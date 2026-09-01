@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
+import '../../../core/widgets/baqueano_logo.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
@@ -30,7 +31,19 @@ class BrandScreen extends StatelessWidget {
               title: '🌿 Nuestra Marca & Manifiesto Baqueano',
               subtitle: '«Descubre lo que no sale en el mapa». Somos el puente tecnológico entre la sabiduría ancestral de los guías locales y el viajero consciente.',
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
+
+            // Official Logo Emblem Showcase Card
+            Center(
+              child: GlassContainer(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 28),
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: AppColors.borderGold, width: 1.2),
+                backgroundColor: AppColors.primaryDark.withValues(alpha: 0.7),
+                child: const BaqueanoLogo(size: BaqueanoLogoSize.large),
+              ),
+            ),
+            const SizedBox(height: 24),
 
             // Manifiesto Quote
             Container(

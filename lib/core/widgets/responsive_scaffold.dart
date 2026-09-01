@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
 import 'baqueano_button.dart';
+import 'baqueano_logo.dart';
 import 'glass_container.dart';
 
 class ResponsiveScaffold extends StatefulWidget {
@@ -79,31 +80,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),
-      title: InkWell(
+      title: BaqueanoLogo(
+        size: BaqueanoLogoSize.small,
         onTap: () => context.go('/home'),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                gradient: AppGradients.sunsetTerracotta,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.terrain_rounded, color: Colors.white, size: 16),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              'BAQUEANO',
-              style: GoogleFonts.montserrat(
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.5,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
       ),
       actions: [
         IconButton(
@@ -134,45 +113,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           child: Row(
             children: [
               // Logo
-              InkWell(
+              BaqueanoLogo(
+                size: BaqueanoLogoSize.medium,
                 onTap: () => context.go('/home'),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        gradient: AppGradients.sunsetTerracotta,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Icon(Icons.terrain_rounded, color: Colors.white, size: 20),
-                    ),
-                    const SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'BAQUEANO',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 2.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          'NICARAGUA EXPEDITIONS',
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1.8,
-                            color: AppColors.goldLight,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
               ),
 
               const SizedBox(width: 32),
@@ -474,41 +417,17 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           children: [
             // Drawer Header
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.sunsetTerracotta,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.terrain_rounded, color: Colors.white, size: 24),
-                ),
-                const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'BAQUEANO',
-                      style: GoogleFonts.montserrat(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1.5,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      'Nicaragua en modo secreto',
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 11,
-                        color: AppColors.goldLight,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: BaqueanoLogo(
+                size: BaqueanoLogoSize.medium,
+                onTap: () {
+                  Navigator.pop(context);
+                  context.go('/home');
+                },
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 14),
             const Divider(color: AppColors.borderLight),
 
             _buildDrawerSectionTitle('NAVEGACIÓN PRINCIPAL'),
