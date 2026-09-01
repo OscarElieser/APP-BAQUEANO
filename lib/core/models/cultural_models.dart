@@ -1,3 +1,25 @@
+// ============================================================================
+// 🎭 MODELOS DE DATOS CULTURALES & PATRIMONIO DE NICARAGUA (CULTURAL_MODELS.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Modelar de forma tipada y estructurada la riqueza cultural intangible de Nicaragua:
+//   platillos gastronómicos ancestrales, repertorio folclórico de marimba, videos 4K,
+//   eco-lodges bioclimáticos, vida nocturna bohemia, insignias del pasaporte digital
+//   y mensajes de asistencia conversacional con IA.
+// - Asegurar interoperabilidad entre las pantallas temáticas del catálogo y los
+//   servicios de reserva y gamificación.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Clases inmutables con constructores `const` para optimización de renderizado en Flutter.
+// - Estructuras de datos limpias compatibles con serialización JSON y Cloud Firestore.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & MODELOS EXPUESTOS):
+// - `GastronomyDish`, `MusicTrack`, `VideoSpot`, `LodgingSpot`, `NightlifeSpot`,
+//   `LocalBusiness`, `ExplorerReview`, `PassportBadge`, `ChatMessage`.
+// ============================================================================
+
+/// Representa un platillo de la gastronomía ancestral nicaragüense.
 class GastronomyDish {
   final String id;
   final String name;
@@ -20,6 +42,7 @@ class GastronomyDish {
   });
 }
 
+/// Representa una pista musical del reproductor de marimba y folklore.
 class MusicTrack {
   final String id;
   final String title;
@@ -42,6 +65,7 @@ class MusicTrack {
   });
 }
 
+/// Representa un video documental en resolución 4K sobre una expedición.
 class VideoSpot {
   final String id;
   final String title;
@@ -64,6 +88,7 @@ class VideoSpot {
   });
 }
 
+/// Representa un hospedaje ecológico o cabaña rústica en entorno rural.
 class LodgingSpot {
   final String id;
   final String name;
@@ -88,6 +113,7 @@ class LodgingSpot {
   });
 }
 
+/// Representa un establecimiento de vida nocturna bohemia, música en vivo o coctelería.
 class NightlifeSpot {
   final String id;
   final String name;
@@ -112,6 +138,7 @@ class NightlifeSpot {
   });
 }
 
+/// Representa un emprendimiento rural o prestador de servicios comunitario aliado.
 class LocalBusiness {
   final String id;
   final String name;
@@ -134,6 +161,7 @@ class LocalBusiness {
   });
 }
 
+/// Representa el testimonio y reseña verificado de un explorador.
 class ExplorerReview {
   final String id;
   final String author;
@@ -152,6 +180,7 @@ class ExplorerReview {
   });
 }
 
+/// Representa un sello o medalla de gamificación desbloqueable en el Pasaporte Digital.
 class PassportBadge {
   final String id;
   final String title;
@@ -170,6 +199,7 @@ class PassportBadge {
   });
 }
 
+/// Representa un mensaje interactivo dentro del chat de Baqueano AI.
 class ChatMessage {
   final String id;
   final String text;

@@ -1,3 +1,23 @@
+// ============================================================================
+// ♾️ CINTILLO TICKER CON DESPLAZAMIENTO INFINITO A 60 FPS (MARQUEE_TICKER.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Mostrar de forma dinámica, viva y continua la red de cooperativas campesinas,
+//   asociaciones de guías y reservas naturales aliadas a Baqueano (Finca Selva Negra,
+//   Cerro Negro Club, Ometepe Kayaks, Baqueanos del Cañón de Somoto).
+// - Dar dinamismo visual al Home, generando credibilidad y validación comunitaria.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `ScrollController` controlado por un bucle asíncrono con `animateTo(maxScroll, curve: Curves.linear)`
+//   y reinicio instantáneo con `jumpTo(0)` al completar la distancia.
+// - Cuadriplicación de la lista de aliados para garantizar un desplazamiento sin saltos (seamless loop).
+// - Manejo de ciclo de vida seguro con bandera `_isDisposed` para evitar fugas de memoria.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `MarqueeTicker`: Ticker animado horizontal que recorre la pantalla de forma infinita.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
@@ -11,24 +31,30 @@ class MarqueeTicker extends StatefulWidget {
 }
 
 class _MarqueeTickerState extends State<MarqueeTicker> {
+  /// Controlador del scroll horizontal continuo.
   late final ScrollController _scrollController;
+
+  /// Bandera para verificar si el widget ha sido destruido antes de continuar el bucle.
   bool _isDisposed = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    // Inicia el bucle de animación una vez montado el primer frame
     WidgetsBinding.instance.addPostFrameCallback((_) => _startInfiniteScroll());
   }
 
+  /// Bucle asíncrono que calcula la velocidad en función de la distancia restante.
   void _startInfiniteScroll() async {
     while (!_isDisposed && mounted) {
       if (_scrollController.hasClients) {
         final maxScroll = _scrollController.position.maxScrollExtent;
         final currentScroll = _scrollController.offset;
         final remainingDistance = maxScroll - currentScroll;
-        
+
         if (remainingDistance > 0) {
+          // Velocidad constante lineal (25ms por píxel)
           final durationMs = (remainingDistance * 25).toInt();
           await _scrollController.animateTo(
             maxScroll,
@@ -37,6 +63,7 @@ class _MarqueeTickerState extends State<MarqueeTicker> {
           );
         }
 
+        // Al llegar al final, salta instantáneamente al inicio sin salto visible
         if (!_isDisposed && mounted && _scrollController.hasClients) {
           _scrollController.jumpTo(0);
         }
@@ -55,8 +82,9 @@ class _MarqueeTickerState extends State<MarqueeTicker> {
 
   @override
   Widget build(BuildContext context) {
-    // Duplicate partners list to create a seamless infinite loop
+    // Cuadruplicación de la lista para crear el bucle infinito sin huecos
     final partners = [
+      ...CatalogData.marqueePartners,
       ...CatalogData.marqueePartners,
       ...CatalogData.marqueePartners,
       ...CatalogData.marqueePartners,
@@ -74,9 +102,10 @@ class _MarqueeTickerState extends State<MarqueeTicker> {
       child: SingleChildScrollView(
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(), // Driven by animation
+        physics: const NeverScrollableScrollPhysics(), // El usuario no interrumpe el scroll motorizado
         child: Row(
           children: [
+            // Badge naranja inicial "RED DE ALIANZAS"
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -101,6 +130,7 @@ class _MarqueeTickerState extends State<MarqueeTicker> {
                 ),
               ),
             ),
+            // Renderizado de cada aliado con icono de verificación y separador '✦'
             ...partners.map(
               (partner) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

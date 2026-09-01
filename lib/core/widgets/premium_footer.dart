@@ -1,3 +1,24 @@
+// ============================================================================
+// 🏛️ FOOTER MULTICOLUMNA DE ALTA GAMA & CINTILLO ÉTICO (PREMIUM_FOOTER.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer una experiencia de cierre institucional prestigiosa y completa,
+//   reforzando el manifiesto de ecoturismo campesino directo (85% de impacto comunitario).
+// - Organizar el mapa de navegación profundo en 3 columnas lógicas (Exploración,
+//   Catálogo Cultural e Institucional/Legal) para usuarios tanto en Web como en Móvil.
+// - Ofrecer acceso rápido a canales oficiales de soporte (WhatsApp, Instagram, INTUR).
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Responsive layout: Fila horizontal de 4 columnas en Desktop (`isDesktop >= 950px`)
+//   y acordeón vertical fluido en Móvil.
+// - Integración con `GoRouter` (`context.go(route)`) para transiciones SPA instantáneas.
+// - Apertura de enlaces externos mediante `url_launcher` en modo `externalApplication`.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `PremiumFooter`: Pie de página integral listo para incrustarse al final de cualquier feed.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +29,7 @@ import 'baqueano_logo.dart';
 class PremiumFooter extends StatelessWidget {
   const PremiumFooter({super.key});
 
+  /// Abre enlaces externos en el navegador web o app correspondiente (Instagram, WhatsApp, YouTube).
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -35,7 +57,9 @@ class PremiumFooter extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Top Impact Banner
+          // ------------------------------------------------------------------
+          // 🌿 CINTILLO SUPERIOR DE IMPACTO ÉTICO COMUNITARIO
+          // ------------------------------------------------------------------
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
@@ -83,7 +107,9 @@ class PremiumFooter extends StatelessWidget {
             ),
           ),
 
-          // Main Multi-Column Footer Body
+          // ------------------------------------------------------------------
+          // 🏛️ CUERPO PRINCIPAL MULTICOLUMNA
+          // ------------------------------------------------------------------
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: isDesktop ? 60.0 : 24.0,
@@ -93,16 +119,16 @@ class PremiumFooter extends StatelessWidget {
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Brand Column
+                      // Columna de Marca y Manifiesto
                       Expanded(flex: 4, child: _buildBrandCol(context)),
                       const SizedBox(width: 48),
-                      // Links Col 1: Explorar
+                      // Columna 1: Enlaces de Exploración
                       Expanded(flex: 2, child: _buildCol1(context)),
                       const SizedBox(width: 24),
-                      // Links Col 2: Catálogo Cultural
+                      // Columna 2: Enlaces del Catálogo Cultural
                       Expanded(flex: 2, child: _buildCol2(context)),
                       const SizedBox(width: 24),
-                      // Links Col 3: Institucional & Legal
+                      // Columna 3: Enlaces Institucionales y Legales
                       Expanded(flex: 2, child: _buildCol3(context)),
                     ],
                   )
@@ -122,7 +148,9 @@ class PremiumFooter extends StatelessWidget {
                   ),
           ),
 
-          // Bottom Bar (Copyright, Flags, Social)
+          // ------------------------------------------------------------------
+          // 📜 BARRA INFERIOR DE COPYRIGHT Y REDES SOCIALES
+          // ------------------------------------------------------------------
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: isDesktop ? 60.0 : 24.0,
@@ -155,6 +183,7 @@ class PremiumFooter extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
+                // Iconos interactivos de redes sociales
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -173,6 +202,9 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // 🧭 COLUMNA DE MARCA, MANIFIESTO & SELLO INTUR
+  // --------------------------------------------------------------------------
   Widget _buildBrandCol(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,6 +220,7 @@ class PremiumFooter extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
+        // Sello de certificación de guías
         Row(
           children: [
             Container(
@@ -215,6 +248,9 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // 🗺️ COLUMNA 1: EXPLORACIÓN
+  // --------------------------------------------------------------------------
   Widget _buildCol1(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,6 +265,9 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // 🎭 COLUMNA 2: CATÁLOGO CULTURAL
+  // --------------------------------------------------------------------------
   Widget _buildCol2(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,6 +283,9 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // ⚖️ COLUMNA 3: INSTITUCIONAL & LEGAL
+  // --------------------------------------------------------------------------
   Widget _buildCol3(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,6 +300,7 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  /// Título de columna en estilo monoespaciado dorado.
   Widget _buildColTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
@@ -273,6 +316,7 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  /// Enlace individual de navegación GoRouter.
   Widget _buildFooterLink(BuildContext context, String title, String route) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -291,6 +335,7 @@ class PremiumFooter extends StatelessWidget {
     );
   }
 
+  /// Botón de red social con icono y contenedor glass.
   Widget _buildSocialIcon(IconData icon, String url) {
     return InkWell(
       onTap: () => _launchUrl(url),

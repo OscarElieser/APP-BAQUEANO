@@ -1,3 +1,22 @@
+// ============================================================================
+// 🎠 CARRUSEL DE ACCESO RÁPIDO A CATEGORÍAS CULTURALES (QUICK_CATEGORIES_CAROUSEL.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Permitir al usuario saltar directamente desde la pantalla de inicio hacia las
+//   8 áreas clave del ecosistema turístico de Nicaragua: Gastronomía, Música y Folklore,
+//   Videos 4K, Playas y Ríos, Eco-Lodges, Vida Nocturna, Circuitos de Volcanes y Catálogo Maestro.
+// - Reducir la fricción de navegación con accesos rápidos visualmente atractivos.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `ListView.separated` horizontal con física elástica `BouncingScrollPhysics()`.
+// - Tarjetas Glassmorphism con gradiente `AppGradients.cardGlass`, bordes translúcidos y sombras.
+// - Enrutamiento instantáneo GoRouter (`context.go(route)`) al presionar cada categoría.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `QuickCategoriesCarousel`: Barra de navegación temática horizontal de 120px de alto.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +28,7 @@ class QuickCategoriesCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Definición de las 8 categorías temáticas con icono, título, subtítulo y ruta canónica
     final categories = [
       {'icon': '🍽️', 'title': 'Gastronomía', 'sub': '6 Platillos & Restaurantes', 'route': '/gastronomia'},
       {'icon': '🎵', 'title': 'Música & Folklore', 'sub': 'Reproductor de Marimba', 'route': '/musica'},
@@ -52,8 +72,10 @@ class QuickCategoriesCarousel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Emoji / Icono temático
                   Text(cat['icon']!, style: const TextStyle(fontSize: 26)),
                   const SizedBox(height: 6),
+                  // Título principal en Space Grotesk
                   Text(
                     cat['title']!,
                     style: GoogleFonts.spaceGrotesk(
@@ -64,6 +86,7 @@ class QuickCategoriesCarousel extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  // Subtítulo descriptivo en Inter
                   Text(
                     cat['sub']!,
                     style: GoogleFonts.inter(

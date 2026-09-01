@@ -1,3 +1,24 @@
+// ============================================================================
+// 🛡️ EL ESTÁNDAR BAQUEANO & BANNER DE CONVERSIÓN (BAQUEANO_STANDARD.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Exponer los 4 pilares innegociables de calidad y ética de la plataforma:
+//   1. Guías Nativos Certificados (conocimiento ancestral y primeros auxilios).
+//   2. 0% Intermediación Abusiva (pago íntegro y directo a las familias rurales).
+//   3. PWA 100% Offline Ready (navegación en cumbres y cañones sin internet).
+//   4. Asistente Baqueano AI (planificación inteligente de presupuestos e itinerarios).
+// - Convertir al visitante en un explorador activo mediante un banner final con doble CTA.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `GridView.builder` con `SliverGridDelegateWithMaxCrossAxisExtent` para layout adaptativo.
+// - Tarjetas Glassmorphism con bordes brillantes e iconos destacados.
+// - Banner inferior con gradiente `AppGradients.sunsetTerracotta` y botones interactivos `BaqueanoButton`.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `BaqueanoStandard`: Sección de cierre y compromiso de marca para el feed principal.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +32,7 @@ class BaqueanoStandard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Definición de los 4 pilares fundamentales del Estándar Baqueano
     final standards = [
       {
         'icon': '🛡️',
@@ -37,12 +59,15 @@ class BaqueanoStandard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Encabezado institucional de la sección
         const SectionHeader(
           tag: 'NUESTRO COMPROMISO',
           title: 'El Estándar Baqueano',
           subtitle: 'Diseñado con tecnología de punta y valores innegociables para brindarte la mejor experiencia de aventura comunitaria.',
         ),
         const SizedBox(height: 12),
+
+        // Cuadrícula responsiva de los 4 pilares
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -65,6 +90,7 @@ class BaqueanoStandard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Icono enmarcado en terracota
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -75,6 +101,7 @@ class BaqueanoStandard extends StatelessWidget {
                     child: Text(std['icon']!, style: const TextStyle(fontSize: 22)),
                   ),
                   const SizedBox(width: 14),
+                  // Título y descripción del pilar
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,6 +134,10 @@ class BaqueanoStandard extends StatelessWidget {
           },
         ),
         const SizedBox(height: 24),
+
+        // --------------------------------------------------------------------
+        // 🚀 BANNER HERO FINAL DE CONVERSIÓN (LLAMADA A LA AVENTURA)
+        // --------------------------------------------------------------------
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(24),
@@ -143,6 +174,7 @@ class BaqueanoStandard extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
+              // Botones de acción dual: Catálogo o Chat IA
               Wrap(
                 spacing: 12,
                 runSpacing: 10,

@@ -1,3 +1,24 @@
+// ============================================================================
+// 📊 FRANJA DE MÉTRICAS DE IMPACTO SOCIAL & COMUNITARIO (IMPACT_COUNTER_STRIP.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Cuantificar ante el explorador el impacto positivo tangible del ecoturismo:
+//   * 85% de retorno económico a familias campesinas.
+//   * 50+ Emprendedores locales aliados.
+//   * 100+ Experiencias auténticas catalogadas.
+//   * 15 Departamentos con cobertura nacional en Nicaragua.
+// - Generar confianza, credibilidad y orgullo por el turismo responsable.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `ShaderMask` con gradiente dorado `AppGradients.gold` para números metálicos de alto impacto.
+// - Adaptabilidad responsiva: Fila de 4 columnas equidistantes en Desktop y cuadrícula 2x2 en Móvil.
+// - Fondo Glassmorphism con bordes brillantes y sombras de elevación.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `ImpactCounterStrip`: Widget transversal insertado en la sección superior del Home.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
@@ -60,6 +81,7 @@ class ImpactCounterStrip extends StatelessWidget {
     );
   }
 
+  /// Separador vertical sutil entre métricas en modo escritorio.
   Widget _buildDivider() {
     return Container(
       height: 48,
@@ -68,10 +90,12 @@ class ImpactCounterStrip extends StatelessWidget {
     );
   }
 
+  /// Tarjeta de métrica para pantallas grandes (Desktop/Tablet).
   Widget _buildStatItem(String number, String label, String sublabel) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // Número con máscara de gradiente metálico dorado
         ShaderMask(
           shaderCallback: (bounds) => AppGradients.gold.createShader(
             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
@@ -86,6 +110,7 @@ class ImpactCounterStrip extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
+        // Etiqueta principal
         Text(
           label,
           style: GoogleFonts.spaceGrotesk(
@@ -95,6 +120,7 @@ class ImpactCounterStrip extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 2),
+        // Subtítulo explicativo
         Text(
           sublabel,
           style: GoogleFonts.inter(
@@ -106,11 +132,13 @@ class ImpactCounterStrip extends StatelessWidget {
     );
   }
 
+  /// Tarjeta de métrica compacta para pantallas móviles.
   Widget _buildStatItemMobile(String number, String label, String sublabel) {
     return SizedBox(
       width: 130,
       child: Column(
         children: [
+          // Número dorado de impacto
           ShaderMask(
             shaderCallback: (bounds) => AppGradients.gold.createShader(
               Rect.fromLTWH(0, 0, bounds.width, bounds.height),

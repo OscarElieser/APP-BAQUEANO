@@ -1,18 +1,52 @@
+// ============================================================================
+// 🧭 COMPONENTE DE IDENTIDAD VISUAL & LOGOTIPO OFICIAL (BAQUEANO_LOGO.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proporcionar una representación consistente, responsiva y adaptable del logotipo
+//   oficial de la marca "BAQUEANO", asegurando presencia gráfica impecable tanto en
+//   pantallas pequeñas (móviles) como en barras de navegación de escritorio y pantallas Splash.
+// - Incluir un mecanismo de contingencia (fallback tipográfico) en caso de fallo de red
+//   o retardo en la carga de assets locales, garantizando que la marca nunca desaparezca.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Enumeración `BaqueanoLogoSize` para variantes: `small` (AppBar móvil), `medium` (Navbar desktop),
+//   `large` (Hero/Splash) e `iconOnly` (Emblema circular con volcán y sol dorado).
+// - Carga `assets/images/logo_baqueano.png` con `Image.asset` y renderiza tipografía vectorial
+//   con `GoogleFonts.montserrat` y badges dorados con `AppGradients.gold`.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `BaqueanoLogo`: Widget reutilizable con callback interactivo opcional `onTap`.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
 
+/// Tamaños estandarizados del logotipo según la ubicación en la interfaz.
 enum BaqueanoLogoSize {
+  /// Tamaño compacto para AppBar móvil (altura ~24px).
   small,
+
+  /// Tamaño mediano para barras de navegación de escritorio y tablet (altura ~32px).
   medium,
+
+  /// Tamaño grande monumental para SplashScreen y encabezados institucionales (altura ~54px).
   large,
+
+  /// Variante de sólo isotipo/emblema circular para botones flotantes y avatares.
   iconOnly,
 }
 
 class BaqueanoLogo extends StatelessWidget {
+  /// Tamaño seleccionado del logotipo.
   final BaqueanoLogoSize size;
+
+  /// Si es true, muestra el subtítulo institucional "PLATAFORMA OFICIAL DE ECOTURISMO".
   final bool showSubtitle;
+
+  /// Acción a ejecutar al tocar el logotipo (generalmente redirigir a `/home`).
   final VoidCallback? onTap;
 
   const BaqueanoLogo({
@@ -26,6 +60,7 @@ class BaqueanoLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content;
 
+    // Selección de la variante visual según el tamaño solicitado
     switch (size) {
       case BaqueanoLogoSize.small:
         content = _buildSmallLogo();
@@ -41,6 +76,7 @@ class BaqueanoLogo extends StatelessWidget {
         break;
     }
 
+    // Si se proporciona un callback onTap, se envuelve en un InkWell para feedback táctil
     if (onTap != null) {
       return InkWell(
         onTap: onTap,
@@ -52,11 +88,14 @@ class BaqueanoLogo extends StatelessWidget {
     return content;
   }
 
-  // Small Logo for Mobile AppBar and Compact Headers
+  // --------------------------------------------------------------------------
+  // 📱 LOGO PEQUEÑO PARA APPBAR MÓVIL
+  // --------------------------------------------------------------------------
   Widget _buildSmallLogo() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // Imagen del logo oficial
         Image.asset(
           'assets/images/logo_baqueano.png',
           height: 24,
@@ -64,6 +103,7 @@ class BaqueanoLogo extends StatelessWidget {
           errorBuilder: (_, __, ___) => _buildFallbackTypography(16, 2.0),
         ),
         const SizedBox(width: 6),
+        // Badge dorado de país 'NI'
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
           decoration: BoxDecoration(
@@ -83,11 +123,14 @@ class BaqueanoLogo extends StatelessWidget {
     );
   }
 
-  // Medium Logo for Desktop Navbar and Headers
+  // --------------------------------------------------------------------------
+  // 💻 LOGO MEDIANO PARA NAVBAR DE ESCRITORIO
+  // --------------------------------------------------------------------------
   Widget _buildMediumLogo() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // Imagen del logo oficial
         Image.asset(
           'assets/images/logo_baqueano.png',
           height: 32,
@@ -95,6 +138,7 @@ class BaqueanoLogo extends StatelessWidget {
           errorBuilder: (_, __, ___) => _buildFallbackTypography(20, 2.5),
         ),
         const SizedBox(width: 8),
+        // Badge dorado completo 'NICARAGUA'
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(
@@ -114,11 +158,14 @@ class BaqueanoLogo extends StatelessWidget {
     );
   }
 
-  // Large Hero / Splash Brand Logo
+  // --------------------------------------------------------------------------
+  // 🚀 LOGO GRANDE PARA SPLASH SCREEN & HERO
+  // --------------------------------------------------------------------------
   Widget _buildLargeLogo() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // Imagen del logo en alta resolución
         Image.asset(
           'assets/images/logo_baqueano.png',
           height: 54,
@@ -126,6 +173,7 @@ class BaqueanoLogo extends StatelessWidget {
           errorBuilder: (_, __, ___) => _buildFallbackTypography(32, 4.0),
         ),
         const SizedBox(height: 8),
+        // Lema y bandera nacional
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -146,6 +194,9 @@ class BaqueanoLogo extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // 🛡️ CONTINGENCIA TIPOGRÁFICA (Fallback)
+  // --------------------------------------------------------------------------
   Widget _buildFallbackTypography(double fontSize, double letterSpacing) {
     return Text(
       'BAQUEANO',
@@ -158,7 +209,9 @@ class BaqueanoLogo extends StatelessWidget {
     );
   }
 
-  // Official Icon Badge: Volcanic Peak with Golden Sun & Ring
+  // --------------------------------------------------------------------------
+  // 🌋 EMBLEMA CIRCULAR OFICIAL (Volcán & Sol Dorado)
+  // --------------------------------------------------------------------------
   Widget _buildIconBadge({required double size}) {
     return Container(
       width: size,
@@ -184,11 +237,13 @@ class BaqueanoLogo extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            // Silueta del volcán
             Icon(
               Icons.landscape_rounded,
               size: size * 0.65,
               color: Colors.white,
             ),
+            // Sol naciente dorado
             Positioned(
               top: size * 0.16,
               right: size * 0.18,
