@@ -1,3 +1,21 @@
+// ============================================================================
+// 🤖 MOTOR DE ASISTENCIA CONVERSACIONAL IA — "EL BAQUEANO MAYOR"
+// ============================================================================
+//
+// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// Empoderar al explorador con un asistente inteligente nativo capaz de planificar
+// itinerarios personalizados, resolver dudas culturales y desglosar presupuestos
+// exactos en tiempo real con profundo arraigo en la jerga y costumbres nicaragüenses.
+//
+// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// Implementa un ChangeNotifier reactivo con inyección contextual de rutas, volcanes,
+// tarifas de transporte y hospedajes comunitarios, gestionado por StateNotifierProvider.
+//
+// 📦 QUÉ (WHAT / ENTREGABLE):
+// Historial de mensajes (ChatMessage), respuestas dinámicas simuladas de alta fidelidad,
+// sugerencias de rutas rápidas y soporte bimoneda (USD / NIO).
+// ============================================================================
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/chat_message.dart';

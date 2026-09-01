@@ -1,3 +1,24 @@
+// ============================================================================
+// 📱 CONTENEDOR MAESTRO ADAPTATIVO & RESPONSIVE (RESPONSIVE_SCAFFOLD.DART)
+// ============================================================================
+//
+// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// Ofrecer una navegación uniforme y ergonómica que se adapte fluidamente a cualquier
+// pantalla: teléfonos móviles con barras de gestos, tablets plegables y pantallas
+// panorámicas de escritorio, manteniendo siempre la identidad visual de Baqueano.
+//
+// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Detecta breakpoints dinámicos (`screenWidth >= 950` para modo Desktop/Web).
+// - En Móvil: AppBar compacta, Menú lateral (Drawer de 12 secciones) y barra flotante
+//   inferior con `SafeArea(bottom: true)` y glassmorphism.
+// - En Desktop: Barra de anuncios superior (`Announcement Ribbon`), Navbar fija con
+//   menús desplegables (`Explorar`, `Nosotros`), selector de idioma y botón `INGRESAR`.
+//
+// 📦 QUÉ (WHAT / ENTREGABLE):
+// Scaffold universal que envuelve las pantallas de la aplicación con modales de
+// autenticación, transiciones de navegación GoRouter y notificaciones toast.
+// ============================================================================
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

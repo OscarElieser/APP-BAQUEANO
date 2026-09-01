@@ -1,3 +1,23 @@
+// ============================================================================
+// 🗺️ ENRUTADOR PRINCIPAL DECLARATIVO (APP_ROUTER.DART)
+// ============================================================================
+//
+// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// Permitir una navegación fluida, profunda y con URLs canónicas (Web) y transiciones
+// nativas (Android/iOS) a través de todos los módulos de exploración, catálogo,
+// mapa GPS, inteligencia artificial, pasaporte y panel de control CMS.
+//
+// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// Utiliza GoRouter 14+ con enrutamiento declarativo, soporte para parámetros de ruta,
+// redirecciones automáticas (ej. `/` hacia `/splash`), y carga optimizada de páginas.
+//
+// 📦 QUÉ (WHAT / ENTREGABLE):
+// Definición de todas las 16 rutas canónicas de la aplicación Baqueano:
+// `/splash`, `/home`, `/descubrir`, `/mapa`, `/ai`, `/pasaporte`, `/gastronomia`,
+// `/musica`, `/videos`, `/playas`, `/hospedaje`, `/nocturna`, `/turismo`, `/marca`,
+// `/ayuda`, `/terminos`, `/privacidad`, `/admin`.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/admin/screens/admin_screen.dart';

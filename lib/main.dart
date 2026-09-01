@@ -1,3 +1,24 @@
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — PUNTO DE ENTRADA PRINCIPAL (MAIN.DART)
+// ============================================================================
+//
+// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// Proveer una experiencia de usuario inmersiva, exótica y de alto rendimiento que
+// digitalice las rutas turísticas campesinas de Nicaragua, garantizando acceso
+// directo sin intermediarios entre exploradores nacionales/internacionales y
+// comunidades locales mediante una infraestructura multiplataforma moderna.
+//
+// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// 1. Configuración de pantalla Edge-to-Edge con barras de sistema transparentes.
+// 2. Inicialización asíncrona de Firebase (Cloud Firestore, Auth, Storage).
+// 3. Envoltorio global en ProviderScope (Riverpod) para inyección de dependencias.
+// 4. Enrutamiento declarativo y responsivo con GoRouter y tema oscuro volcánico.
+//
+// 📦 QUÉ (WHAT / ENTREGABLE):
+// Widget raíz BaqueanoApp configurado con MaterialApp.router, soporte adaptativo
+// para Android, iOS y Web, tipografía Montserrat/Space Grotesk y paleta volcánica.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
