@@ -19,6 +19,23 @@ class CheckoutModal extends StatefulWidget {
   });
 
   static Future<void> show(BuildContext context, DestinationModel destination) {
+    final width = MediaQuery.of(context).size.width;
+    if (width >= 700) {
+      return showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 640, maxHeight: 820),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: CheckoutModal(destination: destination),
+            ),
+          ),
+        ),
+      );
+    }
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,

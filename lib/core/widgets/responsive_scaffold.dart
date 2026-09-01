@@ -372,9 +372,11 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
   // --- FLOATING GLASS BOTTOM NAV (MOBILE) ---
   Widget _buildFloatingBottomNav(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-      child: GlassContainer(
+    return SafeArea(
+      bottom: true,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+        child: GlassContainer(
         height: 68,
         borderRadius: BorderRadius.circular(34),
         blur: 20,
@@ -392,8 +394,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildBottomNavItem(int index, IconData icon, String label, {bool isAi = false}) {
     final isSelected = widget.currentIndex == index;
