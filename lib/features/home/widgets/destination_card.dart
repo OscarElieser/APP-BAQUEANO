@@ -25,6 +25,7 @@ import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/custom_toast.dart';
+import '../../../core/widgets/weather_radar_badge.dart';
 import '../../checkout/widgets/checkout_modal.dart';
 
 class DestinationCard extends StatefulWidget {
@@ -210,6 +211,16 @@ class _DestinationCardState extends State<DestinationCard> {
                       letterSpacing: 0.8,
                     ),
                   ),
+                ),
+              ),
+
+              // Micro-Radar Climático en la esquina inferior derecha
+              Positioned(
+                bottom: 8,
+                right: 12,
+                child: WeatherRadarBadge(
+                  destinationId: destination.id,
+                  compact: true,
                 ),
               ),
             ],

@@ -29,6 +29,8 @@ import 'baqueano_button.dart';
 import 'baqueano_logo.dart';
 import 'custom_toast.dart';
 import 'glass_container.dart';
+import 'sos_safety_modal.dart';
+import 'universal_search_modal.dart';
 
 class ResponsiveScaffold extends StatefulWidget {
   final Widget body;
@@ -109,10 +111,17 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       actions: [
         IconButton(
           icon: const Icon(Icons.search_rounded, color: AppColors.textLight),
-          onPressed: () => context.go('/descubrir'),
+          tooltip: 'Búsqueda Global',
+          onPressed: () => UniversalSearchModal.show(context),
+        ),
+        IconButton(
+          icon: const Icon(Icons.sos_rounded, color: AppColors.error),
+          tooltip: 'Auxilio SOS',
+          onPressed: () => SosSafetyModal.show(context),
         ),
         IconButton(
           icon: const Icon(Icons.smart_toy_outlined, color: AppColors.gold),
+          tooltip: 'Baqueano AI',
           onPressed: () => context.go('/ai'),
         ),
         const SizedBox(width: 4),
@@ -221,6 +230,22 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                   _buildNosotrosDropdown(context),
 
                   const Spacer(),
+
+                  // Quick Search Button
+                  IconButton(
+                    icon: const Icon(Icons.search_rounded, color: AppColors.textLight, size: 22),
+                    tooltip: 'Búsqueda Global',
+                    onPressed: () => UniversalSearchModal.show(context),
+                  ),
+
+                  // SOS Button
+                  IconButton(
+                    icon: const Icon(Icons.sos_rounded, color: AppColors.error, size: 22),
+                    tooltip: 'Auxilio SOS 24/7',
+                    onPressed: () => SosSafetyModal.show(context),
+                  ),
+
+                  const SizedBox(width: 8),
 
                   // Language Selector Pill [NI ES/EN]
                   Container(

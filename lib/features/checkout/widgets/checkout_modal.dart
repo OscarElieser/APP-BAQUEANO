@@ -9,6 +9,7 @@ import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/custom_toast.dart';
+import 'baqueano_voucher_dialog.dart';
 
 class CheckoutModal extends StatefulWidget {
   final DestinationModel destination;
@@ -744,18 +745,25 @@ class _CheckoutModalState extends State<CheckoutModal> {
           children: [
             Expanded(
               child: BaqueanoButton(
-                text: 'Descargar / Imprimir',
-                icon: const Icon(Icons.download, size: 18),
+                text: 'Ver Pase QR Oficial',
+                icon: const Icon(Icons.qr_code_2_rounded, size: 18),
                 variant: BaqueanoButtonVariant.secondary,
                 onPressed: () {
-                  CustomToast.success(context, 'Comprobante $_expeditionCode guardado en tu dispositivo.');
+                  BaqueanoVoucherDialog.show(
+                    context,
+                    destination: widget.destination,
+                    travelersCount: _participants,
+                    totalUsd: _totalUsd,
+                    totalNio: _totalNio,
+                    isTouristExempt: _isTourist,
+                  );
                 },
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: BaqueanoButton(
-                text: 'Cerrar',
+                text: 'Finalizar',
                 variant: BaqueanoButtonVariant.primary,
                 onPressed: () => Navigator.of(context).pop(),
               ),

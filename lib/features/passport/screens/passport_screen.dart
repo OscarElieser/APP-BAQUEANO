@@ -7,6 +7,7 @@ import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
+import '../widgets/stamp_unlock_dialog.dart';
 
 class PassportScreen extends StatelessWidget {
   const PassportScreen({super.key});
@@ -411,6 +412,7 @@ class PassportScreen extends StatelessWidget {
         return GlassContainer(
           padding: const EdgeInsets.all(14),
           borderRadius: BorderRadius.circular(16),
+          onTap: () => StampUnlockDialog.show(context, badge),
           border: Border.all(
             color: badge.isUnlocked ? AppColors.gold : AppColors.borderLight,
             width: badge.isUnlocked ? 1.2 : 0.8,
