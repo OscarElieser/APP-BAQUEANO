@@ -4,8 +4,6 @@ import '../../../core/data/catalog_data.dart';
 import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
-import '../../../core/widgets/baqueano_button.dart';
-import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../checkout/widgets/checkout_modal.dart';

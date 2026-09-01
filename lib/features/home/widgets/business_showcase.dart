@@ -112,7 +112,7 @@ class BusinessShowcase extends StatelessWidget {
                             final uri = Uri.parse('tel:${biz.contact.replaceAll(' ', '')}');
                             if (await canLaunchUrl(uri)) {
                               await launchUrl(uri);
-                            } else {
+                            } else if (context.mounted) {
                               CustomToast.show(context, message: 'Llamando a ${biz.name}: ${biz.contact}');
                             }
                           },

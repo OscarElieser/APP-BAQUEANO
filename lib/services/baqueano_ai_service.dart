@@ -1,14 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/chat_message.dart';
-import 'destination_service.dart';
 
 class BaqueanoAiService extends ChangeNotifier {
-  final Ref _ref;
   final List<ChatMessage> _chatHistory = [];
   bool _isTyping = false;
 
-  BaqueanoAiService(this._ref) {
+  BaqueanoAiService() {
     _initWelcome();
   }
 
@@ -133,5 +131,5 @@ class BaqueanoAiService extends ChangeNotifier {
 }
 
 final baqueanoAiServiceProvider = ChangeNotifierProvider<BaqueanoAiService>((ref) {
-  return BaqueanoAiService(ref);
+  return BaqueanoAiService();
 });

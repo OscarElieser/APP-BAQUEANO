@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../home/widgets/destination_card.dart';

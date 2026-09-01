@@ -1,25 +1,21 @@
-<div align="center">
-  <img src="https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=1200&q=80" alt="Baqueano Banner" width="100%" style="border-radius: 16px; max-height: 320px; object-fit: cover;" />
+# 🌋 BAQUEANO ECOSYSTEM
 
-  # 🌋 BAQUEANO ECOSYSTEM
-  ### **Plataforma Oficial Multiplataforma de Ecoturismo & Rutas Autóctonas de Nicaragua**
-  
-  [![Flutter Version](https://img.shields.io/badge/Flutter-3.7+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
-  [![Dart Version](https://img.shields.io/badge/Dart-3.7+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
-  [![Firebase](https://img.shields.io/badge/Firebase-baqueanonicaragua--3e5c9-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://baqueanonicaragua-3e5c9.web.app/)
-  [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web-2E7D32?style=for-the-badge)](https://github.com/OscarElieser/APP-BAQUEANO)
-  [![License](https://img.shields.io/badge/License-MIT-D4AF37?style=for-the-badge)](LICENSE)
+## Plataforma Oficial Multiplataforma de Ecoturismo & Rutas Autóctonas de Nicaragua
 
-  <p align="center">
-    <b>Nicaragua en modo secreto</b> · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador y un asistente inteligente potenciado por Google Gemini AI.
-  </p>
+[![Flutter Version](https://img.shields.io/badge/Flutter-3.7+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart Version](https://img.shields.io/badge/Dart-3.7+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-baqueanonicaragua--3e5c9-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://baqueanonicaragua-3e5c9.web.app/)
+[![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web-2E7D32?style=for-the-badge)](https://github.com/OscarElieser/APP-BAQUEANO)
+[![License](https://img.shields.io/badge/License-MIT-D4AF37?style=for-the-badge)](LICENSE)
 
-  🌐 **Plataforma Web Oficial en Vivo**: [https://baqueanonicaragua-3e5c9.web.app/](https://baqueanonicaragua-3e5c9.web.app/)
-</div>
+**Nicaragua en modo secreto** · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador y un asistente inteligente potenciado por Google Gemini AI.
+
+🌐 **Plataforma Web Oficial en Vivo**: [https://baqueanonicaragua-3e5c9.web.app/](https://baqueanonicaragua-3e5c9.web.app/)
 
 ---
 
 ## 🧭 Tabla de Contenidos
+
 - [✨ Características Principales](#-características-principales)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
 - [🏗️ Arquitectura del Proyecto](#️-arquitectura-del-proyecto)
@@ -59,6 +55,7 @@ La identidad visual está inspirada en los paisajes volcánicos, la arcilla arte
 | **Jungle Green** | Verde Selva | `#2E7D32` | Sello de sostenibilidad, 100% comunitario e impacto |
 
 ### Tipografía
+
 - **Titulares (Headings)**: `Montserrat` (Pesos 800 y 900)
 - **Subtítulos y Metadatos**: `Space Grotesk` (Pesos 600 y 700)
 - **Cuerpo y Lectura**: `Inter` (Legibilidad óptima en móviles y web)
@@ -69,7 +66,7 @@ La identidad visual está inspirada en los paisajes volcánicos, la arcilla arte
 
 El código está estructurado siguiendo los principios de **Clean Code**, alta cohesión y bajo acoplamiento:
 
-```
+```text
 lib/
 ├── config/                     # Configuración central
 │   ├── app_colors.dart         # Paleta de colores oficiales
@@ -136,7 +133,9 @@ lib/
 ## 📱 Módulos y Pantallas
 
 ### 🍽️ 1. Gastronomía Autóctona
+
 Recetas tradicionales, historia cultural, ingredientes precolombinos y comedores recomendados de:
+
 - **Nacatamal Tradicional** (Masaya / Managua)
 - **Gallo Pinto con Cuajada y Tortilla** (Nacional)
 - **Vigorón Granadino** (Kiosko El Gordito, Granada)
@@ -145,7 +144,9 @@ Recetas tradicionales, historia cultural, ingredientes precolombinos y comedores
 - **Indio Viejo / Masa de Cazuela** (Diriamba / Matagalpa)
 
 ### 🎵 2. Música & Folklore Interactivo
+
 Reproductor musical interactivo con barra de progreso, géneros folclóricos e información histórica de cada obra:
+
 - *El Solar de Monimbó* (Camilo Zapata)
 - *Mora Limpia* (Justo Santos - Marimba de Arco)
 - *El Zanatillo* (Trío Monimbó)
@@ -153,7 +154,9 @@ Reproductor musical interactivo con barra de progreso, géneros folclóricos e i
 - *Palomita Guasiruca* (Polka Campesina Segoviana)
 
 ### 🎬 3. Videos 4K & Documentales
+
 Reproducción de spots cinematográficos de alta definición:
+
 - *Cañón de Somoto en 4K Ultra HD*
 - *Sandboarding en Cerro Negro a 80 km/h*
 - *Little Corn Island: El Secreto del Caribe*
@@ -165,7 +168,7 @@ Reproducción de spots cinematográficos de alta definición:
 
 El sistema de reservas incorpora un motor de cálculo fiscal transparente:
 
-```
+```text
 ┌────────────────────────────────────────────────────────────┐
 │                    DESGLOSE DE RESERVA                     │
 ├────────────────────────────────────────────────────────────┤
@@ -186,6 +189,7 @@ El sistema de reservas incorpora un motor de cálculo fiscal transparente:
 ## 🤖 Asistente Baqueano AI (Gemini Engine)
 
 Potenciado por la lógica de **Google Gemini AI**, *"El Baqueano Mayor"* es un guía virtual sabio que:
+
 - Diseña itinerarios de 1 a 7 días basados en tus días disponibles y presupuesto en USD / NIO.
 - Asigna guías certificados nativos (ej. *Don Toño Calero en Somoto*, *Chepe "El Volcánico" en Cerro Negro*).
 - Entrega recomendaciones de calzado, hidratación y precauciones para ascensos a cráteres activos.
@@ -195,6 +199,7 @@ Potenciado por la lógica de **Google Gemini AI**, *"El Baqueano Mayor"* es un g
 ## 🏆 Pasaporte Digital & Gamificación
 
 Inspirado en el pasaporte oficial de la República de Nicaragua:
+
 - **Sellos de Check-in**: *Somoto*, *Cerro Negro*, *Cascada La Luna*, *Ometepe*, *Masaya*, *Corn Island*.
 - **Insignias Desbloqueables**: *Primer Sendero*, *Guardián del Fuego*, *Navegante de Cañones*, *Catador de Altura*, *Viajero Regenerativo*, *Baqueano Offline*.
 - **Barra de XP y Niveles**: Sistema de progresión (*Novato ➔ Aventurero ➔ Baqueano Maestro*).
@@ -205,6 +210,7 @@ Inspirado en el pasaporte oficial de la República de Nicaragua:
 ## 🛠️ Panel de Administración CMS & Respaldos
 
 Herramienta para administradores con:
+
 - **Métricas en Vivo**: Total de reservas, facturación total en USD y Córdobas (NIO), usuarios activos y destinos.
 - **Gestión CRUD**: Creación y edición de expediciones y prestadores.
 - **Motor de Backup & Restore**:
@@ -216,51 +222,60 @@ Herramienta para administradores con:
 ## 🚀 Instalación y Despliegue
 
 ### Requisitos Previos
+
 - **Flutter SDK** `>= 3.7.0`
 - **Dart SDK** `>= 3.7.0`
 - **Git**
 
 ### 1. Clonar el Repositorio
+
 ```bash
 git clone https://github.com/OscarElieser/APP-BAQUEANO.git
 cd APP-BAQUEANO
 ```
 
 ### 2. Instalar Dependencias
+
 ```bash
 flutter pub get
 ```
 
 ### 3. Ejecutar en Desarrollo
 
-#### Para Web:
+#### Para Web
+
 ```bash
 flutter run -d chrome
 ```
 
-#### Para Android:
+#### Para Android
+
 ```bash
 flutter run -d android
 ```
 
-#### Para iOS (macOS requerido):
+#### Para iOS (macOS requerido)
+
 ```bash
 flutter run -d ios
 ```
 
 ### 4. Compilar para Producción
 
-#### Web Release:
+#### Web Release
+
 ```bash
 flutter build web --release --no-tree-shake-icons
 ```
 
-#### Android APK:
+#### Android APK
+
 ```bash
 flutter build apk --release
 ```
 
-#### Android App Bundle (Play Store):
+#### Android App Bundle (Play Store)
+
 ```bash
 flutter build appbundle --release
 ```
@@ -281,6 +296,4 @@ Desarrollado con orgullo para impulsar el ecoturismo comunitario y sostenible en
 
 Distribuido bajo la Licencia **MIT**. Consulta el archivo `LICENSE` para más información.
 
-<div align="center">
-  <sub>© 2026 Baqueano Ecosystem. Todos los derechos reservados. Turismo comunitario transparente y sin intermediarios.</sub>
-</div>
+© 2026 Baqueano Ecosystem. Todos los derechos reservados. Turismo comunitario transparente y sin intermediarios.

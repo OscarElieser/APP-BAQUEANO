@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
