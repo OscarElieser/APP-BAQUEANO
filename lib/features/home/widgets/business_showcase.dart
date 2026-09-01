@@ -1,3 +1,22 @@
+// ============================================================================
+// 🏪 VITRINA DE NEGOCIOS RURALES & COMERCIO JUSTO DIRECTO (BUSINESS_SHOWCASE.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Empoderar a los emprendedores locales (comedores campesinos, cabañas rústicas,
+//   asociaciones de guías de volcanes y cooperativas cafetaleras) dándoles visibilidad
+//   directa sin comisiones intermediarias.
+// - Permitir a los viajeros contactar vía llamada directa con un toque a los anfitriones.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `ListView.separated` horizontal con tarjetas Glassmorphism.
+// - Integración con `url_launcher` (`Uri.parse('tel:...')`) para llamada telefónica nativa.
+// - Badge verde "100% COMUNITARIO" y toast de contingencia si no hay tarjeta SIM.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `BusinessShowcase`: Carrusel de emprendedores insertado en el feed del Home.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,12 +34,15 @@ class BusinessShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Encabezado temático de la vitrina comunitaria
         const SectionHeader(
           tag: 'RED LOCAL DIRECTA',
           title: 'Vitrina de Negocios Locales',
           subtitle: 'Conecta de forma directa con los protagonistas del ecoturismo nicaragüense. Cabañas rústicas, guías nativos certificados y gastronomía de autor campesina.',
         ),
         const SizedBox(height: 12),
+
+        // Carrusel horizontal de emprendedores de 220px de alto
         SizedBox(
           height: 220,
           child: ListView.separated(
@@ -48,6 +70,7 @@ class BusinessShowcase extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Fila superior: Icono del negocio y Badge verde de acreditación
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -74,6 +97,8 @@ class BusinessShowcase extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
+
+                    // Nombre del negocio
                     Text(
                       biz.name,
                       style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.textLight),
@@ -81,11 +106,15 @@ class BusinessShowcase extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 2),
+
+                    // Categoría y departamento
                     Text(
                       '${biz.category} · ${biz.department}',
                       style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.terracottaLight, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 6),
+
+                    // Descripción del emprendimiento
                     Expanded(
                       child: Text(
                         biz.description,
@@ -95,6 +124,8 @@ class BusinessShowcase extends StatelessWidget {
                       ),
                     ),
                     const Divider(color: AppColors.borderLight, height: 14),
+
+                    // Fila inferior: Número telefónico y botón de marcación directa
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

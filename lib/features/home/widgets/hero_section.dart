@@ -1,3 +1,23 @@
+// ============================================================================
+// 🌄 SECCIÓN HERO MONUMENTAL & TARJETA DESTACADA (HERO_SECTION.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Ser el epicentro de la propuesta de valor al entrar a Baqueano:
+//   * Titular editorial "NICARAGUA EN MODO SECRETO".
+//   * Doble llamada a la acción: "DISEÑAR MI RUTA" e interactuar con "BAQUEANO AI".
+//   * Tarjeta flotante interactiva de *Cascada La Luna* con reserva directa en 1 toque.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `Stack` con orbes de luz atmosférica difuminados (`BoxDecoration(shape: BoxShape.circle)`).
+// - Responsive layout: Fila equilibrada (Flex 6 texto / Flex 4 tarjeta) en Desktop (`>= 950px`)
+//   y columna vertical fluida en Móvil.
+// - Integración directa con `CheckoutModal.show(context, destination)` para procesar reservas.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `HeroSection`: Componente estandarte del Home.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,13 +32,17 @@ class HeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Detección de dimensiones para layout responsivo
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
+    // Obtiene el destino destacado principal (Cascada La Luna)
     final featuredDestination = CatalogData.destinations.first;
 
     return Stack(
       children: [
-        // Background Glow Effects
+        // --------------------------------------------------------------------
+        // 🌌 EFECTOS DE RESPLANDOR ATMOSFÉRICO EN EL FONDO (Glow Spheres)
+        // --------------------------------------------------------------------
         Positioned(
           top: -100,
           right: -80,
@@ -44,7 +68,9 @@ class HeroSection extends StatelessWidget {
           ),
         ),
 
-        // Main Hero Content
+        // --------------------------------------------------------------------
+        // 🏛️ CONTENIDO PRINCIPAL DEL HERO (TEXTO + TARJETA FLOTANTE)
+        // --------------------------------------------------------------------
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: isDesktop ? 48.0 : 20.0,
@@ -54,13 +80,13 @@ class HeroSection extends StatelessWidget {
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Left Text Column
+                    // Columna izquierda: Titular monumental y CTAs
                     Expanded(
                       flex: 6,
                       child: _buildHeroTextContent(context, isDesktop),
                     ),
                     const SizedBox(width: 48),
-                    // Right Featured Floating Card
+                    // Columna derecha: Tarjeta flotante con efecto cristal
                     Expanded(
                       flex: 4,
                       child: _buildFeaturedCard(context, featuredDestination),
@@ -80,11 +106,14 @@ class HeroSection extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // 📝 BLOQUE EDITORIAL (TAG PILL + TITULAR + SUBTÍTULO + BOTONES)
+  // --------------------------------------------------------------------------
   Widget _buildHeroTextContent(BuildContext context, bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Tag Pill (Exact match)
+        // Tag Pill verde selva: Ecoturismo y Turismo Comunitario
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           decoration: BoxDecoration(
@@ -112,7 +141,7 @@ class HeroSection extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // Hero Headline (NICARAGUA in White, EN MODO SECRETO in Neon Orange)
+        // Titular monumental tipográfico en dos colores
         RichText(
           text: TextSpan(
             children: [
@@ -131,7 +160,7 @@ class HeroSection extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                   fontSize: isDesktop ? 54 : 38,
                   fontWeight: FontWeight.w900,
-                  color: const Color(0xFFFF5722), // Vibrant Terracotta Neon
+                  color: const Color(0xFFFF5722), // Naranja neón volcánico de alto impacto
                   letterSpacing: -1.2,
                   height: 1.05,
                 ),
@@ -142,7 +171,7 @@ class HeroSection extends StatelessWidget {
 
         const SizedBox(height: 18),
 
-        // Subtitle
+        // Subtítulo descriptivo de la propuesta de valor
         Text(
           'Diseña rutas inmersivas con guías locales, reservas directas, mapa offline y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
           style: GoogleFonts.inter(
@@ -155,7 +184,7 @@ class HeroSection extends StatelessWidget {
 
         const SizedBox(height: 26),
 
-        // CTA Buttons
+        // Botones interactivos duales (Explorar / Chat IA)
         Wrap(
           spacing: 14,
           runSpacing: 12,
@@ -180,6 +209,9 @@ class HeroSection extends StatelessWidget {
     );
   }
 
+  // --------------------------------------------------------------------------
+  // 🌟 TARJETA DESTACADA (CASCADA LA LUNA & METADATOS EN VIVO)
+  // --------------------------------------------------------------------------
   Widget _buildFeaturedCard(BuildContext context, dynamic destination) {
     return GlassContainer(
       padding: EdgeInsets.zero,
@@ -188,7 +220,7 @@ class HeroSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image with Badges
+          // Imagen local en alta resolución con badge naranja 'DESTACADO'
           Stack(
             children: [
               ClipRRect(
@@ -217,7 +249,7 @@ class HeroSection extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFF5722), // Orange Destacado
+                    color: const Color(0xFFFF5722),
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
@@ -241,7 +273,7 @@ class HeroSection extends StatelessWidget {
             ],
           ),
 
-          // Card Body
+          // Cuerpo de la tarjeta con título, descripción y métricas clave
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: Column(
@@ -281,7 +313,7 @@ class HeroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
 
-                // 3 Stat Boxes
+                // 3 Cajas de métricas: Rating (4.9), Duración (1 Día), Distancia (18 KM)
                 Row(
                   children: [
                     Expanded(
@@ -358,6 +390,7 @@ class HeroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
 
+                // Precio bimoneda (USD / Córdobas NIO) y botón de reserva
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

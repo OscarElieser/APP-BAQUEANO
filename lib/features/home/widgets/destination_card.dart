@@ -1,3 +1,24 @@
+// ============================================================================
+// 🎴 TARJETA MODULAR DE DESTINO CON COTIZACIÓN Y FAVORITOS (DESTINATION_CARD.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Presentar cada destino y expedición del catálogo con un estándar visual de lujo:
+//   * Fotografía de alta resolución con badge de dificultad semántico (Fácil, Moderado, Exigente).
+//   * Botón flotante de favoritos con notificación emergente reactiva.
+//   * Calificación comunitaria por estrellas y conteo de reseñas reales.
+//   * Conversión bimoneda en tiempo real ($ USD / C$ NIO) y botón de reserva inmediata.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `StatefulWidget` con estado `_isFavorite` sincronizado localmente.
+// - Algoritmo `_getDifficultyColor()` que asigna Verde (`AppColors.success`), Ámbar (`AppColors.warning`)
+//   o Rojo (`AppColors.error`) según la exigencia física.
+// - Apertura directa de `CheckoutModal.show(context, destination)` para procesar la reserva.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `DestinationCard`: Tarjeta de cuadrícula reusable de 470px de alto.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/models/destination_model.dart';
@@ -7,7 +28,10 @@ import '../../../core/widgets/custom_toast.dart';
 import '../../checkout/widgets/checkout_modal.dart';
 
 class DestinationCard extends StatefulWidget {
+  /// Modelo de datos con toda la información de la expedición
   final DestinationModel destination;
+
+  /// Callback ejecutado cuando el usuario conmuta el estado de favorito
   final VoidCallback? onFavoriteToggled;
 
   const DestinationCard({
@@ -21,6 +45,7 @@ class DestinationCard extends StatefulWidget {
 }
 
 class _DestinationCardState extends State<DestinationCard> {
+  /// Estado mutable local que rastrea si la tarjeta está guardada en favoritos
   late bool _isFavorite;
 
   @override
@@ -29,6 +54,7 @@ class _DestinationCardState extends State<DestinationCard> {
     _isFavorite = widget.destination.isFavorite;
   }
 
+  /// Retorna el color semántico según el nivel de dificultad de la expedición
   Color _getDifficultyColor(String difficulty) {
     switch (difficulty.toLowerCase()) {
       case 'fácil':
@@ -62,9 +88,12 @@ class _DestinationCardState extends State<DestinationCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image and Overlay Badges
+          // ------------------------------------------------------------------
+          // 🌄 FOTOGRAFÍA & BADGES SUPERPUESTOS
+          // ------------------------------------------------------------------
           Stack(
             children: [
+              // Imagen principal con esquinas superiores redondeadas
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                 child: Image.network(
@@ -80,7 +109,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 ),
               ),
 
-              // Gradient Overlay for readability
+              // Viñeta oscura inferior para asegurar legibilidad
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -97,7 +126,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 ),
               ),
 
-              // Difficulty Badge
+              // Badge de Dificultad en la esquina superior izquierda
               Positioned(
                 top: 12,
                 left: 12,
@@ -133,7 +162,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 ),
               ),
 
-              // Favorite Button
+              // Botón interactivo de Favoritos en la esquina superior derecha
               Positioned(
                 top: 10,
                 right: 10,
@@ -162,7 +191,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 ),
               ),
 
-              // Department pill on image bottom
+              // Pill de Departamento en la esquina inferior izquierda de la foto
               Positioned(
                 bottom: 10,
                 left: 12,
@@ -186,13 +215,15 @@ class _DestinationCardState extends State<DestinationCard> {
             ],
           ),
 
-          // Card Body
+          // ------------------------------------------------------------------
+          // 📝 CUERPO DE LA TARJETA (RATING + TÍTULO + TAGS + PRECIO)
+          // ------------------------------------------------------------------
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Rating and stats
+                // Fila de Calificación con estrella dorada y duración/distancia
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -224,7 +255,7 @@ class _DestinationCardState extends State<DestinationCard> {
 
                 const SizedBox(height: 8),
 
-                // Title
+                // Título de la expedición
                 Text(
                   destination.title,
                   style: GoogleFonts.montserrat(
@@ -238,7 +269,7 @@ class _DestinationCardState extends State<DestinationCard> {
 
                 const SizedBox(height: 6),
 
-                // Description
+                // Descripción breve
                 Text(
                   destination.description,
                   style: GoogleFonts.inter(
@@ -252,7 +283,7 @@ class _DestinationCardState extends State<DestinationCard> {
 
                 const SizedBox(height: 12),
 
-                // Tags
+                // Tags temáticos (#Volcanes, #Aventura, etc.)
                 Wrap(
                   spacing: 6,
                   runSpacing: 4,
@@ -275,7 +306,9 @@ class _DestinationCardState extends State<DestinationCard> {
                 const Divider(color: AppColors.borderLight, height: 1),
                 const SizedBox(height: 12),
 
-                // Price and Book Action
+                // ------------------------------------------------------------
+                // 💵 COTIZACIÓN BIMONEDA & BOTÓN DE RESERVA
+                // ------------------------------------------------------------
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -309,6 +342,7 @@ class _DestinationCardState extends State<DestinationCard> {
                       ),
                     ),
                     const SizedBox(width: 8),
+                    // Botón de llamada a la acción directo al checkout
                     BaqueanoButton(
                       text: 'Reservar',
                       variant: BaqueanoButtonVariant.primary,

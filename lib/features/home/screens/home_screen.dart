@@ -1,3 +1,24 @@
+// ============================================================================
+// 🏠 PANTALLA PRINCIPAL & FEED INTERACTIVO DE EXPERIENCIAS (HOME_SCREEN.DART)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Servir como el portal neurálgico donde los exploradores descubren las maravillas
+//   ocultas de Nicaragua, filtran destinos por departamento (Rivas, Matagalpa, León, etc.),
+//   exploran las categorías culturales y reservan directamente con baqueanos campesinos.
+// - Ofrecer una experiencia fluida, continua y de alto impacto visual sin recargas.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Estado mutable `_HomeScreenState` con variable `_selectedDepartment` para filtrado reactivo.
+// - Orquesta de widgets modulares: HeroSection, ImpactCounterStrip, MarqueeTicker,
+//   QuickCategoriesCarousel, DestinationCard en Grid adaptativo, BusinessShowcase,
+//   ExplorerTestimonials, BaqueanoStandard y PremiumFooter.
+// - Integración con `ResponsiveScaffold` para adaptación fluida Móvil/Desktop.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & VISTA EXPUESTA):
+// - `HomeScreen`: Vista principal mapeada en la ruta `/home`.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/widgets/badge_chip.dart';
@@ -21,36 +42,49 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  /// Filtro activo por departamento geográfico ('Todos', 'Matagalpa', 'Madriz', etc.)
   String _selectedDepartment = 'Todos';
 
   @override
   Widget build(BuildContext context) {
+    // Detección del ancho del dispositivo para layout adaptativo
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
 
+    // Filtrado de la lista en memoria según el departamento seleccionado
     final filteredDestinations = _selectedDepartment == 'Todos'
         ? CatalogData.destinations
-        : CatalogData.destinations.where((d) => d.department.toLowerCase() == _selectedDepartment.toLowerCase()).toList();
+        : CatalogData.destinations
+            .where((d) => d.department.toLowerCase() == _selectedDepartment.toLowerCase())
+            .toList();
 
     return ResponsiveScaffold(
-      currentIndex: 0,
+      currentIndex: 0, // Índice 0 = Home en la barra de navegación
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 1. Hero Section
+            // ----------------------------------------------------------------
+            // 1. HERO SECTION (Titular "NICARAGUA EN MODO SECRETO" + Card Cascada La Luna)
+            // ----------------------------------------------------------------
             const HeroSection(),
 
-            // 2. Impact Counter Strip
+            // ----------------------------------------------------------------
+            // 2. FRANJA DE MÉTRICAS (85% Impacto Comunitario, 50+ Aliados)
+            // ----------------------------------------------------------------
             const ImpactCounterStrip(),
 
-            // 3. Marquee Ticker
+            // ----------------------------------------------------------------
+            // 3. TICKER INFINITO DE COOPERATIVAS Y ALIANZAS A 60 FPS
+            // ----------------------------------------------------------------
             const MarqueeTicker(),
 
             const SizedBox(height: 24),
 
-            // 4. Quick Categories Carousel
+            // ----------------------------------------------------------------
+            // 4. CARRUSEL HORIZONTAL DE CATEGORÍAS CULTURALES
+            // ----------------------------------------------------------------
             Padding(
               padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
               child: const SectionHeader(
@@ -64,7 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 32),
 
-            // 5. Popular Destinations & Department Filters
+            // ----------------------------------------------------------------
+            // 5. DESTINOS POPULARES & FILTROS POR DEPARTAMENTO
+            // ----------------------------------------------------------------
             Padding(
               padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
               child: Column(
@@ -77,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 8),
 
-                  // Department Filter Chips
+                  // Barra horizontal de chips de filtrado por departamento
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
@@ -98,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Destination Grid
+                  // Cuadrícula responsiva de tarjetas de destino
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -120,17 +156,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   const SizedBox(height: 40),
 
-                  // 6. Business Showcase
+                  // ------------------------------------------------------------
+                  // 6. VITRINA DE NEGOCIOS Y GUÍAS LOCALES ALIADOS
+                  // ------------------------------------------------------------
                   const BusinessShowcase(),
 
                   const SizedBox(height: 40),
 
-                  // 7. Explorer Testimonials
+                  // ------------------------------------------------------------
+                  // 7. TESTIMONIOS Y RESEÑAS VERIFICADAS DE VIAJEROS
+                  // ------------------------------------------------------------
                   const ExplorerTestimonials(),
 
                   const SizedBox(height: 40),
 
-                  // 8. The Baqueano Standard
+                  // ------------------------------------------------------------
+                  // 8. EL ESTÁNDAR BAQUEANO (4 PILARES Y CTA DE CONVERSIÓN)
+                  // ------------------------------------------------------------
                   const BaqueanoStandard(),
 
                   const SizedBox(height: 48),
@@ -138,7 +180,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // Premium Multi-Column Footer
+            // ----------------------------------------------------------------
+            // 9. FOOTER MULTICOLUMNA INSTITUCIONAL
+            // ----------------------------------------------------------------
             const PremiumFooter(),
             const SizedBox(height: 80),
           ],
