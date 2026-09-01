@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../core/constants/app_constants.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../checkout/widgets/checkout_modal.dart';
@@ -86,24 +84,24 @@ class HeroSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Tag Pill
+        // Tag Pill (Exact match)
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           decoration: BoxDecoration(
-            color: AppColors.terracotta.withValues(alpha: 0.2),
+            color: AppColors.primaryDark.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: AppColors.terracottaLight.withValues(alpha: 0.5)),
+            border: Border.all(color: AppColors.jungleGreen.withValues(alpha: 0.6), width: 1.2),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('🇳🇮', style: TextStyle(fontSize: 14)),
+              const Icon(Icons.eco_rounded, color: AppColors.jungleGreen, size: 14),
               const SizedBox(width: 8),
               Text(
-                'ECOTURISMO COMUNITARIO AUTÉNTICO',
+                'EXPEDICIONES PRIVADAS · TURISMO LOCAL',
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 11,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   color: AppColors.goldLight,
                   letterSpacing: 1.2,
                 ),
@@ -112,30 +110,41 @@ class HeroSection extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 18),
+        const SizedBox(height: 20),
 
-        // Hero Headline with Gradient
-        ShaderMask(
-          shaderCallback: (bounds) => AppGradients.sunsetTerracotta.createShader(
-            Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-          ),
-          child: Text(
-            AppConstants.appSlogan,
-            style: GoogleFonts.montserrat(
-              fontSize: isDesktop ? 48 : 34,
-              fontWeight: FontWeight.w900,
-              color: Colors.white,
-              letterSpacing: -1.0,
-              height: 1.15,
-            ),
+        // Hero Headline (NICARAGUA in White, EN MODO SECRETO in Neon Orange)
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'NICARAGUA\n',
+                style: GoogleFonts.montserrat(
+                  fontSize: isDesktop ? 54 : 38,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                  letterSpacing: -1.2,
+                  height: 1.05,
+                ),
+              ),
+              TextSpan(
+                text: 'EN MODO\nSECRETO.',
+                style: GoogleFonts.montserrat(
+                  fontSize: isDesktop ? 54 : 38,
+                  fontWeight: FontWeight.w900,
+                  color: const Color(0xFFFF5722), // Vibrant Terracotta Neon
+                  letterSpacing: -1.2,
+                  height: 1.05,
+                ),
+              ),
+            ],
           ),
         ),
 
-        const SizedBox(height: 14),
+        const SizedBox(height: 18),
 
         // Subtitle
         Text(
-          AppConstants.appSubtitle,
+          'Diseña rutas inmersivas con guías locales, reservas directas, mapa offline y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
           style: GoogleFonts.inter(
             fontSize: isDesktop ? 16 : 14,
             fontWeight: FontWeight.w400,
@@ -197,40 +206,29 @@ class HeroSection extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 12,
-                left: 12,
+                top: 14,
+                left: 14,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
-                    color: AppColors.bgDark.withValues(alpha: 0.85),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.gold),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.star, color: AppColors.gold, size: 14),
-                      const SizedBox(width: 4),
-                      Text(
-                        '${destination.rating} (128)',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                    color: const Color(0xFFFF5722), // Orange Destacado
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
                       ),
                     ],
                   ),
-                ),
-              ),
-              Positioned(
-                top: 12,
-                right: 12,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.sunsetTerracotta,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
                   child: Text(
                     'DESTACADO',
-                    style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
+                    style: GoogleFonts.montserrat(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.0,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -239,40 +237,121 @@ class HeroSection extends StatelessWidget {
 
           // Card Body
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(18.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      destination.department.toUpperCase(),
-                      style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.terracottaLight),
-                    ),
-                    Text(
-                      '${destination.duration} · ${destination.distance}',
-                      style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
-                    ),
-                  ],
+                Text(
+                  'RUTA CURADA POR LOCALES',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.5,
+                    color: AppColors.gold,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  destination.title,
+                  destination.title.toUpperCase(),
                   style: GoogleFonts.montserrat(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.textLight,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5,
+                    color: Colors.white,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 Text(
                   destination.description,
-                  style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.4),
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: AppColors.textMuted,
+                    height: 1.4,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 14),
+
+                // 3 Stat Boxes
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AppColors.borderLight),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              '${destination.rating}',
+                              style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w900, color: Colors.white),
+                            ),
+                            Text(
+                              'RATING',
+                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AppColors.borderLight),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              destination.duration.toUpperCase(),
+                              style: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              'DURACIÓN',
+                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AppColors.borderLight),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              destination.distance.toUpperCase(),
+                              style: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
+                            ),
+                            Text(
+                              'RUTA',
+                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

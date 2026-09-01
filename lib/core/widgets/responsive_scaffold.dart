@@ -6,6 +6,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
 import 'baqueano_button.dart';
 import 'baqueano_logo.dart';
+import 'custom_toast.dart';
 import 'glass_container.dart';
 
 class ResponsiveScaffold extends StatefulWidget {
@@ -56,7 +57,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       drawer: isDesktop ? null : _buildDrawer(context),
       appBar: isDesktop
           ? PreferredSize(
-              preferredSize: const Size.fromHeight(74),
+              preferredSize: const Size.fromHeight(110),
               child: _buildDesktopNavbar(context),
             )
           : PreferredSize(
@@ -98,77 +99,198 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     );
   }
 
-  // --- DESKTOP NAVBAR ---
-  Widget _buildDesktopNavbar(BuildContext context) {
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-        child: Container(
-          height: 74,
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          decoration: BoxDecoration(
-            color: AppColors.primaryDark.withValues(alpha: 0.85),
-            border: const Border(bottom: BorderSide(color: AppColors.borderLight, width: 1)),
-          ),
-          child: Row(
-            children: [
-              // Logo
-              BaqueanoLogo(
-                size: BaqueanoLogoSize.medium,
-                onTap: () => context.go('/home'),
-              ),
-
-              const SizedBox(width: 32),
-
-              // Menu Links
-              _buildNavLink(context, 'INICIO', '/home'),
-              _buildExplorarDropdown(context),
-              _buildNavLink(context, 'MAPA MUNDI', '/mapa'),
-              _buildNavLink(context, 'BAQUEANO AI', '/ai', isHighlight: true),
-              _buildNavLink(context, 'COMUNIDAD', '/comunidad'),
-              _buildNosotrosDropdown(context),
-
-              const Spacer(),
-
-              // Language Selector
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+  // --- TOP ANNOUNCEMENT RIBBON ---
+  Widget _buildAnnouncementRibbon(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFFE64A19), Color(0xFFFF5722), Color(0xFFE64A19)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+      ),
+      child: Center(
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 12,
+          runSpacing: 6,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('🔥', style: TextStyle(fontSize: 14)),
+                const SizedBox(width: 6),
+                Text(
+                  '¡OFERTAS EXCLUSIVAS! Descubre las mejores promociones de negocios locales y explora nuestros lugares de referencia nacional.',
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            InkWell(
+              onTap: () => context.go('/descubrir'),
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.bgCard,
+                  color: Colors.black.withValues(alpha: 0.35),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.borderLight),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.6), width: 0.8),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    _buildLangChip('ES'),
-                    const SizedBox(width: 4),
-                    _buildLangChip('EN'),
+                    Text(
+                      'EXPLORAR →',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.white,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
                   ],
                 ),
               ),
-
-              const SizedBox(width: 16),
-
-              // Passport Button
-              BaqueanoButton(
-                text: 'Mi Pasaporte',
-                icon: const Icon(Icons.badge_outlined, size: 16, color: Colors.white),
-                variant: BaqueanoButtonVariant.secondary,
-                height: 40,
-                onPressed: () => context.go('/pasaporte'),
-              ),
-              const SizedBox(width: 12),
-
-              // Admin Button
-              IconButton(
-                tooltip: 'Panel Admin CMS',
-                icon: const Icon(Icons.admin_panel_settings_outlined, color: AppColors.gold, size: 22),
-                onPressed: () => context.go('/admin'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  // --- DESKTOP NAVBAR ---
+  Widget _buildDesktopNavbar(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildAnnouncementRibbon(context),
+        ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+            child: Container(
+              height: 72,
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              decoration: BoxDecoration(
+                color: AppColors.primaryDark.withValues(alpha: 0.95),
+                border: const Border(bottom: BorderSide(color: AppColors.borderLight, width: 1)),
+              ),
+              child: Row(
+                children: [
+                  // Logo
+                  BaqueanoLogo(
+                    size: BaqueanoLogoSize.medium,
+                    onTap: () => context.go('/home'),
+                  ),
+
+                  const SizedBox(width: 24),
+
+                  // Menu Links
+                  _buildNavLink(context, 'INICIO', '/home'),
+                  _buildExplorarDropdown(context),
+                  _buildNavLink(context, 'MAPA MUNDO', '/mapa'),
+                  _buildNavLink(context, 'BAQUEANO AI', '/ai', isHighlight: true),
+                  _buildNavLink(context, 'COMUNIDAD', '/comunidad'),
+                  _buildNosotrosDropdown(context),
+
+                  const Spacer(),
+
+                  // Language Selector Pill [NI ES/EN]
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryLight.withValues(alpha: 0.6),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: AppColors.borderLight),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text('🇳🇮', style: TextStyle(fontSize: 12)),
+                        const SizedBox(width: 4),
+                        _buildLangChip('ES'),
+                        const SizedBox(width: 2),
+                        _buildLangChip('EN'),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(width: 14),
+
+                  // Mi Perfil Button
+                  InkWell(
+                    onTap: () => context.go('/pasaporte'),
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                      decoration: BoxDecoration(
+                        color: AppColors.bgCard,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.borderLight),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.person_outline_rounded, size: 16, color: AppColors.goldLight),
+                          const SizedBox(width: 6),
+                          Text(
+                            'MI PERFIL',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  // INGRESAR Orange Gradient Button
+                  InkWell(
+                    onTap: () => _showAuthModal(context),
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFFFF5722), Color(0xFFE64A19)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFFF5722).withValues(alpha: 0.4),
+                            blurRadius: 10,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        'INGRESAR',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -516,6 +638,110 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         Navigator.of(context).pop();
         context.go(route);
       },
+    );
+  }
+
+  void _showAuthModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 440),
+          child: Container(
+            padding: const EdgeInsets.all(28),
+            decoration: BoxDecoration(
+              color: AppColors.primaryDark,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: AppColors.borderGold, width: 1.2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.6),
+                  blurRadius: 30,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const BaqueanoLogo(size: BaqueanoLogoSize.medium),
+                const SizedBox(height: 20),
+                Text(
+                  '¡Bienvenido a Baqueano!',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Inicia sesión para acumular sellos en tu Pasaporte y acceder a tarifas exclusivas comunitarias.',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: AppColors.textMuted,
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Google Button
+                BaqueanoButton(
+                  text: 'Continuar con Google',
+                  icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 24),
+                  variant: BaqueanoButtonVariant.secondary,
+                  width: double.infinity,
+                  height: 48,
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    CustomToast.show(
+                      context,
+                      message: '¡Sesión iniciada con éxito! Bienvenido, Explorador.',
+                      icon: Icons.check_circle_rounded,
+                      accentColor: AppColors.jungleGreen,
+                    );
+                  },
+                ),
+                const SizedBox(height: 12),
+
+                // WhatsApp MFA Button
+                BaqueanoButton(
+                  text: 'Ingresar con WhatsApp',
+                  icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 18),
+                  variant: BaqueanoButtonVariant.primary,
+                  width: double.infinity,
+                  height: 48,
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    CustomToast.show(
+                      context,
+                      message: 'Código de acceso enviado a tu WhatsApp.',
+                      icon: Icons.sms_outlined,
+                      accentColor: AppColors.gold,
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: Text(
+                    'Continuar como explorador invitado',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 12,
+                      color: AppColors.goldLight,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
