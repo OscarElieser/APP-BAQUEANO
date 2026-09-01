@@ -57,53 +57,27 @@ class BaqueanoLogo extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildIconBadge(size: 34),
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'BAQUEANO',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 2.2,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.gold,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    'NI',
-                    style: GoogleFonts.spaceGrotesk(
-                      fontSize: 8,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                ),
-              ],
+        Image.asset(
+          'assets/images/logo_baqueano.png',
+          height: 24,
+          fit: BoxFit.contain,
+          errorBuilder: (_, __, ___) => _buildFallbackTypography(16, 2.0),
+        ),
+        const SizedBox(width: 6),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+          decoration: BoxDecoration(
+            gradient: AppGradients.gold,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text(
+            'NI',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 8,
+              fontWeight: FontWeight.w900,
+              color: AppColors.textDark,
             ),
-            if (showSubtitle)
-              Text(
-                'ECOTURISMO & RUTAS',
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 8.5,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.5,
-                  color: AppColors.goldLight,
-                ),
-              ),
-          ],
+          ),
         ),
       ],
     );
@@ -114,53 +88,27 @@ class BaqueanoLogo extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildIconBadge(size: 44),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'BAQUEANO',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 3.0,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.gold,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    'NICARAGUA',
-                    style: GoogleFonts.spaceGrotesk(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                ),
-              ],
+        Image.asset(
+          'assets/images/logo_baqueano.png',
+          height: 32,
+          fit: BoxFit.contain,
+          errorBuilder: (_, __, ___) => _buildFallbackTypography(20, 2.5),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(
+            gradient: AppGradients.gold,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            'NICARAGUA',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 9,
+              fontWeight: FontWeight.w900,
+              color: AppColors.textDark,
             ),
-            if (showSubtitle)
-              Text(
-                'EXPEDICIONES Y COMUNIDADES',
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 9.5,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.0,
-                  color: AppColors.goldLight,
-                ),
-              ),
-          ],
+          ),
         ),
       ],
     );
@@ -171,49 +119,42 @@ class BaqueanoLogo extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildIconBadge(size: 80),
-        const SizedBox(height: 16),
+        Image.asset(
+          'assets/images/logo_baqueano.png',
+          height: 54,
+          fit: BoxFit.contain,
+          errorBuilder: (_, __, ___) => _buildFallbackTypography(32, 4.0),
+        ),
+        const SizedBox(height: 8),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const Text('🇳🇮', style: TextStyle(fontSize: 14)),
+            const SizedBox(width: 6),
             Text(
-              'BAQUEANO',
-              style: GoogleFonts.montserrat(
-                fontSize: 32,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 4.0,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                gradient: AppGradients.gold,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'OFICIAL',
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
-                  color: AppColors.textDark,
-                ),
+              'PLATAFORMA OFICIAL DE ECOTURISMO',
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 2.0,
+                color: AppColors.goldLight,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 4),
-        Text(
-          'PLATAFORMA NACIONAL DE ECOTURISMO',
-          style: GoogleFonts.spaceGrotesk(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 2.5,
-            color: AppColors.goldLight,
-          ),
-        ),
       ],
+    );
+  }
+
+  Widget _buildFallbackTypography(double fontSize, double letterSpacing) {
+    return Text(
+      'BAQUEANO',
+      style: GoogleFonts.montserrat(
+        fontSize: fontSize,
+        fontWeight: FontWeight.w900,
+        letterSpacing: letterSpacing,
+        color: Colors.white,
+      ),
     );
   }
 
@@ -243,13 +184,11 @@ class BaqueanoLogo extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Volcanic silhouette
             Icon(
               Icons.landscape_rounded,
               size: size * 0.65,
               color: Colors.white,
             ),
-            // Glowing golden sun rising over the peak
             Positioned(
               top: size * 0.16,
               right: size * 0.18,

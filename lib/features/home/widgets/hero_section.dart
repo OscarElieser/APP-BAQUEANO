@@ -193,15 +193,21 @@ class HeroSection extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                child: Image.network(
-                  destination.imageUrl,
+                child: Image.asset(
+                  'assets/images/cascada_la_luna.jpg',
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
+                  errorBuilder: (_, __, ___) => Image.network(
+                    destination.imageUrl,
                     height: 200,
-                    color: AppColors.primaryLight,
-                    child: const Center(child: Icon(Icons.landscape, size: 48, color: AppColors.gold)),
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Container(
+                      height: 200,
+                      color: AppColors.primaryLight,
+                      child: const Center(child: Icon(Icons.landscape, size: 48, color: AppColors.gold)),
+                    ),
                   ),
                 ),
               ),

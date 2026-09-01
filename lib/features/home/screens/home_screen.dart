@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/badge_chip.dart';
+import '../../../core/widgets/premium_footer.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../widgets/baqueano_standard.dart';
@@ -134,56 +133,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   // 8. The Baqueano Standard
                   const BaqueanoStandard(),
 
-                  const SizedBox(height: 60),
-
-                  // Footer Strip
-                  _buildFooter(context, isDesktop),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 48),
                 ],
               ),
             ),
+
+            // Premium Multi-Column Footer
+            const PremiumFooter(),
+            const SizedBox(height: 80),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildFooter(BuildContext context, bool isDesktop) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppColors.borderLight)),
-      ),
-      child: Column(
-        children: [
-          Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              const Text('🇳🇮', style: TextStyle(fontSize: 22)),
-              const SizedBox(width: 8),
-              Text(
-                'BAQUEANO · Plataforma Oficial de Ecoturismo de Nicaragua',
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textMuted,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '© 2026 Baqueano Ecosystem. Todos los derechos reservados. Turismo comunitario transparente y sin intermediarios.',
-            style: GoogleFonts.inter(
-              fontSize: 11,
-              color: AppColors.textMuted.withValues(alpha: 0.7),
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

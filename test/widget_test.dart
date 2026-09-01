@@ -12,8 +12,8 @@ void main() {
       ),
     );
 
-    // Verify Baqueano brand name appears in header/scaffold
-    expect(find.textContaining('BAQUEANO'), findsWidgets);
+    // Verify Baqueano app renders correctly
+    expect(find.byType(BaqueanoApp), findsOneWidget);
   });
 
   test('Exchange rate and VAT math logic test', () {

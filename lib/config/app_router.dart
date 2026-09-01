@@ -18,14 +18,19 @@ import '../features/institutional/screens/privacy_screen.dart';
 import '../features/institutional/screens/terms_screen.dart';
 import '../features/map/screens/map_screen.dart';
 import '../features/passport/screens/passport_screen.dart';
+import '../features/splash/screens/splash_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/home',
+    initialLocation: '/splash',
     routes: [
       GoRoute(
         path: '/',
-        redirect: (_, __) => '/home',
+        redirect: (_, __) => '/splash',
+      ),
+      GoRoute(
+        path: '/splash',
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: '/home',
