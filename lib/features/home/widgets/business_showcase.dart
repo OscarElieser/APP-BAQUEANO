@@ -39,7 +39,7 @@ class BusinessShowcase extends StatelessWidget {
                   border: Border.all(color: AppColors.borderLight),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -62,7 +62,7 @@ class BusinessShowcase extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppColors.jungleGreen.withOpacity(0.2),
+                            color: AppColors.jungleGreen.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: AppColors.jungleGreenLight, width: 0.8),
                           ),

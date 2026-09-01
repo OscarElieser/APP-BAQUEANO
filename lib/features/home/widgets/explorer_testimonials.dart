@@ -37,7 +37,7 @@ class ExplorerTestimonials extends StatelessWidget {
                   border: Border.all(color: AppColors.borderLight),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -99,7 +99,7 @@ class ExplorerTestimonials extends StatelessWidget {
                         rev.review,
                         style: GoogleFonts.inter(
                           fontSize: 12,
-                          color: AppColors.textLight.withOpacity(0.85),
+                          color: AppColors.textLight.withValues(alpha: 0.85),
                           height: 1.45,
                           fontStyle: FontStyle.italic,
                         ),

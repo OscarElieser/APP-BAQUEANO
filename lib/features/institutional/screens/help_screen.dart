@@ -65,7 +65,7 @@ class HelpScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF260D0D),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.error.withOpacity(0.5)),
+                border: Border.all(color: AppColors.error.withValues(alpha: 0.5)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -219,7 +219,7 @@ class HelpScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.bgDark,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColors.error.withOpacity(0.6)),
+          border: Border.all(color: AppColors.error.withValues(alpha: 0.6)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

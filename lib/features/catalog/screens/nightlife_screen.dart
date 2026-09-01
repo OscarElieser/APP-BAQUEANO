@@ -123,7 +123,7 @@ class NightlifeScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: AppColors.primaryDark,
                                     borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(color: AppColors.borderGold.withOpacity(0.5)),
+                                    border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.5)),
                                   ),
                                   child: Text('🍹 $drink', style: GoogleFonts.inter(fontSize: 10, color: AppColors.textLight)),
                                 );

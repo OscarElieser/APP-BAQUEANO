@@ -57,7 +57,7 @@ class VideosScreen extends StatelessWidget {
                   image: DecorationImage(
                     image: NetworkImage(video.thumbnail),
                     fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.darken),
+                    colorFilter: ColorFilter.mode(Colors.black.withValues(alpha: 0.3), BlendMode.darken),
                   ),
                 ),
                 child: Center(
@@ -71,7 +71,7 @@ class VideosScreen extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.terracotta.withOpacity(0.5),
+                              color: AppColors.terracotta.withValues(alpha: 0.5),
                               blurRadius: 20,
                             ),
                           ],
@@ -82,7 +82,7 @@ class VideosScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7),
+                          color: Colors.black.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -182,7 +182,7 @@ class VideosScreen extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [Colors.black.withOpacity(0.2), Colors.black.withOpacity(0.6)],
+                                  colors: [Colors.black.withValues(alpha: 0.2), Colors.black.withValues(alpha: 0.6)],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                 ),
@@ -200,7 +200,7 @@ class VideosScreen extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.terracotta.withOpacity(0.5),
+                                    color: AppColors.terracotta.withValues(alpha: 0.5),
                                     blurRadius: 16,
                                   ),
                                 ],
@@ -230,7 +230,7 @@ class VideosScreen extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.8),
+                                color: Colors.black.withValues(alpha: 0.8),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Row(

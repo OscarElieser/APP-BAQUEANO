@@ -33,10 +33,10 @@ class SectionHeader extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.terracotta.withOpacity(0.15),
+                  color: AppColors.terracotta.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: AppColors.terracotta.withOpacity(0.4),
+                    color: AppColors.terracotta.withValues(alpha: 0.4),
                     width: 1,
                   ),
                 ),

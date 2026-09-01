@@ -32,7 +32,7 @@ class BadgeChip extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: effectiveColor.withOpacity(isSelected ? 0.9 : 0.4),
+          color: effectiveColor.withValues(alpha: isSelected ? 0.9 : 0.4),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected ? AppColors.gold : AppColors.borderLight,
@@ -41,7 +41,7 @@ class BadgeChip extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: AppColors.terracotta.withOpacity(0.3),
+                    color: AppColors.terracotta.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),

@@ -51,7 +51,7 @@ class GastronomyScreen extends StatelessWidget {
                       '«Somos hijos del maíz». Cada platillo refleja la fusión entre las raíces indígenas chorotegas, náhuatl y las técnicas coloniales campesinas.',
                       style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: AppColors.textLight.withOpacity(0.9),
+                        color: AppColors.textLight.withValues(alpha: 0.9),
                         fontStyle: FontStyle.italic,
                       ),
                     ),
@@ -105,7 +105,7 @@ class GastronomyScreen extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
-                                color: AppColors.bgDark.withOpacity(0.85),
+                                color: AppColors.bgDark.withValues(alpha: 0.85),
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: AppColors.gold),
                               ),
@@ -168,7 +168,7 @@ class GastronomyScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     ing,
-                                    style: GoogleFonts.inter(fontSize: 10, color: AppColors.textLight.withOpacity(0.9)),
+                                    style: GoogleFonts.inter(fontSize: 10, color: AppColors.textLight.withValues(alpha: 0.9)),
                                   ),
                                 );
                               }).toList(),

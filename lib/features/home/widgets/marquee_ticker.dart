@@ -12,7 +12,7 @@ class MarqueeTicker extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.primaryDark.withOpacity(0.9),
+        color: AppColors.primaryDark.withValues(alpha: 0.9),
         border: const Border.symmetric(
           horizontal: BorderSide(color: AppColors.borderLight, width: 0.8),
         ),
@@ -51,7 +51,7 @@ class MarqueeTicker extends StatelessWidget {
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textLight.withOpacity(0.85),
+                        color: AppColors.textLight.withValues(alpha: 0.85),
                       ),
                     ),
                     const SizedBox(width: 16),

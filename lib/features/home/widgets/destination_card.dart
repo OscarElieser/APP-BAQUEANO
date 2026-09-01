@@ -53,7 +53,7 @@ class _DestinationCardState extends State<DestinationCard> {
         border: Border.all(color: AppColors.borderLight),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withValues(alpha: 0.25),
             blurRadius: 14,
             offset: const Offset(0, 6),
           ),
@@ -89,7 +89,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Colors.transparent, AppColors.bgDark.withOpacity(0.8)],
+                      colors: [Colors.transparent, AppColors.bgDark.withValues(alpha: 0.8)],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),
@@ -104,7 +104,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.bgDark.withOpacity(0.85),
+                    color: AppColors.bgDark.withValues(alpha: 0.85),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: _getDifficultyColor(destination.difficulty), width: 1),
                   ),
@@ -149,7 +149,7 @@ class _DestinationCardState extends State<DestinationCard> {
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.bgDark.withOpacity(0.8),
+                      color: AppColors.bgDark.withValues(alpha: 0.8),
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.borderLight),
                     ),
@@ -169,7 +169,7 @@ class _DestinationCardState extends State<DestinationCard> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.terracotta.withOpacity(0.85),
+                    color: AppColors.terracotta.withValues(alpha: 0.85),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -260,7 +260,7 @@ class _DestinationCardState extends State<DestinationCard> {
                     return Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryLight.withOpacity(0.4),
+                        color: AppColors.primaryLight.withValues(alpha: 0.4),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(

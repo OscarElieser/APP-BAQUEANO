@@ -252,7 +252,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: msg.isUser ? AppColors.terracotta : AppColors.primaryLight.withOpacity(0.6),
+          color: msg.isUser ? AppColors.terracotta : AppColors.primaryLight.withValues(alpha: 0.6),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(18),
             topRight: const Radius.circular(18),
@@ -313,9 +313,9 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
-                        color: AppColors.bgDark.withOpacity(0.7),
+                        color: AppColors.bgDark.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.gold.withOpacity(0.6)),
+                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.6)),
                       ),
                       child: Text(
                         action,
@@ -343,7 +343,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         margin: const EdgeInsets.only(bottom: 14),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: AppColors.primaryLight.withOpacity(0.6),
+          color: AppColors.primaryLight.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(

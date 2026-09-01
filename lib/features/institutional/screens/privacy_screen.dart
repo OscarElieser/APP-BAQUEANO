@@ -87,7 +87,7 @@ class PrivacyScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
-                          color: AppColors.craterTeal.withOpacity(0.2),
+                          color: AppColors.craterTeal.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: AppColors.craterTeal),
                         ),

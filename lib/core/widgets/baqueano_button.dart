@@ -127,7 +127,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: AppColors.terracotta.withOpacity(0.35),
+              color: AppColors.terracotta.withValues(alpha: 0.35),
               blurRadius: 14,
               offset: const Offset(0, 4),
             ),
@@ -139,7 +139,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: AppColors.gold.withOpacity(0.35),
+              color: AppColors.gold.withValues(alpha: 0.35),
               blurRadius: 14,
               offset: const Offset(0, 4),
             ),
@@ -159,7 +159,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
         );
       case BaqueanoButtonVariant.glass:
         return BoxDecoration(
-          color: AppColors.bgSurface.withOpacity(0.6),
+          color: AppColors.bgSurface.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.borderLight),
         );

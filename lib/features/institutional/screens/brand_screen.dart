@@ -41,7 +41,7 @@ class BrandScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.terracotta.withOpacity(0.35),
+                    color: AppColors.terracotta.withValues(alpha: 0.35),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -145,14 +145,14 @@ class BrandScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.bgCard,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: accentColor.withOpacity(0.5)),
+        border: Border.all(color: accentColor.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(tag, style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: accentColor)),
           const SizedBox(height: 10),
-          Text(text, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withOpacity(0.9), height: 1.45)),
+          Text(text, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.45)),
         ],
       ),
     );
@@ -172,7 +172,7 @@ class BrandScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white.withOpacity(0.3)),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
             ),
           ),
           const SizedBox(width: 16),

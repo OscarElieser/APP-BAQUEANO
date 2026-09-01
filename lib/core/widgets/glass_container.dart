@@ -46,12 +46,12 @@ class GlassContainer extends StatelessWidget {
           height: height,
           padding: padding ?? const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: backgroundColor ?? AppColors.primary.withOpacity(0.45),
+            color: backgroundColor ?? AppColors.primary.withValues(alpha: 0.45),
             borderRadius: effectiveBorderRadius,
             border: effectiveBorder,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 16,
                 offset: const Offset(0, 8),
               ),
@@ -69,8 +69,8 @@ class GlassContainer extends StatelessWidget {
         child: InkWell(
           borderRadius: effectiveBorderRadius,
           onTap: onTap,
-          splashColor: AppColors.terracotta.withOpacity(0.2),
-          highlightColor: AppColors.gold.withOpacity(0.1),
+          splashColor: AppColors.terracotta.withValues(alpha: 0.2),
+          highlightColor: AppColors.gold.withValues(alpha: 0.1),
           child: content,
         ),
       );

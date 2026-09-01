@@ -70,7 +70,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   // --- MOBILE APP BAR ---
   Widget _buildMobileAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.bgDark.withOpacity(0.85),
+      backgroundColor: AppColors.bgDark.withValues(alpha: 0.85),
       elevation: 0,
       centerTitle: false,
       leading: Builder(
@@ -128,7 +128,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           height: 74,
           padding: const EdgeInsets.symmetric(horizontal: 32),
           decoration: BoxDecoration(
-            color: AppColors.primaryDark.withOpacity(0.85),
+            color: AppColors.primaryDark.withValues(alpha: 0.85),
             border: const Border(bottom: BorderSide(color: AppColors.borderLight, width: 1)),
           ),
           child: Row(
@@ -378,7 +378,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         height: 68,
         borderRadius: BorderRadius.circular(34),
         blur: 20,
-        backgroundColor: AppColors.primaryDark.withOpacity(0.85),
+        backgroundColor: AppColors.primaryDark.withValues(alpha: 0.85),
         border: Border.all(color: AppColors.borderGold, width: 1.2),
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
@@ -409,7 +409,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: (isSelected ? AppColors.terracotta : AppColors.gold).withOpacity(0.4),
+                color: (isSelected ? AppColors.terracotta : AppColors.gold).withValues(alpha: 0.4),
                 blurRadius: 10,
                 offset: const Offset(0, 2),
               ),
@@ -538,7 +538,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.primaryLight.withOpacity(0.3),
+                color: AppColors.primaryLight.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppColors.borderLight),
               ),

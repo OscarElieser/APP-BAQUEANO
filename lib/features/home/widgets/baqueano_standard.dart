@@ -68,9 +68,9 @@ class BaqueanoStandard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: AppColors.terracotta.withOpacity(0.15),
+                      color: AppColors.terracotta.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.terracotta.withOpacity(0.4)),
+                      border: Border.all(color: AppColors.terracotta.withValues(alpha: 0.4)),
                     ),
                     child: Text(std['icon']!, style: const TextStyle(fontSize: 22)),
                   ),
@@ -115,7 +115,7 @@ class BaqueanoStandard extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: AppColors.terracotta.withOpacity(0.3),
+                color: AppColors.terracotta.withValues(alpha: 0.3),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
@@ -137,7 +137,7 @@ class BaqueanoStandard extends StatelessWidget {
                 'Únete a miles de exploradores que viajan con propósito, apoyando a las comunidades locales y viviendo aventuras inolvidables.',
                 style: GoogleFonts.inter(
                   fontSize: 13,
-                  color: Colors.white.withOpacity(0.95),
+                  color: Colors.white.withValues(alpha: 0.95),
                   height: 1.4,
                 ),
                 textAlign: TextAlign.center,

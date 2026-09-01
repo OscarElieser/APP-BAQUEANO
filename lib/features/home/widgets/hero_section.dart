@@ -29,7 +29,7 @@ class HeroSection extends StatelessWidget {
             height: 350,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.terracotta.withOpacity(0.18),
+              color: AppColors.terracotta.withValues(alpha: 0.18),
             ),
           ),
         ),
@@ -41,7 +41,7 @@ class HeroSection extends StatelessWidget {
             height: 300,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.craterTeal.withOpacity(0.12),
+              color: AppColors.craterTeal.withValues(alpha: 0.12),
             ),
           ),
         ),
@@ -90,9 +90,9 @@ class HeroSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
           decoration: BoxDecoration(
-            color: AppColors.terracotta.withOpacity(0.2),
+            color: AppColors.terracotta.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: AppColors.terracottaLight.withOpacity(0.5)),
+            border: Border.all(color: AppColors.terracottaLight.withValues(alpha: 0.5)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -139,7 +139,7 @@ class HeroSection extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: isDesktop ? 16 : 14,
             fontWeight: FontWeight.w400,
-            color: AppColors.textLight.withOpacity(0.9),
+            color: AppColors.textLight.withValues(alpha: 0.9),
             height: 1.6,
           ),
         ),
@@ -202,7 +202,7 @@ class HeroSection extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.bgDark.withOpacity(0.85),
+                    color: AppColors.bgDark.withValues(alpha: 0.85),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: AppColors.gold),
                   ),

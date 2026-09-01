@@ -179,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
             '© 2026 Baqueano Ecosystem. Todos los derechos reservados. Turismo comunitario transparente y sin intermediarios.',
             style: GoogleFonts.inter(
               fontSize: 11,
-              color: AppColors.textMuted.withOpacity(0.7),
+              color: AppColors.textMuted.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),

@@ -77,7 +77,7 @@ class PassportScreen extends StatelessWidget {
         border: Border.all(color: AppColors.gold, width: 2.0),
         boxShadow: [
           BoxShadow(
-            color: AppColors.gold.withOpacity(0.2),
+            color: AppColors.gold.withValues(alpha: 0.2),
             blurRadius: 30,
             offset: const Offset(0, 10),
           ),
@@ -128,7 +128,7 @@ class PassportScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: AppColors.gold.withOpacity(0.2),
+                    color: AppColors.gold.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.gold),
                   ),
@@ -327,7 +327,7 @@ class PassportScreen extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: isStamped ? AppColors.terracotta.withOpacity(0.12) : AppColors.bgCard.withOpacity(0.4),
+            color: isStamped ? AppColors.terracotta.withValues(alpha: 0.12) : AppColors.bgCard.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isStamped ? AppColors.terracotta : AppColors.borderLight,
@@ -341,7 +341,7 @@ class PassportScreen extends StatelessWidget {
                 height: 50,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: isStamped ? AppColors.terracotta.withOpacity(0.3) : AppColors.primaryLight,
+                  color: isStamped ? AppColors.terracotta.withValues(alpha: 0.3) : AppColors.primaryLight,
                   border: Border.all(color: isStamped ? AppColors.gold : AppColors.borderLight),
                 ),
                 child: Center(child: Text(s['icon'] as String, style: const TextStyle(fontSize: 22))),
@@ -412,7 +412,7 @@ class PassportScreen extends StatelessWidget {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: badge.isUnlocked ? AppColors.gold.withOpacity(0.2) : AppColors.primaryLight,
+                  color: badge.isUnlocked ? AppColors.gold.withValues(alpha: 0.2) : AppColors.primaryLight,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: badge.isUnlocked ? AppColors.gold : AppColors.borderLight),
                 ),

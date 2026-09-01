@@ -24,12 +24,12 @@ class CustomToast {
         content: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: backgroundColor.withOpacity(0.95),
+            color: backgroundColor.withValues(alpha: 0.95),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: accentColor.withOpacity(0.6), width: 1.2),
+            border: Border.all(color: accentColor.withValues(alpha: 0.6), width: 1.2),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.35),
+                color: Colors.black.withValues(alpha: 0.35),
                 blurRadius: 16,
                 offset: const Offset(0, 6),
               ),

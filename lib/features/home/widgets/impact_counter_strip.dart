@@ -27,7 +27,7 @@ class ImpactCounterStrip extends StatelessWidget {
         border: Border.all(color: AppColors.borderLight),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withValues(alpha: 0.25),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),

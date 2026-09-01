@@ -132,7 +132,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                 return GlassContainer(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   borderRadius: BorderRadius.circular(16),
-                  backgroundColor: isCurrent ? AppColors.terracotta.withOpacity(0.2) : null,
+                  backgroundColor: isCurrent ? AppColors.terracotta.withValues(alpha: 0.2) : null,
                   border: Border.all(
                     color: isCurrent ? AppColors.gold : AppColors.borderLight,
                     width: isCurrent ? 1.5 : 0.8,
@@ -233,7 +233,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
         border: Border.all(color: AppColors.borderGold, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: AppColors.terracotta.withOpacity(0.2),
+            color: AppColors.terracotta.withValues(alpha: 0.2),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -261,7 +261,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: AppColors.bgDark.withOpacity(0.6),
+              color: AppColors.bgDark.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: AppColors.borderLight),
             ),
@@ -281,7 +281,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                       const SizedBox(height: 4),
                       Text(
                         _currentTrack.history,
-                        style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withOpacity(0.9), height: 1.4),
+                        style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.4),
                       ),
                     ],
                   ),
@@ -318,7 +318,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
             width: size,
             height: size,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Center(
@@ -339,7 +339,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: AppColors.terracotta.withOpacity(0.2),
+                color: AppColors.terracotta.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: AppColors.terracottaLight),
               ),
@@ -418,7 +418,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.terracotta.withOpacity(0.4),
+                      color: AppColors.terracotta.withValues(alpha: 0.4),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),

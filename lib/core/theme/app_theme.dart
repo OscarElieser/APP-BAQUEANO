@@ -109,7 +109,7 @@ class AppTheme {
         ),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: AppColors.primaryLight.withOpacity(0.5),
+        backgroundColor: AppColors.primaryLight.withValues(alpha: 0.5),
         labelStyle: GoogleFonts.spaceGrotesk(
           fontSize: 12,
           fontWeight: FontWeight.w600,

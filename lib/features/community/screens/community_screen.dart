@@ -110,7 +110,7 @@ class CommunityScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
-                              color: AppColors.terracotta.withOpacity(0.2),
+                              color: AppColors.terracotta.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -123,7 +123,7 @@ class CommunityScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       Text(
                         rev.review,
-                        style: GoogleFonts.inter(fontSize: 13, color: AppColors.textLight.withOpacity(0.9), height: 1.45),
+                        style: GoogleFonts.inter(fontSize: 13, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.45),
                       ),
                     ],
                   ),

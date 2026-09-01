@@ -145,7 +145,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: AppColors.terracotta.withOpacity(0.15),
+                        color: AppColors.terracotta.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(Icons.shield_outlined, color: AppColors.gold, size: 22),
@@ -208,7 +208,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.4),
+            color: AppColors.primary.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: AppColors.borderLight),
           ),
@@ -498,7 +498,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
 
         // DESGLOSE FINANCIERO EN VIVO
         GlassContainer(
-          backgroundColor: AppColors.primaryLight.withOpacity(0.3),
+          backgroundColor: AppColors.primaryLight.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(16),
           padding: const EdgeInsets.all(16),
           border: Border.all(color: AppColors.borderGold, width: 1.2),
@@ -627,7 +627,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
             border: Border.all(color: AppColors.gold, width: 1.5),
             boxShadow: [
               BoxShadow(
-                color: AppColors.gold.withOpacity(0.15),
+                color: AppColors.gold.withValues(alpha: 0.15),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
@@ -654,7 +654,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppColors.success.withOpacity(0.2),
+                      color: AppColors.success.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: AppColors.success),
                     ),
@@ -700,7 +700,7 @@ class _CheckoutModalState extends State<CheckoutModal> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryDark.withOpacity(0.7),
+                  color: AppColors.primaryDark.withValues(alpha: 0.7),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: AppColors.borderLight),
                 ),
