@@ -4,7 +4,7 @@
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Proveer el efecto visual de "cristal esmerilado" (Glassmorphism) que define el
-//   look and feel Premium y moderno de Baqueano, permitiendo ver las texturas de
+//   look and feel Pro y moderno de Baqueano, permitiendo ver las texturas de
 //   mapas y fondos volcánicos difuminados bajo las tarjetas de contenido.
 // - Crear una sensación de profundidad óptica sofisticada y jerarquía visual en capas.
 //

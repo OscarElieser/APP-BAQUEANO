@@ -36,8 +36,11 @@ import '../features/institutional/screens/brand_screen.dart';
 import '../features/institutional/screens/help_screen.dart';
 import '../features/institutional/screens/privacy_screen.dart';
 import '../features/institutional/screens/terms_screen.dart';
+import '../features/emergency/screens/emergency_sos_screen.dart';
 import '../features/map/screens/map_screen.dart';
 import '../features/passport/screens/passport_screen.dart';
+import '../features/profile/screens/profile_screen.dart';
+import '../features/search/screens/universal_search_screen.dart';
 import '../features/splash/screens/splash_screen.dart';
 
 class AppRouter {
@@ -74,7 +77,15 @@ class AppRouter {
       ),
       GoRoute(
         path: '/perfil',
-        redirect: (_, __) => '/pasaporte',
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: '/busqueda',
+        builder: (context, state) => const UniversalSearchScreen(),
+      ),
+      GoRoute(
+        path: '/sos',
+        builder: (context, state) => const EmergencySosScreen(),
       ),
       // Cultural Catalog
       GoRoute(

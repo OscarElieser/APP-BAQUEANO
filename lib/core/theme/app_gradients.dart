@@ -5,7 +5,7 @@
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Proveer transiciones de luz y color ricas, inmersivas y dinámicas que simulan
 //   los atardeceres del Pacífico, los cráteres incandescentes y la niebla de las
-//   montañas de Nicaragua, elevando la aplicación al estándar visual Premium.
+//   montañas de Nicaragua, elevando la aplicación al estándar visual Pro de alta gama.
 // - Evitar fondos planos y aburridos, creando profundidad visual tridimensional
 //   y guiando la atención del usuario hacia elementos clave interactivos.
 //

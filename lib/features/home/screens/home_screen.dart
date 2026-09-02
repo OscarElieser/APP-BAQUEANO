@@ -12,8 +12,8 @@
 // - Estado mutable `_HomeScreenState` con variable `_selectedDepartment` para filtrado reactivo.
 // - Orquesta de widgets modulares: HeroSection, ImpactCounterStrip, MarqueeTicker,
 //   QuickCategoriesCarousel, DestinationCard en Grid adaptativo, BusinessShowcase,
-//   ExplorerTestimonials, BaqueanoStandard y PremiumFooter.
-// - Integración con `ResponsiveScaffold` para adaptación fluida Móvil/Desktop.
+//   ExplorerTestimonials y BaqueanoStandard.
+// - Integración con `ResponsiveScaffold` para adaptación fluida móvil nativa.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & VISTA EXPUESTA):
 // - `HomeScreen`: Vista principal mapeada en la ruta `/home`.
@@ -22,7 +22,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/widgets/badge_chip.dart';
-import '../../../core/widgets/premium_footer.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../widgets/baqueano_standard.dart';
@@ -181,10 +180,50 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // ----------------------------------------------------------------
-            // 9. FOOTER MULTICOLUMNA INSTITUCIONAL
+            // 9. CIERRE NATIVO DEL FEED (SELLO DE MARCA & FIN DE RUTAS)
             // ----------------------------------------------------------------
-            const PremiumFooter(),
-            const SizedBox(height: 80),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                children: [
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFF082B35),
+                      border: Border.all(
+                        color: const Color(0xFFD4AF37).withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.explore_rounded,
+                      color: Color(0xFFD4AF37),
+                      size: 22,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'BAQUEANO • NICARAGUA',
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.5),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Has explorado todas las rutas destacadas de hoy 🌋',
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.35),
+                      fontSize: 11,
+                    ),
+                  ),
+                  const SizedBox(height: 80),
+                ],
+              ),
+            ),
           ],
         ),
       ),
