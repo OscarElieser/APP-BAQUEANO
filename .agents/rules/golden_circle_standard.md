@@ -1,4 +1,8 @@
-# 🧭 ESTÁNDAR DE DESARROLLO Y ARQUITECTURA: CÍRCULO DORADO (GOLDEN CIRCLE) & MODO PREMIUM
+---
+trigger: always_on
+---
+
+# 🧭 ESTÁNDAR DE DESARROLLO Y ARQUITECTURA: CÍRCULO DORADO (GOLDEN CIRCLE) & MODO
 
 Este estándar es de cumplimiento obligatorio e irrestricto para todos los archivos, componentes, módulos, servicios y modelos existentes y futuros del proyecto **BAQUEANO NICARAGUA**.
 
@@ -34,13 +38,14 @@ Todo archivo de código (`.dart`, `.js`, etc.) debe iniciar con un encabezado de
 ## 2. Comentarios Línea por Línea / Bloque por Bloque
 
 Cada bloque funcional, método, cálculo fiscal, animación o constructor debe contener comentarios explicativos que detallen:
+
 - **Intención**: Por qué se toma esa decisión técnica.
 - **Mecanismo**: Cómo se ejecuta el cálculo, transición o llamada asíncrona.
 - **Importancia**: Qué sucedería si falla y cómo se previene cualquier error.
 
 ---
 
-## 3. Modo Premium Innegociable
+## 3. Modo  Innegociable
 
 1. **Alineación Visual de Lujo**:
    - Paleta oficial volcánica: `#082B35` (Petróleo Volcánico), `#C86432` (Terracota), `#D4AF37` (Oro Pinolero), `#0F172A` (Noche Profunda).

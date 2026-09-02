@@ -1,8 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permisos esenciales para Baqueano: GPS, Mapas, Internet y Llamada SOS -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
-        android:label="baqueano_app"
+        android:label="Baqueano"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- Llave oficial de Google Maps Android SDK -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

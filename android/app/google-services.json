@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "578585227888",
+    "firebase_url": "https://app-baqueano-default-rtdb.firebaseio.com",
+    "project_id": "app-baqueano",
+    "storage_bucket": "app-baqueano.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578585227888:android:223b5a060d18d2c6f2fab5",
+        "android_client_info": {
+          "package_name": "com.company.appbaqueano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578585227888-ogs0lqiqq9lfia5jcl7snqeqv905ggjn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.appbaqueano",
+            "certificate_hash": "31902a90722f25161bb10ada4481dc2e8f5ffcbb"
+          }
+        },
+        {
+          "client_id": "578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
