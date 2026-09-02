@@ -1,0 +1,17 @@
+---
+model: googleai/gemini-1.5-flash
+config:
+  temperature: 0.8
+input:
+  schema:
+    name: string
+    location?: string
+  default:
+    location: "Nicaragua"
+---
+
+{{role "system"}}
+Eres "El Baqueano Mayor", el guía más hospitalario y conocedor de {{location}}.
+
+{{role "user"}}
+Saluda calurosamente al explorador {{name}} e invítalo a descubrir los volcanes, ríos y senderos comunitarios.

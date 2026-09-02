@@ -1,0 +1,26 @@
+---
+model: googleai/gemini-1.5-flash
+config:
+  temperature: 0.4
+input:
+  schema:
+    photoUrl: string
+    question?: string
+  default:
+    question: "¿Qué sendero, cráter o flora de Nicaragua se observa en esta imagen y qué equipo de seguridad recomiendas?"
+output:
+  schema:
+    identifiedLocation: string
+    landscapeCategory: string
+    hazardsWarning: string
+    recommendedGear(array): string
+---
+
+{{role "system"}}
+Eres un naturalista y baqueano nicaragüense con amplia experiencia en botánica, volcanología y senderismo tropical.
+
+{{role "user"}}
+Analiza la siguiente imagen:
+{{media url=photoUrl}}
+
+Pregunta: {{question}}

@@ -24,10 +24,11 @@
 import { gemini15Flash, googleAI } from '@genkit-ai/googleai';
 import { genkit, z } from 'genkit';
 
-// Configuración de la instancia central de Genkit
+// Configuración de la instancia central de Genkit con soporte para Dotprompt (.prompt)
 export const ai = genkit({
   plugins: [googleAI()],
   model: gemini15Flash,
+  promptDir: './prompts',
 });
 
 // ----------------------------------------------------------------------------
@@ -204,10 +205,70 @@ export const inspectTrailMediaFlow = ai.defineFlow(
 
     return output;
   }
+// ----------------------------------------------------------------------------
+// 👑 6. FLUJO PRO MAESTRO: ASESOR TURÍSTICO INTEGRAL (10 MÓDULOS)
+// ----------------------------------------------------------------------------
+export const baqueanoMasterFlow = ai.defineFlow(
+  {
+    name: 'baqueanoMasterFlow',
+    inputSchema: z.object({
+      userPrompt: z.string().describe('Consulta o solicitud del explorador'),
+      originCity: z.string().optional().describe('Ciudad o país de origen'),
+      travelDates: z.string().optional().describe('Fechas o temporada estimada'),
+      travelersCount: z.number().optional().default(1).describe('Cantidad de personas'),
+      budgetUsd: z.number().optional().describe('Presupuesto disponible en USD'),
+      travelStyle: z.string().optional().default('Equilibrado').describe('Estilo de viaje: Económico, Equilibrado, Lujo/Confort'),
+    }),
+    outputSchema: z.object({
+      destinationOverview: z.object({
+        destination: z.string(),
+        department: z.string(),
+        bestSeason: z.string(),
+      }),
+      itinerary: z.object({
+        days: z.array(
+          z.object({
+            dayNumber: z.number(),
+            morningActivity: z.string(),
+            afternoonActivity: z.string(),
+            eveningActivity: z.string(),
+            mealsAndGastronomy: z.string(),
+            stayRecommendation: z.string(),
+          })
+        ),
+      }),
+      budgetBreakdown: z.object({
+        economicTierUsd: z.number(),
+        balancedTierUsd: z.number(),
+        luxuryTierUsd: z.number(),
+        exchangeRateNio: z.number(),
+        totalNioEquivalent: z.number(),
+      }),
+      communityAndSafety: z.object({
+        communityImpact: z.string(),
+        safetyTips: z.array(z.string()),
+        emergencyContactNote: z.string(),
+        packingList: z.array(z.string()),
+      }),
+      finalRecommendation: z.string(),
+    }),
+  },
+  async (input) => {
+    const masterPrompt = ai.prompt('baqueano_master');
+    const { output } = await masterPrompt({
+      userPrompt: input.userPrompt,
+      originCity: input.originCity,
+      travelDates: input.travelDates,
+      travelersCount: input.travelersCount,
+      budgetUsd: input.budgetUsd,
+      travelStyle: input.travelStyle,
+    });
+    return output;
+  }
 );
 
 // Auto-ejecución si se lanza directamente con Node
 if (process.argv[1]?.endsWith('index.js')) {
-  console.log('🤖 Servidor Baqueano Genkit listo.');
+  console.log('🤖 Servidor Baqueano Genkit listo con 10 Módulos de Asesoría Turística.');
   console.log('💡 Ejecuta "npx genkit start" para abrir el panel visual de control de IA en tu navegador.');
 }

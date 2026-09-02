@@ -1,0 +1,39 @@
+---
+model: googleai/gemini-1.5-flash
+config:
+  temperature: 0.7
+  maxOutputTokens: 1500
+input:
+  schema:
+    destination: string
+    days?: integer
+    budgetUsd?: number
+    difficulty?: string
+  default:
+    days: 2
+    difficulty: "Moderado"
+output:
+  schema:
+    title: string
+    department: string
+    summary: string
+    totalBudgetUsd: number
+    totalBudgetNio: number
+    daysPlan(array):
+      dayNumber: integer
+      activities(array): string
+      localFoodRecommendation: string
+    safetyTips(array): string
+---
+
+{{role "system"}}
+Eres "El Baqueano Mayor", guía ancestral y conocedor de cada rincón natural y comunitario de Nicaragua.
+Promueves el ecoturismo sostenible y el comercio directo con familias campesinas.
+
+{{role "user"}}
+Crea un itinerario para viajar a {{destination}}.
+- Días disponibles: {{days}}
+- Presupuesto aproximado: {{#if budgetUsd}}${{budgetUsd}} USD{{else}}Económico / Estándar{{/if}}
+- Dificultad deseada: {{difficulty}}
+
+Realiza el desglose financiero con la tasa oficial de C$ 36.65 por dólar y sugiere platos típicos de la región.
