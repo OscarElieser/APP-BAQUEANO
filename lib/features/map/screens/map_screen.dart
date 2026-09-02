@@ -176,109 +176,114 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(24),
-                    child: Stack(
-                      children: [
-                        // Cuadrícula y textura geográfica
-                        Positioned.fill(
-                          child: CustomPaint(
-                            painter: _NicaraguaMapPainter(isSatellite: _isSatelliteMode),
-                          ),
-                        ),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final mapW = constraints.maxWidth;
+                        final mapH = constraints.maxHeight;
 
-                        // PINES DE DESTINOS TURÍSTICOS
-                        if (showDestinations)
-                          ...CatalogData.destinations.map((dest) {
-                            final double normX = ((-dest.longitude - 83.0) / (87.5 - 83.0)).clamp(0.08, 0.92);
-                            final double normY = (1.0 - ((dest.latitude - 11.0) / (14.5 - 11.0))).clamp(0.08, 0.92);
-
-                            final isSelected = _selectedDestination?.id == dest.id;
-
-                            return Positioned(
-                              left: (normX * (isDesktop ? 780 : 310)) + (isDesktop ? 60 : 15),
-                              top: normY * 360 + 20,
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _selectedDestination = dest;
-                                    _selectedBusiness = null;
-                                  });
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    AnimatedContainer(
-                                      duration: const Duration(milliseconds: 200),
-                                      padding: EdgeInsets.all(isSelected ? 9 : 7),
-                                      decoration: BoxDecoration(
-                                        color: dest.category == 'volcanes'
-                                            ? const Color(0xFFC86432)
-                                            : dest.category == 'cascadas'
-                                                ? const Color(0xFF0284C7)
-                                                : const Color(0xFFD4AF37),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: isSelected ? Colors.white : const Color(0xFFD4AF37),
-                                          width: isSelected ? 2.5 : 1.2,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: (dest.category == 'volcanes' ? const Color(0xFFC86432) : const Color(0xFF0284C7))
-                                                .withValues(alpha: isSelected ? 0.8 : 0.4),
-                                            blurRadius: isSelected ? 14 : 6,
-                                          ),
-                                        ],
-                                      ),
-                                      child: Icon(
-                                        dest.category == 'volcanes'
-                                            ? Icons.volcano_rounded
-                                            : dest.category == 'cascadas'
-                                                ? Icons.water_drop_rounded
-                                                : Icons.landscape_rounded,
-                                        color: Colors.white,
-                                        size: isSelected ? 18 : 14,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 3),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF082B35).withValues(alpha: 0.9),
-                                        borderRadius: BorderRadius.circular(6),
-                                        border: Border.all(color: Colors.white12),
-                                      ),
-                                      child: Text(
-                                        dest.title.split(' ').first,
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w700,
-                                          color: isSelected ? const Color(0xFFD4AF37) : Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                        return Stack(
+                          children: [
+                            // Cuadrícula y textura geográfica
+                            Positioned.fill(
+                              child: CustomPaint(
+                                painter: _NicaraguaMapPainter(isSatellite: _isSatelliteMode),
                               ),
-                            );
-                          }),
+                            ),
 
-                        // PINES DE NEGOCIOS CAMPESINOS LOCALES
-                        if (showBusinesses)
-                          ...CatalogData.localBusinesses.map((biz) {
-                            final double normX = ((-biz.longitude - 83.0) / (87.5 - 83.0)).clamp(0.08, 0.92);
-                            final double normY = (1.0 - ((biz.latitude - 11.0) / (14.5 - 11.0))).clamp(0.08, 0.92);
+                            // PINES DE DESTINOS TURÍSTICOS
+                            if (showDestinations)
+                              ...CatalogData.destinations.map((dest) {
+                                final double normX = ((-dest.longitude - 83.0) / (87.5 - 83.0)).clamp(0.08, 0.92);
+                                final double normY = (1.0 - ((dest.latitude - 11.0) / (14.5 - 11.0))).clamp(0.08, 0.92);
 
-                            final isSelected = _selectedBusiness?.id == biz.id;
+                                final isSelected = _selectedDestination?.id == dest.id;
 
-                            return Positioned(
-                              left: (normX * (isDesktop ? 780 : 310)) + (isDesktop ? 60 : 15),
-                              top: normY * 360 + 20,
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _selectedBusiness = biz;
-                                    _selectedDestination = null;
-                                  });
-                                },
+                                return Positioned(
+                                  left: (normX * (mapW - 80)) + 30,
+                                  top: (normY * (mapH - 80)) + 20,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _selectedDestination = dest;
+                                        _selectedBusiness = null;
+                                      });
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        AnimatedContainer(
+                                          duration: const Duration(milliseconds: 200),
+                                          padding: EdgeInsets.all(isSelected ? 9 : 7),
+                                          decoration: BoxDecoration(
+                                            color: dest.category == 'volcanes'
+                                                ? const Color(0xFFC86432)
+                                                : dest.category == 'cascadas'
+                                                    ? const Color(0xFF0284C7)
+                                                    : const Color(0xFFD4AF37),
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: isSelected ? Colors.white : const Color(0xFFD4AF37),
+                                              width: isSelected ? 2.5 : 1.2,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: (dest.category == 'volcanes' ? const Color(0xFFC86432) : const Color(0xFF0284C7))
+                                                    .withValues(alpha: isSelected ? 0.8 : 0.4),
+                                                blurRadius: isSelected ? 14 : 6,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Icon(
+                                            dest.category == 'volcanes'
+                                                ? Icons.volcano_rounded
+                                                : dest.category == 'cascadas'
+                                                    ? Icons.water_drop_rounded
+                                                    : Icons.landscape_rounded,
+                                            color: Colors.white,
+                                            size: isSelected ? 18 : 14,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 3),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFF082B35).withValues(alpha: 0.9),
+                                            borderRadius: BorderRadius.circular(6),
+                                            border: Border.all(color: Colors.white12),
+                                          ),
+                                          child: Text(
+                                            dest.title.split(' ').first,
+                                            style: TextStyle(
+                                              fontSize: 9,
+                                              fontWeight: FontWeight.w700,
+                                              color: isSelected ? const Color(0xFFD4AF37) : Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+
+                            // PINES DE NEGOCIOS CAMPESINOS LOCALES
+                            if (showBusinesses)
+                              ...CatalogData.localBusinesses.map((biz) {
+                                final double normX = ((-biz.longitude - 83.0) / (87.5 - 83.0)).clamp(0.08, 0.92);
+                                final double normY = (1.0 - ((biz.latitude - 11.0) / (14.5 - 11.0))).clamp(0.08, 0.92);
+
+                                final isSelected = _selectedBusiness?.id == biz.id;
+
+                                return Positioned(
+                                  left: (normX * (mapW - 80)) + 30,
+                                  top: (normY * (mapH - 80)) + 20,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _selectedBusiness = biz;
+                                        _selectedDestination = null;
+                                      });
+                                    },
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -399,11 +404,13 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                         ),
                       ],
-                    ),
-                  ),
+                    );
+                  },
                 ),
-              ],
+              ),
             ),
+          ],
+        ),
 
             const SizedBox(height: 24),
 

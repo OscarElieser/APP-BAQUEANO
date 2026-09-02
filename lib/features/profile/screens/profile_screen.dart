@@ -177,7 +177,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final userName = user?.displayName ?? 'Oscar Elieser';
     final userEmail = user?.email ?? 'explorador@baqueano.ni';
     final userXp = user?.xp ?? 1150;
+    final screenWidth = MediaQuery.of(context).size.width;
     final explorerRank = user?.explorerLevel ?? 'Guardián de Volcanes';
+    final isWide = screenWidth > 600;
 
     return Scaffold(
       backgroundColor: _highContrast ? Colors.black : const Color(0xFF0F172A),
@@ -209,15 +211,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          children: [
-            // ----------------------------------------------------------------
-            // 1. TARJETA PRINCIPAL DEL PASAPORTE DIGITAL
-            // ----------------------------------------------------------------
-            Container(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 880),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(
+              horizontal: isWide ? 32 : 20,
+              vertical: 20,
+            ),
+            child: Column(
+              children: [
+                // ----------------------------------------------------------------
+                // 1. TARJETA PRINCIPAL DEL PASAPORTE DIGITAL
+                // ----------------------------------------------------------------
+                Container(
               width: double.infinity,
               padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
@@ -437,8 +445,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: isWide ? 6 : 3,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
                 childAspectRatio: 0.85,
@@ -725,6 +733,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ],
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 }
