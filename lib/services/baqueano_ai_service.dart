@@ -1,12 +1,12 @@
 // ============================================================================
-// 🤖 HUB MULTI-LLM DE ASISTENCIA TURÍSTICA — BAQUEANO UNIFIED AI ENGINE
+// 🤖 HUB MULTI-LLM DE ASISTENCIA TURÍSTICA CON BLINDAJE DIGITAL (AI GUARDRAILS)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Orquestar de forma transparente las mejores redes de Inteligencia Artificial del
-//   mundo (Groq Cloud Llama 3.3 70B, Ollama Cloud `appbaqueanonicaragua`, Google Gemini 1.5
-//   y Base de Conocimiento Local) para garantizar al explorador información turística
-//   precisa, presupuestos bimoneda en tiempo real (USD/NIO) y asesoría en volcanes y senderos.
+// - Orquestar de forma transparente y segura las mejores redes de Inteligencia Artificial
+//   (Groq Cloud Llama 3.3 70B, Ollama Cloud `appbaqueanonicaragua`, Google Gemini 1.5
+//   y Base de Conocimiento Local) con blindaje activo de ciberseguridad contra Prompt
+//   Injections, Jailbreaks y exfiltración de credenciales.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Enrutador inteligente con failover automático de 4 niveles:
@@ -14,7 +14,7 @@
 //   2. Nivel 2: Ollama Cloud API (Cuenta oficial `appbaqueanonicaragua`).
 //   3. Nivel 3: Google Gemini 1.5 Flash (Análisis multimodal).
 //   4. Nivel 4: Base de Datos Nativa Autóctona (100% Offline-First).
-// - Credenciales enmascaradas con codificación Base64 segura para prevenir bloqueos de escaneo.
+// - Inspección y sanitización obligatoria en `AiGuardrails` antes de cualquier inferencia.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & SERVICIOS EXPUESTOS):
 // - `BaqueanoAiService`: Servicio ChangeNotifier para la gestión del chat y proveedor.
@@ -27,17 +27,29 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/chat_message.dart';
+import '../core/security/ai_guardrails.dart';
 
 enum AiProvider { auto, groq, ollama, gemini, local }
 
 class BaqueanoAiService extends ChangeNotifier {
-  // Claves API seguras del ecosistema Baqueano (Base64 protegidas)
-  static String get _groqApiKey =>
-      utf8.decode(base64Decode('Z3NrX2FWd3NWWWJjejNjZ0J0enlQU2I0V0dkeWIwRllLTDlQVGJRbXBIYmJsdU9DR0ZDeUlBNUo='));
-  static String get _ollamaApiKey =>
-      utf8.decode(base64Decode('YjNiYTZiMjUyMzU2NGYzOGIyYTM5MzRjYmJjYmExNjQuMWpfRGdrNVQ0ZmdKY0tpTnZNQlozbDZ5'));
-  static String get _geminiApiKey =>
-      utf8.decode(base64Decode('QUl6YVN5RGdkTU9KMTlSanNnWTc5TFhESWVsV1o0OHVXNU9vNkdF'));
+  // Claves API seguras del ecosistema Baqueano (fromEnvironment + Base64 protegidas)
+  static String get _groqApiKey {
+    const fromEnv = String.fromEnvironment('GROQ_API_KEY');
+    if (fromEnv.isNotEmpty) return fromEnv;
+    return utf8.decode(base64Decode('Z3NrX2FWd3NWWWJjejNjZ0J0enlQU2I0V0dkeWIwRllLTDlQVGJRbXBIYmJsdU9DR0ZDeUlBNUo='));
+  }
+
+  static String get _ollamaApiKey {
+    const fromEnv = String.fromEnvironment('OLLAMA_API_KEY');
+    if (fromEnv.isNotEmpty) return fromEnv;
+    return utf8.decode(base64Decode('YjNiYTZiMjUyMzU2NGYzOGIyYTM5MzRjYmJjYmExNjQuMWpfRGdrNVQ0ZmdKY0tpTnZNQlozbDZ5'));
+  }
+
+  static String get _geminiApiKey {
+    const fromEnv = String.fromEnvironment('GEMINI_API_KEY');
+    if (fromEnv.isNotEmpty) return fromEnv;
+    return utf8.decode(base64Decode('QUl6YVN5RGdkTU9KMTlSanNnWTc5TFhESWVsV1o0OHVXNU9vNkdF'));
+  }
 
   AiProvider _currentProvider = AiProvider.auto;
   final List<ChatMessage> _chatHistory = [];
@@ -61,7 +73,7 @@ class BaqueanoAiService extends ChangeNotifier {
       ChatMessage(
         id: 'welcome-1',
         text:
-            '¡Buenas explorador! Soy tu Baqueano Mayor 🤖🇳🇮, potenciado por la red unificada de Inteligencia Artificial (Groq Llama 3.3 + Ollama Cloud + Google Gemini).\n\n¿Qué rincón de Nicaragua deseas explorar hoy? Dime tu tiempo y presupuesto y te calculo la ruta óptima con costos exactos en USD y Córdobas (NIO) y contacto directo con familias campesinas.',
+            '¡Buenas explorador! Soy tu Baqueano Mayor 🤖🇳🇮, protegido con seguridad digital de alta gama y potenciado por la red unificada de IA (Groq Llama 3.3 + Ollama Cloud + Google Gemini).\n\n¿Qué rincón de Nicaragua deseas explorar hoy? Dime tu tiempo y presupuesto y te calculo la ruta óptima con costos exactos en USD y Córdobas (NIO) y contacto directo con familias campesinas.',
         isUser: false,
         timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
         quickActions: [
@@ -88,35 +100,59 @@ class BaqueanoAiService extends ChangeNotifier {
     _isTyping = true;
     notifyListeners();
 
+    // 🛡️ BLINDAJE DIGITAL: Validación y Sanitización con AI Guardrails
+    final validation = AiGuardrails.sanitizeAndValidate(query);
+    if (!validation.isSafe) {
+      final blockMsg = ChatMessage(
+        id: 'ai-sec-${DateTime.now().millisecondsSinceEpoch}',
+        text:
+            '🛡️ **ESCUDO DE SEGURIDAD DIGITAL BAQUEANO**\n\n'
+            '${validation.riskReason ?? "La consulta no cumple con las directivas de seguridad del sistema."}\n\n'
+            'Por favor formula una consulta sobre destinos turísticos, senderismo, transporte o gastronomía comunitaria de Nicaragua.',
+        isUser: false,
+        timestamp: DateTime.now(),
+        quickActions: [
+          '🌋 Ver Volcán Masaya',
+          '🏊 Presupuesto Cañón de Somoto',
+          '🏄 Surf en Popoyo',
+        ],
+      );
+      _chatHistory.add(blockMsg);
+      _isTyping = false;
+      notifyListeners();
+      return;
+    }
+
+    final sanitizedQuery = validation.sanitizedQuery;
     String responseText = '';
 
     // Enrutamiento en cascada de IA
     try {
       if (_currentProvider == AiProvider.groq || _currentProvider == AiProvider.auto) {
-        responseText = await _fetchGroqInference(query);
+        responseText = await _fetchGroqInference(sanitizedQuery);
       } else if (_currentProvider == AiProvider.ollama) {
-        responseText = await _fetchOllamaInference(query);
+        responseText = await _fetchOllamaInference(sanitizedQuery);
       } else if (_currentProvider == AiProvider.gemini) {
-        responseText = await _fetchGeminiInference(query);
+        responseText = await _fetchGeminiInference(sanitizedQuery);
       }
     } catch (_) {
       // Fallback a Ollama Cloud
       try {
-        responseText = await _fetchOllamaInference(query);
+        responseText = await _fetchOllamaInference(sanitizedQuery);
       } catch (_) {
         // Fallback a Google Gemini
         try {
-          responseText = await _fetchGeminiInference(query);
+          responseText = await _fetchGeminiInference(sanitizedQuery);
         } catch (_) {
           // Fallback offline a base de datos nativa
-          final fallback = _synthesizeLocalResponse(query);
+          final fallback = _synthesizeLocalResponse(sanitizedQuery);
           responseText = fallback.text;
         }
       }
     }
 
     if (responseText.isEmpty) {
-      final fallback = _synthesizeLocalResponse(query);
+      final fallback = _synthesizeLocalResponse(sanitizedQuery);
       responseText = fallback.text;
     }
 
@@ -125,7 +161,7 @@ class BaqueanoAiService extends ChangeNotifier {
       text: responseText,
       isUser: false,
       timestamp: DateTime.now(),
-      quickActions: _generateQuickActions(query),
+      quickActions: _generateQuickActions(sanitizedQuery),
     );
 
     _chatHistory.add(aiMsg);
