@@ -146,6 +146,14 @@ class LocalBusiness {
   final String department;
   final String description;
   final String contact;
+  final String ownerName;
+  final String whatsapp;
+  final String email;
+  final String address;
+  final double latitude;
+  final double longitude;
+  final String schedule;
+  final List<String> services;
   final String icon;
   final String badge;
 
@@ -156,6 +164,14 @@ class LocalBusiness {
     required this.department,
     required this.description,
     required this.contact,
+    this.ownerName = 'Baqueano Local',
+    this.whatsapp = '50588889999',
+    this.email = 'contacto@baqueano.ni',
+    this.address = 'Nicaragua',
+    this.latitude = 12.1364,
+    this.longitude = -86.2514,
+    this.schedule = 'Lun - Dom: 7:00 AM - 6:00 PM',
+    this.services = const ['Atención Personalizada', 'Guía Local', 'Comercio Justo'],
     required this.icon,
     required this.badge,
   });

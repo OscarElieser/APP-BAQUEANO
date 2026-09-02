@@ -5,19 +5,20 @@
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Empoderar a los emprendedores locales (comedores campesinos, cabañas rústicas,
 //   asociaciones de guías de volcanes y cooperativas cafetaleras) dándoles visibilidad
-//   directa sin comisiones intermediarias.
-// - Permitir a los viajeros contactar vía llamada directa con un toque a los anfitriones.
+//   completa con propietario, teléfono, WhatsApp, correo, dirección y pin GPS.
+// - Conectar a los exploradores sin intermediarios para un impacto comunitario real.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - `ListView.separated` horizontal con tarjetas Glassmorphism.
-// - Integración con `url_launcher` (`Uri.parse('tel:...')`) para llamada telefónica nativa.
-// - Badge verde "100% COMUNITARIO" y toast de contingencia si no hay tarjeta SIM.
+// - `ListView.separated` horizontal con tarjetas Glassmorphism elevadas.
+// - Botones de acción directa: WhatsApp (`https://wa.me/`), Llamada telefónica y
+//   Navegación al Mapa GPS (`/mapa`).
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `BusinessShowcase`: Carrusel de emprendedores insertado en el feed del Home.
+// - `BusinessShowcase`: Carrusel de emprendedores con ficha técnica completa.
 // ============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
@@ -28,6 +29,177 @@ import '../../../core/widgets/section_header.dart';
 
 class BusinessShowcase extends StatelessWidget {
   const BusinessShowcase({super.key});
+
+  Future<void> _launchWhatsApp(BuildContext context, String phone, String bizName) async {
+    final cleanPhone = phone.replaceAll(RegExp(r'[^0-9]'), '');
+    final uri = Uri.parse('https://wa.me/$cleanPhone?text=Hola%2C%20vi%20su%20negocio%20$bizName%20en%20la%20app%20Baqueano%20y%20deseo%20m%C3%A1s%20informaci%C3%B3n.');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (context.mounted) {
+          CustomToast.error(context, 'No se pudo abrir WhatsApp en este dispositivo');
+        }
+      }
+    } catch (_) {
+      if (context.mounted) {
+        CustomToast.error(context, 'WhatsApp no disponible: $phone');
+      }
+    }
+  }
+
+  Future<void> _launchPhone(BuildContext context, String phone) async {
+    final uri = Uri.parse('tel:$phone');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        if (context.mounted) {
+          CustomToast.show(context, message: 'Teléfono del negocio: $phone');
+        }
+      }
+    } catch (_) {
+      if (context.mounted) {
+        CustomToast.show(context, message: 'Contacto: $phone');
+      }
+    }
+  }
+
+  void _showBusinessDetailsModal(BuildContext context, dynamic biz) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF082B35),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Container(
+                  width: 44,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Text(biz.icon, style: const TextStyle(fontSize: 32)),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          biz.name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          '${biz.category} • ${biz.department}',
+                          style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Divider(color: Colors.white12),
+              const SizedBox(height: 12),
+
+              // Información del Propietario
+              _buildDetailRow(Icons.person_outline_rounded, 'Propietario / Gerente', biz.ownerName),
+              const SizedBox(height: 10),
+              _buildDetailRow(Icons.location_on_outlined, 'Dirección Exacta', biz.address),
+              const SizedBox(height: 10),
+              _buildDetailRow(Icons.phone_outlined, 'Teléfono', biz.contact),
+              const SizedBox(height: 10),
+              _buildDetailRow(Icons.email_outlined, 'Correo', biz.email),
+              const SizedBox(height: 10),
+              _buildDetailRow(Icons.schedule_outlined, 'Horario', biz.schedule),
+
+              const SizedBox(height: 20),
+
+              // Botones de Contacto Rápido
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF25D366),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      ),
+                      icon: const Icon(Icons.chat_rounded, color: Colors.white, size: 18),
+                      label: const Text('WhatsApp', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                        _launchWhatsApp(context, biz.whatsapp, biz.name);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFC86432),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      ),
+                      icon: const Icon(Icons.map_rounded, color: Colors.white, size: 18),
+                      label: const Text('Ver en Mapa', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                        context.go('/mapa');
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(IconData icon, String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: const Color(0xFFD4AF37), size: 18),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(color: Colors.white54, fontSize: 11, fontWeight: FontWeight.w600),
+              ),
+              Text(
+                value,
+                style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +212,11 @@ class BusinessShowcase extends StatelessWidget {
           title: 'Vitrina de Negocios Locales',
           subtitle: 'Conecta de forma directa con los protagonistas del ecoturismo nicaragüense. Cabañas rústicas, guías nativos certificados y gastronomía de autor campesina.',
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
 
-        // Carrusel horizontal de emprendedores de 220px de alto
+        // Carrusel horizontal de emprendedores de 270px de alto
         SizedBox(
-          height: 220,
+          height: 270,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
@@ -53,17 +225,17 @@ class BusinessShowcase extends StatelessWidget {
             itemBuilder: (context, index) {
               final biz = CatalogData.localBusinesses[index];
               return Container(
-                width: 280,
+                width: 300,
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
                   gradient: AppGradients.cardGlass,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(22),
                   border: Border.all(color: AppColors.borderLight),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.2),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
+                      color: Colors.black.withValues(alpha: 0.3),
+                      blurRadius: 14,
+                      offset: const Offset(0, 6),
                     ),
                   ],
                 ),
@@ -96,70 +268,102 @@ class BusinessShowcase extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 10),
 
-                    // Nombre del negocio
+                    // Nombre y categoría
                     Text(
                       biz.name,
-                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.textLight),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 2),
-
-                    // Categoría y departamento
                     Text(
-                      '${biz.category} · ${biz.department}',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.terracottaLight, fontWeight: FontWeight.w600),
+                      '👤 ${biz.ownerName} • ${biz.department}',
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFFD4AF37),
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
 
-                    // Descripción del emprendimiento
-                    Expanded(
-                      child: Text(
-                        biz.description,
-                        style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted, height: 1.35),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                    // Descripción breve
+                    Text(
+                      biz.description,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white.withValues(alpha: 0.7),
+                        height: 1.3,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const Divider(color: AppColors.borderLight, height: 14),
 
-                    // Fila inferior: Número telefónico y botón de marcación directa
+                    const Spacer(),
+
+                    // Botones de Acción
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: Text(
-                            biz.contact,
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w700),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                        // WhatsApp
+                        InkWell(
+                          onTap: () => _launchWhatsApp(context, biz.whatsapp, biz.name),
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF25D366).withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: const Color(0xFF25D366).withValues(alpha: 0.5)),
+                            ),
+                            child: const Icon(Icons.chat_rounded, color: Color(0xFF25D366), size: 16),
                           ),
                         ),
                         const SizedBox(width: 8),
+
+                        // Llamar
                         InkWell(
-                          onTap: () async {
-                            final uri = Uri.parse('tel:${biz.contact.replaceAll(' ', '')}');
-                            if (await canLaunchUrl(uri)) {
-                              await launchUrl(uri);
-                            } else if (context.mounted) {
-                              CustomToast.show(context, message: 'Llamando a ${biz.name}: ${biz.contact}');
-                            }
-                          },
+                          onTap: () => _launchPhone(context, biz.contact),
+                          borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                             decoration: BoxDecoration(
-                              color: AppColors.terracotta,
-                              borderRadius: BorderRadius.circular(8),
+                              color: const Color(0xFF0284C7).withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: const Color(0xFF0284C7).withValues(alpha: 0.5)),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(Icons.phone, size: 12, color: Colors.white),
-                                const SizedBox(width: 4),
-                                Text('Contactar', style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white)),
-                              ],
+                            child: const Icon(Icons.phone_rounded, color: Color(0xFF38BDF8), size: 16),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+
+                        // Ver Ficha Completa
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => _showBusinessDetailsModal(context, biz),
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              decoration: BoxDecoration(
+                                gradient: AppGradients.sunsetTerracotta,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Ver Ficha & Pin 🗺️',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
