@@ -9,7 +9,7 @@
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20SmartTV-2E7D32?style=for-the-badge)](https://github.com/OscarElieser/APP-BAQUEANO)
 [![License](https://img.shields.io/badge/License-MIT-D4AF37?style=for-the-badge)](LICENSE)
 
-**Nicaragua en modo secreto** · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador, geolocalización GPS satelital y un asesor turístico con Inteligencia Artificial (Firebase Genkit + Google Gemini 1.5 Flash).
+**Nicaragua en modo secreto** · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador, geolocalización GPS satelital y un asesor turístico con Inteligencia Artificial (Firebase Genkit + Google Gemini 1.5 Flash + Groq Cloud Llama 3.3 + Ollama Cloud).
 
 ---
 
@@ -18,7 +18,6 @@
 - [✨ Características Principales](#-características-principales)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
 - [🏗️ Arquitectura del Proyecto](#️-arquitectura-del-proyecto)
-- [📱 Módulos y Pantallas](#-módulos-y-pantallas)
 - [🏪 Vitrina de Negocios Campesinos & Comercio Justo](#-vitrina-de-negocios-campesinos--comercio-justo)
 - [🗺️ Mapa GPS Satelital & Geolocalización de Rutas](#️-mapa-gps-satelital--geolocalización-de-rutas)
 - [🤖 Asistente Turístico Inteligente (Firebase Genkit + Gemini)](#-asistente-turístico-inteligente-firebase-genkit--gemini)
@@ -41,7 +40,7 @@
   5. 🧭 *El estándar de Baqueano*: Los 4 pilares éticos de comercio justo y preservación ambiental.
 - 🏪 **Ficha Técnica Completa de Emprendedores**: Nombre del negocio, propietario/gerente, teléfono, WhatsApp directo prellenado, correo electrónico, dirección física y pin GPS en el mapa.
 - 🗺️ **Mapa GPS Satelital Interactivo**: Pines exactos de destinos y negocios campesinos, capas temáticas y selector de vista satelital/relieve.
-- 🤖 **IA Turística Integral (Firebase Genkit + Gemini 1.5 Flash)**: 10 módulos de asesoría que cubren destinos, transportes, hospedajes, gastronomía, seguridad y presupuestos bimoneda en USD y NIO.
+- 🤖 **IA Turística Integral (Firebase Genkit + Gemini 1.5 Flash + Groq + Ollama Cloud)**: 10 módulos de asesoría que cubren destinos, transportes, hospedajes, gastronomía, seguridad y presupuestos bimoneda en USD y NIO.
 - 👤 **Pasaporte Digital & Accesibilidad**:
   - Sellos de expedición (Somoto, Cerro Negro, Ometepe, Miraflor, Indio Maíz).
   - Selector de tamaño de letra dinámico (85% a 135%), alto contraste y vibración háptica.
@@ -109,6 +108,7 @@ lib/
 ## 🏪 Vitrina de Negocios Campesinos & Comercio Justo
 
 Cada emprendedor comunitario cuenta con una ficha técnica completa:
+
 - **👤 Propietario / Gerente**: Nombre real del anfitrión local.
 - **💬 WhatsApp Directo**: Enlace `https://wa.me/` con mensaje prellenado.
 - **📞 Teléfono & Correo**: Marcación nativa y contacto formal.
@@ -129,8 +129,9 @@ Cada emprendedor comunitario cuenta con una ficha técnica completa:
 ## 🤖 Asistente Turístico Inteligente (Firebase Genkit + Gemini)
 
 El backend de Inteligencia Artificial se encuentra en `src/index.js` y `prompts/baqueano_master.prompt`:
+
 - **Framework**: Firebase Genkit (`genkit`, `@genkit-ai/googleai`).
-- **Modelo**: Google Gemini 1.5 Flash.
+- **Modelo**: Google Gemini 1.5 Flash + Groq Llama 3.3 + Ollama Cloud.
 - **Arquitectura de 10 Módulos**:
   1. Identificación y perfil de destinos.
   2. Alojamiento rural y sostenible.
