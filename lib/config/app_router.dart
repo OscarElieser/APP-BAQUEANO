@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/admin/screens/admin_screen.dart';
 import '../features/ai_assistant/screens/ai_assistant_screen.dart';
+import '../features/auth/screens/login_screen.dart';
 import '../features/catalog/screens/beaches_screen.dart';
 import '../features/catalog/screens/discover_screen.dart';
 import '../features/catalog/screens/gastronomy_screen.dart';
@@ -54,6 +55,10 @@ class AppRouter {
       GoRoute(
         path: '/splash',
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         path: '/home',
