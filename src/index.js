@@ -205,6 +205,8 @@ export const inspectTrailMediaFlow = ai.defineFlow(
 
     return output;
   }
+);
+
 // ----------------------------------------------------------------------------
 // 👑 6. FLUJO PRO MAESTRO: ASESOR TURÍSTICO INTEGRAL (10 MÓDULOS)
 // ----------------------------------------------------------------------------
