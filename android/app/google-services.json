@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "578585227888-ogs0lqiqq9lfia5jcl7snqeqv905ggjn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.appbaqueano",
+            "certificate_hash": "bc238bffb68d4aa78ae2e9293893b234e2fdf1fc"
+          }
+        },
+        {
           "client_id": "578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -1,3 +1,25 @@
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — ASISTENTE INTELIGENTE BAQUEANO AI
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Servir como copiloto y asesor digital 24/7 para el explorador y turista en Nicaragua.
+// - Asistir en la planificación de rutas, cálculo de presupuestos en USD/NIO y
+//   conexión directa con guías campesinos locales, promoviendo el turismo justo.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Implementa un chat conversacional responsivo con renderizado de mensajes en burbujas
+//   estilizadas, sugerencias interactivas rápidas y respuestas contextuales.
+// - La barra de entrada de mensajes utiliza Glassmorphism (BackdropFilter) con elevación
+//   adaptable calculada mediante MediaQuery para posicionarse holgadamente sobre la barra
+//   flotante de navegación móvil y las barras del sistema Android.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - `AiAssistantScreen`: Pantalla con chat interactivo, historial de mensajes,
+//   indicador de escritura y barra de entrada con estética visual de alta gama.
+// ============================================================================
+
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
@@ -159,6 +181,14 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+    // Altura de separación dinámica: en móviles se eleva para quedar holgadamente sobre
+    // la barra de navegación flotante (68px alto + 8px margen + padding inferior del sistema)
+    final bottomNavClearance = isDesktop
+        ? 24.0
+        : (bottomInset > 0 ? 12.0 : (96.0 + bottomPadding));
 
     return ResponsiveScaffold(
       currentIndex: 3,
@@ -198,47 +228,148 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               ),
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
 
-            // Input Bar
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: AppColors.bgCard,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.borderLight),
+            // Barra de ingreso de mensajes con diseño de alta gama visual
+            _buildProChatInputBar(),
+            SizedBox(height: bottomNavClearance),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Barra de entrada de mensajes estilizada con efecto Glassmorphism,
+  /// halo de iluminación dorado y elevación sobre la barra de navegación.
+  Widget _buildProChatInputBar() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.55),
+            blurRadius: 24,
+            offset: const Offset(0, 8),
+          ),
+          BoxShadow(
+            color: AppColors.gold.withValues(alpha: 0.12),
+            blurRadius: 16,
+            offset: const Offset(0, 0),
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(28),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primaryDark.withValues(alpha: 0.90),
+                  AppColors.bgCard.withValues(alpha: 0.95),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _messageController,
-                      style: GoogleFonts.inter(color: AppColors.textLight, fontSize: 14),
-                      decoration: InputDecoration(
-                        hintText: 'Pregunta sobre rutas, presupuestos, volcanes o comidas...',
-                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 13),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                      ),
-                      onSubmitted: _sendMessage,
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(
+                color: AppColors.gold.withValues(alpha: 0.45),
+                width: 1.3,
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Insignia interactiva del Asistente Baqueano
+                Container(
+                  margin: const EdgeInsets.only(left: 4, right: 8),
+                  padding: const EdgeInsets.all(9),
+                  decoration: BoxDecoration(
+                    color: AppColors.gold.withValues(alpha: 0.14),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.gold.withValues(alpha: 0.35),
+                      width: 1.2,
                     ),
                   ),
-                  InkWell(
+                  child: const Icon(
+                    Icons.auto_awesome_rounded,
+                    color: AppColors.goldLight,
+                    size: 18,
+                  ),
+                ),
+
+                // Campo de texto con auto-expansión y tipografía optimizada
+                Expanded(
+                  child: TextField(
+                    controller: _messageController,
+                    minLines: 1,
+                    maxLines: 3,
+                    style: GoogleFonts.inter(
+                      color: AppColors.textLight,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    cursorColor: AppColors.gold,
+                    decoration: InputDecoration(
+                      hintText: 'Pregunta sobre rutas, presupuestos, guías...',
+                      hintStyle: GoogleFonts.inter(
+                        color: AppColors.textMuted.withValues(alpha: 0.85),
+                        fontSize: 13,
+                      ),
+                      border: InputBorder.none,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 10,
+                      ),
+                    ),
+                    onSubmitted: _sendMessage,
+                  ),
+                ),
+
+                const SizedBox(width: 8),
+
+                // Botón de Envío con degradado Terracota Volcánico y microinteracción
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
                     onTap: () => _sendMessage(_messageController.text),
+                    borderRadius: BorderRadius.circular(24),
+                    splashColor: AppColors.gold.withValues(alpha: 0.3),
+                    highlightColor: Colors.white.withValues(alpha: 0.15),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(11),
                       decoration: BoxDecoration(
                         gradient: AppGradients.sunsetTerracotta,
                         shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.terracotta.withValues(alpha: 0.55),
+                            blurRadius: 12,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: AppColors.gold.withValues(alpha: 0.4),
+                          width: 1.2,
+                        ),
                       ),
-                      child: const Icon(Icons.send_rounded, color: Colors.white, size: 20),
+                      child: const Icon(
+                        Icons.arrow_upward_rounded,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 2),
+              ],
             ),
-            const SizedBox(height: 80),
-          ],
+          ),
         ),
       ),
     );

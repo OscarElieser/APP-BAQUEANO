@@ -233,8 +233,11 @@ class PassportScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 12,
+          runSpacing: 8,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +245,8 @@ class PassportScreen extends StatelessWidget {
                 Text('TITULAR DEL PASAPORTE', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted, letterSpacing: 1.0)),
                 Text(
                   'VALERIA MENDOZA',
-                  style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white),
+                  style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -254,7 +258,7 @@ class PassportScreen extends StatelessWidget {
               ),
               child: Text(
                 'RANGO: BAQUEANO MAESTRO',
-                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white),
+                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
               ),
             ),
           ],
@@ -292,8 +296,22 @@ class PassportScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('1,150 XP acumulados', style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted)),
-            Text('Nivel Siguiente: 2,000 XP', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.goldLight)),
+            Flexible(
+              child: Text(
+                '1,150 XP acumulados',
+                style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                'Nivel Siguiente: 2,000 XP',
+                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.goldLight),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.end,
+              ),
+            ),
           ],
         ),
       ],

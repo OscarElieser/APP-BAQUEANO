@@ -1,24 +1,26 @@
 // ============================================================================
-// 🤖 HUB MULTI-LLM DE ASISTENCIA TURÍSTICA CON BLINDAJE DIGITAL (AI GUARDRAILS)
+// 🤖 HUB MULTI-LLM DE ASISTENCIA TURÍSTICA CON PROMPT MAESTRO & MODO OFFLINE
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Orquestar de forma transparente y segura las mejores redes de Inteligencia Artificial
-//   (Groq Cloud Llama 3.3 70B, Ollama Cloud `appbaqueanonicaragua`, Google Gemini 1.5
-//   y Base de Conocimiento Local) con blindaje activo de ciberseguridad contra Prompt
-//   Injections, Jailbreaks y exfiltración de credenciales.
+// - Dotar a Baqueano de una Inteligencia Artificial experta en turismo, viajes y
+//   planificación de itinerarios en Nicaragua y Centroamérica, no robótica,
+//   empática y veraz con conexión en vivo a internet y respaldo offline continuo.
+// - Implementar el Prompt Maestro de 34 secciones y 10 módulos turísticos para asesorar,
+//   comparar opciones (Económica, Equilibrada, Alta Gama) y cotizar en bimoneda (USD/NIO).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Enrutador inteligente con failover automático de 4 niveles:
-//   1. Nivel 1: Groq Cloud Llama 3.3 70B (Velocidad extrema < 1.0s, 500+ tok/s).
+// - Enrutador inteligente con failover en cascada:
+//   1. Nivel 1: Groq Cloud Llama 3.3 70B (Velocidad extrema < 1.0s).
 //   2. Nivel 2: Ollama Cloud API (Cuenta oficial `appbaqueanonicaragua`).
-//   3. Nivel 3: Google Gemini 1.5 Flash (Análisis multimodal).
-//   4. Nivel 4: Base de Datos Nativa Autóctona (100% Offline-First).
-// - Inspección y sanitización obligatoria en `AiGuardrails` antes de cualquier inferencia.
+//   3. Nivel 3: Google Gemini 1.5 Flash.
+//   4. Nivel 4: Memoria Caché de Búsquedas Previas + Base de Conocimiento Offline Nativa.
+// - Cada consulta resuelta en línea se almacena en `_offlineSearchCache` para que el
+//   explorador pueda acceder a toda la información incluso en senderos remotos sin señal.
+// - Inspección y sanitización con `AiGuardrails` antes de cualquier inferencia.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & SERVICIOS EXPUESTOS):
 // - `BaqueanoAiService`: Servicio ChangeNotifier para la gestión del chat y proveedor.
-// - `AiProvider`: Enumeración de motores disponibles (Auto, Groq, Ollama, Gemini, Local).
 // - `baqueanoAiServiceProvider`: Provider global de Riverpod.
 // ============================================================================
 
@@ -27,6 +29,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/chat_message.dart';
+import '../core/ai/master_tourism_prompt.dart';
 import '../core/security/ai_guardrails.dart';
 
 enum AiProvider { auto, groq, ollama, gemini, local }
@@ -55,6 +58,14 @@ class BaqueanoAiService extends ChangeNotifier {
   final List<ChatMessage> _chatHistory = [];
   bool _isTyping = false;
 
+  // Memoria caché de consultas e investigaciones online para respaldo offline permanente
+  final Map<String, String> _offlineSearchCache = {
+    'ometepe': OfflineTourismKnowledge.getSmartResponse('ometepe'),
+    'somoto': OfflineTourismKnowledge.getSmartResponse('somoto'),
+    'matagalpa': OfflineTourismKnowledge.getSmartResponse('matagalpa'),
+    'cerro negro': OfflineTourismKnowledge.getSmartResponse('cerro negro'),
+  };
+
   BaqueanoAiService() {
     _initWelcome();
   }
@@ -73,14 +84,16 @@ class BaqueanoAiService extends ChangeNotifier {
       ChatMessage(
         id: 'welcome-1',
         text:
-            '¡Buenas explorador! Soy tu Baqueano Mayor 🤖🇳🇮, protegido con seguridad digital de alta gama y potenciado por la red unificada de IA (Groq Llama 3.3 + Ollama Cloud + Google Gemini).\n\n¿Qué rincón de Nicaragua deseas explorar hoy? Dime tu tiempo y presupuesto y te calculo la ruta óptima con costos exactos en USD y Córdobas (NIO) y contacto directo con familias campesinas.',
+            '¡Buenas explorador! Soy tu Baqueano Mayor 🤖🇳🇮, tu asesor y planificador turístico experto en Nicaragua.\n\n'
+            'Puedo ayudarte a diseñar tu viaje perfecto: itinerarios detallados día a día, comparación de eco-lodges y cabañas, presupuestos en Dólares (\$ USD) y Córdobas (C\$ NIO), estado de rutas y contacto directo con anfitriones campesinos sin intermediarios.\n\n'
+            '¿A dónde deseas viajar o qué experiencia tienes en mente?',
         isUser: false,
         timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
         quickActions: [
-          '🌋 Itinerario 3 días en Ometepe',
+          '🌋 Planificar 3 días en Ometepe',
           '🏊 Presupuesto Cañón de Somoto',
-          '🏄 Rutas de Surf en Popoyo',
-          '🔥 Cráter Santiago Masaya Nocturno',
+          '🏄 Surf y Cabañas en Popoyo',
+          '☕ Ruta del Café en Matagalpa',
         ],
       ),
     );
@@ -126,7 +139,7 @@ class BaqueanoAiService extends ChangeNotifier {
     final sanitizedQuery = validation.sanitizedQuery;
     String responseText = '';
 
-    // Enrutamiento en cascada de IA
+    // Enrutamiento en cascada de IA con acceso a internet
     try {
       if (_currentProvider == AiProvider.groq || _currentProvider == AiProvider.auto) {
         responseText = await _fetchGroqInference(sanitizedQuery);
@@ -144,7 +157,7 @@ class BaqueanoAiService extends ChangeNotifier {
         try {
           responseText = await _fetchGeminiInference(sanitizedQuery);
         } catch (_) {
-          // Fallback offline a base de datos nativa
+          // Fallback offline a base de datos nativa y caché
           final fallback = _synthesizeLocalResponse(sanitizedQuery);
           responseText = fallback.text;
         }
@@ -154,6 +167,9 @@ class BaqueanoAiService extends ChangeNotifier {
     if (responseText.isEmpty) {
       final fallback = _synthesizeLocalResponse(sanitizedQuery);
       responseText = fallback.text;
+    } else {
+      // Guardar en la caché offline para que la información esté disponible sin internet
+      _offlineSearchCache[sanitizedQuery.toLowerCase().trim()] = responseText;
     }
 
     final aiMsg = ChatMessage(
@@ -186,7 +202,7 @@ class BaqueanoAiService extends ChangeNotifier {
           {'role': 'user', 'content': userQuery},
         ],
         'temperature': 0.7,
-        'max_tokens': 1200,
+        'max_tokens': 1400,
       });
 
       request.write(payload);
@@ -270,7 +286,7 @@ class BaqueanoAiService extends ChangeNotifier {
         ],
         'generationConfig': {
           'temperature': 0.7,
-          'maxOutputTokens': 1200,
+          'maxOutputTokens': 1400,
         }
       });
 
@@ -295,17 +311,7 @@ class BaqueanoAiService extends ChangeNotifier {
   }
 
   String _buildSystemPrompt() {
-    return '''
-Eres "El Baqueano Mayor", la Inteligencia Artificial líder en turismo, senderismo, volcanes y ecoturismo comunitario de Nicaragua.
-Tu misión es actuar como el mejor asesor turístico digital combinando sabiduría local, precisión geográfica y transparencia financiera.
-
-REGLAS DE ORO OBLIGATORIAS:
-1. PRESUPUESTOS BIMONEDA: Todo cálculo monetario debe incluir el desglose simultáneo en Dólares (USD) y Córdobas Nicaragüenses (NIO) a la tasa oficial de C\$ 36.65.
-2. RÉGIMEN FISCAL LEY 306: Explica la exoneración de IVA (0% para turistas extranjeros en hospedajes rurales vs 15% para residentes).
-3. COMERCIO JUSTO DIRECTO: Recomienda siempre a los guías locales nativos, fincas de cacao y cooperativas aliadas sin intermediarios.
-4. SEGURIDAD Y PREVENCIÓN SOS: Incluye siempre recomendaciones de hidratación, calzado adecuado y nivel de dificultad del sendero.
-5. FORMATO MARKDOWN: Estructura la respuesta con títulos, viñetas claras y emojis temáticos (🌋, 🏊, 🛖, 💰).
-''';
+    return MasterTourismPrompt.systemPrompt;
   }
 
   List<String> _generateQuickActions(String query) {
@@ -316,84 +322,49 @@ REGLAS DE ORO OBLIGATORIAS:
       return ['Reservar Cañón de Somoto', 'Ver Ficha de Don Toño', 'Calcular en Córdobas'];
     } else if (q.contains('cerro negro') || q.contains('sandboarding')) {
       return ['Reservar Cerro Negro', 'Ver Videos 4K', 'Guías de León'];
+    } else if (q.contains('matagalpa') || q.contains('cascada')) {
+      return ['Reservar Cascada La Luna', 'Ficha Doña Rosa Amelia', 'Ruta del Café'];
     } else {
-      return ['Calcular en USD & NIO', 'Ver Mapa GPS Satelital', 'Consultar por WhatsApp'];
+      return ['Calcular en USD & NIO', 'Ver Mapa GPS Satelital', 'Planificar Itinerario'];
     }
   }
 
   ChatMessage _synthesizeLocalResponse(String query) {
-    final q = query.toLowerCase();
+    final cleanQ = query.toLowerCase().trim();
 
-    if (q.contains('ometepe') || q.contains('isla')) {
+    // 1. Revisar si la consulta fue resuelta previamente y guardada en caché offline
+    if (_offlineSearchCache.containsKey(cleanQ)) {
       return ChatMessage(
         id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
-        text:
-            '🌋 **ITINERARIO BAQUEANO MAYOR: 3 DÍAS EN OMETEPE**\n\n'
-            '• **Día 1:** Ferry desde San Jorge a Moyogalpa. Almuerzo de pescado frito en Charco Verde y kayak en Río Istián con monos aulladores.\n'
-            '• **Día 2:** Caminata hacia la Cascada San Ramón en el Volcán Maderas. Tarde de relajación en las aguas minerales del Ojo de Agua.\n'
-            '• **Día 3:** Visita a la Finca de Cacao Criollo El Encanto y atardecer en la Punta Jesús María.\n\n'
-            '💰 **PRESUPUESTO ESTIMADO (TASA C\$ 36.65 NIO / USD):**\n'
-            '• Guía Local (Mayra Carcache): \$35.00 USD (C\$ 1,282 NIO)\n'
-            '• Cabaña Ecológica (2 noches): \$65.00 USD (C\$ 2,382 NIO)\n'
-            '• Alimentación y Entradas: \$40.00 USD (C\$ 1,466 NIO)\n'
-            '• **TOTAL APROX:** ~\$140.00 USD (C\$ 5,131 NIO)\n\n'
-            '🎒 **EQUIPO:** Zapatos de trekking con buen agarre, linterna frontal y repelente biodegradable.',
+        text: '📱 **[INFORMACIÓN EN MEMORIA OFFLINE]**\n\n${_offlineSearchCache[cleanQ]!}',
         isUser: false,
         timestamp: DateTime.now(),
-        quickActions: ['Reservar Tour Ometepe', 'Ver Mapa de Ometepe'],
-      );
-    } else if (q.contains('somoto') || q.contains('cañon') || q.contains('rio coco')) {
-      return ChatMessage(
-        id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
-        text:
-            '🏊 **EXPEDICIÓN CAÑÓN DE SOMOTO (MADRIZ)**\n\n'
-            'Navegarás y flotarás entre paredes de roca volcánica de 150m en el cañón más impresionante de Centroamérica.\n\n'
-            '💰 **DESGLOSE FINANCIERO:**\n'
-            '• Tour guiado de 6 horas con saltos y lancha: \$45.00 USD (C\$ 1,649 NIO)\n'
-            '• Almuerzo de güirilas con cuajada fresca: Incluido\n'
-            '• Guía asignado: Don Toño Calero (18 años en el cañón)\n\n'
-            '✅ El 85% de tu reserva llega íntegro a las familias campesinas de la Cooperativa Sonís.',
-        isUser: false,
-        timestamp: DateTime.now(),
-        quickActions: ['Reservar Cañón de Somoto', 'Ver Ficha de Don Toño'],
-      );
-    } else if (q.contains('cerro negro') || q.contains('sandboarding') || q.contains('leon')) {
-      return ChatMessage(
-        id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
-        text:
-            '🏄‍♂️ **SANDBOARDING EN CERRO NEGRO (LEÓN)**\n\n'
-            'Descenso a toda velocidad sobre la ladera de arena negra volcánica a más de 70 km/h.\n\n'
-            '• **Dificultad:** Exigente (subida de 1 hora cargando la tabla).\n'
-            '• **Tarifa Oficial:** \$40.00 USD (C\$ 1,466 NIO) con equipo completo (traje, gafas, tabla).\n'
-            '• **Recomendación:** Llevar calzado cerrado alto para evitar que entre arena volcánica caliente.',
-        isUser: false,
-        timestamp: DateTime.now(),
-        quickActions: ['Reservar Cerro Negro', 'Ver Videos 4K'],
-      );
-    } else if (q.contains('masaya') || q.contains('lava')) {
-      return ChatMessage(
-        id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
-        text:
-            '🔥 **VOLCÁN MASAYA: CRÁTER SANTIAGO NOCTURNO**\n\n'
-            'El lago de lava incandescente más accesible del mundo. Puedes contemplar el magma hirviendo a escasos metros de la orilla del cráter.\n\n'
-            '• **Tarifa:** \$30.00 USD (C\$ 1,099 NIO) con acceso nocturno y guía.\n'
-            '• **Hora recomendada:** 5:45 PM para apreciar el atardecer y la lava brillante.',
-        isUser: false,
-        timestamp: DateTime.now(),
-        quickActions: ['Reservar Volcán Masaya', 'Ver Mapa'],
-      );
-    } else {
-      return ChatMessage(
-        id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
-        text:
-            'He analizado tu consulta sobre "$query" contrastándola con la base de datos de rutas y prestadores comunitarios.\n\n'
-            'Nicaragua ofrece una biodiversidad incomparable: desde el clima fresco y cafetales de Matagalpa hasta las aguas cristalinas de Little Corn Island en el Caribe.\n\n'
-            '¿Deseas que armemos un presupuesto detallado para viajeros extranjeros (0% IVA) o para residentes locales (15% IVA)?',
-        isUser: false,
-        timestamp: DateTime.now(),
-        quickActions: ['Calcular en USD & NIO', 'Ver Catálogo Completo', 'Consultar por WhatsApp'],
+        quickActions: _generateQuickActions(query),
       );
     }
+
+    // Búsqueda por subcadena en la caché guardada
+    for (final entry in _offlineSearchCache.entries) {
+      if (cleanQ.contains(entry.key) || entry.key.contains(cleanQ)) {
+        return ChatMessage(
+          id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
+          text: '📱 **[INFORMACIÓN EN MEMORIA OFFLINE]**\n\n${entry.value}',
+          isUser: false,
+          timestamp: DateTime.now(),
+          quickActions: _generateQuickActions(query),
+        );
+      }
+    }
+
+    // 2. Respuesta inteligente de la base de conocimiento nativa
+    final localResponse = OfflineTourismKnowledge.getSmartResponse(query);
+    return ChatMessage(
+      id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
+      text: localResponse,
+      isUser: false,
+      timestamp: DateTime.now(),
+      quickActions: _generateQuickActions(query),
+    );
   }
 }
 

@@ -38,8 +38,10 @@ import '../features/institutional/screens/help_screen.dart';
 import '../features/institutional/screens/privacy_screen.dart';
 import '../features/institutional/screens/terms_screen.dart';
 import '../features/emergency/screens/emergency_sos_screen.dart';
+import '../features/history/screens/expedition_history_screen.dart';
 import '../features/map/screens/map_screen.dart';
-import '../features/passport/screens/passport_screen.dart';
+import '../features/messaging/screens/host_messaging_screen.dart';
+import '../features/notifications/screens/notifications_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
 import '../features/search/screens/universal_search_screen.dart';
 import '../features/splash/screens/splash_screen.dart';
@@ -78,11 +80,23 @@ class AppRouter {
       ),
       GoRoute(
         path: '/pasaporte',
-        builder: (context, state) => const PassportScreen(),
+        redirect: (_, __) => '/perfil',
       ),
       GoRoute(
         path: '/perfil',
         builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: '/historial',
+        builder: (context, state) => const ExpeditionHistoryScreen(),
+      ),
+      GoRoute(
+        path: '/notificaciones',
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: '/mensajes',
+        builder: (context, state) => const HostMessagingScreen(),
       ),
       GoRoute(
         path: '/busqueda',

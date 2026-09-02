@@ -64,7 +64,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         context.go('/ai');
         break;
       case 4:
-        context.go('/pasaporte');
+        context.go('/perfil');
         break;
     }
   }
@@ -113,6 +113,50 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           icon: const Icon(Icons.search_rounded, color: AppColors.textLight),
           tooltip: 'Búsqueda Global',
           onPressed: () => UniversalSearchModal.show(context),
+        ),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.notifications_outlined, color: AppColors.textLight),
+              tooltip: 'Notificaciones',
+              onPressed: () => context.go('/notificaciones'),
+            ),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(
+                  color: AppColors.terracotta,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+          ],
+        ),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.chat_bubble_outline_rounded, color: AppColors.textLight),
+              tooltip: 'Mensajes con Anfitriones',
+              onPressed: () => context.go('/mensajes'),
+            ),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(
+                  color: AppColors.gold,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+          ],
         ),
         IconButton(
           icon: const Icon(Icons.sos_rounded, color: AppColors.error),
@@ -501,7 +545,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             _buildBottomNavItem(1, Icons.explore_rounded, 'Descubrir'),
             _buildBottomNavItem(2, Icons.map_rounded, 'Mapa GPS'),
             _buildBottomNavItem(3, Icons.smart_toy_rounded, 'Baqueano AI', isAi: true),
-            _buildBottomNavItem(4, Icons.badge_rounded, 'Pasaporte'),
+            _buildBottomNavItem(4, Icons.person_rounded, 'Perfil'),
           ],
         ),
       ),
@@ -603,8 +647,14 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             _buildDrawerItem(context, '🧭', 'Descubrir Destinos', '/descubrir'),
             _buildDrawerItem(context, '🌍', 'Mapa Mundial & GPS', '/mapa'),
             _buildDrawerItem(context, '🤖', 'Baqueano AI Assistant', '/ai', isGold: true),
-            _buildDrawerItem(context, '🛂', 'Mi Pasaporte de Explorador', '/pasaporte'),
+            _buildDrawerItem(context, '👤', 'Mi Perfil & Ajustes', '/perfil'),
             _buildDrawerItem(context, '👥', 'Comunidad & Bitácora', '/comunidad'),
+
+            const Divider(color: AppColors.borderLight),
+            _buildDrawerSectionTitle('MI ACTIVIDAD & COMUNICACIÓN'),
+            _buildDrawerItem(context, '📜', 'Historial de Expediciones', '/historial'),
+            _buildDrawerItem(context, '🔔', 'Centro de Notificaciones', '/notificaciones'),
+            _buildDrawerItem(context, '💬', 'Mensajes con Anfitriones', '/mensajes'),
 
             const Divider(color: AppColors.borderLight),
             _buildDrawerSectionTitle('CATÁLOGO CULTURAL DE NICARAGUA'),
