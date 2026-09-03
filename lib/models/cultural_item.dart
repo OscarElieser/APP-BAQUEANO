@@ -7,6 +7,11 @@ class GastronomyDish {
   final String recommendedPlace;
   final String icon;
   final String imageUrl;
+  final String fullAddress;
+  final String contactPhone;
+  final String ownerName;
+  final String estimatedPrice;
+  final String? schedule;
 
   const GastronomyDish({
     required this.id,
@@ -17,6 +22,11 @@ class GastronomyDish {
     required this.recommendedPlace,
     required this.icon,
     required this.imageUrl,
+    this.fullAddress = 'Centro histórico y comedores tradicionales del municipio',
+    this.contactPhone = '+505 2270-0000',
+    this.ownerName = 'Comunidad Anfitriona Campesina',
+    this.estimatedPrice = r'C$ 100 - C$ 160 NIO (~$3.00 - $4.50 USD)',
+    this.schedule = 'Abierto todos los días de 6:00 AM a 6:00 PM',
   });
 }
 
