@@ -31,6 +31,7 @@
 - [🤖 Asistente IA para Turismo Responsable](#-asistente-ia-para-turismo-responsable)
 - [🎫 Pasaporte del Explorador & Gamificación Ética](#-pasaporte-del-explorador--gamificación-ética)
 - [💳 Motor Financiero Bimoneda & Régimen Fiscal](#-motor-financiero-bimoneda--régimen-fiscal)
+- [🛡️ Sistema de Respaldo & Restauración de Versiones](#-sistema-de-respaldo--restauración-de-versiones)
 - [🚀 Instalación y Despliegue en Android](#-instalación-y-despliegue-en-android)
 - [📄 Licencia & Créditos](#-licencia--créditos)
 
@@ -273,6 +274,34 @@ Ubicado en `/perfil`:
 │ Código Único de Expedición       : BAQ-XXXXXX              │
 └────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 🛡️ Sistema de Respaldo & Restauración de Versiones
+
+El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar la seguridad del código y permitir el retorno inmediato a versiones estables verificadas:
+
+- **Versión Estable Actual (Android - Optimizada 100% Sin Desbordamientos ni Warnings)**:
+  - **Rama de Respaldo**: `backup-version-estable`
+  - **Etiqueta Oficial**: `v1.1.0-estable`
+  - **Logros Clave**: Erradicación total de desbordamientos de píxeles (`RenderFlex`), reproducción directa de videos de expedición en 4K en YouTube mediante `url_launcher` e intents nativos en `AndroidManifest.xml`, rediseño ergonómico de la tarjeta de comunidad campesina, dimensiones holgadas en gastronomía y símbolos patrios, y márgenes seguros de 100px para barras de gestos.
+  ```bash
+  # Para restaurar o inspeccionar la versión estable actual:
+  git checkout backup-version-estable
+  ```
+
+- **Versión Previa Histórica**:
+  - **Rama de Respaldo**: `backup-version-anterior`
+  - **Etiqueta Oficial**: `v1.0.0-anterior`
+  ```bash
+  # Para restaurar la versión anterior:
+  git checkout backup-version-anterior
+  ```
+
+- **Regresar a la Rama Principal de Desarrollo**:
+  ```bash
+  git checkout main
+  ```
 
 ---
 
