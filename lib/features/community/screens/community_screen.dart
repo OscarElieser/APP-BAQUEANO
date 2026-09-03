@@ -137,7 +137,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
   List<ExplorerReview> _getFilteredReviews(DateTime? date) {
     if (date == null) return _reviews;
     return _reviews.where((rev) {
-      final d = rev.parsedDate;
+      final d = parseReviewDate(rev);
       return d.year == date.year && d.month == date.month && d.day == date.day;
     }).toList();
   }
@@ -145,7 +145,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
   List<DateTime> get _availableDates {
     final Map<String, DateTime> uniqueDates = {};
     for (final rev in _reviews) {
-      final d = rev.parsedDate;
+      final d = parseReviewDate(rev);
       final key = '${d.year}-${d.month}-${d.day}';
       uniqueDates[key] = DateTime(d.year, d.month, d.day);
     }
@@ -1163,7 +1163,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                           ],
                                         ),
                                         Text(
-                                          '🗓️ ${rev.formattedDate}',
+                                          '🗓️ ${formatReviewDate(rev)}',
                                           style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.goldLight),
                                         ),
                                       ],
@@ -1728,7 +1728,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              '🗓️ ${rev.formattedDate}',
+                              '🗓️ ${formatReviewDate(rev)}',
                               style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
                             ),
                           ],

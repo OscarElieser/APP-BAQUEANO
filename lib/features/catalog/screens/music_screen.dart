@@ -22,6 +22,7 @@
 // ============================================================================
 
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,8 +46,9 @@ class MusicScreen extends StatefulWidget {
 class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStateMixin {
   int _currentTrackIndex = 0;
   bool _isPlaying = false;
-  double _playbackProgress = 0.25;
+  double _playbackProgress = 0.0;
   Timer? _playbackTimer;
+  late final AudioPlayer _audioPlayer;
 
   /// Mapa local mutable para permitir a desarrolladores y usuarios probar enlaces de video en vivo
   final Map<String, String> _customYoutubeUrls = {};
@@ -59,26 +61,88 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
   }
 
   @override
+  void initState() {
+    super.initState();
+    _audioPlayer = AudioPlayer();
+
+    // Escuchar estado del reproductor de audio
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      if (!mounted) return;
+      setState(() {
+        _isPlaying = state == PlayerState.playing;
+      });
+    });
+
+    // Escuchar progreso de reproducción en tiempo real
+    _audioPlayer.onPositionChanged.listen((position) {
+      if (!mounted) return;
+      _audioPlayer.getDuration().then((dur) {
+        if (dur != null && dur.inMilliseconds > 0) {
+          setState(() {
+            _playbackProgress = (position.inMilliseconds / dur.inMilliseconds).clamp(0.0, 1.0);
+          });
+        }
+      });
+    });
+
+    // Avanzar a la siguiente pista automáticamente al terminar la canción
+    _audioPlayer.onPlayerComplete.listen((_) {
+      if (!mounted) return;
+      _playNextTrack();
+    });
+  }
+
+  @override
   void dispose() {
     _playbackTimer?.cancel();
+    _audioPlayer.dispose();
     super.dispose();
   }
 
-  void _togglePlayPause() {
+  Future<void> _togglePlayPause() async {
     HapticFeedback.lightImpact();
-    setState(() {
-      _isPlaying = !_isPlaying;
-      if (_isPlaying) {
-        _startProgressSimulation();
-        CustomToast.show(
-          context,
-          message: 'Reproduciendo: ${_currentTrack.title} (${_currentTrack.artist})',
-          icon: Icons.music_note_rounded,
-        );
-      } else {
-        _playbackTimer?.cancel();
+    if (_isPlaying) {
+      await _audioPlayer.pause();
+      _playbackTimer?.cancel();
+      setState(() => _isPlaying = false);
+    } else {
+      await _playCurrentTrack();
+    }
+  }
+
+  Future<void> _playCurrentTrack() async {
+    final assetPath = _currentTrack.audioAsset;
+    if (assetPath != null && assetPath.isNotEmpty) {
+      try {
+        final cleanSource = assetPath.startsWith('assets/')
+            ? assetPath.substring('assets/'.length)
+            : assetPath;
+        await _audioPlayer.stop();
+        await _audioPlayer.play(AssetSource(cleanSource));
+        if (mounted) {
+          setState(() => _isPlaying = true);
+          CustomToast.show(
+            context,
+            message: 'Reproduciendo: ${_currentTrack.title} (${_currentTrack.artist})',
+            icon: Icons.music_note_rounded,
+          );
+        }
+        return;
+      } catch (e) {
+        debugPrint('Aviso reproduciendo audio nativo: $e');
       }
-    });
+    }
+
+    // Fallback con simulación si por alguna razón el archivo no se encontrara
+    if (mounted) {
+      setState(() => _isPlaying = true);
+      _startProgressSimulation();
+      CustomToast.show(
+        context,
+        message: 'Reproduciendo: ${_currentTrack.title} (${_currentTrack.artist})',
+        icon: Icons.music_note_rounded,
+      );
+    }
   }
 
   void _startProgressSimulation() {
@@ -95,20 +159,26 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
     });
   }
 
-  void _playNextTrack() {
+  Future<void> _playNextTrack() async {
     HapticFeedback.selectionClick();
     setState(() {
       _currentTrackIndex = (_currentTrackIndex + 1) % _tracks.length;
       _playbackProgress = 0.0;
     });
+    if (_isPlaying) {
+      await _playCurrentTrack();
+    }
   }
 
-  void _playPreviousTrack() {
+  Future<void> _playPreviousTrack() async {
     HapticFeedback.selectionClick();
     setState(() {
       _currentTrackIndex = (_currentTrackIndex - 1 + _tracks.length) % _tracks.length;
       _playbackProgress = 0.0;
     });
+    if (_isPlaying) {
+      await _playCurrentTrack();
+    }
   }
 
   Future<void> _launchYoutube(String url) async {

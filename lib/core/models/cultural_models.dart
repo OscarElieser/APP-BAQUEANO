@@ -64,6 +64,7 @@ class MusicTrack {
   final String coverUrl;
   final String? youtubeUrl;
   final String? videoUrl;
+  final String? audioAsset;
 
   const MusicTrack({
     required this.id,
@@ -76,6 +77,7 @@ class MusicTrack {
     required this.coverUrl,
     this.youtubeUrl,
     this.videoUrl,
+    this.audioAsset,
   });
 }
 
@@ -218,24 +220,31 @@ class ExplorerReview {
   });
 
   /// Fecha convertida para comparaciones y filtros de calendario
-  DateTime get parsedDate {
-    if (date != null && date!.isNotEmpty) {
-      try {
-        return DateTime.parse(date!);
-      } catch (_) {}
-    }
-    return DateTime(2026, 9, 3);
-  }
+  DateTime get parsedDate => parseReviewDate(this);
 
   /// Fecha formateada en español para visualización en tarjetas y galería
-  String get formattedDate {
-    final d = parsedDate;
-    const months = [
-      'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-      'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
-    ];
-    return '${d.day} ${months[d.month - 1]} ${d.year}';
+  String get formattedDate => formatReviewDate(this);
+}
+
+/// Función auxiliar top-level para parsear la fecha de una reseña con resiliencia total
+DateTime parseReviewDate(ExplorerReview rev) {
+  final d = rev.date;
+  if (d != null && d.isNotEmpty) {
+    try {
+      return DateTime.parse(d);
+    } catch (_) {}
   }
+  return DateTime(2026, 9, 3);
+}
+
+/// Función auxiliar top-level para formatear la fecha de una reseña
+String formatReviewDate(ExplorerReview rev) {
+  final d = parseReviewDate(rev);
+  const months = [
+    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+  ];
+  return '${d.day} ${months[d.month - 1]} ${d.year}';
 }
 
 /// Representa un sello o medalla de gamificación desbloqueable en el Pasaporte Digital.
