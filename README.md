@@ -110,8 +110,8 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
 
 ## ✨ Características Principales
 
-- 📱 **Diseño 100% Responsivo en Android**: Adaptabilidad desde pantallas compactas de 360px hasta terminales de gama alta (Samsung Galaxy, Pixel) y tablets.
-- ⚡ **Desplazamiento Ultrafluido a 120 FPS**: Aislamiento GPU con `RepaintBoundary` y física de inercia suave (`BouncingScrollPhysics`).
+- 📱 **Diseño Universal y Adaptativo en Android**: Optimizado para funcionar de manera estable, eficiente y fluida en **cualquier teléfono Android en general**, adaptando su rendimiento de forma inteligente según la capacidad del hardware del usuario (desde terminales accesibles y de gama media comunes en el campo hasta pantallas avanzadas y tablets), con gestión de SafeAreas dinámicas, bajo consumo de batería y navegación por gestos.
+- ⚡ **Desplazamiento Ultrafluido (60 - 120 FPS)**: Aislamiento GPU con `RepaintBoundary` y física de inercia suave (`BouncingScrollPhysics`) que elimina tirones y evita sobrecalentamiento.
 - 🎵 **Patrimonio Sonoro Multimedia**: Reproductor folclórico tradicional (Solar de Monimbó, Mora Limpia, Danza del Mestizaje), integración de video en YouTube y editor de URLs.
 - 🚨 **Centro de Auxilio SOS 24/7**: Marcación directa (118, 128, 115, INTUR), botón SOS de WhatsApp con coordenadas GPS y respuesta háptica.
 - 💬 **Mensajería Directa con Baqueanos**: Coordinación de llegada, envío de ubicación GPS y adjuntos de comprobantes bancarios locales.
@@ -123,10 +123,10 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
 
 ---
 
-## ⚡ Arquitectura de Alto Rendimiento (120 FPS)
+## ⚡ Arquitectura de Alto Rendimiento & Eficiencia de Hardware
 
 ```text
-[Feed Vertical Principal] ──────── (Scroll a 120 FPS Nativo)
+[Feed Vertical Principal] ──────── (Desplazamiento Fluido y Eficiente)
         │
         ├── [RepaintBoundary] ──► Carrusel de Categorías Rápidas (Capa GPU aislada)
         ├── [RepaintBoundary] ──► Galería de Destinos Populares (Capa GPU aislada)
@@ -135,8 +135,9 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
         └── [RepaintBoundary] ──► 4 Pilares del Estándar Baqueano (Capa GPU aislada)
 ```
 
+- **Adaptabilidad según Capacidad del Dispositivo**: El motor gráfico respeta la tasa de refresco nativa del terminal (60Hz, 90Hz o 120Hz) y minimiza la carga en procesadores de gama de entrada para evitar lentitud y prolongar la batería en rutas rurales.
 - **Aislamiento GPU (`RepaintBoundary`)**: Cada lista horizontal posee su propia textura en memoria gráfica; las tarjetas se animan sin invalidar el árbol vertical.
-- **Cero Bucles en Segundo Plano**: Desplazamiento reactivo táctil sin timers de auto-scroll artificiales.
+- **Cero Bucles en Segundo Plano**: Desplazamiento reactivo táctil sin timers de auto-scroll artificiales que degraden el rendimiento.
 - **Física Nativa de Inercia**: `BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())`.
 
 ---
