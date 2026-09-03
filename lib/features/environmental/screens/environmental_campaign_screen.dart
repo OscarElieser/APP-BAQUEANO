@@ -22,9 +22,12 @@
 // - `EnvironmentalCampaignScreen`: Pantalla oficial de la campaña ambiental en `/campana-ambiental`.
 // ============================================================================
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
@@ -163,17 +166,507 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
     }
   }
 
-  Future<void> _reportEnvironmentalIssue() async {
-    HapticFeedback.lightImpact();
-    final phone = '+50588880000'; // Línea institucional de protección ambiental
-    final uri = Uri.parse('tel:$phone');
-    try {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } catch (_) {
-      if (mounted) {
-        CustomToast.show(context, message: 'Reporte a Guardaparques: Contacta a tu guía baqueano local');
-      }
+  Future<void> _copyOfficialEmail() async {
+    await Clipboard.setData(const ClipboardData(text: 'denuncias@baqueano.com'));
+    HapticFeedback.mediumImpact();
+    if (mounted) {
+      CustomToast.success(context, 'Correo denuncias@baqueano.com copiado al portapapeles');
     }
+  }
+
+  void _showEnvironmentalReportModal(BuildContext context) {
+    HapticFeedback.lightImpact();
+
+    String selectedInfraction = '🏹 Caza furtiva o captura de fauna silvestre';
+    final TextEditingController locationCtrl = TextEditingController();
+    final TextEditingController detailsCtrl = TextEditingController();
+    final TextEditingController contactNameCtrl = TextEditingController();
+    final TextEditingController contactPhoneCtrl = TextEditingController();
+    bool isAnonymous = true;
+    bool isLocating = false;
+    final List<XFile> attachedPhotos = [];
+    final ImagePicker picker = ImagePicker();
+
+    final List<String> infractionTypes = const [
+      '🏹 Caza furtiva o captura de fauna silvestre',
+      '🪓 Tala no autorizada o deforestación',
+      '🐢 Saqueo de nidos de tortugas o tráfico de carey',
+      '🛢️ Vertido de contaminantes en ríos, lagunas o costas',
+      '🔥 Fogatas ilegales o riesgo de incendio forestal',
+      '🚯 Basurero clandestino en área protegida',
+      '⚠️ Otra infracción o daño a recursos naturales',
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (modalCtx) {
+        return StatefulBuilder(
+          builder: (ctx, setModalState) {
+            Future<void> captureGps() async {
+              setModalState(() => isLocating = true);
+              try {
+                LocationPermission permission = await Geolocator.checkPermission();
+                if (permission == LocationPermission.denied) {
+                  permission = await Geolocator.requestPermission();
+                }
+                if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+                  if (modalCtx.mounted) {
+                    CustomToast.error(modalCtx, 'Permiso de ubicación denegado. Escribe la ubicación manualmente.');
+                  }
+                  setModalState(() => isLocating = false);
+                  return;
+                }
+
+                final pos = await Geolocator.getCurrentPosition(
+                  locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
+                );
+                setModalState(() {
+                  locationCtrl.text = 'GPS: ${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}';
+                  isLocating = false;
+                });
+                HapticFeedback.selectionClick();
+                if (modalCtx.mounted) {
+                  CustomToast.success(modalCtx, 'Coordenadas GPS capturadas con éxito');
+                }
+              } catch (_) {
+                setModalState(() => isLocating = false);
+                if (modalCtx.mounted) {
+                  CustomToast.show(modalCtx, message: 'Ingresa la ubicación o sendero manualmente');
+                }
+              }
+            }
+
+            Future<void> pickPhoto(ImageSource source) async {
+              try {
+                final photo = await picker.pickImage(source: source, imageQuality: 85);
+                if (photo != null) {
+                  setModalState(() {
+                    attachedPhotos.add(photo);
+                  });
+                  HapticFeedback.selectionClick();
+                }
+              } catch (_) {
+                if (modalCtx.mounted) {
+                  CustomToast.error(modalCtx, 'No se pudo cargar la imagen');
+                }
+              }
+            }
+
+            Future<void> sendByEmail() async {
+              if (locationCtrl.text.trim().isEmpty && detailsCtrl.text.trim().isEmpty) {
+                CustomToast.error(modalCtx, 'Por favor indica la ubicación o describe los hechos');
+                return;
+              }
+
+              final now = DateTime.now();
+              final dateFormatted = '${now.day}/${now.month}/${now.year}';
+              final location = locationCtrl.text.trim().isNotEmpty ? locationCtrl.text.trim() : 'Lugar por verificar';
+              final subject = Uri.encodeComponent('[ALERTA AMBIENTAL] - $location - $dateFormatted');
+
+              final bodyText = StringBuffer();
+              bodyText.writeln('CANAL DE ALERTA Y REPORTE AMBIENTAL — BAQUEANO NICARAGUA');
+              bodyText.writeln('========================================================');
+              bodyText.writeln('Tipo de Infracción: $selectedInfraction');
+              bodyText.writeln('Ubicación / Coordenadas: $location');
+              bodyText.writeln('Fecha y Hora del Suceso: ${now.toLocal()}');
+              bodyText.writeln('');
+              bodyText.writeln('DESCRIPCIÓN DETALLADA DE LOS HECHOS:');
+              bodyText.writeln(detailsCtrl.text.trim().isNotEmpty ? detailsCtrl.text.trim() : 'Sin descripción adicional.');
+              bodyText.writeln('');
+              bodyText.writeln('DATOS DEL DENUNCIANTE:');
+              if (isAnonymous) {
+                bodyText.writeln('Condición: 100% ANÓNIMO Y CONFIDENCIAL (Protección al explorador garantizada por Baqueano)');
+              } else {
+                bodyText.writeln('Nombre: ${contactNameCtrl.text.trim()}');
+                bodyText.writeln('Contacto: ${contactPhoneCtrl.text.trim()}');
+              }
+              bodyText.writeln('');
+              bodyText.writeln('EVIDENCIAS ADJUNTAS:');
+              bodyText.writeln('${attachedPhotos.length} fotografía(s) capturada(s) en el lugar.');
+              bodyText.writeln('[POR FAVOR VERIFICA QUE TUS FOTOS O VIDEOS ESTÉN ADJUNTOS A ESTE CORREO]');
+              bodyText.writeln('========================================================');
+              bodyText.writeln('Canalizado por la plataforma oficial Baqueano para trámite ante MARENA, UAM y Policía Nacional.');
+
+              final emailUri = Uri.parse('mailto:denuncias@baqueano.com?subject=$subject&body=${Uri.encodeComponent(bodyText.toString())}');
+
+              Navigator.of(modalCtx).pop();
+              try {
+                await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+              } catch (_) {
+                if (context.mounted) {
+                  CustomToast.show(context, message: 'Copia denuncias@baqueano.com y envíanos tu reporte');
+                }
+              }
+            }
+
+            Future<void> sendByWhatsApp() async {
+              final location = locationCtrl.text.trim().isNotEmpty ? locationCtrl.text.trim() : 'Por verificar';
+              final msg = StringBuffer();
+              msg.writeln('🚨 *ALERTA AMBIENTAL BAQUEANO*');
+              msg.writeln('• *Infracción:* $selectedInfraction');
+              msg.writeln('• *Ubicación:* $location');
+              msg.writeln('• *Detalles:* ${detailsCtrl.text.trim()}');
+              msg.writeln('• *Denunciante:* ${isAnonymous ? "Anónimo (Confidencial)" : contactNameCtrl.text.trim()}');
+              msg.writeln('Adjunto fotos de evidencia en este chat.');
+
+              final waUri = Uri.parse('https://wa.me/50588882222?text=${Uri.encodeComponent(msg.toString())}');
+              Navigator.of(modalCtx).pop();
+              try {
+                await launchUrl(waUri, mode: LaunchMode.externalApplication);
+              } catch (_) {
+                if (context.mounted) {
+                  CustomToast.show(context, message: 'Apertura de WhatsApp no disponible');
+                }
+              }
+            }
+
+            return Container(
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: MediaQuery.of(modalCtx).viewInsets.bottom + 24,
+              ),
+              decoration: const BoxDecoration(
+                color: Color(0xFF071B22),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 44,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: Colors.white24,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppColors.terracotta.withValues(alpha: 0.2),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.shield_rounded, color: AppColors.terracottaLight, size: 22),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'CANAL DE REPORTE AMBIENTAL',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.goldLight,
+                                  letterSpacing: 0.8,
+                                ),
+                              ),
+                              Text(
+                                'Formulario de Evidencia Legal',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close_rounded, color: Colors.white70),
+                          onPressed: () => Navigator.of(modalCtx).pop(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Tipo de Infracción
+                    Text(
+                      'Tipo de Infracción Observada:',
+                      style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                    ),
+                    const SizedBox(height: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryDark,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.borderLight),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedInfraction,
+                          isExpanded: true,
+                          dropdownColor: AppColors.bgDark,
+                          icon: const Icon(Icons.arrow_drop_down, color: AppColors.gold),
+                          items: infractionTypes.map((item) {
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (val) {
+                            if (val != null) {
+                              setModalState(() => selectedInfraction = val);
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Ubicación con botón GPS
+                    Text(
+                      'Ubicación Exacta o Coordenadas GPS:',
+                      style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: locationCtrl,
+                            style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                            decoration: InputDecoration(
+                              hintText: 'Ej: Sendero Volcán Telica, km 4...',
+                              hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                              filled: true,
+                              fillColor: AppColors.primaryDark,
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.gold)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.jungleGreen,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                          onPressed: isLocating ? null : captureGps,
+                          icon: isLocating
+                              ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                              : const Icon(Icons.my_location_rounded, size: 16),
+                          label: Text(
+                            isLocating ? 'GPS...' : 'Mi GPS',
+                            style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Descripción
+                    Text(
+                      'Descripción de los Hechos:',
+                      style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                    ),
+                    const SizedBox(height: 6),
+                    TextField(
+                      controller: detailsCtrl,
+                      maxLines: 3,
+                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Detalla qué observaste: número aproximado de personas, herramientas, vehículos, fecha y hora...',
+                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        filled: true,
+                        fillColor: AppColors.primaryDark,
+                        contentPadding: const EdgeInsets.all(12),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.gold)),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Evidencia Fotográfica
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Evidencia Fotográfica (${attachedPhotos.length}):',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.camera_alt_rounded, color: AppColors.gold, size: 20),
+                              tooltip: 'Tomar foto',
+                              onPressed: () => pickPhoto(ImageSource.camera),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.photo_library_rounded, color: AppColors.goldLight, size: 20),
+                              tooltip: 'Galería',
+                              onPressed: () => pickPhoto(ImageSource.gallery),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    if (attachedPhotos.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      SizedBox(
+                        height: 70,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: attachedPhotos.length,
+                          separatorBuilder: (_, __) => const SizedBox(width: 8),
+                          itemBuilder: (ctx, idx) {
+                            final file = attachedPhotos[idx];
+                            return Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.file(
+                                    File(file.path),
+                                    width: 70,
+                                    height: 70,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 2,
+                                  right: 2,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setModalState(() {
+                                        attachedPhotos.removeAt(idx);
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.black87,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(Icons.close, color: Colors.white, size: 14),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 12),
+
+                    // Anonimato y Confidencialidad
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryDark,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.borderLight),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            isAnonymous ? Icons.lock_outline_rounded : Icons.person_outline_rounded,
+                            color: isAnonymous ? AppColors.jungleGreenLight : AppColors.goldLight,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Reporte 100% Anónimo y Confidencial',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Switch(
+                            value: isAnonymous,
+                            activeTrackColor: AppColors.jungleGreen,
+                            activeColor: Colors.white,
+                            onChanged: (val) {
+                              setModalState(() => isAnonymous = val);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (!isAnonymous) ...[
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: contactNameCtrl,
+                        style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Tu nombre completo (confidencial)',
+                          hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                          filled: true,
+                          fillColor: AppColors.primaryDark,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      TextField(
+                        controller: contactPhoneCtrl,
+                        style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Teléfono o correo de contacto',
+                          hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                          filled: true,
+                          fillColor: AppColors.primaryDark,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        ),
+                      ),
+                    ],
+
+                    const SizedBox(height: 18),
+
+                    // Botones de Despacho
+                    BaqueanoButton(
+                      text: 'ENVIAR DENUNCIA FORMAL A BAQUEANO',
+                      icon: const Icon(Icons.mail_outline_rounded, size: 18),
+                      variant: BaqueanoButtonVariant.primary,
+                      height: 48,
+                      width: double.infinity,
+                      onPressed: sendByEmail,
+                    ),
+                    const SizedBox(height: 8),
+                    BaqueanoButton(
+                      text: 'Notificar por WhatsApp de Guardia 24/7',
+                      icon: const Icon(Icons.chat_rounded, size: 18),
+                      variant: BaqueanoButtonVariant.gold,
+                      height: 42,
+                      width: double.infinity,
+                      onPressed: sendByWhatsApp,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -527,52 +1020,147 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
 
             const SizedBox(height: 24),
 
-            // Reporte y Alerta Ambiental
+            const SizedBox(height: 24),
+
+            // CANAL DE ALERTA Y REPORTE AMBIENTAL — BAQUEANO
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
-                color: AppColors.primaryDark,
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: AppColors.borderLight),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColors.terracotta.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.emergency_rounded, color: AppColors.terracottaLight, size: 24),
+                color: const Color(0xFF091C24),
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: AppColors.terracottaLight.withValues(alpha: 0.6), width: 1.4),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.terracotta.withValues(alpha: 0.15),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6),
                   ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.terracotta.withValues(alpha: 0.25),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.shield_rounded, color: AppColors.terracottaLight, size: 26),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'CANAL INSTITUCIONAL OFICIAL',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.terracottaLight,
+                                letterSpacing: 1.0,
+                              ),
+                            ),
+                            Text(
+                              'Alerta y Reporte Ambiental — Baqueano',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 16.5,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    '«Si durante tu recorrido presencias actividades ilegales como caza furtiva, tala no autorizada, extracción de especies o vertido de contaminantes, repórtalo directamente a nuestro equipo. En Baqueano canalizamos y tramitamos formalmente la denuncia con las evidencias correspondientes ante las autoridades ambientales (MARENA, Alcaldía y Policía Nacional).»',
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white.withValues(alpha: 0.9),
+                      height: 1.45,
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+
+                  // 4 Pilares del Canal
+                  Text(
+                    'VENTAJAS ESTRATÉGICAS DE REPORTAR CON BAQUEANO:',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.goldLight,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  _buildStrategicPillar('🛡️', 'Filtro y Verificación', 'El equipo local valida si el reporte es real, clasifica la gravedad y recopila datos clave antes de activar a las autoridades.'),
+                  const SizedBox(height: 8),
+                  _buildStrategicPillar('📁', 'Custodia de Evidencias', 'Recibe fotografías, videos, audios y coordenadas GPS organizados en un expediente legal formal.'),
+                  const SizedBox(height: 8),
+                  _buildStrategicPillar('🔒', 'Protección y Anonimato', 'Evita trámites policiales directos o barreras de idioma; Baqueano actúa como tu canal formal y protector del territorio.'),
+                  const SizedBox(height: 8),
+                  _buildStrategicPillar('⚖️', 'Denuncia Formal Fundamentada', 'Presentación con respaldo técnico ante MARENA, la Unidad Ambiental de la Alcaldía (UAM) y la Policía Nacional.'),
+
+                  const SizedBox(height: 20),
+
+                  // Tarjeta del correo institucional oficial
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryDark,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+                    ),
+                    child: Row(
                       children: [
-                        Text(
-                          '¿Presenciaste caza furtiva o daño ambiental?',
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                        const Icon(Icons.mark_email_read_rounded, color: AppColors.goldLight, size: 22),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'CORREO DE EVIDENCIAS LEGALES:',
+                                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted),
+                              ),
+                              Text(
+                                'denuncias@baqueano.com',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.goldLight,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          'Informa de inmediato a guardaparques o guías locales certificados.',
-                          style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white60),
+                        IconButton(
+                          icon: const Icon(Icons.copy_rounded, color: AppColors.gold, size: 18),
+                          tooltip: 'Copiar correo',
+                          onPressed: _copyOfficialEmail,
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(width: 8),
+
+                  const SizedBox(height: 16),
+
                   BaqueanoButton(
-                    text: 'Contactar',
-                    variant: BaqueanoButtonVariant.outline,
-                    height: 36,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    onPressed: _reportEnvironmentalIssue,
+                    text: 'REDACTAR REPORTE / ENVIAR EVIDENCIAS',
+                    icon: const Icon(Icons.add_alert_rounded, size: 18),
+                    variant: BaqueanoButtonVariant.primary,
+                    height: 48,
+                    width: double.infinity,
+                    onPressed: () => _showEnvironmentalReportModal(context),
                   ),
                 ],
               ),
@@ -601,6 +1189,30 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
           color: color,
         ),
       ),
+    );
+  }
+
+  Widget _buildStrategicPillar(String icon, String title, String description) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(icon, style: const TextStyle(fontSize: 16)),
+        const SizedBox(width: 8),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: GoogleFonts.inter(fontSize: 12, color: Colors.white70, height: 1.4),
+              children: [
+                TextSpan(
+                  text: '$title: ',
+                  style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w800, color: Colors.white),
+                ),
+                TextSpan(text: description),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
