@@ -4,16 +4,19 @@
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Ofrecer una radiografía demográfica, territorial y geográfica instantánea
-//   con datos verificados del país (INIDE/censos oficiales) sin saturar al usuario.
-// - Presentar cifras clave que contextualicen la riqueza natural y humana de Nicaragua.
+//   con datos verificados del país (INIDE/censos oficiales) sin saturar al explorador.
+// - Presentar cifras clave que contextualicen la riqueza natural y humana de Nicaragua
+//   con total legibilidad en cualquier dispositivo sin desbordamientos visuales.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Rejilla adaptativa con `LayoutBuilder` y `GridView.builder` que conmuta entre
-//   2 columnas en móvil y 3 o 6 en desktop.
-// - Tarjetas Glassmorphism con bordes dorados, iconos y tipografía Space Grotesk.
+// - Rejilla responsiva construida con `GridView.builder` y dimensiones adaptativas
+//   (`mainAxisExtent: isDesktop ? 145 : 152`) con respiro vertical adecuado para absorber
+//   textos de detalle de múltiples líneas y factores de escala tipográfica del sistema.
+// - Tarjetas de estilo visual elevado con `AppColors.bgCard`, bordes dorados tenues,
+//   iconos alusivos y tipografías Montserrat, Space Grotesk e Inter.
 //
-// 📦 3. QUÉ (WHAT / WIDGET EXPUESTO):
-// - `CountryQuickStatsGrid`: Rejilla de tarjetas de estadísticas clave.
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - `CountryQuickStatsGrid`: Rejilla de tarjetas de estadísticas clave del territorio nacional.
 // ============================================================================
 
 import 'package:flutter/material.dart';
@@ -28,10 +31,16 @@ class CountryQuickStatsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Intención: Calcular dimensiones del viewport para adaptar la rejilla.
+    // Mecanismo: Breakpoints en 600px (tablet) y 950px (desktop).
+    // Importancia: Garantiza fluidez y legibilidad tanto en teléfonos como en tablets.
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
     final isTablet = screenWidth >= 600 && screenWidth < 950;
 
+    // Intención: Estructurar los 6 indicadores principales del país.
+    // Mecanismo: Lista de mapas asociativos con icono, etiqueta, valor y detalle descriptivo.
+    // Importancia: Facilita el renderizado dinámico e iteración uniforme en la rejilla.
     final statItems = [
       {
         'icon': '🇳🇮',
@@ -71,20 +80,27 @@ class CountryQuickStatsGrid extends StatelessWidget {
       },
     ];
 
+    // Intención: Renderizar la matriz de tarjetas sin scroll interno acoplándose al scroll padre.
+    // Mecanismo: GridView.builder con NeverScrollableScrollPhysics y mainAxisExtent holgado (152px en tablet/móvil).
+    // Importancia: Evita desbordamientos (BOTTOM OVERFLOWED) cuando el detalle ocupa 2 líneas.
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-        mainAxisExtent: 135,
+        mainAxisExtent: isDesktop ? 145 : 152,
         crossAxisSpacing: 14,
         mainAxisSpacing: 14,
       ),
       itemCount: statItems.length,
       itemBuilder: (context, index) {
         final item = statItems[index];
+
         return Container(
-          padding: const EdgeInsets.all(16),
+          // Intención: Margen interno optimizado verticalmente.
+          // Mecanismo: 16px horizontal para alineación y 13px vertical para dar respiro.
+          // Importancia: Evita colisiones con los límites superior e inferior de la tarjeta.
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
           decoration: BoxDecoration(
             color: AppColors.bgCard,
             borderRadius: BorderRadius.circular(18),
@@ -101,6 +117,7 @@ class CountryQuickStatsGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Fila superior: Icono representativo y etiqueta de sección
               Row(
                 children: [
                   Text(item['icon']!, style: const TextStyle(fontSize: 22)),
@@ -120,7 +137,9 @@ class CountryQuickStatsGrid extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
+
+              // Cifra o dato principal destacado
               Text(
                 item['value']!,
                 style: GoogleFonts.montserrat(
@@ -132,6 +151,8 @@ class CountryQuickStatsGrid extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 4),
+
+              // Texto secundario contextual de apoyo (hasta 2 líneas de texto descriptivo)
               Text(
                 item['detail']!,
                 style: GoogleFonts.inter(

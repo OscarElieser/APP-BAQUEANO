@@ -201,13 +201,17 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                   children: [
                     const Icon(Icons.verified_user_rounded, size: 13, color: AppColors.gold),
                     const SizedBox(width: 6),
-                    Text(
-                      '4 PILARES INNEGOCIABLES · ÉTICA & TECNOLOGÍA',
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 0.8,
-                        color: AppColors.gold,
+                    Flexible(
+                      child: Text(
+                        '4 PILARES INNEGOCIABLES · ÉTICA & TECNOLOGÍA',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.8,
+                          color: AppColors.gold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],

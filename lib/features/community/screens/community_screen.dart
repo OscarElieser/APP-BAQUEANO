@@ -330,9 +330,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
             const SizedBox(height: 16),
 
             // DECÁLOGO DEL EXPLORADOR BAQUEANO
+            // Intención: Presentar los principios rectores de viaje ético en Nicaragua.
+            // Mecanismo: Contenedor con degradado volcánico y bordes dorados, con padding adaptativo y fila protegida con Expanded.
+            // Importancia: Garantiza ajuste responsivo impecable en cualquier ancho de pantalla (móvil, tablet, plegable).
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(22),
+              padding: EdgeInsets.symmetric(
+                horizontal: isDesktop ? 24.0 : 18.0,
+                vertical: 20.0,
+              ),
               decoration: BoxDecoration(
                 gradient: AppGradients.volcanicHero,
                 borderRadius: BorderRadius.circular(24),
@@ -343,15 +349,19 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.verified_user_rounded, color: AppColors.gold, size: 24),
+                      const Icon(Icons.verified_user_rounded, color: AppColors.gold, size: 22),
                       const SizedBox(width: 10),
-                      Text(
-                        'DECÁLOGO DEL EXPLORADOR ÉTICO',
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.goldLight,
-                          letterSpacing: 1.0,
+                      Expanded(
+                        child: Text(
+                          'DECÁLOGO DEL EXPLORADOR ÉTICO',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.goldLight,
+                            letterSpacing: 0.8,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -420,21 +430,23 @@ class _CommunityScreenState extends State<CommunityScreen> {
                             ),
                           ),
                           const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: AppColors.terracotta.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              rev.destination,
-                              style: GoogleFonts.spaceGrotesk(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.goldLight,
+                          Flexible(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: AppColors.terracotta.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(6),
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                rev.destination,
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.goldLight,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         ],
