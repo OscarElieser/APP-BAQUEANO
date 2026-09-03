@@ -349,47 +349,95 @@ class HelpScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Icon(Icons.support_agent_rounded, color: AppColors.gold, size: 28),
                       const SizedBox(width: 10),
-                      Text(
-                        '¿Tienes una consulta específica o necesitas apoyo en ruta?',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                      Expanded(
+                        child: Text(
+                          '¿Tienes una consulta específica o necesitas apoyo en ruta?',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 8),
                   Text(
                     'Nuestro equipo de soporte territorial y asistencia al viajero está disponible para ayudarte en tu expedición.',
                     style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.4),
                   ),
                   const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 12,
-                    runSpacing: 10,
-                    children: [
-                      BaqueanoButton(
-                        text: 'WHATSAPP DE SOPORTE',
-                        icon: const Icon(Icons.chat, size: 16, color: Colors.white),
-                        variant: BaqueanoButtonVariant.primary,
-                        height: 44,
-                        onPressed: () async {
-                          final uri = Uri.parse(AppConstants.supportWhatsApp);
-                          if (await canLaunchUrl(uri)) {
-                            await launchUrl(uri, mode: LaunchMode.externalApplication);
-                          } else if (context.mounted) {
-                            _showDirectSupportModal(context);
-                          }
-                        },
-                      ),
-                      BaqueanoButton(
-                        text: 'ENVIAR CORREO',
-                        icon: const Icon(Icons.email_outlined, size: 16, color: AppColors.textDark),
-                        variant: BaqueanoButtonVariant.gold,
-                        height: 44,
-                        onPressed: () => _handleSendEmail(context),
-                      ),
-                    ],
+                  LayoutBuilder(
+                    builder: (context, btnConstraints) {
+                      final isNarrow = btnConstraints.maxWidth < 480;
+
+                      if (isNarrow) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            BaqueanoButton(
+                              text: 'WHATSAPP DE SOPORTE',
+                              icon: const Icon(Icons.chat, size: 16, color: Colors.white),
+                              variant: BaqueanoButtonVariant.primary,
+                              height: 48,
+                              width: double.infinity,
+                              onPressed: () async {
+                                final uri = Uri.parse(AppConstants.supportWhatsApp);
+                                if (await canLaunchUrl(uri)) {
+                                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                } else if (context.mounted) {
+                                  _showDirectSupportModal(context);
+                                }
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            BaqueanoButton(
+                              text: 'ENVIAR CORREO',
+                              icon: const Icon(Icons.email_outlined, size: 16, color: AppColors.textDark),
+                              variant: BaqueanoButtonVariant.gold,
+                              height: 48,
+                              width: double.infinity,
+                              onPressed: () => _handleSendEmail(context),
+                            ),
+                          ],
+                        );
+                      }
+
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: BaqueanoButton(
+                              text: 'WHATSAPP DE SOPORTE',
+                              icon: const Icon(Icons.chat, size: 16, color: Colors.white),
+                              variant: BaqueanoButtonVariant.primary,
+                              height: 48,
+                              onPressed: () async {
+                                final uri = Uri.parse(AppConstants.supportWhatsApp);
+                                if (await canLaunchUrl(uri)) {
+                                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                } else if (context.mounted) {
+                                  _showDirectSupportModal(context);
+                                }
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: BaqueanoButton(
+                              text: 'ENVIAR CORREO',
+                              icon: const Icon(Icons.email_outlined, size: 16, color: AppColors.textDark),
+                              variant: BaqueanoButtonVariant.gold,
+                              height: 48,
+                              onPressed: () => _handleSendEmail(context),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
