@@ -70,21 +70,24 @@ class InfiniteDestinationsGallery extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.4), width: 0.8),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.swipe_rounded, size: 13, color: AppColors.gold),
-                  const SizedBox(width: 6),
-                  Text(
-                    'DESLIZA PARA EXPLORAR · ${destinations.length} DESTINOS VERIFICADOS',
-                    style: GoogleFonts.spaceGrotesk(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 0.8,
-                      color: AppColors.gold,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.swipe_rounded, size: 13, color: AppColors.gold),
+                    const SizedBox(width: 6),
+                    Text(
+                      'DESLIZA · ${destinations.length} DESTINOS VERIFICADOS',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.8,
+                        color: AppColors.gold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

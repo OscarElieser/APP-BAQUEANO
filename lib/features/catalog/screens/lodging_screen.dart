@@ -1,3 +1,23 @@
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — ALOJAMIENTOS SOSTENIBLES & ECO-LODGES
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Conectar a los exploradores con cabañas bioclimáticas, eco-lodges y fincas
+//   agroecológicas que preservan la biodiversidad de Nicaragua.
+// - Brindar una interfaz de reservación directa con anfitriones rurales sin
+//   intermediarios abusivos.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - `GridView.builder` con `SliverGridDelegateWithMaxCrossAxisExtent` y altura
+//   dimensionada (`mainAxisExtent: 490`) para prevenir desbordamientos verticales.
+// - Etiquetas de amenidades con `TextOverflow.ellipsis` y `Flexible` en precios.
+// - Integración directa con el flujo de reserva `CheckoutModal`.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `LodgingScreen`: Catálogo visual de alojamientos bioclimáticos.
+// ============================================================================
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
@@ -25,12 +45,13 @@ class LodgingScreen extends StatelessWidget {
           vertical: 24.0,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SectionHeader(
               tag: 'HOSPEDAJE SOSTENIBLE',
               title: '🏨 Eco-Lodges & Cabañas Bioclimáticas',
               subtitle: 'Duerme bajo el dosel de la nebliselva, en las faldas de volcanes o frente a cañones ancestrales.',
+              isCentered: true,
             ),
             const SizedBox(height: 20),
 
@@ -39,7 +60,7 @@ class LodgingScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: isDesktop ? 450 : 550,
-                mainAxisExtent: 440,
+                mainAxisExtent: isDesktop ? 475 : 490,
                 crossAxisSpacing: 18,
                 mainAxisSpacing: 18,
               ),
@@ -57,11 +78,11 @@ class LodgingScreen extends StatelessWidget {
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                         child: Image.network(
                           lodge.imageUrl,
-                          height: 180,
+                          height: 175,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) => Container(
-                            height: 180,
+                            height: 175,
                             color: AppColors.primaryLight,
                             child: const Center(child: Icon(Icons.hotel, size: 48, color: AppColors.gold)),
                           ),
@@ -77,13 +98,24 @@ class LodgingScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   lodge.type.toUpperCase(),
-                                  style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.jungleGreenLight),
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.jungleGreenLight,
+                                  ),
                                 ),
                                 Row(
                                   children: [
                                     const Icon(Icons.star, color: AppColors.gold, size: 14),
                                     const SizedBox(width: 4),
-                                    Text('${lodge.rating}', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
+                                    Text(
+                                      '${lodge.rating}',
+                                      style: GoogleFonts.spaceGrotesk(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -91,22 +123,28 @@ class LodgingScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               lodge.name,
-                              style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.textLight),
+                              style: GoogleFonts.montserrat(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.textLight,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               lodge.location,
                               style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 6),
                             Text(
                               lodge.description,
-                              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.35),
+                              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.35),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 8),
                             Wrap(
                               spacing: 6,
                               runSpacing: 4,
@@ -117,7 +155,12 @@ class LodgingScreen extends StatelessWidget {
                                     color: AppColors.primaryDark,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: Text('🌿 $a', style: GoogleFonts.inter(fontSize: 10, color: AppColors.goldLight)),
+                                  child: Text(
+                                    '🌿 $a',
+                                    style: GoogleFonts.inter(fontSize: 10, color: AppColors.goldLight),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 );
                               }).toList(),
                             ),
@@ -125,10 +168,19 @@ class LodgingScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  '\$${lodge.pricePerNightUsd.toInt()} USD / noche',
-                                  style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w900, color: AppColors.gold),
+                                Flexible(
+                                  child: Text(
+                                    '\$${lodge.pricePerNightUsd.toInt()} USD / noche',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 14.5,
+                                      fontWeight: FontWeight.w900,
+                                      color: AppColors.gold,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
+                                const SizedBox(width: 8),
                                 BaqueanoButton(
                                   text: 'Reservar Estadía',
                                   variant: BaqueanoButtonVariant.primary,
