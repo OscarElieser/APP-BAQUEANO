@@ -73,8 +73,18 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/lugares/
+    - assets/images/comida/
+    - assets/images/rios_y_playas/
+    - assets/images/discotecas/
+    - assets/images/hospedaje/
     - assets/audio/
     - assets/videos/
+    - assets/videos/lugares/
+    - assets/videos/comida/
+    - assets/videos/rios_y_playas/
+    - assets/videos/discotecas/
+    - assets/videos/hospedaje/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
