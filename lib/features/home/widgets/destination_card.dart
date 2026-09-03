@@ -20,6 +20,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
@@ -296,19 +297,48 @@ class _DestinationCardState extends State<DestinationCard> {
                 Wrap(
                   spacing: 6,
                   runSpacing: 4,
-                  children: destination.tags.take(3).map((tag) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryLight.withValues(alpha: 0.4),
-                        borderRadius: BorderRadius.circular(6),
+                  children: [
+                    ...destination.tags.take(2).map((tag) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight.withValues(alpha: 0.4),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '#$tag',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.goldLight),
+                        ),
+                      );
+                    }),
+                    InkWell(
+                      onTap: () => context.push('/campana-ambiental'),
+                      borderRadius: BorderRadius.circular(6),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: AppColors.jungleGreen.withValues(alpha: 0.25),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: AppColors.jungleGreenLight.withValues(alpha: 0.6)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text('🌿', style: TextStyle(fontSize: 10)),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Cuidado Ambiental',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 10,
+                                color: AppColors.jungleGreenLight,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: Text(
-                        '#$tag',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.goldLight),
-                      ),
-                    );
-                  }).toList(),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 14),

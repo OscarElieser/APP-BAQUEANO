@@ -41,6 +41,7 @@ import '../features/emergency/screens/emergency_sos_screen.dart';
 import '../features/history/screens/expedition_history_screen.dart';
 import '../features/map/screens/map_screen.dart';
 import '../features/messaging/screens/host_messaging_screen.dart';
+import '../features/environmental/screens/environmental_campaign_screen.dart';
 import '../features/notifications/screens/notifications_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
 import '../features/country_history/screens/country_history_screen.dart';
@@ -139,6 +140,11 @@ class AppRouter {
       GoRoute(
         path: '/destinos',
         redirect: (_, __) => '/turismo',
+      ),
+      // Campaña Ambiental y Cuidado de Recursos
+      GoRoute(
+        path: '/campana-ambiental',
+        builder: (context, state) => const EnvironmentalCampaignScreen(),
       ),
       // Historia de mi país (Nicaragua y modular)
       GoRoute(

@@ -299,17 +299,56 @@ class _LodgingScreenState extends State<LodgingScreen> {
                       spot.reservationInfo ?? 'Contacto directo con la administración.',
                       style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white70, height: 1.4),
                     ),
-                    if (spot.priceRange != null) ...[
-                      const SizedBox(height: 8),
-                      Text(
-                        'Tarifa Estimada: ${spot.priceRange}',
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.jungleGreenLight,
-                        ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Contenedor Destacado de Tarifa en Modal
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryDark,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.5), width: 1.2),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppColors.jungleGreen.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ],
+                      child: const Icon(Icons.payments_rounded, color: AppColors.jungleGreenLight, size: 20),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'TARIFA ESTIMADA DE HOSPEDAJE',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.goldLight,
+                              letterSpacing: 0.8,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            spot.priceRange ?? '\$${spot.pricePerNightUsd.toInt()} USD / noche',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.jungleGreenLight,
+                              height: 1.3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -752,7 +791,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: isDesktop ? 450 : 550,
-                mainAxisExtent: isDesktop ? 510 : 540,
+                mainAxisExtent: isDesktop ? 545 : 575,
                 crossAxisSpacing: 18,
                 mainAxisSpacing: 18,
               ),
@@ -872,18 +911,69 @@ class _LodgingScreenState extends State<LodgingScreen> {
                             ),
                             const SizedBox(height: 12),
 
-                            // Precio / Rango
-                            Text(
-                              lodge.priceRange ?? '\$${lodge.pricePerNightUsd.toInt()} USD / noche',
-                              style: GoogleFonts.montserrat(
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w800,
-                                color: AppColors.jungleGreenLight,
+                            const SizedBox(height: 10),
+
+                            // Contenedor Destacado de Rango de Tarifa
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryDark.withValues(alpha: 0.92),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: AppColors.gold.withValues(alpha: 0.45), width: 1.1),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.25),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.gold.withValues(alpha: 0.15),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: const Icon(Icons.payments_rounded, color: AppColors.goldLight, size: 16),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'RANGO DE PRECIO ESTIMADO',
+                                          style: GoogleFonts.spaceGrotesk(
+                                            fontSize: 9.5,
+                                            fontWeight: FontWeight.w800,
+                                            color: AppColors.goldLight,
+                                            letterSpacing: 0.8,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 1),
+                                        Text(
+                                          lodge.priceRange ?? '\$${lodge.pricePerNightUsd.toInt()} USD / noche',
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 12.5,
+                                            fontWeight: FontWeight.w800,
+                                            color: AppColors.jungleGreenLight,
+                                            height: 1.25,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 10),
 
                             // Botones de Acción
                             Row(

@@ -20,8 +20,12 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/badge_chip.dart';
+import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../widgets/baqueano_standard.dart';
@@ -75,7 +79,101 @@ class _HomeScreenState extends State<HomeScreen> {
             // ----------------------------------------------------------------
             const InteractiveImpactSection(),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
+
+            // ----------------------------------------------------------------
+            // 2.5 BANNER MONUMENTAL: CAMPAÑA AMBIENTAL & CUIDADO DE RECURSOS
+            // ----------------------------------------------------------------
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      const Color(0xFF064E3B), // Verde bosque profundo
+                      AppColors.primaryDark,
+                      const Color(0xFF082B35),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(color: AppColors.jungleGreenLight, width: 1.4),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.jungleGreen.withValues(alpha: 0.25),
+                      blurRadius: 18,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.jungleGreen.withValues(alpha: 0.25),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.jungleGreenLight),
+                          ),
+                          child: const Text('🌿', style: TextStyle(fontSize: 24)),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'MISIÓN FUNDAMENTAL DE BAQUEANO',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.goldLight,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                              Text(
+                                'Campaña Ambiental & Cuidado de Nuestros Recursos',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 15.5,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Sensibilización activa para turistas nacionales e internacionales: protejamos los volcanes, lagunas, arrecifes, nebliselvas y fauna silvestre de Nicaragua.',
+                      style: GoogleFonts.inter(
+                        fontSize: 12.5,
+                        color: Colors.white.withValues(alpha: 0.85),
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    BaqueanoButton(
+                      text: 'CONOCER Y SUMARME AL COMPROMISO VERDE',
+                      icon: const Icon(Icons.eco_rounded, size: 18),
+                      variant: BaqueanoButtonVariant.primary,
+                      height: 44,
+                      width: double.infinity,
+                      onPressed: () => context.push('/campana-ambiental'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
 
             // ----------------------------------------------------------------
             // 3. GALERÍA INFINITA 3D DE ALIADOS LOCALES & COOPERATIVAS (Flip Cards)
