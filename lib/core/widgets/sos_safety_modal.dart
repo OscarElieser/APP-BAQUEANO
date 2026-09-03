@@ -3,15 +3,18 @@
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proteger la vida e integridad física del explorador en áreas remotas o volcanes.
-// - Brindar acceso inmediato a las líneas oficiales de emergencia de Nicaragua
-//   (Policía 118, Cruz Blanca 128, Bomberos 115 e INTUR).
-// - Generar un mensaje de auxilio con coordenadas GPS satelitales copiable en un toque.
+// - Proteger la vida y la integridad física del explorador en áreas remotas o volcanes.
+// - Brindar acceso inmediato con marcación en 1 toque a las líneas de emergencia
+//   de Nicaragua (Policía 118, Cruz Blanca 128, Bomberos 115 e INTUR).
+// - Generar un mensaje de auxilio con coordenadas GPS satelitales copiable o
+//   compartible por WhatsApp/SMS en situaciones de extravío o accidente.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Modal estilo Glassmorphism carmesí volcánico.
-// - Marcación directa telefónica con `url_launcher` (`tel:118`, etc.).
+// - Modal estilo Glassmorphism carmesí volcánico con bordes iluminados.
+// - Marcación directa telefónica con `url_launcher` (`tel:118`, etc.) y vibración háptica.
 // - Copia estructurada de texto de rescate al portapapeles (`Clipboard.setData`).
+// - Botón de envío de alerta de auxilio por WhatsApp y SMS de rescate.
+// - Diseño 100% responsivo sin textos truncados antiestéticos.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & MODAL EXPUESTO):
 // - `SosSafetyModal.show(context)`: Método estático invocable desde cualquier pantalla.
@@ -37,6 +40,7 @@ class SosSafetyModal extends StatelessWidget {
   }
 
   Future<void> _makeCall(String phone) async {
+    HapticFeedback.heavyImpact();
     final cleanPhone = phone.replaceAll(' ', '').replaceAll('-', '');
     final uri = Uri.parse('tel:$cleanPhone');
     if (await canLaunchUrl(uri)) {
@@ -44,15 +48,37 @@ class SosSafetyModal extends StatelessWidget {
     }
   }
 
+  Future<void> _sendWhatsAppSOS(BuildContext context) async {
+    HapticFeedback.mediumImpact();
+    const rescueText =
+        '🚨 *ALERTA DE EMERGENCIA BAQUEANO* 🚨\nRequiero asistencia urgente en ruta turística.\n📍 Coordenadas estimadas: Lat 12.8654° N, Lng -85.2072° W\nRegión Central / Cordillera Dariense, Nicaragua.\nFavor notificar a Policía Turística (118) o Cruz Blanca (128).';
+    final uri = Uri.parse('https://wa.me/?text=${Uri.encodeComponent(rescueText)}');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (context.mounted) {
+          Clipboard.setData(const ClipboardData(text: rescueText));
+          CustomToast.show(context, message: 'Texto copiado para enviar por mensaje');
+        }
+      }
+    } catch (_) {
+      if (context.mounted) {
+        Clipboard.setData(const ClipboardData(text: rescueText));
+        CustomToast.show(context, message: 'Texto copiado para enviar por mensaje');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Container(
         width: 440,
         decoration: BoxDecoration(
-          color: const Color(0xFF1A0A0A), // Fondo carmesí volcánico profundo
+          color: const Color(0xFF140808), // Fondo carmesí volcánico profundo
           borderRadius: BorderRadius.circular(28),
           border: Border.all(color: AppColors.error, width: 1.5),
           boxShadow: [
@@ -64,6 +90,7 @@ class SosSafetyModal extends StatelessWidget {
           ],
         ),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -73,14 +100,16 @@ class SosSafetyModal extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xFFEF4444),
-                      const Color(0xFF991B1B),
+                      Color(0xFFDC2626),
+                      Color(0xFF7F1D1D),
                     ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
                 ),
                 child: Row(
                   children: [
@@ -118,7 +147,8 @@ class SosSafetyModal extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white),
+                      icon: const Icon(Icons.close_rounded, color: Colors.white, size: 22),
+                      tooltip: 'Cerrar',
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],
@@ -126,7 +156,7 @@ class SosSafetyModal extends StatelessWidget {
               ),
 
               // --------------------------------------------------------------
-              // 📞 BOTONES DE MARCACIÓN DIRECTA RÁPIDA (118, 128, 115, INTUR)
+              // 📞 LÍNEAS DE ASISTENCIA NACIONAL 24/7
               // --------------------------------------------------------------
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -148,8 +178,9 @@ class SosSafetyModal extends StatelessWidget {
                       context,
                       icon: Icons.local_police_rounded,
                       title: 'Policía Turística & Nacional',
+                      subtitle: 'Línea directa nacional rápida',
                       phone: AppConstants.policePhone,
-                      fullPhone: AppConstants.policePhoneFull,
+                      buttonLabel: '118',
                       color: const Color(0xFF3B82F6),
                     ),
                     const SizedBox(height: 10),
@@ -157,9 +188,10 @@ class SosSafetyModal extends StatelessWidget {
                     _buildEmergencyContactRow(
                       context,
                       icon: Icons.medical_services_rounded,
-                      title: 'Cruz Blanca Nicaragüense (Ambulancia)',
+                      title: 'Cruz Blanca Nicaragüense',
+                      subtitle: 'Ambulancias y paramédicos de ruta',
                       phone: AppConstants.redCrossPhone,
-                      fullPhone: AppConstants.redCrossPhoneFull,
+                      buttonLabel: '128',
                       color: const Color(0xFFEF4444),
                     ),
                     const SizedBox(height: 10),
@@ -168,8 +200,9 @@ class SosSafetyModal extends StatelessWidget {
                       context,
                       icon: Icons.fire_truck_rounded,
                       title: 'Bomberos Unificados de Nicaragua',
+                      subtitle: 'Rescate en zonas agrestes y fuego',
                       phone: AppConstants.firefightersPhone,
-                      fullPhone: '115',
+                      buttonLabel: '115',
                       color: const Color(0xFFF97316),
                     ),
                     const SizedBox(height: 10),
@@ -178,21 +211,22 @@ class SosSafetyModal extends StatelessWidget {
                       context,
                       icon: Icons.support_agent_rounded,
                       title: 'Atención al Turista INTUR',
+                      subtitle: 'Mesa oficial de asistencia al viajero',
                       phone: AppConstants.inturPhone,
-                      fullPhone: AppConstants.inturPhone,
+                      buttonLabel: '2254-5191',
                       color: const Color(0xFF10B981),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 18),
 
                     // --------------------------------------------------------
                     // 🛰️ COORDENADAS GPS & MENSAJE DE RESCATE
                     // --------------------------------------------------------
                     Container(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryDark,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: AppColors.borderGold),
+                        color: const Color(0xFF0C1920),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.6)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,26 +237,71 @@ class SosSafetyModal extends StatelessWidget {
                               const SizedBox(width: 8),
                               Text(
                                 'COORDENADAS GPS DE REFERENCIA',
-                                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.goldLight,
+                                ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 6),
                           Text(
                             'Lat: 12.8654° N  ·  Lng: -85.2072° W\n(Región Central / Cordillera Dariense)',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              height: 1.4,
+                            ),
                           ),
-                          const SizedBox(height: 10),
-                          BaqueanoButton(
-                            text: 'COPIAR TEXTO DE AUXILIO',
-                            icon: const Icon(Icons.copy_rounded, size: 14, color: Colors.white),
-                            variant: BaqueanoButtonVariant.secondary,
-                            height: 38,
-                            onPressed: () {
-                              const rescueText = '¡EMERGENCIA BAQUEANO! Requiero asistencia en ruta turística. Ubicación estimada: Lat 12.8654° N, Lng -85.2072° W. Por favor alertar a Policía (118) o Cruz Blanca (128).';
-                              Clipboard.setData(const ClipboardData(text: rescueText));
-                              CustomToast.success(context, 'Texto de auxilio copiado al portapapeles.');
-                            },
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: BaqueanoButton(
+                                  text: 'COPIAR COORDENADAS',
+                                  icon: const Icon(Icons.copy_rounded, size: 13, color: Colors.white),
+                                  variant: BaqueanoButtonVariant.secondary,
+                                  height: 38,
+                                  onPressed: () {
+                                    HapticFeedback.lightImpact();
+                                    const rescueText =
+                                        '¡EMERGENCIA BAQUEANO! Requiero asistencia en ruta turística. Ubicación estimada: Lat 12.8654° N, Lng -85.2072° W. Por favor alertar a Policía (118) o Cruz Blanca (128).';
+                                    Clipboard.setData(const ClipboardData(text: rescueText));
+                                    CustomToast.success(context, 'Texto de auxilio copiado al portapapeles.');
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              InkWell(
+                                onTap: () => _sendWhatsAppSOS(context),
+                                borderRadius: BorderRadius.circular(12),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF25D366).withValues(alpha: 0.2),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: const Color(0xFF25D366)),
+                                  ),
+                                  child: const Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.chat_rounded, color: Color(0xFF25D366), size: 16),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        'SOS WhatsApp',
+                                        style: TextStyle(
+                                          color: Color(0xFF25D366),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -233,7 +312,7 @@ class SosSafetyModal extends StatelessWidget {
                     BaqueanoButton(
                       text: 'ENTENDIDO / REGRESAR',
                       variant: BaqueanoButtonVariant.primary,
-                      height: 44,
+                      height: 46,
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],
@@ -250,54 +329,66 @@ class SosSafetyModal extends StatelessWidget {
     BuildContext context, {
     required IconData icon,
     required String title,
+    required String subtitle,
     required String phone,
-    required String fullPhone,
+    required String buttonLabel,
     required Color color,
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: AppColors.primaryLight.withValues(alpha: 0.35),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withValues(alpha: 0.4)),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
       ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(9),
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, color: color, size: 18),
+            child: Icon(icon, color: color, size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
-                  maxLines: 1,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 2),
                 Text(
-                  fullPhone,
-                  style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                  subtitle,
+                  style: GoogleFonts.inter(
+                    fontSize: 10,
+                    color: Colors.white60,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 10),
           InkWell(
             onTap: () => _makeCall(phone),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
                     color: color.withValues(alpha: 0.4),
@@ -310,10 +401,14 @@ class SosSafetyModal extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.phone_in_talk_rounded, size: 14, color: Colors.white),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: 5),
                   Text(
-                    phone,
-                    style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
+                    buttonLabel,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),

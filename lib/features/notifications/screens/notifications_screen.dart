@@ -94,74 +94,84 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
             ),
             const SizedBox(height: 14),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(
-                  child: SectionHeader(
-                    tag: 'ALERTAS & COMUNICACIÓN EN VIVO',
-                    title: '🔔 Centro de Notificaciones',
-                    subtitle: 'Monitorea el estado real de tus expediciones, pagos y mensajes con anfitriones.',
-                  ),
+                const SectionHeader(
+                  tag: 'ALERTAS & COMUNICACIÓN EN VIVO',
+                  title: '🔔 Centro de Notificaciones',
+                  subtitle: 'Monitorea el estado real de tus expediciones, pagos y mensajes con anfitriones.',
+                  isCentered: true,
                 ),
-                if (unreadCount > 0)
-                  TextButton.icon(
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.goldLight,
-                      backgroundColor: AppColors.primaryDark,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: AppColors.borderGold)),
+                if (unreadCount > 0) ...[
+                  const SizedBox(height: 6),
+                  Center(
+                    child: TextButton.icon(
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColors.goldLight,
+                        backgroundColor: AppColors.primaryDark,
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          side: const BorderSide(color: AppColors.borderGold),
+                        ),
+                      ),
+                      icon: const Icon(Icons.done_all_rounded, size: 16),
+                      label: Text('Marcar todas leídas ($unreadCount)',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700)),
+                      onPressed: () {
+                        ref.read(bookingCommunicationProvider.notifier).markAllNotificationsAsRead();
+                        CustomToast.success(context, 'Notificaciones marcadas como leídas');
+                      },
                     ),
-                    icon: const Icon(Icons.done_all_rounded, size: 16),
-                    label: Text('Marcar leídas ($unreadCount)', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700)),
-                    onPressed: () {
-                      ref.read(bookingCommunicationProvider.notifier).markAllNotificationsAsRead();
-                      CustomToast.success(context, 'Notificaciones marcadas como leídas');
-                    },
                   ),
+                ],
               ],
             ),
             const SizedBox(height: 16),
 
             // Pestañas de Filtrado
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              child: Row(
-                children: [
-                  {'id': 'Todas', 'label': 'Todas ($unreadCount no leídas)'},
-                  {'id': 'reservas', 'label': '💳 Reservas & Pagos'},
-                  {'id': 'mensajes', 'label': '💬 Mensajes'},
-                  {'id': 'seguridad', 'label': '⚠️ Seguridad & Clima'},
-                  {'id': 'comunidad', 'label': '🌿 Comunidad Baqueano'},
-                ].map((cat) {
-                  final isSelected = _selectedCategory == cat['id'];
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: InkWell(
-                      onTap: () => setState(() => _selectedCategory = cat['id']!),
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: isSelected ? AppColors.terracotta : AppColors.primaryDark,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: isSelected ? AppColors.gold : AppColors.borderLight,
+            Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    {'id': 'Todas', 'label': 'Todas ($unreadCount no leídas)'},
+                    {'id': 'reservas', 'label': '💳 Reservas & Pagos'},
+                    {'id': 'mensajes', 'label': '💬 Mensajes'},
+                    {'id': 'seguridad', 'label': '⚠️ Seguridad & Clima'},
+                    {'id': 'comunidad', 'label': '🌿 Comunidad Baqueano'},
+                  ].map((cat) {
+                    final isSelected = _selectedCategory == cat['id'];
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: InkWell(
+                        onTap: () => setState(() => _selectedCategory = cat['id']!),
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: isSelected ? AppColors.terracotta : AppColors.primaryDark,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: isSelected ? AppColors.gold : AppColors.borderLight,
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          cat['label']!,
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 12,
-                            fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
-                            color: isSelected ? Colors.white : AppColors.textMuted,
+                          child: Text(
+                            cat['label']!,
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 12,
+                              fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                              color: isSelected ? Colors.white : AppColors.textMuted,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
 

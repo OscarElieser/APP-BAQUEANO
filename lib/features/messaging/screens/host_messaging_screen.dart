@@ -381,9 +381,13 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> {
               children: [
                 Row(
                   children: [
-                    Text(
-                      host.hostName,
-                      style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                    Flexible(
+                      child: Text(
+                        host.hostName,
+                        style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     const SizedBox(width: 6),
                     const Icon(Icons.verified_rounded, color: AppColors.gold, size: 14),
@@ -417,31 +421,33 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> {
     );
   }
 
-  /// Marcador cuando la conversación aún no ha comenzado (hasta que el usuario contacte)
+  /// Marcador cuando la conversación aún no ha comenzado (100% responsivo y sin overflow)
   Widget _buildEmptyChatPlaceholder(HostContact host, RealExpeditionRecord? booking) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(28.0),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 14.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             CircleAvatar(
-              radius: 36,
+              radius: 34,
               backgroundImage: NetworkImage(host.avatarUrl),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
             Text(
               'Canal con ${host.hostName}',
-              style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+              style: GoogleFonts.spaceGrotesk(fontSize: 15, fontWeight: FontWeight.w800, color: Colors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
             Text(
               '${host.businessName} • ${host.department}',
-              style: GoogleFonts.inter(fontSize: 12, color: AppColors.goldLight),
+              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.goldLight),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
             if (booking != null)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -464,10 +470,10 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> {
                   ],
                 ),
               ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             Text(
               'Aún no has iniciado conversación con este anfitrión.\nEscribe tu consulta o usa una sugerencia rápida para coordinar tu llegada o enviar tu comprobante de pago.',
-              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.4),
+              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.35),
               textAlign: TextAlign.center,
             ),
           ],
@@ -550,6 +556,80 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> {
     );
   }
 
+  void _showAttachmentDialog(BuildContext context, String? bookingCode) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF082B35),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(22),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 44,
+                height: 4,
+                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Adjuntar Información al Anfitrión',
+              style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+            ),
+            const SizedBox(height: 14),
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
+                child: const Icon(Icons.receipt_long_rounded, color: AppColors.gold, size: 22),
+              ),
+              title: Text('Comprobante Bancario (BAC / Banpro / LaFise)', style: GoogleFonts.spaceGrotesk(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
+              subtitle: Text('Enviar notificación de transferencia realizada', style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+              onTap: () {
+                Navigator.pop(ctx);
+                _sendMessage('📄 [Comprobante Adjunto]: Transferencia bancaria exitosa de reserva ${bookingCode ?? "BAQ-78219"}.', bookingCode: bookingCode);
+                CustomToast.success(context, 'Comprobante adjuntado');
+              },
+            ),
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(color: AppColors.jungleGreen.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
+                child: const Icon(Icons.add_location_alt_rounded, color: AppColors.jungleGreenLight, size: 22),
+              ),
+              title: Text('Compartir Coordenadas GPS de Llegada', style: GoogleFonts.spaceGrotesk(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
+              subtitle: Text('Enviar punto GPS en tiempo real para encuentro', style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+              onTap: () {
+                Navigator.pop(ctx);
+                _sendMessage('📍 [Ubicación GPS Compartida]: Lat: 12.8654° N, Lng: -85.2072° W. ¡Voy en camino!', bookingCode: bookingCode);
+                CustomToast.success(context, 'Ubicación GPS enviada');
+              },
+            ),
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(color: AppColors.terracotta.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
+                child: const Icon(Icons.photo_camera_rounded, color: AppColors.terracottaLight, size: 22),
+              ),
+              title: Text('Foto o Captura de Pantalla', style: GoogleFonts.spaceGrotesk(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
+              subtitle: Text('Adjuntar imagen de confirmación', style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+              onTap: () {
+                Navigator.pop(ctx);
+                _sendMessage('📸 [Imagen Adjunta]: Foto del depósito / recibo físico en mano.', bookingCode: bookingCode);
+                CustomToast.success(context, 'Imagen adjuntada');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildMessagingInputBar(HostContact host, String? bookingCode) {
     return Container(
       decoration: BoxDecoration(
@@ -590,10 +670,8 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.attach_file_rounded, color: AppColors.goldLight, size: 20),
-                  tooltip: 'Adjuntar Comprobante Bancario',
-                  onPressed: () {
-                    _sendMessage('📄 [Comprobante Adjunto]: Transferencia bancaria exitosa a su cuenta.', bookingCode: bookingCode);
-                  },
+                  tooltip: 'Adjuntar Comprobante o GPS',
+                  onPressed: () => _showAttachmentDialog(context, bookingCode),
                 ),
                 Expanded(
                   child: TextField(
