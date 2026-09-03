@@ -165,6 +165,8 @@ class BookingAndCommunicationService extends ChangeNotifier {
     'h-6': [], // Don Pedro Martínez (Hotel Darío, Granada)
     'h-7': [], // Sofía Alemán (Paradiso Laguna de Apoyo)
     'h-8': [], // Captain Jack Hodgson (Arenas Beach, Corn Island)
+    'h-9': [], // Don Reynaldo Morales (El Chocoyero, Managua)
+    'h-10': [], // Don Álvaro Solórzano (Las Nubes, El Crucero, Managua)
   };
 
   // Mapa reactivo de estado "Escribiendo..." por anfitrión
@@ -264,6 +266,10 @@ class BookingAndCommunicationService extends ChangeNotifier {
       hostKey = 'h-7';
     } else if (lowerHost.contains('corn') || lowerHost.contains('arenas')) {
       hostKey = 'h-8';
+    } else if (lowerHost.contains('chocoyero') || lowerHost.contains('reynaldo')) {
+      hostKey = 'h-9';
+    } else if (lowerHost.contains('crucero') || lowerHost.contains('nubes') || lowerHost.contains('álvaro')) {
+      hostKey = 'h-10';
     }
 
     _activeHostId = hostKey;
@@ -509,6 +515,47 @@ class BookingAndCommunicationService extends ChangeNotifier {
           return {
             'name': 'Captain Jack (Arenas Beach)',
             'reply': '¡Hello my friend! Southwest Bay tiene las aguas más mansas y cristalinas de Corn Island. Estamos listos para atenderle en Arenas Beach Hotel.',
+          };
+        }
+
+      case 'h-9': // Don Reynaldo Morales (Cooperativa Ecoturística El Chocoyero, Managua)
+        if (q.contains('comprobante') || q.contains('pago')) {
+          return {
+            'name': 'Don Reynaldo Morales',
+            'reply': '¡Recibido el pago! Su reserva para el recorrido de avistamiento en El Chocoyero está confirmada. Les esperamos con los binoculares listos.',
+          };
+        } else if (q.contains('hora') || q.contains('chocoyo') || q.contains('salida') || q.contains('llegada')) {
+          return {
+            'name': 'Don Reynaldo Morales',
+            'reply': 'El mejor horario para ver a los miles de chocoyos salir de sus nidos en los farallones es de 6:00 AM a 8:00 AM, o al atardecer entre 4:00 PM y 5:30 PM cuando regresan en bandadas.',
+          };
+        } else if (q.contains('precio') || q.contains('tarifa') || q.contains('cuanto')) {
+          return {
+            'name': 'Don Reynaldo Morales',
+            'reply': 'La entrada a la reserva comunitaria cuesta C\$ 70 Córdobas nacionales y \$5 USD para extranjeros. El tour con guía campesino cuesta C\$ 150 Córdobas.',
+          };
+        } else {
+          return {
+            'name': 'Don Reynaldo Morales',
+            'reply': '¡Buenas tardes! Les saluda Don Reynaldo desde la Reserva Natural El Chocoyero en Ticuantepe, Managua. Estamos a la orden para guiarles por nuestras cascadas y senderos.',
+          };
+        }
+
+      case 'h-10': // Don Álvaro Solórzano (Las Nubes, El Crucero, Managua)
+        if (q.contains('comprobante') || q.contains('pago')) {
+          return {
+            'name': 'Don Álvaro Solórzano',
+            'reply': 'Pago confirmado en firme. Su cabaña de montaña en Las Nubes está reservada con chimenea y vista al Pacífico.',
+          };
+        } else if (q.contains('clima') || q.contains('frio') || q.contains('ropa')) {
+          return {
+            'name': 'Don Álvaro Solórzano',
+            'reply': 'Aquí en El Crucero estamos a 950 msnm con clima templado de 17°C a 20°C. Traigan suéter o chaqueta liviana para las noches frescas y las fogatas.',
+          };
+        } else {
+          return {
+            'name': 'Don Álvaro Solórzano',
+            'reply': '¡Saludos cordiales! Don Álvaro a sus órdenes en Cabañas Las Nubes, El Crucero. La mejor vista de Managua y el Pacífico con café de estricta altura recién tostado.',
           };
         }
 

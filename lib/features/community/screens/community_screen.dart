@@ -210,6 +210,9 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
     bool isSigningInWithGoogle = false;
 
     final destinations = [
+      'Reserva Natural El Chocoyero (Managua)',
+      'Playas de Pochomil & Masachapa (Managua)',
+      'El Crucero & Las Nubes (Managua)',
       'Volcán Cerro Negro',
       'Cañón de Somoto',
       'Isla de Ometepe',

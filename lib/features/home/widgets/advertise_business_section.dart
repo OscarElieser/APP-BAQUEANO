@@ -53,7 +53,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
     final descriptionCtrl = TextEditingController();
 
     String selectedCategory = 'Hospedaje / Eco-Lodges / Cabañas';
-    String selectedDepartment = 'Rivas';
+    String selectedDepartment = 'Managua';
 
     final List<String> categories = const [
       'Hospedaje / Eco-Lodges / Cabañas',

@@ -58,7 +58,14 @@ class HostContact {
 }
 
 class HostMessagingScreen extends ConsumerStatefulWidget {
-  const HostMessagingScreen({super.key});
+  final String? initialHostName;
+  final String? prefilledMessage;
+
+  const HostMessagingScreen({
+    super.key,
+    this.initialHostName,
+    this.prefilledMessage,
+  });
 
   @override
   ConsumerState<HostMessagingScreen> createState() => _HostMessagingScreenState();
@@ -152,6 +159,26 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
       phone: '+505 8851 8046',
       isOnline: true,
     ),
+    HostContact(
+      id: 'h-9',
+      hostName: 'Don Reynaldo Morales',
+      businessName: 'Cooperativa Ecoturística El Chocoyero',
+      role: 'Guardabosque Principal',
+      department: 'Managua (Ticuantepe)',
+      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+      phone: '+505 8899 7711',
+      isOnline: true,
+    ),
+    HostContact(
+      id: 'h-10',
+      hostName: 'Don Álvaro Solórzano',
+      businessName: 'Mirador & Cabañas Nebliselva Las Nubes',
+      role: 'Propietario & Baqueano de Montaña',
+      department: 'Managua (El Crucero)',
+      avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+      phone: '+505 8622 4400',
+      isOnline: true,
+    ),
   ];
 
   @override
@@ -161,6 +188,21 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     )..repeat();
+
+    if (widget.prefilledMessage != null && widget.prefilledMessage!.isNotEmpty) {
+      _textController.text = widget.prefilledMessage!;
+    }
+
+    if (widget.initialHostName != null && widget.initialHostName!.isNotEmpty) {
+      final query = widget.initialHostName!.toLowerCase();
+      final match = _hosts.firstWhere(
+        (h) => h.hostName.toLowerCase().contains(query) || h.businessName.toLowerCase().contains(query),
+        orElse: () => _hosts.first,
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(bookingCommunicationProvider).setActiveHost(match.id);
+      });
+    }
   }
 
   @override

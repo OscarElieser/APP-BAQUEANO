@@ -48,15 +48,28 @@ class BaqueanoAdaptiveImage extends StatelessWidget {
 
     Widget imageWidget;
 
+    final mediaQuery = MediaQuery.maybeOf(context);
+    final dpr = mediaQuery?.devicePixelRatio ?? 2.0;
+    final int? targetCacheWidth = (width != null && !width!.isInfinite)
+        ? (width! * dpr).round().clamp(100, 1200)
+        : (height != null && !height!.isInfinite)
+            ? null
+            : 800;
+    final int? targetCacheHeight = (height != null && !height!.isInfinite)
+        ? (height! * dpr).round().clamp(100, 1200)
+        : null;
+
     // Intención: Detectar si el recurso es local o remoto.
     // Mecanismo: Evaluación de prefijo 'assets/'.
-    // Importancia: Carga inmediata desde almacenamiento local a 60 FPS sin consumo de red.
+    // Importancia: Carga inmediata desde almacenamiento local a 60 FPS con límites de decodificación de memoria.
     if (cleanPath.startsWith('assets/')) {
       imageWidget = Image.asset(
         cleanPath,
         width: width,
         height: height,
         fit: fit,
+        cacheWidth: targetCacheWidth,
+        cacheHeight: targetCacheHeight,
         errorBuilder: (context, error, stackTrace) => _buildErrorFallback(),
       );
     } else if (cleanPath.startsWith('http://') || cleanPath.startsWith('https://')) {

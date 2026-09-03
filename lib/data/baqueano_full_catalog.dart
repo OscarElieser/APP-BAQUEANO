@@ -1420,6 +1420,32 @@ class BaqueanoFullCatalog {
       icon: '🌿',
       verified: true,
     ),
+    const BusinessModel(
+      id: 'coop-chocoyero',
+      name: 'Cooperativa Ecoturística El Chocoyero',
+      type: 'guide_association',
+      department: 'Managua',
+      locationDetail: 'Reserva El Chocoyero, Ticuantepe',
+      phone: '+505 8899-7711',
+      priceRange: '\$',
+      sustainabilityBadge: 'Reserva Silvestre',
+      description: 'Santuario silvestre de anidación del perico verde del Pacífico entre farallones rocosos y cascadas. Guías campesinos nativos y cabañas rústicas.',
+      icon: '🦜',
+      verified: true,
+    ),
+    const BusinessModel(
+      id: 'cabanas-el-crucero',
+      name: 'Mirador & Cabañas Nebliselva Las Nubes',
+      type: 'lodge',
+      department: 'Managua',
+      locationDetail: 'Km 26 Carretera Sur, El Crucero',
+      phone: '+505 8622-4400',
+      priceRange: '\$\$',
+      sustainabilityBadge: 'Clima Fresco 18°C',
+      description: 'Alojamiento ecológico en la meseta de Managua a 950 msnm con clima templado. Mirador panorámico al Océano Pacífico y senderos de café.',
+      icon: '☁️',
+      verified: true,
+    ),
   ];
 
   // --- 9. EXPERIENCIAS / BITÁCORA COMUNITARIA ---

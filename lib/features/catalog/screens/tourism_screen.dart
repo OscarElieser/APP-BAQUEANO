@@ -44,7 +44,10 @@ class TourismScreen extends StatelessWidget {
               itemCount: circuits.length,
               itemBuilder: (context, index) {
                 final dest = circuits[index];
-                return DestinationCard(destination: dest);
+                return DestinationCard(
+                  key: ValueKey('tourism-dest-${dest.id}'),
+                  destination: dest,
+                );
               },
             ),
             const SizedBox(height: 80),

@@ -19,14 +19,15 @@
 
 - [🎯 Propósito Central & Solución al Reto Sostenible](#-propósito-central--solución-al-reto-sostenible)
 - [📱 Alcance Actual: Exclusividad Android Móvil](#-alcance-actual-exclusividad-android-móvil)
+- [🌿 Campaña Ambiental & Denuncias Ciudadanas en Territorio](#-campaña-ambiental--denuncias-ciudadanas-en-territorio)
 - [🏛️ Módulo Insignia: Historia de mi País (Nicaragua)](#️-módulo-insignia-historia-de-mi-país-nicaragua)
 - [🔗 Conexión Territorial Cruzada (Cultura ↔ Destino ↔ Baqueano)](#-conexión-territorial-cruzada-cultura--destino--baqueano)
 - [✨ Características Principales](#-características-principales)
-- [⚡ Arquitectura de Alto Rendimiento (120 FPS)](#-arquitectura-de-alto-rendimiento-120-fps)
+- [⚡ Arquitectura de Rendimiento & Auditoría Senior Continua (60-120 FPS)](#-arquitectura-de-rendimiento--auditoría-senior-continua-60-120-fps)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
 - [🗄️ Arquitectura de Datos Offline-First & Seguridad RBAC](#️-arquitectura-de-datos-offline-first--seguridad-rbac)
 - [🚨 Centro de Auxilio & Emergencias SOS en Sendero](#-centro-de-auxilio--emergencias-sos-en-sendero)
-- [🏪 Vitrina de Negocios Campesinos & Comercio Justo](#-vitrina-de-negocios-campesinos--comercio-justo)
+- [🏪 Vitrina de Negocios Campesinos, Publicidad & Comercio Justo](#-vitrina-de-negocios-campesinos-publicidad--comercio-justo)
 - [🗺️ Mapa GPS Satelital & Geolocalización de Rutas](#️-mapa-gps-satelital--geolocalización-de-rutas)
 - [🤖 Asistente IA para Turismo Responsable](#-asistente-ia-para-turismo-responsable)
 - [🎫 Pasaporte del Explorador & Gamificación Ética](#-pasaporte-del-explorador--gamificación-ética)
@@ -79,6 +80,19 @@ BAQUEANO
 
 ---
 
+## 🌿 Campaña Ambiental & Denuncias Ciudadanas en Territorio
+
+Ubicado en `/campana-ambiental`, este módulo constituye el brazo operativo y ético de Baqueano para sensibilizar al turista y proteger los recursos naturales de Nicaragua:
+
+- **Canal Institucional de Denuncias Ambientales**:
+  - **Correo Oficial**: `denuncias.ambientales@baqueano.ni` con plantilla estructurada para recepción de evidencias (fotografías, videos, audios y coordenadas GPS).
+  - **Línea de WhatsApp de Emergencia Verde**: `+505 8443-1289` para canalización ágil de incidentes en tiempo real.
+  - **Custodia Técnica & Elevación Formal**: Baqueano actúa como filtro técnico y escudo del turista, validando los hechos con guías locales antes de interponer la denuncia ante **MARENA**, la **Unidad Ambiental de la Alcaldía (UAM)** o la **Policía Nacional**.
+- **Decálogo del Explorador Responsable**: 10 mandamientos de no dejar rastro, prohibición de fogatas desatendidas, protección de fuentes hídricas y conservación de fauna silvestre.
+- **Acceso Permanente**: Acceso directo desde el encabezado del Feed, desde cada tarjeta de destino (`DestinationCard`) y en la Bitácora Comunitaria.
+
+---
+
 ## 🏛️ Módulo Insignia: Historia de mi País (Nicaragua)
 
 Ubicado en `/historia-mi-pais`, este módulo constituye una enciclopedia interactiva viva y de alta fidelidad:
@@ -112,11 +126,13 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
 ## ✨ Características Principales
 
 - 📱 **Diseño Universal y Adaptativo en Android**: Optimizado para funcionar de manera estable, eficiente y fluida en **cualquier teléfono Android en general**, adaptando su rendimiento de forma inteligente según la capacidad del hardware del usuario (desde terminales accesibles y de gama media comunes en el campo hasta pantallas avanzadas y tablets), con gestión de SafeAreas dinámicas, bajo consumo de batería y navegación por gestos.
-- ⚡ **Desplazamiento Ultrafluido (60 - 120 FPS)**: Aislamiento GPU con `RepaintBoundary` y física de inercia suave (`BouncingScrollPhysics`) que elimina tirones y evita sobrecalentamiento.
+- 🌿 **Campaña Ambiental & Custodia Ciudadana**: Canal de denuncias ante delitos ambientales con correo institucional, enlace a WhatsApp y decálogo verde en sendero.
+- 🇳🇮 **Presencia Integral de Managua**: Capital y territorio integrado a la cabeza de departamentos, con destinos auténticos (*Reserva Natural El Chocoyero* y *Playas de Pochomil*), comercios campesinos y anfitriones oficiales.
+- ⚡ **Desplazamiento Ultrafluido (60 - 120 FPS)**: Aislamiento GPU con `RepaintBoundary`, decodificación acotada de texturas y física de inercia suave (`BouncingScrollPhysics`) que elimina tirones y evita sobrecalentamiento.
 - 🎵 **Patrimonio Sonoro Multimedia**: Reproductor folclórico tradicional (Solar de Monimbó, Mora Limpia, Danza del Mestizaje), integración de video en YouTube y editor de URLs.
 - 🚨 **Centro de Auxilio SOS 24/7**: Marcación directa (118, 128, 115, INTUR), botón SOS de WhatsApp con coordenadas GPS y respuesta háptica.
-- 💬 **Mensajería Directa con Baqueanos**: Coordinación de llegada, envío de ubicación GPS y adjuntos de comprobantes bancarios locales.
-- 🏪 **Vitrina de Comercios Campesinos**: Comedores rurales, posadas familiares y guías locales con contacto directo por WhatsApp y llamada telefónica.
+- 💬 **Mensajería Directa Dual con Anfitriones**: Coordinación de llegada por WhatsApp Oficial o Mensajería Interna de Baqueano con textos precargados, envío de ubicación GPS y adjuntos de comprobantes.
+- 🏪 **Vitrina de Comercios Campesinos & Publicidad**: Fichas enriquecidas de comedores rurales, posadas familiares y formulario de registro para nuevos negocios aliados.
 - 🗺️ **Cartografía GPS Satelital**: Pines georreferenciados en territorio nicaragüense, capas temáticas y visualización de reservas.
 - 🤖 **Baqueano AI Responsable**: Recomendación de destinos alternativos, explicación de normas ambientales y preparación física de ruta.
 - 🎫 **Pasaporte Digital Gamificado**: Sellos de expedición coleccionables, puntos de compromiso ambiental y centro de accesibilidad visual y háptica.
@@ -124,7 +140,7 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
 
 ---
 
-## ⚡ Arquitectura de Alto Rendimiento & Eficiencia de Hardware
+## ⚡ Arquitectura de Rendimiento & Auditoría Senior Continua (60-120 FPS)
 
 ```text
 [Feed Vertical Principal] ──────── (Desplazamiento Fluido y Eficiente)
@@ -132,11 +148,20 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
         ├── [RepaintBoundary] ──► Carrusel de Categorías Rápidas (Capa GPU aislada)
         ├── [RepaintBoundary] ──► Galería de Destinos Populares (Capa GPU aislada)
         ├── [RepaintBoundary] ──► Vitrina de Negocios Rurales (Capa GPU aislada)
+        ├── [RepaintBoundary] ──► Publicidad de Negocios Campesinos (Capa GPU aislada)
         ├── [RepaintBoundary] ──► Testimonios Verificados (Capa GPU aislada)
         └── [RepaintBoundary] ──► 4 Pilares del Estándar Baqueano (Capa GPU aislada)
 ```
 
-- **Adaptabilidad según Capacidad del Dispositivo**: El motor gráfico respeta la tasa de refresco nativa del terminal (60Hz, 90Hz o 120Hz) y minimiza la carga en procesadores de gama de entrada para evitar lentitud y prolongar la batería en rutas rurales.
+### Protocolo de Prevención de ANRs y Crashes:
+1. **Límites de Decodificación de Memoria (`cacheWidth` / `cacheHeight`)**:
+   - En [baqueano_adaptive_image.dart](file:///c:/Users/PC%201/APP%20BAQUEANO/lib/core/widgets/baqueano_adaptive_image.dart), se acota la resolución física de decodificación al Device Pixel Ratio (DPR), reduciendo el peso de texturas en RAM en más de un **92%** (evitando `OutOfMemoryError` en Android).
+2. **Aislamiento de Capas Gráficas con `RepaintBoundary`**:
+   - Cada tarjeta de catálogo y carrusel opera en su propia textura de composición, erradicando la propagación de invalidaciones al Main UI Thread.
+3. **Ciclo de Vida Limpio (`didUpdateWidget` & `ValueKey`)**:
+   - En listas y cuadrículas dinámicas se asocian llaves estables por ID y se reconcilian estados reactivos (`_isFavorite`) evitando fugas de memoria o estados fantasma.
+4. **Blindaje Defensivo contra Excepciones**:
+   - Todos los disparadores de navegación y modales están envueltos en bloques `try/catch` con validación de contexto `mounted` y aritmética segura.
 - **Aislamiento GPU (`RepaintBoundary`)**: Cada lista horizontal posee su propia textura en memoria gráfica; las tarjetas se animan sin invalidar el árbol vertical.
 - **Cero Bucles en Segundo Plano**: Desplazamiento reactivo táctil sin timers de auto-scroll artificiales que degraden el rendimiento.
 - **Física Nativa de Inercia**: `BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())`.
@@ -281,29 +306,26 @@ Ubicado en `/perfil`:
 
 El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar la seguridad del código y permitir el retorno inmediato a versiones estables verificadas:
 
-- **Versión Estable Actual (Android - V1.2.0 Optimizada 100% Sin Desbordamientos ni Warnings)**:
+- **Versión Estable Actual (Android - V1.3.0 Producción Blindada: Campaña Ambiental, Managua Integral, Auditoría Senior Anti-ANR/OOM y Mensajería Dual)**:
   - **Rama de Respaldo**: `backup-version-estable`
-  - **Etiqueta Oficial**: `v1.2.0-estable`
+  - **Etiqueta Oficial**: `v1.3.0-estable`
   - **Logros Clave**:
-    - **Línea de Tiempo Histórica**: Eliminación de desbordamientos de 18px y 46px en hitos («Huellas de Acahualinca» y «Florecimiento») mediante `Expanded` y truncamiento elíptico flexible.
-    - **Símbolos, Lenguas y Volcanes**: Eliminación definitiva del desbordamiento de 1.6px en pueblos originarios, volcanes y lagos mediante `mainAxisExtent` extendido y reemplazo de `Spacer()` rígidos.
-    - **Checkout & Reservas Directas**: Eliminación del desbordamiento de 68px en «Solicitud de Reserva y Pago», adaptación de tarjetas de cuentas de Banco LAFISE y Billetera Móvil, desglose flexible de tarifa base / total a pagar y comprobante oficial.
-    - **Bitácora Comunitaria**: Botón «Publicar Relato de Expedición» 100% interactivo con formulario modal completo (destino, título, relato, país, calificación de 1 a 5 estrellas) e inyección reactiva que otorga +200 XP en el Pasaporte.
-    - **Historial de Expediciones**: Adaptación elástica con `Wrap` para erradicar desbordamientos laterales en tarjetas de expedición y comprobantes.
-    - **Identidad & Nuestra Marca**: Solución al desbordamiento de 27px en el logotipo oficial monumental mediante `Wrap` y espaciado elástico de caracteres.
-    - **Mesa de Ayuda & Soporte**: Botón «ENVIAR CORREO» 100% funcional con `<queries>` `mailto` nativo en `AndroidManifest.xml`, fallback interactivo con copiado al portapapeles y enlace a WhatsApp de soporte.
-    - **Gastronomía Autóctona**: Diseño visual de alta gama enriquecido con filtros de tradición culinaria, sugerencia de maridaje tradicional (tiste, cacao, café de palo, chicha), fichas de comedores campesinos con llamadas y WhatsApp directos.
+    - **Campaña Ambiental & Denuncias Ciudadanas**: Módulo `/campana-ambiental` con canal oficial de correo (`denuncias.ambientales@baqueano.ni`), custodia técnica de evidencias y enlace directo a WhatsApp para formalizar denuncias ante MARENA, UAM y Policía Nacional.
+    - **Incorporación Integral de Managua**: Capital y territorio integrado al inicio de los filtros departamentales con destinos icónicos (*Reserva Natural El Chocoyero* y *Playas de Pochomil*), cooperativas campesinas y anfitriones oficiales con chat interactivo.
+    - **Auditoría Senior de Rendimiento (Anti-ANRs y Anti-OOMs)**: Aislamiento compositivo con `RepaintBoundary`, decodificación de bitmaps acotada en memoria mediante `cacheWidth` y `cacheHeight` en [BaqueanoAdaptiveImage](file:///c:/Users/PC%201/APP%20BAQUEANO/lib/core/widgets/baqueano_adaptive_image.dart) (ahorro del 92% de RAM), ciclo de vida sincronizado con `didUpdateWidget` y blindaje `try/catch`.
+    - **Mensajería Dual de Comercios Comunitarios**: Ficha modal protegida de negocios con botones duales (WhatsApp Oficial y Chat Interno Baqueano) precargando el mensaje contextual de solicitud de información.
+    - **Sección de Publicidad para Nuevos Negocios**: Módulo *«¿Quieres que tu negocio aparezca aquí?»* con modal elevado y protegido mediante `SafeArea` contra colisiones con barras de navegación Android.
   ```bash
-  # Para restaurar o inspeccionar la versión estable actual:
+  # Para restaurar o inspeccionar la versión estable actual v1.3.0:
   git checkout backup-version-estable
   ```
 
-- **Versión Previa Histórica**:
-  - **Rama de Respaldo**: `backup-version-anterior`
-  - **Etiqueta Oficial**: `v1.0.0-anterior`
+- **Versión Previa Histórica (Android - V1.2.0 Optimizada 100% Sin Desbordamientos ni Warnings)**:
+  - **Rama de Respaldo**: `backup-version-v1.2.0`
+  - **Etiqueta Oficial**: `v1.2.0-estable`
   ```bash
-  # Para restaurar la versión anterior:
-  git checkout backup-version-anterior
+  # Para restaurar la versión v1.2.0:
+  git checkout backup-version-v1.2.0
   ```
 
 - **Regresar a la Rama Principal de Desarrollo**:

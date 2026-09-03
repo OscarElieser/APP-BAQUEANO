@@ -22,3 +22,10 @@
 4. **Enfoque de Plataforma Exclusivo en Android**:
    - Todo el desarrollo, pruebas, configuraciones nativas y optimizaciones se centrarán exclusivamente en **Android** (`android/` y `lib/`).
    - Queda estrictamente prohibido modificar o alterar los directorios y configuraciones de `ios/` y `web/`.
+
+5. **Auditoría Continua de Arquitectura, Rendimiento y Estabilidad (Senior Performance Standard)**:
+   - Prohibido ejecutar tareas pesadas o transformaciones síncronas en el Main UI Thread.
+   - Prevención activa de ANRs (Application Not Responding) mediante `RepaintBoundary` en listas, galerías y componentes interactivos.
+   - Prevención de fugas de memoria (Memory Leaks) y OOM Crashes: todo renderizado de imágenes debe acotar `cacheWidth`/`cacheHeight` al viewport del dispositivo.
+   - Manejo de excepciones defensivo estricto (`try/catch`), verificación `if (mounted)` en contextos asíncronos y validación rigurosa de valores nulos o no finitos.
+   - El ciclo de vida de componentes reciclables debe implementar `didUpdateWidget` y `ValueKey` estable para erradicar estados huérfanos o desincronizados.

@@ -99,7 +99,14 @@ class AppRouter {
       ),
       GoRoute(
         path: '/mensajes',
-        builder: (context, state) => const HostMessagingScreen(),
+        builder: (context, state) {
+          final hostName = state.uri.queryParameters['host'];
+          final prefilled = state.uri.queryParameters['msg'];
+          return HostMessagingScreen(
+            initialHostName: hostName,
+            prefilledMessage: prefilled,
+          );
+        },
       ),
       GoRoute(
         path: '/busqueda',

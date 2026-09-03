@@ -112,6 +112,7 @@ class InfiniteDestinationsGallery extends StatelessWidget {
                 return SizedBox(
                   width: 310,
                   child: DestinationCard(
+                    key: ValueKey('dest-card-${destination.id}'),
                     destination: destination,
                     onCardTapped: () => CheckoutModal.show(context, destination),
                   ),
