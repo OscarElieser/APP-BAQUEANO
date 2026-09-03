@@ -346,7 +346,10 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                           context.go('/mapa');
                         },
                         icon: const Icon(Icons.map_rounded, color: Colors.white, size: 16),
-                        label: const Text('Ver en Mapa GPS'),
+                        label: const FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text('Ver en Mapa GPS'),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.terracotta,
                           foregroundColor: Colors.white,
@@ -360,7 +363,10 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                       child: OutlinedButton.icon(
                         onPressed: () => _launchPhone(ctx, biz.contact),
                         icon: const Icon(Icons.call_rounded, color: AppColors.gold, size: 16),
-                        label: const Text('Llamada Directa', style: TextStyle(color: Colors.white)),
+                        label: const FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text('Llamada Directa', style: TextStyle(color: Colors.white)),
+                        ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: AppColors.borderGold),
                           padding: const EdgeInsets.symmetric(vertical: 12),

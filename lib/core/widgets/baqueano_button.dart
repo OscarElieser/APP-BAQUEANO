@@ -157,11 +157,15 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
                             const SizedBox(width: 8),
                           ],
                           Flexible(
-                            child: Text(
-                              widget.text,
-                              style: _getTextStyle(),
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.center,
+                              child: Text(
+                                widget.text,
+                                style: _getTextStyle(),
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                              ),
                             ),
                           ),
                         ],

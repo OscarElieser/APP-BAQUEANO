@@ -529,39 +529,79 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
 
             const SizedBox(height: 20),
 
-            // Barra de acción y botón
-            Row(
-              children: [
-                Expanded(
-                  child: BaqueanoButton(
-                    text: 'REGISTRAR MI NEGOCIO AHORA',
-                    icon: const Icon(Icons.rocket_launch_rounded, size: 18),
-                    variant: BaqueanoButtonVariant.primary,
-                    height: 50,
-                    onPressed: () => _openRegisterBusinessModal(context),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                BaqueanoButton(
-                  text: 'Ver Planes',
-                  icon: const Icon(Icons.workspace_premium_rounded, size: 18),
-                  variant: BaqueanoButtonVariant.outline,
-                  height: 50,
-                  onPressed: () => context.push('/planes-negocios'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
+            // Barra de acción y botones adaptativos 100% legibles
+            LayoutBuilder(
+              builder: (context, actionConstraints) {
+                final isNarrow = actionConstraints.maxWidth < 520;
 
+                if (isNarrow) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      BaqueanoButton(
+                        text: 'REGISTRAR MI NEGOCIO AHORA',
+                        icon: const Icon(Icons.rocket_launch_rounded, size: 18),
+                        variant: BaqueanoButtonVariant.primary,
+                        height: 50,
+                        width: double.infinity,
+                        onPressed: () => _openRegisterBusinessModal(context),
+                      ),
+                      const SizedBox(height: 10),
+                      BaqueanoButton(
+                        text: 'Ver Planes & Beneficios',
+                        icon: const Icon(Icons.verified_rounded, size: 18),
+                        variant: BaqueanoButtonVariant.outline,
+                        height: 48,
+                        width: double.infinity,
+                        onPressed: () => context.push('/planes-negocios'),
+                      ),
+                    ],
+                  );
+                }
+
+                return Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: BaqueanoButton(
+                        text: 'REGISTRAR MI NEGOCIO AHORA',
+                        icon: const Icon(Icons.rocket_launch_rounded, size: 18),
+                        variant: BaqueanoButtonVariant.primary,
+                        height: 50,
+                        onPressed: () => _openRegisterBusinessModal(context),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      flex: 2,
+                      child: BaqueanoButton(
+                        text: 'Ver Planes',
+                        icon: const Icon(Icons.verified_rounded, size: 18),
+                        variant: BaqueanoButtonVariant.outline,
+                        height: 50,
+                        onPressed: () => context.push('/planes-negocios'),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+
+            // Garantía de respuesta protegida contra overflow
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(Icons.bolt_rounded, color: AppColors.gold, size: 15),
-                const SizedBox(width: 4),
-                Text(
-                  'Respuesta garantizada en menos de 24 horas por nuestro equipo comercial.',
-                  style: GoogleFonts.inter(
-                    fontSize: 11.5,
-                    color: Colors.white60,
+                const Icon(Icons.bolt_rounded, color: AppColors.gold, size: 16),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    'Respuesta garantizada en menos de 24 horas por nuestro equipo comercial.',
+                    style: GoogleFonts.inter(
+                      fontSize: 11.5,
+                      color: Colors.white60,
+                      height: 1.35,
+                    ),
                   ),
                 ),
               ],
