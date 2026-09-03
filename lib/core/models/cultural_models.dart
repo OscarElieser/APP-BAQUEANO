@@ -115,6 +115,7 @@ class LodgingSpot {
   final List<String> amenities;
   final String description;
   final String imageUrl;
+  final String? reservationInfo;
 
   const LodgingSpot({
     required this.id,
@@ -126,6 +127,7 @@ class LodgingSpot {
     required this.amenities,
     required this.description,
     required this.imageUrl,
+    this.reservationInfo,
   });
 }
 
