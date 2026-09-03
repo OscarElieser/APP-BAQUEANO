@@ -26,6 +26,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/baqueano_adaptive_image.dart';
 import '../../checkout/widgets/checkout_modal.dart';
 
 class Interactive3DFeaturedCard extends StatefulWidget {
@@ -260,17 +261,13 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  'assets/images/cascada_la_luna.jpg',
+                BaqueanoAdaptiveImage(
+                  imageUrl: destination.imageUrl ?? '',
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Image.network(
-                    destination.imageUrl ?? '',
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      color: AppColors.primaryLight,
-                      child: const Center(
-                        child: Icon(Icons.terrain_rounded, size: 52, color: AppColors.gold),
-                      ),
+                  fallbackWidget: Container(
+                    color: AppColors.primaryLight,
+                    child: const Center(
+                      child: Icon(Icons.terrain_rounded, size: 52, color: AppColors.gold),
                     ),
                   ),
                 ),

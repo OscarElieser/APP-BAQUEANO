@@ -1,23 +1,27 @@
 // ============================================================================
-// 🌄 SECCIÓN HERO MONUMENTAL & TARJETA DESTACADA (HERO_SECTION.DART)
+// 🌄 SECCIÓN HERO MONUMENTAL & ROTADOR DE DESTINOS DESTACADOS (HERO_SECTION.DART)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Ser el epicentro de la propuesta de valor al entrar a Baqueano:
 //   * Titular editorial "NICARAGUA EN MODO SECRETO".
 //   * Doble llamada a la acción: "DISEÑAR MI RUTA" e interactuar con "BAQUEANO AI".
-//   * Tarjeta flotante interactiva de *Cascada La Luna* con reserva directa en 1 toque.
+//   * Tarjeta flotante interactiva 3D con rotación automática cada 20 segundos
+//     a través de las joyas del catálogo oficial de Nicaragua.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - `Stack` con orbes de luz atmosférica difuminados (`BoxDecoration(shape: BoxShape.circle)`).
+// - `Timer.periodic(const Duration(seconds: 20))` para ciclar automáticamente entre
+//   los destinos del catálogo oficial (`CatalogData.destinations`).
+// - Transición fluida cinematográfica a 60 FPS con `AnimatedSwitcher` y `FadeTransition` (800ms).
 // - Responsive layout: Fila equilibrada (Flex 6 texto / Flex 4 tarjeta) en Desktop (`>= 950px`)
-//   y columna vertical fluida en Móvil.
+//   y columna vertical fluida en Móvil y Tablets.
 // - Integración directa con `CheckoutModal.show(context, destination)` para procesar reservas.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `HeroSection`: Componente estandarte del Home.
+// - `HeroSection`: Componente estandarte del Home con rotación dinámica y visual de alta fidelidad.
 // ============================================================================
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,16 +30,56 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import 'interactive_3d_featured_card.dart';
 
-class HeroSection extends StatelessWidget {
+class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
+
+  @override
+  State<HeroSection> createState() => _HeroSectionState();
+}
+
+class _HeroSectionState extends State<HeroSection> {
+  /// Índice del destino destacado actual en rotación
+  int _currentFeaturedIndex = 0;
+
+  /// Timer recurrente para alternar el destino cada 20 segundos
+  Timer? _rotationTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Intención: Rotar periódicamente el destino insigne para visibilizar múltiples cooperativas rurales.
+    // Mecanismo: Intervalo de 20 segundos que avanza el puntero de forma circular.
+    // Importancia: Muestra la diversidad del ecoturismo nicaragüense sin fatigar al explorador.
+    _rotationTimer = Timer.periodic(const Duration(seconds: 20), (timer) {
+      if (!mounted) return;
+      if (CatalogData.destinations.isNotEmpty) {
+        setState(() {
+          _currentFeaturedIndex =
+              (_currentFeaturedIndex + 1) % CatalogData.destinations.length;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // Intención: Prevenir fugas de memoria al cambiar de pestaña.
+    // Mecanismo: Cancelación estricta del timer asíncrono.
+    // Importancia: Conserva batería y rendimiento óptimo en Android.
+    _rotationTimer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     // Detección de dimensiones para layout responsivo
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
-    // Obtiene el destino destacado principal (Cascada La Luna)
-    final featuredDestination = CatalogData.destinations.first;
+
+    final destinations = CatalogData.destinations;
+    final featuredDestination = destinations.isNotEmpty
+        ? destinations[_currentFeaturedIndex % destinations.length]
+        : null;
 
     return Stack(
       children: [
@@ -68,7 +112,7 @@ class HeroSection extends StatelessWidget {
         ),
 
         // --------------------------------------------------------------------
-        // 🏛️ CONTENIDO PRINCIPAL DEL HERO (TEXTO + TARJETA FLOTANTE 3D)
+        // 🏛️ CONTENIDO PRINCIPAL DEL HERO (TEXTO + TARJETA ROTATIVA 3D)
         // --------------------------------------------------------------------
         Padding(
           padding: EdgeInsets.symmetric(
@@ -85,10 +129,10 @@ class HeroSection extends StatelessWidget {
                       child: _buildHeroTextContent(context, isDesktop),
                     ),
                     const SizedBox(width: 48),
-                    // Columna derecha: Tarjeta flotante 3D interactiva
+                    // Columna derecha: Tarjeta flotante 3D rotativa
                     Expanded(
                       flex: 4,
-                      child: Interactive3DFeaturedCard(destination: featuredDestination),
+                      child: _buildAnimatedFeaturedCard(featuredDestination),
                     ),
                   ],
                 )
@@ -97,11 +141,32 @@ class HeroSection extends StatelessWidget {
                   children: [
                     _buildHeroTextContent(context, isDesktop),
                     const SizedBox(height: 28),
-                    Interactive3DFeaturedCard(destination: featuredDestination),
+                    _buildAnimatedFeaturedCard(featuredDestination),
                   ],
                 ),
         ),
       ],
+    );
+  }
+
+  /// Construye la tarjeta destacada con transición suave de desvanecimiento
+  Widget _buildAnimatedFeaturedCard(dynamic destination) {
+    if (destination == null) return const SizedBox.shrink();
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 800),
+      switchInCurve: Curves.easeInOutCubic,
+      switchOutCurve: Curves.easeInOutCubic,
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      child: Interactive3DFeaturedCard(
+        key: ValueKey('featured_${destination.id}_$_currentFeaturedIndex'),
+        destination: destination,
+      ),
     );
   }
 
