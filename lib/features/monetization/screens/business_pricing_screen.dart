@@ -275,17 +275,20 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${_estimatedClients.toInt()} clientes adicionales',
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.goldLight,
+                      Expanded(
+                        child: Text(
+                          '${_estimatedClients.toInt()} clientes adicionales',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.goldLight,
+                          ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       Text(
-                        '(Ticket prom: \$${_averageTicketUsd.toInt()} USD)',
-                        style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                        '(Ticket: \$${_averageTicketUsd.toInt()} USD)',
+                        style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted),
                       ),
                     ],
                   ),
@@ -302,51 +305,74 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                   ),
                   const SizedBox(height: 12),
 
-                  // Resumen de Ganancia Neta
+                  // Resumen de Ganancia Neta 100% Protegido contra Overflows
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                     decoration: BoxDecoration(
                       color: AppColors.primaryDark,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: AppColors.jungleGreenLight.withValues(alpha: 0.6)),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Ingreso Extra Estimado:',
-                              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
-                            ),
-                            Text(
-                              '+\$${extraRevenueUsd.toInt()} USD / mes',
-                              style: GoogleFonts.spaceGrotesk(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.jungleGreenLight,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Ingreso Estimado:',
+                                style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 2),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '+\$${extraRevenueUsd.toInt()} USD / mes',
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.jungleGreenLight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Ganancia Neta (Retorno):',
-                              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
-                            ),
-                            Text(
-                              '+\$${netProfit.toInt()} USD neto',
-                              style: GoogleFonts.spaceGrotesk(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.goldLight,
+                        Container(
+                          width: 1,
+                          height: 36,
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          color: AppColors.borderLight,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Ganancia Neta:',
+                                style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 2),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  '+\$${netProfit.toInt()} USD neto',
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.goldLight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -375,39 +401,81 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: AppColors.borderLight),
               ),
-              child: Row(
-                children: [
-                  const Text('🤝', style: TextStyle(fontSize: 28)),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
+              child: LayoutBuilder(
+                builder: (context, c) {
+                  final isNarrow = c.maxWidth < 450;
+                  if (isNarrow) {
+                    return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '¿Deseas una propuesta personalizada para tu cooperativa o cadena?',
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
+                        Row(
+                          children: [
+                            const Text('🤝', style: TextStyle(fontSize: 26)),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                '¿Deseas una propuesta personalizada para tu cooperativa o cadena?',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 8),
                         Text(
                           'Contacta a nuestro equipo de alianzas estratégicas para convenios institucionales.',
                           style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
                         ),
+                        const SizedBox(height: 12),
+                        BaqueanoButton(
+                          text: 'Contactar a Alianzas',
+                          variant: BaqueanoButtonVariant.outline,
+                          height: 40,
+                          width: double.infinity,
+                          onPressed: () => _subscribePlan('Consulta Personalizada', 'Convenio'),
+                        ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  BaqueanoButton(
-                    text: 'Contactar',
-                    variant: BaqueanoButtonVariant.outline,
-                    height: 36,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    onPressed: () => _subscribePlan('Consulta Personalizada', 'Convenio'),
-                  ),
-                ],
+                    );
+                  }
+
+                  return Row(
+                    children: [
+                      const Text('🤝', style: TextStyle(fontSize: 28)),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '¿Deseas una propuesta personalizada para tu cooperativa o cadena?',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'Contacta a nuestro equipo de alianzas estratégicas para convenios institucionales.',
+                              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      BaqueanoButton(
+                        text: 'Contactar',
+                        variant: BaqueanoButtonVariant.outline,
+                        height: 36,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        onPressed: () => _subscribePlan('Consulta Personalizada', 'Convenio'),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
 
