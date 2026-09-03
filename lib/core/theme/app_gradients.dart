@@ -38,12 +38,12 @@ class AppGradients {
     end: Alignment.bottomRight,
   );
 
-  /// Gradiente atardecer pacífico (Terracota a Oro), usado en botones CTA primarios.
+  /// Gradiente atardecer pacífico (Terracota #F65E01 a Crema #F4E6C1), usado en botones CTA primarios.
   static const LinearGradient sunsetTerracotta = LinearGradient(
     colors: [
-      AppColors.terracotta,    // Arcilla de San Juan de Oriente (#C86432)
-      Color(0xFFE27B48),       // Transición naranja atardecer
-      AppColors.gold,          // Destello dorado de salida
+      AppColors.terracotta,    // Naranja Terracota Oficial (#F65E01)
+      Color(0xFFFF7B26),       // Transición naranja vibrante
+      AppColors.goldLight,     // Crema Arena Pinolera (#F4E6C1)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -52,9 +52,9 @@ class AppGradients {
   /// Gradiente de inmersión volcánica para fondos principales y encabezados de sección.
   static const LinearGradient volcanicHero = LinearGradient(
     colors: [
-      Color(0xFF041920), // Noche cerrada volcánica
-      Color(0xFF082B35), // Petróleo base
-      Color(0xFF0F172A), // Base azul medianoche
+      AppColors.primaryDark, // Petróleo oscuro (#0C3843)
+      AppColors.primary,     // Petróleo Teal Oficial (#165D6F)
+      AppColors.bgDark,      // Noche profunda (#0F172A)
     ],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -63,8 +63,8 @@ class AppGradients {
   /// Gradiente translúcido para tarjetas Glassmorphism con bordes brillantes.
   static const LinearGradient cardGlass = LinearGradient(
     colors: [
-      Color(0x2E13424E), // Brillo cristal superior al 18%
-      Color(0x1A082B35), // Sombra cristal inferior al 10%
+      Color(0x2E227B91), // Brillo cristal superior al 18% (#227B91)
+      Color(0x1A165D6F), // Sombra cristal inferior al 10% (#165D6F)
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

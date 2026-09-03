@@ -10,7 +10,7 @@
    - Explicar las decisiones de diseño y lógica paso a paso para que cualquier desarrollador entienda su importancia.
 
 2. **Modo Pro de Alta Gama Visual y Técnico**:
-   - Paleta de colores oficial: `#082B35`, `#C86432`, `#D4AF37`, `#0F172A`.
+   - Paleta de colores oficial: `#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`.
    - Efectos Glassmorphism, animaciones continuas a 60fps, y sombras profundas.
    - Cero uso de `.withOpacity()`, siempre utilizar `.withValues(alpha: X)`.
    - Mantener siempre `flutter analyze` y `flutter test` en 100% limpio.

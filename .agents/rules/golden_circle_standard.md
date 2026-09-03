@@ -48,7 +48,7 @@ Cada bloque funcional, método, cálculo fiscal, animación o constructor debe c
 ## 3. Modo  Innegociable
 
 1. **Alineación Visual de Lujo**:
-   - Paleta oficial volcánica: `#082B35` (Petróleo Volcánico), `#C86432` (Terracota), `#D4AF37` (Oro Pinolero), `#0F172A` (Noche Profunda).
+   - Paleta oficial: `#165D6F` (Petróleo Teal), `#F65E01` (Naranja Terracota Fuego), `#F4E6C1` (Crema Arena Pinolera), `#0F172A` (Noche Profunda).
    - Glassmorphism con `BackdropFilter(sigmaX: 12, sigmaY: 12)` y bordes sutiles.
    - Microinteracciones, hover states, elevaciones suaves y curvas de animación fluidas (`Curves.easeInOut`).
 

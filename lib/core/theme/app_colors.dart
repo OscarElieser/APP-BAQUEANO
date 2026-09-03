@@ -23,37 +23,37 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // --------------------------------------------------------------------------
-  // 🌋 FAMILIA PRIMARIA: PETRÓLEO VOLCÁNICO (Basalto de los volcanes de Nicaragua)
+  // 🌊 FAMILIA PRIMARIA: PETRÓLEO TEAL (#165D6F - Identidad Oficial Baqueano)
   // --------------------------------------------------------------------------
-  /// Color base principal de la plataforma, transmite profundidad y solidez geológica.
-  static const Color primary = Color(0xFF082B35);
+  /// Color base principal de la plataforma, transmite inmersión y serenidad orgánica.
+  static const Color primary = Color(0xFF165D6F);
 
   /// Variante clara para contenedores elevados, barras de navegación y tarjetas glass.
-  static const Color primaryLight = Color(0xFF13424E);
+  static const Color primaryLight = Color(0xFF227B91);
 
   /// Variante profunda para el fondo de pantalla general y áreas de inmersión máxima.
-  static const Color primaryDark = Color(0xFF041920);
+  static const Color primaryDark = Color(0xFF0C3843);
 
   // --------------------------------------------------------------------------
-  // 🏺 FAMILIA DE ACENTO 1: TERRACOTA / ARCILLA NICA (Artesanías y calor de la tierra)
+  // 🔥 FAMILIA DE ACENTO 1: NARANJA FUEGO / TERRACOTA (#F65E01 - Acción Oficial)
   // --------------------------------------------------------------------------
   /// Color de acción primario para botones de llamada a la acción (CTA) y destacados.
-  static const Color terracotta = Color(0xFFC86432);
+  static const Color terracotta = Color(0xFFF65E01);
 
   /// Sombra y estado presionado de botones terracota.
-  static const Color terracottaDark = Color(0xFF8B3A14);
+  static const Color terracottaDark = Color(0xFFBF4800);
 
   /// Acento vibrante para etiquetas de estado, badges de categoría y bordes iluminados.
-  static const Color terracottaLight = Color(0xFFE27B48);
+  static const Color terracottaLight = Color(0xFFFF7B26);
 
   // --------------------------------------------------------------------------
-  // ✨ FAMILIA DE ACENTO 2: ORO PINOLERO (Tesoros ancestrales y sol naciente)
+  // ✨ FAMILIA DE ACENTO 2: ORO PINOLERO Y CREMA (#F4E6C1 - Tonos Cálidos)
   // --------------------------------------------------------------------------
   /// Oro de lujo para medallas, valoraciones con estrellas e insignias de guías certificados.
   static const Color gold = Color(0xFFD4AF37);
 
-  /// Variante suave para textos de énfasis sobre fondos oscuros.
-  static const Color goldLight = Color(0xFFF3E5AB);
+  /// Crema suave oficial para textos de énfasis, badges e iluminación sobre fondos oscuros.
+  static const Color goldLight = Color(0xFFF4E6C1);
 
   /// Variante oscura para gradientes metálicos y detalles sutiles.
   static const Color goldDark = Color(0xFFA68519);
@@ -64,26 +64,26 @@ class AppColors {
   /// Fondo más profundo de la aplicación (Midnight Volcano).
   static const Color bgDark = Color(0xFF0F172A);
 
-  /// Superficie base de modales y drawers.
-  static const Color bgSurface = Color(0xFF082B35);
+  /// Superficie base de modales y drawers alineada al Petróleo Teal (#165D6F).
+  static const Color bgSurface = Color(0xFF165D6F);
 
   /// Fondo de tarjetas informativas y contenedores de catálogo.
-  static const Color bgCard = Color(0xFF132A33);
+  static const Color bgCard = Color(0xFF0F4350);
 
   /// Estado hover/activo cuando el usuario interactúa con una tarjeta.
-  static const Color bgCardHover = Color(0xFF1A3B47);
+  static const Color bgCardHover = Color(0xFF1B6A7D);
 
   // --------------------------------------------------------------------------
-  // 🏖️ TONOS ARENA Y COSTA (Playas del Pacífico y Caribe)
+  // 🏖️ TONOS ARENA Y CREMA PINOLERA (#F4E6C1 - Oficial)
   // --------------------------------------------------------------------------
-  /// Tono cálido arena para insignias claras o temas híbridos.
-  static const Color sand = Color(0xFFF4EBD9);
+  /// Tono crema cálido oficial para insignias claras, acentos y fondos contrastados.
+  static const Color sand = Color(0xFFF4E6C1);
 
   /// Arena clara perlada para contrastes ligeros.
-  static const Color sandLight = Color(0xFFF8FAF9);
+  static const Color sandLight = Color(0xFFFCF6E8);
 
-  /// Arena oscura costera.
-  static const Color sandDark = Color(0xFFE6D6BC);
+  /// Arena dorada costera.
+  static const Color sandDark = Color(0xFFE5D2A0);
 
   // --------------------------------------------------------------------------
   // 🌿 NATURALEZA: VERDE SELVA & ECOTURISMO (Reserva Indio Maíz & Bosawás)
@@ -124,8 +124,8 @@ class AppColors {
   /// Borde dorado al 40% para tarjetas VIP y destacadas.
   static const Color borderGold = Color(0x66D4AF37);
 
-  /// Borde terracota al 40% para botones y alertas culturales.
-  static const Color borderTerracotta = Color(0x66C86432);
+  /// Borde terracota al 40% para botones y alertas culturales (#F65E01).
+  static const Color borderTerracotta = Color(0x66F65E01);
 
   // --------------------------------------------------------------------------
   // 🚨 ESTADOS SEMÁNTICOS DEL SISTEMA (Feedback al usuario)
