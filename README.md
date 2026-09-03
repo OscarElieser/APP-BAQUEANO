@@ -24,6 +24,7 @@
 - [🔗 Conexión Territorial Cruzada (Cultura ↔ Destino ↔ Baqueano)](#-conexión-territorial-cruzada-cultura--destino--baqueano)
 - [✨ Características Principales](#-características-principales)
 - [⚡ Arquitectura de Rendimiento & Auditoría Senior Continua (60-120 FPS)](#-arquitectura-de-rendimiento--auditoría-senior-continua-60-120-fps)
+- [📱 Persistencia de Estado & Ciclo de Vida Nativo Android](#-persistencia-de-estado--ciclo-de-vida-nativo-android)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
 - [🗄️ Arquitectura de Datos Offline-First & Seguridad RBAC](#️-arquitectura-de-datos-offline-first--seguridad-rbac)
 - [🚨 Centro de Auxilio & Emergencias SOS en Sendero](#-centro-de-auxilio--emergencias-sos-en-sendero)
@@ -126,10 +127,12 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
 ## ✨ Características Principales
 
 - 📱 **Diseño Universal y Adaptativo en Android**: Optimizado para funcionar de manera estable, eficiente y fluida en **cualquier teléfono Android en general**, adaptando su rendimiento de forma inteligente según la capacidad del hardware del usuario (desde terminales accesibles y de gama media comunes en el campo hasta pantallas avanzadas y tablets), con gestión de SafeAreas dinámicas, bajo consumo de batería y navegación por gestos.
+- 🔄 **Persistencia de Sesión & Ciclo de Vida Nativo Android**: Mantiene la aplicación exactamente en la última pantalla navegada al salir o minimizar mediante canal de plataforma nativo (`moveTaskToBack(true)`) y `PopScope`, reiniciando su flujo raíz únicamente cuando el usuario desliza y cierra la app desde la lista de aplicaciones recientes de Android.
 - 🌿 **Campaña Ambiental & Custodia Ciudadana**: Canal de denuncias ante delitos ambientales con correo institucional, enlace a WhatsApp y decálogo verde en sendero.
 - 🇳🇮 **Presencia Integral de Managua**: Capital y territorio integrado a la cabeza de departamentos, con destinos auténticos (*Reserva Natural El Chocoyero* y *Playas de Pochomil*), comercios campesinos y anfitriones oficiales.
 - ⚡ **Desplazamiento Ultrafluido (60 - 120 FPS)**: Aislamiento GPU con `RepaintBoundary`, decodificación acotada de texturas y física de inercia suave (`BouncingScrollPhysics`) que elimina tirones y evita sobrecalentamiento.
-- 🎵 **Patrimonio Sonoro Multimedia**: Reproductor folclórico tradicional (Solar de Monimbó, Mora Limpia, Danza del Mestizaje), integración de video en YouTube y editor de URLs.
+- 🎵 **Patrimonio Sonoro Multimedia con Reproducción Directa a 1 Toque**: Selección inmediata de cualquier pista folclórica tradicional (Solar de Monimbó, Mora Limpia, Danza del Mestizaje) que inicia la reproducción instantáneamente al tocar la tarjeta sin navegación redundante, integración de video en YouTube y editor de URLs.
+- 📐 **Diseño Ergonómico Anti-Truncamiento y Cero Desbordamientos (Overflows)**: Nombres de posadas y playas mostrados completos hasta en 2 líneas fluidas, botones de acción sin abreviaturas (`[Ver Ruta]`, `[Reservar]`), y calculadora de rentabilidad comercial blindada contra desbordamientos en pantallas compactas y medianas.
 - 🚨 **Centro de Auxilio SOS 24/7**: Marcación directa (118, 128, 115, INTUR), botón SOS de WhatsApp con coordenadas GPS y respuesta háptica.
 - 💬 **Mensajería Directa Dual con Anfitriones**: Coordinación de llegada por WhatsApp Oficial o Mensajería Interna de Baqueano con textos precargados, envío de ubicación GPS y adjuntos de comprobantes.
 - 🏪 **Vitrina de Comercios Campesinos & Publicidad**: Fichas enriquecidas de comedores rurales, posadas familiares y formulario de registro para nuevos negocios aliados.
@@ -168,18 +171,37 @@ $$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarr
 
 ---
 
+## 📱 Persistencia de Estado & Ciclo de Vida Nativo Android
+
+Para asegurar que el explorador nunca pierda su contexto de navegación, filtros de búsqueda o formulario de reserva al salir momentáneamente de la aplicación en senderos o áreas de campo:
+
+1. **Retención de Tarea en Segundo Plano (`moveTaskToBack`)**:
+   - Se implementó un canal de plataforma nativo (`MethodChannel com.company.appbaqueano/lifecycle`) en `MainActivity.kt` invocando `activity?.moveTaskToBack(true)`.
+   - Enlazado con `PopScope(canPop: false, onPopInvokedWithResult: ...)` en `ResponsiveScaffold`, cuando el usuario pulsa el botón o gesto de retroceso en la pantalla raíz, la aplicación se envía a segundo plano de forma nativa sin destruirse.
+2. **Eliminación de `taskAffinity` Huérfano**:
+   - En `AndroidManifest.xml`, se erradicó la propiedad `android:taskAffinity=""` de la `MainActivity`, permitiendo que el gestor de tareas del sistema operativo Android preserve el árbol de actividades completo en la pila de aplicaciones recientes.
+3. **Ciclo de Vida Restaurable**:
+   - La aplicación preserva su estado y pantalla actual de forma continua. Únicamente se reinicia desde cero si el usuario desliza y elimina la aplicación de la vista de multitarea de Android (Clear All / Swipe to dismiss), garantizando una experiencia nativa fluida.
+
+---
+
 ## 🎨 Sistema de Diseño & Tokens Visuales
 
-Inspirado en la geología volcánica, la cerámica tradicional de San Juan de Oriente y la naturaleza de Nicaragua:
+Inspirado en los lagos, volcanes, la cerámica de San Juan de Oriente y la tierra pinolera:
 
 | Token | Nombre | Código Hex | Uso en la Aplicación |
 | :--- | :--- | :--- | :--- |
-| **Primary** | Petróleo Volcánico | `#082B35` / `#13424E` | Barras de navegación, encabezados, fondos de pantalla |
-| **Terracotta** | Arcilla Nica | `#C86432` / `#8B3A14` | Botones de acción primaria (CTA), acentos volcánicos |
-| **Gold** | Oro Pinolero | `#D4AF37` / `#F3E5AB` | Precios bimoneda, insignias de honor, bordes y estrellas |
-| **Dark Surface** | Noche Profunda | `#0F172A` | Fondos de tarjetas y contenedores Glassmorphism |
-| **Jungle Green** | Verde Selva | `#10B981` / `#2E7D32` | Distintivos de sostenibilidad y negocios comunitarios |
-| **Crimson SOS** | Rojo Alerta | `#EF4444` / `#DC2626` | Centro de asistencia y emergencias en sendero |
+| **Primary** | Petróleo Teal | `#165D6F` | Barras de navegación, encabezados, app bars y superficies de alto rango |
+| **Accent / CTA** | Naranja Terracota Fuego | `#F65E01` | Botones de acción principal (CTA), indicadores activos y acentos volcánicos |
+| **Secondary** | Crema Arena Pinolera | `#F4E6C1` | Badges de honor, fondos suaves, bordes cálidos y contrastes nobles |
+| **Dark Surface** | Noche Profunda | `#0F172A` | Fondos de pantalla, tarjetas elevadas y contenedores Glassmorphism |
+| **Jungle Green** | Verde Selva | `#10B981` | Distintivos de sostenibilidad, badges ecológicos y comercios comunitarios |
+| **Crimson SOS** | Rojo Alerta SOS | `#EF4444` | Centro de asistencia, botones de pánico y emergencias en sendero |
+
+### Gradientes Oficiales (`AppGradients`):
+- **`sunsetTerracotta`**: Fusión cálida entre Terracota Fuego (`#F65E01`) y Petróleo Teal (`#165D6F`) para tarjetas y banners.
+- **`volcanicHero`**: Profundidad nocturna entre Petróleo Teal (`#165D6F`) y Noche Profunda (`#0F172A`) para cabeceras épicas.
+- **`cardGlass`**: Efectos Glassmorphism con transparencias dinámicas calculadas mediante `.withValues(alpha: X)`.
 
 > [!IMPORTANT]
 > Se prohíbe terminantemente el uso del deprecado `.withOpacity()`; todo el código emplea rigurosamente `.withValues(alpha: X)` para garantizar cero advertencias y máxima precisión cromática.
@@ -306,15 +328,18 @@ Ubicado en `/perfil`:
 
 El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar la seguridad del código y permitir el retorno inmediato a versiones estables verificadas:
 
-- **Versión Estable Actual (Android - V1.3.0 Producción Blindada: Campaña Ambiental, Managua Integral, Auditoría Senior Anti-ANR/OOM y Mensajería Dual)**:
+- **Versión Estable Actual (Android - V1.3.0 Producción Blindada: Paleta Oficial, Persistencia Nativa de Ciclo de Vida, Cero Overflows, Música a 1 Toque y Campaña Ambiental)**:
   - **Rama de Respaldo**: `backup-version-estable`
   - **Etiqueta Oficial**: `v1.3.0-estable`
   - **Logros Clave**:
+    - **Nueva Identidad Visual & Paleta Oficial**: Adopción estricta de `#165D6F` (Petróleo Teal), `#F65E01` (Naranja Terracota Fuego), `#F4E6C1` (Crema Arena Pinolera) y `#0F172A` (Noche Profunda) en todos los temas, gradientes y componentes.
+    - **Persistencia de Tarea & Ciclo de Vida Nativo Android**: Integración de canal nativo Kotlin (`moveTaskToBack(true)`) mediante `MethodChannel` y `PopScope` en `ResponsiveScaffold`, eliminando `android:taskAffinity=""` en `AndroidManifest.xml` para retener la pantalla y sesión activa al salir a home hasta que el usuario elimine la app de multitarea.
+    - **Erradicación Total de Desbordamientos (Zero Overflows)**: Eliminación definitiva de overflows de 34px y 46px en calculadora de rentabilidad (`business_pricing_screen.dart`), 195px en registro publicitario (`advertise_dialog.dart`), 201px en centro de ayuda (`help_screen.dart`), y badges desacoplados en gastronomía para teléfonos compactos y medianos.
+    - **Reproducción Folclórica a 1 Toque**: En `music_screen.dart`, tocar directamente cualquier tarjeta de audio inicia la reproducción instantáneamente sin pasos redundantes.
+    - **Títulos y Botones Íntegros Anti-Truncamiento**: Títulos de catálogo en 2 líneas completas y botones de acción expandidos `[Ver Ruta]` y `[Reservar]` legibles y sin cortes tipográficos.
     - **Campaña Ambiental & Denuncias Ciudadanas**: Módulo `/campana-ambiental` con canal oficial de correo (`denuncias.ambientales@baqueano.ni`), custodia técnica de evidencias y enlace directo a WhatsApp para formalizar denuncias ante MARENA, UAM y Policía Nacional.
     - **Incorporación Integral de Managua**: Capital y territorio integrado al inicio de los filtros departamentales con destinos icónicos (*Reserva Natural El Chocoyero* y *Playas de Pochomil*), cooperativas campesinas y anfitriones oficiales con chat interactivo.
-    - **Auditoría Senior de Rendimiento (Anti-ANRs y Anti-OOMs)**: Aislamiento compositivo con `RepaintBoundary`, decodificación de bitmaps acotada en memoria mediante `cacheWidth` y `cacheHeight` en [BaqueanoAdaptiveImage](file:///c:/Users/PC%201/APP%20BAQUEANO/lib/core/widgets/baqueano_adaptive_image.dart) (ahorro del 92% de RAM), ciclo de vida sincronizado con `didUpdateWidget` y blindaje `try/catch`.
-    - **Mensajería Dual de Comercios Comunitarios**: Ficha modal protegida de negocios con botones duales (WhatsApp Oficial y Chat Interno Baqueano) precargando el mensaje contextual de solicitud de información.
-    - **Sección de Publicidad para Nuevos Negocios**: Módulo *«¿Quieres que tu negocio aparezca aquí?»* con modal elevado y protegido mediante `SafeArea` contra colisiones con barras de navegación Android.
+    - **Auditoría Senior de Rendimiento (Anti-ANRs y Anti-OOMs)**: Aislamiento compositivo con `RepaintBoundary`, decodificación de bitmaps acotada en memoria mediante `cacheWidth` y `cacheHeight` en [BaqueanoAdaptiveImage](file:///c:/Users/PC%201/APP%20BAQUEANO/lib/core/widgets/baqueano_adaptive_image.dart) (ahorro del 92% de RAM), ciclo de vida sincronizado con `didUpdateWidget`, blindaje `try/catch` y cero deprecaciones con `.withValues(alpha: X)`.
   ```bash
   # Para restaurar o inspeccionar la versión estable actual v1.3.0:
   git checkout backup-version-estable
