@@ -55,7 +55,8 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: isDesktop ? 275 : 305,
+            // Aumentado de 275/305 a 295/340 para absorber textos largos en significados
+            mainAxisExtent: isDesktop ? 295 : 340,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
