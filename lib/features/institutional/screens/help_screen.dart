@@ -74,9 +74,11 @@ class HelpScreen extends StatelessWidget {
                     children: [
                       const Icon(Icons.emergency, color: AppColors.error, size: 24),
                       const SizedBox(width: 10),
-                      Text(
-                        'LÍNEAS DE ATENCIÓN DE EMERGENCIA NACIONAL (24/7)',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 1.0),
+                      Expanded(
+                        child: Text(
+                          'LÍNEAS DE ATENCIÓN DE EMERGENCIA NACIONAL (24/7)',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 0.8),
+                        ),
                       ),
                     ],
                   ),
@@ -197,7 +199,7 @@ class HelpScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),

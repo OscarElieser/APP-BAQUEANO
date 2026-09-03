@@ -181,58 +181,115 @@ class CommunityScreen extends StatelessWidget {
 
             const SizedBox(height: 32),
 
-            // CTA Share Story
+            // CTA Share Story adaptativo para móvil y pantalla ancha
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 gradient: AppGradients.cardGlass,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.gold.withValues(alpha: 0.5)),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.gold.withValues(alpha: 0.15),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.edit_note_rounded, color: AppColors.gold, size: 28),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '¿Completaste una ruta con Baqueano?',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          'Comparte tu relato y fotos para ganar +200 XP en tu pasaporte.',
-                          style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  BaqueanoButton(
-                    text: 'Publicar Relato',
-                    variant: BaqueanoButtonVariant.primary,
-                    height: 40,
-                    onPressed: () {
-                      CustomToast.success(context, 'Tu relato fue enviado a revisión comunitaria.');
-                    },
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: AppColors.gold.withValues(alpha: 0.55), width: 1.2),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
+              child: isDesktop
+                  ? Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: AppColors.gold.withValues(alpha: 0.15),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.edit_note_rounded, color: AppColors.gold, size: 28),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '¿Completaste una ruta con Baqueano?',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'Comparte tu relato y fotos para ganar +200 XP en tu pasaporte.',
+                                style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        BaqueanoButton(
+                          text: 'Publicar Relato',
+                          variant: BaqueanoButtonVariant.primary,
+                          height: 42,
+                          onPressed: () {
+                            CustomToast.success(context, 'Tu relato fue enviado a revisión comunitaria.');
+                          },
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: AppColors.gold.withValues(alpha: 0.15),
+                                shape: BoxShape.circle,
+                                border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
+                              ),
+                              child: const Icon(Icons.edit_note_rounded, color: AppColors.gold, size: 26),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '¿Completaste una ruta con Baqueano?',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 3),
+                                  Text(
+                                    'Comparte tu relato y fotos para ganar +200 XP en tu pasaporte.',
+                                    style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        BaqueanoButton(
+                          text: '✍️ Publicar Relato de Expedición',
+                          variant: BaqueanoButtonVariant.primary,
+                          height: 44,
+                          onPressed: () {
+                            CustomToast.success(context, 'Tu relato fue enviado a revisión comunitaria.');
+                          },
+                        ),
+                      ],
+                    ),
             ),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),

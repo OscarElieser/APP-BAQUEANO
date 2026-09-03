@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
+import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 
 class VideosScreen extends StatelessWidget {
   const VideosScreen({super.key});
+
+  Future<void> _launchVideo(BuildContext context, String? url) async {
+    HapticFeedback.heavyImpact();
+    if (url == null || url.trim().isEmpty) {
+      CustomToast.error(context, 'Enlace de video no disponible');
+      return;
+    }
+    final uri = Uri.parse(url);
+    try {
+      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+    } catch (e) {
+      try {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
+      } catch (err) {
+        if (context.mounted) {
+          CustomToast.error(context, 'No se pudo abrir el video en YouTube');
+        }
+      }
+    }
+  }
 
   void _playVideoModal(BuildContext context, dynamic video) {
     showDialog(
@@ -48,67 +74,86 @@ class VideosScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              // Simulated Video Player
-              Container(
-                height: 240,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
-                    image: NetworkImage(video.thumbnail),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(Colors.black.withValues(alpha: 0.3), BlendMode.darken),
+              // Video Thumbnail & Direct Play Overlay
+              InkWell(
+                onTap: () => _launchVideo(context, video.youtubeUrl),
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  height: 220,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(16),
+                    image: DecorationImage(
+                      image: NetworkImage(video.thumbnail),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(Colors.black.withValues(alpha: 0.35), BlendMode.darken),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          gradient: AppGradients.sunsetTerracotta,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.terracotta.withValues(alpha: 0.5),
-                              blurRadius: 20,
-                            ),
-                          ],
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            gradient: AppGradients.sunsetTerracotta,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.terracotta.withValues(alpha: 0.6),
+                                blurRadius: 22,
+                              ),
+                            ],
+                          ),
+                          child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 40),
                         ),
-                        child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 36),
-                      ),
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                          borderRadius: BorderRadius.circular(12),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.8),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: AppColors.gold.withValues(alpha: 0.6)),
+                          ),
+                          child: Text(
+                            '▶️ Toca para ver en YouTube (4K)',
+                            style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w700),
+                          ),
                         ),
-                        child: Text(
-                          'Reproduciendo en 4K Ultra HD',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
               Text(
                 video.title,
-                style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.textLight),
+                style: GoogleFonts.montserrat(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.textLight),
               ),
               const SizedBox(height: 6),
               Text(
                 video.description,
-                style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted, height: 1.4),
+                style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted, height: 1.4),
               ),
-              const SizedBox(height: 20),
-              BaqueanoButton(
-                text: 'Cerrar Reproductor',
-                variant: BaqueanoButtonVariant.secondary,
-                onPressed: () => Navigator.of(context).pop(),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  Expanded(
+                    child: BaqueanoButton(
+                      text: '▶️ Reproducir en YouTube',
+                      variant: BaqueanoButtonVariant.primary,
+                      height: 44,
+                      onPressed: () => _launchVideo(context, video.youtubeUrl),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  BaqueanoButton(
+                    text: 'Cerrar',
+                    variant: BaqueanoButtonVariant.secondary,
+                    height: 44,
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
               ),
             ],
           ),
@@ -145,7 +190,7 @@ class VideosScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: isDesktop ? 450 : 550,
-                mainAxisExtent: 380,
+                mainAxisExtent: 425,
                 crossAxisSpacing: 18,
                 mainAxisSpacing: 18,
               ),
@@ -153,6 +198,7 @@ class VideosScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final video = CatalogData.videoSpots[index];
                 return GlassContainer(
+                  onTap: () => _playVideoModal(context, video),
                   padding: EdgeInsets.zero,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: AppColors.borderLight),
@@ -191,7 +237,7 @@ class VideosScreen extends StatelessWidget {
                           ),
                           // Play Button
                           InkWell(
-                            onTap: () => _playVideoModal(context, video),
+                            onTap: () => _launchVideo(context, video.youtubeUrl),
                             borderRadius: BorderRadius.circular(30),
                             child: Container(
                               padding: const EdgeInsets.all(14),
@@ -277,6 +323,38 @@ class VideosScreen extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton.icon(
+                                    onPressed: () => _launchVideo(context, video.youtubeUrl),
+                                    icon: const Icon(Icons.play_circle_fill_rounded, size: 16, color: Colors.white),
+                                    label: Text(
+                                      'Ver en YouTube (4K)',
+                                      style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.terracotta,
+                                      foregroundColor: Colors.white,
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                IconButton(
+                                  tooltip: 'Ficha del Video',
+                                  onPressed: () => _playVideoModal(context, video),
+                                  icon: const Icon(Icons.info_outline_rounded, size: 18, color: AppColors.goldLight),
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: AppColors.primaryLight,
+                                    padding: const EdgeInsets.all(8),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -285,7 +363,7 @@ class VideosScreen extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),

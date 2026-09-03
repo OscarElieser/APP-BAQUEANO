@@ -81,27 +81,41 @@ class BrandScreen extends StatelessWidget {
 
             const SizedBox(height: 32),
 
-            // Misión y Visión
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: _buildInfoCard(
-                    '🎯 NUESTRA MISIÓN',
-                    'Empoderar a las comunidades rurales, cooperativas y guías baqueanos de Nicaragua mediante tecnología digital de vanguardia e inteligencia artificial ética, permitiendo que ofrezcan experiencias auténticas y seguras directamente al viajero, asegurando ingresos justos y preservando el patrimonio natural.',
-                    AppColors.craterTeal,
+            // Misión y Visión adaptativa
+            if (isDesktop)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: _buildInfoCard(
+                      '🎯 NUESTRA MISIÓN',
+                      'Empoderar a las comunidades rurales, cooperativas y guías baqueanos de Nicaragua mediante tecnología digital de vanguardia e inteligencia artificial ética, permitiendo que ofrezcan experiencias auténticas y seguras directamente al viajero, asegurando ingresos justos y preservando el patrimonio natural.',
+                      AppColors.craterTeal,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _buildInfoCard(
-                    '🔭 NUESTRA VISIÓN',
-                    'Consolidarnos como el ecosistema digital líder de ecoturismo y turismo comunitario regenerativo en Centroamérica, transformando la forma en que el mundo experimenta Nicaragua: a través de viajes responsables que regeneran ecosistemas y celebran el folklore auténtico.',
-                    AppColors.terracotta,
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildInfoCard(
+                      '🔭 NUESTRA VISIÓN',
+                      'Consolidarnos como el ecosistema digital líder de ecoturismo y turismo comunitario regenerativo en Centroamérica, transformando la forma en que el mundo experimenta Nicaragua: a través de viajes responsables que regeneran ecosistemas y celebran el folklore auténtico.',
+                      AppColors.terracotta,
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              )
+            else ...[
+              _buildInfoCard(
+                '🎯 NUESTRA MISIÓN',
+                'Empoderar a las comunidades rurales, cooperativas y guías baqueanos de Nicaragua mediante tecnología digital de vanguardia e inteligencia artificial ética, permitiendo que ofrezcan experiencias auténticas y seguras directamente al viajero, asegurando ingresos justos y preservando el patrimonio natural.',
+                AppColors.craterTeal,
+              ),
+              const SizedBox(height: 14),
+              _buildInfoCard(
+                '🔭 NUESTRA VISIÓN',
+                'Consolidarnos como el ecosistema digital líder de ecoturismo y turismo comunitario regenerativo en Centroamérica, transformando la forma en que el mundo experimenta Nicaragua: a través de viajes responsables que regeneran ecosistemas y celebran el folklore auténtico.',
+                AppColors.terracotta,
+              ),
+            ],
 
             const SizedBox(height: 32),
 
@@ -145,7 +159,7 @@ class BrandScreen extends StatelessWidget {
               textColor: AppColors.textDark,
             ),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),

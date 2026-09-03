@@ -414,6 +414,8 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
 
         // 7. CONEXIÓN TERRITORIAL: DEL CONOCIMIENTO AL VIAJE RESPONSABLE
         _buildTerritorialConnectionCard(context, isDesktop),
+
+        const SizedBox(height: 100),
       ],
     );
   }

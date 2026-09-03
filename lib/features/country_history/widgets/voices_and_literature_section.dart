@@ -66,7 +66,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (screenWidth >= 650 ? 2 : 1),
-            mainAxisExtent: 280,
+            mainAxisExtent: isDesktop ? 290 : 310,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -176,7 +176,11 @@ class VoicesAndLiteratureSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Insignia Rubén Darío
-          Row(
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 10,
+            runSpacing: 8,
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
@@ -194,7 +198,6 @@ class VoicesAndLiteratureSection extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
               Text(
                 '1867 — 1916',
                 style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight),

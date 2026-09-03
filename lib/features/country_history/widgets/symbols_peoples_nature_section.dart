@@ -55,7 +55,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: 260,
+            mainAxisExtent: isDesktop ? 270 : 285,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -143,7 +143,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 2 : 1,
-            mainAxisExtent: 255,
+            mainAxisExtent: isDesktop ? 275 : 290,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -222,7 +222,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: 330,
+            mainAxisExtent: isDesktop ? 340 : 360,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),

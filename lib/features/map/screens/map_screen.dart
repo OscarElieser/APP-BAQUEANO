@@ -490,7 +490,7 @@ class _MapScreenState extends State<MapScreen> {
             else if (_selectedBusiness != null)
               _buildBusinessDetailCard(_selectedBusiness!),
 
-            const SizedBox(height: 36),
+            const SizedBox(height: 100),
           ],
         ),
       ),
@@ -500,9 +500,10 @@ class _MapScreenState extends State<MapScreen> {
   /// Minimapa Mundi / Radar con indicador sobre Nicaragua
   Widget _buildWorldRadarWidget() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      constraints: const BoxConstraints(maxWidth: 170),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFF041920).withValues(alpha: 0.92),
+        color: const Color(0xFF041920).withValues(alpha: 0.94),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: const Color(0xFFD4AF37).withValues(alpha: 0.6), width: 1.2),
         boxShadow: [
@@ -517,8 +518,8 @@ class _MapScreenState extends State<MapScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 30,
-            height: 30,
+            width: 28,
+            height: 28,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: const RadialGradient(
@@ -530,7 +531,7 @@ class _MapScreenState extends State<MapScreen> {
               alignment: Alignment.center,
               children: [
                 CustomPaint(
-                  size: const Size(30, 30),
+                  size: const Size(28, 28),
                   painter: _MiniGlobePainter(),
                 ),
                 Container(
@@ -548,19 +549,23 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
           const SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'GOOGLE MAPS • NICARAGUA',
-                style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w800, color: const Color(0xFFD4AF37), letterSpacing: 0.8),
-              ),
-              Text(
-                'Satélite Real & Coordenadas GPS',
-                style: GoogleFonts.inter(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w600),
-              ),
-            ],
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'GOOGLE MAPS',
+                  style: GoogleFonts.spaceGrotesk(fontSize: 8.5, fontWeight: FontWeight.w800, color: const Color(0xFFD4AF37), letterSpacing: 0.8),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  'Satélite & GPS',
+                  style: GoogleFonts.inter(fontSize: 9.5, color: Colors.white, fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -763,24 +768,28 @@ class _MapScreenState extends State<MapScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Precio por Explorador', style: TextStyle(color: Colors.white54, fontSize: 10)),
-                  Text(
-                    '\$${dest.priceUsd.toStringAsFixed(0)} USD / C\$ ${dest.priceNio.toStringAsFixed(0)} NIO',
-                    style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 14, fontWeight: FontWeight.w900),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Precio por Explorador', style: TextStyle(color: Colors.white54, fontSize: 10)),
+                    Text(
+                      '\$${dest.priceUsd.toStringAsFixed(0)} USD / C\$ ${dest.priceNio.toStringAsFixed(0)} NIO',
+                      style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 13, fontWeight: FontWeight.w900),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFC86432),
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 ),
-                icon: const Icon(Icons.calendar_today_rounded, color: Colors.white, size: 16),
-                label: const Text('Reservar Ruta', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                icon: const Icon(Icons.calendar_today_rounded, color: Colors.white, size: 15),
+                label: const Text('Reservar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12.5)),
                 onPressed: () => _openCheckout(dest),
               ),
             ],

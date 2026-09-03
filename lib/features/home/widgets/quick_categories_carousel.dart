@@ -38,7 +38,6 @@ class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
 
   /// Lista base de categorías temáticas de exploración en Nicaragua
   final List<Map<String, String>> _categories = const [
-    {'icon': '🇳🇮', 'title': 'Historia Patria', 'sub': '17 Territorios & Memoria', 'route': '/historia-mi-pais'},
     {'icon': '🍽️', 'title': 'Gastronomía', 'sub': '6 Platillos & Restaurantes', 'route': '/gastronomia'},
     {'icon': '🎵', 'title': 'Música & Folklore', 'sub': 'Reproductor de Marimba', 'route': '/musica'},
     {'icon': '🎬', 'title': 'Videos 4K', 'sub': 'Expediciones en video', 'route': '/videos'},

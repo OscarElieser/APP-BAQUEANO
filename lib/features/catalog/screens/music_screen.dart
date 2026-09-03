@@ -113,18 +113,23 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
 
   Future<void> _launchYoutube(String url) async {
     HapticFeedback.mediumImpact();
+    if (url.trim().isEmpty) {
+      CustomToast.error(context, 'Enlace no disponible');
+      return;
+    }
     final uri = Uri.parse(url);
     try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {
-        if (mounted) {
-          CustomToast.show(context, message: 'Abriendo enlace: $url');
-        }
+      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
       }
-    } catch (_) {
-      if (mounted) {
-        CustomToast.error(context, 'No se pudo abrir el enlace de YouTube');
+    } catch (e) {
+      try {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
+      } catch (_) {
+        if (mounted) {
+          CustomToast.error(context, 'No se pudo abrir el enlace de YouTube');
+        }
       }
     }
   }
@@ -404,7 +409,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
 
             _buildGenresGrid(isDesktop),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),

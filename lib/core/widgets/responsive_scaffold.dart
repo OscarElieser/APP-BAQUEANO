@@ -663,7 +663,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
             const Divider(color: AppColors.borderLight),
             _buildDrawerSectionTitle('CATÁLOGO CULTURAL DE NICARAGUA'),
-            _buildDrawerItem(context, '📖', 'Historia de mi país', '/historia-mi-pais', isGold: true),
             _buildDrawerItem(context, '🍽️', 'Gastronomía Autóctona', '/gastronomia'),
             _buildDrawerItem(context, '🎵', 'Música & Marimba de Arco', '/musica'),
             _buildDrawerItem(context, '🎬', 'Videos de Expedición 4K', '/videos'),

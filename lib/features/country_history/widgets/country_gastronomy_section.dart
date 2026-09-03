@@ -95,7 +95,7 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: 410,
+            mainAxisExtent: isDesktop ? 430 : 455,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
           ),

@@ -68,7 +68,7 @@ class GastronomyScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: isDesktop ? 420 : 500,
-                mainAxisExtent: 490,
+                mainAxisExtent: isDesktop ? 510 : 540,
                 crossAxisSpacing: 18,
                 mainAxisSpacing: 18,
               ),
@@ -198,7 +198,7 @@ class GastronomyScreen extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),
