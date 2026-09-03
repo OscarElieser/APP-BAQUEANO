@@ -1,23 +1,23 @@
 // ============================================================================
-// 🛡️ EL ESTÁNDAR BAQUEANO: GALERÍA DINÁMICA INFINITA & CONVERSIÓN (BAQUEANO_STANDARD.DART)
+// 🧭 BAQUEANO ECOSYSTEM — EL ESTÁNDAR BAQUEANO (4 PILARES & LLAMADA A LA AVENTURA)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Presentar los 4 pilares innegociables del ecosistema Baqueano (Guías Nativos,
-//   0% Intermediación, PWA Offline y Baqueano AI) en un carrusel dinámico infinito
-//   continuo a 60 FPS con movimiento en dirección opuesta (Reverse: derecha a izquierda).
-// - Cumplir con la pausa inteligente: cuando el explorador toca cualquier pilar, el carrusel
-//   se detiene al instante y abre el desglose técnico y ético del pilar; al cerrarlo,
-//   continúa fluidamente su marcha.
+// - Consolidar la identidad y la promesa de valor inquebrantable de Baqueano:
+//   guías nativos acreditados, 0% intermediación usurera, tecnología offline
+//   para zonas remotas e inteligencia artificial con Gemini al servicio del campesino.
+// - Brindar una experiencia fluida a 120 FPS sin ralentizaciones ni parpadeos
+//   en cualquier teléfono inteligente (gama media, alta y ultra-alta).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - `StatefulWidget` con `ScrollController` animado en reversa hacia el offset 0
-//   y reinicio transparente a la mitad del contenido cuadriplicado.
-// - Modal explicativo `_showPillarDetailsModal` con diseño Glassmorphism y paleta volcánica.
-// - Banner inferior de conversión hero con doble llamada a la acción interactiva.
+// - `RepaintBoundary` para independizar el renderizado del carrusel de pilares.
+// - `ListView.separated` horizontal con `BouncingScrollPhysics` nativa.
+// - Ficha modal detallada (`_showPillarDetailsModal`) que profundiza en la filosofía
+//   y auditoría de cada pilar al tocarlo.
+// - Banner hero de conversión final que invita a explorar o consultar con Baqueano AI.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `BaqueanoStandard`: Carrusel infinito bidireccional de pilares y banner de conversión.
+// - `BaqueanoStandard`: Sección institucional de pilares y llamada a la acción.
 // ============================================================================
 
 import 'package:flutter/material.dart';
@@ -36,16 +36,7 @@ class BaqueanoStandard extends StatefulWidget {
 }
 
 class _BaqueanoStandardState extends State<BaqueanoStandard> {
-  /// Controlador del desplazamiento horizontal en reversa
-  late final ScrollController _scrollController;
-
-  /// Bandera para evitar llamadas asíncronas tras dispose
-  bool _isDisposed = false;
-
-  /// Estado reactivo de pausa inteligente
-  bool _isPaused = false;
-
-  /// Pilar actualmente seleccionado para feedback visual
+  /// Pilar actualmente seleccionado para desplegar su ficha explicativa
   Map<String, String>? _selectedPillar;
 
   /// Definición de los 4 pilares fundamentales del Estándar Baqueano
@@ -76,68 +67,14 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
     },
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    // Posiciona el scroll en un punto medio y arranca el desplazamiento en reversa
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        final maxScroll = _scrollController.position.maxScrollExtent;
-        if (maxScroll > 0) {
-          _scrollController.jumpTo(maxScroll * 0.6);
-        }
-      }
-      _startContinuousReverseScroll();
-    });
-  }
-
-  /// Desplazamiento continuo infinito a 60 FPS en dirección opuesta (Reverse: derecha -> izquierda)
-  void _startContinuousReverseScroll() async {
-    while (!_isDisposed && mounted) {
-      if (_scrollController.hasClients && !_isPaused) {
-        final currentScroll = _scrollController.offset;
-
-        if (currentScroll > 5) {
-          // Velocidad constante suave (44ms por píxel)
-          final durationMs = (currentScroll * 44).toInt();
-          await _scrollController.animateTo(
-            0,
-            duration: Duration(milliseconds: durationMs),
-            curve: Curves.linear,
-          );
-        }
-
-        // Al llegar a 0 salta transparentemente a la mitad para continuar el bucle
-        if (!_isDisposed && mounted && _scrollController.hasClients && !_isPaused) {
-          final maxScroll = _scrollController.position.maxScrollExtent;
-          _scrollController.jumpTo(maxScroll * 0.6);
-        }
-      } else {
-        await Future.delayed(const Duration(milliseconds: 250));
-      }
+  Future<void> _handlePillarSelected(Map<String, String> pilar) async {
+    setState(() => _selectedPillar = pilar);
+    await _showPillarDetailsModal(context, pilar);
+    if (mounted) {
+      setState(() => _selectedPillar = null);
     }
   }
 
-  /// Abre el detalle exhaustivo del pilar y pausa el carrusel
-  Future<void> _handlePillarSelected(Map<String, String> std) async {
-    setState(() {
-      _isPaused = true;
-      _selectedPillar = std;
-    });
-
-    await _showPillarDetailsModal(context, std);
-
-    if (mounted && !_isDisposed) {
-      setState(() {
-        _isPaused = false;
-        _selectedPillar = null;
-      });
-      _startContinuousReverseScroll();
-    }
-  }
-
-  /// Modal con explicación profunda del pilar seleccionado
   Future<void> _showPillarDetailsModal(BuildContext context, Map<String, String> std) async {
     await showModalBottomSheet(
       context: context,
@@ -147,134 +84,99 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
       ),
       builder: (ctx) => Padding(
         padding: const EdgeInsets.all(24),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(
-                child: Container(
-                  width: 44,
-                  height: 4,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 44,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 18),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.white24,
-                    borderRadius: BorderRadius.circular(2),
+                    color: AppColors.terracotta.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.terracotta.withValues(alpha: 0.5)),
                   ),
+                  child: Text(std['icon']!, style: const TextStyle(fontSize: 32)),
                 ),
-              ),
-              const SizedBox(height: 18),
-
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.terracotta.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: AppColors.terracotta.withValues(alpha: 0.4)),
-                    ),
-                    child: Text(std['icon']!, style: const TextStyle(fontSize: 30)),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          std['title']!,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white,
-                          ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        std['title']!,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
                         ),
-                        Text(
-                          'Pilar Fundamental Baqueano',
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 11,
-                            color: AppColors.gold,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        'Pilar Fundamental Baqueano',
+                        style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.gold),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-              const Divider(color: Colors.white12),
-              const SizedBox(height: 14),
-
-              Text(
-                'Compromiso con la Comunidad & el Explorador:',
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.1,
-                  color: AppColors.goldLight,
                 ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            const Divider(color: Colors.white12),
+            const SizedBox(height: 12),
+            Text(
+              std['detail']!,
+              style: GoogleFonts.inter(
+                fontSize: 13.5,
+                color: Colors.white.withValues(alpha: 0.9),
+                height: 1.55,
               ),
-              const SizedBox(height: 8),
-
-              Text(
-                std['detail']!,
-                style: GoogleFonts.inter(
-                  fontSize: 14,
-                  color: Colors.white.withValues(alpha: 0.9),
-                  height: 1.55,
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(ctx),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.terracotta,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 ),
-              ),
-
-              const SizedBox(height: 24),
-
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pop(ctx),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.terracotta,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  ),
-                  child: Text(
-                    'Entendido · Volver al Estándar',
-                    style: GoogleFonts.montserrat(fontWeight: FontWeight.w800, fontSize: 12),
+                child: Text(
+                  'Entendido',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   @override
-  void dispose() {
-    _isDisposed = true;
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // Cuadriplicación de los 4 pilares para flujo continuo infinito
-    final continuousList = [
-      ..._standards,
-      ..._standards,
-      ..._standards,
-      ..._standards,
-    ];
-
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Encabezado institucional centrado con indicador dinámico de estado en vivo
+        // Encabezado institucional centrado con badge informativo
         Padding(
           padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
           child: Column(
@@ -287,37 +189,25 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                 isCentered: true,
               ),
               const SizedBox(height: 6),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
-                  color: _isPaused
-                      ? AppColors.terracotta.withValues(alpha: 0.22)
-                      : AppColors.gold.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: _isPaused
-                        ? AppColors.terracotta.withValues(alpha: 0.6)
-                        : AppColors.borderGold.withValues(alpha: 0.4),
-                    width: 1,
-                  ),
+                  color: AppColors.gold.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.4), width: 0.8),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      _isPaused ? Icons.pause_circle_rounded : Icons.sync_alt_rounded,
-                      size: 11,
-                      color: _isPaused ? AppColors.terracotta : AppColors.gold,
-                    ),
-                    const SizedBox(width: 5),
+                    const Icon(Icons.verified_user_rounded, size: 13, color: AppColors.gold),
+                    const SizedBox(width: 6),
                     Text(
-                      _isPaused ? 'PAUSADO (EXPLORANDO)' : 'FLUJO INVERSO · 60 FPS',
+                      '4 PILARES INNEGOCIABLES · ÉTICA & TECNOLOGÍA',
                       style: GoogleFonts.spaceGrotesk(
-                        fontSize: 9,
+                        fontSize: 10,
                         fontWeight: FontWeight.w800,
-                        letterSpacing: 0.6,
-                        color: _isPaused ? AppColors.terracotta : AppColors.gold,
+                        letterSpacing: 0.8,
+                        color: AppColors.gold,
                       ),
                     ),
                   ],
@@ -327,33 +217,25 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
           ),
         ),
 
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
 
-        // Carrusel horizontal continuo en dirección opuesta (Reverse)
-        SizedBox(
-          height: 165,
-          child: Listener(
-            onPointerDown: (_) => setState(() => _isPaused = true),
-            onPointerUp: (_) {
-              if (_selectedPillar == null) {
-                setState(() => _isPaused = false);
-                _startContinuousReverseScroll();
-              }
-            },
+        // Carrusel horizontal aislado con RepaintBoundary para 120 FPS
+        RepaintBoundary(
+          child: SizedBox(
+            height: 165,
             child: ListView.separated(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
-              itemCount: continuousList.length,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              itemCount: _standards.length,
               separatorBuilder: (_, __) => const SizedBox(width: 14),
               itemBuilder: (context, index) {
-                final std = continuousList[index];
+                final std = _standards[index];
                 final isSelected = _selectedPillar?['title'] == std['title'];
 
                 return AnimatedScale(
                   scale: isSelected ? 1.03 : 1.0,
-                  duration: const Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 140),
                   child: InkWell(
                     onTap: () => _handlePillarSelected(std),
                     borderRadius: BorderRadius.circular(20),
@@ -388,7 +270,6 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Icono enmarcado en terracota
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -399,8 +280,6 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                             child: Text(std['icon']!, style: const TextStyle(fontSize: 22)),
                           ),
                           const SizedBox(width: 14),
-
-                          // Título y descripción del pilar
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -483,7 +362,6 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
-                // Botones de acción dual: Catálogo o Chat IA
                 Wrap(
                   spacing: 12,
                   runSpacing: 10,

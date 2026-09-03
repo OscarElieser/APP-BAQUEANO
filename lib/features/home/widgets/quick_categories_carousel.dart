@@ -1,23 +1,22 @@
 // ============================================================================
-// 🎠 CARRUSEL DINÁMICO INFINITO DE CATEGORÍAS CULTURALES (QUICK_CATEGORIES_CAROUSEL.DART)
+// 🧭 BAQUEANO ECOSYSTEM — CARRUSEL DE CATEGORÍAS CULTURALES
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una experiencia dinámica y continua a 60 FPS de las 8 categorías
-//   temáticas fundamentales de Nicaragua (Gastronomía, Marimba, Videos 4K, Playas, etc.).
-// - Cumplir con la interacción de pausa inteligente: el carrusel se desplaza
-//   infinitamente de izquierda a derecha; al seleccionar una categoría, se detiene
-//   para dar retroalimentación visual al explorador antes de la navegación.
+// - Proveer acceso rápido e interactivo a las 8 rutas y categorías esenciales
+//   de Nicaragua (Gastronomía ancestral, Marimba, Videos 4K, Playas, Eco-Lodges, etc.).
+// - Brindar una navegación ultrafluida y libre de retrasos tanto en dispositivos
+//   de gama media como en pantallas de 120Hz de alta gama.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - `StatefulWidget` con `ScrollController` y bucle asíncrono constante (`Curves.linear`).
-// - Detección táctil mediante `Listener`: `onPointerDown` pausa inmediatamente el carrusel;
-//   `onPointerUp` reanuda la marcha suavemente.
-// - Cuadruplicación de la lista de categorías para bucle infinito sin parpadeos ni saltos.
-// - Tarjetas Glassmorphism con `AppGradients.cardGlass` y bordes sutiles en paleta volcánica.
+// - `RepaintBoundary` para aislar el renderizado del carrusel y evitar redibujados
+//   innecesarios en la pantalla principal vertical.
+// - `ListView.separated` horizontal con `BouncingScrollPhysics` nativa que asegura
+//   un desplazamiento suave, ligero y sin fricción de gestos táctiles.
+// - Microinteracción con `AnimatedScale` y paleta volcánica oficial (#082B35, #C86432, #D4AF37).
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `QuickCategoriesCarousel`: Carrusel horizontal continuo con desplazamiento hacia adelante.
+// - `QuickCategoriesCarousel`: Carrusel horizontal de alto rendimiento y bajo consumo.
 // ============================================================================
 
 import 'package:flutter/material.dart';
@@ -34,19 +33,10 @@ class QuickCategoriesCarousel extends StatefulWidget {
 }
 
 class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
-  /// Controlador del desplazamiento horizontal continuo
-  late final ScrollController _scrollController;
-
-  /// Bandera para evitar llamadas asíncronas cuando el widget se destruye
-  bool _isDisposed = false;
-
-  /// Estado reactivo que pausa la animación cuando el usuario interactúa
-  bool _isPaused = false;
-
-  /// Categoría actualmente presionada para feedback táctil
+  /// Categoría actualmente presionada para dar feedback táctil inmediato
   String? _selectedCategory;
 
-  /// Lista base de categorías temáticas de exploración
+  /// Lista base de categorías temáticas de exploración en Nicaragua
   final List<Map<String, String>> _categories = const [
     {'icon': '🍽️', 'title': 'Gastronomía', 'sub': '6 Platillos & Restaurantes', 'route': '/gastronomia'},
     {'icon': '🎵', 'title': 'Música & Folklore', 'sub': 'Reproductor de Marimba', 'route': '/musica'},
@@ -58,104 +48,36 @@ class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
     {'icon': '🧭', 'title': 'Mega-Catálogo', 'sub': 'Exploración completa', 'route': '/descubrir'},
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    // Inicia el desplazamiento infinito una vez renderizado el widget
-    WidgetsBinding.instance.addPostFrameCallback((_) => _startContinuousScroll());
-  }
-
-  /// Desplazamiento infinito continuo a 60 FPS en dirección hacia adelante (Forward ->)
-  void _startContinuousScroll() async {
-    while (!_isDisposed && mounted) {
-      if (_scrollController.hasClients && !_isPaused) {
-        final maxScroll = _scrollController.position.maxScrollExtent;
-        final currentScroll = _scrollController.offset;
-        final remainingDistance = maxScroll - currentScroll;
-
-        if (remainingDistance > 0) {
-          // Velocidad constante suave (40ms por píxel)
-          final durationMs = (remainingDistance * 40).toInt();
-          await _scrollController.animateTo(
-            maxScroll,
-            duration: Duration(milliseconds: durationMs),
-            curve: Curves.linear,
-          );
-        }
-
-        // Retorno transparente al inicio para simular bucle continuo sin saltos
-        if (!_isDisposed && mounted && _scrollController.hasClients && !_isPaused) {
-          _scrollController.jumpTo(0);
-        }
-      } else {
-        await Future.delayed(const Duration(milliseconds: 250));
-      }
-    }
-  }
-
-  /// Pausa el carrusel al seleccionar una categoría, resalta y ejecuta la navegación
   void _onCategoryTapped(Map<String, String> cat) async {
-    setState(() {
-      _isPaused = true;
-      _selectedCategory = cat['title'];
-    });
-
-    // Breve pausa para apreciación visual del toque
-    await Future.delayed(const Duration(milliseconds: 180));
-
+    setState(() => _selectedCategory = cat['title']);
+    await Future.delayed(const Duration(milliseconds: 140));
     if (mounted) {
       context.go(cat['route']!);
-      // Al retornar si aplica, se reanuda
-      setState(() {
-        _isPaused = false;
-        _selectedCategory = null;
-      });
-      _startContinuousScroll();
+      setState(() => _selectedCategory = null);
     }
-  }
-
-  @override
-  void dispose() {
-    _isDisposed = true;
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Cuadruplicación de categorías para flujo infinito transparente
-    final continuousList = [
-      ..._categories,
-      ..._categories,
-      ..._categories,
-      ..._categories,
-    ];
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isDesktop = screenWidth >= 950;
 
-    return SizedBox(
-      height: 125,
-      child: Listener(
-        onPointerDown: (_) => setState(() => _isPaused = true),
-        onPointerUp: (_) {
-          if (_selectedCategory == null) {
-            setState(() => _isPaused = false);
-            _startContinuousScroll();
-          }
-        },
+    return RepaintBoundary(
+      child: SizedBox(
+        height: 125,
         child: ListView.separated(
-          controller: _scrollController,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
           scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemCount: continuousList.length,
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          itemCount: _categories.length,
           separatorBuilder: (_, __) => const SizedBox(width: 14),
           itemBuilder: (context, index) {
-            final cat = continuousList[index];
+            final cat = _categories[index];
             final isSelected = _selectedCategory == cat['title'];
 
             return AnimatedScale(
-              scale: isSelected ? 1.05 : 1.0,
-              duration: const Duration(milliseconds: 180),
+              scale: isSelected ? 1.04 : 1.0,
+              duration: const Duration(milliseconds: 140),
               child: InkWell(
                 onTap: () => _onCategoryTapped(cat),
                 borderRadius: BorderRadius.circular(18),
@@ -191,11 +113,8 @@ class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Icono / Emoji temático
                       Text(cat['icon']!, style: const TextStyle(fontSize: 26)),
                       const SizedBox(height: 6),
-
-                      // Título en Space Grotesk
                       Text(
                         cat['title']!,
                         style: GoogleFonts.spaceGrotesk(
@@ -206,8 +125,6 @@ class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-
-                      // Subtítulo descriptivo en Inter
                       Text(
                         cat['sub']!,
                         style: GoogleFonts.inter(

@@ -1,25 +1,22 @@
 // ============================================================================
-// 🏪 VITRINA DINÁMICA INFINITA DE NEGOCIOS RURALES (BUSINESS_SHOWCASE.DART)
+// 🧭 BAQUEANO ECOSYSTEM — VITRINA DE NEGOCIOS RURALES & GUÍAS NATIVOS
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Empoderar a los emprendedores campesinos y guías comunitarios (comedores, cabañas,
-//   cooperativas) mostrándolos en una vitrina viva que fluye de forma continua.
-// - Ofrecer contraste de movimiento bidireccional respecto a otras secciones: este carrusel
-//   se desplaza en dirección opuesta (de derecha a izquierda / Reverse), enriqueciendo la
-//   dinámica visual de la pantalla de inicio.
-// - Cumplir con la pausa inteligente: cuando el explorador toca cualquier negocio o su botón
-//   de ficha completa, el movimiento se congela de inmediato; al cerrar el modal, continúa su viaje.
+// - Conectar de forma directa y sin comisiones abusivas a los turistas con los
+//   dueños de cabañas, comedores ancestrales, cooperativas de café y guías nativos.
+// - Ofrecer una experiencia táctil inmediata y ultrafluida a 120 FPS sin consumo
+//   innecesario de batería ni tirones en el feed principal.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - `StatefulWidget` con `ScrollController` animado en reversa continua hacia el offset 0
-//   y reinicio transparente a la mitad del contenido cuadriplicado (`midPoint`).
-// - Detección táctil por `Listener` y apertura asíncrona de `_showBusinessDetailsModal`.
-// - Indicador dinámico de estado en vivo (`EN VIVO · 60 FPS` vs `PAUSADO (EXPLORANDO)`).
-// - Botones de acción directa para WhatsApp (`https://wa.me/`), Llamada y Mapa GPS.
+// - `RepaintBoundary` para encapsular la superficie de renderizado del carrusel,
+//   eliminando la propagación de repintados hacia la pantalla principal.
+// - `ListView.separated` horizontal con `BouncingScrollPhysics` nativa y suave inercia.
+// - Ficha modal detallada (`_showBusinessDetailsModal`) con enlaces directos a WhatsApp,
+//   llamadas telefónicas y ubicación georreferenciada en el mapa satelital.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `BusinessShowcase`: Vitrina interactiva infinita en dirección inversa.
+// - `BusinessShowcase`: Vitrina interactiva de negocios locales campesinos.
 // ============================================================================
 
 import 'package:flutter/material.dart';
@@ -40,106 +37,37 @@ class BusinessShowcase extends StatefulWidget {
 }
 
 class _BusinessShowcaseState extends State<BusinessShowcase> {
-  /// Controlador del desplazamiento horizontal en reversa
-  late final ScrollController _scrollController;
-
-  /// Bandera para evitar llamadas cuando el widget se destruye
-  bool _isDisposed = false;
-
-  /// Estado reactivo de pausa inteligente
-  bool _isPaused = false;
-
-  /// Negocio actualmente seleccionado para feedback visual
+  /// Negocio actualmente presionado para feedback táctil
   dynamic _selectedBiz;
 
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    // Inicia el desplazamiento en reversa una vez montado el widget
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        // Posiciona el scroll en un punto medio seguro para iniciar el avance hacia la izquierda
-        final maxScroll = _scrollController.position.maxScrollExtent;
-        if (maxScroll > 0) {
-          _scrollController.jumpTo(maxScroll * 0.6);
-        }
-      }
-      _startContinuousReverseScroll();
-    });
-  }
-
-  /// Desplazamiento continuo infinito a 60 FPS en dirección opuesta (Reverse: derecha -> izquierda)
-  void _startContinuousReverseScroll() async {
-    while (!_isDisposed && mounted) {
-      if (_scrollController.hasClients && !_isPaused) {
-        final currentScroll = _scrollController.offset;
-
-        if (currentScroll > 5) {
-          // Velocidad constante suave hacia 0 (38ms por píxel)
-          final durationMs = (currentScroll * 38).toInt();
-          await _scrollController.animateTo(
-            0,
-            duration: Duration(milliseconds: durationMs),
-            curve: Curves.linear,
-          );
-        }
-
-        // Cuando llega a 0, salta transparentemente al punto medio para continuar el bucle infinito
-        if (!_isDisposed && mounted && _scrollController.hasClients && !_isPaused) {
-          final maxScroll = _scrollController.position.maxScrollExtent;
-          _scrollController.jumpTo(maxScroll * 0.6);
-        }
-      } else {
-        await Future.delayed(const Duration(milliseconds: 250));
-      }
-    }
-  }
-
-  /// Abre la ficha técnica y pausa el carrusel hasta que el usuario la cierre
   Future<void> _handleBusinessSelection(dynamic biz) async {
-    setState(() {
-      _isPaused = true;
-      _selectedBiz = biz;
-    });
-
+    setState(() => _selectedBiz = biz);
     await _showBusinessDetailsModal(context, biz);
-
-    if (mounted && !_isDisposed) {
-      setState(() {
-        _isPaused = false;
-        _selectedBiz = null;
-      });
-      _startContinuousReverseScroll();
+    if (mounted) {
+      setState(() => _selectedBiz = null);
     }
   }
 
   Future<void> _launchWhatsApp(BuildContext context, String phone, String bizName) async {
-    setState(() => _isPaused = true);
     final cleanPhone = phone.replaceAll(RegExp(r'[^0-9]'), '');
-    final uri = Uri.parse('https://wa.me/$cleanPhone?text=Hola%2C%20vi%20su%20negocio%20$bizName%20en%20la%20app%20Baqueano%20y%20deseo%20m%C3%A1s%20informaci%C3%B3n.');
+    final uri = Uri.parse(
+        'https://wa.me/$cleanPhone?text=Hola%2C%20vi%20su%20negocio%20$bizName%20en%20la%20app%20Baqueano%20y%20deseo%20m%C3%A1s%20informaci%C3%B3n.');
     try {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else {
         if (context.mounted) {
-          CustomToast.error(context, 'No se pudo abrir WhatsApp en este dispositivo');
+          CustomToast.error(context, 'WhatsApp no disponible: $phone');
         }
       }
     } catch (_) {
       if (context.mounted) {
-        CustomToast.error(context, 'WhatsApp no disponible: $phone');
+        CustomToast.error(context, 'No se pudo abrir WhatsApp');
       }
-    }
-    await Future.delayed(const Duration(milliseconds: 600));
-    if (mounted && !_isDisposed && _selectedBiz == null) {
-      setState(() => _isPaused = false);
-      _startContinuousReverseScroll();
     }
   }
 
   Future<void> _launchPhone(BuildContext context, String phone) async {
-    setState(() => _isPaused = true);
     final uri = Uri.parse('tel:$phone');
     try {
       if (await canLaunchUrl(uri)) {
@@ -153,11 +81,6 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
       if (context.mounted) {
         CustomToast.show(context, message: 'Contacto: $phone');
       }
-    }
-    await Future.delayed(const Duration(milliseconds: 600));
-    if (mounted && !_isDisposed && _selectedBiz == null) {
-      setState(() => _isPaused = false);
-      _startContinuousReverseScroll();
     }
   }
 
@@ -198,64 +121,66 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                         Text(
                           biz.name as String,
                           style: const TextStyle(
-                            color: Colors.white,
                             fontSize: 18,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
                           ),
                         ),
                         Text(
                           '${biz.category} • ${biz.department}',
-                          style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
+                          style: const TextStyle(fontSize: 12, color: Color(0xFFD4AF37)),
                         ),
                       ],
                     ),
                   ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.jungleGreen.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.jungleGreenLight),
+                    ),
+                    child: Text(
+                      biz.badge as String,
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.jungleGreenLight,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
               const Divider(color: Colors.white12),
               const SizedBox(height: 12),
-
-              _buildModalRow(Icons.person_rounded, 'Propietario / Líder', biz.ownerName as String),
-              const SizedBox(height: 10),
-              _buildModalRow(Icons.place_rounded, 'Ubicación Exacta', biz.address as String),
-              const SizedBox(height: 10),
-              _buildModalRow(Icons.phone_rounded, 'Contacto Directo', biz.contact as String),
-              const SizedBox(height: 10),
-              _buildModalRow(Icons.chat_rounded, 'WhatsApp', biz.whatsapp as String),
-              const SizedBox(height: 10),
-              _buildModalRow(Icons.mail_outline_rounded, 'Correo', biz.email as String),
-              const SizedBox(height: 14),
-
               Text(
-                'Descripción & Servicios:',
-                style: GoogleFonts.montserrat(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
+                'Sobre el Emprendimiento Comunitario:',
+                style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               const SizedBox(height: 6),
               Text(
                 biz.description as String,
-                style: GoogleFonts.inter(
+                style: TextStyle(
                   fontSize: 13,
                   color: Colors.white.withValues(alpha: 0.8),
-                  height: 1.4,
+                  height: 1.5,
                 ),
               ),
-              const SizedBox(height: 20),
-
+              const SizedBox(height: 16),
+              _buildModalRow(Icons.person_rounded, 'Anfitrión o Responsable', biz.ownerName as String),
+              const SizedBox(height: 10),
+              _buildModalRow(Icons.location_on_rounded, 'Ubicación Comunitaria', '${biz.location}, ${biz.department}'),
+              const SizedBox(height: 10),
+              _buildModalRow(Icons.star_rounded, 'Calificación Verificada', '${biz.rating} ⭐ de exploradores Baqueano'),
+              const SizedBox(height: 24),
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pop(ctx);
-                        _launchWhatsApp(context, biz.whatsapp as String, biz.name as String);
-                      },
+                      onPressed: () => _launchWhatsApp(ctx, biz.whatsapp as String, biz.name as String),
                       icon: const Icon(Icons.chat_rounded, color: Colors.white, size: 16),
-                      label: const Text('WhatsApp'),
+                      label: const Text('Contactar WhatsApp'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF25D366),
                         foregroundColor: Colors.white,
@@ -320,31 +245,15 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
   }
 
   @override
-  void dispose() {
-    _isDisposed = true;
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final businesses = CatalogData.localBusinesses;
-
-    // Cuadriplicación de la lista para movimiento infinito fluido
-    final continuousList = [
-      ...businesses,
-      ...businesses,
-      ...businesses,
-      ...businesses,
-    ];
-
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Encabezado temático centrado con indicador dinámico de estado en vivo
+        // Encabezado temático centrado con badge informativo
         Padding(
           padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
           child: Column(
@@ -357,37 +266,25 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                 isCentered: true,
               ),
               const SizedBox(height: 6),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
-                  color: _isPaused
-                      ? AppColors.terracotta.withValues(alpha: 0.22)
-                      : AppColors.gold.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: _isPaused
-                        ? AppColors.terracotta.withValues(alpha: 0.6)
-                        : AppColors.borderGold.withValues(alpha: 0.4),
-                    width: 1,
-                  ),
+                  color: AppColors.gold.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.4), width: 0.8),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      _isPaused ? Icons.pause_circle_rounded : Icons.sync_alt_rounded,
-                      size: 11,
-                      color: _isPaused ? AppColors.terracotta : AppColors.gold,
-                    ),
-                    const SizedBox(width: 5),
+                    const Icon(Icons.handshake_rounded, size: 13, color: AppColors.gold),
+                    const SizedBox(width: 6),
                     Text(
-                      _isPaused ? 'PAUSADO (EXPLORANDO)' : 'FLUJO INVERSO · 60 FPS',
+                      'CONTACTO DIRECTO · ${businesses.length} EMPRENDIMIENTOS CAMPESINOS',
                       style: GoogleFonts.spaceGrotesk(
-                        fontSize: 9,
+                        fontSize: 10,
                         fontWeight: FontWeight.w800,
-                        letterSpacing: 0.6,
-                        color: _isPaused ? AppColors.terracotta : AppColors.gold,
+                        letterSpacing: 0.8,
+                        color: AppColors.gold,
                       ),
                     ),
                   ],
@@ -399,31 +296,23 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
 
         const SizedBox(height: 14),
 
-        // Carrusel horizontal continuo en dirección opuesta (Reverse)
-        SizedBox(
-          height: 275,
-          child: Listener(
-            onPointerDown: (_) => setState(() => _isPaused = true),
-            onPointerUp: (_) {
-              if (_selectedBiz == null) {
-                setState(() => _isPaused = false);
-                _startContinuousReverseScroll();
-              }
-            },
+        // Carrusel horizontal aislado con RepaintBoundary para 120 FPS
+        RepaintBoundary(
+          child: SizedBox(
+            height: 275,
             child: ListView.separated(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
-              itemCount: continuousList.length,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              itemCount: businesses.length,
               separatorBuilder: (_, __) => const SizedBox(width: 16),
               itemBuilder: (context, index) {
-                final biz = continuousList[index];
+                final biz = businesses[index];
                 final isSelected = _selectedBiz == biz;
 
                 return AnimatedScale(
                   scale: isSelected ? 1.03 : 1.0,
-                  duration: const Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 140),
                   child: InkWell(
                     onTap: () => _handleBusinessSelection(biz),
                     borderRadius: BorderRadius.circular(22),
@@ -440,25 +329,21 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                             : AppGradients.cardGlass,
                         borderRadius: BorderRadius.circular(22),
                         border: Border.all(
-                          color: isSelected
-                              ? AppColors.gold
-                              : AppColors.borderLight.withValues(alpha: 0.7),
-                          width: isSelected ? 1.8 : 1.0,
+                          color: isSelected ? AppColors.gold : AppColors.borderLight,
+                          width: isSelected ? 1.6 : 1.0,
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: isSelected
-                                ? AppColors.gold.withValues(alpha: 0.35)
-                                : Colors.black.withValues(alpha: 0.3),
-                            blurRadius: isSelected ? 16 : 14,
-                            offset: const Offset(0, 6),
+                            color: Colors.black.withValues(alpha: 0.25),
+                            blurRadius: 12,
+                            offset: const Offset(0, 5),
                           ),
                         ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Fila superior: Icono del negocio y Badge verde de acreditación
+                          // Header con Icono y Badge
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -558,12 +443,12 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: const Color(0xFF0284C7).withValues(alpha: 0.5)),
                                   ),
-                                  child: const Icon(Icons.phone_rounded, color: Color(0xFF38BDF8), size: 16),
+                                  child: const Icon(Icons.phone_rounded, color: Color(0xFF0284C7), size: 16),
                                 ),
                               ),
                               const SizedBox(width: 8),
 
-                              // Ver Ficha Completa
+                              // Ver Ficha
                               Expanded(
                                 child: InkWell(
                                   onTap: () => _handleBusinessSelection(biz),
@@ -571,16 +456,17 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(vertical: 8),
                                     decoration: BoxDecoration(
-                                      gradient: AppGradients.sunsetTerracotta,
+                                      color: AppColors.terracotta.withValues(alpha: 0.15),
                                       borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(color: AppColors.terracotta.withValues(alpha: 0.5)),
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                        'Ver Ficha & Pin 🗺️',
-                                        style: TextStyle(
-                                          color: Colors.white,
+                                        'Ver Ficha',
+                                        style: GoogleFonts.spaceGrotesk(
                                           fontSize: 11,
-                                          fontWeight: FontWeight.w800,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.terracottaLight,
                                         ),
                                       ),
                                     ),
