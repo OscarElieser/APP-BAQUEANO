@@ -37,6 +37,7 @@ import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../services/booking_and_communication_service.dart';
+import '../../../services/passport_membership_service.dart';
 import 'baqueano_voucher_dialog.dart';
 
 /// Ficha técnica, fiscal y bancaria del emprendimiento local anfitrión
@@ -278,12 +279,19 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
     }
   }
 
+  /// Tarifa de servicio Baqueano & Fondo de Conservación Ambiental
+  static const double _serviceFeeUsd = 2.50;
+  double get _serviceFeeNio => _serviceFeeUsd * AppConstants.exchangeRateNioUsd;
+
+  double get _passportDiscountPercentage => ref.watch(passportMembershipProvider).isActive ? 0.15 : 0.0;
+  double get _effectiveDiscountPercentage => (_discountPercentage + _passportDiscountPercentage).clamp(0.0, 0.50);
+
   double get _subtotalUsd => widget.destination.priceUsd * _participants;
-  double get _discountAmountUsd => _subtotalUsd * _discountPercentage;
+  double get _discountAmountUsd => _subtotalUsd * _effectiveDiscountPercentage;
   double get _afterDiscountUsd => _subtotalUsd - _discountAmountUsd;
   double get _vatRate => _isTourist ? AppConstants.touristVatRate : AppConstants.residentVatRate;
   double get _vatAmountUsd => _afterDiscountUsd * _vatRate;
-  double get _totalUsd => _afterDiscountUsd + _vatAmountUsd;
+  double get _totalUsd => _afterDiscountUsd + _vatAmountUsd + _serviceFeeUsd;
 
   double get _totalNio => _totalUsd * AppConstants.exchangeRateNioUsd;
   double get _subtotalNio => _subtotalUsd * AppConstants.exchangeRateNioUsd;
@@ -918,10 +926,14 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 'Tarifa Base x $_participants persona(s)',
                 _formatCurrency(_subtotalUsd, _subtotalNio),
               ),
-              if (_couponApplied) ...[
+              if (_couponApplied || ref.watch(passportMembershipProvider).isActive) ...[
                 const SizedBox(height: 8),
                 _buildPriceRow(
-                  'Descuento Comunitario (-15%)',
+                  ref.watch(passportMembershipProvider).isActive && _couponApplied
+                      ? 'Descuento Combinado (Cupón + Pasaporte)'
+                      : ref.watch(passportMembershipProvider).isActive
+                          ? 'Beneficio Pasaporte Explorador (-15%)'
+                          : 'Descuento Comunitario (-15%)',
                   '- ${_formatCurrency(_discountAmountUsd, _discountAmountNio)}',
                   textColor: AppColors.success,
                 ),
@@ -931,6 +943,12 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 _isTourist ? 'IVA (Exoneración Turista 0% Ley 306)' : 'IVA (Residente Local 15% DGI)',
                 _formatCurrency(_vatAmountUsd, _vatAmountNio),
                 textColor: _isTourist ? AppColors.goldLight : AppColors.textMuted,
+              ),
+              const SizedBox(height: 8),
+              _buildPriceRow(
+                'Tarifa de Servicio Baqueano & Fondo Verde',
+                _formatCurrency(_serviceFeeUsd, _serviceFeeNio),
+                textColor: AppColors.goldLight,
               ),
               const Divider(color: AppColors.borderLight, height: 20),
               Wrap(

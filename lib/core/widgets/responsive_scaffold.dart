@@ -672,6 +672,10 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             _buildDrawerItem(context, '📍', 'Turismo & Volcanes', '/turismo'),
 
             const Divider(color: AppColors.borderLight),
+            _buildDrawerSectionTitle('ALIANZAS & CRECIMIENTO COMERCIAL'),
+            _buildDrawerItem(context, '💼', 'Planes para Negocios & Aliados', '/planes-negocios', isGold: true),
+
+            const Divider(color: AppColors.borderLight),
             _buildDrawerSectionTitle('MISIÓN & COMPROMISO VERDE'),
             _buildDrawerItem(context, '🌿', 'Campaña Ambiental & Recursos', '/campana-ambiental', isGold: true),
             _buildDrawerItem(context, '🏛️', 'Nuestra Marca & Manifiesto', '/marca'),

@@ -292,23 +292,28 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               }
             }
 
-            return Container(
-              padding: EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-              ),
-              decoration: BoxDecoration(
-                color: const Color(0xFF041920),
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-                border: Border.all(color: AppColors.borderGold, width: 1.2),
-                boxShadow: [
-                  BoxShadow(color: Colors.black.withValues(alpha: 0.6), blurRadius: 24, spreadRadius: 4),
-                ],
-              ),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+            final navBarHeight = MediaQuery.of(modalContext).padding.bottom;
+            final keyboardHeight = MediaQuery.of(modalContext).viewInsets.bottom;
+
+            return SafeArea(
+              bottom: true,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 20,
+                  bottom: keyboardHeight + navBarHeight + 28,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF041920),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+                  border: Border.all(color: AppColors.borderGold, width: 1.2),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black.withValues(alpha: 0.6), blurRadius: 24, spreadRadius: 4),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -993,11 +998,13 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                         },
                       ),
                     ),
+                    const SizedBox(height: 48),
                   ],
                 ),
               ),
-            );
-          },
+            ),
+          );
+        },
         );
       },
     );

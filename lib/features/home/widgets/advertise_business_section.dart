@@ -25,6 +25,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
@@ -151,19 +152,24 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
               }
             }
 
-            return Container(
-              padding: EdgeInsets.only(
-                left: 22,
-                right: 22,
-                top: 20,
-                bottom: MediaQuery.of(modalCtx).viewInsets.bottom + 24,
-              ),
-              decoration: const BoxDecoration(
-                color: Color(0xFF071E26),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-              ),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+            final navBarHeight = MediaQuery.of(modalCtx).padding.bottom;
+            final keyboardHeight = MediaQuery.of(modalCtx).viewInsets.bottom;
+
+            return SafeArea(
+              bottom: true,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: 22,
+                  right: 22,
+                  top: 20,
+                  bottom: keyboardHeight + navBarHeight + 28,
+                ),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF071E26),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                ),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -380,12 +386,14 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         width: double.infinity,
                         onPressed: submitByWhatsApp,
                       ),
+                      const SizedBox(height: 36),
                     ],
                   ),
                 ),
               ),
-            );
-          },
+            ),
+          );
+        },
         );
       },
     );
@@ -532,6 +540,14 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                     height: 50,
                     onPressed: () => _openRegisterBusinessModal(context),
                   ),
+                ),
+                const SizedBox(width: 10),
+                BaqueanoButton(
+                  text: 'Ver Planes',
+                  icon: const Icon(Icons.workspace_premium_rounded, size: 18),
+                  variant: BaqueanoButtonVariant.outline,
+                  height: 50,
+                  onPressed: () => context.push('/planes-negocios'),
                 ),
               ],
             ),

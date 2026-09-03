@@ -34,6 +34,7 @@ import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/booking_and_communication_service.dart';
+import '../../../services/passport_membership_service.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -654,6 +655,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             // 1. TARJETA PRINCIPAL DEL EXPLORADOR (DATOS PERSONALES)
             // ----------------------------------------------------------------
             _buildProfileCard(totalExpeditionsDisplay),
+            const SizedBox(height: 18),
+
+            // ----------------------------------------------------------------
+            // 1.5 PASAPORTE DIGITAL DE EXPLORADOR (MONETIZACIÓN B2C & DESCUENTOS)
+            // ----------------------------------------------------------------
+            _buildPassportMembershipCard(),
             const SizedBox(height: 24),
 
             // ----------------------------------------------------------------
@@ -1384,6 +1391,342 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPassportMembershipCard() {
+    final passport = ref.watch(passportMembershipProvider);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xFF0F172A),
+            AppColors.primaryDark,
+            passport.isActive ? const Color(0xFF1E3A2F) : const Color(0xFF082B35),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: passport.isActive ? AppColors.jungleGreenLight : AppColors.gold.withValues(alpha: 0.6),
+          width: 1.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: (passport.isActive ? AppColors.jungleGreen : AppColors.gold).withValues(alpha: 0.15),
+            blurRadius: 18,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: (passport.isActive ? AppColors.jungleGreen : AppColors.gold).withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: passport.isActive ? AppColors.jungleGreenLight : AppColors.goldLight),
+                ),
+                child: Icon(
+                  passport.isActive ? Icons.verified_rounded : Icons.workspace_premium_rounded,
+                  color: passport.isActive ? AppColors.jungleGreenLight : AppColors.goldLight,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      passport.isActive ? 'MEMBRESÍA ACTIVA' : 'PASE TURÍSTICO EXCLUSIVO',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.w800,
+                        color: passport.isActive ? AppColors.jungleGreenLight : AppColors.goldLight,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
+                    Text(
+                      passport.isActive ? 'Pasaporte de Explorador VIP' : 'Pasaporte Digital de Explorador',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (passport.isActive)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.jungleGreen.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.jungleGreenLight),
+                  ),
+                  child: Text(
+                    '15% OFF',
+                    style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.jungleGreenLight),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          if (passport.isActive) ...[
+            Text(
+              'Tienes activados todos los beneficios de explorador: 15% de descuento directo en tus reservas, mapas sin conexión e IA ilimitada.',
+              style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white.withValues(alpha: 0.85), height: 1.4),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                const Icon(Icons.event_available_rounded, color: AppColors.goldLight, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  'Válido hasta: ${passport.expiryDate != null ? "${passport.expiryDate!.day}/${passport.expiryDate!.month}/${passport.expiryDate!.year}" : "Activo"}',
+                  style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                ),
+              ],
+            ),
+          ] else ...[
+            Text(
+              'Ahorra más de \$40 USD en tu viaje a Nicaragua. Accede a 15% de descuento en expediciones y eco-lodges, mapas topográficos 100% offline y asistente IA ilimitado.',
+              style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white.withValues(alpha: 0.85), height: 1.4),
+            ),
+            const SizedBox(height: 14),
+            Row(
+              children: [
+                _buildPassportMiniPerk('🎟️', '15% Descuento'),
+                const SizedBox(width: 8),
+                _buildPassportMiniPerk('🗺️', 'Mapas Offline'),
+                const SizedBox(width: 8),
+                _buildPassportMiniPerk('🤖', 'IA Ilimitada'),
+              ],
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.gold,
+                  foregroundColor: const Color(0xFF041920),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                onPressed: () => _showActivatePassportModal(context),
+                icon: const Icon(Icons.stars_rounded, size: 18),
+                label: Text(
+                  'ACTIVAR PASAPORTE (\$9.99 USD)',
+                  style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w900),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPassportMiniPerk(String emoji, String text) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+        decoration: BoxDecoration(
+          color: AppColors.primaryDark,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppColors.borderLight),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(emoji, style: const TextStyle(fontSize: 13)),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(
+                text,
+                style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w700, color: Colors.white70),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showActivatePassportModal(BuildContext context) {
+    _triggerHaptic();
+
+    String selectedPlan = 'trip';
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (modalCtx, setModalState) {
+            return Container(
+              padding: const EdgeInsets.all(24),
+              decoration: const BoxDecoration(
+                color: Color(0xFF071E26),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 44,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  Row(
+                    children: [
+                      const Icon(Icons.workspace_premium_rounded, color: AppColors.goldLight, size: 26),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Activar Pasaporte Explorador',
+                        style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+
+                  // Opción 1: Pase de Expedición (30 días)
+                  _buildPlanOptionTile(
+                    title: 'Pase de Expedición (30 días)',
+                    price: '\$9.99 USD (C\$ 365 NIO)',
+                    subtitle: 'Ideal para turistas con estadía de 1 mes en Nicaragua',
+                    isSelected: selectedPlan == 'trip',
+                    onTap: () => setModalState(() => selectedPlan = 'trip'),
+                  ),
+                  const SizedBox(height: 10),
+
+                  // Opción 2: Pase Anual (365 días)
+                  _buildPlanOptionTile(
+                    title: 'Pase Anual Completo (365 días)',
+                    price: '\$24.99 USD (C\$ 915 NIO)',
+                    subtitle: 'Para exploradores frecuentes y residentes',
+                    isSelected: selectedPlan == 'annual',
+                    onTap: () => setModalState(() => selectedPlan = 'annual'),
+                  ),
+
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryDark,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: AppColors.borderLight),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.account_balance_rounded, color: AppColors.goldLight, size: 20),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'Se activa al instante. Puedes transferir a cuentas BAC, Banpro, Lafise o Billetera Móvil.',
+                            style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.gold,
+                        foregroundColor: const Color(0xFF041920),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      ),
+                      onPressed: () async {
+                        await ref.read(passportMembershipProvider.notifier).activateMembership(selectedPlan);
+                        if (modalCtx.mounted) {
+                          Navigator.of(modalCtx).pop();
+                        }
+                        if (context.mounted) {
+                          CustomToast.success(context, '¡Pasaporte de Explorador activado con éxito! 15% de descuento habilitado.');
+                        }
+                      },
+                      child: Text(
+                        'CONFIRMAR & ACTIVAR PASAPORTE',
+                        style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w900),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildPlanOptionTile({
+    required String title,
+    required String price,
+    required String subtitle,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.gold.withValues(alpha: 0.15) : AppColors.primaryDark,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: isSelected ? AppColors.gold : AppColors.borderLight,
+            width: isSelected ? 1.6 : 1.0,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              isSelected ? Icons.radio_button_checked_rounded : Icons.radio_button_off_rounded,
+              color: isSelected ? AppColors.goldLight : Colors.white54,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
+                  Text(price, style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight)),
+                  Text(subtitle, style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

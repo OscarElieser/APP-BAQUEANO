@@ -42,6 +42,7 @@ import '../features/history/screens/expedition_history_screen.dart';
 import '../features/map/screens/map_screen.dart';
 import '../features/messaging/screens/host_messaging_screen.dart';
 import '../features/environmental/screens/environmental_campaign_screen.dart';
+import '../features/monetization/screens/business_pricing_screen.dart';
 import '../features/notifications/screens/notifications_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
 import '../features/country_history/screens/country_history_screen.dart';
@@ -202,6 +203,22 @@ class AppRouter {
       GoRoute(
         path: '/admin',
         builder: (context, state) => const AdminScreen(),
+      ),
+      GoRoute(
+        path: '/planes-negocios',
+        builder: (context, state) => const BusinessPricingScreen(),
+      ),
+      GoRoute(
+        path: '/planes_negocios',
+        redirect: (_, __) => '/planes-negocios',
+      ),
+      GoRoute(
+        path: '/planes',
+        redirect: (_, __) => '/planes-negocios',
+      ),
+      GoRoute(
+        path: '/afiliacion',
+        redirect: (_, __) => '/planes-negocios',
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

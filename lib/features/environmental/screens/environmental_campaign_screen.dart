@@ -322,18 +322,23 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
               }
             }
 
-            return Container(
-              padding: EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: MediaQuery.of(modalCtx).viewInsets.bottom + 24,
-              ),
-              decoration: const BoxDecoration(
-                color: Color(0xFF071B22),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-              ),
-              child: SingleChildScrollView(
+            final navBarHeight = MediaQuery.of(modalCtx).padding.bottom;
+            final keyboardHeight = MediaQuery.of(modalCtx).viewInsets.bottom;
+
+            return SafeArea(
+              bottom: true,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 20,
+                  bottom: keyboardHeight + navBarHeight + 28,
+                ),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF071B22),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                ),
+                child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -659,11 +664,13 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                       width: double.infinity,
                       onPressed: sendByWhatsApp,
                     ),
+                    const SizedBox(height: 36),
                   ],
                 ),
               ),
-            );
-          },
+            ),
+          );
+        },
         );
       },
     );

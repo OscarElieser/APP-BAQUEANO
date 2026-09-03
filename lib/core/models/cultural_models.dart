@@ -194,6 +194,10 @@ class LocalBusiness {
   final List<String> services;
   final String icon;
   final String badge;
+  final double rating;
+
+  /// Getter de compatibilidad
+  String get location => address;
 
   const LocalBusiness({
     required this.id,
@@ -212,6 +216,7 @@ class LocalBusiness {
     this.services = const ['Atención Personalizada', 'Guía Local', 'Comercio Justo'],
     required this.icon,
     required this.badge,
+    this.rating = 4.9,
   });
 }
 

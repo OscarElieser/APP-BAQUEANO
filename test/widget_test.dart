@@ -35,6 +35,12 @@ void main() {
     // Coupon discount 15%
     const double discount = priceUsd * AppConstants.promoCouponDiscount;
     expect(discount, equals(15.0));
+
+    // Monetization: Baqueano Service Fee & Passport Discount
+    const double serviceFeeUsd = 2.50;
+    const double passportDiscount = 0.15;
+    expect(priceUsd * passportDiscount, equals(15.0));
+    expect(serviceFeeUsd * AppConstants.exchangeRateNioUsd, equals(91.625));
   });
 
   test('SecurityVault and PII Privacy protection test', () {
