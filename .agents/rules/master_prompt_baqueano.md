@@ -73,10 +73,41 @@ El baqueano tradicional campesino es el corazón del ecosistema: su sabiduría t
 
 ---
 
-## 7. ENFOQUE TÉCNICO DE PLATAFORMA
-* **Prioridad Móvil:** Aplicación Android (`android/` y `lib/`) en Flutter + Riverpod + GoRouter + Firebase + Google Maps + Geolocator.
-* **Consola Administrativa:** Arquitectura Web en `admin/` para gestión, métricas, aprobación de comercios y auditoría.
-* **Prohibido:** Alterar las configuraciones nativas de iOS o Web en la app móvil.
+## 7. ALCANCE ACTUAL — EXCLUSIVAMENTE APP ANDROID
+> **«La prioridad y alcance actual de este proyecto es exclusivamente la aplicación móvil Android desarrollada en Flutter/Dart.»**
+
+Antigravity interpreta y opera sobre la arquitectura central:
+```
+BAQUEANO
+   │
+   └── 📱 APP ANDROID
+          │
+          ├── Flutter / Dart
+          ├── Firebase (Auth, Firestore, Storage)
+          ├── Google Maps & Geolocalización
+          ├── Asistente IA Responsable
+          ├── Reservas y Comercio Campesino
+          ├── Pasaporte Baqueano y Gamificación
+          ├── Historia, Departamentos y Cultura Viva
+          ├── Comunidad y Chat Directo
+          ├── Emergencias y Rescate SOS
+          └── Turismo Sostenible
+```
+
+### 🚨 REGLAS ESTRICTAS DE ALCANCE:
+1. El desarrollo actual de BAQUEANO está dirigido **únicamente y con exclusividad** a la aplicación móvil Android (`lib/` y `android/`).
+2. **NO implementar, desarrollar ni priorizar actualmente:**
+   - Versión iOS;
+   - Aplicación Web pública;
+   - PWA;
+   - Panel administrativo Web;
+   - Adaptación específica para navegador;
+   - Funcionalidades exclusivas de escritorio.
+3. Si existen carpetas, archivos o arquitecturas relacionadas con Web, iOS o administración (`admin/`), **no eliminarlas**, pero **tampoco convertirlas en parte del desarrollo actual**.
+4. No modificar componentes relacionados con esas plataformas salvo que sea estrictamente necesario para que Android funcione correctamente.
+5. Toda nueva funcionalidad debe responder primero a esta pregunta:
+   > **«¿Esto es necesario o aporta valor directamente a la experiencia del usuario de la APP ANDROID BAQUEANO?»**  
+   > *Si la respuesta es no, no debe implementarse ahora.*
 
 ---
 
