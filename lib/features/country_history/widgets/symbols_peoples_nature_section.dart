@@ -143,7 +143,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 2 : 1,
-            mainAxisExtent: 220,
+            mainAxisExtent: 255,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -189,6 +189,21 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                     style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 6),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        HapticFeedback.lightImpact();
+                        context.go('/comunidad');
+                      },
+                      icon: const Icon(Icons.handshake_rounded, size: 13, color: AppColors.goldLight),
+                      label: Text(
+                        'Artesanías & Cooperativas',
+                        style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                      ),
+                    ),
                   ),
                 ],
               ),

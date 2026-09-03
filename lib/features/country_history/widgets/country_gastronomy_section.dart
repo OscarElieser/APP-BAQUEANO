@@ -204,25 +204,46 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
 
                   const Spacer(),
 
-                  // Botón "Explorar Gastronomía en Baqueano"
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        context.go(dish.destinationRouteId ?? '/gastronomia');
-                      },
-                      icon: const Icon(Icons.restaurant_menu_rounded, size: 14, color: AppColors.goldLight),
-                      label: Text(
-                        'Degustar en Baqueano',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
+                  // 🧭 CONEXIÓN CRUZADA: CULTURA → COMERCIO LOCAL
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            context.go(dish.destinationRouteId ?? '/gastronomia');
+                          },
+                          icon: const Icon(Icons.storefront_rounded, size: 14, color: Colors.white),
+                          label: Text(
+                            'Comedores Típicos',
+                            style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.terracotta,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                        ),
                       ),
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: AppColors.borderGold, width: 1.0),
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      const SizedBox(width: 8),
+                      IconButton(
+                        tooltip: 'Ver en Mapa',
+                        onPressed: () {
+                          HapticFeedback.lightImpact();
+                          context.go('/mapa');
+                        },
+                        icon: const Icon(Icons.map_rounded, size: 16, color: AppColors.goldLight),
+                        style: IconButton.styleFrom(
+                          backgroundColor: AppColors.primaryLight,
+                          padding: const EdgeInsets.all(8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.3)),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
