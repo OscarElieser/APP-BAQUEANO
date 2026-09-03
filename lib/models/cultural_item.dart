@@ -95,6 +95,11 @@ class LodgingSpot {
   final double? longitude;
   final String? estimatedTime;
   final String? howToGetThere;
+  final String? contactPhone;
+  final String? email;
+  final String? whatsappUrl;
+  final String? priceRange;
+  final String? destination;
 
   const LodgingSpot({
     required this.id,
@@ -111,6 +116,11 @@ class LodgingSpot {
     this.longitude,
     this.estimatedTime,
     this.howToGetThere,
+    this.contactPhone,
+    this.email,
+    this.whatsappUrl,
+    this.priceRange,
+    this.destination,
   });
 }
 
