@@ -351,58 +351,81 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                   ),
                 ),
               ),
-              // Badge de Región
+              // Badges Superiores Adaptativos (Región & Precio Estimado protegidos contra colisiones)
               Positioned(
-                top: 14,
-                left: 14,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: AppColors.bgDark.withValues(alpha: 0.92),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.gold, width: 1.2),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 6),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.place_rounded, size: 14, color: AppColors.gold),
-                      const SizedBox(width: 5),
-                      Text(
-                        dish.region,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                top: 12,
+                left: 12,
+                right: 12,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Badge de Región
+                    Flexible(
+                      flex: 2,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: AppColors.bgDark.withValues(alpha: 0.92),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppColors.gold, width: 1.2),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 6),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.place_rounded, size: 14, color: AppColors.gold),
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: Text(
+                                dish.region,
+                                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              // Badge de Precio Estimado
-              Positioned(
-                top: 14,
-                right: 14,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.sunsetTerracotta,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white24, width: 0.8),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 8),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.payments_rounded, size: 14, color: Colors.white),
-                      const SizedBox(width: 5),
-                      Text(
-                        dish.estimatedPrice,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white),
+                    ),
+                    const SizedBox(width: 8),
+
+                    // Badge de Precio Estimado (Autoescalable para no solapar la región)
+                    Flexible(
+                      flex: 3,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          gradient: AppGradients.sunsetTerracotta,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white24, width: 0.8),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 8),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.payments_rounded, size: 13, color: Colors.white),
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  dish.estimatedPrice,
+                                  style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white),
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               // Nombre del Platillo Superpuesto en la Base de la Imagen
@@ -433,7 +456,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                             const Shadow(color: Colors.black, blurRadius: 8),
                           ],
                         ),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
