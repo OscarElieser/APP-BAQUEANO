@@ -256,11 +256,12 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         Text(
                           spot.name,
                           style: GoogleFonts.montserrat(
-                            fontSize: 18,
+                            fontSize: 17,
                             fontWeight: FontWeight.w900,
                             color: Colors.white,
+                            height: 1.2,
                           ),
-                          maxLines: 1,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -791,7 +792,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: isDesktop ? 450 : 550,
-                mainAxisExtent: isDesktop ? 545 : 575,
+                mainAxisExtent: isDesktop ? 560 : 615,
                 crossAxisSpacing: 18,
                 mainAxisSpacing: 18,
               ),
@@ -857,16 +858,19 @@ class _LodgingScreenState extends State<LodgingScreen> {
                               ],
                             ),
                             const SizedBox(height: 6),
+                            // Nombre del local completo (hasta 2 líneas sin recortes prematuros)
                             Text(
                               lodge.name,
                               style: GoogleFonts.montserrat(
-                                fontSize: 16.5,
+                                fontSize: 16.0,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.textLight,
+                                height: 1.25,
                               ),
-                              maxLines: 1,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            const SizedBox(height: 3),
                             Text(
                               lodge.location,
                               style: GoogleFonts.inter(
@@ -975,27 +979,27 @@ class _LodgingScreenState extends State<LodgingScreen> {
                             ),
                             const SizedBox(height: 10),
 
-                            // Botones de Acción
+                            // Botones de Acción 100% Completos
                             Row(
                               children: [
                                 Expanded(
                                   child: BaqueanoButton(
-                                    text: 'Consultar Ruta',
+                                    text: 'Ver Ruta',
                                     icon: const Icon(Icons.navigation_rounded, size: 16),
                                     variant: BaqueanoButtonVariant.secondary,
                                     height: 38,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(horizontal: 6),
                                     onPressed: () => _showRouteModal(context, lodge),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: BaqueanoButton(
-                                    text: 'Reservar Estadía',
+                                    text: 'Reservar',
                                     icon: const Icon(Icons.calendar_month_rounded, size: 16),
                                     variant: BaqueanoButtonVariant.primary,
                                     height: 38,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(horizontal: 6),
                                     onPressed: () => _showReservationModal(context, lodge),
                                   ),
                                 ),

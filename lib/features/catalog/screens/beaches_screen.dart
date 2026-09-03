@@ -612,8 +612,9 @@ class BeachesScreen extends StatelessWidget {
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.textLight,
+                                height: 1.25,
                               ),
-                              maxLines: 1,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
