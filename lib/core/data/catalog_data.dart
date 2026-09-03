@@ -278,7 +278,7 @@ class CatalogData {
       history:
           'Himno cultural folclórico compuesto en compás de 6/8 que describe la fiesta, alegría y zapateo indígena en el legendario barrio artesano de Monimbó.',
       coverUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80',
-      youtubeUrl: 'https://www.youtube.com/watch?v=0k5Fz4vUaEI',
+      youtubeUrl: 'https://www.youtube.com/watch?v=qLRSSBibrLw',
       audioAsset: 'assets/audio/el_solar_de_monimbo.mp3',
     ),
     MusicTrack(
@@ -291,7 +291,7 @@ class CatalogData {
       history:
           'Considerada el segundo himno nacional de Nicaragua. Melodía sublime que emula el viento entre los cañaverales y el repicar ancestral de la madera de chiquirín.',
       coverUrl: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80',
-      youtubeUrl: 'https://www.youtube.com/watch?v=3g8fM5n2rHQ',
+      youtubeUrl: 'https://www.youtube.com/watch?v=iHZa2IeKQT8',
       audioAsset: 'assets/audio/la_mora_limpia.mp3',
     ),
     MusicTrack(
@@ -304,7 +304,7 @@ class CatalogData {
       history:
           'Pieza festiva y picaresca en homenaje al pájaro zanate, símbolo de la astucia, audacia y el canto rebelde de los campos nicaragüenses.',
       coverUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80',
-      youtubeUrl: 'https://www.youtube.com/watch?v=5V2yWqF6D8A',
+      youtubeUrl: 'https://www.youtube.com/watch?v=Jvc68tciQWc',
       audioAsset: 'assets/audio/el_zanatillo.mp3',
     ),
     MusicTrack(
@@ -317,7 +317,7 @@ class CatalogData {
       history:
           'Música que acompaña las danzas de El Güegüense (Patrimonio Oral e Inmaterial de la Humanidad por la UNESCO), representando el diálogo y resistencia indígena.',
       coverUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-      youtubeUrl: 'https://www.youtube.com/watch?v=8Pq3vRtQ5jE',
+      youtubeUrl: 'https://www.youtube.com/watch?v=xioEtgWj4R4',
       audioAsset: 'assets/audio/baile_del_mestizaje.mp3',
     ),
     MusicTrack(
@@ -330,7 +330,7 @@ class CatalogData {
       history:
           'Ritmo norteño campesino ejecutado con violín de talalate, guitarra y guitarrilla en las montañas cafetaleras de las cordilleras segovianas.',
       coverUrl: 'https://images.unsplash.com/photo-1445985543469-433ecdd62977?auto=format&fit=crop&w=600&q=80',
-      youtubeUrl: 'https://www.youtube.com/watch?v=2Nk7pM3L4vU',
+      youtubeUrl: 'https://www.youtube.com/watch?v=EX_7D2U0TXg',
       audioAsset: 'assets/audio/palomita_guasiruca.mp3',
     ),
   ];

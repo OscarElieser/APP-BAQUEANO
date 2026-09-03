@@ -39,6 +39,8 @@ class MusicTrack {
   final String duration;
   final String history;
   final String coverUrl;
+  final String? youtubeUrl;
+  final String? audioAsset;
 
   const MusicTrack({
     required this.id,
@@ -49,6 +51,8 @@ class MusicTrack {
     required this.duration,
     required this.history,
     required this.coverUrl,
+    this.youtubeUrl,
+    this.audioAsset,
   });
 }
 
