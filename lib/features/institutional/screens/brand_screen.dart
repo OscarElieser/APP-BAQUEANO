@@ -36,7 +36,7 @@ class BrandScreen extends StatelessWidget {
             // Official Logo Emblem Showcase Card
             Center(
               child: GlassContainer(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 28),
+                padding: EdgeInsets.symmetric(horizontal: isDesktop ? 32 : 16, vertical: 24),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: AppColors.borderGold, width: 1.2),
                 backgroundColor: AppColors.primaryDark.withValues(alpha: 0.7),

@@ -211,7 +211,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                 itemBuilder: (context, index) => _buildExpeditionCard(filtered[index]),
               ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 100),
           ],
         ),
       ),
@@ -256,10 +256,14 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Cabecera de la Reserva
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 6,
               children: [
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -361,8 +365,11 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
             const SizedBox(height: 12),
 
             // Importe Total y Acciones
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 12,
+              runSpacing: 10,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -379,6 +386,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                 ),
                 Wrap(
                   spacing: 8,
+                  runSpacing: 6,
                   children: [
                     // Botón Mensaje Directo con Anfitrión
                     OutlinedButton.icon(

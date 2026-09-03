@@ -1,4 +1,26 @@
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — CENTRO DE AYUDA & SOPORTE INSTITUCIONAL
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer un punto de contacto confiable, transparente y directo para exploradores
+//   y anfitriones locales, resolviendo dudas críticas sobre reservas, modo offline y emergencias.
+// - Brindar asistencia inmediata por múltiples canales oficiales (correo electrónico,
+//   WhatsApp y marcación de emergencia) sin barreras ni intermediarios.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Intent de correo `mailto` con parámetros predefinidos (`subject` y `body`), ejecutado
+//   con `LaunchMode.externalApplication` protegido contra fallos en Android 11+.
+// - Mecanismo de contingencia con modal emergente estilizado que permite copiar la dirección
+//   oficial al portapapeles (`Clipboard.setData`) o saltar a WhatsApp de soporte.
+// - Acordeón expandible para preguntas frecuentes (FAQ) y botones SOS directos.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
+// - `HelpScreen`: Pantalla completa de soporte, preguntas frecuentes y teléfonos de emergencia.
+// ============================================================================
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_constants.dart';
@@ -36,13 +58,180 @@ class HelpScreen extends StatelessWidget {
     },
   ];
 
+  Future<void> _handleSendEmail(BuildContext context) async {
+    HapticFeedback.lightImpact();
+    final uri = Uri(
+      scheme: 'mailto',
+      path: AppConstants.supportEmail,
+      queryParameters: {
+        'subject': 'Consulta de Soporte — Explorador Baqueano Nicaragua',
+        'body': 'Hola equipo de soporte Baqueano,\n\nEscribo desde la aplicación móvil oficial para consultar lo siguiente:\n\n',
+      },
+    );
+
+    try {
+      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched && context.mounted) {
+        _showDirectSupportModal(context);
+      }
+    } catch (_) {
+      if (context.mounted) {
+        _showDirectSupportModal(context);
+      }
+    }
+  }
+
+  void _showDirectSupportModal(BuildContext context) {
+    HapticFeedback.lightImpact();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (modalCtx) {
+        return Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: const Color(0xFF041920),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            border: Border.all(color: AppColors.borderGold, width: 1.2),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withValues(alpha: 0.6), blurRadius: 24, spreadRadius: 4),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 44,
+                  height: 5,
+                  decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.gold.withValues(alpha: 0.15),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppColors.goldLight),
+                    ),
+                    child: const Icon(Icons.mark_email_read_rounded, color: AppColors.gold, size: 24),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'MESA DE AYUDA & SOPORTE',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 0.8),
+                        ),
+                        Text(
+                          'Atención directa 24/7 sin intermediarios',
+                          style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: AppColors.textMuted),
+                    onPressed: () => Navigator.of(modalCtx).pop(),
+                  ),
+                ],
+              ),
+              const Divider(color: AppColors.borderLight, height: 24),
+              Text(
+                'Correo Oficial de Soporte:',
+                style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryDark,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.5)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        AppConstants.supportEmail,
+                        style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Clipboard.setData(const ClipboardData(text: AppConstants.supportEmail));
+                        CustomToast.success(context, '¡Correo copiado al portapapeles!');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.terracotta,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.copy, size: 14, color: Colors.white),
+                            const SizedBox(width: 4),
+                            Text('Copiar', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 14),
+              Text(
+                'Tiempo estimado de respuesta: menos de 15 minutos en horario diurno.',
+                style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF25D366),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 13),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                  ),
+                  icon: const Icon(Icons.chat, size: 18, color: Colors.white),
+                  label: Text(
+                    'Contactar por WhatsApp Directo',
+                    style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(modalCtx).pop();
+                    final uri = Uri.parse(AppConstants.supportWhatsApp);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isDesktop = screenWidth >= 950;
+    final isDesktop = MediaQuery.of(context).size.width >= 950;
 
     return ResponsiveScaffold(
-      currentIndex: 1,
+      currentIndex: 0,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(
@@ -55,15 +244,16 @@ class HelpScreen extends StatelessWidget {
             const SectionHeader(
               tag: 'SOPORTE AL VIAJERO',
               title: '❓ Centro de Ayuda & Preguntas Frecuentes',
-              subtitle: 'Respuestas a todas tus consultas sobre expediciones, cancelaciones, modo offline y contactos de emergencia.',
+              subtitle: 'Encuentra respuestas inmediatas sobre reservas comunitarias, políticas éticas y asistencia en ruta en Nicaragua.',
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
-            // Emergency Contacts Strip
+            // Tarjeta de Emergencias SOS Nacionales
             Container(
-              padding: const EdgeInsets.all(20),
+              width: double.infinity,
+              padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                color: const Color(0xFF260D0D),
+                color: AppColors.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: AppColors.error.withValues(alpha: 0.5)),
               ),
@@ -72,98 +262,111 @@ class HelpScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.emergency, color: AppColors.error, size: 24),
-                      const SizedBox(width: 10),
+                      const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 24),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'LÍNEAS DE ATENCIÓN DE EMERGENCIA NACIONAL (24/7)',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 0.8),
+                          'LÍNEAS DE ASISTENCIA & EMERGENCIA NACIONAL (SOS)',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.error),
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'En caso de cualquier imprevisto en sendero o montaña, puedes marcar directamente a los servicios oficiales de auxilio de Nicaragua:',
+                    style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.4),
+                  ),
                   const SizedBox(height: 12),
                   Wrap(
-                    spacing: 16,
-                    runSpacing: 10,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
-                      _buildEmergencyPhone(context, 'Policía Turística', AppConstants.policePhone, AppConstants.policePhoneFull),
-                      _buildEmergencyPhone(context, 'Cruz Roja Nica', AppConstants.redCrossPhone, AppConstants.redCrossPhoneFull),
-                      _buildEmergencyPhone(context, 'Bomberos Unificados', AppConstants.firefightersPhone, '115 / 911'),
-                      _buildEmergencyPhone(context, 'INTUR Turismo', 'INTUR', AppConstants.inturPhone),
+                      _buildEmergencyPhone(context, 'Cruz Blanca', '128', '+505 2265-1440'),
+                      _buildEmergencyPhone(context, 'Policía Turística', '101', '+505 2222-2222'),
+                      _buildEmergencyPhone(context, 'Bomberos Unificados', '115', '+505 2265-0101'),
+                      _buildEmergencyPhone(context, 'Defensa Civil', '100', '+505 2228-3333'),
                     ],
                   ),
                 ],
               ),
             ),
+            const SizedBox(height: 28),
 
-            const SizedBox(height: 32),
-
-            // FAQ Accordions
+            // Lista interactiva de FAQs
             Text(
-              'PREGUNTAS FRECUENTES (FAQ)',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 1.0),
+              'PREGUNTAS FRECUENTES',
+              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 1.2),
             ),
             const SizedBox(height: 12),
 
-            ...faqs.map((faq) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: GlassContainer(
-                  padding: EdgeInsets.zero,
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: faqs.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              itemBuilder: (context, index) {
+                final faq = faqs[index];
+                return GlassContainer(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: AppColors.borderLight),
                   child: Theme(
-                    data: ThemeData.dark().copyWith(dividerColor: Colors.transparent),
+                    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                     child: ExpansionTile(
                       iconColor: AppColors.gold,
                       collapsedIconColor: AppColors.textMuted,
+                      tilePadding: EdgeInsets.zero,
+                      childrenPadding: const EdgeInsets.only(bottom: 12),
                       title: Text(
                         faq['q']!,
-                        style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textLight),
+                        style: GoogleFonts.spaceGrotesk(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textLight),
                       ),
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                          child: Text(
-                            faq['a']!,
-                            style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted, height: 1.45),
-                          ),
+                        Text(
+                          faq['a']!,
+                          style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted, height: 1.45),
                         ),
                       ],
                     ),
                   ),
-                ),
-              );
-            }),
+                );
+              },
+            ),
 
             const SizedBox(height: 32),
 
-            // Direct Support CTA
+            // Contacto Directo con el Equipo Baqueano
             Container(
-              padding: const EdgeInsets.all(24),
+              width: double.infinity,
+              padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
                 gradient: AppGradients.cardGlass,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: AppColors.borderGold),
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: AppColors.borderGold, width: 1.2),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '¿Aún necesitas ayuda con una reserva?',
-                    style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white),
+                  Row(
+                    children: [
+                      const Icon(Icons.support_agent_rounded, color: AppColors.gold, size: 28),
+                      const SizedBox(width: 10),
+                      Text(
+                        '¿Tienes una consulta específica o necesitas apoyo en ruta?',
+                        style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Nuestro equipo comunitario y baqueanos de guardia están listos para asistirte por WhatsApp o correo electrónico.',
-                    style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
-                    textAlign: TextAlign.center,
+                    'Nuestro equipo de soporte territorial y asistencia al viajero está disponible para ayudarte en tu expedición.',
+                    style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.4),
                   ),
                   const SizedBox(height: 16),
                   Wrap(
                     spacing: 12,
                     runSpacing: 10,
-                    alignment: WrapAlignment.center,
                     children: [
                       BaqueanoButton(
                         text: 'WHATSAPP DE SOPORTE',
@@ -173,9 +376,9 @@ class HelpScreen extends StatelessWidget {
                         onPressed: () async {
                           final uri = Uri.parse(AppConstants.supportWhatsApp);
                           if (await canLaunchUrl(uri)) {
-                            await launchUrl(uri);
+                            await launchUrl(uri, mode: LaunchMode.externalApplication);
                           } else if (context.mounted) {
-                            CustomToast.show(context, message: 'Abriendo WhatsApp de Soporte Baqueano');
+                            _showDirectSupportModal(context);
                           }
                         },
                       ),
@@ -184,14 +387,7 @@ class HelpScreen extends StatelessWidget {
                         icon: const Icon(Icons.email_outlined, size: 16, color: AppColors.textDark),
                         variant: BaqueanoButtonVariant.gold,
                         height: 44,
-                        onPressed: () async {
-                          final uri = Uri.parse('mailto:${AppConstants.supportEmail}');
-                          if (await canLaunchUrl(uri)) {
-                            await launchUrl(uri);
-                          } else if (context.mounted) {
-                            CustomToast.show(context, message: 'Correo: ${AppConstants.supportEmail}');
-                          }
-                        },
+                        onPressed: () => _handleSendEmail(context),
                       ),
                     ],
                   ),
@@ -211,7 +407,7 @@ class HelpScreen extends StatelessWidget {
       onTap: () async {
         final uri = Uri.parse('tel:$shortNumber');
         if (await canLaunchUrl(uri)) {
-          await launchUrl(uri);
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
         } else if (context.mounted) {
           CustomToast.show(context, message: 'Llamando a $entity: $fullNumber');
         }

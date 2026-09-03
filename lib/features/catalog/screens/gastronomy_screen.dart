@@ -8,14 +8,13 @@
 //   promoviendo el consumo local, precios justos y una inmersión cultural auténtica.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Implementación en Flutter/Dart con diseño reactivo, tarjetas auto-adaptativas que evitan desbordamientos de píxeles,
-//   fichas completas con dirección exacta nicaragüense, teléfono de contacto con marcación telefónica directa y WhatsApp,
-//   nombre de la anfitriona y estimación de precio bimoneda (C$ NIO / $ USD).
-// - Integración con url_launcher para comunicación inmediata y go_router para navegación al mapa satelital.
+// - Interfaz responsiva de alta gama visual con filtros por tradición culinaria (Maíz Ancestral, Sabores Criollos, Lácteos),
+//   efectos Glassmorphism con bordes dorados, fichas exhaustivas con direcciones exactas sin recortes,
+//   maridajes típicos nicaragüenses (cacao con leche, café de palo, tiste, chicha) y llamadas/WhatsApp en un solo toque.
+// - Cero desbordamientos de pantalla en cualquier resolución mediante Flexibles y Wraps.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
-// - GastronomyScreen: Pantalla completa de gastronomía típica con lista responsiva de platillos ancestrales.
-// - Acceso a llamada telefónica, mensajería WhatsApp y localización satelital de comedores.
+// - GastronomyScreen: Pantalla completa de gastronomía típica con lista interactiva y conectividad directa.
 // ============================================================================
 
 import 'package:flutter/material.dart';
@@ -28,12 +27,18 @@ import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/custom_toast.dart';
-import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 
-class GastronomyScreen extends StatelessWidget {
+class GastronomyScreen extends StatefulWidget {
   const GastronomyScreen({super.key});
+
+  @override
+  State<GastronomyScreen> createState() => _GastronomyScreenState();
+}
+
+class _GastronomyScreenState extends State<GastronomyScreen> {
+  String _selectedCategory = 'Todos';
 
   static Future<void> _callPhone(BuildContext context, String phone) async {
     HapticFeedback.lightImpact();
@@ -64,10 +69,43 @@ class GastronomyScreen extends StatelessWidget {
     }
   }
 
+  String _getPairing(String dishName) {
+    final lower = dishName.toLowerCase();
+    if (lower.contains('gallo pinto')) {
+      return '☕ Café de palo de Matagalpa o cacao con leche';
+    } else if (lower.contains('nacatamal')) {
+      return '☕ Café negro caliente recién colado en jícaro';
+    } else if (lower.contains('vigorón')) {
+      return '🥤 Chicha de maíz con hielo o fresco de grama';
+    } else if (lower.contains('indio viejo')) {
+      return '🍶 Tiste helado molido con cacao y maíz tostado';
+    } else if (lower.contains('sopa de queso')) {
+      return '🍹 Fresco de tamarindo o pozol con leche';
+    } else if (lower.contains('güirila')) {
+      return '🥛 Cuajada fresca campesina y café norteño';
+    }
+    return '☕ Bebida típica ancestral recomendada';
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
+
+    final List<GastronomyDish> allDishes = CatalogData.gastronomyDishes;
+    final List<GastronomyDish> filteredDishes = _selectedCategory == 'Todos'
+        ? allDishes
+        : allDishes.where((d) {
+            final name = d.name.toLowerCase();
+            if (_selectedCategory == '🌽 Maíz Ancestral') {
+              return name.contains('nacatamal') || name.contains('güirila') || name.contains('indio') || name.contains('gallo');
+            } else if (_selectedCategory == '🥩 Sabores Criollos') {
+              return name.contains('vigorón') || name.contains('indio') || name.contains('nacatamal');
+            } else if (_selectedCategory == '🧀 Lácteos & Tradición') {
+              return name.contains('queso') || name.contains('güirila') || name.contains('gallo');
+            }
+            return true;
+          }).toList();
 
     return ResponsiveScaffold(
       currentIndex: 1,
@@ -87,43 +125,141 @@ class GastronomyScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Intro Banner
+            // Hero Banner Visualmente Impactante
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
-                gradient: AppGradients.cardGlass,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.borderGold),
+                gradient: AppGradients.volcanicHero,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: AppColors.gold, width: 1.5),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.gold.withValues(alpha: 0.15),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('🌽', style: TextStyle(fontSize: 32)),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      '«Somos hijos del maíz». Cada platillo refleja la fusión entre las raíces indígenas chorotegas, náhuatl y las técnicas coloniales campesinas.',
-                      style: GoogleFonts.inter(
-                        fontSize: 13,
-                        color: AppColors.textLight.withValues(alpha: 0.9),
-                        fontStyle: FontStyle.italic,
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.gold.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.goldLight),
+                        ),
+                        child: const Text('🌽', style: TextStyle(fontSize: 28)),
                       ),
-                    ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'SOBERANÍA DEL MAÍZ & SABORES DE TIERRA ADENTRO',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.goldLight,
+                                letterSpacing: 0.8,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              '«Somos hijos del maíz». Recetas heredadas de abuelas y cocineras rurales.',
+                              style: GoogleFonts.inter(
+                                fontSize: 12,
+                                color: Colors.white70,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  const Divider(color: AppColors.borderLight, height: 1),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 8,
+                    children: [
+                      _buildHeroStat('6 Recetas Clásicas', Icons.restaurant_menu_rounded),
+                      _buildHeroStat('Comercio Justo', Icons.handshake_rounded),
+                      _buildHeroStat('100% Directo a Familias', Icons.savings_rounded),
+                    ],
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 28),
+            const SizedBox(height: 24),
+
+            // Chips Filtros de Categorías Culinarias
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child: Row(
+                children: ['Todos', '🌽 Maíz Ancestral', '🥩 Sabores Criollos', '🧀 Lácteos & Tradición'].map((category) {
+                  final isSelected = _selectedCategory == category;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: InkWell(
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        setState(() => _selectedCategory = category);
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: isSelected ? AppColors.terracotta : AppColors.primaryDark,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: isSelected ? AppColors.gold : AppColors.borderLight,
+                            width: isSelected ? 1.2 : 0.8,
+                          ),
+                          boxShadow: isSelected
+                              ? [
+                                  BoxShadow(
+                                    color: AppColors.terracotta.withValues(alpha: 0.4),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 3),
+                                  )
+                                ]
+                              : null,
+                        ),
+                        child: Text(
+                          category == 'Todos' ? 'Todos los Platillos (${allDishes.length})' : category,
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                            color: isSelected ? Colors.white : AppColors.textMuted,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+
+            const SizedBox(height: 24),
 
             // Lista de Platillos Gastronómicos con Información Completa
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: CatalogData.gastronomyDishes.length,
+              itemCount: filteredDishes.length,
               separatorBuilder: (_, __) => const SizedBox(height: 24),
               itemBuilder: (context, index) {
-                final dish = CatalogData.gastronomyDishes[index];
+                final dish = filteredDishes[index];
                 return _buildDishCard(context, dish);
               },
             ),
@@ -135,50 +271,94 @@ class GastronomyScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildHeroStat(String text, IconData icon) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14, color: AppColors.goldLight),
+        const SizedBox(width: 5),
+        Text(
+          text,
+          style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+        ),
+      ],
+    );
+  }
+
   Widget _buildDishCard(BuildContext context, GastronomyDish dish) {
-    return GlassContainer(
-      padding: EdgeInsets.zero,
-      borderRadius: BorderRadius.circular(22),
-      border: Border.all(color: AppColors.borderLight),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: AppGradients.cardGlass,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.6), width: 1.2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.45),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Imagen con Badges de Región y Precio
+          // Imagen en Alta Definición con Badges Flotantes
           Stack(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
                 child: Image.network(
                   dish.imageUrl,
-                  height: 200,
+                  height: 210,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
-                    height: 200,
+                    height: 210,
                     color: AppColors.primaryLight,
                     child: Center(child: Text(dish.icon, style: const TextStyle(fontSize: 54))),
                   ),
                 ),
               ),
+              // Sombra degradada para contraste
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: 0.5),
+                        Colors.transparent,
+                        Colors.black.withValues(alpha: 0.7),
+                      ],
+                      stops: const [0.0, 0.5, 1.0],
+                    ),
+                  ),
+                ),
+              ),
               // Badge de Región
               Positioned(
-                top: 12,
-                left: 12,
+                top: 14,
+                left: 14,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
                   decoration: BoxDecoration(
                     color: AppColors.bgDark.withValues(alpha: 0.92),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.gold, width: 1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: AppColors.gold, width: 1.2),
+                    boxShadow: [
+                      BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 6),
+                    ],
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.place_rounded, size: 13, color: AppColors.gold),
-                      const SizedBox(width: 4),
+                      const Icon(Icons.place_rounded, size: 14, color: AppColors.gold),
+                      const SizedBox(width: 5),
                       Text(
                         dish.region,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                        style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                       ),
                     ],
                   ),
@@ -186,28 +366,64 @@ class GastronomyScreen extends StatelessWidget {
               ),
               // Badge de Precio Estimado
               Positioned(
-                top: 12,
-                right: 12,
+                top: 14,
+                right: 14,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFC86432).withValues(alpha: 0.95),
-                    borderRadius: BorderRadius.circular(10),
+                    gradient: AppGradients.sunsetTerracotta,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white24, width: 0.8),
                     boxShadow: [
-                      BoxShadow(color: Colors.black.withValues(alpha: 0.45), blurRadius: 6),
+                      BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 8),
                     ],
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.monetization_on_rounded, size: 13, color: Colors.white),
-                      const SizedBox(width: 4),
+                      const Icon(Icons.payments_rounded, size: 14, color: Colors.white),
+                      const SizedBox(width: 5),
                       Text(
                         dish.estimatedPrice,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w800, color: Colors.white),
+                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white),
                       ),
                     ],
                   ),
+                ),
+              ),
+              // Nombre del Platillo Superpuesto en la Base de la Imagen
+              Positioned(
+                bottom: 12,
+                left: 16,
+                right: 16,
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: AppColors.bgDark.withValues(alpha: 0.85),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.borderGold),
+                      ),
+                      child: Text(dish.icon, style: const TextStyle(fontSize: 20)),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        dish.name,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                          shadows: [
+                            const Shadow(color: Colors.black, blurRadius: 8),
+                          ],
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -219,31 +435,35 @@ class GastronomyScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Título del Platillo
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(dish.icon, style: const TextStyle(fontSize: 24)),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        dish.name,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.textLight,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-
                 // Reseña Histórica Ancestral
                 Text(
                   dish.history,
-                  style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted, height: 1.45),
+                  style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textLight.withValues(alpha: 0.88), height: 1.45),
                 ),
+                const SizedBox(height: 14),
+
+                // Maridaje Típico Sugerido
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryLight.withValues(alpha: 0.4),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.local_cafe_rounded, size: 15, color: AppColors.goldLight),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          'Maridaje recomendado: ${_getPairing(dish.name)}',
+                          style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 const SizedBox(height: 14),
 
                 // Ingredientes Principales
@@ -275,26 +495,33 @@ class GastronomyScreen extends StatelessWidget {
                 const Divider(color: AppColors.borderLight, height: 1),
                 const SizedBox(height: 14),
 
-                // 🧭 FICHA TÉCNICA DEL COMEDOR & ANFITRIONA RURAL (INFORMACIÓN COMPLETA)
+                // 🧭 FICHA DEL COMEDOR & ANFITRIONA RURAL (INFORMACIÓN COMPLETA Y VISIBLE)
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(14),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF041920).withValues(alpha: 0.88),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFD4AF37).withValues(alpha: 0.55), width: 1.1),
+                    color: const Color(0xFF041920).withValues(alpha: 0.95),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.borderGold, width: 1.2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.storefront_rounded, size: 16, color: Color(0xFFD4AF37)),
+                          const Icon(Icons.storefront_rounded, size: 18, color: AppColors.gold),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               'PUESTO & COMEDOR CAMPESINO RECOMENDADO',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w800, color: const Color(0xFFD4AF37), letterSpacing: 0.8),
+                              style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
                             ),
                           ),
                         ],
@@ -318,13 +545,13 @@ class GastronomyScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
 
-                      // Dirección Completa (¡Totalmente visible, sin truncamiento!)
+                      // Dirección Completa (Totalmente visible sin truncamiento)
                       _buildInfoField(
                         icon: Icons.location_on_rounded,
                         label: 'Dirección Completa:',
                         value: dish.fullAddress,
                         isFullText: true,
-                        iconColor: const Color(0xFFC86432),
+                        iconColor: AppColors.terracottaLight,
                       ),
                       const SizedBox(height: 8),
 
@@ -368,10 +595,11 @@ class GastronomyScreen extends StatelessWidget {
                       child: ElevatedButton.icon(
                         onPressed: () => _callPhone(context, dish.contactPhone),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFC86432),
+                          backgroundColor: AppColors.terracotta,
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 13),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          elevation: 4,
                         ),
                         icon: const Icon(Icons.phone_in_talk_rounded, size: 16, color: Colors.white),
                         label: Text(
@@ -386,8 +614,8 @@ class GastronomyScreen extends StatelessWidget {
                         onPressed: () => _openWhatsApp(context, dish.contactPhone, dish.name, dish.recommendedPlace),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: const Color(0xFF25D366),
-                          side: const BorderSide(color: Color(0xFF25D366), width: 1.2),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          side: const BorderSide(color: Color(0xFF25D366), width: 1.3),
+                          padding: const EdgeInsets.symmetric(vertical: 13),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
                         icon: const Icon(Icons.chat_rounded, size: 16, color: Color(0xFF25D366)),
@@ -404,10 +632,10 @@ class GastronomyScreen extends StatelessWidget {
                         HapticFeedback.lightImpact();
                         context.go('/mapa');
                       },
-                      icon: const Icon(Icons.map_rounded, size: 18, color: Color(0xFFD4AF37)),
+                      icon: const Icon(Icons.map_rounded, size: 18, color: AppColors.gold),
                       style: IconButton.styleFrom(
                         backgroundColor: AppColors.primaryDark,
-                        side: const BorderSide(color: Color(0xFFD4AF37), width: 0.9),
+                        side: const BorderSide(color: AppColors.gold, width: 1.0),
                         padding: const EdgeInsets.all(12),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
@@ -434,7 +662,7 @@ class GastronomyScreen extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 15, color: iconColor ?? const Color(0xFFD4AF37)),
+        Icon(icon, size: 15, color: iconColor ?? AppColors.gold),
         const SizedBox(width: 8),
         Text(
           label,
@@ -451,7 +679,7 @@ class GastronomyScreen extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 11.5,
               fontWeight: isHighlight ? FontWeight.w700 : FontWeight.w500,
-              color: valueColor ?? (isHighlight ? const Color(0xFFD4AF37) : Colors.white),
+              color: valueColor ?? (isHighlight ? AppColors.goldLight : Colors.white),
               height: 1.35,
             ),
           ),

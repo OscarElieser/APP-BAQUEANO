@@ -191,10 +191,9 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                 children: [
                   // Cabecera del Evento
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: AppColors.gold.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(10),
@@ -209,16 +208,24 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       if (event.locations.isNotEmpty)
-                        Row(
-                          children: [
-                            const Icon(Icons.place_rounded, size: 14, color: AppColors.terracottaLight),
-                            const SizedBox(width: 4),
-                            Text(
-                              event.locations.join(' · '),
-                              style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
-                            ),
-                          ],
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Icon(Icons.place_rounded, size: 14, color: AppColors.terracottaLight),
+                              const SizedBox(width: 4),
+                              Flexible(
+                                child: Text(
+                                  event.locations.join(' · '),
+                                  style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                     ],
                   ),

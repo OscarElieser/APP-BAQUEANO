@@ -349,16 +349,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                           Text(
                             _isConfirmed ? 'COMPROBANTE OFICIAL DE RESERVA' : 'SOLICITUD DE RESERVA & PAGO DIRECTO',
                             style: GoogleFonts.spaceGrotesk(
-                              fontSize: 11,
+                              fontSize: 10.5,
                               fontWeight: FontWeight.w700,
                               color: AppColors.terracottaLight,
-                              letterSpacing: 1.1,
+                              letterSpacing: 0.8,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             widget.destination.title,
                             style: GoogleFonts.montserrat(
-                              fontSize: 16,
+                              fontSize: 15,
                               fontWeight: FontWeight.w800,
                               color: AppColors.textLight,
                             ),
@@ -403,8 +405,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: AppColors.borderLight),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 10,
+            runSpacing: 8,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -421,7 +426,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   Text(
                     'Tasa Oficial: C\$ 36.65 NIO = \$1.00 USD',
                     style: GoogleFonts.inter(
-                      fontSize: 12,
+                      fontSize: 11.5,
                       color: AppColors.goldLight,
                       fontWeight: FontWeight.w500,
                     ),
@@ -435,6 +440,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   border: Border.all(color: AppColors.borderGold),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     _buildCurrencyTab('USD', !_useNioCurrency, () => setState(() => _useNioCurrency = false)),
                     _buildCurrencyTab('NIO (C\$)', _useNioCurrency, () => setState(() => _useNioCurrency = true)),
@@ -927,15 +933,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 textColor: _isTourist ? AppColors.goldLight : AppColors.textMuted,
               ),
               const Divider(color: AppColors.borderLight, height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 12,
+                runSpacing: 8,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'TOTAL A PAGAR',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.goldLight, letterSpacing: 1.0),
+                        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight, letterSpacing: 1.0),
                       ),
                       Text(
                         'Pago 100% directo a los anfitriones',
@@ -946,7 +955,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   Text(
                     _formatCurrency(_totalUsd, _totalNio),
                     style: GoogleFonts.montserrat(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w900,
                       color: AppColors.gold,
                     ),
@@ -1104,9 +1113,12 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 decoration: BoxDecoration(color: bankColor, shape: BoxShape.circle),
               ),
               const SizedBox(width: 8),
-              Text(
-                bankName,
-                style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+              Expanded(
+                child: Text(
+                  bankName,
+                  style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -1180,20 +1192,26 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(color: bankColor, shape: BoxShape.circle),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    bankName,
-                    style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(color: bankColor, shape: BoxShape.circle),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        bankName,
+                        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(4)),
@@ -1233,15 +1251,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted),
+        Expanded(
+          child: Text(
+            label,
+            style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted),
+          ),
         ),
+        const SizedBox(width: 8),
         Text(
           value,
           style: GoogleFonts.spaceGrotesk(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
             color: textColor ?? AppColors.textLight,
           ),
         ),
@@ -1294,18 +1315,22 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 8,
                 children: [
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('🇳🇮', style: TextStyle(fontSize: 28)),
-                      const SizedBox(width: 10),
+                      const Text('🇳🇮', style: TextStyle(fontSize: 26)),
+                      const SizedBox(width: 8),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('REPÚBLICA DE NICARAGUA', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold)),
-                          Text('BAQUEANO EXPEDITION PASS', style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w900, color: Colors.white)),
+                          Text('REPÚBLICA DE NICARAGUA', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold)),
+                          Text('BAQUEANO EXPEDITION PASS', style: GoogleFonts.montserrat(fontSize: 12.5, fontWeight: FontWeight.w900, color: Colors.white)),
                         ],
                       ),
                     ],
@@ -1319,7 +1344,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     ),
                     child: Text(
                       'AUTORIZADO',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.success),
+                      style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w800, color: AppColors.success),
                     ),
                   ),
                 ],
@@ -1327,21 +1352,24 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const Divider(color: AppColors.borderLight, height: 28),
 
               // Code and Details
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 12,
+                runSpacing: 8,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('CÓDIGO ÚNICO', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted)),
-                      Text(_expeditionCode, style: GoogleFonts.spaceGrotesk(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.goldLight)),
+                      Text(_expeditionCode, style: GoogleFonts.spaceGrotesk(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.goldLight)),
                     ],
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('FECHA DE VIAJE', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted)),
-                      Text(DateFormat('dd MMMM yyyy').format(_selectedDate), style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
+                      Text(DateFormat('dd MMMM yyyy').format(_selectedDate), style: GoogleFonts.spaceGrotesk(fontSize: 12.5, fontWeight: FontWeight.w700, color: Colors.white)),
                     ],
                   ),
                 ],
@@ -1462,19 +1490,23 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      padding: const EdgeInsets.symmetric(vertical: 3.5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 130,
-            child: Text(label, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted)),
-          ),
           Expanded(
+            flex: 4,
+            child: Text(
+              label,
+              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, fontWeight: FontWeight.w500),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 5,
             child: Text(
               value,
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textLight),
+              style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppColors.textLight),
               textAlign: TextAlign.end,
             ),
           ),

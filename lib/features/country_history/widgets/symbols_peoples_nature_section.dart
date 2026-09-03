@@ -55,7 +55,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: isDesktop ? 270 : 285,
+            mainAxisExtent: isDesktop ? 275 : 305,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -111,7 +111,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -143,7 +143,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 2 : 1,
-            mainAxisExtent: isDesktop ? 275 : 290,
+            mainAxisExtent: isDesktop ? 285 : 325,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -183,7 +183,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 8),
                   Text(
                     'Tradiciones: ${people.traditions}',
                     style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
@@ -222,7 +222,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: isDesktop ? 340 : 360,
+            mainAxisExtent: isDesktop ? 350 : 400,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -275,7 +275,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(

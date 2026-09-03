@@ -6,21 +6,24 @@
 // - Fomentar una cultura de viaje ético, respeto ambiental y apoyo a la economía
 //   campesina mediante el Decálogo del Explorador Baqueano.
 // - Ofrecer una bitácora transparente con historias reales de viajeros de todo el
-//   mundo y permitirles compartir sus propias experiencias en sendero.
+//   mundo y permitirles compartir sus propias experiencias en sendero con recompensa de XP.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Encabezados protegidos con `Expanded` y `TextOverflow.ellipsis` para eliminar
-//   cualquier desbordamiento en dispositivos de cualquier formato.
-// - `ListView.separated` con `GlassContainer` para renderizar las reseñas comunitarias.
-// - Formulario modal interactivo para enviar un nuevo relato de expedición.
+// - `CommunityScreen`: StatefulWidget reactivo que mantiene la lista de relatos en memoria
+//   e integra un formulario modal interactivo completo para publicar nuevas vivencias.
+// - Encabezados protegidos con `Expanded` y `TextOverflow.ellipsis` para erradicar desbordamientos.
+// - Modal ergonómico con selección de destino, valoración de 1 a 5 estrellas, país de origen
+//   y redacción de testimonio con feedback háptico.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `CommunityScreen`: Pantalla comunitaria y decálogo ético del viajero.
+// - `CommunityScreen`: Pantalla comunitaria, decálogo ético del viajero y formulario de relatos.
 // ============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
+import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
@@ -29,8 +32,278 @@ import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 
-class CommunityScreen extends StatelessWidget {
+class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
+
+  @override
+  State<CommunityScreen> createState() => _CommunityScreenState();
+}
+
+class _CommunityScreenState extends State<CommunityScreen> {
+  late List<ExplorerReview> _reviews;
+
+  @override
+  void initState() {
+    super.initState();
+    _reviews = List.from(CatalogData.explorerReviews);
+  }
+
+  void _openPublishStoryModal(BuildContext context) {
+    HapticFeedback.lightImpact();
+    final nameController = TextEditingController();
+    final storyController = TextEditingController();
+    String selectedDestination = 'Volcán Cerro Negro';
+    double selectedRating = 5.0;
+    String selectedFlag = '🇳🇮';
+
+    final destinations = [
+      'Volcán Cerro Negro',
+      'Cañón de Somoto',
+      'Isla de Ometepe',
+      'Selva Indio Maíz',
+      'Reserva Miraflor Estelí',
+      'Río San Juan',
+      'Volcán Masaya',
+      'Pueblos Blancos & Catarina',
+    ];
+
+    final flags = ['🇳🇮', '🇨🇷', '🇸🇻', '🇲🇽', '🇺🇸', '🇨🇦', '🇪🇸', '🇩🇪', '🇨🇭', '🇨🇴'];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (modalContext) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Container(
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+              ),
+              decoration: BoxDecoration(
+                color: const Color(0xFF041920),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+                border: Border.all(color: AppColors.borderGold, width: 1.2),
+                boxShadow: [
+                  BoxShadow(color: Colors.black.withValues(alpha: 0.6), blurRadius: 24, spreadRadius: 4),
+                ],
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Indicador superior de arrastre
+                    Center(
+                      child: Container(
+                        width: 44,
+                        height: 5,
+                        decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const Text('✍️', style: TextStyle(fontSize: 22)),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'PUBLICAR RELATO DE EXPEDICIÓN',
+                                  style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 0.8),
+                                ),
+                                Text(
+                                  'Gana +200 XP en tu Pasaporte Baqueano',
+                                  style: GoogleFonts.inter(fontSize: 11, color: AppColors.terracottaLight),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close, color: AppColors.textMuted),
+                          onPressed: () => Navigator.of(modalContext).pop(),
+                        ),
+                      ],
+                    ),
+                    const Divider(color: AppColors.borderLight, height: 20),
+
+                    // Nombre del Explorador
+                    Text('Nombre del Explorador / Viajero:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    const SizedBox(height: 6),
+                    TextField(
+                      controller: nameController,
+                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Tu nombre o apodo viajero (ej. Carlos Mendoza)',
+                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        filled: true,
+                        fillColor: AppColors.primaryDark,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.gold)),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Bandera / Nacionalidad
+                    Text('País de Origen:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 8,
+                      children: flags.map((f) {
+                        final isSel = selectedFlag == f;
+                        return InkWell(
+                          onTap: () => setModalState(() => selectedFlag = f),
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: isSel ? AppColors.terracotta.withValues(alpha: 0.3) : AppColors.primaryDark,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: isSel ? AppColors.gold : AppColors.borderLight),
+                            ),
+                            child: Text(f, style: const TextStyle(fontSize: 18)),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Destino
+                    Text('Destino / Ruta Explorada:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    const SizedBox(height: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryDark,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.borderLight),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedDestination,
+                          isExpanded: true,
+                          dropdownColor: AppColors.bgDark,
+                          icon: const Icon(Icons.arrow_drop_down, color: AppColors.gold),
+                          items: destinations.map((d) {
+                            return DropdownMenuItem<String>(
+                              value: d,
+                              child: Text(d, style: GoogleFonts.inter(fontSize: 13, color: Colors.white)),
+                            );
+                          }).toList(),
+                          onChanged: (val) {
+                            if (val != null) {
+                              setModalState(() => selectedDestination = val);
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Calificación en Estrellas
+                    Row(
+                      children: [
+                        Text('Calificación:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                        const SizedBox(width: 8),
+                        Row(
+                          children: List.generate(5, (index) {
+                            final star = index + 1;
+                            return IconButton(
+                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              constraints: const BoxConstraints(),
+                              icon: Icon(
+                                star <= selectedRating ? Icons.star_rounded : Icons.star_outline_rounded,
+                                color: AppColors.gold,
+                                size: 24,
+                              ),
+                              onPressed: () => setModalState(() => selectedRating = star.toDouble()),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+
+                    // Relato / Experiencia
+                    Text('Tu Relato o Consejo de Sendero:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    const SizedBox(height: 6),
+                    TextField(
+                      controller: storyController,
+                      maxLines: 4,
+                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Cuéntanos cómo fue tu experiencia con los baqueanos locales, qué llevar, consejos ecológicos...',
+                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        filled: true,
+                        fillColor: AppColors.primaryDark,
+                        contentPadding: const EdgeInsets.all(14),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.gold)),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Botón Publicar
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.terracotta,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        ),
+                        icon: const Icon(Icons.send_rounded, size: 18, color: Colors.white),
+                        label: Text(
+                          'PUBLICAR RELATO EN LA BITÁCORA',
+                          style: GoogleFonts.spaceGrotesk(fontSize: 12.5, fontWeight: FontWeight.w800),
+                        ),
+                        onPressed: () {
+                          if (storyController.text.trim().isEmpty) {
+                            CustomToast.error(modalContext, 'Por favor escribe tu relato o experiencia.');
+                            return;
+                          }
+
+                          HapticFeedback.mediumImpact();
+                          final newReview = ExplorerReview(
+                            id: 'rev-${DateTime.now().millisecondsSinceEpoch}',
+                            author: nameController.text.trim().isEmpty ? 'Explorador Baqueano' : nameController.text.trim(),
+                            countryFlag: selectedFlag,
+                            destination: selectedDestination,
+                            review: storyController.text.trim(),
+                            rating: selectedRating,
+                          );
+
+                          setState(() {
+                            _reviews.insert(0, newReview);
+                          });
+
+                          Navigator.of(modalContext).pop();
+                          CustomToast.success(context, '¡Relato publicado con éxito! Has ganado +200 XP en tu Pasaporte Baqueano.');
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,50 +343,52 @@ class CommunityScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text('📜', style: TextStyle(fontSize: 26)),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'DECÁLOGO DEL EXPLORADOR',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
-                            color: AppColors.gold,
-                            letterSpacing: 1.1,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                      const Icon(Icons.verified_user_rounded, color: AppColors.gold, size: 24),
+                      const SizedBox(width: 10),
+                      Text(
+                        'DECÁLOGO DEL EXPLORADOR ÉTICO',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.goldLight,
+                          letterSpacing: 1.0,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 14),
-                  _buildDecalogueRule('1. Sin Huella Ecológica', 'Llévate toda tu basura de vuelta. No extraigas orquídeas, piedras volcánicas ni molestes la fauna silvestre.'),
-                  _buildDecalogueRule('2. Comercio Justo y Local', 'Paga el valor justo sin regatear a los campesinos y artesanos. Consume en comedores de las familias locales.'),
-                  _buildDecalogueRule('3. Respeta las Tradiciones', 'Pide permiso antes de fotografiar rostros de lugareños y respeta los sitios sagrados precolombinos.'),
-                  _buildDecalogueRule('4. Confía en tu Baqueano', 'Sigue siempre las recomendaciones técnicas de tu guía nativo en ríos, volcanes y senderos de selva.'),
+                  const SizedBox(height: 12),
+                  _buildDecalogueItem('1.', 'No dejes rastro: Regresa toda la basura contigo, incluso la biodegradable.'),
+                  _buildDecalogueItem('2.', 'Respeta a la fauna silvestre: Observa desde la distancia sin alimentar.'),
+                  _buildDecalogueItem('3.', 'Apoya la economía campesina: Contrata guías baqueanos locales certificados.'),
+                  _buildDecalogueItem('4.', 'Honra las tradiciones sagradas: Pide permiso antes de fotografiar en comunidades.'),
                 ],
               ),
             ),
 
-            const SizedBox(height: 36),
+            const SizedBox(height: 28),
 
-            // BITÁCORA COMUNITARIA
-            const SectionHeader(
-              tag: 'HISTORIAS EN RUTA',
-              title: 'Bitácora Comunitaria de Viajeros',
-              subtitle: 'Relatos auténticos de exploradores que apoyan el ecoturismo campesino.',
-              isCentered: true,
+            // LISTA DE RESEÑAS DE LA COMUNIDAD
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'EXPERIENCIAS EN SENDERO (${_reviews.length})',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.goldLight,
+                  letterSpacing: 1.2,
+                ),
+              ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
 
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: CatalogData.explorerReviews.length,
+              itemCount: _reviews.length,
               separatorBuilder: (_, __) => const SizedBox(height: 14),
               itemBuilder: (context, index) {
-                final rev = CatalogData.explorerReviews[index];
+                final rev = _reviews[index];
                 return GlassContainer(
                   padding: const EdgeInsets.all(18),
                   borderRadius: BorderRadius.circular(18),
@@ -204,6 +479,7 @@ class CommunityScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.gold.withValues(alpha: 0.15),
                             shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
                           ),
                           child: const Icon(Icons.edit_note_rounded, color: AppColors.gold, size: 28),
                         ),
@@ -215,7 +491,7 @@ class CommunityScreen extends StatelessWidget {
                               Text(
                                 '¿Completaste una ruta con Baqueano?',
                                 style: GoogleFonts.montserrat(
-                                  fontSize: 15,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white,
                                 ),
@@ -233,9 +509,7 @@ class CommunityScreen extends StatelessWidget {
                           text: 'Publicar Relato',
                           variant: BaqueanoButtonVariant.primary,
                           height: 42,
-                          onPressed: () {
-                            CustomToast.success(context, 'Tu relato fue enviado a revisión comunitaria.');
-                          },
+                          onPressed: () => _openPublishStoryModal(context),
                         ),
                       ],
                     )
@@ -281,9 +555,7 @@ class CommunityScreen extends StatelessWidget {
                           text: '✍️ Publicar Relato de Expedición',
                           variant: BaqueanoButtonVariant.primary,
                           height: 44,
-                          onPressed: () {
-                            CustomToast.success(context, 'Tu relato fue enviado a revisión comunitaria.');
-                          },
+                          onPressed: () => _openPublishStoryModal(context),
                         ),
                       ],
                     ),
@@ -296,27 +568,16 @@ class CommunityScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDecalogueRule(String title, String desc) {
+  Widget _buildDecalogueItem(String num, String text) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.check_circle_outline, color: AppColors.gold, size: 18),
-          const SizedBox(width: 10),
+          Text(num, style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gold)),
+          const SizedBox(width: 8),
           Expanded(
-            child: RichText(
-              text: TextSpan(
-                style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight, height: 1.4),
-                children: [
-                  TextSpan(
-                    text: '$title: ',
-                    style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w800, color: AppColors.goldLight),
-                  ),
-                  TextSpan(text: desc),
-                ],
-              ),
-            ),
+            child: Text(text, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.35)),
           ),
         ],
       ),

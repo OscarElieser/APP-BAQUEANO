@@ -174,17 +174,18 @@ class BaqueanoLogo extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         // Lema y bandera nacional
-        Row(
-          mainAxisSize: MainAxisSize.min,
+        Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 6,
           children: [
             const Text('🇳🇮', style: TextStyle(fontSize: 14)),
-            const SizedBox(width: 6),
             Text(
               'PLATAFORMA OFICIAL DE ECOTURISMO',
               style: GoogleFonts.spaceGrotesk(
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: FontWeight.w800,
-                letterSpacing: 2.0,
+                letterSpacing: 1.1,
                 color: AppColors.goldLight,
               ),
             ),
