@@ -260,8 +260,8 @@ class SosSafetyModal extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: BaqueanoButton(
-                                  text: 'COPIAR COORDENADAS',
-                                  icon: const Icon(Icons.copy_rounded, size: 13, color: Colors.white),
+                                  text: 'COPIAR GPS',
+                                  icon: const Icon(Icons.copy_rounded, size: 14, color: Colors.white),
                                   variant: BaqueanoButtonVariant.secondary,
                                   height: 38,
                                   onPressed: () {

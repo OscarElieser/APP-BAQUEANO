@@ -162,10 +162,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 14),
                     BaqueanoButton(
-                      text: 'CONOCER Y SUMARME AL COMPROMISO VERDE',
+                      text: 'UNIRME AL COMPROMISO VERDE',
                       icon: const Icon(Icons.eco_rounded, size: 18),
                       variant: BaqueanoButtonVariant.primary,
-                      height: 44,
+                      height: 48,
                       width: double.infinity,
                       onPressed: () => context.push('/campana-ambiental'),
                     ),

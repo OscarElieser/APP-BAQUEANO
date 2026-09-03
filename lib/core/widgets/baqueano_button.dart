@@ -136,7 +136,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
               // Si está cargando, bloquea el evento onTap
               onTap: widget.isLoading ? null : widget.onPressed,
               child: Padding(
-                padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: widget.isLoading
                     ? const Center(
                         child: SizedBox(
@@ -165,6 +165,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
                                 style: _getTextStyle(),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
+                                softWrap: false,
                               ),
                             ),
                           ),

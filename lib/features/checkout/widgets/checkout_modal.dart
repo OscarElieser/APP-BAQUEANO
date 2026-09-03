@@ -988,10 +988,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
         // CTA DE CONFIRMACIÓN
         BaqueanoButton(
-          text: 'CONFIRMAR EXPEDICIÓN & GENERAR COMPROBANTE',
+          text: 'CONFIRMAR RESERVA & COMPROBANTE',
           icon: const Icon(Icons.verified, color: Colors.white, size: 20),
           variant: BaqueanoButtonVariant.primary,
-          height: 54,
+          height: 52,
           onPressed: () {
             if (_nameController.text.trim().isEmpty) {
               CustomToast.error(context, 'Por favor ingresa el nombre del explorador');

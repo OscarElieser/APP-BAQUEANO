@@ -960,9 +960,12 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                         ),
                         icon: const Icon(Icons.send_rounded, size: 18, color: Colors.white),
-                        label: Text(
-                          'PUBLICAR RELATO EN LA BITÁCORA',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 12.5, fontWeight: FontWeight.w800),
+                        label: const FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'PUBLICAR RELATO EN LA BITÁCORA',
+                            style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800),
+                          ),
                         ),
                         onPressed: () {
                           if (storyController.text.trim().isEmpty) {
@@ -2217,7 +2220,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                         BaqueanoButton(
                           text: '✍️ Publicar Relato de Expedición',
                           variant: BaqueanoButtonVariant.primary,
-                          height: 44,
+                          height: 48,
                           onPressed: () => _openPublishStoryModal(context),
                         ),
                       ],
