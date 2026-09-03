@@ -278,13 +278,17 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                   children: [
                     const Icon(Icons.handshake_rounded, size: 13, color: AppColors.gold),
                     const SizedBox(width: 6),
-                    Text(
-                      'CONTACTO DIRECTO · ${businesses.length} EMPRENDIMIENTOS CAMPESINOS',
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 0.8,
-                        color: AppColors.gold,
+                    Flexible(
+                      child: Text(
+                        'CONTACTO DIRECTO · ${businesses.length} EMPRENDIMIENTOS',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.8,
+                          color: AppColors.gold,
+                        ),
                       ),
                     ),
                   ],
