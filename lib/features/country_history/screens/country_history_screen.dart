@@ -21,6 +21,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_toast.dart';
@@ -408,7 +409,166 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
           figures: state.filteredHistoricalFigures,
           curiosities: state.curiosities,
         ),
+
+        const SizedBox(height: 56),
+
+        // 7. CONEXIÓN TERRITORIAL: DEL CONOCIMIENTO AL VIAJE RESPONSABLE
+        _buildTerritorialConnectionCard(context, isDesktop),
       ],
+    );
+  }
+
+  Widget _buildTerritorialConnectionCard(BuildContext context, bool isDesktop) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(isDesktop ? 32 : 20),
+      decoration: BoxDecoration(
+        color: AppColors.primaryLight.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.primaryDark.withValues(alpha: 0.95),
+            AppColors.primaryLight.withValues(alpha: 0.45),
+          ],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.terracotta.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.terracotta),
+                ),
+                child: const Icon(Icons.explore_rounded, color: AppColors.goldLight, size: 24),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ECOSISTEMA BAQUEANO',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.goldLight,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'Conecta la Memoria con el Territorio',
+                      style: GoogleFonts.montserrat(
+                        fontSize: isDesktop ? 20 : 16,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Text(
+            'Ahora que conoces las raíces, héroes y geografía de Nicaragua, conviértete en un Explorador Responsable. Recorre senderos alternativos, contacta baqueanos campesinos sin intermediarios y degusta sabores auténticos en comedores locales.',
+            style: GoogleFonts.inter(
+              fontSize: 13,
+              color: AppColors.textLight.withValues(alpha: 0.9),
+              height: 1.5,
+            ),
+          ),
+          const SizedBox(height: 22),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              _buildBridgeButton(
+                context,
+                icon: Icons.hiking_rounded,
+                label: 'Rutas y Senderos',
+                route: '/descubrir',
+                isPrimary: true,
+              ),
+              _buildBridgeButton(
+                context,
+                icon: Icons.support_agent_rounded,
+                label: 'Contactar Baqueano',
+                route: '/mensajes',
+              ),
+              _buildBridgeButton(
+                context,
+                icon: Icons.restaurant_rounded,
+                label: 'Comedores Típicos',
+                route: '/gastronomia',
+              ),
+              _buildBridgeButton(
+                context,
+                icon: Icons.map_rounded,
+                label: 'Mapa Satelital GPS',
+                route: '/mapa',
+              ),
+              _buildBridgeButton(
+                context,
+                icon: Icons.qr_code_2_rounded,
+                label: 'Pasaporte del Explorador',
+                route: '/perfil',
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBridgeButton(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required String route,
+    bool isPrimary = false,
+  }) {
+    if (isPrimary) {
+      return ElevatedButton.icon(
+        onPressed: () {
+          HapticFeedback.lightImpact();
+          context.go(route);
+        },
+        icon: Icon(icon, size: 16, color: Colors.white),
+        label: Text(
+          label,
+          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.terracotta,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+    }
+
+    return OutlinedButton.icon(
+      onPressed: () {
+        HapticFeedback.lightImpact();
+        context.go(route);
+      },
+      icon: Icon(icon, size: 16, color: AppColors.goldLight),
+      label: Text(
+        label,
+        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+      ),
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.5)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
     );
   }
 }

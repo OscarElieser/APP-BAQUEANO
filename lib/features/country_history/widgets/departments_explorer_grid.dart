@@ -162,20 +162,98 @@ class DepartmentsExplorerGrid extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Botón de Enlace Turístico a Baqueano
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pop(ctx);
-                HapticFeedback.mediumImpact();
-                context.go(dept.destinationRouteId ?? '/descubrir');
-              },
-              icon: const Icon(Icons.explore_rounded, color: Colors.white, size: 18),
-              label: Text('Explorar Destinos de ${dept.name} en Baqueano'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.terracotta,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            // 🧭 CONEXIÓN CRUZADA INTEGRAL: CULTURA ↔ DESTINO ↔ BAQUEANO
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: AppColors.primaryLight.withValues(alpha: 0.6),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.goldLight.withValues(alpha: 0.3)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.hub_rounded, color: AppColors.goldLight, size: 18),
+                      const SizedBox(width: 8),
+                      Text(
+                        'CONEXIÓN TERRITORIAL BAQUEANO',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.goldLight,
+                          letterSpacing: 0.6,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Descubre senderos alternativos, apoya a guías campesinos y orienta tu ruta con mapas de campo.',
+                    style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      HapticFeedback.mediumImpact();
+                      context.go(dept.destinationRouteId ?? '/descubrir');
+                    },
+                    icon: const Icon(Icons.explore_rounded, color: Colors.white, size: 18),
+                    label: Text('Explorar Destinos de ${dept.name}'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.terracotta,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 13),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(ctx);
+                            HapticFeedback.lightImpact();
+                            context.go('/mensajes');
+                          },
+                          icon: const Icon(Icons.support_agent_rounded, size: 15, color: AppColors.goldLight),
+                          label: Text(
+                            'Baqueanos',
+                            style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.5)),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(ctx);
+                            HapticFeedback.lightImpact();
+                            context.go('/mapa');
+                          },
+                          icon: const Icon(Icons.map_rounded, size: 15, color: AppColors.goldLight),
+                          label: Text(
+                            'Mapa GPS',
+                            style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.5)),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 16),
