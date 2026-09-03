@@ -227,6 +227,8 @@ class ExplorerReview {
   final String? userPhotoUrl;
   final bool isVerifiedGoogle;
   final String? date;
+  final String? ecoAction;
+  final bool isEcoGuardian;
 
   const ExplorerReview({
     required this.id,
@@ -239,6 +241,8 @@ class ExplorerReview {
     this.userPhotoUrl,
     this.isVerifiedGoogle = false,
     this.date,
+    this.ecoAction,
+    this.isEcoGuardian = false,
   });
 
   /// Fecha convertida para comparaciones y filtros de calendario

@@ -33,6 +33,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/data/catalog_data.dart';
@@ -59,6 +60,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
 
   // Estado del filtrado cronológico y Modo Galería Dinámica
   DateTime? _selectedDate;
+  bool _filterEcoOnly = false;
   bool _isAutoMotionPlaying = true;
   late PageController _galleryPageController;
   int _currentGalleryIndex = 0;
@@ -135,8 +137,12 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
   }
 
   List<ExplorerReview> _getFilteredReviews(DateTime? date) {
-    if (date == null) return _reviews;
-    return _reviews.where((rev) {
+    var list = _reviews;
+    if (_filterEcoOnly) {
+      list = list.where((rev) => rev.isEcoGuardian || rev.ecoAction != null).toList();
+    }
+    if (date == null) return list;
+    return list.where((rev) {
       final d = parseReviewDate(rev);
       return d.year == date.year && d.month == date.month && d.day == date.day;
     }).toList();
@@ -194,6 +200,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
 
     String selectedDestination = 'Volcán Cerro Negro';
     double selectedRating = 5.0;
+    String? selectedEcoAction;
     CountryDetectionResult detectionResult = CountryFlagHelper.detectFlag(countryController.text);
     final List<String> selectedPhotos = [];
     final ImagePicker picker = ImagePicker();
@@ -666,6 +673,97 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                     ),
                     const SizedBox(height: 14),
 
+                    // 2.5 ACCIÓN DE CUIDADO DE NUESTRO PAÍS (OPCIONAL)
+                    Row(
+                      children: [
+                        const Text('🌿', style: TextStyle(fontSize: 14)),
+                        const SizedBox(width: 6),
+                        Text(
+                          '¿Cuidaste a Nicaragua en esta ruta? (Opcional):',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.jungleGreenLight,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryDark,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: selectedEcoAction != null
+                              ? AppColors.jungleGreenLight.withValues(alpha: 0.8)
+                              : AppColors.borderLight,
+                          width: selectedEcoAction != null ? 1.2 : 0.8,
+                        ),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String?>(
+                          value: selectedEcoAction,
+                          isExpanded: true,
+                          hint: Text(
+                            'Selecciona una acción verde que realizaste...',
+                            style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                          ),
+                          dropdownColor: AppColors.bgDark,
+                          icon: const Icon(Icons.arrow_drop_down, color: AppColors.jungleGreenLight),
+                          items: [
+                            DropdownMenuItem<String?>(
+                              value: null,
+                              child: Text('Ninguna en específico', style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white60)),
+                            ),
+                            ...[
+                              '🧹 Limpieza de plásticos y basura en sendero',
+                              '🐢 Protección y respeto a fauna / tortugas',
+                              '💧 Uso de bloqueador biodegradable en agua dulce',
+                              '🌱 Reforestación o siembra de árbol nativo',
+                              '🌾 Consumo directo en cooperativa campesina',
+                              '🪸 Snorkel respetuoso sin pisar corales',
+                              '🚫 No dejé ningún rastro de basura',
+                            ].map((eco) => DropdownMenuItem<String?>(
+                                  value: eco,
+                                  child: Text(eco, style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.jungleGreenLight)),
+                                )),
+                          ],
+                          onChanged: (val) {
+                            setModalState(() => selectedEcoAction = val);
+                          },
+                        ),
+                      ),
+                    ),
+                    if (selectedEcoAction != null) ...[
+                      const SizedBox(height: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: AppColors.jungleGreen.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: AppColors.jungleGreenLight.withValues(alpha: 0.4)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.verified_rounded, color: AppColors.jungleGreenLight, size: 14),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                '¡Esta reseña recibirá el sello oficial de Guardián de Nicaragua!',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.jungleGreenLight,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 14),
+
                     // 3. SUBIDA DE FOTOS DE LA EXPEDICIÓN
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -879,6 +977,8 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             userPhotoUrl: googlePhotoUrl,
                             isVerifiedGoogle: isGoogleVerified,
                             date: dateStr,
+                            ecoAction: selectedEcoAction,
+                            isEcoGuardian: selectedEcoAction != null,
                           );
 
                           setState(() {
@@ -1228,6 +1328,37 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             fontStyle: FontStyle.italic,
                           ),
                         ),
+
+                        if (rev.ecoAction != null) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.jungleGreen.withValues(alpha: 0.25),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: AppColors.jungleGreenLight.withValues(alpha: 0.6)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text('🌱', style: TextStyle(fontSize: 13)),
+                                const SizedBox(width: 6),
+                                Flexible(
+                                  child: Text(
+                                    'Acción Verde: ${rev.ecoAction!}',
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.jungleGreenLight,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
 
                         // Galería de fotos si la reseña incluye capturas
                         if (hasPhotos) ...[
@@ -1591,7 +1722,163 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               ),
             ),
 
-            const SizedBox(height: 28),
+            const SizedBox(height: 20),
+
+            // ----------------------------------------------------------------
+            // BANNER INTERACTIVO: CÓMO CUIDAMOS NUESTRO PAÍS
+            // ----------------------------------------------------------------
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color(0xFF064E3B),
+                    AppColors.primaryDark,
+                    const Color(0xFF082B35),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.jungleGreenLight, width: 1.2),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.jungleGreen.withValues(alpha: 0.2),
+                    blurRadius: 14,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.jungleGreen.withValues(alpha: 0.3),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Text('🌿', style: TextStyle(fontSize: 22)),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'IMPACTO ECOLÓGICO DE LA COMUNIDAD',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.goldLight,
+                                letterSpacing: 0.8,
+                              ),
+                            ),
+                            Text(
+                              '¿Cómo cuidamos nuestro país en cada ruta?',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Nuestra comunidad no solo viaja: recoge plásticos en volcanes, protege nidos de tortugas, utiliza bloqueadores biodegradables en lagunas cratéricas y reforesta con cooperativas campesinas.',
+                    style: GoogleFonts.inter(
+                      fontSize: 12.5,
+                      color: Colors.white.withValues(alpha: 0.88),
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          setState(() {
+                            _filterEcoOnly = !_filterEcoOnly;
+                          });
+                        },
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                          decoration: BoxDecoration(
+                            color: _filterEcoOnly ? AppColors.gold : AppColors.jungleGreen.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: _filterEcoOnly ? AppColors.gold : AppColors.jungleGreenLight,
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                _filterEcoOnly ? Icons.check_circle_rounded : Icons.filter_alt_outlined,
+                                size: 15,
+                                color: _filterEcoOnly ? const Color(0xFF041920) : AppColors.jungleGreenLight,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                _filterEcoOnly
+                                    ? 'Viendo: Guardianes del País (${_reviews.where((r) => r.isEcoGuardian || r.ecoAction != null).length})'
+                                    : 'Filtrar Relatos con Acciones Verdes (${_reviews.where((r) => r.isEcoGuardian || r.ecoAction != null).length})',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: _filterEcoOnly ? const Color(0xFF041920) : Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => context.push('/campana-ambiental'),
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryDark,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: AppColors.gold.withValues(alpha: 0.5), width: 1),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.shield_outlined, size: 15, color: AppColors.goldLight),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Ver Campaña Ambiental',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.goldLight,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 22),
 
             // ----------------------------------------------------------------
             // BARRA DE FILTRADO POR FECHA DE EXPEDICIÓN
@@ -1743,6 +2030,37 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             height: 1.45,
                           ),
                         ),
+
+                        if (rev.ecoAction != null) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.jungleGreen.withValues(alpha: 0.22),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: AppColors.jungleGreenLight.withValues(alpha: 0.55)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text('🌱', style: TextStyle(fontSize: 13)),
+                                const SizedBox(width: 6),
+                                Flexible(
+                                  child: Text(
+                                    'Acción Verde: ${rev.ecoAction!}',
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.jungleGreenLight,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
 
                         if (hasPhotos) ...[
                           const SizedBox(height: 12),

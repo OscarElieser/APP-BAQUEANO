@@ -1469,14 +1469,40 @@ class CatalogData {
   // --- TESTIMONIOS DE EXPLORADORES ---
   static const List<ExplorerReview> explorerReviews = [
     ExplorerReview(
+      id: 'rev-eco-1',
+      author: 'Elena Somarriba Morales',
+      countryFlag: '🇳🇮',
+      destination: 'Refugio de Vida Silvestre La Flor',
+      review:
+          '«Participamos en la patrulla comunitaria y liberación nocturna de más de 120 tortuguillos paslama en la playa. Verlos llegar al mar bajo el cielo estrellado sin linternas blancas te hace comprender por qué debemos cuidar cada centímetro de las costas de Nicaragua. ¡Una lección de amor a nuestra patria!»',
+      rating: 5.0,
+      date: '2026-09-03',
+      ecoAction: '🐢 Protección y Liberación de Tortugas Paslama',
+      isEcoGuardian: true,
+    ),
+    ExplorerReview(
       id: 'rev-1',
       author: 'Valeria Mendoza',
       countryFlag: '🇨🇷',
       destination: 'Cañón de Somoto',
       review:
-          '«¡Una de las mejores experiencias de mi vida! Nadar entre las inmensas paredes de roca milenaria del Cañón de Somoto te llena de una energía inexplicable. Nuestro guía baqueano Don Chepe nos cuidó en cada salto y el almuerzo de güirilas con cuajada al finalizar estuvo insuperable.»',
+          '«¡Una de las mejores experiencias de mi vida! Nadar entre las inmensas paredes de roca milenaria del Cañón de Somoto te llena de una energía inexplicable. Nuestro guía baqueano Don Chepe nos cuidó en cada salto y junto a nuestro grupo recogimos botellas plásticas del cauce fluvial. Cero rastro en el agua sagrada.»',
       rating: 5.0,
       date: '2026-09-03',
+      ecoAction: '🧹 Limpieza Fluvial & Cero Plásticos en Cañón',
+      isEcoGuardian: true,
+    ),
+    ExplorerReview(
+      id: 'rev-eco-2',
+      author: 'Mateo Bianchi',
+      countryFlag: '🇮🇹',
+      destination: 'Islas del Maíz (Little Corn Island)',
+      review:
+          '«Hicimos snorkeling en los arrecifes de coral virgen de Little Corn con flotabilidad neutra para no rozar ni un solo coral cerebro. Que Little Corn sea libre de vehículos a motor mantiene el aire puro y el mar cristalino. ¡Un paraíso caribeño que todos debemos proteger!»',
+      rating: 5.0,
+      date: '2026-09-03',
+      ecoAction: '🪸 Respeto a Arrecifes & Snorkel de Cero Contacto',
+      isEcoGuardian: true,
     ),
     ExplorerReview(
       id: 'rev-2',
@@ -1484,9 +1510,23 @@ class CatalogData {
       countryFlag: '🇪🇸',
       destination: 'Cerro Negro Sandboarding',
       review:
-          '«El sandboarding en Cerro Negro al atardecer superó todas mis expectativas. La adrenalina de bajar a más de 60 km/h sobre arena volcánica negra con el sol ocultándose en el Pacífico es una locura. La app offline me permitió navegar toda la ruta sin señal.»',
+          '«El sandboarding en Cerro Negro al atardecer superó todas mis expectativas. La adrenalina de bajar a más de 60 km/h sobre arena volcánica negra con el sol ocultándose en el Pacífico es una locura. Bajamos toda nuestra basura en las mochilas respetando la ladera geológica activa.»',
       rating: 5.0,
       date: '2026-09-03',
+      ecoAction: '👣 No Dejar Rastro en Cono Volcánico Activo',
+      isEcoGuardian: true,
+    ),
+    ExplorerReview(
+      id: 'rev-eco-3',
+      author: 'Sofia Johansson',
+      countryFlag: '🇸🇪',
+      destination: 'Reserva Natural Selva Negra',
+      review:
+          '«Plantamos 5 árboles nativos de madroño y pochote en el corredor biológico de la finca de café de sombra en Matagalpa. Escuchar los monos aulladores mientras restauras el bosque nuboso te llena el corazón. La comida orgánica de la granja es insuperable.»',
+      rating: 5.0,
+      date: '2026-09-02',
+      ecoAction: '🌱 Reforestación de Árboles Nativos en Nebliselva',
+      isEcoGuardian: true,
     ),
     ExplorerReview(
       id: 'rev-3',
@@ -1494,9 +1534,11 @@ class CatalogData {
       countryFlag: '🇳🇮',
       destination: 'Cascada La Luna',
       review:
-          '«El clima fresco de Matagalpa y el rugido de la Cascada La Luna te desconectan de la rutina. Cruzamos en tirolesa justo por encima de la caída de agua. Me encanta que el dinero va 100% directo a las familias locales de la comunidad.»',
+          '«El clima fresco de Matagalpa y el rugido de la Cascada La Luna te desconectan de la rutina. Usamos únicamente bloqueadores solares biodegradables para no alterar los peces de la poza. Me encanta que el dinero va 100% directo a las familias locales campesinas.»',
       rating: 5.0,
       date: '2026-09-02',
+      ecoAction: '💧 Uso Exclusivo de Bloqueador Biodegradable',
+      isEcoGuardian: true,
     ),
     ExplorerReview(
       id: 'rev-4',
@@ -1504,9 +1546,11 @@ class CatalogData {
       countryFlag: '🇩🇪',
       destination: 'Isla de Ometepe',
       review:
-          '«Baqueano AI me armó un itinerario de 5 días por Ometepe y Granada con cálculo exacto de presupuesto en córdobas. Los kayaks por el Río Istián al amanecer con monos aulladores y garzas fueron mágicos. ¡Una plataforma de clase mundial!»',
+          '«Baqueano AI me armó un itinerario de 5 días por Ometepe y Granada con cálculo exacto de presupuesto en córdobas. Los kayaks por el Río Istián al amanecer respetando la distancia de los nidos de garzas fueron mágicos. ¡Una plataforma de clase mundial!»',
       rating: 5.0,
       date: '2026-09-02',
+      ecoAction: '🛶 Navegación Silenciosa sin Motor en Humedales',
+      isEcoGuardian: true,
     ),
     ExplorerReview(
       id: 'rev-5',
@@ -1514,9 +1558,11 @@ class CatalogData {
       countryFlag: '🇲🇽',
       destination: 'Volcán Masaya Nocturno',
       review:
-          '«Ver el lago de lava incandescente en el Volcán Masaya durante la noche es un espectáculo imponente que te deja sin palabras. La amabilidad del guía y la seguridad en todo momento hicieron el tour perfecto para viajar en familia.»',
+          '«Ver el lago de lava incandescente en el Volcán Masaya durante la noche es un espectáculo imponente que te deja sin palabras. Respetamos los senderos delimitados y las instrucciones de los guardaparques en todo momento.»',
       rating: 5.0,
       date: '2026-09-01',
+      ecoAction: '🌋 Respeto de Senderos en Parque Nacional',
+      isEcoGuardian: true,
     ),
     ExplorerReview(
       id: 'rev-6',
@@ -1524,9 +1570,11 @@ class CatalogData {
       countryFlag: '🇺🇸',
       destination: 'Madriz Eco-Lodge',
       review:
-          '«The authentic community connection makes all the difference. Staying at the eco-lodge in Madriz and hearing the legends from local elders made this trip 10x richer than any standard package tour. 100% recommended!»',
+          '«The authentic community connection makes all the difference. Consuming local fruits and organic food directly from cooperative families helps them protect their mountain forests without having to cut trees. 100% recommended!»',
       rating: 5.0,
       date: '2026-08-30',
+      ecoAction: '🌾 Comercio Justo Directo con Cooperativas',
+      isEcoGuardian: true,
     ),
   ];
 

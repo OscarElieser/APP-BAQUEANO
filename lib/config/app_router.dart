@@ -141,10 +141,26 @@ class AppRouter {
         path: '/destinos',
         redirect: (_, __) => '/turismo',
       ),
-      // Campaña Ambiental y Cuidado de Recursos
+      // Campaña Ambiental y Cuidado de Recursos (con aliases)
       GoRoute(
         path: '/campana-ambiental',
         builder: (context, state) => const EnvironmentalCampaignScreen(),
+      ),
+      GoRoute(
+        path: '/campana_ambiental',
+        redirect: (_, __) => '/campana-ambiental',
+      ),
+      GoRoute(
+        path: '/ambiental',
+        redirect: (_, __) => '/campana-ambiental',
+      ),
+      GoRoute(
+        path: '/ambiente',
+        redirect: (_, __) => '/campana-ambiental',
+      ),
+      GoRoute(
+        path: '/recursos',
+        redirect: (_, __) => '/campana-ambiental',
       ),
       // Historia de mi país (Nicaragua y modular)
       GoRoute(
