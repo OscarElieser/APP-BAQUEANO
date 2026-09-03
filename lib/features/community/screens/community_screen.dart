@@ -226,7 +226,15 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               HapticFeedback.selectionClick();
               try {
                 if (source == ImageSource.gallery) {
-                  final List<XFile> picked = await picker.pickMultiImage(imageQuality: 85);
+                  List<XFile> picked = [];
+                  try {
+                    picked = await picker.pickMultiImage(imageQuality: 85);
+                  } catch (multiErr) {
+                    debugPrint('Aviso fallback a selector simple: $multiErr');
+                    final single = await picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
+                    if (single != null) picked = [single];
+                  }
+
                   if (picked.isNotEmpty) {
                     setModalState(() {
                       for (final f in picked) {
@@ -248,6 +256,9 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                 }
               } catch (e) {
                 debugPrint('Aviso selector de fotos: $e');
+                if (modalContext.mounted) {
+                  CustomToast.error(modalContext, 'Por favor concede los permisos de cámara y fotos en tu dispositivo.');
+                }
               }
             }
 

@@ -111,6 +111,15 @@ class BaqueanoAiService extends ChangeNotifier {
 
     _chatHistory.add(userMsg);
     _isTyping = true;
+
+    // Optimización de memoria: Mantener máximo 25 mensajes activos en memoria
+    if (_chatHistory.length > 25) {
+      final welcome = _chatHistory.first;
+      _chatHistory.removeRange(1, _chatHistory.length - 20);
+      if (!_chatHistory.contains(welcome)) {
+        _chatHistory.insert(0, welcome);
+      }
+    }
     notifyListeners();
 
     // 🛡️ BLINDAJE DIGITAL: Validación y Sanitización con AI Guardrails
@@ -121,6 +130,7 @@ class BaqueanoAiService extends ChangeNotifier {
         text:
             '🛡️ **ESCUDO DE SEGURIDAD DIGITAL BAQUEANO**\n\n'
             '${validation.riskReason ?? "La consulta no cumple con las directivas de seguridad del sistema."}\n\n'
+            '🔒 *Auditoría de Protección:* `${validation.auditToken}`\n\n'
             'Por favor formula una consulta sobre destinos turísticos, senderismo, transporte o gastronomía comunitaria de Nicaragua.',
         isUser: false,
         timestamp: DateTime.now(),

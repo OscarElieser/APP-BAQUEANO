@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserProfile {
   final String uid;
   final String email;
@@ -43,6 +45,13 @@ class UserProfile {
       'favorites': favorites,
       'createdAt': createdAt.toIso8601String(),
     };
+  }
+
+  String toJson() => jsonEncode(toMap());
+
+  factory UserProfile.fromJson(String jsonStr) {
+    final map = jsonDecode(jsonStr) as Map<String, dynamic>;
+    return UserProfile.fromMap(map, map['uid'] ?? '');
   }
 
   factory UserProfile.fromMap(Map<String, dynamic> map, String uid) {
