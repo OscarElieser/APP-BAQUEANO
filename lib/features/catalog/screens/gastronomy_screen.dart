@@ -84,6 +84,20 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
       return '🍹 Fresco de tamarindo o pozol con leche';
     } else if (lower.contains('güirila')) {
       return '🥛 Cuajada fresca campesina y café norteño';
+    } else if (lower.contains('carne asada')) {
+      return '🥤 Cacao con leche bien frío o chía con tamarindo';
+    } else if (lower.contains('chancho con yuca')) {
+      return '🍹 Chicha de maíz o fresco de pitahaya con limón';
+    } else if (lower.contains('salpicón')) {
+      return '🍶 Fresco de melón criollo o limonada con dulce';
+    } else if (lower.contains('mondongo')) {
+      return '🥤 Naranjada agria helada o fresco de cebada';
+    } else if (lower.contains('sopa de res')) {
+      return '🍹 Fresco de calala o tamarindo helado';
+    } else if (lower.contains('rondón') || lower.contains('rice and beans') || lower.contains('pan de coco')) {
+      return '🥥 Agua de coco bien fría o ginger beer caribeña';
+    } else if (lower.contains('bebidas') || lower.contains('repostería')) {
+      return '🍪 Rosquilla somoteña o buñuelo con miel de caña';
     }
     return '☕ Bebida típica ancestral recomendada';
   }
@@ -97,13 +111,14 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
     final List<GastronomyDish> filteredDishes = _selectedCategory == 'Todos'
         ? allDishes
         : allDishes.where((d) {
-            final name = d.name.toLowerCase();
-            if (_selectedCategory == '🌽 Maíz Ancestral') {
-              return name.contains('nacatamal') || name.contains('güirila') || name.contains('indio') || name.contains('gallo');
-            } else if (_selectedCategory == '🥩 Sabores Criollos') {
-              return name.contains('vigorón') || name.contains('indio') || name.contains('nacatamal');
-            } else if (_selectedCategory == '🧀 Lácteos & Tradición') {
-              return name.contains('queso') || name.contains('güirila') || name.contains('gallo');
+            if (_selectedCategory == '🔥 Fritanga & Fuertes') {
+              return d.category?.contains('Fritanga') == true;
+            } else if (_selectedCategory == '🍲 Sopas & Guisos') {
+              return d.category?.contains('Sopas') == true;
+            } else if (_selectedCategory == '🥥 Cocina Caribeña') {
+              return d.category?.contains('Caribeña') == true;
+            } else if (_selectedCategory == '🥤 Bebidas & Antojos') {
+              return d.category?.contains('Bebidas') == true;
             }
             return true;
           }).toList();
@@ -122,7 +137,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
             const SectionHeader(
               tag: 'SABORES ANCESTRALES',
               title: '🍽️ Gastronomía Autóctona de Nicaragua',
-              subtitle: 'La cocina nicaragüense: una explosión de maíz criollo, cacao, carnes cecinadas, lácteos artesanales y tradición precolombina.',
+              subtitle: 'La cocina nicaragüense: una explosión de maíz criollo, cacao, carnes al carbón, coco caribeño y recetas precolombinas.',
             ),
             const SizedBox(height: 16),
 
@@ -191,7 +206,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                     spacing: 16,
                     runSpacing: 8,
                     children: [
-                      _buildHeroStat('6 Recetas Clásicas', Icons.restaurant_menu_rounded),
+                      _buildHeroStat('${allDishes.length} Recetas Clásicas', Icons.restaurant_menu_rounded),
                       _buildHeroStat('Comercio Justo', Icons.handshake_rounded),
                       _buildHeroStat('100% Directo a Familias', Icons.savings_rounded),
                     ],
@@ -207,7 +222,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               child: Row(
-                children: ['Todos', '🌽 Maíz Ancestral', '🥩 Sabores Criollos', '🧀 Lácteos & Tradición'].map((category) {
+                children: ['Todos', '🔥 Fritanga & Fuertes', '🍲 Sopas & Guisos', '🥥 Cocina Caribeña', '🥤 Bebidas & Antojos'].map((category) {
                   final isSelected = _selectedCategory == category;
                   return Padding(
                     padding: const EdgeInsets.only(right: 10.0),
@@ -237,7 +252,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                               : null,
                         ),
                         child: Text(
-                          category == 'Todos' ? 'Todos los Platillos (${allDishes.length})' : category,
+                          category == 'Todos' ? 'Todos (${allDishes.length})' : category,
                           style: GoogleFonts.spaceGrotesk(
                             fontSize: 12,
                             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,

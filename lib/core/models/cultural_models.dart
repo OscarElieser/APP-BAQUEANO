@@ -34,6 +34,7 @@ class GastronomyDish {
   final String ownerName;
   final String estimatedPrice;
   final String? schedule;
+  final String? category;
 
   const GastronomyDish({
     required this.id,
@@ -49,6 +50,7 @@ class GastronomyDish {
     this.ownerName = 'Comunidad Anfitriona Campesina',
     this.estimatedPrice = r'C$ 100 - C$ 160 NIO (~$3.00 - $4.50 USD)',
     this.schedule = 'Abierto todos los días de 6:00 AM a 6:00 PM',
+    this.category,
   });
 }
 
@@ -116,6 +118,10 @@ class LodgingSpot {
   final String description;
   final String imageUrl;
   final String? reservationInfo;
+  final double? latitude;
+  final double? longitude;
+  final String? estimatedTime;
+  final String? howToGetThere;
 
   const LodgingSpot({
     required this.id,
@@ -128,6 +134,10 @@ class LodgingSpot {
     required this.description,
     required this.imageUrl,
     this.reservationInfo,
+    this.latitude,
+    this.longitude,
+    this.estimatedTime,
+    this.howToGetThere,
   });
 }
 
