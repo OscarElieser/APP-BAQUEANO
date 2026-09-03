@@ -199,6 +199,10 @@ class ExplorerReview {
   final String destination;
   final String review;
   final double rating;
+  final List<String> photos;
+  final String? userPhotoUrl;
+  final bool isVerifiedGoogle;
+  final String? date;
 
   const ExplorerReview({
     required this.id,
@@ -207,7 +211,31 @@ class ExplorerReview {
     required this.destination,
     required this.review,
     required this.rating,
+    this.photos = const [],
+    this.userPhotoUrl,
+    this.isVerifiedGoogle = false,
+    this.date,
   });
+
+  /// Fecha convertida para comparaciones y filtros de calendario
+  DateTime get parsedDate {
+    if (date != null && date!.isNotEmpty) {
+      try {
+        return DateTime.parse(date!);
+      } catch (_) {}
+    }
+    return DateTime(2026, 9, 3);
+  }
+
+  /// Fecha formateada en español para visualización en tarjetas y galería
+  String get formattedDate {
+    final d = parsedDate;
+    const months = [
+      'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+      'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+    ];
+    return '${d.day} ${months[d.month - 1]} ${d.year}';
+  }
 }
 
 /// Representa un sello o medalla de gamificación desbloqueable en el Pasaporte Digital.

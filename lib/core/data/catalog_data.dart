@@ -607,6 +607,7 @@ class CatalogData {
       review:
           '«¡Una de las mejores experiencias de mi vida! Nadar entre las inmensas paredes de roca milenaria del Cañón de Somoto te llena de una energía inexplicable. Nuestro guía baqueano Don Chepe nos cuidó en cada salto y el almuerzo de güirilas con cuajada al finalizar estuvo insuperable.»',
       rating: 5.0,
+      date: '2026-09-03',
     ),
     ExplorerReview(
       id: 'rev-2',
@@ -616,6 +617,7 @@ class CatalogData {
       review:
           '«El sandboarding en Cerro Negro al atardecer superó todas mis expectativas. La adrenalina de bajar a más de 60 km/h sobre arena volcánica negra con el sol ocultándose en el Pacífico es una locura. La app offline me permitió navegar toda la ruta sin señal.»',
       rating: 5.0,
+      date: '2026-09-03',
     ),
     ExplorerReview(
       id: 'rev-3',
@@ -625,6 +627,7 @@ class CatalogData {
       review:
           '«El clima fresco de Matagalpa y el rugido de la Cascada La Luna te desconectan de la rutina. Cruzamos en tirolesa justo por encima de la caída de agua. Me encanta que el dinero va 100% directo a las familias locales de la comunidad.»',
       rating: 5.0,
+      date: '2026-09-02',
     ),
     ExplorerReview(
       id: 'rev-4',
@@ -634,6 +637,7 @@ class CatalogData {
       review:
           '«Baqueano AI me armó un itinerario de 5 días por Ometepe y Granada con cálculo exacto de presupuesto en córdobas. Los kayaks por el Río Istián al amanecer con monos aulladores y garzas fueron mágicos. ¡Una plataforma de clase mundial!»',
       rating: 5.0,
+      date: '2026-09-02',
     ),
     ExplorerReview(
       id: 'rev-5',
@@ -643,6 +647,7 @@ class CatalogData {
       review:
           '«Ver el lago de lava incandescente en el Volcán Masaya durante la noche es un espectáculo imponente que te deja sin palabras. La amabilidad del guía y la seguridad en todo momento hicieron el tour perfecto para viajar en familia.»',
       rating: 5.0,
+      date: '2026-09-01',
     ),
     ExplorerReview(
       id: 'rev-6',
@@ -652,6 +657,7 @@ class CatalogData {
       review:
           '«The authentic community connection makes all the difference. Staying at the eco-lodge in Madriz and hearing the legends from local elders made this trip 10x richer than any standard package tour. 100% recommended!»',
       rating: 5.0,
+      date: '2026-08-30',
     ),
   ];
 
