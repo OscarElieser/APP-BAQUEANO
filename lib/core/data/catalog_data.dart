@@ -17,7 +17,7 @@ class CatalogData {
       distance: '18 km',
       description:
           'Sendero privado en bosque nuboso, salto de cascada virgen de 35m, baño natural en pozas esmeralda, almuerzo campesino y guía nativo baqueano.',
-      imageUrl: 'https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/cascada_la_luna.jpg',
       tags: ['Cascadas', 'Bosque Nuboso', 'Cafetales', 'Tirolesa'],
       latitude: 12.9255,
       longitude: -85.9178,
@@ -37,7 +37,7 @@ class CatalogData {
       distance: '12 km',
       description:
           'Flotación, nado y saltos entre paredones rocosos milenarios de 150m en el Río Coco. Incluye chaleco salvavidas, lancha y güirilas tradicionales con cuajada.',
-      imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/canon_de_somoto.jpg',
       tags: ['Geología', 'Río Coco', 'Natación', 'Saltos'],
       latitude: 13.4833,
       longitude: -86.5833,
@@ -57,7 +57,7 @@ class CatalogData {
       distance: '6 km',
       description:
           'Ascenso al volcán más joven y activo de Centroamérica seguido de descenso a más de 70 km/h sobre arena volcánica negra con tabla y traje protector profesional.',
-      imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/cerro_negro.jpg',
       tags: ['Volcán Activo', 'Sandboarding', 'Adrenalina', 'Atardecer'],
       latitude: 12.5061,
       longitude: -86.7022,
@@ -77,7 +77,7 @@ class CatalogData {
       distance: '45 km',
       description:
           'Santuario precolombino entre los volcanes Concepción y Maderas. Kayak en Río Istián con monos aulladores, Ojo de Agua y petroglifos ancestrales.',
-      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/isla_de_ometepe.jpg',
       tags: ['Isla Volcánica', 'Lago Cocibolca', 'Kayak', 'Petroglifos'],
       latitude: 11.5383,
       longitude: -85.5683,
@@ -97,7 +97,7 @@ class CatalogData {
       distance: '4 km',
       description:
           'Presencia el hipnótico lago de lava incandescente en el borde del cráter activo "La Boca del Infierno". Avistamiento de chocoyos y cuevas de murciélagos.',
-      imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/volcan_masaya.jpg',
       tags: ['Lava Activa', 'Nocturno', 'Parque Nacional', 'Fotografía'],
       latitude: 11.9842,
       longitude: -86.1611,
@@ -117,7 +117,7 @@ class CatalogData {
       distance: '15 km',
       description:
           'Paseo en lancha/kayak por canales volcánicos entre islas privadas, avistamiento de garzas y monos, seguido de caminata histórica en la Calzada y Catedral.',
-      imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/isletas_de_granada.jpg',
       tags: ['Ciudad Colonial', 'Isletas', 'Kayak', 'Arquitectura'],
       latitude: 11.9300,
       longitude: -85.9560,
@@ -137,7 +137,7 @@ class CatalogData {
       distance: '5 km',
       description:
           'Isla sin autos de aguas turquesas, arrecifes de coral virgen, buceo con tiburones nodriza, senderos de cocoteros y gastronomía criolla caribeña con pan de coco.',
-      imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/corn_island.jpg',
       tags: ['Mar Caribe', 'Snorkel & Buceo', 'Sin Autos', 'Langosta'],
       latitude: 12.2900,
       longitude: -82.9800,
@@ -157,7 +157,7 @@ class CatalogData {
       distance: '14 km',
       description:
           'Bosque nuboso de estricta protección, santuario del ave Quetzal, orquídeas endémicas, plantaciones de café orgánico sustentable y cabañas de arquitectura bávara.',
-      imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: 'assets/images/lugares/selva_negra.jpg',
       tags: ['Bosque Nuboso', 'Avistamiento Quetzal', 'Café Sostenible', 'Eco-Lodge'],
       latitude: 12.9989,
       longitude: -85.9083,
