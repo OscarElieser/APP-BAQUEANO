@@ -281,10 +281,18 @@ Ubicado en `/perfil`:
 
 El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar la seguridad del código y permitir el retorno inmediato a versiones estables verificadas:
 
-- **Versión Estable Actual (Android - Optimizada 100% Sin Desbordamientos ni Warnings)**:
+- **Versión Estable Actual (Android - V1.2.0 Optimizada 100% Sin Desbordamientos ni Warnings)**:
   - **Rama de Respaldo**: `backup-version-estable`
-  - **Etiqueta Oficial**: `v1.1.0-estable`
-  - **Logros Clave**: Erradicación total de desbordamientos de píxeles (`RenderFlex`), reproducción directa de videos de expedición en 4K en YouTube mediante `url_launcher` e intents nativos en `AndroidManifest.xml`, rediseño ergonómico de la tarjeta de comunidad campesina, dimensiones holgadas en gastronomía y símbolos patrios, y márgenes seguros de 100px para barras de gestos.
+  - **Etiqueta Oficial**: `v1.2.0-estable`
+  - **Logros Clave**:
+    - **Línea de Tiempo Histórica**: Eliminación de desbordamientos de 18px y 46px en hitos («Huellas de Acahualinca» y «Florecimiento») mediante `Expanded` y truncamiento elíptico flexible.
+    - **Símbolos, Lenguas y Volcanes**: Eliminación definitiva del desbordamiento de 1.6px en pueblos originarios, volcanes y lagos mediante `mainAxisExtent` extendido y reemplazo de `Spacer()` rígidos.
+    - **Checkout & Reservas Directas**: Eliminación del desbordamiento de 68px en «Solicitud de Reserva y Pago», adaptación de tarjetas de cuentas de Banco LAFISE y Billetera Móvil, desglose flexible de tarifa base / total a pagar y comprobante oficial.
+    - **Bitácora Comunitaria**: Botón «Publicar Relato de Expedición» 100% interactivo con formulario modal completo (destino, título, relato, país, calificación de 1 a 5 estrellas) e inyección reactiva que otorga +200 XP en el Pasaporte.
+    - **Historial de Expediciones**: Adaptación elástica con `Wrap` para erradicar desbordamientos laterales en tarjetas de expedición y comprobantes.
+    - **Identidad & Nuestra Marca**: Solución al desbordamiento de 27px en el logotipo oficial monumental mediante `Wrap` y espaciado elástico de caracteres.
+    - **Mesa de Ayuda & Soporte**: Botón «ENVIAR CORREO» 100% funcional con `<queries>` `mailto` nativo en `AndroidManifest.xml`, fallback interactivo con copiado al portapapeles y enlace a WhatsApp de soporte.
+    - **Gastronomía Autóctona**: Diseño visual de alta gama enriquecido con filtros de tradición culinaria, sugerencia de maridaje tradicional (tiste, cacao, café de palo, chicha), fichas de comedores campesinos con llamadas y WhatsApp directos.
   ```bash
   # Para restaurar o inspeccionar la versión estable actual:
   git checkout backup-version-estable
