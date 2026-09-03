@@ -1212,10 +1212,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 ),
               ),
               const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(4)),
-                child: Text(currencyBadge, style: GoogleFonts.spaceGrotesk(fontSize: 9, color: AppColors.goldLight, fontWeight: FontWeight.w700)),
+              // Flexible: el badge cede espacio al nombre del banco en pantallas angostas
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(4)),
+                  child: Text(
+                    currencyBadge,
+                    style: GoogleFonts.spaceGrotesk(fontSize: 9, color: AppColors.goldLight, fontWeight: FontWeight.w700),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
               ),
             ],
           ),
@@ -1258,12 +1266,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
           ),
         ),
         const SizedBox(width: 8),
-        Text(
-          value,
-          style: GoogleFonts.spaceGrotesk(
-            fontSize: 13,
-            fontWeight: FontWeight.w700,
-            color: textColor ?? AppColors.textLight,
+        // Flexible: evita overflow cuando la cadena de moneda NIO es muy larga
+        Flexible(
+          child: Text(
+            value,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: textColor ?? AppColors.textLight,
+            ),
+            textAlign: TextAlign.end,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

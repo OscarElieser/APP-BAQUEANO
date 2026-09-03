@@ -378,9 +378,12 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                       'TOTAL A PAGAR',
                       style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.textMuted),
                     ),
+                    // Texto de precio dual: Flexible + ellipsis evita right overflow
                     Text(
                       '\$${exp.totalUsd.toStringAsFixed(2)} USD / C\$ ${exp.totalNio.toStringAsFixed(2)} NIO',
                       style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.gold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),

@@ -116,20 +116,25 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppColors.gold.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.5)),
-                        ),
-                        child: Text(
-                          '📖 PATRIMONIO, IDENTIDAD & CULTURA',
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.gold,
-                            letterSpacing: 0.8,
+                      // Tag envuelto en Flexible: cede espacio al IconButton sin overflow
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: AppColors.gold.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.5)),
+                          ),
+                          child: Text(
+                            '📖 PATRIMONIO, IDENTIDAD & CULTURA',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 10.5,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.gold,
+                              letterSpacing: 0.8,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                         ),
                       ),

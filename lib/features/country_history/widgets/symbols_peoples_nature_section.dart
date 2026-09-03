@@ -143,7 +143,9 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 2 : 1,
-            mainAxisExtent: isDesktop ? 285 : 325,
+            // Aumentado de 285/325 a 320/400 para absorber contenido variable y
+            // escalado de fuentes de accesibilidad sin generar bottom overflow.
+            mainAxisExtent: isDesktop ? 320 : 400,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -161,13 +163,25 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        people.name,
-                        style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                      // Expandido para que el nombre largo no desborde a la derecha
+                      Expanded(
+                        child: Text(
+                          people.name,
+                          style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      Text(
-                        people.region,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.textMuted),
+                      const SizedBox(width: 8),
+                      // Flexible: la región cede espacio al nombre si es necesario
+                      Flexible(
+                        child: Text(
+                          people.region,
+                          style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.textMuted),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                        ),
                       ),
                     ],
                   ),
@@ -222,7 +236,8 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isDesktop ? 3 : (isTablet ? 2 : 1),
-            mainAxisExtent: isDesktop ? 350 : 400,
+            // Aumentado de 350/400 a 390/460 para que el contenido no desborde
+            mainAxisExtent: isDesktop ? 390 : 460,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
           ),
@@ -251,13 +266,25 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        wonder.category.toUpperCase(),
-                        style: GoogleFonts.spaceGrotesk(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight),
+                      // Flexible: la categoría cede espacio al departamento
+                      Flexible(
+                        child: Text(
+                          wonder.category.toUpperCase(),
+                          style: GoogleFonts.spaceGrotesk(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
-                      Text(
-                        wonder.department,
-                        style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
+                      const SizedBox(width: 6),
+                      // Flexible: el departamento cede espacio a la categoría
+                      Flexible(
+                        child: Text(
+                          wonder.department,
+                          style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          textAlign: TextAlign.end,
+                        ),
                       ),
                     ],
                   ),

@@ -59,24 +59,28 @@ class SectionHeader extends StatelessWidget {
             mainAxisAlignment:
                 isCentered ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
             children: [
-              // Badge/Pill con estilo terracota volcánico
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.terracotta.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: AppColors.terracotta.withValues(alpha: 0.4),
-                    width: 1,
+              // Badge/Pill envuelto en Flexible para evitar overflow en pantallas compactas
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.terracotta.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: AppColors.terracotta.withValues(alpha: 0.4),
+                      width: 1,
+                    ),
                   ),
-                ),
-                child: Text(
-                  tag.toUpperCase(),
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2,
-                    color: AppColors.terracottaLight,
+                  child: Text(
+                    tag.toUpperCase(),
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.2,
+                      color: AppColors.terracottaLight,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ),
               ),
