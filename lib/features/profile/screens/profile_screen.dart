@@ -732,13 +732,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       children: [
         Icon(icon, color: const Color(0xFFD4AF37), size: 18),
         const SizedBox(width: 8),
-        Text(
-          title,
-          style: GoogleFonts.spaceGrotesk(
-            fontSize: 12,
-            fontWeight: FontWeight.w800,
-            color: const Color(0xFFD4AF37),
-            letterSpacing: 1.0,
+        Expanded(
+          child: Text(
+            title,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: const Color(0xFFD4AF37),
+              letterSpacing: 0.8,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
@@ -958,22 +962,38 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           // Moneda Preferida
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Moneda de Cotización', style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
-                  Text('Tasa oficial de cambio: C\$ 36.65 NIO / USD', style: GoogleFonts.inter(fontSize: 11, color: Colors.white54)),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Moneda de Cotización',
+                      style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'C\$ 36.65 NIO / USD (Oficial)',
+                      style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   _buildCurrencyChip('USD (\$)', _selectedCurrency == 'USD', () {
                     _triggerHaptic();
                     setState(() => _selectedCurrency = 'USD');
                     CustomToast.show(context, message: 'Moneda establecida en USD (\$)');
                   }),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 6),
                   _buildCurrencyChip('NIO (C\$)', _selectedCurrency == 'NIO', () {
                     _triggerHaptic();
                     setState(() => _selectedCurrency = 'NIO');
@@ -1020,7 +1040,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFFC86432) : const Color(0xFF082B35),
           borderRadius: BorderRadius.circular(10),
@@ -1029,7 +1049,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: Text(
           label,
           style: GoogleFonts.spaceGrotesk(
-            fontSize: 11,
+            fontSize: 10.5,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
             color: isSelected ? Colors.white : Colors.white70,
           ),
@@ -1167,9 +1187,29 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('4 de 5 Sellos Desbloqueados (Toca para ver certificado)', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: const Color(0xFFD4AF37))),
-              Text('+1,150 XP', style: GoogleFonts.spaceGrotesk(fontSize: 11, color: Colors.white54)),
+              Expanded(
+                child: Text(
+                  '4 de 5 Sellos Desbloqueados (Toca para ver)',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFFD4AF37),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                '+1,150 XP',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white70,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -1181,7 +1221,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 2.2,
+              mainAxisExtent: 68,
             ),
             itemBuilder: (context, index) {
               final stamp = _stamps[index];

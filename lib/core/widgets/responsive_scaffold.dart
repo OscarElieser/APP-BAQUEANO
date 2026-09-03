@@ -104,13 +104,18 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),
-      title: BaqueanoLogo(
-        size: BaqueanoLogoSize.small,
-        onTap: () => context.go('/home'),
+      title: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
+        child: BaqueanoLogo(
+          size: BaqueanoLogoSize.small,
+          onTap: () => context.go('/home'),
+        ),
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.search_rounded, color: AppColors.textLight),
+          icon: const Icon(Icons.search_rounded, color: AppColors.textLight, size: 22),
+          visualDensity: VisualDensity.compact,
           tooltip: 'Búsqueda Global',
           onPressed: () => UniversalSearchModal.show(context),
         ),
@@ -118,16 +123,17 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           alignment: Alignment.center,
           children: [
             IconButton(
-              icon: const Icon(Icons.notifications_outlined, color: AppColors.textLight),
+              icon: const Icon(Icons.notifications_outlined, color: AppColors.textLight, size: 22),
+              visualDensity: VisualDensity.compact,
               tooltip: 'Notificaciones',
               onPressed: () => context.go('/notificaciones'),
             ),
             Positioned(
-              top: 10,
-              right: 10,
+              top: 8,
+              right: 8,
               child: Container(
-                width: 8,
-                height: 8,
+                width: 7,
+                height: 7,
                 decoration: const BoxDecoration(
                   color: AppColors.terracotta,
                   shape: BoxShape.circle,
@@ -140,16 +146,17 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           alignment: Alignment.center,
           children: [
             IconButton(
-              icon: const Icon(Icons.chat_bubble_outline_rounded, color: AppColors.textLight),
+              icon: const Icon(Icons.chat_bubble_outline_rounded, color: AppColors.textLight, size: 21),
+              visualDensity: VisualDensity.compact,
               tooltip: 'Mensajes con Anfitriones',
               onPressed: () => context.go('/mensajes'),
             ),
             Positioned(
-              top: 10,
-              right: 10,
+              top: 8,
+              right: 8,
               child: Container(
-                width: 8,
-                height: 8,
+                width: 7,
+                height: 7,
                 decoration: const BoxDecoration(
                   color: AppColors.gold,
                   shape: BoxShape.circle,
@@ -159,16 +166,12 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           ],
         ),
         IconButton(
-          icon: const Icon(Icons.sos_rounded, color: AppColors.error),
+          icon: const Icon(Icons.sos_rounded, color: AppColors.error, size: 23),
+          visualDensity: VisualDensity.compact,
           tooltip: 'Auxilio SOS',
           onPressed: () => SosSafetyModal.show(context),
         ),
-        IconButton(
-          icon: const Icon(Icons.smart_toy_outlined, color: AppColors.gold),
-          tooltip: 'Baqueano AI',
-          onPressed: () => context.go('/ai'),
-        ),
-        const SizedBox(width: 4),
+        const SizedBox(width: 6),
       ],
     );
   }

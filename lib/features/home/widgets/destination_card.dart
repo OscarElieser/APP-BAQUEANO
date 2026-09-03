@@ -35,10 +35,14 @@ class DestinationCard extends StatefulWidget {
   /// Callback ejecutado cuando el usuario conmuta el estado de favorito
   final VoidCallback? onFavoriteToggled;
 
+  /// Callback opcional ejecutado al tocar la tarjeta o el botón de reservar
+  final VoidCallback? onCardTapped;
+
   const DestinationCard({
     super.key,
     required this.destination,
     this.onFavoriteToggled,
+    this.onCardTapped,
   });
 
   @override
@@ -359,7 +363,7 @@ class _DestinationCardState extends State<DestinationCard> {
                       variant: BaqueanoButtonVariant.primary,
                       height: 38,
                       padding: const EdgeInsets.symmetric(horizontal: 14),
-                      onPressed: () => CheckoutModal.show(context, destination),
+                      onPressed: widget.onCardTapped ?? () => CheckoutModal.show(context, destination),
                     ),
                   ],
                 ),

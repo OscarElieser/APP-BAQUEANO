@@ -26,10 +26,11 @@ import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../widgets/baqueano_standard.dart';
 import '../widgets/business_showcase.dart';
-import '../widgets/destination_card.dart';
 import '../widgets/explorer_testimonials.dart';
 import '../widgets/hero_section.dart';
-import '../widgets/impact_counter_strip.dart';
+import '../widgets/infinite_destinations_gallery.dart';
+import '../widgets/interactive_allies_gallery.dart';
+import '../widgets/interactive_impact_section.dart';
 import '../widgets/marquee_ticker.dart';
 import '../widgets/quick_categories_carousel.dart';
 
@@ -65,17 +66,26 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ----------------------------------------------------------------
-            // 1. HERO SECTION (Titular "NICARAGUA EN MODO SECRETO" + Card Cascada La Luna)
+            // 1. HERO SECTION (Titular Monumental + Tarjeta 3D Cascada La Luna)
             // ----------------------------------------------------------------
             const HeroSection(),
 
             // ----------------------------------------------------------------
-            // 2. FRANJA DE MÉTRICAS (85% Impacto Comunitario, 50+ Aliados)
+            // 2. SECCIÓN DINÁMICA DE IMPACTO SOCIAL (85% a Familias Rurales)
             // ----------------------------------------------------------------
-            const ImpactCounterStrip(),
+            const InteractiveImpactSection(),
+
+            const SizedBox(height: 8),
 
             // ----------------------------------------------------------------
-            // 3. TICKER INFINITO DE COOPERATIVAS Y ALIANZAS A 60 FPS
+            // 3. GALERÍA INFINITA 3D DE ALIADOS LOCALES & COOPERATIVAS (Flip Cards)
+            // ----------------------------------------------------------------
+            const InteractiveAlliesGallery(),
+
+            const SizedBox(height: 16),
+
+            // ----------------------------------------------------------------
+            // 4. TICKER INFINITO DE COOPERATIVAS Y ALIANZAS A 60 FPS
             // ----------------------------------------------------------------
             const MarqueeTicker(),
 
@@ -90,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tag: 'CATEGORÍAS DE EXPLORACIÓN',
                 title: 'Nicaragua en Todos sus Sentidos',
                 subtitle: 'Acceso directo a cultura viva, gastronomía ancestral, música, hospedaje sustentable y expediciones.',
+                isCentered: true,
               ),
             ),
             const SizedBox(height: 8),
@@ -103,81 +114,70 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SectionHeader(
                     tag: 'EXPEDICIONES VERIFICADAS',
                     title: 'Top Destinos Populares',
                     subtitle: 'Selección curada por baqueanos nativos con cálculo exacto de presupuesto y reserva directa.',
+                    isCentered: true,
                   ),
                   const SizedBox(height: 8),
 
-                  // Barra horizontal de chips de filtrado por departamento
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    child: Row(
-                      children: CatalogData.departments.map((dept) {
-                        final isSelected = _selectedDepartment == dept;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: BadgeChip(
-                            label: dept,
-                            isSelected: isSelected,
-                            onTap: () => setState(() => _selectedDepartment = dept),
-                          ),
-                        );
-                      }).toList(),
+                  // Barra horizontal de chips de filtrado centrada
+                  Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: CatalogData.departments.map((dept) {
+                          final isSelected = _selectedDepartment == dept;
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: BadgeChip(
+                              label: dept,
+                              isSelected: isSelected,
+                              onTap: () => setState(() => _selectedDepartment = dept),
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // Cuadrícula responsiva de tarjetas de destino
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: isDesktop ? 380 : 500,
-                      mainAxisExtent: 470,
-                      crossAxisSpacing: 18,
-                      mainAxisSpacing: 18,
-                    ),
-                    itemCount: filteredDestinations.length,
-                    itemBuilder: (context, index) {
-                      final dest = filteredDestinations[index];
-                      return DestinationCard(
-                        destination: dest,
-                        onFavoriteToggled: () => setState(() {}),
-                      );
-                    },
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  // ------------------------------------------------------------
-                  // 6. VITRINA DE NEGOCIOS Y GUÍAS LOCALES ALIADOS
-                  // ------------------------------------------------------------
-                  const BusinessShowcase(),
-
-                  const SizedBox(height: 40),
-
-                  // ------------------------------------------------------------
-                  // 7. TESTIMONIOS Y RESEÑAS VERIFICADAS DE VIAJEROS
-                  // ------------------------------------------------------------
-                  const ExplorerTestimonials(),
-
-                  const SizedBox(height: 40),
-
-                  // ------------------------------------------------------------
-                  // 8. EL ESTÁNDAR BAQUEANO (4 PILARES Y CTA DE CONVERSIÓN)
-                  // ------------------------------------------------------------
-                  const BaqueanoStandard(),
-
-                  const SizedBox(height: 48),
                 ],
               ),
             ),
+
+            const SizedBox(height: 12),
+
+            // ----------------------------------------------------------------
+            // ♾️ GALERÍA DINÁMICA INFINITA CON PAUSA INTELIGENTE AL SELECCIONAR
+            // ----------------------------------------------------------------
+            InfiniteDestinationsGallery(destinations: filteredDestinations),
+
+            const SizedBox(height: 36),
+
+            // ------------------------------------------------------------
+            // 6. VITRINA DINÁMICA INFINITA DE NEGOCIOS RURALES (FLUJO INVERSO)
+            // ------------------------------------------------------------
+            const BusinessShowcase(),
+
+            const SizedBox(height: 36),
+
+            // ------------------------------------------------------------
+            // 7. TESTIMONIOS Y RESEÑAS DINÁMICAS INFINITAS (FLUJO HACIA ADELANTE)
+            // ------------------------------------------------------------
+            const ExplorerTestimonials(),
+
+            const SizedBox(height: 36),
+
+            // ------------------------------------------------------------
+            // 8. EL ESTÁNDAR BAQUEANO: PILARES INFINITOS (FLUJO INVERSO) & CONVERSIÓN
+            // ------------------------------------------------------------
+            const BaqueanoStandard(),
+
+            const SizedBox(height: 48),
 
             // ----------------------------------------------------------------
             // 9. CIERRE NATIVO DEL FEED (SELLO DE MARCA & FIN DE RUTAS)

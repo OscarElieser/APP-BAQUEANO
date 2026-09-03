@@ -24,8 +24,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_button.dart';
-import '../../../core/widgets/glass_container.dart';
-import '../../checkout/widgets/checkout_modal.dart';
+import 'interactive_3d_featured_card.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -69,7 +68,7 @@ class HeroSection extends StatelessWidget {
         ),
 
         // --------------------------------------------------------------------
-        // 🏛️ CONTENIDO PRINCIPAL DEL HERO (TEXTO + TARJETA FLOTANTE)
+        // 🏛️ CONTENIDO PRINCIPAL DEL HERO (TEXTO + TARJETA FLOTANTE 3D)
         // --------------------------------------------------------------------
         Padding(
           padding: EdgeInsets.symmetric(
@@ -86,10 +85,10 @@ class HeroSection extends StatelessWidget {
                       child: _buildHeroTextContent(context, isDesktop),
                     ),
                     const SizedBox(width: 48),
-                    // Columna derecha: Tarjeta flotante con efecto cristal
+                    // Columna derecha: Tarjeta flotante 3D interactiva
                     Expanded(
                       flex: 4,
-                      child: _buildFeaturedCard(context, featuredDestination),
+                      child: Interactive3DFeaturedCard(destination: featuredDestination),
                     ),
                   ],
                 )
@@ -98,7 +97,7 @@ class HeroSection extends StatelessWidget {
                   children: [
                     _buildHeroTextContent(context, isDesktop),
                     const SizedBox(height: 28),
-                    _buildFeaturedCard(context, featuredDestination),
+                    Interactive3DFeaturedCard(destination: featuredDestination),
                   ],
                 ),
         ),
@@ -111,7 +110,7 @@ class HeroSection extends StatelessWidget {
   // --------------------------------------------------------------------------
   Widget _buildHeroTextContent(BuildContext context, bool isDesktop) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         // Tag Pill verde selva: Ecoturismo y Turismo Comunitario
         Container(
@@ -143,6 +142,7 @@ class HeroSection extends StatelessWidget {
 
         // Titular monumental tipográfico en dos colores
         RichText(
+          textAlign: isDesktop ? TextAlign.start : TextAlign.center,
           text: TextSpan(
             children: [
               TextSpan(
@@ -174,6 +174,7 @@ class HeroSection extends StatelessWidget {
         // Subtítulo descriptivo de la propuesta de valor
         Text(
           'Diseña rutas inmersivas con guías locales, reservas directas, mapa offline y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
+          textAlign: isDesktop ? TextAlign.start : TextAlign.center,
           style: GoogleFonts.inter(
             fontSize: isDesktop ? 16 : 14,
             fontWeight: FontWeight.w400,
@@ -188,6 +189,7 @@ class HeroSection extends StatelessWidget {
         Wrap(
           spacing: 14,
           runSpacing: 12,
+          alignment: isDesktop ? WrapAlignment.start : WrapAlignment.center,
           children: [
             BaqueanoButton(
               text: 'DISEÑAR MI RUTA',
@@ -206,230 +208,6 @@ class HeroSection extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-
-  // --------------------------------------------------------------------------
-  // 🌟 TARJETA DESTACADA (CASCADA LA LUNA & METADATOS EN VIVO)
-  // --------------------------------------------------------------------------
-  Widget _buildFeaturedCard(BuildContext context, dynamic destination) {
-    return GlassContainer(
-      padding: EdgeInsets.zero,
-      borderRadius: BorderRadius.circular(24),
-      border: Border.all(color: AppColors.borderGold, width: 1.5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Imagen local en alta resolución con badge naranja 'DESTACADO'
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                child: Image.asset(
-                  'assets/images/cascada_la_luna.jpg',
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Image.network(
-                    destination.imageUrl,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      height: 200,
-                      color: AppColors.primaryLight,
-                      child: const Center(child: Icon(Icons.landscape, size: 48, color: AppColors.gold)),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 14,
-                left: 14,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFF5722),
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    'DESTACADO',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          // Cuerpo de la tarjeta con título, descripción y métricas clave
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'RUTA CURADA POR LOCALES',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 1.5,
-                    color: AppColors.gold,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  destination.title.toUpperCase(),
-                  style: GoogleFonts.montserrat(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.5,
-                    color: Colors.white,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  destination.description,
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: AppColors.textMuted,
-                    height: 1.4,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 14),
-
-                // 3 Cajas de métricas: Rating (4.9), Duración (1 Día), Distancia (18 KM)
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryLight.withValues(alpha: 0.5),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.borderLight),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              '${destination.rating}',
-                              style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w900, color: Colors.white),
-                            ),
-                            Text(
-                              'RATING',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.goldLight),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryLight.withValues(alpha: 0.5),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.borderLight),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              destination.duration.toUpperCase(),
-                              style: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              'DURACIÓN',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.goldLight),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryLight.withValues(alpha: 0.5),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.borderLight),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              destination.distance.toUpperCase(),
-                              style: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
-                            ),
-                            Text(
-                              'RUTA',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.goldLight),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-
-                // Precio bimoneda (USD / Córdobas NIO) y botón de reserva
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Desde', style: GoogleFonts.inter(fontSize: 10, color: AppColors.textMuted)),
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              Text(
-                                '\$${destination.priceUsd.toInt()} USD',
-                                style: GoogleFonts.montserrat(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gold),
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                '/ C\$${destination.priceNio.toInt()}',
-                                style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.textMuted),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    BaqueanoButton(
-                      text: 'Reservar',
-                      variant: BaqueanoButtonVariant.primary,
-                      height: 40,
-                      onPressed: () => CheckoutModal.show(context, destination),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
