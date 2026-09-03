@@ -1,112 +1,171 @@
-# 🌋 BAQUEANO ECOSYSTEM
+# 🌋 BAQUEANO NICARAGUA
 
-## Plataforma Oficial de Ecoturismo Campesino & Rutas Autóctonas de Nicaragua
+## Plataforma Tecnológica para Turismo Sostenible, Conservación y Bienestar Comunitario
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-3.7+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart Version](https://img.shields.io/badge/Dart-3.7+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
 [![Performance](https://img.shields.io/badge/Performance-120%20FPS%20GPU-00C853?style=for-the-badge&logo=android&logoColor=white)](https://flutter.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-app--baqueano-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![Genkit AI](https://img.shields.io/badge/Genkit%20AI-Gemini%201.5%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://firebase.google.com/docs/genkit)
 [![Platform](https://img.shields.io/badge/Platform-Android%20Exclusive-2E7D32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/OscarElieser/APP-BAQUEANO)
+[![Quality](https://img.shields.io/badge/Code%20Analysis-0%20Issues-brightgreen?style=for-the-badge&logo=dart)](https://dart.dev)
 [![License](https://img.shields.io/badge/License-MIT-D4AF37?style=for-the-badge)](LICENSE)
 
-**Nicaragua en modo secreto** · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador, geolocalización satelital offline, patrimonio musical folclórico con integración de video/YouTube y un asesor turístico con Inteligencia Artificial (Firebase Genkit + Google Gemini 1.5 Flash + Groq Cloud Llama 3.3 + Ollama Cloud).
+> **«BAQUEANO NO EXISTE PARA LLEVAR MÁS TURISTAS A LOS MISMOS LUGARES.  
+> EXISTE PARA AYUDAR A TRANSFORMAR EL TURISMO EN UNA ACTIVIDAD MÁS RESPONSABLE, DISTRIBUIDA, SEGURA, CULTURALMENTE CONSCIENTE Y BENEFICIOSA PARA LAS COMUNIDADES LOCALES.»**
 
 ---
 
 ## 🧭 Tabla de Contenidos
 
-- [🎯 Filosofía del Círculo Dorado](#-filosofía-del-círculo-dorado)
+- [🎯 Propósito Central & Solución al Reto Sostenible](#-propósito-central--solución-al-reto-sostenible)
+- [📱 Alcance Actual: Exclusividad Android Móvil](#-alcance-actual-exclusividad-android-móvil)
+- [🏛️ Módulo Insignia: Historia de mi País (Nicaragua)](#️-módulo-insignia-historia-de-mi-país-nicaragua)
+- [🔗 Conexión Territorial Cruzada (Cultura ↔ Destino ↔ Baqueano)](#-conexión-territorial-cruzada-cultura--destino--baqueano)
 - [✨ Características Principales](#-características-principales)
 - [⚡ Arquitectura de Alto Rendimiento (120 FPS)](#-arquitectura-de-alto-rendimiento-120-fps)
-- [🎵 Módulo Multimedia de Música Folclórica & Videos](#-módulo-multimedia-de-música-folclórica--videos)
-- [🗄️ Arquitectura de Base de Datos para el Turista Móvil (Offline-First)](#️-arquitectura-de-base-de-datos-para-el-turista-móvil-offline-first)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
+- [🗄️ Arquitectura de Datos Offline-First & Seguridad RBAC](#️-arquitectura-de-datos-offline-first--seguridad-rbac)
 - [🚨 Centro de Auxilio & Emergencias SOS en Sendero](#-centro-de-auxilio--emergencias-sos-en-sendero)
-- [💬 Mensajería Directa & Coordinación Campesina](#-mensajería-directa--coordinación-campesina)
 - [🏪 Vitrina de Negocios Campesinos & Comercio Justo](#-vitrina-de-negocios-campesinos--comercio-justo)
 - [🗺️ Mapa GPS Satelital & Geolocalización de Rutas](#️-mapa-gps-satelital--geolocalización-de-rutas)
-- [🤖 Asistente Turístico Inteligente (Firebase Genkit + Gemini)](#-asistente-turístico-inteligente-firebase-genkit--gemini)
-- [👤 Pasaporte del Explorador & Centro de Accesibilidad](#-pasaporte-del-explorador--centro-de-accesibilidad)
+- [🤖 Asistente IA para Turismo Responsable](#-asistente-ia-para-turismo-responsable)
+- [🎫 Pasaporte del Explorador & Gamificación Ética](#-pasaporte-del-explorador--gamificación-ética)
 - [💳 Motor Financiero Bimoneda & Régimen Fiscal](#-motor-financiero-bimoneda--régimen-fiscal)
-- [🛡️ Sistema de Respaldo & Restauración de Versiones](#️-sistema-de-respaldo--restauración-de-versiones)
 - [🚀 Instalación y Despliegue en Android](#-instalación-y-despliegue-en-android)
 - [📄 Licencia & Créditos](#-licencia--créditos)
 
 ---
 
-## 🎯 Filosofía del Círculo Dorado
+## 🎯 Propósito Central & Solución al Reto Sostenible
 
-Todo el ecosistema Baqueano se rige estrictamente bajo los tres niveles del **Círculo Dorado (Golden Circle)**:
+BAQUEANO no es una aplicación turística genérica. Cada componente responde directamente al reto:
 
-1. 🎯 **POR QUÉ (Why / Propósito)**:
-   - Democratizar el turismo en Nicaragua eliminando las comisiones abusivas de los intermediarios y garantizando que el **85% a 100% de los ingresos** vaya directo a las familias rurales, guías nativos y cooperativas campesinas.
-2. ⚙️ **CÓMO (How / Arquitectura & Proceso)**:
-   - Rendimiento extremo a **120 FPS** mediante aislamiento de capas con `RepaintBoundary`, arquitectura reactiva con Riverpod, base de datos local Offline-First sincronizada con Cloud Firestore y estética Glassmorphism volcánico.
-3. 📦 **QUÉ (What / Funcionalidad & Entregables)**:
-   - Una aplicación integral con feed dinámico, galería interactiva de destinos, reproductor sonoro patrimonial con soporte de YouTube, central de auxilio SOS y checkout fiscal bimoneda (USD/NIO).
+> **«Impulso del turismo para la conservación del entorno y el bienestar de las comunidades locales.»**
+
+### Cadena de Impacto Obligatoria:
+$$\text{PROBLEMA} \rightarrow \text{NECESIDAD} \rightarrow \text{SOLUCIÓN BAQUEANO} \rightarrow \text{FUNCIONALIDAD} \rightarrow \text{USUARIO} \rightarrow \text{COMUNIDAD} \rightarrow \text{IMPACTO} \rightarrow \text{INDICADOR}$$
+
+1. **Desconcentración Turística:** Se priorizan destinos rurales, cumbres y reservas biológicas menos saturadas en lugar de canalizar flujos hacia los mismos circuitos masivos.
+2. **Educación Ambiental Activa:** Fichas de dificultad técnica, avisos de conservación, recolección de basura y respeto estricto a fuentes hídricas y fauna nativa.
+3. **Protagonismo del Baqueano Campesino:** El baqueano nativo es el corazón de la experiencia; sus anécdotas, conocimientos de montaña y contacto directo encabezan la plataforma.
+4. **Comercio Justo y Desintermediación:** Se transparentan los costos para que el **85% al 90%** del valor beneficie de forma directa a la familia anfitriona rural.
+5. **Preservación de la Memoria Colectiva:** La cultura, la gastronomía y la historia son la puerta de entrada para que el visitante comprenda el territorio antes de recorrerlo.
+
+---
+
+## 📱 Alcance Actual: Exclusividad Android Móvil
+
+El desarrollo de BAQUEANO está dirigido **únicamente y con exclusividad a la aplicación móvil Android (`lib/` y `android/`)**.
+
+```text
+BAQUEANO
+   │
+   └── 📱 APP ANDROID (Exclusiva)
+          │
+          ├── Flutter / Dart (Optimizado para 60-120 FPS)
+          ├── Firebase (Auth, Firestore, Storage)
+          ├── Google Maps & Geolocalización de campo
+          ├── Asistente IA para Turismo Responsable
+          ├── Reservas Directas y Comercio Campesino
+          ├── Pasaporte Baqueano y Gamificación Ética
+          ├── Historia Viva, 17 Territorios y Cultura de Nicaragua
+          ├── Red de Comunidad y Mensajería con Baqueanos
+          ├── Protocolo de Emergencias y Rescate SOS
+          └── Impacto y Conservación Sostenible
+```
+
+*Cero distracciones con versiones web públicas, iOS o paneles de administración. Los recursos existentes se conservan congelados mientras el foco técnico total reside en la experiencia móvil Android.*
+
+---
+
+## 🏛️ Módulo Insignia: Historia de mi País (Nicaragua)
+
+Ubicado en `/historia-mi-pais`, este módulo constituye una enciclopedia interactiva viva y de alta fidelidad:
+
+- **Línea de Tiempo Épica (7 Periodos)**: Época Precolombina (tribus Chorotega, Nicarao, Chontales), Conquista, Colonia, Independencia (1821), Batalla de San Jacinto (1856), Guerra Nacional contra William Walker, Rubén Darío y el Modernismo, e Historia Contemporánea.
+- **Explorador de los 17 Territorios**: Los 15 departamentos y 2 regiones autónomas (RACCN y RACCS) con cabeceras, población, climas, tradiciones, artesanías y curiosidades.
+- **Gastronomía Ancestral del Maíz**: Gallo Pinto, Nacatamal, Vigorón, Indio Viejo, Baho, Quesillo, Cacao y Pinolillo con contexto cultural e ingredientes de la milpa.
+- **Símbolos Patrios & Pueblos Originarios**: Homenaje a comunidades Miskitas, Mayangnas, Ramas, Creoles y Chorotegas; Madroño, Sacuanjoche, Guardabarranco y reservas de biosfera (Bosawás e Indio Maíz).
+- **Grandes Voces & Literatura**: Tributo a Rubén Darío, Salomón de la Selva, Alfonso Cortés y poetas nacionales.
+- **Arquitectura Multipaís**: Parametrizado mediante `countryId` (por defecto `nicaragua`), listo para escalar a Centroamérica.
+
+---
+
+## 🔗 Conexión Territorial Cruzada (Cultura ↔ Destino ↔ Baqueano)
+
+El conocimiento cultural se enlaza de forma continua con la acción turística en territorio:
+
+$$\text{PERSONAJE / HISTORIA} \longrightarrow \text{DESTINO RURAL} \longrightarrow \text{MAPA GPS} \longrightarrow \text{BAQUEANO CAMPESINO} \longrightarrow \text{COMERCIO LOCAL}$$
+
+- **Desde la Pantalla de Inicio**: `🇳🇮 Historia Patria` encabeza el carrusel de categorías principales.
+- **En cada Departamento**: El modal de territorio despliega la **`Conexión Territorial Baqueano`** con botones directos:
+  - *Explorar Destinos del Departamento* (`/descubrir`).
+  - *Contactar Baqueanos Locales* (`/mensajes`).
+  - *Mapa Satelital GPS* (`/mapa`).
+- **En la Gastronomía**: Cada platillo incluye accesos a **`Comedores Típicos`** y **`Mapa GPS`**.
+- **En Pueblos Originarios**: Enlace directo a **`Artesanías & Cooperativas`**.
+- **Tarjeta de Cierre en Historia**: Módulo especial *«Conecta la Memoria con el Territorio»* que impulsa al usuario a convertirse en un **Explorador Responsable**.
 
 ---
 
 ## ✨ Características Principales
 
-- 📱 **Diseño 100% Responsivo en Android**: Adaptabilidad total desde pantallas compactas de 360px hasta terminales de gama ultra-alta (Samsung Galaxy S23/S24 Ultra, Pixel 8/9 Pro) y tablets con SafeAreas dinámicas.
-- ⚡ **Desplazamiento Ultrafluido a 120 FPS**: Carruseles horizontales con física de inercia suave (`BouncingScrollPhysics`), erradicando tirones y congelamientos de pantalla.
-- 🎵 **Patrimonio Sonoro Multimedia**: Reproductor folclórico tradicional con visualizador de ecualizador, lanzamiento nativo de videos en YouTube y editor dinámico de URLs para desarrolladores.
-- 🚨 **Centro de Auxilio SOS 24/7**: Marcación directa (Policía 118, Cruz Blanca 128, Bomberos 115, INTUR), botón SOS de WhatsApp con coordenadas GPS y vibración háptica.
-- 💬 **Canal de Chat Real con Anfitriones**: Coordinación de llegada, envío de ubicación GPS y adjuntos de comprobantes de depósito bancario (BAC / Banpro / LaFise).
-- 🏪 **Ficha Técnica de Emprendimientos Locales**: Cabañas, guías certificados y comedores campestres con contacto directo por WhatsApp y llamada telefónica.
-- 🗺️ **Cartografía GPS Satelital**: Pines georreferenciados exactos en territorio nicaragüense, capas temáticas y visualización de lagos y cordilleras.
-- 🤖 **Baqueano AI (Firebase Genkit + Gemini 1.5 Flash)**: Planificador de itinerarios personalizados, cálculo de costos y asistencia turística en tiempo real.
-- 👤 **Pasaporte Digital Gamificado**: Sellos de expedición coleccionables, barra de XP, nivel de explorador y centro de accesibilidad visual y háptica.
-- 💰 **Checkout Bimoneda en Tiempo Real**: Cálculo automático en **USD ($)** y **Córdobas (C$ NIO)** a tasa oficial `C$ 36.65`, con exoneración de IVA para turistas extranjeros bajo la Ley 306.
+- 📱 **Diseño 100% Responsivo en Android**: Adaptabilidad desde pantallas compactas de 360px hasta terminales de gama alta (Samsung Galaxy, Pixel) y tablets.
+- ⚡ **Desplazamiento Ultrafluido a 120 FPS**: Aislamiento GPU con `RepaintBoundary` y física de inercia suave (`BouncingScrollPhysics`).
+- 🎵 **Patrimonio Sonoro Multimedia**: Reproductor folclórico tradicional (Solar de Monimbó, Mora Limpia, Danza del Mestizaje), integración de video en YouTube y editor de URLs.
+- 🚨 **Centro de Auxilio SOS 24/7**: Marcación directa (118, 128, 115, INTUR), botón SOS de WhatsApp con coordenadas GPS y respuesta háptica.
+- 💬 **Mensajería Directa con Baqueanos**: Coordinación de llegada, envío de ubicación GPS y adjuntos de comprobantes bancarios locales.
+- 🏪 **Vitrina de Comercios Campesinos**: Comedores rurales, posadas familiares y guías locales con contacto directo por WhatsApp y llamada telefónica.
+- 🗺️ **Cartografía GPS Satelital**: Pines georreferenciados en territorio nicaragüense, capas temáticas y visualización de reservas.
+- 🤖 **Baqueano AI Responsable**: Recomendación de destinos alternativos, explicación de normas ambientales y preparación física de ruta.
+- 🎫 **Pasaporte Digital Gamificado**: Sellos de expedición coleccionables, puntos de compromiso ambiental y centro de accesibilidad visual y háptica.
+- 💰 **Checkout Bimoneda en Tiempo Real**: Cálculo en **USD ($)** y **Córdobas (C$ NIO)** a tasa oficial `C$ 36.65`, con régimen fiscal de la Ley 306.
 
 ---
 
 ## ⚡ Arquitectura de Alto Rendimiento (120 FPS)
 
-Para garantizar que la aplicación funcione con máxima fluidez en dispositivos de **gama media, alta y ultra-alta**:
-
 ```text
 [Feed Vertical Principal] ──────── (Scroll a 120 FPS Nativo)
         │
         ├── [RepaintBoundary] ──► Carrusel de Categorías Rápidas (Capa GPU aislada)
-        ├── [RepaintBoundary] ──► Galería de Top Destinos Populares (Capa GPU aislada)
+        ├── [RepaintBoundary] ──► Galería de Destinos Populares (Capa GPU aislada)
         ├── [RepaintBoundary] ──► Vitrina de Negocios Rurales (Capa GPU aislada)
         ├── [RepaintBoundary] ──► Testimonios Verificados (Capa GPU aislada)
         └── [RepaintBoundary] ──► 4 Pilares del Estándar Baqueano (Capa GPU aislada)
 ```
 
-- **Aislamiento GPU (`RepaintBoundary`)**: Cada lista horizontal posee su propia capa de textura; cuando una tarjeta se mueve, el árbol vertical no se invalida ni se repinta.
-- **Cero Bucles en Segundo Plano**: Se eliminaron los timers de auto-scroll continuo que consumían ciclos de CPU y competían con el pulgar del usuario (*gesture contention*).
-- **Física Nativa de Inercia**: Desplazamiento orgánico con `BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())`.
+- **Aislamiento GPU (`RepaintBoundary`)**: Cada lista horizontal posee su propia textura en memoria gráfica; las tarjetas se animan sin invalidar el árbol vertical.
+- **Cero Bucles en Segundo Plano**: Desplazamiento reactivo táctil sin timers de auto-scroll artificiales.
+- **Física Nativa de Inercia**: `BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())`.
 
 ---
 
-## 🎵 Módulo Multimedia de Música Folclórica & Videos
+## 🎨 Sistema de Diseño & Tokens Visuales
 
-Ubicado en `/musica`, este módulo rinde homenaje a la tradición musical de Nicaragua:
+Inspirado en la geología volcánica, la cerámica tradicional de San Juan de Oriente y la naturaleza de Nicaragua:
 
-- **Repertorio Emblemático**:
-  - *El Solar de Monimbó* — Camilo Zapata (Son Nica en compás 6/8).
-  - *Mora Limpia* — Justo Santos (Segundo himno nacional en marimba de arco).
-  - *El Zanatillo* — Trío Monimbó (Folklore tradicional picaresco).
-  - *Danza del Mestizaje* — El Güegüense (Patrimonio de la Humanidad UNESCO).
-  - *Palomita Guasiruca* — Los Soñadores de Sarawaska (Polka y mazurca norteña).
-- **Integración con YouTube & Video**:
-  - Botón **`Ver en YouTube`** en el reproductor principal y en cada tarjeta del repertorio para abrir las interpretaciones visuales oficiales.
-  - **Configurador de Medios para Desarrolladores (`🔗`)**: Diálogo modal interactivo para ingresar, probar y actualizar en caliente enlaces de video (YouTube o archivos MP4/WebM) sin recompilar el código.
-- **Reproductor Táctil**: Control de scrubbing (`SliderTheme`), cronómetro dinámico (`01:14 / 03:45`) y animación de ondas sonoras.
+| Token | Nombre | Código Hex | Uso en la Aplicación |
+| :--- | :--- | :--- | :--- |
+| **Primary** | Petróleo Volcánico | `#082B35` / `#13424E` | Barras de navegación, encabezados, fondos de pantalla |
+| **Terracotta** | Arcilla Nica | `#C86432` / `#8B3A14` | Botones de acción primaria (CTA), acentos volcánicos |
+| **Gold** | Oro Pinolero | `#D4AF37` / `#F3E5AB` | Precios bimoneda, insignias de honor, bordes y estrellas |
+| **Dark Surface** | Noche Profunda | `#0F172A` | Fondos de tarjetas y contenedores Glassmorphism |
+| **Jungle Green** | Verde Selva | `#10B981` / `#2E7D32` | Distintivos de sostenibilidad y negocios comunitarios |
+| **Crimson SOS** | Rojo Alerta | `#EF4444` / `#DC2626` | Centro de asistencia y emergencias en sendero |
+
+> [!IMPORTANT]
+> Se prohíbe terminantemente el uso del deprecado `.withOpacity()`; todo el código emplea rigurosamente `.withValues(alpha: X)` para garantizar cero advertencias y máxima precisión cromática.
 
 ---
 
-## 🗄️ Arquitectura de Base de Datos para el Turista Móvil (Offline-First)
+## 🗄️ Arquitectura de Datos Offline-First & Seguridad RBAC
 
-Dado que los turistas recorren volcanes, cañones y selvas donde la cobertura 4G es nula, Baqueano implementa una estrategia **Offline-First Reactiva**:
+Diseñada para operar en volcanes y selvas sin cobertura 4G:
 
 ```text
        ┌──────────────────────────────────────────────┐
-       │             ACCIONES DEL TURISTA             │
+       │             ACCIONES DEL EXPLORADOR          │
        │ (Explorar, cotizar, ver mapas, ganar sellos) │
        └──────────────────────┬───────────────────────┘
                               ▼
@@ -119,35 +178,20 @@ Dado que los turistas recorren volcanes, cañones y selvas donde la cobertura 4G
        │            CACHÉ PERSISTENTE LOCAL           │
        │    (SharedPreferences / Almacenamiento Local)│
        │  • Rutas y mapas satelitales en caché        │
-       │  • Fichas de anfitriones y contactos offline │
-       │  • Sellos XP guardados en el dispositivo     │
+       │  • Fichas de baqueanos y contactos offline   │
+       │  • Sellos y patrimonio histórico local       │
        └──────────────────────┬───────────────────────┘
                               ▼ (Al reconectar a 4G / Wi-Fi)
        ┌──────────────────────────────────────────────┐
        │          CLOUD FIRESTORE & FIREBASE          │
        │  • Sincronización silenciosa en segundo plano│
-       │  • Envío de reservas y comprobantes de pago  │
-       │  • Notificaciones push al anfitrión y guía   │
+       │  • Modelos: BusinessModel, AuditLogModel     │
+       │  • Reglas RBAC (superadmin, admin, guide,...)│
        └──────────────────────────────────────────────┘
 ```
 
----
-
-## 🎨 Sistema de Diseño & Tokens Visuales
-
-La identidad visual está inspirada en los paisajes volcánicos, la arcilla artesanal de San Juan de Oriente y las aguas de los lagos nicaragüenses:
-
-| Token | Nombre | Código Hex | Uso en la Aplicación |
-| :--- | :--- | :--- | :--- |
-| **Primary** | Petróleo Volcánico | `#082B35` / `#13424E` | Barras de navegación, encabezados, fondos de pantalla |
-| **Terracotta** | Arcilla Nica | `#C86432` / `#8B3A14` | Botones de acción primaria (CTA), acentos volcánicos |
-| **Gold** | Oro Pinolero | `#D4AF37` / `#F3E5AB` | Precios bimoneda, insignias de honor, bordes y estrellas |
-| **Dark Surface** | Noche Profunda | `#0F172A` | Fondos de tarjetas y contenedores Glassmorphism |
-| **Jungle Green** | Verde Selva | `#10B981` / `#2E7D32` | Distintivos de sostenibilidad y negocios verificados |
-| **Crimson SOS** | Rojo Alerta | `#EF4444` / `#DC2626` | Centro de asistencia y emergencias en sendero |
-
-> [!IMPORTANT]
-> Se prohíbe terminantemente el uso del deprecado `.withOpacity()`; todo el código emplea `.withValues(alpha: X)` para garantizar cero advertencias en Flutter 3.27+.
+- **Modelos Fuertes Tipados**: [BusinessModel](lib/core/models/business_model.dart), [AuditLogModel](lib/core/models/audit_log_model.dart), [MediaItemModel](lib/core/models/media_item_model.dart), [AppConfigModel](lib/core/models/app_config_model.dart).
+- **Reglas Declarativas**: `firestore.rules` y `storage.rules` blindadas con validación de tamaño y tipos MIME.
 
 ---
 
@@ -161,22 +205,9 @@ Accesible desde el botón SOS de la barra superior en cualquier pantalla:
   - 🚒 **Bomberos Unificados**: `115`
   - ℹ️ **Atención al Turista INTUR**: `+505 2254-5191`
 - **Herramientas de Rescate**:
-  - **Botón `SOS WhatsApp`**: Abre un mensaje preformateado de auxilio con coordenadas satelitales precisas para brigadas de rescate.
-  - **Copia de Coordenadas GPS**: Copia la posición geográfica de referencia en un toque.
-  - **Vibración Háptica Real (`HapticFeedback.heavyImpact`)**: Respuesta sensorial inmediata.
-
----
-
-## 💬 Mensajería Directa & Coordinación Campesina
-
-Canal oficial entre el explorador y los anfitriones comunitarios (`/mensajes`):
-
-- **Sin Conversaciones Artificiales**: El chat solo muestra mensajes legítimos enviados por el usuario o respondidos por los dueños de los alojamientos.
-- **Adjuntos Interactivos (`📎`)**:
-  - 📄 **Comprobante de Depósito Bancario**: Generación de aviso de transferencia (BAC Credomatic, Banpro, LaFise, BDF).
-  - 📍 **Compartir Coordenadas GPS de Llegada**: Punto de encuentro exacto para recepción en la entrada del sendero.
-  - 📸 **Foto del Recibo Físico**: Captura de confirmación de pago en mano.
-- **Llamada Telefónica Directa**: Enlace nativo con un toque al celular del anfitrión.
+  - **Botón `SOS WhatsApp`**: Abre mensaje preformateado de auxilio con coordenadas satelitales precisas.
+  - **Copia de Coordenadas GPS**: Copia la posición geográfica en un solo toque.
+  - **Vibración Háptica**: `HapticFeedback.heavyImpact` para retroalimentación táctil inmediata.
 
 ---
 
@@ -188,7 +219,7 @@ Cada emprendedor comunitario cuenta con una ficha técnica completa:
 - **💬 WhatsApp Directo**: Enlace `https://wa.me/` con mensaje contextual prellenado.
 - **📞 Teléfono & Llamada Rápida**: Marcación nativa sin intermediarios.
 - **📍 Ubicación & Mapa**: Punto georreferenciado con pin temático en la cordillera.
-- **🛡️ 0% Comisiones Abusivas**: El explorador paga directamente al campesino.
+- **🛡️ Cero Comisiones Abusivas**: El explorador apoya directamente la economía local.
 
 ---
 
@@ -201,34 +232,26 @@ Cada emprendedor comunitario cuenta con una ficha técnica completa:
 
 ---
 
-## 🤖 Asistente Turístico Inteligente (Firebase Genkit + Gemini)
+## 🤖 Asistente IA para Turismo Responsable
 
-El backend de Inteligencia Artificial se ubica en `src/index.js` y `prompts/baqueano_master.prompt`:
+Integrado en `/ai`:
 
-- **Framework**: Firebase Genkit (`genkit`, `@genkit-ai/googleai`).
-- **Modelos**: Google Gemini 1.5 Flash + Groq Llama 3.3 + Ollama Cloud.
-- **Módulos de Asesoría**:
-  1. Identificación y perfil de senderos y volcanes.
-  2. Alojamiento rural y eco-lodges bioclimáticos.
-  3. Transporte público, lanchas y logística interna.
-  4. Gastronomía campesina autóctona y de autor.
-  5. Actividades de aventura activa (sandboarding, kayak, senderismo).
-  6. Corredor bohemio y vida nocturna cultural.
-  7. Itinerarios cronológicos detallados.
-  8. Presupuestos bimoneda exactos en USD y Córdobas (NIO).
-  9. Coordinación de reservas directas.
-  10. Consejos de seguridad y clima en cumbres.
+- **Principio Innegociable**: No inventar información; recomendar según la sensibilidad ambiental y la seguridad del sendero.
+- **Capacidades**:
+  - Recomendar destinos alternativos para desconcentrar puntos saturados.
+  - Explicar normas ambientales y buenas prácticas ecológicas.
+  - Detallar el nivel de dificultad física y el equipo requerido.
+  - Conectar la historia de los municipios con experiencias vivas.
 
 ---
 
-## 👤 Pasaporte del Explorador & Centro de Accesibilidad
+## 🎫 Pasaporte del Explorador & Gamificación Ética
 
-- **📜 Pasaporte Digital**: Insignias desbloqueables (*Cañón de Somoto, Cerro Negro, Ometepe, Miraflor, Río San Juan, Indio Maíz*), puntos XP acumulables y rango de explorador.
-- **♿ Centro de Accesibilidad**:
-  - Escalado tipográfico dinámico (de 85% a 135%).
-  - Modo de alto contraste para visibilidad bajo sol intenso en montaña.
-  - Conmutador de respuesta háptica táctil.
-- **🔗 Autenticación Segura**: Vinculación oficial con **Google Sign-In** y almacenamiento en Cloud Firestore.
+Ubicado en `/perfil`:
+
+- **📜 Pasaporte Digital**: Insignias verificadas (*Cañón de Somoto, Cerro Negro, Ometepe, Miraflor, Río San Juan, Indio Maíz*), puntos de impacto ambiental y rango de explorador.
+- **♿ Centro de Accesibilidad**: Escalado tipográfico dinámico (85% a 135%), alto contraste y conmutador háptico.
+- **🔗 Autenticación Segura**: **Google Sign-In** y Correo/Contraseña en Firebase Auth.
 
 ---
 
@@ -252,22 +275,6 @@ El backend de Inteligencia Artificial se ubica en `src/index.js` y `prompts/baqu
 
 ---
 
-## 🛡️ Sistema de Respaldo & Restauración de Versiones
-
-El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar la seguridad del código y facilitar el retorno a versiones anteriores:
-
-- **Restaurar Versión Anterior**:
-  ```bash
-  git checkout backup-version-anterior
-  ```
-- **Regresar a la Versión Actual (120 FPS Multimedia)**:
-  ```bash
-  git checkout main
-  ```
-- **Etiqueta Histórica**: `v1.0.0-anterior`
-
----
-
 ## 🚀 Instalación y Despliegue en Android
 
 ### Requisitos Previos
@@ -275,7 +282,6 @@ El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar l
 - **Flutter SDK** `>= 3.7.0`
 - **Android SDK** con API 34 o superior
 - **Dispositivo Físico Android o Emulador** (con depuración USB habilitada)
-- **Node.js** `>= 18.0.0` (para el servidor Genkit AI)
 
 ### 1. Clonar el Repositorio
 
@@ -284,7 +290,7 @@ git clone https://github.com/OscarElieser/APP-BAQUEANO.git
 cd APP-BAQUEANO
 ```
 
-### 2. Instalar Dependencias de Flutter
+### 2. Instalar Dependencias
 
 ```bash
 flutter pub get
@@ -299,15 +305,7 @@ flutter analyze
 ### 4. Compilar e Instalar en Dispositivo Físico Android
 
 ```bash
-flutter build apk --debug
-adb install -r build/app/outputs/flutter-apk/app-debug.apk
-```
-
-### 5. Iniciar Servidor de Inteligencia Artificial (Opcional)
-
-```bash
-npm install
-npx genkit start -- node src/index.js
+flutter run -d [DEVICE_ID]
 ```
 
 ---
@@ -318,4 +316,4 @@ Desarrollado con orgullo para impulsar el ecoturismo campesino, la soberanía cu
 
 Distribuido bajo la Licencia **MIT**. Consulta el archivo `LICENSE` para más información.
 
-© 2026 Baqueano Ecosystem. Todos los derechos reservados. Turismo comunitario transparente y sin intermediarios.
+© 2026 Baqueano Nicaragua. Todos los derechos reservados. Turismo comunitario responsable y sin intermediarios.
