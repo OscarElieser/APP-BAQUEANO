@@ -43,6 +43,7 @@ import '../features/map/screens/map_screen.dart';
 import '../features/messaging/screens/host_messaging_screen.dart';
 import '../features/notifications/screens/notifications_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
+import '../features/country_history/screens/country_history_screen.dart';
 import '../features/search/screens/universal_search_screen.dart';
 import '../features/splash/screens/splash_screen.dart';
 
@@ -138,6 +139,18 @@ class AppRouter {
       GoRoute(
         path: '/destinos',
         redirect: (_, __) => '/turismo',
+      ),
+      // Historia de mi país (Nicaragua y modular)
+      GoRoute(
+        path: '/historia-mi-pais',
+        builder: (context, state) => const CountryHistoryScreen(),
+      ),
+      GoRoute(
+        path: '/historia-mi-pais/:countryId',
+        builder: (context, state) {
+          final countryId = state.pathParameters['countryId'] ?? 'nicaragua';
+          return CountryHistoryScreen(countryId: countryId);
+        },
       ),
       // Community & Support
       GoRoute(

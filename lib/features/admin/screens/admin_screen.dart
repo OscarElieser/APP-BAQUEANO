@@ -1,37 +1,69 @@
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — PORTAL DE REDIRECCIÓN ADMINISTRATIVA
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Mantener una estricta separación de responsabilidades entre la experiencia del
+//   turista (Baqueano App) y el Centro de Control Web (Baqueano Admin Web).
+// - Informar con elegancia y transparencia al usuario sobre la arquitectura
+//   independiente del ecosistema si accede por enlace directo a la ruta `/admin`.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Interfaz responsiva con `ResponsiveScaffold` y paleta volcánica (#082B35, #C86432).
+// - Enlace directo hacia la URL del portal web administrativo independiente vía `url_launcher`.
+// - Botón de retorno inmediato al feed principal de exploración.
+//
+// 📦 3. QUÉ (WHAT / WIDGET EXPUESTO):
+// - `AdminScreen`: Pantalla de aviso de desacoplamiento y enlace al Admin Web.
+// ============================================================================
+
+// BAQUEANO
+// ARCHIVO: admin_screen.dart
+// MÓDULO: Arquitectura & Enrutamiento
+// PROYECTO: APP (Consumidor)
+// INTEGRACIÓN: GoRouter (`/admin`) y Baqueano Admin Web
+// CONSUMIDO POR: AppRouter
+// RESPONSABILIDAD: Redirigir y educar sobre la separación del centro de control.
+// NO CONTIENE: Formularios CRUD administrativos ni manipulación de datos.
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../core/data/catalog_data.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
-import '../../../core/widgets/section_header.dart';
-import '../../../core/widgets/custom_toast.dart';
 
-class AdminScreen extends StatefulWidget {
+class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});
 
-  @override
-  State<AdminScreen> createState() => _AdminScreenState();
-}
-
-class _AdminScreenState extends State<AdminScreen> {
-  final List<Map<String, dynamic>> _pendingApprovals = [
-    {
-      'name': 'Hospedaje Familiar Volcán Telica',
-      'owner': 'Don Juan Talavera',
-      'dept': 'León',
-      'status': 'Pendiente Verificación INTUR',
-      'fee': '\$25 USD / noche',
-    },
-    {
-      'name': 'Guías Nativos Río Coco Abajo',
-      'owner': 'Cooperativa Wiwilí',
-      'dept': 'Nueva Segovia',
-      'status': 'Documentación en Revisión',
-      'fee': '\$40 USD / ruta',
-    },
-  ];
+  Future<void> _openAdminWeb(BuildContext context) async {
+    final uri = Uri.parse('http://localhost:8086/#/dashboard');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Accede a Baqueano Admin Web desde su puerto dedicado.'),
+              backgroundColor: AppColors.primaryLight,
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Portal administrativo disponible en el módulo web independiente.'),
+            backgroundColor: AppColors.primaryLight,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,165 +71,105 @@ class _AdminScreenState extends State<AdminScreen> {
     final isDesktop = screenWidth >= 950;
 
     return ResponsiveScaffold(
-      currentIndex: 1,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(
-          horizontal: isDesktop ? 48.0 : 20.0,
-          vertical: 24.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SectionHeader(
-              tag: 'PANEL DE CONTROL & GESTIÓN',
-              title: '🔐 Panel de Administración CMS & Respaldos',
-              subtitle: 'Control de calidad, validación de guías comunitarios, edición de catálogo y sincronización con Firebase Cloud.',
-            ),
-            const SizedBox(height: 16),
+      currentIndex: 0,
+      body: Center(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            horizontal: isDesktop ? 64.0 : 24.0,
+            vertical: 40.0,
+          ),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 720),
+            child: GlassContainer(
+              padding: const EdgeInsets.all(32),
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: AppColors.borderGold),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Icono de Centro de Control
+                  Container(
+                    width: 72,
+                    height: 72,
+                    decoration: BoxDecoration(
+                      color: AppColors.terracotta.withValues(alpha: 0.15),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppColors.terracotta, width: 2),
+                    ),
+                    child: const Center(
+                      child: Text('🧭', style: TextStyle(fontSize: 34)),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
 
-            // Stat cards
-            Row(
-              children: [
-                Expanded(child: _buildAdminStatCard('DESTINOS ACTIVOS', '${CatalogData.destinations.length}', AppColors.terracotta, Icons.place)),
-                const SizedBox(width: 12),
-                Expanded(child: _buildAdminStatCard('NEGOCIOS VERIFICADOS', '${CatalogData.localBusinesses.length}', AppColors.jungleGreenLight, Icons.verified)),
-                const SizedBox(width: 12),
-                Expanded(child: _buildAdminStatCard('SOLICITUDES PENDIENTES', '${_pendingApprovals.length}', AppColors.warning, Icons.pending_actions)),
-              ],
-            ),
+                  Text(
+                    'CENTRO DE CONTROL BAQUEANO',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 2.0,
+                      color: AppColors.gold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
 
-            const SizedBox(height: 28),
+                  Text(
+                    'Portal Administrativo Independiente',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.montserrat(
+                      fontSize: isDesktop ? 26 : 20,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
 
-            // Action Toolbar
-            Wrap(
-              spacing: 12,
-              runSpacing: 10,
-              children: [
-                BaqueanoButton(
-                  text: 'Nuevo Destino',
-                  icon: const Icon(Icons.add_location_alt, size: 16),
-                  variant: BaqueanoButtonVariant.primary,
-                  onPressed: () {
-                    CustomToast.show(context, message: 'Formulario de nuevo destino abierto.');
-                  },
-                ),
-                BaqueanoButton(
-                  text: 'Generar Respaldo JSON',
-                  icon: const Icon(Icons.cloud_download_outlined, size: 16),
-                  variant: BaqueanoButtonVariant.secondary,
-                  onPressed: () {
-                    CustomToast.success(context, 'Base de datos exportada y respaldada en Google Cloud.');
-                  },
-                ),
-                BaqueanoButton(
-                  text: 'Sincronizar Firebase',
-                  icon: const Icon(Icons.sync, size: 16),
-                  variant: BaqueanoButtonVariant.outline,
-                  onPressed: () {
-                    CustomToast.success(context, 'Catálogo sincronizado exitosamente con Cloud Firestore.');
-                  },
-                ),
-              ],
-            ),
+                  Text(
+                    'Por directriz de arquitectura, la administración, auditoría, publicación de negocios y gestión multimedia se realiza exclusivamente desde la Web Administrativa independiente.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      color: AppColors.textMuted,
+                      height: 1.6,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
 
-            const SizedBox(height: 32),
+                  Text(
+                    'Esta aplicación está dedicada 100% a la exploración, mapas, expediciones campesinas y pasaporte cultural del turista.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      color: AppColors.goldLight,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
 
-            // Pending Approvals List
-            Text(
-              'SOLICITUDES DE AFILIACIÓN COMUNITARIA',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 1.0),
-            ),
-            const SizedBox(height: 12),
-
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _pendingApprovals.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (context, index) {
-                final item = _pendingApprovals[index];
-                return GlassContainer(
-                  padding: const EdgeInsets.all(16),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.borderLight),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // Botones de Acción
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 12,
+                    alignment: WrapAlignment.center,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item['name'] as String,
-                            style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.textLight),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Titular: ${item['owner']} · ${item['dept']} · ${item['fee']}',
-                            style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            item['status'] as String,
-                            style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.warning),
-                          ),
-                        ],
+                      BaqueanoButton(
+                        text: '🌐 Abrir Baqueano Admin Web',
+                        variant: BaqueanoButtonVariant.primary,
+                        onPressed: () => _openAdminWeb(context),
                       ),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.check_circle, color: AppColors.success, size: 28),
-                            onPressed: () {
-                              setState(() => _pendingApprovals.removeAt(index));
-                              CustomToast.success(context, 'Emprendimiento aprobado y publicado.');
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.cancel, color: AppColors.error, size: 28),
-                            onPressed: () {
-                              setState(() => _pendingApprovals.removeAt(index));
-                              CustomToast.error(context, 'Solicitud rechazada.');
-                            },
-                          ),
-                        ],
+                      BaqueanoButton(
+                        text: 'Volver a Explorar',
+                        variant: BaqueanoButtonVariant.outline,
+                        onPressed: () => context.go('/home'),
                       ),
                     ],
                   ),
-                );
-              },
+                ],
+              ),
             ),
-
-            const SizedBox(height: 80),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildAdminStatCard(String label, String value, Color color, IconData icon) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.bgCard,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: color.withValues(alpha: 0.5)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(label, style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w800, color: AppColors.textMuted)),
-              Icon(icon, color: color, size: 18),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: GoogleFonts.montserrat(fontSize: 22, fontWeight: FontWeight.w900, color: color),
-          ),
-        ],
       ),
     );
   }

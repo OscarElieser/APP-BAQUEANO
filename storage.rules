@@ -1,7 +1,31 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // Fotografías de destinos y avatares de exploradores
+    // 📸 Negocios, alojamientos y gastronomía
+    match /businesses/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 🗂️ Biblioteca multimedia centralizada (fotos, videos, audios folclóricos)
+    match /multimedia/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 🌋 Destinos, mapas y senderos
+    match /destinations/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 👤 Avatares y fotos de perfil de exploradores
+    match /users/{userId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Regla general de lectura pública para assets desplegados
     match /{allPaths=**} {
       allow read: if true;
       allow write: if request.auth != null;

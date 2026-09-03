@@ -271,6 +271,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                   // Menu Links
                   _buildNavLink(context, 'INICIO', '/home'),
                   _buildExplorarDropdown(context),
+                  _buildNavLink(context, 'HISTORIA', '/historia-mi-pais'),
                   _buildNavLink(context, 'MAPA MUNDO', '/mapa'),
                   _buildNavLink(context, 'BAQUEANO AI', '/ai', isHighlight: true),
                   _buildNavLink(context, 'COMUNIDAD', '/comunidad'),
@@ -436,6 +437,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       ),
       onSelected: (route) => context.go(route),
       itemBuilder: (context) => [
+        _buildPopupItem('📖', 'Historia de mi país', 'Cultura, identidad y patrimonio', '/historia-mi-pais'),
         _buildPopupItem('🎬', 'Videos de Expedición 4K', 'Nicaragua en pantalla grande', '/videos'),
         _buildPopupItem('🎵', 'Música & Folklore', 'Son Nica, Marimba y Ritmos', '/musica'),
         _buildPopupItem('🍽️', 'Gastronomía Autóctona', 'Comidas típicas y restaurantes', '/gastronomia'),
@@ -479,7 +481,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         _buildPopupItem('❓', 'Centro de Ayuda & FAQ', 'Preguntas y Líneas de Emergencia', '/ayuda'),
         _buildPopupItem('📜', 'Términos y Condiciones', 'Condiciones de uso y aventura', '/terminos'),
         _buildPopupItem('🛡️', 'Políticas de Privacidad', 'Protección y cero venta de datos', '/privacidad'),
-        _buildPopupItem('🔐', 'Panel Admin (CMS)', 'Gestión y respaldos', '/admin'),
       ],
     );
   }
@@ -647,6 +648,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
             _buildDrawerSectionTitle('NAVEGACIÓN PRINCIPAL'),
             _buildDrawerItem(context, '🏠', 'Inicio', '/home'),
+            _buildDrawerItem(context, '📖', 'Historia de mi país', '/historia-mi-pais', isGold: true),
             _buildDrawerItem(context, '🧭', 'Descubrir Destinos', '/descubrir'),
             _buildDrawerItem(context, '🌍', 'Mapa Mundial & GPS', '/mapa'),
             _buildDrawerItem(context, '🤖', 'Baqueano AI Assistant', '/ai', isGold: true),
@@ -661,6 +663,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
             const Divider(color: AppColors.borderLight),
             _buildDrawerSectionTitle('CATÁLOGO CULTURAL DE NICARAGUA'),
+            _buildDrawerItem(context, '📖', 'Historia de mi país', '/historia-mi-pais', isGold: true),
             _buildDrawerItem(context, '🍽️', 'Gastronomía Autóctona', '/gastronomia'),
             _buildDrawerItem(context, '🎵', 'Música & Marimba de Arco', '/musica'),
             _buildDrawerItem(context, '🎬', 'Videos de Expedición 4K', '/videos'),
@@ -675,7 +678,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             _buildDrawerItem(context, '❓', 'Centro de Ayuda & FAQ', '/ayuda'),
             _buildDrawerItem(context, '📜', 'Términos y Condiciones', '/terminos'),
             _buildDrawerItem(context, '🛡️', 'Políticas de Privacidad', '/privacidad'),
-            _buildDrawerItem(context, '🔐', 'Panel Admin (CMS)', '/admin'),
 
             const SizedBox(height: 24),
             Container(
