@@ -28,6 +28,7 @@ import '../../../core/widgets/badge_chip.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
+import '../widgets/advertise_business_section.dart';
 import '../widgets/baqueano_standard.dart';
 import '../widgets/business_showcase.dart';
 import '../widgets/explorer_testimonials.dart';
@@ -260,6 +261,13 @@ class _HomeScreenState extends State<HomeScreen> {
             // 6. VITRINA DINÁMICA INFINITA DE NEGOCIOS RURALES (FLUJO INVERSO)
             // ------------------------------------------------------------
             const BusinessShowcase(),
+
+            const SizedBox(height: 16),
+
+            // ------------------------------------------------------------
+            // 6.5 SECCIÓN DE PUBLICIDAD: ¿QUIERES QUE TU NEGOCIO APAREZCA AQUÍ?
+            // ------------------------------------------------------------
+            const AdvertiseBusinessSection(),
 
             const SizedBox(height: 36),
 
