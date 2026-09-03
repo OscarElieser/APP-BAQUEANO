@@ -1,107 +1,182 @@
 # 🌋 BAQUEANO ECOSYSTEM
 
-## Plataforma Oficial Multiplataforma de Ecoturismo & Rutas Autóctonas de Nicaragua
+## Plataforma Oficial de Ecoturismo Campesino & Rutas Autóctonas de Nicaragua
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-3.7+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart Version](https://img.shields.io/badge/Dart-3.7+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![Performance](https://img.shields.io/badge/Performance-120%20FPS%20GPU-00C853?style=for-the-badge&logo=android&logoColor=white)](https://flutter.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-app--baqueano-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Genkit AI](https://img.shields.io/badge/Genkit%20AI-Gemini%201.5%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://firebase.google.com/docs/genkit)
-[![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20SmartTV-2E7D32?style=for-the-badge)](https://github.com/OscarElieser/APP-BAQUEANO)
+[![Platform](https://img.shields.io/badge/Platform-Android%20Exclusive-2E7D32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/OscarElieser/APP-BAQUEANO)
 [![License](https://img.shields.io/badge/License-MIT-D4AF37?style=for-the-badge)](LICENSE)
 
-**Nicaragua en modo secreto** · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador, geolocalización GPS satelital y un asesor turístico con Inteligencia Artificial (Firebase Genkit + Google Gemini 1.5 Flash + Groq Cloud Llama 3.3 + Ollama Cloud).
+**Nicaragua en modo secreto** · Diseña expediciones inmersivas con baqueanos nativos, reservas bimoneda sin intermediarios, pasaporte gamificado de explorador, geolocalización satelital offline, patrimonio musical folclórico con integración de video/YouTube y un asesor turístico con Inteligencia Artificial (Firebase Genkit + Google Gemini 1.5 Flash + Groq Cloud Llama 3.3 + Ollama Cloud).
 
 ---
 
 ## 🧭 Tabla de Contenidos
 
+- [🎯 Filosofía del Círculo Dorado](#-filosofía-del-círculo-dorado)
 - [✨ Características Principales](#-características-principales)
+- [⚡ Arquitectura de Alto Rendimiento (120 FPS)](#-arquitectura-de-alto-rendimiento-120-fps)
+- [🎵 Módulo Multimedia de Música Folclórica & Videos](#-módulo-multimedia-de-música-folclórica--videos)
+- [🗄️ Arquitectura de Base de Datos para el Turista Móvil (Offline-First)](#️-arquitectura-de-base-de-datos-para-el-turista-móvil-offline-first)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
-- [🏗️ Arquitectura del Proyecto](#️-arquitectura-del-proyecto)
+- [🚨 Centro de Auxilio & Emergencias SOS en Sendero](#-centro-de-auxilio--emergencias-sos-en-sendero)
+- [💬 Mensajería Directa & Coordinación Campesina](#-mensajería-directa--coordinación-campesina)
 - [🏪 Vitrina de Negocios Campesinos & Comercio Justo](#-vitrina-de-negocios-campesinos--comercio-justo)
 - [🗺️ Mapa GPS Satelital & Geolocalización de Rutas](#️-mapa-gps-satelital--geolocalización-de-rutas)
 - [🤖 Asistente Turístico Inteligente (Firebase Genkit + Gemini)](#-asistente-turístico-inteligente-firebase-genkit--gemini)
 - [👤 Pasaporte del Explorador & Centro de Accesibilidad](#-pasaporte-del-explorador--centro-de-accesibilidad)
 - [💳 Motor Financiero Bimoneda & Régimen Fiscal](#-motor-financiero-bimoneda--régimen-fiscal)
-- [🔒 Seguridad, Firebase & App Check](#-seguridad-firebase--app-check)
-- [🚀 Instalación y Despliegue](#-instalación-y-despliegue)
+- [🛡️ Sistema de Respaldo & Restauración de Versiones](#️-sistema-de-respaldo--restauración-de-versiones)
+- [🚀 Instalación y Despliegue en Android](#-instalación-y-despliegue-en-android)
 - [📄 Licencia & Créditos](#-licencia--créditos)
+
+---
+
+## 🎯 Filosofía del Círculo Dorado
+
+Todo el ecosistema Baqueano se rige estrictamente bajo los tres niveles del **Círculo Dorado (Golden Circle)**:
+
+1. 🎯 **POR QUÉ (Why / Propósito)**:
+   - Democratizar el turismo en Nicaragua eliminando las comisiones abusivas de los intermediarios y garantizando que el **85% a 100% de los ingresos** vaya directo a las familias rurales, guías nativos y cooperativas campesinas.
+2. ⚙️ **CÓMO (How / Arquitectura & Proceso)**:
+   - Rendimiento extremo a **120 FPS** mediante aislamiento de capas con `RepaintBoundary`, arquitectura reactiva con Riverpod, base de datos local Offline-First sincronizada con Cloud Firestore y estética Glassmorphism volcánico.
+3. 📦 **QUÉ (What / Funcionalidad & Entregables)**:
+   - Una aplicación integral con feed dinámico, galería interactiva de destinos, reproductor sonoro patrimonial con soporte de YouTube, central de auxilio SOS y checkout fiscal bimoneda (USD/NIO).
 
 ---
 
 ## ✨ Características Principales
 
-- 📱 **100% Adaptable & Multiplataforma**: Experiencia optimizada para **Móviles** (Android/iOS), **Tablets**, **Desktops** y **Smart TVs** con `LayoutBuilder` y `ConstrainedBox`.
-- 🌋 **5 Carruseles Dinámicos en Home**:
-  1. 💬 *Lo que dicen nuestros exploradores*: Reseñas verificadas con impacto directo a familias rurales.
-  2. 🌋 *Tipos de destinos populares*: Catálogo bimoneda con filtros interactivos por departamento.
-  3. 🇳🇮 *Nicaragua en todos sus sentidos*: Exploración sensorial (gastronomía, café, volcanes, surf, música).
-  4. 🏪 *Vitrinas de negocios locales*: Cabañas, comedores campesinos y guías con WhatsApp y llamada directa.
-  5. 🧭 *El estándar de Baqueano*: Los 4 pilares éticos de comercio justo y preservación ambiental.
-- 🏪 **Ficha Técnica Completa de Emprendedores**: Nombre del negocio, propietario/gerente, teléfono, WhatsApp directo prellenado, correo electrónico, dirección física y pin GPS en el mapa.
-- 🗺️ **Mapa GPS Satelital Interactivo**: Pines exactos de destinos y negocios campesinos, capas temáticas y selector de vista satelital/relieve.
-- 🤖 **IA Turística Integral (Firebase Genkit + Gemini 1.5 Flash + Groq + Ollama Cloud)**: 10 módulos de asesoría que cubren destinos, transportes, hospedajes, gastronomía, seguridad y presupuestos bimoneda en USD y NIO.
-- 👤 **Pasaporte Digital & Accesibilidad**:
-  - Sellos de expedición (Somoto, Cerro Negro, Ometepe, Miraflor, Indio Maíz).
-  - Selector de tamaño de letra dinámico (85% a 135%), alto contraste y vibración háptica.
-  - Vinculación oficial con **Google Sign-In** y cierre de sesión seguro.
-- 💰 **Checkout Bimoneda en Tiempo Real**: Cálculo en **USD ($)** y **Córdobas (C$ NIO)** con tasa oficial `C$ 36.65`, exención de IVA según Ley 306 de Incentivos Turísticos y cupones promocionales (`BAQUEANO2026`).
+- 📱 **Diseño 100% Responsivo en Android**: Adaptabilidad total desde pantallas compactas de 360px hasta terminales de gama ultra-alta (Samsung Galaxy S23/S24 Ultra, Pixel 8/9 Pro) y tablets con SafeAreas dinámicas.
+- ⚡ **Desplazamiento Ultrafluido a 120 FPS**: Carruseles horizontales con física de inercia suave (`BouncingScrollPhysics`), erradicando tirones y congelamientos de pantalla.
+- 🎵 **Patrimonio Sonoro Multimedia**: Reproductor folclórico tradicional con visualizador de ecualizador, lanzamiento nativo de videos en YouTube y editor dinámico de URLs para desarrolladores.
+- 🚨 **Centro de Auxilio SOS 24/7**: Marcación directa (Policía 118, Cruz Blanca 128, Bomberos 115, INTUR), botón SOS de WhatsApp con coordenadas GPS y vibración háptica.
+- 💬 **Canal de Chat Real con Anfitriones**: Coordinación de llegada, envío de ubicación GPS y adjuntos de comprobantes de depósito bancario (BAC / Banpro / LaFise).
+- 🏪 **Ficha Técnica de Emprendimientos Locales**: Cabañas, guías certificados y comedores campestres con contacto directo por WhatsApp y llamada telefónica.
+- 🗺️ **Cartografía GPS Satelital**: Pines georreferenciados exactos en territorio nicaragüense, capas temáticas y visualización de lagos y cordilleras.
+- 🤖 **Baqueano AI (Firebase Genkit + Gemini 1.5 Flash)**: Planificador de itinerarios personalizados, cálculo de costos y asistencia turística en tiempo real.
+- 👤 **Pasaporte Digital Gamificado**: Sellos de expedición coleccionables, barra de XP, nivel de explorador y centro de accesibilidad visual y háptica.
+- 💰 **Checkout Bimoneda en Tiempo Real**: Cálculo automático en **USD ($)** y **Córdobas (C$ NIO)** a tasa oficial `C$ 36.65`, con exoneración de IVA para turistas extranjeros bajo la Ley 306.
+
+---
+
+## ⚡ Arquitectura de Alto Rendimiento (120 FPS)
+
+Para garantizar que la aplicación funcione con máxima fluidez en dispositivos de **gama media, alta y ultra-alta**:
+
+```text
+[Feed Vertical Principal] ──────── (Scroll a 120 FPS Nativo)
+        │
+        ├── [RepaintBoundary] ──► Carrusel de Categorías Rápidas (Capa GPU aislada)
+        ├── [RepaintBoundary] ──► Galería de Top Destinos Populares (Capa GPU aislada)
+        ├── [RepaintBoundary] ──► Vitrina de Negocios Rurales (Capa GPU aislada)
+        ├── [RepaintBoundary] ──► Testimonios Verificados (Capa GPU aislada)
+        └── [RepaintBoundary] ──► 4 Pilares del Estándar Baqueano (Capa GPU aislada)
+```
+
+- **Aislamiento GPU (`RepaintBoundary`)**: Cada lista horizontal posee su propia capa de textura; cuando una tarjeta se mueve, el árbol vertical no se invalida ni se repinta.
+- **Cero Bucles en Segundo Plano**: Se eliminaron los timers de auto-scroll continuo que consumían ciclos de CPU y competían con el pulgar del usuario (*gesture contention*).
+- **Física Nativa de Inercia**: Desplazamiento orgánico con `BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics())`.
+
+---
+
+## 🎵 Módulo Multimedia de Música Folclórica & Videos
+
+Ubicado en `/musica`, este módulo rinde homenaje a la tradición musical de Nicaragua:
+
+- **Repertorio Emblemático**:
+  - *El Solar de Monimbó* — Camilo Zapata (Son Nica en compás 6/8).
+  - *Mora Limpia* — Justo Santos (Segundo himno nacional en marimba de arco).
+  - *El Zanatillo* — Trío Monimbó (Folklore tradicional picaresco).
+  - *Danza del Mestizaje* — El Güegüense (Patrimonio de la Humanidad UNESCO).
+  - *Palomita Guasiruca* — Los Soñadores de Sarawaska (Polka y mazurca norteña).
+- **Integración con YouTube & Video**:
+  - Botón **`Ver en YouTube`** en el reproductor principal y en cada tarjeta del repertorio para abrir las interpretaciones visuales oficiales.
+  - **Configurador de Medios para Desarrolladores (`🔗`)**: Diálogo modal interactivo para ingresar, probar y actualizar en caliente enlaces de video (YouTube o archivos MP4/WebM) sin recompilar el código.
+- **Reproductor Táctil**: Control de scrubbing (`SliderTheme`), cronómetro dinámico (`01:14 / 03:45`) y animación de ondas sonoras.
+
+---
+
+## 🗄️ Arquitectura de Base de Datos para el Turista Móvil (Offline-First)
+
+Dado que los turistas recorren volcanes, cañones y selvas donde la cobertura 4G es nula, Baqueano implementa una estrategia **Offline-First Reactiva**:
+
+```text
+       ┌──────────────────────────────────────────────┐
+       │             ACCIONES DEL TURISTA             │
+       │ (Explorar, cotizar, ver mapas, ganar sellos) │
+       └──────────────────────┬───────────────────────┘
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │         ESTADO REACTIVO EN MEMORIA           │
+       │             (Riverpod Notifiers)             │
+       └──────────────────────┬───────────────────────┘
+                              ▼
+       ┌──────────────────────────────────────────────┐
+       │            CACHÉ PERSISTENTE LOCAL           │
+       │    (SharedPreferences / Almacenamiento Local)│
+       │  • Rutas y mapas satelitales en caché        │
+       │  • Fichas de anfitriones y contactos offline │
+       │  • Sellos XP guardados en el dispositivo     │
+       └──────────────────────┬───────────────────────┘
+                              ▼ (Al reconectar a 4G / Wi-Fi)
+       ┌──────────────────────────────────────────────┐
+       │          CLOUD FIRESTORE & FIREBASE          │
+       │  • Sincronización silenciosa en segundo plano│
+       │  • Envío de reservas y comprobantes de pago  │
+       │  • Notificaciones push al anfitrión y guía   │
+       └──────────────────────────────────────────────┘
+```
 
 ---
 
 ## 🎨 Sistema de Diseño & Tokens Visuales
 
-La identidad visual está inspirada en los paisajes volcánicos, la arcilla artesanal de San Juan de Oriente y los lagos de Nicaragua:
+La identidad visual está inspirada en los paisajes volcánicos, la arcilla artesanal de San Juan de Oriente y las aguas de los lagos nicaragüenses:
 
 | Token | Nombre | Código Hex | Uso en la Aplicación |
 | :--- | :--- | :--- | :--- |
-| **Primary** | Petróleo Volcánico | `#082B35` / `#13424E` | Barras de navegación, encabezados, fondos principales |
-| **Terracotta** | Arcilla Nica | `#C86432` / `#8B3A14` | Botones de acción primaria (CTA), badges de dificultad, acentos |
-| **Gold** | Oro Pinolero | `#D4AF37` / `#F3E5AB` | Precios, insignias de honor, estrellas y elementos destacados |
-| **Dark Surface** | Fondo Oscuro Profundo | `#0F172A` | Fondos de tarjetas Glassmorphism |
-| **Jungle Green** | Verde Selva | `#10B981` / `#2E7D32` | Sellos de sostenibilidad, 100% comunitario y negocios verificados |
-| **Crimson SOS** | Rojo Alerta | `#E11D48` | Centro de asistencia y emergencias SOS |
+| **Primary** | Petróleo Volcánico | `#082B35` / `#13424E` | Barras de navegación, encabezados, fondos de pantalla |
+| **Terracotta** | Arcilla Nica | `#C86432` / `#8B3A14` | Botones de acción primaria (CTA), acentos volcánicos |
+| **Gold** | Oro Pinolero | `#D4AF37` / `#F3E5AB` | Precios bimoneda, insignias de honor, bordes y estrellas |
+| **Dark Surface** | Noche Profunda | `#0F172A` | Fondos de tarjetas y contenedores Glassmorphism |
+| **Jungle Green** | Verde Selva | `#10B981` / `#2E7D32` | Distintivos de sostenibilidad y negocios verificados |
+| **Crimson SOS** | Rojo Alerta | `#EF4444` / `#DC2626` | Centro de asistencia y emergencias en sendero |
+
+> [!IMPORTANT]
+> Se prohíbe terminantemente el uso del deprecado `.withOpacity()`; todo el código emplea `.withValues(alpha: X)` para garantizar cero advertencias en Flutter 3.27+.
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## 🚨 Centro de Auxilio & Emergencias SOS en Sendero
 
-```text
-lib/
-├── config/                     # Configuración central
-│   ├── app_colors.dart         # Paleta de colores oficiales
-│   ├── app_gradients.dart      # Gradientes volcánicos y de oro
-│   ├── app_theme.dart          # Configuración de ThemeData para Flutter
-│   ├── app_constants.dart      # Tasa oficial de cambio, contactos y cupones
-│   ├── firebase_options.dart   # Configuración de Firebase (app-baqueano)
-│   └── app_router.dart         # Enrutamiento declarativo con GoRouter
-│
-├── core/                       # Núcleo compartido
-│   ├── data/
-│   │   └── catalog_data.dart   # Catálogo maestro y datos de destinos/negocios
-│   ├── models/
-│   │   ├── destination_model.dart # Modelo de destinos y rutas
-│   │   └── cultural_models.dart   # Negocios locales, reseñas, gastronomía
-│   ├── theme/                  # Sistema de tokens y gradientes
-│   └── widgets/                # Componentes universales (Scaffold, Toast, Logo)
-│
-├── features/                   # Módulos organizados por característica
-│   ├── auth/                   # Autenticación (Google Sign-In, Email, Invitado)
-│   ├── home/                   # Feed principal con los 5 carruseles
-│   │   └── widgets/            # Hero, Impact, Ticker, Vitrina, Testimonios
-│   ├── map/                    # Mapa GPS satelital interactivo con pines
-│   ├── profile/                # Pasaporte del explorador & Centro de accesibilidad
-│   ├── ai_chat/                # Interfaz de chat con Baqueano AI
-│   ├── destinations/           # Explorador de destinos y detalle de ruta
-│   ├── checkout/               # Checkout bimoneda con régimen fiscal
-│   └── sos/                    # Centro de asistencia y emergencias
-│
-└── services/                   # Servicios de infraestructura
-    ├── auth_service.dart       # Gestión de autenticación y estado Riverpod
-    ├── firestore_service.dart  # Cloud Firestore (Base de datos: appbaqueano)
-    ├── destination_service.dart# Sincronización y caché offline
-    └── baqueano_ai_service.dart# Conexión con backend de IA
-```
+Accesible desde el botón SOS de la barra superior en cualquier pantalla:
+
+- **Líneas Oficiales 24/7**:
+  - 👮 **Policía Turística & Nacional**: `118` / `+505 2277-4130`
+  - 🚑 **Cruz Blanca Nicaragüense**: `128` / `+505 2265-2081`
+  - 🚒 **Bomberos Unificados**: `115`
+  - ℹ️ **Atención al Turista INTUR**: `+505 2254-5191`
+- **Herramientas de Rescate**:
+  - **Botón `SOS WhatsApp`**: Abre un mensaje preformateado de auxilio con coordenadas satelitales precisas para brigadas de rescate.
+  - **Copia de Coordenadas GPS**: Copia la posición geográfica de referencia en un toque.
+  - **Vibración Háptica Real (`HapticFeedback.heavyImpact`)**: Respuesta sensorial inmediata.
+
+---
+
+## 💬 Mensajería Directa & Coordinación Campesina
+
+Canal oficial entre el explorador y los anfitriones comunitarios (`/mensajes`):
+
+- **Sin Conversaciones Artificiales**: El chat solo muestra mensajes legítimos enviados por el usuario o respondidos por los dueños de los alojamientos.
+- **Adjuntos Interactivos (`📎`)**:
+  - 📄 **Comprobante de Depósito Bancario**: Generación de aviso de transferencia (BAC Credomatic, Banpro, LaFise, BDF).
+  - 📍 **Compartir Coordenadas GPS de Llegada**: Punto de encuentro exacto para recepción en la entrada del sendero.
+  - 📸 **Foto del Recibo Físico**: Captura de confirmación de pago en mano.
+- **Llamada Telefónica Directa**: Enlace nativo con un toque al celular del anfitrión.
 
 ---
 
@@ -109,51 +184,51 @@ lib/
 
 Cada emprendedor comunitario cuenta con una ficha técnica completa:
 
-- **👤 Propietario / Gerente**: Nombre real del anfitrión local.
-- **💬 WhatsApp Directo**: Enlace `https://wa.me/` con mensaje prellenado.
-- **📞 Teléfono & Correo**: Marcación nativa y contacto formal.
-- **📍 Dirección y Coordenadas GPS**: Ubicación georreferenciada con pin en el mapa.
-- **🕒 Horarios y Servicios**: Cabañas rústicas, café de altura, tours de sandboarding, kayaks y gastronomía típica.
+- **👤 Propietario / Gerente**: Nombre real y acreditación del baqueano.
+- **💬 WhatsApp Directo**: Enlace `https://wa.me/` con mensaje contextual prellenado.
+- **📞 Teléfono & Llamada Rápida**: Marcación nativa sin intermediarios.
+- **📍 Ubicación & Mapa**: Punto georreferenciado con pin temático en la cordillera.
+- **🛡️ 0% Comisiones Abusivas**: El explorador paga directamente al campesino.
 
 ---
 
 ## 🗺️ Mapa GPS Satelital & Geolocalización de Rutas
 
 - **📍 Pines Georreferenciados**: Coordenadas exactas en Nicaragua (Latitud 11.0° - 14.8° N, Longitud -87.8° - -83.0° O).
-- **🎛️ Capas y Filtros**: Visualización simultánea de volcanes, cañones, cascadas, playas y negocios campesinos.
-- **📡 Modo Satelital / Vectorial**: Textura geográfica con siluetas de los lagos Xolotlán y Cocibolca.
-- **📱 Tarjeta Flotante Interactiva**: Ficha técnica instantánea al pulsar cualquier pin.
+- **🎛️ Filtros Temáticos**: Visualización simultánea de volcanes, cañones, cascadas, playas y cooperativas rurales.
+- **📡 Modo Satelital & Relieve**: Renderizado topográfico con siluetas de los grandes lagos Xolotlán y Cocibolca.
+- **📱 Tarjeta Flotante Interactiva**: Acceso instantáneo a la cotización y reserva al tocar cualquier pin.
 
 ---
 
 ## 🤖 Asistente Turístico Inteligente (Firebase Genkit + Gemini)
 
-El backend de Inteligencia Artificial se encuentra en `src/index.js` y `prompts/baqueano_master.prompt`:
+El backend de Inteligencia Artificial se ubica en `src/index.js` y `prompts/baqueano_master.prompt`:
 
 - **Framework**: Firebase Genkit (`genkit`, `@genkit-ai/googleai`).
-- **Modelo**: Google Gemini 1.5 Flash + Groq Llama 3.3 + Ollama Cloud.
-- **Arquitectura de 10 Módulos**:
-  1. Identificación y perfil de destinos.
-  2. Alojamiento rural y sostenible.
-  3. Transporte y logística interna.
-  4. Gastronomía autóctona y de autor campesina.
-  5. Experiencias y turismo activo.
-  6. Vida nocturna y corredor bohemio.
-  7. Itinerarios personalizados paso a paso.
-  8. Presupuesto bimoneda desglosado (USD/NIO).
-  9. Asistencia de reservas sin intermediarios.
-  10. Agente de IA proactivo y contextual.
+- **Modelos**: Google Gemini 1.5 Flash + Groq Llama 3.3 + Ollama Cloud.
+- **Módulos de Asesoría**:
+  1. Identificación y perfil de senderos y volcanes.
+  2. Alojamiento rural y eco-lodges bioclimáticos.
+  3. Transporte público, lanchas y logística interna.
+  4. Gastronomía campesina autóctona y de autor.
+  5. Actividades de aventura activa (sandboarding, kayak, senderismo).
+  6. Corredor bohemio y vida nocturna cultural.
+  7. Itinerarios cronológicos detallados.
+  8. Presupuestos bimoneda exactos en USD y Córdobas (NIO).
+  9. Coordinación de reservas directas.
+  10. Consejos de seguridad y clima en cumbres.
 
 ---
 
 ## 👤 Pasaporte del Explorador & Centro de Accesibilidad
 
-- **📜 Pasaporte Digital**: Insignias y sellos coleccionables (*Somoto, Cerro Negro, Ometepe, Miraflor, Indio Maíz*), barra de XP y rango de explorador.
+- **📜 Pasaporte Digital**: Insignias desbloqueables (*Cañón de Somoto, Cerro Negro, Ometepe, Miraflor, Río San Juan, Indio Maíz*), puntos XP acumulables y rango de explorador.
 - **♿ Centro de Accesibilidad**:
-  - Escalado de tipografía interactivo (85% a 135%).
-  - Modo de alto contraste para visibilidad bajo luz solar directa.
-  - Interruptor de respuesta háptica táctil.
-- **🔗 Conexión Google**: Sincronización de perfil con Cloud Firestore.
+  - Escalado tipográfico dinámico (de 85% a 135%).
+  - Modo de alto contraste para visibilidad bajo sol intenso en montaña.
+  - Conmutador de respuesta háptica táctil.
+- **🔗 Autenticación Segura**: Vinculación oficial con **Google Sign-In** y almacenamiento en Cloud Firestore.
 
 ---
 
@@ -171,29 +246,36 @@ El backend de Inteligencia Artificial se encuentra en `src/index.js` y `prompts/
 ├────────────────────────────────────────────────────────────┤
 │ TOTAL EN USD                     : $XX.XX USD              │
 │ TOTAL EN CÓRDOBAS (x 36.65)      : C$ X,XXX.XX NIO         │
-│ Código de Expedición Único       : BAQ-XXXXXX              │
+│ Código Único de Expedición       : BAQ-XXXXXX              │
 └────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🔒 Seguridad, Firebase & App Check
+## 🛡️ Sistema de Respaldo & Restauración de Versiones
 
-- **Firebase Project**: `app-baqueano` (Project Number: `578585227888`).
-- **Cloud Firestore Database**: `appbaqueano`.
-- **Firebase App Check**: Integrado con `AndroidProvider.debug` para protección contra abusos de API.
-- **Firebase Realtime Database**: `https://app-baqueano-default-rtdb.firebaseio.com/`.
-- **FCM Push Notifications**: Clave VAPID configurada para alertas y avisos meteorológicos en senderos.
+El repositorio cuenta con ramas y etiquetas de respaldo en Git para garantizar la seguridad del código y facilitar el retorno a versiones anteriores:
+
+- **Restaurar Versión Anterior**:
+  ```bash
+  git checkout backup-version-anterior
+  ```
+- **Regresar a la Versión Actual (120 FPS Multimedia)**:
+  ```bash
+  git checkout main
+  ```
+- **Etiqueta Histórica**: `v1.0.0-anterior`
 
 ---
 
-## 🚀 Instalación y Despliegue
+## 🚀 Instalación y Despliegue en Android
 
 ### Requisitos Previos
 
 - **Flutter SDK** `>= 3.7.0`
-- **Node.js** `>= 18.0.0`
-- **Git**
+- **Android SDK** con API 34 o superior
+- **Dispositivo Físico Android o Emulador** (con depuración USB habilitada)
+- **Node.js** `>= 18.0.0` (para el servidor Genkit AI)
 
 ### 1. Clonar el Repositorio
 
@@ -208,38 +290,31 @@ cd APP-BAQUEANO
 flutter pub get
 ```
 
-### 3. Instalar Dependencias de Genkit AI
-
-```bash
-npm install
-```
-
-### 4. Ejecutar la Aplicación Flutter
-
-```bash
-flutter run
-```
-
-### 5. Iniciar Servidor de Genkit AI
-
-```bash
-npx genkit start -- node src/index.js
-```
-
----
-
-## 🧪 Verificación de Calidad
+### 3. Verificar Calidad del Código (0 Warnings)
 
 ```bash
 flutter analyze
-flutter test
+```
+
+### 4. Compilar e Instalar en Dispositivo Físico Android
+
+```bash
+flutter build apk --debug
+adb install -r build/app/outputs/flutter-apk/app-debug.apk
+```
+
+### 5. Iniciar Servidor de Inteligencia Artificial (Opcional)
+
+```bash
+npm install
+npx genkit start -- node src/index.js
 ```
 
 ---
 
 ## 📄 Licencia & Créditos
 
-Desarrollado con orgullo para impulsar el ecoturismo comunitario y sostenible en **Nicaragua** 🇳🇮.
+Desarrollado con orgullo para impulsar el ecoturismo campesino, la soberanía cultural y la preservación ambiental de **Nicaragua** 🇳🇮.
 
 Distribuido bajo la Licencia **MIT**. Consulta el archivo `LICENSE` para más información.
 
