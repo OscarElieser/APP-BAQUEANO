@@ -23,6 +23,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../services/app_lifecycle_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
 import 'baqueano_button.dart';
@@ -74,21 +75,37 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
 
-    return Scaffold(
-      backgroundColor: AppColors.bgDark,
-      extendBody: true,
-      drawer: isDesktop ? null : _buildDrawer(context),
-      appBar: isDesktop
-          ? PreferredSize(
-              preferredSize: const Size.fromHeight(110),
-              child: _buildDesktopNavbar(context),
-            )
-          : PreferredSize(
-              preferredSize: const Size.fromHeight(60),
-              child: _buildMobileAppBar(context),
-            ),
-      body: widget.body,
-      bottomNavigationBar: isDesktop ? null : _buildFloatingBottomNav(context),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+
+        // Si el usuario está en otra pestaña principal (ej. Descubrir, Mapa), regresar a Home
+        if (widget.currentIndex != 0) {
+          context.go('/home');
+        } else {
+          // Si ya está en Home y presiona Atrás, mover a segundo plano sin destruir la app.
+          // Esto preserva el estado, música y posición. Solo se reiniciará si el usuario
+          // borra la aplicación de la lista de tareas recientes de Android.
+          AppLifecycleService.moveToBackground();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.bgDark,
+        extendBody: true,
+        drawer: isDesktop ? null : _buildDrawer(context),
+        appBar: isDesktop
+            ? PreferredSize(
+                preferredSize: const Size.fromHeight(110),
+                child: _buildDesktopNavbar(context),
+              )
+            : PreferredSize(
+                preferredSize: const Size.fromHeight(60),
+                child: _buildMobileAppBar(context),
+              ),
+        body: widget.body,
+        bottomNavigationBar: isDesktop ? null : _buildFloatingBottomNav(context),
+      ),
     );
   }
 

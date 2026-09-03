@@ -22,5 +22,24 @@ package com.company.appbaqueano
 // ============================================================================
 
 import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
 
-class MainActivity : FlutterActivity()
+class MainActivity : FlutterActivity() {
+    private val LIFECYCLE_CHANNEL = "com.company.appbaqueano/lifecycle"
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, LIFECYCLE_CHANNEL)
+            .setMethodCallHandler { call, result ->
+                if (call.method == "moveToBackground") {
+                    // Mover la tarea a segundo plano sin finalizar la actividad
+                    // Conserva la pila de navegación, memoria y estado exactamente donde finalizó
+                    val sentToBack = moveTaskToBack(true)
+                    result.success(sentToBack)
+                } else {
+                    result.notImplemented()
+                }
+            }
+    }
+}
