@@ -99,6 +99,26 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
     super.dispose();
   }
 
+  Future<void> _handleTrackTap(int index) async {
+    HapticFeedback.lightImpact();
+    if (_currentTrackIndex == index && _isPlaying) {
+      await _audioPlayer.pause();
+      _playbackTimer?.cancel();
+      if (mounted) {
+        setState(() => _isPlaying = false);
+      }
+    } else {
+      _playbackTimer?.cancel();
+      if (mounted) {
+        setState(() {
+          _currentTrackIndex = index;
+          _playbackProgress = 0.0;
+        });
+      }
+      await _playCurrentTrack();
+    }
+  }
+
   Future<void> _togglePlayPause() async {
     HapticFeedback.lightImpact();
     if (_isPlaying) {
@@ -111,6 +131,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
   }
 
   Future<void> _playCurrentTrack() async {
+    _playbackTimer?.cancel();
     final assetPath = _currentTrack.audioAsset;
     if (assetPath != null && assetPath.isNotEmpty) {
       try {
@@ -393,26 +414,28 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                     color: isCurrent ? AppColors.gold : AppColors.borderLight,
                     width: isCurrent ? 1.5 : 0.8,
                   ),
-                  onTap: () {
-                    setState(() {
-                      _currentTrackIndex = index;
-                      _playbackProgress = 0.0;
-                      _isPlaying = true;
-                      _startProgressSimulation();
-                    });
-                  },
+                  onTap: () => _handleTrackTap(index),
                   child: Row(
                     children: [
-                      // Icono de reproducción
+                      // Icono de reproducción interactivo
                       Container(
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
                           color: isCurrent ? AppColors.terracotta : AppColors.primaryLight,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: isCurrent && _isPlaying
+                              ? [
+                                  BoxShadow(
+                                    color: AppColors.terracotta.withValues(alpha: 0.4),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ]
+                              : null,
                         ),
                         child: Icon(
-                          isCurrent && _isPlaying ? Icons.graphic_eq_rounded : Icons.play_arrow_rounded,
+                          isCurrent && _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
                           color: Colors.white,
                           size: 24,
                         ),
@@ -445,10 +468,12 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                         ),
                       ),
 
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 4),
 
                       // Botón Video YouTube
                       IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
                         icon: const Icon(Icons.ondemand_video_rounded, color: Colors.redAccent, size: 22),
                         tooltip: 'Ver Video en YouTube',
                         onPressed: () => _launchYoutube(youtubeUrl),
@@ -456,6 +481,8 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
 
                       // Botón Configurar Enlace
                       IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
                         icon: const Icon(Icons.settings_ethernet_rounded, color: AppColors.goldLight, size: 20),
                         tooltip: 'Configurar Enlace Video/YouTube',
                         onPressed: () => _showConfigureMediaDialog(context, track),
