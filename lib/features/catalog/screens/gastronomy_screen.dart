@@ -26,6 +26,7 @@ import '../../../core/data/catalog_data.dart';
 import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
+import '../../../core/widgets/baqueano_adaptive_image.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
@@ -305,18 +306,16 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
           // Imagen en Alta Definición con Badges Flotantes
           Stack(
             children: [
-              ClipRRect(
+              BaqueanoAdaptiveImage(
+                imageUrl: dish.imageUrl,
+                height: 210,
+                width: double.infinity,
+                fit: BoxFit.cover,
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                child: Image.network(
-                  dish.imageUrl,
+                fallbackWidget: Container(
                   height: 210,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    height: 210,
-                    color: AppColors.primaryLight,
-                    child: Center(child: Text(dish.icon, style: const TextStyle(fontSize: 54))),
-                  ),
+                  color: AppColors.primaryLight,
+                  child: Center(child: Text(dish.icon, style: const TextStyle(fontSize: 54))),
                 ),
               ),
               // Sombra degradada para contraste

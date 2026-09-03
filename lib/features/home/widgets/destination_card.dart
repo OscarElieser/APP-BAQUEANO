@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/baqueano_adaptive_image.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/weather_radar_badge.dart';
@@ -99,19 +100,12 @@ class _DestinationCardState extends State<DestinationCard> {
           Stack(
             children: [
               // Imagen principal con esquinas superiores redondeadas
-              ClipRRect(
+              BaqueanoAdaptiveImage(
+                imageUrl: destination.imageUrl,
+                height: 155,
+                width: double.infinity,
+                fit: BoxFit.cover,
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                child: Image.network(
-                  destination.imageUrl,
-                  height: 155,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    height: 155,
-                    color: AppColors.primaryLight,
-                    child: const Center(child: Icon(Icons.terrain, size: 40, color: AppColors.gold)),
-                  ),
-                ),
               ),
 
               // Viñeta oscura inferior para asegurar legibilidad

@@ -21,6 +21,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/baqueano_adaptive_image.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../models/country_history_models.dart';
 
@@ -111,19 +112,12 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Imagen del platillo
-                  ClipRRect(
+                  BaqueanoAdaptiveImage(
+                    imageUrl: dish.imageUrl,
+                    height: 140,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                     borderRadius: BorderRadius.circular(14),
-                    child: Image.network(
-                      dish.imageUrl,
-                      height: 140,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
-                        height: 140,
-                        color: AppColors.primaryLight,
-                        child: const Center(child: Icon(Icons.restaurant_rounded, size: 36, color: AppColors.gold)),
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 12),
 

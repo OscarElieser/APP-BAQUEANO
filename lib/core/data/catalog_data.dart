@@ -182,7 +182,7 @@ class CatalogData {
       estimatedPrice: r'C$ 120 - 160 NIO (~$3.30 - $4.40 USD)',
       schedule: 'Sábados y Domingos: 6:00 AM - 1:00 PM',
       icon: '🫔',
-      imageUrl: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'assets/images/comida/nacatamal.jpg',
     ),
     GastronomyDish(
       id: 'gallo-pinto',
@@ -198,7 +198,7 @@ class CatalogData {
       estimatedPrice: r'C$ 90 - 130 NIO (~$2.50 - $3.55 USD)',
       schedule: 'Lunes a Domingo: 6:00 AM - 8:30 PM',
       icon: '🍛',
-      imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'assets/images/comida/gallo_pinto.jpg',
     ),
     GastronomyDish(
       id: 'vigoron',
@@ -214,7 +214,7 @@ class CatalogData {
       estimatedPrice: r'C$ 110 - 150 NIO (~$3.00 - $4.10 USD)',
       schedule: 'Todos los días: 8:00 AM - 6:30 PM',
       icon: '🥗',
-      imageUrl: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'assets/images/comida/vigoron.jpg',
     ),
     GastronomyDish(
       id: 'baho',
@@ -230,7 +230,7 @@ class CatalogData {
       estimatedPrice: r'C$ 160 - 220 NIO (~$4.40 - $6.00 USD)',
       schedule: 'Jueves a Domingo: 7:00 AM - 3:30 PM',
       icon: '🍲',
-      imageUrl: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'assets/images/comida/baho.jpg',
     ),
     GastronomyDish(
       id: 'quesillo',
@@ -246,7 +246,7 @@ class CatalogData {
       estimatedPrice: r'C$ 85 - 120 NIO (~$2.30 - $3.30 USD)',
       schedule: 'Servicio continuo 24 horas todos los días del año',
       icon: '🧀',
-      imageUrl: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'assets/images/comida/quesillo.jpg',
     ),
     GastronomyDish(
       id: 'indio-viejo',
@@ -262,7 +262,7 @@ class CatalogData {
       estimatedPrice: r'C$ 140 - 190 NIO (~$3.80 - $5.20 USD)',
       schedule: 'Lunes a Domingo: 10:30 AM - 9:30 PM',
       icon: '🥘',
-      imageUrl: 'https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'assets/images/comida/indio_viejo.jpg',
     ),
   ];
 
