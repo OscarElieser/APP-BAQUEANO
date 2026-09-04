@@ -725,8 +725,12 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
 
   // --- SECCIÓN DE MAPA ---
   Widget _buildMapSection() {
+    final size = MediaQuery.sizeOf(context);
+    final isLandscape = size.width > size.height;
+    final mapHeight = isLandscape ? 240.0 : (size.width > 600 ? 440.0 : 360.0);
+
     return Container(
-      height: 380,
+      height: mapHeight,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -831,7 +835,9 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                   style: GoogleFonts.inter(fontSize: 11, color: Colors.white60),
                 ),
                 const SizedBox(height: 10),
-                Row(
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
                   children: [
                     BaqueanoButton(
                       text: 'Ver detalles',
@@ -840,7 +846,6 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       onPressed: () => _openPlaceDetails(place),
                     ),
-                    const SizedBox(width: 8),
                     BaqueanoButton(
                       text: 'Cómo llegar',
                       variant: BaqueanoButtonVariant.outline,

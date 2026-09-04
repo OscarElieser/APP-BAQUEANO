@@ -379,12 +379,16 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                           children: [
                             const Icon(Icons.location_on_outlined, color: AppColors.goldLight, size: 15),
                             const SizedBox(width: 4),
-                            Text(
-                              '${place.municipalityName}, ${place.departmentName}',
-                              style: GoogleFonts.inter(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.goldLight,
+                            Expanded(
+                              child: Text(
+                                '${place.municipalityName}, ${place.departmentName}',
+                                style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.goldLight,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             if (place.distanceKm != null) ...[

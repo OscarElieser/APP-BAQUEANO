@@ -90,9 +90,11 @@ class _StampUnlockDialogState extends State<StampUnlockDialog> with SingleTicker
             ),
           ],
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
             // Sello institucional
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -212,6 +214,7 @@ class _StampUnlockDialogState extends State<StampUnlockDialog> with SingleTicker
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

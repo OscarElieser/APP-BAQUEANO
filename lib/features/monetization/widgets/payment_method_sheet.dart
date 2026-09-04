@@ -148,20 +148,25 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
           children: [
             const Icon(Icons.verified_user_rounded, color: AppColors.jungleGreenLight),
             const SizedBox(width: 8),
-            Text(
-              'Sesión de Pago Iniciada',
-              style: GoogleFonts.montserrat(
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
-                fontSize: 16,
+            Expanded(
+              child: Text(
+                'Sesión de Pago Iniciada',
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        content: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Text(
               'Hemos abierto el checkout seguro oficial de ${_selectedMethod.displayName}.',
               style: GoogleFonts.inter(fontSize: 13, color: Colors.white70),
@@ -220,7 +225,8 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             ),
           ],
         ),
-        actions: [
+      ),
+      actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
             child: Text(
@@ -259,29 +265,35 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    final isLandscape = size.width > size.height;
+    final maxHeight = size.height * (isLandscape ? 0.94 : 0.88);
     final nioAmount = (widget.amountUsd * 36.65).toInt();
     final billingCycle = widget.isAnnual ? 'Facturación Anual' : 'Facturación Mensual';
 
     return SafeArea(
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-        decoration: BoxDecoration(
-          color: AppColors.bgDark,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-          border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 1.2),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.6),
-              blurRadius: 30,
-              offset: const Offset(0, -10),
-            ),
-          ],
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: maxHeight),
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+          decoration: BoxDecoration(
+            color: AppColors.bgDark,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 1.2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.6),
+                blurRadius: 30,
+                offset: const Offset(0, -10),
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
               // Barra de arrastre superior
               Center(
                 child: Container(
@@ -471,8 +483,9 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildMethodCard({
     required PaymentMethodType type,
@@ -522,12 +535,15 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        type.displayName,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w800,
-                          color: isSelected ? Colors.white : Colors.white70,
+                      Flexible(
+                        child: Text(
+                          type.displayName,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w800,
+                            color: isSelected ? Colors.white : Colors.white70,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const SizedBox(width: 6),

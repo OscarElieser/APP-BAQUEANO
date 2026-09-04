@@ -108,62 +108,65 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Google Play Services rechazó la conexión (ApiException 10) porque la huella SHA-1 de esta computadora aún no está agregada en la consola de Firebase del proyecto app-baqueano.',
-              style: GoogleFonts.inter(color: Colors.white70, fontSize: 12, height: 1.4),
-            ),
-            const SizedBox(height: 14),
-            Text(
-              'HUELLA SHA-1 DE ESTA MÁQUINA:',
-              style: GoogleFonts.spaceGrotesk(color: const Color(0xFFD4AF37), fontSize: 10, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: const Color(0xFF041920),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.white12),
+        content: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Google Play Services rechazó la conexión (ApiException 10) porque la huella SHA-1 de esta computadora aún no está agregada en la consola de Firebase del proyecto app-baqueano.',
+                style: GoogleFonts.inter(color: Colors.white70, fontSize: 12, height: 1.4),
               ),
-              child: SelectableText(
-                sha1Key,
-                style: GoogleFonts.robotoMono(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
+              const SizedBox(height: 14),
+              Text(
+                'HUELLA SHA-1 DE ESTA MÁQUINA:',
+                style: GoogleFonts.spaceGrotesk(color: const Color(0xFFD4AF37), fontSize: 10, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0284C7),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              const SizedBox(height: 4),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF041920),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.white12),
                 ),
-                icon: const Icon(Icons.copy_rounded, color: Colors.white, size: 16),
-                label: const Text('Copiar Huella SHA-1', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  Clipboard.setData(const ClipboardData(text: sha1Key));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Color(0xFF10B981),
-                      content: Text('¡Huella SHA-1 copiada al portapapeles! Pégala en Firebase Console.'),
-                    ),
-                  );
-                },
+                child: SelectableText(
+                  sha1Key,
+                  style: GoogleFonts.robotoMono(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
+                ),
               ),
-            ),
-            const SizedBox(height: 14),
-            const Divider(color: Colors.white12),
-            const SizedBox(height: 6),
-            Text(
-              '¿Deseas identificarte con tu cuenta de Google ahora mismo mientras agregas la clave en Firebase?',
-              style: GoogleFonts.inter(color: Colors.white60, fontSize: 11),
-            ),
-          ],
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0284C7),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  ),
+                  icon: const Icon(Icons.copy_rounded, color: Colors.white, size: 16),
+                  label: const Text('Copiar Huella SHA-1', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                    Clipboard.setData(const ClipboardData(text: sha1Key));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Color(0xFF10B981),
+                        content: Text('¡Huella SHA-1 copiada al portapapeles! Pégala en Firebase Console.'),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 14),
+              const Divider(color: Colors.white12),
+              const SizedBox(height: 6),
+              Text(
+                '¿Deseas identificarte con tu cuenta de Google ahora mismo mientras agregas la clave en Firebase?',
+                style: GoogleFonts.inter(color: Colors.white60, fontSize: 11),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
@@ -210,41 +213,44 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Ingresa tu nombre y correo real de Google para que tu perfil y bitácora queden sincronizados con tu identidad.',
-              style: GoogleFonts.inter(color: Colors.white70, fontSize: 12),
-            ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: nameCtrl,
-              style: const TextStyle(color: Colors.white, fontSize: 13),
-              decoration: InputDecoration(
-                labelText: 'Tu Nombre Completo',
-                labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
-                prefixIcon: const Icon(Icons.person, color: Color(0xFFD4AF37)),
-                filled: true,
-                fillColor: const Color(0xFF041920),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        content: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Ingresa tu nombre y correo real de Google para que tu perfil y bitácora queden sincronizados con tu identidad.',
+                style: GoogleFonts.inter(color: Colors.white70, fontSize: 12),
               ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: emailCtrl,
-              keyboardType: TextInputType.emailAddress,
-              style: const TextStyle(color: Colors.white, fontSize: 13),
-              decoration: InputDecoration(
-                labelText: 'Tu Correo de Google / Gmail',
-                labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
-                prefixIcon: const Icon(Icons.email, color: Color(0xFFD4AF37)),
-                filled: true,
-                fillColor: const Color(0xFF041920),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              const SizedBox(height: 14),
+              TextField(
+                controller: nameCtrl,
+                style: const TextStyle(color: Colors.white, fontSize: 13),
+                decoration: InputDecoration(
+                  labelText: 'Tu Nombre Completo',
+                  labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
+                  prefixIcon: const Icon(Icons.person, color: Color(0xFFD4AF37)),
+                  filled: true,
+                  fillColor: const Color(0xFF041920),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 10),
+              TextField(
+                controller: emailCtrl,
+                keyboardType: TextInputType.emailAddress,
+                style: const TextStyle(color: Colors.white, fontSize: 13),
+                decoration: InputDecoration(
+                  labelText: 'Tu Correo de Google / Gmail',
+                  labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
+                  prefixIcon: const Icon(Icons.email, color: Color(0xFFD4AF37)),
+                  filled: true,
+                  fillColor: const Color(0xFF041920),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(

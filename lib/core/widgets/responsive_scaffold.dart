@@ -549,33 +549,36 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
   // --- FLOATING GLASS BOTTOM NAV (MOBILE) ---
   Widget _buildFloatingBottomNav(BuildContext context) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    final isCompact = screenHeight < 520;
+
     return SafeArea(
       bottom: true,
       child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+        padding: EdgeInsets.only(left: 16, right: 16, bottom: isCompact ? 4 : 8),
         child: GlassContainer(
-        height: 68,
-        borderRadius: BorderRadius.circular(34),
-        blur: 20,
-        backgroundColor: AppColors.primaryDark.withValues(alpha: 0.85),
-        border: Border.all(color: AppColors.borderGold, width: 1.2),
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildBottomNavItem(0, Icons.home_rounded, 'Inicio'),
-            _buildBottomNavItem(1, Icons.explore_rounded, 'Descubrir'),
-            _buildBottomNavItem(2, Icons.map_rounded, 'Mapa GPS'),
-            _buildBottomNavItem(3, Icons.smart_toy_rounded, 'Baqueano AI', isAi: true),
-            _buildBottomNavItem(4, Icons.person_rounded, 'Perfil'),
-          ],
+          height: isCompact ? 54 : 68,
+          borderRadius: BorderRadius.circular(isCompact ? 27 : 34),
+          blur: 20,
+          backgroundColor: AppColors.primaryDark.withValues(alpha: 0.85),
+          border: Border.all(color: AppColors.borderGold, width: 1.2),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildBottomNavItem(0, Icons.home_rounded, 'Inicio', isCompact: isCompact),
+              _buildBottomNavItem(1, Icons.explore_rounded, 'Descubrir', isCompact: isCompact),
+              _buildBottomNavItem(2, Icons.map_rounded, 'Mapa GPS', isCompact: isCompact),
+              _buildBottomNavItem(3, Icons.smart_toy_rounded, 'Baqueano AI', isAi: true, isCompact: isCompact),
+              _buildBottomNavItem(4, Icons.person_rounded, 'Perfil', isCompact: isCompact),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-  Widget _buildBottomNavItem(int index, IconData icon, String label, {bool isAi = false}) {
+  Widget _buildBottomNavItem(int index, IconData icon, String label, {bool isAi = false, bool isCompact = false}) {
     final isSelected = widget.currentIndex == index;
 
     if (isAi) {
@@ -583,7 +586,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         onTap: () => _onBottomNavTapped(index),
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: isCompact ? 8 : 12, vertical: isCompact ? 4 : 6),
           decoration: BoxDecoration(
             gradient: isSelected ? AppGradients.sunsetTerracotta : AppGradients.gold,
             borderRadius: BorderRadius.circular(20),
@@ -598,12 +601,12 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 18, color: isSelected ? Colors.white : AppColors.textDark),
+              Icon(icon, size: isCompact ? 15 : 18, color: isSelected ? Colors.white : AppColors.textDark),
               const SizedBox(width: 4),
               Text(
                 'AI',
                 style: GoogleFonts.spaceGrotesk(
-                  fontSize: 12,
+                  fontSize: isCompact ? 10.5 : 12,
                   fontWeight: FontWeight.w800,
                   color: isSelected ? Colors.white : AppColors.textDark,
                 ),
@@ -624,14 +627,14 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           children: [
             Icon(
               icon,
-              size: 22,
+              size: isCompact ? 18 : 22,
               color: isSelected ? AppColors.gold : AppColors.textMuted,
             ),
-            const SizedBox(height: 2),
+            if (!isCompact) const SizedBox(height: 2),
             Text(
               label,
               style: GoogleFonts.spaceGrotesk(
-                fontSize: 10,
+                fontSize: isCompact ? 9 : 10,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 color: isSelected ? AppColors.goldLight : AppColors.textMuted,
               ),
@@ -787,81 +790,84 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                 ),
               ],
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const BaqueanoLogo(size: BaqueanoLogoSize.medium),
-                const SizedBox(height: 20),
-                Text(
-                  '¡Bienvenido a Baqueano!',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'Inicia sesión para acumular sellos en tu Pasaporte y acceder a tarifas exclusivas comunitarias.',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: AppColors.textMuted,
-                    height: 1.4,
-                  ),
-                ),
-                const SizedBox(height: 24),
-
-                // Google Button
-                BaqueanoButton(
-                  text: 'Continuar con Google',
-                  icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 24),
-                  variant: BaqueanoButtonVariant.secondary,
-                  width: double.infinity,
-                  height: 48,
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    CustomToast.show(
-                      context,
-                      message: '¡Sesión iniciada con éxito! Bienvenido, Explorador.',
-                      icon: Icons.check_circle_rounded,
-                      accentColor: AppColors.jungleGreen,
-                    );
-                  },
-                ),
-                const SizedBox(height: 12),
-
-                // WhatsApp MFA Button
-                BaqueanoButton(
-                  text: 'Ingresar con WhatsApp',
-                  icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 18),
-                  variant: BaqueanoButtonVariant.primary,
-                  width: double.infinity,
-                  height: 48,
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    CustomToast.show(
-                      context,
-                      message: 'Código de acceso enviado a tu WhatsApp.',
-                      icon: Icons.sms_outlined,
-                      accentColor: AppColors.gold,
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx),
-                  child: Text(
-                    'Continuar como explorador invitado',
-                    style: GoogleFonts.spaceGrotesk(
-                      fontSize: 12,
-                      color: AppColors.goldLight,
-                      fontWeight: FontWeight.w700,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const BaqueanoLogo(size: BaqueanoLogoSize.medium),
+                  const SizedBox(height: 20),
+                  Text(
+                    '¡Bienvenido a Baqueano!',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 6),
+                  Text(
+                    'Inicia sesión para acumular sellos en tu Pasaporte y acceder a tarifas exclusivas comunitarias.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: AppColors.textMuted,
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Google Button
+                  BaqueanoButton(
+                    text: 'Continuar con Google',
+                    icon: const Icon(Icons.g_mobiledata_rounded, color: Colors.white, size: 24),
+                    variant: BaqueanoButtonVariant.secondary,
+                    width: double.infinity,
+                    height: 48,
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      CustomToast.show(
+                        context,
+                        message: '¡Sesión iniciada con éxito! Bienvenido, Explorador.',
+                        icon: Icons.check_circle_rounded,
+                        accentColor: AppColors.jungleGreen,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 12),
+
+                  // WhatsApp MFA Button
+                  BaqueanoButton(
+                    text: 'Ingresar con WhatsApp',
+                    icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 18),
+                    variant: BaqueanoButtonVariant.primary,
+                    width: double.infinity,
+                    height: 48,
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      CustomToast.show(
+                        context,
+                        message: 'Código de acceso enviado a tu WhatsApp.',
+                        icon: Icons.sms_outlined,
+                        accentColor: AppColors.gold,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    child: Text(
+                      'Continuar como explorador invitado',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 12,
+                        color: AppColors.goldLight,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
