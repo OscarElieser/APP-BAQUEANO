@@ -1,46 +1,90 @@
 rules_version = '2';
+
+// ============================================================================
+// BAQUEANO — REGLAS DE ARCHIVOS CON PROPIEDAD Y MÍNIMO PRIVILEGIO
+// ============================================================================
+//
+// POR QUÉ:
+// - Una cuenta autenticada no debe sustituir fotos oficiales, archivos de otro
+//   negocio ni adjuntos de conversaciones ajenas.
+//
+// CÓMO:
+// - Claims administrativos protegen medios editoriales; perfiles se aíslan por
+//   UID y los adjuntos exigen participación en la conversación correspondiente.
+// - MIME, tamaño y nombre de archivo se validan antes de aceptar cada escritura.
+//
+// QUÉ:
+// - Rutas seguras para perfiles, negocios, destinos, multimedia y chat.
+// ============================================================================
+
 service firebase.storage {
   match /b/{bucket}/o {
-    // Funciones de validación de seguridad
-    function isValidImage() {
-      return request.resource.contentType.matches('image/.*')
-        && request.resource.size < 10 * 1024 * 1024; // Máximo 10MB
+    function isSignedIn() {
+      return request.auth != null;
     }
 
-    function isValidAudio() {
-      return request.resource.contentType.matches('audio/.*')
-        && request.resource.size < 15 * 1024 * 1024; // Máximo 15MB
+    function isAdmin() {
+      return isSignedIn()
+        && (request.auth.token.admin == true
+          || request.auth.token.role == 'admin'
+          || request.auth.token.role == 'super_admin');
     }
 
-    // 📸 Negocios, alojamientos y gastronomía (Solo imágenes válidas subidas por usuarios autenticados)
-    match /businesses/{allPaths=**} {
+    function isImage() {
+      return request.resource != null
+        && request.resource.contentType.matches('image/(jpeg|png|webp)')
+        && request.resource.size <= 8 * 1024 * 1024;
+    }
+
+    function isAudio() {
+      return request.resource != null
+        && request.resource.contentType.matches('audio/(mpeg|mp4|ogg|wav)')
+        && request.resource.size <= 12 * 1024 * 1024;
+    }
+
+    function ownsBusiness(businessId) {
+      return isSignedIn()
+        && firestore.get(
+          /databases/appbaqueano/documents/businesses/$(businessId)
+        ).data.ownerUid == request.auth.uid;
+    }
+
+    function participatesIn(conversationId) {
+      return isSignedIn()
+        && firestore.get(
+          /databases/appbaqueano/documents/conversations/$(conversationId)
+        ).data.participantUids.hasAny([request.auth.uid]);
+    }
+
+    match /users/{userId}/{fileName} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow write: if isSignedIn()
+        && request.auth.uid == userId
+        && isImage();
+    }
+
+    match /businesses/{businessId}/{fileName} {
       allow read: if true;
-      allow write: if request.auth != null && isValidImage();
+      allow write: if (isAdmin() || ownsBusiness(businessId)) && isImage();
     }
 
-    // 🗂️ Biblioteca multimedia centralizada (fotos y audios folclóricos)
-    match /multimedia/{allPaths=**} {
+    match /destinations/{destinationId}/{fileName} {
       allow read: if true;
-      allow write: if request.auth != null && (isValidImage() || isValidAudio());
+      allow write: if isAdmin() && isImage();
     }
 
-    // 🌋 Destinos, mapas y senderos
-    match /destinations/{allPaths=**} {
+    match /multimedia/{mediaId}/{fileName} {
       allow read: if true;
-      allow write: if request.auth != null && isValidImage();
+      allow write: if isAdmin() && (isImage() || isAudio());
     }
 
-    // 👤 Avatares y fotos de perfil de exploradores (Aislado al propio UID)
-    match /users/{userId}/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId && isValidImage();
+    match /conversations/{conversationId}/{messageId}/{fileName} {
+      allow read: if participatesIn(conversationId);
+      allow write: if participatesIn(conversationId) && isImage();
     }
 
-    // Regla de salvaguarda: lectura pública para assets del sistema, escritura denegada por defecto
     match /{allPaths=**} {
-      allow read: if true;
-      allow write: if false;
+      allow read, write: if false;
     }
   }
 }
-

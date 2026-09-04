@@ -1,279 +1,403 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — SERVICIO DE AUTENTICACIÓN & PERSISTENCIA PERMANENTE
+// 🧭 BAQUEANO — SERVICIO DE AUTENTICACIÓN CON IDENTIDAD VERIFICADA
 // ============================================================================
 //
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Gestionar la identidad digital del explorador vinculando exclusivamente cuentas
-//   reales de Google, garantizando que la sesión NUNCA se cierre automáticamente.
-// - La sesión permanece activa de forma permanente e ininterrumpida entre reinicios de app,
-//   apagados del teléfono o suspensión en segundo plano, hasta que el usuario decida
-//   expresamente pulsar el botón de "Cerrar Sesión".
-// - Cero usuarios ficticios: vinculación veraz con sincronización de Firebase y Google.
+// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// - Garantizar que una persona solo figure como autenticada cuando Firebase Auth
+//   mantenga una sesión válida para ella.
+// - Evitar perfiles locales, sesiones paralelas y cambios de rol desde el APK,
+//   porque ninguno de esos mecanismos constituye una identidad verificable.
+// - Conservar un acceso de invitado explícito sin asociarle UID, correo ni rol.
 //
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Persistencia de sesión en almacenamiento local cifrado mediante `SecurityVault.obfuscate`
-//   y `SharedPreferences` (`_sessionStorageKey`).
-// - Restauración instantánea de perfil en el arranque (Frame 1) sin parpadeo de desconexión.
-// - Reconexión silenciosa en segundo plano con `_googleSignIn.signInSilently()`.
-// - Suscripción reactiva a `FirebaseAuth.instance.authStateChanges()`.
-// - Únicamente el método `signOut()` elimina el token local y desconecta al usuario.
+// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Firebase Auth conserva su propia sesión y `idTokenChanges()` dirige el estado
+//   reactivo; no se guardan credenciales ni copias del usuario en preferencias.
+// - Google entrega una credencial que debe ser aceptada por Firebase antes de
+//   crear el perfil usado por la interfaz.
+// - Los datos de progreso se hidratan desde `users/{uid}` y los roles proceden
+//   únicamente de custom claims o de ese perfil remoto protegido por reglas.
+// - Cada operación asíncrona valida la sesión vigente y el ciclo de vida antes de
+//   publicar cambios, evitando que una respuesta tardía restaure un usuario viejo.
 //
-// 📦 3. QUÉ (WHAT / ENTREGABLES & SERVICIOS EXPUESTOS):
-// - `AuthService`: Servicio reactivo con `signInWithGoogle()`, `signOut()`, persistencia permanente.
-// - `authServiceProvider`: Provider global de Riverpod.
+// 📦 QUÉ (WHAT / ENTREGABLES):
+// - `AuthService`: inicio con Google, cierre de sesión y perfil Firebase reactivo.
+// - `authServiceProvider`: proveedor Riverpod consumido por la interfaz Android.
 // ============================================================================
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../core/security/security_vault.dart';
+
 import '../models/user_profile.dart';
 
 class AuthService extends ChangeNotifier {
-  static const String _sessionStorageKey = 'baqueano_encrypted_user_session';
+  static const String _databaseId = 'appbaqueano';
+  static const String _usersCollection = 'users';
+  static const Set<String> _supportedRoles = {
+    'explorer',
+    'guide',
+    'admin',
+    'super_admin',
+  };
 
+  final firebase_auth.FirebaseAuth? _firebaseAuth;
+  final FirebaseFirestore? _firestore;
+  final GoogleSignIn _googleSignIn;
+
+  StreamSubscription<firebase_auth.User?>? _idTokenSubscription;
   UserProfile? _currentUser;
-  bool _isLoading = false;
+  bool _isLoading = true;
+  bool _isDisposed = false;
+  int _synchronizationVersion = 0;
+  String? _observedFirebaseUid;
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    serverClientId: '578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com',
-    scopes: ['email', 'profile'],
-  );
-
-  AuthService() {
-    // Intención: Inicializar la sesión persistente permanente sin interrupciones.
-    // Mecanismo: Carga inmediata desde disco ofuscado + silent login de Google + listener de Firebase.
-    // Importancia: Asegura que el usuario permanezca autenticado hasta que pulse "Cerrar Sesión".
-    _initPersistentSession();
+  AuthService({
+    firebase_auth.FirebaseAuth? firebaseAuth,
+    FirebaseFirestore? firestore,
+    GoogleSignIn? googleSignIn,
+  }) : _firebaseAuth = firebaseAuth ?? _resolveFirebaseAuth(),
+       _firestore = firestore ?? _resolveFirestore(),
+       _googleSignIn =
+           googleSignIn ??
+           GoogleSignIn(
+             serverClientId:
+                 '578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com',
+             scopes: const ['email', 'profile'],
+           ) {
+    _listenToFirebaseSession();
   }
 
-  // --------------------------------------------------------------------------
-  // RECUPERACIÓN Y MANTENIMIENTO PERMANENTE DE SESIÓN
-  // --------------------------------------------------------------------------
-  Future<void> _initPersistentSession() async {
-    // 1. Carga inmediata de la sesión guardada en disco (ofuscada con sal de seguridad)
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final obfuscated = prefs.getString(_sessionStorageKey);
-      if (obfuscated != null && obfuscated.isNotEmpty) {
-        final jsonStr = SecurityVault.deobfuscate(obfuscated);
-        if (jsonStr.isNotEmpty) {
-          _currentUser = UserProfile.fromJson(jsonStr);
-          notifyListeners();
-        }
-      }
-    } catch (e) {
-      debugPrint('Aviso recuperando sesión local persistente: $e');
+  UserProfile? get currentUser {
+    final firebaseUser = _firebaseAuth?.currentUser;
+    if (firebaseUser == null || _currentUser?.uid != firebaseUser.uid) {
+      return null;
     }
-
-    // 2. Comprobar usuario activo en Firebase Auth si el estado local estuviera vacío
-    try {
-      final fbUser = FirebaseAuth.instance.currentUser;
-      if (fbUser != null && fbUser.email != null && fbUser.email!.isNotEmpty) {
-        if (_currentUser == null) {
-          _currentUser = UserProfile(
-            uid: fbUser.uid,
-            email: fbUser.email!,
-            displayName: fbUser.displayName ?? fbUser.email!.split('@').first,
-            photoUrl: fbUser.photoURL ?? '',
-            role: 'explorer',
-            explorerLevel: 'Aventurero',
-            xp: 150,
-            createdAt: DateTime.now().subtract(const Duration(days: 30)),
-          );
-          await _saveSessionToDisk(_currentUser!);
-          notifyListeners();
-        }
-      }
-    } catch (_) {}
-
-    // 3. Reconexión silenciosa de Google (Background Silent Sign-In)
-    try {
-      final silentAccount = await _googleSignIn.signInSilently();
-      if (silentAccount != null) {
-        final realName = (silentAccount.displayName != null && silentAccount.displayName!.isNotEmpty)
-            ? silentAccount.displayName!
-            : silentAccount.email.split('@').first;
-
-        _currentUser = UserProfile(
-          uid: 'google-${silentAccount.id}',
-          email: silentAccount.email,
-          displayName: realName,
-          photoUrl: silentAccount.photoUrl ?? '',
-          role: _currentUser?.role ?? 'explorer',
-          explorerLevel: _currentUser?.explorerLevel ?? 'Aventurero',
-          xp: _currentUser?.xp ?? 150,
-          createdAt: _currentUser?.createdAt ?? DateTime.now(),
-        );
-        await _saveSessionToDisk(_currentUser!);
-        notifyListeners();
-      }
-    } catch (silentErr) {
-      debugPrint('Aviso silent sign in de Google: $silentErr');
-    }
-
-    // 4. Suscripción continua a eventos de Firebase Auth
-    FirebaseAuth.instance.authStateChanges().listen((fbUser) {
-      if (fbUser != null && _currentUser == null) {
-        _currentUser = UserProfile(
-          uid: fbUser.uid,
-          email: fbUser.email ?? '',
-          displayName: fbUser.displayName ?? (fbUser.email?.split('@').first ?? 'Explorador'),
-          photoUrl: fbUser.photoURL ?? '',
-          role: 'explorer',
-          explorerLevel: 'Aventurero',
-          xp: 150,
-          createdAt: DateTime.now(),
-        );
-        _saveSessionToDisk(_currentUser!);
-        notifyListeners();
-      }
-    });
+    return _currentUser;
   }
 
-  // Intención: Guardar en disco el perfil con ofuscación criptográfica.
-  Future<void> _saveSessionToDisk(UserProfile profile) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final obfuscated = SecurityVault.obfuscate(profile.toJson());
-      await prefs.setString(_sessionStorageKey, obfuscated);
-    } catch (e) {
-      debugPrint('Aviso guardando sesión en disco: $e');
-    }
-  }
-
-  // Intención: Limpiar la sesión en disco únicamente cuando el usuario cierre sesión explícitamente.
-  Future<void> _clearSessionFromDisk() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(_sessionStorageKey);
-    } catch (e) {
-      debugPrint('Aviso eliminando sesión de disco: $e');
-    }
-  }
-
-  UserProfile? get currentUser => _currentUser;
-  bool get isAuthenticated => _currentUser != null;
+  bool get isAuthenticated => _firebaseAuth?.currentUser != null;
   bool get isLoading => _isLoading;
-  bool get isAdmin => _currentUser?.isAdmin ?? false;
+  bool get isAdmin => isAuthenticated && (currentUser?.isAdmin ?? false);
 
-  // --------------------------------------------------------------------------
-  // INICIO DE SESIÓN CON GOOGLE (PERSISTENCIA GARANTIZADA)
-  // --------------------------------------------------------------------------
-  Future<bool> signInWithGoogle() async {
-    _isLoading = true;
-    notifyListeners();
+  static firebase_auth.FirebaseAuth? _resolveFirebaseAuth() {
+    try {
+      return firebase_auth.FirebaseAuth.instance;
+    } catch (error) {
+      debugPrint('Firebase Auth no está disponible: $error');
+      return null;
+    }
+  }
+
+  static FirebaseFirestore? _resolveFirestore() {
+    try {
+      return FirebaseFirestore.instanceFor(
+        app: Firebase.app(),
+        databaseId: _databaseId,
+      );
+    } catch (error) {
+      debugPrint('Firestore de perfiles no está disponible: $error');
+      return null;
+    }
+  }
+
+  void _listenToFirebaseSession() {
+    final auth = _firebaseAuth;
+    if (auth == null) {
+      _isLoading = false;
+      return;
+    }
+
+    _idTokenSubscription = auth.idTokenChanges().listen(
+      (firebaseUser) {
+        unawaited(_synchronizeFirebaseUser(firebaseUser));
+      },
+      onError: (Object error, StackTrace _) {
+        debugPrint('Error observando la sesión Firebase: $error');
+        if (auth.currentUser == null) {
+          _currentUser = null;
+        }
+        _isLoading = false;
+        _notifySafely();
+      },
+    );
+  }
+
+  Future<void> _synchronizeFirebaseUser(
+    firebase_auth.User? firebaseUser,
+  ) async {
+    final incomingUid = firebaseUser?.uid;
+    if (_observedFirebaseUid != incomingUid) {
+      _observedFirebaseUid = incomingUid;
+      ++_synchronizationVersion;
+    }
+    final synchronizationVersion = _synchronizationVersion;
+
+    if (firebaseUser == null) {
+      _currentUser = null;
+      _isLoading = false;
+      _notifySafely();
+      return;
+    }
+
+    if (_currentUser?.uid != firebaseUser.uid) {
+      _isLoading = true;
+      _notifySafely();
+    }
+
+    UserProfile profile;
+    try {
+      profile = await _buildVerifiedProfile(firebaseUser);
+    } catch (error) {
+      debugPrint('Error construyendo el perfil Firebase: $error');
+      profile = _buildFirebaseFallbackProfile(firebaseUser);
+    }
+    final activeFirebaseUser = _firebaseAuth?.currentUser;
+    if (_isDisposed ||
+        synchronizationVersion != _synchronizationVersion ||
+        activeFirebaseUser?.uid != firebaseUser.uid) {
+      return;
+    }
+
+    _currentUser = profile;
+    _isLoading = false;
+    _notifySafely();
+  }
+
+  Future<UserProfile> _buildVerifiedProfile(
+    firebase_auth.User firebaseUser,
+  ) async {
+    final remoteProfile = await _loadRemoteProfile(firebaseUser.uid);
+    final claimRole = await _loadRoleFromClaims(firebaseUser);
+    final remoteRole = _normalizeRole(remoteProfile['role']);
+    final safeRemoteRole =
+        remoteRole == 'admin' || remoteRole == 'super_admin'
+            ? null
+            : remoteRole;
+    final resolvedRole = claimRole ?? safeRemoteRole ?? 'explorer';
+
+    final firebaseEmail = firebaseUser.email?.trim() ?? '';
+    final firebaseDisplayName = firebaseUser.displayName?.trim() ?? '';
+    final firebasePhotoUrl = firebaseUser.photoURL?.trim() ?? '';
+
+    final mergedProfile = <String, dynamic>{
+      ...remoteProfile,
+      'email':
+          firebaseEmail.isNotEmpty
+              ? firebaseEmail
+              : _nonEmptyString(remoteProfile['email']),
+      'displayName':
+          _nonEmptyString(remoteProfile['displayName']).isNotEmpty
+              ? _nonEmptyString(remoteProfile['displayName'])
+              : firebaseDisplayName,
+      'photoUrl':
+          _nonEmptyString(remoteProfile['photoUrl']).isNotEmpty
+              ? _nonEmptyString(remoteProfile['photoUrl'])
+              : firebasePhotoUrl,
+      'role': resolvedRole,
+      'explorerLevel':
+          _nonEmptyString(remoteProfile['explorerLevel']).isNotEmpty
+              ? _nonEmptyString(remoteProfile['explorerLevel'])
+              : 'Novato',
+      'xp': remoteProfile['xp'] ?? 0,
+      'stamps': remoteProfile['stamps'] ?? const <String>[],
+      'badges': remoteProfile['badges'] ?? const <String>[],
+      'favorites': remoteProfile['favorites'] ?? const <String>[],
+      'createdAt':
+          remoteProfile['createdAt'] ??
+          firebaseUser.metadata.creationTime ??
+          DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
+    };
+
+    return UserProfile.fromMap(mergedProfile, firebaseUser.uid);
+  }
+
+  UserProfile _buildFirebaseFallbackProfile(firebase_auth.User firebaseUser) {
+    return UserProfile(
+      uid: firebaseUser.uid,
+      email: firebaseUser.email?.trim() ?? '',
+      displayName: firebaseUser.displayName?.trim() ?? '',
+      photoUrl: firebaseUser.photoURL?.trim() ?? '',
+      createdAt:
+          firebaseUser.metadata.creationTime ??
+          DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
+    );
+  }
+
+  Future<Map<String, dynamic>> _loadRemoteProfile(String uid) async {
+    final firestore = _firestore;
+    if (firestore == null) {
+      return const <String, dynamic>{};
+    }
 
     try {
-      try {
-        await _googleSignIn.signOut();
-      } catch (_) {}
+      final snapshot =
+          await firestore.collection(_usersCollection).doc(uid).get();
+      return snapshot.data() ?? const <String, dynamic>{};
+    } catch (error) {
+      debugPrint('No fue posible cargar el perfil remoto de Firebase: $error');
+      return const <String, dynamic>{};
+    }
+  }
 
-      GoogleSignInAccount? googleUser;
-      try {
-        googleUser = await _googleSignIn.signIn();
-      } catch (err) {
-        debugPrint('Aviso selector primario Google: $err');
-        final fallbackClient = GoogleSignIn(scopes: ['email', 'profile']);
-        googleUser = await fallbackClient.signIn();
-      }
+  Future<String?> _loadRoleFromClaims(firebase_auth.User firebaseUser) async {
+    try {
+      final tokenResult = await firebaseUser.getIdTokenResult();
+      return _normalizeRole(tokenResult.claims?['role']);
+    } catch (error) {
+      debugPrint('No fue posible leer los roles del token Firebase: $error');
+      return null;
+    }
+  }
 
+  static String? _normalizeRole(Object? rawRole) {
+    if (rawRole is! String) {
+      return null;
+    }
+    final normalizedRole = rawRole.trim().toLowerCase();
+    return _supportedRoles.contains(normalizedRole) ? normalizedRole : null;
+  }
+
+  static String _nonEmptyString(Object? value) {
+    return value is String ? value.trim() : '';
+  }
+
+  /// Solicita una cuenta Google, pero solo publica el perfil después de que la
+  /// credencial sea aceptada y exista como sesión activa en Firebase Auth.
+  Future<bool> signInWithGoogle() async {
+    final auth = _firebaseAuth;
+    if (auth == null) {
+      throw firebase_auth.FirebaseAuthException(
+        code: 'firebase-not-initialized',
+        message: 'Firebase Auth no está disponible en este dispositivo.',
+      );
+    }
+
+    final previousFirebaseUid = auth.currentUser?.uid;
+    _isLoading = true;
+    _notifySafely();
+
+    try {
+      final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        _isLoading = false;
-        notifyListeners();
         return false;
       }
 
-      String realEmail = googleUser.email;
-      String realName = (googleUser.displayName != null && googleUser.displayName!.isNotEmpty)
-          ? googleUser.displayName!
-          : realEmail.split('@').first;
-      String realPhoto = googleUser.photoUrl ?? '';
-      String realUid = 'google-${googleUser.id}';
-
-      try {
-        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-        if (googleAuth.idToken != null || googleAuth.accessToken != null) {
-          final AuthCredential credential = GoogleAuthProvider.credential(
-            accessToken: googleAuth.accessToken,
-            idToken: googleAuth.idToken,
-          );
-          final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-          if (userCredential.user != null) {
-            realUid = userCredential.user!.uid;
-            if (userCredential.user!.email != null) realEmail = userCredential.user!.email!;
-            if (userCredential.user!.displayName != null) realName = userCredential.user!.displayName!;
-            if (userCredential.user!.photoURL != null) realPhoto = userCredential.user!.photoURL!;
-          }
-        }
-      } catch (fbError) {
-        debugPrint('Aviso handshake Firebase Auth: $fbError');
+      final googleAuthentication = await googleUser.authentication;
+      if (googleAuthentication.idToken == null &&
+          googleAuthentication.accessToken == null) {
+        throw firebase_auth.FirebaseAuthException(
+          code: 'missing-google-credential',
+          message: 'Google no entregó una credencial verificable.',
+        );
       }
 
-      _currentUser = UserProfile(
-        uid: realUid,
-        email: realEmail,
-        displayName: realName,
-        photoUrl: realPhoto,
-        role: 'explorer',
-        explorerLevel: 'Aventurero',
-        xp: 150,
-        createdAt: DateTime.now(),
+      final credential = firebase_auth.GoogleAuthProvider.credential(
+        accessToken: googleAuthentication.accessToken,
+        idToken: googleAuthentication.idToken,
       );
+      final userCredential = await auth.signInWithCredential(credential);
+      final firebaseUser = userCredential.user;
 
-      // Guardar sesión de forma permanente en almacenamiento local protegido
-      await _saveSessionToDisk(_currentUser!);
+      if (firebaseUser == null || auth.currentUser?.uid != firebaseUser.uid) {
+        throw firebase_auth.FirebaseAuthException(
+          code: 'missing-firebase-session',
+          message:
+              'Firebase no confirmó una sesión para la cuenta seleccionada.',
+        );
+      }
 
-      _isLoading = false;
-      notifyListeners();
+      await _synchronizeFirebaseUser(firebaseUser);
+      if (!isAuthenticated || currentUser?.uid != firebaseUser.uid) {
+        throw firebase_auth.FirebaseAuthException(
+          code: 'profile-synchronization-failed',
+          message: 'No fue posible sincronizar la identidad verificada.',
+        );
+      }
+
       return true;
-    } catch (e) {
-      debugPrint('Error en flujo signInWithGoogle: $e');
-      _isLoading = false;
-      notifyListeners();
+    } catch (error) {
+      debugPrint('Error en el flujo de autenticación Google/Firebase: $error');
+      if (previousFirebaseUid == null && auth.currentUser != null) {
+        try {
+          await auth.signOut();
+        } catch (rollbackError) {
+          debugPrint('Error revirtiendo una sesión incompleta: $rollbackError');
+        }
+      }
+      if (previousFirebaseUid == null) {
+        try {
+          await _googleSignIn.signOut();
+        } catch (googleSignOutError) {
+          debugPrint(
+            'Error limpiando la cuenta Google incompleta: $googleSignOutError',
+          );
+        }
+      }
       rethrow;
+    } finally {
+      _isLoading = false;
+      _notifySafely();
     }
   }
 
-  void setRealGoogleAccount({required String email, required String displayName}) {
-    _currentUser = UserProfile(
-      uid: 'google-${DateTime.now().millisecondsSinceEpoch}',
-      email: email.trim(),
-      displayName: displayName.trim(),
-      photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-      role: 'explorer',
-      explorerLevel: 'Aventurero',
-      xp: 150,
-      createdAt: DateTime.now(),
-    );
-    _saveSessionToDisk(_currentUser!);
-    notifyListeners();
+  /// Cierra primero la sesión que constituye la autoridad de autenticación.
+  /// Si Firebase no logra cerrarla, el método falla y no declara modo invitado.
+  Future<void> signOut() async {
+    final auth = _firebaseAuth;
+    _isLoading = true;
+    _notifySafely();
+
+    Object? firebaseSignOutError;
+    try {
+      await auth?.signOut();
+    } catch (error) {
+      firebaseSignOutError = error;
+      debugPrint('Error cerrando la sesión Firebase: $error');
+    }
+
+    if (auth?.currentUser == null) {
+      if (_observedFirebaseUid != null) {
+        _observedFirebaseUid = null;
+        ++_synchronizationVersion;
+      }
+      _currentUser = null;
+    }
+
+    try {
+      await _googleSignIn.signOut();
+    } catch (error) {
+      debugPrint('Error cerrando la sesión del selector Google: $error');
+    } finally {
+      _isLoading = false;
+      _notifySafely();
+    }
+
+    if (auth?.currentUser != null) {
+      if (firebaseSignOutError != null) {
+        throw firebaseSignOutError;
+      }
+      throw StateError(
+        'Firebase mantuvo una sesión activa después del cierre.',
+      );
+    }
   }
 
-  void setRole(String role) {
-    if (_currentUser != null) {
-      _currentUser = _currentUser!.copyWith(role: role);
-      _saveSessionToDisk(_currentUser!);
+  void _notifySafely() {
+    if (!_isDisposed) {
       notifyListeners();
     }
   }
 
-  // --------------------------------------------------------------------------
-  // CIERRE DE SESIÓN EXPLÍCITO (ÚNICA VÍA PARA DESCONECTAR)
-  // --------------------------------------------------------------------------
-  Future<void> signOut() async {
-    try {
-      // 1. Destruir la sesión permanente en disco
-      await _clearSessionFromDisk();
-      // 2. Cerrar sesión en clientes remotos
-      await _googleSignIn.signOut();
-      await FirebaseAuth.instance.signOut();
-    } catch (_) {}
-
-    _currentUser = null;
-    notifyListeners();
+  @override
+  void dispose() {
+    _isDisposed = true;
+    unawaited(_idTokenSubscription?.cancel());
+    super.dispose();
   }
 }
 

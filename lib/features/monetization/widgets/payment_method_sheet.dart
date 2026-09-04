@@ -12,8 +12,10 @@
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Modal Bottom Sheet ergonómico con efecto Glassmorphism (`BackdropFilter`).
-// - Utiliza `PaymentGateway` para despachar la orden de pago y orquestar el checkout
-//   oficial del banco seleccionado.
+// - Utiliza `PaymentGateway` para pedir al backend una orden cuyo precio, dueño,
+//   disponibilidad y URL de checkout se validan fuera del dispositivo.
+// - La app nunca confirma transacciones ni activa membresías: observa la orden que
+//   actualiza un webhook bancario autenticado.
 // - Estricta paleta oficial: `#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`.
 // - Uso de `.withValues(alpha: X)` en todos los canales de color.
 //
@@ -49,8 +51,8 @@ class PaymentMethodSheet extends ConsumerStatefulWidget {
     required this.planTitle,
     required this.amountUsd,
     required this.isAnnual,
-    this.businessId = 'biz_active_user',
-    this.businessName = 'Mi Negocio Turístico',
+    this.businessId = '',
+    this.businessName = '',
   });
 
   /// Método de utilidad estático para desplegar el modal desde cualquier pantalla
@@ -60,8 +62,8 @@ class PaymentMethodSheet extends ConsumerStatefulWidget {
     required String planTitle,
     required double amountUsd,
     required bool isAnnual,
-    String businessId = 'biz_active_user',
-    String businessName = 'Mi Negocio Turístico',
+    String businessId = '',
+    String businessName = '',
   }) {
     return showModalBottomSheet(
       context: context,
@@ -94,35 +96,32 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
     try {
       final gateway = ref.read(paymentGatewayProvider);
 
-      // 1. Crear la orden formal en Firestore
-      final order = await gateway.createOrder(
+      // El servidor calcula el precio y crea la sesión; el valor visual del plan
+      // nunca se envía como autoridad financiera.
+      final order = await gateway.createCheckoutSession(
         businessId: widget.businessId,
-        businessName: widget.businessName,
         planId: widget.planId,
-        planTitle: widget.planTitle,
-        amountUsd: widget.amountUsd,
         isAnnual: widget.isAnnual,
         methodType: _selectedMethod,
       );
 
-      // 2. Iniciar sesión de checkout seguro con el proveedor
-      final sessionOrder = await gateway.initiatePaymentSession(order: order);
-
       if (!mounted) return;
 
-      // 3. Abrir el checkout bancario seguro oficial
-      if (sessionOrder.checkoutUrl != null && sessionOrder.checkoutUrl!.isNotEmpty) {
-        final uri = Uri.parse(sessionOrder.checkoutUrl!);
-        try {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        } catch (_) {
-          debugPrint('No se pudo lanzar navegador externo para checkout');
-        }
+      final uri = Uri.parse(order.checkoutUrl!);
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        throw const PaymentGatewayException(
+          PaymentFailureReason.unavailable,
+          'Android no pudo abrir el checkout hospedado.',
+        );
+      }
 
-        if (mounted) {
-          Navigator.of(context).pop();
-          _showPaymentConfirmationDialog(sessionOrder);
-        }
+      if (mounted) {
+        Navigator.of(context).pop();
+        _showPaymentConfirmationDialog(order);
       }
     } catch (e) {
       if (mounted) {
@@ -168,7 +167,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
             Text(
-              'Hemos abierto el checkout seguro oficial de ${_selectedMethod.displayName}.',
+              'Abrimos la sesión hospedada que autorizó el servidor para ${_selectedMethod.displayName}.',
               style: GoogleFonts.inter(fontSize: 13, color: Colors.white70),
             ),
             const SizedBox(height: 14),
@@ -201,7 +200,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Destino de Liquidación: ${_selectedMethod.settlementBank}',
+                    'Estado: pendiente de confirmación bancaria',
                     style: GoogleFonts.inter(
                       fontSize: 11,
                       color: AppColors.jungleGreenLight,
@@ -220,7 +219,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Una vez completado en el portal bancario, tu membresía quedará activa automáticamente.',
+              'Completar el formulario no confirma el pago. La activación ocurrirá únicamente cuando el webhook bancario valide monto, moneda y orden.',
               style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white60),
             ),
           ],
@@ -253,12 +252,27 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
       '• Monto: *\$${widget.amountUsd.toInt()} USD*\n\n'
       '¿Podemos coordinar los detalles?',
     );
-    final waUri = Uri.parse('https://wa.me/50588883333?text=$msg');
+    const supportPhone = String.fromEnvironment(
+      'BAQUEANO_SUPPORT_WHATSAPP',
+    );
+    if (supportPhone.isEmpty) {
+      if (mounted) {
+        CustomToast.show(
+          context,
+          message: 'La asistencia comercial aún no está configurada.',
+        );
+      }
+      return;
+    }
+    final waUri = Uri.parse('https://wa.me/$supportPhone?text=$msg');
     try {
       await launchUrl(waUri, mode: LaunchMode.externalApplication);
     } catch (_) {
       if (mounted) {
-        CustomToast.show(context, message: 'Escríbenos a negocios@baqueano.com');
+        CustomToast.show(
+          context,
+          message: 'No fue posible abrir el canal de asistencia.',
+        );
       }
     }
   }
@@ -373,7 +387,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '\$${widget.amountUsd.toInt()} USD',
+                        'Estimado: \$${widget.amountUsd.toInt()} USD',
                           style: GoogleFonts.montserrat(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
@@ -396,7 +410,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
               const SizedBox(height: 18),
 
               Text(
-                'Selecciona tu canal bancario de preferencia:',
+                'Solicita un canal; el servidor confirmará su disponibilidad:',
                 style: GoogleFonts.inter(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -441,7 +455,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Baqueano no almacena números de tarjeta ni CVV. Tu pago es cifrado por la entidad bancaria.',
+                      'Baqueano no recibe números de tarjeta ni CVV. El precio definitivo y el canal disponible se validan en el servidor.',
                       style: GoogleFonts.inter(
                         fontSize: 10.5,
                         color: Colors.white54,

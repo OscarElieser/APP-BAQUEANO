@@ -1,241 +1,199 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — PASARELA CENTRAL DE PAGOS (PAYMENT GATEWAY)
+// BAQUEANO — CLIENTE DE ÓRDENES DE PAGO AUTORIZADAS POR BACKEND
 // ============================================================================
 //
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Centralizar y desacoplar la orquestación de pagos de planes y membresías
-//   comerciales para el ecosistema Baqueano.
-// - Evitar duplicar implementaciones en cada pantalla y permitir agregar o alternar
-//   entre adquirentes (CyberSource, BANPRO, BAC, LAFISE, Tilopay) de forma transparente.
-// - Garantizar que los fondos de las membresías se liquiden de forma auditable
-//   con destino preferente a la cuenta empresarial BANPRO de Baqueano.
+// POR QUÉ:
+// - Un APK controlado por el usuario nunca debe calcular precios definitivos,
+//   verificar transacciones ni activar beneficios comerciales.
+// - La aplicación solo puede solicitar una sesión y observar el resultado que
+//   publique un webhook bancario validado en infraestructura confiable.
 //
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Patrón Gateway + Provider Strategy: `PaymentGateway` delega la llamada al
-//   `PaymentProvider` correspondiente según el método seleccionado.
-// - Manejo de órdenes en Firestore (`payment_orders`), registro de comprobantes
-//   auditables (`payment_transactions`) y activación de membresías
-//   en la colección (`business_subscriptions`).
-// - Prevención estricta contra la persistencia de datos sensibles (PAN / CVV).
+// CÓMO:
+// - Una función callable recibe únicamente identificadores de negocio, plan,
+//   ciclo y método. Firebase adjunta Auth y App Check automáticamente.
+// - La respuesta se valida de forma estricta antes de abrir una URL HTTPS.
+// - Firestore se usa en modo solo lectura para observar el estado de la orden;
+//   no existe ninguna escritura financiera desde el cliente.
 //
-// 📦 3. QUÉ (WHAT / ENTREGABLES & SERVICIO EXPUESTO):
-// - `PaymentGateway`: Orquestador central de pagos.
-// - `paymentGatewayProvider`: Proveedor Riverpod global.
+// QUÉ:
+// - PaymentGateway, PaymentBackendClient y FirebasePaymentBackendClient.
+// - Errores tipificados y stream de seguimiento de órdenes.
 // ============================================================================
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'interfaces/payment_provider.dart';
 import 'models/payment_method_type.dart';
 import 'models/payment_order.dart';
-import 'models/payment_transaction.dart';
-import 'providers/bac_payment_provider.dart';
-import 'providers/banpro_payment_provider.dart';
-import 'providers/card_payment_provider.dart';
-import 'providers/lafise_payment_provider.dart';
+
+enum PaymentFailureReason {
+  unauthenticated,
+  invalidRequest,
+  unavailable,
+  rejected,
+  invalidBackendResponse,
+}
+
+class PaymentGatewayException implements Exception {
+  final PaymentFailureReason reason;
+  final String message;
+  final String? code;
+
+  const PaymentGatewayException(this.reason, this.message, {this.code});
+
+  @override
+  String toString() => message;
+}
+
+abstract interface class PaymentBackendClient {
+  Future<Map<String, dynamic>> createPaymentOrder(
+    Map<String, dynamic> request,
+  );
+}
+
+class FirebasePaymentBackendClient implements PaymentBackendClient {
+  final FirebaseFunctions _functions;
+
+  FirebasePaymentBackendClient({FirebaseFunctions? functions})
+      : _functions =
+            functions ??
+            FirebaseFunctions.instanceFor(
+              app: Firebase.app(),
+              region: 'us-central1',
+            );
+
+  @override
+  Future<Map<String, dynamic>> createPaymentOrder(
+    Map<String, dynamic> request,
+  ) async {
+    try {
+      final callable = _functions.httpsCallable(
+        'createPaymentOrder',
+        options: HttpsCallableOptions(timeout: const Duration(seconds: 20)),
+      );
+      final result = await callable.call<Map<String, dynamic>>(request);
+      return Map<String, dynamic>.from(result.data);
+    } on FirebaseFunctionsException catch (error) {
+      final reason = switch (error.code) {
+        'unauthenticated' => PaymentFailureReason.unauthenticated,
+        'invalid-argument' => PaymentFailureReason.invalidRequest,
+        'permission-denied' => PaymentFailureReason.rejected,
+        'failed-precondition' => PaymentFailureReason.unavailable,
+        _ => PaymentFailureReason.unavailable,
+      };
+      throw PaymentGatewayException(
+        reason,
+        error.message ?? 'No fue posible iniciar el pago.',
+        code: error.code,
+      );
+    } catch (_) {
+      throw const PaymentGatewayException(
+        PaymentFailureReason.unavailable,
+        'No fue posible conectar con el servicio de pagos. Intenta nuevamente.',
+      );
+    }
+  }
+}
 
 class PaymentGateway {
-  final Map<PaymentMethodType, PaymentProvider> _providers = {};
-  FirebaseFirestore? _firestoreInstance;
+  final PaymentBackendClient _backend;
+  final FirebaseAuth _auth;
+  final FirebaseFirestore? _firestoreOverride;
 
   PaymentGateway({
+    PaymentBackendClient? backend,
+    FirebaseAuth? auth,
     FirebaseFirestore? firestore,
-    List<PaymentProvider>? customProviders,
-  }) {
-    _firestoreInstance = firestore;
-    _initializeProviders(customProviders);
-  }
+  }) : _backend = backend ?? FirebasePaymentBackendClient(),
+       _auth = auth ?? FirebaseAuth.instance,
+       _firestoreOverride = firestore;
 
-  void _initializeProviders(List<PaymentProvider>? customProviders) {
-    if (customProviders != null && customProviders.isNotEmpty) {
-      for (final p in customProviders) {
-        _providers[p.methodType] = p;
-      }
-    } else {
-      // Proveedores bancarios oficiales de Nicaragua
-      _registerProvider(const CardPaymentProvider());
-      _registerProvider(const BanproPaymentProvider());
-      _registerProvider(const BacPaymentProvider());
-      _registerProvider(const LafisePaymentProvider());
-    }
-  }
+  FirebaseFirestore get _firestore =>
+      _firestoreOverride ??
+      FirebaseFirestore.instanceFor(
+        app: Firebase.app(),
+        databaseId: 'appbaqueano',
+      );
 
-  void _registerProvider(PaymentProvider provider) {
-    _providers[provider.methodType] = provider;
-  }
-
-  FirebaseFirestore? get _firestore {
-    if (_firestoreInstance != null) return _firestoreInstance;
-    try {
-      if (Firebase.apps.isNotEmpty) {
-        _firestoreInstance = FirebaseFirestore.instanceFor(
-          app: Firebase.app(),
-          databaseId: 'appbaqueano',
-        );
-      }
-    } catch (_) {
-      try {
-        _firestoreInstance = FirebaseFirestore.instance;
-      } catch (_) {
-        _firestoreInstance = null;
-      }
-    }
-    return _firestoreInstance;
-  }
-
-  /// Retorna los métodos de pago disponibles y habilitados para producción
-  List<PaymentMethodType> getAvailablePaymentMethods() {
-    return _providers.keys.where((type) {
-      final provider = _providers[type];
-      return provider != null && provider.isReadyForProduction;
-    }).toList();
-  }
-
-  /// Obtiene el proveedor específico asociado al método
-  PaymentProvider getProvider(PaymentMethodType type) {
-    final provider = _providers[type];
-    if (provider == null) {
-      throw StateError('El proveedor para ${type.displayName} no está registrado.');
-    }
-    return provider;
-  }
-
-  /// Crea e inicializa una nueva orden de pago para un negocio
-  Future<PaymentOrder> createOrder({
+  Future<PaymentOrder> createCheckoutSession({
     required String businessId,
-    required String businessName,
     required String planId,
-    required String planTitle,
-    required double amountUsd,
     required bool isAnnual,
     required PaymentMethodType methodType,
-    Map<String, dynamic>? additionalMetadata,
   }) async {
-    const exchangeRate = 36.65; // Tasa de cambio oficial de referencia BCN / mercado
-    final amountNio = amountUsd * exchangeRate;
-    final orderId = 'ORD-${DateTime.now().millisecondsSinceEpoch}';
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw const PaymentGatewayException(
+        PaymentFailureReason.unauthenticated,
+        'Inicia sesión para administrar pagos de tu negocio.',
+      );
+    }
 
-    final order = PaymentOrder(
-      orderId: orderId,
-      businessId: businessId,
-      businessName: businessName,
-      planId: planId,
-      planTitle: planTitle,
-      amountUsd: amountUsd,
-      amountNio: amountNio,
-      exchangeRate: exchangeRate,
-      currency: 'USD',
-      isAnnual: isAnnual,
-      methodType: methodType,
-      status: PaymentOrderStatus.pending,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      metadata: additionalMetadata ?? {},
+    final cleanBusinessId = businessId.trim();
+    final cleanPlanId = planId.trim();
+    if (cleanBusinessId.isEmpty || cleanPlanId.isEmpty) {
+      throw const PaymentGatewayException(
+        PaymentFailureReason.invalidRequest,
+        'El negocio y el plan deben estar identificados.',
+      );
+    }
+
+    final response = await _backend.createPaymentOrder({
+      'businessId': cleanBusinessId,
+      'planId': cleanPlanId,
+      'isAnnual': isAnnual,
+      'methodType': methodType.id,
+    });
+
+    final rawOrder = response['order'];
+    if (rawOrder is! Map) {
+      throw const PaymentGatewayException(
+        PaymentFailureReason.invalidBackendResponse,
+        'El servidor devolvió una orden incompleta.',
+      );
+    }
+
+    final order = PaymentOrder.fromMap(
+      Map<String, dynamic>.from(rawOrder),
+      rawOrder['orderId']?.toString() ?? '',
     );
+    final checkoutUri = Uri.tryParse(order.checkoutUrl ?? '');
 
-    // Persistir intención de orden en Firestore
-    try {
-      final db = _firestore;
-      if (db != null) {
-        await db.collection('payment_orders').doc(orderId).set(order.toMap());
-      }
-    } catch (e) {
-      debugPrint('⚠️ [PaymentGateway] No se pudo escribir orden en Firestore (modo offline/test): $e');
+    if (order.orderId.isEmpty ||
+        order.businessId != cleanBusinessId ||
+        order.planId != cleanPlanId ||
+        order.createdByUid != user.uid ||
+        !order.amountUsd.isFinite ||
+        order.amountUsd <= 0 ||
+        checkoutUri == null ||
+        checkoutUri.scheme != 'https' ||
+        checkoutUri.host.isEmpty) {
+      throw const PaymentGatewayException(
+        PaymentFailureReason.invalidBackendResponse,
+        'La sesión recibida no superó la validación de seguridad.',
+      );
     }
 
     return order;
   }
 
-  /// Inicia la sesión segura de pago con el banco correspondiente
-  Future<PaymentOrder> initiatePaymentSession({
-    required PaymentOrder order,
-  }) async {
-    final provider = getProvider(order.methodType);
-    final enrichedOrder = await provider.createPaymentSession(order: order);
-
-    // Actualizar estado en Firestore
-    try {
-      final db = _firestore;
-      if (db != null) {
-        await db.collection('payment_orders').doc(order.orderId).update({
-          'status': enrichedOrder.status.name,
-          'checkoutUrl': enrichedOrder.checkoutUrl,
-          'updatedAt': DateTime.now().toIso8601String(),
-          'metadata': enrichedOrder.metadata,
+  Stream<PaymentOrder?> watchOrder(String orderId) {
+    final cleanOrderId = orderId.trim();
+    if (cleanOrderId.isEmpty) {
+      return Stream<PaymentOrder?>.value(null);
+    }
+    return _firestore
+        .collection('payment_orders')
+        .doc(cleanOrderId)
+        .snapshots()
+        .map((snapshot) {
+          final data = snapshot.data();
+          if (!snapshot.exists || data == null) return null;
+          return PaymentOrder.fromMap(data, snapshot.id);
         });
-      }
-    } catch (e) {
-      debugPrint('⚠️ [PaymentGateway] Error al actualizar estado de orden: $e');
-    }
-
-    return enrichedOrder;
-  }
-
-  /// Procesa y confirma la transacción bancaria, registrando el comprobante
-  /// y activando la membresía del negocio en `business_subscriptions`
-  Future<PaymentTransaction> confirmPaymentAndActivateMembership({
-    required PaymentOrder order,
-    required Map<String, dynamic> rawBankResult,
-  }) async {
-    final provider = getProvider(order.methodType);
-    final transaction = await provider.verifyTransaction(
-      order: order,
-      rawResult: rawBankResult,
-    );
-
-    if (transaction.isApproved) {
-      final now = DateTime.now();
-      final expiry = order.isAnnual
-          ? now.add(const Duration(days: 365))
-          : now.add(const Duration(days: 30));
-
-      // 1. Guardar transacción auditable
-      try {
-        final db = _firestore;
-        if (db != null) {
-          await db.collection('payment_transactions').doc(transaction.transactionId).set(transaction.toMap());
-
-          // 2. Actualizar estado de orden
-          await db.collection('payment_orders').doc(order.orderId).update({
-            'status': PaymentOrderStatus.paid.name,
-            'updatedAt': now.toIso8601String(),
-            'transactionId': transaction.transactionId,
-          });
-
-          // 3. Activar membresía en `business_subscriptions`
-          await db.collection('business_subscriptions').doc(order.businessId).set({
-            'businessId': order.businessId,
-            'businessName': order.businessName,
-            'planId': order.planId,
-            'planTitle': order.planTitle,
-            'status': 'active',
-            'isAnnual': order.isAnnual,
-            'startDate': now.toIso8601String(),
-            'expiryDate': expiry.toIso8601String(),
-            'lastPaymentTransactionId': transaction.transactionId,
-            'paymentMethodUsed': transaction.maskedPaymentSummary,
-            'settlementBank': provider.settlementDestination,
-            'updatedAt': now.toIso8601String(),
-          }, SetOptions(merge: true));
-
-          // 4. Actualizar estado de verificación en el documento del negocio
-          if (order.businessId.isNotEmpty) {
-            await db.collection('businesses').doc(order.businessId).set({
-              'verified': true,
-              'membershipPlan': order.planId,
-              'membershipExpiry': expiry.toIso8601String(),
-            }, SetOptions(merge: true));
-          }
-        }
-      } catch (e) {
-        debugPrint('⚠️ [PaymentGateway] Error al persistir activación de membresía: $e');
-      }
-    }
-
-    return transaction;
   }
 }
 

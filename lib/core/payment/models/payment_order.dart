@@ -1,22 +1,22 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — MODELO DE ORDEN DE PAGO (PAYMENT ORDER)
+// BAQUEANO — MODELO INMUTABLE DE ORDEN EMITIDA POR EL SERVIDOR
 // ============================================================================
 //
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Representar la intención de compra formal y el contrato fiscal/financiero
-//   antes de derivar al usuario al checkout seguro bancario.
-// - Garantizar trazabilidad completa en Firestore de cada transacción iniciada,
-//   evitando inconsistencias y permitiendo auditoría y conciliación contable.
+// POR QUÉ:
+// - La interfaz necesita mostrar y seguir una orden sin asumir que el dispositivo
+//   tiene autoridad sobre precio, moneda, identidad o estado financiero.
 //
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Inmutable data class con serialización bidireccional a Map/Firestore.
-// - Conversión monetaria precisa entre USD y NIO usando tasa de cambio de referencia.
-// - Soporte para planes mensuales y anuales con sus respectivos identificadores.
+// CÓMO:
+// - Todos los campos financieros se deserializan desde la respuesta firmada por
+//   la frontera backend y usan valores conservadores ante datos ausentes.
+// - Las fechas aceptan Timestamp, ISO-8601 o epoch para interoperar con callable
+//   functions y snapshots Firestore sin cálculos en el hilo de interfaz.
 //
-// 📦 3. QUÉ (WHAT / ENTREGABLES & MODELO EXPUESTO):
-// - `PaymentOrder`: Entidad central de órdenes de facturación.
-// - `PaymentOrderStatus`: Enum de estados de vida de la orden.
+// QUÉ:
+// - PaymentOrderStatus y PaymentOrder con serialización de solo lectura.
 // ============================================================================
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'payment_method_type.dart';
 
@@ -27,9 +27,10 @@ enum PaymentOrderStatus {
   failed,
   cancelled;
 
-  static PaymentOrderStatus fromString(String val) {
+  static PaymentOrderStatus fromString(Object? value) {
+    final normalized = value?.toString().toLowerCase() ?? '';
     return PaymentOrderStatus.values.firstWhere(
-      (e) => e.name.toLowerCase() == val.toLowerCase(),
+      (status) => status.name == normalized,
       orElse: () => PaymentOrderStatus.pending,
     );
   }
@@ -37,6 +38,7 @@ enum PaymentOrderStatus {
 
 class PaymentOrder {
   final String orderId;
+  final String createdByUid;
   final String businessId;
   final String businessName;
   final String planId;
@@ -55,64 +57,28 @@ class PaymentOrder {
 
   const PaymentOrder({
     required this.orderId,
+    required this.createdByUid,
     required this.businessId,
     required this.businessName,
     required this.planId,
     required this.planTitle,
     required this.amountUsd,
     required this.amountNio,
-    this.exchangeRate = 36.65,
-    this.currency = 'USD',
-    this.isAnnual = false,
+    required this.exchangeRate,
+    required this.currency,
+    required this.isAnnual,
     required this.methodType,
-    this.status = PaymentOrderStatus.pending,
+    required this.status,
     this.checkoutUrl,
     required this.createdAt,
     required this.updatedAt,
     this.metadata = const {},
   });
 
-  PaymentOrder copyWith({
-    String? orderId,
-    String? businessId,
-    String? businessName,
-    String? planId,
-    String? planTitle,
-    double? amountUsd,
-    double? amountNio,
-    double? exchangeRate,
-    String? currency,
-    bool? isAnnual,
-    PaymentMethodType? methodType,
-    PaymentOrderStatus? status,
-    String? checkoutUrl,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    Map<String, dynamic>? metadata,
-  }) {
-    return PaymentOrder(
-      orderId: orderId ?? this.orderId,
-      businessId: businessId ?? this.businessId,
-      businessName: businessName ?? this.businessName,
-      planId: planId ?? this.planId,
-      planTitle: planTitle ?? this.planTitle,
-      amountUsd: amountUsd ?? this.amountUsd,
-      amountNio: amountNio ?? this.amountNio,
-      exchangeRate: exchangeRate ?? this.exchangeRate,
-      currency: currency ?? this.currency,
-      isAnnual: isAnnual ?? this.isAnnual,
-      methodType: methodType ?? this.methodType,
-      status: status ?? this.status,
-      checkoutUrl: checkoutUrl ?? this.checkoutUrl,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      metadata: metadata ?? this.metadata,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
       'orderId': orderId,
+      'createdByUid': createdByUid,
       'businessId': businessId,
       'businessName': businessName,
       'planId': planId,
@@ -132,31 +98,49 @@ class PaymentOrder {
   }
 
   factory PaymentOrder.fromMap(Map<String, dynamic> map, String id) {
-    final usd = (map['amountUsd'] as num?)?.toDouble() ?? 0.0;
-    final rate = (map['exchangeRate'] as num?)?.toDouble() ?? 36.65;
-    final nio = (map['amountNio'] as num?)?.toDouble() ?? (usd * rate);
+    final amountUsd = _finiteDouble(map['amountUsd']);
+    final exchangeRate = _finiteDouble(map['exchangeRate']);
+    final amountNio = _finiteDouble(map['amountNio']);
 
     return PaymentOrder(
-      orderId: id.isNotEmpty ? id : (map['orderId'] ?? ''),
-      businessId: map['businessId'] ?? '',
-      businessName: map['businessName'] ?? 'Negocio Turístico Baqueano',
-      planId: map['planId'] ?? 'aliado_verificado',
-      planTitle: map['planTitle'] ?? 'Plan Aliado Verificado',
-      amountUsd: usd,
-      amountNio: nio,
-      exchangeRate: rate,
-      currency: map['currency'] ?? 'USD',
-      isAnnual: map['isAnnual'] ?? false,
-      methodType: PaymentMethodType.fromId(map['methodType'] ?? 'card'),
-      status: PaymentOrderStatus.fromString(map['status'] ?? 'pending'),
-      checkoutUrl: map['checkoutUrl'],
-      createdAt: map['createdAt'] != null
-          ? DateTime.tryParse(map['createdAt']) ?? DateTime.now()
-          : DateTime.now(),
-      updatedAt: map['updatedAt'] != null
-          ? DateTime.tryParse(map['updatedAt']) ?? DateTime.now()
-          : DateTime.now(),
-      metadata: Map<String, dynamic>.from(map['metadata'] ?? {}),
+      orderId: id.isNotEmpty ? id : map['orderId']?.toString() ?? '',
+      createdByUid: map['createdByUid']?.toString() ?? '',
+      businessId: map['businessId']?.toString() ?? '',
+      businessName: map['businessName']?.toString() ?? '',
+      planId: map['planId']?.toString() ?? '',
+      planTitle: map['planTitle']?.toString() ?? '',
+      amountUsd: amountUsd,
+      amountNio: amountNio,
+      exchangeRate: exchangeRate,
+      currency: map['currency']?.toString() ?? '',
+      isAnnual: map['isAnnual'] == true,
+      methodType: PaymentMethodType.fromId(
+        map['methodType']?.toString() ?? '',
+      ),
+      status: PaymentOrderStatus.fromString(map['status']),
+      checkoutUrl: map['checkoutUrl']?.toString(),
+      createdAt: _dateTime(map['createdAt']),
+      updatedAt: _dateTime(map['updatedAt']),
+      metadata: map['metadata'] is Map
+          ? Map<String, dynamic>.from(map['metadata'] as Map)
+          : const {},
     );
+  }
+
+  static double _finiteDouble(Object? value) {
+    final parsed = value is num
+        ? value.toDouble()
+        : double.tryParse(value?.toString() ?? '') ?? 0;
+    return parsed.isFinite ? parsed : 0;
+  }
+
+  static DateTime _dateTime(Object? value) {
+    if (value is Timestamp) return value.toDate();
+    if (value is DateTime) return value;
+    if (value is int) {
+      return DateTime.fromMillisecondsSinceEpoch(value, isUtc: true).toLocal();
+    }
+    return DateTime.tryParse(value?.toString() ?? '') ??
+        DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
   }
 }

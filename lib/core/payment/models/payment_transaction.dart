@@ -1,91 +1,83 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — MODELO DE TRANSACCIÓN SEGURA (PCI-DSS CUMPLE)
+// BAQUEANO — VISTA DE TRANSACCIÓN CONFIRMADA POR WEBHOOK
 // ============================================================================
 //
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Registrar el comprobante de confirmación de pago emitido por el procesador bancario.
-// - Cumplir estrictamente con la normativa internacional PCI-DSS y las reglas del
-//   proyecto: QUEDA TERMINANTEMENTE PROHIBIDO almacenar número completo de tarjeta (PAN),
-//   CVV o fecha de vencimiento en Firebase o en el almacenamiento local de Baqueano.
+// POR QUÉ:
+// - Una transacción solo existe después de la confirmación bancaria procesada por
+//   el servidor; el cliente necesita una representación segura y no un verificador.
 //
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Contiene únicamente metadatos no sensibles provistos por la pasarela:
-//   `paymentId`, `transactionId`, `status`, `brand`, `last4`, monto y marca temporal.
-// - Formateo amigable de comprobante para el usuario final (ej. "Visa •••• 4587").
+// CÓMO:
+// - El modelo acepta únicamente metadatos no sensibles y usa estado pendiente si
+//   el backend no envía una condición reconocida.
+// - No contiene métodos que aprueben pagos ni payloads arbitrarios del proveedor.
 //
-// 📦 3. QUÉ (WHAT / ENTREGABLES & MODELO EXPUESTO):
-// - `PaymentTransaction`: Registro auditable de transacción aprobada o procesada.
+// QUÉ:
+// - PaymentTransaction para lectura de comprobantes ya conciliados.
 // ============================================================================
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PaymentTransaction {
   final String transactionId;
   final String orderId;
-  final String providerId; // 'card', 'banpro', 'bac', 'lafise'
-  final String status; // 'approved', 'declined', 'pending_confirmation'
-  final String cardBrand; // 'Visa', 'Mastercard', 'N/A'
-  final String last4; // '4587', '0000', etc.
+  final String createdByUid;
+  final String providerId;
+  final String status;
+  final String cardBrand;
+  final String last4;
   final double amount;
   final String currency;
   final DateTime timestamp;
-  final String? authCode;
-  final Map<String, dynamic> providerPayload;
+  final String? authorizationReference;
 
   const PaymentTransaction({
     required this.transactionId,
     required this.orderId,
+    required this.createdByUid,
     required this.providerId,
     required this.status,
-    this.cardBrand = 'N/A',
-    this.last4 = '••••',
+    this.cardBrand = '',
+    this.last4 = '',
     required this.amount,
-    this.currency = 'USD',
+    required this.currency,
     required this.timestamp,
-    this.authCode,
-    this.providerPayload = const {},
+    this.authorizationReference,
   });
 
-  /// Retorna un identificador legible y seguro de la tarjeta o método utilizado.
+  bool get isApprovedByBackend => status == 'approved';
+
   String get maskedPaymentSummary {
-    if (cardBrand != 'N/A' && last4 != '••••') {
-      return '$cardBrand •••• $last4';
+    final safeLast4 = RegExp(r'^\d{4}$').hasMatch(last4) ? last4 : '';
+    if (cardBrand.isNotEmpty && safeLast4.isNotEmpty) {
+      return '$cardBrand •••• $safeLast4';
     }
     return providerId.toUpperCase();
   }
 
-  bool get isApproved => status.toLowerCase() == 'approved';
-
-  Map<String, dynamic> toMap() {
-    return {
-      'transactionId': transactionId,
-      'orderId': orderId,
-      'providerId': providerId,
-      'status': status,
-      'cardBrand': cardBrand,
-      'last4': last4,
-      'amount': amount,
-      'currency': currency,
-      'timestamp': timestamp.toIso8601String(),
-      'authCode': authCode,
-      // Se garantiza que providerPayload nunca contenga PAN ni CVV
-      'providerPayload': providerPayload,
-    };
-  }
-
   factory PaymentTransaction.fromMap(Map<String, dynamic> map, String id) {
+    final rawAmount = map['amount'];
+    final amount = rawAmount is num
+        ? rawAmount.toDouble()
+        : double.tryParse(rawAmount?.toString() ?? '') ?? 0;
+    final rawTimestamp = map['timestamp'];
+
     return PaymentTransaction(
-      transactionId: id.isNotEmpty ? id : (map['transactionId'] ?? ''),
-      orderId: map['orderId'] ?? '',
-      providerId: map['providerId'] ?? 'card',
-      status: map['status'] ?? 'approved',
-      cardBrand: map['cardBrand'] ?? 'N/A',
-      last4: map['last4'] ?? '••••',
-      amount: (map['amount'] as num?)?.toDouble() ?? 0.0,
-      currency: map['currency'] ?? 'USD',
-      timestamp: map['timestamp'] != null
-          ? DateTime.tryParse(map['timestamp']) ?? DateTime.now()
-          : DateTime.now(),
-      authCode: map['authCode'],
-      providerPayload: Map<String, dynamic>.from(map['providerPayload'] ?? {}),
+      transactionId: id.isNotEmpty
+          ? id
+          : map['transactionId']?.toString() ?? '',
+      orderId: map['orderId']?.toString() ?? '',
+      createdByUid: map['createdByUid']?.toString() ?? '',
+      providerId: map['providerId']?.toString() ?? '',
+      status: map['status']?.toString().toLowerCase() ?? 'pending',
+      cardBrand: map['cardBrand']?.toString() ?? '',
+      last4: map['last4']?.toString() ?? '',
+      amount: amount.isFinite ? amount : 0,
+      currency: map['currency']?.toString() ?? '',
+      timestamp: rawTimestamp is Timestamp
+          ? rawTimestamp.toDate()
+          : DateTime.tryParse(rawTimestamp?.toString() ?? '') ??
+                DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
+      authorizationReference: map['authorizationReference']?.toString(),
     );
   }
 }
