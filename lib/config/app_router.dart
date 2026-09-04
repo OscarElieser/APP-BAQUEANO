@@ -46,6 +46,8 @@ import '../features/monetization/screens/business_pricing_screen.dart';
 import '../features/notifications/screens/notifications_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
 import '../features/country_history/screens/country_history_screen.dart';
+import '../features/directory/screens/national_directory_screen.dart';
+import '../features/directory/screens/place_detail_screen.dart';
 import '../features/search/screens/universal_search_screen.dart';
 import '../features/splash/screens/splash_screen.dart';
 
@@ -226,6 +228,22 @@ class AppRouter {
       GoRoute(
         path: '/afiliacion',
         redirect: (_, __) => '/planes-negocios',
+      ),
+      // Directorio Nacional — Descubre Nicaragua
+      GoRoute(
+        path: '/descubre-nicaragua',
+        builder: (context, state) => const NationalDirectoryScreen(),
+      ),
+      GoRoute(
+        path: '/descubre-nicaragua/:placeId',
+        builder: (context, state) {
+          final placeId = state.pathParameters['placeId'] ?? '';
+          return PlaceDetailScreen(placeId: placeId);
+        },
+      ),
+      GoRoute(
+        path: '/directorio',
+        redirect: (_, __) => '/descubre-nicaragua',
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

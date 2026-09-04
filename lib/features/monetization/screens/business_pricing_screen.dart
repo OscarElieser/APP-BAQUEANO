@@ -33,6 +33,7 @@ import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
+import '../widgets/payment_method_sheet.dart';
 
 class BusinessPricingScreen extends StatefulWidget {
   const BusinessPricingScreen({super.key});
@@ -46,8 +47,26 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
   double _estimatedClients = 3.0;
   final double _averageTicketUsd = 30.0;
 
-  Future<void> _subscribePlan(String planName, String priceUsd) async {
+  Future<void> _subscribePlan(
+    String planName,
+    String priceUsd, {
+    double amountUsd = 0.0,
+    String planId = 'free',
+  }) async {
     HapticFeedback.mediumImpact();
+
+    // Despacho de checkout seguro para planes de membresía comercial
+    if (amountUsd > 0.0) {
+      PaymentMethodSheet.show(
+        context,
+        planId: planId,
+        planTitle: planName,
+        amountUsd: amountUsd,
+        isAnnual: _isAnnual,
+      );
+      return;
+    }
+
     final billing = _isAnnual ? 'Facturación Anual (20% descuento)' : 'Facturación Mensual';
     final msg = Uri.encodeComponent(
       '🤝 *SOLICITUD DE AFILIACIÓN COMERCIAL BAQUEANO*\n\n'
@@ -156,7 +175,12 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                   ],
                   buttonText: 'Elegir Plan Aliado',
                   isFeatured: true,
-                  onPressed: () => _subscribePlan('Plan Aliado Verificado', '\$${monthlyVerified.toInt()} USD/mes'),
+                  onPressed: () => _subscribePlan(
+                    'Plan Aliado Verificado',
+                    '\$${monthlyVerified.toInt()} USD/mes',
+                    amountUsd: monthlyVerified,
+                    planId: 'aliado_verificado',
+                  ),
                 );
 
                 final plan3 = _buildPlanCard(
@@ -176,7 +200,12 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                   buttonText: 'Elegir Alianza Destacada',
                   isFeatured: false,
                   accentColor: AppColors.terracottaLight,
-                  onPressed: () => _subscribePlan('Plan Alianza Destacada', '\$${monthlyFeatured.toInt()} USD/mes'),
+                  onPressed: () => _subscribePlan(
+                    'Plan Alianza Destacada',
+                    '\$${monthlyFeatured.toInt()} USD/mes',
+                    amountUsd: monthlyFeatured,
+                    planId: 'alianza_destacada',
+                  ),
                 );
 
                 if (isNarrow) {

@@ -287,6 +287,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
                   // Menu Links
                   _buildNavLink(context, 'INICIO', '/home'),
+                  _buildNavLink(context, 'DESCUBRE NICARAGUA', '/descubre-nicaragua', isHighlight: true),
                   _buildExplorarDropdown(context),
                   _buildNavLink(context, 'HISTORIA', '/historia-mi-pais'),
                   _buildNavLink(context, 'MAPA MUNDO', '/mapa'),
@@ -665,6 +666,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
             _buildDrawerSectionTitle('NAVEGACIÓN PRINCIPAL'),
             _buildDrawerItem(context, '🏠', 'Inicio', '/home'),
+            _buildDrawerItem(context, '🇳🇮', 'Descubre Nicaragua', '/descubre-nicaragua', isGold: true),
             _buildDrawerItem(context, '📖', 'Historia de mi país', '/historia-mi-pais', isGold: true),
             _buildDrawerItem(context, '🧭', 'Descubrir Destinos', '/descubrir'),
             _buildDrawerItem(context, '🌍', 'Mapa Mundial & GPS', '/mapa'),

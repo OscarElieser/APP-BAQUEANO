@@ -1,0 +1,227 @@
+[
+  {
+    "categoryId": "museums",
+    "name": "Museos",
+    "description": "Museos nacionales, arqueológicos y comunitarios",
+    "icon": "museum",
+    "type": "culture",
+    "order": 1,
+    "active": true
+  },
+  {
+    "categoryId": "historical_sites",
+    "name": "Sitios Históricos & Patrimonio",
+    "description": "Fortalezas, ruinas coloniales y monumentos nacionales",
+    "icon": "fort",
+    "type": "culture",
+    "order": 2,
+    "active": true
+  },
+  {
+    "categoryId": "theaters_culture",
+    "name": "Teatros & Centros Culturales",
+    "description": "Casas de cultura, teatros y galerías de arte",
+    "icon": "theater_comedy",
+    "type": "culture",
+    "order": 3,
+    "active": true
+  },
+  {
+    "categoryId": "handicrafts",
+    "name": "Artesanías & Talleres Tradicionales",
+    "description": "Mercados de artesanías, alfarería y hamacas",
+    "icon": "brush",
+    "type": "culture",
+    "order": 4,
+    "active": true
+  },
+  {
+    "categoryId": "tourist_attractions",
+    "name": "Atracciones Turísticas & Miradores",
+    "description": "Volcanes, reservas naturales, cascadas y miradores",
+    "icon": "landscape",
+    "type": "culture",
+    "order": 5,
+    "active": true
+  },
+  {
+    "categoryId": "shopping_centers",
+    "name": "Centros & Plazas Comerciales",
+    "description": "Malls, plazas y áreas de compras",
+    "icon": "shopping_bag",
+    "type": "commerce",
+    "order": 6,
+    "active": true
+  },
+  {
+    "categoryId": "traditional_markets",
+    "name": "Mercados Populares & Municipales",
+    "description": "Mercados tradicionales con frutas, verduras y artesanías",
+    "icon": "storefront",
+    "type": "commerce",
+    "order": 7,
+    "active": true
+  },
+  {
+    "categoryId": "supermarkets",
+    "name": "Supermercados & Tiendas",
+    "description": "Supermercados, pulperías surtidas y abarrotes",
+    "icon": "shopping_cart",
+    "type": "commerce",
+    "order": 8,
+    "active": true
+  },
+  {
+    "categoryId": "banks_atms",
+    "name": "Bancos & Cajeros Automáticos (ATM)",
+    "description": "Sucursales bancarias BANPRO, BAC, LAFISE y cajeros",
+    "icon": "account_balance",
+    "type": "commerce",
+    "order": 9,
+    "active": true
+  },
+  {
+    "categoryId": "pharmacies",
+    "name": "Farmacias",
+    "description": "Farmacias con atención diurna y 24 horas",
+    "icon": "medication",
+    "type": "commerce",
+    "order": 10,
+    "active": true
+  },
+  {
+    "categoryId": "restaurants",
+    "name": "Restaurantes & Gastronomía",
+    "description": "Comida típica nicaragüense, asados y cocina fusión",
+    "icon": "restaurant",
+    "type": "entertainment",
+    "order": 11,
+    "active": true
+  },
+  {
+    "categoryId": "cafes",
+    "name": "Cafeterías & Reposterías",
+    "description": "Café de estricta altura nicaragüense y panadería artesanal",
+    "icon": "local_cafe",
+    "type": "entertainment",
+    "order": 12,
+    "active": true
+  },
+  {
+    "categoryId": "nightlife",
+    "name": "Bares & Discotecas",
+    "description": "Vida nocturna, música en vivo y terrazas bohemias",
+    "icon": "nightlife",
+    "type": "entertainment",
+    "order": 13,
+    "active": true
+  },
+  {
+    "categoryId": "parks_recreation",
+    "name": "Parques & Centros Recreativos",
+    "description": "Parques centrales, áreas infantiles y paseos lacustres",
+    "icon": "park",
+    "type": "entertainment",
+    "order": 14,
+    "active": true
+  },
+  {
+    "categoryId": "hospitals",
+    "name": "Hospitales & Especialidades",
+    "description": "Hospitales de referencia nacional y privados",
+    "icon": "local_hospital",
+    "type": "health",
+    "order": 15,
+    "active": true
+  },
+  {
+    "categoryId": "health_centers",
+    "name": "Centros & Puestos de Salud",
+    "description": "Atención primaria comunitaria y policlínicos",
+    "icon": "health_and_safety",
+    "type": "health",
+    "order": 16,
+    "active": true
+  },
+  {
+    "categoryId": "clinical_laboratories",
+    "name": "Laboratorios & Clínicas",
+    "description": "Diagnóstico clínico, tomas de muestras y ultrasonidos",
+    "icon": "biotech",
+    "type": "health",
+    "order": 17,
+    "active": true
+  },
+  {
+    "categoryId": "police",
+    "name": "Policía Nacional",
+    "description": "Delegaciones, distritos policiales y auxilio 118",
+    "icon": "local_police",
+    "type": "emergency",
+    "order": 18,
+    "active": true
+  },
+  {
+    "categoryId": "firefighters",
+    "name": "Bomberos de Nicaragua",
+    "description": "Estaciones de bomberos unificados y rescate 115",
+    "icon": "fire_truck",
+    "type": "emergency",
+    "order": 19,
+    "active": true
+  },
+  {
+    "categoryId": "red_cross",
+    "name": "Cruz Blanca / Cruz Roja",
+    "description": "Puestos de socorro, ambulancias y emergencias 128",
+    "icon": "emergency",
+    "type": "emergency",
+    "order": 20,
+    "active": true
+  },
+  {
+    "categoryId": "emergency_hospitals",
+    "name": "Hospitales con Emergencia 24H",
+    "description": "Salas de urgencia médicas con atención inmediata continua",
+    "icon": "emergency",
+    "type": "emergency",
+    "order": 21,
+    "active": true
+  },
+  {
+    "categoryId": "bus_terminals",
+    "name": "Terminales de Buses Interlocales",
+    "description": "Terminales de transporte terrestre hacia departamentos",
+    "icon": "directions_bus",
+    "type": "transport",
+    "order": 22,
+    "active": true
+  },
+  {
+    "categoryId": "airports",
+    "name": "Aeropuertos & Aeródromos",
+    "description": "Aeropuerto Internacional y pistas locales nacionales",
+    "icon": "flight",
+    "type": "transport",
+    "order": 23,
+    "active": true
+  },
+  {
+    "categoryId": "ports_ferries",
+    "name": "Puertos & Ferries Lacustres",
+    "description": "Terminales portuarias, ferris a Ometepe y transporte fluvial",
+    "icon": "directions_boat",
+    "type": "transport",
+    "order": 24,
+    "active": true
+  },
+  {
+    "categoryId": "gas_stations",
+    "name": "Estaciones de Servicio",
+    "description": "Combustible, tiendas de conveniencia y asistencia en ruta",
+    "icon": "local_gas_station",
+    "type": "transport",
+    "order": 25,
+    "active": true
+  }
+]

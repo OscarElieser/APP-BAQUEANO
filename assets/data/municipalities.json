@@ -1,0 +1,70 @@
+[
+  {"id": "managua_centro", "departmentId": "managua", "name": "Managua", "latitude": 12.1364, "longitude": -86.2514},
+  {"id": "ciudad_sandino", "departmentId": "managua", "name": "Ciudad Sandino", "latitude": 12.1583, "longitude": -86.3444},
+  {"id": "tipitapa", "departmentId": "managua", "name": "Tipitapa", "latitude": 12.1978, "longitude": -86.0967},
+  {"id": "ticuantepe", "departmentId": "managua", "name": "Ticuantepe", "latitude": 12.0219, "longitude": -86.2047},
+  {"id": "el_crucero", "departmentId": "managua", "name": "El Crucero", "latitude": 11.9903, "longitude": -86.3097},
+
+  {"id": "leon_centro", "departmentId": "leon", "name": "León", "latitude": 12.4379, "longitude": -86.8780},
+  {"id": "poneloya", "departmentId": "leon", "name": "Poneloya / Las Peñitas", "latitude": 12.3739, "longitude": -87.0372},
+  {"id": "nagarote", "departmentId": "leon", "name": "Nagarote", "latitude": 12.2658, "longitude": -86.5647},
+  {"id": "la_paz_centro", "departmentId": "leon", "name": "La Paz Centro", "latitude": 12.3397, "longitude": -86.6744},
+
+  {"id": "granada_centro", "departmentId": "granada", "name": "Granada", "latitude": 11.9299, "longitude": -85.9560},
+  {"id": "dira", "departmentId": "granada", "name": "Diriá", "latitude": 11.8844, "longitude": -86.0569},
+  {"id": "diriomo", "departmentId": "granada", "name": "Diriomo", "latitude": 11.8767, "longitude": -86.0517},
+  {"id": "nandaime", "departmentId": "granada", "name": "Nandaime", "latitude": 11.7567, "longitude": -86.0528},
+
+  {"id": "masaya_centro", "departmentId": "masaya", "name": "Masaya", "latitude": 11.9744, "longitude": -86.0942},
+  {"id": "catarina", "departmentId": "masaya", "name": "Catarina", "latitude": 11.9128, "longitude": -86.0747},
+  {"id": "san_juan_oriente", "departmentId": "masaya", "name": "San Juan de Oriente", "latitude": 11.9056, "longitude": -86.0767},
+  {"id": "nindiri", "departmentId": "masaya", "name": "Nindirí", "latitude": 12.0044, "longitude": -86.1219},
+  {"id": "masatepe", "departmentId": "masaya", "name": "Masatepe", "latitude": 11.9197, "longitude": -86.1436},
+
+  {"id": "jinotepe", "departmentId": "carazo", "name": "Jinotepe", "latitude": 11.8500, "longitude": -86.2000},
+  {"id": "diriamba", "departmentId": "carazo", "name": "Diriamba", "latitude": 11.8581, "longitude": -86.2392},
+  {"id": "san_marcos", "departmentId": "carazo", "name": "San Marcos", "latitude": 11.9094, "longitude": -86.2039},
+
+  {"id": "rivas_centro", "departmentId": "rivas", "name": "Rivas", "latitude": 11.4372, "longitude": -85.8263},
+  {"id": "san_juan_sur", "departmentId": "rivas", "name": "San Juan del Sur", "latitude": 11.2529, "longitude": -85.8705},
+  {"id": "tola", "departmentId": "rivas", "name": "Tola", "latitude": 11.3853, "longitude": -85.9389},
+  {"id": "moyogalpa", "departmentId": "rivas", "name": "Moyogalpa (Ometepe)", "latitude": 11.5394, "longitude": -85.6975},
+  {"id": "altagracia", "departmentId": "rivas", "name": "Altagracia (Ometepe)", "latitude": 11.5661, "longitude": -85.5786},
+
+  {"id": "chinandega_centro", "departmentId": "chinandega", "name": "Chinandega", "latitude": 12.6294, "longitude": -87.1311},
+  {"id": "corinto", "departmentId": "chinandega", "name": "Corinto", "latitude": 12.4819, "longitude": -87.1733},
+  {"id": "el_viejo", "departmentId": "chinandega", "name": "El Viejo", "latitude": 12.6633, "longitude": -87.1689},
+
+  {"id": "esteli_centro", "departmentId": "esteli", "name": "Estelí", "latitude": 13.0919, "longitude": -86.3538},
+  {"id": "condega", "departmentId": "esteli", "name": "Condega", "latitude": 13.3550, "longitude": -86.3989},
+  {"id": "san_juan_limay", "departmentId": "esteli", "name": "San Juan de Limay", "latitude": 13.1764, "longitude": -86.6128},
+
+  {"id": "matagalpa_centro", "departmentId": "matagalpa", "name": "Matagalpa", "latitude": 12.9256, "longitude": -85.9178},
+  {"id": "sebaco", "departmentId": "matagalpa", "name": "Sébaco", "latitude": 12.8550, "longitude": -86.0964},
+  {"id": "san_ramon", "departmentId": "matagalpa", "name": "San Ramón", "latitude": 12.9228, "longitude": -85.8389},
+
+  {"id": "jinotega_centro", "departmentId": "jinotega", "name": "Jinotega", "latitude": 13.0988, "longitude": -86.0028},
+  {"id": "san_rafael_norte", "departmentId": "jinotega", "name": "San Rafael del Norte", "latitude": 13.2128, "longitude": -86.1108},
+
+  {"id": "ocotal", "departmentId": "nueva_segovia", "name": "Ocotal", "latitude": 13.6322, "longitude": -86.4753},
+  {"id": "jalapa", "departmentId": "nueva_segovia", "name": "Jalapa", "latitude": 13.9219, "longitude": -86.1264},
+
+  {"id": "somoto", "departmentId": "madriz", "name": "Somoto", "latitude": 13.4833, "longitude": -86.5833},
+  {"id": "totogalpa", "departmentId": "madriz", "name": "Totogalpa", "latitude": 13.5628, "longitude": -86.4919},
+
+  {"id": "boaco_centro", "departmentId": "boaco", "name": "Boaco", "latitude": 12.4722, "longitude": -85.6586},
+  {"id": "camoapa", "departmentId": "boaco", "name": "Camoapa", "latitude": 12.3839, "longitude": -85.5119},
+
+  {"id": "juigalpa", "departmentId": "chontales", "name": "Juigalpa", "latitude": 12.1063, "longitude": -85.3645},
+  {"id": "santo_tomas", "departmentId": "chontales", "name": "Santo Tomás", "latitude": 12.0694, "longitude": -85.0906},
+
+  {"id": "san_carlos", "departmentId": "rio_san_juan", "name": "San Carlos", "latitude": 11.1236, "longitude": -84.7780},
+  {"id": "el_castillo", "departmentId": "rio_san_juan", "name": "El Castillo", "latitude": 11.0183, "longitude": -84.3986},
+  {"id": "solentiname", "departmentId": "rio_san_juan", "name": "Archipiélago de Solentiname", "latitude": 11.1833, "longitude": -85.0000},
+
+  {"id": "bilwi", "departmentId": "raccn", "name": "Bilwi (Puerto Cabezas)", "latitude": 14.0351, "longitude": -83.3888},
+  {"id": "waspam", "departmentId": "raccn", "name": "Waspam", "latitude": 14.7419, "longitude": -83.9731},
+
+  {"id": "bluefields", "departmentId": "raccs", "name": "Bluefields", "latitude": 12.0137, "longitude": -83.7635},
+  {"id": "corn_island", "departmentId": "raccs", "name": "Corn Island (Isla del Maíz)", "latitude": 12.1667, "longitude": -83.0500}
+]

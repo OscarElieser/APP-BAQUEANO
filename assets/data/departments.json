@@ -1,0 +1,138 @@
+[
+  {
+    "id": "managua",
+    "name": "Managua",
+    "zone": "Pacífico",
+    "capital": "Managua",
+    "latitude": 12.1364,
+    "longitude": -86.2514
+  },
+  {
+    "id": "leon",
+    "name": "León",
+    "zone": "Pacífico",
+    "capital": "León",
+    "latitude": 12.4379,
+    "longitude": -86.8780
+  },
+  {
+    "id": "granada",
+    "name": "Granada",
+    "zone": "Pacífico",
+    "capital": "Granada",
+    "latitude": 11.9299,
+    "longitude": -85.9560
+  },
+  {
+    "id": "masaya",
+    "name": "Masaya",
+    "zone": "Pacífico",
+    "capital": "Masaya",
+    "latitude": 11.9744,
+    "longitude": -86.0942
+  },
+  {
+    "id": "carazo",
+    "name": "Carazo",
+    "zone": "Pacífico",
+    "capital": "Jinotepe",
+    "latitude": 11.8500,
+    "longitude": -86.2000
+  },
+  {
+    "id": "rivas",
+    "name": "Rivas",
+    "zone": "Pacífico",
+    "capital": "Rivas",
+    "latitude": 11.4372,
+    "longitude": -85.8263
+  },
+  {
+    "id": "chinandega",
+    "name": "Chinandega",
+    "zone": "Pacífico",
+    "capital": "Chinandega",
+    "latitude": 12.6294,
+    "longitude": -87.1311
+  },
+  {
+    "id": "esteli",
+    "name": "Estelí",
+    "zone": "Centro-Norte",
+    "capital": "Estelí",
+    "latitude": 13.0919,
+    "longitude": -86.3538
+  },
+  {
+    "id": "matagalpa",
+    "name": "Matagalpa",
+    "zone": "Centro-Norte",
+    "capital": "Matagalpa",
+    "latitude": 12.9256,
+    "longitude": -85.9178
+  },
+  {
+    "id": "jinotega",
+    "name": "Jinotega",
+    "zone": "Centro-Norte",
+    "capital": "Jinotega",
+    "latitude": 13.0988,
+    "longitude": -86.0028
+  },
+  {
+    "id": "nueva_segovia",
+    "name": "Nueva Segovia",
+    "zone": "Centro-Norte",
+    "capital": "Ocotal",
+    "latitude": 13.6322,
+    "longitude": -86.4753
+  },
+  {
+    "id": "madriz",
+    "name": "Madriz",
+    "zone": "Centro-Norte",
+    "capital": "Somoto",
+    "latitude": 13.4833,
+    "longitude": -86.5833
+  },
+  {
+    "id": "boaco",
+    "name": "Boaco",
+    "zone": "Centro",
+    "capital": "Boaco",
+    "latitude": 12.4722,
+    "longitude": -85.6586
+  },
+  {
+    "id": "chontales",
+    "name": "Chontales",
+    "zone": "Centro",
+    "capital": "Juigalpa",
+    "latitude": 12.1063,
+    "longitude": -85.3645
+  },
+  {
+    "id": "rio_san_juan",
+    "name": "Río San Juan",
+    "zone": "Sur",
+    "capital": "San Carlos",
+    "latitude": 11.1236,
+    "longitude": -84.7780
+  },
+  {
+    "id": "raccn",
+    "name": "Costa Caribe Norte",
+    "zone": "Caribe",
+    "capital": "Bilwi (Puerto Cabezas)",
+    "latitude": 14.0351,
+    "longitude": -83.3888
+  },
+  {
+    "id": "raccs",
+    "name": "Costa Caribe Sur",
+    "zone": "Caribe",
+    "capital": "Bluefields",
+    "latitude": 12.0137,
+    "longitude": -83.7635
+  }
+]
