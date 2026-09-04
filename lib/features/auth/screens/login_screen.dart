@@ -1,4 +1,4 @@
-﻿// ============================================================================
+// ============================================================================
 // ðŸ§­ BAQUEANO â€” ACCESO ANDROID CON GOOGLE Y FIREBASE
 // ============================================================================
 //
@@ -109,7 +109,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         _showErrorMessage(
           'No fue posible verificar tu cuenta [$errorCode]. Intentalo de nuevo.',
         );
-      }    } finally {
+      }
+    } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
@@ -158,6 +159,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         normalizedMessage.contains('developer_error') ||
         normalizedCode.contains('firebase-not-initialized');
   }
+
   void _showErrorMessage(String message) {
     if (!mounted) {
       return;
@@ -419,4 +421,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
-

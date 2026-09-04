@@ -1,4 +1,4 @@
-﻿// ============================================================================
+// ============================================================================
 // ðŸ§­ BAQUEANO ECOSYSTEM â€” PUNTO DE ENTRADA PRINCIPAL (MAIN.DART)
 // ============================================================================
 //
@@ -45,7 +45,8 @@ Future<void> main() async {
   );
 
   // Forzar Hybrid Composition para Google Maps en Android para evitar deadlocks de superficie en Samsung
-  final GoogleMapsFlutterPlatform mapsImplementation = GoogleMapsFlutterPlatform.instance;
+  final GoogleMapsFlutterPlatform mapsImplementation =
+      GoogleMapsFlutterPlatform.instance;
   if (mapsImplementation is GoogleMapsFlutterAndroid) {
     mapsImplementation.useAndroidViewSurface = true;
   }
@@ -75,23 +76,22 @@ Future<void> main() async {
             });
       } else {
         debugPrint('AppCheck debug omitido: usa APK release para RC fisico.');
-      }    } else {
-      FirebaseAppCheck.instance.activate(
-        androidProvider: AndroidProvider.playIntegrity,
-        appleProvider: AppleProvider.deviceCheck,
-      ).catchError((e) {
-        debugPrint('AppCheck notice (prod): $e');
-      });
+      }
+    } else {
+      FirebaseAppCheck.instance
+          .activate(
+            androidProvider: AndroidProvider.playIntegrity,
+            appleProvider: AppleProvider.deviceCheck,
+          )
+          .catchError((e) {
+            debugPrint('AppCheck notice (prod): $e');
+          });
     }
   } catch (e) {
     debugPrint('Firebase initialization notice: $e');
   }
 
-  runApp(
-    const ProviderScope(
-      child: BaqueanoApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: BaqueanoApp()));
 }
 
 class BaqueanoApp extends StatelessWidget {
@@ -107,4 +107,3 @@ class BaqueanoApp extends StatelessWidget {
     );
   }
 }
-

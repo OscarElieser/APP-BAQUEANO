@@ -10,7 +10,7 @@
 //   cierre o borre la tarea de las aplicaciones en segundo plano (Recent Apps de Android).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Comunica con el canal nativo de plataforma `com.company.appbaqueano/lifecycle`.
+// - Comunica con el canal nativo de plataforma `ni.baqueano.app/lifecycle`.
 // - Al invocar `moveToBackground()`, delega en el método nativo de Android `moveTaskToBack(true)`,
 //   evitando que el sistema invoque `finish()` sobre la `MainActivity`.
 // - Manejo defensivo con `try/catch` y fallback automático a `SystemNavigator.pop()` en caso
@@ -28,7 +28,9 @@ class AppLifecycleService {
   AppLifecycleService._();
 
   /// Canal oficial de comunicación nativa para eventos de ciclo de vida Android
-  static const MethodChannel _channel = MethodChannel('com.company.appbaqueano/lifecycle');
+  static const MethodChannel _channel = MethodChannel(
+    'ni.baqueano.app/lifecycle',
+  );
 
   /// Envía la aplicación a segundo plano conservando todo su estado en memoria.
   /// No destruye la actividad ni reinicia la pila de navegación.
