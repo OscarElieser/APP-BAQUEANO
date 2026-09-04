@@ -389,6 +389,7 @@ class AuthService extends ChangeNotifier {
       }
     }
   }
+
   /// Cierra primero la sesiÃ³n que constituye la autoridad de autenticaciÃ³n.
   /// Si Firebase no logra cerrarla, el mÃ©todo falla y no declara modo invitado.
   Future<void> signOut() async {
@@ -460,7 +461,9 @@ class AuthService extends ChangeNotifier {
       try {
         await _googleSignIn.signOut();
       } catch (googleError) {
-        debugPrint('Aviso cerrando sesiÃ³n Google tras supresiÃ³n: $googleError');
+        debugPrint(
+          'Aviso cerrando sesiÃ³n Google tras supresiÃ³n: $googleError',
+        );
       }
 
       _currentUser = null;
@@ -492,4 +495,3 @@ class AuthService extends ChangeNotifier {
 final authServiceProvider = ChangeNotifierProvider<AuthService>((ref) {
   return AuthService();
 });
-

@@ -41,8 +41,8 @@ class DefaultFirebaseOptions {
       'BHsot1kXaFMuZazNykRZPGIq5nt8cLoPi2csUI-l5CyT9IUG3VNf7t4UAbLdBe72Nke25NOofS5xN-Z6TbQuWRI';
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE',
-    appId: '1:578585227888:android:223b5a060d18d2c6f2fab5',
+    apiKey: 'AIzaSyC_a8pZmD_mNZDYrR_E8ScbTf5wFwJ5IlY',
+    appId: '1:578585227888:android:538c1475535f41c9f2fab5',
     messagingSenderId: '578585227888',
     projectId: 'app-baqueano',
     databaseURL: 'https://app-baqueano-default-rtdb.firebaseio.com/',
