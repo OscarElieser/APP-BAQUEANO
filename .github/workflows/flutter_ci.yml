@@ -1,0 +1,60 @@
+name: 🧭 BAQUEANO Production CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  flutter_quality_gate:
+    name: 🛡️ Flutter Quality Gate & Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ☕ Setup Java 17 for Android R8 / Gradle
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 💙 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: 📦 Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: 🔍 Static Code Analysis (Zero Warnings Standard)
+        run: flutter analyze --fatal-infos --fatal-warnings
+
+      - name: 🧪 Execute Automated Test Suite (100% Pass Required)
+        run: flutter test --coverage
+
+      - name: 🏗️ Build Android App Bundle (Release)
+        run: flutter build appbundle --release
+
+  backend_validation:
+    name: ⚡ Genkit Backend Node Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install Node Dependencies
+        run: npm ci
+
+      - name: 🛡️ Validate Syntax and Entrypoints
+        run: node -c src/index.js

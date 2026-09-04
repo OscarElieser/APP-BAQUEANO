@@ -49,21 +49,18 @@ class PaymentGatewayException implements Exception {
 }
 
 abstract interface class PaymentBackendClient {
-  Future<Map<String, dynamic>> createPaymentOrder(
-    Map<String, dynamic> request,
-  );
+  Future<Map<String, dynamic>> createPaymentOrder(Map<String, dynamic> request);
 }
 
 class FirebasePaymentBackendClient implements PaymentBackendClient {
-  final FirebaseFunctions _functions;
+  final FirebaseFunctions? _functionsOverride;
 
   FirebasePaymentBackendClient({FirebaseFunctions? functions})
-      : _functions =
-            functions ??
-            FirebaseFunctions.instanceFor(
-              app: Firebase.app(),
-              region: 'us-central1',
-            );
+    : _functionsOverride = functions;
+
+  FirebaseFunctions get _functions =>
+      _functionsOverride ??
+      FirebaseFunctions.instanceFor(app: Firebase.app(), region: 'us-central1');
 
   @override
   Future<Map<String, dynamic>> createPaymentOrder(
@@ -86,37 +83,55 @@ class FirebasePaymentBackendClient implements PaymentBackendClient {
       };
       throw PaymentGatewayException(
         reason,
-        error.message ?? 'No fue posible iniciar el pago.',
+        error.message ?? error.code,
         code: error.code,
       );
-    } catch (_) {
-      throw const PaymentGatewayException(
+    } catch (error) {
+      if (error is PaymentGatewayException) rethrow;
+      throw PaymentGatewayException(
         PaymentFailureReason.unavailable,
-        'No fue posible conectar con el servicio de pagos. Intenta nuevamente.',
+        'No se pudo conectar con el servicio de pagos: $error',
       );
     }
   }
 }
 
 class PaymentGateway {
-  final PaymentBackendClient _backend;
-  final FirebaseAuth _auth;
+  final PaymentBackendClient? _backendOverride;
+  final FirebaseAuth? _authOverride;
   final FirebaseFirestore? _firestoreOverride;
 
   PaymentGateway({
     PaymentBackendClient? backend,
     FirebaseAuth? auth,
     FirebaseFirestore? firestore,
-  }) : _backend = backend ?? FirebasePaymentBackendClient(),
-       _auth = auth ?? FirebaseAuth.instance,
+  }) : _backendOverride = backend,
+       _authOverride = auth,
        _firestoreOverride = firestore;
 
-  FirebaseFirestore get _firestore =>
-      _firestoreOverride ??
-      FirebaseFirestore.instanceFor(
+  PaymentBackendClient get _backend =>
+      _backendOverride ?? FirebasePaymentBackendClient();
+
+  FirebaseAuth? get _auth {
+    if (_authOverride != null) return _authOverride;
+    try {
+      return FirebaseAuth.instance;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  FirebaseFirestore? get _firestore {
+    if (_firestoreOverride != null) return _firestoreOverride;
+    try {
+      return FirebaseFirestore.instanceFor(
         app: Firebase.app(),
         databaseId: 'appbaqueano',
       );
+    } catch (_) {
+      return null;
+    }
+  }
 
   Future<PaymentOrder> createCheckoutSession({
     required String businessId,
@@ -124,7 +139,7 @@ class PaymentGateway {
     required bool isAnnual,
     required PaymentMethodType methodType,
   }) async {
-    final user = _auth.currentUser;
+    final user = _auth?.currentUser;
     if (user == null) {
       throw const PaymentGatewayException(
         PaymentFailureReason.unauthenticated,
@@ -185,7 +200,11 @@ class PaymentGateway {
     if (cleanOrderId.isEmpty) {
       return Stream<PaymentOrder?>.value(null);
     }
-    return _firestore
+    final firestore = _firestore;
+    if (firestore == null) {
+      return Stream<PaymentOrder?>.value(null);
+    }
+    return firestore
         .collection('payment_orders')
         .doc(cleanOrderId)
         .snapshots()

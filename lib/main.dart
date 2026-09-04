@@ -19,6 +19,7 @@
 // para Android, iOS y Web, tipografía Montserrat/Space Grotesk y paleta volcánica.
 // ============================================================================
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,13 +56,22 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    // Initialize Firebase App Check de forma no bloqueante
-    FirebaseAppCheck.instance.activate(
-      androidProvider: AndroidProvider.debug,
-      appleProvider: AppleProvider.debug,
-    ).catchError((e) {
-      debugPrint('AppCheck notice: $e');
-    });
+    // Initialize Firebase App Check de forma no bloqueante con separación debug/producción
+    if (kDebugMode) {
+      FirebaseAppCheck.instance.activate(
+        androidProvider: AndroidProvider.debug,
+        appleProvider: AppleProvider.debug,
+      ).catchError((e) {
+        debugPrint('AppCheck notice (debug): $e');
+      });
+    } else {
+      FirebaseAppCheck.instance.activate(
+        androidProvider: AndroidProvider.playIntegrity,
+        appleProvider: AppleProvider.deviceCheck,
+      ).catchError((e) {
+        debugPrint('AppCheck notice (prod): $e');
+      });
+    }
   } catch (e) {
     debugPrint('Firebase initialization notice: $e');
   }

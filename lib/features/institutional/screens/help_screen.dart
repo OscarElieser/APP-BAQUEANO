@@ -38,23 +38,28 @@ class HelpScreen extends StatelessWidget {
   final List<Map<String, String>> faqs = const [
     {
       'q': '¿Cómo funciona la reserva directa sin intermediarios?',
-      'a': 'En Baqueano conectas directamente con las cooperativas campesinas y guías nativos. El 85% al 100% de tu pago llega de forma íntegra a sus manos, sin cobros de comisiones abusivas de agencias.',
+      'a':
+          'En Baqueano conectas directamente con las cooperativas campesinas y guías nativos. El 85% al 100% de tu pago llega de forma íntegra a sus manos, sin cobros de comisiones abusivas de agencias.',
     },
     {
-      'q': '¿Cómo funciona el modo 100% Offline y mapas descargables?',
-      'a': 'Puedes guardar tus rutas, mapas satelitales y números de contacto antes de iniciar tu viaje. Toda la información queda almacenada localmente en tu dispositivo para navegar en cumbres o cañones sin señal.',
+      'q': '¿Cómo funciona el modo Offline y la guía de viaje?',
+      'a':
+          'Puedes consultar destinos, rutas, números de emergencia y tu itinerario guardado sin conexión. El mapa satelital interactivo se visualiza con conexión o mediante la caché previa de Google Maps en tu dispositivo.',
     },
     {
       'q': '¿Qué es el Asistente Baqueano AI (Gemini)?',
-      'a': 'Es un asistente de inteligencia artificial entrenado con datos geográficos y costos reales de Nicaragua. Te calcula presupuestos en USD y Córdobas (NIO), planifica itinerarios hora por hora y te conecta con guías.',
+      'a':
+          'Es un asistente de inteligencia artificial entrenado con datos geográficos y costos reales de Nicaragua. Te calcula presupuestos en USD y Córdobas (NIO), planifica itinerarios hora por hora y te conecta con guías.',
     },
     {
       'q': '¿Qué cubre la política de cancelación por fuerza mayor climática?',
-      'a': 'Si un volcán presenta actividad restringida o hay lluvias torrenciales en cañones, priorizamos la seguridad del viajero y reprogramamos la expedición sin ninguna penalización.',
+      'a':
+          'Si un volcán presenta actividad restringida o hay lluvias torrenciales en cañones, priorizamos la seguridad del viajero y reprogramamos la expedición sin ninguna penalización.',
     },
     {
       'q': '¿Cómo puedo registrar mi emprendimiento o cooperativa rural?',
-      'a': 'Desde el menú lateral o el panel de registro de emprendedores puedes postular tu negocio. El equipo de administración valida tus credenciales de INTUR y activa tu publicación en menos de 12 horas.',
+      'a':
+          'Desde el menú lateral o el panel de registro de emprendedores puedes postular tu negocio. El equipo de administración valida tus credenciales de INTUR y activa tu publicación en menos de 12 horas.',
     },
   ];
 
@@ -65,12 +70,16 @@ class HelpScreen extends StatelessWidget {
       path: AppConstants.supportEmail,
       queryParameters: {
         'subject': 'Consulta de Soporte — Explorador Baqueano Nicaragua',
-        'body': 'Hola equipo de soporte Baqueano,\n\nEscribo desde la aplicación móvil oficial para consultar lo siguiente:\n\n',
+        'body':
+            'Hola equipo de soporte Baqueano,\n\nEscribo desde la aplicación móvil oficial para consultar lo siguiente:\n\n',
       },
     );
 
     try {
-      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
       if (!launched && context.mounted) {
         _showDirectSupportModal(context);
       }
@@ -95,7 +104,11 @@ class HelpScreen extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
             border: Border.all(color: AppColors.borderGold, width: 1.2),
             boxShadow: [
-              BoxShadow(color: Colors.black.withValues(alpha: 0.6), blurRadius: 24, spreadRadius: 4),
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.6),
+                blurRadius: 24,
+                spreadRadius: 4,
+              ),
             ],
           ),
           child: Column(
@@ -106,7 +119,10 @@ class HelpScreen extends StatelessWidget {
                 child: Container(
                   width: 44,
                   height: 5,
-                  decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
               const SizedBox(height: 18),
@@ -119,7 +135,11 @@ class HelpScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.goldLight),
                     ),
-                    child: const Icon(Icons.mark_email_read_rounded, color: AppColors.gold, size: 24),
+                    child: const Icon(
+                      Icons.mark_email_read_rounded,
+                      color: AppColors.gold,
+                      size: 24,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -128,11 +148,19 @@ class HelpScreen extends StatelessWidget {
                       children: [
                         Text(
                           'MESA DE AYUDA & SOPORTE',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 0.8),
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.goldLight,
+                            letterSpacing: 0.8,
+                          ),
                         ),
                         Text(
                           'Atención directa 24/7 sin intermediarios',
-                          style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted),
+                          style: GoogleFonts.inter(
+                            fontSize: 11.5,
+                            color: AppColors.textMuted,
+                          ),
                         ),
                       ],
                     ),
@@ -146,15 +174,24 @@ class HelpScreen extends StatelessWidget {
               const Divider(color: AppColors.borderLight, height: 24),
               Text(
                 'Correo Oficial de Soporte:',
-                style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white70,
+                ),
               ),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.primaryDark,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.5)),
+                  border: Border.all(
+                    color: AppColors.borderGold.withValues(alpha: 0.5),
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,17 +199,29 @@ class HelpScreen extends StatelessWidget {
                     Expanded(
                       child: Text(
                         AppConstants.supportEmail,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.goldLight,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     InkWell(
                       onTap: () {
-                        Clipboard.setData(const ClipboardData(text: AppConstants.supportEmail));
-                        CustomToast.success(context, '¡Correo copiado al portapapeles!');
+                        Clipboard.setData(
+                          const ClipboardData(text: AppConstants.supportEmail),
+                        );
+                        CustomToast.success(
+                          context,
+                          '¡Correo copiado al portapapeles!',
+                        );
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.terracotta,
                           borderRadius: BorderRadius.circular(8),
@@ -180,9 +229,20 @@ class HelpScreen extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.copy, size: 14, color: Colors.white),
+                            const Icon(
+                              Icons.copy,
+                              size: 14,
+                              color: Colors.white,
+                            ),
                             const SizedBox(width: 4),
-                            Text('Copiar', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+                            Text(
+                              'Copiar',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -193,7 +253,11 @@ class HelpScreen extends StatelessWidget {
               const SizedBox(height: 14),
               Text(
                 'Tiempo estimado de respuesta: menos de 15 minutos en horario diurno.',
-                style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+                style: GoogleFonts.inter(
+                  fontSize: 11.5,
+                  color: AppColors.textMuted,
+                  height: 1.3,
+                ),
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -203,18 +267,26 @@ class HelpScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF25D366),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 13),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
                   icon: const Icon(Icons.chat, size: 18, color: Colors.white),
                   label: Text(
                     'Contactar por WhatsApp Directo',
-                    style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700),
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   onPressed: () async {
                     Navigator.of(modalCtx).pop();
                     final uri = Uri.parse(AppConstants.supportWhatsApp);
                     if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                      await launchUrl(
+                        uri,
+                        mode: LaunchMode.externalApplication,
+                      );
                     }
                   },
                 ),
@@ -244,7 +316,8 @@ class HelpScreen extends StatelessWidget {
             const SectionHeader(
               tag: 'SOPORTE AL VIAJERO',
               title: '❓ Centro de Ayuda & Preguntas Frecuentes',
-              subtitle: 'Encuentra respuestas inmediatas sobre reservas comunitarias, políticas éticas y asistencia en ruta en Nicaragua.',
+              subtitle:
+                  'Encuentra respuestas inmediatas sobre reservas comunitarias, políticas éticas y asistencia en ruta en Nicaragua.',
             ),
             const SizedBox(height: 20),
 
@@ -255,19 +328,29 @@ class HelpScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.error.withValues(alpha: 0.5)),
+                border: Border.all(
+                  color: AppColors.error.withValues(alpha: 0.5),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.warning_amber_rounded, color: AppColors.error, size: 24),
+                      const Icon(
+                        Icons.warning_amber_rounded,
+                        color: AppColors.error,
+                        size: 24,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'LÍNEAS DE ASISTENCIA & EMERGENCIA NACIONAL (SOS)',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.error),
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.error,
+                          ),
                         ),
                       ),
                     ],
@@ -275,17 +358,41 @@ class HelpScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'En caso de cualquier imprevisto en sendero o montaña, puedes marcar directamente a los servicios oficiales de auxilio de Nicaragua:',
-                    style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.4),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: AppColors.textLight.withValues(alpha: 0.85),
+                      height: 1.4,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: [
-                      _buildEmergencyPhone(context, 'Cruz Blanca', '128', '+505 2265-1440'),
-                      _buildEmergencyPhone(context, 'Policía Turística', '101', '+505 2222-2222'),
-                      _buildEmergencyPhone(context, 'Bomberos Unificados', '115', '+505 2265-0101'),
-                      _buildEmergencyPhone(context, 'Defensa Civil', '100', '+505 2228-3333'),
+                      _buildEmergencyPhone(
+                        context,
+                        'Cruz Blanca',
+                        '128',
+                        '+505 2265-1440',
+                      ),
+                      _buildEmergencyPhone(
+                        context,
+                        'Policía Turística',
+                        '101',
+                        '+505 2222-2222',
+                      ),
+                      _buildEmergencyPhone(
+                        context,
+                        'Bomberos Unificados',
+                        '115',
+                        '+505 2265-0101',
+                      ),
+                      _buildEmergencyPhone(
+                        context,
+                        'Defensa Civil',
+                        '100',
+                        '+505 2228-3333',
+                      ),
                     ],
                   ),
                 ],
@@ -296,7 +403,12 @@ class HelpScreen extends StatelessWidget {
             // Lista interactiva de FAQs
             Text(
               'PREGUNTAS FRECUENTES',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 1.2),
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: AppColors.goldLight,
+                letterSpacing: 1.2,
+              ),
             ),
             const SizedBox(height: 12),
 
@@ -308,11 +420,16 @@ class HelpScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final faq = faqs[index];
                 return GlassContainer(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 6,
+                  ),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: AppColors.borderLight),
                   child: Theme(
-                    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                    data: Theme.of(
+                      context,
+                    ).copyWith(dividerColor: Colors.transparent),
                     child: ExpansionTile(
                       iconColor: AppColors.gold,
                       collapsedIconColor: AppColors.textMuted,
@@ -320,12 +437,20 @@ class HelpScreen extends StatelessWidget {
                       childrenPadding: const EdgeInsets.only(bottom: 12),
                       title: Text(
                         faq['q']!,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 13.5, fontWeight: FontWeight.w700, color: AppColors.textLight),
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textLight,
+                        ),
                       ),
                       children: [
                         Text(
                           faq['a']!,
-                          style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted, height: 1.45),
+                          style: GoogleFonts.inter(
+                            fontSize: 12.5,
+                            color: AppColors.textMuted,
+                            height: 1.45,
+                          ),
                         ),
                       ],
                     ),
@@ -351,7 +476,11 @@ class HelpScreen extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Icon(Icons.support_agent_rounded, color: AppColors.gold, size: 28),
+                      const Icon(
+                        Icons.support_agent_rounded,
+                        color: AppColors.gold,
+                        size: 28,
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
@@ -368,7 +497,11 @@ class HelpScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Nuestro equipo de soporte territorial y asistencia al viajero está disponible para ayudarte en tu expedición.',
-                    style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.4),
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: AppColors.textMuted,
+                      height: 1.4,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   LayoutBuilder(
@@ -381,14 +514,23 @@ class HelpScreen extends StatelessWidget {
                           children: [
                             BaqueanoButton(
                               text: 'WHATSAPP DE SOPORTE',
-                              icon: const Icon(Icons.chat, size: 16, color: Colors.white),
+                              icon: const Icon(
+                                Icons.chat,
+                                size: 16,
+                                color: Colors.white,
+                              ),
                               variant: BaqueanoButtonVariant.primary,
                               height: 48,
                               width: double.infinity,
                               onPressed: () async {
-                                final uri = Uri.parse(AppConstants.supportWhatsApp);
+                                final uri = Uri.parse(
+                                  AppConstants.supportWhatsApp,
+                                );
                                 if (await canLaunchUrl(uri)) {
-                                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                  await launchUrl(
+                                    uri,
+                                    mode: LaunchMode.externalApplication,
+                                  );
                                 } else if (context.mounted) {
                                   _showDirectSupportModal(context);
                                 }
@@ -397,7 +539,11 @@ class HelpScreen extends StatelessWidget {
                             const SizedBox(height: 10),
                             BaqueanoButton(
                               text: 'ENVIAR CORREO',
-                              icon: const Icon(Icons.email_outlined, size: 16, color: AppColors.textDark),
+                              icon: const Icon(
+                                Icons.email_outlined,
+                                size: 16,
+                                color: AppColors.textDark,
+                              ),
                               variant: BaqueanoButtonVariant.gold,
                               height: 48,
                               width: double.infinity,
@@ -412,13 +558,22 @@ class HelpScreen extends StatelessWidget {
                           Expanded(
                             child: BaqueanoButton(
                               text: 'WHATSAPP DE SOPORTE',
-                              icon: const Icon(Icons.chat, size: 16, color: Colors.white),
+                              icon: const Icon(
+                                Icons.chat,
+                                size: 16,
+                                color: Colors.white,
+                              ),
                               variant: BaqueanoButtonVariant.primary,
                               height: 48,
                               onPressed: () async {
-                                final uri = Uri.parse(AppConstants.supportWhatsApp);
+                                final uri = Uri.parse(
+                                  AppConstants.supportWhatsApp,
+                                );
                                 if (await canLaunchUrl(uri)) {
-                                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                  await launchUrl(
+                                    uri,
+                                    mode: LaunchMode.externalApplication,
+                                  );
                                 } else if (context.mounted) {
                                   _showDirectSupportModal(context);
                                 }
@@ -429,7 +584,11 @@ class HelpScreen extends StatelessWidget {
                           Expanded(
                             child: BaqueanoButton(
                               text: 'ENVIAR CORREO',
-                              icon: const Icon(Icons.email_outlined, size: 16, color: AppColors.textDark),
+                              icon: const Icon(
+                                Icons.email_outlined,
+                                size: 16,
+                                color: AppColors.textDark,
+                              ),
                               variant: BaqueanoButtonVariant.gold,
                               height: 48,
                               onPressed: () => _handleSendEmail(context),
@@ -450,7 +609,12 @@ class HelpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmergencyPhone(BuildContext context, String entity, String shortNumber, String fullNumber) {
+  Widget _buildEmergencyPhone(
+    BuildContext context,
+    String entity,
+    String shortNumber,
+    String fullNumber,
+  ) {
     return InkWell(
       onTap: () async {
         final uri = Uri.parse('tel:$shortNumber');
@@ -474,7 +638,11 @@ class HelpScreen extends StatelessWidget {
             const SizedBox(width: 6),
             Text(
               '$entity: $shortNumber',
-              style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
             ),
           ],
         ),

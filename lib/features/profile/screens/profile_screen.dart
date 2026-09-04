@@ -22,6 +22,7 @@
 // - `ProfileScreen`: Pantalla oficial de perfil y ajustes en la ruta `/perfil`.
 // ============================================================================
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -90,7 +91,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       'inturCode': 'INTUR-MAD-2026-019',
       'unlocked': true,
       'date': '12 Ene 2026',
-      'description': 'Travesía fluvial de 6km por el cañón sagrado, saltos de roca y natación en aguas calmas.',
+      'description':
+          'Travesía fluvial de 6km por el cañón sagrado, saltos de roca y natación en aguas calmas.',
       'icon': Icons.water_rounded,
       'color': const Color(0xFF0284C7),
     },
@@ -102,7 +104,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       'inturCode': 'INTUR-LEO-2026-088',
       'unlocked': true,
       'date': '24 Feb 2026',
-      'description': 'Ascenso al cráter activo más joven de Centroamérica y descenso en tabla de sandboarding a 65 km/h.',
+      'description':
+          'Ascenso al cráter activo más joven de Centroamérica y descenso en tabla de sandboarding a 65 km/h.',
       'icon': Icons.volcano_rounded,
       'color': const Color(0xFFC86432),
     },
@@ -114,7 +117,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       'inturCode': 'INTUR-RIV-2026-104',
       'unlocked': true,
       'date': '02 Jul 2026',
-      'description': 'Circuito de cacao en las faldas del Volcán Maderas y baño en Ojo de Agua.',
+      'description':
+          'Circuito de cacao en las faldas del Volcán Maderas y baño en Ojo de Agua.',
       'icon': Icons.landscape_rounded,
       'color': const Color(0xFF10B981),
     },
@@ -126,7 +130,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       'inturCode': 'INTUR-MAT-2026-084',
       'unlocked': true,
       'date': '04 Sep 2026',
-      'description': 'Sendero de selva nubosa, poza esmeralda y cata de café recién tostado en fogón campesino.',
+      'description':
+          'Sendero de selva nubosa, poza esmeralda y cata de café recién tostado en fogón campesino.',
       'icon': Icons.waves_rounded,
       'color': const Color(0xFF06B6D4),
     },
@@ -138,7 +143,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       'inturCode': 'INTUR-RSJ-2026-003',
       'unlocked': false,
       'date': 'Bloqueado',
-      'description': 'Expedición en canoa por el corazón de la biosfera caribeña. Completa 8 rutas para desbloquear.',
+      'description':
+          'Expedición en canoa por el corazón de la biosfera caribeña. Completa 8 rutas para desbloquear.',
       'icon': Icons.park_rounded,
       'color': const Color(0xFF64748B),
     },
@@ -180,107 +186,144 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
-      builder: (ctx) => Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: const Color(0xFF082B35),
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-          border: Border.all(color: const Color(0xFFD4AF37), width: 1.5),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      builder:
+          (ctx) => Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: const Color(0xFF082B35),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(28),
+              ),
+              border: Border.all(color: const Color(0xFFD4AF37), width: 1.5),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.add_a_photo_rounded, color: Color(0xFFD4AF37), size: 22),
-                const SizedBox(width: 10),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.add_a_photo_rounded,
+                      color: Color(0xFFD4AF37),
+                      size: 22,
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      'Foto de Perfil & Avatar Baqueano',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
                 Text(
-                  'Foto de Perfil & Avatar Baqueano',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+                  'Selecciona uno de los avatares de expedición o ingresa un enlace web personalizado.',
+                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                ),
+                const SizedBox(height: 18),
+
+                // Cuadrícula de avatares predeterminados
+                SizedBox(
+                  height: 72,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _availableAvatars.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 12),
+                    itemBuilder: (context, index) {
+                      final url = _availableAvatars[index];
+                      final isSelected = url == _userAvatarUrl;
+                      return InkWell(
+                        onTap: () {
+                          _triggerHaptic();
+                          setState(() => _userAvatarUrl = url);
+                          Navigator.of(ctx).pop();
+                          CustomToast.success(
+                            context,
+                            '¡Foto de perfil actualizada!',
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(36),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color:
+                                  isSelected
+                                      ? const Color(0xFFD4AF37)
+                                      : Colors.transparent,
+                              width: 3,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(url),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+                TextField(
+                  controller: urlCtrl,
+                  style: const TextStyle(color: Colors.white, fontSize: 13),
+                  decoration: InputDecoration(
+                    labelText: 'O pega la URL de tu imagen',
+                    labelStyle: const TextStyle(
+                      color: Color(0xFFD4AF37),
+                      fontSize: 12,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.link_rounded,
+                      color: Color(0xFFD4AF37),
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFF041920),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.white12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFC86432),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (urlCtrl.text.trim().isNotEmpty) {
+                        setState(() => _userAvatarUrl = urlCtrl.text.trim());
+                        Navigator.of(ctx).pop();
+                        CustomToast.success(
+                          context,
+                          '¡Avatar personalizado guardado!',
+                        );
+                      }
+                    },
+                    child: const Text(
+                      'Aplicar URL',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 6),
-            Text(
-              'Selecciona uno de los avatares de expedición o ingresa un enlace web personalizado.',
-              style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
-            ),
-            const SizedBox(height: 18),
-
-            // Cuadrícula de avatares predeterminados
-            SizedBox(
-              height: 72,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: _availableAvatars.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 12),
-                itemBuilder: (context, index) {
-                  final url = _availableAvatars[index];
-                  final isSelected = url == _userAvatarUrl;
-                  return InkWell(
-                    onTap: () {
-                      _triggerHaptic();
-                      setState(() => _userAvatarUrl = url);
-                      Navigator.of(ctx).pop();
-                      CustomToast.success(context, '¡Foto de perfil actualizada!');
-                    },
-                    borderRadius: BorderRadius.circular(36),
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: isSelected ? const Color(0xFFD4AF37) : Colors.transparent,
-                          width: 3,
-                        ),
-                      ),
-                      child: CircleAvatar(
-                        radius: 30,
-                        backgroundImage: NetworkImage(url),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-
-            const SizedBox(height: 16),
-            TextField(
-              controller: urlCtrl,
-              style: const TextStyle(color: Colors.white, fontSize: 13),
-              decoration: InputDecoration(
-                labelText: 'O pega la URL de tu imagen',
-                labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
-                prefixIcon: const Icon(Icons.link_rounded, color: Color(0xFFD4AF37)),
-                filled: true,
-                fillColor: const Color(0xFF041920),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Colors.white12)),
-              ),
-            ),
-            const SizedBox(height: 14),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFC86432),
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: () {
-                  if (urlCtrl.text.trim().isNotEmpty) {
-                    setState(() => _userAvatarUrl = urlCtrl.text.trim());
-                    Navigator.of(ctx).pop();
-                    CustomToast.success(context, '¡Avatar personalizado guardado!');
-                  }
-                },
-                child: const Text('Aplicar URL', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
@@ -298,63 +341,106 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF082B35),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Color(0xFFD4AF37), width: 1.2),
-        ),
-        title: Row(
-          children: [
-            const Icon(Icons.edit_note_rounded, color: Color(0xFFD4AF37), size: 24),
-            const SizedBox(width: 10),
-            Text(
-              'Editar Datos del Perfil',
-              style: GoogleFonts.spaceGrotesk(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: const Color(0xFF082B35),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(color: Color(0xFFD4AF37), width: 1.2),
             ),
-          ],
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildDialogField('Nombre Completo', nameCtrl, Icons.person_rounded),
-              const SizedBox(height: 10),
-              _buildDialogField('Cédula o Pasaporte', docCtrl, Icons.badge_rounded),
-              const SizedBox(height: 10),
-              _buildDialogField('Teléfono / WhatsApp', phoneCtrl, Icons.phone_rounded),
-              const SizedBox(height: 10),
-              _buildDialogField('Correo Electrónico', emailCtrl, Icons.email_rounded),
-              const SizedBox(height: 10),
-              _buildDialogField('Nacionalidad', natCtrl, Icons.flag_rounded),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.edit_note_rounded,
+                  color: Color(0xFFD4AF37),
+                  size: 24,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Editar Datos del Perfil',
+                  style: GoogleFonts.spaceGrotesk(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildDialogField(
+                    'Nombre Completo',
+                    nameCtrl,
+                    Icons.person_rounded,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildDialogField(
+                    'Cédula o Pasaporte',
+                    docCtrl,
+                    Icons.badge_rounded,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildDialogField(
+                    'Teléfono / WhatsApp',
+                    phoneCtrl,
+                    Icons.phone_rounded,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildDialogField(
+                    'Correo Electrónico',
+                    emailCtrl,
+                    Icons.email_rounded,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildDialogField(
+                    'Nacionalidad',
+                    natCtrl,
+                    Icons.flag_rounded,
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text(
+                  'Cancelar',
+                  style: TextStyle(color: Colors.white60),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFC86432),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _userName = nameCtrl.text.trim();
+                    _userDocument = docCtrl.text.trim();
+                    _userPhone = phoneCtrl.text.trim();
+                    _userEmail = emailCtrl.text.trim();
+                    _userNationality = natCtrl.text.trim();
+                  });
+                  Navigator.of(ctx).pop();
+                  CustomToast.success(
+                    context,
+                    '¡Datos del perfil actualizados correctamente!',
+                  );
+                },
+                child: const Text(
+                  'Guardar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ],
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white60)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFC86432),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            onPressed: () {
-              setState(() {
-                _userName = nameCtrl.text.trim();
-                _userDocument = docCtrl.text.trim();
-                _userPhone = phoneCtrl.text.trim();
-                _userEmail = emailCtrl.text.trim();
-                _userNationality = natCtrl.text.trim();
-              });
-              Navigator.of(ctx).pop();
-              CustomToast.success(context, '¡Datos del perfil actualizados correctamente!');
-            },
-            child: const Text('Guardar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          ),
-        ],
-      ),
     );
   }
 
@@ -370,99 +456,152 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF082B35),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Color(0xFFD4AF37), width: 1.2),
-        ),
-        title: Row(
-          children: [
-            const Icon(Icons.lock_reset_rounded, color: Color(0xFFD4AF37), size: 24),
-            const SizedBox(width: 10),
-            Text(
-              'Cambiar Contraseña',
-              style: GoogleFonts.spaceGrotesk(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: const Color(0xFF082B35),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(color: Color(0xFFD4AF37), width: 1.2),
             ),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Ingresa tu clave actual y define tu nueva contraseña segura para proteger tu cuenta y pagos.',
-              style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.lock_reset_rounded,
+                  color: Color(0xFFD4AF37),
+                  size: 24,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Cambiar Contraseña',
+                  style: GoogleFonts.spaceGrotesk(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: currentPassCtrl,
-              obscureText: true,
-              style: const TextStyle(color: Colors.white, fontSize: 13),
-              decoration: InputDecoration(
-                labelText: 'Contraseña Actual',
-                labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
-                prefixIcon: const Icon(Icons.key, color: Color(0xFFD4AF37), size: 18),
-                filled: true,
-                fillColor: const Color(0xFF041920),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Ingresa tu clave actual y define tu nueva contraseña segura para proteger tu cuenta y pagos.',
+                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                ),
+                const SizedBox(height: 14),
+                TextField(
+                  controller: currentPassCtrl,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white, fontSize: 13),
+                  decoration: InputDecoration(
+                    labelText: 'Contraseña Actual',
+                    labelStyle: const TextStyle(
+                      color: Color(0xFFD4AF37),
+                      fontSize: 12,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.key,
+                      color: Color(0xFFD4AF37),
+                      size: 18,
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFF041920),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: newPassCtrl,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white, fontSize: 13),
+                  decoration: InputDecoration(
+                    labelText: 'Nueva Contraseña',
+                    labelStyle: const TextStyle(
+                      color: Color(0xFFD4AF37),
+                      fontSize: 12,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.password,
+                      color: Color(0xFFD4AF37),
+                      size: 18,
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFF041920),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: confirmPassCtrl,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white, fontSize: 13),
+                  decoration: InputDecoration(
+                    labelText: 'Confirmar Contraseña',
+                    labelStyle: const TextStyle(
+                      color: Color(0xFFD4AF37),
+                      fontSize: 12,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.check,
+                      color: Color(0xFFD4AF37),
+                      size: 18,
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFF041920),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text(
+                  'Cancelar',
+                  style: TextStyle(color: Colors.white60),
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: newPassCtrl,
-              obscureText: true,
-              style: const TextStyle(color: Colors.white, fontSize: 13),
-              decoration: InputDecoration(
-                labelText: 'Nueva Contraseña',
-                labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
-                prefixIcon: const Icon(Icons.password, color: Color(0xFFD4AF37), size: 18),
-                filled: true,
-                fillColor: const Color(0xFF041920),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFC86432),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  if (newPassCtrl.text.isEmpty || newPassCtrl.text.length < 6) {
+                    CustomToast.error(
+                      context,
+                      'La contraseña debe tener al menos 6 caracteres',
+                    );
+                    return;
+                  }
+                  if (newPassCtrl.text != confirmPassCtrl.text) {
+                    CustomToast.error(context, 'Las contraseñas no coinciden');
+                    return;
+                  }
+                  Navigator.of(ctx).pop();
+                  CustomToast.success(
+                    context,
+                    '¡Contraseña actualizada exitosamente!',
+                  );
+                },
+                child: const Text(
+                  'Actualizar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: confirmPassCtrl,
-              obscureText: true,
-              style: const TextStyle(color: Colors.white, fontSize: 13),
-              decoration: InputDecoration(
-                labelText: 'Confirmar Contraseña',
-                labelStyle: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12),
-                prefixIcon: const Icon(Icons.check, color: Color(0xFFD4AF37), size: 18),
-                filled: true,
-                fillColor: const Color(0xFF041920),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white60)),
+            ],
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFC86432),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            onPressed: () {
-              if (newPassCtrl.text.isEmpty || newPassCtrl.text.length < 6) {
-                CustomToast.error(context, 'La contraseña debe tener al menos 6 caracteres');
-                return;
-              }
-              if (newPassCtrl.text != confirmPassCtrl.text) {
-                CustomToast.error(context, 'Las contraseñas no coinciden');
-                return;
-              }
-              Navigator.of(ctx).pop();
-              CustomToast.success(context, '¡Contraseña actualizada exitosamente!');
-            },
-            child: const Text('Actualizar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          ),
-        ],
-      ),
     );
   }
 
@@ -476,61 +615,108 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF082B35),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(22),
-          side: BorderSide(color: unlocked ? color : Colors.white24, width: 1.5),
-        ),
-        title: Row(
-          children: [
-            Icon(stamp['icon'] as IconData, color: unlocked ? color : Colors.white38, size: 26),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                stamp['title'] as String,
-                style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: const Color(0xFF082B35),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(22),
+              side: BorderSide(
+                color: unlocked ? color : Colors.white24,
+                width: 1.5,
               ),
             ),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: (unlocked ? color : Colors.white24).withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: unlocked ? color : Colors.white24),
-              ),
-              child: Text(
-                unlocked ? 'SELLO OFICIAL CERTIFICADO' : 'SELLO POR DESBLOQUEAR',
-                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: unlocked ? color : Colors.white60),
-              ),
+            title: Row(
+              children: [
+                Icon(
+                  stamp['icon'] as IconData,
+                  color: unlocked ? color : Colors.white38,
+                  size: 26,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    stamp['title'] as String,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 12),
-            Text(
-              stamp['description'] as String,
-              style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withValues(alpha: 0.85), height: 1.4),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: (unlocked ? color : Colors.white24).withValues(
+                      alpha: 0.15,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: unlocked ? color : Colors.white24,
+                    ),
+                  ),
+                  child: Text(
+                    unlocked
+                        ? 'SELLO OFICIAL CERTIFICADO'
+                        : 'SELLO POR DESBLOQUEAR',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      color: unlocked ? color : Colors.white60,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  stamp['description'] as String,
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: Colors.white.withValues(alpha: 0.85),
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                const Divider(color: Colors.white12),
+                const SizedBox(height: 6),
+                _buildDialogDetailRow(
+                  'Departamento',
+                  stamp['department'] as String,
+                ),
+                _buildDialogDetailRow(
+                  'Guía Certificado',
+                  stamp['guide'] as String,
+                ),
+                _buildDialogDetailRow(
+                  'Licencia INTUR',
+                  stamp['inturCode'] as String,
+                ),
+                _buildDialogDetailRow(
+                  'Fecha de Check-in',
+                  stamp['date'] as String,
+                ),
+              ],
             ),
-            const SizedBox(height: 14),
-            const Divider(color: Colors.white12),
-            const SizedBox(height: 6),
-            _buildDialogDetailRow('Departamento', stamp['department'] as String),
-            _buildDialogDetailRow('Guía Certificado', stamp['guide'] as String),
-            _buildDialogDetailRow('Licencia INTUR', stamp['inturCode'] as String),
-            _buildDialogDetailRow('Fecha de Check-in', stamp['date'] as String),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cerrar', style: TextStyle(color: Color(0xFFD4AF37), fontWeight: FontWeight.bold)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text(
+                  'Cerrar',
+                  style: TextStyle(
+                    color: Color(0xFFD4AF37),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -540,14 +726,28 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: GoogleFonts.inter(fontSize: 11, color: Colors.white54)),
-          Text(value, style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+          Text(
+            label,
+            style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+          ),
+          Text(
+            value,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildDialogField(String label, TextEditingController ctrl, IconData icon) {
+  Widget _buildDialogField(
+    String label,
+    TextEditingController ctrl,
+    IconData icon,
+  ) {
     return TextField(
       controller: ctrl,
       style: const TextStyle(color: Colors.white, fontSize: 13),
@@ -557,9 +757,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         prefixIcon: Icon(icon, color: const Color(0xFFD4AF37), size: 18),
         filled: true,
         fillColor: const Color(0xFF041920),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Colors.white12)),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Colors.white12)),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFD4AF37))),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.white12),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.white12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Color(0xFFD4AF37)),
+        ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
     );
@@ -569,55 +778,154 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _triggerHaptic();
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF082B35),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color: const Color(0xFFD4AF37).withValues(alpha: 0.4),
-          ),
-        ),
-        title: const Row(
-          children: [
-            Icon(Icons.logout_rounded, color: Color(0xFFE11D48)),
-            SizedBox(width: 10),
-            Text(
-              'Cerrar Sesión',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: const Color(0xFF082B35),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                color: const Color(0xFFD4AF37).withValues(alpha: 0.4),
+              ),
             ),
-          ],
-        ),
-        content: const Text(
-          '¿Estás seguro de que deseas salir de tu perfil de explorador Baqueano?',
-          style: TextStyle(color: Colors.white70, fontSize: 13),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white60)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFE11D48),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            title: const Row(
+              children: [
+                Icon(Icons.logout_rounded, color: Color(0xFFE11D48)),
+                SizedBox(width: 10),
+                Text(
+                  'Cerrar Sesión',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            onPressed: () async {
-              Navigator.of(ctx).pop();
-              await ref.read(authServiceProvider).signOut();
-              if (mounted) {
-                context.go('/login');
-              }
-            },
-            child: const Text('Salir', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            content: const Text(
+              '¿Estás seguro de que deseas salir de tu perfil de explorador Baqueano?',
+              style: TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text(
+                  'Cancelar',
+                  style: TextStyle(color: Colors.white60),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFE11D48),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () async {
+                  Navigator.of(ctx).pop();
+                  await ref.read(authServiceProvider).signOut();
+                  if (mounted) {
+                    context.go('/login');
+                  }
+                },
+                child: const Text(
+                  'Salir',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+    );
+  }
+
+  void _showDeleteAccountDialog() {
+    _triggerHaptic();
+    showDialog(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: const Color(0xFF082B35),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                color: const Color(0xFFE11D48).withValues(alpha: 0.6),
+              ),
+            ),
+            title: const Row(
+              children: [
+                Icon(Icons.warning_amber_rounded, color: Color(0xFFE11D48)),
+                SizedBox(width: 10),
+                Text(
+                  'Eliminar Cuenta',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            content: const Text(
+              'Esta acción es irreversible y eliminará definitivamente tu perfil, tus datos de autenticación y tus preferencias almacenadas en el servidor, de conformidad con las políticas de privacidad y derechos ARCO.\n\n¿Deseas proceder con la eliminación definitiva?',
+              style: TextStyle(color: Colors.white70, fontSize: 13, height: 1.4),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text(
+                  'Cancelar',
+                  style: TextStyle(color: Colors.white60),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFE11D48),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () async {
+                  Navigator.of(ctx).pop();
+                  try {
+                    await ref.read(authServiceProvider).deleteAccount();
+                    if (mounted) {
+                      CustomToast.show(
+                        context,
+                        message: 'Tu cuenta ha sido eliminada definitivamente.',
+                        icon: Icons.check_circle_outline,
+                      );
+                      context.go('/login');
+                    }
+                  } catch (e) {
+                    if (mounted) {
+                      CustomToast.show(
+                        context,
+                        message:
+                            'Para eliminar tu cuenta por seguridad debes haber iniciado sesión recientemente.',
+                        icon: Icons.error_outline,
+                      );
+                    }
+                  }
+                },
+                child: const Text(
+                  'Eliminar Definitivamente',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
     );
   }
 
   void _saveAllSettings() {
     _triggerHaptic();
-    CustomToast.success(context, '¡Todas las configuraciones fueron guardadas y sincronizadas con éxito!');
+    CustomToast.success(
+      context,
+      '¡Todas las configuraciones fueron guardadas y sincronizadas con éxito!',
+    );
   }
 
   @override
@@ -629,7 +937,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final realExpeditionsCount = commService.bookings.length;
     final totalExpeditionsDisplay = 4 + realExpeditionsCount;
 
-    final containerBgColor = _highContrast ? Colors.black : const Color(0xFF041920);
+    final containerBgColor =
+        _highContrast ? Colors.black : const Color(0xFF041920);
     final containerBorderColor = _highContrast ? Colors.white : Colors.white12;
 
     return ResponsiveScaffold(
@@ -647,7 +956,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             const SectionHeader(
               tag: 'CONFIGURACIÓN DE CUENTA & PREFERENCIAS',
               title: '👤 Mi Perfil & Ajustes',
-              subtitle: 'Administra tus datos personales, moneda preferida, régimen tributario, notificaciones, accesibilidad y seguridad.',
+              subtitle:
+                  'Administra tus datos personales, moneda preferida, régimen tributario, notificaciones, accesibilidad y seguridad.',
             ),
             const SizedBox(height: 18),
 
@@ -666,15 +976,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             // ----------------------------------------------------------------
             // 2. CONFIGURACIONES DE MONEDA & FINANZAS
             // ----------------------------------------------------------------
-            _buildSectionCardTitle('💰 CONFIGURACIONES DE MONEDA & FINANZAS', Icons.currency_exchange_rounded),
+            _buildSectionCardTitle(
+              '💰 CONFIGURACIONES DE MONEDA & FINANZAS',
+              Icons.currency_exchange_rounded,
+            ),
             const SizedBox(height: 10),
-            _buildCurrencyAndTaxSettings(containerBgColor, containerBorderColor),
+            _buildCurrencyAndTaxSettings(
+              containerBgColor,
+              containerBorderColor,
+            ),
             const SizedBox(height: 24),
 
             // ----------------------------------------------------------------
             // 3. CONFIGURACIONES DE NOTIFICACIONES & ALERTAS
             // ----------------------------------------------------------------
-            _buildSectionCardTitle('🔔 NOTIFICACIONES & ALERTAS EN TIEMPO REAL', Icons.notifications_active_outlined),
+            _buildSectionCardTitle(
+              '🔔 NOTIFICACIONES & ALERTAS EN TIEMPO REAL',
+              Icons.notifications_active_outlined,
+            ),
             const SizedBox(height: 10),
             _buildNotificationsSettings(containerBgColor, containerBorderColor),
             const SizedBox(height: 24),
@@ -682,7 +1001,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             // ----------------------------------------------------------------
             // 4. CONFIGURACIONES DE ACCESIBILIDAD & VISUALIZACIÓN
             // ----------------------------------------------------------------
-            _buildSectionCardTitle('👁️ ACCESIBILIDAD & EXPERIENCIA VISUAL', Icons.accessibility_new_rounded),
+            _buildSectionCardTitle(
+              '👁️ ACCESIBILIDAD & EXPERIENCIA VISUAL',
+              Icons.accessibility_new_rounded,
+            ),
             const SizedBox(height: 10),
             _buildAccessibilitySettings(containerBgColor, containerBorderColor),
             const SizedBox(height: 24),
@@ -690,7 +1012,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             // ----------------------------------------------------------------
             // 5. MIS SELLOS DE EXPEDICIÓN & BITÁCORA
             // ----------------------------------------------------------------
-            _buildSectionCardTitle('🧭 MIS SELLOS & BITÁCORA DE EXPEDICIÓN', Icons.military_tech_rounded),
+            _buildSectionCardTitle(
+              '🧭 MIS SELLOS & BITÁCORA DE EXPEDICIÓN',
+              Icons.military_tech_rounded,
+            ),
             const SizedBox(height: 10),
             _buildStampsGrid(containerBgColor, containerBorderColor),
             const SizedBox(height: 24),
@@ -698,7 +1023,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             // ----------------------------------------------------------------
             // 6. SEGURIDAD & SESIÓN
             // ----------------------------------------------------------------
-            _buildSectionCardTitle('🛡️ SEGURIDAD & CUENTA', Icons.security_rounded),
+            _buildSectionCardTitle(
+              '🛡️ SEGURIDAD & CUENTA',
+              Icons.security_rounded,
+            ),
             const SizedBox(height: 10),
             _buildSecuritySettings(containerBgColor, containerBorderColor),
             const SizedBox(height: 24),
@@ -712,13 +1040,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.terracotta,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                   elevation: 6,
                 ),
-                icon: const Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+                icon: const Icon(
+                  Icons.check_circle_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
                 label: Text(
                   'Guardar Todas las Configuraciones',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
                 ),
                 onPressed: _saveAllSettings,
               ),
@@ -768,7 +1106,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           gradient: AppGradients.cardGlass,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: _highContrast ? Colors.white : const Color(0xFFD4AF37).withValues(alpha: 0.5),
+            color:
+                _highContrast
+                    ? Colors.white
+                    : const Color(0xFFD4AF37).withValues(alpha: 0.5),
             width: _highContrast ? 2.0 : 1.5,
           ),
           boxShadow: [
@@ -781,11 +1122,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
         child: Column(
           children: [
-            const Icon(Icons.no_accounts_rounded, color: Color(0xFFD4AF37), size: 52),
+            const Icon(
+              Icons.no_accounts_rounded,
+              color: Color(0xFFD4AF37),
+              size: 52,
+            ),
             const SizedBox(height: 12),
             Text(
               'Sin Sesión de Google Iniciada',
-              style: GoogleFonts.spaceGrotesk(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 17,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 6),
             Text(
@@ -797,13 +1146,25 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFC86432),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
               ),
-              icon: const Icon(Icons.login_rounded, color: Colors.white, size: 18),
+              icon: const Icon(
+                Icons.login_rounded,
+                color: Colors.white,
+                size: 18,
+              ),
               label: Text(
                 'Iniciar Sesión con Google',
-                style: GoogleFonts.spaceGrotesk(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.spaceGrotesk(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               onPressed: () => context.go('/login'),
             ),
@@ -812,9 +1173,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       );
     }
 
-    final displayName = user.displayName.isNotEmpty ? user.displayName : (_userName.isNotEmpty ? _userName : 'Explorador Google');
+    final displayName =
+        user.displayName.isNotEmpty
+            ? user.displayName
+            : (_userName.isNotEmpty ? _userName : 'Explorador Google');
     final displayEmail = user.email.isNotEmpty ? user.email : _userEmail;
-    final displayPhoto = user.photoUrl.isNotEmpty ? user.photoUrl : (_userAvatarUrl.isNotEmpty ? _userAvatarUrl : _availableAvatars.first);
+    final displayPhoto =
+        user.photoUrl.isNotEmpty
+            ? user.photoUrl
+            : (_userAvatarUrl.isNotEmpty
+                ? _userAvatarUrl
+                : _availableAvatars.first);
 
     return Container(
       width: double.infinity,
@@ -823,7 +1192,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         gradient: AppGradients.cardGlass,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: _highContrast ? Colors.white : const Color(0xFFD4AF37).withValues(alpha: 0.6),
+          color:
+              _highContrast
+                  ? Colors.white
+                  : const Color(0xFFD4AF37).withValues(alpha: 0.6),
           width: _highContrast ? 2.0 : 1.5,
         ),
         boxShadow: [
@@ -857,7 +1229,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           color: Color(0xFFC86432),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 12),
+                        child: const Icon(
+                          Icons.camera_alt_rounded,
+                          color: Colors.white,
+                          size: 12,
+                        ),
                       ),
                     ),
                   ],
@@ -878,7 +1254,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                     const SizedBox(height: 2),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFC86432).withValues(alpha: 0.25),
                         borderRadius: BorderRadius.circular(8),
@@ -886,20 +1265,33 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ),
                       child: Text(
                         'RANGO: BAQUEANO MAESTRO',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: const Color(0xFFD4AF37)),
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          color: const Color(0xFFD4AF37),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       displayEmail,
-                      style: GoogleFonts.inter(fontSize: 12 * _fontScale, color: Colors.white70),
+                      style: GoogleFonts.inter(
+                        fontSize: 12 * _fontScale,
+                        color: Colors.white70,
+                      ),
                     ),
                   ],
                 ),
               ),
               IconButton(
-                style: IconButton.styleFrom(backgroundColor: const Color(0xFF082B35)),
-                icon: const Icon(Icons.edit_rounded, color: Color(0xFFD4AF37), size: 20),
+                style: IconButton.styleFrom(
+                  backgroundColor: const Color(0xFF082B35),
+                ),
+                icon: const Icon(
+                  Icons.edit_rounded,
+                  color: Color(0xFFD4AF37),
+                  size: 20,
+                ),
                 tooltip: 'Editar Datos',
                 onPressed: _showEditProfileDialog,
               ),
@@ -914,7 +1306,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildStatItem('Expediciones', '$expeditionsCount Rutas', Icons.hiking_rounded),
+              _buildStatItem(
+                'Expediciones',
+                '$expeditionsCount Rutas',
+                Icons.hiking_rounded,
+              ),
               _buildStatItem('Volcanes', '3 Cumbres', Icons.volcano_rounded),
               _buildStatItem('Experiencia', '1,150 XP', Icons.bolt_rounded),
             ],
@@ -929,15 +1325,30 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               value: 1150 / 2000,
               minHeight: 7,
               backgroundColor: const Color(0xFF041920),
-              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFD4AF37)),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Color(0xFFD4AF37),
+              ),
             ),
           ),
           const SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('1,150 XP acumulados', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: Colors.white54)),
-              Text('Siguiente Nivel: 2,000 XP', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: const Color(0xFFD4AF37), fontWeight: FontWeight.w700)),
+              Text(
+                '1,150 XP acumulados',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 10,
+                  color: Colors.white54,
+                ),
+              ),
+              Text(
+                'Siguiente Nivel: 2,000 XP',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 10,
+                  color: const Color(0xFFD4AF37),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ],
           ),
         ],
@@ -950,8 +1361,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       children: [
         Icon(icon, color: const Color(0xFFD4AF37), size: 18),
         const SizedBox(height: 4),
-        Text(value, style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
-        Text(label, style: GoogleFonts.inter(fontSize: 10, color: Colors.white54)),
+        Text(
+          value,
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          label,
+          style: GoogleFonts.inter(fontSize: 10, color: Colors.white54),
+        ),
       ],
     );
   }
@@ -977,14 +1398,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   children: [
                     Text(
                       'Moneda de Cotización',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 2),
                     Text(
                       'C\$ 36.65 NIO / USD (Oficial)',
-                      style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
+                        color: Colors.white54,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -995,17 +1423,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _buildCurrencyChip('USD (\$)', _selectedCurrency == 'USD', () {
-                    _triggerHaptic();
-                    setState(() => _selectedCurrency = 'USD');
-                    CustomToast.show(context, message: 'Moneda establecida en USD (\$)');
-                  }),
+                  _buildCurrencyChip(
+                    'USD (\$)',
+                    _selectedCurrency == 'USD',
+                    () {
+                      _triggerHaptic();
+                      setState(() => _selectedCurrency = 'USD');
+                      CustomToast.show(
+                        context,
+                        message: 'Moneda establecida en USD (\$)',
+                      );
+                    },
+                  ),
                   const SizedBox(width: 6),
-                  _buildCurrencyChip('NIO (C\$)', _selectedCurrency == 'NIO', () {
-                    _triggerHaptic();
-                    setState(() => _selectedCurrency = 'NIO');
-                    CustomToast.show(context, message: 'Moneda establecida en Córdobas (C\$)');
-                  }),
+                  _buildCurrencyChip(
+                    'NIO (C\$)',
+                    _selectedCurrency == 'NIO',
+                    () {
+                      _triggerHaptic();
+                      setState(() => _selectedCurrency = 'NIO');
+                      CustomToast.show(
+                        context,
+                        message: 'Moneda establecida en Córdobas (C\$)',
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
@@ -1016,10 +1458,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           // Régimen Fiscal
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            activeThumbColor: const Color(0xFFC86432),
+            thumbColor: const WidgetStatePropertyAll(Color(0xFFC86432)),
             title: Text(
               'Exoneración de IVA (Turista Extranjero 0% - Ley 306)',
-              style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
             subtitle: Text(
               _isTouristTaxExempt
@@ -1033,7 +1479,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               setState(() => _isTouristTaxExempt = val);
               CustomToast.show(
                 context,
-                message: val ? 'Régimen Turista 0% IVA activado' : 'Régimen Residente 15% IVA activado',
+                message:
+                    val
+                        ? 'Régimen Turista 0% IVA activado'
+                        : 'Régimen Residente 15% IVA activado',
               );
             },
           ),
@@ -1051,7 +1500,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFFC86432) : const Color(0xFF082B35),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: isSelected ? const Color(0xFFD4AF37) : Colors.white24),
+          border: Border.all(
+            color: isSelected ? const Color(0xFFD4AF37) : Colors.white24,
+          ),
         ),
         child: Text(
           label,
@@ -1121,8 +1572,22 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Tamaño de Texto en Pantalla', style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
-              Text('${(_fontScale * 100).toInt()}%', style: GoogleFonts.spaceGrotesk(fontSize: 12, color: const Color(0xFFD4AF37), fontWeight: FontWeight.w800)),
+              Text(
+                'Tamaño de Texto en Pantalla',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                '${(_fontScale * 100).toInt()}%',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 12,
+                  color: const Color(0xFFD4AF37),
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
             ],
           ),
           Slider(
@@ -1146,7 +1611,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
             child: Text(
               'Vista previa del tamaño de texto en la bitácora Baqueano.',
-              style: GoogleFonts.inter(fontSize: 12 * _fontScale, color: Colors.white70),
+              style: GoogleFonts.inter(
+                fontSize: 12 * _fontScale,
+                color: Colors.white70,
+              ),
             ),
           ),
           const Divider(color: Colors.white12, height: 18),
@@ -1168,12 +1636,30 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Widget _buildSwitchRow(String title, String subtitle, bool value, Function(bool) onChanged) {
+  Widget _buildSwitchRow(
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool) onChanged,
+  ) {
     return SwitchListTile(
       contentPadding: EdgeInsets.zero,
-      activeThumbColor: const Color(0xFFC86432),
-      title: Text(title, style: GoogleFonts.spaceGrotesk(fontSize: 13 * _fontScale, fontWeight: FontWeight.w600, color: Colors.white)),
-      subtitle: Text(subtitle, style: GoogleFonts.inter(fontSize: 11 * _fontScale, color: Colors.white54)),
+      thumbColor: const WidgetStatePropertyAll(Color(0xFFC86432)),
+      title: Text(
+        title,
+        style: GoogleFonts.spaceGrotesk(
+          fontSize: 13 * _fontScale,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+        ),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: GoogleFonts.inter(
+          fontSize: 11 * _fontScale,
+          color: Colors.white54,
+        ),
+      ),
       value: value,
       onChanged: (v) {
         _triggerHaptic();
@@ -1239,15 +1725,27 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 onTap: () => _showStampDetailsDialog(stamp),
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
-                    color: unlocked ? color.withValues(alpha: 0.15) : Colors.white.withValues(alpha: 0.05),
+                    color:
+                        unlocked
+                            ? color.withValues(alpha: 0.15)
+                            : Colors.white.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: unlocked ? color : Colors.white12),
+                    border: Border.all(
+                      color: unlocked ? color : Colors.white12,
+                    ),
                   ),
                   child: Row(
                     children: [
-                      Icon(stamp['icon'] as IconData, color: unlocked ? color : Colors.white30, size: 22),
+                      Icon(
+                        stamp['icon'] as IconData,
+                        color: unlocked ? color : Colors.white30,
+                        size: 22,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Column(
@@ -1256,13 +1754,25 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           children: [
                             Text(
                               stamp['title'] as String,
-                              style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: unlocked ? Colors.white : Colors.white38),
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: unlocked ? Colors.white : Colors.white38,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              unlocked ? stamp['date'] as String : 'Por descubrir',
-                              style: GoogleFonts.inter(fontSize: 9, color: unlocked ? const Color(0xFFD4AF37) : Colors.white24),
+                              unlocked
+                                  ? stamp['date'] as String
+                                  : 'Por descubrir',
+                              style: GoogleFonts.inter(
+                                fontSize: 9,
+                                color:
+                                    unlocked
+                                        ? const Color(0xFFD4AF37)
+                                        : Colors.white24,
+                              ),
                             ),
                           ],
                         ),
@@ -1298,16 +1808,30 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Expanded(
                 child: Row(
                   children: [
-                    const Icon(Icons.verified_user_rounded, color: Color(0xFF10B981), size: 20),
+                    const Icon(
+                      Icons.verified_user_rounded,
+                      color: Color(0xFF10B981),
+                      size: 20,
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Cuenta de Google', style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
+                          Text(
+                            'Cuenta de Google',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
                           Text(
                             user?.email ?? _userEmail,
-                            style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+                            style: GoogleFonts.inter(
+                              fontSize: 11,
+                              color: Colors.white54,
+                            ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -1319,15 +1843,25 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isGoogleLinked ? const Color(0xFF10B981).withValues(alpha: 0.2) : const Color(0xFF0284C7),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  backgroundColor:
+                      isGoogleLinked
+                          ? const Color(0xFF10B981).withValues(alpha: 0.2)
+                          : const Color(0xFF0284C7),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                 ),
                 onPressed: () async {
                   _triggerHaptic();
-                  final success = await ref.read(authServiceProvider).signInWithGoogle();
+                  final success =
+                      await ref.read(authServiceProvider).signInWithGoogle();
                   if (success && mounted) {
-                    final updatedUser = ref.read(authServiceProvider).currentUser;
+                    final updatedUser =
+                        ref.read(authServiceProvider).currentUser;
                     if (updatedUser != null) {
                       setState(() {
                         _userName = updatedUser.displayName;
@@ -1336,7 +1870,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           _userAvatarUrl = updatedUser.photoUrl;
                         }
                       });
-                      CustomToast.success(context, '¡Cuenta de Google vinculada con éxito!');
+                      CustomToast.success(
+                        context,
+                        '¡Cuenta de Google vinculada con éxito!',
+                      );
                     }
                   }
                 },
@@ -1345,7 +1882,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   style: GoogleFonts.spaceGrotesk(
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
-                    color: isGoogleLinked ? const Color(0xFF10B981) : Colors.white,
+                    color:
+                        isGoogleLinked ? const Color(0xFF10B981) : Colors.white,
                   ),
                 ),
               ),
@@ -1360,33 +1898,91 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               setState(() => _biometricAuth = v);
               CustomToast.show(
                 context,
-                message: v ? 'Autenticación biométrica habilitada' : 'Autenticación biométrica deshabilitada',
+                message:
+                    v
+                        ? 'Autenticación biométrica habilitada'
+                        : 'Autenticación biométrica deshabilitada',
               );
             },
           ),
           const Divider(color: Colors.white12, height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            alignment: WrapAlignment.spaceBetween,
             children: [
               OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Color(0xFFD4AF37)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                 ),
-                icon: const Icon(Icons.key_rounded, color: Color(0xFFD4AF37), size: 16),
-                label: Text('Cambiar Clave', style: GoogleFonts.spaceGrotesk(fontSize: 12, color: const Color(0xFFD4AF37), fontWeight: FontWeight.w700)),
+                icon: const Icon(
+                  Icons.key_rounded,
+                  color: Color(0xFFD4AF37),
+                  size: 16,
+                ),
+                label: Text(
+                  'Cambiar Clave',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 12,
+                    color: const Color(0xFFD4AF37),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 onPressed: _showChangePasswordDialog,
               ),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE11D48),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  backgroundColor: const Color(0xFF334155),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                 ),
-                icon: const Icon(Icons.logout_rounded, color: Colors.white, size: 16),
-                label: Text('Cerrar Sesión', style: GoogleFonts.spaceGrotesk(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w700)),
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  color: Colors.white,
+                  size: 16,
+                ),
+                label: Text(
+                  'Cerrar Sesión',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 onPressed: _showLogoutDialog,
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  foregroundColor: const Color(0xFFF43F5E),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.delete_forever_rounded,
+                  size: 16,
+                ),
+                label: Text(
+                  'Eliminar Cuenta',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                onPressed: _showDeleteAccountDialog,
               ),
             ],
           ),
@@ -1406,19 +2002,25 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           colors: [
             const Color(0xFF0F172A),
             AppColors.primaryDark,
-            passport.isActive ? const Color(0xFF1E3A2F) : const Color(0xFF082B35),
+            passport.isActive
+                ? const Color(0xFF1E3A2F)
+                : const Color(0xFF082B35),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(22),
         border: Border.all(
-          color: passport.isActive ? AppColors.jungleGreenLight : AppColors.gold.withValues(alpha: 0.6),
+          color:
+              passport.isActive
+                  ? AppColors.jungleGreenLight
+                  : AppColors.gold.withValues(alpha: 0.6),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: (passport.isActive ? AppColors.jungleGreen : AppColors.gold).withValues(alpha: 0.15),
+            color: (passport.isActive ? AppColors.jungleGreen : AppColors.gold)
+                .withValues(alpha: 0.15),
             blurRadius: 18,
             offset: const Offset(0, 6),
           ),
@@ -1432,13 +2034,26 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: (passport.isActive ? AppColors.jungleGreen : AppColors.gold).withValues(alpha: 0.2),
+                  color: (passport.isActive
+                          ? AppColors.jungleGreen
+                          : AppColors.gold)
+                      .withValues(alpha: 0.2),
                   shape: BoxShape.circle,
-                  border: Border.all(color: passport.isActive ? AppColors.jungleGreenLight : AppColors.goldLight),
+                  border: Border.all(
+                    color:
+                        passport.isActive
+                            ? AppColors.jungleGreenLight
+                            : AppColors.goldLight,
+                  ),
                 ),
                 child: Icon(
-                  passport.isActive ? Icons.verified_rounded : Icons.workspace_premium_rounded,
-                  color: passport.isActive ? AppColors.jungleGreenLight : AppColors.goldLight,
+                  passport.isActive
+                      ? Icons.verified_rounded
+                      : Icons.workspace_premium_rounded,
+                  color:
+                      passport.isActive
+                          ? AppColors.jungleGreenLight
+                          : AppColors.goldLight,
                   size: 22,
                 ),
               ),
@@ -1448,16 +2063,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      passport.isActive ? 'MEMBRESÍA ACTIVA' : 'PASE TURÍSTICO EXCLUSIVO',
+                      passport.isActive
+                          ? 'MEMBRESÍA ACTIVA'
+                          : 'PASE TURÍSTICO EXCLUSIVO',
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 10.5,
                         fontWeight: FontWeight.w800,
-                        color: passport.isActive ? AppColors.jungleGreenLight : AppColors.goldLight,
+                        color:
+                            passport.isActive
+                                ? AppColors.jungleGreenLight
+                                : AppColors.goldLight,
                         letterSpacing: 0.8,
                       ),
                     ),
                     Text(
-                      passport.isActive ? 'Pasaporte de Explorador VIP' : 'Pasaporte Digital de Explorador',
+                      passport.isActive
+                          ? 'Pasaporte de Explorador VIP'
+                          : 'Pasaporte Digital de Explorador',
                       style: GoogleFonts.montserrat(
                         fontSize: 16,
                         fontWeight: FontWeight.w900,
@@ -1469,7 +2091,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               ),
               if (passport.isActive)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.jungleGreen.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(8),
@@ -1477,7 +2102,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   child: Text(
                     '15% OFF',
-                    style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.jungleGreenLight),
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w900,
+                      color: AppColors.jungleGreenLight,
+                    ),
                   ),
                 ),
             ],
@@ -1487,30 +2116,46 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           if (passport.isActive) ...[
             Text(
               'Tienes activados todos los beneficios de explorador: 15% de descuento directo en tus reservas, mapas sin conexión e IA ilimitada.',
-              style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white.withValues(alpha: 0.85), height: 1.4),
+              style: GoogleFonts.inter(
+                fontSize: 12.5,
+                color: Colors.white.withValues(alpha: 0.85),
+                height: 1.4,
+              ),
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                const Icon(Icons.event_available_rounded, color: AppColors.goldLight, size: 16),
+                const Icon(
+                  Icons.event_available_rounded,
+                  color: AppColors.goldLight,
+                  size: 16,
+                ),
                 const SizedBox(width: 6),
                 Text(
                   'Válido hasta: ${passport.expiryDate != null ? "${passport.expiryDate!.day}/${passport.expiryDate!.month}/${passport.expiryDate!.year}" : "Activo"}',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.goldLight,
+                  ),
                 ),
               ],
             ),
           ] else ...[
             Text(
-              'Ahorra más de \$40 USD en tu viaje a Nicaragua. Accede a 15% de descuento en expediciones y eco-lodges, mapas topográficos 100% offline y asistente IA ilimitado.',
-              style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white.withValues(alpha: 0.85), height: 1.4),
+              'Ahorra más de \$40 USD en tu viaje a Nicaragua. Accede a 15% de descuento en expediciones y eco-lodges, guía territorial y asistente IA ilimitado.',
+              style: GoogleFonts.inter(
+                fontSize: 12.5,
+                color: Colors.white.withValues(alpha: 0.85),
+                height: 1.4,
+              ),
             ),
             const SizedBox(height: 14),
             Row(
               children: [
                 _buildPassportMiniPerk('🎟️', '15% Descuento'),
                 const SizedBox(width: 8),
-                _buildPassportMiniPerk('🗺️', 'Mapas Offline'),
+                _buildPassportMiniPerk('🗺️', 'Guía Territorial'),
                 const SizedBox(width: 8),
                 _buildPassportMiniPerk('🤖', 'IA Ilimitada'),
               ],
@@ -1523,13 +2168,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   backgroundColor: AppColors.gold,
                   foregroundColor: const Color(0xFF041920),
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 onPressed: () => _showActivatePassportModal(context),
                 icon: const Icon(Icons.stars_rounded, size: 18),
                 label: Text(
                   'ACTIVAR PASAPORTE (\$9.99 USD)',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w900),
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
             ),
@@ -1556,7 +2206,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Flexible(
               child: Text(
                 text,
-                style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w700, color: Colors.white70),
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white70,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -1602,11 +2256,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
                   Row(
                     children: [
-                      const Icon(Icons.workspace_premium_rounded, color: AppColors.goldLight, size: 26),
+                      const Icon(
+                        Icons.workspace_premium_rounded,
+                        color: AppColors.goldLight,
+                        size: 26,
+                      ),
                       const SizedBox(width: 10),
                       Text(
                         'Activar Pasaporte Explorador',
-                        style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white),
+                        style: GoogleFonts.montserrat(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -1616,7 +2278,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   _buildPlanOptionTile(
                     title: 'Pase de Expedición (30 días)',
                     price: '\$9.99 USD (C\$ 365 NIO)',
-                    subtitle: 'Ideal para turistas con estadía de 1 mes en Nicaragua',
+                    subtitle:
+                        'Ideal para turistas con estadía de 1 mes en Nicaragua',
                     isSelected: selectedPlan == 'trip',
                     onTap: () => setModalState(() => selectedPlan = 'trip'),
                   ),
@@ -1635,18 +2298,42 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryDark,
+                      color:
+                          kReleaseMode
+                              ? const Color(0xFF1E293B)
+                              : AppColors.primaryDark,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.borderLight),
+                      border: Border.all(
+                        color:
+                            kReleaseMode
+                                ? const Color(
+                                  0xFFE2E8F0,
+                                ).withValues(alpha: 0.15)
+                                : AppColors.borderLight,
+                      ),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.account_balance_rounded, color: AppColors.goldLight, size: 20),
+                        Icon(
+                          kReleaseMode
+                              ? Icons.hourglass_top_rounded
+                              : Icons.account_balance_rounded,
+                          color:
+                              kReleaseMode
+                                  ? const Color(0xFF94A3B8)
+                                  : AppColors.goldLight,
+                          size: 20,
+                        ),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            'Se activa al instante. Puedes transferir a cuentas BAC, Banpro, Lafise o Billetera Móvil.',
-                            style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                            kReleaseMode
+                                ? 'La integración de pagos con pasarela bancaria nacional está en proceso de certificación oficial. La suscripción automatizada estará disponible próximamente.'
+                                : '[MODO PRUEBAS / DEMO] En desarrollo local puedes activar la suscripción de prueba para validar la UI.',
+                            style: GoogleFonts.inter(
+                              fontSize: 11.5,
+                              color: Colors.white70,
+                            ),
                           ),
                         ),
                       ],
@@ -1658,23 +2345,56 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.gold,
-                        foregroundColor: const Color(0xFF041920),
+                        backgroundColor:
+                            kReleaseMode
+                                ? const Color(0xFF334155)
+                                : AppColors.gold,
+                        foregroundColor:
+                            kReleaseMode
+                                ? Colors.white70
+                                : const Color(0xFF041920),
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                       ),
-                      onPressed: () async {
-                        await ref.read(passportMembershipProvider.notifier).activateMembership(selectedPlan);
-                        if (modalCtx.mounted) {
-                          Navigator.of(modalCtx).pop();
-                        }
-                        if (context.mounted) {
-                          CustomToast.success(context, '¡Pasaporte de Explorador activado con éxito! 15% de descuento habilitado.');
-                        }
-                      },
+                      onPressed:
+                          kReleaseMode
+                              ? () {
+                                if (modalCtx.mounted) {
+                                  Navigator.of(modalCtx).pop();
+                                }
+                                if (context.mounted) {
+                                  CustomToast.show(
+                                    context,
+                                    message:
+                                        'Membresías digitales próximamente disponibles en producción.',
+                                    icon: Icons.info_outline,
+                                  );
+                                }
+                              }
+                              : () async {
+                                await ref
+                                    .read(passportMembershipProvider.notifier)
+                                    .activateMembership(selectedPlan);
+                                if (modalCtx.mounted) {
+                                  Navigator.of(modalCtx).pop();
+                                }
+                                if (context.mounted) {
+                                  CustomToast.success(
+                                    context,
+                                    '[TEST] Pasaporte de prueba activado localmente.',
+                                  );
+                                }
+                              },
                       child: Text(
-                        'CONFIRMAR & ACTIVAR PASAPORTE',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w900),
+                        kReleaseMode
+                            ? 'PRÓXIMAMENTE DISPONIBLE'
+                            : 'ACTIVAR (TEST LOCAL)',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
                   ),
@@ -1700,7 +2420,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.gold.withValues(alpha: 0.15) : AppColors.primaryDark,
+          color:
+              isSelected
+                  ? AppColors.gold.withValues(alpha: 0.15)
+                  : AppColors.primaryDark,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected ? AppColors.gold : AppColors.borderLight,
@@ -1710,7 +2433,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: Row(
           children: [
             Icon(
-              isSelected ? Icons.radio_button_checked_rounded : Icons.radio_button_off_rounded,
+              isSelected
+                  ? Icons.radio_button_checked_rounded
+                  : Icons.radio_button_off_rounded,
               color: isSelected ? AppColors.goldLight : Colors.white54,
               size: 20,
             ),
@@ -1719,9 +2444,29 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
-                  Text(price, style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight)),
-                  Text(subtitle, style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+                  Text(
+                    title,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    price,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.goldLight,
+                    ),
+                  ),
+                  Text(
+                    subtitle,
+                    style: GoogleFonts.inter(
+                      fontSize: 11,
+                      color: Colors.white60,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1739,17 +2484,35 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           children: [
             TextButton(
               onPressed: () => context.go('/ayuda'),
-              child: Text('Centro de Ayuda', style: GoogleFonts.spaceGrotesk(fontSize: 11, color: Colors.white54)),
+              child: Text(
+                'Centro de Ayuda',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 11,
+                  color: Colors.white54,
+                ),
+              ),
             ),
             const Text('•', style: TextStyle(color: Colors.white24)),
             TextButton(
               onPressed: () => context.go('/terminos'),
-              child: Text('Términos', style: GoogleFonts.spaceGrotesk(fontSize: 11, color: Colors.white54)),
+              child: Text(
+                'Términos',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 11,
+                  color: Colors.white54,
+                ),
+              ),
             ),
             const Text('•', style: TextStyle(color: Colors.white24)),
             TextButton(
               onPressed: () => context.go('/privacidad'),
-              child: Text('Privacidad', style: GoogleFonts.spaceGrotesk(fontSize: 11, color: Colors.white54)),
+              child: Text(
+                'Privacidad',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 11,
+                  color: Colors.white54,
+                ),
+              ),
             ),
           ],
         ),

@@ -317,15 +317,24 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
         );
         if (context.mounted) CustomToast.success(context, 'Ubicación GPS compartida');
         return;
+      } else {
+        if (context.mounted) {
+          CustomToast.show(
+            context,
+            message: 'Permiso de ubicación no concedido para compartir GPS.',
+            icon: Icons.location_off_rounded,
+          );
+        }
       }
-    } catch (_) {}
-
-    // Fallback con datos claros
-    _sendMessage(
-      '📍 [Ubicación GPS Compartida]: En ruta hacia el establecimiento. ¡Nos vemos en breve!',
-      bookingCode: bookingCode,
-    );
-    if (context.mounted) CustomToast.success(context, 'Ubicación compartida');
+    } catch (_) {
+      if (context.mounted) {
+        CustomToast.show(
+          context,
+          message: 'No fue posible obtener la coordenada GPS actual.',
+          icon: Icons.gps_off_rounded,
+        );
+      }
+    }
   }
 
   /// Selecciona foto de la galería para enviar
@@ -344,12 +353,14 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
         );
         if (context.mounted) CustomToast.success(context, 'Foto enviada');
       }
-    } catch (_) {
-      _sendMessage(
-        '📸 [Foto del Depósito]: Adjuntando foto del recibo físico en mano.',
-        bookingCode: bookingCode,
-      );
-      if (context.mounted) CustomToast.success(context, 'Comprobante adjuntado');
+    } catch (e) {
+      if (context.mounted) {
+        CustomToast.show(
+          context,
+          message: 'No se pudo adjuntar la imagen seleccionada.',
+          icon: Icons.image_not_supported_rounded,
+        );
+      }
     }
   }
 
@@ -615,23 +626,26 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
-                if (isTyping)
-                  Text(
-                    '✍️ Escribiendo respuesta...',
-                    style: GoogleFonts.spaceGrotesk(
-                      fontSize: 11,
-                      color: AppColors.jungleGreenLight,
-                      fontWeight: FontWeight.w700,
+                Row(
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      decoration: const BoxDecoration(
+                        color: AppColors.jungleGreenLight,
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  )
-                else
-                  Text(
-                    '🟢 En línea ahora',
-                    style: GoogleFonts.inter(
-                      fontSize: 10.5,
-                      color: Colors.white70,
+                    const SizedBox(width: 5),
+                    Text(
+                      'Canal verificado • Respuesta según cobertura',
+                      style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.white70,
+                      ),
                     ),
-                  ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -851,13 +865,25 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
   Widget _buildDeliveryCheck(MessageStatus status) {
     switch (status) {
       case MessageStatus.sending:
-        return const Icon(Icons.access_time_rounded, size: 12, color: Colors.white60);
+        return const Tooltip(
+          message: 'En cola de transmisión',
+          child: Icon(Icons.access_time_rounded, size: 12, color: Colors.white60),
+        );
       case MessageStatus.sent:
-        return const Icon(Icons.check_rounded, size: 13, color: Colors.white70);
+        return const Tooltip(
+          message: 'Enviado',
+          child: Icon(Icons.check_rounded, size: 13, color: Colors.white70),
+        );
       case MessageStatus.delivered:
-        return const Icon(Icons.done_all_rounded, size: 13, color: Colors.white70);
+        return const Tooltip(
+          message: 'Entregado en servidor',
+          child: Icon(Icons.done_all_rounded, size: 13, color: Colors.white70),
+        );
       case MessageStatus.read:
-        return const Icon(Icons.done_all_rounded, size: 13, color: AppColors.goldLight);
+        return const Tooltip(
+          message: 'Leído por el anfitrión',
+          child: Icon(Icons.done_all_rounded, size: 13, color: AppColors.goldLight),
+        );
     }
   }
 

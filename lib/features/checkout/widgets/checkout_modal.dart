@@ -1,25 +1,25 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — MODAL DE RESERVA, FACTURACIÓN & PAGO DIRECTO
+// 🧭 BAQUEANO ECOSYSTEM — MODAL DE RESERVA & COORDINACIÓN DIRECTA COMUNITARIA
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Proveer una experiencia de reserva, contratación y liquidación transparente y
 //   de comercio justo entre el explorador y los anfitriones campesinos locales.
-// - Recopilar la información completa del explorador para póliza de seguro y registro
-//   de expedición, al tiempo que exhibe la ficha legal, fiscal y bancaria completa
-//   del emprendimiento comunitario receptor del pago sin intermediarios.
+// - Erradicar la simulación de cuentas bancarias falsas y confirmaciones automáticas ficticias.
+// - Conectar al viajero de forma real y directa con el anfitrión comunitario verificado,
+//   facilitando canales de comunicación directa (WhatsApp y llamadas telefónicas).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Modal deslizable (`DraggableScrollableSheet` o `Dialog` en pantallas amplias).
+// - Modal responsivo (`DraggableScrollableSheet` o `Dialog` en pantallas amplias).
 // - Gestión reactiva de moneda dual (USD / NIO) con tipo de cambio oficial de Nicaragua.
 // - Desglose tributario en cumplimiento de la Ley No. 306 de Incentivos Turísticos
 //   (0% IVA para turistas extranjeros y 15% IVA para residentes locales).
-// - Acceso directo a números de cuenta bancarios (BAC Credomatic, Banpro, Lafise,
-//   Billetera Móvil) con copia rápida al portapapeles.
+// - Registro de solicitud en estado honesto 'Pendiente de Confirmación'.
+// - Enlaces directos a WhatsApp y llamada telefónica con datos del anfitrión verificado.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
-// - `CheckoutModal`: Widget con formulario de datos personales, ficha del local,
-//   cuentas bancarias, régimen fiscal, cálculo en tiempo real y emisión de comprobante.
+// - `CheckoutModal`: Formulario de reserva con datos de expedición, régimen fiscal,
+//   coordinación directa con el anfitrión y comprobante de solicitud honesta.
 // ============================================================================
 
 import 'dart:math';
@@ -29,6 +29,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
@@ -36,11 +37,12 @@ import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/custom_toast.dart';
+import '../../../services/auth_service.dart';
 import '../../../services/booking_and_communication_service.dart';
 import '../../../services/passport_membership_service.dart';
 import 'baqueano_voucher_dialog.dart';
 
-/// Ficha técnica, fiscal y bancaria del emprendimiento local anfitrión
+/// Ficha técnica y de contacto oficial del emprendimiento campesino anfitrión
 class HostEnterpriseProfile {
   final String businessName;
   final String legalOwner;
@@ -49,14 +51,8 @@ class HostEnterpriseProfile {
   final String address;
   final String phone;
   final String email;
-  final String bacNioAccount;
-  final String bacUsdAccount;
-  final String banproNioAccount;
-  final String banproUsdAccount;
-  final String lafiseAccount;
-  final String mobileWallet;
-  final String beneficiary;
   final String taxStatus;
+  final String settlementPolicy;
 
   const HostEnterpriseProfile({
     required this.businessName,
@@ -66,106 +62,75 @@ class HostEnterpriseProfile {
     required this.address,
     required this.phone,
     required this.email,
-    required this.bacNioAccount,
-    required this.bacUsdAccount,
-    required this.banproNioAccount,
-    required this.banproUsdAccount,
-    required this.lafiseAccount,
-    required this.mobileWallet,
-    required this.beneficiary,
     required this.taxStatus,
+    this.settlementPolicy =
+        'Pago directo al anfitrión comunitario sin intermediarios ni comisiones abusivas.',
   });
 
   /// Resuelve la información del anfitrión según el destino seleccionado
   factory HostEnterpriseProfile.fromDestination(DestinationModel dest) {
-    if (dest.id.contains('luna') || dest.department.toLowerCase().contains('matagalpa')) {
+    if (dest.id.contains('luna') ||
+        dest.department.toLowerCase().contains('matagalpa')) {
       return const HostEnterpriseProfile(
         businessName: 'Cooperativa Ecoturística Cascada La Luna & Cañones R.L.',
         legalOwner: 'Rosa Amelia Valle Palacios',
-        rucNumber: 'J0310000492819',
-        inturLicense: 'INTUR-MAT-2026-084',
-        address: 'Km 142 Carretera El Tuma - La Dalia, Caserío El Diamante, Matagalpa',
+        rucNumber: 'En proceso de validación oficial',
+        inturLicense: 'En proceso de registro INTUR',
+        address:
+            'Km 142 Carretera El Tuma - La Dalia, Caserío El Diamante, Matagalpa',
         phone: '+505 8990-7766',
         email: 'reservas.cascadalaluna@baqueano.ni',
-        bacNioAccount: '365-849201-9',
-        bacUsdAccount: '365-849202-7',
-        banproNioAccount: '1002-3948-2819',
-        banproUsdAccount: '1002-3948-2820',
-        lafiseAccount: '4920-1928-301',
-        mobileWallet: '50589907766 (Billetera Móvil / CoDi)',
-        beneficiary: 'Rosa Amelia Valle Palacios (Coop. Cascada La Luna)',
-        taxStatus: 'Régimen Especial Ecoturismo Campesino (Exonerado Turistas Ley 306)',
+        taxStatus:
+            'Régimen Especial Ecoturismo Campesino (Exonerado Turistas Ley 306)',
       );
-    } else if (dest.id.contains('somoto') || dest.department.toLowerCase().contains('madriz')) {
+    } else if (dest.id.contains('somoto') ||
+        dest.department.toLowerCase().contains('madriz')) {
       return const HostEnterpriseProfile(
         businessName: 'Asociación de Guías Nativos del Cañón de Somoto',
         legalOwner: 'Antonio "Don Toño" Calero Ruiz',
-        rucNumber: 'J0210000194821',
-        inturLicense: 'INTUR-MAD-2026-012',
+        rucNumber: 'En proceso de validación oficial',
+        inturLicense: 'En proceso de registro INTUR',
         address: 'Comunidad Sonís, Monumento Nacional Cañón de Somoto, Madriz',
         phone: '+505 8443-1289',
         email: 'canon.somoto@baqueano.ni',
-        bacNioAccount: '361-902184-2',
-        bacUsdAccount: '361-902185-0',
-        banproNioAccount: '1001-4492-8812',
-        banproUsdAccount: '1001-4492-8813',
-        lafiseAccount: '4810-2918-091',
-        mobileWallet: '50584431289 (Billetera Móvil)',
-        beneficiary: 'Antonio Calero Ruiz (Asoc. Guías Cañón)',
-        taxStatus: 'Turismo Comunitario Sostenible (Exonerado Turistas Ley 306)',
+        taxStatus:
+            'Turismo Comunitario Sostenible (Exonerado Turistas Ley 306)',
       );
-    } else if (dest.id.contains('ometepe') || dest.department.toLowerCase().contains('rivas')) {
+    } else if (dest.id.contains('ometepe') ||
+        dest.department.toLowerCase().contains('rivas')) {
       return const HostEnterpriseProfile(
         businessName: 'Finca Agroecológica & Turismo El Encanto de Ometepe',
         legalOwner: 'Mayra Auxiliadora Carcache',
-        rucNumber: 'J0510000281944',
-        inturLicense: 'INTUR-RIV-2026-119',
-        address: 'Faldas del Volcán Maderas, Comunidad Balgüe, Isla de Ometepe, Rivas',
+        rucNumber: 'En proceso de validación oficial',
+        inturLicense: 'En proceso de registro INTUR',
+        address:
+            'Faldas del Volcán Maderas, Comunidad Balgüe, Isla de Ometepe, Rivas',
         phone: '+505 8892-3401',
         email: 'ometepe.agroeco@baqueano.ni',
-        bacNioAccount: '368-119284-5',
-        bacUsdAccount: '368-119285-3',
-        banproNioAccount: '1005-7712-4019',
-        banproUsdAccount: '1005-7712-4020',
-        lafiseAccount: '4950-7712-882',
-        mobileWallet: '50588923401 (Billetera Móvil / Kash)',
-        beneficiary: 'Mayra Auxiliadora Carcache (Finca El Encanto)',
-        taxStatus: 'Agroturismo Comunitario (0% IVA Turista / 15% IVA Nacional)',
+        taxStatus:
+            'Agroturismo Comunitario (0% IVA Turista / 15% IVA Nacional)',
       );
     } else if (dest.id.contains('masaya') || dest.id.contains('granada')) {
       return const HostEnterpriseProfile(
         businessName: 'Ecotours Volcán & Lagos de Nicaragua R.L.',
         legalOwner: 'Carlos Mendieta Flores',
-        rucNumber: 'J0410000381920',
-        inturLicense: 'INTUR-MAS-2026-041',
-        address: 'Km 23 Carretera a Masaya, Complejo Parque Nacional Volcán Masaya',
+        rucNumber: 'En proceso de validación oficial',
+        inturLicense: 'En proceso de registro INTUR',
+        address:
+            'Km 23 Carretera a Masaya, Complejo Parque Nacional Volcán Masaya',
         phone: '+505 8831-4422',
         email: 'volcan.masaya@baqueano.ni',
-        bacNioAccount: '362-749102-1',
-        bacUsdAccount: '362-749103-9',
-        banproNioAccount: '1003-8821-5012',
-        banproUsdAccount: '1003-8821-5013',
-        lafiseAccount: '4820-3391-401',
-        mobileWallet: '50588314422 (Billetera Móvil)',
-        beneficiary: 'Carlos Mendieta Flores (Ecotours Volcán)',
         taxStatus: 'Operadora de Turismo de Aventura (Ley 306 INTUR)',
       );
     } else {
       return HostEnterpriseProfile(
         businessName: 'Red Baqueano Comunitario — Operación ${dest.department}',
-        legalOwner: dest.guideName,
-        rucNumber: 'J0110000984712',
-        inturLicense: 'INTUR-NIC-2026-${dest.id.hashCode.abs().toString().substring(0, 3)}',
+        legalOwner: dest.guideName.isNotEmpty ? dest.guideName : 'Comité Local de Turismo',
+        rucNumber: 'En proceso de verificación',
+        inturLicense: 'En proceso de registro INTUR',
         address: '${dest.title}, Departamento de ${dest.department}, Nicaragua',
         phone: '+505 8888-9999',
-        email: 'operaciones.${dest.id.replaceAll("-", "")}@baqueano.ni',
-        bacNioAccount: '360-554421-8',
-        bacUsdAccount: '360-554422-6',
-        banproNioAccount: '1000-8849-2011',
-        banproUsdAccount: '1000-8849-2012',
-        lafiseAccount: '4800-9941-203',
-        mobileWallet: '50588889999 (Billetera Móvil / CoDi)',
-        beneficiary: '${dest.guideName} (Red Baqueano Comunitario)',
+        email: 'contacto@baqueano.app',
         taxStatus: 'Turismo Campesino Comunitario Directo (Ley No. 306)',
       );
     }
@@ -175,27 +140,31 @@ class HostEnterpriseProfile {
 class CheckoutModal extends ConsumerStatefulWidget {
   final DestinationModel destination;
 
-  const CheckoutModal({
-    super.key,
-    required this.destination,
-  });
+  const CheckoutModal({super.key, required this.destination});
 
   static Future<void> show(BuildContext context, DestinationModel destination) {
     final width = MediaQuery.of(context).size.width;
     if (width >= 700) {
       return showDialog(
         context: context,
-        builder: (context) => Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 680, maxHeight: 880),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: CheckoutModal(destination: destination),
+        builder:
+            (context) => Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 24,
+              ),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 680,
+                  maxHeight: 880,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: CheckoutModal(destination: destination),
+                ),
+              ),
             ),
-          ),
-        ),
       );
     }
     return showModalBottomSheet(
@@ -213,19 +182,20 @@ class CheckoutModal extends ConsumerStatefulWidget {
 class _CheckoutModalState extends ConsumerState<CheckoutModal> {
   int _participants = 1;
   DateTime _selectedDate = DateTime.now().add(const Duration(days: 2));
-  bool _isTourist = true; // 0% IVA (Turista Extranjero) vs 15% (Residente Local)
+  bool _isTourist =
+      true; // 0% IVA (Turista Extranjero) vs 15% (Residente Local)
   bool _useNioCurrency = false; // Toggle USD / NIO
   final TextEditingController _couponController = TextEditingController();
   bool _couponApplied = false;
   double _discountPercentage = 0.0;
   String _couponError = '';
 
-  // Datos del explorador / usuario
-  final TextEditingController _nameController = TextEditingController(text: 'Valeria Mendoza');
-  final TextEditingController _documentController = TextEditingController(text: 'CR-849204-P');
-  final TextEditingController _phoneController = TextEditingController(text: '+505 8443-8822');
-  final TextEditingController _emailController = TextEditingController(text: 'valeria.exploradora@baqueano.ni');
-  final TextEditingController _nationalityController = TextEditingController(text: 'Costa Rica');
+  // Datos del explorador / usuario inicializados limpiamente sin identidades falsas
+  late final TextEditingController _nameController;
+  late final TextEditingController _documentController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _nationalityController;
 
   late final HostEnterpriseProfile _hostEnterprise;
 
@@ -235,6 +205,12 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
   @override
   void initState() {
     super.initState();
+    final user = ref.read(authServiceProvider).currentUser;
+    _nameController = TextEditingController(text: user?.displayName ?? '');
+    _documentController = TextEditingController();
+    _phoneController = TextEditingController();
+    _emailController = TextEditingController(text: user?.email ?? '');
+    _nationalityController = TextEditingController();
     _hostEnterprise = HostEnterpriseProfile.fromDestination(widget.destination);
     _generateExpeditionCode();
   }
@@ -269,7 +245,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         _discountPercentage = AppConstants.promoCouponDiscount;
         _couponError = '';
       });
-      CustomToast.success(context, '¡Cupón BAQUEANO2026 aplicado con éxito! -15%');
+      CustomToast.success(
+        context,
+        '¡Cupón BAQUEANO2026 aplicado con éxito! -15%',
+      );
     } else {
       setState(() {
         _couponApplied = false;
@@ -283,20 +262,24 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
   static const double _serviceFeeUsd = 2.50;
   double get _serviceFeeNio => _serviceFeeUsd * AppConstants.exchangeRateNioUsd;
 
-  double get _passportDiscountPercentage => ref.watch(passportMembershipProvider).isActive ? 0.15 : 0.0;
-  double get _effectiveDiscountPercentage => (_discountPercentage + _passportDiscountPercentage).clamp(0.0, 0.50);
+  double get _passportDiscountPercentage =>
+      ref.watch(passportMembershipProvider).isActive ? 0.15 : 0.0;
+  double get _effectiveDiscountPercentage =>
+      (_discountPercentage + _passportDiscountPercentage).clamp(0.0, 0.50);
 
   double get _subtotalUsd => widget.destination.priceUsd * _participants;
   double get _discountAmountUsd => _subtotalUsd * _effectiveDiscountPercentage;
   double get _afterDiscountUsd => _subtotalUsd - _discountAmountUsd;
-  double get _vatRate => _isTourist ? AppConstants.touristVatRate : AppConstants.residentVatRate;
+  double get _vatRate =>
+      _isTourist ? AppConstants.touristVatRate : AppConstants.residentVatRate;
   double get _vatAmountUsd => _afterDiscountUsd * _vatRate;
   double get _totalUsd => _afterDiscountUsd + _vatAmountUsd + _serviceFeeUsd;
 
   double get _totalNio => _totalUsd * AppConstants.exchangeRateNioUsd;
   double get _subtotalNio => _subtotalUsd * AppConstants.exchangeRateNioUsd;
   double get _vatAmountNio => _vatAmountUsd * AppConstants.exchangeRateNioUsd;
-  double get _discountAmountNio => _discountAmountUsd * AppConstants.exchangeRateNioUsd;
+  double get _discountAmountNio =>
+      _discountAmountUsd * AppConstants.exchangeRateNioUsd;
 
   String _formatCurrency(double usdAmount, double nioAmount) {
     if (_useNioCurrency) {
@@ -338,7 +321,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
               // Header
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
                 child: Row(
                   children: [
                     Container(
@@ -347,7 +333,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         color: AppColors.terracotta.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(Icons.shield_outlined, color: AppColors.gold, size: 22),
+                      child: const Icon(
+                        Icons.shield_outlined,
+                        color: AppColors.gold,
+                        size: 22,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -355,7 +345,9 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _isConfirmed ? 'COMPROBANTE OFICIAL DE RESERVA' : 'SOLICITUD DE RESERVA & PAGO DIRECTO',
+                            _isConfirmed
+                                ? 'COMPROBANTE OFICIAL DE RESERVA'
+                                : 'SOLICITUD DE RESERVA & PAGO DIRECTO',
                             style: GoogleFonts.spaceGrotesk(
                               fontSize: 10.5,
                               fontWeight: FontWeight.w700,
@@ -389,9 +381,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
               // Content
               Expanded(
-                child: _isConfirmed
-                    ? _buildConfirmationView(scrollController)
-                    : _buildBookingForm(scrollController),
+                child:
+                    _isConfirmed
+                        ? _buildConfirmationView(scrollController)
+                        : _buildBookingForm(scrollController),
               ),
             ],
           ),
@@ -450,8 +443,16 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _buildCurrencyTab('USD', !_useNioCurrency, () => setState(() => _useNioCurrency = false)),
-                    _buildCurrencyTab('NIO (C\$)', _useNioCurrency, () => setState(() => _useNioCurrency = true)),
+                    _buildCurrencyTab(
+                      'USD',
+                      !_useNioCurrency,
+                      () => setState(() => _useNioCurrency = false),
+                    ),
+                    _buildCurrencyTab(
+                      'NIO (C\$)',
+                      _useNioCurrency,
+                      () => setState(() => _useNioCurrency = true),
+                    ),
                   ],
                 ),
               ),
@@ -464,7 +465,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         // --------------------------------------------------------------------
         // SECCIÓN 1: DATOS COMPLETOS DEL EXPLORADOR / USUARIO
         // --------------------------------------------------------------------
-        _buildSectionTitle('1. DATOS DEL EXPLORADOR SOLICITANTE', Icons.badge_outlined),
+        _buildSectionTitle(
+          '1. DATOS DEL EXPLORADOR SOLICITANTE',
+          Icons.badge_outlined,
+        ),
         const SizedBox(height: 10),
 
         Container(
@@ -537,7 +541,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         // --------------------------------------------------------------------
         // SECCIÓN 2: INFORMACIÓN COMPLETA DEL LOCAL / EMPRENDIMIENTO
         // --------------------------------------------------------------------
-        _buildSectionTitle('2. INFORMACIÓN DEL LOCAL & EMPRENDIMIENTO CAMPESINO', Icons.storefront_outlined),
+        _buildSectionTitle(
+          '2. INFORMACIÓN DEL LOCAL & EMPRENDIMIENTO CAMPESINO',
+          Icons.storefront_outlined,
+        ),
         const SizedBox(height: 10),
 
         Container(
@@ -552,7 +559,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 1.2),
+            border: Border.all(
+              color: AppColors.gold.withValues(alpha: 0.4),
+              width: 1.2,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -567,7 +577,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.gold, width: 1.2),
                     ),
-                    child: const Icon(Icons.verified_user_rounded, color: AppColors.goldLight, size: 22),
+                    child: const Icon(
+                      Icons.verified_user_rounded,
+                      color: AppColors.goldLight,
+                      size: 22,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -585,7 +599,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         const SizedBox(height: 2),
                         Text(
                           'Propietario / Responsable: ${_hostEnterprise.legalOwner}',
-                          style: GoogleFonts.inter(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: AppColors.goldLight,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
@@ -594,12 +612,29 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               ),
               const Divider(color: AppColors.borderLight, height: 20),
 
-              _buildEnterpriseInfoRow('Número RUC:', _hostEnterprise.rucNumber, isMonospace: true),
-              _buildEnterpriseInfoRow('Licencia INTUR:', _hostEnterprise.inturLicense, isMonospace: true),
-              _buildEnterpriseInfoRow('Dirección Exacta:', _hostEnterprise.address),
-              _buildEnterpriseInfoRow('Teléfono Directo:', _hostEnterprise.phone),
+              _buildEnterpriseInfoRow(
+                'Número RUC:',
+                _hostEnterprise.rucNumber,
+                isMonospace: true,
+              ),
+              _buildEnterpriseInfoRow(
+                'Licencia INTUR:',
+                _hostEnterprise.inturLicense,
+                isMonospace: true,
+              ),
+              _buildEnterpriseInfoRow(
+                'Dirección Exacta:',
+                _hostEnterprise.address,
+              ),
+              _buildEnterpriseInfoRow(
+                'Teléfono Directo:',
+                _hostEnterprise.phone,
+              ),
               _buildEnterpriseInfoRow('Correo Oficial:', _hostEnterprise.email),
-              _buildEnterpriseInfoRow('Régimen Legal:', _hostEnterprise.taxStatus),
+              _buildEnterpriseInfoRow(
+                'Régimen Legal:',
+                _hostEnterprise.taxStatus,
+              ),
             ],
           ),
         ),
@@ -607,9 +642,12 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         const SizedBox(height: 18),
 
         // --------------------------------------------------------------------
-        // SECCIÓN 3: CUENTAS BANCARIAS PARA PAGO DIRECTO
+        // SECCIÓN 3: COORDINACIÓN DIRECTA & COMERCIO JUSTO
         // --------------------------------------------------------------------
-        _buildSectionTitle('3. CUENTAS BANCARIAS OFICIALES PARA PAGO DIRECTO', Icons.account_balance_outlined),
+        _buildSectionTitle(
+          '3. MODALIDAD DE LIQUIDACIÓN Y CONTACTO DIRECTO',
+          Icons.handshake_outlined,
+        ),
         const SizedBox(height: 10),
 
         Container(
@@ -623,7 +661,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.jungleGreen.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
@@ -631,12 +672,19 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle_outline, color: AppColors.jungleGreen, size: 16),
+                    const Icon(
+                      Icons.check_circle_outline,
+                      color: AppColors.jungleGreen,
+                      size: 18,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Comercio Justo: El 100% de tu pago se transfiere directamente al anfitrión sin comisión.',
-                        style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                        'Comercio Justo: El 100% de tu pago se transfiere o entrega directamente al anfitrión comunitario sin comisiones.',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: Colors.white70,
+                        ),
                       ),
                     ),
                   ],
@@ -645,44 +693,81 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const SizedBox(height: 14),
 
               Text(
-                'Beneficiario: ${_hostEnterprise.beneficiary}',
-                style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                'Anfitrión Responsable: ${_hostEnterprise.legalOwner}',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.goldLight,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                _hostEnterprise.businessName,
+                style: GoogleFonts.inter(
+                  fontSize: 11,
+                  color: Colors.white60,
+                ),
+              ),
+              const SizedBox(height: 14),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => _launchWhatsAppDirect(
+                        _hostEnterprise.phone,
+                        _hostEnterprise.legalOwner,
+                      ),
+                      icon: const Icon(Icons.chat, color: Color(0xFF25D366), size: 18),
+                      label: Text(
+                        'WhatsApp',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFF25D366)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => _makePhoneCallDirect(_hostEnterprise.phone),
+                      icon: const Icon(Icons.phone, color: AppColors.gold, size: 18),
+                      label: Text(
+                        'Llamar',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: AppColors.gold),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
-
-              // BAC Credomatic
-              _buildBankAccountTile(
-                bankName: 'BAC Credomatic',
-                nioAccount: _hostEnterprise.bacNioAccount,
-                usdAccount: _hostEnterprise.bacUsdAccount,
-                bankColor: const Color(0xFFE50019),
-              ),
-              const SizedBox(height: 8),
-
-              // BANPRO
-              _buildBankAccountTile(
-                bankName: 'Banco de la Producción (BANPRO)',
-                nioAccount: _hostEnterprise.banproNioAccount,
-                usdAccount: _hostEnterprise.banproUsdAccount,
-                bankColor: const Color(0xFF007A3D),
-              ),
-              const SizedBox(height: 8),
-
-              // LAFISE
-              _buildSingleAccountTile(
-                bankName: 'Banco LAFISE Bancentro',
-                accountNumber: _hostEnterprise.lafiseAccount,
-                currencyBadge: 'Cta Unificada NIO / USD',
-                bankColor: const Color(0xFF003865),
-              ),
-              const SizedBox(height: 8),
-
-              // Billetera Móvil / CoDi
-              _buildSingleAccountTile(
-                bankName: 'Billetera Móvil / Transferencia Celular',
-                accountNumber: _hostEnterprise.mobileWallet,
-                currencyBadge: 'Transferencia Rápida',
-                bankColor: const Color(0xFFC86432),
+              Text(
+                'El anfitrión coordinará contigo el método de pago local (efectivo al llegar, transferencia o billetera) al confirmar las fechas.',
+                style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.white54,
+                ),
               ),
             ],
           ),
@@ -693,7 +778,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         // --------------------------------------------------------------------
         // SECCIÓN 4: DETALLES DE LA EXPEDICIÓN
         // --------------------------------------------------------------------
-        _buildSectionTitle('4. DETALLES DE LA EXPEDICIÓN', Icons.event_available_outlined),
+        _buildSectionTitle(
+          '4. DETALLES DE LA EXPEDICIÓN',
+          Icons.event_available_outlined,
+        ),
         const SizedBox(height: 10),
 
         Row(
@@ -701,7 +789,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             // Participantes
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.bgCard,
                   borderRadius: BorderRadius.circular(12),
@@ -710,35 +801,59 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Exploradores', style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted)),
+                    Text(
+                      'Exploradores',
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
+                        color: AppColors.textMuted,
+                      ),
+                    ),
                     const SizedBox(height: 6),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                          onTap: _participants > 1 ? () => setState(() => _participants--) : null,
+                          onTap:
+                              _participants > 1
+                                  ? () => setState(() => _participants--)
+                                  : null,
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: AppColors.primaryLight,
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Icon(Icons.remove, size: 18, color: AppColors.textLight),
+                            child: const Icon(
+                              Icons.remove,
+                              size: 18,
+                              color: AppColors.textLight,
+                            ),
                           ),
                         ),
                         Text(
                           '$_participants pax',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textLight),
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.textLight,
+                          ),
                         ),
                         InkWell(
-                          onTap: _participants < 12 ? () => setState(() => _participants++) : null,
+                          onTap:
+                              _participants < 12
+                                  ? () => setState(() => _participants++)
+                                  : null,
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: AppColors.primaryLight,
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Icon(Icons.add, size: 18, color: AppColors.textLight),
+                            child: const Icon(
+                              Icons.add,
+                              size: 18,
+                              color: AppColors.textLight,
+                            ),
                           ),
                         ),
                       ],
@@ -777,7 +892,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   }
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.bgCard,
                     borderRadius: BorderRadius.circular(12),
@@ -786,15 +904,29 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Fecha de Salida', style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted)),
+                      Text(
+                        'Fecha de Salida',
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          const Icon(Icons.calendar_today, size: 16, color: AppColors.gold),
+                          const Icon(
+                            Icons.calendar_today,
+                            size: 16,
+                            color: AppColors.gold,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             DateFormat('dd MMM yyyy').format(_selectedDate),
-                            style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textLight),
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textLight,
+                            ),
                           ),
                         ],
                       ),
@@ -811,7 +943,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         // --------------------------------------------------------------------
         // SECCIÓN 5: RÉGIMEN FISCAL (TURISTA 0% vs RESIDENTE 15%)
         // --------------------------------------------------------------------
-        _buildSectionTitle('5. RÉGIMEN TRIBUTARIO & POLÍTICA DE IVA (LEY NO. 306)', Icons.gavel_outlined),
+        _buildSectionTitle(
+          '5. RÉGIMEN TRIBUTARIO & POLÍTICA DE IVA (LEY NO. 306)',
+          Icons.gavel_outlined,
+        ),
         const SizedBox(height: 8),
 
         Container(
@@ -831,11 +966,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 dense: true,
                 title: Text(
                   'Turista Extranjero (0% IVA Exonerado)',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textLight),
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textLight,
+                  ),
                 ),
                 subtitle: Text(
                   'Aplica exoneración fiscal de la Ley de Incentivos Turísticos de Nicaragua (Ley 306 INTUR).',
-                  style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: AppColors.textMuted,
+                  ),
                 ),
                 onChanged: (val) => setState(() => _isTourist = val!),
               ),
@@ -848,11 +990,18 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 dense: true,
                 title: Text(
                   'Residente Local / Nacional (15% IVA General DGI)',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textLight),
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textLight,
+                  ),
                 ),
                 subtitle: Text(
                   'Incluye impuesto al valor agregado nacional para facturación fiscal DGI.',
-                  style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: AppColors.textMuted,
+                  ),
                 ),
                 onChanged: (val) => setState(() => _isTourist = val!),
               ),
@@ -865,7 +1014,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         // --------------------------------------------------------------------
         // SECCIÓN 6: CUPÓN DE DESCUENTO
         // --------------------------------------------------------------------
-        _buildSectionTitle('6. CUPÓN DE DESCUENTO COMUNITARIO', Icons.local_offer_outlined),
+        _buildSectionTitle(
+          '6. CUPÓN DE DESCUENTO COMUNITARIO',
+          Icons.local_offer_outlined,
+        ),
         const SizedBox(height: 8),
 
         Row(
@@ -873,16 +1025,34 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             Expanded(
               child: TextField(
                 controller: _couponController,
-                style: GoogleFonts.spaceGrotesk(color: AppColors.textLight, fontWeight: FontWeight.w600),
+                style: GoogleFonts.spaceGrotesk(
+                  color: AppColors.textLight,
+                  fontWeight: FontWeight.w600,
+                ),
                 decoration: InputDecoration(
                   hintText: 'Ingresa código (ej. BAQUEANO2026)',
-                  hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 13),
+                  hintStyle: GoogleFonts.inter(
+                    color: AppColors.textMuted,
+                    fontSize: 13,
+                  ),
                   filled: true,
                   fillColor: AppColors.bgCard,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
-                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
-                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.gold)),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.borderLight),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.borderLight),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.gold),
+                  ),
                 ),
               ),
             ),
@@ -897,15 +1067,28 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         ),
         if (_couponError.isNotEmpty) ...[
           const SizedBox(height: 6),
-          Text(_couponError, style: GoogleFonts.inter(fontSize: 12, color: AppColors.error)),
+          Text(
+            _couponError,
+            style: GoogleFonts.inter(fontSize: 12, color: AppColors.error),
+          ),
         ],
         if (_couponApplied) ...[
           const SizedBox(height: 6),
           Row(
             children: [
-              const Icon(Icons.check_circle, color: AppColors.success, size: 16),
+              const Icon(
+                Icons.check_circle,
+                color: AppColors.success,
+                size: 16,
+              ),
               const SizedBox(width: 6),
-              Text('Cupón activo: 15% de descuento en esta expedición', style: GoogleFonts.inter(fontSize: 12, color: AppColors.success)),
+              Text(
+                'Cupón activo: 15% de descuento en esta expedición',
+                style: GoogleFonts.inter(
+                  fontSize: 12,
+                  color: AppColors.success,
+                ),
+              ),
             ],
           ),
         ],
@@ -926,23 +1109,28 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 'Tarifa Base x $_participants persona(s)',
                 _formatCurrency(_subtotalUsd, _subtotalNio),
               ),
-              if (_couponApplied || ref.watch(passportMembershipProvider).isActive) ...[
+              if (_couponApplied ||
+                  ref.watch(passportMembershipProvider).isActive) ...[
                 const SizedBox(height: 8),
                 _buildPriceRow(
-                  ref.watch(passportMembershipProvider).isActive && _couponApplied
+                  ref.watch(passportMembershipProvider).isActive &&
+                          _couponApplied
                       ? 'Descuento Combinado (Cupón + Pasaporte)'
                       : ref.watch(passportMembershipProvider).isActive
-                          ? 'Beneficio Pasaporte Explorador (-15%)'
-                          : 'Descuento Comunitario (-15%)',
+                      ? 'Beneficio Pasaporte Explorador (-15%)'
+                      : 'Descuento Comunitario (-15%)',
                   '- ${_formatCurrency(_discountAmountUsd, _discountAmountNio)}',
                   textColor: AppColors.success,
                 ),
               ],
               const SizedBox(height: 8),
               _buildPriceRow(
-                _isTourist ? 'IVA (Exoneración Turista 0% Ley 306)' : 'IVA (Residente Local 15% DGI)',
+                _isTourist
+                    ? 'IVA (Exoneración Turista 0% Ley 306)'
+                    : 'IVA (Residente Local 15% DGI)',
                 _formatCurrency(_vatAmountUsd, _vatAmountNio),
-                textColor: _isTourist ? AppColors.goldLight : AppColors.textMuted,
+                textColor:
+                    _isTourist ? AppColors.goldLight : AppColors.textMuted,
               ),
               const SizedBox(height: 8),
               _buildPriceRow(
@@ -962,11 +1150,19 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     children: [
                       Text(
                         'TOTAL A PAGAR',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight, letterSpacing: 1.0),
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.goldLight,
+                          letterSpacing: 1.0,
+                        ),
                       ),
                       Text(
                         'Pago 100% directo a los anfitriones',
-                        style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: AppColors.textMuted,
+                        ),
                       ),
                     ],
                   ),
@@ -986,39 +1182,47 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
         const SizedBox(height: 24),
 
-        // CTA DE CONFIRMACIÓN
+        // CTA DE TRANSMISIÓN DE SOLICITUD
         BaqueanoButton(
-          text: 'CONFIRMAR RESERVA & COMPROBANTE',
-          icon: const Icon(Icons.verified, color: Colors.white, size: 20),
+          text: 'ENVIAR SOLICITUD DE RESERVA',
+          icon: const Icon(Icons.send_rounded, color: Colors.white, size: 20),
           variant: BaqueanoButtonVariant.primary,
           height: 52,
           onPressed: () {
             if (_nameController.text.trim().isEmpty) {
-              CustomToast.error(context, 'Por favor ingresa el nombre del explorador');
+              CustomToast.error(
+                context,
+                'Por favor ingresa el nombre del explorador',
+              );
               return;
             }
 
-            // Registrar reserva real en el servicio central de Baqueano
-            ref.read(bookingCommunicationProvider.notifier).createBooking(
-              code: _expeditionCode,
-              destinationTitle: widget.destination.title,
-              destinationId: widget.destination.id,
-              department: widget.destination.department,
-              hostName: _hostEnterprise.legalOwner,
-              hostBusiness: _hostEnterprise.businessName,
-              hostPhone: _hostEnterprise.phone,
-              date: DateFormat('dd MMM yyyy').format(_selectedDate),
-              participants: _participants,
-              totalUsd: _totalUsd,
-              totalNio: _totalNio,
-              isTourist: _isTourist,
-              imageUrl: widget.destination.imageUrl,
-              clientName: _nameController.text.trim(),
-              clientPhone: _phoneController.text.trim(),
-            );
+            // Registrar solicitud de reserva en el gestor de Baqueano
+            ref
+                .read(bookingCommunicationProvider.notifier)
+                .createBooking(
+                  code: _expeditionCode,
+                  destinationTitle: widget.destination.title,
+                  destinationId: widget.destination.id,
+                  department: widget.destination.department,
+                  hostName: _hostEnterprise.legalOwner,
+                  hostBusiness: _hostEnterprise.businessName,
+                  hostPhone: _hostEnterprise.phone,
+                  date: DateFormat('dd MMM yyyy').format(_selectedDate),
+                  participants: _participants,
+                  totalUsd: _totalUsd,
+                  totalNio: _totalNio,
+                  isTourist: _isTourist,
+                  imageUrl: widget.destination.imageUrl,
+                  clientName: _nameController.text.trim(),
+                  clientPhone: _phoneController.text.trim(),
+                );
 
             setState(() => _isConfirmed = true);
-            CustomToast.success(context, '¡Expedición confirmada! Tu comprobante está listo.');
+            CustomToast.success(
+              context,
+              '¡Solicitud enviada! En espera de confirmación comunitaria.',
+            );
           },
         ),
         const SizedBox(height: 24),
@@ -1058,30 +1262,57 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
       children: [
         Text(
           label,
-          style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.textMuted),
+          style: GoogleFonts.inter(
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+            color: AppColors.textMuted,
+          ),
         ),
         const SizedBox(height: 6),
         TextField(
           controller: controller,
           keyboardType: keyboardType,
-          style: GoogleFonts.inter(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w500),
+          style: GoogleFonts.inter(
+            fontSize: 13,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.inter(color: AppColors.textMuted.withValues(alpha: 0.6), fontSize: 12),
+            hintStyle: GoogleFonts.inter(
+              color: AppColors.textMuted.withValues(alpha: 0.6),
+              fontSize: 12,
+            ),
             prefixIcon: Icon(icon, color: AppColors.goldLight, size: 18),
             filled: true,
             fillColor: const Color(0xFF041920),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.borderLight)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.borderLight)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.gold)),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 10,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: AppColors.borderLight),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: AppColors.borderLight),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: AppColors.gold),
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildEnterpriseInfoRow(String label, String value, {bool isMonospace = false}) {
+  Widget _buildEnterpriseInfoRow(
+    String label,
+    String value, {
+    bool isMonospace = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -1091,15 +1322,24 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             width: 120,
             child: Text(
               label,
-              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, fontWeight: FontWeight.w600),
+              style: GoogleFonts.inter(
+                fontSize: 12,
+                color: AppColors.textMuted,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           Expanded(
             child: Text(
               value,
-              style: isMonospace
-                  ? GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w700)
-                  : GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+              style:
+                  isMonospace
+                      ? GoogleFonts.spaceGrotesk(
+                        fontSize: 12,
+                        color: AppColors.goldLight,
+                        fontWeight: FontWeight.w700,
+                      )
+                      : GoogleFonts.inter(fontSize: 12, color: Colors.white70),
             ),
           ),
         ],
@@ -1107,170 +1347,40 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
     );
   }
 
-  Widget _buildBankAccountTile({
-    required String bankName,
-    required String nioAccount,
-    required String usdAccount,
-    required Color bankColor,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.bgCard,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(color: bankColor, shape: BoxShape.circle),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  bankName,
-                  style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: Text('C\$ (NIO): $nioAccount', style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w600)),
-              ),
-              InkWell(
-                onTap: () => _copyToClipboard(nioAccount, 'Cta $bankName Córdobas'),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(6)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.copy, size: 12, color: Colors.white70),
-                      const SizedBox(width: 4),
-                      Text('Copiar', style: GoogleFonts.inter(fontSize: 10, color: Colors.white)),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Row(
-            children: [
-              Expanded(
-                child: Text('\$ (USD): $usdAccount', style: GoogleFonts.spaceGrotesk(fontSize: 12, color: Colors.white70, fontWeight: FontWeight.w600)),
-              ),
-              InkWell(
-                onTap: () => _copyToClipboard(usdAccount, 'Cta $bankName Dólares'),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(6)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.copy, size: 12, color: Colors.white70),
-                      const SizedBox(width: 4),
-                      Text('Copiar', style: GoogleFonts.inter(fontSize: 10, color: Colors.white)),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+  Future<void> _makePhoneCallDirect(String phone) async {
+    final cleanPhone = phone.replaceAll(RegExp(r'[^\d+]'), '');
+    final uri = Uri.parse('tel:$cleanPhone');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        await launchUrl(uri);
+      }
+    } catch (_) {
+      if (mounted) CustomToast.show(context, message: 'Teléfono anfitrión: $phone');
+    }
   }
 
-  Widget _buildSingleAccountTile({
-    required String bankName,
-    required String accountNumber,
-    required String currencyBadge,
-    required Color bankColor,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.bgCard,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(color: bankColor, shape: BoxShape.circle),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        bankName,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 8),
-              // Flexible: el badge cede espacio al nombre del banco en pantallas angostas
-              Flexible(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(4)),
-                  child: Text(
-                    currencyBadge,
-                    style: GoogleFonts.spaceGrotesk(fontSize: 9, color: AppColors.goldLight, fontWeight: FontWeight.w700),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: Text(accountNumber, style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w600)),
-              ),
-              InkWell(
-                onTap: () => _copyToClipboard(accountNumber, 'Cuenta $bankName'),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(6)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.copy, size: 12, color: Colors.white70),
-                      const SizedBox(width: 4),
-                      Text('Copiar', style: GoogleFonts.inter(fontSize: 10, color: Colors.white)),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+  Future<void> _launchWhatsAppDirect(String phone, String hostName) async {
+    final cleanPhone = phone.replaceAll(RegExp(r'[^\d]'), '');
+    final msg = Uri.encodeComponent(
+      '¡Hola $hostName! He enviado una solicitud de reserva (Código: $_expeditionCode) para ${widget.destination.title} a través de la app Baqueano. Quisiera coordinar detalles de llegada y disponibilidad.',
     );
+    final nativeUri = Uri.parse('whatsapp://send?phone=$cleanPhone&text=$msg');
+    final webUri = Uri.parse('https://wa.me/$cleanPhone?text=$msg');
+    try {
+      if (await canLaunchUrl(nativeUri)) {
+        await launchUrl(nativeUri, mode: LaunchMode.externalApplication);
+        return;
+      }
+      await launchUrl(webUri, mode: LaunchMode.externalApplication);
+    } catch (_) {
+      try {
+        await launchUrl(webUri, mode: LaunchMode.platformDefault);
+      } catch (_) {
+        if (mounted) CustomToast.show(context, message: 'WhatsApp anfitrión: $phone');
+      }
+    }
   }
 
   Widget _buildPriceRow(String label, String value, {Color? textColor}) {
@@ -1280,7 +1390,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         Expanded(
           child: Text(
             label,
-            style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted),
+            style: GoogleFonts.inter(
+              fontSize: 12.5,
+              color: AppColors.textMuted,
+            ),
           ),
         ),
         const SizedBox(width: 8),
@@ -1361,22 +1474,43 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('REPÚBLICA DE NICARAGUA', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold)),
-                          Text('BAQUEANO EXPEDITION PASS', style: GoogleFonts.montserrat(fontSize: 12.5, fontWeight: FontWeight.w900, color: Colors.white)),
+                          Text(
+                            'REPÚBLICA DE NICARAGUA',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.gold,
+                            ),
+                          ),
+                          Text(
+                            'BAQUEANO EXPEDITION PASS',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: AppColors.success.withValues(alpha: 0.2),
+                      color: AppColors.gold.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.success),
+                      border: Border.all(color: AppColors.gold),
                     ),
                     child: Text(
-                      'AUTORIZADO',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w800, color: AppColors.success),
+                      'SOLICITUD EN ESPERA',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.goldLight,
+                      ),
                     ),
                   ),
                 ],
@@ -1393,15 +1527,58 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('CÓDIGO ÚNICO', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted)),
-                      Text(_expeditionCode, style: GoogleFonts.spaceGrotesk(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.goldLight)),
+                      Text(
+                        'CÓDIGO ÚNICO',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 10,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            _expeditionCode,
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.goldLight,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          GestureDetector(
+                            onTap: () => _copyToClipboard(
+                              _expeditionCode,
+                              'Código de reserva',
+                            ),
+                            child: const Icon(
+                              Icons.copy_rounded,
+                              size: 16,
+                              color: AppColors.gold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('FECHA DE VIAJE', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted)),
-                      Text(DateFormat('dd MMMM yyyy').format(_selectedDate), style: GoogleFonts.spaceGrotesk(fontSize: 12.5, fontWeight: FontWeight.w700, color: Colors.white)),
+                      Text(
+                        'FECHA DE VIAJE',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 10,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                      Text(
+                        DateFormat('dd MMMM yyyy').format(_selectedDate),
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -1409,7 +1586,14 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const SizedBox(height: 16),
 
               // Datos del Explorador
-              Text('DATOS DEL EXPLORADOR', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold)),
+              Text(
+                'DATOS DEL EXPLORADOR',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.gold,
+                ),
+              ),
               const SizedBox(height: 6),
               _buildDetailRow('Nombre Titular:', _nameController.text),
               _buildDetailRow('Cédula / Pasaporte:', _documentController.text),
@@ -1421,21 +1605,39 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const Divider(color: AppColors.borderLight, height: 20),
 
               // Datos del Local
-              Text('EMPRENDIMIENTO RECEPTOR', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold)),
+              Text(
+                'EMPRENDIMIENTO RECEPTOR',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.gold,
+                ),
+              ),
               const SizedBox(height: 6),
               _buildDetailRow('Local Anfitrión:', _hostEnterprise.businessName),
               _buildDetailRow('Propietario:', _hostEnterprise.legalOwner),
               _buildDetailRow('RUC Oficial:', _hostEnterprise.rucNumber),
               _buildDetailRow('Licencia INTUR:', _hostEnterprise.inturLicense),
               _buildDetailRow('Dirección:', _hostEnterprise.address),
-              _buildDetailRow('Teléfono Local:', _hostEnterprise.phone),
-              _buildDetailRow('Beneficiario Cuentas:', _hostEnterprise.beneficiary),
+              _buildDetailRow('Teléfono Contacto:', _hostEnterprise.phone),
+              _buildDetailRow(
+                'Liquidación:',
+                _hostEnterprise.settlementPolicy,
+              ),
 
               const Divider(color: AppColors.borderLight, height: 20),
 
               _buildDetailRow('Destino:', widget.destination.title),
-              _buildDetailRow('Monto Total:', _formatCurrency(_totalUsd, _totalNio)),
-              _buildDetailRow('Régimen Fiscal:', _isTourist ? 'Turista (0% IVA Exonerado Ley 306)' : 'Residente (15% IVA Incluido)'),
+              _buildDetailRow(
+                'Monto Total:',
+                _formatCurrency(_totalUsd, _totalNio),
+              ),
+              _buildDetailRow(
+                'Régimen Fiscal:',
+                _isTourist
+                    ? 'Turista (0% IVA Exonerado Ley 306)'
+                    : 'Residente (15% IVA Incluido)',
+              ),
 
               const SizedBox(height: 16),
               Container(
@@ -1447,12 +1649,19 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.info_outline, color: AppColors.gold, size: 20),
+                    const Icon(
+                      Icons.info_outline,
+                      color: AppColors.gold,
+                      size: 20,
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Presenta este comprobante digital o transfiere a las cuentas de ${_hostEnterprise.legalOwner}. El 100% de tu dinero llega directo sin intermediarios.',
-                        style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight),
+                        'Comunícate con ${_hostEnterprise.legalOwner} para coordinar disponibilidad y llegada. Al confirmar tu expedición, el pago se realiza directo al anfitrión sin intermediarios.',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          color: AppColors.textLight,
+                        ),
                       ),
                     ),
                   ],
@@ -1464,19 +1673,82 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
         const SizedBox(height: 16),
 
-        // Coordinar Llegada con el Propietario
+        // Botones de Contacto Directo con el Anfitrión (WhatsApp y Teléfono)
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF25D366),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                icon: const Icon(Icons.chat, size: 16, color: Colors.white),
+                label: Text(
+                  'WhatsApp',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+                onPressed: () => _launchWhatsAppDirect(
+                  _hostEnterprise.phone,
+                  _hostEnterprise.legalOwner,
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.gold,
+                  foregroundColor: const Color(0xFF041920),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                icon: const Icon(Icons.phone_in_talk, size: 16),
+                label: Text(
+                  'Llamar',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+                onPressed: () => _makePhoneCallDirect(_hostEnterprise.phone),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+
+        // Coordinar por Chat en la App
         SizedBox(
           width: double.infinity,
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0284C7),
-              padding: const EdgeInsets.symmetric(vertical: 13),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          child: OutlinedButton.icon(
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(color: Color(0xFF0284C7)),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
-            icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 18),
+            icon: const Icon(
+              Icons.forum_outlined,
+              color: Color(0xFF38BDF8),
+              size: 18,
+            ),
             label: Text(
-              'Coordinar Llegada por Chat con el Propietario',
-              style: GoogleFonts.spaceGrotesk(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+              'Coordinar por Chat en la App',
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.5,
+              ),
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -1530,7 +1802,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             flex: 4,
             child: Text(
               label,
-              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, fontWeight: FontWeight.w500),
+              style: GoogleFonts.inter(
+                fontSize: 11.5,
+                color: AppColors.textMuted,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           const SizedBox(width: 8),
@@ -1538,7 +1814,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             flex: 5,
             child: Text(
               value,
-              style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppColors.textLight),
+              style: GoogleFonts.inter(
+                fontSize: 11.5,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textLight,
+              ),
               textAlign: TextAlign.end,
             ),
           ),
