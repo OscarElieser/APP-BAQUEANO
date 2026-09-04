@@ -1,25 +1,26 @@
-// ============================================================================
-// 🧭 BAQUEANO — ACCESO ANDROID CON GOOGLE Y FIREBASE
+﻿// ============================================================================
+// ðŸ§­ BAQUEANO â€” ACCESO ANDROID CON GOOGLE Y FIREBASE
 // ============================================================================
 //
-// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// ðŸŽ¯ POR QUÃ‰ (WHY / PROPÃ“SITO):
 // - Ofrecer acceso claro a funciones personales sin confundir un correo escrito
 //   manualmente con una identidad verificada.
-// - Mantener disponible la exploración como invitado, indicando que esa opción no
-//   crea ni conserva una sesión autenticada.
+// - Mantener disponible la exploraciÃ³n como invitado, indicando que esa opciÃ³n no
+//   crea ni conserva una sesiÃ³n autenticada.
 //
-// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - El botón Google delega en `AuthService`; la navegación solo ocurre cuando
+// âš™ï¸ CÃ“MO (HOW / ARQUITECTURA & IMPLEMENTACIÃ“N):
+// - El botÃ³n Google delega en `AuthService`; la navegaciÃ³n solo ocurre cuando
 //   Firebase Auth confirma la credencial y el servicio publica el mismo UID.
-// - Los errores de configuración se explican sin habilitar rutas alternativas de
+// - Los errores de configuraciÃ³n se explican sin habilitar rutas alternativas de
 //   identidad. El resto se comunica con mensajes breves y recuperables.
-// - La opción invitado cierra cualquier sesión Firebase antes de entrar y cada
-//   continuación asíncrona comprueba `mounted` antes de usar el contexto.
+// - La opciÃ³n invitado cierra cualquier sesiÃ³n Firebase antes de entrar y cada
+//   continuaciÃ³n asÃ­ncrona comprueba `mounted` antes de usar el contexto.
 //
-// 📦 QUÉ (WHAT / ENTREGABLES):
-// - `LoginScreen`: acceso Google verificado y entrada explícita como invitado.
+// ðŸ“¦ QUÃ‰ (WHAT / ENTREGABLES):
+// - `LoginScreen`: acceso Google verificado y entrada explÃ­cita como invitado.
 // ============================================================================
 
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,7 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final verifiedUser = auth.currentUser;
       if (!auth.isAuthenticated || verifiedUser == null) {
         _showErrorMessage(
-          'Firebase no pudo confirmar tu sesión. Inténtalo nuevamente.',
+          'Firebase no pudo confirmar tu sesiÃ³n. IntÃ©ntalo nuevamente.',
         );
         return;
       }
@@ -71,7 +72,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  '¡Bienvenido a Baqueano, ${verifiedUser.displayName}!',
+                  'Â¡Bienvenido a Baqueano, ${verifiedUser.displayName}!',
                   style: GoogleFonts.spaceGrotesk(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -87,14 +88,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (!mounted) {
         return;
       }
-      if (_isFirebaseConfigurationError(error)) {
-        _showFirebaseConfigurationDialog();
+      final String errorCode;
+      final String sanitizedMessage;
+      if (error is firebase_auth.FirebaseAuthException) {
+        errorCode = error.code;
+        sanitizedMessage = error.message ?? 'Sin mensaje de Firebase Auth';
+      } else if (error is PlatformException) {
+        errorCode = error.code;
+        sanitizedMessage = error.message ?? 'Sin mensaje de plataforma';
+      } else {
+        errorCode = error.runtimeType.toString();
+        sanitizedMessage = error.toString().split('\n').first;
+      }
+      debugPrint(
+        '[AUTH_ERROR_DIAGNOSTIC] code=$errorCode message=$sanitizedMessage',
+      );
+      if (_isFirebaseConfigurationError(errorCode, sanitizedMessage)) {
+        _showFirebaseConfigurationDialog(errorCode, sanitizedMessage);
       } else {
         _showErrorMessage(
-          'No fue posible verificar tu cuenta con Firebase. Inténtalo de nuevo.',
+          'No fue posible verificar tu cuenta [$errorCode]. Intentalo de nuevo.',
         );
-      }
-    } finally {
+      }    } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
@@ -117,7 +132,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
       if (auth.isAuthenticated) {
         _showErrorMessage(
-          'No fue posible cerrar la sesión activa. Inténtalo nuevamente.',
+          'No fue posible cerrar la sesiÃ³n activa. IntÃ©ntalo nuevamente.',
         );
         return;
       }
@@ -135,14 +150,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
-  bool _isFirebaseConfigurationError(Object error) {
-    final message = error.toString().toLowerCase();
-    return message.contains('apiexception: 10') ||
-        message.contains('sign_in_failed') ||
-        message.contains('developer_error') ||
-        message.contains('firebase-not-initialized');
+  bool _isFirebaseConfigurationError(String code, String message) {
+    final normalizedCode = code.toLowerCase();
+    final normalizedMessage = message.toLowerCase();
+    return normalizedMessage.contains('apiexception: 10') ||
+        normalizedCode.contains('developer_error') ||
+        normalizedMessage.contains('developer_error') ||
+        normalizedCode.contains('firebase-not-initialized');
   }
-
   void _showErrorMessage(String message) {
     if (!mounted) {
       return;
@@ -156,7 +171,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  void _showFirebaseConfigurationDialog() {
+  void _showFirebaseConfigurationDialog(String code, String message) {
     if (!mounted) {
       return;
     }
@@ -191,8 +206,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ],
             ),
             content: Text(
-              'Google o Firebase rechazaron la configuración de acceso. '
-              'Por seguridad, Baqueano no creará una cuenta local ni permitirá '
+              'Google o Firebase rechazaron la configuracion de acceso [$code]. '
+              '$message '
+              'Por seguridad, Baqueano no creara una cuenta local ni permitira '
               'continuar como si la identidad estuviera autenticada.',
               style: GoogleFonts.inter(
                 color: Colors.white.withValues(alpha: 0.78),
@@ -280,7 +296,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'Iniciar Sesión',
+                          'Iniciar SesiÃ³n',
                           style: GoogleFonts.spaceGrotesk(
                             color: Colors.white,
                             fontSize: 22,
@@ -299,7 +315,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 32),
                         Semantics(
                           button: true,
-                          label: 'Iniciar sesión con Google',
+                          label: 'Iniciar sesiÃ³n con Google',
                           child: InkWell(
                             onTap: _isLoading ? null : _handleGoogleSignIn,
                             borderRadius: BorderRadius.circular(44),
@@ -372,7 +388,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Tu sesión solo se activa después de validarse con Firebase',
+                          'Tu sesiÃ³n solo se activa despuÃ©s de validarse con Firebase',
                           style: GoogleFonts.inter(
                             color: Colors.white.withValues(alpha: 0.58),
                             fontSize: 11,
@@ -386,7 +402,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   TextButton(
                     onPressed: _isLoading ? null : _handleGuestAccess,
                     child: Text(
-                      'Explorar como invitado, sin sesión →',
+                      'Explorar como invitado, sin sesiÃ³n â†’',
                       style: GoogleFonts.spaceGrotesk(
                         color: const Color(0xFFF4E6C1).withValues(alpha: 0.9),
                         fontSize: 14,
@@ -403,3 +419,4 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
+
