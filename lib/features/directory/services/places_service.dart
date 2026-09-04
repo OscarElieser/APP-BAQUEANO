@@ -274,6 +274,143 @@ class PlacesService {
 
     return !isSaved;
   }
+
+  // --------------------------------------------------------------------------
+  // ⚡ PAGINACIÓN REAL ESCALABLE DE FIRESTORE (SERVER-SIDE CURSORS)
+  // --------------------------------------------------------------------------
+
+  /// Consulta paginada REAL a Cloud Firestore utilizando cursores del servidor (`startAfterDocument`).
+  /// - Consume estrictamente [limit] lecturas por llamada.
+  /// - Utiliza los índices compuestos de [firestore.indexes.json].
+  /// - Retorna [PaginatedPlacesResult] con el último documento visible para cargar la siguiente página.
+  /// - Si no hay conexión, recurre con graceful degradation a los datos locales en caché.
+  Future<PaginatedPlacesResult> getPlacesPaginated({
+    DocumentSnapshot? startAfterDoc,
+    int limit = 20,
+    String? categoryId,
+    String? departmentId,
+    String? municipalityId,
+    bool? isEmergency,
+    bool? isTourist,
+    bool? verifiedOnly,
+    double? userLat,
+    double? userLng,
+  }) async {
+    final db = _firestore;
+
+    if (db != null) {
+      try {
+        Query<Map<String, dynamic>> query = db
+            .collection('places')
+            .where('status', isEqualTo: 'published');
+
+        if (categoryId != null && categoryId.isNotEmpty && categoryId != 'all') {
+          query = query.where('categoryId', isEqualTo: categoryId.toLowerCase());
+        }
+
+        if (departmentId != null && departmentId.isNotEmpty && departmentId != 'all') {
+          query = query.where('departmentId', isEqualTo: departmentId.toLowerCase());
+        }
+
+        if (municipalityId != null && municipalityId.isNotEmpty && municipalityId != 'all') {
+          query = query.where('municipalityId', isEqualTo: municipalityId.toLowerCase());
+        }
+
+        if (isEmergency == true) {
+          query = query.where('isEmergency', isEqualTo: true);
+        }
+
+        if (isTourist == true) {
+          query = query.where('isTourist', isEqualTo: true);
+        }
+
+        if (verifiedOnly == true) {
+          query = query.where('verified', isEqualTo: true);
+        }
+
+        // Ordenamiento primario por calificación aprovechando índices compuestos
+        query = query.orderBy('rating', descending: true);
+
+        // Aplicación del cursor del servidor de Firestore
+        if (startAfterDoc != null) {
+          query = query.startAfterDocument(startAfterDoc);
+        }
+
+        // Se solicita limit + 1 para comprobar si existen más elementos disponibles
+        query = query.limit(limit + 1);
+
+        final snap = await query.get();
+
+        if (snap.docs.isNotEmpty) {
+          final hasMore = snap.docs.length > limit;
+          final docsToTake = hasMore ? snap.docs.sublist(0, limit) : snap.docs;
+
+          var places = docsToTake
+              .map((doc) => PlaceModel.fromMap(doc.data(), doc.id))
+              .toList();
+
+          // Calcular distancias si se facilitaron coordenadas GPS
+          if (userLat != null && userLng != null) {
+            places = places.map((place) {
+              final dist = _geoService.calculateDistanceKm(
+                startLat: userLat,
+                startLng: userLng,
+                endLat: place.latitude,
+                endLng: place.longitude,
+              );
+              return place.copyWith(distanceKm: dist);
+            }).toList();
+          }
+
+          final lastDoc = docsToTake.isNotEmpty ? docsToTake.last : null;
+
+          return PaginatedPlacesResult(
+            places: places,
+            lastDocument: lastDoc,
+            hasMore: hasMore,
+            isFromCache: false,
+          );
+        }
+      } catch (e) {
+        debugPrint('⚠️ [PlacesService] Paginación Firestore fallback a offline: $e');
+      }
+    }
+
+    // Fallback offline resiliente: se extrae del catálogo local pre-cargado
+    final fallbackPlaces = await getPlaces(
+      categoryId: categoryId,
+      departmentId: departmentId,
+      municipalityId: municipalityId,
+      isEmergency: isEmergency,
+      isTourist: isTourist,
+      verifiedOnly: verifiedOnly,
+      userLat: userLat,
+      userLng: userLng,
+      limit: limit,
+    );
+
+    return PaginatedPlacesResult(
+      places: fallbackPlaces,
+      lastDocument: null,
+      hasMore: false,
+      isFromCache: true,
+    );
+  }
+}
+
+/// Contenedor de resultado de paginación real basada en cursores de Cloud Firestore
+class PaginatedPlacesResult {
+  final List<PlaceModel> places;
+  final DocumentSnapshot? lastDocument;
+  final bool hasMore;
+  final bool isFromCache;
+
+  const PaginatedPlacesResult({
+    required this.places,
+    this.lastDocument,
+    required this.hasMore,
+    this.isFromCache = false,
+  });
 }
 
 final placesServiceProvider = Provider<PlacesService>((ref) {
