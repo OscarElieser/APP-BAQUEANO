@@ -8,7 +8,8 @@ class SystemConfigModel {
 
   const SystemConfigModel({
     this.bannerTitle = 'Nicaragua en modo secreto',
-    this.bannerSubtitle = 'Diseña rutas inmersivas con guías locales, reservas directas, mapa offline y un asistente AI',
+    this.bannerSubtitle =
+        'Diseña rutas inmersivas con guías locales, reservas directas, mapa interactivo y asistente AI',
     this.marqueeBrands = const [
       'Finca Selva Negra (Matagalpa)',
       'Cerro Negro Club (León)',
@@ -19,7 +20,8 @@ class SystemConfigModel {
     ],
     this.exchangeRate = 36.65,
     this.emergencyPhone = '+505 2277-4130',
-    this.activeNotice = 'Temporada seca ideal para ascensos a volcanes y cañonismo.',
+    this.activeNotice =
+        'Temporada seca ideal para ascensos a volcanes y cañonismo.',
   });
 
   Map<String, dynamic> toMap() {

@@ -387,6 +387,50 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  /// Elimina definitivamente la cuenta del usuario en Firebase Auth y Firestore,
+  /// anonimizando y suprimiendo sus datos de conformidad con las directivas
+  /// de privacidad, derechos ARCO y requisitos de Google Play Store.
+  Future<void> deleteAccount() async {
+    final auth = _firebaseAuth;
+    final firebaseUser = auth?.currentUser;
+    if (firebaseUser == null) {
+      throw StateError('No hay sesión activa para eliminar.');
+    }
+
+    _isLoading = true;
+    _notifySafely();
+
+    final uid = firebaseUser.uid;
+    try {
+      // 1. Eliminar documento del usuario en Firestore (users/{uid})
+      try {
+        await _firestore?.collection(_usersCollection).doc(uid).delete();
+      } catch (firestoreError) {
+        debugPrint('Aviso al suprimir documento de Firestore: $firestoreError');
+      }
+
+      // 2. Eliminar la identidad del usuario en Firebase Authentication
+      await firebaseUser.delete();
+
+      // 3. Cerrar la sesión asociada en Google Sign-In
+      try {
+        await _googleSignIn.signOut();
+      } catch (googleError) {
+        debugPrint('Aviso cerrando sesión Google tras supresión: $googleError');
+      }
+
+      _currentUser = null;
+      _observedFirebaseUid = null;
+      ++_synchronizationVersion;
+    } catch (error) {
+      debugPrint('Error en la eliminación definitiva de cuenta: $error');
+      rethrow;
+    } finally {
+      _isLoading = false;
+      _notifySafely();
+    }
+  }
+
   void _notifySafely() {
     if (!_isDisposed) {
       notifyListeners();

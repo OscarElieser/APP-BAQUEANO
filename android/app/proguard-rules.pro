@@ -34,6 +34,7 @@
 -keepclassmembers class * {
     @com.google.firebase.database.PropertyName <fields>;
     @com.google.firebase.database.PropertyName <methods>;
+}
 -dontwarn com.google.firebase.**
 
 # Play Core Deferred Components (Flutter engine)

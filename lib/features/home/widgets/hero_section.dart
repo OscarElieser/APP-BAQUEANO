@@ -77,9 +77,10 @@ class _HeroSectionState extends State<HeroSection> {
     final isDesktop = screenWidth >= 950;
 
     final destinations = CatalogData.destinations;
-    final featuredDestination = destinations.isNotEmpty
-        ? destinations[_currentFeaturedIndex % destinations.length]
-        : null;
+    final featuredDestination =
+        destinations.isNotEmpty
+            ? destinations[_currentFeaturedIndex % destinations.length]
+            : null;
 
     return Stack(
       children: [
@@ -119,31 +120,32 @@ class _HeroSectionState extends State<HeroSection> {
             horizontal: isDesktop ? 48.0 : 20.0,
             vertical: isDesktop ? 40.0 : 24.0,
           ),
-          child: isDesktop
-              ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Columna izquierda: Titular monumental y CTAs
-                    Expanded(
-                      flex: 6,
-                      child: _buildHeroTextContent(context, isDesktop),
-                    ),
-                    const SizedBox(width: 48),
-                    // Columna derecha: Tarjeta flotante 3D rotativa
-                    Expanded(
-                      flex: 4,
-                      child: _buildAnimatedFeaturedCard(featuredDestination),
-                    ),
-                  ],
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildHeroTextContent(context, isDesktop),
-                    const SizedBox(height: 28),
-                    _buildAnimatedFeaturedCard(featuredDestination),
-                  ],
-                ),
+          child:
+              isDesktop
+                  ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Columna izquierda: Titular monumental y CTAs
+                      Expanded(
+                        flex: 6,
+                        child: _buildHeroTextContent(context, isDesktop),
+                      ),
+                      const SizedBox(width: 48),
+                      // Columna derecha: Tarjeta flotante 3D rotativa
+                      Expanded(
+                        flex: 4,
+                        child: _buildAnimatedFeaturedCard(featuredDestination),
+                      ),
+                    ],
+                  )
+                  : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildHeroTextContent(context, isDesktop),
+                      const SizedBox(height: 28),
+                      _buildAnimatedFeaturedCard(featuredDestination),
+                    ],
+                  ),
         ),
       ],
     );
@@ -158,10 +160,7 @@ class _HeroSectionState extends State<HeroSection> {
       switchInCurve: Curves.easeInOutCubic,
       switchOutCurve: Curves.easeInOutCubic,
       transitionBuilder: (child, animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
+        return FadeTransition(opacity: animation, child: child);
       },
       child: Interactive3DFeaturedCard(
         key: ValueKey('featured_${destination.id}_$_currentFeaturedIndex'),
@@ -175,7 +174,8 @@ class _HeroSectionState extends State<HeroSection> {
   // --------------------------------------------------------------------------
   Widget _buildHeroTextContent(BuildContext context, bool isDesktop) {
     return Column(
-      crossAxisAlignment: isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      crossAxisAlignment:
+          isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         // Tag Pill verde selva: Ecoturismo y Turismo Comunitario
         Container(
@@ -183,12 +183,19 @@ class _HeroSectionState extends State<HeroSection> {
           decoration: BoxDecoration(
             color: AppColors.primaryDark.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: AppColors.jungleGreen.withValues(alpha: 0.6), width: 1.2),
+            border: Border.all(
+              color: AppColors.jungleGreen.withValues(alpha: 0.6),
+              width: 1.2,
+            ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.eco_rounded, color: AppColors.jungleGreen, size: 14),
+              const Icon(
+                Icons.eco_rounded,
+                color: AppColors.jungleGreen,
+                size: 14,
+              ),
               const SizedBox(width: 8),
               Text(
                 'EXPEDICIONES PRIVADAS · TURISMO LOCAL',
@@ -225,7 +232,9 @@ class _HeroSectionState extends State<HeroSection> {
                 style: GoogleFonts.montserrat(
                   fontSize: isDesktop ? 54 : 38,
                   fontWeight: FontWeight.w900,
-                  color: const Color(0xFFFF5722), // Naranja neón volcánico de alto impacto
+                  color: const Color(
+                    0xFFFF5722,
+                  ), // Naranja neón volcánico de alto impacto
                   letterSpacing: -1.2,
                   height: 1.05,
                 ),
@@ -238,7 +247,7 @@ class _HeroSectionState extends State<HeroSection> {
 
         // Subtítulo descriptivo de la propuesta de valor
         Text(
-          'Diseña rutas inmersivas con guías locales, reservas directas, mapa offline y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
+          'Diseña rutas inmersivas con guías locales, reservas directas, mapa satelital interactivo y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
           textAlign: isDesktop ? TextAlign.start : TextAlign.center,
           style: GoogleFonts.inter(
             fontSize: isDesktop ? 16 : 14,
@@ -265,7 +274,11 @@ class _HeroSectionState extends State<HeroSection> {
             ),
             BaqueanoButton(
               text: 'PROBAR BAQUEANO AI',
-              icon: const Icon(Icons.smart_toy_outlined, size: 18, color: AppColors.textDark),
+              icon: const Icon(
+                Icons.smart_toy_outlined,
+                size: 18,
+                color: AppColors.textDark,
+              ),
               variant: BaqueanoButtonVariant.gold,
               height: 52,
               onPressed: () => context.go('/ai'),

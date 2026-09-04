@@ -49,3 +49,6 @@ node_modules
 .runtimeconfig.json
 firebase-debug.log
 firebase-debug.*.log
+key.properties
+*.jks
+*.keystore

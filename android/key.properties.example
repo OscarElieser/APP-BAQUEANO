@@ -1,0 +1,8 @@
+# Configuración de Firma Release para Google Play Store
+# Renombrar este archivo a 'key.properties' y completar con los valores reales.
+# IMPORTANTE: 'key.properties' y los archivos *.jks están ignorados en .gitignore para seguridad.
+#
+# storeFile=C:/ruta/a/tu/upload-keystore.jks
+# storePassword=TU_PASSWORD_DEL_KEYSTORE
+# keyAlias=upload
+# keyPassword=TU_PASSWORD_DEL_KEY
