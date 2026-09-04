@@ -1,4 +1,4 @@
-{
+﻿{
   "project_info": {
     "project_number": "578585227888",
     "firebase_url": "https://app-baqueano-default-rtdb.firebaseio.com",
@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "578585227888-0tortnlcs9jh3oq73elcpr3dkn4l748v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.appbaqueano",
+            "certificate_hash": "bc238bffb68d4aa78ae2e9293893b234e2fdf1fc"
+          }
+        },
+        {
           "client_id": "578585227888-ogs0lqiqq9lfia5jcl7snqeqv905ggjn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -23,10 +31,55 @@
           }
         },
         {
-          "client_id": "578585227888-ogs0lqiqq9lfia5jcl7snqeqv905ggjn.apps.googleusercontent.com",
+          "client_id": "578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_a8pZmD_mNZDYrR_E8ScbTf5wFwJ5IlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578585227888:android:538c1475535f41c9f2fab5",
+        "android_client_info": {
+          "package_name": "ni.baqueano.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578585227888-5cvhcqb5i2s85v37rm61tdpa23jfk109.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.company.appbaqueano",
+            "package_name": "ni.baqueano.app",
+            "certificate_hash": "9b90324b35f2e9be424fbe214182670efd1e769c"
+          }
+        },
+        {
+          "client_id": "578585227888-a3m800j8r48mvsnca55i406jqp7bthet.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ni.baqueano.app",
+            "certificate_hash": "31902a90722f25161bb10ada4481dc2e8f5ffcbb"
+          }
+        },
+        {
+          "client_id": "578585227888-b5afn4r3dekau9rdocna038uguvt3fav.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ni.baqueano.app",
             "certificate_hash": "bc238bffb68d4aa78ae2e9293893b234e2fdf1fc"
           }
         },
@@ -37,7 +90,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE"
+          "current_key": "AIzaSyC_a8pZmD_mNZDYrR_E8ScbTf5wFwJ5IlY"
         }
       ],
       "services": {
