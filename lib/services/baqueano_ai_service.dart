@@ -32,6 +32,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/data/catalog_data.dart';
@@ -158,7 +160,7 @@ class BaqueanoAiService extends ChangeNotifier {
   /// Verificación de conectividad real a internet en milisegundos (< 600ms)
   Future<bool> _hasActiveInternet() async {
     try {
-      final result = await InternetAddress.lookup('api.groq.com')
+      final result = await InternetAddress.lookup('dns.google')
           .timeout(const Duration(milliseconds: 600));
       return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } catch (_) {
@@ -306,48 +308,46 @@ class BaqueanoAiService extends ChangeNotifier {
       responseText = fallback.text;
       confidence = AiConfidenceLevel.medium;
     } else {
-      try {
-        if (_groqApiKey.isNotEmpty && (_currentProvider == AiProvider.groq || _currentProvider == AiProvider.auto)) {
-          responseText = await _fetchGroqInference(sanitizedQuery, dynamicSystemPrompt);
-          metrics.lastProviderUsed = 'groq';
-        } else if (_ollamaApiKey.isNotEmpty && _currentProvider == AiProvider.ollama) {
-          responseText = await _fetchOllamaInference(sanitizedQuery, dynamicSystemPrompt);
-          metrics.lastProviderUsed = 'ollama';
-        } else if (_geminiApiKey.isNotEmpty && _currentProvider == AiProvider.gemini) {
-          responseText = await _fetchGeminiInference(sanitizedQuery, dynamicSystemPrompt);
-          metrics.lastProviderUsed = 'gemini';
-        } else {
-          // Si no hay llaves locales en dev, invocar el AI Gateway de backend
+      // 🛡️ SEPARACIÓN ESTRICTA PRODUCCIÓN vs DESARROLLO:
+      // En PRODUCCIÓN (kReleaseMode), NUNCA se contacta a proveedores de terceros (Groq, Gemini, Ollama)
+      // directamente desde el cliente con credenciales expuestas. Producción invoca EXCLUSIVAMENTE
+      // el AI Gateway seguro con Firebase Auth y App Check.
+      if (kReleaseMode) {
+        try {
           responseText = await _fetchGatewayInference(sanitizedQuery, dynamicSystemPrompt);
           metrics.lastProviderUsed = 'ai-gateway';
+        } catch (_) {
+          metrics.fallbackCount++;
+          // En producción, si el Gateway no está disponible o falla, fallback a la Base Offline Local
+          isOffline = true;
+          metrics.lastProviderUsed = 'local-offline';
+          final fallback = _synthesizeLocalResponse(sanitizedQuery);
+          responseText = fallback.text;
+          confidence = AiConfidenceLevel.medium;
         }
-      } catch (_) {
-        metrics.fallbackCount++;
-        // Fallback 1: Ollama Cloud (si tiene llave configurada)
+      } else {
+        // MODO DESARROLLO (kDebugMode): Permitir pruebas de desarrollo si se suministraron llaves locales
         try {
-          if (_ollamaApiKey.isNotEmpty) {
+          if (_groqApiKey.isNotEmpty && (_currentProvider == AiProvider.groq || _currentProvider == AiProvider.auto)) {
+            responseText = await _fetchGroqInference(sanitizedQuery, dynamicSystemPrompt);
+            metrics.lastProviderUsed = 'groq-dev';
+          } else if (_ollamaApiKey.isNotEmpty && _currentProvider == AiProvider.ollama) {
             responseText = await _fetchOllamaInference(sanitizedQuery, dynamicSystemPrompt);
-            metrics.lastProviderUsed = 'ollama-fallback';
+            metrics.lastProviderUsed = 'ollama-dev';
+          } else if (_geminiApiKey.isNotEmpty && _currentProvider == AiProvider.gemini) {
+            responseText = await _fetchGeminiInference(sanitizedQuery, dynamicSystemPrompt);
+            metrics.lastProviderUsed = 'gemini-dev';
           } else {
-            throw Exception('Ollama no configurado');
+            responseText = await _fetchGatewayInference(sanitizedQuery, dynamicSystemPrompt);
+            metrics.lastProviderUsed = 'ai-gateway';
           }
         } catch (_) {
-          // Fallback 2: Google Gemini (si tiene llave configurada)
-          try {
-            if (_geminiApiKey.isNotEmpty) {
-              responseText = await _fetchGeminiInference(sanitizedQuery, dynamicSystemPrompt);
-              metrics.lastProviderUsed = 'gemini-fallback';
-            } else {
-              throw Exception('Gemini no configurado');
-            }
-          } catch (_) {
-            // Fallback 3: Base de conocimiento offline y caché local
-            isOffline = true;
-            metrics.lastProviderUsed = 'local-offline';
-            final fallback = _synthesizeLocalResponse(sanitizedQuery);
-            responseText = fallback.text;
-            confidence = AiConfidenceLevel.medium;
-          }
+          metrics.fallbackCount++;
+          isOffline = true;
+          metrics.lastProviderUsed = 'local-offline';
+          final fallback = _synthesizeLocalResponse(sanitizedQuery);
+          responseText = fallback.text;
+          confidence = AiConfidenceLevel.medium;
         }
       }
     }
@@ -418,6 +418,25 @@ class BaqueanoAiService extends ChangeNotifier {
     try {
       final request = await client.postUrl(Uri.parse('$_aiGatewayBaseUrl/chat'));
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
+
+      // 🔐 Inyección de Firebase Auth ID Token verificado server-side
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          final idToken = await user.getIdToken();
+          if (idToken != null && idToken.isNotEmpty) {
+            request.headers.set('Authorization', 'Bearer $idToken');
+          }
+        }
+      } catch (_) {}
+
+      // 🛡️ Inyección de Firebase App Check Token validado server-side
+      try {
+        final appCheckToken = await FirebaseAppCheck.instance.getToken();
+        if (appCheckToken != null && appCheckToken.isNotEmpty) {
+          request.headers.set('X-Firebase-AppCheck', appCheckToken);
+        }
+      } catch (_) {}
 
       final payload = jsonEncode({
         'messages': [
