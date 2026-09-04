@@ -84,17 +84,24 @@ service cloud.firestore {
       allow read, write: if request.auth != null && (resource == null || resource.data.userId == request.auth.uid || request.resource.data.userId == request.auth.uid);
     }
 
-    // 💳 ÓRDENES Y TRANSACCIONES DE FACTURACIÓN (Cero PAN/CVV)
+    // 💳 ÓRDENES Y TRANSACCIONES DE FACTURACIÓN (Cumplimiento PCI-DSS / Cero PAN/CVV)
     match /payment_orders/{orderId} {
-      allow read, write: if request.auth != null;
+      // Solo el explorador autenticado o administradores pueden leer y crear órdenes
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && (request.auth.token.role == 'super_admin' || request.auth.token.role == 'admin');
     }
 
     match /payment_transactions/{txId} {
+      // Las transacciones financieras son comprobantes inmutables: lectura autenticada, creación autorizada, prohibida la edición o eliminación
       allow read: if request.auth != null;
-      allow write: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if false;
     }
 
     match /business_subscriptions/{subId} {
+      // Lectura pública para validación de estado de comercio, escritura protegida
       allow read: if true;
       allow write: if request.auth != null;
     }

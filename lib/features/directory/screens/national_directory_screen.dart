@@ -22,6 +22,7 @@
 // - `NationalDirectoryScreen`: Pantalla oficial mapeada en la ruta `/descubre-nicaragua`.
 // ============================================================================
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,6 +59,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
   static const LatLng _nicaraguaCenter = LatLng(12.8654, -85.2072);
 
   final TextEditingController _searchController = TextEditingController();
+  Timer? _debounceTimer;
 
   List<PlaceModel> _places = [];
   List<PlaceModel> _emergencyPlaces = [];
@@ -89,8 +91,18 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
 
   @override
   void dispose() {
+    _debounceTimer?.cancel();
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _onSearchChanged(String _) {
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        _applyFilters();
+      }
+    });
   }
 
   Future<void> _loadInitialData() async {
@@ -273,7 +285,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                     child: TextField(
                       controller: _searchController,
                       style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                      onChanged: (_) => _applyFilters(),
+                      onChanged: _onSearchChanged,
                       decoration: InputDecoration(
                         hintText: 'Buscar museos, hospitales, bomberos, bancos...',
                         hintStyle: GoogleFonts.inter(fontSize: 12.5, color: Colors.white54),
