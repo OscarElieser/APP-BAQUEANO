@@ -6,28 +6,34 @@
 // - Servir como copiloto y asesor digital 24/7 para el explorador y turista en Nicaragua.
 // - Asistir en la planificación de rutas, cálculo de presupuestos en USD/NIO y
 //   conexión directa con guías campesinos locales, promoviendo el turismo justo.
+// - Conectar en vivo a datos comprobados de Firestore (RAG) y ejecutar herramientas
+//   nativas interactivas (Function Calling visual): mapas satelitales, llamadas,
+//   fichas de establecimientos y reservas directas sin intermediarios.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Implementa un chat conversacional responsivo con renderizado de mensajes en burbujas
-//   estilizadas, sugerencias interactivas rápidas y respuestas contextuales.
-// - La barra de entrada de mensajes utiliza Glassmorphism (BackdropFilter) con elevación
-//   adaptable calculada mediante MediaQuery para posicionarse holgadamente sobre la barra
-//   flotante de navegación móvil y las barras del sistema Android.
+// - Memoria de sesión reactiva que muestra el itinerario activo y presupuesto del viajero.
+// - Capa de Confianza (Confidence Layer) que audita visualmente respuestas verificadas vs offline.
+// - Botones de herramientas con microinteracciones nativas ejecutables mediante GoRouter y UrlLauncher.
+// - Glassmorphism optimizado con `BackdropFilter` y `withValues(alpha: X)` para 60fps constantes.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
 // - `AiAssistantScreen`: Pantalla con chat interactivo, historial de mensajes,
-//   indicador de escritura y barra de entrada con estética visual de alta gama.
+//   barra de memoria de viajero, panel de herramientas nativas y entrada estilizada.
 // ============================================================================
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
+import '../../../models/ai_tool_action.dart';
 import '../../../models/chat_message.dart';
 import '../../../services/baqueano_ai_service.dart';
 import '../../checkout/widgets/checkout_modal.dart';
@@ -57,7 +63,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
     _messageController.clear();
     _scrollToBottom();
 
-    // Invocación al servicio real de Inteligencia Artificial de Baqueano con failover multi-LLM y offline
+    // Invocación al servicio real de Inteligencia Artificial de Baqueano con failover multi-LLM, RAG y offline
     ref.read(baqueanoAiServiceProvider).sendUserPrompt(trimmed).then((_) {
       _scrollToBottom();
     });
@@ -75,19 +81,51 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
     });
   }
 
+  Future<void> _executeToolAction(AiToolAction action) async {
+    switch (action.type) {
+      case AiToolType.showMap:
+        context.push('/mapa');
+        break;
+      case AiToolType.viewPlace:
+        context.push('/directorio');
+        break;
+      case AiToolType.openCheckout:
+        final dest = CatalogData.destinations.first;
+        CheckoutModal.show(context, dest);
+        break;
+      case AiToolType.callPhone:
+        final phone = action.params['phone']?.toString().replaceAll(RegExp(r'\s+'), '');
+        if (phone != null && phone.isNotEmpty) {
+          final uri = Uri.parse('tel:$phone');
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri);
+          }
+        }
+        break;
+      case AiToolType.openWhatsApp:
+        final phone = action.params['phone']?.toString().replaceAll(RegExp(r'[^0-9]'), '');
+        if (phone != null && phone.isNotEmpty) {
+          final uri = Uri.parse('https://wa.me/$phone');
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri, mode: LaunchMode.externalApplication);
+          }
+        }
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final aiService = ref.watch(baqueanoAiServiceProvider);
     final messages = aiService.chatHistory;
     final isTyping = aiService.isTyping;
+    final session = aiService.sessionContext;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
     final bottomInset = MediaQuery.of(context).viewInsets.bottom;
 
-    // Altura de separación dinámica: en móviles se eleva para quedar holgadamente sobre
-    // la barra de navegación flotante (68px alto + 8px margen + padding inferior del sistema)
     final bottomNavClearance = isDesktop
         ? 24.0
         : (bottomInset > 0 ? 12.0 : (96.0 + bottomPadding));
@@ -104,10 +142,16 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
             const SectionHeader(
               tag: 'INTELIGENCIA ARTIFICIAL NICA',
               title: '🤖 Baqueano AI Assistant',
-              subtitle: 'Tu baqueano digital 24/7. Genera itinerarios, calcula presupuestos reales y contacta guías nativos.',
+              subtitle: 'Tu copiloto digital 24/7. Genera itinerarios, consulta datos en tiempo real y ejecuta reservas directas.',
             ),
 
-            // Chat Messages Container
+            // Barra de Memoria Inteligente de Sesión del Viajero
+            if (session.destination != null || session.budgetUsd != null || session.travelStyle != null)
+              _buildSessionMemoryBanner(session, aiService),
+
+            const SizedBox(height: 8),
+
+            // Contenedor de Mensajes de Chat
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -141,8 +185,66 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
     );
   }
 
-  /// Barra de entrada de mensajes estilizada con efecto Glassmorphism,
-  /// halo de iluminación dorado y elevación sobre la barra de navegación.
+  /// Banner informativo que refleja el estado vivo de la memoria contextual de la sesión
+  Widget _buildSessionMemoryBanner(dynamic session, BaqueanoAiService aiService) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.primaryLight.withValues(alpha: 0.8),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 1),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.psychology_alt_rounded, color: AppColors.gold, size: 20),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                if (session.destination != null)
+                  _buildContextChip('📍 ${session.destination}'),
+                if (session.days != null)
+                  _buildContextChip('⏳ ${session.days} días'),
+                if (session.budgetUsd != null)
+                  _buildContextChip('💰 \$${session.budgetUsd!.toStringAsFixed(0)} USD'),
+                if (session.travelStyle == 'economico')
+                  _buildContextChip('🏷️ Modo Económico'),
+              ],
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded, color: AppColors.textMuted, size: 18),
+            tooltip: 'Reiniciar viaje en memoria',
+            onPressed: () => aiService.resetTravelerSession(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContextChip(String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: AppColors.bgDark.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.inter(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: AppColors.goldLight,
+        ),
+      ),
+    );
+  }
+
   Widget _buildProChatInputBar() {
     return Container(
       decoration: BoxDecoration(
@@ -164,47 +266,39 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(28),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.primaryDark.withValues(alpha: 0.90),
-                  AppColors.bgCard.withValues(alpha: 0.95),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: AppColors.bgDark.withValues(alpha: 0.88),
               borderRadius: BorderRadius.circular(28),
               border: Border.all(
-                color: AppColors.gold.withValues(alpha: 0.45),
-                width: 1.3,
+                color: AppColors.borderGold.withValues(alpha: 0.8),
+                width: 1.2,
               ),
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Insignia interactiva del Asistente Baqueano
+                const SizedBox(width: 4),
                 Container(
-                  margin: const EdgeInsets.only(left: 4, right: 8),
-                  padding: const EdgeInsets.all(9),
+                  padding: const EdgeInsets.all(7),
                   decoration: BoxDecoration(
-                    color: AppColors.gold.withValues(alpha: 0.14),
+                    color: AppColors.primaryLight.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors.gold.withValues(alpha: 0.35),
-                      width: 1.2,
+                      color: AppColors.primaryLight.withValues(alpha: 0.5),
+                      width: 1,
                     ),
                   ),
                   child: const Icon(
-                    Icons.auto_awesome_rounded,
-                    color: AppColors.goldLight,
-                    size: 18,
+                    Icons.explore_rounded,
+                    color: AppColors.primaryLight,
+                    size: 16,
                   ),
                 ),
+                const SizedBox(width: 10),
 
-                // Campo de texto con auto-expansión y tipografía optimizada
+                // Campo de Entrada de Texto
                 Expanded(
                   child: TextField(
                     controller: _messageController,
@@ -235,7 +329,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
 
                 const SizedBox(width: 8),
 
-                // Botón de Envío con degradado Terracota Volcánico y microinteracción
+                // Botón de Envío con degradado Terracota Volcánico
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -282,10 +376,10 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
       alignment: msg.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.only(bottom: 14),
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
+        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.82),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: msg.isUser ? AppColors.terracotta : AppColors.primaryLight.withValues(alpha: 0.6),
+          color: msg.isUser ? AppColors.terracotta : AppColors.primaryLight.withValues(alpha: 0.65),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(18),
             topRight: const Radius.circular(18),
@@ -317,6 +411,46 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                     color: msg.isUser ? Colors.white : AppColors.goldLight,
                   ),
                 ),
+                const SizedBox(width: 8),
+
+                // Capa de Confianza (Confidence Layer) y estado Offline
+                if (!msg.isUser) ...[
+                  if (msg.confidenceLevel == AiConfidenceLevel.high)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Colors.teal.withValues(alpha: 0.25),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: Colors.tealAccent, width: 0.8),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.verified_rounded, color: Colors.tealAccent, size: 10),
+                          const SizedBox(width: 3),
+                          Text(
+                            'Verificado Baqueano',
+                            style: GoogleFonts.inter(fontSize: 9, color: Colors.tealAccent, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (msg.isOfflineBackup) ...[
+                    const SizedBox(width: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: Colors.lightBlueAccent, width: 0.8),
+                      ),
+                      child: Text(
+                        'Offline',
+                        style: GoogleFonts.inter(fontSize: 9, color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ],
               ],
             ),
             const SizedBox(height: 8),
@@ -328,6 +462,40 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                 height: 1.5,
               ),
             ),
+
+            // Herramientas y Acciones Ejecutables (Function Calling Nativo)
+            if (msg.toolActions != null && msg.toolActions!.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                children: msg.toolActions!.map((tool) {
+                  return ElevatedButton.icon(
+                    onPressed: () => _executeToolAction(tool),
+                    icon: Icon(_getIconForTool(tool.type), size: 14, color: AppColors.bgDark),
+                    label: Text(
+                      tool.label,
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.bgDark,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.gold,
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      minimumSize: const Size(0, 30),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+
+            // Sugerencias de consultas rápidas
             if (msg.quickActions != null && msg.quickActions!.isNotEmpty) ...[
               const SizedBox(height: 12),
               Wrap(
@@ -369,6 +537,21 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
     );
   }
 
+  IconData _getIconForTool(AiToolType type) {
+    switch (type) {
+      case AiToolType.showMap:
+        return Icons.map_rounded;
+      case AiToolType.viewPlace:
+        return Icons.place_rounded;
+      case AiToolType.openCheckout:
+        return Icons.credit_card_rounded;
+      case AiToolType.callPhone:
+        return Icons.call_rounded;
+      case AiToolType.openWhatsApp:
+        return Icons.chat_bubble_rounded;
+    }
+  }
+
   Widget _buildTypingIndicator() {
     return Align(
       alignment: Alignment.centerLeft,
@@ -389,7 +572,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
             ),
             const SizedBox(width: 10),
             Text(
-              'Baqueano AI está calculando tu ruta...',
+              'Baqueano AI está consultando la base de datos de Nicaragua...',
               style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
             ),
           ],

@@ -1016,7 +1016,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           // Régimen Fiscal
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            activeColor: const Color(0xFFC86432),
+            activeThumbColor: const Color(0xFFC86432),
             title: Text(
               'Exoneración de IVA (Turista Extranjero 0% - Ley 306)',
               style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),
@@ -1171,7 +1171,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget _buildSwitchRow(String title, String subtitle, bool value, Function(bool) onChanged) {
     return SwitchListTile(
       contentPadding: EdgeInsets.zero,
-      activeColor: const Color(0xFFC86432),
+      activeThumbColor: const Color(0xFFC86432),
       title: Text(title, style: GoogleFonts.spaceGrotesk(fontSize: 13 * _fontScale, fontWeight: FontWeight.w600, color: Colors.white)),
       subtitle: Text(subtitle, style: GoogleFonts.inter(fontSize: 11 * _fontScale, color: Colors.white54)),
       value: value,

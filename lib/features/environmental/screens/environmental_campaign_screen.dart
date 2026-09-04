@@ -607,7 +607,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           Switch(
                             value: isAnonymous,
                             activeTrackColor: AppColors.jungleGreen,
-                            activeColor: Colors.white,
+                            activeThumbColor: Colors.white,
                             onChanged: (val) {
                               setModalState(() => isAnonymous = val);
                             },
