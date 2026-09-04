@@ -177,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 12),
 
             // ----------------------------------------------------------------
-            // 3. GALERÍA INFINITA 3D DE ALIADOS LOCALES & COOPERATIVAS (Flip Cards)
+            // 3. GALERÍA MANUAL 3D DE ALIADOS LOCALES & COOPERATIVAS (Flip Cards)
             // ----------------------------------------------------------------
             const InteractiveAlliesGallery(),
 

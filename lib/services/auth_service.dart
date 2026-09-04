@@ -1,26 +1,26 @@
 // ============================================================================
-// 🧭 BAQUEANO — SERVICIO DE AUTENTICACIÓN CON IDENTIDAD VERIFICADA
+// ðŸ§­ BAQUEANO â€” SERVICIO DE AUTENTICACIÃ“N CON IDENTIDAD VERIFICADA
 // ============================================================================
 //
-// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// ðŸŽ¯ POR QUÃ‰ (WHY / PROPÃ“SITO):
 // - Garantizar que una persona solo figure como autenticada cuando Firebase Auth
-//   mantenga una sesión válida para ella.
+//   mantenga una sesiÃ³n vÃ¡lida para ella.
 // - Evitar perfiles locales, sesiones paralelas y cambios de rol desde el APK,
 //   porque ninguno de esos mecanismos constituye una identidad verificable.
-// - Conservar un acceso de invitado explícito sin asociarle UID, correo ni rol.
+// - Conservar un acceso de invitado explÃ­cito sin asociarle UID, correo ni rol.
 //
-// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Firebase Auth conserva su propia sesión y `idTokenChanges()` dirige el estado
+// âš™ï¸ CÃ“MO (HOW / ARQUITECTURA & IMPLEMENTACIÃ“N):
+// - Firebase Auth conserva su propia sesiÃ³n y `idTokenChanges()` dirige el estado
 //   reactivo; no se guardan credenciales ni copias del usuario en preferencias.
 // - Google entrega una credencial que debe ser aceptada por Firebase antes de
 //   crear el perfil usado por la interfaz.
 // - Los datos de progreso se hidratan desde `users/{uid}` y los roles proceden
-//   únicamente de custom claims o de ese perfil remoto protegido por reglas.
-// - Cada operación asíncrona valida la sesión vigente y el ciclo de vida antes de
-//   publicar cambios, evitando que una respuesta tardía restaure un usuario viejo.
+//   Ãºnicamente de custom claims o de ese perfil remoto protegido por reglas.
+// - Cada operaciÃ³n asÃ­ncrona valida la sesiÃ³n vigente y el ciclo de vida antes de
+//   publicar cambios, evitando que una respuesta tardÃ­a restaure un usuario viejo.
 //
-// 📦 QUÉ (WHAT / ENTREGABLES):
-// - `AuthService`: inicio con Google, cierre de sesión y perfil Firebase reactivo.
+// ðŸ“¦ QUÃ‰ (WHAT / ENTREGABLES):
+// - `AuthService`: inicio con Google, cierre de sesiÃ³n y perfil Firebase reactivo.
 // - `authServiceProvider`: proveedor Riverpod consumido por la interfaz Android.
 // ============================================================================
 
@@ -30,6 +30,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -53,6 +54,7 @@ class AuthService extends ChangeNotifier {
   UserProfile? _currentUser;
   bool _isLoading = true;
   bool _isDisposed = false;
+  bool _googleSignInInFlight = false;
   int _synchronizationVersion = 0;
   String? _observedFirebaseUid;
 
@@ -63,12 +65,7 @@ class AuthService extends ChangeNotifier {
   }) : _firebaseAuth = firebaseAuth ?? _resolveFirebaseAuth(),
        _firestore = firestore ?? _resolveFirestore(),
        _googleSignIn =
-           googleSignIn ??
-           GoogleSignIn(
-             serverClientId:
-                 '578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com',
-             scopes: const ['email', 'profile'],
-           ) {
+           googleSignIn ?? GoogleSignIn(scopes: const ['email', 'profile']) {
     _listenToFirebaseSession();
   }
 
@@ -88,7 +85,7 @@ class AuthService extends ChangeNotifier {
     try {
       return firebase_auth.FirebaseAuth.instance;
     } catch (error) {
-      debugPrint('Firebase Auth no está disponible: $error');
+      debugPrint('Firebase Auth no estÃ¡ disponible: $error');
       return null;
     }
   }
@@ -100,7 +97,7 @@ class AuthService extends ChangeNotifier {
         databaseId: _databaseId,
       );
     } catch (error) {
-      debugPrint('Firestore de perfiles no está disponible: $error');
+      debugPrint('Firestore de perfiles no estÃ¡ disponible: $error');
       return null;
     }
   }
@@ -117,7 +114,7 @@ class AuthService extends ChangeNotifier {
         unawaited(_synchronizeFirebaseUser(firebaseUser));
       },
       onError: (Object error, StackTrace _) {
-        debugPrint('Error observando la sesión Firebase: $error');
+        debugPrint('Error observando la sesiÃ³n Firebase: $error');
         if (auth.currentUser == null) {
           _currentUser = null;
         }
@@ -266,18 +263,27 @@ class AuthService extends ChangeNotifier {
     return value is String ? value.trim() : '';
   }
 
-  /// Solicita una cuenta Google, pero solo publica el perfil después de que la
-  /// credencial sea aceptada y exista como sesión activa en Firebase Auth.
+  /// Solicita una cuenta Google, pero solo publica el perfil despuÃ©s de que la
+  /// credencial sea aceptada y exista como sesiÃ³n activa en Firebase Auth.
   Future<bool> signInWithGoogle() async {
     final auth = _firebaseAuth;
     if (auth == null) {
       throw firebase_auth.FirebaseAuthException(
         code: 'firebase-not-initialized',
-        message: 'Firebase Auth no está disponible en este dispositivo.',
+        message: 'Firebase Auth no esta disponible en este dispositivo.',
+      );
+    }
+
+    if (_googleSignInInFlight) {
+      throw firebase_auth.FirebaseAuthException(
+        code: 'google-sign-in-in-progress',
+        message:
+            'Google ya tiene una solicitud de acceso en curso. Espera unos segundos e intentalo nuevamente.',
       );
     }
 
     final previousFirebaseUid = auth.currentUser?.uid;
+    _googleSignInInFlight = true;
     _isLoading = true;
     _notifySafely();
 
@@ -292,7 +298,7 @@ class AuthService extends ChangeNotifier {
           googleAuthentication.accessToken == null) {
         throw firebase_auth.FirebaseAuthException(
           code: 'missing-google-credential',
-          message: 'Google no entregó una credencial verificable.',
+          message: 'Google no entrego una credencial verificable.',
         );
       }
 
@@ -307,7 +313,7 @@ class AuthService extends ChangeNotifier {
         throw firebase_auth.FirebaseAuthException(
           code: 'missing-firebase-session',
           message:
-              'Firebase no confirmó una sesión para la cuenta seleccionada.',
+              'Firebase no confirmo una sesion para la cuenta seleccionada.',
         );
       }
 
@@ -320,33 +326,71 @@ class AuthService extends ChangeNotifier {
       }
 
       return true;
-    } catch (error) {
-      debugPrint('Error en el flujo de autenticación Google/Firebase: $error');
-      if (previousFirebaseUid == null && auth.currentUser != null) {
-        try {
-          await auth.signOut();
-        } catch (rollbackError) {
-          debugPrint('Error revirtiendo una sesión incompleta: $rollbackError');
-        }
-      }
-      if (previousFirebaseUid == null) {
-        try {
-          await _googleSignIn.signOut();
-        } catch (googleSignOutError) {
-          debugPrint(
-            'Error limpiando la cuenta Google incompleta: $googleSignOutError',
-          );
-        }
+    } on firebase_auth.FirebaseAuthException catch (error) {
+      _logAuthDiagnostic('FirebaseAuthException', error.code, error.message);
+      await _rollbackIncompleteGoogleSession(auth, previousFirebaseUid);
+      rethrow;
+    } on PlatformException catch (error) {
+      _logAuthDiagnostic('PlatformException', error.code, error.message);
+      await _rollbackIncompleteGoogleSession(auth, previousFirebaseUid);
+      if (_isGoogleSignInInProgressError(error)) {
+        throw firebase_auth.FirebaseAuthException(
+          code: 'google-sign-in-in-progress',
+          message:
+              'Google cancelo esta solicitud porque ya habia un acceso en curso. Cierra el selector de Google e intentalo una sola vez.',
+        );
       }
       rethrow;
+    } catch (error) {
+      _logAuthDiagnostic(
+        error.runtimeType.toString(),
+        'unknown',
+        error.toString(),
+      );
+      await _rollbackIncompleteGoogleSession(auth, previousFirebaseUid);
+      rethrow;
     } finally {
+      _googleSignInInFlight = false;
       _isLoading = false;
       _notifySafely();
     }
   }
 
-  /// Cierra primero la sesión que constituye la autoridad de autenticación.
-  /// Si Firebase no logra cerrarla, el método falla y no declara modo invitado.
+  static bool _isGoogleSignInInProgressError(PlatformException error) {
+    final message =
+        (error.message ?? error.details?.toString() ?? '').toLowerCase();
+    return error.code == 'sign_in_failed' &&
+        (message.contains('12502') ||
+            message.contains('sign_in_currently_in_progress'));
+  }
+
+  void _logAuthDiagnostic(String type, String code, String? message) {
+    debugPrint('Auth diagnostic [$type]: code=$code, message=$message');
+  }
+
+  Future<void> _rollbackIncompleteGoogleSession(
+    firebase_auth.FirebaseAuth auth,
+    String? previousFirebaseUid,
+  ) async {
+    if (previousFirebaseUid == null && auth.currentUser != null) {
+      try {
+        await auth.signOut();
+      } catch (rollbackError) {
+        debugPrint('Error revirtiendo una sesion incompleta: $rollbackError');
+      }
+    }
+    if (previousFirebaseUid == null) {
+      try {
+        await _googleSignIn.signOut();
+      } catch (googleSignOutError) {
+        debugPrint(
+          'Error limpiando la cuenta Google incompleta: $googleSignOutError',
+        );
+      }
+    }
+  }
+  /// Cierra primero la sesiÃ³n que constituye la autoridad de autenticaciÃ³n.
+  /// Si Firebase no logra cerrarla, el mÃ©todo falla y no declara modo invitado.
   Future<void> signOut() async {
     final auth = _firebaseAuth;
     _isLoading = true;
@@ -357,7 +401,7 @@ class AuthService extends ChangeNotifier {
       await auth?.signOut();
     } catch (error) {
       firebaseSignOutError = error;
-      debugPrint('Error cerrando la sesión Firebase: $error');
+      debugPrint('Error cerrando la sesiÃ³n Firebase: $error');
     }
 
     if (auth?.currentUser == null) {
@@ -371,7 +415,7 @@ class AuthService extends ChangeNotifier {
     try {
       await _googleSignIn.signOut();
     } catch (error) {
-      debugPrint('Error cerrando la sesión del selector Google: $error');
+      debugPrint('Error cerrando la sesiÃ³n del selector Google: $error');
     } finally {
       _isLoading = false;
       _notifySafely();
@@ -382,7 +426,7 @@ class AuthService extends ChangeNotifier {
         throw firebaseSignOutError;
       }
       throw StateError(
-        'Firebase mantuvo una sesión activa después del cierre.',
+        'Firebase mantuvo una sesiÃ³n activa despuÃ©s del cierre.',
       );
     }
   }
@@ -394,7 +438,7 @@ class AuthService extends ChangeNotifier {
     final auth = _firebaseAuth;
     final firebaseUser = auth?.currentUser;
     if (firebaseUser == null) {
-      throw StateError('No hay sesión activa para eliminar.');
+      throw StateError('No hay sesiÃ³n activa para eliminar.');
     }
 
     _isLoading = true;
@@ -412,18 +456,18 @@ class AuthService extends ChangeNotifier {
       // 2. Eliminar la identidad del usuario en Firebase Authentication
       await firebaseUser.delete();
 
-      // 3. Cerrar la sesión asociada en Google Sign-In
+      // 3. Cerrar la sesiÃ³n asociada en Google Sign-In
       try {
         await _googleSignIn.signOut();
       } catch (googleError) {
-        debugPrint('Aviso cerrando sesión Google tras supresión: $googleError');
+        debugPrint('Aviso cerrando sesiÃ³n Google tras supresiÃ³n: $googleError');
       }
 
       _currentUser = null;
       _observedFirebaseUid = null;
       ++_synchronizationVersion;
     } catch (error) {
-      debugPrint('Error en la eliminación definitiva de cuenta: $error');
+      debugPrint('Error en la eliminaciÃ³n definitiva de cuenta: $error');
       rethrow;
     } finally {
       _isLoading = false;
@@ -448,3 +492,4 @@ class AuthService extends ChangeNotifier {
 final authServiceProvider = ChangeNotifierProvider<AuthService>((ref) {
   return AuthService();
 });
+
