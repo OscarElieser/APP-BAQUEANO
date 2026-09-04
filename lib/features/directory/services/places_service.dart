@@ -105,7 +105,8 @@ class PlacesService {
     return _cachedPlaces;
   }
 
-  /// Obtiene los lugares filtrados y ordenados por distancia si se proveen coordenadas
+  /// Obtiene los lugares filtrados y ordenados por distancia si se proveen coordenadas.
+  /// Soporta paginación eficiente con [limit] y [offset] para no sobrecargar el renderizado ni la memoria.
   Future<List<PlaceModel>> getPlaces({
     String? searchQuery,
     String? categoryId,
@@ -117,6 +118,7 @@ class PlacesService {
     double? userLat,
     double? userLng,
     int limit = 50,
+    int offset = 0,
   }) async {
     final all = await getAllPlaces();
 
@@ -180,10 +182,9 @@ class PlacesService {
       });
     }
 
-    if (filtered.length > limit) {
-      return filtered.sublist(0, limit);
-    }
-    return filtered;
+    final start = offset.clamp(0, filtered.length);
+    final end = (start + limit).clamp(start, filtered.length);
+    return filtered.sublist(start, end);
   }
 
   /// Obtiene los servicios de emergencia clasificados por distancia

@@ -1,34 +1,46 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // 📸 Negocios, alojamientos y gastronomía
-    match /businesses/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
+    // Funciones de validación de seguridad
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < 10 * 1024 * 1024; // Máximo 10MB
     }
 
-    // 🗂️ Biblioteca multimedia centralizada (fotos, videos, audios folclóricos)
+    function isValidAudio() {
+      return request.resource.contentType.matches('audio/.*')
+        && request.resource.size < 15 * 1024 * 1024; // Máximo 15MB
+    }
+
+    // 📸 Negocios, alojamientos y gastronomía (Solo imágenes válidas subidas por usuarios autenticados)
+    match /businesses/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && isValidImage();
+    }
+
+    // 🗂️ Biblioteca multimedia centralizada (fotos y audios folclóricos)
     match /multimedia/{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if request.auth != null && (isValidImage() || isValidAudio());
     }
 
     // 🌋 Destinos, mapas y senderos
     match /destinations/{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if request.auth != null && isValidImage();
     }
 
-    // 👤 Avatares y fotos de perfil de exploradores
+    // 👤 Avatares y fotos de perfil de exploradores (Aislado al propio UID)
     match /users/{userId}/{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId && isValidImage();
     }
 
-    // Regla general de lectura pública para assets desplegados
+    // Regla de salvaguarda: lectura pública para assets del sistema, escritura denegada por defecto
     match /{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if false;
     }
   }
 }
+

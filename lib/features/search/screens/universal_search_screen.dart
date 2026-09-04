@@ -17,6 +17,7 @@
 // - `UniversalSearchScreen`: Pantalla completa de búsqueda con filtros activos.
 // ============================================================================
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/models/destination_model.dart';
@@ -30,6 +31,7 @@ class UniversalSearchScreen extends StatefulWidget {
 
 class _UniversalSearchScreenState extends State<UniversalSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
+  Timer? _debounceTimer;
   String _selectedCategory = 'Todos';
   String _selectedDifficulty = 'Todas';
   final double _maxPriceUsd = 200.0;
@@ -51,8 +53,18 @@ class _UniversalSearchScreenState extends State<UniversalSearchScreen> {
     'Exigente',
   ];
 
+  void _onSearchChanged(String val) {
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() => _searchQuery = val);
+      }
+    });
+  }
+
   @override
   void dispose() {
+    _debounceTimer?.cancel();
     _searchController.dispose();
     super.dispose();
   }
@@ -125,7 +137,7 @@ class _UniversalSearchScreenState extends State<UniversalSearchScreen> {
               children: [
                 TextField(
                   controller: _searchController,
-                  onChanged: (val) => setState(() => _searchQuery = val),
+                  onChanged: _onSearchChanged,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Buscar volcanes, playas, lodges o departamentos...',
