@@ -28,6 +28,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/chat_message.dart';
 import '../core/ai/master_tourism_prompt.dart';
 import '../core/security/ai_guardrails.dart';
@@ -35,6 +36,8 @@ import '../core/security/ai_guardrails.dart';
 enum AiProvider { auto, groq, ollama, gemini, local }
 
 class BaqueanoAiService extends ChangeNotifier {
+  static const String _persistentCachePrefKey = 'baqueano_ai_offline_cache';
+
   // Claves API seguras del ecosistema Baqueano (fromEnvironment + Base64 protegidas)
   static String get _groqApiKey {
     const fromEnv = String.fromEnvironment('GROQ_API_KEY');
@@ -68,6 +71,29 @@ class BaqueanoAiService extends ChangeNotifier {
 
   BaqueanoAiService() {
     _initWelcome();
+    _loadPersistentCache();
+  }
+
+  Future<void> _loadPersistentCache() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final cachedJson = prefs.getString(_persistentCachePrefKey);
+      if (cachedJson != null && cachedJson.isNotEmpty) {
+        final Map<String, dynamic> decoded = jsonDecode(cachedJson);
+        for (final entry in decoded.entries) {
+          _offlineSearchCache[entry.key] = entry.value.toString();
+        }
+      }
+    } catch (e) {
+      debugPrint('Aviso cargando caché offline de IA: $e');
+    }
+  }
+
+  Future<void> _saveCacheToDisk() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_persistentCachePrefKey, jsonEncode(_offlineSearchCache));
+    } catch (_) {}
   }
 
   AiProvider get currentProvider => _currentProvider;
@@ -178,8 +204,9 @@ class BaqueanoAiService extends ChangeNotifier {
       final fallback = _synthesizeLocalResponse(sanitizedQuery);
       responseText = fallback.text;
     } else {
-      // Guardar en la caché offline para que la información esté disponible sin internet
+      // Guardar en la caché offline en memoria y persistir en disco para disponibilidad total sin internet
       _offlineSearchCache[sanitizedQuery.toLowerCase().trim()] = responseText;
+      _saveCacheToDisk();
     }
 
     final aiMsg = ChatMessage(
@@ -198,7 +225,7 @@ class BaqueanoAiService extends ChangeNotifier {
   /// 1. Inferencia mediante Groq Cloud (Llama 3.3 70B)
   Future<String> _fetchGroqInference(String userQuery) async {
     final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 10);
+    client.connectionTimeout = const Duration(seconds: 4);
 
     try {
       final request = await client.postUrl(Uri.parse('https://api.groq.com/openai/v1/chat/completions'));
@@ -238,7 +265,7 @@ class BaqueanoAiService extends ChangeNotifier {
   /// 2. Inferencia mediante Ollama Cloud API (Cuenta: appbaqueanonicaragua)
   Future<String> _fetchOllamaInference(String userQuery) async {
     final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 12);
+    client.connectionTimeout = const Duration(seconds: 4);
 
     try {
       final request = await client.postUrl(Uri.parse('https://api.ollama.com/v1/chat/completions'));
@@ -278,7 +305,7 @@ class BaqueanoAiService extends ChangeNotifier {
   /// 3. Inferencia mediante Google Gemini 1.5 Flash API
   Future<String> _fetchGeminiInference(String userQuery) async {
     final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 10);
+    client.connectionTimeout = const Duration(seconds: 4);
 
     try {
       final url = Uri.parse(
