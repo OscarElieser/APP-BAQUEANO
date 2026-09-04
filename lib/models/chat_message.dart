@@ -18,6 +18,7 @@
 // ============================================================================
 
 import 'ai_tool_action.dart';
+import '../features/ai_assistant/models/itinerary_model.dart';
 
 enum AiConfidenceLevel { high, medium, low }
 
@@ -30,6 +31,7 @@ class ChatMessage {
   final List<AiToolAction>? toolActions;
   final AiConfidenceLevel confidenceLevel;
   final bool isOfflineBackup;
+  final Itinerary? itinerary;
 
   const ChatMessage({
     required this.id,
@@ -40,6 +42,7 @@ class ChatMessage {
     this.toolActions,
     this.confidenceLevel = AiConfidenceLevel.medium,
     this.isOfflineBackup = false,
+    this.itinerary,
   });
 
   Map<String, dynamic> toMap() {
@@ -52,6 +55,7 @@ class ChatMessage {
       'toolActions': toolActions?.map((a) => a.toMap()).toList(),
       'confidenceLevel': confidenceLevel.name,
       'isOfflineBackup': isOfflineBackup,
+      'itinerary': itinerary?.toMap(),
     };
   }
 
@@ -74,6 +78,9 @@ class ChatMessage {
         orElse: () => AiConfidenceLevel.medium,
       ),
       isOfflineBackup: map['isOfflineBackup'] ?? false,
+      itinerary: map['itinerary'] != null && map['itinerary'] is Map<String, dynamic>
+          ? Itinerary.fromMap(Map<String, dynamic>.from(map['itinerary']))
+          : null,
     );
   }
 }

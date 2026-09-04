@@ -41,6 +41,8 @@ import '../core/ai/baqueano_rag_retriever.dart';
 import '../core/ai/master_tourism_prompt.dart';
 import '../core/ai/traveler_session_context.dart';
 import '../core/security/ai_guardrails.dart';
+import '../features/ai_assistant/models/itinerary_model.dart';
+import '../features/ai_assistant/services/itinerary_engine_service.dart';
 import '../features/directory/services/places_service.dart';
 import '../models/ai_tool_action.dart';
 import '../models/chat_message.dart';
@@ -394,6 +396,34 @@ class BaqueanoAiService extends ChangeNotifier {
       }
     }
 
+    // 6. Detección de intención y generación de Itinerario Operacional estructurado
+    Itinerary? generatedItinerary;
+    final qLower = sanitizedQuery.toLowerCase();
+    final isItineraryIntent = qLower.contains('itinerario') ||
+        qLower.contains('ruta') ||
+        qLower.contains('conocer') ||
+        qLower.contains('días') ||
+        qLower.contains('dias') ||
+        qLower.contains('viaje') ||
+        qLower.contains('visitar');
+
+    if (isItineraryIntent || _sessionContext.destination != null) {
+      generatedItinerary = ItineraryEngineService.generateItinerary(
+        context: _sessionContext,
+        explicitQuery: sanitizedQuery,
+      );
+      if (!finalActions.any((a) => a.type == AiToolType.showItinerary)) {
+        finalActions.insert(
+          0,
+          AiToolAction(
+            label: '🧭 Ver Ruta Detallada',
+            type: AiToolType.showItinerary,
+            params: {'itineraryId': generatedItinerary.itineraryId},
+          ),
+        );
+      }
+    }
+
     final aiMsg = ChatMessage(
       id: 'ai-${DateTime.now().millisecondsSinceEpoch}',
       text: responseText,
@@ -401,12 +431,35 @@ class BaqueanoAiService extends ChangeNotifier {
       timestamp: DateTime.now(),
       confidenceLevel: confidence,
       isOfflineBackup: isOffline,
+      itinerary: generatedItinerary,
       toolActions: finalActions.isNotEmpty ? finalActions : null,
       quickActions: _generateQuickActions(sanitizedQuery),
     );
 
     _chatHistory.add(aiMsg);
     _isTyping = false;
+    notifyListeners();
+  }
+
+  /// Inyecta un itinerario optimizado/recalculado directamente en el flujo conversacional
+  void injectItineraryResponse(Itinerary itinerary) {
+    _sessionContext = _sessionContext.copyWith(
+      travelStyle: itinerary.travelStyle.name,
+      budgetUsd: itinerary.totalEstimatedCostUsd,
+    );
+    final msg = ChatMessage(
+      id: 'ai-itn-${DateTime.now().millisecondsSinceEpoch}',
+      text: '¡Listo explorador! He recalculado tu plan a modalidad económica. Priorizamos transporte colectivo, posadas campesinas familiares y actividades comunitarias para reducir los costos.',
+      isUser: false,
+      timestamp: DateTime.now(),
+      confidenceLevel: AiConfidenceLevel.high,
+      itinerary: itinerary,
+      quickActions: [
+        '🌋 Ver en Mapa',
+        '🛎️ Ver Alojamientos',
+      ],
+    );
+    _chatHistory.add(msg);
     notifyListeners();
   }
 

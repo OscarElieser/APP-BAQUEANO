@@ -39,6 +39,8 @@ import '../../../models/ai_tool_action.dart';
 import '../../../models/chat_message.dart';
 import '../../../services/baqueano_ai_service.dart';
 import '../../checkout/widgets/checkout_modal.dart';
+import '../services/itinerary_engine_service.dart';
+import '../widgets/itinerary_card_view.dart';
 
 class AiAssistantScreen extends ConsumerStatefulWidget {
   const AiAssistantScreen({super.key});
@@ -161,6 +163,49 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
             }
           }
         }
+        break;
+
+      case AiToolType.showItinerary:
+        final session = ref.read(baqueanoAiServiceProvider).sessionContext;
+        final itn = ItineraryEngineService.generateItinerary(context: session);
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (ctx) => DraggableScrollableSheet(
+            initialChildSize: 0.85,
+            minChildSize: 0.4,
+            maxChildSize: 0.95,
+            builder: (_, scrollCtrl) => Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFF0F172A),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                controller: scrollCtrl,
+                children: [
+                  ItineraryCardView(
+                    itinerary: itn,
+                    onRecalculateCheaper: () {
+                      Navigator.pop(ctx);
+                      final cheaper = ItineraryEngineService.recalculateCheaper(itn);
+                      ref.read(baqueanoAiServiceProvider).injectItineraryResponse(cheaper);
+                    },
+                    onOpenMap: (lat, lng, title) {
+                      Navigator.pop(ctx);
+                      context.push('/mapa?lat=$lat&lng=$lng&title=${Uri.encodeComponent(title)}');
+                    },
+                    onViewPlace: (placeId) {
+                      Navigator.pop(ctx);
+                      context.push('/descubre-nicaragua/$placeId');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
         break;
     }
   }
@@ -514,6 +559,25 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
               ),
             ),
 
+            // Tarjeta de Itinerario Operacional Estructurado
+            if (msg.itinerary != null) ...[
+              const SizedBox(height: 12),
+              ItineraryCardView(
+                itinerary: msg.itinerary!,
+                onRecalculateCheaper: () {
+                  final cheaper = ItineraryEngineService.recalculateCheaper(msg.itinerary!);
+                  ref.read(baqueanoAiServiceProvider).injectItineraryResponse(cheaper);
+                },
+                onOpenMap: (lat, lng, title) {
+                  final encoded = Uri.encodeComponent(title);
+                  context.push('/mapa?lat=$lat&lng=$lng&title=$encoded');
+                },
+                onViewPlace: (placeId) {
+                  context.push('/descubre-nicaragua/$placeId');
+                },
+              ),
+            ],
+
             // Herramientas y Acciones Ejecutables (Function Calling Nativo)
             if (msg.toolActions != null && msg.toolActions!.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -600,6 +664,8 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
         return Icons.call_rounded;
       case AiToolType.openWhatsApp:
         return Icons.chat_bubble_rounded;
+      case AiToolType.showItinerary:
+        return Icons.alt_route_rounded;
     }
   }
 

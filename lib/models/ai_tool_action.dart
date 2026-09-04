@@ -23,6 +23,7 @@ enum AiToolType {
   openCheckout,
   callPhone,
   openWhatsApp,
+  showItinerary,
 }
 
 class AiToolAction {
