@@ -27,8 +27,19 @@ class GeoLocationService {
   static const double defaultLat = 12.1364;
   static const double defaultLng = -86.2514;
 
+  /// Verifica si el permiso de ubicación ya fue concedido previamente sin abrir diálogos del sistema
+  Future<bool> hasPermission() async {
+    try {
+      final permission = await Geolocator.checkPermission();
+      return permission == LocationPermission.always || permission == LocationPermission.whileInUse;
+    } catch (_) {
+      return false;
+    }
+  }
+
   /// Obtiene la posición actual del usuario con manejo defensivo de permisos y timeout
-  Future<Position?> getCurrentPosition() async {
+  /// Por defecto [requestIfNotGranted] es falso para evitar congelamiento de la interfaz y ANRs.
+  Future<Position?> getCurrentPosition({bool requestIfNotGranted = false}) async {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
@@ -38,6 +49,10 @@ class GeoLocationService {
 
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
+        if (!requestIfNotGranted) {
+          // No abrir diálogos del sistema durante la carga inicial para prevenir ANR
+          return null;
+        }
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
           debugPrint('ℹ️ [GeoLocationService] Permiso de ubicación denegado por el usuario');
@@ -50,11 +65,11 @@ class GeoLocationService {
         return null;
       }
 
-      // Obtener posición con límite de tiempo de 6 segundos para no congelar la UI
+      // Obtener posición con límite de tiempo de 4 segundos y precisión optimizada
       return await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.medium,
-          timeLimit: Duration(seconds: 6),
+          accuracy: LocationAccuracy.low,
+          timeLimit: Duration(seconds: 4),
         ),
       );
     } catch (e) {

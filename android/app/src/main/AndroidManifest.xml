@@ -15,7 +15,8 @@
     <application
         android:label="Baqueano"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true">
 
         <!-- Llave oficial de Google Maps Android SDK -->
         <meta-data

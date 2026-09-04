@@ -525,30 +525,32 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.gold.withValues(alpha: 0.5), width: 1.2),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(place.latitude, place.longitude),
-                    zoom: 15,
-                  ),
-                  markers: {
-                    Marker(
-                      markerId: MarkerId(place.placeId),
-                      position: LatLng(place.latitude, place.longitude),
-                      infoWindow: InfoWindow(title: place.name),
+            RepaintBoundary(
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.5), width: 1.2),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(place.latitude, place.longitude),
+                      zoom: 15,
                     ),
-                  },
-                  zoomControlsEnabled: false,
-                  myLocationButtonEnabled: false,
-                  mapToolbarEnabled: false,
+                    markers: {
+                      Marker(
+                        markerId: MarkerId(place.placeId),
+                        position: LatLng(place.latitude, place.longitude),
+                        infoWindow: InfoWindow(title: place.name),
+                      ),
+                    },
+                    zoomControlsEnabled: false,
+                    myLocationButtonEnabled: false,
+                    mapToolbarEnabled: false,
+                  ),
                 ),
               ),
             ),

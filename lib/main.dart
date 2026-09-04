@@ -24,6 +24,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'config/app_router.dart';
 import 'config/firebase_options.dart';
 import 'core/theme/app_theme.dart';
@@ -41,17 +43,25 @@ Future<void> main() async {
     ),
   );
 
+  // Forzar Hybrid Composition para Google Maps en Android para evitar deadlocks de superficie en Samsung
+  final GoogleMapsFlutterPlatform mapsImplementation = GoogleMapsFlutterPlatform.instance;
+  if (mapsImplementation is GoogleMapsFlutterAndroid) {
+    mapsImplementation.useAndroidViewSurface = true;
+  }
+
   // Initialize Firebase with graceful catch
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    // Initialize Firebase App Check for Android security & bot protection
-    await FirebaseAppCheck.instance.activate(
+    // Initialize Firebase App Check de forma no bloqueante
+    FirebaseAppCheck.instance.activate(
       androidProvider: AndroidProvider.debug,
       appleProvider: AppleProvider.debug,
-    );
+    ).catchError((e) {
+      debugPrint('AppCheck notice: $e');
+    });
   } catch (e) {
     debugPrint('Firebase initialization notice: $e');
   }

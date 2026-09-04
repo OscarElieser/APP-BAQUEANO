@@ -102,10 +102,23 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
     _departments = await catService.getDepartments();
     _municipalities = await catService.getMunicipalities();
 
-    // Intentar obtener ubicación inicial del usuario
-    await _fetchUserLocation(silent: true);
-
+    // 1. Cargar y renderizar lugares inmediatamente para respuesta visual instantánea a 60 FPS
     await _applyFilters();
+
+    // 2. Enriquecer con GPS en segundo plano no bloqueante solo si el permiso ya estaba concedido
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _checkLocationIfAlreadyGranted();
+      }
+    });
+  }
+
+  Future<void> _checkLocationIfAlreadyGranted() async {
+    final geoService = ref.read(geoLocationServiceProvider);
+    final hasPerm = await geoService.hasPermission();
+    if (hasPerm) {
+      await _fetchUserLocation(silent: true);
+    }
   }
 
   Future<void> _fetchUserLocation({bool silent = false}) async {
@@ -115,7 +128,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
     }
 
     final geoService = ref.read(geoLocationServiceProvider);
-    final pos = await geoService.getCurrentPosition();
+    final pos = await geoService.getCurrentPosition(requestIfNotGranted: !silent);
 
     if (pos != null) {
       _userLat = pos.latitude;
@@ -126,6 +139,8 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
           CameraUpdate.newLatLngZoom(LatLng(pos.latitude, pos.longitude), 13),
         );
       }
+
+      await _applyFilters();
 
       if (!silent && mounted) {
         CustomToast.show(context, message: '✓ Ubicación GPS actualizada');
@@ -729,34 +744,36 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
     final isLandscape = size.width > size.height;
     final mapHeight = isLandscape ? 240.0 : (size.width > 600 ? 440.0 : 360.0);
 
-    return Container(
-      height: mapHeight,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 1.4),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.4),
-            blurRadius: 20,
-            offset: const Offset(0, 6),
+    return RepaintBoundary(
+      child: Container(
+        height: mapHeight,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 1.4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.4),
+              blurRadius: 20,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: _userLat != null ? LatLng(_userLat!, _userLng!) : _nicaraguaCenter,
+              zoom: _userLat != null ? 12.0 : 7.2,
+            ),
+            markers: _markers,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: false,
+            zoomControlsEnabled: true,
+            onMapCreated: (controller) {
+              _mapController = controller;
+            },
           ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: GoogleMap(
-          initialCameraPosition: CameraPosition(
-            target: _userLat != null ? LatLng(_userLat!, _userLng!) : _nicaraguaCenter,
-            zoom: _userLat != null ? 12.0 : 7.2,
-          ),
-          markers: _markers,
-          myLocationEnabled: true,
-          myLocationButtonEnabled: false,
-          zoomControlsEnabled: true,
-          onMapCreated: (controller) {
-            _mapController = controller;
-          },
         ),
       ),
     );
@@ -778,7 +795,12 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
               height: 70,
               color: AppColors.primaryDark,
               child: place.imageUrl.isNotEmpty
-                  ? Image.network(place.imageUrl, fit: BoxFit.cover)
+                  ? Image.network(
+                      place.imageUrl,
+                      fit: BoxFit.cover,
+                      cacheWidth: 200,
+                      cacheHeight: 200,
+                    )
                   : const Icon(Icons.place_rounded, color: AppColors.goldLight, size: 30),
             ),
           ),
@@ -900,37 +922,44 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
       itemBuilder: (context, index) {
         final place = _places[index];
 
-        return InkWell(
-          onTap: () => _openPlaceDetails(place),
-          borderRadius: BorderRadius.circular(18),
-          child: Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: AppColors.primaryDark.withValues(alpha: 0.6),
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: place.isEmergency
-                    ? AppColors.error.withValues(alpha: 0.5)
-                    : AppColors.borderLight,
-              ),
-            ),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    color: AppColors.primary,
-                    child: place.imageUrl.isNotEmpty
-                        ? Image.network(place.imageUrl, fit: BoxFit.cover)
-                        : Icon(
-                            place.isEmergency ? Icons.emergency_rounded : Icons.landscape_rounded,
-                            color: place.isEmergency ? AppColors.error : AppColors.goldLight,
-                            size: 26,
-                          ),
-                  ),
+        return RepaintBoundary(
+          key: ValueKey(place.placeId),
+          child: InkWell(
+            onTap: () => _openPlaceDetails(place),
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: AppColors.primaryDark.withValues(alpha: 0.6),
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(
+                  color: place.isEmergency
+                      ? AppColors.error.withValues(alpha: 0.5)
+                      : AppColors.borderLight,
                 ),
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      color: AppColors.primary,
+                      child: place.imageUrl.isNotEmpty
+                          ? Image.network(
+                              place.imageUrl,
+                              fit: BoxFit.cover,
+                              cacheWidth: 160,
+                              cacheHeight: 160,
+                            )
+                          : Icon(
+                              place.isEmergency ? Icons.emergency_rounded : Icons.landscape_rounded,
+                              color: place.isEmergency ? AppColors.error : AppColors.goldLight,
+                              size: 26,
+                            ),
+                    ),
+                  ),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
@@ -1001,7 +1030,8 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
               ],
             ),
           ),
-        );
+        ),
+      );
       },
     );
   }
