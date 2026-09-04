@@ -26,7 +26,7 @@
 - [⚡ Arquitectura de Rendimiento & Auditoría Senior Continua (60-120 FPS)](#-arquitectura-de-rendimiento--auditoría-senior-continua-60-120-fps)
 - [📱 Persistencia de Estado & Ciclo de Vida Nativo Android](#-persistencia-de-estado--ciclo-de-vida-nativo-android)
 - [🎨 Sistema de Diseño & Tokens Visuales](#-sistema-de-diseño--tokens-visuales)
-- [🗄️ Arquitectura de Datos Offline-First & Seguridad RBAC](#️-arquitectura-de-datos-offline-first--seguridad-rbac)
+- [🗄️ Arquitectura de Base de Datos, Normas de Seguridad (PCI-DSS, RBAC, PII) & Offline-First](#️-arquitectura-de-base-de-datos-normas-de-seguridad-pci-dss-rbac-pii--offline-first)
 - [🚨 Centro de Auxilio & Emergencias SOS en Sendero](#-centro-de-auxilio--emergencias-sos-en-sendero)
 - [🏪 Vitrina de Negocios Campesinos, Publicidad & Comercio Justo](#-vitrina-de-negocios-campesinos-publicidad--comercio-justo)
 - [🗺️ Mapa GPS Satelital & Geolocalización de Rutas](#️-mapa-gps-satelital--geolocalización-de-rutas)
@@ -208,39 +208,85 @@ Inspirado en los lagos, volcanes, la cerámica de San Juan de Oriente y la tierr
 
 ---
 
-## 🗄️ Arquitectura de Datos Offline-First & Seguridad RBAC
+## 🗄️ Arquitectura de Base de Datos, Normas de Seguridad (PCI-DSS, RBAC, PII) & Offline-First
 
-Diseñada para operar en volcanes y selvas sin cobertura 4G:
+La base de datos de **BAQUEANO** está diseñada bajo una arquitectura híbrida de alta disponibilidad que combina **Google Cloud Firestore** (NoSQL orientado a documentos) con almacenamiento persistente local y empaquetado de arranque, permitiendo operación ininterrumpida en cumbres volcánicas y selvas de Nicaragua sin cobertura móvil.
 
 ```text
-       ┌──────────────────────────────────────────────┐
-       │             ACCIONES DEL EXPLORADOR          │
-       │ (Explorar, cotizar, ver mapas, ganar sellos) │
-       └──────────────────────┬───────────────────────┘
-                              ▼
-       ┌──────────────────────────────────────────────┐
-       │         ESTADO REACTIVO EN MEMORIA           │
-       │             (Riverpod Notifiers)             │
-       └──────────────────────┬───────────────────────┘
-                              ▼
-       ┌──────────────────────────────────────────────┐
-       │            CACHÉ PERSISTENTE LOCAL           │
-       │    (SharedPreferences / Almacenamiento Local)│
-       │  • Rutas y mapas satelitales en caché        │
-       │  • Fichas de baqueanos y contactos offline   │
-       │  • Sellos y patrimonio histórico local       │
-       └──────────────────────┬───────────────────────┘
-                              ▼ (Al reconectar a 4G / Wi-Fi)
-       ┌──────────────────────────────────────────────┐
-       │          CLOUD FIRESTORE & FIREBASE          │
-       │  • Sincronización silenciosa en segundo plano│
-       │  • Modelos: BusinessModel, AuditLogModel     │
-       │  • Reglas RBAC (superadmin, admin, guide,...)│
-       └──────────────────────────────────────────────┘
+       ┌──────────────────────────────────────────────────────────────────┐
+       │                     ACCIONES DEL EXPLORADOR                      │
+       │       (Explorar lugares, ver mapas, cotizar planes, SOS)        │
+       └──────────────────────────────┬───────────────────────────────────┘
+                                      ▼
+       ┌──────────────────────────────────────────────────────────────────┐
+       │             CAPA 1: ESTADO REACTIVO EN MEMORIA                   │
+       │     (Riverpod Providers / StateNotifier / Cero Bloqueo UI)       │
+       └──────────────────────────────┬───────────────────────────────────┘
+                                      ▼
+       ┌──────────────────────────────────────────────────────────────────┐
+       │             CAPA 2: CACHÉ LOCAL PERSISTENTE & ASSETS             │
+       │  • Bootstrap local inmediato: assets/data/*.json                 │
+       │  • SharedPreferences & Firestore Local Cache (Cero Pantallas     │
+       │    en blanco y carga en <50ms sin conexión 4G)                  │
+       └──────────────────────────────┬───────────────────────────────────┘
+                                      ▼ (Sincronización en segundo plano)
+       ┌──────────────────────────────────────────────────────────────────┐
+       │             CAPA 3: CLOUD FIRESTORE (appbaqueano)                │
+       │  • Multibase de datos dedicada: databaseId 'appbaqueano'         │
+       │  • Sincronización atómica con reglas declarativas                │
+       │  • Cero bloqueo de hilos de interfaz (Prevención de ANR)         │
+       └──────────────────────────────────────────────────────────────────┘
 ```
 
-- **Modelos Fuertes Tipados**: [BusinessModel](lib/core/models/business_model.dart), [AuditLogModel](lib/core/models/audit_log_model.dart), [MediaItemModel](lib/core/models/media_item_model.dart), [AppConfigModel](lib/core/models/app_config_model.dart).
-- **Reglas Declarativas**: `firestore.rules` y `storage.rules` blindadas con validación de tamaño y tipos MIME.
+---
+
+### 🛡️ Normas y Estándares Internacionales que Rigen la Base de Datos
+
+La gestión de datos en BAQUEANO se adhiere a cinco marcos normativos de seguridad, privacidad y resiliencia:
+
+#### 1. Norma PCI-DSS (Payment Card Industry Data Security Standard — Requisito 3)
+- **Principio de Cero Almacenamiento de Datos Sensibles**: Queda terminantemente prohibido almacenar en Firestore, caché local o registros de la aplicación números completos de tarjetas (PAN), códigos de seguridad (CVV/CVC), fechas de vencimiento completas o PINs bancarios.
+- **Tokenización Delegada Oficial**: Los pagos se procesan exclusivamente a través de las pasarelas seguras oficiales de las entidades bancarias adquirentes (CyberSource para BANPRO, Compra Click para BAC Credomatic, Botón Oficial para Banco LAFISE).
+- **Enmascaramiento y Auditoría Mínima**: Únicamente se conservan los últimos 4 dígitos (`last4`), la franquicia (`brand`), el identificador de orden (`orderId`), la referencia de autorización bancaria (`authorizationRef`) y la entidad de liquidación (`settlementBank`).
+
+#### 2. Norma RBAC (Role-Based Access Control) & Mínimo Privilegio (PoLP)
+- **Control de Acceso Declarativo (`firestore.rules`)**:
+  - **Superadmin & Admin**: Capacidad de auditoría completa, gestión de catálogo y validación de comercios.
+  - **Host / Aliado Comercial**: Edición restringida a su propia ficha comercial verificada.
+  - **Explorador / Turista**: Lectura pública de lugares y servicios publicados (`status == 'published'`); escritura restringida únicamente a sus propios marcadores guardados (`userId == request.auth.uid`).
+- **Aislamiento por Usuario**: Ningún usuario no autenticado puede consultar o mutar registros privados ajenos.
+
+#### 3. Norma de Resiliencia Offline-First & Continuidad Operativa (Graceful Degradation)
+- **Operación sin Conexión en Senderos**: En zonas remotas sin señal celular, la base de datos conmuta automáticamente al catálogo precargado en JSON (`initial_places.json`, `departments.json`, `municipalities.json`, `categories.json`).
+- **Arranque en Frío Ultrarrápido**: La aplicación renderiza en menos de 50ms a 60 FPS sin esperar respuestas de red, erradicando pantallas congeladas o bloqueos del hilo principal.
+
+#### 4. Norma de Protección de Datos Personales (PII — Personally Identifiable Information)
+- **Custodia de Identidad**: Nombres, correos electrónicos y teléfonos de contacto de los exploradores residen bajo `/users/{userId}` con reglas de lectura que exigen coincidencia de token de autenticación.
+- **Transparencia Campesina**: Los contactos de anfitriones y cooperativas que figuran en `/businesses` y `/places` son de naturaleza comercial pública aprobada por las familias baqueanas para enlace directo sin intermediarios.
+
+#### 5. Norma de Auditoría y Trazabilidad Inmutable (Audit Trail & Idempotencia)
+- **Colección Inmutable `audit_logs`**: Todo evento crítico del sistema (afiliación comercial, creación de orden de pago, actualización de estado) queda sellado de forma permanente.
+- **Bloqueo de Edición Histórica**: Regla `allow update, delete: if false;` que impide la alteración o supresión de registros de auditoría contable.
+
+---
+
+### 🗃️ Matriz de Colecciones en Cloud Firestore
+
+| Colección | Propósito y Contenido | Regla de Acceso (`firestore.rules`) |
+| :--- | :--- | :--- |
+| **`places`** | Catálogo oficial del Directorio Nacional de Nicaragua (establecimientos, puntos de interés, servicios de emergencia 24/7 y geolocalización). | Lectura pública para `published`. Escritura exclusiva para administradores (`admin` / `super_admin`). |
+| **`categories`** | Taxonomía de clasificación nacional (Cultura, Comercio, Entretenimiento, Salud, Emergencias, Transporte). | Lectura pública. Escritura restringida a administradores. |
+| **`departments`** & **`municipalities`** | División político-territorial oficial de los 15 departamentos y 2 regiones autónomas de Nicaragua. | Lectura pública. Escritura restringida a administradores. |
+| **`payment_orders`** | Órdenes de pago formales para planes de negocio (`Semilla Rural`, `Aliado Verificado`, `Alianza Destacada`). | Creación y lectura autenticada del titular (`request.auth != null`). |
+| **`payment_transactions`** | Bitácora de transacciones bancarias procesadas con tokens de pasarela y enmascaramiento PCI-DSS (`last4`, `brand`, `bank`). | Lectura y auditoría exclusiva para usuarios autenticados y administradores. |
+| **`business_subscriptions`** | Estado de vigencia, renovaciones y condiciones comerciales de negocios verificados. | Lectura pública de sellos vigentes. Escritura administrativa. |
+| **`businesses`** | Fichas comerciales detalladas de eco-lodges, guías comunitarios y restaurantes locales. | Lectura pública para negocios activos. Edición por propietario autenticado o administradores. |
+| **`users`** | Perfiles de exploradores, pasaporte de sellos y puntos de experiencia XP. | Lectura pública de perfil comunitario. Edición exclusiva del propietario (`uid == userId`). |
+| **`user_saved_places`** | Lugares y servicios guardados como favoritos por cada usuario. | Lectura y escritura estricta del propietario (`userId == request.auth.uid`). |
+| **`audit_logs`** | Registro histórico inmutable de eventos fiscales, de seguridad y cambios de rol. | Creación por usuarios autenticados. Lectura restringida. **Edición y borrado estrictamente prohibidos**. |
+
+- **Modelos Fuertes Tipados**: [PlaceModel](lib/features/directory/models/place_model.dart), [PaymentOrder](lib/core/payment/models/payment_order.dart), [PaymentTransaction](lib/core/payment/models/payment_transaction.dart), [BusinessModel](lib/core/models/business_model.dart), [AuditLogModel](lib/core/models/audit_log_model.dart).
+- **Reglas Declarativas**: `firestore.rules` y `storage.rules` desplegadas en el proyecto Firebase `appbaqueano`.
 
 ---
 
