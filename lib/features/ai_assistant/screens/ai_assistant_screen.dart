@@ -29,8 +29,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/data/catalog_data.dart';
+import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
+import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../../models/ai_tool_action.dart';
@@ -84,30 +86,79 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
   Future<void> _executeToolAction(AiToolAction action) async {
     switch (action.type) {
       case AiToolType.showMap:
-        context.push('/mapa');
+        final lat = action.params['latitude'];
+        final lng = action.params['longitude'];
+        final name = Uri.encodeComponent(action.params['name']?.toString() ?? '');
+        if (lat != null && lng != null) {
+          context.push('/mapa?lat=$lat&lng=$lng&title=$name');
+        } else {
+          context.push('/mapa');
+        }
         break;
+
       case AiToolType.viewPlace:
-        context.push('/directorio');
+        final placeId = action.params['placeId']?.toString();
+        if (placeId != null && placeId.isNotEmpty) {
+          context.push('/descubre-nicaragua/$placeId');
+        } else {
+          context.push('/descubre-nicaragua');
+        }
         break;
+
       case AiToolType.openCheckout:
-        final dest = CatalogData.destinations.first;
-        CheckoutModal.show(context, dest);
-        break;
-      case AiToolType.callPhone:
-        final phone = action.params['phone']?.toString().replaceAll(RegExp(r'\s+'), '');
-        if (phone != null && phone.isNotEmpty) {
-          final uri = Uri.parse('tel:$phone');
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
+        // 🛡️ Validación Estricta de Parámetros de Checkout
+        // El LLM NO puede forjar un checkout arbitrario: debe cotejarse contra un paquete verificado
+        final destId = action.params['placeId']?.toString();
+        final destName = (action.params['destination'] ?? action.params['name'] ?? '').toString().toLowerCase().trim();
+
+        DestinationModel? matchedDest;
+        if (destId != null && destId.isNotEmpty) {
+          matchedDest = CatalogData.destinations.where((d) => d.id == destId).firstOrNull;
+        }
+        if (matchedDest == null && destName.isNotEmpty) {
+          matchedDest = CatalogData.destinations.where((d) =>
+            d.title.toLowerCase().contains(destName) ||
+            d.department.toLowerCase().contains(destName)
+          ).firstOrNull;
+        }
+
+        if (matchedDest != null) {
+          CheckoutModal.show(context, matchedDest);
+        } else {
+          if (mounted) {
+            CustomToast.show(
+              context,
+              message: 'ℹ️ Este destino no cuenta con pasarela digital activa. Contacta al anfitrión por WhatsApp o teléfono oficial.',
+            );
           }
         }
         break;
+
+      case AiToolType.callPhone:
+        final phone = action.params['phone']?.toString().replaceAll(RegExp(r'[^0-9+]'), '');
+        if (phone != null && phone.isNotEmpty && phone.length >= 8) {
+          final uri = Uri.parse('tel:$phone');
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri);
+          } else {
+            if (mounted) {
+              CustomToast.error(context, 'No se pudo abrir el marcador telefónico para $phone');
+            }
+          }
+        }
+        break;
+
       case AiToolType.openWhatsApp:
         final phone = action.params['phone']?.toString().replaceAll(RegExp(r'[^0-9]'), '');
         if (phone != null && phone.isNotEmpty) {
-          final uri = Uri.parse('https://wa.me/$phone');
+          final text = Uri.encodeComponent('Hola, vi su servicio en BAQUEANO Nicaragua y me gustaría consultar disponibilidad.');
+          final uri = Uri.parse('https://wa.me/$phone?text=$text');
           if (await canLaunchUrl(uri)) {
             await launchUrl(uri, mode: LaunchMode.externalApplication);
+          } else {
+            if (mounted) {
+              CustomToast.error(context, 'No se pudo abrir WhatsApp para el contacto $phone');
+            }
           }
         }
         break;

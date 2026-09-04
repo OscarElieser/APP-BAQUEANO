@@ -55,27 +55,103 @@ class BaqueanoRagRetriever {
   }) async {
     final cleanQuery = query.toLowerCase();
 
-    // 1. Extraer palabras clave de búsqueda
-    String? searchTarget;
-    if (session.destination != null && session.destination!.isNotEmpty) {
-      searchTarget = session.destination;
-    }
-
-    final keyEntities = [
-      'ometepe', 'somoto', 'granada', 'león', 'leon', 'matagalpa',
-      'jinotega', 'corn island', 'masaya', 'san juan del sur', 'popoyo',
-      'mombacho', 'maderas', 'concepcion', 'concepción', 'rio san juan',
-      'río san juan', 'hotel', 'hospedaje', 'dormir', 'cabaña', 'hostal',
-      'restaurante', 'comer', 'comida', 'guía', 'guia', 'tour', 'emergencia',
-      'hospital', 'policia', 'policía', 'cruz roja',
+    // 1. Detección exhaustiva de entidades geográficas oficiales de Nicaragua
+    final departments = [
+      'boaco', 'carazo', 'chinandega', 'chontales', 'estelí', 'esteli',
+      'granada', 'jinotega', 'león', 'leon', 'madriz', 'managua',
+      'masaya', 'matagalpa', 'nueva segovia', 'río san juan', 'rio san juan',
+      'rivas', 'raccn', 'raccs', 'caribe norte', 'caribe sur',
     ];
 
-    for (final entity in keyEntities) {
-      if (cleanQuery.contains(entity)) {
-        searchTarget = (searchTarget != null && searchTarget.isNotEmpty)
-            ? '$searchTarget $entity'
-            : entity;
+    final landmarks = [
+      'ometepe', 'somoto', 'corn island', 'little corn', 'popoyo',
+      'san juan del sur', 'mombacho', 'maderas', 'concepcion', 'concepción',
+      'cerro negro', 'apoyo', 'laguna de apoyo', 'cosigüina', 'cosiguina',
+      'san ramón', 'san ramon', 'miraflor', 'tiscapa', 'zapatera',
+      'solentiname', 'el castillo', 'san carlos', 'poneloya', 'las peñitas',
+      'jiquilillo', 'bosawás', 'bosawas', 'peñas blancas',
+    ];
+
+    final categoriesIntent = <String, String>{
+      'hotel': 'alojamiento',
+      'hospedaje': 'alojamiento',
+      'dormir': 'alojamiento',
+      'cabaña': 'alojamiento',
+      'cabana': 'alojamiento',
+      'hostal': 'alojamiento',
+      'restaurante': 'gastronomia',
+      'comida': 'gastronomia',
+      'comer': 'gastronomia',
+      'almuerzo': 'gastronomia',
+      'cena': 'gastronomia',
+      'guía': 'tours',
+      'guia': 'tours',
+      'tour': 'tours',
+      'caminata': 'senderismo',
+      'senderismo': 'senderismo',
+      'volcán': 'volcanes',
+      'volcan': 'volcanes',
+      'playa': 'playas',
+      'surf': 'aventura',
+      'emergencia': 'emergencias',
+      'hospital': 'emergencias',
+      'policía': 'emergencias',
+      'policia': 'emergencias',
+    };
+
+    String? matchedGeo;
+    String? matchedCategory;
+
+    // Priorizar destino de la sesión si ya fue elegido
+    if (session.destination != null && session.destination!.isNotEmpty) {
+      matchedGeo = session.destination;
+    }
+
+    // Buscar si menciona departamento o hito geográfico
+    for (final dept in departments) {
+      if (cleanQuery.contains(dept)) {
+        matchedGeo = dept;
         break;
+      }
+    }
+    if (matchedGeo == null) {
+      for (final lm in landmarks) {
+        if (cleanQuery.contains(lm)) {
+          matchedGeo = lm;
+          break;
+        }
+      }
+    }
+
+    // Detectar intención de categoría
+    for (final entry in categoriesIntent.entries) {
+      if (cleanQuery.contains(entry.key)) {
+        matchedCategory = entry.value;
+        break;
+      }
+    }
+
+    String? searchTarget;
+    if (matchedGeo != null && matchedCategory != null) {
+      searchTarget = '$matchedGeo $matchedCategory';
+    } else if (matchedGeo != null) {
+      searchTarget = matchedGeo;
+    } else if (matchedCategory != null) {
+      searchTarget = matchedCategory;
+    } else {
+      // Tokenizar palabras clave relevantes de más de 4 letras excluyendo stop-words comunes
+      const stopWords = {
+        'donde', 'puedo', 'quiero', 'viajar', 'hacer', 'estar', 'recomienda',
+        'favor', 'buenas', 'hola', 'dias', 'para', 'como', 'cuanto', 'cuesta',
+        'tienes', 'sobre', 'este', 'esta', 'estos', 'estas', 'algun', 'alguna'
+      };
+      final tokens = cleanQuery
+          .replaceAll(RegExp(r'[^\w\s]'), '')
+          .split(RegExp(r'\s+'))
+          .where((w) => w.length >= 4 && !stopWords.contains(w))
+          .toList();
+      if (tokens.isNotEmpty) {
+        searchTarget = tokens.take(2).join(' ');
       }
     }
 
@@ -87,7 +163,8 @@ class BaqueanoRagRetriever {
           searchQuery: searchTarget,
           limit: 4,
         );
-      } else {
+      }
+      if (places.isEmpty) {
         places = await _placesService.getPlaces(
           limit: 3,
         );
@@ -100,7 +177,9 @@ class BaqueanoRagRetriever {
     final promptBuffer = StringBuffer();
     final actions = <AiToolAction>[];
 
-    if (places.isNotEmpty) {
+    final hasDirectMatch = matchedGeo != null || matchedCategory != null;
+
+    if (places.isNotEmpty && hasDirectMatch) {
       promptBuffer.writeln('=== [BASE DE DATOS REAL Y VERIFICADA DE BAQUEANO EN FIRESTORE (RAG)] ===');
       promptBuffer.writeln('Los siguientes son registros oficiales y comprobados en el territorio de Nicaragua:');
 
@@ -161,7 +240,7 @@ class BaqueanoRagRetriever {
       promptBuffer.writeln('-------------------------------------------------------------');
       promptBuffer.writeln('DIRECTIVA ANTI-ALUCINACIÓN OBLIGATORIA:');
       promptBuffer.writeln('1. Si el viajero pregunta por opciones concretas de estos destinos o servicios, utiliza los lugares arriba listados.');
-      promptBuffer.writeln('2. NUNCA inventes números telefónicos, precios exactos ni disponibilidades que no figuren en los datos verificados.');
+      promptBuffer.writeln('2. No inventes números telefónicos, precios exactos ni disponibilidades que no figuren en los datos verificados.');
       promptBuffer.writeln('3. Si un dato no está disponible, dilo explícitamente: "No tengo un registro oficial de precio verificado para esa opción específica en BAQUEANO".');
       promptBuffer.writeln('=============================================================');
 
@@ -173,15 +252,15 @@ class BaqueanoRagRetriever {
       );
     } else {
       promptBuffer.writeln('=== [BASE DE DATOS BAQUEANO - SIN REGISTRO ESPECÍFICO] ===');
-      promptBuffer.writeln('No se encontraron registros verificados de Firestore para este término de búsqueda.');
-      promptBuffer.writeln('DIRECTIVA: Proporciona orientación turística geográfica general sobre Nicaragua.');
-      promptBuffer.writeln('No inventes establecimientos ficticios, teléfonos ni precios exactos.');
+      promptBuffer.writeln('No se encontraron registros directos de Firestore para el destino o servicio exacto.');
+      promptBuffer.writeln('DIRECTIVA: Proporciona orientación turística geográfica general sobre Nicaragua basada en conocimiento cultural.');
+      promptBuffer.writeln('No inventes nombres comerciales ficticios, números de teléfono ni tarifas exactas.');
       promptBuffer.writeln('==========================================================');
 
       return RagRetrievalResult(
         ragSystemPromptBlock: promptBuffer.toString(),
         generatedActions: const [],
-        confidenceLevel: AiConfidenceLevel.medium,
+        confidenceLevel: hasDirectMatch ? AiConfidenceLevel.medium : AiConfidenceLevel.low,
         retrievedPlaces: const [],
       );
     }

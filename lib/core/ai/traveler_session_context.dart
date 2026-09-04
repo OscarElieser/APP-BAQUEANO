@@ -189,6 +189,34 @@ class TravelerSessionContext {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'destination': destination,
+      'days': days,
+      'adults': adults,
+      'children': children,
+      'budgetUsd': budgetUsd,
+      'travelStyle': travelStyle,
+      'preferences': preferences,
+      'discardedActivities': discardedActivities,
+      'selectedPlaceId': selectedPlaceId,
+    };
+  }
+
+  factory TravelerSessionContext.fromMap(Map<String, dynamic> map) {
+    return TravelerSessionContext(
+      destination: map['destination'],
+      days: map['days'],
+      adults: map['adults'] ?? 2,
+      children: map['children'] ?? 0,
+      budgetUsd: (map['budgetUsd'] as num?)?.toDouble(),
+      travelStyle: map['travelStyle'],
+      preferences: List<String>.from(map['preferences'] ?? const []),
+      discardedActivities: List<String>.from(map['discardedActivities'] ?? const []),
+      selectedPlaceId: map['selectedPlaceId'],
+    );
+  }
+
   /// Retorna el resumen contextual estructurado para alimentar el System Prompt
   String toPromptContext() {
     final buffer = StringBuffer();

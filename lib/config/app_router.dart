@@ -77,7 +77,16 @@ class AppRouter {
       ),
       GoRoute(
         path: '/mapa',
-        builder: (context, state) => const MapScreen(),
+        builder: (context, state) {
+          final lat = double.tryParse(state.uri.queryParameters['lat'] ?? '');
+          final lng = double.tryParse(state.uri.queryParameters['lng'] ?? '');
+          final title = state.uri.queryParameters['title'];
+          return MapScreen(
+            initialLat: lat,
+            initialLng: lng,
+            initialTitle: title,
+          );
+        },
       ),
       GoRoute(
         path: '/ai',

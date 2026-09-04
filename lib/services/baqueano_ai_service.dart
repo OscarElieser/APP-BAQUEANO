@@ -34,6 +34,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/data/catalog_data.dart';
 import '../core/ai/baqueano_rag_retriever.dart';
 import '../core/ai/master_tourism_prompt.dart';
 import '../core/ai/traveler_session_context.dart';
@@ -62,29 +63,33 @@ class AiObservabilityMetrics {
         'lastLatencyMs': lastLatencyMs,
         'lastProviderUsed': lastProviderUsed,
       };
+
+  void loadFromMap(Map<String, dynamic> map) {
+    totalRequests = map['totalRequests'] ?? 0;
+    successfulRequests = map['successfulRequests'] ?? 0;
+    fallbackCount = map['fallbackCount'] ?? 0;
+    cacheHits = map['cacheHits'] ?? 0;
+    guardrailBlocks = map['guardrailBlocks'] ?? 0;
+    lastLatencyMs = map['lastLatencyMs'] ?? 0;
+    lastProviderUsed = map['lastProviderUsed'] ?? 'none';
+  }
 }
 
 class BaqueanoAiService extends ChangeNotifier {
   static const String _persistentCachePrefKey = 'baqueano_ai_offline_cache';
+  static const String _metricsPrefKey = 'baqueano_ai_observability_metrics';
+  static const String _sessionPrefKey = 'baqueano_traveler_session';
 
-  // Claves API seguras del ecosistema Baqueano (fromEnvironment + Base64 protegidas)
-  static String get _groqApiKey {
-    const fromEnv = String.fromEnvironment('GROQ_API_KEY');
-    if (fromEnv.isNotEmpty) return fromEnv;
-    return utf8.decode(base64Decode('Z3NrX2FWd3NWWWJjejNjZ0J0enlQU2I0V0dkeWIwRllLTDlQVGJRbXBIYmJsdU9DR0ZDeUlBNUo='));
-  }
+  // 🛡️ AI GATEWAY & CREDENCIALES COMPILADAS (CERO LLAVES SECRETAS EXPUESTAS EN EL APK)
+  // En producción, el cliente invoca el endpoint seguro del AI Gateway alojado en backend.
+  static const String _aiGatewayBaseUrl = String.fromEnvironment(
+    'AI_GATEWAY_URL',
+    defaultValue: 'https://api.baqueano.app/ai/v1',
+  );
 
-  static String get _ollamaApiKey {
-    const fromEnv = String.fromEnvironment('OLLAMA_API_KEY');
-    if (fromEnv.isNotEmpty) return fromEnv;
-    return utf8.decode(base64Decode('YjNiYTZiMjUyMzU2NGYzOGIyYTM5MzRjYmJjYmExNjQuMWpfRGdrNVQ0ZmdKY0tpTnZNQlozbDZ5'));
-  }
-
-  static String get _geminiApiKey {
-    const fromEnv = String.fromEnvironment('GEMINI_API_KEY');
-    if (fromEnv.isNotEmpty) return fromEnv;
-    return utf8.decode(base64Decode('QUl6YVN5RGdkTU9KMTlSanNnWTc5TFhESWVsV1o0OHVXNU9vNkdF'));
-  }
+  static String get _groqApiKey => const String.fromEnvironment('GROQ_API_KEY');
+  static String get _ollamaApiKey => const String.fromEnvironment('OLLAMA_API_KEY');
+  static String get _geminiApiKey => const String.fromEnvironment('GEMINI_API_KEY');
 
   final BaqueanoRagRetriever _ragRetriever;
   AiProvider _currentProvider = AiProvider.auto;
@@ -106,7 +111,59 @@ class BaqueanoAiService extends ChangeNotifier {
     BaqueanoRagRetriever? ragRetriever,
   }) : _ragRetriever = ragRetriever ?? BaqueanoRagRetriever(placesService: placesService) {
     _initWelcome();
-    _loadPersistentCache();
+    _loadPersistentData();
+  }
+
+  Future<void> _loadPersistentData() async {
+    await _loadPersistentCache();
+    await _loadMetrics();
+    await _loadTravelerSession();
+  }
+
+  Future<void> _loadMetrics() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getString(_metricsPrefKey);
+      if (raw != null && raw.isNotEmpty) {
+        metrics.loadFromMap(jsonDecode(raw));
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _saveMetrics() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_metricsPrefKey, jsonEncode(metrics.toMap()));
+    } catch (_) {}
+  }
+
+  Future<void> _loadTravelerSession() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getString(_sessionPrefKey);
+      if (raw != null && raw.isNotEmpty) {
+        _sessionContext = TravelerSessionContext.fromMap(jsonDecode(raw));
+        notifyListeners();
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _saveTravelerSession() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_sessionPrefKey, jsonEncode(_sessionContext.toMap()));
+    } catch (_) {}
+  }
+
+  /// Verificación de conectividad real a internet en milisegundos (< 600ms)
+  Future<bool> _hasActiveInternet() async {
+    try {
+      final result = await InternetAddress.lookup('api.groq.com')
+          .timeout(const Duration(milliseconds: 600));
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } catch (_) {
+      return false;
+    }
   }
 
   Future<void> _loadPersistentCache() async {
@@ -239,36 +296,58 @@ class BaqueanoAiService extends ChangeNotifier {
     AiConfidenceLevel confidence = ragResult.confidenceLevel;
     bool isOffline = false;
 
-    // 4. Enrutamiento en cascada de IA con acceso a internet
-    try {
-      if (_currentProvider == AiProvider.groq || _currentProvider == AiProvider.auto) {
-        responseText = await _fetchGroqInference(sanitizedQuery, dynamicSystemPrompt);
-        metrics.lastProviderUsed = 'groq';
-      } else if (_currentProvider == AiProvider.ollama) {
-        responseText = await _fetchOllamaInference(sanitizedQuery, dynamicSystemPrompt);
-        metrics.lastProviderUsed = 'ollama';
-      } else if (_currentProvider == AiProvider.gemini) {
-        responseText = await _fetchGeminiInference(sanitizedQuery, dynamicSystemPrompt);
-        metrics.lastProviderUsed = 'gemini';
-      }
-    } catch (_) {
-      metrics.fallbackCount++;
-      // Fallback 1: Ollama Cloud
+    // 4. Detección instantánea de conectividad (< 600ms) para evitar timeouts en offline
+    final hasInternet = await _hasActiveInternet();
+
+    if (!hasInternet) {
+      isOffline = true;
+      metrics.lastProviderUsed = 'local-offline';
+      final fallback = _synthesizeLocalResponse(sanitizedQuery);
+      responseText = fallback.text;
+      confidence = AiConfidenceLevel.medium;
+    } else {
       try {
-        responseText = await _fetchOllamaInference(sanitizedQuery, dynamicSystemPrompt);
-        metrics.lastProviderUsed = 'ollama-fallback';
-      } catch (_) {
-        // Fallback 2: Google Gemini
-        try {
+        if (_groqApiKey.isNotEmpty && (_currentProvider == AiProvider.groq || _currentProvider == AiProvider.auto)) {
+          responseText = await _fetchGroqInference(sanitizedQuery, dynamicSystemPrompt);
+          metrics.lastProviderUsed = 'groq';
+        } else if (_ollamaApiKey.isNotEmpty && _currentProvider == AiProvider.ollama) {
+          responseText = await _fetchOllamaInference(sanitizedQuery, dynamicSystemPrompt);
+          metrics.lastProviderUsed = 'ollama';
+        } else if (_geminiApiKey.isNotEmpty && _currentProvider == AiProvider.gemini) {
           responseText = await _fetchGeminiInference(sanitizedQuery, dynamicSystemPrompt);
-          metrics.lastProviderUsed = 'gemini-fallback';
+          metrics.lastProviderUsed = 'gemini';
+        } else {
+          // Si no hay llaves locales en dev, invocar el AI Gateway de backend
+          responseText = await _fetchGatewayInference(sanitizedQuery, dynamicSystemPrompt);
+          metrics.lastProviderUsed = 'ai-gateway';
+        }
+      } catch (_) {
+        metrics.fallbackCount++;
+        // Fallback 1: Ollama Cloud (si tiene llave configurada)
+        try {
+          if (_ollamaApiKey.isNotEmpty) {
+            responseText = await _fetchOllamaInference(sanitizedQuery, dynamicSystemPrompt);
+            metrics.lastProviderUsed = 'ollama-fallback';
+          } else {
+            throw Exception('Ollama no configurado');
+          }
         } catch (_) {
-          // Fallback 3: Base de conocimiento offline y caché local
-          isOffline = true;
-          metrics.lastProviderUsed = 'local-offline';
-          final fallback = _synthesizeLocalResponse(sanitizedQuery);
-          responseText = fallback.text;
-          confidence = AiConfidenceLevel.medium;
+          // Fallback 2: Google Gemini (si tiene llave configurada)
+          try {
+            if (_geminiApiKey.isNotEmpty) {
+              responseText = await _fetchGeminiInference(sanitizedQuery, dynamicSystemPrompt);
+              metrics.lastProviderUsed = 'gemini-fallback';
+            } else {
+              throw Exception('Gemini no configurado');
+            }
+          } catch (_) {
+            // Fallback 3: Base de conocimiento offline y caché local
+            isOffline = true;
+            metrics.lastProviderUsed = 'local-offline';
+            final fallback = _synthesizeLocalResponse(sanitizedQuery);
+            responseText = fallback.text;
+            confidence = AiConfidenceLevel.medium;
+          }
         }
       }
     }
@@ -288,17 +367,31 @@ class BaqueanoAiService extends ChangeNotifier {
 
     stopwatch.stop();
     metrics.lastLatencyMs = stopwatch.elapsedMilliseconds;
+    await _saveMetrics();
+    await _saveTravelerSession();
 
     // 5. Creación del mensaje de respuesta enriquecido con acciones de herramienta nativas
     final List<AiToolAction> finalActions = List<AiToolAction>.from(ragResult.generatedActions);
     if (finalActions.isEmpty && _sessionContext.destination != null) {
-      finalActions.add(
-        AiToolAction(
-          label: '🛎️ Reservar ${_sessionContext.destination}',
-          type: AiToolType.openCheckout,
-          params: {'destination': _sessionContext.destination!},
-        ),
-      );
+      final destName = _sessionContext.destination!.toLowerCase();
+      final matched = CatalogData.destinations.where((d) =>
+        d.title.toLowerCase().contains(destName) ||
+        d.department.toLowerCase().contains(destName)
+      ).firstOrNull;
+
+      if (matched != null) {
+        finalActions.add(
+          AiToolAction(
+            label: '🛎️ Reservar ${matched.title}',
+            type: AiToolType.openCheckout,
+            params: {
+              'destination': matched.title,
+              'placeId': matched.id,
+              'amountUsd': matched.priceUsd,
+            },
+          ),
+        );
+      }
     }
 
     final aiMsg = ChatMessage(
@@ -315,6 +408,40 @@ class BaqueanoAiService extends ChangeNotifier {
     _chatHistory.add(aiMsg);
     _isTyping = false;
     notifyListeners();
+  }
+
+  /// Inferencia mediante el AI Gateway seguro de BAQUEANO (Genkit / Backend)
+  Future<String> _fetchGatewayInference(String userQuery, String systemPrompt) async {
+    final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 4);
+
+    try {
+      final request = await client.postUrl(Uri.parse('$_aiGatewayBaseUrl/chat'));
+      request.headers.set('Content-Type', 'application/json; charset=utf-8');
+
+      final payload = jsonEncode({
+        'messages': [
+          {'role': 'system', 'content': systemPrompt},
+          {'role': 'user', 'content': userQuery},
+        ],
+        'session': _sessionContext.toMap(),
+      });
+
+      request.write(payload);
+      final response = await request.close();
+
+      if (response.statusCode == 200) {
+        final responseBody = await response.transform(utf8.decoder).join();
+        final json = jsonDecode(responseBody) as Map<String, dynamic>;
+        final reply = json['reply'] ?? json['text'] ?? json['content'];
+        if (reply != null && reply.toString().trim().isNotEmpty) {
+          return reply.toString().trim();
+        }
+      }
+      throw Exception('Gateway error: ${response.statusCode}');
+    } finally {
+      client.close();
+    }
   }
 
   /// Inferencia mediante Groq Cloud (Llama 3.3 70B)

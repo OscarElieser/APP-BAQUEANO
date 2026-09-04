@@ -36,7 +36,16 @@ import '../../../core/widgets/section_header.dart';
 import '../../checkout/widgets/checkout_modal.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+  final double? initialLat;
+  final double? initialLng;
+  final String? initialTitle;
+
+  const MapScreen({
+    super.key,
+    this.initialLat,
+    this.initialLng,
+    this.initialTitle,
+  });
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -87,6 +96,14 @@ class _MapScreenState extends State<MapScreen> {
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
+    if (widget.initialLat != null && widget.initialLng != null) {
+      final target = LatLng(widget.initialLat!, widget.initialLng!);
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: target, zoom: 14.5),
+        ),
+      );
+    }
   }
 
   void _toggleMapType() {
@@ -323,9 +340,11 @@ class _MapScreenState extends State<MapScreen> {
                       children: [
                         // GOOGLE MAP WIDGET NATIVO
                         GoogleMap(
-                          initialCameraPosition: const CameraPosition(
-                            target: _nicaraguaCenter,
-                            zoom: 7.2,
+                          initialCameraPosition: CameraPosition(
+                            target: (widget.initialLat != null && widget.initialLng != null)
+                                ? LatLng(widget.initialLat!, widget.initialLng!)
+                                : _nicaraguaCenter,
+                            zoom: (widget.initialLat != null && widget.initialLng != null) ? 14.5 : 7.2,
                           ),
                           mapType: _currentMapType,
                           style: _isDarkStyleApplied ? _darkMapStyleJson : null,
