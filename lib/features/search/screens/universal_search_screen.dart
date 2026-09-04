@@ -332,6 +332,8 @@ class _UniversalSearchScreenState extends State<UniversalSearchScreen> {
                                 child: Image.network(
                                   item.imageUrl,
                                   fit: BoxFit.cover,
+                                  cacheWidth: 250,
+                                  cacheHeight: 250,
                                   errorBuilder: (_, __, ___) => const Icon(
                                     Icons.landscape_rounded,
                                     color: Color(0xFFD4AF37),

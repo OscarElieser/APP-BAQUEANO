@@ -78,6 +78,8 @@ class BaqueanoAdaptiveImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        cacheWidth: targetCacheWidth,
+        cacheHeight: targetCacheHeight,
         errorBuilder: (context, error, stackTrace) => _buildErrorFallback(),
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;

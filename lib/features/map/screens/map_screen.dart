@@ -726,6 +726,8 @@ class _MapScreenState extends State<MapScreen> {
                   width: 70,
                   height: 70,
                   fit: BoxFit.cover,
+                  cacheWidth: 200,
+                  cacheHeight: 200,
                   errorBuilder: (_, __, ___) => Container(
                     width: 70,
                     height: 70,
