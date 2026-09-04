@@ -65,7 +65,12 @@ class AuthService extends ChangeNotifier {
   }) : _firebaseAuth = firebaseAuth ?? _resolveFirebaseAuth(),
        _firestore = firestore ?? _resolveFirestore(),
        _googleSignIn =
-           googleSignIn ?? GoogleSignIn(scopes: const ['email', 'profile']) {
+           googleSignIn ??
+               GoogleSignIn(
+                 serverClientId:
+                     '578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com',
+                 scopes: const ['email', 'profile'],
+               ) {
     _listenToFirebaseSession();
   }
 
