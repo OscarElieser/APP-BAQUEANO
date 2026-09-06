@@ -956,56 +956,60 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: AppColors.borderLight),
           ),
-          child: Column(
-            children: [
-              RadioListTile<bool>(
-                value: true,
-                groupValue: _isTourist,
-                activeColor: AppColors.terracotta,
-                contentPadding: EdgeInsets.zero,
-                dense: true,
-                title: Text(
-                  'Turista Extranjero (0% IVA Exonerado)',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textLight,
+          child: RadioGroup<bool>(
+            groupValue: _isTourist,
+            onChanged: (val) {
+              if (val != null) {
+                setState(() => _isTourist = val);
+              }
+            },
+            child: Column(
+              children: [
+                RadioListTile<bool>(
+                  value: true,
+                  activeColor: AppColors.terracotta,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  title: Text(
+                    'Turista Extranjero (0% IVA Exonerado)',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textLight,
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Aplica exoneración fiscal de la Ley de Incentivos Turísticos de Nicaragua (Ley 306 INTUR).',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: AppColors.textMuted,
+                    ),
                   ),
                 ),
-                subtitle: Text(
-                  'Aplica exoneración fiscal de la Ley de Incentivos Turísticos de Nicaragua (Ley 306 INTUR).',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: AppColors.textMuted,
+                const Divider(color: AppColors.borderLight, height: 16),
+                RadioListTile<bool>(
+                  value: false,
+                  activeColor: AppColors.terracotta,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  title: Text(
+                    'Residente Local / Nacional (15% IVA General DGI)',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textLight,
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Incluye impuesto al valor agregado nacional para facturación fiscal DGI.',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: AppColors.textMuted,
+                    ),
                   ),
                 ),
-                onChanged: (val) => setState(() => _isTourist = val!),
-              ),
-              const Divider(color: AppColors.borderLight, height: 16),
-              RadioListTile<bool>(
-                value: false,
-                groupValue: _isTourist,
-                activeColor: AppColors.terracotta,
-                contentPadding: EdgeInsets.zero,
-                dense: true,
-                title: Text(
-                  'Residente Local / Nacional (15% IVA General DGI)',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textLight,
-                  ),
-                ),
-                subtitle: Text(
-                  'Incluye impuesto al valor agregado nacional para facturación fiscal DGI.',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: AppColors.textMuted,
-                  ),
-                ),
-                onChanged: (val) => setState(() => _isTourist = val!),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
 
