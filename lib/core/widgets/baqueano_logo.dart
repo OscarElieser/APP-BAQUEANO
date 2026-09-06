@@ -97,7 +97,7 @@ class BaqueanoLogo extends StatelessWidget {
       children: [
         // Imagen del logo oficial
         Image.asset(
-          'assets/images/logo_baqueano.png',
+          'assets/images/baqueano_logo-completo_2160x1669-blanco.png',
           height: 24,
           fit: BoxFit.contain,
           errorBuilder: (_, __, ___) => _buildFallbackTypography(16, 2.0),
@@ -132,7 +132,7 @@ class BaqueanoLogo extends StatelessWidget {
       children: [
         // Imagen del logo oficial
         Image.asset(
-          'assets/images/logo_baqueano.png',
+          'assets/images/baqueano_logo-completo_2160x1669-blanco.png',
           height: 32,
           fit: BoxFit.contain,
           errorBuilder: (_, __, ___) => _buildFallbackTypography(20, 2.5),
@@ -167,7 +167,7 @@ class BaqueanoLogo extends StatelessWidget {
       children: [
         // Imagen del logo en alta resolución
         Image.asset(
-          'assets/images/logo_baqueano.png',
+          'assets/images/baqueano_logo-completo_2160x1669-blanco.png',
           height: 54,
           fit: BoxFit.contain,
           errorBuilder: (_, __, ___) => _buildFallbackTypography(32, 4.0),
