@@ -72,6 +72,18 @@ android {
             }
         }
     }
+
+    applicationVariants.all {
+        val variant = this
+        outputs.all {
+            val output = this
+            if (output is com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
+                if (variant.buildType.name == "release") {
+                    output.outputFileName = "BaqueanoNicaragua.apk"
+                }
+            }
+        }
+    }
 }
 
 flutter {
