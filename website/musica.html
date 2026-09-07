@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PATRIMONIO SONORO FOLCLÓRICO (musica.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Conectar sensorial y espiritualmente al explorador con las raíces sonoras
+  de Nicaragua mediante la marimba de arco de Masaya, la guitarra campesina y
+  las creaciones inmortales de los grandes maestros del son nica.
+- Difundir y preservar el folklore tradicional sin barreras ni publicidad intrusiva.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Reproductor HTML5 Audio nativo orquestado por js/audio-player.js.
+- Tarjetas interactivas con estado dinámico de reproducción a 1 toque.
+- Estética inmersiva con gradientes volcánicos, resplandores dorados y ecualizador animado.
+
+📦 3. QUÉ (WHAT / CONTENIDOS):
+- 5 Obras Maestras del Folklore: La Mora Limpia, El Solar de Monimbó, Baile del Mestizaje,
+  El Zanatillo, Palomita Guasiruca.
+- Reseña del Son Nica y la Marimba de Arco de Monimbó.
+- Navegación oficial, centro de auxilio SOS y descarga de APK.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patrimonio Sonoro Folclórico | Baqueano Nicaragua</title>
+  <meta name="description" content="Escucha a un toque las obras maestras de la música tradicional de Nicaragua: La Mora Limpia, El Solar de Monimbó, Marimba y son nica.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html" class="active">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="environmental-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill" style="background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); color: var(--oro-noble);">
+            <i class="fa-solid fa-music"></i> Son de Marimba & Guitarra
+          </div>
+          <h1 class="section-headline">Patrimonio Sonoro: Música Folclórica a 1 Toque</h1>
+          <p class="section-subtext">
+            Las melodías que han acompañado a nuestros abuelos en las fiestas de Masaya, las noches de campamento en Ometepe
+            y las madrugadas en el cafetal. Toca cualquier pieza para iniciar la experiencia sonora.
+          </p>
+        </div>
+
+        <!-- REPRODUCTOR OFICIAL A 1 TOQUE -->
+        <div class="music-player-panel">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="width: 50px; height: 50px; border-radius: 14px; background: var(--grad-sunset); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #FFFFFF; box-shadow: var(--shadow-glow-terracotta);">
+                <i class="fa-solid fa-compact-disc"></i>
+              </div>
+              <div>
+                <h3 style="font-size: 1.35rem; color: #FFFFFF; margin-bottom: 0.2rem;">Consola Folclórica Baqueano</h3>
+                <div id="currentTrackDisplay" style="font-size: 0.88rem; color: var(--arena-pinolera);">
+                  <i class="fa-solid fa-circle-play"></i> Selecciona una pieza para reproducir
+                </div>
+              </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-tech);">
+              FORMATO MP3 • REPRODUCCIÓN CONTINUA
+            </div>
+          </div>
+
+          <!-- Elemento de Audio Oculto -->
+          <audio id="globalFolkloreAudio" preload="none"></audio>
+
+          <!-- GRID DE LAS 5 PISTAS -->
+          <div class="music-tracks-grid">
+            <!-- Pista 1 -->
+            <div class="track-btn-card" data-audio="assets/audio/la_mora_limpia.mp3" data-name="La Mora Limpia" data-author="Justino Jerez (Himno del Folklore)">
+              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
+              <div class="track-title">La Mora Limpia</div>
+              <div class="track-author">Justino Jerez</div>
+            </div>
+
+            <!-- Pista 2 -->
+            <div class="track-btn-card" data-audio="assets/audio/el_solar_de_monimbo.mp3" data-name="El Solar de Monimbó" data-author="Camilo Zapata (Creador del Son Nica)">
+              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
+              <div class="track-title">El Solar de Monimbó</div>
+              <div class="track-author">Camilo Zapata</div>
+            </div>
+
+            <!-- Pista 3 -->
+            <div class="track-btn-card" data-audio="assets/audio/baile_del_mestizaje.mp3" data-name="Baile del Mestizaje" data-author="Son Tradicional de Marimba">
+              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
+              <div class="track-title">Baile del Mestizaje</div>
+              <div class="track-author">Marimba Masaya</div>
+            </div>
+
+            <!-- Pista 4 -->
+            <div class="track-btn-card" data-audio="assets/audio/el_zanatillo.mp3" data-name="El Zanatillo" data-author="Folklore Campesino de Las Segovias">
+              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
+              <div class="track-title">El Zanatillo</div>
+              <div class="track-author">Tradicional Segoviano</div>
+            </div>
+
+            <!-- Pista 5 -->
+            <div class="track-btn-card" data-audio="assets/audio/palomita_guasiruca.mp3" data-name="Palomita Guasiruca" data-author="Lira Campesina Popular">
+              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
+              <div class="track-title">Palomita Guasiruca</div>
+              <div class="track-author">Lira Campesina</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTEXTO CULTURAL DEL SON NICA -->
+        <div class="impacts-hex-grid" style="margin-top: 4rem;">
+          <div class="impact-hex-card">
+            <div class="impact-icon-circle"><i class="fa-solid fa-guitar"></i></div>
+            <h3 class="impact-card-title">El Son Nica de Camilo Zapata</h3>
+            <p class="impact-card-desc">
+              Creado en compás de 6/8 con acentuación única en el tercer tiempo, imitando el zapateo y el contoneo
+              del campesino pinolero en el baile popular.
+            </p>
+          </div>
+          <div class="impact-hex-card">
+            <div class="impact-icon-circle"><i class="fa-solid fa-drum"></i></div>
+            <h3 class="impact-card-title">La Marimba de Arco Indígena</h3>
+            <p class="impact-card-desc">
+              Construida con teclas de madera de ñábaro o coyote y calabazas de jícaro como resonadores.
+              Monimbó es la capital artesanal de este instrumento sagrado.
+            </p>
+          </div>
+          <div class="impact-hex-card">
+            <div class="impact-icon-circle"><i class="fa-solid fa-feather-pointed"></i></div>
+            <h3 class="impact-card-title">El Güegüense y la Resistencia</h3>
+            <p class="impact-card-desc">
+              Melodías centenarias de pito y tamboril que satirizan a la autoridad colonial con humor inteligente
+              y dignidad popular. Patrimonio de la Humanidad.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Preservación del patrimonio sonoro campesino y difusión de la cultura nicaragüense.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Disfruta del reproductor folclórico sin conexión en cualquier sendero de la montaña.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Homenaje a la música de nuestra patria.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="js/audio-player.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

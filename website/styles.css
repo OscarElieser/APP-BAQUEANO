@@ -1,0 +1,35 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — ARCHIVO MAESTRO DE ESTILOS (STYLES.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Servir como punto de consolidación e importación modular para todo el sistema
+  de diseño visual de Baqueano Nicaragua.
+- Permitir que las páginas HTML carguen un único punto de entrada de estilos
+  mientras el código fuente se mantiene perfectamente ordenado y clasificado en
+  módulos independientes (colors.css, typography.css, layout.css, components.css, modules.css).
+- Garantizar la armonía visual de alta gama entre la versión web y la aplicación móvil.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Emplea directivas CSS3 @import organizadas jerárquicamente:
+  1. colors.css: Tokens cromáticos y paleta oficial Baqueano.
+  2. typography.css: Fuentes, tamaños, jerarquía de encabezados.
+  3. layout.css: Estructuras de rejilla, navbar fija, contenedor principal y pie.
+  4. components.css: Botones Sunset, tarjetas Glassmorphism, modales APK/SOS, simulador smartphone.
+  5. modules.css: Destinos, historia, ambiental, gastronomía, música, aliados 3D, calculadora y Ops Center.
+
+📦 3. QUÉ (WHAT / ARCHIVOS VINCULADOS):
+- css/colors.css
+- css/typography.css
+- css/layout.css
+- css/components.css
+- css/modules.css
+============================================================================
+*/
+
+@import url('css/colors.css');
+@import url('css/typography.css');
+@import url('css/layout.css');
+@import url('css/components.css');
+@import url('css/modules.css');

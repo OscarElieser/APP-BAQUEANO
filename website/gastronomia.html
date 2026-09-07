@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — GASTRONOMÍA ANCESTRAL DEL MAÍZ (gastronomia.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Enaltecer la soberanía alimentaria campesina y la tradición culinaria originaria
+  de Nicaragua, fundamentada en el maíz criollo (hijos del maíz).
+- Orientar al visitante a consumir en comiderías tradicionales y puestos comunitarios,
+  evitando cadenas transnacionales y canalizando los ingresos a las cocineras locales.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Grid responsivo de tarjetas gastronómicas con imágenes locales de alta resolución.
+- Detalle de ingredientes autóctonos de la milpa (achiote, naranja agria, hojas de plátano,
+  yuca, frijol rojo criollo).
+- Estilo visual de alta gama alineado a la paleta Baqueano con efectos hover dinámicos.
+
+📦 3. QUÉ (WHAT / CONTENIDOS):
+- 6 Platillos Insignes: Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho, Indio Viejo.
+- Manifiesto del Maíz Criollo y Soberanía Alimentaria Popular.
+- Navegación unificada y modales institucionales.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gastronomía Ancestral del Maíz | Baqueano Nicaragua</title>
+  <meta name="description" content="Descubre los sabores sagrados de la cocina nicaragüense: Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho e Indio Viejo.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html" class="active">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="destinations-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill" style="background: rgba(244,230,193,0.15); border-color: rgba(244,230,193,0.4); color: var(--arena-pinolera);">
+            <i class="fa-solid fa-bowl-rice"></i> Patrimonio Gastronómico
+          </div>
+          <h1 class="section-headline">Gastronomía Ancestral de los Hijos del Maíz</h1>
+          <p class="section-subtext">
+            Nicaragua sabe a fogón de leña, a nixtamal al amanecer y a hojas de chagüite al vapor.
+            Nuestra cocina es la resistencia viva de nuestras abuelas indígenas y campesinas.
+          </p>
+        </div>
+
+        <!-- GRID GASTRONÓMICO -->
+        <div class="gastronomy-grid">
+          <!-- Platillo 1: Gallo Pinto -->
+          <div class="gastro-card">
+            <div class="gastro-img-wrap">
+              <img src="assets/images/comida/gallo_pinto.jpg" alt="Gallo Pinto Nicaragüense" class="gastro-img" loading="lazy">
+            </div>
+            <div class="gastro-body">
+              <h3 class="gastro-title">Gallo Pinto Campesino</h3>
+              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Arroz, frijol rojo criollo, cebolla picada y chiltoma frita en manteca.</div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                El corazón de la mesa nicaragüense. Preparado con frijol cocido del día anterior y frito hasta dorar. Se acompaña de queso frito, maduro frito y tortilla caliente de maíz blanco.
+              </p>
+            </div>
+          </div>
+
+          <!-- Platillo 2: Nacatamal -->
+          <div class="gastro-card">
+            <div class="gastro-img-wrap">
+              <img src="assets/images/comida/nacatamal.jpg" alt="Nacatamal Criollo" class="gastro-img" loading="lazy">
+            </div>
+            <div class="gastro-body">
+              <h3 class="gastro-title">Nacatamal de Domingo</h3>
+              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Masa de maíz nixtamalizado, cerdo marinado en naranja agria y hojas de plátano.</div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Monumental banquete envuelto en hojas de chagüite. Relleno de tocino, papa, arroz, tomate, hierbabuena, pasas y chile congo. Cocido a fuego lento durante 5 horas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Platillo 3: Vigorón -->
+          <div class="gastro-card">
+            <div class="gastro-img-wrap">
+              <img src="assets/images/comida/vigoron.jpg" alt="Vigorón de Granada" class="gastro-img" loading="lazy">
+            </div>
+            <div class="gastro-body">
+              <h3 class="gastro-title">Vigorón Granadino</h3>
+              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Yuca cocida harinosa, chicharrón crujiente con carne y ensalada de repollo.</div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Nacido bajo los laureles de la Plaza Central de Granada. Servido tradicionalmente sobre hoja de plátano fresca, aderezado con vinagre de guineo y muserola de mimbro.
+              </p>
+            </div>
+          </div>
+
+          <!-- Platillo 4: Quesillo -->
+          <div class="gastro-card">
+            <div class="gastro-img-wrap">
+              <img src="assets/images/comida/quesillo.jpg" alt="Quesillo Nagaroteño" class="gastro-img" loading="lazy">
+            </div>
+            <div class="gastro-body">
+              <h3 class="gastro-title">Quesillo Chontaleño y de Nagarote</h3>
+              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Queso tierno elástico, tortilla caliente, cebollita en vinagre negro y crema espesa.</div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Manjar artesanal servido envuelto en papel plástico o chimbomba. Una explosión láctea de la cuenca ganadera de Chontales y el Pacífico occidental.
+              </p>
+            </div>
+          </div>
+
+          <!-- Platillo 5: Baho -->
+          <div class="gastro-card">
+            <div class="gastro-img-wrap">
+              <img src="assets/images/comida/baho.jpg" alt="Baho Tradicional" class="gastro-img" loading="lazy">
+            </div>
+            <div class="gastro-body">
+              <h3 class="gastro-title">Baho Criollo</h3>
+              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Carne de res cecina curada al sol, plátano verde, plátano maduro y yuca al vapor.</div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Cocinado al vapor durante la noche entera en una olla sellada con hojas de plátano. La carne se deshace al toque y el maduro aporta una dulzura acaramelada inigualable.
+              </p>
+            </div>
+          </div>
+
+          <!-- Platillo 6: Indio Viejo -->
+          <div class="gastro-card">
+            <div class="gastro-img-wrap">
+              <img src="assets/images/comida/indio_viejo.jpg" alt="Indio Viejo Ancestral" class="gastro-img" loading="lazy">
+            </div>
+            <div class="gastro-body">
+              <h3 class="gastro-title">Indio Viejo Ancestral</h3>
+              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Masa de maíz desmoronada, carne de res mechada, hierbabuena fresca y achiote.</div>
+              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Uno de los guisos prehispánicos más antiguos de América Latina. Su textura cremosa aromatizada con naranja agria y hierbabuena es símbolo de fiesta patronal campesina.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MANIFIESTO DEL MAÍZ CRIOLLO -->
+        <div class="calc-panel-box" style="margin-top: 5rem;">
+          <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <div class="badge-section-pill">
+              <i class="fa-solid fa-wheat-awn"></i> La Sagrada Milpa Pinolera
+            </div>
+            <h2 style="font-size: 2.2rem; color: #FFFFFF; margin-bottom: 1rem;">«Somos Hombres y Mujeres de Maíz»</h2>
+            <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.8;">
+              En Nicaragua, el maíz no es un grano mercantil; es un lazo sagrado de comunión campesina.
+              De la milpa brotan las tortillas calientes, las güirilas de Chontales con cuajada fresca,
+              el pozol con leche, el tiste norteño, la chicha bruja y el pinolillo espumoso.
+              Apoyar a los baqueanos es salvaguardar las semillas criollas libres de transgénicos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Soberanía alimentaria, ecoturismo y memoria comunitaria campesina. Comer local es el primer paso de la preservación.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">AUXILIO SOS</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Encuentra comiderías auténticas y cooperativas de mujeres tortilleras con coordenadas exactas.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Hijos de la milpa campesina.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

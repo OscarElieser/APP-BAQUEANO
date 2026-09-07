@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PORTAL OFICIAL & ECOSISTEMA WEB (index.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Servir como la puerta de entrada oficial y portal de presentación del ecosistema
+  tecnológico de Baqueano Nicaragua.
+- Comunicar la misión fundacional: «Baqueano no existe para llevar más turistas
+  a los mismos lugares. Existe para transformar el turismo en una actividad más
+  responsable, distribuida, segura, culturalmente consciente y beneficiosa para las
+  comunidades locales.»
+- Demostrar los 5 impactos fundamentales del proyecto y permitir la descarga
+  directa del APK oficial de la aplicación móvil para Android.
+- Conectar de forma ordenada y modular a todas las páginas de experiencia especializada:
+  Historia, Campaña Ambiental, Gastronomía Ancestral, Patrimonio Sonoro, Cooperativas 3D,
+  Catálogo de Destinos y Baqueano Ops Center.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Arquitectura multi-página desacoplada con CSS modular en css/ y controladores en js/.
+- Hero section cinematográfico con simulador de smartphone de la app Android.
+- Showcase interactivo de los 5 impactos y vitrina de módulos especializados.
+- Modales de Auxilio SOS 24/7 con GPS satelital e instalación de APK.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Hero Section & Smartphone Simulator.
+- Los 5 Impactos del Proyecto Baqueano.
+- Navegación hacia las 7 Páginas de Experiencia Especializada.
+- Portal de Descarga Oficial de BaqueanoNicaragua.apk.
+- Footer Institucional con Contactos de Emergencia Nacional.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baqueano Nicaragua | Portal Oficial</title>
+  <meta name="description" content="Plataforma tecnológica oficial para turismo sostenible, conservación comunitaria y soberanía campesina en Nicaragua. Descarga BaqueanoNicaragua.apk.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Tipografías Oficiales Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Maestros Oficiales (Modular) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html" class="active">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper" style="padding-top: 5rem;">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section-pro">
+      <div class="container hero-grid-2col">
+        <!-- Columna Izquierda: Texto y CTA -->
+        <div class="hero-content-col">
+          <div class="hero-badge-pill">
+            <span class="pulse-dot"></span> Ecoturismo Auténtico en Nicaragua
+          </div>
+          <h1 class="hero-headline">
+            El Sendero lo Abren las <span class="highlight-sunset">Comunidades</span>
+          </h1>
+          <p class="hero-subtext">
+            Baqueano no existe para llevar más turistas a los mismos lugares. Existe para transformar
+            el turismo en una actividad más responsable, distribuida, segura, culturalmente consciente
+            y beneficiosa para las familias campesinas de Nicaragua.
+          </p>
+
+          <div class="hero-cta-bar">
+            <button class="btn-hero-primary open-download-modal-btn">
+              <i class="fa-brands fa-android"></i> Descargar App APK
+            </button>
+            <a href="destinos.html" class="btn-hero-glass">
+              <i class="fa-solid fa-compass"></i> Explorar Destinos
+            </a>
+          </div>
+
+          <div style="display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-shield-halved" style="color: var(--verde-neon); font-size: 1.2rem;"></i>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">0% Comisiones Abusivas</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-map-location-dot" style="color: var(--arena-pinolera); font-size: 1.2rem;"></i>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">Guías Locales Certificados</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-tower-cell" style="color: var(--terracotta-light); font-size: 1.2rem;"></i>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">Mapas y GPS Fuera de Línea</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Simulador de Smartphone Android -->
+        <div class="hero-visual-col">
+          <div class="phone-frame-wrap">
+            <div class="phone-hardware">
+              <div class="phone-notch"><div class="camera-lens"></div></div>
+              <div class="phone-screen">
+                <div class="phone-status-bar">
+                  <span>10:30 AM</span>
+                  <div style="display: flex; gap: 0.35rem; align-items: center;">
+                    <i class="fa-solid fa-signal"></i>
+                    <i class="fa-solid fa-wifi"></i>
+                    <i class="fa-solid fa-battery-full"></i>
+                  </div>
+                </div>
+
+                <div class="phone-app-header">
+                  <div class="phone-app-logo">
+                    <img src="assets/images/logo.png" alt="Logo" style="width: 22px; height: 22px;">
+                    <span>BAQUEANO</span>
+                  </div>
+                  <div class="phone-app-bell"><i class="fa-solid fa-bell"></i></div>
+                </div>
+
+                <div class="phone-body-scroll">
+                  <div class="phone-hero-card">
+                    <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Somoto" class="phone-hero-img">
+                    <div class="phone-hero-overlay">
+                      <span class="phone-hero-badge">Ruta Insigne</span>
+                      <div class="phone-hero-title">Cañón de Somoto</div>
+                      <div class="phone-hero-subtitle">Madriz • Guiado por Mateo Sonís</div>
+                    </div>
+                  </div>
+
+                  <div class="phone-cards-stack">
+                    <div class="phone-mini-card">
+                      <div class="phone-mini-left">
+                        <div class="phone-mini-icon"><i class="fa-solid fa-volcano"></i></div>
+                        <div>
+                          <div class="phone-mini-title">Volcán Cerro Negro</div>
+                          <div class="phone-mini-meta">León • Sandboarding Activo</div>
+                        </div>
+                      </div>
+                      <div class="phone-mini-price">$30</div>
+                    </div>
+
+                    <div class="phone-mini-card">
+                      <div class="phone-mini-left">
+                        <div class="phone-mini-icon"><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                          <div class="phone-mini-title">Isla de Ometepe</div>
+                          <div class="phone-mini-meta">Rivas • Reserva de Biosfera</div>
+                        </div>
+                      </div>
+                      <div class="phone-mini-price">$35</div>
+                    </div>
+
+                    <div class="phone-mini-card">
+                      <div class="phone-mini-left">
+                        <div class="phone-mini-icon"><i class="fa-solid fa-cloud-rain"></i></div>
+                        <div>
+                          <div class="phone-mini-title">Cascada La Luna</div>
+                          <div class="phone-mini-meta">Jinotega • Nebliselva & Café</div>
+                        </div>
+                      </div>
+                      <div class="phone-mini-price">$25</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="phone-bottom-dock">
+                  <div class="dock-tab active"><i class="fa-solid fa-house"></i><span>Inicio</span></div>
+                  <div class="dock-tab"><i class="fa-solid fa-map"></i><span>Rutas</span></div>
+                  <div class="dock-tab"><i class="fa-solid fa-heart"></i><span>Favoritos</span></div>
+                  <div class="dock-tab"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOS 5 IMPACTOS DEL PROYECTO BAQUEANO -->
+    <section class="impacts-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-circle-check"></i> Compromiso Comunitario
+          </div>
+          <h2 class="section-headline">Los 5 Impactos Fundamentales de Baqueano</h2>
+          <p class="section-subtext">
+            Baqueano evalúa y cumple de forma transparente cada uno de los criterios exigidos
+            para proyectos de alto valor socioecológico y viabilidad sostenible.
+          </p>
+        </div>
+
+        <div class="impacts-hex-grid">
+          <!-- Impacto 1 -->
+          <div class="impact-hex-card">
+            <div class="impact-number-tag">IMPACTO 01 • ECOLÓGICO</div>
+            <div class="impact-icon-circle"><i class="fa-solid fa-leaf"></i></div>
+            <h3 class="impact-card-title">Impacto Ambiental & Custodia</h3>
+            <p class="impact-card-desc">
+              Turismo de huella cero. Monitoreo constante de la capacidad de carga en senderos frágiles,
+              prohibición de plásticos de un solo uso y canal de denuncias ciudadanas georreferenciadas.
+            </p>
+            <ul class="impact-check-list">
+              <li><i class="fa-solid fa-check"></i> Decálogo verde de obligatorio cumplimiento</li>
+              <li><i class="fa-solid fa-check"></i> Protección activa de cuencas y lagunas de cráter</li>
+              <li><i class="fa-solid fa-check"></i> Conservación de fauna silvestre nativa</li>
+            </ul>
+          </div>
+
+          <!-- Impacto 2 -->
+          <div class="impact-hex-card">
+            <div class="impact-number-tag">IMPACTO 02 • SOCIAL</div>
+            <div class="impact-icon-circle"><i class="fa-solid fa-users"></i></div>
+            <h3 class="impact-card-title">Impacto Social & Comunitario</h3>
+            <p class="impact-card-desc">
+              Empoderamiento del campesino como dueño legítimo de su destino turístico. Inclusión de mujeres
+              y jóvenes rurales como embajadores culturales, traductores y custodios del bosque.
+            </p>
+            <ul class="impact-check-list">
+              <li><i class="fa-solid fa-check"></i> Capacitación continua en primeros auxilios y rescate</li>
+              <li><i class="fa-solid fa-check"></i> Respeto absoluto a la privacidad comunitaria</li>
+              <li><i class="fa-solid fa-check"></i> Fondos compartidos para escuelas y caminos rurales</li>
+            </ul>
+          </div>
+
+          <!-- Impacto 3 -->
+          <div class="impact-hex-card">
+            <div class="impact-number-tag">IMPACTO 03 • ECONÓMICO</div>
+            <div class="impact-icon-circle"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <h3 class="impact-card-title">Impacto Económico & Distribución</h3>
+            <p class="impact-card-desc">
+              Ruptura del monopolio de plataformas transnacionales que retienen hasta el 25% de los ingresos.
+              El 100% de la tarifa pactada llega a la mano del guía y la cooperativa anfitriona.
+            </p>
+            <ul class="impact-check-list">
+              <li><i class="fa-solid fa-check"></i> Cero intermediarios abusivos en la reserva</li>
+              <li><i class="fa-solid fa-check"></i> Dinamización de comedores y posadas familiares</li>
+              <li><i class="fa-solid fa-check"></i> Régimen fiscal transparente con Ley 306 INTUR</li>
+            </ul>
+          </div>
+
+          <!-- Impacto 4 -->
+          <div class="impact-hex-card">
+            <div class="impact-number-tag">IMPACTO 04 • GOBERNANZA</div>
+            <div class="impact-icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+            <h3 class="impact-card-title">Gobernanza, Ética & Legalidad</h3>
+            <p class="impact-card-desc">
+              Cumplimiento estricto del marco jurídico nacional (Ley 306 de Incentivos Turísticos, Ley 217 del Medio Ambiente).
+              Transparencia contable bimoneda y arquitectura de datos cifrada en Firestore.
+            </p>
+            <ul class="impact-check-list">
+              <li><i class="fa-solid fa-check"></i> Sincronización oficial con normativas INTUR</li>
+              <li><i class="fa-solid fa-check"></i> Centro de telemetría y contingencia en tiempo real</li>
+              <li><i class="fa-solid fa-check"></i> Protocolos de seguridad certificados y balizas SOS</li>
+            </ul>
+          </div>
+
+          <!-- Impacto 5 -->
+          <div class="impact-hex-card">
+            <div class="impact-number-tag">IMPACTO 05 • CULTURAL</div>
+            <div class="impact-icon-circle"><i class="fa-solid fa-landmark"></i></div>
+            <h3 class="impact-card-title">Cultura, Memoria & Soberanía</h3>
+            <p class="impact-card-desc">
+              Rescate de la memoria histórica de Nicaragua: las 7 eras fundacionales, la cosmovisión del maíz,
+              las leyendas campesinas, el son tradicional de marimba y la sabiduría botánica ancestral.
+            </p>
+            <ul class="impact-check-list">
+              <li><i class="fa-solid fa-check"></i> Módulo insignia de los 17 territorios soberanos</li>
+              <li><i class="fa-solid fa-check"></i> Vitrina gastronómica de las abuelas campesinas</li>
+              <li><i class="fa-solid fa-check"></i> Patrimonio sonoro a 1 toque con música folclórica</li>
+            </ul>
+          </div>
+
+          <!-- Tarjeta Extra: Seguridad Integral -->
+          <div class="impact-hex-card" style="border-color: var(--border-glow);">
+            <div class="impact-number-tag" style="color: var(--terracotta-light);">SEGURIDAD 24/7 EN SENDERO</div>
+            <div class="impact-icon-circle" style="background: rgba(246,94,1,0.2);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3 class="impact-card-title">Centro de Auxilio SOS Satelital</h3>
+            <p class="impact-card-desc">
+              Balizas de geolocalización satelital que funcionan incluso en zonas de montaña sin señal telefónica.
+              Enlace inmediato con Cruz Blanca (128), Bomberos (115) y Policía Turística (101).
+            </p>
+            <ul class="impact-check-list">
+              <li><i class="fa-solid fa-check"></i> Coordenadas GPS exactas en 1 toque</li>
+              <li><i class="fa-solid fa-check"></i> Despacho automático de auxilio por WhatsApp</li>
+              <li><i class="fa-solid fa-check"></i> Red de guías en alerta permanente</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORA LAS PÁGINAS ESPECIALIZADAS DE LA WEB -->
+    <section class="destinations-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-cubes"></i> Experiencias Especializadas
+          </div>
+          <h2 class="section-headline">Explora las Páginas del Ecosistema</h2>
+          <p class="section-subtext">
+            Cada sección del proyecto ha sido organizada en su propia página dedicada, permitiendo un control
+            impecable de tipografía, música, videos, fotografías y herramientas interactivas.
+          </p>
+        </div>
+
+        <div class="destinations-showcase-grid">
+          <!-- Tarjeta Módulo 1: Historia -->
+          <a href="historia.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #0C3843, #165D6F); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-landmark" style="font-size: 3.5rem; color: var(--oro-noble);"></i>
+              <span class="dest-badge-corner">7 Periodos</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-book-open"></i> Memoria Viva</div>
+              <h3 class="dest-name-title">Historia de Mi País</h3>
+              <p class="dest-description-text">
+                Línea de tiempo cronológica desde los pueblos originarios hasta la soberanía actual, más el explorador de los 17 territorios.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Entrar a Historia</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 2: Ambiental -->
+          <a href="ambiental.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #064E3B, #10B981); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-leaf" style="font-size: 3.5rem; color: #FFFFFF;"></i>
+              <span class="dest-badge-corner">GPS Satelital</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-shield-heart"></i> Huella Cero</div>
+              <h3 class="dest-name-title">Campaña Ambiental & Denuncias</h3>
+              <p class="dest-description-text">
+                El Decálogo Verde del explorador, formulario de denuncias ciudadanas con coordenadas satelitales y pasaporte ético.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Ver Decálogo & Formulario</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 3: Gastronomía -->
+          <a href="gastronomia.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #7C2D12, #F65E01); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-bowl-food" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+              <span class="dest-badge-corner">6 Platillos</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-fire-burner"></i> Fogón Campesino</div>
+              <h3 class="dest-name-title">Gastronomía Ancestral del Maíz</h3>
+              <p class="dest-description-text">
+                Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho e Indio Viejo con fotografías reales e ingredientes de la milpa.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Saborear Tradición</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 4: Música Folclórica -->
+          <a href="musica.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #1E1B4B, #4338CA); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-music" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+              <span class="dest-badge-corner">1 Toque</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-guitar"></i> Son Nica & Marimba</div>
+              <h3 class="dest-name-title">Patrimonio Sonoro Folclórico</h3>
+              <p class="dest-description-text">
+                Reproductor directo para La Mora Limpia, El Solar de Monimbó, Baile del Mestizaje, El Zanatillo y Palomita Guasiruca.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Escuchar Canciones</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 5: Aliados 3D -->
+          <a href="aliados.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #134E4A, #0D9488); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-handshake" style="font-size: 3.5rem; color: #FFFFFF;"></i>
+              <span class="dest-badge-corner">Giro 180°</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-users-line"></i> Red Solidaria</div>
+              <h3 class="dest-name-title">Cooperativas & Alojamientos 3D</h3>
+              <p class="dest-description-text">
+                Tarjetas tridimensionales interactivas de posadas rurales y guías comunitarios con contacto directo sin intermediarios.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Girar Tarjetas 3D</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 6: Destinos & Cotizador -->
+          <a href="destinos.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #831843, #BE185D); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-mountain" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+              <span class="dest-badge-corner">Ley 306 INTUR</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-calculator"></i> Rutas & Motor Fiscal</div>
+              <h3 class="dest-name-title">Catálogo & Calculadora de Retorno</h3>
+              <p class="dest-description-text">
+                Filtro de destinos protegidos, calculadora del ahorro del 20% frente a OTAs foráneas y cotizador con régimen de Ley 306.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Cotizar & Ver Destinos</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAL DE DESCARGA DIRECTA DE APK -->
+    <section class="download-section-hero">
+      <div class="container">
+        <div class="download-portal-card">
+          <div class="apk-icon-center">
+            <img src="assets/images/logo.png" alt="Baqueano APK">
+          </div>
+          <h2 class="download-portal-title">Descarga Baqueano para Android</h2>
+          <p style="font-size: 1.1rem; color: var(--arena-pinolera); max-width: 680px; margin: 0 auto;">
+            La aplicación oficial con mapas topográficos sin conexión a internet, baliza satelital SOS 24/7 y contacto directo con las cooperativas campesinas.
+          </p>
+
+          <div class="download-specs-bar">
+            <span class="spec-chip"><i class="fa-brands fa-android"></i> Android 8.0 o superior</span>
+            <span class="spec-chip"><i class="fa-solid fa-hard-drive"></i> Peso: ~56 MB</span>
+            <span class="spec-chip"><i class="fa-solid fa-shield-halved"></i> APK Seguro y Firmado</span>
+            <span class="spec-chip"><i class="fa-solid fa-ban"></i> 100% Libre de Publicidad</span>
+          </div>
+
+          <div class="download-cta-double">
+            <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="directApkDownloadBtn" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
+              <i class="fa-solid fa-download"></i> Descargar BaqueanoNicaragua.apk
+            </a>
+            <button class="btn-hero-glass open-download-modal-btn" style="padding: 1.1rem 2rem; font-size: 1.02rem;">
+              <i class="fa-solid fa-circle-question"></i> Guía Paso a Paso de Instalación
+            </button>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn-admin-action" id="shareWhatsAppBtn">
+              <i class="fa-brands fa-whatsapp"></i> Compartir por WhatsApp
+            </button>
+            <button class="btn-admin-action" id="copyLinkBtn">
+              <i class="fa-solid fa-link"></i> Copiar Enlace Oficial
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Plataforma comunitaria para el ecoturismo responsable, la custodia ambiental y el empoderamiento campesino de Nicaragua. Cero intermediarios foráneos.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">AUXILIO SOS 24/7</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa SOS Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APLICACIÓN MÓVIL</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Construida exclusivamente para Android con optimización de memoria y rendimiento a 60fps.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Desarrollado con orgullo para las comunidades de nuestra patria.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

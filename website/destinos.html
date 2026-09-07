@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CATÁLOGO DE DESTINOS & MOTOR FISCAL (destinos.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Presentar el catálogo integral de reservas naturales, volcanes y cuencas
+  hídricas de Nicaragua con acceso a guías baqueanos certificados.
+- Transparentar las finanzas del turismo con la Calculadora Rural de Retorno (ROI)
+  y el Cotizador Bimoneda con el régimen tributario de la Ley 306 INTUR.
+- Asistir en tiempo real con recomendaciones de sendero mediante Baqueano AI.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Filtro reactivo en cliente por categoría (Volcanes, Aguas, Nebliselva, Comunitario).
+- Controladores interactivos js/calculator.js y js/ai-assistant.js.
+- Conversión bimoneda exacta a tasa oficial (36.65 NIO por 1 USD).
+
+📦 3. QUÉ (WHAT / CONTENIDOS):
+- 6 Destinos Protegidos Emblemáticos con fichas técnicas y cooperativas a cargo.
+- Calculadora de Retorno Campesino vs OTAs foráneas (ahorro anual tangible).
+- Cotizador de Reserva Bimoneda con régimen de la Ley 306.
+- Asistente inteligente Baqueano AI con respuestas instantáneas.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinos Protegidos & Cotizador | Baqueano Nicaragua</title>
+  <meta name="description" content="Explora los destinos naturales protegidos de Nicaragua, calcula el retorno directo a cooperativas campesinas y cotiza bajo la Ley 306.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html" class="active">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="destinations-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-compass"></i> Red de Ecoturismo en Territorio
+          </div>
+          <h1 class="section-headline">Catálogo de Destinos Protegidos</h1>
+          <p class="section-subtext">
+            Senderos milenarios custodiados por comunidades locales. Cada visita cuenta con balizas
+            de seguridad satelital en la app Android y pago directo a familias del territorio.
+          </p>
+        </div>
+
+        <!-- FILTROS POR CATEGORÍA -->
+        <div class="filter-pills-bar">
+          <button class="cat-filter-btn active" data-filter="all">Todos los Destinos</button>
+          <button class="cat-filter-btn" data-filter="volcanes">Volcanes Activos</button>
+          <button class="cat-filter-btn" data-filter="aguas">Aguas Sagradas & Cuencas</button>
+          <button class="cat-filter-btn" data-filter="selva">Nebliselva & Café</button>
+          <button class="cat-filter-btn" data-filter="islas">Islas & Biosferas</button>
+        </div>
+
+        <!-- GRID DE DESTINOS -->
+        <div class="destinations-showcase-grid">
+          <!-- Destino 1: Somoto -->
+          <div class="dest-card-pro" data-category="aguas">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-droplet"></i> Cañón Acuático</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Madriz, Nicaragua</div>
+              <h3 class="dest-name-title">Monumento Nacional Cañón de Somoto</h3>
+              <p class="dest-description-text">
+                Paredes rocosas de más de 120 metros de altura esculpidas durante millones de años por el Río Coco (Wangki). Recorridos de natación protegida con chalecos salvavidas y baqueanos campesinos.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (420 reseñas)</span>
+                <span class="dest-coop-name">Coop. Sonís Somoto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destino 2: Cerro Negro -->
+          <div class="dest-card-pro" data-category="volcanes">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/cerro_negro.jpg" alt="Volcán Cerro Negro" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Volcán Activo</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León, Nicaragua</div>
+              <h3 class="dest-name-title">Volcán Cerro Negro (Volcano Sandboarding)</h3>
+              <p class="dest-description-text">
+                El volcán más joven de Centroamérica (1850). Cono de escoria negra basáltica con fumarolas calientes en la cumbre. Descenso de alta adrenalina sobre arena volcánica a 60-80 km/h.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (610 reseñas)</span>
+                <span class="dest-coop-name">Guías Los Maribios</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destino 3: Ometepe -->
+          <div class="dest-card-pro" data-category="islas">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Reserva de Biosfera</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Lago Cocibolca</div>
+              <h3 class="dest-name-title">Isla de Ometepe (Concepción & Maderas)</h3>
+              <p class="dest-description-text">
+                Oasis en medio del Gran Lago de Nicaragua con dos volcanes colosales. Petroglifos sagrados, senderismo en bosque nuboso, Ojo de Agua medicinal y cooperativas agroecológicas.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (890 reseñas)</span>
+                <span class="dest-coop-name">Coop. Ometepe Verde</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destino 4: Cascada La Luna -->
+          <div class="dest-card-pro" data-category="selva">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada La Luna" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-cloud-rain"></i> Nebliselva</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Jinotega, El Cuá</div>
+              <h3 class="dest-name-title">Cascada La Luna & Ruta del Café</h3>
+              <p class="dest-description-text">
+                Impresionante caída de agua oculta en la espesura del bosque de niebla jinotegano. Canopy sobre la catarata, senderos de orquídeas silvestres y cata de café de estricta altura (SHG).
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (310 reseñas)</span>
+                <span class="dest-coop-name">Asoc. Campesina El Cuá</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destino 5: Laguna de Apoyo -->
+          <div class="dest-card-pro" data-category="aguas">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Aguas Minerales</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Granada</div>
+              <h3 class="dest-name-title">Reserva Natural Laguna de Apoyo</h3>
+              <p class="dest-description-text">
+                Cráter volcánico colapsado con aguas termales salobres de transparencia cristalina. Prohibidas las embarcaciones de combustión. Refugio del tucán verde y peces cíclidos endémicos.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (750 reseñas)</span>
+                <span class="dest-coop-name">Custodios del Cráter</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destino 6: Volcán Masaya -->
+          <div class="dest-card-pro" data-category="volcanes">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-fire"></i> Lago de Lava</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Nindirí</div>
+              <h3 class="dest-name-title">Parque Nacional Volcán Masaya (Popogatepe)</h3>
+              <p class="dest-description-text">
+                El cráter Santiago y su lago de lava incandescente activo. Cruz de Bobadilla, túneles de lava fosilizada donde anidan murciélagos y chocoyos que sobreviven al gas sulfuroso.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (980 reseñas)</span>
+                <span class="dest-coop-name">Comunidad de Nindirí</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CALCULADORA RURAL DE RETORNO (ROI) -->
+        <div class="calc-panel-box" style="margin-top: 6rem;">
+          <div style="text-align: center; margin-bottom: 2.5rem;">
+            <div class="badge-section-pill">
+              <i class="fa-solid fa-calculator"></i> Economía Social Comunitaria
+            </div>
+            <h2 style="font-size: 2.2rem; color: #FFFFFF; margin-bottom: 0.5rem;">Calculadora de Retorno Rural Campesino</h2>
+            <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+              Calcula cómo el modelo de comisión 0% de Baqueano erradica la fuga del 20-25% que imponen las OTAs foráneas, dejando el dinero íntegro en las comunidades nicaragüenses.
+            </p>
+          </div>
+
+          <div class="calc-grid-inner">
+            <!-- Columna Izquierda: Sliders -->
+            <div class="calc-controls-col">
+              <div class="slider-group-pro">
+                <div class="slider-header-row">
+                  <span class="slider-title"><i class="fa-solid fa-person-hiking"></i> Tours Realizados al Mes:</span>
+                  <span class="slider-display-badge" id="toursLabel">25</span>
+                </div>
+                <input type="range" min="5" max="80" value="25" class="slider-range-input" id="monthlyTours">
+              </div>
+
+              <div class="slider-group-pro">
+                <div class="slider-header-row">
+                  <span class="slider-title"><i class="fa-solid fa-tag"></i> Tarifa Media por Persona:</span>
+                  <span class="slider-display-badge" id="priceLabel">$35</span>
+                </div>
+                <input type="range" min="15" max="120" step="5" value="35" class="slider-range-input" id="avgTourPrice">
+              </div>
+
+              <div class="slider-group-pro">
+                <div class="slider-header-row">
+                  <span class="slider-title"><i class="fa-solid fa-users"></i> Promedio de Exploradores por Grupo:</span>
+                  <span class="slider-display-badge" id="groupLabel">3 pers.</span>
+                </div>
+                <input type="range" min="1" max="8" value="3" class="slider-range-input" id="groupSize">
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Comparativa de Retorno -->
+            <div class="calc-summary-comparison">
+              <div class="comp-card-ota">
+                <div class="comp-header">
+                  <span class="comp-title">Plataforma Foránea Tradicional</span>
+                  <span class="comp-pill-loss">20% Comisión Externa</span>
+                </div>
+                <div class="comp-figure-big danger" id="otaLoss">-$525 USD</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                  Ingreso Neto Campesino: <strong id="otaNet" style="color: #FFFFFF;">$2,100 USD</strong>
+                </div>
+              </div>
+
+              <div class="comp-card-baqueano">
+                <div class="comp-header">
+                  <span class="comp-title" style="color: #10B981;">Modelo Baqueano Nicaragua</span>
+                  <span class="comp-pill-win">0% Comisión Abusiva</span>
+                </div>
+                <div class="comp-figure-big success" id="baqueanoNet">$2,625 USD</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                  100% Retenido en la Familia y Cooperativa Rural
+                </div>
+                <div class="comp-annual-banner">
+                  <i class="fa-solid fa-circle-check" style="color: #10B981;"></i>
+                  <span>Ahorro Anual para la Comunidad: <strong id="annualSavings" style="color: #FFFFFF;">+$6,300 USD</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COTIZADOR BIMONEDA CON LEY 306 INTUR -->
+        <div class="checkout-preview-panel" style="margin-top: 4rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div>
+              <div class="badge-section-pill" style="margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-receipt"></i> Motor Financiero Transparente
+              </div>
+              <h3 style="font-size: 1.6rem; color: #FFFFFF; margin: 0;">Cotizador Bimoneda con Ley 306 INTUR</h3>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--arena-pinolera); font-family: var(--font-tech);">
+              TASA OFICIAL BCN: 1 USD = 36.65 NIO
+            </div>
+          </div>
+
+          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            La Ley 306 de Incentivos para la Industria Turística de la República de Nicaragua exonera del 15% del IVA a turistas no residentes que contratan servicios turísticos registrados.
+          </p>
+
+          <div class="tax-regime-toggle">
+            <button class="regime-btn active" id="btnRegimeTourist" onclick="setTaxRegime('tourist')">
+              <i class="fa-solid fa-passport"></i> Turista Internacional (Exento 0% IVA - Ley 306)
+            </button>
+            <button class="regime-btn" id="btnRegimeLocal" onclick="setTaxRegime('local')">
+              <i class="fa-solid fa-id-card"></i> Residente Nacional (+15% IVA DGI)
+            </button>
+          </div>
+
+          <div class="checkout-receipt-ticket">
+            <div class="receipt-row">
+              <span>Expedición Guiada Cañón de Somoto (3 pax):</span>
+              <span id="receiptSubtotal">$105.00 USD</span>
+            </div>
+            <div class="receipt-row">
+              <span>Descuento Promoción Comunitaria (15%):</span>
+              <span style="color: var(--verde-neon);">-$15.75 USD</span>
+            </div>
+            <div class="receipt-row">
+              <span>Régimen Fiscal Aplicado:</span>
+              <span id="receiptTax" style="color: var(--arena-pinolera);">0% (Exonerado Ley 306 INTUR)</span>
+            </div>
+            <div class="receipt-row total-row">
+              <span>Total a Liquidar (USD):</span>
+              <span id="receiptTotalUsd" style="color: var(--verde-neon);">$89.25 USD</span>
+            </div>
+            <div class="receipt-row" style="font-size: 1.1rem; font-weight: 800; color: var(--arena-pinolera); margin-top: 0.4rem;">
+              <span>Total Equivalente en Córdobas (NIO):</span>
+              <span id="receiptTotalNio">C$ 3,271.01 NIO</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASISTENTE IA PARA TURISMO RESPONSABLE -->
+        <div class="ai-assistant-panel">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--grad-sunset); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #FFFFFF;">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 1.4rem; color: #FFFFFF; margin: 0;">Baqueano AI: Consulta de Sendero</h3>
+              <span style="font-size: 0.8rem; color: var(--arena-pinolera);">Consejos de equipamiento, dificultad física y regulaciones ecológicas</span>
+            </div>
+          </div>
+
+          <div class="ai-presets-row">
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Qué calzado recomiendan para Somoto?')">¿Calzado para Somoto?</button>
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Qué condición física requiere Cerro Negro?')">¿Dificultad Cerro Negro?</button>
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Por qué no usar bloqueador químico en lagunas?')">¿Bloqueador en lagunas?</button>
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Cómo llegar a Cascada La Luna?')">¿Ruta a Cascada La Luna?</button>
+          </div>
+
+          <div class="ai-chat-box" id="aiChatMessages">
+            <div class="ai-bubble-msg ai-bubble-bot">
+              ¡Hola, explorador! Soy el Asistente Baqueano AI. Pregúntame sobre cualquier sendero de Nicaragua, qué equipo llevar o cómo preservar el ecosistema local sin dejar rastro.
+            </div>
+          </div>
+
+          <form id="aiChatForm" style="display: flex; gap: 0.8rem;">
+            <input type="text" id="aiUserInput" class="form-control-input" placeholder="Escribe tu consulta sobre senderos, clima o equipamiento..." required>
+            <button type="submit" class="btn-hero-primary" style="padding: 0.8rem 1.4rem; font-size: 0.9rem; flex-shrink: 0;">
+              <i class="fa-solid fa-paper-plane"></i> Preguntar
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Descarga mapas satelitales sin conexión y recorre senderos con GPS en tu teléfono.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Ecoturismo con dignidad campesina.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/ai-assistant.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

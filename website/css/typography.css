@@ -1,0 +1,85 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE TIPOGRAFÍA & JERARQUÍA (TYPOGRAPHY.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Establecer una jerarquía tipográfica legible, contundente y moderna que
+  refleje la fuerza de la geografía nicaragüense y la accesibilidad para el explorador.
+- Evitar fuentes predeterminadas del navegador y garantizar consistencia con la app móvil.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Familias oficiales: Montserrat (encabezados display), Space Grotesk (datos técnicos y badges),
+  e Inter (cuerpo de texto y legibilidad general).
+- Escala tipográfica fluida y contrastes óptimos.
+
+📦 3. QUÉ (WHAT / CLASES & TOKENS):
+- --font-sans, --font-display, --font-tech.
+- .text-gradient-fire, .section-headline, .section-subtext, .badge-section-pill.
+============================================================================
+*/
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+  --font-tech: 'Space Grotesk', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+p {
+  color: var(--text-muted);
+}
+
+.text-gradient-fire {
+  background: var(--grad-sunset);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-lead-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.badge-section-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid var(--border-glow);
+  color: var(--terracotta-light);
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.section-headline {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-subtext {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
