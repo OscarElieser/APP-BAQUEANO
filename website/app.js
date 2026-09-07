@@ -69,6 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('liveFeedStream') && typeof initAdminOperations === 'function') {
     initAdminOperations();
   }
+  
+  // 10. Módulos nuevos de expansión
+  if (typeof initFirestoreRealtime === 'function') initFirestoreRealtime();
+  if (document.getElementById('hostForm') && typeof initBusinessPortal === 'function') initBusinessPortal();
+  if (document.getElementById('liveMetricsDashboard') && typeof initLiveMetrics === 'function') initLiveMetrics();
 });
 
 // Control local de tarjetas de territorios

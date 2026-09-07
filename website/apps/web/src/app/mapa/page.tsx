@@ -9,12 +9,18 @@
  * Public map page.
  */
 import { InteractiveMap } from "../../components/map/InteractiveMap";
-import { featuredDestinations } from "../../data/catalog";
+import { DataSourceBanner } from "../../components/sections/DataSourceBanner";
+import { getPublishedDestinationPlaces } from "../../services/destination.service";
 
-export default function MapaPage() {
+export default async function MapaPage() {
+  const result = await getPublishedDestinationPlaces();
+
   return (
     <main className="pt-24">
-      <InteractiveMap destinations={featuredDestinations} />
+      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+        <DataSourceBanner result={result} label="Estado del mapa" />
+      </div>
+      <InteractiveMap places={result.items} />
     </main>
   );
 }

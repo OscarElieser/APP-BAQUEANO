@@ -13,6 +13,7 @@ import { Inter, Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { PublicNavigation } from "../components/navigation/PublicNavigation";
 import { SiteFooter } from "../components/navigation/SiteFooter";
+import { ScrollProgress } from "../components/navigation/ScrollProgress";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", display: "swap" });
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" className={`${inter.variable} ${montserrat.variable} ${spaceGrotesk.variable}`}>
       <body>
+        <ScrollProgress />
         <PublicNavigation />
         {children}
         <SiteFooter />

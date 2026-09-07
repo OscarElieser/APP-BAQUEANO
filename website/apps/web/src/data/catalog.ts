@@ -8,7 +8,7 @@
  * WHAT
  * Featured destinations, territories, dishes, history periods, and impact metrics.
  */
-import type { Destination, Territory } from "@baqueano/types";
+import type { Destination, PlaceRecord, Territory } from "@baqueano/types";
 
 export const featuredDestinations: readonly Destination[] = [
   {
@@ -96,6 +96,36 @@ export const featuredDestinations: readonly Destination[] = [
     updatedAtIso: "2026-09-07T00:00:00.000Z"
   }
 ];
+
+export const seedPlaces: readonly PlaceRecord[] = featuredDestinations.map((destination) => ({
+  placeId: destination.id,
+  name: destination.name,
+  categoryId: destination.category.toLowerCase().replaceAll(" ", "-"),
+  categoryName: destination.category,
+  subcategory: destination.tags[0] ?? "",
+  description: destination.summary,
+  departmentId: destination.department.toLowerCase().replaceAll(" ", "-"),
+  departmentName: destination.department,
+  municipalityId: destination.municipality.toLowerCase().replaceAll(" ", "-"),
+  municipalityName: destination.municipality,
+  address: `${destination.municipality}, ${destination.department}`,
+  latitude: destination.coordinates.latitude,
+  longitude: destination.coordinates.longitude,
+  geohash: "",
+  imageUrl: destination.heroImage,
+  imageUrls: [...destination.gallery],
+  is24Hours: false,
+  isOpen: true,
+  isEmergency: false,
+  isTourist: true,
+  isCommercial: false,
+  verified: true,
+  rating: destination.rating,
+  reviewCount: 0,
+  status: destination.status === "published" ? "published" : "draft",
+  createdAt: destination.updatedAtIso,
+  updatedAt: destination.updatedAtIso
+}));
 
 export const territories: readonly Territory[] = [
   { slug: "boaco", name: "Boaco", type: "departamento", capital: "Boaco", culturalSignal: "Ganaderia y montanas", landscape: "Cordillera central" },

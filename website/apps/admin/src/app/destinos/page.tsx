@@ -1,49 +1,55 @@
 /**
  * WHY
- * Creates the operational entry for destination content that feeds web and Android.
+ * Centralizes destination oversight without pretending CRUD is secure before Auth/RBAC.
  *
  * HOW
- * Lists Firestore-shaped records and exposes validation-ready status controls.
+ * Reads through the admin place service, labels seed fallback, and disables write actions
+ * until authenticated server-side authorization is implemented.
  *
  * WHAT
- * Destinations administration module.
+ * Control Center destination list for Android-compatible `places` records.
  */
 import { AdminPanel } from "../../components/AdminCards";
+import { getAdminDestinationPlaces } from "../../services/destination.service";
 
-const destinationRows = [
-  { id: "dest-canon-somoto", name: "Canon de Somoto", department: "Madriz", difficulty: "media", impact: 94, status: "published" },
-  { id: "dest-ometepe", name: "Isla de Ometepe", department: "Rivas", difficulty: "alta", impact: 91, status: "published" },
-  { id: "dest-cerro-negro", name: "Cerro Negro", department: "Leon", difficulty: "media", impact: 87, status: "review" },
-  { id: "dest-apoyo", name: "Laguna de Apoyo", department: "Masaya", difficulty: "suave", impact: 90, status: "published" }
-] as const;
+export default async function AdminDestinosPage() {
+  const result = await getAdminDestinationPlaces();
 
-export default function AdminDestinosPage() {
   return (
-    <div>
-      <h1 className="font-display text-3xl font-black text-white">Destinos</h1>
-      <p className="mt-2 max-w-2xl text-sm text-white/60">Gestiona destinos publicados, borradores, coordenadas, precios, dificultad, anfitriones y reglas de conservacion.</p>
-      <div className="mt-6">
-        <AdminPanel title="Registros compartidos">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="font-tech text-xs uppercase text-white/48">
-                <tr><th className="py-3">Destino</th><th>Departamento</th><th>Dificultad</th><th>Impacto</th><th>Estado</th></tr>
-              </thead>
-              <tbody>
-                {destinationRows.map((destination) => (
-                  <tr key={destination.id} className="border-t border-white/10 text-white/72">
-                    <td className="py-4 font-bold text-white">{destination.name}</td>
-                    <td>{destination.department}</td>
-                    <td>{destination.difficulty}</td>
-                    <td>{destination.impact}%</td>
-                    <td>{destination.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </AdminPanel>
+    <div className="space-y-6">
+      <div>
+        <h1 className="font-display text-3xl font-black text-white">Catalogo Nacional de Destinos</h1>
+        <p className="mt-1 text-sm text-white/60">
+          Supervision centralizada de atractivos, coordenadas WGS84, categorias, estado de publicacion y compatibilidad con Android.
+        </p>
       </div>
+
+      <div className="rounded-md border border-[#F65E01]/30 bg-[#F65E01]/10 px-4 py-3 text-sm text-white/70">
+        <strong className="font-tech uppercase text-[#F4E6C1]">Fuente:</strong> {result.source === "firestore" ? "Firestore `places`." : "Semilla administrativa; CRUD real pendiente de Auth/RBAC."}
+        {result.warning ? <span className="block pt-1 text-xs text-white/50">{result.warning}</span> : null}
+      </div>
+
+      <AdminPanel title="Registros compartidos">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[760px] text-left text-sm">
+            <thead className="font-tech text-xs uppercase text-white/48">
+              <tr><th className="py-3">Destino</th><th>Ubicacion</th><th>Categoria</th><th>Verificacion</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              {result.items.map((place) => (
+                <tr key={place.placeId} className="border-t border-white/10 text-white/72">
+                  <td className="py-4 font-bold text-white">{place.name}</td>
+                  <td>{place.departmentName}, {place.municipalityName}</td>
+                  <td>{place.categoryName}</td>
+                  <td>{place.verified ? "verificado" : "pendiente"}</td>
+                  <td>{place.status}</td>
+                  <td><span className="rounded-md border border-white/10 px-2 py-1 font-tech text-xs uppercase text-white/45">CRUD pendiente</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </AdminPanel>
     </div>
   );
 }

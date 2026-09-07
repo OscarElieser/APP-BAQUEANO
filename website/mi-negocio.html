@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PORTAL DE ANFITRIONES & NEGOCIOS COMUNITARIOS (mi-negocio.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ser la puerta de entrada oficial para cooperativas campesinas, posadas
+  comunitarias, guías certificados y emprendedores rurales de Nicaragua que
+  desean registrar su negocio turístico en el ecosistema Baqueano.
+- Eliminar la barrera de intermediarios foráneos: el anfitrión registra
+  sus servicios directamente, sin comisiones abusivas de OTAs.
+- Conectar el formulario de registro directamente a Cloud Firestore
+  (/businesses) para supervisión inmediata desde el Ops Center.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Formulario multi-paso (3 pasos) con validación campo por campo.
+- Integración directa con BaqueanoFirestore.registerBusiness() y audit log.
+- Glassmorphism con la paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+- Contador de negocios aliados en tiempo real desde Firestore.
+- Sección de beneficios con modelo económico transparente Ley 306.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Hero Section: Misión del portal de anfitriones.
+- Contadores en Vivo: Negocios aliados, rutas activas, ingresos comunitarios.
+- Formulario Multi-Paso: Datos del negocio → Contacto & Propietario → Confirmación.
+- Panel de Éxito: Confirmación con ID de registro.
+- Sección FAQ: Respuestas a las 6 preguntas más frecuentes de anfitriones.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Anfitriones & Negocios | Baqueano Nicaragua</title>
+  <meta name="description" content="Registra tu cooperativa, posada o guía turístico en Baqueano Nicaragua. Sin intermediarios, 0% comisión, conectado directamente con exploradores responsables.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* =====================================================================
+       ESTILOS ESPECÍFICOS DEL PORTAL DE ANFITRIONES
+       ===================================================================== */
+
+    /* Hero Section del Portal */
+    .host-hero-section {
+      padding: 9rem 0 5rem;
+      background: radial-gradient(ellipse at 70% 40%, rgba(22, 93, 111, 0.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(246, 94, 1, 0.10) 0%, transparent 50%),
+                  var(--noche-profunda);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .host-hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23165D6F' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .host-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .host-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(246, 94, 1, 0.12);
+      border: 1px solid rgba(246, 94, 1, 0.3);
+      color: var(--terracotta);
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--font-tech);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .host-hero-headline {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #FFFFFF;
+      margin-bottom: 1.5rem;
+    }
+
+    .host-hero-headline span {
+      background: linear-gradient(135deg, #165D6F 0%, #F65E01 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .host-hero-subtext {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .host-stat-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .host-stat-box {
+      text-align: center;
+    }
+
+    .host-stat-number {
+      font-family: var(--font-tech);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--terracotta);
+      line-height: 1;
+      display: block;
+    }
+
+    .host-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      display: block;
+    }
+
+    /* Tarjeta de preview del modelo de negocio */
+    .host-model-card {
+      background: rgba(22, 93, 111, 0.08);
+      border: 1px solid rgba(22, 93, 111, 0.25);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .host-model-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(246, 94, 1, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .model-comparison-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .model-col {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 14px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .model-col.bad { border: 1px solid rgba(239, 68, 68, 0.25); }
+    .model-col.good { border: 1px solid rgba(16, 185, 129, 0.25); }
+
+    .model-col-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .model-col-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .model-col-value { font-size: 1.8rem; font-weight: 800; font-family: var(--font-tech); }
+    .model-col.bad .model-col-value { color: #EF4444; }
+    .model-col.good .model-col-value { color: #10B981; }
+
+    /* Formulario Multi-Paso */
+    .reg-form-section {
+      padding: 6rem 0;
+      background: linear-gradient(180deg, var(--noche-profunda) 0%, rgba(22, 93, 111, 0.05) 50%, var(--noche-profunda) 100%);
+    }
+
+    .reg-form-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* Indicador de pasos */
+    .reg-steps-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+
+    .reg-step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .reg-step-indicator::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 100px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: -1;
+    }
+
+    .reg-step-indicator:last-child::after { display: none; }
+
+    .step-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .reg-step-indicator.active .step-circle {
+      background: var(--grad-sunset);
+      border-color: transparent;
+      color: #FFFFFF;
+      box-shadow: 0 0 20px rgba(246, 94, 1, 0.4);
+    }
+
+    .reg-step-indicator.completed .step-circle {
+      background: var(--petroleo-teal);
+      border-color: transparent;
+      color: #FFFFFF;
+    }
+
+    .step-label-text {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-align: center;
+      max-width: 80px;
+    }
+
+    .reg-step-indicator.active .step-label-text { color: var(--terracotta); }
+    .reg-step-indicator.completed .step-label-text { color: var(--petroleo-teal); }
+
+    /* Panel de paso */
+    .reg-step-panel {
+      display: none;
+      animation: stepFadeIn 0.4s ease;
+    }
+
+    .reg-step-panel.active { display: block; }
+
+    @keyframes stepFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card del formulario */
+    .reg-form-card {
+      background: rgba(22, 93, 111, 0.06);
+      border: 1px solid rgba(22, 93, 111, 0.2);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .reg-step-header {
+      margin-bottom: 2rem;
+    }
+
+    .reg-step-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+    }
+
+    .reg-step-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Grupos de campo */
+    .field-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--arena-pinolera);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .field-required { color: var(--terracotta); margin-left: 2px; }
+
+    .form-control-input,
+    .form-select-input,
+    .form-textarea-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .form-control-input:focus,
+    .form-select-input:focus,
+    .form-textarea-input:focus {
+      border-color: var(--petroleo-teal);
+      box-shadow: 0 0 0 3px rgba(22, 93, 111, 0.2);
+    }
+
+    .form-control-input.field-error,
+    .form-select-input.field-error {
+      border-color: #EF4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .form-select-input option { background: #0F172A; color: #FFFFFF; }
+    .form-textarea-input { min-height: 100px; resize: vertical; }
+
+    .field-error-msg {
+      display: none;
+      font-size: 0.78rem;
+      color: #EF4444;
+      margin-top: 0.3rem;
+    }
+
+    .field-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .field-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Panel de previsualización */
+    .reg-preview-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .reg-preview-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .reg-preview-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--grad-sunset);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .reg-preview-title {
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: 1.05rem;
+    }
+
+    .reg-preview-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .reg-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .reg-preview-item { font-size: 0.85rem; }
+    .reg-preview-item strong { color: var(--arena-pinolera); display: block; font-size: 0.72rem; margin-bottom: 0.15rem; }
+    .reg-preview-item span { color: #FFFFFF; }
+
+    /* Checkbox de términos */
+    .terms-check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .terms-check-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--petroleo-teal);
+      flex-shrink: 0;
+    }
+
+    .terms-check-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .terms-check-label a {
+      color: var(--arena-pinolera);
+      text-decoration: underline;
+    }
+
+    /* Navegación del formulario */
+    .reg-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-reg-prev {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.4rem;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-reg-prev:hover {
+      border-color: var(--petroleo-teal);
+      color: #FFFFFF;
+    }
+
+    .btn-reg-next,
+    .btn-reg-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      background: var(--grad-sunset);
+      border: none;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+
+    .btn-reg-next:hover,
+    .btn-reg-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(246, 94, 1, 0.35);
+    }
+
+    .btn-reg-submit {
+      background: linear-gradient(135deg, #165D6F 0%, #10B981 100%);
+    }
+
+    .btn-reg-submit:hover {
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-reg-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Panel de éxito */
+    .reg-success-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 2rem;
+      animation: stepFadeIn 0.6s ease;
+    }
+
+    .success-icon-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #165D6F, #10B981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #FFFFFF;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+      animation: pulseRing 2s infinite;
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 60px rgba(16, 185, 129, 0.6); }
+    }
+
+    .success-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 0.8rem;
+    }
+
+    .success-msg { font-size: 1rem; color: var(--text-muted); max-width: 500px; line-height: 1.6; margin-bottom: 1.5rem; }
+
+    .success-id-badge {
+      background: rgba(22, 93, 111, 0.15);
+      border: 1px solid rgba(22, 93, 111, 0.4);
+      border-radius: 10px;
+      padding: 0.8rem 1.5rem;
+      font-family: var(--font-tech);
+      font-size: 0.85rem;
+      color: var(--arena-pinolera);
+      margin-bottom: 2rem;
+    }
+
+    .success-id-badge strong { color: #FFFFFF; display: block; font-size: 1rem; margin-top: 0.2rem; }
+
+    /* Banner de error */
+    .reg-error-banner {
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      color: #FCA5A5;
+      font-size: 0.9rem;
+    }
+
+    /* Sección de Beneficios */
+    .benefits-section {
+      padding: 5rem 0;
+      background: var(--noche-profunda);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .benefit-card {
+      background: rgba(22, 93, 111, 0.06);
+      border: 1px solid rgba(22, 93, 111, 0.18);
+      border-radius: 18px;
+      padding: 1.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      border-color: rgba(22, 93, 111, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(22, 93, 111, 0.15);
+    }
+
+    .benefit-icon-ring {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(22, 93, 111, 0.15);
+      border: 1px solid rgba(22, 93, 111, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--petroleo-teal);
+      margin-bottom: 1.2rem;
+    }
+
+    .benefit-title {
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .benefit-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 5rem 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(22, 93, 111, 0.08) 0%, transparent 60%), var(--noche-profunda);
+    }
+
+    .faq-list { max-width: 720px; margin: 3rem auto 0; }
+
+    .faq-item {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item.open { border-color: rgba(22, 93, 111, 0.4); }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      background: rgba(15, 23, 42, 0.5);
+      user-select: none;
+    }
+
+    .faq-question:hover { background: rgba(22, 93, 111, 0.1); }
+
+    .faq-icon {
+      font-size: 0.8rem;
+      color: var(--terracotta);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding: 1rem 1.5rem 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .host-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .host-hero-headline { font-size: 2.2rem; }
+      .model-comparison-row { flex-direction: column; }
+      .field-row-2 { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .reg-steps-indicator { gap: 0; overflow-x: auto; }
+      .reg-step-indicator::after { width: 60px; }
+      .reg-preview-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="mi-negocio.html" class="active">Mi Negocio</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <!-- HERO SECTION DEL PORTAL DE ANFITRIONES -->
+    <section class="host-hero-section">
+      <div class="container">
+        <div class="host-hero-inner">
+          <div>
+            <div class="host-hero-tag">
+              <i class="fa-solid fa-handshake"></i> Portal Oficial de Anfitriones
+            </div>
+            <h1 class="host-hero-headline">
+              Tu comunidad merece<br>
+              <span>ganar el 100%</span><br>
+              de lo que cobra
+            </h1>
+            <p class="host-hero-subtext">
+              Registra tu cooperativa, posada, guía certificado o emprendimiento rural en el
+              ecosistema Baqueano Nicaragua. <strong style="color: #FFFFFF;">Cero comisiones abusivas</strong>,
+              contacto directo con exploradores responsables y respaldo total de la Ley 306 INTUR.
+            </p>
+            <div class="host-stat-row">
+              <div class="host-stat-box">
+                <span class="host-stat-number" id="liveBusinessCount">12+</span>
+                <span class="host-stat-label">Negocios Registrados</span>
+              </div>
+              <div class="host-stat-box">
+                <span class="host-stat-number">0%</span>
+                <span class="host-stat-label">Comisión Baqueano</span>
+              </div>
+              <div class="host-stat-box">
+                <span class="host-stat-number">100%</span>
+                <span class="host-stat-label">Ingreso Directo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TARJETA COMPARATIVA DEL MODELO -->
+          <div class="host-model-card">
+            <div style="margin-bottom: 1.5rem;">
+              <div class="badge-section-pill" style="margin-bottom: 0.8rem;">
+                <i class="fa-solid fa-scale-balanced"></i> Modelo Económico Real
+              </div>
+              <h3 style="font-size: 1.3rem; color: #FFFFFF; margin: 0;">¿Cuánto pierdes con OTAs foráneas?</h3>
+            </div>
+
+            <div class="model-comparison-row">
+              <div class="model-col bad">
+                <div class="model-col-icon">😤</div>
+                <div class="model-col-label">OTA Foránea</div>
+                <div class="model-col-value">-20%</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">Comisión abusiva</div>
+              </div>
+              <div class="model-col good">
+                <div class="model-col-icon">🌿</div>
+                <div class="model-col-label">Baqueano</div>
+                <div class="model-col-value">+0%</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">Sin intermediarios</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1rem; margin-bottom: 1.2rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Si ganas $1,000/mes con OTA:</div>
+              <div style="color: #EF4444; font-size: 0.9rem; font-weight: 600;">➤ Pierdes $200 en comisiones</div>
+              <div style="color: #10B981; font-size: 0.9rem; font-weight: 600;">➤ Con Baqueano: 0 pérdida = +$2,400/año</div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted);">
+              <i class="fa-solid fa-shield-check" style="color: #10B981;"></i>
+              Avalado por Ley 306 INTUR Nicaragua
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE BENEFICIOS -->
+    <section class="benefits-section">
+      <div class="container">
+        <div class="section-lead-header" style="text-align: center; margin-bottom: 0;">
+          <div class="badge-section-pill"><i class="fa-solid fa-star"></i> Ventajas del Ecosistema Baqueano</div>
+          <h2 class="section-headline">¿Por qué registrar tu negocio aquí?</h2>
+          <p class="section-subtext" style="max-width: 600px; margin: 0 auto;">
+            Más de una razón para formar parte de la red más honesta del turismo nicaragüense.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon-ring"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <div class="benefit-title">Ingresos Directos Sin Cortes</div>
+            <div class="benefit-desc">El explorador paga directamente a ti. Baqueano no cobra comisiones ni tarifas ocultas. Lo que cobras es 100% tuyo.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon-ring"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <div class="benefit-title">Visibilidad en App Android</div>
+            <div class="benefit-desc">Tu negocio aparece en el mapa de la app BaqueanoNicaragua para Android, con GPS en sendero, calificaciones y contacto directo.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon-ring"><i class="fa-solid fa-certificate"></i></div>
+            <div class="benefit-title">Avalado por Ley 306 INTUR</div>
+            <div class="benefit-desc">Acceso a régimen fiscal de incentivos turísticos. Turistas internacionales quedan exonerados del 15% IVA en tus servicios.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon-ring"><i class="fa-solid fa-satellite-dish"></i></div>
+            <div class="benefit-title">Balizas GPS en Sendero</div>
+            <div class="benefit-desc">Sistema satelital de seguridad en tiempo real para tus rutas. Los exploradores siempre sabrán dónde están y cómo contactarte.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon-ring"><i class="fa-solid fa-leaf"></i></div>
+            <div class="benefit-title">Certificación Verde Baqueano</div>
+            <div class="benefit-desc">Badge de conservación ambiental en tu perfil por cumplir el Decálogo Verde. Genera confianza en turistas responsables.</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon-ring"><i class="fa-solid fa-users"></i></div>
+            <div class="benefit-title">Red de Cooperativas Aliadas</div>
+            <div class="benefit-desc">Forma parte de la comunidad de 12+ negocios activos. Referidos cruzados, capacitaciones y apoyo en temporada alta.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULARIO MULTI-PASO DE REGISTRO -->
+    <section class="reg-form-section" id="registro">
+      <div class="container">
+        <div class="reg-form-wrapper">
+          <div class="section-lead-header" style="text-align: center; margin-bottom: 3rem;">
+            <div class="badge-section-pill"><i class="fa-solid fa-file-circle-plus"></i> Registro Oficial</div>
+            <h2 class="section-headline">Regístrate como Anfitrión</h2>
+            <p class="section-subtext">
+              Completa los 3 pasos en menos de 5 minutos. Tu solicitud llega directamente al
+              Ops Center para aprobación por el Administrador General.
+            </p>
+          </div>
+
+          <!-- Indicador de pasos -->
+          <div class="reg-steps-indicator">
+            <div class="reg-step-indicator active" id="indicator_0">
+              <div class="step-circle"><i class="fa-solid fa-building"></i></div>
+              <span class="step-label-text">Tu Negocio</span>
+            </div>
+            <div class="reg-step-indicator" id="indicator_1">
+              <div class="step-circle"><i class="fa-solid fa-address-card"></i></div>
+              <span class="step-label-text">Contacto</span>
+            </div>
+            <div class="reg-step-indicator" id="indicator_2">
+              <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+              <span class="step-label-text">Confirmar</span>
+            </div>
+          </div>
+
+          <!-- Contenedor del formulario -->
+          <div id="regStepsContainer">
+            <div class="reg-error-banner" id="regErrorBanner">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span id="regErrorText">Error al registrar. Intenta nuevamente.</span>
+            </div>
+
+            <form id="businessRegForm" novalidate>
+              <div class="reg-form-card">
+
+                <!-- PASO 1: Datos del Negocio -->
+                <div class="reg-step-panel active" id="regStep_0">
+                  <div class="reg-step-header">
+                    <div class="reg-step-title">🏡 Datos de tu Negocio</div>
+                    <div class="reg-step-subtitle">Cuéntanos sobre tu cooperativa, posada o servicio turístico.</div>
+                  </div>
+
+                  <div class="field-group">
+                    <label class="field-label" for="bizName">Nombre del Negocio o Cooperativa <span class="field-required">*</span></label>
+                    <input type="text" id="bizName" name="bizName" class="form-control-input"
+                           placeholder="Ej: Coop. Ecoturismo Las Nubes, Posada Don Marcos..."
+                           required maxlength="120">
+                    <span class="field-error-msg" id="bizName_error">Este campo es obligatorio.</span>
+                  </div>
+
+                  <div class="field-group">
+                    <label class="field-label" for="bizType">Tipo de Negocio <span class="field-required">*</span></label>
+                    <select id="bizType" name="bizType" class="form-select-input" required>
+                      <option value="">— Selecciona el tipo —</option>
+                      <option value="Cooperativa Ecoturística">Cooperativa Ecoturística</option>
+                      <option value="Posada / Alojamiento Campesino">Posada / Alojamiento Campesino</option>
+                      <option value="Guía Baqueano Certificado">Guía Baqueano Certificado</option>
+                      <option value="Tour Operadora Comunitaria">Tour Operadora Comunitaria</option>
+                      <option value="Restaurante / Gastronomía Local">Restaurante / Gastronomía Local</option>
+                      <option value="Transporte Rural Solidario">Transporte Rural Solidario</option>
+                      <option value="Artesanía & Cultura">Artesanía & Cultura</option>
+                      <option value="Aventura & Senderismo">Aventura & Senderismo</option>
+                    </select>
+                    <span class="field-error-msg" id="bizType_error">Selecciona el tipo de negocio.</span>
+                  </div>
+
+                  <div class="field-row-2">
+                    <div class="field-group">
+                      <label class="field-label" for="bizDepartment">Departamento <span class="field-required">*</span></label>
+                      <select id="bizDepartment" name="bizDepartment" class="form-select-input" required>
+                        <option value="">— Departamento —</option>
+                        <option>Boaco</option>
+                        <option>Carazo</option>
+                        <option>Chinandega</option>
+                        <option>Chontales</option>
+                        <option>Estelí</option>
+                        <option>Granada</option>
+                        <option>Jinotega</option>
+                        <option>León</option>
+                        <option>Madriz</option>
+                        <option>Managua</option>
+                        <option>Masaya</option>
+                        <option>Matagalpa</option>
+                        <option>Nueva Segovia</option>
+                        <option>Río San Juan</option>
+                        <option>Rivas</option>
+                        <option>RACCS</option>
+                        <option>RACCN</option>
+                      </select>
+                      <span class="field-error-msg" id="bizDepartment_error">Selecciona tu departamento.</span>
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label" for="bizMunicipality">Municipio <span class="field-required">*</span></label>
+                      <input type="text" id="bizMunicipality" name="bizMunicipality" class="form-control-input"
+                             placeholder="Ej: Somoto, El Cuá..." required maxlength="80">
+                      <span class="field-error-msg" id="bizMunicipality_error">Ingresa el municipio.</span>
+                    </div>
+                  </div>
+
+                  <div class="field-group">
+                    <label class="field-label" for="bizDescription">Descripción de tus Servicios <span class="field-required">*</span></label>
+                    <textarea id="bizDescription" name="bizDescription" class="form-textarea-input"
+                              placeholder="Describe los tours, alojamientos, gastronomía o experiencias que ofreces y por qué son únicos para el viajero responsable..."
+                              required maxlength="800"></textarea>
+                    <span class="field-error-msg" id="bizDescription_error">Describe tus servicios.</span>
+                    <span class="field-hint">Máximo 800 caracteres. Sé específico: menciona precios, duración y grupos máximos.</span>
+                  </div>
+
+                  <div class="field-row-2">
+                    <div class="field-group">
+                      <label class="field-label" for="bizCapacity">Capacidad Máxima (personas)</label>
+                      <input type="number" id="bizCapacity" name="bizCapacity" class="form-control-input"
+                             placeholder="Ej: 12" min="1" max="200">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label" for="bizPrice">Precio Base por Persona (USD)</label>
+                      <input type="number" id="bizPrice" name="bizPrice" class="form-control-input"
+                             placeholder="Ej: 35" min="1" max="500" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PASO 2: Datos de Contacto y Propietario -->
+                <div class="reg-step-panel" id="regStep_1">
+                  <div class="reg-step-header">
+                    <div class="reg-step-title">📋 Datos de Contacto</div>
+                    <div class="reg-step-subtitle">Información del propietario o representante legal del negocio.</div>
+                  </div>
+
+                  <div class="field-group">
+                    <label class="field-label" for="bizOwnerName">Nombre Completo del Propietario <span class="field-required">*</span></label>
+                    <input type="text" id="bizOwnerName" name="bizOwnerName" class="form-control-input"
+                           placeholder="Nombre completo según cédula" required maxlength="100">
+                    <span class="field-error-msg" id="bizOwnerName_error">Nombre del propietario obligatorio.</span>
+                  </div>
+
+                  <div class="field-row-2">
+                    <div class="field-group">
+                      <label class="field-label" for="bizOwnerCedula">Cédula de Identidad</label>
+                      <input type="text" id="bizOwnerCedula" name="bizOwnerCedula" class="form-control-input"
+                             placeholder="###-######-####X" maxlength="14">
+                      <span class="field-hint">Formato nacional nicaragüense.</span>
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label" for="bizInturReg">¿Registrado en INTUR? <span class="field-required">*</span></label>
+                      <select id="bizInturReg" name="bizInturReg" class="form-select-input" required>
+                        <option value="">— Selecciona —</option>
+                        <option value="true">Sí, tengo registro INTUR</option>
+                        <option value="false">No aún, estoy en proceso</option>
+                      </select>
+                      <span class="field-error-msg" id="bizInturReg_error">Selecciona una opción.</span>
+                    </div>
+                  </div>
+
+                  <div class="field-group">
+                    <label class="field-label" for="bizEmail">Correo Electrónico <span class="field-required">*</span></label>
+                    <input type="email" id="bizEmail" name="bizEmail" class="form-control-input"
+                           placeholder="tucorreo@ejemplo.com" required maxlength="120">
+                    <span class="field-error-msg" id="bizEmail_error">Correo electrónico inválido.</span>
+                  </div>
+
+                  <div class="field-row-2">
+                    <div class="field-group">
+                      <label class="field-label" for="bizPhone">Teléfono de Contacto <span class="field-required">*</span></label>
+                      <input type="tel" id="bizPhone" name="bizPhone" class="form-control-input"
+                             placeholder="+505 8XXX-XXXX" required maxlength="20">
+                      <span class="field-error-msg" id="bizPhone_error">Teléfono inválido.</span>
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label" for="bizWhatsapp">WhatsApp (Opcional)</label>
+                      <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="form-control-input"
+                             placeholder="+505 8XXX-XXXX" maxlength="20">
+                      <span class="field-hint">Para contacto directo de exploradores.</span>
+                    </div>
+                  </div>
+
+                  <div class="field-group">
+                    <label class="field-label" for="bizCommunityBenefit">¿Cómo beneficia tu negocio a la comunidad? <span class="field-required">*</span></label>
+                    <textarea id="bizCommunityBenefit" name="bizCommunityBenefit" class="form-textarea-input"
+                              placeholder="Ej: El 40% de los ingresos va al fondo de becas escolares. Empleamos 8 familias campesinas de la cooperativa..."
+                              required maxlength="500"></textarea>
+                    <span class="field-error-msg" id="bizCommunityBenefit_error">Describe el impacto comunitario.</span>
+                  </div>
+                </div>
+
+                <!-- PASO 3: Confirmación y Previsualización -->
+                <div class="reg-step-panel" id="regStep_2">
+                  <div class="reg-step-header">
+                    <div class="reg-step-title">✅ Revisa tu Solicitud</div>
+                    <div class="reg-step-subtitle">Confirma los datos antes de enviar al Ops Center para aprobación.</div>
+                  </div>
+
+                  <!-- Previsualización -->
+                  <div class="reg-preview-card">
+                    <div class="reg-preview-header">
+                      <div class="reg-preview-icon"><i class="fa-solid fa-store"></i></div>
+                      <div>
+                        <div class="reg-preview-title" id="previewBizName">—</div>
+                        <div class="reg-preview-sub" id="previewBizType">—</div>
+                      </div>
+                    </div>
+                    <div class="reg-preview-grid">
+                      <div class="reg-preview-item">
+                        <strong>Departamento</strong>
+                        <span id="previewBizDept">—</span>
+                      </div>
+                      <div class="reg-preview-item">
+                        <strong>Contacto</strong>
+                        <span id="previewBizContact">—</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Checkbox de términos -->
+                  <div class="terms-check-row">
+                    <input type="checkbox" id="bizTermsAccept" name="bizTermsAccept" required>
+                    <label class="terms-check-label" for="bizTermsAccept">
+                      Acepto los <a href="ambiental.html">Términos del Decálogo Verde Baqueano</a> y confirmo que la información
+                      proporcionada es veraz. Entiendo que el Administrador General revisará mi solicitud
+                      en un plazo de 48-72 horas hábiles.
+                    </label>
+                  </div>
+                  <span class="field-error-msg" id="bizTermsAccept_error" style="margin-bottom: 1rem;">Debes aceptar los términos para continuar.</span>
+
+                  <!-- Info de procesamiento -->
+                  <div style="background: rgba(22, 93, 111, 0.1); border: 1px solid rgba(22, 93, 111, 0.25); border-radius: 12px; padding: 1rem 1.2rem;">
+                    <div style="display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.5rem;">
+                      <i class="fa-solid fa-cloud-arrow-up" style="color: var(--petroleo-teal);"></i>
+                      <strong style="color: #FFFFFF; font-size: 0.9rem;">¿Qué pasa después del envío?</strong>
+                    </div>
+                    <ul style="font-size: 0.82rem; color: var(--text-muted); padding-left: 1.2rem; line-height: 1.8; margin: 0;">
+                      <li>Tu solicitud queda registrada en Cloud Firestore con estado <strong style="color: var(--arena-pinolera);">pending_review</strong>.</li>
+                      <li>El Administrador General la revisa en el Ops Center en 48-72 horas.</li>
+                      <li>Recibirás confirmación por correo al email registrado.</li>
+                      <li>Una vez aprobado, tu negocio aparece en la app Android y en el mapa web.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- NAVEGACIÓN -->
+                <div class="reg-nav-row">
+                  <button type="button" class="btn-reg-prev" id="btnRegPrev" style="display: none;">
+                    <i class="fa-solid fa-arrow-left"></i> Atrás
+                  </button>
+                  <div></div>
+                  <button type="button" class="btn-reg-next" id="btnRegNext">
+                    Siguiente <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                  <button type="button" class="btn-reg-submit" id="btnRegSubmit" style="display: none;">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud a Firestore
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- PANEL DE ÉXITO -->
+          <div class="reg-form-card reg-success-panel" id="regSuccessPanel">
+            <div class="success-icon-ring"><i class="fa-solid fa-check"></i></div>
+            <div class="success-title">¡Solicitud Enviada!</div>
+            <p class="success-msg">
+              Tu negocio <strong id="regConfirmName" style="color: #FFFFFF;"></strong> ha sido registrado
+              exitosamente en Cloud Firestore. El Administrador General lo revisará en el Ops Center en las próximas
+              48-72 horas hábiles y te contactará al correo registrado.
+            </p>
+            <div class="success-id-badge">
+              ID DE REGISTRO OFICIAL
+              <strong id="regConfirmId">—</strong>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+              <a href="aliados.html" class="btn-hero-primary">
+                <i class="fa-solid fa-users"></i> Ver Cooperativas Aliadas
+              </a>
+              <a href="destinos.html" class="btn-hero-glass">
+                <i class="fa-solid fa-compass"></i> Explorar Destinos
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-lead-header" style="text-align: center;">
+          <div class="badge-section-pill"><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</div>
+          <h2 class="section-headline">Todo lo que necesitas saber</h2>
+        </div>
+
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <div class="faq-question" data-faq="0">
+              ¿Baqueano cobra alguna comisión por mis ventas?
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              No. El modelo Baqueano está diseñado para eliminar la intermediación financiera.
+              El explorador paga directamente a tu cooperativa o negocio. Baqueano facilita la conexión,
+              pero no toca ni retiene ningún porcentaje de tus ingresos. Esto es lo que llamamos
+              «turismo con soberanía campesina».
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-faq="1">
+              ¿Necesito tener registro INTUR para unirme?
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              No es un requisito estricto para registrarse, pero sí es muy recomendable.
+              El registro en INTUR te da acceso al régimen de incentivos de la Ley 306, que exonera
+              del 15% de IVA a turistas internacionales que contratan tus servicios. El equipo Baqueano
+              puede orientarte en el proceso de registro INTUR si lo necesitas.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-faq="2">
+              ¿En cuánto tiempo aparece mi negocio en la app?
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              Una vez enviada tu solicitud, el Administrador General la revisa en el Ops Center
+              en 48-72 horas hábiles. Si la información es correcta y verificable, tu negocio
+              queda publicado en el mapa web y en la app Android. Recibirás un correo de confirmación
+              con tu badge de anfitrión oficial.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-faq="3">
+              ¿Qué es el sistema de balizas GPS en sendero?
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              Las balizas GPS son puntos de seguridad satelital que los guías baqueanos activan
+              en la app Android al comenzar un recorrido. Los exploradores y sus contactos de emergencia
+              pueden ver la ubicación en tiempo real. Si ocurre un incidente, la función SOS
+              envía coordenadas exactas a los números de emergencia y al WhatsApp de la Mesa Baqueano.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-faq="4">
+              ¿Cómo recibo los pagos de los exploradores?
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              El pago es 100% directo: el explorador coordina contigo por WhatsApp, correo o llamada,
+              y paga como prefieran (efectivo, transferencia, depósito bancario). Baqueano muestra
+              tu contacto directo en tu perfil. No existe pasarela de pago intermediaria.
+              Próximamente se habilitará integración con Tilopay/BAC para quienes lo deseen,
+              pero siempre opcional y sin comisiones de Baqueano.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" data-faq="5">
+              ¿Puedo actualizar la información de mi negocio después?
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              Sí. Una vez aprobado tu registro, recibirás acceso a un portal de gestión donde
+              podrás actualizar precios, horarios, fotos y disponibilidad. Los cambios pasan por
+              una revisión rápida del Administrador (generalmente menos de 24 horas) antes de
+              reflejarse en la app y el sitio web.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">Portal de anfitriones para ecoturismo comunitario. Sin intermediarios, con dignidad campesina y respaldo INTUR.</p>
+        </div>
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+            <li><a href="mi-negocio.html">Portal de Anfitriones</a></li>
+            <li><a href="admin.html">Baqueano Ops Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">SOPORTE ANFITRIONES</h4>
+          <div class="emergency-line-item"><i class="fa-brands fa-whatsapp"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-envelope"></i> <div>Email: <strong>oscarelieser.informatica.inatec@gmail.com</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-clock"></i> <div>Atención: <strong>Lun–Vie 8am–5pm (CST)</strong></div></div>
+        </div>
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Gestiona tus rutas y balizas GPS directamente desde tu smartphone.</p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Ecoturismo con dignidad campesina.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo BaqueanoNicaragua.apk en tu dispositivo.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android autoriza la instalación directa.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="width: 100%; justify-content: center; margin-top: 1rem;">
+        <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+      </a>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="js/firestore-realtime.js"></script>
+  <script src="js/business-portal.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // ========================================================================
+    // INICIALIZACIÓN ESPECÍFICA DE MI-NEGOCIO.HTML
+    // ========================================================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializar portal de anfitriones
+      if (typeof initBusinessPortal === 'function') {
+        initBusinessPortal();
+      }
+
+      // 2. Cargar contador real de negocios desde Firestore
+      if (window.BaqueanoFirestore) {
+        if (window.firebase && window.firebase.firestore) {
+          window.firebase.firestore().collection('businesses').get()
+            .then(snap => {
+              const count = snap.size || 12;
+              const el = document.getElementById('liveBusinessCount');
+              if (el) el.textContent = count + '+';
+            })
+            .catch(() => {});
+        }
+      }
+
+      // 3. FAQ Accordion
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (question) {
+          question.addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+            faqItems.forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

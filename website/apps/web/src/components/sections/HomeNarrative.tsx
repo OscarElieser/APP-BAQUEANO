@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bot, Leaf, Map, ShieldCheck, Smartphone, Users } from "lucide-react";
 import { BaqueanoButton, MetricTile, SectionHeader, StatusChip } from "@baqueano/ui";
-import { featuredDestinations } from "../../data/catalog";
+import { featuredDestinations, seedPlaces } from "../../data/catalog";
 import { DestinationCard } from "../cards/DestinationCard";
 import { InteractiveMap } from "../map/InteractiveMap";
 
@@ -59,7 +59,7 @@ export function HomeNarrative() {
         </div>
       </section>
 
-      <InteractiveMap destinations={featuredDestinations} />
+      <InteractiveMap places={seedPlaces} />
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">

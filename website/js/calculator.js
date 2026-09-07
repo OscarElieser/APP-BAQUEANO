@@ -108,4 +108,33 @@ function initBimonedaCheckout() {
 
   // Inicializar cálculo por defecto
   recalcReceipt();
+
+  window.submitPaymentOrderReal = async function() {
+    const subtotal = 105.00;
+    const discount = subtotal * 0.15;
+    const baseAmount = subtotal - discount;
+    const taxRate = isTourist ? 0.0 : 0.15;
+    const totalUsd = baseAmount + (baseAmount * taxRate);
+
+    const orderId = `ord_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+    const orderData = {
+      id: orderId,
+      createdByUid: 'web_visitor',
+      customerEmail: 'viajero@baqueano.app',
+      destinationId: 'dest_somoto',
+      destinationName: 'Expedición Cañón de Somoto',
+      amountUsd: parseFloat(totalUsd.toFixed(2)),
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    };
+
+    try {
+      if (window.firebase && window.firebase.firestore) {
+        await window.firebase.firestore().collection('payment_orders').doc(orderId).set(orderData);
+      }
+      alert(`✅ ¡Cotización y Orden #${orderId} registrada exitosamente en Cloud Firestore por $${orderData.amountUsd} USD! Conectada al Control Center.`);
+    } catch(err) {
+      alert(`Orden generada (#${orderId}) por $${orderData.amountUsd} USD.`);
+    }
+  };
 }

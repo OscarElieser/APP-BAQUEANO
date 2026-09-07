@@ -41,14 +41,97 @@ export interface Destination {
   readonly updatedAtIso: string;
 }
 
-export interface Business {
-  readonly id: string;
-  readonly ownerId: string;
+export interface PlaceRecord {
+  readonly placeId: string;
   readonly name: string;
-  readonly territory: string;
-  readonly type: "hostal" | "comedor" | "guia" | "transporte" | "artesania";
-  readonly status: PublishStatus;
-  readonly contactPhone: string;
+  readonly categoryId: string;
+  readonly categoryName: string;
+  readonly subcategory: string;
+  readonly description: string;
+  readonly departmentId: string;
+  readonly departmentName: string;
+  readonly municipalityId: string;
+  readonly municipalityName: string;
+  readonly address: string;
+  readonly latitude: number;
+  readonly longitude: number;
+  readonly geohash: string;
+  readonly phone?: string | null;
+  readonly whatsapp?: string | null;
+  readonly website?: string | null;
+  readonly imageUrl: string;
+  readonly imageUrls: readonly string[];
+  readonly openingHours?: string | null;
+  readonly is24Hours: boolean;
+  readonly isOpen: boolean;
+  readonly isEmergency: boolean;
+  readonly isTourist: boolean;
+  readonly isCommercial: boolean;
+  readonly verified: boolean;
+  readonly verificationSource?: string | null;
+  readonly sourceUrl?: string | null;
+  readonly lastVerifiedAt?: string | null;
+  readonly rating: number;
+  readonly reviewCount: number;
+  readonly status: "published" | "draft" | "archived";
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly distanceKm?: number;
+  readonly seoSlug?: string | null;
+}
+
+export interface CategoryRecord {
+  readonly categoryId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly icon: string;
+  readonly type: "culture" | "commerce" | "entertainment" | "health" | "emergency" | "transport";
+  readonly order: number;
+  readonly active: boolean;
+}
+
+export interface DepartmentRecord {
+  readonly id: string;
+  readonly name: string;
+  readonly zone: string;
+  readonly capital: string;
+  readonly latitude: number;
+  readonly longitude: number;
+}
+
+export interface MunicipalityRecord {
+  readonly id: string;
+  readonly departmentId: string;
+  readonly name: string;
+  readonly latitude: number;
+  readonly longitude: number;
+}
+
+export interface BusinessRecord {
+  readonly id: string;
+  readonly ownerUid: string;
+  readonly name: string;
+  readonly description: string;
+  readonly category: string;
+  readonly department: string;
+  readonly municipality: string;
+  readonly address: string;
+  readonly phone: string;
+  readonly email: string;
+  readonly website?: string | null;
+  readonly imageUrl: string;
+  readonly galleryUrls: readonly string[];
+  readonly status: "pending_review" | "published" | "archived";
+  readonly verified: boolean;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface UserSavedPlace {
+  readonly id: string;
+  readonly userId: string;
+  readonly placeId: string;
+  readonly savedAt: string;
 }
 
 export interface Territory {
@@ -79,26 +162,41 @@ export interface Reservation {
   readonly status: "pending" | "confirmed" | "cancelled" | "completed";
 }
 
-export interface Payment {
+export interface PaymentOrderRecord {
   readonly id: string;
-  readonly reservationId: string;
+  readonly createdByUid: string;
+  readonly customerEmail: string;
+  readonly destinationId: string;
+  readonly destinationName: string;
   readonly amountUsd: number;
-  readonly status: "pending" | "paid" | "failed" | "refunded";
+  readonly status: "pending" | "paid" | "cancelled";
+  readonly createdAt: string;
 }
 
-export interface Subscription {
+export interface BusinessSubscriptionRecord {
   readonly id: string;
   readonly businessId: string;
   readonly plan: "starter" | "growth" | "alliance";
   readonly status: "active" | "past_due" | "cancelled";
+  readonly validUntil: string;
+  readonly autoRenew: boolean;
 }
 
 export interface AuditLog {
   readonly id: string;
   readonly actorId: string;
+  readonly actorEmail: string;
   readonly actorRole: UserRole;
   readonly action: string;
   readonly collection: string;
   readonly documentId: string;
+  readonly metadata?: Record<string, unknown>;
   readonly createdAtIso: string;
+}
+
+export interface DataResult<T> {
+  readonly source: "firestore" | "seed";
+  readonly isConnected: boolean;
+  readonly items: readonly T[];
+  readonly warning?: string;
 }

@@ -278,3 +278,48 @@ function initSmoothScroll() {
     });
   });
 }
+
+window.toggleFavoriteReal = async function(placeId, btnElement) {
+  try {
+    const auth = window.firebase && window.firebase.auth ? window.firebase.auth() : null;
+    const user = auth ? auth.currentUser : null;
+    const icon = btnElement ? btnElement.querySelector('i') : null;
+
+    if (!user) {
+      const local = JSON.parse(localStorage.getItem('baqueano_favs') || '[]');
+      if (local.includes(placeId)) {
+        const next = local.filter(id => id !== placeId);
+        localStorage.setItem('baqueano_favs', JSON.stringify(next));
+        if (icon) { icon.className = 'fa-regular fa-heart'; icon.style.color = ''; }
+        alert('Destino removido de tus favoritos locales.');
+      } else {
+        local.push(placeId);
+        localStorage.setItem('baqueano_favs', JSON.stringify(local));
+        if (icon) { icon.className = 'fa-solid fa-heart'; icon.style.color = '#EF4444'; }
+        alert('Destino guardado en favoritos. (Inicia sesión para sincronizarlo con tu perfil en la nube).');
+      }
+      return;
+    }
+
+    const db = window.firebase.firestore();
+    const savedId = `${user.uid}_${placeId}`;
+    const docRef = db.collection('user_saved_places').doc(savedId);
+    const snap = await docRef.get();
+
+    if (snap.exists) {
+      await docRef.delete();
+      if (icon) { icon.className = 'fa-regular fa-heart'; icon.style.color = ''; }
+      alert('Removido de tus favoritos en Cloud Firestore.');
+    } else {
+      await docRef.set({
+        userId: user.uid,
+        placeId: placeId,
+        savedAt: new Date().toISOString()
+      });
+      if (icon) { icon.className = 'fa-solid fa-heart'; icon.style.color = '#EF4444'; }
+      alert('¡Destino guardado en tu perfil de Cloud Firestore!');
+    }
+  } catch(err) {
+    console.error('Error al gestionar favorito:', err);
+  }
+};

@@ -39,8 +39,79 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <!-- Leaflet.js — Mapa Interactivo Open Source (sin API Key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Sección del Mapa Interactivo */
+    .map-section-wrapper {
+      margin-top: 5rem;
+      border: 1px solid rgba(22, 93, 111, 0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .map-header-bar {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(22, 93, 111, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    .map-header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+    }
+    .map-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+    }
+    .map-source-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-tech);
+    }
+    .map-source-badge.firestore { color: #10B981; }
+    .map-source-badge.seed { color: var(--arena-pinolera); }
+    #baqueanoInteractiveMap {
+      height: 420px;
+      width: 100%;
+      background: #0F172A;
+    }
+    /* Personalización del popup de Leaflet */
+    .leaflet-popup-content-wrapper {
+      background: rgba(15, 23, 42, 0.97) !important;
+      border: 1px solid rgba(22, 93, 111, 0.4) !important;
+      border-radius: 12px !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    }
+    .leaflet-popup-tip { background: rgba(15, 23, 42, 0.97) !important; }
+    .leaflet-popup-content { margin: 0 !important; }
+    .map-popup-inner { padding: 0.8rem 0.5rem; }
+    .map-popup-name { font-weight: 700; color: #FFFFFF; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .map-popup-dept { font-size: 0.78rem; color: var(--arena-pinolera); margin-bottom: 0.4rem; }
+    .map-popup-price { font-size: 0.82rem; color: #10B981; font-weight: 600; }
+    .leaflet-control-attribution { font-size: 0.65rem !important; }
+  </style>
 </head>
 <body>
 
@@ -219,6 +290,21 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- MAPA INTERACTIVO DE DESTINOS — FIRESTORE EN TIEMPO REAL -->
+        <div class="map-section-wrapper" style="margin-top: 4rem;">
+          <div class="map-header-bar">
+            <div class="map-header-title">
+              <div class="map-live-dot"></div>
+              <i class="fa-solid fa-map-location-dot" style="color: var(--terracotta);"></i>
+              Mapa Interactivo de Destinos Protegidos
+            </div>
+            <div>
+              <span class="map-source-badge" id="mapSourceBadge">Cargando datos...</span>
+            </div>
+          </div>
+          <div id="baqueanoInteractiveMap"></div>
         </div>
 
         <!-- CALCULADORA RURAL DE RETORNO (ROI) -->
@@ -497,10 +583,91 @@
     </div>
   </div>
 
+  <!-- Leaflet.js — Mapa Interactivo -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GqeA=" crossorigin=""></script>
+
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/firestore-realtime.js"></script>
   <script src="js/calculator.js"></script>
   <script src="js/ai-assistant.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    // ========================================================================
+    // 🗺️ INICIALIZACIÓN DEL MAPA INTERACTIVO LEAFLET + FIRESTORE
+    // ========================================================================
+    (function initBaqueanoMap() {
+      // Esperar que el DOM esté listo y Leaflet cargado
+      const mapContainer = document.getElementById('baqueanoInteractiveMap');
+      const sourceBadge = document.getElementById('mapSourceBadge');
+      if (!mapContainer || typeof L === 'undefined') return;
+
+      // Centrado en Nicaragua
+      const map = L.map('baqueanoInteractiveMap', {
+        center: [12.865416, -85.207229],
+        zoom: 7,
+        zoomControl: true,
+        scrollWheelZoom: false
+      });
+
+      // Capa OpenStreetMap (sin API Key requerida)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(map);
+
+      // Icono personalizado Baqueano
+      const baqueanoIcon = L.divIcon({
+        className: '',
+        html: '<div style="width:32px;height:32px;background:linear-gradient(135deg,#165D6F,#F65E01);border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,0.4);"><div style="transform:rotate(45deg);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;">🌿</div></div>',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -36]
+      });
+
+      function addPlaceMarkers(places, source) {
+        places.forEach(place => {
+          if (!place.lat || !place.lng) return;
+
+          const price = place.priceUsd ? `Desde $${place.priceUsd} USD/persona` : 'Consultar precio';
+          const popupHtml = `
+            <div class="map-popup-inner">
+              <div class="map-popup-name">${place.name}</div>
+              <div class="map-popup-dept"><i class="fa-solid fa-location-dot"></i> ${place.department || ''}, Nicaragua</div>
+              <div class="map-popup-price"><i class="fa-solid fa-ticket"></i> ${price}</div>
+            </div>
+          `;
+
+          L.marker([place.lat, place.lng], { icon: baqueanoIcon })
+            .addTo(map)
+            .bindPopup(popupHtml);
+        });
+
+        if (sourceBadge) {
+          sourceBadge.className = `map-source-badge ${source}`;
+          sourceBadge.innerHTML = source === 'firestore'
+            ? '<i class="fa-solid fa-database"></i> Datos en vivo desde Cloud Firestore'
+            : '<i class="fa-solid fa-seedling"></i> Datos semilla (modo offline)';
+        }
+      }
+
+      // Cargar marcadores desde Firestore o datos semilla
+      if (typeof window.BaqueanoFirestore !== 'undefined') {
+        window.BaqueanoFirestore.loadPublishedPlaces(addPlaceMarkers);
+      } else {
+        // Fallback directo con coordenadas conocidas
+        const fallback = [
+          { name: 'Cañón de Somoto', department: 'Madriz', lat: 13.4775, lng: -86.5800, priceUsd: 35 },
+          { name: 'Volcán Cerro Negro', department: 'León', lat: 12.5063, lng: -86.7017, priceUsd: 45 },
+          { name: 'Isla de Ometepe', department: 'Rivas', lat: 11.5206, lng: -85.5700, priceUsd: 55 },
+          { name: 'Cascada La Luna', department: 'Jinotega', lat: 13.3720, lng: -85.6900, priceUsd: 40 },
+          { name: 'Laguna de Apoyo', department: 'Masaya', lat: 11.9333, lng: -86.0333, priceUsd: 30 },
+          { name: 'Volcán Masaya', department: 'Masaya', lat: 11.9854, lng: -86.1614, priceUsd: 20 }
+        ];
+        addPlaceMarkers(fallback, 'seed');
+      }
+    })();
+  </script>
 </body>
 </html>
