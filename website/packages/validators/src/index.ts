@@ -1232,7 +1232,366 @@ export type HumanConfirmationRequestInput = z.infer<typeof humanConfirmationRequ
 export type AgenticWorkflowInput = z.infer<typeof agenticWorkflowSchema>;
 export type AgentTraceLogInput = z.infer<typeof agentTraceLogSchema>;
 
+// ============================================================================
+// 🧭 PREDICTIVE INTELLIGENCE & SIMULATION VALIDATORS (FASE 16)
+// ============================================================================
 
+export const epistemologicalLabelEnum = z.enum([
+  "OBSERVADO",
+  "ESTIMADO",
+  "PRONOSTICADO",
+  "SIMULADO",
+  "DESCONOCIDO"
+]);
 
+export const forecastConfidenceLevelEnum = z.enum([
+  "HIGH",
+  "MODERATE",
+  "LOW",
+  "INSUFFICIENT_DATA"
+]);
 
+export const dataReadinessStatusEnum = z.enum([
+  "READY",
+  "PARTIAL",
+  "INSUFFICIENT",
+  "SIMULATED_ONLY"
+]);
 
+export const modelLifecycleStateEnum = z.enum([
+  "EXPERIMENTAL",
+  "VALIDATING",
+  "APPROVED",
+  "ACTIVE",
+  "DEPRECATED",
+  "DISABLED"
+]);
+
+export const modelHealthStateEnum = z.enum([
+  "HEALTHY",
+  "DEGRADED",
+  "STALE",
+  "DISABLED"
+]);
+
+export const saturationLevelEnum = z.enum([
+  "LOW",
+  "MODERATE",
+  "HIGH",
+  "VERY_HIGH",
+  "UNKNOWN"
+]);
+
+export const forecastHorizonEnum = z.enum(["24H", "7D", "30D"]);
+
+export const demandSignalRecordSchema = z.object({
+  id: z.string().min(1),
+  destinationId: z.string().min(1),
+  territoryId: z.string().min(1),
+  date: z.string(),
+  pageViews: z.number().int().nonnegative(),
+  searchCount: z.number().int().nonnegative(),
+  favoritesCount: z.number().int().nonnegative(),
+  mapInteractions: z.number().int().nonnegative(),
+  contactRequests: z.number().int().nonnegative(),
+  weightConfigRef: z.string().min(1),
+  aggregatedSignalScore: z.number().min(0)
+});
+
+export const aggregatedDemandForecastSchema = z.object({
+  id: z.string().min(1),
+  destinationId: z.string().min(1),
+  territoryId: z.string().min(1),
+  horizon: forecastHorizonEnum,
+  forecastTarget: z.string().min(1),
+  baselineValue: z.number().min(0),
+  predictedValue: z.number().min(0),
+  intervalMin: z.number().min(0),
+  intervalMax: z.number().min(0),
+  confidence: forecastConfidenceLevelEnum,
+  modelVersion: z.string().min(1),
+  datasetVersion: z.string().min(1),
+  epistemologicalLabel: epistemologicalLabelEnum,
+  generatedAt: z.string(),
+  limitations: z.array(z.string()).default([])
+});
+
+export const capacityForecastRecordSchema = z.object({
+  destinationId: z.string().min(1),
+  territoryId: z.string().min(1),
+  horizon: forecastHorizonEnum,
+  validatedCapacity: z.number().nullable(),
+  predictedDemand: z.number().min(0),
+  utilizationRate: z.number().nullable(),
+  saturationLevel: saturationLevelEnum,
+  bottleneckFactors: z.array(z.string()).default([]),
+  generatedAt: z.string()
+});
+
+export const territorialPressureIndexSchema = z.object({
+  territoryId: z.string().min(1),
+  destinationId: z.string().min(1),
+  pressureScore: z.number().min(0).max(100),
+  pressureLevel: z.enum(["LOW", "MODERATE", "HIGH", "CRITICAL", "UNKNOWN"]),
+  demandFactor: z.number().min(0).max(1),
+  environmentalFactor: z.number().min(0).max(1),
+  capacityFactor: z.number().min(0).max(1),
+  seasonalityFactor: z.number().min(0).max(1),
+  calculatedAt: z.string(),
+  epistemologicalLabel: epistemologicalLabelEnum
+});
+
+export const simulationScenarioParametersSchema = z.object({
+  demandMultiplier: z.number().min(0.1).max(3.0),
+  capacityMultiplier: z.number().min(0.1).max(2.0),
+  destinationAvailability: z.record(z.string(), z.boolean()),
+  routeClosure: z.array(z.string()).default([]),
+  weatherDisruptionLevel: z.enum(["NONE", "MODERATE", "SEVERE"]).default("NONE"),
+  targetRedistributionPercent: z.number().min(0).max(50).default(0)
+});
+
+export const simulationScenarioRecordSchema = z.object({
+  scenarioId: z.string().min(1),
+  name: z.string().min(1).max(100),
+  description: z.string().min(1).max(500),
+  baselineSnapshotId: z.string().min(1),
+  assumptions: z.array(z.string()).min(1),
+  parameters: simulationScenarioParametersSchema,
+  result: z.object({
+    projectedDemand: z.number().min(0),
+    projectedCapacityUtilization: z.number().min(0),
+    affectedTerritories: z.array(z.string()),
+    redistributionSuggestions: z.array(
+      z.object({
+        sourceDestinationId: z.string(),
+        targetDestinationId: z.string(),
+        divertedInterestPercent: z.number().min(0).max(100),
+        estimatedCapacityRelief: z.number().min(0)
+      })
+    ),
+    riskLevel: z.enum(["LOW", "MODERATE", "HIGH", "ELEVATED"]),
+    simulatedAt: z.string()
+  }),
+  createdAt: z.string(),
+  createdBy: z.string().min(1),
+  isSimulatedData: z.literal(true)
+});
+
+export const predictiveModelRegistrySchema = z.object({
+  modelId: z.string().min(1),
+  name: z.string().min(1),
+  target: z.string().min(1),
+  version: z.string().min(1),
+  state: modelLifecycleStateEnum,
+  health: modelHealthStateEnum,
+  baselineAlgorithm: z.string().min(1),
+  baselineMae: z.number().min(0),
+  modelMae: z.number().min(0),
+  modelMape: z.number().min(0),
+  lastBacktestDate: z.string(),
+  modelCardRef: z.string().min(1),
+  killSwitchActive: z.boolean().default(false)
+});
+
+export const predictiveSignalRecordSchema = z.object({
+  id: z.string().min(1),
+  territoryId: z.string().min(1),
+  destinationId: z.string().min(1),
+  signalType: z.enum(["CAPACITY_PRESSURE", "SEASONAL_SURGE", "WEATHER_IMPACT", "ROUTE_SATURATION"]),
+  severity: z.enum(["INFO", "WARNING", "CRITICAL"]),
+  confidence: forecastConfidenceLevelEnum,
+  message: z.string().min(1),
+  recommendedAction: z.string().min(1),
+  triggeredAt: z.string()
+});
+
+export const predictiveCostForecastSchema = z.object({
+  serviceName: z.enum(["Firestore", "AIGateway", "Maps", "Compute"]),
+  month: z.string().min(4),
+  estimatedCostUsdMin: z.number().min(0),
+  estimatedCostUsdMax: z.number().min(0),
+  budgetThresholdUsd: z.number().min(0),
+  budgetAlert: z.boolean(),
+  generatedAt: z.string()
+});
+
+// ============================================================================
+// FASE 17: SPATIAL INTELLIGENCE & ADVANCED GIS SCHEMAS
+// ============================================================================
+
+export const geoQualityStatusSchema = z.enum(["VALID", "SUSPECT", "INVALID", "UNKNOWN"]);
+export const locationConfidenceSchema = z.enum(["exact", "approximate", "territory-only", "unknown"]);
+export const geoProvenanceSchema = z.enum(["manual", "geocoded", "field_verified", "partner", "official"]);
+export const transportModeSchema = z.enum(["driving", "walking", "cycling", "multimodal"]);
+export const routeTypeSchema = z.enum(["FASTEST", "SCENIC", "CULTURAL", "ADVENTURE", "COMMUNITY", "LOW_PRESSURE"]);
+export const corridorStatusSchema = z.enum(["DRAFT", "UNDER_REVIEW", "PUBLISHED", "ARCHIVED"]);
+export const accessibilityLevelSchema = z.enum(["HIGH_ACCESS", "MODERATE", "LIMITED", "UNKNOWN"]);
+export const serviceGapCategorySchema = z.enum(["health", "police", "firefighters", "red_cross", "lodging", "food"]);
+
+export const geoBoundingBoxSchema = z.object({
+  minLat: z.number().min(-90).max(90),
+  maxLat: z.number().min(-90).max(90),
+  minLng: z.number().min(-180).max(180),
+  maxLng: z.number().min(-180).max(180)
+});
+
+export const spatialCoordinateRecordSchema = z.object({
+  latitude: z.number().finite().min(-90).max(90),
+  longitude: z.number().finite().min(-180).max(180),
+  geohash: z.string().default(""),
+  countryId: z.string().min(2),
+  territoryId: z.string().min(1),
+  municipalityId: z.string().optional(),
+  qualityStatus: geoQualityStatusSchema,
+  confidence: locationConfidenceSchema,
+  provenance: geoProvenanceSchema,
+  isSensitive: z.boolean().default(false),
+  verifiedAt: z.string().nullable().optional(),
+  verificationNote: z.string().nullable().optional()
+});
+
+export const isochronePolygonSchema = z.object({
+  origin: z.object({
+    latitude: z.number().min(-90).max(90),
+    longitude: z.number().min(-180).max(180)
+  }),
+  originName: z.string().min(1),
+  travelMode: transportModeSchema,
+  timeLimitMinutes: z.union([z.literal(15), z.literal(30), z.literal(45), z.literal(60)]),
+  coordinates: z.array(z.tuple([z.number(), z.number()])),
+  boundingBox: geoBoundingBoxSchema,
+  reachableDestinationsCount: z.number().int().min(0),
+  reachableDestinations: z.array(z.string()),
+  generatedAt: z.string(),
+  isEstimated: z.literal(true)
+});
+
+export const spatialRouteSchema = z.object({
+  routeId: z.string().min(1),
+  name: z.string().min(1),
+  originName: z.string().min(1),
+  destinationName: z.string().min(1),
+  routeType: routeTypeSchema,
+  totalDistanceKm: z.number().min(0),
+  totalDurationMinutes: z.number().min(0),
+  waypoints: z.array(
+    z.object({
+      id: z.string().min(1),
+      name: z.string().min(1),
+      coordinates: z.object({
+        latitude: z.number().min(-90).max(90),
+        longitude: z.number().min(-180).max(180)
+      }),
+      order: z.number().int().min(0),
+      stopDurationMinutes: z.number().optional(),
+      isCulturalStop: z.boolean().optional(),
+      isLocalBusiness: z.boolean().optional()
+    })
+  ),
+  segments: z.array(
+    z.object({
+      fromWaypointId: z.string().min(1),
+      toWaypointId: z.string().min(1),
+      distanceKm: z.number().min(0),
+      durationMinutes: z.number().min(0),
+      mode: transportModeSchema,
+      roadCondition: z.enum(["PAVED", "GRAVEL", "DIRT", "WATERWAY"]).optional(),
+      safetyAlertId: z.string().nullable().optional(),
+      geometryCoordinates: z.array(z.tuple([z.number(), z.number()]))
+    })
+  ),
+  elevationGainMeters: z.number().optional(),
+  elevationLossMeters: z.number().optional(),
+  scenicScore: z.number().min(0).max(100).optional(),
+  culturalScore: z.number().min(0).max(100).optional(),
+  sustainabilityScore: z.number().min(0).max(100).optional(),
+  confidence: z.enum(["HIGH", "ESTIMATED", "PARTIAL"]),
+  activeAlertsCount: z.number().int().min(0),
+  activeAlerts: z.array(z.string()),
+  disclaimer: z.string().min(1),
+  generatedAt: z.string()
+});
+
+export const tourismCorridorSchema = z.object({
+  corridorId: z.string().min(1),
+  slug: z.string().min(1),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  countryId: z.string().min(2),
+  territories: z.array(z.string()),
+  theme: z.enum(["VOLCANOES", "COFFEE", "CRAFTS", "CARIBBEAN", "HERITAGE", "COMMUNITY"]),
+  places: z.array(z.string()),
+  stops: z.array(
+    z.object({
+      placeId: z.string().min(1),
+      name: z.string().min(1),
+      territory: z.string().min(1),
+      role: z.enum(["GATEWAY", "PRIMARY_HUB", "COMMUNITY_STOP", "SCENIC_LOOKOUT"]),
+      coordinates: z.object({
+        latitude: z.number().min(-90).max(90),
+        longitude: z.number().min(-180).max(180)
+      })
+    })
+  ),
+  totalDistanceKm: z.number().min(0),
+  suggestedDurationDays: z.number().min(1),
+  sustainabilityRating: z.number().min(0).max(100),
+  status: corridorStatusSchema,
+  publishedAt: z.string().nullable().optional(),
+  reviewedBy: z.string().nullable().optional(),
+  routeGeometryRef: z.string().optional(),
+  culturalHighlights: z.array(z.string()),
+  localPartnerCount: z.number().int().min(0),
+  createdAt: z.string(),
+  updatedAt: z.string()
+});
+
+export const territorialAccessibilitySchema = z.object({
+  territoryId: z.string().min(1),
+  territoryName: z.string().min(1),
+  accessibilityLevel: accessibilityLevelSchema,
+  accessibilityIndex: z.number().min(0).max(100),
+  primaryRoadAccess: z.boolean(),
+  averageTravelTimeToCapitalMinutes: z.number().min(0),
+  publicTransportCoverageScore: z.number().min(0).max(100),
+  digitalConnectivityScore: z.number().min(0).max(100),
+  emergencyServicesWithin30Min: z.number().int().min(0),
+  healthCentersCount: z.number().int().min(0),
+  policeStationsCount: z.number().int().min(0),
+  fireStationsCount: z.number().int().min(0),
+  totalTouristAttractions: z.number().int().min(0),
+  lastEvaluatedAt: z.string(),
+  evaluationSource: z.enum(["OFFICIAL_SURVEY", "FIELD_VALIDATION", "INFRASTRUCTURE_AUDIT"])
+});
+
+export const serviceGapAnalysisSchema = z.object({
+  gapId: z.string().min(1),
+  territoryId: z.string().min(1),
+  territoryName: z.string().min(1),
+  destinationId: z.string().min(1),
+  destinationName: z.string().min(1),
+  destinationCoordinates: z.object({
+    latitude: z.number().min(-90).max(90),
+    longitude: z.number().min(-180).max(180)
+  }),
+  missingCategory: serviceGapCategorySchema,
+  nearestServiceDistanceKm: z.number().min(0),
+  nearestServiceEstimatedMinutes: z.number().min(0),
+  nearestServiceName: z.string().min(1),
+  severity: z.enum(["LOW", "MODERATE", "HIGH"]),
+  recommendedMitigation: z.string().min(1),
+  isPlanningOnly: z.literal(true),
+  detectedAt: z.string()
+});
+
+export const spatialCoverageSchema = z.object({
+  territoryId: z.string().min(1),
+  territoryName: z.string().min(1),
+  totalDestinations: z.number().int().min(0),
+  totalVerifiedBusinesses: z.number().int().min(0),
+  totalSmartPoints: z.number().int().min(0),
+  whiteSpotsDetected: z.number().int().min(0),
+  fieldResearchQueueCount: z.number().int().min(0),
+  coveragePercentage: z.number().min(0).max(100),
+  lastAuditedAt: z.string()
+});
