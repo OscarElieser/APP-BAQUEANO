@@ -24,6 +24,7 @@ export const publicRoutes = [
 
 export const adminModules = [
   "dashboard",
+  "control-tower",
   "destinos",
   "negocios",
   "mi-negocio",
@@ -57,12 +58,15 @@ export const firestoreCollections = {
   reservations: "reservations",
   paymentOrders: "payment_orders",
   paymentTransactions: "payment_transactions",
-  auditLogs: "audit_logs"
+  auditLogs: "audit_logs",
+  incidents: "incidents",
+  alerts: "alerts",
+  territorialStates: "territorial_states"
 } as const;
 
 export const roleAccess: Record<UserRole, readonly string[]> = {
   super_admin: adminModules,
-  admin: ["dashboard", "destinos", "negocios", "usuarios", "categorias", "historia", "gastronomia", "cultura", "sostenibilidad", "multimedia", "auditoria"],
+  admin: ["dashboard", "control-tower", "destinos", "negocios", "usuarios", "categorias", "historia", "gastronomia", "cultura", "sostenibilidad", "multimedia", "auditoria"],
   host: ["dashboard", "mi-negocio", "reservas", "multimedia", "suscripciones"],
   explorer: ["dashboard"]
 };

@@ -3,10 +3,10 @@
  * Keeps public web, admin, and Android-aligned Firestore records compatible.
  *
  * HOW
- * Defines strict TypeScript contracts with stable ids, slugs, roles, and status fields.
+ * Defines strict TypeScript contracts with stable ids, slugs, roles, status fields, AI, and Control Tower schemas.
  *
  * WHAT
- * Shared models for destinations, businesses, territories, users, payments, and audits.
+ * Shared models for destinations, businesses, territories, users, payments, reviews, notifications, AI itineraries, incidents, alerts, and audits.
  */
 export type UserRole = "super_admin" | "admin" | "host" | "explorer";
 
@@ -152,6 +152,8 @@ export interface BaqueanoUser {
   readonly createdAtIso: string;
 }
 
+export type ReservationStatus = "requested" | "pending_confirmation" | "confirmed" | "cancelled" | "completed" | "expired";
+
 export interface Reservation {
   readonly id: string;
   readonly destinationId: string;
@@ -159,7 +161,49 @@ export interface Reservation {
   readonly hostId: string;
   readonly dateIso: string;
   readonly people: number;
-  readonly status: "pending" | "confirmed" | "cancelled" | "completed";
+  readonly status: "pending" | "confirmed" | "cancelled" | "completed" | ReservationStatus;
+  readonly serviceName?: string;
+  readonly currency?: "NIO" | "USD";
+  readonly unitPrice?: number;
+  readonly totalPrice?: number;
+  readonly notes?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+}
+
+export type NotificationType =
+  | "reservation_requested"
+  | "reservation_confirmed"
+  | "reservation_cancelled"
+  | "business_verified"
+  | "subscription_expiring"
+  | "review_received"
+  | "system_alert";
+
+export interface NotificationRecord {
+  readonly id: string;
+  readonly recipientUid: string;
+  readonly type: NotificationType;
+  readonly title: string;
+  readonly body: string;
+  readonly read: boolean;
+  readonly resourcePath?: string;
+  readonly createdAt: string;
+}
+
+export interface ReviewRecord {
+  readonly id: string;
+  readonly userId: string;
+  readonly userName: string;
+  readonly businessId?: string;
+  readonly placeId?: string;
+  readonly reservationId?: string;
+  readonly rating: number; // 1 to 5
+  readonly comment: string;
+  readonly status: "pending" | "published" | "flagged" | "rejected";
+  readonly isVerifiedVisit: boolean;
+  readonly hostReply?: string;
+  readonly createdAt: string;
 }
 
 export interface PaymentOrderRecord {
@@ -173,6 +217,20 @@ export interface PaymentOrderRecord {
   readonly createdAt: string;
 }
 
+export type PaymentProvider = "bac" | "lafise" | "banpro" | "sandbox";
+
+export interface PaymentTransactionRecord {
+  readonly id: string;
+  readonly orderId: string;
+  readonly provider: PaymentProvider;
+  readonly transactionReference: string;
+  readonly amount: number;
+  readonly currency: "NIO" | "USD";
+  readonly status: "pending" | "authorized" | "paid" | "failed" | "refunded";
+  readonly maskedCard?: string;
+  readonly timestamp: string;
+}
+
 export interface BusinessSubscriptionRecord {
   readonly id: string;
   readonly businessId: string;
@@ -180,6 +238,146 @@ export interface BusinessSubscriptionRecord {
   readonly status: "active" | "past_due" | "cancelled";
   readonly validUntil: string;
   readonly autoRenew: boolean;
+}
+
+// ============================================================================
+// 🧭 AI & COPILOTO TERRITORIAL (FASE 8)
+// ============================================================================
+
+export interface TripProfile {
+  readonly days: number;
+  readonly groupSize: number;
+  readonly budgetUsd: number;
+  readonly currency: "USD" | "NIO";
+  readonly department?: string;
+  readonly interests: readonly string[];
+  readonly travelStyle: "relajado" | "aventura" | "cultural" | "ecologico";
+  readonly restrictions?: string;
+}
+
+export interface ItineraryStop {
+  readonly placeId: string;
+  readonly placeName: string;
+  readonly department: string;
+  readonly timeOfDay: "morning" | "afternoon" | "evening";
+  readonly description: string;
+  readonly estimatedCostUsd: number;
+  readonly coordinates: GeoPointLike;
+  readonly source: "verified_database";
+}
+
+export interface ItineraryDayPlan {
+  readonly dayNumber: number;
+  readonly theme: string;
+  readonly stops: readonly ItineraryStop[];
+  readonly dayBudgetUsd: number;
+}
+
+export type RiskLevel = "low" | "moderate" | "high" | "unknown";
+
+export interface RiskAssessment {
+  readonly level: RiskLevel;
+  readonly explanation: string;
+  readonly factors: readonly string[];
+  readonly recommendations: readonly string[];
+}
+
+export interface ItineraryResponse {
+  readonly title: string;
+  readonly summary: string;
+  readonly totalDays: number;
+  readonly days: readonly ItineraryDayPlan[];
+  readonly totalEstimatedBudgetUsd: number;
+  readonly totalEstimatedBudgetNio: number;
+  readonly risk: RiskAssessment;
+  readonly sustainabilityTips: readonly string[];
+  readonly localContactsSuggested: readonly string[];
+  readonly sourcesCount: number;
+  readonly generatedAtIso: string;
+}
+
+// ============================================================================
+// 🧭 CONTROL TOWER & OPERACIONES TERRITORIALES (FASE 9)
+// ============================================================================
+
+export type IncidentType =
+  | "DATA_ERROR"
+  | "BUSINESS_REPORT"
+  | "DESTINATION_CLOSED"
+  | "MAP_ERROR"
+  | "RESERVATION_ISSUE"
+  | "SAFETY_REPORT"
+  | "SYSTEM_FAILURE"
+  | "CONTENT_REPORT";
+
+export type IncidentSeverity = "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+
+export type IncidentStatus = "OPEN" | "ACKNOWLEDGED" | "INVESTIGATING" | "RESOLVED" | "CLOSED";
+
+export interface IncidentRecord {
+  readonly id: string;
+  readonly type: IncidentType;
+  readonly title: string;
+  readonly description: string;
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly placeId?: string;
+  readonly businessId?: string;
+  readonly severity: IncidentSeverity;
+  readonly status: IncidentStatus;
+  readonly source: "system" | "community" | "host" | "admin";
+  readonly reportedByEmail?: string;
+  readonly assignedToEmail?: string;
+  readonly resolutionNotes?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly resolvedAt?: string;
+}
+
+export type AlertType = "system" | "weather" | "capacity" | "safety" | "freshness";
+
+export type AlertSeverity = "info" | "warning" | "critical";
+
+export interface AlertRecord {
+  readonly id: string;
+  readonly type: AlertType;
+  readonly severity: AlertSeverity;
+  readonly territoryId?: string;
+  readonly territoryName?: string;
+  readonly message: string;
+  readonly source: "system_monitor" | "official_ineter" | "community";
+  readonly acknowledged: boolean;
+  readonly createdAt: string;
+  readonly expiresAt?: string;
+}
+
+export type TerritoryOperationalStatus = "NORMAL" | "ATTENTION" | "DEGRADED" | "CRITICAL" | "UNKNOWN";
+
+export type DemandSignalLevel = "LOW" | "NORMAL" | "HIGH" | "VERY_HIGH";
+
+export type CapacityLevel = "AVAILABLE" | "LIMITED" | "FULL" | "UNKNOWN";
+
+export interface TerritoryOperationalState {
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly status: TerritoryOperationalStatus;
+  readonly activePlacesCount: number;
+  readonly activeBusinessesCount: number;
+  readonly openIncidentsCount: number;
+  readonly activeAlertsCount: number;
+  readonly demandLevel: DemandSignalLevel;
+  readonly capacityStatus: CapacityLevel;
+  readonly coordinates: GeoPointLike;
+  readonly updatedAt: string;
+}
+
+export interface SystemHealthStatus {
+  readonly serviceName: string;
+  readonly status: "HEALTHY" | "DEGRADED" | "DOWN" | "UNKNOWN";
+  readonly latencyMs: number;
+  readonly errorRatePercent: number;
+  readonly lastCheckedIso: string;
+  readonly version: string;
 }
 
 export interface AuditLog {
