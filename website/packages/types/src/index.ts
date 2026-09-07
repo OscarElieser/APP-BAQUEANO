@@ -398,3 +398,510 @@ export interface DataResult<T> {
   readonly items: readonly T[];
   readonly warning?: string;
 }
+
+// ============================================================================
+// 🧭 ENTERPRISE ARCHITECTURE & MULTI-ORGANIZACIÓN (FASE 10)
+// ============================================================================
+
+export type OrganizationType =
+  | "central_platform"
+  | "institution_official"
+  | "municipality"
+  | "cooperative"
+  | "territorial_operator"
+  | "tourism_association";
+
+export type OrganizationStatus = "active" | "pending_verification" | "suspended" | "archived";
+
+export interface OrganizationRecord {
+  readonly id: string;
+  readonly name: string;
+  readonly legalName: string;
+  readonly type: OrganizationType;
+  readonly status: OrganizationStatus;
+  readonly territories: readonly string[];
+  readonly permissions: readonly string[];
+  readonly contactEmail: string;
+  readonly contactPhone?: string;
+  readonly taxId?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export type OrganizationMemberRole = "org_admin" | "org_operator" | "org_auditor" | "org_member";
+
+export interface OrganizationMembership {
+  readonly id: string;
+  readonly organizationId: string;
+  readonly userId: string;
+  readonly role: OrganizationMemberRole;
+  readonly status: "active" | "invited" | "suspended";
+  readonly scope: readonly string[];
+  readonly assignedAt: string;
+}
+
+export type ApiKeyScope = "places.read" | "businesses.read" | "territories.read" | "alerts.read" | "reservations.manage";
+
+export type ApiKeyStatus = "active" | "revoked" | "expired";
+
+export interface ApiKeyRecord {
+  readonly id: string;
+  readonly organizationId: string;
+  readonly keyPrefix: string;
+  readonly keyHash: string;
+  readonly label: string;
+  readonly scopes: readonly ApiKeyScope[];
+  readonly status: ApiKeyStatus;
+  readonly rateLimitPerMin: number;
+  readonly lastUsedAt?: string;
+  readonly expiresAt?: string;
+  readonly createdAt: string;
+}
+
+export interface PartnerWebhookRecord {
+  readonly id: string;
+  readonly organizationId: string;
+  readonly endpointUrl: string;
+  readonly secretHash: string;
+  readonly subscribedEvents: readonly string[];
+  readonly status: "active" | "failing" | "disabled";
+  readonly failureCount: number;
+  readonly lastDeliveredAt?: string;
+  readonly createdAt: string;
+}
+
+export type DataClassification = "PUBLIC" | "INTERNAL" | "CONFIDENTIAL" | "RESTRICTED";
+
+export interface DataGovernanceRecord {
+  readonly datasetId: string;
+  readonly domainName: string;
+  readonly ownerRole: string;
+  readonly classification: DataClassification;
+  readonly retentionDays: number;
+  readonly containsPii: boolean;
+  readonly sourceOfTruth: string;
+  readonly qualitySlo: string;
+  readonly lastAuditIso: string;
+}
+
+export interface DisasterRecoveryStatus {
+  readonly rtoObjectiveHours: number;
+  readonly rpoObjectiveHours: number;
+  readonly lastRestoreTestIso: string;
+  readonly lastRestoreResult: "PASSED" | "FAILED" | "PENDING";
+  readonly automatedBackupEnabled: boolean;
+  readonly backupLocation: string;
+  readonly killSwitches: Record<string, boolean>;
+}
+
+// ============================================================================
+// 🧭 SMART TOURISM, IoT & TERRITORIO CONECTADO (FASE 11)
+// ============================================================================
+
+export type SmartPointType =
+  | "viewpoint"
+  | "trailhead"
+  | "cultural_site"
+  | "museum"
+  | "community_hub"
+  | "visitor_center"
+  | "safety_point"
+  | "eco_farm"
+  | "business_spot";
+
+export type SmartPointStatus = "active" | "maintenance" | "inactive";
+
+export interface SmartPointRecord {
+  readonly id: string;
+  readonly code: string;
+  readonly name: string;
+  readonly type: SmartPointType;
+  readonly placeId: string;
+  readonly placeName: string;
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly coordinates: GeoPointLike;
+  readonly status: SmartPointStatus;
+  readonly qrEnabled: boolean;
+  readonly nfcEnabled: boolean;
+  readonly audioGuideUrl?: string;
+  readonly emergencyContactPhone?: string;
+  readonly maxCapacityEstimate?: number;
+  readonly currentOccupancyStatus: "low" | "moderate" | "high" | "full" | "unknown";
+  readonly assignedDeviceIds: readonly string[];
+  readonly totalScansCount: number;
+  readonly lastInteractionAt?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export type IoTDeviceType =
+  | "weather_station"
+  | "footfall_counter"
+  | "river_level_gauge"
+  | "air_quality_monitor"
+  | "edge_gateway"
+  | "kiosk_display";
+
+export type IoTDeviceStatus = "ONLINE" | "DEGRADED" | "OFFLINE" | "MAINTENANCE" | "UNKNOWN";
+
+export interface IoTDeviceRecord {
+  readonly id: string;
+  readonly label: string;
+  readonly type: IoTDeviceType;
+  readonly smartPointId: string;
+  readonly smartPointCode: string;
+  readonly territoryId: string;
+  readonly status: IoTDeviceStatus;
+  readonly batteryPercent?: number;
+  readonly powerSource: "solar" | "battery" | "grid";
+  readonly connectivityType: "cellular_4g" | "wifi" | "lorawan" | "offline_buffer";
+  readonly firmwareVersion?: string;
+  readonly lastSeenAt?: string;
+  readonly lastTelemetryAt?: string;
+  readonly assignedSensors: readonly string[];
+  readonly createdAt: string;
+}
+
+export type SensorType =
+  | "temperature_celsius"
+  | "humidity_relative"
+  | "rainfall_mm"
+  | "river_level_meters"
+  | "air_quality_aqi"
+  | "footfall_hourly"
+  | "battery_voltage";
+
+export type SensorDataQuality = "VALID" | "SUSPECT" | "INVALID" | "UNKNOWN";
+
+export interface SensorRecord {
+  readonly id: string;
+  readonly deviceId: string;
+  readonly type: SensorType;
+  readonly unit: string;
+  readonly minPlausibleValue: number;
+  readonly maxPlausibleValue: number;
+  readonly lastValue?: number;
+  readonly lastQuality: SensorDataQuality;
+  readonly lastReadingAt?: string;
+}
+
+export interface SensorReading {
+  readonly sensorId: string;
+  readonly deviceId: string;
+  readonly type: SensorType;
+  readonly value: number;
+  readonly quality: SensorDataQuality;
+  readonly deviceTimestamp: string;
+  readonly receivedAt: string;
+}
+
+export type FieldTaskType =
+  | "qr_replacement"
+  | "sensor_calibration"
+  | "battery_replacement"
+  | "signage_inspection"
+  | "device_repair"
+  | "point_audit";
+
+export type FieldTaskStatus = "OPEN" | "ASSIGNED" | "IN_PROGRESS" | "DONE" | "CANCELLED";
+
+export interface FieldMaintenanceTask {
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly type: FieldTaskType;
+  readonly smartPointId: string;
+  readonly smartPointCode: string;
+  readonly territoryId: string;
+  readonly priority: "low" | "medium" | "high" | "urgent";
+  readonly status: FieldTaskStatus;
+  readonly assignedToName?: string;
+  readonly assignedToRole?: string;
+  readonly photoEvidenceUrl?: string;
+  readonly resolutionNotes?: string;
+  readonly createdAt: string;
+  readonly completedAt?: string;
+}
+
+export interface EnvironmentalTelemetryFeed {
+  readonly territoryId: string;
+  readonly smartPointId: string;
+  readonly temperatureC?: number;
+  readonly humidityPercent?: number;
+  readonly rainfallMmToday?: number;
+  readonly riverLevelStatus?: "normal" | "caution" | "flooded" | "unknown";
+  readonly footfallCurrentStatus?: "low" | "moderate" | "high" | "unknown";
+  readonly lastEvaluatedAt: string;
+  readonly sourceLabel: "Sensor BAQUEANO" | "Fuente Oficial INETER" | "Estimado Local";
+}
+
+// ============================================================================
+// FASE 12: REGIONAL EXPANSION, COUNTRY MODEL & I18N
+// ============================================================================
+
+export type CountryCode = "NI" | "CR" | "GT" | "HN" | "SV" | "BZ" | "PA";
+
+export type CountryStatus =
+  | "PLANNED"
+  | "CONFIGURING"
+  | "PILOT"
+  | "ACTIVE"
+  | "PAUSED"
+  | "ARCHIVED";
+
+export type CurrencyCode = "NIO" | "CRC" | "GTQ" | "HNL" | "USD" | "BZD" | "PAB";
+
+export type LocaleCode =
+  | "es-NI"
+  | "es-CR"
+  | "es-GT"
+  | "es-HN"
+  | "es-SV"
+  | "es-PA"
+  | "es"
+  | "en";
+
+export interface TerritorialStructureConfig {
+  readonly level1Label: string; // e.g., "Departamento / Región Autónoma", "Provincia", "Distrito"
+  readonly level2Label: string; // e.g., "Municipio", "Cantón"
+  readonly hasIndigenousTerritories: boolean;
+  readonly indigenousTerritoryLabel?: string;
+}
+
+export interface MoneyAmount {
+  readonly amountMinor: number; // Stored in minor currency units (cents / centavos)
+  readonly currency: CurrencyCode;
+}
+
+export interface RegionalCapabilityMap {
+  readonly destinations: boolean;
+  readonly businesses: boolean;
+  readonly reservations: boolean;
+  readonly onlinePayments: boolean;
+  readonly aiAssistant: boolean;
+  readonly iotSensors: boolean;
+  readonly fieldOperations: boolean;
+}
+
+export interface CountryEmergencyInfo {
+  readonly nationalEmergencyPhone: string;
+  readonly policePhone: string;
+  readonly redCrossPhone: string;
+  readonly fireDeptPhone: string;
+  readonly civilProtectionPhone: string;
+  readonly verifiedAt: string;
+}
+
+export interface CountryRecord {
+  readonly id: string; // e.g., "NI", "CR", "GT"
+  readonly code: CountryCode;
+  readonly name: string;
+  readonly officialName: string;
+  readonly status: CountryStatus;
+  readonly defaultLocale: LocaleCode;
+  readonly supportedLocales: readonly LocaleCode[];
+  readonly defaultCurrency: CurrencyCode;
+  readonly supportedCurrencies: readonly CurrencyCode[];
+  readonly timezone: string; // e.g., "America/Managua", "America/Costa_Rica"
+  readonly territorialStructure: TerritorialStructureConfig;
+  readonly capabilities: RegionalCapabilityMap;
+  readonly emergencyInfo: CountryEmergencyInfo;
+  readonly mapCenterCoordinates: {
+    readonly latitude: number;
+    readonly longitude: number;
+    readonly defaultZoom: number;
+  };
+  readonly activePartnersCount: number;
+  readonly verifiedDestinationsCount: number;
+  readonly verifiedBusinessesCount: number;
+  readonly launchStageDate?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export type LocalizationStatus =
+  | "missing"
+  | "draft"
+  | "machine_generated"
+  | "reviewed"
+  | "published";
+
+export interface TranslationRecord {
+  readonly id: string;
+  readonly entityType: "destination" | "territory" | "ui_string" | "category" | "guide";
+  readonly entityId: string;
+  readonly targetLocale: LocaleCode;
+  readonly sourceLocale: LocaleCode;
+  readonly status: LocalizationStatus;
+  readonly translatedFields: Record<string, string>;
+  readonly reviewerNotes?: string;
+  readonly reviewedBy?: string;
+  readonly publishedAt?: string;
+  readonly updatedAt: string;
+}
+
+// ============================================================================
+// FASE 13: OPEN ECOSYSTEM, OPEN DATA, DEVELOPER PLATFORM & RESEARCH
+// ============================================================================
+
+export type DataAccessTier =
+  | "PUBLIC"
+  | "OPEN_DATA_ELIGIBLE"
+  | "PARTNER_SHAREABLE"
+  | "INTERNAL"
+  | "CONFIDENTIAL"
+  | "RESTRICTED";
+
+export type DatasetFormat = "json" | "geojson" | "csv";
+
+export type DatasetLicense = "CC-BY-4.0" | "ODbL-1.0" | "Custom-Baqueano-Open";
+
+export interface OpenDatasetRecord {
+  readonly id: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly description: string;
+  readonly category: "destinations" | "territories" | "culture" | "environment" | "smart_points";
+  readonly format: readonly DatasetFormat[];
+  readonly license: DatasetLicense;
+  readonly updateFrequency: "real-time" | "hourly" | "daily" | "weekly" | "monthly" | "manual";
+  readonly sourceOfTruth: string;
+  readonly recordCount: number;
+  readonly countryScope: readonly CountryCode[];
+  readonly endpointUrl: string;
+  readonly downloadUrlJson?: string;
+  readonly downloadUrlGeoJson?: string;
+  readonly downloadUrlCsv?: string;
+  readonly fieldsDictionary: readonly {
+    readonly fieldName: string;
+    readonly type: string;
+    readonly description: string;
+    readonly example: string;
+  }[];
+  readonly lastGeneratedAt: string;
+  readonly verifiedAt: string;
+}
+
+export interface OpenDataPlaceDTO {
+  readonly id: string;
+  readonly name: string;
+  readonly category: string;
+  readonly countryCode: string;
+  readonly department: string;
+  readonly municipality: string;
+  readonly description: string;
+  readonly coordinates: {
+    readonly latitude: number;
+    readonly longitude: number;
+  };
+  readonly verified: boolean;
+  readonly rating?: number;
+  readonly sustainabilityScore?: number;
+  readonly tags: readonly string[];
+  readonly attribution: string;
+  readonly license: string;
+}
+
+export interface OpenDataSmartPointDTO {
+  readonly id: string;
+  readonly code: string;
+  readonly name: string;
+  readonly type: string;
+  readonly countryCode: string;
+  readonly territory: string;
+  readonly coordinates: {
+    readonly latitude: number;
+    readonly longitude: number;
+  };
+  readonly currentAforoStatus: "low" | "moderate" | "high" | "full" | "unknown";
+  readonly facilities: readonly string[];
+  readonly attribution: string;
+}
+
+export interface GeoJSONFeature<T = Record<string, any>> {
+  readonly type: "Feature";
+  readonly geometry: {
+    readonly type: "Point" | "Polygon" | "MultiPolygon";
+    readonly coordinates: number[] | number[][] | number[][][];
+  };
+  readonly properties: T;
+}
+
+export interface GeoJSONFeatureCollection<T = Record<string, any>> {
+  readonly type: "FeatureCollection";
+  readonly features: readonly GeoJSONFeature<T>[];
+  readonly metadata?: {
+    readonly title: string;
+    readonly license: string;
+    readonly generatedAt: string;
+    readonly totalFeatures: number;
+  };
+}
+
+export type ApiClientStatus = "ACTIVE" | "SUSPENDED" | "REVOKED" | "PENDING";
+
+export type ApiScope =
+  | "open_data.read"
+  | "places.read"
+  | "places.submit"
+  | "territories.read"
+  | "smart_points.read"
+  | "alerts.read"
+  | "businesses.partner.read"
+  | "operations.partner.read"
+  | "research.telemetry.read";
+
+export interface ApiClientRecord {
+  readonly id: string;
+  readonly organizationId?: string;
+  readonly name: string;
+  readonly contactEmail: string;
+  readonly keyPrefix: string;
+  readonly keyHash: string;
+  readonly environment: "sandbox" | "production";
+  readonly status: ApiClientStatus;
+  readonly scopes: readonly ApiScope[];
+  readonly countryScope: readonly CountryCode[];
+  readonly rateLimitPerMin: number;
+  readonly quotaDailyRequests: number;
+  readonly requestsToday: number;
+  readonly lastUsedAt?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export type ResearchAccessTier = "open" | "registered" | "approved_research" | "restricted";
+
+export interface ResearchProjectRecord {
+  readonly id: string;
+  readonly title: string;
+  readonly principalInvestigator: string;
+  readonly institution: string; // University, NGO, or Scientific Institute
+  readonly contactEmail: string;
+  readonly status: "SUBMITTED" | "APPROVED" | "REJECTED" | "COMPLETED" | "EXPIRED";
+  readonly requestedDatasets: readonly string[];
+  readonly accessTier: ResearchAccessTier;
+  readonly purposeDescription: string;
+  readonly kAnonymityComplianceConfirmed: boolean;
+  readonly validFrom?: string;
+  readonly validUntil?: string;
+  readonly approvedBy?: string;
+  readonly createdAt: string;
+}
+
+export interface WebhookSubscriptionRecord {
+  readonly id: string;
+  readonly clientId: string;
+  readonly targetUrl: string;
+  readonly events: readonly ("place.updated" | "public_alert.created" | "smart_point.status_changed")[];
+  readonly status: "ACTIVE" | "FAILING" | "DISABLED";
+  readonly secretHash: string;
+  readonly failureCount: number;
+  readonly lastDeliveredAt?: string;
+  readonly createdAt: string;
+}
+
+
+
+
