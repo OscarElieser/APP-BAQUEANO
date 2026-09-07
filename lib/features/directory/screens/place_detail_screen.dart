@@ -18,6 +18,8 @@
 // - `PlaceDetailScreen`: Pantalla oficial mapeada en `/descubre-nicaragua/:placeId`.
 // ============================================================================
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -547,7 +549,16 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                         infoWindow: InfoWindow(title: place.name),
                       ),
                     },
-                    zoomControlsEnabled: false,
+                    gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                      Factory<OneSequenceGestureRecognizer>(
+                        () => EagerGestureRecognizer(),
+                      ),
+                    },
+                    zoomControlsEnabled: true,
+                    zoomGesturesEnabled: true,
+                    scrollGesturesEnabled: true,
+                    rotateGesturesEnabled: true,
+                    tiltGesturesEnabled: true,
                     myLocationButtonEnabled: false,
                     mapToolbarEnabled: false,
                   ),

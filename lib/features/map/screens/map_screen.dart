@@ -22,6 +22,8 @@
 // - `MapScreen`: Pantalla oficial de cartografía satelital mapeada en `/mapa`.
 // ============================================================================
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -338,7 +340,7 @@ class _MapScreenState extends State<MapScreen> {
                     borderRadius: BorderRadius.circular(24),
                     child: Stack(
                       children: [
-                        // GOOGLE MAP WIDGET NATIVO
+                        // GOOGLE MAP WIDGET NATIVO CON SOPORTE TÁCTIL COMPLETO Y BOTONES
                         GoogleMap(
                           initialCameraPosition: CameraPosition(
                             target: (widget.initialLat != null && widget.initialLng != null)
@@ -353,6 +355,15 @@ class _MapScreenState extends State<MapScreen> {
                           myLocationEnabled: false,
                           myLocationButtonEnabled: false,
                           zoomControlsEnabled: false,
+                          zoomGesturesEnabled: true,
+                          scrollGesturesEnabled: true,
+                          rotateGesturesEnabled: true,
+                          tiltGesturesEnabled: true,
+                          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                            Factory<OneSequenceGestureRecognizer>(
+                              () => EagerGestureRecognizer(),
+                            ),
+                          },
                           compassEnabled: true,
                           mapToolbarEnabled: false,
                         ),
