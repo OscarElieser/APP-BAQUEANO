@@ -15,19 +15,19 @@
 // ============================================================================
 
 import { NextResponse } from "next/server";
-import { getStaticTerritorySummaries } from "../../../../../services/static-territory.service";
+import { getTerritories } from "../../../../../services/territory.service";
 
 export async function GET() {
-  const envelope = getStaticTerritorySummaries();
+  const envelope = await getTerritories();
 
   const publicTerritories = envelope.items.map((t) => ({
     id: t.slug,
     name: t.name,
-    category: t.category,
+    type: t.type,
     countryCode: "NI",
     capital: t.capital,
-    municipalityCount: t.municipalityCount,
-    highlights: t.highlights,
+    culturalSignal: t.culturalSignal,
+    landscape: t.landscape,
     attribution: "Baqueano Nicaragua & División Político-Administrativa Oficial",
     license: "CC-BY-4.0"
   }));

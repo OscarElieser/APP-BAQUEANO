@@ -16,7 +16,7 @@
 import { NextResponse } from "next/server";
 import { OPEN_DATASETS_CATALOG } from "@baqueano/config";
 import { getStaticDestinationPlaces } from "../../../../../../../services/static-destination.service";
-import { getStaticTerritorySummaries } from "../../../../../../../services/static-territory.service";
+import { getTerritories } from "../../../../../../../services/territory.service";
 
 export async function GET(
   request: Request,
@@ -54,13 +54,14 @@ export async function GET(
       verified: p.verified
     }));
   } else if (datasetId === "ds-territories-admin" || dataset.category === "territories") {
-    const envelope = getStaticTerritorySummaries();
+    const envelope = await getTerritories();
     dataRecords = envelope.items.map((t) => ({
       slug: t.slug,
       name: t.name,
-      category: t.category,
+      type: t.type,
       capital: t.capital,
-      municipalityCount: t.municipalityCount
+      culturalSignal: t.culturalSignal,
+      landscape: t.landscape
     }));
   } else {
     dataRecords = [

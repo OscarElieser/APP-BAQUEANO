@@ -814,5 +814,425 @@ export type ResearchProjectInput = z.infer<typeof researchProjectSchema>;
 export type WebhookSubscriptionInput = z.infer<typeof webhookSubscriptionSchema>;
 export type OpenApiQueryInput = z.infer<typeof openApiQuerySchema>;
 
+// ============================================================================
+// 🧭 BAQUEANO TRUST LAYER VALIDATION SCHEMAS (FASE 14)
+// ============================================================================
+
+export const verificationStatusEnum = z.enum([
+  "UNVERIFIED",
+  "SUBMITTED",
+  "UNDER_REVIEW",
+  "VERIFIED",
+  "VERIFICATION_EXPIRED",
+  "REJECTED",
+  "SUSPENDED"
+]);
+
+export const verificationTypeEnum = z.enum([
+  "BAQUEANO_REVIEW",
+  "PARTNER_VERIFIED",
+  "OFFICIAL_SOURCE",
+  "COMMUNITY_VALIDATED",
+  "DOCUMENT_CHECK",
+  "FIELD_VISIT",
+  "SYSTEM_VALIDATED"
+]);
+
+export const verificationEvidenceSchema = z.object({
+  id: z.string().min(1),
+  verificationId: z.string().min(1),
+  type: z.enum(["photo", "document", "geo_point", "field_report", "official_gazette", "partner_certificate"]),
+  source: z.string().min(1),
+  fileUrl: z.string().url().optional(),
+  notes: z.string().optional(),
+  submittedBy: z.string().min(1),
+  submittedAt: z.string().datetime(),
+  reviewedBy: z.string().optional(),
+  reviewedAt: z.string().datetime().optional(),
+  status: z.enum(["PENDING", "ACCEPTED", "REJECTED"]).default("PENDING"),
+  rejectionReason: z.string().optional()
+});
+
+export const verificationRecordSchema = z.object({
+  id: z.string().min(1),
+  resourceType: z.enum(["place", "business", "destination", "experience"]),
+  resourceId: z.string().min(1),
+  countryId: z.enum(["NI", "CR", "GT", "HN", "SV", "BZ", "PA"]),
+  status: verificationStatusEnum.default("UNVERIFIED"),
+  verificationType: verificationTypeEnum,
+  verifiedAt: z.string().datetime().optional(),
+  verifiedBy: z.string().optional(),
+  secondReviewerBy: z.string().optional(),
+  expiresAt: z.string().datetime().optional(),
+  evidenceIds: z.array(z.string()).default([]),
+  revokedAt: z.string().datetime().optional(),
+  revocationReason: z.string().optional(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+
+export const sourceTypeEnum = z.enum([
+  "OFFICIAL",
+  "BAQUEANO_VERIFIED",
+  "VERIFIED_PARTNER",
+  "COMMUNITY",
+  "BUSINESS_SELF_REPORTED",
+  "SYSTEM_DERIVED",
+  "AI_DERIVED",
+  "UNKNOWN"
+]);
+
+export const freshnessStateEnum = z.enum(["fresh", "aging", "stale", "unknown"]);
+
+export const provenanceMetadataSchema = z.object({
+  field: z.string().min(1),
+  sourceType: sourceTypeEnum,
+  verifiedBy: z.string().optional(),
+  lastVerifiedAt: z.string().datetime().optional(),
+  freshnessState: freshnessStateEnum,
+  freshnessDays: z.number().int().min(0)
+});
+
+export const trustBadgeSchema = z.object({
+  badgeId: z.string().min(1),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  issuer: z.string().min(1),
+  category: z.enum(["verification", "freshness", "official", "community"]),
+  criteria: z.string().min(1),
+  validityMonths: z.number().int().min(1),
+  icon: z.string().min(1)
+});
+
+export const externalCertificationSchema = z.object({
+  id: z.string().min(1),
+  resourceId: z.string().min(1),
+  issuerId: z.string().min(1),
+  issuerName: z.string().min(1),
+  countryScope: z.enum(["NI", "CR", "GT", "HN", "SV", "BZ", "PA"]),
+  certificateType: z.string().min(1),
+  certificateNumber: z.string().optional(),
+  status: z.enum(["VALID", "EXPIRED", "REVOKED", "UNDER_REVIEW"]).default("UNDER_REVIEW"),
+  verifiedAt: z.string().datetime(),
+  expiresAt: z.string().datetime().optional()
+});
+
+export const sustainabilityDimensionEnum = z.enum([
+  "environmental",
+  "social",
+  "local_economy",
+  "culture",
+  "accessibility",
+  "responsible_management"
+]);
+
+export const claimStatusEnum = z.enum(["SELF_REPORTED", "UNDER_REVIEW", "VERIFIED", "REJECTED", "EXPIRED"]);
+
+export const sustainabilityClaimSchema = z.object({
+  id: z.string().min(1),
+  resourceId: z.string().min(1),
+  dimension: sustainabilityDimensionEnum,
+  claimText: z.string().min(1),
+  status: claimStatusEnum.default("SELF_REPORTED"),
+  evidenceId: z.string().optional(),
+  verifiedAt: z.string().datetime().optional(),
+  verifiedBy: z.string().optional(),
+  rejectionReason: z.string().optional(),
+  createdAt: z.string().datetime()
+});
+
+export const brtiLevelEnum = z.enum(["INICIAL", "EN_DESARROLLO", "COMPROMISO_ALTO", "REFERENTE"]);
+
+export const responsibleTourismIndexSchema = z.object({
+  id: z.string().min(1),
+  resourceType: z.enum(["place", "destination", "business"]),
+  resourceId: z.string().min(1),
+  indexVersion: z.string().default("1.0.0"),
+  level: brtiLevelEnum,
+  scoreOverall: z.number().min(0).max(100),
+  dimensionScores: z.object({
+    environmental: z.number().min(0).max(100),
+    social: z.number().min(0).max(100),
+    local_economy: z.number().min(0).max(100),
+    culture: z.number().min(0).max(100),
+    accessibility: z.number().min(0).max(100),
+    responsible_management: z.number().min(0).max(100)
+  }),
+  confidenceScore: z.number().min(0).max(100),
+  strengths: z.array(z.string()).default([]),
+  pendingAreas: z.array(z.string()).default([]),
+  calculatedAt: z.string().datetime()
+});
+
+export const hostActionPlanSchema = z.object({
+  id: z.string().min(1),
+  resourceId: z.string().min(1),
+  dimension: sustainabilityDimensionEnum,
+  title: z.string().min(1),
+  description: z.string().min(1),
+  targetDate: z.string().optional(),
+  status: z.enum(["planned", "in_progress", "completed", "verified"]).default("planned"),
+  evidenceId: z.string().optional(),
+  updatedAt: z.string().datetime()
+});
+
+export const localImpactIndicatorSchema = z.object({
+  id: z.string().min(1),
+  resourceId: z.string().min(1),
+  period: z.string().min(1),
+  localJobsDirect: z.number().int().min(0).optional(),
+  localSuppliersCount: z.number().int().min(0).optional(),
+  communityPartnersCount: z.number().int().min(0).optional(),
+  confidence: z.enum(["verified", "self_reported", "estimated", "unknown"]).default("unknown"),
+  notes: z.string().optional(),
+  updatedAt: z.string().datetime()
+});
+
+export const integrityRiskLevelEnum = z.enum(["LOW", "MEDIUM", "HIGH", "UNKNOWN"]);
+export const integrityCaseStatusEnum = z.enum(["OPEN", "REVIEWING", "CLEARED", "ACTION_REQUIRED", "CLOSED"]);
+
+export const integrityCaseSchema = z.object({
+  id: z.string().min(1),
+  resourceType: z.enum(["place", "business", "review", "certification", "claim"]),
+  resourceId: z.string().min(1),
+  riskLevel: integrityRiskLevelEnum.default("UNKNOWN"),
+  signals: z.array(z.string()).default([]),
+  status: integrityCaseStatusEnum.default("OPEN"),
+  assignedTo: z.string().optional(),
+  findingsNotes: z.string().optional(),
+  actionTaken: z.string().optional(),
+  createdAt: z.string().datetime(),
+  resolvedAt: z.string().datetime().optional()
+});
+
+export const trustAppealSchema = z.object({
+  id: z.string().min(1),
+  caseIdOrVerificationId: z.string().min(1),
+  resourceId: z.string().min(1),
+  submittedBy: z.string().min(1),
+  reason: z.string().min(1),
+  counterEvidenceId: z.string().optional(),
+  status: z.enum(["SUBMITTED", "UNDER_REVIEW", "UPHELD", "REVERSED"]).default("SUBMITTED"),
+  reviewerId: z.string().optional(),
+  resolutionNotes: z.string().optional(),
+  createdAt: z.string().datetime(),
+  resolvedAt: z.string().datetime().optional()
+});
+
+export const trustAuditEventSchema = z.object({
+  id: z.string().min(1),
+  eventType: z.enum([
+    "VERIFICATION_SUBMITTED",
+    "VERIFICATION_APPROVED",
+    "VERIFICATION_REVOKED",
+    "CLAIM_VERIFIED",
+    "CLAIM_REJECTED",
+    "BADGE_GRANTED",
+    "BADGE_REVOKED",
+    "INDEX_RECALCULATED",
+    "INTEGRITY_CASE_RESOLVED",
+    "APPEAL_DECIDED"
+  ]),
+  resourceId: z.string().min(1),
+  actorId: z.string().min(1),
+  actorRole: z.string().min(1),
+  details: z.record(z.any()),
+  timestamp: z.string().datetime()
+});
+
+export type VerificationEvidenceInput = z.infer<typeof verificationEvidenceSchema>;
+export type VerificationRecordInput = z.infer<typeof verificationRecordSchema>;
+export type ProvenanceMetadataInput = z.infer<typeof provenanceMetadataSchema>;
+export type TrustBadgeInput = z.infer<typeof trustBadgeSchema>;
+export type ExternalCertificationInput = z.infer<typeof externalCertificationSchema>;
+export type SustainabilityClaimInput = z.infer<typeof sustainabilityClaimSchema>;
+export type ResponsibleTourismIndexInput = z.infer<typeof responsibleTourismIndexSchema>;
+export type HostActionPlanInput = z.infer<typeof hostActionPlanSchema>;
+export type LocalImpactIndicatorInput = z.infer<typeof localImpactIndicatorSchema>;
+export type IntegrityCaseInput = z.infer<typeof integrityCaseSchema>;
+export type TrustAppealInput = z.infer<typeof trustAppealSchema>;
+export type TrustAuditEventInput = z.infer<typeof trustAuditEventSchema>;
+
+// ============================================================================
+// 🧭 BAQUEANO AGENTIC ECOSYSTEM VALIDATION SCHEMAS (FASE 15)
+// ============================================================================
+
+export const agentIdEnum = z.enum([
+  "trip_planner",
+  "destination",
+  "map",
+  "budget",
+  "safety",
+  "culture",
+  "reservation",
+  "host",
+  "trust",
+  "operations",
+  "data_quality"
+]);
+
+export const agentAutonomyLevelEnum = z.enum([
+  "LEVEL_0_READ",
+  "LEVEL_1_PREPARE",
+  "LEVEL_2_REVERSIBLE",
+  "LEVEL_3_SENSITIVE",
+  "LEVEL_4_PROHIBITED"
+]);
+
+export const agentActionPolicyDecisionEnum = z.enum([
+  "ALLOW",
+  "DENY",
+  "REQUIRE_CONFIRMATION",
+  "REQUIRE_REAUTH"
+]);
+
+export const toolCategoryEnum = z.enum([
+  "READ",
+  "PREPARE",
+  "WRITE_REVERSIBLE",
+  "WRITE_SENSITIVE",
+  "PROHIBITED"
+]);
+
+export const agentDefinitionSchema = z.object({
+  agentId: agentIdEnum,
+  name: z.string().min(1),
+  roleDescription: z.string().min(1),
+  allowedTools: z.array(z.string()).default([]),
+  maxAutonomyLevel: agentAutonomyLevelEnum,
+  requiresHumanInTheLoop: z.boolean().default(true)
+});
+
+export const agentToolDefinitionSchema = z.object({
+  toolId: z.string().min(1),
+  name: z.string().min(1),
+  description: z.string().min(1),
+  category: toolCategoryEnum,
+  autonomyLevel: agentAutonomyLevelEnum,
+  allowedRoles: z.array(z.enum(["super_admin", "admin", "host", "explorer"])).default([]),
+  isReversible: z.boolean().default(true)
+});
+
+export const workflowStatusEnum = z.enum([
+  "CREATED",
+  "RUNNING",
+  "WAITING_FOR_HUMAN",
+  "COMPLETED",
+  "FAILED",
+  "CANCELLED"
+]);
+
+export const tripStopSchema = z.object({
+  placeId: z.string().min(1),
+  name: z.string().min(1),
+  category: z.string().min(1),
+  department: z.string().min(1),
+  durationHours: z.number().min(0),
+  priceNio: z.number().min(0),
+  priceUsd: z.number().min(0),
+  isVerified: z.boolean().default(false),
+  latitude: z.number(),
+  longitude: z.number(),
+  notes: z.string().optional()
+});
+
+export const tripDayPlanSchema = z.object({
+  dayNumber: z.number().int().min(1),
+  title: z.string().min(1),
+  stops: z.array(tripStopSchema).default([]),
+  estimatedTravelHours: z.number().min(0),
+  dayCostNio: z.number().min(0),
+  dayCostUsd: z.number().min(0),
+  climateAdvice: z.string().min(1)
+});
+
+export const budgetBreakdownSchema = z.object({
+  currency: z.enum(["NIO", "USD"]).default("NIO"),
+  activitiesCost: z.number().min(0),
+  transportEstimate: z.number().min(0),
+  foodEstimate: z.number().min(0),
+  totalCalculated: z.number().min(0),
+  budgetLimit: z.number().min(0).optional(),
+  isWithinBudget: z.boolean().default(true)
+});
+
+export const tripPlanRecordSchema = z.object({
+  id: z.string().min(1),
+  userId: z.string().min(1),
+  title: z.string().min(1),
+  territory: z.string().min(1),
+  daysCount: z.number().int().min(1),
+  days: z.array(tripDayPlanSchema).default([]),
+  budget: budgetBreakdownSchema,
+  safetyWarnings: z.array(z.string()).default([]),
+  trustSignals: z.array(z.string()).default([]),
+  status: z.enum(["draft", "saved", "active", "completed"]).default("draft"),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+
+export const humanConfirmationStatusEnum = z.enum(["PENDING", "APPROVED", "REJECTED", "EXPIRED"]);
+
+export const humanConfirmationRequestSchema = z.object({
+  id: z.string().min(1),
+  workflowId: z.string().min(1),
+  agentId: agentIdEnum,
+  actionDescription: z.string().min(1),
+  resourceType: z.string().min(1),
+  resourceId: z.string().min(1),
+  autonomyLevel: agentAutonomyLevelEnum,
+  diffPreview: z.object({ before: z.any(), after: z.any() }).optional(),
+  status: humanConfirmationStatusEnum.default("PENDING"),
+  requestedAt: z.string().datetime(),
+  resolvedAt: z.string().datetime().optional(),
+  expiresAt: z.string().datetime()
+});
+
+export const agenticWorkflowSchema = z.object({
+  workflowId: z.string().min(1),
+  userId: z.string().min(1),
+  intent: z.string().min(1),
+  status: workflowStatusEnum.default("CREATED"),
+  currentStep: z.number().int().min(0),
+  totalSteps: z.number().int().min(1),
+  activeAgent: agentIdEnum.optional(),
+  tripPlanId: z.string().optional(),
+  pendingConfirmationId: z.string().optional(),
+  executionSteps: z.array(
+    z.object({
+      agent: agentIdEnum,
+      action: z.string().min(1),
+      resultSummary: z.string().min(1),
+      timestamp: z.string().datetime()
+    })
+  ).default([]),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+
+export const agentTraceLogSchema = z.object({
+  id: z.string().min(1),
+  workflowId: z.string().min(1),
+  agentId: agentIdEnum,
+  toolName: z.string().min(1),
+  autonomyLevel: agentAutonomyLevelEnum,
+  latencyMs: z.number().min(0),
+  success: z.boolean(),
+  errorMessage: z.string().optional(),
+  timestamp: z.string().datetime()
+});
+
+export type AgentDefinitionInput = z.infer<typeof agentDefinitionSchema>;
+export type AgentToolDefinitionInput = z.infer<typeof agentToolDefinitionSchema>;
+export type TripStopInput = z.infer<typeof tripStopSchema>;
+export type TripDayPlanInput = z.infer<typeof tripDayPlanSchema>;
+export type BudgetBreakdownInput = z.infer<typeof budgetBreakdownSchema>;
+export type TripPlanRecordInput = z.infer<typeof tripPlanRecordSchema>;
+export type HumanConfirmationRequestInput = z.infer<typeof humanConfirmationRequestSchema>;
+export type AgenticWorkflowInput = z.infer<typeof agenticWorkflowSchema>;
+export type AgentTraceLogInput = z.infer<typeof agentTraceLogSchema>;
+
+
+
 
 

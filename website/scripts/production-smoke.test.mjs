@@ -48,10 +48,25 @@ assert(adminLayout.includes("index: false") && adminLayout.includes("follow: fal
 assert(webConfig.includes("Content-Security-Policy"), "Web app must define CSP headers.");
 assert(adminConfig.includes("X-Robots-Tag"), "Admin app must emit noindex header.");
 
+const brtiService = read("apps/web/src/services/responsible-tourism.service.ts");
+const trustConfig = read("packages/config/src/index.ts");
+const trustPublicRoute = read("apps/web/src/app/confianza/metodologia/page.tsx");
+const trustAdminRoute = read("apps/admin/src/app/confianza/page.tsx");
+const trustOpenApiRoute = read("apps/web/src/app/api/open/v1/places/[id]/trust/route.ts");
+
+assert(brtiService.includes("calculateBrtiScore"), "BRTI service must export calculateBrtiScore.");
+assert(brtiService.includes("isRuralSmallholder"), "BRTI engine must include rural smallholder equity safeguard.");
+assert(trustConfig.includes("TRUST_BADGES_CATALOG"), "Config must export TRUST_BADGES_CATALOG.");
+assert(trustConfig.includes("FIELD_FRESHNESS_THRESHOLDS_DAYS"), "Config must define field freshness thresholds.");
+assert(trustPublicRoute.includes("BAQUEANO TRUST LAYER"), "Public trust methodology route must render Trust Layer explanation.");
+assert(trustAdminRoute.includes("Gobernanza de Confianza & Sostenibilidad"), "Admin trust page must render governance interface.");
+assert(trustOpenApiRoute.includes("getPublicTrustSummary"), "Open Data trust endpoint must resolve sanitized public trust signals.");
+
 if (failures.length > 0) {
   console.error("Production smoke tests failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Production smoke tests passed.");
+console.log("Production smoke tests passed (including Fase 14 Trust Layer & BRTI).");
+
