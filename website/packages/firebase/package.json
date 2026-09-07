@@ -6,6 +6,9 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "dependencies": {
+    "@baqueano/config": "workspace:*",
+    "@baqueano/types": "workspace:*",
+    "@baqueano/validators": "workspace:*",
     "firebase": "^12.18.0"
   }
 }

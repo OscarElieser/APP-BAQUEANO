@@ -6,15 +6,126 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "**/*.apk"
+      "**/*.apk",
+      "**/docs/**",
+      "**/scripts/**",
+      "**/dev-*.log",
+      "**/apps/**",
+      "**/packages/**",
+      "**/pnpm-*",
+      "**/tsconfig*",
+      "**/package*",
+      "**/css/**",
+      "**/*.md"
+    ],
+    "rewrites": [
+      {
+        "source": "/health",
+        "function": "healthCheck"
+      },
+      {
+        "source": "/api/**",
+        "function": "api"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/privacidad",
+        "destination": "/index.html#privacidad",
+        "type": 302
+      },
+      {
+        "source": "/terminos",
+        "destination": "/index.html#terminos",
+        "type": 302
+      },
+      {
+        "source": "/negocio",
+        "destination": "/mi-negocio.html",
+        "type": 301
+      },
+      {
+        "source": "/mapa",
+        "destination": "/destinos.html#mapa",
+        "type": 301
+      },
+      {
+        "source": "/ops",
+        "destination": "/admin.html",
+        "type": 301
+      }
     ],
     "headers": [
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|webp|svg)",
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "geolocation=(self), camera=(), microphone=(), payment=()"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000; includeSubDomains; preload"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://apis.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.openstreetmap.org https://firebasestorage.googleapis.com https://lh3.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com; frame-src https://app-baqueano.firebaseapp.com; object-src 'none'; base-uri 'self';"
+          }
+        ]
+      },
+      {
+        "source": "admin.html",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-store, no-cache, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|webp|svg|avif)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=7200"
+            "value": "public, max-age=86400, s-maxage=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, s-maxage=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(html)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300, s-maxage=3600"
           }
         ]
       },
@@ -28,6 +139,10 @@
           {
             "key": "Content-Type",
             "value": "application/vnd.android.package-archive"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
           }
         ]
       }
@@ -36,11 +151,6 @@
   "firestore": [
     {
       "database": "(default)",
-      "rules": "firestore.rules",
-      "indexes": "firestore.indexes.json"
-    },
-    {
-      "database": "appbaqueano",
       "rules": "firestore.rules",
       "indexes": "firestore.indexes.json"
     }
@@ -63,6 +173,9 @@
     },
     "storage": {
       "port": 9199
+    },
+    "hosting": {
+      "port": 5000
     },
     "ui": {
       "enabled": true,

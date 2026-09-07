@@ -19,7 +19,11 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 
 export const metadata: Metadata = {
   title: "Baqueano Control Center",
-  description: "Panel de administracion para contenido, operaciones, auditoria y roles de Baqueano."
+  description: "Panel de administracion para contenido, operaciones, auditoria y roles de Baqueano.",
+  robots: {
+    index: false,
+    follow: false
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

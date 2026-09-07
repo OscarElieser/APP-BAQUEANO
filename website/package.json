@@ -5,15 +5,18 @@
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
   "description": "Baqueano Nicaragua web ecosystem isolated from the Flutter Android app.",
   "scripts": {
-    "dev:web": "next dev apps/web -p 3000",
-    "dev:admin": "next dev apps/admin -p 3001",
+    "dev:web": "corepack pnpm --filter @baqueano/web dev",
+    "dev:admin": "corepack pnpm --filter @baqueano/admin dev",
     "build": "corepack pnpm --filter @baqueano/web build && corepack pnpm --filter @baqueano/admin build",
     "build:web": "corepack pnpm --filter @baqueano/web build",
     "build:admin": "corepack pnpm --filter @baqueano/admin build",
     "lint": "corepack pnpm --filter @baqueano/web lint && corepack pnpm --filter @baqueano/admin lint",
-    "typecheck": "corepack pnpm --filter @baqueano/web typecheck && corepack pnpm --filter @baqueano/admin typecheck"
+    "typecheck": "corepack pnpm --filter @baqueano/web typecheck && corepack pnpm --filter @baqueano/admin typecheck",
+    "test": "node scripts/production-smoke.test.mjs",
+    "audit:visual": "node scripts/visual-audit.mjs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/node": "^20.19.11",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

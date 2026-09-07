@@ -127,7 +127,7 @@
               <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Correo Electrónico Registrado:</label>
               <div class="login-input-wrap">
                 <i class="fa-solid fa-user-shield"></i>
-                <input type="email" id="loginUsername" class="form-control-input" value="oscarelieser.informatica.inatec@gmail.com" required placeholder="correo@gmail.com">
+                <input type="email" id="loginUsername" class="form-control-input" autocomplete="username" required placeholder="correo autorizado">
               </div>
             </div>
 
@@ -135,7 +135,7 @@
               <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Acceso:</label>
               <div class="login-input-wrap">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="loginPassword" class="form-control-input" value="admin123" required placeholder="••••••••">
+                <input type="password" id="loginPassword" class="form-control-input" autocomplete="current-password" required placeholder="contrasena">
               </div>
             </div>
 
@@ -732,7 +732,95 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/firestore-realtime.js"></script>
   <script src="js/admin-ops.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    // ========================================================================
+    // 🧭 ADMIN OPS CENTER — INTEGRACIÓN FIRESTORE EN TIEMPO REAL (Fase 3)
+    // ========================================================================
+    // Conecta las métricas del Ops Center con datos reales de Firestore.
+    // Se ejecuta después de que Firebase SDK y admin-ops.js estén cargados.
+    document.addEventListener('DOMContentLoaded', () => {
+      // Cargar negocios pendientes de revisión desde /businesses
+      function loadPendingBusinesses() {
+        if (!window.firebase || !window.firebase.firestore) return;
+        const db = window.firebase.firestore();
+
+        db.collection('businesses')
+          .where('status', '==', 'pending_review')
+          .orderBy('createdAt', 'desc')
+          .limit(5)
+          .get()
+          .then(snapshot => {
+            if (snapshot.empty) return;
+            const feed = document.getElementById('liveFeedStream');
+            if (!feed) return;
+
+            snapshot.docs.forEach(doc => {
+              const biz = doc.data();
+              const div = document.createElement('div');
+              div.className = 'feed-event-item';
+              div.innerHTML = `
+                <div class="feed-event-icon"><i class="fa-solid fa-store" style="color: #F65E01;"></i></div>
+                <div class="feed-event-content">
+                  <div class="feed-event-title">Nuevo Negocio Pendiente: ${biz.name || 'Sin nombre'}</div>
+                  <div class="feed-event-meta">${biz.type || ''} • ${biz.department || ''} • Revisión requerida</div>
+                </div>
+              `;
+              feed.insertBefore(div, feed.firstChild);
+            });
+          })
+          .catch(err => console.warn('[AdminFirestore] Error cargando negocios:', err.message));
+      }
+
+      // Cargar conteos reales de la colección /places
+      function loadRealPlacesCount() {
+        if (!window.firebase || !window.firebase.firestore) return;
+        const db = window.firebase.firestore();
+
+        db.collection('places').where('status', '==', 'published').get()
+          .then(snap => {
+            // Actualizar contador de destinos publicados si existe el elemento
+            const el = document.getElementById('metricPublishedDests');
+            if (el) el.textContent = snap.size.toString();
+          })
+          .catch(err => console.warn('[AdminFirestore] Error contando places:', err.message));
+
+        // También cargar audit logs recientes
+        db.collection('audit_logs')
+          .orderBy('timestamp', 'desc')
+          .limit(3)
+          .get()
+          .then(snap => {
+            if (snap.empty) return;
+            const feed = document.getElementById('liveFeedStream');
+            if (!feed) return;
+
+            snap.docs.forEach(doc => {
+              const log = doc.data();
+              const div = document.createElement('div');
+              div.className = 'feed-event-item';
+              div.innerHTML = `
+                <div class="feed-event-icon"><i class="fa-solid fa-file-shield" style="color: #10B981;"></i></div>
+                <div class="feed-event-content">
+                  <div class="feed-event-title">${log.action || 'Acción de Sistema'}</div>
+                  <div class="feed-event-meta">${log.performedBy || 'Sistema'} • ${new Date(log.timestamp).toLocaleString('es-NI')}</div>
+                </div>
+              `;
+              feed.insertBefore(div, feed.firstChild);
+            });
+          })
+          .catch(() => {});
+      }
+
+      // Ejecutar después de un breve delay para dar tiempo a Firebase Auth
+      setTimeout(() => {
+        loadPendingBusinesses();
+        loadRealPlacesCount();
+      }, 2000);
+    });
+  </script>
 </body>
 </html>

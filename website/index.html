@@ -35,9 +35,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baqueano Nicaragua | Portal Oficial</title>
-  <meta name="description" content="Plataforma tecnológica oficial para turismo sostenible, conservación comunitaria y soberanía campesina en Nicaragua. Descarga BaqueanoNicaragua.apk.">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- ======================================================================
+       SEO PRIMARIO — Metadatos Esenciales
+       ====================================================================== -->
+  <title>Baqueano Nicaragua | Ecoturismo Sostenible Sin Intermediarios</title>
+  <meta name="description" content="Plataforma tecnológica oficial para ecoturismo sostenible, conservación comunitaria y soberanía campesina en Nicaragua. Descubre destinos auténticos, apoya cooperativas locales y descarga la app BaqueanoNicaragua para Android.">
+  <meta name="keywords" content="ecoturismo Nicaragua, turismo sostenible, cooperativas campesinas, turismo comunitario, Baqueano Nicaragua, Cañón de Somoto, Isla de Ometepe, Cerro Negro, turismo responsable Nicaragua">
+  <meta name="author" content="Baqueano Nicaragua — Ecosistema Digital de Ecoturismo">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#165D6F">
+
+  <!-- URL Canonical — Producción Firebase Hosting -->
+  <link rel="canonical" href="https://app-baqueano.web.app/">
+
+  <!-- ======================================================================
+       OPEN GRAPH (Facebook, WhatsApp, LinkedIn)
+       ====================================================================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://app-baqueano.web.app/">
+  <meta property="og:title" content="Baqueano Nicaragua | Ecoturismo Sin Intermediarios">
+  <meta property="og:description" content="Descubre Nicaragua auténtica. Destinos protegidos, cooperativas campesinas, senderos con GPS y app Android gratuita. Sin comisiones, 100% para las comunidades.">
+  <meta property="og:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baqueano Nicaragua — Ecoturismo Sostenible en Tierras Campesinas">
+  <meta property="og:site_name" content="Baqueano Nicaragua">
+  <meta property="og:locale" content="es_NI">
+
+  <!-- ======================================================================
+       TWITTER CARDS
+       ====================================================================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Baqueano Nicaragua | Ecoturismo Sin Intermediarios">
+  <meta name="twitter:description" content="Plataforma tecnológica para turismo sostenible y soberanía campesina en Nicaragua.">
+  <meta name="twitter:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
+
+  <!-- ======================================================================
+       STRUCTURED DATA — JSON-LD (WebSite + Organization + MobileApp)
+       ====================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://app-baqueano.web.app/#website",
+        "url": "https://app-baqueano.web.app/",
+        "name": "Baqueano Nicaragua",
+        "description": "Plataforma tecnológica oficial para turismo sostenible, conservación comunitaria y soberanía campesina en Nicaragua.",
+        "inLanguage": "es",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://app-baqueano.web.app/destinos.html?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://app-baqueano.web.app/#organization",
+        "name": "Baqueano Nicaragua",
+        "url": "https://app-baqueano.web.app/",
+        "logo": "https://app-baqueano.web.app/assets/images/logo.png",
+        "description": "Ecosistema digital de ecoturismo sostenible para cooperativas campesinas de Nicaragua.",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Nicaragua"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "availableLanguage": "Spanish",
+          "contactOption": "TollFree"
+        }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Baqueano Nicaragua",
+        "operatingSystem": "Android",
+        "applicationCategory": "TravelApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Aplicación Android gratuita con mapas offline, GPS en sendero, Baqueano AI y sistema SOS 24/7 para exploradores en Nicaragua.",
+        "downloadUrl": "https://app-baqueano.web.app/assets/BaqueanoNicaragua.apk"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ======================================================================
+       ÍCONOS Y PWA MANIFEST
+       ====================================================================== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+  <link rel="manifest" href="manifest.json">
 
   <!-- Tipografías Oficiales Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +144,7 @@
   <!-- Estilos Maestros Oficiales (Modular) -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
@@ -71,6 +166,7 @@
         <a href="gastronomia.html">Gastronomía</a>
         <a href="musica.html">Música</a>
         <a href="aliados.html">Aliados</a>
+        <a href="mi-negocio.html">Mi Negocio</a>
         <a href="admin.html">Ops Center</a>
       </div>
 
@@ -616,6 +712,7 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/firestore-realtime.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

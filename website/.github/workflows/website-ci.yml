@@ -1,0 +1,39 @@
+name: Baqueano Website CI
+
+on:
+  pull_request:
+    paths:
+      - "website/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "website/**"
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: corepack pnpm lint
+
+      - name: Typecheck
+        run: corepack pnpm typecheck
+
+      - name: Test
+        run: corepack pnpm test
+
+      - name: Build
+        run: corepack pnpm build
