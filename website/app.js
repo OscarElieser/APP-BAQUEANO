@@ -74,7 +74,40 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initFirestoreRealtime === 'function') initFirestoreRealtime();
   if (document.getElementById('hostForm') && typeof initBusinessPortal === 'function') initBusinessPortal();
   if (document.getElementById('liveMetricsDashboard') && typeof initLiveMetrics === 'function') initLiveMetrics();
+
+  // 11. Tipografía Cinematográfica Dinámica (Letras en Movimiento en H1)
+  initKineticHeadings();
 });
+
+// Inicializador de tipografía cinética para todos los h1
+function initKineticHeadings() {
+  const headings = document.querySelectorAll('h1');
+  if (!headings.length) return;
+
+  headings.forEach(heading => {
+    // Si ya está procesado o tiene inputs interactivos, omitir
+    if (heading.getAttribute('data-kinetic-ready') === 'true') return;
+
+    const rawText = heading.textContent ? heading.textContent.trim() : '';
+    if (!rawText || rawText.length === 0) return;
+
+    // Accesibilidad estricta: preservar el texto original para lectores de pantalla
+    heading.setAttribute('aria-label', rawText);
+    heading.setAttribute('data-kinetic-ready', 'true');
+
+    // Dividir en palabras y caracteres manteniendo la estructura
+    const words = rawText.split(/\s+/);
+    let charCounter = 0;
+
+    heading.innerHTML = words.map(word => {
+      const charsHtml = word.split('').map(char => {
+        charCounter++;
+        return `<span class="kinetic-char" style="--char-index: ${charCounter}">${char}</span>`;
+      }).join('');
+      return `<span class="kinetic-word">${charsHtml}</span>`;
+    }).join('&nbsp;');
+  });
+}
 
 // Control local de tarjetas de territorios
 function initTerritoriesLocal() {
