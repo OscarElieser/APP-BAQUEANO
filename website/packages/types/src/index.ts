@@ -1278,8 +1278,401 @@ export interface AgentTraceLogRecord {
   readonly timestamp: string;
 }
 
+// ============================================================================
+// FASE 16: PREDICTIVE INTELLIGENCE & SIMULATION LAB
+// ============================================================================
 
+export type EpistemologicalLabel =
+  | "OBSERVADO"
+  | "ESTIMADO"
+  | "PRONOSTICADO"
+  | "SIMULADO"
+  | "DESCONOCIDO";
 
+export type ForecastConfidenceLevel =
+  | "HIGH"
+  | "MODERATE"
+  | "LOW"
+  | "INSUFFICIENT_DATA";
 
+export type DataReadinessStatus =
+  | "READY"
+  | "PARTIAL"
+  | "INSUFFICIENT"
+  | "SIMULATED_ONLY";
 
+export type ModelLifecycleState =
+  | "EXPERIMENTAL"
+  | "VALIDATING"
+  | "APPROVED"
+  | "ACTIVE"
+  | "DEPRECATED"
+  | "DISABLED";
 
+export type ModelHealthState =
+  | "HEALTHY"
+  | "DEGRADED"
+  | "STALE"
+  | "DISABLED";
+
+export type SaturationLevel =
+  | "LOW"
+  | "MODERATE"
+  | "HIGH"
+  | "VERY_HIGH"
+  | "UNKNOWN";
+
+export type ForecastHorizon = "24H" | "7D" | "30D";
+
+export interface DemandSignalRecord {
+  readonly id: string;
+  readonly destinationId: string;
+  readonly territoryId: string;
+  readonly date: string;
+  readonly pageViews: number;
+  readonly searchCount: number;
+  readonly favoritesCount: number;
+  readonly mapInteractions: number;
+  readonly contactRequests: number;
+  readonly weightConfigRef: string;
+  readonly aggregatedSignalScore: number;
+}
+
+export interface AggregatedDemandForecast {
+  readonly id: string;
+  readonly destinationId: string;
+  readonly territoryId: string;
+  readonly horizon: ForecastHorizon;
+  readonly forecastTarget: string; // e.g., "aggregated_visitor_interest/day"
+  readonly baselineValue: number;
+  readonly predictedValue: number;
+  readonly intervalMin: number;
+  readonly intervalMax: number;
+  readonly confidence: ForecastConfidenceLevel;
+  readonly modelVersion: string;
+  readonly datasetVersion: string;
+  readonly epistemologicalLabel: EpistemologicalLabel;
+  readonly generatedAt: string;
+  readonly limitations: readonly string[];
+}
+
+export interface CapacityForecastRecord {
+  readonly destinationId: string;
+  readonly territoryId: string;
+  readonly horizon: ForecastHorizon;
+  readonly validatedCapacity: number | null; // null if UNKNOWN
+  readonly predictedDemand: number;
+  readonly utilizationRate: number | null; // percentage 0-100 or null if capacity UNKNOWN
+  readonly saturationLevel: SaturationLevel;
+  readonly bottleneckFactors: readonly string[];
+  readonly generatedAt: string;
+}
+
+export interface TerritorialPressureIndexRecord {
+  readonly territoryId: string;
+  readonly destinationId: string;
+  readonly pressureScore: number; // 0 to 100
+  readonly pressureLevel: "LOW" | "MODERATE" | "HIGH" | "CRITICAL" | "UNKNOWN";
+  readonly demandFactor: number;
+  readonly environmentalFactor: number;
+  readonly capacityFactor: number;
+  readonly seasonalityFactor: number;
+  readonly calculatedAt: string;
+  readonly epistemologicalLabel: EpistemologicalLabel;
+}
+
+export interface SimulationScenarioParameters {
+  readonly demandMultiplier: number; // 0.1 to 3.0 (e.g., 1.2 = +20%)
+  readonly capacityMultiplier: number; // 0.1 to 2.0
+  readonly destinationAvailability: Record<string, boolean>; // e.g. { "cerro-negro": false }
+  readonly routeClosure: readonly string[];
+  readonly weatherDisruptionLevel: "NONE" | "MODERATE" | "SEVERE";
+  readonly targetRedistributionPercent: number; // 0 to 50%
+}
+
+export interface SimulationRedistributionResult {
+  readonly sourceDestinationId: string;
+  readonly targetDestinationId: string;
+  readonly divertedInterestPercent: number;
+  readonly estimatedCapacityRelief: number;
+}
+
+export interface SimulationScenarioResult {
+  readonly projectedDemand: number;
+  readonly projectedCapacityUtilization: number;
+  readonly affectedTerritories: readonly string[];
+  readonly redistributionSuggestions: readonly SimulationRedistributionResult[];
+  readonly riskLevel: "LOW" | "MODERATE" | "HIGH" | "ELEVATED";
+  readonly simulatedAt: string;
+}
+
+export interface SimulationScenarioRecord {
+  readonly scenarioId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly baselineSnapshotId: string;
+  readonly assumptions: readonly string[];
+  readonly parameters: SimulationScenarioParameters;
+  readonly result: SimulationScenarioResult;
+  readonly createdAt: string;
+  readonly createdBy: string;
+  readonly isSimulatedData: true; // Hardcoded strictly to prevent real state corruption
+}
+
+export interface SimulationComparisonRecord {
+  readonly id: string;
+  readonly baselineScenario: SimulationScenarioRecord;
+  readonly candidateScenarios: readonly SimulationScenarioRecord[];
+  readonly diffMetrics: readonly {
+    readonly scenarioId: string;
+    readonly demandChangePercent: number;
+    readonly pressureDelta: number;
+    readonly redistributionGain: number;
+  }[];
+}
+
+export interface PredictiveModelRegistryRecord {
+  readonly modelId: string;
+  readonly name: string;
+  readonly target: string;
+  readonly version: string;
+  readonly state: ModelLifecycleState;
+  readonly health: ModelHealthState;
+  readonly baselineAlgorithm: string;
+  readonly baselineMae: number;
+  readonly modelMae: number;
+  readonly modelMape: number;
+  readonly lastBacktestDate: string;
+  readonly modelCardRef: string;
+  readonly killSwitchActive: boolean;
+}
+
+export interface PredictiveSignalRecord {
+  readonly id: string;
+  readonly territoryId: string;
+  readonly destinationId: string;
+  readonly signalType: "CAPACITY_PRESSURE" | "SEASONAL_SURGE" | "WEATHER_IMPACT" | "ROUTE_SATURATION";
+  readonly severity: "INFO" | "WARNING" | "CRITICAL";
+  readonly confidence: ForecastConfidenceLevel;
+  readonly message: string;
+  readonly recommendedAction: string;
+  readonly triggeredAt: string;
+}
+
+export interface PredictiveCostForecastRecord {
+  readonly serviceName: "Firestore" | "AIGateway" | "Maps" | "Compute";
+  readonly month: string;
+  readonly estimatedCostUsdMin: number;
+  readonly estimatedCostUsdMax: number;
+  readonly budgetThresholdUsd: number;
+  readonly budgetAlert: boolean;
+  readonly generatedAt: string;
+}
+
+// ============================================================================
+// FASE 17: SPATIAL INTELLIGENCE & ADVANCED GIS DATA MODELS
+// ============================================================================
+
+export type GeoQualityStatus = "VALID" | "SUSPECT" | "INVALID" | "UNKNOWN";
+export type LocationConfidence = "exact" | "approximate" | "territory-only" | "unknown";
+export type GeoProvenance = "manual" | "geocoded" | "field_verified" | "partner" | "official";
+export type TransportMode = "driving" | "walking" | "cycling" | "multimodal";
+export type RouteType = "FASTEST" | "SCENIC" | "CULTURAL" | "ADVENTURE" | "COMMUNITY" | "LOW_PRESSURE";
+export type CorridorStatus = "DRAFT" | "UNDER_REVIEW" | "PUBLISHED" | "ARCHIVED";
+export type AccessibilityLevel = "HIGH_ACCESS" | "MODERATE" | "LIMITED" | "UNKNOWN";
+export type ServiceGapCategory = "health" | "police" | "firefighters" | "red_cross" | "lodging" | "food";
+export type GisHealthStatus = "HEALTHY" | "DEGRADED" | "DOWN" | "UNKNOWN";
+
+export interface GeoBoundingBox {
+  readonly minLat: number;
+  readonly maxLat: number;
+  readonly minLng: number;
+  readonly maxLng: number;
+}
+
+export interface SpatialCoordinateRecord {
+  readonly latitude: number;
+  readonly longitude: number;
+  readonly geohash: string;
+  readonly countryId: string;
+  readonly territoryId: string;
+  readonly municipalityId?: string;
+  readonly qualityStatus: GeoQualityStatus;
+  readonly confidence: LocationConfidence;
+  readonly provenance: GeoProvenance;
+  readonly isSensitive: boolean;
+  readonly verifiedAt?: string | null;
+  readonly verificationNote?: string | null;
+}
+
+export interface IsochronePolygonRecord {
+  readonly origin: GeoPointLike;
+  readonly originName: string;
+  readonly travelMode: TransportMode;
+  readonly timeLimitMinutes: 15 | 30 | 45 | 60;
+  readonly coordinates: readonly [number, number][]; // GeoJSON polygon exterior ring [lng, lat]
+  readonly boundingBox: GeoBoundingBox;
+  readonly reachableDestinationsCount: number;
+  readonly reachableDestinations: readonly string[];
+  readonly generatedAt: string;
+  readonly isEstimated: true;
+}
+
+export interface RouteWaypointRecord {
+  readonly id: string;
+  readonly name: string;
+  readonly coordinates: GeoPointLike;
+  readonly order: number;
+  readonly stopDurationMinutes?: number;
+  readonly isCulturalStop?: boolean;
+  readonly isLocalBusiness?: boolean;
+}
+
+export interface RouteSegmentRecord {
+  readonly fromWaypointId: string;
+  readonly toWaypointId: string;
+  readonly distanceKm: number;
+  readonly durationMinutes: number;
+  readonly mode: TransportMode;
+  readonly roadCondition?: "PAVED" | "GRAVEL" | "DIRT" | "WATERWAY";
+  readonly safetyAlertId?: string | null;
+  readonly geometryCoordinates: readonly [number, number][]; // Polyline coords [lng, lat]
+}
+
+export interface SpatialRouteRecord {
+  readonly routeId: string;
+  readonly name: string;
+  readonly originName: string;
+  readonly destinationName: string;
+  readonly routeType: RouteType;
+  readonly totalDistanceKm: number;
+  readonly totalDurationMinutes: number;
+  readonly waypoints: readonly RouteWaypointRecord[];
+  readonly segments: readonly RouteSegmentRecord[];
+  readonly elevationGainMeters?: number;
+  readonly elevationLossMeters?: number;
+  readonly scenicScore?: number;
+  readonly culturalScore?: number;
+  readonly sustainabilityScore?: number;
+  readonly confidence: "HIGH" | "ESTIMATED" | "PARTIAL";
+  readonly activeAlertsCount: number;
+  readonly activeAlerts: readonly string[];
+  readonly disclaimer: string;
+  readonly generatedAt: string;
+}
+
+export interface TourismCorridorRecord {
+  readonly corridorId: string;
+  readonly slug: string;
+  readonly name: string;
+  readonly description: string;
+  readonly countryId: string;
+  readonly territories: readonly string[];
+  readonly theme: "VOLCANOES" | "COFFEE" | "CRAFTS" | "CARIBBEAN" | "HERITAGE" | "COMMUNITY";
+  readonly places: readonly string[];
+  readonly stops: readonly {
+    readonly placeId: string;
+    readonly name: string;
+    readonly territory: string;
+    readonly role: "GATEWAY" | "PRIMARY_HUB" | "COMMUNITY_STOP" | "SCENIC_LOOKOUT";
+    readonly coordinates: GeoPointLike;
+  }[];
+  readonly totalDistanceKm: number;
+  readonly suggestedDurationDays: number;
+  readonly sustainabilityRating: number;
+  readonly status: CorridorStatus;
+  readonly publishedAt?: string | null;
+  readonly reviewedBy?: string | null;
+  readonly routeGeometryRef?: string;
+  readonly culturalHighlights: readonly string[];
+  readonly localPartnerCount: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface TerritorialAccessibilityRecord {
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly accessibilityLevel: AccessibilityLevel;
+  readonly accessibilityIndex: number; // 0 to 100
+  readonly primaryRoadAccess: boolean;
+  readonly averageTravelTimeToCapitalMinutes: number;
+  readonly publicTransportCoverageScore: number; // 0 to 100
+  readonly digitalConnectivityScore: number; // 0 to 100
+  readonly emergencyServicesWithin30Min: number;
+  readonly healthCentersCount: number;
+  readonly policeStationsCount: number;
+  readonly fireStationsCount: number;
+  readonly totalTouristAttractions: number;
+  readonly lastEvaluatedAt: string;
+  readonly evaluationSource: "OFFICIAL_SURVEY" | "FIELD_VALIDATION" | "INFRASTRUCTURE_AUDIT";
+}
+
+export interface ServiceGapAnalysisRecord {
+  readonly gapId: string;
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly destinationId: string;
+  readonly destinationName: string;
+  readonly destinationCoordinates: GeoPointLike;
+  readonly missingCategory: ServiceGapCategory;
+  readonly nearestServiceDistanceKm: number;
+  readonly nearestServiceEstimatedMinutes: number;
+  readonly nearestServiceName: string;
+  readonly severity: "LOW" | "MODERATE" | "HIGH";
+  readonly recommendedMitigation: string;
+  readonly isPlanningOnly: true; // Strict: Internal planning, never public shaming
+  readonly detectedAt: string;
+}
+
+export interface SpatialCoverageRecord {
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly totalDestinations: number;
+  readonly totalVerifiedBusinesses: number;
+  readonly totalSmartPoints: number;
+  readonly whiteSpotsDetected: number;
+  readonly fieldResearchQueueCount: number;
+  readonly coveragePercentage: number; // 0 to 100
+  readonly lastAuditedAt: string;
+}
+
+export interface ElevationProfileRecord {
+  readonly routeId: string;
+  readonly minElevationMeters: number;
+  readonly maxElevationMeters: number;
+  readonly totalGainMeters: number;
+  readonly totalLossMeters: number;
+  readonly elevationSamples: readonly {
+    readonly distanceKm: number;
+    readonly elevationMeters: number;
+  }[];
+  readonly source: "TERRAIN_ELEVATION_API" | "FIELD_GPS_LOG" | "ESTIMATED_CONTOUR";
+}
+
+export interface HikingTrailRecord {
+  readonly trailId: string;
+  readonly name: string;
+  readonly territoryId: string;
+  readonly difficulty: "SUAVE" | "MODERADA" | "EXIGENTE" | "EXTREMA";
+  readonly distanceKm: number;
+  readonly estimatedDurationHours: number;
+  readonly elevationGainMeters: number;
+  readonly startCoordinates: GeoPointLike;
+  readonly endCoordinates: GeoPointLike;
+  readonly waypoints: readonly GeoPointLike[];
+  readonly officialStatus: "OFFICIAL_PARK_TRAIL" | "COMMUNITY_VERIFIED" | "GUIDE_RECOMMENDED";
+  readonly verifiedAt: string;
+  readonly safetyRecommendations: readonly string[];
+  readonly requiresGuide: boolean;
+}
+
+export interface GisToolExecutionResult<T = unknown> {
+  readonly toolName: string;
+  readonly executionTimeMs: number;
+  readonly success: boolean;
+  readonly isCached: boolean;
+  readonly data: T;
+  readonly error?: string | null;
+  readonly disclaimer: string;
+}
