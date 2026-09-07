@@ -1,0 +1,474 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE COMPONENTES DE INTERFAZ (COMPONENTS.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Definir los bloques de construcción reutilizables de la interfaz de usuario:
+  botones Sunset, tarjetas Glassmorphism, modales de auxilio SOS y APK,
+  simulador de smartphone y tablas de datos.
+- Mantener consistencia visual y técnica en todas las páginas del ecosistema.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Clases modulares independientes con aceleración por GPU.
+- Estándar libre de advertencias y efectos hápticos visuales.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- .btn-hero-primary, .btn-hero-glass, .sos-quick-btn, .modal-backdrop-pro, .phone-hardware.
+============================================================================
+*/
+
+/* BOTONES OFICIALES */
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  background: var(--grad-sunset);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 14px;
+  border: none;
+  box-shadow: var(--shadow-glow-terracotta);
+  cursor: pointer;
+  transition: var(--trans-smooth);
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(246, 94, 1, 0.6);
+}
+
+.btn-hero-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.6rem;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid var(--border-subtle);
+  color: var(--arena-pinolera);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  transition: var(--trans-smooth);
+}
+
+.btn-hero-glass:hover {
+  background: rgba(34, 123, 145, 0.35);
+  border-color: var(--arena-pinolera);
+  transform: translateY(-2px);
+}
+
+.btn-admin-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid var(--border-teal);
+  color: var(--arena-pinolera);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--trans-fast);
+}
+
+.btn-admin-action:hover {
+  background: var(--petroleo-teal);
+  color: #FFFFFF;
+}
+
+.btn-broadcast-alert {
+  background: var(--grad-sunset);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: var(--shadow-glow-terracotta);
+}
+
+.btn-nav-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  background: var(--grad-sunset);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 9999px;
+  border: none;
+  box-shadow: var(--shadow-glow-terracotta);
+  cursor: pointer;
+  transition: var(--trans-smooth);
+}
+
+.btn-nav-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(246, 94, 1, 0.5);
+}
+
+/* BOTÓN DE EMERGENCIA SOS EN SENDERO */
+.sos-quick-btn {
+  background: var(--rojo-alerta);
+  color: #FFFFFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  animation: pulseSos 2s infinite;
+}
+
+@keyframes pulseSos {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* MODALES OFICIALES (GLASSMORPHISM) */
+.modal-backdrop-pro {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--trans-smooth);
+}
+
+.modal-backdrop-pro.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card-dialog {
+  background: var(--grad-admin);
+  border: 2px solid var(--border-glow);
+  border-radius: 32px;
+  width: 100%;
+  max-width: 580px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  transform: scale(0.94);
+  transition: var(--trans-bounce);
+}
+
+.modal-backdrop-pro.active .modal-card-dialog {
+  transform: scale(1);
+}
+
+.modal-close-x {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--trans-fast);
+}
+
+.modal-close-x:hover {
+  background: var(--terracotta);
+}
+
+.sos-modal-dialog {
+  background: #0F172A;
+  border: 2px solid var(--rojo-alerta);
+  border-radius: 28px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: 0 20px 50px rgba(239, 68, 68, 0.35);
+  position: relative;
+}
+
+.sos-lines-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.sos-phone-card {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 14px;
+  padding: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: var(--trans-fast);
+}
+
+.sos-phone-card:hover {
+  background: var(--rojo-alerta);
+  transform: translateY(-2px);
+}
+
+/* SIMULADOR DE SMARTPHONE */
+.phone-mockup-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.phone-glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background: radial-gradient(circle, rgba(246, 94, 1, 0.25) 0%, rgba(22, 93, 111, 0.2) 60%, transparent 80%);
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.phone-hardware {
+  position: relative;
+  z-index: 1;
+  width: 320px;
+  height: 640px;
+  background: #020617;
+  border-radius: 46px;
+  padding: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 0 0 2px rgba(244, 230, 193, 0.2);
+  border: 4px solid #1E293B;
+}
+
+.phone-notch-island {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 20px;
+  background: #0F172A;
+  border-radius: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.notch-camera {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #1E293B;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: var(--grad-volcano);
+  border-radius: 36px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.phone-status-bar {
+  padding: 1.4rem 1.2rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.phone-app-header {
+  padding: 0.4rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone-app-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.phone-app-bell {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--arena-pinolera);
+}
+
+.phone-body-scroll {
+  flex: 1;
+  padding: 0.8rem 1.1rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.phone-body-scroll::-webkit-scrollbar { display: none; }
+
+.phone-hero-card {
+  position: relative;
+  height: 175px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.phone-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.phone-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(15, 23, 42, 0.95) 100%);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.phone-hero-badge {
+  align-self: flex-start;
+  font-size: 0.6rem;
+  font-weight: 800;
+  background: var(--terracotta);
+  color: #FFFFFF;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.phone-hero-title {
+  font-size: 1.05rem;
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+.phone-hero-subtitle {
+  font-size: 0.68rem;
+  color: var(--arena-pinolera);
+}
+
+.phone-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.phone-mini-card {
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(8px);
+}
+
+.phone-mini-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.phone-mini-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--grad-sunset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+}
+
+.phone-mini-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.phone-mini-meta {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.phone-mini-price {
+  font-family: var(--font-tech);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--arena-pinolera);
+}
+
+.phone-bottom-dock {
+  background: rgba(12, 56, 67, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-subtle);
+  padding: 0.6rem 0.8rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dock-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.dock-tab.active {
+  color: var(--terracotta-light);
+}
+
+.dock-tab i {
+  font-size: 1rem;
+}

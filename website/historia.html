@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — MÓDULO INSIGNIA: HISTORIA DE MI PAÍS (historia.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Dotar al explorador y a las nuevas generaciones de una comprensión profunda
+  de la identidad, soberanía y resistencia histórica de Nicaragua, desde las
+  culturas originarias prehispánicas hasta el país resiliente de hoy.
+- Promover un turismo culturalmente consciente que valore la memoria comunitaria,
+  los sitios arqueológicos y la riqueza viva de los 17 departamentos y regiones.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Línea de tiempo interactiva vertical con acentos en oro noble (#D4AF37) y
+  tarjetas de lectura con desenfoque de fondo.
+- Explorador interactivo de los 17 territorios nicaragüenses con fichas informativas.
+- Integración completa con el sistema de estilos modulares (colors, typography, layout, components, modules).
+
+📦 3. QUÉ (WHAT / CONTENIDOS):
+- 7 Periodos Históricos Clave: Orígenes Indígenas, Resistencia Indígena, Época Colonial,
+  Independencia de Centroamérica, Batalla de San Jacinto, Lucha de Sandino, Resiliencia Contemporánea.
+- Explorador de los 17 Departamentos y Regiones Autónomas (Costa Caribe Norte y Sur).
+- Barra de navegación y pie institucional Baqueano con centro de auxilio SOS.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia de Nicaragua | Baqueano Nicaragua</title>
+  <meta name="description" content="Recorre la memoria histórica de Nicaragua: 7 periodos fundamentales y el explorador de los 17 departamentos y regiones autónomas.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html" class="active">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="history-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-landmark"></i> Módulo Insignia de Identidad
+          </div>
+          <h1 class="section-headline">Historia de Mi País: Nicaragua</h1>
+          <p class="section-subtext">
+            Conocer la tierra que pisamos es el primer acto de respeto. Nicaragua no es solo volcanes y lagos;
+            es la epopeya viva de pueblos indígenas insumisos, poetas inmortales y comunidades campesinas de dignidad inquebrantable.
+          </p>
+        </div>
+
+        <!-- LÍNEA DE TIEMPO DE 7 PERIODOS -->
+        <div class="timeline-periods-flow">
+          <!-- Periodo 1 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">1</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Época Prehispánica (~8,000 a.C. - 1502 d.C.)</div>
+              <h3>Pueblos Originarios & Cosmovisión del Xolotlán</h3>
+              <p>
+                Asentamientos Chorotegas, Nicaraos, Maribios, Matagalpas, Miskitos y Mayangnas que veneraban el agua,
+                los volcanes sagrados y cultivaban el maíz como génesis divina. Las Huellas de Acahualinca y los petroglifos
+                de Ometepe testimonian milenios de armonía territorial comunitaria.
+              </p>
+            </div>
+          </div>
+
+          <!-- Periodo 2 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">2</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Siglo XVI (1523 - 1524)</div>
+              <h3>Resistencia Indígena: El Encuentro y Diriangén</h3>
+              <p>
+                El Cacique Nicarao dialoga filosóficamente con Gil González Dávila, mientras el gran jefe Diriangén
+                organiza la primera insurrección armada en defensa de la soberanía de estas tierras, consagrando
+                la rebeldía que caracteriza el temple del pueblo nicaragüense.
+              </p>
+            </div>
+          </div>
+
+          <!-- Periodo 3 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">3</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Periodo Colonial (1524 - 1821)</div>
+              <h3>Fundación de Ciudades & Sincretismo Cultural</h3>
+              <p>
+                Francisco Hernández de Córdoba funda Santiago de los Caballeros de León y Granada. Surge el mestizaje
+                arquitectónico, el habla popular pinolera y la inmortal comedia bailete de protesta popular: <em>El Güegüense</em>,
+                declarado Patrimonio Oral e Intangible de la Humanidad por la UNESCO.
+              </p>
+            </div>
+          </div>
+
+          <!-- Periodo 4 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">4</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Independencia (1821)</div>
+              <h3>Ruptura con la Corona Española</h3>
+              <p>
+                El 15 de septiembre de 1821 se proclama el Acta de Independencia de Centroamérica. Nicaragua inicia su senda
+                como nación soberana, superando las confrontaciones locales y defendiendo su autodeterminación territorial.
+              </p>
+            </div>
+          </div>
+
+          <!-- Periodo 5 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">5</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Guerra Nacional (1856)</div>
+              <h3>Defensa Nacional & La Pedrada de Andrés Castro</h3>
+              <p>
+                Frente a la invasión del filibustero William Walker que pretendía esclavizar Centroamérica, el pueblo
+                se levanta en la gloriosa Batalla de San Jacinto (14 de septiembre de 1856). Andrés Castro derriba al invasor
+                de una certera pedrada, símbolo eterno de dignidad nacional.
+              </p>
+            </div>
+          </div>
+
+          <!-- Periodo 6 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">6</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Siglo XX (1927 - 1934)</div>
+              <h3>General de Hombres Libres: Augusto C. Sandino</h3>
+              <p>
+                Desde las montañas de Las Segovias, Sandino y su Ejército Defensor de la Soberanía Nacional expulsan
+                a las tropas de ocupación extranjera con tácticas de guerrilla comunitaria y cooperativismo agrícola
+                sobre el Río Coco, cuna del ecoturismo campesino.
+              </p>
+            </div>
+          </div>
+
+          <!-- Periodo 7 -->
+          <div class="timeline-period-card">
+            <div class="timeline-period-badge">7</div>
+            <div class="timeline-content-box">
+              <div class="timeline-era-tag">Época Contemporánea & Turismo Comunitario</div>
+              <h3>Paz, Soberanía y Ecoturismo de Custodia Local</h3>
+              <p>
+                Nicaragua avanza protegiendo su patrimonio ecológico: Reservas de Biosfera Bosawás, Río San Juan e Isla de Ometepe.
+                Baqueano surge para que cada viajero respete las tradiciones campesinas y apoye a las familias locales de forma directa.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPLORADOR DE LOS 17 TERRITORIOS -->
+        <div class="section-lead-header" style="margin-top: 5rem; margin-bottom: 2rem;">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-map-location-dot"></i> Geografía Soberana
+          </div>
+          <h2 class="section-headline">Explorador de los 17 Territorios de Nicaragua</h2>
+          <p class="section-subtext">
+            15 Departamentos y 2 Regiones Autónomas. Haz clic sobre cada territorio para explorar su identidad turística comunitaria.
+          </p>
+        </div>
+
+        <div class="territories-grid">
+          <div class="territory-pill-card active">
+            <h5>Madriz</h5>
+            <span>Cañón de Somoto & Rosquillas</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>León</h5>
+            <span>Cerro Negro & Catedral Insigne</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Rivas</h5>
+            <span>Isla de Ometepe & Playas de Sur</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Jinotega</h5>
+            <span>Cascada La Luna & Café Nebliselva</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Masaya</h5>
+            <span>Volcán Activo & Cuna del Folklore</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Granada</h5>
+            <span>Isletas, Mombacho & Arquitectura</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Matagalpa</h5>
+            <span>Selva Negra, Cacao & Guías Indígenas</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Estelí</h5>
+            <span>Salto La Estanzuela & Muralismo</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Chinandega</h5>
+            <span>Volcán San Cristóbal & Cosigüina</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Managua</h5>
+            <span>Capital, Xolotlán & Reserva El Chocoyero</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Carazo</h5>
+            <span>El Güegüense & Bosques Secos del Pacífico</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Chontales</h5>
+            <span>Arqueología Amerrisque & Ganadería Sostenible</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Boaco</h5>
+            <span>Ciudad de Dos Pisos & Cerros Vírgenes</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Nueva Segovia</h5>
+            <span>Cerro Mogotón (Punto Más Alto) & Pinares</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>Río San Juan</h5>
+            <span>Castillo de la Inmaculada & Humedales Indio Maíz</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>RACCN (Caribe Norte)</h5>
+            <span>Cultura Miskita, Mayangna & Bosawás Profunda</span>
+          </div>
+          <div class="territory-pill-card">
+            <h5>RACCS (Caribe Sur)</h5>
+            <span>Corn Island, Bluefields & Bahía de Perlas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Plataforma tecnológica comunitaria para el turismo responsable, la custodia ambiental y el empoderamiento
+            campesino de Nicaragua. Cero intermediarios abusivos.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">AUXILIO EN RUTA</h4>
+          <div class="emergency-line-item">
+            <i class="fa-solid fa-phone-volume"></i>
+            <div>Cruz Blanca: <strong>128</strong></div>
+          </div>
+          <div class="emergency-line-item">
+            <i class="fa-solid fa-fire-extinguisher"></i>
+            <div>Bomberos Unidos: <strong>115</strong></div>
+          </div>
+          <div class="emergency-line-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>Policía Turística: <strong>101 / 118</strong></div>
+          </div>
+          <div class="emergency-line-item">
+            <i class="fa-solid fa-headset"></i>
+            <div>Mesa SOS Baqueano: <strong>+505 8443-1289</strong></div>
+          </div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">DISTRIBUCIÓN</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Aplicación nativa diseñada para Android con mapas sin conexión y baliza satelital.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Desarrollado con orgullo para las familias campesinas.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card">
+          <i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i>
+          <div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">Marcar 128</span></div>
+        </a>
+        <a href="tel:115" class="sos-phone-card">
+          <i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i>
+          <div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">Marcar 115</span></div>
+        </a>
+        <a href="tel:101" class="sos-phone-card">
+          <i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i>
+          <div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">Marcar 101</span></div>
+        </a>
+        <a href="tel:50584431289" class="sos-phone-card">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i>
+          <div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div>
+        </a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete APK oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CENTRO DE OPERACIONES & ACCESO POR ROLES (admin.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Dotar al ecosistema de una pasarela de seguridad estricta y control de acceso
+  basado en roles (RBAC) para el Centro de Mando y Telemetría:
+  * 👑 ADMINISTRADOR: Control total de métricas, rutas, alertas de sendero y bases de datos.
+  * 🔍 AUDITOR: Supervisión de cumplimiento normativo, auditorías ecológicas y Ley 306.
+  * 🏕️ USUARIO NORMAL (Operador Comunitario): Gestión de senderos y balizas de su territorio.
+- Garantizar la confidencialidad de los ingresos comunitarios y la integridad de las rutas.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Pasarela de autenticación Glassmorphism reactiva con sessionStorage (admin-ops.js).
+- Selector dinámico de roles de demostración con autocompletado de credenciales a 1 toque.
+- Restricciones visuales y operativas en el DOM según el nivel de privilegios del usuario activo.
+- Barra de sesión activa con avatar, rol, cargo y botón de cierre de sesión seguro.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Pasarela de Inicio de Sesión (#adminLoginGate).
+- Barra de Sesión de Usuario (#userSessionBar).
+- Dashboard Operativo (#adminDashboardContent) con KPIs, Gráfica, Firebase y Rutas.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baqueano Ops Center | Control de Acceso & Telemetría</title>
+  <meta name="description" content="Centro de Operaciones y Monitoreo en Tiempo Real de Baqueano Nicaragua: Autenticación por roles para Administrador, Auditor y Usuario Normal.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html" class="active">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <div class="container admin-hub-view">
+
+      <!-- ================================================================ -->
+      <!-- 1. PASARELA DE AUTENTICACIÓN (LOGIN GATE)                        -->
+      <!-- ================================================================ -->
+      <section class="admin-login-wrapper" id="adminLoginGate">
+        <div class="admin-login-card">
+          <div class="login-header-box">
+            <div class="login-icon-circle">
+              <img src="assets/images/logo.png" alt="Baqueano Nicaragua">
+            </div>
+            <h1 class="login-title">Acceso al Ops Center</h1>
+            <p class="login-subtitle">
+              Autenticación requerida para acceder al centro de mando, telemetría y supervisión de senderos.
+            </p>
+          </div>
+
+          <!-- Selector Rápido de Roles para Demostración -->
+          <div style="margin-bottom: 1rem;">
+            <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">
+              Selecciona tu Rol de Acceso:
+            </span>
+            <div class="login-role-selector">
+              <button type="button" class="role-select-btn active" data-role="admin">
+                <i class="fa-solid fa-crown" style="color: var(--terracotta-light);"></i> Admin
+              </button>
+              <button type="button" class="role-select-btn" data-role="auditor">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--oro-noble);"></i> Auditor
+              </button>
+              <button type="button" class="role-select-btn" data-role="user">
+                <i class="fa-solid fa-user" style="color: var(--azul-info);"></i> Usuario
+              </button>
+            </div>
+          </div>
+
+          <!-- Alerta de Feedback -->
+          <div class="login-feedback-alert" id="loginFeedback"></div>
+
+          <!-- Formulario de Credenciales -->
+          <form id="adminLoginForm">
+            <div class="login-input-group">
+              <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Usuario o Correo Oficial:</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-user-shield"></i>
+                <input type="text" id="loginUsername" class="form-control-input" value="admin@baqueano.ni" required placeholder="nombre@baqueano.ni">
+              </div>
+            </div>
+
+            <div class="login-input-group">
+              <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Seguridad:</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" class="form-control-input" value="admin123" required placeholder="••••••••">
+              </div>
+            </div>
+
+            <button type="submit" class="btn-hero-primary" style="width: 100%; justify-content: center; padding: 0.95rem; font-size: 1rem; margin-top: 0.6rem;">
+              <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Panel de Control
+            </button>
+          </form>
+
+          <!-- Tarjeta de Referencia de Credenciales -->
+          <div style="margin-top: 1.8rem; padding: 1rem; background: rgba(15,23,42,0.6); border-radius: 14px; border: 1px dashed var(--border-subtle); font-size: 0.78rem; color: var(--text-muted);">
+            <div style="font-weight: 800; color: var(--arena-pinolera); margin-bottom: 0.4rem; font-family: var(--font-tech);">
+              <i class="fa-solid fa-id-badge"></i> CREDENCIALES CONFIGURADAS:
+            </div>
+            <div>• <strong>Administrador:</strong> <code>admin@baqueano.ni</code> / <code>admin123</code></div>
+            <div>• <strong>Auditor:</strong> <code>auditor@baqueano.ni</code> / <code>auditor123</code></div>
+            <div>• <strong>Usuario Normal:</strong> <code>operador@baqueano.ni</code> / <code>usuario123</code></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <!-- 2. CONTENIDO DEL DASHBOARD ADMINISTRATIVO                        -->
+      <!-- ================================================================ -->
+      <section id="adminDashboardContent" style="display: none;">
+
+        <!-- BARRA DE SESIÓN ACTIVA (RBAC) -->
+        <div class="user-session-bar" id="userSessionBar">
+          <div class="user-profile-meta">
+            <div class="user-avatar-circle" id="sessionUserAvatar">VM</div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span class="user-name-title" id="sessionUserName">Lic. Valeria Morales</span>
+                <span class="user-role-badge admin" id="sessionUserRole">
+                  <i class="fa-solid fa-shield"></i> Administrador General
+                </span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--arena-pinolera);" id="sessionUserTitle">
+                Directora de Operaciones & Soberanía Territorial
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.8rem;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-tech);">
+              SESIÓN ACTIVA • ENCRIPTACIÓN TLS 1.3
+            </span>
+            <button class="btn-logout" id="btnLogoutAdmin" title="Cerrar sesión actual">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+          </div>
+        </div>
+
+        <!-- HEADER DEL DASHBOARD -->
+        <div class="admin-header-bar">
+          <div class="admin-title-col">
+            <h2>
+              <i class="fa-solid fa-network-wired" style="color: var(--terracotta-light);"></i>
+              Baqueano Ops Center & Telemetría
+            </h2>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span class="admin-badge-live">
+                <span class="pulse-green-small"></span> NÚCLEO EN VIVO
+              </span>
+              <span style="font-size: 0.82rem; color: var(--arena-pinolera); font-family: var(--font-tech);">
+                CLUSTER: app-baqueano (us-central1)
+              </span>
+            </div>
+          </div>
+
+          <div class="admin-actions-col">
+            <button class="btn-admin-action" id="btnRefreshMetrics">
+              <i class="fa-solid fa-rotate"></i> Actualizar Métricas
+            </button>
+            <button class="btn-admin-action btn-broadcast-alert" id="btnBroadcastAlert">
+              <i class="fa-solid fa-bullhorn"></i> Emitir Alerta a Balizas
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 TARJETAS KPI EN TIEMPO REAL -->
+        <div class="kpi-metrics-grid">
+          <!-- KPI 1: Usuarios App -->
+          <div class="kpi-card">
+            <div class="kpi-icon-row">
+              <div class="kpi-icon-box kpi-icon-app"><i class="fa-brands fa-android"></i></div>
+              <span class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> +18.4%</span>
+            </div>
+            <div class="kpi-value-big" id="metricAppUsers">1,495</div>
+            <div class="kpi-label-muted">Dispositivos Android Activos</div>
+          </div>
+
+          <!-- KPI 2: Visitas Web -->
+          <div class="kpi-card">
+            <div class="kpi-icon-row">
+              <div class="kpi-icon-box kpi-icon-web"><i class="fa-solid fa-globe"></i></div>
+              <span class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> +29.1%</span>
+            </div>
+            <div class="kpi-value-big" id="metricWebVisits">5,872</div>
+            <div class="kpi-label-muted">Exploradores en Portal Web</div>
+          </div>
+
+          <!-- KPI 3: Ingreso Campesino -->
+          <div class="kpi-card">
+            <div class="kpi-icon-row">
+              <div class="kpi-icon-box kpi-icon-money"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+              <span class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> 100% Directo</span>
+            </div>
+            <div class="kpi-value-big" id="metricCommunityRevenue">$25,120</div>
+            <div class="kpi-label-muted">Ingreso Retenido por Cooperativas (USD)</div>
+          </div>
+
+          <!-- KPI 4: Balizas GPS -->
+          <div class="kpi-card">
+            <div class="kpi-icon-row">
+              <div class="kpi-icon-box kpi-icon-gps"><i class="fa-solid fa-satellite-dish"></i></div>
+              <span class="kpi-trend" style="color: var(--arena-pinolera);"><i class="fa-solid fa-signal"></i> 99.8%</span>
+            </div>
+            <div class="kpi-value-big" id="metricGpsSessions">344</div>
+            <div class="kpi-label-muted">Balizas Satelitales en Sendero</div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN PRINCIPAL: 2 COLUMNAS (GRÁFICO + SERVICIOS FIREBASE) -->
+        <div class="dashboard-main-grid">
+          <!-- Gráfico Comparativo de Actividad -->
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3 class="dash-panel-title">
+                <i class="fa-solid fa-chart-column" style="color: var(--terracotta-light);"></i>
+                Actividad Semanal: App Android vs Portal Web
+              </h3>
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-tech);">ÚLTIMOS 7 DÍAS</span>
+            </div>
+
+            <div class="activity-chart-wrapper">
+              <div class="chart-bars-container">
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 65%;" data-val="65%"></div>
+                    <div class="bar-col web" style="height: 52%;" data-val="52%"></div>
+                  </div>
+                  <span class="chart-day-label">Lun</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 72%;" data-val="72%"></div>
+                    <div class="bar-col web" style="height: 60%;" data-val="60%"></div>
+                  </div>
+                  <span class="chart-day-label">Mar</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 80%;" data-val="80%"></div>
+                    <div class="bar-col web" style="height: 68%;" data-val="68%"></div>
+                  </div>
+                  <span class="chart-day-label">Mié</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 88%;" data-val="88%"></div>
+                    <div class="bar-col web" style="height: 75%;" data-val="75%"></div>
+                  </div>
+                  <span class="chart-day-label">Jue</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 94%;" data-val="94%"></div>
+                    <div class="bar-col web" style="height: 90%;" data-val="90%"></div>
+                  </div>
+                  <span class="chart-day-label">Vie</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 100%;" data-val="100%"></div>
+                    <div class="bar-col web" style="height: 98%;" data-val="98%"></div>
+                  </div>
+                  <span class="chart-day-label">Sáb</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="bars-pair">
+                    <div class="bar-col app" style="height: 96%;" data-val="96%"></div>
+                    <div class="bar-col web" style="height: 92%;" data-val="92%"></div>
+                  </div>
+                  <span class="chart-day-label">Dom</span>
+                </div>
+              </div>
+
+              <div class="chart-legend-row">
+                <div class="legend-item"><span class="legend-dot app"></span> App Android (Sincronización Offline)</div>
+                <div class="legend-item"><span class="legend-dot web"></span> Portal Web (Exploración & Reservas)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monitor de Infraestructura Firebase -->
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3 class="dash-panel-title">
+                <i class="fa-solid fa-server" style="color: var(--arena-pinolera);"></i>
+                Servicios Firebase Cloud
+              </h3>
+              <span class="service-status-pill online"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Saludable</span>
+            </div>
+
+            <div class="firebase-services-list">
+              <div class="firebase-service-card">
+                <div class="service-meta-left">
+                  <div class="service-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+                  <div>
+                    <div class="service-name">Firebase Auth</div>
+                    <div class="service-sub">Sesiones de Guías y Exploradores</div>
+                  </div>
+                </div>
+                <span class="service-status-pill online">24ms • 100%</span>
+              </div>
+
+              <div class="firebase-service-card">
+                <div class="service-meta-left">
+                  <div class="service-icon-wrap"><i class="fa-solid fa-database"></i></div>
+                  <div>
+                    <div class="service-name">Cloud Firestore</div>
+                    <div class="service-sub">10 Colecciones Ecosistema</div>
+                  </div>
+                </div>
+                <span class="service-status-pill online">18ms • Activo</span>
+              </div>
+
+              <div class="firebase-service-card">
+                <div class="service-meta-left">
+                  <div class="service-icon-wrap"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                  <div>
+                    <div class="service-name">Cloud Storage</div>
+                    <div class="service-sub">Evidencias Ambientales & Audios</div>
+                  </div>
+                </div>
+                <span class="service-status-pill online">32ms • Activo</span>
+              </div>
+
+              <div class="firebase-service-card">
+                <div class="service-meta-left">
+                  <div class="service-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+                  <div>
+                    <div class="service-name">Firebase Analytics</div>
+                    <div class="service-sub">Stream G-J2FBQHH47T</div>
+                  </div>
+                </div>
+                <span class="service-status-pill online">Conectado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MATRIZ DE LAS 10 COLECCIONES FIRESTORE -->
+        <div class="dash-panel" style="margin-bottom: 2.5rem;">
+          <div class="dash-panel-header">
+            <h3 class="dash-panel-title">
+              <i class="fa-solid fa-table-cells" style="color: var(--terracotta-light);"></i>
+              Arquitectura de Datos: 10 Colecciones Firestore
+            </h3>
+            <span style="font-size: 0.8rem; color: var(--arena-pinolera); font-family: var(--font-tech);">ESQUEMA SINCRONIZADO</span>
+          </div>
+
+          <div class="routes-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Colección</th>
+                  <th>Propósito Comunitario</th>
+                  <th>Índices</th>
+                  <th>Sincronización</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="table-dest-name"><code>destinos_conservacion</code></td>
+                  <td>Catálogo de reservas protegidas, coordenadas y ordenanzas</td>
+                  <td>categoría, departamento</td>
+                  <td>Bimodal (App/Web)</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>guias_baqueanos</code></td>
+                  <td>Directorio campesino certificado, idiomas, primeros auxilios</td>
+                  <td>zona_territorial, estado</td>
+                  <td>App Móvil</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>denuncias_ambientales</code></td>
+                  <td>Reportes ciudadanos georreferenciados con evidencia fotográfica</td>
+                  <td>fecha_registro, gravedad</td>
+                  <td>Bimodal (App/Web)</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>rutas_senderos_gps</code></td>
+                  <td>Trazados satelitales GeoJSON con curvas de nivel y altimetría</td>
+                  <td>dificultad, territorio</td>
+                  <td>App Móvil Offline</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>auditorias_ecologicas</code></td>
+                  <td>Evaluación periódica de capacidad de carga de senderos</td>
+                  <td>sendero_id, fecha</td>
+                  <td>Ops Center Web</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>reservas_turistas</code></td>
+                  <td>Solicitudes de guiado directo con liquidación bimoneda</td>
+                  <td>fecha_tour, estado_pago</td>
+                  <td>Bimodal (App/Web)</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>cooperativas_locales</code></td>
+                  <td>Directorio de organizaciones productivas y posadas rurales</td>
+                  <td>municipio, rubro</td>
+                  <td>Bimodal (App/Web)</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>sos_alertas_sendero</code></td>
+                  <td>Balizas de auxilio emitidas en zonas de montaña con GPS</td>
+                  <td>prioridad, estado_atención</td>
+                  <td>Tiempo Real Crítico</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>especies_fauna_flora</code></td>
+                  <td>Guía de biodiversidad, endémicos y especies protegidas</td>
+                  <td>bioma, estado_conservacion</td>
+                  <td>App Móvil Offline</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+                <tr>
+                  <td class="table-dest-name"><code>registro_ley_306</code></td>
+                  <td>Constancias de exoneración fiscal y régimen de fomento INTUR</td>
+                  <td>cooperativa_id, fecha_emision</td>
+                  <td>Ops Center Web</td>
+                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CONTROL DE RUTAS Y FEED DE EVENTOS (2 COLUMNAS) -->
+        <div class="dashboard-main-grid">
+          <!-- Tabla de Rutas -->
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3 class="dash-panel-title">
+                <i class="fa-solid fa-route" style="color: var(--verde-neon);"></i>
+                Estado Operativo de Rutas y Senderos
+              </h3>
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-tech);">ACCIONES RÁPIDAS</span>
+            </div>
+
+            <div class="routes-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sendero</th>
+                    <th>Territorio</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="routesTableBody">
+                  <tr>
+                    <td class="table-dest-name">Cañón de Somoto (Río Abajo)</td>
+                    <td>Madriz</td>
+                    <td><span class="status-badge-table active">Abierto Normal</span></td>
+                    <td>
+                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Cañón de Somoto')">
+                        Alternar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="table-dest-name">Cerro Negro (Sandboarding)</td>
+                    <td>León</td>
+                    <td><span class="status-badge-table active">Abierto Normal</span></td>
+                    <td>
+                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Cerro Negro')">
+                        Alternar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="table-dest-name">Volcán Maderas (Laguna Cráter)</td>
+                    <td>Ometepe</td>
+                    <td><span class="status-badge-table active">Abierto Normal</span></td>
+                    <td>
+                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Volcán Maderas')">
+                        Alternar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="table-dest-name">Cascada La Luna (Canopy)</td>
+                    <td>Jinotega</td>
+                    <td><span class="status-badge-table active">Abierto Normal</span></td>
+                    <td>
+                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Cascada La Luna')">
+                        Alternar
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="table-dest-name">Laguna de Apoyo (Aguas Minerales)</td>
+                    <td>Masaya</td>
+                    <td><span class="status-badge-table active">Abierto Normal</span></td>
+                    <td>
+                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Laguna de Apoyo')">
+                        Alternar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Terminal de Transmisión de Eventos -->
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <h3 class="dash-panel-title">
+                <i class="fa-solid fa-satellite" style="color: var(--terracotta-light);"></i>
+                Terminal de Eventos en Tiempo Real
+              </h3>
+              <span class="service-status-pill online"><span class="pulse-green-small"></span> STREAM</span>
+            </div>
+
+            <div class="feed-stream-box" id="liveFeedStream">
+              <div class="feed-event-item">
+                <div class="feed-event-icon"><i class="fa-solid fa-bookmark"></i></div>
+                <div class="feed-event-content">
+                  <div class="feed-event-title">Reserva Directa en Cañón de Somoto</div>
+                  <div class="feed-event-meta">3 exploradores • 100% tarifa al guía Mateo • Hace 2 min</div>
+                </div>
+              </div>
+              <div class="feed-event-item">
+                <div class="feed-event-icon"><i class="fa-solid fa-download"></i></div>
+                <div class="feed-event-content">
+                  <div class="feed-event-title">Descarga de BaqueanoNicaragua.apk</div>
+                  <div class="feed-event-meta">Dispositivo Android verificado • León • Hace 6 min</div>
+                </div>
+              </div>
+              <div class="feed-event-item">
+                <div class="feed-event-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="feed-event-content">
+                  <div class="feed-event-title">Baliza GPS Activada en Ometepe</div>
+                  <div class="feed-event-meta">Sendero Volcán Maderas en progreso • Hace 12 min</div>
+                </div>
+              </div>
+              <div class="feed-event-item">
+                <div class="feed-event-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="feed-event-content">
+                  <div class="feed-event-title">Denuncia Ciudadana Verificada</div>
+                  <div class="feed-event-meta">Reporte de desechos en mirador atendido por brigada • Hace 25 min</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Centro de mando y telemetría comunitaria. Transparencia fiscal, supervisión ecológica y soporte en ruta.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Supervisa las balizas en tiempo real y gestiona expediciones campesinas.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Operaciones transparentes para el bien común.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="js/admin-ops.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

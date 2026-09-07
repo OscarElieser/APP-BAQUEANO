@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CAMPAÑA AMBIENTAL & DENUNCIAS (ambiental.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Proteger el patrimonio biológico y los ecosistemas protegidos de Nicaragua.
+- Fomentar la ética de sendero y el turismo de huella cero.
+- Dotar a la ciudadanía de un canal expedito para documentar y denunciar agresiones
+  ambientales (talas ilegales, vertederos, quemas o pesca con veneno) con GPS satelital.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Decálogo Verde con 10 mandamientos prácticos para exploradores.
+- Formulario reactivo conectado a Geolocation API y WhatsApp API de custodia.
+- Pasaporte del Explorador Ético con 6 sellos de reconocimiento comunitario.
+- Diseño visual basado en verde selva (#2E7D32), esmeralda (#10B981) y arena pinolera.
+
+📦 3. QUÉ (WHAT / CONTENIDOS):
+- Los 10 Mandamientos del Decálogo Verde.
+- Formulario de Denuncia Ciudadana con GPS Satelital en Sendero.
+- Vitrina del Pasaporte del Explorador & Gamificación Ética.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaña Ambiental & Denuncias | Baqueano Nicaragua</title>
+  <meta name="description" content="Decálogo verde para turismo de huella cero y formulario de denuncias ambientales ciudadanas con geolocalización satelital.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html" class="active">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="environmental-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.4); color: #34D399;">
+            <i class="fa-solid fa-seedling"></i> Custodia del Territorio
+          </div>
+          <h1 class="section-headline">Campaña Ambiental & Denuncias en Sendero</h1>
+          <p class="section-subtext">
+            Nuestros bosques, lagunas de cráter y ríos son sagrados. El turismo verdadero no extrae ni destruye;
+            custodia, restaura y deja el sendero más limpio de lo que lo encontró.
+          </p>
+        </div>
+
+        <!-- DECÁLOGO VERDE -->
+        <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center; color: var(--arena-pinolera);">
+          <i class="fa-solid fa-leaf" style="color: var(--verde-neon);"></i> El Decálogo Verde del Explorador Baqueano
+        </h2>
+
+        <div class="decalogo-grid">
+          <div class="decalogo-item">
+            <div class="decalogo-num">1</div>
+            <div class="decalogo-text">
+              <h5>Regla de Plástico Cero</h5>
+              <p>Prohibido el ingreso de bolsas de un solo uso o descartables. Porta botellas y termos reutilizables de aluminio o bambú.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">2</div>
+            <div class="decalogo-text">
+              <h5>Todo lo que Sube, Baja</h5>
+              <p>Cada envoltura, fruta o residuo generado debe regresar en tu mochila hasta los depósitos de reciclaje autorizados en el poblado base.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">3</div>
+            <div class="decalogo-text">
+              <h5>Protege las Fuentes Hídricas</h5>
+              <p>No utilices jabones sintéticos ni protectores solares químicos en lagunas de cráter ni cascadas minerales. Usa prendas UV manga larga.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">4</div>
+            <div class="decalogo-text">
+              <h5>Respeta el Sendero Marcado</h5>
+              <p>Caminar fuera de las veredas autorizadas compacta el suelo fértil de la nebliselva y destruye madrigueras de especies en peligro.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">5</div>
+            <div class="decalogo-text">
+              <h5>Silencio en la Naturaleza</h5>
+              <p>Prohibido el uso de parlantes bluetooth en áreas protegidas. El ruido estresa a las aves migratorias, monos aulladores y felinos.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">6</div>
+            <div class="decalogo-text">
+              <h5>No Extraer Flora ni Fósiles</h5>
+              <p>Orquídeas, helechos arborescentes, piedras volcánicas y fósiles pertenecen al ecosistema. Fotografíalos; jamás los arranques.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">7</div>
+            <div class="decalogo-text">
+              <h5>Cero Fogatas Clandestinas</h5>
+              <p>Los vientos en laderas volcánicas propagan incendios incontrolables. Solo enciende fuego en fogones comunitarios autorizados por el guía.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">8</div>
+            <div class="decalogo-text">
+              <h5>Contrata Guías Campesinos Locales</h5>
+              <p>El baqueano de la comunidad conoce los secretos del terreno, garantiza tu seguridad física y reinvierte tus aportes en su escuela rural.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">9</div>
+            <div class="decalogo-text">
+              <h5>Comercio Justo y Directo</h5>
+              <p>Paga el valor real del trabajo campesino. No regatees precios de café, frutas o artesanías a pequeños productores familiares.</p>
+            </div>
+          </div>
+          <div class="decalogo-item">
+            <div class="decalogo-num">10</div>
+            <div class="decalogo-text">
+              <h5>Custodia Activa y Alerta</h5>
+              <p>Si presencias tala indiscriminada, quemas de bosque o cacería furtiva, utiliza el módulo de denuncias georreferenciadas de Baqueano.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMULARIO DE DENUNCIA AMBIENTAL CON GPS -->
+        <div class="denuncia-form-card" style="margin-top: 5rem;">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="badge-section-pill" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.35); color: #F87171;">
+              <i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana
+            </div>
+            <h2 style="font-size: 2rem; color: #FFFFFF; margin-bottom: 0.5rem;">Formulario de Denuncia Ambiental en Territorio</h2>
+            <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+              Reporta agresiones ecológicas en tiempo real con coordenadas satelitales verificadas. Tu reporte es canalizado directamente a las cooperativas de custodia y brigadas forestales.
+            </p>
+          </div>
+
+          <form id="environmentalReportForm">
+            <div class="form-grid-2col">
+              <div class="form-group-field">
+                <label for="reportType"><i class="fa-solid fa-list-check"></i> Tipo de Afectación:</label>
+                <select id="reportType" class="form-control-select" required>
+                  <option value="Tala Ilegal o Despale">Tala Ilegal o Despale Indiscriminado</option>
+                  <option value="Incendio o Quema Agrícola no Controlada">Incendio o Quema de Bosque</option>
+                  <option value="Contaminación de Río o Laguna">Contaminación de Fuentes de Agua</option>
+                  <option value="Basura / Vertedero en Sendero">Vertedero Clandestino en Sendero</option>
+                  <option value="Cacería Furtiva de Fauna Silvestre">Cacería o Tráfico de Fauna Silvestre</option>
+                  <option value="Construcción no Autorizada en Reserva">Invasión de Área Protegida</option>
+                </select>
+              </div>
+
+              <div class="form-group-field">
+                <label for="reportLocation"><i class="fa-solid fa-map-pin"></i> Ubicación / Destino:</label>
+                <input type="text" id="reportLocation" class="form-control-input" placeholder="Ej: Sendero Río Abajo, Cañón de Somoto" required>
+              </div>
+            </div>
+
+            <div class="form-group-field" style="margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <label for="reportDescription"><i class="fa-solid fa-align-left"></i> Descripción y Evidencia:</label>
+                <button type="button" class="btn-admin-action" id="btnCaptureGpsReport" style="padding: 0.35rem 0.8rem; font-size: 0.78rem;">
+                  <i class="fa-solid fa-satellite"></i> Incrustar Coordenadas GPS en Vivo
+                </button>
+              </div>
+              <textarea id="reportDescription" class="form-control-textarea" placeholder="Detalla lo observado (árboles talados, humo visible, vehículos, fauna afectada, etc.)..." required></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: center;">
+              <button type="submit" class="btn-hero-primary" style="padding: 1rem 2.5rem; font-size: 1rem;">
+                <i class="fa-solid fa-paper-plane"></i> Transmitir Denuncia Ambiental Vía WhatsApp
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- PASAPORTE DEL EXPLORADOR ÉTICO -->
+        <div class="passport-card-wrap">
+          <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <div class="badge-section-pill" style="background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); color: var(--oro-noble);">
+              <i class="fa-solid fa-award"></i> Gamificación Ética Comunitaria
+            </div>
+            <h2 style="font-size: 2.2rem; color: #FFFFFF; margin-bottom: 0.6rem;">El Pasaporte del Explorador Baqueano</h2>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">
+              En la aplicación móvil para Android, cada vez que completas un sendero con guía comunitario, recoges residuos o apoyas una cooperativa, ganas un sello digital en tu pasaporte ético.
+            </p>
+          </div>
+
+          <div class="passport-stamps-grid">
+            <div class="passport-stamp-badge">
+              <div class="stamp-icon"><i class="fa-solid fa-mountain"></i></div>
+              <div class="stamp-name">Guateador Somoto</div>
+              <div class="stamp-status">Nivel 1 • Obtenido</div>
+            </div>
+            <div class="passport-stamp-badge">
+              <div class="stamp-icon"><i class="fa-solid fa-volcano"></i></div>
+              <div class="stamp-name">Caminante de Lava</div>
+              <div class="stamp-status">Nivel 2 • Obtenido</div>
+            </div>
+            <div class="passport-stamp-badge">
+              <div class="stamp-icon"><i class="fa-solid fa-seedling"></i></div>
+              <div class="stamp-name">Guardián de Cuencas</div>
+              <div class="stamp-status">Nivel 3 • Obtenido</div>
+            </div>
+            <div class="passport-stamp-badge">
+              <div class="stamp-icon"><i class="fa-solid fa-mug-hot"></i></div>
+              <div class="stamp-name">Amigo del Cafetal</div>
+              <div class="stamp-status">Nivel 4 • Obtenido</div>
+            </div>
+            <div class="passport-stamp-badge">
+              <div class="stamp-icon"><i class="fa-solid fa-feather"></i></div>
+              <div class="stamp-name">Vigía de Aves</div>
+              <div class="stamp-status">Nivel 5 • En Ruta</div>
+            </div>
+            <div class="passport-stamp-badge">
+              <div class="stamp-icon"><i class="fa-solid fa-shield-cat"></i></div>
+              <div class="stamp-name">Custodio de Bosawás</div>
+              <div class="stamp-status">Nivel Máximo</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Plataforma comunitaria para el turismo sostenible y la preservación ecológica. Cero residuos, respeto a las familias campesinas y amor patrio.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía Nacional: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa SOS Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Descarga la aplicación nativa para emitir balizas satelitales en zonas sin cobertura telefónica.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Custodios de la tierra pinolera.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="js/environmental.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

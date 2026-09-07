@@ -1,0 +1,335 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE ESTRUCTURA & MAQUETACIÓN (LAYOUT.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Definir el armazón responsivo, la barra de navegación institucional con
+  enlaces a todas las páginas y el pie de página común con líneas de emergencia.
+- Garantizar que la navegación entre páginas separadas sea consistente, fluida y ergonómica.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Flexbox y CSS Grid responsivo con SafeAreas y desenfoque Glassmorphism.
+- Navbar fijado con backdrop-filter y sombras dinámicas al scroll.
+
+📦 3. QUÉ (WHAT / SELECTORES EXPUESTOS):
+- .main-navbar, .nav-inner, .brand-box, .nav-links-menu, .container, .site-footer-pro.
+============================================================================
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22, 93, 111, 0.35) 0%, transparent 70%);
+  filter: blur(100px);
+  z-index: -2;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 94, 1, 0.18) 0%, transparent 70%);
+  filter: blur(120px);
+  z-index: -2;
+  pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--trans-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.page-wrapper {
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+  min-height: 80vh;
+}
+
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN INSTITUCIONAL
+   ========================================================================== */
+.main-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0.85rem 0;
+  transition: var(--trans-smooth);
+}
+
+.main-navbar.scrolled {
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 0.6rem 0;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-icon-wrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow-terracotta);
+  transition: var(--trans-smooth);
+}
+
+.brand-icon-wrapper:hover {
+  transform: rotate(6deg) scale(1.05);
+}
+
+.brand-logo-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.brand-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brand-title-main {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #FFFFFF;
+}
+
+.brand-pill-flag {
+  font-size: 0.6rem;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  background: var(--grad-sunset);
+  color: #FFFFFF;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+}
+
+.brand-tagline-sub {
+  font-size: 0.65rem;
+  font-family: var(--font-tech);
+  letter-spacing: 2px;
+  color: var(--arena-pinolera);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ENLACES DE NAVEGACIÓN MULTI-PÁGINA */
+.nav-links-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  list-style: none;
+}
+
+.nav-link-item {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  padding: 0.35rem 0;
+  transition: color 0.2s ease;
+}
+
+.nav-link-item:hover,
+.nav-link-item.active {
+  color: var(--arena-pinolera);
+}
+
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--grad-sunset);
+  transition: width 0.3s ease;
+}
+
+.nav-link-item:hover::after,
+.nav-link-item.active::after {
+  width: 100%;
+}
+
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   FOOTER INSTITUCIONAL COMPARTIDO
+   ========================================================================== */
+.site-footer-pro {
+  background: var(--bg-darker);
+  border-top: 1px solid var(--border-subtle);
+  padding: 5rem 0 2rem;
+  position: relative;
+}
+
+.footer-columns-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-col-header {
+  font-size: 1rem;
+  color: var(--arena-pinolera);
+  margin-bottom: 1.2rem;
+  font-family: var(--font-tech);
+  letter-spacing: 1px;
+}
+
+.footer-link-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-link-list a {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.footer-link-list a:hover {
+  color: #FFFFFF;
+}
+
+.emergency-line-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.emergency-line-item strong {
+  color: var(--terracotta-light);
+  font-family: var(--font-tech);
+}
+
+.footer-bottom-bar {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* RESPONSIVE LAYOUT */
+@media (max-width: 1024px) {
+  .footer-columns-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links-menu {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .footer-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+}

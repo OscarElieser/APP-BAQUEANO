@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — COOPERATIVAS & ALOJAMIENTOS ALIADOS (aliados.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Conectar directamente al viajero con las cooperativas comunitarias y posadas
+  campesinas de Nicaragua, eliminando intermediarios y comisiones abusivas.
+- Respaldar a familias rurales que protegen el agua y los bosques de su territorio.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Tarjetas tridimensionales 3D con giro de 180° (perspective: 1000px, transform-style: preserve-3d).
+- Al hacer hover o clic, la tarjeta revela los datos de contacto directo (WhatsApp y llamada telefónica).
+- Aceleración por GPU para giros suaves a 60fps sin tirones.
+
+📦 3. QUÉ (WHAT / CONTENIDOS):
+- 6 Fichas 3D de Cooperativas y Alojamientos Rurales: Cañón de Somoto, Posada La Abuela,
+  Isla de Ometepe, Selva Negra Matagalpa, Guías de Cerro Negro y Apoyo Resort.
+- Navegación unificada, centro de auxilio SOS y descarga de APK.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cooperativas & Alojamientos Aliados | Baqueano Nicaragua</title>
+  <meta name="description" content="Conoce la red de cooperativas campesinas y alojamientos comunitarios con contacto directo sin intermediarios foráneos.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html" class="active">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="allies-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill" style="background: rgba(246,94,1,0.15); border-color: rgba(246,94,1,0.4); color: var(--terracotta-light);">
+            <i class="fa-solid fa-handshake-angle"></i> Economía Social Comunitaria
+          </div>
+          <h1 class="section-headline">Cooperativas Campesinas & Alojamientos Aliados</h1>
+          <p class="section-subtext">
+            Pasa el cursor o toca cada tarjeta para girarla en 3D (180°) y acceder al contacto directo
+            del coordinador local por WhatsApp o llamada. Cero comisiones a plataformas transnacionales.
+          </p>
+        </div>
+
+        <!-- GRID 3D FLIP CARDS -->
+        <div class="allies-3d-grid">
+          <!-- Tarjeta 1: Somoto -->
+          <div class="flip-card-3d" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop Somoto" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-body">
+                  <span style="font-size: 0.75rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700;">MADRIZ • MONUMENTO NACIONAL</span>
+                  <h3 class="flip-front-title">Coop. Guías Comunitarios del Cañón</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span style="font-size: 0.72rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800;">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Coop. Cañón de Somoto</h3>
+                  <p class="flip-back-desc">
+                    32 familias campesinas de Sonís y El Guayabo. Ofrecen recorridos acuáticos seguros con chalecos salvavidas certificados, lanchas y hospedaje rural familiar con rosquillas calientes.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Coop%20Somoto,%20deseo%20coordinar%20guía%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Coordinador
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Laguna de Apoyo -->
+          <div class="flip-card-3d" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <img src="assets/images/aliados/posada_ecologica_la_abuela.jpg" alt="Posada La Abuela" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-body">
+                  <span style="font-size: 0.75rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700;">MASAYA • CRÁTER VOLCÁNICO</span>
+                  <h3 class="flip-front-title">Posada Ecológica La Abuela</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span style="font-size: 0.72rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800;">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Posada La Abuela</h3>
+                  <p class="flip-back-desc">
+                    Alojamiento sustentable sobre la orilla de la laguna de aguas minerales. Cabañas de madera nativa, kayak libre de motor, huerto orgánico y respeto a la fauna silvestre.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Posada%20La%20Abuela,%20deseo%20reservar%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar a Recepción
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Cerro Negro -->
+          <div class="flip-card-3d" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <img src="assets/images/destinos/cerro_negro.jpg" alt="Coop Cerro Negro" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-body">
+                  <span style="font-size: 0.75rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700;">LEÓN • CORDILLERA DE LOS MARIBIOS</span>
+                  <h3 class="flip-front-title">Coop. Baqueanos Cerro Negro</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span style="font-size: 0.72rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800;">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Baqueanos del Volcán</h3>
+                  <p class="flip-back-desc">
+                    Guías locales certificados para ascenso al cráter activo y sandboarding seguro con equipo de protección integral. Fondos destinados a la reforestación de la base volcánica.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Guías%20Cerro%20Negro,%20deseo%20tour%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Jefe de Guías
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 4: Ometepe -->
+          <div class="flip-card-3d" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Coop Ometepe" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-body">
+                  <span style="font-size: 0.75rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700;">RIVAS • RESERVA DE BIOSFERA</span>
+                  <h3 class="flip-front-title">Red Comunitaria Ometepe Viva</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span style="font-size: 0.72rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800;">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Ometepe Comunitaria</h3>
+                  <p class="flip-back-desc">
+                    Red de hospederías campesinas en las faldas del Maderas y Concepción. Senderismo hacia petroglifos sagrados, cascada San Ramón y alimentación criolla de huerto familiar.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Red%20Ometepe,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Representante
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 5: Selva Negra & Café -->
+          <div class="flip-card-3d" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <img src="assets/images/aliados/oro_eco.jpg" alt="Selva Negra" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-body">
+                  <span style="font-size: 0.75rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700;">MATAGALPA • NEBLISELVA NORTEÑA</span>
+                  <h3 class="flip-front-title">Finca Agroecológica Selva Norte</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span style="font-size: 0.72rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800;">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Selva Norte Agroecológica</h3>
+                  <p class="flip-back-desc">
+                    Café de sombra 100% orgánico certificado y senderos de avistamiento del Quetzal resplandeciente. Cabañas de niebla, biogas comunitario y cero uso de agroquímicos.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Finca%20Selva%20Norte,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar a Administración
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 6: Apoyo Resort -->
+          <div class="flip-card-3d" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <img src="assets/images/aliados/apoyo_resort.jpg" alt="Apoyo Resort" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-body">
+                  <span style="font-size: 0.75rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700;">CATARINA • MIRADOR NATURAL</span>
+                  <h3 class="flip-front-title">Posada del Sol & Mirador</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span style="font-size: 0.72rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800;">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Posada del Sol Catarina</h3>
+                  <p class="flip-back-desc">
+                    Hospedaje atendido por artesanos de Masaya y Catarina. Talleres de alfarería precolombina, gastronomía típica y vista panorámica inigualable a la caldera de Apoyo y Granada.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Posada%20del%20Sol,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar a Recepción
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Red solidaria de cooperativas y alojamientos familiares de Nicaragua. 100% de los ingresos van a la gente del territorio.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Contacta guías y reserva cabañas sin comisiones desde la aplicación móvil para Android.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Apoyo incondicional al cooperativismo campesino.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Soporte táctil para girar tarjetas en móviles al tocar
+    document.querySelectorAll('.flip-card-3d').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return;
+        this.classList.toggle('flipped');
+      });
+    });
+  </script>
+</body>
+</html>
