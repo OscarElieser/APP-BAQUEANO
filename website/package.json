@@ -1,0 +1,39 @@
+{
+  "name": "@baqueano/website-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "description": "Baqueano Nicaragua web ecosystem isolated from the Flutter Android app.",
+  "scripts": {
+    "dev:web": "next dev apps/web -p 3000",
+    "dev:admin": "next dev apps/admin -p 3001",
+    "build": "corepack pnpm --filter @baqueano/web build && corepack pnpm --filter @baqueano/admin build",
+    "build:web": "corepack pnpm --filter @baqueano/web build",
+    "build:admin": "corepack pnpm --filter @baqueano/admin build",
+    "lint": "corepack pnpm --filter @baqueano/web lint && corepack pnpm --filter @baqueano/admin lint",
+    "typecheck": "corepack pnpm --filter @baqueano/web typecheck && corepack pnpm --filter @baqueano/admin typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.11",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.1.6",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "clsx": "^2.1.1",
+    "firebase": "^12.18.0",
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^0.468.0",
+    "next": "^15.1.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.2",
+    "zod": "^3.24.1"
+  }
+}

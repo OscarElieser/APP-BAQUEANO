@@ -100,20 +100,20 @@
             </p>
           </div>
 
-          <!-- Selector Rápido de Roles para Demostración -->
+          <!-- Selector Rápido de Roles Autorizados -->
           <div style="margin-bottom: 1rem;">
             <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">
-              Selecciona tu Rol de Acceso:
+              Selecciona tu Perfil de Acceso:
             </span>
             <div class="login-role-selector">
-              <button type="button" class="role-select-btn active" data-role="admin">
-                <i class="fa-solid fa-crown" style="color: var(--terracotta-light);"></i> Admin
+              <button type="button" class="role-select-btn active" data-role="admin" title="Administrador General">
+                <i class="fa-solid fa-crown" style="color: var(--terracotta-light);"></i> Administrador
               </button>
-              <button type="button" class="role-select-btn" data-role="auditor">
+              <button type="button" class="role-select-btn" data-role="auditor" title="Auditor Oficial">
                 <i class="fa-solid fa-magnifying-glass" style="color: var(--oro-noble);"></i> Auditor
               </button>
-              <button type="button" class="role-select-btn" data-role="user">
-                <i class="fa-solid fa-user" style="color: var(--azul-info);"></i> Usuario
+              <button type="button" class="role-select-btn" data-role="user" title="Usuario Normal (Prueba de Bloqueo)">
+                <i class="fa-solid fa-user-lock" style="color: var(--rojo-alerta);"></i> Usuario Normal
               </button>
             </div>
           </div>
@@ -121,18 +121,18 @@
           <!-- Alerta de Feedback -->
           <div class="login-feedback-alert" id="loginFeedback"></div>
 
-          <!-- Formulario de Credenciales -->
+          <!-- Formulario de Credenciales Reales -->
           <form id="adminLoginForm">
             <div class="login-input-group">
-              <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Usuario o Correo Oficial:</label>
+              <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Correo Electrónico Registrado:</label>
               <div class="login-input-wrap">
                 <i class="fa-solid fa-user-shield"></i>
-                <input type="text" id="loginUsername" class="form-control-input" value="admin@baqueano.ni" required placeholder="nombre@baqueano.ni">
+                <input type="email" id="loginUsername" class="form-control-input" value="oscarelieser.informatica.inatec@gmail.com" required placeholder="correo@gmail.com">
               </div>
             </div>
 
             <div class="login-input-group">
-              <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Seguridad:</label>
+              <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Acceso:</label>
               <div class="login-input-wrap">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" id="loginPassword" class="form-control-input" value="admin123" required placeholder="••••••••">
@@ -140,18 +140,20 @@
             </div>
 
             <button type="submit" class="btn-hero-primary" style="width: 100%; justify-content: center; padding: 0.95rem; font-size: 1rem; margin-top: 0.6rem;">
-              <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Panel de Control
+              <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Centro de Operaciones
             </button>
           </form>
 
-          <!-- Tarjeta de Referencia de Credenciales -->
-          <div style="margin-top: 1.8rem; padding: 1rem; background: rgba(15,23,42,0.6); border-radius: 14px; border: 1px dashed var(--border-subtle); font-size: 0.78rem; color: var(--text-muted);">
-            <div style="font-weight: 800; color: var(--arena-pinolera); margin-bottom: 0.4rem; font-family: var(--font-tech);">
-              <i class="fa-solid fa-id-badge"></i> CREDENCIALES CONFIGURADAS:
+          <!-- Tarjeta Informativa de Cuentas y Políticas -->
+          <div style="margin-top: 1.8rem; padding: 1.1rem; background: rgba(15,23,42,0.65); border-radius: 14px; border: 1px dashed var(--border-subtle); font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">
+            <div style="font-weight: 800; color: var(--arena-pinolera); margin-bottom: 0.5rem; font-family: var(--font-tech);">
+              <i class="fa-solid fa-id-badge"></i> CUENTAS OFICIALES AUTORIZADAS:
             </div>
-            <div>• <strong>Administrador:</strong> <code>admin@baqueano.ni</code> / <code>admin123</code></div>
-            <div>• <strong>Auditor:</strong> <code>auditor@baqueano.ni</code> / <code>auditor123</code></div>
-            <div>• <strong>Usuario Normal:</strong> <code>operador@baqueano.ni</code> / <code>usuario123</code></div>
+            <div>• <strong style="color: var(--terracotta-light);">Administrador (Control Total):</strong> <code>oscarelieser.informatica.inatec@gmail.com</code> (Clave: <code>admin123</code>)</div>
+            <div>• <strong style="color: var(--oro-noble);">Auditor (Solo Lectura & Ley 306):</strong> <code>vigoronmixt@gmail.com</code> (Clave: <code>auditor123</code>)</div>
+            <div style="margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid rgba(244,230,193,0.1); color: var(--arena-pinolera);">
+              <i class="fa-solid fa-circle-info" style="color: var(--azul-info);"></i> <strong>Política de Usuario Normal:</strong> Los usuarios generales pueden visitar libremente todas las páginas públicas del portal web (destinos, historia, ambiental, gastronomía, música, aliados), pero el acceso al panel administrativo está <strong>estrictamente bloqueado</strong>.
+            </div>
           </div>
         </div>
       </section>

@@ -1,0 +1,21 @@
+{
+  "name": "@baqueano/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@baqueano/config": "workspace:*",
+    "@baqueano/design-system": "workspace:*",
+    "@baqueano/firebase": "workspace:*",
+    "@baqueano/types": "workspace:*",
+    "@baqueano/ui": "workspace:*",
+    "@baqueano/validators": "workspace:*"
+  },
+  "devDependencies": {}
+}
