@@ -25,6 +25,7 @@ export const publicRoutes = [
 export const adminModules = [
   "dashboard",
   "control-tower",
+  "confianza",
   "paises",
   "desarrolladores",
   "smart-points",
@@ -83,7 +84,20 @@ export const firestoreCollections = {
   translations: "translations",
   openDatasets: "open_datasets",
   apiClients: "api_clients",
-  researchProjects: "research_projects"
+  researchProjects: "research_projects",
+  verifications: "verifications",
+  verificationEvidence: "verification_evidence",
+  trustClaims: "trust_claims",
+  certifications: "certifications",
+  integrityCases: "integrity_cases",
+  sustainabilityAssessments: "sustainability_assessments",
+  impactRecords: "impact_records",
+  trustAudits: "trust_audits",
+  trustAppeals: "trust_appeals",
+  agentWorkflows: "agent_workflows",
+  humanConfirmations: "human_confirmations",
+  agentTraces: "agent_traces",
+  activeTrips: "active_trips"
 } as const;
 
 export const roleAccess: Record<UserRole, readonly string[]> = {
@@ -91,6 +105,7 @@ export const roleAccess: Record<UserRole, readonly string[]> = {
   admin: [
     "dashboard",
     "control-tower",
+    "confianza",
     "paises",
     "smart-points",
     "dispositivos",
@@ -493,5 +508,236 @@ export const AVAILABLE_API_SCOPES = [
   { id: "businesses.partner.read", name: "Directorio de Alojamientos y Cooperativas", description: "Acceso para aliados institucionales al catálogo de prestadores.", tier: "partner" },
   { id: "research.telemetry.read", name: "Telemetría Ambiental Agregada para Investigación", description: "Datos climáticos y de aforo anonimizados con K-anonymity.", tier: "research" }
 ] as const;
+
+// ============================================================================
+// 🧭 TRUST LAYER & RESPONSIBLE TOURISM CONSTANTS (FASE 14)
+// ============================================================================
+
+export const TRUST_BADGES_CATALOG = [
+  {
+    badgeId: "verified-baqueano",
+    name: "Verificado por Baqueano",
+    description: "Ubicación geográfica, existencia física y datos de contacto confirmados directamente por el equipo territorial de Baqueano.",
+    issuer: "Baqueano Nicaragua",
+    category: "verification",
+    criteria: "Inspección en territorio, validación documental o visita de campo verificada en los últimos 12 meses.",
+    validityMonths: 12,
+    icon: "ShieldCheck"
+  },
+  {
+    badgeId: "official-source",
+    name: "Fuente Oficial",
+    description: "Datos cartográficos y de gestión sustentados en decretos de áreas protegidas y división político-administrativa oficial.",
+    issuer: "INETER / MARENA / Gobiernos Locales",
+    category: "official",
+    criteria: "Publicación oficial en La Gaceta o inventario turístico municipal reconocido.",
+    validityMonths: 24,
+    icon: "Building2"
+  },
+  {
+    badgeId: "community-validated",
+    name: "Validación Comunitaria",
+    description: "Respaldado activamente por la directiva comunal o cooperativa campesina local del territorio.",
+    issuer: "Directivas de Cooperativas y Pueblos Originarios",
+    category: "community",
+    criteria: "Carta de aval comunitario o participación directa en circuitos asociativos.",
+    validityMonths: 18,
+    icon: "Users"
+  },
+  {
+    badgeId: "fresh-info",
+    name: "Información Actualizada",
+    description: "Precios, horarios y canales de contacto verificados en los últimos 90 días.",
+    issuer: "Sistema de Frescura Baqueano",
+    category: "freshness",
+    criteria: "Revisión activa o confirmación operativa dentro del umbral de frescura de 90 días.",
+    validityMonths: 3,
+    icon: "Sparkles"
+  },
+  {
+    badgeId: "local-economy-champion",
+    name: "Economía Local Campesina",
+    description: "El 80%+ de sus compras de insumos y personal provienen de familias y productores del municipio.",
+    issuer: "Auditoría de Impacto Baqueano",
+    category: "community",
+    criteria: "Evidencia de compras locales y contratación directa sin intermediación foránea.",
+    validityMonths: 12,
+    icon: "HeartHandshake"
+  }
+] as const;
+
+export const BRTI_CONFIG = {
+  version: "1.0.0",
+  dimensionWeights: {
+    environmental: 0.20,
+    local_economy: 0.25,
+    social: 0.20,
+    culture: 0.15,
+    accessibility: 0.10,
+    responsible_management: 0.10
+  },
+  levelThresholds: {
+    INICIAL: { min: 0, max: 39 },
+    EN_DESARROLLO: { min: 40, max: 64 },
+    COMPROMISO_ALTO: { min: 65, max: 84 },
+    REFERENTE: { min: 85, max: 100 }
+  }
+} as const;
+
+export const FIELD_FRESHNESS_THRESHOLDS_DAYS = {
+  price: 90,
+  openingHours: 90,
+  phone: 180,
+  address: 365,
+  description: 365,
+  history: 730,
+  sustainability: 180
+} as const;
+
+// ============================================================================
+// 🧭 AGENTIC REGISTRY & TOOL PERMISSIONS CONSTANTS (FASE 15)
+// ============================================================================
+
+export const AGENT_REGISTRY_CATALOG = [
+  {
+    agentId: "trip_planner",
+    name: "Trip Planner Agent",
+    roleDescription: "Orquesta la creación integral de planes de viaje por días con itinerarios y presupuesto.",
+    allowedTools: ["searchDestinations", "getMapDistance", "calculateBudgetTotal", "getWeatherSafety"],
+    maxAutonomyLevel: "LEVEL_1_PREPARE",
+    requiresHumanInTheLoop: true
+  },
+  {
+    agentId: "destination",
+    name: "Destination Agent",
+    roleDescription: "Descubre atractivos turísticos, filtra por categoría territorial y compara opciones con señales de confianza.",
+    allowedTools: ["searchDestinations", "getTrustSignals"],
+    maxAutonomyLevel: "LEVEL_0_READ",
+    requiresHumanInTheLoop: false
+  },
+  {
+    agentId: "map",
+    name: "Map & Routing Agent",
+    roleDescription: "Calcula distancias geodésicas, tiempos de traslado y optimiza la secuencia de paradas en territorio.",
+    allowedTools: ["getMapDistance", "getRouteCoordinates"],
+    maxAutonomyLevel: "LEVEL_0_READ",
+    requiresHumanInTheLoop: false
+  },
+  {
+    agentId: "budget",
+    name: "Budget Agent",
+    roleDescription: "Ejecuta cálculos matemáticos determinísticos de costos en NIO y USD sin delegar matemáticas al modelo.",
+    allowedTools: ["calculateBudgetTotal"],
+    maxAutonomyLevel: "LEVEL_0_READ",
+    requiresHumanInTheLoop: false
+  },
+  {
+    agentId: "safety",
+    name: "Safety & Climate Agent",
+    roleDescription: "Evalúa condiciones climáticas, dificultad física y alertas de transitabilidad oficiales.",
+    allowedTools: ["getWeatherSafety", "getPublicAlerts"],
+    maxAutonomyLevel: "LEVEL_0_READ",
+    requiresHumanInTheLoop: false
+  },
+  {
+    agentId: "culture",
+    name: "Culture & Heritage Agent",
+    roleDescription: "Consulta archivos históricos y memorias comunitarias verificadas sin inventar tradiciones.",
+    allowedTools: ["getCulturalHeritage"],
+    maxAutonomyLevel: "LEVEL_0_READ",
+    requiresHumanInTheLoop: false
+  },
+  {
+    agentId: "reservation",
+    name: "Reservation Agent",
+    roleDescription: "Prepara borradores estructurados de reservas sin autorización para cobrar o procesar pagos.",
+    allowedTools: ["prepareReservationDraft"],
+    maxAutonomyLevel: "LEVEL_1_PREPARE",
+    requiresHumanInTheLoop: true
+  },
+  {
+    agentId: "host",
+    name: "Host Copilot Agent",
+    roleDescription: "Asiste a cooperativas y anfitriones en redacción de descripciones y organización de evidencias.",
+    allowedTools: ["prepareHostDraft", "analyzeListingCompleteness"],
+    maxAutonomyLevel: "LEVEL_1_PREPARE",
+    requiresHumanInTheLoop: true
+  },
+  {
+    agentId: "trust",
+    name: "Trust & Verification Agent",
+    roleDescription: "Explica el estado de verificación y procedencia de datos de un recurso sin auto-certificar.",
+    allowedTools: ["getTrustSignals"],
+    maxAutonomyLevel: "LEVEL_0_READ",
+    requiresHumanInTheLoop: false
+  },
+  {
+    agentId: "operations",
+    name: "Operations & Control Tower Agent",
+    roleDescription: "Sintetiza alertas e incidencias para el equipo de guardia sin cerrar incidencias automáticamente.",
+    allowedTools: ["summarizeIncidentAlerts", "getDataQualityFlags"],
+    maxAutonomyLevel: "LEVEL_1_PREPARE",
+    requiresHumanInTheLoop: true
+  }
+] as const;
+
+export const AGENT_TOOL_PERMISSIONS_CATALOG = [
+  {
+    toolId: "searchDestinations",
+    name: "Búsqueda de Destinos",
+    description: "Consulta el catálogo territorial de destinos y atractivos publicados.",
+    category: "READ",
+    autonomyLevel: "LEVEL_0_READ",
+    allowedRoles: ["super_admin", "admin", "host", "explorer"],
+    isReversible: true
+  },
+  {
+    toolId: "getMapDistance",
+    name: "Cálculo de Distancias",
+    description: "Calcula distancias kilométricas y tiempos estimados de viaje entre coordenadas.",
+    category: "READ",
+    autonomyLevel: "LEVEL_0_READ",
+    allowedRoles: ["super_admin", "admin", "host", "explorer"],
+    isReversible: true
+  },
+  {
+    toolId: "calculateBudgetTotal",
+    name: "Motor de Cálculo Presupuestario",
+    description: "Suma determinística de costos de actividades, transporte y alimentos en NIO y USD.",
+    category: "READ",
+    autonomyLevel: "LEVEL_0_READ",
+    allowedRoles: ["super_admin", "admin", "host", "explorer"],
+    isReversible: true
+  },
+  {
+    toolId: "getWeatherSafety",
+    name: "Estado de Clima y Alertas",
+    description: "Consulta telemetría y pronósticos climáticos con recomendaciones de seguridad.",
+    category: "READ",
+    autonomyLevel: "LEVEL_0_READ",
+    allowedRoles: ["super_admin", "admin", "host", "explorer"],
+    isReversible: true
+  },
+  {
+    toolId: "prepareReservationDraft",
+    name: "Preparación de Borrador de Reserva",
+    description: "Genera el desglose de una solicitud de reserva para revisión humana antes de emitirla.",
+    category: "PREPARE",
+    autonomyLevel: "LEVEL_1_PREPARE",
+    allowedRoles: ["super_admin", "admin", "host", "explorer"],
+    isReversible: true
+  },
+  {
+    toolId: "saveTripPlanDraft",
+    name: "Guardar Borrador de Itinerario",
+    description: "Guarda un plan de viaje en la cuenta del usuario tras confirmación simple.",
+    category: "WRITE_REVERSIBLE",
+    autonomyLevel: "LEVEL_2_REVERSIBLE",
+    allowedRoles: ["super_admin", "admin", "host", "explorer"],
+    isReversible: true
+  }
+] as const;
+
+
 
 

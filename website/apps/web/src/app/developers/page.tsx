@@ -97,7 +97,7 @@ export default function DevelopersPage() {
                 Los endpoints de datos abiertos son públicos y accesibles directamente sin tokens ni registro:
               </p>
               <div className="bg-[#0F172A] p-4 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 space-y-2">
-                <p className="text-slate-500">// Consulta en cURL:</p>
+                <p className="text-slate-500">{"// Consulta en cURL:"}</p>
                 <p>curl -X GET &quot;https://baqueano.app/api/open/v1/places?format=geojson&limit=10&quot;</p>
               </div>
             </div>

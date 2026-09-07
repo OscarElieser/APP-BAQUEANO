@@ -902,6 +902,384 @@ export interface WebhookSubscriptionRecord {
   readonly createdAt: string;
 }
 
+// ============================================================================
+// 🧭 BAQUEANO TRUST LAYER & RESPONSIBLE TOURISM TYPES (FASE 14)
+// ============================================================================
+
+export type VerificationStatus =
+  | "UNVERIFIED"
+  | "SUBMITTED"
+  | "UNDER_REVIEW"
+  | "VERIFIED"
+  | "VERIFICATION_EXPIRED"
+  | "REJECTED"
+  | "SUSPENDED";
+
+export type VerificationType =
+  | "BAQUEANO_REVIEW"
+  | "PARTNER_VERIFIED"
+  | "OFFICIAL_SOURCE"
+  | "COMMUNITY_VALIDATED"
+  | "DOCUMENT_CHECK"
+  | "FIELD_VISIT"
+  | "SYSTEM_VALIDATED";
+
+export interface VerificationEvidenceRecord {
+  readonly id: string;
+  readonly verificationId: string;
+  readonly type: "photo" | "document" | "geo_point" | "field_report" | "official_gazette" | "partner_certificate";
+  readonly source: string;
+  readonly fileUrl?: string;
+  readonly notes?: string;
+  readonly submittedBy: string;
+  readonly submittedAt: string;
+  readonly reviewedBy?: string;
+  readonly reviewedAt?: string;
+  readonly status: "PENDING" | "ACCEPTED" | "REJECTED";
+  readonly rejectionReason?: string;
+}
+
+export interface VerificationRecord {
+  readonly id: string;
+  readonly resourceType: "place" | "business" | "destination" | "experience";
+  readonly resourceId: string;
+  readonly countryId: CountryCode;
+  readonly status: VerificationStatus;
+  readonly verificationType: VerificationType;
+  readonly verifiedAt?: string;
+  readonly verifiedBy?: string;
+  readonly secondReviewerBy?: string; // Four-eyes principle
+  readonly expiresAt?: string;
+  readonly evidenceIds: readonly string[];
+  readonly revokedAt?: string;
+  readonly revocationReason?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export type SourceType =
+  | "OFFICIAL"
+  | "BAQUEANO_VERIFIED"
+  | "VERIFIED_PARTNER"
+  | "COMMUNITY"
+  | "BUSINESS_SELF_REPORTED"
+  | "SYSTEM_DERIVED"
+  | "AI_DERIVED"
+  | "UNKNOWN";
+
+export type FreshnessState = "fresh" | "aging" | "stale" | "unknown";
+
+export interface ProvenanceMetadata {
+  readonly field: string;
+  readonly sourceType: SourceType;
+  readonly verifiedBy?: string;
+  readonly lastVerifiedAt?: string;
+  readonly freshnessState: FreshnessState;
+  readonly freshnessDays: number;
+}
+
+export interface TrustBadgeRecord {
+  readonly badgeId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly issuer: string;
+  readonly category: "verification" | "freshness" | "official" | "community";
+  readonly criteria: string;
+  readonly validityMonths: number;
+  readonly icon: string;
+}
+
+export interface ExternalCertificationRecord {
+  readonly id: string;
+  readonly resourceId: string;
+  readonly issuerId: string;
+  readonly issuerName: string;
+  readonly countryScope: CountryCode;
+  readonly certificateType: string;
+  readonly certificateNumber?: string;
+  readonly status: "VALID" | "EXPIRED" | "REVOKED" | "UNDER_REVIEW";
+  readonly verifiedAt: string;
+  readonly expiresAt?: string;
+}
+
+export type SustainabilityDimension =
+  | "environmental"
+  | "social"
+  | "local_economy"
+  | "culture"
+  | "accessibility"
+  | "responsible_management";
+
+export type ClaimStatus = "SELF_REPORTED" | "UNDER_REVIEW" | "VERIFIED" | "REJECTED" | "EXPIRED";
+
+export interface SustainabilityClaimRecord {
+  readonly id: string;
+  readonly resourceId: string;
+  readonly dimension: SustainabilityDimension;
+  readonly claimText: string;
+  readonly status: ClaimStatus;
+  readonly evidenceId?: string;
+  readonly verifiedAt?: string;
+  readonly verifiedBy?: string;
+  readonly rejectionReason?: string;
+  readonly createdAt: string;
+}
+
+export type BrtiLevel = "INICIAL" | "EN_DESARROLLO" | "COMPROMISO_ALTO" | "REFERENTE";
+
+export interface ResponsibleTourismIndexRecord {
+  readonly id: string;
+  readonly resourceType: "place" | "destination" | "business";
+  readonly resourceId: string;
+  readonly indexVersion: string;
+  readonly level: BrtiLevel;
+  readonly scoreOverall: number;
+  readonly dimensionScores: { readonly [key in SustainabilityDimension]: number };
+  readonly confidenceScore: number;
+  readonly strengths: readonly string[];
+  readonly pendingAreas: readonly string[];
+  readonly calculatedAt: string;
+}
+
+export interface HostActionPlanRecord {
+  readonly id: string;
+  readonly resourceId: string;
+  readonly dimension: SustainabilityDimension;
+  readonly title: string;
+  readonly description: string;
+  readonly targetDate?: string;
+  readonly status: "planned" | "in_progress" | "completed" | "verified";
+  readonly evidenceId?: string;
+  readonly updatedAt: string;
+}
+
+export interface LocalImpactIndicatorRecord {
+  readonly id: string;
+  readonly resourceId: string;
+  readonly period: string;
+  readonly localJobsDirect?: number;
+  readonly localSuppliersCount?: number;
+  readonly communityPartnersCount?: number;
+  readonly confidence: "verified" | "self_reported" | "estimated" | "unknown";
+  readonly notes?: string;
+  readonly updatedAt: string;
+}
+
+export type IntegrityRiskLevel = "LOW" | "MEDIUM" | "HIGH" | "UNKNOWN";
+export type IntegrityCaseStatus = "OPEN" | "REVIEWING" | "CLEARED" | "ACTION_REQUIRED" | "CLOSED";
+
+export interface IntegrityCaseRecord {
+  readonly id: string;
+  readonly resourceType: "place" | "business" | "review" | "certification" | "claim";
+  readonly resourceId: string;
+  readonly riskLevel: IntegrityRiskLevel;
+  readonly signals: readonly string[];
+  readonly status: IntegrityCaseStatus;
+  readonly assignedTo?: string;
+  readonly findingsNotes?: string;
+  readonly actionTaken?: string;
+  readonly createdAt: string;
+  readonly resolvedAt?: string;
+}
+
+export interface TrustAppealRecord {
+  readonly id: string;
+  readonly caseIdOrVerificationId: string;
+  readonly resourceId: string;
+  readonly submittedBy: string;
+  readonly reason: string;
+  readonly counterEvidenceId?: string;
+  readonly status: "SUBMITTED" | "UNDER_REVIEW" | "UPHELD" | "REVERSED";
+  readonly reviewerId?: string;
+  readonly resolutionNotes?: string;
+  readonly createdAt: string;
+  readonly resolvedAt?: string;
+}
+
+export interface TrustAuditEventRecord {
+  readonly id: string;
+  readonly eventType:
+    | "VERIFICATION_SUBMITTED"
+    | "VERIFICATION_APPROVED"
+    | "VERIFICATION_REVOKED"
+    | "CLAIM_VERIFIED"
+    | "CLAIM_REJECTED"
+    | "BADGE_GRANTED"
+    | "BADGE_REVOKED"
+    | "INDEX_RECALCULATED"
+    | "INTEGRITY_CASE_RESOLVED"
+    | "APPEAL_DECIDED";
+  readonly resourceId: string;
+  readonly actorId: string;
+  readonly actorRole: string;
+  readonly details: Record<string, any>;
+  readonly timestamp: string;
+}
+
+// ============================================================================
+// 🧭 BAQUEANO AGENTIC ECOSYSTEM & DIGITAL CONCIERGE TYPES (FASE 15)
+// ============================================================================
+
+export type AgentId =
+  | "trip_planner"
+  | "destination"
+  | "map"
+  | "budget"
+  | "safety"
+  | "culture"
+  | "reservation"
+  | "host"
+  | "trust"
+  | "operations"
+  | "data_quality";
+
+export type AgentAutonomyLevel =
+  | "LEVEL_0_READ"
+  | "LEVEL_1_PREPARE"
+  | "LEVEL_2_REVERSIBLE"
+  | "LEVEL_3_SENSITIVE"
+  | "LEVEL_4_PROHIBITED";
+
+export type AgentActionPolicyDecision =
+  | "ALLOW"
+  | "DENY"
+  | "REQUIRE_CONFIRMATION"
+  | "REQUIRE_REAUTH";
+
+export type ToolCategory =
+  | "READ"
+  | "PREPARE"
+  | "WRITE_REVERSIBLE"
+  | "WRITE_SENSITIVE"
+  | "PROHIBITED";
+
+export interface AgentDefinitionRecord {
+  readonly agentId: AgentId;
+  readonly name: string;
+  readonly roleDescription: string;
+  readonly allowedTools: readonly string[];
+  readonly maxAutonomyLevel: AgentAutonomyLevel;
+  readonly requiresHumanInTheLoop: boolean;
+}
+
+export interface AgentToolDefinitionRecord {
+  readonly toolId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly category: ToolCategory;
+  readonly autonomyLevel: AgentAutonomyLevel;
+  readonly allowedRoles: readonly UserRole[];
+  readonly isReversible: boolean;
+}
+
+export type WorkflowStatus =
+  | "CREATED"
+  | "RUNNING"
+  | "WAITING_FOR_HUMAN"
+  | "COMPLETED"
+  | "FAILED"
+  | "CANCELLED";
+
+export interface AgenticWorkflowRecord {
+  readonly workflowId: string;
+  readonly userId: string;
+  readonly intent: string;
+  readonly status: WorkflowStatus;
+  readonly currentStep: number;
+  readonly totalSteps: number;
+  readonly activeAgent?: AgentId;
+  readonly tripPlanId?: string;
+  readonly pendingConfirmationId?: string;
+  readonly executionSteps: readonly {
+    readonly agent: AgentId;
+    readonly action: string;
+    readonly resultSummary: string;
+    readonly timestamp: string;
+  }[];
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface TripStop {
+  readonly placeId: string;
+  readonly name: string;
+  readonly category: string;
+  readonly department: string;
+  readonly durationHours: number;
+  readonly priceNio: number;
+  readonly priceUsd: number;
+  readonly isVerified: boolean;
+  readonly latitude: number;
+  readonly longitude: number;
+  readonly notes?: string;
+}
+
+export interface TripDayPlan {
+  readonly dayNumber: number;
+  readonly title: string;
+  readonly stops: readonly TripStop[];
+  readonly estimatedTravelHours: number;
+  readonly dayCostNio: number;
+  readonly dayCostUsd: number;
+  readonly climateAdvice: string;
+}
+
+export interface BudgetBreakdown {
+  readonly currency: "NIO" | "USD";
+  readonly activitiesCost: number;
+  readonly transportEstimate: number;
+  readonly foodEstimate: number;
+  readonly totalCalculated: number;
+  readonly budgetLimit?: number;
+  readonly isWithinBudget: boolean;
+}
+
+export interface TripPlanRecord {
+  readonly id: string;
+  readonly userId: string;
+  readonly title: string;
+  readonly territory: string;
+  readonly daysCount: number;
+  readonly days: readonly TripDayPlan[];
+  readonly budget: BudgetBreakdown;
+  readonly safetyWarnings: readonly string[];
+  readonly trustSignals: readonly string[];
+  readonly status: "draft" | "saved" | "active" | "completed";
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export type HumanConfirmationStatus = "PENDING" | "APPROVED" | "REJECTED" | "EXPIRED";
+
+export interface HumanConfirmationRequestRecord {
+  readonly id: string;
+  readonly workflowId: string;
+  readonly agentId: AgentId;
+  readonly actionDescription: string;
+  readonly resourceType: string;
+  readonly resourceId: string;
+  readonly autonomyLevel: AgentAutonomyLevel;
+  readonly diffPreview?: { readonly before: any; readonly after: any };
+  readonly status: HumanConfirmationStatus;
+  readonly requestedAt: string;
+  readonly resolvedAt?: string;
+  readonly expiresAt: string;
+}
+
+export interface AgentTraceLogRecord {
+  readonly id: string;
+  readonly workflowId: string;
+  readonly agentId: AgentId;
+  readonly toolName: string;
+  readonly autonomyLevel: AgentAutonomyLevel;
+  readonly latencyMs: number;
+  readonly success: boolean;
+  readonly errorMessage?: string;
+  readonly timestamp: string;
+}
+
+
+
 
 
 
