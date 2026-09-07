@@ -1,0 +1,123 @@
+/**
+ * WHY
+ * Establishes the public Baqueano visual atmosphere and responsive rules.
+ *
+ * HOW
+ * Combines Tailwind layers with CSS variables, fluid sections, reduced-motion safeguards,
+ * topographic overlays, and viewport-safe media sizing.
+ *
+ * WHAT
+ * Global tokens, base elements, utility surfaces, and motion primitives for apps/web.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-montserrat: "Montserrat", system-ui, sans-serif;
+  --font-space-grotesk: "Space Grotesk", ui-sans-serif, system-ui;
+  --font-inter: "Inter", ui-sans-serif, system-ui;
+  --teal: #165D6F;
+  --terracotta: #F65E01;
+  --sand: #F4E6C1;
+  --night: #0F172A;
+  --jungle: #10B981;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(22, 93, 111, 0.36), transparent 28rem),
+    radial-gradient(circle at 92% 18%, rgba(246, 94, 1, 0.18), transparent 25rem),
+    linear-gradient(180deg, #061018 0%, #0F172A 42%, #071214 100%);
+  color: white;
+  font-family: var(--font-inter);
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--terracotta);
+  color: white;
+}
+
+.baqueano-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .baqueano-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1180px) {
+  .baqueano-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.topographic {
+  position: relative;
+  isolation: isolate;
+}
+
+.topographic::before {
+  background-image:
+    linear-gradient(rgba(244, 230, 193, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 230, 193, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.76), transparent 78%);
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: var(--terracotta);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

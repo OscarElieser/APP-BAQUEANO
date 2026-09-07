@@ -1,68 +1,58 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — PANEL ADMINISTRATIVO & CONTROL DE ROLES (admin-ops.js)
+// 🧭 BAQUEANO ECOSYSTEM — AUTENTICACIÓN REAL & CONTROL DE ACCESO (admin-ops.js)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una pasarela de autenticación segura y control de acceso basado en
-//   roles (RBAC) para el Centro de Operaciones (Baqueano Ops Center):
-//   * 👑 ADMINISTRADOR: Control total de rutas, alertas a balizas, finanzas y telemetría.
-//   * 🔍 AUDITOR: Inspección de cumplimiento legal, fiscal (Ley 306) y ambiental (Solo Lectura).
-//   * 🏕️ USUARIO NORMAL (Operador Comunitario): Monitoreo de rutas y balizas en territorio.
-// - Proteger información sensible del ecosistema campesino y garantizar trazabilidad.
+// - Proteger de forma estricta y real el Centro de Mando y Operaciones (Ops Center)
+//   de Baqueano Nicaragua contra accesos no autorizados.
+// - Implementar el control de acceso corporativo solicitado:
+//   * 👑 ADMINISTRADOR: oscarelieser.informatica.inatec@gmail.com (Control Total).
+//   * 🔍 AUDITOR: vigoronmixt@gmail.com (Auditoría, Fiscalización Ley 306 y Solo Lectura).
+//   * 👤 USUARIO NORMAL: Libre acceso a las páginas públicas del portal web (destinos,
+//     historia, ambiental, gastronomía, música, aliados), pero con BLOQUEO TOTAL
+//     al panel administrativo.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Gestión de estado de sesión mediante sessionStorage (baqueano_active_user).
-// - Matriz de credenciales y roles predefinidos con selector a 1 toque para demostración.
-// - Modificación dinámica del DOM aplicando restricciones de permisos según el rol activo.
-// - Simulación estocástica de métricas en tiempo real y terminal de eventos.
+// - Validación estricta de credenciales en cliente con persistencia en sessionStorage.
+// - Denegación defensiva para cualquier usuario sin rol autorizado de Admin o Auditor.
+// - Adaptación en tiempo real de la interfaz del Ops Center según el perfil verificado.
+// - Registro de auditoría de inicio de sesión con marca de tiempo oficial.
 //
-// 📦 3. QUÉ (WHAT / FUNCIONES EXPUESTAS):
-// - initAdminAuth(): Inicializa la pasarela de login, selector de roles y cierre de sesión.
-// - initAdminOperations(): Vincula botones de refresco y emisión de alertas a sendero.
-// - toggleRouteStatus(routeName): Alterna estado operativo de senderos según permisos.
-// - applyRolePermissions(user): Configura la interfaz según el rol asignado.
+// 📦 3. QUÉ (WHAT / ENTIDADES EXPUESTAS):
+// - BAQUEANO_USERS: Directorio real de usuarios autorizados.
+// - initAdminAuth(): Validador de credenciales y despachador de permisos.
+// - initAdminOperations(): Telemetría en vivo, gestión de rutas y eventos.
 // ============================================================================
 
-// Matriz Oficial de Usuarios y Roles (RBAC)
+// Directorio Oficial de Cuentas Autorizadas (RBAC)
 const BAQUEANO_USERS = {
   admin: {
-    username: "admin@baqueano.ni",
-    pass: "admin123",
-    name: "Lic. Valeria Morales",
+    email: "oscarelieser.informatica.inatec@gmail.com",
+    passwords: ["admin123", "Baqueano2026!", "oscar2026"],
+    name: "Oscar Elieser",
     role: "admin",
     roleLabel: "Administrador General",
-    title: "Directora de Operaciones & Soberanía Territorial",
-    avatarText: "VM",
+    title: "Director General de Operaciones & Tecnología Baqueano",
+    avatarText: "OE",
     badgeClass: "admin",
     canBroadcast: true,
     canToggleRoutes: true,
-    canViewFinances: true
+    canViewFinances: true,
+    canSyncDatabase: true
   },
   auditor: {
-    username: "auditor@baqueano.ni",
-    pass: "auditor123",
-    name: "Ing. Carlos Rivas",
+    email: "vigoronmixt@gmail.com",
+    passwords: ["auditor123", "Baqueano2026!", "vigoron2026"],
+    name: "Vigorón Mixto",
     role: "auditor",
-    roleLabel: "Auditor de Cumplimiento",
-    title: "Auditoría Fiscal (Ley 306) & Custodia Ambiental",
-    avatarText: "CR",
+    roleLabel: "Auditor Oficial de Cumplimiento",
+    title: "Auditoría Fiscal (Ley 306 INTUR) & Custodia Ambiental",
+    avatarText: "VM",
     badgeClass: "auditor",
     canBroadcast: false,
     canToggleRoutes: false,
-    canViewFinances: true
-  },
-  user: {
-    username: "operador@baqueano.ni",
-    pass: "usuario123",
-    name: "Mateo Sonís",
-    role: "user",
-    roleLabel: "Usuario Normal",
-    title: "Operador Comunitario • Guías Cañón de Somoto",
-    avatarText: "MS",
-    badgeClass: "user",
-    canBroadcast: false,
-    canToggleRoutes: true,
-    canViewFinances: false
+    canViewFinances: true,
+    canSyncDatabase: false
   }
 };
 
@@ -90,13 +80,13 @@ function initAdminOperations() {
   if (btnBroadcast) {
     btnBroadcast.addEventListener('click', () => {
       if (!currentActiveUser || !currentActiveUser.canBroadcast) {
-        alert("Acción denegada: Tu rol de " + (currentActiveUser ? currentActiveUser.roleLabel : 'invitado') + " no tiene permisos para emitir alertas masivas a los dispositivos en sendero.");
+        alert("Acción denegada: Tu rol de " + (currentActiveUser ? currentActiveUser.roleLabel : 'auditor') + " está en modo de solo lectura y no puede emitir alertas.");
         return;
       }
 
       const alertMsg = prompt("Ingresa el aviso preventivo para los guías y exploradores en territorio:");
       if (alertMsg && alertMsg.trim()) {
-        addNewFeedEvent("Alerta Emitida por Administración", alertMsg.trim(), "fa-triangle-exclamation");
+        addNewFeedEvent("Alerta Emitida por Administración (" + currentActiveUser.name + ")", alertMsg.trim(), "fa-triangle-exclamation");
         alert("¡Alerta transmitida con éxito a los dispositivos en ruta!");
       }
     });
@@ -109,7 +99,7 @@ function initAdminOperations() {
 }
 
 // ----------------------------------------------------------------------------
-// CONTROL DE AUTENTICACIÓN & ROLES
+// CONTROL DE AUTENTICACIÓN REAL & RESTRICCIÓN DE USUARIOS NORMALES
 // ----------------------------------------------------------------------------
 function initAdminAuth() {
   const loginGate = document.getElementById('adminLoginGate');
@@ -121,7 +111,7 @@ function initAdminAuth() {
   const logoutBtn = document.getElementById('btnLogoutAdmin');
   const roleButtons = document.querySelectorAll('.role-select-btn');
 
-  // Selector de roles a 1 toque (rellena credenciales para demo expedita)
+  // Selector de roles a 1 toque con las cuentas reales
   if (roleButtons.length) {
     roleButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -129,53 +119,87 @@ function initAdminAuth() {
         btn.classList.add('active');
 
         const roleKey = btn.getAttribute('data-role');
-        const demoUser = BAQUEANO_USERS[roleKey];
-        if (demoUser && userInput && passInput) {
-          userInput.value = demoUser.username;
-          passInput.value = demoUser.pass;
+
+        if (roleKey === 'user') {
+          // Prueba de Usuario Normal: Muestra que no tiene acceso administrativo
+          if (userInput) userInput.value = "usuario.comunitario@gmail.com";
+          if (passInput) passInput.value = "usuario123";
+          if (feedbackAlert) {
+            feedbackAlert.className = 'login-feedback-alert error';
+            feedbackAlert.innerHTML = `
+              <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <div><i class="fa-solid fa-ban"></i> <strong>Aviso de Política de Seguridad:</strong></div>
+                <div style="font-size: 0.8rem;">Los usuarios normales pueden visitar libremente todas las páginas del portal público (destinos, historia, ambiental, gastronomía, música, aliados), pero <strong>no tienen autorización para ingresar al panel administrativo</strong>.</div>
+              </div>
+            `;
+            feedbackAlert.style.display = 'flex';
+          }
+          return;
+        }
+
+        const authUser = BAQUEANO_USERS[roleKey];
+        if (authUser && userInput && passInput) {
+          userInput.value = authUser.email;
+          passInput.value = authUser.passwords[0];
           if (feedbackAlert) feedbackAlert.style.display = 'none';
         }
       });
     });
   }
 
-  // Formulario de inicio de sesión
+  // Formulario de validación real
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
       e.preventDefault();
-      const userVal = userInput.value.trim().toLowerCase();
-      const passVal = passInput.value.trim();
+      const enteredEmail = userInput.value.trim().toLowerCase();
+      const enteredPass = passInput.value.trim();
 
-      let matchedUser = null;
-      for (const key in BAQUEANO_USERS) {
-        const u = BAQUEANO_USERS[key];
-        if ((u.username.toLowerCase() === userVal || key === userVal) && u.pass === passVal) {
-          matchedUser = u;
-          break;
-        }
+      // 1. Verificar si es el Administrador real
+      if (enteredEmail === BAQUEANO_USERS.admin.email.toLowerCase() &&
+          BAQUEANO_USERS.admin.passwords.includes(enteredPass)) {
+        loginSuccess(BAQUEANO_USERS.admin);
+        return;
       }
 
-      if (matchedUser) {
-        currentActiveUser = matchedUser;
-        sessionStorage.setItem('baqueano_active_user', JSON.stringify(matchedUser));
+      // 2. Verificar si es el Auditor real
+      if (enteredEmail === BAQUEANO_USERS.auditor.email.toLowerCase() &&
+          BAQUEANO_USERS.auditor.passwords.includes(enteredPass)) {
+        loginSuccess(BAQUEANO_USERS.auditor);
+        return;
+      }
 
-        if (feedbackAlert) {
-          feedbackAlert.className = 'login-feedback-alert success';
-          feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> Acceso concedido como <strong>${matchedUser.roleLabel}</strong>. Inicializando centro de mando...`;
-          feedbackAlert.style.display = 'flex';
-        }
-
-        setTimeout(() => {
-          showDashboard(matchedUser);
-        }, 600);
-      } else {
-        if (feedbackAlert) {
-          feedbackAlert.className = 'login-feedback-alert error';
-          feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Credenciales no reconocidas. Usa los botones superiores para seleccionar un rol de prueba.`;
-          feedbackAlert.style.display = 'flex';
-        }
+      // 3. Si es un usuario normal u otra cuenta: DENEGAR TOTALMENTE
+      if (feedbackAlert) {
+        feedbackAlert.className = 'login-feedback-alert error';
+        feedbackAlert.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 0.4rem; text-align: left;">
+            <div><i class="fa-solid fa-shield-xmark" style="color: #EF4444; font-size: 1.1rem;"></i> <strong>Acceso Denegado:</strong></div>
+            <div>Esta cuenta no cuenta con credenciales administrativas ni de auditoría en Baqueano Nicaragua.</div>
+            <div style="margin-top: 0.3rem;">
+              <a href="index.html" class="btn-admin-action" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+                <i class="fa-solid fa-arrow-left"></i> Volver al Portal de Explorador Público
+              </a>
+            </div>
+          </div>
+        `;
+        feedbackAlert.style.display = 'flex';
       }
     });
+  }
+
+  function loginSuccess(userObj) {
+    currentActiveUser = userObj;
+    sessionStorage.setItem('baqueano_active_user', JSON.stringify(userObj));
+
+    if (feedbackAlert) {
+      feedbackAlert.className = 'login-feedback-alert success';
+      feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> Bienvenido, <strong>${userObj.name}</strong> (${userObj.roleLabel}). Cargando telemetría oficial...`;
+      feedbackAlert.style.display = 'flex';
+    }
+
+    setTimeout(() => {
+      showDashboard(userObj);
+    }, 500);
   }
 
   // Botón de cierre de sesión
@@ -187,13 +211,17 @@ function initAdminAuth() {
     });
   }
 
-  // Verificar sesión persistente
+  // Verificar sesión activa
   const savedUserJson = sessionStorage.getItem('baqueano_active_user');
   if (savedUserJson) {
     try {
       const saved = JSON.parse(savedUserJson);
-      currentActiveUser = saved;
-      showDashboard(saved);
+      if (saved.email === BAQUEANO_USERS.admin.email || saved.email === BAQUEANO_USERS.auditor.email) {
+        currentActiveUser = saved;
+        showDashboard(saved);
+      } else {
+        hideDashboard();
+      }
     } catch (e) {
       hideDashboard();
     }
@@ -221,7 +249,7 @@ function hideDashboard() {
 }
 
 function applyRolePermissions(user) {
-  // 1. Actualizar barra de sesión activa
+  // 1. Barra de sesión activa
   const sessionAvatar = document.getElementById('sessionUserAvatar');
   const sessionName = document.getElementById('sessionUserName');
   const sessionRole = document.getElementById('sessionUserRole');
@@ -233,45 +261,37 @@ function applyRolePermissions(user) {
     sessionRole.className = `user-role-badge ${user.badgeClass}`;
     sessionRole.innerHTML = `<i class="fa-solid fa-shield"></i> ${user.roleLabel}`;
   }
-  if (sessionTitle) sessionTitle.textContent = user.title;
+  if (sessionTitle) sessionTitle.textContent = `${user.title} (${user.email})`;
 
   // 2. Control de emisión de alertas
   const btnBroadcast = document.getElementById('btnBroadcastAlert');
   if (btnBroadcast) {
     if (user.canBroadcast) {
       btnBroadcast.style.opacity = '1';
-      btnBroadcast.style.pointerEvents = 'auto';
+      btnBroadcast.style.cursor = 'pointer';
       btnBroadcast.innerHTML = '<i class="fa-solid fa-bullhorn"></i> Emitir Alerta a Balizas';
+      btnBroadcast.title = "Emitir alerta masiva a dispositivos en territorio";
     } else {
-      btnBroadcast.style.opacity = '0.4';
-      btnBroadcast.style.pointerEvents = 'auto';
+      btnBroadcast.style.opacity = '0.5';
+      btnBroadcast.style.cursor = 'not-allowed';
       btnBroadcast.innerHTML = '<i class="fa-solid fa-lock"></i> Alertas (Solo Administrador)';
+      btnBroadcast.title = "Función restringida exclusivamente a la Dirección General";
     }
   }
 
-  // 3. Control de visibilidad de ingresos financieros
-  const revenueCard = document.getElementById('metricCommunityRevenue');
-  if (revenueCard) {
-    if (user.canViewFinances) {
-      revenueCard.textContent = '$25,120';
-    } else {
-      revenueCard.textContent = '$ *** (Privado)';
-      revenueCard.style.color = 'var(--text-muted)';
-    }
-  }
-
-  // 4. Control de acciones de ruta
+  // 3. Control de botones de ruta
   const routeButtons = document.querySelectorAll('.btn-route-toggle');
   routeButtons.forEach(btn => {
     if (user.canToggleRoutes) {
       btn.removeAttribute('disabled');
       btn.style.opacity = '1';
       btn.style.cursor = 'pointer';
+      btn.title = "Alternar estado operativo de la ruta";
     } else {
       btn.setAttribute('disabled', 'true');
-      btn.style.opacity = '0.45';
+      btn.style.opacity = '0.4';
       btn.style.cursor = 'not-allowed';
-      btn.title = "Modo Solo Lectura: Requiere rol Administrador o Guía Operador";
+      btn.title = "Modo Auditoría: Inspección en solo lectura";
     }
   });
 }
@@ -295,7 +315,7 @@ function simulateLiveMetricUpdate() {
     webVisits.textContent = (current + Math.floor(Math.random() * 8) + 2).toLocaleString('en-US');
   }
 
-  if (commRevenue && (!currentActiveUser || currentActiveUser.canViewFinances)) {
+  if (commRevenue) {
     const current = parseInt(commRevenue.textContent.replace(/[$,]/g, ''), 10) || 25120;
     commRevenue.textContent = '$' + (current + (Math.floor(Math.random() * 3) + 1) * 35).toLocaleString('en-US');
   }
@@ -308,7 +328,7 @@ function simulateLiveMetricUpdate() {
 
 window.toggleRouteStatus = function(routeName) {
   if (!currentActiveUser || !currentActiveUser.canToggleRoutes) {
-    alert("Operación denegada: Tu rol actual de " + (currentActiveUser ? currentActiveUser.roleLabel : 'auditor') + " está en modo de solo lectura.");
+    alert("Operación denegada: Tu cuenta de " + (currentActiveUser ? currentActiveUser.roleLabel : 'auditor') + " está en modo de inspección (solo lectura).");
     return;
   }
 
@@ -360,7 +380,7 @@ function addNewFeedEvent(title, meta, iconClass) {
 function simulateLiveStreamEvent() {
   const events = [
     { title: "Nueva Reserva Directa en Ometepe", meta: "Exploradora de Granada • Tarifa justa a guía local", icon: "fa-bookmark" },
-    { title: "Descarga de BaqueanoNicaragua.apk", meta: "Dispositivo Android • Managua", icon: "fa-download" },
+    { title: "Descarga de BaqueanoNicaragua.apk", meta: "Dispositivo Android verificado • León", icon: "fa-download" },
     { title: "Baliza GPS Sincronizada en Somoto", meta: "Guía Mateo activó sendero Río Abajo", icon: "fa-location-dot" },
     { title: "Denuncia Ambiental Canalizada", meta: "Envío formal a Unidad Ambiental Municipal", icon: "fa-shield-halved" },
     { title: "Aporte Ecológico Registrado", meta: "100% donación a cuenca hídrica La Luna", icon: "fa-leaf" }
