@@ -147,11 +147,50 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      // Ícono oficial de presentación Baqueano (Isotipo Q Terracota & Teal)
+                      Container(
+                        width: 96,
+                        height: 96,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.terracotta.withValues(alpha: 0.35),
+                              blurRadius: 32,
+                              spreadRadius: 2,
+                            ),
+                            BoxShadow(
+                              color: AppColors.craterTeal.withValues(alpha: 0.25),
+                              blurRadius: 24,
+                              offset: const Offset(0, -2),
+                            ),
+                          ],
+                        ),
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/baqueano_icono_oficial.png',
+                            width: 96,
+                            height: 96,
+                            fit: BoxFit.contain,
+                            cacheWidth: 288,
+                            cacheHeight: 288,
+                            errorBuilder: (_, __, ___) => Image.asset(
+                              'assets/images/IMG_20260905_204339_229.png',
+                              width: 96,
+                              height: 96,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
                       // Logotipo oficial en PNG con fallback tipográfico
                       Image.asset(
                         'assets/images/logo_baqueano.png',
-                        height: 52,
+                        height: 46,
                         fit: BoxFit.contain,
+                        cacheHeight: 138,
                         errorBuilder: (_, __, ___) => Text(
                           'BAQUEANO',
                           style: GoogleFonts.montserrat(

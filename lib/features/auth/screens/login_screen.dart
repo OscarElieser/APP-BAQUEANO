@@ -245,21 +245,64 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Ícono oficial de presentación Baqueano
+                  Container(
+                    width: 78,
+                    height: 78,
+                    margin: const EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFFF65E01).withValues(alpha: 0.35),
+                          blurRadius: 24,
+                          spreadRadius: 2,
+                        ),
+                        BoxShadow(
+                          color: const Color(0xFF165D6F).withValues(alpha: 0.25),
+                          blurRadius: 18,
+                          offset: const Offset(0, -2),
+                        ),
+                      ],
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/baqueano_icono_oficial.png',
+                        width: 78,
+                        height: 78,
+                        fit: BoxFit.contain,
+                        cacheWidth: 234,
+                        cacheHeight: 234,
+                        errorBuilder: (_, __, ___) => Image.asset(
+                          'assets/images/IMG_20260905_204339_229.png',
+                          width: 78,
+                          height: 78,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Logotipo oficial horizontal
                   SizedBox(
-                    width: 280,
-                    height: 110,
+                    width: 240,
+                    height: 48,
                     child: Image.asset(
                       'assets/images/logo_baqueano.png',
-                      width: 280,
-                      height: 110,
+                      width: 240,
+                      height: 48,
                       fit: BoxFit.contain,
-                      cacheWidth: 840,
-                      cacheHeight: 330,
+                      cacheWidth: 720,
+                      cacheHeight: 144,
                       errorBuilder:
-                          (_, __, ___) => const Icon(
-                            Icons.explore_rounded,
-                            color: Color(0xFFF4E6C1),
-                            size: 72,
+                          (_, __, ___) => const Text(
+                            'BAQUEANO',
+                            style: TextStyle(
+                              color: Color(0xFFF4E6C1),
+                              fontSize: 26,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 3,
+                            ),
                           ),
                     ),
                   ),
