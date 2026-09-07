@@ -62,11 +62,24 @@ assert(trustPublicRoute.includes("BAQUEANO TRUST LAYER"), "Public trust methodol
 assert(trustAdminRoute.includes("Gobernanza de Confianza & Sostenibilidad"), "Admin trust page must render governance interface.");
 assert(trustOpenApiRoute.includes("getPublicTrustSummary"), "Open Data trust endpoint must resolve sanitized public trust signals.");
 
+const orchestratorService = read("apps/web/src/services/agents/orchestrator.service.ts");
+const policyEngineService = read("apps/web/src/services/agents/policy-engine.service.ts");
+const toolRegistryService = read("apps/web/src/services/agents/tool-registry.service.ts");
+const conciergePageRoute = read("apps/web/src/app/baqueano-ai/page.tsx");
+
+assert(orchestratorService.includes("routeAndExecuteWorkflow"), "Orchestrator must export routeAndExecuteWorkflow.");
+assert(policyEngineService.includes("evaluateAgentAction"), "Policy engine must export evaluateAgentAction.");
+assert(policyEngineService.includes("isFinancialOperation"), "Policy engine must block autonomous financial operations.");
+assert(toolRegistryService.includes("calculateBudgetTool"), "Tool registry must calculate budget deterministically.");
+assert(conciergePageRoute.includes("BAQUEANO DIGITAL CONCIERGE"), "Baqueano AI page must render Digital Concierge workspace.");
+assert(conciergePageRoute.includes("confirmationModal"), "Digital Concierge must integrate Human-in-the-Loop confirmation modal.");
+
 if (failures.length > 0) {
   console.error("Production smoke tests failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Production smoke tests passed (including Fase 14 Trust Layer & BRTI).");
+console.log("Production smoke tests passed (including Fase 14 Trust & Fase 15 Digital Concierge).");
+
 

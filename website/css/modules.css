@@ -1,36 +1,38 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — MÓDULOS DE ESTILO ESPECIALIZADOS (modules.css)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proporcionar estilos visuales específicos y componentes de interfaz dedicados
-//   para cada una de las experiencias del ecosistema Baqueano (Catálogo de Destinos,
-//   Línea de Tiempo Histórica, Decálogo y Denuncias Ambientales, Gastronomía Ancestral,
-//   Reproductor Folclórico 1-Toque, Tarjetas 3D 180° de Aliados, Calculadora de Retorno
-//   Rural Campesino, Pasaporte Ético y Baqueano Ops Center en tiempo real).
-// - Garantizar que cada módulo mantenga la identidad estética oficial de Baqueano:
-//   Petróleo Teal (#165D6F), Naranja Fuego (#F65E01), Arena Pinolera (#F4E6C1) y
-//   Noche Profunda (#0F172A) con efectos de glassmorphism y microinteracciones fluidas.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Se organiza en bloques modulares CSS3 aislados con selectores semánticos.
-// - Implementa transformaciones 3D con perspective: 1000px y preserve-3d para
-//   las tarjetas giratorias de cooperativas y alojamientos comunitarios.
-// - Aplica CSS Grid dinámico con breakpoints fluidos para móviles, tablets y escritorios.
-// - Se integra sin colisiones a través del archivo central styles.css mediante @import.
-//
-// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
-// - Clases para Los 5 Impactos Comunitarios.
-// - Clases para el Catálogo de Destinos Protegidos con filtrado dinámico.
-// - Clases para la Línea de Tiempo de 7 Periodos Históricos y Explorador de 17 Territorios.
-// - Clases para el Decálogo Verde y Formulario de Denuncias con Georreferenciación.
-// - Clases para la Vitrina de Gastronomía Ancestral y Milpa Pinolera.
-// - Clases para el Centro de Música Folclórica con ecualizador visual.
-// - Clases para las Tarjetas 3D Flip Card de Cooperativas Locales.
-// - Clases para la Calculadora de Retorno Campesino vs Plataformas Foráneas.
-// - Clases para el Asistente Baqueano AI y Chatbot Comunitario.
-// - Clases para el Panel Administrativo en Tiempo Real (Baqueano Ops Center).
-// ============================================================================
+/*
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — MÓDULOS DE ESTILO ESPECIALIZADOS (modules.css)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Proporcionar estilos visuales específicos y componentes de interfaz dedicados
+  para cada una de las experiencias del ecosistema Baqueano (Catálogo de Destinos,
+  Línea de Tiempo Histórica, Decálogo y Denuncias Ambientales, Gastronomía Ancestral,
+  Reproductor Folclórico 1-Toque, Tarjetas 3D 180° de Aliados, Calculadora de Retorno
+  Rural Campesino, Pasaporte Ético y Baqueano Ops Center en tiempo real).
+- Garantizar que cada módulo mantenga la identidad estética oficial de Baqueano:
+  Petróleo Teal (#165D6F), Naranja Fuego (#F65E01), Arena Pinolera (#F4E6C1) y
+  Noche Profunda (#0F172A) con efectos de glassmorphism y microinteracciones fluidas.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Se organiza en bloques modulares CSS3 aislados con selectores semánticos.
+- Implementa transformaciones 3D con perspective: 1000px y preserve-3d para
+  las tarjetas giratorias de cooperativas y alojamientos comunitarios.
+- Aplica CSS Grid dinámico con breakpoints fluidos para móviles, tablets y escritorios.
+- Se integra sin colisiones a través del archivo central styles.css mediante @import.
+
+📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+- Clases para Los 5 Impactos Comunitarios.
+- Clases para el Catálogo de Destinos Protegidos con filtrado dinámico.
+- Clases para la Línea de Tiempo de 7 Periodos Históricos y Explorador de 17 Territorios.
+- Clases para el Decálogo Verde y Formulario de Denuncias con Georreferenciación.
+- Clases para la Vitrina de Gastronomía Ancestral y Milpa Pinolera.
+- Clases para el Centro de Música Folclórica con ecualizador visual.
+- Clases para las Tarjetas 3D Flip Card de Cooperativas Locales.
+- Clases para la Calculadora de Retorno Campesino vs Plataformas Foráneas.
+- Clases para el Asistente Baqueano AI y Chatbot Comunitario.
+- Clases para el Panel Administrativo en Tiempo Real (Baqueano Ops Center).
+============================================================================
+*/
 
 /* --- LOS 5 IMPACTOS DEL PROYECTO BAQUEANO --- */
 .impacts-section-pro {

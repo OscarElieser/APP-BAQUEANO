@@ -15,7 +15,6 @@
       "**/pnpm-*",
       "**/tsconfig*",
       "**/package*",
-      "**/css/**",
       "**/*.md"
     ],
     "rewrites": [
