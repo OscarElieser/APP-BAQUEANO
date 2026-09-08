@@ -12,7 +12,8 @@
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Integración con Leaflet API compatible con múltiples proveedores de teselas:
-//   * Esri World Imagery (Satélite Real en Alta Definición).
+//   * CartoDB Voyager (Calles, Playas y Rutas Claras) como capa inicial visible.
+//   * Esri World Imagery (Satélite Real en Alta Definición) como alternativa.
 //   * CartoDB Dark Matter (Modo Nocturno Baqueano).
 //   * CartoDB Voyager (Calles, Playas y Rutas Claras).
 //   * OpenTopoMap (Relieve Topográfico y Curvas de Nivel).
@@ -41,6 +42,13 @@ window.BaqueanoMap = (function() {
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       attribution: '&copy; Esri, Maxar, Earthstar Geographics',
       subdomains: '',
+      maxZoom: 19
+    },
+    osm: {
+      name: 'Mapa Claro',
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '&copy; OpenStreetMap contributors',
+      subdomains: 'abc',
       maxZoom: 19
     },
     dark: {
@@ -104,7 +112,8 @@ window.BaqueanoMap = (function() {
   // --------------------------------------------------------------------------
   let mapInstance = null;
   let activeTileLayer = null;
-  let currentLayerKey = 'satellite';
+  let currentLayerKey = 'streets';
+  let activeTileErrorCount = 0;
   let markersById = {};
   let currentPlaces = [];
   let activeCategoryFilter = 'all';
@@ -191,6 +200,7 @@ window.BaqueanoMap = (function() {
     }
 
     const conf = TILE_PROVIDERS[layerKey];
+    activeTileErrorCount = 0;
     const layerOptions = {
       attribution: conf.attribution,
       maxZoom: conf.maxZoom || 19,
@@ -205,7 +215,16 @@ window.BaqueanoMap = (function() {
     activeTileLayer = L.tileLayer(conf.url, layerOptions);
 
     activeTileLayer.on('tileerror', function(error) {
-      console.warn('[BaqueanoMap] Reintento de tesela:', error);
+      activeTileErrorCount += 1;
+      console.warn('[BaqueanoMap] Error de tesela en capa', layerKey, error);
+      if (activeTileErrorCount >= 3 && layerKey !== 'osm') {
+        switchTileLayer('osm');
+        updateMapStatus('Mostrando mapa claro por conexión limitada del proveedor satelital.', 'seed');
+      }
+    });
+
+    activeTileLayer.on('load', function() {
+      updateMapStatus(`${conf.name} activo y ${currentPlaces.length} destinos visibles`, 'firestore');
     });
 
     activeTileLayer.addTo(mapInstance);
@@ -220,6 +239,14 @@ window.BaqueanoMap = (function() {
     document.querySelectorAll('.map-layer-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.layer === layerKey);
     });
+  }
+
+  function updateMapStatus(message, source) {
+    const badge = document.getElementById('mapSourceBadge');
+    if (!badge) return;
+
+    badge.className = `map-source-badge ${source || 'firestore'}`;
+    badge.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ${message}`;
   }
 
   // --------------------------------------------------------------------------
@@ -327,7 +354,7 @@ window.BaqueanoMap = (function() {
     const sourceBadge = document.getElementById('mapSourceBadge');
     if (sourceBadge) {
       sourceBadge.className = 'map-source-badge firestore';
-      sourceBadge.innerHTML = `<i class="fa-solid fa-satellite"></i> Satélite HD y ${places.length} Destinos Activos`;
+      sourceBadge.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> Mapa visible y ${places.length} Destinos Activos`;
     }
   }
 
@@ -355,8 +382,11 @@ window.BaqueanoMap = (function() {
       <!-- Capas de Mapa -->
       <div class="map-ctrl-group map-layers-selector">
         <span class="map-ctrl-label"><i class="fa-solid fa-layer-group"></i> Capa:</span>
-        <button type="button" class="map-layer-btn active" data-layer="satellite" title="Fotografía Satelital en Alta Resolución">
+        <button type="button" class="map-layer-btn" data-layer="satellite" title="Fotografía Satelital en Alta Resolución">
           <i class="fa-solid fa-satellite"></i> Satélite HD
+        </button>
+        <button type="button" class="map-layer-btn" data-layer="osm" title="Mapa claro con calles, pueblos y referencias visibles">
+          <i class="fa-solid fa-map-location-dot"></i> Mapa Claro
         </button>
         <button type="button" class="map-layer-btn" data-layer="dark" title="Modo Nocturno Baqueano">
           <i class="fa-solid fa-moon"></i> Noche
@@ -431,8 +461,10 @@ window.BaqueanoMap = (function() {
         scrollWheelZoom: true
       });
 
-      // Añadir capa satelital por defecto
-      switchTileLayer('satellite');
+      container.classList.add('is-loading');
+
+      // Añadir capa clara por defecto para que el mapa siempre se vea.
+      switchTileLayer('streets');
 
       // Inyectar controles personalizados
       injectMapControls(container);
@@ -472,7 +504,10 @@ window.BaqueanoMap = (function() {
 
       // Sincronización geométrica y redibujado de teselas
       setTimeout(() => {
-        if (mapInstance) mapInstance.invalidateSize();
+        if (mapInstance) {
+          mapInstance.invalidateSize();
+          container.classList.remove('is-loading');
+        }
       }, 250);
 
       setTimeout(() => {
@@ -487,7 +522,7 @@ window.BaqueanoMap = (function() {
         if (mapInstance) mapInstance.invalidateSize();
       }, { passive: true });
 
-      console.info('[BaqueanoMap] Mapa interactivo satelital inicializado con éxito.');
+      console.info('[BaqueanoMap] Mapa interactivo inicializado con capa visible.');
     } catch (err) {
       console.error('[BaqueanoMap] Error inicializando mapa:', err);
     }

@@ -95,9 +95,30 @@
     .map-source-badge.firestore { color: #10B981; }
     .map-source-badge.seed { color: var(--arena-pinolera); }
     #baqueanoInteractiveMap {
-      height: 420px;
+      height: min(62vh, 560px);
+      min-height: 460px;
       width: 100%;
-      background: #0F172A;
+      background:
+        linear-gradient(135deg, rgba(244, 230, 193, 0.12), rgba(22, 93, 111, 0.24)),
+        #E7E3D8;
+    }
+    #baqueanoInteractiveMap.is-loading::before {
+      content: 'Cargando mapa territorial...';
+      position: absolute;
+      inset: 0;
+      z-index: 650;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.86), rgba(22, 93, 111, 0.72));
+      color: #FFFFFF;
+      font-family: var(--font-tech);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    #baqueanoInteractiveMap .leaflet-tile-pane {
+      filter: saturate(1.12) contrast(1.02) brightness(1.04);
     }
     /* Personalización del popup de Leaflet */
     .leaflet-popup-content-wrapper {
