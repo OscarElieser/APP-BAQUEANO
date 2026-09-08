@@ -102,6 +102,8 @@
     if (buttonEl) {
       buttonEl.classList.toggle('active', isAdding);
       buttonEl.innerHTML = `<i class="fa-${isAdding ? 'solid' : 'regular'} fa-bookmark"></i>`;
+      buttonEl.title = isAdding ? 'Quitar de mis favoritos' : 'Guardar en mis favoritos';
+      buttonEl.setAttribute('aria-label', isAdding ? 'Quitar de mis favoritos' : 'Guardar en mis favoritos');
     }
   }
 
@@ -136,8 +138,9 @@
       const placeId = btn.getAttribute('data-id');
       const isFav = favs.includes(placeId);
       btn.classList.toggle('active', isFav);
-      btn.innerHTML = `<i class="fa-${isFav ? 'solid' : 'regular'} fa-bookmark"></i> ${isFav ? 'Guardado' : 'Guardar'}`;
+      btn.innerHTML = `<i class="fa-${isFav ? 'solid' : 'regular'} fa-bookmark"></i>`;
       btn.title = isFav ? 'Quitar de mis favoritos' : 'Guardar en mis favoritos';
+      btn.setAttribute('aria-label', isFav ? 'Quitar de mis favoritos' : 'Guardar en mis favoritos');
     });
   }
 
@@ -153,8 +156,9 @@
       const count = likeCounts[placeId] !== undefined ? likeCounts[placeId] : initialLikes;
 
       btn.classList.toggle('active', isLiked);
-      btn.innerHTML = `<i class="fa-${isLiked ? 'solid' : 'regular'} fa-heart"></i> <span class="like-number">${count}</span>`;
+      btn.innerHTML = `<i class="fa-${isLiked ? 'solid' : 'regular'} fa-heart"></i><span class="like-number">${count}</span>`;
       btn.title = isLiked ? 'Ya te gusta este lugar' : 'Me gusta este lugar';
+      btn.setAttribute('aria-label', `${count} personas les gusta este lugar`);
     });
   }
 
