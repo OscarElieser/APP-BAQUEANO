@@ -8,7 +8,13 @@
  * WHAT
  * Public routes, admin modules, Firestore collections, role permissions, and environment validation helpers.
  */
-import type { UserRole } from "@baqueano/types";
+import type {
+  UserRole,
+  StrategicKpi,
+  StrategicSignal,
+  TerritoryPortfolioProfile,
+  StrategicInitiative
+} from "@baqueano/types";
 
 export const publicRoutes = [
   { href: "/", label: "Inicio" },
@@ -24,6 +30,7 @@ export const publicRoutes = [
 
 export const adminModules = [
   "dashboard",
+  "strategic",
   "control-tower",
   "confianza",
   "paises",
@@ -111,7 +118,17 @@ export const firestoreCollections = {
   territorialAccessibility: "territorial_accessibility",
   serviceGaps: "service_gaps",
   spatialCoverage: "spatial_coverage",
-  geoAuditLogs: "geo_audit_logs"
+  geoAuditLogs: "geo_audit_logs",
+  strategicKpis: "strategic_kpis",
+  strategicSignals: "strategic_signals",
+  territorialPortfolios: "territorial_portfolios",
+  strategicInitiatives: "strategic_initiatives",
+  strategicScenarios: "strategic_scenarios",
+  decisionRecords: "decision_records",
+  strategicReports: "strategic_reports",
+  trips: "trips",
+  passportEntries: "passport_entries",
+  experienceContexts: "experience_contexts"
 } as const;
 
 export const roleAccess: Record<UserRole, readonly string[]> = {
@@ -1083,6 +1100,747 @@ export const TOURISM_CORRIDORS_CATALOG = [
     updatedAt: "2026-08-30T00:00:00Z"
   }
 ] as const;
+
+// ============================================================================
+// FASE 19: STRATEGIC KPI CATALOG & STRATEGIC INTELLIGENCE DEFAULTS
+// ============================================================================
+
+export const STRATEGIC_KPI_CATALOG: readonly StrategicKpi[] = [
+  // EXPERIENCE
+  {
+    kpiId: "kpi-exp-explorations",
+    name: "Exploraciones Significativas",
+    description: "Visitas de alta interacción (>30s o navegación profunda en contenido cultural/natural).",
+    formula: "count(analytics_events where event == 'destination_view' and duration_sec >= 30)",
+    source: "analytics_events",
+    period: "Últimos 30 días",
+    aggregation: "count",
+    owner: "Lead de Experiencia & Producto",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "EXPERIENCE",
+    sensitivity: "INTERNAL",
+    value: 14280,
+    targetValue: 15000,
+    forecastValue: 16100,
+    unit: "exploraciones",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0",
+    contributingFactors: ["Incremento de tráfico orgánico en Corredores", "Interés en Pueblos Blancos"]
+  },
+  {
+    kpiId: "kpi-exp-trip-plans",
+    name: "Planes de Viaje Generados",
+    description: "Itinerarios y planes generados por exploradores mediante Digital Concierge y Experience OS.",
+    formula: "count(active_trips where createdAt within period)",
+    source: "active_trips",
+    period: "Últimos 30 días",
+    aggregation: "count",
+    owner: "Lead de Experiencia & Producto",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "EXPERIENCE",
+    sensitivity: "INTERNAL",
+    value: 1240,
+    targetValue: 1200,
+    forecastValue: 1350,
+    unit: "itinerarios",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0",
+    contributingFactors: ["Uso activo del Concierge Digital para rutas multimodales"]
+  },
+  {
+    kpiId: "kpi-exp-qr-journeys",
+    name: "Recorridos Iniciados vía Smart Points",
+    description: "Escaneos de balizas físicas y códigos QR que derivan en consulta profunda de destino.",
+    formula: "count(smart_point_scans where is_valid == true)",
+    source: "smart_points",
+    period: "Últimos 30 días",
+    aggregation: "count",
+    owner: "Lead de Smart Tourism & IoT",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "EXPERIENCE",
+    sensitivity: "INTERNAL",
+    value: 890,
+    targetValue: 1000,
+    forecastValue: 980,
+    unit: "escaneos",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  // MARKETPLACE
+  {
+    kpiId: "kpi-mkt-active-biz",
+    name: "Negocios Locales Activos",
+    description: "Emprendimientos, cooperativas y guías rurales con perfil activo y visible en el marketplace.",
+    formula: "count(businesses where status == 'active')",
+    source: "businesses",
+    period: "Al corte",
+    aggregation: "count",
+    owner: "Coordinador de Marketplace & Anfitriones",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "MARKETPLACE",
+    sensitivity: "INTERNAL",
+    value: 342,
+    targetValue: 350,
+    forecastValue: 360,
+    unit: "negocios",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-mkt-verified-biz",
+    name: "Negocios con Verificación de Confianza",
+    description: "Negocios con inspección en campo o acreditación de prácticas responsables validada.",
+    formula: "count(businesses where trust_badge != null and trust_badge != 'none')",
+    source: "verifications",
+    period: "Al corte",
+    aggregation: "count",
+    owner: "Lead de Trust & Safety",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "MARKETPLACE",
+    sensitivity: "INTERNAL",
+    value: 218,
+    targetValue: 240,
+    forecastValue: 235,
+    unit: "negocios verificados",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-mkt-reservations-completed",
+    name: "Reservas Completadas",
+    description: "Servicios turísticos y visitas comunitarias efectivamente concluidas entre anfitrión y viajero.",
+    formula: "count(reservations where status == 'completed')",
+    source: "reservations",
+    period: "Últimos 30 días",
+    aggregation: "count",
+    owner: "Coordinador de Marketplace & Anfitriones",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "MARKETPLACE",
+    sensitivity: "CONFIDENTIAL",
+    value: 412,
+    targetValue: 400,
+    forecastValue: 450,
+    unit: "reservas",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-mkt-response-rate",
+    name: "Tasa de Respuesta de Anfitriones",
+    description: "Porcentaje de solicitudes de reserva atendidas oportunamente por anfitriones locales.",
+    formula: "avg(responded_requests / total_received_requests) * 100",
+    source: "reservation_requests",
+    period: "Últimos 30 días",
+    aggregation: "ratio",
+    owner: "Coordinador de Marketplace & Anfitriones",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "MARKETPLACE",
+    sensitivity: "INTERNAL",
+    value: 91.4,
+    targetValue: 90.0,
+    forecastValue: 92.0,
+    unit: "%",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  // TERRITORY
+  {
+    kpiId: "kpi-ter-dest-coverage",
+    name: "Destinos Documentados",
+    description: "Atracciones naturales, culturales y comunitarias con ficha técnica, coordenadas y reseñas.",
+    formula: "count(destinations where is_published == true)",
+    source: "destinations",
+    period: "Al corte",
+    aggregation: "count",
+    owner: "Lead de Contenidos & Territorio",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "TERRITORY",
+    sensitivity: "PUBLIC",
+    value: 184,
+    targetValue: 200,
+    forecastValue: 195,
+    unit: "destinos",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-ter-smartpoint-coverage",
+    name: "Nodos Smart Points en Operación",
+    description: "Puntos físicos con señalética inteligente, balizas y monitoreo ambiental activos.",
+    formula: "count(smart_points where status == 'ACTIVE')",
+    source: "smart_points",
+    period: "Al corte",
+    aggregation: "count",
+    owner: "Lead de Smart Tourism & IoT",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "hourly",
+    group: "TERRITORY",
+    sensitivity: "INTERNAL",
+    value: 38,
+    targetValue: 45,
+    forecastValue: 42,
+    unit: "nodos",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-ter-accessibility-avg",
+    name: "Índice Medio de Accesibilidad",
+    description: "Evaluación multidimensional de acceso vial, conectividad y cercanía a servicios de emergencia.",
+    formula: "avg(accessibility_index across evaluated territories)",
+    source: "territorial_accessibility",
+    period: "Evaluación 2026-Q3",
+    aggregation: "index",
+    owner: "Lead de Inteligencia Geoespacial",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "weekly",
+    group: "TERRITORY",
+    sensitivity: "INTERNAL",
+    value: 68.5,
+    targetValue: 70.0,
+    forecastValue: 70.0,
+    unit: "/100",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  // SUSTAINABILITY
+  {
+    kpiId: "kpi-sus-assessed-resources",
+    name: "Recursos Evaluados (BRTI)",
+    description: "Destinos y negocios auditados bajo el Índice Baqueano de Turismo Responsable.",
+    formula: "count(sustainability_assessments where status == 'COMPLETED')",
+    source: "sustainability_assessments",
+    period: "Últimos 90 días",
+    aggregation: "count",
+    owner: "Lead de Sostenibilidad & BRTI",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "weekly",
+    group: "SUSTAINABILITY",
+    sensitivity: "INTERNAL",
+    value: 126,
+    targetValue: 150,
+    forecastValue: 140,
+    unit: "evaluaciones",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-sus-local-participation",
+    name: "Participación Comunitaria Rural",
+    description: "Porcentaje de prestadores pertenecientes a cooperativas o micro-emprendimientos campesinos.",
+    formula: "(count(rural_smallholder_businesses) / count(total_active_businesses)) * 100",
+    source: "businesses",
+    period: "Al corte",
+    aggregation: "ratio",
+    owner: "Lead de Sostenibilidad & BRTI",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "weekly",
+    group: "SUSTAINABILITY",
+    sensitivity: "INTERNAL",
+    value: 63.7,
+    targetValue: 60.0,
+    forecastValue: 65.0,
+    unit: "%",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-sus-capacity-pressure-count",
+    name: "Nodos con Alerta de Presión",
+    description: "Destinos con saturación proyectada o concentración excesiva de demanda en fines de semana.",
+    formula: "count(destinations where saturation_level in ['HIGH', 'VERY_HIGH'])",
+    source: "predictive_forecasts",
+    period: "Próximos 7 días",
+    aggregation: "count",
+    owner: "Lead de Sostenibilidad & BRTI",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "SUSTAINABILITY",
+    sensitivity: "INTERNAL",
+    value: 3,
+    targetValue: 2,
+    forecastValue: 3,
+    unit: "destinos",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0",
+    contributingFactors: ["Cerro Negro (sábado mañana)", "San Juan del Sur (domingo tarde)", "Catarina Mirador (domingo medio día)"]
+  },
+  // TRUST
+  {
+    kpiId: "kpi-tru-verified-coverage",
+    name: "Cobertura de Verificación",
+    description: "Porcentaje de fichas públicas con verificación de identidad, ubicación y servicio vigente.",
+    formula: "(count(verified_places) / count(total_places)) * 100",
+    source: "verifications",
+    period: "Al corte",
+    aggregation: "ratio",
+    owner: "Lead de Trust & Safety",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "TRUST",
+    sensitivity: "INTERNAL",
+    value: 78.4,
+    targetValue: 80.0,
+    forecastValue: 81.0,
+    unit: "%",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-tru-stale-verifications",
+    name: "Verificaciones por Renovar (>180d)",
+    description: "Registros de campo cuya última auditoría supera el umbral de frescura de 180 días.",
+    formula: "count(verifications where days_since_last_audit > 180)",
+    source: "trust_audits",
+    period: "Al corte",
+    aggregation: "count",
+    owner: "Lead de Trust & Safety",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "TRUST",
+    sensitivity: "INTERNAL",
+    value: 14,
+    targetValue: 10,
+    forecastValue: 12,
+    unit: "fichas",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-tru-open-integrity-cases",
+    name: "Casos de Integridad Abiertos",
+    description: "Reclamaciones, reportes de información errónea o discrepancias en proceso de mediación.",
+    formula: "count(integrity_cases where status == 'OPEN')",
+    source: "integrity_cases",
+    period: "Al corte",
+    aggregation: "count",
+    owner: "Lead de Trust & Safety",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "real-time",
+    group: "TRUST",
+    sensitivity: "RESTRICTED",
+    value: 2,
+    targetValue: 0,
+    forecastValue: 1,
+    unit: "casos",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  // OPERATIONS & PLATFORM
+  {
+    kpiId: "kpi-ops-open-incidents",
+    name: "Incidentes Operativos Activos",
+    description: "Incidentes técnicos o de soporte de campo en estado abierto o bajo investigación.",
+    formula: "count(incidents where status in ['OPEN', 'INVESTIGATING'])",
+    source: "incidents",
+    period: "Tiempo real",
+    aggregation: "count",
+    owner: "SRE / Control Tower Lead",
+    status: "VALIDATED",
+    freshness: "2026-09-08T08:00:00Z",
+    cadence: "real-time",
+    group: "OPERATIONS",
+    sensitivity: "INTERNAL",
+    value: 1,
+    targetValue: 0,
+    forecastValue: 0,
+    unit: "incidentes",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  {
+    kpiId: "kpi-plt-health-score",
+    name: "Disponibilidad del Ecosistema",
+    description: "Porcentaje de disponibilidad agregada de Web, PWA, APIs y Gateway de Inteligencia.",
+    formula: "avg(uptime_percentage across critical microservices)",
+    source: "platform_config",
+    period: "Últimos 30 días",
+    aggregation: "ratio",
+    owner: "Principal Platform Architect",
+    status: "VALIDATED",
+    freshness: "2026-09-08T08:00:00Z",
+    cadence: "hourly",
+    group: "PLATFORM",
+    sensitivity: "INTERNAL",
+    value: 99.94,
+    targetValue: 99.90,
+    forecastValue: 99.95,
+    unit: "%",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  },
+  // ECONOMY (CONECTIVIDAD ECONÓMICA LOCAL)
+  {
+    kpiId: "kpi-eco-direct-contacts",
+    name: "Contactos Directos Facilitados",
+    description: "Interacciones directas (WhatsApp, llamada, correo) originadas hacia anfitriones campesinos.",
+    formula: "count(analytics_events where event in ['contact_host_whatsapp', 'contact_host_phone'])",
+    source: "analytics_events",
+    period: "Últimos 30 días",
+    aggregation: "count",
+    owner: "Coordinador de Marketplace & Anfitriones",
+    status: "VALIDATED",
+    freshness: "2026-09-08T06:00:00Z",
+    cadence: "daily",
+    group: "ECONOMY",
+    sensitivity: "INTERNAL",
+    value: 3840,
+    targetValue: 3500,
+    forecastValue: 4100,
+    unit: "contactos",
+    territoryScope: "ALL",
+    countryId: "NI",
+    version: "1.0.0"
+  }
+] as const;
+
+export const STRATEGIC_SIGNAL_DEFINITIONS: readonly StrategicSignal[] = [
+  {
+    signalId: "sig-dem-leon-corredor",
+    type: "DEMAND_CHANGE",
+    title: "Incremento de Demanda en Corredor Volcánico de Occidente",
+    scope: {
+      territoryId: "Leon",
+      corridorId: "corridor-volcanes-occidente",
+      countryId: "NI"
+    },
+    severity: "ATTENTION",
+    source: "forecast",
+    observedAt: "2026-09-08T06:30:00Z",
+    status: "ACTIVE",
+    evidence: {
+      metricRef: "kpi-exp-explorations",
+      metricName: "Interés de Exploración",
+      currentValue: "+28% vs semana previa",
+      threshold: "+20%",
+      details: "Búsquedas e itinerarios hacia Cerro Negro y Hervideros de San Jacinto proyectan alza en fin de semana."
+    },
+    implications: [
+      "Posible congestión de parqueo y guías en turno matutino en Cerro Negro.",
+      "Oportunidad de derivar viajeros a cooperativas de quesillos en Nagarote y artesanías en Sutiaba."
+    ],
+    options: [
+      { id: "opt-1", label: "Monitorear telemetría de Smart Points", actionType: "MONITOR" },
+      { id: "opt-2", label: "Ejecutar simulación de redistribución hacia San Jacinto", actionType: "RUN_SIMULATION" },
+      { id: "opt-3", label: "Revisar disponibilidad de anfitriones en León", actionType: "REVIEW_TERRITORY" }
+    ]
+  },
+  {
+    signalId: "sig-cov-matagalpa-coffee",
+    type: "COVERAGE_GAP",
+    title: "Oportunidad de Documentación en Fincas de Selva Negra & San Ramón",
+    scope: {
+      territoryId: "Matagalpa",
+      countryId: "NI"
+    },
+    severity: "INFORMATIONAL",
+    source: "measured",
+    observedAt: "2026-09-07T14:00:00Z",
+    status: "ACTIVE",
+    evidence: {
+      metricRef: "kpi-ter-dest-coverage",
+      metricName: "Densidad de Fincas Agroturísticas",
+      currentValue: "4 fincas registradas de 18 identificadas en campo",
+      threshold: "N/A",
+      details: "Existe alto potencial cultural y de senderismo cafetero no digitalizado en micro-cuencas."
+    },
+    implications: [
+      "Oportunidad de extender misiones de relevamiento de campo (Field Ops) con cooperativas locales.",
+      "Cero estigmatización: representa brecha de cobertura digital, no déficit de valor territorial."
+    ],
+    options: [
+      { id: "opt-1", label: "Planificar jornada de verificación comunitaria", actionType: "INVESTIGATE" },
+      { id: "opt-2", label: "Vincular con iniciativa de Agro-Rutas Norteñas", actionType: "REVIEW_TERRITORY" }
+    ]
+  },
+  {
+    signalId: "sig-tru-frescura-carazo",
+    type: "TRUST_GAP",
+    title: "Vencimiento Próximo de Verificaciones en Meseta de Carazo",
+    scope: {
+      territoryId: "Carazo",
+      countryId: "NI"
+    },
+    severity: "ATTENTION",
+    source: "measured",
+    observedAt: "2026-09-08T04:00:00Z",
+    status: "ACTIVE",
+    evidence: {
+      metricRef: "kpi-tru-stale-verifications",
+      metricName: "Fichas > 180 días sin re-auditoría",
+      currentValue: 6,
+      threshold: 5,
+      details: "Talleres de artesanos en Diriamba y San Marcos requieren confirmación semestral de horarios y contacto."
+    },
+    implications: [
+      "Riesgo de información desactualizada si no se coordina contacto con los anfitriones."
+    ],
+    options: [
+      { id: "opt-1", label: "Emitir tarea de verificación a gestor local", actionType: "INVESTIGATE" },
+      { id: "opt-2", label: "Notificar a anfitriones vía canal prioritario", actionType: "MONITOR" }
+    ]
+  }
+] as const;
+
+export const TERRITORIAL_PORTFOLIO_DEFAULTS: readonly TerritoryPortfolioProfile[] = [
+  {
+    territoryId: "Leon",
+    territoryName: "León (Occidente)",
+    countryId: "NI",
+    coverageRating: "Strong",
+    trustRating: "Strong",
+    accessibilityRating: "Strong",
+    demandRating: "Strong",
+    sustainabilityRating: "Moderate",
+    destinationsCount: 24,
+    businessesCount: 52,
+    smartPointsCount: 6,
+    dataConfidence: "SUFFICIENT_EVIDENCE",
+    opportunityNotes: "Alta demanda concentrada en Cerro Negro y Las Peñitas; oportunidad de fortalecer circuito histórico-cultural urbano y gastronomía tradicional.",
+    dataGaps: [],
+    lastAuditedAt: "2026-09-07T12:00:00Z"
+  },
+  {
+    territoryId: "Matagalpa",
+    territoryName: "Matagalpa (Norte Central)",
+    countryId: "NI",
+    coverageRating: "Developing",
+    trustRating: "Moderate",
+    accessibilityRating: "Moderate",
+    demandRating: "Moderate",
+    sustainabilityRating: "Strong",
+    destinationsCount: 16,
+    businessesCount: 34,
+    smartPointsCount: 4,
+    dataConfidence: "PARTIAL_EVIDENCE",
+    opportunityNotes: "Gran potencial agroecológico y de aviturismo; se requiere completar relevamiento de fincas comunitarias en San Ramón y Yasica Sur.",
+    dataGaps: ["Capacidad formal de hospedaje rural en temporada alta", "Coordenadas exactas de 6 senderos secundarios"],
+    lastAuditedAt: "2026-09-06T10:00:00Z"
+  },
+  {
+    territoryId: "Masaya",
+    territoryName: "Masaya & Pueblos Blancos",
+    countryId: "NI",
+    coverageRating: "Strong",
+    trustRating: "Strong",
+    accessibilityRating: "Strong",
+    demandRating: "Strong",
+    sustainabilityRating: "Strong",
+    destinationsCount: 19,
+    businessesCount: 48,
+    smartPointsCount: 5,
+    dataConfidence: "SUFFICIENT_EVIDENCE",
+    opportunityNotes: "Eje cultural consolidado en artesanías y gastronomía; monitorear capacidad de carga en miradores de Catarina y Laguna de Apoyo.",
+    dataGaps: [],
+    lastAuditedAt: "2026-09-07T15:00:00Z"
+  },
+  {
+    territoryId: "Rivas",
+    territoryName: "Rivas & Ometepe",
+    countryId: "NI",
+    coverageRating: "Strong",
+    trustRating: "Moderate",
+    accessibilityRating: "Moderate",
+    demandRating: "Strong",
+    sustainabilityRating: "Developing",
+    destinationsCount: 28,
+    businessesCount: 61,
+    smartPointsCount: 7,
+    dataConfidence: "SUFFICIENT_EVIDENCE",
+    opportunityNotes: "Alta presión costera y volcánica; oportunidad de impulsar reservas naturales comunitarias en Altagracia y Tola.",
+    dataGaps: ["Horarios en tiempo real de ferris lacustres en época de viento"],
+    lastAuditedAt: "2026-09-07T16:00:00Z"
+  },
+  {
+    territoryId: "Rio San Juan",
+    territoryName: "Río San Juan & Solentiname",
+    countryId: "NI",
+    coverageRating: "Developing",
+    trustRating: "Developing",
+    accessibilityRating: "Limited data",
+    demandRating: "Moderate",
+    sustainabilityRating: "Strong",
+    destinationsCount: 14,
+    businessesCount: 22,
+    smartPointsCount: 3,
+    dataConfidence: "PARTIAL_EVIDENCE",
+    opportunityNotes: "Santuario de biodiversidad y pintura naif; turismo de conservación de alto valor y baja densidad.",
+    dataGaps: ["Estimación precisa de tiempos de traslado fluvial por variaciones de marea/raudales"],
+    lastAuditedAt: "2026-09-05T09:00:00Z"
+  }
+] as const;
+
+export const STRATEGIC_INITIATIVES_SEED: readonly StrategicInitiative[] = [
+  {
+    initiativeId: "init-redistribucion-occidente",
+    name: "Redistribución de Flujos Ecoturísticos Occidente",
+    objective: "Equilibrar la presión sobre Cerro Negro incentivando visitas a cooperativas de San Jacinto y Quezalguaque.",
+    territoryScope: "Leon",
+    owner: "Coordinador de Sostenibilidad Territorial",
+    status: "ACTIVE",
+    startDate: "2026-08-01",
+    targetDate: "2026-11-30",
+    associatedKpis: [
+      {
+        kpiId: "kpi-sus-capacity-pressure-count",
+        baselineValue: 5,
+        targetValue: 2,
+        currentValue: 3
+      },
+      {
+        kpiId: "kpi-mkt-active-biz",
+        baselineValue: 40,
+        targetValue: 60,
+        currentValue: 52
+      }
+    ],
+    createdAt: "2026-07-28T00:00:00Z",
+    updatedAt: "2026-09-08T00:00:00Z"
+  },
+  {
+    initiativeId: "init-relevamiento-fincas-norte",
+    name: "Documentación Participativa del Corredor del Café",
+    objective: "Digitalizar y verificar 25 micro-fincas agroturísticas en Matagalpa y Jinotega con sello de confianza.",
+    territoryScope: "Matagalpa",
+    owner: "Lead de Trust & Operaciones de Campo",
+    status: "ACTIVE",
+    startDate: "2026-08-15",
+    targetDate: "2026-12-15",
+    associatedKpis: [
+      {
+        kpiId: "kpi-mkt-verified-biz",
+        baselineValue: 200,
+        targetValue: 250,
+        currentValue: 218
+      },
+      {
+        kpiId: "kpi-ter-dest-coverage",
+        baselineValue: 170,
+        targetValue: 200,
+        currentValue: 184
+      }
+    ],
+    createdAt: "2026-08-10T00:00:00Z",
+    updatedAt: "2026-09-08T00:00:00Z"
+  }
+] as const;
+
+/**
+ * Capability matrix across touchpoints in Experience OS.
+ */
+export const EXPERIENCE_CAPABILITY_MATRIX = {
+  WEB: {
+    explore: "FULL",
+    reserve: "FULL",
+    offlineSavedTrip: "PARTIAL",
+    qrScan: "FULL",
+    nfcTap: "UNSUPPORTED",
+    accountManagement: "FULL",
+    conciergeChat: "FULL",
+    passportView: "FULL"
+  },
+  PWA: {
+    explore: "FULL",
+    reserve: "FULL",
+    offlineSavedTrip: "FULL",
+    qrScan: "FULL",
+    nfcTap: "PARTIAL",
+    accountManagement: "FULL",
+    conciergeChat: "FULL",
+    passportView: "FULL"
+  },
+  ANDROID: {
+    explore: "FULL",
+    reserve: "FULL",
+    offlineSavedTrip: "FULL",
+    qrScan: "FULL",
+    nfcTap: "FULL",
+    accountManagement: "FULL",
+    conciergeChat: "FULL",
+    passportView: "FULL"
+  },
+  KIOSK: {
+    explore: "FULL",
+    reserve: "UNSUPPORTED",
+    offlineSavedTrip: "UNSUPPORTED",
+    qrScan: "FULL",
+    nfcTap: "FULL",
+    accountManagement: "UNSUPPORTED",
+    conciergeChat: "PARTIAL",
+    passportView: "UNSUPPORTED"
+  },
+  SMART_POINT: {
+    explore: "PARTIAL",
+    reserve: "UNSUPPORTED",
+    offlineSavedTrip: "UNSUPPORTED",
+    qrScan: "FULL",
+    nfcTap: "FULL",
+    accountManagement: "UNSUPPORTED",
+    conciergeChat: "UNSUPPORTED",
+    passportView: "PARTIAL"
+  }
+} as const;
+
+/**
+ * Official unified vocabulary to eliminate drift across channels.
+ */
+export const OFFICIAL_EXPERIENCE_VOCABULARY = {
+  destination: "Destino",
+  business: "Negocio",
+  trip: "Viaje",
+  itinerary: "Itinerario",
+  saveAction: "Guardar",
+  savedItems: "Guardados",
+  reserveAction: "Reservar",
+  passport: "Pasaporte Digital",
+  concierge: "Baqueano Digital",
+  smartPoint: "Punto Inteligente",
+  verifiedVisit: "Visita Verificada",
+  todayView: "Hoy"
+} as const;
+
 
 
 

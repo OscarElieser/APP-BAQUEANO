@@ -1676,3 +1676,319 @@ export interface GisToolExecutionResult<T = unknown> {
   readonly error?: string | null;
   readonly disclaimer: string;
 }
+
+// ============================================================================
+// FASE 19: NATIONAL COMMAND & STRATEGIC INTELLIGENCE DATA CONTRACTS
+// ============================================================================
+
+export type KpiState = "VALIDATED" | "PARTIAL" | "EXPERIMENTAL" | "UNAVAILABLE";
+
+export type KpiGroup =
+  | "EXPERIENCE"
+  | "MARKETPLACE"
+  | "TERRITORY"
+  | "SUSTAINABILITY"
+  | "TRUST"
+  | "OPERATIONS"
+  | "PLATFORM"
+  | "ECONOMY";
+
+export type DataCadence = "real-time" | "near-real-time" | "hourly" | "daily" | "weekly" | "manual";
+
+export type MetricSensitivity = "PUBLIC" | "INTERNAL" | "CONFIDENTIAL" | "RESTRICTED";
+
+export type ConfidenceLevel = "SUFFICIENT_EVIDENCE" | "PARTIAL_EVIDENCE" | "INSUFFICIENT_DATA";
+
+export type StrategicHealthStatus = "HEALTHY" | "DEGRADED" | "STALE" | "UNKNOWN";
+
+export type SignalSeverity = "INFORMATIONAL" | "ATTENTION" | "HIGH";
+
+export type SignalType =
+  | "DEMAND_CHANGE"
+  | "CAPACITY_PRESSURE"
+  | "COVERAGE_GAP"
+  | "TRUST_GAP"
+  | "DATA_QUALITY"
+  | "MARKETPLACE"
+  | "PLATFORM"
+  | "SUSTAINABILITY"
+  | "COST_ANOMALY";
+
+export type SignalSource = "measured" | "forecast" | "simulation" | "manual_analysis";
+
+export type TerritoryDimensionRating =
+  | "Strong"
+  | "Moderate"
+  | "Developing"
+  | "Limited data"
+  | "Partial evidence"
+  | "Insufficient data";
+
+export type StrategicInitiativeState =
+  | "PROPOSED"
+  | "APPROVED"
+  | "ACTIVE"
+  | "PAUSED"
+  | "COMPLETED"
+  | "CANCELLED";
+
+export type StrategicReportType =
+  | "WEEKLY_EXECUTIVE_BRIEF"
+  | "TERRITORIAL_OVERVIEW"
+  | "MARKETPLACE_HEALTH"
+  | "TRUST_SUSTAINABILITY"
+  | "PLATFORM_HEALTH";
+
+export interface StrategicKpi {
+  readonly kpiId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly formula: string;
+  readonly source: string;
+  readonly period: string;
+  readonly aggregation: "sum" | "avg" | "ratio" | "count" | "index";
+  readonly owner: string;
+  readonly status: KpiState;
+  readonly freshness: string;
+  readonly cadence: DataCadence;
+  readonly group: KpiGroup;
+  readonly sensitivity: MetricSensitivity;
+  readonly value: number | null; // Strictly null if UNAVAILABLE or missing, NEVER 0 for unknown
+  readonly targetValue: number | null;
+  readonly forecastValue: number | null;
+  readonly simulatedValue?: number | null;
+  readonly unit: string;
+  readonly territoryScope: string;
+  readonly countryId: string;
+  readonly version: string;
+  readonly isDeprecated?: boolean;
+  readonly contributingFactors?: readonly string[];
+}
+
+export interface StrategicSignal {
+  readonly signalId: string;
+  readonly type: SignalType;
+  readonly title: string;
+  readonly scope: {
+    readonly territoryId?: string;
+    readonly destinationId?: string;
+    readonly countryId: string;
+    readonly corridorId?: string;
+  };
+  readonly severity: SignalSeverity;
+  readonly source: SignalSource;
+  readonly observedAt: string;
+  readonly status: "ACTIVE" | "REVIEWED" | "RESOLVED" | "ARCHIVED";
+  readonly evidence: {
+    readonly metricRef?: string;
+    readonly metricName?: string;
+    readonly currentValue?: number | string | null;
+    readonly threshold?: number | string;
+    readonly details: string;
+  };
+  readonly implications: readonly string[];
+  readonly options: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly actionType: "MONITOR" | "INVESTIGATE" | "RUN_SIMULATION" | "REVIEW_TERRITORY" | "MANUAL_NOTE";
+  }[];
+}
+
+export interface TerritoryPortfolioProfile {
+  readonly territoryId: string;
+  readonly territoryName: string;
+  readonly countryId: string;
+  readonly coverageRating: TerritoryDimensionRating;
+  readonly trustRating: TerritoryDimensionRating;
+  readonly accessibilityRating: TerritoryDimensionRating;
+  readonly demandRating: TerritoryDimensionRating;
+  readonly sustainabilityRating: TerritoryDimensionRating;
+  readonly destinationsCount: number;
+  readonly businessesCount: number;
+  readonly smartPointsCount: number;
+  readonly dataConfidence: ConfidenceLevel;
+  readonly opportunityNotes: string;
+  readonly dataGaps: readonly string[];
+  readonly lastAuditedAt: string;
+}
+
+export interface StrategicInitiative {
+  readonly initiativeId: string;
+  readonly name: string;
+  readonly objective: string;
+  readonly territoryScope: string;
+  readonly owner: string;
+  readonly status: StrategicInitiativeState;
+  readonly startDate: string;
+  readonly targetDate?: string;
+  readonly associatedKpis: readonly {
+    readonly kpiId: string;
+    readonly baselineValue: number | null;
+    readonly targetValue: number;
+    readonly currentValue: number | null;
+  }[];
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface DecisionRecord {
+  readonly decisionId: string;
+  readonly question: string;
+  readonly evidenceLinks: readonly {
+    readonly type: "KPI" | "MAP" | "FORECAST" | "SCENARIO" | "REPORT";
+    readonly refId: string;
+    readonly summary: string;
+  }[];
+  readonly scenariosConsidered: readonly string[];
+  readonly selectedOption: string;
+  readonly rationale: string;
+  readonly actor: string;
+  readonly actorRole: UserRole;
+  readonly timestamp: string;
+  readonly isSimulated?: boolean;
+}
+
+export interface StrategicReportSnapshot {
+  readonly reportId: string;
+  readonly title: string;
+  readonly reportType: StrategicReportType;
+  readonly countryId: string;
+  readonly territoryId?: string;
+  readonly period: string;
+  readonly generatedAt: string;
+  readonly generatedBy: string;
+  readonly dataVersion: string;
+  readonly sections: readonly {
+    readonly title: string;
+    readonly narrative: string;
+    readonly keyMetrics: readonly {
+      readonly name: string;
+      readonly valueFormatted: string;
+      readonly source: string;
+      readonly status: KpiState;
+    }[];
+    readonly dataConfidence: ConfidenceLevel;
+  }[];
+  readonly aiSummaryNarrative?: string;
+  readonly isHumanReviewed: boolean;
+  readonly reviewedBy?: string;
+}
+
+export interface StrategicCopilotQuery {
+  readonly question: string;
+  readonly role: UserRole;
+  readonly organizationId?: string;
+  readonly countryId: string;
+  readonly territoryId?: string;
+}
+
+export interface StrategicCopilotResponse {
+  readonly summary: string;
+  readonly facts: readonly string[];
+  readonly forecasts: readonly string[];
+  readonly simulations: readonly string[];
+  readonly recommendations: readonly string[];
+  readonly citedMetrics: readonly {
+    readonly kpiId: string;
+    readonly name: string;
+    readonly value: string;
+    readonly period: string;
+    readonly source: string;
+    readonly freshness: string;
+  }[];
+  readonly insufficientDataDisclaimer?: string;
+  readonly latencyMs: number;
+  readonly toolsExecuted: readonly string[];
+}
+
+// ============================================================================
+// FASE 18: EXPERIENCE OS & OMNICHANNEL JOURNEY DATA CONTRACTS
+// ============================================================================
+
+export type ExperienceChannel =
+  | "WEB"
+  | "PWA"
+  | "ANDROID"
+  | "KIOSK"
+  | "QR"
+  | "NFC"
+  | "SMART_POINT";
+
+export type JourneyState =
+  | "DISCOVERING"
+  | "PLANNING"
+  | "BOOKING"
+  | "UPCOMING"
+  | "ACTIVE"
+  | "COMPLETED";
+
+export type ExperienceSyncStatus = "SYNCED" | "PENDING" | "CONFLICT" | "FAILED";
+
+export interface ExperienceContextRecord {
+  readonly sessionId: string;
+  readonly userId?: string | null;
+  readonly channel: ExperienceChannel;
+  readonly countryId: string;
+  readonly locale: string;
+  readonly currency: string;
+  readonly activeTripId?: string | null;
+  readonly currentPlaceId?: string | null;
+  readonly currentSmartPointId?: string | null;
+  readonly lastIntent?: string | null;
+  readonly updatedAt: string;
+}
+
+export interface TripItineraryStopRecord {
+  readonly stopId: string;
+  readonly placeId: string;
+  readonly name: string;
+  readonly territoryId: string;
+  readonly dayNumber: number;
+  readonly order: number;
+  readonly scheduledTime?: string;
+  readonly durationMinutes: number;
+  readonly reservationId?: string | null;
+  readonly smartPointId?: string | null;
+  readonly isCompleted: boolean;
+  readonly notes?: string;
+}
+
+export interface TripHubRecord {
+  readonly tripId: string;
+  readonly userId: string;
+  readonly title: string;
+  readonly countryId: string;
+  readonly territories: readonly string[];
+  readonly state: JourneyState;
+  readonly startDate: string;
+  readonly endDate: string;
+  readonly stops: readonly TripItineraryStopRecord[];
+  readonly syncStatus: ExperienceSyncStatus;
+  readonly isOfflineAvailable: boolean;
+  readonly sharedAccess: "PRIVATE" | "VIEW_LINK" | "COLLABORATIVE";
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface PassportEntryRecord {
+  readonly entryId: string;
+  readonly userId: string;
+  readonly placeId: string;
+  readonly placeName: string;
+  readonly territoryId: string;
+  readonly smartPointId?: string;
+  readonly verificationType: "QR_SCAN" | "NFC_TAP" | "SMART_POINT" | "MANUAL_HOST_CONFIRM";
+  readonly verifiedAt: string;
+  readonly memoryNote?: string;
+  readonly photoUrl?: string;
+  readonly badgeUnlocked?: string;
+}
+
+export interface ExperienceDeepLinkRecord {
+  readonly canonicalUrl: string;
+  readonly targetType: "PLACE" | "BUSINESS" | "TRIP" | "CORRIDOR" | "SMART_POINT" | "RESERVATION";
+  readonly targetId: string;
+  readonly requiresAuth: boolean;
+  readonly shortCode?: string;
+  readonly expiresAt?: string | null;
+}

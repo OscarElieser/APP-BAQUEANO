@@ -148,13 +148,113 @@ assert(openIsochronesRoute.includes("generateIsochronePolygon"), "Open isochrone
 assert(spatialConfig.includes("TOURISM_CORRIDORS_CATALOG"), "Config must export TOURISM_CORRIDORS_CATALOG.");
 assert(spatialConfig.includes("NICARAGUA_TERRITORY_BOUNDS"), "Config must export NICARAGUA_TERRITORY_BOUNDS.");
 
+// ============================================================================
+// FASE 19: NATIONAL COMMAND & STRATEGIC INTELLIGENCE ASSERTIONS
+// ============================================================================
+const strategicMetricsService = read("apps/web/src/services/strategic/strategic-metrics.service.ts");
+const strategicSignalsService = read("apps/web/src/services/strategic/strategic-signals.service.ts");
+const territorialPortfolioService = read("apps/web/src/services/strategic/territorial-portfolio.service.ts");
+const scenarioPlanningService = read("apps/web/src/services/strategic/scenario-planning.service.ts");
+const strategicToolsService = read("apps/web/src/services/strategic/strategic-tools.service.ts");
+const strategicReportingService = read("apps/web/src/services/strategic/strategic-reporting.service.ts");
+const strategicAdminRoute = read("apps/admin/src/app/strategic/page.tsx");
+const scenariosAdminRoute = read("apps/admin/src/app/strategic/scenarios/page.tsx");
+const scorecardAdminRoute = read("apps/admin/src/app/strategic/scorecard/page.tsx");
+const briefingAdminRoute = read("apps/admin/src/app/strategic/briefing/page.tsx");
+const strategicKpisApiRoute = read("apps/web/src/app/api/internal/strategic/kpis/route.ts");
+const strategicSignalsApiRoute = read("apps/web/src/app/api/internal/strategic/signals/route.ts");
+const strategicBriefingApiRoute = read("apps/web/src/app/api/internal/strategic/briefing/route.ts");
+const strategicCopilotApiRoute = read("apps/web/src/app/api/internal/strategic/copilot/route.ts");
+const strategicConfig = read("packages/config/src/index.ts");
+
+assert(strategicMetricsService.includes("getStrategicKpi"), "Strategic metrics service must export getStrategicKpi.");
+assert(strategicMetricsService.includes("getAllStrategicKpis"), "Strategic metrics service must export getAllStrategicKpis.");
+assert(strategicMetricsService.includes("evaluateMetricConfidence"), "Strategic metrics service must evaluate metric confidence.");
+assert(strategicMetricsService.includes("calculatePeriodComparison"), "Strategic metrics service must calculate period comparison.");
+assert(strategicMetricsService.includes("applySmallCellPrivacy"), "Strategic metrics service must enforce small-cell privacy.");
+
+assert(strategicSignalsService.includes("getActiveSignals"), "Strategic signals service must export getActiveSignals.");
+assert(strategicSignalsService.includes("evaluateSignal"), "Strategic signals service must evaluate strategic signals.");
+assert(strategicSignalsService.includes("updateSignalStatus"), "Strategic signals service must update signal status.");
+
+assert(territorialPortfolioService.includes("getTerritoryProfiles"), "Territorial portfolio service must export getTerritoryProfiles.");
+assert(territorialPortfolioService.includes("getTerritoryProfileById"), "Territorial portfolio service must export getTerritoryProfileById.");
+assert(territorialPortfolioService.includes("evaluateTerritorialOpportunity"), "Territorial portfolio service must evaluate territorial opportunities.");
+
+assert(scenarioPlanningService.includes("runStrategicScenario"), "Scenario planning service must run strategic What-If scenarios.");
+assert(scenarioPlanningService.includes("compareStrategicScenario"), "Scenario planning service must compare strategic scenarios.");
+assert(scenarioPlanningService.includes("isSimulatedData: true"), "Scenario planning service must strictly isolate simulated data.");
+
+assert(strategicToolsService.includes("getStrategicKPIsTool"), "Strategic tools must export getStrategicKPIsTool.");
+assert(strategicToolsService.includes("getTerritoryProfileTool"), "Strategic tools must export getTerritoryProfileTool.");
+assert(strategicToolsService.includes("getStrategicSignalsTool"), "Strategic tools must export getStrategicSignalsTool.");
+assert(strategicToolsService.includes("getTrustCoverageTool"), "Strategic tools must export getTrustCoverageTool.");
+assert(strategicToolsService.includes("getOperationalSummaryTool"), "Strategic tools must export getOperationalSummaryTool.");
+assert(strategicToolsService.includes("executeStrategicCopilot"), "Strategic tools must execute grounded Strategic Copilot.");
+
+assert(strategicReportingService.includes("generateReportSnapshot"), "Strategic reporting service must generate report snapshots.");
+assert(strategicReportingService.includes("exportReportCsv"), "Strategic reporting service must export report CSV.");
+assert(strategicReportingService.includes("markReportAsReviewed"), "Strategic reporting service must record human review sign-off.");
+
+assert(strategicAdminRoute.includes("Centro de Inteligencia Estratégica & Territorial"), "Admin strategic page must render Executive Cockpit.");
+assert(strategicAdminRoute.includes("Baqueano Strategic Copilot"), "Admin strategic page must embed Strategic Copilot.");
+assert(scenariosAdminRoute.includes("MODO SIMULACIÓN ACTIVO"), "Scenario room must render simulation banner.");
+assert(scorecardAdminRoute.includes("Cuadro de Mando Integral & Metas Estratégicas"), "Scorecard page must render Executive Scorecard.");
+assert(briefingAdminRoute.includes("¿Qué cambió esta semana?"), "Briefing page must render 6-block executive brief.");
+
+assert(strategicKpisApiRoute.includes("strategicMetricsService"), "Internal KPIs API must query strategic metrics service.");
+assert(strategicSignalsApiRoute.includes("strategicSignalsService"), "Internal signals API must query strategic signals service.");
+assert(strategicBriefingApiRoute.includes("strategicReportingService"), "Internal briefing API must compile snapshot.");
+assert(strategicCopilotApiRoute.includes("executeStrategicCopilot"), "Internal copilot API must execute copilot handler.");
+
+// ============================================================================
+// FASE 18: EXPERIENCE OS & OMNICHANNEL CONTINUITY ASSERTIONS
+// ============================================================================
+const experienceContextService = read("apps/web/src/services/experience/experience-context.service.ts");
+const deepLinkResolverService = read("apps/web/src/services/experience/deep-link-resolver.service.ts");
+const syncEngineService = read("apps/web/src/services/experience/sync-engine.service.ts");
+const tripHubService = read("apps/web/src/services/experience/trip-hub.service.ts");
+const passportService = read("apps/web/src/services/experience/passport.service.ts");
+const tripPageRoute = read("apps/web/src/app/viaje/[tripId]/page.tsx");
+const passportPageRoute = read("apps/web/src/app/pasaporte/page.tsx");
+const notificationsPageRoute = read("apps/web/src/app/notificaciones/page.tsx");
+const ayudaPageRoute = read("apps/web/src/app/ayuda/page.tsx");
+const experienceConfig = read("packages/config/src/index.ts");
+
+assert(experienceContextService.includes("getExperienceContext"), "Experience context service must export getExperienceContext.");
+assert(experienceContextService.includes("preserveLoginIntent"), "Experience context service must preserve login intent.");
+assert(experienceContextService.includes("detectChannel"), "Experience context service must detect channel safely.");
+
+assert(deepLinkResolverService.includes("resolveExperienceLink"), "Deep link resolver service must export resolveExperienceLink.");
+assert(deepLinkResolverService.includes("cleanPath"), "Deep link resolver service must validate canonical URL paths.");
+assert(deepLinkResolverService.includes("requiresAuth"), "Deep link resolver service must distinguish private resources.");
+
+assert(syncEngineService.includes("queueOfflineMutation"), "Sync engine service must enqueue optimistic mutations.");
+assert(syncEngineService.includes("resolveSyncConflict"), "Sync engine service must handle data conflicts.");
+
+assert(tripHubService.includes("getTripHubData"), "Trip hub service must export getTripHubData.");
+assert(tripHubService.includes("getTodayView"), "Trip hub service must synthesize the Today View.");
+
+assert(passportService.includes("getPassportEntries"), "Passport service must export getPassportEntries.");
+assert(passportService.includes("recordPassportVisit"), "Passport service must register verified visits.");
+
+assert(tripPageRoute.includes("BAQUEANO ECOSYSTEM — TRIP HUB"), "Trip page route must implement Trip Hub.");
+assert(passportPageRoute.includes("PASAPORTE DIGITAL"), "Passport page route must implement Digital Passport.");
+assert(notificationsPageRoute.includes("BAQUEANO ECOSYSTEM — NOTIFICATION CENTER"), "Notifications page route must implement Notification Center.");
+assert(ayudaPageRoute.includes("BAQUEANO ECOSYSTEM — CONTEXTUAL HELP & SUPPORT"), "Help page route must implement Help & Support.");
+
+assert(experienceConfig.includes("EXPERIENCE_CAPABILITY_MATRIX"), "Config must export EXPERIENCE_CAPABILITY_MATRIX.");
+assert(experienceConfig.includes("OFFICIAL_EXPERIENCE_VOCABULARY"), "Config must export OFFICIAL_EXPERIENCE_VOCABULARY.");
+assert(experienceConfig.includes('trips: "trips"'), "Config must declare trips collection.");
+assert(experienceConfig.includes('passportEntries: "passport_entries"'), "Config must declare passportEntries collection.");
+
 if (failures.length > 0) {
   console.error("Production smoke tests failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Production smoke tests passed (including Fase 14 Trust, Fase 15 Digital Concierge, Fase 16 Predictive Intelligence & Fase 17 Spatial Intelligence).");
+console.log("Production smoke tests passed (including Fase 14 Trust, Fase 15 Digital Concierge, Fase 16 Predictive Intelligence, Fase 17 Spatial Intelligence, Fase 18 Experience OS & Fase 19 National Command & Strategic Intelligence).");
 
 
 
