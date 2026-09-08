@@ -38,7 +38,7 @@ window.BaqueanoFirestore = (function() {
   // -----------------------------------------------------------------------
   const SEED_PLACES = [
     {
-      id: 'place_somoto_001',
+      id: 'dest_somoto_001',
       name: 'Monumento Nacional Cañón de Somoto',
       department: 'Madriz',
       municipality: 'Somoto',
@@ -53,10 +53,12 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 13.4775,
       lng: -86.5800,
-      priceUsd: 35
+      priceNio: 550,
+      priceUsd: 15,
+      priceDetail: 'Entrada C$ 50-120 | Guía baqueano C$ 350-500 | Chaleco y bote C$ 150'
     },
     {
-      id: 'place_cerronegro_002',
+      id: 'dest_cerronegro_002',
       name: 'Volcán Cerro Negro (Volcano Sandboarding)',
       department: 'León',
       municipality: 'León',
@@ -71,10 +73,12 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 12.5063,
       lng: -86.7017,
-      priceUsd: 45
+      priceNio: 1100,
+      priceUsd: 30,
+      priceDetail: 'Entrada MARENA C$ 180-365 | Tabla, overol y guía Los Maribios C$ 920'
     },
     {
-      id: 'place_ometepe_003',
+      id: 'dest_ometepe_003',
       name: 'Isla de Ometepe (Concepción & Maderas)',
       department: 'Rivas',
       municipality: 'Altagracia',
@@ -89,10 +93,12 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.5206,
       lng: -85.5700,
-      priceUsd: 55
+      priceNio: 750,
+      priceUsd: 20,
+      priceDetail: 'Ferry C$ 50-80 | Ojo de Agua C$ 180-365 | Guía volcán C$ 750 | Cabaña C$ 600'
     },
     {
-      id: 'place_maderas_004',
+      id: 'dest_maderas_004',
       name: 'Playa Maderas (Santuario de Surf)',
       department: 'Rivas',
       municipality: 'San Juan del Sur',
@@ -107,11 +113,13 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.2952,
       lng: -85.9083,
-      priceUsd: 25
+      priceNio: 920,
+      priceUsd: 25,
+      priceDetail: 'Shuttle SJDS C$ 180 | Tabla día C$ 370 | Clase surf 2h con baqueano C$ 920'
     },
     {
-      id: 'place_sjds_005',
-      name: 'Bahía de San Juan del Sur',
+      id: 'dest_bahia_sjds',
+      name: 'Bahía de San Juan del Sur & Mirador del Cristo',
       department: 'Rivas',
       municipality: 'San Juan del Sur',
       category: 'bahias',
@@ -125,7 +133,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.2529,
       lng: -85.8705,
-      priceUsd: 30
+      priceNio: 550,
+      priceUsd: 15,
+      priceDetail: 'Mirador Cristo C$ 75-180 | Paseo lancha artesanal de pescadores C$ 450-550'
     },
     {
       id: 'place_morgans_006',
@@ -138,12 +148,14 @@ window.BaqueanoFirestore = (function() {
       reviewCount: 310,
       cooperativeName: 'Reserva Playa Ocotal',
       imageUrl: 'assets/images/destinos/morgans_rock.jpg',
-      badge: 'Eco-Lodge de Lujo',
+      badge: 'Eco-Lodge Costero',
       badgeIcon: 'fa-hotel',
       status: 'published',
       lat: 11.3120,
       lng: -85.9230,
-      priceUsd: 240
+      priceNio: 7300,
+      priceUsd: 200,
+      priceDetail: 'Bungalow bosque privado C$ 7,300 - C$ 11,000 | Desayuno de granja orgánica'
     },
     {
       id: 'place_dario_007',
@@ -161,7 +173,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9298,
       lng: -85.9535,
-      priceUsd: 95
+      priceNio: 2600,
+      priceUsd: 70,
+      priceDetail: 'Habitación colonial doble con A/C C$ 2,600 | Desayuno típico y piscina'
     },
     {
       id: 'place_treehouse_008',
@@ -179,7 +193,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.8540,
       lng: -85.9780,
-      priceUsd: 22
+      priceNio: 550,
+      priceUsd: 15,
+      priceDetail: 'Cama en dormitorio suspendido C$ 550 | Acceso puentes colgantes y piscina'
     },
     {
       id: 'place_magdalena_009',
@@ -197,7 +213,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.4680,
       lng: -85.5120,
-      priceUsd: 35
+      priceNio: 500,
+      priceUsd: 14,
+      priceDetail: 'Habitación rústica campesina C$ 500 | Desayuno café orgánico C$ 120'
     },
     {
       id: 'place_vistaredonda_010',
@@ -215,7 +233,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.4150,
       lng: -86.0680,
-      priceUsd: 280
+      priceNio: 7500,
+      priceUsd: 200,
+      priceDetail: 'Villa privada completa 8 personas C$ 7,500 - C$ 12,000 | Piscina infinita'
     },
     {
       id: 'place_sanfrancisco_011',
@@ -233,7 +253,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9312,
       lng: -85.9518,
-      priceUsd: 10
+      priceNio: 50,
+      priceUsd: 1.4,
+      priceDetail: 'Entrada nacional C$ 50 | Extranjero C$ 180 (≈ $5 USD) | Guía C$ 150'
     },
     {
       id: 'place_elcastillo_012',
@@ -251,7 +273,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.0180,
       lng: -84.3970,
-      priceUsd: 15
+      priceNio: 50,
+      priceUsd: 1.4,
+      priceDetail: 'Entrada nacional C$ 50 | Extranjero C$ 180 (≈ $5 USD) | Museo de piratas incluido'
     },
     {
       id: 'place_arribas_013',
@@ -269,7 +293,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.2540,
       lng: -85.8720,
-      priceUsd: 15
+      priceNio: 150,
+      priceUsd: 4,
+      priceDetail: 'Entrada libre | Toña C$ 70 | Cóctel Flor de Caña C$ 150-220 | Picada mariscos C$ 350'
     },
     {
       id: 'place_calzada_014',
@@ -287,7 +313,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9290,
       lng: -85.9520,
-      priceUsd: 10
+      priceNio: 70,
+      priceUsd: 1.9,
+      priceDetail: 'Música en vivo libre | Cerveza Toña C$ 60-80 | Tablas y tapas criollas C$ 150-280'
     },
     {
       id: 'gastro_baho_vilma',
@@ -305,7 +333,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9744,
       lng: -86.0942,
-      priceUsd: 5
+      priceNio: 180,
+      priceUsd: 5,
+      priceDetail: 'Plato tradicional completo C$ 180 | Chicha de maíz C$ 30'
     },
     {
       id: 'gastro_quesillo_rosa',
@@ -323,7 +353,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 12.2667,
       lng: -86.5667,
-      priceUsd: 4
+      priceNio: 95,
+      priceUsd: 2.6,
+      priceDetail: 'Quesillo sencillo C$ 65 | Especial doble trenza C$ 95 | Tiste C$ 35'
     },
     {
       id: 'gastro_rosquillas_somoto',
@@ -341,7 +373,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 13.4833,
       lng: -86.5833,
-      priceUsd: 3
+      priceNio: 80,
+      priceUsd: 2.2,
+      priceDetail: 'Bolsa personal C$ 40 | Bolsa familiar 50 uds C$ 80 | Café C$ 25'
     },
     {
       id: 'gastro_rondon_pearl',
@@ -359,7 +393,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 12.0075,
       lng: -83.7636,
-      priceUsd: 8
+      priceNio: 280,
+      priceUsd: 7.6,
+      priceDetail: 'Cazuela pargo y mariscos C$ 280 | Pan de coco C$ 30 | Ginger beer C$ 40'
     },
     {
       id: 'gastro_vigoron_toribia',
@@ -377,10 +413,12 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9300,
       lng: -85.9550,
-      priceUsd: 4
+      priceNio: 120,
+      priceUsd: 3.3,
+      priceDetail: 'Vigorón con chicharrón de carne C$ 120 | Refresco de grama con limón C$ 30'
     },
     {
-      id: 'place_haydee_015',
+      id: 'gastro_fritanga_gueguense',
       name: 'Fritanga Tradicional & Asados El Güegüense',
       department: 'Managua',
       municipality: 'Managua',
@@ -389,13 +427,15 @@ window.BaqueanoFirestore = (function() {
       rating: 4.9,
       reviewCount: 920,
       cooperativeName: 'Fritangueros de Managua',
-      imageUrl: 'assets/images/destinos/dona_haydee.jpg',
+      imageUrl: 'assets/images/comida/nacatamal.jpg',
       badge: 'Asados al Carbón',
       badgeIcon: 'fa-fire-burner',
       status: 'published',
       lat: 12.1364,
       lng: -86.2711,
-      priceUsd: 6
+      priceNio: 190,
+      priceUsd: 5.2,
+      priceDetail: 'Carne asada con gallopinto y tajadas C$ 190 | Queso frito C$ 40 | Cacao C$ 40'
     },
     {
       id: 'place_laflor_016',
@@ -407,16 +447,18 @@ window.BaqueanoFirestore = (function() {
       rating: 4.9,
       reviewCount: 480,
       cooperativeName: 'Guardas de La Flor',
-      imageUrl: 'assets/images/destinos/playa_el_coco.jpg',
+      imageUrl: 'assets/images/destinos/playa_maderas.jpg',
       badge: 'Santuario Marino',
       badgeIcon: 'fa-umbrella-beach',
       status: 'published',
       lat: 11.1390,
       lng: -85.7980,
-      priceUsd: 20
+      priceNio: 200,
+      priceUsd: 5.5,
+      priceDetail: 'Entrada MARENA C$ 100 nac. / C$ 200 extr. | Guía nocturno guardaparque C$ 250'
     },
     {
-      id: 'place_cornisland_017',
+      id: 'dest_corn_island',
       name: 'Corn Island (Big Corn & Little Corn)',
       department: 'Caribe Sur',
       municipality: 'Corn Island',
@@ -431,11 +473,13 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 12.1720,
       lng: -83.0580,
-      priceUsd: 75
+      priceNio: 1280,
+      priceUsd: 35,
+      priceDetail: 'Panga Little Corn C$ 300 | Snorkel arrecife C$ 1,100 | Cabaña playa C$ 1,280'
     },
     {
-      id: 'place_selvanegra_018',
-      name: 'Reserva Silvestre Selva Negra',
+      id: 'dest_selva_negra',
+      name: 'Reserva Ecológica Selva Negra & Finca Cafetalera',
       department: 'Matagalpa',
       municipality: 'Matagalpa',
       category: 'selva',
@@ -445,11 +489,13 @@ window.BaqueanoFirestore = (function() {
       cooperativeName: 'Eco-Reserva Selva Negra',
       imageUrl: 'assets/images/destinos/selva_negra.jpg',
       badge: 'Bosque de Montaña',
-      badgeIcon: 'fa-feather',
+      badgeIcon: 'fa-tree',
       status: 'published',
       lat: 12.9980,
       lng: -85.9090,
-      priceUsd: 65
+      priceNio: 1650,
+      priceUsd: 45,
+      priceDetail: 'Day Pass C$ 180 (consumible) | Tour café y aves C$ 450 | Cabaña C$ 1,650'
     },
     {
       id: 'place_laluna_019',
@@ -467,10 +513,12 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 13.3720,
       lng: -85.6900,
-      priceUsd: 40
+      priceNio: 400,
+      priceUsd: 11,
+      priceDetail: 'Entrada sendero C$ 100 | Canopy tirolesa catarata C$ 400 | Cata café C$ 150'
     },
     {
-      id: 'place_apoyo_020',
+      id: 'dest_laguna_apoyo',
       name: 'Reserva Natural Laguna de Apoyo',
       department: 'Masaya',
       municipality: 'Masaya',
@@ -485,7 +533,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9333,
       lng: -86.0333,
-      priceUsd: 30
+      priceNio: 440,
+      priceUsd: 12,
+      priceDetail: 'Day Pass posada C$ 250 (consumible) | Kayak hora C$ 150 | Cabaña C$ 1,100'
     },
     {
       id: 'place_masaya_021',
@@ -503,7 +553,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.9854,
       lng: -86.1614,
-      priceUsd: 20
+      priceNio: 180,
+      priceUsd: 5,
+      priceDetail: 'Entrada diurna C$ 50 nac. / C$ 180 extr. | Tour nocturno lava C$ 180 nac. / C$ 365 extr.'
     },
     {
       id: 'place_pocoapoco_022',
@@ -521,7 +573,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 12.4370,
       lng: -86.8790,
-      priceUsd: 18
+      priceNio: 450,
+      priceUsd: 12,
+      priceDetail: 'Cama compartida con A/C C$ 450 | Café segoviano ilimitado y piscina colonial'
     },
     {
       id: 'place_posadasanramon_023',
@@ -539,7 +593,9 @@ window.BaqueanoFirestore = (function() {
       status: 'published',
       lat: 11.4420,
       lng: -85.4650,
-      priceUsd: 28
+      priceNio: 650,
+      priceUsd: 18,
+      priceDetail: 'Cabaña familiar de madera con energía solar C$ 650 | Cascada San Ramón C$ 100'
     },
     {
       id: 'place_casasenorial_024',
@@ -555,9 +611,11 @@ window.BaqueanoFirestore = (function() {
       badge: 'Mansión Privada',
       badgeIcon: 'fa-key',
       status: 'published',
-      lat: 11.9305,
-      lng: -85.9540,
-      priceUsd: 195
+      lat: 11.9310,
+      lng: -85.9520,
+      priceNio: 5500,
+      priceUsd: 150,
+      priceDetail: 'Casa colonial privada completa 10 personas C$ 5,500 - C$ 8,800 | Piscina privada'
     }
   ];
 

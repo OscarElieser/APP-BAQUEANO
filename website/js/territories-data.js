@@ -281,7 +281,7 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Reserva Natural Tisey-La Estanzuela', type: 'Cascada & Esculturas', icon: 'fa-water' },
       { name: 'Galería de Esculturas en Piedra de Don Alberto', type: 'Arte Popular Rústico', icon: 'fa-palette' },
       { name: 'Reserva Natural Miraflor', type: 'Orquídeas & Turismo Rural', icon: 'fa-seedling' },
-      { name: 'Fábricas de Puros Artesanales', type: 'Ruta del Tabaco Premium', icon: 'fa-fire' },
+      { name: 'Fábricas de Puros Artesanales', type: 'Ruta del Tabaco de Alta Gama', icon: 'fa-fire' },
       { name: 'Murales Revolucionarios y Urbanos', type: 'Arte Público', icon: 'fa-brush' }
     ],
     activities: [
