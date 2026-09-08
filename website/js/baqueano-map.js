@@ -149,7 +149,10 @@ window.BaqueanoMap = (function() {
   // --------------------------------------------------------------------------
   function buildPopupContent(place) {
     const catStyle = CATEGORY_STYLES[place.category] || { color: '#165D6F', label: place.category || 'Destino' };
-    const price = place.priceUsd ? `$${place.priceUsd} USD` : 'Tarifa Baqueano';
+    const priceNio = place.priceNio ? `C$ ${place.priceNio.toLocaleString('es-NI')}` : (place.priceUsd ? `C$ ${Math.round(place.priceUsd * 36.65).toLocaleString('es-NI')}` : '');
+    const price = priceNio && place.priceUsd 
+      ? `${priceNio} (≈ $${place.priceUsd} USD)` 
+      : (place.priceUsd ? `$${place.priceUsd} USD` : (priceNio || 'Tarifa Comunitaria'));
     const dept = place.department ? `${place.department}, Nicaragua` : 'Nicaragua';
     const img = place.imageUrl || 'assets/images/destinos/cerro_negro.jpg';
 
@@ -168,6 +171,10 @@ window.BaqueanoMap = (function() {
             <span><i class="fa-solid fa-star" style="color: #F59E0B;"></i> ${place.rating || '4.9'} (${place.reviewCount || '150'})</span>
           </div>
           <p class="map-popup-desc">${place.description || ''}</p>
+          ${place.priceDetail ? `
+            <div style="font-size: 0.74rem; color: #F4E6C1; background: rgba(15,23,42,0.7); padding: 0.35rem 0.6rem; border-radius: 6px; margin: 0.4rem 0; border: 1px dashed rgba(244,230,193,0.3); line-height: 1.35;">
+              <i class="fa-solid fa-receipt" style="color: #F59E0B; margin-right: 0.25rem;"></i> ${place.priceDetail}
+            </div>` : ''}
           <div class="map-popup-coop">
             <i class="fa-solid fa-handshake" style="color: #10B981;"></i>
             <span>${place.cooperativeName || 'Comunidad Local'}</span>
