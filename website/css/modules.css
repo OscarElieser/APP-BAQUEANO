@@ -2260,6 +2260,65 @@
   color: var(--text-muted);
 }
 
+.btn-google-auth {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.88rem 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 14px;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1.25rem;
+}
+
+.btn-google-auth:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(244, 230, 193, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 20px rgba(66, 133, 244, 0.25);
+}
+
+.btn-google-auth:active {
+  transform: translateY(0);
+}
+
+.google-svg-icon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.login-divider-line {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.2rem 0 1.4rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-family: var(--font-tech);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.login-divider-line::before,
+.login-divider-line::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px dashed rgba(244, 230, 193, 0.15);
+}
+
+.login-divider-line span {
+  padding: 0 0.85rem;
+}
+
 .login-role-selector {
   display: flex;
   gap: 0.5rem;
@@ -2297,6 +2356,7 @@
   color: #FFFFFF;
   box-shadow: var(--shadow-glow-teal);
 }
+
 
 .login-input-group {
   display: flex;

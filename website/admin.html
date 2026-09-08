@@ -100,25 +100,23 @@
             </p>
           </div>
 
-          <!-- Selector Rápido de Roles Autorizados -->
-          <div style="margin-bottom: 1rem;">
-            <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">
-              Selecciona tu Perfil de Acceso:
-            </span>
-            <div class="login-role-selector">
-              <button type="button" class="role-select-btn active" data-role="admin" title="Administrador General">
-                <i class="fa-solid fa-crown" style="color: var(--terracotta-light);"></i> Administrador
-              </button>
-              <button type="button" class="role-select-btn" data-role="auditor" title="Auditor Oficial">
-                <i class="fa-solid fa-magnifying-glass" style="color: var(--oro-noble);"></i> Auditor
-              </button>
-              <button type="button" class="role-select-btn" data-role="user" title="Usuario Normal (Prueba de Bloqueo)">
-                <i class="fa-solid fa-user-lock" style="color: var(--rojo-alerta);"></i> Usuario Normal
-              </button>
-            </div>
+          <!-- Botón de Acceso Rápido con Cuenta de Google -->
+          <button type="button" class="btn-google-auth" id="btnGoogleLogin">
+            <svg class="google-svg-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Continuar con Google</span>
+          </button>
+
+          <!-- Divisor Visual -->
+          <div class="login-divider-line">
+            <span>o ingresa con tu correo registrado</span>
           </div>
 
-          <!-- Alerta de Feedback -->
+          <!-- Alerta de Feedback y Reconocimiento Automático de Rol -->
           <div class="login-feedback-alert" id="loginFeedback"></div>
 
           <!-- Formulario de Credenciales Reales -->
@@ -127,7 +125,7 @@
               <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Correo Electrónico Registrado:</label>
               <div class="login-input-wrap">
                 <i class="fa-solid fa-user-shield"></i>
-                <input type="email" id="loginUsername" class="form-control-input" autocomplete="username" required placeholder="correo autorizado">
+                <input type="email" id="loginUsername" class="form-control-input" autocomplete="username" required placeholder="tu-correo@gmail.com">
               </div>
             </div>
 
@@ -135,7 +133,7 @@
               <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Acceso:</label>
               <div class="login-input-wrap">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="loginPassword" class="form-control-input" autocomplete="current-password" required placeholder="contrasena">
+                <input type="password" id="loginPassword" class="form-control-input" autocomplete="current-password" required placeholder="••••••••">
               </div>
             </div>
 
@@ -143,18 +141,6 @@
               <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Centro de Operaciones
             </button>
           </form>
-
-          <!-- Tarjeta Informativa de Cuentas y Políticas -->
-          <div style="margin-top: 1.8rem; padding: 1.1rem; background: rgba(15,23,42,0.65); border-radius: 14px; border: 1px dashed var(--border-subtle); font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">
-            <div style="font-weight: 800; color: var(--arena-pinolera); margin-bottom: 0.5rem; font-family: var(--font-tech);">
-              <i class="fa-solid fa-id-badge"></i> CUENTAS OFICIALES AUTORIZADAS:
-            </div>
-            <div>• <strong style="color: var(--terracotta-light);">Administrador (Control Total):</strong> <code>oscarelieser.informatica.inatec@gmail.com</code> (Clave: <code>admin123</code>)</div>
-            <div>• <strong style="color: var(--oro-noble);">Auditor (Solo Lectura & Ley 306):</strong> <code>vigoronmixt@gmail.com</code> (Clave: <code>auditor123</code>)</div>
-            <div style="margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid rgba(244,230,193,0.1); color: var(--arena-pinolera);">
-              <i class="fa-solid fa-circle-info" style="color: var(--azul-info);"></i> <strong>Política de Usuario Normal:</strong> Los usuarios generales pueden visitar libremente todas las páginas públicas del portal web (destinos, historia, ambiental, gastronomía, música, aliados), pero el acceso al panel administrativo está <strong>estrictamente bloqueado</strong>.
-            </div>
-          </div>
         </div>
       </section>
 
