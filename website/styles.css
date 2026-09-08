@@ -218,6 +218,7 @@ h2 {
   display: inline-block;
   background: linear-gradient(135deg, #FFFFFF 0%, #F4E6C1 45%, #F65E01 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 25px rgba(246, 94, 1, 0.22);
   margin-top: 0.5rem;
@@ -326,6 +327,7 @@ h1:hover .kinetic-char {
 .highlight-sunset {
   background: var(--grad-sunset);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
 }
@@ -333,6 +335,7 @@ h1:hover .kinetic-char {
 .highlight-teal {
   background: linear-gradient(135deg, #2DD4BF 0%, #165D6F 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
 }
@@ -340,6 +343,7 @@ h1:hover .kinetic-char {
 .highlight-gold {
   background: var(--grad-gold);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
 }
@@ -1800,6 +1804,7 @@ p {
 .text-gradient-fire {
   background: var(--grad-sunset);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -3033,11 +3038,13 @@ img {
   background: #1E293B;
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
 }
 
 .slider-range-input::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 22px;
   height: 22px;
   border-radius: 50%;
