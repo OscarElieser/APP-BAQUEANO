@@ -39,8 +39,9 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Leaflet.js — Mapa Interactivo Open Source (sin API Key) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <!-- Leaflet.js — Mapa Interactivo Open Source & Satelital -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
@@ -154,40 +155,67 @@
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper">
     <section class="destinations-section-pro">
-      <div class="container">
-        <div class="section-lead-header">
+      <!-- HERO CON VIDEO DE FONDO Y HUD CINEMATOGRÁFICO -->
+      <div class="destinations-video-hero">
+        <video class="hero-bg-video" autoplay loop muted playsinline poster="assets/images/destinos/cerro_negro.jpg">
+          <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay-gradient"></div>
+        <div class="video-scanlines"></div>
+        
+        <div class="container hero-video-content">
           <div class="badge-section-pill">
-            <i class="fa-solid fa-compass"></i> Red de Ecoturismo en Territorio
+            <span class="hud-beacon-led"></span>
+            <i class="fa-solid fa-compass"></i> Red de Ecoturismo & Estadía Soberana
           </div>
-          <h1 class="section-headline">Catálogo de Destinos Protegidos</h1>
+          <h1 class="section-headline animated-stroke-h2">Catálogo de Destinos, Turismo & Hospedaje</h1>
           <p class="section-subtext">
-            Senderos milenarios custodiados por comunidades locales. Cada visita cuenta con balizas
-            de seguridad satelital en la app Android y pago directo a familias del territorio.
+            Playas de surf, bahías tropicales, ríos sagrados, volcanes activos, hoteles ecológicos, hostales, cabañas campesinas, casas de alquiler, museos y vida nocturna en Nicaragua. Sin intermediarios foráneos y con balizas satelitales SOS 24/7.
           </p>
-        </div>
 
-        <!-- FILTROS POR CATEGORÍA -->
+          <!-- BUSCADOR TÁCTICO INTEGRADO EN VIVO -->
+          <div class="dest-search-bar-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="destSearchInput" class="dest-search-input" placeholder="Buscar por playa, hotel, río, cabaña, museo o ciudad (ej. Ometepe, San Juan del Sur, Granada)...">
+            <button class="dest-search-btn" id="destSearchClearBtn" title="Limpiar búsqueda"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- FILTROS DINÁMICOS POR TODAS LAS CATEGORÍAS DE TURISMO Y ESTADÍA -->
         <div class="filter-pills-bar">
-          <button class="cat-filter-btn active" data-filter="all">Todos los Destinos</button>
-          <button class="cat-filter-btn" data-filter="volcanes">Volcanes Activos</button>
-          <button class="cat-filter-btn" data-filter="aguas">Aguas Sagradas & Cuencas</button>
-          <button class="cat-filter-btn" data-filter="selva">Nebliselva & Café</button>
-          <button class="cat-filter-btn" data-filter="islas">Islas & Biosferas</button>
+          <button class="cat-filter-btn active" data-filter="all"><i class="fa-solid fa-globe"></i> Todos los Destinos</button>
+          <button class="cat-filter-btn" data-filter="playas"><i class="fa-solid fa-umbrella-beach"></i> Playas & Costas</button>
+          <button class="cat-filter-btn" data-filter="bahias"><i class="fa-solid fa-sailboat"></i> Bahías & Golfos</button>
+          <button class="cat-filter-btn" data-filter="rios"><i class="fa-solid fa-water"></i> Ríos & Cascadas</button>
+          <button class="cat-filter-btn" data-filter="volcanes"><i class="fa-solid fa-volcano"></i> Volcanes & Aventura</button>
+          <button class="cat-filter-btn" data-filter="selva"><i class="fa-solid fa-tree"></i> Nebliselva & Café</button>
+          <button class="cat-filter-btn" data-filter="islas"><i class="fa-solid fa-mountain-sun"></i> Islas & Biosferas</button>
+          <button class="cat-filter-btn" data-filter="hoteles"><i class="fa-solid fa-hotel"></i> Hoteles & Resorts</button>
+          <button class="cat-filter-btn" data-filter="hostales"><i class="fa-solid fa-bed"></i> Hostales & Lodges</button>
+          <button class="cat-filter-btn" data-filter="hospedajes"><i class="fa-solid fa-house-chimney-window"></i> Hospedajes & Cabañas</button>
+          <button class="cat-filter-btn" data-filter="casas-alquiler"><i class="fa-solid fa-key"></i> Casas de Alquiler</button>
+          <button class="cat-filter-btn" data-filter="museos"><i class="fa-solid fa-landmark"></i> Museos & Cultura</button>
+          <button class="cat-filter-btn" data-filter="discotecas"><i class="fa-solid fa-champagne-glasses"></i> Bares & Vida Nocturna</button>
+          <button class="cat-filter-btn" data-filter="gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</button>
         </div>
 
-        <!-- GRID DE DESTINOS -->
+        <!-- GRID COMPLETO DE DESTINOS, HOSPEDAJES Y TURISMO -->
         <div class="destinations-showcase-grid">
-          <!-- Destino 1: Somoto -->
-          <div class="dest-card-pro" data-category="aguas">
+
+          <!-- 1. SOMOTO (RÍOS / AGUAS) -->
+          <div class="dest-card-pro" data-category="rios">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-droplet"></i> Cañón Acuático</span>
+              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cañón Acuático</span>
+              <span class="dest-price-badge">$15 / Tour Guiado</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Madriz, Nicaragua</div>
               <h3 class="dest-name-title">Monumento Nacional Cañón de Somoto</h3>
               <p class="dest-description-text">
-                Paredes rocosas de más de 120 metros de altura esculpidas durante millones de años por el Río Coco (Wangki). Recorridos de natación protegida con chalecos salvavidas y baqueanos campesinos.
+                Paredes rocosas de más de 120 metros de altura esculpidas por el Río Coco (Wangki). Natación protegida con chalecos salvavidas y baqueanos campesinos.
               </p>
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (420 reseñas)</span>
@@ -196,17 +224,18 @@
             </div>
           </div>
 
-          <!-- Destino 2: Cerro Negro -->
+          <!-- 2. CERRO NEGRO (VOLCANES) -->
           <div class="dest-card-pro" data-category="volcanes">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/cerro_negro.jpg" alt="Volcán Cerro Negro" class="dest-card-img" loading="lazy">
               <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Volcán Activo</span>
+              <span class="dest-price-badge">$30 / Sandboarding</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León, Nicaragua</div>
               <h3 class="dest-name-title">Volcán Cerro Negro (Volcano Sandboarding)</h3>
               <p class="dest-description-text">
-                El volcán más joven de Centroamérica (1850). Cono de escoria negra basáltica con fumarolas calientes en la cumbre. Descenso de alta adrenalina sobre arena volcánica a 60-80 km/h.
+                El volcán más joven de Centroamérica (1850). Cono de escoria basáltica con fumarolas en la cumbre y descenso de adrenalina sobre arena volcánica a 60-80 km/h.
               </p>
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (610 reseñas)</span>
@@ -215,17 +244,18 @@
             </div>
           </div>
 
-          <!-- Destino 3: Ometepe -->
+          <!-- 3. OMETEPE (ISLAS) -->
           <div class="dest-card-pro" data-category="islas">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Reserva de Biosfera</span>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Reserva Biosfera</span>
+              <span class="dest-price-badge">Desde $20 / Día</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Lago Cocibolca</div>
               <h3 class="dest-name-title">Isla de Ometepe (Concepción & Maderas)</h3>
               <p class="dest-description-text">
-                Oasis en medio del Gran Lago de Nicaragua con dos volcanes colosales. Petroglifos sagrados, senderismo en bosque nuboso, Ojo de Agua medicinal y cooperativas agroecológicas.
+                Oasis en medio del Gran Lago con dos volcanes colosales. Petroglifos sagrados, senderismo en bosque nuboso, Ojo de Agua medicinal y fincas agroecológicas.
               </p>
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (890 reseñas)</span>
@@ -234,17 +264,318 @@
             </div>
           </div>
 
-          <!-- Destino 4: Cascada La Luna -->
+          <!-- 4. PLAYA MADERAS (PLAYAS) -->
+          <div class="dest-card-pro" data-category="playas">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80" alt="Playa Maderas" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Playa & Surf</span>
+              <span class="dest-price-badge">Clases Surf $25</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Playa Maderas (Santuario del Surf)</h3>
+              <p class="dest-description-text">
+                Famosa por sus formaciones rocosas esculpidas por el oleaje del Pacífico y rompientes constantes durante todo el año. Puestas de sol de fuego y vida playera.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (530 reseñas)</span>
+                <span class="dest-coop-name">Escuela Surf Maderas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. BAHÍA DE SAN JUAN DEL SUR (BAHÍAS) -->
+          <div class="dest-card-pro" data-category="bahias">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&auto=format&fit=crop&q=80" alt="Bahía de San Juan del Sur" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-sailboat"></i> Bahía Natural</span>
+              <span class="dest-price-badge">Veleros & Tours</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Costa del Pacífico</div>
+              <h3 class="dest-name-title">Bahía de San Juan del Sur & Mirador del Cristo</h3>
+              <p class="dest-description-text">
+                Bahía protegida en herradura con puerto de pescadores artesanales, veleros al atardecer, malecón gastronómico y vista panorámica desde el Cristo de la Misericordia.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (710 reseñas)</span>
+                <span class="dest-coop-name">Pescadores San Juan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. MORGAN'S ROCK ECO-LODGE (HOTELES) -->
+          <div class="dest-card-pro" data-category="hoteles">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=80" alt="Morgan's Rock Eco-Lodge" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-hotel"></i> Eco-Resort</span>
+              <span class="dest-price-badge">Desde $180 / Noche</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Bahía Ocotal, San Juan del Sur</div>
+              <h3 class="dest-name-title">Morgan's Rock Eco-Lodge & Reserva Privada</h3>
+              <p class="dest-description-text">
+                Bungalows de madera sostenible suspendidos sobre el dosel de la selva tropical con vistas al mar. Playa privada, avistamiento de monos aulladores y granja orgánica.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (380 reseñas)</span>
+                <span class="dest-coop-name">Reserva Ecoturística</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. HOTEL DARÍO COLONIAL (HOTELES) -->
+          <div class="dest-card-pro" data-category="hoteles">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&auto=format&fit=crop&q=80" alt="Hotel Darío Colonial" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-hotel"></i> Hotel Colonial</span>
+              <span class="dest-price-badge">Desde $75 / Noche</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Calle La Calzada, Granada</div>
+              <h3 class="dest-name-title">Hotel Darío & Casona Señorial</h3>
+              <p class="dest-description-text">
+                Joyel neoclásico de 1900 en el corazón de la Gran Sultana. Patio andaluz con fuentes de cantera, piscina central, balcones coloniales con vista al Volcán Mombacho.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (490 reseñas)</span>
+                <span class="dest-coop-name">Patrimonio Granadino</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. THE TREEHOUSE NICARAGUA (HOSTALES) -->
+          <div class="dest-card-pro" data-category="hostales">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop&q=80" alt="The Treehouse Hostel" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-bed"></i> Hostal en Árboles</span>
+              <span class="dest-price-badge">Desde $18 / Cama</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Faldas del Mombacho, Granada</div>
+              <h3 class="dest-name-title">The Treehouse Jungle Hostel</h3>
+              <p class="dest-description-text">
+                Hostal icónico construido a 30 metros de altura sobre árboles centenarios. Puentes colgantes, canopy nocturno, mirador de estrellas y ambiente internacional mochilero.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.7 (650 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Diriomo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. CABAÑAS FINCA MAGDALENA (HOSPEDAJES) -->
+          <div class="dest-card-pro" data-category="hospedajes">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&auto=format&fit=crop&q=80" alt="Finca Magdalena" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-house-chimney-window"></i> Cabaña Rural</span>
+              <span class="dest-price-badge">$22 / Noche Familiar</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Volcán Maderas, Ometepe</div>
+              <h3 class="dest-name-title">Cabañas Comunitarias Finca Magdalena</h3>
+              <p class="dest-description-text">
+                Hospedaje cooperativo 100% campesino fundado en 1888. Producción de café orgánico certificado, senderos directos a petroglifos precolombinos y laguna del volcán.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (410 reseñas)</span>
+                <span class="dest-coop-name">Coop. Agropecuaria Magdalena</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. VILLA VISTA REDONDA (CASAS DE ALQUILER) -->
+          <div class="dest-card-pro" data-category="casas-alquiler">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80" alt="Villa Vista Redonda" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-key"></i> Casa de Alquiler</span>
+              <span class="dest-price-badge">$195 / Noche (6 pers.)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Colinas de San Juan del Sur</div>
+              <h3 class="dest-name-title">Villa Vista Redonda & Infinity Pool</h3>
+              <p class="dest-description-text">
+                Residencia vacacional privada con piscina infinita al borde del acantilado, cocina completa equipada, terrazas abiertas al Pacífico, Wi-Fi satelital Starlink y seguridad 24/7.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (180 reseñas)</span>
+                <span class="dest-coop-name">Anfitrión Baqueano VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. MUSEO CONVENTO SAN FRANCISCO (MUSEOS) -->
+          <div class="dest-card-pro" data-category="museos">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800&auto=format&fit=crop&q=80" alt="Museo Convento San Francisco" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-landmark"></i> Museo Histórico</span>
+              <span class="dest-price-badge">$5 / Entrada General</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Centro Histórico, Granada</div>
+              <h3 class="dest-name-title">Museo Convento San Francisco & Estatuaria Zapatera</h3>
+              <p class="dest-description-text">
+                El edificio más antiguo de Nicaragua (1529). Alberga la colosal colección de estatuaria lítica de la Isla Zapatera (ídolos zoomorfos y antropomorfos del 800-1200 d.C.).
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (340 reseñas)</span>
+                <span class="dest-coop-name">Instituto de Cultura</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. FORTALEZA EL CASTILLO (MUSEOS / RÍOS) -->
+          <div class="dest-card-pro" data-category="museos">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1572953109213-3be62398eb95?w=800&auto=format&fit=crop&q=80" alt="Fortaleza El Castillo" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-landmark"></i> Fortaleza 1675</span>
+              <span class="dest-price-badge">$4 / Entrada & Museo</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> El Castillo, Río San Juan</div>
+              <h3 class="dest-name-title">Fortaleza de la Inmaculada Concepción</h3>
+              <p class="dest-description-text">
+                Baluarte militar español construido para repeler piratas en el Raudal del Diablo. Museo de armas, celdas subterráneas y vistas imponentes del Río San Juan hacia Indio Maíz.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (290 reseñas)</span>
+                <span class="dest-coop-name">Patrimonio Río San Juan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. ARRIBAS SUNSET LOUNGE (DISCOTECAS / NOCTURNA) -->
+          <div class="dest-card-pro" data-category="discotecas">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80" alt="Arribas Lounge" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-champagne-glasses"></i> Discoteca & Lounge</span>
+              <span class="dest-price-badge">Entrada Libre</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Malecón, San Juan del Sur</div>
+              <h3 class="dest-name-title">Arribas Sunset Beach Club & Lounge</h3>
+              <p class="dest-description-text">
+                Epicentro de la vida nocturna playera con DJs internacionales y bandas de reggae locales. Pistas de baile frente a la arena, coctelería con Flor de Caña y fogatas marinas.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.7 (520 reseñas)</span>
+                <span class="dest-coop-name">Música en Vivo SJDS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. CALLE LA CALZADA NOCTURNA (DISCOTECAS / NOCTURNA) -->
+          <div class="dest-card-pro" data-category="discotecas">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&auto=format&fit=crop&q=80" alt="Calle La Calzada Granada" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-champagne-glasses"></i> Bares & Fiesta</span>
+              <span class="dest-price-badge">Ambiente Bohemio</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial</div>
+              <h3 class="dest-name-title">Calle La Calzada Fiesta & Bares al Aire Libre</h3>
+              <p class="dest-description-text">
+                Paseo peatonal repleto de terrazas coloniales, marimbas en vivo, bares artesanales, bailarines folclóricos de Gigantonas y peñas trovadoras hasta la medianoche.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (820 reseñas)</span>
+                <span class="dest-coop-name">Gremios de Granada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. COCINA DOÑA HAYDÉE (GASTRONOMÍA) -->
+          <div class="dest-card-pro" data-category="gastronomia">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/nacatamal.jpg" alt="Gastronomía Tradicional" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-utensils"></i> Cocina Ancestral</span>
+              <span class="dest-price-badge">Platos desde $5</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Managua / Masaya</div>
+              <h3 class="dest-name-title">Restaurante Tradicional La Cocina de Doña Haydée</h3>
+              <p class="dest-description-text">
+                Templo del sabor nicaragüense con recetas centenarias: nacatamales de masa colada, baho cocido en hoja de chagüite, indio viejo criollo y tres leches tradicional.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (670 reseñas)</span>
+                <span class="dest-coop-name">Maestras Culinarias</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16. PLAYA EL COCO & LA FLOR (PLAYAS) -->
+          <div class="dest-card-pro" data-category="playas">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&auto=format&fit=crop&q=80" alt="Playa El Coco" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Playa & Tortugas</span>
+              <span class="dest-price-badge">Entrada $8 Refugio</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Refugio La Flor, Rivas</div>
+              <h3 class="dest-name-title">Playa El Coco & Santuario de Tortugas La Flor</h3>
+              <p class="dest-description-text">
+                Uno de los 7 sitios del planeta con arribadas masivas de tortugas paslama (hasta 30,000 en una noche). Aguas tranquilas y arena dorada rodeada de bosque seco tropical.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (460 reseñas)</span>
+                <span class="dest-coop-name">Guardaparques La Flor</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17. CORN ISLAND (ISLAS / BAHÍAS) -->
+          <div class="dest-card-pro" data-category="islas">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/corn_island.jpg" alt="Corn Island" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Paraíso Caribeño</span>
+              <span class="dest-price-badge">Desde $35 / Cabaña</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> RACCS, Caribe Sur</div>
+              <h3 class="dest-name-title">Big Corn Island & Little Corn Island</h3>
+              <p class="dest-description-text">
+                Joya caribeña con arrecifes de coral intactos, buceo con tiburones nodriza, playas de arena blanca como talco, rondón de mariscos fresco y cultura creole bilingüe.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (910 reseñas)</span>
+                <span class="dest-coop-name">Coop. Turística Creole</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 18. SELVA NEGRA (SELVA) -->
           <div class="dest-card-pro" data-category="selva">
             <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/selva_negra.jpg" alt="Selva Negra Matagalpa" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-tree"></i> Bosque Nuboso</span>
+              <span class="dest-price-badge">$45 / Cabaña Montaña</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Cordillera Dariense, Matagalpa</div>
+              <h3 class="dest-name-title">Reserva Ecológica Selva Negra & Finca Cafetalera</h3>
+              <p class="dest-description-text">
+                Nebliselva virgen a 1,400 msnm con senderos de orquídeas, hábitat del Quetzal resplandeciente, cata de café ecológico y prácticas agroforestales de carbono neutral.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (780 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Selva Negra</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 19. CASCADA LA LUNA (RÍOS / SELVA) -->
+          <div class="dest-card-pro" data-category="rios">
+            <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada La Luna" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-cloud-rain"></i> Nebliselva</span>
+              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cascada Selvática</span>
+              <span class="dest-price-badge">$10 / Canopy & Entrada</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Jinotega, El Cuá</div>
-              <h3 class="dest-name-title">Cascada La Luna & Ruta del Café</h3>
+              <h3 class="dest-name-title">Cascada La Luna & Cañón del Café</h3>
               <p class="dest-description-text">
-                Impresionante caída de agua oculta en la espesura del bosque de niebla jinotegano. Canopy sobre la catarata, senderos de orquídeas silvestres y cata de café de estricta altura (SHG).
+                Impresionante catarata oculta en la espesura del bosque de niebla jinotegano. Canopy sobre la caída de agua y senderos ecológicos comunitarios.
               </p>
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (310 reseñas)</span>
@@ -253,17 +584,18 @@
             </div>
           </div>
 
-          <!-- Destino 5: Laguna de Apoyo -->
-          <div class="dest-card-pro" data-category="aguas">
+          <!-- 20. LAGUNA DE APOYO (RÍOS / AGUAS) -->
+          <div class="dest-card-pro" data-category="rios">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Aguas Minerales</span>
+              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cráter Volcánico</span>
+              <span class="dest-price-badge">$12 / Kayak & Pase</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Granada</div>
               <h3 class="dest-name-title">Reserva Natural Laguna de Apoyo</h3>
               <p class="dest-description-text">
-                Cráter volcánico colapsado con aguas termales salobres de transparencia cristalina. Prohibidas las embarcaciones de combustión. Refugio del tucán verde y peces cíclidos endémicos.
+                Cráter volcánico colapsado con aguas termales minerales de transparencia turquesa. Kayak ecológico, natación protegida y avistamiento del tucán verde.
               </p>
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (750 reseñas)</span>
@@ -272,17 +604,18 @@
             </div>
           </div>
 
-          <!-- Destino 6: Volcán Masaya -->
+          <!-- 21. VOLCÁN MASAYA (VOLCANES) -->
           <div class="dest-card-pro" data-category="volcanes">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-fire"></i> Lago de Lava</span>
+              <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Lago de Lava</span>
+              <span class="dest-price-badge">$10 / Tour Nocturno</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Nindirí</div>
               <h3 class="dest-name-title">Parque Nacional Volcán Masaya (Popogatepe)</h3>
               <p class="dest-description-text">
-                El cráter Santiago y su lago de lava incandescente activo. Cruz de Bobadilla, túneles de lava fosilizada donde anidan murciélagos y chocoyos que sobreviven al gas sulfuroso.
+                El cráter Santiago y su lago de lava incandescente activo. Cruz de Bobadilla, túneles de lava fosilizada donde anidan murciélagos y chocoyos resistentes al gas.
               </p>
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (980 reseñas)</span>
@@ -290,6 +623,67 @@
               </div>
             </div>
           </div>
+
+          <!-- 22. POCO A POCO HOSTEL (HOSTALES) -->
+          <div class="dest-card-pro" data-category="hostales">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&auto=format&fit=crop&q=80" alt="Poco a Poco Hostel" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-bed"></i> Hostal Colonial</span>
+              <span class="dest-price-badge">Desde $14 / Cama</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Centro Histórico, León</div>
+              <h3 class="dest-name-title">Poco a Poco Garden Hostel & Pool</h3>
+              <p class="dest-description-text">
+                Casona colonial leonesa con jardín tropical, piscina refrescante, clases de salsa, cocina comunitaria y tours diarios al Cerro Negro y Las Peñitas.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (420 reseñas)</span>
+                <span class="dest-coop-name">Red Hostales de León</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 23. POSADA RURAL SAN RAMÓN (HOSPEDAJES) -->
+          <div class="dest-card-pro" data-category="hospedajes">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&auto=format&fit=crop&q=80" alt="Posada Rural San Ramón" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-house-chimney-window"></i> Hospedaje Campesino</span>
+              <span class="dest-price-badge">$18 / Noche con Desayuno</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
+              <h3 class="dest-name-title">Posada Ecológica y Cafetalera San Ramón</h3>
+              <p class="dest-description-text">
+                Cabañas de madera y barro en fincas de mujeres productoras de café. Desayuno típico campesino con cuajada fresca, tortillas recién hechas y caminatas por cascadas.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (310 reseñas)</span>
+                <span class="dest-coop-name">Coop. Mujeres de San Ramón</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 24. CASA SEÑORIAL CONVENTO (CASAS DE ALQUILER) -->
+          <div class="dest-card-pro" data-category="casas-alquiler">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80" alt="Casa Colonial Granada" class="dest-card-img" loading="lazy">
+              <span class="dest-badge-corner"><i class="fa-solid fa-key"></i> Casona Colonial</span>
+              <span class="dest-price-badge">$140 / Noche Completa</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Barrio San Francisco, Granada</div>
+              <h3 class="dest-name-title">Casa Señorial Colonial del Convento</h3>
+              <p class="dest-description-text">
+                Casona histórica de techos altos de cedro real, piscina interior privada, patio colonial con orquídeas, 3 habitaciones con aire acondicionado y personal de servicio.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (140 reseñas)</span>
+                <span class="dest-coop-name">Hospedajes Históricos</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- MAPA INTERACTIVO DE DESTINOS — FIRESTORE EN TIEMPO REAL -->
@@ -583,91 +977,20 @@
     </div>
   </div>
 
-  <!-- Leaflet.js — Mapa Interactivo -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GqeA=" crossorigin=""></script>
+  <!-- Leaflet.js — Mapa Interactivo Open Source & Satélite HD -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+    if (typeof L === 'undefined') {
+      document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');
+    }
+  </script>
 
-  <!-- Scripts Modulares -->
+  <!-- Scripts Modulares Baqueano -->
   <script src="js/navigation.js"></script>
   <script src="js/firestore-realtime.js"></script>
+  <script src="js/baqueano-map.js"></script>
   <script src="js/calculator.js"></script>
   <script src="js/ai-assistant.js"></script>
   <script src="app.js"></script>
-
-  <script>
-    // ========================================================================
-    // 🗺️ INICIALIZACIÓN DEL MAPA INTERACTIVO LEAFLET + FIRESTORE
-    // ========================================================================
-    (function initBaqueanoMap() {
-      // Esperar que el DOM esté listo y Leaflet cargado
-      const mapContainer = document.getElementById('baqueanoInteractiveMap');
-      const sourceBadge = document.getElementById('mapSourceBadge');
-      if (!mapContainer || typeof L === 'undefined') return;
-
-      // Centrado en Nicaragua
-      const map = L.map('baqueanoInteractiveMap', {
-        center: [12.865416, -85.207229],
-        zoom: 7,
-        zoomControl: true,
-        scrollWheelZoom: false
-      });
-
-      // Capa OpenStreetMap (sin API Key requerida)
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18
-      }).addTo(map);
-
-      // Icono personalizado Baqueano
-      const baqueanoIcon = L.divIcon({
-        className: '',
-        html: '<div style="width:32px;height:32px;background:linear-gradient(135deg,#165D6F,#F65E01);border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,0.4);"><div style="transform:rotate(45deg);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;">🌿</div></div>',
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -36]
-      });
-
-      function addPlaceMarkers(places, source) {
-        places.forEach(place => {
-          if (!place.lat || !place.lng) return;
-
-          const price = place.priceUsd ? `Desde $${place.priceUsd} USD/persona` : 'Consultar precio';
-          const popupHtml = `
-            <div class="map-popup-inner">
-              <div class="map-popup-name">${place.name}</div>
-              <div class="map-popup-dept"><i class="fa-solid fa-location-dot"></i> ${place.department || ''}, Nicaragua</div>
-              <div class="map-popup-price"><i class="fa-solid fa-ticket"></i> ${price}</div>
-            </div>
-          `;
-
-          L.marker([place.lat, place.lng], { icon: baqueanoIcon })
-            .addTo(map)
-            .bindPopup(popupHtml);
-        });
-
-        if (sourceBadge) {
-          sourceBadge.className = `map-source-badge ${source}`;
-          sourceBadge.innerHTML = source === 'firestore'
-            ? '<i class="fa-solid fa-database"></i> Datos en vivo desde Cloud Firestore'
-            : '<i class="fa-solid fa-seedling"></i> Datos semilla (modo offline)';
-        }
-      }
-
-      // Cargar marcadores desde Firestore o datos semilla
-      if (typeof window.BaqueanoFirestore !== 'undefined') {
-        window.BaqueanoFirestore.loadPublishedPlaces(addPlaceMarkers);
-      } else {
-        // Fallback directo con coordenadas conocidas
-        const fallback = [
-          { name: 'Cañón de Somoto', department: 'Madriz', lat: 13.4775, lng: -86.5800, priceUsd: 35 },
-          { name: 'Volcán Cerro Negro', department: 'León', lat: 12.5063, lng: -86.7017, priceUsd: 45 },
-          { name: 'Isla de Ometepe', department: 'Rivas', lat: 11.5206, lng: -85.5700, priceUsd: 55 },
-          { name: 'Cascada La Luna', department: 'Jinotega', lat: 13.3720, lng: -85.6900, priceUsd: 40 },
-          { name: 'Laguna de Apoyo', department: 'Masaya', lat: 11.9333, lng: -86.0333, priceUsd: 30 },
-          { name: 'Volcán Masaya', department: 'Masaya', lat: 11.9854, lng: -86.1614, priceUsd: 20 }
-        ];
-        addPlaceMarkers(fallback, 'seed');
-      }
-    })();
-  </script>
 </body>
 </html>

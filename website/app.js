@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initNavbarScroll === 'function') initNavbarScroll();
   if (typeof initMobileMenu === 'function') initMobileMenu();
   if (typeof initActiveNavHighlight === 'function') initActiveNavHighlight();
+  if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
+  if (typeof initDynamicFooter === 'function') initDynamicFooter();
   if (typeof initSosModal === 'function') initSosModal();
   if (typeof initDownloadModal === 'function') initDownloadModal();
   if (typeof initShareTools === 'function') initShareTools();
@@ -122,26 +124,58 @@ function initTerritoriesLocal() {
   });
 }
 
-// Control local de filtrado de destinos
+// Control interactivo y dinámico de filtrado de destinos y estadías por categoría y búsqueda en vivo
 function initDestinationsFilterLocal() {
   const filterBtns = document.querySelectorAll('.cat-filter-btn');
   const destCards = document.querySelectorAll('.dest-card-pro');
-  if (!filterBtns.length || !destCards.length) return;
+  const searchInput = document.getElementById('destSearchInput');
+  const clearBtn = document.getElementById('destSearchClearBtn');
+
+  if (!filterBtns.length && !destCards.length && !searchInput) return;
+
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  const applyFilters = () => {
+    destCards.forEach(card => {
+      const category = card.getAttribute('data-category') || '';
+      const textContent = (card.textContent || '').toLowerCase();
+
+      const matchCategory = (activeCategory === 'all' || category === activeCategory);
+      const matchSearch = (!searchQuery || textContent.includes(searchQuery));
+
+      if (matchCategory && matchSearch) {
+        card.style.display = 'flex';
+        card.style.animation = 'fadeIn 0.35s ease forwards';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  };
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      const filterVal = btn.getAttribute('data-filter');
-      destCards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (filterVal === 'all' || category === filterVal) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      activeCategory = btn.getAttribute('data-filter') || 'all';
+      applyFilters();
     });
   });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = (e.target.value || '').trim().toLowerCase();
+      applyFilters();
+    });
+  }
+
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      applyFilters();
+      searchInput.focus();
+    });
+  }
 }
+

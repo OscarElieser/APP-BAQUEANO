@@ -40,6 +40,7 @@
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 </head>
 <body>
 
@@ -54,8 +55,7 @@
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">Inicio</a>
+      <div class="nav-links-center" id="navLinksCenter">
         <a href="destinos.html">Destinos</a>
         <a href="historia.html">Historia</a>
         <a href="ambiental.html" class="active">Ambiental</a>
@@ -79,95 +79,316 @@
     </div>
   </nav>
 
+  <!-- VIDEO HERO CINEMATOGRÁFICO DE CAMPAÑA AMBIENTAL -->
+  <div class="video-hero-wrapper">
+    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/selva_negra.jpg">
+      <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/5b0907d7-d779-4560-8438-fbcaef40be44/47942699.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-gradient"></div>
+    <div class="video-hero-scanlines"></div>
+    <div class="video-hero-content">
+      <div class="video-hero-badge" style="border-color: rgba(16, 185, 129, 0.5); color: #34D399;">
+        <i class="fa-solid fa-seedling"></i> Custodia del Territorio
+      </div>
+      <h1 class="video-hero-title">Campaña Ambiental & Custodia en Sendero</h1>
+      <p class="video-hero-subtitle">
+        Nuestros bosques, lagunas de cráter y ríos son sagrados. El turismo verdadero no extrae ni destruye;
+        custodia, restaura y deja el sendero más limpio de lo que lo encontró.
+      </p>
+    </div>
+    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
+  </div>
+
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper">
     <section class="environmental-section-pro">
       <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.4); color: #34D399;">
-            <i class="fa-solid fa-seedling"></i> Custodia del Territorio
+
+        <!-- DECÁLOGO VERDE INTERACTIVO CON PANEL DE COMPROMISO -->
+        <div class="decalogo-interactive-wrapper">
+          <div class="decalogo-header-center">
+            <h2 class="decalogo-main-title">
+              <i class="fa-solid fa-leaf" style="color: #10B981;"></i> El Decálogo Verde del Explorador Baqueano
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 650px; margin: 0 auto 1.5rem;">
+              Haz clic en cada regla para firmar tu compromiso de expedición. Al completar los 10 mandamientos desbloquearás tu <strong>Insignia Digital de Guardián de la Naturaleza</strong>.
+            </p>
+
+            <!-- Dashboard de Progreso en Vivo -->
+            <div class="decalogo-dashboard-panel">
+              <div class="decalogo-progress-stats">
+                <span class="decalogo-stats-label">
+                  <i class="fa-solid fa-shield-halved" style="color: #10B981;"></i>
+                  Nivel de Guardián: <strong id="decalogoCountText" style="color: #FFFFFF;">0 de 10</strong> Mandamientos Asumidos
+                </span>
+                <span class="decalogo-percent-badge" id="decalogoPercentText">0%</span>
+              </div>
+              <div class="decalogo-progress-track">
+                <div class="decalogo-progress-fill" id="decalogoProgressBar"></div>
+              </div>
+
+              <!-- Filtros y Botón de Firma Rápida -->
+              <div class="decalogo-controls-row">
+                <div class="decalogo-filter-pills">
+                  <button type="button" class="decalogo-pill-btn active" data-filter="all">
+                    🌿 Todos (10)
+                  </button>
+                  <button type="button" class="decalogo-pill-btn" data-filter="sendero">
+                    🎒 Sendero & Residuos (4)
+                  </button>
+                  <button type="button" class="decalogo-pill-btn" data-filter="ecosistema">
+                    💧 Aguas & Flora (3)
+                  </button>
+                  <button type="button" class="decalogo-pill-btn" data-filter="comunidad">
+                    🤝 Comunidad & Custodia (3)
+                  </button>
+                </div>
+                <button type="button" class="decalogo-sign-all-btn" id="btnSignAllDecalogo">
+                  <i class="fa-solid fa-check-double"></i> Firmar Todos
+                </button>
+              </div>
+            </div>
           </div>
-          <h1 class="section-headline">Campaña Ambiental & Denuncias en Sendero</h1>
-          <p class="section-subtext">
-            Nuestros bosques, lagunas de cráter y ríos son sagrados. El turismo verdadero no extrae ni destruye;
-            custodia, restaura y deja el sendero más limpio de lo que lo encontró.
-          </p>
+
+          <!-- GRID DE LAS 10 TARJETAS HOLOGRÁFICAS INTERACTIVAS -->
+          <div class="decalogo-cards-grid" id="decalogoCardsGrid">
+
+            <!-- Regla 1 -->
+            <div class="decalogo-interactive-card" data-category="sendero" data-rule="1" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">1</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-bottle-water"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Regla de Plástico Cero</h4>
+                <p class="decalogo-rule-desc">Prohibido el ingreso de bolsas de un solo uso o descartables. Porta botellas y termos reutilizables de aluminio o bambú.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Rellena tu termo en manantiales seguros recomendados por el guía local.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 2 -->
+            <div class="decalogo-interactive-card" data-category="sendero" data-rule="2" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">2</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-trash-arrow-up"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Todo lo que Sube, Baja</h4>
+                <p class="decalogo-rule-desc">Cada envoltura, fruta o residuo generado debe regresar en tu mochila hasta los depósitos de reciclaje autorizados en el poblado base.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Lleva una bolsa impermeable de tela ("Pouch Basura Cero") en tu equipo.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 3 -->
+            <div class="decalogo-interactive-card" data-category="ecosistema" data-rule="3" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">3</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-water"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Protege las Fuentes Hídricas</h4>
+                <p class="decalogo-rule-desc">No utilices jabones sintéticos ni protectores solares químicos en lagunas de cráter ni cascadas minerales. Usa prendas UV manga larga.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Bañarse sin químicos preserva los peces autóctonos y la pureza volcánica.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 4 -->
+            <div class="decalogo-interactive-card" data-category="sendero" data-rule="4" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">4</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-shoe-prints"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Respeta el Sendero Marcado</h4>
+                <p class="decalogo-rule-desc">Caminar fuera de las veredas autorizadas compacta el suelo fértil de la nebliselva y destruye madrigueras de especies en peligro.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Sigue siempre la baliza satelital de la app y las huellas del guía campesino.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 5 -->
+            <div class="decalogo-interactive-card" data-category="ecosistema" data-rule="5" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">5</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-volume-xmark"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Silencio en la Naturaleza</h4>
+                <p class="decalogo-rule-desc">Prohibido el uso de parlantes bluetooth en áreas protegidas. El ruido estresa a las aves migratorias, monos aulladores y felinos.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Conecta con el susurro del viento y los cantos del guardabarranco.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 6 -->
+            <div class="decalogo-interactive-card" data-category="ecosistema" data-rule="6" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">6</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-spa"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">No Extraer Flora ni Fósiles</h4>
+                <p class="decalogo-rule-desc">Orquídeas, helechos arborescentes, piedras volcánicas y fósiles pertenecen al ecosistema. Fotografíalos; jamás los arranques.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Llévate solo recuerdos y fotografías; deja solo tus huellas.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 7 -->
+            <div class="decalogo-interactive-card" data-category="sendero" data-rule="7" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">7</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Cero Fogatas Clandestinas</h4>
+                <p class="decalogo-rule-desc">Los vientos en laderas volcánicas propagan incendios incontrolables. Solo enciende fuego en fogones comunitarios autorizados por el guía.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Utiliza cocinillas de gas portátiles en campamentos designados.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 8 -->
+            <div class="decalogo-interactive-card" data-category="comunidad" data-rule="8" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">8</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-handshake-angle"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Contrata Guías Campesinos Locales</h4>
+                <p class="decalogo-rule-desc">El baqueano de la comunidad conoce los secretos del terreno, garantiza tu seguridad física y reinvierte tus aportes en su escuela rural.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Reserva guías certificados directamente en el módulo de Cooperativas.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 9 -->
+            <div class="decalogo-interactive-card" data-category="comunidad" data-rule="9" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">9</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Comercio Justo y Directo</h4>
+                <p class="decalogo-rule-desc">Paga el valor real del trabajo campesino. No regatees precios de café, frutas o artesanías a pequeños productores familiares.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Cada córdoba invertido fortalece la economía de mujeres y jóvenes rurales.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regla 10 -->
+            <div class="decalogo-interactive-card" data-category="comunidad" data-rule="10" role="button" tabindex="0">
+              <div class="decalogo-card-sparkle"></div>
+              <div class="decalogo-card-top">
+                <div class="decalogo-num-badge">10</div>
+                <div class="decalogo-icon-circle"><i class="fa-solid fa-tower-broadcast"></i></div>
+                <button type="button" class="decalogo-check-toggle" aria-label="Comprometerme">
+                  <i class="fa-regular fa-circle"></i>
+                </button>
+              </div>
+              <div class="decalogo-card-body">
+                <h4 class="decalogo-rule-title">Custodia Activa y Alerta</h4>
+                <p class="decalogo-rule-desc">Si presencias tala indiscriminada, quemas de bosque o cacería furtiva, utiliza el módulo de denuncias georreferenciadas de Baqueano.</p>
+                <div class="decalogo-tip-box">
+                  <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                  <span><strong>Acción Baqueano:</strong> Captura coordenadas GPS con un clic en el formulario inferior.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        <!-- DECÁLOGO VERDE -->
-        <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center; color: var(--arena-pinolera);">
-          <i class="fa-solid fa-leaf" style="color: var(--verde-neon);"></i> El Decálogo Verde del Explorador Baqueano
-        </h2>
+        <!-- MODAL DE CERTIFICADO DE GUARDIÁN DE LA NATURALEZA -->
+        <div class="modal-backdrop-pro" id="guardianModal" aria-hidden="true" role="dialog">
+          <div class="guardian-modal-dialog">
+            <button class="modal-close-x" id="closeGuardianModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+              <div class="guardian-badge-icon">🌿</div>
+              <h3 style="font-size: 1.8rem; color: #FFFFFF; margin: 0.8rem 0 0.3rem;">¡Eres un Guardián Baqueano!</h3>
+              <p style="font-size: 0.95rem; color: var(--arena-pinolera); font-family: var(--font-tech);">
+                Has asumido formalmente los 10 Mandamientos del Decálogo Verde.
+              </p>
+            </div>
 
-        <div class="decalogo-grid">
-          <div class="decalogo-item">
-            <div class="decalogo-num">1</div>
-            <div class="decalogo-text">
-              <h5>Regla de Plástico Cero</h5>
-              <p>Prohibido el ingreso de bolsas de un solo uso o descartables. Porta botellas y termos reutilizables de aluminio o bambú.</p>
+            <div class="guardian-certificate-card">
+              <div class="guardian-cert-header">
+                <img src="assets/images/logo.png" alt="Baqueano" style="height: 38px;">
+                <span style="font-family: var(--font-tech); font-weight: 800; font-size: 0.8rem; color: #10B981;">CERTIFICADO VERDE 2026</span>
+              </div>
+              <p style="font-size: 0.9rem; color: #FFFFFF; line-height: 1.6; margin: 1rem 0;">
+                Se certifica que el portador de esta credencial digital se compromete a practicar turismo de huella cero, defender la soberanía ecológica y apoyar a las comunidades campesinas de Nicaragua.
+              </p>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted);">
+                <span>Folio: #BV-${Date.now().toString(36).toUpperCase()}</span>
+                <span>Estado: <strong style="color: #10B981;">COMPROMISO ACTIVO</strong></span>
+              </div>
             </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">2</div>
-            <div class="decalogo-text">
-              <h5>Todo lo que Sube, Baja</h5>
-              <p>Cada envoltura, fruta o residuo generado debe regresar en tu mochila hasta los depósitos de reciclaje autorizados en el poblado base.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">3</div>
-            <div class="decalogo-text">
-              <h5>Protege las Fuentes Hídricas</h5>
-              <p>No utilices jabones sintéticos ni protectores solares químicos en lagunas de cráter ni cascadas minerales. Usa prendas UV manga larga.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">4</div>
-            <div class="decalogo-text">
-              <h5>Respeta el Sendero Marcado</h5>
-              <p>Caminar fuera de las veredas autorizadas compacta el suelo fértil de la nebliselva y destruye madrigueras de especies en peligro.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">5</div>
-            <div class="decalogo-text">
-              <h5>Silencio en la Naturaleza</h5>
-              <p>Prohibido el uso de parlantes bluetooth en áreas protegidas. El ruido estresa a las aves migratorias, monos aulladores y felinos.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">6</div>
-            <div class="decalogo-text">
-              <h5>No Extraer Flora ni Fósiles</h5>
-              <p>Orquídeas, helechos arborescentes, piedras volcánicas y fósiles pertenecen al ecosistema. Fotografíalos; jamás los arranques.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">7</div>
-            <div class="decalogo-text">
-              <h5>Cero Fogatas Clandestinas</h5>
-              <p>Los vientos en laderas volcánicas propagan incendios incontrolables. Solo enciende fuego en fogones comunitarios autorizados por el guía.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">8</div>
-            <div class="decalogo-text">
-              <h5>Contrata Guías Campesinos Locales</h5>
-              <p>El baqueano de la comunidad conoce los secretos del terreno, garantiza tu seguridad física y reinvierte tus aportes en su escuela rural.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">9</div>
-            <div class="decalogo-text">
-              <h5>Comercio Justo y Directo</h5>
-              <p>Paga el valor real del trabajo campesino. No regatees precios de café, frutas o artesanías a pequeños productores familiares.</p>
-            </div>
-          </div>
-          <div class="decalogo-item">
-            <div class="decalogo-num">10</div>
-            <div class="decalogo-text">
-              <h5>Custodia Activa y Alerta</h5>
-              <p>Si presencias tala indiscriminada, quemas de bosque o cacería furtiva, utiliza el módulo de denuncias georreferenciadas de Baqueano.</p>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+              <a href="https://api.whatsapp.com/send?text=¡Acabo%20de%20asumir%20el%20Decálogo%20Verde%20de%20Baqueano%20Nicaragua!%20Protejamos%20nuestros%20volcanes,%20ríos%20y%20comunidades." target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="flex: 1; justify-content: center; background: #25D366; border: none;">
+                <i class="fa-brands fa-whatsapp"></i> Compartir Compromiso
+              </a>
+              <button type="button" class="btn-hero-secondary" id="btnDownloadCert" style="flex: 1; justify-content: center;">
+                <i class="fa-solid fa-check"></i> Continuar Explorando
+              </button>
             </div>
           </div>
         </div>
@@ -392,6 +613,7 @@
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
   <script src="js/environmental.js"></script>
+  <script src="js/video-registry.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

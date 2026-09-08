@@ -81,6 +81,87 @@
   gap: 2rem;
 }
 
+/* ============================================================================
+ * 🔄 INFINITE MOVING DYNAMIC GALLERY / MARQUEE (IMPACTOS BAQUEANO)
+ * ============================================================================ */
+.impacts-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0 2rem;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.impacts-marquee-track {
+  display: flex;
+  gap: 1.75rem;
+  width: max-content;
+  animation: infiniteImpactScroll 40s linear infinite;
+  will-change: transform;
+}
+
+.impacts-marquee-track:hover,
+.impacts-marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+.impacts-marquee-track .impact-hex-card {
+  flex: 0 0 clamp(320px, 32vw, 410px);
+  width: clamp(320px, 32vw, 410px);
+  margin: 0;
+  user-select: none;
+}
+
+@keyframes infiniteImpactScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 0.875rem));
+  }
+}
+
+.impacts-marquee-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.marquee-control-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--arena-pinolera, #F4E6C1);
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  font-family: var(--font-tech);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(12px);
+}
+
+.marquee-control-btn:hover {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: #F65E01;
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(246, 94, 1, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .impacts-marquee-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
 .impact-hex-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
