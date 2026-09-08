@@ -39,26 +39,30 @@ window.BaqueanoMap = (function() {
     satellite: {
       name: 'Satélite HD',
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Esri &mdash; Earthstar Geographics, Maxar, GeoEye',
-      maxZoom: 18
+      attribution: '&copy; Esri, Maxar, Earthstar Geographics',
+      subdomains: '',
+      maxZoom: 19
     },
     dark: {
       name: 'Modo Noche',
-      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-      maxZoom: 19
+      subdomains: 'abcd',
+      maxZoom: 20
     },
     streets: {
       name: 'Rutas & Playas',
-      url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+      url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-      maxZoom: 19
+      subdomains: 'abcd',
+      maxZoom: 20
     },
     topo: {
       name: 'Topográfico',
-      url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
-      maxZoom: 17
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+      attribution: '&copy; Esri &mdash; National Geographic, USGS, HERE',
+      subdomains: '',
+      maxZoom: 19
     }
   };
 
@@ -179,17 +183,38 @@ window.BaqueanoMap = (function() {
     if (!mapInstance || !TILE_PROVIDERS[layerKey]) return;
 
     if (activeTileLayer) {
-      mapInstance.removeLayer(activeTileLayer);
+      try {
+        mapInstance.removeLayer(activeTileLayer);
+      } catch (e) {
+        // Safe removal
+      }
     }
 
     const conf = TILE_PROVIDERS[layerKey];
-    activeTileLayer = L.tileLayer(conf.url, {
+    const layerOptions = {
       attribution: conf.attribution,
-      maxZoom: conf.maxZoom
+      maxZoom: conf.maxZoom || 19,
+      minZoom: 2,
+      crossOrigin: true
+    };
+
+    if (conf.subdomains) {
+      layerOptions.subdomains = conf.subdomains;
+    }
+
+    activeTileLayer = L.tileLayer(conf.url, layerOptions);
+
+    activeTileLayer.on('tileerror', function(error) {
+      console.warn('[BaqueanoMap] Reintento de tesela:', error);
     });
 
     activeTileLayer.addTo(mapInstance);
     currentLayerKey = layerKey;
+
+    // Forzar actualización inmediata del cálculo geométrico de Leaflet
+    if (mapInstance) {
+      mapInstance.invalidateSize();
+    }
 
     // Actualizar botones en UI
     document.querySelectorAll('.map-layer-btn').forEach(btn => {
@@ -444,6 +469,23 @@ window.BaqueanoMap = (function() {
           }
         });
       });
+
+      // Sincronización geométrica y redibujado de teselas
+      setTimeout(() => {
+        if (mapInstance) mapInstance.invalidateSize();
+      }, 250);
+
+      setTimeout(() => {
+        if (mapInstance) mapInstance.invalidateSize();
+      }, 750);
+
+      setTimeout(() => {
+        if (mapInstance) mapInstance.invalidateSize();
+      }, 1800);
+
+      window.addEventListener('resize', () => {
+        if (mapInstance) mapInstance.invalidateSize();
+      }, { passive: true });
 
       console.info('[BaqueanoMap] Mapa interactivo satelital inicializado con éxito.');
     } catch (err) {
