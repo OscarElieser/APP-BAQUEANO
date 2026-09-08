@@ -170,6 +170,71 @@ h1 {
   }
 }
 
+/* ==========================================================================
+   ANIMATED HANDWRITING & STROKE REVEAL — TÍTULOS H2 (ESTILO TRAZO VIVO)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kaushan+Script&display=swap');
+
+:root {
+  --font-handwriting: 'Caveat', 'Kaushan Script', cursive;
+}
+
+h2 {
+  font-family: var(--font-handwriting);
+  font-weight: 700;
+  font-size: clamp(1.85rem, 3.8vw, 2.9rem);
+  line-height: 1.2;
+  letter-spacing: 0.015em;
+  color: var(--sand);
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F4E6C1 45%, #F65E01 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 25px rgba(246, 94, 1, 0.22);
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  animation: handwritingTitleFloat 4.5s ease-in-out infinite alternate;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  max-width: 160px;
+  height: 3px;
+  background: linear-gradient(90deg, #F65E01, #165D6F, #F4E6C1);
+  border-radius: 4px;
+  transform-origin: left center;
+  animation: strokeDraw 2.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  box-shadow: 0 0 10px rgba(246, 94, 1, 0.5);
+}
+
+@keyframes strokeDraw {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes handwritingTitleFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-2.5px) rotate(-0.4deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -180,3 +245,4 @@ h1 {
     transition-duration: 0.01ms !important;
   }
 }
+
