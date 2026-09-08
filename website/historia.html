@@ -42,6 +42,7 @@
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 </head>
 <body>
 
@@ -56,8 +57,7 @@
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">Inicio</a>
+      <div class="nav-links-center" id="navLinksCenter">
         <a href="destinos.html">Destinos</a>
         <a href="historia.html" class="active">Historia</a>
         <a href="ambiental.html">Ambiental</a>
@@ -81,20 +81,30 @@
     </div>
   </nav>
 
+  <!-- VIDEO HERO CINEMATOGRÁFICO DE HISTORIA -->
+  <div class="video-hero-wrapper">
+    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/convento_san_francisco.jpg">
+      <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/4079ee5e-5883-4a18-a6d1-4db81d6fbb5c/38584852.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-gradient"></div>
+    <div class="video-hero-scanlines"></div>
+    <div class="video-hero-content">
+      <div class="video-hero-badge">
+        <i class="fa-solid fa-landmark"></i> Módulo Insignia de Identidad
+      </div>
+      <h1 class="video-hero-title">Historia de Mi País: Nicaragua</h1>
+      <p class="video-hero-subtitle">
+        Conocer la tierra que pisamos es el primer acto de respeto. Nicaragua no es solo volcanes y lagos;
+        es la epopeya viva de pueblos indígenas insumisos, poetas inmortales y comunidades campesinas de dignidad inquebrantable.
+      </p>
+    </div>
+    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
+  </div>
+
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper">
     <section class="history-section-pro">
       <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill">
-            <i class="fa-solid fa-landmark"></i> Módulo Insignia de Identidad
-          </div>
-          <h1 class="section-headline">Historia de Mi País: Nicaragua</h1>
-          <p class="section-subtext">
-            Conocer la tierra que pisamos es el primer acto de respeto. Nicaragua no es solo volcanes y lagos;
-            es la epopeya viva de pueblos indígenas insumisos, poetas inmortales y comunidades campesinas de dignidad inquebrantable.
-          </p>
-        </div>
 
         <!-- LÍNEA DE TIEMPO DE 7 PERIODOS -->
         <div class="timeline-periods-flow">
@@ -206,74 +216,175 @@
           </p>
         </div>
 
-        <div class="territories-grid">
-          <div class="territory-pill-card active">
+        <div class="territories-grid" id="territoriesGrid">
+          <div class="territory-pill-card active" data-territory="madriz" role="button" tabindex="0">
             <h5>Madriz</h5>
             <span>Cañón de Somoto & Rosquillas</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="leon" role="button" tabindex="0">
             <h5>León</h5>
             <span>Cerro Negro & Catedral Insigne</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="rivas" role="button" tabindex="0">
             <h5>Rivas</h5>
             <span>Isla de Ometepe & Playas de Sur</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="jinotega" role="button" tabindex="0">
             <h5>Jinotega</h5>
             <span>Cascada La Luna & Café Nebliselva</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="masaya" role="button" tabindex="0">
             <h5>Masaya</h5>
             <span>Volcán Activo & Cuna del Folklore</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="granada" role="button" tabindex="0">
             <h5>Granada</h5>
             <span>Isletas, Mombacho & Arquitectura</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="matagalpa" role="button" tabindex="0">
             <h5>Matagalpa</h5>
             <span>Selva Negra, Cacao & Guías Indígenas</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="esteli" role="button" tabindex="0">
             <h5>Estelí</h5>
             <span>Salto La Estanzuela & Muralismo</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="chinandega" role="button" tabindex="0">
             <h5>Chinandega</h5>
             <span>Volcán San Cristóbal & Cosigüina</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="managua" role="button" tabindex="0">
             <h5>Managua</h5>
             <span>Capital, Xolotlán & Reserva El Chocoyero</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="carazo" role="button" tabindex="0">
             <h5>Carazo</h5>
             <span>El Güegüense & Bosques Secos del Pacífico</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="chontales" role="button" tabindex="0">
             <h5>Chontales</h5>
             <span>Arqueología Amerrisque & Ganadería Sostenible</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="boaco" role="button" tabindex="0">
             <h5>Boaco</h5>
             <span>Ciudad de Dos Pisos & Cerros Vírgenes</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="nueva-segovia" role="button" tabindex="0">
             <h5>Nueva Segovia</h5>
             <span>Cerro Mogotón (Punto Más Alto) & Pinares</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="rio-san-juan" role="button" tabindex="0">
             <h5>Río San Juan</h5>
             <span>Castillo de la Inmaculada & Humedales Indio Maíz</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="raccn" role="button" tabindex="0">
             <h5>RACCN (Caribe Norte)</h5>
             <span>Cultura Miskita, Mayangna & Bosawás Profunda</span>
           </div>
-          <div class="territory-pill-card">
+          <div class="territory-pill-card" data-territory="raccs" role="button" tabindex="0">
             <h5>RACCS (Caribe Sur)</h5>
             <span>Corn Island, Bluefields & Bahía de Perlas</span>
+          </div>
+        </div>
+
+        <!-- DETALLE DINÁMICO DEL TERRITORIO SELECCIONADO (ESTRUCTURA EN 12 DIMENSIONES) -->
+        <div id="territoryDetailContainer" style="margin-top: 3.5rem;">
+          <div class="territory-showcase-card" id="territoryShowcaseBox">
+            <!-- Header con Imagen -->
+            <div class="territory-showcase-hero" id="tHeroWrap">
+              <div class="territory-showcase-bg" id="tHeroBg"></div>
+              <div class="territory-showcase-overlay"></div>
+              <div class="territory-showcase-headline">
+                <div class="badge-section-pill" style="margin-bottom: 0.6rem; background: rgba(22,93,111,0.9);">
+                  <i class="fa-solid fa-map-location-dot"></i> <span id="tDeptBadge">Territorio Soberano</span>
+                </div>
+                <h3 id="tNameTitle" style="font-size: 2.4rem; color: #FFFFFF; font-family: var(--font-display); margin: 0 0 0.4rem;">Madriz</h3>
+                <p id="tTagline" style="font-size: 1.15rem; color: var(--terracotta-light); font-family: var(--font-tech); font-weight: 700; margin: 0 0 0.8rem;">
+                  "Tierra de Cañones Milenarios y Rosquillas Doradas"
+                </p>
+                <p id="tShortDesc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; max-width: 750px; margin: 0;"></p>
+              </div>
+            </div>
+
+            <!-- Contenido Interior en 12 Dimensiones -->
+            <div class="territory-showcase-body">
+              <!-- Historia -->
+              <div class="territory-info-block">
+                <div class="territory-block-title">
+                  <i class="fa-solid fa-landmark"></i>
+                  <h4>Historia & Legado Soberano</h4>
+                </div>
+                <p id="tHistoryText" style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65;"></p>
+              </div>
+
+              <!-- Gastronomía & Lugares (2 Columnas) -->
+              <div class="territory-2col-grid">
+                <!-- Gastronomía -->
+                <div class="territory-info-block">
+                  <div class="territory-block-title">
+                    <i class="fa-solid fa-utensils"></i>
+                    <h4>Gastronomía Típica</h4>
+                  </div>
+                  <div class="t-gastro-mini-list" id="tGastroList"></div>
+                </div>
+
+                <!-- Lugares Turísticos -->
+                <div class="territory-info-block">
+                  <div class="territory-block-title">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                    <h4>Lugares Turísticos Principales</h4>
+                  </div>
+                  <div class="t-places-mini-list" id="tPlacesList"></div>
+                </div>
+              </div>
+
+              <!-- Qué Puede Hacer el Turista (Actividades) -->
+              <div class="territory-info-block" style="margin-top: 1.5rem;">
+                <div class="territory-block-title">
+                  <i class="fa-solid fa-person-hiking"></i>
+                  <h4>¿Qué Puede Hacer el Turista? (Actividades en Territorio)</h4>
+                </div>
+                <ul class="t-activities-checklist" id="tActivitiesList"></ul>
+              </div>
+
+              <!-- Cultura & Tradiciones -->
+              <div class="territory-info-block" style="margin-top: 1.5rem;">
+                <div class="territory-block-title">
+                  <i class="fa-solid fa-masks-theater"></i>
+                  <h4>Cultura, Fiestas & Tradiciones</h4>
+                </div>
+                <p id="tCultureText" style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0;"></p>
+              </div>
+
+              <!-- Logística: Clima, Cómo Llegar y Recomendaciones -->
+              <div class="territory-3col-logistics" style="margin-top: 1.5rem;">
+                <div class="t-log-card">
+                  <h6><i class="fa-solid fa-cloud-sun" style="color: #F59E0B;"></i> Mejor Época de Visita</h6>
+                  <p id="tBestSeasonText"></p>
+                </div>
+                <div class="t-log-card">
+                  <h6><i class="fa-solid fa-route" style="color: var(--terracotta);"></i> Cómo Llegar</h6>
+                  <p id="tHowToReachText"></p>
+                </div>
+                <div class="t-log-card">
+                  <h6><i class="fa-solid fa-circle-check" style="color: #10B981;"></i> Recomendaciones</h6>
+                  <p id="tRecommendationsText"></p>
+                </div>
+              </div>
+
+              <!-- Barra de Acciones y Enlace a Página Completa -->
+              <div class="territory-action-bar">
+                <a href="destinos.html" class="btn-hero-primary" style="padding: 0.75rem 1.4rem; font-size: 0.85rem;">
+                  <i class="fa-solid fa-map-location-dot"></i> Explorar en el Mapa Satelital
+                </a>
+                <a href="departamento.html?id=madriz" class="btn-hero-secondary" id="tFullPageLink" style="padding: 0.75rem 1.4rem; font-size: 0.85rem;">
+                  <i class="fa-solid fa-file-lines"></i> Ver Guía Completa de este Departamento &rarr;
+                </a>
+                <a href="destinos.html#cotizadorModal" class="btn-hero-glass" style="padding: 0.75rem 1.4rem; font-size: 0.85rem;">
+                  <i class="fa-solid fa-calculator"></i> Planificar Ruta con Baqueano
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -424,6 +535,115 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/territories-data.js"></script>
+  <script src="js/video-registry.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    // ========================================================================
+    // 🗺️ CONTROLADOR DEL EXPLORADOR DE LOS 17 TERRITORIOS EN 12 DIMENSIONES
+    // ========================================================================
+    (function initTerritoryExplorer() {
+      const territories = window.BAQUEANO_TERRITORIES || [];
+      if (!territories.length) return;
+
+      function renderTerritoryDetail(deptId) {
+        const dept = territories.find(t => t.id === deptId) || territories[0];
+        if (!dept) return;
+
+        // Actualizar título, tagline y descripción
+        const nameTitle = document.getElementById('tNameTitle');
+        const tagline = document.getElementById('tTagline');
+        const shortDesc = document.getElementById('tShortDesc');
+        const deptBadge = document.getElementById('tDeptBadge');
+        const heroBg = document.getElementById('tHeroBg');
+        const fullPageLink = document.getElementById('tFullPageLink');
+
+        if (nameTitle) nameTitle.textContent = dept.name;
+        if (tagline) tagline.textContent = `"${dept.tagline}"`;
+        if (shortDesc) shortDesc.textContent = dept.shortDesc;
+        if (deptBadge) deptBadge.textContent = `${dept.coopCount} Cooperativas Locales Registradas`;
+        if (heroBg) heroBg.style.backgroundImage = `url('${dept.heroImage}')`;
+        if (fullPageLink) {
+          fullPageLink.href = `departamento.html?id=${dept.id}`;
+          fullPageLink.innerHTML = `<i class="fa-solid fa-file-lines"></i> Ver Guía Completa de ${dept.name} &rarr;`;
+        }
+
+        // Historia
+        const historyText = document.getElementById('tHistoryText');
+        if (historyText) historyText.textContent = dept.history;
+
+        // Gastronomía
+        const gastroList = document.getElementById('tGastroList');
+        if (gastroList) {
+          gastroList.innerHTML = dept.gastronomy.map(g => `
+            <div class="t-mini-card">
+              <strong style="color: #FFFFFF; font-size: 0.88rem; display: block; margin-bottom: 0.2rem;">
+                <i class="fa-solid fa-plate-wheat" style="color: var(--terracotta);"></i> ${g.name}
+              </strong>
+              <span style="font-size: 0.8rem; color: var(--text-secondary);">${g.desc}</span>
+            </div>
+          `).join('');
+        }
+
+        // Lugares Turísticos
+        const placesList = document.getElementById('tPlacesList');
+        if (placesList) {
+          placesList.innerHTML = dept.places.map(p => `
+            <div class="t-mini-card">
+              <strong style="color: #FFFFFF; font-size: 0.88rem; display: block; margin-bottom: 0.2rem;">
+                <i class="fa-solid ${p.icon || 'fa-map-pin'}" style="color: var(--oro-noble);"></i> ${p.name}
+              </strong>
+              <span style="font-size: 0.76rem; color: var(--arena-pinolera); font-family: var(--font-tech); font-weight: 700;">${p.type}</span>
+            </div>
+          `).join('');
+        }
+
+        // Actividades
+        const actList = document.getElementById('tActivitiesList');
+        if (actList) {
+          actList.innerHTML = dept.activities.map(a => `
+            <li class="t-act-item">
+              <i class="fa-solid fa-circle-check" style="color: #10B981;"></i>
+              <span>${a}</span>
+            </li>
+          `).join('');
+        }
+
+        // Cultura
+        const cultureText = document.getElementById('tCultureText');
+        if (cultureText) cultureText.textContent = dept.culture;
+
+        // Logística
+        const bestSeason = document.getElementById('tBestSeasonText');
+        const howToReach = document.getElementById('tHowToReachText');
+        const recommendations = document.getElementById('tRecommendationsText');
+
+        if (bestSeason) bestSeason.textContent = dept.bestSeason;
+        if (howToReach) howToReach.textContent = dept.howToReach;
+        if (recommendations) recommendations.textContent = dept.recommendations;
+      }
+
+      // Event listener a todas las tarjetas del grid de territorios
+      const cards = document.querySelectorAll('.territory-pill-card');
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          const deptId = card.dataset.territory;
+          renderTerritoryDetail(deptId);
+
+          // Scroll suave hacia la ficha descriptiva
+          const detailBox = document.getElementById('territoryDetailContainer');
+          if (detailBox) {
+            detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Render inicial (Madriz por defecto)
+      renderTerritoryDetail('madriz');
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,171 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE FONDOS DE VIDEO CINEMATOGRÁFICOS (VIDEOS.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Crear un impacto visual de alta gama en todos los encabezados principales del portal,
+  sumergiendo al usuario en la atmósfera viva de cada tema (Gastronomía, Historia,
+  Ambiental, Música, Aliados, Negocios y Destinos).
+- Garantizar contraste absoluto (WCAG AAA) sobre textos mediante gradientes radiales oscuros,
+  efectos de scanlines sutiles y aceleración por GPU sin penalizar el rendimiento móvil.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Contenedor `.video-hero-wrapper` con posición relativa y overflow oculto.
+- Elemento `<video>` con `object-fit: cover`, `will-change: transform` y `transform: translate3d(0,0,0)`.
+- Doble capa de oscurecimiento:
+  * `.video-hero-gradient`: Radial + lineal hacia el fondo `#0F172A`.
+  * `.video-hero-scanlines`: Textura microscópica que añade textura cinematográfica.
+- Respeto a accesibilidad: `@media (prefers-reduced-motion: reduce)` desactiva la reproducción.
+
+📦 3. QUÉ (WHAT / COMPONENTES Y CLASES EXPUESTAS):
+- `.video-hero-wrapper`, `.video-hero-media`, `.video-hero-gradient`, `.video-hero-scanlines`,
+  `.video-hero-content`, `.video-hero-title`, `.video-hero-subtitle`, `.video-hero-badge`,
+  `.video-hero-ctrl-btn`.
+============================================================================
+*/
+
+.video-hero-wrapper {
+  position: relative;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(246, 94, 1, 0.35);
+  background: #080D1A;
+  margin-bottom: 3.5rem;
+}
+
+.video-hero-media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  filter: brightness(0.65) saturate(1.15);
+  will-change: transform;
+}
+
+.video-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.88) 70%, #0F172A 100%),
+              linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.7) 60%, #0F172A 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.video-hero-scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.video-hero-content {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  max-width: 860px;
+  padding: 4rem 1.5rem;
+  margin: 0 auto;
+}
+
+.video-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  color: var(--arena-pinolera);
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  margin-bottom: 1.2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.video-hero-title {
+  font-size: 2.8rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.18;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(22, 93, 111, 0.35);
+}
+
+.video-hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 720px;
+  margin: 0 auto;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* BOTÓN DE PAUSA/PLAY ACCESIBILIDAD */
+.video-hero-ctrl-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  z-index: 5;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--arena-pinolera);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.video-hero-ctrl-btn:hover {
+  background: var(--terracotta);
+  color: #FFFFFF;
+  border-color: rgba(244, 230, 193, 0.6);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .video-hero-wrapper {
+    min-height: 360px;
+  }
+  .video-hero-title {
+    font-size: 2.1rem;
+  }
+  .video-hero-subtitle {
+    font-size: 0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-hero-media {
+    display: none;
+  }
+  .video-hero-wrapper {
+    background: radial-gradient(circle at center, #132438 0%, #080D1A 100%);
+  }
+}

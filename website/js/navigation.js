@@ -1,43 +1,54 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — CONTROLADOR DE NAVEGACIÓN & MODALES (navigation.js)
+// 🧭 BAQUEANO ECOSYSTEM — CONTROLADOR DE NAVEGACIÓN DINÁMICA & MODALES (navigation.js)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una experiencia de navegación institucional consistente y unificada
-//   entre todas las páginas independientes del sitio web oficial de Baqueano Nicaragua.
-// - Gestionar las funciones transversales de seguridad y distribución:
-//   * Resaltado automático de la página activa en el menú.
-//   * Centro de Auxilio y Emergencias SOS 24/7 en sendero con captura satelital.
-//   * Modal de descarga directa del APK oficial para Android.
-//   * Herramientas de compartir por WhatsApp y copiado de enlaces.
+// - Proveer una experiencia de navegación institucional ultra-interactiva, dinámica
+//   y de alta fidelidad entre todas las páginas del ecosistema oficial Baqueano Nicaragua.
+// - Brindar retroalimentación visual en tiempo real (indicador flotante magnético,
+//   seguimiento de luz ambiental del cursor, baliza SOS viva y micro-interacciones táctiles)
+//   para conectar al explorador con las rutas, historia, gastronomía y herramientas rurales.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Manejo reactivo de eventos DOM con listeners pasivos en scroll.
-// - Geolocation API del navegador con fallback geográfico de Nicaragua.
-// - Clipboard API con retroalimentación visual háptica inmediata.
-// - Modular y desacoplado, exportado globalmente para inicialización en app.js.
+// - Indicador de píldora deslizante con interpolación física suave y ajuste dinámico en resize.
+// - Seguimiento de coordenadas del puntero para iluminación volumétrica con variables CSS3.
+// - Menú móvil con animaciones fluidas, control de accesibilidad (ARIA) y cierre defensivo.
+// - Generación de ondas táctiles (ripples) reactivas al clic en botones de acción.
+// - Integración con Geolocation API y Firebase Analytics sin bloqueo del hilo principal.
 //
 // 📦 3. QUÉ (WHAT / FUNCIONES EXPUESTAS):
-// - initNavbarScroll(): Efecto de fondo glassmorphism y sombra al scrollear.
-// - initMobileMenu(): Menú hamburguesa desplegable para smartphones.
-// - initActiveNavHighlight(): Marca la pestaña activa según la URL actual.
-// - initSosModal(): Modal de auxilio con geolocalización satelital en vivo.
-// - initDownloadModal(): Diálogo de instalación y descarga de BaqueanoNicaragua.apk.
-// - initShareTools(): Botones para compartir el proyecto en redes y mensajería.
-// - initSmoothScroll(): Desplazamiento fluido para anclas en la misma página.
+// - initNavbarScroll(): Efecto dinámico de elevación, desenfoque y brillo de borde al scrollear.
+// - initDynamicNavbar(): Indicador magnético deslizante y luz ambiental interactiva del cursor.
+// - initMobileMenu(): Drawer táctico para smartphones con transiciones escalonadas.
+// - initActiveNavHighlight(): Identificación y resaltado de la ruta activa en el menú.
+// - initActionRipples(): Micro-interacciones de ondas expansivas en botones tácticos.
+// - initSosModal(): Centro de auxilio con geolocalización satelital en tiempo real.
+// - initDownloadModal(): Diálogo de distribución directa del APK oficial para Android.
+// - initShareTools(): Herramientas de difusión comunitaria en WhatsApp y portapapeles.
+// - initSmoothScroll(): Desplazamiento fluido para hipervínculos internos.
 // ============================================================================
 
 let currentGpsCoords = "Buscando satélites...";
 
+/**
+ * Controla el estado visual de la barra superior con efecto dinámico al hacer scroll.
+ */
 function initNavbarScroll() {
   const navbar = document.getElementById('mainNavbar');
   if (!navbar) return;
 
+  let ticking = false;
   const handleScroll = () => {
-    if (window.scrollY > 30) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 25) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
   };
 
@@ -45,40 +56,182 @@ function initNavbarScroll() {
   handleScroll();
 }
 
+/**
+ * Píldora deslizante magnética que sigue el cursor y regresa al elemento activo.
+ */
+function initDynamicNavbar() {
+  const navbar = document.getElementById('mainNavbar');
+  const navMenu = document.getElementById('navLinksMenu');
+  if (!navMenu) return;
+
+  // Crear o reutilizar la píldora indicadora flotante
+  let indicator = navMenu.querySelector('.nav-pill-indicator');
+  if (!indicator) {
+    indicator = document.createElement('div');
+    indicator.className = 'nav-pill-indicator';
+    indicator.setAttribute('aria-hidden', 'true');
+    navMenu.appendChild(indicator);
+  }
+
+  const links = Array.from(navMenu.querySelectorAll('a'));
+  if (links.length === 0) return;
+
+  navMenu.classList.add('has-indicator');
+
+  const moveIndicatorTo = (targetEl) => {
+    if (!targetEl || !indicator) return;
+    const menuRect = navMenu.getBoundingClientRect();
+    const targetRect = targetEl.getBoundingClientRect();
+
+    const left = targetRect.left - menuRect.left;
+    const width = targetRect.width;
+
+    indicator.style.transform = `translateX(${left}px)`;
+    indicator.style.width = `${width}px`;
+    indicator.style.opacity = '1';
+  };
+
+  const getActiveLink = () => {
+    return navMenu.querySelector('a.active') || links[0];
+  };
+
+  const syncActivePosition = () => {
+    const activeLink = getActiveLink();
+    if (activeLink) {
+      moveIndicatorTo(activeLink);
+    }
+  };
+
+  // Posicionamiento inicial con retraso mínimo para asegurar cálculo de fuentes
+  requestAnimationFrame(syncActivePosition);
+  setTimeout(syncActivePosition, 100);
+
+  // Escuchadores de interacción sobre los enlaces
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      links.forEach(l => l.classList.remove('hovered'));
+      link.classList.add('hovered');
+      moveIndicatorTo(link);
+    });
+
+    link.addEventListener('focus', () => {
+      links.forEach(l => l.classList.remove('hovered'));
+      link.classList.add('hovered');
+      moveIndicatorTo(link);
+    });
+  });
+
+  // Al salir del menú, regresar suavemente a la pestaña activa
+  navMenu.addEventListener('mouseleave', () => {
+    links.forEach(l => l.classList.remove('hovered'));
+    syncActivePosition();
+  });
+
+  navMenu.addEventListener('focusout', (e) => {
+    if (!navMenu.contains(e.relatedTarget)) {
+      links.forEach(l => l.classList.remove('hovered'));
+      syncActivePosition();
+    }
+  });
+
+  // Recalcular en cambio de resolución de pantalla con debounce
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncActivePosition, 80);
+  }, { passive: true });
+
+  // Seguimiento del puntero para iluminación ambiental en el HUD
+  if (navbar) {
+    navbar.addEventListener('mousemove', (e) => {
+      const rect = navbar.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      navbar.style.setProperty('--nav-mouse-x', `${x}px`);
+      navbar.style.setProperty('--nav-mouse-y', `${y}px`);
+    }, { passive: true });
+  }
+
+  // Inicializar micro-interacciones de ondas en botones de acción
+  initActionRipples();
+}
+
+/**
+ * Micro-interacciones con efecto ripple táctil en botones de acción.
+ */
+function initActionRipples() {
+  const interactiveBtns = document.querySelectorAll('.btn-nav-download, .sos-quick-btn, .mobile-nav-toggle');
+  interactiveBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.className = 'nav-click-ripple';
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+/**
+ * Menú desplegable táctico y dinámico para pantallas táctiles y smartphones.
+ */
 function initMobileMenu() {
   const toggleBtn = document.getElementById('mobileNavToggle');
   const navMenu = document.getElementById('navLinksMenu');
 
   if (!toggleBtn || !navMenu) return;
 
-  toggleBtn.addEventListener('click', () => {
-    const isVisible = navMenu.style.display === 'flex';
-    if (isVisible) {
-      navMenu.style.display = '';
+  const toggleMenu = () => {
+    const isOpen = navMenu.classList.toggle('mobile-open');
+    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggleBtn.innerHTML = isOpen 
+      ? '<i class="fa-solid fa-xmark"></i>' 
+      : '<i class="fa-solid fa-bars"></i>';
+    toggleBtn.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+  };
+
+  const closeMenu = () => {
+    if (navMenu.classList.contains('mobile-open')) {
+      navMenu.classList.remove('mobile-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
       toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-    } else {
-      navMenu.style.display = 'flex';
-      navMenu.style.flexDirection = 'column';
-      navMenu.style.position = 'absolute';
-      navMenu.style.top = '100%';
-      navMenu.style.left = '0';
-      navMenu.style.right = '0';
-      navMenu.style.background = 'rgba(15, 23, 42, 0.96)';
-      navMenu.style.padding = '1.5rem';
-      navMenu.style.backdropFilter = 'blur(20px)';
-      navMenu.style.borderBottom = '1px solid var(--border-subtle)';
-      toggleBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+      toggleBtn.style.transform = 'rotate(0deg)';
+    }
+  };
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Cerrar al hacer clic en cualquier enlace
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Cerrar al hacer clic fuera del menú o presionar la tecla Escape
+  document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeMenu();
     }
   });
 
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.style.display = '';
-      toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-    });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 }
 
+/**
+ * Identifica la página activa actual y le asigna la clase .active.
+ */
 function initActiveNavHighlight() {
   const currentPath = window.location.pathname;
   const pageName = currentPath.split('/').pop() || 'index.html';
@@ -323,3 +476,118 @@ window.toggleFavoriteReal = async function(placeId, btnElement) {
     console.error('Error al gestionar favorito:', err);
   }
 };
+
+/**
+ * Inicializa la telemetría en vivo, seguidor de luz ambiental y micro-interacciones del footer táctico futurista.
+ */
+function initDynamicFooter() {
+  const footer = document.querySelector('.site-footer-pro');
+  if (!footer) return;
+
+  // 1. Inyectar rayo láser de escaneo si no existe
+  if (!footer.querySelector('.footer-laser-scan')) {
+    const laser = document.createElement('div');
+    laser.className = 'footer-laser-scan';
+    laser.setAttribute('aria-hidden', 'true');
+    footer.prepend(laser);
+  }
+
+  // 2. Inyectar cinta HUD de telemetría si no existe
+  if (!footer.querySelector('.footer-telemetry-hud')) {
+    const container = footer.querySelector('.container');
+    if (container) {
+      const hudStrip = document.createElement('div');
+      hudStrip.className = 'footer-telemetry-hud';
+      hudStrip.innerHTML = `
+        <div class="hud-stat-item">
+          <span class="hud-beacon-led"></span>
+          <span class="hud-label">NODO CENTRAL:</span>
+          <strong class="hud-val">NICARAGUA SOBERANA</strong>
+        </div>
+        <div class="hud-stat-item">
+          <i class="fa-solid fa-satellite" style="color: var(--petroleo-glow);"></i>
+          <span class="hud-label">TELEMETRÍA GPS:</span>
+          <strong class="hud-val">12.1364° N, 86.2514° O</strong>
+        </div>
+        <div class="hud-stat-item">
+          <i class="fa-solid fa-shield-halved" style="color: var(--terracotta-light);"></i>
+          <span class="hud-label">SEGURIDAD:</span>
+          <strong class="hud-val">AES-GCM 256-BIT</strong>
+        </div>
+        <div class="hud-stat-item">
+          <i class="fa-regular fa-clock" style="color: var(--arena-pinolera);"></i>
+          <span class="hud-label">HORA LOCAL CST:</span>
+          <strong class="hud-val" id="footerLiveClock">--:--:--</strong>
+        </div>
+      `;
+      container.insertBefore(hudStrip, container.firstChild);
+    }
+  }
+
+  // 3. Reloj en vivo de Nicaragua (CST UTC-6)
+  const clockEl = document.getElementById('footerLiveClock');
+  const updateClock = () => {
+    if (clockEl) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('es-NI', { 
+        timeZone: 'America/Managua',
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+      });
+      clockEl.textContent = `${timeStr} (UTC-6)`;
+    }
+  };
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // 4. Luz ambiental reactiva en el footer
+  footer.addEventListener('mousemove', (e) => {
+    const rect = footer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    footer.style.setProperty('--footer-mouse-x', `${x}px`);
+    footer.style.setProperty('--footer-mouse-y', `${y}px`);
+  }, { passive: true });
+
+  // 5. Interactividad táctica en las líneas de emergencia
+  const emergencyItems = footer.querySelectorAll('.emergency-line-item');
+  emergencyItems.forEach(item => {
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('title', 'Tocar para activar asistencia directa');
+    
+    const strong = item.querySelector('strong');
+    const phoneNum = strong ? strong.textContent.replace(/[^0-9+]/g, '') : '';
+    
+    const triggerContact = () => {
+      if (!phoneNum) return;
+      if (phoneNum.startsWith('+505') || phoneNum.length > 4) {
+        const cleanWa = phoneNum.replace('+', '');
+        window.open(`https://api.whatsapp.com/send?phone=${cleanWa}&text=${encodeURIComponent('🚨 Auxilio Baqueano SOS: Solicitud de asistencia directa.')}`, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = `tel:${phoneNum}`;
+      }
+    };
+
+    item.addEventListener('click', triggerContact);
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        triggerContact();
+      }
+    });
+  });
+}
+
+// Auto-inicialización defensiva para páginas directas
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
+    if (typeof initDynamicFooter === 'function') initDynamicFooter();
+  });
+} else {
+  if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
+  if (typeof initDynamicFooter === 'function') initDynamicFooter();
+}

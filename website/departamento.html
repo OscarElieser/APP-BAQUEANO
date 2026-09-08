@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — GUÍA TERRITORIAL DEPARTAMENTAL (departamento.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Presentar la identidad integral, turística, gastronómica e histórica de cada
+  uno de los 17 territorios de Nicaragua (15 Departamentos y 2 Regiones Autónomas).
+- Empoderar al turista con información práctica de valor: qué hacer, cómo llegar,
+  cultura viva, mejores épocas de visita y conexión con cooperativas campesinas.
+- Vender el destino de manera profunda y atractiva para que el viajero planifique
+  rutas con los guías baqueanos locales sin intermediarios abusivos.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Lee el parámetro URL `?id=[territorio_id]` (ej. `?id=leon` o `?id=madriz`).
+- Consume el repositorio estructurado `js/territories-data.js`.
+- Renderiza la plantilla completa en 12 dimensiones:
+  1. Nombre & Badge
+  2. Frase atractiva (Tagline)
+  3. Descripción general
+  4. Historia y legado
+  5. Gastronomía típica ancestral
+  6. Lugares turísticos principales
+  7. Actividades para el visitante
+  8. Cultura, fiestas y tradiciones
+  9. Mejor época para visitar
+  10. Cómo llegar
+  11. Recomendaciones prácticas
+  12. Llamadas a la acción (Mapa, Crear Ruta, Cotizar)
+- Selector horizontal superior interactivo para cambiar de territorio al instante.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Hero dinámico con foto de fondo del departamento.
+- Cuadrícula modular de atractivos, platos típicos y actividades.
+- Ficha técnica de viaje y botones de enlace a mapas satelitales y reservas.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="deptPageTitle">Guía Turística Departamental | Baqueano Nicaragua</title>
+  <meta name="description" id="deptPageMetaDesc" content="Descubre la historia, gastronomía, lugares turísticos y rutas auténticas de los departamentos de Nicaragua.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/modules.css">
+
+  <style>
+    /* ESTILOS ESPECÍFICOS DE LA PÁGINA DEPARTAMENTAL */
+    .dept-hero-wrap {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: flex-end;
+      padding: 4rem 0 3rem;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(246, 94, 1, 0.35);
+    }
+    .dept-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.65);
+      transform: scale(1.02);
+      transition: transform 1.2s ease;
+    }
+    .dept-hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0F172A 10%, rgba(15, 23, 42, 0.7) 60%, rgba(15, 23, 42, 0.4) 100%);
+    }
+    .dept-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+    .dept-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(22, 93, 111, 0.85);
+      border: 1px solid rgba(244, 230, 193, 0.4);
+      color: var(--arena-pinolera);
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    .dept-title-big {
+      font-size: 3.2rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .dept-tagline {
+      font-size: 1.35rem;
+      font-family: var(--font-tech);
+      color: var(--terracotta-light);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.35;
+    }
+    .dept-short-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 780px;
+    }
+
+    /* BARRA DE NAVEGACIÓN ENTRE LOS 17 DEPARTAMENTOS */
+    .dept-quick-nav-bar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 70px;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 0.6rem 0;
+    }
+    .dept-pills-scroll {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.2rem 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--terracotta) rgba(15, 23, 42, 0.6);
+    }
+    .dept-pills-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .dept-pills-scroll::-webkit-scrollbar-thumb {
+      background: var(--terracotta);
+      border-radius: 9999px;
+    }
+    .dept-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(22, 93, 111, 0.2);
+      color: var(--text-secondary);
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .dept-pill-btn:hover {
+      border-color: var(--terracotta);
+      color: #FFFFFF;
+      background: rgba(246, 94, 1, 0.2);
+      transform: translateY(-1px);
+    }
+    .dept-pill-btn.active {
+      background: linear-gradient(135deg, #F65E01, #165D6F);
+      color: #FFFFFF;
+      border-color: rgba(244, 230, 193, 0.6);
+      box-shadow: 0 4px 14px rgba(246, 94, 1, 0.4);
+    }
+
+    /* GRID Y SECCIONES DE DETALLE */
+    .dept-section-block {
+      padding: 4rem 0;
+    }
+    .dept-section-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .dept-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .dept-card-header i {
+      font-size: 1.4rem;
+      color: var(--terracotta);
+    }
+    .dept-card-header h3 {
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    /* GASTRO Y LUGARES CARDS */
+    .dept-gastro-grid,
+    .dept-places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .dept-gastro-item,
+    .dept-place-item {
+      background: rgba(22, 93, 111, 0.15);
+      border: 1px solid rgba(22, 93, 111, 0.35);
+      border-radius: 16px;
+      padding: 1.3rem;
+      transition: all 0.25s ease;
+    }
+    .dept-gastro-item:hover,
+    .dept-place-item:hover {
+      border-color: var(--terracotta);
+      background: rgba(246, 94, 1, 0.12);
+      transform: translateY(-3px);
+    }
+    .dept-item-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dept-item-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ACTIVIDADES LISTA */
+    .dept-activities-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    .dept-activity-li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1rem 1.2rem;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      color: #FFFFFF;
+      line-height: 1.45;
+    }
+    .dept-activity-li i {
+      color: #10B981;
+      margin-top: 0.2rem;
+      font-size: 1rem;
+    }
+
+    /* INFO DE VIAJE / LOGÍSTICA */
+    .dept-logistics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .dept-logistic-box {
+      background: rgba(19, 36, 56, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 1.5rem;
+    }
+    .dept-logistic-box h5 {
+      font-size: 1rem;
+      color: var(--arena-pinolera);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dept-logistic-box p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* BOTONES DE ACCIÓN */
+    .dept-cta-bar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .dept-gastro-grid,
+      .dept-places-grid,
+      .dept-activities-list,
+      .dept-logistics-grid {
+        grid-template-columns: 1fr;
+      }
+      .dept-title-big {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER PRINCIPAL -->
+  <header class="site-header-pro">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <nav class="main-nav-menu" id="primaryNav">
+        <a href="index.html" class="nav-item-link">Inicio</a>
+        <a href="destinos.html" class="nav-item-link">Destinos</a>
+        <a href="historia.html" class="nav-item-link active">Territorios</a>
+        <a href="ambiental.html" class="nav-item-link">Campaña Verde</a>
+        <a href="gastronomia.html" class="nav-item-link">Gastronomía</a>
+        <a href="aliados.html" class="nav-item-link">Cooperativas</a>
+      </nav>
+
+      <div class="header-actions-group">
+        <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+          <i class="fa-brands fa-android"></i> App Móvil
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- BARRA DE SELECCIÓN DE LOS 17 TERRITORIOS -->
+  <div class="dept-quick-nav-bar">
+    <div class="container">
+      <div class="dept-pills-scroll" id="territoriesNavPills">
+        <!-- Generado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO DEL DEPARTAMENTO -->
+    <section class="dept-hero-wrap">
+      <div class="dept-hero-bg" id="deptHeroBg"></div>
+      <div class="dept-hero-gradient"></div>
+      <div class="container">
+        <div class="dept-hero-content">
+          <div class="dept-badge-pill">
+            <i class="fa-solid fa-map-pin"></i>
+            <span id="deptBadgeText">Territorio Soberano</span>
+          </div>
+          <h1 class="dept-title-big" id="deptTitle">Cargando Territorio...</h1>
+          <div class="dept-tagline" id="deptTagline"></div>
+          <p class="dept-short-desc" id="deptShortDesc"></p>
+
+          <div class="dept-cta-bar">
+            <a href="destinos.html" class="btn-hero-primary" id="btnExploreMap">
+              <i class="fa-solid fa-map-location-dot"></i> Explorar en el Mapa
+            </a>
+            <a href="destinos.html#cotizadorModal" class="btn-hero-secondary" id="btnQuoteTrip">
+              <i class="fa-solid fa-calculator"></i> Planificar Visita
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUERPO DE CONTENIDOS EN 12 SECCIONES -->
+    <section class="dept-section-block">
+      <div class="container">
+
+        <!-- 1. HISTORIA Y LEGADO -->
+        <div class="dept-section-card">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-landmark-dome"></i>
+            <h3>1. Historia, Origen & Memoria Viva</h3>
+          </div>
+          <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7;" id="deptHistoryText"></p>
+        </div>
+
+        <!-- 2. GASTRONOMÍA TÍPICA ANCESTRAL -->
+        <div class="dept-section-card">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>2. Gastronomía Típica & Sabores de Identidad</h3>
+          </div>
+          <div class="dept-gastro-grid" id="deptGastroGrid"></div>
+        </div>
+
+        <!-- 3. LUGARES TURÍSTICOS PRINCIPALES -->
+        <div class="dept-section-card">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-mountain-sun"></i>
+            <h3>3. Lugares Turísticos Principales & Áreas Protegidas</h3>
+          </div>
+          <div class="dept-places-grid" id="deptPlacesGrid"></div>
+        </div>
+
+        <!-- 4. QUÉ PUEDE HACER EL TURISTA (ACTIVIDADES) -->
+        <div class="dept-section-card">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-person-hiking"></i>
+            <h3>4. Actividades & Experiencias Vivas en Territorio</h3>
+          </div>
+          <ul class="dept-activities-list" id="deptActivitiesList"></ul>
+        </div>
+
+        <!-- 5. CULTURA Y TRADICIONES -->
+        <div class="dept-section-card">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-masks-theater"></i>
+            <h3>5. Cultura, Fiestas Patronales & Tradición Comunitaria</h3>
+          </div>
+          <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7;" id="deptCultureText"></p>
+        </div>
+
+        <!-- 6. LOGÍSTICA DE VIAJE: CLIMA, CÓMO LLEGAR Y RECOMENDACIONES -->
+        <div class="dept-section-card">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-compass"></i>
+            <h3>6. Guía Práctica de Viaje & Logística</h3>
+          </div>
+          <div class="dept-logistics-grid">
+            <div class="dept-logistic-box">
+              <h5><i class="fa-solid fa-cloud-sun" style="color: #F59E0B;"></i> Mejor Época para Visitar</h5>
+              <p id="deptBestSeasonText"></p>
+            </div>
+            <div class="dept-logistic-box">
+              <h5><i class="fa-solid fa-route" style="color: var(--terracotta);"></i> Cómo Llegar</h5>
+              <p id="deptHowToReachText"></p>
+            </div>
+            <div class="dept-logistic-box">
+              <h5><i class="fa-solid fa-circle-check" style="color: #10B981;"></i> Recomendaciones del Baqueano</h5>
+              <p id="deptRecommendationsText"></p>
+            </div>
+          </div>
+
+          <!-- BOTONES FINALES DE ACCIÓN -->
+          <div style="margin-top: 2.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem;">
+            <p style="font-size: 0.95rem; color: var(--arena-pinolera); margin-bottom: 1rem;">
+              ¿Listo para recorrer este territorio con un guía campesino certificado?
+            </p>
+            <div style="display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+              <a href="destinos.html" class="btn-hero-primary" style="padding: 0.8rem 1.8rem;">
+                <i class="fa-solid fa-map-location-dot"></i> Ver en Mapa Satelital
+              </a>
+              <a href="aliados.html" class="btn-hero-secondary" style="padding: 0.8rem 1.8rem;">
+                <i class="fa-solid fa-handshake"></i> Conocer Cooperativas Aliadas
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. 17 Territorios Soberanos de Ecoturismo Comunitario.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="historia.html">Historia de Mi País</a>
+          <a href="destinos.html">Destinos Protegidos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/territories-data.js"></script>
+  <script>
+    (function initDepartmentPage() {
+      // 1. Obtener ID del departamento de la URL (?id=leon)
+      const urlParams = new URLSearchParams(window.location.search);
+      let deptId = urlParams.get('id') || 'leon';
+
+      const territories = window.BAQUEANO_TERRITORIES || [];
+      let currentDept = territories.find(t => t.id === deptId) || territories[0];
+
+      if (!currentDept) return;
+
+      // 2. Renderizar barra de navegación superior de los 17 territorios
+      const navContainer = document.getElementById('territoriesNavPills');
+      if (navContainer) {
+        navContainer.innerHTML = territories.map(t => `
+          <a href="departamento.html?id=${t.id}" class="dept-pill-btn ${t.id === currentDept.id ? 'active' : ''}">
+            ${t.name}
+          </a>
+        `).join('');
+      }
+
+      // 3. Poblar datos del departamento actual
+      document.title = `${currentDept.name} — Guía Turística Oficial | Baqueano Nicaragua`;
+      document.getElementById('deptTitle').textContent = currentDept.name;
+      document.getElementById('deptTagline').textContent = `"${currentDept.tagline}"`;
+      document.getElementById('deptShortDesc').textContent = currentDept.shortDesc;
+      document.getElementById('deptHeroBg').style.backgroundImage = `url('${currentDept.heroImage}')`;
+      document.getElementById('deptBadgeText').textContent = `${currentDept.coopCount} Cooperativas Locales Registradas`;
+
+      // Historia
+      document.getElementById('deptHistoryText').textContent = currentDept.history;
+
+      // Gastronomía
+      const gastroGrid = document.getElementById('deptGastroGrid');
+      if (gastroGrid) {
+        gastroGrid.innerHTML = currentDept.gastronomy.map(g => `
+          <div class="dept-gastro-item">
+            <div class="dept-item-title"><i class="fa-solid fa-plate-wheat" style="color: var(--terracotta);"></i> ${g.name}</div>
+            <div class="dept-item-desc">${g.desc}</div>
+          </div>
+        `).join('');
+      }
+
+      // Lugares Turísticos
+      const placesGrid = document.getElementById('deptPlacesGrid');
+      if (placesGrid) {
+        placesGrid.innerHTML = currentDept.places.map(p => `
+          <div class="dept-place-item">
+            <div class="dept-item-title"><i class="fa-solid ${p.icon || 'fa-map-pin'}" style="color: var(--oro-noble);"></i> ${p.name}</div>
+            <div class="dept-item-desc"><span style="color: var(--arena-pinolera); font-family: var(--font-tech); font-weight:700;">${p.type}</span></div>
+          </div>
+        `).join('');
+      }
+
+      // Actividades
+      const actList = document.getElementById('deptActivitiesList');
+      if (actList) {
+        actList.innerHTML = currentDept.activities.map(a => `
+          <li class="dept-activity-li">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>${a}</span>
+          </li>
+        `).join('');
+      }
+
+      // Cultura
+      document.getElementById('deptCultureText').textContent = currentDept.culture;
+
+      // Logística
+      document.getElementById('deptBestSeasonText').textContent = currentDept.bestSeason;
+      document.getElementById('deptHowToReachText').textContent = currentDept.howToReach;
+      document.getElementById('deptRecommendationsText').textContent = currentDept.recommendations;
+    })();
+  </script>
+</body>
+</html>
