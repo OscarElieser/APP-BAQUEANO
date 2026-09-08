@@ -40,6 +40,7 @@
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 </head>
 <body>
 
@@ -54,8 +55,7 @@
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">Inicio</a>
+      <div class="nav-links-center" id="navLinksCenter">
         <a href="destinos.html">Destinos</a>
         <a href="historia.html">Historia</a>
         <a href="ambiental.html">Ambiental</a>
@@ -79,84 +79,97 @@
     </div>
   </nav>
 
+  <!-- VIDEO HERO CINEMATOGRÁFICO DE MÚSICA -->
+  <div class="video-hero-wrapper">
+    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/calle_la_calzada.jpg">
+      <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/7a0fcda5-1f91-4c6e-8260-264bc80fe3ea/24016149.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-gradient"></div>
+    <div class="video-hero-scanlines"></div>
+    <div class="video-hero-content">
+      <div class="video-hero-badge" style="border-color: rgba(212, 175, 55, 0.4); color: var(--oro-noble);">
+        <i class="fa-solid fa-music"></i> Galería Sonora de Nicaragua
+      </div>
+      <h1 class="video-hero-title">Patrimonio Musical & Galería Sonora</h1>
+      <p class="video-hero-subtitle">
+        Compositores históricos, creadores del Son Nica, cantautores de nueva canción, maestros de la música clásica y ritmos caribeños. Descubre las obras inmortales y la tierra donde nacieron.
+      </p>
+    </div>
+    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
+  </div>
+
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper">
     <section class="environmental-section-pro">
       <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill" style="background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); color: var(--oro-noble);">
-            <i class="fa-solid fa-music"></i> Son de Marimba & Guitarra
-          </div>
-          <h1 class="section-headline">Patrimonio Sonoro: Música Folclórica a 1 Toque</h1>
-          <p class="section-subtext">
-            Las melodías que han acompañado a nuestros abuelos en las fiestas de Masaya, las noches de campamento en Ometepe
-            y las madrugadas en el cafetal. Toca cualquier pieza para iniciar la experiencia sonora.
-          </p>
-        </div>
 
-        <!-- REPRODUCTOR OFICIAL A 1 TOQUE -->
+        <!-- CONSOLA FOLCLÓRICA BAQUEANO -->
         <div class="music-player-panel">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem;">
+          <div class="sonora-console-bar">
             <div style="display: flex; align-items: center; gap: 1rem;">
-              <div style="width: 50px; height: 50px; border-radius: 14px; background: var(--grad-sunset); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #FFFFFF; box-shadow: var(--shadow-glow-terracotta);">
+              <div style="width: 52px; height: 52px; border-radius: 16px; background: var(--grad-sunset); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #FFFFFF; box-shadow: var(--shadow-glow-terracotta); flex-shrink: 0;">
                 <i class="fa-solid fa-compact-disc"></i>
               </div>
               <div>
-                <h3 style="font-size: 1.35rem; color: #FFFFFF; margin-bottom: 0.2rem;">Consola Folclórica Baqueano</h3>
-                <div id="currentTrackDisplay" style="font-size: 0.88rem; color: var(--arena-pinolera);">
-                  <i class="fa-solid fa-circle-play"></i> Selecciona una pieza para reproducir
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                  <h3 style="font-size: 1.4rem; color: #FFFFFF; margin: 0; font-family: var(--font-display);">Consola Sonora Baqueano</h3>
+                  <div class="sonora-wave-anim" id="sonoraWaveAnimation">
+                    <div class="sonora-wave-bar"></div>
+                    <div class="sonora-wave-bar"></div>
+                    <div class="sonora-wave-bar"></div>
+                    <div class="sonora-wave-bar"></div>
+                  </div>
+                </div>
+                <div id="currentTrackDisplay" style="font-size: 0.9rem; color: var(--arena-pinolera); margin-top: 0.25rem;">
+                  <i class="fa-solid fa-circle-play"></i> Selecciona un compositor u obra para iniciar el viaje sonoro
                 </div>
               </div>
             </div>
-            <div style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-tech);">
-              FORMATO MP3 • REPRODUCCIÓN CONTINUA
+
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="btn-hero-glass" id="btnStopSonoraPlayback" style="display: none; padding: 0.45rem 0.9rem; font-size: 0.8rem;">
+                <i class="fa-solid fa-stop"></i> Detener
+              </button>
+              <div style="font-size: 0.75rem; color: var(--verde-neon); font-family: var(--font-tech); font-weight: 800; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.35rem 0.8rem; border-radius: 9999px;">
+                <i class="fa-solid fa-shield-halved"></i> PATRIMONIO EDUCATIVO MINED
+              </div>
             </div>
+          </div>
+
+          <!-- BARRA DE BÚSQUEDA TÁCTICA -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div class="sonora-search-bar">
+              <i class="fa-solid fa-magnifying-glass sonora-search-icon"></i>
+              <input type="text" id="sonoraSearchInput" class="sonora-search-input" placeholder="Buscar artista, canción o territorio (ej. Camilo Zapata, Mora Limpia, Somoto)...">
+              <button class="sonora-search-clear" id="sonoraSearchClear" title="Limpiar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              Toca <strong>«Escuchar»</strong> para la melodía o <strong>«Ficha»</strong> para su biografía y territorio.
+            </div>
+          </div>
+
+          <!-- FILTROS POR LAS 4 CATEGORÍAS MUSICALES -->
+          <div class="sonora-categories-bar" id="sonoraCategoryPills">
+            <!-- Renderizado dinámico desde sonora-data.js -->
+          </div>
+
+          <!-- GRID DE COMPOSITORES Y ARTISTAS (16 ARTISTAS) -->
+          <div class="sonora-artists-grid" id="sonoraArtistsGrid">
+            <!-- Generado dinámicamente -->
           </div>
 
           <!-- Elemento de Audio Oculto -->
           <audio id="globalFolkloreAudio" preload="none"></audio>
-
-          <!-- GRID DE LAS 5 PISTAS -->
-          <div class="music-tracks-grid">
-            <!-- Pista 1 -->
-            <div class="track-btn-card" data-audio="assets/audio/la_mora_limpia.mp3" data-name="La Mora Limpia" data-author="Justino Jerez (Himno del Folklore)">
-              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
-              <div class="track-title">La Mora Limpia</div>
-              <div class="track-author">Justino Jerez</div>
-            </div>
-
-            <!-- Pista 2 -->
-            <div class="track-btn-card" data-audio="assets/audio/el_solar_de_monimbo.mp3" data-name="El Solar de Monimbó" data-author="Camilo Zapata (Creador del Son Nica)">
-              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
-              <div class="track-title">El Solar de Monimbó</div>
-              <div class="track-author">Camilo Zapata</div>
-            </div>
-
-            <!-- Pista 3 -->
-            <div class="track-btn-card" data-audio="assets/audio/baile_del_mestizaje.mp3" data-name="Baile del Mestizaje" data-author="Son Tradicional de Marimba">
-              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
-              <div class="track-title">Baile del Mestizaje</div>
-              <div class="track-author">Marimba Masaya</div>
-            </div>
-
-            <!-- Pista 4 -->
-            <div class="track-btn-card" data-audio="assets/audio/el_zanatillo.mp3" data-name="El Zanatillo" data-author="Folklore Campesino de Las Segovias">
-              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
-              <div class="track-title">El Zanatillo</div>
-              <div class="track-author">Tradicional Segoviano</div>
-            </div>
-
-            <!-- Pista 5 -->
-            <div class="track-btn-card" data-audio="assets/audio/palomita_guasiruca.mp3" data-name="Palomita Guasiruca" data-author="Lira Campesina Popular">
-              <div class="track-icon-play"><i class="fa-solid fa-play"></i></div>
-              <div class="track-title">Palomita Guasiruca</div>
-              <div class="track-author">Lira Campesina</div>
-            </div>
-          </div>
         </div>
 
-        <!-- CONTEXTO CULTURAL DEL SON NICA -->
-        <div class="impacts-hex-grid" style="margin-top: 4rem;">
+        <!-- CONTEXTO CULTURAL & HISTÓRICO RIGUROSO -->
+        <div class="section-lead-header" style="text-align: center; margin-top: 4rem; margin-bottom: 2rem;">
+          <div class="badge-section-pill"><i class="fa-solid fa-landmark"></i> Pilares de la Identidad Musical</div>
+          <h2 class="section-headline">Historia Viva del Sonido Pinolero</h2>
+          <p class="section-subtext">Fundamentos rítmicos, organología y obras cumbres reconocidas por el Ministerio de Educación.</p>
+        </div>
+
+        <div class="impacts-hex-grid">
           <div class="impact-hex-card">
             <div class="impact-icon-circle"><i class="fa-solid fa-guitar"></i></div>
             <h3 class="impact-card-title">El Son Nica de Camilo Zapata</h3>
@@ -165,20 +178,30 @@
               del campesino pinolero en el baile popular.
             </p>
           </div>
+
+          <div class="impact-hex-card">
+            <div class="impact-icon-circle"><i class="fa-solid fa-music"></i></div>
+            <h3 class="impact-card-title">La Mora Limpia de Justo Santos</h3>
+            <p class="impact-card-desc">
+              Compuesta en 1946 por el rivense Justo Santos, es unánimemente reconocida como el segundo himno nacional de Nicaragua, capturando la luz y fertilidad del campo.
+            </p>
+          </div>
+
           <div class="impact-hex-card">
             <div class="impact-icon-circle"><i class="fa-solid fa-drum"></i></div>
             <h3 class="impact-card-title">La Marimba de Arco Indígena</h3>
             <p class="impact-card-desc">
               Construida con teclas de madera de ñábaro o coyote y calabazas de jícaro como resonadores.
-              Monimbó es la capital artesanal de este instrumento sagrado.
+              Monimbó (Masaya) es la capital artesanal de este instrumento sagrado.
             </p>
           </div>
+
           <div class="impact-hex-card">
-            <div class="impact-icon-circle"><i class="fa-solid fa-feather-pointed"></i></div>
+            <div class="impact-icon-circle"><i class="fa-solid fa-masks-theater"></i></div>
             <h3 class="impact-card-title">El Güegüense y la Resistencia</h3>
             <p class="impact-card-desc">
-              Melodías centenarias de pito y tamboril que satirizan a la autoridad colonial con humor inteligente
-              y dignidad popular. Patrimonio de la Humanidad.
+              Melodías centenarias de pito de caña y tamboril que satirizan a la autoridad colonial con humor inteligente
+              y dignidad popular. Patrimonio de la Humanidad por la UNESCO.
             </p>
           </div>
         </div>
@@ -186,6 +209,16 @@
       </div>
     </section>
   </main>
+
+  <!-- MODAL DE FICHA ENRIQUECIDA DE ARTISTA (MÚSICA + TERRITORIO) -->
+  <div class="modal-backdrop-pro" id="sonoraArtistModal" aria-hidden="true" role="dialog">
+    <div class="sonora-modal-dialog">
+      <button class="modal-close-x" id="closeSonoraModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div id="sonoraModalContent">
+        <!-- Rellenado dinámicamente -->
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER OFICIAL -->
   <footer class="site-footer-pro">
@@ -306,6 +339,8 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
+  <script src="js/sonora-data.js"></script>
   <script src="js/audio-player.js"></script>
   <script src="app.js"></script>
 </body>

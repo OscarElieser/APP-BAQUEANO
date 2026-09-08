@@ -45,6 +45,7 @@
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 
   <style>
     /* Sección del Mapa Interactivo */
@@ -183,9 +184,14 @@
       </div>
 
       <div class="container">
-        <!-- FILTROS DINÁMICOS POR TODAS LAS CATEGORÍAS DE TURISMO Y ESTADÍA -->
+        <!-- FILTROS DINÁMICOS POR TODAS LAS CATEGORÍAS DE TURISMO, ESTADÍA Y GASTRONOMÍA -->
         <div class="filter-pills-bar">
           <button class="cat-filter-btn active" data-filter="all"><i class="fa-solid fa-globe"></i> Todos los Destinos</button>
+          <button class="cat-filter-btn" data-filter="favoritos" id="filterFavsBtn">
+            <i class="fa-solid fa-bookmark" style="color: var(--oro-noble);"></i> Mis Favoritos
+            <span class="badge-fav-count" id="favCountBadge" style="display:none; background: #EF4444; color: #FFF; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 9999px; margin-left: 0.3rem;">0</span>
+          </button>
+          <button class="cat-filter-btn" data-filter="gastronomia"><i class="fa-solid fa-utensils" style="color: var(--terracotta);"></i> Comida & Gastronomía</button>
           <button class="cat-filter-btn" data-filter="playas"><i class="fa-solid fa-umbrella-beach"></i> Playas & Costas</button>
           <button class="cat-filter-btn" data-filter="bahias"><i class="fa-solid fa-sailboat"></i> Bahías & Golfos</button>
           <button class="cat-filter-btn" data-filter="rios"><i class="fa-solid fa-water"></i> Ríos & Cascadas</button>
@@ -198,16 +204,351 @@
           <button class="cat-filter-btn" data-filter="casas-alquiler"><i class="fa-solid fa-key"></i> Casas de Alquiler</button>
           <button class="cat-filter-btn" data-filter="museos"><i class="fa-solid fa-landmark"></i> Museos & Cultura</button>
           <button class="cat-filter-btn" data-filter="discotecas"><i class="fa-solid fa-champagne-glasses"></i> Bares & Vida Nocturna</button>
-          <button class="cat-filter-btn" data-filter="gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</button>
         </div>
 
-        <!-- GRID COMPLETO DE DESTINOS, HOSPEDAJES Y TURISMO -->
+        <!-- GRID COMPLETO DE DESTINOS, HOSPEDAJES, GASTRONOMÍA Y TURISMO -->
         <div class="destinations-showcase-grid">
 
+          <!-- ================================================================
+               SECCIÓN GASTRONOMÍA & COMIDA ANCESTRAL
+               ================================================================ -->
+
+          <!-- GASTRO 1: BAHO DOÑA VILMA -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_baho_vilma">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/baho.jpg" alt="Baho Doña Vilma" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_baho_vilma" data-initial-likes="89" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_baho_vilma" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-utensils"></i> Baho Tradicional</span>
+              <span class="dest-price-badge">C$ 180 / Plato Completo</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya, Mercado Municipal</div>
+              <h3 class="dest-name-title">Comedor y Templo del Baho Doña Vilma</h3>
+              <p class="dest-description-text">
+                Carne de res marinada en naranja agria, yuca suave y plátano maduro cocidos al vapor durante 12 horas en hojas de chagüite. Acompañado de ensalada de repollo y chicha de maíz.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Vilma Morales</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Mercado Ernesto Fernández, Tramo #42, Masaya</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588924110">+505 8892-4110</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 160 – C$ 220</span></div>
+                <div class="price-usd">≈ $4.50 – $6.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588924110&text=Hola%20Do%C3%B1a%20Vilma,%20deseo%20consultar%20men%C3%BA%20y%20ordenar%20baho%20desde%20Baqueano%20Nicaragua" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9744" data-lng="-86.0942" data-name="Baho Doña Vilma" data-id="gastro_baho_vilma">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (480 reseñas)</span>
+                <span class="dest-coop-name">Cocinera Tradicional Masaya</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 2: QUESILLOS MI BOHÍO -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_quesillo_rosa">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/quesillo.jpg" alt="Quesillos Mi Bohío" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_quesillo_rosa" data-initial-likes="142" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_quesillo_rosa" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-cheese"></i> Quesillo en Hoja</span>
+              <span class="dest-price-badge">C$ 95 / Especial Doble</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Nagarote, León</div>
+              <h3 class="dest-name-title">Quesillos Mi Bohío & Doña Rosa</h3>
+              <p class="dest-description-text">
+                Tortilla caliente recién salida del comal, trenza de quesillo artesanal elástica bañada en crema ácida pura de hacienda, cebolla encurtida en vinagre de guineo y tiste helado.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Rosa Mendoza</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Km 92 Carretera Panamericana Norte, Nagarote</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584219904">+505 8421-9904</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 75 – C$ 140</span></div>
+                <div class="price-usd">≈ $2.00 – $3.80 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584219904&text=Hola%20Do%C3%B1a%20Rosa,%20deseo%20ordenar%20quesillos%20desde%20Baqueano%20Nicaragua" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.2667" data-lng="-86.5667" data-name="Quesillos Mi Bohío" data-id="gastro_quesillo_rosa">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (620 reseñas)</span>
+                <span class="dest-coop-name">Artesanos Lácteos Nagarote</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 3: ROSQUILLAS SOMOTEÑAS -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_rosquillas_somoto">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/rosquillas.jpg" alt="Rosquillas Somoteñas" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_rosquillas_somoto" data-initial-likes="118" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_rosquillas_somoto" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-cookie-bite"></i> Horno de Barro</span>
+              <span class="dest-price-badge">C$ 80 / Bolsa Familiar</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
+              <h3 class="dest-name-title">Rosquillería Tradicional Delicias del Norte</h3>
+              <p class="dest-description-text">
+                Rosquillas tostadas crujientes y hojaldras de maíz blanco con queso seco de montaña y dulce de caña horneadas en leña de roble. Servidas con café de altura recién chorreado.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Francisca Vílchez</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado Norte del Parque Central 1c al este, Somoto</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586421180">+505 8642-1180</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 60 – C$ 160</span></div>
+                <div class="price-usd">≈ $1.60 – $4.30 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586421180&text=Hola%20Do%C3%B1a%20Francisca,%20deseo%20encargar%20rosquillas%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.4833" data-lng="-86.5833" data-name="Rosquillas Somoteñas" data-id="gastro_rosquillas_somoto">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (530 reseñas)</span>
+                <span class="dest-coop-name">Taller Artesanal Somoto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 4: RONDÓN CREOLE MISS PEARL -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_rondon_pearl">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/rondon.jpg" alt="Rondón Caribeño" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_rondon_pearl" data-initial-likes="96" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_rondon_pearl" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-shrimp"></i> Rondón de Mariscos</span>
+              <span class="dest-price-badge">C$ 280 / Cazuela Caribeña</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Bluefields, RACCS</div>
+              <h3 class="dest-name-title">Cocina Tradicional Creole Miss Pearl</h3>
+              <p class="dest-description-text">
+                Pescado pargo rojo fresco, langosta, yuca, quequisque, malanga y plátano cocidos a fuego lento en leche de coco recién extraída con chile congo y hierbas caribeñas.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Miss Pearl Hodgson</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Barrio Punta Fría, frente al Malecón de Bluefields</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587304522">+505 8730-4522</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 220 – C$ 350</span></div>
+                <div class="price-usd">≈ $6.00 – $9.50 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587304522&text=Hello%20Miss%20Pearl,%20I%20want%20to%20order%20Rondon%20from%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.0075" data-lng="-83.7636" data-name="Miss Pearl Rondon" data-id="gastro_rondon_pearl">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (390 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Creole Bluefields</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 5: VIGORÓN DOÑA TORIBIA -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_vigoron_toribia">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/vigoron.jpg" alt="Vigorón Doña Toribia" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_vigoron_toribia" data-initial-likes="135" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_vigoron_toribia" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-drumstick-bite"></i> Vigorón en Chagüite</span>
+              <span class="dest-price-badge">C$ 120 / Porción con Chicharrón</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Parque Central, Granada</div>
+              <h3 class="dest-name-title">Vigorón Tradicional Granadino Doña Toribia</h3>
+              <p class="dest-description-text">
+                Cama de yuca harinosa al vapor servida en hoja de plátano, chicharrón con carne crujiente, ensalada de repollo con tomate criollo y vinagre de guineo casero. Refresco de grama natural.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Toribia Pérez</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Kiosco #3 del Parque Central Colón, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50585023319">+505 8502-3319</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 90 – C$ 150</span></div>
+                <div class="price-usd">≈ $2.50 – $4.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50585023319&text=Hola%20Do%C3%B1a%20Toribia,%20deseo%20ordenar%20vigor%C3%B3n%20desde%20Baqueano%20Granada" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9300" data-lng="-85.9550" data-name="Vigorón Doña Toribia" data-id="gastro_vigoron_toribia">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (510 reseñas)</span>
+                <span class="dest-coop-name">Tradición Familiar Granadina</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 6: FRITANGA EL GÜEGÜENSE -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_fritanga_gueguense">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/nacatamal.jpg" alt="Fritanga El Güegüense" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_fritanga_gueguense" data-initial-likes="160" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_fritanga_gueguense" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-fire-burner"></i> Asados al Carbón</span>
+              <span class="dest-price-badge">C$ 190 / Asado Mixto</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Plaza España, Managua</div>
+              <h3 class="dest-name-title">Fritanga Tradicional & Asados El Güegüense</h3>
+              <p class="dest-description-text">
+                Carne asada a las brasas de carbón vegetal, gallopinto campesino con queso frito dorado, tajadas verdes crocantes, maduro frito con cuajada y cacao helado con leche.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietario: <strong>Don Jacinto Romero</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>De la Rotonda El Güegüense 2c abajo, Managua</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589113400">+505 8911-3400</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 140 – C$ 230</span></div>
+                <div class="price-usd">≈ $3.80 – $6.20 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589113400&text=Hola%20Don%20Jacinto,%20deseo%20ordenar%20fritanga%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.1364" data-lng="-86.2711" data-name="Fritanga El Güegüense" data-id="gastro_fritanga_gueguense">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (670 reseñas)</span>
+                <span class="dest-coop-name">Fritangueros de Managua</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               SECCIÓN DESTINOS NATURALES, TURISMO & HOSPEDAJE
+               ================================================================ -->
+
           <!-- 1. SOMOTO (RÍOS / AGUAS) -->
-          <div class="dest-card-pro" data-category="rios">
+          <div class="dest-card-pro" data-category="rios" data-id="dest_somoto_001">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_somoto_001" data-initial-likes="210" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_somoto_001" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cañón Acuático</span>
               <span class="dest-price-badge">$15 / Tour Guiado</span>
             </div>
@@ -217,6 +558,36 @@
               <p class="dest-description-text">
                 Paredes rocosas de más de 120 metros de altura esculpidas por el Río Coco (Wangki). Natación protegida con chalecos salvavidas y baqueanos campesinos.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Coordinador: <strong>Don Gonzalo Tercero (Coop. Sonís)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Comunidad de Sonís, Km 230 Carretera Panamericana</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584431289">+505 8443-1289</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 550 – C$ 900</span></div>
+                <div class="price-usd">≈ $15.00 – $25.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Coop%20Somoto,%20deseo%20reservar%20gu%C3%ADa%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.4775" data-lng="-86.5800" data-name="Cañón de Somoto" data-id="dest_somoto_001">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (420 reseñas)</span>
                 <span class="dest-coop-name">Coop. Sonís Somoto</span>
@@ -225,18 +596,52 @@
           </div>
 
           <!-- 2. CERRO NEGRO (VOLCANES) -->
-          <div class="dest-card-pro" data-category="volcanes">
+          <div class="dest-card-pro" data-category="volcanes" data-id="dest_cerronegro_002">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/cerro_negro.jpg" alt="Volcán Cerro Negro" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_cerronegro_002" data-initial-likes="340" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_cerronegro_002" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Volcán Activo</span>
               <span class="dest-price-badge">$30 / Sandboarding</span>
             </div>
             <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León, Nicaragua</div>
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León, Cordillera de los Maribios</div>
               <h3 class="dest-name-title">Volcán Cerro Negro (Volcano Sandboarding)</h3>
               <p class="dest-description-text">
                 El volcán más joven de Centroamérica (1850). Cono de escoria basáltica con fumarolas en la cumbre y descenso de adrenalina sobre arena volcánica a 60-80 km/h.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Guía Principal: <strong>Don Álvaro Mairena (Baqueanos Volcán)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Base del Volcán, Comarca Rota, León</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588442310">+505 8844-2310</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 1,100 – C$ 1,500</span></div>
+                <div class="price-usd">≈ $30.00 – $40.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588442310&text=Hola%20Gu%C3%ADas%20Cerro%20Negro,%20deseo%20tour%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.5063" data-lng="-86.7017" data-name="Volcán Cerro Negro" data-id="dest_cerronegro_002">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (610 reseñas)</span>
                 <span class="dest-coop-name">Guías Los Maribios</span>
@@ -245,9 +650,13 @@
           </div>
 
           <!-- 3. OMETEPE (ISLAS) -->
-          <div class="dest-card-pro" data-category="islas">
+          <div class="dest-card-pro" data-category="islas" data-id="dest_ometepe_003">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_ometepe_003" data-initial-likes="480" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_ometepe_003" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Reserva Biosfera</span>
               <span class="dest-price-badge">Desde $20 / Día</span>
             </div>
@@ -257,6 +666,36 @@
               <p class="dest-description-text">
                 Oasis en medio del Gran Lago con dos volcanes colosales. Petroglifos sagrados, senderismo en bosque nuboso, Ojo de Agua medicinal y fincas agroecológicas.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red Comunitaria: <strong>Finca Magdalena & Hospederías Ometepe</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Faldas del Volcán Maderas, Comunidad Balgüe</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587220199">+505 8722-0199</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 750 – C$ 1,400</span></div>
+                <div class="price-usd">≈ $20.00 – $38.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587220199&text=Hola%20Ometepe%20Viva,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.5206" data-lng="-85.5700" data-name="Isla de Ometepe" data-id="dest_ometepe_003">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (890 reseñas)</span>
                 <span class="dest-coop-name">Coop. Ometepe Verde</span>
@@ -265,9 +704,13 @@
           </div>
 
           <!-- 4. PLAYA MADERAS (PLAYAS) -->
-          <div class="dest-card-pro" data-category="playas">
+          <div class="dest-card-pro" data-category="playas" data-id="dest_maderas_004">
             <div class="dest-card-img-wrap">
               <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80" alt="Playa Maderas" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_maderas_004" data-initial-likes="290" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_maderas_004" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Playa & Surf</span>
               <span class="dest-price-badge">Clases Surf $25</span>
             </div>
@@ -277,6 +720,36 @@
               <p class="dest-description-text">
                 Famosa por sus formaciones rocosas esculpidas por el oleaje del Pacífico y rompientes constantes durante todo el año. Puestas de sol de fuego y vida playera.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Escuela Local: <strong>Baqueanos del Surf Maderas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Acceso a Playa Maderas, 8km norte de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589110034">+505 8911-0034</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 900 – C$ 1,300</span></div>
+                <div class="price-usd">≈ $25.00 – $35.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589110034&text=Hola%20Surf%20Maderas,%20deseo%20clase%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.2952" data-lng="-85.9083" data-name="Playa Maderas" data-id="dest_maderas_004">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (530 reseñas)</span>
                 <span class="dest-coop-name">Escuela Surf Maderas</span>
@@ -285,9 +758,13 @@
           </div>
 
           <!-- 5. BAHÍA DE SAN JUAN DEL SUR (BAHÍAS) -->
-          <div class="dest-card-pro" data-category="bahias">
+          <div class="dest-card-pro" data-category="bahias" data-id="dest_bahia_sjds">
             <div class="dest-card-img-wrap">
               <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&auto=format&fit=crop&q=80" alt="Bahía de San Juan del Sur" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_bahia_sjds" data-initial-likes="360" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_bahia_sjds" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-sailboat"></i> Bahía Natural</span>
               <span class="dest-price-badge">Veleros & Tours</span>
             </div>
@@ -297,6 +774,36 @@
               <p class="dest-description-text">
                 Bahía protegida en herradura con puerto de pescadores artesanales, veleros al atardecer, malecón gastronómico y vista panorámica desde el Cristo de la Misericordia.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Coordinador: <strong>Coop. Pescadores y Lancheros SJDS</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Muelle Municipal, Malecón de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588771120">+505 8877-1120</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 500 – C$ 1,200</span></div>
+                <div class="price-usd">≈ $14.00 – $32.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588771120&text=Hola%20Pescadores%20SJDS,%20deseo%20tour%20en%20lancha%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.2500" data-lng="-85.8700" data-name="Bahía San Juan del Sur" data-id="dest_bahia_sjds">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (710 reseñas)</span>
                 <span class="dest-coop-name">Pescadores San Juan</span>
@@ -304,230 +811,14 @@
             </div>
           </div>
 
-          <!-- 6. MORGAN'S ROCK ECO-LODGE (HOTELES) -->
-          <div class="dest-card-pro" data-category="hoteles">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=80" alt="Morgan's Rock Eco-Lodge" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-hotel"></i> Eco-Resort</span>
-              <span class="dest-price-badge">Desde $180 / Noche</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Bahía Ocotal, San Juan del Sur</div>
-              <h3 class="dest-name-title">Morgan's Rock Eco-Lodge & Reserva Privada</h3>
-              <p class="dest-description-text">
-                Bungalows de madera sostenible suspendidos sobre el dosel de la selva tropical con vistas al mar. Playa privada, avistamiento de monos aulladores y granja orgánica.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (380 reseñas)</span>
-                <span class="dest-coop-name">Reserva Ecoturística</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. HOTEL DARÍO COLONIAL (HOTELES) -->
-          <div class="dest-card-pro" data-category="hoteles">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&auto=format&fit=crop&q=80" alt="Hotel Darío Colonial" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-hotel"></i> Hotel Colonial</span>
-              <span class="dest-price-badge">Desde $75 / Noche</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Calle La Calzada, Granada</div>
-              <h3 class="dest-name-title">Hotel Darío & Casona Señorial</h3>
-              <p class="dest-description-text">
-                Joyel neoclásico de 1900 en el corazón de la Gran Sultana. Patio andaluz con fuentes de cantera, piscina central, balcones coloniales con vista al Volcán Mombacho.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (490 reseñas)</span>
-                <span class="dest-coop-name">Patrimonio Granadino</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 8. THE TREEHOUSE NICARAGUA (HOSTALES) -->
-          <div class="dest-card-pro" data-category="hostales">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop&q=80" alt="The Treehouse Hostel" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-bed"></i> Hostal en Árboles</span>
-              <span class="dest-price-badge">Desde $18 / Cama</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Faldas del Mombacho, Granada</div>
-              <h3 class="dest-name-title">The Treehouse Jungle Hostel</h3>
-              <p class="dest-description-text">
-                Hostal icónico construido a 30 metros de altura sobre árboles centenarios. Puentes colgantes, canopy nocturno, mirador de estrellas y ambiente internacional mochilero.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.7 (650 reseñas)</span>
-                <span class="dest-coop-name">Comunidad Diriomo</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 9. CABAÑAS FINCA MAGDALENA (HOSPEDAJES) -->
-          <div class="dest-card-pro" data-category="hospedajes">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&auto=format&fit=crop&q=80" alt="Finca Magdalena" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-house-chimney-window"></i> Cabaña Rural</span>
-              <span class="dest-price-badge">$22 / Noche Familiar</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Volcán Maderas, Ometepe</div>
-              <h3 class="dest-name-title">Cabañas Comunitarias Finca Magdalena</h3>
-              <p class="dest-description-text">
-                Hospedaje cooperativo 100% campesino fundado en 1888. Producción de café orgánico certificado, senderos directos a petroglifos precolombinos y laguna del volcán.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (410 reseñas)</span>
-                <span class="dest-coop-name">Coop. Agropecuaria Magdalena</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 10. VILLA VISTA REDONDA (CASAS DE ALQUILER) -->
-          <div class="dest-card-pro" data-category="casas-alquiler">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80" alt="Villa Vista Redonda" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-key"></i> Casa de Alquiler</span>
-              <span class="dest-price-badge">$195 / Noche (6 pers.)</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Colinas de San Juan del Sur</div>
-              <h3 class="dest-name-title">Villa Vista Redonda & Infinity Pool</h3>
-              <p class="dest-description-text">
-                Residencia vacacional privada con piscina infinita al borde del acantilado, cocina completa equipada, terrazas abiertas al Pacífico, Wi-Fi satelital Starlink y seguridad 24/7.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (180 reseñas)</span>
-                <span class="dest-coop-name">Anfitrión Baqueano VIP</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 11. MUSEO CONVENTO SAN FRANCISCO (MUSEOS) -->
-          <div class="dest-card-pro" data-category="museos">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800&auto=format&fit=crop&q=80" alt="Museo Convento San Francisco" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-landmark"></i> Museo Histórico</span>
-              <span class="dest-price-badge">$5 / Entrada General</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Centro Histórico, Granada</div>
-              <h3 class="dest-name-title">Museo Convento San Francisco & Estatuaria Zapatera</h3>
-              <p class="dest-description-text">
-                El edificio más antiguo de Nicaragua (1529). Alberga la colosal colección de estatuaria lítica de la Isla Zapatera (ídolos zoomorfos y antropomorfos del 800-1200 d.C.).
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (340 reseñas)</span>
-                <span class="dest-coop-name">Instituto de Cultura</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 12. FORTALEZA EL CASTILLO (MUSEOS / RÍOS) -->
-          <div class="dest-card-pro" data-category="museos">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1572953109213-3be62398eb95?w=800&auto=format&fit=crop&q=80" alt="Fortaleza El Castillo" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-landmark"></i> Fortaleza 1675</span>
-              <span class="dest-price-badge">$4 / Entrada & Museo</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> El Castillo, Río San Juan</div>
-              <h3 class="dest-name-title">Fortaleza de la Inmaculada Concepción</h3>
-              <p class="dest-description-text">
-                Baluarte militar español construido para repeler piratas en el Raudal del Diablo. Museo de armas, celdas subterráneas y vistas imponentes del Río San Juan hacia Indio Maíz.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (290 reseñas)</span>
-                <span class="dest-coop-name">Patrimonio Río San Juan</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 13. ARRIBAS SUNSET LOUNGE (DISCOTECAS / NOCTURNA) -->
-          <div class="dest-card-pro" data-category="discotecas">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80" alt="Arribas Lounge" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-champagne-glasses"></i> Discoteca & Lounge</span>
-              <span class="dest-price-badge">Entrada Libre</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Malecón, San Juan del Sur</div>
-              <h3 class="dest-name-title">Arribas Sunset Beach Club & Lounge</h3>
-              <p class="dest-description-text">
-                Epicentro de la vida nocturna playera con DJs internacionales y bandas de reggae locales. Pistas de baile frente a la arena, coctelería con Flor de Caña y fogatas marinas.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.7 (520 reseñas)</span>
-                <span class="dest-coop-name">Música en Vivo SJDS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 14. CALLE LA CALZADA NOCTURNA (DISCOTECAS / NOCTURNA) -->
-          <div class="dest-card-pro" data-category="discotecas">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&auto=format&fit=crop&q=80" alt="Calle La Calzada Granada" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-champagne-glasses"></i> Bares & Fiesta</span>
-              <span class="dest-price-badge">Ambiente Bohemio</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial</div>
-              <h3 class="dest-name-title">Calle La Calzada Fiesta & Bares al Aire Libre</h3>
-              <p class="dest-description-text">
-                Paseo peatonal repleto de terrazas coloniales, marimbas en vivo, bares artesanales, bailarines folclóricos de Gigantonas y peñas trovadoras hasta la medianoche.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (820 reseñas)</span>
-                <span class="dest-coop-name">Gremios de Granada</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 15. COCINA DOÑA HAYDÉE (GASTRONOMÍA) -->
-          <div class="dest-card-pro" data-category="gastronomia">
-            <div class="dest-card-img-wrap">
-              <img src="assets/images/comida/nacatamal.jpg" alt="Gastronomía Tradicional" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-utensils"></i> Cocina Ancestral</span>
-              <span class="dest-price-badge">Platos desde $5</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Managua / Masaya</div>
-              <h3 class="dest-name-title">Restaurante Tradicional La Cocina de Doña Haydée</h3>
-              <p class="dest-description-text">
-                Templo del sabor nicaragüense con recetas centenarias: nacatamales de masa colada, baho cocido en hoja de chagüite, indio viejo criollo y tres leches tradicional.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (670 reseñas)</span>
-                <span class="dest-coop-name">Maestras Culinarias</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 16. PLAYA EL COCO & LA FLOR (PLAYAS) -->
-          <div class="dest-card-pro" data-category="playas">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&auto=format&fit=crop&q=80" alt="Playa El Coco" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Playa & Tortugas</span>
-              <span class="dest-price-badge">Entrada $8 Refugio</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Refugio La Flor, Rivas</div>
-              <h3 class="dest-name-title">Playa El Coco & Santuario de Tortugas La Flor</h3>
-              <p class="dest-description-text">
-                Uno de los 7 sitios del planeta con arribadas masivas de tortugas paslama (hasta 30,000 en una noche). Aguas tranquilas y arena dorada rodeada de bosque seco tropical.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (460 reseñas)</span>
-                <span class="dest-coop-name">Guardaparques La Flor</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 17. CORN ISLAND (ISLAS / BAHÍAS) -->
-          <div class="dest-card-pro" data-category="islas">
+          <!-- 6. CORN ISLAND (ISLAS) -->
+          <div class="dest-card-pro" data-category="islas" data-id="dest_corn_island">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/corn_island.jpg" alt="Corn Island" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_corn_island" data-initial-likes="520" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_corn_island" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Paraíso Caribeño</span>
               <span class="dest-price-badge">Desde $35 / Cabaña</span>
             </div>
@@ -537,6 +828,36 @@
               <p class="dest-description-text">
                 Joya caribeña con arrecifes de coral intactos, buceo con tiburones nodriza, playas de arena blanca como talco, rondón de mariscos fresco y cultura creole bilingüe.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red Turística: <strong>Coop. Isleña Creole Corn Island</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>South End & Otto Beach, Corn Island</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586903344">+505 8690-3344</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 1,300 – C$ 2,600</span></div>
+                <div class="price-usd">≈ $35.00 – $70.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586903344&text=Hello%20Corn%20Island%20Coop,%20I%20want%20to%20book%20from%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.1720" data-lng="-83.0580" data-name="Corn Island" data-id="dest_corn_island">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (910 reseñas)</span>
                 <span class="dest-coop-name">Coop. Turística Creole</span>
@@ -544,10 +865,14 @@
             </div>
           </div>
 
-          <!-- 18. SELVA NEGRA (SELVA) -->
-          <div class="dest-card-pro" data-category="selva">
+          <!-- 7. SELVA NEGRA (SELVA) -->
+          <div class="dest-card-pro" data-category="selva" data-id="dest_selva_negra">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/selva_negra.jpg" alt="Selva Negra Matagalpa" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_selva_negra" data-initial-likes="390" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_selva_negra" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-tree"></i> Bosque Nuboso</span>
               <span class="dest-price-badge">$45 / Cabaña Montaña</span>
             </div>
@@ -557,6 +882,36 @@
               <p class="dest-description-text">
                 Nebliselva virgen a 1,400 msnm con senderos de orquídeas, hábitat del Quetzal resplandeciente, cata de café ecológico y prácticas agroforestales de carbono neutral.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Comunidad Agroecológica Selva Negra</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Km 140 Carretera Matagalpa - Jinotega</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584332210">+505 8433-2210</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 1,600 – C$ 3,200</span></div>
+                <div class="price-usd">≈ $45.00 – $85.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584332210&text=Hola%20Selva%20Negra,%20deseo%20reservar%20caba%C3%B1a%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.0031" data-lng="-85.9125" data-name="Selva Negra" data-id="dest_selva_negra">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (780 reseñas)</span>
                 <span class="dest-coop-name">Comunidad Selva Negra</span>
@@ -564,39 +919,53 @@
             </div>
           </div>
 
-          <!-- 19. CASCADA LA LUNA (RÍOS / SELVA) -->
-          <div class="dest-card-pro" data-category="rios">
-            <div class="dest-card-img-wrap">
-              <img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada La Luna" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cascada Selvática</span>
-              <span class="dest-price-badge">$10 / Canopy & Entrada</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Jinotega, El Cuá</div>
-              <h3 class="dest-name-title">Cascada La Luna & Cañón del Café</h3>
-              <p class="dest-description-text">
-                Impresionante catarata oculta en la espesura del bosque de niebla jinotegano. Canopy sobre la caída de agua y senderos ecológicos comunitarios.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (310 reseñas)</span>
-                <span class="dest-coop-name">Asoc. Campesina El Cuá</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 20. LAGUNA DE APOYO (RÍOS / AGUAS) -->
-          <div class="dest-card-pro" data-category="rios">
+          <!-- 8. LAGUNA DE APOYO (RÍOS / AGUAS) -->
+          <div class="dest-card-pro" data-category="rios" data-id="dest_laguna_apoyo">
             <div class="dest-card-img-wrap">
               <img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_laguna_apoyo" data-initial-likes="410" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_laguna_apoyo" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cráter Volcánico</span>
               <span class="dest-price-badge">$12 / Kayak & Pase</span>
             </div>
             <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Granada</div>
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Catarina</div>
               <h3 class="dest-name-title">Reserva Natural Laguna de Apoyo</h3>
               <p class="dest-description-text">
                 Cráter volcánico colapsado con aguas termales minerales de transparencia turquesa. Kayak ecológico, natación protegida y avistamiento del tucán verde.
               </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Posada Anfitriona: <strong>Posada Ecológica La Abuela</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado Suroriente de la Laguna, Entrada por Catarina</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588665544">+505 8866-5544</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real: <span class="price-cordobas">C$ 440 – C$ 1,200</span></div>
+                <div class="price-usd">≈ $12.00 – $32.00 USD</div>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588665544&text=Hola%20Posada%20La%20Abuela,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9200" data-lng="-86.0300" data-name="Laguna de Apoyo" data-id="dest_laguna_apoyo">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (750 reseñas)</span>
                 <span class="dest-coop-name">Custodios del Cráter</span>
@@ -604,85 +973,7 @@
             </div>
           </div>
 
-          <!-- 21. VOLCÁN MASAYA (VOLCANES) -->
-          <div class="dest-card-pro" data-category="volcanes">
-            <div class="dest-card-img-wrap">
-              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Lago de Lava</span>
-              <span class="dest-price-badge">$10 / Tour Nocturno</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Nindirí</div>
-              <h3 class="dest-name-title">Parque Nacional Volcán Masaya (Popogatepe)</h3>
-              <p class="dest-description-text">
-                El cráter Santiago y su lago de lava incandescente activo. Cruz de Bobadilla, túneles de lava fosilizada donde anidan murciélagos y chocoyos resistentes al gas.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (980 reseñas)</span>
-                <span class="dest-coop-name">Comunidad de Nindirí</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 22. POCO A POCO HOSTEL (HOSTALES) -->
-          <div class="dest-card-pro" data-category="hostales">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&auto=format&fit=crop&q=80" alt="Poco a Poco Hostel" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-bed"></i> Hostal Colonial</span>
-              <span class="dest-price-badge">Desde $14 / Cama</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Centro Histórico, León</div>
-              <h3 class="dest-name-title">Poco a Poco Garden Hostel & Pool</h3>
-              <p class="dest-description-text">
-                Casona colonial leonesa con jardín tropical, piscina refrescante, clases de salsa, cocina comunitaria y tours diarios al Cerro Negro y Las Peñitas.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (420 reseñas)</span>
-                <span class="dest-coop-name">Red Hostales de León</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 23. POSADA RURAL SAN RAMÓN (HOSPEDAJES) -->
-          <div class="dest-card-pro" data-category="hospedajes">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&auto=format&fit=crop&q=80" alt="Posada Rural San Ramón" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-house-chimney-window"></i> Hospedaje Campesino</span>
-              <span class="dest-price-badge">$18 / Noche con Desayuno</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
-              <h3 class="dest-name-title">Posada Ecológica y Cafetalera San Ramón</h3>
-              <p class="dest-description-text">
-                Cabañas de madera y barro en fincas de mujeres productoras de café. Desayuno típico campesino con cuajada fresca, tortillas recién hechas y caminatas por cascadas.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (310 reseñas)</span>
-                <span class="dest-coop-name">Coop. Mujeres de San Ramón</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 24. CASA SEÑORIAL CONVENTO (CASAS DE ALQUILER) -->
-          <div class="dest-card-pro" data-category="casas-alquiler">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80" alt="Casa Colonial Granada" class="dest-card-img" loading="lazy">
-              <span class="dest-badge-corner"><i class="fa-solid fa-key"></i> Casona Colonial</span>
-              <span class="dest-price-badge">$140 / Noche Completa</span>
-            </div>
-            <div class="dest-body-pro">
-              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Barrio San Francisco, Granada</div>
-              <h3 class="dest-name-title">Casa Señorial Colonial del Convento</h3>
-              <p class="dest-description-text">
-                Casona histórica de techos altos de cedro real, piscina interior privada, patio colonial con orquídeas, 3 habitaciones con aire acondicionado y personal de servicio.
-              </p>
-              <div class="dest-footer-strip">
-                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (140 reseñas)</span>
-                <span class="dest-coop-name">Hospedajes Históricos</span>
-              </div>
-            </div>
-          </div>
+        </div>
 
         </div>
 
@@ -987,10 +1278,12 @@
 
   <!-- Scripts Modulares Baqueano -->
   <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="js/baqueano-map.js"></script>
   <script src="js/calculator.js"></script>
   <script src="js/ai-assistant.js"></script>
+  <script src="js/destinos-gastronomia.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

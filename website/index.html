@@ -143,6 +143,7 @@
 
   <!-- Estilos Maestros Oficiales (Modular) -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 </head>
 
 <body>
@@ -188,8 +189,16 @@
   <main class="page-wrapper" style="padding-top: 5rem;">
 
     <!-- HERO SECTION -->
-    <section class="hero-section-pro">
-      <div class="container hero-grid-2col">
+    <section class="hero-section-pro" style="position: relative; overflow: hidden;">
+      <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/cerro_negro.jpg">
+        <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4" type="video/mp4">
+      </video>
+      <div class="video-hero-gradient"></div>
+      <div class="video-hero-scanlines"></div>
+      <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video de fondo" title="Alternar video">
+        <i class="fa-solid fa-pause"></i>
+      </button>
+      <div class="container hero-grid-2col" style="position: relative; z-index: 4;">
         <!-- Columna Izquierda: Texto y CTA -->
         <div class="hero-content-col">
           <div class="hero-badge-pill">
@@ -839,6 +848,7 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="app.js"></script>
 </body>

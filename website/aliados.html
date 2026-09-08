@@ -38,6 +38,7 @@
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 </head>
 <body>
 
@@ -52,8 +53,7 @@
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">Inicio</a>
+      <div class="nav-links-center" id="navLinksCenter">
         <a href="destinos.html">Destinos</a>
         <a href="historia.html">Historia</a>
         <a href="ambiental.html">Ambiental</a>
@@ -77,20 +77,30 @@
     </div>
   </nav>
 
+  <!-- VIDEO HERO CINEMATOGRÁFICO DE COOPERATIVAS ALIADAS -->
+  <div class="video-hero-wrapper">
+    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/finca_magdalena.jpg">
+      <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/e2815183-b78f-4aa7-ae49-166fefbce78d/33924376.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-gradient"></div>
+    <div class="video-hero-scanlines"></div>
+    <div class="video-hero-content">
+      <div class="video-hero-badge" style="border-color: rgba(246, 94, 1, 0.4); color: var(--terracotta-light);">
+        <i class="fa-solid fa-handshake-angle"></i> Economía Social Comunitaria
+      </div>
+      <h1 class="video-hero-title">Cooperativas Campesinas & Alojamientos Aliados</h1>
+      <p class="video-hero-subtitle">
+        Pasa el cursor o toca cada tarjeta para girarla en 3D (180°) y acceder al contacto directo
+        del coordinador local por WhatsApp o llamada. Cero comisiones a plataformas transnacionales.
+      </p>
+    </div>
+    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
+  </div>
+
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper">
     <section class="allies-section-pro">
       <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill" style="background: rgba(246,94,1,0.15); border-color: rgba(246,94,1,0.4); color: var(--terracotta-light);">
-            <i class="fa-solid fa-handshake-angle"></i> Economía Social Comunitaria
-          </div>
-          <h1 class="section-headline">Cooperativas Campesinas & Alojamientos Aliados</h1>
-          <p class="section-subtext">
-            Pasa el cursor o toca cada tarjeta para girarla en 3D (180°) y acceder al contacto directo
-            del coordinador local por WhatsApp o llamada. Cero comisiones a plataformas transnacionales.
-          </p>
-        </div>
 
         <!-- GRID 3D FLIP CARDS -->
         <div class="allies-3d-grid">
@@ -416,6 +426,7 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
   <script src="app.js"></script>
   <script>
     // Soporte táctil para girar tarjetas en móviles al tocar
