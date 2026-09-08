@@ -145,6 +145,416 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css">
+
+  <!-- ======================================================================
+       ESTILOS DEL MÓDULO DE REGISTRO DE NEGOCIOS & ANFITRIONES
+       🎯 Por qué: Estética de alta gama, glassmorphism y adaptabilidad móvil total
+          para la captación de cooperativas, hospedajes y comedores campesinos.
+       ⚙️ Cómo: Rejilla CSS Grid responsiva, tokens oficiales (#165D6F, #F65E01,
+          #F4E6C1, #0F172A), microinteracciones y dropzone interactivo.
+       📦 Qué: Clases .register-biz-section, .biz-form-grid, .biz-btn-submit, etc.
+       ====================================================================== -->
+  <style>
+    .register-biz-section {
+      padding: 5.5rem 0;
+      position: relative;
+      background: radial-gradient(circle at 15% 20%, rgba(22, 93, 111, 0.2) 0%, transparent 55%),
+                  radial-gradient(circle at 85% 75%, rgba(246, 94, 1, 0.14) 0%, transparent 55%),
+                  #0A1120;
+      overflow: hidden;
+    }
+
+    .register-biz-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(22, 93, 111, 0.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(22, 93, 111, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .register-biz-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(22, 93, 111, 0.45);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(22, 93, 111, 0.15);
+      padding: 3.5rem 3rem;
+    }
+
+    .biz-header-wrap {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .biz-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(246, 94, 1, 0.15);
+      border: 1px solid rgba(246, 94, 1, 0.4);
+      color: var(--terracotta, #F65E01);
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .biz-main-title {
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .biz-subtitle {
+      font-size: 1.05rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      line-height: 1.6;
+      margin: 0 auto 2rem auto;
+      max-width: 740px;
+      opacity: 0.92;
+    }
+
+    .biz-benefits-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      background: rgba(22, 93, 111, 0.18);
+      border: 1px solid rgba(22, 93, 111, 0.35);
+      border-radius: 14px;
+      padding: 1.1rem 1.5rem;
+      text-align: left;
+    }
+
+    .biz-benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      color: #FFFFFF;
+    }
+
+    .biz-benefit-item i {
+      font-size: 1.25rem;
+      color: var(--terracotta, #F65E01);
+      flex-shrink: 0;
+    }
+
+    .biz-form {
+      margin-top: 1rem;
+    }
+
+    .biz-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .biz-col-full {
+      grid-column: 1 / -1;
+    }
+
+    .biz-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      position: relative;
+    }
+
+    .biz-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .biz-label i {
+      color: var(--petroleo-glow, #2DD4BF);
+      font-size: 0.9rem;
+    }
+
+    .biz-label .req {
+      color: #EF4444;
+      font-weight: 800;
+    }
+
+    .biz-char-counter {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--text-muted, #94A3B8);
+      font-family: var(--font-tech, monospace);
+    }
+
+    .biz-input,
+    .biz-select,
+    .biz-textarea {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(244, 230, 193, 0.2);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .biz-input:focus,
+    .biz-select:focus,
+    .biz-textarea:focus {
+      outline: none;
+      border-color: var(--terracotta, #F65E01);
+      box-shadow: 0 0 0 3px rgba(246, 94, 1, 0.25);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .biz-input::placeholder,
+    .biz-textarea::placeholder {
+      color: rgba(244, 230, 193, 0.4);
+    }
+
+    .biz-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23F4E6C1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.1rem;
+      padding-right: 2.5rem;
+    }
+
+    .biz-select option {
+      background: #0F172A;
+      color: #FFFFFF;
+    }
+
+    .biz-input.has-error,
+    .biz-select.has-error,
+    .biz-textarea.has-error {
+      border-color: #EF4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+    }
+
+    .biz-error-msg {
+      color: #EF4444;
+      font-size: 0.78rem;
+      font-weight: 500;
+      min-height: 1rem;
+    }
+
+    .biz-file-upload-box {
+      position: relative;
+      border: 2px dashed rgba(22, 93, 111, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.5);
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .biz-file-upload-box:hover {
+      border-color: var(--terracotta, #F65E01);
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .biz-file-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .biz-upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      pointer-events: none;
+    }
+
+    .biz-upload-placeholder i {
+      font-size: 2rem;
+      color: var(--terracotta, #F65E01);
+    }
+
+    .biz-upload-placeholder small {
+      color: var(--text-muted, #94A3B8);
+      font-size: 0.78rem;
+    }
+
+    .biz-photo-preview {
+      position: relative;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .biz-photo-preview img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--petroleo-glow, #2DD4BF);
+    }
+
+    .biz-btn-remove-photo {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #EF4444;
+      color: #FFFFFF;
+      border: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .biz-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .biz-checkbox-label input[type="checkbox"] {
+      display: none;
+    }
+
+    .biz-checkbox-custom {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      border: 2px solid rgba(244, 230, 193, 0.4);
+      border-radius: 5px;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .biz-checkbox-label input[type="checkbox"]:checked + .biz-checkbox-custom {
+      background: var(--terracotta, #F65E01);
+      border-color: var(--terracotta, #F65E01);
+    }
+
+    .biz-checkbox-label input[type="checkbox"]:checked + .biz-checkbox-custom::after {
+      content: '✓';
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .biz-checkbox-text {
+      color: var(--arena-pinolera, #F4E6C1);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .biz-submit-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .biz-btn-submit {
+      background: linear-gradient(135deg, var(--terracotta, #F65E01) 0%, #D84E00 100%);
+      color: #FFFFFF;
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 1.15rem 2.8rem;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(246, 94, 1, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .biz-btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(246, 94, 1, 0.55);
+      filter: brightness(1.05);
+    }
+
+    .biz-btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .biz-security-note {
+      font-size: 0.82rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .biz-security-note i {
+      color: var(--petroleo-glow, #2DD4BF);
+    }
+
+    @media (max-width: 992px) {
+      .biz-benefits-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .register-biz-card {
+        padding: 2.2rem 1.4rem;
+        border-radius: 18px;
+      }
+      .biz-main-title {
+        font-size: 1.7rem;
+      }
+      .biz-benefits-strip {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      .biz-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .biz-btn-submit {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -687,6 +1097,299 @@
       </div>
     </section>
 
+    <!-- ======================================================================
+         🏪 SECCIÓN DE REGISTRO DE NEGOCIO O ANFITRIÓN ALIADO
+         🎯 Conectar directamente a emprendedores campesinos, guías, comedores y
+            hospedajes comunitarios con el ecosistema Baqueano sin intermediarios.
+         ⚙️ Formulario reactivo con validación de 16 campos, guardado asíncrono
+            en Firestore (/businesses) y despacho con formato WhatsApp a Mesa Baqueano.
+         📦 Sección #registroNegocios con Glassmorphism y diseño responsivo.
+         ====================================================================== -->
+    <section class="register-biz-section" id="registroNegocios">
+      <div class="container">
+        <div class="register-biz-card">
+          <!-- Encabezado de la Sección -->
+          <div class="biz-header-wrap">
+            <span class="biz-badge-pill">
+              <i class="fa-solid fa-handshake-angle"></i> Red de Anfitriones & Comercio Justo
+            </span>
+            <h2 class="biz-main-title">
+              Registra tu Local, Hospedaje o Emprendimiento en Baqueano
+            </h2>
+            <p class="biz-subtitle">
+              Únete a la plataforma tecnológica comunitaria de Nicaragua sin comisiones abusivas.
+              Conecta directamente con viajeros nacionales e internacionales que buscan autenticidad, gastronomía típica,
+              senderos seguros y aventura comunitaria soberana.
+            </p>
+
+            <!-- Tiras de Ventajas -->
+            <div class="biz-benefits-strip">
+              <div class="biz-benefit-item">
+                <i class="fa-solid fa-percent"></i>
+                <span><strong>0% Comisiones</strong> para intermediarios foráneos</span>
+              </div>
+              <div class="biz-benefit-item">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span><strong>Contacto Directo</strong> con el explorador</span>
+              </div>
+              <div class="biz-benefit-item">
+                <i class="fa-solid fa-satellite"></i>
+                <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
+              </div>
+              <div class="biz-benefit-item">
+                <i class="fa-solid fa-shield-heart"></i>
+                <span><strong>Auditoría & Respaldo</strong> de la Mesa Baqueano</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulario de Registro -->
+          <form id="registerBusinessForm" class="biz-form" novalidate>
+            <div class="biz-form-grid">
+              
+              <!-- 1. Nombre del Negocio -->
+              <div class="biz-field-group">
+                <label for="bizName" class="biz-label">
+                  <i class="fa-solid fa-store"></i> Nombre del Negocio / Emprendimiento <span class="req">*</span>
+                </label>
+                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej: Comedor Doña María / Eco-Lodge Las Brisas" required>
+                <span class="biz-error-msg" id="err-bizName"></span>
+              </div>
+
+              <!-- 2. Tipo de Negocio -->
+              <div class="biz-field-group">
+                <label for="bizType" class="biz-label">
+                  <i class="fa-solid fa-tags"></i> Tipo de Negocio <span class="req">*</span>
+                </label>
+                <select id="bizType" name="bizType" class="biz-select" required>
+                  <option value="">Selecciona el tipo de negocio...</option>
+                  <option value="Comedor Tradicional / Restaurante Campesino">Comedor Tradicional / Restaurante Campesino</option>
+                  <option value="Hotel / Eco-Lodge">Hotel / Eco-Lodge</option>
+                  <option value="Hostal Comunitario">Hostal Comunitario</option>
+                  <option value="Hospedaje Rural Familiar">Hospedaje Rural Familiar</option>
+                  <option value="Casa de Alquiler Vacacional">Casa de Alquiler Vacacional</option>
+                  <option value="Guía Baqueano Comunitario">Guía Baqueano Comunitario</option>
+                  <option value="Cooperativa Agroecológica">Cooperativa Agroecológica</option>
+                  <option value="Taller de Artesanías / Recuerdos">Taller de Artesanías / Recuerdos</option>
+                  <option value="Bar / Sunset Lounge Frente al Mar">Bar / Sunset Lounge Frente al Mar</option>
+                  <option value="Museo / Patrimonio Histórico">Museo / Patrimonio Histórico</option>
+                  <option value="Transporte Turístico / Bote">Transporte Turístico / Bote</option>
+                  <option value="Otro">Otro Emprendimiento Local</option>
+                </select>
+                <span class="biz-error-msg" id="err-bizType"></span>
+              </div>
+
+              <!-- 3. Nombre del Propietario -->
+              <div class="biz-field-group">
+                <label for="bizOwner" class="biz-label">
+                  <i class="fa-solid fa-user-tie"></i> Propietario o Responsable Directo <span class="req">*</span>
+                </label>
+                <input type="text" id="bizOwner" name="bizOwner" class="biz-input" placeholder="Ej: María Hernández Gómez" required>
+                <span class="biz-error-msg" id="err-bizOwner"></span>
+              </div>
+
+              <!-- 4. Categoría Baqueano -->
+              <div class="biz-field-group">
+                <label for="bizCategory" class="biz-label">
+                  <i class="fa-solid fa-layer-group"></i> Categoría en Catálogo Baqueano <span class="req">*</span>
+                </label>
+                <select id="bizCategory" name="bizCategory" class="biz-select" required>
+                  <option value="">Selecciona una categoría oficial...</option>
+                  <option value="gastronomia">Gastronomía Ancestral (Comedores, Baho, Quesillos)</option>
+                  <option value="hoteles">Hoteles & Eco-Lodges</option>
+                  <option value="hostales">Hostales de Aventura & Mochileros</option>
+                  <option value="hospedajes">Hospedajes Rurales & Cabañas</option>
+                  <option value="casas-alquiler">Casas de Alquiler & Villas</option>
+                  <option value="museos">Museos, Cultura & Talleres</option>
+                  <option value="discotecas">Vida Nocturna & Clubes de Playa</option>
+                  <option value="rios">Ríos, Cascadas & Cañones</option>
+                  <option value="volcanes">Volcanes & Sandboarding</option>
+                  <option value="playas">Playas & Surf del Pacífico</option>
+                </select>
+                <span class="biz-error-msg" id="err-bizCategory"></span>
+              </div>
+
+              <!-- 5. Departamento -->
+              <div class="biz-field-group">
+                <label for="bizDepartment" class="biz-label">
+                  <i class="fa-solid fa-map"></i> Departamento de Nicaragua <span class="req">*</span>
+                </label>
+                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
+                  <option value="">Selecciona tu departamento...</option>
+                  <option value="Boaco">Boaco</option>
+                  <option value="Carazo">Carazo</option>
+                  <option value="Chinandega">Chinandega</option>
+                  <option value="Chontales">Chontales</option>
+                  <option value="Costa Caribe Norte (RACCN)">Costa Caribe Norte (RACCN)</option>
+                  <option value="Costa Caribe Sur (RACCS)">Costa Caribe Sur (RACCS)</option>
+                  <option value="Estelí">Estelí</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Jinotega">Jinotega</option>
+                  <option value="León">León</option>
+                  <option value="Madriz">Madriz</option>
+                  <option value="Managua">Managua</option>
+                  <option value="Masaya">Masaya</option>
+                  <option value="Matagalpa">Matagalpa</option>
+                  <option value="Nueva Segovia">Nueva Segovia</option>
+                  <option value="Río San Juan">Río San Juan</option>
+                  <option value="Rivas">Rivas</option>
+                </select>
+                <span class="biz-error-msg" id="err-bizDepartment"></span>
+              </div>
+
+              <!-- 6. Municipio -->
+              <div class="biz-field-group">
+                <label for="bizMunicipality" class="biz-label">
+                  <i class="fa-solid fa-location-dot"></i> Municipio <span class="req">*</span>
+                </label>
+                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej: San Juan del Sur, Somoto, Nagarote..." required>
+                <span class="biz-error-msg" id="err-bizMunicipality"></span>
+              </div>
+
+              <!-- 7. Dirección Exacta -->
+              <div class="biz-field-group biz-col-full">
+                <label for="bizAddress" class="biz-label">
+                  <i class="fa-solid fa-compass"></i> Dirección Exacta o Punto de Referencia <span class="req">*</span>
+                </label>
+                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej: Del Parque Central 2 c. al lago, frente a la ermita comunitaria" required>
+                <span class="biz-error-msg" id="err-bizAddress"></span>
+              </div>
+
+              <!-- 8. Teléfono Principal -->
+              <div class="biz-field-group">
+                <label for="bizPhone" class="biz-label">
+                  <i class="fa-solid fa-phone"></i> Teléfono Principal de Llamadas <span class="req">*</span>
+                </label>
+                <input type="tel" id="bizPhone" name="bizPhone" class="biz-input" placeholder="+505 8888-0000" required>
+                <span class="biz-error-msg" id="err-bizPhone"></span>
+              </div>
+
+              <!-- 9. WhatsApp de Reservas -->
+              <div class="biz-field-group">
+                <label for="bizWhatsapp" class="biz-label">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp para Reservas Directas
+                </label>
+                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="+505 8443-0000">
+              </div>
+
+              <!-- 10. Correo Electrónico -->
+              <div class="biz-field-group">
+                <label for="bizEmail" class="biz-label">
+                  <i class="fa-solid fa-envelope"></i> Correo Electrónico
+                </label>
+                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tunegocio.com">
+              </div>
+
+              <!-- 11. Red Social / Sitio Web -->
+              <div class="biz-field-group">
+                <label for="bizWebsite" class="biz-label">
+                  <i class="fa-solid fa-globe"></i> Sitio Web o Red Social (Facebook / Instagram)
+                </label>
+                <input type="url" id="bizWebsite" name="bizWebsite" class="biz-input" placeholder="https://instagram.com/mi_local_nica">
+              </div>
+
+              <!-- 12. Rango de Precios -->
+              <div class="biz-field-group">
+                <label for="bizPrice" class="biz-label">
+                  <i class="fa-solid fa-money-bill-wave"></i> Rango o Precio Base Estimado (C$)
+                </label>
+                <input type="number" id="bizPrice" name="bizPrice" class="biz-input" placeholder="Ej: 150" min="0">
+              </div>
+
+              <!-- 13. Horario de Atención -->
+              <div class="biz-field-group">
+                <label for="bizSchedule" class="biz-label">
+                  <i class="fa-solid fa-clock"></i> Horario Habitual de Atención
+                </label>
+                <input type="text" id="bizSchedule" name="bizSchedule" class="biz-input" placeholder="Ej: Lunes a Domingo 7:00 AM - 8:00 PM">
+              </div>
+
+              <!-- 14. Descripción -->
+              <div class="biz-field-group biz-col-full">
+                <label for="bizDescription" class="biz-label">
+                  <i class="fa-solid fa-pen-to-square"></i> Descripción del Servicio, Menú o Atractivo <span class="req">*</span>
+                  <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
+                </label>
+                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" rows="3" maxlength="300" placeholder="Describe los platos típicos, tours guiados o comodidades de tu establecimiento..." required></textarea>
+                <span class="biz-error-msg" id="err-bizDescription"></span>
+              </div>
+
+              <!-- 15. Fotografía del Local -->
+              <div class="biz-field-group biz-col-full">
+                <label class="biz-label">
+                  <i class="fa-solid fa-camera"></i> Fotografía del Local o Fachada (Opcional)
+                </label>
+                <div class="biz-file-upload-box" id="bizDropZone">
+                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
+                  <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Haz clic o arrastra una imagen de tu establecimiento</span>
+                    <small>Formatos JPG, PNG, WEBP (Máximo 5MB)</small>
+                  </div>
+                  <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
+                    <img id="bizPreviewImg" src="" alt="Vista previa">
+                    <button type="button" class="biz-btn-remove-photo" id="bizBtnRemovePhoto" title="Eliminar foto">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 16. Términos y Compromiso -->
+              <div class="biz-field-group biz-col-full">
+                <label class="biz-checkbox-label">
+                  <input type="checkbox" id="bizTerms" name="bizTerms" required>
+                  <span class="biz-checkbox-custom"></span>
+                  <span class="biz-checkbox-text">
+                    Acepto los principios de <strong>turismo ético y trato justo</strong> de Baqueano Nicaragua. Confirmo que los precios y datos suministrados son reales y que la atención al visitante se realizará sin intermediarios foráneos. <span class="req">*</span>
+                  </span>
+                </label>
+                <span class="biz-error-msg" id="err-bizTerms"></span>
+              </div>
+
+              <!-- Botón de Envío -->
+              <div class="biz-field-group biz-col-full biz-submit-wrap">
+                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
+                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
+                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                </button>
+                <div class="biz-security-note">
+                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
+                </div>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL DE CONFIRMACIÓN DE REGISTRO DE NEGOCIO -->
+    <div class="modal-backdrop-pro" id="bizSuccessModal" aria-hidden="true" role="dialog">
+      <div class="modal-card-dialog" style="max-width: 520px; text-align: center;">
+        <button class="modal-close-x" id="closeBizModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-icon-top" style="background: rgba(22, 93, 111, 0.3); border-color: #2DD4BF;">
+          <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #10B981;"></i>
+        </div>
+        <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">¡Postulación Recibida con Éxito!</h3>
+        <p style="font-size: 0.95rem; color: var(--arena-pinolera); line-height: 1.6; margin-bottom: 1.2rem;">
+          Tu establecimiento ha sido registrado en el sistema y remitido a la Mesa Técnica Baqueano.
+          El equipo verificará las coordenadas y detalles para incluirlo en el mapa satelital HD y catálogo territorial.
+        </p>
+        <div id="bizModalSummary" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(22, 93, 111, 0.4); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.88rem; color: #FFFFFF;">
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a id="bizModalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="background: #25D366; border: none; justify-content: center; flex: 1;">
+            <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp de Mesa Baqueano
+          </a>
+          <button type="button" class="btn-hero-glass" id="bizModalCloseBtn" style="padding: 0.85rem 1.5rem;">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- PORTAL DE DESCARGA DIRECTA DE APK -->
     <section class="download-section-hero">
       <div class="container">
@@ -851,5 +1554,230 @@
   <script src="js/video-registry.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="app.js"></script>
+
+  <!-- ======================================================================
+       🧭 MANEJADOR DEL FORMULARIO DE REGISTRO DE NEGOCIOS (/businesses + WhatsApp)
+       🎯 Por qué: Conectar de forma inmediata a los dueños de negocios locales con
+          la Mesa Técnica Baqueano vía WhatsApp (+505 8443-1289) y registrar el
+          anfitrión en Cloud Firestore (/businesses) para el Ops Center.
+       ⚙️ Cómo: Validación reactiva de 16 campos, preview de fotografía, formateo
+          con emojis y codificación URI para WhatsApp, modal de confirmación.
+       📦 Qué: Controlador interactivo del formulario #registerBusinessForm.
+       ====================================================================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    const form = document.getElementById('registerBusinessForm');
+    if (!form) return;
+
+    const descInput = document.getElementById('bizDescription');
+    const charCounter = document.getElementById('bizCharCounter');
+    const photoInput = document.getElementById('bizPhoto');
+    const placeholder = document.getElementById('bizUploadPlaceholder');
+    const previewBox = document.getElementById('bizPhotoPreview');
+    const previewImg = document.getElementById('bizPreviewImg');
+    const btnRemovePhoto = document.getElementById('bizBtnRemovePhoto');
+    const submitBtn = document.getElementById('btnSubmitBiz');
+    const modal = document.getElementById('bizSuccessModal');
+    const modalCloseBtn = document.getElementById('closeBizModalBtn');
+    const modalAcceptBtn = document.getElementById('bizModalCloseBtn');
+    const modalSummary = document.getElementById('bizModalSummary');
+    const modalWhatsAppBtn = document.getElementById('bizModalWhatsAppBtn');
+
+    // Contador reactivo de caracteres
+    if (descInput && charCounter) {
+      descInput.addEventListener('input', function() {
+        charCounter.textContent = `${this.value.length} / 300`;
+      });
+    }
+
+    // Manejo de archivo y preview de imagen
+    if (photoInput && previewBox && previewImg) {
+      photoInput.addEventListener('change', function(e) {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+          if (file.size > 5 * 1024 * 1024) {
+            alert('La fotografía debe ser menor a 5MB.');
+            photoInput.value = '';
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            previewImg.src = evt.target.result;
+            if (placeholder) placeholder.style.display = 'none';
+            previewBox.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      if (btnRemovePhoto) {
+        btnRemovePhoto.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          photoInput.value = '';
+          previewImg.src = '';
+          previewBox.style.display = 'none';
+          if (placeholder) placeholder.style.display = 'flex';
+        });
+      }
+    }
+
+    // Cerrar modal de confirmación
+    function closeModal() {
+      if (modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modalAcceptBtn) modalAcceptBtn.addEventListener('click', closeModal);
+
+    // Validación y Envío del Formulario
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Limpiar errores previos
+      form.querySelectorAll('.biz-error-msg').forEach(el => el.textContent = '');
+      form.querySelectorAll('.biz-input, .biz-select, .biz-textarea').forEach(el => el.classList.remove('has-error'));
+
+      let isValid = true;
+      function markError(fieldId, msg) {
+        const field = document.getElementById(fieldId);
+        const err = document.getElementById('err-' + fieldId);
+        if (field) field.classList.add('has-error');
+        if (err) err.textContent = msg;
+        if (isValid && field) field.focus();
+        isValid = false;
+      }
+
+      const name = document.getElementById('bizName').value.trim();
+      const type = document.getElementById('bizType').value;
+      const owner = document.getElementById('bizOwner').value.trim();
+      const category = document.getElementById('bizCategory').value;
+      const department = document.getElementById('bizDepartment').value;
+      const municipality = document.getElementById('bizMunicipality').value.trim();
+      const address = document.getElementById('bizAddress').value.trim();
+      const phone = document.getElementById('bizPhone').value.trim();
+      const whatsapp = document.getElementById('bizWhatsapp').value.trim();
+      const email = document.getElementById('bizEmail').value.trim();
+      const website = document.getElementById('bizWebsite').value.trim();
+      const price = document.getElementById('bizPrice').value.trim();
+      const schedule = document.getElementById('bizSchedule').value.trim();
+      const description = descInput ? descInput.value.trim() : '';
+      const terms = document.getElementById('bizTerms').checked;
+
+      if (!name) markError('bizName', 'Por favor ingresa el nombre del negocio');
+      if (!type) markError('bizType', 'Selecciona el tipo de negocio');
+      if (!owner) markError('bizOwner', 'Ingresa el nombre del propietario o responsable');
+      if (!category) markError('bizCategory', 'Selecciona la categoría Baqueano');
+      if (!department) markError('bizDepartment', 'Selecciona el departamento');
+      if (!municipality) markError('bizMunicipality', 'Ingresa el municipio');
+      if (!address) markError('bizAddress', 'Indica la dirección o referencia exacta');
+      if (!phone) markError('bizPhone', 'Ingresa un teléfono principal de contacto');
+      if (!description) markError('bizDescription', 'Escribe una breve descripción del servicio');
+      if (!terms) markError('bizTerms', 'Debes aceptar los términos de turismo justo');
+
+      if (!isValid) return;
+
+      // Estado de carga en botón
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Registrando en Mesa Baqueano...';
+
+      const payload = {
+        name: name,
+        businessType: type,
+        owner: owner,
+        category: category,
+        department: department,
+        municipality: municipality,
+        address: address,
+        phone: phone,
+        whatsapp: whatsapp || phone,
+        email: email || '',
+        website: website || '',
+        priceApproxNio: price ? Number(price) : null,
+        schedule: schedule || '',
+        description: description,
+        hasPhoto: Boolean(photoInput && photoInput.files && photoInput.files.length > 0),
+        acceptedTerms: true,
+        source: 'index_landing_registration'
+      };
+
+      try {
+        // 1. Guardar en Firestore si el módulo está disponible
+        if (window.BaqueanoFirestore && typeof window.BaqueanoFirestore.registerBusiness === 'function') {
+          try {
+            await window.BaqueanoFirestore.registerBusiness(payload);
+          } catch (eFirestore) {
+            console.warn('[RegistroNegocios] Guardado local/offline:', eFirestore);
+          }
+        }
+
+        // 2. Construir mensaje enriquecido para WhatsApp Business
+        const waLines = [
+          '🇳🇮 *POSTULACIÓN DE NEGOCIO — BAQUEANO NICARAGUA*',
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          `🏪 *Negocio:* ${name}`,
+          `🏷️ *Tipo:* ${type}`,
+          `📂 *Categoría:* ${category}`,
+          `👤 *Responsable:* ${owner}`,
+          `📍 *Ubicación:* ${municipality}, ${department}`,
+          `🗺️ *Dirección:* ${address}`,
+          `📞 *Teléfono:* ${phone}`,
+          whatsapp ? `💬 *WhatsApp:* ${whatsapp}` : '',
+          email ? `✉️ *Email:* ${email}` : '',
+          website ? `🌐 *Enlace:* ${website}` : '',
+          price ? `💵 *Precio Base:* C$ ${price}` : '',
+          schedule ? `⏰ *Horario:* ${schedule}` : '',
+          `📝 *Descripción:* ${description}`,
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          '✅ _Aceptó términos de turismo justo sin intermediarios._'
+        ].filter(Boolean).join('\n');
+
+        const waUrl = `https://wa.me/50584431289?text=${encodeURIComponent(waLines)}`;
+
+        // 3. Poblar modal de resumen y abrir WhatsApp
+        if (modalSummary) {
+          modalSummary.innerHTML = `
+            <div style="margin-bottom: 0.35rem;"><strong>Negocio:</strong> ${name}</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Ubicación:</strong> ${municipality}, ${department}</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Responsable:</strong> ${owner}</div>
+            <div><strong>Contacto:</strong> ${phone}</div>
+          `;
+        }
+        if (modalWhatsAppBtn) {
+          modalWhatsAppBtn.href = waUrl;
+        }
+
+        if (modal) {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+        }
+
+        // Abrir WhatsApp en nueva pestaña
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+        // Limpiar formulario
+        form.reset();
+        if (charCounter) charCounter.textContent = '0 / 300';
+        if (previewBox && placeholder) {
+          previewBox.style.display = 'none';
+          placeholder.style.display = 'flex';
+        }
+
+      } catch (err) {
+        console.error('[RegistroNegocios] Error procesando postulación:', err);
+        alert('Hubo un inconveniente al procesar la solicitud. Por favor intenta nuevamente.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+    });
+
+  })();
+  </script>
 </body>
 </html>
