@@ -46,6 +46,7 @@
 
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/videos.css">
 
   <style>
     /* =====================================================================
@@ -751,8 +752,16 @@
   <main class="page-wrapper">
 
     <!-- HERO SECTION DEL PORTAL DE ANFITRIONES -->
-    <section class="host-hero-section">
-      <div class="container">
+    <section class="host-hero-section" style="position: relative; overflow: hidden;">
+      <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/aliados/posada_ecologica_la_abuela.jpg">
+        <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/14f24efb-1cf2-4428-bafe-a1f79ae6dc5e/24519965.mp4" type="video/mp4">
+      </video>
+      <div class="video-hero-gradient"></div>
+      <div class="video-hero-scanlines"></div>
+      <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video de fondo" title="Alternar video">
+        <i class="fa-solid fa-pause"></i>
+      </button>
+      <div class="container" style="position: relative; z-index: 4;">
         <div class="host-hero-inner">
           <div>
             <div class="host-hero-tag">
@@ -1355,6 +1364,7 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="js/business-portal.js"></script>
   <script src="app.js"></script>
