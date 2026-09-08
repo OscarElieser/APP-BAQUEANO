@@ -3,49 +3,78 @@
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una experiencia cartográfica real, inmersiva e interactiva con
-//   imágenes satelitales en HD y capas vectoriales de Nicaragua.
-// - Conectar visualmente las 24+ ubicaciones de turismo, áreas protegidas,
-//   hoteles, hostales, hospedajes rurales y cultura con las cooperativas campesinas.
-// - Erradicar cualquier pantalla en blanco garantizando carga resiliente y sincronización
-//   bidireccional inmediata con el catálogo de fichas.
+// - Proveer una experiencia cartográfica inmersiva, nítida y de alta resolución
+//   con imágenes satelitales oficiales de Google Maps y capas vectoriales de Nicaragua.
+// - Conectar visualmente los 29 destinos y experiencias gastronómicas de turismo campesino,
+//   áreas protegidas, eco-lodges, hospedajes rurales y cultura con sus cooperativas.
+// - Erradicar definitivamente la marca de agua 'API KEY REQUIRED' sustituyendo proveedores
+//   obsoletos por la API oficial de Google Maps v3 y capas Esri/OSM de alta disponibilidad.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Integración con Leaflet API compatible con múltiples proveedores de teselas:
-//   * CartoDB Voyager (Calles, Playas y Rutas Claras) como capa inicial visible.
-//   * Esri World Imagery (Satélite Real en Alta Definición) como alternativa.
-//   * CartoDB Dark Matter (Modo Nocturno Baqueano).
-//   * CartoDB Voyager (Calles, Playas y Rutas Claras).
-//   * OpenTopoMap (Relieve Topográfico y Curvas de Nivel).
-// - Generación de pines animados SVG/HTML con insignias de color por categoría.
-// - Control interactivo de capas (Layer Switcher) y saltos rápidos por región geográfica.
-// - Sincronización reactiva con filtros de categoría y tarjetas de destino.
+// - Integración de Leaflet con el plugin Leaflet.GridLayer.GoogleMutant y Google Maps JS API:
+//   * Google Maps Satélite HD ('satellite') como capa principal activa.
+//   * Google Maps Híbrido ('hybrid') con relieve y nombres de comunidades.
+//   * Google Maps Rutas ('streets' / 'roadmap') para carreteras y costas del Pacífico.
+//   * Fallback defensivo automático e instantáneo a Esri World Imagery / World Street Map / OSM.
+// - Generación de pines animados SVG/HTML con insignias de color por categoría territorial.
+// - Control interactivo flotante de capas y saltos de cámara cinemáticos por región geográfica.
+// - Sincronización reactiva con filtros del catálogo y tarjetas de destino.
 //
 // 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
 // - Objeto global `window.BaqueanoMap` con métodos:
-//   * `init()`: Inicializa el mapa y los marcadores.
-//   * `switchLayer(layerId)`: Alterna entre Satélite, Noche, Calles y Topografía.
+//   * `init()`: Inicializa el mapa y renderiza los 29 marcadores georreferenciados.
+//   * `switchLayer(layerId)`: Alterna entre Google Satélite, Híbrido, Rutas, Noche y Relieve.
 //   * `focusRegion(regionId)`: Vuelo suave por cámara (flyTo) a regiones de Nicaragua.
 //   * `filterCategory(catKey)`: Muestra/oculta pines según la categoría seleccionada.
-//   * `selectPlace(placeId)`: Centra el mapa en un destino y abre su popup enriquecido.
+//   * `flyToPlace(placeId)`: Centra el mapa en un destino y abre su popup enriquecido.
+//   * `getPlaces()`: Retorna la lista activa de destinos cargados.
 // ============================================================================
 
 window.BaqueanoMap = (function() {
   'use strict';
 
   // --------------------------------------------------------------------------
-  // CONFIGURACIÓN DE CAPAS DE MAPA REALES
+  // DETECCIÓN DE DISPONIBILIDAD DE GOOGLE MAPS MUTANT API
+  // --------------------------------------------------------------------------
+  function isGoogleMutantAvailable() {
+    return typeof L !== 'undefined' &&
+           typeof L.gridLayer !== 'undefined' &&
+           typeof L.gridLayer.googleMutant === 'function' &&
+           typeof window.google !== 'undefined' &&
+           typeof window.google.maps !== 'undefined';
+  }
+
+  // --------------------------------------------------------------------------
+  // CONFIGURACIÓN DE CAPAS DE MAPA REALES (SIN MARCAS DE AGUA)
   // --------------------------------------------------------------------------
   const TILE_PROVIDERS = {
     satellite: {
       name: 'Satélite HD',
+      googleType: 'satellite',
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Esri, Maxar, Earthstar Geographics',
+      attribution: '&copy; Google Maps / Esri World Imagery',
       subdomains: '',
-      maxZoom: 19
+      maxZoom: 20
+    },
+    hybrid: {
+      name: 'Satélite Híbrido',
+      googleType: 'hybrid',
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      attribution: '&copy; Google Maps / Esri Imagery & Rutas',
+      subdomains: '',
+      maxZoom: 20
+    },
+    streets: {
+      name: 'Rutas & Playas',
+      googleType: 'roadmap',
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+      attribution: '&copy; Google Maps / Esri &mdash; Rutas y Playas de Nicaragua',
+      subdomains: '',
+      maxZoom: 20
     },
     osm: {
       name: 'Mapa Claro',
+      googleType: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; OpenStreetMap contributors',
       subdomains: 'abc',
@@ -53,22 +82,17 @@ window.BaqueanoMap = (function() {
     },
     dark: {
       name: 'Modo Noche',
-      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-      subdomains: 'abcd',
-      maxZoom: 20
-    },
-    streets: {
-      name: 'Rutas & Playas',
-      url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-      subdomains: 'abcd',
-      maxZoom: 20
+      googleType: null,
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      attribution: '&copy; Esri &copy; OpenStreetMap',
+      subdomains: '',
+      maxZoom: 18
     },
     topo: {
       name: 'Topográfico',
+      googleType: null,
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Esri &mdash; National Geographic, USGS, HERE',
+      attribution: '&copy; Esri &mdash; National Geographic, USGS, INETER',
       subdomains: '',
       maxZoom: 19
     }
@@ -193,10 +217,15 @@ window.BaqueanoMap = (function() {
   }
 
   // --------------------------------------------------------------------------
-  // CAMBIO DE CAPA BASE (SATÉLITE / NOCHE / CALLES / TOPO)
+  // CAMBIO DE CAPA BASE (GOOGLE MUTANT CON FALLBACK A ESRI/OSM)
   // --------------------------------------------------------------------------
   function switchTileLayer(layerKey) {
-    if (!mapInstance || !TILE_PROVIDERS[layerKey]) return;
+    if (!mapInstance) return;
+
+    // Normalizar si la clave solicitada no existe
+    if (!TILE_PROVIDERS[layerKey]) {
+      layerKey = 'satellite';
+    }
 
     if (activeTileLayer) {
       try {
@@ -204,10 +233,31 @@ window.BaqueanoMap = (function() {
       } catch (e) {
         // Safe removal
       }
+      activeTileLayer = null;
     }
 
     const conf = TILE_PROVIDERS[layerKey];
     activeTileErrorCount = 0;
+    currentLayerKey = layerKey;
+
+    // 1. Intentar proveedor oficial Google Maps GridLayer si está disponible
+    if (conf.googleType && isGoogleMutantAvailable()) {
+      try {
+        activeTileLayer = L.gridLayer.googleMutant({
+          type: conf.googleType,
+          maxZoom: 20
+        });
+        activeTileLayer.addTo(mapInstance);
+        updateMapStatus(`Google Maps ${conf.name} activo y ${currentPlaces.length} destinos visibles`, 'firestore');
+        updateLayerButtonsUI(layerKey);
+        if (mapInstance) mapInstance.invalidateSize();
+        return;
+      } catch (errGoogle) {
+        console.warn('[BaqueanoMap] Error inicializando Google Mutant (' + conf.googleType + '), usando fallback Esri:', errGoogle);
+      }
+    }
+
+    // 2. Fallback estándar a teselas Esri / OSM sin marcas de agua
     const layerOptions = {
       attribution: conf.attribution,
       maxZoom: conf.maxZoom || 19,
@@ -224,7 +274,7 @@ window.BaqueanoMap = (function() {
     activeTileLayer.on('tileerror', function(error) {
       activeTileErrorCount += 1;
       console.warn('[BaqueanoMap] Error de tesela en capa', layerKey, error);
-      if (activeTileErrorCount >= 3 && layerKey !== 'osm') {
+      if (activeTileErrorCount >= 4 && layerKey !== 'osm') {
         switchTileLayer('osm');
         updateMapStatus('Mostrando mapa claro por conexión limitada del proveedor satelital.', 'seed');
       }
@@ -235,14 +285,16 @@ window.BaqueanoMap = (function() {
     });
 
     activeTileLayer.addTo(mapInstance);
-    currentLayerKey = layerKey;
 
     // Forzar actualización inmediata del cálculo geométrico de Leaflet
     if (mapInstance) {
       mapInstance.invalidateSize();
     }
 
-    // Actualizar botones en UI
+    updateLayerButtonsUI(layerKey);
+  }
+
+  function updateLayerButtonsUI(layerKey) {
     document.querySelectorAll('.map-layer-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.layer === layerKey);
     });
@@ -389,17 +441,20 @@ window.BaqueanoMap = (function() {
       <!-- Capas de Mapa -->
       <div class="map-ctrl-group map-layers-selector">
         <span class="map-ctrl-label"><i class="fa-solid fa-layer-group"></i> Capa:</span>
-        <button type="button" class="map-layer-btn" data-layer="satellite" title="Fotografía Satelital en Alta Resolución">
+        <button type="button" class="map-layer-btn active" data-layer="satellite" title="Google Maps Satélite HD en Alta Resolución">
           <i class="fa-solid fa-satellite"></i> Satélite HD
+        </button>
+        <button type="button" class="map-layer-btn" data-layer="hybrid" title="Google Maps Híbrido con Nombres y Rutas">
+          <i class="fa-solid fa-earth-americas"></i> Híbrido
+        </button>
+        <button type="button" class="map-layer-btn" data-layer="streets" title="Google Maps Rutas, Playas y Calles">
+          <i class="fa-solid fa-road"></i> Rutas
         </button>
         <button type="button" class="map-layer-btn" data-layer="osm" title="Mapa claro con calles, pueblos y referencias visibles">
           <i class="fa-solid fa-map-location-dot"></i> Mapa Claro
         </button>
         <button type="button" class="map-layer-btn" data-layer="dark" title="Modo Nocturno Baqueano">
           <i class="fa-solid fa-moon"></i> Noche
-        </button>
-        <button type="button" class="map-layer-btn" data-layer="streets" title="Calles, Playas y Rutas">
-          <i class="fa-solid fa-road"></i> Rutas
         </button>
         <button type="button" class="map-layer-btn" data-layer="topo" title="Relieve y Curvas de Nivel">
           <i class="fa-solid fa-mountain"></i> Relieve
@@ -470,8 +525,8 @@ window.BaqueanoMap = (function() {
 
       container.classList.add('is-loading');
 
-      // Añadir capa clara por defecto para que el mapa siempre se vea.
-      switchTileLayer('streets');
+      // Añadir capa Satélite HD por defecto (Google Maps / Esri)
+      switchTileLayer('satellite');
 
       // Inyectar controles personalizados
       injectMapControls(container);

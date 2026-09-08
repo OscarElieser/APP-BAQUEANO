@@ -140,6 +140,242 @@
     .map-popup-dept { font-size: 0.78rem; color: var(--arena-pinolera); margin-bottom: 0.4rem; }
     .map-popup-price { font-size: 0.82rem; color: #10B981; font-weight: 600; }
     .leaflet-control-attribution { font-size: 0.65rem !important; }
+
+    /* ================================================================
+       🗺️ FOOTER MAP STRIP — Franja de mapa territorial en el pie de página
+       ================================================================ */
+    .footer-map-strip {
+      border-top: 1px solid rgba(22, 93, 111, 0.35);
+      margin-top: 3rem;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(22, 93, 111, 0.28);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Encabezado de la franja */
+    .footer-map-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding: 0.9rem 1.4rem;
+      background: rgba(22, 93, 111, 0.15);
+      border-bottom: 1px solid rgba(22, 93, 111, 0.2);
+    }
+
+    .footer-map-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-map-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulseDot 2s infinite;
+      flex-shrink: 0;
+    }
+
+    .footer-map-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: var(--font-tech);
+    }
+
+    .footer-stat-chip strong {
+      color: #FFFFFF;
+      font-weight: 800;
+    }
+
+    /* Cuerpo: mapa + panel de regiones */
+    .footer-map-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 280px;
+    }
+
+    /* Mini-mapa */
+    .footer-mini-map-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #footerMiniMap {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, rgba(22, 93, 111, 0.3), #0F172A);
+    }
+
+    #footerMiniMap .leaflet-tile-pane {
+      filter: saturate(1.15) contrast(1.08) brightness(0.92);
+    }
+
+    .footer-mini-map-badge {
+      position: absolute;
+      bottom: 8px;
+      left: 10px;
+      z-index: 500;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(22, 93, 111, 0.5);
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.7rem;
+      font-family: var(--font-tech);
+      font-weight: 700;
+      color: var(--arena-pinolera);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Panel lateral de regiones */
+    .footer-map-regions-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1.2rem 1.4rem;
+      background: rgba(15, 23, 42, 0.5);
+      border-left: 1px solid rgba(22, 93, 111, 0.2);
+      overflow-y: auto;
+      max-height: 280px;
+    }
+
+    .footer-regions-title {
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--arena-pinolera);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+      flex-shrink: 0;
+    }
+
+    .footer-regions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+    }
+
+    .footer-region-jump-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(22, 93, 111, 0.18);
+      border: 1px solid rgba(22, 93, 111, 0.3);
+      border-radius: 9px;
+      color: var(--text-secondary);
+      font-family: var(--font-tech);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .footer-region-jump-btn i {
+      font-size: 0.75rem;
+      color: var(--terracotta);
+      flex-shrink: 0;
+      width: 14px;
+      text-align: center;
+    }
+
+    .footer-region-jump-btn:hover {
+      background: rgba(246, 94, 1, 0.2);
+      border-color: rgba(246, 94, 1, 0.5);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(246, 94, 1, 0.2);
+    }
+
+    .footer-region-jump-btn:hover i {
+      color: #F65E01;
+    }
+
+    /* CTA — Botón principal de apertura de mapa completo */
+    .footer-map-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #F65E01, #165D6F);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(246, 94, 1, 0.4);
+      box-shadow: 0 4px 18px rgba(246, 94, 1, 0.3);
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .footer-map-cta-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 28px rgba(246, 94, 1, 0.45);
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    /* Responsive: en pantallas pequeñas, apila verticalmente */
+    @media (max-width: 768px) {
+      .footer-map-body {
+        grid-template-columns: 1fr;
+      }
+      #footerMiniMap {
+        height: 200px;
+      }
+      .footer-map-regions-panel {
+        max-height: none;
+        border-left: none;
+        border-top: 1px solid rgba(22, 93, 111, 0.2);
+      }
+      .footer-regions-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-map-stats-row {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2181,6 +2417,102 @@
         </div>
       </div>
 
+      <!-- ================================================================
+           🗺️ FRANJA DEL MAPA TERRITORIAL EN EL FOOTER
+           ⚙️ Mini-mapa Leaflet de sólo lectura (scroll desactivado) + stats
+           📦 Muestra territorio, 29 destinos y accesos rápidos por región
+           ================================================================ -->
+      <div class="footer-map-strip">
+        <!-- Encabezado de la franja -->
+        <div class="footer-map-header">
+          <div class="footer-map-title-group">
+            <div class="footer-map-live-dot"></div>
+            <i class="fa-solid fa-earth-americas" style="color: var(--terracotta);"></i>
+            <span>Territorio Baqueano Nicaragua</span>
+          </div>
+          <div class="footer-map-stats-row">
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-location-dot" style="color: #10B981;"></i>
+              <span><strong>29</strong> Destinos Activos</span>
+            </div>
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-layer-group" style="color: #F65E01;"></i>
+              <span><strong>13</strong> Categorías</span>
+            </div>
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-shield-heart" style="color: #14B8A6;"></i>
+              <span><strong>0%</strong> Comisión</span>
+            </div>
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-peso-sign" style="color: #F4E6C1;"></i>
+              <span>Tasa BCN <strong>36.65</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cuerpo: Mapa + botones de región -->
+        <div class="footer-map-body">
+          <!-- Mini-mapa -->
+          <div class="footer-mini-map-wrap">
+            <div id="footerMiniMap"></div>
+            <div class="footer-mini-map-badge">
+              <i class="fa-solid fa-satellite-dish"></i> Satélite HD
+            </div>
+          </div>
+
+          <!-- Atajos rápidos de región -->
+          <div class="footer-map-regions-panel">
+            <div class="footer-regions-title">
+              <i class="fa-solid fa-compass" style="color: var(--terracotta);"></i>
+              Salto Rápido a Región
+            </div>
+            <div class="footer-regions-grid">
+              <button class="footer-region-jump-btn" data-region="nicaragua" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('nicaragua'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-flag"></i>
+                <span>Nicaragua Completa</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="pacifico" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('pacifico'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <span>Rivas & San Juan del Sur</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="volcanes" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('volcanes'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-volcano"></i>
+                <span>Cadena Volcánica</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="granada" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('granada'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-landmark-dome"></i>
+                <span>Granada Colonial</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="ometepe" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('ometepe'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-island-tropical"></i>
+                <span>Isla de Ometepe</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="norte" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('norte'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-tree"></i>
+                <span>Nebliselva Norte</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="caribe" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('caribe'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-fish"></i>
+                <span>Corn Island Caribe</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="riosanjuan" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('riosanjuan'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-water"></i>
+                <span>Río San Juan</span>
+              </button>
+            </div>
+
+            <!-- CTA para volver al mapa principal -->
+            <a href="#baqueanoInteractiveMap"
+               onclick="event.preventDefault(); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'});"
+               class="footer-map-cta-btn">
+              <i class="fa-solid fa-map-location-dot"></i>
+              Abrir Mapa Interactivo Completo
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="footer-bottom-bar">
         <div>© 2026 Baqueano Nicaragua. Ecoturismo con dignidad campesina.</div>
         <div style="display: flex; gap: 1.5rem;">
@@ -2250,6 +2582,9 @@
     </div>
   </div>
 
+  <!-- Google Maps JavaScript API (Clave Oficial Baqueano) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE"></script>
+
   <!-- Leaflet.js — Mapa Interactivo Open Source & Satélite HD -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script>
@@ -2257,6 +2592,9 @@
       document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');
     }
   </script>
+
+  <!-- Leaflet GoogleMutant Plugin (Google Maps GridLayer en Leaflet) -->
+  <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
 
   <!-- Scripts Modulares Baqueano -->
   <script src="js/navigation.js"></script>
@@ -2267,5 +2605,142 @@
   <script src="js/ai-assistant.js"></script>
   <script src="js/destinos-gastronomia.js"></script>
   <script src="app.js"></script>
+
+  <!-- ================================================================
+       🗺️ MINI-MAPA FOOTER — Inicialización Leaflet decorativa/exploratoria
+       ⚙️ IntersectionObserver para lazy-init, sin scroll wheel (decorativo)
+       📦 Satélite HD con pines simplificados de todos los destinos activos
+       ================================================================ -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Retry hasta que Leaflet esté disponible
+    function initFooterMap() {
+      if (typeof L === 'undefined') {
+        setTimeout(initFooterMap, 300);
+        return;
+      }
+
+      var el = document.getElementById('footerMiniMap');
+      if (!el || el._footerMapInit) return;
+      el._footerMapInit = true;
+
+      // Mini-mapa de sólo lectura — sin interacción de usuario
+      var miniMap = L.map('footerMiniMap', {
+        center: [12.8654, -85.2072],
+        zoom: 6,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        dragging: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        attributionControl: false
+      });
+
+      // Capa satélite HD con fallback a OSM
+      var satLayer = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        { maxZoom: 18, crossOrigin: true }
+      );
+      var errCount = 0;
+      satLayer.on('tileerror', function() {
+        errCount++;
+        if (errCount >= 3) {
+          miniMap.removeLayer(satLayer);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            subdomains: 'abc', maxZoom: 19
+          }).addTo(miniMap);
+        }
+      });
+      satLayer.addTo(miniMap);
+
+      // Obtener destinos del módulo Firestore y pintar puntos decorativos
+      function paintDots(places) {
+        var COLORS = {
+          playas: '#0EA5E9', bahias: '#06B6D4', rios: '#10B981',
+          volcanes: '#F65E01', selva: '#22C55E', islas: '#14B8A6',
+          hoteles: '#EAB308', hostales: '#F97316', hospedajes: '#84CC16',
+          'casas-alquiler': '#A855F7', museos: '#6366F1',
+          discotecas: '#EC4899', gastronomia: '#F59E0B'
+        };
+
+        places.forEach(function(p) {
+          if (!p.lat || !p.lng) return;
+          var color = COLORS[p.category] || '#F65E01';
+          var circle = L.circleMarker([p.lat, p.lng], {
+            radius: 5,
+            fillColor: color,
+            color: '#FFFFFF',
+            weight: 1.5,
+            fillOpacity: 0.9
+          });
+          circle.bindTooltip(p.name, { permanent: false, direction: 'top', className: 'footer-map-tooltip' });
+          circle.on('click', function() {
+            // Al hacer clic en un punto, volar en el mapa principal
+            if (window.BaqueanoMap && window.BaqueanoMap.flyToPlace) {
+              window.BaqueanoMap.flyToPlace(p.id);
+            }
+            document.getElementById('baqueanoInteractiveMap')
+              .scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          circle.addTo(miniMap);
+        });
+      }
+
+      // Usar datos del módulo Firestore (o esperar a que cargue)
+      function tryLoad() {
+        if (window.BaqueanoFirestore && typeof window.BaqueanoFirestore.loadPublishedPlaces === 'function') {
+          window.BaqueanoFirestore.loadPublishedPlaces(paintDots);
+        } else if (window.BaqueanoFirestore && window.BaqueanoFirestore.SEED_PLACES) {
+          paintDots(window.BaqueanoFirestore.SEED_PLACES);
+        } else {
+          setTimeout(tryLoad, 400);
+        }
+      }
+      tryLoad();
+
+      // Forzar recalculo geométrico después de animación del footer
+      setTimeout(function() { miniMap.invalidateSize(); }, 500);
+    }
+
+    // Lazy init: solo inicializar cuando el footer sea visible en viewport
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            initFooterMap();
+            observer.disconnect();
+          }
+        });
+      }, { rootMargin: '200px' });
+
+      var target = document.getElementById('footerMiniMap');
+      if (target) observer.observe(target);
+    } else {
+      // Fallback sin observer
+      window.addEventListener('load', initFooterMap);
+    }
+  })();
+  </script>
+
+  <style>
+    /* Tooltip del mini-mapa del footer */
+    .footer-map-tooltip {
+      background: rgba(15, 23, 42, 0.92) !important;
+      border: 1px solid rgba(22, 93, 111, 0.5) !important;
+      color: #F4E6C1 !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      border-radius: 7px !important;
+      padding: 0.25rem 0.6rem !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+      white-space: nowrap;
+    }
+    .footer-map-tooltip::before { display: none !important; }
+  </style>
 </body>
 </html>
