@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <!--
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — CATÁLOGO DE DESTINOS & MOTOR FISCAL (destinos.html)
+🧭 BAQUEANO ECOSYSTEM — CATÁLOGO DE DESTINOS, TURISMO & MOTOR FISCAL (destinos.html)
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Presentar el catálogo integral de reservas naturales, volcanes y cuencas
-  hídricas de Nicaragua con acceso a guías baqueanos certificados.
+- Presentar el catálogo territorial soberano de Nicaragua con precios reales,
+  transparentes y auditados en Córdobas (C$) y Dólares ($) para cada destino,
+  área protegida, experiencia gastronómica, hospedaje rural, hotel, museo y vida nocturna.
+- Erradicar la especulación y comisiones abusivas del 20-25% impuestas por OTAs foráneas,
+  permitiendo contacto directo con cooperativas campesinas, cocineras tradicionales y anfitriones.
 - Transparentar las finanzas del turismo con la Calculadora Rural de Retorno (ROI)
   y el Cotizador Bimoneda con el régimen tributario de la Ley 306 INTUR.
-- Asistir en tiempo real con recomendaciones de sendero mediante Baqueano AI.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Filtro reactivo en cliente por categoría (Volcanes, Aguas, Nebliselva, Comunitario).
-- Controladores interactivos js/calculator.js y js/ai-assistant.js.
-- Conversión bimoneda exacta a tasa oficial (36.65 NIO por 1 USD).
+- Fichas interactivas con doble divisa (C$ NIO y USD) calculadas a la tasa oficial del Banco Central (36.65).
+- Desglose exhaustivo por ítems reales: entradas oficiales MARENA/comunitarias, guías acreditados,
+  equipamiento, alimentación tradicional y tarifas nocturnas por persona o grupo.
+- Filtros reactivos instantáneos por 13 categorías territoriales con persistencia de favoritos y likes.
+- Integración cartográfica Leaflet con sincronización bidireccional y enlaces satelitales GPS directos.
 
-📦 3. QUÉ (WHAT / CONTENIDOS):
-- 6 Destinos Protegidos Emblemáticos con fichas técnicas y cooperativas a cargo.
-- Calculadora de Retorno Campesino vs OTAs foráneas (ahorro anual tangible).
-- Cotizador de Reserva Bimoneda con régimen de la Ley 306.
-- Asistente inteligente Baqueano AI con respuestas instantáneas.
+📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
+- Catálogo completo con precios reales de Nicaragua en todas las categorías territoriales.
+- Desglose transparente en cada tarjeta (.dest-real-price-strip y .dest-price-breakdown).
+- Calculadora de Retorno Rural Campesino vs intermediarios externos.
+- Cotizador de Reserva Bimoneda con régimen de exoneración de la Ley 306.
+- Asistente de sendero inteligente Baqueano AI y baliza satelital de auxilio SOS 24/7.
 ============================================================================
 -->
 <html lang="es">
@@ -244,7 +249,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="gastro_baho_vilma" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-utensils"></i> Baho Tradicional</span>
-              <span class="dest-price-badge">C$ 180 / Plato Completo</span>
+              <span class="dest-price-badge">C$ 180 / Plato (≈ $5.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya, Mercado Municipal</div>
@@ -269,8 +274,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 160 – C$ 220</span></div>
-                <div class="price-usd">≈ $4.50 – $6.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 160 – C$ 200 NIO</span></div>
+                <div class="price-usd">≈ $4.50 – $5.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Plato tradicional completo: <strong>C$ 180</strong> | Chicha de maíz fresca: <strong>C$ 30</strong> | Ensalada criolla: <strong>C$ 20</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -298,7 +308,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="gastro_quesillo_rosa" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-cheese"></i> Quesillo en Hoja</span>
-              <span class="dest-price-badge">C$ 95 / Especial Doble</span>
+              <span class="dest-price-badge">C$ 95 / Especial Doble (≈ $2.60 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Nagarote, León</div>
@@ -323,8 +333,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 75 – C$ 140</span></div>
-                <div class="price-usd">≈ $2.00 – $3.80 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 70 – C$ 120 NIO</span></div>
+                <div class="price-usd">≈ $1.90 – $3.30 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Quesillo sencillo: <strong>C$ 65</strong> | Especial doble trenza con crema: <strong>C$ 95</strong> | Vaso de tiste frío: <strong>C$ 35</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -352,7 +367,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="gastro_rosquillas_somoto" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-cookie-bite"></i> Horno de Barro</span>
-              <span class="dest-price-badge">C$ 80 / Bolsa Familiar</span>
+              <span class="dest-price-badge">C$ 80 / Bolsa Familiar (≈ $2.20 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
@@ -377,8 +392,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 60 – C$ 160</span></div>
-                <div class="price-usd">≈ $1.60 – $4.30 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 120 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $3.30 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Bolsa personal 20 uds: <strong>C$ 40</strong> | Bolsa familiar 50 uds: <strong>C$ 80</strong> | Café chorreado: <strong>C$ 25</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -406,7 +426,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="gastro_rondon_pearl" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-shrimp"></i> Rondón de Mariscos</span>
-              <span class="dest-price-badge">C$ 280 / Cazuela Caribeña</span>
+              <span class="dest-price-badge">C$ 280 / Cazuela (≈ $7.60 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Bluefields, RACCS</div>
@@ -431,8 +451,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 220 – C$ 350</span></div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 220 – C$ 350 NIO</span></div>
                 <div class="price-usd">≈ $6.00 – $9.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cazuela de pargo y mariscos: <strong>C$ 280</strong> | Pan de coco criollo: <strong>C$ 30</strong> | Ginger beer artesanal: <strong>C$ 40</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -460,7 +485,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="gastro_vigoron_toribia" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-drumstick-bite"></i> Vigorón en Chagüite</span>
-              <span class="dest-price-badge">C$ 120 / Porción con Chicharrón</span>
+              <span class="dest-price-badge">C$ 120 / Porción (≈ $3.30 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Parque Central, Granada</div>
@@ -485,8 +510,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 90 – C$ 150</span></div>
-                <div class="price-usd">≈ $2.50 – $4.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 90 – C$ 150 NIO</span></div>
+                <div class="price-usd">≈ $2.50 – $4.10 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Vigorón con chicharrón de carne: <strong>C$ 120</strong> | Refresco de grama con limón: <strong>C$ 30</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -514,7 +544,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="gastro_fritanga_gueguense" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-fire-burner"></i> Asados al Carbón</span>
-              <span class="dest-price-badge">C$ 190 / Asado Mixto</span>
+              <span class="dest-price-badge">C$ 190 / Asado Mixto (≈ $5.20 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Plaza España, Managua</div>
@@ -539,8 +569,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 140 – C$ 230</span></div>
-                <div class="price-usd">≈ $3.80 – $6.20 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 150 – C$ 240 NIO</span></div>
+                <div class="price-usd">≈ $4.10 – $6.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Carne asada al carbón con gallopinto y tajadas: <strong>C$ 190</strong> | Queso frito: <strong>C$ 40</strong> | Cacao con leche: <strong>C$ 40</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -572,7 +607,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_somoto_001" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cañón Acuático</span>
-              <span class="dest-price-badge">$15 / Tour Guiado</span>
+              <span class="dest-price-badge">C$ 550 / Tour Guiado (≈ $15.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Madriz, Nicaragua</div>
@@ -597,8 +632,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 550 – C$ 900</span></div>
-                <div class="price-usd">≈ $15.00 – $25.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 900 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $25.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada MARENA: <strong>C$ 50</strong> nac. / <strong>C$ 120</strong> extr. | Guía baqueano Coop. Sonís: <strong>C$ 350 - 500</strong> grupo | Chaleco y bote: <strong>C$ 150</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -626,7 +666,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_cerronegro_002" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Volcán Activo</span>
-              <span class="dest-price-badge">$30 / Sandboarding</span>
+              <span class="dest-price-badge">C$ 1,100 / Sandboarding (≈ $30.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León, Cordillera de los Maribios</div>
@@ -651,8 +691,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 1,100 – C$ 1,500</span></div>
-                <div class="price-usd">≈ $30.00 – $40.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 1,100 – C$ 1,500 NIO</span></div>
+                <div class="price-usd">≈ $30.00 – $41.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada MARENA: <strong>C$ 180</strong> nac. / <strong>C$ 365</strong> extr. | Tabla protectora, overol y guía Los Maribios: <strong>C$ 920</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -680,7 +725,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_ometepe_003" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Reserva Biosfera</span>
-              <span class="dest-price-badge">Desde $20 / Día</span>
+              <span class="dest-price-badge">C$ 750 / Día Aventura (≈ $20.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Lago Cocibolca</div>
@@ -705,8 +750,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 750 – C$ 1,400</span></div>
-                <div class="price-usd">≈ $20.00 – $38.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 550 – C$ 1,400 NIO</span></div>
+                <div class="price-usd">≈ $15.00 – $38.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Ferry San Jorge: <strong>C$ 50 - 80</strong> | Ojo de Agua: <strong>C$ 180</strong> nac. / <strong>C$ 365</strong> extr. | Guía volcán: <strong>C$ 750</strong> | Cabaña Balgüe: <strong>C$ 600</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -734,7 +784,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_maderas_004" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Playa & Surf</span>
-              <span class="dest-price-badge">Clases Surf $25</span>
+              <span class="dest-price-badge">C$ 920 / Clase de Surf (≈ $25.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
@@ -759,8 +809,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 900 – C$ 1,300</span></div>
-                <div class="price-usd">≈ $25.00 – $35.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 370 – C$ 1,200 NIO</span></div>
+                <div class="price-usd">≈ $10.00 – $33.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Shuttle SJDS ida/vuelta: <strong>C$ 180</strong> | Alquiler tabla día completo: <strong>C$ 370</strong> | Clase surf 2h con baqueano: <strong>C$ 920</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -788,7 +843,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_bahia_sjds" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-sailboat"></i> Bahía Natural</span>
-              <span class="dest-price-badge">Veleros & Tours</span>
+              <span class="dest-price-badge">C$ 550 / Paseo Bahía (≈ $15.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Costa del Pacífico</div>
@@ -813,8 +868,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 500 – C$ 1,200</span></div>
-                <div class="price-usd">≈ $14.00 – $32.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 1,300 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $35.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Acceso Mirador Cristo: <strong>C$ 75</strong> nac. / <strong>C$ 180</strong> extr. | Paseo en lancha artesanal de pescadores: <strong>C$ 450 - 550</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -842,7 +902,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_corn_island" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Paraíso Caribeño</span>
-              <span class="dest-price-badge">Desde $35 / Cabaña</span>
+              <span class="dest-price-badge">C$ 1,280 / Cabaña Mar (≈ $35.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> RACCS, Caribe Sur</div>
@@ -867,8 +927,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 1,300 – C$ 2,600</span></div>
-                <div class="price-usd">≈ $35.00 – $70.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 900 – C$ 2,400 NIO</span></div>
+                <div class="price-usd">≈ $25.00 – $65.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Panga Little Corn: <strong>C$ 300</strong> | Snorkel en arrecife: <strong>C$ 1,100</strong> | Cabaña playa noche: <strong>C$ 1,280</strong> | Taxi carrera fija: <strong>C$ 35</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -896,7 +961,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_selva_negra" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-tree"></i> Bosque Nuboso</span>
-              <span class="dest-price-badge">$45 / Cabaña Montaña</span>
+              <span class="dest-price-badge">C$ 1,650 / Cabaña Montaña (≈ $45.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Cordillera Dariense, Matagalpa</div>
@@ -921,8 +986,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 1,600 – C$ 3,200</span></div>
-                <div class="price-usd">≈ $45.00 – $85.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 3,100 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $85.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Day Pass senderos: <strong>C$ 180</strong> (100% consumible) | Tour café y aves: <strong>C$ 450</strong> | Cabaña rústica 2 pax: <strong>C$ 1,650</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -950,7 +1020,7 @@
                 <button class="btn-floating-fav btn-action-fav" data-id="dest_laguna_apoyo" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
               </div>
               <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cráter Volcánico</span>
-              <span class="dest-price-badge">$12 / Kayak & Pase</span>
+              <span class="dest-price-badge">C$ 440 / Kayak & Day Pass (≈ $12.00 USD)</span>
             </div>
             <div class="dest-body-pro">
               <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Catarina</div>
@@ -975,8 +1045,13 @@
               </div>
 
               <div class="dest-real-price-strip">
-                <div>Precio Real: <span class="price-cordobas">C$ 440 – C$ 1,200</span></div>
-                <div class="price-usd">≈ $12.00 – $32.00 USD</div>
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 250 – C$ 1,500 NIO</span></div>
+                <div class="price-usd">≈ $7.00 – $41.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Day Pass posada privada: <strong>C$ 250</strong> (consumible) | Kayak por hora: <strong>C$ 150</strong> | Habitación laguna noche: <strong>C$ 1,100</strong></span>
               </div>
 
               <div class="dest-card-action-bar">
@@ -991,6 +1066,891 @@
               <div class="dest-footer-strip">
                 <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (750 reseñas)</span>
                 <span class="dest-coop-name">Custodios del Cráter</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. VOLCÁN MASAYA (VOLCANES) -->
+          <div class="dest-card-pro" data-category="volcanes" data-id="place_masaya_021">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_masaya_021" data-initial-likes="495" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_masaya_021" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-fire"></i> Lago de Lava</span>
+              <span class="dest-price-badge">C$ 180 / Entrada Cráter (≈ $5.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Nindirí, Masaya</div>
+              <h3 class="dest-name-title">Parque Nacional Volcán Masaya (Popogatepe)</h3>
+              <p class="dest-description-text">
+                El cráter Santiago y su lago de lava incandescente activo. Cruz de Bobadilla, senderos por coladas basálticas, túneles de murciélagos y museo vulcanológico oficial.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Guardaparques MARENA & Guías de Nindirí</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Km 23 Carretera a Masaya, Nindirí</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525225415">+505 2522-5415</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 365 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $10.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada diurna: <strong>C$ 50</strong> nac. / <strong>C$ 180</strong> extr. | Tour nocturno lago de lava: <strong>C$ 180</strong> nac. / <strong>C$ 365</strong> extr.</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Gu%C3%ADas%20Masaya,%20deseo%20visitar%20el%20cr%C3%A1ter%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9854" data-lng="-86.1614" data-name="Volcán Masaya" data-id="place_masaya_021">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (980 reseñas)</span>
+                <span class="dest-coop-name">Guías Volcán Popogatepe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. CASCADA LA LUNA (RÍOS) -->
+          <div class="dest-card-pro" data-category="rios" data-id="place_laluna_019">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada La Luna" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_laluna_019" data-initial-likes="310" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_laluna_019" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-cloud-rain"></i> Nebliselva & Cascada</span>
+              <span class="dest-price-badge">C$ 400 / Canopy & Sendero (≈ $11.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> El Cuá, Jinotega</div>
+              <h3 class="dest-name-title">Cascada La Luna & Ruta del Café de Altura</h3>
+              <p class="dest-description-text">
+                Imponente caída de agua en el corazón de la nebliselva jinotegana. Canopy con tirolesas sobre el caudal de la catarata, pozas naturales y cata de café de estricta altura (SHG).
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Cooperativa: <strong>Asoc. Ecoturística Campesina El Cuá</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Carretera Jinotega - El Cuá, Km 182</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586552211">+505 8655-2211</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 100 – C$ 550 NIO</span></div>
+                <div class="price-usd">≈ $2.70 – $15.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada sendero y mirador: <strong>C$ 100</strong> | Canopy tirolesa catarata: <strong>C$ 400</strong> | Degustación café SHG: <strong>C$ 150</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586552211&text=Hola%20Cascada%20La%20Luna,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.3720" data-lng="-85.6900" data-name="Cascada La Luna" data-id="place_laluna_019">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (310 reseñas)</span>
+                <span class="dest-coop-name">Ecoturismo El Cuá</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. REFUGIO LA FLOR (PLAYAS) -->
+          <div class="dest-card-pro" data-category="playas" data-id="place_laflor_016">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&auto=format&fit=crop&q=80" alt="Refugio La Flor" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_laflor_016" data-initial-likes="480" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_laflor_016" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Santuario Marino</span>
+              <span class="dest-price-badge">C$ 200 / Desove Tortugas (≈ $5.50 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Refugio de Vida Silvestre La Flor & Playa El Coco</h3>
+              <p class="dest-description-text">
+                Arenas vírgenes del Pacífico sur y santuario biológico mundial donde anidan miles de tortugas paslama en arribadas masivas nocturnas bajo luz de luna.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Custodios: <strong>Guardaparques Comunitarios La Flor</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>20km al sur de San Juan del Sur, Rivas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587661199">+505 8766-1199</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 100 – C$ 550 NIO</span></div>
+                <div class="price-usd">≈ $2.70 – $15.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada MARENA: <strong>C$ 100</strong> nac. / <strong>C$ 200</strong> extr. | Guía nocturno guardaparque: <strong>C$ 250</strong> por grupo</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587661199&text=Hola%20Guardas%20La%20Flor,%20deseo%20visitar%20arribada%20de%20tortugas%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.1390" data-lng="-85.7980" data-name="Refugio La Flor" data-id="place_laflor_016">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (480 reseñas)</span>
+                <span class="dest-coop-name">Conservación Marina del Sur</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. MORGAN'S ROCK (HOTELES) -->
+          <div class="dest-card-pro" data-category="hoteles" data-id="place_morgans_006">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=80" alt="Morgan's Rock Eco-Lodge" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_morgans_006" data-initial-likes="310" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_morgans_006" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-hotel"></i> Eco-Lodge Costero</span>
+              <span class="dest-price-badge">C$ 7,300 / Bungalow Bosque (≈ $200.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Morgan's Rock Eco-Lodge & Reserva Marina</h3>
+              <p class="dest-description-text">
+                Bungalows de madera nativa sobre las copas de los árboles en playa privada de 4,000 acres de reserva silvestre. Desayuno campesino de granja orgánica y avistamiento de perezosos.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Reserva Natural Playa Ocotal</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Bahía de Ocotal, 12km al norte de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586702111">+505 8670-2111</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 7,300 – C$ 11,000 NIO</span></div>
+                <div class="price-usd">≈ $200.00 – $300.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Bungalow sobre los árboles en playa privada | Desayuno a la carta de granja incluido | Senderos privados</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586702111&text=Hola%20Morgans%20Rock,%20deseo%20reservar%20estancia%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.3120" data-lng="-85.9230" data-name="Morgan's Rock" data-id="place_morgans_006">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (310 reseñas)</span>
+                <span class="dest-coop-name">Reserva Playa Ocotal</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. HOTEL DARÍO COLONIAL (HOTELES) -->
+          <div class="dest-card-pro" data-category="hoteles" data-id="place_dario_007">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80" alt="Hotel Darío Colonial" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_dario_007" data-initial-likes="460" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_dario_007" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-building-columns"></i> Hotel Colonial</span>
+              <span class="dest-price-badge">C$ 2,600 / Habitación (≈ $70.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial, Granada</div>
+              <h3 class="dest-name-title">Hotel Darío Colonial Patrimonio</h3>
+              <p class="dest-description-text">
+                Arquitectura neoclásica restaurada del siglo XIX con patios coloniales, piscina refrescante y jardines tropicales en plena Calle La Calzada, a pasos del Gran Lago.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Patrimonio Hotelero Granadino</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle La Calzada, frente a Iglesia Guadalupe, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525523400">+505 2552-3400</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 2,600 – C$ 3,600 NIO</span></div>
+                <div class="price-usd">≈ $70.00 – $98.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Habitación colonial doble con A/C | Desayuno típico nicaragüense incluido | Piscina en patio central</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50525523400&text=Hola%20Hotel%20Dar%C3%ADo,%20deseo%20reservar%20habitaci%C3%B3n%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9298" data-lng="-85.9535" data-name="Hotel Darío" data-id="place_dario_007">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (460 reseñas)</span>
+                <span class="dest-coop-name">Patrimonio Granadino</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. THE TREEHOUSE NICARAGUA (HOSTALES) -->
+          <div class="dest-card-pro" data-category="hostales" data-id="place_treehouse_008">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&auto=format&fit=crop&q=80" alt="The Treehouse Nicaragua" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_treehouse_008" data-initial-likes="620" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_treehouse_008" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-tree"></i> Hostal de Selva</span>
+              <span class="dest-price-badge">C$ 550 / Cama Árboles (≈ $15.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Volcán Mombacho, Granada</div>
+              <h3 class="dest-name-title">The Treehouse Nicaragua (Hostal en los Árboles)</h3>
+              <p class="dest-description-text">
+                Hostal de aventura suspendido entre las copas de los árboles en las faldas del Volcán Mombacho. Puentes colgantes, piscina con vistas a la selva y ambiente comunitario.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Comunidad: <strong>Baqueanos del Mombacho</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Laderas este del Volcán Mombacho, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588214300">+505 8821-4300</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 550 – C$ 800 NIO</span></div>
+                <div class="price-usd">≈ $15.00 – $22.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cama en dormitorio suspendido: <strong>C$ 550</strong> | Acceso a puentes colgantes y senderos selváticos incluido</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588214300&text=Hola%20Treehouse,%20deseo%20reservar%20cama%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.8540" data-lng="-85.9780" data-name="The Treehouse" data-id="place_treehouse_008">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (620 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Mombacho</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. POCO A POCO HOSTEL (HOSTALES) -->
+          <div class="dest-card-pro" data-category="hostales" data-id="place_pocoapoco_022">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop&q=80" alt="Poco a Poco Hostel" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_pocoapoco_022" data-initial-likes="540" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_pocoapoco_022" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mug-saucer"></i> Hostal Urbano</span>
+              <span class="dest-price-badge">C$ 450 / Cama Compartida (≈ $12.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León Colonial, León</div>
+              <h3 class="dest-name-title">Poco a Poco Hostel & Cultural Café</h3>
+              <p class="dest-description-text">
+                Hostal colonial acogedor con piscina en patio central, terraza panorámica para atardeceres leoneses, café de cortesía ilimitado y talleres de intercambio cultural.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red: <strong>Hostales Tradicionales de León</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado norte Iglesia San Juan Bautista, León</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587213455">+505 8721-3455</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 650 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $18.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cama en dormitorio con A/C nocturno: <strong>C$ 450</strong> | Café segoviano ilimitado y piscina colonial incluida</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587213455&text=Hola%20Poco%20a%20Poco,%20deseo%20consultar%20cama%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.4370" data-lng="-86.8790" data-name="Poco a Poco Hostel" data-id="place_pocoapoco_022">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (540 reseñas)</span>
+                <span class="dest-coop-name">Hostales de León</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16. FINCA MAGDALENA (HOSPEDAJES) -->
+          <div class="dest-card-pro" data-category="hospedajes" data-id="place_magdalena_009">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&auto=format&fit=crop&q=80" alt="Finca Magdalena" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_magdalena_009" data-initial-likes="390" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_magdalena_009" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mug-hot"></i> Finca Comunitaria</span>
+              <span class="dest-price-badge">C$ 500 / Habitación Rural (≈ $14.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Balgüe, Ometepe, Rivas</div>
+              <h3 class="dest-name-title">Finca Magdalena Eco-Lodge Campesino</h3>
+              <p class="dest-description-text">
+                Cooperativa agroecológica de café orgánico gestionada por 24 familias campesinas. Punto de partida oficial para el ascenso al cráter y laguna del Volcán Maderas.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Cooperativa: <strong>Coop. Carlos Díaz Cajina (24 Familias)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Faldas del Volcán Maderas, Balgüe, Isla de Ometepe</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584440019">+505 8444-0019</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 500 – C$ 900 NIO</span></div>
+                <div class="price-usd">≈ $14.00 – $25.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Habitación rústica privada: <strong>C$ 500</strong> | Desayuno campesino con café orgánico: <strong>C$ 120</strong> | Senderos petroglifos</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584440019&text=Hola%20Finca%20Magdalena,%20deseo%20reservar%20hospedaje%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.4680" data-lng="-85.5120" data-name="Finca Magdalena" data-id="place_magdalena_009">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (390 reseñas)</span>
+                <span class="dest-coop-name">Coop. Carlos Díaz Cajina</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17. POSADA SAN RAMÓN (HOSPEDAJES) -->
+          <div class="dest-card-pro" data-category="hospedajes" data-id="place_posadasanramon_023">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&auto=format&fit=crop&q=80" alt="Posada San Ramón" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_posadasanramon_023" data-initial-likes="290" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_posadasanramon_023" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-seedling"></i> Posada Ecológica</span>
+              <span class="dest-price-badge">C$ 650 / Cabaña Campesina (≈ $18.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Ramón, Ometepe, Rivas</div>
+              <h3 class="dest-name-title">Posada Rural San Ramón Ometepe</h3>
+              <p class="dest-description-text">
+                Cabañas ecológicas familiares en contacto directo con la naturaleza junto a la Estación Biológica y la Cascada de San Ramón. Energía solar limpia y cocina casera de huerto.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Familia Anfitriona: <strong>Familia Álvarez (Red Comunitaria Ometepe)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Comunidad de San Ramón, vertiente sur del Volcán Maderas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589332204">+505 8933-2204</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 650 – C$ 1,100 NIO</span></div>
+                <div class="price-usd">≈ $18.00 – $30.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cabaña familiar de madera con energía solar: <strong>C$ 650</strong> | Acceso a sendero y Cascada de San Ramón: <strong>C$ 100</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589332204&text=Hola%20Posada%20San%20Ram%C3%B3n,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.4420" data-lng="-85.4650" data-name="Posada San Ramón" data-id="place_posadasanramon_023">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (290 reseñas)</span>
+                <span class="dest-coop-name">Red Comunitaria Ometepe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 18. VILLA VISTA REDONDA (CASAS-ALQUILER) -->
+          <div class="dest-card-pro" data-category="casas-alquiler" data-id="place_vistaredonda_010">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=80" alt="Villa Vista Redonda" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_vistaredonda_010" data-initial-likes="180" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_vistaredonda_010" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-house-chimney-window"></i> Villa Costera</span>
+              <span class="dest-price-badge">C$ 7,500 / Villa Completa (≈ $200.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Tola, Costa Esmeralda, Rivas</div>
+              <h3 class="dest-name-title">Villa Vista Redonda (Emerald Coast)</h3>
+              <p class="dest-description-text">
+                Villa privada sobre el acantilado con piscina infinita privada, 4 habitaciones climatizadas, terraza panorámica para puestas de sol y acceso directo a Playa Redonda.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red Local: <strong>Anfitriones Costeros de Tola</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Playa Redonda, Municipio de Tola, Rivas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588117766">+505 8811-7766</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 7,500 – C$ 12,000 NIO</span></div>
+                <div class="price-usd">≈ $200.00 – $330.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Villa completa para 8 personas | Piscina infinita privada | Cocina equipada y salida directa al mar</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588117766&text=Hola%20Villa%20Redonda,%20deseo%20alquilar%20villa%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.4150" data-lng="-86.0680" data-name="Villa Vista Redonda" data-id="place_vistaredonda_010">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (180 reseñas)</span>
+                <span class="dest-coop-name">Red Villas Tola</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 19. CASA SEÑORIAL GRANADA (CASAS-ALQUILER) -->
+          <div class="dest-card-pro" data-category="casas-alquiler" data-id="place_casasenorial_024">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80" alt="Casa Señorial Granada" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_casasenorial_024" data-initial-likes="240" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_casasenorial_024" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-key"></i> Casona Señorial</span>
+              <span class="dest-price-badge">C$ 5,500 / Mansión Completa (≈ $150.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Centro Histórico, Granada</div>
+              <h3 class="dest-name-title">Casa Señorial Colonial Granada</h3>
+              <p class="dest-description-text">
+                Mansión colonial completa de 4 habitaciones con arcos de tejas centenarias, piscina privada en patio central, corredores de madera preciosa y cocinera tradicional bajo pedido.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Anfitrión: <strong>Don Sergio Chamorro</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle El Consulado, 2c al lago, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584551100">+505 8455-1100</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 5,500 – C$ 8,800 NIO</span></div>
+                <div class="price-usd">≈ $150.00 – $240.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Casa colonial privada completa (hasta 10 personas) | Piscina en patio central | Servicio doméstico disponible</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584551100&text=Hola%20Don%20Sergio,%20deseo%20alquilar%20la%20Casona%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9310" data-lng="-85.9520" data-name="Casa Señorial Granada" data-id="place_casasenorial_024">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (240 reseñas)</span>
+                <span class="dest-coop-name">Casas Patrimoniales Granada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 20. MUSEO SAN FRANCISCO (MUSEOS) -->
+          <div class="dest-card-pro" data-category="museos" data-id="place_sanfrancisco_011">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop&q=80" alt="Museo y Convento San Francisco" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_sanfrancisco_011" data-initial-likes="510" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_sanfrancisco_011" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-landmark"></i> Patrimonio Histórico</span>
+              <span class="dest-price-badge">C$ 50 / Entrada Nacional (≈ $1.40 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial, Granada</div>
+              <h3 class="dest-name-title">Museo y Convento San Francisco (1529)</h3>
+              <p class="dest-description-text">
+                El convento más antiguo de Centroamérica con la colección original de estatuaria prehispánica de la Isla Zapatera esculpida en roca basáltica hace más de 1,200 años.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Guías: <strong>Asociación de Guías Patrimoniales de Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle Cervantes y Calle Corral, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525522770">+505 2552-2770</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 180 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $5.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada nacional: <strong>C$ 50</strong> NIO | Extranjeros: <strong>C$ 180</strong> NIO (≈ $5 USD) | Guía patrimonial: <strong>C$ 150</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50525522770&text=Hola%20Gu%C3%ADas%20San%20Francisco,%20deseo%20visita%20guiada%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9312" data-lng="-85.9518" data-name="Museo San Francisco" data-id="place_sanfrancisco_011">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (510 reseñas)</span>
+                <span class="dest-coop-name">Guías Patrimoniales Granada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 21. FORTALEZA EL CASTILLO (MUSEOS) -->
+          <div class="dest-card-pro" data-category="museos" data-id="place_elcastillo_012">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1599827556794-a28a2a4b8700?w=800&auto=format&fit=crop&q=80" alt="Fortaleza La Inmaculada" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_elcastillo_012" data-initial-likes="420" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_elcastillo_012" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-chess-rook"></i> Fortaleza Colonial</span>
+              <span class="dest-price-badge">C$ 50 / Entrada Fortaleza (≈ $1.40 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> El Castillo, Río San Juan</div>
+              <h3 class="dest-name-title">Fortaleza de la Inmaculada Concepción</h3>
+              <p class="dest-description-text">
+                Baluarte militar del siglo XVII sobre el raudal del Río San Juan. Hito histórico donde Rafaela Herrera repelió la invasión pirata británica de 1762. Museo de sitio y cañones originales.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Guías Locales: <strong>Asociación de Baqueanos de Río San Juan</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Loma de la Fortaleza, El Castillo, Río San Juan</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588339910">+505 8833-9910</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 180 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $5.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada nacional: <strong>C$ 50</strong> NIO | Extranjeros: <strong>C$ 180</strong> NIO (≈ $5 USD) | Museo de piratería incluido</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588339910&text=Hola%20Gu%C3%ADas%20El%20Castillo,%20deseo%20visita%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.0180" data-lng="-84.3970" data-name="Fortaleza El Castillo" data-id="place_elcastillo_012">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (420 reseñas)</span>
+                <span class="dest-coop-name">Guías de Río San Juan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 22. ARRIBAS SUNSET (DISCOTECAS) -->
+          <div class="dest-card-pro" data-category="discotecas" data-id="place_arribas_013">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80" alt="Arribas Sunset Lounge" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_arribas_013" data-initial-likes="650" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_arribas_013" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-martini-glass-citrus"></i> Club Frente al Mar</span>
+              <span class="dest-price-badge">C$ 150 / Cóctel Casa (≈ $4.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Arribas Sunset Lounge & Club</h3>
+              <p class="dest-description-text">
+                Música en vivo al atardecer, mixología con ron Flor de Caña, pista sobre la arena frente al Pacífico y gastronomía marina fresca con ambiente vibrante.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Coordinación: <strong>San Juan del Sur Nightlife</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado sur del Malecón de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589221144">+505 8922-1144</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 70 – C$ 350 NIO</span></div>
+                <div class="price-usd">≈ $1.90 – $9.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada libre | Cerveza Toña helada: <strong>C$ 70</strong> | Cóctel con Flor de Caña: <strong>C$ 150 - 220</strong> | Picada mariscos: <strong>C$ 350</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589221144&text=Hola%20Arribas,%20deseo%20reservar%20mesa%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.2540" data-lng="-85.8720" data-name="Arribas Sunset" data-id="place_arribas_013">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.7 (650 reseñas)</span>
+                <span class="dest-coop-name">San Juan Nightlife</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 23. CALLE LA CALZADA (DISCOTECAS) -->
+          <div class="dest-card-pro" data-category="discotecas" data-id="place_calzada_014">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80" alt="Calle La Calzada" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_calzada_014" data-initial-likes="890" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_calzada_014" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-music"></i> Boulevard Bohemio</span>
+              <span class="dest-price-badge">C$ 70 / Toña Helada (≈ $1.90 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial, Granada</div>
+              <h3 class="dest-name-title">Calle La Calzada & Zona Bohemia</h3>
+              <p class="dest-description-text">
+                Paseo peatonal empedrado con bares al aire libre, música en vivo (marimba, trova, son nica y salsa), cerveza nacional bien fría y tertulias nocturnas bajo faroles coloniales.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Asociación: <strong>Comerciantes Gastronómicos La Calzada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle La Calzada (del Parque Colón al Lago Cocibolca)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525523000">+505 2552-3000</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 60 – C$ 280 NIO</span></div>
+                <div class="price-usd">≈ $1.60 – $7.60 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Paseo peatonal y música libre | Cerveza Toña/Victoria: <strong>C$ 60 - 80</strong> | Tablas y tapas criollas: <strong>C$ 150 - 280</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50525523000&text=Hola%20Comerciantes%20La%20Calzada,%20deseo%20informaci%C3%B3n%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9290" data-lng="-85.9520" data-name="Calle La Calzada" data-id="place_calzada_014">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (890 reseñas)</span>
+                <span class="dest-coop-name">Comerciantes La Calzada</span>
               </div>
             </div>
           </div>
