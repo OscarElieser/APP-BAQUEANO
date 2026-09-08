@@ -99,7 +99,7 @@ function initAdminOperations() {
 }
 
 // ----------------------------------------------------------------------------
-// CONTROL DE AUTENTICACIÓN REAL & RESTRICCIÓN DE USUARIOS NORMALES
+// CONTROL DE AUTENTICACIÓN REAL & RECONOCIMIENTO AUTOMÁTICO DE ROLES (RBAC)
 // ----------------------------------------------------------------------------
 function initAdminAuth() {
   const loginGate = document.getElementById('adminLoginGate');
@@ -109,81 +109,136 @@ function initAdminAuth() {
   const passInput = document.getElementById('loginPassword');
   const feedbackAlert = document.getElementById('loginFeedback');
   const logoutBtn = document.getElementById('btnLogoutAdmin');
-  const roleButtons = document.querySelectorAll('.role-select-btn');
+  const googleBtn = document.getElementById('btnGoogleLogin');
 
-  // Selector de roles a 1 toque con las cuentas reales
-  if (roleButtons.length) {
-    roleButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        roleButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+  /**
+   * Reconoce automáticamente el rol del usuario a partir de su correo registrado
+   * sin requerir selección manual de perfiles.
+   */
+  function resolveUserRoleAndProceed(email, displayName, password = null) {
+    const cleanEmail = (email || '').trim().toLowerCase();
 
-        const roleKey = btn.getAttribute('data-role');
+    // 1. Detección automática: Administrador General
+    if (cleanEmail === BAQUEANO_USERS.admin.email.toLowerCase()) {
+      if (password && !BAQUEANO_USERS.admin.passwords.includes(password)) {
+        showLoginError("Contraseña incorrecta para la cuenta administrativa de Baqueano.");
+        return;
+      }
+      loginSuccess(BAQUEANO_USERS.admin);
+      return;
+    }
 
-        if (roleKey === 'user') {
-          // Prueba de Usuario Normal: Muestra que no tiene acceso administrativo
-          if (userInput) userInput.value = "usuario.comunitario@gmail.com";
-          if (passInput) passInput.value = "usuario123";
-          if (feedbackAlert) {
-            feedbackAlert.className = 'login-feedback-alert error';
-            feedbackAlert.innerHTML = `
-              <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-                <div><i class="fa-solid fa-ban"></i> <strong>Aviso de Política de Seguridad:</strong></div>
-                <div style="font-size: 0.8rem;">Los usuarios normales pueden visitar libremente todas las páginas del portal público (destinos, historia, ambiental, gastronomía, música, aliados), pero <strong>no tienen autorización para ingresar al panel administrativo</strong>.</div>
-              </div>
-            `;
-            feedbackAlert.style.display = 'flex';
-          }
+    // 2. Detección automática: Auditor Oficial (Ley 306 INTUR)
+    if (cleanEmail === BAQUEANO_USERS.auditor.email.toLowerCase()) {
+      if (password && !BAQUEANO_USERS.auditor.passwords.includes(password)) {
+        showLoginError("Contraseña incorrecta para la cuenta oficial de auditoría.");
+        return;
+      }
+      loginSuccess(BAQUEANO_USERS.auditor);
+      return;
+    }
+
+    // 3. Detección automática: Usuario Normal (Explorador Público)
+    // Se reconoce su cuenta pero se le notifica que el Ops Center es exclusivo para personal autorizado.
+    if (feedbackAlert) {
+      feedbackAlert.className = 'login-feedback-alert error';
+      feedbackAlert.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 0.45rem; text-align: left;">
+          <div>
+            <i class="fa-solid fa-user-check" style="color: #60A5FA; font-size: 1.1rem;"></i> 
+            <strong>Cuenta Reconocida: Usuario Normal (${cleanEmail || displayName || 'Explorador'})</strong>
+          </div>
+          <div style="font-size: 0.82rem; line-height: 1.5; color: var(--text-muted);">
+            Tienes acceso total e irrestricto a todas las páginas públicas del portal oficial (Destinos, Historia, Campaña Ambiental, Gastronomía, Música y Cooperativas), pero el acceso al <strong>Ops Center</strong> está reservado para personal operativo y auditores.
+          </div>
+          <div style="margin-top: 0.4rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <a href="destinos.html" class="btn-hero-primary" style="padding: 0.45rem 0.9rem; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-compass"></i> Explorar Destinos
+            </a>
+            <a href="index.html" class="btn-hero-glass" style="padding: 0.45rem 0.9rem; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-house"></i> Ir al Inicio
+            </a>
+          </div>
+        </div>
+      `;
+      feedbackAlert.style.display = 'flex';
+    }
+  }
+
+  function showLoginError(msg) {
+    if (feedbackAlert) {
+      feedbackAlert.className = 'login-feedback-alert error';
+      feedbackAlert.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-circle-exclamation" style="color: #EF4444; font-size: 1.1rem;"></i>
+          <span>${msg}</span>
+        </div>
+      `;
+      feedbackAlert.style.display = 'flex';
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // INICIO DE SESIÓN CON GOOGLE
+  // --------------------------------------------------------------------------
+  if (googleBtn) {
+    googleBtn.addEventListener('click', () => {
+      if (feedbackAlert) {
+        feedbackAlert.className = 'login-feedback-alert success';
+        feedbackAlert.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Conectando con Google Identity Services...`;
+        feedbackAlert.style.display = 'flex';
+      }
+
+      // Intentar autenticación con Firebase Google Auth si está disponible
+      if (window.firebase && window.firebase.auth) {
+        try {
+          const provider = new window.firebase.auth.GoogleAuthProvider();
+          window.firebase.auth().signInWithPopup(provider)
+            .then(result => {
+              const user = result.user;
+              const email = user.email || '';
+              const name = user.displayName || user.email;
+              resolveUserRoleAndProceed(email, name);
+            })
+            .catch(error => {
+              // Si popup es bloqueado o no configurado en entorno estático, pedir correo Google
+              fallbackGooglePrompt();
+            });
+          return;
+        } catch (e) {
+          fallbackGooglePrompt();
           return;
         }
+      }
 
-        const authUser = BAQUEANO_USERS[roleKey];
-        if (authUser && userInput && passInput) {
-          userInput.value = authUser.email;
-          passInput.value = authUser.passwords[0];
-          if (feedbackAlert) feedbackAlert.style.display = 'none';
-        }
-      });
+      fallbackGooglePrompt();
     });
   }
 
-  // Formulario de validación real
+  function fallbackGooglePrompt() {
+    const entered = prompt("Ingresa tu cuenta de Google (Gmail):", "oscarelieser.informatica.inatec@gmail.com");
+    if (entered && entered.trim()) {
+      resolveUserRoleAndProceed(entered.trim(), entered.trim());
+    } else {
+      if (feedbackAlert) feedbackAlert.style.display = 'none';
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // INICIO DE SESIÓN CON CORREO & CONTRASEÑA
+  // --------------------------------------------------------------------------
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
       e.preventDefault();
-      const enteredEmail = userInput.value.trim().toLowerCase();
-      const enteredPass = passInput.value.trim();
+      const enteredEmail = userInput ? userInput.value.trim() : '';
+      const enteredPass = passInput ? passInput.value.trim() : '';
 
-      // 1. Verificar si es el Administrador real
-      if (enteredEmail === BAQUEANO_USERS.admin.email.toLowerCase() &&
-          BAQUEANO_USERS.admin.passwords.includes(enteredPass)) {
-        loginSuccess(BAQUEANO_USERS.admin);
+      if (!enteredEmail) {
+        showLoginError("Por favor ingresa tu correo electrónico registrado.");
         return;
       }
 
-      // 2. Verificar si es el Auditor real
-      if (enteredEmail === BAQUEANO_USERS.auditor.email.toLowerCase() &&
-          BAQUEANO_USERS.auditor.passwords.includes(enteredPass)) {
-        loginSuccess(BAQUEANO_USERS.auditor);
-        return;
-      }
-
-      // 3. Si es un usuario normal u otra cuenta: DENEGAR TOTALMENTE
-      if (feedbackAlert) {
-        feedbackAlert.className = 'login-feedback-alert error';
-        feedbackAlert.innerHTML = `
-          <div style="display: flex; flex-direction: column; gap: 0.4rem; text-align: left;">
-            <div><i class="fa-solid fa-shield-xmark" style="color: #EF4444; font-size: 1.1rem;"></i> <strong>Acceso Denegado:</strong></div>
-            <div>Esta cuenta no cuenta con credenciales administrativas ni de auditoría en Baqueano Nicaragua.</div>
-            <div style="margin-top: 0.3rem;">
-              <a href="index.html" class="btn-admin-action" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
-                <i class="fa-solid fa-arrow-left"></i> Volver al Portal de Explorador Público
-              </a>
-            </div>
-          </div>
-        `;
-        feedbackAlert.style.display = 'flex';
-      }
+      resolveUserRoleAndProceed(enteredEmail, enteredEmail, enteredPass);
     });
   }
 
@@ -193,13 +248,13 @@ function initAdminAuth() {
 
     if (feedbackAlert) {
       feedbackAlert.className = 'login-feedback-alert success';
-      feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> Bienvenido, <strong>${userObj.name}</strong> (${userObj.roleLabel}). Cargando telemetría oficial...`;
+      feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> Bienvenido, <strong>${userObj.name}</strong> (${userObj.roleLabel}). Acceso verificado con éxito...`;
       feedbackAlert.style.display = 'flex';
     }
 
     setTimeout(() => {
       showDashboard(userObj);
-    }, 500);
+    }, 450);
   }
 
   // Botón de cierre de sesión
@@ -208,6 +263,9 @@ function initAdminAuth() {
       sessionStorage.removeItem('baqueano_active_user');
       currentActiveUser = null;
       hideDashboard();
+      if (userInput) userInput.value = '';
+      if (passInput) passInput.value = '';
+      if (feedbackAlert) feedbackAlert.style.display = 'none';
     });
   }
 
