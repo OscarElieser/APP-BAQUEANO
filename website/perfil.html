@@ -645,13 +645,13 @@
           </div>
           <div>
             <h1 class="profile-name-title">
-              <span id="userHeaderName">Carlos Mendoza Jarquín</span>
-              <span class="profile-role-pill" id="userHeaderRole">Explorador Soberano</span>
+              <span id="userHeaderName">Inicia sesión para ver tu perfil</span>
+              <span class="profile-role-pill" id="userHeaderRole">Invitado</span>
             </h1>
             <div class="profile-email-meta">
-              <span><i class="fa-solid fa-envelope"></i> <span id="userHeaderEmail">carlos.mendoza@explorador.ni</span></span>
-              <span><i class="fa-solid fa-calendar-check"></i> Miembro desde <span id="userHeaderSince">Febrero 2026</span></span>
-              <span><i class="fa-solid fa-shield-heart" style="color: #10B981;"></i> Huella Cero Verificada</span>
+              <span><i class="fa-solid fa-envelope"></i> <span id="userHeaderEmail">Sin sesión activa</span></span>
+              <span><i class="fa-solid fa-calendar-check"></i> Miembro desde <span id="userHeaderSince">—</span></span>
+              <span id="userVerificationState"><i class="fa-solid fa-shield" style="color: #94A3B8;"></i> Identidad no verificada</span>
             </div>
           </div>
         </div>
@@ -697,19 +697,19 @@
           <form id="formBasicInfo" class="profile-form-grid">
             <div class="form-group-pro">
               <label class="form-label-pro" for="inputFullName">Nombre Completo</label>
-              <input type="text" id="inputFullName" class="form-input-pro" value="Carlos Mendoza Jarquín" required>
+              <input type="text" id="inputFullName" class="form-input-pro" value="" autocomplete="name" required>
             </div>
             <div class="form-group-pro">
               <label class="form-label-pro" for="inputEmail">Correo Electrónico</label>
-              <input type="email" id="inputEmail" class="form-input-pro" value="carlos.mendoza@explorador.ni" required>
+              <input type="email" id="inputEmail" class="form-input-pro" value="" autocomplete="email" readonly required>
             </div>
             <div class="form-group-pro">
               <label class="form-label-pro" for="inputPhone">Número de Teléfono</label>
-              <input type="tel" id="inputPhone" class="form-input-pro" value="+505 8765-4321">
+              <input type="tel" id="inputPhone" class="form-input-pro" value="" autocomplete="tel">
             </div>
             <div class="form-group-pro">
               <label class="form-label-pro" for="inputEmergencyContact">Contacto de Emergencia SOS</label>
-              <input type="text" id="inputEmergencyContact" class="form-input-pro" value="María Jarquín (+505 8899-1122)">
+              <input type="text" id="inputEmergencyContact" class="form-input-pro" value="">
             </div>
             <div style="grid-column: 1 / -1; margin-top: 0.5rem;">
               <button type="submit" class="btn-hero-primary" style="padding: 0.65rem 1.4rem;">
@@ -1151,6 +1151,9 @@
   </footer>
 
   <!-- Scripts Modulares -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="/__/firebase/init.js"></script>
   <script src="js/user-session.js"></script>
   <script src="js/navigation.js"></script>
   <script src="app.js"></script>
@@ -1160,7 +1163,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Cargar Usuario Actual
       const user = window.BaqueanoSession ? window.BaqueanoSession.getUser() : null;
-      if (!user) return;
+      if (!user) {
+        window.addEventListener('baqueano_session_updated', event => {
+          if (event.detail) window.location.reload();
+        }, { once: true });
+        return;
+      }
 
       // 2. Poblar Datos del Header
       const headerName = document.getElementById('userHeaderName');
@@ -1171,7 +1179,13 @@
       if (headerName) headerName.textContent = user.name || 'Explorador';
       if (headerRole) headerRole.textContent = user.roleLabel || 'Explorador Soberano';
       if (headerEmail) headerEmail.textContent = user.email || '';
-      if (headerSince) headerSince.textContent = user.memberSince || '2026';
+      if (headerSince) headerSince.textContent = user.memberSince || '—';
+      const headerAvatar = document.getElementById('userHeaderAvatar');
+      if (headerAvatar && user.avatar) headerAvatar.src = user.avatar;
+      const verification = document.getElementById('userVerificationState');
+      if (verification) verification.innerHTML = user.emailVerified
+        ? '<i class="fa-solid fa-shield-check" style="color:#10B981"></i> Correo verificado'
+        : '<i class="fa-solid fa-shield" style="color:#F59E0B"></i> Correo pendiente de verificación';
 
       // 3. Poblar Formulario de Datos Básicos
       const inputName = document.getElementById('inputFullName');
@@ -1591,17 +1605,12 @@
       // 14. Cambiar Cuenta / Iniciar Sesión / Salir
       const btnSwitchAcc = document.getElementById('btnSwitchAccount');
       if (btnSwitchAcc) {
-        btnSwitchAcc.addEventListener('click', () => {
-          const email = prompt('Ingresa el correo electrónico para acceder (Ej: oscarelieser.informatica.inatec@gmail.com para Administrador, vigoronmixt@gmail.com para Auditor, o tu correo de explorador):');
-          if (email && email.trim()) {
-            const logged = window.BaqueanoSession.login(email.trim());
-            if (logged.role === 'admin' || logged.role === 'auditor') {
-              alert(`¡Bienvenido ${logged.name}! Tu rol es ${logged.roleLabel}. Redirigiendo a Ops Center...`);
-              window.location.href = 'admin.html';
-            } else {
-              alert(`¡Bienvenido ${logged.name}! Perfil actualizado.`);
-              window.location.reload();
-            }
+        btnSwitchAcc.addEventListener('click', async () => {
+          try {
+            await window.BaqueanoSession.loginWithGoogle();
+            window.location.reload();
+          } catch (error) {
+            alert('No fue posible validar la cuenta con Google: ' + error.message);
           }
         });
       }

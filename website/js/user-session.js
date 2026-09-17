@@ -54,142 +54,23 @@
     }
   };
 
-  // Usuario Explorador por Defecto (Mock Inicial para Experiencia Inmediata)
-  const DEFAULT_EXPLORER = {
-    id: 'usr-nic-2026-884',
-    name: 'Carlos Mendoza Jarquín',
-    email: 'carlos.mendoza@explorador.ni',
-    phone: '+505 8765-4321',
-    avatar: 'assets/images/logo.png',
-    avatarText: 'CM',
-    role: 'explorer',
-    roleLabel: 'Explorador Soberano',
-    memberSince: 'Febrero 2026',
-    isLoggedIn: true,
-    twoFactorEnabled: false,
-    settings: {
-      language: 'es',
-      currency: 'USD'
-    },
-    travelPreferences: {
-      interests: ['senderismo', 'volcanes', 'gastronomia', 'aventura'],
-      dietaryRestrictions: 'Ninguna',
-      accessibilityNeeds: 'Sin limitaciones de movilidad física',
-      emergencyContact: 'María Jarquín (+505 8899-1122)'
-    },
-    savedPaymentMethods: [
-      {
-        id: 'pm-1',
-        brand: 'Visa',
-        last4: '4821',
-        holder: 'Carlos Mendoza J.',
-        expiry: '08/28',
-        isDefault: true
-      },
-      {
-        id: 'pm-2',
-        brand: 'Mastercard',
-        last4: '9034',
-        holder: 'Carlos Mendoza J.',
-        expiry: '11/27',
-        isDefault: false
-      }
-    ],
-    bookings: [
-      {
-        id: 'BK-2026-9042',
-        destinationName: 'Parque Nacional Volcán Masaya & Cuevas de Tálquez',
-        destinationCategory: 'Volcanes & Senderos',
-        date: '25 Oct 2026',
-        days: '2 Días / 1 Noche',
-        travelers: 2,
-        totalAmount: 95.00,
-        currency: 'USD',
-        status: 'upcoming', // upcoming, completed, cancelled
-        statusLabel: 'Próxima Expedición',
-        cooperative: 'Cooperativa Ecoturística Guardaparques de Masaya',
-        guideName: 'Don Efraín Morales (Guía Baqueano #14)',
-        meetingPoint: 'Entrada Oficial Km 23 Carretera a Masaya, 07:30 AM',
-        qrCodeText: 'BAQUEANO-AUTH-RES-MASAYA-9042'
-      },
-      {
-        id: 'BK-2026-7811',
-        destinationName: 'Cañón de Somoto & Pozas Escondidas',
-        destinationCategory: 'Ríos & Geología',
-        date: '14 Ene 2026',
-        days: '1 Día Completo',
-        travelers: 4,
-        totalAmount: 140.00,
-        currency: 'USD',
-        status: 'completed',
-        statusLabel: 'Completada',
-        cooperative: 'Cooperativa Multisectorial Guías del Cañón R.L.',
-        guideName: 'Marlon Corrales',
-        meetingPoint: 'Monumento al Cañón, Somoto Madriz',
-        qrCodeText: 'BAQUEANO-AUTH-RES-SOMOTO-7811'
-      },
-      {
-        id: 'BK-2026-6502',
-        destinationName: 'Refugio de Vida Silvestre Los Guatuzos',
-        destinationCategory: 'Humedales & Aves',
-        date: '02 Dic 2025',
-        days: '3 Días / 2 Noches',
-        travelers: 1,
-        totalAmount: 180.00,
-        currency: 'USD',
-        status: 'cancelled',
-        statusLabel: 'Cancelada',
-        cooperative: 'Asociación de Pescadores y Guías de Río San Juan',
-        guideName: 'Sebastián Solís',
-        meetingPoint: 'Muelle de San Carlos, Río San Juan',
-        qrCodeText: 'BAQUEANO-AUTH-RES-GUATUZOS-6502'
-      }
-    ],
-    billingHistory: [
-      {
-        id: 'FAC-2026-00481',
-        bookingId: 'BK-2026-9042',
-        concept: 'Expedición Nocturna Volcán Masaya & Cuevas de Lava',
-        date: '15 Sep 2026',
-        subtotal: 95.00,
-        inturDiscountLey306: 0.00,
-        taxes: 0.00,
-        total: 95.00,
-        currency: 'USD',
-        paymentMethod: 'Visa •••• 4821',
-        fiscalRegime: 'Régimen Ecoturístico Comunitario — Ley 306 INTUR'
-      },
-      {
-        id: 'FAC-2026-00312',
-        bookingId: 'BK-2026-7811',
-        concept: 'Descenso Acuático en Tubing Somoto & Almuerzo Típico',
-        date: '10 Ene 2026',
-        subtotal: 140.00,
-        inturDiscountLey306: 0.00,
-        taxes: 0.00,
-        total: 140.00,
-        currency: 'USD',
-        paymentMethod: 'Mastercard •••• 9034',
-        fiscalRegime: 'Régimen Ecoturístico Comunitario — Ley 306 INTUR'
-      }
-    ]
-  };
-
   /**
    * Carga la sesión del usuario desde el almacenamiento local.
    */
   function loadSession() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        return JSON.parse(raw);
+      if (!raw) return null;
+      const session = JSON.parse(raw);
+      if (!session || !session.firebaseUid || !session.isLoggedIn) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
       }
-    } catch (e) {
-      console.warn('[Baqueano Session] Error leyendo localStorage:', e);
+      return session;
+    } catch (error) {
+      console.warn('[Baqueano Session] Sesión local inválida:', error);
+      return null;
     }
-    // Si no existe, guardar el explorador inicial por defecto
-    saveSession(DEFAULT_EXPLORER);
-    return DEFAULT_EXPLORER;
   }
 
   /**
@@ -306,34 +187,35 @@
       window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: userObj }));
     },
 
-    login: function(email, password) {
-      const cleanEmail = (email || '').trim().toLowerCase();
-      let user = loadSession();
-
-      if (PRIVILEGED_ACCOUNTS[cleanEmail]) {
-        const priv = PRIVILEGED_ACCOUNTS[cleanEmail];
-        user.email = cleanEmail;
-        user.role = priv.role;
-        user.roleLabel = priv.roleLabel;
-        user.name = priv.role === 'admin' ? 'Oscar Elieser (Admin)' : 'Vigorón Mixto (Auditor)';
-        user.isLoggedIn = true;
-      } else {
-        user.email = cleanEmail;
-        user.role = 'explorer';
-        user.roleLabel = 'Explorador Soberano';
-        user.name = cleanEmail.split('@')[0].replace(/[._]/g, ' ').toUpperCase();
-        user.isLoggedIn = true;
-      }
-
-      this.saveUser(user);
-      return user;
+    login: async function(email, password) {
+      if (!window.firebase || !window.firebase.auth) throw new Error('Firebase Authentication no está disponible.');
+      if (!email || !password) throw new Error('Correo y contraseña son obligatorios.');
+      const credential = await window.firebase.auth().signInWithEmailAndPassword(email.trim(), password);
+      return syncFirebaseIdentity(credential.user);
     },
 
-    logout: function() {
-      let user = loadSession();
-      user.isLoggedIn = false;
-      this.saveUser(user);
-      return user;
+    register: async function(email, password, displayName) {
+      if (!window.firebase || !window.firebase.auth) throw new Error('Firebase Authentication no está disponible.');
+      if (!email || !password || !displayName) throw new Error('Nombre, correo y contraseña son obligatorios.');
+      const credential = await window.firebase.auth().createUserWithEmailAndPassword(email.trim(), password);
+      await credential.user.updateProfile({ displayName: displayName.trim() });
+      await credential.user.sendEmailVerification();
+      await credential.user.reload();
+      return syncFirebaseIdentity(window.firebase.auth().currentUser);
+    },
+    loginWithGoogle: async function() {
+      if (!window.firebase || !window.firebase.auth) throw new Error('Firebase Authentication no está disponible.');
+      const provider = new window.firebase.auth.GoogleAuthProvider();
+      const credential = await window.firebase.auth().signInWithPopup(provider);
+      return syncFirebaseIdentity(credential.user);
+    },
+
+    logout: async function() {
+      if (window.firebase && window.firebase.auth) await window.firebase.auth().signOut();
+      localStorage.removeItem(STORAGE_KEY);
+      updateNavbar();
+      window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: null }));
+      return null;
     },
 
     updateProfile: function(updatedFields) {
@@ -390,6 +272,47 @@
     }
   };
 
+  function syncFirebaseIdentity(firebaseUser) {
+    if (!firebaseUser) {
+      localStorage.removeItem(STORAGE_KEY);
+      updateNavbar();
+      window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: null }));
+      return null;
+    }
+    const existing = loadSession();
+    const email = (firebaseUser.email || '').trim().toLowerCase();
+    const privileged = PRIVILEGED_ACCOUNTS[email];
+    const createdAt = firebaseUser.metadata && firebaseUser.metadata.creationTime
+      ? new Date(firebaseUser.metadata.creationTime).toLocaleDateString('es-NI', { month: 'long', year: 'numeric' })
+      : '';
+    const session = {
+      ...(existing && existing.firebaseUid === firebaseUser.uid ? existing : {}),
+      firebaseUid: firebaseUser.uid,
+      name: firebaseUser.displayName || email,
+      email,
+      phone: firebaseUser.phoneNumber || '',
+      avatar: firebaseUser.photoURL || '',
+      role: privileged ? privileged.role : 'explorer',
+      roleLabel: privileged ? privileged.roleLabel : 'Explorador',
+      memberSince: createdAt,
+      emailVerified: !!firebaseUser.emailVerified,
+      providerIds: (firebaseUser.providerData || []).map(profile => profile.providerId),
+      isLoggedIn: true,
+      settings: existing && existing.settings ? existing.settings : { language: 'es', currency: 'USD' },
+      travelPreferences: existing && existing.travelPreferences ? existing.travelPreferences : {},
+      bookings: existing && existing.bookings ? existing.bookings : [],
+      billingHistory: existing && existing.billingHistory ? existing.billingHistory : [],
+      savedPaymentMethods: []
+    };
+    saveSession(session);
+    updateNavbar();
+    window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: session }));
+    return session;
+  }
+
+  if (window.firebase && window.firebase.auth) {
+    window.firebase.auth().onAuthStateChanged(syncFirebaseIdentity);
+  }
   // Exponer globalmente
   window.BaqueanoSession = BaqueanoSession;
 

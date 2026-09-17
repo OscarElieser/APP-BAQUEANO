@@ -28,7 +28,6 @@
 const BAQUEANO_USERS = {
   admin: {
     email: "oscarelieser.informatica.inatec@gmail.com",
-    passwords: ["admin123", "Baqueano2026!", "oscar2026"],
     name: "Oscar Elieser",
     role: "admin",
     roleLabel: "Administrador General",
@@ -42,7 +41,6 @@ const BAQUEANO_USERS = {
   },
   auditor: {
     email: "vigoronmixt@gmail.com",
-    passwords: ["auditor123", "Baqueano2026!", "vigoron2026"],
     name: "Vigorón Mixto",
     role: "auditor",
     roleLabel: "Auditor Oficial de Cumplimiento",
@@ -72,7 +70,7 @@ function initAdminOperations() {
 
       setTimeout(() => {
         if (icon) icon.classList.remove('fa-spin');
-        simulateLiveMetricUpdate();
+        refreshVerifiedAdminMetrics();
       }, 700);
     });
   }
@@ -93,9 +91,7 @@ function initAdminOperations() {
   }
 
   // Simulación periódica de actividad en segundo plano
-  setInterval(() => {
-    simulateLiveStreamEvent();
-  }, 35000);
+  refreshVerifiedAdminMetrics();
 }
 
 // ----------------------------------------------------------------------------
@@ -115,26 +111,23 @@ function initAdminAuth() {
    * Reconoce automáticamente el rol del usuario a partir de su correo registrado
    * sin requerir selección manual de perfiles.
    */
-  function resolveUserRoleAndProceed(email, displayName, password = null) {
+  function resolveUserRoleAndProceed(email, displayName, firebaseUser = null) {
     const cleanEmail = (email || '').trim().toLowerCase();
+
+    if (!firebaseUser) {
+      showLoginError('Acceso rechazado. Inicia sesi?n mediante el bot?n oficial de Google.');
+      return;
+    }
 
     // 1. Detección automática: Administrador General
     if (cleanEmail === BAQUEANO_USERS.admin.email.toLowerCase()) {
-      if (password && !BAQUEANO_USERS.admin.passwords.includes(password)) {
-        showLoginError("Contraseña incorrecta para la cuenta administrativa de Baqueano.");
-        return;
-      }
-      loginSuccess(BAQUEANO_USERS.admin);
+      loginSuccess({ ...BAQUEANO_USERS.admin, uid: firebaseUser.uid, name: displayName || firebaseUser.email, photoURL: firebaseUser.photoURL || '' });
       return;
     }
 
     // 2. Detección automática: Auditor Oficial (Ley 306 INTUR)
     if (cleanEmail === BAQUEANO_USERS.auditor.email.toLowerCase()) {
-      if (password && !BAQUEANO_USERS.auditor.passwords.includes(password)) {
-        showLoginError("Contraseña incorrecta para la cuenta oficial de auditoría.");
-        return;
-      }
-      loginSuccess(BAQUEANO_USERS.auditor);
+      loginSuccess({ ...BAQUEANO_USERS.auditor, uid: firebaseUser.uid, name: displayName || firebaseUser.email, photoURL: firebaseUser.photoURL || '' });
       return;
     }
 
@@ -201,21 +194,27 @@ function initAdminAuth() {
             .then(result => {
               const user = result.user;
               const email = user.email || '';
+              const hasGoogleProvider = (user.providerData || []).some(profile => profile.providerId === 'google.com');
+              if (!hasGoogleProvider || !user.emailVerified) {
+                window.firebase.auth().signOut();
+                showLoginError('El Ops Center exige una cuenta Google con correo verificado.');
+                return;
+              }
               const name = user.displayName || user.email;
-              resolveUserRoleAndProceed(email, name);
+              resolveUserRoleAndProceed(email, name, user);
             })
             .catch(error => {
               // Si popup es bloqueado o no configurado en entorno estático, pedir correo Google
-              fallbackGooglePrompt();
+              showLoginError('Google no pudo validar el acceso. Intenta nuevamente y permite la ventana de autenticaci?n.');
             });
           return;
         } catch (e) {
-          fallbackGooglePrompt();
+          showLoginError('Firebase Authentication no pudo iniciar Google.');
           return;
         }
       }
 
-      fallbackGooglePrompt();
+      showLoginError('Firebase Authentication no est? disponible. El acceso local est? deshabilitado.');
     });
   }
 
@@ -268,28 +267,29 @@ function initAdminAuth() {
       currentActiveUser = null;
       hideDashboard();
       if (userInput) userInput.value = '';
+      if (window.firebase && window.firebase.auth) window.firebase.auth().signOut();
       if (passInput) passInput.value = '';
       if (feedbackAlert) feedbackAlert.style.display = 'none';
     });
   }
 
   // Verificar sesión activa
-  const savedUserJson = sessionStorage.getItem('baqueano_active_user');
-  if (savedUserJson) {
-    try {
-      const saved = JSON.parse(savedUserJson);
-      if (saved.email === BAQUEANO_USERS.admin.email || saved.email === BAQUEANO_USERS.auditor.email) {
-        currentActiveUser = saved;
-        showDashboard(saved);
-      } else {
-        hideDashboard();
-      }
-    } catch (e) {
+  sessionStorage.removeItem('baqueano_active_user');
+  hideDashboard();
+  if (!window.firebase || !window.firebase.auth) return;
+  window.firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (!firebaseUser) {
       hideDashboard();
+      return;
     }
-  } else {
-    hideDashboard();
-  }
+    const hasGoogleProvider = (firebaseUser.providerData || []).some(profile => profile.providerId === 'google.com');
+    if (!hasGoogleProvider || !firebaseUser.emailVerified) {
+      window.firebase.auth().signOut();
+      showLoginError('El Ops Center solo acepta cuentas Google verificadas.');
+      return;
+    }
+    resolveUserRoleAndProceed(firebaseUser.email, firebaseUser.displayName || firebaseUser.email, firebaseUser);
+  });
 }
 
 function showDashboard(user) {
@@ -360,6 +360,39 @@ function applyRolePermissions(user) {
 
 // ----------------------------------------------------------------------------
 // OPERACIONES DEL DASHBOARD (MÉTRICAS & RUTAS)
+function setAdminDataProvenance(source) {
+  const root = document.getElementById('opsDataProvenance');
+  const label = document.getElementById('opsDataSourceLabel');
+  const detail = document.getElementById('opsDataSourceDetail');
+  const badge = document.getElementById('opsDataSourceBadge');
+  if (!root || !label || !detail || !badge) return;
+  const isLive = source === 'firestore';
+  root.classList.toggle('is-live', isLive);
+  label.textContent = isLive ? 'DATOS EN VIVO' : 'MODO DEMOSTRACI?N';
+  detail.textContent = isLive ? 'M?tricas verificadas desde Cloud Firestore.' : 'Las cifras fijas son referencias visuales y no representan actividad real.';
+  badge.textContent = isLive ? 'PRODUCCI?N' : 'DEMO';
+  badge.className = 'ops-data-provenance-badge ' + (isLive ? 'live' : 'demo');
+}
+
+function refreshVerifiedAdminMetrics() {
+  const service = window.BaqueanoFirestore;
+  if (!service || typeof service.listenAdminMetrics !== 'function') {
+    setAdminDataProvenance('seed');
+    return;
+  }
+  try {
+    service.stopListeningMetrics();
+    service.listenAdminMetrics(metrics => {
+      setAdminDataProvenance(metrics.source);
+      const published = document.getElementById('metricPublishedDests');
+      if (published && Number.isFinite(metrics.publishedPlaces)) published.textContent = String(metrics.publishedPlaces);
+    });
+  } catch (error) {
+    console.error('[OpsCenter] No fue posible verificar m?tricas:', error);
+    setAdminDataProvenance('error');
+  }
+}
+
 // ----------------------------------------------------------------------------
 function simulateLiveMetricUpdate() {
   const appUsers = document.getElementById('metricAppUsers');
