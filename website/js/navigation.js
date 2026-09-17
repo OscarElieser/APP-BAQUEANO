@@ -28,7 +28,7 @@
 // - initSmoothScroll(): Desplazamiento fluido para hipervínculos internos.
 // ============================================================================
 
-let currentGpsCoords = "Buscando satélites...";
+let currentGpsCoords = "Ubicación aún no disponible";
 
 /**
  * Controla el estado visual de la barra superior con efecto dinámico al hacer scroll.
@@ -273,13 +273,13 @@ function initSosModal() {
           if (gpsDisplay) gpsDisplay.innerHTML = `<i class="fa-solid fa-satellite" style="color: #10B981;"></i> ${currentGpsCoords}`;
         },
         () => {
-          currentGpsCoords = "Lat: 12.1364° N, Lon: -86.2514° O (Nicaragua)";
-          if (gpsDisplay) gpsDisplay.innerHTML = `<i class="fa-solid fa-location-dot" style="color: var(--terracotta);"></i> ${currentGpsCoords}`;
+          currentGpsCoords = "Ubicación no compartida por el dispositivo";
+          if (gpsDisplay) gpsDisplay.innerHTML = `<i class="fa-solid fa-location-crosshairs" style="color: var(--terracotta);"></i> ${currentGpsCoords}`;
         },
         { timeout: 8000 }
       );
     } else {
-      currentGpsCoords = "Lat: 12.1364° N, Lon: -86.2514° O (Nicaragua)";
+      currentGpsCoords = "Geolocalización no disponible en este dispositivo";
       if (gpsDisplay) gpsDisplay.textContent = currentGpsCoords;
     }
   };
@@ -584,6 +584,40 @@ function initDynamicFooter() {
 }
 
 /**
+ * POR QUÉ: reunir identidad institucional y documentos legales sin saturar la barra principal.
+ * CÓMO: transforma el enlace Nosotros existente en un desplegable accesible antes de iniciar controles.
+ * QUÉ: acceso a Nosotros, Términos, Privacidad, Aviso Legal y Cookies en todas las páginas.
+ */
+function buildAboutDropdown() {
+  const navMenu = document.getElementById('navLinksMenu');
+  if (!navMenu || navMenu.querySelector('#navDropdownAbout')) return;
+
+  const aboutLink = Array.from(navMenu.children).find((item) =>
+    item.matches?.('a[href="nosotros.html"], a[href$="/nosotros.html"]')
+  );
+  if (!aboutLink) return;
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'nav-dropdown nav-dropdown-about';
+  dropdown.id = 'navDropdownAbout';
+  dropdown.setAttribute('role', 'none');
+  dropdown.innerHTML = `
+    <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="megaMenuAbout" role="menuitem">
+      <span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Nosotros</span><span class="nav-sublabel">Institución & Legal</span></span></span>
+      <span class="nav-dropdown-caret"><i class="fa-solid fa-chevron-down"></i></span>
+    </button>
+    <div class="nav-dropdown-menu" id="megaMenuAbout" role="menu">
+      <div class="mega-menu-header" aria-hidden="true"><span class="mega-menu-header-icon"><i class="fa-solid fa-scale-balanced"></i></span><span class="mega-menu-header-title">Institución & Transparencia</span><span class="mega-menu-header-line"></span></div>
+      <a href="nosotros.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-people-group"></i></span><span class="nav-dd-text"><span class="nav-dd-title">Quiénes Somos</span><span class="nav-dd-desc">Marca, propósito y manifiesto</span></span></a>
+      <a href="terminos.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-file-signature"></i></span><span class="nav-dd-text"><span class="nav-dd-title">Términos y Condiciones</span><span class="nav-dd-desc">Reglas de uso de la plataforma</span></span></a>
+      <a href="privacidad.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-shield-halved"></i></span><span class="nav-dd-text"><span class="nav-dd-title">Política de Privacidad</span><span class="nav-dd-desc">Protección y tratamiento de datos</span></span></a>
+      <a href="aviso-legal.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-gavel"></i></span><span class="nav-dd-text"><span class="nav-dd-title">Aviso Legal</span><span class="nav-dd-desc">Responsabilidad y marco institucional</span></span></a>
+      <a href="cookies.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-cookie-bite"></i></span><span class="nav-dd-text"><span class="nav-dd-title">Política de Cookies</span><span class="nav-dd-desc">Preferencias y tecnologías utilizadas</span></span></a>
+    </div>`;
+
+  aboutLink.replaceWith(dropdown);
+}
+/**
  * Control interactivo del submenú desplegable "Mi País"
  */
 function initDropdownMiPais() {
@@ -630,17 +664,23 @@ function ensureUserSessionLoaded() {
   }
 }
 
-// Auto-inicialización defensiva para páginas directas
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    ensureUserSessionLoaded();
-    if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
-    if (typeof initDynamicFooter === 'function') initDynamicFooter();
-    if (typeof initDropdownMiPais === 'function') initDropdownMiPais();
-  });
-} else {
+// Auto-inicialización completa y defensiva para páginas directas.
+function initializeNavigationModules() {
   ensureUserSessionLoaded();
-  if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
-  if (typeof initDynamicFooter === 'function') initDynamicFooter();
-  if (typeof initDropdownMiPais === 'function') initDropdownMiPais();
+  initNavbarScroll();
+  initDynamicNavbar();
+  initMobileMenu();
+  initActiveNavHighlight();
+  initSosModal();
+  initDownloadModal();
+  initShareTools();
+  initSmoothScroll();
+  initDynamicFooter();
+  initDropdownMiPais();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeNavigationModules, { once: true });
+} else {
+  initializeNavigationModules();
 }
