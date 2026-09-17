@@ -159,10 +159,10 @@
           </span>
         </a>
 
-        <!-- ENLACE DINÁMICO: PERFIL (Explorador) vs OPS CENTER (Admin/Auditor) -->
-        <a href="perfil.html" class="nav-link-user-role active">
+        <!-- BOTÓN PERFIL (EXPLORADOR / MI CUENTA) -->
+        <a href="perfil.html" class="nav-link-perfil active" role="menuitem">
           <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-user-gear nav-icon"></i></span>
+            <span class="nav-icon-box"><i class="fa-solid fa-circle-user nav-icon"></i></span>
             <span class="nav-text-group">
               <span class="nav-label">Perfil</span>
               <span class="nav-sublabel">Mi Cuenta</span>
@@ -173,9 +173,33 @@
             <i class="fa-solid fa-chevron-right nav-arrow"></i>
           </span>
         </a>
+
+        <!-- BOTÓN OPS CENTER (SOLO AUDITOR / ADMIN) -->
+        <a href="admin.html" class="nav-link-ops" role="menuitem">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ops Center</span>
+              <span class="nav-sublabel">Comando & Telemetría</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">● 24/7</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
       </div>
 
       <div class="nav-actions-right">
+        <!-- Chip de Perfil de Acceso Rápido -->
+        <a href="perfil.html" class="nav-profile-btn" title="Mi Perfil" aria-label="Abrir mi perfil">
+          <span class="nav-profile-avatar" aria-hidden="true"><i class="fa-solid fa-circle-user"></i></span>
+          <span class="nav-profile-info">
+            <span class="nav-profile-name">Mi Perfil</span>
+            <span class="nav-profile-role">Explorador</span>
+          </span>
+        </a>
+
         <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
           <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
         </button>
