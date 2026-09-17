@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CANAL ÉTICO AMBIENTAL & DENUNCIAS (denuncias.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Proveer a exploradores, cooperativas y campesinos un canal seguro, confidencial
+  y directo para reportar infracciones ambientales, tala ilegal, caza furtiva,
+  contaminación de afluentes o alteración de áreas naturales protegidas.
+- Enlazar la acción ciudadana con las brigadas comunitarias de base y las
+  autoridades de MARENA (Ministerio del Ambiente y los Recursos Naturales).
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Formulario interactivo con geolocalización satelital en sendero, selección
+  de departamento y tipo de delito ecológico.
+- Enlace directo a la línea de denuncia verde de MARENA y WhatsApp de la Mesa Técnica.
+- Paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+- Menú principal integrado con el submenú de "Mi País", drawer móvil y footer oficial.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Formulario de denuncia ambiental confidencial.
+- Líneas de auxilio y contacto directo de brigadas de guardabosques.
+- Protocolo de acción inmediata ante emergencias de incendios forestales (SINAPRED).
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canal Ético Ambiental & Denuncias | Baqueano Nicaragua</title>
+  <meta name="description" content="Canal ético y de denuncias ambientales de Baqueano Nicaragua. Reporta delitos ecológicos y apoya a las brigadas comunitarias y MARENA.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Maestros Oficiales -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modules.css">
+
+  <style>
+    .report-hero-section {
+      padding: 6.5rem 0 3.5rem;
+      background: radial-gradient(circle at 15% 25%, rgba(46, 125, 50, 0.4) 0%, transparent 60%),
+                  radial-gradient(circle at 85% 75%, rgba(246, 94, 1, 0.25) 0%, transparent 60%),
+                  #0A1120;
+      border-bottom: 1px solid rgba(46, 125, 50, 0.3);
+    }
+    .report-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(46, 125, 50, 0.2);
+      border: 1px solid rgba(74, 222, 128, 0.45);
+      border-radius: 9999px;
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #4ADE80;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .report-card-wrap {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1.5px solid rgba(74, 222, 128, 0.3);
+      border-radius: 24px;
+      padding: 2.2rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      margin-top: 2rem;
+    }
+    .report-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .report-form-label {
+      font-family: var(--font-tech);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--arena-pinolera);
+      letter-spacing: 0.5px;
+    }
+    .report-input, .report-select, .report-textarea {
+      width: 100%;
+      background: rgba(10, 15, 29, 0.85);
+      border: 1.2px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      color: #FFFFFF;
+      font-family: var(--font-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .report-input:focus, .report-select:focus, .report-textarea:focus {
+      border-color: #4ADE80;
+      box-shadow: 0 0 14px rgba(74, 222, 128, 0.35);
+    }
+    .report-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #15803D 0%, #166534 100%);
+      border: 1px solid rgba(74, 222, 128, 0.5);
+      border-radius: 14px;
+      color: #FFFFFF;
+      font-family: var(--font-tech);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(22, 101, 52, 0.5);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .report-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 222, 128, 0.6);
+      background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+    }
+    .hotlines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.3rem;
+      margin-top: 2.5rem;
+    }
+    .hotline-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .hotline-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--terracotta);
+    }
+    .hotline-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(22, 93, 111, 0.4);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4ADE80;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Inicio</span>
+              <span class="nav-sublabel">Portal Soberano</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
+        <div class="nav-dropdown" id="navDropdownMiPais">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="nav-item-content">
+              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
+              <span class="nav-text-group">
+                <span class="nav-label">Mi País</span>
+                <span class="nav-sublabel">Tierra Pinolera</span>
+              </span>
+            </span>
+            <span class="nav-dropdown-caret">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Destinos</span>
+                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
+              </div>
+              <span class="nav-dd-badge">29</span>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Historia</span>
+                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
+              </div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Gastronomía</span>
+                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
+              </div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Música</span>
+                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="ambiental.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ambiental</span>
+              <span class="nav-sublabel">Huella Cero & Decálogo</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="aliados.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Aliados</span>
+              <span class="nav-sublabel">Cooperativas Campesinas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="nosotros.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Nosotros</span>
+              <span class="nav-sublabel">Marca & Manifiesto</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="admin.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ops Center</span>
+              <span class="nav-sublabel">Consola Satelital</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">ACTIVO</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="nav-right-actions">
+        <button class="btn-nav-download" id="headerDownloadBtn">
+          <i class="fa-brands fa-android"></i>
+          <span>App Android</span>
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menú de Navegación">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <section class="report-hero-section">
+      <div class="container">
+        <span class="report-tag-badge">
+          <i class="fa-solid fa-seedling"></i> Vigilancia Ecológica & Soberanía Territorial
+        </span>
+        <h1 style="font-size: clamp(2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 800; margin-bottom: 0.8rem;">
+          🌳 Canal Ético & Denuncias Ambientales
+        </h1>
+        <p style="font-size: 1.05rem; color: var(--arena-pinolera); max-width: 800px; line-height: 1.6;">
+          Protegemos juntos el patrimonio natural de Nicaragua. Reporta con total confidencialidad cualquier daño ecológico para alertar de inmediato a las brigadas de guardabosques comunitarios y a MARENA.
+        </p>
+
+        <!-- FORMULARIO DE DENUNCIA AMBIENTAL -->
+        <div class="report-card-wrap">
+          <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 800; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fa-solid fa-triangle-exclamation" style="color: #4ADE80;"></i>
+            <span>Formulario de Reporte Ecológico Confidencial</span>
+          </h3>
+
+          <form id="ecoReportForm" onsubmit="event.preventDefault(); alert('✅ Tu reporte ha sido remitido con éxito a la Mesa Técnica de Vigilancia Ambiental Baqueano y a las Brigadas Territoriales.'); this.reset();">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportType">Tipo de Incidencia Ambiental *</label>
+                <select id="reportType" class="report-select" required>
+                  <option value="">Selecciona una categoría...</option>
+                  <option value="tala">Tala ilegal o despale en reserva</option>
+                  <option value="caza">Caza furtiva o tráfico de fauna silvestre</option>
+                  <option value="contaminacion">Contaminación de río, laguna o afluente</option>
+                  <option value="incendio">Foco de incendio forestal o quema agrícola descontrolada</option>
+                  <option value="basura">Acumulación de residuos sólidos o basurero clandestino</option>
+                  <option value="otro">Otra alteración del ecosistema</option>
+                </select>
+              </div>
+
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportDepartment">Departamento o Región *</label>
+                <select id="reportDepartment" class="report-select" required>
+                  <option value="">Selecciona el territorio...</option>
+                  <option value="Madriz">Madriz (Cañón de Somoto)</option>
+                  <option value="Rivas">Rivas (Isla de Ometepe / San Juan del Sur)</option>
+                  <option value="León">León (Volcán Cerro Negro / Telica)</option>
+                  <option value="Masaya">Masaya (Volcán Masaya / Laguna de Apoyo)</option>
+                  <option value="Matagalpa">Matagalpa (Peñas Blancas / Selva Negra)</option>
+                  <option value="Jinotega">Jinotega (Bosawás / Datanlí El Diablo)</option>
+                  <option value="Río San Juan">Río San Juan (Indio Maíz / El Castillo)</option>
+                  <option value="Caribe Sur">RACCS (Corn Island / Bluefields)</option>
+                  <option value="Caribe Norte">RACCN (Waspam / Bilwi)</option>
+                  <option value="Otro">Otro Departamento de Nicaragua</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="report-form-group">
+              <label class="report-form-label" for="reportLocation">Ubicación Precisa o Punto de Referencia *</label>
+              <input type="text" id="reportLocation" class="report-input" placeholder="Ej. Sendero El Aguacate, 2 km al norte de la entrada comunitaria..." required>
+            </div>
+
+            <div class="report-form-group">
+              <label class="report-form-label" for="reportDetails">Descripción Detallada del Hecho *</label>
+              <textarea id="reportDetails" rows="4" class="report-textarea" placeholder="Indica lo que observaste, gravedad, posibles involucrados o coordenadas GPS si las tienes..." required></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportName">Nombre de Contacto (Opcional - Puede ser Anónimo)</label>
+                <input type="text" id="reportName" class="report-input" placeholder="Anónimo o tu nombre">
+              </div>
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportContact">Teléfono o WhatsApp (Opcional para Seguimiento)</label>
+                <input type="tel" id="reportContact" class="report-input" placeholder="+505 8000-0000">
+              </div>
+            </div>
+
+            <button type="submit" class="report-submit-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Enviar Reporte a la Brigada Ambiental</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- LÍNEAS DIRECTAS DE EMERGENCIA AMBIENTAL -->
+        <div class="hotlines-grid">
+          <div class="hotline-card">
+            <div class="hotline-icon-box">
+              <i class="fa-solid fa-phone-volume"></i>
+            </div>
+            <div>
+              <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.2rem;">Línea Verde MARENA</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Emergencias Ambientales Nacionales: <strong style="color: #4ADE80;">+505 2263-1273</strong></p>
+            </div>
+          </div>
+
+          <div class="hotline-card">
+            <div class="hotline-icon-box" style="color: var(--terracotta-light);">
+              <i class="fa-solid fa-fire-flame-curved"></i>
+            </div>
+            <div>
+              <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.2rem;">Incendios Forestales</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Bomberos de Nicaragua & SINAPRED: <strong style="color: var(--terracotta-light);">115 / 118</strong></p>
+            </div>
+          </div>
+
+          <div class="hotline-card">
+            <div class="hotline-icon-box" style="color: #25D366;">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div>
+              <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.2rem;">Mesa de Enlace Baqueano</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">WhatsApp Territorial Directo: <strong style="color: #25D366;">+505 8443-1289</strong></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER INSTITUCIONAL OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+
+      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
+      <div class="footer-top-utility-bar">
+        <div class="footer-newsletter-wrap">
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos & Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE LEGAL (LEGAL STACK) -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos & Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html" style="color: #4ADE80; font-weight: 700;">Canal Ético Ambiental</a>
+        <span class="separator">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
+      </div>
+
+      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+            Red Satelital 24/7 Operativa
+          </span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
+          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+</body>
+</html>

@@ -73,8 +73,9 @@ function initDynamicNavbar() {
     navMenu.appendChild(indicator);
   }
 
-  const links = Array.from(navMenu.querySelectorAll('a'));
-  if (links.length === 0) return;
+  // Seleccionar solo los elementos de nivel superior (enlaces directos o trigger de dropdown)
+  const topNavItems = Array.from(navMenu.querySelectorAll(':scope > a, :scope > .nav-dropdown > .nav-dropdown-trigger'));
+  if (topNavItems.length === 0) return;
 
   navMenu.classList.add('has-indicator');
 
@@ -91,14 +92,20 @@ function initDynamicNavbar() {
     indicator.style.opacity = '1';
   };
 
-  const getActiveLink = () => {
-    return navMenu.querySelector('a.active') || links[0];
+  const getActiveItem = () => {
+    // Si un enlace dentro del dropdown "Mi País" está activo, el trigger es el activo
+    const dropdownActiveLink = navMenu.querySelector('.nav-dropdown-menu a.active');
+    if (dropdownActiveLink) {
+      const trigger = navMenu.querySelector('.nav-dropdown-trigger');
+      if (trigger) return trigger;
+    }
+    return navMenu.querySelector(':scope > a.active') || topNavItems[0];
   };
 
   const syncActivePosition = () => {
-    const activeLink = getActiveLink();
-    if (activeLink) {
-      moveIndicatorTo(activeLink);
+    const activeItem = getActiveItem();
+    if (activeItem) {
+      moveIndicatorTo(activeItem);
     }
   };
 
@@ -106,30 +113,30 @@ function initDynamicNavbar() {
   requestAnimationFrame(syncActivePosition);
   setTimeout(syncActivePosition, 100);
 
-  // Escuchadores de interacción sobre los enlaces
-  links.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-      links.forEach(l => l.classList.remove('hovered'));
-      link.classList.add('hovered');
-      moveIndicatorTo(link);
+  // Escuchadores de interacción sobre los elementos superiores
+  topNavItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      topNavItems.forEach(l => l.classList.remove('hovered'));
+      item.classList.add('hovered');
+      moveIndicatorTo(item);
     });
 
-    link.addEventListener('focus', () => {
-      links.forEach(l => l.classList.remove('hovered'));
-      link.classList.add('hovered');
-      moveIndicatorTo(link);
+    item.addEventListener('focus', () => {
+      topNavItems.forEach(l => l.classList.remove('hovered'));
+      item.classList.add('hovered');
+      moveIndicatorTo(item);
     });
   });
 
-  // Al salir del menú, regresar suavemente a la pestaña activa
+  // Al salir del menú, regresar suavemente al elemento activo
   navMenu.addEventListener('mouseleave', () => {
-    links.forEach(l => l.classList.remove('hovered'));
+    topNavItems.forEach(l => l.classList.remove('hovered'));
     syncActivePosition();
   });
 
   navMenu.addEventListener('focusout', (e) => {
     if (!navMenu.contains(e.relatedTarget)) {
-      links.forEach(l => l.classList.remove('hovered'));
+      topNavItems.forEach(l => l.classList.remove('hovered'));
       syncActivePosition();
     }
   });
@@ -581,13 +588,50 @@ function initDynamicFooter() {
   });
 }
 
+/**
+ * Control interactivo del submenú desplegable "Mi País"
+ */
+function initDropdownMiPais() {
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (!dropdown) return;
+
+  const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+  if (!trigger) return;
+
+  // Alternar apertura con clic en el botón principal
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Cerrar al hacer clic fuera del dropdown
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Cerrar al presionar la tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdown.classList.contains('is-open')) {
+      dropdown.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.focus();
+    }
+  });
+}
+
 // Auto-inicialización defensiva para páginas directas
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
     if (typeof initDynamicFooter === 'function') initDynamicFooter();
+    if (typeof initDropdownMiPais === 'function') initDropdownMiPais();
   });
 } else {
   if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
   if (typeof initDynamicFooter === 'function') initDynamicFooter();
+  if (typeof initDropdownMiPais === 'function') initDropdownMiPais();
 }

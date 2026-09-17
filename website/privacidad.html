@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — POLÍTICA DE PRIVACIDAD & SEGURIDAD CLOUD (privacidad.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Garantizar a los exploradores y prestadores locales la máxima transparencia
+  en el manejo de sus datos personales, coordenadas satelitales y reservas.
+- Consagrar la política innegociable de cero venta de información a terceros,
+  cero rastreadores publicitarios invasivos y soberanía de datos del usuario.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Basado directamente en PrivacyScreen de Baqueano Android
+  (lib/features/institutional/screens/privacy_screen.dart).
+- Desglose de arquitectura cloud segura (Google Cloud Platform, Cloud Firestore,
+  Firebase Auth con cifrado TLS/SSL en tránsito y AES-256 en reposo).
+- Paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+- Menú principal integrado con el submenú de "Mi País", drawer móvil y footer oficial.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- 8 Artículos formales de protección de datos personales y derechos ARCO.
+- Canales de contacto con el Oficial de Privacidad (privacidad@baqueano.ni).
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad & Seguridad Cloud | Baqueano Nicaragua</title>
+  <meta name="description" content="Política de privacidad y protección de datos de Baqueano Nicaragua. Cero venta de datos, cifrado en la nube y respeto absoluto por tu privacidad.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Maestros Oficiales -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modules.css">
+
+  <style>
+    .privacy-hero-section {
+      padding: 6.5rem 0 3rem;
+      background: radial-gradient(circle at 15% 25%, rgba(0, 168, 150, 0.35) 0%, transparent 60%),
+                  radial-gradient(circle at 85% 75%, rgba(22, 93, 111, 0.3) 0%, transparent 60%),
+                  #0A1120;
+      border-bottom: 1px solid rgba(0, 168, 150, 0.25);
+    }
+    .privacy-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(0, 168, 150, 0.18);
+      border: 1px solid rgba(0, 168, 150, 0.45);
+      border-radius: 9999px;
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #2DD4BF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .article-item-card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(244, 230, 193, 0.16);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 1.3rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .article-item-card:hover {
+      transform: translateY(-3px);
+      border-color: #00A896;
+    }
+    .article-num-pill {
+      font-family: var(--font-tech);
+      font-size: 1rem;
+      font-weight: 900;
+      color: #2DD4BF;
+      background: rgba(0, 168, 150, 0.15);
+      border: 1px solid rgba(0, 168, 150, 0.4);
+      border-radius: 10px;
+      padding: 0.4rem 0.75rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Inicio</span>
+              <span class="nav-sublabel">Portal Soberano</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
+        <div class="nav-dropdown" id="navDropdownMiPais">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="nav-item-content">
+              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
+              <span class="nav-text-group">
+                <span class="nav-label">Mi País</span>
+                <span class="nav-sublabel">Tierra Pinolera</span>
+              </span>
+            </span>
+            <span class="nav-dropdown-caret">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Destinos</span>
+                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
+              </div>
+              <span class="nav-dd-badge">29</span>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Historia</span>
+                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
+              </div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Gastronomía</span>
+                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
+              </div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Música</span>
+                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="ambiental.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ambiental</span>
+              <span class="nav-sublabel">Huella Cero & Decálogo</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="aliados.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Aliados</span>
+              <span class="nav-sublabel">Cooperativas Campesinas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="nosotros.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Nosotros</span>
+              <span class="nav-sublabel">Marca & Manifiesto</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="admin.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ops Center</span>
+              <span class="nav-sublabel">Consola Satelital</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">ACTIVO</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="nav-right-actions">
+        <button class="btn-nav-download" id="headerDownloadBtn">
+          <i class="fa-brands fa-android"></i>
+          <span>App Android</span>
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menú de Navegación">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <section class="privacy-hero-section">
+      <div class="container">
+        <span class="privacy-tag-badge">
+          <i class="fa-solid fa-user-shield"></i> Protección de Datos & Infraestructura Cloud
+        </span>
+        <h1 style="font-size: clamp(2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 800; margin-bottom: 0.8rem;">
+          🛡️ Políticas de Privacidad & Seguridad Cloud
+        </h1>
+        <p style="font-size: 1.05rem; color: var(--arena-pinolera); max-width: 800px; line-height: 1.6; margin-bottom: 2.5rem;">
+          Cifrado internacional en la nube, cero venta de datos personales y soporte territorial para el viajero.
+        </p>
+
+        <!-- ARTÍCULOS LEGALES DE PRIVACIDAD (Extraídos de privacy_screen.dart) -->
+        <div class="article-item-card">
+          <div class="article-num-pill">01</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Compromiso Ético con la Privacidad
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              En BAQUEANO consideramos la privacidad un derecho fundamental inalienable. Describimos con total transparencia cómo recolectamos, resguardamos y usamos tu información tanto en la aplicación móvil para Android como en la plataforma web oficial y el asistente inteligente Baqueano AI.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">02</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Información que Recopilamos
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Únicamente recolectamos los datos estrictamente necesarios para prestar el servicio: nombre completo, correo electrónico de contacto para reservas directas, datos de geolocalización satelital opcionales (sólo si autorizas el permiso en tu dispositivo para centrar rutas y baliza de auxilio SOS) y consultas realizadas al asistente.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">03</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Finalidad y Uso de los Datos
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              La información se utiliza exclusivamente para: permitir la gestión de reservas comunitarias sin intermediarios, generar presupuestos en tiempo real bajo tasas oficiales (USD/NIO) y sincronizar tus destinos favoritos y rutas offline en tu dispositivo.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">04</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Almacenamiento Seguro e Infraestructura en la Nube
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Toda la información es procesada mediante Google Cloud Platform (Cloud Firestore y Firebase Auth) con cifrado de grado bancario en tránsito (TLS/SSL) y cifrado integral en reposo (AES-256), protegiendo tus credenciales contra accesos no autorizados.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">05</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Modo Offline y Almacenamiento Local Soberano
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Utilizamos almacenamiento local en dispositivo (IndexedDB y almacenamiento seguro Android) para que consultes tus mapas cartográficos y fichas de senderos aún sin conexión celular en montañas, cañones remotos o selvas tropicales. Cero rastreadores publicitarios invasivos.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">06</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Política Estricta de Cero Comercialización de Datos
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Baqueano NO vende, no cede ni comercializa bajo ninguna circunstancia datos personales, perfiles de viaje o patrones de ubicación a terceros, empresas de telemercadeo o redes publicitarias.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">07</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Derechos ARCO (Acceso, Rectificación y Supresión)
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Tienes derecho incondicional en todo momento de acceder a tu información, rectificar cualquier dato inexacto o solicitar la eliminación definitiva e irreversible de tu cuenta y registros asociados de nuestros servidores.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">08</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Contacto y Oficial de Privacidad
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Para ejercer cualquiera de tus derechos de privacidad o realizar consultas sobre el resguardo de tu información, puedes escribir directamente a nuestro canal oficial: <a href="mailto:privacidad@baqueano.ni" style="color: #2DD4BF; font-weight: 700;">privacidad@baqueano.ni</a>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER INSTITUCIONAL OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+
+      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
+      <div class="footer-top-utility-bar">
+        <div class="footer-newsletter-wrap">
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos & Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE LEGAL (LEGAL STACK) -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos & Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html" style="color: #2DD4BF; font-weight: 700;">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
+        <span class="separator">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
+      </div>
+
+      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+            Red Satelital 24/7 Operativa
+          </span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
+          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+</body>
+</html>

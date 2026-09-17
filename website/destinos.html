@@ -392,14 +392,119 @@
       </a>
 
       <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">Inicio</a>
-        <a href="destinos.html" class="active">Destinos</a>
-        <a href="historia.html">Historia</a>
-        <a href="ambiental.html">Ambiental</a>
-        <a href="gastronomia.html">Gastronomía</a>
-        <a href="musica.html">Música</a>
-        <a href="aliados.html">Aliados</a>
-        <a href="admin.html">Ops Center</a>
+        <a href="index.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Inicio</span>
+              <span class="nav-sublabel">Portal Soberano</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
+        <div class="nav-dropdown" id="navDropdownMiPais">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="nav-item-content">
+              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
+              <span class="nav-text-group">
+                <span class="nav-label">Mi País</span>
+                <span class="nav-sublabel">Tierra Pinolera</span>
+              </span>
+            </span>
+            <span class="nav-dropdown-caret">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="destinos.html" class="nav-dropdown-item active" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Destinos</span>
+                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
+              </div>
+              <span class="nav-dd-badge">29</span>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Historia</span>
+                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
+              </div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Gastronomía</span>
+                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
+              </div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Música</span>
+                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="ambiental.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ambiental</span>
+              <span class="nav-sublabel">Huella Cero & Decálogo</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="aliados.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Aliados</span>
+              <span class="nav-sublabel">Cooperativas Campesinas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN NOSOTROS -->
+        <a href="nosotros.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Nosotros</span>
+              <span class="nav-sublabel">Marca & Manifiesto</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="admin.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ops Center</span>
+              <span class="nav-sublabel">Comando & Telemetría</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">● 24/7</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
       </div>
 
       <div class="nav-actions-right">
@@ -2742,17 +2847,17 @@
 
       <!-- BLOQUE LEGAL (LEGAL STACK) -->
       <div class="footer-legal-stack">
-        <a href="terminos.html" onclick="event.preventDefault(); alert('Términos & Condiciones de Uso: Plataforma comunitaria de Nicaragua bajo el Régimen Especial de Fomento Turístico Ley 306 INTUR.');">Términos & Condiciones</a>
+        <a href="terminos.html">Términos & Condiciones</a>
         <span class="separator">|</span>
-        <a href="privacidad.html" onclick="event.preventDefault(); alert('Política de Privacidad: Protección rigurosa de datos personales y ubicación en sendero.');">Política de Privacidad</a>
+        <a href="privacidad.html">Política de Privacidad</a>
         <span class="separator">|</span>
-        <a href="aviso-legal.html" onclick="event.preventDefault(); alert('Aviso Legal: Operación y catálogo respaldado bajo gobernanza comunitaria territorial.');">Aviso Legal</a>
+        <a href="aviso-legal.html">Aviso Legal</a>
         <span class="separator">|</span>
-        <a href="cookies.html" onclick="event.preventDefault(); alert('Política de Cookies: Cache offline local y sin rastreadores invasivos de terceros.');">Política de Cookies</a>
+        <a href="cookies.html">Política de Cookies</a>
         <span class="separator">|</span>
         <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
         <span class="separator">|</span>
-        <a href="denuncias.html" onclick="event.preventDefault(); alert('Canal Ético y Denuncias Ambientales: MARENA / Brigadas Comunitarias.');">Canal Ético Ambiental</a>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
         <span class="separator">|</span>
         <a href="admin.html">Baqueano Ops Center</a>
       </div>
