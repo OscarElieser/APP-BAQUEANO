@@ -554,6 +554,107 @@
         justify-content: center;
       }
     }
+
+    /* =========================================================================
+       ACORDEÓN & DESPLIEGUE REACTIVO: RED DE ANFITRIONES
+       ========================================================================= */
+    .biz-trigger-wrap {
+      margin-top: 2.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .biz-btn-toggle {
+      font-size: 1.08rem;
+      padding: 1.2rem 2.8rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(246, 94, 1, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(246, 94, 1, 0.6);
+    }
+
+    .biz-btn-toggle:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 42px rgba(246, 94, 1, 0.6);
+    }
+
+    .biz-btn-toggle .btn-arrow {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .biz-btn-toggle.is-open {
+      background: linear-gradient(135deg, #165D6F 0%, #0F172A 100%);
+      border-color: rgba(45, 212, 191, 0.5);
+      box-shadow: 0 10px 25px rgba(22, 93, 111, 0.4);
+    }
+
+    .biz-btn-toggle.is-open .btn-arrow {
+      transform: rotate(90deg);
+    }
+
+    .biz-form-collapse {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, margin-top 0.45s ease;
+      margin-top: 0;
+      pointer-events: none;
+    }
+
+    .biz-form-collapse.is-expanded {
+      max-height: 5000px;
+      opacity: 1;
+      margin-top: 2.5rem;
+      overflow: visible;
+      pointer-events: auto;
+    }
+
+    .biz-form-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(22, 93, 111, 0.22);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      border-radius: 14px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 2rem;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .biz-form-header-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .biz-btn-close-form {
+      background: rgba(15, 23, 42, 0.65);
+      color: var(--arena-pinolera, #F4E6C1);
+      border: 1px solid rgba(244, 230, 193, 0.25);
+      padding: 0.45rem 1rem;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .biz-btn-close-form:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #EF4444;
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 
@@ -578,6 +679,7 @@
         <a href="gastronomia.html">Gastronomía</a>
         <a href="musica.html">Música</a>
         <a href="aliados.html">Aliados</a>
+        <a href="#registroNegocios" title="Registra tu Local o Emprendimiento"><i class="fa-solid fa-handshake-angle"></i> Unir Negocio</a>
         <a href="admin.html">Ops Center</a>
       </div>
 
@@ -1141,10 +1243,30 @@
                 <span><strong>Auditoría & Respaldo</strong> de la Mesa Baqueano</span>
               </div>
             </div>
+
+            <!-- Botón de Acción Principal para Abrir la Postulación -->
+            <div class="biz-trigger-wrap">
+              <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
+                <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
+                <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
+              </button>
+            </div>
           </div>
 
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
+          <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
+          <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
+            <div class="biz-form-header-bar">
+              <div class="biz-form-header-info">
+                <i class="fa-solid fa-file-signature" style="color: #2DD4BF; font-size: 1.1rem;"></i>
+                <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
+              </div>
+              <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
+                <i class="fa-solid fa-chevron-up"></i> Ocultar
+              </button>
+            </div>
+
+            <!-- Formulario de Registro -->
+            <form id="registerBusinessForm" class="biz-form" novalidate>
             <div class="biz-form-grid">
               
               <!-- 1. Nombre del Negocio -->
@@ -1360,6 +1482,7 @@
 
             </div>
           </form>
+          </div> <!-- /bizFormCollapse -->
 
         </div>
       </div>
@@ -1584,6 +1707,82 @@
     const modalAcceptBtn = document.getElementById('bizModalCloseBtn');
     const modalSummary = document.getElementById('bizModalSummary');
     const modalWhatsAppBtn = document.getElementById('bizModalWhatsAppBtn');
+
+    // Elementos del Acordeón Desplegable
+    const toggleBtn = document.getElementById('btnToggleBizForm');
+    const formCollapse = document.getElementById('bizFormCollapse');
+    const closeBtnTop = document.getElementById('btnCloseBizFormTop');
+
+    function openBizForm(shouldScroll = true) {
+      if (!formCollapse) return;
+      formCollapse.classList.add('is-expanded');
+      formCollapse.setAttribute('aria-hidden', 'false');
+      if (toggleBtn) {
+        toggleBtn.classList.add('is-open');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        const textSpan = toggleBtn.querySelector('.btn-text');
+        if (textSpan) {
+          textSpan.innerHTML = '<i class="fa-solid fa-chevron-up"></i> Ocultar Formulario de Postulación';
+        }
+      }
+      if (shouldScroll) {
+        setTimeout(() => {
+          formCollapse.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const firstInput = document.getElementById('bizName');
+          if (firstInput) firstInput.focus();
+        }, 180);
+      }
+    }
+
+    function closeBizForm() {
+      if (!formCollapse) return;
+      formCollapse.classList.remove('is-expanded');
+      formCollapse.setAttribute('aria-hidden', 'true');
+      if (toggleBtn) {
+        toggleBtn.classList.remove('is-open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        const textSpan = toggleBtn.querySelector('.btn-text');
+        if (textSpan) {
+          textSpan.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano';
+        }
+      }
+    }
+
+    function toggleBizForm() {
+      if (formCollapse && formCollapse.classList.contains('is-expanded')) {
+        closeBizForm();
+      } else {
+        openBizForm(true);
+      }
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleBizForm);
+    if (closeBtnTop) closeBtnTop.addEventListener('click', closeBizForm);
+
+    // Permitir abrir también al hacer clic en el encabezado (título o badge)
+    const bizTitle = document.querySelector('.biz-main-title');
+    const bizPill = document.querySelector('.biz-badge-pill');
+    [bizTitle, bizPill].forEach(el => {
+      if (el) {
+        el.style.cursor = 'pointer';
+        el.title = 'Haz clic para desplegar el formulario de postulación';
+        el.addEventListener('click', () => {
+          if (formCollapse && !formCollapse.classList.contains('is-expanded')) {
+            openBizForm(true);
+          }
+        });
+      }
+    });
+
+    // Abrir automáticamente si la URL contiene el hash #registroNegocios
+    if (window.location.hash === '#registroNegocios') {
+      setTimeout(() => openBizForm(true), 250);
+    }
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#registroNegocios') {
+        openBizForm(true);
+      }
+    });
 
     // Contador reactivo de caracteres
     if (descInput && charCounter) {
