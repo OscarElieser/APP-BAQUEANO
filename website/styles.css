@@ -2184,7 +2184,249 @@ input[type="range"] {
   background: var(--grad-sunset);
   border-color: rgba(244, 230, 193, 0.6);
   color: #FFFFFF;
+/* ============================================================================
+   ESTILOS DEL FOOTER INSTITUCIONAL COMPLETO & PROFESIONAL
+   ============================================================================ */
+
+/* Franja Superior: Boletín & Redes Oficiales */
+.footer-top-utility-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.5rem 1.8rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.footer-newsletter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 520px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.footer-newsletter-title {
+  font-family: var(--font-tech);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.footer-newsletter-title i {
+  color: var(--terracotta);
+}
+
+.footer-newsletter-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.footer-newsletter-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.footer-newsletter-input {
+  flex: 1;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 15, 29, 0.8);
+  color: #FFFFFF;
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.footer-newsletter-input:focus {
+  border-color: var(--petroleo-light);
+  box-shadow: 0 0 12px rgba(22, 93, 111, 0.5);
+}
+
+.footer-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  background: var(--grad-sunset);
+  color: #FFFFFF;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  font-size: 0.8rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-newsletter-btn:hover {
+  transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(246, 94, 1, 0.5);
+}
+
+/* Redes Sociales Oficiales */
+.footer-social-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.footer-social-label {
+  font-family: var(--font-tech);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--arena-pinolera);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--arena-pinolera);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.footer-social-btn:hover {
+  transform: translateY(-3px) scale(1.12);
+  color: #FFFFFF;
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+  box-shadow: 0 6px 18px rgba(246, 94, 1, 0.6);
+}
+
+/* Sellos de Confianza y Soberanía */
+.footer-trust-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.footer-trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: 6px;
+  font-family: var(--font-tech);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--petroleo-glow);
+  letter-spacing: 0.5px;
+}
+
+/* Datos de Contacto Directo */
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.footer-contact-item i {
+  font-size: 0.95rem;
+  color: var(--terracotta);
+  margin-top: 0.15rem;
+  width: 16px;
+  text-align: center;
+}
+
+.footer-contact-item a {
+  color: var(--arena-pinolera);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-item a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+/* Bloque Legal Stack */
+.footer-legal-stack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  padding: 1rem 0;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.footer-legal-stack a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-stack a:hover {
+  color: var(--arena-pinolera);
+  text-decoration: underline;
+}
+
+.footer-legal-stack span.separator {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 900px) {
+  .footer-top-utility-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .footer-social-section {
+    align-items: flex-start;
+  }
 }
 
 /* ==========================================================================
@@ -3588,7 +3830,357 @@ img {
   color: #FFFFFF;
 }
 
-/* BARRA DE FILTROS POR CATEGORÍA SCROLLABLE */
+/* ============================================================================
+   SUITE DE NAVEGACIÓN Y FILTRADO POR CATEGORÍAS & SUBMENÚS (DESTINOS)
+   ============================================================================
+   🎯 POR QUÉ:
+   - Reemplazar la barra plana de 15 píldoras dispersas por una jerarquía
+     ordenada en dos niveles (Categorías Madre y Subcategorías Tácticas).
+   - Optimizar la experiencia táctil y de navegación en televisores de 40"+,
+     computadoras, tablets y celulares con accesos rápidos y dropdowns.
+   
+   ⚙️ CÓMO:
+   - Menú de macro-categorías tipo pill-dock con Glassmorphism (blur 20px).
+   - Dropdown flotante con microinteracciones de chevrons y elevación suave.
+   - Pira dinámica de submenú (active-submenu-strip) que muestra opciones hijas.
+   - Paleta oficial: #165D6F Petróleo Teal, #F65E01 Terracota, #F4E6C1 Arena Pinolera.
+   
+   📦 QUÉ:
+   - Selectores: .dest-category-nav-suite, .macro-category-bar, .macro-nav-btn,
+     .macro-dropdown-wrapper, .macro-submenu-dropdown, .sub-cat-btn,
+     .active-submenu-strip, .strip-buttons-container, .strip-label-tag.
+   ============================================================================ */
+
+.dest-category-nav-suite {
+  margin-bottom: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Barra Principal de Macro-Categorías */
+.macro-category-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: rgba(10, 15, 29, 0.75);
+  padding: 0.65rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Botón Macro Principal */
+.macro-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--text-secondary);
+  font-family: var(--font-tech);
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  user-select: none;
+}
+
+.macro-nav-btn .macro-icon {
+  font-size: 1rem;
+  color: var(--terracotta-light);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.macro-nav-btn .sub-chevron {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+}
+
+.macro-nav-btn:hover {
+  border-color: rgba(246, 94, 1, 0.5);
+  background: rgba(22, 93, 111, 0.35);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(246, 94, 1, 0.25);
+}
+
+.macro-nav-btn:hover .macro-icon {
+  transform: scale(1.15);
+  color: var(--arena-pinolera);
+}
+
+.macro-nav-btn.active {
+  background: linear-gradient(135deg, rgba(246, 94, 1, 0.95) 0%, rgba(22, 93, 111, 0.95) 100%);
+  color: #FFFFFF;
+  border-color: rgba(244, 230, 193, 0.6);
+  box-shadow: 0 4px 20px rgba(246, 94, 1, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.macro-nav-btn.active .macro-icon {
+  color: #FFFFFF;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.macro-nav-btn.active .sub-chevron {
+  color: #FFFFFF;
+}
+
+/* Wrapper Dropdown */
+.macro-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.macro-dropdown-wrapper.open .macro-nav-btn .sub-chevron,
+.macro-dropdown-wrapper:hover .macro-nav-btn .sub-chevron {
+  transform: rotate(180deg);
+}
+
+/* Submenú Flotante Oculto (Los datos se renderizan en el panel táctil interactivo) */
+.macro-submenu-dropdown {
+  display: none !important;
+}
+
+.sub-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--text-secondary);
+  font-family: var(--font-tech);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s ease;
+  user-select: none;
+}
+
+.sub-cat-btn i {
+  font-size: 0.92rem;
+  color: var(--terracotta-light);
+  width: 18px;
+  text-align: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.sub-cat-btn:hover {
+  background: rgba(22, 93, 111, 0.5);
+  border-color: rgba(246, 94, 1, 0.6);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(246, 94, 1, 0.25);
+}
+
+.sub-cat-btn:hover i {
+  transform: scale(1.18);
+  color: var(--arena-pinolera);
+}
+
+.sub-cat-btn.active {
+  background: linear-gradient(135deg, rgba(246, 94, 1, 0.9) 0%, rgba(22, 93, 111, 0.95) 100%);
+  color: #FFFFFF;
+  border-color: rgba(244, 230, 193, 0.6);
+  box-shadow: 0 4px 16px rgba(246, 94, 1, 0.45);
+}
+
+.sub-cat-btn.active i {
+  color: #FFFFFF;
+}
+
+/* Panel Desplegable de Subcategorías (Se Esconde Automáticamente tras la Selección) */
+.active-submenu-strip {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 15, 29, 0.92);
+  padding: 0.85rem 1.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  animation: stripSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(22, 93, 111, 0.25);
+  margin-top: 0.85rem;
+  width: 100%;
+}
+
+@keyframes stripSlideDown {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.strip-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.strip-label-tag {
+  font-family: var(--font-tech);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--arena-pinolera);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.strip-label-tag i {
+  color: var(--terracotta);
+}
+
+.strip-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.strip-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #EF4444;
+  color: #FFFFFF;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.strip-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+/* Indicador de Filtro Activo (Feedback Inmediato al Esconderse el Submenú) */
+.active-filter-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.4rem 1.1rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: indicatorFadeIn 0.25s ease-out;
+  margin-top: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes indicatorFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.indicator-label {
+  font-family: var(--font-tech);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.indicator-label i {
+  color: var(--terracotta);
+}
+
+.indicator-name {
+  font-family: var(--font-tech);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--arena-pinolera);
+}
+
+.indicator-count {
+  font-family: var(--font-tech);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+}
+
+.indicator-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.65rem;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 9999px;
+  color: #FCA5A5;
+  font-family: var(--font-tech);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.indicator-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  border-color: #EF4444;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* Responsividad para móviles y tablets */
+@media (max-width: 900px) {
+  .macro-category-bar {
+    border-radius: 20px;
+    padding: 0.6rem;
+    gap: 0.45rem;
+  }
+  .macro-nav-btn {
+    padding: 0.52rem 0.95rem;
+    font-size: 0.8rem;
+  }
+  .macro-submenu-dropdown {
+    left: 0;
+    transform: translateY(-10px) scale(0.96);
+    width: 100%;
+    min-width: 250px;
+  }
+  .macro-dropdown-wrapper:hover .macro-submenu-dropdown,
+  .macro-dropdown-wrapper.open .macro-submenu-dropdown {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* BARRA DE FILTROS POR CATEGORÍA COMPATIBLE */
 .filter-pills-bar {
   display: flex;
   align-items: center;

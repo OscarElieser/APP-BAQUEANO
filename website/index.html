@@ -1672,9 +1672,60 @@
 
       </div> <!-- /footer-biz-register-card -->
 
+      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
+      <div class="footer-top-utility-bar">
+        <div class="footer-newsletter-wrap">
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos & Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
       <div class="footer-columns-grid">
+        
+        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
         <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.2rem;">
+          <div class="brand-box" style="margin-bottom: 1.1rem;">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -1682,13 +1733,24 @@
             </div>
           </div>
           <p class="footer-bio-text">
-            Plataforma comunitaria para el ecoturismo responsable, la custodia ambiental y el empoderamiento campesino de Nicaragua. Cero intermediarios foráneos.
+            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
           </p>
+          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
+            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
+          </div>
+          <!-- Sellos de Confianza y Régimen Legal -->
+          <div class="footer-trust-strip">
+            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Ley 306 INTUR</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
+          </div>
         </div>
 
+        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
         <div class="footer-col-links">
           <h4 class="footer-col-header">MÓDULOS WEB</h4>
           <ul class="footer-link-list">
+            <li><a href="index.html">Inicio Institucional</a></li>
             <li><a href="destinos.html">Destinos Protegidos</a></li>
             <li><a href="historia.html">Historia de Mi País</a></li>
             <li><a href="ambiental.html">Campaña Ambiental</a></li>
@@ -1696,33 +1758,104 @@
             <li><a href="musica.html">Patrimonio Sonoro</a></li>
             <li><a href="aliados.html">Cooperativas Aliadas</a></li>
             <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
+            <li><a href="admin.html">Baqueano Ops Center</a></li>
           </ul>
         </div>
 
+        <!-- COLUMNA 3: LÍNEAS DE AUXILIO SOS -->
         <div class="footer-col-emergency">
-          <h4 class="footer-col-header">AUXILIO SOS 24/7</h4>
-          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
-          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
-          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
-          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa SOS Baqueano: <strong>+505 8443-1289</strong></div></div>
-        </div>
-
-        <div class="footer-col-badges">
-          <h4 class="footer-col-header">APLICACIÓN MÓVIL</h4>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-            Construida exclusivamente para Android con optimización de memoria y rendimiento a 60fps.
-          </p>
-          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
-            <i class="fa-brands fa-android"></i> Descargar APK
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item open-sos-btn" title="Cruz Blanca Nacional">
+            <i class="fa-solid fa-truck-medical"></i> <div>Cruz Blanca: <strong>128</strong></div>
+          </div>
+          <div class="emergency-line-item open-sos-btn" title="Bomberos Unidos de Nicaragua">
+            <i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div>
+          </div>
+          <div class="emergency-line-item open-sos-btn" title="Policía Turística y Nacional">
+            <i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>101 / 118</strong></div>
+          </div>
+          <div class="emergency-line-item open-sos-btn" title="Mesa de Enlace SOS Baqueano">
+            <i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div>
+          </div>
+          <button type="button" class="btn-hero-primary open-sos-btn" style="margin-top: 0.6rem; padding: 0.55rem 1rem; font-size: 0.8rem; width: 100%; justify-content: center; background: rgba(239, 68, 68, 0.2); border: 1px solid #EF4444; color: #FF8888;">
+            <i class="fa-solid fa-triangle-exclamation"></i> Abrir Radar GPS SOS
           </button>
         </div>
+
+        <!-- COLUMNA 4: APP ANDROID & INFORMACIÓN DE CONTACTO -->
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.8rem;">
+            Descarga mapas satelitales sin conexión y recorre senderos con GPS en tu teléfono.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.84rem; width: 100%; justify-content: center; margin-bottom: 1.2rem;">
+            <i class="fa-brands fa-android"></i> Descargar APK (56 MB)
+          </button>
+          
+          <h4 class="footer-col-header" style="margin-top: 0.5rem;">INFORMACIÓN DE CONTACTO</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <span>Correo Oficial:</span><br>
+                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <span>Mesa de Enlace:</span><br>
+                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <span>Sede Territorial:</span><br>
+                <span>Managua • 17 Departamentos, Nicaragua</span>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <span>Horario de Atención:</span><br>
+                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
       </div>
 
+      <!-- BLOQUE LEGAL (LEGAL STACK) -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html" onclick="event.preventDefault(); alert('Términos & Condiciones de Uso: Plataforma comunitaria de Nicaragua bajo el Régimen Especial de Fomento Turístico Ley 306 INTUR.');">Términos & Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html" onclick="event.preventDefault(); alert('Política de Privacidad: Protección rigurosa de datos personales y ubicación en sendero.');">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html" onclick="event.preventDefault(); alert('Aviso Legal: Operación y catálogo respaldado bajo gobernanza comunitaria territorial.');">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html" onclick="event.preventDefault(); alert('Política de Cookies: Cache offline local y sin rastreadores invasivos de terceros.');">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html" onclick="event.preventDefault(); alert('Canal Ético y Denuncias Ambientales: MARENA / Brigadas Comunitarias.');">Canal Ético Ambiental</a>
+        <span class="separator">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
+      </div>
+
+      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
       <div class="footer-bottom-bar">
-        <div>© 2026 Baqueano Nicaragua. Desarrollado con orgullo para las comunidades de nuestra patria.</div>
-        <div style="display: flex; gap: 1.5rem;">
-          <a href="ambiental.html">Decálogo Verde</a>
-          <a href="admin.html">Baqueano Ops Center</a>
+        <div>
+          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+            Red Satelital 24/7 Operativa
+          </span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
+          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
         </div>
       </div>
     </div>
