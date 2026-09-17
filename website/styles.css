@@ -7570,3 +7570,245 @@ img {
     width: 100%;
     min-height: 54px;
     padding: 0.65rem 0.8rem;
+
+/* ========================================================================== 
+   SUBMEN? TERRITORIAL ? POSICIONAMIENTO Y ACABADO DE ALTA GAMA
+   ?? POR QU?: el m?dulo layout.css no se carga en las p?ginas HTML heredadas.
+   ?? C?MO: define el estado cerrado/abierto fuera del flujo y tarjetas accesibles.
+   ?? QU?: disparador, panel flotante, cabecera, opciones, insignias y m?vil.
+   ========================================================================== */
+.main-navbar .nav-dropdown {
+  position: relative;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.main-navbar .nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  z-index: 1300;
+  display: grid;
+  gap: 7px;
+  width: 390px;
+  min-width: 390px;
+  padding: 12px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.98);
+  transform-origin: top left;
+  border: 1px solid rgba(244, 230, 193, 0.18);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 0 0, rgba(22, 93, 111, 0.34), transparent 48%),
+    linear-gradient(145deg, rgba(10, 25, 35, 0.99), rgba(5, 12, 21, 0.99));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(255, 255, 255, 0.025) inset;
+  transition: opacity 180ms ease, visibility 180ms ease, transform 220ms cubic-bezier(.16,1,.3,1);
+}
+
+.main-navbar .nav-dropdown:hover .nav-dropdown-menu,
+.main-navbar .nav-dropdown:focus-within .nav-dropdown-menu,
+.main-navbar .nav-dropdown.is-open .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.main-navbar .mega-menu-header {
+  display: grid;
+  grid-template-columns: 34px max-content 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 5px 11px;
+  color: #F4E6C1;
+}
+
+.main-navbar .mega-menu-header-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #F65E01, #165D6F);
+}
+
+.main-navbar .mega-menu-header-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.main-navbar .mega-menu-header-line { height: 1px; background: rgba(244, 230, 193, 0.15); }
+
+.main-navbar .nav-dropdown-item {
+  display: grid !important;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px !important;
+  min-height: 58px;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  transform: none !important;
+}
+
+.main-navbar .nav-dropdown-item:hover,
+.main-navbar .nav-dropdown-item:focus-visible {
+  border-color: rgba(246, 94, 1, 0.46) !important;
+  background: linear-gradient(100deg, rgba(246, 94, 1, 0.14), rgba(22, 93, 111, 0.2)) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.main-navbar .nav-dd-icon-box {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(105, 210, 200, 0.2);
+  border-radius: 10px;
+  color: #F4E6C1;
+  background: rgba(22, 93, 111, 0.24);
+}
+.main-navbar .nav-dd-text { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.main-navbar .nav-dd-title { font-size: 0.8rem; font-weight: 800; color: #fff; }
+.main-navbar .nav-dd-desc { overflow: hidden; font-size: 0.68rem; color: rgba(255,255,255,.5); text-overflow: ellipsis; white-space: nowrap; }
+.main-navbar .nav-dd-badge { border-radius: 999px; padding: 3px 7px; color: #6EE7B7; background: rgba(16,185,129,.12); font-size: .64rem; font-weight: 800; }
+.main-navbar .mega-menu-footer { display: flex; justify-content: center; gap: 5px; padding-top: 4px; }
+.main-navbar .mega-menu-footer-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(244,230,193,.3); }
+
+@media (max-width: 1200px) {
+  .main-navbar .nav-dropdown { display: block; width: 100%; }
+  .main-navbar .nav-dropdown-menu {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    min-width: 0;
+    max-height: 0;
+    margin: 0;
+    padding-block: 0;
+    opacity: 0;
+    transform: none;
+    border-width: 0;
+  }
+  .main-navbar .nav-dropdown.is-open .nav-dropdown-menu,
+  .main-navbar .nav-dropdown:focus-within .nav-dropdown-menu {
+    max-height: 430px;
+    margin-top: 8px;
+    padding-block: 12px;
+    border-width: 1px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-navbar .nav-dropdown-item { min-height: 54px; }
+  .main-navbar .nav-dd-desc { white-space: normal; }
+}
+
+/* ========================================================================== 
+   NAVEGACI?N VISIBLE EN LAPTOP Y TABLET HORIZONTAL
+   ?? POR QU?: evitar ocultar opciones esenciales detr?s del bot?n hamburguesa.
+   ?? C?MO: recupera el modo horizontal entre 901 y 1200 px y compacta controles.
+   ?? QU?: men? completo visible, acciones claras y submen? flotante alineado.
+   ========================================================================== */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .main-navbar .nav-inner {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) max-content;
+    gap: 8px;
+    min-height: 72px;
+  }
+
+  .main-navbar .brand-box {
+    min-width: 44px;
+  }
+
+  .main-navbar .brand-text,
+  .main-navbar .brand-logo-halo,
+  .main-navbar .brand-accent-bar {
+    display: none;
+  }
+
+  .main-navbar .nav-links-menu,
+  .main-navbar .nav-links-menu.mobile-open {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: none;
+    min-height: 46px;
+    max-height: none;
+    padding: 4px;
+    gap: 0;
+    overflow: visible;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    border-color: rgba(244, 230, 193, 0.12);
+    border-radius: 14px;
+  }
+
+  .main-navbar .nav-links-menu > a,
+  .main-navbar .nav-links-menu.mobile-open > a,
+  .main-navbar .nav-dropdown-trigger,
+  .main-navbar .nav-links-menu.mobile-open .nav-dropdown-trigger {
+    width: auto;
+    min-height: 36px;
+    padding: 0 7px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 0.68rem;
+  }
+
+  .main-navbar .nav-links-menu .nav-icon-box {
+    width: auto;
+    height: auto;
+    border: 0;
+    background: transparent;
+  }
+
+  .main-navbar .nav-dropdown {
+    position: relative;
+    display: inline-flex;
+    width: auto;
+    align-self: stretch;
+  }
+
+  .main-navbar .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 360px;
+    min-width: 360px;
+    max-height: none;
+    margin: 0;
+    padding: 12px;
+    overflow: hidden;
+    transform: translateY(10px) scale(0.98);
+    border-width: 1px;
+  }
+
+  .main-navbar .nav-dropdown.is-open .nav-dropdown-menu,
+  .main-navbar .nav-dropdown:hover .nav-dropdown-menu,
+  .main-navbar .nav-dropdown:focus-within .nav-dropdown-menu {
+    max-height: none;
+    margin: 0;
+    padding: 12px;
+    transform: translateY(0) scale(1);
+  }
+
