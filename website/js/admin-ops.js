@@ -139,24 +139,28 @@ function initAdminAuth() {
     }
 
     // 3. Detección automática: Usuario Normal (Explorador Público)
-    // Se reconoce su cuenta pero se le notifica que el Ops Center es exclusivo para personal autorizado.
+    // El Ops Center es exclusivo para personal autorizado; se sincroniza su sesión y se le dirige a perfil.html
+    if (window.BaqueanoSession) {
+      window.BaqueanoSession.login(cleanEmail || 'explorador@baqueano.ni');
+    }
+
     if (feedbackAlert) {
       feedbackAlert.className = 'login-feedback-alert error';
       feedbackAlert.innerHTML = `
-        <div style="display: flex; flex-direction: column; gap: 0.45rem; text-align: left;">
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
           <div>
-            <i class="fa-solid fa-user-check" style="color: #60A5FA; font-size: 1.1rem;"></i> 
-            <strong>Cuenta Reconocida: Usuario Normal (${cleanEmail || displayName || 'Explorador'})</strong>
+            <i class="fa-solid fa-user-check" style="color: #2DD4BF; font-size: 1.1rem;"></i> 
+            <strong>Cuenta Reconocida: Explorador (${cleanEmail || displayName || 'Usuario'})</strong>
           </div>
-          <div style="font-size: 0.82rem; line-height: 1.5; color: var(--text-muted);">
-            Tienes acceso total e irrestricto a todas las páginas públicas del portal oficial (Destinos, Historia, Campaña Ambiental, Gastronomía, Música y Cooperativas), pero el acceso al <strong>Ops Center</strong> está reservado para personal operativo y auditores.
+          <div style="font-size: 0.84rem; line-height: 1.5; color: var(--text-muted);">
+            El <strong>Ops Center</strong> está reservado exclusivamente para el Administrador y el Auditor. Tu portal personal para gestionar reservas, tiques, favoritos, facturación y preferencias es <strong>Mi Perfil</strong>.
           </div>
           <div style="margin-top: 0.4rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
-            <a href="destinos.html" class="btn-hero-primary" style="padding: 0.45rem 0.9rem; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
-              <i class="fa-solid fa-compass"></i> Explorar Destinos
+            <a href="perfil.html" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.82rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-user-gear"></i> Ir a Mi Perfil de Explorador
             </a>
-            <a href="index.html" class="btn-hero-glass" style="padding: 0.45rem 0.9rem; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
-              <i class="fa-solid fa-house"></i> Ir al Inicio
+            <a href="destinos.html" class="btn-hero-glass" style="padding: 0.5rem 0.9rem; font-size: 0.82rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-compass"></i> Ver Destinos
             </a>
           </div>
         </div>
