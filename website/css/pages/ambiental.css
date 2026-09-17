@@ -1,0 +1,290 @@
+/**
+ * POR QU?: mantener la presentaci?n de ambiental.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de ambiental, sin l?gica ni contenido estructural.
+ */
+
+
+html body .ambiental-inline-001 {
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  color: #34D399 !important;
+}
+
+html body .ambiental-inline-002 {
+  color: #10B981 !important;
+}
+
+html body .ambiental-inline-003 {
+  color: var(--text-muted) !important;
+  font-size: 0.95rem !important;
+  max-width: 650px !important;
+  margin: 0 auto 1.5rem !important;
+}
+
+html body .ambiental-inline-004 {
+  color: #FFFFFF !important;
+}
+
+html body .ambiental-inline-005 {
+  color: #F59E0B !important;
+}
+
+html body .ambiental-inline-006 {
+  text-align: center !important;
+  margin-bottom: 1.5rem !important;
+}
+
+html body .ambiental-inline-007 {
+  font-size: 1.8rem !important;
+  color: #FFFFFF !important;
+  margin: 0.8rem 0 0.3rem !important;
+}
+
+html body .ambiental-inline-008 {
+  font-size: 0.95rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+}
+
+html body .ambiental-inline-009 {
+  height: 38px !important;
+}
+
+html body .ambiental-inline-010 {
+  font-family: var(--font-tech) !important;
+  font-weight: 800 !important;
+  font-size: 0.8rem !important;
+  color: #10B981 !important;
+}
+
+html body .ambiental-inline-011 {
+  font-size: 0.9rem !important;
+  color: #FFFFFF !important;
+  line-height: 1.6 !important;
+  margin: 1rem 0 !important;
+}
+
+html body .ambiental-inline-012 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-top: 1px solid rgba(255,255,255,0.1) !important;
+  padding-top: 0.8rem !important;
+  font-size: 0.75rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .ambiental-inline-013 {
+  display: flex !important;
+  gap: 1rem !important;
+  margin-top: 1.5rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .ambiental-inline-014 {
+  flex: 1 !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .ambiental-inline-015 {
+  flex: 1 !important;
+  justify-content: center !important;
+}
+
+html body .ambiental-inline-016 {
+  margin-top: 5rem !important;
+}
+
+html body .ambiental-inline-017 {
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+}
+
+html body .ambiental-inline-018 {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+  color: #F87171 !important;
+}
+
+html body .ambiental-inline-019 {
+  font-size: 2rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .ambiental-inline-020 {
+  font-size: 0.95rem !important;
+  color: var(--text-muted) !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+}
+
+html body .ambiental-inline-021 {
+  margin-bottom: 1.5rem !important;
+}
+
+html body .ambiental-inline-022 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 0.4rem !important;
+}
+
+html body .ambiental-inline-023 {
+  padding: 0.35rem 0.8rem !important;
+  font-size: 0.78rem !important;
+}
+
+html body .ambiental-inline-024 {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+html body .ambiental-inline-025 {
+  padding: 1rem 2.5rem !important;
+  font-size: 1rem !important;
+}
+
+html body .ambiental-inline-026 {
+  text-align: center !important;
+  max-width: 700px !important;
+  margin: 0 auto !important;
+}
+
+html body .ambiental-inline-027 {
+  background: rgba(212,175,55,0.15) !important;
+  border-color: rgba(212,175,55,0.4) !important;
+  color: var(--oro-noble) !important;
+}
+
+html body .ambiental-inline-028 {
+  font-size: 2.2rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.6rem !important;
+}
+
+html body .ambiental-inline-029 {
+  font-size: 0.95rem !important;
+  color: var(--text-secondary) !important;
+}
+
+html body .ambiental-inline-030 {
+  margin-bottom: 1.2rem !important;
+}
+
+html body .ambiental-inline-031 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .ambiental-inline-032 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .ambiental-inline-033 {
+  font-size: 2.5rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .ambiental-inline-034 {
+  font-size: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  color: #FFFFFF !important;
+}
+
+html body .ambiental-inline-035 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .ambiental-inline-036 {
+  background: rgba(15,23,42,0.9) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px dashed var(--border-subtle) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+html body .ambiental-inline-037 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  display: block !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body .ambiental-inline-038 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+}
+
+html body .ambiental-inline-039 {
+  font-size: 1.3rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .ambiental-inline-040 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+html body .ambiental-inline-041 {
+  font-size: 0.75rem !important;
+}
+
+html body .ambiental-inline-042 {
+  font-size: 1.3rem !important;
+  color: var(--terracotta) !important;
+}
+
+html body .ambiental-inline-043 {
+  font-size: 1.3rem !important;
+  color: var(--azul-info) !important;
+}
+
+html body .ambiental-inline-044 {
+  font-size: 1.3rem !important;
+  color: #25D366 !important;
+}
+
+html body .ambiental-inline-045 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+}
+
+html body .ambiental-inline-046 {
+  width: 100% !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .ambiental-inline-047 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .ambiental-inline-048 {
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .ambiental-inline-049 {
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .ambiental-inline-050 {
+  display: flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}

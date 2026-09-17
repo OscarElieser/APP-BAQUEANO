@@ -48,668 +48,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css">
-
-  <style>
-    /* =====================================================================
-       ESTILOS ESPECÍFICOS DEL PORTAL DE ANFITRIONES
-       ===================================================================== */
-
-    /* Hero Section del Portal */
-    .host-hero-section {
-      padding: 9rem 0 5rem;
-      background: radial-gradient(ellipse at 70% 40%, rgba(22, 93, 111, 0.18) 0%, transparent 60%),
-                  radial-gradient(ellipse at 20% 80%, rgba(246, 94, 1, 0.10) 0%, transparent 50%),
-                  var(--noche-profunda);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .host-hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23165D6F' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .host-hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .host-hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(246, 94, 1, 0.12);
-      border: 1px solid rgba(246, 94, 1, 0.3);
-      color: var(--terracotta);
-      font-size: 0.8rem;
-      font-weight: 700;
-      font-family: var(--font-tech);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      margin-bottom: 1.5rem;
-    }
-
-    .host-hero-headline {
-      font-family: var(--font-display);
-      font-size: 3.2rem;
-      font-weight: 900;
-      line-height: 1.1;
-      color: #FFFFFF;
-      margin-bottom: 1.5rem;
-    }
-
-    .host-hero-headline span {
-      background: linear-gradient(135deg, #165D6F 0%, #F65E01 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .host-hero-subtext {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
-
-    .host-stat-row {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .host-stat-box {
-      text-align: center;
-    }
-
-    .host-stat-number {
-      font-family: var(--font-tech);
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--terracotta);
-      line-height: 1;
-      display: block;
-    }
-
-    .host-stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-      display: block;
-    }
-
-    /* Tarjeta de preview del modelo de negocio */
-    .host-model-card {
-      background: rgba(22, 93, 111, 0.08);
-      border: 1px solid rgba(22, 93, 111, 0.25);
-      border-radius: 24px;
-      padding: 2.5rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .host-model-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -30%;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(246, 94, 1, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .model-comparison-row {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .model-col {
-      flex: 1;
-      background: rgba(15, 23, 42, 0.6);
-      border-radius: 14px;
-      padding: 1.2rem;
-      text-align: center;
-    }
-
-    .model-col.bad { border: 1px solid rgba(239, 68, 68, 0.25); }
-    .model-col.good { border: 1px solid rgba(16, 185, 129, 0.25); }
-
-    .model-col-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .model-col-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .model-col-value { font-size: 1.8rem; font-weight: 800; font-family: var(--font-tech); }
-    .model-col.bad .model-col-value { color: #EF4444; }
-    .model-col.good .model-col-value { color: #10B981; }
-
-    /* Formulario Multi-Paso */
-    .reg-form-section {
-      padding: 6rem 0;
-      background: linear-gradient(180deg, var(--noche-profunda) 0%, rgba(22, 93, 111, 0.05) 50%, var(--noche-profunda) 100%);
-    }
-
-    .reg-form-wrapper {
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
-    /* Indicador de pasos */
-    .reg-steps-indicator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      margin-bottom: 3rem;
-    }
-
-    .reg-step-indicator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .reg-step-indicator::after {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      width: 100px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      z-index: -1;
-    }
-
-    .reg-step-indicator:last-child::after { display: none; }
-
-    .step-circle {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.06);
-      border: 2px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      transition: all 0.3s ease;
-    }
-
-    .reg-step-indicator.active .step-circle {
-      background: var(--grad-sunset);
-      border-color: transparent;
-      color: #FFFFFF;
-      box-shadow: 0 0 20px rgba(246, 94, 1, 0.4);
-    }
-
-    .reg-step-indicator.completed .step-circle {
-      background: var(--petroleo-teal);
-      border-color: transparent;
-      color: #FFFFFF;
-    }
-
-    .step-label-text {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      text-align: center;
-      max-width: 80px;
-    }
-
-    .reg-step-indicator.active .step-label-text { color: var(--terracotta); }
-    .reg-step-indicator.completed .step-label-text { color: var(--petroleo-teal); }
-
-    /* Panel de paso */
-    .reg-step-panel {
-      display: none;
-      animation: stepFadeIn 0.4s ease;
-    }
-
-    .reg-step-panel.active { display: block; }
-
-    @keyframes stepFadeIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Card del formulario */
-    .reg-form-card {
-      background: rgba(22, 93, 111, 0.06);
-      border: 1px solid rgba(22, 93, 111, 0.2);
-      border-radius: 24px;
-      padding: 2.5rem;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    .reg-step-header {
-      margin-bottom: 2rem;
-    }
-
-    .reg-step-title {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 0.4rem;
-    }
-
-    .reg-step-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    /* Grupos de campo */
-    .field-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .field-label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--arena-pinolera);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.03em;
-    }
-
-    .field-required { color: var(--terracotta); margin-left: 2px; }
-
-    .form-control-input,
-    .form-select-input,
-    .form-textarea-input {
-      width: 100%;
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 0.85rem 1rem;
-      font-size: 0.95rem;
-      color: #FFFFFF;
-      font-family: var(--font-body);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      outline: none;
-      box-sizing: border-box;
-    }
-
-    .form-control-input:focus,
-    .form-select-input:focus,
-    .form-textarea-input:focus {
-      border-color: var(--petroleo-teal);
-      box-shadow: 0 0 0 3px rgba(22, 93, 111, 0.2);
-    }
-
-    .form-control-input.field-error,
-    .form-select-input.field-error {
-      border-color: #EF4444;
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
-    }
-
-    .form-select-input option { background: #0F172A; color: #FFFFFF; }
-    .form-textarea-input { min-height: 100px; resize: vertical; }
-
-    .field-error-msg {
-      display: none;
-      font-size: 0.78rem;
-      color: #EF4444;
-      margin-top: 0.3rem;
-    }
-
-    .field-hint {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 0.3rem;
-    }
-
-    .field-row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    /* Panel de previsualización */
-    .reg-preview-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .reg-preview-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .reg-preview-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--grad-sunset);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: #FFFFFF;
-      flex-shrink: 0;
-    }
-
-    .reg-preview-title {
-      font-weight: 700;
-      color: #FFFFFF;
-      font-size: 1.05rem;
-    }
-
-    .reg-preview-sub {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .reg-preview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-    }
-
-    .reg-preview-item { font-size: 0.85rem; }
-    .reg-preview-item strong { color: var(--arena-pinolera); display: block; font-size: 0.72rem; margin-bottom: 0.15rem; }
-    .reg-preview-item span { color: #FFFFFF; }
-
-    /* Checkbox de términos */
-    .terms-check-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .terms-check-row input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      margin-top: 2px;
-      cursor: pointer;
-      accent-color: var(--petroleo-teal);
-      flex-shrink: 0;
-    }
-
-    .terms-check-label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .terms-check-label a {
-      color: var(--arena-pinolera);
-      text-decoration: underline;
-    }
-
-    /* Navegación del formulario */
-    .reg-nav-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .btn-reg-prev {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.4rem;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-reg-prev:hover {
-      border-color: var(--petroleo-teal);
-      color: #FFFFFF;
-    }
-
-    .btn-reg-next,
-    .btn-reg-submit {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.8rem;
-      background: var(--grad-sunset);
-      border: none;
-      border-radius: 10px;
-      color: #FFFFFF;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: var(--font-body);
-    }
-
-    .btn-reg-next:hover,
-    .btn-reg-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(246, 94, 1, 0.35);
-    }
-
-    .btn-reg-submit {
-      background: linear-gradient(135deg, #165D6F 0%, #10B981 100%);
-    }
-
-    .btn-reg-submit:hover {
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
-    }
-
-    .btn-reg-submit:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Panel de éxito */
-    .reg-success-panel {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 3rem 2rem;
-      animation: stepFadeIn 0.6s ease;
-    }
-
-    .success-icon-ring {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #165D6F, #10B981);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: #FFFFFF;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
-      animation: pulseRing 2s infinite;
-    }
-
-    @keyframes pulseRing {
-      0%, 100% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.4); }
-      50% { box-shadow: 0 0 60px rgba(16, 185, 129, 0.6); }
-    }
-
-    .success-title {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 900;
-      color: #FFFFFF;
-      margin-bottom: 0.8rem;
-    }
-
-    .success-msg { font-size: 1rem; color: var(--text-muted); max-width: 500px; line-height: 1.6; margin-bottom: 1.5rem; }
-
-    .success-id-badge {
-      background: rgba(22, 93, 111, 0.15);
-      border: 1px solid rgba(22, 93, 111, 0.4);
-      border-radius: 10px;
-      padding: 0.8rem 1.5rem;
-      font-family: var(--font-tech);
-      font-size: 0.85rem;
-      color: var(--arena-pinolera);
-      margin-bottom: 2rem;
-    }
-
-    .success-id-badge strong { color: #FFFFFF; display: block; font-size: 1rem; margin-top: 0.2rem; }
-
-    /* Banner de error */
-    .reg-error-banner {
-      display: none;
-      align-items: center;
-      gap: 0.8rem;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 10px;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1rem;
-      color: #FCA5A5;
-      font-size: 0.9rem;
-    }
-
-    /* Sección de Beneficios */
-    .benefits-section {
-      padding: 5rem 0;
-      background: var(--noche-profunda);
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .benefit-card {
-      background: rgba(22, 93, 111, 0.06);
-      border: 1px solid rgba(22, 93, 111, 0.18);
-      border-radius: 18px;
-      padding: 1.8rem;
-      transition: all 0.3s ease;
-    }
-
-    .benefit-card:hover {
-      border-color: rgba(22, 93, 111, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(22, 93, 111, 0.15);
-    }
-
-    .benefit-icon-ring {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: rgba(22, 93, 111, 0.15);
-      border: 1px solid rgba(22, 93, 111, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: var(--petroleo-teal);
-      margin-bottom: 1.2rem;
-    }
-
-    .benefit-title {
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .benefit-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
-
-    /* FAQ Section */
-    .faq-section {
-      padding: 5rem 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(22, 93, 111, 0.08) 0%, transparent 60%), var(--noche-profunda);
-    }
-
-    .faq-list { max-width: 720px; margin: 3rem auto 0; }
-
-    .faq-item {
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 14px;
-      margin-bottom: 0.8rem;
-      overflow: hidden;
-      transition: border-color 0.2s ease;
-    }
-
-    .faq-item.open { border-color: rgba(22, 93, 111, 0.4); }
-
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 1.5rem;
-      cursor: pointer;
-      font-weight: 600;
-      color: #FFFFFF;
-      font-size: 0.95rem;
-      background: rgba(15, 23, 42, 0.5);
-      user-select: none;
-    }
-
-    .faq-question:hover { background: rgba(22, 93, 111, 0.1); }
-
-    .faq-icon {
-      font-size: 0.8rem;
-      color: var(--terracotta);
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .faq-item.open .faq-icon { transform: rotate(180deg); }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-      padding: 0 1.5rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .faq-item.open .faq-answer {
-      max-height: 400px;
-      padding: 1rem 1.5rem 1.5rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .host-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .host-hero-headline { font-size: 2.2rem; }
-      .model-comparison-row { flex-direction: column; }
-      .field-row-2 { grid-template-columns: 1fr; }
-      .benefits-grid { grid-template-columns: 1fr; }
-      .reg-steps-indicator { gap: 0; overflow-x: auto; }
-      .reg-step-indicator::after { width: 60px; }
-      .reg-preview-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/mi-negocio.css">
 </head>
 <body>
 
@@ -854,7 +193,7 @@
   <main class="page-wrapper">
 
     <!-- HERO SECTION DEL PORTAL DE ANFITRIONES -->
-    <section class="host-hero-section" style="position: relative; overflow: hidden;">
+    <section class="host-hero-section mi-negocio-inline-001">
       <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/aliados/posada_ecologica_la_abuela.jpg">
         <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/14f24efb-1cf2-4428-bafe-a1f79ae6dc5e/24519965.mp4" type="video/mp4">
       </video>
@@ -863,7 +202,7 @@
       <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video de fondo" title="Alternar video">
         <i class="fa-solid fa-pause"></i>
       </button>
-      <div class="container" style="position: relative; z-index: 4;">
+      <div class="container mi-negocio-inline-002">
         <div class="host-hero-inner">
           <div>
             <div class="host-hero-tag">
@@ -876,7 +215,7 @@
             </h1>
             <p class="host-hero-subtext">
               Registra tu cooperativa, posada, guía certificado o emprendimiento rural en el
-              ecosistema Baqueano Nicaragua. <strong style="color: #FFFFFF;">Cero comisiones abusivas</strong>,
+              ecosistema Baqueano Nicaragua. <strong class="mi-negocio-inline-003">Cero comisiones abusivas</strong>,
               contacto directo con exploradores responsables y respaldo total de la Ley 306 INTUR.
             </p>
             <div class="host-stat-row">
@@ -897,11 +236,11 @@
 
           <!-- TARJETA COMPARATIVA DEL MODELO -->
           <div class="host-model-card">
-            <div style="margin-bottom: 1.5rem;">
-              <div class="badge-section-pill" style="margin-bottom: 0.8rem;">
+            <div class="mi-negocio-inline-004">
+              <div class="badge-section-pill mi-negocio-inline-005">
                 <i class="fa-solid fa-scale-balanced"></i> Modelo Económico Real
               </div>
-              <h3 style="font-size: 1.3rem; color: #FFFFFF; margin: 0;">¿Cuánto pierdes con OTAs foráneas?</h3>
+              <h3 class="mi-negocio-inline-006">¿Cuánto pierdes con OTAs foráneas?</h3>
             </div>
 
             <div class="model-comparison-row">
@@ -909,24 +248,24 @@
                 <div class="model-col-icon">😤</div>
                 <div class="model-col-label">OTA Foránea</div>
                 <div class="model-col-value">-20%</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">Comisión abusiva</div>
+                <div class="mi-negocio-inline-007">Comisión abusiva</div>
               </div>
               <div class="model-col good">
                 <div class="model-col-icon">🌿</div>
                 <div class="model-col-label">Baqueano</div>
                 <div class="model-col-value">+0%</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">Sin intermediarios</div>
+                <div class="mi-negocio-inline-007">Sin intermediarios</div>
               </div>
             </div>
 
-            <div style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1rem; margin-bottom: 1.2rem;">
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Si ganas $1,000/mes con OTA:</div>
-              <div style="color: #EF4444; font-size: 0.9rem; font-weight: 600;">➤ Pierdes $200 en comisiones</div>
-              <div style="color: #10B981; font-size: 0.9rem; font-weight: 600;">➤ Con Baqueano: 0 pérdida = +$2,400/año</div>
+            <div class="mi-negocio-inline-008">
+              <div class="mi-negocio-inline-009">Si ganas $1,000/mes con OTA:</div>
+              <div class="mi-negocio-inline-010">➤ Pierdes $200 en comisiones</div>
+              <div class="mi-negocio-inline-011">➤ Con Baqueano: 0 pérdida = +$2,400/año</div>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted);">
-              <i class="fa-solid fa-shield-check" style="color: #10B981;"></i>
+            <div class="mi-negocio-inline-012">
+              <i class="fa-solid fa-shield-check mi-negocio-inline-013"></i>
               Avalado por Ley 306 INTUR Nicaragua
             </div>
           </div>
@@ -937,10 +276,10 @@
     <!-- SECCIÓN DE BENEFICIOS -->
     <section class="benefits-section">
       <div class="container">
-        <div class="section-lead-header" style="text-align: center; margin-bottom: 0;">
+        <div class="section-lead-header mi-negocio-inline-014">
           <div class="badge-section-pill"><i class="fa-solid fa-star"></i> Ventajas del Ecosistema Baqueano</div>
           <h2 class="section-headline">¿Por qué registrar tu negocio aquí?</h2>
-          <p class="section-subtext" style="max-width: 600px; margin: 0 auto;">
+          <p class="section-subtext mi-negocio-inline-015">
             Más de una razón para formar parte de la red más honesta del turismo nicaragüense.
           </p>
         </div>
@@ -984,7 +323,7 @@
     <section class="reg-form-section" id="registro">
       <div class="container">
         <div class="reg-form-wrapper">
-          <div class="section-lead-header" style="text-align: center; margin-bottom: 3rem;">
+          <div class="section-lead-header mi-negocio-inline-016">
             <div class="badge-section-pill"><i class="fa-solid fa-file-circle-plus"></i> Registro Oficial</div>
             <h2 class="section-headline">Regístrate como Anfitrión</h2>
             <p class="section-subtext">
@@ -1206,16 +545,16 @@
                       en un plazo de 48-72 horas hábiles.
                     </label>
                   </div>
-                  <span class="field-error-msg" id="bizTermsAccept_error" style="margin-bottom: 1rem;">Debes aceptar los términos para continuar.</span>
+                  <span class="field-error-msg mi-negocio-inline-017" id="bizTermsAccept_error">Debes aceptar los términos para continuar.</span>
 
                   <!-- Info de procesamiento -->
-                  <div style="background: rgba(22, 93, 111, 0.1); border: 1px solid rgba(22, 93, 111, 0.25); border-radius: 12px; padding: 1rem 1.2rem;">
-                    <div style="display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.5rem;">
-                      <i class="fa-solid fa-cloud-arrow-up" style="color: var(--petroleo-teal);"></i>
-                      <strong style="color: #FFFFFF; font-size: 0.9rem;">¿Qué pasa después del envío?</strong>
+                  <div class="mi-negocio-inline-018">
+                    <div class="mi-negocio-inline-019">
+                      <i class="fa-solid fa-cloud-arrow-up mi-negocio-inline-020"></i>
+                      <strong class="mi-negocio-inline-021">¿Qué pasa después del envío?</strong>
                     </div>
-                    <ul style="font-size: 0.82rem; color: var(--text-muted); padding-left: 1.2rem; line-height: 1.8; margin: 0;">
-                      <li>Tu solicitud queda registrada en Cloud Firestore con estado <strong style="color: var(--arena-pinolera);">pending_review</strong>.</li>
+                    <ul class="mi-negocio-inline-022">
+                      <li>Tu solicitud queda registrada en Cloud Firestore con estado <strong class="mi-negocio-inline-023">pending_review</strong>.</li>
                       <li>El Administrador General la revisa en el Ops Center en 48-72 horas.</li>
                       <li>Recibirás confirmación por correo al email registrado.</li>
                       <li>Una vez aprobado, tu negocio aparece en la app Android y en el mapa web.</li>
@@ -1225,14 +564,14 @@
 
                 <!-- NAVEGACIÓN -->
                 <div class="reg-nav-row">
-                  <button type="button" class="btn-reg-prev" id="btnRegPrev" style="display: none;">
+                  <button type="button" class="btn-reg-prev mi-negocio-inline-024" id="btnRegPrev">
                     <i class="fa-solid fa-arrow-left"></i> Atrás
                   </button>
                   <div></div>
                   <button type="button" class="btn-reg-next" id="btnRegNext">
                     Siguiente <i class="fa-solid fa-arrow-right"></i>
                   </button>
-                  <button type="button" class="btn-reg-submit" id="btnRegSubmit" style="display: none;">
+                  <button type="button" class="btn-reg-submit mi-negocio-inline-024" id="btnRegSubmit">
                     <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud a Firestore
                   </button>
                 </div>
@@ -1245,7 +584,7 @@
             <div class="success-icon-ring"><i class="fa-solid fa-check"></i></div>
             <div class="success-title">¡Solicitud Enviada!</div>
             <p class="success-msg">
-              Tu negocio <strong id="regConfirmName" style="color: #FFFFFF;"></strong> ha sido registrado
+              Tu negocio <strong id="regConfirmName" class="mi-negocio-inline-003"></strong> ha sido registrado
               exitosamente en Cloud Firestore. El Administrador General lo revisará en el Ops Center en las próximas
               48-72 horas hábiles y te contactará al correo registrado.
             </p>
@@ -1253,7 +592,7 @@
               ID DE REGISTRO OFICIAL
               <strong id="regConfirmId">—</strong>
             </div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <div class="mi-negocio-inline-025">
               <a href="aliados.html" class="btn-hero-primary">
                 <i class="fa-solid fa-users"></i> Ver Cooperativas Aliadas
               </a>
@@ -1269,7 +608,7 @@
     <!-- PREGUNTAS FRECUENTES -->
     <section class="faq-section">
       <div class="container">
-        <div class="section-lead-header" style="text-align: center;">
+        <div class="section-lead-header mi-negocio-inline-026">
           <div class="badge-section-pill"><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</div>
           <h2 class="section-headline">Todo lo que necesitas saber</h2>
         </div>
@@ -1413,7 +752,7 @@
 
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.2rem;">
+          <div class="brand-box mi-negocio-inline-027">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -1490,7 +829,7 @@
 
       <div class="footer-bottom-bar">
         <div>© 2026 Baqueano Nicaragua. Ecoturismo con dignidad campesina.</div>
-        <div style="display: flex; gap: 1.5rem;">
+        <div class="mi-negocio-inline-028">
           <a href="ambiental.html">Decálogo Verde</a>
           <a href="admin.html">Ops Center</a>
         </div>
@@ -1502,26 +841,26 @@
   <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
     <div class="sos-modal-dialog">
       <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div style="text-align: center; margin-bottom: 1.2rem;">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
-        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      <div class="mi-negocio-inline-029">
+        <i class="fa-solid fa-triangle-exclamation mi-negocio-inline-030"></i>
+        <h3 class="mi-negocio-inline-031">Centro de Auxilio SOS 24/7</h3>
+        <p class="mi-negocio-inline-032">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
       </div>
-      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
-        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
-        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      <div class="sos-gps-card mi-negocio-inline-033">
+        <span class="mi-negocio-inline-034">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" class="mi-negocio-inline-035">Buscando satélites...</div>
       </div>
       <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
-        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
-        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical mi-negocio-inline-036"></i><div><h5 class="mi-negocio-inline-037">Cruz Blanca</h5><span class="mi-negocio-inline-038">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher mi-negocio-inline-039"></i><div><h5 class="mi-negocio-inline-037">Bomberos</h5><span class="mi-negocio-inline-038">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved mi-negocio-inline-040"></i><div><h5 class="mi-negocio-inline-037">Policía Turística</h5><span class="mi-negocio-inline-038">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp mi-negocio-inline-041"></i><div><h5 class="mi-negocio-inline-037">Mesa Baqueano</h5><span class="mi-negocio-inline-038">WhatsApp SOS</span></div></a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
-        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+      <div class="mi-negocio-inline-042">
+        <button class="btn-hero-primary mi-negocio-inline-043" id="btnSendWhatsAppSos">
           <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
         </button>
-        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+        <button class="btn-hero-glass mi-negocio-inline-044" id="btnCopyGpsSos">
           <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
         </button>
       </div>
@@ -1533,8 +872,8 @@
     <div class="modal-card-dialog">
       <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <h3 class="mi-negocio-inline-045">Instalar Baqueano para Android</h3>
+      <p class="mi-negocio-inline-046">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
@@ -1549,7 +888,7 @@
           <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Mapas fuera de línea y senderos sin intermediarios.</p></div>
         </div>
       </div>
-      <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="width: 100%; justify-content: center; margin-top: 1rem;">
+      <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary mi-negocio-inline-047" id="modalConfirmDownloadBtn">
         <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
       </a>
     </div>

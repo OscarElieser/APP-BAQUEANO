@@ -44,127 +44,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-
-  <style>
-    .report-hero-section {
-      padding: 6.5rem 0 3.5rem;
-      background: radial-gradient(circle at 15% 25%, rgba(46, 125, 50, 0.4) 0%, transparent 60%),
-                  radial-gradient(circle at 85% 75%, rgba(246, 94, 1, 0.25) 0%, transparent 60%),
-                  #0A1120;
-      border-bottom: 1px solid rgba(46, 125, 50, 0.3);
-    }
-    .report-tag-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 1rem;
-      background: rgba(46, 125, 50, 0.2);
-      border: 1px solid rgba(74, 222, 128, 0.45);
-      border-radius: 9999px;
-      font-family: var(--font-tech);
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #4ADE80;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-    }
-    .report-card-wrap {
-      background: rgba(15, 23, 42, 0.88);
-      border: 1.5px solid rgba(74, 222, 128, 0.3);
-      border-radius: 24px;
-      padding: 2.2rem;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-      margin-top: 2rem;
-    }
-    .report-form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-bottom: 1.25rem;
-    }
-    .report-form-label {
-      font-family: var(--font-tech);
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--arena-pinolera);
-      letter-spacing: 0.5px;
-    }
-    .report-input, .report-select, .report-textarea {
-      width: 100%;
-      background: rgba(10, 15, 29, 0.85);
-      border: 1.2px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      padding: 0.75rem 1rem;
-      color: #FFFFFF;
-      font-family: var(--font-main);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-    .report-input:focus, .report-select:focus, .report-textarea:focus {
-      border-color: #4ADE80;
-      box-shadow: 0 0 14px rgba(74, 222, 128, 0.35);
-    }
-    .report-submit-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      width: 100%;
-      padding: 0.85rem 1.5rem;
-      background: linear-gradient(135deg, #15803D 0%, #166534 100%);
-      border: 1px solid rgba(74, 222, 128, 0.5);
-      border-radius: 14px;
-      color: #FFFFFF;
-      font-family: var(--font-tech);
-      font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(22, 101, 52, 0.5);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-    }
-    .report-submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(74, 222, 128, 0.6);
-      background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
-    }
-    .hotlines-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.3rem;
-      margin-top: 2.5rem;
-    }
-    .hotline-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
-      padding: 1.5rem;
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-    .hotline-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--terracotta);
-    }
-    .hotline-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(22, 93, 111, 0.4);
-      border: 1px solid rgba(45, 212, 191, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #4ADE80;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/denuncias.css">
 </head>
 <body>
 
@@ -309,22 +189,22 @@
         <span class="report-tag-badge">
           <i class="fa-solid fa-seedling"></i> Vigilancia Ecológica & Soberanía Territorial
         </span>
-        <h1 style="font-size: clamp(2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 800; margin-bottom: 0.8rem;">
+        <h1 class="denuncias-inline-001">
           🌳 Canal Ético & Denuncias Ambientales
         </h1>
-        <p style="font-size: 1.05rem; color: var(--arena-pinolera); max-width: 800px; line-height: 1.6;">
+        <p class="denuncias-inline-002">
           Protegemos juntos el patrimonio natural de Nicaragua. Reporta con total confidencialidad cualquier daño ecológico para alertar de inmediato a las brigadas de guardabosques comunitarios y a MARENA.
         </p>
 
         <!-- FORMULARIO DE DENUNCIA AMBIENTAL -->
         <div class="report-card-wrap">
-          <h3 style="font-size: 1.25rem; color: #FFFFFF; font-weight: 800; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem;">
-            <i class="fa-solid fa-triangle-exclamation" style="color: #4ADE80;"></i>
+          <h3 class="denuncias-inline-003">
+            <i class="fa-solid fa-triangle-exclamation denuncias-inline-004"></i>
             <span>Formulario de Reporte Ecológico Confidencial</span>
           </h3>
 
           <form id="ecoReportForm" onsubmit="event.preventDefault(); alert('✅ Tu reporte ha sido remitido con éxito a la Mesa Técnica de Vigilancia Ambiental Baqueano y a las Brigadas Territoriales.'); this.reset();">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+            <div class="denuncias-inline-005">
               <div class="report-form-group">
                 <label class="report-form-label" for="reportType">Tipo de Incidencia Ambiental *</label>
                 <select id="reportType" class="report-select" required>
@@ -366,7 +246,7 @@
               <textarea id="reportDetails" rows="4" class="report-textarea" placeholder="Indica lo que observaste, gravedad, posibles involucrados o coordenadas GPS si las tienes..." required></textarea>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="denuncias-inline-006">
               <div class="report-form-group">
                 <label class="report-form-label" for="reportName">Nombre de Contacto (Opcional - Puede ser Anónimo)</label>
                 <input type="text" id="reportName" class="report-input" placeholder="Anónimo o tu nombre">
@@ -391,28 +271,28 @@
               <i class="fa-solid fa-phone-volume"></i>
             </div>
             <div>
-              <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.2rem;">Línea Verde MARENA</h4>
-              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Emergencias Ambientales Nacionales: <strong style="color: #4ADE80;">+505 2263-1273</strong></p>
+              <h4 class="denuncias-inline-007">Línea Verde MARENA</h4>
+              <p class="denuncias-inline-008">Emergencias Ambientales Nacionales: <strong class="denuncias-inline-004">+505 2263-1273</strong></p>
             </div>
           </div>
 
           <div class="hotline-card">
-            <div class="hotline-icon-box" style="color: var(--terracotta-light);">
+            <div class="hotline-icon-box denuncias-inline-009">
               <i class="fa-solid fa-fire-flame-curved"></i>
             </div>
             <div>
-              <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.2rem;">Incendios Forestales</h4>
-              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Bomberos de Nicaragua & SINAPRED: <strong style="color: var(--terracotta-light);">115 / 118</strong></p>
+              <h4 class="denuncias-inline-007">Incendios Forestales</h4>
+              <p class="denuncias-inline-008">Bomberos de Nicaragua & SINAPRED: <strong class="denuncias-inline-009">115 / 118</strong></p>
             </div>
           </div>
 
           <div class="hotline-card">
-            <div class="hotline-icon-box" style="color: #25D366;">
+            <div class="hotline-icon-box denuncias-inline-010">
               <i class="fa-brands fa-whatsapp"></i>
             </div>
             <div>
-              <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.2rem;">Mesa de Enlace Baqueano</h4>
-              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">WhatsApp Territorial Directo: <strong style="color: #25D366;">+505 8443-1289</strong></p>
+              <h4 class="denuncias-inline-007">Mesa de Enlace Baqueano</h4>
+              <p class="denuncias-inline-008">WhatsApp Territorial Directo: <strong class="denuncias-inline-010">+505 8443-1289</strong></p>
             </div>
           </div>
         </div>
@@ -485,7 +365,7 @@
         <span class="separator">|</span>
         <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
         <span class="separator">|</span>
-        <a href="denuncias.html" style="color: #4ADE80; font-weight: 700;">Canal Ético Ambiental</a>
+        <a href="denuncias.html" class="denuncias-inline-011">Canal Ético Ambiental</a>
         <span class="separator">|</span>
         <a href="admin.html">Baqueano Ops Center</a>
       </div>
@@ -495,9 +375,9 @@
         <div>
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+        <div class="denuncias-inline-012">
+          <span class="denuncias-inline-013">
+            <span class="denuncias-inline-014"></span>
             Red Satelital 24/7 Operativa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>

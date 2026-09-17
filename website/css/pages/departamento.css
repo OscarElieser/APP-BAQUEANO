@@ -1,0 +1,440 @@
+/**
+ * POR QU?: mantener la presentaci?n de departamento.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de departamento, sin l?gica ni contenido estructural.
+ */
+
+
+/* ESTILOS ESPECÍFICOS DE LA PÁGINA DEPARTAMENTAL */
+    .dept-hero-wrap {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: flex-end;
+      padding: 4rem 0 3rem;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(246, 94, 1, 0.35);
+    }
+    .dept-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.65);
+      transform: scale(1.02);
+      transition: transform 1.2s ease;
+    }
+    .dept-hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0F172A 10%, rgba(15, 23, 42, 0.7) 60%, rgba(15, 23, 42, 0.4) 100%);
+    }
+    .dept-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+    .dept-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(22, 93, 111, 0.85);
+      border: 1px solid rgba(244, 230, 193, 0.4);
+      color: var(--arena-pinolera);
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    .dept-title-big {
+      font-size: 3.2rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .dept-tagline {
+      font-size: 1.35rem;
+      font-family: var(--font-tech);
+      color: var(--terracotta-light);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.35;
+    }
+    .dept-short-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 780px;
+    }
+
+    /* BARRA DE NAVEGACIÓN ENTRE LOS 17 DEPARTAMENTOS */
+    .dept-quick-nav-bar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 70px;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 0.6rem 0;
+    }
+    .dept-pills-scroll {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.2rem 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--terracotta) rgba(15, 23, 42, 0.6);
+    }
+    .dept-pills-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .dept-pills-scroll::-webkit-scrollbar-thumb {
+      background: var(--terracotta);
+      border-radius: 9999px;
+    }
+    .dept-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(22, 93, 111, 0.2);
+      color: var(--text-secondary);
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .dept-pill-btn:hover {
+      border-color: var(--terracotta);
+      color: #FFFFFF;
+      background: rgba(246, 94, 1, 0.2);
+      transform: translateY(-1px);
+    }
+    .dept-pill-btn.active {
+      background: linear-gradient(135deg, #F65E01, #165D6F);
+      color: #FFFFFF;
+      border-color: rgba(244, 230, 193, 0.6);
+      box-shadow: 0 4px 14px rgba(246, 94, 1, 0.4);
+    }
+
+    /* GRID Y SECCIONES DE DETALLE */
+    .dept-section-block {
+      padding: 4rem 0;
+    }
+    .dept-section-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .dept-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .dept-card-header i {
+      font-size: 1.4rem;
+      color: var(--terracotta);
+    }
+    .dept-card-header h3 {
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    /* GASTRO Y LUGARES CARDS */
+    .dept-gastro-grid,
+    .dept-places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .dept-gastro-item,
+    .dept-place-item {
+      background: rgba(22, 93, 111, 0.15);
+      border: 1px solid rgba(22, 93, 111, 0.35);
+      border-radius: 16px;
+      padding: 1.3rem;
+      transition: all 0.25s ease;
+    }
+    .dept-gastro-item:hover,
+    .dept-place-item:hover {
+      border-color: var(--terracotta);
+      background: rgba(246, 94, 1, 0.12);
+      transform: translateY(-3px);
+    }
+    .dept-item-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dept-item-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ACTIVIDADES LISTA */
+    .dept-activities-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    .dept-activity-li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1rem 1.2rem;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      color: #FFFFFF;
+      line-height: 1.45;
+    }
+    .dept-activity-li i {
+      color: #10B981;
+      margin-top: 0.2rem;
+      font-size: 1rem;
+    }
+
+    /* INFO DE VIAJE / LOGÍSTICA */
+    .dept-logistics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .dept-logistic-box {
+      background: rgba(19, 36, 56, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 1.5rem;
+    }
+    .dept-logistic-box h5 {
+      font-size: 1rem;
+      color: var(--arena-pinolera);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dept-logistic-box p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* BOTONES DE ACCIÓN */
+    .dept-cta-bar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .dept-gastro-grid,
+      .dept-places-grid,
+      .dept-activities-list,
+      .dept-logistics-grid {
+        grid-template-columns: 1fr;
+      }
+      .dept-title-big {
+        font-size: 2.4rem;
+      }
+    }
+
+html body .departamento-inline-001 {
+  font-size: 1rem !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.7 !important;
+}
+
+html body .departamento-inline-002 {
+  color: #F59E0B !important;
+}
+
+html body .departamento-inline-003 {
+  color: var(--terracotta) !important;
+}
+
+html body .departamento-inline-004 {
+  color: #10B981 !important;
+}
+
+html body .departamento-inline-005 {
+  margin-top: 2.5rem !important;
+  text-align: center !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  padding-top: 2rem !important;
+}
+
+html body .departamento-inline-006 {
+  font-size: 0.95rem !important;
+  color: var(--arena-pinolera) !important;
+  margin-bottom: 1rem !important;
+}
+
+html body .departamento-inline-007 {
+  display: inline-flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+
+html body .departamento-inline-008 {
+  padding: 0.8rem 1.8rem !important;
+}
+
+html body .departamento-inline-009 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .departamento-inline-010 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .departamento-inline-011 {
+  font-size: 2.5rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .departamento-inline-012 {
+  font-size: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  color: #FFFFFF !important;
+}
+
+html body .departamento-inline-013 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .departamento-inline-014 {
+  background: rgba(15,23,42,0.9) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px dashed var(--border-subtle) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+html body .departamento-inline-015 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  display: block !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body .departamento-inline-016 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+}
+
+html body .departamento-inline-017 {
+  font-size: 1.3rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .departamento-inline-018 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+html body .departamento-inline-019 {
+  font-size: 0.75rem !important;
+}
+
+html body .departamento-inline-020 {
+  font-size: 1.3rem !important;
+  color: var(--terracotta) !important;
+}
+
+html body .departamento-inline-021 {
+  font-size: 1.3rem !important;
+  color: var(--azul-info) !important;
+}
+
+html body .departamento-inline-022 {
+  font-size: 1.3rem !important;
+  color: #25D366 !important;
+}
+
+html body .departamento-inline-023 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+}
+
+html body .departamento-inline-024 {
+  width: 100% !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .departamento-inline-025 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .departamento-inline-026 {
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .departamento-inline-027 {
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .departamento-inline-028 {
+  display: flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .departamento-inline-029 {
+  flex: 1 !important;
+  justify-content: center !important;
+}
+
+html body .departamento-inline-030 {
+  color: var(--oro-noble) !important;
+}
+
+html body .departamento-inline-031 {
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  font-weight:700 !important;
+}

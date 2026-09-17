@@ -1,0 +1,210 @@
+/**
+ * POR QU?: mantener la presentaci?n de musica.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de musica, sin l?gica ni contenido estructural.
+ */
+
+
+html body .musica-inline-001 {
+  border-color: rgba(212, 175, 55, 0.4) !important;
+  color: var(--oro-noble) !important;
+}
+
+html body .musica-inline-002 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+html body .musica-inline-003 {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  background: var(--grad-sunset) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.5rem !important;
+  color: #FFFFFF !important;
+  box-shadow: var(--shadow-glow-terracotta) !important;
+  flex-shrink: 0 !important;
+}
+
+html body .musica-inline-004 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.8rem !important;
+}
+
+html body .musica-inline-005 {
+  font-size: 1.4rem !important;
+  color: #FFFFFF !important;
+  margin: 0 !important;
+  font-family: var(--font-display) !important;
+}
+
+html body .musica-inline-006 {
+  font-size: 0.9rem !important;
+  color: var(--arena-pinolera) !important;
+  margin-top: 0.25rem !important;
+}
+
+html body .musica-inline-007 {
+  display: none !important;
+  padding: 0.45rem 0.9rem !important;
+  font-size: 0.8rem !important;
+}
+
+html body .musica-inline-008 {
+  font-size: 0.75rem !important;
+  color: var(--verde-neon) !important;
+  font-family: var(--font-tech) !important;
+  font-weight: 800 !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  padding: 0.35rem 0.8rem !important;
+  border-radius: 9999px !important;
+}
+
+html body .musica-inline-009 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+}
+
+html body .musica-inline-010 {
+  font-size: 0.82rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .musica-inline-011 {
+  text-align: center !important;
+  margin-top: 4rem !important;
+  margin-bottom: 2rem !important;
+}
+
+html body .musica-inline-012 {
+  margin-bottom: 1.2rem !important;
+}
+
+html body .musica-inline-013 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .musica-inline-014 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .musica-inline-015 {
+  font-size: 2.5rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .musica-inline-016 {
+  font-size: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  color: #FFFFFF !important;
+}
+
+html body .musica-inline-017 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .musica-inline-018 {
+  background: rgba(15,23,42,0.9) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px dashed var(--border-subtle) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+html body .musica-inline-019 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  display: block !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body .musica-inline-020 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+}
+
+html body .musica-inline-021 {
+  font-size: 1.3rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .musica-inline-022 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+html body .musica-inline-023 {
+  font-size: 0.75rem !important;
+}
+
+html body .musica-inline-024 {
+  font-size: 1.3rem !important;
+  color: var(--terracotta) !important;
+}
+
+html body .musica-inline-025 {
+  font-size: 1.3rem !important;
+  color: var(--azul-info) !important;
+}
+
+html body .musica-inline-026 {
+  font-size: 1.3rem !important;
+  color: #25D366 !important;
+}
+
+html body .musica-inline-027 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+}
+
+html body .musica-inline-028 {
+  width: 100% !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .musica-inline-029 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .musica-inline-030 {
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .musica-inline-031 {
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .musica-inline-032 {
+  display: flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .musica-inline-033 {
+  flex: 1 !important;
+  justify-content: center !important;
+}

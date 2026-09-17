@@ -41,59 +41,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-
-  <style>
-    .cookies-hero-section {
-      padding: 6.5rem 0 3rem;
-      background: radial-gradient(circle at 15% 25%, rgba(246, 94, 1, 0.3) 0%, transparent 60%),
-                  radial-gradient(circle at 85% 75%, rgba(22, 93, 111, 0.35) 0%, transparent 60%),
-                  #0A1120;
-      border-bottom: 1px solid rgba(246, 94, 1, 0.25);
-    }
-    .cookies-tag-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 1rem;
-      background: rgba(246, 94, 1, 0.18);
-      border: 1px solid rgba(246, 94, 1, 0.45);
-      border-radius: 9999px;
-      font-family: var(--font-tech);
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--arena-pinolera);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-    }
-    .article-item-card {
-      background: rgba(15, 23, 42, 0.82);
-      border: 1px solid rgba(244, 230, 193, 0.16);
-      border-radius: 20px;
-      padding: 1.8rem;
-      margin-bottom: 1.3rem;
-      backdrop-filter: blur(16px);
-      display: flex;
-      gap: 1.4rem;
-      align-items: flex-start;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-    .article-item-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--terracotta);
-    }
-    .article-num-pill {
-      font-family: var(--font-tech);
-      font-size: 1rem;
-      font-weight: 900;
-      color: var(--terracotta-light);
-      background: rgba(246, 94, 1, 0.15);
-      border: 1px solid rgba(246, 94, 1, 0.4);
-      border-radius: 10px;
-      padding: 0.4rem 0.75rem;
-      flex-shrink: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/cookies.css">
 </head>
 <body>
 
@@ -238,10 +186,10 @@
         <span class="cookies-tag-badge">
           <i class="fa-solid fa-cookie-bite"></i> Transparencia Tecnológica & Almacenamiento Local
         </span>
-        <h1 style="font-size: clamp(2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 800; margin-bottom: 0.8rem;">
+        <h1 class="cookies-inline-001">
           🍪 Política de Cookies & Caché Offline
         </h1>
-        <p style="font-size: 1.05rem; color: var(--arena-pinolera); max-width: 800px; line-height: 1.6; margin-bottom: 2.5rem;">
+        <p class="cookies-inline-002">
           Explicación clara del almacenamiento técnico necesario para que disfrutes mapas fuera de línea y cotizadores sin rastreadores invasivos.
         </p>
 
@@ -249,10 +197,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">01</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="cookies-inline-003">
               ¿Qué son las Cookies y el Almacenamiento Local?
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="cookies-inline-004">
               Las cookies y elementos de almacenamiento local (como IndexedDB y LocalStorage) son pequeños fragmentos de información técnica que se almacenan de manera segura en tu navegador o smartphone para recordar tus preferencias de viaje, moneda seleccionada (USD/NIO) y fichas de senderos descargadas.
             </p>
           </div>
@@ -261,10 +209,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">02</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="cookies-inline-003">
               Cookies Técnicas Esenciales (Obligatorias)
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="cookies-inline-004">
               Son aquellas imprescindibles para el funcionamiento correcto de la plataforma: sesión segura de autenticación en Firebase, control del estado del menú de navegación, prevención de fraudes y persistencia temporal del cotizador de destinos campesinos.
             </p>
           </div>
@@ -273,10 +221,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">03</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="cookies-inline-003">
               Almacenamiento de Mapas Fuera de Línea (Offline)
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="cookies-inline-004">
               Para garantizar que los exploradores en áreas protegidas remotas de Nicaragua puedan consultar coordenadas GPS, rutas de senderos y números de emergencia aún en ausencia de señal celular, la plataforma almacena en memoria local las capas cartográficas autorizadas por el usuario.
             </p>
           </div>
@@ -285,10 +233,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">04</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="cookies-inline-003">
               Cero Rastreadores Publicitarios Invasivos
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="cookies-inline-004">
               Baqueano Nicaragua no emplea cookies de terceros para publicidad programática ni comparte historiales de navegación con agencias publicitarias. Tu experiencia de exploración permanece libre de telemercadeo comercial.
             </p>
           </div>
@@ -358,7 +306,7 @@
         <span class="separator">|</span>
         <a href="aviso-legal.html">Aviso Legal</a>
         <span class="separator">|</span>
-        <a href="cookies.html" style="color: var(--terracotta); font-weight: 700;">Política de Cookies</a>
+        <a href="cookies.html" class="cookies-inline-005">Política de Cookies</a>
         <span class="separator">|</span>
         <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
         <span class="separator">|</span>
@@ -372,9 +320,9 @@
         <div>
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+        <div class="cookies-inline-006">
+          <span class="cookies-inline-007">
+            <span class="cookies-inline-008"></span>
             Red Satelital 24/7 Operativa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>

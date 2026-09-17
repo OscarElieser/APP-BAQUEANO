@@ -1,0 +1,1073 @@
+/**
+ * POR QU?: mantener la presentaci?n de admin.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de admin, sin l?gica ni contenido estructural.
+ */
+
+
+html body .admin-inline-001 {
+  display:flex !important;
+  align-items:center !important;
+  gap:0.8rem !important;
+}
+
+html body .admin-inline-002 {
+  font-family:var(--font-tech) !important;
+  font-size:1rem !important;
+  font-weight:800 !important;
+  color:#FFFFFF !important;
+  letter-spacing:3px !important;
+}
+
+html body .admin-inline-003 {
+  color:#EF4444 !important;
+}
+
+html body .admin-inline-004 {
+  background:linear-gradient(135deg,#EF4444,#F97316) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+}
+
+html body .admin-inline-005 {
+  padding-top:5rem !important;
+  padding-bottom:0 !important;
+}
+
+html body .admin-inline-006 {
+  max-width:100% !important;
+}
+
+html body .admin-inline-007 {
+  width:100% !important;
+  justify-content:center !important;
+  padding:0.95rem !important;
+  font-size:1rem !important;
+  margin-top:0.6rem !important;
+}
+
+html body .admin-inline-008 {
+  display:none !important;
+}
+
+html body .admin-inline-009 {
+  display:flex !important;
+  align-items:center !important;
+  gap:0.6rem !important;
+}
+
+html body .admin-inline-010 {
+  font-size:0.75rem !important;
+  color:var(--arena-pinolera) !important;
+}
+
+html body .admin-inline-011 {
+  font-size:0.75rem !important;
+  color:var(--text-muted) !important;
+  font-family:var(--font-tech) !important;
+}
+
+html body .admin-inline-012 {
+  line-height:1.1 !important;
+}
+
+html body .admin-inline-013 {
+  font-size:0.65rem !important;
+  font-weight:400 !important;
+  color:var(--text-muted) !important;
+  margin-top:0.1rem !important;
+}
+
+html body .admin-inline-014 {
+  --kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF) !important;
+}
+
+html body .admin-inline-015 {
+  background:rgba(16,185,129,0.2) !important;
+  color:#10B981 !important;
+  border:1px solid rgba(16,185,129,0.35) !important;
+}
+
+html body .admin-inline-016 {
+  --kpi-accent:linear-gradient(90deg,var(--terracotta),#FF9B44) !important;
+}
+
+html body .admin-inline-017 {
+  background:rgba(246,94,1,0.2) !important;
+  color:#FF7B26 !important;
+  border:1px solid rgba(246,94,1,0.35) !important;
+}
+
+html body .admin-inline-018 {
+  --kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1) !important;
+}
+
+html body .admin-inline-019 {
+  background:rgba(56,189,248,0.2) !important;
+  color:#38BDF8 !important;
+  border:1px solid rgba(56,189,248,0.35) !important;
+}
+
+html body .admin-inline-020 {
+  --kpi-accent:linear-gradient(90deg,#EF4444,#F97316) !important;
+}
+
+html body .admin-inline-021 {
+  background:rgba(239,68,68,0.2) !important;
+  color:#EF4444 !important;
+  border:1px solid rgba(239,68,68,0.35) !important;
+}
+
+html body .admin-inline-022 {
+  --kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6) !important;
+}
+
+html body .admin-inline-023 {
+  background:rgba(139,92,246,0.2) !important;
+  color:#A78BFA !important;
+  border:1px solid rgba(139,92,246,0.35) !important;
+}
+
+html body .admin-inline-024 {
+  left:17% !important;
+  top:33% !important;
+}
+
+html body .admin-inline-025 {
+  left:38% !important;
+  top:51% !important;
+}
+
+html body .admin-inline-026 {
+  left:36% !important;
+  top:63% !important;
+}
+
+html body .admin-inline-027 {
+  left:55% !important;
+  top:75% !important;
+}
+
+html body .admin-inline-028 {
+  left:22% !important;
+  top:16% !important;
+}
+
+html body .admin-inline-029 {
+  left:68% !important;
+  top:22% !important;
+}
+
+html body .admin-inline-030 {
+  left:33% !important;
+  top:74% !important;
+}
+
+html body .admin-inline-031 {
+  font-size:5px !important;
+}
+
+html body .admin-inline-032 {
+  grid-template-columns:1fr 1fr !important;
+}
+
+html body .admin-inline-033 {
+  background:rgba(66,133,244,0.2) !important;
+  color:#4285F4 !important;
+  border:1px solid rgba(66,133,244,0.3) !important;
+}
+
+html body .admin-inline-034 {
+  background:rgba(255,160,0,0.2) !important;
+  color:#FFA000 !important;
+  border:1px solid rgba(255,160,0,0.3) !important;
+}
+
+html body .admin-inline-035 {
+  background:rgba(76,175,80,0.2) !important;
+  color:#4CAF50 !important;
+  border:1px solid rgba(76,175,80,0.3) !important;
+}
+
+html body .admin-inline-036 {
+  background:rgba(239,68,68,0.2) !important;
+  color:#EF4444 !important;
+  border:1px solid rgba(239,68,68,0.3) !important;
+}
+
+html body .admin-inline-037 {
+  padding:0.3rem 0.65rem !important;
+  font-size:0.7rem !important;
+}
+
+html body .admin-inline-038 {
+  background:rgba(246,94,1,0.18) !important;
+  color:#FF7B26 !important;
+}
+
+html body .admin-inline-039 {
+  background:rgba(16,185,129,0.18) !important;
+  color:#10B981 !important;
+}
+
+html body .admin-inline-040 {
+  background:rgba(139,92,246,0.18) !important;
+  color:#A78BFA !important;
+}
+
+html body .admin-inline-041 {
+  background:rgba(239,68,68,0.18) !important;
+  color:#EF4444 !important;
+}
+
+html body .admin-inline-042 {
+  --kpi-accent:linear-gradient(90deg,#FF7B26,#F59E0B) !important;
+}
+
+html body .admin-inline-043 {
+  background:rgba(16,185,129,0.2) !important;
+  color:#10B981 !important;
+  border:1px solid rgba(16,185,129,0.3) !important;
+}
+
+html body .admin-inline-044 {
+  background:rgba(56,189,248,0.2) !important;
+  color:#38BDF8 !important;
+  border:1px solid rgba(56,189,248,0.3) !important;
+}
+
+html body .admin-inline-045 {
+  background:rgba(246,94,1,0.2) !important;
+  color:#FF7B26 !important;
+  border:1px solid rgba(246,94,1,0.3) !important;
+}
+
+html body .admin-inline-046 {
+  color:#F59E0B !important;
+}
+
+html body .admin-inline-047 {
+  background:rgba(132,204,22,0.2) !important;
+  color:#84CC16 !important;
+  border:1px solid rgba(132,204,22,0.3) !important;
+}
+
+html body .admin-inline-048 {
+  color:#10B981 !important;
+}
+
+html body .admin-inline-049 {
+  font-size:0.68rem !important;
+  padding:0.28rem 0.55rem !important;
+}
+
+html body .admin-inline-050 {
+  width:70% !important;
+}
+
+html body .admin-inline-051 {
+  width:38% !important;
+}
+
+html body .admin-inline-052 {
+  width:100% !important;
+}
+
+html body .admin-inline-053 {
+  color:#EF4444 !important;
+}
+
+html body .admin-inline-054 {
+  width:35% !important;
+}
+
+html body .admin-inline-055 {
+  width:84% !important;
+}
+
+html body .admin-inline-056 {
+  margin-bottom:1.6rem !important;
+}
+
+html body .admin-inline-057 {
+  display:flex !important;
+  gap:0.5rem !important;
+}
+
+html body .admin-inline-058 {
+  font-size:0.7rem !important;
+  padding:0.28rem 0.6rem !important;
+}
+
+html body .admin-inline-059 {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr)) !important;
+  gap:1rem !important;
+}
+
+html body .admin-inline-060 {
+  font-family:var(--font-tech) !important;
+  font-size:0.7rem !important;
+  color:var(--text-muted) !important;
+  margin-bottom:0.6rem !important;
+  text-transform:uppercase !important;
+  letter-spacing:1px !important;
+}
+
+html body .admin-inline-061 {
+  display:flex !important;
+  flex-direction:column !important;
+  gap:0.4rem !important;
+}
+
+html body .admin-inline-062 {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  font-size:0.78rem !important;
+}
+
+html body .admin-inline-063 {
+  color:#FFFFFF !important;
+}
+
+html body .admin-inline-064 {
+  color:var(--terracotta-light) !important;
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+}
+
+html body .admin-inline-065 {
+  color:var(--text-muted) !important;
+}
+
+html body .admin-inline-066 {
+  color:#10B981 !important;
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+}
+
+html body .admin-inline-067 {
+  color:#38BDF8 !important;
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+}
+
+html body .admin-inline-068 {
+  color:#A78BFA !important;
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+}
+
+html body .admin-inline-069 {
+  color:#EF4444 !important;
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+}
+
+html body .admin-inline-070 {
+  color:#F59E0B !important;
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+}
+
+html body .admin-inline-071 {
+  --kpi-accent:linear-gradient(90deg,#F59E0B,#FBBF24) !important;
+}
+
+html body .admin-inline-072 {
+  background:rgba(245,158,11,0.2) !important;
+  color:#F59E0B !important;
+  border:1px solid rgba(245,158,11,0.35) !important;
+}
+
+html body .admin-inline-073 {
+  --kpi-accent:linear-gradient(90deg,#84CC16,#22C55E) !important;
+}
+
+html body .admin-inline-074 {
+  background:rgba(132,204,22,0.2) !important;
+  color:#84CC16 !important;
+  border:1px solid rgba(132,204,22,0.35) !important;
+}
+
+html body .admin-inline-075 {
+  margin-bottom:1.1rem !important;
+}
+
+html body .admin-inline-076 {
+  background:#EF4444 !important;
+  box-shadow:0 0 8px #EF4444 !important;
+}
+
+html body .admin-inline-077 {
+  padding:0.5rem 0 !important;
+}
+
+html body .admin-inline-078 {
+  overflow-x:auto !important;
+}
+
+html body .admin-inline-079 {
+  font-weight:700 !important;
+  color:#FFFFFF !important;
+}
+
+html body .admin-inline-080 {
+  font-family:var(--font-tech) !important;
+  font-size:0.72rem !important;
+  color:#38BDF8 !important;
+}
+
+html body .admin-inline-081 {
+  font-family:var(--font-tech) !important;
+  color:#EF4444 !important;
+}
+
+html body .admin-inline-082 {
+  font-family:var(--font-tech) !important;
+  font-size:0.72rem !important;
+}
+
+html body .admin-inline-083 {
+  font-family:var(--font-tech) !important;
+  color:#F59E0B !important;
+}
+
+html body .admin-inline-084 {
+  opacity:0.6 !important;
+}
+
+html body .admin-inline-085 {
+  font-weight:700 !important;
+  color:#94A3B8 !important;
+}
+
+html body .admin-inline-086 {
+  font-family:var(--font-tech) !important;
+  font-size:0.72rem !important;
+  color:var(--text-muted) !important;
+}
+
+html body .admin-inline-087 {
+  font-family:var(--font-tech) !important;
+  color:#10B981 !important;
+}
+
+html body .admin-inline-088 {
+  font-size:0.72rem !important;
+  color:#10B981 !important;
+}
+
+html body .admin-inline-089 {
+  display:grid !important;
+  grid-template-columns:1fr auto !important;
+  gap:0.6rem !important;
+  align-items:end !important;
+}
+
+html body .admin-inline-090 {
+  font-size:0.72rem !important;
+  color:var(--text-muted) !important;
+  margin-bottom:0.3rem !important;
+  font-family:var(--font-tech) !important;
+}
+
+html body .admin-inline-091 {
+  width:100% !important;
+  background:rgba(6,9,18,0.8) !important;
+  border:1px solid rgba(22,93,111,0.4) !important;
+  border-radius:10px !important;
+  padding:0.65rem 0.85rem !important;
+  color:#FFFFFF !important;
+  font-family:var(--font-main) !important;
+  font-size:0.82rem !important;
+}
+
+html body .admin-inline-092 {
+  white-space:nowrap !important;
+}
+
+html body .admin-inline-093 {
+  padding-top:1.5rem !important;
+}
+
+html body .admin-inline-094 {
+  height:45% !important;
+}
+
+html body .admin-inline-095 {
+  height:52% !important;
+}
+
+html body .admin-inline-096 {
+  height:48% !important;
+}
+
+html body .admin-inline-097 {
+  height:60% !important;
+}
+
+html body .admin-inline-098 {
+  height:70% !important;
+}
+
+html body .admin-inline-099 {
+  height:78% !important;
+}
+
+html body .admin-inline-100 {
+  height:85% !important;
+}
+
+html body .admin-inline-101 {
+  height:88% !important;
+}
+
+html body .admin-inline-102 {
+  height:100% !important;
+}
+
+html body .admin-inline-103 {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr)) !important;
+  gap:0.75rem !important;
+  margin-top:1rem !important;
+}
+
+html body .admin-inline-104 {
+  text-align:center !important;
+  background:rgba(6,9,18,0.7) !important;
+  border:1px solid rgba(255,255,255,0.05) !important;
+  border-radius:10px !important;
+  padding:0.7rem !important;
+}
+
+html body .admin-inline-105 {
+  font-size:0.7rem !important;
+  color:var(--text-muted) !important;
+  font-family:var(--font-tech) !important;
+}
+
+html body .admin-inline-106 {
+  font-family:var(--font-tech) !important;
+  font-weight:800 !important;
+  color:#10B981 !important;
+  font-size:1rem !important;
+}
+
+html body .admin-inline-107 {
+  font-family:var(--font-tech) !important;
+  font-weight:800 !important;
+  color:#38BDF8 !important;
+  font-size:1rem !important;
+}
+
+html body .admin-inline-108 {
+  font-family:var(--font-tech) !important;
+  font-weight:800 !important;
+  color:#F59E0B !important;
+  font-size:1rem !important;
+}
+
+html body .admin-inline-109 {
+  font-family:var(--font-tech) !important;
+  font-weight:800 !important;
+  color:#A78BFA !important;
+  font-size:1rem !important;
+}
+
+html body .admin-inline-110 {
+  font-size:6px !important;
+}
+
+html body .admin-inline-111 {
+  margin-bottom:0 !important;
+}
+
+html body .admin-inline-112 {
+  --kpi-accent:linear-gradient(90deg,#2DD4BF,#38BDF8) !important;
+}
+
+html body .admin-inline-113 {
+  background:rgba(45,212,191,0.2) !important;
+  color:#2DD4BF !important;
+  border:1px solid rgba(45,212,191,0.35) !important;
+}
+
+html body .admin-inline-114 {
+  --kpi-accent:linear-gradient(90deg,#22C55E,#84CC16) !important;
+}
+
+html body .admin-inline-115 {
+  background:rgba(34,197,94,0.2) !important;
+  color:#22C55E !important;
+  border:1px solid rgba(34,197,94,0.35) !important;
+}
+
+html body .admin-inline-116 {
+  background:rgba(239,68,68,0.2) !important;
+  color:#EF4444 !important;
+}
+
+html body .admin-inline-117 {
+  background:rgba(245,158,11,0.2) !important;
+  color:#F59E0B !important;
+}
+
+html body .admin-inline-118 {
+  background:rgba(132,204,22,0.2) !important;
+  color:#84CC16 !important;
+}
+
+html body .admin-inline-119 {
+  background:rgba(246,94,1,0.2) !important;
+  color:#FF7B26 !important;
+}
+
+html body .admin-inline-120 {
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:0.75rem !important;
+  margin-bottom:0.85rem !important;
+}
+
+html body .admin-inline-121 {
+  background:rgba(6,9,18,0.7) !important;
+  border:1px solid rgba(132,204,22,0.2) !important;
+  border-radius:11px !important;
+  padding:0.75rem !important;
+  text-align:center !important;
+}
+
+html body .admin-inline-122 {
+  font-size:1.5rem !important;
+  margin-bottom:0.3rem !important;
+}
+
+html body .admin-inline-123 {
+  font-family:var(--font-tech) !important;
+  font-size:0.8rem !important;
+  font-weight:700 !important;
+  color:#FFFFFF !important;
+}
+
+html body .admin-inline-124 {
+  font-size:0.68rem !important;
+  color:var(--text-muted) !important;
+}
+
+html body .admin-inline-125 {
+  background:rgba(6,9,18,0.7) !important;
+  border:1px solid rgba(45,212,191,0.2) !important;
+  border-radius:11px !important;
+  padding:0.75rem !important;
+  text-align:center !important;
+}
+
+html body .admin-inline-126 {
+  background:rgba(6,9,18,0.7) !important;
+  border:1px solid rgba(246,94,1,0.2) !important;
+  border-radius:11px !important;
+  padding:0.75rem !important;
+  text-align:center !important;
+}
+
+html body .admin-inline-127 {
+  background:rgba(6,9,18,0.7) !important;
+  border:1px solid rgba(239,68,68,0.2) !important;
+  border-radius:11px !important;
+  padding:0.75rem !important;
+  text-align:center !important;
+}
+
+html body .admin-inline-128 {
+  font-family:var(--font-tech) !important;
+  font-size:0.8rem !important;
+  font-weight:700 !important;
+  color:#EF4444 !important;
+}
+
+html body .admin-inline-129 {
+  background:rgba(22,93,111,0.15) !important;
+  border:1px solid rgba(22,93,111,0.3) !important;
+  border-radius:10px !important;
+  padding:0.75rem !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:0.65rem !important;
+}
+
+html body .admin-inline-130 {
+  color:#A78BFA !important;
+  font-size:1.1rem !important;
+}
+
+html body .admin-inline-131 {
+  font-size:0.78rem !important;
+  color:var(--text-secondary) !important;
+}
+
+html body .admin-inline-132 {
+  color:var(--arena-pinolera) !important;
+}
+
+html body .admin-inline-133 {
+  color:#A78BFA !important;
+}
+
+html body .admin-inline-134 {
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:1rem !important;
+}
+
+html body .admin-inline-135 {
+  font-family:var(--font-tech) !important;
+  font-size:0.7rem !important;
+  color:var(--text-muted) !important;
+  margin-bottom:0.65rem !important;
+  text-transform:uppercase !important;
+  letter-spacing:1px !important;
+}
+
+html body .admin-inline-136 {
+  display:flex !important;
+  flex-direction:column !important;
+  gap:0.55rem !important;
+}
+
+html body .admin-inline-137 {
+  background:rgba(6,9,18,0.7) !important;
+  border:1px solid rgba(139,92,246,0.2) !important;
+  border-radius:10px !important;
+  padding:0.65rem !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+}
+
+html body .admin-inline-138 {
+  font-size:0.78rem !important;
+  color:#FFFFFF !important;
+}
+
+html body .admin-inline-139 {
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+  color:#10B981 !important;
+}
+
+html body .admin-inline-140 {
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+  color:#F59E0B !important;
+}
+
+html body .admin-inline-141 {
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+  color:#38BDF8 !important;
+}
+
+html body .admin-inline-142 {
+  font-family:var(--font-tech) !important;
+  font-weight:700 !important;
+  color:#A78BFA !important;
+}
+
+html body .admin-inline-143 {
+  width:100% !important;
+  justify-content:center !important;
+}
+
+html body .admin-inline-144 {
+  background:rgba(139,92,246,0.2) !important;
+  color:#A78BFA !important;
+  border:1px solid rgba(139,92,246,0.3) !important;
+}
+
+html body .admin-inline-145 {
+  background:rgba(34,197,94,0.2) !important;
+  color:#22C55E !important;
+  border:1px solid rgba(34,197,94,0.3) !important;
+}
+
+html body .admin-inline-146 {
+  background:rgba(245,158,11,0.2) !important;
+  color:#F59E0B !important;
+  border:1px solid rgba(245,158,11,0.3) !important;
+}
+
+html body .admin-inline-147 {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 0.95rem !important;
+  font-size: 1rem !important;
+  margin-top: 0.6rem !important;
+}
+
+html body .admin-inline-148 {
+  display: none !important;
+}
+
+html body .admin-inline-149 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+}
+
+html body .admin-inline-150 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+}
+
+html body .admin-inline-151 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.8rem !important;
+}
+
+html body .admin-inline-152 {
+  font-size: 0.75rem !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-tech) !important;
+}
+
+html body .admin-inline-153 {
+  color: var(--terracotta-light) !important;
+}
+
+html body .admin-inline-154 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+html body .admin-inline-155 {
+  font-size: 0.82rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+}
+
+html body .admin-inline-156 {
+  color: var(--arena-pinolera) !important;
+}
+
+html body .admin-inline-157 {
+  font-size: 0.78rem !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-tech) !important;
+}
+
+html body .admin-inline-158 {
+  height: 65% !important;
+}
+
+html body .admin-inline-159 {
+  height: 52% !important;
+}
+
+html body .admin-inline-160 {
+  height: 72% !important;
+}
+
+html body .admin-inline-161 {
+  height: 60% !important;
+}
+
+html body .admin-inline-162 {
+  height: 80% !important;
+}
+
+html body .admin-inline-163 {
+  height: 68% !important;
+}
+
+html body .admin-inline-164 {
+  height: 88% !important;
+}
+
+html body .admin-inline-165 {
+  height: 75% !important;
+}
+
+html body .admin-inline-166 {
+  height: 94% !important;
+}
+
+html body .admin-inline-167 {
+  height: 90% !important;
+}
+
+html body .admin-inline-168 {
+  height: 100% !important;
+}
+
+html body .admin-inline-169 {
+  height: 98% !important;
+}
+
+html body .admin-inline-170 {
+  height: 96% !important;
+}
+
+html body .admin-inline-171 {
+  height: 92% !important;
+}
+
+html body .admin-inline-172 {
+  font-size: 6px !important;
+}
+
+html body .admin-inline-173 {
+  margin-bottom: 2.5rem !important;
+}
+
+html body .admin-inline-174 {
+  font-size: 0.8rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+}
+
+html body .admin-inline-175 {
+  color: var(--verde-neon) !important;
+}
+
+html body .admin-inline-176 {
+  padding: 0.35rem 0.75rem !important;
+  font-size: 0.75rem !important;
+}
+
+html body .admin-inline-177 {
+  margin-bottom: 1.2rem !important;
+}
+
+html body .admin-inline-178 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .admin-inline-179 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .admin-inline-180 {
+  font-size: 2.5rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .admin-inline-181 {
+  font-size: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  color: #FFFFFF !important;
+}
+
+html body .admin-inline-182 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .admin-inline-183 {
+  background: rgba(15,23,42,0.9) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px dashed var(--border-subtle) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+html body .admin-inline-184 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  display: block !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body .admin-inline-185 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+}
+
+html body .admin-inline-186 {
+  font-size: 1.3rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .admin-inline-187 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+html body .admin-inline-188 {
+  font-size: 0.75rem !important;
+}
+
+html body .admin-inline-189 {
+  font-size: 1.3rem !important;
+  color: var(--terracotta) !important;
+}
+
+html body .admin-inline-190 {
+  font-size: 1.3rem !important;
+  color: var(--azul-info) !important;
+}
+
+html body .admin-inline-191 {
+  font-size: 1.3rem !important;
+  color: #25D366 !important;
+}
+
+html body .admin-inline-192 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+}
+
+html body .admin-inline-193 {
+  width: 100% !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .admin-inline-194 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .admin-inline-195 {
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .admin-inline-196 {
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .admin-inline-197 {
+  display: flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .admin-inline-198 {
+  flex: 1 !important;
+  justify-content: center !important;
+}
+
+html body .admin-inline-199 {
+  color: #F65E01 !important;
+}
+
+html body .admin-inline-200 {
+  color: #10B981 !important;
+}
