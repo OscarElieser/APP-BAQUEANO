@@ -210,14 +210,6 @@ function initAdminAuth() {
     });
   }
 
-  function fallbackGooglePrompt() {
-    const entered = prompt("Ingresa tu cuenta de Google (Gmail):", "oscarelieser.informatica.inatec@gmail.com");
-    if (entered && entered.trim()) {
-      resolveUserRoleAndProceed(entered.trim(), entered.trim());
-    } else {
-      if (feedbackAlert) feedbackAlert.style.display = 'none';
-    }
-  }
 
   // --------------------------------------------------------------------------
   // INICIO DE SESIÓN CON CORREO & CONTRASEÑA
