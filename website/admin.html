@@ -184,14 +184,1163 @@
     </div>
   </nav>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper">
-    <div class="container admin-hub-view">
+  <!-- MODO CENTRO DE MANDO (FULLSCREEN) -->
+  <div class="command-mode-overlay" id="commandModeOverlay" aria-hidden="true">
+    <div class="command-mode-header">
+      <div class="command-mode-title">
+        <span class="ops-led"></span>
+        🛰️ BAQUEANO — PULSO DE NICARAGUA · CENTRO DE MANDO EN VIVO
+      </div>
+      <div style="display:flex;align-items:center;gap:0.8rem;">
+        <span id="commandClock" style="font-family:var(--font-tech);font-size:1rem;font-weight:800;color:#FFFFFF;letter-spacing:3px;"></span>
+        <button class="command-close-btn" id="commandCloseBtn"><i class="fa-solid fa-compress"></i> Salir</button>
+      </div>
+    </div>
+    <div class="command-mode-grid">
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-users"></i> Turistas Activos</div>
+        <div class="command-big" id="cmdTuristas">248</div>
+        <div class="command-label">En ruta ahora mismo</div>
+      </div>
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-route"></i> Senderos Abiertos</div>
+        <div class="command-big" id="cmdSenderos">31</div>
+        <div class="command-label">De 38 registrados</div>
+      </div>
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Alertas SOS Activas</div>
+        <div class="command-big" id="cmdSOS" style="background:linear-gradient(135deg,#EF4444,#F97316);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">2</div>
+        <div class="command-label">En atención ahora</div>
+      </div>
+      <div class="command-cell span2">
+        <div class="command-cell-title"><i class="fa-solid fa-hand-holding-dollar"></i> Ingreso Comunitario del Mes</div>
+        <div class="command-big" id="cmdIngresos">$25,120</div>
+        <div class="command-label">100% directo a comunidades · Sin intermediarios</div>
+      </div>
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-person-hiking"></i> Guías en Campo</div>
+        <div class="command-big" id="cmdGuias">18</div>
+        <div class="command-label">Activos y en ruta</div>
+      </div>
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-leaf"></i> Denuncias Ambientales</div>
+        <div class="command-big" id="cmdDenuncias">7</div>
+        <div class="command-label">En seguimiento activo</div>
+      </div>
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-calendar-check"></i> Reservas Hoy</div>
+        <div class="command-big" id="cmdReservas">34</div>
+        <div class="command-label">Excursiones confirmadas</div>
+      </div>
+      <div class="command-cell">
+        <div class="command-cell-title"><i class="fa-solid fa-globe"></i> Visitas Web Hoy</div>
+        <div class="command-big" id="cmdVisitas">1,247</div>
+        <div class="command-label">Exploradores en el portal</div>
+      </div>
+    </div>
+  </div>
 
-      <!-- ================================================================ -->
-      <!-- 1. PASARELA DE AUTENTICACIÓN (LOGIN GATE)                        -->
-      <!-- ================================================================ -->
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper" style="padding-top:5rem;padding-bottom:0;">
+    <div class="admin-hub-view" style="max-width:100%;">
+
+      <!-- 1. PASARELA DE AUTENTICACIÓN -->
       <section class="admin-login-wrapper" id="adminLoginGate">
+        <div class="admin-login-card">
+          <div class="login-header-box">
+            <div class="login-icon-circle">
+              <img src="assets/images/logo.png" alt="Baqueano Nicaragua">
+            </div>
+            <h1 class="login-title">Acceso al Ops Center</h1>
+            <p class="login-subtitle">
+              Autenticación requerida para acceder al centro de mando, telemetría y supervisión de senderos.
+            </p>
+          </div>
+          <button type="button" class="btn-google-auth" id="btnGoogleLogin">
+            <svg class="google-svg-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Continuar con Google</span>
+          </button>
+          <div class="login-divider-line"><span>o ingresa con tu correo registrado</span></div>
+          <div class="login-feedback-alert" id="loginFeedback"></div>
+          <form id="adminLoginForm">
+            <div class="login-input-group">
+              <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Correo Electrónico Registrado:</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-user-shield"></i>
+                <input type="email" id="loginUsername" class="form-control-input" autocomplete="username" required placeholder="tu-correo@gmail.com">
+              </div>
+            </div>
+            <div class="login-input-group">
+              <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Acceso:</label>
+              <div class="login-input-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" class="form-control-input" autocomplete="current-password" required placeholder="••••••••">
+              </div>
+            </div>
+            <button type="submit" class="btn-hero-primary" style="width:100%;justify-content:center;padding:0.95rem;font-size:1rem;margin-top:0.6rem;">
+              <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Centro de Operaciones
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 2. DASHBOARD OPS CENTER (hidden until login) -->
+      <section id="adminDashboardContent" style="display:none;">
+
+        <!-- BARRA DE SESIÓN ACTIVA -->
+        <div class="user-session-bar" id="userSessionBar">
+          <div class="user-profile-meta">
+            <div class="user-avatar-circle" id="sessionUserAvatar">VM</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:0.6rem;">
+                <span class="user-name-title" id="sessionUserName">Lic. Valeria Morales</span>
+                <span class="user-role-badge admin" id="sessionUserRole">
+                  <i class="fa-solid fa-shield"></i> Administrador General
+                </span>
+              </div>
+              <div style="font-size:0.75rem;color:var(--arena-pinolera);" id="sessionUserTitle">
+                Directora de Operaciones &amp; Soberanía Territorial
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.8rem;">
+            <span style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-tech);">SESIÓN ACTIVA • TLS 1.3</span>
+            <button class="btn-logout" id="btnLogoutAdmin"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</button>
+          </div>
+        </div>
+
+        <!-- OPS CENTER: LAYOUT SIDEBAR + MAIN -->
+        <div class="ops-layout">
+
+          <!-- ═══════════════════════════════════════════════
+               SIDEBAR DE CENTROS DE MANDO
+               ═══════════════════════════════════════════════ -->
+          <aside class="ops-sidebar" id="opsSidebar">
+            <div class="ops-sidebar-header">
+              <div class="ops-sidebar-brand">
+                <span class="ops-led"></span>
+                OPS CENTER
+              </div>
+              <div class="ops-live-clock" id="opsClock">00:00:00</div>
+              <div class="ops-live-date" id="opsDate">Cargando...</div>
+            </div>
+
+            <!-- CENTRO 1: OPERACIONES -->
+            <div class="ops-center-group">
+              <div class="ops-group-label">Principal</div>
+              <button class="ops-center-tab active" data-panel="panel-operaciones">
+                <div class="ops-tab-icon op"><i class="fa-solid fa-satellite-dish"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Operaciones</div>
+                  <div class="ops-tab-sub">Mapa · Pulso · Reportes</div>
+                </div>
+                <span class="ops-tab-badge live">EN VIVO</span>
+              </button>
+
+              <!-- CENTRO 2: TURISMO -->
+              <button class="ops-center-tab" data-panel="panel-turismo">
+                <div class="ops-tab-icon tur"><i class="fa-solid fa-person-hiking"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Turismo</div>
+                  <div class="ops-tab-sub">Reservas · Capacidad · Analítica</div>
+                </div>
+                <span class="ops-tab-badge new">34</span>
+              </button>
+            </div>
+
+            <div class="ops-center-group">
+              <div class="ops-group-label">Operativo</div>
+              <!-- CENTRO 3: SEGURIDAD -->
+              <button class="ops-center-tab" data-panel="panel-seguridad">
+                <div class="ops-tab-icon seg"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Seguridad</div>
+                  <div class="ops-tab-sub">SOS · Usuarios · Auditoría</div>
+                </div>
+                <span class="ops-tab-badge alert">2 SOS</span>
+              </button>
+
+              <!-- CENTRO 4: COMUNIDADES -->
+              <button class="ops-center-tab" data-panel="panel-comunidades">
+                <div class="ops-tab-icon com"><i class="fa-solid fa-handshake-angle"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Comunidades</div>
+                  <div class="ops-tab-sub">Economía · Guías · Impacto</div>
+                </div>
+              </button>
+            </div>
+
+            <div class="ops-center-group">
+              <div class="ops-group-label">Ecosistema</div>
+              <!-- CENTRO 5: CONSERVACIÓN -->
+              <button class="ops-center-tab" data-panel="panel-conservacion">
+                <div class="ops-tab-icon con"><i class="fa-solid fa-leaf"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Conservación</div>
+                  <div class="ops-tab-sub">Ambiental · Biodiversidad</div>
+                </div>
+                <span class="ops-tab-badge alert">7</span>
+              </button>
+
+              <!-- CENTRO 6: TECNOLOGÍA -->
+              <button class="ops-center-tab" data-panel="panel-tecnologia">
+                <div class="ops-tab-icon tec"><i class="fa-solid fa-microchip"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Tecnología</div>
+                  <div class="ops-tab-sub">IA · Firebase · Estado</div>
+                </div>
+                <span class="ops-tab-badge live">99.8%</span>
+              </button>
+            </div>
+
+            <!-- BOTÓN MODO CENTRO DE MANDO -->
+            <button class="ops-command-btn" id="btnCommandMode">
+              <i class="fa-solid fa-tv"></i>
+              <div>
+                <div style="line-height:1.1;">Modo Centro de Mando</div>
+                <div style="font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-top:0.1rem;">Pantalla TV / Monitor grande</div>
+              </div>
+            </button>
+          </aside>
+
+          <!-- ═══════════════════════════════════════════════
+               ÁREA DE CONTENIDO PRINCIPAL
+               ═══════════════════════════════════════════════ -->
+          <main class="ops-main" id="opsMain">
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 1: OPERACIONES
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel active" id="panel-operaciones">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon op"><i class="fa-solid fa-satellite-dish"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Operaciones</div>
+                    <div class="ops-panel-subtitle">MAPA NACIONAL · PULSO DE NICARAGUA · ESTADO EN TIEMPO REAL</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                  <button class="btn-ops-action success"><i class="fa-solid fa-download"></i> Exportar</button>
+                </div>
+              </div>
+
+              <!-- KPIs de Operaciones -->
+              <div class="ops-kpi-grid">
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
+                  <div class="ops-kpi-top">
+                    <div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-users"></i></div>
+                    <span class="ops-kpi-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +12%</span>
+                  </div>
+                  <div class="ops-kpi-value">248</div>
+                  <div class="ops-kpi-label">Turistas en Ruta Ahora</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,var(--terracotta),#FF9B44)">
+                  <div class="ops-kpi-top">
+                    <div class="ops-kpi-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.35);"><i class="fa-solid fa-route"></i></div>
+                    <span class="ops-kpi-trend flat">31/38</span>
+                  </div>
+                  <div class="ops-kpi-value">31</div>
+                  <div class="ops-kpi-label">Senderos Abiertos Hoy</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
+                  <div class="ops-kpi-top">
+                    <div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-satellite-dish"></i></div>
+                    <span class="ops-kpi-trend up">99.8%</span>
+                  </div>
+                  <div class="ops-kpi-value">344</div>
+                  <div class="ops-kpi-label">Balizas GPS Activas</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
+                  <div class="ops-kpi-top">
+                    <div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <span class="ops-kpi-trend down">2 activas</span>
+                  </div>
+                  <div class="ops-kpi-value">2</div>
+                  <div class="ops-kpi-label">Alertas SOS en Atención</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6)">
+                  <div class="ops-kpi-top">
+                    <div class="ops-kpi-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.35);"><i class="fa-solid fa-person-hiking"></i></div>
+                    <span class="ops-kpi-trend flat">18 activos</span>
+                  </div>
+                  <div class="ops-kpi-value">18</div>
+                  <div class="ops-kpi-label">Guías en Campo</div>
+                </div>
+              </div>
+
+              <!-- MAPA OPERATIVO — PULSO DE NICARAGUA -->
+              <div class="ops-map-container">
+                <div class="ops-map-header">
+                  <div class="ops-map-title">
+                    <span class="ops-led"></span>
+                    🗺️ PULSO DE NICARAGUA — Mapa Operativo Nacional en Tiempo Real
+                  </div>
+                  <div class="ops-map-legend">
+                    <div class="map-legend-item"><span class="map-legend-dot active"></span>Sendero Activo</div>
+                    <div class="map-legend-item"><span class="map-legend-dot sos"></span>Alerta SOS</div>
+                    <div class="map-legend-item"><span class="map-legend-dot alert"></span>Incidencia</div>
+                    <div class="map-legend-item"><span class="map-legend-dot closed"></span>Cerrado</div>
+                  </div>
+                </div>
+                <div class="pulse-map-area" id="pulseMapArea">
+                  <!-- SVG de Nicaragua con departamentos -->
+                  <svg viewBox="0 0 700 440" class="nica-svg-outline" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outline de Nicaragua simplificado -->
+                    <defs>
+                      <filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+                    <!-- Forma general de Nicaragua -->
+                    <path d="M 80 80 L 140 55 L 220 48 L 300 52 L 380 60 L 440 75 L 500 95 L 540 120 L 560 155 L 555 190 L 540 220 L 510 250 L 480 275 L 450 295 L 420 320 L 400 345 L 375 365 L 340 380 L 300 385 L 260 380 L 220 368 L 185 355 L 155 340 L 130 318 L 108 295 L 90 268 L 75 240 L 65 210 L 62 180 L 65 145 L 72 115 Z"
+                      fill="rgba(22,93,111,0.25)" stroke="rgba(45,212,191,0.6)" stroke-width="1.5" filter="url(#glow)"/>
+                    <!-- Lago de Nicaragua (Lago Cocibolca) -->
+                    <ellipse cx="320" cy="295" rx="80" ry="55" fill="rgba(56,189,248,0.2)" stroke="rgba(56,189,248,0.5)" stroke-width="1"/>
+                    <!-- Lago Managua (Xolotlán) -->
+                    <ellipse cx="185" cy="195" rx="45" ry="28" fill="rgba(56,189,248,0.18)" stroke="rgba(56,189,248,0.45)" stroke-width="1"/>
+                    <!-- Líneas de departamentos -->
+                    <g stroke="rgba(22,93,111,0.4)" stroke-width="0.8" fill="none">
+                      <line x1="200" y1="80" x2="200" y2="350"/>
+                      <line x1="310" y1="75" x2="310" y2="200"/>
+                      <line x1="420" y1="90" x2="420" y2="300"/>
+                      <line x1="80" y1="180" x2="560" y2="180"/>
+                      <line x1="80" y1="270" x2="450" y2="270"/>
+                    </g>
+                    <!-- Label Nicaragua -->
+                    <text x="295" y="145" text-anchor="middle" fill="rgba(244,230,193,0.7)" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="3">NICARAGUA</text>
+                    <!-- Departamentos principales -->
+                    <text x="130" y="160" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Chinandega</text>
+                    <text x="230" y="155" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">León</text>
+                    <text x="195" y="218" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Managua</text>
+                    <text x="310" y="148" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Boaco</text>
+                    <text x="395" y="148" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Chontales</text>
+                    <text x="450" y="200" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">RACCS</text>
+                    <text x="265" y="220" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Masaya</text>
+                    <text x="230" y="340" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Rivas</text>
+                    <text x="115" y="295" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Carazo</text>
+                    <text x="120" y="248" fill="rgba(148,163,184,0.6)" font-size="8" font-family="monospace">Granada</text>
+                    <!-- Océano Pacífico -->
+                    <text x="42" y="300" fill="rgba(56,189,248,0.4)" font-size="7" font-family="monospace" transform="rotate(-90,42,300)">PACÍFICO</text>
+                    <!-- Mar Caribe -->
+                    <text x="580" y="190" fill="rgba(56,189,248,0.4)" font-size="7" font-family="monospace" transform="rotate(90,580,190)">MAR CARIBE</text>
+                  </svg>
+
+                  <!-- PUNTOS ACTIVOS DEL MAPA -->
+                  <!-- Cerro Negro - Activo -->
+                  <div class="map-point mp-active" style="left:17%;top:33%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-ring"></div>
+                    <div class="map-point-label">🌋 Cerro Negro · 42 turistas</div>
+                  </div>
+                  <!-- Volcán Masaya - Alerta -->
+                  <div class="map-point mp-alert" style="left:38%;top:51%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-ring"></div>
+                    <div class="map-point-label">⚠️ V. Masaya · Gases elevados</div>
+                  </div>
+                  <!-- Mombacho - Activo -->
+                  <div class="map-point mp-active" style="left:36%;top:63%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-ring"></div>
+                    <div class="map-point-label">🌿 Mombacho · 28 turistas</div>
+                  </div>
+                  <!-- SOS - Río San Juan -->
+                  <div class="map-point mp-sos" style="left:55%;top:75%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-ring"></div>
+                    <div class="map-point-label">🚨 SOS · Carlos M. · Río San Juan</div>
+                  </div>
+                  <!-- Somoto - Activo -->
+                  <div class="map-point mp-active" style="left:22%;top:16%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-ring"></div>
+                    <div class="map-point-label">🏞️ Cañón Somoto · 19 turistas</div>
+                  </div>
+                  <!-- RAAN - Cerrado -->
+                  <div class="map-point mp-closed" style="left:68%;top:22%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-label">🔒 Bosawás · Cerrado temporal</div>
+                  </div>
+                  <!-- SOS 2 - Ometepe -->
+                  <div class="map-point mp-sos" style="left:33%;top:74%;">
+                    <div class="map-point-dot"></div>
+                    <div class="map-point-ring"></div>
+                    <div class="map-point-label">🚨 SOS · Ana R. · Isla Ometepe</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Módulos inferiores de Operaciones -->
+              <div class="ops-module-grid">
+                <!-- Estado de Servicios Firebase -->
+                <div class="ops-module-panel">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-server"></i> Infraestructura Firebase</div>
+                    <span class="ops-status-pill online"><i class="fa-solid fa-circle" style="font-size:5px"></i> Saludable</span>
+                  </div>
+                  <div class="ops-module-body">
+                    <div class="tech-grid" style="grid-template-columns:1fr 1fr;">
+                      <div class="tech-service-card">
+                        <div class="tech-svc-icon" style="background:rgba(66,133,244,0.2);color:#4285F4;border:1px solid rgba(66,133,244,0.3);"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="tech-svc-info"><div class="tech-svc-name">Auth</div><div class="tech-svc-sub">24ms latencia</div></div>
+                        <div class="tech-status-dot operativo"></div>
+                      </div>
+                      <div class="tech-service-card">
+                        <div class="tech-svc-icon" style="background:rgba(255,160,0,0.2);color:#FFA000;border:1px solid rgba(255,160,0,0.3);"><i class="fa-solid fa-database"></i></div>
+                        <div class="tech-svc-info"><div class="tech-svc-name">Firestore</div><div class="tech-svc-sub">38ms latencia</div></div>
+                        <div class="tech-status-dot operativo"></div>
+                      </div>
+                      <div class="tech-service-card">
+                        <div class="tech-svc-icon" style="background:rgba(76,175,80,0.2);color:#4CAF50;border:1px solid rgba(76,175,80,0.3);"><i class="fa-solid fa-folder-open"></i></div>
+                        <div class="tech-svc-info"><div class="tech-svc-name">Storage</div><div class="tech-svc-sub">14.2 GB usados</div></div>
+                        <div class="tech-status-dot operativo"></div>
+                      </div>
+                      <div class="tech-service-card">
+                        <div class="tech-svc-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.3);"><i class="fa-solid fa-bell"></i></div>
+                        <div class="tech-svc-info"><div class="tech-svc-name">Push Notifications</div><div class="tech-svc-sub">100% entrega</div></div>
+                        <div class="tech-status-dot operativo"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Auditoría Reciente -->
+                <div class="ops-module-panel">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-file-shield"></i> Auditoría Reciente</div>
+                    <button class="btn-ops-action" style="padding:0.3rem 0.65rem;font-size:0.7rem;">Ver Todo</button>
+                  </div>
+                  <div class="ops-module-body">
+                    <div class="audit-log">
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(246,94,1,0.18);color:#FF7B26;"><i class="fa-solid fa-lock-open"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Oscar E.</strong> cambió Cerro Negro de <strong>Abierto → Restringido</strong></div>
+                          <div class="audit-meta">16/09/2026 18:32 · IP: 190.11.x.x · Managua</div>
+                        </div>
+                      </div>
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(16,185,129,0.18);color:#10B981;"><i class="fa-solid fa-user-plus"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Sistema</strong> registró nuevo guía: <strong>Carlos Méndez · Carazo</strong></div>
+                          <div class="audit-meta">16/09/2026 17:14 · Registro automático</div>
+                        </div>
+                      </div>
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(139,92,246,0.18);color:#A78BFA;"><i class="fa-solid fa-dollar-sign"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Valeria M.</strong> aprobó pago $840 a <strong>Cooperativa Mombacho</strong></div>
+                          <div class="audit-meta">16/09/2026 15:50 · Autorización nivel 1</div>
+                        </div>
+                      </div>
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(239,68,68,0.18);color:#EF4444;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Sistema SOS</strong> registró alerta P1 en <strong>Río San Juan</strong></div>
+                          <div class="audit-meta">16/09/2026 14:28 · Asignado a guía #18</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 2: TURISMO
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-turismo">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon tur"><i class="fa-solid fa-person-hiking"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Centro de Turismo</div>
+                    <div class="ops-panel-subtitle">RESERVAS · CAPACIDAD DE CARGA · ANALÍTICA AVANZADA · CONTENIDO</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action"><i class="fa-solid fa-calendar-plus"></i> Nueva Reserva</button>
+                  <button class="btn-ops-action success"><i class="fa-solid fa-file-pdf"></i> Reporte</button>
+                </div>
+              </div>
+
+              <div class="ops-kpi-grid">
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#FF7B26,#F59E0B)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.35);"><i class="fa-solid fa-calendar-check"></i></div><span class="ops-kpi-trend up">+8 vs ayer</span></div>
+                  <div class="ops-kpi-value">34</div><div class="ops-kpi-label">Reservas Hoy</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-check-circle"></i></div><span class="ops-kpi-trend up">95%</span></div>
+                  <div class="ops-kpi-value">28</div><div class="ops-kpi-label">Confirmadas &amp; Pagadas</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-calendar-xmark"></i></div><span class="ops-kpi-trend down">3 hoy</span></div>
+                  <div class="ops-kpi-value">3</div><div class="ops-kpi-label">Cancelaciones</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-globe"></i></div><span class="ops-kpi-trend up">+29%</span></div>
+                  <div class="ops-kpi-value">5,872</div><div class="ops-kpi-label">Visitas Web del Mes</div>
+                </div>
+              </div>
+
+              <div class="ops-module-grid">
+                <!-- Reservas del Día -->
+                <div class="ops-module-panel">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-calendar-day"></i> Reservas de Hoy</div>
+                    <span class="ops-status-pill online">34 activas</span>
+                  </div>
+                  <div class="ops-module-body">
+                    <div class="reservas-list">
+                      <div class="reserva-item">
+                        <div class="reserva-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.3);"><i class="fa-solid fa-mountain"></i></div>
+                        <div class="reserva-info">
+                          <div class="reserva-title">Cerro Negro · Grupo: 8 personas</div>
+                          <div class="reserva-meta">Guía: Roberto A. · Salida: 06:00 AM · Regreso: 14:00</div>
+                        </div>
+                        <div class="reserva-right"><div class="reserva-amount">$320</div><div class="reserva-status">✓ Pagado</div></div>
+                      </div>
+                      <div class="reserva-item">
+                        <div class="reserva-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-water"></i></div>
+                        <div class="reserva-info">
+                          <div class="reserva-title">Cañón Somoto · Grupo: 5 personas</div>
+                          <div class="reserva-meta">Guía: María G. · Salida: 08:00 AM · Regreso: 17:00</div>
+                        </div>
+                        <div class="reserva-right"><div class="reserva-amount">$175</div><div class="reserva-status">✓ Pagado</div></div>
+                      </div>
+                      <div class="reserva-item">
+                        <div class="reserva-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.3);"><i class="fa-solid fa-volcano"></i></div>
+                        <div class="reserva-info">
+                          <div class="reserva-title">Volcán Masaya · Grupo: 12 personas</div>
+                          <div class="reserva-meta">Guía: Luis P. · Salida: 15:00 PM · Nocturno</div>
+                        </div>
+                        <div class="reserva-right"><div class="reserva-amount">$480</div><div class="reserva-status" style="color:#F59E0B;">⏳ Pendiente</div></div>
+                      </div>
+                      <div class="reserva-item">
+                        <div class="reserva-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.3);"><i class="fa-solid fa-tree"></i></div>
+                        <div class="reserva-info">
+                          <div class="reserva-title">Mombacho · Grupo: 6 personas</div>
+                          <div class="reserva-meta">Guía: Ana C. · Salida: 07:30 AM · En ruta</div>
+                        </div>
+                        <div class="reserva-right"><div class="reserva-amount">$240</div><div class="reserva-status" style="color:#10B981;">🟢 En curso</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Capacidad de Carga Turística -->
+                <div class="ops-module-panel">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-gauge-high"></i> Capacidad de Carga Turística</div>
+                    <button class="btn-ops-action danger" style="font-size:0.68rem;padding:0.28rem 0.55rem;"><i class="fa-solid fa-ban"></i> Restringir</button>
+                  </div>
+                  <div class="ops-module-body">
+                    <div class="trail-list">
+                      <div class="trail-item">
+                        <div class="trail-item-top"><div class="trail-name">🌋 Cerro Negro</div><div class="trail-count">42/60</div></div>
+                        <div class="trail-bar"><div class="trail-fill warn" style="width:70%"></div></div>
+                        <div class="trail-footer"><span>70% ocupado</span><span style="color:#F59E0B;">⚠️ Casi lleno</span></div>
+                      </div>
+                      <div class="trail-item">
+                        <div class="trail-item-top"><div class="trail-name">🏞️ Cañón Somoto</div><div class="trail-count">19/50</div></div>
+                        <div class="trail-bar"><div class="trail-fill ok" style="width:38%"></div></div>
+                        <div class="trail-footer"><span>38% ocupado</span><span style="color:#10B981;">✅ Disponible</span></div>
+                      </div>
+                      <div class="trail-item">
+                        <div class="trail-item-top"><div class="trail-name">🌿 Reserva Mombacho</div><div class="trail-count">55/55</div></div>
+                        <div class="trail-bar"><div class="trail-fill full" style="width:100%"></div></div>
+                        <div class="trail-footer"><span>100% LLENO</span><span style="color:#EF4444;">🔴 Sin cupos</span></div>
+                      </div>
+                      <div class="trail-item">
+                        <div class="trail-item-top"><div class="trail-name">🦎 Isla Ometepe</div><div class="trail-count">28/80</div></div>
+                        <div class="trail-bar"><div class="trail-fill ok" style="width:35%"></div></div>
+                        <div class="trail-footer"><span>35% ocupado</span><span style="color:#10B981;">✅ Amplia disponibilidad</span></div>
+                      </div>
+                      <div class="trail-item">
+                        <div class="trail-item-top"><div class="trail-name">🌊 Sendero Costera Pacífico</div><div class="trail-count">38/45</div></div>
+                        <div class="trail-bar"><div class="trail-fill warn" style="width:84%"></div></div>
+                        <div class="trail-footer"><span>84% ocupado</span><span style="color:#F59E0B;">⚠️ Alerta de saturación</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Analítica Turística -->
+              <div class="ops-module-panel" style="margin-bottom:1.6rem;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-chart-line"></i> Analítica Turística Avanzada</div>
+                  <div style="display:flex;gap:0.5rem;">
+                    <button class="btn-ops-action" style="font-size:0.7rem;padding:0.28rem 0.6rem;">7 días</button>
+                    <button class="btn-ops-action success" style="font-size:0.7rem;padding:0.28rem 0.6rem;">30 días</button>
+                    <button class="btn-ops-action" style="font-size:0.7rem;padding:0.28rem 0.6rem;">3 meses</button>
+                  </div>
+                </div>
+                <div class="ops-module-body">
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+                    <div>
+                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:1px;">Destinos más explorados</div>
+                      <div style="display:flex;flex-direction:column;gap:0.4rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🌋 Cerro Negro</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">847</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🏞️ Cañón Somoto</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">621</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🦎 Isla Ometepe</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">548</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🌿 Mombacho</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">432</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:1px;">Métricas de conversión</div>
+                      <div style="display:flex;flex-direction:column;gap:0.4rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Tasa de conversión</span><span style="color:#10B981;font-family:var(--font-tech);font-weight:700;">64%</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Duración media visita</span><span style="color:#38BDF8;font-family:var(--font-tech);font-weight:700;">4.2h</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Turistas recurrentes</span><span style="color:#A78BFA;font-family:var(--font-tech);font-weight:700;">28%</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Búsquedas sin resultado</span><span style="color:#EF4444;font-family:var(--font-tech);font-weight:700;">7%</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:1px;">Horarios de mayor actividad</div>
+                      <div style="display:flex;flex-direction:column;gap:0.4rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">06:00 - 09:00 AM</span><span style="color:#F59E0B;font-family:var(--font-tech);font-weight:700;">Alta 🟡</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">09:00 - 14:00 PM</span><span style="color:#EF4444;font-family:var(--font-tech);font-weight:700;">Pico 🔴</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">14:00 - 18:00 PM</span><span style="color:#10B981;font-family:var(--font-tech);font-weight:700;">Normal 🟢</span></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">18:00 - 22:00 PM</span><span style="color:#38BDF8;font-family:var(--font-tech);font-weight:700;">Baja 🔵</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 3: SEGURIDAD
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-seguridad">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon seg"><i class="fa-solid fa-shield-halved"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Centro de Seguridad</div>
+                    <div class="ops-panel-subtitle">SOS · EMERGENCIAS · USUARIOS · AUDITORÍA · COMUNICACIONES</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action danger"><i class="fa-solid fa-bullhorn"></i> Alerta Masiva</button>
+                  <button class="btn-ops-action"><i class="fa-solid fa-file-export"></i> Exportar Audit</button>
+                </div>
+              </div>
+
+              <div class="ops-kpi-grid">
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="ops-kpi-trend down" style="color:#EF4444;">CRÍTICO</span></div>
+                  <div class="ops-kpi-value">2</div><div class="ops-kpi-label">SOS Activos P1 Crítico</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-users"></i></div><span class="ops-kpi-trend up">+12%</span></div>
+                  <div class="ops-kpi-value">1,495</div><div class="ops-kpi-label">Usuarios Registrados</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#F59E0B,#FBBF24)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;border:1px solid rgba(245,158,11,0.35);"><i class="fa-solid fa-user-slash"></i></div><span class="ops-kpi-trend flat">Esta semana</span></div>
+                  <div class="ops-kpi-value">3</div><div class="ops-kpi-label">Sesiones Sospechosas</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#84CC16,#22C55E)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.35);"><i class="fa-solid fa-bell"></i></div><span class="ops-kpi-trend up">+94%</span></div>
+                  <div class="ops-kpi-value">1,247</div><div class="ops-kpi-label">Push Enviados Este Mes</div>
+                </div>
+              </div>
+
+              <!-- Tabla de Emergencias SOS -->
+              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-tower-broadcast" style="color:#EF4444;"></i> Centro de Emergencias SOS — En Tiempo Real</div>
+                  <span class="ops-status-pill offline"><span class="ops-led" style="background:#EF4444;box-shadow:0 0 8px #EF4444;"></span> 2 Activas</span>
+                </div>
+                <div class="ops-module-body" style="padding:0.5rem 0;">
+                  <div style="overflow-x:auto;">
+                    <table class="sos-table">
+                      <thead>
+                        <tr>
+                          <th>Prioridad</th>
+                          <th>Explorador</th>
+                          <th>Ubicación GPS</th>
+                          <th>Guía Asignado</th>
+                          <th>Batería</th>
+                          <th>Última Señal</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><span class="priority-badge p1">🔴 P1 Crítico</span></td>
+                          <td style="font-weight:700;color:#FFFFFF;">Carlos M.</td>
+                          <td style="font-family:var(--font-tech);font-size:0.72rem;color:#38BDF8;">11.0182°N, -84.2210°O</td>
+                          <td>Roberto A. · En camino</td>
+                          <td style="font-family:var(--font-tech);color:#EF4444;">12% 🔴</td>
+                          <td style="font-family:var(--font-tech);font-size:0.72rem;">hace 4 min</td>
+                          <td><div class="incident-actions">
+                            <button class="incident-btn atender"><i class="fa-solid fa-headset"></i> Atender</button>
+                            <button class="incident-btn escalar"><i class="fa-solid fa-arrow-up"></i> Escalar</button>
+                            <button class="incident-btn cerrar"><i class="fa-solid fa-xmark"></i></button>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><span class="priority-badge p1">🔴 P1 Crítico</span></td>
+                          <td style="font-weight:700;color:#FFFFFF;">Ana R.</td>
+                          <td style="font-family:var(--font-tech);font-size:0.72rem;color:#38BDF8;">11.5090°N, -85.5900°O</td>
+                          <td>María G. · Pendiente</td>
+                          <td style="font-family:var(--font-tech);color:#F59E0B;">34% 🟡</td>
+                          <td style="font-family:var(--font-tech);font-size:0.72rem;">hace 11 min</td>
+                          <td><div class="incident-actions">
+                            <button class="incident-btn atender"><i class="fa-solid fa-headset"></i> Atender</button>
+                            <button class="incident-btn escalar"><i class="fa-solid fa-arrow-up"></i> Escalar</button>
+                            <button class="incident-btn cerrar"><i class="fa-solid fa-xmark"></i></button>
+                          </div></td>
+                        </tr>
+                        <tr style="opacity:0.6;">
+                          <td><span class="priority-badge p3">✅ Cerrado</span></td>
+                          <td style="font-weight:700;color:#94A3B8;">Pedro V.</td>
+                          <td style="font-family:var(--font-tech);font-size:0.72rem;color:var(--text-muted);">12.1327°N, -86.2942°O</td>
+                          <td>Luis P. · Atendido</td>
+                          <td style="font-family:var(--font-tech);color:#10B981;">88% 🟢</td>
+                          <td style="font-family:var(--font-tech);font-size:0.72rem;">hace 2h</td>
+                          <td><span style="font-size:0.72rem;color:#10B981;">✓ Cerrado por Luis P.</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Notificaciones Push -->
+              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-paper-plane"></i> Centro de Comunicaciones Push</div>
+                  <span class="ops-status-pill online">Firebase FCM</span>
+                </div>
+                <div class="ops-module-body">
+                  <div class="notif-chips">
+                    <span class="notif-chip active"><i class="fa-solid fa-exclamation-triangle"></i> Alerta de Sendero</span>
+                    <span class="notif-chip"><i class="fa-solid fa-calendar"></i> Reserva Confirmada</span>
+                    <span class="notif-chip"><i class="fa-solid fa-route"></i> Nueva Ruta</span>
+                    <span class="notif-chip"><i class="fa-solid fa-cloud-rain"></i> Alerta Meteorológica</span>
+                    <span class="notif-chip"><i class="fa-solid fa-bullhorn"></i> Mensaje General</span>
+                    <span class="notif-chip"><i class="fa-solid fa-map-marker-alt"></i> Por Territorio</span>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr auto;gap:0.6rem;align-items:end;">
+                    <div>
+                      <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;font-family:var(--font-tech);">Mensaje de Notificación</div>
+                      <input type="text" placeholder="Ej: Sendero Cerro Negro cerrado por lluvia intensa..." style="width:100%;background:rgba(6,9,18,0.8);border:1px solid rgba(22,93,111,0.4);border-radius:10px;padding:0.65rem 0.85rem;color:#FFFFFF;font-family:var(--font-main);font-size:0.82rem;">
+                    </div>
+                    <div style="display:flex;gap:0.5rem;">
+                      <button class="btn-ops-action" style="white-space:nowrap;"><i class="fa-solid fa-users"></i> Todos</button>
+                      <button class="btn-ops-action danger" style="white-space:nowrap;"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 4: COMUNIDADES
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-comunidades">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon com"><i class="fa-solid fa-handshake-angle"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Centro de Comunidades</div>
+                    <div class="ops-panel-subtitle">ECONOMÍA COMUNITARIA · GUÍAS BAQUEANOS · INDICADORES DE IMPACTO</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action success"><i class="fa-solid fa-dollar-sign"></i> Aprobar Pagos</button>
+                  <button class="btn-ops-action"><i class="fa-solid fa-user-plus"></i> Nuevo Guía</button>
+                </div>
+              </div>
+
+              <div class="ops-kpi-grid">
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-hand-holding-dollar"></i></div><span class="ops-kpi-trend up">+22%</span></div>
+                  <div class="ops-kpi-value">$25,120</div><div class="ops-kpi-label">Ingresos Comunitarios (USD)</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#FF7B26,#F59E0B)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.35);"><i class="fa-solid fa-person-hiking"></i></div><span class="ops-kpi-trend live">18 activos</span></div>
+                  <div class="ops-kpi-value">38</div><div class="ops-kpi-label">Guías BAQUEANOS Activos</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#84CC16,#22C55E)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.35);"><i class="fa-solid fa-store"></i></div><span class="ops-kpi-trend up">+5 este mes</span></div>
+                  <div class="ops-kpi-value">127</div><div class="ops-kpi-label">Negocios Comunitarios</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.35);"><i class="fa-solid fa-clock"></i></div><span class="ops-kpi-trend down">$3,400</span></div>
+                  <div class="ops-kpi-value">$3,400</div><div class="ops-kpi-label">Pagos Pendientes</div>
+                </div>
+              </div>
+
+              <!-- Panel Económico Comunitario -->
+              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-chart-bar"></i> Evolución Económica Comunitaria (2026)</div>
+                  <span class="ops-status-pill online">100% Directo</span>
+                </div>
+                <div class="ops-module-body">
+                  <div class="eco-chart" style="padding-top:1.5rem;">
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:45%;" data-val="$10.2k"></div><div class="eco-bar-month">Ene</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:52%;" data-val="$11.8k"></div><div class="eco-bar-month">Feb</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:48%;" data-val="$10.9k"></div><div class="eco-bar-month">Mar</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:60%;" data-val="$13.6k"></div><div class="eco-bar-month">Abr</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:70%;" data-val="$15.8k"></div><div class="eco-bar-month">May</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:78%;" data-val="$17.6k"></div><div class="eco-bar-month">Jun</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:85%;" data-val="$19.2k"></div><div class="eco-bar-month">Jul</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:88%;" data-val="$19.9k"></div><div class="eco-bar-month">Ago</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:100%;" data-val="$25.1k"></div><div class="eco-bar-month">Sep</div></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.75rem;margin-top:1rem;">
+                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
+                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Guías</div>
+                      <div style="font-family:var(--font-tech);font-weight:800;color:#10B981;font-size:1rem;">$14,570</div>
+                    </div>
+                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
+                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Hospedajes</div>
+                      <div style="font-family:var(--font-tech);font-weight:800;color:#38BDF8;font-size:1rem;">$5,840</div>
+                    </div>
+                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
+                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Artesanos</div>
+                      <div style="font-family:var(--font-tech);font-weight:800;color:#F59E0B;font-size:1rem;">$2,960</div>
+                    </div>
+                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
+                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Gastronomía</div>
+                      <div style="font-family:var(--font-tech);font-weight:800;color:#A78BFA;font-size:1rem;">$1,750</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Centro de Guías BAQUEANOS -->
+              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-id-badge"></i> Centro de Guías BAQUEANOS</div>
+                  <button class="btn-ops-action"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                </div>
+                <div class="ops-module-body">
+                  <div class="guides-grid">
+                    <div class="guide-card">
+                      <div class="guide-avatar">RA</div>
+                      <div class="guide-name">Roberto Amaya</div>
+                      <div class="guide-zone">🌋 León · Cerro Negro</div>
+                      <div class="guide-status en-recorrido"><i class="fa-solid fa-circle" style="font-size:6px"></i> En Recorrido</div>
+                      <div class="guide-meta">
+                        <span class="guide-tag">⭐ 4.9</span>
+                        <span class="guide-tag">🇬🇧 EN</span>
+                        <span class="guide-tag">42 tours</span>
+                      </div>
+                    </div>
+                    <div class="guide-card">
+                      <div class="guide-avatar">MG</div>
+                      <div class="guide-name">María González</div>
+                      <div class="guide-zone">🏞️ Madriz · Cañón Somoto</div>
+                      <div class="guide-status disponible"><i class="fa-solid fa-circle" style="font-size:6px"></i> Disponible</div>
+                      <div class="guide-meta">
+                        <span class="guide-tag">⭐ 4.8</span>
+                        <span class="guide-tag">🇩🇪 DE</span>
+                        <span class="guide-tag">28 tours</span>
+                      </div>
+                    </div>
+                    <div class="guide-card">
+                      <div class="guide-avatar">LP</div>
+                      <div class="guide-name">Luis Pérez</div>
+                      <div class="guide-zone">🌿 Granada · Mombacho</div>
+                      <div class="guide-status en-recorrido"><i class="fa-solid fa-circle" style="font-size:6px"></i> En Recorrido</div>
+                      <div class="guide-meta">
+                        <span class="guide-tag">⭐ 4.7</span>
+                        <span class="guide-tag">🇫🇷 FR</span>
+                        <span class="guide-tag">61 tours</span>
+                      </div>
+                    </div>
+                    <div class="guide-card">
+                      <div class="guide-avatar">AC</div>
+                      <div class="guide-name">Ana Castillo</div>
+                      <div class="guide-zone">🦎 Rivas · Isla Ometepe</div>
+                      <div class="guide-status emergencia"><i class="fa-solid fa-circle" style="font-size:6px"></i> Emergencia</div>
+                      <div class="guide-meta">
+                        <span class="guide-tag">⭐ 4.9</span>
+                        <span class="guide-tag">🇬🇧 EN</span>
+                        <span class="guide-tag">35 tours</span>
+                      </div>
+                    </div>
+                    <div class="guide-card">
+                      <div class="guide-avatar">CM</div>
+                      <div class="guide-name">Carlos Méndez</div>
+                      <div class="guide-zone">🌊 Carazo · Costa Pacífica</div>
+                      <div class="guide-status fuera"><i class="fa-solid fa-circle" style="font-size:6px"></i> Fuera de Servicio</div>
+                      <div class="guide-meta">
+                        <span class="guide-tag">⭐ 4.6</span>
+                        <span class="guide-tag">🇮🇹 IT</span>
+                        <span class="guide-tag">19 tours</span>
+                      </div>
+                    </div>
+                    <div class="guide-card">
+                      <div class="guide-avatar">JR</div>
+                      <div class="guide-name">Juan Rivera</div>
+                      <div class="guide-zone">🏔️ Jinotega · Senderos Norte</div>
+                      <div class="guide-status disponible"><i class="fa-solid fa-circle" style="font-size:6px"></i> Disponible</div>
+                      <div class="guide-meta">
+                        <span class="guide-tag">⭐ 5.0</span>
+                        <span class="guide-tag">🇬🇧 EN 🇩🇪 DE</span>
+                        <span class="guide-tag">87 tours</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Indicadores de Impacto BAQUEANO -->
+              <div class="ops-module-panel" style="margin-bottom:0;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-earth-americas"></i> Indicadores de Impacto BAQUEANO</div>
+                </div>
+                <div class="ops-module-body">
+                  <div class="impact-grid">
+                    <div class="impact-card"><span class="impact-icon">👨‍👩‍👧‍👦</span><div class="impact-value">342</div><div class="impact-label">Familias Beneficiadas</div></div>
+                    <div class="impact-card"><span class="impact-icon">🧭</span><div class="impact-value">38</div><div class="impact-label">Guías Locales Activos</div></div>
+                    <div class="impact-card"><span class="impact-icon">🏘️</span><div class="impact-value">17</div><div class="impact-label">Comunidades Conectadas</div></div>
+                    <div class="impact-card"><span class="impact-icon">💰</span><div class="impact-value">$25K</div><div class="impact-label">Ingresos a Territorios</div></div>
+                    <div class="impact-card"><span class="impact-icon">📍</span><div class="impact-value">29</div><div class="impact-label">Destinos Digitalizados</div></div>
+                    <div class="impact-card"><span class="impact-icon">🌿</span><div class="impact-value">47</div><div class="impact-label">Denuncias Atendidas</div></div>
+                    <div class="impact-card"><span class="impact-icon">🥾</span><div class="impact-value">380km</div><div class="impact-label">Senderos Registrados</div></div>
+                    <div class="impact-card"><span class="impact-icon">🔄</span><div class="impact-value">842</div><div class="impact-label">Turistas Redistribuidos</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 5: CONSERVACIÓN
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-conservacion">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon con"><i class="fa-solid fa-leaf"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Centro de Conservación</div>
+                    <div class="ops-panel-subtitle">DENUNCIAS AMBIENTALES · BIODIVERSIDAD INTELIGENTE · INCIDENCIAS</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action success"><i class="fa-solid fa-plus"></i> Nueva Denuncia</button>
+                  <button class="btn-ops-action"><i class="fa-solid fa-file-pdf"></i> Reporte Ambiental</button>
+                </div>
+              </div>
+
+              <div class="ops-kpi-grid">
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#84CC16,#22C55E)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.35);"><i class="fa-solid fa-flag"></i></div><span class="ops-kpi-trend down">7 activas</span></div>
+                  <div class="ops-kpi-value">7</div><div class="ops-kpi-label">Denuncias en Seguimiento</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-fire"></i></div><span class="ops-kpi-trend down">1 activo</span></div>
+                  <div class="ops-kpi-value">1</div><div class="ops-kpi-label">Incendios Reportados</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#2DD4BF,#38BDF8)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(45,212,191,0.2);color:#2DD4BF;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-paw"></i></div><span class="ops-kpi-trend up">+14</span></div>
+                  <div class="ops-kpi-value">284</div><div class="ops-kpi-label">Especies Registradas</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#22C55E,#84CC16)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(34,197,94,0.2);color:#22C55E;border:1px solid rgba(34,197,94,0.35);"><i class="fa-solid fa-check-circle"></i></div><span class="ops-kpi-trend up">89%</span></div>
+                  <div class="ops-kpi-value">47</div><div class="ops-kpi-label">Denuncias Resueltas</div>
+                </div>
+              </div>
+
+              <div class="ops-module-grid">
+                <!-- Denuncias Ambientales -->
+                <div class="ops-module-panel">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-exclamation-circle"></i> Denuncias Ambientales Activas</div>
+                    <span class="ops-tab-badge alert">7</span>
+                  </div>
+                  <div class="ops-module-body">
+                    <div class="audit-log">
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;"><i class="fa-solid fa-fire"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Incendio forestal</strong> — Sector sur Cerro Musún</div>
+                          <div class="audit-meta">Reportado por: Carlos V. · 16/09/2026 · En atención</div>
+                        </div>
+                      </div>
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;"><i class="fa-solid fa-trash"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Contaminación</strong> — Vertido de desechos en río Malacatoya</div>
+                          <div class="audit-meta">Reportado por: María R. · 15/09/2026 · Investigando</div>
+                        </div>
+                      </div>
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;"><i class="fa-solid fa-paw"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Especie protegida</strong> — Avistamiento jaguar Reserva Bosawás</div>
+                          <div class="audit-meta">Reportado por: Sistema · 14/09/2026 · Documentado</div>
+                        </div>
+                      </div>
+                      <div class="audit-item">
+                        <div class="audit-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;"><i class="fa-solid fa-road-circle-xmark"></i></div>
+                        <div class="audit-content">
+                          <div class="audit-action"><strong>Sendero afectado</strong> — Derrumbe en ruta Cerro Negro km 4.2</div>
+                          <div class="audit-meta">Reportado por: Roberto A. · 14/09/2026 · Cerrado temporalmente</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Biodiversidad Inteligente -->
+                <div class="ops-module-panel">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-seedling"></i> Biodiversidad Inteligente</div>
+                    <span class="ops-status-pill online">284 especies</span>
+                  </div>
+                  <div class="ops-module-body">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.85rem;">
+                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(132,204,22,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
+                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🦅</div>
+                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#FFFFFF;">142</div>
+                        <div style="font-size:0.68rem;color:var(--text-muted);">Aves registradas</div>
+                      </div>
+                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(45,212,191,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
+                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🐆</div>
+                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#FFFFFF;">38</div>
+                        <div style="font-size:0.68rem;color:var(--text-muted);">Mamíferos registrados</div>
+                      </div>
+                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(246,94,1,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
+                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🌸</div>
+                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#FFFFFF;">74</div>
+                        <div style="font-size:0.68rem;color:var(--text-muted);">Flora endémica</div>
+                      </div>
+                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(239,68,68,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
+                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">⚠️</div>
+                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#EF4444;">12</div>
+                        <div style="font-size:0.68rem;color:var(--text-muted);">En peligro crítico</div>
+                      </div>
+                    </div>
+                    <div style="background:rgba(22,93,111,0.15);border:1px solid rgba(22,93,111,0.3);border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:0.65rem;">
+                      <i class="fa-solid fa-robot" style="color:#A78BFA;font-size:1.1rem;"></i>
+                      <div style="font-size:0.78rem;color:var(--text-secondary);">
+                        <strong style="color:var(--arena-pinolera);">IA sugiere para Cerro Negro:</strong> Hoy puede avistar Chichiltote (Icterus pectoralis), Guardabarranco y Zanate Mayor. Probabilidad: 87%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 6: TECNOLOGÍA
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-tecnologia">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon tec"><i class="fa-solid fa-microchip"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Centro de Tecnología</div>
+                    <div class="ops-panel-subtitle">BAQUEANO AI · FIREBASE · ESTADO TECNOLÓGICO COMPLETO</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action"><i class="fa-solid fa-rotate"></i> Verificar Estado</button>
+                  <button class="btn-ops-action success"><i class="fa-solid fa-brain"></i> Actualizar IA</button>
+                </div>
+              </div>
+
+              <div class="ops-kpi-grid">
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.35);"><i class="fa-solid fa-robot"></i></div><span class="ops-kpi-trend up">+31%</span></div>
+                  <div class="ops-kpi-value">4,821</div><div class="ops-kpi-label">Consultas IA este mes</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-server"></i></div><span class="ops-kpi-trend up">99.8%</span></div>
+                  <div class="ops-kpi-value">99.8%</div><div class="ops-kpi-label">Uptime del Sistema</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#F59E0B,#FBBF24)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;border:1px solid rgba(245,158,11,0.35);"><i class="fa-solid fa-hard-drive"></i></div><span class="ops-kpi-trend flat">14.2 GB</span></div>
+                  <div class="ops-kpi-value">14.2GB</div><div class="ops-kpi-label">Almacenamiento Usado</div>
+                </div>
+                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-gauge"></i></div><span class="ops-kpi-trend up">Óptimo</span></div>
+                  <div class="ops-kpi-value">38ms</div><div class="ops-kpi-label">Latencia Promedio API</div>
+                </div>
+              </div>
+
+              <!-- AI Control Center -->
+              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-brain" style="color:#A78BFA;"></i> Baqueano AI Control Center</div>
+                  <span class="ops-status-pill online">Gemini · Operativo</span>
+                </div>
+                <div class="ops-module-body">
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                    <div>
+                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.65rem;text-transform:uppercase;letter-spacing:1px;">Consultas Más Frecuentes</div>
+                      <div class="ai-queries">
+                        <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">¿Cuál es el mejor sendero para principiantes?</div><div class="ai-query-count">342x</div></div>
+                        <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">¿Qué fauna puedo ver en Cerro Negro?</div><div class="ai-query-count">285x</div></div>
+                        <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">¿Cómo llego a la Isla de Ometepe?</div><div class="ai-query-count">241x</div></div>
+                        <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">¿Qué llevar en una excursión de un día?</div><div class="ai-query-count">198x</div></div>
+                        <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">Gastronomía típica de Nicaragua rural</div><div class="ai-query-count">164x</div></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.65rem;text-transform:uppercase;letter-spacing:1px;">Estado del Servicio IA</div>
+                      <div style="display:flex;flex-direction:column;gap:0.55rem;">
+                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
+                          <span style="font-size:0.78rem;color:#FFFFFF;">Tasa de respuesta</span><span style="font-family:var(--font-tech);font-weight:700;color:#10B981;">97.8%</span>
+                        </div>
+                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
+                          <span style="font-size:0.78rem;color:#FFFFFF;">Errores reportados</span><span style="font-family:var(--font-tech);font-weight:700;color:#F59E0B;">18 (0.4%)</span>
+                        </div>
+                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
+                          <span style="font-size:0.78rem;color:#FFFFFF;">Tiempo de respuesta</span><span style="font-family:var(--font-tech);font-weight:700;color:#38BDF8;">1.2s avg</span>
+                        </div>
+                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
+                          <span style="font-size:0.78rem;color:#FFFFFF;">Base de conocimiento</span><span style="font-family:var(--font-tech);font-weight:700;color:#A78BFA;">v4.2 · 16/09</span>
+                        </div>
+                        <button class="btn-ops-action success" style="width:100%;justify-content:center;"><i class="fa-solid fa-upload"></i> Actualizar Base de Conocimiento</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estado Tecnológico Completo -->
+              <div class="ops-module-panel" style="margin-bottom:0;">
+                <div class="ops-module-header">
+                  <div class="ops-module-title"><i class="fa-solid fa-network-wired"></i> Estado Tecnológico Completo</div>
+                  <span class="ops-status-pill online">Todos Operativos</span>
+                </div>
+                <div class="ops-module-body">
+                  <div class="tech-grid">
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(66,133,244,0.2);color:#4285F4;border:1px solid rgba(66,133,244,0.3);"><i class="fa-solid fa-shield-halved"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Firebase Auth</div><div class="tech-svc-sub">24ms · 100% uptime</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(255,160,0,0.2);color:#FFA000;border:1px solid rgba(255,160,0,0.3);"><i class="fa-solid fa-database"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Firestore DB</div><div class="tech-svc-sub">38ms · 99.9%</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(76,175,80,0.2);color:#4CAF50;border:1px solid rgba(76,175,80,0.3);"><i class="fa-solid fa-folder-open"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Cloud Storage</div><div class="tech-svc-sub">14.2 GB / 50 GB</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.3);"><i class="fa-solid fa-robot"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Gemini API</div><div class="tech-svc-sub">1.2s avg · 97.8%</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.3);"><i class="fa-solid fa-bell"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Push (FCM)</div><div class="tech-svc-sub">94% entrega efectiva</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-globe"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Portal Web</div><div class="tech-svc-sub">99.8% uptime</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(34,197,94,0.2);color:#22C55E;border:1px solid rgba(34,197,94,0.3);"><i class="fa-brands fa-android"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Android App</div><div class="tech-svc-sub">v1.0 · 1,495 activos</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;border:1px solid rgba(245,158,11,0.3);"><i class="fa-solid fa-map"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Mapas Satelitales</div><div class="tech-svc-sub">344 balizas activas</div></div><div class="tech-status-dot operativo"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </main>
+        </div><!-- /.ops-layout -->
+      </section><!-- /#adminDashboardContent -->
+
+    </div>
+  </main>
+
+
         <div class="admin-login-card">
           <div class="login-header-box">
             <div class="login-icon-circle">
