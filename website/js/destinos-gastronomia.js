@@ -259,6 +259,9 @@
     document.querySelectorAll('.macro-nav-btn.has-sub').forEach(btn => {
       btn.setAttribute('aria-expanded', 'false');
     });
+    document.querySelectorAll('.macro-dropdown-wrapper').forEach(w => {
+      w.classList.remove('open');
+    });
     currentOpenMacro = null;
   }
 
@@ -268,12 +271,19 @@
     const containerEl = document.getElementById('stripButtonsContainer');
     const labelEl = document.getElementById('stripLabelTag');
 
-    if (!stripEl || !containerEl || !labelEl) return;
-
     if (!macroKey || macroKey === 'all' || macroKey === 'favoritos') {
       hideSubmenu();
       return;
     }
+
+    // Activar estado .open en el dropdown flotante correspondiente
+    document.querySelectorAll('.macro-dropdown-wrapper').forEach(w => {
+      if (w.dataset.dropdown === macroKey) {
+        w.classList.add('open');
+      } else {
+        w.classList.remove('open');
+      }
+    });
 
     const dropdownWrap = document.querySelector(`.macro-dropdown-wrapper[data-dropdown="${macroKey}"]`);
     if (!dropdownWrap) return;
@@ -281,25 +291,32 @@
     const sourceButtons = dropdownWrap.querySelectorAll('.sub-cat-btn');
     if (!sourceButtons.length) return;
 
-    const info = MACRO_INFO[macroKey] || { label: 'Subcategorías', icon: 'fa-filter' };
-    labelEl.innerHTML = `<i class="fa-solid ${info.icon}"></i> ${info.label}:`;
+    if (labelEl) {
+      const info = MACRO_INFO[macroKey] || { label: 'Subcategorías', icon: 'fa-filter' };
+      labelEl.innerHTML = `<i class="fa-solid ${info.icon}"></i> ${info.label}:`;
+    }
 
-    // Replicar botones en el panel
-    containerEl.innerHTML = '';
-    sourceButtons.forEach(btn => {
-      const clone = document.createElement('button');
-      clone.type = 'button';
-      clone.className = 'cat-filter-btn sub-cat-btn';
-      clone.setAttribute('data-filter', btn.getAttribute('data-filter'));
-      clone.setAttribute('data-macro-parent', macroKey);
-      clone.innerHTML = btn.innerHTML;
-      if (btn.getAttribute('data-filter') === activeFilterKey) {
-        clone.classList.add('active');
-      }
-      containerEl.appendChild(clone);
-    });
+    // Replicar botones en el panel táctil
+    if (containerEl) {
+      containerEl.innerHTML = '';
+      sourceButtons.forEach(btn => {
+        const clone = document.createElement('button');
+        clone.type = 'button';
+        clone.className = 'cat-filter-btn sub-cat-btn';
+        const filterVal = btn.getAttribute('data-filter');
+        clone.setAttribute('data-filter', filterVal);
+        clone.setAttribute('data-macro-parent', macroKey);
+        clone.innerHTML = btn.innerHTML;
+        if (filterVal === activeFilterKey) {
+          clone.classList.add('active');
+        }
+        containerEl.appendChild(clone);
+      });
+    }
 
-    stripEl.style.display = 'flex';
+    if (stripEl) {
+      stripEl.style.display = 'flex';
+    }
     currentOpenMacro = macroKey;
 
     // Actualizar aria-expanded en los botones
@@ -387,7 +404,7 @@
 
     // Event Delegation para likes, favoritos, macro dropdowns y filtros
     document.addEventListener('click', function (e) {
-      // 1. Click en botón macro con submenú (toggle de apertura/cierre)
+      // 1. Click en botón macro con submenú (toggle de apertura/cierre y filtro inmediato)
       const macroToggleBtn = e.target.closest('.macro-nav-btn.has-sub');
       if (macroToggleBtn) {
         e.preventDefault();
@@ -397,8 +414,10 @@
           // Ya estaba abierto -> alternar y cerrarlo
           hideSubmenu();
         } else {
-          // Abrir para seleccionar subcategoría
-          openSubmenuFor(macroKey, currentActiveFilter);
+          // Filtrar por la macro categoría y abrir opciones de subcategoría
+          const defaultFilter = MACRO_INFO[macroKey]?.allKey || macroKey;
+          applyCategoryFilter(defaultFilter, false);
+          openSubmenuFor(macroKey, defaultFilter);
         }
         return;
       }

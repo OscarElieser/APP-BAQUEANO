@@ -133,6 +133,9 @@ function initTerritoriesLocal() {
 
 // Control interactivo y dinámico de filtrado de destinos y estadías por categoría y búsqueda en vivo
 function initDestinationsFilterLocal() {
+  // En destinos.html la suite de navegación es gestionada por destinos-gastronomia.js
+  if (document.getElementById('destCategoryNav')) return;
+
   const filterBtns = document.querySelectorAll('.cat-filter-btn');
   const destCards = document.querySelectorAll('.dest-card-pro');
   const searchInput = document.getElementById('destSearchInput');
