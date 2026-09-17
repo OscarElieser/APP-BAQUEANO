@@ -238,6 +238,39 @@
   </header>
 
   <!-- CONTENIDO DE LAS PESTAÑAS -->
+  <!--
+    POR QUÉ: impedir que un visitante vea o edite datos de perfil sin una identidad confirmada.
+    CÓMO: Firebase Authentication valida correo/contraseña o Google antes de revelar el contenido privado.
+    QUÉ: acceso, creación de cuenta y mensajes de estado sin información simulada.
+  -->
+  <section class="profile-auth-gate" id="profileAuthGate" hidden aria-labelledby="profileAuthTitle">
+    <div class="profile-auth-card">
+      <span class="profile-auth-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+      <p class="profile-auth-eyebrow">ACCESO SEGURO</p>
+      <h1 id="profileAuthTitle">Inicia sesión en Baqueano</h1>
+      <p>Accede a tu perfil, viajes y preferencias usando únicamente tus datos reales.</p>
+      <form id="profileAuthForm" class="profile-auth-form">
+        <label for="profileAuthName">Nombre completo <span>(solo para crear cuenta)</span></label>
+        <input id="profileAuthName" type="text" autocomplete="name" placeholder="Tu nombre y apellido">
+        <label for="profileAuthEmail">Correo electrónico</label>
+        <input id="profileAuthEmail" type="email" autocomplete="username" required placeholder="correo@ejemplo.com">
+        <label for="profileAuthPassword">Contraseña</label>
+        <input id="profileAuthPassword" type="password" autocomplete="current-password" minlength="8" required placeholder="Mínimo 8 caracteres">
+        <div class="profile-auth-actions">
+          <button type="submit" class="btn-hero-primary"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</button>
+          <button type="button" class="btn-hero-glass" id="btnCreateProfileAccount"><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+        </div>
+      </form>
+      <div class="profile-auth-divider"><span>o continúa con</span></div>
+      <button type="button" class="btn-google-auth" id="btnProfileGoogleAuth"><i class="fa-brands fa-google"></i> Google</button>
+      <div class="profile-auth-demo-wrap" style="margin-top: 1rem; text-align: center;">
+        <button type="button" class="btn-hero-glass" id="btnProfileDemoAccess" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.7rem 1rem;">
+          <i class="fa-solid fa-compass"></i> Acceso Rápido (Modo Explorador de Prueba)
+        </button>
+      </div>
+      <p class="profile-auth-feedback" id="profileAuthFeedback" role="status" aria-live="polite"></p>
+    </div>
+  </section>
   <main class="page-wrapper profile-section-content">
     <div class="container">
 
@@ -705,10 +738,14 @@
     </div>
   </footer>
 
-  <!-- Scripts Modulares -->
+  <!-- ======================================================================
+       🔥 FIREBASE SDK + CONFIGURACIÓN CENTRALIZADA BAQUEANO
+       Orden crítico: SDK → firebase-config.js (Singleton) → módulos
+       ====================================================================== -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-  <script src="/__/firebase/init.js"></script>
+  <!-- Configuración central con Google OAuth client_id oficial del proyecto -->
+  <script src="js/firebase-config.js"></script>
   <script src="js/user-session.js"></script>
   <script src="js/navigation.js"></script>
   <script src="app.js"></script>
@@ -719,6 +756,110 @@
       // 1. Cargar Usuario Actual
       const user = window.BaqueanoSession ? window.BaqueanoSession.getUser() : null;
       if (!user) {
+        const profileContent = document.querySelector('main.profile-section-content');
+        const switchAccountButton = document.getElementById('btnSwitchAccount');
+        const logoutButton = document.getElementById('btnLogoutUser');
+        const headerName = document.getElementById('userHeaderName');
+        const headerRole = document.getElementById('userHeaderRole');
+        const headerEmail = document.getElementById('userHeaderEmail');
+        const authGate = document.getElementById('profileAuthGate');
+        const authForm = document.getElementById('profileAuthForm');
+        const createAccountButton = document.getElementById('btnCreateProfileAccount');
+        const googleAuthButton = document.getElementById('btnProfileGoogleAuth');
+        const demoAccessButton = document.getElementById('btnProfileDemoAccess');
+        const authFeedback = document.getElementById('profileAuthFeedback');
+
+        const reportAuthError = (error) => {
+          if (!authFeedback) return;
+          authFeedback.classList.add('is-error');
+          authFeedback.textContent = error && error.message
+            ? error.message
+            : 'No fue posible validar la cuenta. Revisa tus datos e inténtalo nuevamente.';
+        };
+
+        const authenticateWithGoogle = async () => {
+          if (authFeedback) {
+            authFeedback.classList.remove('is-error');
+            authFeedback.textContent = 'Validando tu cuenta con Google…';
+          }
+          try {
+            if (!window.BaqueanoSession || typeof window.BaqueanoSession.loginWithGoogle !== 'function') {
+              throw new Error('El módulo de autenticación no está listo. Por favor recarga la página.');
+            }
+            await window.BaqueanoSession.loginWithGoogle();
+            window.location.reload();
+          } catch (error) {
+            reportAuthError(error);
+          }
+        };
+
+        if (authGate) authGate.hidden = false;
+        if (profileContent) profileContent.hidden = true;
+        if (logoutButton) logoutButton.hidden = true;
+
+        if (authForm) {
+          authForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('profileAuthEmail')?.value.trim();
+            const password = document.getElementById('profileAuthPassword')?.value || '';
+            if (authFeedback) {
+              authFeedback.classList.remove('is-error');
+              authFeedback.textContent = 'Verificando credenciales…';
+            }
+            try {
+              if (!window.BaqueanoSession || typeof window.BaqueanoSession.login !== 'function') {
+                throw new Error('El módulo de autenticación no está listo. Recarga la página.');
+              }
+              await window.BaqueanoSession.login(email, password);
+              window.location.reload();
+            } catch (error) {
+              reportAuthError(error);
+            }
+          });
+        }
+
+        if (createAccountButton) {
+          createAccountButton.addEventListener('click', async () => {
+            const name = document.getElementById('profileAuthName')?.value.trim();
+            const email = document.getElementById('profileAuthEmail')?.value.trim();
+            const password = document.getElementById('profileAuthPassword')?.value || '';
+            if (!name) {
+              reportAuthError(new Error('Escribe tu nombre completo para crear la cuenta.'));
+              return;
+            }
+            try {
+              if (authFeedback) authFeedback.textContent = 'Creando tu cuenta segura…';
+              if (!window.BaqueanoSession || typeof window.BaqueanoSession.register !== 'function') {
+                throw new Error('El módulo de autenticación no está listo. Recarga la página.');
+              }
+              await window.BaqueanoSession.register(email, password, name);
+              window.location.reload();
+            } catch (error) {
+              reportAuthError(error);
+            }
+          });
+        }
+
+        if (googleAuthButton) googleAuthButton.addEventListener('click', authenticateWithGoogle);
+
+        if (demoAccessButton) {
+          demoAccessButton.addEventListener('click', () => {
+            if (window.BaqueanoSession && typeof window.BaqueanoSession.loginAsExplorer === 'function') {
+              window.BaqueanoSession.loginAsExplorer('Explorador Baqueano', 'explorador@baqueano.ni');
+              window.location.reload();
+            }
+          });
+        }
+
+        if (headerName) headerName.textContent = 'Inicia sesión para acceder a tu perfil';
+        if (headerRole) headerRole.textContent = 'Acceso protegido';
+        if (headerEmail) headerEmail.textContent = 'Tus datos aparecerán después de autenticarte';
+
+        if (switchAccountButton) {
+          switchAccountButton.innerHTML = '<i class="fa-brands fa-google"></i> Iniciar sesión con Google';
+          switchAccountButton.addEventListener('click', authenticateWithGoogle);
+        }
+
         window.addEventListener('baqueano_session_updated', event => {
           if (event.detail) window.location.reload();
         }, { once: true });

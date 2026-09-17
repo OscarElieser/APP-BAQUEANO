@@ -901,3 +901,39 @@ html body .perfil-inline-078 {
   font-size: 0.75rem !important;
   color: #FCA5A5 !important;
 }
+
+/*
+ * POR QUÉ: separar claramente el acceso público del contenido privado del explorador.
+ * CÓMO: una tarjeta centrada mantiene jerarquía, contraste y controles táctiles adaptables.
+ * QUÉ: presentación del formulario de correo, registro, Google y retroalimentación de Firebase.
+ */
+.profile-auth-gate {
+  min-height: calc(100vh - 88px);
+  padding: clamp(7rem, 12vw, 9rem) 1rem 4rem;
+  background: radial-gradient(circle at 50% 15%, rgba(22, 93, 111, 0.25), transparent 42%);
+}
+.profile-auth-gate:not([hidden]) { display: grid; place-items: start center; }
+.profile-auth-card {
+  width: min(100%, 520px);
+  padding: clamp(1.4rem, 4vw, 2.2rem);
+  border: 1px solid rgba(244, 230, 193, 0.16);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.97), rgba(7, 20, 29, 0.98));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.profile-auth-icon { display: grid; width: 52px; height: 52px; place-items: center; border-radius: 15px; color: #F4E6C1; background: linear-gradient(135deg, #F65E01, #165D6F); }
+.profile-auth-eyebrow { margin: 1rem 0 0.35rem; color: #F65E01; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.16em; }
+.profile-auth-card h1 { margin: 0; color: #fff; font-size: clamp(1.55rem, 5vw, 2.15rem); }
+.profile-auth-card > p:not(.profile-auth-eyebrow):not(.profile-auth-feedback) { color: rgba(244,230,193,0.64); line-height: 1.55; }
+.profile-auth-form { display: grid; gap: 0.65rem; margin-top: 1.4rem; }
+.profile-auth-form label { color: #F4E6C1; font-size: 0.76rem; font-weight: 800; }
+.profile-auth-form label span { color: rgba(244,230,193,0.45); font-weight: 500; }
+.profile-auth-form input { min-height: 48px; padding: 0 0.9rem; border: 1px solid rgba(244,230,193,0.14); border-radius: 12px; color: #fff; background: rgba(255,255,255,0.045); outline: none; }
+.profile-auth-form input:focus { border-color: #F65E01; box-shadow: 0 0 0 3px rgba(246,94,1,0.14); }
+.profile-auth-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 0.65rem; }
+.profile-auth-actions button, #btnProfileGoogleAuth { justify-content: center; width: 100%; min-height: 46px; }
+.profile-auth-divider { display: flex; align-items: center; gap: 0.8rem; margin: 1.15rem 0; color: rgba(244,230,193,0.46); font-size: 0.72rem; }
+.profile-auth-divider::before, .profile-auth-divider::after { content: ''; height: 1px; flex: 1; background: rgba(244,230,193,0.12); }
+.profile-auth-feedback { min-height: 1.4rem; margin: 0.8rem 0 0; color: #F4E6C1; font-size: 0.78rem; text-align: center; }
+.profile-auth-feedback.is-error { color: #FB7185; }
+@media (max-width: 520px) { .profile-auth-actions { grid-template-columns: 1fr; } }
