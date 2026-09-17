@@ -26,31 +26,20 @@
 
 // Directorio Oficial de Cuentas Autorizadas (RBAC)
 const BAQUEANO_USERS = {
-  admin: {
+  primaryAdmin: {
     email: "oscarelieser.informatica.inatec@gmail.com",
-    name: "Oscar Elieser",
-    role: "admin",
-    roleLabel: "Administrador General",
-    title: "Director General de Operaciones & Tecnología Baqueano",
-    avatarText: "OE",
-    badgeClass: "admin",
-    canBroadcast: true,
-    canToggleRoutes: true,
-    canViewFinances: true,
-    canSyncDatabase: true
+    role: "admin", roleLabel: "Administrador General", title: "Administración General BAQUEANO",
+    badgeClass: "admin", canBroadcast: true, canToggleRoutes: true, canViewFinances: true, canSyncDatabase: true
   },
-  auditor: {
+  secondaryAdmin: {
+    email: "byoscarelieser@gmail.com",
+    role: "admin", roleLabel: "Administrador General", title: "Administración General BAQUEANO",
+    badgeClass: "admin", canBroadcast: true, canToggleRoutes: true, canViewFinances: true, canSyncDatabase: true
+  },
+  thirdAdmin: {
     email: "vigoronmixt@gmail.com",
-    name: "Vigorón Mixto",
-    role: "auditor",
-    roleLabel: "Auditor Oficial de Cumplimiento",
-    title: "Auditoría Fiscal (Ley 306 INTUR) & Custodia Ambiental",
-    avatarText: "VM",
-    badgeClass: "auditor",
-    canBroadcast: false,
-    canToggleRoutes: false,
-    canViewFinances: true,
-    canSyncDatabase: false
+    role: "admin", roleLabel: "Administrador General", title: "Administración General BAQUEANO",
+    badgeClass: "admin", canBroadcast: true, canToggleRoutes: true, canViewFinances: true, canSyncDatabase: true
   }
 };
 
@@ -120,22 +109,25 @@ function initAdminAuth() {
     }
 
     // 1. Detección automática: Administrador General
-    if (cleanEmail === BAQUEANO_USERS.admin.email.toLowerCase()) {
-      loginSuccess({ ...BAQUEANO_USERS.admin, uid: firebaseUser.uid, name: displayName || firebaseUser.email, photoURL: firebaseUser.photoURL || '' });
+    if (cleanEmail === BAQUEANO_USERS.primaryAdmin.email.toLowerCase()) {
+      loginSuccess({ ...BAQUEANO_USERS.primaryAdmin, uid: firebaseUser.uid, name: displayName || firebaseUser.email, avatarText: (displayName || firebaseUser.email).split(/\s+/).map(part => part[0]).join('').slice(0, 2).toUpperCase(), photoURL: firebaseUser.photoURL || '' });
       return;
     }
 
     // 2. Detección automática: Auditor Oficial (Ley 306 INTUR)
-    if (cleanEmail === BAQUEANO_USERS.auditor.email.toLowerCase()) {
-      loginSuccess({ ...BAQUEANO_USERS.auditor, uid: firebaseUser.uid, name: displayName || firebaseUser.email, photoURL: firebaseUser.photoURL || '' });
+    if (cleanEmail === BAQUEANO_USERS.secondaryAdmin.email.toLowerCase()) {
+      loginSuccess({ ...BAQUEANO_USERS.secondaryAdmin, uid: firebaseUser.uid, name: displayName || firebaseUser.email, avatarText: (displayName || firebaseUser.email).split(/\s+/).map(part => part[0]).join('').slice(0, 2).toUpperCase(), photoURL: firebaseUser.photoURL || '' });
+      return;
+    }
+
+    if (cleanEmail === BAQUEANO_USERS.thirdAdmin.email.toLowerCase()) {
+      loginSuccess({ ...BAQUEANO_USERS.thirdAdmin, uid: firebaseUser.uid, name: displayName || firebaseUser.email, avatarText: (displayName || firebaseUser.email).split(/\s+/).map(part => part[0]).join('').slice(0, 2).toUpperCase(), photoURL: firebaseUser.photoURL || '' });
       return;
     }
 
     // 3. Detección automática: Usuario Normal (Explorador Público)
     // El Ops Center es exclusivo para personal autorizado; se sincroniza su sesión y se le dirige a perfil.html
-    if (window.BaqueanoSession) {
-      window.BaqueanoSession.login(cleanEmail || 'explorador@baqueano.ni');
-    }
+    if (window.firebase && window.firebase.auth) window.firebase.auth().signOut();
 
     if (feedbackAlert) {
       feedbackAlert.className = 'login-feedback-alert error';

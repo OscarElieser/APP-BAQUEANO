@@ -35,22 +35,16 @@
   // Cuentas de Alta Jerarquía Operativa (Admin & Auditor)
   const PRIVILEGED_ACCOUNTS = {
     'oscarelieser.informatica.inatec@gmail.com': {
-      role: 'admin',
-      roleLabel: 'Administrador General',
-      navTitle: 'Ops Center',
-      navDesc: 'Comando & Telemetría',
-      navBadge: '● 24/7',
-      targetUrl: 'admin.html',
-      isPrivileged: true
+      role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
+      navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
+    },
+    'byoscarelieser@gmail.com': {
+      role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
+      navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'vigoronmixt@gmail.com': {
-      role: 'auditor',
-      roleLabel: 'Auditor Oficial Ley 306',
-      navTitle: 'Ops Center',
-      navDesc: 'Auditoría & Fiscalización',
-      navBadge: '● Auditor',
-      targetUrl: 'admin.html',
-      isPrivileged: true
+      role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
+      navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     }
   };
 
