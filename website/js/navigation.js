@@ -603,7 +603,7 @@ function buildAboutDropdown() {
   dropdown.setAttribute('role', 'none');
   dropdown.innerHTML = `
     <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="megaMenuAbout" role="menuitem">
-      <span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Nosotros</span><span class="nav-sublabel">Institución & Legal</span></span></span>
+      <span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Nosotros</span></span></span>
       <span class="nav-dropdown-caret"><i class="fa-solid fa-chevron-down"></i></span>
     </button>
     <div class="nav-dropdown-menu" id="megaMenuAbout" role="menu">
