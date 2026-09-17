@@ -125,7 +125,44 @@ class BrandScreen extends StatelessWidget {
               title: 'Nuestra Paleta de Colores & Qué Nos Representa',
               subtitle: 'Cada tonalidad de la identidad Baqueano encapsula la geografía y cultura viva de Nicaragua.',
             ),
-            const SizedBox(height: 12),
+            // Isotipo Oficial de Presentación
+            GlassContainer(
+              padding: const EdgeInsets.all(20),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: AppColors.borderGold, width: 1.2),
+              child: Row(
+                children: [
+                  const BaqueanoLogo.icon(size: 68),
+                  const SizedBox(width: 18),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'EL EMBLEMA BAQUEANO: LA "Q" ANCESTRAL',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.goldLight,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          'El anillo circular en Naranja Fuego (#F65E01) representa la energía del sol pinolero y el sendero que guía al viajero. En su corazón, la silueta volcánica y el río serpenteante en Petróleo Teal (#165D6F) simbolizan la cordillera viva de los Maribios y las aguas vírgenes de Nicaragua.',
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: AppColors.textMuted,
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
 
             _buildColorMeaningCard(
               'Verde Selva Profundo (#2E7D32)',

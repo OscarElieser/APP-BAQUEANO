@@ -1,0 +1,79 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE COLORIMETRÍA & GRADIENTES (COLORS.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Definir la identidad cromática oficial de Baqueano Nicaragua, inspirada en
+  la geografía volcánica, arcilla de San Juan de Oriente y la arena pinolera.
+- Proveer una fuente única de verdad para paletas, contrastes WCAG AAA y
+  sombras resplandecientes en modo oscuro sin valores dispersos.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Variables CSS3 (:root) sincronizadas con lib/core/theme/app_colors.dart y app_gradients.dart.
+- Tonos semánticos: Petróleo Teal, Terracota Fuego, Arena Pinolera, Noche y Verde Selva.
+
+📦 3. QUÉ (WHAT / TOKENS EXPUESTOS):
+- --petroleo-teal, --terracotta, --arena-pinolera, --bg-dark, --grad-sunset, --grad-volcano.
+============================================================================
+*/
+
+:root {
+  /* --- PALETA OFICIAL BAQUEANO (Alineada con AppColors) --- */
+  --petroleo-teal: #165D6F;
+  --petroleo-light: #227B91;
+  --petroleo-dark: #0C3843;
+
+  --terracotta: #F65E01;
+  --terracotta-light: #FF7B26;
+  --terracotta-dark: #BF4800;
+
+  --arena-pinolera: #F4E6C1;
+  --arena-light: #FCF6E8;
+  --arena-dark: #E5D2A0;
+
+  --oro-noble: #D4AF37;
+  --oro-light: #F4E6C1;
+
+  --bg-dark: #0F172A;
+  --bg-darker: #080D1A;
+  --bg-surface: #132438;
+  --bg-card: rgba(22, 93, 111, 0.16);
+  --bg-card-hover: rgba(34, 123, 145, 0.28);
+
+  --verde-selva: #2E7D32;
+  --verde-neon: #10B981;
+  --rojo-alerta: #EF4444;
+  --azul-info: #38BDF8;
+
+  /* --- TEXTO Y BORDES --- */
+  --text-primary: #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-muted: #94A3B8;
+  --text-cream: #F4E6C1;
+
+  --border-subtle: rgba(244, 230, 193, 0.12);
+  --border-glow: rgba(246, 94, 1, 0.35);
+  --border-teal: rgba(34, 123, 145, 0.35);
+
+  /* --- GRADIENTES ATMOSFÉRICOS OFICIALES --- */
+  --grad-sunset: linear-gradient(135deg, #F65E01 0%, #FF7B26 50%, #F4E6C1 100%);
+  --grad-volcano: linear-gradient(180deg, #0C3843 0%, #165D6F 45%, #0F172A 100%);
+  --grad-glass: linear-gradient(135deg, rgba(34, 123, 145, 0.22) 0%, rgba(22, 93, 111, 0.08) 100%);
+  --grad-gold: linear-gradient(135deg, #D4AF37 0%, #F4E6C1 100%);
+  --grad-surface: linear-gradient(180deg, #132438 0%, #0F172A 100%);
+  --grad-admin: linear-gradient(180deg, rgba(12, 56, 67, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+
+  /* --- SOMBRAS Y RESPLANDORES --- */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.55);
+  --shadow-glow-terracotta: 0 8px 30px rgba(246, 94, 1, 0.35);
+  --shadow-glow-teal: 0 8px 30px rgba(22, 93, 111, 0.4);
+  --shadow-glow-gold: 0 8px 24px rgba(212, 175, 55, 0.3);
+
+  /* --- TRANSICIONES --- */
+  --trans-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

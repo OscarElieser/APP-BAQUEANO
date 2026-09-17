@@ -118,7 +118,9 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
-  ios: true
-  image_path: "assets/images/baqueano_icono_500x386.png"
+  ios: false
+  image_path: "assets/images/baqueano_launcher_solid.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/baqueano_adaptive_foreground.png"

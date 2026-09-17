@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PORTAL OFICIAL & ECOSISTEMA WEB (index.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Servir como la puerta de entrada oficial y portal de presentación del ecosistema
+  tecnológico de Baqueano Nicaragua.
+- Comunicar la misión fundacional: «Baqueano no existe para llevar más turistas
+  a los mismos lugares. Existe para transformar el turismo en una actividad más
+  responsable, distribuida, segura, culturalmente consciente y beneficiosa para las
+  comunidades locales.»
+- Demostrar los 5 impactos fundamentales del proyecto y permitir la descarga
+  directa del APK oficial de la aplicación móvil para Android.
+- Conectar de forma ordenada y modular a todas las páginas de experiencia especializada:
+  Historia, Campaña Ambiental, Gastronomía Ancestral, Patrimonio Sonoro, Cooperativas 3D,
+  Catálogo de Destinos y Baqueano Ops Center.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Arquitectura multi-página desacoplada con CSS modular en css/ y controladores en js/.
+- Hero section cinematográfico con simulador de smartphone de la app Android.
+- Showcase interactivo de los 5 impactos y vitrina de módulos especializados.
+- Modales de Auxilio SOS 24/7 con GPS satelital e instalación de APK.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Hero Section & Smartphone Simulator.
+- Los 5 Impactos del Proyecto Baqueano.
+- Navegación hacia las 7 Páginas de Experiencia Especializada.
+- Portal de Descarga Oficial de BaqueanoNicaragua.apk.
+- Footer Institucional con Contactos de Emergencia Nacional.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ======================================================================
+       SEO PRIMARIO — Metadatos Esenciales
+       ====================================================================== -->
+  <title>Baqueano Nicaragua | Ecoturismo Sostenible Sin Intermediarios</title>
+  <meta name="description" content="Plataforma tecnológica oficial para ecoturismo sostenible, conservación comunitaria y soberanía campesina en Nicaragua. Descubre destinos auténticos, apoya cooperativas locales y descarga la app BaqueanoNicaragua para Android.">
+  <meta name="keywords" content="ecoturismo Nicaragua, turismo sostenible, cooperativas campesinas, turismo comunitario, Baqueano Nicaragua, Cañón de Somoto, Isla de Ometepe, Cerro Negro, turismo responsable Nicaragua">
+  <meta name="author" content="Baqueano Nicaragua — Ecosistema Digital de Ecoturismo">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#165D6F">
+
+  <!-- URL Canonical — Producción Firebase Hosting -->
+  <link rel="canonical" href="https://app-baqueano.web.app/">
+
+  <!-- ======================================================================
+       OPEN GRAPH (Facebook, WhatsApp, LinkedIn)
+       ====================================================================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://app-baqueano.web.app/">
+  <meta property="og:title" content="Baqueano Nicaragua | Ecoturismo Sin Intermediarios">
+  <meta property="og:description" content="Descubre Nicaragua auténtica. Destinos protegidos, cooperativas campesinas, senderos con GPS y app Android gratuita. Sin comisiones, 100% para las comunidades.">
+  <meta property="og:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baqueano Nicaragua — Ecoturismo Sostenible en Tierras Campesinas">
+  <meta property="og:site_name" content="Baqueano Nicaragua">
+  <meta property="og:locale" content="es_NI">
+
+  <!-- ======================================================================
+       TWITTER CARDS
+       ====================================================================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Baqueano Nicaragua | Ecoturismo Sin Intermediarios">
+  <meta name="twitter:description" content="Plataforma tecnológica para turismo sostenible y soberanía campesina en Nicaragua.">
+  <meta name="twitter:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
+
+  <!-- ======================================================================
+       STRUCTURED DATA — JSON-LD (WebSite + Organization + MobileApp)
+       ====================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://app-baqueano.web.app/#website",
+        "url": "https://app-baqueano.web.app/",
+        "name": "Baqueano Nicaragua",
+        "description": "Plataforma tecnológica oficial para turismo sostenible, conservación comunitaria y soberanía campesina en Nicaragua.",
+        "inLanguage": "es",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://app-baqueano.web.app/destinos.html?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://app-baqueano.web.app/#organization",
+        "name": "Baqueano Nicaragua",
+        "url": "https://app-baqueano.web.app/",
+        "logo": "https://app-baqueano.web.app/assets/images/logo.png",
+        "description": "Ecosistema digital de ecoturismo sostenible para cooperativas campesinas de Nicaragua.",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Nicaragua"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "availableLanguage": "Spanish",
+          "contactOption": "TollFree"
+        }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Baqueano Nicaragua",
+        "operatingSystem": "Android",
+        "applicationCategory": "TravelApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Aplicación Android gratuita con mapas offline, GPS en sendero, Baqueano AI y sistema SOS 24/7 para exploradores en Nicaragua.",
+        "downloadUrl": "https://app-baqueano.web.app/assets/BaqueanoNicaragua.apk"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ======================================================================
+       ÍCONOS Y PWA MANIFEST
+       ====================================================================== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tipografías Oficiales Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Maestros Oficiales (Modular) -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/videos.css">
+
+  <!-- ======================================================================
+       ESTILOS DEL MÓDULO DE REGISTRO DE NEGOCIOS & ANFITRIONES
+       🎯 Por qué: Estética de alta gama, glassmorphism y adaptabilidad móvil total
+          para la captación de cooperativas, hospedajes y comedores campesinos.
+       ⚙️ Cómo: Rejilla CSS Grid responsiva, tokens oficiales (#165D6F, #F65E01,
+          #F4E6C1, #0F172A), microinteracciones y dropzone interactivo.
+       📦 Qué: Clases .register-biz-section, .biz-form-grid, .biz-btn-submit, etc.
+       ====================================================================== -->
+  <style>
+    .register-biz-section {
+      padding: 5.5rem 0;
+      position: relative;
+      background: radial-gradient(circle at 15% 20%, rgba(22, 93, 111, 0.2) 0%, transparent 55%),
+                  radial-gradient(circle at 85% 75%, rgba(246, 94, 1, 0.14) 0%, transparent 55%),
+                  #0A1120;
+      overflow: hidden;
+    }
+
+    .register-biz-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(22, 93, 111, 0.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(22, 93, 111, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .register-biz-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(22, 93, 111, 0.45);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(22, 93, 111, 0.15);
+      padding: 3.5rem 3rem;
+    }
+
+    .biz-header-wrap {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .biz-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(246, 94, 1, 0.15);
+      border: 1px solid rgba(246, 94, 1, 0.4);
+      color: var(--terracotta, #F65E01);
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .biz-main-title {
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .biz-subtitle {
+      font-size: 1.05rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      line-height: 1.6;
+      margin: 0 auto 2rem auto;
+      max-width: 740px;
+      opacity: 0.92;
+    }
+
+    .biz-benefits-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      background: rgba(22, 93, 111, 0.18);
+      border: 1px solid rgba(22, 93, 111, 0.35);
+      border-radius: 14px;
+      padding: 1.1rem 1.5rem;
+      text-align: left;
+    }
+
+    .biz-benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      color: #FFFFFF;
+    }
+
+    .biz-benefit-item i {
+      font-size: 1.25rem;
+      color: var(--terracotta, #F65E01);
+      flex-shrink: 0;
+    }
+
+    .biz-form {
+      margin-top: 1rem;
+    }
+
+    .biz-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .biz-col-full {
+      grid-column: 1 / -1;
+    }
+
+    .biz-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      position: relative;
+    }
+
+    .biz-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .biz-label i {
+      color: var(--petroleo-glow, #2DD4BF);
+      font-size: 0.9rem;
+    }
+
+    .biz-label .req {
+      color: #EF4444;
+      font-weight: 800;
+    }
+
+    .biz-char-counter {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--text-muted, #94A3B8);
+      font-family: var(--font-tech, monospace);
+    }
+
+    .biz-input,
+    .biz-select,
+    .biz-textarea {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(244, 230, 193, 0.2);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .biz-input:focus,
+    .biz-select:focus,
+    .biz-textarea:focus {
+      outline: none;
+      border-color: var(--terracotta, #F65E01);
+      box-shadow: 0 0 0 3px rgba(246, 94, 1, 0.25);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .biz-input::placeholder,
+    .biz-textarea::placeholder {
+      color: rgba(244, 230, 193, 0.4);
+    }
+
+    .biz-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23F4E6C1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.1rem;
+      padding-right: 2.5rem;
+    }
+
+    .biz-select option {
+      background: #0F172A;
+      color: #FFFFFF;
+    }
+
+    .biz-input.has-error,
+    .biz-select.has-error,
+    .biz-textarea.has-error {
+      border-color: #EF4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+    }
+
+    .biz-error-msg {
+      color: #EF4444;
+      font-size: 0.78rem;
+      font-weight: 500;
+      min-height: 1rem;
+    }
+
+    .biz-file-upload-box {
+      position: relative;
+      border: 2px dashed rgba(22, 93, 111, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.5);
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .biz-file-upload-box:hover {
+      border-color: var(--terracotta, #F65E01);
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .biz-file-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .biz-upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      pointer-events: none;
+    }
+
+    .biz-upload-placeholder i {
+      font-size: 2rem;
+      color: var(--terracotta, #F65E01);
+    }
+
+    .biz-upload-placeholder small {
+      color: var(--text-muted, #94A3B8);
+      font-size: 0.78rem;
+    }
+
+    .biz-photo-preview {
+      position: relative;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .biz-photo-preview img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--petroleo-glow, #2DD4BF);
+    }
+
+    .biz-btn-remove-photo {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #EF4444;
+      color: #FFFFFF;
+      border: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .biz-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .biz-checkbox-label input[type="checkbox"] {
+      display: none;
+    }
+
+    .biz-checkbox-custom {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      border: 2px solid rgba(244, 230, 193, 0.4);
+      border-radius: 5px;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .biz-checkbox-label input[type="checkbox"]:checked + .biz-checkbox-custom {
+      background: var(--terracotta, #F65E01);
+      border-color: var(--terracotta, #F65E01);
+    }
+
+    .biz-checkbox-label input[type="checkbox"]:checked + .biz-checkbox-custom::after {
+      content: '✓';
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .biz-checkbox-text {
+      color: var(--arena-pinolera, #F4E6C1);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .biz-submit-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .biz-btn-submit {
+      background: linear-gradient(135deg, var(--terracotta, #F65E01) 0%, #D84E00 100%);
+      color: #FFFFFF;
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 1.15rem 2.8rem;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(246, 94, 1, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .biz-btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(246, 94, 1, 0.55);
+      filter: brightness(1.05);
+    }
+
+    .biz-btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .biz-security-note {
+      font-size: 0.82rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .biz-security-note i {
+      color: var(--petroleo-glow, #2DD4BF);
+    }
+
+    @media (max-width: 992px) {
+      .biz-benefits-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .register-biz-card {
+        padding: 2.2rem 1.4rem;
+        border-radius: 18px;
+      }
+      .biz-main-title {
+        font-size: 1.7rem;
+      }
+      .biz-benefits-strip {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      .biz-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .biz-btn-submit {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html" class="active">Inicio</a>
+        <a href="destinos.html">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper" style="padding-top: 5rem;">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section-pro" style="position: relative; overflow: hidden;">
+      <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/cerro_negro.jpg">
+        <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4" type="video/mp4">
+      </video>
+      <div class="video-hero-gradient"></div>
+      <div class="video-hero-scanlines"></div>
+      <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video de fondo" title="Alternar video">
+        <i class="fa-solid fa-pause"></i>
+      </button>
+      <div class="container hero-grid-2col" style="position: relative; z-index: 4;">
+        <!-- Columna Izquierda: Texto y CTA -->
+        <div class="hero-content-col">
+          <div class="hero-badge-pill">
+            <span class="pulse-dot"></span> Ecoturismo Auténtico en Nicaragua
+          </div>
+          <h1 class="hero-headline">
+            El Sendero lo Abren las <span class="highlight-sunset">Comunidades</span>
+          </h1>
+          <p class="hero-subtext">
+            Baqueano no existe para llevar más turistas a los mismos lugares. Existe para transformar
+            el turismo en una actividad más responsable, distribuida, segura, culturalmente consciente
+            y beneficiosa para las familias campesinas de Nicaragua.
+          </p>
+
+          <div class="hero-cta-bar">
+            <button class="btn-hero-primary open-download-modal-btn">
+              <i class="fa-brands fa-android"></i> Descargar App APK
+            </button>
+            <a href="destinos.html" class="btn-hero-glass">
+              <i class="fa-solid fa-compass"></i> Explorar Destinos
+            </a>
+          </div>
+
+          <div style="display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-shield-halved" style="color: var(--verde-neon); font-size: 1.2rem;"></i>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">0% Comisiones Abusivas</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-map-location-dot" style="color: var(--arena-pinolera); font-size: 1.2rem;"></i>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">Guías Locales Certificados</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <i class="fa-solid fa-tower-cell" style="color: var(--terracotta-light); font-size: 1.2rem;"></i>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">Mapas y GPS Fuera de Línea</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Simulador de Smartphone Android -->
+        <div class="hero-visual-col">
+          <div class="phone-frame-wrap">
+            <div class="phone-hardware">
+              <div class="phone-notch"><div class="camera-lens"></div></div>
+              <div class="phone-screen">
+                <div class="phone-status-bar">
+                  <span>10:30 AM</span>
+                  <div style="display: flex; gap: 0.35rem; align-items: center;">
+                    <i class="fa-solid fa-signal"></i>
+                    <i class="fa-solid fa-wifi"></i>
+                    <i class="fa-solid fa-battery-full"></i>
+                  </div>
+                </div>
+
+                <div class="phone-app-header">
+                  <div class="phone-app-logo">
+                    <img src="assets/images/logo.png" alt="Logo" style="width: 22px; height: 22px;">
+                    <span>BAQUEANO</span>
+                  </div>
+                  <div class="phone-app-bell"><i class="fa-solid fa-bell"></i></div>
+                </div>
+
+                <div class="phone-body-scroll">
+                  <div class="phone-hero-card">
+                    <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Somoto" class="phone-hero-img">
+                    <div class="phone-hero-overlay">
+                      <span class="phone-hero-badge">Ruta Insigne</span>
+                      <div class="phone-hero-title">Cañón de Somoto</div>
+                      <div class="phone-hero-subtitle">Madriz • Guiado por Mateo Sonís</div>
+                    </div>
+                  </div>
+
+                  <div class="phone-cards-stack">
+                    <div class="phone-mini-card">
+                      <div class="phone-mini-left">
+                        <div class="phone-mini-icon"><i class="fa-solid fa-volcano"></i></div>
+                        <div>
+                          <div class="phone-mini-title">Volcán Cerro Negro</div>
+                          <div class="phone-mini-meta">León • Sandboarding Activo</div>
+                        </div>
+                      </div>
+                      <div class="phone-mini-price">$30</div>
+                    </div>
+
+                    <div class="phone-mini-card">
+                      <div class="phone-mini-left">
+                        <div class="phone-mini-icon"><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                          <div class="phone-mini-title">Isla de Ometepe</div>
+                          <div class="phone-mini-meta">Rivas • Reserva de Biosfera</div>
+                        </div>
+                      </div>
+                      <div class="phone-mini-price">$35</div>
+                    </div>
+
+                    <div class="phone-mini-card">
+                      <div class="phone-mini-left">
+                        <div class="phone-mini-icon"><i class="fa-solid fa-cloud-rain"></i></div>
+                        <div>
+                          <div class="phone-mini-title">Cascada La Luna</div>
+                          <div class="phone-mini-meta">Jinotega • Nebliselva & Café</div>
+                        </div>
+                      </div>
+                      <div class="phone-mini-price">$25</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="phone-bottom-dock">
+                  <div class="dock-tab active"><i class="fa-solid fa-house"></i><span>Inicio</span></div>
+                  <div class="dock-tab"><i class="fa-solid fa-map"></i><span>Rutas</span></div>
+                  <div class="dock-tab"><i class="fa-solid fa-heart"></i><span>Favoritos</span></div>
+                  <div class="dock-tab"><i class="fa-solid fa-user"></i><span>Perfil</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOS 5 IMPACTOS DEL PROYECTO BAQUEANO -->
+    <section class="impacts-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-circle-check"></i> Compromiso Comunitario
+          </div>
+          <h2 class="section-headline">Los 5 Impactos Fundamentales de Baqueano</h2>
+          <p class="section-subtext">
+            Baqueano evalúa y cumple de forma transparente cada uno de los criterios exigidos
+            para proyectos de alto valor socioecológico y viabilidad sostenible.
+          </p>
+        </div>
+
+        <!-- Galería Dinámica en Movimiento Infinito -->
+        <div class="impacts-marquee-wrapper" id="impactsMarqueeWrapper">
+          <div class="impacts-marquee-track" id="impactsMarqueeTrack">
+            <!-- SET 1 (Original) -->
+            <!-- Impacto 1 -->
+            <div class="impact-hex-card">
+              <div class="impact-number-tag">IMPACTO 01 • ECOLÓGICO</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-leaf"></i></div>
+              <h3 class="impact-card-title">Impacto Ambiental & Custodia</h3>
+              <p class="impact-card-desc">
+                Turismo de huella cero. Monitoreo constante de la capacidad de carga en senderos frágiles,
+                prohibición de plásticos de un solo uso y canal de denuncias ciudadanas georreferenciadas.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Decálogo verde de obligatorio cumplimiento</li>
+                <li><i class="fa-solid fa-check"></i> Protección activa de cuencas y lagunas de cráter</li>
+                <li><i class="fa-solid fa-check"></i> Conservación de fauna silvestre nativa</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 2 -->
+            <div class="impact-hex-card">
+              <div class="impact-number-tag">IMPACTO 02 • SOCIAL</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-users"></i></div>
+              <h3 class="impact-card-title">Impacto Social & Comunitario</h3>
+              <p class="impact-card-desc">
+                Empoderamiento del campesino como dueño legítimo de su destino turístico. Inclusión de mujeres
+                y jóvenes rurales como embajadores culturales, traductores y custodios del bosque.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Capacitación continua en primeros auxilios y rescate</li>
+                <li><i class="fa-solid fa-check"></i> Respeto absoluto a la privacidad comunitaria</li>
+                <li><i class="fa-solid fa-check"></i> Fondos compartidos para escuelas y caminos rurales</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 3 -->
+            <div class="impact-hex-card">
+              <div class="impact-number-tag">IMPACTO 03 • ECONÓMICO</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+              <h3 class="impact-card-title">Impacto Económico & Distribución</h3>
+              <p class="impact-card-desc">
+                Ruptura del monopolio de plataformas transnacionales que retienen hasta el 25% de los ingresos.
+                El 100% de la tarifa pactada llega a la mano del guía y la cooperativa anfitriona.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Cero intermediarios abusivos en la reserva</li>
+                <li><i class="fa-solid fa-check"></i> Dinamización de comedores y posadas familiares</li>
+                <li><i class="fa-solid fa-check"></i> Régimen fiscal transparente con Ley 306 INTUR</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 4 -->
+            <div class="impact-hex-card">
+              <div class="impact-number-tag">IMPACTO 04 • GOBERNANZA</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+              <h3 class="impact-card-title">Gobernanza, Ética & Legalidad</h3>
+              <p class="impact-card-desc">
+                Cumplimiento estricto del marco jurídico nacional (Ley 306 de Incentivos Turísticos, Ley 217 del Medio Ambiente).
+                Transparencia contable bimoneda y arquitectura de datos cifrada en Firestore.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Sincronización oficial con normativas INTUR</li>
+                <li><i class="fa-solid fa-check"></i> Centro de telemetría y contingencia en tiempo real</li>
+                <li><i class="fa-solid fa-check"></i> Protocolos de seguridad certificados y balizas SOS</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 5 -->
+            <div class="impact-hex-card">
+              <div class="impact-number-tag">IMPACTO 05 • CULTURAL</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-landmark"></i></div>
+              <h3 class="impact-card-title">Cultura, Memoria & Soberanía</h3>
+              <p class="impact-card-desc">
+                Rescate de la memoria histórica de Nicaragua: las 7 eras fundacionales, la cosmovisión del maíz,
+                las leyendas campesinas, el son tradicional de marimba y la sabiduría botánica ancestral.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Módulo insignia de los 17 territorios soberanos</li>
+                <li><i class="fa-solid fa-check"></i> Vitrina gastronómica de las abuelas campesinas</li>
+                <li><i class="fa-solid fa-check"></i> Patrimonio sonoro a 1 toque con música folclórica</li>
+              </ul>
+            </div>
+
+            <!-- Tarjeta Extra: Seguridad Integral -->
+            <div class="impact-hex-card" style="border-color: var(--border-glow);">
+              <div class="impact-number-tag" style="color: var(--terracotta-light);">SEGURIDAD 24/7 EN SENDERO</div>
+              <div class="impact-icon-circle" style="background: rgba(246,94,1,0.2);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <h3 class="impact-card-title">Centro de Auxilio SOS Satelital</h3>
+              <p class="impact-card-desc">
+                Balizas de geolocalización satelital que funcionan incluso en zonas de montaña sin señal telefónica.
+                Enlace inmediato con Cruz Blanca (128), Bomberos (115) y Policía Turística (101).
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Coordenadas GPS exactas en 1 toque</li>
+                <li><i class="fa-solid fa-check"></i> Despacho automático de auxilio por WhatsApp</li>
+                <li><i class="fa-solid fa-check"></i> Red de guías en alerta permanente</li>
+              </ul>
+            </div>
+
+            <!-- SET 2 (Clon para Movimiento Infinito Continuo sin Saltos) -->
+            <!-- Impacto 1 Clon -->
+            <div class="impact-hex-card" aria-hidden="true">
+              <div class="impact-number-tag">IMPACTO 01 • ECOLÓGICO</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-leaf"></i></div>
+              <h3 class="impact-card-title">Impacto Ambiental & Custodia</h3>
+              <p class="impact-card-desc">
+                Turismo de huella cero. Monitoreo constante de la capacidad de carga en senderos frágiles,
+                prohibición de plásticos de un solo uso y canal de denuncias ciudadanas georreferenciadas.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Decálogo verde de obligatorio cumplimiento</li>
+                <li><i class="fa-solid fa-check"></i> Protección activa de cuencas y lagunas de cráter</li>
+                <li><i class="fa-solid fa-check"></i> Conservación de fauna silvestre nativa</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 2 Clon -->
+            <div class="impact-hex-card" aria-hidden="true">
+              <div class="impact-number-tag">IMPACTO 02 • SOCIAL</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-users"></i></div>
+              <h3 class="impact-card-title">Impacto Social & Comunitario</h3>
+              <p class="impact-card-desc">
+                Empoderamiento del campesino como dueño legítimo de su destino turístico. Inclusión de mujeres
+                y jóvenes rurales como embajadores culturales, traductores y custodios del bosque.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Capacitación continua en primeros auxilios y rescate</li>
+                <li><i class="fa-solid fa-check"></i> Respeto absoluto a la privacidad comunitaria</li>
+                <li><i class="fa-solid fa-check"></i> Fondos compartidos para escuelas y caminos rurales</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 3 Clon -->
+            <div class="impact-hex-card" aria-hidden="true">
+              <div class="impact-number-tag">IMPACTO 03 • ECONÓMICO</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+              <h3 class="impact-card-title">Impacto Económico & Distribución</h3>
+              <p class="impact-card-desc">
+                Ruptura del monopolio de plataformas transnacionales que retienen hasta el 25% de los ingresos.
+                El 100% de la tarifa pactada llega a la mano del guía y la cooperativa anfitriona.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Cero intermediarios abusivos en la reserva</li>
+                <li><i class="fa-solid fa-check"></i> Dinamización de comedores y posadas familiares</li>
+                <li><i class="fa-solid fa-check"></i> Régimen fiscal transparente con Ley 306 INTUR</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 4 Clon -->
+            <div class="impact-hex-card" aria-hidden="true">
+              <div class="impact-number-tag">IMPACTO 04 • GOBERNANZA</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+              <h3 class="impact-card-title">Gobernanza, Ética & Legalidad</h3>
+              <p class="impact-card-desc">
+                Cumplimiento estricto del marco jurídico nacional (Ley 306 de Incentivos Turísticos, Ley 217 del Medio Ambiente).
+                Transparencia contable bimoneda y arquitectura de datos cifrada en Firestore.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Sincronización oficial con normativas INTUR</li>
+                <li><i class="fa-solid fa-check"></i> Centro de telemetría y contingencia en tiempo real</li>
+                <li><i class="fa-solid fa-check"></i> Protocolos de seguridad certificados y balizas SOS</li>
+              </ul>
+            </div>
+
+            <!-- Impacto 5 Clon -->
+            <div class="impact-hex-card" aria-hidden="true">
+              <div class="impact-number-tag">IMPACTO 05 • CULTURAL</div>
+              <div class="impact-icon-circle"><i class="fa-solid fa-landmark"></i></div>
+              <h3 class="impact-card-title">Cultura, Memoria & Soberanía</h3>
+              <p class="impact-card-desc">
+                Rescate de la memoria histórica de Nicaragua: las 7 eras fundacionales, la cosmovisión del maíz,
+                las leyendas campesinas, el son tradicional de marimba y la sabiduría botánica ancestral.
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Módulo insignia de los 17 territorios soberanos</li>
+                <li><i class="fa-solid fa-check"></i> Vitrina gastronómica de las abuelas campesinas</li>
+                <li><i class="fa-solid fa-check"></i> Patrimonio sonoro a 1 toque con música folclórica</li>
+              </ul>
+            </div>
+
+            <!-- Tarjeta Extra Clon -->
+            <div class="impact-hex-card" style="border-color: var(--border-glow);" aria-hidden="true">
+              <div class="impact-number-tag" style="color: var(--terracotta-light);">SEGURIDAD 24/7 EN SENDERO</div>
+              <div class="impact-icon-circle" style="background: rgba(246,94,1,0.2);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <h3 class="impact-card-title">Centro de Auxilio SOS Satelital</h3>
+              <p class="impact-card-desc">
+                Balizas de geolocalización satelital que funcionan incluso en zonas de montaña sin señal telefónica.
+                Enlace inmediato con Cruz Blanca (128), Bomberos (115) y Policía Turística (101).
+              </p>
+              <ul class="impact-check-list">
+                <li><i class="fa-solid fa-check"></i> Coordenadas GPS exactas en 1 toque</li>
+                <li><i class="fa-solid fa-check"></i> Despacho automático de auxilio por WhatsApp</li>
+                <li><i class="fa-solid fa-check"></i> Red de guías en alerta permanente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles Interactivos -->
+        <div class="impacts-marquee-controls">
+          <button class="marquee-control-btn" id="btnToggleMarquee" onclick="toggleImpactsMarquee()">
+            <i class="fa-solid fa-pause" id="marqueeToggleIcon"></i> <span id="marqueeToggleText">Pausar Movimiento</span>
+          </button>
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-tech);">
+            <i class="fa-solid fa-hand-pointer"></i> Pasa el cursor o mantén presionado para leer con calma
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleImpactsMarquee() {
+        const track = document.getElementById('impactsMarqueeTrack');
+        const icon = document.getElementById('marqueeToggleIcon');
+        const text = document.getElementById('marqueeToggleText');
+        if (!track) return;
+        
+        track.classList.toggle('is-paused');
+        const isPaused = track.classList.contains('is-paused');
+        if (icon && text) {
+          icon.className = isPaused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
+          text.textContent = isPaused ? 'Reanudar Movimiento' : 'Pausar Movimiento';
+        }
+      }
+    </script>
+
+    <!-- EXPLORA LAS PÁGINAS ESPECIALIZADAS DE LA WEB -->
+    <section class="destinations-section-pro">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-cubes"></i> Experiencias Especializadas
+          </div>
+          <h2 class="section-headline">Explora las Páginas del Ecosistema</h2>
+          <p class="section-subtext">
+            Cada sección del proyecto ha sido organizada en su propia página dedicada, permitiendo un control
+            impecable de tipografía, música, videos, fotografías y herramientas interactivas.
+          </p>
+        </div>
+
+        <div class="destinations-showcase-grid">
+          <!-- Tarjeta Módulo 1: Historia -->
+          <a href="historia.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #0C3843, #165D6F); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-landmark" style="font-size: 3.5rem; color: var(--oro-noble);"></i>
+              <span class="dest-badge-corner">7 Periodos</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-book-open"></i> Memoria Viva</div>
+              <h3 class="dest-name-title">Historia de Mi País</h3>
+              <p class="dest-description-text">
+                Línea de tiempo cronológica desde los pueblos originarios hasta la soberanía actual, más el explorador de los 17 territorios.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Entrar a Historia</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 2: Ambiental -->
+          <a href="ambiental.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #064E3B, #10B981); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-leaf" style="font-size: 3.5rem; color: #FFFFFF;"></i>
+              <span class="dest-badge-corner">GPS Satelital</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-shield-heart"></i> Huella Cero</div>
+              <h3 class="dest-name-title">Campaña Ambiental & Denuncias</h3>
+              <p class="dest-description-text">
+                El Decálogo Verde del explorador, formulario de denuncias ciudadanas con coordenadas satelitales y pasaporte ético.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Ver Decálogo & Formulario</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 3: Gastronomía -->
+          <a href="gastronomia.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #7C2D12, #F65E01); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-bowl-food" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+              <span class="dest-badge-corner">6 Platillos</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-fire-burner"></i> Fogón Campesino</div>
+              <h3 class="dest-name-title">Gastronomía Ancestral del Maíz</h3>
+              <p class="dest-description-text">
+                Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho e Indio Viejo con fotografías reales e ingredientes de la milpa.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Saborear Tradición</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 4: Música Folclórica -->
+          <a href="musica.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #1E1B4B, #4338CA); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-music" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+              <span class="dest-badge-corner">1 Toque</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-guitar"></i> Son Nica & Marimba</div>
+              <h3 class="dest-name-title">Patrimonio Sonoro Folclórico</h3>
+              <p class="dest-description-text">
+                Reproductor directo para La Mora Limpia, El Solar de Monimbó, Baile del Mestizaje, El Zanatillo y Palomita Guasiruca.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Escuchar Canciones</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 5: Aliados 3D -->
+          <a href="aliados.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #134E4A, #0D9488); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-handshake" style="font-size: 3.5rem; color: #FFFFFF;"></i>
+              <span class="dest-badge-corner">Giro 180°</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-users-line"></i> Red Solidaria</div>
+              <h3 class="dest-name-title">Cooperativas & Alojamientos 3D</h3>
+              <p class="dest-description-text">
+                Tarjetas tridimensionales interactivas de posadas rurales y guías comunitarios con contacto directo sin intermediarios.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Girar Tarjetas 3D</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tarjeta Módulo 6: Destinos & Cotizador -->
+          <a href="destinos.html" class="dest-card-pro" style="text-decoration: none;">
+            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #831843, #BE185D); display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-mountain" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+              <span class="dest-badge-corner">Ley 306 INTUR</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-calculator"></i> Rutas & Motor Fiscal</div>
+              <h3 class="dest-name-title">Catálogo & Calculadora de Retorno</h3>
+              <p class="dest-description-text">
+                Filtro de destinos protegidos, calculadora del ahorro del 20% frente a OTAs foráneas y cotizador con régimen de Ley 306.
+              </p>
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-arrow-right"></i> Cotizar & Ver Destinos</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         🏪 SECCIÓN DE REGISTRO DE NEGOCIO O ANFITRIÓN ALIADO
+         🎯 Conectar directamente a emprendedores campesinos, guías, comedores y
+            hospedajes comunitarios con el ecosistema Baqueano sin intermediarios.
+         ⚙️ Formulario reactivo con validación de 16 campos, guardado asíncrono
+            en Firestore (/businesses) y despacho con formato WhatsApp a Mesa Baqueano.
+         📦 Sección #registroNegocios con Glassmorphism y diseño responsivo.
+         ====================================================================== -->
+    <section class="register-biz-section" id="registroNegocios">
+      <div class="container">
+        <div class="register-biz-card">
+          <!-- Encabezado de la Sección -->
+          <div class="biz-header-wrap">
+            <span class="biz-badge-pill">
+              <i class="fa-solid fa-handshake-angle"></i> Red de Anfitriones & Comercio Justo
+            </span>
+            <h2 class="biz-main-title">
+              Registra tu Local, Hospedaje o Emprendimiento en Baqueano
+            </h2>
+            <p class="biz-subtitle">
+              Únete a la plataforma tecnológica comunitaria de Nicaragua sin comisiones abusivas.
+              Conecta directamente con viajeros nacionales e internacionales que buscan autenticidad, gastronomía típica,
+              senderos seguros y aventura comunitaria soberana.
+            </p>
+
+            <!-- Tiras de Ventajas -->
+            <div class="biz-benefits-strip">
+              <div class="biz-benefit-item">
+                <i class="fa-solid fa-percent"></i>
+                <span><strong>0% Comisiones</strong> para intermediarios foráneos</span>
+              </div>
+              <div class="biz-benefit-item">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span><strong>Contacto Directo</strong> con el explorador</span>
+              </div>
+              <div class="biz-benefit-item">
+                <i class="fa-solid fa-satellite"></i>
+                <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
+              </div>
+              <div class="biz-benefit-item">
+                <i class="fa-solid fa-shield-heart"></i>
+                <span><strong>Auditoría & Respaldo</strong> de la Mesa Baqueano</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulario de Registro -->
+          <form id="registerBusinessForm" class="biz-form" novalidate>
+            <div class="biz-form-grid">
+              
+              <!-- 1. Nombre del Negocio -->
+              <div class="biz-field-group">
+                <label for="bizName" class="biz-label">
+                  <i class="fa-solid fa-store"></i> Nombre del Negocio / Emprendimiento <span class="req">*</span>
+                </label>
+                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej: Comedor Doña María / Eco-Lodge Las Brisas" required>
+                <span class="biz-error-msg" id="err-bizName"></span>
+              </div>
+
+              <!-- 2. Tipo de Negocio -->
+              <div class="biz-field-group">
+                <label for="bizType" class="biz-label">
+                  <i class="fa-solid fa-tags"></i> Tipo de Negocio <span class="req">*</span>
+                </label>
+                <select id="bizType" name="bizType" class="biz-select" required>
+                  <option value="">Selecciona el tipo de negocio...</option>
+                  <option value="Comedor Tradicional / Restaurante Campesino">Comedor Tradicional / Restaurante Campesino</option>
+                  <option value="Hotel / Eco-Lodge">Hotel / Eco-Lodge</option>
+                  <option value="Hostal Comunitario">Hostal Comunitario</option>
+                  <option value="Hospedaje Rural Familiar">Hospedaje Rural Familiar</option>
+                  <option value="Casa de Alquiler Vacacional">Casa de Alquiler Vacacional</option>
+                  <option value="Guía Baqueano Comunitario">Guía Baqueano Comunitario</option>
+                  <option value="Cooperativa Agroecológica">Cooperativa Agroecológica</option>
+                  <option value="Taller de Artesanías / Recuerdos">Taller de Artesanías / Recuerdos</option>
+                  <option value="Bar / Sunset Lounge Frente al Mar">Bar / Sunset Lounge Frente al Mar</option>
+                  <option value="Museo / Patrimonio Histórico">Museo / Patrimonio Histórico</option>
+                  <option value="Transporte Turístico / Bote">Transporte Turístico / Bote</option>
+                  <option value="Otro">Otro Emprendimiento Local</option>
+                </select>
+                <span class="biz-error-msg" id="err-bizType"></span>
+              </div>
+
+              <!-- 3. Nombre del Propietario -->
+              <div class="biz-field-group">
+                <label for="bizOwner" class="biz-label">
+                  <i class="fa-solid fa-user-tie"></i> Propietario o Responsable Directo <span class="req">*</span>
+                </label>
+                <input type="text" id="bizOwner" name="bizOwner" class="biz-input" placeholder="Ej: María Hernández Gómez" required>
+                <span class="biz-error-msg" id="err-bizOwner"></span>
+              </div>
+
+              <!-- 4. Categoría Baqueano -->
+              <div class="biz-field-group">
+                <label for="bizCategory" class="biz-label">
+                  <i class="fa-solid fa-layer-group"></i> Categoría en Catálogo Baqueano <span class="req">*</span>
+                </label>
+                <select id="bizCategory" name="bizCategory" class="biz-select" required>
+                  <option value="">Selecciona una categoría oficial...</option>
+                  <option value="gastronomia">Gastronomía Ancestral (Comedores, Baho, Quesillos)</option>
+                  <option value="hoteles">Hoteles & Eco-Lodges</option>
+                  <option value="hostales">Hostales de Aventura & Mochileros</option>
+                  <option value="hospedajes">Hospedajes Rurales & Cabañas</option>
+                  <option value="casas-alquiler">Casas de Alquiler & Villas</option>
+                  <option value="museos">Museos, Cultura & Talleres</option>
+                  <option value="discotecas">Vida Nocturna & Clubes de Playa</option>
+                  <option value="rios">Ríos, Cascadas & Cañones</option>
+                  <option value="volcanes">Volcanes & Sandboarding</option>
+                  <option value="playas">Playas & Surf del Pacífico</option>
+                </select>
+                <span class="biz-error-msg" id="err-bizCategory"></span>
+              </div>
+
+              <!-- 5. Departamento -->
+              <div class="biz-field-group">
+                <label for="bizDepartment" class="biz-label">
+                  <i class="fa-solid fa-map"></i> Departamento de Nicaragua <span class="req">*</span>
+                </label>
+                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
+                  <option value="">Selecciona tu departamento...</option>
+                  <option value="Boaco">Boaco</option>
+                  <option value="Carazo">Carazo</option>
+                  <option value="Chinandega">Chinandega</option>
+                  <option value="Chontales">Chontales</option>
+                  <option value="Costa Caribe Norte (RACCN)">Costa Caribe Norte (RACCN)</option>
+                  <option value="Costa Caribe Sur (RACCS)">Costa Caribe Sur (RACCS)</option>
+                  <option value="Estelí">Estelí</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Jinotega">Jinotega</option>
+                  <option value="León">León</option>
+                  <option value="Madriz">Madriz</option>
+                  <option value="Managua">Managua</option>
+                  <option value="Masaya">Masaya</option>
+                  <option value="Matagalpa">Matagalpa</option>
+                  <option value="Nueva Segovia">Nueva Segovia</option>
+                  <option value="Río San Juan">Río San Juan</option>
+                  <option value="Rivas">Rivas</option>
+                </select>
+                <span class="biz-error-msg" id="err-bizDepartment"></span>
+              </div>
+
+              <!-- 6. Municipio -->
+              <div class="biz-field-group">
+                <label for="bizMunicipality" class="biz-label">
+                  <i class="fa-solid fa-location-dot"></i> Municipio <span class="req">*</span>
+                </label>
+                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej: San Juan del Sur, Somoto, Nagarote..." required>
+                <span class="biz-error-msg" id="err-bizMunicipality"></span>
+              </div>
+
+              <!-- 7. Dirección Exacta -->
+              <div class="biz-field-group biz-col-full">
+                <label for="bizAddress" class="biz-label">
+                  <i class="fa-solid fa-compass"></i> Dirección Exacta o Punto de Referencia <span class="req">*</span>
+                </label>
+                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej: Del Parque Central 2 c. al lago, frente a la ermita comunitaria" required>
+                <span class="biz-error-msg" id="err-bizAddress"></span>
+              </div>
+
+              <!-- 8. Teléfono Principal -->
+              <div class="biz-field-group">
+                <label for="bizPhone" class="biz-label">
+                  <i class="fa-solid fa-phone"></i> Teléfono Principal de Llamadas <span class="req">*</span>
+                </label>
+                <input type="tel" id="bizPhone" name="bizPhone" class="biz-input" placeholder="+505 8888-0000" required>
+                <span class="biz-error-msg" id="err-bizPhone"></span>
+              </div>
+
+              <!-- 9. WhatsApp de Reservas -->
+              <div class="biz-field-group">
+                <label for="bizWhatsapp" class="biz-label">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp para Reservas Directas
+                </label>
+                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="+505 8443-0000">
+              </div>
+
+              <!-- 10. Correo Electrónico -->
+              <div class="biz-field-group">
+                <label for="bizEmail" class="biz-label">
+                  <i class="fa-solid fa-envelope"></i> Correo Electrónico
+                </label>
+                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tunegocio.com">
+              </div>
+
+              <!-- 11. Red Social / Sitio Web -->
+              <div class="biz-field-group">
+                <label for="bizWebsite" class="biz-label">
+                  <i class="fa-solid fa-globe"></i> Sitio Web o Red Social (Facebook / Instagram)
+                </label>
+                <input type="url" id="bizWebsite" name="bizWebsite" class="biz-input" placeholder="https://instagram.com/mi_local_nica">
+              </div>
+
+              <!-- 12. Rango de Precios -->
+              <div class="biz-field-group">
+                <label for="bizPrice" class="biz-label">
+                  <i class="fa-solid fa-money-bill-wave"></i> Rango o Precio Base Estimado (C$)
+                </label>
+                <input type="number" id="bizPrice" name="bizPrice" class="biz-input" placeholder="Ej: 150" min="0">
+              </div>
+
+              <!-- 13. Horario de Atención -->
+              <div class="biz-field-group">
+                <label for="bizSchedule" class="biz-label">
+                  <i class="fa-solid fa-clock"></i> Horario Habitual de Atención
+                </label>
+                <input type="text" id="bizSchedule" name="bizSchedule" class="biz-input" placeholder="Ej: Lunes a Domingo 7:00 AM - 8:00 PM">
+              </div>
+
+              <!-- 14. Descripción -->
+              <div class="biz-field-group biz-col-full">
+                <label for="bizDescription" class="biz-label">
+                  <i class="fa-solid fa-pen-to-square"></i> Descripción del Servicio, Menú o Atractivo <span class="req">*</span>
+                  <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
+                </label>
+                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" rows="3" maxlength="300" placeholder="Describe los platos típicos, tours guiados o comodidades de tu establecimiento..." required></textarea>
+                <span class="biz-error-msg" id="err-bizDescription"></span>
+              </div>
+
+              <!-- 15. Fotografía del Local -->
+              <div class="biz-field-group biz-col-full">
+                <label class="biz-label">
+                  <i class="fa-solid fa-camera"></i> Fotografía del Local o Fachada (Opcional)
+                </label>
+                <div class="biz-file-upload-box" id="bizDropZone">
+                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
+                  <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Haz clic o arrastra una imagen de tu establecimiento</span>
+                    <small>Formatos JPG, PNG, WEBP (Máximo 5MB)</small>
+                  </div>
+                  <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
+                    <img id="bizPreviewImg" src="" alt="Vista previa">
+                    <button type="button" class="biz-btn-remove-photo" id="bizBtnRemovePhoto" title="Eliminar foto">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 16. Términos y Compromiso -->
+              <div class="biz-field-group biz-col-full">
+                <label class="biz-checkbox-label">
+                  <input type="checkbox" id="bizTerms" name="bizTerms" required>
+                  <span class="biz-checkbox-custom"></span>
+                  <span class="biz-checkbox-text">
+                    Acepto los principios de <strong>turismo ético y trato justo</strong> de Baqueano Nicaragua. Confirmo que los precios y datos suministrados son reales y que la atención al visitante se realizará sin intermediarios foráneos. <span class="req">*</span>
+                  </span>
+                </label>
+                <span class="biz-error-msg" id="err-bizTerms"></span>
+              </div>
+
+              <!-- Botón de Envío -->
+              <div class="biz-field-group biz-col-full biz-submit-wrap">
+                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
+                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
+                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                </button>
+                <div class="biz-security-note">
+                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
+                </div>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL DE CONFIRMACIÓN DE REGISTRO DE NEGOCIO -->
+    <div class="modal-backdrop-pro" id="bizSuccessModal" aria-hidden="true" role="dialog">
+      <div class="modal-card-dialog" style="max-width: 520px; text-align: center;">
+        <button class="modal-close-x" id="closeBizModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-icon-top" style="background: rgba(22, 93, 111, 0.3); border-color: #2DD4BF;">
+          <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #10B981;"></i>
+        </div>
+        <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">¡Postulación Recibida con Éxito!</h3>
+        <p style="font-size: 0.95rem; color: var(--arena-pinolera); line-height: 1.6; margin-bottom: 1.2rem;">
+          Tu establecimiento ha sido registrado en el sistema y remitido a la Mesa Técnica Baqueano.
+          El equipo verificará las coordenadas y detalles para incluirlo en el mapa satelital HD y catálogo territorial.
+        </p>
+        <div id="bizModalSummary" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(22, 93, 111, 0.4); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.88rem; color: #FFFFFF;">
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a id="bizModalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="background: #25D366; border: none; justify-content: center; flex: 1;">
+            <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp de Mesa Baqueano
+          </a>
+          <button type="button" class="btn-hero-glass" id="bizModalCloseBtn" style="padding: 0.85rem 1.5rem;">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTAL DE DESCARGA DIRECTA DE APK -->
+    <section class="download-section-hero">
+      <div class="container">
+        <div class="download-portal-card">
+          <div class="apk-icon-center">
+            <img src="assets/images/logo.png" alt="Baqueano APK">
+          </div>
+          <h2 class="download-portal-title">Descarga Baqueano para Android</h2>
+          <p style="font-size: 1.1rem; color: var(--arena-pinolera); max-width: 680px; margin: 0 auto;">
+            La aplicación oficial con mapas topográficos sin conexión a internet, baliza satelital SOS 24/7 y contacto directo con las cooperativas campesinas.
+          </p>
+
+          <div class="download-specs-bar">
+            <span class="spec-chip"><i class="fa-brands fa-android"></i> Android 8.0 o superior</span>
+            <span class="spec-chip"><i class="fa-solid fa-hard-drive"></i> Peso: ~56 MB</span>
+            <span class="spec-chip"><i class="fa-solid fa-shield-halved"></i> APK Seguro y Firmado</span>
+            <span class="spec-chip"><i class="fa-solid fa-ban"></i> 100% Libre de Publicidad</span>
+          </div>
+
+          <div class="download-cta-double">
+            <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="directApkDownloadBtn" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
+              <i class="fa-solid fa-download"></i> Descargar BaqueanoNicaragua.apk
+            </a>
+            <button class="btn-hero-glass open-download-modal-btn" style="padding: 1.1rem 2rem; font-size: 1.02rem;">
+              <i class="fa-solid fa-circle-question"></i> Guía Paso a Paso de Instalación
+            </button>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn-admin-action" id="shareWhatsAppBtn">
+              <i class="fa-brands fa-whatsapp"></i> Compartir por WhatsApp
+            </button>
+            <button class="btn-admin-action" id="copyLinkBtn">
+              <i class="fa-solid fa-link"></i> Copiar Enlace Oficial
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Plataforma comunitaria para el ecoturismo responsable, la custodia ambiental y el empoderamiento campesino de Nicaragua. Cero intermediarios foráneos.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">AUXILIO SOS 24/7</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa SOS Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APLICACIÓN MÓVIL</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Construida exclusivamente para Android con optimización de memoria y rendimiento a 60fps.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Desarrollado con orgullo para las comunidades de nuestra patria.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
+  <script src="js/firestore-realtime.js"></script>
+  <script src="app.js"></script>
+
+  <!-- ======================================================================
+       🧭 MANEJADOR DEL FORMULARIO DE REGISTRO DE NEGOCIOS (/businesses + WhatsApp)
+       🎯 Por qué: Conectar de forma inmediata a los dueños de negocios locales con
+          la Mesa Técnica Baqueano vía WhatsApp (+505 8443-1289) y registrar el
+          anfitrión en Cloud Firestore (/businesses) para el Ops Center.
+       ⚙️ Cómo: Validación reactiva de 16 campos, preview de fotografía, formateo
+          con emojis y codificación URI para WhatsApp, modal de confirmación.
+       📦 Qué: Controlador interactivo del formulario #registerBusinessForm.
+       ====================================================================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    const form = document.getElementById('registerBusinessForm');
+    if (!form) return;
+
+    const descInput = document.getElementById('bizDescription');
+    const charCounter = document.getElementById('bizCharCounter');
+    const photoInput = document.getElementById('bizPhoto');
+    const placeholder = document.getElementById('bizUploadPlaceholder');
+    const previewBox = document.getElementById('bizPhotoPreview');
+    const previewImg = document.getElementById('bizPreviewImg');
+    const btnRemovePhoto = document.getElementById('bizBtnRemovePhoto');
+    const submitBtn = document.getElementById('btnSubmitBiz');
+    const modal = document.getElementById('bizSuccessModal');
+    const modalCloseBtn = document.getElementById('closeBizModalBtn');
+    const modalAcceptBtn = document.getElementById('bizModalCloseBtn');
+    const modalSummary = document.getElementById('bizModalSummary');
+    const modalWhatsAppBtn = document.getElementById('bizModalWhatsAppBtn');
+
+    // Contador reactivo de caracteres
+    if (descInput && charCounter) {
+      descInput.addEventListener('input', function() {
+        charCounter.textContent = `${this.value.length} / 300`;
+      });
+    }
+
+    // Manejo de archivo y preview de imagen
+    if (photoInput && previewBox && previewImg) {
+      photoInput.addEventListener('change', function(e) {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+          if (file.size > 5 * 1024 * 1024) {
+            alert('La fotografía debe ser menor a 5MB.');
+            photoInput.value = '';
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            previewImg.src = evt.target.result;
+            if (placeholder) placeholder.style.display = 'none';
+            previewBox.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      if (btnRemovePhoto) {
+        btnRemovePhoto.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          photoInput.value = '';
+          previewImg.src = '';
+          previewBox.style.display = 'none';
+          if (placeholder) placeholder.style.display = 'flex';
+        });
+      }
+    }
+
+    // Cerrar modal de confirmación
+    function closeModal() {
+      if (modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modalAcceptBtn) modalAcceptBtn.addEventListener('click', closeModal);
+
+    // Validación y Envío del Formulario
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Limpiar errores previos
+      form.querySelectorAll('.biz-error-msg').forEach(el => el.textContent = '');
+      form.querySelectorAll('.biz-input, .biz-select, .biz-textarea').forEach(el => el.classList.remove('has-error'));
+
+      let isValid = true;
+      function markError(fieldId, msg) {
+        const field = document.getElementById(fieldId);
+        const err = document.getElementById('err-' + fieldId);
+        if (field) field.classList.add('has-error');
+        if (err) err.textContent = msg;
+        if (isValid && field) field.focus();
+        isValid = false;
+      }
+
+      const name = document.getElementById('bizName').value.trim();
+      const type = document.getElementById('bizType').value;
+      const owner = document.getElementById('bizOwner').value.trim();
+      const category = document.getElementById('bizCategory').value;
+      const department = document.getElementById('bizDepartment').value;
+      const municipality = document.getElementById('bizMunicipality').value.trim();
+      const address = document.getElementById('bizAddress').value.trim();
+      const phone = document.getElementById('bizPhone').value.trim();
+      const whatsapp = document.getElementById('bizWhatsapp').value.trim();
+      const email = document.getElementById('bizEmail').value.trim();
+      const website = document.getElementById('bizWebsite').value.trim();
+      const price = document.getElementById('bizPrice').value.trim();
+      const schedule = document.getElementById('bizSchedule').value.trim();
+      const description = descInput ? descInput.value.trim() : '';
+      const terms = document.getElementById('bizTerms').checked;
+
+      if (!name) markError('bizName', 'Por favor ingresa el nombre del negocio');
+      if (!type) markError('bizType', 'Selecciona el tipo de negocio');
+      if (!owner) markError('bizOwner', 'Ingresa el nombre del propietario o responsable');
+      if (!category) markError('bizCategory', 'Selecciona la categoría Baqueano');
+      if (!department) markError('bizDepartment', 'Selecciona el departamento');
+      if (!municipality) markError('bizMunicipality', 'Ingresa el municipio');
+      if (!address) markError('bizAddress', 'Indica la dirección o referencia exacta');
+      if (!phone) markError('bizPhone', 'Ingresa un teléfono principal de contacto');
+      if (!description) markError('bizDescription', 'Escribe una breve descripción del servicio');
+      if (!terms) markError('bizTerms', 'Debes aceptar los términos de turismo justo');
+
+      if (!isValid) return;
+
+      // Estado de carga en botón
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Registrando en Mesa Baqueano...';
+
+      const payload = {
+        name: name,
+        businessType: type,
+        owner: owner,
+        category: category,
+        department: department,
+        municipality: municipality,
+        address: address,
+        phone: phone,
+        whatsapp: whatsapp || phone,
+        email: email || '',
+        website: website || '',
+        priceApproxNio: price ? Number(price) : null,
+        schedule: schedule || '',
+        description: description,
+        hasPhoto: Boolean(photoInput && photoInput.files && photoInput.files.length > 0),
+        acceptedTerms: true,
+        source: 'index_landing_registration'
+      };
+
+      try {
+        // 1. Guardar en Firestore si el módulo está disponible
+        if (window.BaqueanoFirestore && typeof window.BaqueanoFirestore.registerBusiness === 'function') {
+          try {
+            await window.BaqueanoFirestore.registerBusiness(payload);
+          } catch (eFirestore) {
+            console.warn('[RegistroNegocios] Guardado local/offline:', eFirestore);
+          }
+        }
+
+        // 2. Construir mensaje enriquecido para WhatsApp Business
+        const waLines = [
+          '🇳🇮 *POSTULACIÓN DE NEGOCIO — BAQUEANO NICARAGUA*',
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          `🏪 *Negocio:* ${name}`,
+          `🏷️ *Tipo:* ${type}`,
+          `📂 *Categoría:* ${category}`,
+          `👤 *Responsable:* ${owner}`,
+          `📍 *Ubicación:* ${municipality}, ${department}`,
+          `🗺️ *Dirección:* ${address}`,
+          `📞 *Teléfono:* ${phone}`,
+          whatsapp ? `💬 *WhatsApp:* ${whatsapp}` : '',
+          email ? `✉️ *Email:* ${email}` : '',
+          website ? `🌐 *Enlace:* ${website}` : '',
+          price ? `💵 *Precio Base:* C$ ${price}` : '',
+          schedule ? `⏰ *Horario:* ${schedule}` : '',
+          `📝 *Descripción:* ${description}`,
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          '✅ _Aceptó términos de turismo justo sin intermediarios._'
+        ].filter(Boolean).join('\n');
+
+        const waUrl = `https://wa.me/50584431289?text=${encodeURIComponent(waLines)}`;
+
+        // 3. Poblar modal de resumen y abrir WhatsApp
+        if (modalSummary) {
+          modalSummary.innerHTML = `
+            <div style="margin-bottom: 0.35rem;"><strong>Negocio:</strong> ${name}</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Ubicación:</strong> ${municipality}, ${department}</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Responsable:</strong> ${owner}</div>
+            <div><strong>Contacto:</strong> ${phone}</div>
+          `;
+        }
+        if (modalWhatsAppBtn) {
+          modalWhatsAppBtn.href = waUrl;
+        }
+
+        if (modal) {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+        }
+
+        // Abrir WhatsApp en nueva pestaña
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+        // Limpiar formulario
+        form.reset();
+        if (charCounter) charCounter.textContent = '0 / 300';
+        if (previewBox && placeholder) {
+          previewBox.style.display = 'none';
+          placeholder.style.display = 'flex';
+        }
+
+      } catch (err) {
+        console.error('[RegistroNegocios] Error procesando postulación:', err);
+        alert('Hubo un inconveniente al procesar la solicitud. Por favor intenta nuevamente.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+    });
+
+  })();
+  </script>
+</body>
+</html>
