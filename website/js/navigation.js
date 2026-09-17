@@ -623,14 +623,28 @@ function initDropdownMiPais() {
   });
 }
 
+/**
+ * Asegura la carga reactiva del módulo de sesión de usuario (user-session.js)
+ * para adaptar el enlace del Navbar entre "Ops Center" (Admin/Auditor) y "Perfil" (Explorador).
+ */
+function ensureUserSessionLoaded() {
+  if (!window.BaqueanoSession) {
+    const script = document.createElement('script');
+    script.src = 'js/user-session.js';
+    document.head.appendChild(script);
+  }
+}
+
 // Auto-inicialización defensiva para páginas directas
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
+    ensureUserSessionLoaded();
     if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
     if (typeof initDynamicFooter === 'function') initDynamicFooter();
     if (typeof initDropdownMiPais === 'function') initDropdownMiPais();
   });
 } else {
+  ensureUserSessionLoaded();
   if (typeof initDynamicNavbar === 'function') initDynamicNavbar();
   if (typeof initDynamicFooter === 'function') initDynamicFooter();
   if (typeof initDropdownMiPais === 'function') initDropdownMiPais();
