@@ -1,0 +1,65 @@
+# ============================================================================
+# 🧭 BAQUEANO NICARAGUA — robots.txt DE PRODUCCIÓN
+# ============================================================================
+#
+# 🎯 POR QUÉ:
+# - Controlar qué partes del ecosistema web son indexables por motores de
+#   búsqueda. El panel administrativo NUNCA debe aparecer en Google.
+# - Permitir la indexación del contenido de ecoturismo que genera visibilidad
+#   para las comunidades campesinas de Nicaragua.
+#
+# ⚙️ CÓMO:
+# - Sección 1: Reglas para todos los crawlers (Googlebot, Bingbot, etc.)
+# - Sección 2: Permisos explícitos de acceso.
+# - Sección 3: Disallow de rutas administrativas y privadas.
+#
+# 📦 QUÉ:
+# - Protege: admin.html, scripts/, docs/, node_modules/
+# - Permite: Todas las páginas de contenido turístico público.
+# ============================================================================
+
+# Crawlers Generales
+User-agent: *
+
+# Rutas PÚBLICAS permitidas (implícito, se listan para claridad)
+# / — Home
+# /destinos.html — Destinos y Mapa
+# /historia.html — Historia de Nicaragua
+# /ambiental.html — Campaña Ambiental y Denuncias
+# /gastronomia.html — Gastronomía nicaragüense
+# /musica.html — Patrimonio Sonoro
+# /aliados.html — Cooperativas Aliadas
+# /mi-negocio.html — Portal de Anfitriones
+
+# Rutas ADMINISTRATIVAS y PRIVADAS — PROHIBIDAS
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /scripts/
+Disallow: /docs/
+Disallow: /node_modules/
+Disallow: /apps/
+Disallow: /packages/
+Disallow: /css/
+Disallow: /dev-admin.log
+Disallow: /dev-web.log
+Disallow: /*.log
+Disallow: /api/
+Disallow: /health
+
+# Assets públicos — permitidos
+Allow: /assets/images/
+Allow: /assets/audio/
+Allow: /assets/icons/
+
+# APK — permitido para descarga (no para indexación de contenido)
+Disallow: /assets/BaqueanoNicaragua.apk
+
+# Sitemap oficial
+Sitemap: https://app-baqueano.web.app/sitemap.xml
+
+# ============================================================================
+# NOTAS DE SEGURIDAD:
+# - El panel Ops Center (admin.html) tiene adicionalmente X-Robots-Tag: noindex
+#   configurado en firebase.json como cabecera HTTP para doble protección.
+# - Google Search Console requiere verificación de dominio independiente.
+# ============================================================================

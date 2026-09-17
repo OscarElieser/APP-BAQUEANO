@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — SITEMAP XML DE PRODUCCIÓN
+============================================================================
+
+🎯 POR QUÉ:
+- Permitir que los motores de búsqueda indexen correctamente el contenido
+  público de BAQUEANO Nicaragua, mejorando la visibilidad de destinos
+  turísticos sostenibles, historia y gastronomía en búsquedas de español.
+- Excluir rutas administrativas, borradores y contenido privado.
+
+⚙️ CÓMO:
+- Sitemap estático para las rutas HTML públicas verificadas.
+- Prioridad basada en importancia de página: Home (1.0) > Destinos (0.9) > etc.
+- changefreq refleja la frecuencia real de actualización del contenido.
+- URL canonical: https://app-baqueano.web.app (Firebase Hosting actual)
+
+📦 QUÉ:
+- 8 URLs públicas con metadata de prioridad y frecuencia.
+- NO incluye: admin.html, rutas privadas, borradores, favoritos, pagos.
+============================================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- HOME — Página Principal del Ecosistema -->
+  <url>
+    <loc>https://app-baqueano.web.app/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- DESTINOS — Catálogo de Destinos Protegidos + Mapa Interactivo -->
+  <url>
+    <loc>https://app-baqueano.web.app/destinos.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- HISTORIA — Patrimonio e Historia de Nicaragua -->
+  <url>
+    <loc>https://app-baqueano.web.app/historia.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- AMBIENTAL — Campaña Verde & Denuncias Ciudadanas -->
+  <url>
+    <loc>https://app-baqueano.web.app/ambiental.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- GASTRONOMÍA — Recetas y Patrimonio Culinario Nicaragüense -->
+  <url>
+    <loc>https://app-baqueano.web.app/gastronomia.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- MÚSICA — Patrimonio Sonoro Folclórico de Nicaragua -->
+  <url>
+    <loc>https://app-baqueano.web.app/musica.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ALIADOS — Cooperativas y Negocios Comunitarios Aliados -->
+  <url>
+    <loc>https://app-baqueano.web.app/aliados.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- MI NEGOCIO — Portal de Registro de Anfitriones -->
+  <url>
+    <loc>https://app-baqueano.web.app/mi-negocio.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- EXCLUIDAS EXPLÍCITAMENTE (NO añadir aquí):
+       admin.html - Noindex por X-Robots-Tag
+       Rutas de Cloud Functions /api/*
+       Rutas privadas, favoritos, pagos
+  -->
+
+</urlset>

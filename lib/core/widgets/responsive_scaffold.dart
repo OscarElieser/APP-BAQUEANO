@@ -655,13 +655,27 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           children: [
             // Drawer Header
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              child: BaqueanoLogo(
-                size: BaqueanoLogoSize.medium,
-                onTap: () {
-                  Navigator.pop(context);
-                  context.go('/home');
-                },
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Row(
+                children: [
+                  BaqueanoLogo.icon(
+                    size: 42,
+                    onTap: () {
+                      Navigator.pop(context);
+                      context.go('/home');
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: BaqueanoLogo(
+                      size: BaqueanoLogoSize.small,
+                      onTap: () {
+                        Navigator.pop(context);
+                        context.go('/home');
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 14),

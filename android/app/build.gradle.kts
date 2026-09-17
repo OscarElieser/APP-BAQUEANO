@@ -33,7 +33,7 @@ android {
         applicationId = "ni.baqueano.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -68,6 +68,18 @@ android {
                     throw GradleException("FALLO DE SEGURIDAD EN RELEASE: Falta el archivo 'android/key.properties'. Se prohíbe terminantemente firmar compilaciones release o AAB con credenciales debug.")
                 } else {
                     signingConfigs.getByName("debug")
+                }
+            }
+        }
+    }
+
+    applicationVariants.all {
+        val variant = this
+        outputs.all {
+            val output = this
+            if (output is com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
+                if (variant.buildType.name == "release") {
+                    output.outputFileName = "BaqueanoNicaragua.apk"
                 }
             }
         }

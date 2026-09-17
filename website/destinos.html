@@ -1,0 +1,2746 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CATÁLOGO DE DESTINOS, TURISMO & MOTOR FISCAL (destinos.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Presentar el catálogo territorial soberano de Nicaragua con precios reales,
+  transparentes y auditados en Córdobas (C$) y Dólares ($) para cada destino,
+  área protegida, experiencia gastronómica, hospedaje rural, hotel, museo y vida nocturna.
+- Erradicar la especulación y comisiones abusivas del 20-25% impuestas por OTAs foráneas,
+  permitiendo contacto directo con cooperativas campesinas, cocineras tradicionales y anfitriones.
+- Transparentar las finanzas del turismo con la Calculadora Rural de Retorno (ROI)
+  y el Cotizador Bimoneda con el régimen tributario de la Ley 306 INTUR.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Fichas interactivas con doble divisa (C$ NIO y USD) calculadas a la tasa oficial del Banco Central (36.65).
+- Desglose exhaustivo por ítems reales: entradas oficiales MARENA/comunitarias, guías acreditados,
+  equipamiento, alimentación tradicional y tarifas nocturnas por persona o grupo.
+- Filtros reactivos instantáneos por 13 categorías territoriales con persistencia de favoritos y likes.
+- Integración cartográfica Leaflet con sincronización bidireccional y enlaces satelitales GPS directos.
+
+📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
+- Catálogo completo con precios reales de Nicaragua en todas las categorías territoriales.
+- Desglose transparente en cada tarjeta (.dest-real-price-strip y .dest-price-breakdown).
+- Calculadora de Retorno Rural Campesino vs intermediarios externos.
+- Cotizador de Reserva Bimoneda con régimen de exoneración de la Ley 306.
+- Asistente de sendero inteligente Baqueano AI y baliza satelital de auxilio SOS 24/7.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinos Protegidos & Cotizador | Baqueano Nicaragua</title>
+  <meta name="description" content="Explora los destinos naturales protegidos de Nicaragua, calcula el retorno directo a cooperativas campesinas y cotiza bajo la Ley 306.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Leaflet.js — Mapa Interactivo Open Source & Satelital -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/videos.css">
+
+  <style>
+    /* Sección del Mapa Interactivo */
+    .map-section-wrapper {
+      margin-top: 5rem;
+      border: 1px solid rgba(22, 93, 111, 0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .map-header-bar {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(22, 93, 111, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    .map-header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+    }
+    .map-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+    }
+    .map-source-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-tech);
+    }
+    .map-source-badge.firestore { color: #10B981; }
+    .map-source-badge.seed { color: var(--arena-pinolera); }
+    #baqueanoInteractiveMap {
+      height: min(62vh, 560px);
+      min-height: 460px;
+      width: 100%;
+      background:
+        linear-gradient(135deg, rgba(244, 230, 193, 0.12), rgba(22, 93, 111, 0.24)),
+        #E7E3D8;
+    }
+    #baqueanoInteractiveMap.is-loading::before {
+      content: 'Cargando mapa territorial...';
+      position: absolute;
+      inset: 0;
+      z-index: 650;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.86), rgba(22, 93, 111, 0.72));
+      color: #FFFFFF;
+      font-family: var(--font-tech);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    #baqueanoInteractiveMap .leaflet-tile-pane {
+      filter: saturate(1.12) contrast(1.02) brightness(1.04);
+    }
+    /* Personalización del popup de Leaflet */
+    .leaflet-popup-content-wrapper {
+      background: rgba(15, 23, 42, 0.97) !important;
+      border: 1px solid rgba(22, 93, 111, 0.4) !important;
+      border-radius: 12px !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    }
+    .leaflet-popup-tip { background: rgba(15, 23, 42, 0.97) !important; }
+    .leaflet-popup-content { margin: 0 !important; }
+    .map-popup-inner { padding: 0.8rem 0.5rem; }
+    .map-popup-name { font-weight: 700; color: #FFFFFF; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .map-popup-dept { font-size: 0.78rem; color: var(--arena-pinolera); margin-bottom: 0.4rem; }
+    .map-popup-price { font-size: 0.82rem; color: #10B981; font-weight: 600; }
+    .leaflet-control-attribution { font-size: 0.65rem !important; }
+
+    /* ================================================================
+       🗺️ FOOTER MAP STRIP — Franja de mapa territorial en el pie de página
+       ================================================================ */
+    .footer-map-strip {
+      border-top: 1px solid rgba(22, 93, 111, 0.35);
+      margin-top: 3rem;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(22, 93, 111, 0.28);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Encabezado de la franja */
+    .footer-map-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding: 0.9rem 1.4rem;
+      background: rgba(22, 93, 111, 0.15);
+      border-bottom: 1px solid rgba(22, 93, 111, 0.2);
+    }
+
+    .footer-map-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-map-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulseDot 2s infinite;
+      flex-shrink: 0;
+    }
+
+    .footer-map-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-family: var(--font-tech);
+    }
+
+    .footer-stat-chip strong {
+      color: #FFFFFF;
+      font-weight: 800;
+    }
+
+    /* Cuerpo: mapa + panel de regiones */
+    .footer-map-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 280px;
+    }
+
+    /* Mini-mapa */
+    .footer-mini-map-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #footerMiniMap {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, rgba(22, 93, 111, 0.3), #0F172A);
+    }
+
+    #footerMiniMap .leaflet-tile-pane {
+      filter: saturate(1.15) contrast(1.08) brightness(0.92);
+    }
+
+    .footer-mini-map-badge {
+      position: absolute;
+      bottom: 8px;
+      left: 10px;
+      z-index: 500;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(22, 93, 111, 0.5);
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.7rem;
+      font-family: var(--font-tech);
+      font-weight: 700;
+      color: var(--arena-pinolera);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Panel lateral de regiones */
+    .footer-map-regions-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1.2rem 1.4rem;
+      background: rgba(15, 23, 42, 0.5);
+      border-left: 1px solid rgba(22, 93, 111, 0.2);
+      overflow-y: auto;
+      max-height: 280px;
+    }
+
+    .footer-regions-title {
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--arena-pinolera);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+      flex-shrink: 0;
+    }
+
+    .footer-regions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+    }
+
+    .footer-region-jump-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(22, 93, 111, 0.18);
+      border: 1px solid rgba(22, 93, 111, 0.3);
+      border-radius: 9px;
+      color: var(--text-secondary);
+      font-family: var(--font-tech);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .footer-region-jump-btn i {
+      font-size: 0.75rem;
+      color: var(--terracotta);
+      flex-shrink: 0;
+      width: 14px;
+      text-align: center;
+    }
+
+    .footer-region-jump-btn:hover {
+      background: rgba(246, 94, 1, 0.2);
+      border-color: rgba(246, 94, 1, 0.5);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(246, 94, 1, 0.2);
+    }
+
+    .footer-region-jump-btn:hover i {
+      color: #F65E01;
+    }
+
+    /* CTA — Botón principal de apertura de mapa completo */
+    .footer-map-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #F65E01, #165D6F);
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(246, 94, 1, 0.4);
+      box-shadow: 0 4px 18px rgba(246, 94, 1, 0.3);
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .footer-map-cta-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 28px rgba(246, 94, 1, 0.45);
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    /* Responsive: en pantallas pequeñas, apila verticalmente */
+    @media (max-width: 768px) {
+      .footer-map-body {
+        grid-template-columns: 1fr;
+      }
+      #footerMiniMap {
+        height: 200px;
+      }
+      .footer-map-regions-panel {
+        max-height: none;
+        border-left: none;
+        border-top: 1px solid rgba(22, 93, 111, 0.2);
+      }
+      .footer-regions-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-map-stats-row {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">Inicio</a>
+        <a href="destinos.html" class="active">Destinos</a>
+        <a href="historia.html">Historia</a>
+        <a href="ambiental.html">Ambiental</a>
+        <a href="gastronomia.html">Gastronomía</a>
+        <a href="musica.html">Música</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="admin.html">Ops Center</a>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        </button>
+        <button class="btn-nav-download open-download-modal-btn">
+          <i class="fa-solid fa-download"></i> App APK
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper">
+    <section class="destinations-section-pro">
+      <!-- HERO CON VIDEO DE FONDO Y HUD CINEMATOGRÁFICO -->
+      <div class="destinations-video-hero">
+        <video class="hero-bg-video" autoplay loop muted playsinline poster="assets/videos/turismo_playa_hospedajes.mp4
+        " type="video/mp4">
+        </video>
+        <div class="video-overlay-gradient"></div>
+        <div class="video-scanlines"></div>
+        
+        <div class="container hero-video-content">
+          <div class="badge-section-pill">
+            <span class="hud-beacon-led"></span>
+            <i class="fa-solid fa-compass"></i> Red de Ecoturismo & Estadía Soberana
+          </div>
+          <h1 class="section-headline animated-stroke-h2">Catálogo de Destinos, Turismo & Hospedaje</h1>
+          <p class="section-subtext">
+            Playas de surf, bahías tropicales, ríos sagrados, volcanes activos, hoteles ecológicos, hostales, cabañas campesinas, casas de alquiler, museos y vida nocturna en Nicaragua. Sin intermediarios foráneos y con balizas satelitales SOS 24/7.
+          </p>
+
+          <!-- BUSCADOR TÁCTICO INTEGRADO EN VIVO -->
+          <div class="dest-search-bar-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="destSearchInput" class="dest-search-input" placeholder="Buscar por playa, hotel, río, cabaña, museo o ciudad (ej. Ometepe, San Juan del Sur, Granada)...">
+            <button class="dest-search-btn" id="destSearchClearBtn" title="Limpiar búsqueda"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- FILTROS DINÁMICOS POR TODAS LAS CATEGORÍAS DE TURISMO, ESTADÍA Y GASTRONOMÍA -->
+        <div class="filter-pills-bar">
+          <button class="cat-filter-btn active" data-filter="all"><i class="fa-solid fa-globe"></i> Todos los Destinos</button>
+          <button class="cat-filter-btn" data-filter="favoritos" id="filterFavsBtn">
+            <i class="fa-solid fa-bookmark" style="color: var(--oro-noble);"></i> Mis Favoritos
+            <span class="badge-fav-count" id="favCountBadge" style="display:none; background: #EF4444; color: #FFF; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 9999px; margin-left: 0.3rem;">0</span>
+          </button>
+          <button class="cat-filter-btn" data-filter="gastronomia"><i class="fa-solid fa-utensils" style="color: var(--terracotta);"></i> Comida & Gastronomía</button>
+          <button class="cat-filter-btn" data-filter="playas"><i class="fa-solid fa-umbrella-beach"></i> Playas & Costas</button>
+          <button class="cat-filter-btn" data-filter="bahias"><i class="fa-solid fa-sailboat"></i> Bahías & Golfos</button>
+          <button class="cat-filter-btn" data-filter="rios"><i class="fa-solid fa-water"></i> Ríos & Cascadas</button>
+          <button class="cat-filter-btn" data-filter="volcanes"><i class="fa-solid fa-volcano"></i> Volcanes & Aventura</button>
+          <button class="cat-filter-btn" data-filter="selva"><i class="fa-solid fa-tree"></i> Nebliselva & Café</button>
+          <button class="cat-filter-btn" data-filter="islas"><i class="fa-solid fa-mountain-sun"></i> Islas & Biosferas</button>
+          <button class="cat-filter-btn" data-filter="hoteles"><i class="fa-solid fa-hotel"></i> Hoteles & Resorts</button>
+          <button class="cat-filter-btn" data-filter="hostales"><i class="fa-solid fa-bed"></i> Hostales & Lodges</button>
+          <button class="cat-filter-btn" data-filter="hospedajes"><i class="fa-solid fa-house-chimney-window"></i> Hospedajes & Cabañas</button>
+          <button class="cat-filter-btn" data-filter="casas-alquiler"><i class="fa-solid fa-key"></i> Casas de Alquiler</button>
+          <button class="cat-filter-btn" data-filter="museos"><i class="fa-solid fa-landmark"></i> Museos & Cultura</button>
+          <button class="cat-filter-btn" data-filter="discotecas"><i class="fa-solid fa-champagne-glasses"></i> Bares & Vida Nocturna</button>
+        </div>
+
+        <!-- GRID COMPLETO DE DESTINOS, HOSPEDAJES, GASTRONOMÍA Y TURISMO -->
+        <div class="destinations-showcase-grid">
+
+          <!-- ================================================================
+               SECCIÓN GASTRONOMÍA & COMIDA ANCESTRAL
+               ================================================================ -->
+
+          <!-- GASTRO 1: BAHO DOÑA VILMA -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_baho_vilma">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/baho.jpg" alt="Baho Doña Vilma" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_baho_vilma" data-initial-likes="89" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_baho_vilma" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-utensils"></i> Baho Tradicional</span>
+              <span class="dest-price-badge">C$ 180 / Plato (≈ $5.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya, Mercado Municipal</div>
+              <h3 class="dest-name-title">Comedor y Templo del Baho Doña Vilma</h3>
+              <p class="dest-description-text">
+                Carne de res marinada en naranja agria, yuca suave y plátano maduro cocidos al vapor durante 12 horas en hojas de chagüite. Acompañado de ensalada de repollo y chicha de maíz.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Vilma Morales</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Mercado Ernesto Fernández, Tramo #42, Masaya</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588924110">+505 8892-4110</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 160 – C$ 200 NIO</span></div>
+                <div class="price-usd">≈ $4.50 – $5.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Plato tradicional completo: <strong>C$ 180</strong> | Chicha de maíz fresca: <strong>C$ 30</strong> | Ensalada criolla: <strong>C$ 20</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588924110&text=Hola%20Do%C3%B1a%20Vilma,%20deseo%20consultar%20men%C3%BA%20y%20ordenar%20baho%20desde%20Baqueano%20Nicaragua" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9744" data-lng="-86.0942" data-name="Baho Doña Vilma" data-id="gastro_baho_vilma">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (480 reseñas)</span>
+                <span class="dest-coop-name">Cocinera Tradicional Masaya</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 2: QUESILLOS MI BOHÍO -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_quesillo_rosa">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/quesillo.jpg" alt="Quesillos Mi Bohío" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_quesillo_rosa" data-initial-likes="142" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_quesillo_rosa" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-cheese"></i> Quesillo en Hoja</span>
+              <span class="dest-price-badge">C$ 95 / Especial Doble (≈ $2.60 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Nagarote, León</div>
+              <h3 class="dest-name-title">Quesillos Mi Bohío & Doña Rosa</h3>
+              <p class="dest-description-text">
+                Tortilla caliente recién salida del comal, trenza de quesillo artesanal elástica bañada en crema ácida pura de hacienda, cebolla encurtida en vinagre de guineo y tiste helado.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Rosa Mendoza</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Km 92 Carretera Panamericana Norte, Nagarote</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584219904">+505 8421-9904</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 70 – C$ 120 NIO</span></div>
+                <div class="price-usd">≈ $1.90 – $3.30 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Quesillo sencillo: <strong>C$ 65</strong> | Especial doble trenza con crema: <strong>C$ 95</strong> | Vaso de tiste frío: <strong>C$ 35</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584219904&text=Hola%20Do%C3%B1a%20Rosa,%20deseo%20ordenar%20quesillos%20desde%20Baqueano%20Nicaragua" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.2667" data-lng="-86.5667" data-name="Quesillos Mi Bohío" data-id="gastro_quesillo_rosa">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (620 reseñas)</span>
+                <span class="dest-coop-name">Artesanos Lácteos Nagarote</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 3: ROSQUILLAS SOMOTEÑAS -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_rosquillas_somoto">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/rosquillas.jpg" alt="Rosquillas Somoteñas" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_rosquillas_somoto" data-initial-likes="118" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_rosquillas_somoto" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-cookie-bite"></i> Horno de Barro</span>
+              <span class="dest-price-badge">C$ 80 / Bolsa Familiar (≈ $2.20 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
+              <h3 class="dest-name-title">Rosquillería Tradicional Delicias del Norte</h3>
+              <p class="dest-description-text">
+                Rosquillas tostadas crujientes y hojaldras de maíz blanco con queso seco de montaña y dulce de caña horneadas en leña de roble. Servidas con café de altura recién chorreado.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Francisca Vílchez</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado Norte del Parque Central 1c al este, Somoto</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586421180">+505 8642-1180</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 120 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $3.30 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Bolsa personal 20 uds: <strong>C$ 40</strong> | Bolsa familiar 50 uds: <strong>C$ 80</strong> | Café chorreado: <strong>C$ 25</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586421180&text=Hola%20Do%C3%B1a%20Francisca,%20deseo%20encargar%20rosquillas%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.4833" data-lng="-86.5833" data-name="Rosquillas Somoteñas" data-id="gastro_rosquillas_somoto">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (530 reseñas)</span>
+                <span class="dest-coop-name">Taller Artesanal Somoto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 4: RONDÓN CREOLE MISS PEARL -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_rondon_pearl">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/rondon.jpg" alt="Rondón Caribeño" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_rondon_pearl" data-initial-likes="96" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_rondon_pearl" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-shrimp"></i> Rondón de Mariscos</span>
+              <span class="dest-price-badge">C$ 280 / Cazuela (≈ $7.60 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Bluefields, RACCS</div>
+              <h3 class="dest-name-title">Cocina Tradicional Creole Miss Pearl</h3>
+              <p class="dest-description-text">
+                Pescado pargo rojo fresco, langosta, yuca, quequisque, malanga y plátano cocidos a fuego lento en leche de coco recién extraída con chile congo y hierbas caribeñas.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Miss Pearl Hodgson</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Barrio Punta Fría, frente al Malecón de Bluefields</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587304522">+505 8730-4522</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 220 – C$ 350 NIO</span></div>
+                <div class="price-usd">≈ $6.00 – $9.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cazuela de pargo y mariscos: <strong>C$ 280</strong> | Pan de coco criollo: <strong>C$ 30</strong> | Ginger beer artesanal: <strong>C$ 40</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587304522&text=Hello%20Miss%20Pearl,%20I%20want%20to%20order%20Rondon%20from%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.0075" data-lng="-83.7636" data-name="Miss Pearl Rondon" data-id="gastro_rondon_pearl">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (390 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Creole Bluefields</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 5: VIGORÓN DOÑA TORIBIA -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_vigoron_toribia">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/vigoron.jpg" alt="Vigorón Doña Toribia" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_vigoron_toribia" data-initial-likes="135" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_vigoron_toribia" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-drumstick-bite"></i> Vigorón en Chagüite</span>
+              <span class="dest-price-badge">C$ 120 / Porción (≈ $3.30 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Parque Central, Granada</div>
+              <h3 class="dest-name-title">Vigorón Tradicional Granadino Doña Toribia</h3>
+              <p class="dest-description-text">
+                Cama de yuca harinosa al vapor servida en hoja de plátano, chicharrón con carne crujiente, ensalada de repollo con tomate criollo y vinagre de guineo casero. Refresco de grama natural.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietaria: <strong>Doña Toribia Pérez</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Kiosco #3 del Parque Central Colón, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50585023319">+505 8502-3319</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 90 – C$ 150 NIO</span></div>
+                <div class="price-usd">≈ $2.50 – $4.10 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Vigorón con chicharrón de carne: <strong>C$ 120</strong> | Refresco de grama con limón: <strong>C$ 30</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50585023319&text=Hola%20Do%C3%B1a%20Toribia,%20deseo%20ordenar%20vigor%C3%B3n%20desde%20Baqueano%20Granada" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9300" data-lng="-85.9550" data-name="Vigorón Doña Toribia" data-id="gastro_vigoron_toribia">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (510 reseñas)</span>
+                <span class="dest-coop-name">Tradición Familiar Granadina</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GASTRO 6: FRITANGA EL GÜEGÜENSE -->
+          <div class="dest-card-pro" data-category="gastronomia" data-id="gastro_fritanga_gueguense">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/comida/nacatamal.jpg" alt="Fritanga El Güegüense" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="gastro_fritanga_gueguense" data-initial-likes="160" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="gastro_fritanga_gueguense" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-fire-burner"></i> Asados al Carbón</span>
+              <span class="dest-price-badge">C$ 190 / Asado Mixto (≈ $5.20 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Plaza España, Managua</div>
+              <h3 class="dest-name-title">Fritanga Tradicional & Asados El Güegüense</h3>
+              <p class="dest-description-text">
+                Carne asada a las brasas de carbón vegetal, gallopinto campesino con queso frito dorado, tajadas verdes crocantes, maduro frito con cuajada y cacao helado con leche.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-user-check"></i>
+                  <span>Propietario: <strong>Don Jacinto Romero</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>De la Rotonda El Güegüense 2c abajo, Managua</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589113400">+505 8911-3400</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 150 – C$ 240 NIO</span></div>
+                <div class="price-usd">≈ $4.10 – $6.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Carne asada al carbón con gallopinto y tajadas: <strong>C$ 190</strong> | Queso frito: <strong>C$ 40</strong> | Cacao con leche: <strong>C$ 40</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589113400&text=Hola%20Don%20Jacinto,%20deseo%20ordenar%20fritanga%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.1364" data-lng="-86.2711" data-name="Fritanga El Güegüense" data-id="gastro_fritanga_gueguense">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (670 reseñas)</span>
+                <span class="dest-coop-name">Fritangueros de Managua</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               SECCIÓN DESTINOS NATURALES, TURISMO & HOSPEDAJE
+               ================================================================ -->
+
+          <!-- 1. SOMOTO (RÍOS / AGUAS) -->
+          <div class="dest-card-pro" data-category="rios" data-id="dest_somoto_001">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_somoto_001" data-initial-likes="210" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_somoto_001" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cañón Acuático</span>
+              <span class="dest-price-badge">C$ 550 / Tour Guiado (≈ $15.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Madriz, Nicaragua</div>
+              <h3 class="dest-name-title">Monumento Nacional Cañón de Somoto</h3>
+              <p class="dest-description-text">
+                Paredes rocosas de más de 120 metros de altura esculpidas por el Río Coco (Wangki). Natación protegida con chalecos salvavidas y baqueanos campesinos.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Coordinador: <strong>Don Gonzalo Tercero (Coop. Sonís)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Comunidad de Sonís, Km 230 Carretera Panamericana</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584431289">+505 8443-1289</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 900 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $25.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada MARENA: <strong>C$ 50</strong> nac. / <strong>C$ 120</strong> extr. | Guía baqueano Coop. Sonís: <strong>C$ 350 - 500</strong> grupo | Chaleco y bote: <strong>C$ 150</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Coop%20Somoto,%20deseo%20reservar%20gu%C3%ADa%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.4775" data-lng="-86.5800" data-name="Cañón de Somoto" data-id="dest_somoto_001">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (420 reseñas)</span>
+                <span class="dest-coop-name">Coop. Sonís Somoto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CERRO NEGRO (VOLCANES) -->
+          <div class="dest-card-pro" data-category="volcanes" data-id="dest_cerronegro_002">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/cerro_negro.jpg" alt="Volcán Cerro Negro" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_cerronegro_002" data-initial-likes="340" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_cerronegro_002" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-volcano"></i> Volcán Activo</span>
+              <span class="dest-price-badge">C$ 1,100 / Sandboarding (≈ $30.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León, Cordillera de los Maribios</div>
+              <h3 class="dest-name-title">Volcán Cerro Negro (Volcano Sandboarding)</h3>
+              <p class="dest-description-text">
+                El volcán más joven de Centroamérica (1850). Cono de escoria basáltica con fumarolas en la cumbre y descenso de adrenalina sobre arena volcánica a 60-80 km/h.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Guía Principal: <strong>Don Álvaro Mairena (Baqueanos Volcán)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Base del Volcán, Comarca Rota, León</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588442310">+505 8844-2310</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 1,100 – C$ 1,500 NIO</span></div>
+                <div class="price-usd">≈ $30.00 – $41.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada MARENA: <strong>C$ 180</strong> nac. / <strong>C$ 365</strong> extr. | Tabla protectora, overol y guía Los Maribios: <strong>C$ 920</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588442310&text=Hola%20Gu%C3%ADas%20Cerro%20Negro,%20deseo%20tour%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.5063" data-lng="-86.7017" data-name="Volcán Cerro Negro" data-id="dest_cerronegro_002">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (610 reseñas)</span>
+                <span class="dest-coop-name">Guías Los Maribios</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. OMETEPE (ISLAS) -->
+          <div class="dest-card-pro" data-category="islas" data-id="dest_ometepe_003">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_ometepe_003" data-initial-likes="480" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_ometepe_003" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Reserva Biosfera</span>
+              <span class="dest-price-badge">C$ 750 / Día Aventura (≈ $20.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Lago Cocibolca</div>
+              <h3 class="dest-name-title">Isla de Ometepe (Concepción & Maderas)</h3>
+              <p class="dest-description-text">
+                Oasis en medio del Gran Lago con dos volcanes colosales. Petroglifos sagrados, senderismo en bosque nuboso, Ojo de Agua medicinal y fincas agroecológicas.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red Comunitaria: <strong>Finca Magdalena & Hospederías Ometepe</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Faldas del Volcán Maderas, Comunidad Balgüe</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587220199">+505 8722-0199</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 550 – C$ 1,400 NIO</span></div>
+                <div class="price-usd">≈ $15.00 – $38.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Ferry San Jorge: <strong>C$ 50 - 80</strong> | Ojo de Agua: <strong>C$ 180</strong> nac. / <strong>C$ 365</strong> extr. | Guía volcán: <strong>C$ 750</strong> | Cabaña Balgüe: <strong>C$ 600</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587220199&text=Hola%20Ometepe%20Viva,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.5206" data-lng="-85.5700" data-name="Isla de Ometepe" data-id="dest_ometepe_003">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (890 reseñas)</span>
+                <span class="dest-coop-name">Coop. Ometepe Verde</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. PLAYA MADERAS (PLAYAS) -->
+          <div class="dest-card-pro" data-category="playas" data-id="dest_maderas_004">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80" alt="Playa Maderas" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_maderas_004" data-initial-likes="290" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_maderas_004" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Playa & Surf</span>
+              <span class="dest-price-badge">C$ 920 / Clase de Surf (≈ $25.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Playa Maderas (Santuario del Surf)</h3>
+              <p class="dest-description-text">
+                Famosa por sus formaciones rocosas esculpidas por el oleaje del Pacífico y rompientes constantes durante todo el año. Puestas de sol de fuego y vida playera.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Escuela Local: <strong>Baqueanos del Surf Maderas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Acceso a Playa Maderas, 8km norte de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589110034">+505 8911-0034</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 370 – C$ 1,200 NIO</span></div>
+                <div class="price-usd">≈ $10.00 – $33.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Shuttle SJDS ida/vuelta: <strong>C$ 180</strong> | Alquiler tabla día completo: <strong>C$ 370</strong> | Clase surf 2h con baqueano: <strong>C$ 920</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589110034&text=Hola%20Surf%20Maderas,%20deseo%20clase%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.2952" data-lng="-85.9083" data-name="Playa Maderas" data-id="dest_maderas_004">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (530 reseñas)</span>
+                <span class="dest-coop-name">Escuela Surf Maderas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. BAHÍA DE SAN JUAN DEL SUR (BAHÍAS) -->
+          <div class="dest-card-pro" data-category="bahias" data-id="dest_bahia_sjds">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&auto=format&fit=crop&q=80" alt="Bahía de San Juan del Sur" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_bahia_sjds" data-initial-likes="360" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_bahia_sjds" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-sailboat"></i> Bahía Natural</span>
+              <span class="dest-price-badge">C$ 550 / Paseo Bahía (≈ $15.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Costa del Pacífico</div>
+              <h3 class="dest-name-title">Bahía de San Juan del Sur & Mirador del Cristo</h3>
+              <p class="dest-description-text">
+                Bahía protegida en herradura con puerto de pescadores artesanales, veleros al atardecer, malecón gastronómico y vista panorámica desde el Cristo de la Misericordia.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Coordinador: <strong>Coop. Pescadores y Lancheros SJDS</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Muelle Municipal, Malecón de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588771120">+505 8877-1120</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 1,300 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $35.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Acceso Mirador Cristo: <strong>C$ 75</strong> nac. / <strong>C$ 180</strong> extr. | Paseo en lancha artesanal de pescadores: <strong>C$ 450 - 550</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588771120&text=Hola%20Pescadores%20SJDS,%20deseo%20tour%20en%20lancha%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.2500" data-lng="-85.8700" data-name="Bahía San Juan del Sur" data-id="dest_bahia_sjds">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (710 reseñas)</span>
+                <span class="dest-coop-name">Pescadores San Juan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. CORN ISLAND (ISLAS) -->
+          <div class="dest-card-pro" data-category="islas" data-id="dest_corn_island">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/corn_island.jpg" alt="Corn Island" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_corn_island" data-initial-likes="520" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_corn_island" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mountain-sun"></i> Paraíso Caribeño</span>
+              <span class="dest-price-badge">C$ 1,280 / Cabaña Mar (≈ $35.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> RACCS, Caribe Sur</div>
+              <h3 class="dest-name-title">Big Corn Island & Little Corn Island</h3>
+              <p class="dest-description-text">
+                Joya caribeña con arrecifes de coral intactos, buceo con tiburones nodriza, playas de arena blanca como talco, rondón de mariscos fresco y cultura creole bilingüe.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red Turística: <strong>Coop. Isleña Creole Corn Island</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>South End & Otto Beach, Corn Island</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586903344">+505 8690-3344</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 900 – C$ 2,400 NIO</span></div>
+                <div class="price-usd">≈ $25.00 – $65.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Panga Little Corn: <strong>C$ 300</strong> | Snorkel en arrecife: <strong>C$ 1,100</strong> | Cabaña playa noche: <strong>C$ 1,280</strong> | Taxi carrera fija: <strong>C$ 35</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586903344&text=Hello%20Corn%20Island%20Coop,%20I%20want%20to%20book%20from%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.1720" data-lng="-83.0580" data-name="Corn Island" data-id="dest_corn_island">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (910 reseñas)</span>
+                <span class="dest-coop-name">Coop. Turística Creole</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. SELVA NEGRA (SELVA) -->
+          <div class="dest-card-pro" data-category="selva" data-id="dest_selva_negra">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/selva_negra.jpg" alt="Selva Negra Matagalpa" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_selva_negra" data-initial-likes="390" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_selva_negra" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-tree"></i> Bosque Nuboso</span>
+              <span class="dest-price-badge">C$ 1,650 / Cabaña Montaña (≈ $45.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Cordillera Dariense, Matagalpa</div>
+              <h3 class="dest-name-title">Reserva Ecológica Selva Negra & Finca Cafetalera</h3>
+              <p class="dest-description-text">
+                Nebliselva virgen a 1,400 msnm con senderos de orquídeas, hábitat del Quetzal resplandeciente, cata de café ecológico y prácticas agroforestales de carbono neutral.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Comunidad Agroecológica Selva Negra</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Km 140 Carretera Matagalpa - Jinotega</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584332210">+505 8433-2210</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 3,100 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $85.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Day Pass senderos: <strong>C$ 180</strong> (100% consumible) | Tour café y aves: <strong>C$ 450</strong> | Cabaña rústica 2 pax: <strong>C$ 1,650</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584332210&text=Hola%20Selva%20Negra,%20deseo%20reservar%20caba%C3%B1a%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.0031" data-lng="-85.9125" data-name="Selva Negra" data-id="dest_selva_negra">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (780 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Selva Negra</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. LAGUNA DE APOYO (RÍOS / AGUAS) -->
+          <div class="dest-card-pro" data-category="rios" data-id="dest_laguna_apoyo">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="dest_laguna_apoyo" data-initial-likes="410" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="dest_laguna_apoyo" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-water"></i> Cráter Volcánico</span>
+              <span class="dest-price-badge">C$ 440 / Kayak & Day Pass (≈ $12.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Masaya / Catarina</div>
+              <h3 class="dest-name-title">Reserva Natural Laguna de Apoyo</h3>
+              <p class="dest-description-text">
+                Cráter volcánico colapsado con aguas termales minerales de transparencia turquesa. Kayak ecológico, natación protegida y avistamiento del tucán verde.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Posada Anfitriona: <strong>Posada Ecológica La Abuela</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado Suroriente de la Laguna, Entrada por Catarina</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588665544">+505 8866-5544</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 250 – C$ 1,500 NIO</span></div>
+                <div class="price-usd">≈ $7.00 – $41.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Day Pass posada privada: <strong>C$ 250</strong> (consumible) | Kayak por hora: <strong>C$ 150</strong> | Habitación laguna noche: <strong>C$ 1,100</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588665544&text=Hola%20Posada%20La%20Abuela,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9200" data-lng="-86.0300" data-name="Laguna de Apoyo" data-id="dest_laguna_apoyo">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (750 reseñas)</span>
+                <span class="dest-coop-name">Custodios del Cráter</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. VOLCÁN MASAYA (VOLCANES) -->
+          <div class="dest-card-pro" data-category="volcanes" data-id="place_masaya_021">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_masaya_021" data-initial-likes="495" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_masaya_021" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-fire"></i> Lago de Lava</span>
+              <span class="dest-price-badge">C$ 180 / Entrada Cráter (≈ $5.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Nindirí, Masaya</div>
+              <h3 class="dest-name-title">Parque Nacional Volcán Masaya (Popogatepe)</h3>
+              <p class="dest-description-text">
+                El cráter Santiago y su lago de lava incandescente activo. Cruz de Bobadilla, senderos por coladas basálticas, túneles de murciélagos y museo vulcanológico oficial.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Guardaparques MARENA & Guías de Nindirí</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Km 23 Carretera a Masaya, Nindirí</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525225415">+505 2522-5415</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 365 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $10.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada diurna: <strong>C$ 50</strong> nac. / <strong>C$ 180</strong> extr. | Tour nocturno lago de lava: <strong>C$ 180</strong> nac. / <strong>C$ 365</strong> extr.</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Gu%C3%ADas%20Masaya,%20deseo%20visitar%20el%20cr%C3%A1ter%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9854" data-lng="-86.1614" data-name="Volcán Masaya" data-id="place_masaya_021">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (980 reseñas)</span>
+                <span class="dest-coop-name">Guías Volcán Popogatepe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. CASCADA LA LUNA (RÍOS) -->
+          <div class="dest-card-pro" data-category="rios" data-id="place_laluna_019">
+            <div class="dest-card-img-wrap">
+              <img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada La Luna" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_laluna_019" data-initial-likes="310" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_laluna_019" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-cloud-rain"></i> Nebliselva & Cascada</span>
+              <span class="dest-price-badge">C$ 400 / Canopy & Sendero (≈ $11.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> El Cuá, Jinotega</div>
+              <h3 class="dest-name-title">Cascada La Luna & Ruta del Café de Altura</h3>
+              <p class="dest-description-text">
+                Imponente caída de agua en el corazón de la nebliselva jinotegana. Canopy con tirolesas sobre el caudal de la catarata, pozas naturales y cata de café de estricta altura (SHG).
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Cooperativa: <strong>Asoc. Ecoturística Campesina El Cuá</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Carretera Jinotega - El Cuá, Km 182</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586552211">+505 8655-2211</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 100 – C$ 550 NIO</span></div>
+                <div class="price-usd">≈ $2.70 – $15.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada sendero y mirador: <strong>C$ 100</strong> | Canopy tirolesa catarata: <strong>C$ 400</strong> | Degustación café SHG: <strong>C$ 150</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586552211&text=Hola%20Cascada%20La%20Luna,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="13.3720" data-lng="-85.6900" data-name="Cascada La Luna" data-id="place_laluna_019">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (310 reseñas)</span>
+                <span class="dest-coop-name">Ecoturismo El Cuá</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. REFUGIO LA FLOR (PLAYAS) -->
+          <div class="dest-card-pro" data-category="playas" data-id="place_laflor_016">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&auto=format&fit=crop&q=80" alt="Refugio La Flor" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_laflor_016" data-initial-likes="480" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_laflor_016" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-umbrella-beach"></i> Santuario Marino</span>
+              <span class="dest-price-badge">C$ 200 / Desove Tortugas (≈ $5.50 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Refugio de Vida Silvestre La Flor & Playa El Coco</h3>
+              <p class="dest-description-text">
+                Arenas vírgenes del Pacífico sur y santuario biológico mundial donde anidan miles de tortugas paslama en arribadas masivas nocturnas bajo luz de luna.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Custodios: <strong>Guardaparques Comunitarios La Flor</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>20km al sur de San Juan del Sur, Rivas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587661199">+505 8766-1199</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 100 – C$ 550 NIO</span></div>
+                <div class="price-usd">≈ $2.70 – $15.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada MARENA: <strong>C$ 100</strong> nac. / <strong>C$ 200</strong> extr. | Guía nocturno guardaparque: <strong>C$ 250</strong> por grupo</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587661199&text=Hola%20Guardas%20La%20Flor,%20deseo%20visitar%20arribada%20de%20tortugas%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.1390" data-lng="-85.7980" data-name="Refugio La Flor" data-id="place_laflor_016">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (480 reseñas)</span>
+                <span class="dest-coop-name">Conservación Marina del Sur</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. MORGAN'S ROCK (HOTELES) -->
+          <div class="dest-card-pro" data-category="hoteles" data-id="place_morgans_006">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=80" alt="Morgan's Rock Eco-Lodge" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_morgans_006" data-initial-likes="310" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_morgans_006" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-hotel"></i> Eco-Lodge Costero</span>
+              <span class="dest-price-badge">C$ 7,300 / Bungalow Bosque (≈ $200.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Morgan's Rock Eco-Lodge & Reserva Marina</h3>
+              <p class="dest-description-text">
+                Bungalows de madera nativa sobre las copas de los árboles en playa privada de 4,000 acres de reserva silvestre. Desayuno campesino de granja orgánica y avistamiento de perezosos.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Reserva Natural Playa Ocotal</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Bahía de Ocotal, 12km al norte de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50586702111">+505 8670-2111</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 7,300 – C$ 11,000 NIO</span></div>
+                <div class="price-usd">≈ $200.00 – $300.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Bungalow sobre los árboles en playa privada | Desayuno a la carta de granja incluido | Senderos privados</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50586702111&text=Hola%20Morgans%20Rock,%20deseo%20reservar%20estancia%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.3120" data-lng="-85.9230" data-name="Morgan's Rock" data-id="place_morgans_006">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (310 reseñas)</span>
+                <span class="dest-coop-name">Reserva Playa Ocotal</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. HOTEL DARÍO COLONIAL (HOTELES) -->
+          <div class="dest-card-pro" data-category="hoteles" data-id="place_dario_007">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80" alt="Hotel Darío Colonial" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_dario_007" data-initial-likes="460" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_dario_007" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-building-columns"></i> Hotel Colonial</span>
+              <span class="dest-price-badge">C$ 2,600 / Habitación (≈ $70.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial, Granada</div>
+              <h3 class="dest-name-title">Hotel Darío Colonial Patrimonio</h3>
+              <p class="dest-description-text">
+                Arquitectura neoclásica restaurada del siglo XIX con patios coloniales, piscina refrescante y jardines tropicales en plena Calle La Calzada, a pasos del Gran Lago.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Administración: <strong>Patrimonio Hotelero Granadino</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle La Calzada, frente a Iglesia Guadalupe, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525523400">+505 2552-3400</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 2,600 – C$ 3,600 NIO</span></div>
+                <div class="price-usd">≈ $70.00 – $98.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Habitación colonial doble con A/C | Desayuno típico nicaragüense incluido | Piscina en patio central</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50525523400&text=Hola%20Hotel%20Dar%C3%ADo,%20deseo%20reservar%20habitaci%C3%B3n%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9298" data-lng="-85.9535" data-name="Hotel Darío" data-id="place_dario_007">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (460 reseñas)</span>
+                <span class="dest-coop-name">Patrimonio Granadino</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. THE TREEHOUSE NICARAGUA (HOSTALES) -->
+          <div class="dest-card-pro" data-category="hostales" data-id="place_treehouse_008">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&auto=format&fit=crop&q=80" alt="The Treehouse Nicaragua" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_treehouse_008" data-initial-likes="620" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_treehouse_008" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-tree"></i> Hostal de Selva</span>
+              <span class="dest-price-badge">C$ 550 / Cama Árboles (≈ $15.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Volcán Mombacho, Granada</div>
+              <h3 class="dest-name-title">The Treehouse Nicaragua (Hostal en los Árboles)</h3>
+              <p class="dest-description-text">
+                Hostal de aventura suspendido entre las copas de los árboles en las faldas del Volcán Mombacho. Puentes colgantes, piscina con vistas a la selva y ambiente comunitario.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Comunidad: <strong>Baqueanos del Mombacho</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Laderas este del Volcán Mombacho, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588214300">+505 8821-4300</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 550 – C$ 800 NIO</span></div>
+                <div class="price-usd">≈ $15.00 – $22.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cama en dormitorio suspendido: <strong>C$ 550</strong> | Acceso a puentes colgantes y senderos selváticos incluido</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588214300&text=Hola%20Treehouse,%20deseo%20reservar%20cama%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.8540" data-lng="-85.9780" data-name="The Treehouse" data-id="place_treehouse_008">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (620 reseñas)</span>
+                <span class="dest-coop-name">Comunidad Mombacho</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. POCO A POCO HOSTEL (HOSTALES) -->
+          <div class="dest-card-pro" data-category="hostales" data-id="place_pocoapoco_022">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop&q=80" alt="Poco a Poco Hostel" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_pocoapoco_022" data-initial-likes="540" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_pocoapoco_022" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mug-saucer"></i> Hostal Urbano</span>
+              <span class="dest-price-badge">C$ 450 / Cama Compartida (≈ $12.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> León Colonial, León</div>
+              <h3 class="dest-name-title">Poco a Poco Hostel & Cultural Café</h3>
+              <p class="dest-description-text">
+                Hostal colonial acogedor con piscina en patio central, terraza panorámica para atardeceres leoneses, café de cortesía ilimitado y talleres de intercambio cultural.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red: <strong>Hostales Tradicionales de León</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado norte Iglesia San Juan Bautista, León</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50587213455">+505 8721-3455</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 450 – C$ 650 NIO</span></div>
+                <div class="price-usd">≈ $12.00 – $18.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cama en dormitorio con A/C nocturno: <strong>C$ 450</strong> | Café segoviano ilimitado y piscina colonial incluida</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50587213455&text=Hola%20Poco%20a%20Poco,%20deseo%20consultar%20cama%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="12.4370" data-lng="-86.8790" data-name="Poco a Poco Hostel" data-id="place_pocoapoco_022">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (540 reseñas)</span>
+                <span class="dest-coop-name">Hostales de León</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16. FINCA MAGDALENA (HOSPEDAJES) -->
+          <div class="dest-card-pro" data-category="hospedajes" data-id="place_magdalena_009">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&auto=format&fit=crop&q=80" alt="Finca Magdalena" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_magdalena_009" data-initial-likes="390" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_magdalena_009" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-mug-hot"></i> Finca Comunitaria</span>
+              <span class="dest-price-badge">C$ 500 / Habitación Rural (≈ $14.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Balgüe, Ometepe, Rivas</div>
+              <h3 class="dest-name-title">Finca Magdalena Eco-Lodge Campesino</h3>
+              <p class="dest-description-text">
+                Cooperativa agroecológica de café orgánico gestionada por 24 familias campesinas. Punto de partida oficial para el ascenso al cráter y laguna del Volcán Maderas.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Cooperativa: <strong>Coop. Carlos Díaz Cajina (24 Familias)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Faldas del Volcán Maderas, Balgüe, Isla de Ometepe</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584440019">+505 8444-0019</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 500 – C$ 900 NIO</span></div>
+                <div class="price-usd">≈ $14.00 – $25.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Habitación rústica privada: <strong>C$ 500</strong> | Desayuno campesino con café orgánico: <strong>C$ 120</strong> | Senderos petroglifos</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584440019&text=Hola%20Finca%20Magdalena,%20deseo%20reservar%20hospedaje%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.4680" data-lng="-85.5120" data-name="Finca Magdalena" data-id="place_magdalena_009">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (390 reseñas)</span>
+                <span class="dest-coop-name">Coop. Carlos Díaz Cajina</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17. POSADA SAN RAMÓN (HOSPEDAJES) -->
+          <div class="dest-card-pro" data-category="hospedajes" data-id="place_posadasanramon_023">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&auto=format&fit=crop&q=80" alt="Posada San Ramón" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_posadasanramon_023" data-initial-likes="290" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_posadasanramon_023" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-seedling"></i> Posada Ecológica</span>
+              <span class="dest-price-badge">C$ 650 / Cabaña Campesina (≈ $18.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Ramón, Ometepe, Rivas</div>
+              <h3 class="dest-name-title">Posada Rural San Ramón Ometepe</h3>
+              <p class="dest-description-text">
+                Cabañas ecológicas familiares en contacto directo con la naturaleza junto a la Estación Biológica y la Cascada de San Ramón. Energía solar limpia y cocina casera de huerto.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Familia Anfitriona: <strong>Familia Álvarez (Red Comunitaria Ometepe)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Comunidad de San Ramón, vertiente sur del Volcán Maderas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589332204">+505 8933-2204</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 650 – C$ 1,100 NIO</span></div>
+                <div class="price-usd">≈ $18.00 – $30.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Cabaña familiar de madera con energía solar: <strong>C$ 650</strong> | Acceso a sendero y Cascada de San Ramón: <strong>C$ 100</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589332204&text=Hola%20Posada%20San%20Ram%C3%B3n,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.4420" data-lng="-85.4650" data-name="Posada San Ramón" data-id="place_posadasanramon_023">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (290 reseñas)</span>
+                <span class="dest-coop-name">Red Comunitaria Ometepe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 18. VILLA VISTA REDONDA (CASAS-ALQUILER) -->
+          <div class="dest-card-pro" data-category="casas-alquiler" data-id="place_vistaredonda_010">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=80" alt="Villa Vista Redonda" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_vistaredonda_010" data-initial-likes="180" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_vistaredonda_010" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-house-chimney-window"></i> Villa Costera</span>
+              <span class="dest-price-badge">C$ 7,500 / Villa Completa (≈ $200.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Tola, Costa Esmeralda, Rivas</div>
+              <h3 class="dest-name-title">Villa Vista Redonda (Emerald Coast)</h3>
+              <p class="dest-description-text">
+                Villa privada sobre el acantilado con piscina infinita privada, 4 habitaciones climatizadas, terraza panorámica para puestas de sol y acceso directo a Playa Redonda.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Red Local: <strong>Anfitriones Costeros de Tola</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Playa Redonda, Municipio de Tola, Rivas</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588117766">+505 8811-7766</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 7,500 – C$ 12,000 NIO</span></div>
+                <div class="price-usd">≈ $200.00 – $330.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Villa completa para 8 personas | Piscina infinita privada | Cocina equipada y salida directa al mar</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588117766&text=Hola%20Villa%20Redonda,%20deseo%20alquilar%20villa%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.4150" data-lng="-86.0680" data-name="Villa Vista Redonda" data-id="place_vistaredonda_010">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (180 reseñas)</span>
+                <span class="dest-coop-name">Red Villas Tola</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 19. CASA SEÑORIAL GRANADA (CASAS-ALQUILER) -->
+          <div class="dest-card-pro" data-category="casas-alquiler" data-id="place_casasenorial_024">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80" alt="Casa Señorial Granada" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_casasenorial_024" data-initial-likes="240" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_casasenorial_024" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-key"></i> Casona Señorial</span>
+              <span class="dest-price-badge">C$ 5,500 / Mansión Completa (≈ $150.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Centro Histórico, Granada</div>
+              <h3 class="dest-name-title">Casa Señorial Colonial Granada</h3>
+              <p class="dest-description-text">
+                Mansión colonial completa de 4 habitaciones con arcos de tejas centenarias, piscina privada en patio central, corredores de madera preciosa y cocinera tradicional bajo pedido.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Anfitrión: <strong>Don Sergio Chamorro</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle El Consulado, 2c al lago, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50584551100">+505 8455-1100</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 5,500 – C$ 8,800 NIO</span></div>
+                <div class="price-usd">≈ $150.00 – $240.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Casa colonial privada completa (hasta 10 personas) | Piscina en patio central | Servicio doméstico disponible</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50584551100&text=Hola%20Don%20Sergio,%20deseo%20alquilar%20la%20Casona%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9310" data-lng="-85.9520" data-name="Casa Señorial Granada" data-id="place_casasenorial_024">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (240 reseñas)</span>
+                <span class="dest-coop-name">Casas Patrimoniales Granada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 20. MUSEO SAN FRANCISCO (MUSEOS) -->
+          <div class="dest-card-pro" data-category="museos" data-id="place_sanfrancisco_011">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop&q=80" alt="Museo y Convento San Francisco" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_sanfrancisco_011" data-initial-likes="510" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_sanfrancisco_011" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-landmark"></i> Patrimonio Histórico</span>
+              <span class="dest-price-badge">C$ 50 / Entrada Nacional (≈ $1.40 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial, Granada</div>
+              <h3 class="dest-name-title">Museo y Convento San Francisco (1529)</h3>
+              <p class="dest-description-text">
+                El convento más antiguo de Centroamérica con la colección original de estatuaria prehispánica de la Isla Zapatera esculpida en roca basáltica hace más de 1,200 años.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Guías: <strong>Asociación de Guías Patrimoniales de Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle Cervantes y Calle Corral, Granada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525522770">+505 2552-2770</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 180 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $5.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada nacional: <strong>C$ 50</strong> NIO | Extranjeros: <strong>C$ 180</strong> NIO (≈ $5 USD) | Guía patrimonial: <strong>C$ 150</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50525522770&text=Hola%20Gu%C3%ADas%20San%20Francisco,%20deseo%20visita%20guiada%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9312" data-lng="-85.9518" data-name="Museo San Francisco" data-id="place_sanfrancisco_011">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.9 (510 reseñas)</span>
+                <span class="dest-coop-name">Guías Patrimoniales Granada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 21. FORTALEZA EL CASTILLO (MUSEOS) -->
+          <div class="dest-card-pro" data-category="museos" data-id="place_elcastillo_012">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1599827556794-a28a2a4b8700?w=800&auto=format&fit=crop&q=80" alt="Fortaleza La Inmaculada" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_elcastillo_012" data-initial-likes="420" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_elcastillo_012" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-chess-rook"></i> Fortaleza Colonial</span>
+              <span class="dest-price-badge">C$ 50 / Entrada Fortaleza (≈ $1.40 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> El Castillo, Río San Juan</div>
+              <h3 class="dest-name-title">Fortaleza de la Inmaculada Concepción</h3>
+              <p class="dest-description-text">
+                Baluarte militar del siglo XVII sobre el raudal del Río San Juan. Hito histórico donde Rafaela Herrera repelió la invasión pirata británica de 1762. Museo de sitio y cañones originales.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Guías Locales: <strong>Asociación de Baqueanos de Río San Juan</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Loma de la Fortaleza, El Castillo, Río San Juan</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50588339910">+505 8833-9910</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 50 – C$ 180 NIO</span></div>
+                <div class="price-usd">≈ $1.40 – $5.00 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada nacional: <strong>C$ 50</strong> NIO | Extranjeros: <strong>C$ 180</strong> NIO (≈ $5 USD) | Museo de piratería incluido</span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50588339910&text=Hola%20Gu%C3%ADas%20El%20Castillo,%20deseo%20visita%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.0180" data-lng="-84.3970" data-name="Fortaleza El Castillo" data-id="place_elcastillo_012">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 5.0 (420 reseñas)</span>
+                <span class="dest-coop-name">Guías de Río San Juan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 22. ARRIBAS SUNSET (DISCOTECAS) -->
+          <div class="dest-card-pro" data-category="discotecas" data-id="place_arribas_013">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80" alt="Arribas Sunset Lounge" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_arribas_013" data-initial-likes="650" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_arribas_013" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-martini-glass-citrus"></i> Club Frente al Mar</span>
+              <span class="dest-price-badge">C$ 150 / Cóctel Casa (≈ $4.00 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
+              <h3 class="dest-name-title">Arribas Sunset Lounge & Club</h3>
+              <p class="dest-description-text">
+                Música en vivo al atardecer, mixología con ron Flor de Caña, pista sobre la arena frente al Pacífico y gastronomía marina fresca con ambiente vibrante.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Coordinación: <strong>San Juan del Sur Nightlife</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Costado sur del Malecón de San Juan del Sur</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50589221144">+505 8922-1144</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 70 – C$ 350 NIO</span></div>
+                <div class="price-usd">≈ $1.90 – $9.50 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Entrada libre | Cerveza Toña helada: <strong>C$ 70</strong> | Cóctel con Flor de Caña: <strong>C$ 150 - 220</strong> | Picada mariscos: <strong>C$ 350</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50589221144&text=Hola%20Arribas,%20deseo%20reservar%20mesa%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.2540" data-lng="-85.8720" data-name="Arribas Sunset" data-id="place_arribas_013">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.7 (650 reseñas)</span>
+                <span class="dest-coop-name">San Juan Nightlife</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 23. CALLE LA CALZADA (DISCOTECAS) -->
+          <div class="dest-card-pro" data-category="discotecas" data-id="place_calzada_014">
+            <div class="dest-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80" alt="Calle La Calzada" class="dest-card-img" loading="lazy">
+              <div class="dest-floating-actions">
+                <button class="btn-floating-like btn-action-like" data-id="place_calzada_014" data-initial-likes="890" title="Me gusta"><i class="fa-regular fa-heart"></i></button>
+                <button class="btn-floating-fav btn-action-fav" data-id="place_calzada_014" title="Guardar"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <span class="dest-badge-corner"><i class="fa-solid fa-music"></i> Boulevard Bohemio</span>
+              <span class="dest-price-badge">C$ 70 / Toña Helada (≈ $1.90 USD)</span>
+            </div>
+            <div class="dest-body-pro">
+              <div class="dest-location-tag"><i class="fa-solid fa-location-dot"></i> Granada Colonial, Granada</div>
+              <h3 class="dest-name-title">Calle La Calzada & Zona Bohemia</h3>
+              <p class="dest-description-text">
+                Paseo peatonal empedrado con bares al aire libre, música en vivo (marimba, trova, son nica y salsa), cerveza nacional bien fría y tertulias nocturnas bajo faroles coloniales.
+              </p>
+
+              <div class="dest-host-details-box">
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-handshake"></i>
+                  <span>Asociación: <strong>Comerciantes Gastronómicos La Calzada</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Dirección: <strong>Calle La Calzada (del Parque Colón al Lago Cocibolca)</strong></span>
+                </div>
+                <div class="dest-host-row">
+                  <i class="fa-solid fa-phone"></i>
+                  <span>Teléfono: <a href="tel:50525523000">+505 2552-3000</a></span>
+                </div>
+              </div>
+
+              <div class="dest-real-price-strip">
+                <div>Precio Real Nicaragua: <span class="price-cordobas">C$ 60 – C$ 280 NIO</span></div>
+                <div class="price-usd">≈ $1.60 – $7.60 USD</div>
+              </div>
+
+              <div class="dest-price-breakdown">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Paseo peatonal y música libre | Cerveza Toña/Victoria: <strong>C$ 60 - 80</strong> | Tablas y tapas criollas: <strong>C$ 150 - 280</strong></span>
+              </div>
+
+              <div class="dest-card-action-bar">
+                <a href="https://api.whatsapp.com/send?phone=50525523000&text=Hola%20Comerciantes%20La%20Calzada,%20deseo%20informaci%C3%B3n%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" class="btn-card-route btn-action-route" data-lat="11.9290" data-lng="-85.9520" data-name="Calle La Calzada" data-id="place_calzada_014">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+                </button>
+              </div>
+
+              <div class="dest-footer-strip">
+                <span class="dest-rating-gold"><i class="fa-solid fa-star"></i> 4.8 (890 reseñas)</span>
+                <span class="dest-coop-name">Comerciantes La Calzada</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        </div>
+
+        <!-- MAPA INTERACTIVO DE DESTINOS — FIRESTORE EN TIEMPO REAL -->
+        <div class="map-section-wrapper" style="margin-top: 4rem;">
+          <div class="map-header-bar">
+            <div class="map-header-title">
+              <div class="map-live-dot"></div>
+              <i class="fa-solid fa-map-location-dot" style="color: var(--terracotta);"></i>
+              Mapa Interactivo de Destinos Protegidos
+            </div>
+            <div>
+              <span class="map-source-badge" id="mapSourceBadge">Cargando datos...</span>
+            </div>
+          </div>
+          <div id="baqueanoInteractiveMap"></div>
+        </div>
+
+        <!-- CALCULADORA RURAL DE RETORNO (ROI) -->
+        <div class="calc-panel-box" style="margin-top: 6rem;">
+          <div style="text-align: center; margin-bottom: 2.5rem;">
+            <div class="badge-section-pill">
+              <i class="fa-solid fa-calculator"></i> Economía Social Comunitaria
+            </div>
+            <h2 style="font-size: 2.2rem; color: #FFFFFF; margin-bottom: 0.5rem;">Calculadora de Retorno Rural Campesino</h2>
+            <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+              Calcula cómo el modelo de comisión 0% de Baqueano erradica la fuga del 20-25% que imponen las OTAs foráneas, dejando el dinero íntegro en las comunidades nicaragüenses.
+            </p>
+          </div>
+
+          <div class="calc-grid-inner">
+            <!-- Columna Izquierda: Sliders -->
+            <div class="calc-controls-col">
+              <div class="slider-group-pro">
+                <div class="slider-header-row">
+                  <span class="slider-title"><i class="fa-solid fa-person-hiking"></i> Tours Realizados al Mes:</span>
+                  <span class="slider-display-badge" id="toursLabel">25</span>
+                </div>
+                <input type="range" min="5" max="80" value="25" class="slider-range-input" id="monthlyTours">
+              </div>
+
+              <div class="slider-group-pro">
+                <div class="slider-header-row">
+                  <span class="slider-title"><i class="fa-solid fa-tag"></i> Tarifa Media por Persona:</span>
+                  <span class="slider-display-badge" id="priceLabel">$35</span>
+                </div>
+                <input type="range" min="15" max="120" step="5" value="35" class="slider-range-input" id="avgTourPrice">
+              </div>
+
+              <div class="slider-group-pro">
+                <div class="slider-header-row">
+                  <span class="slider-title"><i class="fa-solid fa-users"></i> Promedio de Exploradores por Grupo:</span>
+                  <span class="slider-display-badge" id="groupLabel">3 pers.</span>
+                </div>
+                <input type="range" min="1" max="8" value="3" class="slider-range-input" id="groupSize">
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Comparativa de Retorno -->
+            <div class="calc-summary-comparison">
+              <div class="comp-card-ota">
+                <div class="comp-header">
+                  <span class="comp-title">Plataforma Foránea Tradicional</span>
+                  <span class="comp-pill-loss">20% Comisión Externa</span>
+                </div>
+                <div class="comp-figure-big danger" id="otaLoss">-$525 USD</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                  Ingreso Neto Campesino: <strong id="otaNet" style="color: #FFFFFF;">$2,100 USD</strong>
+                </div>
+              </div>
+
+              <div class="comp-card-baqueano">
+                <div class="comp-header">
+                  <span class="comp-title" style="color: #10B981;">Modelo Baqueano Nicaragua</span>
+                  <span class="comp-pill-win">0% Comisión Abusiva</span>
+                </div>
+                <div class="comp-figure-big success" id="baqueanoNet">$2,625 USD</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                  100% Retenido en la Familia y Cooperativa Rural
+                </div>
+                <div class="comp-annual-banner">
+                  <i class="fa-solid fa-circle-check" style="color: #10B981;"></i>
+                  <span>Ahorro Anual para la Comunidad: <strong id="annualSavings" style="color: #FFFFFF;">+$6,300 USD</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COTIZADOR BIMONEDA CON LEY 306 INTUR -->
+        <div class="checkout-preview-panel" style="margin-top: 4rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div>
+              <div class="badge-section-pill" style="margin-bottom: 0.4rem;">
+                <i class="fa-solid fa-receipt"></i> Motor Financiero Transparente
+              </div>
+              <h3 style="font-size: 1.6rem; color: #FFFFFF; margin: 0;">Cotizador Bimoneda con Ley 306 INTUR</h3>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--arena-pinolera); font-family: var(--font-tech);">
+              TASA OFICIAL BCN: 1 USD = 36.65 NIO
+            </div>
+          </div>
+
+          <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            La Ley 306 de Incentivos para la Industria Turística de la República de Nicaragua exonera del 15% del IVA a turistas no residentes que contratan servicios turísticos registrados.
+          </p>
+
+          <div class="tax-regime-toggle">
+            <button class="regime-btn active" id="btnRegimeTourist" onclick="setTaxRegime('tourist')">
+              <i class="fa-solid fa-passport"></i> Turista Internacional (Exento 0% IVA - Ley 306)
+            </button>
+            <button class="regime-btn" id="btnRegimeLocal" onclick="setTaxRegime('local')">
+              <i class="fa-solid fa-id-card"></i> Residente Nacional (+15% IVA DGI)
+            </button>
+          </div>
+
+          <div class="checkout-receipt-ticket">
+            <div class="receipt-row">
+              <span>Expedición Guiada Cañón de Somoto (3 pax):</span>
+              <span id="receiptSubtotal">$105.00 USD</span>
+            </div>
+            <div class="receipt-row">
+              <span>Descuento Promoción Comunitaria (15%):</span>
+              <span style="color: var(--verde-neon);">-$15.75 USD</span>
+            </div>
+            <div class="receipt-row">
+              <span>Régimen Fiscal Aplicado:</span>
+              <span id="receiptTax" style="color: var(--arena-pinolera);">0% (Exonerado Ley 306 INTUR)</span>
+            </div>
+            <div class="receipt-row total-row">
+              <span>Total a Liquidar (USD):</span>
+              <span id="receiptTotalUsd" style="color: var(--verde-neon);">$89.25 USD</span>
+            </div>
+            <div class="receipt-row" style="font-size: 1.1rem; font-weight: 800; color: var(--arena-pinolera); margin-top: 0.4rem;">
+              <span>Total Equivalente en Córdobas (NIO):</span>
+              <span id="receiptTotalNio">C$ 3,271.01 NIO</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASISTENTE IA PARA TURISMO RESPONSABLE -->
+        <div class="ai-assistant-panel">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--grad-sunset); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #FFFFFF;">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 1.4rem; color: #FFFFFF; margin: 0;">Baqueano AI: Consulta de Sendero</h3>
+              <span style="font-size: 0.8rem; color: var(--arena-pinolera);">Consejos de equipamiento, dificultad física y regulaciones ecológicas</span>
+            </div>
+          </div>
+
+          <div class="ai-presets-row">
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Qué calzado recomiendan para Somoto?')">¿Calzado para Somoto?</button>
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Qué condición física requiere Cerro Negro?')">¿Dificultad Cerro Negro?</button>
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Por qué no usar bloqueador químico en lagunas?')">¿Bloqueador en lagunas?</button>
+            <button class="ai-preset-chip" onclick="askAiPreset('¿Cómo llegar a Cascada La Luna?')">¿Ruta a Cascada La Luna?</button>
+          </div>
+
+          <div class="ai-chat-box" id="aiChatMessages">
+            <div class="ai-bubble-msg ai-bubble-bot">
+              ¡Hola, explorador! Soy el Asistente Baqueano AI. Pregúntame sobre cualquier sendero de Nicaragua, qué equipo llevar o cómo preservar el ecosistema local sin dejar rastro.
+            </div>
+          </div>
+
+          <form id="aiChatForm" style="display: flex; gap: 0.8rem;">
+            <input type="text" id="aiUserInput" class="form-control-input" placeholder="Escribe tu consulta sobre senderos, clima o equipamiento..." required>
+            <button type="submit" class="btn-hero-primary" style="padding: 0.8rem 1.4rem; font-size: 0.9rem; flex-shrink: 0;">
+              <i class="fa-solid fa-paper-plane"></i> Preguntar
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box" style="margin-bottom: 1.2rem;">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-emergency">
+          <h4 class="footer-col-header">LÍNEAS DE AUXILIO</h4>
+          <div class="emergency-line-item"><i class="fa-solid fa-phone-volume"></i> <div>Cruz Blanca: <strong>128</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-fire-extinguisher"></i> <div>Bomberos Unidos: <strong>115</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-shield-halved"></i> <div>Policía: <strong>118</strong></div></div>
+          <div class="emergency-line-item"><i class="fa-solid fa-headset"></i> <div>Mesa Baqueano: <strong>+505 8443-1289</strong></div></div>
+        </div>
+
+        <div class="footer-col-badges">
+          <h4 class="footer-col-header">APP ANDROID</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Descarga mapas satelitales sin conexión y recorre senderos con GPS en tu teléfono.
+          </p>
+          <button class="btn-hero-primary open-download-modal-btn" style="padding: 0.6rem 1rem; font-size: 0.85rem; width: 100%; justify-content: center;">
+            <i class="fa-brands fa-android"></i> Descargar APK
+          </button>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           🗺️ FRANJA DEL MAPA TERRITORIAL EN EL FOOTER
+           ⚙️ Mini-mapa Leaflet de sólo lectura (scroll desactivado) + stats
+           📦 Muestra territorio, 29 destinos y accesos rápidos por región
+           ================================================================ -->
+      <div class="footer-map-strip">
+        <!-- Encabezado de la franja -->
+        <div class="footer-map-header">
+          <div class="footer-map-title-group">
+            <div class="footer-map-live-dot"></div>
+            <i class="fa-solid fa-earth-americas" style="color: var(--terracotta);"></i>
+            <span>Territorio Baqueano Nicaragua</span>
+          </div>
+          <div class="footer-map-stats-row">
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-location-dot" style="color: #10B981;"></i>
+              <span><strong>29</strong> Destinos Activos</span>
+            </div>
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-layer-group" style="color: #F65E01;"></i>
+              <span><strong>13</strong> Categorías</span>
+            </div>
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-shield-heart" style="color: #14B8A6;"></i>
+              <span><strong>0%</strong> Comisión</span>
+            </div>
+            <div class="footer-stat-chip">
+              <i class="fa-solid fa-peso-sign" style="color: #F4E6C1;"></i>
+              <span>Tasa BCN <strong>36.65</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cuerpo: Mapa + botones de región -->
+        <div class="footer-map-body">
+          <!-- Mini-mapa -->
+          <div class="footer-mini-map-wrap">
+            <div id="footerMiniMap"></div>
+            <div class="footer-mini-map-badge">
+              <i class="fa-solid fa-satellite-dish"></i> Satélite HD
+            </div>
+          </div>
+
+          <!-- Atajos rápidos de región -->
+          <div class="footer-map-regions-panel">
+            <div class="footer-regions-title">
+              <i class="fa-solid fa-compass" style="color: var(--terracotta);"></i>
+              Salto Rápido a Región
+            </div>
+            <div class="footer-regions-grid">
+              <button class="footer-region-jump-btn" data-region="nicaragua" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('nicaragua'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-flag"></i>
+                <span>Nicaragua Completa</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="pacifico" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('pacifico'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <span>Rivas & San Juan del Sur</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="volcanes" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('volcanes'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-volcano"></i>
+                <span>Cadena Volcánica</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="granada" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('granada'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-landmark-dome"></i>
+                <span>Granada Colonial</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="ometepe" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('ometepe'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-island-tropical"></i>
+                <span>Isla de Ometepe</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="norte" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('norte'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-tree"></i>
+                <span>Nebliselva Norte</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="caribe" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('caribe'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-fish"></i>
+                <span>Corn Island Caribe</span>
+              </button>
+              <button class="footer-region-jump-btn" data-region="riosanjuan" onclick="if(window.BaqueanoMap) { window.BaqueanoMap.focusRegion('riosanjuan'); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'}); }">
+                <i class="fa-solid fa-water"></i>
+                <span>Río San Juan</span>
+              </button>
+            </div>
+
+            <!-- CTA para volver al mapa principal -->
+            <a href="#baqueanoInteractiveMap"
+               onclick="event.preventDefault(); document.getElementById('baqueanoInteractiveMap').scrollIntoView({behavior:'smooth',block:'center'});"
+               class="footer-map-cta-btn">
+              <i class="fa-solid fa-map-location-dot"></i>
+              Abrir Mapa Interactivo Completo
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Ecoturismo con dignidad campesina.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AUXILIO SOS -->
+  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
+    <div class="sos-modal-dialog">
+      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      </div>
+      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      </div>
+      <div class="sos-lines-grid">
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+        </button>
+        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DESCARGA DE APK -->
+  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
+    <div class="modal-card-dialog">
+      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
+      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <div class="install-steps-vertical">
+        <div class="step-row-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro BaqueanoNicaragua.apk en tu almacenamiento.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">2</div>
+          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+        </div>
+        <div class="step-row-item">
+          <div class="step-badge-num">3</div>
+          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Maps JavaScript API (Clave Oficial Baqueano) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE"></script>
+
+  <!-- Leaflet.js — Mapa Interactivo Open Source & Satélite HD -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+    if (typeof L === 'undefined') {
+      document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');
+    }
+  </script>
+
+  <!-- Leaflet GoogleMutant Plugin (Google Maps GridLayer en Leaflet) -->
+  <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+
+  <!-- Scripts Modulares Baqueano -->
+  <script src="js/navigation.js"></script>
+  <script src="js/video-registry.js"></script>
+  <script src="js/firestore-realtime.js"></script>
+  <script src="js/baqueano-map.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/ai-assistant.js"></script>
+  <script src="js/destinos-gastronomia.js"></script>
+  <script src="app.js"></script>
+
+  <!-- ================================================================
+       🗺️ MINI-MAPA FOOTER — Inicialización Leaflet decorativa/exploratoria
+       ⚙️ IntersectionObserver para lazy-init, sin scroll wheel (decorativo)
+       📦 Satélite HD con pines simplificados de todos los destinos activos
+       ================================================================ -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Retry hasta que Leaflet esté disponible
+    function initFooterMap() {
+      if (typeof L === 'undefined') {
+        setTimeout(initFooterMap, 300);
+        return;
+      }
+
+      var el = document.getElementById('footerMiniMap');
+      if (!el || el._footerMapInit) return;
+      el._footerMapInit = true;
+
+      // Mini-mapa de sólo lectura — sin interacción de usuario
+      var miniMap = L.map('footerMiniMap', {
+        center: [12.8654, -85.2072],
+        zoom: 6,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        dragging: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        attributionControl: false
+      });
+
+      // Capa satélite HD con fallback a OSM
+      var satLayer = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        { maxZoom: 18, crossOrigin: true }
+      );
+      var errCount = 0;
+      satLayer.on('tileerror', function() {
+        errCount++;
+        if (errCount >= 3) {
+          miniMap.removeLayer(satLayer);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            subdomains: 'abc', maxZoom: 19
+          }).addTo(miniMap);
+        }
+      });
+      satLayer.addTo(miniMap);
+
+      // Obtener destinos del módulo Firestore y pintar puntos decorativos
+      function paintDots(places) {
+        var COLORS = {
+          playas: '#0EA5E9', bahias: '#06B6D4', rios: '#10B981',
+          volcanes: '#F65E01', selva: '#22C55E', islas: '#14B8A6',
+          hoteles: '#EAB308', hostales: '#F97316', hospedajes: '#84CC16',
+          'casas-alquiler': '#A855F7', museos: '#6366F1',
+          discotecas: '#EC4899', gastronomia: '#F59E0B'
+        };
+
+        places.forEach(function(p) {
+          if (!p.lat || !p.lng) return;
+          var color = COLORS[p.category] || '#F65E01';
+          var circle = L.circleMarker([p.lat, p.lng], {
+            radius: 5,
+            fillColor: color,
+            color: '#FFFFFF',
+            weight: 1.5,
+            fillOpacity: 0.9
+          });
+          circle.bindTooltip(p.name, { permanent: false, direction: 'top', className: 'footer-map-tooltip' });
+          circle.on('click', function() {
+            // Al hacer clic en un punto, volar en el mapa principal
+            if (window.BaqueanoMap && window.BaqueanoMap.flyToPlace) {
+              window.BaqueanoMap.flyToPlace(p.id);
+            }
+            document.getElementById('baqueanoInteractiveMap')
+              .scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          circle.addTo(miniMap);
+        });
+      }
+
+      // Usar datos del módulo Firestore (o esperar a que cargue)
+      function tryLoad() {
+        if (window.BaqueanoFirestore && typeof window.BaqueanoFirestore.loadPublishedPlaces === 'function') {
+          window.BaqueanoFirestore.loadPublishedPlaces(paintDots);
+        } else if (window.BaqueanoFirestore && window.BaqueanoFirestore.SEED_PLACES) {
+          paintDots(window.BaqueanoFirestore.SEED_PLACES);
+        } else {
+          setTimeout(tryLoad, 400);
+        }
+      }
+      tryLoad();
+
+      // Forzar recalculo geométrico después de animación del footer
+      setTimeout(function() { miniMap.invalidateSize(); }, 500);
+    }
+
+    // Lazy init: solo inicializar cuando el footer sea visible en viewport
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            initFooterMap();
+            observer.disconnect();
+          }
+        });
+      }, { rootMargin: '200px' });
+
+      var target = document.getElementById('footerMiniMap');
+      if (target) observer.observe(target);
+    } else {
+      // Fallback sin observer
+      window.addEventListener('load', initFooterMap);
+    }
+  })();
+  </script>
+
+  <style>
+    /* Tooltip del mini-mapa del footer */
+    .footer-map-tooltip {
+      background: rgba(15, 23, 42, 0.92) !important;
+      border: 1px solid rgba(22, 93, 111, 0.5) !important;
+      color: #F4E6C1 !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      border-radius: 7px !important;
+      padding: 0.25rem 0.6rem !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+      white-space: nowrap;
+    }
+    .footer-map-tooltip::before { display: none !important; }
+  </style>
+</body>
+</html>
