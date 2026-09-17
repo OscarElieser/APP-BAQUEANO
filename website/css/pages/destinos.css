@@ -359,7 +359,7 @@ html body .destinos-inline-002 {
 }
 
 html body .destinos-inline-003 {
-  display: none !important;
+  /* Controlado dinámicamente por BaqueanoDestinos */
 }
 
 html body .destinos-inline-004 {
