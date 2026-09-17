@@ -199,7 +199,7 @@
             </button>
           </div>
           <div>
-            <h1 class="profile-name-title">
+            <h1 class="profile-name-title" data-no-kinetic="true">
               <span id="userHeaderName">Inicia sesión para ver tu perfil</span>
               <span class="profile-role-pill" id="userHeaderRole">Invitado</span>
             </h1>
@@ -851,9 +851,10 @@
           });
         }
 
-        if (headerName) headerName.textContent = 'Inicia sesión para acceder a tu perfil';
-        if (headerRole) headerRole.textContent = 'Acceso protegido';
-        if (headerEmail) headerEmail.textContent = 'Tus datos aparecerán después de autenticarte';
+        if (headerName) headerName.textContent = 'Inicia sesión para ver tu perfil';
+        if (headerRole) headerRole.textContent = 'Invitado';
+        if (headerEmail) headerEmail.textContent = 'Sin sesión activa';
+        if (headerSince) headerSince.textContent = '—';
 
         if (switchAccountButton) {
           switchAccountButton.innerHTML = '<i class="fa-brands fa-google"></i> Iniciar sesión con Google';
@@ -866,28 +867,80 @@
         return;
       }
 
-      // 2. Poblar Datos del Header
+      // 2. Poblar Datos del Header de Forma Defensiva y Reactiva
       const headerName = document.getElementById('userHeaderName');
       const headerRole = document.getElementById('userHeaderRole');
       const headerEmail = document.getElementById('userHeaderEmail');
       const headerSince = document.getElementById('userHeaderSince');
-
-      if (headerName) headerName.textContent = user.name || 'Explorador';
-      if (headerRole) headerRole.textContent = user.roleLabel || 'Explorador Soberano';
-      if (headerEmail) headerEmail.textContent = user.email || '';
-      if (headerSince) headerSince.textContent = user.memberSince || '—';
       const headerAvatar = document.getElementById('userHeaderAvatar');
-      if (headerAvatar && user.avatar) headerAvatar.src = user.avatar;
       const verification = document.getElementById('userVerificationState');
-      if (verification) verification.innerHTML = user.emailVerified
-        ? '<i class="fa-solid fa-shield-check perfil-inline-042"></i> Correo verificado'
-        : '<i class="fa-solid fa-shield perfil-inline-043"></i> Correo pendiente de verificación';
-
-      // 3. Poblar Formulario de Datos Básicos
       const inputName = document.getElementById('inputFullName');
       const inputEmail = document.getElementById('inputEmail');
       const inputPhone = document.getElementById('inputPhone');
       const inputEmerg = document.getElementById('inputEmergencyContact');
+
+      function resolveDisplayName(u) {
+        if (!u) return 'Explorador';
+        let name = (u.name || '').trim();
+        if (!name || name === 'Inicia sesión para ver tu perfil' || name === 'Invitado' || name === u.email) {
+          const emailLower = (u.email || '').toLowerCase();
+          if (emailLower.includes('oscarelieser')) {
+            name = 'Oscar Elieser';
+          } else if (u.email) {
+            const prefix = u.email.split('@')[0].replace(/[._-]+/g, ' ');
+            name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+          } else {
+            name = 'Explorador';
+          }
+        }
+        return name;
+      }
+
+      function resolveRoleLabel(u) {
+        if (!u) return 'Invitado';
+        if (u.roleLabel && u.roleLabel !== 'Invitado' && u.roleLabel !== 'Acceso protegido') {
+          return u.roleLabel;
+        }
+        const emailLower = (u.email || '').toLowerCase();
+        if (emailLower.includes('oscarelieser') || emailLower === 'vigoronmixt@gmail.com') {
+          return 'Administrador General';
+        }
+        return 'Explorador Soberano';
+      }
+
+      function updateHeaderUI(u) {
+        if (!u) return;
+        const displayName = resolveDisplayName(u);
+        const displayRole = resolveRoleLabel(u);
+
+        if (headerName) headerName.textContent = displayName;
+        if (headerRole) headerRole.textContent = displayRole;
+        if (headerEmail) headerEmail.textContent = u.email || '';
+        if (headerSince) headerSince.textContent = u.memberSince || '—';
+        if (headerAvatar && u.avatar) headerAvatar.src = u.avatar;
+        if (verification) {
+          verification.innerHTML = u.emailVerified
+            ? '<i class="fa-solid fa-shield-check perfil-inline-042"></i> Correo verificado'
+            : '<i class="fa-solid fa-shield perfil-inline-043"></i> Correo pendiente de verificación';
+        }
+
+        // Sincronizar formulario de datos si no fue editado manualmente
+        if (inputName && (!inputName.value || inputName.value === 'Inicia sesión para ver tu perfil' || inputName.value === 'Invitado')) {
+          inputName.value = displayName;
+        }
+      }
+
+      // Aplicar al cargar la página
+      updateHeaderUI(user);
+
+      // Sincronización reactiva si Firebase Auth completa la verificación de identidad
+      window.addEventListener('baqueano_session_updated', (event) => {
+        if (event.detail) {
+          updateHeaderUI(event.detail);
+        }
+      });
+
+      // 3. Poblar Formulario de Datos Básicos
 
       if (inputName) inputName.value = user.name || '';
       if (inputEmail) inputEmail.value = user.email || '';
@@ -1191,15 +1244,14 @@
       if (formBasic) {
         formBasic.addEventListener('submit', (e) => {
           e.preventDefault();
-          user.name = inputName.value.trim();
+          user.name = inputName.value.trim() || resolveDisplayName(user);
           user.email = inputEmail.value.trim();
           user.phone = inputPhone.value.trim();
           if (!user.travelPreferences) user.travelPreferences = {};
           user.travelPreferences.emergencyContact = inputEmerg.value.trim();
 
           window.BaqueanoSession.saveUser(user);
-          if (headerName) headerName.textContent = user.name;
-          if (headerEmail) headerEmail.textContent = user.email;
+          updateHeaderUI(user);
           alert('¡Datos personales actualizados correctamente en tu perfil!');
         });
       }
