@@ -136,12 +136,36 @@ function initDestinationsFilterLocal() {
   let activeCategory = 'all';
   let searchQuery = '';
 
+  const MACRO_GROUPS = {
+    'naturaleza-all': ['playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas'],
+    'estadias-all': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
+    'cultura-all': ['gastronomia', 'museos', 'discotecas']
+  };
+
   const applyFilters = () => {
+    let savedFavs = [];
+    try {
+      savedFavs = JSON.parse(localStorage.getItem('baqueano_favs_local') || '[]');
+    } catch (e) {
+      savedFavs = [];
+    }
+
     destCards.forEach(card => {
       const category = card.getAttribute('data-category') || '';
+      const cardId = card.getAttribute('data-id') || '';
       const textContent = (card.textContent || '').toLowerCase();
 
-      const matchCategory = (activeCategory === 'all' || category === activeCategory);
+      let matchCategory = false;
+      if (activeCategory === 'all') {
+        matchCategory = true;
+      } else if (activeCategory === 'favoritos') {
+        matchCategory = savedFavs.includes(cardId);
+      } else if (MACRO_GROUPS[activeCategory]) {
+        matchCategory = MACRO_GROUPS[activeCategory].includes(category);
+      } else {
+        matchCategory = (category === activeCategory);
+      }
+
       const matchSearch = (!searchQuery || textContent.includes(searchQuery));
 
       if (matchCategory && matchSearch) {

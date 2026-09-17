@@ -330,10 +330,25 @@ window.BaqueanoMap = (function() {
   function filterMarkersByCategory(category) {
     activeCategoryFilter = category;
 
+    const MACRO_GROUPS = {
+      'naturaleza-all': ['playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas'],
+      'estadias-all': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
+      'cultura-all': ['gastronomia', 'museos', 'discotecas']
+    };
+
     let visibleCount = 0;
     Object.keys(markersById).forEach(placeId => {
       const { marker, place } = markersById[placeId];
-      if (category === 'all' || place.category === category) {
+      let match = false;
+      if (category === 'all') {
+        match = true;
+      } else if (MACRO_GROUPS[category]) {
+        match = MACRO_GROUPS[category].includes(place.category);
+      } else {
+        match = (place.category === category);
+      }
+
+      if (match) {
         if (!mapInstance.hasLayer(marker)) {
           marker.addTo(mapInstance);
         }

@@ -190,8 +190,127 @@
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
-  // Aplicar filtro de categorías y favoritos
-  function applyCategoryFilter(filterKey) {
+  // Mapeo de Macro-Categorías con sus Subcategorías
+  const MACRO_GROUPS = {
+    'naturaleza-all': ['playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas'],
+    'estadias-all': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
+    'cultura-all': ['gastronomia', 'museos', 'discotecas']
+  };
+
+  const SUB_TO_MACRO = {
+    'playas': 'naturaleza', 'bahias': 'naturaleza', 'rios': 'naturaleza', 'volcanes': 'naturaleza', 'selva': 'naturaleza', 'islas': 'naturaleza', 'naturaleza-all': 'naturaleza',
+    'hoteles': 'estadias', 'hostales': 'estadias', 'hospedajes': 'estadias', 'casas-alquiler': 'estadias', 'estadias-all': 'estadias',
+    'gastronomia': 'cultura', 'museos': 'cultura', 'discotecas': 'cultura', 'cultura-all': 'cultura'
+  };
+
+  const MACRO_INFO = {
+    'naturaleza': {
+      label: 'Naturaleza & Aventura',
+      icon: 'fa-mountain-sun',
+      btnId: 'macroBtnNaturaleza',
+      allKey: 'naturaleza-all'
+    },
+    'estadias': {
+      label: 'Hospedajes & Estadías',
+      icon: 'fa-house-chimney-window',
+      btnId: 'macroBtnEstadias',
+      allKey: 'estadias-all'
+    },
+    'cultura': {
+      label: 'Cultura, Sabor & Vida',
+      icon: 'fa-utensils',
+      btnId: 'macroBtnCultura',
+      allKey: 'cultura-all'
+    }
+  };
+
+  // Nombres humanizados para el indicador de filtro activo
+  const FILTER_NAMES = {
+    'all': 'Todos los Destinos',
+    'favoritos': 'Mis Favoritos',
+    'naturaleza-all': 'Toda la Naturaleza & Aventura',
+    'playas': 'Playas del Pacífico',
+    'bahias': 'Bahías & Puertos',
+    'rios': 'Ríos, Cascadas & Cañones',
+    'volcanes': 'Volcanes & Senderos',
+    'selva': 'Reservas & Selva',
+    'islas': 'Islas & Archipiélagos',
+    'estadias-all': 'Todos los Hospedajes',
+    'hoteles': 'Hoteles & Resorts',
+    'hostales': 'Hostales & Lodges',
+    'hospedajes': 'Cabañas & Posadas',
+    'casas-alquiler': 'Casas de Alquiler',
+    'cultura-all': 'Toda la Cultura & Vida',
+    'gastronomia': 'Gastronomía Ancestral',
+    'museos': 'Museos & Memoria',
+    'discotecas': 'Bares & Vida Nocturna'
+  };
+
+  // Variable de estado para controlar qué submenú está visible
+  let currentOpenMacro = null;
+  let currentActiveFilter = 'all';
+
+  // Esconde el submenú automáticamente con animación limpia
+  function hideSubmenu() {
+    const stripEl = document.getElementById('activeSubmenuStrip');
+    if (stripEl) {
+      stripEl.style.display = 'none';
+    }
+    document.querySelectorAll('.macro-nav-btn.has-sub').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+    });
+    currentOpenMacro = null;
+  }
+
+  // Abre y renderiza el submenú de una macro-categoría
+  function openSubmenuFor(macroKey, activeFilterKey) {
+    const stripEl = document.getElementById('activeSubmenuStrip');
+    const containerEl = document.getElementById('stripButtonsContainer');
+    const labelEl = document.getElementById('stripLabelTag');
+
+    if (!stripEl || !containerEl || !labelEl) return;
+
+    if (!macroKey || macroKey === 'all' || macroKey === 'favoritos') {
+      hideSubmenu();
+      return;
+    }
+
+    const dropdownWrap = document.querySelector(`.macro-dropdown-wrapper[data-dropdown="${macroKey}"]`);
+    if (!dropdownWrap) return;
+
+    const sourceButtons = dropdownWrap.querySelectorAll('.sub-cat-btn');
+    if (!sourceButtons.length) return;
+
+    const info = MACRO_INFO[macroKey] || { label: 'Subcategorías', icon: 'fa-filter' };
+    labelEl.innerHTML = `<i class="fa-solid ${info.icon}"></i> ${info.label}:`;
+
+    // Replicar botones en el panel
+    containerEl.innerHTML = '';
+    sourceButtons.forEach(btn => {
+      const clone = document.createElement('button');
+      clone.type = 'button';
+      clone.className = 'cat-filter-btn sub-cat-btn';
+      clone.setAttribute('data-filter', btn.getAttribute('data-filter'));
+      clone.setAttribute('data-macro-parent', macroKey);
+      clone.innerHTML = btn.innerHTML;
+      if (btn.getAttribute('data-filter') === activeFilterKey) {
+        clone.classList.add('active');
+      }
+      containerEl.appendChild(clone);
+    });
+
+    stripEl.style.display = 'flex';
+    currentOpenMacro = macroKey;
+
+    // Actualizar aria-expanded en los botones
+    document.querySelectorAll('.macro-nav-btn.has-sub').forEach(btn => {
+      btn.setAttribute('aria-expanded', btn.dataset.macro === macroKey ? 'true' : 'false');
+    });
+  }
+
+  // Aplicar filtro de categorías y favoritos con auto-ocultamiento del submenú
+  function applyCategoryFilter(filterKey, autoHideSubmenu = true) {
+    currentActiveFilter = filterKey;
     const cards = document.querySelectorAll('.dest-card-pro');
     const favs = getFavorites();
     let visibleCount = 0;
@@ -205,6 +324,8 @@
         show = true;
       } else if (filterKey === 'favoritos') {
         show = favs.includes(cardId);
+      } else if (MACRO_GROUPS[filterKey]) {
+        show = MACRO_GROUPS[filterKey].includes(cardCategory);
       } else {
         show = (cardCategory === filterKey);
       }
@@ -213,10 +334,44 @@
       if (show) visibleCount++;
     });
 
-    // Actualizar píldoras activas
+    // Determinar la macro-categoría correspondiente
+    let currentMacro = null;
+    if (filterKey === 'all') currentMacro = 'all';
+    else if (filterKey === 'favoritos') currentMacro = 'favoritos';
+    else currentMacro = SUB_TO_MACRO[filterKey] || null;
+
+    // Actualizar botones de macro nivel
+    document.querySelectorAll('.macro-nav-btn').forEach(btn => {
+      const isAll = (filterKey === 'all' && btn.id === 'macroBtnAll');
+      const isFav = (filterKey === 'favoritos' && btn.id === 'filterFavsBtn');
+      const isMacro = (currentMacro && btn.dataset.macro === currentMacro);
+      btn.classList.toggle('active', isAll || isFav || isMacro);
+    });
+
+    // Actualizar píldoras y sub-botones activos
     document.querySelectorAll('.cat-filter-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-filter') === filterKey);
     });
+
+    // Actualizar o esconder el indicador de filtro activo
+    const indicatorEl = document.getElementById('activeFilterIndicator');
+    const indicatorNameEl = document.getElementById('activeFilterName');
+    const indicatorCountEl = document.getElementById('activeFilterCount');
+
+    if (indicatorEl && indicatorNameEl && indicatorCountEl) {
+      if (filterKey === 'all') {
+        indicatorEl.style.display = 'none';
+      } else {
+        indicatorNameEl.textContent = FILTER_NAMES[filterKey] || filterKey;
+        indicatorCountEl.textContent = `(${visibleCount})`;
+        indicatorEl.style.display = 'inline-flex';
+      }
+    }
+
+    // SI autoHideSubmenu es true, esconder el submenú para no estancarse en pantalla
+    if (autoHideSubmenu) {
+      hideSubmenu();
+    }
 
     // Notificar al mapa interactivo para filtrar pines
     if (window.BaqueanoMap && typeof window.BaqueanoMap.filterCategory === 'function') {
@@ -230,8 +385,48 @@
     updateLikeButtonsUI();
     updateFavoriteBadgeCount();
 
-    // Event Delegation para likes, favoritos y rutas
+    // Event Delegation para likes, favoritos, macro dropdowns y filtros
     document.addEventListener('click', function (e) {
+      // 1. Click en botón macro con submenú (toggle de apertura/cierre)
+      const macroToggleBtn = e.target.closest('.macro-nav-btn.has-sub');
+      if (macroToggleBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const macroKey = macroToggleBtn.dataset.macro;
+        if (currentOpenMacro === macroKey) {
+          // Ya estaba abierto -> alternar y cerrarlo
+          hideSubmenu();
+        } else {
+          // Abrir para seleccionar subcategoría
+          openSubmenuFor(macroKey, currentActiveFilter);
+        }
+        return;
+      }
+
+      // 2. Botón de cerrar submenú manualmente (✕)
+      const closeSubBtn = e.target.closest('#closeSubmenuBtn');
+      if (closeSubBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        hideSubmenu();
+        return;
+      }
+
+      // 3. Botón de quitar filtro activo
+      const clearFilterBtn = e.target.closest('#clearActiveFilterBtn');
+      if (clearFilterBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        applyCategoryFilter('all', true);
+        return;
+      }
+
+      // 4. Cerrar submenú al hacer click fuera del área de navegación de categorías
+      if (currentOpenMacro && !e.target.closest('.dest-category-nav-suite')) {
+        hideSubmenu();
+      }
+
+      // 5. Favoritos
       const favBtn = e.target.closest('.btn-action-fav');
       if (favBtn) {
         e.preventDefault();
@@ -241,6 +436,7 @@
         return;
       }
 
+      // 6. Likes
       const likeBtn = e.target.closest('.btn-action-like');
       if (likeBtn) {
         e.preventDefault();
@@ -250,6 +446,7 @@
         return;
       }
 
+      // 7. Rutas y GPS
       const routeBtn = e.target.closest('.btn-action-route');
       if (routeBtn) {
         e.preventDefault();
@@ -262,10 +459,12 @@
         return;
       }
 
+      // 8. Botones de filtro de categorías (Macro, Submenú o Strip)
       const catBtn = e.target.closest('.cat-filter-btn');
       if (catBtn) {
         const filter = catBtn.getAttribute('data-filter') || 'all';
-        applyCategoryFilter(filter);
+        // Al seleccionar cualquier subcategoría o categoría, se esconde automáticamente el submenú
+        applyCategoryFilter(filter, true);
         return;
       }
     });
