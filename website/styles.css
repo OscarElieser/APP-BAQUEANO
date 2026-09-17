@@ -7986,3 +7986,15 @@ img {
   .site-footer-pro .footer-col-contact .footer-contact-list { grid-template-columns: 1fr; }
   .site-footer-pro .footer-col-contact .footer-contact-item { min-height: 76px; }
 }
+
+/* Ocultar elementos redundantes fuera del menú principal en escritorio */
+@media (min-width: 769px) {
+  .mobile-nav-toggle,
+  .main-navbar .mobile-nav-toggle,
+  .nav-profile-btn,
+  .main-navbar .nav-profile-btn,
+  .nav-separator,
+  .main-navbar .nav-separator {
+    display: none !important;
+  }
+}
