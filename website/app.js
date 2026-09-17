@@ -87,8 +87,15 @@ function initKineticHeadings() {
   if (!headings.length) return;
 
   headings.forEach(heading => {
-    // Si ya está procesado o tiene inputs interactivos, omitir
-    if (heading.getAttribute('data-kinetic-ready') === 'true') return;
+    // Si ya está procesado, si es un encabezado dinámico interactivo o marcado para ignorar, omitir
+    if (
+      heading.getAttribute('data-kinetic-ready') === 'true' ||
+      heading.getAttribute('data-no-kinetic') === 'true' ||
+      heading.classList.contains('profile-name-title') ||
+      heading.querySelector('#userHeaderName, #userHeaderRole')
+    ) {
+      return;
+    }
 
     const rawText = heading.textContent ? heading.textContent.trim() : '';
     if (!rawText || rawText.length === 0) return;

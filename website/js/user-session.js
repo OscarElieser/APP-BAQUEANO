@@ -35,14 +35,17 @@
   // Cuentas de Alta Jerarquía Operativa (Admin & Auditor)
   const PRIVILEGED_ACCOUNTS = {
     'oscarelieser.informatica.inatec@gmail.com': {
+      name: 'Oscar Elieser',
       role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
       navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'byoscarelieser@gmail.com': {
+      name: 'Oscar Elieser',
       role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
       navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'vigoronmixt@gmail.com': {
+      name: 'Auditor Baqueano',
       role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
       navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     }
@@ -73,6 +76,20 @@
       if (!session || !session.firebaseUid || !session.isLoggedIn) {
         localStorage.removeItem(STORAGE_KEY);
         return null;
+      }
+      // Auto-corregir nombres residuales de placeholder o texto de invitado
+      if (!session.name || session.name === 'Inicia sesión para ver tu perfil' || session.name === 'Invitado') {
+        const emailLower = (session.email || '').toLowerCase();
+        const priv = PRIVILEGED_ACCOUNTS[emailLower];
+        if (priv && priv.name) {
+          session.name = priv.name;
+        } else if (session.email) {
+          const prefix = session.email.split('@')[0].replace(/[._-]+/g, ' ');
+          session.name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+        } else {
+          session.name = 'Explorador';
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
       }
       return session;
     } catch (error) {
@@ -466,16 +483,31 @@
     const createdAt = firebaseUser.metadata && firebaseUser.metadata.creationTime
       ? new Date(firebaseUser.metadata.creationTime).toLocaleDateString('es-NI', { month: 'long', year: 'numeric' })
       : '';
+
+    let resolvedName = (firebaseUser.displayName || '').trim();
+    if (!resolvedName || resolvedName === email || resolvedName === 'Inicia sesión para ver tu perfil' || resolvedName === 'Invitado') {
+      if (existing && existing.name && existing.name !== 'Inicia sesión para ver tu perfil' && existing.name !== 'Invitado' && existing.name !== email) {
+        resolvedName = existing.name;
+      } else if (privileged && privileged.name) {
+        resolvedName = privileged.name;
+      } else if (email) {
+        const prefix = email.split('@')[0].replace(/[._-]+/g, ' ');
+        resolvedName = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+      } else {
+        resolvedName = 'Explorador';
+      }
+    }
+
     const session = {
       ...(existing && existing.firebaseUid === firebaseUser.uid ? existing : {}),
       firebaseUid: firebaseUser.uid,
-      name: firebaseUser.displayName || email,
+      name: resolvedName,
       email,
       phone: firebaseUser.phoneNumber || '',
-      avatar: firebaseUser.photoURL || '',
+      avatar: firebaseUser.photoURL || (existing && existing.avatar) || '',
       role: privileged ? privileged.role : 'explorer',
       roleLabel: privileged ? privileged.roleLabel : 'Explorador',
-      memberSince: createdAt,
+      memberSince: createdAt || (existing && existing.memberSince) || '—',
       emailVerified: !!firebaseUser.emailVerified,
       providerIds: (firebaseUser.providerData || []).map(profile => profile.providerId),
       isLoggedIn: true,
