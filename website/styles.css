@@ -76,6 +76,7 @@
   --text-secondary: #E2E8F0;
   --text-muted: #94A3B8;
   --text-cream: #F4E6C1;
+  --text-light: #CBD5E1;
 
   --border-subtle: rgba(244, 230, 193, 0.12);
   --border-glow: rgba(246, 94, 1, 0.35);
@@ -807,6 +808,16 @@ h1:hover .kinetic-char {
   background: rgba(246, 94, 1, 0.4);
   border-color: rgba(246, 94, 1, 0.6);
   transform: scale(1.05);
+}
+
+/* Contenedor de acciones derecha del navbar */
+.nav-actions-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.35rem, 0.6vw, 0.75rem);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 /* ==========================================================================
