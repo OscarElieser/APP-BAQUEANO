@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — AVISO LEGAL & PROPIEDAD INTELECTUAL (aviso-legal.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Definir la titularidad jurídica, régimen regulatorio nacional e internacional
+  y las condiciones de operación de la plataforma oficial Baqueano Nicaragua.
+- Certificar el amparo de la Ley N° 306 de Fomento a la Industria Turística de Nicaragua
+  y las regulaciones de MARENA e INTUR.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Estructura modular con el diseño oficial Baqueano y cumplimiento del Círculo Dorado.
+- Paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+- Enlaces de navegación interactivos con menú "Mi País" y footer institucional.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Datos de titularidad, régimen fiscal territorial, propiedad intelectual,
+  limitación de responsabilidad y canales de notificación legal.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviso Legal & Propiedad Intelectual | Baqueano Nicaragua</title>
+  <meta name="description" content="Aviso legal oficial y marco normativo de Baqueano Nicaragua. Información societaria, derechos de propiedad intelectual y cumplimiento de la Ley 306 INTUR.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Maestros Oficiales -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modules.css">
+
+  <style>
+    .legal-hero-section {
+      padding: 6.5rem 0 3rem;
+      background: radial-gradient(circle at 15% 25%, rgba(22, 93, 111, 0.35) 0%, transparent 60%),
+                  radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.2) 0%, transparent 60%),
+                  #0A1120;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    }
+    .legal-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 9999px;
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #D4AF37;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .article-item-card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(244, 230, 193, 0.16);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 1.3rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .article-item-card:hover {
+      transform: translateY(-3px);
+      border-color: #D4AF37;
+    }
+    .article-num-pill {
+      font-family: var(--font-tech);
+      font-size: 1rem;
+      font-weight: 900;
+      color: #D4AF37;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 10px;
+      padding: 0.4rem 0.75rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Inicio</span>
+              <span class="nav-sublabel">Portal Soberano</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
+        <div class="nav-dropdown" id="navDropdownMiPais">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="nav-item-content">
+              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
+              <span class="nav-text-group">
+                <span class="nav-label">Mi País</span>
+                <span class="nav-sublabel">Tierra Pinolera</span>
+              </span>
+            </span>
+            <span class="nav-dropdown-caret">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Destinos</span>
+                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
+              </div>
+              <span class="nav-dd-badge">29</span>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Historia</span>
+                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
+              </div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Gastronomía</span>
+                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
+              </div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Música</span>
+                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="ambiental.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ambiental</span>
+              <span class="nav-sublabel">Huella Cero & Decálogo</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="aliados.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Aliados</span>
+              <span class="nav-sublabel">Cooperativas Campesinas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="nosotros.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Nosotros</span>
+              <span class="nav-sublabel">Marca & Manifiesto</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="admin.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ops Center</span>
+              <span class="nav-sublabel">Consola Satelital</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">ACTIVO</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="nav-right-actions">
+        <button class="btn-nav-download" id="headerDownloadBtn">
+          <i class="fa-brands fa-android"></i>
+          <span>App Android</span>
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menú de Navegación">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <section class="legal-hero-section">
+      <div class="container">
+        <span class="legal-tag-badge">
+          <i class="fa-solid fa-building-columns"></i> Información Societaria & Gobernanza Territorial
+        </span>
+        <h1 style="font-size: clamp(2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 800; margin-bottom: 0.8rem;">
+          ⚖️ Aviso Legal & Transparencia Institucional
+        </h1>
+        <p style="font-size: 1.05rem; color: var(--arena-pinolera); max-width: 800px; line-height: 1.6; margin-bottom: 2.5rem;">
+          Conoce los fundamentos jurídicos, titularidad tecnológica y el marco de gobernanza comunitaria de Baqueano Nicaragua.
+        </p>
+
+        <!-- ARTÍCULOS DE AVISO LEGAL -->
+        <div class="article-item-card">
+          <div class="article-num-pill">01</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Titularidad de la Plataforma y Domicilio Legal
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              El ecosistema digital BAQUEANO NICARAGUA (sitio web oficial y aplicación para Android) es desarrollado y administrado como una iniciativa de soberanía tecnológica comunitaria con sede territorial en Managua y cobertura operativa en los 17 departamentos y regiones autónomas de la República de Nicaragua. Correo oficial de contacto: <a href="mailto:legal@baqueano.ni" style="color: #D4AF37; font-weight: 700;">legal@baqueano.ni</a>.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">02</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Régimen de Fomento Turístico Ley 306 INTUR
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Las operaciones de difusión, articulación y apoyo a las cooperativas rurales aliadas se fundamentan en las disposiciones de la Ley N° 306 ("Ley de Incentivos para la Industria Turística de la República de Nicaragua") y los lineamientos de promoción comunitaria emitidos por el Instituto Nicaragüense de Turismo (INTUR).
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">03</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Propiedad Intelectual, Marcas y Diseños
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              El emblema oficial de la "Q" Ancestral, las combinaciones cromáticas institucionales, la arquitectura del software, bases de datos y textos analíticos son creaciones intelectuales protegidas por la Ley N° 312 de Derechos de Autor y Conexos de Nicaragua. Queda prohibida su reproducción o explotación comercial sin consentimiento expreso por escrito.
+            </p>
+          </div>
+        </div>
+
+        <div class="article-item-card">
+          <div class="article-num-pill">04</div>
+          <div>
+            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+              Limitación de Responsabilidad en Senderismo de Aventura
+            </h3>
+            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+              Baqueano Nicaragua facilita el catálogo y la herramienta de contacto directo con guías territoriales. La ejecución de expediciones, ascensos a volcanes y navegación fluvial se rige por las condiciones de mutuo acuerdo entre el explorador y la cooperativa anfitriona. Baqueano promueve activamente el respeto estricto a las alertas de SINAPRED y el uso de equipo de protección homologado.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER INSTITUCIONAL OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+
+      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
+      <div class="footer-top-utility-bar">
+        <div class="footer-newsletter-wrap">
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos & Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE LEGAL (LEGAL STACK) -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos & Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html" style="color: #D4AF37; font-weight: 700;">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
+        <span class="separator">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
+      </div>
+
+      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+            Red Satelital 24/7 Operativa
+          </span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
+          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Modulares -->
+  <script src="js/navigation.js"></script>
+</body>
+</html>
