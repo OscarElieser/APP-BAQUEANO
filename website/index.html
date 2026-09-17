@@ -1318,74 +1318,142 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         🏪 SECCIÓN DE REGISTRO DE NEGOCIO O ANFITRIÓN ALIADO
-         🎯 Conectar directamente a emprendedores campesinos, guías, comedores y
-            hospedajes comunitarios con el ecosistema Baqueano sin intermediarios.
-         ⚙️ Formulario reactivo con validación de 16 campos, guardado asíncrono
-            en Firestore (/businesses) y despacho con formato WhatsApp a Mesa Baqueano.
-         📦 Sección #registroNegocios con Glassmorphism y diseño responsivo.
-         ====================================================================== -->
-    <section class="register-biz-section" id="registroNegocios">
+
+    <!-- MODAL DE CONFIRMACIÓN DE REGISTRO DE NEGOCIO -->
+    <div class="modal-backdrop-pro" id="bizSuccessModal" aria-hidden="true" role="dialog">
+      <div class="modal-card-dialog" style="max-width: 520px; text-align: center;">
+        <button class="modal-close-x" id="closeBizModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-icon-top" style="background: rgba(22, 93, 111, 0.3); border-color: #2DD4BF;">
+          <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #10B981;"></i>
+        </div>
+        <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">¡Postulación Recibida con Éxito!</h3>
+        <p style="font-size: 0.95rem; color: var(--arena-pinolera); line-height: 1.6; margin-bottom: 1.2rem;">
+          Tu establecimiento ha sido registrado en el sistema y remitido a la Mesa Técnica Baqueano.
+          El equipo verificará las coordenadas y detalles para incluirlo en el mapa satelital HD y catálogo territorial.
+        </p>
+        <div id="bizModalSummary" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(22, 93, 111, 0.4); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.88rem; color: #FFFFFF;">
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a id="bizModalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="background: #25D366; border: none; justify-content: center; flex: 1;">
+            <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp de Mesa Baqueano
+          </a>
+          <button type="button" class="btn-hero-glass" id="bizModalCloseBtn" style="padding: 0.85rem 1.5rem;">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTAL DE DESCARGA DIRECTA DE APK -->
+    <section class="download-section-hero">
       <div class="container">
-        <div class="register-biz-card">
-          <!-- Encabezado de la Sección -->
-          <div class="biz-header-wrap">
-            <span class="biz-badge-pill">
-              <i class="fa-solid fa-handshake-angle"></i> Red de Anfitriones & Comercio Justo
-            </span>
-            <h2 class="biz-main-title">
-              Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-            </h2>
-            <p class="biz-subtitle">
-              Únete a la plataforma tecnológica comunitaria de Nicaragua sin comisiones abusivas.
-              Conecta directamente con viajeros nacionales e internacionales que buscan autenticidad, gastronomía típica,
-              senderos seguros y aventura comunitaria soberana.
-            </p>
+        <div class="download-portal-card">
+          <div class="apk-icon-center">
+            <img src="assets/images/logo.png" alt="Baqueano APK">
+          </div>
+          <h2 class="download-portal-title">Descarga Baqueano para Android</h2>
+          <p style="font-size: 1.1rem; color: var(--arena-pinolera); max-width: 680px; margin: 0 auto;">
+            La aplicación oficial con mapas topográficos sin conexión a internet, baliza satelital SOS 24/7 y contacto directo con las cooperativas campesinas.
+          </p>
 
-            <!-- Tiras de Ventajas -->
-            <div class="biz-benefits-strip">
-              <div class="biz-benefit-item">
-                <i class="fa-solid fa-percent"></i>
-                <span><strong>0% Comisiones</strong> para intermediarios foráneos</span>
-              </div>
-              <div class="biz-benefit-item">
-                <i class="fa-brands fa-whatsapp"></i>
-                <span><strong>Contacto Directo</strong> con el explorador</span>
-              </div>
-              <div class="biz-benefit-item">
-                <i class="fa-solid fa-satellite"></i>
-                <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-              </div>
-              <div class="biz-benefit-item">
-                <i class="fa-solid fa-shield-heart"></i>
-                <span><strong>Auditoría & Respaldo</strong> de la Mesa Baqueano</span>
-              </div>
+          <div class="download-specs-bar">
+            <span class="spec-chip"><i class="fa-brands fa-android"></i> Android 8.0 o superior</span>
+            <span class="spec-chip"><i class="fa-solid fa-hard-drive"></i> Peso: ~56 MB</span>
+            <span class="spec-chip"><i class="fa-solid fa-shield-halved"></i> APK Seguro y Firmado</span>
+            <span class="spec-chip"><i class="fa-solid fa-ban"></i> 100% Libre de Publicidad</span>
+          </div>
+
+          <div class="download-cta-double">
+            <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="directApkDownloadBtn" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
+              <i class="fa-solid fa-download"></i> Descargar BaqueanoNicaragua.apk
+            </a>
+            <button class="btn-hero-glass open-download-modal-btn" style="padding: 1.1rem 2rem; font-size: 1.02rem;">
+              <i class="fa-solid fa-circle-question"></i> Guía Paso a Paso de Instalación
+            </button>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn-admin-action" id="shareWhatsAppBtn">
+              <i class="fa-brands fa-whatsapp"></i> Compartir por WhatsApp
+            </button>
+            <button class="btn-admin-action" id="copyLinkBtn">
+              <i class="fa-solid fa-link"></i> Copiar Enlace Oficial
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER OFICIAL -->
+  <footer class="site-footer-pro">
+    <div class="container">
+
+      <!-- ======================================================================
+           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
+           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
+              con el ecosistema Baqueano sin intermediarios foráneos.
+           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
+              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
+           📦 Tarjeta #registroNegocios integrada en el footer institucional.
+           ====================================================================== -->
+      <div class="footer-biz-register-card" id="registroNegocios">
+        <!-- Encabezado de la Tarjeta -->
+        <div class="footer-biz-header-wrap">
+          <div class="footer-biz-tag">
+            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
+          </div>
+          <h3 class="footer-biz-title">
+            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
+          </h3>
+          <p class="footer-biz-subtitle">
+            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
+          </p>
+
+          <!-- Tiras de Ventajas Tácticas -->
+          <div class="footer-biz-benefits-strip">
+            <div class="footer-biz-benefit-item">
+              <i class="fa-solid fa-percent"></i>
+              <span><strong>0% Comisiones</strong> intermediarios</span>
             </div>
-
-            <!-- Botón de Acción Principal para Abrir la Postulación -->
-            <div class="biz-trigger-wrap">
-              <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-                <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-              </button>
+            <div class="footer-biz-benefit-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span><strong>Contacto Directo</strong> con el viajero</span>
+            </div>
+            <div class="footer-biz-benefit-item">
+              <i class="fa-solid fa-satellite"></i>
+              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
+            </div>
+            <div class="footer-biz-benefit-item">
+              <i class="fa-solid fa-shield-heart"></i>
+              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
             </div>
           </div>
 
-          <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-          <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-            <div class="biz-form-header-bar">
-              <div class="biz-form-header-info">
-                <i class="fa-solid fa-file-signature" style="color: #2DD4BF; font-size: 1.1rem;"></i>
-                <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-              </div>
-              <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-                <i class="fa-solid fa-chevron-up"></i> Ocultar
-              </button>
-            </div>
+          <!-- Botón de Acción Principal para Abrir la Postulación -->
+          <div class="biz-trigger-wrap">
+            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
+              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
+              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
+            </button>
+          </div>
+        </div>
 
-            <!-- Formulario de Registro -->
-            <form id="registerBusinessForm" class="biz-form" novalidate>
+        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
+        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
+          <div class="biz-form-header-bar">
+            <div class="biz-form-header-info">
+              <i class="fa-solid fa-file-signature" style="color: #2DD4BF; font-size: 1.1rem;"></i>
+              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
+            </div>
+            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
+              <i class="fa-solid fa-chevron-up"></i> Ocultar
+            </button>
+          </div>
+
+          <!-- Formulario de Registro -->
+          <form id="registerBusinessForm" class="biz-form" novalidate>
             <div class="biz-form-grid">
               
               <!-- 1. Nombre del Negocio -->
@@ -1540,34 +1608,33 @@
               <!-- 13. Horario de Atención -->
               <div class="biz-field-group">
                 <label for="bizSchedule" class="biz-label">
-                  <i class="fa-solid fa-clock"></i> Horario Habitual de Atención
+                  <i class="fa-solid fa-clock"></i> Horario de Atención
                 </label>
-                <input type="text" id="bizSchedule" name="bizSchedule" class="biz-input" placeholder="Ej: Lunes a Domingo 7:00 AM - 8:00 PM">
+                <input type="text" id="bizSchedule" name="bizSchedule" class="biz-input" placeholder="Ej: Lunes a Domingo, 7:00 AM - 9:00 PM">
               </div>
 
-              <!-- 14. Descripción -->
+              <!-- 14. Breve Descripción -->
               <div class="biz-field-group biz-col-full">
                 <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-pen-to-square"></i> Descripción del Servicio, Menú o Atractivo <span class="req">*</span>
+                  <i class="fa-solid fa-align-left"></i> Breve Descripción del Servicio o Menú Típico <span class="req">*</span>
                   <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
                 </label>
-                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" rows="3" maxlength="300" placeholder="Describe los platos típicos, tours guiados o comodidades de tu establecimiento..." required></textarea>
+                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Describe qué ofreces al visitante, especialidad culinaria, tipo de habitaciones o atractivos naturales cercanos..." required></textarea>
                 <span class="biz-error-msg" id="err-bizDescription"></span>
               </div>
 
-              <!-- 15. Fotografía del Local -->
+              <!-- 15. Fotografía Principal -->
               <div class="biz-field-group biz-col-full">
                 <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Fotografía del Local o Fachada (Opcional)
+                  <i class="fa-solid fa-camera"></i> Fotografía del Negocio o Platillo Principal
                 </label>
-                <div class="biz-file-upload-box" id="bizDropZone">
+                <div class="biz-file-dropzone" id="bizFileDropzone">
                   <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
                   <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Haz clic o arrastra una imagen de tu establecimiento</span>
-                    <small>Formatos JPG, PNG, WEBP (Máximo 5MB)</small>
+                    <span>Toca o arrastra una imagen de tu establecimiento (Máx 5MB)</span>
                   </div>
-                  <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
+                  <div class="biz-photo-preview" id="bizPhotoPreview">
                     <img id="bizPreviewImg" src="" alt="Vista previa">
                     <button type="button" class="biz-btn-remove-photo" id="bizBtnRemovePhoto" title="Eliminar foto">
                       <i class="fa-solid fa-xmark"></i>
@@ -1601,82 +1668,10 @@
 
             </div>
           </form>
-          </div> <!-- /bizFormCollapse -->
+        </div> <!-- /bizFormCollapse -->
 
-        </div>
-      </div>
-    </section>
+      </div> <!-- /footer-biz-register-card -->
 
-    <!-- MODAL DE CONFIRMACIÓN DE REGISTRO DE NEGOCIO -->
-    <div class="modal-backdrop-pro" id="bizSuccessModal" aria-hidden="true" role="dialog">
-      <div class="modal-card-dialog" style="max-width: 520px; text-align: center;">
-        <button class="modal-close-x" id="closeBizModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-        <div class="modal-icon-top" style="background: rgba(22, 93, 111, 0.3); border-color: #2DD4BF;">
-          <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #10B981;"></i>
-        </div>
-        <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">¡Postulación Recibida con Éxito!</h3>
-        <p style="font-size: 0.95rem; color: var(--arena-pinolera); line-height: 1.6; margin-bottom: 1.2rem;">
-          Tu establecimiento ha sido registrado en el sistema y remitido a la Mesa Técnica Baqueano.
-          El equipo verificará las coordenadas y detalles para incluirlo en el mapa satelital HD y catálogo territorial.
-        </p>
-        <div id="bizModalSummary" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(22, 93, 111, 0.4); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.88rem; color: #FFFFFF;">
-        </div>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a id="bizModalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="background: #25D366; border: none; justify-content: center; flex: 1;">
-            <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp de Mesa Baqueano
-          </a>
-          <button type="button" class="btn-hero-glass" id="bizModalCloseBtn" style="padding: 0.85rem 1.5rem;">
-            Aceptar
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- PORTAL DE DESCARGA DIRECTA DE APK -->
-    <section class="download-section-hero">
-      <div class="container">
-        <div class="download-portal-card">
-          <div class="apk-icon-center">
-            <img src="assets/images/logo.png" alt="Baqueano APK">
-          </div>
-          <h2 class="download-portal-title">Descarga Baqueano para Android</h2>
-          <p style="font-size: 1.1rem; color: var(--arena-pinolera); max-width: 680px; margin: 0 auto;">
-            La aplicación oficial con mapas topográficos sin conexión a internet, baliza satelital SOS 24/7 y contacto directo con las cooperativas campesinas.
-          </p>
-
-          <div class="download-specs-bar">
-            <span class="spec-chip"><i class="fa-brands fa-android"></i> Android 8.0 o superior</span>
-            <span class="spec-chip"><i class="fa-solid fa-hard-drive"></i> Peso: ~56 MB</span>
-            <span class="spec-chip"><i class="fa-solid fa-shield-halved"></i> APK Seguro y Firmado</span>
-            <span class="spec-chip"><i class="fa-solid fa-ban"></i> 100% Libre de Publicidad</span>
-          </div>
-
-          <div class="download-cta-double">
-            <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="directApkDownloadBtn" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
-              <i class="fa-solid fa-download"></i> Descargar BaqueanoNicaragua.apk
-            </a>
-            <button class="btn-hero-glass open-download-modal-btn" style="padding: 1.1rem 2rem; font-size: 1.02rem;">
-              <i class="fa-solid fa-circle-question"></i> Guía Paso a Paso de Instalación
-            </button>
-          </div>
-
-          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <button class="btn-admin-action" id="shareWhatsAppBtn">
-              <i class="fa-brands fa-whatsapp"></i> Compartir por WhatsApp
-            </button>
-            <button class="btn-admin-action" id="copyLinkBtn">
-              <i class="fa-solid fa-link"></i> Copiar Enlace Oficial
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER OFICIAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
           <div class="brand-box" style="margin-bottom: 1.2rem;">
@@ -1700,6 +1695,7 @@
             <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
             <li><a href="musica.html">Patrimonio Sonoro</a></li>
             <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
           </ul>
         </div>
 
@@ -1879,9 +1875,8 @@
     if (closeBtnTop) closeBtnTop.addEventListener('click', closeBizForm);
 
     // Permitir abrir también al hacer clic en el encabezado (título o badge)
-    const bizTitle = document.querySelector('.biz-main-title');
-    const bizPill = document.querySelector('.biz-badge-pill');
-    [bizTitle, bizPill].forEach(el => {
+    const bizTitles = document.querySelectorAll('.footer-biz-title, .footer-biz-tag, .biz-main-title, .biz-badge-pill');
+    bizTitles.forEach(el => {
       if (el) {
         el.style.cursor = 'pointer';
         el.title = 'Haz clic para desplegar el formulario de postulación';
@@ -1892,6 +1887,15 @@
         });
       }
     });
+
+    // Enlace en Módulos Web del footer
+    const footerLink = document.getElementById('footerLinkRegBiz');
+    if (footerLink) {
+      footerLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openBizForm(true);
+      });
+    }
 
     // Abrir automáticamente si la URL contiene el hash #registroNegocios
     if (window.location.hash === '#registroNegocios') {
