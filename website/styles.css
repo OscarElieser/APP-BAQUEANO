@@ -7552,7 +7552,8 @@ img {
   .main-navbar .nav-profile-role { display: none; }
 }
 
-@media (max-width: 1200px) {
+/* --- SOLO OCULTAR MENÚ EN MÓVIL PEQUEÑO (≤ 768px) --- */
+@media (max-width: 768px) {
   .main-navbar .nav-inner { display: flex; min-height: 68px; }
   .main-navbar .brand-text { display: flex; }
   .main-navbar .nav-links-menu {
@@ -7570,6 +7571,8 @@ img {
     width: 100%;
     min-height: 54px;
     padding: 0.65rem 0.8rem;
+  }
+}
 
 /* ========================================================================== 
    SUBMEN? TERRITORIAL ? POSICIONAMIENTO Y ACABADO DE ALTA GAMA
@@ -7685,7 +7688,7 @@ img {
 .main-navbar .mega-menu-footer { display: flex; justify-content: center; gap: 5px; padding-top: 4px; }
 .main-navbar .mega-menu-footer-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(244,230,193,.3); }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   .main-navbar .nav-dropdown { display: block; width: 100%; }
   .main-navbar .nav-dropdown-menu {
     position: relative;
@@ -7720,7 +7723,7 @@ img {
    ?? C?MO: recupera el modo horizontal entre 901 y 1200 px y compacta controles.
    ?? QU?: men? completo visible, acciones claras y submen? flotante alineado.
    ========================================================================== */
-@media (min-width: 901px) and (max-width: 1200px) {
+@media (min-width: 769px) and (max-width: 1200px) {
   .main-navbar .nav-inner {
     display: grid;
     grid-template-columns: 48px minmax(0, 1fr) max-content;
@@ -7809,6 +7812,67 @@ img {
     max-height: none;
     margin: 0;
     padding: 12px;
+
+/* ========================================================================== 
+   PROCEDENCIA DE DATOS DEL OPS CENTER
+   ?? POR QU?: impedir que cifras de referencia se interpreten como producci?n.
+   ?? C?MO: un estado global cambia entre demostraci?n y Firestore verificado.
+   ?? QU?: banner accesible, insignia de entorno y variantes responsivas.
+   ========================================================================== */
+.ops-data-provenance {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: 12px;
+  margin: 0 1rem 1rem;
+  padding: 12px 14px;
+  border: 1px solid rgba(245, 158, 11, 0.34);
+  border-radius: 14px;
+  background: linear-gradient(110deg, rgba(245, 158, 11, 0.12), rgba(15, 23, 42, 0.82));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.2);
+}
+
+.ops-data-provenance.is-live {
+  border-color: rgba(16, 185, 129, 0.34);
+  background: linear-gradient(110deg, rgba(16, 185, 129, 0.11), rgba(15, 23, 42, 0.82));
+}
+
+.ops-data-provenance-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 11px;
+  color: #F4E6C1;
+  background: rgba(245, 158, 11, 0.16);
+}
+
+.ops-data-provenance.is-live .ops-data-provenance-icon {
+  color: #6EE7B7;
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.ops-data-provenance-copy { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.ops-data-provenance-copy strong { font-family: var(--font-tech); font-size: 0.72rem; letter-spacing: 0.08em; color: #FBBF24; }
+.ops-data-provenance.is-live .ops-data-provenance-copy strong { color: #6EE7B7; }
+.ops-data-provenance-copy span { font-size: 0.72rem; line-height: 1.45; color: rgba(255, 255, 255, 0.56); }
+.ops-data-provenance-badge {
+  padding: 5px 9px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--font-tech);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+.ops-data-provenance-badge.demo { color: #FBBF24; background: rgba(245, 158, 11, 0.1); }
+.ops-data-provenance-badge.live { color: #6EE7B7; background: rgba(16, 185, 129, 0.1); }
+
+@media (max-width: 640px) {
+  .ops-data-provenance { grid-template-columns: 36px 1fr; margin-inline: 0.65rem; }
+  .ops-data-provenance-icon { width: 36px; height: 36px; }
+  .ops-data-provenance-badge { grid-column: 1 / -1; justify-self: start; }
+}
     transform: translateY(0) scale(1);
   }
 

@@ -265,9 +265,9 @@
             </svg>
             <span>Continuar con Google</span>
           </button>
-          <div class="login-divider-line"><span>o ingresa con tu correo registrado</span></div>
+          <div class="login-divider-line"><span>Solo cuentas Google autorizadas por BAQUEANO</span></div>
           <div class="login-feedback-alert" id="loginFeedback"></div>
-          <form id="adminLoginForm">
+          <form id="adminLoginForm" hidden aria-hidden="true">
             <div class="login-input-group">
               <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Correo Electrónico Registrado:</label>
               <div class="login-input-wrap">
@@ -312,6 +312,16 @@
             <span style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-tech);">SESIÓN ACTIVA • TLS 1.3</span>
             <button class="btn-logout" id="btnLogoutAdmin"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</button>
           </div>
+        </div>
+
+        <!-- Procedencia global de la informaci?n operativa -->
+        <div class="ops-data-provenance" id="opsDataProvenance" role="status" aria-live="polite">
+          <span class="ops-data-provenance-icon"><i class="fa-solid fa-flask"></i></span>
+          <div class="ops-data-provenance-copy">
+            <strong id="opsDataSourceLabel">MODO DEMOSTRACI?N</strong>
+            <span id="opsDataSourceDetail">Las cifras fijas son referencias visuales. Los registros de Firestore se identificar?n como datos en vivo.</span>
+          </div>
+          <span class="ops-data-provenance-badge demo" id="opsDataSourceBadge">DEMO</span>
         </div>
 
         <!-- OPS CENTER: LAYOUT SIDEBAR + MAIN -->
@@ -1986,6 +1996,9 @@
   </div>
 
   <!-- Scripts Modulares -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="/__/firebase/init.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="js/admin-ops.js"></script>
