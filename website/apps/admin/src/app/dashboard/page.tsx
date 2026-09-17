@@ -6,7 +6,7 @@
  * Uses dense KPI tiles and recent activity prepared for Firestore-backed snapshots.
  *
  * WHAT
- * Main dashboard for Baqueano Control Center.
+ * Main dashboard for Baqueano Control Center and territorial operations.
  */
 import { AlertTriangle, CreditCard, Leaf, MapPinned, Users } from "lucide-react";
 import { AdminMetric, AdminPanel } from "../../components/AdminCards";
