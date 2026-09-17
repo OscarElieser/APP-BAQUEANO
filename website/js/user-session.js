@@ -149,51 +149,126 @@
   }
 
   /**
-   * Actualiza los enlaces del Navbar en la página actual.
+   * Actualiza los enlaces del Navbar en la página actual de forma robusta y defensiva.
+   * 🎯 Por qué: Garantizar que el botón "Perfil" SIEMPRE permanezca visible y accesible
+   *    en el menú de navegación para todos los usuarios (exploradores y administradores),
+   *    evitando que sea sobreescrito o eliminado por el enlace de Ops Center.
+   * ⚙️ Cómo: Mantener de forma independiente el botón de "Perfil" (perfil.html) y el
+   *    botón de "Ops Center" (admin.html), sincronizando estado activo, subetiquetas e insignias.
+   * 📦 Qué: Botón Perfil en menú, botón Ops Center condicional, botón avatar en cabecera y enlaces de pie de página.
    */
   function updateNavbar() {
     const user = loadSession();
     const navMeta = getRoleNavMetadata(user);
+    const currentPath = (window.location.pathname || '').toLowerCase();
+    const isPerfilPage = currentPath.endsWith('perfil.html');
+    const isAdminPage = currentPath.endsWith('admin.html');
+    const isAuthenticated = Boolean(user && user.isLoggedIn);
+    const userFirstName = (user && user.name)
+      ? user.name.trim().split(/\s+/)[0]
+      : (isAuthenticated ? 'Explorador' : 'Mi Cuenta');
 
-    // 1. Localizar el enlace de Ops Center / Perfil en la barra de navegación
     const navLinksMenu = document.getElementById('navLinksMenu');
-    if (!navLinksMenu) return;
+    if (navLinksMenu) {
+      // 1. GARANTIZAR QUE EL BOTÓN DE "PERFIL" ESTÉ SIEMPRE PRESENTE EN EL MENÚ (NUNCA SE ELIMINA)
+      let perfilLink = navLinksMenu.querySelector('a[href="perfil.html"], .nav-link-perfil');
 
-    // Buscar el enlace existente por targetUrl o clase
-    let roleLink = navLinksMenu.querySelector('a[href="admin.html"], a[href="perfil.html"], .nav-link-user-role');
+      const perfilSublabel = isAuthenticated ? userFirstName : 'Iniciar sesión';
+      const perfilBadge = isAuthenticated ? '● Activo' : 'Acceso';
 
-    if (roleLink) {
-      roleLink.href = navMeta.targetUrl;
-      roleLink.className = roleLink.className.replace(/\bactive\b/, '');
-
-      const currentPath = window.location.pathname.toLowerCase();
-      if (currentPath.endsWith(navMeta.targetUrl.toLowerCase())) {
-        roleLink.classList.add('active');
-      }
-
-      // Icono representativo
-      const iconClass = navMeta.isPrivileged ? 'fa-solid fa-satellite-dish' : 'fa-solid fa-user-gear';
-      const badgeHtml = navMeta.badge ? `<span class="nav-item-badge ${navMeta.isPrivileged ? 'live' : ''}">${navMeta.badge}</span>` : '';
-
-      roleLink.innerHTML = `
+      const perfilInnerHtml = `
         <span class="nav-item-content">
-          <span class="nav-icon-box"><i class="${iconClass} nav-icon"></i></span>
+          <span class="nav-icon-box"><i class="fa-solid fa-circle-user nav-icon"></i></span>
           <span class="nav-text-group">
-            <span class="nav-label">${navMeta.navTitle}</span>
-            <span class="nav-sublabel">${navMeta.navSublabel}</span>
+            <span class="nav-label">Perfil</span>
+            <span class="nav-sublabel">${escapeHtml(perfilSublabel)}</span>
           </span>
         </span>
         <span class="nav-right-wrap">
-          ${badgeHtml}
+          <span class="nav-item-badge">${escapeHtml(perfilBadge)}</span>
           <i class="fa-solid fa-chevron-right nav-arrow"></i>
         </span>
       `;
+
+      if (perfilLink) {
+        perfilLink.href = 'perfil.html';
+        perfilLink.classList.remove('nav-link-user-role');
+        perfilLink.classList.add('nav-link-perfil');
+        if (isPerfilPage) {
+          perfilLink.classList.add('active');
+        } else {
+          perfilLink.classList.remove('active');
+        }
+        perfilLink.innerHTML = perfilInnerHtml;
+      } else {
+        // Inyección reactiva si el HTML base no lo incluyó
+        perfilLink = document.createElement('a');
+        perfilLink.href = 'perfil.html';
+        perfilLink.className = `nav-link-perfil ${isPerfilPage ? 'active' : ''}`;
+        perfilLink.setAttribute('role', 'menuitem');
+        perfilLink.innerHTML = perfilInnerHtml;
+
+        // Insertar justo antes del Ops Center si existe, o al final
+        const opsRef = navLinksMenu.querySelector('a[href="admin.html"], .nav-link-ops');
+        if (opsRef) {
+          navLinksMenu.insertBefore(perfilLink, opsRef);
+        } else {
+          navLinksMenu.appendChild(perfilLink);
+        }
+      }
+
+      // 2. GESTIONAR EL BOTÓN DE "OPS CENTER" (ADMINISTRADOR / AUDITOR) SIN AFECTAR AL PERFIL
+      let opsLink = navLinksMenu.querySelector('a[href="admin.html"], .nav-link-ops');
+      if (navMeta.isPrivileged) {
+        if (!opsLink) {
+          opsLink = document.createElement('a');
+          opsLink.href = 'admin.html';
+          opsLink.className = 'nav-link-ops';
+          opsLink.setAttribute('role', 'menuitem');
+          navLinksMenu.appendChild(opsLink);
+        }
+        opsLink.style.display = '';
+        opsLink.href = 'admin.html';
+        if (isAdminPage) {
+          opsLink.classList.add('active');
+        } else {
+          opsLink.classList.remove('active');
+        }
+        opsLink.innerHTML = `
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">${escapeHtml(navMeta.navTitle || 'Ops Center')}</span>
+              <span class="nav-sublabel">${escapeHtml(navMeta.navSublabel || 'Comando & Gestión')}</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">${escapeHtml(navMeta.badge || '● 24/7')}</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        `;
+      } else if (opsLink) {
+        // Ocultar Ops Center para usuarios regulares/invitados
+        opsLink.style.display = 'none';
+      }
     }
 
-    // 2. Sincronizar el botón de identidad situado a la derecha del encabezado.
+    // 3. Sincronizar o inyectar el botón de identidad / avatar situado a la derecha del encabezado (.nav-profile-btn)
+    const navActionsRight = document.querySelector('.nav-actions-right');
+    if (navActionsRight && !navActionsRight.querySelector('.nav-profile-btn')) {
+      const chip = document.createElement('a');
+      chip.className = 'nav-profile-btn';
+      chip.href = 'perfil.html';
+      const sosBtn = navActionsRight.querySelector('.sos-quick-btn');
+      if (sosBtn) {
+        navActionsRight.insertBefore(chip, sosBtn);
+      } else {
+        navActionsRight.prepend(chip);
+      }
+    }
+
     document.querySelectorAll('.nav-profile-btn').forEach((profileButton) => {
-      const isAuthenticated = Boolean(user && user.isLoggedIn && user.firebaseUid);
-      profileButton.href = isAuthenticated ? 'perfil.html' : 'perfil.html?auth=1';
+      profileButton.href = 'perfil.html';
       profileButton.title = isAuthenticated ? 'Abrir mi perfil' : 'Iniciar sesión';
       profileButton.setAttribute('aria-label', profileButton.title);
 
@@ -220,11 +295,15 @@
       `;
     });
 
-    // 3. Actualizar también el enlace correspondiente en el footer
-    const footerRoleLink = document.querySelector('.footer-link-list a[href="admin.html"], .footer-link-list a[href="perfil.html"]');
-    if (footerRoleLink) {
-      footerRoleLink.href = navMeta.targetUrl;
-      footerRoleLink.textContent = navMeta.isPrivileged ? 'Baqueano Ops Center' : 'Mi Perfil de Explorador';
+    // 4. Actualizar enlaces correspondientes en el footer
+    const footerPerfilLink = document.querySelector('.footer-link-list a[href="perfil.html"]');
+    if (footerPerfilLink) {
+      footerPerfilLink.textContent = isAuthenticated ? `Mi Perfil (${userFirstName})` : 'Mi Perfil de Explorador';
+    }
+
+    const footerOpsLink = document.querySelector('.footer-link-list a[href="admin.html"]');
+    if (footerOpsLink) {
+      footerOpsLink.style.display = navMeta.isPrivileged ? '' : 'none';
     }
   }
 

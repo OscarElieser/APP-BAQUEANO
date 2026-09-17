@@ -45,56 +45,54 @@ window.BaqueanoMap = (function() {
   }
 
   // --------------------------------------------------------------------------
-  // CONFIGURACIÓN DE CAPAS DE MAPA REALES (SIN MARCAS DE AGUA)
+  // CONFIGURACIÓN DE CAPAS DE MAPA ULTRA RESOLUCIÓN Y ALTA DISPONIBILIDAD
+  // 🎯 Por qué: Garantizar que todos los botones de capa (Satélite HD, Híbrido, Rutas,
+  //    Mapa Claro, Noche y Relieve) carguen de inmediato sin errores de teselas ni fallbacks forzados.
+  // ⚙️ Cómo: Uso de endpoints optimizados multihost con balanceo y proyección Web Mercator estándar.
+  // 📦 Qué: satellite, hybrid, streets, osm, dark, topo.
   // --------------------------------------------------------------------------
   const TILE_PROVIDERS = {
     satellite: {
       name: 'Satélite HD',
-      googleType: 'satellite',
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Google Maps / Esri World Imagery',
-      subdomains: '',
+      url: 'https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps &mdash; Satélite HD',
       maxZoom: 20
     },
     hybrid: {
       name: 'Satélite Híbrido',
-      googleType: 'hybrid',
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Google Maps / Esri Imagery & Rutas',
-      subdomains: '',
+      url: 'https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps &mdash; Híbrido & Rutas',
       maxZoom: 20
     },
     streets: {
       name: 'Rutas & Playas',
-      googleType: 'roadmap',
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Google Maps / Esri &mdash; Rutas y Playas de Nicaragua',
-      subdomains: '',
+      url: 'https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps &mdash; Rutas y Playas',
       maxZoom: 20
     },
     osm: {
       name: 'Mapa Claro',
-      googleType: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      subdomains: ['a', 'b', 'c'],
       attribution: '&copy; OpenStreetMap contributors',
-      subdomains: 'abc',
       maxZoom: 19
     },
     dark: {
       name: 'Modo Noche',
-      googleType: null,
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Esri &copy; OpenStreetMap',
-      subdomains: '',
-      maxZoom: 18
+      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+      subdomains: ['a', 'b', 'c', 'd'],
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      maxZoom: 19
     },
     topo: {
-      name: 'Topográfico',
-      googleType: null,
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-      attribution: '&copy; Esri &mdash; National Geographic, USGS, INETER',
-      subdomains: '',
-      maxZoom: 19
+      name: 'Relieve & Topografía',
+      url: 'https://mt{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps &mdash; Terreno & Relieve',
+      maxZoom: 20
     }
   };
 
@@ -217,7 +215,11 @@ window.BaqueanoMap = (function() {
   }
 
   // --------------------------------------------------------------------------
-  // CAMBIO DE CAPA BASE (GOOGLE MUTANT CON FALLBACK A ESRI/OSM)
+  // CAMBIO DE CAPA BASE NATIVO Y DE ALTA VELOCIDAD
+  // 🎯 Por qué: Permitir alternar de forma inmediata entre Satélite HD, Híbrido, Rutas,
+  //    Mapa Claro, Noche y Relieve sin retrasos, fallos de CORS ni regresiones involuntarias.
+  // ⚙️ Cómo: Instanciación limpia de Leaflet TileLayer con URLs verificadas y subdominios balanceados.
+  // 📦 Qué: switchTileLayer(layerKey).
   // --------------------------------------------------------------------------
   function switchTileLayer(layerKey) {
     if (!mapInstance) return;
@@ -227,6 +229,10 @@ window.BaqueanoMap = (function() {
       layerKey = 'satellite';
     }
 
+    const conf = TILE_PROVIDERS[layerKey];
+    currentLayerKey = layerKey;
+
+    // Retirar capa activa anterior de forma segura
     if (activeTileLayer) {
       try {
         mapInstance.removeLayer(activeTileLayer);
@@ -236,61 +242,32 @@ window.BaqueanoMap = (function() {
       activeTileLayer = null;
     }
 
-    const conf = TILE_PROVIDERS[layerKey];
-    activeTileErrorCount = 0;
-    currentLayerKey = layerKey;
-
-    // 1. Intentar proveedor oficial Google Maps GridLayer si está disponible
-    if (conf.googleType && isGoogleMutantAvailable()) {
-      try {
-        activeTileLayer = L.gridLayer.googleMutant({
-          type: conf.googleType,
-          maxZoom: 20
-        });
-        activeTileLayer.addTo(mapInstance);
-        updateMapStatus(`Google Maps ${conf.name} activo y ${currentPlaces.length} destinos visibles`, 'firestore');
-        updateLayerButtonsUI(layerKey);
-        if (mapInstance) mapInstance.invalidateSize();
-        return;
-      } catch (errGoogle) {
-        console.warn('[BaqueanoMap] Error inicializando Google Mutant (' + conf.googleType + '), usando fallback Esri:', errGoogle);
-      }
-    }
-
-    // 2. Fallback estándar a teselas Esri / OSM sin marcas de agua
+    // Configuración robusta de la capa Leaflet
     const layerOptions = {
       attribution: conf.attribution,
-      maxZoom: conf.maxZoom || 19,
-      minZoom: 2,
-      crossOrigin: true
+      maxZoom: conf.maxZoom || 20,
+      minZoom: 3,
+      subdomains: conf.subdomains || 'abc'
     };
 
-    if (conf.subdomains) {
-      layerOptions.subdomains = conf.subdomains;
-    }
-
     activeTileLayer = L.tileLayer(conf.url, layerOptions);
-
-    activeTileLayer.on('tileerror', function(error) {
-      activeTileErrorCount += 1;
-      console.warn('[BaqueanoMap] Error de tesela en capa', layerKey, error);
-      if (activeTileErrorCount >= 4 && layerKey !== 'osm') {
-        switchTileLayer('osm');
-        updateMapStatus('Mostrando mapa claro por conexión limitada del proveedor satelital.', 'seed');
-      }
-    });
 
     activeTileLayer.on('load', function() {
       updateMapStatus(`${conf.name} activo y ${currentPlaces.length} destinos visibles`, 'firestore');
     });
 
+    activeTileLayer.on('tileerror', function(error) {
+      console.warn('[BaqueanoMap] Reintento de tesela en capa ' + layerKey);
+    });
+
     activeTileLayer.addTo(mapInstance);
 
-    // Forzar actualización inmediata del cálculo geométrico de Leaflet
+    // Asegurar renderizado geométrico perfecto
     if (mapInstance) {
       mapInstance.invalidateSize();
     }
 
+    // Actualizar inmediatamente los estados activos de los botones
     updateLayerButtonsUI(layerKey);
   }
 
@@ -325,25 +302,50 @@ window.BaqueanoMap = (function() {
   }
 
   // --------------------------------------------------------------------------
-  // FILTRAR MARCADORES POR CATEGORÍA
+  // FILTRAR MARCADORES POR CATEGORÍA & EXPERIENCIA
+  // 🎯 Por qué: Permitir a los exploradores filtrar al instante por Playa, Bares,
+  //    Hospedaje, Gastronomía o Museos con reencuadre cinemático de cámara.
+  // ⚙️ Cómo: Agrupación semántica de categorías de Firestore y ajuste de límites Leaflet.
+  // 📦 Qué: filterMarkersByCategory(category).
   // --------------------------------------------------------------------------
   function filterMarkersByCategory(category) {
     activeCategoryFilter = category;
 
-    const MACRO_GROUPS = {
+    const CATEGORY_MAP = {
+      'all': 'all',
+      'playa': ['playas', 'bahias', 'islas'],
+      'playas': ['playas', 'bahias', 'islas'],
+      'bares': ['discotecas', 'bares'],
+      'discotecas': ['discotecas', 'bares'],
+      'hospedaje': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
+      'hoteles': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
+      'gastronomia': ['gastronomia'],
+      'museo': ['museos', 'museo'],
+      'museos': ['museos', 'museo'],
       'naturaleza-all': ['playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas'],
       'estadias-all': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
       'cultura-all': ['gastronomia', 'museos', 'discotecas']
     };
 
+    const LABELS = {
+      'all': 'Todos los Destinos',
+      'playa': 'Playas & Costas',
+      'bares': 'Bares & Vida Nocturna',
+      'hospedaje': 'Hospedajes & Eco-Lodges',
+      'gastronomia': 'Gastronomía Tradicional',
+      'museo': 'Museos & Patrimonio'
+    };
+
     let visibleCount = 0;
+    const visibleLatLngs = [];
+
     Object.keys(markersById).forEach(placeId => {
       const { marker, place } = markersById[placeId];
       let match = false;
       if (category === 'all') {
         match = true;
-      } else if (MACRO_GROUPS[category]) {
-        match = MACRO_GROUPS[category].includes(place.category);
+      } else if (CATEGORY_MAP[category]) {
+        match = CATEGORY_MAP[category].includes(place.category);
       } else {
         match = (place.category === category);
       }
@@ -353,6 +355,9 @@ window.BaqueanoMap = (function() {
           marker.addTo(mapInstance);
         }
         visibleCount++;
+        if (place.lat && place.lng) {
+          visibleLatLngs.push([place.lat, place.lng]);
+        }
       } else {
         if (mapInstance.hasLayer(marker)) {
           mapInstance.removeLayer(marker);
@@ -360,9 +365,38 @@ window.BaqueanoMap = (function() {
       }
     });
 
+    // Actualizar botones de categoría activos en la UI
+    document.querySelectorAll('.map-category-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.category === category);
+    });
+
+    // Reencuadre cinemático de cámara hacia los destinos filtrados
+    if (mapInstance) {
+      if (category === 'all' || visibleLatLngs.length === 0) {
+        mapInstance.flyTo([12.8654, -85.2072], 7, {
+          duration: 1.2,
+          easeLinearity: 0.25
+        });
+      } else if (visibleLatLngs.length === 1) {
+        mapInstance.flyTo(visibleLatLngs[0], 12, {
+          duration: 1.2,
+          easeLinearity: 0.25
+        });
+      } else {
+        const bounds = L.latLngBounds(visibleLatLngs);
+        mapInstance.fitBounds(bounds, {
+          padding: [50, 50],
+          maxZoom: 12,
+          animate: true,
+          duration: 1.2
+        });
+      }
+    }
+
     const badge = document.getElementById('mapSourceBadge');
     if (badge) {
-      badge.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${visibleCount} marcadores activos (${category === 'all' ? 'Todas las categorías' : category})`;
+      const friendlyName = LABELS[category] || category;
+      badge.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${visibleCount} destinos activos (${friendlyName})`;
     }
   }
 
@@ -488,6 +522,29 @@ window.BaqueanoMap = (function() {
         <button type="button" class="map-region-btn" data-region="caribe">🏝️ Corn Island</button>
         <button type="button" class="map-region-btn" data-region="riosanjuan">🛶 Río S. Juan</button>
       </div>
+
+      <!-- Filtro por Experiencia & Servicios -->
+      <div class="map-ctrl-group map-categories-selector">
+        <span class="map-ctrl-label"><i class="fa-solid fa-tags"></i> Experiencia:</span>
+        <button type="button" class="map-category-btn active" data-category="all" title="Ver todos los destinos">
+          <i class="fa-solid fa-border-all"></i> Todos
+        </button>
+        <button type="button" class="map-category-btn" data-category="playa" title="Playas y Costas del Pacífico y Caribe">
+          <i class="fa-solid fa-umbrella-beach"></i> Playa
+        </button>
+        <button type="button" class="map-category-btn" data-category="bares" title="Bares, Discotecas y Vida Nocturna">
+          <i class="fa-solid fa-martini-glass"></i> Bares
+        </button>
+        <button type="button" class="map-category-btn" data-category="hospedaje" title="Hospedajes, Eco-Lodges, Hostales y Cabañas">
+          <i class="fa-solid fa-hotel"></i> Hospedaje
+        </button>
+        <button type="button" class="map-category-btn" data-category="gastronomia" title="Gastronomía Campesina y Tradicional">
+          <i class="fa-solid fa-utensils"></i> Gastronomía
+        </button>
+        <button type="button" class="map-category-btn" data-category="museo" title="Museos, Historia y Patrimonio">
+          <i class="fa-solid fa-landmark"></i> Museo
+        </button>
+      </div>
     `;
 
     container.parentNode.insertBefore(controlsWrap, container);
@@ -503,6 +560,13 @@ window.BaqueanoMap = (function() {
     controlsWrap.querySelectorAll('.map-region-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         focusRegion(btn.dataset.region);
+      });
+    });
+
+    // Event listeners para categorías y experiencias
+    controlsWrap.querySelectorAll('.map-category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterMarkersByCategory(btn.dataset.category);
       });
     });
   }
