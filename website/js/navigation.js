@@ -199,18 +199,13 @@ function initMobileMenu() {
   const toggleMenu = () => {
     const isOpen = navMenu.classList.toggle('mobile-open');
     toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggleBtn.innerHTML = isOpen 
-      ? '<i class="fa-solid fa-xmark"></i>' 
-      : '<i class="fa-solid fa-bars"></i>';
-    toggleBtn.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+    // La animación X es manejada por CSS via aria-expanded, no se cambia innerHTML
   };
 
   const closeMenu = () => {
     if (navMenu.classList.contains('mobile-open')) {
       navMenu.classList.remove('mobile-open');
       toggleBtn.setAttribute('aria-expanded', 'false');
-      toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-      toggleBtn.style.transform = 'rotate(0deg)';
     }
   };
 
