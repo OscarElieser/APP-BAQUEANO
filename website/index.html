@@ -556,6 +556,125 @@
     }
 
     /* =========================================================================
+       TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (MODO ALTA GAMA)
+       ========================================================================= */
+    .footer-biz-register-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(22, 93, 111, 0.45);
+      border-radius: 20px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(22, 93, 111, 0.2);
+      padding: 2.5rem 2.8rem;
+      margin-bottom: 2.75rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-biz-register-card:hover {
+      border-color: rgba(246, 94, 1, 0.5);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 20px 55px rgba(0, 0, 0, 0.7), 0 0 45px rgba(246, 94, 1, 0.22);
+    }
+
+    .footer-biz-header-wrap {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .footer-biz-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-tech);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      color: var(--arena-pinolera);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      padding-bottom: 0.4rem;
+      position: relative;
+    }
+
+    .footer-biz-tag::before {
+      content: '//';
+      color: var(--terracotta);
+      font-weight: 900;
+    }
+
+    .footer-biz-tag::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 2px;
+      background: var(--grad-sunset);
+      box-shadow: 0 0 10px rgba(246, 94, 1, 0.85);
+    }
+
+    .footer-biz-title {
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin: 0.8rem auto 0.7rem auto;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-biz-subtitle {
+      font-size: 0.98rem;
+      color: var(--arena-pinolera, #F4E6C1);
+      line-height: 1.6;
+      margin: 0 auto 1.6rem auto;
+      max-width: 760px;
+      opacity: 0.9;
+    }
+
+    .footer-biz-benefits-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      background: rgba(22, 93, 111, 0.16);
+      border: 1px solid rgba(22, 93, 111, 0.35);
+      border-radius: 14px;
+      padding: 1rem 1.4rem;
+      text-align: left;
+    }
+
+    .footer-biz-benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+      color: #FFFFFF;
+    }
+
+    .footer-biz-benefit-item i {
+      font-size: 1.15rem;
+      color: var(--terracotta, #F65E01);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .footer-biz-register-card {
+        padding: 1.8rem 1.2rem;
+        border-radius: 16px;
+      }
+      .footer-biz-title {
+        font-size: 1.55rem;
+      }
+      .footer-biz-benefits-strip {
+        grid-template-columns: 1fr;
+        padding: 0.85rem;
+      }
+    }
+
+    /* =========================================================================
        ACORDEÓN & DESPLIEGUE REACTIVO: RED DE ANFITRIONES
        ========================================================================= */
     .biz-trigger-wrap {
