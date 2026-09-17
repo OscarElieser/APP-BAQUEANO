@@ -738,32 +738,52 @@
           </span>
         </a>
 
-        <a href="destinos.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-map-location-dot nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Destinos</span>
-              <span class="nav-sublabel">29 Áreas Protegidas</span>
+        <!-- MENÚ DESPLEGABLE: MI PAÍS -->
+        <div class="nav-dropdown" id="navDropdownMiPais">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="nav-item-content">
+              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
+              <span class="nav-text-group">
+                <span class="nav-label">Mi País</span>
+                <span class="nav-sublabel">Tierra Pinolera</span>
+              </span>
             </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge">29</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="historia.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-scroll nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Historia</span>
-              <span class="nav-sublabel">Línea de Tiempo Patria</span>
+            <span class="nav-dropdown-caret">
+              <i class="fa-solid fa-chevron-down"></i>
             </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Destinos</span>
+                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
+              </div>
+              <span class="nav-dd-badge">29</span>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Historia</span>
+                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
+              </div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Gastronomía</span>
+                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
+              </div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Música</span>
+                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
+              </div>
+            </a>
+          </div>
+        </div>
 
         <a href="ambiental.html">
           <span class="nav-item-content">
@@ -778,38 +798,26 @@
           </span>
         </a>
 
-        <a href="gastronomia.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-bowl-food nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Gastronomía</span>
-              <span class="nav-sublabel">Comida Ancestral</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="musica.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-guitar nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Música</span>
-              <span class="nav-sublabel">Patrimonio Sonoro</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
         <a href="aliados.html">
           <span class="nav-item-content">
             <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
             <span class="nav-text-group">
               <span class="nav-label">Aliados</span>
               <span class="nav-sublabel">Cooperativas Campesinas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN NOSOTROS -->
+        <a href="nosotros.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Nosotros</span>
+              <span class="nav-sublabel">Marca & Manifiesto</span>
             </span>
           </span>
           <span class="nav-right-wrap">
@@ -1357,6 +1365,55 @@
   <!-- FOOTER OFICIAL -->
   <footer class="site-footer-pro">
     <div class="container">
+
+      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
+      <div class="footer-top-utility-bar">
+        <div class="footer-newsletter-wrap">
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos & Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
           <div class="brand-box" style="margin-bottom: 1.2rem;">
@@ -1373,6 +1430,9 @@
           <ul class="footer-link-list">
             <li><a href="destinos.html">Destinos Protegidos</a></li>
             <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="gastronomia.html">Gastronomía Campesina</a></li>
+            <li><a href="musica.html">Música Tradicional</a></li>
+            <li><a href="nosotros.html">Acerca de Nosotros</a></li>
             <li><a href="aliados.html">Cooperativas Aliadas</a></li>
             <li><a href="mi-negocio.html">Portal de Anfitriones</a></li>
             <li><a href="admin.html">Baqueano Ops Center</a></li>
@@ -1392,6 +1452,24 @@
           </button>
         </div>
       </div>
+
+      <!-- BLOQUE LEGAL (LEGAL STACK) -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos & Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
+        <span class="separator">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
+      </div>
+
       <div class="footer-bottom-bar">
         <div>© 2026 Baqueano Nicaragua. Ecoturismo con dignidad campesina.</div>
         <div style="display: flex; gap: 1.5rem;">
