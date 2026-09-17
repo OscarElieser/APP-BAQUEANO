@@ -7812,6 +7812,9 @@ img {
     max-height: none;
     margin: 0;
     padding: 12px;
+    transform: translateY(0) scale(1);
+  }
+}
 
 /* ========================================================================== 
    PROCEDENCIA DE DATOS DEL OPS CENTER
@@ -7873,9 +7876,6 @@ img {
   .ops-data-provenance-icon { width: 36px; height: 36px; }
   .ops-data-provenance-badge { grid-column: 1 / -1; justify-self: start; }
 }
-    transform: translateY(0) scale(1);
-  }
-
 
 /* ========================================================================== 
    CONTACTO INSTITUCIONAL A TODO LO ANCHO
