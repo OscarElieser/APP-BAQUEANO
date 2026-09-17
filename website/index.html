@@ -154,627 +154,7 @@
           #F4E6C1, #0F172A), microinteracciones y dropzone interactivo.
        📦 Qué: Clases .register-biz-section, .biz-form-grid, .biz-btn-submit, etc.
        ====================================================================== -->
-  <style>
-    .register-biz-section {
-      padding: 5.5rem 0;
-      position: relative;
-      background: radial-gradient(circle at 15% 20%, rgba(22, 93, 111, 0.2) 0%, transparent 55%),
-                  radial-gradient(circle at 85% 75%, rgba(246, 94, 1, 0.14) 0%, transparent 55%),
-                  #0A1120;
-      overflow: hidden;
-    }
-
-    .register-biz-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(22, 93, 111, 0.08) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(22, 93, 111, 0.08) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-
-    .register-biz-card {
-      position: relative;
-      z-index: 2;
-      background: rgba(15, 23, 42, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(22, 93, 111, 0.45);
-      border-radius: 24px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(22, 93, 111, 0.15);
-      padding: 3.5rem 3rem;
-    }
-
-    .biz-header-wrap {
-      text-align: center;
-      max-width: 820px;
-      margin: 0 auto 3rem auto;
-    }
-
-    .biz-badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(246, 94, 1, 0.15);
-      border: 1px solid rgba(246, 94, 1, 0.4);
-      color: var(--terracotta, #F65E01);
-      padding: 0.4rem 1.1rem;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-    }
-
-    .biz-main-title {
-      font-family: var(--font-heading, 'Montserrat', sans-serif);
-      font-size: 2.3rem;
-      font-weight: 900;
-      color: #FFFFFF;
-      line-height: 1.25;
-      margin-bottom: 1rem;
-      letter-spacing: -0.5px;
-    }
-
-    .biz-subtitle {
-      font-size: 1.05rem;
-      color: var(--arena-pinolera, #F4E6C1);
-      line-height: 1.6;
-      margin: 0 auto 2rem auto;
-      max-width: 740px;
-      opacity: 0.92;
-    }
-
-    .biz-benefits-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      background: rgba(22, 93, 111, 0.18);
-      border: 1px solid rgba(22, 93, 111, 0.35);
-      border-radius: 14px;
-      padding: 1.1rem 1.5rem;
-      text-align: left;
-    }
-
-    .biz-benefit-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.88rem;
-      color: #FFFFFF;
-    }
-
-    .biz-benefit-item i {
-      font-size: 1.25rem;
-      color: var(--terracotta, #F65E01);
-      flex-shrink: 0;
-    }
-
-    .biz-form {
-      margin-top: 1rem;
-    }
-
-    .biz-form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-
-    .biz-col-full {
-      grid-column: 1 / -1;
-    }
-
-    .biz-field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      position: relative;
-    }
-
-    .biz-label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--arena-pinolera, #F4E6C1);
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-
-    .biz-label i {
-      color: var(--petroleo-glow, #2DD4BF);
-      font-size: 0.9rem;
-    }
-
-    .biz-label .req {
-      color: #EF4444;
-      font-weight: 800;
-    }
-
-    .biz-char-counter {
-      margin-left: auto;
-      font-size: 0.78rem;
-      color: var(--text-muted, #94A3B8);
-      font-family: var(--font-tech, monospace);
-    }
-
-    .biz-input,
-    .biz-select,
-    .biz-textarea {
-      width: 100%;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(244, 230, 193, 0.2);
-      border-radius: 10px;
-      padding: 0.85rem 1rem;
-      color: #FFFFFF;
-      font-size: 0.95rem;
-      font-family: inherit;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-      box-sizing: border-box;
-    }
-
-    .biz-input:focus,
-    .biz-select:focus,
-    .biz-textarea:focus {
-      outline: none;
-      border-color: var(--terracotta, #F65E01);
-      box-shadow: 0 0 0 3px rgba(246, 94, 1, 0.25);
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    .biz-input::placeholder,
-    .biz-textarea::placeholder {
-      color: rgba(244, 230, 193, 0.4);
-    }
-
-    .biz-select {
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23F4E6C1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 1.1rem;
-      padding-right: 2.5rem;
-    }
-
-    .biz-select option {
-      background: #0F172A;
-      color: #FFFFFF;
-    }
-
-    .biz-input.has-error,
-    .biz-select.has-error,
-    .biz-textarea.has-error {
-      border-color: #EF4444;
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
-    }
-
-    .biz-error-msg {
-      color: #EF4444;
-      font-size: 0.78rem;
-      font-weight: 500;
-      min-height: 1rem;
-    }
-
-    .biz-file-upload-box {
-      position: relative;
-      border: 2px dashed rgba(22, 93, 111, 0.5);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-      background: rgba(15, 23, 42, 0.5);
-      cursor: pointer;
-      transition: border-color 0.25s, background 0.25s;
-    }
-
-    .biz-file-upload-box:hover {
-      border-color: var(--terracotta, #F65E01);
-      background: rgba(15, 23, 42, 0.75);
-    }
-
-    .biz-file-input {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-    }
-
-    .biz-upload-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--arena-pinolera, #F4E6C1);
-      pointer-events: none;
-    }
-
-    .biz-upload-placeholder i {
-      font-size: 2rem;
-      color: var(--terracotta, #F65E01);
-    }
-
-    .biz-upload-placeholder small {
-      color: var(--text-muted, #94A3B8);
-      font-size: 0.78rem;
-    }
-
-    .biz-photo-preview {
-      position: relative;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-
-    .biz-photo-preview img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid var(--petroleo-glow, #2DD4BF);
-    }
-
-    .biz-btn-remove-photo {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #EF4444;
-      color: #FFFFFF;
-      border: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.8rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    .biz-checkbox-label {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .biz-checkbox-label input[type="checkbox"] {
-      display: none;
-    }
-
-    .biz-checkbox-custom {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      border: 2px solid rgba(244, 230, 193, 0.4);
-      border-radius: 5px;
-      margin-top: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .biz-checkbox-label input[type="checkbox"]:checked + .biz-checkbox-custom {
-      background: var(--terracotta, #F65E01);
-      border-color: var(--terracotta, #F65E01);
-    }
-
-    .biz-checkbox-label input[type="checkbox"]:checked + .biz-checkbox-custom::after {
-      content: '✓';
-      color: #FFFFFF;
-      font-size: 0.85rem;
-      font-weight: 900;
-    }
-
-    .biz-checkbox-text {
-      color: var(--arena-pinolera, #F4E6C1);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .biz-submit-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .biz-btn-submit {
-      background: linear-gradient(135deg, var(--terracotta, #F65E01) 0%, #D84E00 100%);
-      color: #FFFFFF;
-      font-family: var(--font-heading, 'Montserrat', sans-serif);
-      font-size: 1.05rem;
-      font-weight: 800;
-      padding: 1.15rem 2.8rem;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(246, 94, 1, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.85rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    }
-
-    .biz-btn-submit:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 36px rgba(246, 94, 1, 0.55);
-      filter: brightness(1.05);
-    }
-
-    .biz-btn-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .biz-security-note {
-      font-size: 0.82rem;
-      color: var(--arena-pinolera, #F4E6C1);
-      opacity: 0.85;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
-
-    .biz-security-note i {
-      color: var(--petroleo-glow, #2DD4BF);
-    }
-
-    @media (max-width: 992px) {
-      .biz-benefits-strip {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .register-biz-card {
-        padding: 2.2rem 1.4rem;
-        border-radius: 18px;
-      }
-      .biz-main-title {
-        font-size: 1.7rem;
-      }
-      .biz-benefits-strip {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-      }
-      .biz-form-grid {
-        grid-template-columns: 1fr;
-      }
-      .biz-btn-submit {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    /* =========================================================================
-       TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (MODO ALTA GAMA)
-       ========================================================================= */
-    .footer-biz-register-card {
-      position: relative;
-      z-index: 2;
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(22, 93, 111, 0.45);
-      border-radius: 20px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(22, 93, 111, 0.2);
-      padding: 2.5rem 2.8rem;
-      margin-bottom: 2.75rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    .footer-biz-register-card:hover {
-      border-color: rgba(246, 94, 1, 0.5);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 20px 55px rgba(0, 0, 0, 0.7), 0 0 45px rgba(246, 94, 1, 0.22);
-    }
-
-    .footer-biz-header-wrap {
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .footer-biz-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-tech);
-      font-weight: 800;
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
-      color: var(--arena-pinolera);
-      margin-bottom: 0.75rem;
-      text-transform: uppercase;
-      padding-bottom: 0.4rem;
-      position: relative;
-    }
-
-    .footer-biz-tag::before {
-      content: '//';
-      color: var(--terracotta);
-      font-weight: 900;
-    }
-
-    .footer-biz-tag::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 44px;
-      height: 2px;
-      background: var(--grad-sunset);
-      box-shadow: 0 0 10px rgba(246, 94, 1, 0.85);
-    }
-
-    .footer-biz-title {
-      font-family: var(--font-heading, 'Montserrat', sans-serif);
-      font-size: 2.1rem;
-      font-weight: 900;
-      color: #FFFFFF;
-      line-height: 1.25;
-      margin: 0.8rem auto 0.7rem auto;
-      letter-spacing: -0.5px;
-    }
-
-    .footer-biz-subtitle {
-      font-size: 0.98rem;
-      color: var(--arena-pinolera, #F4E6C1);
-      line-height: 1.6;
-      margin: 0 auto 1.6rem auto;
-      max-width: 760px;
-      opacity: 0.9;
-    }
-
-    .footer-biz-benefits-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      background: rgba(22, 93, 111, 0.16);
-      border: 1px solid rgba(22, 93, 111, 0.35);
-      border-radius: 14px;
-      padding: 1rem 1.4rem;
-      text-align: left;
-    }
-
-    .footer-biz-benefit-item {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      font-size: 0.85rem;
-      color: #FFFFFF;
-    }
-
-    .footer-biz-benefit-item i {
-      font-size: 1.15rem;
-      color: var(--terracotta, #F65E01);
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 768px) {
-      .footer-biz-register-card {
-        padding: 1.8rem 1.2rem;
-        border-radius: 16px;
-      }
-      .footer-biz-title {
-        font-size: 1.55rem;
-      }
-      .footer-biz-benefits-strip {
-        grid-template-columns: 1fr;
-        padding: 0.85rem;
-      }
-    }
-
-    /* =========================================================================
-       ACORDEÓN & DESPLIEGUE REACTIVO: RED DE ANFITRIONES
-       ========================================================================= */
-    .biz-trigger-wrap {
-      margin-top: 2.2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .biz-btn-toggle {
-      font-size: 1.08rem;
-      padding: 1.2rem 2.8rem;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(246, 94, 1, 0.4);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(246, 94, 1, 0.6);
-    }
-
-    .biz-btn-toggle:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 16px 42px rgba(246, 94, 1, 0.6);
-    }
-
-    .biz-btn-toggle .btn-arrow {
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .biz-btn-toggle.is-open {
-      background: linear-gradient(135deg, #165D6F 0%, #0F172A 100%);
-      border-color: rgba(45, 212, 191, 0.5);
-      box-shadow: 0 10px 25px rgba(22, 93, 111, 0.4);
-    }
-
-    .biz-btn-toggle.is-open .btn-arrow {
-      transform: rotate(90deg);
-    }
-
-    .biz-form-collapse {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, margin-top 0.45s ease;
-      margin-top: 0;
-      pointer-events: none;
-    }
-
-    .biz-form-collapse.is-expanded {
-      max-height: 5000px;
-      opacity: 1;
-      margin-top: 2.5rem;
-      overflow: visible;
-      pointer-events: auto;
-    }
-
-    .biz-form-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(22, 93, 111, 0.22);
-      border: 1px solid rgba(45, 212, 191, 0.35);
-      border-radius: 14px;
-      padding: 1rem 1.4rem;
-      margin-bottom: 2rem;
-      color: #FFFFFF;
-      font-size: 0.95rem;
-      font-weight: 600;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    .biz-form-header-info {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .biz-btn-close-form {
-      background: rgba(15, 23, 42, 0.65);
-      color: var(--arena-pinolera, #F4E6C1);
-      border: 1px solid rgba(244, 230, 193, 0.25);
-      padding: 0.45rem 1rem;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: all 0.2s ease;
-    }
-
-    .biz-btn-close-form:hover {
-      background: rgba(239, 68, 68, 0.25);
-      border-color: #EF4444;
-      color: #FFFFFF;
-      transform: translateY(-1px);
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/index.css">
 </head>
 
 <body>
@@ -988,10 +368,10 @@
   </nav>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper" style="padding-top: 5rem;">
+  <main class="page-wrapper index-inline-001">
 
     <!-- HERO SECTION -->
-    <section class="hero-section-pro" style="position: relative; overflow: hidden;">
+    <section class="hero-section-pro index-inline-002">
       <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/cerro_negro.jpg">
         <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4" type="video/mp4">
       </video>
@@ -1000,7 +380,7 @@
       <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video de fondo" title="Alternar video">
         <i class="fa-solid fa-pause"></i>
       </button>
-      <div class="container hero-grid-2col" style="position: relative; z-index: 4;">
+      <div class="container hero-grid-2col index-inline-003">
         <!-- Columna Izquierda: Texto y CTA -->
         <div class="hero-content-col">
           <div class="hero-badge-pill">
@@ -1024,18 +404,18 @@
             </a>
           </div>
 
-          <div style="display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <i class="fa-solid fa-shield-halved" style="color: var(--verde-neon); font-size: 1.2rem;"></i>
-              <span style="font-size: 0.85rem; color: var(--text-secondary);">0% Comisiones Abusivas</span>
+          <div class="index-inline-004">
+            <div class="index-inline-005">
+              <i class="fa-solid fa-shield-halved index-inline-006"></i>
+              <span class="index-inline-007">0% Comisiones Abusivas</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <i class="fa-solid fa-map-location-dot" style="color: var(--arena-pinolera); font-size: 1.2rem;"></i>
-              <span style="font-size: 0.85rem; color: var(--text-secondary);">Guías Locales Certificados</span>
+            <div class="index-inline-005">
+              <i class="fa-solid fa-map-location-dot index-inline-008"></i>
+              <span class="index-inline-007">Guías Locales Certificados</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <i class="fa-solid fa-tower-cell" style="color: var(--terracotta-light); font-size: 1.2rem;"></i>
-              <span style="font-size: 0.85rem; color: var(--text-secondary);">Mapas y GPS Fuera de Línea</span>
+            <div class="index-inline-005">
+              <i class="fa-solid fa-tower-cell index-inline-009"></i>
+              <span class="index-inline-007">Mapas y GPS Fuera de Línea</span>
             </div>
           </div>
         </div>
@@ -1048,7 +428,7 @@
               <div class="phone-screen">
                 <div class="phone-status-bar">
                   <span>10:30 AM</span>
-                  <div style="display: flex; gap: 0.35rem; align-items: center;">
+                  <div class="index-inline-010">
                     <i class="fa-solid fa-signal"></i>
                     <i class="fa-solid fa-wifi"></i>
                     <i class="fa-solid fa-battery-full"></i>
@@ -1057,7 +437,7 @@
 
                 <div class="phone-app-header">
                   <div class="phone-app-logo">
-                    <img src="assets/images/logo.png" alt="Logo" style="width: 22px; height: 22px;">
+                    <img src="assets/images/logo.png" alt="Logo" class="index-inline-011">
                     <span>BAQUEANO</span>
                   </div>
                   <div class="phone-app-bell"><i class="fa-solid fa-bell"></i></div>
@@ -1221,9 +601,9 @@
             </div>
 
             <!-- Tarjeta Extra: Seguridad Integral -->
-            <div class="impact-hex-card" style="border-color: var(--border-glow);">
-              <div class="impact-number-tag" style="color: var(--terracotta-light);">SEGURIDAD 24/7 EN SENDERO</div>
-              <div class="impact-icon-circle" style="background: rgba(246,94,1,0.2);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="impact-hex-card index-inline-012">
+              <div class="impact-number-tag index-inline-013">SEGURIDAD 24/7 EN SENDERO</div>
+              <div class="impact-icon-circle index-inline-014"><i class="fa-solid fa-triangle-exclamation"></i></div>
               <h3 class="impact-card-title">Centro de Auxilio SOS Satelital</h3>
               <p class="impact-card-desc">
                 Balizas de geolocalización satelital que funcionan incluso en zonas de montaña sin señal telefónica.
@@ -1318,9 +698,9 @@
             </div>
 
             <!-- Tarjeta Extra Clon -->
-            <div class="impact-hex-card" style="border-color: var(--border-glow);" aria-hidden="true">
-              <div class="impact-number-tag" style="color: var(--terracotta-light);">SEGURIDAD 24/7 EN SENDERO</div>
-              <div class="impact-icon-circle" style="background: rgba(246,94,1,0.2);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="impact-hex-card index-inline-012" aria-hidden="true">
+              <div class="impact-number-tag index-inline-013">SEGURIDAD 24/7 EN SENDERO</div>
+              <div class="impact-icon-circle index-inline-014"><i class="fa-solid fa-triangle-exclamation"></i></div>
               <h3 class="impact-card-title">Centro de Auxilio SOS Satelital</h3>
               <p class="impact-card-desc">
                 Balizas de geolocalización satelital que funcionan incluso en zonas de montaña sin señal telefónica.
@@ -1340,7 +720,7 @@
           <button class="marquee-control-btn" id="btnToggleMarquee" onclick="toggleImpactsMarquee()">
             <i class="fa-solid fa-pause" id="marqueeToggleIcon"></i> <span id="marqueeToggleText">Pausar Movimiento</span>
           </button>
-          <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-tech);">
+          <span class="index-inline-015">
             <i class="fa-solid fa-hand-pointer"></i> Pasa el cursor o mantén presionado para leer con calma
           </span>
         </div>
@@ -1379,9 +759,9 @@
 
         <div class="destinations-showcase-grid">
           <!-- Tarjeta Módulo 1: Historia -->
-          <a href="historia.html" class="dest-card-pro" style="text-decoration: none;">
-            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #0C3843, #165D6F); display: flex; align-items: center; justify-content: center;">
-              <i class="fa-solid fa-landmark" style="font-size: 3.5rem; color: var(--oro-noble);"></i>
+          <a href="historia.html" class="dest-card-pro index-inline-016">
+            <div class="dest-card-img-wrap index-inline-017">
+              <i class="fa-solid fa-landmark index-inline-018"></i>
               <span class="dest-badge-corner">7 Periodos</span>
             </div>
             <div class="dest-body-pro">
@@ -1397,9 +777,9 @@
           </a>
 
           <!-- Tarjeta Módulo 2: Ambiental -->
-          <a href="ambiental.html" class="dest-card-pro" style="text-decoration: none;">
-            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #064E3B, #10B981); display: flex; align-items: center; justify-content: center;">
-              <i class="fa-solid fa-leaf" style="font-size: 3.5rem; color: #FFFFFF;"></i>
+          <a href="ambiental.html" class="dest-card-pro index-inline-016">
+            <div class="dest-card-img-wrap index-inline-019">
+              <i class="fa-solid fa-leaf index-inline-020"></i>
               <span class="dest-badge-corner">GPS Satelital</span>
             </div>
             <div class="dest-body-pro">
@@ -1415,9 +795,9 @@
           </a>
 
           <!-- Tarjeta Módulo 3: Gastronomía -->
-          <a href="gastronomia.html" class="dest-card-pro" style="text-decoration: none;">
-            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #7C2D12, #F65E01); display: flex; align-items: center; justify-content: center;">
-              <i class="fa-solid fa-bowl-food" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+          <a href="gastronomia.html" class="dest-card-pro index-inline-016">
+            <div class="dest-card-img-wrap index-inline-021">
+              <i class="fa-solid fa-bowl-food index-inline-022"></i>
               <span class="dest-badge-corner">6 Platillos</span>
             </div>
             <div class="dest-body-pro">
@@ -1433,9 +813,9 @@
           </a>
 
           <!-- Tarjeta Módulo 4: Música Folclórica -->
-          <a href="musica.html" class="dest-card-pro" style="text-decoration: none;">
-            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #1E1B4B, #4338CA); display: flex; align-items: center; justify-content: center;">
-              <i class="fa-solid fa-music" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+          <a href="musica.html" class="dest-card-pro index-inline-016">
+            <div class="dest-card-img-wrap index-inline-023">
+              <i class="fa-solid fa-music index-inline-022"></i>
               <span class="dest-badge-corner">1 Toque</span>
             </div>
             <div class="dest-body-pro">
@@ -1451,9 +831,9 @@
           </a>
 
           <!-- Tarjeta Módulo 5: Aliados 3D -->
-          <a href="aliados.html" class="dest-card-pro" style="text-decoration: none;">
-            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #134E4A, #0D9488); display: flex; align-items: center; justify-content: center;">
-              <i class="fa-solid fa-handshake" style="font-size: 3.5rem; color: #FFFFFF;"></i>
+          <a href="aliados.html" class="dest-card-pro index-inline-016">
+            <div class="dest-card-img-wrap index-inline-024">
+              <i class="fa-solid fa-handshake index-inline-020"></i>
               <span class="dest-badge-corner">Giro 180°</span>
             </div>
             <div class="dest-body-pro">
@@ -1469,9 +849,9 @@
           </a>
 
           <!-- Tarjeta Módulo 6: Destinos & Cotizador -->
-          <a href="destinos.html" class="dest-card-pro" style="text-decoration: none;">
-            <div class="dest-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, #831843, #BE185D); display: flex; align-items: center; justify-content: center;">
-              <i class="fa-solid fa-mountain" style="font-size: 3.5rem; color: var(--arena-pinolera);"></i>
+          <a href="destinos.html" class="dest-card-pro index-inline-016">
+            <div class="dest-card-img-wrap index-inline-025">
+              <i class="fa-solid fa-mountain index-inline-022"></i>
               <span class="dest-badge-corner">Ley 306 INTUR</span>
             </div>
             <div class="dest-body-pro">
@@ -1492,23 +872,23 @@
 
     <!-- MODAL DE CONFIRMACIÓN DE REGISTRO DE NEGOCIO -->
     <div class="modal-backdrop-pro" id="bizSuccessModal" aria-hidden="true" role="dialog">
-      <div class="modal-card-dialog" style="max-width: 520px; text-align: center;">
+      <div class="modal-card-dialog index-inline-026">
         <button class="modal-close-x" id="closeBizModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-        <div class="modal-icon-top" style="background: rgba(22, 93, 111, 0.3); border-color: #2DD4BF;">
-          <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #10B981;"></i>
+        <div class="modal-icon-top index-inline-027">
+          <i class="fa-solid fa-circle-check index-inline-028"></i>
         </div>
-        <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">¡Postulación Recibida con Éxito!</h3>
-        <p style="font-size: 0.95rem; color: var(--arena-pinolera); line-height: 1.6; margin-bottom: 1.2rem;">
+        <h3 class="index-inline-029">¡Postulación Recibida con Éxito!</h3>
+        <p class="index-inline-030">
           Tu establecimiento ha sido registrado en el sistema y remitido a la Mesa Técnica Baqueano.
           El equipo verificará las coordenadas y detalles para incluirlo en el mapa satelital HD y catálogo territorial.
         </p>
-        <div id="bizModalSummary" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(22, 93, 111, 0.4); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.88rem; color: #FFFFFF;">
+        <div id="bizModalSummary" class="index-inline-031">
         </div>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a id="bizModalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="background: #25D366; border: none; justify-content: center; flex: 1;">
+        <div class="index-inline-032">
+          <a id="bizModalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-hero-primary index-inline-033">
             <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp de Mesa Baqueano
           </a>
-          <button type="button" class="btn-hero-glass" id="bizModalCloseBtn" style="padding: 0.85rem 1.5rem;">
+          <button type="button" class="btn-hero-glass index-inline-034" id="bizModalCloseBtn">
             Aceptar
           </button>
         </div>
@@ -1523,7 +903,7 @@
             <img src="assets/images/logo.png" alt="Baqueano APK">
           </div>
           <h2 class="download-portal-title">Descarga Baqueano para Android</h2>
-          <p style="font-size: 1.1rem; color: var(--arena-pinolera); max-width: 680px; margin: 0 auto;">
+          <p class="index-inline-035">
             La aplicación oficial con mapas topográficos sin conexión a internet, baliza satelital SOS 24/7 y contacto directo con las cooperativas campesinas.
           </p>
 
@@ -1535,15 +915,15 @@
           </div>
 
           <div class="download-cta-double">
-            <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="directApkDownloadBtn" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">
+            <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary index-inline-036" id="directApkDownloadBtn">
               <i class="fa-solid fa-download"></i> Descargar BaqueanoNicaragua.apk
             </a>
-            <button class="btn-hero-glass open-download-modal-btn" style="padding: 1.1rem 2rem; font-size: 1.02rem;">
+            <button class="btn-hero-glass open-download-modal-btn index-inline-037">
               <i class="fa-solid fa-circle-question"></i> Guía Paso a Paso de Instalación
             </button>
           </div>
 
-          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <div class="index-inline-038">
             <button class="btn-admin-action" id="shareWhatsAppBtn">
               <i class="fa-brands fa-whatsapp"></i> Compartir por WhatsApp
             </button>
@@ -1573,7 +953,7 @@
         <!-- Encabezado de la Tarjeta -->
         <div class="footer-biz-header-wrap">
           <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
+            <i class="fa-solid fa-handshake-angle index-inline-039"></i> RED DE ANFITRIONES & COMERCIO JUSTO
           </div>
           <h3 class="footer-biz-title">
             Registra tu Local, Hospedaje o Emprendimiento en Baqueano
@@ -1615,7 +995,7 @@
         <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
           <div class="biz-form-header-bar">
             <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: #2DD4BF; font-size: 1.1rem;"></i>
+              <i class="fa-solid fa-file-signature index-inline-040"></i>
               <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
             </div>
             <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
@@ -1896,7 +1276,7 @@
         
         <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
         <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
+          <div class="brand-box index-inline-041">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -1906,7 +1286,7 @@
           <p class="footer-bio-text">
             Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
           </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
+          <div class="index-inline-042">
             <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
           </div>
           <!-- Sellos de Confianza y Régimen Legal -->
@@ -1928,7 +1308,7 @@
             <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
             <li><a href="musica.html">Patrimonio Sonoro</a></li>
             <li><a href="aliados.html">Cooperativas Aliadas</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
+            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle index-inline-043"></i> Registrar Mi Negocio</a></li>
             <li><a href="admin.html">Baqueano Ops Center</a></li>
           </ul>
         </div>
@@ -1992,9 +1372,9 @@
         <div>
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+        <div class="index-inline-044">
+          <span class="index-inline-045">
+            <span class="index-inline-046"></span>
             Red Satelital 24/7 Operativa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
@@ -2008,26 +1388,26 @@
   <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
     <div class="sos-modal-dialog">
       <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div style="text-align: center; margin-bottom: 1.2rem;">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
-        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      <div class="index-inline-047">
+        <i class="fa-solid fa-triangle-exclamation index-inline-048"></i>
+        <h3 class="index-inline-049">Centro de Auxilio SOS 24/7</h3>
+        <p class="index-inline-050">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
       </div>
-      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
-        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
-        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      <div class="sos-gps-card index-inline-051">
+        <span class="index-inline-052">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" class="index-inline-053">Buscando satélites...</div>
       </div>
       <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
-        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
-        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical index-inline-054"></i><div><h5 class="index-inline-055">Cruz Blanca</h5><span class="index-inline-056">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher index-inline-057"></i><div><h5 class="index-inline-055">Bomberos</h5><span class="index-inline-056">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved index-inline-058"></i><div><h5 class="index-inline-055">Policía Turística</h5><span class="index-inline-056">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp index-inline-059"></i><div><h5 class="index-inline-055">Mesa Baqueano</h5><span class="index-inline-056">WhatsApp SOS</span></div></a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
-        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+      <div class="index-inline-060">
+        <button class="btn-hero-primary index-inline-061" id="btnSendWhatsAppSos">
           <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
         </button>
-        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+        <button class="btn-hero-glass index-inline-062" id="btnCopyGpsSos">
           <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
         </button>
       </div>
@@ -2039,8 +1419,8 @@
     <div class="modal-card-dialog">
       <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <h3 class="index-inline-029">Instalar Baqueano para Android</h3>
+      <p class="index-inline-063">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
@@ -2055,8 +1435,8 @@
           <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
         </div>
       </div>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+      <div class="index-inline-064">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary index-inline-065" id="modalConfirmDownloadBtn">
           <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
         </a>
       </div>
@@ -2340,9 +1720,9 @@
         // 3. Poblar modal de resumen y abrir WhatsApp
         if (modalSummary) {
           modalSummary.innerHTML = `
-            <div style="margin-bottom: 0.35rem;"><strong>Negocio:</strong> ${name}</div>
-            <div style="margin-bottom: 0.35rem;"><strong>Ubicación:</strong> ${municipality}, ${department}</div>
-            <div style="margin-bottom: 0.35rem;"><strong>Responsable:</strong> ${owner}</div>
+            <div class="index-inline-066"><strong>Negocio:</strong> ${name}</div>
+            <div class="index-inline-066"><strong>Ubicación:</strong> ${municipality}, ${department}</div>
+            <div class="index-inline-066"><strong>Responsable:</strong> ${owner}</div>
             <div><strong>Contacto:</strong> ${phone}</div>
           `;
         }

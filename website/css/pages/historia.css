@@ -1,0 +1,224 @@
+/**
+ * POR QU?: mantener la presentaci?n de historia.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de historia, sin l?gica ni contenido estructural.
+ */
+
+
+html body .historia-inline-001 {
+  margin-top: 5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+html body .historia-inline-002 {
+  margin-top: 3.5rem !important;
+}
+
+html body .historia-inline-003 {
+  margin-bottom: 0.6rem !important;
+  background: rgba(22,93,111,0.9) !important;
+}
+
+html body .historia-inline-004 {
+  font-size: 2.4rem !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-display) !important;
+  margin: 0 0 0.4rem !important;
+}
+
+html body .historia-inline-005 {
+  font-size: 1.15rem !important;
+  color: var(--terracotta-light) !important;
+  font-family: var(--font-tech) !important;
+  font-weight: 700 !important;
+  margin: 0 0 0.8rem !important;
+}
+
+html body .historia-inline-006 {
+  font-size: 0.95rem !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.6 !important;
+  max-width: 750px !important;
+  margin: 0 !important;
+}
+
+html body .historia-inline-007 {
+  color: var(--text-secondary) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+}
+
+html body .historia-inline-008 {
+  margin-top: 1.5rem !important;
+}
+
+html body .historia-inline-009 {
+  color: var(--text-secondary) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+}
+
+html body .historia-inline-010 {
+  color: #F59E0B !important;
+}
+
+html body .historia-inline-011 {
+  color: var(--terracotta) !important;
+}
+
+html body .historia-inline-012 {
+  color: #10B981 !important;
+}
+
+html body .historia-inline-013 {
+  padding: 0.75rem 1.4rem !important;
+  font-size: 0.85rem !important;
+}
+
+html body .historia-inline-014 {
+  margin-bottom: 1.2rem !important;
+}
+
+html body .historia-inline-015 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .historia-inline-016 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .historia-inline-017 {
+  font-size: 2.5rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .historia-inline-018 {
+  font-size: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  color: #FFFFFF !important;
+}
+
+html body .historia-inline-019 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .historia-inline-020 {
+  background: rgba(15,23,42,0.9) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px dashed var(--border-subtle) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+html body .historia-inline-021 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  display: block !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body .historia-inline-022 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+}
+
+html body .historia-inline-023 {
+  font-size: 1.3rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .historia-inline-024 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+html body .historia-inline-025 {
+  font-size: 0.75rem !important;
+}
+
+html body .historia-inline-026 {
+  font-size: 1.3rem !important;
+  color: var(--terracotta) !important;
+}
+
+html body .historia-inline-027 {
+  font-size: 1.3rem !important;
+  color: var(--azul-info) !important;
+}
+
+html body .historia-inline-028 {
+  font-size: 1.3rem !important;
+  color: #25D366 !important;
+}
+
+html body .historia-inline-029 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+}
+
+html body .historia-inline-030 {
+  width: 100% !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .historia-inline-031 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .historia-inline-032 {
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .historia-inline-033 {
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .historia-inline-034 {
+  display: flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .historia-inline-035 {
+  flex: 1 !important;
+  justify-content: center !important;
+}
+
+html body .historia-inline-036 {
+  color: #FFFFFF !important;
+  font-size: 0.88rem !important;
+  display: block !important;
+  margin-bottom: 0.2rem !important;
+}
+
+html body .historia-inline-037 {
+  font-size: 0.8rem !important;
+  color: var(--text-secondary) !important;
+}
+
+html body .historia-inline-038 {
+  color: var(--oro-noble) !important;
+}
+
+html body .historia-inline-039 {
+  font-size: 0.76rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  font-weight: 700 !important;
+}

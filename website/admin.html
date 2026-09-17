@@ -43,6 +43,7 @@
   <!-- Estilos Modulares Baqueano -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/admin.css">
 </head>
 <body>
 
@@ -191,8 +192,8 @@
         <span class="ops-led"></span>
         🛰️ BAQUEANO — PULSO DE NICARAGUA · CENTRO DE MANDO EN VIVO
       </div>
-      <div style="display:flex;align-items:center;gap:0.8rem;">
-        <span id="commandClock" style="font-family:var(--font-tech);font-size:1rem;font-weight:800;color:#FFFFFF;letter-spacing:3px;"></span>
+      <div class="admin-inline-001">
+        <span id="commandClock" class="admin-inline-002"></span>
         <button class="command-close-btn" id="commandCloseBtn"><i class="fa-solid fa-compress"></i> Salir</button>
       </div>
     </div>
@@ -208,8 +209,8 @@
         <div class="command-label">De 38 registrados</div>
       </div>
       <div class="command-cell">
-        <div class="command-cell-title"><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Alertas SOS Activas</div>
-        <div class="command-big" id="cmdSOS" style="background:linear-gradient(135deg,#EF4444,#F97316);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">2</div>
+        <div class="command-cell-title"><i class="fa-solid fa-triangle-exclamation admin-inline-003"></i> Alertas SOS Activas</div>
+        <div class="command-big admin-inline-004" id="cmdSOS">2</div>
         <div class="command-label">En atención ahora</div>
       </div>
       <div class="command-cell span2">
@@ -241,8 +242,8 @@
   </div>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper" style="padding-top:5rem;padding-bottom:0;">
-    <div class="admin-hub-view" style="max-width:100%;">
+  <main class="page-wrapper admin-inline-005">
+    <div class="admin-hub-view admin-inline-006">
 
       <!-- 1. PASARELA DE AUTENTICACIÓN -->
       <section class="admin-login-wrapper" id="adminLoginGate">
@@ -282,7 +283,7 @@
                 <input type="password" id="loginPassword" class="form-control-input" autocomplete="current-password" required placeholder="••••••••">
               </div>
             </div>
-            <button type="submit" class="btn-hero-primary" style="width:100%;justify-content:center;padding:0.95rem;font-size:1rem;margin-top:0.6rem;">
+            <button type="submit" class="btn-hero-primary admin-inline-007">
               <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Centro de Operaciones
             </button>
           </form>
@@ -290,26 +291,26 @@
       </section>
 
       <!-- 2. DASHBOARD OPS CENTER (hidden until login) -->
-      <section id="adminDashboardContent" style="display:none;">
+      <section id="adminDashboardContent" class="admin-inline-008">
 
         <!-- BARRA DE SESIÓN ACTIVA -->
         <div class="user-session-bar" id="userSessionBar">
           <div class="user-profile-meta">
             <div class="user-avatar-circle" id="sessionUserAvatar">VM</div>
             <div>
-              <div style="display:flex;align-items:center;gap:0.6rem;">
+              <div class="admin-inline-009">
                 <span class="user-name-title" id="sessionUserName">Lic. Valeria Morales</span>
                 <span class="user-role-badge admin" id="sessionUserRole">
                   <i class="fa-solid fa-shield"></i> Administrador General
                 </span>
               </div>
-              <div style="font-size:0.75rem;color:var(--arena-pinolera);" id="sessionUserTitle">
+              <div id="sessionUserTitle" class="admin-inline-010">
                 Directora de Operaciones &amp; Soberanía Territorial
               </div>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:0.8rem;">
-            <span style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-tech);">SESIÓN ACTIVA • TLS 1.3</span>
+          <div class="admin-inline-001">
+            <span class="admin-inline-011">SESIÓN ACTIVA • TLS 1.3</span>
             <button class="btn-logout" id="btnLogoutAdmin"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</button>
           </div>
         </div>
@@ -412,8 +413,8 @@
             <button class="ops-command-btn" id="btnCommandMode">
               <i class="fa-solid fa-tv"></i>
               <div>
-                <div style="line-height:1.1;">Modo Centro de Mando</div>
-                <div style="font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-top:0.1rem;">Pantalla TV / Monitor grande</div>
+                <div class="admin-inline-012">Modo Centro de Mando</div>
+                <div class="admin-inline-013">Pantalla TV / Monitor grande</div>
               </div>
             </button>
           </aside>
@@ -443,41 +444,41 @@
 
               <!-- KPIs de Operaciones -->
               <div class="ops-kpi-grid">
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
+                <div class="ops-kpi-card admin-inline-014">
                   <div class="ops-kpi-top">
-                    <div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-users"></i></div>
+                    <div class="ops-kpi-icon admin-inline-015"><i class="fa-solid fa-users"></i></div>
                     <span class="ops-kpi-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +12%</span>
                   </div>
                   <div class="ops-kpi-value">248</div>
                   <div class="ops-kpi-label">Turistas en Ruta Ahora</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,var(--terracotta),#FF9B44)">
+                <div class="ops-kpi-card admin-inline-016">
                   <div class="ops-kpi-top">
-                    <div class="ops-kpi-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.35);"><i class="fa-solid fa-route"></i></div>
+                    <div class="ops-kpi-icon admin-inline-017"><i class="fa-solid fa-route"></i></div>
                     <span class="ops-kpi-trend flat">31/38</span>
                   </div>
                   <div class="ops-kpi-value">31</div>
                   <div class="ops-kpi-label">Senderos Abiertos Hoy</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
+                <div class="ops-kpi-card admin-inline-018">
                   <div class="ops-kpi-top">
-                    <div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-satellite-dish"></i></div>
+                    <div class="ops-kpi-icon admin-inline-019"><i class="fa-solid fa-satellite-dish"></i></div>
                     <span class="ops-kpi-trend up">99.8%</span>
                   </div>
                   <div class="ops-kpi-value">344</div>
                   <div class="ops-kpi-label">Balizas GPS Activas</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
+                <div class="ops-kpi-card admin-inline-020">
                   <div class="ops-kpi-top">
-                    <div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="ops-kpi-icon admin-inline-021"><i class="fa-solid fa-triangle-exclamation"></i></div>
                     <span class="ops-kpi-trend down">2 activas</span>
                   </div>
                   <div class="ops-kpi-value">2</div>
                   <div class="ops-kpi-label">Alertas SOS en Atención</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6)">
+                <div class="ops-kpi-card admin-inline-022">
                   <div class="ops-kpi-top">
-                    <div class="ops-kpi-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.35);"><i class="fa-solid fa-person-hiking"></i></div>
+                    <div class="ops-kpi-icon admin-inline-023"><i class="fa-solid fa-person-hiking"></i></div>
                     <span class="ops-kpi-trend flat">18 activos</span>
                   </div>
                   <div class="ops-kpi-value">18</div>
@@ -542,42 +543,42 @@
 
                   <!-- PUNTOS ACTIVOS DEL MAPA -->
                   <!-- Cerro Negro - Activo -->
-                  <div class="map-point mp-active" style="left:17%;top:33%;">
+                  <div class="map-point mp-active admin-inline-024">
                     <div class="map-point-dot"></div>
                     <div class="map-point-ring"></div>
                     <div class="map-point-label">🌋 Cerro Negro · 42 turistas</div>
                   </div>
                   <!-- Volcán Masaya - Alerta -->
-                  <div class="map-point mp-alert" style="left:38%;top:51%;">
+                  <div class="map-point mp-alert admin-inline-025">
                     <div class="map-point-dot"></div>
                     <div class="map-point-ring"></div>
                     <div class="map-point-label">⚠️ V. Masaya · Gases elevados</div>
                   </div>
                   <!-- Mombacho - Activo -->
-                  <div class="map-point mp-active" style="left:36%;top:63%;">
+                  <div class="map-point mp-active admin-inline-026">
                     <div class="map-point-dot"></div>
                     <div class="map-point-ring"></div>
                     <div class="map-point-label">🌿 Mombacho · 28 turistas</div>
                   </div>
                   <!-- SOS - Río San Juan -->
-                  <div class="map-point mp-sos" style="left:55%;top:75%;">
+                  <div class="map-point mp-sos admin-inline-027">
                     <div class="map-point-dot"></div>
                     <div class="map-point-ring"></div>
                     <div class="map-point-label">🚨 SOS · Carlos M. · Río San Juan</div>
                   </div>
                   <!-- Somoto - Activo -->
-                  <div class="map-point mp-active" style="left:22%;top:16%;">
+                  <div class="map-point mp-active admin-inline-028">
                     <div class="map-point-dot"></div>
                     <div class="map-point-ring"></div>
                     <div class="map-point-label">🏞️ Cañón Somoto · 19 turistas</div>
                   </div>
                   <!-- RAAN - Cerrado -->
-                  <div class="map-point mp-closed" style="left:68%;top:22%;">
+                  <div class="map-point mp-closed admin-inline-029">
                     <div class="map-point-dot"></div>
                     <div class="map-point-label">🔒 Bosawás · Cerrado temporal</div>
                   </div>
                   <!-- SOS 2 - Ometepe -->
-                  <div class="map-point mp-sos" style="left:33%;top:74%;">
+                  <div class="map-point mp-sos admin-inline-030">
                     <div class="map-point-dot"></div>
                     <div class="map-point-ring"></div>
                     <div class="map-point-label">🚨 SOS · Ana R. · Isla Ometepe</div>
@@ -591,27 +592,27 @@
                 <div class="ops-module-panel">
                   <div class="ops-module-header">
                     <div class="ops-module-title"><i class="fa-solid fa-server"></i> Infraestructura Firebase</div>
-                    <span class="ops-status-pill online"><i class="fa-solid fa-circle" style="font-size:5px"></i> Saludable</span>
+                    <span class="ops-status-pill online"><i class="fa-solid fa-circle admin-inline-031"></i> Saludable</span>
                   </div>
                   <div class="ops-module-body">
-                    <div class="tech-grid" style="grid-template-columns:1fr 1fr;">
+                    <div class="tech-grid admin-inline-032">
                       <div class="tech-service-card">
-                        <div class="tech-svc-icon" style="background:rgba(66,133,244,0.2);color:#4285F4;border:1px solid rgba(66,133,244,0.3);"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="tech-svc-icon admin-inline-033"><i class="fa-solid fa-shield-halved"></i></div>
                         <div class="tech-svc-info"><div class="tech-svc-name">Auth</div><div class="tech-svc-sub">24ms latencia</div></div>
                         <div class="tech-status-dot operativo"></div>
                       </div>
                       <div class="tech-service-card">
-                        <div class="tech-svc-icon" style="background:rgba(255,160,0,0.2);color:#FFA000;border:1px solid rgba(255,160,0,0.3);"><i class="fa-solid fa-database"></i></div>
+                        <div class="tech-svc-icon admin-inline-034"><i class="fa-solid fa-database"></i></div>
                         <div class="tech-svc-info"><div class="tech-svc-name">Firestore</div><div class="tech-svc-sub">38ms latencia</div></div>
                         <div class="tech-status-dot operativo"></div>
                       </div>
                       <div class="tech-service-card">
-                        <div class="tech-svc-icon" style="background:rgba(76,175,80,0.2);color:#4CAF50;border:1px solid rgba(76,175,80,0.3);"><i class="fa-solid fa-folder-open"></i></div>
+                        <div class="tech-svc-icon admin-inline-035"><i class="fa-solid fa-folder-open"></i></div>
                         <div class="tech-svc-info"><div class="tech-svc-name">Storage</div><div class="tech-svc-sub">14.2 GB usados</div></div>
                         <div class="tech-status-dot operativo"></div>
                       </div>
                       <div class="tech-service-card">
-                        <div class="tech-svc-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.3);"><i class="fa-solid fa-bell"></i></div>
+                        <div class="tech-svc-icon admin-inline-036"><i class="fa-solid fa-bell"></i></div>
                         <div class="tech-svc-info"><div class="tech-svc-name">Push Notifications</div><div class="tech-svc-sub">100% entrega</div></div>
                         <div class="tech-status-dot operativo"></div>
                       </div>
@@ -623,33 +624,33 @@
                 <div class="ops-module-panel">
                   <div class="ops-module-header">
                     <div class="ops-module-title"><i class="fa-solid fa-file-shield"></i> Auditoría Reciente</div>
-                    <button class="btn-ops-action" style="padding:0.3rem 0.65rem;font-size:0.7rem;">Ver Todo</button>
+                    <button class="btn-ops-action admin-inline-037">Ver Todo</button>
                   </div>
                   <div class="ops-module-body">
                     <div class="audit-log">
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(246,94,1,0.18);color:#FF7B26;"><i class="fa-solid fa-lock-open"></i></div>
+                        <div class="audit-icon admin-inline-038"><i class="fa-solid fa-lock-open"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Oscar E.</strong> cambió Cerro Negro de <strong>Abierto → Restringido</strong></div>
                           <div class="audit-meta">16/09/2026 18:32 · IP: 190.11.x.x · Managua</div>
                         </div>
                       </div>
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(16,185,129,0.18);color:#10B981;"><i class="fa-solid fa-user-plus"></i></div>
+                        <div class="audit-icon admin-inline-039"><i class="fa-solid fa-user-plus"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Sistema</strong> registró nuevo guía: <strong>Carlos Méndez · Carazo</strong></div>
                           <div class="audit-meta">16/09/2026 17:14 · Registro automático</div>
                         </div>
                       </div>
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(139,92,246,0.18);color:#A78BFA;"><i class="fa-solid fa-dollar-sign"></i></div>
+                        <div class="audit-icon admin-inline-040"><i class="fa-solid fa-dollar-sign"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Valeria M.</strong> aprobó pago $840 a <strong>Cooperativa Mombacho</strong></div>
                           <div class="audit-meta">16/09/2026 15:50 · Autorización nivel 1</div>
                         </div>
                       </div>
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(239,68,68,0.18);color:#EF4444;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="audit-icon admin-inline-041"><i class="fa-solid fa-triangle-exclamation"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Sistema SOS</strong> registró alerta P1 en <strong>Río San Juan</strong></div>
                           <div class="audit-meta">16/09/2026 14:28 · Asignado a guía #18</div>
@@ -680,20 +681,20 @@
               </div>
 
               <div class="ops-kpi-grid">
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#FF7B26,#F59E0B)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.35);"><i class="fa-solid fa-calendar-check"></i></div><span class="ops-kpi-trend up">+8 vs ayer</span></div>
+                <div class="ops-kpi-card admin-inline-042">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-017"><i class="fa-solid fa-calendar-check"></i></div><span class="ops-kpi-trend up">+8 vs ayer</span></div>
                   <div class="ops-kpi-value">34</div><div class="ops-kpi-label">Reservas Hoy</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-check-circle"></i></div><span class="ops-kpi-trend up">95%</span></div>
+                <div class="ops-kpi-card admin-inline-014">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-015"><i class="fa-solid fa-check-circle"></i></div><span class="ops-kpi-trend up">95%</span></div>
                   <div class="ops-kpi-value">28</div><div class="ops-kpi-label">Confirmadas &amp; Pagadas</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-calendar-xmark"></i></div><span class="ops-kpi-trend down">3 hoy</span></div>
+                <div class="ops-kpi-card admin-inline-020">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-021"><i class="fa-solid fa-calendar-xmark"></i></div><span class="ops-kpi-trend down">3 hoy</span></div>
                   <div class="ops-kpi-value">3</div><div class="ops-kpi-label">Cancelaciones</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-globe"></i></div><span class="ops-kpi-trend up">+29%</span></div>
+                <div class="ops-kpi-card admin-inline-018">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-019"><i class="fa-solid fa-globe"></i></div><span class="ops-kpi-trend up">+29%</span></div>
                   <div class="ops-kpi-value">5,872</div><div class="ops-kpi-label">Visitas Web del Mes</div>
                 </div>
               </div>
@@ -708,7 +709,7 @@
                   <div class="ops-module-body">
                     <div class="reservas-list">
                       <div class="reserva-item">
-                        <div class="reserva-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.3);"><i class="fa-solid fa-mountain"></i></div>
+                        <div class="reserva-icon admin-inline-043"><i class="fa-solid fa-mountain"></i></div>
                         <div class="reserva-info">
                           <div class="reserva-title">Cerro Negro · Grupo: 8 personas</div>
                           <div class="reserva-meta">Guía: Roberto A. · Salida: 06:00 AM · Regreso: 14:00</div>
@@ -716,7 +717,7 @@
                         <div class="reserva-right"><div class="reserva-amount">$320</div><div class="reserva-status">✓ Pagado</div></div>
                       </div>
                       <div class="reserva-item">
-                        <div class="reserva-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-water"></i></div>
+                        <div class="reserva-icon admin-inline-044"><i class="fa-solid fa-water"></i></div>
                         <div class="reserva-info">
                           <div class="reserva-title">Cañón Somoto · Grupo: 5 personas</div>
                           <div class="reserva-meta">Guía: María G. · Salida: 08:00 AM · Regreso: 17:00</div>
@@ -724,20 +725,20 @@
                         <div class="reserva-right"><div class="reserva-amount">$175</div><div class="reserva-status">✓ Pagado</div></div>
                       </div>
                       <div class="reserva-item">
-                        <div class="reserva-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.3);"><i class="fa-solid fa-volcano"></i></div>
+                        <div class="reserva-icon admin-inline-045"><i class="fa-solid fa-volcano"></i></div>
                         <div class="reserva-info">
                           <div class="reserva-title">Volcán Masaya · Grupo: 12 personas</div>
                           <div class="reserva-meta">Guía: Luis P. · Salida: 15:00 PM · Nocturno</div>
                         </div>
-                        <div class="reserva-right"><div class="reserva-amount">$480</div><div class="reserva-status" style="color:#F59E0B;">⏳ Pendiente</div></div>
+                        <div class="reserva-right"><div class="reserva-amount">$480</div><div class="reserva-status admin-inline-046">⏳ Pendiente</div></div>
                       </div>
                       <div class="reserva-item">
-                        <div class="reserva-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.3);"><i class="fa-solid fa-tree"></i></div>
+                        <div class="reserva-icon admin-inline-047"><i class="fa-solid fa-tree"></i></div>
                         <div class="reserva-info">
                           <div class="reserva-title">Mombacho · Grupo: 6 personas</div>
                           <div class="reserva-meta">Guía: Ana C. · Salida: 07:30 AM · En ruta</div>
                         </div>
-                        <div class="reserva-right"><div class="reserva-amount">$240</div><div class="reserva-status" style="color:#10B981;">🟢 En curso</div></div>
+                        <div class="reserva-right"><div class="reserva-amount">$240</div><div class="reserva-status admin-inline-048">🟢 En curso</div></div>
                       </div>
                     </div>
                   </div>
@@ -747,34 +748,34 @@
                 <div class="ops-module-panel">
                   <div class="ops-module-header">
                     <div class="ops-module-title"><i class="fa-solid fa-gauge-high"></i> Capacidad de Carga Turística</div>
-                    <button class="btn-ops-action danger" style="font-size:0.68rem;padding:0.28rem 0.55rem;"><i class="fa-solid fa-ban"></i> Restringir</button>
+                    <button class="btn-ops-action danger admin-inline-049"><i class="fa-solid fa-ban"></i> Restringir</button>
                   </div>
                   <div class="ops-module-body">
                     <div class="trail-list">
                       <div class="trail-item">
                         <div class="trail-item-top"><div class="trail-name">🌋 Cerro Negro</div><div class="trail-count">42/60</div></div>
-                        <div class="trail-bar"><div class="trail-fill warn" style="width:70%"></div></div>
-                        <div class="trail-footer"><span>70% ocupado</span><span style="color:#F59E0B;">⚠️ Casi lleno</span></div>
+                        <div class="trail-bar"><div class="trail-fill warn admin-inline-050"></div></div>
+                        <div class="trail-footer"><span>70% ocupado</span><span class="admin-inline-046">⚠️ Casi lleno</span></div>
                       </div>
                       <div class="trail-item">
                         <div class="trail-item-top"><div class="trail-name">🏞️ Cañón Somoto</div><div class="trail-count">19/50</div></div>
-                        <div class="trail-bar"><div class="trail-fill ok" style="width:38%"></div></div>
-                        <div class="trail-footer"><span>38% ocupado</span><span style="color:#10B981;">✅ Disponible</span></div>
+                        <div class="trail-bar"><div class="trail-fill ok admin-inline-051"></div></div>
+                        <div class="trail-footer"><span>38% ocupado</span><span class="admin-inline-048">✅ Disponible</span></div>
                       </div>
                       <div class="trail-item">
                         <div class="trail-item-top"><div class="trail-name">🌿 Reserva Mombacho</div><div class="trail-count">55/55</div></div>
-                        <div class="trail-bar"><div class="trail-fill full" style="width:100%"></div></div>
-                        <div class="trail-footer"><span>100% LLENO</span><span style="color:#EF4444;">🔴 Sin cupos</span></div>
+                        <div class="trail-bar"><div class="trail-fill full admin-inline-052"></div></div>
+                        <div class="trail-footer"><span>100% LLENO</span><span class="admin-inline-053">🔴 Sin cupos</span></div>
                       </div>
                       <div class="trail-item">
                         <div class="trail-item-top"><div class="trail-name">🦎 Isla Ometepe</div><div class="trail-count">28/80</div></div>
-                        <div class="trail-bar"><div class="trail-fill ok" style="width:35%"></div></div>
-                        <div class="trail-footer"><span>35% ocupado</span><span style="color:#10B981;">✅ Amplia disponibilidad</span></div>
+                        <div class="trail-bar"><div class="trail-fill ok admin-inline-054"></div></div>
+                        <div class="trail-footer"><span>35% ocupado</span><span class="admin-inline-048">✅ Amplia disponibilidad</span></div>
                       </div>
                       <div class="trail-item">
                         <div class="trail-item-top"><div class="trail-name">🌊 Sendero Costera Pacífico</div><div class="trail-count">38/45</div></div>
-                        <div class="trail-bar"><div class="trail-fill warn" style="width:84%"></div></div>
-                        <div class="trail-footer"><span>84% ocupado</span><span style="color:#F59E0B;">⚠️ Alerta de saturación</span></div>
+                        <div class="trail-bar"><div class="trail-fill warn admin-inline-055"></div></div>
+                        <div class="trail-footer"><span>84% ocupado</span><span class="admin-inline-046">⚠️ Alerta de saturación</span></div>
                       </div>
                     </div>
                   </div>
@@ -782,42 +783,42 @@
               </div>
 
               <!-- Analítica Turística -->
-              <div class="ops-module-panel" style="margin-bottom:1.6rem;">
+              <div class="ops-module-panel admin-inline-056">
                 <div class="ops-module-header">
                   <div class="ops-module-title"><i class="fa-solid fa-chart-line"></i> Analítica Turística Avanzada</div>
-                  <div style="display:flex;gap:0.5rem;">
-                    <button class="btn-ops-action" style="font-size:0.7rem;padding:0.28rem 0.6rem;">7 días</button>
-                    <button class="btn-ops-action success" style="font-size:0.7rem;padding:0.28rem 0.6rem;">30 días</button>
-                    <button class="btn-ops-action" style="font-size:0.7rem;padding:0.28rem 0.6rem;">3 meses</button>
+                  <div class="admin-inline-057">
+                    <button class="btn-ops-action admin-inline-058">7 días</button>
+                    <button class="btn-ops-action success admin-inline-058">30 días</button>
+                    <button class="btn-ops-action admin-inline-058">3 meses</button>
                   </div>
                 </div>
                 <div class="ops-module-body">
-                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+                  <div class="admin-inline-059">
                     <div>
-                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:1px;">Destinos más explorados</div>
-                      <div style="display:flex;flex-direction:column;gap:0.4rem;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🌋 Cerro Negro</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">847</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🏞️ Cañón Somoto</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">621</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🦎 Isla Ometepe</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">548</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:#FFFFFF;">🌿 Mombacho</span><span style="color:var(--terracotta-light);font-family:var(--font-tech);font-weight:700;">432</span></div>
+                      <div class="admin-inline-060">Destinos más explorados</div>
+                      <div class="admin-inline-061">
+                        <div class="admin-inline-062"><span class="admin-inline-063">🌋 Cerro Negro</span><span class="admin-inline-064">847</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-063">🏞️ Cañón Somoto</span><span class="admin-inline-064">621</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-063">🦎 Isla Ometepe</span><span class="admin-inline-064">548</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-063">🌿 Mombacho</span><span class="admin-inline-064">432</span></div>
                       </div>
                     </div>
                     <div>
-                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:1px;">Métricas de conversión</div>
-                      <div style="display:flex;flex-direction:column;gap:0.4rem;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Tasa de conversión</span><span style="color:#10B981;font-family:var(--font-tech);font-weight:700;">64%</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Duración media visita</span><span style="color:#38BDF8;font-family:var(--font-tech);font-weight:700;">4.2h</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Turistas recurrentes</span><span style="color:#A78BFA;font-family:var(--font-tech);font-weight:700;">28%</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">Búsquedas sin resultado</span><span style="color:#EF4444;font-family:var(--font-tech);font-weight:700;">7%</span></div>
+                      <div class="admin-inline-060">Métricas de conversión</div>
+                      <div class="admin-inline-061">
+                        <div class="admin-inline-062"><span class="admin-inline-065">Tasa de conversión</span><span class="admin-inline-066">64%</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-065">Duración media visita</span><span class="admin-inline-067">4.2h</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-065">Turistas recurrentes</span><span class="admin-inline-068">28%</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-065">Búsquedas sin resultado</span><span class="admin-inline-069">7%</span></div>
                       </div>
                     </div>
                     <div>
-                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:1px;">Horarios de mayor actividad</div>
-                      <div style="display:flex;flex-direction:column;gap:0.4rem;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">06:00 - 09:00 AM</span><span style="color:#F59E0B;font-family:var(--font-tech);font-weight:700;">Alta 🟡</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">09:00 - 14:00 PM</span><span style="color:#EF4444;font-family:var(--font-tech);font-weight:700;">Pico 🔴</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">14:00 - 18:00 PM</span><span style="color:#10B981;font-family:var(--font-tech);font-weight:700;">Normal 🟢</span></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;"><span style="color:var(--text-muted);">18:00 - 22:00 PM</span><span style="color:#38BDF8;font-family:var(--font-tech);font-weight:700;">Baja 🔵</span></div>
+                      <div class="admin-inline-060">Horarios de mayor actividad</div>
+                      <div class="admin-inline-061">
+                        <div class="admin-inline-062"><span class="admin-inline-065">06:00 - 09:00 AM</span><span class="admin-inline-070">Alta 🟡</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-065">09:00 - 14:00 PM</span><span class="admin-inline-069">Pico 🔴</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-065">14:00 - 18:00 PM</span><span class="admin-inline-066">Normal 🟢</span></div>
+                        <div class="admin-inline-062"><span class="admin-inline-065">18:00 - 22:00 PM</span><span class="admin-inline-067">Baja 🔵</span></div>
                       </div>
                     </div>
                   </div>
@@ -844,32 +845,32 @@
               </div>
 
               <div class="ops-kpi-grid">
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="ops-kpi-trend down" style="color:#EF4444;">CRÍTICO</span></div>
+                <div class="ops-kpi-card admin-inline-020">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-021"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="ops-kpi-trend down admin-inline-053">CRÍTICO</span></div>
                   <div class="ops-kpi-value">2</div><div class="ops-kpi-label">SOS Activos P1 Crítico</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-users"></i></div><span class="ops-kpi-trend up">+12%</span></div>
+                <div class="ops-kpi-card admin-inline-018">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-019"><i class="fa-solid fa-users"></i></div><span class="ops-kpi-trend up">+12%</span></div>
                   <div class="ops-kpi-value">1,495</div><div class="ops-kpi-label">Usuarios Registrados</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#F59E0B,#FBBF24)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;border:1px solid rgba(245,158,11,0.35);"><i class="fa-solid fa-user-slash"></i></div><span class="ops-kpi-trend flat">Esta semana</span></div>
+                <div class="ops-kpi-card admin-inline-071">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-072"><i class="fa-solid fa-user-slash"></i></div><span class="ops-kpi-trend flat">Esta semana</span></div>
                   <div class="ops-kpi-value">3</div><div class="ops-kpi-label">Sesiones Sospechosas</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#84CC16,#22C55E)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.35);"><i class="fa-solid fa-bell"></i></div><span class="ops-kpi-trend up">+94%</span></div>
+                <div class="ops-kpi-card admin-inline-073">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-074"><i class="fa-solid fa-bell"></i></div><span class="ops-kpi-trend up">+94%</span></div>
                   <div class="ops-kpi-value">1,247</div><div class="ops-kpi-label">Push Enviados Este Mes</div>
                 </div>
               </div>
 
               <!-- Tabla de Emergencias SOS -->
-              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+              <div class="ops-module-panel admin-inline-075">
                 <div class="ops-module-header">
-                  <div class="ops-module-title"><i class="fa-solid fa-tower-broadcast" style="color:#EF4444;"></i> Centro de Emergencias SOS — En Tiempo Real</div>
-                  <span class="ops-status-pill offline"><span class="ops-led" style="background:#EF4444;box-shadow:0 0 8px #EF4444;"></span> 2 Activas</span>
+                  <div class="ops-module-title"><i class="fa-solid fa-tower-broadcast admin-inline-053"></i> Centro de Emergencias SOS — En Tiempo Real</div>
+                  <span class="ops-status-pill offline"><span class="ops-led admin-inline-076"></span> 2 Activas</span>
                 </div>
-                <div class="ops-module-body" style="padding:0.5rem 0;">
-                  <div style="overflow-x:auto;">
+                <div class="ops-module-body admin-inline-077">
+                  <div class="admin-inline-078">
                     <table class="sos-table">
                       <thead>
                         <tr>
@@ -885,11 +886,11 @@
                       <tbody>
                         <tr>
                           <td><span class="priority-badge p1">🔴 P1 Crítico</span></td>
-                          <td style="font-weight:700;color:#FFFFFF;">Carlos M.</td>
-                          <td style="font-family:var(--font-tech);font-size:0.72rem;color:#38BDF8;">11.0182°N, -84.2210°O</td>
+                          <td class="admin-inline-079">Carlos M.</td>
+                          <td class="admin-inline-080">11.0182°N, -84.2210°O</td>
                           <td>Roberto A. · En camino</td>
-                          <td style="font-family:var(--font-tech);color:#EF4444;">12% 🔴</td>
-                          <td style="font-family:var(--font-tech);font-size:0.72rem;">hace 4 min</td>
+                          <td class="admin-inline-081">12% 🔴</td>
+                          <td class="admin-inline-082">hace 4 min</td>
                           <td><div class="incident-actions">
                             <button class="incident-btn atender"><i class="fa-solid fa-headset"></i> Atender</button>
                             <button class="incident-btn escalar"><i class="fa-solid fa-arrow-up"></i> Escalar</button>
@@ -898,25 +899,25 @@
                         </tr>
                         <tr>
                           <td><span class="priority-badge p1">🔴 P1 Crítico</span></td>
-                          <td style="font-weight:700;color:#FFFFFF;">Ana R.</td>
-                          <td style="font-family:var(--font-tech);font-size:0.72rem;color:#38BDF8;">11.5090°N, -85.5900°O</td>
+                          <td class="admin-inline-079">Ana R.</td>
+                          <td class="admin-inline-080">11.5090°N, -85.5900°O</td>
                           <td>María G. · Pendiente</td>
-                          <td style="font-family:var(--font-tech);color:#F59E0B;">34% 🟡</td>
-                          <td style="font-family:var(--font-tech);font-size:0.72rem;">hace 11 min</td>
+                          <td class="admin-inline-083">34% 🟡</td>
+                          <td class="admin-inline-082">hace 11 min</td>
                           <td><div class="incident-actions">
                             <button class="incident-btn atender"><i class="fa-solid fa-headset"></i> Atender</button>
                             <button class="incident-btn escalar"><i class="fa-solid fa-arrow-up"></i> Escalar</button>
                             <button class="incident-btn cerrar"><i class="fa-solid fa-xmark"></i></button>
                           </div></td>
                         </tr>
-                        <tr style="opacity:0.6;">
+                        <tr class="admin-inline-084">
                           <td><span class="priority-badge p3">✅ Cerrado</span></td>
-                          <td style="font-weight:700;color:#94A3B8;">Pedro V.</td>
-                          <td style="font-family:var(--font-tech);font-size:0.72rem;color:var(--text-muted);">12.1327°N, -86.2942°O</td>
+                          <td class="admin-inline-085">Pedro V.</td>
+                          <td class="admin-inline-086">12.1327°N, -86.2942°O</td>
                           <td>Luis P. · Atendido</td>
-                          <td style="font-family:var(--font-tech);color:#10B981;">88% 🟢</td>
-                          <td style="font-family:var(--font-tech);font-size:0.72rem;">hace 2h</td>
-                          <td><span style="font-size:0.72rem;color:#10B981;">✓ Cerrado por Luis P.</span></td>
+                          <td class="admin-inline-087">88% 🟢</td>
+                          <td class="admin-inline-082">hace 2h</td>
+                          <td><span class="admin-inline-088">✓ Cerrado por Luis P.</span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -925,7 +926,7 @@
               </div>
 
               <!-- Notificaciones Push -->
-              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+              <div class="ops-module-panel admin-inline-075">
                 <div class="ops-module-header">
                   <div class="ops-module-title"><i class="fa-solid fa-paper-plane"></i> Centro de Comunicaciones Push</div>
                   <span class="ops-status-pill online">Firebase FCM</span>
@@ -939,14 +940,14 @@
                     <span class="notif-chip"><i class="fa-solid fa-bullhorn"></i> Mensaje General</span>
                     <span class="notif-chip"><i class="fa-solid fa-map-marker-alt"></i> Por Territorio</span>
                   </div>
-                  <div style="display:grid;grid-template-columns:1fr auto;gap:0.6rem;align-items:end;">
+                  <div class="admin-inline-089">
                     <div>
-                      <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.3rem;font-family:var(--font-tech);">Mensaje de Notificación</div>
-                      <input type="text" placeholder="Ej: Sendero Cerro Negro cerrado por lluvia intensa..." style="width:100%;background:rgba(6,9,18,0.8);border:1px solid rgba(22,93,111,0.4);border-radius:10px;padding:0.65rem 0.85rem;color:#FFFFFF;font-family:var(--font-main);font-size:0.82rem;">
+                      <div class="admin-inline-090">Mensaje de Notificación</div>
+                      <input type="text" placeholder="Ej: Sendero Cerro Negro cerrado por lluvia intensa..." class="admin-inline-091">
                     </div>
-                    <div style="display:flex;gap:0.5rem;">
-                      <button class="btn-ops-action" style="white-space:nowrap;"><i class="fa-solid fa-users"></i> Todos</button>
-                      <button class="btn-ops-action danger" style="white-space:nowrap;"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+                    <div class="admin-inline-057">
+                      <button class="btn-ops-action admin-inline-092"><i class="fa-solid fa-users"></i> Todos</button>
+                      <button class="btn-ops-action danger admin-inline-092"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
                     </div>
                   </div>
                 </div>
@@ -972,65 +973,65 @@
               </div>
 
               <div class="ops-kpi-grid">
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-hand-holding-dollar"></i></div><span class="ops-kpi-trend up">+22%</span></div>
+                <div class="ops-kpi-card admin-inline-014">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-015"><i class="fa-solid fa-hand-holding-dollar"></i></div><span class="ops-kpi-trend up">+22%</span></div>
                   <div class="ops-kpi-value">$25,120</div><div class="ops-kpi-label">Ingresos Comunitarios (USD)</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#FF7B26,#F59E0B)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;border:1px solid rgba(246,94,1,0.35);"><i class="fa-solid fa-person-hiking"></i></div><span class="ops-kpi-trend live">18 activos</span></div>
+                <div class="ops-kpi-card admin-inline-042">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-017"><i class="fa-solid fa-person-hiking"></i></div><span class="ops-kpi-trend live">18 activos</span></div>
                   <div class="ops-kpi-value">38</div><div class="ops-kpi-label">Guías BAQUEANOS Activos</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#84CC16,#22C55E)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.35);"><i class="fa-solid fa-store"></i></div><span class="ops-kpi-trend up">+5 este mes</span></div>
+                <div class="ops-kpi-card admin-inline-073">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-074"><i class="fa-solid fa-store"></i></div><span class="ops-kpi-trend up">+5 este mes</span></div>
                   <div class="ops-kpi-value">127</div><div class="ops-kpi-label">Negocios Comunitarios</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.35);"><i class="fa-solid fa-clock"></i></div><span class="ops-kpi-trend down">$3,400</span></div>
+                <div class="ops-kpi-card admin-inline-022">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-023"><i class="fa-solid fa-clock"></i></div><span class="ops-kpi-trend down">$3,400</span></div>
                   <div class="ops-kpi-value">$3,400</div><div class="ops-kpi-label">Pagos Pendientes</div>
                 </div>
               </div>
 
               <!-- Panel Económico Comunitario -->
-              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+              <div class="ops-module-panel admin-inline-075">
                 <div class="ops-module-header">
                   <div class="ops-module-title"><i class="fa-solid fa-chart-bar"></i> Evolución Económica Comunitaria (2026)</div>
                   <span class="ops-status-pill online">100% Directo</span>
                 </div>
                 <div class="ops-module-body">
-                  <div class="eco-chart" style="padding-top:1.5rem;">
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:45%;" data-val="$10.2k"></div><div class="eco-bar-month">Ene</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:52%;" data-val="$11.8k"></div><div class="eco-bar-month">Feb</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:48%;" data-val="$10.9k"></div><div class="eco-bar-month">Mar</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:60%;" data-val="$13.6k"></div><div class="eco-bar-month">Abr</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:70%;" data-val="$15.8k"></div><div class="eco-bar-month">May</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:78%;" data-val="$17.6k"></div><div class="eco-bar-month">Jun</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:85%;" data-val="$19.2k"></div><div class="eco-bar-month">Jul</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:88%;" data-val="$19.9k"></div><div class="eco-bar-month">Ago</div></div>
-                    <div class="eco-bar-col"><div class="eco-bar-fill" style="height:100%;" data-val="$25.1k"></div><div class="eco-bar-month">Sep</div></div>
+                  <div class="eco-chart admin-inline-093">
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-094" data-val="$10.2k"></div><div class="eco-bar-month">Ene</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-095" data-val="$11.8k"></div><div class="eco-bar-month">Feb</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-096" data-val="$10.9k"></div><div class="eco-bar-month">Mar</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-097" data-val="$13.6k"></div><div class="eco-bar-month">Abr</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-098" data-val="$15.8k"></div><div class="eco-bar-month">May</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-099" data-val="$17.6k"></div><div class="eco-bar-month">Jun</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-100" data-val="$19.2k"></div><div class="eco-bar-month">Jul</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-101" data-val="$19.9k"></div><div class="eco-bar-month">Ago</div></div>
+                    <div class="eco-bar-col"><div class="eco-bar-fill admin-inline-102" data-val="$25.1k"></div><div class="eco-bar-month">Sep</div></div>
                   </div>
-                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.75rem;margin-top:1rem;">
-                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
-                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Guías</div>
-                      <div style="font-family:var(--font-tech);font-weight:800;color:#10B981;font-size:1rem;">$14,570</div>
+                  <div class="admin-inline-103">
+                    <div class="admin-inline-104">
+                      <div class="admin-inline-105">Guías</div>
+                      <div class="admin-inline-106">$14,570</div>
                     </div>
-                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
-                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Hospedajes</div>
-                      <div style="font-family:var(--font-tech);font-weight:800;color:#38BDF8;font-size:1rem;">$5,840</div>
+                    <div class="admin-inline-104">
+                      <div class="admin-inline-105">Hospedajes</div>
+                      <div class="admin-inline-107">$5,840</div>
                     </div>
-                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
-                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Artesanos</div>
-                      <div style="font-family:var(--font-tech);font-weight:800;color:#F59E0B;font-size:1rem;">$2,960</div>
+                    <div class="admin-inline-104">
+                      <div class="admin-inline-105">Artesanos</div>
+                      <div class="admin-inline-108">$2,960</div>
                     </div>
-                    <div style="text-align:center;background:rgba(6,9,18,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.7rem;">
-                      <div style="font-size:0.7rem;color:var(--text-muted);font-family:var(--font-tech);">Gastronomía</div>
-                      <div style="font-family:var(--font-tech);font-weight:800;color:#A78BFA;font-size:1rem;">$1,750</div>
+                    <div class="admin-inline-104">
+                      <div class="admin-inline-105">Gastronomía</div>
+                      <div class="admin-inline-109">$1,750</div>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!-- Centro de Guías BAQUEANOS -->
-              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+              <div class="ops-module-panel admin-inline-075">
                 <div class="ops-module-header">
                   <div class="ops-module-title"><i class="fa-solid fa-id-badge"></i> Centro de Guías BAQUEANOS</div>
                   <button class="btn-ops-action"><i class="fa-solid fa-rotate"></i> Actualizar</button>
@@ -1041,7 +1042,7 @@
                       <div class="guide-avatar">RA</div>
                       <div class="guide-name">Roberto Amaya</div>
                       <div class="guide-zone">🌋 León · Cerro Negro</div>
-                      <div class="guide-status en-recorrido"><i class="fa-solid fa-circle" style="font-size:6px"></i> En Recorrido</div>
+                      <div class="guide-status en-recorrido"><i class="fa-solid fa-circle admin-inline-110"></i> En Recorrido</div>
                       <div class="guide-meta">
                         <span class="guide-tag">⭐ 4.9</span>
                         <span class="guide-tag">🇬🇧 EN</span>
@@ -1052,7 +1053,7 @@
                       <div class="guide-avatar">MG</div>
                       <div class="guide-name">María González</div>
                       <div class="guide-zone">🏞️ Madriz · Cañón Somoto</div>
-                      <div class="guide-status disponible"><i class="fa-solid fa-circle" style="font-size:6px"></i> Disponible</div>
+                      <div class="guide-status disponible"><i class="fa-solid fa-circle admin-inline-110"></i> Disponible</div>
                       <div class="guide-meta">
                         <span class="guide-tag">⭐ 4.8</span>
                         <span class="guide-tag">🇩🇪 DE</span>
@@ -1063,7 +1064,7 @@
                       <div class="guide-avatar">LP</div>
                       <div class="guide-name">Luis Pérez</div>
                       <div class="guide-zone">🌿 Granada · Mombacho</div>
-                      <div class="guide-status en-recorrido"><i class="fa-solid fa-circle" style="font-size:6px"></i> En Recorrido</div>
+                      <div class="guide-status en-recorrido"><i class="fa-solid fa-circle admin-inline-110"></i> En Recorrido</div>
                       <div class="guide-meta">
                         <span class="guide-tag">⭐ 4.7</span>
                         <span class="guide-tag">🇫🇷 FR</span>
@@ -1074,7 +1075,7 @@
                       <div class="guide-avatar">AC</div>
                       <div class="guide-name">Ana Castillo</div>
                       <div class="guide-zone">🦎 Rivas · Isla Ometepe</div>
-                      <div class="guide-status emergencia"><i class="fa-solid fa-circle" style="font-size:6px"></i> Emergencia</div>
+                      <div class="guide-status emergencia"><i class="fa-solid fa-circle admin-inline-110"></i> Emergencia</div>
                       <div class="guide-meta">
                         <span class="guide-tag">⭐ 4.9</span>
                         <span class="guide-tag">🇬🇧 EN</span>
@@ -1085,7 +1086,7 @@
                       <div class="guide-avatar">CM</div>
                       <div class="guide-name">Carlos Méndez</div>
                       <div class="guide-zone">🌊 Carazo · Costa Pacífica</div>
-                      <div class="guide-status fuera"><i class="fa-solid fa-circle" style="font-size:6px"></i> Fuera de Servicio</div>
+                      <div class="guide-status fuera"><i class="fa-solid fa-circle admin-inline-110"></i> Fuera de Servicio</div>
                       <div class="guide-meta">
                         <span class="guide-tag">⭐ 4.6</span>
                         <span class="guide-tag">🇮🇹 IT</span>
@@ -1096,7 +1097,7 @@
                       <div class="guide-avatar">JR</div>
                       <div class="guide-name">Juan Rivera</div>
                       <div class="guide-zone">🏔️ Jinotega · Senderos Norte</div>
-                      <div class="guide-status disponible"><i class="fa-solid fa-circle" style="font-size:6px"></i> Disponible</div>
+                      <div class="guide-status disponible"><i class="fa-solid fa-circle admin-inline-110"></i> Disponible</div>
                       <div class="guide-meta">
                         <span class="guide-tag">⭐ 5.0</span>
                         <span class="guide-tag">🇬🇧 EN 🇩🇪 DE</span>
@@ -1108,7 +1109,7 @@
               </div>
 
               <!-- Indicadores de Impacto BAQUEANO -->
-              <div class="ops-module-panel" style="margin-bottom:0;">
+              <div class="ops-module-panel admin-inline-111">
                 <div class="ops-module-header">
                   <div class="ops-module-title"><i class="fa-solid fa-earth-americas"></i> Indicadores de Impacto BAQUEANO</div>
                 </div>
@@ -1146,20 +1147,20 @@
               </div>
 
               <div class="ops-kpi-grid">
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#84CC16,#22C55E)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;border:1px solid rgba(132,204,22,0.35);"><i class="fa-solid fa-flag"></i></div><span class="ops-kpi-trend down">7 activas</span></div>
+                <div class="ops-kpi-card admin-inline-073">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-074"><i class="fa-solid fa-flag"></i></div><span class="ops-kpi-trend down">7 activas</span></div>
                   <div class="ops-kpi-value">7</div><div class="ops-kpi-label">Denuncias en Seguimiento</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#EF4444,#F97316)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.35);"><i class="fa-solid fa-fire"></i></div><span class="ops-kpi-trend down">1 activo</span></div>
+                <div class="ops-kpi-card admin-inline-020">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-021"><i class="fa-solid fa-fire"></i></div><span class="ops-kpi-trend down">1 activo</span></div>
                   <div class="ops-kpi-value">1</div><div class="ops-kpi-label">Incendios Reportados</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#2DD4BF,#38BDF8)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(45,212,191,0.2);color:#2DD4BF;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-paw"></i></div><span class="ops-kpi-trend up">+14</span></div>
+                <div class="ops-kpi-card admin-inline-112">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-113"><i class="fa-solid fa-paw"></i></div><span class="ops-kpi-trend up">+14</span></div>
                   <div class="ops-kpi-value">284</div><div class="ops-kpi-label">Especies Registradas</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#22C55E,#84CC16)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(34,197,94,0.2);color:#22C55E;border:1px solid rgba(34,197,94,0.35);"><i class="fa-solid fa-check-circle"></i></div><span class="ops-kpi-trend up">89%</span></div>
+                <div class="ops-kpi-card admin-inline-114">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-115"><i class="fa-solid fa-check-circle"></i></div><span class="ops-kpi-trend up">89%</span></div>
                   <div class="ops-kpi-value">47</div><div class="ops-kpi-label">Denuncias Resueltas</div>
                 </div>
               </div>
@@ -1174,28 +1175,28 @@
                   <div class="ops-module-body">
                     <div class="audit-log">
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;"><i class="fa-solid fa-fire"></i></div>
+                        <div class="audit-icon admin-inline-116"><i class="fa-solid fa-fire"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Incendio forestal</strong> — Sector sur Cerro Musún</div>
                           <div class="audit-meta">Reportado por: Carlos V. · 16/09/2026 · En atención</div>
                         </div>
                       </div>
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;"><i class="fa-solid fa-trash"></i></div>
+                        <div class="audit-icon admin-inline-117"><i class="fa-solid fa-trash"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Contaminación</strong> — Vertido de desechos en río Malacatoya</div>
                           <div class="audit-meta">Reportado por: María R. · 15/09/2026 · Investigando</div>
                         </div>
                       </div>
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(132,204,22,0.2);color:#84CC16;"><i class="fa-solid fa-paw"></i></div>
+                        <div class="audit-icon admin-inline-118"><i class="fa-solid fa-paw"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Especie protegida</strong> — Avistamiento jaguar Reserva Bosawás</div>
                           <div class="audit-meta">Reportado por: Sistema · 14/09/2026 · Documentado</div>
                         </div>
                       </div>
                       <div class="audit-item">
-                        <div class="audit-icon" style="background:rgba(246,94,1,0.2);color:#FF7B26;"><i class="fa-solid fa-road-circle-xmark"></i></div>
+                        <div class="audit-icon admin-inline-119"><i class="fa-solid fa-road-circle-xmark"></i></div>
                         <div class="audit-content">
                           <div class="audit-action"><strong>Sendero afectado</strong> — Derrumbe en ruta Cerro Negro km 4.2</div>
                           <div class="audit-meta">Reportado por: Roberto A. · 14/09/2026 · Cerrado temporalmente</div>
@@ -1212,32 +1213,32 @@
                     <span class="ops-status-pill online">284 especies</span>
                   </div>
                   <div class="ops-module-body">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.85rem;">
-                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(132,204,22,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
-                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🦅</div>
-                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#FFFFFF;">142</div>
-                        <div style="font-size:0.68rem;color:var(--text-muted);">Aves registradas</div>
+                    <div class="admin-inline-120">
+                      <div class="admin-inline-121">
+                        <div class="admin-inline-122">🦅</div>
+                        <div class="admin-inline-123">142</div>
+                        <div class="admin-inline-124">Aves registradas</div>
                       </div>
-                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(45,212,191,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
-                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🐆</div>
-                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#FFFFFF;">38</div>
-                        <div style="font-size:0.68rem;color:var(--text-muted);">Mamíferos registrados</div>
+                      <div class="admin-inline-125">
+                        <div class="admin-inline-122">🐆</div>
+                        <div class="admin-inline-123">38</div>
+                        <div class="admin-inline-124">Mamíferos registrados</div>
                       </div>
-                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(246,94,1,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
-                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">🌸</div>
-                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#FFFFFF;">74</div>
-                        <div style="font-size:0.68rem;color:var(--text-muted);">Flora endémica</div>
+                      <div class="admin-inline-126">
+                        <div class="admin-inline-122">🌸</div>
+                        <div class="admin-inline-123">74</div>
+                        <div class="admin-inline-124">Flora endémica</div>
                       </div>
-                      <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(239,68,68,0.2);border-radius:11px;padding:0.75rem;text-align:center;">
-                        <div style="font-size:1.5rem;margin-bottom:0.3rem;">⚠️</div>
-                        <div style="font-family:var(--font-tech);font-size:0.8rem;font-weight:700;color:#EF4444;">12</div>
-                        <div style="font-size:0.68rem;color:var(--text-muted);">En peligro crítico</div>
+                      <div class="admin-inline-127">
+                        <div class="admin-inline-122">⚠️</div>
+                        <div class="admin-inline-128">12</div>
+                        <div class="admin-inline-124">En peligro crítico</div>
                       </div>
                     </div>
-                    <div style="background:rgba(22,93,111,0.15);border:1px solid rgba(22,93,111,0.3);border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:0.65rem;">
-                      <i class="fa-solid fa-robot" style="color:#A78BFA;font-size:1.1rem;"></i>
-                      <div style="font-size:0.78rem;color:var(--text-secondary);">
-                        <strong style="color:var(--arena-pinolera);">IA sugiere para Cerro Negro:</strong> Hoy puede avistar Chichiltote (Icterus pectoralis), Guardabarranco y Zanate Mayor. Probabilidad: 87%
+                    <div class="admin-inline-129">
+                      <i class="fa-solid fa-robot admin-inline-130"></i>
+                      <div class="admin-inline-131">
+                        <strong class="admin-inline-132">IA sugiere para Cerro Negro:</strong> Hoy puede avistar Chichiltote (Icterus pectoralis), Guardabarranco y Zanate Mayor. Probabilidad: 87%
                       </div>
                     </div>
                   </div>
@@ -1264,34 +1265,34 @@
               </div>
 
               <div class="ops-kpi-grid">
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#A78BFA,#8B5CF6)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.35);"><i class="fa-solid fa-robot"></i></div><span class="ops-kpi-trend up">+31%</span></div>
+                <div class="ops-kpi-card admin-inline-022">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-023"><i class="fa-solid fa-robot"></i></div><span class="ops-kpi-trend up">+31%</span></div>
                   <div class="ops-kpi-value">4,821</div><div class="ops-kpi-label">Consultas IA este mes</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#10B981,#2DD4BF)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(16,185,129,0.2);color:#10B981;border:1px solid rgba(16,185,129,0.35);"><i class="fa-solid fa-server"></i></div><span class="ops-kpi-trend up">99.8%</span></div>
+                <div class="ops-kpi-card admin-inline-014">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-015"><i class="fa-solid fa-server"></i></div><span class="ops-kpi-trend up">99.8%</span></div>
                   <div class="ops-kpi-value">99.8%</div><div class="ops-kpi-label">Uptime del Sistema</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#F59E0B,#FBBF24)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;border:1px solid rgba(245,158,11,0.35);"><i class="fa-solid fa-hard-drive"></i></div><span class="ops-kpi-trend flat">14.2 GB</span></div>
+                <div class="ops-kpi-card admin-inline-071">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-072"><i class="fa-solid fa-hard-drive"></i></div><span class="ops-kpi-trend flat">14.2 GB</span></div>
                   <div class="ops-kpi-value">14.2GB</div><div class="ops-kpi-label">Almacenamiento Usado</div>
                 </div>
-                <div class="ops-kpi-card" style="--kpi-accent:linear-gradient(90deg,#38BDF8,#6366F1)">
-                  <div class="ops-kpi-top"><div class="ops-kpi-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.35);"><i class="fa-solid fa-gauge"></i></div><span class="ops-kpi-trend up">Óptimo</span></div>
+                <div class="ops-kpi-card admin-inline-018">
+                  <div class="ops-kpi-top"><div class="ops-kpi-icon admin-inline-019"><i class="fa-solid fa-gauge"></i></div><span class="ops-kpi-trend up">Óptimo</span></div>
                   <div class="ops-kpi-value">38ms</div><div class="ops-kpi-label">Latencia Promedio API</div>
                 </div>
               </div>
 
               <!-- AI Control Center -->
-              <div class="ops-module-panel" style="margin-bottom:1.1rem;">
+              <div class="ops-module-panel admin-inline-075">
                 <div class="ops-module-header">
-                  <div class="ops-module-title"><i class="fa-solid fa-brain" style="color:#A78BFA;"></i> Baqueano AI Control Center</div>
+                  <div class="ops-module-title"><i class="fa-solid fa-brain admin-inline-133"></i> Baqueano AI Control Center</div>
                   <span class="ops-status-pill online">Gemini · Operativo</span>
                 </div>
                 <div class="ops-module-body">
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                  <div class="admin-inline-134">
                     <div>
-                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.65rem;text-transform:uppercase;letter-spacing:1px;">Consultas Más Frecuentes</div>
+                      <div class="admin-inline-135">Consultas Más Frecuentes</div>
                       <div class="ai-queries">
                         <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">¿Cuál es el mejor sendero para principiantes?</div><div class="ai-query-count">342x</div></div>
                         <div class="ai-query-item"><div class="ai-query-icon"><i class="fa-solid fa-message"></i></div><div class="ai-query-text">¿Qué fauna puedo ver en Cerro Negro?</div><div class="ai-query-count">285x</div></div>
@@ -1301,21 +1302,21 @@
                       </div>
                     </div>
                     <div>
-                      <div style="font-family:var(--font-tech);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.65rem;text-transform:uppercase;letter-spacing:1px;">Estado del Servicio IA</div>
-                      <div style="display:flex;flex-direction:column;gap:0.55rem;">
-                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
-                          <span style="font-size:0.78rem;color:#FFFFFF;">Tasa de respuesta</span><span style="font-family:var(--font-tech);font-weight:700;color:#10B981;">97.8%</span>
+                      <div class="admin-inline-135">Estado del Servicio IA</div>
+                      <div class="admin-inline-136">
+                        <div class="admin-inline-137">
+                          <span class="admin-inline-138">Tasa de respuesta</span><span class="admin-inline-139">97.8%</span>
                         </div>
-                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
-                          <span style="font-size:0.78rem;color:#FFFFFF;">Errores reportados</span><span style="font-family:var(--font-tech);font-weight:700;color:#F59E0B;">18 (0.4%)</span>
+                        <div class="admin-inline-137">
+                          <span class="admin-inline-138">Errores reportados</span><span class="admin-inline-140">18 (0.4%)</span>
                         </div>
-                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
-                          <span style="font-size:0.78rem;color:#FFFFFF;">Tiempo de respuesta</span><span style="font-family:var(--font-tech);font-weight:700;color:#38BDF8;">1.2s avg</span>
+                        <div class="admin-inline-137">
+                          <span class="admin-inline-138">Tiempo de respuesta</span><span class="admin-inline-141">1.2s avg</span>
                         </div>
-                        <div style="background:rgba(6,9,18,0.7);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:0.65rem;display:flex;justify-content:space-between;align-items:center;">
-                          <span style="font-size:0.78rem;color:#FFFFFF;">Base de conocimiento</span><span style="font-family:var(--font-tech);font-weight:700;color:#A78BFA;">v4.2 · 16/09</span>
+                        <div class="admin-inline-137">
+                          <span class="admin-inline-138">Base de conocimiento</span><span class="admin-inline-142">v4.2 · 16/09</span>
                         </div>
-                        <button class="btn-ops-action success" style="width:100%;justify-content:center;"><i class="fa-solid fa-upload"></i> Actualizar Base de Conocimiento</button>
+                        <button class="btn-ops-action success admin-inline-143"><i class="fa-solid fa-upload"></i> Actualizar Base de Conocimiento</button>
                       </div>
                     </div>
                   </div>
@@ -1323,21 +1324,21 @@
               </div>
 
               <!-- Estado Tecnológico Completo -->
-              <div class="ops-module-panel" style="margin-bottom:0;">
+              <div class="ops-module-panel admin-inline-111">
                 <div class="ops-module-header">
                   <div class="ops-module-title"><i class="fa-solid fa-network-wired"></i> Estado Tecnológico Completo</div>
                   <span class="ops-status-pill online">Todos Operativos</span>
                 </div>
                 <div class="ops-module-body">
                   <div class="tech-grid">
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(66,133,244,0.2);color:#4285F4;border:1px solid rgba(66,133,244,0.3);"><i class="fa-solid fa-shield-halved"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Firebase Auth</div><div class="tech-svc-sub">24ms · 100% uptime</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(255,160,0,0.2);color:#FFA000;border:1px solid rgba(255,160,0,0.3);"><i class="fa-solid fa-database"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Firestore DB</div><div class="tech-svc-sub">38ms · 99.9%</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(76,175,80,0.2);color:#4CAF50;border:1px solid rgba(76,175,80,0.3);"><i class="fa-solid fa-folder-open"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Cloud Storage</div><div class="tech-svc-sub">14.2 GB / 50 GB</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.3);"><i class="fa-solid fa-robot"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Gemini API</div><div class="tech-svc-sub">1.2s avg · 97.8%</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(239,68,68,0.2);color:#EF4444;border:1px solid rgba(239,68,68,0.3);"><i class="fa-solid fa-bell"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Push (FCM)</div><div class="tech-svc-sub">94% entrega efectiva</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(56,189,248,0.2);color:#38BDF8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-globe"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Portal Web</div><div class="tech-svc-sub">99.8% uptime</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(34,197,94,0.2);color:#22C55E;border:1px solid rgba(34,197,94,0.3);"><i class="fa-brands fa-android"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Android App</div><div class="tech-svc-sub">v1.0 · 1,495 activos</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon" style="background:rgba(245,158,11,0.2);color:#F59E0B;border:1px solid rgba(245,158,11,0.3);"><i class="fa-solid fa-map"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Mapas Satelitales</div><div class="tech-svc-sub">344 balizas activas</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-033"><i class="fa-solid fa-shield-halved"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Firebase Auth</div><div class="tech-svc-sub">24ms · 100% uptime</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-034"><i class="fa-solid fa-database"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Firestore DB</div><div class="tech-svc-sub">38ms · 99.9%</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-035"><i class="fa-solid fa-folder-open"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Cloud Storage</div><div class="tech-svc-sub">14.2 GB / 50 GB</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-144"><i class="fa-solid fa-robot"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Gemini API</div><div class="tech-svc-sub">1.2s avg · 97.8%</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-036"><i class="fa-solid fa-bell"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Push (FCM)</div><div class="tech-svc-sub">94% entrega efectiva</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-044"><i class="fa-solid fa-globe"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Portal Web</div><div class="tech-svc-sub">99.8% uptime</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-145"><i class="fa-brands fa-android"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Android App</div><div class="tech-svc-sub">v1.0 · 1,495 activos</div></div><div class="tech-status-dot operativo"></div></div>
+                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-146"><i class="fa-solid fa-map"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Mapas Satelitales</div><div class="tech-svc-sub">344 balizas activas</div></div><div class="tech-status-dot operativo"></div></div>
                   </div>
                 </div>
               </div>
@@ -1399,7 +1400,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn-hero-primary" style="width: 100%; justify-content: center; padding: 0.95rem; font-size: 1rem; margin-top: 0.6rem;">
+            <button type="submit" class="btn-hero-primary admin-inline-147">
               <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Centro de Operaciones
             </button>
           </form>
@@ -1409,27 +1410,27 @@
       <!-- ================================================================ -->
       <!-- 2. CONTENIDO DEL DASHBOARD ADMINISTRATIVO                        -->
       <!-- ================================================================ -->
-      <section id="adminDashboardContent" style="display: none;">
+      <section id="adminDashboardContent" class="admin-inline-148">
 
         <!-- BARRA DE SESIÓN ACTIVA (RBAC) -->
         <div class="user-session-bar" id="userSessionBar">
           <div class="user-profile-meta">
             <div class="user-avatar-circle" id="sessionUserAvatar">VM</div>
             <div>
-              <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <div class="admin-inline-149">
                 <span class="user-name-title" id="sessionUserName">Lic. Valeria Morales</span>
                 <span class="user-role-badge admin" id="sessionUserRole">
                   <i class="fa-solid fa-shield"></i> Administrador General
                 </span>
               </div>
-              <div style="font-size: 0.75rem; color: var(--arena-pinolera);" id="sessionUserTitle">
+              <div id="sessionUserTitle" class="admin-inline-150">
                 Directora de Operaciones & Soberanía Territorial
               </div>
             </div>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 0.8rem;">
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-tech);">
+          <div class="admin-inline-151">
+            <span class="admin-inline-152">
               SESIÓN ACTIVA • ENCRIPTACIÓN TLS 1.3
             </span>
             <button class="btn-logout" id="btnLogoutAdmin" title="Cerrar sesión actual">
@@ -1442,14 +1443,14 @@
         <div class="admin-header-bar">
           <div class="admin-title-col">
             <h2>
-              <i class="fa-solid fa-network-wired" style="color: var(--terracotta-light);"></i>
+              <i class="fa-solid fa-network-wired admin-inline-153"></i>
               Baqueano Ops Center & Telemetría
             </h2>
-            <div style="display: flex; align-items: center; gap: 1rem;">
+            <div class="admin-inline-154">
               <span class="admin-badge-live">
                 <span class="pulse-green-small"></span> NÚCLEO EN VIVO
               </span>
-              <span style="font-size: 0.82rem; color: var(--arena-pinolera); font-family: var(--font-tech);">
+              <span class="admin-inline-155">
                 CLUSTER: app-baqueano (us-central1)
               </span>
             </div>
@@ -1501,7 +1502,7 @@
           <div class="kpi-card">
             <div class="kpi-icon-row">
               <div class="kpi-icon-box kpi-icon-gps"><i class="fa-solid fa-satellite-dish"></i></div>
-              <span class="kpi-trend" style="color: var(--arena-pinolera);"><i class="fa-solid fa-signal"></i> 99.8%</span>
+              <span class="kpi-trend admin-inline-156"><i class="fa-solid fa-signal"></i> 99.8%</span>
             </div>
             <div class="kpi-value-big" id="metricGpsSessions">344</div>
             <div class="kpi-label-muted">Balizas Satelitales en Sendero</div>
@@ -1514,60 +1515,60 @@
           <div class="dash-panel">
             <div class="dash-panel-header">
               <h3 class="dash-panel-title">
-                <i class="fa-solid fa-chart-column" style="color: var(--terracotta-light);"></i>
+                <i class="fa-solid fa-chart-column admin-inline-153"></i>
                 Actividad Semanal: App Android vs Portal Web
               </h3>
-              <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-tech);">ÚLTIMOS 7 DÍAS</span>
+              <span class="admin-inline-157">ÚLTIMOS 7 DÍAS</span>
             </div>
 
             <div class="activity-chart-wrapper">
               <div class="chart-bars-container">
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 65%;" data-val="65%"></div>
-                    <div class="bar-col web" style="height: 52%;" data-val="52%"></div>
+                    <div class="bar-col app admin-inline-158" data-val="65%"></div>
+                    <div class="bar-col web admin-inline-159" data-val="52%"></div>
                   </div>
                   <span class="chart-day-label">Lun</span>
                 </div>
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 72%;" data-val="72%"></div>
-                    <div class="bar-col web" style="height: 60%;" data-val="60%"></div>
+                    <div class="bar-col app admin-inline-160" data-val="72%"></div>
+                    <div class="bar-col web admin-inline-161" data-val="60%"></div>
                   </div>
                   <span class="chart-day-label">Mar</span>
                 </div>
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 80%;" data-val="80%"></div>
-                    <div class="bar-col web" style="height: 68%;" data-val="68%"></div>
+                    <div class="bar-col app admin-inline-162" data-val="80%"></div>
+                    <div class="bar-col web admin-inline-163" data-val="68%"></div>
                   </div>
                   <span class="chart-day-label">Mié</span>
                 </div>
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 88%;" data-val="88%"></div>
-                    <div class="bar-col web" style="height: 75%;" data-val="75%"></div>
+                    <div class="bar-col app admin-inline-164" data-val="88%"></div>
+                    <div class="bar-col web admin-inline-165" data-val="75%"></div>
                   </div>
                   <span class="chart-day-label">Jue</span>
                 </div>
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 94%;" data-val="94%"></div>
-                    <div class="bar-col web" style="height: 90%;" data-val="90%"></div>
+                    <div class="bar-col app admin-inline-166" data-val="94%"></div>
+                    <div class="bar-col web admin-inline-167" data-val="90%"></div>
                   </div>
                   <span class="chart-day-label">Vie</span>
                 </div>
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 100%;" data-val="100%"></div>
-                    <div class="bar-col web" style="height: 98%;" data-val="98%"></div>
+                    <div class="bar-col app admin-inline-168" data-val="100%"></div>
+                    <div class="bar-col web admin-inline-169" data-val="98%"></div>
                   </div>
                   <span class="chart-day-label">Sáb</span>
                 </div>
                 <div class="chart-bar-group">
                   <div class="bars-pair">
-                    <div class="bar-col app" style="height: 96%;" data-val="96%"></div>
-                    <div class="bar-col web" style="height: 92%;" data-val="92%"></div>
+                    <div class="bar-col app admin-inline-170" data-val="96%"></div>
+                    <div class="bar-col web admin-inline-171" data-val="92%"></div>
                   </div>
                   <span class="chart-day-label">Dom</span>
                 </div>
@@ -1584,10 +1585,10 @@
           <div class="dash-panel">
             <div class="dash-panel-header">
               <h3 class="dash-panel-title">
-                <i class="fa-solid fa-server" style="color: var(--arena-pinolera);"></i>
+                <i class="fa-solid fa-server admin-inline-156"></i>
                 Servicios Firebase Cloud
               </h3>
-              <span class="service-status-pill online"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Saludable</span>
+              <span class="service-status-pill online"><i class="fa-solid fa-circle admin-inline-172"></i> Saludable</span>
             </div>
 
             <div class="firebase-services-list">
@@ -1639,13 +1640,13 @@
         </div>
 
         <!-- MATRIZ DE LAS 10 COLECCIONES FIRESTORE -->
-        <div class="dash-panel" style="margin-bottom: 2.5rem;">
+        <div class="dash-panel admin-inline-173">
           <div class="dash-panel-header">
             <h3 class="dash-panel-title">
-              <i class="fa-solid fa-table-cells" style="color: var(--terracotta-light);"></i>
+              <i class="fa-solid fa-table-cells admin-inline-153"></i>
               Arquitectura de Datos: 10 Colecciones Firestore
             </h3>
-            <span style="font-size: 0.8rem; color: var(--arena-pinolera); font-family: var(--font-tech);">ESQUEMA SINCRONIZADO</span>
+            <span class="admin-inline-174">ESQUEMA SINCRONIZADO</span>
           </div>
 
           <div class="routes-table-wrap">
@@ -1741,10 +1742,10 @@
           <div class="dash-panel">
             <div class="dash-panel-header">
               <h3 class="dash-panel-title">
-                <i class="fa-solid fa-route" style="color: var(--verde-neon);"></i>
+                <i class="fa-solid fa-route admin-inline-175"></i>
                 Estado Operativo de Rutas y Senderos
               </h3>
-              <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-tech);">ACCIONES RÁPIDAS</span>
+              <span class="admin-inline-157">ACCIONES RÁPIDAS</span>
             </div>
 
             <div class="routes-table-wrap">
@@ -1763,7 +1764,7 @@
                     <td>Madriz</td>
                     <td><span class="status-badge-table active">Abierto Normal</span></td>
                     <td>
-                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Cañón de Somoto')">
+                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Cañón de Somoto')">
                         Alternar
                       </button>
                     </td>
@@ -1773,7 +1774,7 @@
                     <td>León</td>
                     <td><span class="status-badge-table active">Abierto Normal</span></td>
                     <td>
-                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Cerro Negro')">
+                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Cerro Negro')">
                         Alternar
                       </button>
                     </td>
@@ -1783,7 +1784,7 @@
                     <td>Ometepe</td>
                     <td><span class="status-badge-table active">Abierto Normal</span></td>
                     <td>
-                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Volcán Maderas')">
+                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Volcán Maderas')">
                         Alternar
                       </button>
                     </td>
@@ -1793,7 +1794,7 @@
                     <td>Jinotega</td>
                     <td><span class="status-badge-table active">Abierto Normal</span></td>
                     <td>
-                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Cascada La Luna')">
+                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Cascada La Luna')">
                         Alternar
                       </button>
                     </td>
@@ -1803,7 +1804,7 @@
                     <td>Masaya</td>
                     <td><span class="status-badge-table active">Abierto Normal</span></td>
                     <td>
-                      <button class="btn-admin-action btn-route-toggle" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="toggleRouteStatus('Laguna de Apoyo')">
+                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Laguna de Apoyo')">
                         Alternar
                       </button>
                     </td>
@@ -1817,7 +1818,7 @@
           <div class="dash-panel">
             <div class="dash-panel-header">
               <h3 class="dash-panel-title">
-                <i class="fa-solid fa-satellite" style="color: var(--terracotta-light);"></i>
+                <i class="fa-solid fa-satellite admin-inline-153"></i>
                 Terminal de Eventos en Tiempo Real
               </h3>
               <span class="service-status-pill online"><span class="pulse-green-small"></span> STREAM</span>
@@ -1866,7 +1867,7 @@
     <div class="container">
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.2rem;">
+          <div class="brand-box admin-inline-177">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -1928,7 +1929,7 @@
 
       <div class="footer-bottom-bar">
         <div>© 2026 Baqueano Nicaragua. Operaciones transparentes para el bien común.</div>
-        <div style="display: flex; gap: 1.5rem;">
+        <div class="admin-inline-178">
           <a href="ambiental.html">Decálogo Verde</a>
           <a href="admin.html">Baqueano Ops Center</a>
         </div>
@@ -1940,26 +1941,26 @@
   <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
     <div class="sos-modal-dialog">
       <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div style="text-align: center; margin-bottom: 1.2rem;">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
-        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      <div class="admin-inline-179">
+        <i class="fa-solid fa-triangle-exclamation admin-inline-180"></i>
+        <h3 class="admin-inline-181">Centro de Auxilio SOS 24/7</h3>
+        <p class="admin-inline-182">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
       </div>
-      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
-        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
-        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      <div class="sos-gps-card admin-inline-183">
+        <span class="admin-inline-184">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" class="admin-inline-185">Buscando satélites...</div>
       </div>
       <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">115</span></div></a>
-        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">101</span></div></a>
-        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i><div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div></a>
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical admin-inline-186"></i><div><h5 class="admin-inline-187">Cruz Blanca</h5><span class="admin-inline-188">128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher admin-inline-189"></i><div><h5 class="admin-inline-187">Bomberos</h5><span class="admin-inline-188">115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved admin-inline-190"></i><div><h5 class="admin-inline-187">Policía Turística</h5><span class="admin-inline-188">101</span></div></a>
+        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp admin-inline-191"></i><div><h5 class="admin-inline-187">Mesa Baqueano</h5><span class="admin-inline-188">WhatsApp SOS</span></div></a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
-        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+      <div class="admin-inline-192">
+        <button class="btn-hero-primary admin-inline-193" id="btnSendWhatsAppSos">
           <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
         </button>
-        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+        <button class="btn-hero-glass admin-inline-194" id="btnCopyGpsSos">
           <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
         </button>
       </div>
@@ -1971,8 +1972,8 @@
     <div class="modal-card-dialog">
       <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <h3 class="admin-inline-195">Instalar Baqueano para Android</h3>
+      <p class="admin-inline-196">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
@@ -1987,8 +1988,8 @@
           <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
         </div>
       </div>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+      <div class="admin-inline-197">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary admin-inline-198" id="modalConfirmDownloadBtn">
           <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
         </a>
       </div>
@@ -2031,7 +2032,7 @@
               const div = document.createElement('div');
               div.className = 'feed-event-item';
               div.innerHTML = `
-                <div class="feed-event-icon"><i class="fa-solid fa-store" style="color: #F65E01;"></i></div>
+                <div class="feed-event-icon"><i class="fa-solid fa-store admin-inline-199"></i></div>
                 <div class="feed-event-content">
                   <div class="feed-event-title">Nuevo Negocio Pendiente: ${biz.name || 'Sin nombre'}</div>
                   <div class="feed-event-meta">${biz.type || ''} • ${biz.department || ''} • Revisión requerida</div>
@@ -2071,7 +2072,7 @@
               const div = document.createElement('div');
               div.className = 'feed-event-item';
               div.innerHTML = `
-                <div class="feed-event-icon"><i class="fa-solid fa-file-shield" style="color: #10B981;"></i></div>
+                <div class="feed-event-icon"><i class="fa-solid fa-file-shield admin-inline-200"></i></div>
                 <div class="feed-event-content">
                   <div class="feed-event-title">${log.action || 'Acción de Sistema'}</div>
                   <div class="feed-event-meta">${log.performedBy || 'Sistema'} • ${new Date(log.timestamp).toLocaleString('es-NI')}</div>

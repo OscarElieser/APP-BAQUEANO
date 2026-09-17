@@ -1,0 +1,903 @@
+/**
+ * POR QU?: mantener la presentaci?n de perfil.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de perfil, sin l?gica ni contenido estructural.
+ */
+
+
+/* ==========================================================================
+       ESTILOS EXCLUSIVOS DEL PORTAL DE PERFIL DE USUARIO
+       ========================================================================== */
+    .profile-hero-section {
+      position: relative;
+      padding: 130px 0 40px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(22, 93, 111, 0.35) 50%, rgba(15, 23, 42, 1) 100%);
+      border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+    }
+
+    .profile-header-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(244, 230, 193, 0.18);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-identity-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-avatar-wrap {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid var(--arena-pinolera);
+      box-shadow: 0 0 20px rgba(246, 94, 1, 0.3);
+      overflow: hidden;
+      background: #165D6F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-avatar-badge-edit {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 28px;
+      height: 28px;
+      background: var(--terracotta);
+      color: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      cursor: pointer;
+      border: 2px solid #0F172A;
+      transition: transform 0.2s ease;
+    }
+
+    .profile-avatar-badge-edit:hover {
+      transform: scale(1.15);
+    }
+
+    .profile-name-title {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 0 0 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-role-pill {
+      font-size: 0.72rem;
+      font-family: var(--font-tech);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      background: rgba(45, 212, 191, 0.15);
+      border: 1px solid #2DD4BF;
+      color: #2DD4BF;
+    }
+
+    .profile-email-meta {
+      font-size: 0.9rem;
+      color: var(--arena-pinolera);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-header-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    /* Pestañas de Navegación del Perfil */
+    .profile-tabs-bar {
+      display: flex;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(244, 230, 193, 0.15);
+      margin-top: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .profile-tab-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(244, 230, 193, 0.15);
+      color: var(--text-muted);
+      padding: 0.75rem 1.4rem;
+      border-radius: 12px 12px 0 0;
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .profile-tab-btn:hover {
+      color: #FFFFFF;
+      background: rgba(22, 93, 111, 0.4);
+      border-color: rgba(244, 230, 193, 0.3);
+    }
+
+    .profile-tab-btn.active {
+      color: #FFFFFF;
+      background: var(--petroleo);
+      border-color: var(--arena-pinolera);
+      border-bottom: 2px solid var(--terracotta);
+      box-shadow: 0 -4px 16px rgba(246, 94, 1, 0.15);
+    }
+
+    /* Contenido de las Secciones */
+    .profile-section-content {
+      padding: 2.5rem 0 4rem;
+    }
+
+    .profile-tab-pane {
+      display: none;
+      animation: fadeInTab 0.3s ease forwards;
+    }
+
+    .profile-tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeInTab {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-card-box {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(244, 230, 193, 0.14);
+      border-radius: 16px;
+      padding: 1.8rem;
+      backdrop-filter: blur(12px);
+      margin-bottom: 1.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-card-title {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 1.2rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .profile-card-title i {
+      color: var(--terracotta);
+    }
+
+    /* Formularios dentro del Perfil */
+    .profile-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .form-group-pro {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label-pro {
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--arena-pinolera);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input-pro, .form-select-pro {
+      background: rgba(10, 16, 30, 0.85);
+      border: 1px solid rgba(244, 230, 193, 0.2);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+
+    .form-input-pro:focus, .form-select-pro:focus {
+      outline: none;
+      border-color: var(--terracotta);
+      box-shadow: 0 0 12px rgba(246, 94, 1, 0.3);
+    }
+
+    /* Switch de 2FA */
+    .switch-2fa-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(10, 16, 30, 0.6);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+
+    .switch-ui {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+    }
+
+    .switch-ui input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider-round {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #334155;
+      transition: .3s;
+      border-radius: 34px;
+    }
+
+    .slider-round:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider-round {
+      background-color: #10B981;
+    }
+
+    input:checked + .slider-round:before {
+      transform: translateX(24px);
+    }
+
+    /* Tarjetas de Reservas */
+    .booking-filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .booking-filter-pill {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(244, 230, 193, 0.15);
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .booking-filter-pill.active {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #FFFFFF;
+    }
+
+    .booking-card-item {
+      background: rgba(10, 16, 30, 0.85);
+      border: 1px solid rgba(244, 230, 193, 0.16);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .booking-card-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(246, 94, 1, 0.4);
+    }
+
+    .booking-status-tag {
+      font-family: var(--font-tech);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .booking-status-tag.upcoming {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10B981;
+      color: #10B981;
+    }
+
+    .booking-status-tag.completed {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid #3B82F6;
+      color: #60A5FA;
+    }
+
+    .booking-status-tag.cancelled {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #EF4444;
+      color: #F87171;
+    }
+
+    /* Tiras de Intereses Turísticos (Tags) */
+    .interest-tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .interest-tag-btn {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(244, 230, 193, 0.2);
+      color: var(--arena-pinolera);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .interest-tag-btn:hover {
+      border-color: var(--terracotta);
+      color: #FFFFFF;
+    }
+
+    .interest-tag-btn.selected {
+      background: var(--petroleo);
+      border-color: #2DD4BF;
+      color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(45, 212, 191, 0.25);
+    }
+
+    /* Métodos de Pago Seguros */
+    .payment-card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.2rem;
+      background: rgba(10, 16, 30, 0.7);
+      border: 1px solid rgba(244, 230, 193, 0.15);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+    }
+
+    .payment-card-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .payment-card-icon {
+      font-size: 1.8rem;
+      color: var(--arena-pinolera);
+    }
+
+    /* Modal de Tique Descargable */
+    .ticket-printable-card {
+      background: #0F172A;
+      border: 2px dashed rgba(246, 94, 1, 0.6);
+      border-radius: 16px;
+      padding: 2rem;
+      color: #FFFFFF;
+      position: relative;
+    }
+
+    .ticket-qr-box {
+      width: 120px;
+      height: 120px;
+      background: #FFFFFF;
+      padding: 8px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+    }
+
+html body .perfil-inline-001 {
+  color: #94A3B8 !important;
+}
+
+html body .perfil-inline-002 {
+  padding: 0.65rem 1.2rem !important;
+  font-size: 0.85rem !important;
+}
+
+html body .perfil-inline-003 {
+  padding: 0.65rem 1.2rem !important;
+  font-size: 0.85rem !important;
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: #EF4444 !important;
+  color: #FCA5A5 !important;
+}
+
+html body .perfil-inline-004 {
+  grid-column: 1 / -1 !important;
+  margin-top: 0.5rem !important;
+}
+
+html body .perfil-inline-005 {
+  padding: 0.65rem 1.4rem !important;
+}
+
+html body .perfil-inline-006 {
+  margin: 0 0 0.2rem 0 !important;
+  color: #FFFFFF !important;
+  font-size: 1rem !important;
+}
+
+html body .perfil-inline-007 {
+  color: #2DD4BF !important;
+}
+
+html body .perfil-inline-008 {
+  margin: 0 !important;
+  font-size: 0.82rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .perfil-inline-009 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .perfil-inline-010 {
+  margin: 0 !important;
+}
+
+html body .perfil-inline-011 {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.8rem !important;
+}
+
+html body .perfil-inline-012 {
+  color: #EF4444 !important;
+}
+
+html body .perfil-inline-013 {
+  font-size: 0.85rem !important;
+  color: var(--arena-pinolera) !important;
+}
+
+html body .perfil-inline-014 {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+html body .perfil-inline-015 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .perfil-inline-016 {
+  font-size: 0.88rem !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 1rem !important;
+}
+
+html body .perfil-inline-017 {
+  grid-column: 1 / -1 !important;
+}
+
+html body .perfil-inline-018 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 1rem !important;
+}
+
+html body .perfil-inline-019 {
+  max-width: 580px !important;
+}
+
+html body .perfil-inline-020 {
+  text-align: center !important;
+  border-bottom: 1px dashed rgba(244, 230, 193, 0.25) !important;
+  padding-bottom: 1rem !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .perfil-inline-021 {
+  width: 50px !important;
+  height: 50px !important;
+  margin-bottom: 0.4rem !important;
+}
+
+html body .perfil-inline-022 {
+  font-size: 1.3rem !important;
+  margin: 0 !important;
+  color: #FFFFFF !important;
+}
+
+html body .perfil-inline-023 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.8rem !important;
+  color: var(--arena-pinolera) !important;
+}
+
+html body .perfil-inline-024 {
+  font-size: 5rem !important;
+  color: #0F172A !important;
+}
+
+html body .perfil-inline-025 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.8rem !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .perfil-inline-026 {
+  color: var(--text-muted) !important;
+  display: block !important;
+  font-size: 0.75rem !important;
+}
+
+html body .perfil-inline-027 {
+  color: var(--terracotta) !important;
+  font-family: var(--font-tech) !important;
+  font-size: 1rem !important;
+}
+
+html body .perfil-inline-028 {
+  color: #10B981 !important;
+}
+
+html body .perfil-inline-029 {
+  color: var(--arena-pinolera) !important;
+}
+
+html body .perfil-inline-030 {
+  text-align: center !important;
+  font-size: 0.75rem !important;
+  color: var(--text-muted) !important;
+  border-top: 1px dashed rgba(244, 230, 193, 0.2) !important;
+  padding-top: 0.8rem !important;
+}
+
+html body .perfil-inline-031 {
+  display: flex !important;
+  gap: 0.8rem !important;
+  margin-top: 1.2rem !important;
+}
+
+html body .perfil-inline-032 {
+  flex: 1 !important;
+  justify-content: center !important;
+}
+
+html body .perfil-inline-033 {
+  padding: 0.75rem 1.4rem !important;
+}
+
+html body .perfil-inline-034 {
+  max-width: 480px !important;
+}
+
+html body .perfil-inline-035 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .perfil-inline-036 {
+  font-size: 2.2rem !important;
+  color: #2DD4BF !important;
+}
+
+html body .perfil-inline-037 {
+  font-size: 1.4rem !important;
+  color: #FFFFFF !important;
+  margin-top: 0.4rem !important;
+}
+
+html body .perfil-inline-038 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .perfil-inline-039 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .perfil-inline-040 {
+  margin-bottom: 1.1rem !important;
+}
+
+html body .perfil-inline-041 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .perfil-inline-042 {
+  color:#10B981 !important;
+}
+
+html body .perfil-inline-043 {
+  color:#F59E0B !important;
+}
+
+html body .perfil-inline-044 {
+  text-align: center !important;
+  padding: 2.5rem !important;
+  background: rgba(10, 16, 30, 0.5) !important;
+  border-radius: 12px !important;
+  border: 1px dashed rgba(244, 230, 193, 0.2) !important;
+}
+
+html body .perfil-inline-045 {
+  font-size: 2rem !important;
+  color: var(--arena-pinolera) !important;
+  margin-bottom: 0.6rem !important;
+}
+
+html body .perfil-inline-046 {
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+}
+
+html body .perfil-inline-047 {
+  flex: 1 !important;
+  min-width: 260px !important;
+}
+
+html body .perfil-inline-048 {
+  display: flex !important;
+  gap: 0.6rem !important;
+  align-items: center !important;
+  margin-bottom: 0.4rem !important;
+}
+
+html body .perfil-inline-049 {
+  margin: 0 0 0.3rem 0 !important;
+  color: #FFFFFF !important;
+  font-size: 1.1rem !important;
+}
+
+html body .perfil-inline-050 {
+  margin: 0 !important;
+  font-size: 0.84rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .perfil-inline-051 {
+  color: var(--terracotta) !important;
+}
+
+html body .perfil-inline-052 {
+  font-size: 0.8rem !important;
+  color: #2DD4BF !important;
+  margin-top: 0.3rem !important;
+}
+
+html body .perfil-inline-053 {
+  text-align: right !important;
+  min-width: 140px !important;
+}
+
+html body .perfil-inline-054 {
+  font-family: var(--font-tech) !important;
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .perfil-inline-055 {
+  display: flex !important;
+  gap: 0.5rem !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important;
+}
+
+html body .perfil-inline-056 {
+  padding: 0.45rem 0.9rem !important;
+  font-size: 0.78rem !important;
+}
+
+html body .perfil-inline-057 {
+  padding: 0.45rem 0.7rem !important;
+  font-size: 0.78rem !important;
+  color: #FCA5A5 !important;
+}
+
+html body .perfil-inline-058 {
+  background: rgba(10, 16, 30, 0.8) !important;
+  border: 1px solid rgba(244, 230, 193, 0.16) !important;
+  border-radius: 12px !important;
+  padding: 1.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+html body .perfil-inline-059 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 0.6rem !important;
+}
+
+html body .perfil-inline-060 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  text-transform: uppercase !important;
+}
+
+html body .perfil-inline-061 {
+  background: none !important;
+  border: none !important;
+  color: #EF4444 !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+}
+
+html body .perfil-inline-062 {
+  margin: 0 0 0.8rem 0 !important;
+  color: #FFFFFF !important;
+  font-size: 1.05rem !important;
+}
+
+html body .perfil-inline-063 {
+  color: var(--terracotta) !important;
+  margin-right: 0.4rem !important;
+}
+
+html body .perfil-inline-064 {
+  display: flex !important;
+  gap: 0.6rem !important;
+  margin-top: 0.8rem !important;
+}
+
+html body .perfil-inline-065 {
+  padding: 0.45rem 0.8rem !important;
+  font-size: 0.78rem !important;
+  flex: 1 !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+html body .perfil-inline-066 {
+  padding: 0.45rem 0.8rem !important;
+  font-size: 0.78rem !important;
+  text-decoration: none !important;
+}
+
+html body .perfil-inline-067 {
+  background: rgba(10, 16, 30, 0.75) !important;
+  border: 1px solid rgba(244, 230, 193, 0.14) !important;
+  border-radius: 12px !important;
+  padding: 1.2rem !important;
+  margin-bottom: 0.8rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+}
+
+html body .perfil-inline-068 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.82rem !important;
+  color: var(--arena-pinolera) !important;
+  margin-bottom: 0.2rem !important;
+}
+
+html body .perfil-inline-069 {
+  font-size: 0.75rem !important;
+  color: #2DD4BF !important;
+}
+
+html body .perfil-inline-070 {
+  text-align: right !important;
+}
+
+html body .perfil-inline-071 {
+  font-family: var(--font-tech) !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+  margin-bottom: 0.4rem !important;
+}
+
+html body .perfil-inline-072 {
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.75rem !important;
+}
+
+html body .perfil-inline-073 {
+  color: #FFFFFF !important;
+  font-size: 0.95rem !important;
+}
+
+html body .perfil-inline-074 {
+  font-size: 0.78rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .perfil-inline-075 {
+  display: flex !important;
+  gap: 0.6rem !important;
+  align-items: center !important;
+}
+
+html body .perfil-inline-076 {
+  font-size: 0.72rem !important;
+  font-family: var(--font-tech) !important;
+  padding: 0.2rem 0.6rem !important;
+  border-radius: 4px !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #10B981 !important;
+  border: 1px solid #10B981 !important;
+}
+
+html body .perfil-inline-077 {
+  padding: 0.35rem 0.7rem !important;
+  font-size: 0.72rem !important;
+}
+
+html body .perfil-inline-078 {
+  padding: 0.35rem 0.6rem !important;
+  font-size: 0.75rem !important;
+  color: #FCA5A5 !important;
+}

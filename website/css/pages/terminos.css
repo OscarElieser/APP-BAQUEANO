@@ -1,0 +1,119 @@
+/**
+ * POR QU?: mantener la presentaci?n de terminos.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de terminos, sin l?gica ni contenido estructural.
+ */
+
+
+.legal-hero-section {
+      padding: 6.5rem 0 3rem;
+      background: radial-gradient(circle at 15% 25%, rgba(22, 93, 111, 0.35) 0%, transparent 60%),
+                  radial-gradient(circle at 85% 75%, rgba(246, 94, 1, 0.2) 0%, transparent 60%),
+                  #0A1120;
+      border-bottom: 1px solid rgba(246, 94, 1, 0.2);
+    }
+    .legal-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(246, 94, 1, 0.18);
+      border: 1px solid rgba(246, 94, 1, 0.45);
+      border-radius: 9999px;
+      font-family: var(--font-tech);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--arena-pinolera);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .article-item-card {
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(244, 230, 193, 0.16);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 1.3rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .article-item-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--terracotta);
+    }
+    .article-num-pill {
+      font-family: var(--font-tech);
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--terracotta-light);
+      background: rgba(246, 94, 1, 0.15);
+      border: 1px solid rgba(246, 94, 1, 0.4);
+      border-radius: 10px;
+      padding: 0.4rem 0.75rem;
+      flex-shrink: 0;
+    }
+
+html body .terminos-inline-001 {
+  font-size: clamp(2rem, 3.8vw, 3rem) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  margin-bottom: 0.8rem !important;
+}
+
+html body .terminos-inline-002 {
+  font-size: 1.05rem !important;
+  color: var(--arena-pinolera) !important;
+  max-width: 800px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 2.5rem !important;
+}
+
+html body .terminos-inline-003 {
+  font-size: 1.15rem !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .terminos-inline-004 {
+  font-size: 0.92rem !important;
+  color: var(--text-muted) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+html body .terminos-inline-005 {
+  color: var(--terracotta) !important;
+  font-weight: 700 !important;
+}
+
+html body .terminos-inline-006 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .terminos-inline-007 {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  font-family: var(--font-tech) !important;
+  font-size: 0.75rem !important;
+  color: #10B981 !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 9999px !important;
+}
+
+html body .terminos-inline-008 {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: #10B981 !important;
+  box-shadow: 0 0 6px #10B981 !important;
+}

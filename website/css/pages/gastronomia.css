@@ -1,0 +1,158 @@
+/**
+ * POR QU?: mantener la presentaci?n de gastronomia.html separada de su estructura HTML.
+ * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
+ * QU?: reglas visuales espec?ficas de gastronomia, sin l?gica ni contenido estructural.
+ */
+
+
+html body .gastronomia-inline-001 {
+  font-size: 0.88rem !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.6 !important;
+}
+
+html body .gastronomia-inline-002 {
+  margin-top: 5rem !important;
+}
+
+html body .gastronomia-inline-003 {
+  text-align: center !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
+}
+
+html body .gastronomia-inline-004 {
+  font-size: 2.2rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 1rem !important;
+}
+
+html body .gastronomia-inline-005 {
+  font-size: 1rem !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.8 !important;
+}
+
+html body .gastronomia-inline-006 {
+  margin-bottom: 1.2rem !important;
+}
+
+html body .gastronomia-inline-007 {
+  display: flex !important;
+  gap: 1.5rem !important;
+}
+
+html body .gastronomia-inline-008 {
+  text-align: center !important;
+  margin-bottom: 1.2rem !important;
+}
+
+html body .gastronomia-inline-009 {
+  font-size: 2.5rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .gastronomia-inline-010 {
+  font-size: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  color: #FFFFFF !important;
+}
+
+html body .gastronomia-inline-011 {
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .gastronomia-inline-012 {
+  background: rgba(15,23,42,0.9) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px dashed var(--border-subtle) !important;
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+}
+
+html body .gastronomia-inline-013 {
+  font-size: 0.75rem !important;
+  color: var(--arena-pinolera) !important;
+  font-family: var(--font-tech) !important;
+  display: block !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body .gastronomia-inline-014 {
+  font-family: var(--font-tech) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #10B981 !important;
+}
+
+html body .gastronomia-inline-015 {
+  font-size: 1.3rem !important;
+  color: var(--rojo-alerta) !important;
+}
+
+html body .gastronomia-inline-016 {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+html body .gastronomia-inline-017 {
+  font-size: 0.75rem !important;
+}
+
+html body .gastronomia-inline-018 {
+  font-size: 1.3rem !important;
+  color: var(--terracotta) !important;
+}
+
+html body .gastronomia-inline-019 {
+  font-size: 1.3rem !important;
+  color: var(--azul-info) !important;
+}
+
+html body .gastronomia-inline-020 {
+  font-size: 1.3rem !important;
+  color: #25D366 !important;
+}
+
+html body .gastronomia-inline-021 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+}
+
+html body .gastronomia-inline-022 {
+  width: 100% !important;
+  justify-content: center !important;
+  background: #25D366 !important;
+  border: none !important;
+}
+
+html body .gastronomia-inline-023 {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html body .gastronomia-inline-024 {
+  font-size: 1.6rem !important;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body .gastronomia-inline-025 {
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+
+html body .gastronomia-inline-026 {
+  display: flex !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+}
+
+html body .gastronomia-inline-027 {
+  flex: 1 !important;
+  justify-content: center !important;
+}

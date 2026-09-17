@@ -51,228 +51,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css">
-
-  <style>
-    .about-hero-section {
-      padding: 6.5rem 0 3.5rem;
-      position: relative;
-      background: radial-gradient(circle at 20% 25%, rgba(22, 93, 111, 0.4) 0%, transparent 60%),
-                  radial-gradient(circle at 80% 75%, rgba(246, 94, 1, 0.25) 0%, transparent 60%),
-                  #0A1120;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(246, 94, 1, 0.2);
-    }
-    .about-tag-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 1.1rem;
-      background: rgba(246, 94, 1, 0.18);
-      border: 1px solid rgba(246, 94, 1, 0.45);
-      border-radius: 9999px;
-      font-family: var(--font-tech);
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--arena-pinolera);
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 1.2rem;
-    }
-    .manifesto-quote-card {
-      background: linear-gradient(135deg, rgba(246, 94, 1, 0.92) 0%, rgba(200, 100, 50, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 26px;
-      padding: 2.5rem;
-      box-shadow: 0 16px 40px rgba(246, 94, 1, 0.35);
-      position: relative;
-      margin: 2.5rem 0;
-      text-align: center;
-    }
-    .manifesto-quote-text {
-      font-family: var(--font-accent);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      line-height: 1.6;
-      font-style: italic;
-      margin: 1rem 0 0;
-    }
-    .mv-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.8rem;
-      margin-bottom: 3.5rem;
-    }
-    .mv-card {
-      background: rgba(15, 23, 42, 0.82);
-      border: 1px solid rgba(244, 230, 193, 0.18);
-      border-radius: 22px;
-      padding: 2.2rem;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-      position: relative;
-      transition: transform 0.28s ease, border-color 0.28s ease;
-    }
-    .mv-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--terracotta);
-    }
-    .mv-card.mision {
-      border-top: 4px solid var(--petroleo-light);
-    }
-    .mv-card.vision {
-      border-top: 4px solid var(--terracotta);
-    }
-    .mv-title {
-      font-family: var(--font-tech);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 1rem;
-    }
-    .mv-card.mision .mv-title i { color: #00A896; }
-    .mv-card.vision .mv-title i { color: var(--terracotta); }
-    .mv-text {
-      font-size: 0.92rem;
-      line-height: 1.65;
-      color: rgba(244, 230, 193, 0.9);
-      margin: 0;
-    }
-    .emblem-card {
-      background: rgba(15, 23, 42, 0.88);
-      border: 1.5px solid rgba(212, 175, 55, 0.35);
-      border-radius: 24px;
-      padding: 2.2rem;
-      margin: 2.5rem 0;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-    }
-    .emblem-logo-wrap {
-      width: 130px;
-      height: 130px;
-      border-radius: 26px;
-      background: rgba(22, 93, 111, 0.4);
-      border: 2px solid rgba(246, 94, 1, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 0 30px rgba(246, 94, 1, 0.35);
-    }
-    .emblem-logo-wrap img {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-    }
-    /*
-     * POR QUÉ: presentar la identidad territorial como un recorrido vivo y continuo.
-     * CÓMO: una ventana recorta una pista duplicada que se desplaza con GPU y se pausa al seleccionar.
-     * QUÉ: galería horizontal infinita, adaptable y accesible para las cinco tarjetas cromáticas.
-     */
-    .color-gallery-shell {
-      --gallery-gap: 1.25rem;
-      position: relative;
-      overflow: hidden;
-      margin: 2.5rem 0 0;
-      padding: 0.35rem 0 1rem;
-      mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-    }
-    .color-meaning-grid {
-      display: flex;
-      width: max-content;
-      gap: var(--gallery-gap);
-      animation: territorial-color-loop 34s linear infinite;
-      will-change: transform;
-    }
-    .color-gallery-shell.is-paused .color-meaning-grid { animation-play-state: paused; }
-    @keyframes territorial-color-loop {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(calc(-50% - (var(--gallery-gap) / 2)), 0, 0); }
-    }
-    .color-item-card {
-      flex: 0 0 clamp(285px, 31vw, 390px);
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 1.4rem;
-      display: flex;
-      gap: 1.2rem;
-      align-items: flex-start;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-    .color-item-card:hover,
-    .color-item-card:focus-visible,
-    .color-item-card.is-selected {
-      transform: translateY(-3px);
-      border-color: rgba(244, 230, 193, 0.4);
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(246, 94, 1, 0.18);
-      outline: none;
-    }
-    .color-gallery-status {
-      display: flex; align-items: center; justify-content: center; gap: 0.55rem;
-      min-height: 1.6rem; margin-top: 0.25rem; color: var(--text-muted);
-      font-size: 0.75rem; letter-spacing: 0.02em;
-    }
-    .color-gallery-status::before {
-      content: ''; width: 0.45rem; height: 0.45rem; border-radius: 50%;
-      background: #F65E01; box-shadow: 0 0 10px rgba(246, 94, 1, 0.8);
-    }
-    .color-gallery-shell.is-paused + .color-gallery-status::before {
-      background: #F4E6C1; box-shadow: 0 0 10px rgba(244, 230, 193, 0.65);
-    }
-    @media (max-width: 720px) {
-      .color-gallery-shell { mask-image: none; }
-      .color-item-card { flex-basis: min(84vw, 330px); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .color-meaning-grid { animation: none; }
-      .color-item-card { transition: none; }
-    }
-    .color-swatch-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      flex-shrink: 0;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-    .stats-trio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-    .stat-box-card {
-      background: linear-gradient(135deg, rgba(22, 93, 111, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%);
-      border: 1px solid rgba(22, 93, 111, 0.45);
-      border-radius: 20px;
-      padding: 1.8rem;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    }
-    .stat-number {
-      font-family: var(--font-tech);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--terracotta-light);
-      margin-bottom: 0.3rem;
-    }
-    .stat-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--arena-pinolera);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/nosotros.css">
 </head>
 <body>
 
@@ -432,16 +211,16 @@
         <span class="about-tag-pill">
           <i class="fa-solid fa-shield-halved"></i> Identidad & Propósito Institucional
         </span>
-        <h1 style="font-size: clamp(2rem, 4vw, 3.2rem); color: #FFFFFF; font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
+        <h1 class="nosotros-inline-001">
           🌿 Nuestra Marca & Manifiesto Baqueano
         </h1>
-        <p style="font-size: 1.15rem; color: var(--arena-pinolera); max-width: 820px; line-height: 1.6;">
+        <p class="nosotros-inline-002">
           «Descubre lo que no sale en el mapa». Somos el puente tecnológico entre la sabiduría ancestral de los guías locales y el viajero consciente.
         </p>
 
         <!-- CITA DEL MANIFIESTO OFICIAL ANDROID -->
         <div class="manifesto-quote-card">
-          <i class="fa-solid fa-quote-left" style="font-size: 2.2rem; color: #FFFFFF; opacity: 0.9;"></i>
+          <i class="fa-solid fa-quote-left nosotros-inline-003"></i>
           <p class="manifesto-quote-text">
             «En Nicaragua, un "Baqueano" es el conocedor nato de los senderos secretos, volcanes y ríos donde ningún mapa tradicional llega. Existimos para dignificar su labor y proteger nuestra tierra.»
           </p>
@@ -475,75 +254,75 @@
           <div class="emblem-logo-wrap">
             <img src="assets/images/logo.png" alt="Emblema Baqueano Oficial">
           </div>
-          <div style="flex: 1; min-width: 280px;">
-            <div style="font-family: var(--font-tech); font-size: 0.85rem; font-weight: 800; color: #D4AF37; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem;">
+          <div class="nosotros-inline-004">
+            <div class="nosotros-inline-005">
               SIMBOLOGÍA DE IDENTIDAD VISUAL
             </div>
-            <h3 style="font-size: 1.4rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.6rem;">
+            <h3 class="nosotros-inline-006">
               El Emblema Baqueano: La "Q" Ancestral
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin: 0;">
-              El anillo circular en Naranja Fuego (<code style="color: var(--terracotta);">#F65E01</code>) representa la energía del sol pinolero y el sendero que guía al viajero. En su corazón, la silueta volcánica y el río serpenteante en Petróleo Teal (<code style="color: var(--petroleo-light);">#165D6F</code>) simbolizan la cordillera viva de los Maribios y las aguas vírgenes de Nicaragua.
+            <p class="nosotros-inline-007">
+              El anillo circular en Naranja Fuego (<code class="nosotros-inline-008">#F65E01</code>) representa la energía del sol pinolero y el sendero que guía al viajero. En su corazón, la silueta volcánica y el río serpenteante en Petróleo Teal (<code class="nosotros-inline-009">#165D6F</code>) simbolizan la cordillera viva de los Maribios y las aguas vírgenes de Nicaragua.
             </p>
           </div>
         </div>
 
         <!-- PALETA DE COLORES EXPLICADA -->
-        <div style="margin-top: 3.5rem;">
-          <h2 style="font-size: 1.8rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+        <div class="nosotros-inline-010">
+          <h2 class="nosotros-inline-011">
             Nuestra Paleta Territorial & Qué Nos Representa
           </h2>
-          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          <p class="nosotros-inline-012">
             Cada tonalidad de la identidad Baqueano encapsula la geografía viva y la dignidad campesina de Nicaragua.
           </p>
 
           <div class="color-gallery-shell" id="territorialColorGallery" aria-label="Galería automática de la paleta territorial">
           <div class="color-meaning-grid" id="territorialColorTrack">
             <div class="color-item-card">
-              <div class="color-swatch-box" style="background: #2E7D32;"></div>
+              <div class="color-swatch-box nosotros-inline-013"></div>
               <div>
-                <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.3rem;">Verde Selva Profundo</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+                <h4 class="nosotros-inline-014">Verde Selva Profundo</h4>
+                <p class="nosotros-inline-015">
                   Representa la inmensidad de las reservas naturales vírgenes (Indio Maíz, Peñas Blancas y Bosawás), encarnando nuestro compromiso con la protección ecológica.
                 </p>
               </div>
             </div>
 
             <div class="color-item-card">
-              <div class="color-swatch-box" style="background: #00A896;"></div>
+              <div class="color-swatch-box nosotros-inline-016"></div>
               <div>
-                <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.3rem;">Teal Aguas de Cráter</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+                <h4 class="nosotros-inline-014">Teal Aguas de Cráter</h4>
+                <p class="nosotros-inline-015">
                   Evoca las aguas minerales de la Laguna de Apoyo, las pozas del Cañón de Somoto, la Cascada La Luna y las corrientes fluviales de Nicaragua.
                 </p>
               </div>
             </div>
 
             <div class="color-item-card">
-              <div class="color-swatch-box" style="background: #F4E6C1;"></div>
+              <div class="color-swatch-box nosotros-inline-017"></div>
               <div>
-                <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.3rem;">Arena Costera & Calidez</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+                <h4 class="nosotros-inline-014">Arena Costera & Calidez</h4>
+                <p class="nosotros-inline-015">
                   Simboliza las costas del Pacífico, las orillas de la Isla de Ometepe y la calidez hospitalaria con la que las familias rurales acogen a cada visitante.
                 </p>
               </div>
             </div>
 
             <div class="color-item-card">
-              <div class="color-swatch-box" style="background: #C86432;"></div>
+              <div class="color-swatch-box nosotros-inline-018"></div>
               <div>
-                <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.3rem;">Terracota Fuego & Volcanes</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+                <h4 class="nosotros-inline-014">Terracota Fuego & Volcanes</h4>
+                <p class="nosotros-inline-015">
                   El color insigne de Baqueano: encarna el fuego de la cordillera volcánica activa (Masaya, Cerro Negro, Telica) y la pasión comunitaria.
                 </p>
               </div>
             </div>
 
             <div class="color-item-card">
-              <div class="color-swatch-box" style="background: #D4AF37;"></div>
+              <div class="color-swatch-box nosotros-inline-019"></div>
               <div>
-                <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.3rem;">Oro Ancestral Pinolero</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
+                <h4 class="nosotros-inline-014">Oro Ancestral Pinolero</h4>
+                <p class="nosotros-inline-015">
                   Representa el valor sagrado de la cultura precolombina, los maizales maduros y el estándar de excelencia en cada expedición.
                 </p>
               </div>
@@ -653,9 +432,9 @@
         <div>
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+        <div class="nosotros-inline-020">
+          <span class="nosotros-inline-021">
+            <span class="nosotros-inline-022"></span>
             Red Satelital 24/7 Operativa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
@@ -673,24 +452,24 @@
   <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
     <div class="sos-modal-dialog">
       <button class="modal-close-x" id="closeSosModalBtn" type="button" aria-label="Cerrar centro SOS"><i class="fa-solid fa-xmark"></i></button>
-      <div style="text-align: center; margin-bottom: 1.2rem;">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
-        <h3 id="sosModalTitle" style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización del dispositivo</p>
+      <div class="nosotros-inline-023">
+        <i class="fa-solid fa-triangle-exclamation nosotros-inline-024"></i>
+        <h3 id="sosModalTitle" class="nosotros-inline-025">Centro de Auxilio SOS 24/7</h3>
+        <p class="nosotros-inline-026">Líneas de emergencia nacional y geolocalización del dispositivo</p>
       </div>
-      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
-        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS:</span>
-        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Solicitando ubicación segura…</div>
+      <div class="sos-gps-card nosotros-inline-027">
+        <span class="nosotros-inline-028">TUS COORDENADAS:</span>
+        <div id="sosGpsDisplay" class="nosotros-inline-029">Solicitando ubicación segura…</div>
       </div>
       <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical" style="color: var(--rojo-alerta);"></i><div><h5 style="margin: 0;">Cruz Blanca</h5><span>128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher" style="color: var(--terracotta);"></i><div><h5 style="margin: 0;">Bomberos</h5><span>115</span></div></a>
-        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved" style="color: var(--azul-info);"></i><div><h5 style="margin: 0;">Policía Nacional</h5><span>101</span></div></a>
-        <a href="https://wa.me/50584431289" class="sos-phone-card" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i><div><h5 style="margin: 0;">Mesa Baqueano</h5><span>WhatsApp SOS</span></div></a>
+        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical nosotros-inline-030"></i><div><h5 class="nosotros-inline-031">Cruz Blanca</h5><span>128</span></div></a>
+        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher nosotros-inline-008"></i><div><h5 class="nosotros-inline-031">Bomberos</h5><span>115</span></div></a>
+        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved nosotros-inline-032"></i><div><h5 class="nosotros-inline-031">Policía Nacional</h5><span>101</span></div></a>
+        <a href="https://wa.me/50584431289" class="sos-phone-card" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp nosotros-inline-033"></i><div><h5 class="nosotros-inline-031">Mesa Baqueano</h5><span>WhatsApp SOS</span></div></a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
-        <button class="btn-hero-primary" id="btnSendWhatsAppSos" type="button" style="width: 100%; justify-content: center; background: #25D366; border: none;"><i class="fa-brands fa-whatsapp"></i> Enviar alerta con coordenadas</button>
-        <button class="btn-hero-glass" id="btnCopyGpsSos" type="button" style="width: 100%; justify-content: center;"><i class="fa-solid fa-copy"></i> Copiar coordenadas</button>
+      <div class="nosotros-inline-034">
+        <button class="btn-hero-primary nosotros-inline-035" id="btnSendWhatsAppSos" type="button"><i class="fa-brands fa-whatsapp"></i> Enviar alerta con coordenadas</button>
+        <button class="btn-hero-glass nosotros-inline-036" id="btnCopyGpsSos" type="button"><i class="fa-solid fa-copy"></i> Copiar coordenadas</button>
       </div>
     </div>
   </div>

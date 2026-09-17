@@ -55,270 +55,7 @@
   <!-- Estilos Baqueano -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
-
-  <style>
-    /* ESTILOS ESPECÍFICOS DE LA PÁGINA DEPARTAMENTAL */
-    .dept-hero-wrap {
-      position: relative;
-      min-height: 480px;
-      display: flex;
-      align-items: flex-end;
-      padding: 4rem 0 3rem;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(246, 94, 1, 0.35);
-    }
-    .dept-hero-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.65);
-      transform: scale(1.02);
-      transition: transform 1.2s ease;
-    }
-    .dept-hero-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, #0F172A 10%, rgba(15, 23, 42, 0.7) 60%, rgba(15, 23, 42, 0.4) 100%);
-    }
-    .dept-hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-    }
-    .dept-badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(22, 93, 111, 0.85);
-      border: 1px solid rgba(244, 230, 193, 0.4);
-      color: var(--arena-pinolera);
-      font-family: var(--font-tech);
-      font-weight: 800;
-      font-size: 0.8rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 9999px;
-      margin-bottom: 1rem;
-      backdrop-filter: blur(10px);
-    }
-    .dept-title-big {
-      font-size: 3.2rem;
-      font-family: var(--font-display);
-      font-weight: 900;
-      color: #FFFFFF;
-      line-height: 1.1;
-      margin-bottom: 0.8rem;
-    }
-    .dept-tagline {
-      font-size: 1.35rem;
-      font-family: var(--font-tech);
-      color: var(--terracotta-light);
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-      line-height: 1.35;
-    }
-    .dept-short-desc {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 780px;
-    }
-
-    /* BARRA DE NAVEGACIÓN ENTRE LOS 17 DEPARTAMENTOS */
-    .dept-quick-nav-bar {
-      background: rgba(15, 23, 42, 0.95);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      position: sticky;
-      top: 70px;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 0.6rem 0;
-    }
-    .dept-pills-scroll {
-      display: flex;
-      gap: 0.5rem;
-      overflow-x: auto;
-      padding: 0.2rem 0;
-      scrollbar-width: thin;
-      scrollbar-color: var(--terracotta) rgba(15, 23, 42, 0.6);
-    }
-    .dept-pills-scroll::-webkit-scrollbar {
-      height: 4px;
-    }
-    .dept-pills-scroll::-webkit-scrollbar-thumb {
-      background: var(--terracotta);
-      border-radius: 9999px;
-    }
-    .dept-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.45rem 1rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(22, 93, 111, 0.2);
-      color: var(--text-secondary);
-      font-family: var(--font-tech);
-      font-size: 0.78rem;
-      font-weight: 700;
-      white-space: nowrap;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .dept-pill-btn:hover {
-      border-color: var(--terracotta);
-      color: #FFFFFF;
-      background: rgba(246, 94, 1, 0.2);
-      transform: translateY(-1px);
-    }
-    .dept-pill-btn.active {
-      background: linear-gradient(135deg, #F65E01, #165D6F);
-      color: #FFFFFF;
-      border-color: rgba(244, 230, 193, 0.6);
-      box-shadow: 0 4px 14px rgba(246, 94, 1, 0.4);
-    }
-
-    /* GRID Y SECCIONES DE DETALLE */
-    .dept-section-block {
-      padding: 4rem 0;
-    }
-    .dept-section-card {
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 24px;
-      padding: 2.5rem;
-      margin-bottom: 2.5rem;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-    .dept-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .dept-card-header i {
-      font-size: 1.4rem;
-      color: var(--terracotta);
-    }
-    .dept-card-header h3 {
-      font-size: 1.5rem;
-      color: #FFFFFF;
-      margin: 0;
-    }
-
-    /* GASTRO Y LUGARES CARDS */
-    .dept-gastro-grid,
-    .dept-places-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
-    }
-    .dept-gastro-item,
-    .dept-place-item {
-      background: rgba(22, 93, 111, 0.15);
-      border: 1px solid rgba(22, 93, 111, 0.35);
-      border-radius: 16px;
-      padding: 1.3rem;
-      transition: all 0.25s ease;
-    }
-    .dept-gastro-item:hover,
-    .dept-place-item:hover {
-      border-color: var(--terracotta);
-      background: rgba(246, 94, 1, 0.12);
-      transform: translateY(-3px);
-    }
-    .dept-item-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 0.35rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .dept-item-desc {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    /* ACTIVIDADES LISTA */
-    .dept-activities-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.8rem;
-    }
-    .dept-activity-li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 1rem 1.2rem;
-      border-radius: 14px;
-      font-size: 0.92rem;
-      color: #FFFFFF;
-      line-height: 1.45;
-    }
-    .dept-activity-li i {
-      color: #10B981;
-      margin-top: 0.2rem;
-      font-size: 1rem;
-    }
-
-    /* INFO DE VIAJE / LOGÍSTICA */
-    .dept-logistics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .dept-logistic-box {
-      background: rgba(19, 36, 56, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 1.5rem;
-    }
-    .dept-logistic-box h5 {
-      font-size: 1rem;
-      color: var(--arena-pinolera);
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .dept-logistic-box p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    /* BOTONES DE ACCIÓN */
-    .dept-cta-bar {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 900px) {
-      .dept-gastro-grid,
-      .dept-places-grid,
-      .dept-activities-list,
-      .dept-logistics-grid {
-        grid-template-columns: 1fr;
-      }
-      .dept-title-big {
-        font-size: 2.4rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/departamento.css">
 </head>
 <body>
 
@@ -506,7 +243,7 @@
             <i class="fa-solid fa-landmark-dome"></i>
             <h3>1. Historia, Origen & Memoria Viva</h3>
           </div>
-          <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7;" id="deptHistoryText"></p>
+          <p id="deptHistoryText" class="departamento-inline-001"></p>
         </div>
 
         <!-- 2. GASTRONOMÍA TÍPICA ANCESTRAL -->
@@ -542,7 +279,7 @@
             <i class="fa-solid fa-masks-theater"></i>
             <h3>5. Cultura, Fiestas Patronales & Tradición Comunitaria</h3>
           </div>
-          <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7;" id="deptCultureText"></p>
+          <p id="deptCultureText" class="departamento-inline-001"></p>
         </div>
 
         <!-- 6. LOGÍSTICA DE VIAJE: CLIMA, CÓMO LLEGAR Y RECOMENDACIONES -->
@@ -553,29 +290,29 @@
           </div>
           <div class="dept-logistics-grid">
             <div class="dept-logistic-box">
-              <h5><i class="fa-solid fa-cloud-sun" style="color: #F59E0B;"></i> Mejor Época para Visitar</h5>
+              <h5><i class="fa-solid fa-cloud-sun departamento-inline-002"></i> Mejor Época para Visitar</h5>
               <p id="deptBestSeasonText"></p>
             </div>
             <div class="dept-logistic-box">
-              <h5><i class="fa-solid fa-route" style="color: var(--terracotta);"></i> Cómo Llegar</h5>
+              <h5><i class="fa-solid fa-route departamento-inline-003"></i> Cómo Llegar</h5>
               <p id="deptHowToReachText"></p>
             </div>
             <div class="dept-logistic-box">
-              <h5><i class="fa-solid fa-circle-check" style="color: #10B981;"></i> Recomendaciones del Baqueano</h5>
+              <h5><i class="fa-solid fa-circle-check departamento-inline-004"></i> Recomendaciones del Baqueano</h5>
               <p id="deptRecommendationsText"></p>
             </div>
           </div>
 
           <!-- BOTONES FINALES DE ACCIÓN -->
-          <div style="margin-top: 2.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem;">
-            <p style="font-size: 0.95rem; color: var(--arena-pinolera); margin-bottom: 1rem;">
+          <div class="departamento-inline-005">
+            <p class="departamento-inline-006">
               ¿Listo para recorrer este territorio con un guía campesino certificado?
             </p>
-            <div style="display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-              <a href="destinos.html" class="btn-hero-primary" style="padding: 0.8rem 1.8rem;">
+            <div class="departamento-inline-007">
+              <a href="destinos.html" class="btn-hero-primary departamento-inline-008">
                 <i class="fa-solid fa-map-location-dot"></i> Ver en Mapa Satelital
               </a>
-              <a href="aliados.html" class="btn-hero-secondary" style="padding: 0.8rem 1.8rem;">
+              <a href="aliados.html" class="btn-hero-secondary departamento-inline-008">
                 <i class="fa-solid fa-handshake"></i> Conocer Cooperativas Aliadas
               </a>
             </div>
@@ -591,7 +328,7 @@
     <div class="container">
       <div class="footer-bottom-bar">
         <div>© 2026 Baqueano Nicaragua. 17 Territorios Soberanos de Ecoturismo Comunitario.</div>
-        <div style="display: flex; gap: 1.5rem;">
+        <div class="departamento-inline-009">
           <a href="historia.html">Historia de Mi País</a>
           <a href="destinos.html">Destinos Protegidos</a>
         </div>
@@ -603,38 +340,38 @@
   <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
     <div class="sos-modal-dialog">
       <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div style="text-align: center; margin-bottom: 1.2rem;">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: var(--rojo-alerta);"></i>
-        <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #FFFFFF;">Centro de Auxilio SOS 24/7</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+      <div class="departamento-inline-010">
+        <i class="fa-solid fa-triangle-exclamation departamento-inline-011"></i>
+        <h3 class="departamento-inline-012">Centro de Auxilio SOS 24/7</h3>
+        <p class="departamento-inline-013">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
       </div>
-      <div class="sos-gps-card" style="background: rgba(15,23,42,0.9); padding: 1rem; border-radius: 12px; border: 1px dashed var(--border-subtle); margin-bottom: 1rem; text-align: center;">
-        <span style="font-size: 0.75rem; color: var(--arena-pinolera); font-family: var(--font-tech); display: block; margin-bottom: 0.3rem;">TUS COORDENADAS SATELITALES:</span>
-        <div id="sosGpsDisplay" style="font-family: var(--font-tech); font-size: 0.95rem; font-weight: 800; color: #10B981;">Buscando satélites...</div>
+      <div class="sos-gps-card departamento-inline-014">
+        <span class="departamento-inline-015">TUS COORDENADAS SATELITALES:</span>
+        <div id="sosGpsDisplay" class="departamento-inline-016">Buscando satélites...</div>
       </div>
       <div class="sos-lines-grid">
         <a href="tel:128" class="sos-phone-card">
-          <i class="fa-solid fa-truck-medical" style="font-size: 1.3rem; color: var(--rojo-alerta);"></i>
-          <div><h5 style="margin: 0; font-size: 0.9rem;">Cruz Blanca</h5><span style="font-size: 0.75rem;">Marcar 128</span></div>
+          <i class="fa-solid fa-truck-medical departamento-inline-017"></i>
+          <div><h5 class="departamento-inline-018">Cruz Blanca</h5><span class="departamento-inline-019">Marcar 128</span></div>
         </a>
         <a href="tel:115" class="sos-phone-card">
-          <i class="fa-solid fa-fire-extinguisher" style="font-size: 1.3rem; color: var(--terracotta);"></i>
-          <div><h5 style="margin: 0; font-size: 0.9rem;">Bomberos</h5><span style="font-size: 0.75rem;">Marcar 115</span></div>
+          <i class="fa-solid fa-fire-extinguisher departamento-inline-020"></i>
+          <div><h5 class="departamento-inline-018">Bomberos</h5><span class="departamento-inline-019">Marcar 115</span></div>
         </a>
         <a href="tel:101" class="sos-phone-card">
-          <i class="fa-solid fa-shield-halved" style="font-size: 1.3rem; color: var(--azul-info);"></i>
-          <div><h5 style="margin: 0; font-size: 0.9rem;">Policía Turística</h5><span style="font-size: 0.75rem;">Marcar 101</span></div>
+          <i class="fa-solid fa-shield-halved departamento-inline-021"></i>
+          <div><h5 class="departamento-inline-018">Policía Turística</h5><span class="departamento-inline-019">Marcar 101</span></div>
         </a>
         <a href="tel:50584431289" class="sos-phone-card">
-          <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i>
-          <div><h5 style="margin: 0; font-size: 0.9rem;">Mesa Baqueano</h5><span style="font-size: 0.75rem;">WhatsApp SOS</span></div>
+          <i class="fa-brands fa-whatsapp departamento-inline-022"></i>
+          <div><h5 class="departamento-inline-018">Mesa Baqueano</h5><span class="departamento-inline-019">WhatsApp SOS</span></div>
         </a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
-        <button class="btn-hero-primary" id="btnSendWhatsAppSos" style="width: 100%; justify-content: center; background: #25D366; border: none;">
+      <div class="departamento-inline-023">
+        <button class="btn-hero-primary departamento-inline-024" id="btnSendWhatsAppSos">
           <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
         </button>
-        <button class="btn-hero-glass" id="btnCopyGpsSos" style="width: 100%; justify-content: center;">
+        <button class="btn-hero-glass departamento-inline-025" id="btnCopyGpsSos">
           <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
         </button>
       </div>
@@ -646,8 +383,8 @@
     <div class="modal-card-dialog">
       <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 style="font-size: 1.6rem; color: #FFFFFF; margin-bottom: 0.5rem;">Instalar Baqueano para Android</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">Descarga directa del paquete APK oficial v1.0.0 firmado para tu smartphone.</p>
+      <h3 class="departamento-inline-026">Instalar Baqueano para Android</h3>
+      <p class="departamento-inline-027">Descarga directa del paquete APK oficial v1.0.0 firmado para tu smartphone.</p>
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
@@ -662,8 +399,8 @@
           <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
         </div>
       </div>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary" id="modalConfirmDownloadBtn" style="flex: 1; justify-content: center;">
+      <div class="departamento-inline-028">
+        <a href="assets/BaqueanoNicaragua.apk" download="BaqueanoNicaragua.apk" class="btn-hero-primary departamento-inline-029" id="modalConfirmDownloadBtn">
           <i class="fa-solid fa-download"></i> Descargar APK (56 MB)
         </a>
       </div>
@@ -710,7 +447,7 @@
       if (gastroGrid) {
         gastroGrid.innerHTML = currentDept.gastronomy.map(g => `
           <div class="dept-gastro-item">
-            <div class="dept-item-title"><i class="fa-solid fa-plate-wheat" style="color: var(--terracotta);"></i> ${g.name}</div>
+            <div class="dept-item-title"><i class="fa-solid fa-plate-wheat departamento-inline-003"></i> ${g.name}</div>
             <div class="dept-item-desc">${g.desc}</div>
           </div>
         `).join('');
@@ -721,8 +458,8 @@
       if (placesGrid) {
         placesGrid.innerHTML = currentDept.places.map(p => `
           <div class="dept-place-item">
-            <div class="dept-item-title"><i class="fa-solid ${p.icon || 'fa-map-pin'}" style="color: var(--oro-noble);"></i> ${p.name}</div>
-            <div class="dept-item-desc"><span style="color: var(--arena-pinolera); font-family: var(--font-tech); font-weight:700;">${p.type}</span></div>
+            <div class="dept-item-title"><i class="fa-solid ${p.icon || 'fa-map-pin'} departamento-inline-030"></i> ${p.name}</div>
+            <div class="dept-item-desc"><span class="departamento-inline-031">${p.type}</span></div>
           </div>
         `).join('');
       }

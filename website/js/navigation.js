@@ -621,37 +621,41 @@ function buildAboutDropdown() {
  * Control interactivo del submenú desplegable "Mi País"
  */
 function initDropdownMiPais() {
-  const dropdown = document.querySelector('.nav-dropdown');
-  if (!dropdown) return;
+  const dropdowns = Array.from(document.querySelectorAll('.nav-dropdown'));
+  if (dropdowns.length === 0) return;
 
-  const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-  if (!trigger) return;
+  const closeDropdown = (dropdown, returnFocus = false) => {
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    dropdown.classList.remove('is-open');
+    trigger?.setAttribute('aria-expanded', 'false');
+    if (returnFocus) trigger?.focus();
+  };
 
-  // Alternar apertura con clic en el botón principal
-  trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = dropdown.classList.toggle('is-open');
-    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = !dropdown.classList.contains('is-open');
+      dropdowns.forEach((item) => closeDropdown(item));
+      dropdown.classList.toggle('is-open', willOpen);
+      trigger.setAttribute('aria-expanded', String(willOpen));
+    });
   });
 
-  // Cerrar al hacer clic fuera del dropdown
-  document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
-    }
+  document.addEventListener('click', (event) => {
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(event.target)) closeDropdown(dropdown);
+    });
   });
 
-  // Cerrar al presionar la tecla Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && dropdown.classList.contains('is-open')) {
-      dropdown.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
-      trigger.focus();
-    }
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    dropdowns.forEach((dropdown) => {
+      if (dropdown.classList.contains('is-open')) closeDropdown(dropdown, true);
+    });
   });
 }
-
 /**
  * Asegura la carga reactiva del módulo de sesión de usuario (user-session.js)
  * para adaptar el enlace del Navbar entre "Ops Center" (Admin/Auditor) y "Perfil" (Explorador).
@@ -667,6 +671,7 @@ function ensureUserSessionLoaded() {
 // Auto-inicialización completa y defensiva para páginas directas.
 function initializeNavigationModules() {
   ensureUserSessionLoaded();
+  buildAboutDropdown();
   initNavbarScroll();
   initDynamicNavbar();
   initMobileMenu();

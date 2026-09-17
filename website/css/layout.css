@@ -1315,3 +1315,27 @@ img {
   .main-navbar .brand-text { display: none; }
   .main-navbar .sos-quick-btn { min-width: 94px; padding-inline: 11px; }
 }
+/*
+ * POR QUÉ: el bloque institucional debe desplegarse sin desbordar el borde derecho del encabezado.
+ * CÓMO: alinea su panel al extremo final y conserva el comportamiento vertical en teléfonos.
+ * QUÉ: posición, estado activo y diferenciación visual del submenú Nosotros.
+ */
+.main-navbar .nav-dropdown-about .nav-dropdown-menu {
+  right: 0;
+  left: auto;
+  transform-origin: top right;
+}
+
+.main-navbar .nav-dropdown-about:has(.nav-dropdown-item.active) > .nav-dropdown-trigger {
+  color: #fff;
+  border-color: rgba(246, 94, 1, 0.42);
+  background: linear-gradient(135deg, rgba(246, 94, 1, 0.24), rgba(22, 93, 111, 0.24));
+}
+
+@media (max-width: 768px) {
+  .main-navbar .nav-dropdown-about .nav-dropdown-menu {
+    right: auto;
+    left: auto;
+    transform-origin: top center;
+  }
+}

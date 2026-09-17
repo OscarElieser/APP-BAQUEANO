@@ -40,59 +40,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-
-  <style>
-    .legal-hero-section {
-      padding: 6.5rem 0 3rem;
-      background: radial-gradient(circle at 15% 25%, rgba(22, 93, 111, 0.35) 0%, transparent 60%),
-                  radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.2) 0%, transparent 60%),
-                  #0A1120;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-    }
-    .legal-tag-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 1rem;
-      background: rgba(212, 175, 55, 0.18);
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      border-radius: 9999px;
-      font-family: var(--font-tech);
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #D4AF37;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-    }
-    .article-item-card {
-      background: rgba(15, 23, 42, 0.82);
-      border: 1px solid rgba(244, 230, 193, 0.16);
-      border-radius: 20px;
-      padding: 1.8rem;
-      margin-bottom: 1.3rem;
-      backdrop-filter: blur(16px);
-      display: flex;
-      gap: 1.4rem;
-      align-items: flex-start;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-    .article-item-card:hover {
-      transform: translateY(-3px);
-      border-color: #D4AF37;
-    }
-    .article-num-pill {
-      font-family: var(--font-tech);
-      font-size: 1rem;
-      font-weight: 900;
-      color: #D4AF37;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      border-radius: 10px;
-      padding: 0.4rem 0.75rem;
-      flex-shrink: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="css/pages/aviso-legal.css">
 </head>
 <body>
 
@@ -237,10 +185,10 @@
         <span class="legal-tag-badge">
           <i class="fa-solid fa-building-columns"></i> Información Societaria & Gobernanza Territorial
         </span>
-        <h1 style="font-size: clamp(2rem, 3.8vw, 3rem); color: #FFFFFF; font-weight: 800; margin-bottom: 0.8rem;">
+        <h1 class="aviso-legal-inline-001">
           ⚖️ Aviso Legal & Transparencia Institucional
         </h1>
-        <p style="font-size: 1.05rem; color: var(--arena-pinolera); max-width: 800px; line-height: 1.6; margin-bottom: 2.5rem;">
+        <p class="aviso-legal-inline-002">
           Conoce los fundamentos jurídicos, titularidad tecnológica y el marco de gobernanza comunitaria de Baqueano Nicaragua.
         </p>
 
@@ -248,11 +196,11 @@
         <div class="article-item-card">
           <div class="article-num-pill">01</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="aviso-legal-inline-003">
               Titularidad de la Plataforma y Domicilio Legal
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
-              El ecosistema digital BAQUEANO NICARAGUA (sitio web oficial y aplicación para Android) es desarrollado y administrado como una iniciativa de soberanía tecnológica comunitaria con sede territorial en Managua y cobertura operativa en los 17 departamentos y regiones autónomas de la República de Nicaragua. Correo oficial de contacto: <a href="mailto:legal@baqueano.ni" style="color: #D4AF37; font-weight: 700;">legal@baqueano.ni</a>.
+            <p class="aviso-legal-inline-004">
+              El ecosistema digital BAQUEANO NICARAGUA (sitio web oficial y aplicación para Android) es desarrollado y administrado como una iniciativa de soberanía tecnológica comunitaria con sede territorial en Managua y cobertura operativa en los 17 departamentos y regiones autónomas de la República de Nicaragua. Correo oficial de contacto: <a href="mailto:legal@baqueano.ni" class="aviso-legal-inline-005">legal@baqueano.ni</a>.
             </p>
           </div>
         </div>
@@ -260,10 +208,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">02</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="aviso-legal-inline-003">
               Régimen de Fomento Turístico Ley 306 INTUR
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="aviso-legal-inline-004">
               Las operaciones de difusión, articulación y apoyo a las cooperativas rurales aliadas se fundamentan en las disposiciones de la Ley N° 306 ("Ley de Incentivos para la Industria Turística de la República de Nicaragua") y los lineamientos de promoción comunitaria emitidos por el Instituto Nicaragüense de Turismo (INTUR).
             </p>
           </div>
@@ -272,10 +220,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">03</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="aviso-legal-inline-003">
               Propiedad Intelectual, Marcas y Diseños
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="aviso-legal-inline-004">
               El emblema oficial de la "Q" Ancestral, las combinaciones cromáticas institucionales, la arquitectura del software, bases de datos y textos analíticos son creaciones intelectuales protegidas por la Ley N° 312 de Derechos de Autor y Conexos de Nicaragua. Queda prohibida su reproducción o explotación comercial sin consentimiento expreso por escrito.
             </p>
           </div>
@@ -284,10 +232,10 @@
         <div class="article-item-card">
           <div class="article-num-pill">04</div>
           <div>
-            <h3 style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 0.5rem;">
+            <h3 class="aviso-legal-inline-003">
               Limitación de Responsabilidad en Senderismo de Aventura
             </h3>
-            <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            <p class="aviso-legal-inline-004">
               Baqueano Nicaragua facilita el catálogo y la herramienta de contacto directo con guías territoriales. La ejecución de expediciones, ascensos a volcanes y navegación fluvial se rige por las condiciones de mutuo acuerdo entre el explorador y la cooperativa anfitriona. Baqueano promueve activamente el respeto estricto a las alertas de SINAPRED y el uso de equipo de protección homologado.
             </p>
           </div>
@@ -355,7 +303,7 @@
         <span class="separator">|</span>
         <a href="privacidad.html">Política de Privacidad</a>
         <span class="separator">|</span>
-        <a href="aviso-legal.html" style="color: #D4AF37; font-weight: 700;">Aviso Legal</a>
+        <a href="aviso-legal.html" class="aviso-legal-inline-005">Aviso Legal</a>
         <span class="separator">|</span>
         <a href="cookies.html">Política de Cookies</a>
         <span class="separator">|</span>
@@ -371,9 +319,9 @@
         <div>
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+        <div class="aviso-legal-inline-006">
+          <span class="aviso-legal-inline-007">
+            <span class="aviso-legal-inline-008"></span>
             Red Satelital 24/7 Operativa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
