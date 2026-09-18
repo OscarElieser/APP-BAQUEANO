@@ -35,16 +35,35 @@
   const BaqueanoPanorama = {
     init() {
       this.bindTiltCards();
+      this.bindModalEvents();
+    },
+
+    bindModalEvents() {
+      const closeBtn = document.getElementById('btnClosePanorama');
+      const backdrop = document.getElementById('closePanoramaBackdrop');
+      const audioBtn = document.getElementById('btnTogglePanoAudio');
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => this.closePanorama());
+      }
+      if (backdrop) {
+        backdrop.addEventListener('click', () => this.closePanorama());
+      }
+      if (audioBtn) {
+        audioBtn.addEventListener('click', () => this.toggleAmbientSound());
+      }
     },
 
     openPanorama(title, imageUrl) {
       const modal = document.getElementById('panorama360Modal');
-      const titleEl = document.getElementById('panorama360Title');
-      const container = document.getElementById('panorama360CanvasContainer');
+      const titleEl = document.getElementById('panoDestinationTitle');
+      const subEl = document.getElementById('panoDestinationSub');
+      const container = document.getElementById('panoramaCanvasContainer');
 
       if (!modal || !container) return;
 
-      if (titleEl) titleEl.textContent = `Experiencia 360° — ${title}`;
+      if (titleEl) titleEl.textContent = title || 'Inmersión 360°';
+      if (subEl) subEl.textContent = 'Exploración Panorámica — Territorio Baqueano';
       modal.classList.add('is-open');
 
       container.innerHTML = '';
@@ -60,14 +79,15 @@
       geometry.scale(-1, 1, 1);
 
       const textureLoader = new THREE.TextureLoader();
-      textureLoader.load(imageUrl, (texture) => {
+      const defaultPano = 'assets/images/heroes/hero-bg.jpg';
+      textureLoader.load(imageUrl || defaultPano, (texture) => {
         texture.colorSpace = THREE.SRGBColorSpace;
         const material = new THREE.MeshBasicMaterial({ map: texture });
         const mesh = new THREE.Mesh(geometry, material);
         panoScene.add(mesh);
       });
 
-      panoRenderer = new THREE.WebGLRenderer({ antialias: true });
+      panoRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       panoRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       panoRenderer.setSize(width, height);
       container.appendChild(panoRenderer.domElement);
@@ -123,6 +143,9 @@
       if (panoRenderer) {
         panoRenderer.dispose();
       }
+      if (isAudioPlaying) {
+        this.toggleAmbientSound();
+      }
     },
 
     // ------------------------------------------------------------------------
@@ -155,7 +178,8 @@
     // AUDIO AMBIENTAL PROCEDURAL CON WEB AUDIO API
     // ------------------------------------------------------------------------
     toggleAmbientSound() {
-      const btn = document.getElementById('btnToggleAmbientSound');
+      const icon = document.getElementById('panoAudioIcon');
+      const label = document.getElementById('panoAudioLabel');
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
@@ -163,7 +187,8 @@
       if (isAudioPlaying) {
         if (ambientGain) ambientGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
         isAudioPlaying = false;
-        if (btn) btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Sonido Ambiente (Off)';
+        if (icon) icon.className = 'fa-solid fa-volume-xmark';
+        if (label) label.textContent = 'Sonido (Off)';
       } else {
         // Generador de ruido rosa/brisa suave
         const bufferSize = audioCtx.sampleRate * 2;
@@ -195,15 +220,18 @@
 
         noise.start(0);
         isAudioPlaying = true;
-        if (btn) btn.innerHTML = '<i class="fa-solid fa-volume-high" style="color: #10B981;"></i> Sonido Ambiente (On)';
+        if (icon) icon.className = 'fa-solid fa-volume-high';
+        if (label) label.textContent = 'Sonido (On)';
       }
     }
   };
 
   window.BaqueanoPanorama = BaqueanoPanorama;
 
-  document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => BaqueanoPanorama.init());
+  } else {
     BaqueanoPanorama.init();
-  });
+  }
 
 })(window, document);

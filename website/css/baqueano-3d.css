@@ -1,355 +1,1031 @@
 /* ============================================================================
    🧭 BAQUEANO ECOSYSTEM — ESTILOS 3D, WEBGL & EXPERIENCIA INMERSIVA
+   ============================================================================
+   🎯 1. POR QUÉ:
+   - Proveer una experiencia tridimensional de alta gama visual para el territorio
+     de Nicaragua, integrando el lienzo WebGL Three.js, el diseñador de viajes,
+     la brújula táctil y el guía asistente digital sin romper la paleta oficial.
+   ⚙️ 2. CÓMO:
+   - Tokens de diseño oficial (#165D6F Petróleo, #F65E01 Fuego Volcánico, #F4E6C1 Arena,
+     #0F172A Noche Profunda, #080D1A Fondo Absoluto).
+   - Glassmorphism con backdrop-filter, bordes translúcidos y sombras profundas.
+   - Posicionamiento flotante defensivo (FAB en esquina inferior derecha, sin
+     desbordamiento horizontal ni bloqueo de contenido).
+   📦 3. QUÉ:
+   - Clases para .hero-compass-interactive, .mapa-vivo-3d-section,
+     .route-builder-section, .baqueano-assistant-widget, .panorama-360-modal.
    ============================================================================ */
 
 :root {
   --b3d-bg-deep: #080D1A;
   --b3d-surface-1: #0F172A;
-  --b3d-surface-2: rgba(22, 93, 111, 0.25);
+  --b3d-surface-card: rgba(15, 23, 42, 0.88);
   --b3d-petroleo: #165D6F;
+  --b3d-petroleo-glow: #2DD4BF;
   --b3d-volcan: #F65E01;
+  --b3d-volcan-glow: rgba(246, 94, 1, 0.4);
   --b3d-arena: #F4E6C1;
   --b3d-gold: #F59E0B;
-  --b3d-emerald: #10B981;
+  --b3d-border: rgba(244, 230, 193, 0.18);
+  --b3d-border-highlight: rgba(45, 212, 191, 0.45);
 }
 
-/* ----------------------------------------------------------------------------
-   1. SECCIÓN PRINCIPAL: MAPA VIVO 3D DE NICARAGUA
-   ---------------------------------------------------------------------------- */
-.map-3d-section-pro {
+/* ============================================================================
+   1. BRÚJULA 3D INTERACTIVA EN EL HERO
+   ============================================================================ */
+.hero-compass-interactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--b3d-border);
+  padding: 0.65rem 1.15rem;
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), inset 0 0 16px rgba(22, 93, 111, 0.25);
+  transition: transform 0.2s ease-out, border-color 0.2s ease;
+  user-select: none;
+}
+
+.hero-compass-interactive:hover {
+  border-color: var(--b3d-volcan);
+  transform: translateY(-2px);
+}
+
+.compass-dial {
   position: relative;
-  background: radial-gradient(circle at 50% 20%, #0F172A 0%, #080D1A 100%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #165D6F 0%, #080D1A 85%);
+  border: 2px solid var(--b3d-arena);
+  box-shadow: 0 0 14px var(--b3d-volcan-glow), inset 0 0 8px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.compass-ring {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px dashed rgba(244, 230, 193, 0.35);
+  pointer-events: none;
+}
+
+.compass-needle {
+  position: absolute;
+  width: 3px;
+  height: 28px;
+  background: linear-gradient(180deg, #F65E01 0%, #F65E01 50%, #F4E6C1 50%, #F4E6C1 100%);
+  border-radius: 2px;
+  transform-origin: center center;
+  transition: transform 0.15s ease-out;
+  box-shadow: 0 0 6px rgba(246, 94, 1, 0.8);
+}
+
+.compass-center-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #000;
+  z-index: 2;
+}
+
+.compass-marker {
+  position: absolute;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.52rem;
+  font-weight: 800;
+  color: var(--b3d-arena);
+  line-height: 1;
+}
+
+.marker-n { top: 2px; color: #F65E01; }
+.marker-s { bottom: 2px; }
+.marker-e { right: 2px; }
+.marker-w { left: 2px; }
+
+.compass-legend {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.compass-legend strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.compass-legend span {
+  font-size: 0.72rem;
+  color: var(--b3d-arena);
+  opacity: 0.85;
+}
+
+.hero-apk-subtle-wrap {
+  margin-top: 0.85rem;
+}
+
+.hero-apk-subtle-btn {
+  background: transparent;
+  border: none;
+  color: rgba(244, 230, 193, 0.75);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.hero-apk-subtle-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================================
+   2. SECCIÓN: MAPA VIVO 3D DE NICARAGUA
+   ============================================================================ */
+.mapa-vivo-3d-section {
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, #0F172A 0%, #080D1A 85%);
   padding: 5rem 1.5rem;
-  border-top: 1px solid rgba(244, 230, 193, 0.12);
-  border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+  border-top: 1px solid var(--b3d-border);
+  border-bottom: 1px solid var(--b3d-border);
   overflow: hidden;
 }
 
-.map-3d-header-wrap {
-  text-align: center;
-  max-width: 840px;
-  margin: 0 auto 2.5rem auto;
+.mapa-3d-viewport-card {
+  position: relative;
+  max-width: 1220px;
+  margin: 2.5rem auto 0 auto;
+  background: #080D1A;
+  border: 1px solid var(--b3d-border-highlight);
+  border-radius: 20px;
+  box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(22, 93, 111, 0.2);
+  overflow: hidden;
 }
 
-.map-3d-badge-insignia {
+.mapa-3d-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(15, 23, 42, 0.92);
+  border-bottom: 1px solid var(--b3d-border);
+  backdrop-filter: blur(12px);
+  z-index: 15;
+}
+
+.mapa-3d-status-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mapa-3d-title-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.mapa-3d-regions-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.btn-map-region {
+  background: rgba(8, 13, 26, 0.8);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  color: var(--b3d-arena);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(246, 94, 1, 0.15);
-  border: 1px solid rgba(246, 94, 1, 0.4);
-  color: var(--b3d-volcan);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  margin-bottom: 1rem;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
 }
 
-.map-3d-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(1.8rem, 3.8vw, 2.7rem);
-  font-weight: 800;
+.btn-map-region:hover {
+  background: rgba(22, 93, 111, 0.35);
+  border-color: var(--b3d-petroleo-glow);
   color: #FFFFFF;
-  letter-spacing: -0.5px;
-  margin: 0 0 1rem 0;
-  line-height: 1.2;
 }
 
-.map-3d-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
+.btn-map-region.active {
+  background: linear-gradient(135deg, #165D6F 0%, #0F172A 100%);
+  border-color: var(--b3d-volcan);
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(246, 94, 1, 0.35);
+}
+
+.mapa-3d-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.btn-map-action {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(8, 13, 26, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.25);
   color: var(--b3d-arena);
-  opacity: 0.85;
-  line-height: 1.6;
-  margin: 0 auto;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-.map-3d-canvas-container {
+.btn-map-action:hover {
+  background: var(--b3d-petroleo);
+  color: #FFFFFF;
+  border-color: var(--b3d-arena);
+}
+
+.mapa-3d-stage {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 620px;
-  margin: 0 auto;
-  border-radius: 20px;
-  border: 1px solid rgba(22, 93, 111, 0.45);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), inset 0 0 40px rgba(22, 93, 111, 0.2);
+  height: 600px;
   background: #080D1A;
   overflow: hidden;
 }
 
-.map-3d-canvas-wrap {
+#baqueano3dCanvasWrap {
   width: 100%;
   height: 100%;
   cursor: grab;
 }
 
-.map-3d-canvas-wrap:active {
+#baqueano3dCanvasWrap:active {
   cursor: grabbing;
 }
 
-.map-3d-controls-overlay {
+#baqueano3dCanvasWrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.mapa-3d-hints-overlay {
   position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  z-index: 10;
-}
-
-.map-3d-ctrl-btn {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(244, 230, 193, 0.25);
-  backdrop-filter: blur(10px);
-  color: var(--b3d-arena);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  transition: all 0.2s ease;
-}
-
-.map-3d-ctrl-btn:hover {
-  background: var(--b3d-petroleo);
-  color: #FFFFFF;
-  border-color: var(--b3d-arena);
-  transform: translateY(-1px);
-}
-
-.map-3d-hint-badge {
-  position: absolute;
-  bottom: 1.25rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(244, 230, 193, 0.2);
-  backdrop-filter: blur(8px);
-  color: #FFFFFF;
-  font-size: 0.78rem;
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  pointer-events: none;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.25rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.18);
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
   z-index: 10;
+  font-size: 0.74rem;
+  color: rgba(244, 230, 193, 0.85);
+  white-space: nowrap;
 }
 
 /* ----------------------------------------------------------------------------
-   2. DRAWER TERRITORIAL LATERAL INTERACTIVO
+   DRAWER LATERAL DE DETALLES DEL MAPA 3D
    ---------------------------------------------------------------------------- */
 .map-3d-detail-drawer {
   position: absolute;
   top: 0;
   right: -420px;
-  width: 390px;
-  height: 100%;
+  width: 380px;
   max-width: 90%;
-  background: rgba(15, 23, 42, 0.94);
-  border-left: 1px solid rgba(244, 230, 193, 0.2);
-  backdrop-filter: blur(16px);
-  padding: 1.75rem 1.5rem;
-  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.6);
-  z-index: 20;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.96);
+  border-left: 1px solid var(--b3d-border);
+  backdrop-filter: blur(18px);
+  padding: 1.5rem;
+  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.7);
+  z-index: 25;
   transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .map-3d-detail-drawer.is-open {
   right: 0;
 }
 
-.map-3d-drawer-header {
+.drawer-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  color: #FFFFFF;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.map-3d-drawer-title {
+.drawer-close-btn:hover {
+  background: var(--b3d-volcan);
+  color: #FFFFFF;
+}
+
+.drawer-badge-pill {
+  display: inline-block;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  color: var(--b3d-volcan);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.35rem;
+}
+
+.drawer-title {
   font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.drawer-location {
+  font-size: 0.8rem;
+  color: var(--b3d-arena);
+  opacity: 0.8;
+  margin: 0.25rem 0 0 0;
+}
+
+.drawer-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--b3d-border);
+}
+
+.drawer-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-drawer-360 {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.6rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--b3d-arena);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.btn-drawer-360:hover {
+  background: var(--b3d-volcan);
+  border-color: #FFFFFF;
+}
+
+.drawer-desc {
+  font-size: 0.84rem;
+  color: rgba(244, 230, 193, 0.9);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.drawer-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.drawer-metric-box {
+  background: rgba(8, 13, 26, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 8px;
+  padding: 0.55rem;
+  text-align: center;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--b3d-arena);
+  opacity: 0.75;
+  margin-bottom: 0.2rem;
+}
+
+.metric-val {
+  font-size: 0.82rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.btn-drawer-explore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: linear-gradient(135deg, #F65E01 0%, #D946EF 120%);
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-drawer-explore:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(246, 94, 1, 0.45);
+}
+
+.mapa-3d-footer-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.5rem;
+  background: rgba(15, 23, 42, 0.92);
+  border-top: 1px solid var(--b3d-border);
+  font-size: 0.76rem;
+  color: var(--b3d-arena);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-volcano { background: #F65E01; box-shadow: 0 0 6px #F65E01; }
+.dot-lake { background: #165D6F; box-shadow: 0 0 6px #2DD4BF; }
+.dot-eco { background: #10B981; box-shadow: 0 0 6px #10B981; }
+.dot-beach { background: #F59E0B; box-shadow: 0 0 6px #F59E0B; }
+.legend-update { color: rgba(244, 230, 193, 0.6); }
+
+/* ============================================================================
+   3. SECCIÓN: DISEÑADOR VISUAL DE VIAJES ("CONSTRUYE TU AVENTURA")
+   ============================================================================ */
+.route-builder-section {
+  position: relative;
+  background: #080D1A;
+  padding: 5rem 1.5rem;
+  border-bottom: 1px solid var(--b3d-border);
+}
+
+.route-builder-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2rem;
+  max-width: 1220px;
+  margin: 2.5rem auto 0 auto;
+}
+
+.builder-card-pro {
+  background: var(--b3d-surface-card);
+  border: 1px solid var(--b3d-border);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.builder-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(22, 93, 111, 0.25);
+  border-bottom: 1px solid var(--b3d-border);
+  color: #F65E01;
+}
+
+.builder-header-bar i {
   font-size: 1.15rem;
+}
+
+.builder-header-bar h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #FFFFFF;
   margin: 0;
 }
 
-.map-3d-drawer-close {
+.builder-form-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.builder-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.builder-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--b3d-arena);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.builder-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rb-chip {
+  background: rgba(8, 13, 26, 0.75);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  color: var(--b3d-arena);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rb-chip:hover {
+  border-color: var(--b3d-petroleo-glow);
+  color: #FFFFFF;
+}
+
+.rb-chip.active {
+  background: linear-gradient(135deg, #165D6F 0%, #0F172A 100%);
+  border-color: var(--b3d-volcan);
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(246, 94, 1, 0.35);
+}
+
+.builder-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.builder-select {
+  width: 100%;
+  background: #080D1A;
+  border: 1px solid rgba(244, 230, 193, 0.22);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.builder-select:focus {
+  border-color: var(--b3d-volcan);
+  box-shadow: 0 0 10px rgba(246, 94, 1, 0.25);
+}
+
+.btn-calculate-route {
+  width: 100%;
+  background: linear-gradient(135deg, #F65E01 0%, #E11D48 100%);
+  border: none;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 24px rgba(246, 94, 1, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-calculate-route:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(246, 94, 1, 0.55);
+}
+
+.builder-result-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+}
+
+.builder-budget-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.budget-stat-box {
+  background: rgba(8, 13, 26, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 12px;
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.bs-title {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--b3d-arena);
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.bs-val {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.bs-cordobas { color: var(--b3d-volcan); }
+.bs-savings { color: #10B981; }
+
+.bs-sub {
+  display: block;
+  font-size: 0.68rem;
+  color: rgba(244, 230, 193, 0.7);
+  margin-top: 0.2rem;
+}
+
+.itinerary-stops-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.itinerary-stop-item {
+  display: flex;
+  gap: 0.85rem;
+  background: rgba(8, 13, 26, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 10px;
+  padding: 0.75rem;
+  align-items: center;
+}
+
+.stop-day-badge {
+  background: var(--b3d-petroleo);
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.stop-info {
+  flex: 1;
+}
+
+.stop-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.stop-meta {
+  font-size: 0.72rem;
+  color: var(--b3d-arena);
+  opacity: 0.8;
+  margin-top: 0.15rem;
+}
+
+.itinerary-action-strip {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.btn-anim-route {
+  flex: 1;
+  background: linear-gradient(135deg, #165D6F 0%, #0F172A 100%);
+  border: 1px solid var(--b3d-petroleo-glow);
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.btn-anim-route:hover {
+  background: var(--b3d-petroleo);
+  box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+}
+
+.btn-share-route {
+  background: #25D366;
+  border: none;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.btn-share-route:hover {
+  background: #1EBE5D;
+}
+
+/* ============================================================================
+   4. ASISTENTE BAQUEANO DIGITAL FLOTANTE (FAB + DRAWER)
+   ============================================================================ */
+.baqueano-assistant-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  left: auto !important;
+  width: auto !important;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: auto;
+}
+
+.assistant-fab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #F65E01 0%, #165D6F 100%);
+  border: 2px solid var(--b3d-arena);
+  border-radius: 999px;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  box-shadow: 0 8px 25px rgba(246, 94, 1, 0.5);
+  cursor: pointer;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+}
+
+.assistant-fab-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 12px 32px rgba(246, 94, 1, 0.65);
+}
+
+.assistant-avatar-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #080D1A;
+  border: 1px solid var(--b3d-arena);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #F65E01;
+}
+
+.assistant-fab-label {
+  white-space: nowrap;
+}
+
+/* Chat Drawer: OCULTO POR DEFECTO */
+.assistant-chat-drawer {
+  display: none;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: rgba(15, 23, 42, 0.97);
+  border: 1px solid var(--b3d-border);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(18px);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.assistant-chat-drawer.is-open {
+  display: flex !important;
+  animation: assistantPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes assistantPop {
+  0% { opacity: 0; transform: translateY(15px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.assistant-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.15rem;
+  background: rgba(22, 93, 111, 0.3);
+  border-bottom: 1px solid var(--b3d-border);
+}
+
+.assistant-identity-info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.assistant-identity-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F65E01;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.assistant-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.assistant-tag {
+  font-size: 0.68rem;
+  color: var(--b3d-arena);
+  opacity: 0.8;
+}
+
+.assistant-close-btn {
   background: none;
   border: none;
   color: var(--b3d-arena);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   cursor: pointer;
   padding: 0.2rem;
-  transition: color 0.2s;
+  line-height: 1;
 }
 
-.map-3d-drawer-close:hover {
+.assistant-close-btn:hover {
   color: var(--b3d-volcan);
 }
 
-/* ----------------------------------------------------------------------------
-   3. HERO RENOVADO: BRÚJULA BAQUEANA & PARTÍCULAS
-   ---------------------------------------------------------------------------- */
-.hero-compass-interactive {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(22, 93, 111, 0.35) 0%, rgba(8, 13, 26, 0.8) 100%);
-  border: 2px solid rgba(244, 230, 193, 0.4);
-  box-shadow: 0 0 25px rgba(246, 94, 1, 0.25), inset 0 0 15px rgba(22, 93, 111, 0.4);
+.assistant-messages-body {
+  padding: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem auto;
-  position: relative;
-  transition: transform 0.15s ease-out;
-}
-
-.hero-compass-needle {
-  font-size: 2.2rem;
-  color: var(--b3d-volcan);
-  transform-origin: center center;
-  filter: drop-shadow(0 0 8px rgba(246, 94, 1, 0.6));
-  animation: compassDrift 6s infinite ease-in-out;
-}
-
-@keyframes compassDrift {
-  0%, 100% { transform: rotate(0deg); }
-  35% { transform: rotate(18deg); }
-  70% { transform: rotate(-12deg); }
-}
-
-.hero-actions-dual {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 1.75rem;
-}
-
-/* ----------------------------------------------------------------------------
-   4. DISEÑADOR DE RUTAS: "CONSTRUYE TU AVENTURA"
-   ---------------------------------------------------------------------------- */
-.route-builder-section-pro {
-  background: #080D1A;
-  padding: 5rem 1.5rem;
-  position: relative;
-}
-
-.route-builder-card {
-  max-width: 980px;
-  margin: 0 auto;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(244, 230, 193, 0.18);
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-}
-
-.route-builder-grid-fields {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.rb-field-group label {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--b3d-arena);
-  margin-bottom: 0.45rem;
-}
-
-.rb-select, .rb-input {
-  width: 100%;
-  background: rgba(8, 13, 26, 0.8);
-  border: 1px solid rgba(244, 230, 193, 0.2);
-  border-radius: 8px;
-  padding: 0.7rem 0.9rem;
-  color: #FFFFFF;
-  font-size: 0.88rem;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.rb-select:focus, .rb-input:focus {
-  border-color: var(--b3d-volcan);
-}
-
-/* ----------------------------------------------------------------------------
-   5. ASISTENTE BAQUEANO DIGITAL FLOTANTE
-   ---------------------------------------------------------------------------- */
-.baqueano-assistant-widget {
-  position: fixed;
-  bottom: 1.75rem;
-  left: 1.75rem;
-  z-index: 999;
-}
-
-.assistant-avatar-float {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #F65E01 0%, #165D6F 100%);
-  border: 2px solid var(--b3d-arena);
-  box-shadow: 0 8px 24px rgba(246, 94, 1, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #FFFFFF;
-  font-size: 1.5rem;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.assistant-avatar-float:hover {
-  transform: scale(1.1) rotate(6deg);
-}
-
-.assistant-chat-window {
-  position: absolute;
-  bottom: 75px;
-  left: 0;
-  width: 340px;
-  max-width: 90vw;
-  background: rgba(15, 23, 42, 0.96);
-  border: 1px solid rgba(244, 230, 193, 0.25);
-  border-radius: 16px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(16px);
-  padding: 1.25rem;
-  display: none;
   flex-direction: column;
-  gap: 0.85rem;
-  z-index: 1000;
+  gap: 0.75rem;
+  max-height: 260px;
+  overflow-y: auto;
 }
 
-.baqueano-assistant-widget.is-open .assistant-chat-window {
+.assistant-msg {
+  padding: 0.75rem 0.95rem;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.assistant-msg-bot {
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  color: #FFFFFF;
+}
+
+.assistant-msg-bot p {
+  margin: 0;
+}
+
+.assistant-msg-user {
+  background: linear-gradient(135deg, #F65E01 0%, #D946EF 120%);
+  color: #FFFFFF;
+  align-self: flex-end;
+}
+
+.assistant-quick-prompts {
   display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.85rem 1rem;
+  background: rgba(8, 13, 26, 0.75);
+  border-top: 1px solid var(--b3d-border);
 }
 
-/* ----------------------------------------------------------------------------
-   6. MODAL VISOR 360°
-   ---------------------------------------------------------------------------- */
-.panorama-modal-backdrop {
+.prompt-chip {
+  width: 100%;
+  text-align: left;
+  background: rgba(15, 23, 42, 0.9) !important;
+  border: 1px solid rgba(244, 230, 193, 0.22) !important;
+  color: var(--b3d-arena) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.55rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.prompt-chip:hover {
+  background: var(--b3d-petroleo) !important;
+  border-color: var(--b3d-volcan) !important;
+  color: #FFFFFF !important;
+  transform: translateX(3px);
+}
+
+/* ============================================================================
+   5. VISOR PANORÁMICO 360° MODAL
+   ============================================================================ */
+.panorama-360-modal {
   position: fixed;
   inset: 0;
-  background: rgba(8, 13, 26, 0.88);
-  backdrop-filter: blur(12px);
   z-index: 10000;
   display: none;
   align-items: center;
@@ -357,24 +1033,126 @@
   padding: 1.5rem;
 }
 
-.panorama-modal-backdrop.is-open {
+.panorama-360-modal.is-open {
   display: flex;
 }
 
-.panorama-modal-dialog {
+.panorama-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 13, 26, 0.88);
+  backdrop-filter: blur(14px);
+}
+
+.panorama-modal-window {
+  position: relative;
   width: 100%;
-  max-width: 860px;
+  max-width: 900px;
   background: var(--b3d-surface-1);
-  border: 1px solid rgba(244, 230, 193, 0.2);
-  border-radius: 18px;
+  border: 1px solid var(--b3d-border);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+.panorama-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--b3d-border);
+}
+
+.panorama-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.panorama-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(246, 94, 1, 0.2);
+  color: #F65E01;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.panorama-destination-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.panorama-sub-tag {
+  font-size: 0.72rem;
+  color: var(--b3d-arena);
+  opacity: 0.8;
+}
+
+.panorama-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-pano-audio {
+  background: rgba(8, 13, 26, 0.8);
+  border: 1px solid var(--b3d-border);
+  color: var(--b3d-arena);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-pano-audio:hover {
+  background: var(--b3d-petroleo);
+  color: #FFFFFF;
+}
+
+.btn-pano-audio.is-active {
+  background: #10B981;
+  border-color: #10B981;
+  color: #FFFFFF;
+}
+
+.btn-pano-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--b3d-border);
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-pano-close:hover {
+  background: var(--b3d-volcan);
 }
 
 .panorama-canvas-wrap {
+  position: relative;
   width: 100%;
   height: 480px;
-  background: #000;
+  background: #000000;
   cursor: grab;
 }
 
@@ -382,25 +1160,58 @@
   cursor: grabbing;
 }
 
-/* ----------------------------------------------------------------------------
-   7. TARJETAS TILT 3D
-   ---------------------------------------------------------------------------- */
-.tilt-card-3d {
-  transition: transform 0.15s ease-out, box-shadow 0.25s ease;
-  transform-style: preserve-3d;
-  will-change: transform;
+.panorama-canvas-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.panorama-drag-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   6. RESPONSIVE BREAKPOINTS
+   ============================================================================ */
+@media (max-width: 992px) {
+  .route-builder-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
-  .map-3d-canvas-container {
+  .mapa-3d-stage {
     height: 440px;
   }
   .map-3d-detail-drawer {
     width: 100%;
     right: -100%;
   }
+  .mapa-3d-hints-overlay {
+    font-size: 0.68rem;
+    gap: 0.6rem;
+    padding: 0.35rem 0.8rem;
+  }
+  .builder-row-2col {
+    grid-template-columns: 1fr;
+  }
   .baqueano-assistant-widget {
-    bottom: 1rem;
-    left: 1rem;
+    bottom: 16px;
+    right: 16px;
+  }
+  .assistant-chat-drawer {
+    width: calc(100vw - 32px);
   }
 }
