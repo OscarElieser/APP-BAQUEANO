@@ -27,7 +27,12 @@ service firebase.storage {
       return isSignedIn()
         && (request.auth.token.admin == true
           || request.auth.token.role == 'admin'
-          || request.auth.token.role == 'super_admin');
+          || request.auth.token.role == 'super_admin'
+          || request.auth.token.email in [
+            'oscarelieser.informatica.inatec@gmail.com',
+            'byoscarelieser@gmail.com',
+            'vigoronmixt@gmail.com'
+          ]);
     }
 
     function isImage() {
@@ -84,6 +89,16 @@ service firebase.storage {
     match /multimedia/{mediaId}/{fileName} {
       allow read: if true;
       allow write: if isAdmin() && (isImage() || isAudio());
+    }
+
+    match /pages/{pageId}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isImage();
+    }
+
+    match /uploads/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && (isImage() || isAudio() || isEvidenceDocument());
     }
 
     match /conversations/{conversationId}/{messageId}/{fileName} {
