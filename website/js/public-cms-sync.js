@@ -107,24 +107,29 @@
     applyPageSections(pageId, sections) {
       sections.forEach((sec) => {
         const status = sec.status || 'published';
-        const secId = sec.id;
+        const secId = sec.id || '';
+        const secType = sec.type || '';
 
-        // Buscar elemento en el DOM
+        // Buscar elemento en el DOM por ID explícito o atributo
         let targetEl = document.getElementById(secId) || document.querySelector(`[data-section-id="${secId}"]`);
 
-        // Heurísticas defensivas si no tiene id estricto
+        // Heurísticas defensivas especializadas por tipo de componente
         if (!targetEl) {
-          if (secId.includes('hero') || sec.type === 'hero') {
+          if (secType === 'header' || secId.includes('header') || secId.includes('navbar')) {
+            targetEl = document.querySelector('header.main-header, nav.main-navbar, nav.navbar, header, .site-header');
+          } else if (secType === 'footer' || secId.includes('footer')) {
+            targetEl = document.querySelector('footer, .site-footer, .footer-section');
+          } else if (secType === 'map' || secId.includes('map') || secId.includes('mapa')) {
+            targetEl = document.getElementById('mapaVivo3dSection') || document.getElementById('mapaVivoContainer') || document.getElementById('baqueanoInteractiveMap') || document.querySelector('.map-section, #selectorDepartamento');
+          } else if (secType === 'form' || secId.includes('form') || secId.includes('registro') || secId.includes('denuncia') || secId.includes('calc')) {
+            targetEl = document.getElementById('registroAnfitrionSection') || document.getElementById('formularioDenuncia') || document.getElementById('formDenuncia') || document.getElementById('cotizadorBimonedaSection') || document.getElementById('panelAutogestion') || document.querySelector('.host-register-form, form.register-form, .calculator-section');
+          } else if (secType === 'hero' || secId.includes('hero')) {
             targetEl = document.querySelector('.hero-section, .hero, header.hero, .page-hero');
-          } else if (secId.includes('map') || secId.includes('mapa') || sec.type === 'map') {
-            targetEl = document.getElementById('mapaVivoContainer') || document.getElementById('baqueanoInteractiveMap') || document.querySelector('.map-section');
           } else if (secId.includes('destinos') || secId.includes('rutas')) {
             targetEl = document.querySelector('.featured-destinations, .destinations-grid, .destinos-section, #destinosGrid');
-          } else if (secId.includes('calc') || secId.includes('cotizador')) {
-            targetEl = document.getElementById('cotizadorBimonedaSection') || document.querySelector('.calculator-section');
           } else if (secId.includes('faq')) {
             targetEl = document.querySelector('.faq-section, #faqSection');
-          } else if (secId.includes('cta') || sec.type === 'cta') {
+          } else if (secType === 'cta' || secId.includes('cta')) {
             targetEl = document.querySelector('.cta-section, .download-cta-section');
           }
         }
@@ -133,32 +138,166 @@
           // Ocultar / Mostrar según status
           if (status === 'draft' || status === 'trashed') {
             targetEl.style.display = 'none';
-          } else {
-            targetEl.style.display = '';
+            return;
+          }
 
-            // Si tiene título modificado
+          targetEl.style.display = '';
+
+          // ─── 1. TIPO HEADER (ENCABEZADO & BARRA DE NAVEGACIÓN) ───
+          if (secType === 'header' || secId.includes('header') || secId.includes('navbar')) {
             if (sec.title) {
-              const heading = targetEl.querySelector('h1, h2, .section-title, .hero-title');
-              if (heading && sec.title !== heading.textContent.trim()) {
-                heading.textContent = sec.title;
+              const brand = targetEl.querySelector('.navbar-brand, .brand-title, .logo-text, .brand-name');
+              if (brand) {
+                // Conservar posible icono o imagen dentro del logo
+                const logoImg = brand.querySelector('img');
+                if (logoImg) {
+                  brand.textContent = ` ${sec.title}`;
+                  brand.prepend(logoImg);
+                } else {
+                  brand.textContent = sec.title;
+                }
               }
             }
-
-            // Si tiene subtítulo modificado
-            if (sec.subtitle) {
-              const sub = targetEl.querySelector('p.section-subtitle, p.hero-subtitle, .lead, .subtitle');
-              if (sub && sec.subtitle !== sub.textContent.trim()) {
-                sub.textContent = sec.subtitle;
-              }
+            if (sec.imageUrl) {
+              const logo = targetEl.querySelector('img.navbar-logo, img.brand-logo, .navbar-brand img');
+              if (logo && logo.src !== sec.imageUrl) logo.src = sec.imageUrl;
             }
-
-            // Si tiene botón CTA
             if (sec.ctaText) {
-              const btn = targetEl.querySelector('a.btn-cta, a.btn-hero, .btn-action-primary, a.btn-baqueano-primary');
+              const btn = targetEl.querySelector('.btn-nav-sos, .nav-action-btn, .btn-download-nav, .navbar a.btn, header a.btn');
               if (btn) {
                 btn.textContent = sec.ctaText;
                 if (sec.ctaLink) btn.href = sec.ctaLink;
               }
+            }
+            return;
+          }
+
+          // ─── 2. TIPO FOOTER (PIE DE PÁGINA INSTITUCIONAL) ───
+          if (secType === 'footer' || secId.includes('footer')) {
+            if (sec.title) {
+              const fTitle = targetEl.querySelector('.footer-brand h3, .footer-brand h2, .footer-title, .footer-logo-title');
+              if (fTitle && fTitle.textContent.trim() !== sec.title) fTitle.textContent = sec.title;
+            }
+            if (sec.subtitle) {
+              const fPhone = targetEl.querySelector('.footer-phone, .footer-contact-phone, a[href^="tel:"], footer a[href*="wa.me"]');
+              if (fPhone) {
+                fPhone.textContent = sec.subtitle;
+                if (sec.subtitle.includes('+')) {
+                  const cleanTel = sec.subtitle.replace(/[^0-9+]/g, '');
+                  fPhone.href = `tel:${cleanTel}`;
+                }
+              }
+            }
+            if (sec.content) {
+              const fDesc = targetEl.querySelector('.footer-desc, .footer-about p, .legal-copy, .footer-bottom p, .copyright');
+              if (fDesc && fDesc.textContent.trim() !== sec.content) fDesc.textContent = sec.content;
+            }
+            if (sec.ctaText) {
+              const fCta = targetEl.querySelector('a.footer-link-primary, .footer-wa-btn, footer a.btn-cta, footer a.btn-primary');
+              if (fCta) {
+                fCta.textContent = sec.ctaText;
+                if (sec.ctaLink) fCta.href = sec.ctaLink;
+              }
+            }
+            if (sec.cta2Text) {
+              const fCta2 = targetEl.querySelector('a.footer-link-secondary, footer a.btn-secondary');
+              if (fCta2) {
+                fCta2.textContent = sec.cta2Text;
+                if (sec.cta2Link) fCta2.href = sec.cta2Link;
+              }
+            }
+            return;
+          }
+
+          // ─── 3. TIPO MAPA (VISOR CARTOGRÁFICO 3D O TERRITORIAL) ───
+          if (secType === 'map' || secId.includes('map') || secId.includes('mapa')) {
+            if (sec.title) {
+              const h = targetEl.querySelector('h1, h2, .section-title, .map-title');
+              if (h && h.textContent.trim() !== sec.title) h.textContent = sec.title;
+            }
+            if (sec.subtitle) {
+              const p = targetEl.querySelector('p.section-subtitle, p.subtitle, .map-subtitle');
+              if (p && p.textContent.trim() !== sec.subtitle) p.textContent = sec.subtitle;
+            }
+            if (sec.ctaText) {
+              const btn = targetEl.querySelector('a.btn-cta, button.btn-cta, .btn-map-action, .btn-action-primary');
+              if (btn) {
+                btn.textContent = sec.ctaText;
+                if (sec.ctaLink && btn.tagName === 'A') btn.href = sec.ctaLink;
+              }
+            }
+            return;
+          }
+
+          // ─── 4. TIPO FORMULARIO / COTIZADOR / REGISTRO ───
+          if (secType === 'form' || secId.includes('form') || secId.includes('registro') || secId.includes('denuncia')) {
+            if (sec.title) {
+              const h = targetEl.querySelector('h1, h2, h3, .section-title, .form-title');
+              if (h && h.textContent.trim() !== sec.title) h.textContent = sec.title;
+            }
+            if (sec.subtitle) {
+              const p = targetEl.querySelector('p.section-subtitle, p.form-subtitle, .lead');
+              if (p && p.textContent.trim() !== sec.subtitle) p.textContent = sec.subtitle;
+            }
+            if (sec.content) {
+              const desc = targetEl.querySelector('.form-instructions, .form-legal-note, p.form-desc');
+              if (desc && desc.textContent.trim() !== sec.content) desc.textContent = sec.content;
+            }
+            if (sec.ctaText) {
+              const submitBtn = targetEl.querySelector('button[type="submit"], .btn-submit, .btn-submit-pro');
+              if (submitBtn) submitBtn.textContent = sec.ctaText;
+            }
+            if (sec.ctaLink) {
+              const waLink = targetEl.querySelector('a[href*="wa.me"], a.btn-wa');
+              if (waLink) waLink.href = sec.ctaLink;
+              if (targetEl.dataset) targetEl.dataset.targetLink = sec.ctaLink;
+            }
+            return;
+          }
+
+          // ─── 5. TIPO HERO O SECCIÓN DE CONTENIDO ESTÁNDAR ───
+          if (sec.badgeText) {
+            const badge = targetEl.querySelector('.hero-badge, .badge-pro, .badge-tag, .section-badge');
+            if (badge && badge.textContent.trim() !== sec.badgeText) badge.textContent = sec.badgeText;
+          }
+          if (sec.title) {
+            const heading = targetEl.querySelector('h1, h2, .section-title, .hero-title');
+            if (heading && sec.title !== heading.textContent.trim()) {
+              heading.textContent = sec.title;
+            }
+          }
+          if (sec.subtitle) {
+            const sub = targetEl.querySelector('p.section-subtitle, p.hero-subtitle, .lead, .subtitle');
+            if (sub && sec.subtitle !== sub.textContent.trim()) {
+              sub.textContent = sec.subtitle;
+            }
+          }
+          if (sec.content) {
+            const bodyP = targetEl.querySelector('.hero-description, .section-content, .hero-lead, p.description');
+            if (bodyP && bodyP.textContent.trim() !== sec.content) {
+              bodyP.textContent = sec.content;
+            }
+          }
+          if (sec.ctaText) {
+            const btn = targetEl.querySelector('a.btn-cta, a.btn-hero, .btn-action-primary, a.btn-baqueano-primary, .hero a.btn-primary');
+            if (btn) {
+              btn.textContent = sec.ctaText;
+              if (sec.ctaLink) btn.href = sec.ctaLink;
+            }
+          }
+          if (sec.cta2Text) {
+            const btn2 = targetEl.querySelector('a.btn-hero-secondary, a.btn-secondary, a.btn-outline, a.btn-outline-light');
+            if (btn2) {
+              btn2.textContent = sec.cta2Text;
+              if (sec.cta2Link) btn2.href = sec.cta2Link;
+            }
+          }
+          if (sec.imageUrl) {
+            const imgEl = targetEl.querySelector('img.hero-bg, img.section-media, img.hero-image');
+            if (imgEl && imgEl.src !== sec.imageUrl) {
+              imgEl.src = sec.imageUrl;
+            } else if (!imgEl && targetEl.classList.contains('hero-section')) {
+              targetEl.style.backgroundImage = `url("${sec.imageUrl}")`;
             }
           }
         } else if (status === 'published' && (sec.content || sec.title)) {
@@ -180,11 +319,15 @@
 
           dynContainer.innerHTML = `
             <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              ${sec.badgeText ? `<span style="display:inline-block; padding: 0.35rem 1rem; border-radius: 9999px; background: rgba(246,94,1,0.15); color: #F65E01; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(246,94,1,0.3);">${this.escape(sec.badgeText)}</span>` : ''}
               ${sec.title ? `<h2 style="font-size: 2rem; color: #F4E6C1; margin-bottom: 0.75rem; font-family: var(--font-title, sans-serif);">${this.escape(sec.title)}</h2>` : ''}
               ${sec.subtitle ? `<p style="font-size: 1.1rem; color: #94A3B8; margin-bottom: 1.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">${this.escape(sec.subtitle)}</p>` : ''}
               ${sec.imageUrl ? `<div style="margin: 1.5rem 0;"><img src="${sec.imageUrl}" alt="${this.escape(sec.title || '')}" style="max-width: 100%; max-height: 400px; border-radius: 12px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></div>` : ''}
               ${sec.content ? `<div style="font-size: 1rem; color: #CBD5E1; line-height: 1.7; max-width: 800px; margin: 0 auto 1.5rem auto; text-align: left; background: rgba(22, 93, 111, 0.15); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(244, 230, 193, 0.1);">${sec.content}</div>` : ''}
-              ${sec.ctaText ? `<div style="margin-top: 1.5rem;"><a href="${sec.ctaLink || '#'}" style="display: inline-block; padding: 0.75rem 2rem; background: #F65E01; color: #fff; font-weight: 700; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(246,94,1,0.4);">${this.escape(sec.ctaText)}</a></div>` : ''}
+              <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+                ${sec.ctaText ? `<a href="${sec.ctaLink || '#'}" style="display: inline-block; padding: 0.75rem 2rem; background: #F65E01; color: #fff; font-weight: 700; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(246,94,1,0.4);">${this.escape(sec.ctaText)}</a>` : ''}
+                ${sec.cta2Text ? `<a href="${sec.cta2Link || '#'}" style="display: inline-block; padding: 0.75rem 2rem; background: rgba(22,93,111,0.5); color: #F4E6C1; font-weight: 700; border-radius: 8px; text-decoration: none; border: 1px solid rgba(244,230,193,0.3);">${this.escape(sec.cta2Text)}</a>` : ''}
+              </div>
             </div>
           `;
           dynContainer.style.display = '';
