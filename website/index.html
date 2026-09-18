@@ -168,6 +168,222 @@
        📦 Qué: Clases .mapa-vivo-3d-section, .route-builder-section, etc.
        ====================================================================== -->
   <link rel="stylesheet" href="css/baqueano-3d.css">
+
+  <!-- ======================================================================
+       🗺️ ESTILOS MAPA REAL DE NICARAGUA — PINES, POPUPS Y CONTENEDOR LEAFLET
+       🎯 Por qué: Personalizar la apariencia de Leaflet para que sea coherente
+          con la identidad visual de Baqueano (#165D6F, #F65E01, #0F172A).
+       ⚙️ Cómo: Clases .baqueano-map-pin, .baqueano-popup-wrap, .baq-map-popup
+          aplicadas a los marcadores SVG y popups enriquecidos del mapa real.
+       📦 Qué: Estilos de pines SVG, animación de pulso, popup con imagen y CTA.
+       ====================================================================== -->
+  <style>
+    /* ── Contenedor del mapa Leaflet integrado en el HUD ── */
+    #baqueano3dCanvasWrap {
+      width: 100%;
+      height: 520px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0F172A;
+      position: relative;
+    }
+    #baqueano3dCanvasWrap .leaflet-container {
+      background: #080D1A !important;
+      font-family: 'Inter', 'Outfit', sans-serif;
+      border-radius: 14px;
+    }
+
+    /* ── Pines personalizados ── */
+    .baqueano-map-pin {
+      background: transparent !important;
+      border: none !important;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 4px 12px rgba(22, 93, 111, 0.5));
+    }
+    .baqueano-map-pin:hover {
+      filter: drop-shadow(0 6px 18px rgba(246, 94, 1, 0.7));
+      z-index: 9999 !important;
+    }
+
+    /* ── Anillo de pulso SVG (animación continua) ── */
+    @keyframes pinPulse {
+      0%   { r: 19; opacity: 0.5; }
+      50%  { r: 22; opacity: 0.2; }
+      100% { r: 19; opacity: 0.5; }
+    }
+    .baqueano-map-pin .pin-pulse-ring {
+      animation: pinPulse 2.4s ease-in-out infinite;
+    }
+
+    /* ── Popup contenedor ── */
+    .baqueano-popup-wrap .leaflet-popup-content-wrapper {
+      background: #0F172A;
+      border: 1px solid rgba(22, 93, 111, 0.5);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(246, 94, 1, 0.15);
+      padding: 0;
+      overflow: hidden;
+      max-width: 300px;
+    }
+    .baqueano-popup-wrap .leaflet-popup-content {
+      margin: 0;
+      width: 100% !important;
+    }
+    .baqueano-popup-wrap .leaflet-popup-tip {
+      background: #0F172A;
+    }
+    .baqueano-popup-wrap .leaflet-popup-close-button {
+      color: #F4E6C1 !important;
+      font-size: 18px !important;
+      padding: 6px 10px !important;
+      z-index: 10;
+    }
+
+    /* ── Popup interior ── */
+    .baq-map-popup { color: #F4E6C1; font-family: 'Inter', sans-serif; }
+
+    .baq-popup-header {
+      padding: 12px 14px 10px;
+      border-radius: 0;
+    }
+    .baq-popup-cat-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 20px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .baq-popup-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #F4E6C1;
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+    .baq-popup-tagline {
+      font-size: 11px;
+      color: rgba(244,230,193,0.65);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* ── Imagen del popup ── */
+    .baq-popup-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 130px;
+      overflow: hidden;
+    }
+    .baq-popup-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .baq-map-popup:hover .baq-popup-img { transform: scale(1.06); }
+
+    .baq-popup-img-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 6px 10px;
+      background: linear-gradient(to top, rgba(15,23,42,0.9), transparent);
+      display: flex;
+      justify-content: flex-end;
+    }
+    .baq-popup-coops {
+      font-size: 10px;
+      font-weight: 700;
+      color: #F65E01;
+      background: rgba(15,23,42,0.8);
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(246,94,1,0.4);
+    }
+
+    /* ── Descripción y highlights ── */
+    .baq-popup-desc {
+      font-size: 11.5px;
+      color: rgba(244,230,193,0.8);
+      padding: 10px 14px 6px;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .baq-popup-highlights {
+      list-style: none;
+      padding: 0 14px 8px;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 6px;
+    }
+    .baq-popup-highlights li {
+      font-size: 10.5px;
+      color: rgba(244,230,193,0.7);
+      padding: 2px 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── CTA del popup ── */
+    .baq-popup-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin: 4px 14px 14px;
+      padding: 9px 14px;
+      background: linear-gradient(135deg, #F65E01, #e04d00);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(246,94,1,0.4);
+    }
+    .baq-popup-cta:hover {
+      background: linear-gradient(135deg, #ff6d1a, #F65E01);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(246,94,1,0.6);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ── Controles de zoom de Leaflet con estilo Baqueano ── */
+    #baqueano3dCanvasWrap .leaflet-control-zoom {
+      border: 1px solid rgba(22, 93, 111, 0.6) !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5) !important;
+      border-radius: 10px !important;
+      overflow: hidden;
+    }
+    #baqueano3dCanvasWrap .leaflet-control-zoom-in,
+    #baqueano3dCanvasWrap .leaflet-control-zoom-out {
+      background: rgba(15,23,42,0.9) !important;
+      color: #F4E6C1 !important;
+      border: none !important;
+      font-size: 16px !important;
+    }
+    #baqueano3dCanvasWrap .leaflet-control-zoom-in:hover,
+    #baqueano3dCanvasWrap .leaflet-control-zoom-out:hover {
+      background: rgba(22,93,111,0.8) !important;
+      color: #F65E01 !important;
+    }
+    #baqueano3dCanvasWrap .leaflet-control-attribution {
+      background: rgba(15,23,42,0.75) !important;
+      color: rgba(244,230,193,0.4) !important;
+      font-size: 9px !important;
+    }
+    #baqueano3dCanvasWrap .leaflet-control-attribution a {
+      color: rgba(22,93,111,0.8) !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -2708,14 +2924,14 @@
   <script src="js/index-features.js"></script>
 
   <!-- ======================================================================
-       MOTOR 3D WEBGL THREE.JS, PLANIFICADOR DE RUTAS Y ASISTENTE
-       🎯 Por qué: Brindar la experiencia 3D insignia de Nicaragua en el portal,
-          con relieve geográfico, cálculo de rutas y asistente guiado.
-       ⚙️ Cómo: Three.js r128, OrbitControls, WebGL procedural & Raycasting.
+       🗺️ MAPA REAL DE NICARAGUA — LEAFLET + COORDENADAS WGS-84 AUTÉNTICAS
+       🎯 Por qué: Reemplaza el canvas Three.js procesal por un mapa geográfico
+          real que muestra los 17 departamentos y regiones con pines interactivos.
+       ⚙️ Cómo: Leaflet 1.9.4 (ya cargado), marcadores SVG por tipo de destino,
+          tiles topográficos Esri, popups enriquecidos y filtros de región.
+       📦 Qué: window.BaqueanoRealMap con 17 pines en coordenadas reales de Nicaragua.
        ====================================================================== -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
-  <script src="js/baqueano-3d-map.js"></script>
+  <script src="js/nicaragua-real-map.js"></script>
   <script src="js/route-builder.js"></script>
   <script src="js/baqueano-assistant.js"></script>
   <script src="js/panorama-viewer.js"></script>
