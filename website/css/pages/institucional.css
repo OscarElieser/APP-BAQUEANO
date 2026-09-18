@@ -1,0 +1,273 @@
+/* ========================================================================== 
+   🧭 BAQUEANO ECOSYSTEM — ESTILOS INSTITUCIONALES & LEGALES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO INSTITUCIONAL
+   -------------------------------------------------------------------------- */
+.institucional-hero {
+  position: relative;
+  width: 100%;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 8rem 2rem 4rem;
+  background-color: #061018;
+}
+
+.institucional-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.institucional-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 16, 24, 0.7) 0%, #061018 100%);
+  z-index: 2;
+}
+
+.institucional-hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 900px;
+}
+
+.institucional-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  border-radius: 999px;
+  color: #F65E01;
+  font-family: var(--font-tech);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.institucional-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.institucional-hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(244, 230, 193, 0.8);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   LAYOUT PRINCIPAL: SIDEBAR + CONTENIDO
+   -------------------------------------------------------------------------- */
+.institucional-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  padding: 4rem 0;
+  align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   SIDEBAR: ÍNDICE INTELIGENTE
+   -------------------------------------------------------------------------- */
+.institucional-sidebar {
+  position: sticky;
+  top: 100px; /* Offset for navbar */
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #F4E6C1;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-nav-link {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-left: 2px solid transparent;
+  transition: all 0.3s ease;
+  border-radius: 0 8px 8px 0;
+}
+
+.sidebar-nav-link:hover {
+  color: #F65E01;
+  background: rgba(246, 94, 1, 0.05);
+}
+
+.sidebar-nav-link.active {
+  color: #F65E01;
+  border-left-color: #F65E01;
+  background: linear-gradient(90deg, rgba(246, 94, 1, 0.1), transparent);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   TARJETAS LEGALES (GLASSMORPHISM)
+   -------------------------------------------------------------------------- */
+.institucional-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.legal-card {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  scroll-margin-top: 100px; /* For scroll anchoring */
+}
+
+.legal-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(246, 94, 1, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.legal-card-num {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.legal-card-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #F4E6C1;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.legal-card-title i {
+  color: #F65E01;
+}
+
+.legal-card-body {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+}
+
+.legal-card-body p {
+  margin-bottom: 1rem;
+}
+
+.legal-card-body ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.legal-card-body li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  list-style-type: none;
+}
+
+.legal-card-body li::before {
+  content: '▹';
+  color: #F65E01;
+  position: absolute;
+  left: -1.5rem;
+}
+
+.legal-card-body a {
+  color: #6EE7B7;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.legal-card-body a:hover {
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .institucional-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .institucional-sidebar {
+    position: relative;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .sidebar-nav-link {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .sidebar-nav-link.active {
+    border-left-color: transparent;
+    border-bottom-color: #F65E01;
+    background: linear-gradient(0deg, rgba(246, 94, 1, 0.1), transparent);
+  }
+}
+
+@media (max-width: 600px) {
+  .institucional-hero {
+    padding-top: 6rem;
+  }
+  .legal-card {
+    padding: 1.5rem;
+  }
+}
