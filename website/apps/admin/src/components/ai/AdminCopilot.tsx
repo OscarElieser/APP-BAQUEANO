@@ -109,10 +109,11 @@ export function AdminCopilot() {
           <button 
             onClick={handleAnalyze}
             disabled={loading || !resourceId}
-            className="mt-2 flex items-center justify-center gap-2 bg-[#F65E01] hover:bg-[#d95301] disabled:bg-slate-700 disabled:text-slate-400 text-white p-2 rounded text-sm font-medium transition-colors"
+            className="mt-2 flex items-center justify-center gap-2 bg-[#F65E01] hover:bg-[#d95301] disabled:bg-slate-700 disabled:text-slate-400 text-white p-2 rounded text-sm font-medium transition-colors relative overflow-hidden"
           >
+            {loading && <div className="absolute inset-0 bg-white/10 animate-pulse"></div>}
             {loading ? <Loader2 className="animate-spin" size={16} /> : <FileSearch size={16} />}
-            {loading ? "Analizando Contexto..." : "Ejecutar Análisis Multiagente"}
+            {loading ? "Analizando Contexto de forma distribuida..." : "Ejecutar Análisis Multiagente"}
           </button>
         </div>
 
@@ -122,8 +123,25 @@ export function AdminCopilot() {
           </div>
         )}
 
-        {result && (
-          <div className="flex flex-col gap-4 mt-2 border-t border-slate-800 pt-4">
+        {loading && !result && (
+          <div className="mt-4 flex flex-col gap-3">
+            <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold animate-pulse">
+              Desplegando Swarm de Agentes...
+            </div>
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center gap-3 bg-slate-800/20 p-3 rounded-lg border border-slate-700/20">
+                <div className="w-4 h-4 rounded-full bg-slate-700 animate-pulse"></div>
+                <div className="flex flex-col gap-1 w-full">
+                  <div className="h-2.5 bg-slate-700 rounded w-1/3 animate-pulse"></div>
+                  <div className="h-2 bg-slate-700 rounded w-3/4 animate-pulse"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {result && !loading && (
+          <div className="flex flex-col gap-4 mt-2 border-t border-slate-800 pt-4 animate-in fade-in slide-in-from-bottom-2">
             <div className={`p-3 rounded-lg text-sm border flex flex-col gap-1 ${
               result.actionRecommended === "APPROVE" ? "bg-green-900/20 border-green-900/50 text-green-300" :
               result.actionRecommended === "REQUIRES_FIXES" ? "bg-amber-900/20 border-amber-900/50 text-amber-300" :
