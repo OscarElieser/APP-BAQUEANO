@@ -454,14 +454,6 @@ function addNewFeedEvent(title, meta, iconClass) {
 }
 
 function simulateLiveStreamEvent() {
-  const events = [
-    { title: "Nueva Reserva Directa en Ometepe", meta: "Exploradora de Granada • Tarifa justa a guía local", icon: "fa-bookmark" },
-    { title: "Descarga de BaqueanoNicaragua.apk", meta: "Dispositivo Android verificado • León", icon: "fa-download" },
-    { title: "Baliza GPS Sincronizada en Somoto", meta: "Guía Mateo activó sendero Río Abajo", icon: "fa-location-dot" },
-    { title: "Denuncia Ambiental Canalizada", meta: "Envío formal a Unidad Ambiental Municipal", icon: "fa-shield-halved" },
-    { title: "Aporte Ecológico Registrado", meta: "100% donación a cuenca hídrica La Luna", icon: "fa-leaf" }
-  ];
-
-  // No se generan eventos ni métricas sin una fuente verificable.
-  return events.length === 0;
+  // REAL > DEMO: No se simulan eventos bajo ninguna circunstancia.
+  return false;
 }

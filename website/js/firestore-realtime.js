@@ -662,12 +662,7 @@ window.BaqueanoFirestore = (function() {
     if (!window.firebase || !window.firebase.firestore) {
       // Métricas de referencia para desarrollo
       callback({
-        totalPlaces: 6,
-        publishedPlaces: 6,
-        totalBusinesses: 3,
-        totalAuditLogs: 12,
-        activeSessions: 7,
-        source: 'seed'
+        totalPlaces: 0, publishedPlaces: 0, totalBusinesses: 0, totalAuditLogs: 0, activeSessions: 0, source: "unavailable"
       });
       return null;
     }
