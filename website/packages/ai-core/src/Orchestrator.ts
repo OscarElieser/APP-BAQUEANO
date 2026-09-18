@@ -1,21 +1,12 @@
 import { AgentRole, AGENT_REGISTRY } from "./AgentRegistry";
+import { genkitProvider, OrchestratorResultSchemaType } from "./providers/GenkitProvider";
 
 export type OrchestratorTask = {
   id: string;
   taskType: "REVIEW_DESTINATION" | "REVIEW_BUSINESS" | "REVIEW_PAGE";
   resourceId: string;
   adminUid: string;
-};
-
-export type OrchestratorResult = {
-  success: boolean;
-  actionRecommended: "APPROVE" | "REJECT" | "REQUIRES_FIXES";
-  summary: string;
-  agentReports: Array<{
-    agentRole: AgentRole;
-    status: "PASS" | "WARNING" | "FAIL";
-    message: string;
-  }>;
+  contextData?: any;
 };
 
 export class AIOrchestrator {
@@ -36,35 +27,24 @@ export class AIOrchestrator {
   }
 
   /**
-   * Ejecuta la orquestación (simulada por ahora hasta conectar un proveedor de IA).
+   * Ejecuta la orquestación utilizando GenkitProvider (Gemini).
    */
-  public async executeTask(task: OrchestratorTask): Promise<OrchestratorResult> {
+  public async executeTask(task: OrchestratorTask): Promise<OrchestratorResultSchemaType> {
     const agents = this.selectAgentsForTask(task.taskType);
     console.log(`[Orchestrator] Delegando tarea ${task.id} a los agentes:`, agents.join(", "));
 
-    // Aquí iría el fan-out a los distintos agentes para que evalúen el contexto
-    // utilizando LLMs y tools específicas (RAG, etc.)
-    // Simulamos una respuesta consolidada:
+    const taskDescription = `Por favor revisa el recurso ${task.resourceId} de tipo ${task.taskType}.`;
+    
+    // Llamada real al LLM a través de Genkit
+    const result = await genkitProvider.evaluateTask(
+      taskDescription, 
+      task.contextData || { notice: "No context provided." }, 
+      agents
+    );
 
-    const reports = agents.map(role => {
-      // Simulación básica: si es SEO_AI siempre encuentra un warning de ejemplo
-      if (role === "SEO_AI") {
-        return { agentRole: role, status: "WARNING" as const, message: "Falta meta description." };
-      }
-      return { agentRole: role, status: "PASS" as const, message: "Revisión exitosa." };
-    });
-
-    const hasWarnings = reports.some(r => r.status === "WARNING" || r.status === "FAIL");
-
-    return {
-      success: true,
-      actionRecommended: hasWarnings ? "REQUIRES_FIXES" : "APPROVE",
-      summary: hasWarnings 
-        ? "El recurso está operativamente completo, pero requiere ajustes antes de la publicación." 
-        : "El recurso cumple con todos los criterios de calidad.",
-      agentReports: reports
-    };
+    return result;
   }
 }
 
 export const orchestrator = new AIOrchestrator();
+

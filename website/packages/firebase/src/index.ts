@@ -282,6 +282,15 @@ export async function updateBusiness(businessId: string, partial: Partial<Busine
   await updateDoc(docRef, { ...partial, updatedAt });
 }
 
+export async function getBusinessById(businessId: string): Promise<BusinessRecord | null> {
+  const docRef = doc(getBaqueanoDb(), firestoreCollections.businesses, businessId);
+  const snap = await getDoc(docRef);
+  if (!snap.exists()) return null;
+  const parsed = businessRecordSchema.safeParse({ ...snap.data(), id: snap.id });
+  return parsed.success ? (parsed.data as BusinessRecord) : null;
+}
+
+
 export async function listBusinessesForAdmin(): Promise<DataResult<BusinessRecord>> {
   const availability = getFirebaseAvailability();
   if (!availability.available) return { source: "seed", isConnected: false, items: [] };
@@ -542,5 +551,31 @@ export async function updateReservationStatus(reservationId: string, status: Res
   const docRef = doc(getBaqueanoDb(), firestoreCollections.reservations, reservationId);
   const updatedAt = new Date().toISOString();
   await updateDoc(docRef, { status, updatedAt });
+}
+
+// ============================================================================
+// SECCIÓN 9: WEBSITE ENGINE (website_pages)
+// ============================================================================
+
+import type { WebsitePage } from "@baqueano/types";
+
+export async function getWebsitePage(pageId: string): Promise<WebsitePage | null> {
+  const availability = getFirebaseAvailability();
+  if (!availability.available) return null;
+
+  try {
+    const docRef = doc(getBaqueanoDb(), firestoreCollections.websitePages, pageId);
+    const snap = await getDoc(docRef);
+    if (!snap.exists()) return null;
+    return { ...snap.data(), id: snap.id } as WebsitePage;
+  } catch (err) {
+    console.error("Error al obtener website_page:", err);
+    return null;
+  }
+}
+
+export async function saveWebsitePage(pageId: string, data: Omit<WebsitePage, "id">): Promise<void> {
+  const docRef = doc(getBaqueanoDb(), firestoreCollections.websitePages, pageId);
+  await setDoc(docRef, data);
 }
 

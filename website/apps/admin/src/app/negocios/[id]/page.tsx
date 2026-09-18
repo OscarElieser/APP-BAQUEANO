@@ -83,6 +83,16 @@ export default function FiscalizarNegocioPage({ params }: { params: Promise<{ id
         </div>
       )}
 
+      {/* AI RECOMMENDATION HINT */}
+      {business.status === "pending_review" && (
+        <div className="bg-[#165D6F]/20 border border-[#165D6F]/50 text-slate-200 p-4 rounded-xl text-sm flex items-start gap-3">
+          <div className="text-[#F65E01] mt-0.5">✨</div>
+          <p>
+            <strong className="text-white">Tip de Auditoría:</strong> Abre el <strong>Copiloto IA</strong> en la esquina inferior derecha y pídele que revise el negocio <code>{business.id}</code>. El sistema orquestará agentes para validar el contenido, SEO, consistencia de locación y seguridad antes de que decidas publicarlo.
+          </p>
+        </div>
+      )}
+
       {/* DETALLES DEL NEGOCIO */}
       <div className="bg-[#1e293b]/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 shadow-2xl flex flex-col gap-8">
         

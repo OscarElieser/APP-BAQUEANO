@@ -8,14 +8,17 @@
  * WHAT
  * Home page with hero, exploration story, destinations, map, impact, AI, and Android bridge.
  */
-import { HeroSection } from "../components/sections/HeroSection";
-import { HomeNarrative } from "../components/sections/HomeNarrative";
+import { getWebsitePage } from "@baqueano/firebase";
+import { DynamicBlockRenderer } from "../components/DynamicBlockRenderer";
 
-export default function HomePage() {
+export const revalidate = 60; // Revalidate every minute for live CMS updates
+
+export default async function HomePage() {
+  const page = await getWebsitePage("home");
+  
   return (
     <main>
-      <HeroSection />
-      <HomeNarrative />
+      <DynamicBlockRenderer blocks={page?.blocks || []} />
     </main>
   );
 }
