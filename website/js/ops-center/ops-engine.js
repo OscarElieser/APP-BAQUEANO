@@ -38,6 +38,382 @@
   'use strict';
 
   // --------------------------------------------------------------------------
+  // 0. REGISTRO UNIVERSAL DE PÁGINAS Y SECCIONES DEL SITIO WEB (12 PÁGINAS)
+  // --------------------------------------------------------------------------
+  const SITE_PAGES_REGISTRY = {
+    index: {
+      name: 'Portada Principal',
+      file: 'index.html',
+      icon: 'fa-house',
+      sections: [
+        {
+          id: 'sec_index_hero',
+          name: 'Hero Principal Cinemático',
+          type: 'hero',
+          title: 'El Sendero lo Abren las Comunidades',
+          subtitle: 'Ecoturismo Auténtico en Nicaragua sin intermediarios',
+          content: 'Baqueano existe para transformar el turismo en una actividad más responsable, distribuida, segura, culturalmente consciente y beneficiosa para las familias campesinas.',
+          ctaText: 'Explora Nicaragua en 3D',
+          ctaLink: '#mapaVivo3dSection',
+          imageUrl: 'assets/images/heroes/hero-bg.jpg',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_index_map3d',
+          name: 'Mapa Vivo 3D de Nicaragua',
+          type: 'custom',
+          title: 'Mapa Topográfico Vivo 3D de Nicaragua',
+          subtitle: 'Relieve de volcanes, lagos, reservas y cordilleras con Three.js',
+          content: 'Visualiza la geografía soberana de Nicaragua en WebGL interactivo a 60fps con brújula de rumbo y selector de regiones.',
+          ctaText: 'Abrir Navegación Libre',
+          ctaLink: '#mapaVivo3dSection',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        },
+        {
+          id: 'sec_index_routes',
+          name: 'Diseñador Inteligente de Rutas',
+          type: 'custom',
+          title: 'Diseña tu Travesía Comunitaria',
+          subtitle: 'Itinerarios inteligentes con presupuesto real bimoneda (C$ y US$ a tipo de cambio oficial BCN)',
+          content: 'Selecciona tus días de viaje, presupuesto diario y preferencias para generar una ruta conectada a las cooperativas anfitrionas.',
+          ctaText: 'Calcular Ruta',
+          ctaLink: '#disenadorRutasSection',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_index_featured',
+          name: 'Destinos Insignia & Senderos',
+          type: 'cards',
+          title: 'Destinos Protegidos en Vivo',
+          subtitle: 'Senderos, volcanes activos y reservas campesinas conectadas a Cloud Firestore',
+          content: 'Explora fichas técnicas verificadas con coordenadas precisas, dificultad y tarifas justas.',
+          ctaText: 'Ver Catálogo Completo',
+          ctaLink: 'destinos.html',
+          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_index_testimonials',
+          name: 'Voces del Territorio & Testimonios',
+          type: 'testimonial',
+          title: 'Historias Reales de Familias y Viajeros',
+          subtitle: 'Transparencia total sin comisiones foráneas abusivas',
+          content: 'Campesinos de Somoto, Ometepe y Selva Negra relatan el impacto directo del modelo Baqueano.',
+          ctaText: 'Enviar Testimonio',
+          ctaLink: '#testimoniosComunitarios',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 5
+        },
+        {
+          id: 'sec_index_apk',
+          name: 'Portal de Descarga APK Android',
+          type: 'banner',
+          title: 'Descarga Baqueano para Android',
+          subtitle: 'Mapas offline, coordenadas GPS sin señal y botón SOS satelital',
+          content: 'Instala la versión oficial del APK en tu dispositivo móvil y lleva el conocimiento campesino en el bolsillo.',
+          ctaText: 'Descargar BaqueanoNicaragua.apk',
+          ctaLink: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 6
+        },
+        {
+          id: 'sec_index_register',
+          name: 'Postulación de Anfitriones Comunitarios',
+          type: 'cta',
+          title: 'Registra tu Local, Hospedaje o Cooperativa',
+          subtitle: 'Formulario oficial conectado directamente a la Mesa Técnica Baqueano vía WhatsApp (+505 8443-1289)',
+          content: 'Inscribe tu negocio bajo los principios de turismo ético y soberanía comunitaria.',
+          ctaText: 'Postular a Mesa Baqueano',
+          ctaLink: '#registroAnfitrionSection',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 7
+        }
+      ]
+    },
+    destinos: {
+      name: 'Catálogo de Destinos',
+      file: 'destinos.html',
+      icon: 'fa-mountain',
+      sections: [
+        {
+          id: 'sec_dest_hero',
+          name: 'Hero de Destinos',
+          type: 'hero',
+          title: 'Catálogo Oficial de Destinos y Áreas Protegidas',
+          subtitle: 'Fichas técnicas con coordenadas GPS verificadas y cotizador bimoneda Ley 306',
+          content: 'Encuentra senderos, volcanes y reservas naturales administradas con respeto ambiental.',
+          ctaText: 'Filtrar por Departamento',
+          ctaLink: '#filtrosDepartamento',
+          imageUrl: 'assets/images/destinos/cerro_negro.jpg',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_dest_grid',
+          name: 'Rejilla de Destinos Sincronizada',
+          type: 'cards',
+          title: 'Senderos Activos en Todo el País',
+          subtitle: 'Sincronización en tiempo real desde Firestore con la app Android',
+          content: 'Tarjetas dinámicas con dificultad, tarifas en córdobas y dólares y contacto de baqueanos.',
+          ctaText: 'Ver Detalles',
+          ctaLink: '#',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        }
+      ]
+    },
+    ambiental: {
+      name: 'Guía Ambiental & Sostenibilidad',
+      file: 'ambiental.html',
+      icon: 'fa-leaf',
+      sections: [
+        {
+          id: 'sec_amb_hero',
+          name: 'Hero Ambiental',
+          type: 'hero',
+          title: 'Guía Ambiental & Huella Cero en Territorio Soberano',
+          subtitle: 'Protocolo de protección para las 76 áreas protegidas de Nicaragua',
+          content: 'El ecoturismo campesino protege nuestros bosques, fuentes de agua y biodiversidad nativa.',
+          ctaText: 'Leer Decálogo Verde',
+          ctaLink: '#decalogoVerde',
+          imageUrl: 'assets/images/destinos/selva_negra.jpg',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_amb_decalogo',
+          name: 'Decálogo Verde del Explorador',
+          type: 'content',
+          title: '10 Mandamientos del Ecoturismo Consciente',
+          subtitle: 'Normas innegociables de no dejar rastro y respeto a la cosmovisión rural',
+          content: 'No extraigas flora silvestre, no introduzcas plásticos de un solo uso y apoya el consumo local.',
+          ctaText: 'Conocer Protocolos',
+          ctaLink: '#protocolosMarena',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        }
+      ]
+    },
+    aliados: {
+      name: 'Red de Aliados & Negocios',
+      file: 'aliados.html',
+      icon: 'fa-store',
+      sections: [
+        {
+          id: 'sec_aliados_hero',
+          name: 'Hero de Aliados',
+          type: 'hero',
+          title: 'Red de Anfitriones y Cooperativas Campesinas',
+          subtitle: 'Directorio acreditado con sello verificado bajo Ley 1210/1211',
+          content: 'Hospedajes rurales, comederos típicos, guías certificados y transporte comunitario.',
+          ctaText: 'Contactar por WhatsApp',
+          ctaLink: '#directorioAliados',
+          imageUrl: 'assets/images/aliados/posada_ecologica_la_abuela.jpg',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_aliados_grid',
+          name: 'Directorio 3D de Comercios',
+          type: 'cards',
+          title: 'Tarjetas Interactivas con Giro 3D',
+          subtitle: 'Toca cada tarjeta para voltearla y chatear directamente por WhatsApp con el anfitrión',
+          content: 'Datos reales comprobados en campo sin intermediarios extranjeros.',
+          ctaText: 'Ver Negocios',
+          ctaLink: '#',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        }
+      ]
+    },
+    nosotros: {
+      name: 'Nosotros & Manifiesto',
+      file: 'nosotros.html',
+      icon: 'fa-users',
+      sections: [
+        {
+          id: 'sec_nosotros_hero',
+          name: 'Manifiesto Soberano',
+          type: 'hero',
+          title: 'Manifiesto Baqueano: Soberanía Ecoturística',
+          subtitle: 'Tecnología digital puesta al servicio del campesinado nicaragüense',
+          content: 'Nacimos para que el turismo beneficie directamente a quienes cuidan la tierra y abren los senderos.',
+          ctaText: 'Conoce Nuestra Misión',
+          ctaLink: '#misionBaqueano',
+          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_nosotros_mision',
+          name: 'Pilares Fundamentales',
+          type: 'content',
+          title: 'Comercio Justo, Identidad y Seguridad Satelital',
+          subtitle: 'Los tres ejes que guían cada línea de código y cada sendero mapeado',
+          content: 'Cero comisiones abusivas, rescate de la historia viva y tecnología de rescate SOS en Android.',
+          ctaText: 'Unirme al Movimiento',
+          ctaLink: '#',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        }
+      ]
+    },
+    gastronomia: {
+      name: 'Gastronomía Ancestral',
+      file: 'gastronomia.html',
+      icon: 'fa-utensils',
+      sections: [
+        {
+          id: 'sec_gastro_hero',
+          name: 'Hero Gastronómico',
+          type: 'hero',
+          title: 'Gastronomía Ancestral de Nicaragua',
+          subtitle: 'El sabor del fogón de leña y el maíz nixtamalizado de nuestras abuelas',
+          content: 'Gallo pinto, nacatamal, vigorón, baho, quesillo e indio viejo: la identidad patria servida en la mesa.',
+          ctaText: 'Explorar Recetas',
+          ctaLink: '#recetasTradicionales',
+          imageUrl: 'assets/images/comida/gallo_pinto.jpg',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    },
+    historia: {
+      name: 'Historia Patria',
+      file: 'historia.html',
+      icon: 'fa-scroll',
+      sections: [
+        {
+          id: 'sec_hist_hero',
+          name: 'Hero de Historia',
+          type: 'hero',
+          title: 'Cronología Soberana de Nicaragua',
+          subtitle: 'Hitos patrios desde los pueblos originarios hasta la defensa de la autodeterminación',
+          content: 'Descubre la memoria viva que impregna cada valle, volcán y río de nuestra patria bendita.',
+          ctaText: 'Ver Línea de Tiempo',
+          ctaLink: '#lineaDeTiempo',
+          imageUrl: 'assets/images/heroes/hero-bg.jpg',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    },
+    musica: {
+      name: 'Música & Folclore',
+      file: 'musica.html',
+      icon: 'fa-guitar',
+      sections: [
+        {
+          id: 'sec_mus_hero',
+          name: 'Hero Folclórico',
+          type: 'hero',
+          title: 'Patrimonio Sonoro de Nicaragua',
+          subtitle: 'Son de marimba, mazurcas norteñas y polkas segovianas',
+          content: 'La música autóctona que acompaña las fiestas patronales y las faenas campesinas.',
+          ctaText: 'Escuchar Grabaciones',
+          ctaLink: '#reproductorSonoro',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    },
+    denuncias: {
+      name: 'Canal de Denuncias',
+      file: 'denuncias.html',
+      icon: 'fa-shield-halved',
+      sections: [
+        {
+          id: 'sec_den_hero',
+          name: 'Hero de Denuncias',
+          type: 'hero',
+          title: 'Canal Comunitario de Denuncia Ambiental',
+          subtitle: 'Alerta ciudadana para la protección de cuencas, bosques y fauna silvestre',
+          content: 'Tus reportes son canalizados ante las autoridades ambientales competentes con respaldo georreferenciado.',
+          ctaText: 'Presentar Denuncia',
+          ctaLink: '#formularioDenuncia',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    },
+    departamento: {
+      name: 'Ficha Departamental',
+      file: 'departamento.html',
+      icon: 'fa-map-location-dot',
+      sections: [
+        {
+          id: 'sec_dep_hero',
+          name: 'Hero Departamental',
+          type: 'hero',
+          title: 'Exploración Territorial por Departamento',
+          subtitle: 'Los 15 departamentos y 2 regiones autónomas de la República de Nicaragua',
+          content: 'Información geográfica soberana, cabeceras, municipios y destinos comunitarios verificados.',
+          ctaText: 'Seleccionar Territorio',
+          ctaLink: '#selectorDepartamento',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    },
+    'mi-negocio': {
+      name: 'Portal Mi Negocio',
+      file: 'mi-negocio.html',
+      icon: 'fa-id-badge',
+      sections: [
+        {
+          id: 'sec_biz_hero',
+          name: 'Hero Mi Negocio',
+          type: 'hero',
+          title: 'Portal de Autogestión para Anfitriones Locales',
+          subtitle: 'Actualiza tus tarifas, verifica reservas y mantén al día tu perfil de aliado',
+          content: 'Acceso directo y soberano para cooperativas, hospedajes rurales y guías comunitarios.',
+          ctaText: 'Acceder a Mi Negocio',
+          ctaLink: '#panelAutogestion',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    },
+    perfil: {
+      name: 'Perfil de Usuario',
+      file: 'perfil.html',
+      icon: 'fa-circle-user',
+      sections: [
+        {
+          id: 'sec_prf_hero',
+          name: 'Hero de Perfil',
+          type: 'hero',
+          title: 'Pasaporte del Explorador Baqueano',
+          subtitle: 'Tus expediciones guardadas, bitácora de viaje y preferencias de ruta',
+          content: 'Sincronizado entre tu sesión web y la app móvil de Android.',
+          ctaText: 'Ver Rutas Guardadas',
+          ctaLink: '#rutasGuardadas',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 1
+        }
+      ]
+    }
+  };
+
+  // --------------------------------------------------------------------------
   // 1. REGISTRO MAESTRO DE ENTIDADES (33 MÓDULOS DE GESTIÓN)
   // --------------------------------------------------------------------------
   const ENTITY_REGISTRY = {
@@ -306,6 +682,12 @@
     activeFilterDepartment: 'all',
     activeSearchQuery: '',
     sidebarCollapsed: false,
+
+    // CMS Universal de Páginas y Secciones
+    activeBuilderPage: 'index',
+    activeBuilderFilter: 'all',
+    builderSearchQuery: '',
+    pageSections: {},
 
     // Caché reactivo por colección
     collectionsData: {},
@@ -1246,8 +1628,197 @@
         }
       ];
 
+      // 0. Sembrar Destinos Turísticos Insignia (dualSync en destinations y places)
+      const seedDestinations = [
+        {
+          id: 'dest_somoto',
+          title: 'Cañón de Somoto',
+          name: 'Cañón de Somoto',
+          slug: 'canon-de-somoto',
+          category: 'canon',
+          department: 'Madriz',
+          municipality: 'Somoto',
+          difficulty: 'Moderada',
+          priceNio: 650,
+          priceUsd: 18,
+          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
+          description: 'Monumento Nacional con paredes de roca de casi 150 metros de altura que encajonan las aguas cristalinas del Río Coco. Recorrido guiado por baqueanos campesinos con lanchas y chalecos.',
+          status: 'published',
+          featured: true,
+          latitude: 13.4833,
+          longitude: -86.5833
+        },
+        {
+          id: 'dest_cerro_negro',
+          title: 'Volcán Cerro Negro',
+          name: 'Volcán Cerro Negro',
+          slug: 'volcan-cerro-negro',
+          category: 'volcan',
+          department: 'León',
+          municipality: 'León',
+          difficulty: 'Alta',
+          priceNio: 1100,
+          priceUsd: 30,
+          imageUrl: 'assets/images/destinos/cerro_negro.jpg',
+          description: 'El volcán más joven de Centroamérica, nacido en 1850. Famoso en todo el mundo por la experiencia de volcano sandboarding sobre sus laderas de arena volcánica negra azabache.',
+          status: 'published',
+          featured: true,
+          latitude: 12.5064,
+          longitude: -86.7028
+        },
+        {
+          id: 'dest_ometepe',
+          title: 'Isla de Ometepe (Volcán Concepción & Maderas)',
+          name: 'Isla de Ometepe',
+          slug: 'isla-de-ometepe',
+          category: 'isla',
+          department: 'Rivas',
+          municipality: 'Altagracia / Moyogalpa',
+          difficulty: 'Moderada',
+          priceNio: 920,
+          priceUsd: 25,
+          imageUrl: 'assets/images/destinos/finca_magdalena.jpg',
+          description: 'Reserva de Biosfera mundial en el Gran Lago Cocibolca formada por dos colosos volcánicos: el activo Concepción y el Maderas con su laguna cratérica de nebliselva.',
+          status: 'published',
+          featured: true,
+          latitude: 11.5386,
+          longitude: -85.5908
+        },
+        {
+          id: 'dest_masaya',
+          title: 'Volcán Masaya (Popogatepe)',
+          name: 'Volcán Masaya',
+          slug: 'volcan-masaya',
+          category: 'volcan',
+          department: 'Masaya',
+          municipality: 'Nindirí / Masaya',
+          difficulty: 'Baja',
+          priceNio: 550,
+          priceUsd: 15,
+          imageUrl: 'assets/images/heroes/hero-bg.jpg',
+          description: 'Parque Nacional con el cráter activo Santiago donde se puede contemplar el lago de lava incandescente al caer el atardecer, rodeado de senderos de lava solidificada.',
+          status: 'published',
+          featured: true,
+          latitude: 11.9844,
+          longitude: -86.1608
+        },
+        {
+          id: 'dest_apoyo',
+          title: 'Laguna de Apoyo',
+          name: 'Laguna de Apoyo',
+          slug: 'laguna-de-apoyo',
+          category: 'laguna',
+          department: 'Masaya',
+          municipality: 'Catarina / Diriá',
+          difficulty: 'Baja',
+          priceNio: 450,
+          priceUsd: 12,
+          imageUrl: 'assets/images/aliados/posada_ecologica_la_abuela.jpg',
+          description: 'Cráter volcánico extinto con aguas termales y minerales de azul turquesa profundo, rodeado de un exuberante bosque seco tropical con monos congos y aves migratorias.',
+          status: 'published',
+          featured: true,
+          latitude: 11.9222,
+          longitude: -86.0333
+        },
+        {
+          id: 'dest_miraflor',
+          title: 'Reserva Natural Miraflor',
+          name: 'Reserva Natural Miraflor',
+          slug: 'reserva-miraflor',
+          category: 'reserva',
+          department: 'Estelí',
+          municipality: 'Estelí',
+          difficulty: 'Moderada',
+          priceNio: 750,
+          priceUsd: 20,
+          imageUrl: 'assets/images/destinos/selva_negra.jpg',
+          description: 'Paisaje protegido donde conviven tres zonas ecológicas: bosque seco, transición y nebliselva con más de 200 especies de orquídeas y hospedajes campesinos auténticos.',
+          status: 'published',
+          featured: true,
+          latitude: 13.2333,
+          longitude: -86.2500
+        },
+        {
+          id: 'dest_corn_island',
+          title: 'Islas del Maíz (Corn Island & Little Corn)',
+          name: 'Corn Island',
+          slug: 'corn-island',
+          category: 'isla',
+          department: 'RACCS',
+          municipality: 'Corn Island',
+          difficulty: 'Baja',
+          priceNio: 1500,
+          priceUsd: 40,
+          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
+          description: 'Paraíso del Caribe nicaragüense con arrecifes de coral virgen, playas de arena blanca nacarada, cultura criolla y gastronomía a base de langosta y pan de coco.',
+          status: 'published',
+          featured: true,
+          latitude: 12.1667,
+          longitude: -83.0500
+        },
+        {
+          id: 'dest_la_luna',
+          title: 'Cascada La Luna',
+          name: 'Cascada La Luna',
+          slug: 'cascada-la-luna',
+          category: 'cascada',
+          department: 'Jinotega',
+          municipality: 'El Cuá',
+          difficulty: 'Baja',
+          priceNio: 350,
+          priceUsd: 10,
+          imageUrl: 'assets/images/destinos/selva_negra.jpg',
+          description: 'Impresionante caída de agua entre cafetales de altura en las montañas brumosas del norte, con poza cristalina para natación y senderismo ecológico.',
+          status: 'published',
+          featured: true,
+          latitude: 13.3667,
+          longitude: -85.7667
+        },
+        {
+          id: 'dest_mombacho',
+          title: 'Volcán Mombacho',
+          name: 'Volcán Mombacho',
+          slug: 'volcan-mombacho',
+          category: 'volcan',
+          department: 'Granada',
+          municipality: 'Granada',
+          difficulty: 'Moderada',
+          priceNio: 800,
+          priceUsd: 22,
+          imageUrl: 'assets/images/destinos/cerro_negro.jpg',
+          description: 'Reserva Natural con bosque nuboso perpetuo, fumarolas activas, túneles de neblina y miradores con vistas panorámicas hacia las 365 isletas de Granada.',
+          status: 'published',
+          featured: true,
+          latitude: 11.8264,
+          longitude: -85.9681
+        },
+        {
+          id: 'dest_rio_san_juan',
+          title: 'Río San Juan & Fortaleza El Castillo',
+          name: 'Río San Juan',
+          slug: 'rio-san-juan-el-castillo',
+          category: 'rio',
+          department: 'Río San Juan',
+          municipality: 'El Castillo',
+          difficulty: 'Moderada',
+          priceNio: 1200,
+          priceUsd: 32,
+          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
+          description: 'Ruta fluvial histórica que conecta el Gran Lago con el Mar Caribe. Fortaleza colonial de la Inmaculada Concepción y selva tropical virgen.',
+          status: 'published',
+          featured: true,
+          latitude: 11.0189,
+          longitude: -84.3972
+        }
+      ];
+
       // Ejecución por lotes
       const batch = db.batch();
+
+      seedDestinations.forEach((dest) => {
+        batch.set(db.collection('destinations').doc(dest.id), dest, { merge: true });
+        batch.set(db.collection('places').doc(dest.id), dest, { merge: true });
+      });
 
       seedBusinesses.forEach((b) => {
         batch.set(db.collection('businesses').doc(b.id), b, { merge: true });
@@ -1261,6 +1832,18 @@
         batch.set(db.collection('history_timeline').doc(h.id), h, { merge: true });
       });
 
+      // Sembrar Secciones de las 12 Páginas en site_pages
+      Object.keys(SITE_PAGES_REGISTRY).forEach((pId) => {
+        const pData = SITE_PAGES_REGISTRY[pId];
+        batch.set(db.collection('site_pages').doc(pId), {
+          pageId: pId,
+          title: pData.name,
+          sections: pData.sections,
+          updatedAt: new Date().toISOString(),
+          updatedBy: OpsState.currentUser?.email || 'admin'
+        }, { merge: true });
+      });
+
       // Anuncio Global en app_config
       batch.set(db.collection('app_config').doc('global'), {
         announcementText: '¡BIENVENIDOS A BAQUEANO! Conectamos al viajero consciente con comunidades campesinas sin intermediarios.',
@@ -1270,13 +1853,270 @@
 
       await batch.commit();
 
-      OpsToast.show('¡Migración canónica completada! Negocios, gastronomía e historia sembrados en Firestore.', 'success');
+      OpsToast.show('¡Catálogo Completo Sincronizado! Destinos, negocios, páginas e historia en vivo en Firestore.', 'success');
       await this.logAuditEvent({
         action: 'CANONICAL_SEED_COMPLETED',
         module: 'Sistema',
-        description: 'Poblado canónico inicial de colecciones businesses, gastronomy, history_timeline y app_config.',
+        description: 'Poblado integral canónico de destinos (destinations/places), negocios, site_pages, gastronomía e historia.',
         status: 'success'
       });
+    },
+
+    // 7.10 GESTIÓN UNIVERSAL DE SECCIONES DE PÁGINAS (SITE_PAGES)
+    listenToPageSections(pageId) {
+      const db = this.getDb();
+      if (!db) return;
+
+      const unsub = db.collection('site_pages').doc(pageId).onSnapshot(
+        async (doc) => {
+          if (!doc.exists) {
+            const baseSections = SITE_PAGES_REGISTRY[pageId]?.sections || [];
+            try {
+              await db.collection('site_pages').doc(pageId).set({
+                pageId: pageId,
+                title: SITE_PAGES_REGISTRY[pageId]?.name || pageId,
+                sections: baseSections,
+                updatedAt: new Date().toISOString(),
+                updatedBy: OpsState.currentUser?.email || 'sistema'
+              }, { merge: true });
+              OpsState.pageSections[pageId] = baseSections;
+            } catch (_) {
+              OpsState.pageSections[pageId] = baseSections;
+            }
+          } else {
+            const data = doc.data();
+            OpsState.pageSections[pageId] = data.sections || [];
+          }
+
+          if (OpsState.activeTab === '24-builder' || OpsState.activeTab === '02-contenido') {
+            OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+          }
+        },
+        (err) => console.warn(`[OpsCMS] Error escuchando site_pages/${pageId}:`, err.message)
+      );
+
+      OpsState.listeners.push(unsub);
+    },
+
+    async savePageSection(pageId, sectionData) {
+      const db = this.getDb();
+      if (!db) throw new Error('Firestore no disponible');
+
+      const pageDocRef = db.collection('site_pages').doc(pageId);
+      const doc = await pageDocRef.get();
+      let sections = [];
+      if (doc.exists && doc.data().sections) {
+        sections = [...doc.data().sections];
+      } else {
+        sections = [...(SITE_PAGES_REGISTRY[pageId]?.sections || [])];
+      }
+
+      if (sectionData.id) {
+        const idx = sections.findIndex((s) => s.id === sectionData.id);
+        if (idx >= 0) {
+          sections[idx] = { ...sections[idx], ...sectionData };
+        } else {
+          sections.push(sectionData);
+        }
+      } else {
+        sectionData.id = `sec_${pageId}_${Date.now()}`;
+        sectionData.sortOrder = sections.length + 1;
+        sections.push(sectionData);
+      }
+
+      sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+
+      await pageDocRef.set({
+        pageId,
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      await this.logAuditEvent({
+        action: 'PAGE_SECTION_SAVED',
+        module: 'Website Builder',
+        description: `Sección "${sectionData.name || sectionData.title}" guardada en ${pageId}.html`,
+        status: 'success'
+      });
+    },
+
+    async togglePageSectionStatus(pageId, sectionId) {
+      const db = this.getDb();
+      if (!db) return;
+
+      const pageDocRef = db.collection('site_pages').doc(pageId);
+      const doc = await pageDocRef.get();
+      if (!doc.exists) return;
+
+      let sections = doc.data().sections || [];
+      const target = sections.find((s) => s.id === sectionId);
+      if (!target) return;
+
+      target.status = target.status === 'published' ? 'draft' : 'published';
+
+      await pageDocRef.set({
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      OpsToast.show(`Sección "${target.name || target.title}" ahora está ${target.status === 'published' ? 'Publicada' : 'en Borrador / Oculta'}.`, 'success');
+      await this.logAuditEvent({
+        action: 'PAGE_SECTION_STATUS_TOGGLED',
+        module: 'Website Builder',
+        description: `Estado de "${target.name || target.title}" cambiado a ${target.status}`,
+        status: 'success'
+      });
+    },
+
+    async movePageSectionOrder(pageId, sectionId, direction) {
+      const db = this.getDb();
+      if (!db) return;
+
+      const pageDocRef = db.collection('site_pages').doc(pageId);
+      const doc = await pageDocRef.get();
+      if (!doc.exists) return;
+
+      let sections = [...(doc.data().sections || [])];
+      sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+
+      const idx = sections.findIndex((s) => s.id === sectionId);
+      if (idx < 0) return;
+
+      if (direction === 'up' && idx > 0) {
+        const prevOrder = sections[idx - 1].sortOrder || idx;
+        sections[idx - 1].sortOrder = sections[idx].sortOrder || (idx + 1);
+        sections[idx].sortOrder = prevOrder;
+      } else if (direction === 'down' && idx < sections.length - 1) {
+        const nextOrder = sections[idx + 1].sortOrder || (idx + 2);
+        sections[idx + 1].sortOrder = sections[idx].sortOrder || (idx + 1);
+        sections[idx].sortOrder = nextOrder;
+      }
+
+      sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+
+      await pageDocRef.set({
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      OpsToast.show('Orden de secciones actualizado.', 'info');
+    },
+
+    async trashPageSection(pageId, sectionId) {
+      const db = this.getDb();
+      if (!db) return;
+
+      const pageDocRef = db.collection('site_pages').doc(pageId);
+      const doc = await pageDocRef.get();
+      if (!doc.exists) return;
+
+      let sections = doc.data().sections || [];
+      const target = sections.find((s) => s.id === sectionId);
+      if (!target) return;
+
+      target.status = 'trashed';
+
+      await pageDocRef.set({
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      OpsToast.show(`Sección movida a la papelera.`, 'warning');
+      await this.logAuditEvent({
+        action: 'PAGE_SECTION_TRASHED',
+        module: 'Website Builder',
+        description: `Sección "${target.name || target.title}" movida a papelera`,
+        status: 'success'
+      });
+    },
+
+    async restorePageSection(pageId, sectionId) {
+      const db = this.getDb();
+      if (!db) return;
+
+      const pageDocRef = db.collection('site_pages').doc(pageId);
+      const doc = await pageDocRef.get();
+      if (!doc.exists) return;
+
+      let sections = doc.data().sections || [];
+      const target = sections.find((s) => s.id === sectionId);
+      if (!target) return;
+
+      target.status = 'published';
+
+      await pageDocRef.set({
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      OpsToast.show(`Sección restaurada y publicada en la web.`, 'success');
+      await this.logAuditEvent({
+        action: 'PAGE_SECTION_RESTORED',
+        module: 'Website Builder',
+        description: `Sección "${target.name || target.title}" restaurada a publicada`,
+        status: 'success'
+      });
+    },
+
+    async hardDeletePageSection(pageId, sectionId) {
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Eliminar Sección Definitivamente?',
+        message: 'Esta acción removerá la sección de forma permanente en Firestore sin posibilidad de recuperación.',
+        isDangerous: true,
+        confirmText: 'Eliminar Permanente'
+      });
+      if (!confirmed) return;
+
+      const db = this.getDb();
+      if (!db) return;
+
+      const pageDocRef = db.collection('site_pages').doc(pageId);
+      const doc = await pageDocRef.get();
+      if (!doc.exists) return;
+
+      let sections = (doc.data().sections || []).filter((s) => s.id !== sectionId);
+
+      await pageDocRef.set({
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      OpsToast.show('Sección eliminada definitivamente.', 'success');
+      await this.logAuditEvent({
+        action: 'PAGE_SECTION_HARD_DELETED',
+        module: 'Website Builder',
+        description: `Sección eliminada permanentemente de ${pageId}.html`,
+        status: 'danger'
+      });
+    },
+
+    async resetPageSectionsToBaseline(pageId) {
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Restaurar Secciones Originales?',
+        message: `Se restablecerán las secciones predeterminadas para ${pageId}.html desde la plantilla canónica.`,
+        isDangerous: true,
+        confirmText: 'Restablecer Plantilla'
+      });
+      if (!confirmed) return;
+
+      const db = this.getDb();
+      if (!db) return;
+
+      const baseSections = SITE_PAGES_REGISTRY[pageId]?.sections || [];
+      await db.collection('site_pages').doc(pageId).set({
+        pageId,
+        sections: baseSections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      OpsToast.show(`Plantilla original restablecida para ${pageId}.html.`, 'success');
     }
   };
 
@@ -1291,6 +2131,7 @@
       this.bindDrawer();
       this.bindCommandPalette();
       this.bindOmniSearch();
+      this.bindSectionModal();
     },
 
     bindSidebar() {
@@ -1393,10 +2234,11 @@
 
       // Si es una vista especializada del sistema, delegar al renderizador correspondiente
       if (tabId === '01-dashboard') return this.renderDashboardMetrics();
+      if (tabId === '02-contenido') return this.renderWebsiteBuilderModule('02-contenido');
       if (tabId === '09-verificaciones') return this.renderVerificationsModule();
       if (tabId === '10-suscripciones') return this.renderSubscriptionsModule();
       if (tabId === '21-multimedia') return this.renderMediaLibraryModule();
-      if (tabId === '24-builder') return this.renderWebsiteBuilderModule();
+      if (tabId === '24-builder') return this.renderWebsiteBuilderModule('24-builder');
       if (tabId === '27-auditoria') return this.renderAuditFeed();
 
       // Si es una colección administrable estándar, construir o actualizar la tabla
@@ -1868,66 +2710,311 @@
       `;
     },
 
-    renderWebsiteBuilderModule() {
-      const panel = document.getElementById('view-24-builder');
+    renderWebsiteBuilderModule(currentTab = '24-builder') {
+      const panel = document.getElementById(`view-${currentTab}`) || document.getElementById('view-24-builder');
       if (!panel) return;
+
+      const pageId = OpsState.activeBuilderPage || 'index';
+      const pageInfo = SITE_PAGES_REGISTRY[pageId] || { name: 'Página', file: `${pageId}.html`, icon: 'fa-file', sections: [] };
+
+      // Iniciar listener reactivo si no existe en memoria
+      if (!OpsState.pageSections[pageId]) {
+        OpsCMS.listenToPageSections(pageId);
+      }
+
+      let allSections = OpsState.pageSections[pageId] || pageInfo.sections || [];
+      const totalCount = allSections.length;
+      const publishedCount = allSections.filter((s) => s.status === 'published').length;
+      const draftCount = allSections.filter((s) => s.status === 'draft').length;
+      const trashedCount = allSections.filter((s) => s.status === 'trashed').length;
+
+      // Filtrar secciones
+      let filteredSections = [...allSections];
+      if (OpsState.activeBuilderFilter !== 'all') {
+        filteredSections = filteredSections.filter((s) => (s.status || 'published') === OpsState.activeBuilderFilter);
+      }
+
+      if (OpsState.builderSearchQuery) {
+        const q = OpsState.builderSearchQuery.toLowerCase();
+        filteredSections = filteredSections.filter((s) =>
+          `${s.name || ''} ${s.title || ''} ${s.subtitle || ''} ${s.content || ''} ${s.type || ''}`.toLowerCase().includes(q)
+        );
+      }
+
+      filteredSections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
       panel.innerHTML = `
         <div class="ops-view-header">
           <div class="ops-view-title-group">
-            <h1><i class="fa-solid fa-cubes" style="color: var(--bq-secondary);"></i> Website Builder Dinámico</h1>
-            <p class="ops-view-subtitle">EDITOR VISUAL DE PÁGINAS, SECCIONES, BANNERS Y ACCESIBILIDAD RESPONSIVE</p>
+            <h1><i class="fa-solid fa-cubes" style="color: var(--bq-accent);"></i> Website Builder Universal</h1>
+            <p class="ops-view-subtitle">CONTROL TOTAL DE PÁGINAS Y SECCIONES · EDITA, AGREGA, ELIMINA Y RESTAURA SIN TOCAR CÓDIGO</p>
           </div>
           <div class="ops-view-actions">
-            <button class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine.saveGlobalAnnouncement()"><i class="fa-solid fa-floppy-disk"></i> Guardar Anuncio</button>
+            <button class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine.saveGlobalAnnouncement()"><i class="fa-solid fa-floppy-disk"></i> Guardar Anuncio Global</button>
           </div>
         </div>
 
-        <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;">
-          <h3 style="font-size: 1rem; color: #fff; margin-bottom: 1rem;"><i class="fa-solid fa-bullhorn"></i> Banner de Anuncio Global (Web & Android)</h3>
-          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <label style="font-size: 0.8rem; color: var(--ops-text-secondary);">Texto oficial desplegado en el cintillo superior de toda la plataforma:</label>
-            <input type="text" id="cfgAnnouncementText" placeholder="Ej. ¡Descubre Nicaragua auténtica con baqueanos campesinos sin intermediarios!" style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.65rem 1rem; color: #fff; font-size: 0.88rem;">
+        <!-- CINTILLO DE ANUNCIO GLOBAL -->
+        <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <strong style="color:#fff; font-size:0.92rem;"><i class="fa-solid fa-bullhorn" style="color:var(--bq-accent);"></i> Banner de Anuncio Global en Vivo (Web & Android)</strong>
+            <span class="ops-badge-pill published">Sincronización Inmediata</span>
+          </div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <input type="text" id="cfgAnnouncementText" placeholder="Ej. ¡Descubre Nicaragua auténtica con baqueanos campesinos sin intermediarios!" style="flex:1; background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.65rem 1rem; color: #fff; font-size: 0.88rem;">
+            <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.saveGlobalAnnouncement()"><i class="fa-solid fa-floppy-disk"></i> Publicar Anuncio</button>
           </div>
         </div>
 
-        <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 1.5rem;">
-          <h3 style="font-size: 1rem; color: #fff; margin-bottom: 1rem;"><i class="fa-solid fa-layer-group"></i> Editor de Páginas & Secciones</h3>
-          <div class="ops-form-grid-2" style="margin-bottom: 1.25rem;">
-            <div class="ops-form-group">
-              <label class="ops-form-label">Página a Modificar:</label>
-              <select class="ops-form-select" id="builderPageSelect" onchange="window.BaqueanoOpsEngine.onBuilderPageChange(this.value)">
-                <option value="index">Página Principal (index.html)</option>
-                <option value="nosotros">Nosotros & Manifiesto (nosotros.html)</option>
-                <option value="destinos">Catálogo de Destinos (destinos.html)</option>
-                <option value="aliados">Red de Aliados (aliados.html)</option>
-                <option value="gastronomia">Gastronomía (gastronomia.html)</option>
-                <option value="historia">Historia Patria (historia.html)</option>
-                <option value="ambiental">Sostenibilidad (ambiental.html)</option>
-              </select>
-            </div>
-            <div class="ops-form-group" style="justify-content: flex-end;">
-              <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.addSectionToPage()"><i class="fa-solid fa-plus"></i> Añadir Nueva Sección</button>
-            </div>
+        <!-- BARRA DE SELECCIÓN DE PÁGINA (12 PÁGINAS DEL ECOSISTEMA) -->
+        <div class="ops-builder-header-strip" style="margin-bottom: 1.5rem;">
+          <div class="ops-page-selector-box">
+            <label style="font-size:0.88rem; font-weight:700; color:#fff;">Página a Administrar:</label>
+            <select class="ops-page-select" id="builderPageSelect" onchange="window.BaqueanoOpsEngine.onBuilderPageChange(this.value)">
+              ${Object.keys(SITE_PAGES_REGISTRY).map((pId) => {
+                const p = SITE_PAGES_REGISTRY[pId];
+                return `<option value="${pId}" ${pId === pageId ? 'selected' : ''}>${p.name} (${p.file})</option>`;
+              }).join('')}
+            </select>
+            <a href="${pageInfo.file}" target="_blank" rel="noopener noreferrer" class="ops-page-live-link">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver ${pageInfo.file} en vivo
+            </a>
           </div>
-          <div id="builderSectionsContainer">
-            <div style="padding: 1.5rem; background: var(--ops-surface-2); border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); margin-bottom: 1rem;">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
-                <strong style="color:#fff;"><i class="fa-solid fa-heading"></i> Sección 01 — Hero Principal</strong>
-                <span class="ops-badge-pill published">Activo</span>
-              </div>
-              <p style="font-size:0.82rem; color:var(--ops-text-secondary); margin:0;">Encabezado cinemático con título dinámico, subtítulo cultural y botón de llamada a la acción (CTA).</p>
-            </div>
-            <div style="padding: 1.5rem; background: var(--ops-surface-2); border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle);">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
-                <strong style="color:#fff;"><i class="fa-solid fa-mountain-sun"></i> Sección 02 — Destinos Destacados</strong>
-                <span class="ops-badge-pill published">Activo</span>
-              </div>
-              <p style="font-size:0.82rem; color:var(--ops-text-secondary); margin:0;">Rejilla interactiva conectada a Cloud Firestore en vivo mostrando los destinos más populares.</p>
-            </div>
+
+          <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+            <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.addSectionToPage('${pageId}')">
+              <i class="fa-solid fa-plus"></i> Añadir Nueva Sección
+            </button>
+            <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.resetPageToBaseline('${pageId}')" title="Restablecer plantilla inicial de esta página">
+              <i class="fa-solid fa-arrow-rotate-left"></i> Restablecer Plantilla
+            </button>
           </div>
+        </div>
+
+        <!-- BARRA DE FILTROS Y BÚSQUEDA DE SECCIONES -->
+        <div class="ops-crud-toolbar">
+          <div class="ops-filter-group">
+            <button class="ops-filter-pill ${OpsState.activeBuilderFilter === 'all' ? 'is-active' : ''}" onclick="window.BaqueanoOpsEngine.setBuilderFilter('all')">
+              Todas <span class="ops-filter-count">${totalCount}</span>
+            </button>
+            <button class="ops-filter-pill ${OpsState.activeBuilderFilter === 'published' ? 'is-active' : ''}" onclick="window.BaqueanoOpsEngine.setBuilderFilter('published')">
+              Publicadas <span class="ops-filter-count">${publishedCount}</span>
+            </button>
+            <button class="ops-filter-pill ${OpsState.activeBuilderFilter === 'draft' ? 'is-active' : ''}" onclick="window.BaqueanoOpsEngine.setBuilderFilter('draft')">
+              Borradores / Ocultas <span class="ops-filter-count">${draftCount}</span>
+            </button>
+            <button class="ops-filter-pill ${OpsState.activeBuilderFilter === 'trashed' ? 'is-active' : ''}" onclick="window.BaqueanoOpsEngine.setBuilderFilter('trashed')">
+              En Papelera <span class="ops-filter-count">${trashedCount}</span>
+            </button>
+          </div>
+
+          <div class="ops-search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="ops-filter-search-input" placeholder="Buscar secciones en ${pageInfo.name}..." value="${this.escape(OpsState.builderSearchQuery)}" oninput="window.BaqueanoOpsEngine.onBuilderSearch(this.value)">
+          </div>
+        </div>
+
+        <!-- LISTA DE TARJETAS DE SECCIÓN -->
+        <div id="builderSectionsList" style="margin-top: 1rem;">
+          ${filteredSections.length === 0 ? `
+            <div class="ops-empty-state" style="padding: 3rem 1.5rem; background: var(--ops-surface-1); border-radius: var(--ops-radius-lg); border: 1px solid var(--ops-border-subtle);">
+              <i class="fa-solid fa-layer-group ops-empty-icon" style="color:var(--bq-secondary);"></i>
+              <div class="ops-empty-title">0 Secciones encontradas en ${pageInfo.name}</div>
+              <div class="ops-empty-desc">No existen bloques con el filtro seleccionado. Puedes crear uno nuevo o restablecer la plantilla base.</div>
+              <button class="btn-ops-matte accent" style="margin-top: 1rem;" onclick="window.BaqueanoOpsEngine.addSectionToPage('${pageId}')">
+                <i class="fa-solid fa-plus"></i> Crear Primera Sección
+              </button>
+            </div>
+          ` : filteredSections.map((s, idx) => {
+            const status = s.status || 'published';
+            const statusLabel = status === 'published' ? 'Publicado' : status === 'draft' ? 'Borrador / Oculto' : 'En Papelera';
+            return `
+              <div class="ops-section-card status-${status}">
+                <div class="ops-section-card-top">
+                  <div class="ops-section-card-title-group">
+                    <div class="ops-section-order-badge" title="Orden de aparición: #${s.sortOrder || idx + 1}">
+                      ${s.sortOrder || idx + 1}
+                    </div>
+                    <div>
+                      <h4 class="ops-section-name">${this.escape(s.name || s.title || 'Sección')}</h4>
+                      <div style="font-size:0.75rem; color:var(--ops-text-muted);">ID: <code>${s.id}</code></div>
+                    </div>
+                    <span class="ops-section-type-badge">${s.type || 'bloque'}</span>
+                  </div>
+
+                  <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span class="ops-badge-pill ${status}">
+                      <i class="fa-solid ${status === 'published' ? 'fa-circle-check' : status === 'draft' ? 'fa-eye-slash' : 'fa-trash-can'}"></i>
+                      ${statusLabel}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="ops-section-card-body">
+                  ${s.title ? `<div class="ops-section-title-preview">${this.escape(s.title)}</div>` : ''}
+                  ${s.subtitle ? `<div class="ops-section-sub-preview">${this.escape(s.subtitle)}</div>` : ''}
+                  ${s.content ? `<p style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5; margin:0 0 0.5rem 0;">${this.escape(s.content)}</p>` : ''}
+
+                  <div class="ops-section-meta-chips">
+                    ${s.ctaText ? `
+                      <span class="ops-section-meta-chip">
+                        <i class="fa-solid fa-arrow-pointer" style="color:var(--bq-accent);"></i> Botón: "${this.escape(s.ctaText)}" (${this.escape(s.ctaLink || '#')})
+                      </span>
+                    ` : ''}
+                    ${s.imageUrl ? `
+                      <span class="ops-section-meta-chip">
+                        <i class="fa-solid fa-image" style="color:var(--bq-jungle);"></i> Imagen Vinculada
+                      </span>
+                    ` : ''}
+                  </div>
+                </div>
+
+                <div class="ops-section-actions">
+                  <button type="button" class="ops-btn-action-icon" title="Subir posición" onclick="window.BaqueanoOpsEngine.moveSectionOrder('${pageId}', '${s.id}', 'up')">
+                    <i class="fa-solid fa-arrow-up"></i> Subir
+                  </button>
+                  <button type="button" class="ops-btn-action-icon" title="Bajar posición" onclick="window.BaqueanoOpsEngine.moveSectionOrder('${pageId}', '${s.id}', 'down')">
+                    <i class="fa-solid fa-arrow-down"></i> Bajar
+                  </button>
+                  <button type="button" class="ops-btn-action-icon accent" onclick="window.BaqueanoOpsEngine.openSectionModal('${pageId}', '${s.id}')">
+                    <i class="fa-solid fa-pen-to-square"></i> Modificar
+                  </button>
+                  <button type="button" class="ops-btn-action-icon" onclick="window.BaqueanoOpsEngine.toggleSectionStatus('${pageId}', '${s.id}')" title="${status === 'published' ? 'Ocultar del sitio web' : 'Hacer visible en el sitio web'}">
+                    <i class="fa-solid ${status === 'published' ? 'fa-eye-slash' : 'fa-eye'}"></i>
+                    ${status === 'published' ? 'Despublicar' : 'Publicar'}
+                  </button>
+
+                  ${status === 'trashed' ? `
+                    <button type="button" class="ops-btn-action-icon success" onclick="window.BaqueanoOpsEngine.restoreSection('${pageId}', '${s.id}')" title="Restaurar de la papelera">
+                      <i class="fa-solid fa-rotate-left"></i> Restaurar
+                    </button>
+                    <button type="button" class="ops-btn-action-icon danger" onclick="window.BaqueanoOpsEngine.hardDeleteSection('${pageId}', '${s.id}')" title="Eliminar para siempre">
+                      <i class="fa-solid fa-ban"></i> Eliminar Definitivo
+                    </button>
+                  ` : `
+                    <button type="button" class="ops-btn-action-icon danger" onclick="window.BaqueanoOpsEngine.trashSection('${pageId}', '${s.id}')" title="Mover a papelera">
+                      <i class="fa-solid fa-trash-can"></i> Papelera
+                    </button>
+                  `}
+                </div>
+              </div>
+            `;
+          }).join('')}
         </div>
       `;
+    },
+
+    bindSectionModal() {
+      const modal = document.getElementById('opsSectionModal');
+      const closeBtn = document.getElementById('opsSectionModalCloseBtn');
+      const cancelBtn = document.getElementById('btnCancelSectionModal');
+      const saveBtn = document.getElementById('btnSaveSectionModal');
+      const uploadBtn = document.getElementById('btnUploadSectionMedia');
+      const fileInput = document.getElementById('secFormFileInput');
+
+      const closeModal = () => {
+        if (modal) modal.classList.remove('is-open');
+      };
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+      if (saveBtn) {
+        saveBtn.addEventListener('click', () => this.saveSectionForm());
+      }
+
+      if (uploadBtn && fileInput) {
+        uploadBtn.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', async (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          uploadBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Subiendo...';
+          try {
+            const { downloadURL } = await OpsStorage.uploadFile(file, 'pages');
+            const imgInput = document.getElementById('secFormImageUrl');
+            if (imgInput) imgInput.value = downloadURL;
+            OpsToast.show('Medio subido a Firebase Storage.', 'success');
+            uploadBtn.innerHTML = '<i class="fa-solid fa-check" style="color:var(--bq-jungle);"></i> Listo';
+          } catch (err) {
+            OpsToast.show(`Error subiendo medio: ${err.message}`, 'error');
+            uploadBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Subir a Storage';
+          }
+        });
+      }
+    },
+
+    openSectionModal(pageId, sectionId = null) {
+      const modal = document.getElementById('opsSectionModal');
+      const titleEl = document.getElementById('opsSectionModalTitle');
+      const subEl = document.getElementById('opsSectionModalSubtitle');
+      if (!modal) return;
+
+      const pageInfo = SITE_PAGES_REGISTRY[pageId] || { name: pageId, file: `${pageId}.html` };
+      const sections = OpsState.pageSections[pageId] || pageInfo.sections || [];
+      const section = sectionId ? sections.find((s) => s.id === sectionId) : null;
+
+      document.getElementById('sectionPageId').value = pageId;
+      document.getElementById('sectionId').value = sectionId || '';
+
+      if (titleEl) {
+        titleEl.innerHTML = `<i class="fa-solid fa-layer-group" style="color: var(--bq-accent);"></i> ${section ? 'Modificar Sección' : 'Añadir Nueva Sección'}`;
+      }
+      if (subEl) {
+        subEl.textContent = `Página: ${pageInfo.name} (${pageInfo.file})`;
+      }
+
+      document.getElementById('secFormTitle').value = section ? (section.title || section.name || '') : '';
+      document.getElementById('secFormSubtitle').value = section ? (section.subtitle || '') : '';
+      document.getElementById('secFormType').value = section ? (section.type || 'content') : 'content';
+      document.getElementById('secFormContent').value = section ? (section.content || '') : '';
+      document.getElementById('secFormCtaText').value = section ? (section.ctaText || '') : '';
+      document.getElementById('secFormCtaLink').value = section ? (section.ctaLink || '') : '';
+      document.getElementById('secFormImageUrl').value = section ? (section.imageUrl || '') : '';
+      document.getElementById('secFormStatus').value = section ? (section.status || 'published') : 'published';
+      document.getElementById('secFormSortOrder').value = section ? (section.sortOrder || sections.length + 1) : (sections.length + 1);
+
+      modal.classList.add('is-open');
+    },
+
+    async saveSectionForm() {
+      const pageId = document.getElementById('sectionPageId').value;
+      const sectionId = document.getElementById('sectionId').value;
+      const titleInput = document.getElementById('secFormTitle');
+
+      if (!titleInput.value.trim()) {
+        OpsToast.show('El título de la sección es obligatorio.', 'warning');
+        titleInput.focus();
+        return;
+      }
+
+      const saveBtn = document.getElementById('btnSaveSectionModal');
+      if (saveBtn) saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+
+      const sectionData = {
+        id: sectionId || undefined,
+        name: titleInput.value.trim(),
+        title: titleInput.value.trim(),
+        subtitle: document.getElementById('secFormSubtitle').value.trim(),
+        type: document.getElementById('secFormType').value,
+        content: document.getElementById('secFormContent').value.trim(),
+        ctaText: document.getElementById('secFormCtaText').value.trim(),
+        ctaLink: document.getElementById('secFormCtaLink').value.trim(),
+        imageUrl: document.getElementById('secFormImageUrl').value.trim(),
+        status: document.getElementById('secFormStatus').value,
+        sortOrder: parseInt(document.getElementById('secFormSortOrder').value, 10) || 1
+      };
+
+      try {
+        await OpsCMS.savePageSection(pageId, sectionData);
+        const modal = document.getElementById('opsSectionModal');
+        if (modal) modal.classList.remove('is-open');
+        OpsToast.show('¡Sección guardada con éxito en Firestore!', 'success');
+        this.renderWebsiteBuilderModule(OpsState.activeTab);
+      } catch (err) {
+        OpsToast.show(`Error al guardar: ${err.message}`, 'error');
+      } finally {
+        if (saveBtn) saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios en Vivo';
+      }
     },
 
     renderMediaLibraryModule() {
@@ -2434,12 +3521,69 @@
     async seedInitialContent() {
       const confirmed = await OpsDialog.confirm({
         title: '¿Sincronizar Contenido Canónico a Firestore?',
-        message: 'Se sembrarán cooperativas aliadas, platillos ancestrales y periodos históricos patrimoniales en Cloud Firestore para su gestión inmediata.',
+        message: 'Se sembrarán cooperativas aliadas, platillos ancestrales, periodos históricos y destinos oficiales en Cloud Firestore para su gestión inmediata.',
         confirmText: 'Sembrar en Firestore'
       });
       if (confirmed) {
         await OpsCMS.seedInitialContent();
       }
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // MÉTODOS DEL WEBSITE & PAGE BUILDER UNIVERSAL CMS
+    // ══════════════════════════════════════════════════════════════════════════
+    onBuilderPageChange(pageId) {
+      OpsState.activeBuilderPage = pageId;
+      OpsCMS.listenToPageSections(pageId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    setBuilderFilter(filter) {
+      OpsState.activeBuilderFilter = filter;
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    onBuilderSearch(query) {
+      OpsState.builderSearchQuery = query;
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    openSectionModal(pageId, sectionId) {
+      OpsUI.openSectionModal(pageId, sectionId);
+    },
+
+    addSectionToPage(pageId) {
+      OpsUI.openSectionModal(pageId, null);
+    },
+
+    async toggleSectionStatus(pageId, sectionId) {
+      await OpsCMS.togglePageSectionStatus(pageId, sectionId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async moveSectionOrder(pageId, sectionId, direction) {
+      await OpsCMS.movePageSectionOrder(pageId, sectionId, direction);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async trashSection(pageId, sectionId) {
+      await OpsCMS.trashPageSection(pageId, sectionId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async restoreSection(pageId, sectionId) {
+      await OpsCMS.restorePageSection(pageId, sectionId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async hardDeleteSection(pageId, sectionId) {
+      await OpsCMS.hardDeletePageSection(pageId, sectionId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async resetPageToBaseline(pageId) {
+      await OpsCMS.resetPageSectionsToBaseline(pageId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
     }
   };
 
