@@ -505,6 +505,370 @@
       </div>
     </section>
 
+    <!-- ============================================================================
+         🧭 GALERÍA INFINITA DE LOCALES ALIADOS — BAQUEANO
+         🎯 Por qué: Visibilizar la red de cooperativas, posadas, guías y comedores
+            locales que conforman el ecosistema Baqueano Nicaragua, generando confianza
+            y prueba social inmediata tras el primer impacto visual del Hero.
+         ⚙️ Cómo: Dos tracks CSS animados con translate infinito en direcciones
+            opuestas (marquee continuo), sin JS de loop — solo CSS animation.
+            Se duplican los items para lograr la ilusión de continuidad perfecta.
+         📦 Qué: Sección .partners-infinity-section con 2 filas de chips de locales.
+         ============================================================================ -->
+    <section class="partners-infinity-section" aria-label="Red de locales aliados Baqueano">
+      <div class="partners-infinity-header">
+        <div class="partners-pill-badge">
+          <i class="fa-solid fa-store"></i> Red Comunitaria Activa
+        </div>
+        <h2 class="partners-infinity-title">Locales Aliados en Todo Nicaragua</h2>
+        <p class="partners-infinity-sub">Cooperativas, posadas, guías y comedores verificados sin intermediarios</p>
+      </div>
+
+      <!-- Track 1: izquierda → derecha -->
+      <div class="partners-track-viewport" aria-hidden="true">
+        <div class="partners-track partners-track--fwd" id="partnersTrackA">
+          <!-- Set original -->
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-water"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Coop. Cañón de Somoto</span>
+              <span class="partner-chip-location">Madriz · Senderismo</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-bed"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Posada Ecológica La Abuela</span>
+              <span class="partner-chip-location">Masaya · Alojamiento</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-volcano"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Baqueanos del Volcán</span>
+              <span class="partner-chip-location">León · Guías Certificados</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-tree"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Red Comunitaria Ometepe Viva</span>
+              <span class="partner-chip-location">Rivas · Reserva Biosfera</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-leaf"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Ecolodge Selva Negra</span>
+              <span class="partner-chip-location">Matagalpa · Ecoturismo</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-utensils"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Comedor Doña Chepita</span>
+              <span class="partner-chip-location">Estelí · Gastronomía</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-horse"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Rancho Aventura Chinandega</span>
+              <span class="partner-chip-location">Chinandega · Cabalgata</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-fish"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Cooperativa Pesquera El Río</span>
+              <span class="partner-chip-location">Río San Juan · Pesca</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-mug-hot"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Hacienda Cafetalera San Marcos</span>
+              <span class="partner-chip-location">Jinotega · Café</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-palette"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Taller Artesanal Nicoya</span>
+              <span class="partner-chip-location">Granada · Artesanías</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <!-- Set duplicado (para loop continuo) -->
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-water"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Coop. Cañón de Somoto</span>
+              <span class="partner-chip-location">Madriz · Senderismo</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-bed"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Posada Ecológica La Abuela</span>
+              <span class="partner-chip-location">Masaya · Alojamiento</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-volcano"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Baqueanos del Volcán</span>
+              <span class="partner-chip-location">León · Guías Certificados</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-tree"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Red Comunitaria Ometepe Viva</span>
+              <span class="partner-chip-location">Rivas · Reserva Biosfera</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-leaf"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Ecolodge Selva Negra</span>
+              <span class="partner-chip-location">Matagalpa · Ecoturismo</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-utensils"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Comedor Doña Chepita</span>
+              <span class="partner-chip-location">Estelí · Gastronomía</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-horse"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Rancho Aventura Chinandega</span>
+              <span class="partner-chip-location">Chinandega · Cabalgata</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-fish"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Cooperativa Pesquera El Río</span>
+              <span class="partner-chip-location">Río San Juan · Pesca</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-mug-hot"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Hacienda Cafetalera San Marcos</span>
+              <span class="partner-chip-location">Jinotega · Café</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-palette"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Taller Artesanal Nicoya</span>
+              <span class="partner-chip-location">Granada · Artesanías</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Track 2: derecha → izquierda (sentido inverso) -->
+      <div class="partners-track-viewport" aria-hidden="true">
+        <div class="partners-track partners-track--rev" id="partnersTrackB">
+          <!-- Set original -->
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-umbrella-beach"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Surf Camp Las Peñitas</span>
+              <span class="partner-chip-location">León · Surf &amp; Playa</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-mountain-sun"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Guías Macizo Peñas Blancas</span>
+              <span class="partner-chip-location">Matagalpa · Trekking</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Cooperativa Arrocera Jalapa</span>
+              <span class="partner-chip-location">Nueva Segovia · Agro</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-sailboat"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Lanchas El Lago Azul</span>
+              <span class="partner-chip-location">Granada · Navegación</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-seedling"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Vivero Comunitario Dipilto</span>
+              <span class="partner-chip-location">Nueva Segovia · Flora</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-camera"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Tours Fotográficos Mombacho</span>
+              <span class="partner-chip-location">Granada · Fotografía</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-star"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Apoyo Resort Comunitario</span>
+              <span class="partner-chip-location">Masaya · Resort</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-jug-detergent"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Artesanas de Cerámica Mozonte</span>
+              <span class="partner-chip-location">Nueva Segovia · Barro</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-tent"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Campamento Bocay Selva</span>
+              <span class="partner-chip-location">Jinotega · Camping</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-person-biking"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Bici-Ruta La Isla Verde</span>
+              <span class="partner-chip-location">Ometepe · Ciclismo</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <!-- Set duplicado (loop continuo) -->
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-umbrella-beach"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Surf Camp Las Peñitas</span>
+              <span class="partner-chip-location">León · Surf &amp; Playa</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-mountain-sun"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Guías Macizo Peñas Blancas</span>
+              <span class="partner-chip-location">Matagalpa · Trekking</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Cooperativa Arrocera Jalapa</span>
+              <span class="partner-chip-location">Nueva Segovia · Agro</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-sailboat"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Lanchas El Lago Azul</span>
+              <span class="partner-chip-location">Granada · Navegación</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-seedling"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Vivero Comunitario Dipilto</span>
+              <span class="partner-chip-location">Nueva Segovia · Flora</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-camera"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Tours Fotográficos Mombacho</span>
+              <span class="partner-chip-location">Granada · Fotografía</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-star"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Apoyo Resort Comunitario</span>
+              <span class="partner-chip-location">Masaya · Resort</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-jug-detergent"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Artesanas de Cerámica Mozonte</span>
+              <span class="partner-chip-location">Nueva Segovia · Barro</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-tent"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Campamento Bocay Selva</span>
+              <span class="partner-chip-location">Jinotega · Camping</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+          <div class="partner-chip partner-chip--alt">
+            <span class="partner-chip-icon"><i class="fa-solid fa-person-biking"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">Bici-Ruta La Isla Verde</span>
+              <span class="partner-chip-location">Ometepe · Ciclismo</span>
+            </div>
+            <span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA al final de la galería -->
+      <div class="partners-infinity-cta">
+        <a href="aliados.html" class="partners-cta-btn" aria-label="Ver todos los locales aliados">
+          <i class="fa-solid fa-grid-2"></i> Ver Todos los Locales Aliados
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
     <!-- LOS 5 IMPACTOS DEL PROYECTO BAQUEANO -->
     <section class="impacts-section-pro">
       <div class="container">
@@ -1276,6 +1640,34 @@
           <div class="exp-form-field">
             <label for="expComment" class="exp-form-label">Cuéntanos tu experiencia *</label>
             <textarea id="expComment" class="exp-form-textarea" rows="3" placeholder="¿Cómo fue tu visita o cómo ha beneficiado Baqueano a tu comunidad o negocio local?" required></textarea>
+          </div>
+
+          <!-- ZONA DE UPLOAD FOTO / VIDEO -->
+          <div class="exp-form-field">
+            <label class="exp-form-label">
+              <i class="fa-solid fa-photo-film" style="color:#F65E01;margin-right:0.35rem;"></i>
+              Foto o Video de tu Experiencia
+              <span class="exp-upload-badge">Opcional</span>
+            </label>
+
+            <!-- Drop Zone -->
+            <div class="exp-upload-zone" id="expUploadZone" role="button" tabindex="0" aria-label="Subir foto o video">
+              <input type="file" id="expMediaInput" class="exp-upload-hidden" accept="image/*,video/*" multiple aria-hidden="true">
+              <div class="exp-upload-zone-inner">
+                <div class="exp-upload-icon-wrap">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <p class="exp-upload-hint-primary">Arrastra o haz clic para subir</p>
+                <p class="exp-upload-hint-secondary">Imágenes (JPG, PNG, WEBP) · Videos (MP4, MOV) · Máx. 4 archivos</p>
+                <div class="exp-upload-pills">
+                  <span class="exp-upload-pill"><i class="fa-solid fa-image"></i> Foto</span>
+                  <span class="exp-upload-pill"><i class="fa-solid fa-clapperboard"></i> Video</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Previews -->
+            <div class="exp-media-preview-grid" id="expMediaPreviewGrid" aria-live="polite"></div>
           </div>
 
           <div class="exp-modal-actions">

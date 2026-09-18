@@ -1199,12 +1199,148 @@ window.BaqueanoIndexFeatures = (function () {
     initExpModal();
 
     function initExpModal() {
-      const openModalBtn = document.getElementById('btnOpenExpModal');
-      const modalBackdrop = document.getElementById('modalAddExperience');
-      const closeModalBtn = document.getElementById('btnCloseExpModal');
-      const cancelModalBtn = document.getElementById('btnCancelExpModal');
-      const form = document.getElementById('formAddExperience');
+      const openModalBtn    = document.getElementById('btnOpenExpModal');
+      const modalBackdrop   = document.getElementById('modalAddExperience');
+      const closeModalBtn   = document.getElementById('btnCloseExpModal');
+      const cancelModalBtn  = document.getElementById('btnCancelExpModal');
+      const form            = document.getElementById('formAddExperience');
 
+      // ── Upload multimedia ──────────────────────────────────────────────────
+      const uploadZone      = document.getElementById('expUploadZone');
+      const mediaInput      = document.getElementById('expMediaInput');
+      const previewGrid     = document.getElementById('expMediaPreviewGrid');
+
+      /** Array de objetos { file, objectUrl, type: 'image'|'video', base64? } */
+      let selectedMedia = [];
+      const MAX_FILES   = 4;
+
+      /** Renderiza/actualiza la cuadrícula de previews */
+      function renderPreviews() {
+        if (!previewGrid) return;
+        previewGrid.innerHTML = '';
+        selectedMedia.forEach((item, idx) => {
+          const wrap = document.createElement('div');
+          wrap.className = 'exp-preview-item';
+
+          if (item.type === 'image') {
+            const img = document.createElement('img');
+            img.src = item.objectUrl;
+            img.alt = 'Vista previa';
+            wrap.appendChild(img);
+          } else {
+            // Video: thumbnail estático con ícono de play
+            const vid = document.createElement('video');
+            vid.src  = item.objectUrl;
+            vid.muted = true;
+            vid.preload = 'metadata';
+            wrap.appendChild(vid);
+
+            const playIco = document.createElement('div');
+            playIco.className = 'exp-preview-play-icon';
+            playIco.innerHTML = '<i class="fa-solid fa-circle-play"></i>';
+            wrap.appendChild(playIco);
+
+            const badge = document.createElement('span');
+            badge.className = 'exp-preview-type-badge';
+            badge.textContent = 'VIDEO';
+            wrap.appendChild(badge);
+          }
+
+          // Overlay con botón eliminar
+          const overlay = document.createElement('div');
+          overlay.className = 'exp-preview-overlay';
+          const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
+          removeBtn.className = 'exp-preview-remove';
+          removeBtn.setAttribute('aria-label', 'Eliminar archivo');
+          removeBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+          removeBtn.addEventListener('click', () => {
+            URL.revokeObjectURL(item.objectUrl);
+            selectedMedia.splice(idx, 1);
+            renderPreviews();
+            // Actualizar texto de la zona de upload
+            updateZoneHint();
+          });
+          overlay.appendChild(removeBtn);
+          wrap.appendChild(overlay);
+
+          previewGrid.appendChild(wrap);
+        });
+        updateZoneHint();
+      }
+
+      /** Actualiza el hint de la drop zone según cuántos archivos hay */
+      function updateZoneHint() {
+        const hint = uploadZone ? uploadZone.querySelector('.exp-upload-hint-primary') : null;
+        if (!hint) return;
+        const remaining = MAX_FILES - selectedMedia.length;
+        if (remaining <= 0) {
+          hint.textContent = '¡Máximo de archivos alcanzado!';
+        } else if (selectedMedia.length > 0) {
+          hint.textContent = `${selectedMedia.length} archivo(s) · Haz clic para añadir más`;
+        } else {
+          hint.textContent = 'Arrastra o haz clic para subir';
+        }
+      }
+
+      /** Procesa los archivos nuevos seleccionados/soltados */
+      function handleFiles(files) {
+        const allowed = Array.from(files).filter(f =>
+          f.type.startsWith('image/') || f.type.startsWith('video/')
+        );
+        const toAdd = allowed.slice(0, MAX_FILES - selectedMedia.length);
+        if (toAdd.length < allowed.length) {
+          alert(`Solo puedes subir hasta ${MAX_FILES} archivos en total.`);
+        }
+        toAdd.forEach(file => {
+          selectedMedia.push({
+            file,
+            objectUrl: URL.createObjectURL(file),
+            type: file.type.startsWith('image/') ? 'image' : 'video',
+            base64: null  // se llena de forma asíncrona para fotos (para persistir)
+          });
+          // Leer base64 solo para imágenes (evitar OOM con videos grandes)
+          if (file.type.startsWith('image/') && file.size < 3 * 1024 * 1024) {
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+              const match = selectedMedia.find(m => m.file === file);
+              if (match) match.base64 = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+        renderPreviews();
+      }
+
+      // ── Eventos de la zona de upload ──────────────────────────────────────
+      if (mediaInput) {
+        mediaInput.addEventListener('change', () => {
+          handleFiles(mediaInput.files);
+          mediaInput.value = ''; // Permitir re-seleccionar el mismo archivo
+        });
+      }
+
+      if (uploadZone) {
+        uploadZone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          uploadZone.classList.add('drag-over');
+        });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+        uploadZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          uploadZone.classList.remove('drag-over');
+          handleFiles(e.dataTransfer.files);
+        });
+        // Teclado: Enter/Space activan el input file
+        uploadZone.addEventListener('keydown', (e) => {
+          if ((e.key === 'Enter' || e.key === ' ') && mediaInput) {
+            e.preventDefault();
+            mediaInput.click();
+          }
+        });
+      }
+
+      // ── Abrir / cerrar modal ───────────────────────────────────────────────
       function openModal() {
         if (!modalBackdrop) return;
         modalBackdrop.classList.add('is-open');
@@ -1216,10 +1352,15 @@ window.BaqueanoIndexFeatures = (function () {
         modalBackdrop.classList.remove('is-open');
         document.body.style.overflow = '';
         if (form) form.reset();
+        // Revocar URLs de objeto y limpiar array
+        selectedMedia.forEach(m => URL.revokeObjectURL(m.objectUrl));
+        selectedMedia = [];
+        if (previewGrid) previewGrid.innerHTML = '';
+        updateZoneHint();
       }
 
-      if (openModalBtn) openModalBtn.addEventListener('click', openModal);
-      if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+      if (openModalBtn)   openModalBtn.addEventListener('click', openModal);
+      if (closeModalBtn)  closeModalBtn.addEventListener('click', closeModal);
       if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
 
       if (modalBackdrop) {
@@ -1234,34 +1375,48 @@ window.BaqueanoIndexFeatures = (function () {
         }
       });
 
+      // ── Envío del formulario ───────────────────────────────────────────────
       if (form) {
         form.addEventListener('submit', (e) => {
           e.preventDefault();
 
-          const author = document.getElementById('expAuthor')?.value.trim();
-          const role = document.getElementById('expRoleType')?.value;
+          const author   = document.getElementById('expAuthor')?.value.trim();
+          const role     = document.getElementById('expRoleType')?.value;
           const location = document.getElementById('expLocation')?.value.trim();
-          const rating = parseInt(document.getElementById('expRating')?.value || '5', 10);
-          const comment = document.getElementById('expComment')?.value.trim();
+          const rating   = parseInt(document.getElementById('expRating')?.value || '5', 10);
+          const comment  = document.getElementById('expComment')?.value.trim();
 
           if (!author || !comment) {
             alert('Por favor completa todos los campos requeridos.');
             return;
           }
 
+          // Serializar solo las imágenes base64 (los videos NO se persisten en localStorage)
+          const mediaForStorage = selectedMedia
+            .filter(m => m.type === 'image' && m.base64)
+            .map(m => ({ type: 'image', base64: m.base64 }))
+            .slice(0, 4);
+
           const newReview = {
-            id: 'rev_' + Date.now(),
+            id:       'rev_' + Date.now(),
             author,
-            role: role || 'turista-local',
+            role:     role || 'turista-local',
             location: location || 'Nicaragua',
-            rating: rating || 5,
+            rating:   rating || 5,
             comment,
-            date: 'Hoy (Recién compartido)'
+            date:     'Hoy (Recién compartido)',
+            media:    mediaForStorage
           };
 
+          // También pasar las ObjectURLs para renderizado inmediato en la card
+          const mediaForCard = selectedMedia.map(m => ({ type: m.type, url: m.objectUrl, base64: m.base64 || null }));
+
           saveUserExperienceLocally(newReview);
-          injectNewReviewCard(newReview);
+          injectNewReviewCard(newReview, mediaForCard);
           closeModal();
+
+          // Limpiar objectURLs ya que closeModal revocó las que tenía selectedMedia,
+          // pero mediaForCard mantiene referencias vivas para la card → no revocar aquí.
           alert('¡Gracias por compartir tu experiencia con la comunidad Baqueano!');
         });
       }
@@ -1269,7 +1424,7 @@ window.BaqueanoIndexFeatures = (function () {
       loadLocalUserExperiences();
     }
 
-    function injectNewReviewCard(data) {
+    function injectNewReviewCard(data, mediaItems) {
       const card = document.createElement('div');
       card.className = 'exp-card';
       card.dataset.audience = data.role === 'negocio' ? 'negocio' : (data.role === 'turista-inter' ? 'turista-inter' : 'turista-local');
@@ -1293,6 +1448,40 @@ window.BaqueanoIndexFeatures = (function () {
         starsHtml += i <= data.rating ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
       }
 
+      // ── Construir sección de medios si hay archivos adjuntos ─────────────────
+      // Priorizamos: (1) mediaItems pasados desde el modal (objectURL activo),
+      //              (2) data.media con base64 (restaurado desde localStorage).
+      const resolvedMedia = [];
+      if (Array.isArray(mediaItems) && mediaItems.length > 0) {
+        mediaItems.forEach(m => resolvedMedia.push({ type: m.type, src: m.url || m.base64 }));
+      } else if (Array.isArray(data.media) && data.media.length > 0) {
+        data.media.forEach(m => resolvedMedia.push({ type: m.type, src: m.base64 }));
+      }
+
+      let mediaSectionHtml = '';
+      if (resolvedMedia.length > 0) {
+        const pillLabel = resolvedMedia.length === 1 ? '1 archivo adjunto' : `${resolvedMedia.length} archivos adjuntos`;
+
+        let thumbsHtml = '';
+        resolvedMedia.forEach(m => {
+          if (m.type === 'image') {
+            thumbsHtml += `<img class="exp-card-thumb" src="${escapeHtml(m.src || '')}" alt="Foto de experiencia" loading="lazy">`;
+          } else {
+            thumbsHtml += `
+              <div class="exp-card-video-wrap">
+                <video src="${escapeHtml(m.src || '')}" muted preload="metadata"></video>
+                <div class="exp-card-play"><i class="fa-solid fa-circle-play"></i></div>
+              </div>`;
+          }
+        });
+
+        mediaSectionHtml = `
+          <span class="exp-media-pill">
+            <i class="fa-solid fa-photo-film"></i> ${escapeHtml(pillLabel)}
+          </span>
+          <div class="exp-card-media-row">${thumbsHtml}</div>`;
+      }
+
       card.innerHTML = `
         <div>
           <div class="exp-card-header">
@@ -1307,6 +1496,7 @@ window.BaqueanoIndexFeatures = (function () {
           </div>
           <div class="exp-rating-stars">${starsHtml}</div>
           <p class="exp-quote-text">«${escapeHtml(data.comment)}»</p>
+          ${mediaSectionHtml}
         </div>
         <div class="exp-footer-tag">
           <span class="exp-impact-pill"><i class="fa-solid fa-comment-dots"></i> Experiencia Comunitaria</span>
