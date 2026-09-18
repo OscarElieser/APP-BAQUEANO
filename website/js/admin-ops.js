@@ -352,9 +352,9 @@ function setAdminDataProvenance(source) {
   if (!root || !label || !detail || !badge) return;
   const isLive = source === 'firestore';
   root.classList.toggle('is-live', isLive);
-  label.textContent = isLive ? 'DATOS EN VIVO' : 'MODO DEMOSTRACI?N';
-  detail.textContent = isLive ? 'M?tricas verificadas desde Cloud Firestore.' : 'Las cifras fijas son referencias visuales y no representan actividad real.';
-  badge.textContent = isLive ? 'PRODUCCI?N' : 'DEMO';
+  label.textContent = isLive ? 'DATOS EN VIVO' : 'MODO DEMOSTRACIÓN';
+  detail.textContent = isLive ? 'Métricas verificadas desde Cloud Firestore.' : 'Las cifras fijas son referencias visuales y no representan actividad real.';
+  badge.textContent = isLive ? 'PRODUCCIÓN' : 'DEMO';
   badge.className = 'ops-data-provenance-badge ' + (isLive ? 'live' : 'demo');
 }
 
@@ -372,7 +372,7 @@ function refreshVerifiedAdminMetrics() {
       if (published && Number.isFinite(metrics.publishedPlaces)) published.textContent = String(metrics.publishedPlaces);
     });
   } catch (error) {
-    console.error('[OpsCenter] No fue posible verificar m?tricas:', error);
+    console.error('[OpsCenter] No fue posible verificar métricas:', error);
     setAdminDataProvenance('error');
   }
 }

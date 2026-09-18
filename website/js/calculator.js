@@ -1,13 +1,13 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — CALCULADORA RURAL & MOTOR FISCAL LEY 306 (calculator.js)
+// 🧭 BAQUEANO ECOSYSTEM — CALCULADORA RURAL & MOTOR FISCAL LEYES 1210 & 1211 (calculator.js)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Demostrar con datos cuantitativos el impacto económico del modelo Baqueano:
 //   la eliminación de comisiones de 20-25% de OTAs foráneas para que ese capital
 //   se quede 100% en las cooperativas campesinas locales.
-// - Proveer un cotizador bimoneda transparente que aplique la exoneración fiscal
-//   de la Ley 306 INTUR para turismo receptivo comunitario.
+// - Proveer un cotizador bimoneda transparente que aplique el régimen fiscal
+//   de las Leyes No. 1210 y 1211 INTUR para turismo receptivo comunitario.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Event listeners en tiempo real para inputs de rango (sliders).
@@ -16,7 +16,7 @@
 //
 // 📦 3. QUÉ (WHAT / FUNCIONES EXPUESTAS):
 // - initRoiCalculator(): Sliders interactivos de tours mensuales, precio y grupo.
-// - initBimonedaCheckout(): Cotizador de boleto turístico bimoneda con Ley 306.
+// - initBimonedaCheckout(): Cotizador de boleto turístico bimoneda con Leyes 1210 & 1211.
 // ============================================================================
 
 function initRoiCalculator() {
@@ -101,7 +101,7 @@ function initBimonedaCheckout() {
     const elTotalNio = document.getElementById('receiptTotalNio');
 
     if (elSub) elSub.textContent = `$${subtotal.toFixed(2)} USD`;
-    if (elTax) elTax.textContent = isTourist ? '0% (Exonerado Ley 306 INTUR)' : `+15% DGI ($${taxAmount.toFixed(2)} USD)`;
+    if (elTax) elTax.textContent = isTourist ? '0% (Incentivo Ley 1210 / 1211 INTUR)' : `+15% DGI ($${taxAmount.toFixed(2)} USD)`;
     if (elTotalUsd) elTotalUsd.textContent = `$${totalUsd.toFixed(2)} USD`;
     if (elTotalNio) elTotalNio.textContent = `C$ ${totalNio.toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} NIO`;
   }
