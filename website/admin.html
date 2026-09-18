@@ -409,6 +409,30 @@
               </button>
             </div>
 
+            <!-- GRUPO: GESTIÓN & CATÁLOGO (CMS & SUSCRIPCIONES) -->
+            <div class="ops-center-group">
+              <div class="ops-group-label">Gestión &amp; Catálogo</div>
+              <!-- CENTRO 7: CMS CONTENIDOS -->
+              <button class="ops-center-tab" data-panel="panel-cms">
+                <div class="ops-tab-icon" style="background: rgba(246,94,1,0.15); color: #F65E01;"><i class="fa-solid fa-folder-tree"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">CMS &amp; Catálogo</div>
+                  <div class="ops-tab-sub">Destinos · Negocios · CRUD</div>
+                </div>
+                <span class="ops-tab-badge live">CMS</span>
+              </button>
+
+              <!-- CENTRO 8: SUSCRIPCIONES & VERIFICACIÓN -->
+              <button class="ops-center-tab" data-panel="panel-suscripciones">
+                <div class="ops-tab-icon" style="background: rgba(45,212,191,0.15); color: #2DD4BF;"><i class="fa-solid fa-certificate"></i></div>
+                <div class="ops-tab-text">
+                  <div class="ops-tab-name">Suscripciones</div>
+                  <div class="ops-tab-sub">Aliados · Check Verificado</div>
+                </div>
+                <span class="ops-tab-badge alert" id="badgePendingSubscriptions">3 Aliados</span>
+              </button>
+            </div>
+
             <!-- BOTÓN MODO CENTRO DE MANDO -->
             <button class="ops-command-btn" id="btnCommandMode">
               <i class="fa-solid fa-tv"></i>
@@ -654,6 +678,112 @@
                         <div class="audit-content">
                           <div class="audit-action"><strong>Sistema SOS</strong> registró alerta P1 en <strong>Río San Juan</strong></div>
                           <div class="audit-meta">16/09/2026 14:28 · Asignado a guía #18</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rutas Operativas y Terminal de Eventos en Vivo -->
+              <div class="ops-module-grid" style="margin-top: 1.5rem;">
+                <!-- Tabla de Rutas -->
+                <div class="ops-module-panel" style="grid-column: span 1;">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-route"></i> Control Operativo de Senderos</div>
+                    <span class="ops-status-pill online">RUTAS ACTIVAS</span>
+                  </div>
+                  <div class="ops-module-body" style="padding: 0;">
+                    <div class="routes-table-wrap" style="overflow-x: auto;">
+                      <table class="admin-table" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                          <tr style="background: rgba(22,93,111,0.2); font-size: 0.78rem; text-transform: uppercase;">
+                            <th style="padding: 0.75rem 1rem;">Sendero</th>
+                            <th style="padding: 0.75rem 1rem;">Territorio</th>
+                            <th style="padding: 0.75rem 1rem;">Estado</th>
+                            <th style="padding: 0.75rem 1rem; text-align: right;">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody id="routesTableBody">
+                          <tr>
+                            <td class="table-dest-name" style="padding: 0.75rem 1rem; font-weight: 600;">Cañón de Somoto (Río Abajo)</td>
+                            <td style="padding: 0.75rem 1rem; color: var(--text-muted);">Madriz</td>
+                            <td style="padding: 0.75rem 1rem;"><span class="status-badge-table active">Abierto Normal</span></td>
+                            <td style="padding: 0.75rem 1rem; text-align: right;">
+                              <button class="btn-admin-action btn-route-toggle" onclick="toggleRouteStatus('Cañón de Somoto')">Alternar</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="table-dest-name" style="padding: 0.75rem 1rem; font-weight: 600;">Cerro Negro (Sandboarding)</td>
+                            <td style="padding: 0.75rem 1rem; color: var(--text-muted);">León</td>
+                            <td style="padding: 0.75rem 1rem;"><span class="status-badge-table active">Abierto Normal</span></td>
+                            <td style="padding: 0.75rem 1rem; text-align: right;">
+                              <button class="btn-admin-action btn-route-toggle" onclick="toggleRouteStatus('Cerro Negro')">Alternar</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="table-dest-name" style="padding: 0.75rem 1rem; font-weight: 600;">Volcán Maderas (Laguna Cráter)</td>
+                            <td style="padding: 0.75rem 1rem; color: var(--text-muted);">Ometepe</td>
+                            <td style="padding: 0.75rem 1rem;"><span class="status-badge-table active">Abierto Normal</span></td>
+                            <td style="padding: 0.75rem 1rem; text-align: right;">
+                              <button class="btn-admin-action btn-route-toggle" onclick="toggleRouteStatus('Volcán Maderas')">Alternar</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="table-dest-name" style="padding: 0.75rem 1rem; font-weight: 600;">Cascada La Luna (Canopy)</td>
+                            <td style="padding: 0.75rem 1rem; color: var(--text-muted);">Jinotega</td>
+                            <td style="padding: 0.75rem 1rem;"><span class="status-badge-table active">Abierto Normal</span></td>
+                            <td style="padding: 0.75rem 1rem; text-align: right;">
+                              <button class="btn-admin-action btn-route-toggle" onclick="toggleRouteStatus('Cascada La Luna')">Alternar</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="table-dest-name" style="padding: 0.75rem 1rem; font-weight: 600;">Laguna de Apoyo (Aguas Minerales)</td>
+                            <td style="padding: 0.75rem 1rem; color: var(--text-muted);">Masaya</td>
+                            <td style="padding: 0.75rem 1rem;"><span class="status-badge-table active">Abierto Normal</span></td>
+                            <td style="padding: 0.75rem 1rem; text-align: right;">
+                              <button class="btn-admin-action btn-route-toggle" onclick="toggleRouteStatus('Laguna de Apoyo')">Alternar</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Terminal de Eventos en Tiempo Real -->
+                <div class="ops-module-panel" style="grid-column: span 1;">
+                  <div class="ops-module-header">
+                    <div class="ops-module-title"><i class="fa-solid fa-satellite-dish"></i> Terminal de Transmisión en Vivo</div>
+                    <span class="ops-status-pill online"><span class="pulse-green-small"></span> STREAM 24/7</span>
+                  </div>
+                  <div class="ops-module-body">
+                    <div class="feed-stream-box" id="liveFeedStream">
+                      <div class="feed-event-item">
+                        <div class="feed-event-icon"><i class="fa-solid fa-bookmark"></i></div>
+                        <div class="feed-event-content">
+                          <div class="feed-event-title">Reserva Directa en Cañón de Somoto</div>
+                          <div class="feed-event-meta">3 exploradores • 100% tarifa al guía Mateo • Hace 2 min</div>
+                        </div>
+                      </div>
+                      <div class="feed-event-item">
+                        <div class="feed-event-icon"><i class="fa-solid fa-download"></i></div>
+                        <div class="feed-event-content">
+                          <div class="feed-event-title">Descarga de BaqueanoNicaragua.apk</div>
+                          <div class="feed-event-meta">Dispositivo Android verificado • León • Hace 6 min</div>
+                        </div>
+                      </div>
+                      <div class="feed-event-item">
+                        <div class="feed-event-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="feed-event-content">
+                          <div class="feed-event-title">Baliza GPS Activada en Ometepe</div>
+                          <div class="feed-event-meta">Sendero Volcán Maderas en progreso • Hace 12 min</div>
+                        </div>
+                      </div>
+                      <div class="feed-event-item">
+                        <div class="feed-event-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="feed-event-content">
+                          <div class="feed-event-title">Denuncia Ciudadana Verificada</div>
+                          <div class="feed-event-meta">Reporte de desechos en mirador atendido por brigada • Hace 25 min</div>
                         </div>
                       </div>
                     </div>
@@ -1338,9 +1468,113 @@
                     <div class="tech-service-card"><div class="tech-svc-icon admin-inline-036"><i class="fa-solid fa-bell"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Push (FCM)</div><div class="tech-svc-sub">94% entrega efectiva</div></div><div class="tech-status-dot operativo"></div></div>
                     <div class="tech-service-card"><div class="tech-svc-icon admin-inline-044"><i class="fa-solid fa-globe"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Portal Web</div><div class="tech-svc-sub">99.8% uptime</div></div><div class="tech-status-dot operativo"></div></div>
                     <div class="tech-service-card"><div class="tech-svc-icon admin-inline-145"><i class="fa-brands fa-android"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Android App</div><div class="tech-svc-sub">v1.0 · 1,495 activos</div></div><div class="tech-status-dot operativo"></div></div>
-                    <div class="tech-service-card"><div class="tech-svc-icon admin-inline-146"><i class="fa-solid fa-map"></i></div><div class="tech-svc-info"><div class="tech-svc-name">Mapas Satelitales</div><div class="tech-svc-sub">344 balizas activas</div></div><div class="tech-status-dot operativo"></div></div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 7: CMS & CATÁLOGO SOBERANO
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-cms">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon op" style="background: rgba(246,94,1,0.15); color: #F65E01;"><i class="fa-solid fa-folder-tree"></i></div>
+                  <div>
+                    <div class="ops-panel-title">CMS &amp; Catálogo Soberano</div>
+                    <div class="ops-panel-subtitle">ADMINISTRACIÓN GENERAL CRUD · DESTINOS, NEGOCIOS, GASTRONOMÍA, HISTORIA</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action success" id="btnCmsAddNew"><i class="fa-solid fa-plus"></i> Agregar Contenido</button>
+                  <button class="btn-ops-action" id="btnCmsExportJson"><i class="fa-solid fa-download"></i> Exportar JSON</button>
+                  <button class="btn-ops-action" id="btnCmsImportJson"><i class="fa-solid fa-upload"></i> Importar</button>
+                  <input type="file" id="cmsFileInput" accept=".json" style="display:none;">
+                </div>
+              </div>
+
+              <!-- Filtros de Categoría CMS y Buscador -->
+              <div class="cms-toolbar-bar" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; margin: 1.5rem 0; flex-wrap:wrap;">
+                <div class="cms-filter-pills" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                  <button class="cms-filter-btn active" data-filter="all" style="padding:0.45rem 1rem; border-radius:999px; background:var(--primary); color:#fff; border:1px solid rgba(45,212,191,0.4); font-size:0.82rem; font-weight:600; cursor:pointer;">Todos (<span id="cmsCountAll">0</span>)</button>
+                  <button class="cms-filter-btn" data-filter="destinos" style="padding:0.45rem 1rem; border-radius:999px; background:rgba(15,23,42,0.6); color:var(--text-muted); border:1px solid var(--border-subtle); font-size:0.82rem; font-weight:600; cursor:pointer;">Destinos</button>
+                  <button class="cms-filter-btn" data-filter="negocios" style="padding:0.45rem 1rem; border-radius:999px; background:rgba(15,23,42,0.6); color:var(--text-muted); border:1px solid var(--border-subtle); font-size:0.82rem; font-weight:600; cursor:pointer;">Negocios &amp; Aliados</button>
+                  <button class="cms-filter-btn" data-filter="gastronomia" style="padding:0.45rem 1rem; border-radius:999px; background:rgba(15,23,42,0.6); color:var(--text-muted); border:1px solid var(--border-subtle); font-size:0.82rem; font-weight:600; cursor:pointer;">Gastronomía</button>
+                  <button class="cms-filter-btn" data-filter="historia" style="padding:0.45rem 1rem; border-radius:999px; background:rgba(15,23,42,0.6); color:var(--text-muted); border:1px solid var(--border-subtle); font-size:0.82rem; font-weight:600; cursor:pointer;">Historia &amp; Raíces</button>
+                </div>
+                <div class="cms-search-box" style="position:relative; min-width:280px;">
+                  <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--text-muted);"></i>
+                  <input type="text" id="cmsSearchInput" placeholder="Buscar por nombre, departamento o etiqueta..." style="width:100%; padding:0.55rem 1rem 0.55rem 2.5rem; background:rgba(15,23,42,0.7); border:1px solid var(--border-subtle); border-radius:10px; color:#fff; font-size:0.85rem;">
+                </div>
+              </div>
+
+              <!-- Tabla de Contenidos CMS -->
+              <div class="cms-table-container" style="background:rgba(15,23,42,0.6); border:1px solid var(--border-subtle); border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+                <table class="admin-table" style="width:100%; border-collapse:collapse;">
+                  <thead>
+                    <tr style="background:rgba(22,93,111,0.2); border-bottom:1px solid var(--border-subtle); text-align:left; font-size:0.8rem; color:var(--sand-light); text-transform:uppercase; letter-spacing:0.5px;">
+                      <th style="padding:1rem;">Elemento / Título</th>
+                      <th style="padding:1rem;">Categoría</th>
+                      <th style="padding:1rem;">Departamento</th>
+                      <th style="padding:1rem;">Precio / Tarifa</th>
+                      <th style="padding:1rem;">Contacto</th>
+                      <th style="padding:1rem;">Estado</th>
+                      <th style="padding:1rem; text-align:right;">Acciones CRUD</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cmsTableBody">
+                    <!-- Filas generadas dinámicamente -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ════════════════════════════════════════
+                 CENTRO 8: SUSCRIPCIONES & VERIFICACIÓN
+                 ════════════════════════════════════════ -->
+            <div class="ops-center-panel" id="panel-suscripciones">
+              <div class="ops-panel-header">
+                <div class="ops-panel-title-group">
+                  <div class="ops-panel-icon op" style="background: rgba(45,212,191,0.15); color: #2DD4BF;"><i class="fa-solid fa-certificate"></i></div>
+                  <div>
+                    <div class="ops-panel-title">Suscripciones &amp; Verificación de Negocios</div>
+                    <div class="ops-panel-subtitle">CONTROL OPERATIVO DE ALIADOS · LEY 1210 / 1211 · AUDITORÍA TERRITORIAL</div>
+                  </div>
+                </div>
+                <div class="ops-panel-actions">
+                  <button class="btn-ops-action" id="btnSyncSubscriptions"><i class="fa-solid fa-arrows-rotate"></i> Verificar Vencimientos</button>
+                  <button class="btn-ops-action success" id="btnAddNewSubscription"><i class="fa-solid fa-user-plus"></i> Registrar Negocio</button>
+                </div>
+              </div>
+
+              <!-- Banner de Claridad y Transparencia -->
+              <div class="verification-transparency-banner" style="background:linear-gradient(135deg, rgba(22,93,111,0.3), rgba(15,23,42,0.7)); border:1px solid rgba(45,212,191,0.3); border-radius:14px; padding:1.2rem 1.5rem; margin:1.5rem 0; display:flex; gap:1.2rem; align-items:center;">
+                <div style="font-size:2rem; color:var(--primary-glow);"><i class="fa-solid fa-shield-check"></i></div>
+                <div style="font-size:0.86rem; line-height:1.6; color:var(--sand-light);">
+                  <strong style="color:#fff; display:block; margin-bottom:0.2rem;">ESTÁNDAR DE TRANSPARENCIA: VERIFICACIÓN BAQUEANO VS CERTIFICACIÓN ESTATAL</strong>
+                  El sello <strong>"Verificado por BAQUEANO"</strong> acredita que nuestro equipo de campo auditó presencialmente el emprendimiento, verificó el cumplimiento de la <strong>Ley No. 1210 y 1211</strong>, corroboró la ausencia de intermediarios usureros y constató guías o anfitriones nativos de la comunidad. Toda verificación cuenta con ficha pública con auditor, fecha y notas comprobadas.
+                </div>
+              </div>
+
+              <!-- Tabla de Suscripciones & Negocios -->
+              <div class="subscriptions-table-container" style="background:rgba(15,23,42,0.6); border:1px solid var(--border-subtle); border-radius:16px; overflow:hidden;">
+                <table class="admin-table" style="width:100%; border-collapse:collapse;">
+                  <thead>
+                    <tr style="background:rgba(22,93,111,0.2); border-bottom:1px solid var(--border-subtle); text-align:left; font-size:0.8rem; color:var(--sand-light); text-transform:uppercase; letter-spacing:0.5px;">
+                      <th style="padding:1rem;">Emprendimiento / Cooperativa</th>
+                      <th style="padding:1rem;">Departamento</th>
+                      <th style="padding:1rem;">Plan Activo</th>
+                      <th style="padding:1rem;">Vigencia (Inicio - Fin)</th>
+                      <th style="padding:1rem;">Estado Plan</th>
+                      <th style="padding:1rem;">Check Verificado</th>
+                      <th style="padding:1rem;">Ficha Auditoría</th>
+                      <th style="padding:1rem; text-align:right;">Gestión</th>
+                    </tr>
+                  </thead>
+                  <tbody id="subscriptionsTableBody">
+                    <!-- Rellenado dinámicamente -->
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -1349,109 +1583,6 @@
       </section><!-- /#adminDashboardContent -->
 
     </div>
-  </main>
-
-
-        <div class="admin-login-card">
-          <div class="login-header-box">
-            <div class="login-icon-circle">
-              <img src="assets/images/logo.png" alt="Baqueano Nicaragua">
-            </div>
-            <h1 class="login-title">Acceso al Ops Center</h1>
-            <p class="login-subtitle">
-              Autenticación requerida para acceder al centro de mando, telemetría y supervisión de senderos.
-            </p>
-          </div>
-
-          <!-- Botón de Acceso Rápido con Cuenta de Google -->
-          <button type="button" class="btn-google-auth" id="btnGoogleLogin">
-            <svg class="google-svg-icon" viewBox="0 0 24 24" width="20" height="20">
-              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-            </svg>
-            <span>Continuar con Google</span>
-          </button>
-
-          <!-- Divisor Visual -->
-          <div class="login-divider-line">
-            <span>o ingresa con tu correo registrado</span>
-          </div>
-
-          <!-- Alerta de Feedback y Reconocimiento Automático de Rol -->
-          <div class="login-feedback-alert" id="loginFeedback"></div>
-
-          <!-- Formulario de Credenciales Reales -->
-          <form id="adminLoginForm">
-            <div class="login-input-group">
-              <label for="loginUsername"><i class="fa-solid fa-envelope"></i> Correo Electrónico Registrado:</label>
-              <div class="login-input-wrap">
-                <i class="fa-solid fa-user-shield"></i>
-                <input type="email" id="loginUsername" class="form-control-input" autocomplete="username" required placeholder="tu-correo@gmail.com">
-              </div>
-            </div>
-
-            <div class="login-input-group">
-              <label for="loginPassword"><i class="fa-solid fa-key"></i> Contraseña de Acceso:</label>
-              <div class="login-input-wrap">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="loginPassword" class="form-control-input" autocomplete="current-password" required placeholder="••••••••">
-              </div>
-            </div>
-
-            <button type="submit" class="btn-hero-primary admin-inline-147">
-              <i class="fa-solid fa-right-to-bracket"></i> Ingresar al Centro de Operaciones
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <!-- ================================================================ -->
-      <!-- 2. CONTENIDO DEL DASHBOARD ADMINISTRATIVO                        -->
-      <!-- ================================================================ -->
-      <section id="adminDashboardContent" class="admin-inline-148">
-
-        <!-- BARRA DE SESIÓN ACTIVA (RBAC) -->
-        <div class="user-session-bar" id="userSessionBar">
-          <div class="user-profile-meta">
-            <div class="user-avatar-circle" id="sessionUserAvatar">VM</div>
-            <div>
-              <div class="admin-inline-149">
-                <span class="user-name-title" id="sessionUserName">Lic. Valeria Morales</span>
-                <span class="user-role-badge admin" id="sessionUserRole">
-                  <i class="fa-solid fa-shield"></i> Administrador General
-                </span>
-              </div>
-              <div id="sessionUserTitle" class="admin-inline-150">
-                Directora de Operaciones & Soberanía Territorial
-              </div>
-            </div>
-          </div>
-
-          <div class="admin-inline-151">
-            <span class="admin-inline-152">
-              SESIÓN ACTIVA • ENCRIPTACIÓN TLS 1.3
-            </span>
-            <button class="btn-logout" id="btnLogoutAdmin" title="Cerrar sesión actual">
-              <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
-            </button>
-          </div>
-        </div>
-
-        <!-- HEADER DEL DASHBOARD -->
-        <div class="admin-header-bar">
-          <div class="admin-title-col">
-            <h2>
-              <i class="fa-solid fa-network-wired admin-inline-153"></i>
-              Baqueano Ops Center & Telemetría
-            </h2>
-            <div class="admin-inline-154">
-              <span class="admin-badge-live">
-                <span class="pulse-green-small"></span> NÚCLEO EN VIVO
-              </span>
-              <span class="admin-inline-155">
-                CLUSTER: app-baqueano (us-central1)
               </span>
             </div>
           </div>
@@ -1696,127 +1827,11 @@
                   <td>Ops Center Web</td>
                   <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
                 </tr>
-                <tr>
-                  <td class="table-dest-name"><code>reservas_turistas</code></td>
-                  <td>Solicitudes de guiado directo con liquidación bimoneda</td>
-                  <td>fecha_tour, estado_pago</td>
-                  <td>Bimodal (App/Web)</td>
-                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
-                </tr>
-                <tr>
-                  <td class="table-dest-name"><code>cooperativas_locales</code></td>
-                  <td>Directorio de organizaciones productivas y posadas rurales</td>
-                  <td>municipio, rubro</td>
-                  <td>Bimodal (App/Web)</td>
-                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
-                </tr>
-                <tr>
-                  <td class="table-dest-name"><code>sos_alertas_sendero</code></td>
-                  <td>Balizas de auxilio emitidas en zonas de montaña con GPS</td>
-                  <td>prioridad, estado_atención</td>
-                  <td>Tiempo Real Crítico</td>
-                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
-                </tr>
-                <tr>
-                  <td class="table-dest-name"><code>especies_fauna_flora</code></td>
-                  <td>Guía de biodiversidad, endémicos y especies protegidas</td>
-                  <td>bioma, estado_conservacion</td>
-                  <td>App Móvil Offline</td>
-                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
-                </tr>
-                <tr>
-                  <td class="table-dest-name"><code>registro_ley_306</code></td>
-                  <td>Constancias de exoneración fiscal y régimen de fomento INTUR</td>
-                  <td>cooperativa_id, fecha_emision</td>
-                  <td>Ops Center Web</td>
-                  <td><span class="status-badge-table active"><i class="fa-solid fa-check"></i> Activa</span></td>
-                </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- CONTROL DE RUTAS Y FEED DE EVENTOS (2 COLUMNAS) -->
-        <div class="dashboard-main-grid">
-          <!-- Tabla de Rutas -->
-          <div class="dash-panel">
-            <div class="dash-panel-header">
-              <h3 class="dash-panel-title">
-                <i class="fa-solid fa-route admin-inline-175"></i>
-                Estado Operativo de Rutas y Senderos
-              </h3>
-              <span class="admin-inline-157">ACCIONES RÁPIDAS</span>
-            </div>
-
-            <div class="routes-table-wrap">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Sendero</th>
-                    <th>Territorio</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody id="routesTableBody">
-                  <tr>
-                    <td class="table-dest-name">Cañón de Somoto (Río Abajo)</td>
-                    <td>Madriz</td>
-                    <td><span class="status-badge-table active">Abierto Normal</span></td>
-                    <td>
-                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Cañón de Somoto')">
-                        Alternar
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-dest-name">Cerro Negro (Sandboarding)</td>
-                    <td>León</td>
-                    <td><span class="status-badge-table active">Abierto Normal</span></td>
-                    <td>
-                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Cerro Negro')">
-                        Alternar
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-dest-name">Volcán Maderas (Laguna Cráter)</td>
-                    <td>Ometepe</td>
-                    <td><span class="status-badge-table active">Abierto Normal</span></td>
-                    <td>
-                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Volcán Maderas')">
-                        Alternar
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-dest-name">Cascada La Luna (Canopy)</td>
-                    <td>Jinotega</td>
-                    <td><span class="status-badge-table active">Abierto Normal</span></td>
-                    <td>
-                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Cascada La Luna')">
-                        Alternar
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-dest-name">Laguna de Apoyo (Aguas Minerales)</td>
-                    <td>Masaya</td>
-                    <td><span class="status-badge-table active">Abierto Normal</span></td>
-                    <td>
-                      <button class="btn-admin-action btn-route-toggle admin-inline-176" onclick="toggleRouteStatus('Laguna de Apoyo')">
-                        Alternar
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Terminal de Transmisión de Eventos -->
-          <div class="dash-panel">
-            <div class="dash-panel-header">
               <h3 class="dash-panel-title">
                 <i class="fa-solid fa-satellite admin-inline-153"></i>
                 Terminal de Eventos en Tiempo Real
