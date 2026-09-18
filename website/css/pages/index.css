@@ -253,6 +253,7 @@
     }
 
     .biz-photo-preview {
+      display: none;
       position: relative;
       max-width: 280px;
       margin: 0 auto;

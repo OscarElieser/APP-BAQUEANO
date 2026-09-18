@@ -1,0 +1,406 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — ESTILOS 3D, WEBGL & EXPERIENCIA INMERSIVA
+   ============================================================================ */
+
+:root {
+  --b3d-bg-deep: #080D1A;
+  --b3d-surface-1: #0F172A;
+  --b3d-surface-2: rgba(22, 93, 111, 0.25);
+  --b3d-petroleo: #165D6F;
+  --b3d-volcan: #F65E01;
+  --b3d-arena: #F4E6C1;
+  --b3d-gold: #F59E0B;
+  --b3d-emerald: #10B981;
+}
+
+/* ----------------------------------------------------------------------------
+   1. SECCIÓN PRINCIPAL: MAPA VIVO 3D DE NICARAGUA
+   ---------------------------------------------------------------------------- */
+.map-3d-section-pro {
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, #0F172A 0%, #080D1A 100%);
+  padding: 5rem 1.5rem;
+  border-top: 1px solid rgba(244, 230, 193, 0.12);
+  border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+  overflow: hidden;
+}
+
+.map-3d-header-wrap {
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.map-3d-badge-insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  color: var(--b3d-volcan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.map-3d-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.8rem, 3.8vw, 2.7rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.map-3d-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--b3d-arena);
+  opacity: 0.85;
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+.map-3d-canvas-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 620px;
+  margin: 0 auto;
+  border-radius: 20px;
+  border: 1px solid rgba(22, 93, 111, 0.45);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), inset 0 0 40px rgba(22, 93, 111, 0.2);
+  background: #080D1A;
+  overflow: hidden;
+}
+
+.map-3d-canvas-wrap {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.map-3d-canvas-wrap:active {
+  cursor: grabbing;
+}
+
+.map-3d-controls-overlay {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.map-3d-ctrl-btn {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  backdrop-filter: blur(10px);
+  color: var(--b3d-arena);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.map-3d-ctrl-btn:hover {
+  background: var(--b3d-petroleo);
+  color: #FFFFFF;
+  border-color: var(--b3d-arena);
+  transform: translateY(-1px);
+}
+
+.map-3d-hint-badge {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+/* ----------------------------------------------------------------------------
+   2. DRAWER TERRITORIAL LATERAL INTERACTIVO
+   ---------------------------------------------------------------------------- */
+.map-3d-detail-drawer {
+  position: absolute;
+  top: 0;
+  right: -420px;
+  width: 390px;
+  height: 100%;
+  max-width: 90%;
+  background: rgba(15, 23, 42, 0.94);
+  border-left: 1px solid rgba(244, 230, 193, 0.2);
+  backdrop-filter: blur(16px);
+  padding: 1.75rem 1.5rem;
+  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.6);
+  z-index: 20;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.map-3d-detail-drawer.is-open {
+  right: 0;
+}
+
+.map-3d-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+}
+
+.map-3d-drawer-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.map-3d-drawer-close {
+  background: none;
+  border: none;
+  color: var(--b3d-arena);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  transition: color 0.2s;
+}
+
+.map-3d-drawer-close:hover {
+  color: var(--b3d-volcan);
+}
+
+/* ----------------------------------------------------------------------------
+   3. HERO RENOVADO: BRÚJULA BAQUEANA & PARTÍCULAS
+   ---------------------------------------------------------------------------- */
+.hero-compass-interactive {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22, 93, 111, 0.35) 0%, rgba(8, 13, 26, 0.8) 100%);
+  border: 2px solid rgba(244, 230, 193, 0.4);
+  box-shadow: 0 0 25px rgba(246, 94, 1, 0.25), inset 0 0 15px rgba(22, 93, 111, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  position: relative;
+  transition: transform 0.15s ease-out;
+}
+
+.hero-compass-needle {
+  font-size: 2.2rem;
+  color: var(--b3d-volcan);
+  transform-origin: center center;
+  filter: drop-shadow(0 0 8px rgba(246, 94, 1, 0.6));
+  animation: compassDrift 6s infinite ease-in-out;
+}
+
+@keyframes compassDrift {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(18deg); }
+  70% { transform: rotate(-12deg); }
+}
+
+.hero-actions-dual {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+}
+
+/* ----------------------------------------------------------------------------
+   4. DISEÑADOR DE RUTAS: "CONSTRUYE TU AVENTURA"
+   ---------------------------------------------------------------------------- */
+.route-builder-section-pro {
+  background: #080D1A;
+  padding: 5rem 1.5rem;
+  position: relative;
+}
+
+.route-builder-card {
+  max-width: 980px;
+  margin: 0 auto;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.18);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+}
+
+.route-builder-grid-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.rb-field-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--b3d-arena);
+  margin-bottom: 0.45rem;
+}
+
+.rb-select, .rb-input {
+  width: 100%;
+  background: rgba(8, 13, 26, 0.8);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.rb-select:focus, .rb-input:focus {
+  border-color: var(--b3d-volcan);
+}
+
+/* ----------------------------------------------------------------------------
+   5. ASISTENTE BAQUEANO DIGITAL FLOTANTE
+   ---------------------------------------------------------------------------- */
+.baqueano-assistant-widget {
+  position: fixed;
+  bottom: 1.75rem;
+  left: 1.75rem;
+  z-index: 999;
+}
+
+.assistant-avatar-float {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #F65E01 0%, #165D6F 100%);
+  border: 2px solid var(--b3d-arena);
+  box-shadow: 0 8px 24px rgba(246, 94, 1, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.assistant-avatar-float:hover {
+  transform: scale(1.1) rotate(6deg);
+}
+
+.assistant-chat-window {
+  position: absolute;
+  bottom: 75px;
+  left: 0;
+  width: 340px;
+  max-width: 90vw;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(16px);
+  padding: 1.25rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.85rem;
+  z-index: 1000;
+}
+
+.baqueano-assistant-widget.is-open .assistant-chat-window {
+  display: flex;
+}
+
+/* ----------------------------------------------------------------------------
+   6. MODAL VISOR 360°
+   ---------------------------------------------------------------------------- */
+.panorama-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 13, 26, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.panorama-modal-backdrop.is-open {
+  display: flex;
+}
+
+.panorama-modal-dialog {
+  width: 100%;
+  max-width: 860px;
+  background: var(--b3d-surface-1);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+}
+
+.panorama-canvas-wrap {
+  width: 100%;
+  height: 480px;
+  background: #000;
+  cursor: grab;
+}
+
+.panorama-canvas-wrap:active {
+  cursor: grabbing;
+}
+
+/* ----------------------------------------------------------------------------
+   7. TARJETAS TILT 3D
+   ---------------------------------------------------------------------------- */
+.tilt-card-3d {
+  transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .map-3d-canvas-container {
+    height: 440px;
+  }
+  .map-3d-detail-drawer {
+    width: 100%;
+    right: -100%;
+  }
+  .baqueano-assistant-widget {
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
