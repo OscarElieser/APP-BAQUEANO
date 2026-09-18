@@ -187,7 +187,7 @@ function initEnvironmentalModule() {
           pos => {
             const lat = pos.coords.latitude.toFixed(5);
             const lon = pos.coords.longitude.toFixed(5);
-            descField.value += `\n[Coordenadas Satelitales Verificadas: Lat ${lat}°, Lon ${lon}°]\n`;
+            descField.value += `\n[Coordenadas reportadas por el dispositivo: Lat ${lat}°, Lon ${lon}°]\n`;
             btnCaptureGps.innerHTML = '<i class="fa-solid fa-check"></i> Coordenadas Incrustadas';
           },
           () => {

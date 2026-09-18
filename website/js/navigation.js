@@ -31,6 +31,19 @@
 let currentGpsCoords = "Ubicación aún no disponible";
 
 /**
+ * POR QUÉ: habilita navegación offline sin almacenar datos personales.
+ * CÓMO: registra un worker cuyo alcance y exclusiones se validan internamente.
+ * QUÉ: activa el fallback público en contextos seguros compatibles.
+ */
+function initPublicServiceWorker() {
+  if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+      .catch((error) => console.warn('[PWA] No fue posible registrar el modo offline:', error));
+  }, { once: true });
+}
+
+/**
  * Controla el estado visual de la barra superior con efecto dinámico al hacer scroll.
  */
 function initNavbarScroll() {
@@ -264,7 +277,7 @@ function initSosModal() {
 
   const fetchGps = () => {
     if (navigator.geolocation) {
-      if (gpsDisplay) gpsDisplay.textContent = "🛰️ Conectando con satélites GPS...";
+      if (gpsDisplay) gpsDisplay.textContent = "Solicitando ubicación al dispositivo...";
       navigator.geolocation.getCurrentPosition(
         pos => {
           const lat = pos.coords.latitude.toFixed(5);
@@ -670,6 +683,7 @@ function ensureUserSessionLoaded() {
 
 // Auto-inicialización completa y defensiva para páginas directas.
 function initializeNavigationModules() {
+  initPublicServiceWorker();
   ensureUserSessionLoaded();
   buildAboutDropdown();
   initNavbarScroll();

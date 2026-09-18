@@ -22,7 +22,7 @@ import type { TripHubRecord, TripItineraryStopRecord } from "@baqueano/types";
 
 const SEED_TRIP: TripHubRecord = {
   tripId: "trip-occidente-magico",
-  userId: "user-demo-explorador",
+  userId: "",
   title: "Aventura Volcánica & Tradición en Occidente",
   countryId: "NI",
   territories: ["Leon", "Chinandega"],
@@ -83,15 +83,11 @@ const SEED_TRIP: TripHubRecord = {
 export class TripHubService {
   private trips: Map<string, TripHubRecord> = new Map();
 
-  constructor() {
-    this.trips.set(SEED_TRIP.tripId, SEED_TRIP);
-  }
-
   /**
    * Obtiene la información consolidada del viaje.
    */
   public getTripHubData(tripId: string): TripHubRecord | null {
-    return this.trips.get(tripId) ?? this.trips.get("trip-occidente-magico") ?? null;
+    return this.trips.get(tripId) ?? null;
   }
 
   /**

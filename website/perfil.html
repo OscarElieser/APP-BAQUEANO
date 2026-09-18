@@ -287,11 +287,6 @@
       </form>
       <div class="profile-auth-divider"><span>o continúa con</span></div>
       <button type="button" class="btn-google-auth" id="btnProfileGoogleAuth"><i class="fa-brands fa-google"></i> Google</button>
-      <div class="profile-auth-demo-wrap" style="margin-top: 1rem; text-align: center;">
-        <button type="button" class="btn-hero-glass" id="btnProfileDemoAccess" style="width: 100%; justify-content: center; font-size: 0.85rem; padding: 0.7rem 1rem;">
-          <i class="fa-solid fa-compass"></i> Acceso Rápido (Modo Explorador de Prueba)
-        </button>
-      </div>
       <p class="profile-auth-feedback" id="profileAuthFeedback" role="status" aria-live="polite"></p>
     </div>
   </section>
@@ -790,7 +785,6 @@
         const authForm = document.getElementById('profileAuthForm');
         const createAccountButton = document.getElementById('btnCreateProfileAccount');
         const googleAuthButton = document.getElementById('btnProfileGoogleAuth');
-        const demoAccessButton = document.getElementById('btnProfileDemoAccess');
         const authFeedback = document.getElementById('profileAuthFeedback');
 
         const reportAuthError = (error) => {
@@ -865,15 +859,6 @@
         }
 
         if (googleAuthButton) googleAuthButton.addEventListener('click', authenticateWithGoogle);
-
-        if (demoAccessButton) {
-          demoAccessButton.addEventListener('click', () => {
-            if (window.BaqueanoSession && typeof window.BaqueanoSession.loginAsExplorer === 'function') {
-              window.BaqueanoSession.loginAsExplorer('Explorador Baqueano', 'explorador@baqueano.ni');
-              window.location.reload();
-            }
-          });
-        }
 
         if (headerName) headerName.textContent = 'Inicia sesión para ver tu perfil';
         if (headerRole) headerRole.textContent = 'Invitado';

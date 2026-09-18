@@ -42,12 +42,12 @@ const SEED_NOTIFICATIONS: readonly NotificationRecord[] = [
 ];
 
 export async function getUserNotifications(userId: string): Promise<DataResult<NotificationRecord>> {
-  const items = SEED_NOTIFICATIONS.filter((n) => !userId || n.recipientUid === userId || n.recipientUid === "current-user");
+  const items: readonly NotificationRecord[] = [];
   return {
     source: "seed",
     isConnected: false,
     items,
-    warning: "Notificaciones locales en modo desarrollo."
+    warning: "Las notificaciones no estan disponibles hasta conectar una sesion autenticada."
   };
 }
 

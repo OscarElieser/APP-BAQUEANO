@@ -79,7 +79,7 @@ function initAdminOperations() {
     });
   }
 
-  // Simulación periódica de actividad en segundo plano
+  // Carga inicial: solo acepta datos procedentes del servicio conectado.
   refreshVerifiedAdminMetrics();
 }
 
@@ -352,16 +352,17 @@ function setAdminDataProvenance(source) {
   if (!root || !label || !detail || !badge) return;
   const isLive = source === 'firestore';
   root.classList.toggle('is-live', isLive);
-  label.textContent = isLive ? 'DATOS EN VIVO' : 'MODO DEMOSTRACIÓN';
-  detail.textContent = isLive ? 'Métricas verificadas desde Cloud Firestore.' : 'Las cifras fijas son referencias visuales y no representan actividad real.';
-  badge.textContent = isLive ? 'PRODUCCIÓN' : 'DEMO';
+  label.textContent = isLive ? 'DATOS EN VIVO' : 'SIN DATOS DISPONIBLES';
+  detail.textContent = isLive ? 'Métricas verificadas desde Cloud Firestore.' : 'No se muestran cifras hasta obtener una fuente verificable.';
+  badge.textContent = isLive ? 'PRODUCCIÓN' : 'VACÍO';
   badge.className = 'ops-data-provenance-badge ' + (isLive ? 'live' : 'demo');
 }
 
 function refreshVerifiedAdminMetrics() {
   const service = window.BaqueanoFirestore;
   if (!service || typeof service.listenAdminMetrics !== 'function') {
-    setAdminDataProvenance('seed');
+    clearAdminMetrics();
+    setAdminDataProvenance('unavailable');
     return;
   }
   try {
@@ -378,30 +379,26 @@ function refreshVerifiedAdminMetrics() {
 }
 
 // ----------------------------------------------------------------------------
-function simulateLiveMetricUpdate() {
+function clearAdminMetrics() {
   const appUsers = document.getElementById('metricAppUsers');
   const webVisits = document.getElementById('metricWebVisits');
   const commRevenue = document.getElementById('metricCommunityRevenue');
   const gpsSessions = document.getElementById('metricGpsSessions');
 
   if (appUsers) {
-    const current = parseInt(appUsers.textContent.replace(/,/g, ''), 10) || 1495;
-    appUsers.textContent = (current + Math.floor(Math.random() * 5) + 1).toLocaleString('en-US');
+    appUsers.textContent = '0';
   }
 
   if (webVisits) {
-    const current = parseInt(webVisits.textContent.replace(/,/g, ''), 10) || 5872;
-    webVisits.textContent = (current + Math.floor(Math.random() * 8) + 2).toLocaleString('en-US');
+    webVisits.textContent = '0';
   }
 
   if (commRevenue) {
-    const current = parseInt(commRevenue.textContent.replace(/[$,]/g, ''), 10) || 25120;
-    commRevenue.textContent = '$' + (current + (Math.floor(Math.random() * 3) + 1) * 35).toLocaleString('en-US');
+    commRevenue.textContent = '$0';
   }
 
   if (gpsSessions) {
-    const current = parseInt(gpsSessions.textContent.replace(/,/g, ''), 10) || 344;
-    gpsSessions.textContent = (current + Math.floor(Math.random() * 3) - 1).toLocaleString('en-US');
+    gpsSessions.textContent = '0';
   }
 }
 
@@ -465,7 +462,6 @@ function simulateLiveStreamEvent() {
     { title: "Aporte Ecológico Registrado", meta: "100% donación a cuenca hídrica La Luna", icon: "fa-leaf" }
   ];
 
-  const pick = events[Math.floor(Math.random() * events.length)];
-  addNewFeedEvent(pick.title, pick.meta, pick.icon);
-  simulateLiveMetricUpdate();
+  // No se generan eventos ni métricas sin una fuente verificable.
+  return events.length === 0;
 }

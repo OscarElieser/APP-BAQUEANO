@@ -398,7 +398,7 @@ window.BaqueanoIndexFeatures = (function () {
       rating: 5.0,
       reviewCount: 620,
       cooperativeName: 'Artesanos Lácteos Nagarote',
-      imageUrl: 'assets/images/comida/quesillo.jpg',
+      imageUrl: 'assets/images/comida/rosquillas.jpg',
       badge: 'Quesillo de Nagarote',
       lat: 12.2667,
       lng: -86.5667,
@@ -416,7 +416,7 @@ window.BaqueanoIndexFeatures = (function () {
       rating: 4.9,
       reviewCount: 530,
       cooperativeName: 'Taller Artesanal Somoto',
-      imageUrl: 'assets/images/comida/rosquillas.jpg',
+      imageUrl: 'assets/images/comida/quesillo.jpg',
       badge: 'Horno de Barro',
       lat: 13.4833,
       lng: -86.5833,
@@ -676,9 +676,8 @@ window.BaqueanoIndexFeatures = (function () {
       switchIndexLayer('satellite');
 
       // 1. Renderizado INMEDIATO con los 29 puntos para cero latencia
-      const initialPlaces = (window.BaqueanoFirestore && Array.isArray(window.BaqueanoFirestore.SEED_PLACES) && window.BaqueanoFirestore.SEED_PLACES.length > 0)
-        ? window.BaqueanoFirestore.SEED_PLACES
-        : FALLBACK_SEED_PLACES;
+      // REAL > DEMO: nunca publicar el catálogo semilla como información vigente.
+      const initialPlaces = [];
       renderIndexMarkers(initialPlaces);
 
       // 2. Sincronización asíncrona reactiva con Firestore en tiempo real

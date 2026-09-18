@@ -1,0 +1,10 @@
+{
+  "name": "baqueano-firebase-functions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Funciones HTTP aisladas para salud, métricas públicas verificables y disponibilidad de IA.",
+  "main": "index.js",
+  "engines": { "node": "20" },
+  "scripts": {"test": "node --test test/*.test.js", "check": "node --check index.js && node --check lib/http.js && node --check lib/public-metrics.js"},
+  "dependencies": {"firebase-admin": "^14.3.0", "firebase-functions": "^7.3.2"}
+}

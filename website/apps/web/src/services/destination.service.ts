@@ -10,12 +10,11 @@
  * Public list and detail readers for Android-compatible `places` records.
  */
 import type { DataResult, PlaceRecord } from "@baqueano/types";
-import { seedPlaces } from "../data/catalog";
 import { slugifyPlace } from "../utils/place";
 
 export async function getPublishedDestinationPlaces(): Promise<DataResult<PlaceRecord>> {
   const { listPublishedPlaces } = await import("@baqueano/firebase");
-  return listPublishedPlaces(seedPlaces);
+  return listPublishedPlaces();
 }
 
 export async function getDestinationPlaceBySlug(slug: string): Promise<{ result: DataResult<PlaceRecord>; item?: PlaceRecord }> {

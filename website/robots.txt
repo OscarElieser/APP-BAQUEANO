@@ -45,6 +45,7 @@ Disallow: /dev-web.log
 Disallow: /*.log
 Disallow: /api/
 Disallow: /health
+Disallow: /offline.html
 
 # Assets públicos — permitidos
 Allow: /assets/images/

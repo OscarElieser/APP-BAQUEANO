@@ -35,12 +35,12 @@ const SEED_REVIEWS: readonly ReviewRecord[] = [
 ];
 
 export async function getPlaceReviews(placeId: string): Promise<DataResult<ReviewRecord>> {
-  const items = SEED_REVIEWS.filter((r) => !placeId || r.placeId === placeId || r.placeId === "place-somoto");
+  const items: readonly ReviewRecord[] = [];
   return {
     source: "seed",
     isConnected: false,
     items,
-    warning: "Reseñas demostrativas locales."
+    warning: "No hay resenas verificadas disponibles para este lugar."
   };
 }
 

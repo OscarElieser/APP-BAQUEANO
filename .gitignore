@@ -44,8 +44,13 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 node_modules
+# WHY: Prevent Corepack's local package-manager cache from entering source control.
+# HOW: Corepack may use this workspace-local directory when its system cache is unavailable.
+# WHAT: Ignore generated package-manager binaries and metadata while preserving source files.
+.corepack/
 .env
 .env.*
+!website/.env.example
 .runtimeconfig.json
 firebase-debug.log
 firebase-debug.*.log
