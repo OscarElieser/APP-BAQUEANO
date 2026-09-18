@@ -599,6 +599,26 @@
     saveSession(session);
     updateNavbar();
     window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: session }));
+
+    // Sincronizar usuario con la base de datos Firestore (Directorio de Usuarios)
+    if (typeof window.firebase !== 'undefined' && window.firebase.firestore) {
+      try {
+        const db = window.firebase.firestore();
+        db.collection('users').doc(firebaseUser.uid).set({
+          displayName: session.name,
+          email: session.email,
+          role: session.role,
+          explorerLevel: 'Explorador Inicial',
+          status: 'active',
+          updatedAt: new Date().toISOString(),
+          // Evitamos sobreescribir createdAt si ya existe con merge: true
+          createdAt: firebaseUser.metadata && firebaseUser.metadata.creationTime ? new Date(firebaseUser.metadata.creationTime).toISOString() : new Date().toISOString()
+        }, { merge: true }).catch(function(err) {
+          console.warn('[Baqueano Session] Omitido guardado en Firestore:', err.message);
+        });
+      } catch (err) {}
+    }
+
     return session;
   }
 

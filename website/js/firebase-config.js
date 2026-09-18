@@ -114,4 +114,44 @@
     isReady:          !!firebaseApp
   };
 
+  // ==========================================================================
+  // 📊 TELEMETRÍA DE PÁGINA (AUDITORÍA WEB EN TIEMPO REAL)
+  // Registra visitas a la página en la colección 'audit_logs' de Firestore
+  // ==========================================================================
+  function logPageView() {
+    if (!firebaseApp || typeof firebase === 'undefined' || !firebase.firestore) return;
+    
+    var db = firebase.firestore();
+    var pageName = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Intentar obtener el usuario actual si existe en session/local storage
+    var userEmail = 'Visitante Anónimo';
+    try {
+      var sessionData = sessionStorage.getItem('baqueano_active_user');
+      if (sessionData) {
+        var parsed = JSON.parse(sessionData);
+        if (parsed && parsed.email) userEmail = parsed.email;
+      }
+    } catch(e) {}
+
+    db.collection('audit_logs').add({
+      action: 'PAGE_VISIT',
+      module: 'Telemetría Web',
+      description: 'Acceso detectado en la página: ' + pageName,
+      performedBy: userEmail,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      status: 'success'
+    }).catch(function(err) {
+      console.warn('[Baqueano Telemetry] No se pudo registrar visita:', err.message);
+    });
+  }
+
+  // Ejecutar el registro de visita una vez que el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', logPageView);
+  } else {
+    logPageView();
+  }
+
 })(window);
