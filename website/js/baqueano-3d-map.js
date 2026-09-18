@@ -198,6 +198,7 @@
       this.createAmbientParticles();
       this.drawRoute('ruta_volcanes');
       this.setupInteraction();
+      this.setupHudControls();
       this.setupObserver();
       this.animate();
 
@@ -569,47 +570,42 @@
         MapState.controls.target.set(pos.x, pos.y, pos.z);
       }
 
-      // Inyectar contenido en el modal o drawer territorial
+      // Inyectar contenido en el drawer territorial
       const drawer = document.getElementById('map3dDetailDrawer');
-      const titleEl = document.getElementById('map3dDrawerTitle');
-      const bodyEl = document.getElementById('map3dDrawerBody');
+      if (drawer) {
+        const titleEl = document.getElementById('drawerTitle') || document.getElementById('map3dDrawerTitle');
+        const locEl = document.getElementById('drawerLocation');
+        const descEl = document.getElementById('drawerDesc') || document.getElementById('map3dDrawerBody');
+        const badgeEl = document.getElementById('drawerBadge');
+        const imgEl = document.getElementById('drawerImg');
+        const priceEl = document.getElementById('drawerPrice');
+        const diffEl = document.getElementById('drawerDifficulty');
+        const commEl = document.getElementById('drawerCommunity');
+        const exploreLink = document.getElementById('drawerExploreLink');
 
-      if (drawer && titleEl && bodyEl) {
-        titleEl.innerHTML = `<i class="fa-solid fa-mountain" style="color: ${item.color};"></i> ${item.name}`;
-        bodyEl.innerHTML = `
-          <div style="font-size: 0.88rem; color: #F4E6C1; line-height: 1.6; margin-bottom: 1rem;">
-            ${item.description}
-          </div>
+        if (titleEl) titleEl.textContent = item.name;
+        if (locEl) locEl.textContent = `Nicaragua · ${item.type.toUpperCase()}`;
+        if (descEl) descEl.textContent = item.description;
+        if (badgeEl) badgeEl.textContent = item.type === 'volcano' ? 'Volcán Activo' : item.type === 'lake' ? 'Gran Lago' : item.type === 'island' ? 'Isla Lacustre' : 'Territorio Baqueano';
+        if (imgEl) {
+          const imgMap = {
+            managua: 'assets/images/destinos/cerro_negro.jpg',
+            leon: 'assets/images/destinos/cerro_negro.jpg',
+            granada: 'assets/images/destinos/isletas_de_granada.jpg',
+            rivas: 'assets/images/destinos/isla_de_ometepe.jpg',
+            madriz: 'assets/images/destinos/canon_de_somoto.jpg',
+            matagalpa: 'assets/images/destinos/selva_negra.jpg',
+            jinotega: 'assets/images/destinos/cascada_la_luna.jpg',
+            masaya: 'assets/images/destinos/volcan_masaya.jpg',
+            caribe_sur: 'assets/images/destinos/corn_island.jpg'
+          };
+          imgEl.src = imgMap[territoryKey] || 'assets/images/destinos/canon_de_somoto.jpg';
+        }
+        if (priceEl) priceEl.textContent = territoryKey === 'masaya' ? 'C$ 50 - 180' : territoryKey === 'madriz' ? 'C$ 550' : territoryKey === 'rivas' ? 'C$ 750' : 'C$ 450';
+        if (diffEl) diffEl.textContent = item.elevation > 0.35 ? 'Moderada-Alta' : 'Fácil';
+        if (commEl) commEl.textContent = 'Coop. Verificada';
+        if (exploreLink) exploreLink.href = `destinos.html?q=${encodeURIComponent(item.name.split(' ')[0])}`;
 
-          <div style="margin-bottom: 1rem;">
-            <strong style="color: #FFFFFF; font-size: 0.82rem; display: block; margin-bottom: 0.4rem;">
-              <i class="fa-solid fa-compass" style="color: #F65E01;"></i> Destinos & Atractivos Soberanos:
-            </strong>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-              ${item.highlights.map(h => `
-                <span style="background: rgba(22, 93, 111, 0.4); border: 1px solid rgba(244, 230, 193, 0.2); padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; color: #FFFFFF;">
-                  ${h}
-                </span>
-              `).join('')}
-            </div>
-          </div>
-
-          <div style="margin-bottom: 1.25rem; background: rgba(8, 13, 26, 0.6); padding: 0.75rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
-            <strong style="color: #F4E6C1; font-size: 0.78rem; display: block; margin-bottom: 0.25rem;">
-              <i class="fa-solid fa-guitar" style="color: #F65E01;"></i> Identidad & Tradición:
-            </strong>
-            <span style="font-size: 0.8rem; color: #94A3B8;">${item.culture}</span>
-          </div>
-
-          <div style="display: flex; gap: 0.6rem;">
-            <a href="destinos.html?depto=${encodeURIComponent(item.name.split(' ')[0])}" class="btn-hero-primary" style="flex: 1; text-align: center; font-size: 0.82rem; padding: 0.65rem 0.8rem;">
-              <i class="fa-solid fa-compass"></i> Ver Destinos
-            </a>
-            <button type="button" class="btn-hero-glass" onclick="window.Baqueano3DMap.closeDetailDrawer()" style="font-size: 0.82rem; padding: 0.65rem 0.8rem;">
-              Cerrar
-            </button>
-          </div>
-        `;
         drawer.classList.add('is-open');
       }
     },
@@ -620,6 +616,98 @@
       if (MapState.controls) {
         MapState.controls.autoRotate = true;
         MapState.controls.target.set(0, 0, 0);
+      }
+    },
+
+    setupHudControls() {
+      // 1. Selector de regiones
+      document.querySelectorAll('.btn-map-region').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.btn-map-region').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const region = btn.getAttribute('data-region');
+          this.filterRegion(region);
+        });
+      });
+
+      // 2. Botón rotación
+      const rotBtn = document.getElementById('btnToggle3DRotation');
+      if (rotBtn) {
+        rotBtn.addEventListener('click', () => {
+          if (MapState.controls) {
+            MapState.controls.autoRotate = !MapState.controls.autoRotate;
+            rotBtn.style.color = MapState.controls.autoRotate ? '#F65E01' : '#F4E6C1';
+          }
+        });
+      }
+
+      // 3. Botón reset cámara
+      const resetBtn = document.getElementById('btnReset3DView');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (MapState.controls && MapState.camera) {
+            MapState.camera.position.set(0, 11, 12);
+            MapState.controls.target.set(0, 0, 0);
+            MapState.controls.autoRotate = true;
+          }
+        });
+      }
+
+      // 4. Cerrar drawer
+      const closeBtn = document.getElementById('btnCloseMap3dDrawer');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => this.closeDetailDrawer());
+      }
+
+      // 5. Botón 360 en drawer
+      const btn360 = document.getElementById('btnDrawer360');
+      if (btn360) {
+        btn360.addEventListener('click', () => {
+          const activeKey = MapState.activeLocationKey || 'madriz';
+          if (window.BaqueanoPanorama && typeof window.BaqueanoPanorama.open === 'function') {
+            window.BaqueanoPanorama.open(activeKey);
+          }
+        });
+      }
+
+      // 6. Brújula interactiva del Hero
+      const compassNeedle = document.getElementById('heroCompassNeedle');
+      if (compassNeedle) {
+        window.addEventListener('mousemove', (e) => {
+          const cx = window.innerWidth / 2;
+          const cy = window.innerHeight / 2;
+          const rad = Math.atan2(e.clientY - cy, e.clientX - cx);
+          const deg = (rad * 180) / Math.PI + 90;
+          compassNeedle.style.transform = `rotate(${deg}deg)`;
+        }, { passive: true });
+
+        if (window.DeviceOrientationEvent) {
+          window.addEventListener('deviceorientation', (e) => {
+            if (e.alpha !== null) {
+              compassNeedle.style.transform = `rotate(${-e.alpha}deg)`;
+            }
+          }, { passive: true });
+        }
+      }
+    },
+
+    filterRegion(region) {
+      if (!MapState.controls || !MapState.camera) return;
+      MapState.controls.autoRotate = false;
+
+      if (region === 'pacifico') {
+        MapState.camera.position.set(-3.5, 7.5, 7.5);
+        MapState.controls.target.set(-2, 0.4, 0);
+      } else if (region === 'centro') {
+        MapState.camera.position.set(0.5, 8.5, 6.5);
+        MapState.controls.target.set(0.2, 0.8, -0.4);
+      } else if (region === 'caribe') {
+        MapState.camera.position.set(4.2, 8, 7.5);
+        MapState.controls.target.set(2.5, 0.2, 0);
+      } else {
+        MapState.camera.position.set(0, 11, 12);
+        MapState.controls.target.set(0, 0, 0);
+        MapState.controls.autoRotate = true;
       }
     },
 
@@ -685,5 +773,18 @@
 
   // Exponer objeto globalmente
   window.Baqueano3DMap = Baqueano3DMap;
+
+  // Inicialización automática cuando el DOM esté listo
+  function startBaqueano3DOnReady() {
+    if (document.getElementById('baqueano3dCanvasWrap') || document.getElementById('map3dContainer')) {
+      Baqueano3DMap.init('baqueano3dCanvasWrap');
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startBaqueano3DOnReady);
+  } else {
+    setTimeout(startBaqueano3DOnReady, 50);
+  }
 
 })(window, document);
