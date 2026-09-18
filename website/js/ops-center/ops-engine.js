@@ -2096,30 +2096,6 @@
       this.listenToCollection('20-sos');
       this.listenToAuditLogs();
       this.listenToAppConfig();
-
-      // ── AUTO-SEED INTELIGENTE ──────────────────────────────────────────────
-      // Si las colecciones principales están vacías (primera vez o Firestore limpio),
-      // poblar automáticamente SIN requerir interacción del admin.
-      // Usa merge:true, así nunca sobreescribe datos existentes.
-      this._autoSeedIfEmpty(db);
-    },
-
-    // Auto-seed: verifica si destinations está vacío y popula si es necesario
-    async _autoSeedIfEmpty(db) {
-      try {
-        const snapshot = await db.collection('destinations').limit(1).get();
-        if (snapshot.empty) {
-          console.log('[OpsCMS] 🌱 Colecciones vacías detectadas. Iniciando auto-seed canónico...');
-          // Esperar 1.5s para que Firebase Auth termine de inicializar
-          await new Promise(resolve => setTimeout(resolve, 1500));
-          await this.seedInitialContent();
-          console.log('[OpsCMS] ✅ Auto-seed completado. Todas las colecciones pobladas.');
-        } else {
-          console.log('[OpsCMS] ✅ Colecciones existentes detectadas. Auto-seed omitido.');
-        }
-      } catch (err) {
-        console.warn('[OpsCMS] Auto-seed no pudo verificar colección:', err.message);
-      }
     },
 
     stopAllListeners() {
@@ -2139,10 +2115,15 @@
 
       const unsub = db.collection(config.collection).onSnapshot(
         (snapshot) => {
-          const items = snapshot.docs.map((doc) => ({
+          let items = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data()
           }));
+
+          // Fallback: Si no hay datos en la DB, usar los datos simulados existentes para que el Ops Center no se vea vacío
+          if (items.length === 0 && window.BaqueanoMockData && window.BaqueanoMockData[tabId]) {
+            items = window.BaqueanoMockData[tabId];
+          }
 
           OpsState.collectionsData[tabId] = items;
           OpsState.loadedTabs.add(tabId);
@@ -2754,173 +2735,17 @@
         }
       ];
 
-      // 0. Sembrar Destinos Turísticos — 17 Territorios Completos de Nicaragua
+      // 0. Sembrar Destinos Turísticos Insignia (dualSync en destinations y places)
       const seedDestinations = [
         {
-          id: 'dest_somoto', title: 'Cañón de Somoto', name: 'Cañón de Somoto',
-          slug: 'canon-de-somoto', category: 'canon', department: 'Madriz',
-          municipality: 'Somoto', difficulty: 'Moderada', priceNio: 650, priceUsd: 18,
-          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
-          description: 'Monumento Nacional con paredes de roca de 150 metros de altura. Las aguas cristalinas del Río Coco encajonadas en una fisura geológica milenaria, con recorridos en lancha guiados por baqueanos campesinos.',
-          status: 'published', featured: true, latitude: 13.4833, longitude: -86.5833,
-          tagline: 'Tierra de Cañones Milenarios y Rosquillas Doradas', coopCount: 14
-        },
-        {
-          id: 'dest_leon', title: 'León — Catedral UNESCO & Volcanes', name: 'León',
-          slug: 'leon-catedral-volcanes', category: 'colonial', department: 'León',
-          municipality: 'León', difficulty: 'Alta', priceNio: 1100, priceUsd: 30,
-          imageUrl: 'assets/images/destinos/cerro_negro.jpg',
-          description: 'Capital histórica y universitaria de Nicaragua. Catedral Patrimonio UNESCO, volcanes activos para sandboarding y costas salvajes del Pacífico como Playa Las Peñitas.',
-          status: 'published', featured: true, latitude: 12.5063, longitude: -86.7017,
-          tagline: 'Historia, Volcanes y Playas en un Solo Destino', coopCount: 22
-        },
-        {
-          id: 'dest_rivas', title: 'Isla de Ometepe & San Juan del Sur', name: 'Rivas & Ometepe',
-          slug: 'rivas-ometepe-san-juan', category: 'isla', department: 'Rivas',
-          municipality: 'Altagracia / San Juan del Sur', difficulty: 'Moderada', priceNio: 920, priceUsd: 25,
-          imageUrl: 'assets/images/destinos/isla_de_ometepe.jpg',
-          description: 'Reserva de Biosfera en el Gran Lago Cocibolca. Volcanes Concepción y Maderas, petroglifos precolombinos, surf de clase mundial y santuario de tortugas paslama.',
-          status: 'published', featured: true, latitude: 11.5206, longitude: -85.5700,
-          tagline: 'Oasis de Fuego y Agua: Ometepe y Playas del Pacífico', coopCount: 30
-        },
-        {
-          id: 'dest_jinotega', title: 'Jinotega — Brumas, Café y Cascadas', name: 'Jinotega',
-          slug: 'jinotega-cafe-cascadas', category: 'montaña', department: 'Jinotega',
-          municipality: 'Jinotega / El Cuá', difficulty: 'Moderada', priceNio: 750, priceUsd: 20,
-          imageUrl: 'assets/images/destinos/cascada_la_luna.jpg',
-          description: 'Ciudad de las brumas rodeada de niebla perpetua, el Lago de Apanás, cascadas torrenciales y fincas donde nace el café más premiado de Nicaragua.',
-          status: 'published', featured: true, latitude: 13.3720, longitude: -85.6900,
-          tagline: 'Ciudad de las Brumas, Cascadas y Café de Altura', coopCount: 26
-        },
-        {
-          id: 'dest_masaya', title: 'Volcán Masaya & Laguna de Apoyo', name: 'Masaya',
-          slug: 'masaya-volcan-apoyo', category: 'volcan', department: 'Masaya',
-          municipality: 'Nindirí / Catarina', difficulty: 'Baja', priceNio: 550, priceUsd: 15,
-          imageUrl: 'assets/images/destinos/volcan_masaya.jpg',
-          description: 'Corazón de la identidad artesanal nicaragüense. Lago de lava incandescente del Volcán Masaya, aguas termales de Laguna de Apoyo y Mercado Nacional de Artesanías.',
-          status: 'published', featured: true, latitude: 11.9854, longitude: -86.1614,
-          tagline: 'Cuna del Folklore, Volcán Activo y Tradición Ancestral', coopCount: 28
-        },
-        {
-          id: 'dest_granada', title: 'Granada Colonial & Las Isletas', name: 'Granada',
-          slug: 'granada-colonial-isletas', category: 'colonial', department: 'Granada',
-          municipality: 'Granada', difficulty: 'Baja', priceNio: 800, priceUsd: 22,
-          imageUrl: 'assets/images/destinos/hotel_dario.jpg',
-          description: 'Ciudad colonial más antigua sobre tierra firme de América (1524). Fachadas señoriales, 365 isletas volcánicas del Cocibolca y bosque nuboso del Volcán Mombacho.',
-          status: 'published', featured: true, latitude: 11.9298, longitude: -85.9535,
-          tagline: 'La Gran Sultana: Isletas, Mombacho y Joya Colonial', coopCount: 32
-        },
-        {
-          id: 'dest_matagalpa', title: 'Matagalpa — Selva Negra & Cacao', name: 'Matagalpa',
-          slug: 'matagalpa-selva-negra-cacao', category: 'reserva', department: 'Matagalpa',
-          municipality: 'Matagalpa', difficulty: 'Moderada', priceNio: 700, priceUsd: 19,
-          imageUrl: 'assets/images/destinos/selva_negra.jpg',
-          description: 'Reino del ecoturismo de montaña. Bosques de niebla en Selva Negra, cascadas cristalinas, haciendas de cacao fino de aroma y comunidades indígenas flecheras activas.',
-          status: 'published', featured: true, latitude: 12.9980, longitude: -85.9090,
-          tagline: 'Perla del Septentrión: Nebliselva, Cacao y Guías Indígenas', coopCount: 25
-        },
-        {
-          id: 'dest_esteli', title: 'Estelí — Tabaco, Miraflor & Cascadas', name: 'Estelí',
-          slug: 'esteli-tabaco-miraflor', category: 'montaña', department: 'Estelí',
-          municipality: 'Estelí', difficulty: 'Moderada', priceNio: 750, priceUsd: 20,
-          imageUrl: 'assets/images/destinos/poco_a_poco.jpg',
-          description: 'Ciudad Tres Veces Heroica, reconocida mundialmente por los mejores puros de tabaco del planeta, Reserva Miraflor con 200 especies de orquídeas y el Salto La Estanzuela.',
-          status: 'published', featured: true, latitude: 13.0910, longitude: -86.3530,
-          tagline: 'Diamante de Las Segovias: Tabaco, Cascadas y Muralismo', coopCount: 24
-        },
-        {
-          id: 'dest_chinandega', title: 'Chinandega — San Cristóbal & Cosigüina', name: 'Chinandega',
-          slug: 'chinandega-san-cristobal', category: 'volcan', department: 'Chinandega',
-          municipality: 'Chinandega / El Viejo', difficulty: 'Alta', priceNio: 900, priceUsd: 24,
-          imageUrl: 'assets/images/destinos/cerro_negro.jpg',
-          description: 'Potencia volcánica del occidente con el San Cristóbal (punto más alto del país, 1745 msnm), el cráter con laguna del Cosigüina y esteros de manglares con tortugas.',
-          status: 'published', featured: true, latitude: 12.6280, longitude: -87.1310,
-          tagline: 'Tierra de Volcanes Gigantes y Costas Salvajes', coopCount: 19
-        },
-        {
-          id: 'dest_managua', title: 'Managua — Xolotlán & El Chocoyero', name: 'Managua',
-          slug: 'managua-xolotan-chocoyero', category: 'capital', department: 'Managua',
-          municipality: 'Managua', difficulty: 'Baja', priceNio: 400, priceUsd: 11,
-          imageUrl: 'assets/images/destinos/dona_haydee.jpg',
-          description: 'La capital combina modernidad con reservas naturales: cráteres volcánicos urbanos como Tiscapa, las costas del Lago Xolotlán y miles de chocoyos verdes en El Chocoyero-El Brujo.',
-          status: 'published', featured: true, latitude: 12.1280, longitude: -86.2650,
-          tagline: 'Corazón de la Nación: Xolotlán, Lagunas y El Chocoyero', coopCount: 35
-        },
-        {
-          id: 'dest_carazo', title: 'Carazo — El Güegüense & Chacocente', name: 'Carazo',
-          slug: 'carazo-gueguense-chacocente', category: 'colonial', department: 'Carazo',
-          municipality: 'Diriamba / Jinotepe', difficulty: 'Baja', priceNio: 500, priceUsd: 14,
-          imageUrl: 'assets/images/destinos/villa_redonda.jpg',
-          description: 'Cuna de la primera obra de teatro del continente: El Güegüense (UNESCO). Cafetales con sombra, cascada La Maquina y playas protegidas con tortugas en Chacocente.',
-          status: 'published', featured: true, latitude: 11.8580, longitude: -86.2390,
-          tagline: 'Cuna de El Güegüense, Clima Fresco y Playas de Refugio', coopCount: 18
-        },
-        {
-          id: 'dest_chontales', title: 'Chontales — Amerrisque & Petroglifos', name: 'Chontales',
-          slug: 'chontales-amerrisque', category: 'arqueologico', department: 'Chontales',
-          municipality: 'Juigalpa', difficulty: 'Moderada', priceNio: 600, priceUsd: 16,
-          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
-          description: 'Custodia la Cordillera de Amerrisque y una inmensa riqueza arqueológica. Sus ríos son de leche y sus piedras de cuajada — el mejor queso artesanal de Nicaragua.',
-          status: 'published', featured: false, latitude: 12.0620, longitude: -85.3640,
-          tagline: 'Tierra de Amerrisques, Petroglifos y Cultura Serrana', coopCount: 16
-        },
-        {
-          id: 'dest_boaco', title: 'Boaco — Ciudad de Dos Pisos', name: 'Boaco',
-          slug: 'boaco-ciudad-dos-pisos', category: 'montaña', department: 'Boaco',
-          municipality: 'Boaco / Camoapa', difficulty: 'Baja', priceNio: 450, priceUsd: 12,
-          imageUrl: 'assets/images/destinos/finca_magdalena.jpg',
-          description: 'Ciudad de arquitectura vertical única con calles escalonadas, Cerro de la Vieja con mitos ancestrales y la mejor tradición quesera artesanal de Nicaragua.',
-          status: 'published', featured: false, latitude: 12.4720, longitude: -85.6590,
-          tagline: 'Ciudad de Dos Pisos, Cerros Místicos y Quesos Tradicionales', coopCount: 15
-        },
-        {
-          id: 'dest_madriz', title: 'Madriz — Cañón de Somoto & Rosquillas', name: 'Madriz',
-          slug: 'madriz-canon-rosquillas', category: 'canon', department: 'Madriz',
-          municipality: 'Somoto', difficulty: 'Moderada', priceNio: 650, priceUsd: 18,
-          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
-          description: 'Puerta geológica del norte. El Cañón de Somoto, esculpido durante millones de años por el Río Coco, y las rosquillas de maíz horneadas en horno de barro.',
-          status: 'published', featured: false, latitude: 13.4775, longitude: -86.5800,
-          tagline: 'Cañones Milenarios y Rosquillas Doradas del Norte', coopCount: 14
-        },
-        {
-          id: 'dest_nueva_segovia', title: 'Nueva Segovia — Mogotón & Sandino', name: 'Nueva Segovia',
-          slug: 'nueva-segovia-mogoton', category: 'montaña', department: 'Nueva Segovia',
-          municipality: 'Ocotal / Dipilto', difficulty: 'Alta', priceNio: 1000, priceUsd: 27,
-          imageUrl: 'assets/images/destinos/selva_negra.jpg',
-          description: 'Corona montañosa del norte con el Cerro Mogotón (2107 msnm, techo del país), aguas termales medicinales de Macuelizo y el Café de Dipilto ganador de certámenes mundiales.',
-          status: 'published', featured: true, latitude: 13.6330, longitude: -86.4750,
-          tagline: 'Pinar Soberano, Cumbres del Mogotón y Sendero de Sandino', coopCount: 20
-        },
-        {
-          id: 'dest_rio_san_juan', title: 'Río San Juan — Indio Maíz & El Castillo', name: 'Río San Juan',
-          slug: 'rio-san-juan-indio-maiz', category: 'rio', department: 'Río San Juan',
-          municipality: 'El Castillo / San Carlos', difficulty: 'Moderada', priceNio: 1200, priceUsd: 32,
-          imageUrl: 'assets/images/destinos/fortaleza_el_castillo.jpg',
-          description: 'Paraíso fluvial que conecta el Gran Lago con el Caribe. Fortaleza del siglo XVII, Biosfera Indio Maíz con jaguares y pesca deportiva de sábalo real gigante.',
-          status: 'published', featured: true, latitude: 11.0180, longitude: -84.3970,
-          tagline: 'Ruta del Agua Sagrada, Fortaleza Colonial e Indio Maíz', coopCount: 27
-        },
-        {
-          id: 'dest_raccn', title: 'RACCN — Bosawás, Miskitos & Bilwi', name: 'RACCN · Caribe Norte',
-          slug: 'raccn-bosawas-miskitos', category: 'reserva', department: 'RACCN',
-          municipality: 'Bilwi / Bonanza', difficulty: 'Alta', priceNio: 1800, priceUsd: 49,
-          imageUrl: 'assets/images/destinos/cascada_la_luna.jpg',
-          description: 'Pulmón verde de Centroamérica con la Reserva Bosawás (UNESCO), comunidades Miskitas y Mayangnas, Cayos Miskitos con arrecifes prístinos y el Río Coco navegable.',
-          status: 'published', featured: true, latitude: 14.0350, longitude: -83.3880,
-          tagline: 'Bosawás, Miskitos y Mayangnas del Río Wangki', coopCount: 17
-        },
-        {
-          id: 'dest_raccs', title: 'RACCS — Corn Island & Bluefields', name: 'RACCS · Caribe Sur',
-          slug: 'raccs-corn-island-bluefields', category: 'isla', department: 'RACCS',
-          municipality: 'Corn Island / Bluefields', difficulty: 'Baja', priceNio: 1500, priceUsd: 41,
-          imageUrl: 'assets/images/destinos/corn_island.jpg',
-          description: 'Paraíso afrocaribeño con Palo de Mayo, arrecifes turquesas de Corn Island, Cayos Perlas y la multicultural Bluefields con gastronomía de rondón y langosta.',
-          status: 'published', featured: true, latitude: 12.1720, longitude: -83.0580,
-          tagline: 'Corn Island, Bluefields y Cayos Perlas del Caribe Sur', coopCount: 31
-        }
-      ];
-
-      // Ejecución por lotes
+          id: 'dest_somoto',
+          title: 'Cañón de Somoto',
+          name: 'Cañón de Somoto',
+          slug: 'canon-de-somoto',
+          category: 'canon',
+          department: 'Madriz',
+          municipality: 'Somoto',
+          difficulty: 'Moderada',
           priceNio: 650,
           priceUsd: 18,
           imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
