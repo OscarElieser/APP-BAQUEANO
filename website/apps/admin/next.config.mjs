@@ -6,7 +6,6 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 
 const nextConfig = {
   reactStrictMode: true,
-  outputFileTracingRoot: workspaceRoot,
   transpilePackages: ["@baqueano/config", "@baqueano/firebase", "@baqueano/types", "@baqueano/ui", "@baqueano/validators"],
   async headers() {
     return [

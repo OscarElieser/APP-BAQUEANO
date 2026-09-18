@@ -55,7 +55,11 @@ import type {
   BusinessSubscriptionRecord,
   DataResult,
   PaymentOrderRecord,
-  PlaceRecord
+  PlaceRecord,
+  BaqueanoUser,
+  UserRole,
+  Reservation,
+  ReservationStatus
 } from "@baqueano/types";
 import {
   auditLogSchema,
@@ -63,9 +67,12 @@ import {
   businessSubscriptionRecordSchema,
   paymentOrderRecordSchema,
   placeRecordSchema,
+  baqueanoUserSchema,
+  reservationSchema,
   type BusinessRecordInput,
   type PaymentOrderRecordInput,
-  type PlaceRecordInput
+  type PlaceRecordInput,
+  type BaqueanoUserInput
 } from "@baqueano/validators";
 
 const firebaseConfig = {
@@ -449,3 +456,91 @@ export async function listAuditLogs(limitCount = 50): Promise<DataResult<AuditLo
     };
   }
 }
+
+// ============================================================================
+// SECCIÓN 7: USUARIOS & ROLES (users)
+// ============================================================================
+
+export async function listUsersForAdmin(): Promise<DataResult<BaqueanoUser>> {
+  const availability = getFirebaseAvailability();
+  if (!availability.available) return { source: "seed", isConnected: false, items: [] };
+
+  try {
+    const snapshot = await getDocs(
+      query(baqueanoCollection(firestoreCollections.users), orderBy("createdAtIso", "desc"), limit(100))
+    );
+
+    const items = snapshot.docs
+      .map((d) => baqueanoUserSchema.safeParse({ ...d.data(), id: d.id }))
+      .filter((r) => r.success)
+      .map((r) => r.data as BaqueanoUser);
+
+    return { source: "firestore", isConnected: true, items };
+  } catch (err) {
+    return {
+      source: "seed",
+      isConnected: false,
+      items: [],
+      warning: err instanceof Error ? err.message : "Error al consultar usuarios"
+    };
+  }
+}
+
+export async function updateUserRole(userId: string, role: UserRole): Promise<void> {
+  const auth = getBaqueanoAuth();
+  const token = await auth.currentUser?.getIdToken();
+
+  if (!token) {
+    throw new Error("No hay usuario autenticado.");
+  }
+
+  const res = await fetch("/api/auth/claims", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({ targetUid: userId, newRole: role })
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || "Error al actualizar el rol mediante Custom Claims.");
+  }
+}
+
+// ============================================================================
+// SECCIÓN 8: RESERVAS (reservations)
+// ============================================================================
+
+export async function listReservationsForAdmin(): Promise<DataResult<Reservation>> {
+  const availability = getFirebaseAvailability();
+  if (!availability.available) return { source: "seed", isConnected: false, items: [] };
+
+  try {
+    const snapshot = await getDocs(
+      query(baqueanoCollection(firestoreCollections.reservations), orderBy("createdAt", "desc"), limit(100))
+    );
+
+    const items = snapshot.docs
+      .map((d) => reservationSchema.safeParse({ ...d.data(), id: d.id }))
+      .filter((r) => r.success)
+      .map((r) => r.data as Reservation);
+
+    return { source: "firestore", isConnected: true, items };
+  } catch (err) {
+    return {
+      source: "seed",
+      isConnected: false,
+      items: [],
+      warning: err instanceof Error ? err.message : "Error al consultar reservas"
+    };
+  }
+}
+
+export async function updateReservationStatus(reservationId: string, status: ReservationStatus): Promise<void> {
+  const docRef = doc(getBaqueanoDb(), firestoreCollections.reservations, reservationId);
+  const updatedAt = new Date().toISOString();
+  await updateDoc(docRef, { status, updatedAt });
+}
+
