@@ -314,7 +314,8 @@
         maxZoom: MAP_CONFIG.maxZoom,
         zoomControl: true,
         scrollWheelZoom: true,
-        // maxBounds: MAP_CONFIG.maxBounds,   // Opcional
+        maxBounds: MAP_CONFIG.maxBounds,
+        maxBoundsViscosity: 1.0,
         attributionControl: true
       });
 
