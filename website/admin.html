@@ -278,11 +278,10 @@
       <!-- TOPBAR FIJO MATE -->
       <header class="ops-topbar-matte">
         <div class="ops-topbar-left">
-          <button class="ops-global-search-btn" id="opsCommandPaletteTrigger">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Buscar destino, negocio, usuario o comando...</span>
-            <span class="ops-kbd-badge">Ctrl+K</span>
-          </button>
+          <div class="ops-topbar-brand-indicator">
+            <span class="ops-topbar-shield"><i class="fa-solid fa-shield-halved"></i></span>
+            <span class="ops-topbar-title">Centro de Mando Nacional</span>
+          </div>
         </div>
 
         <div class="ops-topbar-right">
@@ -306,6 +305,15 @@
           </div>
         </div>
       </header>
+
+      <!-- FRANJA DE BÚSQUEDA / PALETA DE COMANDOS GLOBAL (DEBAJO DEL HEADER) -->
+      <div class="ops-search-strip">
+        <button class="ops-global-search-btn" id="opsCommandPaletteTrigger">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Buscar destino, negocio, usuario o comando...</span>
+          <span class="ops-kbd-badge">Ctrl+K</span>
+        </button>
+      </div>
 
       <!-- ÁREA DE VISTAS (WORK AREA) -->
       <main class="ops-content-area">

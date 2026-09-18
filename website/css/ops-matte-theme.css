@@ -330,7 +330,39 @@
   align-items: center;
   gap: 1.25rem;
   flex: 1;
-  max-width: 600px;
+}
+
+.ops-topbar-brand-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ops-text-primary);
+  letter-spacing: 0.3px;
+}
+
+.ops-topbar-shield {
+  color: var(--bq-accent);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.ops-search-strip {
+  background-color: var(--ops-bg-base);
+  border-bottom: 1px solid var(--ops-border-subtle);
+  padding: 0.65rem 1.75rem;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: var(--ops-topbar-height);
+  z-index: 85;
+}
+
+.ops-search-strip .ops-global-search-btn {
+  width: 100%;
+  max-width: 100%;
 }
 
 .ops-global-search-btn {
