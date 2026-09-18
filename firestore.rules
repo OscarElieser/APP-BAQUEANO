@@ -32,7 +32,12 @@ service cloud.firestore {
       return isSignedIn()
         && (request.auth.token.admin == true
           || request.auth.token.role == 'admin'
-          || request.auth.token.role == 'super_admin');
+          || request.auth.token.role == 'super_admin'
+          || request.auth.token.email in [
+            'oscarelieser.informatica.inatec@gmail.com',
+            'byoscarelieser@gmail.com',
+            'vigoronmixt@gmail.com'
+          ]);
     }
 
     function isOwner(ownerUid) {
@@ -242,12 +247,13 @@ service cloud.firestore {
         || (isSignedIn()
           && get(/databases/$(database)/documents/businesses/$(businessId))
             .data.ownerUid == request.auth.uid);
-      allow write: if false;
+      allow write: if isAdmin();
     }
 
     match /audit_logs/{logId} {
       allow read: if isAdmin();
-      allow write: if false;
+      allow create: if isAdmin();
+      allow update, delete: if false;
     }
 
     match /rate_limits/{limitId} {
@@ -284,6 +290,56 @@ service cloud.firestore {
 
     match /municipalities/{municipalityId} {
       allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /experiences/{expId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /cultural_items/{itemId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /gastronomy/{dishId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /history_timeline/{periodId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /sustainability_initiatives/{initId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /environmental_reports/{reportId} {
+      allow create: if isSignedIn();
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /emergency_directory/{dirId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /pages/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      match /sections/{sectionId} {
+        allow read: if true;
+        allow write: if isAdmin();
+      }
+    }
+
+    match /roles/{roleId} {
+      allow read: if isAdmin();
       allow write: if isAdmin();
     }
 

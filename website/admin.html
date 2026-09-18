@@ -696,25 +696,267 @@
         <input type="text" class="ops-command-input" id="opsCommandSearchInput" placeholder="Escribe un comando o navega a un módulo...">
         <button class="ops-sidebar-toggle-btn" id="opsCommandCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="ops-command-results-list">
-        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && switchTab('01-dashboard')">
+      <div class="ops-command-results-list" id="opsCommandResultsList">
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('01-dashboard')">
           <i class="fa-solid fa-gauge-high"></i> <span>Abrir Dashboard Principal</span>
         </div>
-        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && switchTab('03-destinos')">
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('03-destinos')">
           <i class="fa-solid fa-mountain"></i> <span>Gestionar Destinos Turísticos</span>
         </div>
-        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && switchTab('08-negocios')">
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('08-negocios')">
           <i class="fa-solid fa-store"></i> <span>Revisar Negocios Pendientes</span>
         </div>
-        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && switchTab('20-sos')">
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('20-sos')">
           <i class="fa-solid fa-tower-broadcast"></i> <span>Monitorear Centro SOS</span>
         </div>
-        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && switchTab('24-builder')">
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('24-builder')">
           <i class="fa-solid fa-cubes"></i> <span>Abrir Website Builder</span>
         </div>
-        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && switchTab('27-auditoria')">
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('27-auditoria')">
           <i class="fa-solid fa-file-shield"></i> <span>Ver Registro de Auditoría</span>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN REFORZADA (OPS DIALOG) -->
+  <div class="ops-modal-backdrop" id="opsConfirmModal">
+    <div class="ops-modal-box">
+      <h3 class="ops-modal-title" id="opsConfirmTitle">¿Confirmar Acción?</h3>
+      <p class="ops-modal-desc" id="opsConfirmDesc">Esta acción impactará los registros de la base de datos de producción.</p>
+      <div class="ops-modal-actions">
+        <button type="button" class="btn-ops-matte" id="opsConfirmCancelBtn">Cancelar</button>
+        <button type="button" class="btn-ops-matte primary" id="opsConfirmOkBtn">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE VISTA PREVIA (PREVIEW MODAL) -->
+  <div class="ops-modal-backdrop" id="opsPreviewModal">
+    <div class="ops-modal-box" style="max-width: 680px; width: 92%;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+        <h3 class="ops-modal-title" id="previewModalTitle" style="margin:0;">Vista Previa</h3>
+        <button class="ops-sidebar-toggle-btn" id="previewModalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="previewModalBody"></div>
+    </div>
+  </div>
+
+  <!-- BARRA FLOTANTE DE ACCIONES MASIVAS -->
+  <div class="ops-bulk-bar" id="opsBulkBar">
+    <span class="ops-bulk-count" id="opsBulkCount">0 seleccionados</span>
+    <button type="button" class="btn-ops-matte" id="btnBulkPublish"><i class="fa-solid fa-circle-check"></i> Publicar</button>
+    <button type="button" class="btn-ops-matte" id="btnBulkDraft"><i class="fa-solid fa-file-pen"></i> Borrador</button>
+    <button type="button" class="btn-ops-matte" id="btnBulkArchive"><i class="fa-solid fa-box-archive"></i> Archivar</button>
+    <button type="button" class="btn-ops-matte danger" id="btnBulkTrash"><i class="fa-solid fa-trash-can"></i> Papelera</button>
+  </div>
+
+  <!-- CONTENEDOR DE TOASTS FLOTANTES -->
+  <div class="ops-toast-container" id="opsToastContainer"></div>
+
+  <!-- OFFCANVAS DRAWER UNIVERSAL DE EDICIÓN & CREACIÓN -->
+  <div class="ops-drawer-backdrop" id="opsEntityDrawer">
+    <div class="ops-drawer-panel">
+      <div class="ops-drawer-header">
+        <div>
+          <h2 class="ops-drawer-title" id="opsDrawerTitle">Nuevo Registro</h2>
+          <p class="ops-drawer-subtitle" id="opsDrawerSubtitle">Módulo Administrativo</p>
+        </div>
+        <button type="button" class="ops-drawer-close-btn" id="opsDrawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Navegación de pestañas del Drawer -->
+      <div class="ops-drawer-tabs">
+        <button type="button" class="ops-drawer-tab-btn is-active" data-drawer-tab="general"><i class="fa-solid fa-file-lines"></i> General</button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="location"><i class="fa-solid fa-map-location-dot"></i> Territorio</button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="pricing"><i class="fa-solid fa-tag"></i> Tarifas &amp; Contacto</button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="media"><i class="fa-solid fa-image"></i> Multimedia</button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="seo"><i class="fa-solid fa-globe"></i> SEO</button>
+      </div>
+
+      <div class="ops-drawer-body">
+        <input type="hidden" id="entityCollection" value="03-destinos">
+        <input type="hidden" id="entityId" value="">
+
+        <!-- PANE GENERAL -->
+        <div class="ops-drawer-tab-pane is-active" id="pane-general">
+          <div class="ops-form-group">
+            <label class="ops-form-label">Nombre / Título Oficial *</label>
+            <input type="text" class="ops-form-input" id="entityTitle" placeholder="Ej. Cañón de Somoto, Volcán Mombacho...">
+          </div>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Slug URL Amigable</label>
+              <input type="text" class="ops-form-input" id="entitySlug" placeholder="ej. canon-de-somoto">
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Categoría</label>
+              <input type="text" class="ops-form-input" id="entityCategory" placeholder="playas, volcanes, rios, senderismo...">
+            </div>
+          </div>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Estado Editorial</label>
+              <select class="ops-form-select" id="entityStatus">
+                <option value="published">Publicado</option>
+                <option value="draft">Borrador</option>
+                <option value="archived">Archivado</option>
+              </select>
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Orden de Aparición</label>
+              <input type="number" class="ops-form-input" id="entitySortOrder" value="0">
+            </div>
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Resumen Ejecutivo</label>
+            <input type="text" class="ops-form-input" id="entityShortDesc" placeholder="Breve sinopsis para listados y tarjetas móviles">
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Descripción Detallada / Contenido Enriquecido</label>
+            <textarea class="ops-form-textarea" id="entityDescription" rows="5" placeholder="Descripción profunda, normas de acceso, recomendaciones campesinas..."></textarea>
+          </div>
+        </div>
+
+        <!-- PANE UBICACIÓN -->
+        <div class="ops-drawer-tab-pane" id="pane-location">
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Departamento / Región</label>
+              <select class="ops-form-select" id="entityDepartment">
+                <option value="Nacional">Nacional / Multiterritorial</option>
+                <option value="Boaco">Boaco</option>
+                <option value="Carazo">Carazo</option>
+                <option value="Chinandega">Chinandega</option>
+                <option value="Chontales">Chontales</option>
+                <option value="Estelí">Estelí</option>
+                <option value="Granada">Granada</option>
+                <option value="Jinotega">Jinotega</option>
+                <option value="León">León</option>
+                <option value="Madriz">Madriz</option>
+                <option value="Managua">Managua</option>
+                <option value="Masaya">Masaya</option>
+                <option value="Matagalpa">Matagalpa</option>
+                <option value="Nueva Segovia">Nueva Segovia</option>
+                <option value="Rivas">Rivas</option>
+                <option value="Río San Juan">Río San Juan</option>
+                <option value="RACCN">RACCN (Caribe Norte)</option>
+                <option value="RACCS">RACCS (Caribe Sur)</option>
+              </select>
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Municipio</label>
+              <input type="text" class="ops-form-input" id="entityMunicipality" placeholder="Ej. Tola, San Juan del Sur, Matagalpa...">
+            </div>
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Dirección / Referencia de Llegada</label>
+            <input type="text" class="ops-form-input" id="entityAddress" placeholder="Ej. De la iglesia 2 cuadras al norte...">
+          </div>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Latitud GPS (Ej. 12.1364)</label>
+              <input type="number" step="any" class="ops-form-input" id="entityLatitude" placeholder="12.1364">
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Longitud GPS (Ej. -86.2514)</label>
+              <input type="number" step="any" class="ops-form-input" id="entityLongitude" placeholder="-86.2514">
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE TARIFAS & CONTACTO -->
+        <div class="ops-drawer-tab-pane" id="pane-pricing">
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Tarifa en Córdobas (C$ NIO)</label>
+              <input type="number" step="any" class="ops-form-input" id="entityPriceNio" placeholder="500">
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Tarifa en Dólares ($ USD)</label>
+              <input type="number" step="any" class="ops-form-input" id="entityPriceUsd" placeholder="15">
+            </div>
+          </div>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Teléfono Convencional</label>
+              <input type="text" class="ops-form-input" id="entityPhone" placeholder="+505 2222-0000">
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">WhatsApp Directo</label>
+              <input type="text" class="ops-form-input" id="entityWhatsapp" placeholder="+505 8888-0000">
+            </div>
+          </div>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Correo Electrónico</label>
+              <input type="email" class="ops-form-input" id="entityEmail" placeholder="contacto@aliado.com">
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Sitio Web / Red Social</label>
+              <input type="url" class="ops-form-input" id="entityWebsite" placeholder="https://...">
+            </div>
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Day Pass / Paquete / Amenidades</label>
+            <input type="text" class="ops-form-input" id="entityDayPass" placeholder="Acceso piscina, almuerzo típico, senderismo guiado...">
+          </div>
+        </div>
+
+        <!-- PANE MULTIMEDIA -->
+        <div class="ops-drawer-tab-pane" id="pane-media">
+          <input type="file" id="entityFileInput" accept="image/*,video/*,audio/*,.pdf" style="display: none;">
+          <div class="ops-dropzone" id="entityDropzone">
+            <i class="fa-solid fa-cloud-arrow-up ops-dropzone-icon"></i>
+            <div style="font-weight: 600; color: #fff; margin-bottom: 0.25rem;">Haz clic para subir a Firebase Storage</div>
+            <div style="font-size: 0.76rem; color: var(--ops-text-muted);">Soporta JPG, PNG, WebP de alta resolución</div>
+          </div>
+
+          <div class="ops-form-group" style="margin-top: 1rem;">
+            <label class="ops-form-label">URL Permanente de Imagen</label>
+            <input type="text" class="ops-form-input" id="entityImageUrl" placeholder="https://firebasestorage.googleapis.com/...">
+          </div>
+
+          <div class="ops-preview-box" id="entityPreviewBox" style="display: none; margin-top: 1rem;">
+            <img src="" id="entityPreviewImg" class="ops-preview-img" alt="Vista previa">
+            <div style="margin-top: 0.5rem; text-align: right;">
+              <button type="button" class="btn-ops-matte danger" id="btnRemovePreview" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">
+                <i class="fa-solid fa-trash-can"></i> Quitar Imagen
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE SEO -->
+        <div class="ops-drawer-tab-pane" id="pane-seo">
+          <div class="ops-form-group">
+            <label class="ops-form-label">Meta Título Canónico</label>
+            <input type="text" class="ops-form-input" id="entityMetaTitle" placeholder="Título para Google y OpenGraph">
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label">Meta Descripción</label>
+            <textarea class="ops-form-textarea" id="entityMetaDesc" rows="3" placeholder="Descripción optimizada para buscadores (máx 160 caracteres)"></textarea>
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label">Palabras Clave (Keywords)</label>
+            <input type="text" class="ops-form-input" id="entityKeywords" placeholder="nicaragua, turismo rural, volcanes, baqueano">
+          </div>
+        </div>
+      </div>
+
+      <div class="ops-drawer-footer">
+        <button type="button" class="btn-ops-matte" id="opsDrawerCancelBtn">Cancelar</button>
+        <button type="button" class="btn-ops-matte" id="opsDrawerSaveDraftBtn"><i class="fa-solid fa-file-pen"></i> Guardar Borrador</button>
+        <button type="button" class="btn-ops-matte primary" id="opsDrawerSavePublishBtn"><i class="fa-solid fa-paper-plane"></i> Publicar Registro</button>
       </div>
     </div>
   </div>
@@ -723,39 +965,28 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/ops-center/ops-engine.js"></script>
 
   <script>
-    function promptNewDestination() {
-      const name = prompt('Nombre del nuevo destino turístico:');
-      if (!name || !name.trim()) return;
-      const dept = prompt('Departamento (ej. Rivas, León, Matagalpa, Granada):', 'Rivas');
-      const category = prompt('Categoría (ej. playas, volcanes, rios, naturaleza):', 'playas');
-      const price = prompt('Tarifa en Córdobas (C$):', '500');
+    // Puente de compatibilidad global sin errores de consola
+    window.switchTab = function(tabId) {
+      if (window.BaqueanoOpsEngine && typeof window.BaqueanoOpsEngine.switchTab === 'function') {
+        window.BaqueanoOpsEngine.switchTab(tabId);
+      }
+    };
 
-      window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.saveDestination({
-        name: name.trim(),
-        department: dept || 'Nacional',
-        category: category || 'general',
-        priceNio: parseFloat(price) || 0,
-        status: 'published'
-      }).then(() => {
-        alert(`¡Destino "${name}" creado y publicado exitosamente en Firestore!`);
-      }).catch(err => {
-        alert('Error al guardar en Firestore: ' + err.message);
-      });
+    function promptNewDestination() {
+      if (window.BaqueanoOpsEngine && typeof window.BaqueanoOpsEngine.openCreateDrawer === 'function') {
+        window.BaqueanoOpsEngine.openCreateDrawer('03-destinos');
+      }
     }
 
     function saveWebsiteConfig() {
-      const text = document.getElementById('cfgAnnouncementText')?.value || '';
-      if (!window.firebase || !window.firebase.firestore) return;
-      window.firebase.firestore().collection('app_config').doc('global').set({
-        announcementText: text,
-        updatedAt: new Date().toISOString()
-      }, { merge: true }).then(() => {
-        alert('Configuración guardada en Firestore. La Website y la aplicación Android reflejarán este cambio.');
-      }).catch(err => alert('Error: ' + err.message));
+      if (window.BaqueanoOpsEngine && typeof window.BaqueanoOpsEngine.saveGlobalAnnouncement === 'function') {
+        window.BaqueanoOpsEngine.saveGlobalAnnouncement();
+      }
     }
   </script>
 </body>
