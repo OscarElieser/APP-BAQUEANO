@@ -35,7 +35,7 @@ interface ExperienceNotification {
   read: boolean;
 }
 
-const mockNotifications: ExperienceNotification[] = [
+const disconnectedNotificationExamples: ExperienceNotification[] = [
   {
     id: "notif-1",
     title: "Reserva Confirmada: Taller de Café",
@@ -69,7 +69,7 @@ const mockNotifications: ExperienceNotification[] = [
 ];
 
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState<ExperienceNotification[]>(mockNotifications);
+  const [notifications, setNotifications] = useState<ExperienceNotification[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
 
   const unreadCount = notifications.filter(n => !n.read).length;

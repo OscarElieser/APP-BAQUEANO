@@ -61,21 +61,21 @@ export async function requestReservation(input: ReservationInput): Promise<{ suc
 }
 
 export async function getExplorerReservations(explorerId: string): Promise<DataResult<Reservation>> {
-  const filtered = SEED_RESERVATIONS.filter((res) => !explorerId || res.explorerId === explorerId);
+  const filtered: readonly Reservation[] = [];
   return {
     source: "seed",
     isConnected: false,
     items: filtered,
-    warning: "Mostrando reservas locales de demostración. Conexión a Firestore en vivo pendiente de autenticación."
+    warning: "Las reservas no estan disponibles hasta conectar una sesion autenticada."
   };
 }
 
 export async function getHostReservations(hostId: string): Promise<DataResult<Reservation>> {
-  const filtered = SEED_RESERVATIONS.filter((res) => !hostId || res.hostId === hostId);
+  const filtered: readonly Reservation[] = [];
   return {
     source: "seed",
     isConnected: false,
     items: filtered,
-    warning: "Mostrando reservas del anfitrión en entorno local."
+    warning: "Las reservas del anfitrion no estan disponibles hasta conectar una sesion autenticada."
   };
 }

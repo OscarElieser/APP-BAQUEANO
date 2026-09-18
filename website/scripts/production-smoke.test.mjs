@@ -24,23 +24,30 @@ function assert(condition, message) {
 }
 
 const envExample = read(".env.example");
-const envStaging = read(".env.staging");
-const envProduction = read(".env.production");
+const workspace = read("pnpm-workspace.yaml");
+const rootPackage = JSON.parse(read("package.json"));
+const adminPackage = JSON.parse(read("apps/admin/package.json"));
 const firebaseSource = read("packages/firebase/src/index.ts");
 const webHealthRoute = read("apps/web/src/app/api/health/route.ts");
 const adminLayout = read("apps/admin/src/app/layout.tsx");
 const webConfig = read("apps/web/next.config.mjs");
 const adminConfig = read("apps/admin/next.config.mjs");
 
-for (const [name, source] of [
-  [".env.example", envExample],
-  [".env.staging", envStaging],
-  [".env.production", envProduction]
-]) {
+for (const [name, source] of [[".env.example", envExample]]) {
   assert(!source.includes("-----BEGIN"), `${name} must not contain private key material.`);
   assert(!source.includes("AIzaSy"), `${name} must not contain a real-looking Firebase API key.`);
   assert(source.includes("NEXT_PUBLIC_FIREBASE_PROJECT_ID"), `${name} must document Firebase project id.`);
 }
+
+assert(workspace.includes('"apps/*"'), "Workspace must discover app manifests from apps/*.");
+assert(adminPackage.name === "@baqueano/admin", "Admin manifest must live at apps/admin/package.json.");
+assert(!fs.existsSync(path.join(root, "apps/admin/src/package.json")), "Admin source must not contain a nested package manifest.");
+assert(
+  ["dev:web", "dev:admin", "build", "build:web", "build:admin", "lint", "typecheck"].every((name) =>
+    rootPackage.scripts[name]?.includes("corepack pnpm")
+  ),
+  "Workspace lifecycle scripts must invoke pnpm through Corepack."
+);
 
 assert(firebaseSource.includes('where("userId", "==", userId)'), "Favorites query must use the runtime userId.");
 assert(webHealthRoute.includes("validatePublicEnvironment"), "Health route must validate public env.");

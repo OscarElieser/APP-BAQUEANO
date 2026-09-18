@@ -33,7 +33,7 @@ import {
 import { passportService } from "../../services/experience/passport.service";
 
 export default function PassportPage() {
-  const entries = passportService.getPassportEntries("user-demo-explorador");
+  const entries = passportService.getPassportEntries("");
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 space-y-8">

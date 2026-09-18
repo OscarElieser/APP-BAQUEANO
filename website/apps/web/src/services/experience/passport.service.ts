@@ -24,7 +24,7 @@ import type { PassportEntryRecord } from "@baqueano/types";
 const SEED_PASSPORT_ENTRIES: readonly PassportEntryRecord[] = [
   {
     entryId: "pass-01",
-    userId: "user-demo-explorador",
+    userId: "",
     placeId: "cerro-negro",
     placeName: "Volcán Cerro Negro",
     territoryId: "Leon",
@@ -36,7 +36,7 @@ const SEED_PASSPORT_ENTRIES: readonly PassportEntryRecord[] = [
   },
   {
     entryId: "pass-02",
-    userId: "user-demo-explorador",
+    userId: "",
     placeId: "san-juan-de-oriente-talleres",
     placeName: "Talleres Cerámicos de San Juan de Oriente",
     territoryId: "Masaya",
@@ -51,15 +51,11 @@ const SEED_PASSPORT_ENTRIES: readonly PassportEntryRecord[] = [
 export class PassportService {
   private entries: Map<string, PassportEntryRecord[]> = new Map();
 
-  constructor() {
-    this.entries.set("user-demo-explorador", [...SEED_PASSPORT_ENTRIES]);
-  }
-
   /**
    * Obtiene los sellos y entradas verificadas del pasaporte del usuario.
    */
   public getPassportEntries(userId: string): readonly PassportEntryRecord[] {
-    return this.entries.get(userId) ?? this.entries.get("user-demo-explorador") ?? [];
+    return this.entries.get(userId) ?? [];
   }
 
   /**

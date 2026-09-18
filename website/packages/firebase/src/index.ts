@@ -118,14 +118,14 @@ export function baqueanoCollection<T extends DocumentData>(path: string): Collec
 /**
  * Consulta pública: Retorna únicamente lugares en estado publicado.
  */
-export async function listPublishedPlaces(seedItems: readonly PlaceRecord[] = []): Promise<DataResult<PlaceRecord>> {
+export async function listPublishedPlaces(): Promise<DataResult<PlaceRecord>> {
   const availability = getFirebaseAvailability();
 
   if (!availability.available) {
     return {
       source: "seed",
       isConnected: false,
-      items: seedItems,
+      items: [],
       warning: availability.reason
     };
   }
@@ -138,16 +138,12 @@ export async function listPublishedPlaces(seedItems: readonly PlaceRecord[] = []
       .filter((result) => result.success)
       .map((result) => result.data);
 
-    if (items.length === 0 && seedItems.length > 0) {
-      return { source: "seed", isConnected: true, items: seedItems, warning: "Firestore vacio, mostrando catalogo base." };
-    }
-
     return { source: "firestore", isConnected: true, items };
   } catch (error) {
     return {
       source: "seed",
       isConnected: false,
-      items: seedItems,
+      items: [],
       warning: error instanceof Error ? error.message : "Firestore places query failed."
     };
   }
@@ -156,14 +152,14 @@ export async function listPublishedPlaces(seedItems: readonly PlaceRecord[] = []
 /**
  * Consulta de Control Center: Retorna todos los lugares sin filtrar por estado.
  */
-export async function listPlacesForAdmin(seedItems: readonly PlaceRecord[] = []): Promise<DataResult<PlaceRecord>> {
+export async function listPlacesForAdmin(): Promise<DataResult<PlaceRecord>> {
   const availability = getFirebaseAvailability();
 
   if (!availability.available) {
     return {
       source: "seed",
       isConnected: false,
-      items: seedItems,
+      items: [],
       warning: availability.reason
     };
   }
@@ -175,16 +171,12 @@ export async function listPlacesForAdmin(seedItems: readonly PlaceRecord[] = [])
       .filter((result) => result.success)
       .map((result) => result.data);
 
-    if (items.length === 0 && seedItems.length > 0) {
-      return { source: "seed", isConnected: true, items: seedItems, warning: "Firestore vacio, mostrando registros de inicializacion." };
-    }
-
     return { source: "firestore", isConnected: true, items };
   } catch (error) {
     return {
       source: "seed",
       isConnected: false,
-      items: seedItems,
+      items: [],
       warning: error instanceof Error ? error.message : "Firestore admin places query failed."
     };
   }

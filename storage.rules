@@ -45,15 +45,23 @@ service firebase.storage {
     function ownsBusiness(businessId) {
       return isSignedIn()
         && firestore.get(
-          /databases/appbaqueano/documents/businesses/$(businessId)
+          /databases/(default)/documents/businesses/$(businessId)
         ).data.ownerUid == request.auth.uid;
     }
 
     function participatesIn(conversationId) {
       return isSignedIn()
         && firestore.get(
-          /databases/appbaqueano/documents/conversations/$(conversationId)
+          /databases/(default)/documents/conversations/$(conversationId)
         ).data.participantUids.hasAny([request.auth.uid]);
+    }
+
+    function isEvidenceDocument() {
+      return request.resource != null
+        && request.resource.contentType.matches(
+          '(application/pdf|image/(jpeg|png|webp))'
+        )
+        && request.resource.size <= 12 * 1024 * 1024;
     }
 
     match /users/{userId}/{fileName} {
@@ -81,6 +89,14 @@ service firebase.storage {
     match /conversations/{conversationId}/{messageId}/{fileName} {
       allow read: if participatesIn(conversationId);
       allow write: if participatesIn(conversationId) && isImage();
+    }
+
+    // Verification evidence is never public or available to regular clients.
+    // Trusted backend code retains access through the Admin SDK.
+    match /trust/{resourceId}/evidence/{fileName} {
+      allow read: if isAdmin();
+      allow create, update: if isAdmin() && isEvidenceDocument();
+      allow delete: if isAdmin();
     }
 
     match /{allPaths=**} {
