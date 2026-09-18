@@ -1770,3 +1770,47 @@
   background: rgba(16, 185, 129, 0.15);
 }
 
+/* ==========================================================================
+   INSIGNIA DE VERIFICACIÓN OFICIAL ESTILO RED SOCIAL (TIKTOK / IG / X / FB)
+   ========================================================================== */
+.ops-social-verified-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #00BAF2;
+  font-size: 0.95rem;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 5px rgba(0, 186, 242, 0.6));
+}
+
+.bq-social-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #00BAF2;
+  font-size: 1rem;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 6px rgba(0, 186, 242, 0.8));
+  animation: bqVerifiedPulse 3s infinite ease-in-out;
+}
+
+@keyframes bqVerifiedPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(0, 186, 242, 0.5)); }
+  50% { transform: scale(1.12); filter: drop-shadow(0 0 8px rgba(0, 186, 242, 0.95)); }
+}
+
+.btn-ops-icon.verified-active {
+  background: rgba(0, 186, 242, 0.18) !important;
+  border-color: rgba(0, 186, 242, 0.55) !important;
+  color: #00BAF2 !important;
+  box-shadow: 0 0 8px rgba(0, 186, 242, 0.3);
+}
+
+.btn-ops-icon.verified-active:hover {
+  background: rgba(0, 186, 242, 0.3) !important;
+  box-shadow: 0 0 12px rgba(0, 186, 242, 0.6);
+}
+
+
