@@ -158,6 +158,16 @@
        📦 Qué: Clases .register-biz-section, .biz-form-grid, .biz-btn-submit, etc.
        ====================================================================== -->
   <link rel="stylesheet" href="css/pages/index.css">
+
+  <!-- ======================================================================
+       ESTILOS DEL MAPA VIVO 3D, DISEÑADOR DE RUTAS Y ASISTENTE BAQUEANO
+       🎯 Por qué: Proporcionar la experiencia 3D central insignia de Nicaragua
+          con controles WebGL, HUD, visor 360° y tarjetas dinámicas tilt.
+       ⚙️ Cómo: Tokens oficiales (#165D6F, #F65E01, #F4E6C1, #0F172A),
+          aceleración por GPU, microinteracciones a 60fps y adaptabilidad móvil.
+       📦 Qué: Clases .mapa-vivo-3d-section, .route-builder-section, etc.
+       ====================================================================== -->
+  <link rel="stylesheet" href="css/baqueano-3d.css">
 </head>
 
 <body>
@@ -398,13 +408,37 @@
             y beneficiosa para las familias campesinas de Nicaragua.
           </p>
 
+          <!-- Brújula 3D Interactiva Reactiva al Cursor -->
+          <div class="hero-compass-interactive" id="heroCompass3D" title="Brújula Baqueano 3D interactiva">
+            <div class="compass-dial">
+              <div class="compass-ring"></div>
+              <div class="compass-needle" id="heroCompassNeedle"></div>
+              <span class="compass-marker marker-n">N</span>
+              <span class="compass-marker marker-s">S</span>
+              <span class="compass-marker marker-e">E</span>
+              <span class="compass-marker marker-w">O</span>
+              <div class="compass-center-dot"></div>
+            </div>
+            <div class="compass-legend">
+              <strong>Rumbo Baqueano</strong>
+              <span>Nicaragua 12.86° N, 85.20° O</span>
+            </div>
+          </div>
+
           <div class="hero-cta-bar">
-            <button class="btn-hero-primary open-download-modal-btn">
-              <i class="fa-brands fa-android"></i> Descargar App APK
-            </button>
-            <a href="destinos.html" class="btn-hero-glass">
-              <i class="fa-solid fa-compass"></i> Explorar Destinos
+            <a href="#routeBuilderSection" class="btn-hero-primary">
+              <i class="fa-solid fa-route"></i> Crear mi Ruta
             </a>
+            <a href="#mapaVivo3DNicaragua" class="btn-hero-glass">
+              <i class="fa-solid fa-cube"></i> Explorar Nicaragua en 3D
+            </a>
+          </div>
+
+          <!-- Opción adicional de APK Android -->
+          <div class="hero-apk-subtle-wrap">
+            <button type="button" class="hero-apk-subtle-btn open-download-modal-btn" title="Descargar APK oficial para Android">
+              <i class="fa-brands fa-android"></i> Descargar App APK (Modo sin conexión &amp; GPS)
+            </button>
           </div>
 
           <div class="index-inline-004">
@@ -869,6 +903,306 @@
       </div>
     </section>
 
+    <!-- ============================================================================
+         🧭 MAPA VIVO 3D DE NICARAGUA — EXPERIENCIA INSIGNIA WEBGL THREE.JS
+         🎯 Por qué: Proveer el primer territorio turístico digital 3D de Nicaragua,
+            donde cada destino conecta relieve topográfico, volcanes, lagos, comunidades,
+            cultura y datos reales de Cloud Firestore sin intermediarios.
+         ⚙️ Cómo: Canvas WebGL Three.js con relieve sombreado de cordillera de los Maribios,
+            Mombacho, Masaya, volcanes Concepción y Maderas de Ometepe, lagos Cocibolca
+            y Xolotlán, marcadores 3D interactivos con raycasting y drawer deslizable.
+         📦 Qué: Canvas interactivo #baqueano3dCanvasWrap, selector de regiones, HUD de
+            capas (volcanes, lagos, rutas), drawer de detalle #map3dDetailDrawer.
+         ============================================================================ -->
+    <section class="mapa-vivo-3d-section" id="mapaVivo3DNicaragua">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-cube"></i> Experiencia 3D Central Insignia
+          </div>
+          <h2 class="section-headline">Mapa Vivo 3D de Nicaragua</h2>
+          <p class="section-subtext">
+            Explora el territorio nacional en relieve topográfico tridimensional. Gira, acércate y descubre volcanes activos, lagos sagrados, costas y comunidades campesinas conectadas en tiempo real.
+          </p>
+        </div>
+
+        <div class="mapa-3d-viewport-card">
+          <!-- Barra superior de estado y control -->
+          <div class="mapa-3d-hud-header">
+            <div class="mapa-3d-status-wrap">
+              <span class="live-pulse-dot" title="Sincronización WebGL Activa"></span>
+              <span class="mapa-3d-title-text"><i class="fa-solid fa-mountain-sun"></i> Territorio 3D Interactivo · WebGL</span>
+            </div>
+
+            <!-- Filtro de Regiones -->
+            <div class="mapa-3d-regions-bar">
+              <button type="button" class="btn-map-region active" data-region="todos">
+                <i class="fa-solid fa-earth-americas"></i> Todo el País
+              </button>
+              <button type="button" class="btn-map-region" data-region="pacifico">
+                <i class="fa-solid fa-volcano"></i> Pacífico &amp; Volcanes
+              </button>
+              <button type="button" class="btn-map-region" data-region="centro">
+                <i class="fa-solid fa-cloud-sun"></i> Centro &amp; Montañas
+              </button>
+              <button type="button" class="btn-map-region" data-region="caribe">
+                <i class="fa-solid fa-water"></i> Caribe &amp; Costas
+              </button>
+            </div>
+
+            <!-- Botones de Acción de Cámara -->
+            <div class="mapa-3d-actions-bar">
+              <button type="button" class="btn-map-action" id="btnToggle3DRotation" title="Pausar o Reanudar rotación automática">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+              <button type="button" class="btn-map-action" id="btnReset3DView" title="Restablecer perspectiva panorámica">
+                <i class="fa-solid fa-compass"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Lienzo 3D WebGL con contenedor relativo -->
+          <div class="mapa-3d-stage">
+            <div id="baqueano3dCanvasWrap"></div>
+
+            <!-- Capa de Instrucciones / Controles táctiles -->
+            <div class="mapa-3d-hints-overlay">
+              <span><i class="fa-solid fa-hand-pointer"></i> Arrastra para rotar en 360°</span>
+              <span><i class="fa-solid fa-magnifying-glass-plus"></i> Rueda o pellizca para acercar</span>
+              <span><i class="fa-solid fa-location-crosshairs"></i> Toca un destino o volcán</span>
+            </div>
+
+            <!-- Drawer deslizable lateral para destino seleccionado -->
+            <div class="map-3d-detail-drawer" id="map3dDetailDrawer" aria-hidden="true">
+              <button type="button" class="drawer-close-btn" id="btnCloseMap3dDrawer" aria-label="Cerrar ficha">&times;</button>
+              <div class="drawer-header">
+                <div class="drawer-badge-pill" id="drawerBadge">Destino Baqueano</div>
+                <h3 class="drawer-title" id="drawerTitle">Cargando territorio...</h3>
+                <p class="drawer-location" id="drawerLocation">Nicaragua</p>
+              </div>
+              <div class="drawer-img-wrap" id="drawerImgWrap">
+                <img id="drawerImg" src="assets/images/destinos/canon_de_somoto.jpg" alt="Destino 3D" onerror="this.src='assets/images/destinos/canon_de_somoto.jpg'">
+                <button type="button" class="btn-drawer-360" id="btnDrawer360">
+                  <i class="fa-solid fa-vr-cardboard"></i> Vista 360°
+                </button>
+              </div>
+              <p class="drawer-desc" id="drawerDesc">Descripción geográfica y comunitaria del punto seleccionado.</p>
+              <div class="drawer-metrics-row">
+                <div class="drawer-metric-box">
+                  <span class="metric-label">Precio Aprox.</span>
+                  <strong class="metric-val" id="drawerPrice">C$ 500</strong>
+                </div>
+                <div class="drawer-metric-box">
+                  <span class="metric-label">Dificultad</span>
+                  <strong class="metric-val" id="drawerDifficulty">Moderada</strong>
+                </div>
+                <div class="drawer-metric-box">
+                  <span class="metric-label">Comunidad</span>
+                  <strong class="metric-val" id="drawerCommunity">Coop. Local</strong>
+                </div>
+              </div>
+              <div class="drawer-actions">
+                <a href="destinos.html" class="btn-drawer-explore" id="drawerExploreLink">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Explorar Ficha Completa
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tira inferior de Leyenda y Estadísticas Vivas -->
+          <div class="mapa-3d-footer-legend">
+            <div class="legend-item"><span class="legend-dot dot-volcano"></span> Volcanes Activos &amp; Cráteres</div>
+            <div class="legend-item"><span class="legend-dot dot-lake"></span> Grandes Lagos &amp; Lagunas</div>
+            <div class="legend-item"><span class="legend-dot dot-eco"></span> Reservas Campesinas</div>
+            <div class="legend-item"><span class="legend-dot dot-beach"></span> Costas &amp; Archipiélagos</div>
+            <div class="legend-item legend-update"><i class="fa-solid fa-clock-rotate-left"></i> Conexión viva a Firestore</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================================
+         🧭 DISEÑADOR VISUAL DE VIAJES — "CONSTRUYE TU AVENTURA"
+         🎯 Por qué: Permitir a cualquier viajero diseñar de forma interactiva una ruta
+            personalizada según días, presupuesto, vehículo y condición física,
+            calculando costos justos bajo Ley 306 y proyectando el recorrido en el mapa 3D.
+         ⚙️ Cómo: Formulario interactivo con chips seleccionables, cálculo reactivo
+            bi-monetario (C$ / US$ a tasa oficial BCN), generador de itinerario diario
+            y sincronización con la animación de curvas en el mapa 3D.
+         📦 Qué: Sección #routeBuilderSection con panel de configuración, resumen
+            financiero de ahorro campesino, itinerario dinámico y botón de exportación.
+         ============================================================================ -->
+    <section class="route-builder-section" id="routeBuilderSection">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-route"></i> Planificador Inteligente
+          </div>
+          <h2 class="section-headline">Construye tu Aventura en Nicaragua</h2>
+          <p class="section-subtext">
+            Diseña un viaje personalizado sin intermediarios. Selecciona tus preferencias y calcularemos una ruta optimizada con presupuesto real, tiempos y contacto directo con las cooperativas anfitrionas.
+          </p>
+        </div>
+
+        <div class="route-builder-grid">
+          <!-- Columna Izquierda: Configuración del Viaje -->
+          <div class="builder-card-pro">
+            <div class="builder-header-bar">
+              <i class="fa-solid fa-sliders"></i>
+              <h3>Parámetros del Explorador</h3>
+            </div>
+
+            <form id="routePlannerForm" class="builder-form-body">
+              <!-- 1. Días de viaje -->
+              <div class="builder-field-group">
+                <label class="builder-label"><i class="fa-solid fa-calendar-days"></i> Duración del Viaje</label>
+                <div class="builder-chips-row" id="rbDaysSelector">
+                  <button type="button" class="rb-chip" data-days="1">1 Día (Day Pass)</button>
+                  <button type="button" class="rb-chip active" data-days="3">3 Días (Fin de semana)</button>
+                  <button type="button" class="rb-chip" data-days="5">5 Días (Ruta Clásica)</button>
+                  <button type="button" class="rb-chip" data-days="7">7+ Días (Gran Aventura)</button>
+                </div>
+              </div>
+
+              <!-- 2. Presupuesto -->
+              <div class="builder-field-group">
+                <label class="builder-label"><i class="fa-solid fa-coins"></i> Nivel de Presupuesto</label>
+                <div class="builder-chips-row" id="rbBudgetSelector">
+                  <button type="button" class="rb-chip active" data-budget="economico">Económico Campesino (C$ 650/día)</button>
+                  <button type="button" class="rb-chip" data-budget="equilibrado">Equilibrado Confort (C$ 1,450/día)</button>
+                  <button type="button" class="rb-chip" data-budget="todo-incluido">Todo Incluido Comunitario (C$ 2,800/día)</button>
+                </div>
+              </div>
+
+              <!-- 3. Departamento de Salida y Transporte -->
+              <div class="builder-row-2col">
+                <div class="builder-field-group">
+                  <label class="builder-label" for="rbOriginDept"><i class="fa-solid fa-map-pin"></i> Departamento de Salida</label>
+                  <select id="rbOriginDept" class="builder-select">
+                    <option value="Managua">Managua (Capital)</option>
+                    <option value="León">León</option>
+                    <option value="Granada">Granada</option>
+                    <option value="Rivas">Rivas / San Juan del Sur</option>
+                    <option value="Matagalpa">Matagalpa</option>
+                    <option value="Jinotega">Jinotega</option>
+                    <option value="Madriz">Madriz (Somoto)</option>
+                    <option value="Estelí">Estelí</option>
+                    <option value="Chinandega">Chinandega</option>
+                    <option value="Carazo">Carazo</option>
+                    <option value="Masaya">Masaya</option>
+                    <option value="Boaco">Boaco</option>
+                    <option value="Chontales">Chontales</option>
+                    <option value="Río San Juan">Río San Juan</option>
+                    <option value="RACCN">RACCN (Caribe Norte)</option>
+                    <option value="RACCS">RACCS (Caribe Sur)</option>
+                  </select>
+                </div>
+
+                <div class="builder-field-group">
+                  <label class="builder-label" for="rbTransport"><i class="fa-solid fa-van-shuttle"></i> Transporte</label>
+                  <select id="rbTransport" class="builder-select">
+                    <option value="publico">Transporte Público / Bus Local</option>
+                    <option value="particular" selected>Vehículo Propio / 4x4</option>
+                    <option value="cooperativa">Transporte de Cooperativa Baqueano</option>
+                    <option value="ferry">Ferry Lacustre / Panga</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 4. Tipo de Viaje e Interés Principal -->
+              <div class="builder-row-2col">
+                <div class="builder-field-group">
+                  <label class="builder-label" for="rbTravelType"><i class="fa-solid fa-users"></i> Modalidad de Viaje</label>
+                  <select id="rbTravelType" class="builder-select">
+                    <option value="pareja" selected>En Pareja</option>
+                    <option value="familia">En Familia con Niños</option>
+                    <option value="grupo">Grupo de Amigos</option>
+                    <option value="individual">Viajero Solitario</option>
+                  </select>
+                </div>
+
+                <div class="builder-field-group">
+                  <label class="builder-label" for="rbInterest"><i class="fa-solid fa-compass"></i> Interés Principal</label>
+                  <select id="rbInterest" class="builder-select">
+                    <option value="volcanes" selected>Volcanes &amp; Aventura</option>
+                    <option value="playa">Playa &amp; Surf Sostenible</option>
+                    <option value="montana">Montaña &amp; Ruta del Café</option>
+                    <option value="cultura">Cultura, Cerámica &amp; Pueblos Blancos</option>
+                    <option value="gastronomia">Gastronomía Ancestral del Maíz</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 5. Condición Física y Alojamiento -->
+              <div class="builder-row-2col">
+                <div class="builder-field-group">
+                  <label class="builder-label" for="rbFitness"><i class="fa-solid fa-person-hiking"></i> Condición Física</label>
+                  <select id="rbFitness" class="builder-select">
+                    <option value="ligera">Ligera (Paseos y miradores accesibles)</option>
+                    <option value="moderada" selected>Moderada (Caminatas de 2-4 horas)</option>
+                    <option value="avanzada">Avanzada (Ascensos de volcanes y cañones)</option>
+                  </select>
+                </div>
+
+                <div class="builder-field-group">
+                  <label class="builder-label" for="rbStayMode"><i class="fa-solid fa-bed"></i> Modalidad de Estancia</label>
+                  <select id="rbStayMode" class="builder-select">
+                    <option value="hospedaje" selected>Hospedaje Rural / Posada Campesina</option>
+                    <option value="daypass">Day Pass (Retorno el mismo día)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="builder-actions-row">
+                <button type="button" class="btn-calculate-route" id="btnCalculateRoute">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Mi Ruta Optimizada
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Columna Derecha: Itinerario Calculado y Proyección 3D -->
+          <div class="builder-card-pro builder-result-card">
+            <div class="builder-header-bar">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <h3>Itinerario Recomendado en Tiempo Real</h3>
+            </div>
+
+            <div class="builder-result-content">
+              <!-- Resumen de Costos y Ahorro -->
+              <div class="builder-budget-summary">
+                <div class="budget-stat-box">
+                  <span class="bs-title">Inversión Estimada</span>
+                  <strong class="bs-val bs-cordobas" id="rbEstimatedCostNio">C$ 4,350</strong>
+                  <span class="bs-sub" id="rbEstimatedCostUsd">~ $118.70 USD (Tasa BCN 36.65)</span>
+                </div>
+                <div class="budget-stat-box">
+                  <span class="bs-title">Ahorro Comunitario Directo</span>
+                  <strong class="bs-val bs-savings" id="rbSavingsNio">C$ 870</strong>
+                  <span class="bs-sub">0% comisiones a intermediarios extranjeros</span>
+                </div>
+              </div>
+
+              <!-- Lista de Paradas del Itinerario -->
+              <div class="itinerary-stops-timeline" id="rbTimelineStops">
+                <!-- Se poblará reactivamente por route-builder.js -->
+              </div>
+
+              <!-- Botones de Acción sobre la Ruta -->
+              <div class="itinerary-action-strip">
+                <button type="button" class="btn-anim-route" id="btnAnimateRoute3D">
+                  <i class="fa-solid fa-play"></i> Recorrer Ruta en Mapa 3D
+                </button>
+                <button type="button" class="btn-share-route" id="btnShareRouteWhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i> Compartir Itinerario
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- LOS 5 IMPACTOS DEL PROYECTO BAQUEANO -->
     <section class="impacts-section-pro">
       <div class="container">
@@ -1044,7 +1378,7 @@
 
         <div class="destinations-showcase-grid">
           <!-- Tarjeta Módulo 1: Historia -->
-          <a href="historia.html" class="dest-card-pro index-inline-016">
+          <a href="historia.html" class="dest-card-pro tilt-card-3d index-inline-016">
             <div class="dest-card-img-wrap index-inline-017">
               <i class="fa-solid fa-landmark index-inline-018"></i>
               <span class="dest-badge-corner">7 Periodos</span>
@@ -1062,7 +1396,7 @@
           </a>
 
           <!-- Tarjeta Módulo 2: Ambiental -->
-          <a href="ambiental.html" class="dest-card-pro index-inline-016">
+          <a href="ambiental.html" class="dest-card-pro tilt-card-3d index-inline-016">
             <div class="dest-card-img-wrap index-inline-019">
               <i class="fa-solid fa-leaf index-inline-020"></i>
               <span class="dest-badge-corner">GPS Satelital</span>
@@ -1080,7 +1414,7 @@
           </a>
 
           <!-- Tarjeta Módulo 3: Gastronomía -->
-          <a href="gastronomia.html" class="dest-card-pro index-inline-016">
+          <a href="gastronomia.html" class="dest-card-pro tilt-card-3d index-inline-016">
             <div class="dest-card-img-wrap index-inline-021">
               <i class="fa-solid fa-bowl-food index-inline-022"></i>
               <span class="dest-badge-corner">6 Platillos</span>
@@ -1098,7 +1432,7 @@
           </a>
 
           <!-- Tarjeta Módulo 4: Música Folclórica -->
-          <a href="musica.html" class="dest-card-pro index-inline-016">
+          <a href="musica.html" class="dest-card-pro tilt-card-3d index-inline-016">
             <div class="dest-card-img-wrap index-inline-023">
               <i class="fa-solid fa-music index-inline-022"></i>
               <span class="dest-badge-corner">1 Toque</span>
@@ -1116,7 +1450,7 @@
           </a>
 
           <!-- Tarjeta Módulo 5: Aliados 3D -->
-          <a href="aliados.html" class="dest-card-pro index-inline-016">
+          <a href="aliados.html" class="dest-card-pro tilt-card-3d index-inline-016">
             <div class="dest-card-img-wrap index-inline-024">
               <i class="fa-solid fa-handshake index-inline-020"></i>
               <span class="dest-badge-corner">Giro 180°</span>
@@ -1134,7 +1468,7 @@
           </a>
 
           <!-- Tarjeta Módulo 6: Destinos & Cotizador -->
-          <a href="destinos.html" class="dest-card-pro index-inline-016">
+          <a href="destinos.html" class="dest-card-pro tilt-card-3d index-inline-016">
             <div class="dest-card-img-wrap index-inline-025">
               <i class="fa-solid fa-mountain index-inline-022"></i>
               <span class="dest-badge-corner">Leyes 1210 & 1211</span>
@@ -1996,8 +2330,8 @@
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                     <span>Toca o arrastra una imagen de tu establecimiento (Máx 5MB)</span>
                   </div>
-                  <div class="biz-photo-preview" id="bizPhotoPreview">
-                    <img id="bizPreviewImg" src="" alt="Vista previa">
+                  <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
+                    <img id="bizPreviewImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Vista previa de foto">
                     <button type="button" class="biz-btn-remove-photo" id="bizBtnRemovePhoto" title="Eliminar foto">
                       <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -2259,14 +2593,132 @@
     </div>
   </div>
 
-  <!-- Scripts Modulares -->
+  <!-- ============================================================================
+       🧭 ASISTENTE BAQUEANO DIGITAL — GUÍA VIRTUAL DEL TERRITORIO
+       🎯 Por qué: Brindar asistencia conversacional y contextual con identidad nica,
+          ayudando a elegir destinos según presupuesto, días, normas ambientales y joyas ocultas.
+       ⚙️ Cómo: Widget interactivo con avatar de Guardabarranco / Brújula, árbol de
+          decisión contextual y conexión directa con el enfoque del mapa 3D.
+       📦 Qué: Botón flotante #assistantFabBtn y panel deslizable #assistantChatDrawer.
+       ============================================================================ -->
+  <div class="baqueano-assistant-widget" id="baqueanoAssistantBox">
+    <button type="button" class="assistant-fab-btn" id="assistantFabBtn" title="Consultar con Baqueano Digital" aria-label="Abrir Asistente Baqueano">
+      <div class="assistant-avatar-badge">
+        <i class="fa-solid fa-compass"></i>
+      </div>
+      <span class="assistant-fab-label">Guía Baqueano</span>
+    </button>
+
+    <div class="assistant-chat-drawer" id="assistantChatDrawer" aria-hidden="true">
+      <div class="assistant-chat-header">
+        <div class="assistant-identity-info">
+          <div class="assistant-identity-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+          <div>
+            <h4 class="assistant-name">Baqueano Digital</h4>
+            <span class="assistant-tag">Guía Comunitario de Nicaragua</span>
+          </div>
+        </div>
+        <button type="button" class="assistant-close-btn" id="btnCloseAssistant" aria-label="Cerrar Asistente">&times;</button>
+      </div>
+
+      <div class="assistant-messages-body" id="assistantMessagesBody">
+        <!-- Mensaje de bienvenida inicial -->
+        <div class="assistant-msg assistant-msg-bot">
+          <p>¡Buenas amigo explorador! 🇳🇮 Soy tu guía <strong>Baqueano Digital</strong>. Te oriento para descubrir Nicaragua con respeto ambiental, precios justos y apoyo directo a nuestras familias campesinas. ¿Qué te gustaría consultar hoy?</p>
+        </div>
+      </div>
+
+      <!-- Opciones Rápidas del Guía -->
+      <div class="assistant-quick-prompts" id="assistantQuickPrompts">
+        <button type="button" class="prompt-chip" data-action="budget">
+          <i class="fa-solid fa-coins"></i> Destinos según mi presupuesto
+        </button>
+        <button type="button" class="prompt-chip" data-action="days">
+          <i class="fa-solid fa-calendar-check"></i> Rutas por días disponibles
+        </button>
+        <button type="button" class="prompt-chip" data-action="green">
+          <i class="fa-solid fa-leaf"></i> Decálogo Verde &amp; Normas
+        </button>
+        <button type="button" class="prompt-chip" data-action="hidden">
+          <i class="fa-solid fa-gem"></i> Joyas ocultas poco conocidas
+        </button>
+        <button type="button" class="prompt-chip" data-action="map">
+          <i class="fa-solid fa-map-location-dot"></i> Enfocar Mapa 3D
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================================
+       🧭 VISOR PANORÁMICO 360° — EXPERIENCIAS EN INMERSIÓN TOTAL
+       🎯 Por qué: Ofrecer vistas panorámicas 360° esféricas con Three.js y síntesis
+          de audio ambiental procedimental de la naturaleza nicaragüense.
+       ⚙️ Cómo: Geometría esférica invertida con textura equirectangular, control
+          de arrastre táctil y Web Audio API procedural.
+       📦 Qué: Modal #panorama360Modal con controles de rotación y sonido ambiental.
+       ============================================================================ -->
+  <div class="panorama-360-modal" id="panorama360Modal" aria-hidden="true">
+    <div class="panorama-modal-overlay" id="closePanoramaBackdrop"></div>
+    <div class="panorama-modal-window">
+      <div class="panorama-top-bar">
+        <div class="panorama-title-wrap">
+          <span class="panorama-icon"><i class="fa-solid fa-vr-cardboard"></i></span>
+          <div>
+            <h3 class="panorama-destination-name" id="panoDestinationTitle">Inmersión 360°</h3>
+            <span class="panorama-sub-tag" id="panoDestinationSub">Nicaragua</span>
+          </div>
+        </div>
+        <div class="panorama-controls-right">
+          <button type="button" class="btn-pano-audio" id="btnTogglePanoAudio" title="Activar sonido ambiental de la naturaleza">
+            <i class="fa-solid fa-volume-xmark" id="panoAudioIcon"></i>
+            <span id="panoAudioLabel">Sonido</span>
+          </button>
+          <button type="button" class="btn-pano-close" id="btnClosePanorama" aria-label="Cerrar visor 360">&times;</button>
+        </div>
+      </div>
+
+      <div class="panorama-canvas-wrap" id="panoramaCanvasContainer">
+        <!-- Three.js Canvas se inyecta dinámicamente -->
+        <div class="panorama-drag-hint">
+          <i class="fa-solid fa-arrows-up-down-left-right"></i> Arrastra en cualquier dirección para explorar en 360°
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       SDK FIREBASE & CONEXIÓN EN TIEMPO REAL
+       🎯 Por qué: Eliminar datos semilla y sincronizar destinos, métricas y
+          reservas directamente desde Cloud Firestore (/places, /businesses).
+       ⚙️ Cómo: Firebase Compat v10 + Singleton de configuración oficial.
+       ====================================================================== -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/public-cms-sync.js"></script>
+
+  <!-- Scripts Modulares del Ecosistema -->
   <script src="js/navigation.js"></script>
   <script src="js/video-registry.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="app.js"></script>
+
   <!-- Leaflet Map JS & Controlador de Territorio y Experiencias -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="js/index-features.js"></script>
+
+  <!-- ======================================================================
+       MOTOR 3D WEBGL THREE.JS, PLANIFICADOR DE RUTAS Y ASISTENTE
+       🎯 Por qué: Brindar la experiencia 3D insignia de Nicaragua en el portal,
+          con relieve geográfico, cálculo de rutas y asistente guiado.
+       ⚙️ Cómo: Three.js r128, OrbitControls, WebGL procedural & Raycasting.
+       ====================================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+  <script src="js/baqueano-3d-map.js"></script>
+  <script src="js/route-builder.js"></script>
+  <script src="js/baqueano-assistant.js"></script>
+  <script src="js/panorama-viewer.js"></script>
 
   <!-- ======================================================================
        🧭 MANEJADOR DEL FORMULARIO DE REGISTRO DE NEGOCIOS (/businesses + WhatsApp)
