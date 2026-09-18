@@ -979,6 +979,304 @@
       OpsState.selectedIds.clear();
       OpsUI.updateBulkBar();
       OpsToast.show(`Acción masiva completada para ${ids.length} registros.`, 'success');
+    },
+
+    // 7.9 Migración Progresiva & Poblado Inicial Canónico
+    async seedInitialContent() {
+      const db = this.getDb();
+      if (!db) throw new Error('Base de datos no conectada.');
+
+      OpsToast.show('Iniciando sincronización canónica hacia Cloud Firestore...', 'info');
+
+      // 1. Sembrar Negocios / Cooperativas Aliadas
+      const seedBusinesses = [
+        {
+          id: 'biz_somoto_guias',
+          name: 'Coop. Guías Comunitarios del Cañón de Somoto',
+          title: 'Coop. Guías Comunitarios del Cañón de Somoto',
+          department: 'Madriz',
+          municipality: 'Somoto',
+          category: 'cooperativas',
+          verified: true,
+          verificationStatus: 'verified',
+          verifiedBy: OpsState.currentUser?.email || 'admin',
+          verifiedAt: new Date().toISOString(),
+          verificationNotes: 'Certificada por el INTUR y acreditada en campo por BAQUEANO Nicaragua.',
+          phone: '+505 8443-1289',
+          whatsapp: '+505 8443-1289',
+          imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
+          description: '32 familias campesinas de Sonís y El Guayabo. Ofrecen recorridos acuáticos seguros con chalecos certificados, lanchas y hospedaje rural familiar con rosquillas calientes.',
+          status: 'published',
+          subscriptionStatus: 'active',
+          subscriptionType: 'Comunitaria Campesina',
+          subscriptionStart: '2026-01-01',
+          subscriptionEnd: '2026-12-31'
+        },
+        {
+          id: 'biz_abuela_apoyo',
+          name: 'Posada Ecológica La Abuela',
+          title: 'Posada Ecológica La Abuela',
+          department: 'Masaya',
+          municipality: 'Laguna de Apoyo',
+          category: 'hospedajes',
+          verified: true,
+          verificationStatus: 'verified',
+          verifiedBy: OpsState.currentUser?.email || 'admin',
+          verifiedAt: new Date().toISOString(),
+          verificationNotes: 'Posada con normas ecológicas de cero emisiones de hidrocarburos en la laguna.',
+          phone: '+505 8888-1234',
+          whatsapp: '+505 8888-1234',
+          imageUrl: 'assets/images/aliados/posada_ecologica_la_abuela.jpg',
+          description: 'Pioneros en bioconstrucción en la ladera del cráter volcánico. Cabañas de madera reforestada, kayaks limpios y gastronomía tradicional.',
+          status: 'published',
+          subscriptionStatus: 'active',
+          subscriptionType: 'Ecológica Anual',
+          subscriptionStart: '2026-01-01',
+          subscriptionEnd: '2026-12-31'
+        },
+        {
+          id: 'biz_magdalena_ometepe',
+          name: 'Finca Magdalena & Cooperativa Carlos Díaz Cajina',
+          title: 'Finca Magdalena & Cooperativa Carlos Díaz Cajina',
+          department: 'Rivas',
+          municipality: 'Altagracia, Ometepe',
+          category: 'fincas',
+          verified: true,
+          verificationStatus: 'verified',
+          verifiedBy: OpsState.currentUser?.email || 'admin',
+          verifiedAt: new Date().toISOString(),
+          verificationNotes: 'Cooperativa agroecológica comunitaria histórica en las faldas del Volcán Maderas.',
+          phone: '+505 8443-1289',
+          whatsapp: '+505 8443-1289',
+          imageUrl: 'assets/images/destinos/finca_magdalena.jpg',
+          description: '24 socios campesinos fundaron esta cooperativa en 1983. Cultivan café orgánico bajo sombra en las faldas del Volcán Maderas.',
+          status: 'published',
+          subscriptionStatus: 'active',
+          subscriptionType: 'Comunitaria Campesina',
+          subscriptionStart: '2026-01-01',
+          subscriptionEnd: '2026-12-31'
+        },
+        {
+          id: 'biz_selva_negra',
+          name: 'Eco-Reserva Selva Negra Matagalpa',
+          title: 'Eco-Reserva Selva Negra Matagalpa',
+          department: 'Matagalpa',
+          municipality: 'Matagalpa',
+          category: 'hospedajes',
+          verified: true,
+          verificationStatus: 'verified',
+          verifiedBy: OpsState.currentUser?.email || 'admin',
+          verifiedAt: new Date().toISOString(),
+          verificationNotes: 'Referente nacional de conservación de bosque nuboso y huella de carbono neutral.',
+          phone: '+505 2772-3888',
+          whatsapp: '+505 8443-1289',
+          imageUrl: 'assets/images/destinos/selva_negra.jpg',
+          description: 'Santuario de conservación de nebliselva tropical. Caficultura orgánica regenerativa y generación de biogás para autosuficiencia energética.',
+          status: 'published',
+          subscriptionStatus: 'active',
+          subscriptionType: 'Empresarial Sostenible',
+          subscriptionStart: '2026-01-01',
+          subscriptionEnd: '2026-12-31'
+        },
+        {
+          id: 'biz_maribios_leon',
+          name: 'Guías Comunitarios Los Maribios',
+          title: 'Guías Comunitarios Los Maribios',
+          department: 'León',
+          municipality: 'León',
+          category: 'guias',
+          verified: true,
+          verificationStatus: 'verified',
+          verifiedBy: OpsState.currentUser?.email || 'admin',
+          verifiedAt: new Date().toISOString(),
+          verificationNotes: 'Jóvenes baqueanos campesinos de Malpaisillo capacitados en socorrismo y sandboarding.',
+          phone: '+505 8443-1289',
+          whatsapp: '+505 8443-1289',
+          imageUrl: 'assets/images/destinos/cerro_negro.jpg',
+          description: 'Asociación de jóvenes campesinos de Malpaisillo capacitados en vulcanología, primeros auxilios y volcano sandboarding seguro.',
+          status: 'published',
+          subscriptionStatus: 'active',
+          subscriptionType: 'Comunitaria Campesina',
+          subscriptionStart: '2026-01-01',
+          subscriptionEnd: '2026-12-31'
+        }
+      ];
+
+      // 2. Sembrar Gastronomía Ancestral
+      const seedDishes = [
+        {
+          id: 'gastro_gallo_pinto',
+          title: 'Gallo Pinto Campesino',
+          name: 'Gallo Pinto Campesino',
+          department: 'Nacional',
+          category: 'desayunos',
+          imageUrl: 'assets/images/comida/gallo_pinto.jpg',
+          dayPass: 'Arroz, frijol rojo criollo, cebolla picada y chiltoma frita en manteca.',
+          description: 'El corazón de la mesa nicaragüense. Preparado con frijol cocido del día anterior y frito hasta dorar. Se acompaña de queso frito, maduro frito y tortilla caliente de maíz blanco.',
+          status: 'published'
+        },
+        {
+          id: 'gastro_nacatamal',
+          title: 'Nacatamal de Domingo',
+          name: 'Nacatamal de Domingo',
+          department: 'Nacional',
+          category: 'tradicional',
+          imageUrl: 'assets/images/comida/nacatamal.jpg',
+          dayPass: 'Masa de maíz nixtamalizado, cerdo marinado en naranja agria y hojas de plátano.',
+          description: 'Monumental banquete envuelto en hojas de chagüite. Relleno de tocino, papa, arroz, tomate, hierbabuena, pasas y chile congo. Cocido a fuego lento durante 5 horas.',
+          status: 'published'
+        },
+        {
+          id: 'gastro_vigoron',
+          title: 'Vigorón Granadino',
+          name: 'Vigorón Granadino',
+          department: 'Granada',
+          category: 'antojitos',
+          imageUrl: 'assets/images/comida/vigoron.jpg',
+          dayPass: 'Yuca cocida harinosa, chicharrón crujiente con carne y ensalada de repollo.',
+          description: 'Nacido bajo los laureles de la Plaza Central de Granada. Servido tradicionalmente sobre hoja de plátano fresca, aderezado con vinagre de guineo y muserola de mimbro.',
+          status: 'published'
+        },
+        {
+          id: 'gastro_quesillo',
+          title: 'Quesillo Chontaleño y de Nagarote',
+          name: 'Quesillo Chontaleño y de Nagarote',
+          department: 'León',
+          category: 'lacteos',
+          imageUrl: 'assets/images/comida/quesillo.jpg',
+          dayPass: 'Queso tierno elástico, tortilla caliente, cebollita en vinagre negro y crema espesa.',
+          description: 'Manjar artesanal servido envuelto en papel plástico o chimbomba. Una explosión láctea de la cuenca ganadera de Chontales y el Pacífico occidental.',
+          status: 'published'
+        },
+        {
+          id: 'gastro_baho',
+          title: 'Baho Criollo',
+          name: 'Baho Criollo',
+          department: 'Masaya',
+          category: 'almuerzos',
+          imageUrl: 'assets/images/comida/baho.jpg',
+          dayPass: 'Carne de res cecina curada al sol, plátano verde, plátano maduro y yuca al vapor.',
+          description: 'Cocinado al vapor durante la noche entera en una olla sellada con hojas de plátano. La carne se deshace al toque y el maduro aporta una dulzura acaramelada inigualable.',
+          status: 'published'
+        },
+        {
+          id: 'gastro_indio_viejo',
+          title: 'Indio Viejo Ancestral',
+          name: 'Indio Viejo Ancestral',
+          department: 'Nacional',
+          category: 'ancestral',
+          imageUrl: 'assets/images/comida/indio_viejo.jpg',
+          dayPass: 'Masa de maíz desmoronada, carne de res mechada, hierbabuena fresca y achiote.',
+          description: 'Uno de los guisos prehispánicos más antiguos de América Latina. Su textura cremosa aromatizada con naranja agria y hierbabuena es símbolo de fiesta patronal campesina.',
+          status: 'published'
+        }
+      ];
+
+      // 3. Sembrar Historia de Nicaragua
+      const seedHistory = [
+        {
+          id: 'hist_01_prehispanica',
+          title: 'Pueblos Originarios & Cosmovisión del Xolotlán',
+          name: 'Pueblos Originarios & Cosmovisión del Xolotlán',
+          department: 'Época Prehispánica (~8,000 a.C. - 1502 d.C.)',
+          category: 'prehispanica',
+          sortOrder: 1,
+          description: 'Asentamientos Chorotegas, Nicaraos, Maribios, Matagalpas, Miskitos y Mayangnas que veneraban el agua, los volcanes sagrados y cultivaban el maíz como génesis divina.',
+          status: 'published'
+        },
+        {
+          id: 'hist_02_resistencia',
+          title: 'Resistencia Indígena: El Encuentro y Diriangén',
+          name: 'Resistencia Indígena: El Encuentro y Diriangén',
+          department: 'Siglo XVI (1523 - 1524)',
+          category: 'resistencia',
+          sortOrder: 2,
+          description: 'El Cacique Nicarao dialoga filosóficamente con Gil González Dávila, mientras el gran jefe Diriangén organiza la primera insurrección armada en defensa de la soberanía de estas tierras.',
+          status: 'published'
+        },
+        {
+          id: 'hist_03_colonial',
+          title: 'Periodo Colonial: Fundación de Ciudades & El Güegüense',
+          name: 'Periodo Colonial: Fundación de Ciudades & El Güegüense',
+          department: 'Periodo Colonial (1524 - 1821)',
+          category: 'colonial',
+          sortOrder: 3,
+          description: 'Francisco Hernández de Córdoba funda Santiago de los Caballeros de León y Granada. Surge el mestizaje arquitectónico, el habla popular pinolera y la inmortal comedia bailete de protesta popular: El Güegüense.',
+          status: 'published'
+        },
+        {
+          id: 'hist_04_independencia',
+          title: 'Independencia de Centroamérica (1821)',
+          name: 'Independencia de Centroamérica (1821)',
+          department: 'Independencia (1821)',
+          category: 'independencia',
+          sortOrder: 4,
+          description: 'El 15 de septiembre de 1821 se proclama el Acta de Independencia de Centroamérica. Nicaragua inicia su senda como nación soberana, defendiendo su autodeterminación territorial.',
+          status: 'published'
+        },
+        {
+          id: 'hist_05_san_jacinto',
+          title: 'Guerra Nacional & La Pedrada de Andrés Castro (1856)',
+          name: 'Guerra Nacional & La Pedrada de Andrés Castro (1856)',
+          department: 'Guerra Nacional (1856)',
+          category: 'guerra_nacional',
+          sortOrder: 5,
+          description: 'Frente a la invasión del filibustero William Walker que pretendía esclavizar Centroamérica, el pueblo se levanta en la gloriosa Batalla de San Jacinto (14 de septiembre de 1856). Andrés Castro derriba al invasor de una certera pedrada.',
+          status: 'published'
+        },
+        {
+          id: 'hist_06_sandino',
+          title: 'General de Hombres Libres: Augusto C. Sandino (1927 - 1934)',
+          name: 'General de Hombres Libres: Augusto C. Sandino (1927 - 1934)',
+          department: 'Siglo XX (1927 - 1934)',
+          category: 'sandino',
+          sortOrder: 6,
+          description: 'Desde las montañas de Las Segovias, Sandino y su Ejército Defensor de la Soberanía Nacional expulsan a las tropas de ocupación extranjera con tácticas de guerrilla comunitaria y cooperativismo agrícola sobre el Río Coco.',
+          status: 'published'
+        },
+        {
+          id: 'hist_07_resiliencia',
+          title: 'Resiliencia & Soberanía Territorial Contemporánea',
+          name: 'Resiliencia & Soberanía Territorial Contemporánea',
+          department: 'Época Contemporánea (1979 - Presente)',
+          category: 'contemporanea',
+          sortOrder: 7,
+          description: 'Nicaragua se erige como una nación digna y amante de la paz, proyectando su ecoturismo comunitario, la protección de sus reservas de biosfera (Bosawás, Río San Juan, Ometepe) y el protagonismo del campesinado rural.',
+          status: 'published'
+        }
+      ];
+
+      // Ejecución por lotes
+      const batch = db.batch();
+
+      seedBusinesses.forEach((b) => {
+        batch.set(db.collection('businesses').doc(b.id), b, { merge: true });
+      });
+
+      seedDishes.forEach((d) => {
+        batch.set(db.collection('gastronomy').doc(d.id), d, { merge: true });
+      });
+
+      seedHistory.forEach((h) => {
+        batch.set(db.collection('history_timeline').doc(h.id), h, { merge: true });
+      });
+
+      // Anuncio Global en app_config
+      batch.set(db.collection('app_config').doc('global'), {
+        announcementText: '¡BIENVENIDOS A BAQUEANO! Conectamos al viajero consciente con comunidades campesinas sin intermediarios.',
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+
+      await batch.commit();
+
+      OpsToast.show('¡Migración canónica completada! Negocios, gastronomía e historia sembrados en Firestore.', 'success');
+      await this.logAuditEvent({
+        action: 'CANONICAL_SEED_COMPLETED',
+        module: 'Sistema',
+        description: 'Poblado canónico inicial de colecciones businesses, gastronomy, history_timeline y app_config.',
+        status: 'success'
+      });
     }
   };
 
@@ -2130,6 +2428,17 @@
         OpsToast.show(`Archivo "${file.name}" subido. Enlace copiado al portapapeles.`, 'success', 4500);
       } catch (err) {
         OpsToast.show(`Error de carga: ${err.message}`, 'error');
+      }
+    },
+
+    async seedInitialContent() {
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Sincronizar Contenido Canónico a Firestore?',
+        message: 'Se sembrarán cooperativas aliadas, platillos ancestrales y periodos históricos patrimoniales en Cloud Firestore para su gestión inmediata.',
+        confirmText: 'Sembrar en Firestore'
+      });
+      if (confirmed) {
+        await OpsCMS.seedInitialContent();
       }
     }
   };
