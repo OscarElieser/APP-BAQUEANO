@@ -4,23 +4,27 @@
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Conectar de forma reactiva las páginas públicas del portal web de BAQUEANO
-//   (aliados.html, gastronomia.html, historia.html, index.html, etc.) directamente
-//   a Cloud Firestore, asegurando que todo cambio editorial, creación, edición,
-//   publicación, despublicación o sello verificado asignado desde el Ops Center
-//   se refleje de inmediato ante el explorador sin necesidad de tocar código fuente.
+//   (index.html, destinos.html, aliados.html, gastronomia.html, historia.html, etc.)
+//   directamente a Cloud Firestore (site_pages, businesses, gastronomy, etc.),
+//   asegurando que todo cambio editorial, creación, edición, publicación,
+//   despublicación o restauración realizado desde el Ops Center se refleje
+//   de inmediato ante el explorador sin necesidad de tocar código fuente.
 // - Garantizar una estrategia de migración progresiva y tolerancia a fallos:
 //   si Firestore no contiene registros o el usuario se encuentra desconectado,
 //   se preserva el contenido nativo en HTML para que el portal jamás quede vacío.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Detección automática de la página actual según el DOM y URL.
-// - Subscripción reactiva mediante onSnapshot() en colecciones con status == 'published'.
-// - Renderizado progresivo del DOM sustituyendo o complementando las cuadrículas
-//   con animaciones fluidas a 60fps y efectos visuales de alta gama.
-// - Integración con el Banner Global de Anuncios configurado en app_config/global.
+// - Subscripción reactiva en tiempo real con onSnapshot() a site_pages/{pageId}.
+// - Modificación dinámica de atributos de visibilidad (display: none / '') según
+//   el estado de publicación (published vs draft vs trashed).
+// - Actualización de encabezados, subtítulos y enlaces de llamada a la acción (CTA).
+// - Soporte para inyección de bloques dinámicos nuevos creados en vivo desde el CMS.
 //
 // 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
 // - window.BaqueanoPublicSync: Objeto global con inicializadores por página:
+//   * syncDynamicPageSections(): Sincroniza visibilidad y bloques de site_pages.
+//   * applyPageSections(): Aplica visibilidad y textos a secciones del DOM.
 //   * syncAlliesPage(): Sincroniza cooperativas y comercios aliados en tiempo real.
 //   * syncGastronomyPage(): Sincroniza platillos y tradiciones culinarias campesinas.
 //   * syncHistoryPage(): Sincroniza la línea de tiempo soberana nacional.
@@ -42,11 +46,23 @@
     },
 
     // ------------------------------------------------------------------------
+    // DETECCIÓN DE LA PÁGINA ACTUAL DEL ECOSISTEMA
+    // ------------------------------------------------------------------------
+    detectCurrentPageId() {
+      const path = window.location.pathname.toLowerCase();
+      const filename = path.split('/').pop() || 'index.html';
+      let pageId = filename.replace('.html', '').trim() || 'index';
+      if (pageId === '' || pageId === '/') pageId = 'index';
+      return pageId;
+    },
+
+    // ------------------------------------------------------------------------
     // INICIALIZACIÓN AUTOMÁTICA SEGÚN LA PÁGINA ACTIVA
     // ------------------------------------------------------------------------
     init() {
       console.info('[BaqueanoPublicSync] Conectando páginas públicas con Cloud Firestore...');
       this.syncGlobalAnnouncement();
+      this.syncDynamicPageSections();
 
       const path = window.location.pathname.toLowerCase();
       if (path.includes('aliados.html') || document.querySelector('.allies-3d-grid')) {
@@ -58,6 +74,122 @@
       if (path.includes('historia.html') || document.querySelector('.timeline-periods-flow')) {
         this.syncHistoryPage();
       }
+    },
+
+    // ------------------------------------------------------------------------
+    // 0. SINCRONIZACIÓN UNIVERSAL DE PÁGINAS Y SECCIONES (site_pages/{pageId})
+    // ------------------------------------------------------------------------
+    syncDynamicPageSections() {
+      const pageId = this.detectCurrentPageId();
+      if (pageId === 'admin') return;
+
+      const db = this.getDb();
+      if (!db) {
+        setTimeout(() => this.syncDynamicPageSections(), 600);
+        return;
+      }
+
+      db.collection('site_pages').doc(pageId).onSnapshot(
+        (doc) => {
+          if (!doc.exists) return;
+          const data = doc.data();
+          const sections = data.sections || [];
+          if (!sections.length) return;
+          this.applyPageSections(pageId, sections);
+        },
+        (err) => console.warn(`[BaqueanoPublicSync] Error en secciones de ${pageId}:`, err.message)
+      );
+    },
+
+    applyPageSections(pageId, sections) {
+      sections.forEach((sec) => {
+        const status = sec.status || 'published';
+        const secId = sec.id;
+
+        // Buscar elemento en el DOM
+        let targetEl = document.getElementById(secId) || document.querySelector(`[data-section-id="${secId}"]`);
+
+        // Heurísticas defensivas si no tiene id estricto
+        if (!targetEl) {
+          if (secId.includes('hero') || sec.type === 'hero') {
+            targetEl = document.querySelector('.hero-section, .hero, header.hero, .page-hero');
+          } else if (secId.includes('map') || secId.includes('mapa') || sec.type === 'map') {
+            targetEl = document.getElementById('mapaVivoContainer') || document.getElementById('baqueanoInteractiveMap') || document.querySelector('.map-section');
+          } else if (secId.includes('destinos') || secId.includes('rutas')) {
+            targetEl = document.querySelector('.featured-destinations, .destinations-grid, .destinos-section, #destinosGrid');
+          } else if (secId.includes('calc') || secId.includes('cotizador')) {
+            targetEl = document.getElementById('cotizadorBimonedaSection') || document.querySelector('.calculator-section');
+          } else if (secId.includes('faq')) {
+            targetEl = document.querySelector('.faq-section, #faqSection');
+          } else if (secId.includes('cta') || sec.type === 'cta') {
+            targetEl = document.querySelector('.cta-section, .download-cta-section');
+          }
+        }
+
+        if (targetEl) {
+          // Ocultar / Mostrar según status
+          if (status === 'draft' || status === 'trashed') {
+            targetEl.style.display = 'none';
+          } else {
+            targetEl.style.display = '';
+
+            // Si tiene título modificado
+            if (sec.title) {
+              const heading = targetEl.querySelector('h1, h2, .section-title, .hero-title');
+              if (heading && sec.title !== heading.textContent.trim()) {
+                heading.textContent = sec.title;
+              }
+            }
+
+            // Si tiene subtítulo modificado
+            if (sec.subtitle) {
+              const sub = targetEl.querySelector('p.section-subtitle, p.hero-subtitle, .lead, .subtitle');
+              if (sub && sec.subtitle !== sub.textContent.trim()) {
+                sub.textContent = sec.subtitle;
+              }
+            }
+
+            // Si tiene botón CTA
+            if (sec.ctaText) {
+              const btn = targetEl.querySelector('a.btn-cta, a.btn-hero, .btn-action-primary, a.btn-baqueano-primary');
+              if (btn) {
+                btn.textContent = sec.ctaText;
+                if (sec.ctaLink) btn.href = sec.ctaLink;
+              }
+            }
+          }
+        } else if (status === 'published' && (sec.content || sec.title)) {
+          // Sección dinámica adicional creada en vivo desde el Ops Center
+          let dynContainer = document.getElementById(`dynSec_${secId}`);
+          if (!dynContainer) {
+            dynContainer = document.createElement('section');
+            dynContainer.id = `dynSec_${secId}`;
+            dynContainer.className = 'bq-dynamic-cms-section';
+            dynContainer.style.cssText = 'padding: 4rem 1.5rem; background: #0F172A; border-top: 1px solid rgba(244,230,193,0.1); border-bottom: 1px solid rgba(244,230,193,0.1); color: #fff;';
+
+            const footer = document.querySelector('footer');
+            if (footer && footer.parentNode) {
+              footer.parentNode.insertBefore(dynContainer, footer);
+            } else {
+              document.body.appendChild(dynContainer);
+            }
+          }
+
+          dynContainer.innerHTML = `
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              ${sec.title ? `<h2 style="font-size: 2rem; color: #F4E6C1; margin-bottom: 0.75rem; font-family: var(--font-title, sans-serif);">${this.escape(sec.title)}</h2>` : ''}
+              ${sec.subtitle ? `<p style="font-size: 1.1rem; color: #94A3B8; margin-bottom: 1.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">${this.escape(sec.subtitle)}</p>` : ''}
+              ${sec.imageUrl ? `<div style="margin: 1.5rem 0;"><img src="${sec.imageUrl}" alt="${this.escape(sec.title || '')}" style="max-width: 100%; max-height: 400px; border-radius: 12px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></div>` : ''}
+              ${sec.content ? `<div style="font-size: 1rem; color: #CBD5E1; line-height: 1.7; max-width: 800px; margin: 0 auto 1.5rem auto; text-align: left; background: rgba(22, 93, 111, 0.15); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(244, 230, 193, 0.1);">${sec.content}</div>` : ''}
+              ${sec.ctaText ? `<div style="margin-top: 1.5rem;"><a href="${sec.ctaLink || '#'}" style="display: inline-block; padding: 0.75rem 2rem; background: #F65E01; color: #fff; font-weight: 700; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(246,94,1,0.4);">${this.escape(sec.ctaText)}</a></div>` : ''}
+            </div>
+          `;
+          dynContainer.style.display = '';
+        } else {
+          const dynContainer = document.getElementById(`dynSec_${secId}`);
+          if (dynContainer) dynContainer.style.display = 'none';
+        }
+      });
     },
 
     // ------------------------------------------------------------------------

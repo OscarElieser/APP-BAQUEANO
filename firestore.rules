@@ -338,6 +338,16 @@ service cloud.firestore {
       }
     }
 
+    match /site_pages/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+
+      match /sections/{sectionId} {
+        allow read: if true;
+        allow write: if isAdmin();
+      }
+    }
+
     match /roles/{roleId} {
       allow read: if isAdmin();
       allow write: if isAdmin();

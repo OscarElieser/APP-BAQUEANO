@@ -743,6 +743,95 @@
     </div>
   </div>
 
+  <!-- MODAL UNIVERSAL DE GESTIÓN Y EDICIÓN DE SECCIONES (PAGE & SECTION CMS) -->
+  <div class="ops-modal-backdrop" id="opsSectionModal">
+    <div class="ops-modal-box" style="max-width: 760px; width: 95%; max-height: 90vh; display: flex; flex-direction: column;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; border-bottom: 1px solid var(--ops-border-subtle); padding-bottom: 1rem;">
+        <div>
+          <h3 class="ops-modal-title" id="opsSectionModalTitle" style="margin:0;"><i class="fa-solid fa-layer-group" style="color: var(--bq-accent);"></i> Editar Sección</h3>
+          <span style="font-size:0.78rem; color:var(--ops-text-muted);" id="opsSectionModalSubtitle">Página: index.html</span>
+        </div>
+        <button type="button" class="ops-sidebar-toggle-btn" id="opsSectionModalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div style="flex:1; overflow-y:auto; padding-right:0.5rem;" id="opsSectionModalBody">
+        <input type="hidden" id="sectionPageId">
+        <input type="hidden" id="sectionId">
+
+        <div class="ops-form-grid-2">
+          <div class="ops-form-group">
+            <label class="ops-form-label">Título de la Sección *</label>
+            <input type="text" class="ops-form-input" id="secFormTitle" placeholder="Ej. El Sendero lo Abren las Comunidades" required>
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label">Tipo de Bloque</label>
+            <select class="ops-form-select" id="secFormType">
+              <option value="hero">Hero Cinemático Principal</option>
+              <option value="content">Bloque de Contenido / Texto</option>
+              <option value="cards">Rejilla de Tarjetas / Destacados</option>
+              <option value="banner">Banner de Anuncio / Alerta</option>
+              <option value="cta">Llamada a la Acción (CTA)</option>
+              <option value="testimonial">Testimonio Campesino</option>
+              <option value="custom">Bloque Personalizado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ops-form-group">
+          <label class="ops-form-label">Subtítulo / Bajada Cultural</label>
+          <input type="text" class="ops-form-input" id="secFormSubtitle" placeholder="Ej. Ecoturismo Auténtico en Nicaragua sin intermediarios">
+        </div>
+
+        <div class="ops-form-group">
+          <label class="ops-form-label">Cuerpo del Contenido / Descripción</label>
+          <textarea class="ops-form-textarea" id="secFormContent" rows="4" placeholder="Texto descriptivo, manifiesto o contenido que se despliega en la sección..."></textarea>
+        </div>
+
+        <div class="ops-form-grid-2">
+          <div class="ops-form-group">
+            <label class="ops-form-label">Texto del Botón CTA (Opcional)</label>
+            <input type="text" class="ops-form-input" id="secFormCtaText" placeholder="Ej. Explorar Nicaragua en 3D">
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label">Enlace / Destino del Botón</label>
+            <input type="text" class="ops-form-input" id="secFormCtaLink" placeholder="Ej. #mapaVivo3dSection o destinos.html">
+          </div>
+        </div>
+
+        <div class="ops-form-group">
+          <label class="ops-form-label">URL de Fotografía / Fondo Multimedia</label>
+          <div style="display:flex; gap:0.5rem;">
+            <input type="text" class="ops-form-input" id="secFormImageUrl" placeholder="https://firebasestorage.googleapis.com/... o assets/images/...">
+            <button type="button" class="btn-ops-matte accent" id="btnUploadSectionMedia" style="white-space:nowrap;">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Subir a Storage
+            </button>
+            <input type="file" id="secFormFileInput" accept="image/*,video/*" style="display:none;">
+          </div>
+        </div>
+
+        <div class="ops-form-grid-2">
+          <div class="ops-form-group">
+            <label class="ops-form-label">Estado de Publicación</label>
+            <select class="ops-form-select" id="secFormStatus">
+              <option value="published">Publicado (Visible en el sitio web)</option>
+              <option value="draft">Borrador (Oculto en el sitio web)</option>
+              <option value="trashed">En Papelera (Desactivado)</option>
+            </select>
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label">Orden de Aparición (Sort Order)</label>
+            <input type="number" class="ops-form-input" id="secFormSortOrder" value="1" min="1">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.25rem; border-top: 1px solid var(--ops-border-subtle); padding-top:1rem;">
+        <button type="button" class="btn-ops-matte" id="btnCancelSectionModal">Cancelar</button>
+        <button type="button" class="btn-ops-matte primary" id="btnSaveSectionModal"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios en Vivo</button>
+      </div>
+    </div>
+  </div>
+
   <!-- BARRA FLOTANTE DE ACCIONES MASIVAS -->
   <div class="ops-bulk-bar" id="opsBulkBar">
     <span class="ops-bulk-count" id="opsBulkCount">0 seleccionados</span>
