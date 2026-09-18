@@ -2,9 +2,13 @@
   "name": "@baqueano/ai-core",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "main": "src/index.ts",
+  "types": "src/index.ts",
   "dependencies": {
     "@baqueano/types": "workspace:*",
-    "@baqueano/validators": "workspace:*"
+    "@baqueano/validators": "workspace:*",
+    "@genkit-ai/googleai": "^1.28.0",
+    "genkit": "^1.42.0"
   }
 }

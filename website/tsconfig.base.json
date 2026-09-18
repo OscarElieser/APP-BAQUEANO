@@ -20,7 +20,8 @@
       "@baqueano/firebase": ["packages/firebase/src"],
       "@baqueano/validators": ["packages/validators/src"],
       "@baqueano/design-system": ["packages/design-system/src"],
-      "@baqueano/config": ["packages/config/src"]
+      "@baqueano/config": ["packages/config/src"],
+      "@baqueano/ai-core": ["packages/ai-core/src"]
     }
   }
 }
