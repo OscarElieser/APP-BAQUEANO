@@ -626,8 +626,8 @@ window.BaqueanoFirestore = (function() {
     try {
       if (!window.firebase || !window.firebase.firestore) {
         console.warn('[BaqueanoFirestore] SDK no disponible — usando datos semilla.');
-        callback(SEED_PLACES, 'seed');
-        return;
+        if (typeof callback === 'function') callback(SEED_PLACES, 'seed');
+        return SEED_PLACES;
       }
 
       const db = window.firebase.firestore();
@@ -639,15 +639,17 @@ window.BaqueanoFirestore = (function() {
 
       if (snapshot.empty) {
         console.info('[BaqueanoFirestore] Colección /places vacía — usando datos semilla.');
-        callback(SEED_PLACES, 'seed');
-        return;
+        if (typeof callback === 'function') callback(SEED_PLACES, 'seed');
+        return SEED_PLACES;
       }
 
       const places = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      callback(places, 'firestore');
+      if (typeof callback === 'function') callback(places, 'firestore');
+      return places;
     } catch (err) {
       console.error('[BaqueanoFirestore] Error cargando places:', err.message);
-      callback(SEED_PLACES, 'seed');
+      if (typeof callback === 'function') callback(SEED_PLACES, 'seed');
+      return SEED_PLACES;
     }
   }
 
