@@ -24,7 +24,7 @@
 - Catálogo completo con precios reales de Nicaragua en todas las categorías territoriales.
 - Desglose transparente en cada tarjeta (.dest-real-price-strip y .dest-price-breakdown).
 - Calculadora de Retorno Rural Campesino vs intermediarios externos.
-- Cotizador de Reserva Bimoneda con régimen de exoneración de la Ley 306.
+- Cotizador de Reserva Bimoneda con régimen de exoneración de la Ley No. 1210 y 1211.
 - Asistente de sendero inteligente Baqueano AI y baliza satelital de auxilio SOS 24/7.
 ============================================================================
 -->
@@ -32,8 +32,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Destinos Protegidos & Cotizador | Baqueano Nicaragua</title>
-  <meta name="description" content="Explora los destinos naturales protegidos de Nicaragua, calcula el retorno directo a cooperativas campesinas y cotiza bajo la Ley 306.">
+  <title>Baqueano Nicaragua | Destinos Protegidos & Cotizador Bimoneda</title>
+  <meta name="description" content="Explora los destinos naturales protegidos de Nicaragua, calcula el retorno directo a cooperativas campesinas y cotiza bajo la Ley No. 1210 y 1211.">
   <link rel="icon" type="image/png" href="assets/images/logo.png">
 
   <!-- Google Fonts Oficiales -->
@@ -2188,14 +2188,14 @@
           </div>
         </div>
 
-        <!-- COTIZADOR BIMONEDA CON LEY 306 INTUR -->
+        <!-- COTIZADOR BIMONEDA CON LEYES 1210 & 1211 INTUR -->
         <div class="checkout-preview-panel destinos-inline-004">
           <div class="destinos-inline-013">
             <div>
               <div class="badge-section-pill destinos-inline-014">
                 <i class="fa-solid fa-receipt"></i> Motor Financiero Transparente
               </div>
-              <h3 class="destinos-inline-015">Cotizador Bimoneda con Ley 306 INTUR</h3>
+              <h3 class="destinos-inline-015">Cotizador Bimoneda con Leyes 1210 & 1211 INTUR</h3>
             </div>
             <div class="destinos-inline-016">
               TASA OFICIAL BCN: 1 USD = 36.65 NIO
@@ -2203,12 +2203,12 @@
           </div>
 
           <p class="destinos-inline-017">
-            La Ley 306 de Incentivos para la Industria Turística de la República de Nicaragua exonera del 15% del IVA a turistas no residentes que contratan servicios turísticos registrados.
+            El marco normativo vigente (Ley No. 1210 General de Turismo y Ley No. 1211 de Incentivos para los Desarrollos Turísticos) promueve el turismo comunitario y establece el tratamiento tributario aplicable a prestadores registrados.
           </p>
 
           <div class="tax-regime-toggle">
             <button class="regime-btn active" id="btnRegimeTourist" onclick="setTaxRegime('tourist')">
-              <i class="fa-solid fa-passport"></i> Turista Internacional (Exento 0% IVA - Ley 306)
+              <i class="fa-solid fa-passport"></i> Turista Internacional (Exento 0% IVA - Ley 1210 / 1211)
             </button>
             <button class="regime-btn" id="btnRegimeLocal" onclick="setTaxRegime('local')">
               <i class="fa-solid fa-id-card"></i> Residente Nacional (+15% IVA DGI)
@@ -2226,7 +2226,7 @@
             </div>
             <div class="receipt-row">
               <span>Régimen Fiscal Aplicado:</span>
-              <span id="receiptTax" class="destinos-inline-019">0% (Exonerado Ley 306 INTUR)</span>
+              <span id="receiptTax" class="destinos-inline-019">0% (Incentivo Ley 1210 / 1211 INTUR)</span>
             </div>
             <div class="receipt-row total-row">
               <span>Total a Liquidar (USD):</span>
@@ -2349,7 +2349,7 @@
           </div>
           <!-- Sellos de Confianza y Régimen Legal -->
           <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Ley 306 INTUR</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
             <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
             <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
           </div>
@@ -2548,13 +2548,13 @@
         <p class="destinos-inline-010">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
       </div>
       <div class="sos-gps-card destinos-inline-038">
-        <span class="destinos-inline-039">TUS COORDENADAS SATELITALES:</span>
-        <div id="sosGpsDisplay" class="destinos-inline-040">Buscando satélites...</div>
+        <span class="destinos-inline-039">TUS COORDENADAS GPS:</span>
+        <div id="sosGpsDisplay" class="destinos-inline-040">Obteniendo señal GPS...</div>
       </div>
       <div class="sos-lines-grid">
         <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical destinos-inline-041"></i><div><h5 class="destinos-inline-042">Cruz Blanca</h5><span class="destinos-inline-043">128</span></div></a>
         <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher destinos-inline-044"></i><div><h5 class="destinos-inline-042">Bomberos</h5><span class="destinos-inline-043">115</span></div></a>
-        <a href="tel:101" class="sos-phone-card"><i class="fa-solid fa-shield-halved destinos-inline-045"></i><div><h5 class="destinos-inline-042">Policía Turística</h5><span class="destinos-inline-043">101</span></div></a>
+        <a href="tel:118" class="sos-phone-card"><i class="fa-solid fa-shield-halved destinos-inline-045"></i><div><h5 class="destinos-inline-042">Policía Nacional</h5><span class="destinos-inline-043">118</span></div></a>
         <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp destinos-inline-046"></i><div><h5 class="destinos-inline-042">Mesa Baqueano</h5><span class="destinos-inline-043">WhatsApp SOS</span></div></a>
       </div>
       <div class="destinos-inline-047">
@@ -2565,6 +2565,9 @@
           <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
         </button>
       </div>
+      <p style="font-size: 0.76rem; color: rgba(244, 230, 193, 0.7); text-align: center; margin-top: 0.85rem; line-height: 1.4;">
+        <i class="fa-solid fa-circle-info" style="color: #2DD4BF;"></i> Las coordenadas GPS se leen satelitalmente desde tu dispositivo móvil sin requerir internet. El despacho de alerta por WhatsApp requiere conectividad de datos móviles o red WiFi.
+      </p>
     </div>
   </div>
 

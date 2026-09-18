@@ -7913,9 +7913,9 @@ img {
 
 /* ========================================================================== 
    PROCEDENCIA DE DATOS DEL OPS CENTER
-   ?? POR QU?: impedir que cifras de referencia se interpreten como producci?n.
-   ?? C?MO: un estado global cambia entre demostraci?n y Firestore verificado.
-   ?? QU?: banner accesible, insignia de entorno y variantes responsivas.
+   🎯 POR QUÉ: impedir que cifras de referencia se interpreten como producción.
+   ⚙️ CÓMO: un estado global cambia entre demostración y Firestore verificado.
+   📦 QUÉ: banner accesible, insignia de entorno y variantes responsivas.
    ========================================================================== */
 .ops-data-provenance {
   display: grid;
