@@ -480,6 +480,67 @@
     },
 
     // ——————————————————————————————
+    // drawRoute(stops): Traza una ruta física en el mapa uniendo las paradas seleccionadas
+    // ——————————————————————————————
+    drawRoute: function(stops) {
+      if (!this.map || !stops || stops.length === 0) return;
+
+      // Limpiar ruta anterior si existe
+      if (this.routeLayer) {
+        this.map.removeLayer(this.routeLayer);
+      }
+
+      const latLngs = [];
+      const routeMarkers = [];
+
+      // Cerrar cualquier popup abierto
+      this.map.closePopup();
+
+      // Recolectar coordenadas
+      stops.forEach(stop => {
+        if (stop.lat && stop.lng) {
+          latLngs.push([stop.lat, stop.lng]);
+          
+          // Encontrar el marcador correspondiente para resaltarlo (opcional)
+          const marker = this.markers.find(m => m.getLatLng().lat === stop.lat && m.getLatLng().lng === stop.lng);
+          if (marker) routeMarkers.push(marker);
+        }
+      });
+
+      if (latLngs.length < 2) {
+        console.warn('No hay suficientes coordenadas reales para trazar una ruta en el mapa.');
+        // Si solo hay uno, hacemos zoom a ese punto
+        if (latLngs.length === 1) {
+          this.map.setView(latLngs[0], 10, { animate: true, duration: 1.5 });
+        }
+        return;
+      }
+
+      // Trazar línea de ruta con estilo dinámico
+      this.routeLayer = L.polyline(latLngs, {
+        color: '#F65E01',
+        weight: 5,
+        opacity: 0.8,
+        dashArray: '10, 10',
+        lineCap: 'round'
+      }).addTo(this.map);
+
+      // Animar mapa para encuadrar la ruta completa
+      this.map.fitBounds(this.routeLayer.getBounds().pad(0.2), {
+        animate: true,
+        duration: 1.8,
+        easeLinearity: 0.25
+      });
+
+      // Efecto visual: resaltar el primer marcador de la ruta abriendo su popup
+      setTimeout(() => {
+        if (routeMarkers.length > 0) {
+          routeMarkers[0].openPopup();
+        }
+      }, 1900);
+    },
+
+    // ——————————————————————————————
     // _updateHUDTitle(): Actualiza el texto del HUD para reflejar el mapa real
     // ——————————————————————————————
     _updateHUDTitle: function () {
