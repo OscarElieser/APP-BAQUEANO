@@ -152,17 +152,51 @@
         return;
       }
 
+      // Extraer foto desde photoURL directa, providerData de Google o sesión local
+      let cachedAvatar = '';
+      try {
+        const stored = localStorage.getItem('baqueano_session');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && (parsed.avatar || parsed.photoURL)) {
+            cachedAvatar = parsed.avatar || parsed.photoURL;
+          }
+        }
+      } catch (_) {}
+
+      const resolvedPhoto = user.photoURL || 
+        (Array.isArray(user.providerData) && user.providerData.find((p) => p && p.photoURL)?.photoURL) || 
+        cachedAvatar || 
+        '';
+
       OpsState.currentUser = {
         uid: user.uid,
         email: user.email,
         name: user.displayName || user.email.split('@')[0],
-        photoURL: user.photoURL || '',
+        photoURL: resolvedPhoto,
         role: 'superAdmin'
       };
 
       OpsUI.updateUserProfileUI(OpsState.currentUser);
       OpsUI.hideLoginGate();
       OpsData.initDataSync();
+
+      // Enriquecer foto desde Firestore de forma asíncrona si existe documento en 'usuarios'
+      try {
+        const db = OpsData.getDb();
+        if (db && user.uid) {
+          db.collection('usuarios').doc(user.uid).get().then((doc) => {
+            if (doc.exists) {
+              const uData = doc.data();
+              const fsPhoto = uData.photoURL || uData.avatar || uData.foto;
+              if (fsPhoto && fsPhoto !== OpsState.currentUser.photoURL) {
+                OpsState.currentUser.photoURL = fsPhoto;
+                OpsUI.updateUserProfileUI(OpsState.currentUser);
+              }
+            }
+          }).catch(() => {});
+        }
+      } catch (_) {}
 
       // Registro de inicio de sesión en auditoría
       OpsData.logAuditEvent({
@@ -515,11 +549,23 @@
       const roleEl = document.getElementById('opsTopUserRole');
       const avatarEl = document.getElementById('opsTopUserAvatar');
 
-      if (nameEl) nameEl.textContent = user.name || user.email;
+      const displayName = user.name || user.displayName || user.email || 'Administrador';
+      if (nameEl) nameEl.textContent = displayName;
       if (roleEl) roleEl.textContent = 'Super Administrador';
+
       if (avatarEl) {
-        const initials = (user.name || user.email).substring(0, 2).toUpperCase();
-        avatarEl.textContent = initials;
+        const photo = user.photoURL || 
+                      (Array.isArray(user.providerData) && user.providerData.find((p) => p && p.photoURL)?.photoURL) || 
+                      '';
+        const initials = displayName.substring(0, 2).toUpperCase();
+
+        if (photo) {
+          avatarEl.innerHTML = `<img src="${photo}" alt="${displayName}" class="ops-user-avatar-img" referrerpolicy="no-referrer" loading="eager" onerror="this.remove(); this.parentElement.textContent='${initials}';">`;
+          avatarEl.title = displayName;
+        } else {
+          avatarEl.textContent = initials;
+          avatarEl.title = displayName;
+        }
       }
     },
 
