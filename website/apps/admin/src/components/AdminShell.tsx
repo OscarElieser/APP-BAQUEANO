@@ -52,8 +52,18 @@ export function AdminShell({ children }: Readonly<{ children: React.ReactNode }>
               );
             })}
           </nav>
+          
+          <div className="mt-auto pt-4 pb-4 border-t border-white/10 hidden lg:block">
+            <button className="flex items-center justify-between w-full rounded-md border border-white/10 bg-[#08111f] px-3 py-2 text-sm text-white/50 hover:bg-white/5 transition-colors focus-ring" id="opsCommandPaletteTrigger">
+              <div className="flex items-center gap-2 truncate">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span className="truncate">Buscar destino, comando...</span>
+              </div>
+              <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-bold text-white/70 ml-2 shrink-0">Ctrl+K</span>
+            </button>
+          </div>
         </aside>
-        <div className="min-w-0">
+        <div className="min-w-0 flex flex-col">
           <header className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-white/10 bg-[#08111f]/86 px-4 backdrop-blur lg:px-8">
             <div>
               <p className="font-tech text-xs font-bold uppercase text-[#F65E01] tracking-wider">

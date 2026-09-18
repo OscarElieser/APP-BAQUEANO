@@ -165,6 +165,10 @@ export interface Reservation {
   readonly serviceName?: string;
   readonly currency?: "NIO" | "USD";
   readonly unitPrice?: number;
+  readonly totalPrice?: number;
+  readonly notes?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
 }
 
 export interface WebsiteBlock {
@@ -180,11 +184,6 @@ export interface WebsitePage {
   readonly blocks: readonly WebsiteBlock[];
   readonly status: "published" | "draft";
   readonly updatedAt: string;
-}
-  readonly totalPrice?: number;
-  readonly notes?: string;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
 }
 
 export type NotificationType =
