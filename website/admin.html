@@ -760,46 +760,78 @@
 
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label">Título de la Sección *</label>
+            <label class="ops-form-label" id="lblSecFormTitle">Título de la Sección / Encabezado *</label>
             <input type="text" class="ops-form-input" id="secFormTitle" placeholder="Ej. El Sendero lo Abren las Comunidades" required>
+            <span class="ops-form-hint" id="hintSecFormTitle" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label">Tipo de Bloque</label>
+            <label class="ops-form-label" id="lblSecFormType">Tipo de Componente</label>
             <select class="ops-form-select" id="secFormType">
+              <option value="header">Encabezado &amp; Barra de Navegación</option>
               <option value="hero">Hero Cinemático Principal</option>
               <option value="content">Bloque de Contenido / Texto</option>
               <option value="cards">Rejilla de Tarjetas / Destacados</option>
-              <option value="banner">Banner de Anuncio / Alerta</option>
+              <option value="map">Mapa Interactivo &amp; Coordenadas</option>
+              <option value="form">Formulario / Cotizador / Registro</option>
               <option value="cta">Llamada a la Acción (CTA)</option>
-              <option value="testimonial">Testimonio Campesino</option>
+              <option value="banner">Banner de Anuncio / Alerta</option>
+              <option value="testimonial">Testimonios &amp; Reseñas</option>
+              <option value="footer">Pie de Página / Footer Institucional</option>
               <option value="custom">Bloque Personalizado</option>
             </select>
+            <span class="ops-form-hint" id="hintSecFormType" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
-        </div>
-
-        <div class="ops-form-group">
-          <label class="ops-form-label">Subtítulo / Bajada Cultural</label>
-          <input type="text" class="ops-form-input" id="secFormSubtitle" placeholder="Ej. Ecoturismo Auténtico en Nicaragua sin intermediarios">
-        </div>
-
-        <div class="ops-form-group">
-          <label class="ops-form-label">Cuerpo del Contenido / Descripción</label>
-          <textarea class="ops-form-textarea" id="secFormContent" rows="4" placeholder="Texto descriptivo, manifiesto o contenido que se despliega en la sección..."></textarea>
         </div>
 
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label">Texto del Botón CTA (Opcional)</label>
-            <input type="text" class="ops-form-input" id="secFormCtaText" placeholder="Ej. Explorar Nicaragua en 3D">
+            <label class="ops-form-label" id="lblSecFormSubtitle">Subtítulo / Bajada Cultural</label>
+            <input type="text" class="ops-form-input" id="secFormSubtitle" placeholder="Ej. Ecoturismo Auténtico en Nicaragua sin intermediarios">
+            <span class="ops-form-hint" id="hintSecFormSubtitle" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label">Enlace / Destino del Botón</label>
-            <input type="text" class="ops-form-input" id="secFormCtaLink" placeholder="Ej. #mapaVivo3dSection o destinos.html">
+            <label class="ops-form-label" id="lblSecFormBadge">Distintivo / Badge Superior</label>
+            <input type="text" class="ops-form-input" id="secFormBadgeText" placeholder="Ej. GPS Satelital 24/7, Ley 306, etc.">
+            <span class="ops-form-hint" id="hintSecFormBadge" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
         </div>
 
         <div class="ops-form-group">
-          <label class="ops-form-label">URL de Fotografía / Fondo Multimedia</label>
+          <label class="ops-form-label" id="lblSecFormContent">Cuerpo del Contenido / Descripción / Texto Legal</label>
+          <textarea class="ops-form-textarea" id="secFormContent" rows="4" placeholder="Texto descriptivo, párrafos, notas de copyright o manifiesto que se despliega en este componente..."></textarea>
+          <span class="ops-form-hint" id="hintSecFormContent" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
+        </div>
+
+        <!-- BOTÓN PRINCIPAL (CTA 1) -->
+        <div class="ops-form-grid-2">
+          <div class="ops-form-group">
+            <label class="ops-form-label" id="lblSecFormCtaText">Botón Principal: Texto</label>
+            <input type="text" class="ops-form-input" id="secFormCtaText" placeholder="Ej. Explorar Nicaragua en 3D">
+            <span class="ops-form-hint" id="hintSecFormCtaText" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label" id="lblSecFormCtaLink">Botón Principal: Enlace / URL</label>
+            <input type="text" class="ops-form-input" id="secFormCtaLink" placeholder="Ej. #mapaVivo3dSection o destinos.html">
+            <span class="ops-form-hint" id="hintSecFormCtaLink" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
+          </div>
+        </div>
+
+        <!-- BOTÓN SECUNDARIO (CTA 2) -->
+        <div class="ops-form-grid-2">
+          <div class="ops-form-group">
+            <label class="ops-form-label" id="lblSecFormCta2Text">Botón Secundario: Texto (Opcional)</label>
+            <input type="text" class="ops-form-input" id="secFormCta2Text" placeholder="Ej. Descargar APK Android">
+            <span class="ops-form-hint" id="hintSecFormCta2Text" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
+          </div>
+          <div class="ops-form-group">
+            <label class="ops-form-label" id="lblSecFormCta2Link">Botón Secundario: Enlace / URL</label>
+            <input type="text" class="ops-form-input" id="secFormCta2Link" placeholder="Ej. assets/BaqueanoNicaragua.apk">
+            <span class="ops-form-hint" id="hintSecFormCta2Link" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
+          </div>
+        </div>
+
+        <div class="ops-form-group">
+          <label class="ops-form-label" id="lblSecFormImage">URL de Fotografía / Fondo Multimedia</label>
           <div style="display:flex; gap:0.5rem;">
             <input type="text" class="ops-form-input" id="secFormImageUrl" placeholder="https://firebasestorage.googleapis.com/... o assets/images/...">
             <button type="button" class="btn-ops-matte accent" id="btnUploadSectionMedia" style="white-space:nowrap;">

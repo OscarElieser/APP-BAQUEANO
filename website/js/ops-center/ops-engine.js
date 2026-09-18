@@ -38,39 +38,63 @@
   'use strict';
 
   // --------------------------------------------------------------------------
-  // 0. REGISTRO UNIVERSAL DE PÁGINAS Y SECCIONES DEL SITIO WEB (12 PÁGINAS)
+  // --------------------------------------------------------------------------
+  // 0. REGISTRO UNIVERSAL DE PÁGINAS Y SECCIONES DEL SITIO WEB (16 PÁGINAS)
   // --------------------------------------------------------------------------
   const SITE_PAGES_REGISTRY = {
+    // 01. PORTADA PRINCIPAL (INDEX)
     index: {
       name: 'Portada Principal',
       file: 'index.html',
       icon: 'fa-house',
       sections: [
         {
+          id: 'sec_index_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Ecoturismo Auténtico & Soberanía Territorial Campesina',
+          badgeText: 'GPS Satelital Activo 24/7',
+          content: 'Inicio:index.html, Destinos:destinos.html, Guía Verde:ambiental.html, Aliados:aliados.html, Nosotros:nosotros.html, Gastronomía:gastronomia.html, Historia:historia.html, Música:musica.html, Denuncias:denuncias.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_index_hero',
           name: 'Hero Principal Cinemático',
           type: 'hero',
           title: 'El Sendero lo Abren las Comunidades',
           subtitle: 'Ecoturismo Auténtico en Nicaragua sin intermediarios',
+          badgeText: 'Soberanía Ecoturística',
           content: 'Baqueano existe para transformar el turismo en una actividad más responsable, distribuida, segura, culturalmente consciente y beneficiosa para las familias campesinas.',
           ctaText: 'Explora Nicaragua en 3D',
           ctaLink: '#mapaVivo3dSection',
+          cta2Text: 'Descargar APK Android',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
           imageUrl: 'assets/images/heroes/hero-bg.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
         },
         {
           id: 'sec_index_map3d',
           name: 'Mapa Vivo 3D de Nicaragua',
-          type: 'custom',
+          type: 'map',
           title: 'Mapa Topográfico Vivo 3D de Nicaragua',
           subtitle: 'Relieve de volcanes, lagos, reservas y cordilleras con Three.js',
+          badgeText: 'WebGL 3D a 60fps',
           content: 'Visualiza la geografía soberana de Nicaragua en WebGL interactivo a 60fps con brújula de rumbo y selector de regiones.',
           ctaText: 'Abrir Navegación Libre',
           ctaLink: '#mapaVivo3dSection',
+          cta2Text: 'Ver Ficha Departamental',
+          cta2Link: 'departamento.html',
           imageUrl: '',
           status: 'published',
-          sortOrder: 2
+          sortOrder: 3
         },
         {
           id: 'sec_index_routes',
@@ -78,12 +102,15 @@
           type: 'custom',
           title: 'Diseña tu Travesía Comunitaria',
           subtitle: 'Itinerarios inteligentes con presupuesto real bimoneda (C$ y US$ a tipo de cambio oficial BCN)',
+          badgeText: 'Cotizador Bimoneda Oficial',
           content: 'Selecciona tus días de viaje, presupuesto diario y preferencias para generar una ruta conectada a las cooperativas anfitrionas.',
           ctaText: 'Calcular Ruta',
           ctaLink: '#disenadorRutasSection',
+          cta2Text: 'Explorar Catálogo',
+          cta2Link: 'destinos.html',
           imageUrl: '',
           status: 'published',
-          sortOrder: 3
+          sortOrder: 4
         },
         {
           id: 'sec_index_featured',
@@ -91,12 +118,15 @@
           type: 'cards',
           title: 'Destinos Protegidos en Vivo',
           subtitle: 'Senderos, volcanes activos y reservas campesinas conectadas a Cloud Firestore',
+          badgeText: '76 Áreas Protegidas',
           content: 'Explora fichas técnicas verificadas con coordenadas precisas, dificultad y tarifas justas.',
           ctaText: 'Ver Catálogo Completo',
           ctaLink: 'destinos.html',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
           status: 'published',
-          sortOrder: 4
+          sortOrder: 5
         },
         {
           id: 'sec_index_testimonials',
@@ -104,12 +134,15 @@
           type: 'testimonial',
           title: 'Historias Reales de Familias y Viajeros',
           subtitle: 'Transparencia total sin comisiones foráneas abusivas',
+          badgeText: 'Comunidad Viva',
           content: 'Campesinos de Somoto, Ometepe y Selva Negra relatan el impacto directo del modelo Baqueano.',
           ctaText: 'Enviar Testimonio',
           ctaLink: '#testimoniosComunitarios',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: '',
           status: 'published',
-          sortOrder: 5
+          sortOrder: 6
         },
         {
           id: 'sec_index_apk',
@@ -117,78 +150,177 @@
           type: 'banner',
           title: 'Descarga Baqueano para Android',
           subtitle: 'Mapas offline, coordenadas GPS sin señal y botón SOS satelital',
+          badgeText: '100% Android Soberano',
           content: 'Instala la versión oficial del APK en tu dispositivo móvil y lleva el conocimiento campesino en el bolsillo.',
           ctaText: 'Descargar BaqueanoNicaragua.apk',
           ctaLink: 'assets/BaqueanoNicaragua.apk',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
-          sortOrder: 6
+          sortOrder: 7
         },
         {
           id: 'sec_index_register',
           name: 'Postulación de Anfitriones Comunitarios',
-          type: 'cta',
+          type: 'form',
           title: 'Registra tu Local, Hospedaje o Cooperativa',
           subtitle: 'Formulario oficial conectado directamente a la Mesa Técnica Baqueano vía WhatsApp (+505 8443-1289)',
+          badgeText: 'Ley 1210 / Ley 306',
           content: 'Inscribe tu negocio bajo los principios de turismo ético y soberanía comunitaria.',
           ctaText: 'Postular a Mesa Baqueano',
           ctaLink: '#registroAnfitrionSection',
+          cta2Text: 'WhatsApp Directo',
+          cta2Link: 'https://wa.me/50584431289',
           imageUrl: '',
           status: 'published',
-          sortOrder: 7
+          sortOrder: 8
+        },
+        {
+          id: 'sec_index_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Atención 24/7: +505 8443-1289 • Emergencias: 118',
+          badgeText: 'Acreditado INTUR • MARENA',
+          content: '© 2026 Baqueano Nicaragua. Plataforma Soberana de Ecoturismo Campesino y Tecnológico. Sin intermediarios foráneos.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Canal de Denuncias',
+          cta2Link: 'denuncias.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 9
         }
       ]
     },
+
+    // 02. CATÁLOGO DE DESTINOS
     destinos: {
       name: 'Catálogo de Destinos',
       file: 'destinos.html',
       icon: 'fa-mountain',
       sections: [
         {
+          id: 'sec_dest_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Catálogo Oficial de Destinos y Áreas Protegidas',
+          badgeText: 'GPS Satelital Activo',
+          content: 'Inicio:index.html, Destinos:destinos.html, Guía Verde:ambiental.html, Aliados:aliados.html, Nosotros:nosotros.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_dest_hero',
-          name: 'Hero de Destinos',
+          name: 'Hero de Destinos & Búsqueda',
           type: 'hero',
           title: 'Catálogo Oficial de Destinos y Áreas Protegidas',
           subtitle: 'Fichas técnicas con coordenadas GPS verificadas y cotizador bimoneda Ley 306',
-          content: 'Encuentra senderos, volcanes y reservas naturales administradas con respeto ambiental.',
+          badgeText: 'Geolocalización Verificada',
+          content: 'Encuentra senderos, volcanes y reservas naturales administradas con respeto ambiental por familias nicaragüenses.',
           ctaText: 'Filtrar por Departamento',
           ctaLink: '#filtrosDepartamento',
+          cta2Text: 'Ver en Mapa 3D',
+          cta2Link: 'index.html#mapaVivo3dSection',
           imageUrl: 'assets/images/destinos/cerro_negro.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_dest_calc',
+          name: 'Cotizador Bimoneda en Tiempo Real',
+          type: 'form',
+          title: 'Calculadora de Presupuesto Bimoneda (C$ y US$)',
+          subtitle: 'Conversión transparente bajo la tasa oficial del Banco Central de Nicaragua (BCN)',
+          badgeText: 'Transparencia Fiscal Ley 306',
+          content: 'Calcula el costo total de tus expediciones con guías nativos, hospedajes comunitarios y alimentación tradicional.',
+          ctaText: 'Calcular Presupuesto',
+          ctaLink: '#cotizadorBimonedaSection',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
         },
         {
           id: 'sec_dest_grid',
           name: 'Rejilla de Destinos Sincronizada',
           type: 'cards',
-          title: 'Senderos Activos en Todo el País',
+          title: 'Senderos y Destinos Activos en Todo el País',
           subtitle: 'Sincronización en tiempo real desde Firestore con la app Android',
-          content: 'Tarjetas dinámicas con dificultad, tarifas en córdobas y dólares y contacto de baqueanos.',
+          badgeText: 'Fichas Oficiales',
+          content: 'Tarjetas dinámicas con dificultad, tarifas en córdobas y dólares, coordenadas y contacto de baqueanos nativos.',
           ctaText: 'Ver Detalles',
           ctaLink: '#',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: '',
           status: 'published',
-          sortOrder: 2
+          sortOrder: 4
+        },
+        {
+          id: 'sec_dest_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Atención 24/7: +505 8443-1289 • Emergencias: 118',
+          badgeText: 'Acreditado INTUR • MARENA',
+          content: '© 2026 Baqueano Nicaragua. Destinos verificados y protegidos por sus guardianes comunitarios.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Guía Ambiental',
+          cta2Link: 'ambiental.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 03. GUÍA AMBIENTAL & SOSTENIBILIDAD
     ambiental: {
       name: 'Guía Ambiental & Sostenibilidad',
       file: 'ambiental.html',
       icon: 'fa-leaf',
       sections: [
         {
+          id: 'sec_amb_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Guía Ambiental & Protección de Áreas Protegidas',
+          badgeText: 'Huella Cero',
+          content: 'Inicio:index.html, Destinos:destinos.html, Guía Verde:ambiental.html, Denuncias:denuncias.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_amb_hero',
           name: 'Hero Ambiental',
           type: 'hero',
           title: 'Guía Ambiental & Huella Cero en Territorio Soberano',
           subtitle: 'Protocolo de protección para las 76 áreas protegidas de Nicaragua',
+          badgeText: 'Custodia Ecológica',
           content: 'El ecoturismo campesino protege nuestros bosques, fuentes de agua y biodiversidad nativa.',
           ctaText: 'Leer Decálogo Verde',
           ctaLink: '#decalogoVerde',
+          cta2Text: 'Denunciar Infracción',
+          cta2Link: 'denuncias.html',
           imageUrl: 'assets/images/destinos/selva_negra.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
         },
         {
           id: 'sec_amb_decalogo',
@@ -196,32 +328,88 @@
           type: 'content',
           title: '10 Mandamientos del Ecoturismo Consciente',
           subtitle: 'Normas innegociables de no dejar rastro y respeto a la cosmovisión rural',
-          content: 'No extraigas flora silvestre, no introduzcas plásticos de un solo uso y apoya el consumo local.',
-          ctaText: 'Conocer Protocolos',
+          badgeText: 'Decálogo Ético',
+          content: 'No extraigas flora silvestre, no introduzcas plásticos de un solo uso y apoya el consumo de alimentos del fogón local.',
+          ctaText: 'Conocer Protocolos MARENA',
           ctaLink: '#protocolosMarena',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: '',
           status: 'published',
-          sortOrder: 2
+          sortOrder: 3
+        },
+        {
+          id: 'sec_amb_reservas',
+          name: 'Catálogo de Reservas y Áreas Protegidas',
+          type: 'cards',
+          title: 'Las 76 Áreas Naturales Bajo Custodia Comunitaria',
+          subtitle: 'Refugios de vida silvestre, reservas biológicas y parques nacionales',
+          badgeText: 'Patrimonio Natural',
+          content: 'Descubre los ecosistemas de Bosawás, Indio Maíz, Mombacho, Zapatera y Miraflor.',
+          ctaText: 'Explorar Reservas',
+          ctaLink: '#reservasNaturales',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_amb_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Línea Verde MARENA: 118 • WhatsApp Baqueano: +505 8443-1289',
+          badgeText: 'Protección Ambiental Activa',
+          content: '© 2026 Baqueano Nicaragua. Conservación activa de la madre tierra sin concesiones extractivistas.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Canal de Denuncias',
+          cta2Link: 'denuncias.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 04. RED DE ALIADOS & NEGOCIOS
     aliados: {
       name: 'Red de Aliados & Negocios',
       file: 'aliados.html',
       icon: 'fa-store',
       sections: [
         {
+          id: 'sec_aliados_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Red de Anfitriones y Cooperativas Rurales Certificadas',
+          badgeText: 'Comercio Justo Directo',
+          content: 'Inicio:index.html, Destinos:destinos.html, Aliados:aliados.html, Mi Negocio:mi-negocio.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Afiliar mi Negocio',
+          cta2Link: 'mi-negocio.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_aliados_hero',
           name: 'Hero de Aliados',
           type: 'hero',
           title: 'Red de Anfitriones y Cooperativas Campesinas',
           subtitle: 'Directorio acreditado con sello verificado bajo Ley 1210/1211',
-          content: 'Hospedajes rurales, comederos típicos, guías certificados y transporte comunitario.',
+          badgeText: 'Sello Verificado',
+          content: 'Hospedajes rurales, comederos típicos, guías certificados y cooperativas de transporte comunitario sin comisiones abusivas.',
           ctaText: 'Contactar por WhatsApp',
           ctaLink: '#directorioAliados',
+          cta2Text: 'Inscribir mi Negocio',
+          cta2Link: 'mi-negocio.html',
           imageUrl: 'assets/images/aliados/posada_ecologica_la_abuela.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
         },
         {
           id: 'sec_aliados_grid',
@@ -229,32 +417,88 @@
           type: 'cards',
           title: 'Tarjetas Interactivas con Giro 3D',
           subtitle: 'Toca cada tarjeta para voltearla y chatear directamente por WhatsApp con el anfitrión',
+          badgeText: 'Directo al Fogón Campesino',
           content: 'Datos reales comprobados en campo sin intermediarios extranjeros.',
           ctaText: 'Ver Negocios',
           ctaLink: '#',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: '',
           status: 'published',
-          sortOrder: 2
+          sortOrder: 3
+        },
+        {
+          id: 'sec_aliados_benefits',
+          name: 'Beneficios de Afiliación Soberana',
+          type: 'content',
+          title: '¿Por qué Integrar la Red Baqueano?',
+          subtitle: 'Tecnología digital soberana sin pagos mensuales extorsivos',
+          badgeText: 'Economía Solidaria',
+          content: 'Visibilidad en la app Android y en la web, cotizaciones en moneda nacional y dólares, y respaldo técnico directo de la Mesa Baqueano.',
+          ctaText: 'Unirme a la Red',
+          ctaLink: 'mi-negocio.html',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_aliados_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Mesa de Atención a Aliados: +505 8443-1289',
+          badgeText: 'Ley 1210 de Comercio Justo',
+          content: '© 2026 Baqueano Nicaragua. Apoyando el trabajo digno de las cooperativas y comederos del país.',
+          ctaText: 'WhatsApp Aliados',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Portal Mi Negocio',
+          cta2Link: 'mi-negocio.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 05. NOSOTROS & MANIFIESTO
     nosotros: {
       name: 'Nosotros & Manifiesto',
       file: 'nosotros.html',
       icon: 'fa-users',
       sections: [
         {
+          id: 'sec_nosotros_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Manifiesto de Soberanía Ecoturística',
+          badgeText: 'Identidad y Soberanía',
+          content: 'Inicio:index.html, Destinos:destinos.html, Nosotros:nosotros.html, Historia:historia.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_nosotros_hero',
           name: 'Manifiesto Soberano',
           type: 'hero',
           title: 'Manifiesto Baqueano: Soberanía Ecoturística',
           subtitle: 'Tecnología digital puesta al servicio del campesinado nicaragüense',
-          content: 'Nacimos para que el turismo beneficie directamente a quienes cuidan la tierra y abren los senderos.',
+          badgeText: 'Pueblo y Territorio',
+          content: 'Nacimos para que el turismo beneficie directamente a quienes cuidan la tierra, protegen las cuencas y abren los senderos.',
           ctaText: 'Conoce Nuestra Misión',
           ctaLink: '#misionBaqueano',
+          cta2Text: 'Leer Decálogo Verde',
+          cta2Link: 'ambiental.html',
           imageUrl: 'assets/images/destinos/canon_de_somoto.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
         },
         {
           id: 'sec_nosotros_mision',
@@ -262,152 +506,962 @@
           type: 'content',
           title: 'Comercio Justo, Identidad y Seguridad Satelital',
           subtitle: 'Los tres ejes que guían cada línea de código y cada sendero mapeado',
+          badgeText: 'Tres Pilares',
           content: 'Cero comisiones abusivas, rescate de la historia viva y tecnología de rescate SOS en Android.',
           ctaText: 'Unirme al Movimiento',
-          ctaLink: '#',
+          ctaLink: 'aliados.html',
+          cta2Text: '',
+          cta2Link: '',
           imageUrl: '',
           status: 'published',
-          sortOrder: 2
+          sortOrder: 3
+        },
+        {
+          id: 'sec_nosotros_cooperativas',
+          name: 'Red de Guardianes y Familias Fundadoras',
+          type: 'cards',
+          title: 'Las Familias que Hacen Posible Baqueano',
+          subtitle: 'Testimonios vivos de Somoto, Miraflor, Ometepe y Río San Juan',
+          badgeText: 'Comunidades Fundadoras',
+          content: 'Conoce a los guías ancestrales y sus historias de resistencia y arraigo campesino.',
+          ctaText: 'Ver Familias',
+          ctaLink: '#guardianesTerritorio',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_nosotros_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Contacto Comunitario: +505 8443-1289',
+          badgeText: 'Ecoturismo 100% Nicaragüense',
+          content: '© 2026 Baqueano Nicaragua. Sembrando soberanía, dignidad y respeto mutuo.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Historia Patria',
+          cta2Link: 'historia.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 06. GASTRONOMÍA ANCESTRAL
     gastronomia: {
       name: 'Gastronomía Ancestral',
       file: 'gastronomia.html',
       icon: 'fa-utensils',
       sections: [
         {
+          id: 'sec_gastro_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Gastronomía Ancestral y Fogón Campesino',
+          badgeText: 'Patrimonio Culinario',
+          content: 'Inicio:index.html, Destinos:destinos.html, Gastronomía:gastronomia.html, Aliados:aliados.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_gastro_hero',
           name: 'Hero Gastronómico',
           type: 'hero',
           title: 'Gastronomía Ancestral de Nicaragua',
           subtitle: 'El sabor del fogón de leña y el maíz nixtamalizado de nuestras abuelas',
-          content: 'Gallo pinto, nacatamal, vigorón, baho, quesillo e indio viejo: la identidad patria servida en la mesa.',
+          badgeText: 'Sabor de la Tierra',
+          content: 'Gallo pinto, nacatamal, vigorón, baho, quesillo e indio viejo: la identidad patria servida en la mesa campesina.',
           ctaText: 'Explorar Recetas',
           ctaLink: '#recetasTradicionales',
+          cta2Text: 'Ver Comederos Locales',
+          cta2Link: 'aliados.html',
           imageUrl: 'assets/images/comida/gallo_pinto.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_gastro_recetario',
+          name: 'Recetario Campesino y Platillos Típicos',
+          type: 'cards',
+          title: 'Platillos Emblema de los 15 Departamentos',
+          subtitle: 'Preparaciones tradicionales documentadas directamente en los fogones rurales',
+          badgeText: 'Recetas Tradicionales',
+          content: 'Ingredientes nativos, técnicas de cocción en barro y maridaje con bebidas ancestrales.',
+          ctaText: 'Ver Platillos',
+          ctaLink: '#platillosTradicionales',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_gastro_bebidas',
+          name: 'Bebidas Tradicionales y Refrescos de Maíz',
+          type: 'content',
+          title: 'Pinolillo, Tiste, Cacao y Chicha Bruja',
+          subtitle: 'Bebidas soberanas que alimentaron a nuestros pueblos originarios',
+          badgeText: 'Herencia Precolombina',
+          content: 'El maíz como eje sagrado de nuestra alimentación e identidad cultural nicaragüense.',
+          ctaText: 'Conocer Tradición',
+          ctaLink: '#bebidasAncestrales',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_gastro_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Mesa de Tradiciones: +505 8443-1289',
+          badgeText: 'Fogón de Leña Campesino',
+          content: '© 2026 Baqueano Nicaragua. Rescatando la cocina autóctona frente a la comida rápida foránea.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Directorio de Comedores',
+          cta2Link: 'aliados.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 07. HISTORIA PATRIA
     historia: {
       name: 'Historia Patria',
       file: 'historia.html',
       icon: 'fa-scroll',
       sections: [
         {
+          id: 'sec_hist_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Cronología Soberana e Historia Viva',
+          badgeText: 'Memoria Histórica',
+          content: 'Inicio:index.html, Historia:historia.html, Música:musica.html, Nosotros:nosotros.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_hist_hero',
           name: 'Hero de Historia',
           type: 'hero',
           title: 'Cronología Soberana de Nicaragua',
           subtitle: 'Hitos patrios desde los pueblos originarios hasta la defensa de la autodeterminación',
+          badgeText: 'Soberanía Nacional',
           content: 'Descubre la memoria viva que impregna cada valle, volcán y río de nuestra patria bendita.',
           ctaText: 'Ver Línea de Tiempo',
           ctaLink: '#lineaDeTiempo',
+          cta2Text: 'Conocer Patriotas',
+          cta2Link: '#patriotasSoberanos',
           imageUrl: 'assets/images/heroes/hero-bg.jpg',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_hist_timeline',
+          name: 'Línea de Tiempo Soberana y Periodos',
+          type: 'content',
+          title: 'Grandes Épocas de la Resistencia Popular',
+          subtitle: 'Desde la lucha contra la ocupación colonial hasta la actualidad soberana',
+          badgeText: 'Cronología Oficial',
+          content: 'Diriangén, Nicarao, San Jacinto 1856, Zeledón 1912 y la gesta del General Sandino.',
+          ctaText: 'Explorar Hitos',
+          ctaLink: '#periodosHistoricos',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_hist_heroes',
+          name: 'Héroes y Mártires de la Patria',
+          type: 'cards',
+          title: 'Defensores de la Autodeterminación Territorial',
+          subtitle: 'Vidas dedicadas a la libertad, soberanía y dignidad de las familias campesinas',
+          badgeText: 'Dignidad Heroica',
+          content: 'Biografías y testimonios históricos de los constructores de la nación.',
+          ctaText: 'Ver Biografías',
+          ctaLink: '#biografiasPatrias',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_hist_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Archivo Histórico Baqueano: +505 8443-1289',
+          badgeText: 'Memoria Viva de la Patria',
+          content: '© 2026 Baqueano Nicaragua. La historia patria es el cimiento de nuestro ecoturismo soberano.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Música & Folclore',
+          cta2Link: 'musica.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 08. MÚSICA & FOLCLORE
     musica: {
       name: 'Música & Folclore',
       file: 'musica.html',
       icon: 'fa-guitar',
       sections: [
         {
+          id: 'sec_mus_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Patrimonio Sonoro y Tradiciones Vivas',
+          badgeText: 'Folclore Nacional',
+          content: 'Inicio:index.html, Música:musica.html, Historia:historia.html, Gastronomía:gastronomia.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_mus_hero',
           name: 'Hero Folclórico',
           type: 'hero',
           title: 'Patrimonio Sonoro de Nicaragua',
           subtitle: 'Son de marimba, mazurcas norteñas y polkas segovianas',
-          content: 'La música autóctona que acompaña las fiestas patronales y las faenas campesinas.',
+          badgeText: 'Sonidos de la Tierra',
+          content: 'La música autóctona que acompaña las fiestas patronales, las faenas campesinas y la danza en los atrios.',
           ctaText: 'Escuchar Grabaciones',
           ctaLink: '#reproductorSonoro',
+          cta2Text: 'Ver Danzas Típicas',
+          cta2Link: '#danzasTradicionales',
           imageUrl: '',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_mus_player',
+          name: 'Reproductor Sonoro Comunitario',
+          type: 'custom',
+          title: 'Grabaciones de Campo y Marimba de Arco',
+          subtitle: 'Audios preservados en Cloud Storage directamente de manos de los músicos nativos',
+          badgeText: 'Audio Alta Fidelidad',
+          content: 'El solar de Monimbó, La mora limpia, Aquella indita y los sones de toro tradicionales.',
+          ctaText: 'Reproducir Colección',
+          ctaLink: '#reproductorSonoro',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_mus_danzas',
+          name: 'Danzas y Bailes Tradicionales',
+          type: 'cards',
+          title: 'El Güegüense, Las Inditas y El Toro Huaco',
+          subtitle: 'Expresiones dancísticas reconocidas como Patrimonio Inmaterial de la Humanidad',
+          badgeText: 'Patrimonio UNESCO',
+          content: 'Trajes de satín, máscaras de madera y zapateo en las fiestas de Masaya, Diriamba y León.',
+          ctaText: 'Ver Danzas',
+          ctaLink: '#danzasPatrimoniales',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_mus_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Mesa de Cultura y Tradiciones: +505 8443-1289',
+          badgeText: 'Música Campesina Auténtica',
+          content: '© 2026 Baqueano Nicaragua. Preservando el compás campesino frente al olvido comercial.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Gastronomía Ancestral',
+          cta2Link: 'gastronomia.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 09. CANAL DE DENUNCIAS AMBIENTALES
     denuncias: {
       name: 'Canal de Denuncias',
       file: 'denuncias.html',
       icon: 'fa-shield-halved',
       sections: [
         {
+          id: 'sec_den_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Canal Oficial de Denuncia Ambiental y Territorial',
+          badgeText: 'Alerta Ciudadana 24/7',
+          content: 'Inicio:index.html, Denuncias:denuncias.html, Guía Verde:ambiental.html, Destinos:destinos.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_den_hero',
           name: 'Hero de Denuncias',
           type: 'hero',
           title: 'Canal Comunitario de Denuncia Ambiental',
           subtitle: 'Alerta ciudadana para la protección de cuencas, bosques y fauna silvestre',
-          content: 'Tus reportes son canalizados ante las autoridades ambientales competentes con respaldo georreferenciado.',
+          badgeText: 'Vigilancia Popular',
+          content: 'Tus reportes son canalizados ante las autoridades ambientales competentes con respaldo georreferenciado e inmutable.',
           ctaText: 'Presentar Denuncia',
           ctaLink: '#formularioDenuncia',
+          cta2Text: 'Ver Marco Jurídico',
+          cta2Link: '#marcoJuridicoMarena',
           imageUrl: '',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_den_form',
+          name: 'Formulario de Denuncia Georreferenciada',
+          type: 'form',
+          title: 'Formulario Oficial de Denuncia Ambiental',
+          subtitle: 'Ingresa los datos, ubicación y evidencia gráfica para tramitación inmediata',
+          badgeText: 'Formulario Seguro',
+          content: 'Reporta tala clandestina, caza furtiva, contaminación de ríos o vertederos ilegales en áreas protegidas.',
+          ctaText: 'Enviar Denuncia',
+          ctaLink: '#formularioDenuncia',
+          cta2Text: 'WhatsApp Emergencias',
+          cta2Link: 'https://wa.me/50584431289',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_den_legal',
+          name: 'Marco Jurídico y Procedimiento Legal',
+          type: 'content',
+          title: 'Ley General del Medio Ambiente (Ley 217) y Código Penal',
+          subtitle: 'Sanciones legales ante delitos ambientales en la República de Nicaragua',
+          badgeText: 'Respaldo Jurídico',
+          content: 'Toda infracción en zonas de amortiguamiento y núcleos de reserva cuenta con sanción administrativa y penal.',
+          ctaText: 'Leer Ley 217',
+          ctaLink: '#ley217',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_den_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Línea de Alerta Verde: 118 • WhatsApp Mesa: +505 8443-1289',
+          badgeText: 'Defensa Ecológica Comunitaria',
+          content: '© 2026 Baqueano Nicaragua. Custodiando la integridad territorial y ambiental de la patria.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Guía Ambiental',
+          cta2Link: 'ambiental.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 10. FICHA DEPARTAMENTAL
     departamento: {
       name: 'Ficha Departamental',
       file: 'departamento.html',
       icon: 'fa-map-location-dot',
       sections: [
         {
+          id: 'sec_dep_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Exploración Territorial por Departamentos',
+          badgeText: '15 Departamentos & 2 Regiones',
+          content: 'Inicio:index.html, Departamentos:departamento.html, Destinos:destinos.html, Aliados:aliados.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_dep_hero',
           name: 'Hero Departamental',
           type: 'hero',
           title: 'Exploración Territorial por Departamento',
           subtitle: 'Los 15 departamentos y 2 regiones autónomas de la República de Nicaragua',
+          badgeText: 'Geografía Soberana',
           content: 'Información geográfica soberana, cabeceras, municipios y destinos comunitarios verificados.',
           ctaText: 'Seleccionar Territorio',
           ctaLink: '#selectorDepartamento',
+          cta2Text: 'Ver Mapa 3D',
+          cta2Link: 'index.html#mapaVivo3dSection',
           imageUrl: '',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_dep_selector',
+          name: 'Selector y Mapa Departamental',
+          type: 'map',
+          title: 'Mapa y Fichas Territoriales',
+          subtitle: 'Explora datos demográficos, clima, atractivos y cooperativas por región',
+          badgeText: 'Cartografía Nacional',
+          content: 'Pacífico, Centro, Norte y Regiones Autónomas de la Costa Caribe Norte y Sur.',
+          ctaText: 'Ver Ficha Seleccionada',
+          ctaLink: '#fichaDepartamental',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_dep_destinos',
+          name: 'Destinos del Departamento',
+          type: 'cards',
+          title: 'Senderos y Atractivos Verificados por Región',
+          subtitle: 'Conexión con los baqueanos locales del departamento elegido',
+          badgeText: 'Guías de la Zona',
+          content: 'Fichas técnicas con kilometraje, dificultad y hospedajes comunitarios certificados.',
+          ctaText: 'Explorar Senderos',
+          ctaLink: '#senderosZona',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_dep_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Atención Territorial: +505 8443-1289',
+          badgeText: 'Integración Territorial Soberana',
+          content: '© 2026 Baqueano Nicaragua. Conectando cada rincón de nuestra geografía con orgullo campesino.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Catálogo de Destinos',
+          cta2Link: 'destinos.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 11. PORTAL MI NEGOCIO
     'mi-negocio': {
       name: 'Portal Mi Negocio',
       file: 'mi-negocio.html',
       icon: 'fa-id-badge',
       sections: [
         {
+          id: 'sec_biz_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Portal de Autogestión para Anfitriones y Cooperativas',
+          badgeText: 'Autonomía Campesina',
+          content: 'Inicio:index.html, Aliados:aliados.html, Mi Negocio:mi-negocio.html, Destinos:destinos.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'WhatsApp Mesa',
+          cta2Link: 'https://wa.me/50584431289',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_biz_hero',
           name: 'Hero Mi Negocio',
           type: 'hero',
           title: 'Portal de Autogestión para Anfitriones Locales',
           subtitle: 'Actualiza tus tarifas, verifica reservas y mantén al día tu perfil de aliado',
-          content: 'Acceso directo y soberano para cooperativas, hospedajes rurales y guías comunitarios.',
-          ctaText: 'Acceder a Mi Negocio',
+          badgeText: 'Cero Intermediación',
+          content: 'Acceso directo y soberano para cooperativas, hospedajes rurales y guías comunitarios de toda Nicaragua.',
+          ctaText: 'Acceder a Mi Perfil',
           ctaLink: '#panelAutogestion',
+          cta2Text: 'Inscribir Nuevo Emprendimiento',
+          cta2Link: '#formularioInscripcionNegocio',
           imageUrl: '',
           status: 'published',
-          sortOrder: 1
+          sortOrder: 2
+        },
+        {
+          id: 'sec_biz_form',
+          name: 'Formulario de Inscripción y Tarifas',
+          type: 'form',
+          title: 'Inscripción de Comercio Comunitario y Actualización de Tarifas',
+          subtitle: 'Envía los datos de tu emprendimiento para verificación y sello oficial en la app',
+          badgeText: 'Sello Ley 1210',
+          content: 'Tarifas en córdobas y dólares, amenidades, número de WhatsApp para reservas directas y fotos del local.',
+          ctaText: 'Guardar y Enviar a Mesa Técnica',
+          ctaLink: '#formularioInscripcionNegocio',
+          cta2Text: 'WhatsApp Mesa de Afiliación',
+          cta2Link: 'https://wa.me/50584431289',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_biz_beneficios',
+          name: 'Ventajas de la Membresía Comunitaria',
+          type: 'content',
+          title: 'Tu Negocio en el Radar Nacional de Ecoturistas',
+          subtitle: 'Plataforma web, app Android, geolocalización satelital y soporte técnico gratuito',
+          badgeText: 'Economía Popular',
+          content: 'Los turistas te contactan y pagan directamente a ti, sin cobros de pasarelas extranjeras que confiscan tus ganancias.',
+          ctaText: 'Ver Todos los Beneficios',
+          ctaLink: '#beneficiosMembresia',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_biz_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Mesa de Autogestión de Anfitriones: +505 8443-1289',
+          badgeText: 'Soberanía Económica Popular',
+          content: '© 2026 Baqueano Nicaragua. El fruto del trabajo de la tierra le pertenece a quien la suda.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Red de Aliados',
+          cta2Link: 'aliados.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
         }
       ]
     },
+
+    // 12. PERFIL DE USUARIO
     perfil: {
       name: 'Perfil de Usuario',
       file: 'perfil.html',
       icon: 'fa-circle-user',
       sections: [
         {
+          id: 'sec_prf_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Pasaporte del Explorador y Sesión Activa',
+          badgeText: 'Explorador Soberano',
+          content: 'Inicio:index.html, Destinos:destinos.html, Perfil:perfil.html, Mi Negocio:mi-negocio.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
           id: 'sec_prf_hero',
           name: 'Hero de Perfil',
           type: 'hero',
           title: 'Pasaporte del Explorador Baqueano',
           subtitle: 'Tus expediciones guardadas, bitácora de viaje y preferencias de ruta',
-          content: 'Sincronizado entre tu sesión web y la app móvil de Android.',
+          badgeText: 'Bitácora Digital',
+          content: 'Sincronizado de manera continua entre tu sesión web y la app móvil de Android.',
           ctaText: 'Ver Rutas Guardadas',
           ctaLink: '#rutasGuardadas',
+          cta2Text: 'Editar Preferencias',
+          cta2Link: '#preferenciasUsuario',
           imageUrl: '',
           status: 'published',
+          sortOrder: 2
+        },
+        {
+          id: 'sec_prf_trips',
+          name: 'Bitácora de Rutas Guardadas y Senderos',
+          type: 'cards',
+          title: 'Tus Travesías Comunitarias Guardadas',
+          subtitle: 'Itinerarios calculados, cotizaciones en córdobas y destinos favoritos',
+          badgeText: 'Mis Senderos',
+          content: 'Consulta tus rutas sin conexión y coordina directamente con los baqueanos anfitriones.',
+          ctaText: 'Ver Mis Rutas',
+          ctaLink: '#rutasGuardadas',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_prf_settings',
+          name: 'Preferencias de Cuenta y Seguridad',
+          type: 'content',
+          title: 'Configuración de Seguridad y Modo Offline',
+          subtitle: 'Control soberano sobre tus datos personales y dispositivos enlazados',
+          badgeText: 'Privacidad Protegida',
+          content: 'Administra tu sesión Google, descargas de mapas offline y notificaciones satelitales.',
+          ctaText: 'Configurar Cuenta',
+          ctaLink: '#configuracionCuenta',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 4
+        },
+        {
+          id: 'sec_prf_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Soporte al Explorador: +505 8443-1289',
+          badgeText: 'Pasaporte Digital Protegido',
+          content: '© 2026 Baqueano Nicaragua. Privacidad ciudadana y soberanía de datos.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Términos y Privacidad',
+          cta2Link: 'terminos.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 5
+        }
+      ]
+    },
+
+    // 13. TÉRMINOS & CONDICIONES
+    terminos: {
+      name: 'Términos & Condiciones',
+      file: 'terminos.html',
+      icon: 'fa-scale-balanced',
+      sections: [
+        {
+          id: 'sec_term_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Marco Legal & Términos de Servicio',
+          badgeText: 'Soberanía Legal',
+          content: 'Inicio:index.html, Destinos:destinos.html, Términos:terminos.html, Privacidad:privacidad.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
           sortOrder: 1
+        },
+        {
+          id: 'sec_term_hero',
+          name: 'Hero de Términos Legales',
+          type: 'hero',
+          title: 'Términos & Condiciones de Uso Soberano',
+          subtitle: 'Marco legal bajo la legislación de la República de Nicaragua y Ley 306',
+          badgeText: 'Ley 306 & Ley 1210',
+          content: 'Normas claras de no intermediación, respeto a la propiedad comunitaria y exoneraciones fiscales legales.',
+          ctaText: 'Leer Cláusulas',
+          ctaLink: '#clausulasLegales',
+          cta2Text: 'Política de Privacidad',
+          cta2Link: 'privacidad.html',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        },
+        {
+          id: 'sec_term_content',
+          name: 'Cláusulas de Servicio y No Intermediación',
+          type: 'content',
+          title: 'Acuerdo Soberano entre Exploradores y Familias Locales',
+          subtitle: 'Baqueano actúa exclusivamente como facilitador tecnológico comunitario sin cobro de comisiones',
+          badgeText: 'Comercio Ético',
+          content: 'Toda contratación de servicios turísticos se realiza de mutuo acuerdo entre el viajero y el prestador certificado bajo las tarifas fijadas por este último.',
+          ctaText: 'Ver Derechos del Explorador',
+          ctaLink: '#derechosExplorador',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_term_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Consultas Legales: mesa@baqueano.ni • +505 8443-1289',
+          badgeText: 'Legislación Soberana',
+          content: '© 2026 Baqueano Nicaragua. Sujeto a la jurisdicción de los tribunales de la República de Nicaragua.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Aviso Legal',
+          cta2Link: 'aviso-legal.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 4
+        }
+      ]
+    },
+
+    // 14. POLÍTICA DE PRIVACIDAD
+    privacidad: {
+      name: 'Política de Privacidad',
+      file: 'privacidad.html',
+      icon: 'fa-user-shield',
+      sections: [
+        {
+          id: 'sec_priv_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Política Soberana de Protección de Datos',
+          badgeText: 'Privacidad Blindada',
+          content: 'Inicio:index.html, Privacidad:privacidad.html, Términos:terminos.html, Cookies:cookies.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_priv_hero',
+          name: 'Hero de Privacidad',
+          type: 'hero',
+          title: 'Política de Privacidad y Protección de Datos',
+          subtitle: 'Tus datos pertenecen a tu persona y jamás serán comercializados a terceros',
+          badgeText: 'Derechos ARCO',
+          content: 'Protocolos rigurosos de cifrado, almacenamiento local defensivo y geolocalización satelital para emergencias.',
+          ctaText: 'Leer Política Completa',
+          ctaLink: '#politicaDatos',
+          cta2Text: 'Términos de Servicio',
+          cta2Link: 'terminos.html',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        },
+        {
+          id: 'sec_priv_content',
+          name: 'Tratamiento de Datos y Geolocalización',
+          type: 'content',
+          title: 'Uso Estrictamente Operativo y de Rescate Satelital',
+          subtitle: 'Cero venta de perfiles, cero rastreo invasivo y soberanía tecnológica',
+          badgeText: 'Cero Rastreo Comercial',
+          content: 'Las coordenadas GPS solo se utilizan para posicionarte en los senderos offline y para enviar tu ubicación precisa en caso de activar el botón SOS satelital.',
+          ctaText: 'Ver Derechos ARCO',
+          ctaLink: '#derechosArco',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_priv_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Oficial de Datos: privacidad@baqueano.ni',
+          badgeText: 'Privacidad Ciudadana',
+          content: '© 2026 Baqueano Nicaragua. Respetando el derecho fundamental a la intimidad digital.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Política de Cookies',
+          cta2Link: 'cookies.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 4
+        }
+      ]
+    },
+
+    // 15. POLÍTICA DE COOKIES
+    cookies: {
+      name: 'Política de Cookies',
+      file: 'cookies.html',
+      icon: 'fa-cookie-bite',
+      sections: [
+        {
+          id: 'sec_cook_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Política de Cookies y Almacenamiento Local',
+          badgeText: 'Transparencia Técnica',
+          content: 'Inicio:index.html, Cookies:cookies.html, Privacidad:privacidad.html, Términos:terminos.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_cook_hero',
+          name: 'Hero de Política de Cookies',
+          type: 'hero',
+          title: 'Política de Cookies y Almacenamiento Local',
+          subtitle: 'Información transparente sobre el uso de tokens de sesión y caché local',
+          badgeText: 'Almacenamiento Seguro',
+          content: 'Solo empleamos cookies técnicas indispensables para la persistencia de sesión segura y caché offline de senderos.',
+          ctaText: 'Ver Tipos de Cookies',
+          ctaLink: '#tiposCookies',
+          cta2Text: 'Aviso Legal',
+          cta2Link: 'aviso-legal.html',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        },
+        {
+          id: 'sec_cook_content',
+          name: 'Cookies Técnicas y Configuración',
+          type: 'content',
+          title: 'Cero Cookies Publicitarias de Terceros',
+          subtitle: 'Tu navegador almacena únicamente los mapas y tokens autenticados por Firebase Auth',
+          badgeText: 'Cero Cookies Espías',
+          content: 'Puedes borrar tu almacenamiento local en cualquier instante desde las preferencias de tu navegador sin perder tu cuenta.',
+          ctaText: 'Ajustar Configuración',
+          ctaLink: '#configuracionCookies',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_cook_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Mesa Técnica: mesa@baqueano.ni',
+          badgeText: 'Navegación Limpia',
+          content: '© 2026 Baqueano Nicaragua. Sin cookies de seguimiento comercial abusivo.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Aviso Legal',
+          cta2Link: 'aviso-legal.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 4
+        }
+      ]
+    },
+
+    // 16. AVISO LEGAL & SOBERANÍA DIGITAL
+    'aviso-legal': {
+      name: 'Aviso Legal & Soberanía',
+      file: 'aviso-legal.html',
+      icon: 'fa-gavel',
+      sections: [
+        {
+          id: 'sec_legal_header',
+          name: 'Encabezado & Barra de Navegación',
+          type: 'header',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Aviso Legal & Soberanía Tecnológica',
+          badgeText: 'Marco Jurídico Nacional',
+          content: 'Inicio:index.html, Aviso Legal:aviso-legal.html, Términos:terminos.html, Privacidad:privacidad.html',
+          ctaText: 'SOS Satelital',
+          ctaLink: 'tel:118',
+          cta2Text: 'Descargar APK',
+          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 1
+        },
+        {
+          id: 'sec_legal_hero',
+          name: 'Hero de Aviso Legal',
+          type: 'hero',
+          title: 'Aviso Legal & Soberanía Tecnológica',
+          subtitle: 'Régimen de propiedad intelectual, soberanía y marco institucional de Nicaragua',
+          badgeText: 'Constitución Política',
+          content: 'Plataforma comunitaria regida bajo las leyes soberanas de la República de Nicaragua.',
+          ctaText: 'Leer Aviso Legal',
+          ctaLink: '#avisoLegalCompleto',
+          cta2Text: 'Términos y Condiciones',
+          cta2Link: 'terminos.html',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 2
+        },
+        {
+          id: 'sec_legal_content',
+          name: 'Titularidad y Propiedad Intelectual',
+          type: 'content',
+          title: 'Titularidad Comunitaria y Salvaguarda del Conocimiento Nativo',
+          subtitle: 'Los saberes de los senderos pertenecen a las cooperativas y familias campesinas',
+          badgeText: 'Soberanía Popular',
+          content: 'Baqueano es una herramienta soberana para el desarrollo económico campesino sin sujeción a monopolios turísticos.',
+          ctaText: 'Ver Régimen Legal',
+          ctaLink: '#regimenLegal',
+          cta2Text: '',
+          cta2Link: '',
+          imageUrl: '',
+          status: 'published',
+          sortOrder: 3
+        },
+        {
+          id: 'sec_legal_footer',
+          name: 'Pie de Página / Footer Institucional',
+          type: 'footer',
+          title: 'BAQUEANO NICARAGUA',
+          subtitle: 'Consultas Jurídicas: legal@baqueano.ni',
+          badgeText: 'República de Nicaragua',
+          content: '© 2026 Baqueano Nicaragua. Plataforma de soberanía y desarrollo integral campesino.',
+          ctaText: 'WhatsApp Mesa Técnica',
+          ctaLink: 'https://wa.me/50584431289',
+          cta2Text: 'Términos & Condiciones',
+          cta2Link: 'terminos.html',
+          imageUrl: 'assets/images/logo.png',
+          status: 'published',
+          sortOrder: 4
         }
       ]
     }
@@ -1933,7 +2987,18 @@
             }
           } else {
             const data = doc.data();
-            OpsState.pageSections[pageId] = data.sections || [];
+            const existingSections = data.sections || [];
+            const baseSections = SITE_PAGES_REGISTRY[pageId]?.sections || [];
+            const existingIds = new Set(existingSections.map((s) => s.id));
+            const missingBase = baseSections.filter((b) => !existingIds.has(b.id));
+
+            if (missingBase.length > 0) {
+              const merged = [...existingSections, ...missingBase];
+              merged.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+              OpsState.pageSections[pageId] = merged;
+            } else {
+              OpsState.pageSections[pageId] = existingSections;
+            }
           }
 
           if (OpsState.activeTab === '24-builder' || OpsState.activeTab === '02-contenido') {
@@ -2977,6 +4042,7 @@
       const saveBtn = document.getElementById('btnSaveSectionModal');
       const uploadBtn = document.getElementById('btnUploadSectionMedia');
       const fileInput = document.getElementById('secFormFileInput');
+      const typeSelect = document.getElementById('secFormType');
 
       const closeModal = () => {
         if (modal) modal.classList.remove('is-open');
@@ -2984,6 +4050,12 @@
 
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+      if (typeSelect) {
+        typeSelect.addEventListener('change', (e) => {
+          this.adaptSectionModalForm(e.target.value);
+        });
+      }
 
       if (saveBtn) {
         saveBtn.addEventListener('click', () => this.saveSectionForm());
@@ -3009,6 +4081,187 @@
       }
     },
 
+    adaptSectionModalForm(type) {
+      const lblTitle = document.getElementById('lblSecFormTitle');
+      const inputTitle = document.getElementById('secFormTitle');
+      const hintTitle = document.getElementById('hintSecFormTitle');
+
+      const lblSub = document.getElementById('lblSecFormSubtitle');
+      const inputSub = document.getElementById('secFormSubtitle');
+      const hintSub = document.getElementById('hintSecFormSubtitle');
+
+      const lblBadge = document.getElementById('lblSecFormBadge');
+      const inputBadge = document.getElementById('secFormBadgeText');
+      const hintBadge = document.getElementById('hintSecFormBadge');
+
+      const lblContent = document.getElementById('lblSecFormContent');
+      const inputContent = document.getElementById('secFormContent');
+      const hintContent = document.getElementById('hintSecFormContent');
+
+      const lblCtaText = document.getElementById('lblSecFormCtaText');
+      const inputCtaText = document.getElementById('secFormCtaText');
+      const hintCtaText = document.getElementById('hintSecFormCtaText');
+
+      const lblCtaLink = document.getElementById('lblSecFormCtaLink');
+      const inputCtaLink = document.getElementById('secFormCtaLink');
+      const hintCtaLink = document.getElementById('hintSecFormCtaLink');
+
+      const lblCta2Text = document.getElementById('lblSecFormCta2Text');
+      const inputCta2Text = document.getElementById('secFormCta2Text');
+      const hintCta2Text = document.getElementById('hintSecFormCta2Text');
+
+      const lblCta2Link = document.getElementById('lblSecFormCta2Link');
+      const inputCta2Link = document.getElementById('secFormCta2Link');
+      const hintCta2Link = document.getElementById('hintSecFormCta2Link');
+
+      const lblImage = document.getElementById('lblSecFormImage');
+      const inputImage = document.getElementById('secFormImageUrl');
+
+      if (type === 'header') {
+        if (lblTitle) lblTitle.textContent = 'Marca / Nombre de Encabezado (Logo Text) *';
+        if (inputTitle) inputTitle.placeholder = 'Ej. BAQUEANO NICARAGUA';
+        if (hintTitle) hintTitle.textContent = 'Nombre de la marca o título visible en la barra superior fija.';
+
+        if (lblSub) lblSub.textContent = 'Lema / Subtítulo de Cabecera';
+        if (inputSub) inputSub.placeholder = 'Ej. Ecoturismo Auténtico & Soberanía Territorial Campesina';
+        if (hintSub) hintSub.textContent = 'Texto descriptivo secundario visible en el encabezado.';
+
+        if (lblBadge) lblBadge.textContent = 'Indicador Superior / Cintillo';
+        if (inputBadge) inputBadge.placeholder = 'Ej. GPS Satelital Activo 24/7';
+        if (hintBadge) hintBadge.textContent = 'Cintillo o indicador de estado superior.';
+
+        if (lblContent) lblContent.textContent = 'Menú de Navegación (Etiqueta:URL separados por coma)';
+        if (inputContent) inputContent.placeholder = 'Inicio:index.html, Destinos:destinos.html, Guía Verde:ambiental.html, Aliados:aliados.html...';
+        if (hintContent) hintContent.textContent = 'Define los enlaces principales de navegación del encabezado.';
+
+        if (lblCtaText) lblCtaText.textContent = 'Botón Principal de Cabecera (Texto)';
+        if (inputCtaText) inputCtaText.placeholder = 'Ej. SOS Satelital o Explorar';
+        if (lblCtaLink) lblCtaLink.textContent = 'Botón Principal: Enlace o Teléfono';
+        if (inputCtaLink) inputCtaLink.placeholder = 'Ej. tel:118 o destinos.html';
+
+        if (lblCta2Text) lblCta2Text.textContent = 'Botón Secundario de Cabecera (Texto)';
+        if (inputCta2Text) inputCta2Text.placeholder = 'Ej. Descargar APK o Mi Negocio';
+        if (lblCta2Link) lblCta2Link.textContent = 'Botón Secundario: Enlace o URL';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. assets/BaqueanoNicaragua.apk';
+
+        if (lblImage) lblImage.textContent = 'URL del Logotipo Oficial / Isotipo';
+        if (inputImage) inputImage.placeholder = 'assets/images/logo.png o URL de Storage';
+      } else if (type === 'footer') {
+        if (lblTitle) lblTitle.textContent = 'Título / Nombre Institucional en Pie de Página *';
+        if (inputTitle) inputTitle.placeholder = 'Ej. BAQUEANO NICARAGUA';
+        if (hintTitle) hintTitle.textContent = 'Nombre institucional en el bloque principal del pie de página.';
+
+        if (lblSub) lblSub.textContent = 'Línea de Emergencia / Teléfono de Contacto';
+        if (inputSub) inputSub.placeholder = 'Ej. Atención 24/7: +505 8443-1289 • Emergencias: 118';
+        if (hintSub) hintSub.textContent = 'Teléfono principal o línea directa que se muestra en el pie.';
+
+        if (lblBadge) lblBadge.textContent = 'Sello Institucional / Certificación';
+        if (inputBadge) inputBadge.placeholder = 'Ej. Acreditado INTUR • MARENA';
+        if (hintBadge) hintBadge.textContent = 'Distintivo de acreditación o custodia comunitaria.';
+
+        if (lblContent) lblContent.textContent = 'Texto de Copyright, Misión y Enlaces Legales';
+        if (inputContent) inputContent.placeholder = 'Ej. © 2026 Baqueano Nicaragua. Plataforma Soberana de Ecoturismo Campesino...';
+        if (hintContent) hintContent.textContent = 'Párrafo de copyright, aviso de derechos y aclaraciones.';
+
+        if (lblCtaText) lblCtaText.textContent = 'Enlace / Botón Principal de Pie (Texto)';
+        if (inputCtaText) inputCtaText.placeholder = 'Ej. WhatsApp Mesa Técnica';
+        if (lblCtaLink) lblCtaLink.textContent = 'Enlace Principal: URL / WhatsApp';
+        if (inputCtaLink) inputCtaLink.placeholder = 'Ej. https://wa.me/50584431289';
+
+        if (lblCta2Text) lblCta2Text.textContent = 'Enlace Secundario de Pie (Texto)';
+        if (inputCta2Text) inputCta2Text.placeholder = 'Ej. Canal de Denuncias o Términos';
+        if (lblCta2Link) lblCta2Link.textContent = 'Enlace Secundario: URL';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. denuncias.html o terminos.html';
+
+        if (lblImage) lblImage.textContent = 'Logotipo / Escudo de Pie de Página';
+      } else if (type === 'map') {
+        if (lblTitle) lblTitle.textContent = 'Título del Módulo de Mapa *';
+        if (inputTitle) inputTitle.placeholder = 'Ej. Mapa Topográfico Vivo 3D de Nicaragua';
+        if (hintTitle) hintTitle.textContent = 'Encabezado principal visible en el visor cartográfico.';
+
+        if (lblSub) lblSub.textContent = 'Subtítulo / Instrucciones del Mapa';
+        if (inputSub) inputSub.placeholder = 'Ej. Relieve de volcanes, lagos, reservas y cordilleras con Three.js';
+        if (hintSub) hintSub.textContent = 'Guía para la interacción de órbita y zoom en 3D.';
+
+        if (lblBadge) lblBadge.textContent = 'Modo de Navegación / Brújula';
+        if (inputBadge) inputBadge.placeholder = 'Ej. WebGL 3D a 60fps';
+        if (hintBadge) hintBadge.textContent = 'Distintivo técnico o modo de visualización.';
+
+        if (lblContent) lblContent.textContent = 'Información Geográfica / Leyenda del Mapa';
+        if (inputContent) inputContent.placeholder = 'Ej. Visualiza la geografía soberana con brújula de rumbo y selector de regiones...';
+        if (hintContent) hintContent.textContent = 'Detalles cartográficos y referencias de altitud.';
+
+        if (lblCtaText) lblCtaText.textContent = 'Botón de Acción del Mapa (Texto)';
+        if (inputCtaText) inputCtaText.placeholder = 'Ej. Abrir Navegación Libre';
+        if (lblCtaLink) lblCtaLink.textContent = 'Botón del Mapa: Enlace o Ancla';
+        if (inputCtaLink) inputCtaLink.placeholder = 'Ej. #mapaVivo3dSection';
+
+        if (lblCta2Text) lblCta2Text.textContent = 'Botón Secundario del Mapa (Texto)';
+        if (inputCta2Text) inputCta2Text.placeholder = 'Ej. Ver Ficha Departamental';
+        if (lblCta2Link) lblCta2Link.textContent = 'Botón Secundario: Enlace';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. departamento.html';
+
+        if (lblImage) lblImage.textContent = 'Textura / Captura de Mapa';
+      } else if (type === 'form') {
+        if (lblTitle) lblTitle.textContent = 'Título del Formulario / Registro *';
+        if (inputTitle) inputTitle.placeholder = 'Ej. Registra tu Local, Hospedaje o Cooperativa';
+        if (hintTitle) hintTitle.textContent = 'Encabezado del formulario visible al explorador o anfitrión.';
+
+        if (lblSub) lblSub.textContent = 'Subtítulo / Instrucciones del Formulario';
+        if (inputSub) inputSub.placeholder = 'Ej. Formulario oficial conectado directamente a la Mesa Técnica Baqueano';
+        if (hintSub) hintSub.textContent = 'Instrucciones paso a paso para el usuario.';
+
+        if (lblBadge) lblBadge.textContent = 'Marco Jurídico / Distintivo del Formulario';
+        if (inputBadge) inputBadge.placeholder = 'Ej. Ley 1210 / Ley 306';
+        if (hintBadge) hintBadge.textContent = 'Insignia o ley que ampara este formulario.';
+
+        if (lblContent) lblContent.textContent = 'Instrucciones Detalladas / Política de Datos';
+        if (inputContent) inputContent.placeholder = 'Ej. Inscribe tu negocio bajo los principios de turismo ético y soberanía comunitaria...';
+        if (hintContent) hintContent.textContent = 'Texto explicativo que se despliega antes de los campos.';
+
+        if (lblCtaText) lblCtaText.textContent = 'Texto del Botón de Envío del Formulario';
+        if (inputCtaText) inputCtaText.placeholder = 'Ej. Postular a Mesa Baqueano o Enviar Denuncia';
+        if (lblCtaLink) lblCtaLink.textContent = 'Destino de Recepción (WhatsApp o Endpoint)';
+        if (inputCtaLink) inputCtaLink.placeholder = 'Ej. https://wa.me/50584431289 o #registroAnfitrionSection';
+
+        if (lblCta2Text) lblCta2Text.textContent = 'Botón Secundario / Alternativo (Texto)';
+        if (inputCta2Text) inputCta2Text.placeholder = 'Ej. WhatsApp Directo o Descargar Formato';
+        if (lblCta2Link) lblCta2Link.textContent = 'Botón Secundario: Enlace / URL';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. https://wa.me/50584431289';
+
+        if (lblImage) lblImage.textContent = 'Imagen Ilustrativa del Formulario';
+      } else {
+        // Hero, Content, Cards, CTA, Banner, Testimonial
+        if (lblTitle) lblTitle.textContent = 'Título de la Sección / Encabezado *';
+        if (inputTitle) inputTitle.placeholder = 'Ej. El Sendero lo Abren las Comunidades';
+        if (hintTitle) hintTitle.textContent = 'Encabezado principal de este bloque.';
+
+        if (lblSub) lblSub.textContent = 'Subtítulo / Bajada Cultural';
+        if (inputSub) inputSub.placeholder = 'Ej. Ecoturismo Auténtico en Nicaragua sin intermediarios';
+        if (hintSub) hintSub.textContent = 'Lema o descripción corta bajo el título.';
+
+        if (lblBadge) lblBadge.textContent = 'Distintivo / Badge Superior';
+        if (inputBadge) inputBadge.placeholder = 'Ej. Soberanía Ecoturística, Ley 306, etc.';
+        if (hintBadge) hintBadge.textContent = 'Pill o etiqueta que flota sobre el título.';
+
+        if (lblContent) lblContent.textContent = 'Cuerpo del Contenido / Descripción / Texto Legal';
+        if (inputContent) inputContent.placeholder = 'Texto descriptivo, párrafos, notas de copyright o manifiesto...';
+        if (hintContent) hintContent.textContent = 'Contenido principal en prosa de este bloque.';
+
+        if (lblCtaText) lblCtaText.textContent = 'Botón Principal: Texto';
+        if (inputCtaText) inputCtaText.placeholder = 'Ej. Explorar Nicaragua en 3D';
+        if (lblCtaLink) lblCtaLink.textContent = 'Botón Principal: Enlace / URL';
+        if (inputCtaLink) inputCtaLink.placeholder = 'Ej. #mapaVivo3dSection o destinos.html';
+
+        if (lblCta2Text) lblCta2Text.textContent = 'Botón Secundario: Texto (Opcional)';
+        if (inputCta2Text) inputCta2Text.placeholder = 'Ej. Descargar APK Android';
+        if (lblCta2Link) lblCta2Link.textContent = 'Botón Secundario: Enlace / URL';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. assets/BaqueanoNicaragua.apk';
+
+        if (lblImage) lblImage.textContent = 'URL de Fotografía / Fondo Multimedia';
+      }
+    },
+
     openSectionModal(pageId, sectionId = null) {
       const modal = document.getElementById('opsSectionModal');
       const titleEl = document.getElementById('opsSectionModalTitle');
@@ -3023,18 +4276,24 @@
       document.getElementById('sectionId').value = sectionId || '';
 
       if (titleEl) {
-        titleEl.innerHTML = `<i class="fa-solid fa-layer-group" style="color: var(--bq-accent);"></i> ${section ? 'Modificar Sección' : 'Añadir Nueva Sección'}`;
+        titleEl.innerHTML = `<i class="fa-solid fa-layer-group" style="color: var(--bq-accent);"></i> ${section ? 'Modificar Componente' : 'Añadir Nuevo Componente'}`;
       }
       if (subEl) {
-        subEl.textContent = `Página: ${pageInfo.name} (${pageInfo.file})`;
+        subEl.textContent = `Página: ${pageInfo.name} (${pageInfo.file}) • Todo elemento es editable en vivo`;
       }
+
+      const secType = section ? (section.type || 'content') : 'content';
+      document.getElementById('secFormType').value = secType;
+      this.adaptSectionModalForm(secType);
 
       document.getElementById('secFormTitle').value = section ? (section.title || section.name || '') : '';
       document.getElementById('secFormSubtitle').value = section ? (section.subtitle || '') : '';
-      document.getElementById('secFormType').value = section ? (section.type || 'content') : 'content';
+      document.getElementById('secFormBadgeText').value = section ? (section.badgeText || '') : '';
       document.getElementById('secFormContent').value = section ? (section.content || '') : '';
       document.getElementById('secFormCtaText').value = section ? (section.ctaText || '') : '';
       document.getElementById('secFormCtaLink').value = section ? (section.ctaLink || '') : '';
+      document.getElementById('secFormCta2Text').value = section ? (section.cta2Text || '') : '';
+      document.getElementById('secFormCta2Link').value = section ? (section.cta2Link || '') : '';
       document.getElementById('secFormImageUrl').value = section ? (section.imageUrl || '') : '';
       document.getElementById('secFormStatus').value = section ? (section.status || 'published') : 'published';
       document.getElementById('secFormSortOrder').value = section ? (section.sortOrder || sections.length + 1) : (sections.length + 1);
@@ -3048,23 +4307,26 @@
       const titleInput = document.getElementById('secFormTitle');
 
       if (!titleInput.value.trim()) {
-        OpsToast.show('El título de la sección es obligatorio.', 'warning');
+        OpsToast.show('El título / encabezado del componente es obligatorio.', 'warning');
         titleInput.focus();
         return;
       }
 
       const saveBtn = document.getElementById('btnSaveSectionModal');
-      if (saveBtn) saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+      if (saveBtn) saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando en Vivo...';
 
       const sectionData = {
         id: sectionId || undefined,
         name: titleInput.value.trim(),
         title: titleInput.value.trim(),
         subtitle: document.getElementById('secFormSubtitle').value.trim(),
+        badgeText: document.getElementById('secFormBadgeText').value.trim(),
         type: document.getElementById('secFormType').value,
         content: document.getElementById('secFormContent').value.trim(),
         ctaText: document.getElementById('secFormCtaText').value.trim(),
         ctaLink: document.getElementById('secFormCtaLink').value.trim(),
+        cta2Text: document.getElementById('secFormCta2Text').value.trim(),
+        cta2Link: document.getElementById('secFormCta2Link').value.trim(),
         imageUrl: document.getElementById('secFormImageUrl').value.trim(),
         status: document.getElementById('secFormStatus').value,
         sortOrder: parseInt(document.getElementById('secFormSortOrder').value, 10) || 1
@@ -3074,7 +4336,7 @@
         await OpsCMS.savePageSection(pageId, sectionData);
         const modal = document.getElementById('opsSectionModal');
         if (modal) modal.classList.remove('is-open');
-        OpsToast.show('¡Sección guardada con éxito en Firestore!', 'success');
+        OpsToast.show(`¡Componente "${sectionData.title}" guardado con éxito y publicado en ${pageId}.html!`, 'success');
         this.renderWebsiteBuilderModule(OpsState.activeTab);
       } catch (err) {
         OpsToast.show(`Error al guardar: ${err.message}`, 'error');
