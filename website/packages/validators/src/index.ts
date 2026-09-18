@@ -14,6 +14,15 @@ export const userRoleSchema = z.enum(["super_admin", "admin", "host", "explorer"
 export const publishStatusSchema = z.enum(["draft", "review", "published", "archived"]);
 export const difficultySchema = z.enum(["suave", "media", "alta", "experta"]);
 
+export const baqueanoUserSchema = z.object({
+  id: z.string().min(1),
+  email: z.string().email(),
+  displayName: z.string().min(2),
+  role: userRoleSchema.default("explorer"),
+  businessId: z.string().optional(),
+  createdAtIso: z.string()
+});
+
 export const destinationSchema = z.object({
   id: z.string().min(2),
   slug: z.string().min(2).regex(/^[a-z0-9-]+$/),
@@ -777,6 +786,7 @@ export const openApiQuerySchema = z.object({
 });
 
 export type PlaceRecordInput = z.infer<typeof placeRecordSchema>;
+export type BaqueanoUserInput = z.infer<typeof baqueanoUserSchema>;
 export type CategoryRecordInput = z.infer<typeof categoryRecordSchema>;
 export type AuditLogInput = z.infer<typeof auditLogSchema>;
 export type BusinessRecordInput = z.infer<typeof businessRecordSchema>;
