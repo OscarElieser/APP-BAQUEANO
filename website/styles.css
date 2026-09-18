@@ -8093,3 +8093,15 @@ img {
     display: none !important;
   }
 }
+/*
+ * POR QUÉ: mantener legibles y consistentes los documentos legales extensos.
+ * CÓMO: metadatos, listas y avisos usan la paleta oficial y rejillas adaptables.
+ * QUÉ: presentación compartida para privacidad, aviso legal, cookies y términos.
+ */
+.legal-document-meta { display:flex; flex-wrap:wrap; gap:.65rem 1.25rem; margin:1.25rem 0 2rem; padding:1rem 1.25rem; border:1px solid rgba(244,230,193,.18); border-radius:14px; background:rgba(15,23,42,.55); color:#F4E6C1; font-size:.82rem; }
+.legal-document-intro { margin-bottom:1.5rem; color:var(--text-muted); line-height:1.7; }
+.legal-article-content { min-width:0; }
+.legal-article-content p { line-height:1.7; }
+.legal-article-content ul { margin:.8rem 0 1rem; padding-left:1.25rem; color:var(--text-muted); }
+.legal-article-content li { margin:.4rem 0; line-height:1.55; }
+.legal-review-note { margin:2rem 0; padding:1.15rem 1.3rem; border-left:4px solid #F65E01; border-radius:0 14px 14px 0; background:rgba(246,94,1,.1); color:#F4E6C1; line-height:1.6; }
