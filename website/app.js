@@ -118,15 +118,20 @@ function initKineticHeadings() {
   });
 }
 
-// Control local de tarjetas de territorios
+// Control local de tarjetas de territorios: redirige a la guía departamental oficial
 function initTerritoriesLocal() {
   const cards = document.querySelectorAll('.territory-pill-card');
   if (!cards.length) return;
 
   cards.forEach(card => {
-    card.addEventListener('click', () => {
-      cards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
+    card.addEventListener('click', (e) => {
+      const deptId = card.dataset.territory;
+      const targetHref = card.getAttribute('href');
+      if (targetHref) {
+        window.location.href = targetHref;
+      } else if (deptId) {
+        window.location.href = `departamento.html?id=${deptId}`;
+      }
     });
   });
 }

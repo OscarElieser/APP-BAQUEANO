@@ -170,6 +170,20 @@
           </span>
         </a>
 
+        <!-- BOTÓN PERFIL (EXPLORADOR / MI CUENTA) -->
+        <a href="perfil.html" role="menuitem" class="nav-link-perfil">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-user-astronaut nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Perfil</span>
+              <span class="nav-sublabel">Mi Pasaporte</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
         <a href="admin.html">
           <span class="nav-item-content">
             <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
@@ -318,6 +332,20 @@
           </div>
         </div>
 
+        <!-- 7. SELECTOR COMPLETO DE LOS 17 TERRITORIOS: CAMBIO INSTANTÁNEO -->
+        <div class="dept-section-card" id="selectorTerritoriosSection">
+          <div class="dept-card-header">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <h3>7. Explorar Otro Departamento o Región (17 Territorios)</h3>
+          </div>
+          <p class="departamento-inline-001">
+            Selecciona cualquiera de los 15 departamentos y 2 regiones autónomas de Nicaragua para cambiar inmediatamente esta guía oficial a ese territorio:
+          </p>
+          <div class="territories-grid" id="deptSelectorGrid">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
@@ -411,76 +439,166 @@
   <script src="js/territories-data.js"></script>
   <script>
     (function initDepartmentPage() {
-      // 1. Obtener ID del departamento de la URL (?id=leon)
-      const urlParams = new URLSearchParams(window.location.search);
-      let deptId = urlParams.get('id') || 'leon';
-
       const territories = window.BAQUEANO_TERRITORIES || [];
-      let currentDept = territories.find(t => t.id === deptId) || territories[0];
+      if (!territories.length) return;
 
-      if (!currentDept) return;
-
-      // 2. Renderizar barra de navegación superior de los 17 territorios
       const navContainer = document.getElementById('territoriesNavPills');
+      const selectorGrid = document.getElementById('deptSelectorGrid');
+      const mainContainer = document.querySelector('main');
+
+      // 1. Obtener ID inicial
+      const urlParams = new URLSearchParams(window.location.search);
+      let initialDeptId = urlParams.get('id') || 'leon';
+      let activeDept = territories.find(t => t.id === initialDeptId) || territories[0];
+
+      // 2. Renderizar Píldoras Horizontales Superiores
       if (navContainer) {
         navContainer.innerHTML = territories.map(t => `
-          <a href="departamento.html?id=${t.id}" class="dept-pill-btn ${t.id === currentDept.id ? 'active' : ''}">
+          <button type="button" class="dept-pill-btn ${t.id === activeDept.id ? 'active' : ''}" data-dept-id="${t.id}">
             ${t.name}
-          </a>
+          </button>
         `).join('');
       }
 
-      // 3. Poblar datos del departamento actual
-      document.title = `${currentDept.name} — Guía Turística Oficial | Baqueano Nicaragua`;
-      document.getElementById('deptTitle').textContent = currentDept.name;
-      document.getElementById('deptTagline').textContent = `"${currentDept.tagline}"`;
-      document.getElementById('deptShortDesc').textContent = currentDept.shortDesc;
-      document.getElementById('deptHeroBg').style.backgroundImage = `url('${currentDept.heroImage}')`;
-      document.getElementById('deptBadgeText').textContent = `${currentDept.coopCount} Cooperativas Locales Registradas`;
-
-      // Historia
-      document.getElementById('deptHistoryText').textContent = currentDept.history;
-
-      // Gastronomía
-      const gastroGrid = document.getElementById('deptGastroGrid');
-      if (gastroGrid) {
-        gastroGrid.innerHTML = currentDept.gastronomy.map(g => `
-          <div class="dept-gastro-item">
-            <div class="dept-item-title"><i class="fa-solid fa-plate-wheat departamento-inline-003"></i> ${g.name}</div>
-            <div class="dept-item-desc">${g.desc}</div>
-          </div>
+      // 3. Renderizar Rejilla Completa de los 17 Territorios
+      if (selectorGrid) {
+        selectorGrid.innerHTML = territories.map(t => `
+          <button type="button" class="territory-pill-card ${t.id === activeDept.id ? 'active' : ''}" data-territory="${t.id}">
+            <h5>${t.name}</h5>
+            <span>${t.tagline}</span>
+          </button>
         `).join('');
       }
 
-      // Lugares Turísticos
-      const placesGrid = document.getElementById('deptPlacesGrid');
-      if (placesGrid) {
-        placesGrid.innerHTML = currentDept.places.map(p => `
-          <div class="dept-place-item">
-            <div class="dept-item-title"><i class="fa-solid ${p.icon || 'fa-map-pin'} departamento-inline-030"></i> ${p.name}</div>
-            <div class="dept-item-desc"><span class="departamento-inline-031">${p.type}</span></div>
-          </div>
-        `).join('');
+      // 4. Función central para cambiar de departamento dinámicamente
+      function switchDepartment(targetId, updateHistory = true, shouldScroll = true) {
+        const target = territories.find(t => t.id === targetId);
+        if (!target) return;
+        activeDept = target;
+
+        // Efecto fade-out suave
+        if (mainContainer) {
+          mainContainer.classList.add('dept-content-transition', 'dept-content-fading');
+        }
+
+        setTimeout(() => {
+          renderDepartment(target);
+
+          // Actualizar estado de URL y título
+          if (updateHistory) {
+            const newUrl = `${window.location.pathname}?id=${target.id}`;
+            window.history.pushState({ id: target.id }, '', newUrl);
+          }
+          document.title = `${target.name} — Guía Turística Oficial | Baqueano Nicaragua`;
+
+          // Actualizar clases activas en píldoras y tarjetas
+          document.querySelectorAll('.dept-pill-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.deptId === target.id);
+          });
+          document.querySelectorAll('#deptSelectorGrid .territory-pill-card').forEach(card => {
+            card.classList.toggle('active', card.dataset.territory === target.id);
+          });
+
+          // Centrar píldora activa en la barra superior
+          const activePill = document.querySelector(`.dept-pill-btn[data-dept-id="${target.id}"]`);
+          if (activePill) {
+            activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+
+          // Fade-in
+          if (mainContainer) {
+            mainContainer.classList.remove('dept-content-fading');
+          }
+
+          // Scroll hacia arriba
+          if (shouldScroll) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 150);
       }
 
-      // Actividades
-      const actList = document.getElementById('deptActivitiesList');
-      if (actList) {
-        actList.innerHTML = currentDept.activities.map(a => `
-          <li class="dept-activity-li">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>${a}</span>
-          </li>
-        `).join('');
+      // 5. Poblar datos en la interfaz
+      function renderDepartment(dept) {
+        document.getElementById('deptTitle').textContent = dept.name;
+        document.getElementById('deptTagline').textContent = `"${dept.tagline}"`;
+        document.getElementById('deptShortDesc').textContent = dept.shortDesc;
+        document.getElementById('deptHeroBg').style.backgroundImage = `url('${dept.heroImage}')`;
+        document.getElementById('deptBadgeText').textContent = `${dept.coopCount} Cooperativas Locales Registradas`;
+
+        // Historia
+        document.getElementById('deptHistoryText').textContent = dept.history;
+
+        // Gastronomía
+        const gastroGrid = document.getElementById('deptGastroGrid');
+        if (gastroGrid) {
+          gastroGrid.innerHTML = dept.gastronomy.map(g => `
+            <div class="dept-gastro-item">
+              <div class="dept-item-title"><i class="fa-solid fa-plate-wheat departamento-inline-003"></i> ${g.name}</div>
+              <div class="dept-item-desc">${g.desc}</div>
+            </div>
+          `).join('');
+        }
+
+        // Lugares Turísticos
+        const placesGrid = document.getElementById('deptPlacesGrid');
+        if (placesGrid) {
+          placesGrid.innerHTML = dept.places.map(p => `
+            <div class="dept-place-item">
+              <div class="dept-item-title"><i class="fa-solid ${p.icon || 'fa-map-pin'} departamento-inline-030"></i> ${p.name}</div>
+              <div class="dept-item-desc"><span class="departamento-inline-031">${p.type}</span></div>
+            </div>
+          `).join('');
+        }
+
+        // Actividades
+        const actList = document.getElementById('deptActivitiesList');
+        if (actList) {
+          actList.innerHTML = dept.activities.map(a => `
+            <li class="dept-activity-li">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>${a}</span>
+            </li>
+          `).join('');
+        }
+
+        // Cultura
+        document.getElementById('deptCultureText').textContent = dept.culture;
+
+        // Logística
+        document.getElementById('deptBestSeasonText').textContent = dept.bestSeason;
+        document.getElementById('deptHowToReachText').textContent = dept.howToReach;
+        document.getElementById('deptRecommendationsText').textContent = dept.recommendations;
       }
 
-      // Cultura
-      document.getElementById('deptCultureText').textContent = currentDept.culture;
+      // 6. Conectar eventos a píldoras y tarjetas
+      if (navContainer) {
+        navContainer.addEventListener('click', (e) => {
+          const pill = e.target.closest('.dept-pill-btn');
+          if (pill && pill.dataset.deptId) {
+            switchDepartment(pill.dataset.deptId, true, true);
+          }
+        });
+      }
 
-      // Logística
-      document.getElementById('deptBestSeasonText').textContent = currentDept.bestSeason;
-      document.getElementById('deptHowToReachText').textContent = currentDept.howToReach;
-      document.getElementById('deptRecommendationsText').textContent = currentDept.recommendations;
+      if (selectorGrid) {
+        selectorGrid.addEventListener('click', (e) => {
+          const card = e.target.closest('.territory-pill-card');
+          if (card && card.dataset.territory) {
+            switchDepartment(card.dataset.territory, true, true);
+          }
+        });
+      }
+
+      // 7. Manejo de botones atrás/adelante del navegador
+      window.addEventListener('popstate', (e) => {
+        const currentUrlParams = new URLSearchParams(window.location.search);
+        const popId = currentUrlParams.get('id') || 'leon';
+        switchDepartment(popId, false, false);
+      });
+
+      // Render inicial
+      renderDepartment(activeDept);
+      document.title = `${activeDept.name} — Guía Turística Oficial | Baqueano Nicaragua`;
     })();
   </script>
 </body>

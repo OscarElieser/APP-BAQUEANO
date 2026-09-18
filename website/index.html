@@ -141,6 +141,9 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
   <!-- Estilos Maestros Oficiales (Modular) -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
@@ -165,7 +168,7 @@
           la identidad de Baqueano como plataforma líder de ecoturismo en Nicaragua.
        ⚙️ Cómo: Glassmorphism multicapa, glow ambiental reactivo al cursor,
           mega-dropdown cinematográfico, indicator pill animado con física de resorte,
-          y botón de perfil con avatar. Totalmente responsivo con drawer móvil premium.
+          y botón de perfil con avatar. Totalmente responsivo con drawer móvil de alta gama.
        📦 Qué: Navbar fija con brand holográfico, menú pill, mega-dropdown "Mi País",
           botón Perfil, botón SOS 24/7 y hamburguesa animada.
        ============================================================================ -->
@@ -869,6 +872,500 @@
       </div>
     </section>
 
+    <!-- ============================================================================
+         🧭 SECCIÓN: TERRITORIO BAQUEANO NICARAGUA (MAPA SATELITAL EN PORTADA)
+         🎯 Por qué: Brindar al explorador en la página principal la vista cartográfica
+            interactiva con georreferenciación oficial de los 29 destinos, filtros
+            por experiencia (Playa, Bares, Hospedaje, Gastronomía, Museo) y saltos regionales.
+         ⚙️ Cómo: Contenedor #indexTerritoryMap renderizado vía Leaflet + capa satelital HD,
+            indicadores de tasa BCN y 0% comisión, botones interactivos conectados a index-features.js.
+         📦 Qué: Card interactiva .index-map-card con selectores y enlace a destinos.html#mapa.
+         ============================================================================ -->
+    <section class="index-map-section-pro" id="territorioMapaSection">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge-primary"><i class="fa-solid fa-earth-americas"></i> Georreferenciación Soberana</span>
+          <h2 class="section-title">Territorio Baqueano Nicaragua</h2>
+          <p class="section-subtitle">
+            Explora la geografía viva de la patria con cartografía satelital de alta resolución, rutas comunitarias y contacto directo sin intermediarios.
+          </p>
+        </div>
+
+        <div class="index-map-card">
+          <!-- Barra superior de estado -->
+          <div class="index-map-header">
+            <div class="index-map-title-wrap">
+              <span class="live-pulse-dot" title="Sistema en Tiempo Real"></span>
+              <h3 class="index-map-title"><i class="fa-solid fa-satellite"></i> Territorio Baqueano Nicaragua</h3>
+            </div>
+            <div class="index-map-chips">
+              <span class="index-chip"><i class="fa-solid fa-location-dot"></i> 29 Destinos Activos</span>
+              <span class="index-chip chip-orange"><i class="fa-solid fa-layer-group"></i> 13 Categorías</span>
+              <span class="index-chip"><i class="fa-solid fa-shield-halved"></i> 0% Comisión</span>
+              <span class="index-chip chip-gold"><i class="fa-solid fa-coins"></i> Tasa BCN 36.65</span>
+            </div>
+          </div>
+
+          <!-- Cuerpo: Mapa + Controles de Selección -->
+          <div class="index-map-body-grid">
+            <!-- Columna Izquierda: Mapa Leaflet -->
+            <div class="index-map-frame">
+              <div id="indexTerritoryMap"></div>
+              <div class="index-map-layer-badge" id="indexMapLayerBadge">
+                <i class="fa-solid fa-satellite-dish"></i> Satélite HD
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Controles y Filtros -->
+            <div class="index-map-controls-col">
+              <!-- Capas Satelitales -->
+              <div>
+                <div class="control-group-title"><i class="fa-solid fa-layer-group"></i> Capa Satelital Oficial</div>
+                <div class="index-layers-strip">
+                  <button type="button" class="index-layer-btn active" data-layer="satellite" title="Google Maps Satélite HD">
+                    <i class="fa-solid fa-satellite"></i> Satélite HD
+                  </button>
+                  <button type="button" class="index-layer-btn" data-layer="hybrid" title="Google Maps Satélite Híbrido">
+                    <i class="fa-solid fa-globe"></i> Híbrido
+                  </button>
+                  <button type="button" class="index-layer-btn" data-layer="streets" title="Rutas & Playas">
+                    <i class="fa-solid fa-road"></i> Rutas
+                  </button>
+                  <button type="button" class="index-layer-btn" data-layer="osm" title="Mapa Claro Cartográfico">
+                    <i class="fa-solid fa-map"></i> Claro
+                  </button>
+                  <button type="button" class="index-layer-btn" data-layer="dark" title="Modo Noche">
+                    <i class="fa-solid fa-moon"></i> Noche
+                  </button>
+                </div>
+              </div>
+
+              <!-- Salto Rápido a Región -->
+              <div>
+                <div class="control-group-title"><i class="fa-solid fa-compass"></i> Salto Rápido a Región</div>
+                <div class="index-regions-grid">
+                  <button type="button" class="index-region-btn active" data-region="nicaragua" title="Ver todo el país">
+                    <i class="fa-solid fa-flag"></i> Nicaragua Completa
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="rivas" title="Playas y costas del Pacífico Sur">
+                    <i class="fa-solid fa-umbrella-beach"></i> Rivas & San Juan del Sur
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="volcanes" title="Volcanes activos del Pacífico">
+                    <i class="fa-solid fa-volcano"></i> Cadena Volcánica
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="granada" title="Patrimonio Colonial e Isletas">
+                    <i class="fa-solid fa-landmark"></i> Granada Colonial
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="ometepe" title="Reserva de Biósfera en el Gran Lago">
+                    <i class="fa-solid fa-water"></i> Isla de Ometepe
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="norte" title="Tierras altas y fincas cafetaleras">
+                    <i class="fa-solid fa-tree"></i> Nebliselva Norte
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="caribe" title="Caribe Sur y arrecifes">
+                    <i class="fa-solid fa-fish"></i> Corn Island Caribe
+                  </button>
+                  <button type="button" class="index-region-btn" data-region="riosanjuan" title="Fortaleza y selva fluvial">
+                    <i class="fa-solid fa-ferry"></i> Río San Juan
+                  </button>
+                </div>
+              </div>
+
+              <!-- Filtro por Experiencia Solicitado -->
+              <div>
+                <div class="control-group-title"><i class="fa-solid fa-sliders"></i> Filtrar por Experiencia</div>
+                <div class="index-exp-grid">
+                  <button type="button" class="index-exp-btn active" data-exp="all">
+                    <i class="fa-solid fa-border-all"></i> Todos (29)
+                  </button>
+                  <button type="button" class="index-exp-btn" data-exp="playa">
+                    <i class="fa-solid fa-umbrella-beach"></i> Playa
+                  </button>
+                  <button type="button" class="index-exp-btn" data-exp="bares">
+                    <i class="fa-solid fa-martini-glass-citrus"></i> Bares
+                  </button>
+                  <button type="button" class="index-exp-btn" data-exp="hospedaje">
+                    <i class="fa-solid fa-hotel"></i> Hospedaje
+                  </button>
+                  <button type="button" class="index-exp-btn" data-exp="gastronomia">
+                    <i class="fa-solid fa-utensils"></i> Gastronomía
+                  </button>
+                  <button type="button" class="index-exp-btn" data-exp="museo">
+                    <i class="fa-solid fa-monument"></i> Museo
+                  </button>
+                </div>
+              </div>
+
+              <!-- Botón a Mapa Completo -->
+              <a href="destinos.html#mapa" class="index-btn-map-full">
+                <i class="fa-solid fa-map-location-dot"></i> Abrir Mapa Interactivo Completo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================================
+         🧭 SECCIÓN: EXPERIENCIAS DE LA COMUNIDAD (TURISTAS & ANFITRIONES LOCALES)
+         🎯 Por qué: Visibilizar la voz auténtica de viajeros nacionales e internacionales
+            y el testimonio directo de los negocios familiares y cooperativas campesinas
+            que perciben el 100% del valor de su servicio gracias al modelo sin intermediarios.
+         ⚙️ Cómo: Pestañas interactivas a 60fps con filtrado dinámico (Todos, Turistas Locales,
+            Viajeros Internacionales, Negocios/Anfitriones), métricas de impacto soberano,
+            y modal con persistencia localStorage para añadir testimonios al instante.
+         📦 Qué: Grid de tarjetas .testimonials-grid con insignia de verificación y calificación.
+         ============================================================================ -->
+    <section class="community-experiences-section" id="experienciasComunidad">
+      <div class="container">
+        <!-- Encabezado de sección -->
+        <div class="section-header text-center">
+          <span class="badge badge-primary"><i class="fa-solid fa-comments"></i> Prueba Social Auténtica</span>
+          <h2 class="section-title">Voz del Territorio & Experiencias Vivas</h2>
+          <p class="section-subtitle">
+            Conoce cómo Baqueano transforma el viaje tanto para quienes descubren la patria como para las familias y negocios que la hospedan.
+          </p>
+        </div>
+
+        <!-- Barra de Estadísticas de Impacto Comunitario -->
+        <div class="exp-stats-strip">
+          <div class="exp-stat-box">
+            <div class="exp-stat-num">100%</div>
+            <div class="exp-stat-label">Ingreso Directo a Anfitriones (0% Comisión)</div>
+          </div>
+          <div class="exp-stat-box">
+            <div class="exp-stat-num">4.9 ★</div>
+            <div class="exp-stat-label">Calificación Promedio de la Comunidad</div>
+          </div>
+          <div class="exp-stat-box">
+            <div class="exp-stat-num">+850</div>
+            <div class="exp-stat-label">Exploradores Locales e Internacionales</div>
+          </div>
+          <div class="exp-stat-box">
+            <div class="exp-stat-num">+29</div>
+            <div class="exp-stat-label">Comunidades y Fincas Campesinas Activas</div>
+          </div>
+        </div>
+
+        <!-- Barra de Filtros por Audiencia + Botón para Compartir Experiencia -->
+        <div class="exp-controls-row">
+          <div class="exp-tabs-bar">
+            <button type="button" class="exp-tab-btn active" data-filter="all">
+              <i class="fa-solid fa-border-all"></i> Todas las Voces
+            </button>
+            <button type="button" class="exp-tab-btn" data-filter="turista-local">
+              <i class="fa-solid fa-flag"></i> Turistas Locales (Nicas)
+            </button>
+            <button type="button" class="exp-tab-btn" data-filter="turista-inter">
+              <i class="fa-solid fa-plane-departure"></i> Viajeros Internacionales
+            </button>
+            <button type="button" class="exp-tab-btn" data-filter="negocio">
+              <i class="fa-solid fa-store"></i> Negocios & Anfitriones
+            </button>
+          </div>
+
+          <button type="button" class="btn-open-exp-modal" id="btnOpenExpModal">
+            <i class="fa-solid fa-pen-to-square"></i> Compartir mi Experiencia
+          </button>
+        </div>
+
+        <!-- Galería Rotatoria Infinita Animada e Interactiva -->
+        <div class="exp-rotary-gallery-container" id="expRotaryGallery">
+          <!-- Barra superior de control interactivo -->
+          <div class="exp-rotary-toolbar">
+            <div class="exp-rotary-status">
+              <span class="exp-rotary-live-badge">
+                <span class="live-pulse-dot"></span>
+                <span>Rotación Continua en Vivo</span>
+              </span>
+              <span class="exp-rotary-speed-hint"><i class="fa-solid fa-hand-pointer"></i> Pasa el cursor o arrastra para pausar y explorar</span>
+            </div>
+
+            <div class="exp-rotary-actions">
+              <button type="button" class="exp-rotary-btn exp-btn-prev" id="expRotaryPrevBtn" title="Anterior testimonio" aria-label="Anterior testimonio">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <button type="button" class="exp-rotary-btn exp-btn-playpause" id="expRotaryToggleBtn" title="Pausar o Reanudar rotación automática" aria-label="Pausar o Reanudar">
+                <i class="fa-solid fa-pause" id="expRotaryPlayIcon"></i>
+                <span id="expRotaryPlayText">Pausar</span>
+              </button>
+              <button type="button" class="exp-rotary-btn exp-btn-next" id="expRotaryNextBtn" title="Siguiente testimonio" aria-label="Siguiente testimonio">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Viewport con máscara de degradado lateral para efecto infinito continuo -->
+          <div class="exp-rotary-viewport" id="expRotaryViewport">
+            <div class="exp-rotary-track" id="expRotaryTrack">
+              <!-- Tarjeta 1: Turista Local -->
+              <div class="exp-card" data-audience="turista-local">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🇳🇮</div>
+                      <div>
+                        <h4 class="exp-name">Carlos Mendoza <i class="fa-solid fa-circle-check exp-verified-icon" title="Explorador Verificado"></i></h4>
+                        <p class="exp-origin">Managua &bull; Explorador de Senderos</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-turista">Turista Local</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Subir el Volcán Mombacho con los mapas fuera de línea de Baqueano nos dio total seguridad. Coordinamos el almuerzo en la cooperativa cafetalera sin pagar recargos de agencias extranjeras. La mejor app de turismo nacional que se ha hecho en Nicaragua.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-map-pin"></i> Volcán Mombacho</span>
+                  <span>Ahorro del 20% verificado</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 2: Negocio / Anfitrión Campesino -->
+              <div class="exp-card" data-audience="negocio">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🌾</div>
+                      <div>
+                        <h4 class="exp-name">Doña Rosalía Gómez <i class="fa-solid fa-circle-check exp-verified-icon" title="Anfitriona Verificada"></i></h4>
+                        <p class="exp-origin">Miraflor, Estelí &bull; Finca El Porvenir</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-negocio">Anfitriona Local</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Antes las páginas de afuera nos cobraban hasta el 25% de comisión por cada noche de hospedaje campesino. Con Baqueano los turistas nos contactan directamente a nuestro WhatsApp y recibimos el 100% íntegro para reinvertir en la comunidad y nuestros senderos.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-handshake"></i> 100% Retorno Directo</span>
+                  <span>Comunidad Miraflor</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 3: Viajero Internacional -->
+              <div class="exp-card" data-audience="turista-inter">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🇩🇪</div>
+                      <div>
+                        <h4 class="exp-name">Lukas Weber <i class="fa-solid fa-circle-check exp-verified-icon" title="Viajero Verificado"></i></h4>
+                        <p class="exp-origin">Berlín, Alemania &bull; Trekker Independiente</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-inter">Viajero Internacional</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Viajé por Ometepe y Somoto durante tres semanas. La baliza SOS satelital y el soporte de senderos de Baqueano me permitieron llegar a rincones donde Google Maps simplemente no funciona. Saber que mi dinero va directamente a la familia que cocina es un modelo ejemplar.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-shield-halved"></i> Conexión Satelital SOS</span>
+                  <span>Isla de Ometepe</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 4: Negocio / Guía Comunitario -->
+              <div class="exp-card" data-audience="negocio">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🛶</div>
+                      <div>
+                        <h4 class="exp-name">Marcos Centeno <i class="fa-solid fa-circle-check exp-verified-icon" title="Guía Certificado"></i></h4>
+                        <p class="exp-origin">Cañón de Somoto &bull; Cooperativa de Lancheros</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-negocio">Guía Campesino</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Baqueano nos puso en el mapa con coordenadas precisas y ficha técnica oficial. Ahora los grupos de jóvenes y familias nos reservan el tour fluvial con semanas de anticipación. Es soberanía económica para nuestros jóvenes guías.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-person-hiking"></i> 14 Jóvenes Empleados</span>
+                  <span>Madriz, Somoto</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 5: Turista Local -->
+              <div class="exp-card" data-audience="turista-local">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🇳🇮</div>
+                      <div>
+                        <h4 class="exp-name">Dra. Claudia Vivas <i class="fa-solid fa-circle-check exp-verified-icon" title="Exploradora Verificada"></i></h4>
+                        <p class="exp-origin">León &bull; Turismo Familiar Sostenible</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-turista">Turista Local</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Hicimos la ruta de playas vírgenes en Rivas y pudimos filtrar fácilmente restaurantes tradicionales y hospedajes con tarifas justas en córdobas. El cotizador oficial nos calculó exactamente los incentivos de la Ley 306.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-umbrella-beach"></i> Costa Esmeralda</span>
+                  <span>Viaje Familiar 4 días</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 6: Viajera Internacional -->
+              <div class="exp-card" data-audience="turista-inter">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🇫🇷</div>
+                      <div>
+                        <h4 class="exp-name">Camille Dupont <i class="fa-solid fa-circle-check exp-verified-icon" title="Viajera Verificada"></i></h4>
+                        <p class="exp-origin">Lyon, Francia &bull; Ecoturismo & Fotografía</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-inter">Viajera Internacional</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «El respeto con el que Baqueano documenta el patrimonio gastronómico ancestral y la cultura comunitaria es único en Centroamérica. Nos alojamos en Corn Island y Río San Juan con una calidez humana incomparable.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-camera"></i> Patrimonio Cultural</span>
+                  <span>Caribe & Río San Juan</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 7: Anfitrión Rural / Finca Cafetalera -->
+              <div class="exp-card" data-audience="negocio">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">☕</div>
+                      <div>
+                        <h4 class="exp-name">Don Teodoro Rugama <i class="fa-solid fa-circle-check exp-verified-icon" title="Anfitrión Verificado"></i></h4>
+                        <p class="exp-origin">Matagalpa &bull; Finca Orgánica Nebliselva</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-negocio">Cafetalero Campesino</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Recibimos a grupos de senderistas que catan nuestro café de estricta altura y compran grano directamente a las familias campesinas. Baqueano nos devolvió el control de nuestras cosechas y nuestra hospitalidad.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-seedling"></i> Café de Estricta Altura</span>
+                  <span>Cordillera Dariense</span>
+                </div>
+              </div>
+
+              <!-- Tarjeta 8: Viajeros Ecoturismo Internacional -->
+              <div class="exp-card" data-audience="turista-inter">
+                <div>
+                  <div class="exp-card-header">
+                    <div class="exp-author-info">
+                      <div class="exp-avatar-wrap">🇺🇸</div>
+                      <div>
+                        <h4 class="exp-name">Sarah & Mateo Silva <i class="fa-solid fa-circle-check exp-verified-icon" title="Viajeros Verificados"></i></h4>
+                        <p class="exp-origin">Austin, Texas &bull; Ecoturismo & Kayak</p>
+                      </div>
+                    </div>
+                    <span class="exp-role-badge tag-inter">Viajeros Internacionales</span>
+                  </div>
+                  <div class="exp-rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="exp-quote-text">
+                    «Navegar por los raudales de El Castillo y cruzar a Little Corn Island con la asesoría de baqueanos locales fue la mejor aventura de nuestras vidas. Sin tarifas ocultas y con una seguridad impecable en todo momento.»
+                  </p>
+                </div>
+                <div class="exp-footer-tag">
+                  <span class="exp-impact-pill"><i class="fa-solid fa-water"></i> Río San Juan & Caribe</span>
+                  <span>Expedición 10 días</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Indicadores de Navegación (Dots) -->
+          <div class="exp-rotary-dots" id="expRotaryDots" aria-label="Paginación de testimonios"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL INTERACTIVO PARA COMPARTIR EXPERIENCIA -->
+    <div class="exp-modal-backdrop" id="modalAddExperience" aria-hidden="true" role="dialog">
+      <div class="exp-modal-card">
+        <div class="exp-modal-header">
+          <h3 class="exp-modal-title"><i class="fa-solid fa-comment-dots"></i> Comparte tu Experiencia</h3>
+          <button type="button" class="exp-modal-close-btn" id="btnCloseExpModal" aria-label="Cerrar">&times;</button>
+        </div>
+
+        <form id="formAddExperience">
+          <div class="exp-form-field">
+            <label for="expAuthor" class="exp-form-label">Tu Nombre Completo *</label>
+            <input type="text" id="expAuthor" class="exp-form-input" placeholder="Ej: María José Morales" required>
+          </div>
+
+          <div class="exp-form-field">
+            <label for="expRoleType" class="exp-form-label">¿Cuál es tu rol en el territorio? *</label>
+            <select id="expRoleType" class="exp-form-select">
+              <option value="turista-local">Turista Nacional (Nicaragüense)</option>
+              <option value="turista-inter">Viajero / Turista Internacional</option>
+              <option value="negocio">Dueño de Negocio / Anfitrión Campesino</option>
+            </select>
+          </div>
+
+          <div class="exp-form-field">
+            <label for="expLocation" class="exp-form-label">Tu Ciudad, País o Comunidad</label>
+            <input type="text" id="expLocation" class="exp-form-input" placeholder="Ej: Estelí, Nicaragua o Madrid, España">
+          </div>
+
+          <div class="exp-form-field">
+            <label for="expRating" class="exp-form-label">Valoración General *</label>
+            <select id="expRating" class="exp-form-select">
+              <option value="5">★★★★★ (5 Estrellas - Extraordinario)</option>
+              <option value="4">★★★★☆ (4 Estrellas - Muy Bueno)</option>
+              <option value="3">★★★☆☆ (3 Estrellas - Bueno)</option>
+            </select>
+          </div>
+
+          <div class="exp-form-field">
+            <label for="expComment" class="exp-form-label">Cuéntanos tu experiencia *</label>
+            <textarea id="expComment" class="exp-form-textarea" rows="3" placeholder="¿Cómo fue tu visita o cómo ha beneficiado Baqueano a tu comunidad o negocio local?" required></textarea>
+          </div>
+
+          <div class="exp-modal-actions">
+            <button type="button" class="btn-exp-cancel" id="btnCancelExpModal">Cancelar</button>
+            <button type="submit" class="btn-exp-submit">
+              <i class="fa-solid fa-paper-plane"></i> Publicar Experiencia
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
 
     <!-- MODAL DE CONFIRMACIÓN DE REGISTRO DE NEGOCIO -->
     <div class="modal-backdrop-pro" id="bizSuccessModal" aria-hidden="true" role="dialog">
@@ -1302,6 +1799,8 @@
           <h4 class="footer-col-header">MÓDULOS WEB</h4>
           <ul class="footer-link-list">
             <li><a href="index.html">Inicio Institucional</a></li>
+            <li><a href="#territorioMapaSection"><i class="fa-solid fa-satellite"></i> Territorio Baqueano</a></li>
+            <li><a href="#experienciasComunidad"><i class="fa-solid fa-comments"></i> Experiencias Vivas</a></li>
             <li><a href="destinos.html">Destinos Protegidos</a></li>
             <li><a href="historia.html">Historia de Mi País</a></li>
             <li><a href="ambiental.html">Campaña Ambiental</a></li>
@@ -1448,6 +1947,9 @@
   <script src="js/video-registry.js"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="app.js"></script>
+  <!-- Leaflet Map JS & Controlador de Territorio y Experiencias -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="js/index-features.js"></script>
 
   <!-- ======================================================================
        🧭 MANEJADOR DEL FORMULARIO DE REGISTRO DE NEGOCIOS (/businesses + WhatsApp)

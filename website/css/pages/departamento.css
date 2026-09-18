@@ -438,3 +438,83 @@ html body .departamento-inline-031 {
   font-family: var(--font-tech) !important;
   font-weight:700 !important;
 }
+
+/* ============================================================================
+   🧭 SELECTOR DE LOS 17 TERRITORIOS EN DEPARTAMENTO.HTML & TRANSICIÓN REACTIVA
+   🎯 Por qué: Permitir al usuario cambiar de departamento en tiempo real con
+      animación suave a 60fps sin bloqueos ni retrasos en la navegación.
+   ⚙️ Cómo: Rejilla responsiva de tarjetas interactivas, estados hover/active
+      con tokens (#165D6F, #F65E01, #F4E6C1, #0F172A), y fade reactivo.
+   📦 Qué: #deptSelectorGrid, button.territory-pill-card, .dept-content-fading.
+   ============================================================================ */
+#deptSelectorGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  #deptSelectorGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  #deptSelectorGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+button.territory-pill-card {
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(19, 36, 56, 0.7);
+  border-radius: 16px;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+}
+
+button.territory-pill-card:hover {
+  background: rgba(22, 93, 111, 0.5);
+  border-color: #2DD4BF;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(22, 93, 111, 0.35);
+}
+
+button.territory-pill-card.active {
+  background: linear-gradient(135deg, rgba(246, 94, 1, 0.25) 0%, rgba(22, 93, 111, 0.5) 100%);
+  border-color: #F65E01;
+  box-shadow: 0 0 16px rgba(246, 94, 1, 0.4);
+}
+
+button.territory-pill-card h5 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 0.25rem 0;
+}
+
+button.territory-pill-card span {
+  font-size: 0.8rem;
+  color: #CBD5E1;
+  line-height: 1.4;
+}
+
+/* Transición suave para actualización reactiva */
+.dept-content-transition {
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dept-content-fading {
+  opacity: 0.2;
+  transform: translateY(6px);
+}
+
