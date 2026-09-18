@@ -84,11 +84,12 @@ export default function DashboardPage() {
               <p className="text-white/50 text-sm">Cargando actividad...</p>
             ) : auditLogs.length > 0 ? (
               auditLogs.map((log) => (
-                <div key={log.id} className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/72 flex justify-between">
-                  <span>
-                    <strong className="text-white">{log.actorEmail}</strong> ({log.actorRole}) - {log.action} en {log.collection}
-                  </span>
-                  <span className="text-xs text-white/50">{new Date(log.createdAtIso).toLocaleDateString()}</span>
+                <div key={log.id} className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/72 flex justify-between items-center">
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-white text-xs">{log.actorEmail}</span>
+                    <span>{log.action} en {log.collection}</span>
+                  </div>
+                  <span className="text-xs text-[#F65E01] font-tech">{new Date(log.createdAtIso).toLocaleDateString()}</span>
                 </div>
               ))
             ) : (
@@ -96,11 +97,28 @@ export default function DashboardPage() {
             )}
           </div>
         </AdminPanel>
-        <AdminPanel title="RBAC activo">
-          <div className="grid gap-2 text-sm text-white/70">
-            {["super_admin: control completo", "admin: contenido y validaciones", "auditor: read-only total", "host: negocio propio", "explorer: datos personales"].map((item) => (
-              <div key={item} className="rounded-md bg-[#10B981]/10 px-3 py-2 font-tech text-xs uppercase text-[#9EF1D2]">{item}</div>
-            ))}
+
+        <AdminPanel title="Cola de Auditoría (Requiere Acción)">
+          <div className="grid gap-3">
+            {loading ? (
+              <p className="text-white/50 text-sm">Cargando pendientes...</p>
+            ) : businesses.filter(b => b.status === "pending_review").length > 0 ? (
+              businesses.filter(b => b.status === "pending_review").slice(0, 5).map((biz) => (
+                <a key={biz.id} href={`/negocios/${biz.id}`} className="block group">
+                  <div className="rounded-md border border-amber-900/50 bg-amber-900/10 hover:bg-amber-900/20 px-4 py-3 text-sm text-white transition-colors flex justify-between items-center">
+                    <div className="flex flex-col">
+                      <strong className="text-amber-400 group-hover:text-amber-300">{biz.name}</strong>
+                      <span className="text-xs text-white/50 mt-0.5">Correo: {biz.email || "N/A"}</span>
+                    </div>
+                    <span className="text-xs font-semibold bg-amber-500/20 text-amber-300 px-2 py-1 rounded">REVISAR</span>
+                  </div>
+                </a>
+              ))
+            ) : (
+              <div className="flex items-center justify-center p-6 border border-dashed border-white/10 rounded-lg">
+                <p className="text-white/50 text-sm">No hay negocios pendientes de revisión. 🎉</p>
+              </div>
+            )}
           </div>
         </AdminPanel>
       </div>

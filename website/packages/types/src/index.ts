@@ -165,6 +165,22 @@ export interface Reservation {
   readonly serviceName?: string;
   readonly currency?: "NIO" | "USD";
   readonly unitPrice?: number;
+}
+
+export interface WebsiteBlock {
+  readonly id: string;
+  readonly type: string;
+  readonly props: Record<string, any>;
+}
+
+export interface WebsitePage {
+  readonly id: string;
+  readonly title: string;
+  readonly path: string;
+  readonly blocks: readonly WebsiteBlock[];
+  readonly status: "published" | "draft";
+  readonly updatedAt: string;
+}
   readonly totalPrice?: number;
   readonly notes?: string;
   readonly createdAt?: string;

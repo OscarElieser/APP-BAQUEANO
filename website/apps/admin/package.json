@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@baqueano/ai-core": "workspace:*",
     "@baqueano/config": "workspace:*",
     "@baqueano/firebase": "workspace:*",
     "@baqueano/types": "workspace:*",

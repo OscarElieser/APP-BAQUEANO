@@ -128,7 +128,8 @@ export const firestoreCollections = {
   strategicReports: "strategic_reports",
   trips: "trips",
   passportEntries: "passport_entries",
-  experienceContexts: "experience_contexts"
+  experienceContexts: "experience_contexts",
+  websitePages: "website_pages"
 } as const;
 
 export const roleAccess: Record<UserRole, readonly string[]> = {
