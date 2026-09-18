@@ -68,6 +68,9 @@
       if (path.includes('aliados.html') || document.querySelector('.allies-3d-grid')) {
         this.syncAlliesPage();
       }
+      if (path.includes('destinos.html') || document.querySelector('.dest-card-pro, #destinosGrid, .destinos-grid, .featured-destinations')) {
+        this.syncDestinationsCatalog();
+      }
       if (path.includes('gastronomia.html') || document.querySelector('.gastronomy-grid')) {
         this.syncGastronomyPage();
       }
@@ -193,6 +196,104 @@
     },
 
     // ------------------------------------------------------------------------
+    // 0b. SINCRONIZACIÓN DE DESTINOS & LUGARES EN TIEMPO REAL
+    // ------------------------------------------------------------------------
+    syncDestinationsCatalog() {
+      const db = this.getDb();
+      if (!db) {
+        setTimeout(() => this.syncDestinationsCatalog(), 600);
+        return;
+      }
+
+      // Escuchar 'destinations' en tiempo real
+      db.collection('destinations').onSnapshot(
+        (snapshot) => {
+          if (!snapshot.empty) {
+            const items = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+            this.applyDestinationUpdates(items);
+          }
+        },
+        (err) => console.warn('[BaqueanoPublicSync] Error en destinations:', err.message)
+      );
+
+      // También escuchar 'places' como espejo defensivo
+      db.collection('places').onSnapshot(
+        (snapshot) => {
+          if (!snapshot.empty) {
+            const items = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+            this.applyDestinationUpdates(items);
+          }
+        },
+        (err) => console.warn('[BaqueanoPublicSync] Error en places:', err.message)
+      );
+    },
+
+    applyDestinationUpdates(items) {
+      items.forEach((d) => {
+        const status = d.status || 'published';
+        const isVerified = d.verified === true || d.verificationStatus === 'verified';
+        const cards = document.querySelectorAll(`[data-id="${d.id}"], #${d.id}`);
+
+        if (cards.length > 0) {
+          cards.forEach((card) => {
+            // Ocultar si está en borrador o papelera
+            if (status === 'draft' || status === 'trashed') {
+              card.style.display = 'none';
+              return;
+            }
+
+            card.style.display = '';
+
+            // 1. Imagen
+            if (d.imageUrl || d.image) {
+              const img = card.querySelector('img.dest-card-img, img.dest-thumb, img');
+              if (img && img.src !== (d.imageUrl || d.image)) {
+                img.src = d.imageUrl || d.image;
+              }
+            }
+
+            // 2. Título & Insignia de Verificación Oficial estilo Red Social
+            const titleEl = card.querySelector('.dest-name-title, .dest-title, h3');
+            if (titleEl) {
+              const cleanTitle = d.title || d.name || titleEl.textContent.trim();
+              titleEl.innerHTML = `
+                ${this.escape(cleanTitle)}
+                ${isVerified ? '<span class="bq-social-verified-badge" title="Destino Verificado Oficialmente"><i class="fa-solid fa-circle-check"></i></span>' : ''}
+              `;
+            }
+
+            // 3. Descripción
+            if (d.description) {
+              const descEl = card.querySelector('.dest-description-text, p.dest-desc');
+              if (descEl) descEl.textContent = d.description;
+            }
+
+            // 4. Precios bimoneda
+            if (d.priceNio || d.priceUsd) {
+              const badgePrice = card.querySelector('.dest-price-badge');
+              if (badgePrice) {
+                badgePrice.textContent = `C$ ${d.priceNio || Math.round(d.priceUsd * 36.65)} (${d.category || 'Destino'}) ≈ $${d.priceUsd || (d.priceNio / 36.65).toFixed(1)} USD`;
+              }
+              const nioEl = card.querySelector('.price-cordobas');
+              if (nioEl) nioEl.textContent = `C$ ${d.priceNio} NIO`;
+              const usdEl = card.querySelector('.price-usd');
+              if (usdEl) usdEl.textContent = `≈ $${d.priceUsd} USD`;
+            }
+
+            // 5. Contacto WhatsApp
+            if (d.whatsapp || d.phone) {
+              const cleanPhone = (d.whatsapp || d.phone).replace(/[^0-9]/g, '');
+              const waBtn = card.querySelector('a.btn-card-whatsapp, a.btn-flip-wa');
+              if (waBtn && cleanPhone) {
+                waBtn.href = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=Hola%20${encodeURIComponent(d.title || d.name)},%20deseo%20información%20desde%20Baqueano`;
+              }
+            }
+          });
+        }
+      });
+    },
+
+    // ------------------------------------------------------------------------
     // 1. ANUNCIO GLOBAL EN TIEMPO REAL (app_config/global)
     // ------------------------------------------------------------------------
     syncGlobalAnnouncement() {
@@ -268,17 +369,23 @@
                       </div>
                       <div class="flip-front-body">
                         <span class="aliados-inline-002">${this.escape(territory)} • ${this.escape(municipality)}</span>
-                        <h3 class="flip-front-title">${this.escape(name)}</h3>
+                        <h3 class="flip-front-title">
+                          ${this.escape(name)}
+                          ${isVerified ? '<span class="bq-social-verified-badge" title="Cuenta Oficial Verificada"><i class="fa-solid fa-circle-check"></i></span>' : ''}
+                        </h3>
                         <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
                       </div>
                     </div>
                     <div class="flip-card-back">
                       <div>
-                        <span class="aliados-inline-003" style="display: inline-flex; align-items: center; gap: 0.35rem; color: ${isVerified ? '#10B981' : '#F59E0B'};">
-                          <i class="fa-solid ${isVerified ? 'fa-shield-check' : 'fa-certificate'}"></i>
-                          ${isVerified ? 'VERIFICADO BAQUEANO' : 'EN PROCESO DE ACREDITACIÓN'}
+                        <span class="aliados-inline-003" style="display: inline-flex; align-items: center; gap: 0.35rem; color: ${isVerified ? '#00BAF2' : '#F59E0B'};">
+                          <i class="fa-solid ${isVerified ? 'fa-circle-check' : 'fa-certificate'}"></i>
+                          ${isVerified ? 'VERIFICADO OFICIAL' : 'EN PROCESO DE ACREDITACIÓN'}
                         </span>
-                        <h3 class="flip-back-title">${this.escape(name)}</h3>
+                        <h3 class="flip-back-title">
+                          ${this.escape(name)}
+                          ${isVerified ? '<span class="bq-social-verified-badge" title="Cuenta Oficial Verificada"><i class="fa-solid fa-circle-check"></i></span>' : ''}
+                        </h3>
                         <p class="flip-back-desc">
                           ${this.escape(description)}
                         </p>

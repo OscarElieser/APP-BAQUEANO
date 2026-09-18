@@ -1337,6 +1337,54 @@
       OpsToast.show('Registro duplicado en modo borrador.', 'success');
     },
 
+    // 7.7b Check de Verificado Manual (TikTok / Instagram / X / FB Style)
+    async toggleManualVerified(tabId, entityId) {
+      const config = ENTITY_REGISTRY[tabId];
+      const items = OpsState.collectionsData[tabId] || [];
+      const item = items.find((x) => x.id === entityId);
+      if (!item) return;
+
+      const newVerified = !(item.verified === true || item.verificationStatus === 'verified');
+      const collName = config?.collection || 'destinations';
+
+      const db = this.getDb();
+      if (!db) return;
+
+      const updateData = {
+        verified: newVerified,
+        verificationStatus: newVerified ? 'verified' : 'unverified',
+        updatedAt: new Date().toISOString(),
+        verifiedAt: newVerified ? new Date().toISOString() : null,
+        verifiedBy: newVerified ? (OpsState.currentUser?.email || 'admin') : null
+      };
+
+      await db.collection(collName).doc(entityId).set(updateData, { merge: true });
+
+      // Si es un destino, sincronizar también en colección espejo
+      if (config.dualSyncCollection) {
+        await db.collection(config.dualSyncCollection).doc(entityId).set(updateData, { merge: true }).catch(() => {});
+      }
+
+      item.verified = newVerified;
+      item.verificationStatus = updateData.verificationStatus;
+
+      OpsToast.show(
+        newVerified
+          ? `✅ Check Oficial de Verificación otorgado a "${item.title || item.name}".`
+          : `Insignia de verificación removida de "${item.title || item.name}".`,
+        newVerified ? 'success' : 'info'
+      );
+
+      await this.logAuditEvent({
+        action: newVerified ? 'BADGE_VERIFIED_GRANTED' : 'BADGE_VERIFIED_REVOKED',
+        module: config?.title || tabId,
+        collection: collName,
+        recordId: entityId,
+        description: `Check de verificación manual (estilo red social) ${newVerified ? 'otorgado' : 'retirado'} para "${item.title || item.name}"`,
+        status: 'success'
+      });
+    },
+
     // 7.8 Acciones Masivas
     async executeBulkAction(tabId, action, ids) {
       if (!ids || ids.length === 0) return;
@@ -2342,6 +2390,7 @@
       const image = item.imageUrl || item.image || item.photo || '';
       const territory = item.department || item.region || item.category || 'Nacional';
       const updated = item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('es-NI', { day: '2-digit', month: 'short' }) : 'Hoy';
+      const isVerified = item.verified === true || item.verificationStatus === 'verified';
 
       return `
         <tr class="ops-table-row ${isSelected ? 'is-selected' : ''}">
@@ -2352,8 +2401,11 @@
             <div class="ops-cell-title">
               ${image ? `<img src="${image}" class="ops-cell-thumb" alt="" referrerpolicy="no-referrer">` : `<div class="ops-cell-thumb" style="display:flex;align-items:center;justify-content:center;color:var(--ops-text-muted);"><i class="fa-solid fa-image"></i></div>`}
               <div class="ops-cell-meta">
-                <span class="ops-cell-meta-title">${this.escape(title)}</span>
-                <span class="ops-cell-meta-sub">ID: ${item.id}</span>
+                <span class="ops-cell-meta-title">
+                  ${this.escape(title)}
+                  ${isVerified ? `<span class="ops-social-verified-check" title="Verificado Oficialmente (Sello Auténtico)"><i class="fa-solid fa-circle-check"></i></span>` : ''}
+                </span>
+                <span class="ops-cell-meta-sub">ID: ${item.id} ${item.priceNio ? `• C$ ${item.priceNio} (≈ $${item.priceUsd})` : ''}</span>
               </div>
             </div>
           </td>
@@ -2369,7 +2421,10 @@
           <td style="font-size: 0.76rem; color: var(--ops-text-muted);">${updated}</td>
           <td>
             <div class="ops-table-actions">
-              <button class="btn-ops-icon" title="Editar registro" onclick="window.BaqueanoOpsEngine.openEditDrawer('${tabId}', '${item.id}')">
+              <button class="btn-ops-icon ${isVerified ? 'verified-active' : ''}" title="${isVerified ? 'Insignia Verificada (Clic para retirar)' : 'Check de verificado manual estilo red social (TikTok, Instagram, X)'}" onclick="window.BaqueanoOpsEngine.toggleManualVerified('${tabId}', '${item.id}')">
+                <i class="fa-solid fa-circle-check" style="${isVerified ? 'color: #00BAF2;' : 'color: var(--ops-text-muted);'}"></i>
+              </button>
+              <button class="btn-ops-icon" title="Editar registro (imagen, precio, textos)" onclick="window.BaqueanoOpsEngine.openEditDrawer('${tabId}', '${item.id}')">
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
               <button class="btn-ops-icon" title="Vista previa" onclick="window.BaqueanoOpsEngine.previewEntity('${tabId}', '${item.id}')">
@@ -2491,6 +2546,11 @@
       subEl.textContent = item ? `ID: ${item.id}` : `Módulo: ${config.title}`;
 
       // Resetear campos
+      const verCheckbox = document.getElementById('entityVerified');
+      if (verCheckbox) {
+        verCheckbox.checked = item ? (item.verified === true || item.verificationStatus === 'verified') : false;
+      }
+
       document.getElementById('entityTitle').value = item ? (item.title || item.name || '') : '';
       document.getElementById('entitySlug').value = item ? (item.slug || '') : '';
       document.getElementById('entityCategory').value = item ? (item.category || item.type || '') : '';
@@ -2550,6 +2610,8 @@
       }
 
       const id = document.getElementById('entityId').value;
+      const isVerified = document.getElementById('entityVerified') ? document.getElementById('entityVerified').checked : false;
+
       const payload = {
         id: id || undefined,
         title: titleInput.value.trim(),
@@ -2575,7 +2637,11 @@
         imageUrl: document.getElementById('entityImageUrl').value.trim(),
         metaTitle: document.getElementById('entityMetaTitle').value.trim(),
         metaDescription: document.getElementById('entityMetaDesc').value.trim(),
-        keywords: document.getElementById('entityKeywords').value.trim()
+        keywords: document.getElementById('entityKeywords').value.trim(),
+        verified: isVerified,
+        verificationStatus: isVerified ? 'verified' : 'unverified',
+        verifiedAt: isVerified ? new Date().toISOString() : null,
+        verifiedBy: isVerified ? (OpsState.currentUser?.email || 'admin') : null
       };
 
       try {
@@ -3416,6 +3482,11 @@
         confirmText: 'Eliminar Permanentemente'
       });
       if (confirmed) await OpsCMS.hardDelete(tabId, entityId);
+    },
+
+    async toggleManualVerified(tabId, entityId) {
+      await OpsCMS.toggleManualVerified(tabId, entityId);
+      OpsUI.renderEntityView(tabId);
     },
 
     // Verificaciones & Suscripciones
