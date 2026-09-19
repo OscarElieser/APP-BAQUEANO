@@ -461,26 +461,267 @@
   <!-- FOOTER INSTITUCIONAL OFICIAL -->
   <footer class="site-footer-pro">
     <div class="container">
-      <div class="footer-top-utility-bar">
-        <div class="footer-network-status">
-          <span class="pulse-dot"></span>
-          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+
+      <!-- ======================================================================
+           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
+           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
+              con el ecosistema Baqueano sin intermediarios foráneos.
+           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
+              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
+           📦 Tarjeta #registroNegocios integrada en el footer institucional.
+           ====================================================================== -->
+      <div class="footer-biz-register-card" id="registroNegocios">
+        <!-- Encabezado de la Tarjeta -->
+        <div class="footer-biz-header-wrap">
+          <div class="footer-biz-tag">
+            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
+          </div>
+          <h3 class="footer-biz-title">
+            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
+          </h3>
+          <p class="footer-biz-subtitle">
+            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
+          </p>
+
+          <!-- Tiras de Ventajas Tácticas -->
+          <div class="footer-biz-benefits-strip">
+            <div class="footer-biz-benefit-item">
+              <i class="fa-solid fa-percent"></i>
+              <span><strong>0% Comisiones</strong> intermediarios</span>
+            </div>
+            <div class="footer-biz-benefit-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span><strong>Contacto Directo</strong> con el viajero</span>
+            </div>
+            <div class="footer-biz-benefit-item">
+              <i class="fa-solid fa-satellite"></i>
+              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
+            </div>
+            <div class="footer-biz-benefit-item">
+              <i class="fa-solid fa-shield-heart"></i>
+              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
+            </div>
+          </div>
+
+          <!-- Botón de Acción Principal para Abrir la Postulación -->
+          <div class="biz-trigger-wrap">
+            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
+              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
+              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
+            </button>
+          </div>
         </div>
+
+        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
+        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
+          <div class="biz-form-header-bar">
+            <div class="biz-form-header-info">
+              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
+              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
+            </div>
+            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
+              <i class="fa-solid fa-chevron-up"></i> Ocultar
+            </button>
+          </div>
+
+          <!-- Formulario de Registro -->
+          <form id="registerBusinessForm" class="biz-form" novalidate>
+            <div class="biz-form-grid">
+              
+              <!-- 1. Nombre del Negocio -->
+              <div class="biz-field-group">
+                <label for="bizName" class="biz-label">
+                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
+                </label>
+                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
+                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
+              </div>
+
+              <!-- 2. Categoría -->
+              <div class="biz-field-group">
+                <label for="bizCategory" class="biz-label">
+                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
+                </label>
+                <select id="bizCategory" name="bizCategory" class="biz-select" required>
+                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
+                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
+                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
+                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
+                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
+                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
+                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
+                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
+                </select>
+                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
+              </div>
+
+              <!-- 3. Departamento -->
+              <div class="biz-field-group">
+                <label for="bizDepartment" class="biz-label">
+                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
+                </label>
+                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
+                  <option value="" disabled selected>Selecciona tu departamento...</option>
+                  <option value="Boaco">Boaco</option>
+                  <option value="Carazo">Carazo</option>
+                  <option value="Chinandega">Chinandega</option>
+                  <option value="Chontales">Chontales</option>
+                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
+                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
+                  <option value="Estelí">Estelí</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Jinotega">Jinotega</option>
+                  <option value="León">León</option>
+                  <option value="Madriz">Madriz</option>
+                  <option value="Managua">Managua</option>
+                  <option value="Masaya">Masaya</option>
+                  <option value="Matagalpa">Matagalpa</option>
+                  <option value="Nueva Segovia">Nueva Segovia</option>
+                  <option value="Río San Juan">Río San Juan</option>
+                  <option value="Rivas">Rivas</option>
+                </select>
+                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
+              </div>
+
+              <!-- 4. Municipio o Comunidad -->
+              <div class="biz-field-group">
+                <label for="bizMunicipality" class="biz-label">
+                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
+                </label>
+                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
+                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
+              </div>
+
+              <!-- 5. Nombre del Contacto / Anfitrión -->
+              <div class="biz-field-group">
+                <label for="bizContactName" class="biz-label">
+                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
+                </label>
+                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
+                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
+              </div>
+
+              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
+              <div class="biz-field-group">
+                <label for="bizWhatsapp" class="biz-label">
+                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
+                </label>
+                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
+                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
+                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
+              </div>
+
+              <!-- 7. Correo Electrónico (Opcional) -->
+              <div class="biz-field-group">
+                <label for="bizEmail" class="biz-label">
+                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
+                </label>
+                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
+                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
+              </div>
+
+              <!-- 8. Dirección / Cómo Llegar -->
+              <div class="biz-field-group">
+                <label for="bizAddress" class="biz-label">
+                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
+                </label>
+                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
+                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
+              </div>
+
+              <!-- 9. Breve Descripción del Servicio -->
+              <div class="biz-field-group biz-col-full">
+                <label for="bizDescription" class="biz-label">
+                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
+                </label>
+                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
+                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
+                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
+              </div>
+
+              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
+              <div class="biz-field-group biz-col-full">
+                <label class="biz-label">
+                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
+                </label>
+                <div class="biz-file-dropzone" id="bizDropzone">
+                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
+                  <div class="dropzone-content" id="dropzonePrompt">
+                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
+                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
+                  </div>
+                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
+                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
+                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
+                      <i class="fa-solid fa-xmark"></i> Quitar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Botón de Envío y Términos -->
+              <div class="biz-field-group biz-col-full biz-submit-wrap">
+                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
+                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
+                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                </button>
+                <div class="biz-security-note">
+                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div> <!-- /bizFormCollapse -->
+
+      </div> <!-- /footer-biz-register-card -->
+
+      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
+      <div class="footer-top-utility-bar">
         <div class="footer-newsletter-wrap">
-          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!');">
-            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
-            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
-            <button type="submit" class="newsletter-submit-btn">
-              <span>Unirme</span>
-              <i class="fa-solid fa-arrow-right"></i>
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos & Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
             </button>
           </form>
         </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
       </div>
 
+      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
       <div class="footer-columns-grid">
+        
+        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
         <div class="footer-col-brand">
-          <div class="brand-box mb-3">
+          <div class="brand-box" style="margin-bottom: 1.1rem;">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -488,29 +729,37 @@
             </div>
           </div>
           <p class="footer-bio-text">
-            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
+            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
           </p>
-          <div class="footer-social-row">
-            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
+          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
+            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
+          </div>
+          <!-- Sellos de Confianza y Régimen Legal -->
+          <div class="footer-trust-strip">
+            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
           </div>
         </div>
 
+        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
         <div class="footer-col-links">
           <h4 class="footer-col-header">MÓDULOS WEB</h4>
           <ul class="footer-link-list">
-            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
-            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
+            <li><a href="index.html">Inicio Institucional</a></li>
+            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-guitar"></i> Patrimonio Sonoro</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
+            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
+            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
           </ul>
         </div>
 
+        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
         <div class="footer-col-contact">
           <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
           <ul class="footer-contact-list">
@@ -532,38 +781,50 @@
               <i class="fa-solid fa-location-dot"></i>
               <div>
                 <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos</span>
+                <span>Managua • 17 Departamentos, Nicaragua</span>
               </div>
             </li>
             <li class="footer-contact-item">
               <i class="fa-solid fa-clock"></i>
               <div>
-                <span>Atención al Explorador:</span><br>
-                <span>24/7 en Sendero • Red Satelital</span>
+                <span>Horario de Atención:</span><br>
+                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
               </div>
             </li>
           </ul>
         </div>
+
       </div>
 
-      <div class="footer-trust-pills-row">
-        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
-        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
-        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
-        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
+      <!-- BLOQUE LEGAL (LEGAL STACK) -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos & Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
+        <span class="separator">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
       </div>
 
+      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
       <div class="footer-bottom-bar">
-        <div class="footer-copy-text">
+        <div>
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div class="footer-legal-links">
-          <a href="terminos.html">Términos & Condiciones</a>
-          <a href="privacidad.html">Privacidad</a>
-          <a href="aviso-legal.html">Aviso Legal</a>
-          <a href="cookies.html">Cookies</a>
-          <a href="ambiental.html">Decálogo Verde</a>
-          <a href="admin.html">Baqueano Ops Center</a>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+            Telemetría GPS 24/7 Activa
+          </span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
+          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
         </div>
       </div>
     </div>
