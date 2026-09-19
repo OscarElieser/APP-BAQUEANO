@@ -1,8 +1,22 @@
-/**
- * POR QU?: mantener la presentaci?n de gastronomia.html separada de su estructura HTML.
- * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
- * QU?: reglas visuales espec?ficas de gastronomia, sin l?gica ni contenido estructural.
- */
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — ESTILOS DE GASTRONOMÍA ANCESTRAL (gastronomia.css)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proporcionar un diseño visual de alta fidelidad para el catálogo culinario de Nicaragua.
+// - Resaltar la riqueza de las comidas típicas, bebidas tradicionales y dulces ancestrales
+//   con acabados glassmorphism, tipografía jerárquica y adaptabilidad responsiva.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
+// - CSS Grid adaptativo (1 col móvil, 2 cols tablet, 3 cols desktop).
+// - Efectos hover fluidos con elevación y resplandor sutil sin afectar el rendimiento.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
+// - .gastro-section-header, .gastro-category-badge, .gastro-origin-tag.
+// - .beverages-grid, .sweets-grid, .gastro-card variantes temáticas.
+// ============================================================================
+
 
 
 html body .gastronomia-inline-001 {
@@ -155,4 +169,177 @@ html body .gastronomia-inline-026 {
 html body .gastronomia-inline-027 {
   flex: 1 !important;
   justify-content: center !important;
+}
+
+/* ==========================================================================
+   ESTILOS DE CATEGORÍAS CULINARIAS, BEBIDAS Y DULCES TÍPICOS
+   ========================================================================== */
+
+.gastro-section-header {
+  text-align: center;
+  margin: 3.5rem 0 2rem;
+  position: relative;
+}
+
+.gastro-section-header:first-of-type {
+  margin-top: 1rem;
+}
+
+.gastro-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(244, 230, 193, 0.3);
+  color: var(--arena-pinolera);
+  font-family: var(--font-tech);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.gastro-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.gastro-section-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.gastro-origin-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  background: rgba(246, 94, 1, 0.12);
+  border: 1px solid rgba(246, 94, 1, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-tech);
+}
+
+.beverages-grid,
+.sweets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.gastro-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gastro-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(246, 94, 1, 0.4);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}
+
+.gastro-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.gastro-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gastro-card:hover .gastro-img {
+  transform: scale(1.06);
+}
+
+.gastro-badge-floating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.3);
+  color: var(--arena-pinolera);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gastro-body {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gastro-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.35rem;
+}
+
+.gastro-ingredients {
+  font-size: 0.82rem;
+  color: var(--terracotta);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+.gastro-ingredients i {
+  margin-top: 0.2rem;
+}
+
+.gastro-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.gastro-footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(244, 230, 193, 0.08);
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }

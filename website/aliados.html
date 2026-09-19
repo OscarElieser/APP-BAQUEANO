@@ -15,9 +15,10 @@
 - Aceleración por GPU para giros suaves a 60fps sin tirones.
 
 📦 3. QUÉ (WHAT / CONTENIDOS):
-- 6 Fichas 3D de Cooperativas y Alojamientos Rurales: Cañón de Somoto, Posada La Abuela,
-  Isla de Ometepe, Selva Negra Matagalpa, Guías de Cerro Negro y Apoyo Resort.
-- Navegación unificada, centro de auxilio SOS y descarga de APK.
+- Catálogo Ampliado de 14 Fichas 3D de Cooperativas y Alojamientos Rurales Verificados.
+- Galería Fotográfica Enriquecida con Miniaturas Interactivas por Aliado.
+- Barra de Filtros por Categoría (Cooperativas, Eco-Lodges, Playas, Patrimonio).
+- Footer Institucional Soberano alineado con los 4 canales oficiales.
 ============================================================================
 -->
 <html lang="es">
@@ -183,7 +184,7 @@
 
   <!-- VIDEO HERO CINEMATOGRÁFICO DE COOPERATIVAS ALIADAS -->
   <div class="video-hero-wrapper">
-    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/finca_magdalena.jpg">
+    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg">
       <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/e2815183-b78f-4aa7-ae49-166fefbce78d/33924376.mp4" type="video/mp4">
     </video>
     <div class="video-hero-gradient"></div>
@@ -207,13 +208,29 @@
       <div class="container">
 
         <!-- GRID 3D FLIP CARDS -->
-        <div class="allies-3d-grid">
+                <!-- FILTROS DE CATEGORÍAS DE ALIADOS -->
+        <div class="allies-filter-bar" id="alliesFilterBar">
+          <button type="button" class="allies-filter-btn is-active" data-filter="all"><i class="fa-solid fa-handshake"></i> Todos los Aliados (14)</button>
+          <button type="button" class="allies-filter-btn" data-filter="coop"><i class="fa-solid fa-people-group"></i> Cooperativas Campesinas (4)</button>
+          <button type="button" class="allies-filter-btn" data-filter="eco"><i class="fa-solid fa-leaf"></i> Eco-Lodges & Cabañas (4)</button>
+          <button type="button" class="allies-filter-btn" data-filter="playa"><i class="fa-solid fa-umbrella-beach"></i> Costa & Playas (3)</button>
+          <button type="button" class="allies-filter-btn" data-filter="patrimonio"><i class="fa-solid fa-landmark"></i> Casonas & Cultura (3)</button>
+        </div>
+
+        <div class="allies-3d-grid" id="allies3dGrid">
           <!-- Tarjeta 1: Somoto -->
-          <div class="flip-card-3d" tabindex="0">
+          <div class="flip-card-3d" data-category="coop" tabindex="0">
             <div class="flip-card-inner">
               <div class="flip-card-front">
                 <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-water"></i> Aventura</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
                   <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop Somoto" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/selva_negra.jpg" alt="Montaña"></div>
                 </div>
                 <div class="flip-front-body">
                   <span class="aliados-inline-002">MADRIZ • MONUMENTO NACIONAL</span>
@@ -226,11 +243,11 @@
                   <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
                   <h3 class="flip-back-title">Coop. Cañón de Somoto</h3>
                   <p class="flip-back-desc">
-                    32 familias campesinas de Sonís y El Guayabo. Ofrecen recorridos acuáticos seguros con chalecos salvavidas certificados, lanchas y hospedaje rural familiar con rosquillas calientes.
+                    32 familias campesinas de Sonís y El Guayabo. Recorridos acuáticos seguros con chalecos salvavidas certificados, lanchas y hospedaje rural familiar con rosquillas calientes.
                   </p>
                 </div>
                 <div class="flip-back-actions">
-                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Coop%20Somoto,%20deseo%20coordinar%20guía%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                  <a href="https://wa.me/50584431289?text=Hola%20Coop%20Somoto,%20deseo%20coordinar%20guía%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                   </a>
                   <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
@@ -241,12 +258,19 @@
             </div>
           </div>
 
-          <!-- Tarjeta 2: Laguna de Apoyo -->
-          <div class="flip-card-3d" tabindex="0">
+          <!-- Tarjeta 2: Posada La Abuela -->
+          <div class="flip-card-3d" data-category="eco" tabindex="0">
             <div class="flip-card-inner">
               <div class="flip-card-front">
                 <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-spa"></i> Bienestar</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
                   <img src="assets/images/aliados/posada_ecologica_la_abuela.jpg" alt="Posada La Abuela" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/posada_ecologica_la_abuela.jpg" alt="Muelle"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/apoyo_resort.jpg" alt="Laguna"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/san_simian.jpg" alt="Cabaña"></div>
                 </div>
                 <div class="flip-front-body">
                   <span class="aliados-inline-002">MASAYA • CRÁTER VOLCÁNICO</span>
@@ -263,7 +287,7 @@
                   </p>
                 </div>
                 <div class="flip-back-actions">
-                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Posada%20La%20Abuela,%20deseo%20reservar%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                  <a href="https://wa.me/50584431289?text=Hola%20Posada%20La%20Abuela,%20deseo%20reservar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                   </a>
                   <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
@@ -274,15 +298,62 @@
             </div>
           </div>
 
-          <!-- Tarjeta 3: Cerro Negro -->
-          <div class="flip-card-3d" tabindex="0">
+          <!-- Tarjeta 3: Arenas Beach Corn Island -->
+          <div class="flip-card-3d" data-category="playa" tabindex="0">
             <div class="flip-card-inner">
               <div class="flip-card-front">
                 <div class="flip-front-img-wrap">
-                  <img src="assets/images/destinos/cerro_negro.jpg" alt="Coop Cerro Negro" class="flip-front-img" loading="lazy">
+                  <span class="flip-category-badge"><i class="fa-solid fa-umbrella-beach"></i> Caribe</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/arenas_beach.jpg" alt="Arenas Beach Hotel" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/arenas_beach.jpg" alt="Playa"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/corn_island_hostal.jpg" alt="Cabaña"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/corn_island.jpg" alt="Mar Turquesa"></div>
                 </div>
                 <div class="flip-front-body">
-                  <span class="aliados-inline-002">LEÓN • CORDILLERA DE LOS MARIBIOS</span>
+                  <span class="aliados-inline-002">CORN ISLAND • CARIBE SUR</span>
+                  <h3 class="flip-front-title">Arenas Beach Hotel & Cabañas</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Arenas Beach Hotel</h3>
+                  <p class="flip-back-desc">
+                    Frente a las aguas turquesa de Big Corn Island. Cabañas rústicas sobre arena blanca, pesca artesanal con pescadores de la isla y cocina criolla de rondón de mariscos.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Arenas%20Beach,%20deseo%20reservar%20hospedaje%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Hotel
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 4: Cerro Negro -->
+          <div class="flip-card-3d" data-category="coop" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-volcano"></i> Volcán</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/destinos/cerro_negro.jpg" alt="Coop Cerro Negro" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/cerro_negro.jpg" alt="Sandboarding"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Cráter"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/town_hostel.jpg" alt="Campamento"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">LEÓN • CORDILLERA MARIBIOS</span>
                   <h3 class="flip-front-title">Coop. Baqueanos Cerro Negro</h3>
                   <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
                 </div>
@@ -292,11 +363,11 @@
                   <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
                   <h3 class="flip-back-title">Baqueanos del Volcán</h3>
                   <p class="flip-back-desc">
-                    Guías locales verificados por BAQUEANO para ascenso al cráter activo y sandboarding seguro con equipo de protección integral. Fondos destinados a la reforestación de la base volcánica.
+                    Guías locales comunitarios para ascenso al cráter activo y sandboarding seguro con equipo de protección integral. Fondos destinados a la reforestación de la base volcánica.
                   </p>
                 </div>
                 <div class="flip-back-actions">
-                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Guías%20Cerro%20Negro,%20deseo%20tour%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                  <a href="https://wa.me/50584431289?text=Hola%20Guías%20Cerro%20Negro,%20deseo%20tour%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                   </a>
                   <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
@@ -307,29 +378,36 @@
             </div>
           </div>
 
-          <!-- Tarjeta 4: Ometepe -->
-          <div class="flip-card-3d" tabindex="0">
+          <!-- Tarjeta 5: Ometepe & Finca Magdalena -->
+          <div class="flip-card-3d" data-category="coop" tabindex="0">
             <div class="flip-card-inner">
               <div class="flip-card-front">
                 <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-mountain-sun"></i> Biosfera</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
                   <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Coop Ometepe" class="flip-front-img" loading="lazy">
                 </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Volcanes"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Finca Magdalena"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="San Ramón"></div>
+                </div>
                 <div class="flip-front-body">
-                  <span class="aliados-inline-002">RIVAS • RESERVA DE BIOSFERA</span>
-                  <h3 class="flip-front-title">Red Comunitaria Ometepe Viva</h3>
+                  <span class="aliados-inline-002">RIVAS • ISLA DE OMETEPE</span>
+                  <h3 class="flip-front-title">Red Comunitaria Finca Magdalena</h3>
                   <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
                 </div>
               </div>
               <div class="flip-card-back">
                 <div>
                   <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
-                  <h3 class="flip-back-title">Ometepe Comunitaria</h3>
+                  <h3 class="flip-back-title">Finca Magdalena & Ometepe</h3>
                   <p class="flip-back-desc">
-                    Red de hospederías campesinas en las faldas del Maderas y Concepción. Senderismo hacia petroglifos sagrados, cascada San Ramón y alimentación criolla de huerto familiar.
+                    Cooperativa agropecuaria en las faldas del volcán Maderas. Senderos a petroglifos sagrados, café orgánico de altura y cabañas rústicas con vista panorámica al lago Cocibolca.
                   </p>
                 </div>
                 <div class="flip-back-actions">
-                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Red%20Ometepe,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                  <a href="https://wa.me/50584431289?text=Hola%20Finca%20Magdalena,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                   </a>
                   <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
@@ -340,15 +418,22 @@
             </div>
           </div>
 
-          <!-- Tarjeta 5: Selva Negra & Café -->
-          <div class="flip-card-3d" tabindex="0">
+          <!-- Tarjeta 6: Selva Negra -->
+          <div class="flip-card-3d" data-category="eco" tabindex="0">
             <div class="flip-card-inner">
               <div class="flip-card-front">
                 <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-tree"></i> Nebliselva</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
                   <img src="assets/images/aliados/oro_eco.jpg" alt="Selva Negra" class="flip-front-img" loading="lazy">
                 </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/oro_eco.jpg" alt="Cafetal"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/selva_negra.jpg" alt="Bosque"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada"></div>
+                </div>
                 <div class="flip-front-body">
-                  <span class="aliados-inline-002">MATAGALPA • NEBLISELVA NORTEÑA</span>
+                  <span class="aliados-inline-002">MATAGALPA • CORDILLERA DARIENSE</span>
                   <h3 class="flip-front-title">Finca Agroecológica Selva Norte</h3>
                   <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
                 </div>
@@ -362,7 +447,7 @@
                   </p>
                 </div>
                 <div class="flip-back-actions">
-                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Finca%20Selva%20Norte,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                  <a href="https://wa.me/50584431289?text=Hola%20Finca%20Selva%20Norte,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                   </a>
                   <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
@@ -373,15 +458,102 @@
             </div>
           </div>
 
-          <!-- Tarjeta 6: Apoyo Resort -->
-          <div class="flip-card-3d" tabindex="0">
+          <!-- Tarjeta 7: Paraíso Beach Corn Island -->
+          <div class="flip-card-3d" data-category="playa" tabindex="0">
             <div class="flip-card-inner">
               <div class="flip-card-front">
                 <div class="flip-front-img-wrap">
-                  <img src="assets/images/aliados/apoyo_resort.jpg" alt="Apoyo Resort" class="flip-front-img" loading="lazy">
+                  <span class="flip-category-badge"><i class="fa-solid fa-sun"></i> Coral</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/paraiso_beach.jpg" alt="Paraíso Beach Hotel" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/paraiso_beach.jpg" alt="Resort"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/paraiso_nicaragua.jpg" alt="Playa"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/corn_island_hostal.jpg" alt="Habitación"></div>
                 </div>
                 <div class="flip-front-body">
-                  <span class="aliados-inline-002">CATARINA • MIRADOR NATURAL</span>
+                  <span class="aliados-inline-002">BRIG BAY • CORN ISLAND</span>
+                  <h3 class="flip-front-title">Paraíso Beach & Eco-Resort</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Paraíso Beach Resort</h3>
+                  <p class="flip-back-desc">
+                    Cabañas bioclimáticas rodeadas de jardines tropicales. Snorkel en arrecifes de coral vivos, kayaks y gastronomía costeña con pescadores locales de la isla.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Paraíso%20Beach,%20deseo%20reservar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Eco-Resort
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 8: San Simián Lodge -->
+          <div class="flip-card-3d" data-category="eco" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-feather"></i> Refugio</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/san_simian.jpg" alt="San Simián Lodge" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/san_simian.jpg" alt="Lodge"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/posada_ecologica_la_abuela.jpg" alt="Aguas Calmas"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">LAGUNA DE APOYO • GRANADA</span>
+                  <h3 class="flip-front-title">San Simián Eco-Lodge</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">San Simián Lodge</h3>
+                  <p class="flip-back-desc">
+                    Bungalows ecológicos escondidos entre la vegetación del cráter. Acceso directo a aguas termales y minerales, avistamiento de monos aulladores y alimentos frescos de la comarca.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20San%20Simián,%20deseo%20reservar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Lodge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 9: Posada del Sol Catarina -->
+          <div class="flip-card-3d" data-category="patrimonio" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-eye"></i> Mirador</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/posada_del_sol.jpg" alt="Posada del Sol" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/posada_del_sol.jpg" alt="Fachada"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/apoyo_resort.jpg" alt="Vista"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Cráter"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">CATARINA • PUEBLOS BLANCOS</span>
                   <h3 class="flip-front-title">Posada del Sol & Mirador</h3>
                   <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
                 </div>
@@ -395,11 +567,211 @@
                   </p>
                 </div>
                 <div class="flip-back-actions">
-                  <a href="https://api.whatsapp.com/send?phone=50584431289&text=Hola%20Posada%20del%20Sol,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener" class="btn-flip-contact btn-flip-wa">
+                  <a href="https://wa.me/50584431289?text=Hola%20Posada%20del%20Sol,%20deseo%20alojamiento%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
                   </a>
                   <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
                     <i class="fa-solid fa-phone"></i> Llamar a Recepción
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 10: Hotel Darío Granada -->
+          <div class="flip-card-3d" data-category="patrimonio" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-archway"></i> Colonial</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/hotel_dario.jpg" alt="Hotel Darío" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/hotel_dario.jpg" alt="Patio Central"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Casa Señorial Colonial Granada.jpg" alt="Casona"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Calle La Calzada"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">GRANADA • CENTRO HISTÓRICO</span>
+                  <h3 class="flip-front-title">Hotel Darío & Casona Colonial</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Hotel Darío Granada</h3>
+                  <p class="flip-back-desc">
+                    Joya arquitectónica de la época neoclásica frente al Parque Central de Granada. Patios floridos coloniales, fuentes de piedra y rescate del patrimonio literario de Rubén Darío.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Hotel%20Darío,%20deseo%20reservar%20habitación%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Hotel
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 11: Morgan's Rock San Juan del Sur -->
+          <div class="flip-card-3d" data-category="playa" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-water"></i> Santuario</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/destinos/Morgan's Rock Eco-Lodge & Reserva Marina.jpg" alt="Morgan's Rock" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Morgan's Rock Eco-Lodge & Reserva Marina.jpg" alt="Bungalow"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/beach_club.jpg" alt="Playa"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Playa Maderas (Santuario del Surf).jpg" alt="Acantilados"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">SAN JUAN DEL SUR • RIVAS</span>
+                  <h3 class="flip-front-title">Morgan's Rock & Reserva Marina</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Morgan's Rock Eco-Lodge</h3>
+                  <p class="flip-back-desc">
+                    Hacienda y reserva privada con puente colgante sobre el dosel arbóreo. Desove de tortugas paslama, reforestación activa de maderas preciosas y apoyo directo a escuelas rurales.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Morgan%27s%20Rock,%20deseo%20visitar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Lodge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 12: Hola Ola Eco-Hostal -->
+          <div class="flip-card-3d" data-category="eco" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-sailboat"></i> Surf & Selva</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/hola_ola.jpg" alt="Hola Ola Hostal" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/hola_ola.jpg" alt="Hamacas"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Playa Maderas (Santuario del Surf).jpg" alt="Maderas"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/pic_nic.jpg" alt="Jardín"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">SAN JUAN DEL SUR • PACÍFICO SUR</span>
+                  <h3 class="flip-front-title">Hola Ola Eco-Hostal Comunitario</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Hola Ola Eco-Hostal</h3>
+                  <p class="flip-back-desc">
+                    Espacio solidario y ecológico con energía solar, talleres comunitarios de compostaje y conexión directa con las escuelas de surf locales de Playa Maderas y Marsella.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Hola%20Ola,%20deseo%20hospedarme%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Hostal
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 13: Feel at Home Campestre -->
+          <div class="flip-card-3d" data-category="eco" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-house-chimney"></i> Campestre</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/feel_at_home.jpg" alt="Feel at Home" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/feel_at_home.jpg" alt="Piscina"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/inn_hotel.jpg" alt="Interiores"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Casa Señorial Colonial Granada.jpg" alt="Jardín"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">MANAGUA • LAS SIERRITAS</span>
+                  <h3 class="flip-front-title">Feel at Home Eco-Lodge</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Feel at Home Campestre</h3>
+                  <p class="flip-back-desc">
+                    Oasis de clima fresco en las faldas de las Sierras de Managua. Árboles frutales autóctonos, avistamiento de chocoyos y conexión estratégica hacia Masaya y el Pacífico.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Feel%20at%20Home,%20deseo%20reservar%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Lodge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 14: Sohla Rooftop & Café Cultural -->
+          <div class="flip-card-3d" data-category="patrimonio" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-front-img-wrap">
+                  <span class="flip-category-badge"><i class="fa-solid fa-coffee"></i> Cultural</span>
+                  <span class="flip-photo-badge"><i class="fa-solid fa-images"></i> 3 Fotos</span>
+                  <img src="assets/images/aliados/sohla_rooftop.jpg" alt="Sohla Rooftop" class="flip-front-img" loading="lazy">
+                </div>
+                <div class="flip-front-gallery-strip">
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/sohla_rooftop.jpg" alt="Terraza"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Calle La Calzada"></div>
+                  <div class="flip-gallery-thumb"><img src="assets/images/aliados/hotel_maharaja.jpg" alt="Noche Colonial"></div>
+                </div>
+                <div class="flip-front-body">
+                  <span class="aliados-inline-002">GRANADA • CALZADA BOHEMIA</span>
+                  <h3 class="flip-front-title">Sohla Rooftop & Terraza Cultural</h3>
+                  <div class="flip-hint"><i class="fa-solid fa-arrows-rotate"></i> Toca para girar y contactar</div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div>
+                  <span class="aliados-inline-003">VERIFICADO BAQUEANO</span>
+                  <h3 class="flip-back-title">Sohla Rooftop Granada</h3>
+                  <p class="flip-back-desc">
+                    Terraza panorámica sobre las tejas coloniales de la Gran Sultana. Café de especialidad de Dipilto, coctelería a base de frutas criollas y noches de trova y son nica en vivo.
+                  </p>
+                </div>
+                <div class="flip-back-actions">
+                  <a href="https://wa.me/50584431289?text=Hola%20Sohla%20Rooftop,%20deseo%20coordinar%20visita%20desde%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-flip-contact btn-flip-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Directo
+                  </a>
+                  <a href="tel:50584431289" class="btn-flip-contact btn-flip-call">
+                    <i class="fa-solid fa-phone"></i> Llamar al Local
                   </a>
                 </div>
               </div>
@@ -412,11 +784,29 @@
   </main>
 
   <!-- FOOTER OFICIAL -->
+    <!-- FOOTER OFICIAL CON IDENTIDAD TERRITORIAL Y TRANSPARENCIA FISCAL -->
   <footer class="site-footer-pro">
     <div class="container">
+      <div class="footer-top-utility-bar">
+        <div class="footer-network-status">
+          <span class="pulse-dot"></span>
+          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+        </div>
+        <div class="footer-newsletter-wrap">
+          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte a la red de guardianes Baqueano!');">
+            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
+            <button type="submit" class="newsletter-submit-btn">
+              <span>Unirme</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
-          <div class="brand-box aliados-inline-004">
+          <div class="brand-box mb-3">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -424,23 +814,29 @@
             </div>
           </div>
           <p class="footer-bio-text">
-            Red solidaria de cooperativas y alojamientos familiares de Nicaragua. 100% de los ingresos van a la gente del territorio.
+            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
           </p>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
         </div>
 
         <div class="footer-col-links">
           <h4 class="footer-col-header">MÓDULOS WEB</h4>
           <ul class="footer-link-list">
-            <li><a href="destinos.html">Destinos Protegidos</a></li>
-            <li><a href="historia.html">Historia de Mi País</a></li>
-            <li><a href="ambiental.html">Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
-            <li><a href="musica.html">Patrimonio Sonoro</a></li>
-            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
         <div class="footer-col-contact">
           <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
           <ul class="footer-contact-list">
@@ -476,9 +872,18 @@
         </div>
       </div>
 
+      <div class="footer-trust-pills-row">
+        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
+        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
+        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
+        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
+      </div>
+
       <div class="footer-bottom-bar">
-        <div>© 2026 Baqueano Nicaragua. Apoyo incondicional al cooperativismo campesino.</div>
-        <div class="aliados-inline-005">
+        <div class="footer-copy-text">
+          © 2026 Baqueano Nicaragua. Alianza soberana con las cooperativas campesinas.
+        </div>
+        <div class="footer-legal-links">
           <a href="ambiental.html">Decálogo Verde</a>
           <a href="admin.html">Baqueano Ops Center</a>
         </div>
@@ -555,14 +960,45 @@
   <script src="js/website-operations-catalog.js"></script>
   <script defer src="js/public-cms-sync.js"></script>
 
-  <script>
-    // Soporte táctil para girar tarjetas en móviles al tocar
+    <script>
+    // Soporte táctil y click para girar tarjetas 3D
     document.querySelectorAll('.flip-card-3d').forEach(card => {
       card.addEventListener('click', function(e) {
-        if (e.target.closest('a')) return;
+        if (e.target.closest('a') || e.target.closest('.flip-gallery-thumb')) return;
         this.classList.toggle('flipped');
       });
     });
+
+    // Cambio interactivo de foto principal al pasar el cursor por las miniaturas
+    document.querySelectorAll('.flip-gallery-thumb').forEach(thumb => {
+      thumb.addEventListener('mouseenter', function(e) {
+        e.stopPropagation();
+        const card = this.closest('.flip-card-front');
+        const mainImg = card?.querySelector('.flip-front-img');
+        const thumbImg = this.querySelector('img');
+        if (mainImg && thumbImg) {
+          mainImg.src = thumbImg.src;
+        }
+      });
+    });
+
+    // Filtros de categoría de aliados
+    document.querySelectorAll('.allies-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.allies-filter-btn').forEach(b => b.classList.remove('is-active'));
+        this.classList.add('is-active');
+        const filter = this.getAttribute('data-filter');
+        const cards = document.querySelectorAll('.flip-card-3d');
+        cards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
   </script>
+
 </body>
 </html>

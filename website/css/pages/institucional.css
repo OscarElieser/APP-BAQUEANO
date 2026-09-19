@@ -1,19 +1,43 @@
-/* ========================================================================== 
+/* ============================================================================
    🧭 BAQUEANO ECOSYSTEM — ESTILOS INSTITUCIONALES & LEGALES
-   ========================================================================== */
+   ============================================================================
+   
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Proporcionar la arquitectura visual de alta gama para las páginas institucionales
+     y jurídicas de Baqueano Nicaragua (Términos, Privacidad, Aviso Legal, Nosotros).
+   - Ofrecer máxima legibilidad de documentos legales extensos mediante un índice
+     lateral con cursor dinámico de arriba a abajo y barra de progreso lector.
+   - Respetar la identidad oficial: Petróleo Teal (#165D6F), Terracota Fuego (#F65E01),
+     Arena Pinolera (#F4E6C1) y Noche Profunda (#0F172A).
+   
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Grid institucional responsivo (320px sidebar sticky + 1fr contenido legal).
+   - Sidebar con riel vertical iluminado (.toc-cursor-rail), cursor activo deslizante
+     (.toc-cursor-pip) con interpolación cúbica a 60fps, y botones de navegación arriba/abajo.
+   - Tarjetas jurídicas (.legal-card) con glassmorphism, elevación suave y micro-detalles.
+   - Sección de Manifiesto Centrado de Alta Fidelidad (.manifesto-masterpiece-section).
+   - Totalmente responsivo para móviles, tablets y monitores de escritorio.
+   
+   📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+   - .institucional-hero, .hero-badge-pill, .pulse-dot, .hero-headline, .highlight-sunset
+   - .institucional-sidebar, .toc-header-bar, .toc-progress-track, .toc-cursor-rail, .toc-cursor-pip
+   - .sidebar-nav, .sidebar-nav-link, .toc-jump-controls
+   - .legal-card, .legal-card-num, .legal-card-header, .legal-callout-box
+   - .manifesto-masterpiece-card, .manifesto-seal-glow, .manifesto-pillars-grid
+   ============================================================================ */
 
 /* --------------------------------------------------------------------------
-   HERO INSTITUCIONAL
+   HERO INSTITUCIONAL DE ALTA GAMA (CONFORME A INDEX.HTML)
    -------------------------------------------------------------------------- */
 .institucional-hero {
   position: relative;
   width: 100%;
-  min-height: 40vh;
+  min-height: 42vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 8rem 2rem 4rem;
+  padding: 8.5rem 2rem 4.5rem;
   background-color: #061018;
 }
 
@@ -23,14 +47,21 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.4;
+  opacity: 0.35;
   z-index: 1;
+  filter: saturate(1.15) brightness(0.85);
+  transform: scale(1.02);
+  transition: transform 10s ease-out;
+}
+
+.institucional-hero:hover .institucional-hero-bg {
+  transform: scale(1.06);
 }
 
 .institucional-hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(6, 16, 24, 0.7) 0%, #061018 100%);
+  background: radial-gradient(circle at 50% 20%, rgba(22, 93, 111, 0.25) 0%, rgba(6, 16, 24, 0.8) 60%, #061018 100%);
   z-index: 2;
 }
 
@@ -38,42 +69,89 @@
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: 900px;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.institucional-hero-badge {
+/* Insignia / Pill con punto pulsante estilo index.html */
+.hero-badge-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.2rem;
-  background: rgba(246, 94, 1, 0.15);
-  border: 1px solid rgba(246, 94, 1, 0.3);
+  gap: 0.65rem;
+  padding: 0.45rem 1.25rem;
+  background: rgba(246, 94, 1, 0.12);
+  border: 1px solid rgba(246, 94, 1, 0.35);
   border-radius: 999px;
   color: #F65E01;
-  font-family: var(--font-tech);
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
   font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(246, 94, 1, 0.15);
 }
 
+.hero-badge-pill .pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #F65E01;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #F65E01;
+  animation: institucional-pulse 2s infinite;
+}
+
+@keyframes institucional-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(246, 94, 1, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 9px rgba(246, 94, 1, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(246, 94, 1, 0);
+  }
+}
+
+/* Título Hero H1 con gradiente Sunset oficial */
+.hero-headline,
 .institucional-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 900;
   color: #FFFFFF;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  line-height: 1.15;
+  margin: 0 0 1.2rem;
+  text-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.02em;
 }
 
+.highlight-sunset {
+  background: linear-gradient(135deg, #F65E01 0%, #FFB074 50%, #F4E6C1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  text-shadow: none;
+}
+
+.hero-subtext,
 .institucional-hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(244, 230, 193, 0.8);
-  line-height: 1.6;
-  max-width: 700px;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
+  color: rgba(244, 230, 193, 0.88);
+  line-height: 1.7;
+  max-width: 780px;
   margin: 0 auto;
+  text-wrap: balance;
 }
 
 /* --------------------------------------------------------------------------
@@ -81,193 +159,590 @@
    -------------------------------------------------------------------------- */
 .institucional-layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 3rem;
-  padding: 4rem 0;
+  grid-template-columns: 320px 1fr;
+  gap: 3.5rem;
+  padding: 4.5rem 0 6rem;
   align-items: start;
 }
 
 /* --------------------------------------------------------------------------
-   SIDEBAR: ÍNDICE INTELIGENTE
+   SIDEBAR: ÍNDICE INTELIGENTE CON CURSOR ARRIBA-ABAJO
    -------------------------------------------------------------------------- */
 .institucional-sidebar {
   position: sticky;
-  top: 100px; /* Offset for navbar */
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 2rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  top: 92px; /* Offset para el navbar */
+  max-height: calc(100vh - 115px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(246, 94, 1, 0.22);
+  border-radius: 22px;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 25px rgba(22, 93, 111, 0.2);
+  z-index: 20;
+}
+
+/* Encabezado del Índice con barra de progreso */
+.toc-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .sidebar-title {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
   color: #F4E6C1;
-  margin-bottom: 1.5rem;
+  margin: 0;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  letter-spacing: 0.02em;
 }
 
+.sidebar-title i {
+  color: #F65E01;
+}
+
+.toc-active-counter {
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #F65E01;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+/* Barra de progreso de lectura */
+.toc-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.toc-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #165D6F 0%, #F65E01 100%);
+  border-radius: 999px;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 8px #F65E01;
+}
+
+/* Controles de cursor arriba y abajo */
+.toc-jump-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.toc-jump-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  color: rgba(244, 230, 193, 0.85);
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(22, 93, 111, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.toc-jump-btn:hover {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: #F65E01;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(246, 94, 1, 0.25);
+}
+
+.toc-jump-btn:active {
+  transform: translateY(1px);
+}
+
+/* Contenedor del Riel y la Lista */
+.sidebar-nav-container {
+  position: relative;
+  flex: 1;
+  min-height: 0; /* Necesario para overflow en flexbox */
+  display: flex;
+  overflow: hidden;
+}
+
+/* Riel vertical iluminado y Pip deslizante */
+.toc-cursor-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  z-index: 2;
+}
+
+.toc-cursor-pip {
+  position: absolute;
+  left: -4.5px;
+  top: 0;
+  width: 12px;
+  height: 28px;
+  background: linear-gradient(180deg, #F65E01 0%, #FF9E54 100%);
+  border-radius: 6px;
+  box-shadow: 0 0 14px rgba(246, 94, 1, 0.9), 0 0 24px rgba(246, 94, 1, 0.5);
+  z-index: 3;
+  transition: top 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+/* Lista de navegación scrolleable */
 .sidebar-nav {
+  position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.35rem;
+  padding-left: 1.1rem;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(246, 94, 1, 0.6) rgba(15, 23, 42, 0.4);
 }
 
+.sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 999px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(246, 94, 1, 0.5);
+  border-radius: 999px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: #F65E01;
+}
+
+/* Enlaces del índice */
 .sidebar-nav-link {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.87rem;
+  color: rgba(255, 255, 255, 0.68);
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-left: 2px solid transparent;
-  transition: all 0.3s ease;
-  border-radius: 0 8px 8px 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+  transition: all 0.22s ease;
+  line-height: 1.35;
+  border: 1px solid transparent;
+}
+
+.toc-nav-num {
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #F4E6C1;
+  opacity: 0.7;
+  flex-shrink: 0;
+  min-width: 1.6rem;
+}
+
+.toc-nav-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sidebar-nav-link:hover {
-  color: #F65E01;
-  background: rgba(246, 94, 1, 0.05);
+  color: #F4E6C1;
+  background: rgba(246, 94, 1, 0.08);
+  border-color: rgba(246, 94, 1, 0.2);
+  transform: translateX(3px);
 }
 
 .sidebar-nav-link.active {
+  color: #FFFFFF;
+  background: linear-gradient(90deg, rgba(246, 94, 1, 0.2) 0%, rgba(22, 93, 111, 0.15) 100%);
+  border-color: rgba(246, 94, 1, 0.4);
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 10px rgba(246, 94, 1, 0.15);
+}
+
+.sidebar-nav-link.active .toc-nav-num {
   color: #F65E01;
-  border-left-color: #F65E01;
-  background: linear-gradient(90deg, rgba(246, 94, 1, 0.1), transparent);
-  font-weight: 600;
+  opacity: 1;
 }
 
 /* --------------------------------------------------------------------------
-   TARJETAS LEGALES (GLASSMORPHISM)
+   TARJETAS LEGALES (ARTÍCULOS) DE ALTA GAMA
    -------------------------------------------------------------------------- */
 .institucional-content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
-.legal-card {
-  background: rgba(15, 23, 42, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.legal-document-meta {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding: 0.8rem 1.4rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  font-size: 0.88rem;
+  color: rgba(244, 230, 193, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.legal-document-intro {
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.25) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(22, 93, 111, 0.45);
   border-radius: 20px;
-  padding: 2.5rem;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.legal-document-intro p {
+  color: rgba(244, 230, 193, 0.9);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+}
+
+.legal-document-intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tarjeta individual de artículo */
+.legal-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.78) 0%, rgba(22, 93, 111, 0.12) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 2.8rem 2.5rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  scroll-margin-top: 100px; /* For scroll anchoring */
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  scroll-margin-top: 110px; /* Para anclaje perfecto de scroll */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 .legal-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(246, 94, 1, 0.2);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  border-color: rgba(246, 94, 1, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(246, 94, 1, 0.1);
+}
+
+.legal-card.active-reading {
+  border-color: rgba(246, 94, 1, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 30px rgba(246, 94, 1, 0.15);
 }
 
 .legal-card-num {
   position: absolute;
-  top: -15px;
-  right: 20px;
-  font-family: var(--font-display);
-  font-size: 6rem;
+  top: -10px;
+  right: 22px;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 5.5rem;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.03);
   line-height: 1;
   user-select: none;
   pointer-events: none;
+  letter-spacing: -0.05em;
+  transition: color 0.3s ease;
+}
+
+.legal-card:hover .legal-card-num {
+  color: rgba(246, 94, 1, 0.08);
 }
 
 .legal-card-title {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: #F4E6C1;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  font-weight: 800;
+  color: #FFFFFF;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
+  line-height: 1.3;
 }
 
 .legal-card-title i {
   color: #F65E01;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  padding: 0.55rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
 }
 
 .legal-card-body {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.8;
+  font-size: 1.04rem;
+  color: rgba(244, 230, 193, 0.85);
+  line-height: 1.85;
 }
 
 .legal-card-body p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.legal-card-body p:last-child {
+  margin-bottom: 0;
 }
 
 .legal-card-body ul {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
+  margin: 1rem 0 1.2rem;
+  padding-left: 1.8rem;
 }
 
 .legal-card-body li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
   position: relative;
   list-style-type: none;
 }
 
 .legal-card-body li::before {
-  content: '▹';
+  content: '▸';
   color: #F65E01;
   position: absolute;
-  left: -1.5rem;
+  left: -1.4rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 
 .legal-card-body a {
-  color: #6EE7B7;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  color: #FFB074;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: all 0.25s ease;
 }
 
 .legal-card-body a:hover {
   color: #FFFFFF;
+  text-decoration-color: #F65E01;
+}
+
+/* Cajas de llamada institucional destacadas dentro de artículos */
+.legal-callout-box {
+  background: rgba(22, 93, 111, 0.2);
+  border-left: 4px solid #165D6F;
+  border-radius: 0 14px 14px 0;
+  padding: 1.2rem 1.5rem;
+  margin: 1.2rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.legal-callout-box.terracotta {
+  background: rgba(246, 94, 1, 0.12);
+  border-left-color: #F65E01;
+}
+
+.legal-callout-icon {
+  font-size: 1.3rem;
+  color: #F65E01;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.legal-callout-text {
+  font-size: 0.95rem;
+  color: rgba(244, 230, 193, 0.9);
+  line-height: 1.6;
+  margin: 0 !important;
 }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVE
+   SECCIÓN DE MANIFIESTO CENTRADO & LLAMATIVO (NOSOTROS.HTML)
+   -------------------------------------------------------------------------- */
+.manifesto-masterpiece-card {
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(246, 94, 1, 0.22) 0%, transparent 65%),
+              radial-gradient(circle at 50% 100%, rgba(22, 93, 111, 0.25) 0%, transparent 65%),
+              #0F172A;
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  border-radius: 32px;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.8rem, 5vw, 3.5rem);
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 45px rgba(246, 94, 1, 0.15);
+  overflow: hidden;
+  margin: 3rem 0;
+}
+
+.manifesto-seal-glow {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #165D6F 0%, #F65E01 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #FFFFFF;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 30px rgba(246, 94, 1, 0.6);
+  border: 3px solid rgba(244, 230, 193, 0.3);
+}
+
+.manifesto-big-quote {
+  font-family: Georgia, serif;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1;
+  color: #F65E01;
+  opacity: 0.6;
+  display: block;
+  margin-bottom: -1rem;
+}
+
+.manifesto-master-title {
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin: 0 auto 1.5rem;
+  max-width: 820px;
+  letter-spacing: -0.01em;
+}
+
+.manifesto-text-block {
+  max-width: 840px;
+  margin: 0 auto 2rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: rgba(244, 230, 193, 0.92);
+  line-height: 1.85;
+}
+
+.manifesto-text-block p {
+  margin-bottom: 1.2rem;
+}
+
+.manifesto-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  max-width: 860px;
+  margin: 2.2rem auto 2.5rem;
+}
+
+.manifesto-pillar-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 18px;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.manifesto-pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: #F65E01;
+  box-shadow: 0 10px 25px rgba(246, 94, 1, 0.2);
+  background: rgba(22, 93, 111, 0.2);
+}
+
+.manifesto-pillar-icon {
+  font-size: 1.5rem;
+  color: #F65E01;
+}
+
+.manifesto-pillar-title {
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.manifesto-pillar-desc {
+  font-size: 0.82rem;
+  color: rgba(244, 230, 193, 0.75);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.manifesto-action-slogan {
+  display: inline-block;
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-weight: 800;
+  color: #F65E01;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 2rem;
+  background: rgba(246, 94, 1, 0.12);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  border-radius: 999px;
+  box-shadow: 0 0 20px rgba(246, 94, 1, 0.2);
+}
+
+.manifesto-signature {
+  margin-top: 1.8rem;
+  font-size: 0.85rem;
+  color: rgba(244, 230, 193, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVIDAD & ADAPTABILIDAD
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
   .institucional-layout {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
   
   .institucional-sidebar {
     position: relative;
     top: 0;
+    max-height: 480px;
     z-index: 10;
   }
   
-  .sidebar-nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  .sidebar-nav-link {
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    border-radius: 8px 8px 0 0;
-  }
-  
-  .sidebar-nav-link.active {
-    border-left-color: transparent;
-    border-bottom-color: #F65E01;
-    background: linear-gradient(0deg, rgba(246, 94, 1, 0.1), transparent);
+  .sidebar-nav-container {
+    max-height: 280px;
   }
 }
 
 @media (max-width: 600px) {
   .institucional-hero {
-    padding-top: 6rem;
+    padding: 7rem 1.25rem 3.5rem;
   }
   .legal-card {
-    padding: 1.5rem;
+    padding: 1.8rem 1.4rem;
+  }
+  .manifesto-masterpiece-card {
+    padding: 2rem 1.2rem;
   }
 }

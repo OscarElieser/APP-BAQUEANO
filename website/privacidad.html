@@ -15,11 +15,14 @@
   (lib/features/institutional/screens/privacy_screen.dart).
 - Desglose de arquitectura cloud segura (Google Cloud Platform, Cloud Firestore,
   Firebase Auth con cifrado TLS/SSL en tránsito y AES-256 en reposo).
+- Índice lateral inteligente con riel y cursor dinámico de arriba hacia abajo
+  sincronizado a 60fps con la lectura del documento.
 - Paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
 - Menú principal integrado con el submenú de "Mi País", drawer móvil y footer oficial.
 
 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-- 8 Artículos formales de protección de datos personales y derechos ARCO.
+- 15 Artículos formales de protección de datos personales y derechos ARCO.
+- Riel de cursor vertical deslizante y barra de progreso lector.
 - Canales de contacto con el Oficial de Privacidad (privacidad@baqueano.ni).
 ============================================================================
 -->
@@ -181,152 +184,352 @@
   </nav>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <!--
-    POR QUÉ: ofrecer información jurídica completa, separada por materia y fácil de consultar.
-    CÓMO: el documento fuente se distribuye en artículos numerados, listas semánticas y metadatos visibles.
-    QUÉ: versión 1.0, actualizada el 18 de septiembre de 2026.
-  -->
-  <main><section class="privacy-hero-section"><div class="container">
-<span class="privacy-tag-badge"><i class="fa-solid fa-user-shield" aria-hidden="true"></i> Protección de datos y seguridad tecnológica</span>
-<h1 class="privacidad-inline-001">Política de Privacidad, Protección de Datos y Seguridad Cloud</h1><p class="privacidad-inline-002">Cómo BAQUEANO recopila, utiliza, protege y permite administrar la información personal.</p>
-<div class="legal-document-meta"><span><strong>Última actualización:</strong> 18 de septiembre de 2026</span><span><strong>Versión:</strong> 1.0</span></div>
-<div class="legal-document-intro"><p>Protección de datos personales, infraestructura tecnológica segura y control transparente de la información del usuario.</p><p>BAQUEANO NICARAGUA adopta medidas técnicas, administrativas y organizativas destinadas a proteger la información de exploradores, prestadores locales, negocios, baqueanos y demás usuarios de nuestra plataforma web, aplicación Android y servicios digitales asociados.</p><p>Nuestra política se basa en principios de privacidad desde el diseño, minimización de datos, transparencia, seguridad, consentimiento y control del usuario sobre su información.</p></div>
-<article class="legal-card" id="article-01">
+  <main>
+    <!-- HERO CINEMATOGRÁFICO CON ESTILO OFICIAL INDEX.HTML -->
+    <section class="institucional-hero">
+      <img src="assets/images/destinos/selva_negra.jpg" alt="Privacidad y Seguridad Cloud" class="institucional-hero-bg">
+      <div class="institucional-hero-gradient"></div>
+      <div class="institucional-hero-content">
+        <div class="hero-badge-pill">
+          <span class="pulse-dot"></span> Privacidad & Soberanía de Datos
+        </div>
+        <h1 class="hero-headline">
+          Política de <span class="highlight-sunset">Privacidad</span> & Seguridad Cloud
+        </h1>
+        <p class="hero-subtext">
+          Cómo BAQUEANO recopila, utiliza, protege y garantiza el control soberano de tu información personal y telemetría satelital sin intermediarios ni comercialización de datos.
+        </p>
+      </div>
+    </section>
+
+    <!-- LAYOUT INTERACTIVO DOS COLUMNAS -->
+    <section class="container institucional-layout">
+      
+      <!-- SIDEBAR (ÍNDICE CON CURSOR DINÁMICO DE ARRIBA A ABAJO) -->
+      <aside class="institucional-sidebar">
+        <div class="toc-header-bar">
+          <div class="sidebar-title">
+            <i class="fa-solid fa-list-ul"></i> Índice de Privacidad
+          </div>
+          <span class="toc-active-counter">01 / 15</span>
+        </div>
+
+        <div class="toc-progress-track" title="Progreso de lectura">
+          <div class="toc-progress-fill"></div>
+        </div>
+
+        <div class="toc-jump-controls">
+          <button type="button" class="toc-jump-btn" id="tocBtnPrev" title="Artículo anterior o ir al inicio">
+            <i class="fa-solid fa-arrow-up"></i> Arriba
+          </button>
+          <button type="button" class="toc-jump-btn" id="tocBtnNext" title="Artículo siguiente o ir al final">
+            <i class="fa-solid fa-arrow-down"></i> Abajo
+          </button>
+        </div>
+
+        <div class="sidebar-nav-container">
+          <div class="toc-cursor-rail">
+            <div class="toc-cursor-pip"></div>
+          </div>
+          <nav class="sidebar-nav" id="institucionalScrollspy" aria-label="Índice de artículos de privacidad">
+            <a href="#article-01" class="sidebar-nav-link active"><span class="toc-nav-num">01</span><span class="toc-nav-title">Compromiso de privacidad</span></a>
+            <a href="#article-02" class="sidebar-nav-link"><span class="toc-nav-num">02</span><span class="toc-nav-title">Información recopilada</span></a>
+            <a href="#article-03" class="sidebar-nav-link"><span class="toc-nav-num">03</span><span class="toc-nav-title">Finalidad del tratamiento</span></a>
+            <a href="#article-04" class="sidebar-nav-link"><span class="toc-nav-num">04</span><span class="toc-nav-title">Infraestructura Cloud</span></a>
+            <a href="#article-05" class="sidebar-nav-link"><span class="toc-nav-num">05</span><span class="toc-nav-title">Almacenamiento offline</span></a>
+            <a href="#article-06" class="sidebar-nav-link"><span class="toc-nav-num">06</span><span class="toc-nav-title">Geolocalización & SOS</span></a>
+            <a href="#article-07" class="sidebar-nav-link"><span class="toc-nav-num">07</span><span class="toc-nav-title">Cero venta de datos</span></a>
+            <a href="#article-08" class="sidebar-nav-link"><span class="toc-nav-num">08</span><span class="toc-nav-title">Conservación y borrado</span></a>
+            <a href="#article-09" class="sidebar-nav-link"><span class="toc-nav-num">09</span><span class="toc-nav-title">Derechos y control</span></a>
+            <a href="#article-10" class="sidebar-nav-link"><span class="toc-nav-num">10</span><span class="toc-nav-title">Servicios de terceros</span></a>
+            <a href="#article-11" class="sidebar-nav-link"><span class="toc-nav-num">11</span><span class="toc-nav-title">Seguridad de cuentas</span></a>
+            <a href="#article-12" class="sidebar-nav-link"><span class="toc-nav-num">12</span><span class="toc-nav-title">Gestión de incidentes</span></a>
+            <a href="#article-13" class="sidebar-nav-link"><span class="toc-nav-num">13</span><span class="toc-nav-title">Privacidad por diseño</span></a>
+            <a href="#article-14" class="sidebar-nav-link"><span class="toc-nav-num">14</span><span class="toc-nav-title">Actualizaciones legales</span></a>
+            <a href="#article-15" class="sidebar-nav-link"><span class="toc-nav-num">15</span><span class="toc-nav-title">Contacto oficial</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL: TARJETAS DE ARTÍCULOS ESTILIZADAS -->
+      <div class="institucional-content">
+        
+        <div class="legal-document-meta">
+          <span><i class="fa-solid fa-calendar-check text-terracotta"></i> <strong>Última actualización:</strong> 18 de septiembre de 2026</span>
+          <span><i class="fa-solid fa-shield-halved text-terracotta"></i> <strong>Versión:</strong> 1.0 Soberana</span>
+          <span><i class="fa-solid fa-cloud-arrow-up text-terracotta"></i> <strong>Infraestructura:</strong> Google Cloud Platform & Firebase</span>
+        </div>
+
+        <div class="legal-document-intro">
+          <p>
+            <strong>Protección de datos personales, infraestructura tecnológica segura y control transparente de la información del usuario.</strong>
+          </p>
+          <p>
+            BAQUEANO NICARAGUA adopta medidas técnicas, administrativas y organizativas de vanguardia destinadas a proteger la información de exploradores, prestadores locales, negocios, baqueanos y demás usuarios de nuestra plataforma web, aplicación Android y servicios digitales asociados.
+          </p>
+          <p>
+            Nuestra política se basa en principios de privacidad desde el diseño, minimización de datos, transparencia, seguridad, consentimiento y soberanía del usuario sobre su propia información.
+          </p>
+        </div>
+
+        <!-- ARTÍCULO 01 -->
+        <article class="legal-card" id="article-01">
           <div class="legal-card-num">01</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Compromiso con la Privacidad</h2>
-          <div class="legal-card-body"><p>En BAQUEANO NICARAGUA reconocemos la privacidad y la protección de los datos personales como elementos esenciales de nuestra plataforma.</p>
-<p>Esta política explica de forma clara:</p>
-<ul><li>qué información podemos recopilar</li><li>para qué la utilizamos</li><li>dónde puede almacenarse</li><li>qué tecnologías utilizamos para protegerla</li><li>durante cuánto tiempo puede conservarse</li><li>con qué proveedores tecnológicos puede ser procesada</li><li>y qué opciones tiene el usuario para administrar, corregir o solicitar la eliminación de su información.</li></ul>
-<p>Esta política aplica a la aplicación móvil Android, plataforma web, paneles administrativos, servicios de reservas, mapas, funciones de emergencia y Baqueano AI.</p></div>
-        </article><article class="legal-card" id="article-02">
-          <div class="legal-card-num">02</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Información que Podemos Recopilar</h2>
-          <div class="legal-card-body"><p>BAQUEANO aplica el principio de minimización de datos, procurando recopilar únicamente la información necesaria para proporcionar sus servicios.</p>
-<p>Dependiendo de las funciones utilizadas, podemos procesar información como:</p>
-<p>Datos de identificación y cuenta</p>
-<ul><li>nombre y apellidos</li><li>correo electrónico</li><li>fotografía de perfil, cuando el usuario decida agregarla</li><li>identificador interno de usuario</li><li>información necesaria para autenticación y seguridad de la cuenta.</li></ul>
-<p>Información relacionada con servicios y reservas</p>
-<ul><li>destinos guardados</li><li>favoritos</li><li>solicitudes de información</li><li>reservaciones o cotizaciones</li><li>historial relacionado con servicios contratados mediante la plataforma</li><li>interacción con negocios, guías o prestadores locales.</li></ul>
-<p>Datos de ubicación</p>
-<p>BAQUEANO puede solicitar acceso a la ubicación del dispositivo únicamente cuando sea necesaria para determinadas funciones, como:</p>
-<ul><li>mostrar lugares cercanos</li><li>utilizar mapas y navegación</li><li>calcular rutas</li><li>compartir una ubicación durante una solicitud de emergencia</li><li>utilizar herramientas territoriales o funciones del Centro SOS.</li></ul>
-<p>La ubicación será utilizada únicamente cuando exista autorización del usuario y conforme a los permisos disponibles en el dispositivo.</p>
-<p>Interacciones con Baqueano AI</p>
-<p>Las consultas enviadas al asistente inteligente pueden ser procesadas para generar recomendaciones, rutas, información turística y asistencia contextual.</p>
-<p>El usuario deberá evitar introducir contraseñas, información financiera sensible, documentos confidenciales u otros datos que no sean necesarios para utilizar el servicio.</p></div>
-        </article><article class="legal-card" id="article-03">
-          <div class="legal-card-num">03</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Finalidad del Tratamiento de la Información</h2>
-          <div class="legal-card-body"><p>La información recopilada podrá utilizarse exclusivamente para finalidades relacionadas con la operación y mejora de BAQUEANO, entre ellas:</p>
-<ul><li>crear y administrar cuentas de usuario</li><li>autenticar accesos</li><li>personalizar experiencias dentro de la plataforma</li><li>sincronizar favoritos, destinos y preferencias</li><li>facilitar solicitudes de reserva y comunicación con prestadores locales</li><li>generar cotizaciones y presupuestos</li><li>mostrar información territorial y turística relevante</li><li>proporcionar funcionalidades de mapas y geolocalización</li><li>habilitar funciones de seguridad y emergencia</li><li>generar recomendaciones mediante Baqueano AI</li><li>prevenir fraude, abuso y accesos no autorizados</li><li>realizar diagnósticos técnicos y mejorar estabilidad, rendimiento y seguridad.</li></ul>
-<p>BAQUEANO no utilizará datos personales para finalidades incompatibles con aquellas para las cuales fueron recopilados sin informar previamente al usuario cuando corresponda.</p></div>
-        </article><article class="legal-card" id="article-04">
-          <div class="legal-card-num">04</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Infraestructura Cloud y Seguridad de la Información</h2>
-          <div class="legal-card-body"><p>BAQUEANO utiliza servicios tecnológicos de infraestructura en la nube, incluyendo soluciones de Google Cloud Platform y Firebase, entre ellas servicios como autenticación y bases de datos.</p>
-<p>Estos proveedores incorporan mecanismos de protección de información durante su transmisión y almacenamiento.</p>
-<p>BAQUEANO complementa estas medidas mediante controles como:</p>
-<ul><li>autenticación de usuarios</li><li>control de permisos</li><li>reglas de seguridad para bases de datos</li><li>separación de funciones administrativas</li><li>validación de solicitudes</li><li>restricciones de acceso</li><li>monitoreo técnico</li><li>protección frente a accesos no autorizados</li><li>respaldos y mecanismos de recuperación cuando corresponda.</li></ul>
-<p>Las comunicaciones con nuestros servicios deberán utilizar conexiones cifradas mediante protocolos seguros como HTTPS/TLS.</p>
-<p>Ningún sistema conectado a Internet puede garantizar seguridad absoluta; por ello BAQUEANO adopta un enfoque de seguridad continua, prevención, monitoreo y actualización de controles.</p></div>
-        </article><article class="legal-card" id="article-05">
-          <div class="legal-card-num">05</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Almacenamiento Local y Funcionamiento Offline</h2>
-          <div class="legal-card-body"><p>Determinadas funcionalidades pueden utilizar almacenamiento local en el dispositivo para mejorar velocidad, continuidad y funcionamiento sin conexión.</p>
-<p>Dependiendo de la plataforma y funcionalidad utilizada, esto puede incluir:</p>
-<ul><li>preferencias</li><li>información temporal</li><li>destinos consultados</li><li>datos necesarios para funcionamiento offline</li><li>mapas o recursos previamente descargados</li><li>sesiones autorizadas</li><li>caché de imágenes y contenido turístico.</li></ul>
-<p>El almacenamiento local se administra utilizando los mecanismos disponibles en cada plataforma y se procura evitar almacenar información sensible innecesariamente.</p>
-<p>BAQUEANO no incorpora deliberadamente tecnologías destinadas a crear perfiles publicitarios invasivos basados en la actividad privada del usuario.</p></div>
-        </article><article class="legal-card" id="article-06">
-          <div class="legal-card-num">06</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Geolocalización y Centro SOS</h2>
-          <div class="legal-card-body"><p>Las funcionalidades relacionadas con ubicación requieren autorización del dispositivo cuando corresponda.</p>
-<p>BAQUEANO no necesita mantener un seguimiento permanente de la ubicación del usuario para prestar sus servicios generales.</p>
-<p>Cuando se active una herramienta de emergencia, el usuario podrá utilizar voluntariamente su ubicación para facilitar información útil relacionada con una solicitud de asistencia.</p>
-<p>La función SOS constituye una herramienta tecnológica de apoyo y comunicación y no sustituye a los organismos oficiales de emergencia, cuerpos de socorro, Policía Nacional, servicios médicos u otras instituciones competentes.</p></div>
-        </article><article class="legal-card" id="article-07">
-          <div class="legal-card-num">07</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Política de No Venta de Datos Personales</h2>
-          <div class="legal-card-body"><p>BAQUEANO NICARAGUA no comercializa datos personales de sus usuarios.</p>
-<p>Esto significa que BAQUEANO no vende perfiles de viaje, historiales personales, direcciones de correo electrónico ni patrones individuales de ubicación a:</p>
-<ul><li>redes publicitarias</li><li>empresas de telemercadeo</li><li>corredores de datos</li><li>anunciantes externos</li><li>organizaciones dedicadas a la comercialización de perfiles personales.</li></ul>
-<p>Cuando determinados proveedores tecnológicos necesiten procesar información para prestar servicios esenciales de infraestructura, autenticación, almacenamiento, mapas, comunicaciones o inteligencia artificial, dicho procesamiento deberá estar limitado a las finalidades técnicas correspondientes.</p></div>
-        </article><article class="legal-card" id="article-08">
-          <div class="legal-card-num">08</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Conservación y Eliminación de Información</h2>
-          <div class="legal-card-body"><p>Los datos personales se conservarán únicamente durante el tiempo razonablemente necesario para:</p>
-<ul><li>proporcionar los servicios solicitados</li><li>mantener la cuenta del usuario</li><li>cumplir obligaciones legales aplicables</li><li>resolver controversias</li><li>prevenir fraude o abuso</li><li>garantizar seguridad e integridad de la plataforma.</li></ul>
-<p>Cuando la información deje de ser necesaria, podrá ser eliminada, anonimizada o desvinculada de la identidad del usuario, según corresponda.</p>
-<p>El usuario podrá solicitar la eliminación de su cuenta y de los datos personales asociados, sujeto a aquellas excepciones de conservación que resulten necesarias por razones legales, financieras, de seguridad o de prevención de fraude.</p></div>
-        </article><article class="legal-card" id="article-09">
-          <div class="legal-card-num">09</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Derechos y Control del Usuario</h2>
-          <div class="legal-card-body"><p>El usuario podrá solicitar, cuando corresponda:</p>
-<ul><li>conocer qué datos personales mantiene BAQUEANO</li><li>acceder a su información</li><li>corregir información incorrecta o desactualizada</li><li>actualizar sus datos</li><li>retirar determinados consentimientos</li><li>desactivar permisos de ubicación desde su dispositivo</li><li>solicitar la eliminación de su cuenta</li><li>solicitar la eliminación de información personal que ya no sea necesaria</li><li>realizar consultas relacionadas con privacidad y protección de datos.</li></ul>
-<p>Las solicitudes estarán sujetas a los procedimientos de verificación de identidad necesarios para evitar que terceros modifiquen o eliminen información sin autorización.</p></div>
-        </article><article class="legal-card" id="article-10">
-          <div class="legal-card-num">10</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Proveedores y Servicios de Terceros</h2>
-          <div class="legal-card-body"><p>Para operar determinadas funcionalidades, BAQUEANO podrá utilizar servicios proporcionados por terceros, incluyendo tecnologías relacionadas con:</p>
-<ul><li>infraestructura cloud</li><li>Firebase</li><li>Google Cloud</li><li>Google Maps</li><li>autenticación</li><li>almacenamiento</li><li>envío de notificaciones</li><li>inteligencia artificial</li><li>procesamiento técnico y monitoreo de errores.</li></ul>
-<p>Cada proveedor puede operar conforme a sus propias políticas, condiciones y estándares de privacidad.</p>
-<p>BAQUEANO procurará seleccionar proveedores reconocidos y limitar el intercambio de información a aquello que resulte necesario para prestar cada servicio.</p></div>
-        </article><article class="legal-card" id="article-11">
-          <div class="legal-card-num">11</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Seguridad de las Cuentas</h2>
-          <div class="legal-card-body"><p>El usuario también tiene responsabilidad en la protección de su cuenta.</p>
-<p>Recomendamos:</p>
-<ul><li>utilizar contraseñas seguras</li><li>no compartir credenciales</li><li>cerrar sesiones en dispositivos compartidos</li><li>mantener actualizado el dispositivo</li><li>utilizar únicamente las aplicaciones y dominios oficiales de BAQUEANO</li><li>comunicar inmediatamente cualquier actividad sospechosa.</li></ul>
-<p>BAQUEANO nunca solicitará contraseñas completas mediante mensajes, redes sociales o comunicaciones informales.</p></div>
-        </article><article class="legal-card" id="article-12">
-          <div class="legal-card-num">12</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Gestión de Incidentes de Seguridad</h2>
-          <div class="legal-card-body"><p>En caso de detectar un incidente que pueda comprometer información personal, BAQUEANO aplicará procedimientos destinados a:</p>
-<p>1. identificar y contener el incidente;</p>
-<p>2. determinar los sistemas afectados;</p>
-<p>3. evaluar el alcance del riesgo;</p>
-<p>4. corregir la vulnerabilidad;</p>
-<p>5. recuperar los servicios afectados;</p>
-<p>6. preservar evidencia técnica cuando corresponda;</p>
-<p>7. informar a usuarios o autoridades cuando sea legalmente requerido.</p>
-<p>La seguridad de la plataforma será objeto de revisión y mejora continua.</p></div>
-        </article><article class="legal-card" id="article-13">
-          <div class="legal-card-num">13</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Privacidad desde el Diseño</h2>
-          <div class="legal-card-body"><p>BAQUEANO procura incorporar protección de datos desde las etapas de diseño y desarrollo de sus servicios.</p>
-<p>Esto incluye principios como:</p>
-<p>Minimización de datos</p>
-<p>Recopilar únicamente información necesaria.</p>
-<p>Acceso restringido</p>
-<p>Limitar los permisos administrativos según responsabilidades.</p>
-<p>Ubicación bajo control del usuario</p>
-<p>Utilizar geolocalización únicamente cuando una función lo requiera y exista autorización.</p>
-<p>Eliminación controlada</p>
-<p>Permitir gestionar o solicitar eliminación de información personal.</p>
-<p>Transparencia</p>
-<p>Explicar claramente cómo funciona el tratamiento de información.</p>
-<p>No comercialización de perfiles personales</p>
-<p>La información del usuario no constituye un producto de BAQUEANO.</p></div>
-        </article><article class="legal-card" id="article-14">
-          <div class="legal-card-num">14</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Actualizaciones de esta Política</h2>
-          <div class="legal-card-body"><p>Esta Política de Privacidad podrá actualizarse cuando:</p>
-<ul><li>se incorporen nuevas funcionalidades</li><li>cambie la arquitectura tecnológica</li><li>se integren nuevos proveedores</li><li>cambien requisitos legales aplicables</li><li>se implementen nuevas medidas de seguridad.</li></ul>
-<p>Cuando los cambios sean sustanciales, BAQUEANO podrá comunicarlo mediante la aplicación, plataforma web u otros canales oficiales.</p>
-<p>En esta sección deberá mostrarse siempre la fecha de la última actualización.</p></div>
-        </article><article class="legal-card" id="article-15">
-          <div class="legal-card-num">15</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Contacto de Privacidad</h2>
-          <div class="legal-card-body"><p>Para consultas, solicitudes relacionadas con datos personales o reportes vinculados con privacidad, podrá utilizarse el canal oficial:</p>
-<p><a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a></p>
-<p>BAQUEANO NICARAGUA</p>
-<p>Descubrí. Conectá. Protegé. Viví Nicaragua.</p>
-<p>Tu información es tuya</p>
-<p>BAQUEANO utiliza la tecnología para ayudarte a descubrir Nicaragua, no para convertir tus datos personales en un producto.</p>
-<p>Tu ubicación permanece bajo tu control.</p>
-<p>Tus datos no están a la venta.</p>
-<p>Tu privacidad forma parte del diseño de BAQUEANO.</p></div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-shield-heart"></i> Compromiso con la Privacidad</h2>
+          <div class="legal-card-body">
+            <p>En BAQUEANO NICARAGUA reconocemos la privacidad y la protección de los datos personales como elementos esenciales e innegociables de nuestra plataforma comunitaria.</p>
+            <p>Esta política explica de forma clara, transparente y accesible:</p>
+            <ul>
+              <li>Qué información puntual podemos recopilar para prestar el servicio.</li>
+              <li>Para qué finalidades operativas la utilizamos.</li>
+              <li>Dónde se almacena bajo esquemas de alta seguridad en la nube.</li>
+              <li>Qué tecnologías de cifrado utilizamos para resguardarla en reposo y en tránsito.</li>
+              <li>Durante cuánto tiempo se conserva en nuestros registros activos.</li>
+              <li>Con qué proveedores tecnológicos esenciales puede ser procesada.</li>
+              <li>Y qué opciones inmediatas tiene el usuario para administrar, corregir o solicitar la eliminación total de su información.</li>
+            </ul>
+            <div class="legal-callout-box">
+              <i class="fa-solid fa-circle-info legal-callout-icon"></i>
+              <p class="legal-callout-text">
+                Esta política rige para la aplicación móvil Android, plataforma web, paneles administrativos, servicios de reservas campesinas, mapas satelitales, funciones de emergencia y Baqueano AI.
+              </p>
+            </div>
+          </div>
         </article>
+
+        <!-- ARTÍCULO 02 -->
+        <article class="legal-card" id="article-02">
+          <div class="legal-card-num">02</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-database"></i> Información que Podemos Recopilar</h2>
+          <div class="legal-card-body">
+            <p>BAQUEANO aplica con rigor el principio de <strong>minimización de datos</strong>, recopilando únicamente los elementos indispensables para habilitar las funcionalidades solicitadas por el usuario.</p>
+            <p><strong>Datos de identificación y cuenta:</strong></p>
+            <ul>
+              <li>Nombre y apellidos para identificación en reservas y contacto con guías.</li>
+              <li>Correo electrónico verificado para autenticación y avisos de seguridad.</li>
+              <li>Fotografía de perfil, cuando el usuario decida añadirla voluntariamente.</li>
+              <li>Identificador único de usuario (UID) generado por Firebase Authentication.</li>
+            </ul>
+            <p><strong>Información de servicios y rutas:</strong></p>
+            <ul>
+              <li>Destinos guardados en favoritos y rutas personalizadas.</li>
+              <li>Historial de consultas e interacciones con cooperativas y emprendimientos locales.</li>
+              <li>Solicitudes de reserva o cotización directa sin comisiones intermediarias.</li>
+            </ul>
+            <p><strong>Datos de ubicación satelital:</strong></p>
+            <p>BAQUEANO solicita acceso a la ubicación GPS únicamente cuando el usuario interactúa activamente con mapas interactivos, cálculo de rutas en sendero o al activar el Centro SOS de auxilio. No se efectúa seguimiento en segundo plano sin permiso explícito.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 03 -->
+        <article class="legal-card" id="article-03">
+          <div class="legal-card-num">03</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-bullseye"></i> Finalidad del Tratamiento de la Información</h2>
+          <div class="legal-card-body">
+            <p>La información recopilada se utiliza exclusivamente para finalidades vinculadas a la operación soberana y la mejora técnica continua de BAQUEANO:</p>
+            <ul>
+              <li>Administrar perfiles de usuario y asegurar accesos protegidos.</li>
+              <li>Sincronizar favoritos, destinos y mapas fuera de línea entre dispositivos.</li>
+              <li>Facilitar la comunicación directa y expedita entre el viajero y el prestador local.</li>
+              <li>Habilitar la cartografía viva de los 17 departamentos y áreas naturales.</li>
+              <li>Despachar coordenadas geográficas precisas en caso de activación del Centro SOS.</li>
+              <li>Generar sugerencias territoriales hiperlocales a través del asistente Baqueano AI.</li>
+              <li>Prevenir fraudes, accesos indebidos y anomalías en la red comunitaria.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 04 -->
+        <article class="legal-card" id="article-04">
+          <div class="legal-card-num">04</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-cloud-arrow-up"></i> Infraestructura Cloud y Seguridad de la Información</h2>
+          <div class="legal-card-body">
+            <p>BAQUEANO opera sobre infraestructura de primer nivel mundial provista por Google Cloud Platform (GCP) y Google Firebase, garantizando los más altos estándares internacionales de disponibilidad y seguridad informática.</p>
+            <div class="legal-callout-box terracotta">
+              <i class="fa-solid fa-lock legal-callout-icon"></i>
+              <p class="legal-callout-text">
+                Todas las transmisiones de datos se realizan obligatoriamente mediante protocolos seguros con cifrado TLS/SSL (HTTPS) de 256 bits, y los repositorios de Cloud Firestore implementan cifrado avanzado AES-256 en reposo.
+              </p>
+            </div>
+            <p>Controles de seguridad activos implementados:</p>
+            <ul>
+              <li>Reglas de seguridad granulares de Firestore para aislar datos por usuario.</li>
+              <li>Autenticación multifactor y tokens criptográficos JWT de vida acotada.</li>
+              <li>Separación estricta de privilegios administrativos en Ops Center.</li>
+              <li>Monitoreo de seguridad y auditoría continua de integridad de registros.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 05 -->
+        <article class="legal-card" id="article-05">
+          <div class="legal-card-num">05</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-hard-drive"></i> Almacenamiento Local y Funcionamiento Offline</h2>
+          <div class="legal-card-body">
+            <p>Para permitir que los exploradores se adentren en reservas naturales y volcanes sin conectividad celular, BAQUEANO almacena en la memoria local del dispositivo:</p>
+            <ul>
+              <li>Mapas satelitales previamente descargados y coordenadas geodésicas.</li>
+              <li>Fichas de senderos, información de flora, fauna y decálogos ambientales.</li>
+              <li>Caché de imágenes optimizadas para reducir el consumo de datos móviles.</li>
+              <li>Credenciales de sesión cifradas localmente.</li>
+            </ul>
+            <p>BAQUEANO no incorpora librerías de seguimiento conductual publicitario ni scripts espías en el almacenamiento del usuario.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 06 -->
+        <article class="legal-card" id="article-06">
+          <div class="legal-card-num">06</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-tower-broadcast"></i> Geolocalización y Centro SOS</h2>
+          <div class="legal-card-body">
+            <p>El uso de la geolocalización satelital en BAQUEANO está bajo el control permanente del explorador. La plataforma únicamente consulta los sensores GPS cuando el usuario solicita una función que lo requiere.</p>
+            <p><strong>Operación del Centro SOS:</strong></p>
+            <p>Al pulsar el botón SOS 24/7, el sistema extrae las coordenadas geodésicas exactas (latitud, longitud y precisión) en el dispositivo del usuario para que éste pueda transmitirlas a Cruz Blanca, Bomberos Unificados, Policía Nacional o la Mesa Baqueano.</p>
+            <div class="legal-callout-box">
+              <i class="fa-solid fa-triangle-exclamation legal-callout-icon"></i>
+              <p class="legal-callout-text">
+                El Centro SOS es una herramienta tecnológica de soporte y coordinación, y no sustituye la autoridad ni la actuación de los organismos de rescate del Estado de Nicaragua.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 07 -->
+        <article class="legal-card" id="article-07">
+          <div class="legal-card-num">07</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-ban"></i> Política de Cero Venta de Datos Personales</h2>
+          <div class="legal-card-body">
+            <p><strong>BAQUEANO NICARAGUA tiene una política categórica: jamás vendemos, alquilamos ni comercializamos los datos personales de nuestros usuarios.</strong></p>
+            <p>Esto significa que BAQUEANO nunca compartirá tus perfiles de viaje, ubicaciones, búsquedas o correos con:</p>
+            <ul>
+              <li>Redes publicitarias o intermediarios de monetización de tráfico.</li>
+              <li>Empresas de telemercadeo o mercadeo masivo no solicitado.</li>
+              <li>Corredores de datos (data brokers) o corporaciones transnacionales de perfilamiento.</li>
+            </ul>
+            <div class="legal-callout-box terracotta">
+              <i class="fa-solid fa-hand-holding-dollar legal-callout-icon"></i>
+              <p class="legal-callout-text">
+                El modelo de BAQUEANO se sustenta en la dignidad del turismo comunitario y el comercio campesino justo, no en la explotación comercial de la privacidad de los viajeros.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 08 -->
+        <article class="legal-card" id="article-08">
+          <div class="legal-card-num">08</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-trash-can"></i> Conservación y Eliminación de Información</h2>
+          <div class="legal-card-body">
+            <p>Los datos se resguardan únicamente durante el tiempo estrictamente requerido para proveer los servicios contratados y dar cumplimiento a las obligaciones legales nicaragüenses.</p>
+            <p>Cualquier usuario puede solicitar en cualquier momento la <strong>eliminación total y definitiva de su cuenta</strong> y de todos los registros asociados a través de su panel de perfil o escribiendo a <a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a>.</p>
+            <p>Tras la confirmación de la solicitud, los datos serán purgados de las bases de datos activas en un plazo máximo de 72 horas hábiles.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 09 -->
+        <article class="legal-card" id="article-09">
+          <div class="legal-card-num">09</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-user-gear"></i> Derechos y Control del Usuario (Derechos ARCO)</h2>
+          <div class="legal-card-body">
+            <p>Garantizamos el ejercicio pleno de los derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO):</p>
+            <ul>
+              <li><strong>Acceso:</strong> Saber qué datos tuyos obran en nuestros sistemas.</li>
+              <li><strong>Rectificación:</strong> Corregir información inexacta o desactualizada.</li>
+              <li><strong>Cancelación:</strong> Solicitar el borrado definitivo de tu perfil.</li>
+              <li><strong>Oposición:</strong> Oponerte al tratamiento de datos no indispensables para el servicio.</li>
+            </ul>
+            <p>Las solicitudes son procesadas sin costo alguno previa verificación de la identidad del titular.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 10 -->
+        <article class="legal-card" id="article-10">
+          <div class="legal-card-num">10</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-server"></i> Proveedores y Servicios de Terceros</h2>
+          <div class="legal-card-body">
+            <p>Para garantizar una experiencia tecnológica óptima, BAQUEANO se apoya en proveedores de clase mundial sujetos a estrictos contratos de confidencialidad técnica:</p>
+            <ul>
+              <li><strong>Google Firebase / Google Cloud:</strong> Autenticación, hosting seguro y base de datos distribuida.</li>
+              <li><strong>Google Maps Platform:</strong> Cartografía interactiva y georreferenciación de senderos.</li>
+              <li><strong>WhatsApp Business API:</strong> Canal voluntario de enlace directo con guías y cooperativas.</li>
+            </ul>
+            <p>Cada proveedor procesa únicamente los datos estrictamente necesarios para su función técnica.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 11 -->
+        <article class="legal-card" id="article-11">
+          <div class="legal-card-num">11</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-key"></i> Seguridad de las Cuentas</h2>
+          <div class="legal-card-body">
+            <p>La seguridad de la cuenta es una responsabilidad compartida. Recomendamos a todos los miembros de la red:</p>
+            <ul>
+              <li>Utilizar contraseñas robustas y únicas para su acceso a BAQUEANO.</li>
+              <li>No compartir credenciales ni códigos de verificación con terceras personas.</li>
+              <li>Cerrar sesión al utilizar terminales públicas o dispositivos de terceros.</li>
+              <li>Notificar de inmediato a la Mesa Técnica ante cualquier sospecha de vulneración.</li>
+            </ul>
+            <p>El equipo de BAQUEANO jamás te solicitará tu contraseña por teléfono, correo o mensajería.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 12 -->
+        <article class="legal-card" id="article-12">
+          <div class="legal-card-num">12</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-shield-halved"></i> Gestión de Incidentes de Seguridad</h2>
+          <div class="legal-card-body">
+            <p>Disponemos de un protocolo estructurado de respuesta ante incidentes para identificar, contener y remediar cualquier anomalía que pudiera comprometer la confidencialidad de la información:</p>
+            <p>1. Detección inmediata y aislamiento de servicios afectados.</p>
+            <p>2. Análisis forense y erradicación de la causa raíz.</p>
+            <p>3. Restauración íntegra desde respaldos protegidos.</p>
+            <p>4. Comunicación transparente a los usuarios afectados y a las autoridades pertinentes según la ley.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 13 -->
+        <article class="legal-card" id="article-13">
+          <div class="legal-card-num">13</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-compass-drafting"></i> Privacidad desde el Diseño</h2>
+          <div class="legal-card-body">
+            <p>En el ecosistema BAQUEANO, cada nueva funcionalidad, pantalla o servicio se diseña desde sus cimientos bajo el principio de <em>Privacy by Design</em>:</p>
+            <ul>
+              <li>La opción predeterminada es siempre la de mayor privacidad.</li>
+              <li>Los permisos de Android son solicitados en tiempo de ejecución solo cuando son requeridos.</li>
+              <li>La telemetría interna es anónima y destinada exclusivamente al diagnóstico de caídas técnicas.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 14 -->
+        <article class="legal-card" id="article-14">
+          <div class="legal-card-num">14</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-clock-rotate-left"></i> Actualizaciones de esta Política</h2>
+          <div class="legal-card-body">
+            <p>Esta política puede ser modificada para reflejar mejoras en la plataforma, cambios normativos o actualizaciones en la infraestructura tecnológica.</p>
+            <p>Cualquier modificación sustancial será notificada de manera visible mediante aviso destacado en la aplicación Android y el portal web oficial antes de entrar en vigencia.</p>
+          </div>
+        </article>
+
+        <!-- ARTÍCULO 15 -->
+        <article class="legal-card" id="article-15">
+          <div class="legal-card-num">15</div>
+          <h2 class="legal-card-title"><i class="fa-solid fa-envelope-open-text"></i> Contacto Oficial de Privacidad</h2>
+          <div class="legal-card-body">
+            <p>Para cualquier inquietud, ejercicio de derechos ARCO o consulta sobre nuestras medidas de protección de datos, puedes dirigirte directamente a nuestro Oficial de Privacidad:</p>
+            <div class="legal-callout-box">
+              <i class="fa-solid fa-envelope legal-callout-icon"></i>
+              <div>
+                <p class="legal-callout-text"><strong>Canal Oficial:</strong> <a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a></p>
+                <p class="legal-callout-text"><strong>Mesa de Enlace:</strong> <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></p>
+                <p class="legal-callout-text"><strong>Sede:</strong> Managua, Nicaragua • Cobertura en 17 Departamentos</p>
+              </div>
+            </div>
+            <p style="margin-top: 1.5rem; font-weight: 700; color: #F4E6C1;">
+              Descubrí. Conectá. Protegé. Viví Nicaragua con total soberanía y seguridad sobre tus datos.
+            </p>
+          </div>
+        </article>
+
       </div>
     </section>
   </main>
@@ -334,84 +537,109 @@
   <!-- FOOTER INSTITUCIONAL OFICIAL -->
   <footer class="site-footer-pro">
     <div class="container">
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
       <div class="footer-top-utility-bar">
+        <div class="footer-network-status">
+          <span class="pulse-dot"></span>
+          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+        </div>
         <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!');">
+            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
+            <button type="submit" class="newsletter-submit-btn">
+              <span>Unirme</span>
+              <i class="fa-solid fa-arrow-right"></i>
             </button>
           </form>
         </div>
+      </div>
 
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box mb-3">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
           </div>
+          <p class="footer-bio-text">
+            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
+          </p>
           <div class="footer-social-row">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-contact">
+          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <span>Correo Oficial:</span><br>
+                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <span>Mesa de Enlace:</span><br>
+                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <span>Sede Territorial:</span><br>
+                <span>Managua • 17 Departamentos</span>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <span>Atención al Explorador:</span><br>
+                <span>24/7 en Sendero • Red Satelital</span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html" class="privacidad-inline-005">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
+      <div class="footer-trust-pills-row">
+        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
+        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
+        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
+        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
       </div>
 
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
       <div class="footer-bottom-bar">
-        <div>
+        <div class="footer-copy-text">
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div class="privacidad-inline-006">
-          <span class="privacidad-inline-007">
-            <span class="privacidad-inline-008"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        <div class="footer-legal-links">
+          <a href="terminos.html">Términos & Condiciones</a>
+          <a href="privacidad.html" class="active">Privacidad</a>
+          <a href="aviso-legal.html">Aviso Legal</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
         </div>
       </div>
     </div>
@@ -425,36 +653,6 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
-
-  <!-- SCRIPT SCROLLSPY INSTITUCIONAL -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const sections = document.querySelectorAll(".legal-card");
-      const navLinks = document.querySelectorAll(".sidebar-nav-link");
-
-      const observerOptions = {
-        root: null,
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("id");
-            navLinks.forEach(link => {
-              link.classList.remove("active");
-              if (link.getAttribute("href") === `#${id}`) {
-                link.classList.add("active");
-              }
-            });
-          }
-        });
-      }, observerOptions);
-
-      sections.forEach(sec => observer.observe(sec));
-    });
-  </script>
+  <script src="js/legal-scrollspy.js"></script>
 </body>
-
 </html>

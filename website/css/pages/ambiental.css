@@ -1,8 +1,22 @@
-/**
- * POR QU?: mantener la presentaci?n de ambiental.html separada de su estructura HTML.
- * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
- * QU?: reglas visuales espec?ficas de ambiental, sin l?gica ni contenido estructural.
- */
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — CAMPAÑA AMBIENTAL & DENUNCIAS (ambiental.css)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proporcionar una presentación visual de alto impacto para la campaña de
+//   huella cero, el Decálogo Verde del Explorador y la plataforma de denuncias
+//   ambientales con carga de evidencias visuales (fotos y videos) en tiempo real.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
+// - Dropzone interactivo con soporte drag-and-drop y miniaturas dinámicas.
+// - Indicadores de estado de subida y badges de tamaño.
+//
+// 📦 3. QUÉ (WHAT / CLASES EXPUESTAS):
+// - .evidence-dropzone, .evidence-preview-grid, .evidence-item-thumb.
+// - .evidence-stats-bar, .btn-remove-evidence, .badge-media-type.
+// ============================================================================
+
 
 
 html body .ambiental-inline-001 {
@@ -287,4 +301,184 @@ html body .ambiental-inline-050 {
   display: flex !important;
   gap: 1rem !important;
   flex-wrap: wrap !important;
+}
+
+/* ==========================================================================
+   CARGA DE EVIDENCIAS VISUALES (FOTOS Y VIDEOS) EN DENUNCIA AMBIENTAL
+   ========================================================================== */
+
+.evidence-upload-label {
+  display: block;
+  font-family: var(--font-tech);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--arena-pinolera);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.03em;
+}
+
+.evidence-dropzone {
+  position: relative;
+  background: rgba(15, 23, 42, 0.7);
+  border: 2px dashed rgba(244, 230, 193, 0.25);
+  border-radius: 16px;
+  padding: 1.8rem 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.evidence-dropzone:hover,
+.evidence-dropzone.is-dragover {
+  border-color: #F65E01;
+  background: rgba(246, 94, 1, 0.08);
+  box-shadow: 0 0 20px rgba(246, 94, 1, 0.2);
+}
+
+.evidence-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+
+.dropzone-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(22, 93, 111, 0.3);
+  border: 1px solid rgba(244, 230, 193, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--terracotta);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropzone-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.dropzone-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.btn-select-files {
+  pointer-events: auto;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  padding: 0.4rem 1.1rem;
+}
+
+/* Grilla de Previsualizaciones de Evidencias */
+.evidence-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.evidence-item-thumb {
+  position: relative;
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  background: #0F172A;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.evidence-item-thumb img,
+.evidence-item-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.evidence-item-video-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-tech);
+}
+
+.btn-remove-evidence {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.85);
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 10;
+}
+
+.btn-remove-evidence:hover {
+  transform: scale(1.15);
+  background: #DC2626;
+}
+
+.evidence-stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #10B981;
+  font-family: var(--font-tech);
+}
+
+.btn-clear-evidence {
+  background: none;
+  border: none;
+  color: #F87171;
+  font-size: 0.76rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.btn-clear-evidence:hover {
+  color: #EF4444;
+  text-decoration: underline;
 }

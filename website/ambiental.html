@@ -17,9 +17,10 @@
 - Diseño visual basado en verde selva (#2E7D32), esmeralda (#10B981) y arena pinolera.
 
 📦 3. QUÉ (WHAT / CONTENIDOS):
-- Los 10 Mandamientos del Decálogo Verde.
-- Formulario de Denuncia Ciudadana con GPS Satelital en Sendero.
-- Vitrina del Pasaporte del Explorador & Gamificación Ética.
+- Decálogo Verde del Explorador Baqueano con 10 Mandamientos interactivos y certificado.
+- Formulario de Denuncia Ambiental en Territorio con carga de evidencias (fotos y videos) y GPS en vivo.
+- Gamificación de Pasaporte Ético con 6 sellos de guardianía.
+- Footer Institucional Soberano alineado con los 4 canales oficiales.
 ============================================================================
 -->
 <html lang="es">
@@ -539,6 +540,37 @@
               <textarea id="reportDescription" class="form-control-textarea" placeholder="Detalla lo observado (árboles talados, humo visible, vehículos, fauna afectada, etc.)..." required></textarea>
             </div>
 
+                        <!-- ZONA DE CARGA DE EVIDENCIAS VISUALES (FOTOS Y VIDEOS) -->
+            <div class="form-group-field" style="margin-top: 1.2rem;">
+              <label class="evidence-upload-label">
+                <i class="fa-solid fa-photo-film"></i> Subir Evidencias Visuales (Fotos y Videos):
+              </label>
+              <div class="evidence-dropzone" id="evidenceDropzone">
+                <input type="file" id="reportMediaFiles" class="evidence-file-input" accept="image/*,video/*" multiple>
+                <div class="dropzone-content">
+                  <div class="dropzone-icon-box">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                  </div>
+                  <div class="dropzone-text">
+                    <strong>Haz clic o arrastra fotos y videos de la afectación aquí</strong>
+                    <span>Admite imágenes (JPG, PNG, WEBP) y videos (MP4, MOV) de hasta 50MB</span>
+                  </div>
+                  <button type="button" class="btn-hero-glass btn-select-files">
+                    <i class="fa-solid fa-folder-open"></i> Explorar Archivos
+                  </button>
+                </div>
+              </div>
+
+              <!-- Miniaturas de Previsualización -->
+              <div class="evidence-preview-grid" id="evidencePreviewGrid"></div>
+
+              <!-- Barra de Estado de Archivos Adjuntos -->
+              <div class="evidence-stats-bar" id="evidenceStatsBar" style="display: none;">
+                <span id="evidenceCountText"><i class="fa-solid fa-paperclip"></i> 0 archivos adjuntos</span>
+                <button type="button" class="btn-clear-evidence" id="btnClearEvidence"><i class="fa-solid fa-trash-can"></i> Quitar todos</button>
+              </div>
+            </div>
+
             <div class="ambiental-inline-024">
               <button type="submit" class="btn-hero-primary ambiental-inline-025">
                 <i class="fa-solid fa-paper-plane"></i> Transmitir Denuncia Ambiental Vía WhatsApp
@@ -598,11 +630,29 @@
   </main>
 
   <!-- FOOTER OFICIAL -->
+    <!-- FOOTER OFICIAL CON IDENTIDAD TERRITORIAL Y TRANSPARENCIA FISCAL -->
   <footer class="site-footer-pro">
     <div class="container">
+      <div class="footer-top-utility-bar">
+        <div class="footer-network-status">
+          <span class="pulse-dot"></span>
+          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+        </div>
+        <div class="footer-newsletter-wrap">
+          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte a la red de guardianes Baqueano!');">
+            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
+            <button type="submit" class="newsletter-submit-btn">
+              <span>Unirme</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
-          <div class="brand-box ambiental-inline-030">
+          <div class="brand-box mb-3">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -610,23 +660,29 @@
             </div>
           </div>
           <p class="footer-bio-text">
-            Plataforma comunitaria para el turismo sostenible y la preservación ecológica. Cero residuos, respeto a las familias campesinas y amor patrio.
+            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
           </p>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
         </div>
 
         <div class="footer-col-links">
           <h4 class="footer-col-header">MÓDULOS WEB</h4>
           <ul class="footer-link-list">
-            <li><a href="destinos.html">Destinos Protegidos</a></li>
-            <li><a href="historia.html">Historia de Mi País</a></li>
-            <li><a href="ambiental.html">Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
-            <li><a href="musica.html">Patrimonio Sonoro</a></li>
-            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
         <div class="footer-col-contact">
           <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
           <ul class="footer-contact-list">
@@ -662,9 +718,18 @@
         </div>
       </div>
 
+      <div class="footer-trust-pills-row">
+        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
+        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
+        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
+        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
+      </div>
+
       <div class="footer-bottom-bar">
-        <div>© 2026 Baqueano Nicaragua. Custodios de la tierra pinolera.</div>
-        <div class="ambiental-inline-031">
+        <div class="footer-copy-text">
+          © 2026 Baqueano Nicaragua. Custodia ambiental y soberanía de los recursos naturales.
+        </div>
+        <div class="footer-legal-links">
           <a href="ambiental.html">Decálogo Verde</a>
           <a href="admin.html">Baqueano Ops Center</a>
         </div>
@@ -732,6 +797,7 @@
   <script src="js/navigation.js"></script>
   <script src="js/environmental.js"></script>
   <script src="js/video-registry.js"></script>
+  <script src="js/environmental-evidence.js"></script>
   <script src="app.js"></script>
 
   <!-- SDK Firebase & Sincronización en Tiempo Real -->

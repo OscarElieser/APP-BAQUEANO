@@ -394,12 +394,64 @@
         </div>
         <p class="stats-note">*Las condiciones pueden variar según el servicio, método de pago, proveedor externo o modalidad de reserva.</p>
 
-        <section class="closing-manifesto" aria-labelledby="manifestoTitle">
-          <span class="section-eyebrow">Nuestro manifiesto</span>
-          <h2 id="manifestoTitle">Creemos que Nicaragua no termina donde termina la carretera.</h2>
-          <p>Creemos en los caminos que conoce la comunidad, en la finca detrás de la montaña, en el comedor que todavía no aparece en una aplicación, en el río que conoce el baqueano y en la artesana que mantiene vivo un oficio.</p>
-          <p>La tecnología puede ayudar a descubrir esos lugares sin destruir aquello que los hace únicos. BAQUEANO no quiere mostrarte solamente dónde ir: quiere ayudarte a comprender qué estás visitando, quién vive allí y por qué vale la pena protegerlo.</p>
-          <strong>Descubrí. Conectá. Protegé. Viví Nicaragua.</strong>
+        <!--
+          🎯 POR QUÉ: Elevar la declaración fundacional de BAQUEANO a una pieza central de honor.
+          ⚙️ CÓMO: Alineación centrada perfecta, glassmorphism con brillo sutil y 4 pilares de acción territorial.
+          📦 QUÉ: Manifiesto "Nicaragua no termina donde termina la carretera" con sello y pilares.
+        -->
+        <section class="manifesto-masterpiece-card" aria-labelledby="manifestoMasterTitle">
+          <div class="manifesto-seal-glow" title="Sello Soberano Baqueano">
+            <i class="fa-solid fa-compass" aria-hidden="true"></i>
+          </div>
+
+          <div class="hero-badge-pill" style="margin: 0 auto 1.25rem;">
+            <span class="pulse-dot"></span> Manifiesto Soberano Baqueano
+          </div>
+
+          <span class="manifesto-big-quote">“</span>
+          <h2 id="manifestoMasterTitle" class="manifesto-master-title">
+            Creemos que Nicaragua no termina donde <span class="highlight-sunset">termina la carretera</span>.
+          </h2>
+
+          <div class="manifesto-text-block">
+            <p>
+              Creemos en los caminos que conoce la comunidad, en la finca detrás de la montaña, en el comedor que todavía no aparece en un mapa convencional, en el río que surca el baqueano y en las manos artesanas que mantienen vivo el patrimonio de la patria.
+            </p>
+            <p>
+              La tecnología ética y la inteligencia artificial son herramientas para dignificar esos saberes sin alterar su esencia. BAQUEANO no busca mostrarte únicamente hacia dónde viajar: busca conectarte con quién vive allí, comprender la memoria del territorio y proteger su soberanía para las futuras generaciones.
+            </p>
+          </div>
+
+          <!-- Pilares de Acción Territorial Centrados -->
+          <div class="manifesto-pillars-grid">
+            <div class="manifesto-pillar-card">
+              <i class="fa-solid fa-compass manifesto-pillar-icon"></i>
+              <span class="manifesto-pillar-title">Descubrí</span>
+              <p class="manifesto-pillar-desc">Senderos y parajes que ningún mapa tradicional registra.</p>
+            </div>
+            <div class="manifesto-pillar-card">
+              <i class="fa-solid fa-people-roof manifesto-pillar-icon"></i>
+              <span class="manifesto-pillar-title">Conectá</span>
+              <p class="manifesto-pillar-desc">De tú a tú con guías nativos y familias campesinas.</p>
+            </div>
+            <div class="manifesto-pillar-card">
+              <i class="fa-solid fa-leaf manifesto-pillar-icon"></i>
+              <span class="manifesto-pillar-title">Protegé</span>
+              <p class="manifesto-pillar-desc">Ecoturismo de huella cero y respeto a las comunidades.</p>
+            </div>
+            <div class="manifesto-pillar-card">
+              <i class="fa-solid fa-volcano manifesto-pillar-icon"></i>
+              <span class="manifesto-pillar-title">Viví Nicaragua</span>
+              <p class="manifesto-pillar-desc">Auténtica, indómita, soberana y en paz.</p>
+            </div>
+          </div>
+
+          <div>
+            <span class="manifesto-action-slogan">Descubrí • Conectá • Protegé • Viví Nicaragua</span>
+          </div>
+          <div class="manifesto-signature">
+            Mesa Técnica Territorial & Red de Guardianes Baqueano • 153 Municipios
+          </div>
         </section>
 
       </div>
@@ -409,84 +461,109 @@
   <!-- FOOTER INSTITUCIONAL OFICIAL -->
   <footer class="site-footer-pro">
     <div class="container">
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
       <div class="footer-top-utility-bar">
+        <div class="footer-network-status">
+          <span class="pulse-dot"></span>
+          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+        </div>
         <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!');">
+            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
+            <button type="submit" class="newsletter-submit-btn">
+              <span>Unirme</span>
+              <i class="fa-solid fa-arrow-right"></i>
             </button>
           </form>
         </div>
+      </div>
 
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box mb-3">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
           </div>
+          <p class="footer-bio-text">
+            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
+          </p>
           <div class="footer-social-row">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-contact">
+          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <span>Correo Oficial:</span><br>
+                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <span>Mesa de Enlace:</span><br>
+                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <span>Sede Territorial:</span><br>
+                <span>Managua • 17 Departamentos</span>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <span>Atención al Explorador:</span><br>
+                <span>24/7 en Sendero • Red Satelital</span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
+      <div class="footer-trust-pills-row">
+        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
+        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
+        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
+        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
       </div>
 
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
       <div class="footer-bottom-bar">
-        <div>
+        <div class="footer-copy-text">
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div class="nosotros-inline-020">
-          <span class="nosotros-inline-021">
-            <span class="nosotros-inline-022"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        <div class="footer-legal-links">
+          <a href="terminos.html">Términos & Condiciones</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="aviso-legal.html">Aviso Legal</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
         </div>
       </div>
     </div>
