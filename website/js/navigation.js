@@ -386,7 +386,7 @@ function initDownloadModal() {
   const trackDownload = () => {
     if (typeof window.logFirebaseEvent === 'function' && window.firebaseAnalytics) {
       window.logFirebaseEvent(window.firebaseAnalytics, 'apk_download_started', {
-        file: 'BaqueanoNicaragua.apk'
+        file: 'baqueanonicaragua.apk'
       });
     }
   };

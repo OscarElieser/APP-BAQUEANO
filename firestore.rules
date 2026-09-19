@@ -353,6 +353,14 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    match /ai_tasks/{taskId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /ai_settings/{settingId} {
+      allow read, write: if isAdmin();
+    }
+
     match /user_saved_places/{savedId} {
       allow read: if isSignedIn()
         && resource.data.userId == request.auth.uid;

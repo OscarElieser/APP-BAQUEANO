@@ -28,6 +28,16 @@
     type: 'audio', category: 'Patrimonio sonoro', audioUrl: `assets/audio/${file}`,
     publicUrl: `assets/audio/${file}`, status: 'published', source: 'website_catalog'
   }));
+  media.push({
+    id: 'media-apk-baqueanonicaragua',
+    title: 'baqueanonicaragua.apk',
+    name: 'baqueanonicaragua.apk',
+    type: 'application',
+    category: 'Android',
+    publicUrl: 'assets/baqueanonicaragua.apk',
+    status: 'published',
+    source: 'website_catalog'
+  });
   window.BaqueanoWebsiteMedia = media;
   window.BaqueanoWebsiteNotifications = [
     { id: 'notification-sos', title: 'Centro SOS 24/7 disponible', message: 'Para emergencias nacionales utiliza la linea 118.', targetPlatform: 'web_android', link: 'tel:118', category: 'Seguridad', status: 'published', source: 'website_catalog' },
@@ -39,7 +49,7 @@
     { id: 'ai-guardrails', title: 'Guardrails de seguridad', category: 'Seguridad', description: 'Politicas defensivas existentes para solicitudes de IA.', implementationPath: '../lib/core/security/ai_guardrails.dart', status: 'published', source: 'website_catalog' }
   ];
   window.BaqueanoAndroidInventory = [
-    { id: 'android-debug-apk', title: 'APK Android de desarrollo', category: 'Build local', description: 'Compilacion debug comprobada localmente. No esta publicada como descarga web.', artifactPath: '../build/app/outputs/flutter-apk/app-debug.apk', releaseChannel: 'debug', telemetryStatus: 'sin_datos_de_dispositivos', status: 'draft', source: 'website_catalog' },
+    { id: 'android-public-apk', title: 'baqueanonicaragua.apk', category: 'APK publico', description: 'Aplicacion Android disponible para descarga directa desde el sitio web.', artifactPath: 'assets/baqueanonicaragua.apk', publicUrl: 'assets/baqueanonicaragua.apk', fileSizeBytes: 95441231, releaseChannel: 'public', telemetryStatus: 'sin_datos_de_dispositivos', status: 'published', source: 'website_catalog' },
     { id: 'android-app-source', title: 'Aplicacion Android Baqueano', category: 'Codigo fuente', description: 'Proyecto Flutter Android activo con servicios Firebase y experiencia offline.', artifactPath: '../android', releaseChannel: 'development', telemetryStatus: 'sin_datos_de_dispositivos', status: 'published', source: 'website_catalog' }
   ];
 })(window);

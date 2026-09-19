@@ -59,7 +59,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -75,7 +75,7 @@
           ctaText: 'Explora Nicaragua en 3D',
           ctaLink: '#mapaVivo3dSection',
           cta2Text: 'Descargar APK Android',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/heroes/hero-bg.jpg',
           status: 'published',
           sortOrder: 2
@@ -152,8 +152,8 @@
           subtitle: 'Mapas offline, coordenadas GPS sin señal y botón SOS satelital',
           badgeText: '100% Android Soberano',
           content: 'Instala la versión oficial del APK en tu dispositivo móvil y lleva el conocimiento campesino en el bolsillo.',
-          ctaText: 'Descargar BaqueanoNicaragua.apk',
-          ctaLink: 'assets/BaqueanoNicaragua.apk',
+          ctaText: 'Descargar baqueanonicaragua.apk',
+          ctaLink: 'assets/baqueanonicaragua.apk',
           cta2Text: '',
           cta2Link: '',
           imageUrl: 'assets/images/logo.png',
@@ -212,7 +212,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -301,7 +301,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -479,7 +479,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -568,7 +568,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -657,7 +657,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -746,7 +746,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -835,7 +835,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -924,7 +924,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -1102,7 +1102,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -1191,7 +1191,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -1264,7 +1264,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -1337,7 +1337,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -1410,7 +1410,7 @@
           ctaText: 'SOS Satelital',
           ctaLink: 'tel:118',
           cta2Text: 'Descargar APK',
-          cta2Link: 'assets/BaqueanoNicaragua.apk',
+          cta2Link: 'assets/baqueanonicaragua.apk',
           imageUrl: 'assets/images/logo.png',
           status: 'published',
           sortOrder: 1
@@ -1470,6 +1470,12 @@
   // --------------------------------------------------------------------------
   // 1. REGISTRO MAESTRO DE ENTIDADES (33 MÓDULOS DE GESTIÓN)
   // --------------------------------------------------------------------------
+  Object.assign(SITE_PAGES_REGISTRY, {
+    'mi-negocio': { name: 'Portal Mi Negocio', file: 'mi-negocio.html', icon: 'fa-store', sections: [] },
+    'aviso-legal': { name: 'Aviso Legal', file: 'aviso-legal.html', icon: 'fa-scale-balanced', sections: [] },
+    '404': { name: 'Página No Encontrada', file: '404.html', icon: 'fa-triangle-exclamation', sections: [] }
+  });
+
   const ENTITY_REGISTRY = {
     // 01: Dashboard Ejecutivo (Vista consolidada de KPIs y Pulso Nacional)
     '01-dashboard': {
@@ -1754,6 +1760,9 @@
     activeBuilderFilter: 'all',
     builderSearchQuery: '',
     pageSections: {},
+    aiReports: [],
+    aiAutonomyEnabled: false,
+    aiAutonomyTimer: null,
 
     // Caché reactivo por colección
     collectionsData: {},
@@ -2171,9 +2180,15 @@
       // Iniciar listeners para los módulos base de telemetría y catálogo
       this.listenToCollection('03-destinos');
       this.listenToCollection('08-negocios');
+      this.listenToCollection('14-guias');
+      this.listenToCollection('21-multimedia');
+      this.listenToCollection('22-notificaciones');
+      this.listenToCollection('23-ai');
+      this.listenToCollection('25-android');
       this.listenToCollection('20-sos');
       this.listenToAuditLogs();
       this.listenToAppConfig();
+      this.listenToAiTasks();
     },
 
     stopAllListeners() {
@@ -2278,6 +2293,19 @@
           }
         },
         (error) => console.warn('[OpsCMS] Config global:', error.message)
+      );
+      OpsState.listeners.push(unsub);
+    },
+
+    listenToAiTasks() {
+      const db = this.getDb();
+      if (!db) return;
+      const unsub = db.collection('ai_tasks').orderBy('createdAt', 'desc').limit(40).onSnapshot(
+        (snapshot) => {
+          OpsState.aiReports = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          if (OpsState.activeTab === '23-ai') OpsUI.renderAiAdminModule();
+        },
+        (error) => console.warn('[BAQUEANO IA] No se pudo leer ai_tasks:', error.message)
       );
       OpsState.listeners.push(unsub);
     },
@@ -3174,6 +3202,77 @@
       }).catch(e => console.warn(e));
     },
 
+    async discoverPageElements(pageId) {
+      const pageInfo = SITE_PAGES_REGISTRY[pageId];
+      if (!pageInfo?.file) throw new Error('La página no tiene un archivo asociado.');
+      const response = await fetch(pageInfo.file, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`No se pudo leer ${pageInfo.file} (HTTP ${response.status}).`);
+      const parsed = new DOMParser().parseFromString(await response.text(), 'text/html');
+      const nodes = Array.from(parsed.querySelectorAll('body h1, body h2, body h3, body h4, body p, body img, body video, body a[href], body button'))
+        .filter((node) => !node.closest('script, style, template, noscript'));
+      const hash = (value) => {
+        let result = 2166136261;
+        for (let index = 0; index < value.length; index += 1) {
+          result ^= value.charCodeAt(index);
+          result = Math.imul(result, 16777619);
+        }
+        return (result >>> 0).toString(36);
+      };
+      const selectorFor = (node) => {
+        if (node.id) return `#${node.id}`;
+        const parts = [];
+        let current = node;
+        while (current?.tagName && current.tagName.toLowerCase() !== 'html') {
+          if (current.id) { parts.unshift(`#${current.id}`); break; }
+          const tag = current.tagName.toLowerCase();
+          const classes = Array.from(current.classList || []).filter((name) => /^[a-zA-Z_][\w-]*$/.test(name)).slice(0, 2);
+          let part = tag + classes.map((name) => `.${name}`).join('');
+          const siblings = current.parentElement ? Array.from(current.parentElement.children).filter((child) => child.tagName === current.tagName) : [];
+          if (siblings.length > 1) part += `:nth-of-type(${siblings.indexOf(current) + 1})`;
+          parts.unshift(part);
+          current = current.parentElement;
+          if (parts.length >= 6) break;
+        }
+        return parts.join(' > ');
+      };
+      const discovered = nodes.map((node, index) => {
+        const selector = selectorFor(node);
+        const tag = node.tagName.toLowerCase();
+        const text = (node.textContent || '').replace(/\s+/g, ' ').trim();
+        const heading = /^h[1-4]$/.test(tag);
+        const action = tag === 'a' || tag === 'button';
+        const media = tag === 'img' || tag === 'video';
+        const label = media ? (node.getAttribute('alt') || node.getAttribute('src') || tag) : (text.slice(0, 90) || tag);
+        return {
+          id: `element_${pageId}_${hash(selector)}`,
+          name: `${tag.toUpperCase()} · ${label}`,
+          title: heading ? text : label,
+          content: !heading && !action && !media ? text : '',
+          ctaText: action ? text : '',
+          ctaLink: tag === 'a' ? (node.getAttribute('href') || '') : '',
+          imageUrl: media ? (node.getAttribute('src') || '') : '',
+          type: 'element', elementTag: tag, selector, sourceFile: pageInfo.file,
+          original: { text, href: node.getAttribute('href') || '', src: node.getAttribute('src') || '', alt: node.getAttribute('alt') || '' },
+          status: 'published', sortOrder: index + 1000, source: 'website_dom'
+        };
+      }).filter((item) => item.original.text || item.original.src);
+      const merged = new Map([...(OpsState.pageSections[pageId] || pageInfo.sections || [])].map((section) => [section.id, section]));
+      discovered.forEach((section) => {
+        const existing = merged.get(section.id);
+        merged.set(section.id, existing ? { ...section, ...existing, selector: section.selector, original: existing.original || section.original } : section);
+      });
+      const sections = Array.from(merged.values()).sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+      OpsState.pageSections[pageId] = sections;
+      pageInfo.sections = sections;
+      const db = this.getDb();
+      if (db) await db.collection('site_pages').doc(pageId).set({
+        pageId, title: pageInfo.name, sourceFile: pageInfo.file, sections,
+        inventoryUpdatedAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+      return discovered.length;
+    },
+
     async togglePageSectionStatus(pageId, sectionId) {
       const db = this.getDb();
       if (!db) return;
@@ -3296,6 +3395,33 @@
       }).catch(e => console.warn(e));
     },
 
+    async restorePageElementOriginal(pageId, sectionId) {
+      const sections = [...(OpsState.pageSections[pageId] || [])];
+      const target = sections.find((section) => section.id === sectionId);
+      if (!target?.original) return;
+      const original = target.original;
+      const tag = target.elementTag || '';
+      target.status = 'published';
+      target.permanentlyDeleted = false;
+      target.deletedAt = null;
+      if (/^h[1-4]$/.test(tag)) target.title = original.text || target.title;
+      else if (tag === 'a' || tag === 'button') {
+        target.ctaText = original.text || target.ctaText;
+        target.ctaLink = original.href || target.ctaLink;
+      } else if (tag === 'img' || tag === 'video') {
+        target.imageUrl = original.src || target.imageUrl;
+        target.title = original.alt || target.title;
+      } else target.content = original.text || target.content;
+      const db = this.getDb();
+      if (db) await db.collection('site_pages').doc(pageId).set({
+        sections,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+      OpsState.pageSections[pageId] = sections;
+      OpsToast.show('Contenido original restaurado y publicado.', 'success');
+    },
+
     async hardDeletePageSection(pageId, sectionId) {
       const confirmed = await OpsDialog.confirm({
         title: '¿Eliminar Sección Definitivamente?',
@@ -3313,7 +3439,14 @@
       let sections = [...(OpsState.pageSections[pageId] || [])];
       if (sections.length === 0) return;
 
-      sections = sections.filter((s) => s.id !== sectionId);
+      const target = sections.find((section) => section.id === sectionId);
+      if (target && (target.source === 'website_dom' || target.original)) {
+        target.status = 'trashed';
+        target.permanentlyDeleted = true;
+        target.deletedAt = new Date().toISOString();
+      } else {
+        sections = sections.filter((s) => s.id !== sectionId);
+      }
 
       pageDocRef.set({
         sections,
@@ -3342,7 +3475,20 @@
       const db = this.getDb();
       if (!db) return;
 
-      const baseSections = SITE_PAGES_REGISTRY[pageId]?.sections || [];
+      const currentSections = OpsState.pageSections[pageId] || SITE_PAGES_REGISTRY[pageId]?.sections || [];
+      const baseSections = currentSections.map((section) => {
+        if (!section.original) return { ...section, status: section.status === 'trashed' ? 'published' : section.status };
+        const restored = { ...section, status: 'published', permanentlyDeleted: false, deletedAt: null };
+        if (/^h[1-4]$/.test(section.elementTag || '')) restored.title = section.original.text || restored.title;
+        else if (section.elementTag === 'a' || section.elementTag === 'button') {
+          restored.ctaText = section.original.text || restored.ctaText;
+          restored.ctaLink = section.original.href || restored.ctaLink;
+        } else if (section.elementTag === 'img' || section.elementTag === 'video') {
+          restored.imageUrl = section.original.src || restored.imageUrl;
+          restored.title = section.original.alt || restored.title;
+        } else restored.content = section.original.text || restored.content;
+        return restored;
+      });
       db.collection('site_pages').doc(pageId).set({
         pageId,
         sections: baseSections,
@@ -3471,6 +3617,7 @@
       if (tabId === '02-contenido') return this.renderWebsiteBuilderModule('02-contenido');
       if (tabId === '09-verificaciones') return this.renderVerificationsModule();
       if (tabId === '10-suscripciones') return this.renderSubscriptionsModule();
+      if (tabId === '23-ai') return this.renderAiAdminModule();
       if (tabId === '24-builder') return this.renderWebsiteBuilderModule('24-builder');
       if (tabId === '27-auditoria') return this.renderAuditFeed();
 
@@ -3977,6 +4124,18 @@
       if (!OpsState.pageSections[pageId]) {
         OpsCMS.listenToPageSections(pageId);
       }
+      if (!pageInfo.inventoryLoaded && !pageInfo.inventoryLoading) {
+        pageInfo.inventoryLoading = true;
+        OpsCMS.discoverPageElements(pageId)
+          .then(() => {
+            pageInfo.inventoryLoaded = true;
+            OpsUI.renderWebsiteBuilderModule(currentTab);
+          })
+          .catch((error) => {
+            pageInfo.inventoryLoading = false;
+            console.warn(`[WebsiteBuilder] No se pudo inventariar ${pageInfo.file}:`, error.message);
+          });
+      }
 
       let allSections = OpsState.pageSections[pageId] || pageInfo.sections || [];
       const totalCount = allSections.length;
@@ -4040,6 +4199,9 @@
           <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
             <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.addSectionToPage('${pageId}')">
               <i class="fa-solid fa-plus"></i> Añadir Nueva Sección
+            </button>
+            <button class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine.scanWebsitePage('${pageId}')">
+              <i class="fa-solid fa-magnifying-glass"></i> Inventariar Todo el HTML
             </button>
             <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.resetPageToBaseline('${pageId}')" title="Restablecer plantilla inicial de esta página">
               <i class="fa-solid fa-arrow-rotate-left"></i> Restablecer Plantilla
@@ -4135,6 +4297,11 @@
                   <button type="button" class="ops-btn-action-icon accent" onclick="window.BaqueanoOpsEngine.openSectionModal('${pageId}', '${s.id}')">
                     <i class="fa-solid fa-pen-to-square"></i> Modificar
                   </button>
+                  ${s.original ? `
+                    <button type="button" class="ops-btn-action-icon success" onclick="window.BaqueanoOpsEngine.restoreOriginalElement('${pageId}', '${s.id}')" title="Restaurar texto, enlace o multimedia original">
+                      <i class="fa-solid fa-clock-rotate-left"></i> Original
+                    </button>
+                  ` : ''}
                   <button type="button" class="ops-btn-action-icon" onclick="window.BaqueanoOpsEngine.toggleSectionStatus('${pageId}', '${s.id}')" title="${status === 'published' ? 'Ocultar del sitio web' : 'Hacer visible en el sitio web'}">
                     <i class="fa-solid ${status === 'published' ? 'fa-eye-slash' : 'fa-eye'}"></i>
                     ${status === 'published' ? 'Despublicar' : 'Publicar'}
@@ -4267,7 +4434,7 @@
         if (lblCta2Text) lblCta2Text.textContent = 'Botón Secundario de Cabecera (Texto)';
         if (inputCta2Text) inputCta2Text.placeholder = 'Ej. Descargar APK o Mi Negocio';
         if (lblCta2Link) lblCta2Link.textContent = 'Botón Secundario: Enlace o URL';
-        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. assets/BaqueanoNicaragua.apk';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. assets/baqueanonicaragua.apk';
 
         if (lblImage) lblImage.textContent = 'URL del Logotipo Oficial / Isotipo';
         if (inputImage) inputImage.placeholder = 'assets/images/logo.png o URL de Storage';
@@ -4381,7 +4548,7 @@
         if (lblCta2Text) lblCta2Text.textContent = 'Botón Secundario: Texto (Opcional)';
         if (inputCta2Text) inputCta2Text.placeholder = 'Ej. Descargar APK Android';
         if (lblCta2Link) lblCta2Link.textContent = 'Botón Secundario: Enlace / URL';
-        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. assets/BaqueanoNicaragua.apk';
+        if (inputCta2Link) inputCta2Link.placeholder = 'Ej. assets/baqueanonicaragua.apk';
 
         if (lblImage) lblImage.textContent = 'URL de Fotografía / Fondo Multimedia';
       }
@@ -4501,6 +4668,59 @@
             <li><code>/multimedia/{id}</code> — Archivos de audio folclórico, marimba y documentos patrimoniales.</li>
           </ul>
         </div>
+      `;
+    },
+
+    renderAiAdminModule() {
+      const panel = document.getElementById('view-23-ai');
+      if (!panel) return;
+      const reports = OpsState.aiReports || [];
+      const totalRecords = Object.values(OpsState.collectionsData).reduce((sum, items) => sum + (Array.isArray(items) ? items.length : 0), 0);
+      const totalSections = Object.values(OpsState.pageSections).reduce((sum, items) => sum + (Array.isArray(items) ? items.length : 0), 0);
+      panel.innerHTML = `
+        <div class="ops-view-header">
+          <div class="ops-view-title-group">
+            <h1><i class="fa-solid fa-brain" style="color:var(--bq-accent)"></i> BAQUEANO IA · Centro Autónomo</h1>
+            <p class="ops-view-subtitle">ASISTENCIA OPERATIVA, AUDITORÍA CONTINUA Y PREPARACIÓN SEGURA DE CAMBIOS</p>
+          </div>
+          <div class="ops-view-actions">
+            <button class="btn-ops-matte ${OpsState.aiAutonomyEnabled ? 'primary' : ''}" onclick="window.BaqueanoOpsEngine.toggleAiAutonomy()">
+              <i class="fa-solid ${OpsState.aiAutonomyEnabled ? 'fa-pause' : 'fa-play'}"></i>
+              ${OpsState.aiAutonomyEnabled ? 'Pausar Autonomía' : 'Activar Autonomía'}
+            </button>
+          </div>
+        </div>
+        <div class="ops-kpi-grid" style="margin-bottom:1.5rem">
+          <div class="ops-kpi-card"><span class="ops-kpi-label">Registros observables</span><strong class="ops-kpi-value">${totalRecords}</strong></div>
+          <div class="ops-kpi-card"><span class="ops-kpi-label">Elementos web</span><strong class="ops-kpi-value">${totalSections}</strong></div>
+          <div class="ops-kpi-card"><span class="ops-kpi-label">Informes generados</span><strong class="ops-kpi-value">${reports.length}</strong></div>
+          <div class="ops-kpi-card"><span class="ops-kpi-label">Autonomía</span><strong class="ops-kpi-value" style="font-size:1rem">L2 · Reversible</strong></div>
+        </div>
+        <div class="ops-builder-header-strip" style="margin-bottom:1.5rem">
+          <div style="width:100%">
+            <label class="ops-form-label" for="aiOpsInstruction">¿Qué trabajo necesitas facilitar?</label>
+            <textarea id="aiOpsInstruction" class="ops-form-textarea" rows="3" placeholder="Ej. revisa destinos sin imagen, audita SEO, encuentra contenido incompleto o prepara una notificación"></textarea>
+            <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.8rem">
+              <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.runAiInstruction()"><i class="fa-solid fa-wand-magic-sparkles"></i> Ejecutar Trabajo</button>
+              <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.runAiJob('content_audit')"><i class="fa-solid fa-list-check"></i> Auditar Contenido</button>
+              <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.runAiJob('seo_audit')"><i class="fa-solid fa-magnifying-glass-chart"></i> Auditar SEO</button>
+              <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.runAiJob('media_audit')"><i class="fa-solid fa-photo-film"></i> Auditar Multimedia</button>
+              <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.runAiJob('operations_summary')"><i class="fa-solid fa-chart-line"></i> Resumen Operativo</button>
+            </div>
+            <p style="margin:.75rem 0 0;color:var(--ops-text-muted);font-size:.76rem">Analiza y prepara cambios reversibles. Publicar, eliminar, acreditar o enviar comunicaciones requiere confirmación humana.</p>
+          </div>
+        </div>
+        <div class="ops-table-wrap"><table class="ops-table-matte">
+          <thead><tr><th>Trabajo</th><th>Resultado</th><th>Hallazgos</th><th>Fecha</th><th>Acción</th></tr></thead>
+          <tbody>${reports.length ? reports.map((report) => `
+            <tr class="ops-table-row">
+              <td><strong>${this.escape(report.title)}</strong><div style="font-size:.72rem;color:var(--ops-text-muted)">${this.escape(report.autonomyLevel)}</div></td>
+              <td><span class="ops-badge-pill ${report.severity === 'ok' ? 'published' : 'draft'}">${this.escape(report.status)}</span></td>
+              <td style="max-width:440px;font-size:.8rem;color:var(--ops-text-secondary)">${this.escape(report.summary)}</td>
+              <td style="font-size:.75rem">${new Date(report.createdAt).toLocaleString('es-NI')}</td>
+              <td><button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.previewAiReport('${report.id}')"><i class="fa-solid fa-eye"></i> Ver</button></td>
+            </tr>`).join('') : '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--ops-text-muted)">Ejecuta la primera auditoría autónoma.</td></tr>'}</tbody>
+        </table></div>
       `;
     },
 
@@ -4963,6 +5183,145 @@
       OpsToast.show('Anuncio global sincronizado con Website y Android.', 'success');
     },
 
+    async runAiJob(jobType, instruction = '') {
+      const id = `ai_job_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+      const allRecords = Object.entries(OpsState.collectionsData).flatMap(([module, items]) =>
+        (Array.isArray(items) ? items : []).map((item) => ({ module, ...item }))
+      );
+      const allSections = Object.entries(SITE_PAGES_REGISTRY).flatMap(([pageId, page]) =>
+        (OpsState.pageSections[pageId] || page.sections || []).map((section) => ({ pageId, ...section }))
+      );
+      let findings = [];
+      let title = 'Resumen operativo';
+
+      if (jobType === 'content_audit') {
+        title = 'Auditoría autónoma de contenido';
+        findings = allRecords.filter((item) =>
+          item.status === 'published' && !(item.title || item.name || item.displayName)
+        ).map((item) => ({ module: item.module, id: item.id, issue: 'Registro publicado sin título visible' }));
+        allSections.filter((item) => item.status === 'published' && !(item.title || item.content || item.imageUrl))
+          .forEach((item) => findings.push({ module: `page:${item.pageId}`, id: item.id, issue: 'Elemento web publicado sin contenido' }));
+      } else if (jobType === 'seo_audit') {
+        title = 'Auditoría autónoma de SEO';
+        findings = allSections.filter((item) =>
+          item.status === 'published' && item.type !== 'element' && (!item.title || !item.subtitle)
+        ).map((item) => ({ module: `page:${item.pageId}`, id: item.id, issue: !item.title ? 'Falta título' : 'Falta subtítulo o descripción' }));
+      } else if (jobType === 'media_audit') {
+        title = 'Auditoría autónoma de multimedia';
+        const media = OpsState.collectionsData['21-multimedia'] || [];
+        findings = media.filter((item) =>
+          item.status === 'published' && !(item.imageUrl || item.audioUrl || item.publicUrl)
+        ).map((item) => ({ module: 'multimedia', id: item.id, issue: 'Archivo publicado sin URL utilizable' }));
+        const seen = new Map();
+        media.forEach((item) => {
+          const url = item.publicUrl || item.imageUrl || item.audioUrl;
+          if (!url) return;
+          if (seen.has(url)) findings.push({ module: 'multimedia', id: item.id, issue: `URL duplicada con ${seen.get(url)}` });
+          else seen.set(url, item.id);
+        });
+      } else {
+        title = instruction ? 'Trabajo solicitado al asistente' : 'Resumen autónomo de operaciones';
+        findings = [
+          { module: 'ecosistema', id: 'records', issue: `${allRecords.length} registros cargados en módulos administrativos` },
+          { module: 'website', id: 'elements', issue: `${allSections.length} secciones y elementos web administrables` },
+          { module: 'workflow', id: 'instruction', issue: instruction || 'Monitoreo general solicitado' }
+        ];
+      }
+
+      const actionableCount = jobType === 'operations_summary' ? 0 : findings.length;
+      const report = {
+        id,
+        jobType,
+        title,
+        instruction,
+        status: actionableCount === 0 ? 'Sin incidencias' : `${actionableCount} por revisar`,
+        severity: actionableCount === 0 ? 'ok' : 'warning',
+        summary: actionableCount === 0
+          ? 'La revisión terminó sin incidencias accionables.'
+          : `Se detectaron ${actionableCount} hallazgos. BAQUEANO IA preparó el informe sin publicar ni eliminar contenido.`,
+        findings,
+        autonomyLevel: 'LEVEL_2_REVERSIBLE',
+        createdAt: new Date().toISOString(),
+        createdBy: OpsState.currentUser?.email || 'admin'
+      };
+      OpsState.aiReports = [report, ...(OpsState.aiReports || [])].slice(0, 40);
+      const db = OpsCMS.getDb();
+      if (db) {
+        await db.collection('ai_tasks').doc(id).set(report, { merge: true });
+        await OpsCMS.logAuditEvent({
+          action: 'AI_AUTONOMOUS_JOB_COMPLETED',
+          module: 'BAQUEANO IA',
+          collection: 'ai_tasks',
+          recordId: id,
+          description: `${title}: ${report.status}`,
+          status: 'success'
+        });
+      }
+      OpsToast.show(`${title} completada: ${report.status}.`, actionableCount ? 'warning' : 'success');
+      OpsUI.renderAiAdminModule();
+      return report;
+    },
+
+    async runAiInstruction() {
+      const input = document.getElementById('aiOpsInstruction');
+      const instruction = input?.value.trim() || '';
+      if (!instruction) {
+        OpsToast.show('Describe el trabajo que deseas delegar.', 'warning');
+        return;
+      }
+      const normalized = instruction.toLowerCase();
+      const type = /seo|t[ií]tulo|descripci[oó]n/.test(normalized)
+        ? 'seo_audit'
+        : /imagen|audio|video|multimedia|archivo/.test(normalized)
+          ? 'media_audit'
+          : /contenido|destino|negocio|incompleto|revis/.test(normalized)
+            ? 'content_audit'
+            : 'operations_summary';
+      await this.runAiJob(type, instruction);
+    },
+
+    async toggleAiAutonomy() {
+      OpsState.aiAutonomyEnabled = !OpsState.aiAutonomyEnabled;
+      if (OpsState.aiAutonomyTimer) {
+        clearInterval(OpsState.aiAutonomyTimer);
+        OpsState.aiAutonomyTimer = null;
+      }
+      if (OpsState.aiAutonomyEnabled) {
+        await this.runAiJob('content_audit', 'Ciclo autónomo inicial');
+        OpsState.aiAutonomyTimer = setInterval(() => {
+          this.runAiJob('content_audit', 'Ciclo autónomo periódico').catch((error) => console.warn('[BAQUEANO IA]', error));
+        }, 300000);
+      }
+      const db = OpsCMS.getDb();
+      if (db) await db.collection('ai_settings').doc('admin_autonomy').set({
+        enabled: OpsState.aiAutonomyEnabled,
+        level: 'LEVEL_2_REVERSIBLE',
+        intervalMinutes: 5,
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+      OpsUI.renderAiAdminModule();
+    },
+
+    previewAiReport(reportId) {
+      const report = (OpsState.aiReports || []).find((item) => item.id === reportId);
+      const modal = document.getElementById('opsPreviewModal');
+      const titleEl = document.getElementById('previewModalTitle');
+      const bodyEl = document.getElementById('previewModalBody');
+      if (!report || !modal || !bodyEl) return;
+      if (titleEl) titleEl.textContent = report.title;
+      bodyEl.innerHTML = report.findings.length
+        ? `<div style="display:grid;gap:.75rem">${report.findings.map((item) => `
+            <div style="padding:1rem;border:1px solid var(--ops-border-subtle);border-radius:10px;background:var(--ops-surface-1)">
+              <strong>${OpsUI.escape(item.module)} · ${OpsUI.escape(item.id)}</strong>
+              <p style="margin:.35rem 0 0;color:var(--ops-text-secondary)">${OpsUI.escape(item.issue)}</p>
+            </div>`).join('')}</div>`
+        : '<p>No se detectaron incidencias.</p>';
+      modal.classList.add('is-open');
+      const closeBtn = document.getElementById('previewModalCloseBtn');
+      if (closeBtn) closeBtn.onclick = () => modal.classList.remove('is-open');
+    },
+
     async onDirectMediaUpload(file) {
       if (!file) return;
       try {
@@ -4994,6 +5353,17 @@
       OpsState.activeBuilderPage = pageId;
       OpsCMS.listenToPageSections(pageId);
       OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async scanWebsitePage(pageId) {
+      try {
+        OpsToast.show('Leyendo textos, imágenes, enlaces, botones y multimedia de la página...', 'info');
+        const count = await OpsCMS.discoverPageElements(pageId);
+        OpsToast.show(`${count} elementos reales incorporados al Website Builder.`, 'success');
+        OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+      } catch (error) {
+        OpsToast.show(`No se pudo inventariar la página: ${error.message}`, 'error');
+      }
     },
 
     setBuilderFilter(filter) {
@@ -5031,6 +5401,11 @@
 
     async restoreSection(pageId, sectionId) {
       await OpsCMS.restorePageSection(pageId, sectionId);
+      OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+    },
+
+    async restoreOriginalElement(pageId, sectionId) {
+      await OpsCMS.restorePageElementOriginal(pageId, sectionId);
       OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
     },
 

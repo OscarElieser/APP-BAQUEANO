@@ -115,7 +115,15 @@
         const secType = sec.type || '';
 
         // Buscar elemento en el DOM por ID explícito o atributo
-        let targetEl = document.getElementById(secId) || document.querySelector(`[data-section-id="${secId}"]`);
+        let targetEl = null;
+        if (sec.selector) {
+          try {
+            targetEl = document.querySelector(sec.selector);
+          } catch (_) {
+            targetEl = null;
+          }
+        }
+        targetEl = targetEl || document.getElementById(secId) || document.querySelector(`[data-section-id="${secId}"]`);
 
         // Heurísticas defensivas especializadas por tipo de componente
         if (!targetEl) {
@@ -146,6 +154,25 @@
           }
 
           targetEl.style.display = '';
+
+          if (secType === 'element') {
+            const tag = (sec.elementTag || targetEl.tagName || '').toLowerCase();
+            if (tag === 'img') {
+              if (sec.imageUrl) targetEl.src = sec.imageUrl;
+              if (sec.title) targetEl.alt = sec.title;
+            } else if (tag === 'video') {
+              if (sec.imageUrl) targetEl.src = sec.imageUrl;
+              if (typeof targetEl.load === 'function') targetEl.load();
+            } else if (tag === 'a' || tag === 'button') {
+              const label = sec.ctaText || sec.title || sec.content;
+              if (label) targetEl.textContent = label;
+              if (tag === 'a' && sec.ctaLink) targetEl.href = sec.ctaLink;
+            } else {
+              const value = sec.content || sec.subtitle || sec.title;
+              if (value) targetEl.textContent = value;
+            }
+            return;
+          }
 
           // ─── 1. TIPO HEADER (ENCABEZADO & BARRA DE NAVEGACIÓN) ───
           if (secType === 'header' || secId.includes('header') || secId.includes('navbar')) {
