@@ -20,9 +20,29 @@
 import { NextResponse } from "next/server";
 import type { ItineraryDayPlan, ItineraryResponse, ItineraryStop, PlaceRecord, RiskAssessment, TripProfile } from "@baqueano/types";
 import { tripProfileSchema, itineraryResponseSchema } from "@baqueano/validators";
+import { listPublishedPlaces } from "@baqueano/firebase";
 import { getStaticDestinationPlaces } from "../../../services/static-destination.service";
 
 const USD_TO_NIO_RATE = 36.8;
+
+function normalize(value: string): string {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function scorePlace(place: PlaceRecord, profile: TripProfile): number {
+  const searchable = normalize(`${place.name} ${place.categoryName} ${place.subcategory} ${place.description} ${place.departmentName} ${place.municipalityName}`);
+  const interestScore = profile.interests.reduce((score, interest) => score + (searchable.includes(normalize(interest)) ? 4 : 0), 0);
+  const departmentScore = profile.department && searchable.includes(normalize(profile.department)) ? 8 : 0;
+  return interestScore + departmentScore + (place.verified ? 3 : 0) + (place.isOpen ? 2 : 0) + Math.min(place.rating, 5);
+}
+
+function buildStopDescription(place: PlaceRecord, profile: TripProfile): string {
+  const factualDescription = place.description.trim() || `${place.categoryName} ubicado en ${place.municipalityName}.`;
+  const restrictionNote = profile.restrictions
+    ? ` Antes de reservar, confirma con el prestador estas necesidades: ${profile.restrictions}.`
+    : " Antes de reservar, confirma horarios, acceso y disponibilidad con el prestador.";
+  return `${factualDescription}${restrictionNote}`;
+}
 
 function evaluateRisk(profile: TripProfile, stops: readonly ItineraryStop[]): RiskAssessment {
   const factors: string[] = [];
@@ -64,13 +84,23 @@ export async function POST(request: Request) {
     const profile = tripProfileSchema.parse(rawBody);
 
     // Selección de lugares verificados según departamento o interés
+    const liveResult = await listPublishedPlaces();
     const staticResult = getStaticDestinationPlaces();
-    const availablePlaces: readonly PlaceRecord[] = staticResult.items;
+    const availablePlaces: readonly PlaceRecord[] = liveResult.items.length > 0 ? liveResult.items : staticResult.items;
+    const publishedPlaces = availablePlaces.filter((place) => place.status === "published" && place.isTourist);
     const matchedPlaces = profile.department
-      ? availablePlaces.filter((p) => p.departmentName.toLowerCase().includes(profile.department!.toLowerCase()))
-      : availablePlaces;
+      ? publishedPlaces.filter((place) => normalize(`${place.departmentName} ${place.municipalityName}`).includes(normalize(profile.department!)))
+      : publishedPlaces;
 
-    const pool = matchedPlaces.length > 0 ? matchedPlaces : availablePlaces;
+    const pool = [...(matchedPlaces.length > 0 ? matchedPlaces : publishedPlaces)]
+      .sort((left, right) => scorePlace(right, profile) - scorePlace(left, profile));
+
+    if (pool.length === 0) {
+      return NextResponse.json(
+        { success: false, error: "No hay destinos turísticos publicados que coincidan con la búsqueda." },
+        { status: 404 }
+      );
+    }
 
     // Construcción de días de itinerario
     const days: ItineraryDayPlan[] = [];
@@ -79,7 +109,7 @@ export async function POST(request: Request) {
     for (let day = 1; day <= profile.days; day++) {
       const dayPlaceIndex = (day - 1) % pool.length;
       const place = pool[dayPlaceIndex];
-      const costForDay = Math.min(Math.round(profile.budgetUsd / profile.days), 60);
+      const costForDay = Math.floor(profile.budgetUsd / profile.days);
       cumulativeCostUsd += costForDay;
 
       const stop: ItineraryStop = {
@@ -87,7 +117,7 @@ export async function POST(request: Request) {
         placeName: place.name,
         department: place.departmentName,
         timeOfDay: day % 2 === 1 ? "morning" : "afternoon",
-        description: `Visita guiada con baqueano local en ${place.name}. Exploración de senderos naturales y degustación gastronómica comunitaria.`,
+        description: buildStopDescription(place, profile),
         estimatedCostUsd: costForDay,
         coordinates: {
           latitude: place.latitude,
@@ -111,7 +141,7 @@ export async function POST(request: Request) {
 
     const itinerary: ItineraryResponse = {
       title: `Itinerario Territorial Baqueano: ${profile.days} Días en Nicaragua`,
-      summary: `Plan estructurado para ${profile.groupSize} personas enfocado en estilo ${profile.travelStyle} con presupuesto estimado de $${totalBudgetUsd} USD (C$ ${totalBudgetNio.toLocaleString("es-NI")} NIO).`,
+      summary: `Plan orientativo para ${profile.groupSize} personas, estilo ${profile.travelStyle}, construido con ${allStops.length} registros del catálogo. Presupuesto máximo distribuido: $${totalBudgetUsd} USD (C$ ${totalBudgetNio.toLocaleString("es-NI")} NIO). Precios y disponibilidad deben confirmarse antes de reservar.`,
       totalDays: profile.days,
       days,
       totalEstimatedBudgetUsd: totalBudgetUsd,
@@ -122,10 +152,10 @@ export async function POST(request: Request) {
         "Evita extraer flora, fauna o piedras volcánicas de las reservas naturales.",
         "Lleva tus propios recipientes reutilizables para no generar basura plástica."
       ],
-      localContactsSuggested: [
-        "Cooperativa de Guías Locales del Territorio",
-        "Red de Hospedajes Familiares y Comiderías Tradicionales"
-      ],
+      localContactsSuggested: Array.from(new Set(pool
+        .filter((place) => Boolean(place.phone || place.whatsapp || place.website))
+        .slice(0, 5)
+        .map((place) => `${place.name}: ${place.whatsapp || place.phone || place.website}`))),
       sourcesCount: allStops.length,
       generatedAtIso: new Date().toISOString()
     };
