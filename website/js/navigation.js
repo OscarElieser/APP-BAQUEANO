@@ -694,14 +694,259 @@ function initDropdownMiPais() {
   });
 }
 /**
- * Asegura la carga reactiva del módulo de sesión de usuario (user-session.js)
- * para adaptar el enlace del Navbar entre "Ops Center" (Admin/Auditor) y "Perfil" (Explorador).
- */
-function ensureUserSessionLoaded() {
+ * Asegura la carga reactiva del módulo de sesión de function ensureUserSessionLoaded() {
   if (!window.BaqueanoSession) {
     const script = document.createElement('script');
     script.src = 'js/user-session.js';
     document.head.appendChild(script);
+  }
+}
+ndow.BaqueanoSession) {
+    const script = document.createElement('script');
+    script.src = 'js/user-session.js';
+    document.head.appendChild(script);
+  }
+}
+
+/**
+ * Inicializa el acordeón desplegable y la interactividad del registro de negocios en el footer.
+ */
+function initFooterBizRegister() {
+  if (window.__bizRegisterInitialized) return;
+  const toggleBtn = document.getElementById('btnToggleBizForm');
+  const formCollapse = document.getElementById('bizFormCollapse');
+  const closeBtnTop = document.getElementById('btnCloseBizFormTop');
+  const form = document.getElementById('registerBusinessForm');
+
+  if (!toggleBtn && !formCollapse) return;
+  window.__bizRegisterInitialized = true;
+
+  function openBizForm(shouldScroll = true) {
+    if (!formCollapse) return;
+    formCollapse.classList.add('is-expanded');
+    formCollapse.setAttribute('aria-hidden', 'false');
+    if (toggleBtn) {
+      toggleBtn.classList.add('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      const textSpan = toggleBtn.querySelector('.btn-text');
+      if (textSpan) {
+        textSpan.innerHTML = '<i class="fa-solid fa-chevron-up"></i> Ocultar Formulario de Postulación';
+      }
+    }
+    if (shouldScroll) {
+      setTimeout(() => {
+        formCollapse.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const firstInput = document.getElementById('bizName');
+        if (firstInput) firstInput.focus();
+      }, 180);
+    }
+  }
+
+  function closeBizForm() {
+    if (!formCollapse) return;
+    formCollapse.classList.remove('is-expanded');
+    formCollapse.setAttribute('aria-hidden', 'true');
+    if (toggleBtn) {
+      toggleBtn.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      const textSpan = toggleBtn.querySelector('.btn-text');
+      if (textSpan) {
+        textSpan.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano';
+      }
+    }
+  }
+
+  function toggleBizForm() {
+    if (formCollapse && formCollapse.classList.contains('is-expanded')) {
+      closeBizForm();
+    } else {
+      openBizForm(true);
+    }
+  }
+
+  if (toggleBtn) toggleBtn.addEventListener('click', toggleBizForm);
+  if (closeBtnTop) closeBtnTop.addEventListener('click', closeBizForm);
+
+  // Abrir también al hacer clic en títulos o tags del banner
+  const bizTitles = document.querySelectorAll('.footer-biz-title, .footer-biz-tag');
+  bizTitles.forEach(el => {
+    if (el) {
+      el.style.cursor = 'pointer';
+      el.title = 'Haz clic para desplegar el formulario de postulación';
+      el.addEventListener('click', () => {
+        if (formCollapse && !formCollapse.classList.contains('is-expanded')) {
+          openBizForm(true);
+        }
+      });
+    }
+  });
+
+  // Enlace en Módulos Web del footer
+  const footerLinks = document.querySelectorAll('#footerLinkRegBiz, a[href="#registroNegocios"]');
+  footerLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openBizForm(true);
+    });
+  });
+
+  // Abrir automáticamente si la URL contiene el hash #registroNegocios
+  if (window.location.hash === '#registroNegocios') {
+    setTimeout(() => openBizForm(true), 250);
+  }
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#registroNegocios') {
+      openBizForm(true);
+    }
+  });
+
+  // Contador reactivo de caracteres
+  const descInput = document.getElementById('bizDescription');
+  const charCounter = document.getElementById('bizCharCounter');
+  if (descInput && charCounter) {
+    descInput.addEventListener('input', function() {
+      charCounter.textContent = `${this.value.length} / 300`;
+    });
+  }
+
+  // Manejo de archivo y preview de imagen
+  const photoInput = document.getElementById('bizPhoto');
+  const previewBox = document.getElementById('bizPhotoPreview');
+  const previewImg = document.getElementById('bizPreviewImg');
+  const placeholder = document.getElementById('bizUploadPlaceholder');
+  const btnRemovePhoto = document.getElementById('bizBtnRemovePhoto');
+
+  if (photoInput && previewBox && previewImg) {
+    photoInput.addEventListener('change', function(e) {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        if (file.size > 5 * 1024 * 1024) {
+          alert('La fotografía debe ser menor a 5MB.');
+          photoInput.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          previewImg.src = evt.target.result;
+          if (placeholder) placeholder.style.display = 'none';
+          previewBox.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    if (btnRemovePhoto) {
+      btnRemovePhoto.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        photoInput.value = '';
+        previewImg.src = '';
+        previewBox.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'flex';
+      });
+    }
+  }
+
+  // Envío del Formulario
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      form.querySelectorAll('.biz-error-msg').forEach(el => el.textContent = '');
+      form.querySelectorAll('.biz-input, .biz-select, .biz-textarea').forEach(el => el.classList.remove('has-error'));
+
+      let isValid = true;
+      function markError(fieldId, msg) {
+        const field = document.getElementById(fieldId);
+        const err = document.getElementById('err-' + fieldId);
+        if (field) field.classList.add('has-error');
+        if (err) err.textContent = msg;
+        if (isValid && field) field.focus();
+        isValid = false;
+      }
+
+      const name = document.getElementById('bizName')?.value.trim() || '';
+      const type = document.getElementById('bizType')?.value || '';
+      const owner = document.getElementById('bizOwner')?.value.trim() || '';
+      const category = document.getElementById('bizCategory')?.value || '';
+      const department = document.getElementById('bizDepartment')?.value || '';
+      const municipality = document.getElementById('bizMunicipality')?.value.trim() || '';
+      const address = document.getElementById('bizAddress')?.value.trim() || '';
+      const phone = document.getElementById('bizPhone')?.value.trim() || '';
+      const whatsapp = document.getElementById('bizWhatsapp')?.value.trim() || '';
+      const email = document.getElementById('bizEmail')?.value.trim() || '';
+      const website = document.getElementById('bizWebsite')?.value.trim() || '';
+      const price = document.getElementById('bizPrice')?.value.trim() || '';
+      const schedule = document.getElementById('bizSchedule')?.value.trim() || '';
+      const description = descInput ? descInput.value.trim() : '';
+      const terms = document.getElementById('bizTerms')?.checked;
+
+      if (!name) markError('bizName', 'Por favor ingresa el nombre del negocio');
+      if (!type) markError('bizType', 'Selecciona el tipo de negocio');
+      if (!owner) markError('bizOwner', 'Ingresa el nombre del propietario o responsable');
+      if (!category) markError('bizCategory', 'Selecciona la categoría Baqueano');
+      if (!department) markError('bizDepartment', 'Selecciona el departamento');
+      if (!municipality) markError('bizMunicipality', 'Ingresa el municipio');
+      if (!address) markError('bizAddress', 'Indica la dirección o referencia exacta');
+      if (!phone) markError('bizPhone', 'Ingresa un teléfono principal de contacto');
+      if (!description) markError('bizDescription', 'Escribe una breve descripción del servicio');
+      if (!terms) markError('bizTerms', 'Debes aceptar los términos de turismo justo');
+
+      if (!isValid) return;
+
+      const submitBtn = document.getElementById('btnSubmitBiz');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Registrando en Mesa Baqueano...';
+      }
+
+      const payload = {
+        name, businessType: type, owner, category, department, municipality,
+        address, phone, whatsapp: whatsapp || phone, email, website, price,
+        schedule, description, status: 'pendiente_auditoria', createdAt: new Date().toISOString()
+      };
+
+      // Guardar en Firestore si está disponible
+      try {
+        if (window.firebase && firebase.firestore) {
+          await firebase.firestore().collection('registro_negocios').add(payload);
+        }
+      } catch (err) {
+        console.warn('[Baqueano Biz] Nota al guardar en Firestore:', err);
+      }
+
+      // Preparar mensaje de WhatsApp oficial (+505 8443-1289)
+      const waMsg = `🇳🇮 *NUEVA POSTULACIÓN DE NEGOCIO — BAQUEANO NICARAGUA*\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `🏪 *Negocio:* ${name}\n` +
+        `📌 *Tipo:* ${type}\n` +
+        `👤 *Propietario:* ${owner}\n` +
+        `📍 *Ubicación:* ${municipality}, ${department}\n` +
+        `🧭 *Dirección:* ${address}\n` +
+        `📞 *Teléfono:* ${phone}\n` +
+        `💬 *WhatsApp:* ${whatsapp || phone}\n` +
+        `💰 *Precio estimado:* C$ ${price || 'N/D'}\n` +
+        `📝 *Descripción:* ${description}\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `_Solicito incorporación a la Mesa Técnica y Catálogo Baqueano._`;
+
+      const cleanWa = '50584431289';
+      const waUrl = `https://wa.me/${cleanWa}?text=${encodeURIComponent(waMsg)}`;
+
+      alert(`¡Gracias ${owner}! Tu negocio "${name}" ha sido postulado exitosamente. Se abrirá el WhatsApp oficial de la Mesa Baqueano (+505 8443-1289) para finalizar la verificación territorial.`);
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+      form.reset();
+      if (previewBox) previewBox.style.display = 'none';
+      if (placeholder) placeholder.style.display = 'flex';
+      if (charCounter) charCounter.textContent = '0 / 300';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+      closeBizForm();
+    });
   }
 }
 
@@ -721,6 +966,7 @@ function initializeNavigationModules() {
   initShareTools();
   initSmoothScroll();
   initDynamicFooter();
+  initFooterBizRegister();
   initDropdownMiPais();
 }
 

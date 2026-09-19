@@ -343,10 +343,80 @@
       return loadSession();
     },
 
-    saveUser: function(userObj) {
+    saveUser: async function(userObj) {
+      if (!userObj) return null;
+      // 1. Guardar localmente para reactividad instantánea
       saveSession(userObj);
       updateNavbar();
       window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: userObj }));
+
+      // 2. Persistencia en FIREBASE FIRESTORE (Almacenamiento Principal)
+      if (typeof window.firebase !== 'undefined' && window.firebase.firestore) {
+        try {
+          const db = window.firebase.firestore();
+          const uid = userObj.firebaseUid || 'guest_uid';
+          db.collection('users').doc(uid).set({
+            displayName: userObj.name || '',
+            name: userObj.name || '',
+            email: userObj.email || '',
+            phone: userObj.phone || '',
+            avatar: userObj.avatar || '',
+            role: userObj.role || 'explorer',
+            roleLabel: userObj.roleLabel || 'Explorador',
+            twoFactorEnabled: !!userObj.twoFactorEnabled,
+            settings: userObj.settings || { language: 'es', currency: 'USD' },
+            travelPreferences: userObj.travelPreferences || {},
+            savedPaymentMethods: userObj.savedPaymentMethods || [],
+            bookings: userObj.bookings || [],
+            billingHistory: userObj.billingHistory || [],
+            updatedAt: new Date().toISOString()
+          }, { merge: true }).then(() => {
+            console.info('🟢 [Baqueano Session] Perfil y configuración guardados en Firebase Firestore (Principal).');
+          }).catch((err) => {
+            console.warn('🟡 [Baqueano Session] Aviso al guardar en Firestore:', err.message);
+          });
+        } catch (fbErr) {
+          console.warn('🟡 [Baqueano Session] Excepción en Firestore:', fbErr.message);
+        }
+      }
+
+      // 3. Persistencia en SUPABASE (Almacenamiento de Respaldo)
+      if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
+        try {
+          const uid = userObj.firebaseUid || 'guest_uid';
+          window.baqueanoSupabase.from('user_profiles').upsert({
+            id: uid,
+            email: userObj.email || '',
+            display_name: userObj.name || '',
+            phone: userObj.phone || '',
+            avatar_url: userObj.avatar || '',
+            role: userObj.role || 'explorer',
+            settings: userObj.settings || {},
+            travel_preferences: userObj.travelPreferences || {},
+            two_factor_enabled: !!userObj.twoFactorEnabled,
+            updated_at: new Date().toISOString()
+          }).then(({ error }) => {
+            if (error) {
+              // Guardar en copia local de respaldo de Supabase
+              localStorage.setItem('baqueano_supabase_user_backup', JSON.stringify({
+                uid,
+                email: userObj.email,
+                data: userObj,
+                syncedAt: new Date().toISOString()
+              }));
+              console.info('🔵 [Baqueano Session] Respaldo Supabase sincronizado en nodo local de seguridad.');
+            } else {
+              console.info('🔵 [Baqueano Session] Perfil y configuración respaldados con éxito en Supabase Cloud.');
+            }
+          }).catch((sbErr) => {
+            console.warn('🟡 [Baqueano Session] Aviso al guardar en Supabase:', sbErr.message);
+          });
+        } catch (sbEx) {
+          console.warn('🟡 [Baqueano Session] Excepción en Supabase:', sbEx.message);
+        }
+      }
+
+      return userObj;
     },
 
     login: async function(email, password) {
@@ -475,14 +545,33 @@
     },
 
     logout: async function() {
+      // 1. Cierre seguro de Firebase con timeout de salvaguarda (1.2s)
       try {
         if (window.firebase && window.firebase.auth) {
-          await window.firebase.auth().signOut();
+          await Promise.race([
+            window.firebase.auth().signOut(),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase signOut timeout')), 1200))
+          ]);
         }
       } catch (err) {
-        console.warn('[Baqueano Session] Aviso en cierre de sesión Firebase:', err);
+        console.warn('[Baqueano Session] Aviso en cierre de sesión Firebase:', err.message);
       }
+
+      // 2. Cierre seguro de Supabase Auth si está presente
+      try {
+        if (window.baqueanoSupabase && window.baqueanoSupabase.auth) {
+          await Promise.race([
+            window.baqueanoSupabase.auth.signOut(),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Supabase signOut timeout')), 1000))
+          ]);
+        }
+      } catch (sbErr) {
+        console.warn('[Baqueano Session] Aviso en cierre de sesión Supabase:', sbErr.message);
+      }
+
+      // 3. Limpiar almacenamiento local y sesión
       localStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(STORAGE_KEY);
       updateNavbar();
       window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: null }));
       return null;
