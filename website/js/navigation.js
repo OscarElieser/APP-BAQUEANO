@@ -694,14 +694,11 @@ function initDropdownMiPais() {
   });
 }
 /**
- * Asegura la carga reactiva del módulo de sesión de function ensureUserSessionLoaded() {
+ * Asegura la carga reactiva del módulo de sesión de usuario (user-session.js)
+ * para adaptar el enlace del Navbar entre "Ops Center" (Admin/Auditor) y "Perfil" (Explorador).
+ */
+function ensureUserSessionLoaded() {
   if (!window.BaqueanoSession) {
-    const script = document.createElement('script');
-    script.src = 'js/user-session.js';
-    document.head.appendChild(script);
-  }
-}
-ndow.BaqueanoSession) {
     const script = document.createElement('script');
     script.src = 'js/user-session.js';
     document.head.appendChild(script);
