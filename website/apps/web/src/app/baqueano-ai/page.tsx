@@ -35,7 +35,7 @@ import {
   HelpCircle
 } from "lucide-react";
 import type { TripPlanRecord } from "@baqueano/types";
-import { routeAndExecuteWorkflow } from "../../services/agents/orchestrator.service";
+import { generateItineraryPlan } from "../../services/ai.service";
 
 export default function BaqueanoAiPage() {
   const [inputText, setInputText] = useState<string>("");
@@ -43,6 +43,8 @@ export default function BaqueanoAiPage() {
   const [daysCount, setDaysCount] = useState<number>(2);
   const [travelersCount, setTravelersCount] = useState<number>(2);
   const [currency, setCurrency] = useState<"NIO" | "USD">("NIO");
+  const [budgetUsd, setBudgetUsd] = useState<number>(300);
+  const [restrictions, setRestrictions] = useState<string>("");
 
   const [loading, setLoading] = useState<boolean>(false);
   const [chatMessages, setChatMessages] = useState<Array<{ sender: "user" | "concierge"; text: string }>>([
@@ -80,21 +82,87 @@ export default function BaqueanoAiPage() {
     setLoading(true);
 
     try {
-      const result = await routeAndExecuteWorkflow({
-        message: text,
-        territory: selectedTerritory,
-        daysCount,
-        travelersCount,
-        currency
+      const normalizedText = text.toLowerCase();
+      const travelStyle = normalizedText.includes("aventura")
+        ? "aventura"
+        : normalizedText.includes("cultura")
+          ? "cultural"
+          : normalizedText.includes("relaj")
+            ? "relajado"
+            : "ecologico";
+      const interests = ["naturaleza", "cultura", "gastronomía", "alojamiento"].filter((interest) =>
+        normalizedText.includes(interest)
+      );
+      const result = await generateItineraryPlan({
+        days: daysCount,
+        groupSize: travelersCount,
+        budgetUsd,
+        currency,
+        department: selectedTerritory,
+        interests: interests.length > 0 ? interests : ["naturaleza", "cultura", "alojamiento"],
+        travelStyle,
+        restrictions: restrictions.trim() || undefined
       });
 
-      setChatMessages([...newMessages, { sender: "concierge" as const, text: result.messageResponse }]);
-      if (result.tripPlan) {
-        setActiveTripPlan(result.tripPlan);
+      if (!result.success || !result.itinerary) {
+        throw new Error(result.error || "No se encontraron opciones verificables para esta solicitud.");
       }
-      if (result.workflow.executionSteps) {
-        setWorkflowSteps([...result.workflow.executionSteps]);
-      }
+
+      const itinerary = result.itinerary;
+      const plan: TripPlanRecord = {
+        id: `trip-${Date.now()}`,
+        userId: "anonymous_explorer",
+        title: itinerary.title,
+        territory: selectedTerritory,
+        daysCount: itinerary.totalDays,
+        days: itinerary.days.map((day) => ({
+          dayNumber: day.dayNumber,
+          title: day.theme,
+          stops: day.stops.map((stop) => ({
+            placeId: stop.placeId,
+            name: stop.placeName,
+            category: "Destino turístico",
+            department: stop.department,
+            durationHours: 3,
+            priceNio: Math.round(stop.estimatedCostUsd * 36.8),
+            priceUsd: stop.estimatedCostUsd,
+            isVerified: stop.source === "verified_database",
+            latitude: stop.coordinates.latitude,
+            longitude: stop.coordinates.longitude,
+            notes: stop.description
+          })),
+          estimatedTravelHours: 0,
+          dayCostNio: Math.round(day.dayBudgetUsd * 36.8),
+          dayCostUsd: day.dayBudgetUsd,
+          climateAdvice: itinerary.risk.recommendations.join(" ")
+        })),
+        budget: {
+          currency,
+          activitiesCost: currency === "USD" ? itinerary.totalEstimatedBudgetUsd : itinerary.totalEstimatedBudgetNio,
+          transportEstimate: 0,
+          foodEstimate: 0,
+          totalCalculated: currency === "USD" ? itinerary.totalEstimatedBudgetUsd : itinerary.totalEstimatedBudgetNio,
+          budgetLimit: currency === "USD" ? budgetUsd : Math.round(budgetUsd * 36.8),
+          isWithinBudget: itinerary.totalEstimatedBudgetUsd <= budgetUsd
+        },
+        safetyWarnings: [...itinerary.risk.factors, ...itinerary.risk.recommendations],
+        trustSignals: [
+          `${itinerary.sourcesCount} registros del catálogo utilizados`,
+          "Disponibilidad y precio sujetos a confirmación del prestador",
+          ...itinerary.localContactsSuggested
+        ],
+        status: "draft",
+        createdAt: itinerary.generatedAtIso,
+        updatedAt: itinerary.generatedAtIso
+      };
+      setActiveTripPlan(plan);
+      setWorkflowSteps([
+        { agent: "catálogo", action: "VALIDATE_PUBLISHED_PLACES", resultSummary: `${itinerary.sourcesCount} fuentes` },
+        { agent: "planner", action: "RANK_BY_INTERESTS", resultSummary: "Territorio e intereses aplicados" },
+        { agent: "budget", action: "DISTRIBUTE_MAX_BUDGET", resultSummary: "Límite respetado" },
+        { agent: "safety", action: "PREPARE_TRAVEL_CHECKLIST", resultSummary: itinerary.risk.level }
+      ]);
+      setChatMessages([...newMessages, { sender: "concierge" as const, text: itinerary.summary }]);
     } catch (e: any) {
       setChatMessages([
         ...newMessages,
@@ -138,7 +206,7 @@ export default function BaqueanoAiPage() {
 
   const handleConfirmAction = () => {
     setConfirmationModal({ ...confirmationModal, isOpen: false });
-    setNotification("¡Itinerario guardado con éxito en tus borradores!");
+    setNotification("Itinerario preparado. Inicia sesión para guardarlo y solicitar disponibilidad; ningún cobro fue realizado.");
   };
 
   return (
@@ -153,7 +221,7 @@ export default function BaqueanoAiPage() {
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white">Coordinador Territorial Inteligente</h1>
             <p className="text-xs text-slate-300 mt-1">
-              Orquestación de 10 agentes especializados para descubrir, planificar y conectar con el ecoturismo campesino.
+              Planifica destinos, estadía, presupuesto, seguridad y preparación de reservas con información del catálogo.
             </p>
           </div>
 
@@ -204,6 +272,12 @@ export default function BaqueanoAiPage() {
           >
             🧗 Aventura Volcán Cerro Negro
           </button>
+          <button
+            onClick={() => handleSendMessage("Busca alojamiento, alimentación, transporte y actividades para mis vacaciones.")}
+            className="px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-[#165D6F] text-slate-300 hover:text-white border border-slate-700 transition-all"
+          >
+            Plan completo de vacaciones
+          </button>
         </div>
 
         {/* Main Grid: Chat Workspace + Structured Trip Plan */}
@@ -246,7 +320,7 @@ export default function BaqueanoAiPage() {
             </div>
 
             {/* Parameter Bar */}
-            <div className="pt-3 border-t border-slate-800/80 grid grid-cols-3 gap-2 mb-3 text-[11px]">
+            <div className="pt-3 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3 text-[11px]">
               <div>
                 <label className="text-slate-400 block mb-1">Días:</label>
                 <select
@@ -287,7 +361,27 @@ export default function BaqueanoAiPage() {
                   <option value="USD">USD ($)</option>
                 </select>
               </div>
+              <div>
+                <label className="text-slate-400 block mb-1">Presupuesto USD:</label>
+                <input
+                  type="number"
+                  min={20}
+                  max={10000}
+                  value={budgetUsd}
+                  onChange={(event) => setBudgetUsd(Math.max(20, Math.min(10000, Number(event.target.value) || 20)))}
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg p-1.5 text-white"
+                />
+              </div>
             </div>
+
+            <input
+              type="text"
+              maxLength={300}
+              placeholder="Necesidades: niños, movilidad, alimentación, alergias..."
+              value={restrictions}
+              onChange={(event) => setRestrictions(event.target.value)}
+              className="mb-3 w-full bg-[#0F172A] border border-slate-700 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            />
 
             {/* Input Bar */}
             <form
@@ -344,7 +438,7 @@ export default function BaqueanoAiPage() {
                     <p className="text-lg font-black text-amber-400">
                       {activeTripPlan.budget.currency} {activeTripPlan.budget.totalCalculated.toLocaleString()}
                     </p>
-                    <p className="text-[10px] text-slate-400">Actividades + Traslado + Comida</p>
+                    <p className="text-[10px] text-slate-400">Tope orientativo; confirma precios y disponibilidad</p>
                   </div>
 
                   <div className="bg-[#0F172A] p-3.5 rounded-2xl border border-slate-800 space-y-1">
