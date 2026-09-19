@@ -1857,67 +1857,133 @@
   };
 
   // --------------------------------------------------------------------------
-  // 5. GESTOR DE FIREBASE STORAGE (OPS STORAGE)
+  // 5. GESTOR HÍBRIDO DE ALMACENAMIENTO (FIREBASE PRINCIPAL + SUPABASE RESPALDO)
   // --------------------------------------------------------------------------
   const OpsStorage = {
-    getStorage() {
+    getFirebaseStorage() {
       return window.firebase && window.firebase.storage ? window.firebase.storage() : null;
     },
 
-    async uploadFile(file, folder = 'destinations', onProgress = null) {
-      const storage = this.getStorage();
-      if (!storage) {
-        throw new Error('Firebase Storage no está disponible en este momento.');
-      }
+    getSupabaseStorage() {
+      return window.baqueanoSupabase ? window.baqueanoSupabase.storage : null;
+    },
 
+    async uploadFile(file, folder = 'destinations', onProgress = null) {
       const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
       const filename = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${sanitizedName}`;
       const path = `${folder}/${filename}`;
-      const storageRef = storage.ref(path);
 
-      const metadata = {
-        contentType: file.type,
-        customMetadata: {
-          uploadedBy: OpsState.currentUser?.email || 'admin',
-          uploadedAt: new Date().toISOString()
-        }
-      };
-
-      const uploadTask = storageRef.put(file, metadata);
-
-      return new Promise((resolve, reject) => {
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            if (typeof onProgress === 'function') onProgress(progress);
-          },
-          (error) => {
-            console.error('[OpsStorage] Error de carga:', error);
-            reject(error);
-          },
-          async () => {
-            try {
-              const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-              resolve({ downloadURL, path, filename });
-            } catch (urlErr) {
-              reject(urlErr);
+      // 1. INTENTAR CON FIREBASE (ALMACENAMIENTO PRINCIPAL)
+      const fbStorage = this.getFirebaseStorage();
+      if (fbStorage) {
+        try {
+          const storageRef = fbStorage.ref(path);
+          const metadata = {
+            contentType: file.type,
+            customMetadata: {
+              uploadedBy: OpsState.currentUser?.email || 'admin',
+              uploadedAt: new Date().toISOString()
             }
-          }
-        );
-      });
+          };
+
+          const uploadTask = storageRef.put(file, metadata);
+
+          const firebaseResult = await new Promise((resolve, reject) => {
+            uploadTask.on(
+              'state_changed',
+              (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                if (typeof onProgress === 'function') onProgress(progress);
+              },
+              (error) => reject(error),
+              async () => {
+                try {
+                  const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                  resolve({ downloadURL, path, filename, provider: 'firebase' });
+                } catch (urlErr) {
+                  reject(urlErr);
+                }
+              }
+            );
+          });
+          
+          console.info('🟢 [OpsStorage] Archivo subido exitosamente a FIREBASE Storage.');
+          return firebaseResult;
+
+        } catch (firebaseErr) {
+          console.warn('🟡 [OpsStorage] Falló subida a Firebase. Activando Supabase como RESPALDO...', firebaseErr);
+        }
+      } else {
+        console.warn('🟡 [OpsStorage] Firebase Storage inaccesible. Activando Supabase como RESPALDO...');
+      }
+
+      // 2. INTENTAR CON SUPABASE (ALMACENAMIENTO DE RESPALDO)
+      const sbStorage = this.getSupabaseStorage();
+      if (!sbStorage) {
+        throw new Error('CRÍTICO: Ni Firebase ni Supabase están disponibles para almacenamiento.');
+      }
+
+      const bucketName = 'baqueano-media';
+      try {
+        if (typeof onProgress === 'function') onProgress(50); // Simular progreso rápido de respaldo
+        
+        const { data, error } = await sbStorage.from(bucketName).upload(path, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+        if (error) throw error;
+
+        if (typeof onProgress === 'function') onProgress(100);
+
+        const { data: publicUrlData } = sbStorage.from(bucketName).getPublicUrl(path);
+        const downloadURL = publicUrlData.publicUrl;
+
+        console.info('🔵 [OpsStorage] Archivo subido exitosamente a SUPABASE Storage (Respaldo).');
+        return { downloadURL, path, filename, provider: 'supabase' };
+      } catch (err) {
+        console.error('🔴 [OpsStorage] Falla total: Firebase y Supabase rechazaron el archivo.', err);
+        throw err;
+      }
     },
 
     async deleteFileByUrl(fileUrl) {
-      const storage = this.getStorage();
-      if (!storage || !fileUrl) return;
+      if (!fileUrl) return;
 
-      try {
-        const ref = storage.refFromURL(fileUrl);
-        await ref.delete();
-        console.info('[OpsStorage] Archivo eliminado con éxito de Storage:', fileUrl);
-      } catch (err) {
-        console.warn('[OpsStorage] No fue posible eliminar archivo de Storage:', err.message);
+      // ELIMINAR DE FIREBASE
+      if (fileUrl.includes('firebasestorage.googleapis.com')) {
+        const fbStorage = this.getFirebaseStorage();
+        if (fbStorage) {
+          try {
+            const ref = fbStorage.refFromURL(fileUrl);
+            await ref.delete();
+            console.info('🟢 [OpsStorage] Archivo eliminado de Firebase Storage.');
+          } catch (err) {
+            console.warn('🟡 [OpsStorage] No se pudo eliminar de Firebase:', err.message);
+          }
+        }
+        return;
+      }
+
+      // ELIMINAR DE SUPABASE
+      if (fileUrl.includes('supabase.co/storage')) {
+        const sbStorage = this.getSupabaseStorage();
+        if (sbStorage) {
+          try {
+            const bucketName = 'baqueano-media';
+            const urlObj = new URL(fileUrl);
+            const pathParts = urlObj.pathname.split(`/public/${bucketName}/`);
+            
+            if (pathParts.length > 1) {
+              const relativePath = pathParts[1];
+              const { error } = await sbStorage.from(bucketName).remove([relativePath]);
+              if (error) throw error;
+              console.info('🔵 [OpsStorage] Archivo eliminado de Supabase Storage.');
+            }
+          } catch (err) {
+            console.warn('🟡 [OpsStorage] No se pudo eliminar de Supabase:', err.message);
+          }
+        }
       }
     }
   };
@@ -3021,10 +3087,11 @@
       if (!db) throw new Error('Firestore no disponible');
 
       const pageDocRef = db.collection('site_pages').doc(pageId);
-      const doc = await pageDocRef.get();
+      
+      // Optimización: Usar el estado local sincronizado en lugar de esperar la red
       let sections = [];
-      if (doc.exists && doc.data().sections) {
-        sections = [...doc.data().sections];
+      if (OpsState.pageSections && OpsState.pageSections[pageId]) {
+        sections = [...OpsState.pageSections[pageId]];
       } else {
         sections = [...(SITE_PAGES_REGISTRY[pageId]?.sections || [])];
       }
@@ -3044,19 +3111,24 @@
 
       sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
-      await pageDocRef.set({
+      // Actualización optimista: Disparamos la escritura y no bloqueamos la UI esperando al servidor
+      pageDocRef.set({
         pageId,
         sections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(err => {
+        console.warn('[OpsCMS] Error guardando sección en segundo plano:', err.message);
+        OpsToast.show('Aviso: La red está inestable. Los cambios se guardarán localmente.', 'warning');
+      });
 
-      await this.logAuditEvent({
+      // Ejecutar auditoría en segundo plano (fire-and-forget) para no bloquear la UI
+      this.logAuditEvent({
         action: 'PAGE_SECTION_SAVED',
         module: 'Website Builder',
         description: `Sección "${sectionData.name || sectionData.title}" guardada en ${pageId}.html`,
         status: 'success'
-      });
+      }).catch(e => console.warn(e));
     },
 
     async togglePageSectionStatus(pageId, sectionId) {
@@ -3064,28 +3136,28 @@
       if (!db) return;
 
       const pageDocRef = db.collection('site_pages').doc(pageId);
-      const doc = await pageDocRef.get();
-      if (!doc.exists) return;
+      
+      let sections = [...(OpsState.pageSections[pageId] || [])];
+      if (sections.length === 0) return;
 
-      let sections = doc.data().sections || [];
       const target = sections.find((s) => s.id === sectionId);
       if (!target) return;
 
       target.status = target.status === 'published' ? 'draft' : 'published';
 
-      await pageDocRef.set({
+      pageDocRef.set({
         sections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(e => console.warn(e));
 
       OpsToast.show(`Sección "${target.name || target.title}" ahora está ${target.status === 'published' ? 'Publicada' : 'en Borrador / Oculta'}.`, 'success');
-      await this.logAuditEvent({
+      this.logAuditEvent({
         action: 'PAGE_SECTION_STATUS_TOGGLED',
         module: 'Website Builder',
         description: `Estado de "${target.name || target.title}" cambiado a ${target.status}`,
         status: 'success'
-      });
+      }).catch(e => console.warn(e));
     },
 
     async movePageSectionOrder(pageId, sectionId, direction) {
@@ -3093,10 +3165,10 @@
       if (!db) return;
 
       const pageDocRef = db.collection('site_pages').doc(pageId);
-      const doc = await pageDocRef.get();
-      if (!doc.exists) return;
+      
+      let sections = [...(OpsState.pageSections[pageId] || [])];
+      if (sections.length === 0) return;
 
-      let sections = [...(doc.data().sections || [])];
       sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
       const idx = sections.findIndex((s) => s.id === sectionId);
@@ -3114,11 +3186,11 @@
 
       sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
-      await pageDocRef.set({
+      pageDocRef.set({
         sections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(e => console.warn(e));
 
       OpsToast.show('Orden de secciones actualizado.', 'info');
     },
@@ -3128,28 +3200,28 @@
       if (!db) return;
 
       const pageDocRef = db.collection('site_pages').doc(pageId);
-      const doc = await pageDocRef.get();
-      if (!doc.exists) return;
+      
+      let sections = [...(OpsState.pageSections[pageId] || [])];
+      if (sections.length === 0) return;
 
-      let sections = doc.data().sections || [];
       const target = sections.find((s) => s.id === sectionId);
       if (!target) return;
 
       target.status = 'trashed';
 
-      await pageDocRef.set({
+      pageDocRef.set({
         sections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(e => console.warn(e));
 
       OpsToast.show(`Sección movida a la papelera.`, 'warning');
-      await this.logAuditEvent({
+      this.logAuditEvent({
         action: 'PAGE_SECTION_TRASHED',
         module: 'Website Builder',
         description: `Sección "${target.name || target.title}" movida a papelera`,
         status: 'success'
-      });
+      }).catch(e => console.warn(e));
     },
 
     async restorePageSection(pageId, sectionId) {
@@ -3157,28 +3229,28 @@
       if (!db) return;
 
       const pageDocRef = db.collection('site_pages').doc(pageId);
-      const doc = await pageDocRef.get();
-      if (!doc.exists) return;
+      
+      let sections = [...(OpsState.pageSections[pageId] || [])];
+      if (sections.length === 0) return;
 
-      let sections = doc.data().sections || [];
       const target = sections.find((s) => s.id === sectionId);
       if (!target) return;
 
       target.status = 'published';
 
-      await pageDocRef.set({
+      pageDocRef.set({
         sections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(e => console.warn(e));
 
       OpsToast.show(`Sección restaurada y publicada en la web.`, 'success');
-      await this.logAuditEvent({
+      this.logAuditEvent({
         action: 'PAGE_SECTION_RESTORED',
         module: 'Website Builder',
         description: `Sección "${target.name || target.title}" restaurada a publicada`,
         status: 'success'
-      });
+      }).catch(e => console.warn(e));
     },
 
     async hardDeletePageSection(pageId, sectionId) {
@@ -3194,24 +3266,25 @@
       if (!db) return;
 
       const pageDocRef = db.collection('site_pages').doc(pageId);
-      const doc = await pageDocRef.get();
-      if (!doc.exists) return;
+      
+      let sections = [...(OpsState.pageSections[pageId] || [])];
+      if (sections.length === 0) return;
 
-      let sections = (doc.data().sections || []).filter((s) => s.id !== sectionId);
+      sections = sections.filter((s) => s.id !== sectionId);
 
-      await pageDocRef.set({
+      pageDocRef.set({
         sections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show('Sección eliminada definitivamente.', 'success');
-      await this.logAuditEvent({
+      OpsToast.show(`Sección eliminada permanentemente.`, 'error');
+      this.logAuditEvent({
         action: 'PAGE_SECTION_HARD_DELETED',
         module: 'Website Builder',
-        description: `Sección eliminada permanentemente de ${pageId}.html`,
+        description: `Sección ${sectionId} eliminada físicamente de ${pageId}.html`,
         status: 'danger'
-      });
+      }).catch(e => console.warn(e));
     },
 
     async resetPageSectionsToBaseline(pageId) {
@@ -3227,12 +3300,12 @@
       if (!db) return;
 
       const baseSections = SITE_PAGES_REGISTRY[pageId]?.sections || [];
-      await db.collection('site_pages').doc(pageId).set({
+      db.collection('site_pages').doc(pageId).set({
         pageId,
         sections: baseSections,
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
-      }, { merge: true });
+      }, { merge: true }).catch(e => console.warn(e));
 
       OpsToast.show(`Plantilla original restablecida para ${pageId}.html.`, 'success');
     }

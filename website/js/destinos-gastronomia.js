@@ -510,7 +510,77 @@
         document.querySelectorAll('.dest-card-pro').forEach(card => card.style.display = 'flex');
       });
     }
+    // Comportamiento de Ancla (Hash) inicial
+    handleHashNavigation();
   }
+
+  // Lógica de navegación por Hash (Ancla)
+  function handleHashNavigation() {
+    if (!window.location.hash) return;
+    const hashVal = window.location.hash.substring(1);
+    if (!hashVal) return;
+
+    // Registrar telemetría de interacción específica (Círculo Dorado: Qué)
+    if (typeof firebase !== 'undefined' && firebase.firestore) {
+      try {
+        let userEmail = 'Visitante Anónimo';
+        try {
+          const sessionData = sessionStorage.getItem('baqueano_active_user');
+          if (sessionData) {
+            const parsed = JSON.parse(sessionData);
+            if (parsed && parsed.email) userEmail = parsed.email;
+          }
+        } catch(e) {}
+        
+        firebase.firestore().collection('audit_logs').add({
+          action: 'DESTINATION_VIEWED',
+          module: 'Telemetría Web',
+          description: 'Usuario exploró ficha de destino: ' + hashVal,
+          performedBy: userEmail,
+          timestamp: new Date().toISOString(),
+          status: 'success'
+        }).catch(e => console.warn(e));
+      } catch(e) {}
+    }
+
+    // Intentar ubicar el elemento hasta por 3 segundos (por si la BD tarda en cargar)
+    let attempts = 0;
+    const searchInput = document.getElementById('searchDestinations');
+    
+    // Auto-completar búsqueda
+    if (searchInput) {
+      let searchTerm = hashVal.replace(/-/g, ' ');
+      if (searchTerm.includes('_')) searchTerm = searchTerm.split('_').slice(1, -1).join(' ');
+      if (searchTerm.toLowerCase() !== 'all') {
+        searchInput.value = searchTerm;
+        searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+
+    const tryScroll = setInterval(() => {
+      let targetEl = document.getElementById(hashVal) || document.querySelector(`[data-id="${hashVal}"]`);
+      if (targetEl) {
+        clearInterval(tryScroll);
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const isGrid = targetEl.classList.contains('destinations-showcase-grid');
+        if (!isGrid) {
+          targetEl.style.transition = 'box-shadow 0.5s ease';
+          targetEl.style.boxShadow = '0 0 20px 5px var(--baq-primary, #F65E01)';
+          setTimeout(() => { targetEl.style.boxShadow = ''; }, 2500);
+        }
+      } else {
+        attempts++;
+        if (attempts > 15) { // 3 segundos max
+          clearInterval(tryScroll);
+          const grid = document.querySelector('.destinations-showcase-grid');
+          if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, 200);
+  }
+
+  // Escuchar cambios de hash en la misma página (Navegación SPA)
+  window.addEventListener('hashchange', handleHashNavigation);
 
   // Exponer API global
   window.BaqueanoDestinos = {
