@@ -60,27 +60,38 @@
     // INICIALIZACIÓN AUTOMÁTICA SEGÚN LA PÁGINA ACTIVA
     // ------------------------------------------------------------------------
     init() {
-      console.info('[BaqueanoPublicSync] Conectando páginas públicas con Cloud Firestore...');
-      this.syncGlobalAnnouncement();
-      this.syncPublishedNotifications();
-      this.syncDynamicPageSections();
+      if (this._initialized) return;
+      this._initialized = true;
+      console.info('[BaqueanoPublicSync] Sincronización pública optimizada iniciada.');
+      const startSync = () => {
+        this.syncGlobalAnnouncement();
+        this.syncPublishedNotifications();
+        this.syncDynamicPageSections();
 
-      const path = window.location.pathname.toLowerCase();
-      if (path.includes('aliados.html') || document.querySelector('.allies-3d-grid')) {
-        this.syncAlliesPage();
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('aliados.html') || document.querySelector('.allies-3d-grid')) this.syncAlliesPage();
+        if (document.querySelector('.partners-infinity-section')) this.syncPartnerTracks();
+        if (path.includes('destinos.html') || document.querySelector('.dest-card-pro, #destinosGrid, .destinos-grid, .featured-destinations')) this.syncDestinationsCatalog();
+        if (path.includes('gastronomia.html') || document.querySelector('.gastronomy-grid')) this.syncGastronomyPage();
+        if (path.includes('historia.html') || document.querySelector('.timeline-periods-flow')) this.syncHistoryPage();
+      };
+      if ('requestIdleCallback' in window) window.requestIdleCallback(startSync, { timeout: 1200 });
+      else setTimeout(startSync, 60);
+    },
+
+    readCache(key) {
+      try {
+        const cached = JSON.parse(localStorage.getItem(`bq_cms_${key}`) || 'null');
+        return cached && Date.now() - cached.savedAt < 15 * 60 * 1000 ? cached.value : null;
+      } catch (_) {
+        return null;
       }
-      if (document.querySelector('.partners-infinity-section')) {
-        this.syncPartnerTracks();
-      }
-      if (path.includes('destinos.html') || document.querySelector('.dest-card-pro, #destinosGrid, .destinos-grid, .featured-destinations')) {
-        this.syncDestinationsCatalog();
-      }
-      if (path.includes('gastronomia.html') || document.querySelector('.gastronomy-grid')) {
-        this.syncGastronomyPage();
-      }
-      if (path.includes('historia.html') || document.querySelector('.timeline-periods-flow')) {
-        this.syncHistoryPage();
-      }
+    },
+
+    writeCache(key, value) {
+      try {
+        localStorage.setItem(`bq_cms_${key}`, JSON.stringify({ savedAt: Date.now(), value }));
+      } catch (_) {}
     },
 
     // ------------------------------------------------------------------------
@@ -96,16 +107,20 @@
         return;
       }
 
-      db.collection('site_pages').doc(pageId).onSnapshot(
-        (doc) => {
+      const cacheKey = `page_${pageId}`;
+      const cachedSections = this.readCache(cacheKey);
+      if (Array.isArray(cachedSections) && cachedSections.length) this.applyPageSections(pageId, cachedSections);
+
+      db.collection('site_pages').doc(pageId).get()
+        .then((doc) => {
           if (!doc.exists) return;
           const data = doc.data();
           const sections = data.sections || [];
           if (!sections.length) return;
+          this.writeCache(cacheKey, sections);
           this.applyPageSections(pageId, sections);
-        },
-        (err) => console.warn(`[BaqueanoPublicSync] Error en secciones de ${pageId}:`, err.message)
-      );
+        })
+        .catch((err) => console.warn(`[BaqueanoPublicSync] Error en secciones de ${pageId}:`, err.message));
     },
 
     applyPageSections(pageId, sections) {
@@ -379,27 +394,25 @@
         return;
       }
 
-      // Escuchar 'destinations' en tiempo real
-      db.collection('destinations').onSnapshot(
-        (snapshot) => {
+      // Lectura acotada: evita dos listeners permanentes y conserva el HTML como respaldo.
+      db.collection('destinations').limit(150).get()
+        .then((snapshot) => {
           if (!snapshot.empty) {
             const items = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
             this.applyDestinationUpdates(items);
           }
-        },
-        (err) => console.warn('[BaqueanoPublicSync] Error en destinations:', err.message)
-      );
+        })
+        .catch((err) => console.warn('[BaqueanoPublicSync] Error en destinations:', err.message));
 
-      // También escuchar 'places' como espejo defensivo
-      db.collection('places').onSnapshot(
-        (snapshot) => {
+      // Espejo defensivo, también acotado y de una sola ejecución.
+      db.collection('places').limit(150).get()
+        .then((snapshot) => {
           if (!snapshot.empty) {
             const items = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
             this.applyDestinationUpdates(items);
           }
-        },
-        (err) => console.warn('[BaqueanoPublicSync] Error en places:', err.message)
-      );
+        })
+        .catch((err) => console.warn('[BaqueanoPublicSync] Error en places:', err.message));
     },
 
     applyDestinationUpdates(items) {
@@ -474,10 +487,7 @@
       const db = this.getDb();
       if (!db) return;
 
-      db.collection('app_config').doc('global').onSnapshot(
-        (doc) => {
-          if (!doc.exists) return;
-          const data = doc.data();
+      const applyAnnouncement = (data) => {
           const announcement = (data.announcementText || '').trim();
 
           let bar = document.getElementById('bqGlobalAnnouncementBar');
@@ -495,9 +505,17 @@
 
           bar.style.display = 'flex';
           bar.innerHTML = `<i class="fa-solid fa-bullhorn"></i> <span>${this.escape(announcement)}</span>`;
-        },
-        (err) => console.warn('[BaqueanoPublicSync] Error en anuncio global:', err.message)
-      );
+      };
+      const cached = this.readCache('announcement');
+      if (cached) applyAnnouncement(cached);
+      db.collection('app_config').doc('global').get()
+        .then((doc) => {
+          if (!doc.exists) return;
+          const data = doc.data();
+          this.writeCache('announcement', data);
+          applyAnnouncement(data);
+        })
+        .catch((err) => console.warn('[BaqueanoPublicSync] Error en anuncio global:', err.message));
     },
 
     // ------------------------------------------------------------------------
@@ -506,7 +524,7 @@
     syncPublishedNotifications() {
       const db = this.getDb();
       if (!db) return;
-      db.collection('notifications').onSnapshot((snapshot) => {
+      db.collection('notifications').where('status', '==', 'published').limit(8).get().then((snapshot) => {
         const published = snapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .filter((item) => (item.status || 'draft') === 'published' && item.permanentlyDeleted !== true)
@@ -530,7 +548,7 @@
           <span style="font-size:.84rem;color:#cbd5e1">${this.escape(item.message || item.description || '')}</span>
           ${link ? `<a href="${this.escape(link)}" style="display:block;margin-top:.65rem;color:#F4E6C1;font-weight:700">Ver información</a>` : ''}
         `;
-      }, (error) => console.warn('[BaqueanoPublicSync] Error en notifications:', error.message));
+      }).catch((error) => console.warn('[BaqueanoPublicSync] Error en notifications:', error.message));
     },
 
     // ------------------------------------------------------------------------

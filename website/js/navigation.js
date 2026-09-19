@@ -30,6 +30,44 @@
 
 let currentGpsCoords = "Ubicación aún no disponible";
 
+function initRuntimeObservability() {
+  if (window.__baqueanoObservabilityReady) return;
+  window.__baqueanoObservabilityReady = true;
+  const record = (type, detail) => {
+    const entry = { type, detail, path: location.pathname, at: new Date().toISOString() };
+    try {
+      const previous = JSON.parse(sessionStorage.getItem('baqueano_runtime_trace') || '[]');
+      sessionStorage.setItem('baqueano_runtime_trace', JSON.stringify([...previous.slice(-19), entry]));
+    } catch (_) {}
+    if (type.includes('error')) console.warn('[Baqueano Trace]', entry);
+  };
+
+  window.addEventListener('error', (event) => {
+    const target = event.target;
+    if (target && target !== window && (target.src || target.href)) {
+      record('resource_error', String(target.src || target.href));
+      return;
+    }
+    record('javascript_error', event.message || 'Error no identificado');
+  }, true);
+  window.addEventListener('unhandledrejection', (event) => {
+    record('promise_error', event.reason?.message || String(event.reason || 'Promesa rechazada'));
+  });
+
+  if ('PerformanceObserver' in window) {
+    try {
+      new PerformanceObserver((list) => {
+        const last = list.getEntries().at(-1);
+        if (last) record('largest_contentful_paint', Math.round(last.startTime));
+      }).observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch (_) {}
+  }
+  window.BaqueanoTrace = { read: () => {
+    try { return JSON.parse(sessionStorage.getItem('baqueano_runtime_trace') || '[]'); }
+    catch (_) { return []; }
+  } };
+}
+
 /**
  * POR QUÉ: habilita navegación offline sin almacenar datos personales.
  * CÓMO: registra un worker cuyo alcance y exclusiones se validan internamente.
@@ -669,6 +707,7 @@ function ensureUserSessionLoaded() {
 
 // Auto-inicialización completa y defensiva para páginas directas.
 function initializeNavigationModules() {
+  initRuntimeObservability();
   initPublicServiceWorker();
   ensureUserSessionLoaded();
   buildAboutDropdown();

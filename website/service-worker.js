@@ -9,11 +9,11 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-public-v1';
+const CACHE_VERSION = 'baqueano-public-v2';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE_URLS = [OFFLINE_URL, '/assets/images/baqueano_launcher_solid.png', '/assets/images/logo.png'];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
-const STATIC_PREFIXES = ['/assets/images/', '/css/'];
+const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/'];
 function isPrivatePath(pathname) {
   return PRIVATE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
@@ -36,14 +36,28 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin || isPrivatePath(url.pathname)) return;
   if (request.mode === 'navigate') {
-    event.respondWith(fetch(request).catch(() => caches.match(OFFLINE_URL)));
+    event.respondWith(
+      Promise.race([
+        fetch(request),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('navigation-timeout')), 4000))
+      ]).then((response) => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+        }
+        return response;
+      }).catch(async () => (await caches.match(request)) || caches.match(OFFLINE_URL))
+    );
     return;
   }
   if (!isPublicStaticPath(url.pathname)) return;
-  event.respondWith(caches.match(request).then((cached) => cached || fetch(request).then((response) => {
-    if (!response.ok || response.type !== 'basic') return response;
-    const copy = response.clone();
-    caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
-    return response;
-  })));
+  event.respondWith(caches.match(request).then((cached) => {
+    const networkUpdate = fetch(request).then((response) => {
+      if (!response.ok || response.type !== 'basic') return response;
+      const copy = response.clone();
+      caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+      return response;
+    }).catch(() => cached);
+    return cached || networkUpdate;
+  }));
 });
