@@ -115,43 +115,24 @@
   };
 
   // ==========================================================================
-  // 📊 TELEMETRÍA DE PÁGINA (AUDITORÍA WEB EN TIEMPO REAL)
-  // Registra visitas a la página en la colección 'audit_logs' de Firestore
+  // 📊 TRAZABILIDAD DE RENDIMIENTO SIN ESCRITURAS BLOQUEANTES
   // ==========================================================================
   function logPageView() {
-    if (!firebaseApp || typeof firebase === 'undefined' || !firebase.firestore) return;
-    
-    var db = firebase.firestore();
     var pageName = window.location.pathname.split('/').pop() || 'index.html';
-    
-    // Intentar obtener el usuario actual si existe en session/local storage
-    var userEmail = 'Visitante Anónimo';
-    try {
-      var sessionData = sessionStorage.getItem('baqueano_active_user');
-      if (sessionData) {
-        var parsed = JSON.parse(sessionData);
-        if (parsed && parsed.email) userEmail = parsed.email;
-      }
-    } catch(e) {}
-
-    db.collection('audit_logs').add({
-      action: 'PAGE_VISIT',
-      module: 'Telemetría Web',
-      description: 'Acceso detectado en la página: ' + pageName,
-      performedBy: userEmail,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      status: 'success'
-    }).catch(function(err) {
-      console.warn('[Baqueano Telemetry] No se pudo registrar visita:', err.message);
-    });
+    var navigationEntry = window.performance && performance.getEntriesByType
+      ? performance.getEntriesByType('navigation')[0]
+      : null;
+    var detail = {
+      page: pageName,
+      domReadyMs: navigationEntry ? Math.round(navigationEntry.domContentLoadedEventEnd) : null,
+      loadMs: navigationEntry ? Math.round(navigationEntry.loadEventEnd) : null,
+      online: navigator.onLine
+    };
+    window.dispatchEvent(new CustomEvent('baqueano:page-ready', { detail: detail }));
+    console.info('[Baqueano Performance]', detail);
   }
 
-  // Ejecutar el registro de visita una vez que el DOM esté listo
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', logPageView);
-  } else {
-    logPageView();
-  }
+  if (document.readyState === 'complete') logPageView();
+  else window.addEventListener('load', logPageView, { once: true });
 
 })(window);
