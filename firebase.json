@@ -11,7 +11,6 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "**/*.apk",
       "**/docs/**",
       "**/scripts/**",
       "**/dev-*.log",
@@ -156,11 +155,11 @@
         ]
       },
       {
-        "source": "assets/BaqueanoNicaragua.apk",
+        "source": "assets/baqueanonicaragua.apk",
         "headers": [
           {
             "key": "Content-Disposition",
-            "value": "attachment; filename=\"BaqueanoNicaragua.apk\""
+            "value": "attachment; filename=\"baqueanonicaragua.apk\""
           },
           {
             "key": "Content-Type",
