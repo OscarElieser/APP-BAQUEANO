@@ -1763,6 +1763,7 @@
     aiReports: [],
     aiAutonomyEnabled: false,
     aiAutonomyTimer: null,
+    androidRelease: null,
 
     // Caché reactivo por colección
     collectionsData: {},
@@ -2188,6 +2189,7 @@
       this.listenToCollection('20-sos');
       this.listenToAuditLogs();
       this.listenToAppConfig();
+      this.listenToAndroidRelease();
       this.listenToAiTasks();
     },
 
@@ -2293,6 +2295,19 @@
           }
         },
         (error) => console.warn('[OpsCMS] Config global:', error.message)
+      );
+      OpsState.listeners.push(unsub);
+    },
+
+    listenToAndroidRelease() {
+      const db = this.getDb();
+      if (!db) return;
+      const unsub = db.collection('app_config').doc('android_release').onSnapshot(
+        (doc) => {
+          OpsState.androidRelease = doc.exists ? { id: doc.id, ...doc.data() } : null;
+          if (OpsState.activeTab === '25-android') OpsUI.renderAndroidReleaseModule();
+        },
+        (error) => console.warn('[OpsCMS] Configuración Android:', error.message)
       );
       OpsState.listeners.push(unsub);
     },
@@ -3619,6 +3634,7 @@
       if (tabId === '10-suscripciones') return this.renderSubscriptionsModule();
       if (tabId === '23-ai') return this.renderAiAdminModule();
       if (tabId === '24-builder') return this.renderWebsiteBuilderModule('24-builder');
+      if (tabId === '25-android') return this.renderAndroidReleaseModule();
       if (tabId === '27-auditoria') return this.renderAuditFeed();
 
       // Si es una colección administrable estándar, construir o actualizar la tabla

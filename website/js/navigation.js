@@ -351,48 +351,11 @@ function initSosModal() {
 }
 
 function initDownloadModal() {
-  const openBtns = document.querySelectorAll('.open-download-modal-btn');
   const modal = document.getElementById('downloadModal');
-  const closeBtn = document.getElementById('closeModalBtn');
-  const confirmBtn = document.getElementById('modalConfirmDownloadBtn');
-  const directBtn = document.getElementById('directApkDownloadBtn');
-
-  if (!modal) return;
-
-  const openModal = e => {
-    if (e) e.preventDefault();
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-
-    if (typeof window.logFirebaseEvent === 'function' && window.firebaseAnalytics) {
-      window.logFirebaseEvent(window.firebaseAnalytics, 'open_download_modal');
-    }
-  };
-
-  const closeModal = () => {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-
-  openBtns.forEach(btn => btn.addEventListener('click', openModal));
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-  modal.addEventListener('click', e => {
-    if (e.target === modal) closeModal();
+  document.querySelectorAll('a[href$=".apk"], [download$=".apk"], .open-download-modal-btn').forEach((control) => {
+    control.remove();
   });
-
-  const trackDownload = () => {
-    if (typeof window.logFirebaseEvent === 'function' && window.firebaseAnalytics) {
-      window.logFirebaseEvent(window.firebaseAnalytics, 'apk_download_started', {
-        file: 'baqueanonicaragua.apk'
-      });
-    }
-  };
-
-  if (confirmBtn) confirmBtn.addEventListener('click', trackDownload);
-  if (directBtn) directBtn.addEventListener('click', trackDownload);
+  if (modal) modal.remove();
 }
 
 function initShareTools() {

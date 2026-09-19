@@ -19,7 +19,8 @@
       "**/pnpm-*",
       "**/tsconfig*",
       "**/package*",
-      "**/*.md"
+      "**/*.md",
+      "**/*.apk"
     ],
     "rewrites": [
       {
@@ -151,23 +152,6 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=300, s-maxage=3600"
-          }
-        ]
-      },
-      {
-        "source": "assets/baqueanonicaragua.apk",
-        "headers": [
-          {
-            "key": "Content-Disposition",
-            "value": "attachment; filename=\"baqueanonicaragua.apk\""
-          },
-          {
-            "key": "Content-Type",
-            "value": "application/vnd.android.package-archive"
-          },
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=3600"
           }
         ]
       }
