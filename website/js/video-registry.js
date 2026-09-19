@@ -24,12 +24,12 @@ window.BaqueanoVideos = (function() {
   const VIDEO_CATALOG = {
     gastronomia: {
       src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4',
-      poster: 'assets/images/destinos/dona_haydee.jpg',
+      poster: 'assets/images/comida/nacatamal.jpg',
       title: 'Gastronomía Ancestral y Fogón Campesino'
     },
     historia: {
       src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/4079ee5e-5883-4a18-a6d1-4db81d6fbb5c/38584852.mp4',
-      poster: 'assets/images/destinos/convento_san_francisco.jpg',
+      poster: 'assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg',
       title: 'Historia, Soberanía y Ciudades Coloniales'
     },
     ambiental: {

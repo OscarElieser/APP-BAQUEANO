@@ -1,8 +1,24 @@
-/**
- * POR QU?: mantener la presentaci?n de musica.html separada de su estructura HTML.
- * C?MO: re?ne los estilos propios de la p?gina y las antiguas declaraciones en l?nea en clases reutilizables.
- * QU?: reglas visuales espec?ficas de musica, sin l?gica ni contenido estructural.
- */
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — REPRODUCTOR ÉPICO & GALERÍA SONORA (musica.css)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proporcionar una experiencia auditiva y visual de alta fidelidad para la
+//   música tradicional nicaragüense, el folklore campesino y las canciones históricas.
+// - Crear un diseño épico e interactivo con tornamesa virtual, vinilo giratorio,
+//   ecualizador de espectro dinámico a 60fps y consola de control táctil.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
+// - Animaciones fluidas GPU-accelerated: @keyframes vinylRotate, @keyframes soundWavePulse.
+// - Canvas interactivo o barras SVG/CSS para el visualizador de frecuencias en tiempo real.
+//
+// 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+// - .epic-player-wrapper, .epic-turntable-chassis, .epic-vinyl-disc, .epic-tonearm.
+// - .epic-spectrum-visualizer, .epic-scrubber-track, .epic-controls-group.
+// - .epic-playlist-drawer, .epic-track-item.
+// ============================================================================
+
 
 
 html body .musica-inline-001 {
@@ -207,4 +223,673 @@ html body .musica-inline-032 {
 html body .musica-inline-033 {
   flex: 1 !important;
   justify-content: center !important;
+}
+
+/* ==========================================================================
+   REPRODUCTOR DE MÚSICA ÉPICO BAQUEANO (TORNAMESA & HIFI CONSOLE)
+   ========================================================================== */
+
+.epic-music-section {
+  position: relative;
+  margin: -3.5rem auto 3.5rem;
+  z-index: 20;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.epic-player-chassis {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(8, 13, 26, 0.98));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+              0 0 35px rgba(246, 94, 1, 0.15),
+              inset 0 1px 0 rgba(244, 230, 193, 0.15);
+  padding: 2.2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.epic-player-chassis::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #165D6F 0%, #F65E01 50%, #F4E6C1 100%);
+}
+
+.epic-player-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.1);
+  margin-bottom: 2rem;
+}
+
+.epic-brand-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.epic-brand-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #165D6F, #0F172A);
+  border: 1px solid rgba(244, 230, 193, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--terracotta);
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.epic-brand-titles h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.epic-brand-titles p {
+  font-size: 0.78rem;
+  color: var(--arena-pinolera);
+  margin: 0;
+  font-family: var(--font-tech);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.epic-player-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.epic-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-tech);
+}
+
+.epic-badge-hi-res {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #10B981;
+}
+
+.epic-badge-heritage {
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  color: var(--terracotta);
+}
+
+/* Layout del Reproductor Principal */
+.epic-player-main-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .epic-player-main-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* Tornamesa y Disco Vinilo */
+.epic-turntable-deck {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.epic-vinyl-platter {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #252830 0%, #151820 40%, #0d1017 70%, #05070a 100%);
+  border: 6px solid #1a202c;
+  box-shadow: 0 0 0 2px rgba(244, 230, 193, 0.15),
+              0 15px 35px rgba(0, 0, 0, 0.8),
+              inset 0 0 20px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: vinylSpin 14s linear infinite;
+  animation-play-state: paused;
+  transition: transform 0.4s ease;
+}
+
+.epic-player-chassis.is-playing .epic-vinyl-platter {
+  animation-play-state: running;
+}
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Surcos del Vinilo */
+.epic-vinyl-grooves {
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 12px rgba(255, 255, 255, 0.02),
+              inset 0 0 0 24px rgba(0, 0, 0, 0.3),
+              inset 0 0 0 36px rgba(255, 255, 255, 0.02),
+              inset 0 0 0 48px rgba(0, 0, 0, 0.4);
+}
+
+.epic-vinyl-label {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #F65E01;
+  box-shadow: 0 0 15px rgba(246, 94, 1, 0.4);
+  background: #0F172A;
+  z-index: 2;
+}
+
+.epic-vinyl-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.epic-vinyl-center-hole {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000;
+  z-index: 3;
+}
+
+/* Brazo de la Tornamesa (Tonearm) */
+.epic-tonearm {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 35px;
+  height: 120px;
+  transform-origin: top right;
+  transform: rotate(-25deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.epic-player-chassis.is-playing .epic-tonearm {
+  transform: rotate(5deg);
+}
+
+.epic-tonearm-base {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #718096;
+  border: 2px solid #CBD5E0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.epic-tonearm-arm {
+  width: 4px;
+  height: 90px;
+  background: linear-gradient(to bottom, #CBD5E0, #A0AEC0);
+  position: absolute;
+  top: 15px;
+  right: 8px;
+  border-radius: 2px;
+}
+
+.epic-tonearm-head {
+  width: 14px;
+  height: 20px;
+  background: #F65E01;
+  border-radius: 2px;
+  position: absolute;
+  bottom: 12px;
+  right: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Columna de Controles y Espectro */
+.epic-player-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.epic-track-metadata-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.epic-track-genre-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  color: var(--terracotta);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font-tech);
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .epic-track-genre-pill {
+    align-self: center;
+  }
+}
+
+.epic-track-title-now {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.epic-track-author-now {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--arena-pinolera);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .epic-track-author-now {
+    justify-content: center;
+  }
+}
+
+.epic-track-territory-tag {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Visualizador de Espectro de Audio */
+.epic-visualizer-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 48px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.08);
+  border-radius: 10px;
+  padding: 6px 12px;
+  overflow: hidden;
+}
+
+.epic-spectrum-bar {
+  flex: 1;
+  background: linear-gradient(to top, #165D6F 0%, #F65E01 60%, #F4E6C1 100%);
+  border-radius: 2px 2px 0 0;
+  height: 8%;
+  transition: height 0.15s ease;
+}
+
+.epic-player-chassis.is-playing .epic-spectrum-bar {
+  animation: barEqualize 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes barEqualize {
+  0% { height: 12%; }
+  50% { height: 75%; }
+  100% { height: 35%; }
+}
+
+/* Retardos escalonados para las barras */
+.epic-spectrum-bar:nth-child(2n) { animation-duration: 0.6s; animation-delay: 0.1s; }
+.epic-spectrum-bar:nth-child(3n) { animation-duration: 0.9s; animation-delay: 0.2s; }
+.epic-spectrum-bar:nth-child(4n) { animation-duration: 0.75s; animation-delay: 0.15s; }
+.epic-spectrum-bar:nth-child(5n) { animation-duration: 0.85s; animation-delay: 0.25s; }
+
+/* Barra de Tiempo / Scrubber */
+.epic-timeline-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.epic-scrubber-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(244, 230, 193, 0.15);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.epic-scrubber-slider:hover {
+  background: rgba(244, 230, 193, 0.25);
+}
+
+.epic-scrubber-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #F65E01;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 8px rgba(246, 94, 1, 0.8);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.epic-scrubber-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+.epic-timestamps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-family: var(--font-tech);
+  color: var(--text-muted);
+}
+
+/* Botonera de Control */
+.epic-controls-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding-top: 0.5rem;
+}
+
+.epic-mode-toggles {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.epic-btn-mode {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 230, 193, 0.1);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.epic-btn-mode:hover,
+.epic-btn-mode.is-active {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: rgba(246, 94, 1, 0.4);
+  color: var(--terracotta);
+}
+
+.epic-main-transport {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.epic-btn-step {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  color: #FFFFFF;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.epic-btn-step:hover {
+  background: rgba(22, 93, 111, 0.4);
+  border-color: rgba(22, 93, 111, 0.8);
+  transform: scale(1.08);
+}
+
+.epic-btn-play-hero {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F65E01, #D9530F);
+  border: 2px solid rgba(244, 230, 193, 0.4);
+  color: #FFFFFF;
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(246, 94, 1, 0.45);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.epic-btn-play-hero:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(246, 94, 1, 0.7);
+}
+
+.epic-volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.epic-btn-mute {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.epic-btn-mute:hover {
+  color: var(--terracotta);
+}
+
+.epic-volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 75px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(244, 230, 193, 0.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.epic-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--arena-pinolera);
+  cursor: pointer;
+}
+
+/* Pestañas de Lista de Reproducción */
+.epic-playlist-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 1rem 0 0.8rem;
+  border-top: 1px solid rgba(244, 230, 193, 0.1);
+  margin-top: 1.8rem;
+}
+
+.epic-tab-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  color: var(--text-secondary);
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.epic-tab-btn:hover,
+.epic-tab-btn.is-active {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: rgba(246, 94, 1, 0.5);
+  color: #FFFFFF;
+}
+
+/* Grilla de Canciones de la Lista */
+.epic-playlist-tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.8rem;
+  max-height: 290px;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+}
+
+.epic-track-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.08);
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.epic-track-card:hover {
+  background: rgba(22, 93, 111, 0.25);
+  border-color: rgba(244, 230, 193, 0.25);
+  transform: translateY(-2px);
+}
+
+.epic-track-card.is-active {
+  background: rgba(246, 94, 1, 0.18);
+  border-color: rgba(246, 94, 1, 0.5);
+}
+
+.epic-track-card-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.epic-track-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.epic-track-card-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.epic-track-card:hover .epic-track-card-play-overlay,
+.epic-track-card.is-active .epic-track-card-play-overlay {
+  opacity: 1;
+}
+
+.epic-track-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.epic-track-card-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.epic-track-card.is-active .epic-track-card-name {
+  color: var(--terracotta);
+}
+
+.epic-track-card-meta {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.15rem;
+}
+
+.epic-track-card-time {
+  font-size: 0.72rem;
+  font-family: var(--font-tech);
+  color: var(--arena-pinolera);
+  flex-shrink: 0;
 }

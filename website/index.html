@@ -240,6 +240,37 @@
       z-index: 10;
     }
 
+    /* ── Tarjetas (Cards) Centradas en el Visor del Mapa Real y Mapa Territorial ── */
+    #baqueano3dCanvasWrap .leaflet-popup.baq-popup-centered,
+    #indexTerritoryMap .leaflet-popup.baq-popup-centered {
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      bottom: auto !important;
+      right: auto !important;
+      transform: translate(-50%, -50%) !important;
+      margin: 0 !important;
+      z-index: 2000 !important;
+      pointer-events: auto !important;
+      width: calc(100% - 32px) !important;
+      max-width: 360px !important;
+      animation: baqPopupCenterPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #baqueano3dCanvasWrap .leaflet-popup.baq-popup-centered .leaflet-popup-tip-container,
+    #indexTerritoryMap .leaflet-popup.baq-popup-centered .leaflet-popup-tip-container {
+      display: none !important;
+    }
+    @keyframes baqPopupCenterPop {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -46%) scale(0.94);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
     /* ── Popup interior ── */
     .baq-map-popup { color: #F4E6C1; font-family: 'Inter', sans-serif; }
 
@@ -2610,17 +2641,8 @@
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
               <i class="fa-brands fa-instagram"></i>
             </a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
             <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
               <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
             </a>
             <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
               <i class="fa-brands fa-whatsapp"></i>
@@ -2931,6 +2953,90 @@
   <script src="js/route-builder.js"></script>
   <script src="js/baqueano-assistant.js"></script>
   <script src="js/panorama-viewer.js"></script>
+
+  <!-- ======================================================================
+       🧭 CONTROLADOR DE CENTRADO DE TARJETAS (CARDS) EN MAPAS REALES DE NICARAGUA
+       🎯 Por qué: Garantizar que al hacer clic o seleccionar cualquier pin en el
+          mapa real geográfico o en el mapa territorial de Nicaragua, la tarjeta
+          informativa (card) se posicione automáticamente con precisión milimétrica
+          en el centro exacto del visor cartográfico. Esto erradica recortes visuales,
+          desbordes superiores contra la barra de navegación y desalineaciones laterales,
+          asegurando legibilidad óptima y accesibilidad en cualquier resolución.
+       ⚙️ Cómo: Interceptar los eventos de apertura cartográfica 'popupopen' en Leaflet.
+          Se reubica el elemento DOM del card directamente en el contenedor del visor
+          con la clase reactiva .baq-popup-centered (top: 50%, left: 50%, translate(-50%, -50%)),
+          acompañado de un paneo suave (panTo) para enfocar las coordenadas satelitales
+          del destino detrás de la tarjeta. Se gestiona además el cierre limpio al pulsar
+          fuera del card o mediante el botón de cierre (&times;).
+       📦 Qué: Controlador autoejecutable que registra hooks en L.Map.addInitHook y
+          monitoriza de forma continua los visores cartográficos de la plataforma.
+       ====================================================================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    function attachCenteringToMap(map) {
+      if (!map || map._baqCenteringAttached) return;
+      map._baqCenteringAttached = true;
+
+      const container = map.getContainer ? map.getContainer() : null;
+      if (!container) return;
+
+      map.on('popupopen', function(e) {
+        const popup = e.popup;
+        if (!popup) return;
+
+        const popupEl = popup.getElement();
+        if (popupEl && container) {
+          if (popupEl.parentElement !== container) {
+            container.appendChild(popupEl);
+          }
+          popupEl.classList.add('baq-popup-centered');
+
+          const latLng = popup.getLatLng();
+          if (latLng) {
+            map.panTo(latLng, { animate: true, duration: 0.5 });
+          }
+        }
+      });
+
+      // Cierre reactivo si el usuario pulsa en el mapa fuera del card
+      container.addEventListener('click', function(evt) {
+        const popupEl = container.querySelector('.leaflet-popup.baq-popup-centered');
+        if (!popupEl) return;
+        if (!popupEl.contains(evt.target) && !evt.target.closest('.baqueano-map-pin, .baqueano-custom-leaflet-pin')) {
+          map.closePopup();
+        }
+      });
+    }
+
+    // 1. Hook arquitectónico para toda nueva instancia de mapa Leaflet
+    if (typeof L !== 'undefined' && L.Map && typeof L.Map.addInitHook === 'function') {
+      L.Map.addInitHook(function() {
+        attachCenteringToMap(this);
+      });
+    }
+
+    // 2. Vinculación activa para mapas ya inicializados o con arranque asíncrono
+    function syncActiveMaps() {
+      if (window.BaqueanoRealMap && window.BaqueanoRealMap.map) {
+        attachCenteringToMap(window.BaqueanoRealMap.map);
+      }
+      if (typeof L !== 'undefined') {
+        const containers = document.querySelectorAll('#baqueano3dCanvasWrap, #indexTerritoryMap');
+        containers.forEach(function(el) {
+          if (el._leaflet_id && el._leaflet_map) {
+            attachCenteringToMap(el._leaflet_map);
+          }
+        });
+      }
+    }
+
+    syncActiveMaps();
+    window.addEventListener('DOMContentLoaded', syncActiveMaps);
+    setInterval(syncActiveMaps, 1000);
+  })();
+  </script>
 
   <!-- ======================================================================
        🧭 MANEJADOR DEL FORMULARIO DE REGISTRO DE NEGOCIOS (/businesses + WhatsApp)

@@ -193,12 +193,14 @@
       <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Términos y Condiciones" class="institucional-hero-bg">
       <div class="institucional-hero-gradient"></div>
       <div class="institucional-hero-content">
-        <div class="institucional-hero-badge">
-          <i class="fa-solid fa-scale-balanced"></i> Marco Jurídico
+        <div class="hero-badge-pill">
+          <span class="pulse-dot"></span> Marco Jurídico Soberano
         </div>
-        <h1 class="institucional-hero-title">Términos y Condiciones</h1>
-        <p class="institucional-hero-subtitle">
-          Reglas aplicables a la web, la aplicación Android y los servicios digitales de BAQUEANO.
+        <h1 class="hero-headline">
+          Términos & <span class="highlight-sunset">Condiciones</span> de Uso
+        </h1>
+        <p class="hero-subtext">
+          Reglas aplicables a la web, la aplicación Android y los servicios digitales de BAQUEANO Nicaragua bajo el marco legal de las Leyes No. 1210 y 1211 INTUR.
         </p>
       </div>
     </section>
@@ -206,43 +208,65 @@
     <!-- LAYOUT INTERACTIVO -->
     <section class="container institucional-layout">
       
-      <!-- SIDEBAR (ÍNDICE) -->
+      <!-- SIDEBAR (ÍNDICE CON CURSOR DINÁMICO DE ARRIBA A ABAJO) -->
       <aside class="institucional-sidebar">
-        <div class="sidebar-title">
-          <i class="fa-solid fa-list-ul"></i> Índice
+        <div class="toc-header-bar">
+          <div class="sidebar-title">
+            <i class="fa-solid fa-list-ul"></i> Índice Legal
+          </div>
+          <span class="toc-active-counter">01 / 30</span>
         </div>
-        <nav class="sidebar-nav" id="institucionalScrollspy">
-          <a href="#article-01" class="sidebar-nav-link active">1. Aceptación y objeto de los tér...</a>
-          <a href="#article-02" class="sidebar-nav-link">2. Definiciones</a>
-          <a href="#article-03" class="sidebar-nav-link">3. Naturaleza de BAQUEANO y rol t...</a>
-          <a href="#article-04" class="sidebar-nav-link">4. Cumplimiento de los Prestadore...</a>
-          <a href="#article-05" class="sidebar-nav-link">5. Registro y seguridad de la cue...</a>
-          <a href="#article-06" class="sidebar-nav-link">6. Negocios registrados y distint...</a>
-          <a href="#article-07" class="sidebar-nav-link">7. Suscripciones de establecimien...</a>
-          <a href="#article-08" class="sidebar-nav-link">8. Reservas, solicitudes y cotiza...</a>
-          <a href="#article-09" class="sidebar-nav-link">9. Precios, moneda y pagos</a>
-          <a href="#article-10" class="sidebar-nav-link">10. Cancelaciones, devoluciones y ...</a>
-          <a href="#article-11" class="sidebar-nav-link">11. Turismo de naturaleza y activi...</a>
-          <a href="#article-12" class="sidebar-nav-link">12. Centro SOS y herramientas de e...</a>
-          <a href="#article-13" class="sidebar-nav-link">13. Turismo responsable y protecci...</a>
-          <a href="#article-14" class="sidebar-nav-link">14. Respeto a las comunidades y pa...</a>
-          <a href="#article-15" class="sidebar-nav-link">15. Protección de niñas, niños y a...</a>
-          <a href="#article-16" class="sidebar-nav-link">16. Contenido aportado por usuario...</a>
-          <a href="#article-17" class="sidebar-nav-link">17. Reseñas y opiniones</a>
-          <a href="#article-18" class="sidebar-nav-link">18. Asistente de Inteligencia Arti...</a>
-          <a href="#article-19" class="sidebar-nav-link">19. Protección de datos personales...</a>
-          <a href="#article-20" class="sidebar-nav-link">20. Servicios y plataformas de ter...</a>
-          <a href="#article-21" class="sidebar-nav-link">21. Propiedad intelectual</a>
-          <a href="#article-22" class="sidebar-nav-link">22. Usos prohibidos</a>
-          <a href="#article-23" class="sidebar-nav-link">23. Suspensión y cancelación de cu...</a>
-          <a href="#article-24" class="sidebar-nav-link">24. Responsabilidad de los Prestad...</a>
-          <a href="#article-25" class="sidebar-nav-link">25. Reclamos y atención al usuario</a>
-          <a href="#article-26" class="sidebar-nav-link">26. Información, disponibilidad y ...</a>
-          <a href="#article-27" class="sidebar-nav-link">27. Modificaciones de estos términ...</a>
-          <a href="#article-28" class="sidebar-nav-link">28. Legislación aplicable y autori...</a>
-          <a href="#article-29" class="sidebar-nav-link">29. Independencia de las disposici...</a>
-          <a href="#article-30" class="sidebar-nav-link">30. Contacto</a>
-        </nav>
+
+        <div class="toc-progress-track" title="Progreso de lectura">
+          <div class="toc-progress-fill"></div>
+        </div>
+
+        <div class="toc-jump-controls">
+          <button type="button" class="toc-jump-btn" id="tocBtnPrev" title="Artículo anterior o ir al inicio">
+            <i class="fa-solid fa-arrow-up"></i> Arriba
+          </button>
+          <button type="button" class="toc-jump-btn" id="tocBtnNext" title="Artículo siguiente o ir al final">
+            <i class="fa-solid fa-arrow-down"></i> Abajo
+          </button>
+        </div>
+
+        <div class="sidebar-nav-container">
+          <div class="toc-cursor-rail">
+            <div class="toc-cursor-pip"></div>
+          </div>
+          <nav class="sidebar-nav" id="institucionalScrollspy" aria-label="Índice de artículos">
+            <a href="#article-01" class="sidebar-nav-link active"><span class="toc-nav-num">01</span><span class="toc-nav-title">Aceptación y objeto</span></a>
+            <a href="#article-02" class="sidebar-nav-link"><span class="toc-nav-num">02</span><span class="toc-nav-title">Definiciones</span></a>
+            <a href="#article-03" class="sidebar-nav-link"><span class="toc-nav-num">03</span><span class="toc-nav-title">Naturaleza de BAQUEANO</span></a>
+            <a href="#article-04" class="sidebar-nav-link"><span class="toc-nav-num">04</span><span class="toc-nav-title">Cumplimiento prestadores</span></a>
+            <a href="#article-05" class="sidebar-nav-link"><span class="toc-nav-num">05</span><span class="toc-nav-title">Registro y seguridad</span></a>
+            <a href="#article-06" class="sidebar-nav-link"><span class="toc-nav-num">06</span><span class="toc-nav-title">Negocios registrados</span></a>
+            <a href="#article-07" class="sidebar-nav-link"><span class="toc-nav-num">07</span><span class="toc-nav-title">Suscripciones</span></a>
+            <a href="#article-08" class="sidebar-nav-link"><span class="toc-nav-num">08</span><span class="toc-nav-title">Reservas y solicitudes</span></a>
+            <a href="#article-09" class="sidebar-nav-link"><span class="toc-nav-num">09</span><span class="toc-nav-title">Precios y pagos</span></a>
+            <a href="#article-10" class="sidebar-nav-link"><span class="toc-nav-num">10</span><span class="toc-nav-title">Cancelaciones y reembolsos</span></a>
+            <a href="#article-11" class="sidebar-nav-link"><span class="toc-nav-num">11</span><span class="toc-nav-title">Turismo de aventura</span></a>
+            <a href="#article-12" class="sidebar-nav-link"><span class="toc-nav-num">12</span><span class="toc-nav-title">Centro SOS y auxilio</span></a>
+            <a href="#article-13" class="sidebar-nav-link"><span class="toc-nav-num">13</span><span class="toc-nav-title">Turismo responsable</span></a>
+            <a href="#article-14" class="sidebar-nav-link"><span class="toc-nav-num">14</span><span class="toc-nav-title">Respeto comunitario</span></a>
+            <a href="#article-15" class="sidebar-nav-link"><span class="toc-nav-num">15</span><span class="toc-nav-title">Protección de niñez</span></a>
+            <a href="#article-16" class="sidebar-nav-link"><span class="toc-nav-num">16</span><span class="toc-nav-title">Contenido de usuarios</span></a>
+            <a href="#article-17" class="sidebar-nav-link"><span class="toc-nav-num">17</span><span class="toc-nav-title">Reseñas y opiniones</span></a>
+            <a href="#article-18" class="sidebar-nav-link"><span class="toc-nav-num">18</span><span class="toc-nav-title">Baqueano AI Asistente</span></a>
+            <a href="#article-19" class="sidebar-nav-link"><span class="toc-nav-num">19</span><span class="toc-nav-title">Protección de datos</span></a>
+            <a href="#article-20" class="sidebar-nav-link"><span class="toc-nav-num">20</span><span class="toc-nav-title">Servicios de terceros</span></a>
+            <a href="#article-21" class="sidebar-nav-link"><span class="toc-nav-num">21</span><span class="toc-nav-title">Propiedad intelectual</span></a>
+            <a href="#article-22" class="sidebar-nav-link"><span class="toc-nav-num">22</span><span class="toc-nav-title">Usos prohibidos</span></a>
+            <a href="#article-23" class="sidebar-nav-link"><span class="toc-nav-num">23</span><span class="toc-nav-title">Suspensión de cuentas</span></a>
+            <a href="#article-24" class="sidebar-nav-link"><span class="toc-nav-num">24</span><span class="toc-nav-title">Responsabilidad prestadores</span></a>
+            <a href="#article-25" class="sidebar-nav-link"><span class="toc-nav-num">25</span><span class="toc-nav-title">Reclamos y atención</span></a>
+            <a href="#article-26" class="sidebar-nav-link"><span class="toc-nav-num">26</span><span class="toc-nav-title">Disponibilidad del servicio</span></a>
+            <a href="#article-27" class="sidebar-nav-link"><span class="toc-nav-num">27</span><span class="toc-nav-title">Modificaciones legales</span></a>
+            <a href="#article-28" class="sidebar-nav-link"><span class="toc-nav-num">28</span><span class="toc-nav-title">Legislación aplicable</span></a>
+            <a href="#article-29" class="sidebar-nav-link"><span class="toc-nav-num">29</span><span class="toc-nav-title">Independencia de cláusulas</span></a>
+            <a href="#article-30" class="sidebar-nav-link"><span class="toc-nav-num">30</span><span class="toc-nav-title">Contacto oficial</span></a>
+          </nav>
+        </div>
       </aside>
 
       <!-- CONTENIDO (TARJETAS) -->
@@ -496,6 +520,8 @@
           <h2 class="legal-card-title"><i class="fa-solid fa-file-contract"></i> Contacto</h2>
           <div class="legal-card-body"><p>BAQUEANO deberá mantener dentro de la plataforma un canal claramente identificable para:</p>
 <p>Soporte general</p>
+          <div class="legal-card-body"><p>BAQUEANO deberá mantener dentro de la plataforma un canal claramente identificable para:</p>
+<p>Soporte general</p>
 <p>Privacidad y datos personales</p>
 <p>Reclamos</p>
 <p>Registro de negocios</p>
@@ -514,84 +540,109 @@
   <!-- FOOTER INSTITUCIONAL OFICIAL -->
   <footer class="site-footer-pro">
     <div class="container">
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
       <div class="footer-top-utility-bar">
+        <div class="footer-network-status">
+          <span class="pulse-dot"></span>
+          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+        </div>
         <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!');">
+            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
+            <button type="submit" class="newsletter-submit-btn">
+              <span>Unirme</span>
+              <i class="fa-solid fa-arrow-right"></i>
             </button>
           </form>
         </div>
+      </div>
 
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+      <div class="footer-columns-grid">
+        <div class="footer-col-brand">
+          <div class="brand-box mb-3">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
           </div>
+          <p class="footer-bio-text">
+            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
+          </p>
           <div class="footer-social-row">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="X (Twitter) Oficial" aria-label="X Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="YouTube Documentales" aria-label="YouTube">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Institucional" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
+        </div>
+
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col-contact">
+          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <span>Correo Oficial:</span><br>
+                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <span>Mesa de Enlace:</span><br>
+                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <span>Sede Territorial:</span><br>
+                <span>Managua • 17 Departamentos</span>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <span>Atención al Explorador:</span><br>
+                <span>24/7 en Sendero • Red Satelital</span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html" class="terminos-inline-005">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
+      <div class="footer-trust-pills-row">
+        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
+        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
+        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
+        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
       </div>
 
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
       <div class="footer-bottom-bar">
-        <div>
+        <div class="footer-copy-text">
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
-        <div class="terminos-inline-006">
-          <span class="terminos-inline-007">
-            <span class="terminos-inline-008"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        <div class="footer-legal-links">
+          <a href="terminos.html" class="active">Términos & Condiciones</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="aviso-legal.html">Aviso Legal</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="ambiental.html">Decálogo Verde</a>
+          <a href="admin.html">Baqueano Ops Center</a>
         </div>
       </div>
     </div>
@@ -605,36 +656,6 @@
 
   <!-- Scripts Modulares -->
   <script src="js/navigation.js"></script>
-
-  <!-- SCRIPT SCROLLSPY INSTITUCIONAL -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const sections = document.querySelectorAll(".legal-card");
-      const navLinks = document.querySelectorAll(".sidebar-nav-link");
-
-      const observerOptions = {
-        root: null,
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("id");
-            navLinks.forEach(link => {
-              link.classList.remove("active");
-              if (link.getAttribute("href") === `#${id}`) {
-                link.classList.add("active");
-              }
-            });
-          }
-        });
-      }, observerOptions);
-
-      sections.forEach(sec => observer.observe(sec));
-    });
-  </script>
+  <script src="js/legal-scrollspy.js"></script>
 </body>
-
 </html>

@@ -16,10 +16,10 @@
 - Estética inmersiva con gradientes volcánicos, resplandores dorados y ecualizador animado.
 
 📦 3. QUÉ (WHAT / CONTENIDOS):
-- 5 Obras Maestras del Folklore: La Mora Limpia, El Solar de Monimbó, Baile del Mestizaje,
-  El Zanatillo, Palomita Guasiruca.
-- Reseña del Son Nica y la Marimba de Arco de Monimbó.
-- Navegación oficial, centro de auxilio SOS y descarga de APK.
+- Reproductor Épico Soberano con Tornamesa Virtual, Vinilo y Ecualizador de Espectro Hi-Fi.
+- Catálogo Integral de Folklore Campesino, Son Nica y Música Revolucionaria Histórica.
+- Galería Interactiva de 16 Maestros y Compositores de la Patria.
+- Footer Institucional Soberano alineado con los 4 canales oficiales.
 ============================================================================
 -->
 <html lang="es">
@@ -185,7 +185,7 @@
 
   <!-- VIDEO HERO CINEMATOGRÁFICO DE MÚSICA -->
   <div class="video-hero-wrapper">
-    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/calle_la_calzada.jpg">
+    <video class="video-hero-media" autoplay loop muted playsinline poster="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg">
       <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/7a0fcda5-1f91-4c6e-8260-264bc80fe3ea/24016149.mp4" type="video/mp4">
     </video>
     <div class="video-hero-gradient"></div>
@@ -206,6 +206,125 @@
   <main class="page-wrapper">
     <section class="environmental-section-pro">
       <div class="container">
+        <!-- =================================================================
+             REPRODUCTOR ÉPICO BAQUEANO: TORNAMESA VIRTUAL & MÚSICA DE LA PATRIA
+             ================================================================= -->
+        <div class="epic-music-section" id="epicMusicPlayer">
+          <div class="epic-player-chassis" id="epicPlayerChassis">
+            <div class="epic-player-topbar">
+              <div class="epic-brand-tag">
+                <div class="epic-brand-icon-box">
+                  <i class="fa-solid fa-compact-disc fa-spin-pulse"></i>
+                </div>
+                <div class="epic-brand-titles">
+                  <h2>Tornamesa Soberana & Galería Sonora</h2>
+                  <p>Música Tradicional, Folklore Campesino & Canto Histórico</p>
+                </div>
+              </div>
+              <div class="epic-player-badges">
+                <span class="epic-badge-pill epic-badge-hi-res"><i class="fa-solid fa-wave-square"></i> Audio Hi-Fi 60FPS</span>
+                <span class="epic-badge-pill epic-badge-heritage"><i class="fa-solid fa-shield-halved"></i> Patrimonio de la Patria</span>
+              </div>
+            </div>
+
+            <!-- Panel Central: Vinilo + Metadatos + Espectro -->
+            <div class="epic-player-main-grid">
+              <!-- Deck del Vinilo -->
+              <div class="epic-turntable-deck">
+                <div class="epic-vinyl-platter" id="epicVinylPlatter">
+                  <div class="epic-vinyl-grooves"></div>
+                  <div class="epic-vinyl-label">
+                    <img src="assets/images/destinos/volcan_masaya.jpg" alt="Portada de la Obra" id="epicVinylImg">
+                  </div>
+                  <div class="epic-vinyl-center-hole"></div>
+                </div>
+                <!-- Brazo Tonearm -->
+                <div class="epic-tonearm">
+                  <div class="epic-tonearm-base"></div>
+                  <div class="epic-tonearm-arm"></div>
+                  <div class="epic-tonearm-head"></div>
+                </div>
+              </div>
+
+              <!-- Información y Controles de la Pista Actual -->
+              <div class="epic-player-info-col">
+                <div class="epic-track-metadata-box">
+                  <span class="epic-track-genre-pill" id="epicTrackGenre">
+                    <i class="fa-solid fa-tag"></i> Son Nica Insigne
+                  </span>
+                  <h3 class="epic-track-title-now" id="epicTrackTitle">La Mora Limpia</h3>
+                  <div class="epic-track-author-now">
+                    <span id="epicTrackArtist"><i class="fa-solid fa-microphone-lines"></i> Justo Santos</span>
+                    <span class="epic-track-territory-tag" id="epicTrackTerritory">• Rivas • Segundo Himno Nacional</span>
+                  </div>
+                </div>
+
+                <!-- Visualizador de Frecuencias de Audio -->
+                <div class="epic-visualizer-container" id="epicSpectrumVisualizer" aria-label="Ecualizador de audio en tiempo real">
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                  <div class="epic-spectrum-bar"></div>
+                </div>
+
+                <!-- Línea de Tiempo / Scrubber -->
+                <div class="epic-timeline-wrap">
+                  <input type="range" class="epic-scrubber-slider" id="epicScrubber" min="0" max="100" value="0" aria-label="Control de posición de audio">
+                  <div class="epic-timestamps">
+                    <span id="epicCurrentTime">0:00</span>
+                    <span id="epicDurationTime">3:15</span>
+                  </div>
+                </div>
+
+                <!-- Botonera de Control Táctil -->
+                <div class="epic-controls-cluster">
+                  <div class="epic-mode-toggles">
+                    <button type="button" class="epic-btn-mode" id="epicShuffleBtn" title="Modo Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
+                    <button type="button" class="epic-btn-mode" id="epicRepeatBtn" title="Repetir Canción"><i class="fa-solid fa-repeat"></i></button>
+                  </div>
+
+                  <div class="epic-main-transport">
+                    <button type="button" class="epic-btn-step" id="epicPrevBtn" title="Canción Anterior"><i class="fa-solid fa-backward-step"></i></button>
+                    <button type="button" class="epic-btn-play-hero" id="epicPlayBtn" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+                    <button type="button" class="epic-btn-step" id="epicNextBtn" title="Siguiente Canción"><i class="fa-solid fa-forward-step"></i></button>
+                  </div>
+
+                  <div class="epic-volume-wrap">
+                    <button type="button" class="epic-btn-mute" id="epicMuteBtn" title="Silenciar / Activar sonido"><i class="fa-solid fa-volume-high"></i></button>
+                    <input type="range" class="epic-volume-slider" id="epicVolumeSlider" min="0" max="1" step="0.05" value="0.85" aria-label="Control de volumen">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Selector de Categorías de Playlist -->
+            <div class="epic-playlist-tabs">
+              <button type="button" class="epic-tab-btn is-active" data-category="all"><i class="fa-solid fa-list-ul"></i> Todas (16)</button>
+              <button type="button" class="epic-tab-btn" data-category="folklore"><i class="fa-solid fa-guitar"></i> Folklore Tradicional (6)</button>
+              <button type="button" class="epic-tab-btn" data-category="revolucion"><i class="fa-solid fa-star"></i> Música Revolucionaria (6)</button>
+              <button type="button" class="epic-tab-btn" data-category="caribe"><i class="fa-solid fa-drum"></i> Palo de Mayo (2)</button>
+              <button type="button" class="epic-tab-btn" data-category="norte"><i class="fa-solid fa-mountain"></i> Polkas del Norte (2)</button>
+            </div>
+
+            <!-- Grilla Dinámica de Canciones -->
+            <div class="epic-playlist-tracks-grid" id="epicPlaylistGrid">
+              <!-- Renderizado dinámicamente por epic-music-player.js -->
+            </div>
+          </div>
+        </div>
+
 
         <!-- CONSOLA FOLCLÓRICA BAQUEANO -->
         <div class="music-player-panel">
@@ -325,11 +444,29 @@
   </div>
 
   <!-- FOOTER OFICIAL -->
+    <!-- FOOTER OFICIAL CON IDENTIDAD TERRITORIAL Y TRANSPARENCIA FISCAL -->
   <footer class="site-footer-pro">
     <div class="container">
+      <div class="footer-top-utility-bar">
+        <div class="footer-network-status">
+          <span class="pulse-dot"></span>
+          <span class="footer-status-text">Red Territorial Baqueano: <strong>153 Municipios Conectados</strong></span>
+        </div>
+        <div class="footer-newsletter-wrap">
+          <form class="footer-newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('¡Gracias por unirte a la red de guardianes Baqueano!');">
+            <label for="newsletterEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="newsletterEmail" placeholder="Tu correo para boletines campesinos..." required class="newsletter-input">
+            <button type="submit" class="newsletter-submit-btn">
+              <span>Unirme</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
       <div class="footer-columns-grid">
         <div class="footer-col-brand">
-          <div class="brand-box musica-inline-012">
+          <div class="brand-box mb-3">
             <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
             <div class="brand-text">
               <span class="brand-title">BAQUEANO</span>
@@ -337,23 +474,29 @@
             </div>
           </div>
           <p class="footer-bio-text">
-            Preservación del patrimonio sonoro campesino y difusión de la cultura nicaragüense.
+            Plataforma soberana de turismo rural y ecoturismo comunitario. Conectamos viajeros conscientes con guías locales nativos, sin comisiones extractivas ni intermediarios extranjeros.
           </p>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" class="footer-social-btn" aria-label="Facebook Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" class="footer-social-btn" aria-label="TikTok Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" class="footer-social-btn" aria-label="WhatsApp Oficial" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
         </div>
 
         <div class="footer-col-links">
           <h4 class="footer-col-header">MÓDULOS WEB</h4>
           <ul class="footer-link-list">
-            <li><a href="destinos.html">Destinos Protegidos</a></li>
-            <li><a href="historia.html">Historia de Mi País</a></li>
-            <li><a href="ambiental.html">Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
-            <li><a href="musica.html">Patrimonio Sonoro</a></li>
-            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+            <li><a href="destinos.html"><i class="fa-solid fa-chevron-right"></i> 29 Destinos Protegidos</a></li>
+            <li><a href="historia.html"><i class="fa-solid fa-chevron-right"></i> Historia de Mi País</a></li>
+            <li><a href="gastronomia.html"><i class="fa-solid fa-chevron-right"></i> Gastronomía Ancestral</a></li>
+            <li><a href="musica.html"><i class="fa-solid fa-chevron-right"></i> Patrimonio Sonoro</a></li>
+            <li><a href="ambiental.html"><i class="fa-solid fa-chevron-right"></i> Campaña Huella Cero</a></li>
+            <li><a href="aliados.html"><i class="fa-solid fa-chevron-right"></i> Cooperativas Campesinas</a></li>
+            <li><a href="nosotros.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Manifiesto</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
         <div class="footer-col-contact">
           <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
           <ul class="footer-contact-list">
@@ -389,9 +532,18 @@
         </div>
       </div>
 
+      <div class="footer-trust-pills-row">
+        <div class="trust-pill"><i class="fa-solid fa-handshake-angle"></i> Comercio Justo 100% Campesino</div>
+        <div class="trust-pill"><i class="fa-solid fa-shield-halved"></i> Verificación Territorial Comunitaria</div>
+        <div class="trust-pill"><i class="fa-solid fa-seedling"></i> Ecoturismo de Huella Cero</div>
+        <div class="trust-pill"><i class="fa-solid fa-network-wired"></i> Sincronización Fuera de Línea</div>
+      </div>
+
       <div class="footer-bottom-bar">
-        <div>© 2026 Baqueano Nicaragua. Homenaje a la música de nuestra patria.</div>
-        <div class="musica-inline-013">
+        <div class="footer-copy-text">
+          © 2026 Baqueano Nicaragua. Soberanía e identidad cultural. Todos los derechos comunitarios reservados.
+        </div>
+        <div class="footer-legal-links">
           <a href="ambiental.html">Decálogo Verde</a>
           <a href="admin.html">Baqueano Ops Center</a>
         </div>
@@ -466,6 +618,7 @@
   <script src="js/video-registry.js"></script>
   <script src="js/sonora-data.js"></script>
   <script src="js/audio-player.js"></script>
+  <script src="js/epic-music-player.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -653,3 +653,176 @@ html body .destinos-inline-053 {
   flex: 1 !important;
   justify-content: center !important;
 }
+
+/* ============================================================================
+   🎠 CARRUSEL PROGRESIVO DE 3-5 FOTOS CON ROTACIÓN AUTOMÁTICA DE 2 SEGUNDOS
+   ============================================================================ */
+.dest-carousel-wrap {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.dest-carousel-slide {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 0 !important;
+  transform: scale(1) !important;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 2s ease-out !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.dest-carousel-slide.active {
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+  pointer-events: auto !important;
+  z-index: 2 !important;
+}
+
+.dest-carousel-indicators {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  gap: 6px !important;
+  z-index: 4 !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  padding: 4px 8px !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dest-carousel-indicators .indicator-dot {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: rgba(244, 230, 193, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.dest-carousel-indicators .indicator-dot.active {
+  width: 16px !important;
+  border-radius: 999px !important;
+  background: #F65E01 !important;
+  box-shadow: 0 0 8px rgba(246, 94, 1, 0.8) !important;
+}
+
+/* ============================================================================
+   🛡️ DIRECTORIO DE SEGURIDAD & SALUD DEL TURISTA (HOSPITALES, POLICÍA, BOMBEROS)
+   ============================================================================ */
+.safety-emergency-section {
+  margin: 4rem 0 3rem 0;
+  padding: 2.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(22, 93, 111, 0.4);
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.safety-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.safety-card {
+  background: rgba(10, 47, 56, 0.45);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.safety-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(246, 94, 1, 0.5);
+}
+
+.safety-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.safety-card-header i {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.safety-card-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.safety-card-header span {
+  font-size: 0.78rem;
+  color: var(--arena-pinolera);
+  opacity: 0.8;
+}
+
+.header-hospital { background: rgba(16, 185, 129, 0.15); border-left: 4px solid #10B981; }
+.header-hospital i { color: #10B981; }
+
+.header-police { background: rgba(59, 130, 246, 0.15); border-left: 4px solid #3B82F6; }
+.header-police i { color: #3B82F6; }
+
+.header-fire { background: rgba(239, 68, 68, 0.15); border-left: 4px solid #EF4444; }
+.header-fire i { color: #EF4444; }
+
+.header-health { background: rgba(245, 158, 11, 0.15); border-left: 4px solid #F59E0B; }
+.header-health i { color: #F59E0B; }
+
+.safety-card-body {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.safety-item strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #FFFFFF;
+  margin-bottom: 0.2rem;
+}
+
+.safety-item p {
+  font-size: 0.78rem;
+  color: rgba(244, 230, 193, 0.75);
+  margin: 0 0 0.4rem 0;
+}
+
+.btn-safety-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: rgba(22, 93, 111, 0.4);
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid rgba(22, 93, 111, 0.7);
+  transition: all 0.2s ease;
+}
+
+.btn-safety-call:hover {
+  background: #F65E01;
+  border-color: #F65E01;
+  color: #FFFFFF;
+}
