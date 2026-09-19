@@ -1,3 +1,12 @@
+// ============================================================================
+// BAQUEANO - CATALOGO NATIVO VISIBLE EN OPS CENTER
+// ============================================================================
+// POR QUE: Permite administrar el contenido que ya existe en el sitio aunque
+// todavia no tenga un documento equivalente dentro de Cloud Firestore.
+// COMO: Combina respaldos existentes con las fuentes publicas usando IDs
+// estables; Firestore puede reemplazar cada registro sin borrar los demas.
+// QUE: Alimenta destinos, mapa, territorios, municipios y experiencias.
+// ============================================================================
 window.BaqueanoMockData = {
   '03-destinos': [
     { id: 'dest-001', title: 'Cañón de Somoto', department: 'Madriz', category: 'naturaleza', status: 'published', updatedAt: new Date().toISOString(), imageUrl: 'assets/images/destinos/canon_de_somoto.jpg', verified: true, priceNio: 250, priceUsd: 7 },
@@ -46,3 +55,101 @@ window.BaqueanoMockData = {
     { id: 'sos-001', title: 'Reporte Incendio Forestal Mombacho', department: 'Granada', category: 'Alerta Ambiental', status: 'published', updatedAt: new Date().toISOString(), verified: false }
   ]
 };
+
+(function hydrateOpsCatalogFromWebsite(window) {
+  'use strict';
+  const now = new Date().toISOString();
+  const publicPlaces = window.BaqueanoFirestore?.SEED_PLACES || [];
+  const publicTerritories = window.BAQUEANO_TERRITORIES || [];
+  const mergeById = (base, additions) => {
+    const records = new Map((base || []).map((item) => [item.id, item]));
+    additions.forEach((item) => {
+      const identity = String(item.title || item.name || '').trim().toLocaleLowerCase('es');
+      const duplicate = Array.from(records.entries()).find(([, current]) =>
+        String(current.title || current.name || '').trim().toLocaleLowerCase('es') === identity
+      );
+      if (duplicate && duplicate[0] !== item.id) records.delete(duplicate[0]);
+      records.set(item.id, { ...(records.get(item.id) || {}), ...item });
+    });
+    return Array.from(records.values());
+  };
+  const destinations = publicPlaces.map((place) => ({
+    ...place,
+    id: place.id,
+    title: place.title || place.name,
+    name: place.name || place.title,
+    latitude: Number(place.latitude ?? place.lat),
+    longitude: Number(place.longitude ?? place.lng),
+    coordinates: {
+      lat: Number(place.latitude ?? place.lat),
+      lng: Number(place.longitude ?? place.lng)
+    },
+    status: place.status || 'published',
+    updatedAt: place.updatedAt || now,
+    source: 'website_catalog'
+  }));
+
+  window.BaqueanoMockData['03-destinos'] = mergeById(window.BaqueanoMockData['03-destinos'], destinations);
+  window.BaqueanoMockData['07-mapa'] = destinations.filter((item) =>
+    Number.isFinite(item.latitude) && Number.isFinite(item.longitude)
+  );
+
+  const territories = publicTerritories.map((territory) => ({
+    id: `ter-${territory.id}`,
+    title: territory.name,
+    name: territory.name,
+    capital: territory.capital || territory.name,
+    department: territory.name,
+    category: territory.id === 'raccn' || territory.id === 'raccs' ? 'Region Autonoma' : 'Departamento',
+    description: territory.shortDesc || territory.tagline || '',
+    imageUrl: territory.heroImage || '',
+    latitude: Number(territory.lat),
+    longitude: Number(territory.lng),
+    status: 'published',
+    updatedAt: now,
+    source: 'website_catalog'
+  }));
+  window.BaqueanoMockData['04-territorios'] = mergeById(window.BaqueanoMockData['04-territorios'], territories);
+
+  const municipalities = destinations.filter((place) => place.municipality).map((place) => ({
+    id: `mun-${String(place.department)}-${String(place.municipality)}`
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    title: place.municipality,
+    name: place.municipality,
+    department: place.department || 'Nacional',
+    category: 'Municipio',
+    status: 'published',
+    updatedAt: now,
+    source: 'website_catalog'
+  }));
+  window.BaqueanoMockData['05-municipios'] = mergeById(window.BaqueanoMockData['05-municipios'], municipalities);
+
+  const experiences = destinations.map((place) => ({
+    ...place,
+    id: `exp-${place.id}`,
+    destinationId: place.id,
+    title: place.experienceTitle || `Explorar ${place.name}`,
+    category: place.category || 'Experiencia turistica',
+    source: 'website_catalog'
+  }));
+  window.BaqueanoMockData['06-experiencias'] = mergeById(window.BaqueanoMockData['06-experiencias'], experiences);
+
+  const businesses = window.BaqueanoWebsiteBusinesses || [];
+  window.BaqueanoMockData['08-negocios'] = mergeById(window.BaqueanoMockData['08-negocios'], businesses);
+
+  const guides = businesses.filter((business) =>
+    /gu[ií]a|baqueano/i.test(`${business.type || ''} ${business.name || ''}`)
+  ).map((business) => ({
+    ...business,
+    id: `guide-${business.id}`,
+    businessId: business.id,
+    category: 'Guía Certificado',
+    specialty: business.type,
+    certified: business.verified === true
+  }));
+  window.BaqueanoMockData['14-guias'] = mergeById(window.BaqueanoMockData['14-guias'], guides);
+  window.BaqueanoMockData['21-multimedia'] = mergeById([], window.BaqueanoWebsiteMedia || []);
+  window.BaqueanoMockData['22-notificaciones'] = mergeById([], window.BaqueanoWebsiteNotifications || []);
+  window.BaqueanoMockData['23-ai'] = mergeById([], window.BaqueanoAiCapabilities || []);
+  window.BaqueanoMockData['25-android'] = mergeById([], window.BaqueanoAndroidInventory || []);
+})(window);

@@ -62,11 +62,15 @@
     init() {
       console.info('[BaqueanoPublicSync] Conectando páginas públicas con Cloud Firestore...');
       this.syncGlobalAnnouncement();
+      this.syncPublishedNotifications();
       this.syncDynamicPageSections();
 
       const path = window.location.pathname.toLowerCase();
       if (path.includes('aliados.html') || document.querySelector('.allies-3d-grid')) {
         this.syncAlliesPage();
+      }
+      if (document.querySelector('.partners-infinity-section')) {
+        this.syncPartnerTracks();
       }
       if (path.includes('destinos.html') || document.querySelector('.dest-card-pro, #destinosGrid, .destinos-grid, .featured-destinations')) {
         this.syncDestinationsCatalog();
@@ -136,7 +140,7 @@
 
         if (targetEl) {
           // Ocultar / Mostrar según status
-          if (status === 'draft' || status === 'trashed') {
+          if (status === 'draft' || status === 'archived' || status === 'trashed') {
             targetEl.style.display = 'none';
             return;
           }
@@ -380,7 +384,7 @@
         if (cards.length > 0) {
           cards.forEach((card) => {
             // Ocultar si está en borrador o papelera
-            if (status === 'draft' || status === 'trashed') {
+            if (status === 'draft' || status === 'archived' || status === 'trashed') {
               card.style.display = 'none';
               return;
             }
@@ -470,6 +474,39 @@
     },
 
     // ------------------------------------------------------------------------
+    // 1b. NOTIFICACIONES EDITORIALES PUBLICADAS DESDE OPS CENTER
+    // ------------------------------------------------------------------------
+    syncPublishedNotifications() {
+      const db = this.getDb();
+      if (!db) return;
+      db.collection('notifications').onSnapshot((snapshot) => {
+        const published = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .filter((item) => (item.status || 'draft') === 'published' && item.permanentlyDeleted !== true)
+          .sort((a, b) => String(b.updatedAt || b.createdAt || '').localeCompare(String(a.updatedAt || a.createdAt || '')));
+        let notice = document.getElementById('bqPublishedNotification');
+        if (!published.length) {
+          if (notice) notice.remove();
+          return;
+        }
+        const item = published[0];
+        if (!notice) {
+          notice = document.createElement('aside');
+          notice.id = 'bqPublishedNotification';
+          notice.style.cssText = 'position:fixed;right:1rem;bottom:1rem;z-index:9998;max-width:360px;background:#0F172A;color:#fff;border:1px solid #165D6F;border-left:4px solid #F65E01;border-radius:14px;padding:1rem 2.5rem 1rem 1rem;box-shadow:0 18px 45px rgba(0,0,0,.38);';
+          document.body.appendChild(notice);
+        }
+        const link = item.link || item.website || '';
+        notice.innerHTML = `
+          <button type="button" aria-label="Cerrar notificación" style="position:absolute;right:.65rem;top:.45rem;border:0;background:transparent;color:#fff;font-size:1.1rem;cursor:pointer" onclick="this.parentElement.remove()">×</button>
+          <strong style="display:block;margin-bottom:.35rem">${this.escape(item.title || item.name || 'Baqueano')}</strong>
+          <span style="font-size:.84rem;color:#cbd5e1">${this.escape(item.message || item.description || '')}</span>
+          ${link ? `<a href="${this.escape(link)}" style="display:block;margin-top:.65rem;color:#F4E6C1;font-weight:700">Ver información</a>` : ''}
+        `;
+      }, (error) => console.warn('[BaqueanoPublicSync] Error en notifications:', error.message));
+    },
+
+    // ------------------------------------------------------------------------
     // 2. SINCRONIZACIÓN DE ALIADOS Y COOPERATIVAS (aliados.html)
     // ------------------------------------------------------------------------
     syncAlliesPage() {
@@ -480,16 +517,24 @@
       if (!db) return;
 
       db.collection('businesses')
-        .where('status', '==', 'published')
         .onSnapshot(
           (snapshot) => {
-            // Si no existen negocios publicados en Firestore, conservar el respaldo estático
-            if (snapshot.empty) {
+            const nativeBusinesses = window.BaqueanoWebsiteBusinesses || [];
+            // Si no existe ninguna fuente, conservar el respaldo HTML original.
+            if (snapshot.empty && nativeBusinesses.length === 0) {
               console.info('[BaqueanoPublicSync] Colección businesses vacía en Firestore. Preservando contenido nativo.');
               return;
             }
 
-            const allies = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+            const mergedBusinesses = new Map(nativeBusinesses.map((item) => [item.id, item]));
+            snapshot.docs.forEach((d) => mergedBusinesses.set(d.id, {
+              ...(mergedBusinesses.get(d.id) || {}),
+              id: d.id,
+              ...d.data()
+            }));
+            const allies = Array.from(mergedBusinesses.values()).filter((item) =>
+              (item.status || 'published') === 'published' && item.permanentlyDeleted !== true
+            );
 
             // Renderizar tarjetas 3D fluidas con los datos reales administrados
             grid.innerHTML = allies.map((ally) => {
@@ -559,6 +604,41 @@
           },
           (error) => console.warn('[BaqueanoPublicSync] Error escuchando businesses:', error.message)
         );
+    },
+
+    // ------------------------------------------------------------------------
+    // 2b. RED DE ALIADOS DE LA PORTADA
+    // ------------------------------------------------------------------------
+    syncPartnerTracks() {
+      const tracks = [
+        document.getElementById('partnersTrackA'),
+        document.getElementById('partnersTrackB')
+      ].filter(Boolean);
+      const db = this.getDb();
+      if (!tracks.length || !db) return;
+
+      db.collection('businesses').onSnapshot((snapshot) => {
+        const merged = new Map((window.BaqueanoWebsiteBusinesses || []).map((item) => [item.id, item]));
+        snapshot.docs.forEach((doc) => merged.set(doc.id, {
+          ...(merged.get(doc.id) || {}),
+          id: doc.id,
+          ...doc.data()
+        }));
+        const visible = Array.from(merged.values()).filter((item) =>
+          (item.status || 'published') === 'published' && item.permanentlyDeleted !== true
+        );
+        const chips = visible.map((business) => `
+          <div class="partner-chip">
+            <span class="partner-chip-icon"><i class="fa-solid fa-store"></i></span>
+            <div class="partner-chip-body">
+              <span class="partner-chip-name">${this.escape(business.name || business.title)}</span>
+              <span class="partner-chip-location">${this.escape(business.department || 'Nicaragua')} · ${this.escape(business.type || business.category || 'Aliado')}</span>
+            </div>
+            ${business.verified === true ? '<span class="partner-chip-verified" title="Verificado Baqueano"><i class="fa-solid fa-circle-check"></i></span>' : ''}
+          </div>
+        `).join('');
+        tracks.forEach((track) => { track.innerHTML = chips; });
+      }, (error) => console.warn('[BaqueanoPublicSync] Error en red de aliados:', error.message));
     },
 
     // ------------------------------------------------------------------------
