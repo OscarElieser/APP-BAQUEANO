@@ -1894,6 +1894,9 @@
       const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
       const filename = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${sanitizedName}`;
       const path = `${folder}/${filename}`;
+      const contentType = /\.apk$/i.test(file.name)
+        ? 'application/vnd.android.package-archive'
+        : (file.type || 'application/octet-stream');
 
       // 1. INTENTAR CON FIREBASE (ALMACENAMIENTO PRINCIPAL)
       const fbStorage = this.getFirebaseStorage();
@@ -1901,7 +1904,7 @@
         try {
           const storageRef = fbStorage.ref(path);
           const metadata = {
-            contentType: file.type,
+            contentType,
             customMetadata: {
               uploadedBy: OpsState.currentUser?.email || 'admin',
               uploadedAt: new Date().toISOString()
@@ -1951,6 +1954,7 @@
         
         const { data, error } = await sbStorage.from(bucketName).upload(path, file, {
           cacheControl: '3600',
+          contentType,
           upsert: false
         });
 
@@ -4687,6 +4691,82 @@
       `;
     },
 
+    renderAndroidReleaseModule() {
+      const panel = document.getElementById('view-25-android');
+      if (!panel) return;
+      const release = OpsState.androidRelease;
+      const hasRelease = Boolean(release?.downloadUrl);
+      panel.innerHTML = `
+        <div class="ops-view-header">
+          <div class="ops-view-title-group">
+            <h1><i class="fa-brands fa-android" style="color:var(--bq-jungle)"></i> Publicación de APK Android</h1>
+            <p class="ops-view-subtitle">CARGA ADMINISTRATIVA, PUBLICACIÓN CONTROLADA E HISTORIAL DE LA APLICACIÓN</p>
+          </div>
+        </div>
+
+        <div class="ops-kpi-grid-matte" style="margin-bottom:1.5rem">
+          <div class="ops-kpi-card-matte">
+            <div class="ops-kpi-header"><span class="ops-kpi-title">Estado público</span><div class="ops-kpi-icon-wrap"><i class="fa-solid fa-mobile-screen"></i></div></div>
+            <div class="ops-kpi-value-num" style="font-size:1.35rem">${release?.published ? 'Publicado' : 'Sin APK'}</div>
+            <div class="ops-kpi-subtext">${hasRelease ? OpsUI.escape(release.version || 'Versión sin identificar') : 'Formulario listo para una carga futura'}</div>
+          </div>
+          <div class="ops-kpi-card-matte">
+            <div class="ops-kpi-header"><span class="ops-kpi-title">Canal</span><div class="ops-kpi-icon-wrap"><i class="fa-solid fa-code-branch"></i></div></div>
+            <div class="ops-kpi-value-num" style="font-size:1.35rem">${OpsUI.escape(release?.channel || '—')}</div>
+            <div class="ops-kpi-subtext">${release?.updatedAt ? `Actualizado ${OpsUI.formatDate(release.updatedAt)}` : 'Sin publicaciones anteriores'}</div>
+          </div>
+        </div>
+
+        <div class="ops-builder-header-strip">
+          <div style="width:100%">
+            <h3 style="margin:0 0 1rem;color:#fff"><i class="fa-solid fa-cloud-arrow-up"></i> Nueva versión Android</h3>
+            <div class="ops-form-grid">
+              <div class="ops-form-group">
+                <label class="ops-form-label" for="androidApkVersion">Versión *</label>
+                <input id="androidApkVersion" class="ops-form-input" type="text" maxlength="30" placeholder="Ej. 1.0.0">
+              </div>
+              <div class="ops-form-group">
+                <label class="ops-form-label" for="androidApkChannel">Canal *</label>
+                <select id="androidApkChannel" class="ops-form-input">
+                  <option value="production">Producción</option>
+                  <option value="beta">Beta</option>
+                  <option value="internal">Pruebas internas</option>
+                </select>
+              </div>
+            </div>
+            <div class="ops-form-group" style="margin-top:1rem">
+              <label class="ops-form-label" for="androidApkNotes">Notas de la versión</label>
+              <textarea id="androidApkNotes" class="ops-form-textarea" rows="3" maxlength="1000" placeholder="Cambios, correcciones y requisitos importantes"></textarea>
+            </div>
+            <div class="ops-form-group" style="margin-top:1rem">
+              <label class="ops-form-label" for="androidApkFile">Archivo APK *</label>
+              <input id="androidApkFile" class="ops-form-input" type="file" accept=".apk,application/vnd.android.package-archive">
+              <small style="color:var(--ops-text-secondary)">El archivo permanece vacío hasta que un superadministrador seleccione una versión. No se publica automáticamente.</small>
+            </div>
+            <label style="display:flex;align-items:center;gap:.65rem;margin-top:1rem;color:var(--ops-text-secondary)">
+              <input id="androidApkPublish" type="checkbox">
+              Publicar el botón de descarga en la web después de completar y verificar la carga
+            </label>
+            <div id="androidApkProgress" style="display:none;margin-top:1rem;color:var(--ops-text-secondary)">Preparando carga…</div>
+            <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem">
+              <button class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine.uploadAndroidRelease()">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Subir nueva versión
+              </button>
+              ${hasRelease && release.published ? `
+                <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.unpublishAndroidRelease()">
+                  <i class="fa-solid fa-eye-slash"></i> Retirar de la web
+                </button>` : ''}
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.25rem;padding:1rem;border:1px solid var(--ops-border-subtle);border-radius:var(--ops-radius-md);background:var(--ops-surface-1)">
+          <strong style="color:#fff"><i class="fa-solid fa-shield-halved"></i> Publicación segura</strong>
+          <p style="margin:.5rem 0 0;color:var(--ops-text-secondary)">Si el proveedor de almacenamiento no admite APK o el plan no tiene capacidad suficiente, la carga se detendrá y la versión pública anterior permanecerá intacta.</p>
+        </div>
+      `;
+    },
+
     renderAiAdminModule() {
       const panel = document.getElementById('view-23-ai');
       if (!panel) return;
@@ -5197,6 +5277,108 @@
       }, { merge: true });
 
       OpsToast.show('Anuncio global sincronizado con Website y Android.', 'success');
+    },
+
+    async uploadAndroidRelease() {
+      const fileInput = document.getElementById('androidApkFile');
+      const versionInput = document.getElementById('androidApkVersion');
+      const channelInput = document.getElementById('androidApkChannel');
+      const notesInput = document.getElementById('androidApkNotes');
+      const publishInput = document.getElementById('androidApkPublish');
+      const progress = document.getElementById('androidApkProgress');
+      const file = fileInput?.files?.[0];
+      const version = versionInput?.value.trim() || '';
+
+      if (!file || !version) {
+        OpsToast.show('Selecciona un archivo APK e indica su versión.', 'warning');
+        return;
+      }
+      if (!/\.apk$/i.test(file.name) || file.size <= 0 || file.size > 500 * 1024 * 1024) {
+        OpsToast.show('El archivo debe ser un APK válido y no superar 500 MB.', 'error');
+        return;
+      }
+
+      const signature = new Uint8Array(await file.slice(0, 4).arrayBuffer());
+      if (signature[0] !== 0x50 || signature[1] !== 0x4b) {
+        OpsToast.show('El archivo seleccionado no tiene una estructura APK válida.', 'error');
+        return;
+      }
+
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Subir nueva versión Android?',
+        message: publishInput?.checked
+          ? 'El APK se cargará y su descarga aparecerá en la web únicamente cuando finalice correctamente.'
+          : 'El APK se cargará como borrador y no aparecerá todavía en la web.',
+        confirmText: 'Continuar con la carga'
+      });
+      if (!confirmed) return;
+
+      try {
+        if (progress) {
+          progress.style.display = 'block';
+          progress.textContent = 'Cargando APK: 0%';
+        }
+        const result = await OpsStorage.uploadFile(file, 'android/releases', (value) => {
+          if (progress) progress.textContent = `Cargando APK: ${Math.round(value)}%`;
+        });
+        const now = new Date().toISOString();
+        const releaseId = `android_${version.replace(/[^a-zA-Z0-9.-]/g, '_')}_${Date.now()}`;
+        const release = {
+          id: releaseId,
+          version,
+          channel: channelInput?.value || 'production',
+          notes: notesInput?.value.trim() || '',
+          fileName: file.name,
+          fileSizeBytes: file.size,
+          downloadUrl: result.downloadURL,
+          storagePath: result.path,
+          storageProvider: result.provider,
+          published: Boolean(publishInput?.checked),
+          status: publishInput?.checked ? 'published' : 'draft',
+          updatedAt: now,
+          updatedBy: OpsState.currentUser?.email || 'admin'
+        };
+        const db = OpsCMS.getDb();
+        if (!db) throw new Error('Firestore no está disponible para registrar la versión.');
+        const batch = db.batch();
+        batch.set(db.collection('android_releases').doc(releaseId), release);
+        batch.set(db.collection('app_config').doc('android_release'), release, { merge: true });
+        await batch.commit();
+        await OpsCMS.logAuditEvent({
+          action: release.published ? 'ANDROID_APK_PUBLISHED' : 'ANDROID_APK_UPLOADED',
+          module: 'Android',
+          collection: 'android_releases',
+          recordId: releaseId,
+          description: `APK ${version} cargado mediante ${result.provider}.`,
+          status: 'success'
+        });
+        OpsToast.show(release.published ? 'APK cargado y publicado en la web.' : 'APK cargado como borrador.', 'success');
+        if (progress) progress.textContent = 'Carga y registro completados.';
+      } catch (error) {
+        console.error('[AndroidRelease] No se pudo cargar el APK:', error);
+        if (progress) progress.textContent = 'La carga no pudo completarse. La versión pública no cambió.';
+        OpsToast.show(`No se pudo cargar el APK: ${error.message || 'almacenamiento no disponible'}`, 'error', 7000);
+      }
+    },
+
+    async unpublishAndroidRelease() {
+      const release = OpsState.androidRelease;
+      if (!release?.downloadUrl) return;
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Retirar APK de la web?',
+        message: 'El archivo se conservará en el historial, pero el botón público dejará de mostrarse.',
+        confirmText: 'Retirar de la web'
+      });
+      if (!confirmed) return;
+      const db = OpsCMS.getDb();
+      if (!db) return;
+      await db.collection('app_config').doc('android_release').set({
+        published: false,
+        status: 'archived',
+        updatedAt: new Date().toISOString(),
+        updatedBy: OpsState.currentUser?.email || 'admin'
+      }, { merge: true });
+      OpsToast.show('La descarga del APK fue retirada de la web; el archivo se conserva.', 'success');
     },
 
     async runAiJob(jobType, instruction = '') {

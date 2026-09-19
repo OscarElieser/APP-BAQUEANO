@@ -358,6 +358,29 @@ function initDownloadModal() {
   if (modal) modal.remove();
 }
 
+async function initAndroidReleaseDownload(retryCount = 0) {
+  const container = document.querySelector('.download-cta-double');
+  if (!container) return;
+  if (!window.firebase || !window.firebase.firestore) {
+    if (retryCount < 3) setTimeout(() => initAndroidReleaseDownload(retryCount + 1), 1000);
+    return;
+  }
+  try {
+    const snapshot = await window.firebase.firestore().collection('app_config').doc('android_release').get();
+    const release = snapshot.exists ? snapshot.data() : null;
+    if (!release?.published || !release.downloadUrl) return;
+    const link = document.createElement('a');
+    link.href = release.downloadUrl;
+    link.className = 'btn-hero-primary';
+    link.rel = 'noopener';
+    link.setAttribute('download', release.fileName || 'baqueanonicaragua.apk');
+    link.innerHTML = '<i class="fa-solid fa-download"></i> Descargar aplicación Android';
+    container.prepend(link);
+  } catch (error) {
+    console.warn('[AndroidRelease] No se pudo consultar la versión pública:', error.message);
+  }
+}
+
 function initShareTools() {
   const waBtn = document.getElementById('shareWhatsAppBtn');
   const copyBtn = document.getElementById('copyLinkBtn');
@@ -655,6 +678,7 @@ function initializeNavigationModules() {
   initActiveNavHighlight();
   initSosModal();
   initDownloadModal();
+  initAndroidReleaseDownload();
   initShareTools();
   initSmoothScroll();
   initDynamicFooter();
