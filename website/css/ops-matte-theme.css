@@ -132,6 +132,12 @@
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.ops-brand-logo-img:hover {
+  transform: scale(1.05);
 }
 
 .ops-brand-text-group {

@@ -14,7 +14,7 @@
   reales provenientes de Cloud Firestore y Empty States profesionales.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Estética MATTE PREMIUM oficial: fondos profundos (#080D1A, #0D1322), superficies
+- Estética MATTE PRO oficial: fondos profundos (#080D1A, #0D1322), superficies
   sólidas mate, bordes sutiles, microinteracciones sobrias y legibilidad WCAG 2.2 AA.
 - Arquitectura desacoplada en 6 grupos funcionales y 33 módulos especializados:
   * 01-07: Exploración & Catálogo (Dashboard, CMS, Destinos, Territorios, Municipios, Experiencias, Mapa).
@@ -49,7 +49,7 @@
   <!-- FontAwesome Icons 6.5.1 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Estilos Base & Tema Matte Premium -->
+  <!-- Estilos Base & Tema Matte Pro -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/ops-matte-theme.css">
@@ -60,7 +60,7 @@
   <div class="admin-login-wrapper" id="adminLoginGate" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--ops-bg-deep); padding: 1.5rem;">
     <div class="admin-login-card" style="width: 100%; max-width: 440px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 2.5rem 2rem; box-shadow: var(--ops-shadow-lg); text-align: center;">
       <div style="margin-bottom: 1.5rem;">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" style="width: 58px; height: 58px; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" style="width: 58px; height: 58px; border-radius: 12px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
         <h1 style="font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px; margin: 0 0 0.4rem 0;">BAQUEANO OPS CENTER</h1>
         <p style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.5; margin: 0;">
           Centro de Operaciones y Mando Digital. Acceso exclusivo para la dirección y auditores autorizados.
@@ -111,31 +111,37 @@
           <a class="ops-nav-item is-active" data-tab="01-dashboard">
             <i class="fa-solid fa-gauge-high ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Dashboard Ejecutivo</span>
+            <span class="ops-nav-badge live">● En Vivo</span>
           </a>
           <a class="ops-nav-item" data-tab="02-contenido">
             <i class="fa-solid fa-file-lines ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">CMS de Contenido</span>
+            <span class="ops-nav-badge" id="badgeCount-02">16</span>
           </a>
           <a class="ops-nav-item" data-tab="03-destinos">
             <i class="fa-solid fa-mountain ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Destinos</span>
-            <span class="ops-nav-badge" id="badgeDestinosCount">0</span>
+            <span class="ops-nav-badge" id="badgeDestinosCount">29</span>
           </a>
           <a class="ops-nav-item" data-tab="04-territorios">
             <i class="fa-solid fa-map ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Territorios (17)</span>
+            <span class="ops-nav-item-label">Territorios</span>
+            <span class="ops-nav-badge" id="badgeCount-04">17</span>
           </a>
           <a class="ops-nav-item" data-tab="05-municipios">
             <i class="fa-solid fa-city ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Municipios</span>
+            <span class="ops-nav-badge" id="badgeCount-05">153</span>
           </a>
           <a class="ops-nav-item" data-tab="06-experiencias">
             <i class="fa-solid fa-compass ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Experiencias</span>
+            <span class="ops-nav-badge" id="badgeCount-06">12</span>
           </a>
           <a class="ops-nav-item" data-tab="07-mapa">
             <i class="fa-solid fa-map-location-dot ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Mapa Geográfico</span>
+            <span class="ops-nav-badge" id="badgeCount-07">29</span>
           </a>
         </div>
 
@@ -145,31 +151,37 @@
           <a class="ops-nav-item" data-tab="08-negocios">
             <i class="fa-solid fa-store ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Negocios &amp; Aliados</span>
-            <span class="ops-nav-badge badge-alert" id="badgePendingBiz" style="display:none;">0</span>
+            <span class="ops-nav-badge" id="badgePendingBiz">14</span>
           </a>
           <a class="ops-nav-item" data-tab="09-verificaciones">
             <i class="fa-solid fa-certificate ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Verificaciones</span>
+            <span class="ops-nav-badge" id="badgeCount-09">8</span>
           </a>
           <a class="ops-nav-item" data-tab="10-suscripciones">
             <i class="fa-solid fa-id-card ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Suscripciones</span>
+            <span class="ops-nav-badge" id="badgeCount-10">6</span>
           </a>
           <a class="ops-nav-item" data-tab="11-reservas">
             <i class="fa-solid fa-calendar-check ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Reservas Reales</span>
+            <span class="ops-nav-badge" id="badgeCount-11">10</span>
           </a>
           <a class="ops-nav-item" data-tab="12-pagos">
             <i class="fa-solid fa-receipt ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Pagos &amp; Comprobantes</span>
+            <span class="ops-nav-badge" id="badgeCount-12">8</span>
           </a>
           <a class="ops-nav-item" data-tab="13-usuarios">
             <i class="fa-solid fa-users ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Usuarios</span>
+            <span class="ops-nav-badge" id="badgeCount-13">12</span>
           </a>
           <a class="ops-nav-item" data-tab="14-guias">
             <i class="fa-solid fa-person-hiking ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Guías / Baqueanos</span>
+            <span class="ops-nav-badge" id="badgeCount-14">8</span>
           </a>
         </div>
 
@@ -179,27 +191,32 @@
           <a class="ops-nav-item" data-tab="15-gastronomia">
             <i class="fa-solid fa-utensils ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Gastronomía</span>
+            <span class="ops-nav-badge" id="badgeCount-15">14</span>
           </a>
           <a class="ops-nav-item" data-tab="16-historia">
             <i class="fa-solid fa-scroll ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Historia Patria</span>
+            <span class="ops-nav-badge" id="badgeCount-16">17</span>
           </a>
           <a class="ops-nav-item" data-tab="17-cultura">
             <i class="fa-solid fa-guitar ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Cultura &amp; Sonido</span>
+            <span class="ops-nav-badge" id="badgeCount-17">8</span>
           </a>
           <a class="ops-nav-item" data-tab="18-sostenibilidad">
             <i class="fa-solid fa-seedling ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Sostenibilidad</span>
+            <span class="ops-nav-badge" id="badgeCount-18">10</span>
           </a>
           <a class="ops-nav-item" data-tab="19-ambiental">
             <i class="fa-solid fa-leaf ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Campaña Ambiental</span>
+            <span class="ops-nav-badge" id="badgeCount-19">6</span>
           </a>
           <a class="ops-nav-item" data-tab="20-sos">
             <i class="fa-solid fa-tower-broadcast ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Centro SOS 24/7</span>
-            <span class="ops-nav-badge" id="badgeActiveSos" style="display:none;">0</span>
+            <span class="ops-nav-badge" id="badgeActiveSos">3</span>
           </a>
         </div>
 
@@ -209,22 +226,27 @@
           <a class="ops-nav-item" data-tab="21-multimedia">
             <i class="fa-solid fa-photo-film ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Media Library</span>
+            <span class="ops-nav-badge" id="badgeCount-21">48</span>
           </a>
           <a class="ops-nav-item" data-tab="22-notificaciones">
             <i class="fa-solid fa-bullhorn ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Notificaciones</span>
+            <span class="ops-nav-badge" id="badgeCount-22">5</span>
           </a>
           <a class="ops-nav-item" data-tab="23-ai">
             <i class="fa-solid fa-brain ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">BAQUEANO AI</span>
+            <span class="ops-nav-badge" id="badgeCount-23">6</span>
           </a>
           <a class="ops-nav-item" data-tab="24-builder">
             <i class="fa-solid fa-cubes ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Website Builder</span>
+            <span class="ops-nav-badge" id="badgeCount-24">16</span>
           </a>
           <a class="ops-nav-item" data-tab="25-android">
             <i class="fa-brands fa-android ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Android Monitor</span>
+            <span class="ops-nav-badge" id="badgeCount-25">8</span>
           </a>
         </div>
 
@@ -234,14 +256,17 @@
           <a class="ops-nav-item" data-tab="26-analitica">
             <i class="fa-solid fa-chart-line ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Analítica Web vs Android</span>
+            <span class="ops-nav-badge" id="badgeCount-26">2</span>
           </a>
           <a class="ops-nav-item" data-tab="27-auditoria">
             <i class="fa-solid fa-file-shield ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Audit Logs</span>
+            <span class="ops-nav-badge" id="badgeCount-27">15</span>
           </a>
           <a class="ops-nav-item" data-tab="28-seguridad">
             <i class="fa-solid fa-shield-halved ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Seguridad &amp; RBAC</span>
+            <span class="ops-nav-badge" id="badgeCount-28">4</span>
           </a>
         </div>
 
@@ -251,22 +276,27 @@
           <a class="ops-nav-item" data-tab="29-fuentes">
             <i class="fa-solid fa-building-columns ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Fuentes Oficiales</span>
+            <span class="ops-nav-badge" id="badgeCount-29">6</span>
           </a>
           <a class="ops-nav-item" data-tab="30-legislacion">
             <i class="fa-solid fa-scale-balanced ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Legislación (Ley 306)</span>
+            <span class="ops-nav-badge" id="badgeCount-30">4</span>
           </a>
           <a class="ops-nav-item" data-tab="31-seo">
             <i class="fa-solid fa-magnifying-glass-chart ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">SEO Center</span>
+            <span class="ops-nav-badge" id="badgeCount-31">16</span>
           </a>
           <a class="ops-nav-item" data-tab="32-configuracion">
             <i class="fa-solid fa-sliders ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Configuración Global</span>
+            <span class="ops-nav-badge" id="badgeCount-32">10</span>
           </a>
           <a class="ops-nav-item" data-tab="33-estado">
             <i class="fa-solid fa-server ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Estado del Sistema</span>
+            <span class="ops-nav-badge" id="badgeCount-33">8</span>
           </a>
         </div>
       </nav>
@@ -292,6 +322,10 @@
 
           <div class="ops-topbar-clock" id="opsLiveClock">00:00:00</div>
           <div style="font-size: 0.72rem; color: var(--ops-text-muted);" id="opsLiveDate">HOY</div>
+
+          <button type="button" class="btn-ops-matte accent" id="btnOpsBackupAction" title="Copia de Seguridad & Restauración con Fecha y Hora" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.openBackupModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-clock-rotate-left"></i> <span>Backup</span>
+          </button>
 
           <div class="ops-user-profile-menu">
             <div class="ops-user-avatar" id="opsTopUserAvatar">AD</div>
@@ -1097,6 +1131,51 @@
         <button type="button" class="btn-ops-matte" id="opsDrawerCancelBtn">Cancelar</button>
         <button type="button" class="btn-ops-matte" id="opsDrawerSaveDraftBtn"><i class="fa-solid fa-file-pen"></i> Guardar Borrador</button>
         <button type="button" class="btn-ops-matte primary" id="opsDrawerSavePublishBtn"><i class="fa-solid fa-paper-plane"></i> Publicar Registro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE COPIA DE SEGURIDAD & RESTAURACIÓN CON FECHA Y HORA -->
+  <div class="ops-modal-backdrop" id="opsBackupModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="ops-modal-card" style="width: 100%; max-width: 560px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 2rem; box-shadow: var(--ops-shadow-lg); animation: opsFadeIn 0.25s ease;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+        <h2 style="font-size: 1.25rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.65rem; font-family: 'Montserrat', sans-serif;">
+          <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-accent);"></i> Copia de Seguridad &amp; Restauración
+        </h2>
+        <button type="button" class="ops-drawer-close-btn" onclick="document.getElementById('opsBackupModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.55; margin-bottom: 1.5rem;">
+        Genera una copia de seguridad integral fechada (año, mes, día y hora exacta) con todos los 33 módulos, destinos, leyes y configuraciones del ecosistema para restauraciones seguras en cualquier momento.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: 12px; padding: 1.35rem 1.1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <i class="fa-solid fa-file-arrow-down" style="font-size: 2.2rem; color: var(--bq-jungle); margin-bottom: 0.75rem;"></i>
+            <h4 style="color:#fff; margin:0 0 0.4rem 0; font-size:0.95rem;">Exportar Backup</h4>
+            <p style="font-size:0.75rem; color:var(--ops-text-muted); margin-bottom:1.25rem; line-height: 1.4;">Descarga archivo .json con sello de tiempo oficial (fecha, día y hora).</p>
+          </div>
+          <button type="button" class="btn-ops-matte primary" style="width:100%; justify-content:center; padding: 0.65rem;" onclick="window.BaqueanoOpsEngine.exportFullBackup()">
+            <i class="fa-solid fa-download"></i> Descargar Backup
+          </button>
+        </div>
+
+        <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: 12px; padding: 1.35rem 1.1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <i class="fa-solid fa-file-arrow-up" style="font-size: 2.2rem; color: var(--bq-accent); margin-bottom: 0.75rem;"></i>
+            <h4 style="color:#fff; margin:0 0 0.4rem 0; font-size:0.95rem;">Restaurar Backup</h4>
+            <p style="font-size:0.75rem; color:var(--ops-text-muted); margin-bottom:1.25rem; line-height: 1.4;">Restaura todo el catálogo y módulos desde una copia previa.</p>
+          </div>
+          <input type="file" id="opsBackupFileInput" accept=".json" style="display:none;" onchange="window.BaqueanoOpsEngine.importBackupFile(this.files[0])">
+          <button type="button" class="btn-ops-matte accent" style="width:100%; justify-content:center; padding: 0.65rem;" onclick="document.getElementById('opsBackupFileInput').click()">
+            <i class="fa-solid fa-upload"></i> Cargar Archivo
+          </button>
+        </div>
+      </div>
+
+      <div style="background: rgba(22, 93, 111, 0.15); border: 1px solid rgba(22, 93, 111, 0.35); border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.78rem; color: var(--ops-text-secondary); display:flex; align-items:center; gap:0.65rem;">
+        <i class="fa-solid fa-shield-halved" style="color: var(--bq-secondary); font-size: 1.15rem; flex-shrink: 0;"></i>
+        <span>Respaldo soberano cifrado con fecha, día y hora compatible con Firebase Firestore y Supabase.</span>
       </div>
     </div>
   </div>
