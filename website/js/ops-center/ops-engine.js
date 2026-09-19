@@ -1527,9 +1527,14 @@
     },
     // 07: Mapa Geográfico & Coordenadas
     '07-mapa': {
-      isSystem: true,
+      collection: 'places',
+      dualSyncCollection: 'destinations',
       title: 'Mapa Geográfico & Coordenadas',
-      icon: 'fa-map-location-dot'
+      singular: 'Registro Geográfico',
+      icon: 'fa-map-location-dot',
+      hasImage: true,
+      hasGeo: true,
+      fields: ['title', 'category', 'department', 'municipality', 'description', 'latitude', 'longitude', 'imageUrl', 'status']
     },
     // 08: Negocios & Aliados Comunitarios
     '08-negocios': {
@@ -1640,9 +1645,12 @@
     },
     // 21: Biblioteca Multimedia (Storage)
     '21-multimedia': {
-      isSystem: true,
+      collection: 'media_assets',
       title: 'Biblioteca Multimedia (Cloud Storage)',
-      icon: 'fa-photo-film'
+      singular: 'Archivo Multimedia',
+      icon: 'fa-photo-film',
+      hasImage: true,
+      fields: ['title', 'type', 'category', 'imageUrl', 'audioUrl', 'publicUrl', 'status']
     },
     // 22: Centro de Notificaciones
     '22-notificaciones': {
@@ -1654,9 +1662,11 @@
     },
     // 23: BAQUEANO AI Admin
     '23-ai': {
-      isSystem: true,
+      collection: 'ai_capabilities',
       title: 'BAQUEANO AI Admin & Guardrails',
-      icon: 'fa-brain'
+      singular: 'Configuración AI',
+      icon: 'fa-brain',
+      fields: ['title', 'category', 'description', 'implementationPath', 'status']
     },
     // 24: Website Builder por Bloques
     '24-builder': {
@@ -1666,9 +1676,11 @@
     },
     // 25: Android Monitor
     '25-android': {
-      isSystem: true,
+      collection: 'android_inventory',
       title: 'Android Monitor & Telemetría APK',
-      icon: 'fa-brands fa-android'
+      singular: 'Registro Android',
+      icon: 'fa-brands fa-android',
+      fields: ['title', 'category', 'description', 'artifactPath', 'releaseChannel', 'telemetryStatus', 'status']
     },
     // 26: Analítica Web vs Android
     '26-analitica': {
@@ -2186,17 +2198,27 @@
             ...doc.data()
           }));
 
-          // Fallback: Si no hay datos en la DB, usar los datos simulados existentes para que el Ops Center no se vea vacío
-          if (items.length === 0 && window.BaqueanoMockData && window.BaqueanoMockData[tabId]) {
-            items = window.BaqueanoMockData[tabId];
-          }
+          // Catálogo unificado: la web nativa nunca desaparece. Firestore
+          // reemplaza por ID y agrega registros nuevos sin duplicar contenido.
+          const websiteItems = window.BaqueanoMockData?.[tabId] || [];
+          const mergedItems = new Map(websiteItems.map((item) => [item.id, item]));
+          items.forEach((item) => {
+            const nativeItem = mergedItems.get(item.id);
+            mergedItems.set(item.id, {
+              ...(nativeItem || {}),
+              ...item,
+              source: 'firestore',
+              nativeSource: nativeItem?.source === 'website_catalog' || nativeItem?.nativeSource === true
+            });
+          });
+          items = Array.from(mergedItems.values()).filter((item) => item.permanentlyDeleted !== true);
 
           OpsState.collectionsData[tabId] = items;
           OpsState.loadedTabs.add(tabId);
 
           // Actualizar métricas globales
           if (tabId === '03-destinos') {
-            OpsState.metrics.totalDestinations = snapshot.size;
+            OpsState.metrics.totalDestinations = items.length;
             OpsState.metrics.publishedDestinations = items.filter((d) => d.status === 'published').length;
           }
           if (tabId === '08-negocios') {
@@ -2326,6 +2348,12 @@
         payload.longitude = lng;
       }
 
+      if (tabId === '22-notificaciones') {
+        payload.message = payload.message || payload.description || payload.shortDesc || '';
+        payload.targetPlatform = payload.targetPlatform || payload.category || 'web_android';
+        payload.link = payload.link || payload.website || '';
+      }
+
       // Escritura atómica (Batch) si requiere sincronización dual
       const batch = db.batch();
       const primaryDocRef = db.collection(config.collection).doc(entityId);
@@ -2365,10 +2393,10 @@
       };
 
       const batch = db.batch();
-      batch.update(db.collection(config.collection).doc(entityId), updatePayload);
+      batch.set(db.collection(config.collection).doc(entityId), updatePayload, { merge: true });
 
       if (config.dualSyncCollection) {
-        batch.update(db.collection(config.dualSyncCollection).doc(entityId), updatePayload);
+        batch.set(db.collection(config.dualSyncCollection).doc(entityId), updatePayload, { merge: true });
       }
 
       await batch.commit();
@@ -2401,9 +2429,9 @@
       };
 
       const batch = db.batch();
-      batch.update(db.collection(config.collection).doc(entityId), updatePayload);
+      batch.set(db.collection(config.collection).doc(entityId), updatePayload, { merge: true });
       if (config.dualSyncCollection) {
-        batch.update(db.collection(config.dualSyncCollection).doc(entityId), updatePayload);
+        batch.set(db.collection(config.dualSyncCollection).doc(entityId), updatePayload, { merge: true });
       }
       await batch.commit();
 
@@ -2427,9 +2455,24 @@
       if (!db) return;
 
       const batch = db.batch();
-      batch.delete(db.collection(config.collection).doc(entityId));
-      if (config.dualSyncCollection) {
-        batch.delete(db.collection(config.dualSyncCollection).doc(entityId));
+      const item = (OpsState.collectionsData[tabId] || []).find((record) => record.id === entityId);
+      if (item?.source === 'website_catalog' || item?.nativeSource === true) {
+        const tombstone = {
+          id: entityId,
+          permanentlyDeleted: true,
+          status: 'trashed',
+          deletedAt: new Date().toISOString(),
+          deletedBy: OpsState.currentUser?.email || 'admin'
+        };
+        batch.set(db.collection(config.collection).doc(entityId), tombstone, { merge: true });
+        if (config.dualSyncCollection) {
+          batch.set(db.collection(config.dualSyncCollection).doc(entityId), tombstone, { merge: true });
+        }
+      } else {
+        batch.delete(db.collection(config.collection).doc(entityId));
+        if (config.dualSyncCollection) {
+          batch.delete(db.collection(config.dualSyncCollection).doc(entityId));
+        }
       }
       await batch.commit();
 
@@ -3428,7 +3471,6 @@
       if (tabId === '02-contenido') return this.renderWebsiteBuilderModule('02-contenido');
       if (tabId === '09-verificaciones') return this.renderVerificationsModule();
       if (tabId === '10-suscripciones') return this.renderSubscriptionsModule();
-      if (tabId === '21-multimedia') return this.renderMediaLibraryModule();
       if (tabId === '24-builder') return this.renderWebsiteBuilderModule('24-builder');
       if (tabId === '27-auditoria') return this.renderAuditFeed();
 
@@ -3699,8 +3741,8 @@
       document.getElementById('entityCategory').value = item ? (item.category || item.type || '') : '';
       document.getElementById('entityStatus').value = item ? (item.status || 'published') : 'published';
       document.getElementById('entitySortOrder').value = item ? (item.sortOrder || 0) : 0;
-      document.getElementById('entityShortDesc').value = item ? (item.shortDesc || '') : '';
-      document.getElementById('entityDescription').value = item ? (item.description || '') : '';
+      document.getElementById('entityShortDesc').value = item ? (item.shortDesc || item.message || '') : '';
+      document.getElementById('entityDescription').value = item ? (item.description || item.message || '') : '';
 
       // Ubicación
       document.getElementById('entityDepartment').value = item ? (item.department || 'Nacional') : 'Nacional';
@@ -3715,7 +3757,7 @@
       document.getElementById('entityPhone').value = item ? (item.phone || '') : '';
       document.getElementById('entityWhatsapp').value = item ? (item.whatsapp || '') : '';
       document.getElementById('entityEmail').value = item ? (item.email || '') : '';
-      document.getElementById('entityWebsite').value = item ? (item.website || '') : '';
+      document.getElementById('entityWebsite').value = item ? (item.website || item.link || '') : '';
       document.getElementById('entityDayPass').value = item ? (item.dayPass || item.amenities || '') : '';
 
       // Media
@@ -3813,7 +3855,9 @@
       const panel = document.getElementById('view-09-verificaciones');
       if (!panel) return;
 
-      const businesses = OpsState.collectionsData['08-negocios'] || [];
+      const businesses = (OpsState.collectionsData['08-negocios'] || []).filter((business) =>
+        business.status !== 'trashed' && business.status !== 'archived' && business.permanentlyDeleted !== true
+      );
 
       panel.innerHTML = `
         <div class="ops-view-header">
@@ -3869,7 +3913,9 @@
       const panel = document.getElementById('view-10-suscripciones');
       if (!panel) return;
 
-      const businesses = OpsState.collectionsData['08-negocios'] || [];
+      const businesses = (OpsState.collectionsData['08-negocios'] || []).filter((business) =>
+        business.status !== 'trashed' && business.status !== 'archived' && business.permanentlyDeleted !== true
+      );
 
       panel.innerHTML = `
         <div class="ops-view-header">
@@ -3895,7 +3941,8 @@
               ${businesses.length === 0 ? `
                 <tr><td colspan="6" style="text-align:center;padding:2rem;">No hay registros de suscripción activos.</td></tr>
               ` : businesses.map((b) => {
-                const isExpired = b.subscriptionEnd && new Date(b.subscriptionEnd) < new Date();
+                const hasMembership = b.subscriptionStatus === 'active' || Boolean(b.subscriptionStart || b.subscriptionEnd);
+                const isExpired = Boolean(b.subscriptionEnd && new Date(b.subscriptionEnd) < new Date());
                 return `
                   <tr class="ops-table-row">
                     <td><strong>${this.escape(b.name || b.title)}</strong></td>
@@ -4841,7 +4888,7 @@
       const db = OpsCMS.getDb();
       if (!db) return;
 
-      await db.collection('businesses').doc(businessId).update({
+      await db.collection('businesses').doc(businessId).set({
         verified: true,
         verificationStatus: 'verified',
         verifiedAt: new Date().toISOString(),
@@ -4849,7 +4896,7 @@
         verificationNotes: 'Acreditado tras verificación presencial de estándares ecoturísticos.',
         status: 'published',
         updatedAt: new Date().toISOString()
-      });
+      }, { merge: true });
 
       OpsToast.show('Sello oficial asignado exitosamente.', 'success');
       OpsUI.renderVerificationsModule();
@@ -4867,11 +4914,11 @@
       const db = OpsCMS.getDb();
       if (!db) return;
 
-      await db.collection('businesses').doc(businessId).update({
+      await db.collection('businesses').doc(businessId).set({
         verified: false,
         verificationStatus: 'unverified',
         updatedAt: new Date().toISOString()
-      });
+      }, { merge: true });
 
       OpsToast.show('Sello de verificación revocado.', 'warning');
       OpsUI.renderVerificationsModule();
@@ -4888,13 +4935,13 @@
       const db = OpsCMS.getDb();
       if (!db) return;
 
-      await db.collection('businesses').doc(businessId).update({
+      await db.collection('businesses').doc(businessId).set({
         subscriptionStatus: 'active',
         subscriptionType: 'Comunitaria Anual',
         subscriptionStart: new Date().toISOString().split('T')[0],
         subscriptionEnd: `${new Date().getFullYear() + 1}-12-31`,
         updatedAt: new Date().toISOString()
-      });
+      }, { merge: true });
 
       OpsToast.show('Membresía renovada por 1 año.', 'success');
       OpsUI.renderSubscriptionsModule();
