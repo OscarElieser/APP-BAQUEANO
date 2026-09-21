@@ -1,142 +1,101 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — CENTRO UNIFICADO DE VIAJE (TRIP HUB) (trip-hub.service.ts)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Servir como el centro operativo del viaje ("Trip Hub") unificando itinerario, mapa,
-//   reservas, alertas territoriales, balizas Smart Points y sugerencias del Concierge.
-// - Ofrecer la vista contextual "Hoy" (Today View) durante viajes activos para mostrar
-//   únicamente la información relevante del momento sin saturar al explorador.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Agregador de Datos de Experiencia: Combina paradas del itinerario con el estado de reservas,
-//   alertas críticas y proximidad a servicios de emergencia (Fase 17).
-//
-// 📦 3. QUÉ (WHAT / MÉTODOS EXPUESTOS):
-// - getTripHubData(): Obtiene el estado consolidado de un viaje.
-// - getTodayView(): Sintetiza la vista diaria para viajes activos.
-// - markStopCompleted(): Actualiza el progreso de una parada del itinerario.
-// ============================================================================
+/**
+ * POR QUE
+ * Mi Viaje debe representar el viaje solicitado y nunca una aventura semilla.
+ *
+ * COMO
+ * Lee trip_bookings y trip_plans por sus IDs, transforma el plan al contrato
+ * TripHubRecord y conserva estados desconocidos como pendientes. No incorpora
+ * alertas, emergencias, horarios ni reservas que no existan en Firestore.
+ *
+ * QUE
+ * Carga del Trip Hub, vista diaria y actualizacion reversible de progreso.
+ */
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { firestoreCollections } from "@baqueano/config";
+import { getBaqueanoDb } from "@baqueano/firebase";
+import type { JourneyState, TripBookingRecord, TripHubRecord, TripPlanRecord } from "@baqueano/types";
 
-import type { TripHubRecord, TripItineraryStopRecord } from "@baqueano/types";
+export interface TodayView {
+  readonly tripTitle: string;
+  readonly currentDayNumber: number;
+  readonly totalDays: number;
+  readonly todayStops: TripHubRecord["stops"];
+  readonly nextPendingStop: TripHubRecord["stops"][number] | null;
+  readonly activeAlerts: readonly { id: string; severity: "INFO" | "WARNING" | "CRITICAL"; message: string }[];
+  readonly nearbyEmergency: null;
+}
 
-const SEED_TRIP: TripHubRecord = {
-  tripId: "trip-occidente-magico",
-  userId: "",
-  title: "Aventura Volcánica & Tradición en Occidente",
-  countryId: "NI",
-  territories: ["Leon", "Chinandega"],
-  state: "ACTIVE",
-  startDate: "2026-09-07",
-  endDate: "2026-09-09",
-  stops: [
-    {
-      stopId: "stop-1",
-      placeId: "cerro-negro",
-      name: "Volcán Cerro Negro (Sandboarding)",
-      territoryId: "Leon",
-      dayNumber: 1,
-      order: 1,
-      scheduledTime: "08:30",
-      durationMinutes: 180,
-      reservationId: "res-cn-01",
-      smartPointId: "sp-leon-cerro-negro",
-      isCompleted: true,
-      notes: "Llevar ropa deportiva y lentes de protección."
-    },
-    {
-      stopId: "stop-2",
-      placeId: "san-jacinto-hervideros",
-      name: "Hervideros de San Jacinto (Geotermia)",
-      territoryId: "Leon",
-      dayNumber: 2,
-      order: 1,
-      scheduledTime: "10:00",
-      durationMinutes: 90,
-      reservationId: null,
-      smartPointId: "sp-leon-san-jacinto",
-      isCompleted: false,
-      notes: "Apoyo con guías infantiles locales autorizados."
-    },
-    {
-      stopId: "stop-3",
-      placeId: "las-penitas-playa",
-      name: "Playa Las Peñitas & Reserva Juan Venado",
-      territoryId: "Leon",
-      dayNumber: 2,
-      order: 2,
-      scheduledTime: "14:30",
-      durationMinutes: 180,
-      reservationId: "res-jv-02",
-      smartPointId: "sp-leon-penitas",
-      isCompleted: false,
-      notes: "Tour en lancha por los manglares con cooperativa pesquera."
-    }
-  ],
-  syncStatus: "SYNCED",
-  isOfflineAvailable: true,
-  sharedAccess: "VIEW_LINK",
-  createdAt: "2026-09-01T00:00:00Z",
-  updatedAt: "2026-09-08T06:00:00Z"
-};
+function mapJourneyState(booking: TripBookingRecord): JourneyState {
+  if (booking.status === "completed") return "COMPLETED";
+  if (booking.status === "confirmed" && booking.paymentStatus === "paid") return "ACTIVE";
+  if (booking.status === "cancelled") return "DISCOVERING";
+  return "BOOKING";
+}
 
-export class TripHubService {
-  private trips: Map<string, TripHubRecord> = new Map();
+function toTripHub(booking: TripBookingRecord, plan: TripPlanRecord): TripHubRecord {
+  const stops = plan.days.flatMap((day) => day.stops.map((stop, index) => ({
+    stopId: `${day.dayNumber}-${stop.placeId}-${index}`,
+    placeId: stop.placeId,
+    name: stop.name,
+    territoryId: stop.department,
+    dayNumber: day.dayNumber,
+    order: index + 1,
+    durationMinutes: Math.max(0, Math.round(stop.durationHours * 60)),
+    reservationId: booking.reservationIds[index] ?? null,
+    smartPointId: null,
+    isCompleted: false,
+    notes: stop.notes
+  })));
+  const start = plan.createdAt.slice(0, 10);
+  const endDate = new Date(plan.createdAt);
+  endDate.setUTCDate(endDate.getUTCDate() + Math.max(0, plan.daysCount - 1));
+  return {
+    tripId: booking.tripId,
+    userId: booking.explorerId,
+    title: plan.title,
+    countryId: "NI",
+    territories: Array.from(new Set(plan.days.flatMap((day) => day.stops.map((stop) => stop.department)))),
+    state: mapJourneyState(booking),
+    startDate: start,
+    endDate: endDate.toISOString().slice(0, 10),
+    stops,
+    syncStatus: "SYNCED",
+    isOfflineAvailable: false,
+    sharedAccess: "PRIVATE",
+    createdAt: booking.createdAt,
+    updatedAt: booking.updatedAt
+  };
+}
 
-  /**
-   * Obtiene la información consolidada del viaje.
-   */
-  public getTripHubData(tripId: string): TripHubRecord | null {
-    return this.trips.get(tripId) ?? null;
-  }
-
-  /**
-   * Obtiene la vista "Hoy" con la próxima parada y alertas para el viajero.
-   */
-  public getTodayView(tripId: string, currentDayNumber: number = 2) {
-    const trip = this.getTripHubData(tripId);
-    if (!trip) return null;
-
-    const todayStops = trip.stops.filter((s) => s.dayNumber === currentDayNumber);
-    const nextPendingStop = todayStops.find((s) => !s.isCompleted) ?? null;
-
-    return {
-      tripTitle: trip.title,
-      currentDayNumber,
-      totalDays: 3,
-      todayStops,
-      nextPendingStop,
-      activeAlerts: [
-        {
-          id: "alt-clima-calor",
-          severity: "INFO",
-          message: "Temperaturas de hasta 34°C en Occidente. Hidratación recomendada."
-        }
-      ],
-      nearbyEmergency: {
-        nearestHealthCenter: "Centro de Salud Mantica Berio (León)",
-        distanceKm: 4.2,
-        emergencyNumber: "128 (Cruz Blanca)"
-      }
-    };
-  }
-
-  /**
-   * Marca una parada como completada.
-   */
-  public markStopCompleted(tripId: string, stopId: string, isCompleted: boolean): boolean {
-    const trip = this.getTripHubData(tripId);
-    if (!trip) return false;
-
-    const updatedStops = trip.stops.map((s) => (s.stopId === stopId ? { ...s, isCompleted } : s));
-    this.trips.set(tripId, {
-      ...trip,
-      stops: updatedStops,
-      updatedAt: new Date().toISOString()
-    });
-
-    return true;
+export async function getTripHubData(tripId: string): Promise<TripHubRecord | null> {
+  try {
+    const bookingSnapshot = await getDoc(doc(getBaqueanoDb(), firestoreCollections.tripBookings, tripId));
+    if (!bookingSnapshot.exists()) return null;
+    const booking = bookingSnapshot.data() as TripBookingRecord;
+    const planSnapshot = await getDoc(doc(getBaqueanoDb(), firestoreCollections.tripPlans, booking.itineraryId));
+    if (!planSnapshot.exists()) return null;
+    return toTripHub(booking, planSnapshot.data() as TripPlanRecord);
+  } catch {
+    return null;
   }
 }
 
-export const tripHubService = new TripHubService();
+export function getTodayView(trip: TripHubRecord, currentDayNumber = 1): TodayView {
+  const todayStops = trip.stops.filter((stop) => stop.dayNumber === currentDayNumber);
+  return {
+    tripTitle: trip.title,
+    currentDayNumber,
+    totalDays: Math.max(1, ...trip.stops.map((stop) => stop.dayNumber)),
+    todayStops,
+    nextPendingStop: todayStops.find((stop) => !stop.isCompleted) ?? null,
+    activeAlerts: [],
+    nearbyEmergency: null
+  };
+}
+
+export async function markStopCompleted(tripId: string, stopId: string, isCompleted: boolean): Promise<void> {
+  await setDoc(doc(getBaqueanoDb(), firestoreCollections.activeTrips, tripId), {
+    completedStops: { [stopId]: isCompleted },
+    updatedAt: new Date().toISOString()
+  }, { merge: true });
+}

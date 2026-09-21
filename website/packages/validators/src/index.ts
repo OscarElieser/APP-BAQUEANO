@@ -1238,6 +1238,110 @@ export type TripStopInput = z.infer<typeof tripStopSchema>;
 export type TripDayPlanInput = z.infer<typeof tripDayPlanSchema>;
 export type BudgetBreakdownInput = z.infer<typeof budgetBreakdownSchema>;
 export type TripPlanRecordInput = z.infer<typeof tripPlanRecordSchema>;
+
+// ============================================================================
+// VIAJE TRANSACCIONAL - VALIDACION DE FRONTERAS DE DATOS
+// ============================================================================
+// POR QUE: Firestore y formularios son entradas no confiables.
+// COMO: Los esquemas rechazan estados, URLs, fechas y montos invalidos.
+// QUE: Fuentes, slots, rentadoras, vehiculos y agrupadores de viaje.
+
+export const dataSourceRecordSchema = z.object({
+  id: z.string().min(1),
+  resourceType: z.enum(["place", "business", "vehicle_rental", "vehicle", "emergency", "price", "schedule"]),
+  resourceId: z.string().min(1),
+  sourceType: z.enum(["official", "website", "google_maps", "facebook", "instagram", "tiktok", "manual_verified"]),
+  sourceUrl: z.string().url(),
+  sourceName: z.string().min(2).max(160),
+  verifiedAt: z.string().optional(),
+  verifiedBy: z.string().optional(),
+  lastCheckedAt: z.string(),
+  confidenceLevel: z.enum(["high", "medium", "low"]),
+  dataStatus: z.enum(["verified", "needs_review", "expired", "disputed"]),
+  validFrom: z.string().optional(),
+  validUntil: z.string().optional(),
+  notes: z.string().max(1000).optional()
+});
+
+export const availabilitySlotRecordSchema = z.object({
+  id: z.string().min(1),
+  resourceType: z.enum(["lodging", "guide", "activity", "experience", "vehicle", "transport", "restaurant"]),
+  resourceId: z.string().min(1),
+  businessId: z.string().optional(),
+  startsAt: z.string(),
+  endsAt: z.string(),
+  capacity: z.number().int().nonnegative(),
+  remainingCapacity: z.number().int().nonnegative().optional(),
+  status: z.enum(["available", "limited", "requires_confirmation", "unavailable", "blocked"]),
+  priceSnapshot: z.object({ currency: z.enum(["NIO", "CRC", "GTQ", "HNL", "USD", "BZD", "PAB"]), amount: z.number().finite().nonnegative() }).optional(),
+  sourceIds: z.array(z.string().min(1)),
+  lastVerifiedAt: z.string().optional(),
+  updatedAt: z.string()
+}).refine((value) => new Date(value.endsAt).getTime() > new Date(value.startsAt).getTime(), { message: "endsAt must be after startsAt" });
+
+export const vehicleRentalCompanyRecordSchema = z.object({
+  id: z.string().min(1),
+  businessId: z.string().optional(),
+  name: z.string().min(2).max(160),
+  relationship: z.enum(["directory", "verified", "ally"]),
+  status: z.enum(["pending_review", "published", "inactive"]),
+  phone: z.string().optional(),
+  whatsapp: z.string().optional(),
+  website: z.string().url().optional(),
+  locations: z.array(z.string()),
+  sourceIds: z.array(z.string().min(1)),
+  lastVerifiedAt: z.string().optional(),
+  createdAt: z.string(),
+  updatedAt: z.string()
+});
+
+export const rentalVehicleRecordSchema = z.object({
+  id: z.string().min(1),
+  businessId: z.string().min(1),
+  brand: z.string().min(1),
+  model: z.string().min(1),
+  year: z.number().int().min(1980).max(2100).optional(),
+  category: z.enum(["economy", "compact", "sedan", "suv", "4x4", "pickup", "van", "minibus"]),
+  transmission: z.enum(["manual", "automatic", "unknown"]),
+  fuelType: z.string(),
+  passengerCapacity: z.number().int().positive(),
+  luggageCapacity: z.number().int().nonnegative(),
+  airConditioning: z.boolean(),
+  is4x4: z.boolean(),
+  dailyPriceUsd: z.number().finite().nonnegative().optional(),
+  dailyPriceNio: z.number().finite().nonnegative().optional(),
+  insuranceOptions: z.array(z.string()),
+  pickupLocations: z.array(z.string()),
+  dropoffLocations: z.array(z.string()),
+  images: z.array(z.string().url()),
+  availabilityStatus: z.enum(["available", "limited", "requires_confirmation", "unavailable", "blocked"]),
+  verificationStatus: z.enum(["verified", "needs_review", "expired", "disputed"]),
+  sourceIds: z.array(z.string().min(1)),
+  lastVerifiedAt: z.string().optional()
+}).passthrough();
+
+export const tripBookingRecordSchema = z.object({
+  tripId: z.string().min(1),
+  explorerId: z.string().min(1),
+  itineraryId: z.string().min(1),
+  reservationIds: z.array(z.string()),
+  vehicleReservationId: z.string().optional(),
+  currency: z.enum(["NIO", "USD"]),
+  subtotal: z.number().finite().nonnegative(),
+  total: z.number().finite().nonnegative(),
+  status: z.enum(["draft", "checking_availability", "pending_provider_confirmation", "ready_for_payment", "confirmed", "cancelled", "completed"]),
+  paymentStatus: z.enum(["not_started", "pending", "paid", "failed", "refunded"]),
+  qrStatus: z.enum(["not_eligible", "ready", "active", "revoked"]),
+  priceSnapshotAt: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string()
+});
+
+export type DataSourceRecordInput = z.infer<typeof dataSourceRecordSchema>;
+export type AvailabilitySlotRecordInput = z.infer<typeof availabilitySlotRecordSchema>;
+export type VehicleRentalCompanyRecordInput = z.infer<typeof vehicleRentalCompanyRecordSchema>;
+export type RentalVehicleRecordInput = z.infer<typeof rentalVehicleRecordSchema>;
+export type TripBookingRecordInput = z.infer<typeof tripBookingRecordSchema>;
 export type HumanConfirmationRequestInput = z.infer<typeof humanConfirmationRequestSchema>;
 export type AgenticWorkflowInput = z.infer<typeof agenticWorkflowSchema>;
 export type AgentTraceLogInput = z.infer<typeof agentTraceLogSchema>;

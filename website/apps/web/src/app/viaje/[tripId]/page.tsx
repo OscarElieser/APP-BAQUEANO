@@ -17,7 +17,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -37,12 +37,30 @@ import {
   Wifi,
   WifiOff
 } from "lucide-react";
-import { tripHubService } from "../../../services/experience/trip-hub.service";
+import type { TripHubRecord } from "@baqueano/types";
+import { getTodayView, getTripHubData, type TodayView } from "../../../services/experience/trip-hub.service";
 
-export default function TripHubPage() {
+export default function TripHubPage({ params }: { params: Promise<{ tripId: string }> }) {
+  const { tripId } = use(params);
   const [activeTab, setActiveTab] = useState<"TODAY" | "FULL_ITINERARY" | "RESERVATIONS">("TODAY");
-  const tripData = tripHubService.getTripHubData("trip-occidente-magico");
-  const todayData = tripHubService.getTodayView("trip-occidente-magico", 2);
+  const [tripData, setTripData] = useState<TripHubRecord | null>(null);
+  const [todayData, setTodayData] = useState<TodayView | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    void getTripHubData(tripId).then((trip) => {
+      if (!active) return;
+      setTripData(trip);
+      setTodayData(trip ? getTodayView(trip, 1) : null);
+      setLoading(false);
+    });
+    return () => { active = false; };
+  }, [tripId]);
+
+  if (loading) {
+    return <div className="mx-auto max-w-4xl px-4 py-16 text-center text-white/70">Cargando viaje verificado...</div>;
+  }
 
   if (!tripData || !todayData) {
     return (
@@ -170,6 +188,7 @@ export default function TripHubPage() {
           <div className="space-y-6">
             <div className="rounded-2xl border border-white/10 bg-[#07131f]/90 p-6 space-y-4">
               <h3 className="font-display text-base font-bold text-white">Alertas & Condiciones</h3>
+              {todayData.activeAlerts.length === 0 && <p className="text-xs text-white/60">Sin alertas verificadas disponibles.</p>}
               {todayData.activeAlerts.map((alt) => (
                 <div key={alt.id} className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-xs text-amber-200 leading-relaxed">
                   {alt.message}
@@ -179,8 +198,7 @@ export default function TripHubPage() {
 
             <div className="rounded-2xl border border-white/10 bg-[#07131f]/90 p-6 space-y-2 text-xs">
               <h3 className="font-display text-base font-bold text-white">Emergencias Cercanas</h3>
-              <p className="text-white/70">{todayData.nearbyEmergency.nearestHealthCenter} ({todayData.nearbyEmergency.distanceKm} km)</p>
-              <p className="font-mono font-bold text-[#F4E6C1]">Contacto: {todayData.nearbyEmergency.emergencyNumber}</p>
+              <p className="text-white/70">Consulta el directorio oficial verificado para este territorio. No hay un contacto cercano confirmado para este viaje.</p>
             </div>
           </div>
         </div>
