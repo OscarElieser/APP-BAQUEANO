@@ -9,7 +9,7 @@ import * as React from "react"
  */
 
 export interface AdminBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "success" | "warning" | "danger" | "neutral" | "info";
+  variant?: "success" | "warning" | "danger" | "neutral" | "info" | "green" | "orange" | "red" | "blue" | "default";
   children: React.ReactNode;
 }
 
@@ -17,17 +17,22 @@ export function AdminBadge({ className = "", variant = "neutral", children, ...p
   let variantClasses = "";
   switch (variant) {
     case "success":
+    case "green":
       variantClasses = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
       break;
     case "warning":
+    case "orange":
       variantClasses = "bg-amber-500/10 text-amber-400 border border-amber-500/20";
       break;
     case "danger":
+    case "red":
       variantClasses = "bg-red-500/10 text-red-400 border border-red-500/20";
       break;
     case "info":
+    case "blue":
       variantClasses = "bg-sky-500/10 text-sky-400 border border-sky-500/20";
       break;
+    case "default":
     case "neutral":
     default:
       variantClasses = "bg-white/5 text-white/70 border border-white/10";

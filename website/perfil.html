@@ -46,6 +46,14 @@
   <link rel="stylesheet" href="css/pages/perfil.css">
 </head>
 <body>
+  <!-- POR QUE: El perfil historico debe enlazar viajes sin duplicarlos.
+       COMO: Enlace a la ruta moderna canonica.
+       QUE: Acceso directo a Mi Viaje. -->
+  <p style="text-align:center;padding:.75rem"><a href="/mi-viaje">Abrir Mi Viaje</a></p>
+  <!-- POR QUE: El perfil historico debe enlazar viajes sin duplicarlos.
+       COMO: Enlace a la ruta moderna canonica.
+       QUE: Acceso directo a Mi Viaje. -->
+  <p style="text-align:center;padding:.75rem"><a href="/mi-viaje">Abrir Mi Viaje</a></p>
 
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL OFICIAL -->
   <nav class="main-navbar" id="mainNavbar">
@@ -587,7 +595,14 @@
         <h3 class="perfil-inline-037">Añadir Tarjeta Segura</h3>
         <p class="perfil-inline-038">Protección con cifrado bancario para reservas en 1 clic</p>
       </div>
-      <form id="formAddCard" class="profile-form-grid">
+      <!-- POR QUE: BAQUEANO no debe recibir PAN, CVV ni PIN.
+           COMO: La captura directa queda inerte hasta integrar checkout bancario tokenizado.
+           QUE: Aviso de seguridad sin campos financieros. -->
+      <div class="profile-form-grid" role="status">
+        <p>El registro directo de tarjetas esta deshabilitado. BAQUEANO no almacena PAN, CVV ni PIN.</p>
+        <p>Los pagos se habilitaran mediante checkout bancario tokenizado cuando exista un proveedor contratado.</p>
+      </div>
+      <form id="formAddCard" class="profile-form-grid" hidden aria-hidden="true">
         <div class="form-group-pro perfil-inline-017">
           <label class="form-label-pro" for="cardHolder">Titular de la Tarjeta</label>
           <input type="text" id="cardHolder" class="form-input-pro" placeholder="Nombre como figura en la tarjeta" required>

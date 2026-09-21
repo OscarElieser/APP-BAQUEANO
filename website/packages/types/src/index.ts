@@ -42,6 +42,7 @@ export interface Destination {
 }
 
 export interface PlaceRecord {
+  readonly id?: string;
   readonly placeId: string;
   readonly name: string;
   readonly categoryId: string;
@@ -61,6 +62,11 @@ export interface PlaceRecord {
   readonly website?: string | null;
   readonly imageUrl: string;
   readonly imageUrls: readonly string[];
+  readonly images?: readonly string[];
+  readonly location?: GeoPointLike;
+  readonly category?: string;
+  readonly estimatedCost?: number;
+  readonly difficulty?: string;
   readonly openingHours?: string | null;
   readonly is24Hours: boolean;
   readonly isOpen: boolean;
@@ -2006,6 +2012,138 @@ export interface ExperienceDeepLinkRecord {
   readonly requiresAuth: boolean;
   readonly shortCode?: string;
   readonly expiresAt?: string | null;
+}
+
+// ============================================================================
+// BAQUEANO VIAJE TRANSACCIONAL - CONTRATOS WEB COMPARTIDOS
+// ============================================================================
+// POR QUE: Un viaje reservable necesita contratos trazables y no puede inferir
+// disponibilidad, precios o verificacion a partir de texto generado por IA.
+// COMO: Los registros enlazan recursos del catalogo por ID, conservan snapshots
+// inmutables y modelan explicitamente estados desconocidos o por confirmar.
+// QUE: Fuentes, disponibilidad, movilidad, agrupadores de reserva y Trip Pass.
+
+export type DataSourceType = "official" | "website" | "google_maps" | "facebook" | "instagram" | "tiktok" | "manual_verified";
+export type DataConfidenceLevel = "high" | "medium" | "low";
+export type DataVerificationStatus = "verified" | "needs_review" | "expired" | "disputed";
+
+export interface DataSourceRecord {
+  readonly id: string;
+  readonly resourceType: "place" | "business" | "vehicle_rental" | "vehicle" | "emergency" | "price" | "schedule";
+  readonly resourceId: string;
+  readonly sourceType: DataSourceType;
+  readonly sourceUrl: string;
+  readonly sourceName: string;
+  readonly verifiedAt?: string;
+  readonly verifiedBy?: string;
+  readonly lastCheckedAt: string;
+  readonly confidenceLevel: DataConfidenceLevel;
+  readonly dataStatus: DataVerificationStatus;
+  readonly validFrom?: string;
+  readonly validUntil?: string;
+  readonly notes?: string;
+}
+
+export type AvailabilityStatus = "available" | "limited" | "requires_confirmation" | "unavailable" | "blocked";
+export type ReservableResourceType = "lodging" | "guide" | "activity" | "experience" | "vehicle" | "transport" | "restaurant";
+
+export interface AvailabilitySlotRecord {
+  readonly id: string;
+  readonly resourceType: ReservableResourceType;
+  readonly resourceId: string;
+  readonly businessId?: string;
+  readonly startsAt: string;
+  readonly endsAt: string;
+  readonly capacity: number;
+  readonly remainingCapacity?: number;
+  readonly status: AvailabilityStatus;
+  readonly priceSnapshot?: MoneyAmount;
+  readonly sourceIds: readonly string[];
+  readonly lastVerifiedAt?: string;
+  readonly updatedAt: string;
+}
+
+export type VehicleRentalRelationship = "directory" | "verified" | "ally";
+export type VehicleCategory = "economy" | "compact" | "sedan" | "suv" | "4x4" | "pickup" | "van" | "minibus";
+
+export interface VehicleRentalCompanyRecord {
+  readonly id: string;
+  readonly businessId?: string;
+  readonly name: string;
+  readonly relationship: VehicleRentalRelationship;
+  readonly status: "pending_review" | "published" | "inactive";
+  readonly phone?: string;
+  readonly whatsapp?: string;
+  readonly website?: string;
+  readonly locations: readonly string[];
+  readonly sourceIds: readonly string[];
+  readonly lastVerifiedAt?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface RentalVehicleRecord {
+  readonly id: string;
+  readonly businessId: string;
+  readonly brand: string;
+  readonly model: string;
+  readonly year?: number;
+  readonly category: VehicleCategory;
+  readonly transmission: "manual" | "automatic" | "unknown";
+  readonly fuelType: string;
+  readonly passengerCapacity: number;
+  readonly luggageCapacity: number;
+  readonly airConditioning: boolean;
+  readonly is4x4: boolean;
+  readonly dailyPriceUsd?: number;
+  readonly dailyPriceNio?: number;
+  readonly depositAmount?: MoneyAmount;
+  readonly insuranceIncluded?: boolean;
+  readonly insuranceOptions: readonly string[];
+  readonly fuelPolicy?: string;
+  readonly mileagePolicy?: string;
+  readonly minimumDriverAge?: number;
+  readonly foreignLicenseAccepted?: boolean;
+  readonly internationalLicenseRequired?: boolean;
+  readonly airportPickup?: boolean;
+  readonly pickupLocations: readonly string[];
+  readonly dropoffLocations: readonly string[];
+  readonly deliveryAvailable?: boolean;
+  readonly roadsideAssistance?: boolean;
+  readonly images: readonly string[];
+  readonly availabilityStatus: AvailabilityStatus;
+  readonly verificationStatus: DataVerificationStatus;
+  readonly sourceIds: readonly string[];
+  readonly lastVerifiedAt?: string;
+}
+
+export type TripBookingStatus = "draft" | "checking_availability" | "pending_provider_confirmation" | "ready_for_payment" | "confirmed" | "cancelled" | "completed";
+
+export interface TripBookingRecord {
+  readonly tripId: string;
+  readonly explorerId: string;
+  readonly itineraryId: string;
+  readonly reservationIds: readonly string[];
+  readonly vehicleReservationId?: string;
+  readonly currency: "NIO" | "USD";
+  readonly subtotal: number;
+  readonly total: number;
+  readonly status: TripBookingStatus;
+  readonly paymentStatus: "not_started" | "pending" | "paid" | "failed" | "refunded";
+  readonly qrStatus: "not_eligible" | "ready" | "active" | "revoked";
+  readonly priceSnapshotAt: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
+export interface TripPassRecord {
+  readonly id: string;
+  readonly tripId: string;
+  readonly explorerId: string;
+  readonly secureReference: string;
+  readonly status: "active" | "revoked" | "expired";
+  readonly issuedAt: string;
+  readonly expiresAt: string;
 }
 
 export * from "./builder";

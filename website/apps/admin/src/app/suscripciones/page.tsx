@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Search, CreditCard, ShieldCheck, Crown, CalendarClock } from "lucide-react";
@@ -6,9 +6,9 @@ import { AdminTable, AdminTableBody, AdminTableCell, AdminTableHead, AdminTableH
 import { AdminBadge } from "../../components/ui/AdminBadge";
 
 const initialSubscriptions = [
-  { id: "sub-bus-001", business: "Hotel Selva Negra", tier: "Premium", status: "active", expiresAt: "2026-12-31" },
-  { id: "sub-bus-002", business: "Restaurante El Timón", tier: "Pro", status: "active", expiresAt: "2026-10-15" },
-  { id: "sub-bus-003", business: "Tour Operadora Volcán", tier: "Free", status: "active", expiresAt: "N/A" },
+  { id: "sub-bus-001", business: "Hotel Selva Negra", tier: "Alianza", status: "active", expiresAt: "2026-12-31" },
+  { id: "sub-bus-002", business: "Restaurante El TimÃ³n", tier: "Pro", status: "active", expiresAt: "2026-10-15" },
+  { id: "sub-bus-003", business: "Tour Operadora VolcÃ¡n", tier: "Free", status: "active", expiresAt: "N/A" },
   { id: "sub-bus-004", business: "Hostal Ometepe", tier: "Pro", status: "suspended", expiresAt: "2026-08-01" }
 ];
 
@@ -20,7 +20,7 @@ export default function SuscripcionesAdminPage() {
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
           <h1 className="font-display text-2xl font-black text-white">Suscripciones B2B</h1>
-          <p className="font-tech text-sm text-white/60">Monitoreo de membresías de negocios (Free, Pro, Premium) y estado de facturación.</p>
+          <p className="font-tech text-sm text-white/60">Monitoreo de membresÃ­as de negocios (Free, Pro, Alianza) y estado de facturaciÃ³n.</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@ export default function SuscripcionesAdminPage() {
           <Search size={18} />
           <input
             type="text"
-            placeholder="Buscar por negocio o ID de suscripción..."
+            placeholder="Buscar por negocio o ID de suscripciÃ³n..."
             className="w-full bg-transparent px-2 py-1 text-sm text-white outline-none placeholder:text-white/30"
           />
         </div>
@@ -39,7 +39,7 @@ export default function SuscripcionesAdminPage() {
         <AdminTable>
           <AdminTableHeader>
             <AdminTableRow>
-              <AdminTableHead>Suscripción / Negocio</AdminTableHead>
+              <AdminTableHead>SuscripciÃ³n / Negocio</AdminTableHead>
               <AdminTableHead>Nivel (Tier)</AdminTableHead>
               <AdminTableHead>Vencimiento</AdminTableHead>
               <AdminTableHead>Estado Financiero</AdminTableHead>
@@ -62,11 +62,11 @@ export default function SuscripcionesAdminPage() {
                 </AdminTableCell>
                 <AdminTableCell>
                   <AdminBadge variant={
-                    sub.tier === "Premium" ? "orange" :
+                    sub.tier === "Alianza" ? "orange" :
                     sub.tier === "Pro" ? "blue" : "neutral"
                   }>
                     <div className="flex items-center gap-1">
-                      {sub.tier === "Premium" ? <Crown size={12} /> : <ShieldCheck size={12} />}
+                      {sub.tier === "Alianza" ? <Crown size={12} /> : <ShieldCheck size={12} />}
                       {sub.tier}
                     </div>
                   </AdminBadge>
@@ -79,7 +79,7 @@ export default function SuscripcionesAdminPage() {
                 </AdminTableCell>
                 <AdminTableCell>
                   <AdminBadge variant={sub.status === "active" ? "green" : "red"}>
-                    {sub.status === "active" ? "Al Día (Activo)" : "Suspendida / Mora"}
+                    {sub.status === "active" ? "Al DÃ­a (Activo)" : "Suspendida / Mora"}
                   </AdminBadge>
                 </AdminTableCell>
                 <AdminTableCell className="text-right">

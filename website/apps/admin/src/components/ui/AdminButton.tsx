@@ -1,25 +1,26 @@
-import * as React from "react"
+﻿import * as React from "react"
 
 /**
  * WHY
- * Estandariza la acción principal interactiva para mantener el diseño Matte Premium.
+ * Estandariza la acciÃ³n principal interactiva para mantener el diseÃ±o Matte Alianza.
  *
  * HOW
- * Usa variantes de Tailwind para manejar estados (primary, secondary, danger, ghost) sin repetir código.
- * Evita la opacidad estándar, utilizando `.withValues()` o rgba explícito en el diseño si es necesario, 
- * aunque aquí en Tailwind se usarán colores sólidos y bordes para mantener la legibilidad.
- * 
+ * Usa variantes de Tailwind para manejar estados (primary, secondary, danger, ghost) sin repetir cÃ³digo.
+ * Evita la opacidad estÃ¡ndar, utilizando `.withValues()` o rgba explÃ­cito en el diseÃ±o si es necesario,
+ * aunque aquÃ­ en Tailwind se usarÃ¡n colores sÃ³lidos y bordes para mantener la legibilidad.
+ *
  * WHAT
- * Componente botón reusable que soporta `asChild` para fusionarse con `Link`.
+ * Componente botÃ³n reusable que soporta `asChild` para fusionarse con `Link`.
  */
 
 export interface AdminButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger" | "outline" | "ghost";
   size?: "default" | "sm" | "lg" | "icon";
+  icon?: React.ReactNode;
 }
 
 export const AdminButton = React.forwardRef<HTMLButtonElement, AdminButtonProps>(
-  ({ className = "", variant = "primary", size = "default", ...props }, ref) => {
+  ({ className = "", variant = "primary", size = "default", icon, children, ...props }, ref) => {
     let variantClasses = "";
     switch (variant) {
       case "primary":
@@ -63,7 +64,7 @@ export const AdminButton = React.forwardRef<HTMLButtonElement, AdminButtonProps>
         className={combinedClasses}
         ref={ref}
         {...props}
-      />
+      >{icon}{children}</button>
     )
   }
 )

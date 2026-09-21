@@ -18,6 +18,9 @@
 
 import type { DataResult, Reservation } from "@baqueano/types";
 import { reservationSchema, type ReservationInput } from "@baqueano/validators";
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { firestoreCollections } from "@baqueano/config";
+import { getBaqueanoDb } from "@baqueano/firebase";
 
 const SEED_RESERVATIONS: readonly Reservation[] = [
   {
@@ -47,6 +50,7 @@ export async function requestReservation(input: ReservationInput): Promise<{ suc
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
+    await setDoc(doc(getBaqueanoDb(), firestoreCollections.reservations, newReservation.id), newReservation, { merge: false });
 
     return {
       success: true,
@@ -61,21 +65,19 @@ export async function requestReservation(input: ReservationInput): Promise<{ suc
 }
 
 export async function getExplorerReservations(explorerId: string): Promise<DataResult<Reservation>> {
-  const filtered: readonly Reservation[] = [];
-  return {
-    source: "seed",
-    isConnected: false,
-    items: filtered,
-    warning: "Las reservas no estan disponibles hasta conectar una sesion autenticada."
-  };
+  try {
+    const snapshot = await getDocs(query(collection(getBaqueanoDb(), firestoreCollections.reservations), where("explorerId", "==", explorerId)));
+    return { source: "firestore", isConnected: true, items: snapshot.docs.map((item) => reservationSchema.parse({ ...item.data(), id: item.id })) };
+  } catch (error) {
+    return { source: "seed", isConnected: false, items: [], warning: error instanceof Error ? error.message : "Reservas no disponibles." };
+  }
 }
 
 export async function getHostReservations(hostId: string): Promise<DataResult<Reservation>> {
-  const filtered: readonly Reservation[] = [];
-  return {
-    source: "seed",
-    isConnected: false,
-    items: filtered,
-    warning: "Las reservas del anfitrion no estan disponibles hasta conectar una sesion autenticada."
-  };
+  try {
+    const snapshot = await getDocs(query(collection(getBaqueanoDb(), firestoreCollections.reservations), where("hostId", "==", hostId)));
+    return { source: "firestore", isConnected: true, items: snapshot.docs.map((item) => reservationSchema.parse({ ...item.data(), id: item.id })) };
+  } catch (error) {
+    return { source: "seed", isConnected: false, items: [], warning: error instanceof Error ? error.message : "Reservas no disponibles." };
+  }
 }
