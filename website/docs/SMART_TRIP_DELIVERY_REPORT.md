@@ -25,8 +25,8 @@ declara operativo sin infraestructura real.
 | 8 | Completa | availability.service.ts |
 | 9 | Completa en codigo | Solicitudes Firestore; reglas raiz pendientes |
 | 10 | Completa | TripBookingRecord y orquestador |
-| 11 | Parcial | Paneles movilidad/fuentes; CRUD seguro pendiente |
-| 12 | Completa como enlace | /mi-viaje reutiliza Trip Hub existente |
+| 11 | Parcial | Paneles movilidad/fuentes leen Firestore; mutaciones seguras pendientes |
+| 12 | Completa | Mi Viaje usa tripId real y deriva el Trip Hub de Firestore |
 | 13 | Parcial | Mapa existente; SOS y proveedor vial real pendientes |
 | 14 | Preparada | Bancos bloqueados hasta credenciales reales |
 | 15 | Preparada | Contrato TripPass; emision backend pendiente |
@@ -50,8 +50,9 @@ declara operativo sin infraestructura real.
 - typecheck: limpio en web y admin.
 - lint: limpio, cero errores y cero advertencias.
 - pruebas: production-smoke aprobada.
-- build: el worker de Next.js termina con codigo nativo 3221225477 en Windows,
-  incluso fuera del sandbox; no se atribuye un resultado exitoso.
+- build web: exitoso, 65 paginas generadas.
+- build admin: el proceso supero cuatro minutos sin finalizar y fue detenido por
+  timeout; no se atribuye un resultado exitoso.
 
 ### Verificacion humana pendiente
 

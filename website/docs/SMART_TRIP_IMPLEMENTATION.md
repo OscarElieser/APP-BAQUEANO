@@ -54,6 +54,12 @@ Se permite cachear itinerario, cultura, contactos y datos preparados. No se
 cachean credenciales, datos bancarios, secretos, tokens ni respuestas de pago.
 Una copia offline nunca confirma disponibilidad actual.
 
+### Mi Viaje
+
+La ruta /viaje/[tripId] consulta el agrupador real y su TripPlan asociado. No
+usa viajes semilla, IDs fijos, alertas inventadas ni contactos de emergencia
+incrustados. Si falta una fuente, la interfaz declara que no hay dato verificado.
+
 ### Limites externos
 
 - BAC, LAFISE y BANPRO permanecen pendientes de contrato y credenciales.
