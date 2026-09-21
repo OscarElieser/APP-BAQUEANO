@@ -1,26 +1,93 @@
-/**
- * POR QUE
- * Los proveedores sugeridos necesitan revision humana antes de entrar al
- * catalogo operativo o recibir una insignia de verificacion.
- *
- * COMO
- * Conserva solo hechos respaldados por fuentes publicas consultadas el
- * 2026-09-21. Las contradicciones y tarifas no verificadas quedan explicitas.
- *
- * QUE
- * Cola editorial de Lugo, LAGO y Payless; no crea registros Firestore.
- */
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — INVESTIGACION DE MOVILIDAD Y RENTADORAS (ADMIN DATA)
+// ============================================================================
+//
+// 🎯 1. POR QUE (WHY / PROPOSITO):
+// Evitar la inclusion de proveedores o vehiculos ficticios en el catalogo
+// operativo. Garantiza que solo hechos documentados mediante fuentes oficiales
+// (Nivel 1 EAAI) y sitios directos de operadores (Nivel 2 Alamo, Avis, Lugo)
+// pasen a revision editorial antes de recibir insignias o estado verificado.
+//
+// ⚙️ 2. COMO (HOW / ARQUITECTURA & IMPLEMENTACION):
+// Estructura inmutable en TypeScript que almacena hechos verificados, datos no
+// resueltos, enlaces a fuentes publicas auditadas y estado editorial.
+//
+// 📦 3. QUE (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// Exporta la interfaz `RentalResearchCandidate` y el catalogo `RENTAL_RESEARCH_CANDIDATES`.
+// ============================================================================
+
 export interface RentalResearchCandidate {
   readonly id: string;
   readonly name: string;
   readonly status: "ready_for_admin_review" | "disputed";
   readonly verifiedFacts: readonly string[];
   readonly unresolvedFacts: readonly string[];
-  readonly sources: readonly { name: string; url: string; type: "official_website" | "corporate_directory" | "secondary_directory" }[];
+  readonly sources: readonly {
+    name: string;
+    url: string;
+    type: "official_institution" | "official_website" | "corporate_directory" | "secondary_directory";
+  }[];
   readonly lastCheckedAt: string;
 }
 
 export const RENTAL_RESEARCH_CANDIDATES: readonly RentalResearchCandidate[] = [
+  {
+    id: "research-alamo-nicaragua",
+    name: "Alamo Rent A Car Nicaragua",
+    status: "ready_for_admin_review",
+    verifiedFacts: [
+      "Operacion activa con oficinas en Aeropuerto Internacional Augusto C. Sandino (Managua), Managua Centro y sucursal de asistencia turistica en San Juan del Sur.",
+      "Flota verificada en catalogo oficial: sedanes compactos e intermedios, SUV, camionetas pickup 4x4 y vans familiares para grupos.",
+      "Requisitos de conduccion: licencia de conducir vigente del pais de origen, pasaporte valido con sello de entrada y tarjeta de credito fisica para deposito de garantia.",
+      "Politica de edad: edad minima de 21 anos con recargos documentados para menores de 25 segun condiciones contractuales."
+    ],
+    unresolvedFacts: [
+      "Tarifas diarias y disponibilidad exacta de modelos varian por temporada y demandan cotizacion fechada.",
+      "Costos de coberturas opcionales (CDW/TPL) se cotizan al momento de la reserva."
+    ],
+    sources: [
+      { name: "Alamo Nicaragua Oficial", url: "https://www.alamonicaragua.com/", type: "official_website" },
+      { name: "Directorio Global Alamo", url: "https://www.alamo.com/en/car-rental-locations/ni.html", type: "corporate_directory" }
+    ],
+    lastCheckedAt: "2026-09-21"
+  },
+  {
+    id: "research-avis-nicaragua",
+    name: "Avis Rent A Car Nicaragua",
+    status: "ready_for_admin_review",
+    verifiedFacts: [
+      "Mostrador oficial de retiro y devolucion en Aeropuerto Internacional Augusto C. Sandino (MGA) con seleccion de horario y reserva en linea.",
+      "Flota publicada: vehiculos compactos, sedanes intermedios, camionetas SUV y vehiculos 4x4 para terreno interdepartamental.",
+      "Requisitos documentados: documento de identidad o pasaporte, licencia de conducir valida y tarjeta de credito a nombre del titular de la reserva para el deposito de garantia."
+    ],
+    unresolvedFacts: [
+      "Las tarifas diarias no se consideran fijas; dependen de cotizacion web directa y disponibilidad por fecha.",
+      "Politicas de kilometraje y seguro adicional deben validarse con contrato previo."
+    ],
+    sources: [
+      { name: "Avis Nicaragua Oficial", url: "https://www.avis.com.ni/", type: "official_website" },
+      { name: "Avis Ubicaciones Nicaragua", url: "https://www.avis.com/en/locations/ni", type: "corporate_directory" }
+    ],
+    lastCheckedAt: "2026-09-21"
+  },
+  {
+    id: "research-eaai-directorio-aeropuerto",
+    name: "Directorio de Rentadoras Aeropuerto EAAI",
+    status: "ready_for_admin_review",
+    verifiedFacts: [
+      "Fuente institucional Nivel 1: Empresa Administradora de Aeropuertos Internacionales (EAAI) publica el directorio oficial de servicios comerciales en terminal.",
+      "Establecimientos autorizados con presencia fisica de mostrador en la terminal de llegadas: Dollar Rent A Car, Thrifty Car Rental y Hertz Rent A Car.",
+      "Ubicacion verificada: Sala de llegadas internacionales del Aeropuerto Internacional Augusto C. Sandino."
+    ],
+    unresolvedFacts: [
+      "Disponibilidad de vehiculos para pasajeros sin reserva previa en vuelos nocturnos debe confirmarse directamente en mostrador.",
+      "Las tarifas, tipos de cobertura y politicas de deposito de cada franquicia operadora requieren consulta directa."
+    ],
+    sources: [
+      { name: "Portal Oficial EAAI Nicaragua", url: "https://eaai.com.ni/", type: "official_institution" }
+    ],
+    lastCheckedAt: "2026-09-21"
+  },
   {
     id: "research-lugo-rent-a-car",
     name: "Lugo Rent a Car",

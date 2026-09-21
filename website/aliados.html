@@ -44,14 +44,12 @@
   <link rel="stylesheet" href="css/pages/aliados.css">
 </head>
 <body>
-  <!-- POR QUE: Conectar el directorio historico con movilidad moderna.
-       COMO: Enlace directo sin duplicar catalogos.
-       QUE: Acceso a rentadoras verificables. -->
-  <p style="text-align:center;padding:.75rem"><a href="/alquiler-vehiculos">Ver alquiler de vehiculos</a></p>
-  <!-- POR QUE: Conectar el directorio historico con movilidad moderna.
-       COMO: Enlace directo sin duplicar catalogos.
-       QUE: Acceso a rentadoras verificables. -->
-  <p style="text-align:center;padding:.75rem"><a href="/alquiler-vehiculos">Ver alquiler de vehiculos</a></p>
+  <!-- POR QUE: Conectar el directorio historico con movilidad moderna verificable.
+       COMO: Enlace directo al buscador de rentadoras.
+       QUE: Acceso honesto a vehiculos sin datos ficticios. -->
+  <div style="background:#0F172A;color:#F4E6C1;text-align:center;padding:.6rem 1rem;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,0.1)">
+    🚗 ¿Buscas vehículo para tu aventura? <a href="/alquiler-vehiculos" style="color:#F65E01;font-weight:700;margin-left:.5rem;text-decoration:underline">Ver Alquiler de Vehículos Verificados</a>
+  </div>
 
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
   <nav class="main-navbar" id="mainNavbar">
@@ -223,6 +221,14 @@
           <button type="button" class="allies-filter-btn" data-filter="eco"><i class="fa-solid fa-leaf"></i> Eco-Lodges & Cabañas (4)</button>
           <button type="button" class="allies-filter-btn" data-filter="playa"><i class="fa-solid fa-umbrella-beach"></i> Costa & Playas (3)</button>
           <button type="button" class="allies-filter-btn" data-filter="patrimonio"><i class="fa-solid fa-landmark"></i> Casonas & Cultura (3)</button>
+          <a href="/alquiler-vehiculos" class="allies-filter-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:.4rem"><i class="fa-solid fa-car"></i> 🚗 Rentadoras</a>
+        </div>
+
+        <!-- LEYENDA TRANSPARENTE DE NIVELES BAQUEANO -->
+        <div style="margin:1rem 0 2rem;padding:1rem 1.25rem;background:#091522;border:1px solid rgba(255,255,255,0.1);border-radius:12px;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;font-size:0.8rem;color:#F4E6C1">
+          <div><strong style="color:#10B981">Directorio Baqueano:</strong> Empresa publicada con información pública verificada.</div>
+          <div><strong style="color:#38BDF8">Verificado ✓:</strong> Identidad, flota y condiciones auditadas según protocolo oficial.</div>
+          <div><strong style="color:#F65E01">Aliado Baqueano 🤝:</strong> Relación formal y coordinación directa en el ecosistema.</div>
         </div>
 
         <div class="allies-3d-grid" id="allies3dGrid">

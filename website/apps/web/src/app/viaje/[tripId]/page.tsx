@@ -39,6 +39,7 @@ import {
 } from "lucide-react";
 import type { TripHubRecord } from "@baqueano/types";
 import { getTodayView, getTripHubData, type TodayView } from "../../../services/experience/trip-hub.service";
+import { getTerritorialTripContext, type TerritorialTripContext } from "../../../services/territorial-trip-context.service";
 
 export default function TripHubPage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = use(params);
@@ -46,13 +47,15 @@ export default function TripHubPage({ params }: { params: Promise<{ tripId: stri
   const [tripData, setTripData] = useState<TripHubRecord | null>(null);
   const [todayData, setTodayData] = useState<TodayView | null>(null);
   const [loading, setLoading] = useState(true);
+  const [territorialContext, setTerritorialContext] = useState<TerritorialTripContext | null>(null);
 
   useEffect(() => {
     let active = true;
-    void getTripHubData(tripId).then((trip) => {
+    void getTripHubData(tripId).then(async (trip) => {
       if (!active) return;
       setTripData(trip);
       setTodayData(trip ? getTodayView(trip, 1) : null);
+      if (trip?.territories[0]) setTerritorialContext(await getTerritorialTripContext(trip.territories[0]));
       setLoading(false);
     });
     return () => { active = false; };
@@ -198,10 +201,30 @@ export default function TripHubPage({ params }: { params: Promise<{ tripId: stri
 
             <div className="rounded-2xl border border-white/10 bg-[#07131f]/90 p-6 space-y-2 text-xs">
               <h3 className="font-display text-base font-bold text-white">Emergencias Cercanas</h3>
-              <p className="text-white/70">Consulta el directorio oficial verificado para este territorio. No hay un contacto cercano confirmado para este viaje.</p>
+              {territorialContext?.emergencies.length ? territorialContext.emergencies.slice(0, 3).map((place) => <div key={place.placeId} className="rounded-lg border border-white/10 p-3"><p className="font-bold text-white">{place.name}</p><p className="text-white/60">{place.phone ? `Telefono: ${place.phone}` : "Telefono sujeto a confirmacion"}</p></div>) : <p className="text-white/70">Consulta el directorio oficial verificado para este territorio. No hay un contacto cercano confirmado para este viaje.</p>}
             </div>
           </div>
         </div>
+      )}
+
+      {territorialContext && (
+        <section className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-[#07131f]/90 p-5">
+            <h3 className="font-bold text-[#F4E6C1]">Conoce tu destino</h3>
+            <p className="mt-2 text-xs text-white/60">{territorialContext.culture.length} lugares culturales publicados para {territorialContext.territory}.</p>
+            <Link href="/historia" className="mt-4 inline-block text-xs font-bold text-cyan-300 underline">Historia y patrimonio</Link>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-[#07131f]/90 p-5">
+            <h3 className="font-bold text-[#F4E6C1]">Que comer</h3>
+            <p className="mt-2 text-xs text-white/60">{territorialContext.gastronomy.length} opciones publicadas; precios y horarios requieren vigencia.</p>
+            <Link href="/gastronomia" className="mt-4 inline-block text-xs font-bold text-cyan-300 underline">Explorar gastronomia</Link>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-[#07131f]/90 p-5">
+            <h3 className="font-bold text-[#F4E6C1]">Escucha tu destino</h3>
+            <p className="mt-2 text-xs text-white/60">El audio nunca inicia automaticamente.</p>
+            <Link href="/cultura" className="mt-4 inline-block text-xs font-bold text-cyan-300 underline">Cultura y musica</Link>
+          </div>
+        </section>
       )}
 
       {/* CONTENIDO PESTAÑA: ITINERARIO COMPLETO */}

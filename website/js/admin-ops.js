@@ -5,22 +5,29 @@
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Proteger de forma estricta y real el Centro de Mando y Operaciones (Ops Center)
 //   de Baqueano Nicaragua contra accesos no autorizados.
-// - Implementar el control de acceso corporativo solicitado:
-//   * 👑 ADMINISTRADOR: oscarelieser.informatica.inatec@gmail.com (Control Total).
-//   * 🔍 AUDITOR: vigoronmixt@gmail.com (Auditoría, Fiscalización Ley 306 y Solo Lectura).
-//   * 👤 USUARIO NORMAL: Libre acceso a las páginas públicas del portal web (destinos,
-//     historia, ambiental, gastronomía, música, aliados), pero con BLOQUEO TOTAL
-//     al panel administrativo.
+// - CORRECCIÓN P0 DE SEGURIDAD (2026-09-21):
+//   El formulario de correo/contraseña pasaba el string de contraseña como tercer
+//   argumento (firebaseUser) a resolveUserRoleAndProceed(), lo que evaluaba como
+//   truthy y permitía acceso con solo conocer el correo de un administrador.
+//   Ese bypass ha sido ELIMINADO. El formulario ahora usa signInWithEmailAndPassword()
+//   real de Firebase Auth. El acceso solo se otorga cuando Firebase confirma la
+//   identidad del usuario y onAuthStateChanged() lo procesa correctamente.
+// - El rol se determina comparando el correo autenticado por Firebase contra la
+//   lista de cuentas autorizadas BAQUEANO_USERS. En el futuro este control debe
+//   migrar a Custom Claims (request.auth.token.admin === true) en el backend,
+//   eliminando progresivamente la lista de correos en JavaScript.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Validación estricta de credenciales en cliente con persistencia en sessionStorage.
+// - Google Auth: signInWithPopup() con GoogleAuthProvider. Solo cuentas Google.
+// - Email/Pass: signInWithEmailAndPassword() real de Firebase Auth.
+//   → onAuthStateChanged() recibe el firebaseUser autenticado verificado.
+//   → resolveUserRoleAndProceed() valida que firebaseUser sea objeto Firebase real.
 // - Denegación defensiva para cualquier usuario sin rol autorizado de Admin o Auditor.
 // - Adaptación en tiempo real de la interfaz del Ops Center según el perfil verificado.
-// - Registro de auditoría de inicio de sesión con marca de tiempo oficial.
 //
 // 📦 3. QUÉ (WHAT / ENTIDADES EXPUESTAS):
 // - BAQUEANO_USERS: Directorio real de usuarios autorizados.
-// - initAdminAuth(): Validador de credenciales y despachador de permisos.
+// - initAdminAuth(): Inicializa autenticación Firebase real (Google + Email/Password).
 // - initAdminOperations(): Telemetría en vivo, gestión de rutas y eventos.
 // ============================================================================
 
@@ -212,8 +219,13 @@ function initAdminAuth() {
 
 
   // --------------------------------------------------------------------------
-  // INICIO DE SESIÓN CON CORREO & CONTRASEÑA
+  // INICIO DE SESIÓN CON CORREO & CONTRASEÑA — Firebase Auth Real
   // --------------------------------------------------------------------------
+  // 🎯 POR QUÉ: El bypass anterior pasaba la contraseña como firebaseUser (truthy),
+  //    permitiendo acceso sin autenticación real. Ahora se usa signInWithEmailAndPassword().
+  // ⚙️ CÓMO: Firebase valida credenciales en servidor. onAuthStateChanged() recibe
+  //    el firebaseUser real y llama a resolveUserRoleAndProceed() con identidad verificada.
+  // 📦 QUÉ: El formulario solo inicia el proceso; el acceso se otorga en onAuthStateChanged.
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -221,11 +233,45 @@ function initAdminAuth() {
       const enteredPass = passInput ? passInput.value.trim() : '';
 
       if (!enteredEmail) {
-        showLoginError("Por favor ingresa tu correo electrónico registrado.");
+        showLoginError('Por favor ingresa tu correo electrónico registrado.');
+        return;
+      }
+      if (!enteredPass) {
+        showLoginError('Por favor ingresa tu contraseña.');
         return;
       }
 
-      resolveUserRoleAndProceed(enteredEmail, enteredEmail, enteredPass);
+      // Verificar que Firebase Auth esté disponible antes de intentar autenticar.
+      if (!window.firebase || !window.firebase.auth) {
+        showLoginError('Firebase Authentication no está disponible. Recarga la página e intenta de nuevo.');
+        return;
+      }
+
+      // Mostrar estado de carga para feedback inmediato al usuario.
+      if (feedbackAlert) {
+        feedbackAlert.className = 'login-feedback-alert success';
+        feedbackAlert.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verificando credenciales con Firebase...';
+        feedbackAlert.style.display = 'flex';
+      }
+
+      // signInWithEmailAndPassword() es la única vía de acceso por contraseña.
+      // onAuthStateChanged() a continuación procesará el resultado cuando Firebase confirme.
+      window.firebase.auth()
+        .signInWithEmailAndPassword(enteredEmail, enteredPass)
+        .catch(function(error) {
+          // Firebase rechazó las credenciales: mostrar error sin revelar detalles internos.
+          var userFacingError;
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+            userFacingError = 'Correo o contraseña incorrectos. Verifica tus credenciales y vuelve a intentarlo.';
+          } else if (error.code === 'auth/too-many-requests') {
+            userFacingError = 'Demasiados intentos fallidos. Espera unos minutos antes de volver a intentarlo.';
+          } else if (error.code === 'auth/user-disabled') {
+            userFacingError = 'Esta cuenta ha sido deshabilitada. Contacta al administrador.';
+          } else {
+            userFacingError = 'No fue posible verificar tu identidad. Intenta con Google o contacta al administrador.';
+          }
+          showLoginError(userFacingError);
+        });
     });
   }
 
