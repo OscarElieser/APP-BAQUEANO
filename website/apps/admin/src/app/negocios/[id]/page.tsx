@@ -98,8 +98,9 @@ export default function FiscalizarNegocioPage({ params }: { params: Promise<{ id
         
         <div className="flex gap-6 items-start">
           <div className="w-24 h-24 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
-            {business.imageUrl ? (
-              <img src={business.imageUrl} alt={business.name} className="w-full h-full object-cover" />
+            {business.imageUrl ? (<>
+              {/* eslint-disable-next-line @next/next/no-img-element -- Admin previews preserve arbitrary reviewed source URLs. */}
+              <img src={business.imageUrl} alt={business.name} className="w-full h-full object-cover" /></>
             ) : (
               <Building className="w-8 h-8 text-slate-500" />
             )}

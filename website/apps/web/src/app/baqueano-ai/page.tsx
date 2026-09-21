@@ -217,9 +217,10 @@ export default function BaqueanoAiPage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2">
               <Bot className="w-4 h-4 text-[#F65E01]" />
-              <span>BAQUEANO DIGITAL CONCIERGE & MULTI-AGENT PLATFORM</span>
+              {/* BAQUEANO DIGITAL CONCIERGE remains the internal workspace contract. */}
+              <span>BAQUEANO IA - CONCIERGE TURISTICO TERRITORIAL</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white">Coordinador Territorial Inteligente</h1>
+            <h1 className="text-2xl sm:text-3xl font-black text-white">BAQUEANO IA</h1>
             <p className="text-xs text-slate-300 mt-1">
               Planifica destinos, estadía, presupuesto, seguridad y preparación de reservas con información del catálogo.
             </p>
@@ -427,7 +428,7 @@ export default function BaqueanoAiPage() {
                     onClick={handleRequestSaveDraft}
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold transition-all shadow-md"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Guardar Itinerario
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Reservar mi aventura
                   </button>
                 </div>
 

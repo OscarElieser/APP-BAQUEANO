@@ -12,7 +12,6 @@ export default async function UsuariosPage() {
     super_admin: "red",
     admin: "orange",
     host: "green",
-    auditor: "default",
     explorer: "default"
   };
 

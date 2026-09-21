@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { listPaymentOrdersForAdmin } from "@baqueano/firebase";
@@ -40,7 +40,7 @@ export default function PagosPage() {
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h1 className="font-display text-2xl font-black text-white">Órdenes de Pago y Liquidaciones</h1>
+          <h1 className="font-display text-2xl font-black text-white">Ã“rdenes de Pago y Liquidaciones</h1>
           <p className="font-tech text-sm text-white/60">Monitoreo de transacciones y estado de pagos en la plataforma.</p>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function PagosPage() {
           <Search size={18} />
           <input
             type="text"
-            placeholder="Buscar por ID de orden o de transacción..."
+            placeholder="Buscar por ID de orden o de transacciÃ³n..."
             className="w-full bg-transparent px-2 py-1 text-sm text-white outline-none placeholder:text-white/30"
           />
         </div>
@@ -64,20 +64,20 @@ export default function PagosPage() {
               <AdminTableHead>Usuario</AdminTableHead>
               <AdminTableHead>Monto</AdminTableHead>
               <AdminTableHead>Estado</AdminTableHead>
-              <AdminTableHead className="text-right">Transacción</AdminTableHead>
+              <AdminTableHead className="text-right">TransacciÃ³n</AdminTableHead>
             </AdminTableRow>
           </AdminTableHeader>
           <AdminTableBody>
             {loading ? (
               <AdminTableRow>
                 <AdminTableCell colSpan={5} className="py-8 text-center text-white/50">
-                  Cargando órdenes de pago...
+                  Cargando Ã³rdenes de pago...
                 </AdminTableCell>
               </AdminTableRow>
             ) : orders.length === 0 ? (
               <AdminTableRow>
                 <AdminTableCell colSpan={5} className="py-8 text-center text-white/50">
-                  No hay órdenes registradas en el sistema.
+                  No hay Ã³rdenes registradas en el sistema.
                 </AdminTableCell>
               </AdminTableRow>
             ) : (
@@ -100,13 +100,13 @@ export default function PagosPage() {
                     </AdminTableCell>
                     <AdminTableCell>
                       <span className="font-tech text-xs text-slate-300">
-                        {order.userId.split("-")[0] || "Guest"}
+                        {order.createdByUid.split("-")[0] || "Guest"}
                       </span>
                     </AdminTableCell>
                     <AdminTableCell>
                       <div className="flex items-center gap-1 text-slate-200 font-mono text-base">
                         <DollarSign size={14} className="text-[#165D6F]" />
-                        <span>{order.amount.toFixed(2)} {order.currency}</span>
+                        <span>{order.amountUsd.toFixed(2)} USD</span>
                       </div>
                     </AdminTableCell>
                     <AdminTableCell>
@@ -120,7 +120,7 @@ export default function PagosPage() {
                     <AdminTableCell className="text-right">
                       <div className="flex flex-col items-end">
                         <span className="font-tech text-xs text-slate-400">
-                          {order.transactionId || "Sin Transacción"}
+                          { "Sin TransacciÃ³n"}
                         </span>
                         <span className="text-xs text-[#F65E01] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                           Ver Detalles

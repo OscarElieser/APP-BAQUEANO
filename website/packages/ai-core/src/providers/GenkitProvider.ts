@@ -55,7 +55,8 @@ export class GenkitProvider {
         }
       });
       
-      return response.output();
+      if (!response.output) throw new Error("AI response did not match the expected schema.");
+      return response.output;
     } catch (error) {
       console.error("[GenkitProvider] Error executing Gemini:", error);
       throw new Error("Failed to evaluate task with AI.");

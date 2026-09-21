@@ -84,8 +84,9 @@ export default async function NegociosPage() {
                     <AdminTableCell className="font-medium text-slate-200">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden">
-                          {negocio.imageUrl ? (
-                            <img src={negocio.imageUrl} alt={negocio.name} className="w-full h-full object-cover" />
+                          {negocio.imageUrl ? (<>
+                            {/* eslint-disable-next-line @next/next/no-img-element -- Admin previews preserve arbitrary reviewed source URLs. */}
+                            <img src={negocio.imageUrl} alt={negocio.name} className="w-full h-full object-cover" /></>
                           ) : (
                             <Briefcase className="w-4 h-4 text-slate-400" />
                           )}

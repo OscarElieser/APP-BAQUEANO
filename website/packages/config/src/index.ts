@@ -25,6 +25,8 @@ export const publicRoutes = [
   { href: "/gastronomia", label: "Gastronomia" },
   { href: "/cultura", label: "Cultura" },
   { href: "/baqueano-ai", label: "Baqueano AI" },
+  { href: "/alquiler-vehiculos", label: "Alquiler de Vehiculos" },
+  { href: "/mi-viaje", label: "Mi Viaje" },
   { href: "/sostenibilidad", label: "Impacto" }
 ] as const;
 
@@ -48,6 +50,8 @@ export const adminModules = [
   "municipios",
   "reservas",
   "pagos",
+  "movilidad",
+  "fuentes",
   "suscripciones",
   "historia",
   "gastronomia",
@@ -129,7 +133,15 @@ export const firestoreCollections = {
   trips: "trips",
   passportEntries: "passport_entries",
   experienceContexts: "experience_contexts",
-  websitePages: "website_pages"
+  websitePages: "website_pages",
+  tripPlans: "trip_plans",
+  tripBookings: "trip_bookings",
+  availabilitySlots: "availability_slots",
+  vehicleRentalCompanies: "vehicle_rental_companies",
+  rentalVehicles: "rental_vehicles",
+  dataSources: "data_sources",
+  sourceVerifications: "source_verifications",
+  tripPasses: "trip_passes"
 } as const;
 
 export const roleAccess: Record<UserRole, readonly string[]> = {
