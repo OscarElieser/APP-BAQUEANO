@@ -32,24 +32,38 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 import {
   Bell,
+  Car,
   ChevronDown,
   Clock3,
   Compass,
   FileText,
   HelpCircle,
+  Landmark,
   LockKeyhole,
   Mail,
+  Map,
   Menu,
   MessageCircle,
+  Music,
   Palette,
   Phone,
   Shield,
   Smartphone,
+  Sparkles,
   UserRound,
+  UtensilsCrossed,
   X
 } from "lucide-react";
 import { publicRoutes } from "@baqueano/config";
 import { getBaqueanoAuth, getBaqueanoDb } from "@baqueano/firebase";
+
+const miPaisRoutes = [
+  { href: "/historia", label: "Historia & Patrimonio", icon: Landmark },
+  { href: "/gastronomia", label: "Gastronomía", icon: UtensilsCrossed },
+  { href: "/cultura", label: "Música & Cultura", icon: Music },
+  { href: "/territorios", label: "Territorios", icon: Map },
+  { href: "/alquiler-vehiculos", label: "🚗 Alquiler de Vehículos", icon: Car }
+] as const;
 
 const aboutRoutes = [
   { href: "/marca", label: "Nuestra Marca & Manifiesto", icon: Palette },
@@ -262,11 +276,30 @@ export function PublicNavigation() {
         </Link>
 
         <div className="hidden items-center gap-1 lg:flex">
-          {publicRoutes.map((route) => (
-            <Link key={route.href} href={route.href} className="rounded-md px-3 py-2 text-sm font-semibold text-white/76 transition hover:bg-white/10 hover:text-white focus-ring">
-              {route.label}
-            </Link>
-          ))}
+          <Link href="/" className="rounded-md px-3 py-2 text-sm font-semibold text-white/76 transition hover:bg-white/10 hover:text-white focus-ring">
+            Inicio
+          </Link>
+          <Link href="/destinos" className="rounded-md px-3 py-2 text-sm font-semibold text-white/76 transition hover:bg-white/10 hover:text-white focus-ring">
+            Destinos
+          </Link>
+
+          <NavDropdown label="Mi País">
+            {miPaisRoutes.map(({ href, label, icon: Icon }) => (
+              <Link key={href} href={href} className="focus-ring flex items-center gap-3 rounded-md px-3 py-3 text-sm font-semibold text-white/78 hover:bg-white/10 hover:text-white">
+                <Icon size={17} className="text-[#F65E01]" /> {label}
+              </Link>
+            ))}
+          </NavDropdown>
+
+          <Link href="/baqueano-ai" className="rounded-md px-3 py-2 text-sm font-bold text-[#F4E6C1] transition hover:bg-white/10 hover:text-white focus-ring flex items-center gap-1.5">
+            <Sparkles size={14} className="text-[#F65E01]" /> Baqueano IA
+          </Link>
+          <Link href="/aliados.html" className="rounded-md px-3 py-2 text-sm font-semibold text-white/76 transition hover:bg-white/10 hover:text-white focus-ring">
+            Aliados
+          </Link>
+          <Link href="/mi-viaje" className="rounded-md px-3 py-2 text-sm font-semibold text-white/76 transition hover:bg-white/10 hover:text-white focus-ring">
+            Mi Viaje
+          </Link>
 
           <NavDropdown label="Acerca de Nosotros">
             {aboutRoutes.map(({ href, label, icon: Icon }) => (
@@ -317,12 +350,32 @@ export function PublicNavigation() {
       {open ? (
         <div className="max-h-[calc(100vh-80px)] overflow-y-auto border-t border-white/10 bg-[#0F172A]/96 px-4 py-4 shadow-2xl lg:hidden">
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2">
-            {publicRoutes.map((route) => (
-              <Link key={route.href} href={route.href} onClick={() => setOpen(false)} className="focus-ring rounded-md border border-white/10 bg-white/[0.06] px-4 py-4 text-sm font-bold text-white">
-                {route.label}
+            <Link href="/" onClick={() => setOpen(false)} className="focus-ring rounded-md border border-white/10 bg-white/[0.06] px-4 py-4 text-sm font-bold text-white">
+              Inicio
+            </Link>
+            <Link href="/destinos" onClick={() => setOpen(false)} className="focus-ring rounded-md border border-white/10 bg-white/[0.06] px-4 py-4 text-sm font-bold text-white">
+              Destinos
+            </Link>
+            <Link href="/baqueano-ai" onClick={() => setOpen(false)} className="focus-ring rounded-md border border-cyan-500/30 bg-cyan-950/40 px-4 py-4 text-sm font-bold text-cyan-300">
+              Baqueano IA
+            </Link>
+            <Link href="/mi-viaje" onClick={() => setOpen(false)} className="focus-ring rounded-md border border-white/10 bg-white/[0.06] px-4 py-4 text-sm font-bold text-white">
+              Mi Viaje
+            </Link>
+            <Link href="/aliados.html" onClick={() => setOpen(false)} className="focus-ring rounded-md border border-white/10 bg-white/[0.06] px-4 py-4 text-sm font-bold text-white">
+              Aliados
+            </Link>
+            <Link href="/mapa" onClick={() => setOpen(false)} className="focus-ring rounded-md border border-[#F65E01]/40 bg-[#F65E01]/20 px-4 py-4 text-sm font-bold text-white">
+              Mapa
+            </Link>
+          </div>
+          <MobileSection title="Mi País">
+            {miPaisRoutes.map(({ href, label, icon: Icon }) => (
+              <Link key={href} href={href} onClick={() => setOpen(false)} className="focus-ring flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-bold text-white">
+                <Icon size={17} className="text-[#F65E01]" /> {label}
               </Link>
             ))}
-          </div>
+          </MobileSection>
           <MobileSection title="Acerca de Nosotros">
             {aboutRoutes.map(({ href, label, icon: Icon }) => (
               <Link key={href} href={href} onClick={() => setOpen(false)} className="focus-ring flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-bold text-white">

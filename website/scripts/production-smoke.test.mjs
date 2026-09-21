@@ -255,6 +255,25 @@ assert(experienceConfig.includes("OFFICIAL_EXPERIENCE_VOCABULARY"), "Config must
 assert(experienceConfig.includes('trips: "trips"'), "Config must declare trips collection.");
 assert(experienceConfig.includes('passportEntries: "passport_entries"'), "Config must declare passportEntries collection.");
 
+// ============================================================================
+// VIAJE TRANSACCIONAL, TRIP PASS Y OFFLINE SEGURO
+// ============================================================================
+const tripPassRoute = read("apps/web/src/app/api/trip-pass/route.ts");
+const tripPassService = read("apps/web/src/services/trip-pass.service.ts");
+const safeServiceWorker = read("apps/web/public/sw.js");
+const territorialContextService = read("apps/web/src/services/territorial-trip-context.service.ts");
+const realTripHubService = read("apps/web/src/services/experience/trip-hub.service.ts");
+
+assert(tripPassRoute.includes("createHmac"), "Trip Pass must use a cryptographic HMAC.");
+assert(tripPassRoute.includes("timingSafeEqual"), "Trip Pass validation must compare signatures safely.");
+assert(tripPassRoute.includes("BAQUEANO_TRIP_PASS_SIGNING_KEY"), "Trip Pass signing key must remain server-side.");
+assert(tripPassService.includes("validateTripPass"), "Trip Pass client must expose validation.");
+assert(safeServiceWorker.includes('url.pathname.startsWith("/api/")'), "Offline cache must exclude API responses.");
+assert(safeServiceWorker.includes('url.pathname.includes("pago")'), "Offline cache must exclude payment routes.");
+assert(territorialContextService.includes("getTerritorialTripContext"), "Trip Hub must resolve contextual territory data.");
+assert(realTripHubService.includes("firestoreCollections.tripBookings"), "Trip Hub must load the requested booking from Firestore.");
+assert(!realTripHubService.includes("SEED_TRIP"), "Trip Hub must not ship a demonstration trip.");
+
 if (failures.length > 0) {
   console.error("Production smoke tests failed:");
   for (const failure of failures) console.error(`- ${failure}`);
