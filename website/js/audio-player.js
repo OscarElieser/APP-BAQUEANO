@@ -170,6 +170,13 @@
     const work = works[workIndex] || works[0];
     if (!work) return;
 
+    // Las fichas solo abren el MP3 cuando la relación está verificada en el
+    // archivo documental. Las demás obras permanecen como referencia escrita.
+    if (window.BaqueanoArchive && window.BaqueanoArchive.playByTitle(work.title)) {
+      document.getElementById('epicMusicPlayer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
     // Si ya está sonando esta misma obra, detener
     if (isSynthesizerPlaying && activeArtistId === artistId && activeWorkIndex === workIndex) {
       stopCurrentPlayback();
@@ -311,7 +318,9 @@
     const content = document.getElementById('sonoraModalContent');
     if (!modal || !content) return;
 
-    const worksHtml = (artist.works || []).map((work, idx) => `
+    const worksHtml = (artist.works || []).map((work, idx) => {
+      const hasVerifiedAudio = Boolean(window.BaqueanoArchive?.hasVerifiedTitle(work.title));
+      return `
       <div class="sonora-modal-work-item">
         <div style="flex: 1;">
           <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">
@@ -322,11 +331,12 @@
             ${work.desc}
           </p>
         </div>
-        <button class="btn-sonora-listen-pill" onclick="window.BaqueanoSonora.playWork('${artist.id}', ${idx})">
-          <i class="fa-solid fa-circle-play"></i> Escuchar
+        <button class="btn-sonora-listen-pill" ${hasVerifiedAudio ? `onclick="window.BaqueanoSonora.playWork('${artist.id}', ${idx})"` : 'disabled aria-disabled="true"'}>
+          <i class="fa-solid fa-${hasVerifiedAudio ? 'circle-play' : 'clock'}"></i> ${hasVerifiedAudio ? 'Escuchar MP3' : 'Audio por documentar'}
         </button>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     content.innerHTML = `
       <div class="sonora-modal-header-hero">
