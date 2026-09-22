@@ -482,3 +482,136 @@ html body .ambiental-inline-050 {
   color: #EF4444;
   text-decoration: underline;
 }
+
+/* ==========================================================================
+   BANQUETA DE ACCIÓN Y MODAL OFICIAL DE DENUNCIA AMBIENTAL
+   ========================================================================== */
+
+.denuncia-cta-card {
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.45) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(22, 93, 111, 0.55);
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(22, 93, 111, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.denuncia-cta-card:hover {
+  border-color: rgba(246, 94, 1, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7), 0 0 30px rgba(246, 94, 1, 0.2);
+}
+
+.denuncia-cta-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 1.6rem 0 2.2rem;
+}
+
+.denuncia-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.2rem;
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(244, 230, 193, 0.22);
+  border-radius: 9999px;
+  color: var(--arena-pinolera);
+  font-size: 0.84rem;
+  font-family: var(--font-tech);
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.denuncia-cta-pill i {
+  color: var(--terracotta-light);
+}
+
+.denuncia-cta-action {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-open-denuncia {
+  padding: 1.1rem 2.8rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 9999px;
+  box-shadow: 0 12px 28px rgba(246, 94, 1, 0.4);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-open-denuncia:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(246, 94, 1, 0.55);
+}
+
+/* DIÁLOGO MODAL DE DENUNCIA AMBIENTAL */
+.denuncia-modal-dialog {
+  max-width: 760px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  border-radius: 28px;
+  background: linear-gradient(155deg, rgba(15, 23, 42, 0.98), rgba(22, 93, 111, 0.9));
+  border: 2px solid var(--border-glow);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(22, 93, 111, 0.3);
+  scrollbar-width: thin;
+  scrollbar-color: var(--terracotta) rgba(15, 23, 42, 0.6);
+}
+
+.denuncia-modal-dialog::-webkit-scrollbar {
+  width: 6px;
+}
+
+.denuncia-modal-dialog::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 10px;
+}
+
+.denuncia-modal-dialog::-webkit-scrollbar-thumb {
+  background: var(--terracotta);
+  border-radius: 10px;
+}
+
+.denuncia-modal-header {
+  text-align: center;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+}
+
+.denuncia-modal-title {
+  font-size: 1.6rem !important;
+  margin: 0.6rem 0 0.4rem !important;
+}
+
+.denuncia-modal-subtitle {
+  font-size: 0.88rem !important;
+  max-width: 580px !important;
+  margin: 0 auto !important;
+}
+
+@media (max-width: 768px) {
+  .denuncia-modal-dialog {
+    padding: 1.5rem 1.1rem;
+    max-height: 92vh;
+    border-radius: 20px;
+  }
+
+  .denuncia-cta-card {
+    padding: 2.2rem 1.2rem;
+  }
+
+  .btn-open-denuncia {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+  }
+}

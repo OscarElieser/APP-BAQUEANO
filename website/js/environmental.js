@@ -7,17 +7,19 @@
 //   gamificada e interactiva ("Pacto del Guardián Baqueano").
 // - Permitir a los exploradores firmar individualmente los 10 mandamientos de
 //   turismo de huella cero y desbloquear su Certificado Digital de Guardián.
-// - Facilitar denuncias ciudadanas georreferenciadas con GPS en tiempo real.
+// - Facilitar denuncias ciudadanas georreferenciadas con GPS en tiempo real
+//   activables bajo demanda mediante un modal interactivo de alta gama.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Seguimiento de estado reactivo mediante `committedRules` (Set / LocalStorage).
 // - Animaciones fluidas de microinteracción, partículas luminosas y barra de progreso.
 // - Filtros por categoría (Sendero, Aguas, Comunidad) con transiciones CSS.
 // - Modal de celebración automática al alcanzar 10/10 compromisos.
-// - Integración con Geolocation API para capturar coordenadas satelitales en denuncias.
+// - Modal de Denuncia Ambiental interactivo: apertura al clic, cierre con ESC,
+//   bloqueo de scroll y auto-apertura por hash (#denuncia).
 //
 // 📦 3. QUÉ (WHAT / FUNCIONES EXPUESTAS):
-// - initEnvironmentalModule(): Inicializa el Decálogo interactivo y el formulario SOS.
+// - initEnvironmentalModule(): Inicializa Decálogo interactivo, modal guardián y modal de denuncia.
 // ============================================================================
 
 function initEnvironmentalModule() {
@@ -203,8 +205,78 @@ function initEnvironmentalModule() {
     });
   }
 
+  // --------------------------------------------------------------------------
+  // 3. CONTROLADOR DEL MODAL DE DENUNCIA AMBIENTAL
+  // --------------------------------------------------------------------------
+  const denunciaModal = document.getElementById('denunciaModal');
+  const openDenunciaBtns = document.querySelectorAll('#btnOpenDenunciaModal, .btn-open-denuncia');
+  const closeDenunciaBtn = document.getElementById('btnCloseDenunciaModal');
+  const cancelDenunciaBtn = document.getElementById('btnCancelDenunciaModal');
+
+  function openDenunciaModal(e) {
+    if (e) e.preventDefault();
+    if (!denunciaModal) return;
+    denunciaModal.classList.add('active');
+    denunciaModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Focus en primer campo interactivo accesible
+    const firstInput = document.getElementById('reportType');
+    if (firstInput) {
+      setTimeout(() => firstInput.focus(), 120);
+    }
+  }
+
+  function closeDenunciaModal() {
+    if (!denunciaModal) return;
+    denunciaModal.classList.remove('active');
+    denunciaModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Exportar funciones de apertura/cierre para interoperabilidad
+  window.openDenunciaModal = openDenunciaModal;
+  window.closeDenunciaModal = closeDenunciaModal;
+
+  if (openDenunciaBtns.length > 0) {
+    openDenunciaBtns.forEach(btn => btn.addEventListener('click', openDenunciaModal));
+  }
+
+  if (closeDenunciaBtn) {
+    closeDenunciaBtn.addEventListener('click', closeDenunciaModal);
+  }
+
+  if (cancelDenunciaBtn) {
+    cancelDenunciaBtn.addEventListener('click', closeDenunciaModal);
+  }
+
+  if (denunciaModal) {
+    denunciaModal.addEventListener('click', e => {
+      if (e.target === denunciaModal) {
+        closeDenunciaModal();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && denunciaModal.classList.contains('active')) {
+        closeDenunciaModal();
+      }
+    });
+
+    // Auto-apertura si se ingresa con ancla hash #denuncia
+    if (window.location.hash === '#denuncia' || window.location.hash === '#formulario-denuncia') {
+      setTimeout(openDenunciaModal, 300);
+    }
+  }
+
+  // Si environmental-evidence.js no está presente, fallback para envío y cierre
   if (form) {
     form.addEventListener('submit', e => {
+      // Si ya fue prevenido/procesado por el módulo de evidencias, solo cerrar modal
+      if (e.defaultPrevented || window.__evidenceFormHandlerRegistered) {
+        closeDenunciaModal();
+        return;
+      }
       e.preventDefault();
       const typeEl = document.getElementById('reportType');
       const locEl = document.getElementById('reportLocation');
@@ -219,6 +291,7 @@ function initEnvironmentalModule() {
 
       alert("¡Gracias por proteger a Nicaragua! Tu evidencia ha sido canalizada al equipo de custodia ambiental.");
       form.reset();
+      closeDenunciaModal();
     });
   }
 }

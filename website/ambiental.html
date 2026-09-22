@@ -498,11 +498,11 @@
           </div>
         </div>
 
-        <!-- FORMULARIO DE DENUNCIA AMBIENTAL CON GPS -->
-        <div class="denuncia-form-card ambiental-inline-016">
+        <!-- BANNER DE ACCIÓN: DENUNCIA AMBIENTAL EN TERRITORIO (MODAL TRIGGER) -->
+        <div class="denuncia-cta-card ambiental-inline-016">
           <div class="ambiental-inline-017">
             <div class="badge-section-pill ambiental-inline-018">
-              <i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana
+              <i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana en Territorio
             </div>
             <h2 class="ambiental-inline-019">Formulario de Denuncia Ambiental en Territorio</h2>
             <p class="ambiental-inline-020">
@@ -510,73 +510,17 @@
             </p>
           </div>
 
-          <form id="environmentalReportForm">
-            <div class="form-grid-2col">
-              <div class="form-group-field">
-                <label for="reportType"><i class="fa-solid fa-list-check"></i> Tipo de Afectación:</label>
-                <select id="reportType" class="form-control-select" required>
-                  <option value="Tala Ilegal o Despale">Tala Ilegal o Despale Indiscriminado</option>
-                  <option value="Incendio o Quema Agrícola no Controlada">Incendio o Quema de Bosque</option>
-                  <option value="Contaminación de Río o Laguna">Contaminación de Fuentes de Agua</option>
-                  <option value="Basura / Vertedero en Sendero">Vertedero Clandestino en Sendero</option>
-                  <option value="Cacería Furtiva de Fauna Silvestre">Cacería o Tráfico de Fauna Silvestre</option>
-                  <option value="Construcción no Autorizada en Reserva">Invasión de Área Protegida</option>
-                </select>
-              </div>
+          <div class="denuncia-cta-badges">
+            <span class="denuncia-cta-pill"><i class="fa-solid fa-satellite"></i> GPS Satelital en Vivo</span>
+            <span class="denuncia-cta-pill"><i class="fa-solid fa-camera"></i> Evidencias en Fotos y Videos</span>
+            <span class="denuncia-cta-pill"><i class="fa-solid fa-shield-halved"></i> 100% Confidencial y Directo</span>
+          </div>
 
-              <div class="form-group-field">
-                <label for="reportLocation"><i class="fa-solid fa-map-pin"></i> Ubicación / Destino:</label>
-                <input type="text" id="reportLocation" class="form-control-input" placeholder="Ej: Sendero Río Abajo, Cañón de Somoto" required>
-              </div>
-            </div>
-
-            <div class="form-group-field ambiental-inline-021">
-              <div class="ambiental-inline-022">
-                <label for="reportDescription"><i class="fa-solid fa-align-left"></i> Descripción y Evidencia:</label>
-                <button type="button" class="btn-admin-action ambiental-inline-023" id="btnCaptureGpsReport">
-                  <i class="fa-solid fa-satellite"></i> Incrustar Coordenadas GPS en Vivo
-                </button>
-              </div>
-              <textarea id="reportDescription" class="form-control-textarea" placeholder="Detalla lo observado (árboles talados, humo visible, vehículos, fauna afectada, etc.)..." required></textarea>
-            </div>
-
-                        <!-- ZONA DE CARGA DE EVIDENCIAS VISUALES (FOTOS Y VIDEOS) -->
-            <div class="form-group-field" style="margin-top: 1.2rem;">
-              <label class="evidence-upload-label">
-                <i class="fa-solid fa-photo-film"></i> Subir Evidencias Visuales (Fotos y Videos):
-              </label>
-              <div class="evidence-dropzone" id="evidenceDropzone">
-                <input type="file" id="reportMediaFiles" class="evidence-file-input" accept="image/*,video/*" multiple>
-                <div class="dropzone-content">
-                  <div class="dropzone-icon-box">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                  </div>
-                  <div class="dropzone-text">
-                    <strong>Haz clic o arrastra fotos y videos de la afectación aquí</strong>
-                    <span>Admite imágenes (JPG, PNG, WEBP) y videos (MP4, MOV) de hasta 50MB</span>
-                  </div>
-                  <button type="button" class="btn-hero-glass btn-select-files">
-                    <i class="fa-solid fa-folder-open"></i> Explorar Archivos
-                  </button>
-                </div>
-              </div>
-
-              <!-- Miniaturas de Previsualización -->
-              <div class="evidence-preview-grid" id="evidencePreviewGrid"></div>
-
-              <!-- Barra de Estado de Archivos Adjuntos -->
-              <div class="evidence-stats-bar" id="evidenceStatsBar" style="display: none;">
-                <span id="evidenceCountText"><i class="fa-solid fa-paperclip"></i> 0 archivos adjuntos</span>
-                <button type="button" class="btn-clear-evidence" id="btnClearEvidence"><i class="fa-solid fa-trash-can"></i> Quitar todos</button>
-              </div>
-            </div>
-
-            <div class="ambiental-inline-024">
-              <button type="submit" class="btn-hero-primary ambiental-inline-025">
-                <i class="fa-solid fa-paper-plane"></i> Transmitir Denuncia Ambiental Vía WhatsApp
-              </button>
-            </div>
-          </form>
+          <div class="denuncia-cta-action">
+            <button type="button" class="btn-hero-primary btn-open-denuncia" id="btnOpenDenunciaModal">
+              <i class="fa-solid fa-bullhorn"></i> Abrir Formulario de Denuncia
+            </button>
+          </div>
         </div>
 
         <!-- PASAPORTE DEL EXPLORADOR ÉTICO -->
@@ -1055,6 +999,98 @@
       </div>
       <div class="ambiental-inline-050">
       </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL OFICIAL: FORMULARIO DE DENUNCIA AMBIENTAL CON GPS Y MULTIMEDIA
+       ======================================================================== -->
+  <div class="modal-backdrop-pro" id="denunciaModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="denunciaModalTitle">
+    <div class="modal-card-dialog denuncia-modal-dialog">
+      <button class="modal-close-x" id="btnCloseDenunciaModal" type="button" aria-label="Cerrar formulario de denuncia">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="denuncia-modal-header">
+        <div class="badge-section-pill ambiental-inline-018">
+          <i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana en Territorio
+        </div>
+        <h2 id="denunciaModalTitle" class="ambiental-inline-019 denuncia-modal-title">Formulario de Denuncia Ambiental en Territorio</h2>
+        <p class="ambiental-inline-020 denuncia-modal-subtitle">
+          Reporta agresiones ecológicas en tiempo real con coordenadas satelitales verificadas. Tu reporte es canalizado directamente a las cooperativas de custodia y brigadas forestales.
+        </p>
+      </div>
+
+      <form id="environmentalReportForm">
+        <div class="form-grid-2col">
+          <div class="form-group-field">
+            <label for="reportType"><i class="fa-solid fa-list-check"></i> Tipo de Afectación:</label>
+            <select id="reportType" class="form-control-select" required>
+              <option value="Tala Ilegal o Despale">Tala Ilegal o Despale Indiscriminado</option>
+              <option value="Incendio o Quema Agrícola no Controlada">Incendio o Quema de Bosque</option>
+              <option value="Contaminación de Río o Laguna">Contaminación de Fuentes de Agua</option>
+              <option value="Basura / Vertedero en Sendero">Vertedero Clandestino en Sendero</option>
+              <option value="Cacería Furtiva de Fauna Silvestre">Cacería o Tráfico de Fauna Silvestre</option>
+              <option value="Construcción no Autorizada en Reserva">Invasión de Área Protegida</option>
+            </select>
+          </div>
+
+          <div class="form-group-field">
+            <label for="reportLocation"><i class="fa-solid fa-map-pin"></i> Ubicación / Destino:</label>
+            <input type="text" id="reportLocation" class="form-control-input" placeholder="Ej: Sendero Río Abajo, Cañón de Somoto" required>
+          </div>
+        </div>
+
+        <div class="form-group-field ambiental-inline-021">
+          <div class="ambiental-inline-022">
+            <label for="reportDescription"><i class="fa-solid fa-align-left"></i> Descripción y Evidencia:</label>
+            <button type="button" class="btn-admin-action ambiental-inline-023" id="btnCaptureGpsReport">
+              <i class="fa-solid fa-satellite"></i> Incrustar Coordenadas GPS en Vivo
+            </button>
+          </div>
+          <textarea id="reportDescription" class="form-control-textarea" placeholder="Detalla lo observado (árboles talados, humo visible, vehículos, fauna afectada, etc.)..." required></textarea>
+        </div>
+
+        <!-- ZONA DE CARGA DE EVIDENCIAS VISUALES (FOTOS Y VIDEOS) -->
+        <div class="form-group-field" style="margin-top: 1.2rem;">
+          <label class="evidence-upload-label">
+            <i class="fa-solid fa-photo-film"></i> Subir Evidencias Visuales (Fotos y Videos):
+          </label>
+          <div class="evidence-dropzone" id="evidenceDropzone">
+            <input type="file" id="reportMediaFiles" class="evidence-file-input" accept="image/*,video/*" multiple>
+            <div class="dropzone-content">
+              <div class="dropzone-icon-box">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <div class="dropzone-text">
+                <strong>Haz clic o arrastra fotos y videos de la afectación aquí</strong>
+                <span>Admite imágenes (JPG, PNG, WEBP) y videos (MP4, MOV) de hasta 50MB</span>
+              </div>
+              <button type="button" class="btn-hero-glass btn-select-files">
+                <i class="fa-solid fa-folder-open"></i> Explorar Archivos
+              </button>
+            </div>
+          </div>
+
+          <!-- Miniaturas de Previsualización -->
+          <div class="evidence-preview-grid" id="evidencePreviewGrid"></div>
+
+          <!-- Barra de Estado de Archivos Adjuntos -->
+          <div class="evidence-stats-bar" id="evidenceStatsBar" style="display: none;">
+            <span id="evidenceCountText"><i class="fa-solid fa-paperclip"></i> 0 archivos adjuntos</span>
+            <button type="button" class="btn-clear-evidence" id="btnClearEvidence"><i class="fa-solid fa-trash-can"></i> Quitar todos</button>
+          </div>
+        </div>
+
+        <div class="ambiental-inline-024" style="margin-top: 1.5rem; flex-direction: column; gap: 0.75rem;">
+          <button type="submit" class="btn-hero-primary ambiental-inline-025" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-paper-plane"></i> Transmitir Denuncia Ambiental Vía WhatsApp
+          </button>
+          <button type="button" class="btn-hero-secondary" id="btnCancelDenunciaModal" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-arrow-left"></i> Cancelar y Cerrar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 

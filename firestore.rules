@@ -128,6 +128,38 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Tarifas turísticas: lectura pública para transparencia; toda mutación y
+    // verificación exige privilegio administrativo emitido por custom claims.
+    match /tourism_services/{serviceId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+
+      match /priceHistory/{historyId} {
+        allow read: if isAdmin();
+        allow write: if isAdmin();
+      }
+    }
+
+    // El tipo de cambio es público, pero solo Ops Center puede actualizarlo.
+    match /app_config/exchange_rate {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Historial privado de itinerarios y snapshot de precios del propietario.
+    match /travelPlans/{planId} {
+      allow read, delete: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.status == 'draft'
+        && request.resource.data.totalCost <= request.resource.data.availableBudget;
+      allow update: if isAdmin()
+        || (isSignedIn()
+          && resource.data.userId == request.auth.uid
+          && request.resource.data.userId == resource.data.userId
+          && request.resource.data.totalCost <= request.resource.data.availableBudget);
+    }
+
     match /multimedia/{mediaId} {
       allow read: if isPublished() || isAdmin();
       allow write: if isAdmin();
