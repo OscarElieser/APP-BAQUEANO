@@ -498,30 +498,95 @@
           </div>
         </div>
 
-        <!-- BANNER DE ACCIÓN: DENUNCIA AMBIENTAL EN TERRITORIO (MODAL TRIGGER) -->
-        <div class="denuncia-cta-card ambiental-inline-016">
-          <div class="ambiental-inline-017">
-            <div class="badge-section-pill ambiental-inline-018">
-              <i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana en Territorio
+        <!-- BANNER CTA: DENUNCIA AMBIENTAL EN TERRITORIO (MODAL TRIGGER) -->
+        <div class="denuncia-cta-card ambiental-inline-016" id="denunciaCTASection">
+
+          <!-- Destellos decorativos de fondo -->
+          <div class="denuncia-cta-glow denuncia-cta-glow--left" aria-hidden="true"></div>
+          <div class="denuncia-cta-glow denuncia-cta-glow--right" aria-hidden="true"></div>
+
+          <!-- Grid interno: texto (izquierda) + ícono (derecha) -->
+          <div class="denuncia-cta-inner">
+
+            <!-- Columna principal: copy y acción -->
+            <div class="denuncia-cta-body">
+              <div class="badge-section-pill ambiental-inline-018">
+                <i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana en Territorio
+              </div>
+
+              <h2 class="denuncia-cta-title">
+                Reporta Agresiones<br><span class="denuncia-cta-highlight">Ecológicas en Tiempo Real</span>
+              </h2>
+
+              <p class="denuncia-cta-desc">
+                Con coordenadas GPS satelitales verificadas, tus reportes llegan
+                directamente a las cooperativas de custodia y brigadas forestales
+                de Nicaragua. Cero intermediarios, máxima efectividad.
+              </p>
+
+              <!-- Pills de características -->
+              <div class="denuncia-cta-badges">
+                <span class="denuncia-cta-pill">
+                  <i class="fa-solid fa-satellite"></i> GPS Satelital en Vivo
+                </span>
+                <span class="denuncia-cta-pill">
+                  <i class="fa-solid fa-photo-film"></i> Fotos y Videos
+                </span>
+                <span class="denuncia-cta-pill">
+                  <i class="fa-solid fa-shield-halved"></i> Confidencial y Directo
+                </span>
+              </div>
+
+              <!-- CTA principal -->
+              <div class="denuncia-cta-action">
+                <button
+                  type="button"
+                  class="btn-open-denuncia"
+                  id="btnOpenDenunciaModal"
+                  aria-haspopup="dialog"
+                  aria-controls="denunciaModal"
+                >
+                  <span class="btn-open-denuncia__icon"><i class="fa-solid fa-bullhorn"></i></span>
+                  <span class="btn-open-denuncia__label">Abrir Formulario de Denuncia</span>
+                  <span class="btn-open-denuncia__arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </button>
+
+                <p class="denuncia-cta-legal">
+                  <i class="fa-solid fa-lock"></i> Anónimo · Cifrado · Sin registro obligatorio
+                </p>
+              </div>
             </div>
-            <h2 class="ambiental-inline-019">Formulario de Denuncia Ambiental en Territorio</h2>
-            <p class="ambiental-inline-020">
-              Reporta agresiones ecológicas en tiempo real con coordenadas satelitales verificadas. Tu reporte es canalizado directamente a las cooperativas de custodia y brigadas forestales.
-            </p>
-          </div>
 
-          <div class="denuncia-cta-badges">
-            <span class="denuncia-cta-pill"><i class="fa-solid fa-satellite"></i> GPS Satelital en Vivo</span>
-            <span class="denuncia-cta-pill"><i class="fa-solid fa-camera"></i> Evidencias en Fotos y Videos</span>
-            <span class="denuncia-cta-pill"><i class="fa-solid fa-shield-halved"></i> 100% Confidencial y Directo</span>
-          </div>
+            <!-- Columna visual: ícono hero animado + estadísticas -->
+            <div class="denuncia-cta-visual" aria-hidden="true">
+              <div class="denuncia-cta-icon-ring">
+                <div class="denuncia-cta-icon-ring__pulse"></div>
+                <div class="denuncia-cta-icon-ring__inner">
+                  <i class="fa-solid fa-earth-americas"></i>
+                </div>
+              </div>
 
-          <div class="denuncia-cta-action">
-            <button type="button" class="btn-hero-primary btn-open-denuncia" id="btnOpenDenunciaModal">
-              <i class="fa-solid fa-bullhorn"></i> Abrir Formulario de Denuncia
-            </button>
-          </div>
-        </div>
+              <!-- Estadísticas de impacto -->
+              <div class="denuncia-stats-grid">
+                <div class="denuncia-stat-item">
+                  <span class="denuncia-stat-num">+320</span>
+                  <span class="denuncia-stat-lbl">Denuncias<br>Enviadas</span>
+                </div>
+                <div class="denuncia-stat-divider"></div>
+                <div class="denuncia-stat-item">
+                  <span class="denuncia-stat-num">72h</span>
+                  <span class="denuncia-stat-lbl">Tiempo de<br>Respuesta</span>
+                </div>
+                <div class="denuncia-stat-divider"></div>
+                <div class="denuncia-stat-item">
+                  <span class="denuncia-stat-num">15</span>
+                  <span class="denuncia-stat-lbl">Brigadas<br>Activas</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /denuncia-cta-inner -->
+        </div><!-- /denuncia-cta-card -->
 
         <!-- PASAPORTE DEL EXPLORADOR ÉTICO -->
         <div class="passport-card-wrap">
@@ -1106,6 +1171,6 @@
   <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script defer src="js/firebase-config.js"></script>
   <script defer src="js/public-cms-sync.js"></script>
-  <script src="js/persistent-audio-player.js"></script>
+  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 </body>
 </html>
