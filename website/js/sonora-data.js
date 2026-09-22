@@ -114,7 +114,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
     departmentId: "rivas",
     departmentName: "Rivas",
     genres: "Son de Marimba · Música Instrumental",
-    years: "1931 – 1958",
+    years: "1925 – 1958",
     icon: "fa-solid fa-music",
     quote: "«La Mora Limpia es el canto del alma nicaragüense que eriza la piel de todo patriota.»",
     legacy: "Compositor genuino de 'La Mora Limpia', inmortalizada en 1946 para un concurso de música típica. Considerada por unanimidad popular y académica como el segundo himno de Nicaragua. Su melodía en guitarra y marimba sintetiza la luz, la fertilidad y el misticismo de los campos de Nicaragua.",
@@ -124,12 +124,6 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Segundo Himno Nacional",
         desc: "Obra cumbre del folclore nicaragüense que abre todas las fiestas patronales y celebraciones patrias.",
         notes: [659.25, 783.99, 880.00, 987.77, 880.00, 783.99, 659.25, 587.33, 523.25]
-      },
-      {
-        title: "Al Atardecer",
-        tag: "Nocturno Instrumental",
-        desc: "Composición romántica para guitarra solista y trío folclórico.",
-        notes: [440.00, 523.25, 659.25, 587.33, 440.00]
       }
     ]
   },
@@ -413,7 +407,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
     years: "1874 – 1907",
     icon: "fa-solid fa-violin",
     quote: "«En medio del dolor de las Ruinas brotó la melodía más hermosa jamás escuchada.»",
-    legacy: "El más ilustre compositor de música académica de Nicaragua. A pesar de sufrir ceguera y aislamiento a orillas del río Chiquito en León, compuso valses inmortales como 'Ruinas', 'Amores de Santa Cecilia' y 'Rosalía', catalogados entre las cumbres del romanticismo musical latinoamericano.",
+    legacy: "Figura fundamental de la composición académica nicaragüense. En 1904 su vals 'Ruinas' obtuvo el premio de música de los Juegos Florales de León. Su catálogo documentado incluye también 'Amores de Abraham' y 'Rosalía'.",
     works: [
       {
         title: "Ruinas",
@@ -422,9 +416,9 @@ window.BAQUEANO_SONORA_ARTISTS = [
         notes: [523.25, 659.25, 783.99, 880.00, 987.77, 783.99, 659.25, 523.25]
       },
       {
-        title: "Amores de Santa Cecilia",
-        tag: "Vals Triunfal",
-        desc: "Premiado internacionalmente en 1904, derroche de virtuosismo orquestal y elegancia.",
+        title: "Amores de Abraham",
+        tag: "Vals Documentado",
+        desc: "Obra documentada dentro del catálogo del compositor leonés.",
         notes: [440.00, 554.37, 659.25, 880.00, 659.25, 440.00]
       },
       {
@@ -538,7 +532,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
     departmentId: "raccs",
     departmentName: "RACCS",
     genres: "Palo de Mayo · Calipso · Soca Afrocaribeña",
-    years: "1980 – Presente",
+    years: "1979 – Presente",
     icon: "fa-solid fa-drum",
     quote: "«¡Mayaya lasinki, mayo ya llegó, bailemos con la brisa del Caribe y el amor!»",
     legacy: "La agrupación que llevó la cadencia sensual, polirrítmica y festiva del Palo de Mayo costeño a todo el Pacífico nicaragüense y el mundo. Con el bajo percutido, trompetas brillantes y percusión caribeña, consolidaron el orgullo multiétnico y multicultural de Nicaragua.",

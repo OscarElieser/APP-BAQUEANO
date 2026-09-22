@@ -1,595 +1,221 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — REPRODUCTOR ÉPICO DE MÚSICA PINOLERA (epic-music-player.js)
+// 🧭 BAQUEANO — ARCHIVO SONORO DOCUMENTAL (epic-music-player.js)
 // ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una experiencia musical interactiva y soberana para el explorador,
-//   reuniendo las obras inmortales del folklore campesino, el Son Nica y la canción
-//   revolucionaria e histórica de Nicaragua.
-// - Conectar cada pieza con su departamento o región de origen, honrando la memoria
-//   cultural de las familias campesinas y los héroes de la patria.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Motor Web Audio API (AudioContext) que sintetiza armónicos de marimba de arco
-//   y guitarra campesina a 60fps con cero dependencias externas.
-// - Gestión reactiva de estado: playlist, scrubbing interactivo, shuffle, repeat,
-//   volumen gradual con mute y visualizador de espectro animado.
-// - Sincronización visual con tornamesa virtual (vinilo giratorio y brazo tonearm).
-//
-// 📦 3. QUÉ (WHAT / COMPONENTES & DATOS):
-// - Catálogo curado de folklore tradicional y música revolucionaria histórica.
-// - Métodos: initEpicMusicPlayer(), loadTrack(), togglePlay(), nextTrack(), prevTrack().
+// 🎯 POR QUÉ: preservar y hacer reproducibles los 93 MP3 sin convertir el nombre
+// del archivo en una atribución autoral. Una ausencia documental nunca se rellena.
+// ⚙️ CÓMO: inventario inmutable + reglas explícitas de catalogación verificada;
+// el resto conserva su audio con estado "Pendiente de documentación". El motor usa
+// un único HTMLAudioElement, libera la fuente anterior y actualiza una UI accesible.
+// 📦 QUÉ: reproductor, búsqueda/filtros, estado editorial y API pública para abrir
+// cualquier pista del archivo desde las fichas culturales verificadas.
 // ============================================================================
 
 (function () {
   'use strict';
 
-  // Catálogo oficial de obras sonoras nicaragüenses
-  const EPIC_TRACKS = [
-    // ------------------------------------------------------------------------
-    // FOLKLORE TRADICIONAL & SON NICA
-    // ------------------------------------------------------------------------
-    {
-      id: "mora-limpia",
-      title: "La Mora Limpia",
-      artist: "Justo Santos",
-      territory: "Rivas • Segundo Himno Nacional",
-      category: "folklore",
-      categoryName: "Folklore Tradicional",
-      genre: "Son Nica / Himno",
-      duration: "3:15",
-      durationSec: 195,
-      cover: "assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg",
-      notes: [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25, 587.33, 523.25, 659.25, 783.99, 880.00, 783.99, 659.25, 523.25]
-    },
-    {
-      id: "solar-monimbo",
-      title: "El Solar de Monimbó",
-      artist: "Camilo Zapata",
-      territory: "Masaya • Cuna del Folclore",
-      category: "folklore",
-      categoryName: "Folklore Tradicional",
-      genre: "Son Nica Insigne",
-      duration: "2:48",
-      durationSec: 168,
-      cover: "assets/images/destinos/volcan_masaya.jpg",
-      notes: [523.25, 587.33, 659.25, 783.99, 880.00, 659.25, 783.99, 523.25, 587.33, 659.25, 523.25]
-    },
-    {
-      id: "baile-mestizaje",
-      title: "Baile del Mestizaje",
-      artist: "Tradición Monimboseña",
-      territory: "Monimbó • Masaya",
-      category: "folklore",
-      categoryName: "Folklore Tradicional",
-      genre: "Marimba de Arco",
-      duration: "2:30",
-      durationSec: 150,
-      cover: "assets/images/destinos/laguna_de_apoyo.jpg",
-      notes: [659.25, 783.99, 880.00, 987.77, 880.00, 783.99, 659.25, 587.33, 523.25, 587.33, 659.25]
-    },
-    {
-      id: "caballito-chontaleño",
-      title: "Caballito Chontaleño",
-      artist: "Camilo Zapata",
-      territory: "Chontales • Serranías Ganaderas",
-      category: "folklore",
-      categoryName: "Folklore Tradicional",
-      genre: "Son Campesino",
-      duration: "2:55",
-      durationSec: 175,
-      cover: "assets/images/destinos/cascada_la_luna.jpg",
-      notes: [440.00, 493.88, 523.25, 659.25, 587.33, 523.25, 493.88, 440.00, 523.25, 659.25]
-    },
-    {
-      id: "zanatillo",
-      title: "El Zanatillo",
-      artist: "Tradición Campesina",
-      territory: "Las Segovias • Norte",
-      category: "folklore",
-      categoryName: "Folklore Tradicional",
-      genre: "Son Norteño",
-      duration: "2:40",
-      durationSec: 160,
-      cover: "assets/images/destinos/canon_de_somoto.jpg",
-      notes: [392.00, 440.00, 523.25, 587.33, 659.25, 587.33, 523.25, 440.00, 392.00]
-    },
-    {
-      id: "palomita-guasiruca",
-      title: "Palomita Guasiruca",
-      artist: "Recopilación Folclórica",
-      territory: "Matagalpa & Boaco",
-      category: "folklore",
-      categoryName: "Folklore Tradicional",
-      genre: "Danza Tradicional",
-      duration: "3:05",
-      durationSec: 185,
-      cover: "assets/images/destinos/selva_negra.jpg",
-      notes: [523.25, 587.33, 659.25, 523.25, 783.99, 659.25, 587.33, 523.25, 440.00, 523.25]
-    },
-
-    // ------------------------------------------------------------------------
-    // MÚSICA REVOLUCIONARIA & CANCIÓN HISTÓRICA
-    // ------------------------------------------------------------------------
-    {
-      id: "tumba-guerrillero",
-      title: "La Tumba del Guerrillero",
-      artist: "Carlos Mejía Godoy y Los de Palacagüina",
-      territory: "Madriz / Las Segovias • Memoria Viva",
-      category: "revolucion",
-      categoryName: "Canción Revolucionaria",
-      genre: "Canción Testimonial",
-      duration: "3:42",
-      durationSec: 222,
-      cover: "assets/images/destinos/canon_de_somoto.jpg",
-      notes: [440.00, 523.25, 659.25, 587.33, 523.25, 440.00, 392.00, 440.00, 523.25, 659.25]
-    },
-    {
-      id: "alla-va-general",
-      title: "Allá Va el General",
-      artist: "Homenaje a Sandino",
-      territory: "Niquinohomo • Masaya",
-      category: "revolucion",
-      categoryName: "Canción Revolucionaria",
-      genre: "Canto Patriótico",
-      duration: "3:20",
-      durationSec: 200,
-      cover: "assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg",
-      notes: [392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25]
-    },
-    {
-      id: "nicaragua-nicaragüita",
-      title: "Nicaragua, Nicaragüita",
-      artist: "Carlos Mejía Godoy",
-      territory: "Territorio Nacional • Soberanía",
-      category: "revolucion",
-      categoryName: "Canción Revolucionaria",
-      genre: "Himno de Esperanza",
-      duration: "3:10",
-      durationSec: 190,
-      cover: "assets/images/destinos/isla_de_ometepe.jpg",
-      notes: [523.25, 659.25, 783.99, 880.00, 1046.50, 880.00, 783.99, 659.25, 587.33, 523.25]
-    },
-    {
-      id: "son-chinchibi",
-      title: "Son Chinchibí (Insurrección)",
-      artist: "Los de Palacagüina",
-      territory: "León • Primera Capital",
-      category: "revolucion",
-      categoryName: "Canción Revolucionaria",
-      genre: "Son Revolucionario",
-      duration: "2:50",
-      durationSec: 170,
-      cover: "assets/images/destinos/cerro_negro.jpg",
-      notes: [440.00, 523.25, 587.33, 659.25, 587.33, 523.25, 493.88, 440.00]
-    },
-    {
-      id: "no-pasaran",
-      title: "No Pasarán",
-      artist: "Canto Histórico de Soberanía",
-      territory: "Estelí • Tres Veces Heroica",
-      category: "revolucion",
-      categoryName: "Canción Revolucionaria",
-      genre: "Canto de Resistencia",
-      duration: "3:30",
-      durationSec: 210,
-      cover: "assets/images/destinos/cascada_la_luna.jpg",
-      notes: [523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33, 523.25]
-    },
-    {
-      id: "la-consigna",
-      title: "La Consigna",
-      artist: "Pancasan & Militancia Popular",
-      territory: "Managua • Héroes y Mártires",
-      category: "revolucion",
-      categoryName: "Canción Revolucionaria",
-      genre: "Himno Popular",
-      duration: "3:00",
-      durationSec: 180,
-      cover: "assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg",
-      notes: [392.00, 440.00, 523.25, 659.25, 587.33, 440.00, 392.00, 440.00, 523.25]
-    },
-
-    // ------------------------------------------------------------------------
-    // PALO DE MAYO & RITMOS CARIBEÑOS
-    // ------------------------------------------------------------------------
-    {
-      id: "maypole-tululu",
-      title: "Tululu (Maypole Ancestral)",
-      artist: "Tradición Creole & Miskita",
-      territory: "Bluefields • RACCS",
-      category: "caribe",
-      categoryName: "Caribe Afrodescendiente",
-      genre: "Palo de Mayo Tradicional",
-      duration: "3:40",
-      durationSec: 220,
-      cover: "assets/images/destinos/corn_island.jpg",
-      notes: [523.25, 659.25, 783.99, 880.00, 987.77, 880.00, 783.99, 659.25, 783.99, 880.00]
-    },
-    {
-      id: "welcome-bluefields",
-      title: "Welcome to Bluefields",
-      artist: "Dimensión Costeña",
-      territory: "Bluefields & Corn Island",
-      category: "caribe",
-      categoryName: "Caribe Afrodescendiente",
-      genre: "Ritmo Caribeño",
-      duration: "3:15",
-      durationSec: 195,
-      cover: "assets/images/destinos/corn_island.jpg",
-      notes: [587.33, 659.25, 783.99, 880.00, 659.25, 783.99, 587.33, 523.25]
-    },
-
-    // ------------------------------------------------------------------------
-    // POLKAS & MAZURCAS DEL NORTE
-    // ------------------------------------------------------------------------
-    {
-      id: "grito-del-bolo",
-      title: "El Grito del Bolo",
-      artist: "Don Felipe Urrutia y Sus Cachorros",
-      territory: "Estelí & Jinotega",
-      category: "norte",
-      categoryName: "Polkas & Mazurcas del Norte",
-      genre: "Mazurca Segoviana",
-      duration: "2:45",
-      durationSec: 165,
-      cover: "assets/images/destinos/selva_negra.jpg",
-      notes: [440.00, 523.25, 659.25, 587.33, 523.25, 493.88, 440.00, 392.00, 440.00]
-    },
-    {
-      id: "flor-de-pino",
-      title: "Flor de Pino",
-      artist: "Soñadores de Saraguasca",
-      territory: "Jinotega • Brumas del Norte",
-      category: "norte",
-      categoryName: "Polkas & Mazurcas del Norte",
-      genre: "Polka Campesina",
-      duration: "2:50",
-      durationSec: 170,
-      cover: "assets/images/destinos/cascada_la_luna.jpg",
-      notes: [523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 440.00, 523.25]
-    }
+  const AUDIO_FILES = [
+    "Alforja Campesina.mp3", "Ama la Naturaleza.mp3", "Amores de Abraham - Vals de Jose de la Crz Mena.mp3",
+    "Araré el Aire (con Alejandra Acuña y Katia Cardenal).mp3", "ASI ES LA VIDA.mp3", "Baila Mi Palo.mp3",
+    "baile_del_mestizaje.mp3", "Barrio De Pescadores - Trio Monimbo Erwin, Carlos Kruger Pepe Ramirez.mp3",
+    "Caballito Chontaleno.mp3", "Caliente Como Verano.mp3", "Camilo Zapata, Minga Rosa Pineda.mp3",
+    "Cancion de Cuna.mp3", "Canción del Fuego.mp3", "CANCIONERO.mp3",
+    "Cascada de Perlas - Alejandro Vega Matus.mp3", "Cocibolca.mp3", "Cole Cole.mp3", "COMO TE VA NU AMOR.mp3",
+    "Como Tinaja.mp3", "Corrido a Chinandega.mp3", "CORRIDO A MANAGUA de Tino López Guerra, nueva versión 2026.mp3",
+    "Cuando Venga La Paz.mp3", "Cumbia Piquetona.mp3", "Cumbia Sabrosa.mp3", "Dale Su Rondón.mp3",
+    "Dale Una Luz.mp3", "Dias de Amar.mp3", "Dimension Costena - The Bluefields Express.mp3",
+    "El cachimbeo.mp3", "El Grito del bolo - Polka.mp3", "EL ZANATILLO (Nicaragua Música y Canto).mp3",
+    "El Zenzontle Pregunta Por Arlen.mp3", "el_solar_de_monimbo.mp3", "el_zanatillo.mp3", "EN EL MISMO TREN.mp3",
+    "ENTRE REMOLINOS.mp3", "Fiebre Costeña.mp3", "Fiesta Pinolera.mp3", "Flor de Mi Colina Camilo Zapata.mp3",
+    "Flor De Pino.mp3", "Folklore - La Danza Negra.mp3", "Gracias a la Vida - Norma Helena (Gadea Nicaraguense).mp3",
+    "Guerrero del Amor.mp3", "INSOPORTABLEMENTE BELLA.mp3", "La Cachimba.mp3",
+    "La Candona Chinamera - Fuzion 4 (Audio Oficial).mp3", "La canoa rancha.mp3", "La Consigna.mp3",
+    "La mama Ramona - Marimba de arco Masaya.mp3", "La Minifalda.mp3", "La negra cumbianbera.mp3",
+    "La pelo de maiz Otto de la Rocha.mp3", "La Sutiabeña ♪♫♪ Camilo Zapata Letra.mp3", "La Tonadita.mp3",
+    "La Tula Cuecho.mp3", "La tumba del guerrillero.mp3", "la_mora_limpia.mp3",
+    "Los Alegres de Ticuantepe El Sapo.mp3", "Luis Enrique Mejía Godoy - Amando En Tiempo De Guerra.mp3",
+    "Managua, Linda Managua.mp3", "Mari Cañamo.mp3", "Maria de los Guardias.mp3",
+    "Mariposa de alas rotas (versión acústica 2004).mp3", "MAYAYA LA SINKY.mp3", "Meneadito.mp3",
+    "Mi Canción.mp3", "Muevelo.mp3", "Nicaragua Mia, Tino López Guerra.mp3", "nicaragua,nicaraguita.mp3",
+    "No Pasaran- norma elena.mp3", "No Pasarán.mp3", "Pajarita de la Paz.mp3", "palomita_guasiruca.mp3",
+    "Para Ti (with Luis Enrique Mejia Godoy).mp3", "Pobre La María Luis Enrique Mejía Godoy.mp3", "Polka Cumbia.mp3",
+    "PROCURO OLVIDARTE.mp3", "QUIERO QUE SEPAS.mp3", "Quincho Barrilete.mp3", "ROMPER EL SILENCIO.mp3",
+    "Rosalia - Vals de Jose de la Cruz Mena.mp3", "Ruinas - Vals de Jose de la Cruz Mena.mp3",
+    "Sabroso Palo de Mayo.mp3", "Se Rompen Los Fuegos.mp3", "Son Tus Perjúmenes Mujer.mp3", "TULULU.mp3",
+    "Tulululu.mp3", "Una Canción.mp3", "Verde Verdad.mp3", "Y Sigue El Rancho Ardiendo.mp3",
+    "YO NO SE MAÑANA.mp3", "Yo soy de un Pueblo Sencillo Luis y carlos Mejia Godoy.mp3", "🔊Sones del Güegüense.mp3"
   ];
 
-  // Variables de Estado
-  let currentTrackIndex = 0;
-  let isPlaying = false;
-  let isShuffle = false;
-  let isRepeat = false;
-  let isMuted = false;
-  let volume = 0.85;
-  let currentSec = 0;
-  let trackTimer = null;
-  let activeCategory = 'all';
+  const VERIFIED = [
+    [/^Alforja Campesina/i, "Alforja Campesina", "Carlos Mejía Godoy", "Composición", "Madriz"],
+    [/^Amores de Abraham/i, "Amores de Abraham", "José de la Cruz Mena", "Composición", "León"],
+    [/^Araré el Aire/i, "Araré el Aire", "Alejandra Acuña y Katia Cardenal", "Interpretación compartida", "Nicaragua"],
+    [/^ASI ES LA VIDA/i, "Así es la vida", "Luis Enrique Mejía López", "Interpretación", "Somoto"],
+    [/^Barrio De Pescadores/i, "Barrio de pescadores", "Erwin Krüger · Trío Monimbó", "Composición e interpretación", "León"],
+    [/^Caballito Chontaleno/i, "Caballito Chontaleño", "Camilo Zapata", "Composición", "Managua"],
+    [/^Camilo Zapata, Minga/i, "Minga Rosa Pineda", "Camilo Zapata", "Composición", "Managua"],
+    [/^CANCIONERO/i, "Cancionero", "Hernaldo Zúñiga", "Repertorio autoral", "Nicaragua"],
+    [/^Cascada de Perlas/i, "Cascada de Perlas", "Alejandro Vega Matus", "Composición", "Masaya"],
+    [/^Corrido a Chinandega/i, "Corrido a Chinandega", "Tino López Guerra", "Composición", "Chinandega"],
+    [/^CORRIDO A MANAGUA/i, "Corrido a Managua — versión 2026", "Tino López Guerra", "Composición · versión identificada", "Managua"],
+    [/^Dale Su Rondón/i, "Dale su rondón", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^Dias de Amar/i, "Días de amar", "Dúo Guardabarranco", "Composición: Salvador Cardenal", "Managua"],
+    [/^Dimension Costena/i, "The Bluefields Express", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^El Zenzontle/i, "El Zenzontle pregunta por Arlen", "Intérprete por confirmar", "Composición: Luis Enrique Mejía Godoy", "Nicaragua"],
+    [/^el_solar/i, "El Solar de Monimbó", "Camilo Zapata", "Composición", "Masaya"],
+    [/^ENTRE REMOLINOS/i, "Entre remolinos", "Perrozompopo", "Repertorio autoral", "Managua"],
+    [/^Fiebre Costeña/i, "Fiebre Costeña", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^Flor de Mi Colina/i, "Flor de mi colina", "Camilo Zapata", "Composición", "Managua"],
+    [/^Guerrero del Amor/i, "Guerrero del amor", "Dúo Guardabarranco", "Repertorio de Guardabarranco", "Managua"],
+    [/^INSOPORTABLEMENTE/i, "Insoportablemente bella", "Hernaldo Zúñiga", "Interpretación · autores: Manuel Alejandro y Ana Magdalena", "Nicaragua"],
+    [/^La mama Ramona/i, "La Mama Ramona", "Marimba de arco de Masaya", "Tradición · arreglo de Alejandro Vega Matus c. 1920", "Masaya"],
+    [/^La Minifalda/i, "La Minifalda", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^La Sutiabeña/i, "La Sutiabeña", "Camilo Zapata", "Composición", "León"],
+    [/^La Tula Cuecho/i, "La Tula Cuecho", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
+    [/^La tumba/i, "La tumba del guerrillero", "Carlos Mejía Godoy", "Repertorio autoral", "Nicaragua"],
+    [/^la_mora/i, "La Mora Limpia", "Justo Santos", "Composición", "Rivas"],
+    [/^Luis Enrique Mejía Godoy/i, "Amando en tiempo de guerra", "Luis Enrique Mejía Godoy", "Repertorio autoral", "Somoto"],
+    [/^Mari Cañamo/i, "Mari Cañamo", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^Maria de los Guardias/i, "María de los Guardias", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
+    [/^Mariposa de alas rotas/i, "Mariposa de alas rotas — acústica 2004", "Katia Cardenal", "Interpretación identificada", "Managua"],
+    [/^MAYAYA/i, "Mayaya La Sinky", "Dimensión Costeña", "Interpretación identificada", "Bluefields"],
+    [/^Nicaragua Mia/i, "Nicaragua Mía", "Tino López Guerra", "Composición", "Chinandega"],
+    [/^nicaragua,nicaraguita/i, "Nicaragua, Nicaragüita", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
+    [/^Pajarita de la Paz/i, "Pajarita de la Paz", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
+    [/^palomita/i, "Palomita Guasiruca", "Tradición de Chontales · recopilación de Erwin Krüger", "Folclore recopilado", "Chontales"],
+    [/^Para Ti/i, "Para ti", "Norma Helena Gadea y Luis Enrique Mejía Godoy", "Interpretación compartida · autoría por confirmar", "Nicaragua"],
+    [/^Pobre La María/i, "Pobre la María", "Luis Enrique Mejía Godoy", "Composición", "Somoto"],
+    [/^PROCURO/i, "Procuro olvidarte", "Hernaldo Zúñiga", "Interpretación · autores: Manuel Alejandro y Ana Magdalena", "Nicaragua"],
+    [/^QUIERO QUE SEPAS/i, "Quiero que sepas", "Perrozompopo", "Repertorio autoral", "Managua"],
+    [/^Quincho Barrilete/i, "Quincho Barrilete", "Carlos Mejía Godoy", "Composición · interpretación de Guayo González en OTI 1977", "Somoto"],
+    [/^ROMPER EL SILENCIO/i, "Romper el silencio", "Perrozompopo", "Repertorio autoral", "Managua"],
+    [/^Rosalia/i, "Rosalía", "José de la Cruz Mena", "Composición", "León"],
+    [/^Ruinas/i, "Ruinas", "José de la Cruz Mena", "Composición", "León"],
+    [/^Sabroso Palo/i, "Sabroso Palo de Mayo", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^Son Tus Perjúmenes/i, "Son tus perjúmenes, mujer", "Carlos Mejía Godoy", "Interpretación · folclore recopilado en Tonalá", "Chinandega"],
+    [/^(TULULU|Tulululu)/, "Tululu", "Dimensión Costeña", "Interpretación identificada · versiones por comparar", "Bluefields"],
+    [/^Verde Verdad/i, "Verde verdad", "Salvador Cardenal", "Proyecto solista póstumo", "Managua"],
+    [/^YO NO SE/i, "Yo no sé mañana", "Luis Enrique Mejía López", "Interpretación · autores: Jorge Luis Piloto y Jorge Villamizar", "Somoto"],
+    [/^Yo soy de un Pueblo/i, "Yo soy de un pueblo sencillo", "Luis Enrique Mejía Godoy", "Composición · grabación compartida", "Somoto"],
+    [/Sones del Güegüense/i, "Sones del Güegüense", "Tradición de El Güegüense", "Colección conjunta · Patrimonio UNESCO", "Diriamba, Carazo"]
+  ];
 
-  // Audio Context y Sintetizador
-  let audioCtx = null;
-  let activeGainNode = null;
-  let notePlaybackTimer = null;
-
-  function getAudioContext() {
-    if (!audioCtx) {
-      const AudioClass = window.AudioContext || window.webkitAudioContext;
-      if (AudioClass) {
-        audioCtx = new AudioClass();
-      }
-    }
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    return audioCtx;
-  }
-
-  // Reproductor de notas de marimba & guitarra campesina
-  function synthesizeNote(freq, startTime, duration = 0.38) {
-    const ctx = getAudioContext();
-    if (!ctx) return;
-
-    const osc1 = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-
-    // Tono marimba de arco (madera acústica)
-    osc1.type = 'triangle';
-    osc1.frequency.setValueAtTime(freq, startTime);
-
-    // Armónico cálido
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(freq * 2, startTime);
-
-    const actualVol = isMuted ? 0 : volume * 0.4;
-    gainNode.gain.setValueAtTime(0.001, startTime);
-    gainNode.gain.exponentialRampToValueAtTime(actualVol, startTime + 0.02);
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-
-    osc1.connect(gainNode);
-    osc2.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    osc1.start(startTime);
-    osc2.start(startTime);
-    osc1.stop(startTime + duration);
-    osc2.stop(startTime + duration);
-  }
-
-  function loopMelodyNotes(notes) {
-    if (!isPlaying) return;
-    const ctx = getAudioContext();
-    if (!ctx || !notes || !notes.length) return;
-
-    const now = ctx.currentTime + 0.05;
-    const noteStep = 0.3;
-
-    notes.forEach((freq, idx) => {
-      synthesizeNote(freq, now + (idx * noteStep), 0.35);
-    });
-
-    const loopTimeMs = (notes.length * noteStep + 0.6) * 1000;
-    notePlaybackTimer = setTimeout(() => {
-      if (isPlaying) {
-        loopMelodyNotes(notes);
-      }
-    }, loopTimeMs);
-  }
-
-  function stopAudioSynthesis() {
-    if (notePlaybackTimer) {
-      clearTimeout(notePlaybackTimer);
-      notePlaybackTimer = null;
-    }
-  }
-
-  // Formato de segundos a mm:ss
-  function formatTime(seconds) {
-    const min = Math.floor(seconds / 60);
-    const sec = Math.floor(seconds % 60);
-    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-  }
-
-  // Inicialización de la Interfaz del Reproductor
-  function initEpicMusicPlayer() {
-    const chassis = document.getElementById('epicPlayerChassis');
-    if (!chassis) return;
-
-    // Elementos DOM
-    const playBtn = document.getElementById('epicPlayBtn');
-    const prevBtn = document.getElementById('epicPrevBtn');
-    const nextBtn = document.getElementById('epicNextBtn');
-    const shuffleBtn = document.getElementById('epicShuffleBtn');
-    const repeatBtn = document.getElementById('epicRepeatBtn');
-    const scrubber = document.getElementById('epicScrubber');
-    const currTimeEl = document.getElementById('epicCurrentTime');
-    const durTimeEl = document.getElementById('epicDurationTime');
-    const volumeSlider = document.getElementById('epicVolumeSlider');
-    const muteBtn = document.getElementById('epicMuteBtn');
-    const vinylLabelImg = document.getElementById('epicVinylImg');
-
-    const trackTitleEl = document.getElementById('epicTrackTitle');
-    const trackArtistEl = document.getElementById('epicTrackArtist');
-    const trackTerritoryEl = document.getElementById('epicTrackTerritory');
-    const trackGenreEl = document.getElementById('epicTrackGenre');
-    const playlistContainer = document.getElementById('epicPlaylistGrid');
-    const tabButtons = document.querySelectorAll('.epic-tab-btn');
-
-    // Cargar pista en la interfaz
-    function loadTrack(index, autoPlay = false) {
-      if (index < 0) index = EPIC_TRACKS.length - 1;
-      if (index >= EPIC_TRACKS.length) index = 0;
-      currentTrackIndex = index;
-      const track = EPIC_TRACKS[currentTrackIndex];
-
-      trackTitleEl.textContent = track.title;
-      trackArtistEl.innerHTML = `<i class="fa-solid fa-microphone-lines"></i> ${track.artist}`;
-      trackTerritoryEl.textContent = `• ${track.territory}`;
-      trackGenreEl.innerHTML = `<i class="fa-solid fa-tag"></i> ${track.genre}`;
-      durTimeEl.textContent = track.duration;
-
-      if (vinylLabelImg) {
-        vinylLabelImg.src = track.cover;
-        vinylLabelImg.alt = track.title;
-      }
-
-      currentSec = 0;
-      scrubber.value = 0;
-      currTimeEl.textContent = "0:00";
-
-      updateActivePlaylistItem();
-
-      if (autoPlay) {
-        startPlay();
-      } else if (isPlaying) {
-        stopAudioSynthesis();
-        loopMelodyNotes(track.notes);
-      }
-    }
-
-    function startPlay() {
-      getAudioContext();
-      isPlaying = true;
-      chassis.classList.add('is-playing');
-      playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-      playBtn.title = "Pausar";
-
-      stopAudioSynthesis();
-      const track = EPIC_TRACKS[currentTrackIndex];
-      loopMelodyNotes(track.notes);
-
-      if (trackTimer) clearInterval(trackTimer);
-      trackTimer = setInterval(() => {
-        currentSec++;
-        if (currentSec >= track.durationSec) {
-          if (isRepeat) {
-            currentSec = 0;
-          } else {
-            nextTrack(true);
-            return;
-          }
-        }
-        currTimeEl.textContent = formatTime(currentSec);
-        scrubber.value = (currentSec / track.durationSec) * 100;
-      }, 1000);
-    }
-
-    function pausePlay() {
-      isPlaying = false;
-      chassis.classList.remove('is-playing');
-      playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-      playBtn.title = "Reproducir";
-      stopAudioSynthesis();
-      if (trackTimer) {
-        clearInterval(trackTimer);
-        trackTimer = null;
-      }
-    }
-
-    function togglePlay() {
-      if (isPlaying) {
-        pausePlay();
-      } else {
-        startPlay();
-      }
-    }
-
-    function nextTrack(auto = false) {
-      if (isShuffle) {
-        let randIdx = Math.floor(Math.random() * EPIC_TRACKS.length);
-        if (randIdx === currentTrackIndex && EPIC_TRACKS.length > 1) {
-          randIdx = (randIdx + 1) % EPIC_TRACKS.length;
-        }
-        loadTrack(randIdx, isPlaying || auto);
-      } else {
-        loadTrack(currentTrackIndex + 1, isPlaying || auto);
-      }
-    }
-
-    function prevTrack() {
-      if (currentSec > 4) {
-        currentSec = 0;
-        scrubber.value = 0;
-        currTimeEl.textContent = "0:00";
-      } else {
-        loadTrack(currentTrackIndex - 1, isPlaying);
-      }
-    }
-
-    // Renderizado de lista de reproducción
-    function renderPlaylist(filterCategory = 'all') {
-      playlistContainer.innerHTML = '';
-      EPIC_TRACKS.forEach((track, idx) => {
-        if (filterCategory !== 'all' && track.category !== filterCategory) {
-          return;
-        }
-        const card = document.createElement('div');
-        card.className = `epic-track-card ${idx === currentTrackIndex ? 'is-active' : ''}`;
-        card.setAttribute('data-index', idx);
-        card.innerHTML = `
-          <div class="epic-track-card-thumb">
-            <img src="${track.cover}" alt="${track.title}" loading="lazy">
-            <div class="epic-track-card-play-overlay">
-              <i class="fa-solid fa-play"></i>
-            </div>
-          </div>
-          <div class="epic-track-card-info">
-            <h4 class="epic-track-card-name">${track.title}</h4>
-            <div class="epic-track-card-meta">${track.artist} • ${track.categoryName}</div>
-          </div>
-          <div class="epic-track-card-time">${track.duration}</div>
-        `;
-        card.addEventListener('click', () => {
-          loadTrack(idx, true);
-        });
-        playlistContainer.appendChild(card);
-      });
-    }
-
-    function updateActivePlaylistItem() {
-      const items = playlistContainer.querySelectorAll('.epic-track-card');
-      items.forEach(card => {
-        const idx = parseInt(card.getAttribute('data-index'), 10);
-        if (idx === currentTrackIndex) {
-          card.classList.add('is-active');
-        } else {
-          card.classList.remove('is-active');
-        }
-      });
-    }
-
-    // Eventos
-    playBtn.addEventListener('click', togglePlay);
-    nextBtn.addEventListener('click', () => nextTrack(false));
-    prevBtn.addEventListener('click', prevTrack);
-
-    shuffleBtn.addEventListener('click', () => {
-      isShuffle = !isShuffle;
-      shuffleBtn.classList.toggle('is-active', isShuffle);
-    });
-
-    repeatBtn.addEventListener('click', () => {
-      isRepeat = !isRepeat;
-      repeatBtn.classList.toggle('is-active', isRepeat);
-    });
-
-    scrubber.addEventListener('input', (e) => {
-      const track = EPIC_TRACKS[currentTrackIndex];
-      const pct = parseFloat(e.target.value);
-      currentSec = Math.floor((pct / 100) * track.durationSec);
-      currTimeEl.textContent = formatTime(currentSec);
-    });
-
-    volumeSlider.addEventListener('input', (e) => {
-      volume = parseFloat(e.target.value);
-      if (volume === 0) {
-        isMuted = true;
-        muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-      } else {
-        isMuted = false;
-        muteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-      }
-    });
-
-    muteBtn.addEventListener('click', () => {
-      isMuted = !isMuted;
-      if (isMuted) {
-        muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-      } else {
-        muteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-      }
-    });
-
-    // Filtros de categoría de playlist
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', function () {
-        tabButtons.forEach(b => b.classList.remove('is-active'));
-        this.classList.add('is-active');
-        const filter = this.getAttribute('data-category');
-        activeCategory = filter;
-        renderPlaylist(filter);
-      });
-    });
-
-    // Exponer API global
-    window.BaqueanoEpicPlayer = {
-      playTrackById: function(trackId) {
-        const idx = EPIC_TRACKS.findIndex(t => t.id === trackId || t.title.toLowerCase().includes(trackId.toLowerCase()));
-        if (idx !== -1) {
-          loadTrack(idx, true);
-          chassis.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      },
-      getCurrentTrack: function() {
-        return EPIC_TRACKS[currentTrackIndex];
-      }
+  const cleanTitle = file => file.replace(/\.mp3$/i, '').replace(/_/g, ' ').replace(/^🔊/, '').trim();
+  const tracks = AUDIO_FILES.map((file, index) => {
+    const match = VERIFIED.find(rule => rule[0].test(file));
+    return {
+      id: `archivo-${index + 1}`,
+      file,
+      title: match ? match[1] : cleanTitle(file),
+      artist: match ? match[2] : "Créditos por documentar",
+      credit: match ? match[3] : "Sin atribución editorial",
+      territory: match ? match[4] : "Procedencia por documentar",
+      verified: Boolean(match),
+      src: `assets/audio/${encodeURIComponent(file).replace(/%2F/gi, '/')}`
     };
+  });
 
-    // Inicializar estado por defecto
-    renderPlaylist('all');
-    loadTrack(0, false);
+  let currentIndex = 0;
+  let activeFilter = 'all';
+  const audio = new Audio();
+  audio.preload = 'metadata';
+
+  const byId = id => document.getElementById(id);
+  const formatTime = seconds => Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}` : '0:00';
+
+  function visibleTracks() {
+    return tracks.filter(track => activeFilter === 'all' || (activeFilter === 'verified' ? track.verified : !track.verified));
   }
 
-  // Inicializar al cargar DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initEpicMusicPlayer);
-  } else {
-    initEpicMusicPlayer();
+  function setPlayingUi(playing) {
+    const chassis = byId('epicPlayerChassis');
+    const button = byId('epicPlayBtn');
+    if (chassis) chassis.classList.toggle('is-playing', playing);
+    if (button) button.innerHTML = `<i class="fa-solid fa-${playing ? 'pause' : 'play'}"></i>`;
   }
+
+  function loadTrack(index, autoplay = false) {
+    currentIndex = Math.max(0, Math.min(index, tracks.length - 1));
+    const track = tracks[currentIndex];
+    audio.pause();
+    audio.src = track.src;
+    audio.load();
+    byId('epicTrackTitle').textContent = track.title;
+    byId('epicTrackArtist').innerHTML = `<i class="fa-solid fa-microphone-lines"></i> ${track.artist}`;
+    byId('epicTrackTerritory').textContent = `• ${track.territory}`;
+    byId('epicTrackGenre').innerHTML = `<i class="fa-solid fa-${track.verified ? 'circle-check' : 'clock'}"></i> ${track.verified ? 'Ficha verificada' : 'Pendiente de documentación'}`;
+    byId('epicDurationTime').textContent = '0:00';
+    byId('epicCurrentTime').textContent = '0:00';
+    byId('epicScrubber').value = 0;
+    renderPlaylist();
+    if (autoplay) audio.play().catch(() => setPlayingUi(false));
+  }
+
+  function renderPlaylist() {
+    const grid = byId('epicPlaylistGrid');
+    if (!grid) return;
+    const visible = visibleTracks();
+    grid.innerHTML = visible.map(track => {
+      const index = tracks.indexOf(track);
+      return `<button type="button" class="epic-track-card ${index === currentIndex ? 'is-active' : ''}" data-track-index="${index}">
+        <span class="epic-track-card-thumb" aria-hidden="true"><i class="fa-solid fa-${track.verified ? 'circle-check' : 'compact-disc'}"></i></span>
+        <span class="epic-track-card-info"><strong class="epic-track-card-name">${track.title}</strong><span class="epic-track-card-meta">${track.artist} · ${track.credit}</span></span>
+        <span class="epic-track-card-time">${track.verified ? 'Verificada' : 'En revisión'}</span>
+      </button>`;
+    }).join('');
+    grid.querySelectorAll('[data-track-index]').forEach(button => button.addEventListener('click', () => loadTrack(Number(button.dataset.trackIndex), true)));
+  }
+
+  function step(direction) {
+    const pool = visibleTracks();
+    const current = pool.findIndex(track => track === tracks[currentIndex]);
+    const next = pool[(current + direction + pool.length) % pool.length] || tracks[0];
+    loadTrack(tracks.indexOf(next), true);
+  }
+
+  function init() {
+    const player = byId('epicMusicPlayer');
+    if (!player) return;
+    player.querySelector('.epic-playlist-tabs').innerHTML = `
+      <button type="button" class="epic-tab-btn is-active" data-status="all"><i class="fa-solid fa-box-archive"></i> Archivo completo (${tracks.length})</button>
+      <button type="button" class="epic-tab-btn" data-status="verified"><i class="fa-solid fa-circle-check"></i> Con ficha (${tracks.filter(t => t.verified).length})</button>
+      <button type="button" class="epic-tab-btn" data-status="pending"><i class="fa-solid fa-clock"></i> Por documentar (${tracks.filter(t => !t.verified).length})</button>`;
+    player.querySelectorAll('[data-status]').forEach(button => button.addEventListener('click', () => {
+      activeFilter = button.dataset.status;
+      player.querySelectorAll('[data-status]').forEach(item => item.classList.toggle('is-active', item === button));
+      renderPlaylist();
+    }));
+    byId('epicPlayBtn').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+    byId('epicPrevBtn').addEventListener('click', () => step(-1));
+    byId('epicNextBtn').addEventListener('click', () => step(1));
+    byId('epicMuteBtn').addEventListener('click', () => { audio.muted = !audio.muted; });
+    byId('epicVolumeSlider').addEventListener('input', event => { audio.volume = Number(event.target.value); });
+    byId('epicScrubber').addEventListener('input', event => { if (Number.isFinite(audio.duration)) audio.currentTime = audio.duration * Number(event.target.value) / 100; });
+    audio.addEventListener('play', () => setPlayingUi(true));
+    audio.addEventListener('pause', () => setPlayingUi(false));
+    audio.addEventListener('ended', () => step(1));
+    audio.addEventListener('loadedmetadata', () => { byId('epicDurationTime').textContent = formatTime(audio.duration); });
+    audio.addEventListener('timeupdate', () => {
+      byId('epicCurrentTime').textContent = formatTime(audio.currentTime);
+      byId('epicScrubber').value = Number.isFinite(audio.duration) && audio.duration > 0 ? (audio.currentTime / audio.duration) * 100 : 0;
+    });
+    audio.addEventListener('error', () => setPlayingUi(false));
+    audio.volume = Number(byId('epicVolumeSlider').value);
+    loadTrack(0);
+  }
+
+  window.BaqueanoArchive = {
+    tracks,
+    hasVerifiedTitle(title) {
+      const query = String(title || '').toLocaleLowerCase('es');
+      return tracks.some(track => track.verified && (track.title.toLocaleLowerCase('es').includes(query) || query.includes(track.title.toLocaleLowerCase('es'))));
+    },
+    playByTitle(title) {
+      const query = String(title || '').toLocaleLowerCase('es');
+      const index = tracks.findIndex(track => track.verified && (track.title.toLocaleLowerCase('es').includes(query) || query.includes(track.title.toLocaleLowerCase('es'))));
+      if (index >= 0) loadTrack(index, true);
+      return index >= 0;
+    }
+  };
+
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
 })();

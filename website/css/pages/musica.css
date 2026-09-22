@@ -803,6 +803,54 @@ html body .musica-inline-033 {
   padding-right: 0.4rem;
 }
 
+/*
+ * 🎯 POR QUÉ: hacer visible el criterio documental antes de que una persona
+ * confunda el nombre técnico de un MP3 con una autoría confirmada.
+ * ⚙️ CÓMO: aviso semántico responsivo y tarjetas-button compatibles con teclado.
+ * 📦 QUÉ: estados editoriales del archivo sonoro de 93 pistas.
+ */
+.archive-editorial-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin: 1rem 0;
+  padding: 1rem 1.15rem;
+  color: #f4e6c1;
+  line-height: 1.55;
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.38), rgba(15, 23, 42, 0.92));
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.22);
+}
+
+.archive-editorial-note > i {
+  margin-top: 0.2rem;
+  color: #f65e01;
+}
+
+button.epic-track-card {
+  width: 100%;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.epic-track-card-thumb {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  height: 44px;
+  color: #f4e6c1;
+  background: #165d6f;
+  border-radius: 50%;
+}
+
+@media (max-width: 640px) {
+  .archive-editorial-note { font-size: 0.86rem; }
+  .epic-track-card-time { display: none; }
+}
+
 .epic-track-card {
   display: flex;
   align-items: center;
