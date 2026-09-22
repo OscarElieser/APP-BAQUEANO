@@ -1,3 +1,4 @@
 {
-  "vscode-edge-devtools.webhint": false
+  "vscode-edge-devtools.webhint": false,
+  "cmake.sourceDirectory": "C:/Users/PC 1/APP BAQUEANO/windows"
 }
