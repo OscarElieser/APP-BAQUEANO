@@ -2870,21 +2870,27 @@
         </div>
       </div>
 
+      <form class="assistant-query-form" id="assistantQueryForm">
+        <label class="sr-only" for="assistantQueryInput">Escribí tu consulta sobre Nicaragua</label>
+        <textarea id="assistantQueryInput" rows="2" maxlength="400" placeholder="Preguntá por destinos, rutas, precios o accesibilidad…" required></textarea>
+        <button type="submit" id="assistantSendBtn" aria-label="Enviar consulta" title="Enviar consulta"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+
       <!-- Opciones Rápidas del Guía -->
       <div class="assistant-quick-prompts" id="assistantQuickPrompts">
-        <button type="button" class="prompt-chip" data-action="budget">
+        <button type="button" class="prompt-chip" data-action="budget" data-question="Tengo un presupuesto y quiero construir una ruta">
           <i class="fa-solid fa-coins"></i> Destinos según mi presupuesto
         </button>
-        <button type="button" class="prompt-chip" data-action="days">
+        <button type="button" class="prompt-chip" data-action="days" data-question="¿Cómo puedo crear una ruta según mis días disponibles?">
           <i class="fa-solid fa-calendar-check"></i> Rutas por días disponibles
         </button>
-        <button type="button" class="prompt-chip" data-action="green">
+        <button type="button" class="prompt-chip" data-action="green" data-question="¿Cuáles son las normas del Decálogo Verde?">
           <i class="fa-solid fa-leaf"></i> Decálogo Verde &amp; Normas
         </button>
-        <button type="button" class="prompt-chip" data-action="hidden">
+        <button type="button" class="prompt-chip" data-action="hidden" data-question="Mostrame destinos menos conocidos con información registrada">
           <i class="fa-solid fa-gem"></i> Joyas ocultas poco conocidas
         </button>
-        <button type="button" class="prompt-chip" data-action="map">
+        <button type="button" class="prompt-chip" data-action="map" data-question="Quiero explorar los destinos en el mapa">
           <i class="fa-solid fa-map-location-dot"></i> Enfocar Mapa 3D
         </button>
       </div>
@@ -2961,7 +2967,7 @@
        ====================================================================== -->
   <script src="js/nicaragua-real-map.js"></script>
   <script src="js/route-builder.js"></script>
-  <script src="js/baqueano-assistant.js"></script>
+  <script src="js/baqueano-assistant.js?v=20260922-2"></script>
   <script src="js/panorama-viewer.js"></script>
 
   <!-- ======================================================================

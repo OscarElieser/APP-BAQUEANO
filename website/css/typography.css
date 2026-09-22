@@ -87,9 +87,28 @@ p {
 }
 
 .section-lead-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   max-width: 800px;
   margin: 0 auto 4rem;
+}
+
+/* ============================================================================
+ * 🎯 POR QUÉ: las etiquetas de contexto deben introducir el título, no competir
+ *    lateralmente con él ni perder su eje visual entre distintas páginas.
+ * ⚙️ CÓMO: todo distintivo que precede directamente a un h2 se centra como
+ *    elemento independiente, incluso dentro de encabezados con reglas particulares.
+ * 📦 QUÉ: jerarquía vertical uniforme: etiqueta arriba, h2 centrado debajo.
+ * ============================================================================ */
+.badge-section-pill:has(+ h2) {
+  align-self: center;
+  margin-inline: auto;
+}
+
+.badge-section-pill + h2 {
+  text-align: center;
 }
 
 .badge-section-pill {
