@@ -4,7 +4,7 @@
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Transformar la sección musical en una Galería Sonora viva que rinda tributo
-//   a los 16 compositores y artistas más trascendentales de Nicaragua.
+//   a compositores, intérpretes, agrupaciones y tradiciones de Nicaragua.
 // - Conectar de forma interactiva la MÚSICA con el TERRITORIO (enlace directo a los
 //   17 departamentos), demostrando cómo el paisaje, el río y el volcán inspiraron
 //   cada acorde nacional.
