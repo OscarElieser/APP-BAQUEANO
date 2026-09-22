@@ -237,7 +237,21 @@
       // Mostrar confirmación
       alert(`¡Denuncia preparada con éxito!\n\nSe abrirá WhatsApp para transmitir las coordenadas y el detalle de tus ${selectedFiles.length} evidencia(s) adjuntas a la Mesa de Custodia Territorial.`);
       window.open(whatsappUrl, '_blank');
+
+      // Limpieza de estado y cierre de modal
+      form.reset();
+      selectedFiles = [];
+      renderPreviews();
+
+      const modal = document.getElementById('denunciaModal');
+      if (modal && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
     });
+
+    window.__evidenceFormHandlerRegistered = true;
   }
 
   if (document.readyState === 'loading') {

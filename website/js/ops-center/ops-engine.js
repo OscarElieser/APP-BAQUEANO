@@ -1477,6 +1477,16 @@
   });
 
   const ENTITY_REGISTRY = {
+    // 34: Tarifas turísticas verificables usadas por el planificador público.
+    '34-tarifas': {
+      collection: 'tourism_services',
+      title: 'Gestión de Tarifas',
+      singular: 'Tarifa',
+      icon: 'fa-tags',
+      hasPricing: true,
+      hasContact: true,
+      fields: ['nombre', 'tipoServicio', 'businessId', 'destinoId', 'precio', 'moneda', 'precioDesde', 'precioHasta', 'precioAdulto', 'precioNino', 'tipoPrecio', 'incluye', 'noIncluye', 'dayPass', 'dayPassPrecio', 'dayPassHorario', 'restricciones', 'requiereReserva', 'disponibilidad', 'estadoDisponibilidad', 'contacto', 'whatsapp', 'urlOficial', 'fuentePrecio', 'fuentePrecioUrl', 'fechaVerificacion', 'fechaVencimiento', 'verificado', 'verificadoPor', 'estadoPrecio', 'status']
+    },
     // 01: Dashboard Ejecutivo (Vista consolidada de KPIs y Pulso Nacional)
     '01-dashboard': {
       isSystem: true,
@@ -2417,7 +2427,7 @@
         payload.name = payload.title || payload.name || 'Destino Sin Nombre';
         payload.title = payload.name;
         payload.priceUsd = parseFloat(payload.priceUsd) || 0;
-        payload.priceNio = parseFloat(payload.priceNio) || (payload.priceUsd * 36.65);
+        payload.priceNio = parseFloat(payload.priceNio) || null;
         payload.rating = payload.rating || 5.0;
         payload.reviewsCount = payload.reviewsCount || 0;
 
@@ -5461,8 +5471,14 @@
           <div class="ops-form-grid-2" style="margin-bottom: 1.25rem;">
             <div class="ops-form-group">
               <label class="ops-form-label">Tipo de Cambio Oficial BCN (C$ por 1 USD)</label>
-              <input type="number" step="0.01" class="ops-form-input" id="cfgExchangeRate" value="36.65">
-              <small style="color:var(--ops-text-muted); font-size:0.75rem;">Sincronizado con el Banco Central de Nicaragua.</small>
+              <input type="number" min="0.0001" step="0.0001" class="ops-form-input" id="cfgExchangeRate" placeholder="Cargar tasa vigente">
+              <small style="color:var(--ops-text-muted); font-size:0.75rem;">Debe registrarse junto con su fuente y fecha.</small>
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Fuente de la tasa</label>
+              <input type="text" class="ops-form-input" id="cfgExchangeSource" placeholder="Ej. publicación oficial BCN">
+              <label class="ops-form-label" style="margin-top:.75rem;">Fecha de la tasa</label>
+              <input type="date" class="ops-form-input" id="cfgExchangeDate">
             </div>
             <div class="ops-form-group">
               <label class="ops-form-label">Comisión de Plataforma para Familias Campesinas</label>
@@ -5902,7 +5918,7 @@
             </div>
             <h2 style="font-size:1.3rem;color:#fff;margin:0 0 0.75rem 0;">${OpsUI.escape(item.title || item.name)}</h2>
             <p style="font-size:0.88rem;color:var(--ops-text-secondary);line-height:1.6;">${OpsUI.escape(item.description || 'Sin descripción detallada.')}</p>
-            ${item.priceUsd ? `<div style="font-size:1.1rem;font-weight:700;color:var(--bq-accent);margin-top:1rem;">$${item.priceUsd} USD <span style="font-size:0.8rem;color:var(--ops-text-muted);">(C$ ${item.priceNio || item.priceUsd * 36.65})</span></div>` : ''}
+            ${item.priceUsd ? `<div style="font-size:1.1rem;font-weight:700;color:var(--bq-accent);margin-top:1rem;">$${item.priceUsd} USD ${item.priceNio ? `<span style="font-size:0.8rem;color:var(--ops-text-muted);">(C$ ${item.priceNio})</span>` : '<span style="font-size:0.8rem;color:var(--ops-text-muted);">Sin conversión registrada</span>'}</div>` : ''}
           </div>
         </div>
       `;
@@ -6482,7 +6498,17 @@
     // ACCIONES DE CONFIGURACIÓN GLOBAL, SEO Y DIAGNÓSTICO
     // ══════════════════════════════════════════════════════════════════════════
     async saveGlobalSettings() {
-      const exchangeRate = parseFloat(document.getElementById('cfgExchangeRate')?.value) || 36.65;
+      const exchangeRate = parseFloat(document.getElementById('cfgExchangeRate')?.value);
+      const exchangeSource = document.getElementById('cfgExchangeSource')?.value?.trim();
+      const exchangeDate = document.getElementById('cfgExchangeDate')?.value;
+      if (!(exchangeRate > 0)) {
+        OpsToast.show('Ingresá una tasa de cambio válida y verificable.', 'error', 5000);
+        return;
+      }
+      if (!exchangeSource || !exchangeDate) {
+        OpsToast.show('Registrá la fuente y la fecha de la tasa de cambio.', 'error', 5000);
+        return;
+      }
       const sosPhone = document.getElementById('cfgSosPhone')?.value?.trim() || '118';
       const whatsappSupport = document.getElementById('cfgWhatsappSupport')?.value?.trim() || '+505 8888-0000';
       const announcement = document.getElementById('cfgGlobalAnnouncement')?.value?.trim() || '';
@@ -6503,6 +6529,13 @@
         const db = OpsCMS.getDb();
         if (db) {
           await db.collection('system_settings').doc('global_config').set(settingsPayload, { merge: true });
+          await db.collection('app_config').doc('exchange_rate').set({
+            tipoCambio: exchangeRate,
+            fuenteTipoCambio: exchangeSource,
+            fechaTipoCambio: exchangeDate,
+            updatedAt: new Date().toISOString(),
+            updatedBy: OpsState.currentUser?.email || 'admin'
+          }, { merge: true });
         }
         if (window.baqueanoSupabase) {
           await window.baqueanoSupabase.from('ops_backup_entities').upsert({

@@ -147,6 +147,8 @@
       duration: Number.isFinite(audio.duration) ? audio.duration : 0,
       volume: audio.volume,
       playing: !audio.paused,
+      currentIndex,
+      queue: tracks.map(({ file, title, artist, src }) => ({ file, title, artist, src })),
       dismissed: false,
       updatedAt: Date.now()
     };
