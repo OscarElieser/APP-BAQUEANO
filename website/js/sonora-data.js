@@ -23,7 +23,8 @@
 //
 // 📦 3. QUÉ (WHAT / DATOS EXPUESTOS):
 // - BAQUEANO_SONORA_CATEGORIES: 4 categorías oficiales.
-// - BAQUEANO_SONORA_ARTISTS: Catálogo de 16 compositores y artistas insignia.
+// - BAQUEANO_SONORA_ARTISTS: catálogo vivo de compositores, intérpretes,
+//   agrupaciones y tradiciones con relaciones documentales explícitas.
 // ============================================================================
 
 window.BAQUEANO_SONORA_CATEGORIES = [
@@ -57,7 +58,70 @@ window.BAQUEANO_SONORA_CATEGORIES = [
     icon: "fa-solid fa-drum",
     badge: "CARIBE & FUSIÓN ACTUAL",
     description: "La cadencia del Palo de Mayo afrocaribeño, salsa de proyección internacional y rock de autor.",
-    count: "3 Referentes"
+    count: "7 Referentes"
+  }
+];
+
+window.BAQUEANO_NEW_SONORA_ARTISTS = [
+  {
+    id: "mokuanes",
+    name: "Mokuanes",
+    honorific: "La Orquesta Histórica de La Trinidad",
+    category: "caribe-contemporaneo",
+    origin: "La Trinidad, Estelí",
+    departmentId: "esteli",
+    departmentName: "Estelí",
+    genres: "Cumbia · Música Tropical · Balada · Palo de Mayo",
+    years: "1968 – Presente",
+    icon: "fa-solid fa-drum",
+    quote: "Más de medio siglo de música nacido en La Trinidad y transmitido entre generaciones.",
+    legacy: "Mokuanes nació en La Trinidad, Estelí, en 1968, alrededor de un grupo de jóvenes encabezados por Fidencio Escoto. La agrupación evolucionó hasta convertirse en una empresa musical familiar y generacional, con más de cien grabaciones y una trayectoria que abarca cumbia, balada, bachata, Palo de Mayo y otros ritmos bailables.",
+    works: [
+      { title: "Baila mi palo", tag: "Palo de Mayo", desc: "Producción identificada con Mokuanes e incluida posteriormente en Éxitos Tropicales, Vol. 1." },
+      { title: "Cumbia Piquetona", tag: "Versión de Mokuanes", desc: "Interpretación de Mokuanes de la composición del nicaragüense Víctor M. Leiva." },
+      { title: "Meneadito", tag: "Cumbia Tropical", desc: "Sencillo bailable presentado por la agrupación en 2014." }
+    ]
+  },
+  {
+    id: "fuzion-4",
+    name: "Fuzion 4",
+    honorific: "Los Príncipes de la Cumbia",
+    category: "caribe-contemporaneo",
+    origin: "San Marcos, Carazo",
+    departmentId: "carazo",
+    departmentName: "Carazo",
+    genres: "Cumbia · Música Tropical · Fusión Bailable",
+    years: "2004 – Presente",
+    icon: "fa-solid fa-music",
+    quote: "La cumbia contemporánea nicaragüense con identidad sanmarqueña.",
+    legacy: "Fuzion 4 es una agrupación originaria de San Marcos, Carazo, conocida como Los Príncipes de la Cumbia. Su propuesta combina cumbia bailable, metales, acordeón y arreglos tropicales contemporáneos. Frankling Gutiérrez dirige la agrupación y participa como compositor y arreglista en parte de su producción.",
+    works: [
+      { title: "El Cachimbeo", tag: "Composición Original", desc: "Canción de Fuzion 4 compuesta por Frankling Gutiérrez." },
+      { title: "La Cachimba", tag: "Interpretación", desc: "Versión de Fuzion 4; la autoría acreditada corresponde a Juan Carlos Vicencio." },
+      { title: "La Negra Cumbianbera", tag: "Repertorio Sanmarqueño", desc: "Grabación de Fuzion 4 incluida en el proyecto Puro San Marqueño; compositor aún no documentado." },
+      { title: "La Candona Chinamera", tag: "Producción 2026", desc: "Interpretación identificada de Fuzion 4; crédito de composición pendiente de documentación." }
+    ]
+  },
+  {
+    id: "la-nueva-compania",
+    name: "La Nueva Compañía",
+    honorific: "La Gran Orquesta de la Fiesta Pinolera",
+    category: "caribe-contemporaneo",
+    origin: "Nicaragua",
+    departmentId: "managua",
+    departmentName: "Nicaragua",
+    genres: "Son Nica · Cumbia · Música Tropical · Folclore Modernizado",
+    years: "1991 – Presente",
+    icon: "fa-solid fa-people-group",
+    quote: "Tradición nicaragüense reinterpretada para nuevas generaciones.",
+    legacy: "La Nueva Compañía inició en 1991 como proyecto impulsado por los hermanos Hernández, con liderazgo musical de Óscar Hernández. Su aporte característico ha sido reinterpretar repertorios nicaragüenses mediante arreglos contemporáneos que integran son nica, marimba, música tropical, metales, percusión y recursos escénicos.",
+    works: [
+      { title: "Fiesta Pinolera", tag: "Fiesta Popular", desc: "Interpretación de La Nueva Compañía incluida en Chojín Nica; compositor pendiente de verificación." },
+      { title: "Se Rompen Los Fuegos", tag: "Música de Fiesta", desc: "Pieza presente en el proyecto Tonaditas y en el catálogo posterior de la agrupación." },
+      { title: "Y Sigue El Rancho Ardiendo", tag: "Música Bailable", desc: "Grabación incluida en el álbum Y Se Rompen Los Fuegos." },
+      { title: "La Tonadita", tag: "Música Popular", desc: "Parte del repertorio discográfico de La Nueva Compañía." },
+      { title: "Polka Cumbia", tag: "Fusión Nicaragüense", desc: "Fusión de polka y cumbia incluida en su repertorio publicado." }
+    ]
   }
 ];
 
@@ -654,3 +718,8 @@ window.BAQUEANO_SONORA_ARTISTS = [
     ]
   }
 ];
+
+// Las agrupaciones contemporáneas se mantienen en un bloque editorial propio
+// para distinguir repertorio interpretado de autoría original, y luego se
+// integran al catálogo público sin duplicar la lógica de la galería.
+window.BAQUEANO_SONORA_ARTISTS.push(...window.BAQUEANO_NEW_SONORA_ARTISTS);

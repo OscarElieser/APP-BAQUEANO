@@ -50,6 +50,7 @@
     [/^Amores de Abraham/i, "Amores de Abraham", "José de la Cruz Mena", "Composición", "León"],
     [/^Araré el Aire/i, "Araré el Aire", "Alejandra Acuña y Katia Cardenal", "Interpretación compartida", "Nicaragua"],
     [/^ASI ES LA VIDA/i, "Así es la vida", "Luis Enrique Mejía López", "Interpretación", "Somoto"],
+    [/^Baila Mi Palo/i, "Baila mi palo", "Mokuanes", "Interpretación verificada", "La Trinidad, Estelí"],
     [/^Barrio De Pescadores/i, "Barrio de pescadores", "Erwin Krüger · Trío Monimbó", "Composición e interpretación", "León"],
     [/^Caballito Chontaleno/i, "Caballito Chontaleño", "Camilo Zapata", "Composición", "Managua"],
     [/^Camilo Zapata, Minga/i, "Minga Rosa Pineda", "Camilo Zapata", "Composición", "Managua"],
@@ -57,18 +58,25 @@
     [/^Cascada de Perlas/i, "Cascada de Perlas", "Alejandro Vega Matus", "Composición", "Masaya"],
     [/^Corrido a Chinandega/i, "Corrido a Chinandega", "Tino López Guerra", "Composición", "Chinandega"],
     [/^CORRIDO A MANAGUA/i, "Corrido a Managua — versión 2026", "Tino López Guerra", "Composición · versión identificada", "Managua"],
+    [/^Cumbia Piquetona/i, "Cumbia Piquetona", "Mokuanes", "Interpretación · compositor: Víctor M. Leiva", "La Trinidad, Estelí"],
     [/^Dale Su Rondón/i, "Dale su rondón", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^Dias de Amar/i, "Días de amar", "Dúo Guardabarranco", "Composición: Salvador Cardenal", "Managua"],
     [/^Dimension Costena/i, "The Bluefields Express", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^El Zenzontle/i, "El Zenzontle pregunta por Arlen", "Intérprete por confirmar", "Composición: Luis Enrique Mejía Godoy", "Nicaragua"],
+    [/^El cachimbeo/i, "El Cachimbeo", "Fuzion 4", "Composición: Frankling Gutiérrez", "San Marcos, Carazo"],
     [/^el_solar/i, "El Solar de Monimbó", "Camilo Zapata", "Composición", "Masaya"],
     [/^ENTRE REMOLINOS/i, "Entre remolinos", "Perrozompopo", "Repertorio autoral", "Managua"],
     [/^Fiebre Costeña/i, "Fiebre Costeña", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^Fiesta Pinolera/i, "Fiesta Pinolera", "La Nueva Compañía", "Interpretación · compositor por verificar", "Nicaragua"],
     [/^Flor de Mi Colina/i, "Flor de mi colina", "Camilo Zapata", "Composición", "Managua"],
     [/^Guerrero del Amor/i, "Guerrero del amor", "Dúo Guardabarranco", "Repertorio de Guardabarranco", "Managua"],
     [/^INSOPORTABLEMENTE/i, "Insoportablemente bella", "Hernaldo Zúñiga", "Interpretación · autores: Manuel Alejandro y Ana Magdalena", "Nicaragua"],
     [/^La mama Ramona/i, "La Mama Ramona", "Marimba de arco de Masaya", "Tradición · arreglo de Alejandro Vega Matus c. 1920", "Masaya"],
+    [/^La Cachimba/i, "La Cachimba", "Fuzion 4", "Interpretación · autor: Juan Carlos Vicencio", "San Marcos, Carazo"],
+    [/^La Candona Chinamera/i, "La Candona Chinamera", "Fuzion 4", "Interpretación verificada · compositor por documentar", "San Marcos, Carazo"],
     [/^La Minifalda/i, "La Minifalda", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^La negra cumbianbera/i, "La Negra Cumbianbera", "Fuzion 4", "Interpretación verificada · compositor por documentar", "San Marcos, Carazo"],
+    [/^La Tonadita/i, "La Tonadita", "La Nueva Compañía", "Repertorio verificado", "Nicaragua"],
     [/^La Sutiabeña/i, "La Sutiabeña", "Camilo Zapata", "Composición", "León"],
     [/^La Tula Cuecho/i, "La Tula Cuecho", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
     [/^La tumba/i, "La tumba del guerrillero", "Carlos Mejía Godoy", "Repertorio autoral", "Nicaragua"],
@@ -78,12 +86,14 @@
     [/^Maria de los Guardias/i, "María de los Guardias", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
     [/^Mariposa de alas rotas/i, "Mariposa de alas rotas — acústica 2004", "Katia Cardenal", "Interpretación identificada", "Managua"],
     [/^MAYAYA/i, "Mayaya La Sinky", "Dimensión Costeña", "Interpretación identificada", "Bluefields"],
+    [/^Meneadito/i, "Meneadito", "Mokuanes", "Interpretación verificada", "La Trinidad, Estelí"],
     [/^Nicaragua Mia/i, "Nicaragua Mía", "Tino López Guerra", "Composición", "Chinandega"],
     [/^nicaragua,nicaraguita/i, "Nicaragua, Nicaragüita", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
     [/^Pajarita de la Paz/i, "Pajarita de la Paz", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
     [/^palomita/i, "Palomita Guasiruca", "Tradición de Chontales · recopilación de Erwin Krüger", "Folclore recopilado", "Chontales"],
     [/^Para Ti/i, "Para ti", "Norma Helena Gadea y Luis Enrique Mejía Godoy", "Interpretación compartida · autoría por confirmar", "Nicaragua"],
     [/^Pobre La María/i, "Pobre la María", "Luis Enrique Mejía Godoy", "Composición", "Somoto"],
+    [/^Polka Cumbia/i, "Polka Cumbia", "La Nueva Compañía", "Repertorio verificado", "Nicaragua"],
     [/^PROCURO/i, "Procuro olvidarte", "Hernaldo Zúñiga", "Interpretación · autores: Manuel Alejandro y Ana Magdalena", "Nicaragua"],
     [/^QUIERO QUE SEPAS/i, "Quiero que sepas", "Perrozompopo", "Repertorio autoral", "Managua"],
     [/^Quincho Barrilete/i, "Quincho Barrilete", "Carlos Mejía Godoy", "Composición · interpretación de Guayo González en OTI 1977", "Somoto"],
@@ -91,9 +101,11 @@
     [/^Rosalia/i, "Rosalía", "José de la Cruz Mena", "Composición", "León"],
     [/^Ruinas/i, "Ruinas", "José de la Cruz Mena", "Composición", "León"],
     [/^Sabroso Palo/i, "Sabroso Palo de Mayo", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^Se Rompen Los Fuegos/i, "Se Rompen Los Fuegos", "La Nueva Compañía", "Repertorio verificado", "Nicaragua"],
     [/^Son Tus Perjúmenes/i, "Son tus perjúmenes, mujer", "Carlos Mejía Godoy", "Interpretación · folclore recopilado en Tonalá", "Chinandega"],
     [/^(TULULU|Tulululu)/, "Tululu", "Dimensión Costeña", "Interpretación identificada · versiones por comparar", "Bluefields"],
     [/^Verde Verdad/i, "Verde verdad", "Salvador Cardenal", "Proyecto solista póstumo", "Managua"],
+    [/^Y Sigue El Rancho Ardiendo/i, "Y Sigue El Rancho Ardiendo", "La Nueva Compañía", "Repertorio verificado", "Nicaragua"],
     [/^YO NO SE/i, "Yo no sé mañana", "Luis Enrique Mejía López", "Interpretación · autores: Jorge Luis Piloto y Jorge Villamizar", "Somoto"],
     [/^Yo soy de un Pueblo/i, "Yo soy de un pueblo sencillo", "Luis Enrique Mejía Godoy", "Composición · grabación compartida", "Somoto"],
     [/Sones del Güegüense/i, "Sones del Güegüense", "Tradición de El Güegüense", "Colección conjunta · Patrimonio UNESCO", "Diriamba, Carazo"]
@@ -118,9 +130,28 @@
   let activeFilter = 'all';
   const audio = new Audio();
   audio.preload = 'metadata';
+  const SESSION_KEY = 'baqueano_audio_session_v1';
 
   const byId = id => document.getElementById(id);
   const formatTime = seconds => Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}` : '0:00';
+
+  function persistAudioSession() {
+    const track = tracks[currentIndex];
+    if (!track || !audio.src) return;
+    const snapshot = {
+      src: audio.src,
+      file: track.file,
+      title: track.title,
+      artist: track.artist,
+      currentTime: Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
+      duration: Number.isFinite(audio.duration) ? audio.duration : 0,
+      volume: audio.volume,
+      playing: !audio.paused,
+      dismissed: false,
+      updatedAt: Date.now()
+    };
+    try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(snapshot)); } catch (_) { /* almacenamiento no disponible */ }
+  }
 
   function visibleTracks() {
     return tracks.filter(track => activeFilter === 'all' || (activeFilter === 'verified' ? track.verified : !track.verified));
@@ -139,6 +170,7 @@
     audio.pause();
     audio.src = track.src;
     audio.load();
+    persistAudioSession();
     byId('epicTrackTitle').textContent = track.title;
     byId('epicTrackArtist').innerHTML = `<i class="fa-solid fa-microphone-lines"></i> ${track.artist}`;
     byId('epicTrackTerritory').textContent = `• ${track.territory}`;
@@ -194,17 +226,30 @@
     byId('epicMuteBtn').addEventListener('click', () => { audio.muted = !audio.muted; });
     byId('epicVolumeSlider').addEventListener('input', event => { audio.volume = Number(event.target.value); });
     byId('epicScrubber').addEventListener('input', event => { if (Number.isFinite(audio.duration)) audio.currentTime = audio.duration * Number(event.target.value) / 100; });
-    audio.addEventListener('play', () => setPlayingUi(true));
-    audio.addEventListener('pause', () => setPlayingUi(false));
+    audio.addEventListener('play', () => { setPlayingUi(true); persistAudioSession(); });
+    audio.addEventListener('pause', () => { setPlayingUi(false); persistAudioSession(); });
     audio.addEventListener('ended', () => step(1));
     audio.addEventListener('loadedmetadata', () => { byId('epicDurationTime').textContent = formatTime(audio.duration); });
     audio.addEventListener('timeupdate', () => {
       byId('epicCurrentTime').textContent = formatTime(audio.currentTime);
       byId('epicScrubber').value = Number.isFinite(audio.duration) && audio.duration > 0 ? (audio.currentTime / audio.duration) * 100 : 0;
+      persistAudioSession();
     });
     audio.addEventListener('error', () => setPlayingUi(false));
     audio.volume = Number(byId('epicVolumeSlider').value);
-    loadTrack(0);
+    let restored = null;
+    try { restored = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); } catch (_) { restored = null; }
+    const restoredIndex = restored?.file ? tracks.findIndex(track => track.file === restored.file) : -1;
+    loadTrack(restoredIndex >= 0 ? restoredIndex : 0);
+    if (restoredIndex >= 0) {
+      audio.volume = Number.isFinite(restored.volume) ? restored.volume : audio.volume;
+      byId('epicVolumeSlider').value = audio.volume;
+      audio.addEventListener('loadedmetadata', () => {
+        audio.currentTime = Math.min(Number(restored.currentTime) || 0, Math.max(0, audio.duration - 0.25));
+        if (restored.playing) audio.play().catch(() => setPlayingUi(false));
+      }, { once: true });
+    }
+    window.addEventListener('pagehide', persistAudioSession);
   }
 
   window.BaqueanoArchive = {
