@@ -63,3 +63,6 @@ key.properties
 *.keystore
 *.apk
 !website/assets/baqueanonicaragua.apk
+
+# Claves locales - NO subir a GitHub
+website/js/local-keys.js
