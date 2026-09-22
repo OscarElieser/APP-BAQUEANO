@@ -158,8 +158,12 @@
       const index = tracks.indexOf(track);
       return `<button type="button" class="epic-track-card ${index === currentIndex ? 'is-active' : ''}" data-track-index="${index}">
         <span class="epic-track-card-thumb" aria-hidden="true"><i class="fa-solid fa-${track.verified ? 'circle-check' : 'compact-disc'}"></i></span>
-        <span class="epic-track-card-info"><strong class="epic-track-card-name">${track.title}</strong><span class="epic-track-card-meta">${track.artist} · ${track.credit}</span></span>
-        <span class="epic-track-card-time">${track.verified ? 'Verificada' : 'En revisión'}</span>
+        <span class="epic-track-card-info">
+          <strong class="epic-track-card-name">${track.title}</strong>
+          <span class="epic-track-card-artist">${track.artist}</span>
+          <span class="epic-track-card-meta">${track.credit}</span>
+        </span>
+        <span class="epic-track-card-status ${track.verified ? 'is-verified' : 'is-review'}"><i class="fa-solid fa-${track.verified ? 'check' : 'clock'}"></i>${track.verified ? 'Verificada' : 'En revisión'}</span>
       </button>`;
     }).join('');
     grid.querySelectorAll('[data-track-index]').forEach(button => button.addEventListener('click', () => loadTrack(Number(button.dataset.trackIndex), true)));

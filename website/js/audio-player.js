@@ -36,6 +36,15 @@
   let currentFilter = 'all';
   let searchTerm = '';
 
+  // Devuelve exclusivamente obras cuya relación con un MP3 fue validada por
+  // el catálogo documental. Conserva el índice original para los controles.
+  function getVerifiedWorks(artist) {
+    if (!window.BaqueanoArchive || !Array.isArray(artist?.works)) return [];
+    return artist.works
+      .map((work, originalIndex) => ({ work, originalIndex }))
+      .filter(({ work }) => window.BaqueanoArchive.hasVerifiedTitle(work.title));
+  }
+
   // Inicializador de AudioContext bajo interacción de usuario
   function getAudioContext() {
     if (!audioCtx) {
@@ -177,31 +186,7 @@
       return;
     }
 
-    // Si ya está sonando esta misma obra, detener
-    if (isSynthesizerPlaying && activeArtistId === artistId && activeWorkIndex === workIndex) {
-      stopCurrentPlayback();
-      return;
-    }
-
-    activeArtistId = artistId;
-    activeWorkIndex = workIndex;
-
-    updateConsoleDisplay(artist, work.title);
-    updateAllCardPlayStates(artistId);
-
-    // Registro defensivo en Analytics
-    if (typeof window.logFirebaseEvent === 'function' && window.firebaseAnalytics) {
-      window.logFirebaseEvent(window.firebaseAnalytics, 'play_sonora_piece', {
-        artist_id: artistId,
-        song_title: work.title,
-        origin: artist.origin
-      });
-    }
-
-    playMelodySequence(work.notes, () => {
-      updateConsoleDisplay(null, null);
-      updateAllCardPlayStates(null);
-    });
+    // Una obra no verificada nunca se reproduce ni se expone desde una ficha.
   }
 
   // Renderizado dinámico de la galería de artistas
@@ -217,7 +202,7 @@
         a.name.toLowerCase().includes(searchLower) ||
         a.origin.toLowerCase().includes(searchLower) ||
         a.genres.toLowerCase().includes(searchLower) ||
-        a.works.some(w => w.title.toLowerCase().includes(searchLower));
+        getVerifiedWorks(a).some(({ work }) => work.title.toLowerCase().includes(searchLower));
 
       return matchesCategory && matchesSearch;
     });
@@ -238,7 +223,8 @@
 
     container.innerHTML = filtered.map(artist => {
       const isPlaying = isSynthesizerPlaying && activeArtistId === artist.id;
-      const primaryWork = (artist.works && artist.works[0]) ? artist.works[0].title : 'Obra Insigne';
+      const verifiedWorks = getVerifiedWorks(artist);
+      const primaryWork = verifiedWorks[0]?.work.title || '';
 
       return `
         <div class="sonora-artist-card ${isPlaying ? 'playing' : ''}" data-artist-id="${artist.id}" id="card-${artist.id}">
@@ -260,20 +246,20 @@
             ${artist.legacy.substring(0, 135)}...
           </p>
 
-          <div class="sonora-card-sample-box">
+          ${primaryWork ? `<div class="sonora-card-sample-box">
             <div style="font-size: 0.72rem; color: var(--arena-pinolera); font-family: var(--font-tech); text-transform: uppercase;">
               OBRA DESTACADA:
             </div>
             <div style="font-size: 0.92rem; font-weight: 700; color: #FFFFFF;">
               🎵 ${primaryWork}
             </div>
-          </div>
+          </div>` : ''}
 
           <div class="sonora-card-actions">
-            <button class="btn-sonora-play-work" onclick="window.BaqueanoSonora.playWork('${artist.id}', 0)" title="Escuchar melodía tradicional">
+            ${primaryWork ? `<button class="btn-sonora-play-work" onclick="window.BaqueanoSonora.playWork('${artist.id}', ${verifiedWorks[0].originalIndex})" title="Escuchar grabación verificada">
               <span class="btn-play-card-icon"><i class="fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'}"></i></span>
               <span>Escuchar</span>
-            </button>
+            </button>` : ''}
             <button class="btn-sonora-view-bio" onclick="window.BaqueanoSonora.openModal('${artist.id}')" title="Ver ficha completa y territorio">
               <i class="fa-solid fa-id-card"></i> Ficha
             </button>
@@ -318,8 +304,8 @@
     const content = document.getElementById('sonoraModalContent');
     if (!modal || !content) return;
 
-    const worksHtml = (artist.works || []).map((work, idx) => {
-      const hasVerifiedAudio = Boolean(window.BaqueanoArchive?.hasVerifiedTitle(work.title));
+    const verifiedWorks = getVerifiedWorks(artist);
+    const worksHtml = verifiedWorks.map(({ work, originalIndex }) => {
       return `
       <div class="sonora-modal-work-item">
         <div style="flex: 1;">
@@ -331,8 +317,8 @@
             ${work.desc}
           </p>
         </div>
-        <button class="btn-sonora-listen-pill" ${hasVerifiedAudio ? `onclick="window.BaqueanoSonora.playWork('${artist.id}', ${idx})"` : 'disabled aria-disabled="true"'}>
-          <i class="fa-solid fa-${hasVerifiedAudio ? 'circle-play' : 'clock'}"></i> ${hasVerifiedAudio ? 'Escuchar MP3' : 'Audio por documentar'}
+        <button class="btn-sonora-listen-pill" onclick="window.BaqueanoSonora.playWork('${artist.id}', ${originalIndex})">
+          <i class="fa-solid fa-circle-play"></i> Escuchar MP3
         </button>
       </div>
     `;
@@ -371,14 +357,14 @@
         </p>
       </div>
 
-      <div style="margin-bottom: 2rem;">
+      ${worksHtml ? `<div style="margin-bottom: 2rem;">
         <h4 style="font-size: 1.1rem; color: #FFFFFF; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-compact-disc" style="color: var(--verde-neon);"></i> Obras Insignes en el Patrimonio Baqueano
         </h4>
         <div style="display: flex; flex-direction: column; gap: 0.8rem;">
           ${worksHtml}
         </div>
-      </div>
+      </div>` : ''}
 
       <!-- BOTÓN DESTACADO: CONEXIÓN MÚSICA + TERRITORIO -->
       <div style="background: linear-gradient(135deg, rgba(22, 93, 111, 0.4) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid var(--border-teal); border-radius: 16px; padding: 1.3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
