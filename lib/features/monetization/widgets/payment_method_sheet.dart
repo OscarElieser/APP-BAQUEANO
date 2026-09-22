@@ -420,40 +420,32 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
               const SizedBox(height: 10),
 
               // Opciones de Métodos Bancarios
-              RadioGroup<PaymentMethodType>(
-                groupValue: _selectedMethod,
-                onChanged: (val) {
-                  if (val != null) {
-                    setState(() => _selectedMethod = val);
-                  }
-                },
-                child: Column(
-                  children: [
-                    _buildMethodCard(
-                      type: PaymentMethodType.card,
-                      badgeText: 'MULTI-BANCO',
-                      badgeColor: AppColors.jungleGreenLight,
-                    ),
-                    const SizedBox(height: 10),
-                    _buildMethodCard(
-                      type: PaymentMethodType.banpro,
-                      badgeText: 'LIQUIDACIÓN DIRECTA',
-                      badgeColor: AppColors.goldLight,
-                    ),
-                    const SizedBox(height: 10),
-                    _buildMethodCard(
-                      type: PaymentMethodType.bac,
-                      badgeText: '3D SECURE',
-                      badgeColor: AppColors.terracottaLight,
-                    ),
-                    const SizedBox(height: 10),
-                    _buildMethodCard(
-                      type: PaymentMethodType.lafise,
-                      badgeText: 'PAGO RECURRENTE',
-                      badgeColor: AppColors.terracotta,
-                    ),
-                  ],
-                ),
+              Column(
+                children: [
+                  _buildMethodCard(
+                    type: PaymentMethodType.card,
+                    badgeText: 'MULTI-BANCO',
+                    badgeColor: AppColors.jungleGreenLight,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildMethodCard(
+                    type: PaymentMethodType.banpro,
+                    badgeText: 'LIQUIDACIÓN DIRECTA',
+                    badgeColor: AppColors.goldLight,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildMethodCard(
+                    type: PaymentMethodType.bac,
+                    badgeText: '3D SECURE',
+                    badgeColor: AppColors.terracottaLight,
+                  ),
+                  const SizedBox(height: 10),
+                  _buildMethodCard(
+                    type: PaymentMethodType.lafise,
+                    badgeText: 'PAGO RECURRENTE',
+                    badgeColor: AppColors.terracotta,
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
 
@@ -601,6 +593,12 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             ),
             Radio<PaymentMethodType>(
               value: type,
+              groupValue: _selectedMethod,
+              onChanged: (val) {
+                if (val != null) {
+                  setState(() => _selectedMethod = val);
+                }
+              },
               activeColor: AppColors.gold,
             ),
           ],
