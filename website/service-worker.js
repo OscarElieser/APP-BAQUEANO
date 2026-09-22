@@ -9,7 +9,7 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-public-v2';
+const CACHE_VERSION = 'baqueano-public-v3';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE_URLS = [OFFLINE_URL, '/assets/images/baqueano_launcher_solid.png', '/assets/images/logo.png'];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
@@ -51,13 +51,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   if (!isPublicStaticPath(url.pathname)) return;
-  event.respondWith(caches.match(request).then((cached) => {
-    const networkUpdate = fetch(request).then((response) => {
-      if (!response.ok || response.type !== 'basic') return response;
-      const copy = response.clone();
-      caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
-      return response;
-    }).catch(() => cached);
-    return cached || networkUpdate;
-  }));
+  // JavaScript y CSS usan red primero para no conservar controles obsoletos.
+  // El caché queda únicamente como respaldo cuando no existe conectividad.
+  event.respondWith(fetch(request).then((response) => {
+    if (!response.ok || response.type !== 'basic') return response;
+    const copy = response.clone();
+    caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+    return response;
+  }).catch(() => caches.match(request)));
 });
