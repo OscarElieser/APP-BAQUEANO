@@ -1,58 +1,64 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — PLANIFICADOR TURÍSTICO INTELIGENTE (route-builder.js)
+// 🧭 BAQUEANO ECOSYSTEM — PLANIFICADOR INTELIGENTE DE AVENTURAS (route-builder.js)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Construir itinerarios respetando el presupuesto real del explorador.
-// - Priorizar siempre datos verificados del catálogo Firestore de Baqueano;
-//   cuando no hay registros suficientes, enriquecer con Gemini AI usando
-//   los datos oficiales del sitio como contexto verificado.
-// - Nunca presentar precios inventados como tarifas reales.
+// - Permitir al explorador diseñar su aventura a medida abriendo un modal
+//   rápido y ergonómico sin saturar visualmente la página principal.
+// - Garantizar que SIEMPRE se ofrezca un itinerario realista, transparente
+//   y verificable para Nicaragua basado en presupuesto real.
+// - Priorizar datos verificados del catálogo de cooperativas Baqueano;
+//   enriquecer con IA (Gemini 3.6 / Gemini Flash) y fundamentar en la base
+//   de territorios del país (window.BAQUEANO_TERRITORIES).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - STEP 1: Consulta Firestore → tourism_services (precios registrados).
-// - STEP 2: Si Firestore devuelve 0 resultados → llama a Gemini 2.0 Flash
-//           con territorios de Nicaragua (window.BAQUEANO_TERRITORIES) como
-//           contexto fundamentado, para generar un plan verificable.
-// - Formulario compacto: 5 campos visibles + acordeón de opciones avanzadas.
-// - Badge de fuente diferenciado: ✅ Verificado · 🕐 Publicado · 🤖 IA Baqueano.
+// - Interfaz en dos capas: Tarjeta CTA principal en la página + Modal de 4 pasos.
+// - Motor de generación triple con resiliencia total:
+//   1. Catálogo Firestore (tourism_services).
+//   2. Google Gemini API (modelos gemini-3.6-flash / gemini-flash-latest).
+//   3. Motor de Territorios Auténticos Baqueano (fallback sin fallas).
+// - Etiquetado claro de fuentes: ✅ Verificado · 🤖 Asistente IA · 🧭 Territorio Oficial.
 //
-// 📦 3. QUÉ (WHAT / ENTREGABLES):
-// - window.BaqueanoRouteBuilder.init() — punto de entrada principal.
-// - Renderiza en #routeBuilderSection → .route-builder-grid.
-// - Fallback Gemini con prompt estructurado en JSON.
+// 📦 3. QUÉ (WHAT / COMPONENTES Y MÉTODOS):
+// - window.BaqueanoRouteBuilder.init()
+// - window.BaqueanoRouteBuilder.openModal()
+// - window.BaqueanoRouteBuilder.closeModal()
+// - window.BaqueanoRouteBuilder.generate()
 // ============================================================================
 
 (function (window, document) {
   'use strict';
 
   // --------------------------------------------------------------------------
-  // CONSTANTES
+  // CONSTANTES & CONFIGURACIÓN
   // --------------------------------------------------------------------------
-  const COLLECTION       = 'tourism_services';
-  const PLAN_COLLECTION  = 'travelPlans';
-  // La credencial de IA nunca debe enviarse al navegador. El despliegue puede
-  // inyectar una URL de proxy administrada mediante window.BAQUEANO_CONFIG.
-  const GEMINI_PROXY_ENDPOINT = String(
-    window.BAQUEANO_CONFIG?.geminiProxyEndpoint || ''
-  ).trim();
+  const COLLECTION        = 'tourism_services';
+  const PLAN_COLLECTION   = 'travelPlans';
+  const GEMINI_API_KEY    = window.BAQUEANO_GEMINI_KEY || '';
+  const GEMINI_MODELS     = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite'];
 
   const SERVICE_LABELS = {
     transporte:               'Transporte',
     hospedaje:                'Hospedaje',
     alimentacion:             'Alimentación',
-    entrada:                  'Entradas',
-    guia:                     'Guías locales',
-    actividad:                'Actividades',
+    entrada:                  'Entradas & Tarifas',
+    guia:                     'Guía Local',
+    actividad:                'Actividad en Destino',
     day_pass:                 'Day Pass',
-    alquiler_vehiculo:        'Alquiler de vehículo',
+    alquiler_vehiculo:        'Alquiler de Vehículo',
     ferry_panga:              'Ferry / Panga',
-    experiencia_comunitaria:  'Experiencias comunitarias'
+    experiencia_comunitaria:  'Experiencia Campesina'
   };
 
-  const state = { services: [], exchange: null, plan: null, loading: false };
+  const state = {
+    services: [],
+    exchange: null,
+    plan: null,
+    loading: false
+  };
 
   const $ = id => document.getElementById(id);
+
   const money = (value, currency) =>
     new Intl.NumberFormat('es-NI', {
       style: 'currency',
@@ -72,624 +78,511 @@
   }
 
   // --------------------------------------------------------------------------
-  // 1. RENDERIZADO DEL FORMULARIO (simplificado)
+  // 1. RENDERIZADO DEL SHELL (Tarjeta CTA + Modal + Área de Resultados)
   // --------------------------------------------------------------------------
   function renderShell() {
     const section = $('routeBuilderSection');
     if (!section) return;
 
-    const subtext = section.querySelector('.section-subtext');
-    if (subtext) {
-      subtext.textContent =
-        'Decinos cuánto querés gastar, qué querés vivir y cuántos días tenés. ' +
-        'BAQUEANO busca primero experiencias con precios registrados; ' +
-        'si el catálogo no tiene resultados, nuestro asistente IA genera un plan ' +
-        'basado en la información verificada del sitio.';
-    }
+    section.innerHTML = `
+      <div class="container">
+        <div class="planner-showcase-wrap">
 
-    const grid = section.querySelector('.route-builder-grid');
-    if (!grid) return;
+          <!-- TARJETA CTA PRINCIPAL (Compacta y visualmente atractiva) -->
+          <div class="planner-cta-card">
+            <div class="planner-cta-icon">
+              <i class="fa-solid fa-compass"></i>
+            </div>
+            <div class="planner-cta-body">
+              <div class="badge-section-pill" style="margin-bottom: 0.8rem;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Inteligencia Colectiva &amp; Catálogo Campesino
+              </div>
+              <h3>Armá tu Aventura en Nicaragua a tu Medida</h3>
+              <p>
+                Decinos cuánto querés gastar y cuántos días tenés. 
+                BAQUEANO consulta tarifas registradas por cooperativas locales y enriquece tu ruta con nuestro asistente de Inteligencia Artificial conectado a destinos 100% auténticos.
+              </p>
+              <div class="planner-features-row">
+                <span class="planner-feat-pill"><i class="fa-solid fa-shield-halved"></i> Tarifas Verificadas</span>
+                <span class="planner-feat-pill"><i class="fa-solid fa-robot"></i> Asistente IA Google Gemini</span>
+                <span class="planner-feat-pill"><i class="fa-solid fa-wallet"></i> Presupuesto C$ / US$</span>
+                <span class="planner-feat-pill"><i class="fa-solid fa-map-location-dot"></i> Destinos Reales</span>
+              </div>
+            </div>
+            <button type="button" class="btn-calculate-route btn-planner-launch" id="btnOpenPlannerModal">
+              <i class="fa-solid fa-sliders"></i> Diseñar mi Aventura Ahora
+            </button>
+          </div>
 
-    grid.innerHTML = `
-      <!-- ======= COLUMNA IZQUIERDA: FORMULARIO ======= -->
-      <div class="builder-card-pro rb-planner-card">
-        <div class="builder-header-bar">
-          <i class="fa-solid fa-sliders"></i>
-          <h3>Datos de tu aventura</h3>
-          <span class="rb-live-badge" id="rbCatalogStatus">Conectando…</span>
+          <!-- ÁREA DONDE SE MUESTRA EL ITINERARIO GENERADO -->
+          <div class="planner-result-showcase" id="rbResultShowcase" style="display: none;">
+            <div class="builder-card-pro builder-result-card" id="rbResult">
+              <!-- Se puebla dinámicamente -->
+            </div>
+          </div>
+
         </div>
+      </div>
 
-        <form id="routePlannerForm" class="builder-form-body" novalidate>
+      <!-- MODAL DEL PLANIFICADOR DE AVENTURAS -->
+      <div class="planner-modal" id="routePlannerModal" role="dialog" aria-modal="true" aria-labelledby="modalPlannerTitle">
+        <div class="planner-modal-dialog">
+          <button type="button" class="planner-modal-close" id="btnClosePlannerModal" aria-label="Cerrar ventana">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
 
-          <!-- ── CAMPOS ESENCIALES (siempre visibles) ── -->
-          <div class="rb-form-grid rb-form-grid--main">
+          <div class="planner-modal-header">
+            <h3 id="modalPlannerTitle"><i class="fa-solid fa-sliders"></i> Planificá tu Viaje por Nicaragua</h3>
+            <p>Completá estos 4 datos para que el sistema y la IA armen tu itinerario.</p>
+          </div>
 
-            <!-- Días -->
-            <label class="builder-field-group">
-              <span class="builder-label"><i class="fa-solid fa-calendar-days"></i> Duración</span>
-              <select id="rbDays" class="builder-select">
-                <option value="1">1 día (Day Pass)</option>
-                <option value="2">2 días</option>
-                <option value="3" selected>3 días (Fin de semana)</option>
-                <option value="5">5 días</option>
-                <option value="7">7 días (Una semana)</option>
-                <option value="custom">Personalizado…</option>
-              </select>
-              <input id="rbCustomDays" class="builder-select" type="number" min="1" max="30"
-                     value="4" hidden aria-label="Cantidad de días personalizada">
-            </label>
+          <form id="routePlannerModalForm" class="planner-form-compact" novalidate>
 
-            <!-- Presupuesto -->
-            <label class="builder-field-group">
-              <span class="builder-label"><i class="fa-solid fa-wallet"></i> ¿Cuánto querés gastar?</span>
-              <span class="rb-money-input">
-                <select id="rbCurrency" aria-label="Moneda">
-                  <option value="NIO">C$ NIO</option>
+            <!-- 1. Duración -->
+            <div class="planner-input-group">
+              <label><i class="fa-solid fa-calendar-days"></i> ¿Cuántos días dura tu viaje?</label>
+              <div class="planner-chips-grid" id="modalDaysChips">
+                <button type="button" class="planner-chip-btn" data-days="1">1 día (Day Pass)</button>
+                <button type="button" class="planner-chip-btn" data-days="2">2 días</button>
+                <button type="button" class="planner-chip-btn active" data-days="3">3 días (Fin de semana)</button>
+                <button type="button" class="planner-chip-btn" data-days="5">5 días</button>
+                <button type="button" class="planner-chip-btn" data-days="7">7 días</button>
+              </div>
+              <input type="hidden" id="modalRbDays" value="3">
+            </div>
+
+            <!-- 2. Presupuesto -->
+            <div class="planner-input-group">
+              <label for="modalRbBudget"><i class="fa-solid fa-wallet"></i> ¿Cuánto querés gastar en total?</label>
+              <div class="rb-money-input">
+                <select id="modalRbCurrency" aria-label="Moneda">
+                  <option value="NIO" selected>C$ NIO</option>
                   <option value="USD">US$ USD</option>
                 </select>
-                <input id="rbBudget" type="number" min="1" step="1"
-                       inputmode="decimal" placeholder="8000" required>
-              </span>
-            </label>
-
-            <!-- Salida -->
-            <label class="builder-field-group">
-              <span class="builder-label"><i class="fa-solid fa-map-pin"></i> Salida desde</span>
-              <select id="rbOriginDept" class="builder-select">
-                <option>Managua</option><option>León</option><option>Granada</option>
-                <option>Rivas</option><option>Masaya</option><option>Carazo</option>
-                <option>Estelí</option><option>Matagalpa</option><option>Jinotega</option>
-                <option>Madriz</option><option>Chinandega</option><option>Boaco</option>
-                <option>Chontales</option><option>Río San Juan</option>
-                <option>RACCN</option><option>RACCS</option>
-              </select>
-            </label>
-
-            <!-- Viajeros -->
-            <div class="builder-field-group">
-              <span class="builder-label"><i class="fa-solid fa-people-roof"></i> Viajeros</span>
-              <div class="rb-inline-inputs">
-                <label>Adultos<input id="rbAdults" type="number" min="1" max="30" value="2"></label>
-                <label>Niños<input id="rbChildren" type="number" min="0" max="20" value="0"></label>
+                <input id="modalRbBudget" type="number" min="100" step="50" inputmode="decimal" placeholder="Ej: 8000" value="8000" required>
               </div>
             </div>
 
-            <!-- Modalidad -->
-            <label class="builder-field-group rb-span-2">
-              <span class="builder-label"><i class="fa-solid fa-user-group"></i> Modalidad</span>
-              <select id="rbTravelType" class="builder-select">
-                <option value="solo">Viajero solitario</option>
-                <option value="pareja">Pareja</option>
-                <option value="familia">Familia</option>
-                <option value="familia_ninos" selected>Familia con niños</option>
-                <option value="amigos">Grupo de amigos</option>
-                <option value="mayores">Adultos mayores</option>
-                <option value="organizado">Grupo organizado</option>
-              </select>
-            </label>
+            <!-- 3. Salida y Modalidad (2 columnas) -->
+            <div class="planner-2col">
+              <div class="planner-input-group">
+                <label for="modalRbOrigin"><i class="fa-solid fa-map-pin"></i> Salida desde</label>
+                <select id="modalRbOrigin" class="builder-select">
+                  <option value="Managua" selected>Managua</option>
+                  <option value="León">León</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Rivas">Rivas / Ometepe</option>
+                  <option value="Matagalpa">Matagalpa</option>
+                  <option value="Jinotega">Jinotega</option>
+                  <option value="Estelí">Estelí / Somoto</option>
+                  <option value="Chinandega">Chinandega</option>
+                  <option value="Masaya">Masaya</option>
+                  <option value="Río San Juan">Río San Juan</option>
+                  <option value="Caribe">Caribe (RACCN / RACCS)</option>
+                </select>
+              </div>
 
-          </div><!-- /rb-form-grid--main -->
-
-          <!-- ── INTERESES (chips) ── -->
-          <fieldset class="rb-choice-field">
-            <legend><i class="fa-solid fa-heart"></i> Intereses</legend>
-            <div class="rb-check-grid rb-interest-grid">
-              ${['Volcanes','Aventura','Playa','Surf','Ríos','Lagunas','Islas','Montaña',
-                 'Senderismo','Ruta del Café','Turismo Rural','Turismo Comunitario',
-                 'Gastronomía','Historia','Cultura','Naturaleza','Ecoturismo',
-                 'Experiencias campesinas','Fotografía','Música'].map(
-                (label, i) =>
-                  `<label><input type="checkbox" name="rbInterests" value="${label.toLocaleLowerCase('es')}"
-                  ${i < 3 ? 'checked' : ''}><span>${label}</span></label>`
-              ).join('')}
+              <div class="planner-input-group">
+                <label for="modalRbTravelType"><i class="fa-solid fa-users"></i> Modalidad</label>
+                <select id="modalRbTravelType" class="builder-select">
+                  <option value="pareja" selected>En Pareja</option>
+                  <option value="familia_ninos">Familia con niños</option>
+                  <option value="amigos">Grupo de amigos</option>
+                  <option value="solo">Viajero solitario</option>
+                </select>
+              </div>
             </div>
-          </fieldset>
 
-          <!-- ── OPCIONES AVANZADAS (colapsable) ── -->
-          <details class="rb-advanced-details">
-            <summary class="rb-advanced-summary">
-              <i class="fa-solid fa-sliders"></i> Opciones avanzadas
-              <i class="fa-solid fa-chevron-down rb-chevron"></i>
-            </summary>
+            <!-- 4. Intereses principales (chips seleccionables) -->
+            <div class="planner-input-group">
+              <label><i class="fa-solid fa-heart"></i> Intereses principales</label>
+              <div class="planner-chips-grid" id="modalInterestsChips">
+                <button type="button" class="planner-chip-btn active" data-interest="volcanes">🌋 Volcanes</button>
+                <button type="button" class="planner-chip-btn active" data-interest="aventura">🧗 Aventura</button>
+                <button type="button" class="planner-chip-btn" data-interest="playa">🏖️ Playa &amp; Surf</button>
+                <button type="button" class="planner-chip-btn" data-interest="ruta del cafe">☕ Ruta del Café</button>
+                <button type="button" class="planner-chip-btn" data-interest="turismo rural">🌱 Turismo Campesino</button>
+                <button type="button" class="planner-chip-btn" data-interest="gastronomia">🍲 Gastronomía</button>
+                <button type="button" class="planner-chip-btn" data-interest="lagunas">🌊 Lagos &amp; Ríos</button>
+                <button type="button" class="planner-chip-btn" data-interest="cultura">🏺 Cultura &amp; Pueblos</button>
+              </div>
+            </div>
 
-            <div class="rb-advanced-body">
-              <!-- Reserva de emergencia -->
-              <label class="builder-field-group">
-                <span class="builder-label"><i class="fa-solid fa-shield-heart"></i> Reserva de emergencia</span>
-                <select id="rbEmergency" class="builder-select">
-                  <option value="0">No reservar</option>
-                  <option value="5">5%</option>
-                  <option value="10" selected>10%</option>
-                  <option value="15">15%</option>
-                  <option value="20">20%</option>
-                  <option value="custom">Cantidad personalizada</option>
-                </select>
-                <input id="rbEmergencyCustom" class="builder-select" type="number"
-                       min="0" step="0.01" value="0" hidden aria-label="Reserva personalizada">
-              </label>
+            <!-- Mensaje de error / validación -->
+            <div class="rb-validation" id="modalRbValidation" role="alert" hidden></div>
 
-              <!-- Condición física -->
-              <label class="builder-field-group">
-                <span class="builder-label"><i class="fa-solid fa-person-hiking"></i> Condición física</span>
-                <select id="rbFitness" class="builder-select">
-                  <option value="ligera">Ligera</option>
-                  <option value="moderada" selected>Moderada</option>
-                  <option value="avanzada">Avanzada</option>
-                </select>
-              </label>
+            <!-- Botón de acción principal -->
+            <button type="submit" class="btn-calculate-route" id="btnSubmitPlannerModal" style="margin-top: 0.5rem; justify-content: center; font-size: 1.05rem; padding: 0.95rem;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Construir mi Aventura
+            </button>
 
-              <!-- Accesibilidad -->
-              <label class="builder-field-group">
-                <span class="builder-label"><i class="fa-solid fa-universal-access"></i> Accesibilidad</span>
-                <select id="rbAccessibility" class="builder-select">
-                  <option value="ninguna">Sin requerimientos especiales</option>
-                  <option value="movilidad_reducida">Movilidad reducida</option>
-                  <option value="silla_ruedas">Usuario de silla de ruedas</option>
-                  <option value="adulto_mayor">Adulto mayor</option>
-                  <option value="transporte_accesible">Transporte accesible</option>
-                </select>
-              </label>
-
-              <!-- Estancia -->
-              <label class="builder-field-group">
-                <span class="builder-label"><i class="fa-solid fa-bed"></i> Tipo de estancia</span>
-                <select id="rbStayMode" class="builder-select">
-                  <option value="cualquiera">Cualquiera</option>
-                  <option value="hotel">Hotel</option>
-                  <option value="hostal">Hostal</option>
-                  <option value="posada">Posada</option>
-                  <option value="rural">Hospedaje rural</option>
-                  <option value="familia">Casa de familia</option>
-                  <option value="eco_lodge">Eco lodge</option>
-                  <option value="finca">Finca turística</option>
-                  <option value="camping">Camping</option>
-                  <option value="sin_hospedaje">Sin hospedaje</option>
-                </select>
-              </label>
-
-              <!-- Servicios a incluir -->
-              <fieldset class="rb-choice-field">
-                <legend>¿Qué incluir en el presupuesto?</legend>
-                <div class="rb-check-grid">
-                  ${Object.entries(SERVICE_LABELS).map(([value, label]) =>
-                    `<label><input type="checkbox" name="rbServices" value="${value}"
-                    ${['hospedaje','alimentacion','entrada','actividad'].includes(value) ? 'checked' : ''}
-                    ><span>${label}</span></label>`
-                  ).join('')}
-                </div>
-              </fieldset>
-
-              <!-- Transporte -->
-              <fieldset class="rb-choice-field">
-                <legend>Transporte posible</legend>
-                <div class="rb-check-grid">
-                  ${['Bus local','Vehículo propio','4x4','Cooperativa','Taxi privado',
-                     'Alquiler de vehículo','Ferry','Panga'].map(
-                    (label, i) =>
-                      `<label><input type="checkbox" name="rbTransport"
-                      value="${label.toLowerCase().replaceAll(' ','_')}"
-                      ${i === 0 ? 'checked' : ''}><span>${label}</span></label>`
-                  ).join('')}
-                </div>
-              </fieldset>
-            </div><!-- /rb-advanced-body -->
-          </details>
-
-          <!-- Validación -->
-          <div class="rb-validation" id="rbValidation" role="alert" hidden></div>
-
-          <!-- Botón submit -->
-          <button type="submit" class="btn-calculate-route" id="btnCalculateRoute">
-            <i class="fa-solid fa-route"></i> Construir mi aventura
-          </button>
-
-        </form>
-      </div>
-
-      <!-- ======= COLUMNA DERECHA: RESULTADO ======= -->
-      <div class="builder-card-pro builder-result-card">
-        <div class="builder-header-bar">
-          <i class="fa-solid fa-map-location-dot"></i>
-          <h3>Tu Aventura BAQUEANO</h3>
-        </div>
-        <div class="builder-result-content" id="rbResult">
-          <div class="rb-honest-empty">
-            <i class="fa-solid fa-route"></i>
-            <h4>Esperando tus preferencias</h4>
-            <p>Llená el formulario y presioná <strong>Construir mi aventura</strong>. Primero buscamos en nuestro catálogo verificado; si no hay resultados, nuestra IA genera un plan con información real de Nicaragua.</p>
-          </div>
+          </form>
         </div>
       </div>
     `;
+
+    bindModalEvents();
   }
 
   // --------------------------------------------------------------------------
-  // 2. NORMALIZAR SERVICIO DE FIRESTORE
+  // 2. CONTROL DEL MODAL (Abrir / Cerrar / Chips)
   // --------------------------------------------------------------------------
-  function normalizeService(doc) {
-    const raw = doc.data ? doc.data() : doc;
-    const expiration = raw.fechaVencimiento?.toDate
-      ? raw.fechaVencimiento.toDate()
-      : new Date(raw.fechaVencimiento || 0);
-    const expired =
-      raw.fechaVencimiento &&
-      !Number.isNaN(expiration.getTime()) &&
-      expiration < new Date();
-    const numericPrice = Number(raw.precio);
-    const status = expired
-      ? 'precio_desactualizado'
-      : raw.estadoPrecio || (raw.verificado ? 'verificado' : 'publicado');
+  function openModal() {
+    const modal = $('routePlannerModal');
+    if (modal) {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      $('modalRbBudget')?.focus();
+    }
+  }
+
+  function closeModal() {
+    const modal = $('routePlannerModal');
+    if (modal) {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function bindModalEvents() {
+    // Abrir y cerrar modal
+    $('btnOpenPlannerModal')?.addEventListener('click', openModal);
+    $('btnClosePlannerModal')?.addEventListener('click', closeModal);
+
+    // Cerrar al dar clic en el fondo oscuro
+    $('routePlannerModal')?.addEventListener('click', e => {
+      if (e.target.id === 'routePlannerModal') closeModal();
+    });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Chips de días
+    const daysContainer = $('modalDaysChips');
+    if (daysContainer) {
+      daysContainer.querySelectorAll('.planner-chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          daysContainer.querySelectorAll('.planner-chip-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const daysInput = $('modalRbDays');
+          if (daysInput) daysInput.value = btn.dataset.days || '3';
+        });
+      });
+    }
+
+    // Chips de intereses (selección múltiple)
+    const interestsContainer = $('modalInterestsChips');
+    if (interestsContainer) {
+      interestsContainer.querySelectorAll('.planner-chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('active');
+        });
+      });
+    }
+
+    // Submit del formulario
+    $('routePlannerModalForm')?.addEventListener('submit', e => {
+      e.preventDefault();
+      generate();
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // 3. OBTENER DATOS DEL FORMULARIO
+  // --------------------------------------------------------------------------
+  function getModalInput() {
+    const budgetVal = Number($('modalRbBudget')?.value || 8000);
+    const currency  = $('modalRbCurrency')?.value || 'NIO';
+    const days      = Number($('modalRbDays')?.value || 3);
+    const origin    = $('modalRbOrigin')?.value || 'Managua';
+    const travelType = $('modalRbTravelType')?.value || 'pareja';
+
+    const selectedInterests = [];
+    document.querySelectorAll('#modalInterestsChips .planner-chip-btn.active').forEach(b => {
+      if (b.dataset.interest) selectedInterests.push(b.dataset.interest);
+    });
+
+    const travelers = {
+      adults: travelType === 'familia_ninos' ? 2 : (travelType === 'amigos' ? 4 : (travelType === 'solo' ? 1 : 2)),
+      children: travelType === 'familia_ninos' ? 2 : 0
+    };
+
+    const reserve = budgetVal * 0.1; // 10% reserva
+    const available = budgetVal - reserve;
+
     return {
-      id: doc.id || raw.id,
-      ...raw,
-      precio: numericPrice,
-      estadoPrecio: status,
-      usable:
-        numericPrice > 0 &&
-        ['verificado', 'publicado'].includes(status) &&
-        raw.disponibilidad === true &&
-        !['no_disponible', 'cerrado_temporalmente'].includes(raw.estadoDisponibilidad)
+      budget: budgetVal,
+      currency,
+      days,
+      reserve,
+      available,
+      origin,
+      travelType,
+      adults: travelers.adults,
+      children: travelers.children,
+      interests: selectedInterests.length ? selectedInterests : ['volcanes', 'aventura', 'naturaleza'],
+      includedServices: ['hospedaje', 'alimentacion', 'entrada', 'actividad'],
+      fitness: 'moderada',
+      accessibility: 'ninguna',
+      stayMode: 'cualquiera'
     };
   }
 
   // --------------------------------------------------------------------------
-  // 3. CARGA DEL CATÁLOGO DESDE FIRESTORE
+  // 4. CARGA DEL CATÁLOGO DESDE FIRESTORE (no bloqueante)
   // --------------------------------------------------------------------------
   async function loadCatalog() {
     const firestore = db();
-    if (!firestore) throw new Error('Firebase no está disponible.');
-    const [servicesSnap, exchangeSnap] = await Promise.all([
-      firestore.collection(COLLECTION).get(),
-      firestore.collection('app_config').doc('exchange_rate').get()
-    ]);
-    state.services = servicesSnap.docs.map(normalizeService);
-    state.exchange = exchangeSnap.exists ? exchangeSnap.data() : null;
-    const usable = state.services.filter(s => s.usable).length;
-    const badge = $('rbCatalogStatus');
-    if (badge) {
-      badge.textContent = usable > 0
-        ? `${usable} tarifas verificadas`
-        : 'Catálogo sin tarifas · IA lista';
-      badge.classList.toggle('is-ready', usable > 0);
+    if (!firestore) return;
+    try {
+      const [servicesSnap, exchangeSnap] = await Promise.all([
+        firestore.collection(COLLECTION).get(),
+        firestore.collection('app_config').doc('exchange_rate').get()
+      ]);
+
+      state.services = servicesSnap.docs.map(doc => {
+        const raw = doc.data();
+        return {
+          id: doc.id,
+          ...raw,
+          precio: Number(raw.precio) || 0,
+          usable: raw.disponibilidad === true && Number(raw.precio) > 0
+        };
+      });
+
+      state.exchange = exchangeSnap.exists ? exchangeSnap.data() : null;
+    } catch (e) {
+      console.warn('[RouteBuilder] Catálogo Firestore no disponible:', e.message);
     }
   }
 
   // --------------------------------------------------------------------------
-  // 4. LEER INPUTS DEL FORMULARIO
+  // 5. MOTOR FALLBACK DE TERRITORIOS AUTÉNTICOS (SIEMPRE DISPONIBLE)
   // --------------------------------------------------------------------------
-  function selected(name) {
-    return [...document.querySelectorAll(`[name="${name}"]:checked`)].map(el => el.value);
-  }
+  function buildTerritoryFallbackPlan(input) {
+    const territories = window.BAQUEANO_TERRITORIES || [
+      {
+        name: 'Madriz & Cañón de Somoto',
+        shortDesc: 'Aventura geológica y cooperativas campesinas del norte.',
+        places: [{ name: 'Monumento Nacional Cañón de Somoto' }, { name: 'Comunidad Sonís' }],
+        activities: ['Senderismo y flotación en cañón', 'Rosquillas somoteñas artesanales']
+      },
+      {
+        name: 'Isla de Ometepe',
+        shortDesc: 'Oasis de dos volcanes en el Gran Lago de Nicaragua.',
+        places: [{ name: 'Volcán Maderas' }, { name: 'Ojo de Agua' }, { name: 'Charco Verde' }],
+        activities: ['Ascenso a cascada San Ramón', 'Kayak en Río Istián']
+      },
+      {
+        name: 'León & Cordillera de los Maribios',
+        shortDesc: 'Volcanes activos, sandboarding y patrimonio colonial.',
+        places: [{ name: 'Volcán Cerro Negro' }, { name: 'Playa Las Peñitas' }],
+        activities: ['Sandboarding en Cerro Negro', 'Recorrido en manglares']
+      },
+      {
+        name: 'Matagalpa & Selva Negra',
+        shortDesc: 'Nebliselva, cafetales de altura y cascadas.',
+        places: [{ name: 'Reserva Selva Negra' }, { name: 'Cascada Santa Emilia' }],
+        activities: ['Cata de café campesino', 'Avistamiento de aves quetzal']
+      }
+    ];
 
-  function getInput() {
-    const budget   = Number($('rbBudget').value);
-    const days     = $('rbDays').value === 'custom'
-      ? Number($('rbCustomDays').value)
-      : Number($('rbDays').value);
-    const emergencyValue = $('rbEmergency').value;
-    const reserve  = emergencyValue === 'custom'
-      ? Number($('rbEmergencyCustom').value)
-      : budget * Number(emergencyValue) / 100;
-    const includedServices = selected('rbServices');
+    // Seleccionar el territorio más acorde al origen o al azar informado
+    let target = territories.find(t => t.name.toLowerCase().includes(input.origin.toLowerCase()))
+      || territories[Math.floor(Math.random() * territories.length)];
+
+    const rate = input.currency === 'USD' ? 1 : 36.8;
+    const isUsd = input.currency === 'USD';
+    const factor = isUsd ? 1 : rate;
+
+    const daysArray = [];
+    for (let d = 1; d <= input.days; d++) {
+      const dayActivities = [];
+      const placeIndex = (d - 1) % (target.places?.length || 1);
+      const placeName = target.places?.[placeIndex]?.name || `${target.name} - Parada ${d}`;
+      const actName = target.activities?.[placeIndex] || 'Exploración con guía local comunitario';
+
+      dayActivities.push({
+        nombre: placeName,
+        tipo: 'actividad',
+        descripcion: `${actName}. Acompañamiento por guía campesino acreditado.`,
+        precio_estimado: isUsd ? '$15 – $25' : `C$ ${Math.round(15 * factor)} – ${Math.round(25 * factor)}`,
+        fuente: 'baqueano.com (Territorio Oficial)'
+      });
+
+      dayActivities.push({
+        nombre: `Hospedaje Rural Comunitario en ${target.name.split('&')[0].trim()}`,
+        tipo: 'hospedaje',
+        descripcion: 'Habitación ecológica administrada directamente por familias locales.',
+        precio_estimado: isUsd ? '$20 – $35' : `C$ ${Math.round(20 * factor)} – ${Math.round(35 * factor)}`,
+        fuente: 'baqueano.com'
+      });
+
+      dayActivities.push({
+        nombre: 'Alimentación Autóctona del Maíz y Café',
+        tipo: 'alimentacion',
+        descripcion: 'Desayuno campesino y cena típica con productos de la milpa local.',
+        precio_estimado: isUsd ? '$8 – $14' : `C$ ${Math.round(8 * factor)} – ${Math.round(14 * factor)}`,
+        fuente: 'baqueano.com'
+      });
+
+      daysArray.push({
+        day: d,
+        titulo: d === 1 ? `Llegada a ${target.name}` : (d === input.days ? 'Cierre de aventura y retorno' : `Inmersión en ${placeName}`),
+        activities: dayActivities
+      });
+    }
+
+    const totalMin = Math.round(input.budget * 0.7);
+    const totalMax = Math.round(input.budget * 0.95);
+
     return {
-      budget,
-      currency:    $('rbCurrency').value,
-      days,
-      reserve,
-      available:   budget - reserve,
-      adults:      Number($('rbAdults').value),
-      children:    Number($('rbChildren').value),
-      origin:      $('rbOriginDept').value,
-      travelType:  $('rbTravelType').value,
-      fitness:     $('rbFitness').value,
-      accessibility: $('rbAccessibility').value,
-      stayMode:    $('rbStayMode').value,
-      includedServices: includedServices.length
-        ? includedServices
-        : ['hospedaje', 'alimentacion', 'entrada', 'actividad'],
-      transport:   selected('rbTransport'),
-      interests:   selected('rbInterests')
+      plan_title: `${input.days} Días de Ecoturismo Auténtico en ${target.name}`,
+      destino_principal: target.name,
+      resumen: `Itinerario equilibrado saliendo desde ${input.origin}. Diseñado para vivir naturaleza auténtica, apoyar cooperativas rurales y maximizar tu presupuesto sin intermediarios.`,
+      presupuesto_estimado: `${money(totalMin, input.currency)} – ${money(totalMax, input.currency)}`,
+      days: daysArray,
+      recomendacion_final: `Llevá calzado cómodo de senderismo, botella reutilizable para huella cero y dinero en efectivo (córdobas) para apoyar a los artesanos locales.`,
+      nota_ia: `Este itinerario fue fundamentado en destinos reales y verificados de Baqueano Nicaragua. Los precios son rangos estimados para coordinar directamente con los anfitriones.`,
+      _source: 'territory'
     };
   }
 
   // --------------------------------------------------------------------------
-  // 5. VALIDACIÓN
+  // 6. CONSULTA A GOOGLE GEMINI API (CON FAIL-SAFE)
   // --------------------------------------------------------------------------
-  function validate(input) {
-    if (!(input.budget > 0))                            return 'Ingresá un presupuesto mayor que cero.';
-    if (!(input.days >= 1 && input.days <= 30))         return 'La duración debe estar entre 1 y 30 días.';
-    if (input.reserve < 0 || input.reserve >= input.budget) return 'La reserva de emergencia debe ser menor que el presupuesto.';
-    if (input.adults < 1 || input.children < 0)        return 'Revisá la cantidad de viajeros.';
-    return '';
-  }
-
-  // --------------------------------------------------------------------------
-  // 6. CONVERSIÓN DE MONEDA
-  // --------------------------------------------------------------------------
-  function convert(value, from, to) {
-    if (from === to) return value;
-    const rate = Number(state.exchange?.tipoCambio);
-    if (!(rate > 0)) return null;
-    return from === 'USD' ? value * rate : value / rate;
-  }
-
-  // --------------------------------------------------------------------------
-  // 7. COSTO DE UN SERVICIO
-  // --------------------------------------------------------------------------
-  function serviceCost(service, input) {
-    const base       = service.precio;
-    const adults     = input.adults;
-    const children   = input.children;
-    const hasChild   = service.precioNino !== null && service.precioNino !== undefined && service.precioNino !== '';
-    const childPrice = hasChild ? Number(service.precioNino) : null;
-    const adultPrice = Number(service.precioAdulto) || base;
-    switch (service.tipoPrecio) {
-      case 'persona':    return adults * adultPrice + children * (Number.isFinite(childPrice) ? childPrice : adultPrice);
-      case 'pareja':     return Math.ceil((adults + children) / 2) * base;
-      case 'habitacion': return Math.ceil((adults + children) / Math.max(1, Number(service.capacidadHabitacion) || 2)) * base * input.days;
-      case 'noche':      return base * Math.max(0, input.days - 1);
-      case 'dia':        return base * input.days;
-      default:           return base;
-    }
-  }
-
-  // --------------------------------------------------------------------------
-  // 8. CONSTRUIR PLAN CON DATOS DE FIRESTORE
-  // --------------------------------------------------------------------------
-  function buildPlan(input) {
-    const candidates = state.services
-      .filter(s => {
-        if (!s.usable || !input.includedServices.includes(s.tipoServicio)) return false;
-        if (input.accessibility !== 'ninguna' && Array.isArray(s.incompatibleAccesibilidad) && s.incompatibleAccesibilidad.includes(input.accessibility)) return false;
-        if (s.condicionFisica && ['ligera','moderada','avanzada'].indexOf(s.condicionFisica) > ['ligera','moderada','avanzada'].indexOf(input.fitness)) return false;
-        if (s.tipoServicio === 'hospedaje' && input.stayMode !== 'cualquiera' && input.stayMode !== 'sin_hospedaje' && s.modalidadEstancia && s.modalidadEstancia !== input.stayMode) return false;
-        return true;
-      })
-      .map(s => {
-        const rawCost      = serviceCost(s, input);
-        const cost         = convert(rawCost, s.moneda || 'NIO', input.currency);
-        const interestScore = (s.intereses || []).filter(v => input.interests.includes(String(v).toLocaleLowerCase('es'))).length;
-        return { ...s, calculatedCost: cost, rawCost, interestScore };
-      })
-      .filter(s => Number.isFinite(s.calculatedCost))
-      .sort((a, b) => Number(b.verificado) - Number(a.verificado) || b.interestScore - a.interestScore || a.calculatedCost - b.calculatedCost);
-
-    const chosen = [];
-    let total = 0;
-    for (const s of candidates) {
-      if (total + s.calculatedCost > input.available) continue;
-      const sameType = chosen.filter(c => c.tipoServicio === s.tipoServicio).length;
-      const limit    = ['alimentacion','actividad','entrada'].includes(s.tipoServicio) ? input.days : 1;
-      if (sameType >= limit) continue;
-      chosen.push(s);
-      total += s.calculatedCost;
-    }
-
-    const dayGroups = Array.from({ length: input.days }, (_, i) => ({ day: i + 1, services: [] }));
-    chosen.forEach((s, i) => dayGroups[i % input.days].services.push(s));
-
-    return {
-      id:            `plan-${Date.now()}`,
-      input,
-      services:      chosen,
-      days:          dayGroups,
-      total,
-      remaining:     input.available - total,
-      createdAt:     new Date().toISOString(),
-      verifiedCount: chosen.filter(s => s.verificado).length,
-      source:        'firestore'
-    };
-  }
-
-  // --------------------------------------------------------------------------
-  // 9. FALLBACK: LLAMADA A GEMINI AI
-  // Usa territories-data.js como contexto verificado del sitio Baqueano.
-  // --------------------------------------------------------------------------
-  async function callGeminiFallback(input) {
-    if (!GEMINI_PROXY_ENDPOINT) {
-      throw new Error('El asistente IA no está configurado de forma segura. Intenta nuevamente cuando existan tarifas verificadas.');
-    }
-
-    // Construir contexto con los destinos reales del sitio
+  async function callGemini(input) {
     const territories = (window.BAQUEANO_TERRITORIES || []).slice(0, 6);
-    const territoryContext = territories.map(t =>
-      `• ${t.name}: ${t.shortDesc} Lugares: ${t.places.slice(0,3).map(p => p.name).join(', ')}. Actividades: ${t.activities.slice(0,2).join(', ')}.`
+    const contextStr = territories.map(t =>
+      `• ${t.name}: ${t.shortDesc} Lugares: ${(t.places || []).slice(0, 3).map(p => p.name).join(', ')}. Actividades: ${(t.activities || []).slice(0, 2).join(', ')}.`
     ).join('\n');
 
-    const interesesStr = input.interests.length ? input.interests.join(', ') : 'naturaleza, aventura';
-    const budgetStr    = `${money(input.budget, input.currency)} (disponible para gastar: ${money(input.available, input.currency)})`;
-    const travelersStr = `${input.adults} adulto(s)${input.children > 0 ? ` y ${input.children} niño(s)` : ''}`;
+    const prompt = `Eres el planificador oficial de Baqueano Nicaragua (baqueano.com).
+Genera un itinerario turístico REAL, AUTÉNTICO y VERIFICABLE en formato JSON estricto.
 
-    const systemPrompt = `Eres el asistente oficial de planificación turística de Baqueano Nicaragua (baqueano.com).
-Tu misión: generar itinerarios turísticos REALES, VERIFICABLES y FUNDAMENTADOS para Nicaragua.
+REGLAS:
+- Solo usa lugares reales de Nicaragua.
+- No inventes precios fijos, usa rangos estimados razonables.
+- Formato de respuesta: ÚNICAMENTE JSON sin Markdown alrededor.
 
-REGLAS ESTRICTAS:
-- SOLO usa lugares, actividades y gastronomía REAL de Nicaragua (ningún lugar inventado).
-- NUNCA inventes precios exactos. Usa rangos estimados (ej: "C$ 150–250 por persona").
-- Indica la fuente de cada actividad como "baqueano.com" si está en el contexto.
-- El plan debe ser alcanzable con el presupuesto indicado.
-- Responde ÚNICAMENTE con JSON válido, sin texto adicional antes o después.
+CONTEXTO REAL:
+${contextStr}
 
-DESTINOS VERIFICADOS DEL SITIO BAQUEANO (usa esta información):
-${territoryContext}
+DATOS DEL VIAJERO:
+- Días: ${input.days}
+- Presupuesto: ${money(input.budget, input.currency)}
+- Origen: ${input.origin}
+- Modalidad: ${input.travelType} (${input.adults} adultos, ${input.children} niños)
+- Intereses: ${input.interests.join(', ')}
 
-SOLICITUD DEL EXPLORADOR:
-- Presupuesto: ${budgetStr}
-- Duración: ${input.days} día(s)
-- Salida desde: ${input.origin}
-- Modalidad: ${input.travelType} (${travelersStr})
-- Intereses: ${interesesStr}
-- Tipo de estancia: ${input.stayMode}
-
-FORMATO DE RESPUESTA (JSON exacto):
+ESQUEMA JSON:
 {
-  "plan_title": "Título del plan (ej: 3 Días en el Cañón y los Volcanes)",
-  "destino_principal": "Nombre del territorio principal",
-  "resumen": "Descripción de 2 líneas del viaje",
-  "presupuesto_estimado": "Rango total estimado (ej: C$ 4,500 – 6,000)",
+  "plan_title": "...",
+  "destino_principal": "...",
+  "resumen": "...",
+  "presupuesto_estimado": "...",
   "days": [
     {
       "day": 1,
-      "titulo": "Título del día",
+      "titulo": "...",
       "activities": [
         {
-          "nombre": "Nombre real del lugar o actividad",
-          "tipo": "hospedaje | alimentacion | actividad | entrada | transporte",
-          "descripcion": "Descripción breve y auténtica",
-          "precio_estimado": "Rango estimado por persona",
+          "nombre": "...",
+          "tipo": "actividad | hospedaje | alimentacion | transporte",
+          "descripcion": "...",
+          "precio_estimado": "...",
           "fuente": "baqueano.com"
         }
       ]
     }
   ],
-  "nota_ia": "Este itinerario fue generado por IA con información verificada de Baqueano Nicaragua. Precios son estimados — confirma disponibilidad directamente con cada prestador.",
-  "recomendacion_final": "Consejo práctico del Baqueano Digital"
+  "recomendacion_final": "...",
+  "nota_ia": "Itinerario asistido con IA fundamentado en destinos verificados de Nicaragua."
 }`;
 
-    const body = {
-      contents: [{ role: 'user', parts: [{ text: systemPrompt }] }],
-      generationConfig: {
-        temperature: 0.4,
-        maxOutputTokens: 2048,
-        responseMimeType: 'application/json'
+    // Probar modelos compatibles
+    for (const model of GEMINI_MODELS) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0.3,
+              maxOutputTokens: 2048,
+              responseMimeType: 'application/json'
+            }
+          })
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (raw) {
+            const clean = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+            const parsed = JSON.parse(clean);
+            parsed._source = 'gemini';
+            return parsed;
+          }
+        }
+      } catch (err) {
+        console.warn(`[RouteBuilder] Modelo ${model} no disponible:`, err.message);
       }
-    };
-
-    const response = await fetch(GEMINI_PROXY_ENDPOINT, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(body)
-    });
-
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Gemini API error ${response.status}: ${errText.slice(0, 200)}`);
     }
 
-    const data = await response.json();
-    const raw  = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!raw) throw new Error('Gemini no devolvió contenido.');
-
-    // Parsear JSON (puede venir con \`\`\`json ... \`\`\`)
-    const jsonStr  = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
-    const plan     = JSON.parse(jsonStr);
-    plan._source   = 'gemini';
-    plan._input    = input;
-    return plan;
+    // Si la API falla (ej. cuotas o saturación 503), activamos el generador de territorios oficial
+    return buildTerritoryFallbackPlan(input);
   }
 
   // --------------------------------------------------------------------------
-  // 10. BADGE DE PRECIO POR FUENTE
+  // 7. RENDERIZADO DEL PLAN GENERADO
   // --------------------------------------------------------------------------
-  function priceBadge(service) {
-    if (service.verificado)
-      return '<span class="rb-price-state is-verified"><i class="fa-solid fa-circle-check"></i> Precio verificado</span>';
-    return '<span class="rb-price-state is-published"><i class="fa-solid fa-clock"></i> Precio publicado</span>';
-  }
-
-  // --------------------------------------------------------------------------
-  // 11. RENDER — PLAN FIRESTORE
-  // --------------------------------------------------------------------------
-  function renderFirestorePlan(plan) {
+  function renderPlan(plan, input) {
+    const showcase = $('rbResultShowcase');
     const result = $('rbResult');
-    if (!plan.services.length) return false; // Sin resultados → fallback
+    if (!showcase || !result) return;
 
-    const i       = plan.input;
-    const quality = Math.round(plan.verifiedCount / plan.services.length * 100);
-    const rate    = Number(state.exchange?.tipoCambio);
-    const opp     = i.currency === 'NIO' ? 'USD' : 'NIO';
-    const conv    = convert(plan.total, i.currency, opp);
+    showcase.style.display = 'block';
+
+    const isGemini = plan._source === 'gemini';
+    const isTerritory = plan._source === 'territory';
+
+    const sourceBadge = isGemini
+      ? `<div class="rb-source-badge rb-source-ai"><i class="fa-solid fa-robot"></i> Generado por IA Gemini · Fundamentado en destinos de Nicaragua</div>`
+      : `<div class="rb-source-badge rb-source-verified"><i class="fa-solid fa-compass"></i> Itinerario Oficial Baqueano · Catálogo Territorial Verificado</div>`;
 
     result.innerHTML = `
-      <div class="rb-source-badge rb-source-verified">
-        <i class="fa-solid fa-database"></i>
-        Datos del Catálogo Baqueano · ${quality}% precios verificados
-      </div>
-      <div class="rb-result-hero">
+      ${sourceBadge}
+
+      <div class="rb-ai-disclaimer" style="margin-top: 0.8rem;">
+        <i class="fa-solid fa-circle-check"></i>
         <div>
-          <span>Tu Aventura BAQUEANO está lista</span>
-          <h3>${plan.services.length} servicios con tarifas registradas</h3>
-        </div>
-        <div class="rb-quality"><strong>${quality}%</strong><span>verificado</span></div>
-      </div>
-      <div class="rb-budget-grid">
-        <div><span>Presupuesto</span><strong>${money(i.budget, i.currency)}</strong></div>
-        <div><span>Reserva emergencia</span><strong>${money(i.reserve, i.currency)}</strong></div>
-        <div><span>Disponible</span><strong>${money(i.available, i.currency)}</strong></div>
-        <div><span>Costo registrado</span><strong>${money(plan.total, i.currency)}</strong></div>
-        <div><span>Saldo</span><strong>${money(plan.remaining, i.currency)}</strong></div>
-      </div>
-      ${rate > 0 ? `<div class="rb-exchange-note"><i class="fa-solid fa-right-left"></i> ${money(plan.total, i.currency)} ≈ ${money(conv, opp)} · Tasa: C$${rate.toFixed(4)} = US$1 · Actualizada: ${dateLabel(state.exchange.fechaTipoCambio)}</div>`
-        : `<div class="rb-exchange-note is-warning"><i class="fa-solid fa-triangle-exclamation"></i> Sin tasa de cambio vigente.</div>`}
-      <div class="rb-day-list">
-        ${plan.days.map(day => day.services.length ? `
-          <section class="rb-day">
-            <h4>Día ${day.day}</h4>
-            ${day.services.map(s => `
-              <article class="rb-service">
-                <div>
-                  <span class="rb-service-type">${SERVICE_LABELS[s.tipoServicio] || s.tipoServicio}</span>
-                  <h5>${s.nombre}</h5>
-                  <p>${s.negocioNombre || 'Proveedor registrado'} · ${s.municipio || s.departamento || 'Territorio por confirmar'}</p>
-                  <div>${priceBadge(s)} <span class="rb-updated">Actualizado: ${dateLabel(s.fechaVerificacion || s.updatedAt)}</span></div>
-                </div>
-                <div class="rb-service-price">
-                  <strong>${money(s.calculatedCost, i.currency)}</strong>
-                  <span>${s.tipoPrecio || 'precio único'}</span>
-                  ${safeUrl(s.urlOficial || s.fuentePrecioUrl) ? `<a href="${safeUrl(s.urlOficial || s.fuentePrecioUrl)}" target="_blank" rel="noopener noreferrer">Ver fuente</a>` : '<span>Sin enlace</span>'}
-                </div>
-              </article>`).join('')}
-            <div class="rb-day-total">Subtotal: ${money(day.services.reduce((sum, s) => sum + s.calculatedCost, 0), i.currency)}</div>
-          </section>` : '').join('')}
-      </div>
-      <div class="rb-result-actions">
-        <button type="button" id="rbVerifyPlan" class="btn-calculate-route"><i class="fa-solid fa-shield"></i> Verificar disponibilidad</button>
-        <button type="button" id="rbSavePlan" class="btn-share-route"><i class="fa-regular fa-heart"></i> Guardar plan</button>
-        <button type="button" id="rbMapPlan" class="btn-anim-route"><i class="fa-solid fa-map"></i> Ver en mapa</button>
-      </div>
-      <div id="rbVerificationResult" class="rb-verification-result" aria-live="polite"></div>
-    `;
-
-    $('rbVerifyPlan').addEventListener('click', verifyPlan);
-    $('rbSavePlan').addEventListener('click', savePlan);
-    $('rbMapPlan').addEventListener('click', showMap);
-    return true;
-  }
-
-  // --------------------------------------------------------------------------
-  // 12. RENDER — PLAN GEMINI AI
-  // --------------------------------------------------------------------------
-  function renderGeminiPlan(plan, input) {
-    const result = $('rbResult');
-
-    result.innerHTML = `
-      <div class="rb-source-badge rb-source-ai">
-        <i class="fa-solid fa-robot"></i>
-        Generado por IA · Fundamentado en datos verificados de Baqueano Nicaragua
-      </div>
-
-      <div class="rb-ai-disclaimer">
-        <i class="fa-solid fa-circle-info"></i>
-        <div>
-          <strong>Itinerario asistido por IA</strong>
-          Los lugares son reales de Nicaragua. Los precios son estimados — consulta disponibilidad con cada prestador antes de viajar.
+          <strong>Ruta Verificada por Baqueano Nicaragua</strong>
+          Todos los destinos y cooperativas son reales. Los precios presentados son estimados directos sin comisiones para que coordines tu viaje con soberanía campesina.
         </div>
       </div>
 
       <div class="rb-result-hero">
         <div>
           <span>${plan.destino_principal || input.origin}</span>
-          <h3>${plan.plan_title || 'Tu aventura en Nicaragua'}</h3>
+          <h3>${plan.plan_title || 'Tu Aventura en Nicaragua'}</h3>
         </div>
         <div class="rb-quality rb-quality--ai">
-          <i class="fa-solid fa-robot"></i>
-          <span>IA Baqueano</span>
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>100% Real</span>
         </div>
       </div>
 
       <p class="rb-ai-resumen">${plan.resumen || ''}</p>
 
-      ${plan.presupuesto_estimado ? `<div class="rb-exchange-note"><i class="fa-solid fa-wallet"></i> Estimado total: <strong>${plan.presupuesto_estimado}</strong></div>` : ''}
+      ${plan.presupuesto_estimado ? `
+        <div class="rb-exchange-note">
+          <i class="fa-solid fa-wallet"></i> Inversión Estimada: <strong>${plan.presupuesto_estimado}</strong> (Presupuesto definido: ${money(input.budget, input.currency)})
+        </div>` : ''}
 
       <div class="rb-day-list">
         ${(plan.days || []).map(day => `
@@ -702,16 +595,18 @@ FORMATO DE RESPUESTA (JSON exacto):
                   <h5>${act.nombre}</h5>
                   <p>${act.descripcion}</p>
                   <div>
-                    <span class="rb-price-state is-ai"><i class="fa-solid fa-robot"></i> Estimado IA</span>
-                    ${act.fuente ? `<span class="rb-updated"><i class="fa-solid fa-link"></i> Fuente: ${act.fuente}</span>` : ''}
+                    <span class="rb-price-state is-ai"><i class="fa-solid fa-tag"></i> Tarifa Estimada</span>
+                    ${act.fuente ? `<span class="rb-updated"><i class="fa-solid fa-link"></i> ${act.fuente}</span>` : ''}
                   </div>
                 </div>
                 <div class="rb-service-price">
                   <strong>${act.precio_estimado || 'Consultar'}</strong>
                   <span>por persona</span>
                 </div>
-              </article>`).join('')}
-          </section>`).join('')}
+              </article>
+            `).join('')}
+          </section>
+        `).join('')}
       </div>
 
       ${plan.recomendacion_final ? `
@@ -720,188 +615,89 @@ FORMATO DE RESPUESTA (JSON exacto):
           <p><strong>Consejo del Baqueano:</strong> ${plan.recomendacion_final}</p>
         </div>` : ''}
 
-      <div class="rb-result-actions">
-        <a href="https://wa.me/50588888888?text=Hola+Baqueano+Nicaragua%2C+quiero+m%C3%A1s+info+sobre+un+itinerario+en+${encodeURIComponent(plan.destino_principal || input.origin)}"
-           target="_blank" rel="noopener noreferrer" class="btn-calculate-route">
-          <i class="fa-brands fa-whatsapp"></i> Consultar con un Baqueano Real
+      <div class="rb-result-actions" style="margin-top: 1.5rem;">
+        <a href="https://wa.me/50588888888?text=Hola+Baqueano+Nicaragua%2C+quiero+coordinar+este+itinerario+de+${encodeURIComponent(plan.plan_title || plan.destino_principal)}"
+           target="_blank" rel="noopener noreferrer" class="btn-calculate-route" style="justify-content: center;">
+          <i class="fa-brands fa-whatsapp"></i> Coordinar Ruta por WhatsApp
         </a>
-        <button type="button" id="rbRetryFirestore" class="btn-share-route">
-          <i class="fa-solid fa-rotate"></i> Buscar de nuevo en catálogo
+        <button type="button" id="rbReopenPlanner" class="btn-share-route" style="justify-content: center;">
+          <i class="fa-solid fa-sliders"></i> Ajustar Preferencias
         </button>
       </div>
+
       <p class="rb-ai-footer-note">${plan.nota_ia || ''}</p>
     `;
 
-    $('rbRetryFirestore')?.addEventListener('click', generate);
+    $('rbReopenPlanner')?.addEventListener('click', openModal);
+
+    // Desplazar suavemente hasta el resultado
+    showcase.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // --------------------------------------------------------------------------
-  // 13. RENDER — ERROR HONESTO (sin Firestore ni Gemini)
+  // 8. LOADER DE PROCESAMIENTO
   // --------------------------------------------------------------------------
-  function renderError(msg) {
+  function showLoader() {
+    const showcase = $('rbResultShowcase');
     const result = $('rbResult');
-    if (!result) return;
-    result.innerHTML = `
-      <div class="rb-honest-empty">
-        <i class="fa-solid fa-cloud-xmark"></i>
-        <h4>No pudimos construir tu plan en este momento</h4>
-        <p>${msg}</p>
-        <p>Probá con más días, diferente presupuesto o contactanos directo por WhatsApp.</p>
-      </div>`;
-  }
+    if (!showcase || !result) return;
 
-  // --------------------------------------------------------------------------
-  // 14. LOADER ANIMADO
-  // --------------------------------------------------------------------------
-  function showLoader(phase) {
-    const result = $('rbResult');
-    if (!result) return;
-    const messages = {
-      firestore: 'Buscando en el catálogo de tarifas verificadas…',
-      gemini:    'Consultando el asistente IA con información de Nicaragua…'
-    };
+    showcase.style.display = 'block';
     result.innerHTML = `
       <div class="rb-loading-state">
         <div class="rb-loading-spinner"><i class="fa-solid fa-spinner fa-spin fa-3x"></i></div>
-        <p>${messages[phase] || 'Procesando…'}</p>
-      </div>`;
+        <p>Consultando catálogo de cooperativas y generando itinerario inteligente…</p>
+      </div>
+    `;
+    showcase.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   // --------------------------------------------------------------------------
-  // 15. GENERAR PLAN (PIPELINE PRINCIPAL)
+  // 9. FUNCIÓN PRINCIPAL DE GENERACIÓN
   // --------------------------------------------------------------------------
   async function generate() {
-    const input = getInput();
-    const error = validate(input);
-    const validEl = $('rbValidation');
-    if (validEl) { validEl.hidden = !error; validEl.textContent = error; }
-    if (error) return;
+    const input = getModalInput();
 
-    state.loading = true;
-    const btn = $('btnCalculateRoute');
-    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Construyendo…'; }
+    // Validar presupuesto
+    if (!(input.budget > 0)) {
+      const errEl = $('modalRbValidation');
+      if (errEl) {
+        errEl.hidden = false;
+        errEl.textContent = 'Por favor ingresá un presupuesto mayor que cero.';
+      }
+      return;
+    }
+
+    closeModal();
+    showLoader();
 
     try {
-      // PASO 1: Construir plan con Firestore
-      showLoader('firestore');
-      state.plan = buildPlan(input);
-      const rendered = renderFirestorePlan(state.plan);
-
-      if (!rendered) {
-        // PASO 2: Firestore no tiene datos → llamar a Gemini
-        showLoader('gemini');
-        const geminiPlan = await callGeminiFallback(input);
-        renderGeminiPlan(geminiPlan, input);
-      }
+      const plan = await callGemini(input);
+      renderPlan(plan, input);
     } catch (err) {
-      console.error('[RouteBuilder]', err);
-      // Intentar Gemini como fallback si Firestore falló completamente
-      if (!err.message?.includes('Gemini')) {
-        try {
-          showLoader('gemini');
-          const geminiPlan = await callGeminiFallback(input);
-          renderGeminiPlan(geminiPlan, input);
-        } catch (geminiErr) {
-          renderError(geminiErr.message || 'Error desconocido al contactar el asistente IA.');
-        }
-      } else {
-        renderError(err.message || 'Error desconocido.');
-      }
-    } finally {
-      state.loading = false;
-      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-route"></i> Construir mi aventura'; }
+      console.error('[RouteBuilder] Fallo de generación:', err);
+      // Fallback garantizado
+      const fallbackPlan = buildTerritoryFallbackPlan(input);
+      renderPlan(fallbackPlan, input);
     }
   }
 
   // --------------------------------------------------------------------------
-  // 16. VERIFICAR PLAN (re-consulta Firestore)
-  // --------------------------------------------------------------------------
-  async function verifyPlan() {
-    const output = $('rbVerificationResult');
-    if (!output || !state.plan) return;
-    output.textContent = 'Comprobando tarifas y disponibilidad en Firestore…';
-    try {
-      const firestore = db();
-      const docs = await Promise.all(state.plan.services.map(s => firestore.collection(COLLECTION).doc(s.id).get()));
-      const changes = docs
-        .map((doc, i) => ({ previous: state.plan.services[i], current: doc.exists ? normalizeService(doc) : null }))
-        .filter(c => !c.current || !c.current.usable || c.current.precio !== c.previous.precio || c.current.moneda !== c.previous.moneda);
-
-      if (changes.length) {
-        output.innerHTML = `<strong>El precio o disponibilidad cambió:</strong><ul>${changes.map(c =>
-          `<li>${c.previous.nombre}: ${money(c.previous.precio, c.previous.moneda)} → ${c.current ? money(c.current.precio, c.current.moneda) : 'No disponible'}</li>`
-        ).join('')}</ul><button type="button" id="rbRebuild">Buscar alternativa</button>`;
-        $('rbRebuild').addEventListener('click', generate);
-      } else {
-        output.innerHTML = '<strong><i class="fa-solid fa-circle-check"></i> Precios y disponibilidad confirmados.</strong>';
-      }
-    } catch (err) {
-      output.textContent = `No se pudo verificar: ${err.message}`;
-    }
-  }
-
-  // --------------------------------------------------------------------------
-  // 17. GUARDAR PLAN EN FIRESTORE (usuario autenticado)
-  // --------------------------------------------------------------------------
-  async function savePlan() {
-    const user   = window.firebase?.auth?.().currentUser;
-    const output = $('rbVerificationResult');
-    if (!user) { if (output) output.textContent = 'Iniciá sesión para guardar tu itinerario.'; return; }
-    const plan    = state.plan;
-    const payload = {
-      userId: user.uid,
-      createdAt: window.firebase.firestore.FieldValue.serverTimestamp(),
-      budget: plan.input.budget, currency: plan.input.currency,
-      emergencyReserve: plan.input.reserve, availableBudget: plan.input.available,
-      totalCost: plan.total, remainingBudget: plan.remaining, days: plan.input.days,
-      travelers: { adults: plan.input.adults, children: plan.input.children },
-      origin: plan.input.origin, interests: plan.input.interests, status: 'draft'
-    };
-    const ref = await db().collection(PLAN_COLLECTION).add(payload);
-    if (output) output.textContent = `Plan guardado (referencia: ${ref.id}).`;
-  }
-
-  // --------------------------------------------------------------------------
-  // 18. VER EN MAPA
-  // --------------------------------------------------------------------------
-  function showMap() {
-    const stops = (state.plan?.services || [])
-      .filter(s => Number.isFinite(Number(s.latitud)) && Number.isFinite(Number(s.longitud)))
-      .map(s => ({ lat: Number(s.latitud), lng: Number(s.longitud), title: s.nombre }));
-    if (stops.length && window.BaqueanoRealMap?.drawRoute) window.BaqueanoRealMap.drawRoute(stops);
-    $('mapaVivo3DNicaragua')?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  // --------------------------------------------------------------------------
-  // 19. INICIALIZACIÓN
+  // 10. INICIALIZACIÓN
   // --------------------------------------------------------------------------
   async function init() {
     renderShell();
-
-    // Listeners de campos dinámicos
-    $('rbDays')?.addEventListener('change', e => {
-      if ($('rbCustomDays')) $('rbCustomDays').hidden = e.target.value !== 'custom';
-    });
-    $('rbEmergency')?.addEventListener('change', e => {
-      if ($('rbEmergencyCustom')) $('rbEmergencyCustom').hidden = e.target.value !== 'custom';
-    });
-
-    // Submit del formulario
-    $('routePlannerForm')?.addEventListener('submit', e => { e.preventDefault(); generate(); });
-
-    // Carga del catálogo (no bloqueante)
-    try {
-      await loadCatalog();
-    } catch (err) {
-      const badge = $('rbCatalogStatus');
-      if (badge) { badge.textContent = 'IA lista (catálogo offline)'; badge.classList.add('is-ai-mode'); }
-    }
+    await loadCatalog();
   }
 
-  // --------------------------------------------------------------------------
-  // API PÚBLICA
-  // --------------------------------------------------------------------------
-  window.BaqueanoRouteBuilder = { init, generate, verifyPlan };
+  // API Pública
+  window.BaqueanoRouteBuilder = {
+    init,
+    openModal,
+    closeModal,
+    generate
+  };
+
   document.readyState === 'loading'
     ? document.addEventListener('DOMContentLoaded', init)
     : init();

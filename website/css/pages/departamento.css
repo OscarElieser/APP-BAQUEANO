@@ -518,3 +518,1740 @@ button.territory-pill-card span {
   transform: translateY(6px);
 }
 
+/* ============================================================================
+   🧭 SUITE DE ALTA GAMA: EXPERIENCIA TERRITORIAL MADRIZ (departamento.css)
+   🎯 Propósito: Estilos para la experiencia integral de Madriz (29 secciones)
+   ⚙️ Arquitectura: Glassmorphism (#165D6F, #F65E01, #F4E6C1, #0F172A),
+      animaciones 60fps, grid responsivo para 9 municipios y modo científico.
+   📦 Componentes: .manifesto-card-alta-gama, .madriz-photo-grid, .nine-mun-grid, etc.
+   ============================================================================ */
+
+/* ============================================================================
+   🎯 POR QUÉ: Madriz necesita una lectura territorial visual sin presentar
+      coordenadas ni valoraciones que no existan en el catálogo documentado.
+   ⚙️ CÓMO: lienzo MapLibre oscuro, controles accesibles y carrusel superpuesto
+      alimentado por Firestore con adaptación fluida a móvil y escritorio.
+   📦 QUÉ: mapa interactivo, estados de carga/vacío/error, marcadores y fichas.
+   ============================================================================ */
+.madriz-map-section {
+  padding: 1rem 0 3rem;
+}
+
+.madriz-map-heading {
+  max-width: 820px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.madriz-map-heading .sub-label-tag {
+  display: inline-flex;
+  margin-inline: auto;
+}
+
+.madriz-map-heading h2 {
+  margin: 0.8rem 0 0.65rem;
+  color: #F4E6C1;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.madriz-map-heading p {
+  margin: 0 auto;
+  color: #A8B4C5;
+  line-height: 1.65;
+}
+
+.baqueano-map-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0F172A;
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 30px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(22, 93, 111, 0.18) inset;
+}
+
+.baqueano-map-wrapper:fullscreen,
+.baqueano-map-wrapper.is-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+#madrizMap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.madriz-map-topbar {
+  position: absolute;
+  z-index: 5;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  pointer-events: none;
+}
+
+.madriz-map-live,
+.madriz-map-expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 42px;
+  padding: 0.65rem 0.95rem;
+  color: #FFFFFF;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  pointer-events: auto;
+}
+
+.madriz-map-live i {
+  color: #F65E01;
+}
+
+.madriz-map-expand {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.madriz-map-expand:hover,
+.madriz-map-expand:focus-visible {
+  background: #F65E01;
+  border-color: #F65E01;
+  outline: none;
+}
+
+.madriz-map-status {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 76px;
+  max-width: calc(100% - 32px);
+  padding: 0.55rem 0.85rem;
+  transform: translateX(-50%);
+  color: #D7E0EA;
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(22, 93, 111, 0.7);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.madriz-map-status.is-error {
+  color: #FCA5A5;
+  border-color: rgba(239, 68, 68, 0.55);
+}
+
+.madriz-map-status.is-ready {
+  color: #D1FAE5;
+  border-color: rgba(16, 185, 129, 0.55);
+}
+
+.map-places-carousel {
+  position: absolute;
+  z-index: 5;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 5px 5px 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #F65E01 rgba(15, 23, 42, 0.65);
+}
+
+.map-place-card {
+  flex: 0 0 350px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 94px;
+  padding: 12px;
+  color: #FFFFFF;
+  text-align: left;
+  background: rgba(20, 25, 28, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 27px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.map-place-card:hover,
+.map-place-card:focus-visible,
+.map-place-card.is-active {
+  transform: translateY(-4px);
+  background: rgba(22, 93, 111, 0.94);
+  border-color: rgba(244, 230, 193, 0.5);
+  outline: none;
+}
+
+.map-place-card img {
+  width: 68px;
+  height: 68px;
+  flex: 0 0 68px;
+  object-fit: cover;
+  background: #0F172A;
+  border-radius: 18px;
+}
+
+.map-place-copy {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.map-place-copy strong {
+  overflow: hidden;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.map-place-copy span {
+  color: #D7E0EA;
+  font-size: 0.82rem;
+  text-transform: capitalize;
+}
+
+.baqueano-map-marker,
+.baqueano-rating-marker {
+  display: grid;
+  place-items: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  color: #FFFFFF;
+  background: #165D6F;
+  border: 2px solid rgba(244, 230, 193, 0.65);
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.baqueano-rating-marker {
+  color: #0F172A;
+  background: #F4E6C1;
+}
+
+.baqueano-map-marker:hover,
+.baqueano-map-marker:focus-visible,
+.baqueano-rating-marker:hover,
+.baqueano-rating-marker:focus-visible {
+  transform: scale(1.08);
+  border-color: #F65E01;
+  outline: none;
+}
+
+.madriz-map-popup {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 0.85rem;
+  width: min(300px, 72vw);
+  color: #0F172A;
+}
+
+.madriz-map-popup img {
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.madriz-map-popup h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+
+.madriz-map-popup p {
+  margin: 0;
+  color: #475569;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.madriz-map-verified {
+  display: inline-block;
+  margin-top: 0.45rem;
+  color: #165D6F;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .baqueano-map-wrapper {
+    min-height: 500px;
+    border-radius: 22px;
+  }
+
+  .madriz-map-live {
+    max-width: 58%;
+    font-size: 0.65rem;
+  }
+
+  .madriz-map-expand {
+    font-size: 0;
+  }
+
+  .madriz-map-expand i {
+    font-size: 0.85rem;
+  }
+
+  .map-place-card {
+    flex-basis: min(290px, 82vw);
+  }
+}
+
+/* 1. Manifiesto Inicial */
+.madriz-manifesto-strip {
+  padding: 1.5rem 0 2rem;
+}
+.manifesto-card-alta-gama {
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.manifesto-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+.m-badge-primary, .m-badge-secondary, .m-badge-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+}
+.m-badge-primary {
+  background: rgba(22, 93, 111, 0.6);
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  color: #2DD4BF;
+}
+.m-badge-secondary {
+  background: rgba(246, 94, 1, 0.2);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  color: var(--arena-pinolera, #F4E6C1);
+}
+.m-badge-accent {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10B981;
+}
+.manifesto-headline {
+  font-size: 2.2rem;
+  font-family: var(--font-display, sans-serif);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+.manifesto-copy {
+  font-size: 1.05rem;
+  color: #E2E8F0;
+  line-height: 1.7;
+  max-width: 960px;
+  margin: 0 0 1.8rem 0;
+}
+.manifesto-action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* 2. Galería Fotográfica del Cañón en Alta Fidelidad */
+.madriz-gallery-strip {
+  padding: 1rem 0 2.5rem;
+}
+.gallery-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.2rem;
+}
+.sub-label-tag {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.75rem;
+  color: var(--terracotta, #F65E01);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+.section-title-clean {
+  font-size: 1.6rem;
+  font-family: var(--font-display, sans-serif);
+  color: #FFFFFF;
+  margin: 0;
+}
+.tag-verified-count {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+}
+.madriz-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.photo-card-showcase {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 280px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  background: #0F172A;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.photo-card-showcase:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(246, 94, 1, 0.3);
+  border-color: rgba(246, 94, 1, 0.5);
+}
+.photo-card-showcase img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.photo-card-showcase:hover img {
+  transform: scale(1.06);
+}
+.photo-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.3) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.3rem;
+}
+.photo-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(22, 93, 111, 0.85);
+  color: var(--arena-pinolera, #F4E6C1);
+  font-family: var(--font-tech, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  margin-bottom: 0.4rem;
+}
+.photo-card-overlay h4 {
+  font-size: 1.15rem;
+  color: #FFFFFF;
+  margin: 0 0 0.2rem 0;
+}
+.photo-card-overlay p {
+  font-size: 0.82rem;
+  color: #CBD5E1;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 3. Secciones Específicas */
+.card-subtitle {
+  font-size: 0.84rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  font-family: var(--font-tech, monospace);
+  font-weight: 600;
+  display: block;
+}
+.geopark-overview-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.baqueano-highlight-quote {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(22, 93, 111, 0.25);
+  border-left: 4px solid var(--terracotta, #F65E01);
+  padding: 1.2rem 1.4rem;
+  border-radius: 0 16px 16px 0;
+  margin-top: 1.5rem;
+}
+.baqueano-highlight-quote i {
+  color: #10B981;
+  font-size: 1.4rem;
+  margin-top: 0.2rem;
+}
+.baqueano-highlight-quote h5 {
+  font-size: 0.95rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  margin: 0 0 0.3rem 0;
+}
+.baqueano-highlight-quote p {
+  font-size: 0.88rem;
+  color: #E2E8F0;
+  line-height: 1.5;
+  margin: 0;
+}
+.geopark-stats-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.stat-box-alta-gama {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.2rem;
+  text-align: center;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.stat-box-alta-gama:hover {
+  transform: translateY(-2px);
+  border-color: var(--terracotta, #F65E01);
+}
+.stat-number {
+  display: block;
+  font-size: 1.7rem;
+  font-family: var(--font-display, sans-serif);
+  font-weight: 900;
+  color: #2DD4BF;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.stat-desc {
+  display: block;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  margin-top: 0.2rem;
+}
+
+/* 4. Línea de Tiempo Territorial */
+.timeline-madriz-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+.t-step {
+  flex: 1;
+  min-width: 170px;
+  background: rgba(19, 36, 56, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem;
+  position: relative;
+}
+.t-step.active {
+  background: rgba(22, 93, 111, 0.4);
+  border-color: #2DD4BF;
+}
+.t-pill {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--terracotta, #F65E01);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.t-step h5 {
+  font-size: 0.92rem;
+  color: #FFFFFF;
+  margin: 0 0 0.25rem 0;
+}
+.t-step p {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  line-height: 1.4;
+  margin: 0;
+}
+.t-arrow {
+  color: var(--terracotta, #F65E01);
+  font-size: 0.9rem;
+}
+
+/* 5. Modo Explorador Científico */
+.scientific-mode-card {
+  border-color: rgba(45, 212, 191, 0.3);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(22, 93, 111, 0.25) 100%);
+}
+.geo-tabs-bar {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  margin: 1.5rem 0 1.2rem;
+  padding-bottom: 0.3rem;
+}
+.geo-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(19, 36, 56, 0.8);
+  color: #CBD5E1;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.geo-tab-btn:hover {
+  background: rgba(22, 93, 111, 0.4);
+  color: #FFFFFF;
+  border-color: #2DD4BF;
+}
+.geo-tab-btn.active {
+  background: #165D6F;
+  color: #FFFFFF;
+  border-color: #2DD4BF;
+  box-shadow: 0 4px 14px rgba(45, 212, 191, 0.25);
+}
+.geo-pane {
+  display: none;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.8rem;
+  animation: fadeInPane 0.3s ease;
+}
+.geo-pane.active {
+  display: block;
+}
+@keyframes fadeInPane {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.geo-pane-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 1.8rem;
+  align-items: center;
+}
+.geo-pane-grid h4 {
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  margin: 0 0 0.6rem 0;
+}
+.geo-pane-grid p {
+  font-size: 0.92rem;
+  color: #CBD5E1;
+  line-height: 1.65;
+  margin: 0 0 0.8rem 0;
+}
+.geo-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 0;
+}
+.geo-bullet-list li {
+  font-size: 0.85rem;
+  color: #E2E8F0;
+  margin-bottom: 0.4rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+.geo-bullet-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #2DD4BF;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.geo-side-box {
+  background: rgba(19, 36, 56, 0.8);
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  border-radius: 14px;
+  padding: 1.3rem;
+}
+.geo-tip-title {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #2DD4BF;
+  margin-bottom: 0.4rem;
+}
+.time-scale-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+.time-scale-item {
+  background: rgba(22, 93, 111, 0.2);
+  border-left: 3px solid #2DD4BF;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0 8px 8px 0;
+}
+.time-scale-item span {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--arena-pinolera, #F4E6C1);
+}
+.time-scale-item p {
+  font-size: 0.8rem;
+  color: #CBD5E1;
+  margin: 0;
+}
+
+/* 6. Cañón Features */
+.canon-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+.canon-feat-item {
+  background: rgba(19, 36, 56, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.canon-feat-item i {
+  color: var(--terracotta, #F65E01);
+  font-size: 1.3rem;
+  margin-top: 0.15rem;
+}
+.canon-feat-item h5 {
+  font-size: 0.92rem;
+  color: #FFFFFF;
+  margin: 0 0 0.25rem 0;
+}
+.canon-feat-item p {
+  font-size: 0.8rem;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* 7. Grillas de Dos y Tres Tarjetas */
+.grid-two-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.grid-three-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.inner-card {
+  margin-bottom: 0 !important;
+  height: 100%;
+}
+.trail-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+.meta-pill {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.76rem;
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(22, 93, 111, 0.5);
+  color: var(--arena-pinolera, #F4E6C1);
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+}
+.price-policy-box {
+  background: rgba(19, 36, 56, 0.75);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin-top: 1rem;
+}
+.price-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.badge-status-published {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #F59E0B;
+}
+.source-tag {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+.price-policy-desc {
+  font-size: 0.84rem;
+  color: #CBD5E1;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 8. Stepper Ruta del Café */
+.coffee-route-stepper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.c-step {
+  background: rgba(19, 36, 56, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.1rem;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.c-step:hover {
+  transform: translateY(-3px);
+  border-color: var(--terracotta, #F65E01);
+}
+.c-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  color: var(--terracotta, #F65E01);
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+.c-step h5 {
+  font-size: 0.88rem;
+  color: #FFFFFF;
+  margin: 0 0 0.3rem 0;
+}
+.c-step p {
+  font-size: 0.76rem;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 9. Tabla Matriz de Gastronomía Ancestral */
+.sub-table-title {
+  font-size: 1.15rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  margin: 1.8rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.matrix-table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.madriz-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+  background: rgba(15, 23, 42, 0.8);
+}
+.madriz-matrix-table th {
+  background: rgba(22, 93, 111, 0.4);
+  color: #FFFFFF;
+  padding: 1rem;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.madriz-matrix-table td {
+  padding: 1rem;
+  color: #CBD5E1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.madriz-matrix-table tr:hover td {
+  background: rgba(246, 94, 1, 0.06);
+}
+.badge-location {
+  display: inline-block;
+  background: rgba(22, 93, 111, 0.3);
+  color: #2DD4BF;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.76rem;
+}
+
+/* 10. Artesanos Cards */
+.artisans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 1.4rem;
+}
+.artisan-card {
+  background: rgba(19, 36, 56, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.artisan-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--terracotta, #F65E01);
+}
+.artisan-tag {
+  align-self: flex-start;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.72rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  background: rgba(246, 94, 1, 0.18);
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  margin-bottom: 0.6rem;
+}
+.artisan-card h4 {
+  font-size: 1.1rem;
+  color: #FFFFFF;
+  margin: 0 0 0.5rem 0;
+}
+.artisan-card p {
+  font-size: 0.84rem;
+  color: #CBD5E1;
+  margin: 0 0 0.4rem 0;
+  line-height: 1.45;
+}
+.artisan-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.verified-badge {
+  font-size: 0.75rem;
+  color: #10B981;
+  font-weight: 700;
+}
+
+/* 11. Música Segoviana */
+.music-madriz-player-box {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.8rem;
+  align-items: center;
+  background: rgba(19, 36, 56, 0.6);
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  border-radius: 18px;
+  padding: 1.8rem;
+  margin-top: 1.2rem;
+}
+.sound-tag {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--terracotta, #F65E01);
+  margin-bottom: 0.4rem;
+  display: inline-block;
+}
+.music-meta-left h4 {
+  font-size: 1.3rem;
+  color: #FFFFFF;
+  margin: 0 0 0.4rem 0;
+}
+.music-meta-left p {
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  margin: 0 0 1rem 0;
+}
+.player-action-strip {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.artists-badge-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.art-pill {
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.82rem;
+  color: #FFFFFF;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.art-pill i {
+  color: var(--terracotta, #F65E01);
+}
+
+/* 12, 13 & 14 Items */
+.event-mini-badge {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10B981;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.patrimony-check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0;
+}
+.patrimony-check-list li {
+  font-size: 0.84rem;
+  color: #E2E8F0;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.patrimony-check-list li i {
+  color: #3B82F6;
+  font-size: 0.8rem;
+}
+.seal-patrimonio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.75rem;
+  color: #3B82F6;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  margin-top: 0.5rem;
+}
+.scientific-rigor-box {
+  background: rgba(19, 36, 56, 0.6);
+  border-left: 3px solid #3B82F6;
+  padding: 0.8rem;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  color: #CBD5E1;
+}
+.scientific-rigor-box i {
+  color: #3B82F6;
+  margin-top: 0.15rem;
+}
+
+/* 15. Rejilla de los Nueve Municipios */
+.nine-mun-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+}
+.mun-card {
+  background: rgba(19, 36, 56, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  backdrop-filter: blur(10px);
+}
+.mun-card:hover {
+  transform: translateY(-4px);
+  border-color: #2DD4BF;
+  box-shadow: 0 10px 28px rgba(22, 93, 111, 0.35);
+  background: rgba(22, 93, 111, 0.3);
+}
+.mun-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+.mun-number {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--terracotta, #F65E01);
+}
+.mun-badge-pill {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.72rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  background: rgba(22, 93, 111, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+.mun-name {
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  margin: 0 0 0.3rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mun-name i {
+  color: var(--terracotta, #F65E01);
+  font-size: 1.05rem;
+}
+.mun-title {
+  font-size: 0.85rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  font-weight: 600;
+  margin: 0 0 0.6rem 0;
+}
+.mun-short-desc {
+  font-size: 0.82rem;
+  color: #CBD5E1;
+  line-height: 1.45;
+  margin: 0 0 0.8rem 0;
+}
+.mun-vivi-tag {
+  background: rgba(15, 23, 42, 0.6);
+  border-left: 2px solid var(--terracotta, #F65E01);
+  padding: 0.45rem 0.7rem;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.76rem;
+  color: #E2E8F0;
+  margin-bottom: 1rem;
+}
+.mun-vivi-tag strong {
+  color: var(--terracotta, #F65E01);
+}
+.btn-open-mun {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+.mun-card:hover .btn-open-mun {
+  background: var(--terracotta, #F65E01);
+  border-color: var(--terracotta, #F65E01);
+  box-shadow: 0 4px 12px rgba(246, 94, 1, 0.35);
+}
+
+/* Modal Detalle de Municipio */
+.mun-modal-dialog {
+  background: #0F172A;
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  border-radius: 24px;
+  max-width: 850px;
+  width: 90%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 2.2rem;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+.mun-modal-header {
+  margin-bottom: 1.2rem;
+}
+.modal-badge-pill {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.75rem;
+  background: rgba(22, 93, 111, 0.6);
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  color: #2DD4BF;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+.modal-mun-title {
+  font-size: 2rem;
+  font-family: var(--font-display, sans-serif);
+  color: #FFFFFF;
+  margin: 0;
+}
+.modal-mun-subtitle {
+  font-size: 1rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  font-weight: 600;
+  margin: 0.2rem 0 0 0;
+}
+.mun-modal-content-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.8rem;
+  align-items: flex-start;
+}
+.mun-modal-desc {
+  font-size: 0.92rem;
+  color: #CBD5E1;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+.mun-modal-vivi-box {
+  background: rgba(19, 36, 56, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+.mun-modal-vivi-box h5 {
+  font-size: 0.88rem;
+  color: var(--terracotta, #F65E01);
+  margin: 0 0 0.5rem 0;
+}
+.mun-modal-vivi-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mun-modal-vivi-box li {
+  font-size: 0.82rem;
+  color: #E2E8F0;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mun-modal-vivi-box li i {
+  color: #10B981;
+  font-size: 0.75rem;
+}
+.mun-quick-stats {
+  font-size: 0.8rem;
+  color: #94A3B8;
+  line-height: 1.5;
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0.8rem;
+  border-radius: 10px;
+  margin-bottom: 1.2rem;
+}
+.mun-quick-stats div {
+  margin-bottom: 0.25rem;
+}
+.mun-quick-stats strong {
+  color: #FFFFFF;
+}
+.mun-modal-footer-cta {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.mun-modal-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.media-caption {
+  display: block;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-top: 0.4rem;
+  text-align: center;
+}
+
+/* 16. Vida Silvestre & Tradición Oral */
+.wildlife-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.wild-tag {
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  color: #2DD4BF;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.76rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.disclaimer-oral-tradition {
+  background: rgba(139, 92, 246, 0.15);
+  border-left: 3px solid #8B5CF6;
+  padding: 0.8rem;
+  border-radius: 0 10px 10px 0;
+}
+.oral-badge {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #A78BFA;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.disclaimer-oral-tradition p {
+  font-size: 0.78rem;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+/* 18. Conocé a su Gente */
+.people-grid-alta-gama {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+}
+.person-profile-card {
+  background: rgba(19, 36, 56, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.person-tag-pill {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.72rem;
+  color: var(--terracotta, #F65E01);
+  background: rgba(246, 94, 1, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  align-self: flex-start;
+  margin-bottom: 0.5rem;
+}
+.person-profile-card h4 {
+  font-size: 1.05rem;
+  color: #FFFFFF;
+  margin: 0 0 0.2rem 0;
+}
+.person-comunidad {
+  font-size: 0.76rem;
+  color: var(--arena-pinolera, #F4E6C1);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.person-desc {
+  font-size: 0.82rem;
+  color: #CBD5E1;
+  line-height: 1.45;
+  margin: 0 0 0.8rem 0;
+}
+.person-footer-badge {
+  font-size: 0.72rem;
+  color: #10B981;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* 19. 5 Rutas Experienciales */
+.experiencias-grid-baqueano {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.exp-route-box {
+  background: rgba(19, 36, 56, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.1rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.exp-route-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--terracotta, #F65E01);
+}
+.exp-step-badge {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--terracotta, #F65E01);
+  background: rgba(246, 94, 1, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+.exp-route-box h4 {
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  margin: 0.5rem 0 0.4rem 0;
+}
+.exp-route-box p {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 24. Decálogo */
+.decalogo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0 1.2rem;
+}
+.decalogo-list li {
+  font-size: 0.84rem;
+  color: #CBD5E1;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.decalogo-list li i {
+  color: #10B981;
+  font-size: 0.85rem;
+}
+.report-damage-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid var(--terracotta, #F65E01);
+  color: var(--terracotta, #F65E01);
+  font-family: var(--font-tech, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.report-damage-btn:hover {
+  background: var(--terracotta, #F65E01);
+  color: #FFFFFF;
+}
+
+/* 28 & 29. Cierre: ¿Ya conocés Madriz? */
+.madriz-closing-strip {
+  padding: 2.5rem 0 4rem;
+}
+.closing-card-alta-gama {
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.5) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(244, 230, 193, 0.3);
+  border-radius: 24px;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+.closing-pretitle {
+  font-family: var(--font-tech, monospace);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #2DD4BF;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.closing-title {
+  font-size: 2.4rem;
+  font-family: var(--font-display, sans-serif);
+  color: #FFFFFF;
+  margin: 0 0 0.8rem 0;
+}
+.closing-desc {
+  font-size: 1.05rem;
+  color: #CBD5E1;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+.closing-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.closing-action-btn {
+  background: rgba(19, 36, 56, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-family: var(--font-tech, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.closing-action-btn:hover {
+  background: var(--terracotta, #F65E01);
+  border-color: var(--terracotta, #F65E01);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(246, 94, 1, 0.35);
+}
+
+/* Lightbox Modal */
+.lightbox-dialog {
+  max-width: 900px;
+  width: 90%;
+  background: #0F172A;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.lightbox-dialog img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+  background: #000000;
+}
+.lightbox-caption {
+  padding: 1.2rem;
+  color: #E2E8F0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background: #0F172A;
+}
+
+/* Media Queries Responsivos */
+@media (max-width: 1100px) {
+  .nine-mun-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .madriz-photo-grid,
+  .artisans-grid,
+  .people-grid-alta-gama {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .experiencias-grid-baqueano {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .closing-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .coffee-route-stepper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .canon-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .manifesto-headline {
+    font-size: 1.6rem;
+  }
+  .geopark-overview-layout,
+  .geo-pane-grid,
+  .music-madriz-player-box,
+  .mun-modal-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .grid-two-cards,
+  .grid-three-cards {
+    grid-template-columns: 1fr;
+  }
+  .nine-mun-grid,
+  .madriz-photo-grid,
+  .artisans-grid,
+  .people-grid-alta-gama,
+  .coffee-route-stepper,
+  .canon-features-grid,
+  .experiencias-grid-baqueano {
+    grid-template-columns: 1fr;
+  }
+  .closing-actions-grid {
+    grid-template-columns: 1fr;
+  }
+  .manifesto-card-alta-gama,
+  .closing-card-alta-gama {
+    padding: 1.5rem;
+  }
+}
+
+/* ============================================================================
+   ?? GALERÍAS DE VIDEO Y CARRUSEL INFINITO
+   ============================================================================ */
+
+/* Carrusel Infinito (Marquee) */
+.infinite-gallery-section {
+  padding: 3rem 0 2rem;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.infinite-carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.infinite-track {
+  display: flex;
+  width: max-content;
+  animation: scrollInfinite 25s linear infinite;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+.infinite-track.is-paused {
+  animation-play-state: paused !important;
+}
+
+@keyframes scrollInfinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50%)); }
+}
+
+.infinite-item {
+  width: 320px;
+  height: 220px;
+  margin-right: 1.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.infinite-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.infinite-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Galería de video territorial */
+.madriz-video-gallery {
+  padding: 4rem 0 5rem;
+}
+
+.video-gallery-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.video-card-showcase {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.2rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.video-card-showcase:hover {
+  transform: translateY(-5px);
+  border-color: rgba(246, 94, 1, 0.5); /* Terracotta hover */
+}
+
+.video-card-showcase video {
+  width: 100%;
+  height: 240px;
+  border-radius: 14px;
+  outline: none;
+  background: #000;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  margin-bottom: 1rem;
+}
+
+.video-info h4 {
+  color: #FFFFFF;
+  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem 0;
+}
+
+.video-info p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}

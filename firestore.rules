@@ -140,6 +140,18 @@ service cloud.firestore {
       }
     }
 
+    // Cartografía territorial web: solo fichas y opiniones ya publicadas.
+    // El navegador nunca puede aprobar, editar ni fabricar ubicaciones o ratings.
+    match /tourismPlaces/{placeId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
     // El tipo de cambio es público, pero solo Ops Center puede actualizarlo.
     match /app_config/exchange_rate {
       allow read: if true;

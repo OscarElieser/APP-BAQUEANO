@@ -23,36 +23,170 @@ window.BAQUEANO_TERRITORIES = [
   {
     id: 'madriz',
     name: 'Madriz',
-    tagline: 'Tierra de Cañones Milenarios y Rosquillas Doradas',
-    shortDesc: 'Madriz es la puerta geológica del norte de Nicaragua. Destaca por el imponente Monumento Nacional Cañón de Somoto, sus comunidades artesanas de rosquillas de maíz y su clima fresco segoviano.',
-    history: 'Creado en 1936 en honor al presidente José Madriz, este territorio fue esculpido ancestralmente por las aguas sagradas del Río Coco (Wangki). En sus serranías habitaron comunidades indígenas chorotegas y es escenario de la memoria viva de la defensa soberana.',
+    tagline: 'Tierra de Cañones Milenarios, Rosquillas Doradas, Café y Montañas Segovianas',
+    shortDesc: 'No vengás solamente a conocer Madriz. Vení a comprenderlo. Una tierra de 9 municipios donde la geología milenaria del Geoparque Mundial UNESCO Río Coco, la tradición campesina del maíz, cafetales de altura, artesanía ancestral y el espíritu segoviano construyen una identidad única en Nicaragua.',
+    capital: 'Somoto',
+    culturalRegion: 'Las Segovias · Norte de Nicaragua',
+    municipalitiesCount: 9,
+    territoriesList: 'Somoto · Totogalpa · Telpaneca · San Juan del Río Coco · Yalagüina · Palacagüina · San Lucas · Las Sabanas · San José de Cusmapa',
+    identitySummary: 'Geología · Cultura indígena · Café · Maíz · Rosquillas · Artesanía · Música campesina · Bosques · Turismo rural · Aventura',
+    history: 'Constituido en 1936 en honor al expresidente José Madriz al separarse de Nueva Segovia. Su historia viva es milenaria: habitado por pueblos originarios Chorotegas y etnias norteñas, sus valles y cañones resguardan petroglifos prehispánicos, templos coloniales declarados Patrimonio Cultural de la Nación y la memoria de las luchas patrias en Las Segovias.',
+    geopark: {
+      name: 'Geoparque Mundial UNESCO Río Coco',
+      year: 2020,
+      areaHa: 95400,
+      significance: 'Primer Geoparque Mundial de la UNESCO en Centroamérica',
+      maxAltitude: 'Cerro Volcán de Somoto (~1,730 msnm)',
+      geositesCount: 12
+    },
+    municipalities: [
+      {
+        id: 'somoto',
+        name: 'Somoto',
+        badge: 'Cabecera Departamental',
+        title: 'Cañón, Rosquillas y Música Campesina',
+        desc: 'Cabecera departamental y puerta principal del Monumento Nacional Cañón de Somoto. Conectada por la Carretera Panamericana Norte, destaca por sus talleres rosquilleros tradicionales, las fiestas patronales de Santiago Apóstol y su centro histórico.',
+        vivi: 'Cañón de Somoto · Geología · Rosquillas en horno de leña · Música segoviana · Centro histórico · Fiestas tradicionales',
+        icon: 'fa-water',
+        lat: 13.4833,
+        lng: -86.5833
+      },
+      {
+        id: 'yalaguina',
+        name: 'Yalagüina',
+        badge: 'Tierra del Maíz',
+        title: 'Rosquillas Tradicionales y Bosque Seco',
+        desc: 'Comparte con Somoto la centenaria tradición rosquillera en hornos de barro. Alberga el Parque Natural Zonzapote, Cerro El Cobre, Cerro Quizuca y la legendaria Poza Bruja, con una vibrante tradición de polkas y mazurcas.',
+        vivi: 'Rosquillas recién horneadas · Senderos de montaña · Miradores · Música segoviana · Cocina del maíz',
+        icon: 'fa-bread-slice',
+        lat: 13.4833,
+        lng: -86.5000
+      },
+      {
+        id: 'totogalpa',
+        name: 'Totogalpa',
+        badge: 'Cultura Indígena',
+        title: 'Patrimonio Ancestral y Turismo Rural',
+        desc: 'Conserva profundas raíces indígenas y arqueología. La comunidad de San José de Palmira ofrece turismo rural comunitario con cabalgatas y senderos. Su templo parroquial es Patrimonio Cultural de la Nación.',
+        vivi: 'Comunidad indígena · Arqueología viva · Museo El Almendro · Artesanía · Convivencia comunitaria',
+        icon: 'fa-hands-holding-circle',
+        lat: 13.5667,
+        lng: -86.4833
+      },
+      {
+        id: 'san-lucas',
+        name: 'San Lucas',
+        badge: 'Artesanía en Barro',
+        title: 'Cerámica Ancestral y Memoria Viva',
+        desc: 'Hogar de las reconocidas Mujeres Artesanas de Loma Panda, quienes moldean barro con técnicas precolombinas. En sus valles se conservan geositios como La Remedona y rica música de cuerda campesina.',
+        vivi: 'Alfarería en barro · Cultura indígena · Geositio La Remedona · Finca rural · Convivencia campesina',
+        icon: 'fa-palette',
+        lat: 13.4167,
+        lng: -86.6000
+      },
+      {
+        id: 'las-sabanas',
+        name: 'Las Sabanas',
+        badge: 'Nebliselva & Laguna',
+        title: 'Laguna La Bruja, Café y Alturas Segovianas',
+        desc: 'Ubicado en la Reserva Tepesomoto-La Pataste con alturas superiores a los 1,700 msnm. En la comunidad El Pegador se ubica la mística Laguna La Bruja, con senderismo, avistamiento de aves y canopy.',
+        vivi: 'Laguna La Bruja · Bosque nuboso · Café de altura · Senderismo de montaña · Fotografía de paisaje',
+        icon: 'fa-tree',
+        lat: 13.3500,
+        lng: -86.6167
+      },
+      {
+        id: 'san-jose-de-cusmapa',
+        name: 'San José de Cusmapa',
+        badge: 'El Gran Balcón',
+        title: 'Miradores Hacia el Pacífico y Cestería en Pino',
+        desc: 'El municipio más encumbrado de Madriz. El Mirador El Balcón ofrece panorámicas espectaculares hacia la cadena volcánica del Pacífico. Célebre por sus artesanías tejidas en acícula de pino, La Mano del Diablo y Cueva de la Tuma.',
+        vivi: 'Mirador El Balcón · Cestería en acícula de pino · Bosque de pino · Historia indígena · Mazurcas con acordeón',
+        icon: 'fa-mountain-sun',
+        lat: 13.2833,
+        lng: -86.6500
+      },
+      {
+        id: 'san-juan-del-rio-coco',
+        name: 'San Juan del Río Coco',
+        badge: 'Territorio del Café',
+        title: 'Aroma de Café, Cascadas y Nebliselva',
+        desc: 'Corazón cafetalero de Madriz de clima fresco y brumoso. Fincas agroturísticas vivenciales donde se vive la ruta de la planta a la taza, Parque Natural El Majaste y cascadas rodeadas de orquídeas.',
+        vivi: 'Café de estricta altura · Fincas vivenciales · Cascadas cristalinas · Bosque nuboso · Cabalgatas',
+        icon: 'fa-mug-hot',
+        lat: 13.5500,
+        lng: -86.1667
+      },
+      {
+        id: 'telpaneca',
+        name: 'Telpaneca',
+        badge: 'Pueblo del Río Coco',
+        title: 'Río Sagrado, Memoria y Gastronomía Rural',
+        desc: 'Asentamiento prehispánico a orillas del majestuoso Río Coco (Wangki). Posee una amplia gastronomía ancestral del maíz, la Reserva Hídrica El Malacate, petroglifos en El Limón y un templo histórico dedicado a Cristo Rey.',
+        vivi: 'Ribera del Río Coco · Memoria indígena · Reserva El Malacate · Cocina campesina · Música rural',
+        icon: 'fa-water',
+        lat: 13.5333,
+        lng: -86.2833
+      },
+      {
+        id: 'palacaguina',
+        name: 'Palacagüina',
+        badge: 'Historia Segoviana',
+        title: 'Memoria Histórica, Cerro de la Iguana y Tradición',
+        desc: 'Inmortalizada en el cancionero nacional por la pieza "El Cristo de Palacagüina". Sus serranías resguardan la Piedra del Sapo, Cerro de la Iguana y monumentos al general Miguel Ángel Ortez.',
+        vivi: 'Historia patria · Paisaje segoviano · Caminatas rurales · Antigua iglesia María Reina · Cancionero popular',
+        icon: 'fa-landmark',
+        lat: 13.4500,
+        lng: -86.4000
+      }
+    ],
+    canonSomoto: {
+      distanceFromSomoto: '15 km',
+      protectedAreaHa: 170.3,
+      lengthKm: 3.0,
+      wallHeightMeters: '80 a 100 m (hasta 190 m en sectores de falla)',
+      confluence: 'Confluencia del Río Comalí (Honduras) y Río Tapacalí (Nicaragua), donde nace el Río Coco o Wangki',
+      nationalMonumentYear: 2006,
+      activities: ['Senderismo interpretativo', 'Navegación en bote de remos con baqueano', 'Flotación guiada en neumáticos', 'Fotografía geológica', 'Trail running de montaña']
+    },
     gastronomy: [
-      { name: 'Rosquillas de Somoto', desc: 'Horneadas en hornos de barro con maíz blanco, queso criollo y mantequilla de hacienda.' },
-      { name: 'Gorditas de Maíz', desc: 'Masa dulce tradicional rellena de cuajada fresca.' },
-      { name: 'Montucas Madricenses', desc: 'Tamal de maíz tierno condimentado con pollo y hierbabuena.' },
-      { name: 'Café de Estricta Altura', desc: 'Cultivado bajo sombra en las microcuencas de San Juan de Río Coco.' }
+      { name: 'Rosquillas de Somoto y Yalagüina', desc: 'Elaboradas artesanalmente con maíz blanco seleccionado, queso seco criollo, cuajada fresca y mantequilla de hacienda, doradas a leña en hornos de barro.' },
+      { name: 'Viejitas y Hojaldras', desc: 'Bocados crujientes de masa de maíz con dulce de panela (rapadura) derretida en su centro.' },
+      { name: 'Montucas Madricenses', desc: 'Tamal tierno de elote condimentado con pollo de patio, hierbabuena, leche y un toque sutil de chile congo.' },
+      { name: 'Café de Estricta Altura', desc: 'Variedades Caturra, Borbón y Catuaí cultivadas bajo sombra de montaña en San Juan del Río Coco entre 1,000 y 1,400 msnm.' },
+      { name: 'Gorditas de Maíz y Güirilas', desc: 'Tortas dulces asadas en hojas de plátano acompañadas con cuajada fresca de hacienda.' },
+      { name: 'Rosquillas en Miel de Caña', desc: 'Postre tradicional de Semana Santa y fiestas patronales bañado en almíbar de dulce de atado.' }
     ],
     places: [
-      { name: 'Monumento Nacional Cañón de Somoto', type: 'Geositio / Aventura', icon: 'fa-water' },
-      { name: 'Talleres Tradicionales de Rosquillas', type: 'Ruta Gastronómica', icon: 'fa-bread-slice' },
-      { name: 'Mirador La Cruz de Somoto', type: 'Panorámica', icon: 'fa-mountain' },
-      { name: 'Reserva Natural Tepesomoto-La Pataste', type: 'Bosque Nuboso', icon: 'fa-tree' },
-      { name: 'Pueblo Alfarero de Ducualí', type: 'Artesanía en Barro', icon: 'fa-palette' }
+      { name: 'Monumento Nacional Cañón de Somoto', type: 'Geositio / Geoparque UNESCO', icon: 'fa-water' },
+      { name: 'Reserva Natural Tepesomoto-La Pataste', type: 'Bosque Nuboso & Biodiversidad', icon: 'fa-tree' },
+      { name: 'Laguna La Bruja (Las Sabanas)', type: 'Humedal de Altura & Canopy', icon: 'fa-water' },
+      { name: 'Mirador El Balcón (San José de Cusmapa)', type: 'Vistas al Pacífico & Serranías', icon: 'fa-mountain-sun' },
+      { name: 'Parque Natural El Majaste (San Juan del Río Coco)', type: 'Cafetales de Altura & Cascadas', icon: 'fa-leaf' },
+      { name: 'Comunidad Indígena San José de Palmira (Totogalpa)', type: 'Turismo Rural Comunitario', icon: 'fa-hands-holding-circle' },
+      { name: 'Talleres de Cerámica de Loma Panda (San Lucas)', type: 'Alfarería Prehispánica', icon: 'fa-palette' },
+      { name: 'Parque Arqueológico Piedras Pintadas', type: 'Petroglifos & Memoria Viva', icon: 'fa-feather' }
     ],
     activities: [
-      'Navegación en lancha y natación con chaleco por el Cañón de Somoto',
-      'Senderismo de interpretación geológica con baqueanos locales',
-      'Ruta vivencial del maíz y elaboración artesanal de rosquillas',
-      'Avistamiento de aves en los pinares de San Lucas y Las Sabanas',
-      'Fotografía de caídas de agua y pozas de aguas cristalinas'
+      'Navegación y flotación guiada entre las paredes milenarias del Cañón de Somoto',
+      'Ruta vivencial de las rosquillas: del amasado campesino al horno de leña',
+      'Ruta del Café: recorrido desde el almácigo y floración hasta el tostado y taza en finca',
+      'Taller vivencial de cestería con acícula de pino en San José de Cusmapa',
+      'Senderismo y avistamiento de aves en los pinares y nebliselva de Tepesomoto-La Pataste',
+      'Interpretación geológica del origen del Río Coco con baqueanos locales'
     ],
-    culture: 'Famoso por su música de polkas y mazurcas campesinas interpretadas con guitarras de cedro y violín de talalate. Celebran en julio las fiestas de Santiago Apóstol y la feria del maíz.',
-    bestSeason: 'Noviembre a mayo para navegación óptima del cañón con aguas calmas y senderos secos.',
-    howToReach: 'Desde Managua por la Carretera Panamericana Norte (NIC-1) pasando por Estelí hacia Somoto (216 km, aprox. 3.5 horas). Terminal de buses en El Mayoreo.',
-    recommendations: 'Llevar calzado para agua que no resbale, protector solar biodegradable, ropa de cambio impermeable y comprar directo a las cooperativas de rosquilleras.',
-    heroImage: 'assets/images/destinos/canon_de_somoto.jpg',
-    lat: 13.4775,
-    lng: -86.5800,
+    culture: 'Cuna de la música de polkas, mazurcas y valses segovianos interpretados con guitarra campesina, acordeón y violín de talalate. Tierra natal de compositores legendarios como Carlos Mejía Godoy, Luis Enrique Mejía Godoy y Luis Enrique. Fiestas patronales de Santiago Apóstol en Somoto (25 de julio) y el tradicional Festival de los Burritos Somoteños.',
+    bestSeason: 'Noviembre a mayo ofrece condiciones ideales para recorrer los senderos y navegar las aguas cristalinas del Cañón. Durante la época de cosecha de café (diciembre a marzo), San Juan del Río Coco vive su mayor esplendor productivo.',
+    howToReach: 'Desde Managua por la Carretera Panamericana Norte (NIC-1), pasando por Sébaco y Estelí hasta llegar a Somoto (216 km, aprox. 3.5 a 4 horas). Buses expresos y ordinarios parten diariamente desde la Terminal del Mercado El Mayoreo en Managua.',
+    recommendations: 'Llevar calzado con agarre para agua y rocas (no sandalias lisas), ropa de secado rápido, protector solar y repelente biodegradables, dinero en efectivo en córdobas para compras directas a cooperativas y respetar en todo momento las normas de preservación geológica del Geoparque UNESCO.',
+    heroImage: 'assets/images/madriz/canon_somoto_panoramica.jpg',
+    userImages: [
+      'assets/images/madriz/canon_somoto_interior.png',
+      'assets/images/madriz/canon_somoto_bote.png',
+      'assets/images/madriz/canon_somoto_panoramica.jpg'
+    ],
+    lat: 13.4833,
+    lng: -86.5833,
     coopCount: 14
   },
   {
