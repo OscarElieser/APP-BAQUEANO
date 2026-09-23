@@ -137,6 +137,44 @@
   ];
 
   const cleanTitle = file => file.replace(/\.mp3$/i, '').replace(/_/g, ' ').replace(/^🔊/, '').trim();
+  const normalizeText = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').trim();
+  const TRACK_ARTIST_IMAGES = [
+    [/Fuzion 4/i, "assets/artistas/Fuzion 4.jpg"],
+    [/Mokuanes/i, "assets/artistas/Mokuanes.jpg"],
+    [/La Nueva Compañía/i, "assets/artistas/La Nueva Compañía.jpg"],
+    [/Camilo Zapata/i, "assets/artistas/camilo zapata.jpg"],
+    [/Justo Santos/i, "assets/artistas/justo santos.jpg"],
+    [/Tino López Guerra/i, "assets/artistas/tino lopez guerra.jpg"],
+    [/Erwin Krüger|Tradición de Chontales/i, "assets/artistas/Erwin Krüger.jpg"],
+    [/Otto de la Rocha/i, "assets/artistas/Otto de la Rocha.jpg"],
+    [/Carlos Mejía Godoy/i, "assets/artistas/carlos mejia godoy.jpg"],
+    [/Luis Enrique Mejía Godoy/i, "assets/artistas/Luis Enrique Mejía Godoy.jpg"],
+    [/Salvador Cardenal/i, "assets/artistas/Salvador Cardenal Barquero.jpg"],
+    [/Katia Cardenal/i, "assets/artistas/Katia Cardenal.jpg"],
+    [/Norma Helena Gadea/i, "assets/artistas/Norma Helena Gadea.jpg"],
+    [/José de la Cruz Mena/i, "assets/artistas/José de la Cruz Mena.jpg"],
+    [/Alejandro Vega Matus/i, "assets/artistas/Alejandro Vega Matus.jpg"],
+    [/Marimba de [Aa]rco/i, "assets/artistas/La Marimba de Arco de Monimbó.jpg"],
+    [/Güegüense/i, "assets/artistas/Música de El Güegüense.jpg"],
+    [/Dimensión Costeña/i, "assets/artistas/Dimensión Costeña.jpg"],
+    [/Hernaldo Zúñiga/i, "assets/artistas/Hernaldo Zúñiga.jpg"],
+    [/Luis Enrique Mejía López/i, "assets/artistas/Luis Enrique.jpg"],
+    [/Perrozompopo/i, "assets/artistas/Perrozompopo (Ramón Mejía).jpg"],
+    [/Dúo Guardabarranco/i, "assets/artistas/duo guardabarranco.jpg"]
+  ];
+  const imageForArtist = artist => TRACK_ARTIST_IMAGES.find(([pattern]) => pattern.test(artist))?.[1] || '';
+  const imageForTrack = (artist, file) => imageForArtist(artist) || (/^Una Canción/i.test(file) ? "assets/artistas/Otto de la Rocha.jpg" : '');
+  const profileForTrack = track => {
+    if (/^Una Canción/i.test(track.file)) {
+      return (window.BAQUEANO_SONORA_ARTISTS || []).find(profile => profile.id === 'otto-de-la-rocha');
+    }
+    const artist = normalizeText(track.artist);
+    const aliases = artist.includes('luis enrique mejia lopez') ? ['luis enrique'] : [];
+    return (window.BAQUEANO_SONORA_ARTISTS || []).find(profile => {
+      const name = normalizeText(profile.name);
+      return artist.includes(name) || name.includes(artist) || aliases.includes(name);
+    });
+  };
   const tracks = AUDIO_FILES.map((file, index) => {
     const match = VERIFIED.find(rule => rule[0].test(file));
     return {
@@ -147,15 +185,18 @@
       credit: match ? match[3] : "Sin atribución editorial",
       territory: match ? match[4] : "Procedencia por documentar",
       verified: Boolean(match),
+      image: imageForTrack(match ? match[2] : '', file),
       src: `assets/audio/${encodeURIComponent(file).replace(/%2F/gi, '/')}`
     };
   });
 
   let currentIndex = 0;
   let activeFilter = 'all';
+  let searchQuery = '';
   const audio = new Audio();
   audio.preload = 'metadata';
   const SESSION_KEY = 'baqueano_audio_session_v1';
+  const DEFAULT_COVER = 'assets/images/destinos/volcan_masaya.jpg';
 
   const byId = id => document.getElementById(id);
   const formatTime = seconds => Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}` : '0:00';
@@ -181,7 +222,16 @@
   }
 
   function visibleTracks() {
-    return tracks.filter(track => activeFilter === 'all' || (activeFilter === 'verified' ? track.verified : !track.verified));
+    const query = normalizeText(searchQuery);
+    return tracks.filter(track => {
+      const matchesStatus = activeFilter === 'all' || (activeFilter === 'verified' ? track.verified : !track.verified);
+      if (!matchesStatus || !query) return matchesStatus;
+      const profile = profileForTrack(track);
+      const searchable = [track.title, track.artist, track.credit, track.territory, track.file, profile?.name, profile?.genres, profile?.honorific, profile?.origin]
+        .map(normalizeText)
+        .join(' ');
+      return searchable.includes(query);
+    });
   }
 
   function setPlayingUi(playing) {
@@ -202,6 +252,11 @@
     byId('epicTrackArtist').innerHTML = `<i class="fa-solid fa-microphone-lines"></i> ${track.artist}`;
     byId('epicTrackTerritory').textContent = `• ${track.territory}`;
     byId('epicTrackGenre').innerHTML = `<i class="fa-solid fa-${track.verified ? 'circle-check' : 'clock'}"></i> ${track.verified ? 'Ficha verificada' : 'Pendiente de documentación'}`;
+    const vinylImage = byId('epicVinylImg');
+    if (vinylImage) {
+      vinylImage.src = encodeURI(track.image || DEFAULT_COVER);
+      vinylImage.alt = track.image ? `Fotografía de ${track.artist}` : `Portada de ${track.title}`;
+    }
     byId('epicDurationTime').textContent = '0:00';
     byId('epicCurrentTime').textContent = '0:00';
     byId('epicScrubber').value = 0;
@@ -213,10 +268,18 @@
     const grid = byId('epicPlaylistGrid');
     if (!grid) return;
     const visible = visibleTracks();
+    const status = byId('epicMusicSearchStatus');
+    if (status) status.textContent = searchQuery
+      ? `${visible.length} resultado${visible.length === 1 ? '' : 's'} para “${searchQuery}”`
+      : `Mostrando ${visible.length} de ${tracks.length} grabaciones`;
+    if (!visible.length) {
+      grid.innerHTML = `<div class="epic-music-empty"><i class="fa-solid fa-record-vinyl"></i><strong>No encontramos coincidencias</strong><span>Prueba con otra canción, artista, género o territorio.</span></div>`;
+      return;
+    }
     grid.innerHTML = visible.map(track => {
       const index = tracks.indexOf(track);
       return `<button type="button" class="epic-track-card ${index === currentIndex ? 'is-active' : ''}" data-track-index="${index}">
-        <span class="epic-track-card-thumb" aria-hidden="true"><i class="fa-solid fa-${track.verified ? 'circle-check' : 'compact-disc'}"></i></span>
+        <span class="epic-track-card-thumb" aria-hidden="true">${track.image ? `<img src="${encodeURI(track.image)}" alt="" loading="lazy" decoding="async"><span class="epic-track-card-play-overlay"><i class="fa-solid fa-play"></i></span>` : `<i class="fa-solid fa-${track.verified ? 'circle-check' : 'compact-disc'}"></i>`}</span>
         <span class="epic-track-card-info">
           <strong class="epic-track-card-name">${track.title}</strong>
           <span class="epic-track-card-artist">${track.artist}</span>
@@ -230,6 +293,7 @@
 
   function step(direction) {
     const pool = visibleTracks();
+    if (!pool.length) return;
     const current = pool.findIndex(track => track === tracks[currentIndex]);
     const next = pool[(current + direction + pool.length) % pool.length] || tracks[0];
     loadTrack(tracks.indexOf(next), true);
@@ -247,6 +311,26 @@
       player.querySelectorAll('[data-status]').forEach(item => item.classList.toggle('is-active', item === button));
       renderPlaylist();
     }));
+    const searchInput = byId('epicMusicSearchInput');
+    const searchClear = byId('epicMusicSearchClear');
+    const syncArtistSearch = value => {
+      const artistSearch = byId('sonoraSearchInput');
+      if (!artistSearch) return;
+      artistSearch.value = value;
+      artistSearch.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    if (searchInput) searchInput.addEventListener('input', event => {
+      searchQuery = event.target.value.trim();
+      renderPlaylist();
+      syncArtistSearch(searchQuery);
+    });
+    if (searchClear && searchInput) searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      renderPlaylist();
+      syncArtistSearch('');
+      searchInput.focus();
+    });
     byId('epicPlayBtn').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
     byId('epicPrevBtn').addEventListener('click', () => step(-1));
     byId('epicNextBtn').addEventListener('click', () => step(1));

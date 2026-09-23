@@ -830,6 +830,114 @@ html body .musica-inline-033 {
   color: #f65e01;
 }
 
+/*
+ * 🎯 POR QUÉ: permitir explorar el archivo completo sin conocer de antemano
+ * el nombre exacto de una canción o artista.
+ * ⚙️ CÓMO: campo semántico responsivo conectado al índice de pistas y fichas.
+ * 📦 QUÉ: buscador global, contador accesible y estado sin resultados.
+ */
+.epic-music-search {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(300px, 1.2fr);
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin: 1.35rem 0 0.35rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.28), rgba(15, 23, 42, 0.88));
+  border: 1px solid rgba(244, 230, 193, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 16px 38px rgba(2, 8, 23, 0.24);
+}
+
+.epic-music-search-copy h3 {
+  margin: 0.25rem 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.epic-music-search-copy p,
+.epic-music-search-status {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.epic-music-search-kicker {
+  color: #f4e6c1;
+  font-family: var(--font-tech);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.epic-music-search-control {
+  position: relative;
+}
+
+.epic-music-search-control > i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  color: #f65e01;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.epic-music-search-control input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.85rem 3.2rem 0.85rem 2.8rem;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.epic-music-search-control input:focus {
+  border-color: #f65e01;
+  box-shadow: 0 0 0 3px rgba(246, 94, 1, 0.16);
+}
+
+.epic-music-search-control button {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  color: #f4e6c1;
+  background: rgba(22, 93, 111, 0.55);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.epic-music-search-status {
+  grid-column: 2;
+  padding-left: 0.15rem;
+}
+
+.epic-music-empty {
+  grid-column: 1 / -1;
+  display: grid;
+  place-items: center;
+  gap: 0.45rem;
+  min-height: 180px;
+  padding: 2rem;
+  color: var(--text-muted);
+  text-align: center;
+  border: 1px dashed rgba(244, 230, 193, 0.2);
+  border-radius: 16px;
+}
+
+.epic-music-empty i { color: #f65e01; font-size: 2rem; }
+.epic-music-empty strong { color: #fff; font-size: 1.05rem; }
+
 button.epic-track-card {
   width: 100%;
   color: inherit;
@@ -993,6 +1101,8 @@ button.epic-track-card {
 
 @media (max-width: 640px) {
   .archive-editorial-note { font-size: 0.86rem; }
+  .epic-music-search { grid-template-columns: 1fr; padding: 1rem; }
+  .epic-music-search-status { grid-column: 1; }
   .epic-playlist-tracks-grid { max-height: 520px; padding-right: 0.3rem; }
   .epic-track-card {
     grid-template-columns: 46px minmax(0, 1fr);
