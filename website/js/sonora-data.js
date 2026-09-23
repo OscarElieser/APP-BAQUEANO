@@ -66,6 +66,7 @@ window.BAQUEANO_NEW_SONORA_ARTISTS = [
   {
     id: "mokuanes",
     name: "Mokuanes",
+    image: "assets/artistas/Mokuanes.jpg",
     honorific: "La Orquesta Histórica de La Trinidad",
     category: "caribe-contemporaneo",
     origin: "La Trinidad, Estelí",
@@ -85,6 +86,7 @@ window.BAQUEANO_NEW_SONORA_ARTISTS = [
   {
     id: "fuzion-4",
     name: "Fuzion 4",
+    image: "assets/artistas/Fuzion 4.jpg",
     honorific: "Los Príncipes de la Cumbia",
     category: "caribe-contemporaneo",
     origin: "San Marcos, Carazo",
@@ -99,12 +101,15 @@ window.BAQUEANO_NEW_SONORA_ARTISTS = [
       { title: "El Cachimbeo", tag: "Composición Original", desc: "Canción de Fuzion 4 compuesta por Frankling Gutiérrez." },
       { title: "La Cachimba", tag: "Interpretación", desc: "Versión de Fuzion 4; la autoría acreditada corresponde a Juan Carlos Vicencio." },
       { title: "La Negra Cumbianbera", tag: "Repertorio Sanmarqueño", desc: "Grabación de Fuzion 4 incluida en el proyecto Puro San Marqueño; compositor aún no documentado." },
-      { title: "La Candona Chinamera", tag: "Producción 2026", desc: "Interpretación identificada de Fuzion 4; crédito de composición pendiente de documentación." }
+      { title: "La Candona Chinamera", tag: "Producción 2026", desc: "Interpretación identificada de Fuzion 4; crédito de composición pendiente de documentación." },
+      { title: "Cumbia Sabrosa", tag: "Repertorio Verificado", desc: "Interpretación identificada de Fuzion 4 en el archivo sonoro." },
+      { title: "La Canoa Rancha", tag: "Repertorio Verificado", desc: "Interpretación identificada de Fuzion 4 en el archivo sonoro." }
     ]
   },
   {
     id: "la-nueva-compania",
     name: "La Nueva Compañía",
+    image: "assets/artistas/La Nueva Compañía.jpg",
     honorific: "La Gran Orquesta de la Fiesta Pinolera",
     category: "caribe-contemporaneo",
     origin: "Nicaragua",
@@ -120,7 +125,8 @@ window.BAQUEANO_NEW_SONORA_ARTISTS = [
       { title: "Se Rompen Los Fuegos", tag: "Música de Fiesta", desc: "Pieza presente en el proyecto Tonaditas y en el catálogo posterior de la agrupación." },
       { title: "Y Sigue El Rancho Ardiendo", tag: "Música Bailable", desc: "Grabación incluida en el álbum Y Se Rompen Los Fuegos." },
       { title: "La Tonadita", tag: "Música Popular", desc: "Parte del repertorio discográfico de La Nueva Compañía." },
-      { title: "Polka Cumbia", tag: "Fusión Nicaragüense", desc: "Fusión de polka y cumbia incluida en su repertorio publicado." }
+      { title: "Polka Cumbia", tag: "Fusión Nicaragüense", desc: "Fusión de polka y cumbia incluida en su repertorio publicado." },
+      { title: "El Grito del Bolo", tag: "Repertorio Verificado", desc: "Interpretación identificada de La Nueva Compañía en el archivo sonoro." }
     ]
   }
 ];
@@ -132,6 +138,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "camilo-zapata",
     name: "Camilo Zapata",
+    image: "assets/artistas/camilo zapata.jpg",
     honorific: "El Padre del Son Nica",
     category: "son-nica",
     origin: "Managua (Influencia en Masaya y Chontales)",
@@ -172,6 +179,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "justo-santos",
     name: "Justo Santos",
+    image: "assets/artistas/justo santos.jpg",
     honorific: "Autor del Segundo Himno Nacional",
     category: "son-nica",
     origin: "Rivas / Masaya",
@@ -194,6 +202,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "tino-lopez-guerra",
     name: "Tino López Guerra",
+    image: "assets/artistas/tino lopez guerra.jpg",
     honorific: "El Rey del Corrido Nicaragüense",
     category: "son-nica",
     origin: "Chinandega",
@@ -228,6 +237,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "erwin-kruger",
     name: "Erwin Krüger",
+    image: "assets/artistas/Erwin Krüger.jpg",
     honorific: "El Poeta del Trío Monimbó",
     category: "son-nica",
     origin: "Managua / Masaya",
@@ -256,6 +266,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "otto-de-la-rocha",
     name: "Otto de la Rocha",
+    image: "assets/artistas/Otto de la Rocha.jpg",
     honorific: "Voz Campesina y Creador de Pancho Madrigal",
     category: "son-nica",
     origin: "Jinotega",
@@ -294,6 +305,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "carlos-mejia-godoy",
     name: "Carlos Mejía Godoy",
+    image: "assets/artistas/carlos mejia godoy.jpg",
     honorific: "El Cronista del Canto Popular Campesino",
     category: "cantautores",
     origin: "Somoto, Madriz",
@@ -328,12 +340,23 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Canto de Amor Patrio",
         desc: "La más tierna declaración de amor filial a la tierra que amanece entre volcanes.",
         notes: [523.25, 659.25, 783.99, 659.25, 587.33, 523.25]
+      },
+      {
+        title: "Flor de Pino",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Carlos Mejía Godoy."
+      },
+      {
+        title: "No Pasarán",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Carlos Mejía Godoy."
       }
     ]
   },
   {
     id: "luis-enrique-mejia-godoy",
     name: "Luis Enrique Mejía Godoy",
+    image: "assets/artistas/Luis Enrique Mejía Godoy.jpg",
     honorific: "El Trovador de la Poesía Musicalizada",
     category: "cantautores",
     origin: "Somoto, Madriz",
@@ -368,6 +391,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "salvador-cardenal",
     name: "Salvador Cardenal Barquero",
+    image: "assets/artistas/Salvador Cardenal Barquero.jpg",
     honorific: "El Poeta Ecológico de Guardabarranco",
     category: "cantautores",
     origin: "Managua / Matagalpa",
@@ -396,12 +420,33 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Lírica de Atardecer",
         desc: "Poema musical a los cielos crepusculares sobre los lagos y montañas nicaragüenses.",
         notes: [392.00, 440.00, 523.25, 659.25, 523.25]
+      },
+      {
+        title: "Amar a la Vida",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Salvador Cardenal Barquero."
+      },
+      {
+        title: "Canción del Fuego",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Salvador Cardenal Barquero."
+      },
+      {
+        title: "Cocibolca",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Salvador Cardenal Barquero."
+      },
+      {
+        title: "Mi Canción",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Salvador Cardenal Barquero."
       }
     ]
   },
   {
     id: "katia-cardenal",
     name: "Katia Cardenal",
+    image: "assets/artistas/Katia Cardenal.jpg",
     honorific: "Voz Cristalina de la Canción de Autor",
     category: "cantautores",
     origin: "Managua",
@@ -424,12 +469,18 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Poesía Musical",
         desc: "Vuelo metafórico sobre la libertad y la metamorfosis del espíritu humano.",
         notes: [440.00, 523.25, 659.25, 587.33, 440.00]
+      },
+      {
+        title: "Dale una Luz",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Katia Cardenal."
       }
     ]
   },
   {
     id: "norma-helena-gadea",
     name: "Norma Helena Gadea",
+    image: "assets/artistas/Norma Helena Gadea.jpg",
     honorific: "La Gran Voz de la Dignidad Nicaragüense",
     category: "cantautores",
     origin: "Ocotal, Nueva Segovia",
@@ -452,6 +503,31 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Folklore Norteño",
         desc: "Canto de amor a las serranías de Ocotal, Jalapa y el pinar de Las Segovias.",
         notes: [440.00, 493.88, 587.33, 659.25, 440.00]
+      },
+      {
+        title: "Gracias a la Vida",
+        tag: "Interpretación Verificada",
+        desc: "Interpretación identificada de Norma Helena Gadea."
+      },
+      {
+        title: "Canción de Cuna",
+        tag: "Interpretación Verificada",
+        desc: "Interpretación identificada de Norma Helena Gadea."
+      },
+      {
+        title: "Como Tinaja",
+        tag: "Interpretación Verificada",
+        desc: "Interpretación identificada de Norma Helena Gadea."
+      },
+      {
+        title: "Cuando Venga la Paz",
+        tag: "Interpretación Verificada",
+        desc: "Interpretación identificada de Norma Helena Gadea."
+      },
+      {
+        title: "No Pasarán",
+        tag: "Interpretación Verificada",
+        desc: "Interpretación identificada de Norma Helena Gadea."
       }
     ]
   },
@@ -462,6 +538,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "jose-de-la-cruz-mena",
     name: "José de la Cruz Mena",
+    image: "assets/artistas/José de la Cruz Mena.jpg",
     honorific: "El Genio Romántico de los Valses Inmortales",
     category: "patrimonio",
     origin: "León",
@@ -496,6 +573,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "alejandro-vega-matus",
     name: "Alejandro Vega Matus",
+    image: "assets/artistas/Alejandro Vega Matus.jpg",
     honorific: "El Patriarca Musical de Masaya",
     category: "patrimonio",
     origin: "Masaya",
@@ -524,6 +602,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "marimba-monimbo",
     name: "La Marimba de Arco de Monimbó",
+    image: "assets/artistas/La Marimba de Arco de Monimbó.jpg",
     honorific: "Instrumento Sagrado Indígena",
     category: "patrimonio",
     origin: "Masaya (Comunidad de Monimbó)",
@@ -552,12 +631,18 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Ritmo Mestizo",
         desc: "Antigua marcha de marimba de raíz afroindígena de las comarcas orientales.",
         notes: [392.00, 440.00, 523.25, 659.25, 523.25, 392.00]
+      },
+      {
+        title: "El Zanatillo",
+        tag: "Son Tradicional",
+        desc: "Pieza tradicional identificada con la marimba de arco de Monimbó."
       }
     ]
   },
   {
     id: "el-gueguense",
     name: "Música de El Güegüense",
+    image: "assets/artistas/Música de El Güegüense.jpg",
     honorific: "Patrimonio Oral e Inmaterial de la Humanidad (UNESCO)",
     category: "patrimonio",
     origin: "Carazo / Masaya",
@@ -590,6 +675,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "dimension-costena",
     name: "Dimensión Costeña",
+    image: "assets/artistas/Dimensión Costeña.jpg",
     honorific: "Embajadores del Palo de Mayo y la Identidad Caribeña",
     category: "caribe-contemporaneo",
     origin: "Bluefields, RACCS",
@@ -618,12 +704,23 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Calipso de Bluefields",
         desc: "Fusión creole con percusión caribeña que invita al movimiento perpetuo.",
         notes: [392.00, 493.88, 587.33, 783.99, 587.33, 392.00]
+      },
+      {
+        title: "Caliente Como el Verano",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Dimensión Costeña."
+      },
+      {
+        title: "Cole Cole",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Dimensión Costeña."
       }
     ]
   },
   {
     id: "hernaldo-zuniga",
     name: "Hernaldo Zúñiga",
+    image: "assets/artistas/Hernaldo Zúñiga.jpg",
     honorific: "El Gran Baladista y Poeta de Proyección Internacional",
     category: "caribe-contemporaneo",
     origin: "Masaya",
@@ -652,12 +749,18 @@ window.BAQUEANO_SONORA_ARTISTS = [
         tag: "Éxito Continental",
         desc: "Obra maestra que conquistó las listas continentales de música romántica.",
         notes: [392.00, 440.00, 523.25, 659.25, 523.25]
+      },
+      {
+        title: "En el Mismo Tren",
+        tag: "Repertorio Verificado",
+        desc: "Pieza identificada en el repertorio de Hernaldo Zúñiga."
       }
     ]
   },
   {
     id: "luis-enrique",
     name: "Luis Enrique",
+    image: "assets/artistas/Luis Enrique.jpg",
     honorific: "El Príncipe de la Salsa",
     category: "caribe-contemporaneo",
     origin: "Somoto, Madriz",
@@ -686,6 +789,7 @@ window.BAQUEANO_SONORA_ARTISTS = [
   {
     id: "perrozompopo",
     name: "Perrozompopo (Ramón Mejía)",
+    image: "assets/artistas/Perrozompopo (Ramón Mejía).jpg",
     honorific: "Canción Alternativa y Rock Urbano de Autor",
     category: "caribe-contemporaneo",
     origin: "Managua",
