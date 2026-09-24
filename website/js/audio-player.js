@@ -230,7 +230,7 @@
         <div class="sonora-artist-card ${isPlaying ? 'playing' : ''}" data-artist-id="${artist.id}" id="card-${artist.id}">
           <div class="sonora-card-top">
             <div class="sonora-card-icon-wrap">
-              <i class="${artist.icon}"></i>
+              <img src="${encodeURI(artist.image)}" alt="Retrato de ${artist.name}" loading="lazy" decoding="async">
             </div>
             <div class="sonora-card-badge">${artist.honorific}</div>
           </div>
@@ -327,7 +327,7 @@
     content.innerHTML = `
       <div class="sonora-modal-header-hero">
         <div class="sonora-modal-avatar">
-          <i class="${artist.icon}"></i>
+          <img src="${encodeURI(artist.image)}" alt="Retrato de ${artist.name}" decoding="async">
         </div>
         <div style="flex: 1;">
           <div class="sonora-card-badge" style="margin-bottom: 0.4rem; display: inline-block;">${artist.honorific}</div>

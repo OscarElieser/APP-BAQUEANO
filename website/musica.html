@@ -314,6 +314,21 @@
               <div><strong>Escuchar no equivale a atribuir.</strong> Las pistas verificadas enlazan composición, interpretación y tradición cuando existe respaldo. Las demás siguen disponibles en este reproductor, marcadas para revisión, sin inventar créditos ni procedencias.</div>
             </aside>
 
+            <!-- BUSCADOR GENERAL DEL ARCHIVO MUSICAL -->
+            <section class="epic-music-search" role="search" aria-labelledby="epicMusicSearchTitle">
+              <div class="epic-music-search-copy">
+                <span class="epic-music-search-kicker"><i class="fa-solid fa-magnifying-glass"></i> Explorador musical</span>
+                <h3 id="epicMusicSearchTitle">Busca canciones, artistas y géneros</h3>
+                <p>Consulta todo el archivo por título, intérprete, agrupación, género, crédito o territorio.</p>
+              </div>
+              <div class="epic-music-search-control">
+                <i class="fa-solid fa-music" aria-hidden="true"></i>
+                <input type="search" id="epicMusicSearchInput" autocomplete="off" spellcheck="false" placeholder="Ej. cumbia, Katia Cardenal, marimba, Managua..." aria-describedby="epicMusicSearchStatus">
+                <button type="button" id="epicMusicSearchClear" aria-label="Limpiar búsqueda musical" title="Limpiar búsqueda"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+              <div class="epic-music-search-status" id="epicMusicSearchStatus" role="status" aria-live="polite">Mostrando todo el archivo musical</div>
+            </section>
+
             <!-- Selector de estado documental -->
             <div class="epic-playlist-tabs">
               <button type="button" class="epic-tab-btn is-active"><i class="fa-solid fa-box-archive"></i> Archivo completo (93)</button>
