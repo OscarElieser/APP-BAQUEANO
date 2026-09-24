@@ -4449,7 +4449,7 @@ img {
 /* HERO CON VIDEO CINEMATOGRÁFICO DE FONDO */
 .destinations-video-hero {
   position: relative;
-  min-height: 480px;
+  min-height: clamp(560px, 68vh, 780px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4463,17 +4463,15 @@ img {
 
 .hero-bg-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 0) scale(1.002);
   object-fit: cover;
+  object-position: center center;
   z-index: 0;
   pointer-events: none;
-  filter: brightness(0.65) saturate(1.2) contrast(1.1);
+  filter: brightness(0.9) saturate(1.18) contrast(1.05);
 }
 
 .video-overlay-gradient {
@@ -4482,9 +4480,8 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 50% 40%, rgba(10, 15, 29, 0.6) 0%, rgba(7, 11, 20, 0.9) 85%, #070B14 100%);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: linear-gradient(to bottom, rgba(7, 11, 20, 0.16) 0%, rgba(7, 11, 20, 0.32) 52%, rgba(7, 11, 20, 0.76) 100%),
+              linear-gradient(90deg, rgba(7, 11, 20, 0.28), transparent 34%, transparent 70%, rgba(7, 11, 20, 0.2));
   z-index: 1;
 }
 
@@ -4506,7 +4503,24 @@ img {
   background-size: 100% 4px, 6px 100%;
   pointer-events: none;
   z-index: 2;
-  opacity: 0.55;
+  opacity: 0.08;
+}
+
+@media (min-width: 1920px) {
+  .destinations-video-hero {
+    min-height: clamp(680px, 72vh, 900px);
+  }
+
+  .hero-bg-video {
+    filter: brightness(0.94) saturate(1.2) contrast(1.05);
+  }
+}
+
+@media (max-width: 768px) {
+  .destinations-video-hero {
+    min-height: clamp(520px, 72svh, 680px);
+    border-radius: 18px;
+  }
 }
 
 .hero-video-content {
