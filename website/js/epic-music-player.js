@@ -47,34 +47,54 @@
 
   const VERIFIED = [
     [/^Alforja Campesina/i, "Alforja Campesina", "Carlos Mejía Godoy", "Composición", "Madriz"],
+    [/^Ama la Naturaleza/i, "Amar a la vida", "Salvador Cardenal Barquero", "Repertorio verificado", "Nicaragua"],
     [/^Amores de Abraham/i, "Amores de Abraham", "José de la Cruz Mena", "Composición", "León"],
     [/^Araré el Aire/i, "Araré el Aire", "Alejandra Acuña y Katia Cardenal", "Interpretación compartida", "Nicaragua"],
     [/^ASI ES LA VIDA/i, "Así es la vida", "Luis Enrique Mejía López", "Interpretación", "Somoto"],
     [/^Baila Mi Palo/i, "Baila mi palo", "Mokuanes", "Interpretación verificada", "La Trinidad, Estelí"],
+    [/^baile_del_mestizaje/i, "El Baile del Mestizaje", "Marimba de Arco de Monimbó", "Tradición verificada", "Monimbó, Masaya"],
     [/^Barrio De Pescadores/i, "Barrio de pescadores", "Erwin Krüger · Trío Monimbó", "Composición e interpretación", "León"],
     [/^Caballito Chontaleno/i, "Caballito Chontaleño", "Camilo Zapata", "Composición", "Managua"],
+    [/^Caliente Como Verano/i, "Caliente Como el Verano", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^Camilo Zapata, Minga/i, "Minga Rosa Pineda", "Camilo Zapata", "Composición", "Managua"],
+    [/^Cancion de Cuna/i, "Canción de Cuna", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
+    [/^Canción del Fuego/i, "Canción del Fuego", "Salvador Cardenal Barquero", "Repertorio verificado", "Nicaragua"],
     [/^CANCIONERO/i, "Cancionero", "Hernaldo Zúñiga", "Repertorio autoral", "Nicaragua"],
     [/^Cascada de Perlas/i, "Cascada de Perlas", "Alejandro Vega Matus", "Composición", "Masaya"],
+    [/^Cocibolca/i, "Cocibolca", "Salvador Cardenal Barquero", "Repertorio verificado", "Nicaragua"],
+    [/^Cole Cole/i, "Cole Cole", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^COMO TE VA NU AMOR/i, "¿Cómo te va mi amor?", "Hernaldo Zúñiga", "Repertorio verificado", "Nicaragua"],
+    [/^Como Tinaja/i, "Como Tinaja", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
     [/^Corrido a Chinandega/i, "Corrido a Chinandega", "Tino López Guerra", "Composición", "Chinandega"],
     [/^CORRIDO A MANAGUA/i, "Corrido a Managua — versión 2026", "Tino López Guerra", "Composición · versión identificada", "Managua"],
+    [/^Cuando Venga La Paz/i, "Cuando Venga la Paz", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
     [/^Cumbia Piquetona/i, "Cumbia Piquetona", "Mokuanes", "Interpretación · compositor: Víctor M. Leiva", "La Trinidad, Estelí"],
+    [/^Cumbia Sabrosa/i, "Cumbia Sabrosa", "Fuzion 4", "Interpretación identificada", "San Marcos, Carazo"],
+    [/^Dale Una Luz/i, "Dale una Luz", "Katia Cardenal", "Interpretación identificada", "Nicaragua"],
     [/^Dale Su Rondón/i, "Dale su rondón", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^Dias de Amar/i, "Días de amar", "Dúo Guardabarranco", "Composición: Salvador Cardenal", "Managua"],
     [/^Dimension Costena/i, "The Bluefields Express", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^El Zenzontle/i, "El Zenzontle pregunta por Arlen", "Intérprete por confirmar", "Composición: Luis Enrique Mejía Godoy", "Nicaragua"],
     [/^El cachimbeo/i, "El Cachimbeo", "Fuzion 4", "Composición: Frankling Gutiérrez", "San Marcos, Carazo"],
+    [/^El Grito del bolo/i, "El Grito del Bolo", "La Nueva Compañía", "Interpretación identificada", "Nicaragua"],
+    [/^(EL ZANATILLO|el_zanatillo)/i, "El Zanatillo", "Marimba de Arco de Monimbó", "Tradición verificada", "Monimbó, Masaya"],
     [/^el_solar/i, "El Solar de Monimbó", "Camilo Zapata", "Composición", "Masaya"],
+    [/^EN EL MISMO TREN/i, "En el Mismo Tren", "Hernaldo Zúñiga", "Repertorio verificado", "Nicaragua"],
     [/^ENTRE REMOLINOS/i, "Entre remolinos", "Perrozompopo", "Repertorio autoral", "Managua"],
     [/^Fiebre Costeña/i, "Fiebre Costeña", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^Fiesta Pinolera/i, "Fiesta Pinolera", "La Nueva Compañía", "Interpretación · compositor por verificar", "Nicaragua"],
     [/^Flor de Mi Colina/i, "Flor de mi colina", "Camilo Zapata", "Composición", "Managua"],
+    [/^Flor De Pino/i, "Flor de Pino", "Carlos Mejía Godoy", "Repertorio verificado", "Nicaragua"],
+    [/^Folklore - La Danza Negra/i, "La Danza Negra", "Marimba de Arco de Monimbó", "Tradición verificada", "Monimbó, Masaya"],
+    [/^Gracias a la Vida/i, "Gracias a la Vida", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
     [/^Guerrero del Amor/i, "Guerrero del amor", "Dúo Guardabarranco", "Repertorio de Guardabarranco", "Managua"],
     [/^INSOPORTABLEMENTE/i, "Insoportablemente bella", "Hernaldo Zúñiga", "Interpretación · autores: Manuel Alejandro y Ana Magdalena", "Nicaragua"],
     [/^La mama Ramona/i, "La Mama Ramona", "Marimba de arco de Masaya", "Tradición · arreglo de Alejandro Vega Matus c. 1920", "Masaya"],
     [/^La Cachimba/i, "La Cachimba", "Fuzion 4", "Interpretación · autor: Juan Carlos Vicencio", "San Marcos, Carazo"],
+    [/^La canoa rancha/i, "La Canoa Rancha", "Fuzion 4", "Interpretación identificada", "San Marcos, Carazo"],
     [/^La Candona Chinamera/i, "La Candona Chinamera", "Fuzion 4", "Interpretación verificada · compositor por documentar", "San Marcos, Carazo"],
     [/^La Minifalda/i, "La Minifalda", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
+    [/^La pelo de maiz/i, "La Pelo de Maíz", "Otto de la Rocha", "Repertorio verificado", "Jinotega"],
     [/^La negra cumbianbera/i, "La Negra Cumbianbera", "Fuzion 4", "Interpretación verificada · compositor por documentar", "San Marcos, Carazo"],
     [/^La Tonadita/i, "La Tonadita", "La Nueva Compañía", "Repertorio verificado", "Nicaragua"],
     [/^La Sutiabeña/i, "La Sutiabeña", "Camilo Zapata", "Composición", "León"],
@@ -82,13 +102,18 @@
     [/^La tumba/i, "La tumba del guerrillero", "Carlos Mejía Godoy", "Repertorio autoral", "Nicaragua"],
     [/^la_mora/i, "La Mora Limpia", "Justo Santos", "Composición", "Rivas"],
     [/^Luis Enrique Mejía Godoy/i, "Amando en tiempo de guerra", "Luis Enrique Mejía Godoy", "Repertorio autoral", "Somoto"],
+    [/^Los Alegres de Ticuantepe El Sapo/i, "El Sapo", "Marimba de Arco de Monimbó", "Tradición verificada", "Monimbó, Masaya"],
+    [/^Managua, Linda Managua/i, "Managua Linda Managua", "Otto de la Rocha", "Repertorio verificado", "Managua"],
     [/^Mari Cañamo/i, "Mari Cañamo", "Dimensión Costeña", "Repertorio verificado", "Bluefields"],
     [/^Maria de los Guardias/i, "María de los Guardias", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
     [/^Mariposa de alas rotas/i, "Mariposa de alas rotas — acústica 2004", "Katia Cardenal", "Interpretación identificada", "Managua"],
     [/^MAYAYA/i, "Mayaya La Sinky", "Dimensión Costeña", "Interpretación identificada", "Bluefields"],
     [/^Meneadito/i, "Meneadito", "Mokuanes", "Interpretación verificada", "La Trinidad, Estelí"],
+    [/^Mi Canción/i, "Mi Canción", "Salvador Cardenal Barquero", "Repertorio verificado", "Nicaragua"],
     [/^Nicaragua Mia/i, "Nicaragua Mía", "Tino López Guerra", "Composición", "Chinandega"],
     [/^nicaragua,nicaraguita/i, "Nicaragua, Nicaragüita", "Carlos Mejía Godoy", "Composición", "Nicaragua"],
+    [/^No Pasaran- norma elena/i, "No Pasarán", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
+    [/^No Pasarán/i, "No Pasarán", "Carlos Mejía Godoy", "Repertorio verificado", "Nicaragua"],
     [/^Pajarita de la Paz/i, "Pajarita de la Paz", "Norma Helena Gadea", "Interpretación identificada", "Nicaragua"],
     [/^palomita/i, "Palomita Guasiruca", "Tradición de Chontales · recopilación de Erwin Krüger", "Folclore recopilado", "Chontales"],
     [/^Para Ti/i, "Para ti", "Norma Helena Gadea y Luis Enrique Mejía Godoy", "Interpretación compartida · autoría por confirmar", "Nicaragua"],
@@ -112,6 +137,44 @@
   ];
 
   const cleanTitle = file => file.replace(/\.mp3$/i, '').replace(/_/g, ' ').replace(/^🔊/, '').trim();
+  const normalizeText = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').trim();
+  const TRACK_ARTIST_IMAGES = [
+    [/Fuzion 4/i, "assets/artistas/Fuzion 4.jpg"],
+    [/Mokuanes/i, "assets/artistas/Mokuanes.jpg"],
+    [/La Nueva Compañía/i, "assets/artistas/La Nueva Compañía.jpg"],
+    [/Camilo Zapata/i, "assets/artistas/camilo zapata.jpg"],
+    [/Justo Santos/i, "assets/artistas/justo santos.jpg"],
+    [/Tino López Guerra/i, "assets/artistas/tino lopez guerra.jpg"],
+    [/Erwin Krüger|Tradición de Chontales/i, "assets/artistas/Erwin Krüger.jpg"],
+    [/Otto de la Rocha/i, "assets/artistas/Otto de la Rocha.jpg"],
+    [/Carlos Mejía Godoy/i, "assets/artistas/carlos mejia godoy.jpg"],
+    [/Luis Enrique Mejía Godoy/i, "assets/artistas/Luis Enrique Mejía Godoy.jpg"],
+    [/Salvador Cardenal/i, "assets/artistas/Salvador Cardenal Barquero.jpg"],
+    [/Katia Cardenal/i, "assets/artistas/Katia Cardenal.jpg"],
+    [/Norma Helena Gadea/i, "assets/artistas/Norma Helena Gadea.jpg"],
+    [/José de la Cruz Mena/i, "assets/artistas/José de la Cruz Mena.jpg"],
+    [/Alejandro Vega Matus/i, "assets/artistas/Alejandro Vega Matus.jpg"],
+    [/Marimba de [Aa]rco/i, "assets/artistas/La Marimba de Arco de Monimbó.jpg"],
+    [/Güegüense/i, "assets/artistas/Música de El Güegüense.jpg"],
+    [/Dimensión Costeña/i, "assets/artistas/Dimensión Costeña.jpg"],
+    [/Hernaldo Zúñiga/i, "assets/artistas/Hernaldo Zúñiga.jpg"],
+    [/Luis Enrique Mejía López/i, "assets/artistas/Luis Enrique.jpg"],
+    [/Perrozompopo/i, "assets/artistas/Perrozompopo (Ramón Mejía).jpg"],
+    [/Dúo Guardabarranco/i, "assets/artistas/duo guardabarranco.jpg"]
+  ];
+  const imageForArtist = artist => TRACK_ARTIST_IMAGES.find(([pattern]) => pattern.test(artist))?.[1] || '';
+  const imageForTrack = (artist, file) => imageForArtist(artist) || (/^Una Canción/i.test(file) ? "assets/artistas/Otto de la Rocha.jpg" : '');
+  const profileForTrack = track => {
+    if (/^Una Canción/i.test(track.file)) {
+      return (window.BAQUEANO_SONORA_ARTISTS || []).find(profile => profile.id === 'otto-de-la-rocha');
+    }
+    const artist = normalizeText(track.artist);
+    const aliases = artist.includes('luis enrique mejia lopez') ? ['luis enrique'] : [];
+    return (window.BAQUEANO_SONORA_ARTISTS || []).find(profile => {
+      const name = normalizeText(profile.name);
+      return artist.includes(name) || name.includes(artist) || aliases.includes(name);
+    });
+  };
   const tracks = AUDIO_FILES.map((file, index) => {
     const match = VERIFIED.find(rule => rule[0].test(file));
     return {
@@ -122,15 +185,18 @@
       credit: match ? match[3] : "Sin atribución editorial",
       territory: match ? match[4] : "Procedencia por documentar",
       verified: Boolean(match),
+      image: imageForTrack(match ? match[2] : '', file),
       src: `assets/audio/${encodeURIComponent(file).replace(/%2F/gi, '/')}`
     };
   });
 
   let currentIndex = 0;
   let activeFilter = 'all';
+  let searchQuery = '';
   const audio = new Audio();
   audio.preload = 'metadata';
   const SESSION_KEY = 'baqueano_audio_session_v1';
+  const DEFAULT_COVER = 'assets/images/destinos/volcan_masaya.jpg';
 
   const byId = id => document.getElementById(id);
   const formatTime = seconds => Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}` : '0:00';
@@ -156,7 +222,16 @@
   }
 
   function visibleTracks() {
-    return tracks.filter(track => activeFilter === 'all' || (activeFilter === 'verified' ? track.verified : !track.verified));
+    const query = normalizeText(searchQuery);
+    return tracks.filter(track => {
+      const matchesStatus = activeFilter === 'all' || (activeFilter === 'verified' ? track.verified : !track.verified);
+      if (!matchesStatus || !query) return matchesStatus;
+      const profile = profileForTrack(track);
+      const searchable = [track.title, track.artist, track.credit, track.territory, track.file, profile?.name, profile?.genres, profile?.honorific, profile?.origin]
+        .map(normalizeText)
+        .join(' ');
+      return searchable.includes(query);
+    });
   }
 
   function setPlayingUi(playing) {
@@ -177,6 +252,11 @@
     byId('epicTrackArtist').innerHTML = `<i class="fa-solid fa-microphone-lines"></i> ${track.artist}`;
     byId('epicTrackTerritory').textContent = `• ${track.territory}`;
     byId('epicTrackGenre').innerHTML = `<i class="fa-solid fa-${track.verified ? 'circle-check' : 'clock'}"></i> ${track.verified ? 'Ficha verificada' : 'Pendiente de documentación'}`;
+    const vinylImage = byId('epicVinylImg');
+    if (vinylImage) {
+      vinylImage.src = encodeURI(track.image || DEFAULT_COVER);
+      vinylImage.alt = track.image ? `Fotografía de ${track.artist}` : `Portada de ${track.title}`;
+    }
     byId('epicDurationTime').textContent = '0:00';
     byId('epicCurrentTime').textContent = '0:00';
     byId('epicScrubber').value = 0;
@@ -188,10 +268,18 @@
     const grid = byId('epicPlaylistGrid');
     if (!grid) return;
     const visible = visibleTracks();
+    const status = byId('epicMusicSearchStatus');
+    if (status) status.textContent = searchQuery
+      ? `${visible.length} resultado${visible.length === 1 ? '' : 's'} para “${searchQuery}”`
+      : `Mostrando ${visible.length} de ${tracks.length} grabaciones`;
+    if (!visible.length) {
+      grid.innerHTML = `<div class="epic-music-empty"><i class="fa-solid fa-record-vinyl"></i><strong>No encontramos coincidencias</strong><span>Prueba con otra canción, artista, género o territorio.</span></div>`;
+      return;
+    }
     grid.innerHTML = visible.map(track => {
       const index = tracks.indexOf(track);
       return `<button type="button" class="epic-track-card ${index === currentIndex ? 'is-active' : ''}" data-track-index="${index}">
-        <span class="epic-track-card-thumb" aria-hidden="true"><i class="fa-solid fa-${track.verified ? 'circle-check' : 'compact-disc'}"></i></span>
+        <span class="epic-track-card-thumb" aria-hidden="true">${track.image ? `<img src="${encodeURI(track.image)}" alt="" loading="lazy" decoding="async"><span class="epic-track-card-play-overlay"><i class="fa-solid fa-play"></i></span>` : `<i class="fa-solid fa-${track.verified ? 'circle-check' : 'compact-disc'}"></i>`}</span>
         <span class="epic-track-card-info">
           <strong class="epic-track-card-name">${track.title}</strong>
           <span class="epic-track-card-artist">${track.artist}</span>
@@ -205,6 +293,7 @@
 
   function step(direction) {
     const pool = visibleTracks();
+    if (!pool.length) return;
     const current = pool.findIndex(track => track === tracks[currentIndex]);
     const next = pool[(current + direction + pool.length) % pool.length] || tracks[0];
     loadTrack(tracks.indexOf(next), true);
@@ -222,6 +311,26 @@
       player.querySelectorAll('[data-status]').forEach(item => item.classList.toggle('is-active', item === button));
       renderPlaylist();
     }));
+    const searchInput = byId('epicMusicSearchInput');
+    const searchClear = byId('epicMusicSearchClear');
+    const syncArtistSearch = value => {
+      const artistSearch = byId('sonoraSearchInput');
+      if (!artistSearch) return;
+      artistSearch.value = value;
+      artistSearch.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    if (searchInput) searchInput.addEventListener('input', event => {
+      searchQuery = event.target.value.trim();
+      renderPlaylist();
+      syncArtistSearch(searchQuery);
+    });
+    if (searchClear && searchInput) searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      renderPlaylist();
+      syncArtistSearch('');
+      searchInput.focus();
+    });
     byId('epicPlayBtn').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
     byId('epicPrevBtn').addEventListener('click', () => step(-1));
     byId('epicNextBtn').addEventListener('click', () => step(1));
