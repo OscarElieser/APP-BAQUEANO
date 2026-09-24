@@ -7,6 +7,9 @@
 (function (window, document) {
   'use strict';
   if (window.BaqueanoAssistant?.version === '2') return;
+  if (!document.querySelector('link[data-baqueano-assistant]')) {
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260924-3'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+  }
 
   const CONFIG = Object.freeze({ greetingDelay: 10000, contextDelay: 30000, cooldown: 240000, autoPeek: 14000, endpoint: '/api/v1/ai/chat' });
   const KEYS = Object.freeze({ session: 'baqueano_assistant_session_v2', preferences: 'baqueano_assistant_preferences_v2' });
