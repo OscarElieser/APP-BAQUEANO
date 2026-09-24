@@ -34,7 +34,7 @@
   // --------------------------------------------------------------------------
   const COLLECTION        = 'tourism_services';
   const PLAN_COLLECTION   = 'travelPlans';
-  const GEMINI_API_KEY    = window.BAQUEANO_GEMINI_KEY || '';
+  const GEMINI_API_KEY    = ''; // IA generativa: únicamente mediante gateway server-side.
   const GEMINI_MODELS     = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite'];
 
   const SERVICE_LABELS = {
@@ -454,6 +454,9 @@
   // 6. CONSULTA A GOOGLE GEMINI API (CON FAIL-SAFE)
   // --------------------------------------------------------------------------
   async function callGemini(input) {
+    // Las credenciales de IA nunca se leen desde el navegador. Mientras el
+    // planificador migra al gateway server-side, se usa el motor territorial.
+    if (!GEMINI_API_KEY) return buildTerritoryFallbackPlan(input);
     const territories = (window.BAQUEANO_TERRITORIES || []).slice(0, 6);
     const contextStr = territories.map(t =>
       `• ${t.name}: ${t.shortDesc} Lugares: ${(t.places || []).slice(0, 3).map(p => p.name).join(', ')}. Actividades: ${(t.activities || []).slice(0, 2).join(', ')}.`

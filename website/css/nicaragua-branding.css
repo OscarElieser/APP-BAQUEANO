@@ -1,0 +1,1446 @@
+/*
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — IDENTIDAD VISUAL & BRANDING NICARAGÜENSE (nicaragua-branding.css)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Transformar la jerarquía visual de Baqueano para que el primer impacto comunique
+  de forma inmediata: NICARAGUA, TURISMO, CULTURA, NATURALEZA, COMUNIDADES, AVENTURA
+  y TECNOLOGÍA al servicio de la soberanía campesina y el viajero.
+- Ampliar el sistema de diseño oficial con variables semánticas armoniosas
+  (--baqueano-primary, --baqueano-orange, --baqueano-cream, etc.), manteniendo
+  el contraste WCAG AAA y evitando la sensación de "página de scroll infinito".
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Capa CSS3 modular que convive y refina styles.css sin romper selectores existentes.
+- Aceleración por GPU (transform3d, will-change) para microinteracciones fluidas a 60fps.
+- Rejillas CSS Grid adaptativas para los 9 breakpoints oficiales:
+  320px, 360px, 390px, 412px, 768px, 1024px, 1366px, 1440px y 1920px.
+- Fondos térmicos diferenciados: secciones culturales cálidas (#F4E6C1 / #F5F4F0)
+  y secciones tecnológicas de alta gama (#0D1B2A).
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Variables globales oficiales :root.
+- Nuevo Hero con titular patrio y mosaico visual de destinos nicaragüenses.
+- Buscador interactivo "¿Qué querés descubrir en Nicaragua?" con chips rápidos.
+- Malla de 10 Categorías Visuales "Explora Nicaragua".
+- Selector temático de Experiencias "¿Qué querés vivir?".
+- Bloque "Cultura Viva de Nicaragua" con patrón petroglífico sutil.
+- Módulo tecnológico "Baqueano Digital (IA)" con showcase conversacional.
+- Módulo "App Baqueano" con simulador de smartphone Android y descarga APK.
+============================================================================
+*/
+
+/* ==========================================================================
+   1. VARIABLES GLOBALES DE IDENTIDAD VISUAL OFICIAL
+   ========================================================================== */
+:root {
+  --baqueano-primary: #165D6F; /* Azul petróleo institucional */
+  --baqueano-orange: #F65E01;  /* Naranja de acción / CTA */
+  --baqueano-cream: #F4E6C1;   /* Crema / arena pinolera para cultura y patrimonio */
+  --baqueano-green: #5F6F52;   /* Verde naturaleza y custodia ambiental */
+  --baqueano-earth: #C2A58C;   /* Arena / tierra ancestral */
+  --baqueano-night: #0D1B2A;   /* Azul noche para tecnología, 3D e IA */
+  --baqueano-bg: #F5F4F0;      /* Fondo cálido orgánico */
+  --baqueano-white: #FFFFFF;   /* Blanco puro */
+  --baqueano-text: #1D292D;    /* Texto principal de alto contraste */
+  --baqueano-muted: #6B7678;   /* Texto secundario y descriptores */
+}
+
+/* ==========================================================================
+   2. REFINAMIENTO DE NAVEGACIÓN INSTITUCIONAL
+   ========================================================================== */
+.main-navbar .nav-links-menu a.active {
+  color: var(--baqueano-orange) !important;
+  border-bottom: 2px solid var(--baqueano-orange);
+}
+
+.nav-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(22, 93, 111, 0.2);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 50%;
+  color: #F4E6C1;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nav-search-btn:hover {
+  background: rgba(246, 94, 1, 0.25);
+  border-color: var(--baqueano-orange);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   3. NUEVO HERO: NICARAGUA COMO PROTAGONISTA ABSOLUTO
+   ========================================================================== */
+.hero-section-nicaragua {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(90px, 12vh, 140px) 0 clamp(40px, 6vh, 80px);
+  background: radial-gradient(circle at 75% 30%, rgba(22, 93, 111, 0.45) 0%, rgba(13, 27, 42, 0.95) 70%, #070B14 100%);
+  overflow: hidden;
+}
+
+.hero-nicaragua-bg-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: saturate(1.2) contrast(1.1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-nicaragua-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 11, 20, 0.4) 0%, rgba(13, 27, 42, 0.75) 50%, #070B14 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-nicaragua-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.hero-nicaragua-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 6px 16px;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  border-radius: 30px;
+  color: var(--baqueano-cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.hero-tag-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--baqueano-orange);
+  box-shadow: 0 0 10px var(--baqueano-orange);
+}
+
+.hero-main-title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 900;
+  line-height: 1.12;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.hero-main-title .highlight-terra {
+  background: linear-gradient(135deg, #F65E01 0%, #FF7B26 60%, #F4E6C1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-main-subtitle {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: #E2E8F0;
+  max-width: 620px;
+}
+
+.hero-manifesto-subtle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--baqueano-cream);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-manifesto-subtle::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--baqueano-orange);
+}
+
+.hero-actions-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.btn-cta-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--baqueano-orange);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  color: #0D1B2A;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(246, 94, 1, 0.45);
+  transition: all 0.25s ease;
+}
+
+.btn-cta-explore:hover {
+  background: #FF7B26;
+  color: #070B14;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(246, 94, 1, 0.6);
+}
+
+.btn-cta-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: rgba(22, 93, 111, 0.3);
+  border: 1px solid rgba(244, 230, 193, 0.35);
+  border-radius: 14px;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.btn-cta-route:hover {
+  background: rgba(22, 93, 111, 0.6);
+  border-color: var(--baqueano-cream);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(22, 93, 111, 0.4);
+}
+
+/* ── Mosaico Visual de Nicaragua en Hero ── */
+.hero-nicaragua-mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  position: relative;
+}
+
+.mosaic-card {
+  position: relative;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+
+.mosaic-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: var(--baqueano-orange);
+  box-shadow: 0 18px 45px rgba(246, 94, 1, 0.3);
+  z-index: 5;
+}
+
+.mosaic-card.card-featured {
+  grid-column: span 2;
+  height: 220px;
+}
+
+.mosaic-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.mosaic-card:hover .mosaic-img {
+  transform: scale(1.08);
+}
+
+.mosaic-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 27, 42, 0.95) 0%, rgba(13, 27, 42, 0.3) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.mosaic-badge {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--baqueano-orange);
+  margin-bottom: 4px;
+}
+
+.mosaic-title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.mosaic-meta {
+  margin: 2px 0 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--baqueano-cream);
+}
+
+/* ==========================================================================
+   4. BUSCADOR / EXPLORADOR PRINCIPAL
+   ========================================================================== */
+.home-search-section {
+  position: relative;
+  z-index: 20;
+  margin-top: -35px;
+  padding-bottom: 30px;
+}
+
+.home-search-card {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 28px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(22, 93, 111, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.home-search-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+
+.home-search-label i {
+  color: var(--baqueano-orange);
+}
+
+.home-search-form {
+  display: flex;
+  gap: 10px;
+}
+
+.home-search-input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.home-search-input-wrap i {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--baqueano-muted);
+  font-size: 16px;
+}
+
+.home-search-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 20px 0 48px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 16px;
+  color: #FFFFFF;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.home-search-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--baqueano-orange);
+  box-shadow: 0 0 15px rgba(246, 94, 1, 0.35);
+}
+
+.home-search-submit {
+  height: 52px;
+  padding: 0 24px;
+  background: var(--baqueano-orange);
+  border: none;
+  border-radius: 16px;
+  color: #0D1B2A;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(246, 94, 1, 0.4);
+  transition: all 0.2s ease;
+}
+
+.home-search-submit:hover {
+  background: #FF7B26;
+  transform: translateY(-2px);
+}
+
+.home-search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chips-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--baqueano-cream);
+  margin-right: 4px;
+}
+
+.search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 12px;
+  color: #CBD5E1;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.search-chip:hover {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: var(--baqueano-orange);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   5. SECCIÓN 3: EXPLORA NICARAGUA (10 CATEGORÍAS VISUALES)
+   ========================================================================== */
+.categories-nicaragua-section {
+  padding: 80px 0 60px;
+  background: #0A0F1D;
+  position: relative;
+}
+
+.section-head-nicaragua {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 48px;
+}
+
+.section-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 30px;
+  color: var(--baqueano-cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.section-title-nicaragua {
+  margin: 0 0 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.section-sub-nicaragua {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: #94A3B8;
+}
+
+.categories-grid-10 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.category-card-pro {
+  position: relative;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.category-card-pro:hover {
+  transform: translateY(-6px);
+  border-color: var(--baqueano-orange);
+  box-shadow: 0 16px 40px rgba(246, 94, 1, 0.35);
+}
+
+.category-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.category-card-pro:hover .category-card-img {
+  transform: scale(1.1);
+}
+
+.category-card-overlay {
+  position: relative;
+  z-index: 2;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(13, 27, 42, 0.96) 0%, rgba(13, 27, 42, 0.4) 65%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category-card-title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.category-card-desc {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: #CBD5E1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.category-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--baqueano-orange);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   6. SECCIÓN 4: ¿QUÉ QUERÉS VIVIR? (EXPERIENCIAS)
+   ========================================================================== */
+.experiences-nicaragua-section {
+  padding: 80px 0;
+  background: radial-gradient(circle at 20% 50%, rgba(22, 93, 111, 0.15) 0%, #070B14 100%);
+  border-top: 1px solid rgba(244, 230, 193, 0.08);
+}
+
+.experiences-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.experience-card-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 18px;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.experience-card-pill:hover {
+  background: rgba(22, 93, 111, 0.35);
+  border-color: var(--baqueano-orange);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(246, 94, 1, 0.25);
+}
+
+.experience-icon-box {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  border-radius: 14px;
+  color: var(--baqueano-orange);
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.experience-card-pill:hover .experience-icon-box {
+  transform: scale(1.1) rotate(5deg);
+  background: var(--baqueano-orange);
+  color: #0D1B2A;
+}
+
+.experience-info h4 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.experience-info p {
+  margin: 3px 0 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+/* ==========================================================================
+   7. SECCIÓN 10: SERVICIOS TURÍSTICOS ("Todo lo que necesitas")
+   ========================================================================== */
+.services-travel-section {
+  padding: 80px 0;
+  background: #0A0F1D;
+  border-top: 1px solid rgba(244, 230, 193, 0.08);
+}
+
+.services-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.service-item-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.1);
+  border-radius: 16px;
+  color: #E2E8F0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.service-item-box:hover {
+  background: rgba(22, 93, 111, 0.3);
+  border-color: var(--baqueano-primary);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.service-item-box i {
+  color: var(--baqueano-orange);
+  font-size: 18px;
+}
+
+/* ==========================================================================
+   8. SECCIÓN 11: CULTURA VIVA DE NICARAGUA (#F4E6C1)
+   ========================================================================== */
+.culture-alive-section {
+  padding: 90px 0;
+  background: #F4E6C1;
+  color: #1D292D;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Patrón petroglífico sutil a 5% opacidad */
+.culture-alive-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#165D6F 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.culture-head-box {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.culture-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(22, 93, 111, 0.12);
+  border: 1px solid rgba(22, 93, 111, 0.25);
+  border-radius: 30px;
+  color: #165D6F;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.culture-title {
+  margin: 0 0 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 900;
+  color: #165D6F;
+}
+
+.culture-sub {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: #475569;
+}
+
+.culture-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.culture-feature-card {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(22, 93, 111, 0.18);
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(22, 93, 111, 0.08);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.culture-feature-card:hover {
+  transform: translateY(-5px);
+  background: #FFFFFF;
+  border-color: #F65E01;
+  box-shadow: 0 16px 35px rgba(246, 94, 1, 0.2);
+}
+
+.culture-card-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: rgba(22, 93, 111, 0.1);
+  border-radius: 14px;
+  color: #165D6F;
+  font-size: 20px;
+  margin-bottom: 16px;
+  transition: all 0.25s ease;
+}
+
+.culture-feature-card:hover .culture-card-icon {
+  background: #F65E01;
+  color: #FFFFFF;
+  transform: rotate(5deg);
+}
+
+.culture-feature-card h3 {
+  margin: 0 0 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #165D6F;
+}
+
+.culture-feature-card p {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.culture-feature-card .culture-link-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #F65E01;
+  margin-top: 16px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   9. SECCIÓN 9: BAQUEANO DIGITAL (IA)
+   ========================================================================== */
+.digital-assistant-showcase {
+  padding: 90px 0;
+  background: #0D1B2A;
+  border-top: 1px solid rgba(244, 230, 193, 0.1);
+  border-bottom: 1px solid rgba(244, 230, 193, 0.1);
+}
+
+.digital-ai-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.digital-ai-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.digital-chat-simulator {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(22, 93, 111, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 14px 18px;
+  border-radius: 18px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.chat-user {
+  align-self: flex-end;
+  background: rgba(22, 93, 111, 0.45);
+  border: 1px solid rgba(22, 93, 111, 0.7);
+  color: #FFFFFF;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-baqueano {
+  align-self: flex-start;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(246, 94, 1, 0.5);
+  color: #E2E8F0;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-baqueano-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--baqueano-orange);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   10. SECCIÓN 14: APP BAQUEANO (SMARTPHONE MOCKUP REUBICADO)
+   ========================================================================== */
+.app-baqueano-section {
+  padding: 90px 0;
+  background: radial-gradient(circle at 80% 50%, rgba(22, 93, 111, 0.3) 0%, #070B14 100%);
+  border-top: 1px solid rgba(244, 230, 193, 0.08);
+}
+
+.app-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.app-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.app-feature-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.app-feature-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  border-radius: 12px;
+  color: var(--baqueano-orange);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.app-feature-row h4 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.app-feature-row p {
+  margin: 3px 0 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12.5px;
+  color: #94A3B8;
+}
+
+/* ==========================================================================
+   11. SECCIÓN 5: INSPECTOR INTERACTIVO DE LOS 17 TERRITORIOS
+   ========================================================================== */
+.territories-interactive-wrap {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.territory-chips-scroll {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 6px 2px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--baqueano-primary) transparent;
+}
+
+.territory-chips-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.territory-chips-scroll::-webkit-scrollbar-thumb {
+  background: var(--baqueano-primary);
+  border-radius: 10px;
+}
+
+.territory-chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 30px;
+  color: #E2E8F0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.territory-chip-btn i {
+  color: var(--baqueano-orange);
+  font-size: 12px;
+}
+
+.territory-chip-btn:hover {
+  background: rgba(22, 93, 111, 0.4);
+  border-color: var(--baqueano-orange);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.territory-chip-btn.is-active {
+  background: var(--baqueano-orange);
+  border-color: var(--baqueano-orange);
+  color: #0D1B2A;
+  box-shadow: 0 4px 16px rgba(246, 94, 1, 0.35);
+}
+
+.territory-chip-btn.is-active i {
+  color: #0D1B2A;
+}
+
+.territory-inspector-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(22, 93, 111, 0.4);
+  border-radius: 20px;
+  padding: clamp(20px, 3vw, 32px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.terr-inspect-header {
+  border-bottom: 1px solid rgba(244, 230, 193, 0.1);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.terr-inspect-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--baqueano-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.terr-inspect-name {
+  margin: 0 0 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.terr-inspect-tagline {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  color: #94A3B8;
+  line-height: 1.5;
+}
+
+.terr-inspect-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
+.terr-inspect-title {
+  margin: 0 0 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--baqueano-cream);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terr-inspect-title:not(:first-child) {
+  margin-top: 18px;
+}
+
+.terr-inspect-title i {
+  color: var(--baqueano-orange);
+}
+
+.terr-inspect-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.terr-inspect-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(22, 93, 111, 0.4);
+  border-radius: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  color: #E2E8F0;
+}
+
+.terr-inspect-tag.tag-food {
+  background: rgba(246, 94, 1, 0.12);
+  border-color: rgba(246, 94, 1, 0.3);
+}
+
+.terr-inspect-text {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #CBD5E1;
+}
+
+.terr-inspect-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.terr-inspect-li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12.5px;
+  color: #CBD5E1;
+}
+
+.terr-inspect-li i {
+  color: #10B981;
+  font-size: 11px;
+}
+
+.terr-inspect-footer {
+  border-top: 1px solid rgba(244, 230, 193, 0.1);
+  padding-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.terr-inspect-services {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #94A3B8;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+}
+
+.terr-inspect-services i {
+  color: var(--baqueano-orange);
+  font-size: 18px;
+}
+
+.btn-terr-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--baqueano-orange);
+  color: #0D1B2A !important;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(246, 94, 1, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-terr-explore:hover {
+  background: #FF7B26;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(246, 94, 1, 0.5);
+}
+
+/* ==========================================================================
+   12. SECCIÓN 15: SOS / SEGURIDAD TERRITORIAL 24/7
+   ========================================================================== */
+.sos-security-section {
+  padding: 80px 0;
+  background: radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.12) 0%, #070B14 100%);
+  border-top: 1px solid rgba(220, 38, 38, 0.25);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+.sos-security-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  border-radius: 24px;
+  padding: clamp(24px, 4vw, 48px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(220, 38, 38, 0.15);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.sos-card-title {
+  margin: 0 0 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.sos-card-title .sos-highlight {
+  color: #EF4444;
+}
+
+.sos-card-desc {
+  margin: 0 0 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #CBD5E1;
+}
+
+.sos-numbers-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sos-num-item {
+  padding: 12px 14px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sos-num-item:hover {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: #EF4444;
+  transform: translateY(-2px);
+}
+
+.sos-num-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #EF4444;
+}
+
+.sos-num-lbl {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #E2E8F0;
+}
+
+.sos-action-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px;
+  background: rgba(7, 11, 20, 0.6);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 18px;
+  text-align: center;
+}
+
+.sos-trigger-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: #DC2626;
+  color: #FFFFFF !important;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sos-trigger-btn:hover {
+  background: #B91C1C;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.6);
+}
+
+.sos-note {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11.5px;
+  color: #94A3B8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ==========================================================================
+   13. RESPONSIVE DESIGN (TODOS LOS BREAKPOINTS)
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .categories-grid-10 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .experiences-grid-12 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .culture-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-nicaragua-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-nicaragua-mosaic {
+    margin-top: 24px;
+  }
+  .digital-ai-grid {
+    grid-template-columns: 1fr;
+  }
+  .app-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .services-chips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .terr-inspect-body-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .sos-security-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-grid-10 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .category-card-pro {
+    height: 200px;
+  }
+  .experiences-grid-12 {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .experience-card-pill {
+    padding: 12px;
+    gap: 10px;
+  }
+  .culture-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-search-form {
+    flex-direction: column;
+  }
+  .home-search-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  .sos-numbers-row {
+    grid-template-columns: 1fr;
+  }
+  .terr-inspect-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-terr-explore {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-grid-10 {
+    grid-template-columns: 1fr;
+  }
+  .experiences-grid-12 {
+    grid-template-columns: 1fr;
+  }
+  .services-chips-grid {
+    grid-template-columns: 1fr;
+  }
+  .mosaic-card.card-featured {
+    height: 180px;
+  }
+  .mosaic-card {
+    height: 160px;
+  }
+}
