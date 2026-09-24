@@ -421,19 +421,6 @@
 </head>
 
 <body>
-  <!-- POR QUE: La web historica debe conducir a la experiencia moderna.
-       COMO: Puente visible sin duplicar logica.
-       QUE: Accesos a IA, movilidad y Mi Viaje. -->
-  <nav aria-label="Experiencia BAQUEANO" style="position:fixed;right:1rem;bottom:1rem;z-index:9999;display:flex;gap:.5rem;flex-wrap:wrap">
-    <a href="/baqueano-ai">BAQUEANO IA</a><a href="/alquiler-vehiculos">Alquiler de Vehiculos</a><a href="/mi-viaje">Mi Viaje</a>
-  </nav>
-  <!-- POR QUE: La web historica debe conducir a la experiencia moderna.
-       COMO: Puente visible sin duplicar logica.
-       QUE: Accesos a IA, movilidad y Mi Viaje. -->
-  <nav aria-label="Experiencia BAQUEANO" style="position:fixed;right:1rem;bottom:1rem;z-index:9999;display:flex;gap:.5rem;flex-wrap:wrap">
-    <a href="/baqueano-ai">BAQUEANO IA</a><a href="/alquiler-vehiculos">Alquiler de Vehiculos</a><a href="/mi-viaje">Mi Viaje</a>
-  </nav>
-
   <!-- ============================================================================
        🧭 BAQUEANO — BARRA DE NAVEGACIÓN INSTITUCIONAL ULTRA HD
        🎯 Por qué: Crear una primera impresión visual de altísima gama que refleje
@@ -1653,9 +1640,12 @@
             <p class="section-sub-nicaragua">
               Planificación conversacional con memoria de territorio. Nuestra IA conoce caminos de tierra, precios justos campesinos, horarios de buses y cooperativas locales sin intermediarios.
             </p>
-            <div style="margin-top: 10px;">
-              <button type="button" class="btn-cta-explore" onclick="if(window.BaqueanoAssistant &amp;&amp; typeof window.BaqueanoAssistant.openAssistant === 'function'){ window.BaqueanoAssistant.openAssistant(); } else { const box = document.getElementById('baqueanoAssistantBox') || document.getElementById('assistantChatDrawer'); if(box) box.classList.add('is-open'); }">
-                <i class="fa-solid fa-comments"></i> Planificar con Baqueano
+            <div style="margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="baqueano-ai.html" class="btn-cta-explore">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Abrir Baqueano IA
+              </a>
+              <button type="button" class="btn-cta-route" onclick="if(window.BaqueanoAssistant && typeof window.BaqueanoAssistant.open === 'function'){ window.BaqueanoAssistant.open(); } else if(window.BaqueanoAssistant && typeof window.BaqueanoAssistant.openAssistant === 'function'){ window.BaqueanoAssistant.openAssistant(); } else { const box = document.getElementById('baqueanoAssistantBox') || document.getElementById('assistantChatDrawer'); if(box) box.classList.add('is-open'); }">
+                <i class="fa-solid fa-comments"></i> Asistente en Vivo
               </button>
             </div>
           </div>
