@@ -978,6 +978,28 @@ function initializeNavigationModules() {
   initDynamicFooter();
   initFooterBizRegister();
   initDropdownMiPais();
+  loadBaqueanoDigital();
+}
+
+// ============================================================================
+// BAQUEANO DIGITAL — CARGA GLOBAL DIFERIDA
+// 🎯 POR QUÉ: compartir un solo asistente en las páginas turísticas públicas.
+// ⚙️ CÓMO: carga CSS/JS una vez y respeta rutas sensibles o institucionales.
+// 📦 QUÉ: bootstrap liviano del componente global.
+// ============================================================================
+function loadBaqueanoDigital() {
+  const excluded = /(?:admin|perfil|privacidad|terminos|cookies|aviso-legal|offline|denuncias)(?:\.html)?$/i;
+  if (excluded.test(window.location.pathname.replace(/\/$/, ''))) return;
+  if (!document.querySelector('link[data-baqueano-assistant]')) {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260924-1'; style.dataset.baqueanoAssistant = 'true';
+    document.head.appendChild(style);
+  }
+  if (!document.querySelector('script[data-baqueano-assistant]') && !window.BaqueanoAssistant) {
+    const script = document.createElement('script');
+    script.src = 'js/baqueano-assistant.js?v=20260924-1'; script.defer = true; script.dataset.baqueanoAssistant = 'true';
+    document.body.appendChild(script);
+  }
 }
 
 if (document.readyState === 'loading') {
