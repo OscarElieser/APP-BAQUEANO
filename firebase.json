@@ -19,6 +19,7 @@
       "**/pnpm-*",
       "**/tsconfig*",
       "**/package*",
+      "**/local-keys.js",
       "**/*.md",
       "**/*.apk"
     ],
@@ -33,6 +34,11 @@
       }
     ],
     "redirects": [
+      {
+        "source": "/baqueano-ai",
+        "destination": "/baqueano-ai.html",
+        "type": 301
+      },
       {
         "source": "/privacidad",
         "destination": "/index.html#privacidad",

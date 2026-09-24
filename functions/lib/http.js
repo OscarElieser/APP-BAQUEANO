@@ -25,12 +25,18 @@ function createHealthHandler({ now = () => new Date() } = {}) {
     return sendJson(response, 200, {ok: true, service: "baqueano-functions", timestamp: now().toISOString()});
   };
 }
-function createApiHandler({ readPublicMetrics, now = () => new Date() }) {
+function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Date() }) {
   if (typeof readPublicMetrics !== "function") throw new TypeError("readPublicMetrics debe ser una función.");
   return async function apiHandler(request, response) {
     const path = normalizedPath(request);
+    const isAiPath = path === "/v1/ai/chat" || path === "/baqueano-ai";
+    if (isAiPath && request.method === "POST") {
+      if (typeof handleAiChat !== "function") return sendJson(response, 503, {ok: false, error: {code: "AI_NOT_CONFIGURED"}});
+      const result = await handleAiChat(request);
+      return sendJson(response, result.status, result.body);
+    }
     if (request.method !== "GET") {
-      response.setHeader("Allow", "GET");
+      response.setHeader("Allow", isAiPath ? "POST" : "GET");
       return sendJson(response, 405, {ok: false, error: {code: "METHOD_NOT_ALLOWED"}});
     }
     if (path === "/v1/public/metrics" || path === "/metrics") {
@@ -42,7 +48,7 @@ function createApiHandler({ readPublicMetrics, now = () => new Date() }) {
         return sendJson(response, 503, {ok: false, error: {code: "METRICS_UNAVAILABLE", message: "Las métricas reales no están disponibles temporalmente."}});
       }
     }
-    if (path === "/v1/ai" || path.startsWith("/v1/ai/")) {
+    if (path === "/v1/ai" || path.startsWith("/v1/ai/") || path === "/baqueano-ai") {
       return sendJson(response, 503, {ok: false, error: {code: "AI_NOT_CONFIGURED", message: "El servicio de IA no está configurado."}});
     }
     return sendJson(response, 404, {ok: false, error: {code: "NOT_FOUND"}});
