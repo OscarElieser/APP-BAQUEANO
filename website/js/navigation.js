@@ -706,6 +706,18 @@ function ensureUserSessionLoaded() {
 }
 
 /**
+ * Asegura la carga reactiva del selector dinámico de temas y paletas (theme-switcher.js)
+ */
+function ensureThemeSwitcherLoaded() {
+  if (!window.BaqueanoThemeManager && !document.getElementById('baqueanoThemeSwitcherScript')) {
+    const script = document.createElement('script');
+    script.id = 'baqueanoThemeSwitcherScript';
+    script.src = 'js/theme-switcher.js';
+    document.head.appendChild(script);
+  }
+}
+
+/**
  * Inicializa el acordeón desplegable y la interactividad del registro de negocios en el footer.
  */
 function initFooterBizRegister() {
@@ -952,6 +964,7 @@ function initializeNavigationModules() {
   initRuntimeObservability();
   initPublicServiceWorker();
   ensureUserSessionLoaded();
+  ensureThemeSwitcherLoaded();
   buildAboutDropdown();
   initNavbarScroll();
   initDynamicNavbar();
