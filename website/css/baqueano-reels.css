@@ -1,0 +1,51 @@
+/* ========================================================================== */
+/* BAQUEANO REELS                                                             */
+/* 🎯 POR QUÉ: hacer del teléfono una muestra viva sin afectar otros módulos. */
+/* ⚙️ CÓMO: estilos encapsulados, scroll snap y capas dentro del viewport.     */
+/* 📦 QUÉ: feed 9:16, overlays, acciones, indicadores y dock responsive.       */
+/* ========================================================================== */
+.baqueano-phone-stage { display:flex; align-items:center; justify-content:center; min-height:640px; }
+.baqueano-phone-stage .phone-frame-wrap { position:relative; width:320px; perspective:1200px; }
+.baqueano-phone-stage .phone-frame-wrap::before { content:""; position:absolute; inset:-4%; background:radial-gradient(circle,rgba(246,94,1,.3),rgba(22,93,111,.22) 45%,transparent 72%); filter:blur(35px); z-index:-1; }
+.baqueano-phone-stage .phone-hardware { width:100%; height:640px; padding:12px; border:4px solid #1e293b; border-radius:46px; background:#020617; box-shadow:0 25px 60px rgba(0,0,0,.75),inset 0 0 0 2px rgba(244,230,193,.2); transition:transform .45s ease; }
+.baqueano-phone-stage .phone-hardware:hover { transform:translateY(-6px) rotateY(-3deg) rotateX(2deg); }
+.baqueano-phone-stage .phone-notch { position:absolute; z-index:10; top:18px; left:50%; width:90px; height:20px; transform:translateX(-50%); border-radius:20px; background:#0f172a; display:grid; place-items:center; }
+.baqueano-phone-stage .camera-lens { width:8px; height:8px; border-radius:50%; background:#1e293b; border:1px solid #165d6f; }
+.baqueano-phone-stage .phone-screen { position:relative; width:100%; height:100%; overflow:hidden; border-radius:32px; border:1px solid rgba(255,255,255,.08); }
+.baqueano-reels { isolation:isolate; background:#0d1b2a; color:#fff; }
+.baqueano-reels-feed { position:absolute; inset:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; scroll-snap-type:y mandatory; touch-action:pan-y; }
+.baqueano-reels-feed::-webkit-scrollbar { display:none; }
+.baqueano-reel { position:relative; width:100%; height:100%; min-height:100%; overflow:hidden; scroll-snap-align:start; scroll-snap-stop:always; background:#0d1b2a; }
+.baqueano-reel-poster,.baqueano-reel-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.baqueano-reel-video { opacity:0; transition:opacity 350ms ease; }
+.baqueano-reel.is-active .baqueano-reel-video { opacity:1; }
+.baqueano-reel.is-active .baqueano-reel-poster { animation:baqueano-reel-zoom 9s ease-out both; }
+.baqueano-reel-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(5,17,27,.28),transparent 28%,rgba(5,17,27,.25) 54%,rgba(5,17,27,.92)); }
+.baqueano-reel-header { position:absolute; z-index:3; top:0; left:0; right:0; min-height:68px; padding:32px 16px 10px; display:flex; align-items:center; gap:6px; background:linear-gradient(180deg,rgba(13,27,42,.82),transparent); font-size:10px; letter-spacing:.06em; }
+.baqueano-reel-header img { width:18px; height:18px; object-fit:contain; }
+.baqueano-reel-header span { margin-left:auto; color:rgba(255,255,255,.7); font-size:8px; letter-spacing:0; }
+.baqueano-reel-copy { position:absolute; z-index:3; left:16px; right:62px; bottom:70px; text-shadow:0 2px 14px rgba(0,0,0,.65); }
+.baqueano-reel-badge { display:inline-flex; padding:4px 8px; border-radius:999px; background:#f65e01; font-size:8px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.baqueano-reel-phrase { margin:8px 0 4px; color:#f4e6c1; font-size:9px; font-weight:600; }
+.baqueano-reel-copy h3 { margin:0 0 4px; max-width:180px; color:#fff; font-size:21px; line-height:1.02; }
+.baqueano-reel-meta,.baqueano-reel-category { margin:3px 0; color:rgba(255,255,255,.86); font-size:9px; }
+.baqueano-reel-meta b { margin-left:5px; color:#f4e6c1; }
+.baqueano-reel-explore { display:inline-flex; align-items:center; gap:5px; margin-top:9px; padding:8px 12px; border-radius:999px; background:#f65e01; color:#fff; font-size:9px; font-weight:800; text-transform:uppercase; text-decoration:none; box-shadow:0 8px 20px rgba(246,94,1,.28); transition:transform 250ms ease,background 250ms ease; }
+.baqueano-reel-explore:hover { color:#fff; background:#df5502; transform:translateY(-2px); }
+.baqueano-reel-actions { position:absolute; z-index:4; right:9px; bottom:76px; display:flex; flex-direction:column; gap:8px; }
+.baqueano-reel-actions button,.baqueano-reel-actions a { width:42px; min-height:42px; padding:6px 2px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(13,27,42,.65); backdrop-filter:blur(10px); color:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-decoration:none; cursor:pointer; }
+.baqueano-reel-actions button:disabled { opacity:.48; cursor:default; }
+.baqueano-reel-actions i { font-size:14px; } .baqueano-reel-actions span { font-size:6px; } .baqueano-reel-actions .is-selected { color:#f65e01; }
+.baqueano-reels-indicators { position:absolute; z-index:5; right:5px; top:42%; display:flex; flex-direction:column; gap:4px; }
+.baqueano-reels-indicators span { width:2px; height:9px; border-radius:2px; background:rgba(255,255,255,.38); transition:height 250ms ease,background 250ms ease; }
+.baqueano-reels-indicators .is-active { height:18px; background:#f65e01; }
+.baqueano-reels-dock { position:absolute; z-index:6; left:0; right:0; bottom:0; height:58px; display:grid; grid-template-columns:repeat(4,1fr); padding:7px 10px 8px; background:rgba(13,27,42,.85); backdrop-filter:blur(16px); border-top:1px solid rgba(255,255,255,.1); }
+.baqueano-reels-dock a { color:rgba(255,255,255,.65); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-size:7px; text-decoration:none; }
+.baqueano-reels-dock a i { font-size:13px; } .baqueano-reels-dock a.is-active { color:#f65e01; }
+.baqueano-reels :is(a,button):focus-visible { outline:2px solid #f4e6c1; outline-offset:2px; }
+.baqueano-reel.is-active :is(.baqueano-reel-phrase,h3,.baqueano-reel-meta,.baqueano-reel-category,.baqueano-reel-explore) { animation:baqueano-reel-rise 420ms ease both; }
+@keyframes baqueano-reel-rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes baqueano-reel-zoom { from { transform:scale(1); } to { transform:scale(1.035); } }
+@media (prefers-reduced-motion:reduce) { .baqueano-reels *,.baqueano-reels *::before,.baqueano-reels *::after { animation:none!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } .baqueano-reel-video { display:none; } }
+@media (max-width:768px) { .baqueano-phone-stage { min-height:560px; } .baqueano-phone-stage .phone-frame-wrap { width:min(286px,78vw); } .baqueano-phone-stage .phone-hardware { height:min(572px,72vh); } }
+@media (hover:none) { .baqueano-phone-stage .phone-hardware:hover { transform:none; } }

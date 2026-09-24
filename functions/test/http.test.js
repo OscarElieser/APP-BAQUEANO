@@ -47,6 +47,14 @@ test("IA sin configurar responde 503", async () => {
   assert.equal(response.statusCode, 503);
   assert.equal(response.body.error.code, "AI_NOT_CONFIGURED");
 });
+test("chat IA acepta POST y conserva contrato estructurado", async () => {
+  const response = responseDouble();
+  await createApiHandler({readPublicMetrics: async () => ({}), handleAiChat: async () => ({status: 200, body: {ok: true, message: "Ruta verificada", conversationId: "c1", sources: [], actions: [], tripProfilePatch: {}, mode: "deterministic"}})})(
+    {method: "POST", path: "/api/v1/ai/chat", body: {message: "Quiero una ruta"}}, response);
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.body.ok, true);
+  assert.equal(response.body.mode, "deterministic");
+});
 test("método inválido y ruta desconocida tienen contratos distintos", async () => {
   const handler = createApiHandler({readPublicMetrics: async () => ({})});
   const methodResponse = responseDouble();

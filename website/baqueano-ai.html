@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es-NI">
+<head>
+  <!--
+    🎯 POR QUÉ: activar el concierge territorial en el hosting público real.
+    ⚙️ CÓMO: documento estático autónomo, accesible y conectado al endpoint oficial con respaldo local.
+    📦 QUÉ: planificador conversacional, parámetros de viaje e itinerario verificable.
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0F172A">
+  <meta name="description" content="Baqueano IA crea rutas personalizadas para descubrir Nicaragua con criterio local.">
+  <title>Baqueano IA | Tu ruta inteligente por Nicaragua</title>
+  <link rel="icon" href="assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/baqueano-ai.css">
+  <link rel="stylesheet" href="css/baqueano-assistant.css?v=20260924-1">
+</head>
+<body>
+  <a class="skip-link" href="#planner">Ir al planificador</a>
+  <div class="ai-ambient" aria-hidden="true"><span></span><span></span><span></span></div>
+  <header class="ai-nav">
+    <a class="ai-brand" href="index.html" aria-label="Baqueano Nicaragua, inicio"><img src="assets/images/logo.png" alt=""><span><b>BAQUEANO</b><small>NICARAGUA</small></span></a>
+    <nav aria-label="Navegación principal"><a href="destinos.html">Destinos</a><a href="index.html#mapaVivo3DNicaragua">Mapa vivo</a><a href="index.html#routeBuilderSection">Rutas</a></nav>
+    <a class="ai-nav-cta" href="index.html"><i class="fa-solid fa-arrow-left"></i><span>Volver al portal</span></a>
+  </header>
+
+  <main>
+    <section class="ai-hero">
+      <div class="ai-hero-copy">
+        <div class="ai-status"><span></span> Concierge territorial activo</div>
+        <p class="ai-kicker">Inteligencia con criterio local</p>
+        <h1>Tu viaje por Nicaragua,<br><em>pensado contigo.</em></h1>
+        <p class="ai-lead">Cuéntanos qué quieres vivir. Baqueano combina territorio, presupuesto y ritmo de viaje para convertir tu idea en una ruta clara.</p>
+        <div class="ai-trust"><span><i class="fa-solid fa-shield-heart"></i> Turismo responsable</span><span><i class="fa-solid fa-location-dot"></i> Datos territoriales</span><span><i class="fa-solid fa-volume-xmark"></i> Sin reproducción automática</span></div>
+      </div>
+      <div class="ai-compass" aria-hidden="true"><div class="ai-compass-ring"><span>N</span><i class="fa-solid fa-location-arrow"></i><small>RUMBO<br>BAQUEANO</small></div></div>
+    </section>
+
+    <section class="ai-workspace" id="planner" aria-labelledby="plannerTitle">
+      <aside class="ai-panel ai-profile">
+        <div class="ai-panel-title"><span>01</span><div><p>Tu aventura</p><h2 id="plannerTitle">Define el rumbo</h2></div></div>
+        <label>Territorio<select id="territory"><option>León</option><option>Granada</option><option>Ometepe</option><option>Rivas</option><option>Matagalpa</option><option>Madriz</option></select></label>
+        <div class="ai-fields"><label>Días<input id="days" type="number" min="1" max="14" value="3"></label><label>Viajeros<input id="travelers" type="number" min="1" max="12" value="2"></label></div>
+        <label>Presupuesto máximo (USD)<div class="ai-money"><span>$</span><input id="budget" type="number" min="100" max="10000" step="50" value="600"></div></label>
+        <fieldset><legend>Tu ritmo</legend><div class="ai-options"><label><input type="radio" name="style" value="aventura" checked><span><i class="fa-solid fa-person-hiking"></i>Aventura</span></label><label><input type="radio" name="style" value="cultura"><span><i class="fa-solid fa-landmark"></i>Cultura</span></label><label><input type="radio" name="style" value="naturaleza"><span><i class="fa-solid fa-leaf"></i>Naturaleza</span></label></div></fieldset>
+        <div class="ai-note"><i class="fa-solid fa-circle-info"></i><p>Las cifras son orientativas. Confirma precio y disponibilidad con cada prestador antes de reservar.</p></div>
+      </aside>
+
+      <section class="ai-panel ai-conversation">
+        <div class="ai-panel-title"><span>02</span><div><p>Conversa</p><h2>¿Qué quieres vivir?</h2></div><div class="ai-live"><b></b>En línea</div></div>
+        <div class="ai-messages" id="messages" aria-live="polite">
+          <article class="ai-message assistant"><div class="ai-avatar"><i class="fa-solid fa-compass"></i></div><div><small>BAQUEANO IA</small><p>¡Hola, explorador! Puedo ayudarte a crear una ruta por Nicaragua. Cuéntame si buscas volcanes, cultura, playas, comida local o caminos menos conocidos.</p></div></article>
+        </div>
+        <div class="ai-prompts" aria-label="Consultas sugeridas"><button data-prompt="Quiero una aventura de volcanes y cultura en León">Volcanes y cultura</button><button data-prompt="Quiero naturaleza, café y comunidades en Matagalpa">Naturaleza y café</button><button data-prompt="Quiero una escapada tranquila a Ometepe">Escapada a Ometepe</button></div>
+        <form class="ai-input" id="aiForm"><label class="sr-only" for="request">Describe tu viaje</label><textarea id="request" rows="2" maxlength="500" placeholder="Ejemplo: Somos dos, queremos 3 días de aventura y comida local en León…" required></textarea><button type="submit" aria-label="Crear mi ruta"><span>Crear mi ruta</span><i class="fa-solid fa-arrow-up"></i></button></form>
+        <p class="ai-disclaimer"><i class="fa-solid fa-shield"></i> Recomendaciones de apoyo. Verifica clima, accesos y alertas oficiales antes de salir.</p>
+      </section>
+    </section>
+
+    <section class="ai-result" id="result" aria-live="polite" hidden></section>
+  </main>
+  <footer><img src="assets/images/logo.png" alt=""><span>BAQUEANO NICARAGUA</span><p>Descubre lo que no sale en el mapa.</p><a href="index.html#sos">SOS 24/7</a></footer>
+  <script src="js/baqueano-ai.js"></script>
+  <script src="js/baqueano-assistant.js?v=20260924-1"></script>
+</body>
+</html>
