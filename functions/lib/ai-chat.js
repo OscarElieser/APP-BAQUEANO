@@ -5,7 +5,8 @@
  * QUÉ: servicio POST con contrato estable, fuentes, acciones y perfil incremental.
  */
 "use strict";
-const ALLOWED_ACTIONS = new Set(["open_destination", "open_map", "show_place", "search_places", "build_itinerary", "save_favorite", "show_nearby", "show_emergency", "open_booking", "open_route"]);
+const ALLOWED_ACTIONS = new Set(["open_destination", "open_department", "open_map", "show_place", "search_places", "build_itinerary", "save_favorite", "show_nearby", "show_emergency", "open_booking", "open_route", "play_audio", "pause_audio", "show_food", "show_history"]);
+const ALLOWED_ANIMATIONS = new Set(["idle", "speaking", "explaining", "celebrating", "exploring", "emergency"]);
 const buckets = new Map();
 function cleanText(value, max = 500) { return String(value || "").replace(/[\u0000-\u001F\u007F]/g, " ").trim().slice(0, max); }
 function allowRequest(key, now = Date.now()) { const current = buckets.get(key) || {start: now, count: 0}; if (now - current.start > 60000) { current.start = now; current.count = 0; } current.count += 1; buckets.set(key, current); return current.count <= 12; }
@@ -30,7 +31,7 @@ async function readCatalog(db) {
 function sanitizeActions(actions) { return Array.isArray(actions) ? actions.filter(item => item && ALLOWED_ACTIONS.has(item.type)).slice(0, 3).map(item => ({type: item.type, label: cleanText(item.label || "Abrir", 50), url: /^\/[a-z0-9_./?#=&%-]+$/i.test(item.url || "") ? item.url : undefined, id: cleanText(item.id, 120) || undefined})) : []; }
 async function callGemini(apiKey, payload, catalog, fetchImpl = fetch) {
   if (!apiKey) throw new Error("AI_NOT_CONFIGURED"); const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), 9000);
-  const prompt = `Sos Baqueano Digital, guía turístico nicaragüense cálido y conciso. Respondé solo con datos del CATÁLOGO. No inventés precios, disponibilidad, negocios ni contactos. Si falta evidencia, decilo. Devolvé JSON estricto: {"message":"...","actions":[{"type":"...","label":"...","url":"/..."}],"sourceIds":["..."],"tripProfilePatch":{}}. Acciones permitidas: ${Array.from(ALLOWED_ACTIONS).join(", ")}.
+  const prompt = `Sos Baqueano Digital, guía turístico nicaragüense cálido y conciso. Respondé solo con datos del CATÁLOGO. No inventés precios, disponibilidad, negocios ni contactos. Si falta evidencia, decilo. Devolvé JSON estricto: {"message":"...","emotion":"happy|curious|serious|calm","animation":"idle|speaking|explaining|celebrating|exploring|emergency","actions":[{"type":"...","label":"...","url":"/..."}],"sourceIds":["..."],"tripProfilePatch":{}}. Acciones permitidas: ${Array.from(ALLOWED_ACTIONS).join(", ")}.
 CONTEXTO: ${JSON.stringify(payload.context)}
 HISTORIAL: ${JSON.stringify(payload.history)}
 CATÁLOGO: ${JSON.stringify(catalog.slice(0, 45))}
@@ -44,7 +45,7 @@ function createAiChatService({db, getApiKey = () => "", fetchImpl = fetch}) {
     const payload = {message, conversationId: cleanText(body.conversationId, 100), history: Array.isArray(body.history) ? body.history.slice(-12).map(item => ({role: item.role === "user" ? "user" : "assistant", content: cleanText(item.content, 700)})) : [], context: body.context && typeof body.context === "object" ? JSON.parse(JSON.stringify(body.context).slice(0, 5000)) : {}};
     const catalog = await readCatalog(db); let result; let mode = "deterministic"; try { result = await callGemini(getApiKey(), payload, catalog, fetchImpl); mode = "gemini"; } catch (_) { result = deterministicResponse(message, catalog); }
     const sourceIds = new Set(Array.isArray(result.sourceIds) ? result.sourceIds.map(String) : []); const sources = result.sources || catalog.filter(item => sourceIds.has(item.id)).slice(0, 5).map(item => ({id: item.id, label: item.name, collection: item.collection}));
-    return {status: 200, body: {ok: true, message: cleanText(result.message, 1800), conversationId: payload.conversationId, sources, actions: sanitizeActions(result.actions), tripProfilePatch: result.tripProfilePatch && typeof result.tripProfilePatch === "object" ? result.tripProfilePatch : {}, mode}};
+    return {status: 200, body: {ok: true, message: cleanText(result.message, 1800), emotion: cleanText(result.emotion || "calm", 20), animation: ALLOWED_ANIMATIONS.has(result.animation) ? result.animation : "speaking", conversationId: payload.conversationId, sources, actions: sanitizeActions(result.actions), tripProfilePatch: result.tripProfilePatch && typeof result.tripProfilePatch === "object" ? result.tripProfilePatch : {}, mode}};
   };
 }
 module.exports = {createAiChatService, deterministicResponse, sanitizeActions, cleanText};
