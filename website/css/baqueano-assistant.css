@@ -84,3 +84,196 @@
 @media(max-width:700px){.bq-live{padding:8px;gap:5px}.bq-live-card{padding:7px 5px;grid-template-columns:14px minmax(0,1fr)}.bq-context-icon{width:26px;height:26px;font-size:13px}.bq-mini-time{right:3px;top:3px}}
 @media(prefers-reduced-motion:reduce){.bq-context-icon,.bq-mini-time{transition:none!important}}
 .bq-mascot img.is-contextual-art{border-radius:34% 34% 28% 28%;object-fit:cover;object-position:center 38%;mix-blend-mode:screen;filter:saturate(1.08) contrast(1.04);mask-image:radial-gradient(ellipse 72% 78% at 50% 48%,#000 58%,rgba(0,0,0,.9) 72%,transparent 100%)}
+
+/* ========================================================================== */
+/* BAQÜI — GUARDABARRANCO CONTEXTUAL                                          */
+/* ========================================================================== */
+/*
+  POR QUÉ:
+  Convertir la mascota oficial en una guía con presencia y respuesta emocional,
+  conservando exactamente su ilustración y evitando un vídeo repetitivo.
+
+  CÓMO:
+  La ilustración transparente se compone en capas recortadas de cabeza, ala y
+  cola. Cada estado de la máquina del asistente mueve solo las piezas necesarias
+  mediante transform y opacity, propiedades aceleradas y económicas para el navegador.
+  El modo de movimiento reducido mantiene a Baqüi estático y completamente usable.
+
+  QUÉ:
+  Estados visuales idle, greeting, listening, thinking, speaking, dancing,
+  explaining, celebrating, exploring, emergency y sleeping, con adaptación móvil.
+*/
+
+.bq-character {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-origin: 52% 88%;
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .34));
+  pointer-events: none;
+}
+
+.bq-character-base,
+.bq-character-part {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  background: center / contain no-repeat url('../assets/images/baqui.png');
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.bq-character-head {
+  clip-path: polygon(17% 0, 64% 0, 69% 31%, 55% 45%, 20% 39%);
+  transform-origin: 42% 34%;
+}
+
+.bq-character-wing {
+  clip-path: polygon(48% 27%, 100% 24%, 100% 61%, 57% 63%);
+  transform-origin: 55% 44%;
+}
+
+.bq-character-tail {
+  clip-path: polygon(0 55%, 43% 53%, 46% 100%, 0 100%);
+  transform-origin: 35% 60%;
+}
+
+.bq-sleep-symbol {
+  position: absolute;
+  top: 13%;
+  right: 7%;
+  display: none;
+  color: #F4E6C1;
+  font: 900 18px/1 Montserrat, sans-serif;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, .8);
+}
+
+.bq-header picture {
+  display: grid;
+  place-items: center;
+}
+
+.bq-header picture img {
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: scale(1.12) !important;
+}
+
+.bq-assistant.is-idle .bq-character-head {
+  animation: bq-look-around 6.2s ease-in-out infinite;
+}
+
+.bq-assistant.is-idle .bq-character-tail {
+  animation: bq-tail-breathe 4.4s ease-in-out infinite;
+}
+
+.bq-assistant.is-greeting .bq-character {
+  animation: bq-fly-greet 1.05s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.bq-assistant.is-greeting .bq-character-wing {
+  animation: bq-wing-wave .34s ease-in-out 3;
+}
+
+.bq-assistant.is-listening .bq-character-head {
+  animation: bq-listen .9s ease-in-out infinite alternate;
+}
+
+.bq-assistant.is-thinking .bq-character-head {
+  animation: bq-thought 1.4s ease-in-out infinite;
+}
+
+.bq-assistant.is-speaking .bq-character-head {
+  animation: bq-talk .32s ease-in-out infinite alternate;
+}
+
+.bq-assistant.is-speaking .bq-character-wing,
+.bq-assistant.is-explaining .bq-character-wing {
+  animation: bq-present-wing 1.15s ease-in-out infinite alternate;
+}
+
+.bq-assistant.is-dancing .bq-character {
+  animation: bq-baile .72s ease-in-out infinite;
+}
+
+.bq-assistant.is-dancing .bq-character-tail {
+  animation: bq-tail-dance .36s ease-in-out infinite alternate;
+}
+
+.bq-assistant.is-celebrating .bq-character {
+  animation: bq-happy-jump .58s cubic-bezier(.2, .8, .2, 1) 3;
+}
+
+.bq-assistant.is-celebrating .bq-character-wing {
+  animation: bq-wing-wave .25s ease-in-out 7;
+}
+
+.bq-assistant.is-exploring .bq-character {
+  animation: bq-scout 2.4s ease-in-out infinite;
+}
+
+.bq-assistant.is-exploring .bq-context-icon {
+  animation: bq-compass-pulse 1.8s ease-in-out infinite;
+}
+
+.bq-assistant.is-emergency .bq-character {
+  animation: bq-alert-posture .8s ease-out both;
+  filter: drop-shadow(0 0 16px rgba(239, 68, 68, .72));
+}
+
+.bq-assistant.is-emergency .bq-context-icon {
+  border-color: rgba(239, 68, 68, .8);
+  background: rgba(127, 29, 29, .94);
+}
+
+.bq-assistant.is-sleeping .bq-mascot {
+  animation: none;
+}
+
+.bq-assistant.is-sleeping .bq-character {
+  animation: bq-sleep 3.2s ease-in-out infinite;
+  filter: saturate(.72) drop-shadow(0 12px 16px rgba(0, 0, 0, .3));
+}
+
+.bq-assistant.is-sleeping .bq-sleep-symbol {
+  display: block;
+  animation: bq-dream 2.2s ease-out infinite;
+}
+
+@keyframes bq-look-around { 0%, 48%, 100% { transform: none; } 54%, 66% { transform: rotate(-1.8deg) translate(-1px, 1px); } 72%, 84% { transform: rotate(1.4deg) translate(1px, 0); } }
+@keyframes bq-tail-breathe { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-1.5deg); } }
+@keyframes bq-fly-greet { 0% { opacity: 0; transform: translate(82px, -52px) rotate(12deg) scale(.72); } 65% { opacity: 1; transform: translate(-5px, -8px) rotate(-3deg) scale(1.04); } 100% { transform: none; } }
+@keyframes bq-wing-wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-7deg) translateY(-3px); } }
+@keyframes bq-listen { to { transform: rotate(-2.6deg) translate(-2px, 1px); } }
+@keyframes bq-thought { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(2.4deg) translate(1px, -2px); } }
+@keyframes bq-talk { to { transform: translateY(1.5px) rotate(.7deg); } }
+@keyframes bq-present-wing { to { transform: rotate(-5deg) translateY(-2px); } }
+@keyframes bq-baile { 0%, 100% { transform: rotate(-3deg) translateY(0); } 25% { transform: rotate(2deg) translateY(-7px); } 50% { transform: rotate(4deg) translateY(0); } 75% { transform: rotate(-1deg) translateY(-5px); } }
+@keyframes bq-tail-dance { to { transform: rotate(-7deg) translateX(-2px); } }
+@keyframes bq-happy-jump { 0%, 100% { transform: translateY(0) scale(1); } 45% { transform: translateY(-14px) scale(1.04); } }
+@keyframes bq-scout { 0%, 100% { transform: rotate(0) translateX(0); } 50% { transform: rotate(1.8deg) translateX(-4px); } }
+@keyframes bq-compass-pulse { 50% { transform: scale(1.1) rotate(8deg); box-shadow: 0 0 20px rgba(246, 94, 1, .65); } }
+@keyframes bq-alert-posture { to { transform: translateY(-4px) rotate(-1deg) scale(1.035); } }
+@keyframes bq-sleep { 0%, 100% { transform: rotate(4deg) translateY(4px) scale(.96); } 50% { transform: rotate(4deg) translateY(7px) scale(.95); } }
+@keyframes bq-dream { 0% { opacity: 0; transform: translate(0, 8px) scale(.7); } 45% { opacity: 1; } 100% { opacity: 0; transform: translate(12px, -20px) scale(1.18); } }
+
+@media (max-width: 600px) {
+  .bq-character {
+    filter: drop-shadow(0 9px 12px rgba(0, 0, 0, .32));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bq-character,
+  .bq-character-part,
+  .bq-context-icon,
+  .bq-sleep-symbol {
+    animation: none !important;
+    transform: none !important;
+  }
+}

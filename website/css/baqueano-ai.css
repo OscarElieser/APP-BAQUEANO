@@ -8,3 +8,82 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 .ai-options input{width:1px;height:1px}
 .ai-panel,.ai-conversation,.ai-profile{min-width:0}
+
+/* ========================================================================== */
+/* EXPERIENCIA VIVA DEL CONCIERGE TERRITORIAL                                 */
+/* 🎯 POR QUÉ: convertir la portada en una invitación clara a planificar.      */
+/* ⚙️ CÓMO: CTA, profundidad, estados reactivos y movimiento no invasivo.      */
+/* 📦 QUÉ: hero activo, brújula viva, recorrido guiado y paneles interactivos. */
+/* ========================================================================== */
+.ai-nav{position:sticky;top:0;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.ai-nav nav a{position:relative;padding:9px 0;transition:color .2s ease}
+.ai-nav nav a::after{content:"";position:absolute;right:0;bottom:0;left:0;height:2px;transform:scaleX(0);border-radius:3px;background:linear-gradient(90deg,var(--orange),var(--sand));transition:transform .22s ease}
+.ai-nav nav a:hover::after,.ai-nav nav a.active::after{transform:scaleX(1)}
+.ai-nav nav a.active{color:var(--sand)}
+.ai-nav nav a i{margin-right:5px;color:var(--orange)}
+.ai-nav-cta{transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.ai-nav-cta:hover{transform:translateY(-2px);border-color:rgba(246,94,1,.5);background:rgba(246,94,1,.1)}
+
+.ai-hero{min-height:510px;padding-top:86px}
+.ai-hero-copy{position:relative;z-index:2}
+.ai-hero-copy::before{content:"";position:absolute;z-index:-1;top:-80px;left:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(246,94,1,.11),transparent 68%);filter:blur(20px)}
+.ai-status span,.ai-live b{animation:ai-status-pulse 2s ease-in-out infinite}
+.ai-hero h1 em{color:transparent;background:linear-gradient(90deg,var(--sand),#ffb47d 55%,var(--orange));background-clip:text;-webkit-background-clip:text}
+.ai-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 24px}
+.ai-primary-cta,.ai-surprise-cta{display:inline-flex;min-height:52px;align-items:center;justify-content:center;gap:11px;padding:0 20px;border-radius:15px;font-size:12px;font-weight:900;text-decoration:none;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.ai-primary-cta{border:1px solid var(--orange);color:#fff;background:linear-gradient(135deg,#f65e01,#ff7b2c);box-shadow:0 16px 38px rgba(246,94,1,.27)}
+.ai-primary-cta i{animation:ai-arrow-invite 1.7s ease-in-out infinite}
+.ai-surprise-cta{border:1px solid rgba(244,230,193,.18);color:var(--sand);background:rgba(255,255,255,.045)}
+.ai-primary-cta:hover,.ai-surprise-cta:hover{transform:translateY(-4px);box-shadow:0 20px 42px rgba(0,0,0,.34)}
+.ai-surprise-cta:hover{border-color:rgba(246,94,1,.55)}
+
+.ai-compass{position:relative;min-height:390px}
+.ai-compass-ring{z-index:2;width:290px;height:290px;animation:ai-compass-float 5s ease-in-out infinite}
+.ai-compass-ring::after{content:"";position:absolute;inset:-14px;border:1px dashed rgba(246,94,1,.22);border-radius:50%;animation:ai-orbit-spin 28s linear infinite}
+.ai-compass-ring>i{animation:ai-needle-seek 7s ease-in-out infinite}
+.ai-orbit{position:absolute;border:1px solid rgba(244,230,193,.08);border-radius:50%;animation:ai-orbit-spin 34s linear infinite}
+.ai-orbit-one{width:370px;height:370px}
+.ai-orbit-two{width:450px;height:450px;border-style:dashed;animation-direction:reverse;animation-duration:46s}
+.ai-float-card{position:absolute;z-index:4;display:grid;grid-template-columns:38px auto;column-gap:10px;min-width:155px;padding:11px 13px;border:1px solid rgba(244,230,193,.16);border-radius:14px;background:rgba(7,17,31,.82);box-shadow:0 18px 42px rgba(0,0,0,.36);backdrop-filter:blur(16px);animation:ai-float-card 4.2s ease-in-out infinite}
+.ai-float-card>i{grid-row:1/3;display:grid;width:38px;height:38px;place-items:center;border-radius:11px;color:var(--orange);background:rgba(246,94,1,.12)}
+.ai-float-card span{color:#7f8fa3;font-size:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
+.ai-float-card strong{font-size:12px;color:#fff}
+.ai-float-territory{top:36px;right:-4px}
+.ai-float-budget{bottom:28px;left:-14px;animation-delay:1.1s}
+
+.ai-journey-progress{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px;max-width:960px;margin:0 auto 42px;padding:12px;border:1px solid var(--line);border-radius:20px;background:rgba(15,23,42,.62);box-shadow:0 20px 60px rgba(0,0,0,.2);backdrop-filter:blur(16px)}
+.ai-journey-progress>a{display:flex;align-items:center;gap:11px;padding:11px;border-radius:14px;color:#fff;text-decoration:none;transition:background .2s ease,transform .2s ease}
+.ai-journey-progress>a:hover{transform:translateY(-2px);background:rgba(22,93,111,.2)}
+.ai-journey-progress>a>span{display:grid;width:34px;height:34px;place-items:center;border-radius:10px;color:var(--orange);background:rgba(246,94,1,.12);font-size:9px;font-weight:900}
+.ai-journey-progress div{display:grid;gap:2px}.ai-journey-progress strong{font-size:11px}.ai-journey-progress small{color:#7e8da0;font-size:8px}.ai-journey-progress>i{color:rgba(244,230,193,.25);font-size:10px}
+
+.ai-panel{position:relative;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.ai-panel::before{content:"";position:absolute;top:0;right:0;left:0;height:1px;background:linear-gradient(90deg,transparent,rgba(246,94,1,.5),transparent);opacity:.35}
+.ai-panel:hover{transform:translateY(-4px);border-color:rgba(244,230,193,.16);box-shadow:0 30px 90px rgba(0,0,0,.38)}
+.ai-profile select,.ai-profile input{transition:border-color .2s ease,background .2s ease,box-shadow .2s ease}
+.ai-options span{transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.ai-options label:hover span{transform:translateY(-3px);border-color:rgba(246,94,1,.45)}
+.ai-message{animation:ai-message-enter .35s cubic-bezier(.2,.8,.2,1)}
+.ai-prompts button{transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.ai-prompts button:hover{transform:translateY(-2px);background:rgba(246,94,1,.1)}
+.ai-input{transition:border-color .2s ease,box-shadow .2s ease}
+.ai-input:focus-within{border-color:rgba(246,94,1,.55);box-shadow:0 0 0 4px rgba(246,94,1,.08),0 18px 44px rgba(0,0,0,.24)}
+.ai-input button{transition:transform .2s ease,box-shadow .2s ease}.ai-input button:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(246,94,1,.3)}
+
+@keyframes ai-status-pulse{50%{opacity:.5;box-shadow:0 0 0 10px rgba(67,213,162,0)}}
+@keyframes ai-arrow-invite{50%{transform:translateY(4px)}}
+@keyframes ai-compass-float{50%{transform:translateY(-9px)}}
+@keyframes ai-orbit-spin{to{transform:rotate(360deg)}}
+@keyframes ai-needle-seek{0%,100%{transform:rotate(-28deg)}45%{transform:rotate(18deg)}70%{transform:rotate(-8deg)}}
+@keyframes ai-float-card{50%{transform:translateY(-8px)}}
+@keyframes ai-message-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .ai-hero{padding-top:58px;text-align:center}.ai-lead{margin-right:auto;margin-left:auto}.ai-hero-actions,.ai-trust{justify-content:center}.ai-compass{display:grid;min-height:360px}.ai-orbit-two{width:390px;height:390px}.ai-float-territory{right:8%}.ai-float-budget{left:8%}
+  .ai-journey-progress{margin-right:20px;margin-left:20px}
+}
+@media(max-width:620px){
+  .ai-hero{padding-bottom:34px}.ai-hero-actions{display:grid}.ai-primary-cta,.ai-surprise-cta{width:100%}.ai-compass{min-height:315px}.ai-compass-ring{width:220px;height:220px}.ai-orbit-one{width:270px;height:270px}.ai-orbit-two{width:315px;height:315px}.ai-float-card{min-width:132px;padding:8px}.ai-float-card>i{width:32px;height:32px}.ai-float-territory{top:18px;right:0}.ai-float-budget{bottom:12px;left:0}
+  .ai-journey-progress{grid-template-columns:1fr;margin:0 12px 28px}.ai-journey-progress>i{display:none}.ai-journey-progress>a{padding:8px}
+  .ai-conversation{min-height:520px}.ai-panel:hover{transform:none}
+}
