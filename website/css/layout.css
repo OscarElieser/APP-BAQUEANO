@@ -88,6 +88,13 @@ img {
   min-height: 80vh;
 }
 
+.page-wrapper.has-hero-header,
+.has-video-hero .page-wrapper,
+.page-index-definitive .page-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
 /* ==========================================================================
    BARRA DE NAVEGACIÓN INSTITUCIONAL HUD DINÁMICA & INTERACTIVA
    ========================================================================== */

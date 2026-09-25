@@ -4446,19 +4446,25 @@ img {
   position: relative;
 }
 
-/* HERO CON VIDEO CINEMATOGRÁFICO DE FONDO */
 .destinations-video-hero {
   position: relative;
-  min-height: clamp(560px, 68vh, 780px);
+  width: 100%;
+  min-height: clamp(560px, 72vh, 800px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 3rem;
-  border-radius: 28px;
-  border: 1px solid rgba(246, 94, 1, 0.35);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(22, 93, 111, 0.3);
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid rgba(246, 94, 1, 0.35);
+  box-shadow: none;
   background: #070B14;
+  padding-top: clamp(90px, 13vh, 130px);
+  padding-bottom: clamp(36px, 5vh, 60px);
 }
 
 .hero-bg-video {
@@ -4518,8 +4524,10 @@ img {
 
 @media (max-width: 768px) {
   .destinations-video-hero {
-    min-height: clamp(520px, 72svh, 680px);
-    border-radius: 18px;
+    min-height: clamp(480px, 70svh, 620px);
+    border-radius: 0;
+    padding-top: clamp(80px, 12vh, 100px);
+    padding-bottom: 1.75rem;
   }
 }
 
