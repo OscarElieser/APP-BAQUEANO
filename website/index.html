@@ -2682,6 +2682,9 @@
   <script src="js/website-business-catalog.js"></script>
   <script src="js/website-operations-catalog.js"></script>
   <script defer src="js/public-cms-sync.js"></script>
+  <!-- Supabase Cloud Client (Persistencia y Soberanía Territorial) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
 
   <!-- Scripts Modulares del Ecosistema -->
   <script src="js/navigation.js?v=20260925-shell-1"></script>
@@ -3032,6 +3035,38 @@
               await window.BaqueanoFirestore.registerBusiness(payload);
             } catch (eFirestore) {
               console.warn('[RegistroNegocios] Guardado local/offline:', eFirestore);
+            }
+          }
+
+          // 1.1 Persistencia garantizada en Supabase (public.businesses)
+          if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+            try {
+              window.baqueanoSupabase.from('businesses').insert({
+                id: 'biz-' + Date.now().toString(36),
+                name: name,
+                category: category || type,
+                department: department,
+                municipality: municipality,
+                phone: phone,
+                whatsapp: whatsapp || phone,
+                address: address || municipality,
+                commission_rate: 0.00,
+                verified: true,
+                metadata: {
+                  owner: owner,
+                  email: email,
+                  website: website,
+                  priceNio: price,
+                  schedule: schedule,
+                  description: description,
+                  registeredAt: new Date().toISOString()
+                }
+              }).then(({ error }) => {
+                if (error) console.warn('[Supabase Sync] Aviso en businesses:', error.message);
+                else console.info('🟢 [Supabase Sync] Negocio registrado con éxito en Supabase.');
+              }).catch(e => console.warn('[Supabase Sync] Error negocio:', e.message));
+            } catch (sbBizErr) {
+              console.warn('[Supabase Sync] Excepción negocio:', sbBizErr);
             }
           }
 
