@@ -317,3 +317,38 @@
 /* Moneda nacional: la equivalencia extranjera acompaña sin competir con el total en C$. */
 .ai-profile > label > small{display:block;margin-top:.55rem;color:#92a4b7;font-size:.72rem;font-weight:700;letter-spacing:.02em}
 .ai-total small{display:block;margin-top:.28rem;color:#92a4b7;font-size:.68rem;font-weight:600}
+/*
+ * 🎯 POR QUÉ: completar la integración del footer institucional sin estilos
+ * embebidos y mantener una lectura consistente en cualquier ancho de pantalla.
+ * ⚙️ CÓMO: agrupa el estado operativo y permite que sus acciones se reorganicen
+ * mediante flex-wrap sin forzar desbordamiento horizontal.
+ * 📦 QUÉ: fila de estado y distintivo de telemetría del footer del planificador.
+ */
+.page-baqueano-ai .ai-footer-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-baqueano-ai .ai-footer-live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+  font-family: var(--font-tech);
+  font-size: 0.75rem;
+}
+
+.page-baqueano-ai .ai-footer-live-status > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
