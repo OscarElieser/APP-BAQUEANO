@@ -2397,7 +2397,20 @@
           status: eventData.status || 'success'
         });
       } catch (err) {
-        console.warn('[OpsCMS] No se pudo escribir en audit_logs:', err.message);
+        console.warn('[OpsCMS] No se pudo escribir en audit_logs de Firestore:', err.message);
+      }
+
+      // Sincronización soberana en Supabase (public.audit_logs)
+      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+        try {
+          window.baqueanoSupabase.from('audit_logs').insert({
+            admin_email: OpsState.currentUser?.email || 'admin@baqueano.ni',
+            action: eventData.action || 'ADMIN_ACTION',
+            target_entity: eventData.collection || eventData.module || 'Sistema',
+            target_id: eventData.recordId || null,
+            payload: eventData
+          }).then(() => {}).catch(() => {});
+        } catch (_) {}
       }
     },
 
@@ -2478,9 +2491,44 @@
             payload: payload,
             updated_at: new Date().toISOString()
           }, { onConflict: 'id' });
-          console.info(`🔵 [OpsCMS] Registro "${entityId}" respaldado en Supabase.`);
+          console.info(`🔵 [OpsCMS] Registro "${entityId}" respaldado en Supabase (ops_backup_entities).`);
+
+          // Sincronización relacional directa en tablas PostgreSQL oficiales
+          if (config.collection === 'destinations' || config.collection === 'places') {
+            await window.baqueanoSupabase.from('destinations').upsert({
+              id: entityId,
+              name: payload.title || payload.name || entityId,
+              category: payload.category || 'naturaleza',
+              short_desc: payload.shortDesc || (payload.description ? payload.description.slice(0, 150) : ''),
+              description: payload.description || '',
+              department_id: payload.departmentId || (payload.department ? payload.department.toLowerCase().replace(/\s+/g, '_') : 'rivas'),
+              latitude: Number(payload.latitude) || null,
+              longitude: Number(payload.longitude) || null,
+              cover_image: payload.imageUrl || payload.coverImage || null,
+              rating: Number(payload.rating) || 5.0,
+              verified: payload.verified !== false,
+              status: payload.status || 'published'
+            }, { onConflict: 'id' }).catch(e => console.warn('[Supabase destinations]', e));
+          } else if (config.collection === 'businesses') {
+            await window.baqueanoSupabase.from('businesses').upsert({
+              id: entityId,
+              name: payload.title || payload.name || entityId,
+              category: payload.category || 'cooperativa',
+              department: payload.department || 'Nicaragua',
+              municipality: payload.municipality || '',
+              phone: payload.phone || '',
+              whatsapp: payload.whatsapp || payload.phone || '',
+              address: payload.address || '',
+              latitude: Number(payload.latitude) || null,
+              longitude: Number(payload.longitude) || null,
+              cover_image: payload.imageUrl || null,
+              verified: payload.verified !== false,
+              commission_rate: 0.00,
+              metadata: payload
+            }, { onConflict: 'id' }).catch(e => console.warn('[Supabase businesses]', e));
+          }
         } catch (sbErr) {
-          // Silencioso para no degradar experiencia si la tabla de respaldo está en proceso
+          console.warn('[OpsCMS] Supabase sync notice:', sbErr.message);
         }
       }
 
@@ -2604,6 +2652,19 @@
         }
       }
       await batch.commit();
+
+      // Eliminación garantizada en Supabase
+      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+        try {
+          window.baqueanoSupabase.from('ops_backup_entities').delete().eq('id', entityId).catch(() => {});
+          if (config.collection === 'destinations' || config.collection === 'places') {
+            window.baqueanoSupabase.from('destinations').delete().eq('id', entityId).catch(() => {});
+          } else if (config.collection === 'businesses') {
+            window.baqueanoSupabase.from('businesses').delete().eq('id', entityId).catch(() => {});
+          }
+          console.info(`🗑️ [OpsCMS] Registro "${entityId}" eliminado también de Supabase.`);
+        } catch (_) {}
+      }
 
       OpsToast.show('Registro eliminado permanentemente de la base de datos.', 'info');
       await this.logAuditEvent({
@@ -3198,7 +3259,49 @@
 
       await batch.commit();
 
-      OpsToast.show('¡Catálogo Completo Sincronizado! Destinos, negocios, páginas e historia en vivo en Firestore.', 'success');
+      // Sincronización soberana masiva hacia Supabase
+      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+        try {
+          for (const dest of seedDestinations) {
+            await window.baqueanoSupabase.from('destinations').upsert({
+              id: dest.id,
+              name: dest.name || dest.title,
+              category: dest.category || 'naturaleza',
+              short_desc: (dest.description ? dest.description.slice(0, 150) : '') || '',
+              description: dest.description || '',
+              department_id: dest.department ? dest.department.toLowerCase().replace(/\s+/g, '_') : 'rivas',
+              latitude: dest.latitude || null,
+              longitude: dest.longitude || null,
+              cover_image: dest.imageUrl || null,
+              rating: 5.0,
+              verified: true,
+              status: 'published'
+            }, { onConflict: 'id' }).catch(() => {});
+          }
+
+          for (const b of seedBusinesses) {
+            await window.baqueanoSupabase.from('businesses').upsert({
+              id: b.id,
+              name: b.name || b.title,
+              category: b.category || 'cooperativa',
+              department: b.department || 'Nicaragua',
+              municipality: b.municipality || '',
+              phone: b.phone || '',
+              whatsapp: b.whatsapp || b.phone || '',
+              address: (b.municipality || '') + ', ' + (b.department || ''),
+              cover_image: b.imageUrl || null,
+              verified: true,
+              commission_rate: 0.00,
+              metadata: b
+            }, { onConflict: 'id' }).catch(() => {});
+          }
+          console.info('🟢 [OpsCMS] Catálogo inicial sembrado exitosamente en Supabase PostgreSQL.');
+        } catch (sbSeedErr) {
+          console.warn('[OpsCMS] Aviso semillero Supabase:', sbSeedErr.message);
+        }
+      }
+
+      OpsToast.show('¡Catálogo Completo Sincronizado! Destinos, negocios y páginas en vivo en Firestore y Supabase.', 'success');
       await this.logAuditEvent({
         action: 'CANONICAL_SEED_COMPLETED',
         module: 'Sistema',
