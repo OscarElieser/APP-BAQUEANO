@@ -398,3 +398,221 @@
     justify-content: center;
   }
 }
+
+/* ========================================================================== */
+/* PANEL DE CONVERSACIÓN COMPACTO                                             */
+/* ========================================================================== */
+/*
+  POR QUÉ: mantener la conversación disponible sin cubrir la página completa,
+  especialmente en teléfonos donde el espacio visible es limitado.
+  CÓMO: el drawer se convierte en una tarjeta flotante anclada al borde inferior,
+  con jerarquía similar a una conversación de mensajería y controles compactos.
+  QUÉ: panel de ancho limitado, burbujas diferenciadas, barra contextual reducida,
+  accesos horizontales y compositor siempre visible.
+*/
+
+.bq-drawer {
+  top: auto;
+  right: 18px;
+  bottom: 18px;
+  width: min(370px, calc(100vw - 28px));
+  height: min(620px, calc(100dvh - 36px));
+  border: 1px solid rgba(244, 230, 193, .16);
+  border-radius: 22px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .58), 0 0 0 1px rgba(22, 93, 111, .14);
+  transform: translateY(24px) scale(.96);
+  transform-origin: right bottom;
+  overflow: hidden;
+}
+
+.bq-drawer.is-open {
+  transform: translateY(0) scale(1);
+}
+
+.bq-edge-left .bq-drawer {
+  right: auto;
+  left: 18px;
+  transform-origin: left bottom;
+}
+
+.bq-header {
+  min-height: 66px;
+  padding: 9px 11px;
+  background: rgba(10, 27, 42, .96);
+}
+
+.bq-header picture {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+}
+
+.bq-header strong {
+  font-size: 13px;
+}
+
+.bq-header span {
+  font-size: 8px;
+}
+
+.bq-header-actions button {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+}
+
+.bq-live {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  padding: 7px 8px;
+}
+
+.bq-live-card {
+  min-height: 42px;
+  grid-template-columns: 13px minmax(0, 1fr);
+  padding: 5px 6px;
+  border-radius: 11px;
+}
+
+.bq-live-card i {
+  font-size: 11px;
+}
+
+.bq-live-card span {
+  font-size: 6.5px;
+}
+
+.bq-live-card strong {
+  font-size: 7.5px;
+}
+
+.bq-messages {
+  min-height: 0;
+  padding: 12px;
+  gap: 8px;
+  background: radial-gradient(circle at 50% 0, rgba(22, 93, 111, .08), transparent 42%);
+}
+
+.bq-message {
+  max-width: 82%;
+  padding: 9px 11px;
+  border-radius: 5px 16px 16px 16px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.bq-message.is-user {
+  border: 0;
+  border-radius: 16px 5px 16px 16px;
+  background: linear-gradient(135deg, #165D6F, #14788E);
+}
+
+.bq-quick {
+  display: flex;
+  gap: 6px;
+  max-height: none;
+  padding: 7px 9px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: rgba(6, 16, 28, .72);
+}
+
+.bq-quick button {
+  flex: none;
+  width: auto;
+  min-height: 28px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: 7.5px;
+}
+
+.bq-form {
+  grid-template-columns: minmax(0, 1fr) 34px 34px;
+  gap: 6px;
+  padding: 8px 9px;
+}
+
+.bq-form textarea {
+  height: 42px;
+  min-height: 42px;
+  max-height: 72px;
+  padding: 9px 10px;
+  resize: none;
+  border-radius: 18px;
+  font-size: 10.5px;
+}
+
+.bq-form button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.bq-drawer > footer {
+  padding: 5px 10px calc(6px + env(safe-area-inset-bottom));
+}
+
+.bq-drawer > footer button {
+  font-size: 7.5px;
+}
+
+@media (max-width: 700px) {
+  .bq-drawer {
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: auto;
+    width: min(360px, calc(100vw - 20px));
+    height: min(560px, calc(100dvh - 92px));
+    min-height: 0;
+    max-height: calc(100dvh - 92px);
+    border-radius: 20px;
+    transform: translateY(22px) scale(.96);
+  }
+
+  .bq-edge-left .bq-drawer {
+    right: auto;
+    left: 10px;
+  }
+
+  .bq-drawer.is-open {
+    transform: translateY(0) scale(1);
+  }
+
+  .bq-messages {
+    min-height: 90px;
+    padding: 10px;
+  }
+
+  .bq-quick {
+    display: flex;
+    max-height: 43px;
+    padding: 7px 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .bq-quick button {
+    width: auto;
+    min-height: 27px;
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 370px) {
+  .bq-drawer {
+    right: 7px;
+    left: auto;
+    width: calc(100vw - 14px);
+    height: min(530px, calc(100dvh - 82px));
+    max-height: calc(100dvh - 82px);
+  }
+
+  .bq-edge-left .bq-drawer {
+    right: auto;
+    left: 7px;
+  }
+
+  .bq-live-card span {
+    display: none;
+  }
+}

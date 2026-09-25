@@ -8,7 +8,7 @@
   'use strict';
   if (window.BaqueanoAssistant?.version === '4') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-2'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-4'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
   const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: '/api/v1/ai/chat' });
@@ -144,19 +144,6 @@
 
   function speak(text) { if (!('speechSynthesis' in window) || !preferences.voice) return; speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(String(text).slice(0, 1200)); utterance.lang = 'es-NI'; utterance.rate = .96; utterance.onend = () => setCharacter('idle'); utterance.onerror = () => setCharacter('idle'); speechSynthesis.speak(utterance); }
 
-  function deterministicReply(query) {
-    const q = query.toLocaleLowerCase('es');
-    if (/emergencia|sos|auxilio/.test(q)) return { message: 'Puedo abrir el módulo SOS 24/7. Si existe peligro inmediato, contactá a las autoridades locales.', actions: [{ type: 'show_emergency', label: 'Abrir SOS 24/7' }] };
-    if (/mapa|cerca|ubicación/.test(q)) return { message: 'Puedo llevarte al mapa territorial. La ubicación solo se solicitará si elegís buscar cerca de vos.', actions: [{ type: 'open_map', label: 'Abrir mapa' }] };
-    if (/ruta|viaje|itinerario|días/.test(q)) return { message: 'Abramos el planificador para preparar una ruta con tus días, intereses y presupuesto.', actions: [{ type: 'build_itinerary', label: 'Planificar viaje' }] };
-    if (/comida|comer|gastronom|platillo|nacatamal|vigorón|quesillo/.test(q)) return { message: 'Puedo acompañarte por los sabores de Nicaragua, explicarte el origen de cada platillo y llevarte al fogón gastronómico de la página.', actions: [{ type: 'show_food', label: 'Explorar gastronomía' }] };
-    if (/historia|darío|güegüense|leyenda|memoria|colonial/.test(q)) return { message: 'Puedo narrarte episodios y personajes de la memoria nicaragüense usando el contenido histórico disponible en Baqueano.', actions: [{ type: 'show_history', label: 'Descubrir historia' }] };
-    if (/museo|arte|artesanía|cultura|patrimonio/.test(q)) return { message: 'Puedo ayudarte a descubrir museos, talleres artesanales, patrimonio y expresiones culturales registradas en nuestra plataforma.', actions: [{ type: 'search_experience', label: 'Explorar cultura' }, { type: 'search_business', label: 'Ver artesanos' }] };
-    if (/música|musica|canción|cancion|marimba|son nica/.test(q)) return { message: 'Puedo presentarte la galería sonora, explicar géneros nicaragüenses y acompañarte mientras escuchás la música de nuestra tierra.', actions: [{ type: 'play_audio', label: 'Escuchar música' }] };
-    if (/naturaleza|volcán|volcan|playa|reserva|sendero|río|rio/.test(q)) return { message: 'Puedo comparar destinos naturales, revisar rutas y ayudarte a elegir una experiencia según tu tiempo y nivel de aventura.', actions: [{ type: 'search_places', label: 'Explorar naturaleza' }, { type: 'build_itinerary', label: 'Crear ruta' }] };
-    return { message: 'Soy Baqüi. Puedo ayudarte con turismo, rutas, historia, gastronomía, museos, arte, cultura, música, naturaleza, hospedaje y seguridad usando la información de Baqueano.', actions: [{ type: 'search_places', label: 'Explorar destinos' }, { type: 'build_itinerary', label: 'Planificar viaje' }] };
-  }
-
   async function ask(raw) {
     const message = String(raw || '').trim(); if (!message || state.busy) return;
     session.tripProfile = Object.assign({}, session.tripProfile, extractTripProfile(message)); saveSession();
@@ -168,7 +155,12 @@
       if (!response.ok) throw new Error('gateway'); const data = await response.json(); if (!data.ok) throw new Error('contract');
       thinking?.closest('article')?.remove(); session.tripProfile = Object.assign({}, session.tripProfile, data.tripProfilePatch || {}); if (CHARACTER_STATES.has(data.animation)) setCharacter(data.animation); await streamText(data.message); renderActions(data.actions || []); track('assistant_response', { mode: data.mode, latency_ms: Math.round(performance.now() - started) });
     } catch (error) {
-      thinking?.closest('article')?.remove(); if (error.name !== 'AbortError') { const fallback = deterministicReply(message); await streamText(fallback.message); renderActions(fallback.actions); track('assistant_response', { mode: 'client_fallback', latency_ms: Math.round(performance.now() - started) }); }
+      thinking?.closest('article')?.remove();
+      if (error.name !== 'AbortError') {
+        appendMessage('No pude conectarme con el servicio de inteligencia en este momento. Tu pregunta no fue respondida ni sustituida por contenido automático. Intentá nuevamente en unos instantes.', 'status', false);
+        setCharacter('idle');
+        track('assistant_error', { code: 'AI_UNAVAILABLE', latency_ms: Math.round(performance.now() - started) });
+      }
     } finally { state.busy = false; state.controller = null; $('#bqMessages').setAttribute('aria-busy', 'false'); $('[data-command="stop"]').hidden = true; if (state.character === 'thinking') setCharacter('idle'); }
   }
 

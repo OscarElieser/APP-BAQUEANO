@@ -1,7 +1,7 @@
 /**
  * BAQUEANO DIGITAL — GATEWAY CONVERSACIONAL TERRITORIAL
  * POR QUÉ: responder con contexto verificable sin exponer secretos ni datos privados.
- * CÓMO: consulta catálogos públicos, invoca Gemini en servidor y conserva fallback determinista.
+ * CÓMO: consulta catálogos públicos e invoca Gemini en servidor sin simular respuestas.
  * QUÉ: servicio POST con contrato estable, fuentes, acciones y perfil incremental.
  */
 "use strict";
@@ -11,18 +11,6 @@ const ALLOWED_ANIMATIONS = new Set(["idle", "speaking", "explaining", "celebrati
 const buckets = new Map();
 function cleanText(value, max = 500) { return String(value || "").replace(/[\u0000-\u001F\u007F]/g, " ").trim().slice(0, max); }
 function allowRequest(key, now = Date.now()) { const current = buckets.get(key) || {start: now, count: 0}; if (now - current.start > 60000) { current.start = now; current.count = 0; } current.count += 1; buckets.set(key, current); return current.count <= 12; }
-function deterministicResponse(message, catalog = []) {
-  const query = message.toLocaleLowerCase("es");
-  const matches = catalog.filter(item => cleanText(JSON.stringify(item), 3000).toLocaleLowerCase("es").split(/\s+/).some(term => term.length > 3 && query.includes(term))).slice(0, 4);
-  if (/emergencia|sos|auxilio/.test(query)) return {message: "Puedo abrir el módulo SOS 24/7. Si existe peligro inmediato, contactá a las autoridades locales.", actions: [{type: "show_emergency", label: "Abrir SOS 24/7"}]};
-  if (/cerca|ubicación|ubicacion/.test(query)) return {message: "Puedo buscar opciones cercanas cuando autoricés tu ubicación para esa consulta.", actions: [{type: "show_nearby", label: "Buscar cerca"}]};
-  if (/mapa/.test(query)) return {message: "Abramos el mapa territorial para explorar destinos con coordenadas registradas.", actions: [{type: "open_map", label: "Abrir mapa"}]};
-  if (/clima|tiempo|pron[oó]stico/.test(query)) return {message: "El clima cambia constantemente; puedo consultarlo en tiempo real sin tratarlo como información permanente.", actions: [{type: "check_weather", label: "Consultar clima"}]};
-  if (/evento|festival|actividad hoy/.test(query)) return {message: "Los eventos requieren fecha y fuente vigentes. Puedo buscar únicamente registros actualizados.", actions: [{type: "search_events", label: "Buscar eventos"}]};
-  if (/ruta|viaje|itinerario|presupuesto/.test(query)) return {message: "Puedo preparar una ruta usando días, viajeros, intereses y presupuesto. Los costos solo se incluyen cuando están verificados y vigentes.", actions: [{type: "build_itinerary", label: "Planificar viaje"}]};
-  if (matches.length) return {message: `Encontré información registrada sobre ${matches.map(item => item.name).join(", ")}. Abrí el catálogo para revisar detalles y fuentes.`, actions: [{type: "search_places", label: "Ver resultados"}], sources: matches.map(item => ({id: item.id, label: item.name, collection: item.collection}))};
-  return {message: "No encontré una coincidencia verificable. Puedo ayudarte a explorar el catálogo, abrir el mapa o preparar una ruta sin inventar datos.", actions: [{type: "search_places", label: "Explorar destinos"}]};
-}
 async function readCatalog(db) {
   const snapshots = await Promise.all(KNOWLEDGE_COLLECTIONS.map(async config => { try { return {collection: config.name, snapshot: await db.collection(config.name).limit(config.limit).get()}; } catch (_) { return {collection: config.name, snapshot: {docs: []}}; } }));
   return snapshots.flatMap(({collection, snapshot}) => snapshot.docs.map(doc => ({id: doc.id, collection, ...doc.data()})))
@@ -54,9 +42,11 @@ function createAiChatService({db, getApiKey = () => "", fetchImpl = fetch}) {
     const clientKey = cleanText(request.ip || request.headers?.["x-forwarded-for"] || "anonymous", 100); if (!allowRequest(clientKey)) return {status: 429, body: {ok: false, error: {code: "RATE_LIMITED"}}};
     const body = request.body && typeof request.body === "object" ? request.body : {}; const message = cleanText(body.message, 500); if (!message) return {status: 400, body: {ok: false, error: {code: "INVALID_MESSAGE"}}};
     const payload = {message, conversationId: cleanText(body.conversationId, 100), history: Array.isArray(body.history) ? body.history.slice(-12).map(item => ({role: item.role === "user" ? "user" : "assistant", content: cleanText(item.content, 700)})) : [], context: body.context && typeof body.context === "object" ? JSON.parse(JSON.stringify(body.context).slice(0, 5000)) : {}};
-    const catalog = await readCatalog(db); let result; let mode = "deterministic"; try { result = await callGemini(getApiKey(), payload, catalog, fetchImpl); mode = "gemini"; } catch (_) { result = deterministicResponse(message, catalog); }
+    const catalog = await readCatalog(db); let result;
+    try { result = await callGemini(getApiKey(), payload, catalog, fetchImpl); }
+    catch (error) { console.error("AI_UNAVAILABLE", error?.message || error); return {status: 503, body: {ok: false, error: {code: "AI_UNAVAILABLE", message: "El servicio de inteligencia no pudo responder la consulta."}}}; }
     const sourceIds = new Set(Array.isArray(result.sourceIds) ? result.sourceIds.map(String) : []); const sources = result.sources || catalog.filter(item => sourceIds.has(item.id)).slice(0, 5).map(item => ({id: item.id, label: item.name, collection: item.collection, verified: item.verified, verifiedAt: item.verificationDate || undefined, sourceName: item.sourceName || undefined, sourceUrl: item.sourceUrl || undefined}));
-    return {status: 200, body: {ok: true, message: cleanText(result.message, 1800), emotion: cleanText(result.emotion || "calm", 20), animation: ALLOWED_ANIMATIONS.has(result.animation) ? result.animation : "speaking", conversationId: payload.conversationId, sources, actions: sanitizeActions(result.actions), tripProfilePatch: sanitizeTripProfilePatch(result.tripProfilePatch), mode}};
+    return {status: 200, body: {ok: true, message: cleanText(result.message, 1800), emotion: cleanText(result.emotion || "calm", 20), animation: ALLOWED_ANIMATIONS.has(result.animation) ? result.animation : "speaking", conversationId: payload.conversationId, sources, actions: sanitizeActions(result.actions), tripProfilePatch: sanitizeTripProfilePatch(result.tripProfilePatch), mode: "gemini"}};
   };
 }
-module.exports = {createAiChatService, deterministicResponse, sanitizeActions, sanitizeTripProfilePatch, readCatalog, cleanText};
+module.exports = {createAiChatService, sanitizeActions, sanitizeTripProfilePatch, readCatalog, cleanText};
