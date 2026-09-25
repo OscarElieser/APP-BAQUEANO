@@ -68,3 +68,10 @@ key.properties
 
 # Claves locales - NO subir a GitHub
 website/js/local-keys.js
+
+# Cache de herramientas y resultados temporales
+.gemini/
+website/test-results/
+supabase/.temp/
+
+
