@@ -229,9 +229,11 @@
 
     let autoTimer = null;
     let isUserInteracting = false;
+    let isPhoneInViewport = false;
 
     function advanceToNextReel() {
-      if (isUserInteracting) return;
+      // Bloquear si el usuario interactúa o si la pantalla del hero no está en el viewport
+      if (isUserInteracting || !isPhoneInViewport) return;
       const cards = feed.querySelectorAll('.baqueano-reel');
       if (!cards.length) return;
 
@@ -240,14 +242,21 @@
       const nextIndex = (currentIndex + 1) % cards.length;
       const nextCard = cards[nextIndex];
 
-      if (nextCard && typeof nextCard.scrollIntoView === 'function') {
-        nextCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      if (nextCard) {
+        // NUNCA usar scrollIntoView aquí porque fuerza el scroll de la ventana principal al Hero
+        // Usar scroll interno del contenedor feed de forma segura:
+        feed.scrollTo({
+          top: nextCard.offsetTop,
+          behavior: 'smooth'
+        });
       }
     }
 
     function startTimer() {
       stopTimer();
-      autoTimer = setInterval(advanceToNextReel, 5500);
+      if (isPhoneInViewport && !isUserInteracting) {
+        autoTimer = setInterval(advanceToNextReel, 6000);
+      }
     }
 
     function stopTimer() {
@@ -257,13 +266,29 @@
       }
     }
 
+    // Observar visibilidad en viewport: solo reproduce/avanza si el usuario está viendo el Hero
+    if ('IntersectionObserver' in window) {
+      const visibilityObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isPhoneInViewport = entry.isIntersecting;
+          if (isPhoneInViewport) {
+            startTimer();
+          } else {
+            stopTimer();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      visibilityObs.observe(reelsRoot);
+    } else {
+      isPhoneInViewport = true;
+      startTimer();
+    }
+
     reelsRoot.addEventListener('mouseenter', () => { isUserInteracting = true; stopTimer(); });
     reelsRoot.addEventListener('mouseleave', () => { isUserInteracting = false; startTimer(); });
     reelsRoot.addEventListener('touchstart', () => { isUserInteracting = true; stopTimer(); }, { passive: true });
     reelsRoot.addEventListener('touchend', () => { isUserInteracting = false; startTimer(); }, { passive: true });
-
-    // Iniciar auto-avance
-    startTimer();
   }
 
   // 8. INTERACCIONES DE NICARAGUA VIVA (Música, Sabores, Relato con Robot Baqueano)
