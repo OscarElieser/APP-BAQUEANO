@@ -448,9 +448,14 @@
 
             <!-- Feed de Auditoría en Vivo -->
             <div class="ops-table-container-matte" style="padding: 1.5rem;">
-              <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-secondary);"></i> Actividad Reciente Verificada
-              </h3>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                  <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-secondary);"></i> Actividad Reciente Verificada
+                </h3>
+                <button type="button" class="btn-ops-matte" style="font-size: 0.75rem; padding: 0.28rem 0.65rem; color: #ef4444; border-color: rgba(239,68,68,0.35);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Limpiar todo el historial de auditoría">
+                  <i class="fa-solid fa-trash-can"></i> Limpiar Historial
+                </button>
+              </div>
               <div id="opsAuditFeed" style="max-height: 280px; overflow-y: auto;">
                 <div class="ops-empty-state" style="padding: 1.5rem;">
                   <div style="font-size: 0.85rem;">Esperando eventos de auditoría...</div>
@@ -700,8 +705,18 @@
           <div class="ops-empty-state"><i class="fa-solid fa-chart-simple ops-empty-icon"></i><div class="ops-empty-title">Analítica Agregada &amp; Ética</div><div class="ops-empty-desc">Medición sin invasión a la privacidad, combinando Firebase Analytics y Firestore.</div></div>
         </section>
         <section class="ops-view-panel" id="view-27-auditoria">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-file-shield"></i> Registro de Auditoría (Audit Logs)</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-clock-rotate-left ops-empty-icon"></i><div class="ops-empty-title">Trazabilidad Inmutable</div><div class="ops-empty-desc">Cada acción de publicación, edición o verificación queda registrada de por vida.</div></div>
+          <div class="ops-view-header">
+            <div class="ops-view-title-group">
+              <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> Historial y Registro de Auditoría</h1>
+              <p class="ops-view-subtitle">TRAZABILIDAD DE ACCESO, DIRECCIÓN IP Y ACCIONES EDITORIALES EN FIRESTORE Y SUPABASE</p>
+            </div>
+            <div class="ops-view-actions">
+              <button type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Vaciar todo el historial">
+                <i class="fa-solid fa-trash-can"></i> Vaciar Historial
+              </button>
+            </div>
+          </div>
+          <div class="ops-empty-state"><i class="fa-solid fa-clock-rotate-left ops-empty-icon"></i><div class="ops-empty-title">Cargando Historial de Auditoría...</div><div class="ops-empty-desc">Sincronizando registros con Cloud Firestore y Supabase.</div></div>
         </section>
         <section class="ops-view-panel" id="view-28-seguridad">
           <div class="ops-view-header"><h1><i class="fa-solid fa-shield-halved"></i> Seguridad &amp; RBAC</h1></div>

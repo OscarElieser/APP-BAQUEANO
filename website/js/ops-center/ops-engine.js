@@ -1776,6 +1776,7 @@
     activeBuilderPage: 'index',
     activeBuilderFilter: 'all',
     builderSearchQuery: '',
+    clientIp: null,
     pageSections: {},
     aiReports: [],
     aiAutonomyEnabled: false,
@@ -2193,12 +2194,22 @@
         }
       } catch (_) {}
 
-      // Registro de inicio de sesión en auditoría
-      OpsCMS.logAuditEvent({
-        action: 'ADMIN_SESSION_STARTED',
-        module: 'Seguridad',
-        description: `Inicio de sesión verificado para ${user.email}`,
-        status: 'success'
+      // Registro de inicio de sesión en auditoría con captura de IP
+      OpsCMS.getClientIp().then((ip) => {
+        OpsCMS.logAuditEvent({
+          action: 'ADMIN_SESSION_STARTED',
+          module: 'Seguridad',
+          description: `Inicio de sesión verificado para ${user.email} · IP: ${ip}`,
+          status: 'success',
+          ip: ip
+        });
+      }).catch(() => {
+        OpsCMS.logAuditEvent({
+          action: 'ADMIN_SESSION_STARTED',
+          module: 'Seguridad',
+          description: `Inicio de sesión verificado para ${user.email}`,
+          status: 'success'
+        });
       });
     },
 
@@ -2226,6 +2237,36 @@
   const OpsCMS = {
     getDb() {
       return window.firebase && window.firebase.firestore ? window.firebase.firestore() : null;
+    },
+
+    async getClientIp() {
+      if (OpsState.clientIp) return OpsState.clientIp;
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const fetchJson = async (url) => {
+          const res = await fetch(url, { signal: controller.signal });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const data = await res.json();
+          return data.ip || data.origin || data.query;
+        };
+
+        const ip = await Promise.any([
+          fetchJson('https://api.ipify.org?format=json'),
+          fetchJson('https://api.seeip.org/jsonip'),
+          fetchJson('https://httpbin.org/ip')
+        ]);
+        clearTimeout(timeoutId);
+        if (ip) {
+          OpsState.clientIp = String(ip).trim();
+          return OpsState.clientIp;
+        }
+      } catch (_) {}
+
+      OpsState.clientIp = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? '127.0.0.1 (Local)'
+        : (window.location.hostname || '127.0.0.1');
+      return OpsState.clientIp;
     },
 
     initDataSync() {
@@ -2379,23 +2420,48 @@
       OpsState.listeners.push(unsub);
     },
 
-    async logAuditEvent(eventData) {
+        async logAuditEvent(eventData) {
       const db = this.getDb();
       if (!db || !OpsState.currentUser) return;
 
+      const clientIp = eventData.ip || OpsState.clientIp || await this.getClientIp();
+      const userAgent = navigator.userAgent || 'Web Browser';
+      const currentUser = OpsState.currentUser;
+      const performedByEmail = currentUser.email || 'admin@baqueano.ni';
+      const performedByName = currentUser.name || performedByEmail.split('@')[0];
+
+      const auditPayload = {
+        action: eventData.action || 'ADMIN_ACTION',
+        module: eventData.module || 'Sistema',
+        collection: eventData.collection || '',
+        recordId: eventData.recordId || '',
+        description: eventData.description || '',
+        ip: clientIp,
+        ipAddress: clientIp,
+        userAgent: userAgent,
+        performedBy: performedByEmail,
+        performedByName: performedByName,
+        performedByUid: currentUser.uid,
+        role: currentUser.role || 'superAdmin',
+        timestamp: new Date().toISOString(),
+        status: eventData.status || 'success'
+      };
+
+      let generatedLogId = null;
+
       try {
-        await db.collection('audit_logs').add({
-          action: eventData.action || 'ADMIN_ACTION',
-          module: eventData.module || 'Sistema',
-          collection: eventData.collection || '',
-          recordId: eventData.recordId || '',
-          description: eventData.description || '',
-          performedBy: OpsState.currentUser.email,
-          performedByUid: OpsState.currentUser.uid,
-          role: OpsState.currentUser.role || 'superAdmin',
-          timestamp: new Date().toISOString(),
-          status: eventData.status || 'success'
-        });
+        const docRef = await db.collection('audit_logs').add(auditPayload);
+        generatedLogId = docRef.id;
+
+        // Mantener memoria reactiva sincronizada de inmediato
+        if (Array.isArray(OpsState.collectionsData['27-auditoria'])) {
+          const exists = OpsState.collectionsData['27-auditoria'].some((l) => l.id === generatedLogId);
+          if (!exists) {
+            OpsState.collectionsData['27-auditoria'].unshift({ id: generatedLogId, ...auditPayload });
+            OpsState.metrics.auditEventsCount = OpsState.collectionsData['27-auditoria'].length;
+            OpsUI.renderAuditFeed();
+          }
+        }
       } catch (err) {
         console.warn('[OpsCMS] No se pudo escribir en audit_logs de Firestore:', err.message);
       }
@@ -2403,15 +2469,101 @@
       // Sincronización soberana en Supabase (public.audit_logs)
       if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
         try {
-          window.baqueanoSupabase.from('audit_logs').insert({
-            admin_email: OpsState.currentUser?.email || 'admin@baqueano.ni',
-            action: eventData.action || 'ADMIN_ACTION',
-            target_entity: eventData.collection || eventData.module || 'Sistema',
-            target_id: eventData.recordId || null,
-            payload: eventData
-          }).then(() => {}).catch(() => {});
+          await window.baqueanoSupabase.from('audit_logs').insert({
+            admin_email: performedByEmail,
+            ip_address: clientIp,
+            user_agent: userAgent,
+            action: auditPayload.action,
+            module: auditPayload.module,
+            target_entity: auditPayload.collection || auditPayload.module,
+            target_id: auditPayload.recordId || generatedLogId || null,
+            description: auditPayload.description,
+            payload: auditPayload
+          });
         } catch (_) {}
       }
+    },
+
+    async deleteAuditLog(logId) {
+      if (!logId) return;
+
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Eliminar Registro del Historial?',
+        message: '¿Deseas eliminar permanentemente esta entrada de auditoría en Firebase y Supabase?',
+        isDangerous: true,
+        confirmText: 'Eliminar Registro'
+      });
+      if (!confirmed) return;
+
+      // 1. Eliminar en Firestore
+      const db = this.getDb();
+      if (db) {
+        try {
+          await db.collection('audit_logs').doc(logId).delete();
+        } catch (fbErr) {
+          console.warn('[OpsCMS] Error eliminando log en Firestore:', fbErr.message);
+        }
+      }
+
+      // 2. Eliminar en Supabase
+      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+        try {
+          await window.baqueanoSupabase.from('audit_logs').delete().or(`id.eq.${logId},target_id.eq.${logId}`);
+        } catch (sbErr) {
+          console.warn('[OpsCMS] Error eliminando log en Supabase:', sbErr.message);
+        }
+      }
+
+      // 3. Remover de memoria local de inmediato
+      if (Array.isArray(OpsState.collectionsData['27-auditoria'])) {
+        OpsState.collectionsData['27-auditoria'] = OpsState.collectionsData['27-auditoria'].filter((l) => l.id !== logId);
+        OpsState.metrics.auditEventsCount = OpsState.collectionsData['27-auditoria'].length;
+      }
+
+      OpsUI.renderAuditFeed();
+      OpsToast.show('Registro de auditoría eliminado exitosamente.', 'success');
+    },
+
+    async clearAuditLogs() {
+      const logs = OpsState.collectionsData['27-auditoria'] || [];
+      if (logs.length === 0) {
+        OpsToast.show('No hay registros de auditoría para eliminar.', 'info');
+        return;
+      }
+
+      const confirmed = await OpsDialog.confirm({
+        title: '¿Vaciar Todo el Historial?',
+        message: `Esta acción eliminará de forma irreversible ${logs.length} registros de auditoría e inicios de sesión en Firebase y Supabase.`,
+        isDangerous: true,
+        confirmText: 'Vaciar Historial'
+      });
+      if (!confirmed) return;
+
+      const db = this.getDb();
+      if (db) {
+        try {
+          const batch = db.batch();
+          logs.forEach((l) => {
+            if (l.id) batch.delete(db.collection('audit_logs').doc(l.id));
+          });
+          await batch.commit();
+        } catch (fbErr) {
+          console.warn('[OpsCMS] Error vaciando audit_logs en Firestore:', fbErr.message);
+        }
+      }
+
+      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+        try {
+          await window.baqueanoSupabase.from('audit_logs').delete().neq('admin_email', 'TRUNCATE_FILTER_IMPOSSIBLE_VALUE');
+        } catch (sbErr) {
+          console.warn('[OpsCMS] Error vaciando audit_logs en Supabase:', sbErr.message);
+        }
+      }
+
+      OpsState.collectionsData['27-auditoria'] = [];
+      OpsState.metrics.auditEventsCount = 0;
+      OpsUI.renderAuditFeed();
+      OpsToast.show('Historial de auditoría vaciado por completo.', 'success');
     },
 
     // 7.3 Guardado y Actualización Universal (con Dual-Write Atómico)
@@ -5218,17 +5370,34 @@
         if (logs.length === 0) {
           dashFeed.innerHTML = '<div class="ops-empty-state" style="padding: 1.5rem;"><div style="font-size: 0.85rem;">Esperando eventos de auditoría...</div></div>';
         } else {
-          dashFeed.innerHTML = logs.slice(0, 8).map((log) => `
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; padding: 0.65rem 0; border-bottom: 1px solid var(--ops-border-subtle); font-size: 0.8rem;">
-              <div>
-                <strong style="color: #fff;">${this.escape(log.action)}</strong>
-                <div style="color: var(--ops-text-secondary); font-size: 0.74rem;">${this.escape(log.description || '')}</div>
+          dashFeed.innerHTML = logs.slice(0, 10).map((log) => {
+            const ipVal = log.ip || log.ipAddress || (log.payload && (log.payload.ip || log.payload.ipAddress)) || '127.0.0.1';
+            const userVal = log.performedBy || log.performedByName || (log.payload && log.payload.performedBy) || 'Admin';
+            return `
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; padding: 0.75rem 0; border-bottom: 1px solid var(--ops-border-subtle); font-size: 0.82rem; gap: 0.75rem;">
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap; margin-bottom:0.3rem;">
+                    <strong style="color: #fff; font-size:0.84rem;">${this.escape(log.action)}</strong>
+                    <span class="ops-badge-pill" style="font-size:0.68rem; background:rgba(22,93,111,0.25); border:1px solid #165D6F; color:#67e8f9; padding:0.15rem 0.45rem;">
+                      <i class="fa-solid fa-network-wired"></i> ${this.escape(ipVal)}
+                    </span>
+                    <span class="ops-badge-pill" style="font-size:0.68rem; background:rgba(246,94,1,0.15); border:1px solid rgba(246,94,1,0.35); color:#F65E01; padding:0.15rem 0.45rem;">
+                      <i class="fa-solid fa-user-shield"></i> ${this.escape(userVal)}
+                    </span>
+                  </div>
+                  <div style="color: var(--ops-text-secondary); font-size: 0.75rem; line-height:1.4;">${this.escape(log.description || '')}</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
+                  <span style="font-size: 0.72rem; color: var(--ops-text-muted); font-family:monospace; white-space:nowrap;">
+                    ${log.timestamp ? new Date(log.timestamp).toLocaleTimeString('es-NI', { hour12: false }) : ''}
+                  </span>
+                  <button type="button" class="btn-ops-matte" style="padding:0.2rem 0.45rem; font-size:0.7rem; color:#ef4444; border-color:rgba(239,68,68,0.35);" title="Eliminar registro de auditoría" onclick="window.BaqueanoOpsEngine.deleteAuditLog('${log.id}')">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
               </div>
-              <span style="font-size: 0.7rem; color: var(--ops-text-muted); white-space: nowrap;">
-                ${log.timestamp ? new Date(log.timestamp).toLocaleTimeString('es-NI', { hour12: false }) : ''}
-              </span>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         }
       }
 
@@ -5238,8 +5407,13 @@
         auditPanel.innerHTML = `
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> Registro Inmutable de Auditoría</h1>
-              <p class="ops-view-subtitle">TRAZABILIDAD DE ACCIONES EDITORIALES, VERIFICACIONES Y MODIFICACIONES EN FIRESTORE</p>
+              <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> Historial y Registro de Auditoría</h1>
+              <p class="ops-view-subtitle">TRAZABILIDAD DE ACCESO, DIRECCIÓN IP Y ACCIONES EDITORIALES EN FIRESTORE Y SUPABASE</p>
+            </div>
+            <div class="ops-view-actions">
+              <button type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Vaciar todo el historial">
+                <i class="fa-solid fa-trash-can"></i> Vaciar Historial
+              </button>
             </div>
           </div>
 
@@ -5251,31 +5425,55 @@
                   <th>Acción</th>
                   <th>Módulo</th>
                   <th>Detalle Operativo</th>
-                  <th>Responsable</th>
+                  <th>Dirección IP</th>
+                  <th>Usuario que Entra</th>
+                  <th style="text-align:right;">Eliminar</th>
                 </tr>
               </thead>
               <tbody id="auditTableBody">
                 ${logs.length === 0 ? `
-                  <tr><td colspan="5" style="text-align:center;padding:2.5rem;color:var(--ops-text-muted);">No existen registros de auditoría aún.</td></tr>
-                ` : logs.map((log) => `
-                  <tr class="ops-table-row">
-                    <td style="font-size:0.78rem; font-family:monospace; color:var(--ops-text-muted);">
-                      ${log.timestamp ? new Date(log.timestamp).toLocaleString('es-NI', { hour12: false }) : 'Reciente'}
-                    </td>
-                    <td><strong style="color:#fff;">${this.escape(log.action)}</strong></td>
-                    <td>${this.escape(log.module || 'Sistema')}</td>
-                    <td style="font-size:0.82rem; color:var(--ops-text-secondary); max-width:320px;">
-                      ${this.escape(log.description || '')}
-                    </td>
-                    <td><code>${this.escape(log.performedBy || 'Admin')}</code></td>
-                  </tr>
-                `).join('')}
+                  <tr><td colspan="7" style="text-align:center;padding:2.5rem;color:var(--ops-text-muted);">No existen registros de auditoría aún.</td></tr>
+                ` : logs.map((log) => {
+                  const ipVal = log.ip || log.ipAddress || (log.payload && (log.payload.ip || log.payload.ipAddress)) || '127.0.0.1';
+                  const userVal = log.performedBy || log.performedByName || (log.payload && log.payload.performedBy) || 'Admin';
+                  return `
+                    <tr class="ops-table-row">
+                      <td style="font-size:0.78rem; font-family:monospace; color:var(--ops-text-muted); white-space:nowrap;">
+                        ${log.timestamp ? new Date(log.timestamp).toLocaleString('es-NI', { hour12: false }) : 'Reciente'}
+                      </td>
+                      <td><strong style="color:#fff; font-size:0.84rem;">${this.escape(log.action)}</strong></td>
+                      <td>
+                        <span class="ops-badge-pill" style="font-size:0.75rem; background:rgba(255,255,255,0.06);">${this.escape(log.module || 'Sistema')}</span>
+                      </td>
+                      <td style="font-size:0.82rem; color:var(--ops-text-secondary); max-width:320px; line-height:1.4;">
+                        ${this.escape(log.description || '')}
+                      </td>
+                      <td>
+                        <span class="ops-badge-pill" style="font-size:0.74rem; font-family:monospace; background:rgba(22,93,111,0.3); border:1px solid #165D6F; color:#67e8f9;">
+                          <i class="fa-solid fa-network-wired" style="margin-right:0.3rem;"></i>${this.escape(ipVal)}
+                        </span>
+                      </td>
+                      <td>
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                          <i class="fa-solid fa-user-check" style="color:var(--bq-accent); font-size:0.8rem;"></i>
+                          <code style="color:var(--bq-sand); font-size:0.8rem;">${this.escape(userVal)}</code>
+                        </div>
+                      </td>
+                      <td style="text-align:right;">
+                        <button type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4); padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="window.BaqueanoOpsEngine.deleteAuditLog('${log.id}')" title="Eliminar este registro">
+                          <i class="fa-solid fa-trash-can"></i> Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
               </tbody>
             </table>
           </div>
         `;
       }
     },
+
 
     // 8.3b Módulo de Analítica Web vs Android (26-analitica)
     renderAnalyticsModule() {
