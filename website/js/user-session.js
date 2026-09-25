@@ -384,18 +384,20 @@
       if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
         try {
           const uid = userObj.firebaseUid || 'guest_uid';
-          window.baqueanoSupabase.from('user_profiles').upsert({
-            id: uid,
+          window.baqueanoSupabase.from('profiles').upsert({
+            firebase_uid: uid,
             email: userObj.email || '',
             display_name: userObj.name || '',
             phone: userObj.phone || '',
             avatar_url: userObj.avatar || '',
-            role: userObj.role || 'explorer',
-            settings: userObj.settings || {},
-            travel_preferences: userObj.travelPreferences || {},
-            two_factor_enabled: !!userObj.twoFactorEnabled,
+            role: userObj.role || 'traveler',
+            metadata: {
+              settings: userObj.settings || {},
+              travel_preferences: userObj.travelPreferences || {},
+              two_factor_enabled: !!userObj.twoFactorEnabled
+            },
             updated_at: new Date().toISOString()
-          }).then(({ error }) => {
+          }, { onConflict: 'firebase_uid' }).then(({ error }) => {
             if (error) {
               // Guardar en copia local de respaldo de Supabase
               localStorage.setItem('baqueano_supabase_user_backup', JSON.stringify({
@@ -591,6 +593,27 @@
       if (!user.bookings) user.bookings = [];
       user.bookings.unshift(bookingData);
       this.saveUser(user);
+
+      // Sincronizar reserva en Supabase (reservations)
+      if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
+        const uid = user.firebaseUid || 'guest_uid';
+        const reservationCode = bookingData.id || ('RES-' + Date.now().toString(36).toUpperCase());
+        window.baqueanoSupabase.from('reservations').insert({
+          reservation_code: reservationCode,
+          user_uid: uid,
+          service_title: bookingData.destinationName || 'Expedición Baqueano',
+          travel_date: bookingData.date || new Date().toISOString().split('T')[0],
+          people_count: Number(bookingData.pax) || 1,
+          total_price: Number(bookingData.totalNio) || (Number(bookingData.totalUsd || 0) * 36.65),
+          currency: 'NIO',
+          status: bookingData.status || 'pending',
+          notes: bookingData.guideName ? 'Guía: ' + bookingData.guideName : null
+        }).then(({ error }) => {
+          if (error) console.warn('[Supabase Sync] Aviso en reserva:', error.message);
+          else console.info('🟢 [Supabase Sync] Reserva respaldada con éxito en Supabase.');
+        }).catch(err => console.warn('[Supabase Sync] Error reserva:', err.message));
+      }
+
       return user;
     },
 
@@ -602,6 +625,16 @@
         booking.status = 'cancelled';
         booking.statusLabel = 'Cancelada';
         this.saveUser(user);
+
+        // Cancelar en Supabase
+        if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
+          window.baqueanoSupabase.from('reservations')
+            .update({ status: 'cancelled', updated_at: new Date().toISOString() })
+            .eq('reservation_code', bookingId)
+            .then(({ error }) => {
+              if (error) console.warn('[Supabase Sync] Error al cancelar en Supabase:', error.message);
+            }).catch(e => console.warn('[Supabase Sync] Excepción cancelación:', e.message));
+        }
       }
       return user;
     },
@@ -623,6 +656,7 @@
     toggleFavorite: function(destinationId) {
       let favs = this.getFavorites();
       const idx = favs.indexOf(destinationId);
+      const isNowFav = idx < 0;
       if (idx >= 0) {
         favs.splice(idx, 1);
       } else {
@@ -630,6 +664,30 @@
       }
       localStorage.setItem(FAVS_STORAGE_KEY, JSON.stringify(favs));
       window.dispatchEvent(new CustomEvent('baqueano_favs_updated', { detail: favs }));
+
+      // Sincronizar en Supabase (favorites)
+      if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
+        const user = loadSession();
+        const uid = user ? (user.firebaseUid || 'guest_uid') : 'guest_uid';
+        if (isNowFav) {
+          window.baqueanoSupabase.from('favorites').upsert({
+            user_uid: uid,
+            entity_type: 'destination',
+            entity_id: destinationId
+          }).then(({ error }) => {
+            if (error) console.warn('[Supabase Sync] Favorito no sincronizado:', error.message);
+          }).catch(e => console.warn('[Supabase Sync] Error fav:', e.message));
+        } else {
+          window.baqueanoSupabase.from('favorites').delete()
+            .eq('user_uid', uid)
+            .eq('entity_type', 'destination')
+            .eq('entity_id', destinationId)
+            .then(({ error }) => {
+              if (error) console.warn('[Supabase Sync] Error borrado fav:', error.message);
+            }).catch(e => console.warn('[Supabase Sync] Error delete fav:', e.message));
+        }
+      }
+
       return favs.includes(destinationId);
     }
   };
