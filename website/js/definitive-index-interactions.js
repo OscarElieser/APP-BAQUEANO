@@ -23,6 +23,7 @@
 // - initCategoryChipsToggle(): Muestra/oculta categorías secundarias de búsqueda.
 // - initHeroReelsAutoAdvance(): Transición automática suave de clips verticales en el smartphone.
 // - initNavbarScrollEffect(): Aplica la clase .scrolled al navbar según el desplazamiento.
+// - initInfiniteGalleries(): Carruseles continuos con pausa voluntaria y controles accesibles.
 // ============================================================================
 
 (function () {
@@ -378,6 +379,141 @@
     });
   }
 
+  // 11. GALERÍAS ROTATIVAS CONTINUAS
+  // 🎯 POR QUÉ: exhibir todas las experiencias sin una cuadrícula extensa o estática.
+  // ⚙️ CÓMO: desplazamiento por requestAnimationFrame, duplicado visual y reinicio imperceptible.
+  // 📦 QUÉ: reproducción, pausa, navegación, gestos y respeto a movimiento reducido.
+  function initInfiniteGalleries() {
+    const galleryConfigs = [
+      { track: document.getElementById('livingCarouselTrack'), label: 'Experiencias de Nicaragua' },
+      { track: document.querySelector('#destinosDestacadosSection .destinations-pro-grid'), label: 'Destinos destacados' }
+    ];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    galleryConfigs.forEach((config, galleryIndex) => {
+      const track = config.track;
+      if (!track || track.dataset.infiniteReady === 'true') return;
+      const originals = [...track.children];
+      if (originals.length < 2) return;
+
+      track.dataset.infiniteReady = 'true';
+      track.classList.add('is-infinite-track');
+
+      const currentParent = track.parentElement;
+      const shell = document.createElement('div');
+      const viewport = document.createElement('div');
+      const controls = document.createElement('div');
+      const status = document.createElement('span');
+      shell.className = 'infinite-gallery-shell';
+      viewport.className = 'infinite-gallery-viewport';
+      viewport.setAttribute('role', 'region');
+      viewport.setAttribute('aria-label', config.label);
+      viewport.tabIndex = 0;
+      controls.className = 'infinite-gallery-controls';
+      controls.innerHTML = `
+        <button type="button" data-gallery-action="prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button type="button" data-gallery-action="toggle" aria-label="Pausar galería" aria-pressed="false"><i class="fa-solid fa-pause"></i><span>Pausar</span></button>
+        <button type="button" data-gallery-action="next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>`;
+      status.className = 'sr-only';
+      status.setAttribute('aria-live', 'polite');
+
+      currentParent.insertBefore(shell, track);
+      shell.append(controls, viewport, status);
+      viewport.appendChild(track);
+      if (currentParent.classList.contains('living-carousel-wrap')) {
+        shell.classList.add('infinite-gallery-shell--living');
+        currentParent.classList.add('is-gallery-host');
+      }
+
+      originals.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.dataset.galleryClone = 'true';
+        clone.setAttribute('aria-hidden', 'true');
+        clone.tabIndex = -1;
+        clone.querySelectorAll('a, button, [tabindex]').forEach((node) => { node.tabIndex = -1; });
+        track.appendChild(clone);
+      });
+
+      let manualPause = reduceMotion;
+      let interactionPause = false;
+      let lastTime = 0;
+      let frameId = 0;
+      const toggleButton = controls.querySelector('[data-gallery-action="toggle"]');
+
+      const updateToggle = () => {
+        const paused = manualPause || reduceMotion;
+        toggleButton.setAttribute('aria-pressed', String(paused));
+        toggleButton.setAttribute('aria-label', paused ? 'Reanudar galería' : 'Pausar galería');
+        toggleButton.innerHTML = paused
+          ? '<i class="fa-solid fa-play"></i><span>Reanudar</span>'
+          : '<i class="fa-solid fa-pause"></i><span>Pausar</span>';
+        shell.classList.toggle('is-paused', paused || interactionPause);
+      };
+
+      const normalizeScroll = () => {
+        const midpoint = track.scrollWidth / 2;
+        if (midpoint > 0 && viewport.scrollLeft >= midpoint) viewport.scrollLeft -= midpoint;
+        if (viewport.scrollLeft < 0) viewport.scrollLeft += midpoint;
+      };
+
+      const step = (time) => {
+        const elapsed = Math.min(40, time - (lastTime || time));
+        lastTime = time;
+        if (!manualPause && !interactionPause && !document.hidden && !reduceMotion) {
+          viewport.scrollLeft += elapsed * 0.035;
+          normalizeScroll();
+        }
+        frameId = window.requestAnimationFrame(step);
+      };
+
+      const moveByCard = (direction) => {
+        const first = originals[0];
+        const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+        const distance = first.getBoundingClientRect().width + gap;
+        if (direction < 0 && viewport.scrollLeft < distance) viewport.scrollLeft += track.scrollWidth / 2;
+        viewport.scrollBy({ left: direction * distance, behavior: 'smooth' });
+        window.setTimeout(normalizeScroll, 500);
+      };
+
+      controls.addEventListener('click', (event) => {
+        const button = event.target.closest('button');
+        const action = button?.dataset.galleryAction;
+        if (action === 'toggle') {
+          manualPause = !manualPause;
+          status.textContent = manualPause ? 'Galería pausada' : 'Galería reanudada';
+          updateToggle();
+        } else if (action === 'prev' || action === 'next') {
+          interactionPause = true;
+          moveByCard(action === 'next' ? 1 : -1);
+          window.setTimeout(() => { interactionPause = false; updateToggle(); }, 2200);
+        }
+      });
+
+      shell.addEventListener('mouseenter', () => { interactionPause = true; updateToggle(); });
+      shell.addEventListener('mouseleave', () => { interactionPause = false; updateToggle(); });
+      shell.addEventListener('focusin', () => { interactionPause = true; updateToggle(); });
+      shell.addEventListener('focusout', (event) => {
+        if (!shell.contains(event.relatedTarget)) { interactionPause = false; updateToggle(); }
+      });
+      viewport.addEventListener('pointerdown', () => { interactionPause = true; updateToggle(); }, { passive: true });
+      viewport.addEventListener('pointerup', () => {
+        window.setTimeout(() => { interactionPause = false; updateToggle(); }, 3200);
+      }, { passive: true });
+      viewport.addEventListener('scroll', normalizeScroll, { passive: true });
+      viewport.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        interactionPause = true;
+        moveByCard(event.key === 'ArrowRight' ? 1 : -1);
+      });
+
+      updateToggle();
+      frameId = window.requestAnimationFrame(step);
+      window.addEventListener('pagehide', () => window.cancelAnimationFrame(frameId), { once: true });
+      shell.dataset.galleryIndex = String(galleryIndex);
+    });
+  }
+
   // ARRANQUE DEFENSIVO
   function init() {
     initNavbarScrollEffect();
@@ -390,6 +526,7 @@
     initHeroBackgroundVideo();
     initNicaraguaVivaInteractions();
     initAlliesFilter();
+    initInfiniteGalleries();
     initLivingCardsInteractivity();
   }
 

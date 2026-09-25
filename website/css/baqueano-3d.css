@@ -1534,6 +1534,47 @@
 }
 
 .planner-result-showcase {
+  position: relative;
   margin-top: 1.5rem;
   width: 100%;
+}
+
+.planner-result-showcase .builder-result-card {
+  position: relative;
+  padding-top: 4.25rem;
+}
+
+.rb-result-close {
+  position: absolute;
+  z-index: 5;
+  top: 1rem;
+  right: 1rem;
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(246, 94, 1, 0.42);
+  border-radius: 50%;
+  color: #F4E6C1;
+  background: rgba(15, 23, 42, 0.88);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+  cursor: pointer;
+  transition: transform 180ms ease, color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.rb-result-close:hover {
+  transform: rotate(90deg) scale(1.06);
+  color: #FFFFFF;
+  background: #F65E01;
+  box-shadow: 0 12px 30px rgba(246, 94, 1, 0.3);
+}
+
+.rb-result-close:focus-visible {
+  outline: 3px solid #F4E6C1;
+  outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+  .planner-result-showcase .builder-result-card { padding-top: 3.8rem; }
+  .rb-result-close { top: 0.75rem; right: 0.75rem; width: 38px; height: 38px; }
 }
