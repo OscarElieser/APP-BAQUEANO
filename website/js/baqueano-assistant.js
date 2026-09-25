@@ -168,7 +168,7 @@
     const text = String(message).toLocaleLowerCase('es'); const patch = {};
     const travelers = text.match(/(?:somos|viajamos|para)\s+(\d{1,2})\s+(?:personas?|viajeros?)/); const days = text.match(/(\d{1,3})\s+d[ií]as?/); const budget = text.match(/(?:presupuesto|tengo|gastar)\s*(?:de)?\s*(c\$|us\$|\$)?\s*([\d,.]+)/);
     if (travelers) patch.travelers = Math.min(50, Number(travelers[1])); if (days) patch.days = Math.min(365, Number(days[1]));
-    if (budget) { patch.budget = Number(budget[2].replace(/,/g, '')); patch.currency = /c\$/i.test(budget[1] || '') ? 'NIO' : 'USD'; }
+    if (budget) { patch.budget = Number(budget[2].replace(/,/g, '')); patch.currency = /(?:us\$|\$)/i.test(budget[1] || '') ? 'USD' : 'NIO'; }
     const interests = ['aventura','cultura','gastronomía','gastronomia','playa','montaña','naturaleza','historia','música','musica'].filter(item => text.includes(item)); if (interests.length) patch.interests = [...new Set(interests.map(item => item.normalize('NFD').replace(/[\u0300-\u036f]/g, '')))];
     if (/silla de ruedas|movilidad reducida|accesibilidad/.test(text)) patch.accessibility = ['movilidad'];
     return patch;

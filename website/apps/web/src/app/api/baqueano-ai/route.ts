@@ -23,7 +23,7 @@ import { tripProfileSchema, itineraryResponseSchema } from "@baqueano/validators
 import { listPublishedPlaces } from "@baqueano/firebase";
 import { getStaticDestinationPlaces } from "../../../services/static-destination.service";
 
-const USD_TO_NIO_RATE = 36.8;
+const USD_TO_NIO_RATE = 36.65;
 
 function normalize(value: string): string {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
