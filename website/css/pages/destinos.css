@@ -826,7 +826,22 @@ html body .destinos-inline-053 {
   border-color: #F65E01;
   color: #FFFFFF;
 }
-/* ==========================================================================
+
+/* ============================================================================
+   🎯 POR QUÉ: permitir explorar la red territorial sin una cuadrícula extensa.
+   ⚙️ CÓMO: viewport oculto, pista flexible infinita y controles accesibles.
+   📦 QUÉ: galería de tres, dos o una tarjeta con pausa y navegación manual.
+   ============================================================================ */
+.safety-gallery-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:2rem;padding:.85rem 1rem;border:1px solid rgba(244,230,193,.12);border-radius:16px;background:linear-gradient(120deg,rgba(22,93,111,.18),rgba(15,23,42,.72))}
+.safety-gallery-toolbar>div:first-child{display:grid;gap:.18rem}.safety-gallery-toolbar strong{color:#fff;font:800 .86rem 'Montserrat',sans-serif}.safety-gallery-toolbar span{color:rgba(244,230,193,.68);font-size:.72rem}.safety-gallery-actions{display:flex;gap:.5rem}.safety-gallery-actions button{min-width:42px;height:40px;border:1px solid rgba(244,230,193,.18);border-radius:12px;background:rgba(7,17,31,.78);color:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-weight:800;font-size:.72rem;transition:transform .2s ease,border-color .2s ease,background .2s ease}.safety-gallery-actions button:hover{transform:translateY(-2px);border-color:#f65e01;background:rgba(246,94,1,.14)}.safety-gallery-actions [data-safety-pause]{padding:0 .9rem}
+.safety-gallery{overflow:hidden;margin-top:1rem;border-radius:20px;outline:none}.safety-gallery:focus-visible{box-shadow:0 0 0 3px rgba(244,230,193,.35)}
+.safety-gallery .safety-cards-grid{display:flex;grid-template-columns:none;gap:1.25rem;margin:0;will-change:transform}.safety-gallery .safety-card{flex:0 0 calc((100% - 2.5rem)/3);min-width:0;min-height:410px}.safety-gallery .safety-card:hover{transform:translateY(-3px)}
+.safety-territory-card .safety-card-body{height:100%}.btn-safety-source{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;margin-top:auto;padding:.55rem .75rem;border:1px solid rgba(244,230,193,.2);border-radius:9px;color:#f4e6c1;text-decoration:none;font-size:.73rem;font-weight:800;background:rgba(244,230,193,.06)}.btn-safety-source:hover{border-color:#f65e01;color:#fff;background:rgba(246,94,1,.14)}
+.safety-gallery-note{display:flex;align-items:flex-start;gap:.55rem;margin:1rem 0 0;color:rgba(244,230,193,.68);font-size:.72rem;line-height:1.55}.safety-gallery-note i{color:#f65e01;margin-top:.15rem}
+@media(max-width:900px){.safety-gallery .safety-card{flex-basis:calc((100% - 1.25rem)/2)}}
+@media(max-width:620px){.safety-emergency-section{padding:1.15rem;margin-inline:-.35rem}.safety-gallery-toolbar{align-items:flex-start}.safety-gallery-toolbar>div:first-child{max-width:46%}.safety-gallery-actions [data-safety-pause] span{display:none}.safety-gallery-actions [data-safety-pause]{padding:0;min-width:42px}.safety-gallery .safety-card{flex-basis:100%;min-height:430px}.safety-card-header{padding:1rem}.safety-card-body{padding:1rem}}
+@media(prefers-reduced-motion:reduce){.safety-gallery .safety-cards-grid{transition:none!important}}
+/* ===========================================================================
    🎯 POR QUÉ: Mantener el catálogo ordenado, sin huecos ni fichas gigantes.
    ⚙️ CÓMO: La hoja específica de Destinos se carga al final y fija la
       cuadrícula definitiva por viewport, por encima de reglas globales antiguas.

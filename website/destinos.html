@@ -7668,7 +7668,16 @@
             </p>
           </div>
 
-          <div class="safety-cards-grid">
+          <div class="safety-gallery-toolbar" aria-label="Controles del directorio territorial">
+            <div><strong>Red nacional por territorio</strong><span id="safetyGalleryStatus" aria-live="polite">Recorrido automático activo</span></div>
+            <div class="safety-gallery-actions">
+              <button type="button" data-safety-prev aria-label="Ver territorio anterior"><i class="fa-solid fa-arrow-left"></i></button>
+              <button type="button" data-safety-pause aria-pressed="false"><i class="fa-solid fa-pause"></i><span>Pausar</span></button>
+              <button type="button" data-safety-next aria-label="Ver territorio siguiente"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="safety-gallery" data-safety-gallery tabindex="0" aria-roledescription="carrusel" aria-label="Directorio de seguridad y salud por territorio">
+          <div class="safety-cards-grid" data-safety-track>
             <!-- Tarjeta 1: Hospitales -->
             <div class="safety-card">
               <div class="safety-card-header header-hospital">
@@ -7780,7 +7789,39 @@
                 </div>
               </div>
             </div>
+
+            <article class="safety-card safety-territory-card">
+              <div class="safety-card-header header-hospital"><i class="fa-solid fa-map-location-dot"></i><div><h4>Occidente</h4><span>León &amp; Chinandega</span></div></div>
+              <div class="safety-card-body"><div class="safety-item"><strong>Hospital Escuela Oscar Danilo Rosales</strong><p>León · Hospital regional ubicado en el centro histórico.</p></div><div class="safety-item"><strong>Hospital Departamental España</strong><p>Chinandega · Referencia departamental para el occidente.</p></div><a class="btn-safety-source" href="https://www.minsa.gob.ni/red-de-salud/hospitales" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-heart"></i> Consultar directorio MINSA</a></div>
+            </article>
+
+            <article class="safety-card safety-territory-card">
+              <div class="safety-card-header header-health"><i class="fa-solid fa-mountain-sun"></i><div><h4>Norte Cafetalero</h4><span>Estelí, Matagalpa &amp; Jinotega</span></div></div>
+              <div class="safety-card-body"><div class="safety-item"><strong>Hospital San Juan de Dios</strong><p>Estelí · Referencia para rutas del norte.</p></div><div class="safety-item"><strong>Hospital César Amador Molina</strong><p>Matagalpa · Cobertura regional de montaña.</p></div><div class="safety-item"><strong>Hospital Victoria Motta</strong><p>Jinotega · Referencia departamental.</p></div><a class="btn-safety-source" href="https://www.minsa.gob.ni/red-de-salud/hospitales" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-heart"></i> Consultar directorio MINSA</a></div>
+            </article>
+
+            <article class="safety-card safety-territory-card">
+              <div class="safety-card-header header-police"><i class="fa-solid fa-compass"></i><div><h4>Las Segovias</h4><span>Madriz &amp; Nueva Segovia</span></div></div>
+              <div class="safety-card-body"><div class="safety-item"><strong>Hospital Juan Antonio Brenes Palacios</strong><p>Somoto, Madriz · Referencia para el Cañón de Somoto.</p></div><div class="safety-item"><strong>Hospital Héroes de Las Segovias</strong><p>Ocotal, Nueva Segovia · Atención departamental.</p></div><a href="tel:118" class="btn-safety-call"><i class="fa-solid fa-phone-volume"></i> Policía 118 · 24 horas</a><a class="btn-safety-source" href="https://www.minsa.gob.ni/red-de-salud/hospitales" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-heart"></i> Ver fuente oficial</a></div>
+            </article>
+
+            <article class="safety-card safety-territory-card">
+              <div class="safety-card-header header-fire"><i class="fa-solid fa-volcano"></i><div><h4>Pacífico Sur</h4><span>Masaya, Carazo, Granada &amp; Rivas</span></div></div>
+              <div class="safety-card-body"><div class="safety-item"><strong>Hospital Humberto Alvarado</strong><p>Masaya · Referencia para rutas volcánicas.</p></div><div class="safety-item"><strong>Hospital Regional Santiago</strong><p>Jinotepe, Carazo · Cobertura del corredor costero.</p></div><div class="safety-item"><strong>Hospital Gaspar García Laviana</strong><p>Rivas · Referencia para costa sur y Ometepe.</p></div><a href="tel:115" class="btn-safety-call"><i class="fa-solid fa-fire-extinguisher"></i> Bomberos 115</a></div>
+            </article>
+
+            <article class="safety-card safety-territory-card">
+              <div class="safety-card-header header-hospital"><i class="fa-solid fa-tree-city"></i><div><h4>Centro de Nicaragua</h4><span>Boaco &amp; Chontales</span></div></div>
+              <div class="safety-card-body"><div class="safety-item"><strong>Hospital José Nieborowsky</strong><p>Boaco · Hospital departamental.</p></div><div class="safety-item"><strong>Hospital Comandante Camilo Ortega Saavedra</strong><p>Juigalpa, Chontales · Referencia del centro del país.</p></div><a class="btn-safety-source" href="https://www.minsa.gob.ni/red-de-salud/hospitales" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-heart"></i> Consultar directorio MINSA</a></div>
+            </article>
+
+            <article class="safety-card safety-territory-card">
+              <div class="safety-card-header header-health"><i class="fa-solid fa-water"></i><div><h4>Caribe &amp; Río San Juan</h4><span>RACCN, RACCS &amp; Río San Juan</span></div></div>
+              <div class="safety-card-body"><div class="safety-item"><strong>Hospital Ernesto Sequeira Blanco</strong><p>Bluefields · Referencia del Caribe Sur.</p></div><div class="safety-item"><strong>Hospital Nuevo Amanecer</strong><p>Bilwi · Referencia del Caribe Norte.</p></div><div class="safety-item"><strong>Hospital Luis Felipe Moncada</strong><p>San Carlos · Referencia de Río San Juan.</p></div><a class="btn-safety-source" href="https://www.minsa.gob.ni/red-de-salud/hospitales" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-heart"></i> Consultar directorio MINSA</a></div>
+            </article>
           </div>
+          </div>
+          <p class="safety-gallery-note"><i class="fa-solid fa-circle-info"></i> En una emergencia llamá al 118 (Policía) o 115 (Bomberos). Los nombres y ubicaciones de unidades médicas proceden de la red oficial MINSA; confirmá atención y acceso antes de desplazarte.</p>
         </div>
 
         <!-- ASISTENTE IA PARA TURISMO RESPONSABLE -->
@@ -8181,7 +8222,6 @@
             <li><a href="historia.html">Historia de Mi País</a></li>
             <li><a href="ambiental.html">Campaña Ambiental</a></li>
             <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
-            <li><a href="musica.html">Patrimonio Sonoro</a></li>
             <li><a href="aliados.html">Cooperativas Aliadas</a></li>
             <li><a href="mi-negocio.html">Registrar Mi Negocio</a></li>
             <li><a href="admin.html">Baqueano Ops Center</a></li>
@@ -8627,6 +8667,7 @@
   })();
   </script>
 
+  <script src="js/safety-gallery.js?v=20260925-1"></script>
   <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 </body>
 </html>

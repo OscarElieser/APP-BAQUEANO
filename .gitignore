@@ -54,6 +54,8 @@ node_modules
 .corepack/
 .env
 .env.*
+!.env.example
+!functions/.env.example
 !website/.env.example
 .runtimeconfig.json
 firebase-debug.log
