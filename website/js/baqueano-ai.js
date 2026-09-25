@@ -15,4 +15,27 @@
   async function requestPlan(text){const button=form.querySelector('button');button.disabled=true;button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i><span>Preparando</span>';try{const payload={days:Number(document.getElementById('days').value),groupSize:Number(document.getElementById('travelers').value),budgetUsd:Number(document.getElementById('budget').value),currency:'USD',department:document.getElementById('territory').value,interests:[document.querySelector('input[name="style"]:checked').value],travelStyle:document.querySelector('input[name="style"]:checked').value,prompt:text};const response=await fetch('/api/baqueano-ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error('gateway');const data=await response.json();if(!data.success||!data.itinerary)throw new Error('invalid');addMessage('Preparé una ruta usando el servicio territorial conectado. Revisa cada jornada y ajusta tu presupuesto cuando lo necesites.','assistant');const days=data.itinerary.days||[];renderPlan({territory:payload.department,total:data.itinerary.totalEstimatedCostUsd||payload.budgetUsd,items:days.map((day,index)=>({day:day.dayNumber||index+1,title:day.title||`Explora ${payload.department}`,copy:(day.stops||[]).map(stop=>stop.name).join(' · ')||'Experiencia territorial sugerida.'}))});}catch(_){const plan=localPlan();addMessage(`Preparé una ruta orientativa de ${plan.days} días por ${plan.territory}. Puedes ajustar territorio, ritmo y presupuesto para crear otra versión.`,'assistant');renderPlan(plan);}finally{button.disabled=false;button.innerHTML='<span>Crear mi ruta</span><i class="fa-solid fa-arrow-up"></i>';}}
   form.addEventListener('submit',(event)=>{event.preventDefault();const text=input.value.trim();if(!text)return;addMessage(text,'user');input.value='';requestPlan(text);});
   document.querySelectorAll('[data-prompt]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.prompt;input.focus();}));
+
+  // Señales vivas del hero y propuesta sorpresa para iniciar sin fricción.
+  const territoryInput=document.getElementById('territory'),budgetInput=document.getElementById('budget'),liveTerritory=document.getElementById('aiLiveTerritory'),liveBudget=document.getElementById('aiLiveBudget'),surpriseButton=document.getElementById('aiSurpriseRoute');
+  const syncHero=()=>{if(liveTerritory)liveTerritory.textContent=territoryInput?.value||'Nicaragua';if(liveBudget)liveBudget.textContent=`$${Number(budgetInput?.value||0).toLocaleString('en-US')}`;};
+  territoryInput?.addEventListener('change',syncHero);
+  budgetInput?.addEventListener('input',syncHero);
+  surpriseButton?.addEventListener('click',()=>{
+    const territories=[...territoryInput.options];
+    territoryInput.selectedIndex=Math.floor(Math.random()*territories.length);
+    document.getElementById('days').value=String(2+Math.floor(Math.random()*5));
+    document.getElementById('travelers').value=String(1+Math.floor(Math.random()*4));
+    budgetInput.value=String(450+Math.floor(Math.random()*12)*50);
+    const styles=[...document.querySelectorAll('input[name="style"]')];
+    const style=styles[Math.floor(Math.random()*styles.length)];
+    if(style)style.checked=true;
+    syncHero();
+    const styleLabel=style?.value||'aventura';
+    input.value=`Sorpréndeme con una ruta de ${styleLabel} por ${territoryInput.value}, combinando lugares emblemáticos y experiencias comunitarias.`;
+    addMessage(`Elegí ${territoryInput.value} como punto de partida. Ajustá cualquier dato o creá la ruta cuando estés listo.`,'assistant');
+    document.getElementById('planner')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+    window.setTimeout(()=>input.focus(),500);
+  });
+  syncHero();
 })();

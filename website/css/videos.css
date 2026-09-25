@@ -295,3 +295,160 @@ body:has(.video-hero-wrapper) .main-navbar.scrolled {
   padding: 2.25rem 0 5rem !important;
 }
 
+/* ============================================================================
+   ENCABEZADOS CINEMATOGRÁFICOS UNIFICADOS Y FUENTES DE ALTA DEFINICIÓN
+   ============================================================================
+   POR QUÉ:
+   - Dar a cada página pública una entrada inmersiva equivalente a la portada,
+     sin eliminar sus títulos, descripciones, buscadores, métricas o controles.
+   - Evitar el desenfoque causado por ampliar medios pequeños por encima de su
+     resolución natural y mantener una imagen nítida en monitores de alta densidad.
+
+   CÓMO:
+   - Los encabezados ocupan el viewport visible y centran el contenido sobre una
+     composición de contraste controlado; la navegación permanece superpuesta.
+   - Vídeos e imágenes conservan su relación con object-fit y usan renderizado GPU
+     sin escalados artificiales, filtros de desenfoque ni texturas invasivas.
+   - En móvil se respeta el área segura y se reduce la escala tipográfica sin
+     sacrificar legibilidad ni ocultar acciones existentes.
+
+   QUÉ:
+   - Unifica video-hero-wrapper, destinations-video-hero, institucional-hero y
+     host-hero-section; además normaliza títulos, subtítulos, overlays y controles.
+   ============================================================================ */
+
+.video-hero-wrapper,
+.destinations-video-hero,
+.institucional-hero,
+.host-hero-section {
+  min-height: 100svh !important;
+  padding-top: clamp(104px, 15vh, 150px) !important;
+  padding-bottom: clamp(52px, 8vh, 88px) !important;
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
+  isolation: isolate;
+  border-radius: 0 !important;
+}
+
+.video-hero-wrapper,
+.destinations-video-hero,
+.host-hero-section,
+.institucional-hero {
+  background-color: #0F172A !important;
+}
+
+.video-hero-media,
+.hero-bg-video,
+.institucional-hero-bg,
+.hero-nicaragua-bg-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  filter: saturate(1.08) contrast(1.04) brightness(0.84) !important;
+}
+
+.institucional-hero-bg {
+  opacity: 0.88 !important;
+}
+
+.institucional-hero:hover .institucional-hero-bg {
+  transform: translateZ(0) !important;
+}
+
+.video-hero-gradient,
+.video-overlay-gradient,
+.institucional-hero-gradient {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.24) 0%, rgba(15, 23, 42, 0.16) 42%, rgba(15, 23, 42, 0.82) 100%),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.38), transparent 35%, transparent 65%, rgba(15, 23, 42, 0.38)) !important;
+}
+
+.video-hero-scanlines,
+.video-scanlines {
+  opacity: 0.025 !important;
+}
+
+.video-hero-content,
+.hero-video-content,
+.institucional-hero-content {
+  width: min(100%, 1080px);
+  max-width: 1080px !important;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px) !important;
+  text-align: center;
+}
+
+.video-hero-title,
+.hero-video-content .section-headline,
+.institucional-hero-title {
+  font-size: clamp(2.65rem, 6vw, 5.6rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.045em !important;
+  text-wrap: balance;
+  text-shadow: 0 5px 8px rgba(0, 0, 0, 0.78), 0 18px 48px rgba(0, 0, 0, 0.46) !important;
+}
+
+.video-hero-subtitle,
+.hero-video-content .section-subtext,
+.institucional-hero-subtitle {
+  max-width: 850px !important;
+  margin-inline: auto !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: clamp(1rem, 1.4vw, 1.2rem) !important;
+  text-wrap: balance;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9) !important;
+}
+
+.has-cinematic-header .main-navbar:not(.scrolled),
+body:has(.institucional-hero) .main-navbar:not(.scrolled),
+body:has(.host-hero-section) .main-navbar:not(.scrolled) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: none !important;
+}
+
+.has-cinematic-header .main-navbar.scrolled,
+body:has(.institucional-hero) .main-navbar.scrolled,
+body:has(.host-hero-section) .main-navbar.scrolled {
+  background: rgba(15, 23, 42, 0.94) !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+
+@media (max-width: 768px) {
+  .video-hero-wrapper,
+  .destinations-video-hero,
+  .institucional-hero,
+  .host-hero-section {
+    min-height: 100svh !important;
+    padding-top: calc(84px + env(safe-area-inset-top)) !important;
+    padding-bottom: calc(42px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .video-hero-title,
+  .hero-video-content .section-headline,
+  .institucional-hero-title {
+    font-size: clamp(2.15rem, 10.5vw, 3.35rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .video-hero-content,
+  .hero-video-content,
+  .institucional-hero-content {
+    padding-inline: 18px !important;
+  }
+
+  .video-hero-ctrl-btn {
+    right: 16px;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    width: 44px;
+    height: 44px;
+  }
+}

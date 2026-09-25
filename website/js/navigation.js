@@ -137,6 +137,23 @@ function initRuntimeObservability() {
   } };
 }
 
+// Acceso global al planificador territorial desde la navegación pública.
+function initBaqueanoAiNavLink() {
+  const menu = document.querySelector('.nav-links-menu');
+  if (!menu || menu.querySelector('a[href^="baqueano-ai.html"]')) return;
+  const link = document.createElement('a');
+  link.href = 'baqueano-ai.html#planner';
+  link.className = 'nav-link-ai';
+  link.innerHTML = `
+    <span class="nav-item-content">
+      <span class="nav-icon-box"><i class="fa-solid fa-wand-magic-sparkles nav-icon"></i></span>
+      <span class="nav-text-group"><span class="nav-label">Baqueano AI</span><span class="nav-sublabel">Planifica tu ruta</span></span>
+    </span>
+    <span class="nav-right-wrap"><span class="nav-item-badge live">● En línea</span><i class="fa-solid fa-chevron-right nav-arrow"></i></span>`;
+  const profileLink = menu.querySelector('a[href="perfil.html"]');
+  menu.insertBefore(link, profileLink || null);
+}
+
 /**
  * POR QUÉ: habilita navegación offline sin almacenar datos personales.
  * CÓMO: registra un worker cuyo alcance y exclusiones se validan internamente.
@@ -145,7 +162,7 @@ function initRuntimeObservability() {
 function initPublicServiceWorker() {
   if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+    navigator.serviceWorker.register('/service-worker.js?v=11', { scope: '/', updateViaCache: 'none' })
       .catch((error) => console.warn('[PWA] No fue posible registrar el modo offline:', error));
   }, { once: true });
 }
@@ -1108,6 +1125,7 @@ function initializeNavigationModules() {
   ensureUserSessionLoaded();
   ensureThemeSwitcherLoaded();
   buildAboutDropdown();
+  initBaqueanoAiNavLink();
   initNavbarScroll();
   initDynamicNavbar();
   initNavbarQuickSearch();
@@ -1136,12 +1154,12 @@ function loadBaqueanoDigital() {
   if (excluded.test(window.location.pathname.replace(/\/$/, ''))) return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260924-5'; style.dataset.baqueanoAssistant = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-1'; style.dataset.baqueanoAssistant = 'true';
     document.head.appendChild(style);
   }
   if (!document.querySelector('script[data-baqueano-assistant]') && !window.BaqueanoAssistant) {
     const script = document.createElement('script');
-    script.src = 'js/baqueano-assistant.js?v=20260924-6'; script.defer = true; script.dataset.baqueanoAssistant = 'true';
+    script.src = 'js/baqueano-assistant.js?v=20260925-baqui-1'; script.defer = true; script.dataset.baqueanoAssistant = 'true';
     document.body.appendChild(script);
   }
 }
