@@ -432,44 +432,51 @@
     <section class="home-search-section" id="homeSearchSection">
       <div class="container">
         <div class="home-search-card">
-          <label for="homeSearchInput" class="home-search-label">
-            <i class="fa-solid fa-magnifying-glass"></i> ¿Qué querés descubrir en Nicaragua?
-          </label>
+          <div class="home-search-header">
+            <div class="home-search-badge">
+              <i class="fa-solid fa-compass"></i>
+              <span>EXPLORADOR BAQUEANO</span>
+            </div>
+            <h2 class="home-search-title">¿Qué querés descubrir en Nicaragua?</h2>
+            <p class="home-search-subtext">Volcanes, fogones ancestrales, costas vírgenes y cooperativas locales sin intermediarios.</p>
+          </div>
+
           <form class="home-search-form" action="destinos.html" method="GET">
             <div class="home-search-input-wrap">
-              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
               <input type="text" id="homeSearchInput" name="q" class="home-search-input"
-                     placeholder="Playa, volcán, restaurante, hotel, museo, comunidad..."
+                     placeholder="Buscar por playa, volcán, restaurante, hotel, museo, comunidad..."
                      autocomplete="off" required>
             </div>
             <button type="submit" class="home-search-submit">
-              <i class="fa-solid fa-arrow-right"></i> <span>Buscar</span>
+              <span>BUSCAR</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </button>
           </form>
 
-          <!-- 8 Chips Iniciales Visibles -->
+          <!-- Atajos directos refinados -->
           <div class="home-search-chips">
-            <span class="chips-label">Atajos directos:</span>
-            <a href="destinos.html?cat=volcanes" class="search-chip"><i class="fa-solid fa-volcano"></i> 🌋 Volcanes</a>
-            <a href="destinos.html?cat=playas" class="search-chip"><i class="fa-solid fa-umbrella-beach"></i> 🏝️ Playas</a>
-            <a href="destinos.html?cat=lagunas" class="search-chip"><i class="fa-solid fa-water"></i> 🌊 Lagos y Lagunas</a>
-            <a href="destinos.html?cat=naturaleza" class="search-chip"><i class="fa-solid fa-leaf"></i> 🌿 Naturaleza</a>
-            <a href="gastronomia.html" class="search-chip"><i class="fa-solid fa-bowl-food"></i> 🍽️ Gastronomía</a>
-            <a href="historia.html" class="search-chip"><i class="fa-solid fa-masks-theater"></i> 🎭 Cultura</a>
-            <a href="#queQueresVivir" class="search-chip"><i class="fa-solid fa-person-hiking"></i> 🥾 Aventura</a>
-            <a href="aliados.html" class="search-chip"><i class="fa-solid fa-handshake-angle"></i> 🤝 Comunidades</a>
+            <span class="chips-label"><i class="fa-solid fa-bolt"></i> Atajos populares:</span>
+            <a href="destinos.html?cat=volcanes" class="search-chip chip-volcanes"><i class="fa-solid fa-mountain-sun"></i> Volcanes</a>
+            <a href="destinos.html?cat=playas" class="search-chip chip-playas"><i class="fa-solid fa-umbrella-beach"></i> Playas</a>
+            <a href="destinos.html?cat=lagunas" class="search-chip chip-lagunas"><i class="fa-solid fa-water"></i> Lagos &amp; Lagunas</a>
+            <a href="destinos.html?cat=naturaleza" class="search-chip chip-naturaleza"><i class="fa-solid fa-leaf"></i> Naturaleza</a>
+            <a href="gastronomia.html" class="search-chip chip-gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
+            <a href="historia.html" class="search-chip chip-cultura"><i class="fa-solid fa-masks-theater"></i> Cultura</a>
+            <a href="#queQueresVivir" class="search-chip chip-aventura"><i class="fa-solid fa-person-hiking"></i> Aventura</a>
+            <a href="aliados.html" class="search-chip chip-comunidades"><i class="fa-solid fa-people-roof"></i> Comunidades</a>
             <button type="button" class="search-chip chip-toggle-all" id="btnToggleAllCategories" aria-expanded="false">
-              <span>Ver todas</span> <i class="fa-solid fa-chevron-down"></i>
+              <span>Más categorías</span> <i class="fa-solid fa-chevron-down"></i>
             </button>
           </div>
 
           <!-- Categorías secundarias desplegables -->
           <div class="home-search-chips-extra" id="homeSearchChipsExtra" hidden>
-            <a href="destinos.html?cat=islas" class="search-chip"><i class="fa-solid fa-fish"></i> Islas &amp; Archipiélagos</a>
-            <a href="destinos.html?cat=canones" class="search-chip"><i class="fa-solid fa-mountain"></i> Cañones &amp; Cuevas</a>
-            <a href="destinos.html?cat=cascadas" class="search-chip"><i class="fa-solid fa-droplet"></i> Cascadas &amp; Saltos</a>
-            <a href="destinos.html?cat=museos" class="search-chip"><i class="fa-solid fa-landmark"></i> Museos &amp; Patrimonio</a>
-            <a href="musica.html" class="search-chip"><i class="fa-solid fa-guitar"></i> Música &amp; Marimba</a>
+            <a href="destinos.html?cat=islas" class="search-chip chip-islas"><i class="fa-solid fa-water"></i> Islas &amp; Archipiélagos</a>
+            <a href="destinos.html?cat=canones" class="search-chip chip-canones"><i class="fa-solid fa-mountain"></i> Cañones &amp; Cuevas</a>
+            <a href="destinos.html?cat=cascadas" class="search-chip chip-cascadas"><i class="fa-solid fa-droplet"></i> Cascadas &amp; Saltos</a>
+            <a href="destinos.html?cat=museos" class="search-chip chip-museos"><i class="fa-solid fa-landmark"></i> Museos &amp; Patrimonio</a>
+            <a href="musica.html" class="search-chip chip-musica"><i class="fa-solid fa-music"></i> Música &amp; Marimba</a>
           </div>
         </div>
       </div>
