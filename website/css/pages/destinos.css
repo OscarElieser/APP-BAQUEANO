@@ -826,3 +826,28 @@ html body .destinos-inline-053 {
   border-color: #F65E01;
   color: #FFFFFF;
 }
+/* ==========================================================================
+   🎯 POR QUÉ: Mantener el catálogo ordenado, sin huecos ni fichas gigantes.
+   ⚙️ CÓMO: La hoja específica de Destinos se carga al final y fija la
+      cuadrícula definitiva por viewport, por encima de reglas globales antiguas.
+   📦 QUÉ: Tres columnas desde 900 px, dos entre 681–899 px y una en móvil.
+   ========================================================================== */
+@media (min-width: 900px) {
+  .destinations-showcase-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+@media (min-width: 681px) and (max-width: 899px) {
+  .destinations-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 680px) {
+  .destinations-showcase-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
