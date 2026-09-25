@@ -277,3 +277,124 @@
     transform: none !important;
   }
 }
+
+/* ========================================================================== */
+/* CONTROLES DE AGENCIA, VOZ Y PRIVACIDAD                                    */
+/* ========================================================================== */
+/*
+  POR QUÉ: las recomendaciones deben ser voluntarias, accionables y fáciles
+  de silenciar; Baqüi nunca debe bloquear contenido ni hablar sin permiso.
+  CÓMO: la burbuja ofrece escuchar, abrir o posponer, y el modo pospuesto deja
+  únicamente una pestaña discreta y recuperable durante treinta minutos.
+  QUÉ: acciones contextuales, botón de regreso y estados visuales de ocultado.
+*/
+
+.bq-suggestion {
+  width: min(310px, calc(100vw - 32px));
+  padding: 16px 34px 14px 16px;
+}
+
+.bq-suggestion .bq-suggestion-close {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+}
+
+.bq-suggestion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 11px;
+}
+
+.bq-suggestion .bq-suggestion-actions button {
+  position: static;
+  min-height: 31px;
+  padding: 7px 10px;
+  border: 1px solid rgba(244, 230, 193, .15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .055);
+  color: #F4E6C1;
+  font: 800 9px/1 Inter, sans-serif;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.bq-suggestion .bq-suggestion-actions button:first-child,
+.bq-suggestion .bq-suggestion-actions button:nth-child(2) {
+  border-color: rgba(246, 94, 1, .42);
+  background: rgba(246, 94, 1, .12);
+}
+
+.bq-suggestion .bq-suggestion-actions button:hover {
+  transform: translateY(-2px);
+  border-color: #F65E01;
+  background: rgba(246, 94, 1, .2);
+}
+
+.bq-reopen-tab {
+  position: fixed;
+  right: max(8px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  display: none;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 5px 11px 5px 5px;
+  border: 1px solid rgba(244, 230, 193, .2);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, .94);
+  color: #F4E6C1;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .38);
+  backdrop-filter: blur(14px);
+  pointer-events: auto;
+  cursor: pointer;
+  font: 800 9px/1 Inter, sans-serif;
+}
+
+.bq-reopen-tab img {
+  width: 31px;
+  height: 31px;
+  object-fit: contain;
+}
+
+.bq-assistant.is-snoozed > :not(.bq-reopen-tab) {
+  display: none !important;
+}
+
+.bq-assistant.is-snoozed .bq-reopen-tab {
+  display: inline-flex;
+}
+
+.bq-edge-left .bq-reopen-tab {
+  right: auto;
+  left: max(8px, env(safe-area-inset-left));
+}
+
+@media (max-width: 700px) {
+  .bq-suggestion {
+    bottom: 132px;
+    padding: 14px 32px 13px 14px;
+  }
+
+  .bq-suggestion-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .bq-suggestion .bq-suggestion-actions button {
+    min-width: 0;
+    padding-inline: 6px;
+    font-size: 8px;
+  }
+
+  .bq-reopen-tab span {
+    display: none;
+  }
+
+  .bq-reopen-tab {
+    width: 46px;
+    height: 46px;
+    padding: 6px;
+    justify-content: center;
+  }
+}

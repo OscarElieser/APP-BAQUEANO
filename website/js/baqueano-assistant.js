@@ -8,10 +8,10 @@
   'use strict';
   if (window.BaqueanoAssistant?.version === '4') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-1'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-2'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
-  const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 30000, cooldown: 240000, autoPeek: 14000, sleepDelay: 90000, endpoint: '/api/v1/ai/chat' });
+  const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: '/api/v1/ai/chat' });
   const KEYS = Object.freeze({ session: 'baqueano_assistant_session_v2', preferences: 'baqueano_assistant_preferences_v2', weather: 'baqueano_weather_v1' });
   const EXCLUDED = /(?:admin|perfil|privacidad|terminos|cookies|aviso-legal|offline|denuncias)(?:\.html)?$/i;
   const ACTIONS = new Set(['open_destination','open_department','open_map','show_place','search_places','search_destination','search_business','search_experience','build_itinerary','calculate_budget','calculate_distance','save_favorite','show_nearby','show_emergency','open_booking','request_booking','check_availability','check_weather','search_events','create_route','share_itinerary','open_route','play_audio','pause_audio','show_food','show_history']);
@@ -19,7 +19,7 @@
   if (EXCLUDED.test(location.pathname.replace(/\/$/, ''))) return;
 
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
-  const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, lastSuggestion: 0 }, safeJson(sessionStorage.getItem(KEYS.session), {}));
+  const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, lastSuggestion: 0 }, safeJson(sessionStorage.getItem(KEYS.session), {}));
   const preferences = Object.assign({ voice: false, edge: 'right', y: null, enabled: true, suggestions: true }, safeJson(localStorage.getItem(KEYS.preferences), {}));
   const state = { open: false, busy: false, minimized: false, dragging: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio' };
   const saveSession = () => sessionStorage.setItem(KEYS.session, JSON.stringify(session));
@@ -42,7 +42,7 @@
     root.id = 'baqueanoAssistantBox';
     root.className = `bq-assistant bq-edge-${preferences.edge}`;
     root.innerHTML = `
-      <div class="bq-suggestion" id="bqSuggestion" role="status" hidden><button type="button" data-command="dismiss-suggestion" aria-label="Cerrar sugerencia">×</button><p></p></div>
+      <div class="bq-suggestion" id="bqSuggestion" role="status" hidden><button type="button" class="bq-suggestion-close" data-command="dismiss-suggestion" aria-label="Cerrar sugerencia">×</button><p></p><div class="bq-suggestion-actions"><button type="button" data-command="suggestion-listen"><i class="fa-solid fa-volume-high"></i> Escuchar</button><button type="button" data-command="suggestion-open"><i class="fa-solid fa-comments"></i> Abrir panel</button><button type="button" data-command="snooze">Ahora no</button></div></div>
       <aside class="bq-drawer" id="bqDrawer" aria-hidden="true" aria-label="Baqüi, guía digital de Nicaragua">
         <header class="bq-header"><picture><img src="assets/images/baqui.png" alt=""></picture><div><strong>Baqüi</strong><span><i></i> <b id="bqModuleLabel">Guía IA de Nicaragua</b></span></div><div class="bq-header-actions"><button data-command="voice" aria-label="Activar voz" title="Voz"><i class="fa-solid fa-volume-xmark"></i></button><button data-command="minimize" aria-label="Minimizar"><i class="fa-solid fa-minus"></i></button><button data-command="close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div></header>
         <section class="bq-live" aria-label="Información útil"><div class="bq-live-card"><i class="fa-regular fa-clock"></i><span>Hora en Nicaragua</span><strong id="bqClock">--:--</strong></div><button class="bq-live-card" type="button" data-command="weather"><i class="fa-solid fa-cloud-sun"></i><span id="bqWeatherPlace">Managua</span><strong id="bqWeather">Consultar clima</strong></button><button class="bq-live-card bq-promo" type="button" data-command="promotion"><i class="fa-solid fa-tags"></i><span>Promociones</span><strong id="bqPromotion">Verificadas</strong></button></section>
@@ -51,11 +51,12 @@
           <button data-quick="build_itinerary">🗺️ Planificar viaje</button><button data-quick="search_places">🌋 Descubrir destinos</button><button data-quick="lodging">🏨 Hospedaje</button><button data-quick="food">🍽️ Dónde comer</button><button data-quick="music">🎶 Música</button><button data-quick="history">📖 Historia</button><button data-quick="experiences">🥾 Aventuras</button><button data-quick="show_nearby">📍 Qué hay cerca</button><button data-quick="favorites">❤️ Favoritos</button><button data-quick="show_emergency">🚨 SOS 24/7</button><button data-quick="country">🇳🇮 Conocer Nicaragua</button><button data-quick="surprise">✨ Sorpréndeme</button>
         </div>
         <form class="bq-form" id="bqForm"><label class="sr-only" for="bqInput">Escribe tu consulta</label><textarea id="bqInput" rows="2" maxlength="500" placeholder="Preguntá por destinos, rutas o experiencias…" required></textarea><button type="button" data-command="microphone" aria-label="Hablar"><i class="fa-solid fa-microphone"></i></button><button type="submit" aria-label="Enviar"><i class="fa-solid fa-arrow-up"></i></button></form>
-        <footer><button data-command="clear"><i class="fa-solid fa-trash-can"></i> Limpiar</button><button data-command="stop" hidden><i class="fa-solid fa-stop"></i> Detener</button><button data-command="hide"><i class="fa-solid fa-eye-slash"></i> Ocultar esta sesión</button></footer>
+        <footer><button data-command="clear"><i class="fa-solid fa-trash-can"></i> Limpiar</button><button data-command="stop" hidden><i class="fa-solid fa-stop"></i> Detener</button><button data-command="hide"><i class="fa-solid fa-eye-slash"></i> Ocultar 30 min</button></footer>
       </aside>
       <button class="bq-mascot" id="bqMascot" type="button" aria-label="Abrir a Baqüi, guía digital" aria-expanded="false">
         <span class="bq-glow"></span><span class="bq-context-icon" id="bqContextIcon" aria-hidden="true">🧭</span><span class="bq-character" aria-hidden="true"><img class="bq-character-base" src="assets/images/baqui.png" alt="" draggable="false"><span class="bq-character-part bq-character-head"></span><span class="bq-character-part bq-character-wing"></span><span class="bq-character-part bq-character-tail"></span><span class="bq-sleep-symbol">Z</span></span><span class="sr-only">Baqüi, guardabarranco guía virtual de Nicaragua</span><span class="bq-online" aria-hidden="true"></span><span class="bq-mini-time" id="bqMiniTime" aria-hidden="true"></span>
-      </button>`;
+      </button>
+      <button class="bq-reopen-tab" type="button" data-command="reopen" aria-label="Mostrar nuevamente a Baqüi"><img src="assets/images/baqui.png" alt=""><span>Hablar con Baqüi</span></button>`;
     document.body.appendChild(root);
     restorePosition(root);
     return root;
@@ -148,7 +149,12 @@
     if (/emergencia|sos|auxilio/.test(q)) return { message: 'Puedo abrir el módulo SOS 24/7. Si existe peligro inmediato, contactá a las autoridades locales.', actions: [{ type: 'show_emergency', label: 'Abrir SOS 24/7' }] };
     if (/mapa|cerca|ubicación/.test(q)) return { message: 'Puedo llevarte al mapa territorial. La ubicación solo se solicitará si elegís buscar cerca de vos.', actions: [{ type: 'open_map', label: 'Abrir mapa' }] };
     if (/ruta|viaje|itinerario|días/.test(q)) return { message: 'Abramos el planificador para preparar una ruta con tus días, intereses y presupuesto.', actions: [{ type: 'build_itinerary', label: 'Planificar viaje' }] };
-    return { message: 'En este momento uso el modo territorial de respaldo. Puedo ayudarte a explorar destinos, abrir el mapa o preparar una ruta con información registrada.', actions: [{ type: 'search_places', label: 'Explorar destinos' }] };
+    if (/comida|comer|gastronom|platillo|nacatamal|vigorón|quesillo/.test(q)) return { message: 'Puedo acompañarte por los sabores de Nicaragua, explicarte el origen de cada platillo y llevarte al fogón gastronómico de la página.', actions: [{ type: 'show_food', label: 'Explorar gastronomía' }] };
+    if (/historia|darío|güegüense|leyenda|memoria|colonial/.test(q)) return { message: 'Puedo narrarte episodios y personajes de la memoria nicaragüense usando el contenido histórico disponible en Baqueano.', actions: [{ type: 'show_history', label: 'Descubrir historia' }] };
+    if (/museo|arte|artesanía|cultura|patrimonio/.test(q)) return { message: 'Puedo ayudarte a descubrir museos, talleres artesanales, patrimonio y expresiones culturales registradas en nuestra plataforma.', actions: [{ type: 'search_experience', label: 'Explorar cultura' }, { type: 'search_business', label: 'Ver artesanos' }] };
+    if (/música|musica|canción|cancion|marimba|son nica/.test(q)) return { message: 'Puedo presentarte la galería sonora, explicar géneros nicaragüenses y acompañarte mientras escuchás la música de nuestra tierra.', actions: [{ type: 'play_audio', label: 'Escuchar música' }] };
+    if (/naturaleza|volcán|volcan|playa|reserva|sendero|río|rio/.test(q)) return { message: 'Puedo comparar destinos naturales, revisar rutas y ayudarte a elegir una experiencia según tu tiempo y nivel de aventura.', actions: [{ type: 'search_places', label: 'Explorar naturaleza' }, { type: 'build_itinerary', label: 'Crear ruta' }] };
+    return { message: 'Soy Baqüi. Puedo ayudarte con turismo, rutas, historia, gastronomía, museos, arte, cultura, música, naturaleza, hospedaje y seguridad usando la información de Baqueano.', actions: [{ type: 'search_places', label: 'Explorar destinos' }, { type: 'build_itinerary', label: 'Planificar viaje' }] };
   }
 
   async function ask(raw) {
@@ -202,15 +208,17 @@
     navigator.geolocation.getCurrentPosition(position => { const lat = position.coords.latitude.toFixed(2), lng = position.coords.longitude.toFixed(2); location.href = `destinos.html#mapa?near=${encodeURIComponent(`${lat},${lng}`)}`; }, () => appendMessage('No fue posible obtener la ubicación. Podés elegir el territorio manualmente.', 'assistant'), { enableHighAccuracy: false, timeout: 7000, maximumAge: 300000 });
   }
 
-  function open() { if (session.hidden) return; wakeCharacter(); state.open = true; state.minimized = false; $('#bqDrawer').classList.add('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'false'); $('#bqMascot').setAttribute('aria-expanded', 'true'); root.classList.remove('is-peeking'); hideSuggestion(); setTimeout(() => $('#bqInput')?.focus(), 120); track('assistant_opened'); }
+  function isSnoozed() { return Number(session.hiddenUntil || 0) > Date.now(); }
+  function open() { if (isSnoozed()) return; wakeCharacter(); state.open = true; state.minimized = false; $('#bqDrawer').classList.add('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'false'); $('#bqMascot').setAttribute('aria-expanded', 'true'); root.classList.remove('is-peeking'); hideSuggestion(); setTimeout(() => $('#bqInput')?.focus(), 120); track('assistant_opened'); }
   function close() { state.open = false; $('#bqDrawer').classList.remove('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'true'); $('#bqMascot').setAttribute('aria-expanded', 'false'); window.speechSynthesis?.cancel(); track('assistant_closed'); schedulePeek(); }
-  function hide() { session.hidden = true; saveSession(); setCharacter('hidden'); root.hidden = true; close(); track('assistant_hidden'); }
-  function showSuggestion(text) { if (state.open || session.hidden || isSensitiveInteraction()) return; const box = $('#bqSuggestion'); $('p', box).textContent = text; box.hidden = false; const preserveMode = state.character === 'dancing' || state.character === 'emergency'; if (!preserveMode) setCharacter('greeting'); setTimeout(() => { if (state.character === 'greeting') setCharacter('idle'); hideSuggestion(); }, 8500); track('assistant_shown'); track('assistant_context_suggestion'); }
+  function hide() { session.hidden = false; session.hiddenUntil = Date.now() + CONFIG.snoozeTime; saveSession(); close(); hideSuggestion(); root.classList.add('is-snoozed'); track('assistant_hidden', { minutes: 30 }); }
+  function reopen() { session.hidden = false; session.hiddenUntil = 0; saveSession(); root.classList.remove('is-snoozed'); wakeCharacter(); showSuggestion('Estoy de vuelta. Puedo recomendarte algo de esta sección o abrir el panel cuando vos decidás.'); track('assistant_reopened'); }
+  function showSuggestion(text) { if (state.open || isSnoozed() || isSensitiveInteraction()) return; state.suggestionText = String(text); const box = $('#bqSuggestion'); $('p', box).textContent = text; box.hidden = false; const preserveMode = state.character === 'dancing' || state.character === 'emergency'; if (!preserveMode) setCharacter('greeting'); if (preferences.voice) speak(text); setTimeout(() => { if (state.character === 'greeting') setCharacter('idle'); hideSuggestion(); }, 12000); track('assistant_shown'); track('assistant_context_suggestion'); }
   function hideSuggestion() { const box = $('#bqSuggestion'); if (box) box.hidden = true; }
   function schedulePeek() { clearTimeout(state.peekTimer); state.peekTimer = setTimeout(() => { if (!state.open && !state.dragging) root.classList.add('is-peeking'); }, CONFIG.autoPeek); }
 
   function contextualSuggestion() {
-    if (!preferences.suggestions || state.open || session.hidden || isSensitiveInteraction() || Date.now() - session.lastSuggestion < CONFIG.cooldown) return;
+    if (!preferences.suggestions || state.open || isSnoozed() || isSensitiveInteraction() || Date.now() - session.lastSuggestion < CONFIG.cooldown) return;
     const ctx = context(); let text = null;
     if (ctx.destination) text = `Puedo mostrarte cómo llegar, qué visitar cerca y cómo incluir ${ctx.destination} en una ruta.`;
     else if (ctx.department) text = `¿Querés que prepare una ruta de un día por ${ctx.department}?`;
@@ -220,6 +228,9 @@
     else if (/musica/.test(location.pathname)) text = 'Estás explorando música nicaragüense. Puedo explicarte el género, su historia y sus intérpretes.';
     else if (/departamento/.test(location.pathname)) text = 'Puedo ayudarte a descubrir este territorio y convertir tus intereses en una ruta.';
     else if (/ambiental/.test(location.pathname)) text = 'Puedo ayudarte a explorar naturaleza y prácticas responsables usando información registrada.';
+    else if (/aliados/.test(location.pathname)) text = 'Puedo ayudarte a encontrar artesanos, cooperativas y experiencias culturales con contacto directo.';
+    else if (/nosotros/.test(location.pathname)) text = '¿Querés que te cuente cómo Baqueano conecta tecnología, territorio y cultura nicaragüense?';
+    else text = 'Puedo recomendarte destinos, historia, gastronomía, museos, arte, cultura o música según lo que te interese.';
     if (text) { session.lastSuggestion = Date.now(); saveSession(); showSuggestion(text); }
   }
 
@@ -240,7 +251,8 @@
     recognition.onerror = () => { $('#bqInput').placeholder = 'No pude escuchar. Intentá nuevamente.'; }; recognition.onend = () => { state.recognition = null; setCharacter('idle'); }; recognition.start();
   }
 
-  const root = buildUi(); if (!preferences.enabled || session.hidden) root.hidden = true;
+  session.hidden = false;
+  const root = buildUi(); if (!preferences.enabled) root.hidden = true; if (isSnoozed()) root.classList.add('is-snoozed');
   session.messages.length ? session.messages.forEach(message => appendMessage(message.content, message.role, false)) : appendMessage('¡Hola! Soy Baqüi, tu guardabarranco guía. Puedo ayudarte a descubrir Nicaragua con información territorial y acciones concretas.', 'assistant');
   initDrag($('#bqMascot'));
   $('#bqForm').addEventListener('submit', event => { event.preventDefault(); const input = $('#bqInput'), value = input.value; input.value = ''; ask(value); track('assistant_message_sent'); });
@@ -249,7 +261,7 @@
   root.addEventListener('click', event => {
     const command = event.target.closest('[data-command]')?.dataset.command; const quick = event.target.closest('[data-quick]')?.dataset.quick;
     if (quick) { track('assistant_quick_action', { action: quick }); if (ACTIONS.has(quick)) return executeAction({ type: quick }); const prompts = { lodging: 'Busco hospedaje con información registrada.', food: '¿Dónde puedo comer comida local?', music: 'Quiero conocer la música de Nicaragua.', history: 'Contame una historia verificada de Nicaragua.', experiences: 'Mostrame aventuras y experiencias.', favorites: 'Quiero ver mis favoritos.', country: 'Quiero conocer Nicaragua.', surprise: 'Sorpréndeme con un destino verificado.' }; return ask(prompts[quick]); }
-    if (command === 'close' || command === 'minimize') close(); if (command === 'hide') hide(); if (command === 'clear') { session.messages = []; session.tripProfile = {}; saveSession(); $('#bqMessages').replaceChildren(); appendMessage('Conversación limpia. ¿Qué querés descubrir?', 'assistant'); }
+    if (command === 'close' || command === 'minimize') close(); if (command === 'hide' || command === 'snooze') hide(); if (command === 'reopen') reopen(); if (command === 'suggestion-open') open(); if (command === 'suggestion-listen') { preferences.voice = true; savePreferences(); speak(state.suggestionText || 'Estoy listo para ayudarte a descubrir Nicaragua.'); } if (command === 'clear') { session.messages = []; session.tripProfile = {}; saveSession(); $('#bqMessages').replaceChildren(); appendMessage('Conversación limpia. ¿Qué querés descubrir?', 'assistant'); }
     if (command === 'stop') { state.busy = false; state.controller?.abort(); window.speechSynthesis?.cancel(); }
     if (command === 'voice') { preferences.voice = !preferences.voice; savePreferences(); const icon = event.target.closest('button').querySelector('i'); icon.className = preferences.voice ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'; track('assistant_voice_enabled', { enabled: preferences.voice }); }
     if (command === 'microphone') startRecognition(); if (command === 'weather') requestWeather(); if (command === 'promotion') showPromotions(); if (command === 'dismiss-suggestion') { session.lastSuggestion = Date.now(); saveSession(); hideSuggestion(); }
@@ -283,8 +295,9 @@
   window.addEventListener('baqueano:promotion', event => { if (!event.detail?.verified) return; const items = safeJson(sessionStorage.getItem('baqueano_verified_promotions'), []); items.push(event.detail); sessionStorage.setItem('baqueano_verified_promotions', JSON.stringify(items.slice(-5))); $('#bqPromotion').textContent = `${items.length} nueva${items.length === 1 ? '' : 's'}`; if (!isSensitiveInteraction()) showSuggestion(`🏷️ Promoción verificada: ${event.detail.title}`); });
   applyModulePersonality(); updateClock(); state.timers.push(setInterval(updateClock, 30000)); loadWeather(); const promoCount = verifiedPromotions().length; $('#bqPromotion').textContent = promoCount ? `${promoCount} activa${promoCount === 1 ? '' : 's'}` : 'Sin alertas';
   state.timers.push(setInterval(() => { if (!state.open && !state.busy && !state.dragging && Date.now() - state.lastActivity >= CONFIG.sleepDelay) setCharacter('sleeping'); }, 5000));
-  state.timers.push(setTimeout(() => { if (!session.greeted && !session.hidden) { session.greeted = true; saveSession(); showSuggestion('👋 ¡Hola! Soy Baqüi. ¿Qué rincón de Nicaragua querés descubrir?'); } }, CONFIG.greetingDelay));
-  state.timers.push(setTimeout(contextualSuggestion, CONFIG.contextDelay)); schedulePeek();
+  state.timers.push(setTimeout(() => { if (!session.greeted && !isSnoozed()) { session.greeted = true; saveSession(); showSuggestion('👋 ¡Hola! Soy Baqüi. ¿Qué rincón de Nicaragua querés descubrir?'); } }, CONFIG.greetingDelay));
+  state.timers.push(setTimeout(contextualSuggestion, CONFIG.contextDelay)); state.timers.push(setInterval(contextualSuggestion, CONFIG.cooldown));
+  state.timers.push(setInterval(() => { if (root.classList.contains('is-snoozed') && !isSnoozed()) reopen(); }, 15000)); schedulePeek();
 
-  window.BaqueanoAssistant = { version: '4', open, close, ask, setState: setCharacter, show: () => { session.hidden = false; root.hidden = false; saveSession(); wakeCharacter(); }, context, refreshWeather: requestWeather, showPromotions };
+  window.BaqueanoAssistant = { version: '4', open, close, ask, speak: text => { preferences.voice = true; savePreferences(); speak(text); }, setState: setCharacter, show: () => { root.hidden = false; reopen(); }, hide, context, refreshWeather: requestWeather, showPromotions };
 })(window, document);
