@@ -1727,6 +1727,8 @@
   border: 1px solid rgba(244, 230, 193, 0.12);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  cursor: pointer;
+  user-select: none;
 }
 
 .living-card:hover {
@@ -1876,6 +1878,8 @@
   flex-direction: column;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  cursor: pointer;
+  user-select: none;
 }
 
 .destination-card-pro:hover {

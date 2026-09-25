@@ -9,9 +9,9 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-public-v8';
+const CACHE_VERSION = 'baqueano-public-v9';
 const OFFLINE_URL = '/offline.html';
-const PRECACHE_URLS = [OFFLINE_URL, '/assets/images/baqueano_launcher_solid.png', '/assets/images/logo.png'];
+const PRECACHE_URLS = [OFFLINE_URL, '/index.html', '/destinos.html', '/assets/images/baqueano_launcher_solid.png', '/assets/images/logo.png'];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
 const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/'];
 function isPrivatePath(pathname) {
@@ -39,7 +39,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       Promise.race([
         fetch(request),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('navigation-timeout')), 4000))
+        new Promise((_, reject) => setTimeout(() => reject(new Error('navigation-timeout')), 15000))
       ]).then((response) => {
         if (response && response.ok) {
           const copy = response.clone();

@@ -361,6 +361,23 @@
     });
   }
 
+  // 10. INTERACTIVIDAD Y NAVEGACIÓN EN TARJETAS DE EXPERIENCIAS Y DESTINOS EMBLEMÁTICOS
+  // 🎯 POR QUÉ: Convertir toda el área de las tarjetas en interactiva para exploradores en móvil y desktop.
+  // ⚙️ CÓMO: Detecta clics sobre .living-card y .destination-card-pro y navega al destino indicado en data-href.
+  // 📦 QUÉ: initLivingCardsInteractivity()
+  function initLivingCardsInteractivity() {
+    const cards = document.querySelectorAll('.living-card, .destination-card-pro');
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;
+        const href = card.getAttribute('data-href') || card.querySelector('.living-card-link, .dest-card-cta')?.getAttribute('href');
+        if (href) {
+          window.location.href = href;
+        }
+      });
+    });
+  }
+
   // ARRANQUE DEFENSIVO
   function init() {
     initNavbarScrollEffect();
@@ -373,6 +390,7 @@
     initHeroBackgroundVideo();
     initNicaraguaVivaInteractions();
     initAlliesFilter();
+    initLivingCardsInteractivity();
   }
 
   // Reproducción defensiva del video de fondo del Hero
