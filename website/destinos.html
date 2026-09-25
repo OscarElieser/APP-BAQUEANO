@@ -52,9 +52,10 @@
   <link rel="stylesheet" href="styles.css?v=20260924-4k-1">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css?v=20260924-4k-1">
+  <link rel="stylesheet" href="css/nicaragua-branding.css">
   <link rel="stylesheet" href="css/pages/destinos.css">
 </head>
-<body>
+<body class="has-video-hero page-destinos">
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
   <nav class="main-navbar" id="mainNavbar">
     <div class="container nav-inner">
@@ -207,37 +208,37 @@
     </div>
   </nav>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper">
-    <section class="destinations-section-pro">
-      <!-- HERO CON VIDEO DE FONDO Y HUD CINEMATOGRÁFICO -->
-      <div class="destinations-video-hero">
-        <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="assets/images/destinos/isla_de_ometepe.jpg" aria-label="Paisajes y experiencias turísticas de Nicaragua">
-          <source src="https://www.visitanicaragua.com/wp-content/uploads/2026/09/volcan.mp4" type="video/mp4">
-          <source src="assets/videos/destinos.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay-gradient"></div>
-        <div class="video-scanlines"></div>
-        
-        <div class="container hero-video-content">
-          <div class="badge-section-pill">
-            <span class="hud-beacon-led"></span>
-            <i class="fa-solid fa-compass"></i> Red de Ecoturismo & Estadía Soberana
-          </div>
-          <h1 class="section-headline animated-stroke-h2">Catálogo de Destinos, Turismo & Hospedaje</h1>
-          <p class="section-subtext">
-            Playas de surf, bahías tropicales, ríos sagrados, volcanes activos, hoteles ecológicos, hostales, cabañas campesinas, casas de alquiler, museos y vida nocturna en Nicaragua. Sin intermediarios foráneos y con balizas satelitales SOS 24/7.
-          </p>
-
-          <!-- BUSCADOR TÁCTICO INTEGRADO EN VIVO -->
-          <div class="dest-search-bar-wrap">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" id="destSearchInput" class="dest-search-input" placeholder="Buscar por playa, hotel, río, cabaña, museo o ciudad (ej. Ometepe, San Juan del Sur, Granada)...">
-            <button class="dest-search-btn" id="destSearchClearBtn" title="Limpiar búsqueda"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div>
+  <!-- HERO CINEMATOGRÁFICO DE PANTALLA COMPLETA DE DESTINOS (ESTILO INDEX) -->
+  <div class="destinations-video-hero">
+    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="assets/images/destinos/isla_de_ometepe.jpg" aria-label="Paisajes y experiencias turísticas de Nicaragua">
+      <source src="https://www.visitanicaragua.com/wp-content/uploads/2026/09/volcan.mp4" type="video/mp4">
+      <source src="assets/videos/destinos.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay-gradient"></div>
+    <div class="video-scanlines"></div>
+    
+    <div class="container hero-video-content">
+      <div class="badge-section-pill">
+        <span class="hud-beacon-led"></span>
+        <i class="fa-solid fa-compass"></i> Red de Ecoturismo &amp; Estadía Soberana
       </div>
+      <h1 class="section-headline animated-stroke-h2">Catálogo de Destinos, Turismo &amp; Hospedaje</h1>
+      <p class="section-subtext">
+        Playas de surf, bahías tropicales, ríos sagrados, volcanes activos, hoteles ecológicos, hostales, cabañas campesinas, casas de alquiler, museos y vida nocturna en Nicaragua. Sin intermediarios foráneos y con balizas satelitales SOS 24/7.
+      </p>
 
+      <!-- BUSCADOR TÁCTICO INTEGRADO EN VIVO -->
+      <div class="dest-search-bar-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="destSearchInput" class="dest-search-input" placeholder="Buscar por playa, hotel, río, cabaña, museo o ciudad (ej. Ometepe, San Juan del Sur, Granada)...">
+        <button class="dest-search-btn" id="destSearchClearBtn" title="Limpiar búsqueda"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="page-wrapper has-hero-header">
+    <section class="destinations-section-pro">
       <div class="container">
         <!-- SUITE DE NAVEGACIÓN POR CATEGORÍAS & SUBMENÚS -->
         <div class="dest-category-nav-suite" id="destCategoryNav">
@@ -7506,7 +7507,10 @@
                 <span class="dest-coop-name">Tejedores de Hamacas de Monimbó</span>
               </div>
             </div>
-          </div> — FIRESTORE EN TIEMPO REAL -->
+          </div>
+        </div>
+
+        <!-- MAPA INTERACTIVO DE DESTINOS — FIRESTORE EN TIEMPO REAL -->
         <div class="map-section-wrapper destinos-inline-004">
           <div class="map-header-bar">
             <div class="map-header-title">

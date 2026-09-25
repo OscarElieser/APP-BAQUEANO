@@ -27,14 +27,17 @@
 
 .video-hero-wrapper {
   position: relative;
-  min-height: clamp(500px, 62vh, 720px);
+  min-height: clamp(520px, 66vh, 760px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-bottom: 1px solid rgba(246, 94, 1, 0.35);
   background: #080D1A;
-  margin-bottom: 3.5rem;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  padding-top: clamp(80px, 12vh, 120px);
+  padding-bottom: clamp(32px, 5vh, 60px);
 }
 
 .video-hero-media {
@@ -177,3 +180,118 @@
     background: radial-gradient(circle at center, #132438 0%, #080D1A 100%);
   }
 }
+
+/* ============================================================================
+   🧭 HERO CONTINUO DE BORDE A BORDE (ESTILO INDEX.HTML)
+   ============================================================================
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Eliminar el espacio muerto/hueco oscuro intermedio ("la parte de medio")
+     entre la barra de navegación institucional y los encabezados cinematográficos
+     en Destinos, Historia, Gastronomía y Música.
+   - Homogeneizar la experiencia visual para que todas las páginas insignia de
+     "Mi País" fluyan continuas desde la cima tal como index.html.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Barra de navegación flotante transparente al inicio (.main-navbar:not(.scrolled)),
+     adquiriendo fondo glassmorphic con desenfoque al desplazarse hacia abajo.
+   - Eliminación del padding-top y margin-top del contenedor .page-wrapper cuando
+     existe un encabezado hero superior.
+   - Encabezado .destinations-video-hero y .video-hero-wrapper sin border-radius,
+     de borde a borde, iniciando en y:0.
+   - Acople armónico de las secciones subsiguientes (.history-section-pro,
+     .destinations-section-pro, .environmental-section-pro) sin espacios vacíos.
+
+   📦 3. QUÉ (WHAT / REGLAS EXPUESTAS):
+   - .has-video-hero .main-navbar, .has-hero-header, .destinations-video-hero,
+     espaciados de transición fluidos a 60fps.
+   ============================================================================ */
+
+/* 1. Navbar transparente en la cima para páginas con hero (Destinos, Historia, Gastronomía, Música) */
+.page-index-definitive .main-navbar:not(.scrolled),
+.has-video-hero .main-navbar:not(.scrolled),
+body:has(.destinations-video-hero) .main-navbar:not(.scrolled),
+body:has(.video-hero-wrapper) .main-navbar:not(.scrolled) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+}
+
+/* 2. Navbar dinámico al hacer scroll */
+.page-index-definitive .main-navbar.scrolled,
+.has-video-hero .main-navbar.scrolled,
+body:has(.destinations-video-hero) .main-navbar.scrolled,
+body:has(.video-hero-wrapper) .main-navbar.scrolled {
+  background: rgba(10, 15, 29, 0.95) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.2) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(246, 94, 1, 0.3) !important;
+}
+
+/* 3. Erradicación del espacio muerto intermedio ("la parte de medio") */
+.has-video-hero .page-wrapper,
+.page-wrapper.has-hero-header,
+.video-hero-wrapper + .page-wrapper,
+.destinations-video-hero + .page-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 4. Hero de Destinos continuo y de ancho completo */
+.destinations-video-hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(560px, 72vh, 800px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 1px solid rgba(246, 94, 1, 0.35);
+  box-shadow: none !important;
+  background: #070B14;
+  padding-top: clamp(90px, 13vh, 130px);
+  padding-bottom: clamp(36px, 5vh, 60px);
+}
+
+@media (max-width: 768px) {
+  .destinations-video-hero {
+    min-height: clamp(480px, 70svh, 620px);
+    border-radius: 0 !important;
+    padding-top: clamp(80px, 12vh, 100px);
+    padding-bottom: 1.75rem;
+  }
+}
+
+/* 5. Transición fluida a las secciones de contenido sin huecos */
+.has-video-hero .history-section-pro,
+.page-historia .history-section-pro {
+  padding: 2.5rem 0 5rem !important;
+}
+
+.has-video-hero .history-section-pro .timeline-periods-flow {
+  margin: 1.5rem 0 4rem !important;
+}
+
+.has-video-hero .destinations-section-pro,
+.page-destinos .destinations-section-pro,
+.page-gastronomia .destinations-section-pro {
+  padding: 2.25rem 0 5rem !important;
+}
+
+.has-video-hero .destinations-section-pro .gastro-section-header {
+  margin: 0 auto 2.5rem auto !important;
+}
+
+.has-video-hero .environmental-section-pro,
+.page-musica .environmental-section-pro {
+  padding: 2.25rem 0 5rem !important;
+}
+
