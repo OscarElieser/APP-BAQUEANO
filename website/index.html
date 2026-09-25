@@ -123,7 +123,7 @@
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css">
   <link rel="stylesheet" href="css/theme-switcher.css">
-  <link rel="stylesheet" href="css/nicaragua-branding.css">
+  <link rel="stylesheet" href="css/nicaragua-branding.css?v=20260924-center">
   <link rel="stylesheet" href="css/baqueano-reels.css">
   <link rel="stylesheet" href="css/pages/index.css">
   <link rel="stylesheet" href="css/baqueano-3d.css">
@@ -429,18 +429,143 @@
          🧭 02. BUSCADOR / DESCUBRIMIENTO CENTRAL
          Placeholder amplio, búsqueda por texto y 8 accesos rápidos visuales.
          ============================================================================ -->
+    <style>
+    .home-search-section {
+      position: relative;
+      z-index: 20;
+      margin-top: -45px;
+      padding-bottom: 40px;
+    }
+    .home-search-card {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 34px 36px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(22, 93, 111, 0.38) 100%) !important;
+      border: 1px solid rgba(244, 230, 193, 0.24) !important;
+      border-radius: 28px !important;
+      box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.06) inset, 0 12px 36px rgba(22, 93, 111, 0.32) !important;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .home-search-header {
+      margin-bottom: 22px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+    .home-search-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 5px 15px !important;
+      border-radius: 999px !important;
+      background: rgba(22, 93, 111, 0.4) !important;
+      border: 1px solid rgba(244, 230, 193, 0.28) !important;
+      color: #F4E6C1 !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      margin: 0 auto 12px auto !important;
+    }
+    .home-search-title {
+      margin: 0 auto 8px auto !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: clamp(22px, 2.7vw, 30px) !important;
+      font-weight: 800 !important;
+      color: #FFFFFF !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.25 !important;
+      text-align: center !important;
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+    }
+    .home-search-title::after,
+    .home-search-title::before {
+      content: none !important;
+      display: none !important;
+    }
+    .home-search-subtext {
+      margin: 0 auto !important;
+      font-family: 'Inter', system-ui, sans-serif !important;
+      font-size: 14px !important;
+      color: rgba(244, 230, 193, 0.85) !important;
+      line-height: 1.5 !important;
+      max-width: 640px !important;
+      text-align: center !important;
+    }
+    .home-search-form {
+      display: flex !important;
+      gap: 12px !important;
+      width: 100% !important;
+      max-width: 820px !important;
+      margin: 0 auto 20px auto !important;
+    }
+    .home-search-chips-container {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: 100% !important;
+    }
+    .chips-label-centered {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      color: rgba(244, 230, 193, 0.85) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      margin-bottom: 2px !important;
+    }
+    .chips-label-centered i {
+      color: #F65E01 !important;
+    }
+    .home-search-chips {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 9px !important;
+      max-width: 860px !important;
+      margin: 0 auto !important;
+    }
+    .home-search-chips-extra {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+      gap: 9px !important;
+      margin: 14px auto 0 auto !important;
+      padding-top: 16px !important;
+      border-top: 1px solid rgba(244, 230, 193, 0.12) !important;
+      width: 100% !important;
+      max-width: 860px !important;
+    }
+    </style>
     <section class="home-search-section" id="homeSearchSection">
       <div class="container">
         <div class="home-search-card">
+          <!-- Encabezado 100% Centrado -->
           <div class="home-search-header">
             <div class="home-search-badge">
               <i class="fa-solid fa-compass"></i>
               <span>EXPLORADOR BAQUEANO</span>
             </div>
-            <h2 class="home-search-title">¿Qué querés descubrir en Nicaragua?</h2>
-            <p class="home-search-subtext">Volcanes, fogones ancestrales, costas vírgenes y cooperativas locales sin intermediarios.</p>
+            <h2 class="home-search-title">¿Qué querés descubrir en <span class="highlight-orange">Nicaragua</span>?</h2>
+            <p class="home-search-subtext">Volcanes, fogones ancestrales, costas vírgenes y cooperativas comunitarias sin intermediarios.</p>
           </div>
 
+          <!-- Formulario Centrado con Barra de Búsqueda -->
           <form class="home-search-form" action="destinos.html" method="GET">
             <div class="home-search-input-wrap">
               <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -454,23 +579,28 @@
             </button>
           </form>
 
-          <!-- Atajos directos refinados -->
-          <div class="home-search-chips">
-            <span class="chips-label"><i class="fa-solid fa-bolt"></i> Atajos populares:</span>
-            <a href="destinos.html?cat=volcanes" class="search-chip chip-volcanes"><i class="fa-solid fa-mountain-sun"></i> Volcanes</a>
-            <a href="destinos.html?cat=playas" class="search-chip chip-playas"><i class="fa-solid fa-umbrella-beach"></i> Playas</a>
-            <a href="destinos.html?cat=lagunas" class="search-chip chip-lagunas"><i class="fa-solid fa-water"></i> Lagos &amp; Lagunas</a>
-            <a href="destinos.html?cat=naturaleza" class="search-chip chip-naturaleza"><i class="fa-solid fa-leaf"></i> Naturaleza</a>
-            <a href="gastronomia.html" class="search-chip chip-gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
-            <a href="historia.html" class="search-chip chip-cultura"><i class="fa-solid fa-masks-theater"></i> Cultura</a>
-            <a href="#queQueresVivir" class="search-chip chip-aventura"><i class="fa-solid fa-person-hiking"></i> Aventura</a>
-            <a href="aliados.html" class="search-chip chip-comunidades"><i class="fa-solid fa-people-roof"></i> Comunidades</a>
-            <button type="button" class="search-chip chip-toggle-all" id="btnToggleAllCategories" aria-expanded="false">
-              <span>Más categorías</span> <i class="fa-solid fa-chevron-down"></i>
-            </button>
+          <!-- Atajos directos 100% centrados -->
+          <div class="home-search-chips-container">
+            <div class="chips-label-centered">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Atajos populares:</span>
+            </div>
+            <div class="home-search-chips">
+              <a href="destinos.html?cat=volcanes" class="search-chip chip-volcanes"><i class="fa-solid fa-mountain-sun"></i> Volcanes</a>
+              <a href="destinos.html?cat=playas" class="search-chip chip-playas"><i class="fa-solid fa-umbrella-beach"></i> Playas</a>
+              <a href="destinos.html?cat=lagunas" class="search-chip chip-lagunas"><i class="fa-solid fa-water"></i> Lagos &amp; Lagunas</a>
+              <a href="destinos.html?cat=naturaleza" class="search-chip chip-naturaleza"><i class="fa-solid fa-leaf"></i> Naturaleza</a>
+              <a href="gastronomia.html" class="search-chip chip-gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
+              <a href="historia.html" class="search-chip chip-cultura"><i class="fa-solid fa-masks-theater"></i> Cultura</a>
+              <a href="#queQueresVivir" class="search-chip chip-aventura"><i class="fa-solid fa-person-hiking"></i> Aventura</a>
+              <a href="aliados.html" class="search-chip chip-comunidades"><i class="fa-solid fa-people-roof"></i> Comunidades</a>
+              <button type="button" class="search-chip chip-toggle-all" id="btnToggleAllCategories" aria-expanded="false">
+                <span>Más categorías</span> <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
           </div>
 
-          <!-- Categorías secundarias desplegables -->
+          <!-- Categorías secundarias desplegables centradas -->
           <div class="home-search-chips-extra" id="homeSearchChipsExtra" hidden>
             <a href="destinos.html?cat=islas" class="search-chip chip-islas"><i class="fa-solid fa-water"></i> Islas &amp; Archipiélagos</a>
             <a href="destinos.html?cat=canones" class="search-chip chip-canones"><i class="fa-solid fa-mountain"></i> Cañones &amp; Cuevas</a>
