@@ -193,12 +193,13 @@
   // Mapeo de Macro-Categorías con sus Subcategorías
   const MACRO_GROUPS = {
     'naturaleza-all': ['playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas'],
+    'aventura': ['volcanes', 'rios', 'islas', 'selva'],
     'estadias-all': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
     'cultura-all': ['gastronomia', 'museos', 'discotecas']
   };
 
   const SUB_TO_MACRO = {
-    'playas': 'naturaleza', 'bahias': 'naturaleza', 'rios': 'naturaleza', 'volcanes': 'naturaleza', 'selva': 'naturaleza', 'islas': 'naturaleza', 'naturaleza-all': 'naturaleza',
+    'aventura': 'naturaleza', 'playas': 'naturaleza', 'bahias': 'naturaleza', 'rios': 'naturaleza', 'volcanes': 'naturaleza', 'selva': 'naturaleza', 'islas': 'naturaleza', 'naturaleza-all': 'naturaleza',
     'hoteles': 'estadias', 'hostales': 'estadias', 'hospedajes': 'estadias', 'casas-alquiler': 'estadias', 'estadias-all': 'estadias',
     'gastronomia': 'cultura', 'museos': 'cultura', 'discotecas': 'cultura', 'cultura-all': 'cultura'
   };
@@ -228,8 +229,9 @@
   const FILTER_NAMES = {
     'all': 'Todos los Destinos',
     'favoritos': 'Mis Favoritos',
+    'aventura': 'Aventura Soberana & Volcanes',
     'naturaleza-all': 'Toda la Naturaleza & Aventura',
-    'playas': 'Playas del Pacífico',
+    'playas': 'Playas del Pacífico & Caribe',
     'bahias': 'Bahías & Puertos',
     'rios': 'Ríos, Cascadas & Cañones',
     'volcanes': 'Volcanes & Senderos',
@@ -436,6 +438,8 @@
       if (clearFilterBtn) {
         e.preventDefault();
         e.stopPropagation();
+        const sInput = document.getElementById('destSearchInput');
+        if (sInput) sInput.value = '';
         applyCategoryFilter('all', true);
         return;
       }
@@ -510,8 +514,104 @@
         document.querySelectorAll('.dest-card-pro').forEach(card => card.style.display = 'flex');
       });
     }
+
     // Comportamiento de Ancla (Hash) inicial
     handleHashNavigation();
+    // Comportamiento de Parámetros URL (?cat=... & ?q=...)
+    handleQueryParamsNavigation();
+  }
+
+  // Lógica de navegación por Parámetros URL (?cat=... & ?q=...)
+  // 🎯 POR QUÉ: Permitir que los enlaces directos de experiencias y actividades filtren al instante.
+  // ⚙️ CÓMO: Lee URLSearchParams(window.location.search), aplica el filtro o búsqueda y hace scrollIntoView.
+  // 📦 QUÉ: handleQueryParamsNavigation()
+  function handleQueryParamsNavigation() {
+    if (!window.location.search) return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('cat') || params.get('categoria') || params.get('category');
+      const qParam = params.get('q') || params.get('search') || params.get('buscar');
+
+      let filterApplied = false;
+
+      if (catParam) {
+        const normalized = catParam.toLowerCase().trim();
+        const CAT_MAP = {
+          'aventura': 'aventura',
+          'adrenalina': 'aventura',
+          'volcan': 'volcanes',
+          'volcanes': 'volcanes',
+          'playa': 'playas',
+          'playas': 'playas',
+          'costas': 'playas',
+          'surf': 'playas',
+          'naturaleza': 'naturaleza-all',
+          'biosfera': 'selva',
+          'selva': 'selva',
+          'bosques': 'selva',
+          'rios': 'rios',
+          'rio': 'rios',
+          'bahias': 'bahias',
+          'islas': 'islas',
+          'isla': 'islas',
+          'estadias': 'estadias-all',
+          'hospedaje': 'estadias-all',
+          'hospedajes': 'hospedajes',
+          'hoteles': 'hoteles',
+          'hotel': 'hoteles',
+          'hostales': 'hostales',
+          'hostal': 'hostales',
+          'cultura': 'cultura-all',
+          'patrimonio': 'museos',
+          'gastronomia': 'gastronomia',
+          'comida': 'gastronomia',
+          'museos': 'museos',
+          'discotecas': 'discotecas',
+          'favoritos': 'favoritos'
+        };
+
+        const targetFilter = CAT_MAP[normalized] || normalized;
+        applyCategoryFilter(targetFilter, true);
+        filterApplied = true;
+      }
+
+      if (qParam) {
+        const searchInput = document.getElementById('destSearchInput');
+        if (searchInput) {
+          searchInput.value = qParam;
+          const query = qParam.toLowerCase().trim();
+          const cards = document.querySelectorAll('.dest-card-pro');
+          let matchCount = 0;
+          cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            const show = (!query || text.includes(query));
+            card.style.display = show ? 'flex' : 'none';
+            if (show) matchCount++;
+          });
+          filterApplied = true;
+
+          const indicatorEl = document.getElementById('activeFilterIndicator');
+          const indicatorNameEl = document.getElementById('activeFilterName');
+          const indicatorCountEl = document.getElementById('activeFilterCount');
+          if (indicatorEl && indicatorNameEl && indicatorCountEl) {
+            indicatorNameEl.textContent = `Búsqueda: "${qParam}"`;
+            indicatorCountEl.textContent = `(${matchCount})`;
+            indicatorEl.style.display = 'inline-flex';
+          }
+        }
+      }
+
+      if (filterApplied) {
+        setTimeout(() => {
+          const navSuite = document.getElementById('destCategoryNav') || document.querySelector('.destinations-showcase-grid');
+          if (navSuite) {
+            navSuite.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 400);
+      }
+    } catch (e) {
+      console.warn('[BaqueanoDestinos] Error analizando parámetros URL:', e);
+    }
   }
 
   // Lógica de navegación por Hash (Ancla)
