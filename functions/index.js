@@ -37,12 +37,16 @@ const getApiKey = () => {
   return process.env.GEMINI_API_KEY || "";
 };
 
-const handleAiChat = createAiChatService({db: getFirestore(), getApiKey});
+const db = getFirestore();
+const readPublicMetrics = createPublicMetricsReader(db);
+const handleAiChat = createAiChatService({db, getApiKey});
+
 exports.healthCheck = onRequest(runtimeOptions, createHealthHandler());
 exports.api = onRequest(
   geminiApiKey ? {...runtimeOptions, secrets: [geminiApiKey]} : runtimeOptions,
-  createApiHandler({readPublicMetrics, handleAiChat})
+  createApiHandler({readPublicMetrics, handleAiChat, getApiKey})
 );
+
 
 exports.auditTourismServicePrice = onDocumentWritten(
   {document: "tourism_services/{serviceId}", region: "us-central1", memory: "256MiB", maxInstances: 10},
