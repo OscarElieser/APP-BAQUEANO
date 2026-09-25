@@ -409,6 +409,10 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
+    match /audit_logs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
     match /user_saved_places/{savedId} {
       allow read: if isSignedIn()
         && resource.data.userId == request.auth.uid;
