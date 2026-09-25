@@ -443,7 +443,50 @@ window.BaqueanoMap = (function() {
   // --------------------------------------------------------------------------
   // RENDERIZADO DE MARCADORES EN EL MAPA
   // --------------------------------------------------------------------------
+  function catalogPlacesFromDom() {
+    const places = [];
+    document.querySelectorAll('.dest-card-pro').forEach(card => {
+      const route = card.querySelector('.btn-action-route[data-lat][data-lng]');
+      const id = card.dataset.id;
+      const lat = route ? Number(route.dataset.lat) : NaN;
+      const lng = route ? Number(route.dataset.lng) : NaN;
+      if (!id || !Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+      const location = (card.querySelector('.dest-location-tag')?.textContent || '')
+        .replace(/\s+/g, ' ').trim();
+      const locationParts = location.split(',').map(value => value.trim());
+      const ratingText = card.querySelector('.dest-rating-gold')?.textContent || '';
+      const ratingMatch = ratingText.match(/([0-5](?:\.\d)?)/);
+      const reviewMatch = ratingText.match(/\(([\d,.]+)/);
+      places.push({
+        id,
+        name: (card.querySelector('.dest-name-title, .dest-card-title')?.textContent || route.dataset.name || id).trim(),
+        municipality: locationParts[0] || 'Nicaragua',
+        department: locationParts.slice(1).join(', ') || 'Nicaragua',
+        category: card.dataset.category || 'naturaleza',
+        description: (card.querySelector('.dest-description-text')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        rating: ratingMatch ? Number(ratingMatch[1]) : 4.8,
+        reviewCount: reviewMatch ? Number(reviewMatch[1].replace(/[,.]/g, '')) : 0,
+        cooperativeName: (card.querySelector('.dest-coop-name')?.textContent || 'Red Baqueano').trim(),
+        imageUrl: card.querySelector('.dest-card-img')?.getAttribute('src') || '',
+        badge: (card.querySelector('.dest-badge-corner')?.textContent || 'Destino Turístico').replace(/\s+/g, ' ').trim(),
+        status: 'published',
+        lat,
+        lng,
+        priceDetail: (card.querySelector('.dest-price-breakdown')?.textContent || '').replace(/\s+/g, ' ').trim()
+      });
+    });
+    return places;
+  }
+
   function renderMarkers(places, source) {
+    const mergedById = new Map();
+    (Array.isArray(places) ? places : []).forEach(place => mergedById.set(place.id, place));
+    catalogPlacesFromDom().forEach(place => {
+      const existing = mergedById.get(place.id);
+      mergedById.set(place.id, existing ? { ...place, ...existing, lat: place.lat, lng: place.lng } : place);
+    });
+    places = Array.from(mergedById.values());
     currentPlaces = places;
     markersById = {};
 
@@ -661,7 +704,7 @@ window.BaqueanoMap = (function() {
           // Si el clic no fue en un enlace de cotización directo
           if (e.target.closest('a') || e.target.closest('button')) return;
 
-          const titleEl = card.querySelector('.dest-card-title');
+          const titleEl = card.querySelector('.dest-name-title, .dest-card-title');
           if (!titleEl) return;
           const name = titleEl.textContent.trim();
 
