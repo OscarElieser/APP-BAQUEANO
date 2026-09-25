@@ -6,9 +6,9 @@
 // ============================================================================
 (function (window, document) {
   'use strict';
-  if (window.BaqueanoAssistant?.version === '5') return;
+  if (window.BaqueanoAssistant?.version === '6') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-5'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-6'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
   const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: '/api/v1/ai/chat', healthEndpoint: '/health', healthInterval: 45000, requestAttempts: 3 });
@@ -19,7 +19,7 @@
   if (EXCLUDED.test(location.pathname.replace(/\/$/, ''))) return;
 
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
-  const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, lastSuggestion: 0 }, safeJson(sessionStorage.getItem(KEYS.session), {}));
+  const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, minimized: false, lastSuggestion: 0 }, safeJson(sessionStorage.getItem(KEYS.session), {}));
   const preferences = Object.assign({ voice: false, edge: 'right', y: null, enabled: true, suggestions: true }, safeJson(localStorage.getItem(KEYS.preferences), {}));
   const state = { open: false, busy: false, minimized: false, dragging: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio', service: 'checking' };
   const saveSession = () => sessionStorage.setItem(KEYS.session, JSON.stringify(session));
@@ -53,6 +53,7 @@
         <form class="bq-form" id="bqForm"><label class="sr-only" for="bqInput">Escribe tu consulta</label><textarea id="bqInput" rows="2" maxlength="500" placeholder="Preguntá por destinos, rutas o experiencias…" required></textarea><button type="button" data-command="microphone" aria-label="Hablar"><i class="fa-solid fa-microphone"></i></button><button type="submit" aria-label="Enviar"><i class="fa-solid fa-arrow-up"></i></button></form>
         <footer><button data-command="clear"><i class="fa-solid fa-trash-can"></i> Limpiar</button><button data-command="stop" hidden><i class="fa-solid fa-stop"></i> Detener</button><button data-command="hide"><i class="fa-solid fa-eye-slash"></i> Ocultar 30 min</button></footer>
       </aside>
+      <button class="bq-mascot-minimize" type="button" data-command="minimize-mascot" aria-label="Minimizar a Baqüi" title="Minimizar"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
       <button class="bq-mascot" id="bqMascot" type="button" aria-label="Abrir a Baqüi, guía digital" aria-expanded="false">
         <span class="bq-glow"></span><span class="bq-context-icon" id="bqContextIcon" aria-hidden="true">🧭</span><span class="bq-character" aria-hidden="true"><img class="bq-character-base" src="assets/images/baqui.png" alt="" draggable="false"><span class="bq-character-part bq-character-head"></span><span class="bq-character-part bq-character-wing"></span><span class="bq-character-part bq-character-tail"></span><span class="bq-sleep-symbol">Z</span></span><span class="sr-only">Baqüi, guardabarranco guía virtual de Nicaragua</span><span class="bq-online" aria-hidden="true"></span><span class="bq-mini-time" id="bqMiniTime" aria-hidden="true"></span>
       </button>
