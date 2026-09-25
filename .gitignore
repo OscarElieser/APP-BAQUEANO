@@ -71,7 +71,9 @@ website/js/local-keys.js
 
 # Cache de herramientas y resultados temporales
 .gemini/
+.firebase/
 website/test-results/
 supabase/.temp/
+
 
 
