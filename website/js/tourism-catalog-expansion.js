@@ -82,4 +82,35 @@
       grid.insertAdjacentHTML('beforeend', cardTemplate(place));
     }
   });
+
+  // Recalcular equivalencias afectadas por texto histórico dañado. El valor
+  // en córdobas es la fuente visible y se convierte con la tasa editorial usada
+  // por el catálogo para evitar rangos truncados o sin el signo de moneda.
+  const exchangeRate = 36.65;
+  grid.querySelectorAll('.dest-card-pro').forEach((card) => {
+    const nioText = card.querySelector('.price-cordobas')?.textContent || '';
+    const usdNode = card.querySelector('.price-usd');
+    if (!usdNode || !nioText) return;
+    const amounts = Array.from(nioText.matchAll(/C\$\s*([\d,.]+)/g), match => Number(match[1].replace(/,/g, '')))
+      .filter(Number.isFinite);
+    if (!amounts.length) return;
+    const converted = amounts.map(amount => `$${(amount / exchangeRate).toFixed(2)}`);
+    usdNode.textContent = `≈ ${converted.join(' – ')} USD`;
+  });
+
+  // Orden editorial estable: primero gastronomía como en la referencia visual,
+  // luego naturaleza, estadías y cultura. Dentro de cada grupo se conserva el
+  // orden original de las fichas ya trabajadas y de Visit Nicaragua.
+  const categoryOrder = [
+    'gastronomia', 'playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas',
+    'hoteles', 'hostales', 'hospedajes', 'casas-alquiler', 'museos', 'discotecas'
+  ];
+  const rank = new Map(categoryOrder.map((category, index) => [category, index]));
+  Array.from(grid.querySelectorAll(':scope > .dest-card-pro'))
+    .map((card, index) => ({ card, index }))
+    .sort((left, right) => {
+      const categoryDelta = (rank.get(left.card.dataset.category) ?? 999) - (rank.get(right.card.dataset.category) ?? 999);
+      return categoryDelta || left.index - right.index;
+    })
+    .forEach(({ card }) => grid.appendChild(card));
 })();

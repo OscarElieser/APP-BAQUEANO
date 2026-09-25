@@ -851,3 +851,15 @@ html body .destinos-inline-053 {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/*
+ * 🎯 POR QUÉ: El asistente lateral cerrado usa una traslación fuera del
+ * viewport y no debe ampliar artificialmente el ancho de destinos.html.
+ * ⚙️ CÓMO: Se recorta solo el excedente horizontal; el desplazamiento vertical
+ * y la apertura normal del panel permanecen intactos.
+ * 📦 QUÉ: Elimina la barra horizontal residual en escritorio y móvil.
+ */
+html,
+body {
+  overflow-x: clip;
+}
