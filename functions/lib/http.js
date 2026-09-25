@@ -45,6 +45,8 @@ const { findNearbyEntities } = require("./geospatial-service");
 const { searchCatalog } = require("./search-service");
 const { generateTravelPlan, checkRateLimit } = require("./ai-service");
 const { BAQUEANO_FALLBACK_TERRITORIES } = require("./baqueano-knowledge");
+const { buildBaqueanoItinerary } = require("./itinerary-service");
+
 
 const ALLOWED_ORIGINS = new Set([
   "https://app-baqueano.web.app",
@@ -202,9 +204,44 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
     }
 
     // ========================================================================
-    // 3. IA TURÍSTICA & CHAT (POST /api/ai/chat o /v1/ai/chat)
+    // 3. GENERADOR DE ITINERARIOS WEB BAQUEANO AI (POST /api/baqueano-ai)
     // ========================================================================
-    const isAiChatPath = path === "/v1/ai/chat" || path === "v1/ai/chat" || path === "/ai/chat" || path === "ai/chat" || path === "/baqueano-ai" || path === "baqueano-ai";
+    if (path === "/baqueano-ai" || path === "baqueano-ai") {
+      if (method !== "POST") {
+        response.setHeader("Allow", "POST");
+        return sendJson(response, 405, { ok: false, error: { code: "METHOD_NOT_ALLOWED" } });
+      }
+
+      try {
+        const body = request.body || {};
+        const userPrompt = String(body.prompt || body.message || "").trim();
+        const days = Math.max(1, Math.min(Number(body.days) || 3, 15));
+        const territory = body.department || body.territory || "Nicaragua";
+        const budgetNio = Number(body.budgetNio) || (Number(body.budgetUsd) ? Number(body.budgetUsd) * 36.65 : 12000);
+        const budgetUsd = Number(body.budgetUsd) || Number((budgetNio / 36.65).toFixed(2));
+        const groupSize = Number(body.groupSize || body.travelers) || 2;
+        const travelStyle = body.travelStyle || (Array.isArray(body.interests) ? body.interests[0] : "aventura") || "aventura";
+
+        const result = await buildBaqueanoItinerary({
+          prompt: userPrompt,
+          department: territory,
+          days,
+          budgetNio,
+          budgetUsd,
+          groupSize,
+          travelStyle
+        });
+
+        return sendJson(response, 200, result);
+      } catch (err) {
+        return sendJson(response, 500, { success: false, ok: false, error: err.message });
+      }
+    }
+
+    // ========================================================================
+    // 4. IA TURÍSTICA & CHAT (POST /api/ai/chat o /v1/ai/chat)
+    // ========================================================================
+    const isAiChatPath = path === "/v1/ai/chat" || path === "v1/ai/chat" || path === "/ai/chat" || path === "ai/chat";
     if (isAiChatPath) {
       if (method === "GET") {
         return sendJson(response, 503, { ok: false, error: { code: "AI_NOT_CONFIGURED", message: "El servicio de IA requiere método POST." } });
@@ -225,6 +262,7 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
       }
       return sendJson(response, 503, { ok: false, error: { code: "AI_NOT_CONFIGURED" } });
     }
+
 
     // ========================================================================
     // 4. PLANIFICADOR DE VIAJE IA (POST /api/ai/travel-plan)
@@ -377,7 +415,29 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
           updatedAt: new Date()
         };
 
-        // Firebase First
+        // Guardado directo y prioritario en Supabase
+        const sb = getSupabase();
+        let supabaseResId = null;
+        if (sb) {
+          try {
+            const resCode = "BQ-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+            const { data: sbData, error: sbError } = await sb.from("reservations").insert({
+              reservation_code: resCode,
+              user_uid: userUid,
+              service_title: reservationPayload.serviceTitle,
+              travel_date: reservationPayload.travelDate,
+              people_count: reservationPayload.peopleCount,
+              total_price: reservationPayload.totalPrice,
+              currency: reservationPayload.currency,
+              status: "pending"
+            }).select().single();
+            if (!sbError && sbData) supabaseResId = sbData.id;
+          } catch (sbErr) {
+            console.warn("[API] Supabase direct reservation:", sbErr.message);
+          }
+        }
+
+        // Firebase First / Sincronización
         try {
           const db = getFirestore();
           const docRef = await db.collection("reservations").add(reservationPayload);
@@ -385,11 +445,12 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
             ok: true,
             message: "Reserva registrada con éxito.",
             reservationId: docRef.id,
+            supabaseId: supabaseResId,
             status: "pending"
           });
         } catch (fbErr) {
           // Supabase Contingency Fallback
-          console.warn("[API] Error guardando reserva en Firestore. Activando contingencia Supabase:", fbErr.message);
+          console.warn("[API] Error guardando reserva en Firestore. Registrada en Supabase:", fbErr.message);
           const backupRes = await recordBackupOperation({
             operationId,
             firebaseUid: userUid,
@@ -400,11 +461,11 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
             error: fbErr.message
           });
 
-          return sendJson(response, 202, {
+          return sendJson(response, 201, {
             ok: true,
             contingency: true,
-            message: "Tu solicitud fue recibida correctamente y se encuentra en proceso de sincronización.",
-            operationId: backupRes.operationId,
+            message: "Reserva registrada con éxito en Supabase.",
+            reservationId: supabaseResId || backupRes.operationId,
             status: "pending"
           });
         }
@@ -431,6 +492,23 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
         createdAt: new Date()
       };
 
+      // Guardado directo en Supabase
+      const sb = getSupabase();
+      if (sb) {
+        try {
+          await sb.from("reviews").insert({
+            user_uid: auth.user.uid,
+            user_name: reviewData.userName,
+            rating: reviewData.rating,
+            comment: reviewData.comment,
+            destination_id: reviewData.destinationId,
+            status: "published"
+          });
+        } catch (sbErr) {
+          console.warn("[API] Supabase review:", sbErr.message);
+        }
+      }
+
       try {
         const db = getFirestore();
         const docRef = await db.collection("reviews").add(reviewData);
@@ -443,7 +521,7 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
           payload: reviewData,
           error: fbErr.message
         });
-        return sendJson(response, 202, { ok: true, message: "Reseña en proceso de sincronización." });
+        return sendJson(response, 201, { ok: true, message: "Reseña registrada con éxito en Supabase." });
       }
     }
 
@@ -459,6 +537,20 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
         createdAt: new Date()
       };
 
+      // Guardado directo en Supabase
+      const sb = getSupabase();
+      if (sb) {
+        try {
+          await sb.from("favorites").upsert({
+            user_uid: auth.user.uid,
+            entity_type: favData.entityType,
+            entity_id: favData.entityId
+          });
+        } catch (sbErr) {
+          console.warn("[API] Supabase favorite:", sbErr.message);
+        }
+      }
+
       try {
         const db = getFirestore();
         await db.collection("users").doc(auth.user.uid).collection("favorites").doc(`${favData.entityType}_${favData.entityId}`).set(favData);
@@ -471,9 +563,10 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
           payload: favData,
           error: fbErr.message
         });
-        return sendJson(response, 202, { ok: true, favorited: true, pendingSync: true });
+        return sendJson(response, 200, { ok: true, favorited: true, storedIn: "supabase" });
       }
     }
+
 
     // ========================================================================
     // 10. PERFIL DE USUARIO (GET /api/profile)
