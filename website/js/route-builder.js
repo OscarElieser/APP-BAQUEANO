@@ -244,6 +244,16 @@
     }
   }
 
+  function closeResult() {
+    const showcase = $('rbResultShowcase');
+    if (!showcase || showcase.style.display === 'none') return;
+    showcase.style.display = 'none';
+    showcase.setAttribute('aria-hidden', 'true');
+    const launchButton = $('btnOpenPlannerModal');
+    launchButton?.focus({ preventScroll: true });
+    launchButton?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   function bindModalEvents() {
     // Abrir y cerrar modal
     $('btnOpenPlannerModal')?.addEventListener('click', openModal);
@@ -256,7 +266,10 @@
 
     // Cerrar con Escape
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key !== 'Escape') return;
+      const modal = $('routePlannerModal');
+      if (modal?.classList.contains('is-open')) closeModal();
+      else closeResult();
     });
 
     // Chips de días
@@ -550,6 +563,7 @@ ESQUEMA JSON:
     if (!showcase || !result) return;
 
     showcase.style.display = 'block';
+    showcase.setAttribute('aria-hidden', 'false');
 
     const isGemini = plan._source === 'gemini';
     const isTerritory = plan._source === 'territory';
@@ -559,6 +573,9 @@ ESQUEMA JSON:
       : `<div class="rb-source-badge rb-source-verified"><i class="fa-solid fa-compass"></i> Itinerario Oficial Baqueano · Catálogo Territorial Verificado</div>`;
 
     result.innerHTML = `
+      <button type="button" class="rb-result-close" id="rbCloseResult" aria-label="Cerrar itinerario" title="Cerrar itinerario">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
       ${sourceBadge}
 
       <div class="rb-ai-disclaimer" style="margin-top: 0.8rem;">
@@ -632,6 +649,7 @@ ESQUEMA JSON:
     `;
 
     $('rbReopenPlanner')?.addEventListener('click', openModal);
+    $('rbCloseResult')?.addEventListener('click', closeResult);
 
     // Desplazar suavemente hasta el resultado
     showcase.scrollIntoView({ behavior: 'smooth', block: 'start' });

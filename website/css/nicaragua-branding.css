@@ -752,14 +752,23 @@
 }
 
 /* ==========================================================================
-   8. SECCIÓN 11: CULTURA VIVA DE NICARAGUA (#F4E6C1)
+   8. SECCIÓN 11: CULTURA VIVA DE NICARAGUA
+   🎯 POR QUÉ: integrar la memoria cultural al lenguaje visual del portal.
+   ⚙️ CÓMO: superficies oscuras, acentos oficiales y profundidad ambiental.
+   📦 QUÉ: cabecera, pilares culturales y accesos secundarios unificados.
    ========================================================================== */
 .culture-alive-section {
-  padding: 90px 0;
-  background: #F4E6C1;
-  color: #1D292D;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
+  padding: 100px 0;
+  color: #F4E6C1;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(246, 94, 1, 0.13), transparent 30%),
+    radial-gradient(circle at 88% 80%, rgba(22, 93, 111, 0.36), transparent 36%),
+    linear-gradient(145deg, #080d17 0%, #0d1925 52%, #0b2731 100%);
+  border-top: 1px solid rgba(244, 230, 193, 0.08);
+  border-bottom: 1px solid rgba(244, 230, 193, 0.08);
 }
 
 /* Patrón petroglífico sutil a 5% opacidad */
@@ -767,10 +776,28 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(#165D6F 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.06;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(244, 230, 193, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 230, 193, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.72;
   pointer-events: none;
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+.culture-alive-section::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -220px;
+  left: 50%;
+  width: min(900px, 90vw);
+  height: 430px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(246, 94, 1, 0.14);
+  border-radius: 50%;
+  box-shadow: 0 0 100px rgba(246, 94, 1, 0.08);
 }
 
 .culture-head-box {
@@ -786,10 +813,10 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background: rgba(22, 93, 111, 0.12);
-  border: 1px solid rgba(22, 93, 111, 0.25);
+  background: rgba(246, 94, 1, 0.1);
+  border: 1px solid rgba(246, 94, 1, 0.38);
   border-radius: 30px;
-  color: #165D6F;
+  color: #FF9B58;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 12px;
   font-weight: 800;
@@ -802,7 +829,10 @@
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 900;
-  color: #165D6F;
+  color: #F4E6C1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  text-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
 }
 
 .culture-sub {
@@ -810,7 +840,7 @@
   font-family: 'Inter', system-ui, sans-serif;
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.6;
-  color: #475569;
+  color: #AFC0D2;
 }
 
 .culture-cards-grid {
@@ -823,11 +853,12 @@
 
 .culture-feature-card {
   padding: 24px;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(22, 93, 111, 0.18);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025));
+  border: 1px solid rgba(244, 230, 193, 0.12);
   border-radius: 20px;
   text-decoration: none;
-  box-shadow: 0 10px 25px rgba(22, 93, 111, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 38px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   flex-direction: column;
@@ -836,9 +867,9 @@
 
 .culture-feature-card:hover {
   transform: translateY(-5px);
-  background: #FFFFFF;
+  background: linear-gradient(145deg, rgba(246, 94, 1, 0.11), rgba(22, 93, 111, 0.13));
   border-color: #F65E01;
-  box-shadow: 0 16px 35px rgba(246, 94, 1, 0.2);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28), 0 0 30px rgba(246, 94, 1, 0.08);
 }
 
 .culture-card-icon {
@@ -846,9 +877,10 @@
   height: 48px;
   display: grid;
   place-items: center;
-  background: rgba(22, 93, 111, 0.1);
+  background: rgba(246, 94, 1, 0.1);
+  border: 1px solid rgba(246, 94, 1, 0.24);
   border-radius: 14px;
-  color: #165D6F;
+  color: #F65E01;
   font-size: 20px;
   margin-bottom: 16px;
   transition: all 0.25s ease;
@@ -865,7 +897,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 800;
-  color: #165D6F;
+  color: #F4E6C1;
 }
 
 .culture-feature-card p {
@@ -873,7 +905,7 @@
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 13px;
   line-height: 1.5;
-  color: #475569;
+  color: #9FB0C4;
 }
 
 .culture-feature-card .culture-link-action {
@@ -963,32 +995,121 @@
    10. SECCIÓN 14: APP BAQUEANO (SMARTPHONE MOCKUP REUBICADO)
    ========================================================================== */
 .app-baqueano-section {
-  padding: 90px 0;
-  background: radial-gradient(circle at 80% 50%, rgba(22, 93, 111, 0.3) 0%, #070B14 100%);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 110px 0;
+  background:
+    radial-gradient(circle at 82% 46%, rgba(22, 93, 111, 0.42) 0%, transparent 34%),
+    radial-gradient(circle at 12% 100%, rgba(246, 94, 1, 0.12) 0%, transparent 32%),
+    linear-gradient(135deg, #060b14 0%, #0b1724 55%, #102f3c 100%);
   border-top: 1px solid rgba(244, 230, 193, 0.08);
+  border-bottom: 1px solid rgba(244, 230, 193, 0.08);
+}
+
+.app-baqueano-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.23;
+  background-image: linear-gradient(rgba(244, 230, 193, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(244, 230, 193, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(90deg, transparent, #000 55%, #000);
 }
 
 .app-showcase-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(390px, 0.88fr);
+  gap: clamp(52px, 7vw, 110px);
   align-items: center;
 }
 
-.app-features-list {
+.app-info-col {
+  position: relative;
+  z-index: 2;
+}
+
+.app-main-title {
+  margin: 24px 0 18px;
+  max-width: 760px;
+  color: #fff7ed;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(42px, 5.4vw, 76px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.app-main-title span {
+  color: transparent;
+  background: linear-gradient(90deg, #f4e6c1 0%, #ff9b58 46%, #f65e01 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.app-main-desc {
+  max-width: 690px;
+  margin: 0;
+  color: #b7c5d8;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.75;
+}
+
+.app-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  max-width: 680px;
+  margin: 28px 0;
+  overflow: hidden;
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 18px;
+  background: rgba(244, 230, 193, 0.1);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.2);
+}
+
+.app-trust-strip > div {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin: 20px 0;
+  gap: 4px;
+  padding: 17px 20px;
+  background: rgba(8, 18, 30, 0.78);
+  backdrop-filter: blur(16px);
+}
+
+.app-trust-strip strong { color: #f65e01; font: 800 22px 'Space Grotesk', sans-serif; }
+.app-trust-strip span { color: #cbd5e1; font: 600 11px 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.app-features-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 26px 0 30px;
 }
 
 .app-feature-row {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 13px;
+  min-height: 112px;
+  padding: 17px;
+  border: 1px solid rgba(244, 230, 193, 0.1);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
-.app-feature-icon {
+.app-feature-row:hover {
+  transform: translateY(-4px);
+  border-color: rgba(246, 94, 1, 0.42);
+  background: linear-gradient(145deg, rgba(246, 94, 1, 0.1), rgba(22, 93, 111, 0.09));
+}
+
+.app-feature-icon,
+.feat-icon {
   width: 40px;
   height: 40px;
   display: grid;
@@ -999,6 +1120,12 @@
   color: var(--baqueano-orange);
   font-size: 16px;
   flex-shrink: 0;
+}
+
+.app-feature-row strong {
+  display: block;
+  color: #fff;
+  font: 750 14px/1.3 'Montserrat', sans-serif;
 }
 
 .app-feature-row h4 {
@@ -1015,6 +1142,72 @@
   font-size: 12.5px;
   color: #94A3B8;
 }
+
+.app-download-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 15px 20px; }
+.app-download-actions .btn-hero-primary { min-height: 56px; box-shadow: 0 16px 36px rgba(246, 94, 1, 0.28); }
+.app-web-route-link { display: inline-flex; align-items: center; gap: 9px; min-height: 50px; padding: 0 18px; border: 1px solid rgba(244,230,193,0.18); border-radius: 14px; color: #f4e6c1; background: rgba(244,230,193,0.05); font: 700 12px 'Montserrat', sans-serif; transition: transform 200ms ease, border-color 200ms ease, background 200ms ease; }
+.app-web-route-link:hover { transform: translateY(-3px); border-color: rgba(246,94,1,0.55); background: rgba(246,94,1,0.1); }
+.app-download-note { width: 100%; color: #94a3b8; font: 600 11px 'Inter', sans-serif; }
+.app-download-note i { margin-right: 6px; color: #4ade80; }
+
+.app-mockup-col {
+  position: relative;
+  display: grid;
+  min-height: 620px;
+  place-items: center;
+}
+
+.app-orbit {
+  position: absolute;
+  width: min(520px, 100%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(244, 230, 193, 0.13);
+  border-radius: 50%;
+  box-shadow: 0 0 90px rgba(22, 93, 111, 0.3), inset 0 0 80px rgba(22, 93, 111, 0.12);
+  animation: appOrbitPulse 4s ease-in-out infinite;
+}
+
+.app-orbit::before,
+.app-orbit::after { content: ''; position: absolute; border: 1px dashed rgba(246, 94, 1, 0.2); border-radius: inherit; }
+.app-orbit::before { inset: 12%; }
+.app-orbit::after { inset: 27%; }
+
+.app-phone-mockup { position: relative; z-index: 2; width: min(326px, 72vw); perspective: 1200px; }
+.phone-mockup-frame {
+  position: relative;
+  padding: 11px;
+  aspect-ratio: 0.515;
+  border: 2px solid #334155;
+  border-radius: 48px;
+  background: linear-gradient(145deg, #334155, #050910 12%, #050910 88%, #334155);
+  box-shadow: 0 45px 90px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(244, 230, 193, 0.15), inset 0 0 0 2px #020617;
+  transform: rotateY(-7deg) rotateX(2deg);
+  transition: transform 450ms cubic-bezier(.2,.8,.2,1);
+}
+.phone-mockup-frame:hover { transform: rotateY(0) rotateX(0) translateY(-8px); }
+.phone-speaker-notch { position: absolute; z-index: 6; top: 19px; left: 50%; width: 92px; height: 24px; transform: translateX(-50%); border-radius: 20px; background: #030712; box-shadow: inset 0 -1px 0 rgba(255,255,255,0.08); }
+.app-screen-preview { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 38px; background: #0f172a; }
+.app-screen-img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.04); }
+.app-screen-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 54px 19px 21px; background: linear-gradient(180deg, rgba(2,6,23,0.52), transparent 38%, rgba(2,6,23,0.2) 50%, rgba(2,6,23,0.96) 82%); }
+.app-screen-topbar { display: flex; justify-content: space-between; color: #fff; font: 800 10px 'Space Grotesk', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.app-gps-live { display: flex; align-items: center; gap: 5px; }
+.app-gps-live i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 12px #4ade80; animation: appGpsPulse 1.8s ease-in-out infinite; }
+.app-screen-category { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid rgba(246,94,1,0.4); border-radius: 999px; color: #ffb27d; background: rgba(246,94,1,0.13); font: 700 9px 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
+.app-screen-footbar h4 { margin: 12px 0 5px; color: #fff; font: 800 24px 'Montserrat', sans-serif; }
+.app-screen-footbar p { margin: 0; color: #cbd5e1; font: 500 12px 'Inter', sans-serif; }
+.app-screen-route { display: flex; align-items: center; gap: 13px; margin-top: 18px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font: 650 10px 'Inter', sans-serif; }
+.app-screen-route button { display: grid; width: 34px; height: 34px; margin-left: auto; place-items: center; border: 0; border-radius: 50%; color: #fff; background: #f65e01; box-shadow: 0 8px 20px rgba(246,94,1,0.4); }
+
+.app-floating-chip { position: absolute; z-index: 4; display: grid; grid-template-columns: 38px auto; column-gap: 10px; min-width: 174px; padding: 13px 15px; border: 1px solid rgba(244,230,193,0.2); border-radius: 16px; color: #fff; background: rgba(7,15,25,0.78); box-shadow: 0 20px 50px rgba(0,0,0,0.35); backdrop-filter: blur(18px); }
+.app-floating-chip > i { grid-row: 1 / 3; display: grid; width: 38px; height: 38px; place-items: center; border-radius: 12px; color: #f65e01; background: rgba(246,94,1,0.13); }
+.app-floating-chip span { color: #94a3b8; font: 700 9px 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
+.app-floating-chip strong { font: 700 12px 'Montserrat', sans-serif; }
+.app-floating-chip--gps { top: 16%; right: -2%; animation: appFloat 4s ease-in-out infinite; }
+.app-floating-chip--offline { bottom: 17%; left: -8%; animation: appFloat 4s 1.2s ease-in-out infinite; }
+
+@keyframes appFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes appOrbitPulse { 0%,100% { transform: scale(0.98); opacity: 0.65; } 50% { transform: scale(1.03); opacity: 1; } }
+@keyframes appGpsPulse { 50% { opacity: 0.45; transform: scale(0.72); } }
 
 /* ==========================================================================
    11. SECCIÓN 5: INSPECTOR INTERACTIVO DE LOS 17 TERRITORIOS
@@ -1413,6 +1606,12 @@
   .app-showcase-grid {
     grid-template-columns: 1fr;
   }
+  .app-info-col { text-align: center; }
+  .app-main-title,
+  .app-main-desc,
+  .app-trust-strip { margin-right: auto; margin-left: auto; }
+  .app-download-actions { justify-content: center; }
+  .app-mockup-col { min-height: 610px; }
   .services-chips-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1426,6 +1625,22 @@
 }
 
 @media (max-width: 768px) {
+  .app-baqueano-section { padding: 76px 0; }
+  .app-main-title { font-size: clamp(38px, 12vw, 56px); }
+  .app-main-desc { font-size: 15px; line-height: 1.65; }
+  .app-features-list { grid-template-columns: 1fr; }
+  .app-feature-row { min-height: 0; text-align: left; }
+  .app-trust-strip > div { padding: 14px 8px; }
+  .app-trust-strip strong { font-size: 19px; }
+  .app-trust-strip span { font-size: 9px; }
+  .app-download-actions .btn-hero-primary { width: 100%; padding-right: 16px; padding-left: 16px; }
+  .app-web-route-link { width: 100%; justify-content: center; }
+  .app-download-note { width: 100%; }
+  .app-mockup-col { min-height: 560px; }
+  .app-floating-chip { min-width: 148px; padding: 10px 12px; }
+  .app-floating-chip--gps { top: 12%; right: 0; }
+  .app-floating-chip--offline { bottom: 12%; left: 0; }
+  .app-orbit { width: 92vw; }
   .categories-grid-10 {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -1703,6 +1918,15 @@
   scrollbar-color: var(--baqueano-orange) rgba(255, 255, 255, 0.06);
 }
 
+.living-carousel-wrap.is-gallery-host {
+  overflow: visible;
+  padding-right: 0;
+  padding-left: 0;
+  scrollbar-width: none;
+}
+
+.living-carousel-wrap.is-gallery-host::-webkit-scrollbar { display: none; }
+
 .living-carousel-wrap::-webkit-scrollbar {
   height: 6px;
 }
@@ -1867,6 +2091,98 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 32px;
+}
+
+/* Galería continua compartida por experiencias y destinos destacados. */
+.infinite-gallery-shell {
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
+  padding-top: 54px;
+}
+
+.infinite-gallery-shell--living { margin-top: 0; }
+
+.infinite-gallery-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 12px 4px 24px;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%);
+}
+
+.infinite-gallery-viewport::-webkit-scrollbar { display: none; }
+
+.is-infinite-track {
+  display: flex;
+  grid-template-columns: none;
+  width: max-content;
+  min-width: max-content;
+  gap: 22px;
+  margin-top: 0;
+}
+
+.destinations-pro-grid.is-infinite-track .destination-card-pro {
+  flex: 0 0 clamp(290px, 29vw, 390px);
+  width: clamp(290px, 29vw, 390px);
+}
+
+.infinite-gallery-controls {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px;
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 999px;
+  background: rgba(7, 17, 29, 0.82);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(16px);
+}
+
+.infinite-gallery-controls button {
+  display: inline-flex;
+  min-width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 999px;
+  color: #F4E6C1;
+  background: rgba(255, 255, 255, 0.04);
+  font: 700 10px 'Space Grotesk', sans-serif;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.infinite-gallery-controls button:hover,
+.infinite-gallery-controls button:focus-visible {
+  border-color: rgba(246, 94, 1, 0.62);
+  color: #FFFFFF;
+  background: rgba(246, 94, 1, 0.16);
+  transform: translateY(-1px);
+}
+
+.infinite-gallery-shell.is-paused .infinite-gallery-controls [data-gallery-action="toggle"] {
+  border-color: rgba(246, 94, 1, 0.55);
+  color: #FFFFFF;
+  background: rgba(246, 94, 1, 0.16);
+}
+
+@media (max-width: 620px) {
+  .infinite-gallery-shell { padding-top: 48px; }
+  .infinite-gallery-controls { right: 50%; transform: translateX(50%); }
+  .infinite-gallery-controls button { height: 32px; min-width: 32px; }
+  .destinations-pro-grid.is-infinite-track .destination-card-pro { flex-basis: min(82vw, 320px); width: min(82vw, 320px); }
+  .infinite-gallery-viewport { mask-image: linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent); }
 }
 
 .destination-card-pro {

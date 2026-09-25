@@ -26,9 +26,78 @@
 // - initDownloadModal(): Diálogo de distribución directa del APK oficial para Android.
 // - initShareTools(): Herramientas de difusión comunitaria en WhatsApp y portapapeles.
 // - initSmoothScroll(): Desplazamiento fluido para hipervínculos internos.
+// - initDynamicDestinationCount(): Total publicado de destinos sincronizado con Firestore.
 // ============================================================================
 
 let currentGpsCoords = "Ubicación aún no disponible";
+
+// ============================================================================
+// CONTADOR GLOBAL DE DESTINOS PUBLICADOS
+// 🎯 POR QUÉ: impedir que el menú muestre una cifra obsoleta al crecer el catálogo.
+// ⚙️ CÓMO: escucha /places en tiempo real; si no hay red, usa catálogo local o caché.
+// 📦 QUÉ: actualiza insignia y descripción de Destinos en cada barra de navegación.
+// ============================================================================
+function initDynamicDestinationCount() {
+  const destinationLinks = [...document.querySelectorAll('.nav-dropdown-item[href$="destinos.html"]')];
+  if (!destinationLinks.length) return;
+
+  const cacheKey = 'baqueano_published_destinations_count';
+  let unsubscribe = null;
+
+  const renderCount = (rawCount) => {
+    const count = Number(rawCount);
+    if (!Number.isInteger(count) || count < 0) return;
+
+    destinationLinks.forEach((link) => {
+      const badge = link.querySelector('.nav-dd-badge');
+      const description = link.querySelector('.nav-dd-desc');
+      if (badge) {
+        badge.textContent = String(count);
+        badge.setAttribute('aria-label', `${count} destinos publicados`);
+      }
+      if (description) description.textContent = `${count} destinos y experiencias`;
+    });
+
+    try { localStorage.setItem(cacheKey, String(count)); } catch (_) {}
+  };
+
+  const localCards = document.querySelectorAll('.destinations-showcase-grid > .dest-card-pro').length;
+  let cachedCount = 0;
+  try { cachedCount = Number.parseInt(localStorage.getItem(cacheKey) || '0', 10); } catch (_) {}
+  if (localCards > 0) renderCount(localCards);
+  else if (cachedCount > 0) renderCount(cachedCount);
+  else {
+    destinationLinks.forEach((link) => {
+      const badge = link.querySelector('.nav-dd-badge');
+      const description = link.querySelector('.nav-dd-desc');
+      if (badge) badge.textContent = '…';
+      if (description) description.textContent = 'Destinos y experiencias';
+    });
+  }
+
+  const connectFirestore = (attempt = 0) => {
+    if (!window.firebase || typeof window.firebase.firestore !== 'function') {
+      if (attempt < 12) window.setTimeout(() => connectFirestore(attempt + 1), 250);
+      return;
+    }
+
+    try {
+      const query = window.firebase.firestore().collection('places').where('status', '==', 'published');
+      unsubscribe = query.onSnapshot((snapshot) => {
+        renderCount(snapshot.size);
+      }, (error) => {
+        console.warn('[Baqueano Navigation] Contador de destinos en modo local:', error.message);
+      });
+    } catch (error) {
+      console.warn('[Baqueano Navigation] No se pudo iniciar el contador:', error.message);
+    }
+  };
+
+  connectFirestore();
+  window.addEventListener('pagehide', () => {
+    if (typeof unsubscribe === 'function') unsubscribe();
+  }, { once: true });
+}
 
 function initRuntimeObservability() {
   if (window.__baqueanoObservabilityReady) return;
@@ -1044,6 +1113,7 @@ function initializeNavigationModules() {
   initNavbarQuickSearch();
   initMobileMenu();
   initActiveNavHighlight();
+  initDynamicDestinationCount();
   initSosModal();
   initDownloadModal();
   initAndroidReleaseDownload();
