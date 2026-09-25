@@ -4628,8 +4628,9 @@ img {
    
    ⚙️ CÓMO:
    - Menú de macro-categorías tipo pill-dock con Glassmorphism (blur 20px).
-   - Dropdown flotante con microinteracciones de chevrons y elevación suave.
-   - Pira dinámica de submenú (active-submenu-strip) que muestra opciones hijas.
+   - Los catálogos internos permanecen ocultos y alimentan un único panel ancho.
+   - Tira dinámica de submenú (active-submenu-strip) que muestra opciones hijas
+     sin superponer un segundo menú sobre el contenido ni duplicar controles.
    - Paleta oficial: #165D6F Petróleo Teal, #F65E01 Terracota, #F4E6C1 Arena Pinolera.
    
    📦 QUÉ:
@@ -4736,33 +4737,16 @@ img {
   transform: rotate(180deg);
 }
 
-/* Submenú Flotante Glassmorphism */
+/*
+ * Catálogo interno de subcategorías.
+ * POR QUÉ: su contenido también se replica en .active-submenu-strip; mostrar ambas
+ * superficies provocaba el menú duplicado y parcialmente tapado de la interfaz.
+ * CÓMO: permanece fuera del flujo visual, mientras JavaScript sigue consultando sus
+ * botones para construir el panel ancho, accesible y responsivo.
+ * QUÉ: fuente DOM no interactiva para los filtros de cada macro-categoría.
+ */
 .macro-submenu-dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.96);
-  min-width: 270px;
-  background: rgba(10, 15, 29, 0.95);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(246, 94, 1, 0.4);
-  border-radius: 18px;
-  padding: 0.85rem 1rem;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(22, 93, 111, 0.35);
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 100;
-}
-
-.macro-dropdown-wrapper:hover .macro-submenu-dropdown,
-.macro-dropdown-wrapper.open .macro-submenu-dropdown {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0) scale(1);
+  display: none;
 }
 
 .submenu-header-title {
@@ -5010,16 +4994,6 @@ img {
   .macro-nav-btn {
     padding: 0.52rem 0.95rem;
     font-size: 0.8rem;
-  }
-  .macro-submenu-dropdown {
-    left: 0;
-    transform: translateY(-10px) scale(0.96);
-    width: 100%;
-    min-width: 250px;
-  }
-  .macro-dropdown-wrapper:hover .macro-submenu-dropdown,
-  .macro-dropdown-wrapper.open .macro-submenu-dropdown {
-    transform: translateY(0) scale(1);
   }
 }
 
@@ -8526,7 +8500,21 @@ img {
    ?? QU?: correo, enlace directo, sede y horario con jerarqu?a y accesibilidad.
    ========================================================================== */
 .site-footer-pro .footer-columns-grid {
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/*
+ * ELIMINACIÓN DE TARJETAS SUPERIORES DEL FOOTER
+ * 🎯 POR QUÉ: la identidad repetida y el listado de módulos ocupaban una fila
+ * completa sin aportar una acción necesaria al cierre de cada página.
+ * ⚙️ CÓMO: se retiran del renderizado las dos columnas compartidas en todas
+ * las vistas y se conserva el contacto institucional en una sola columna fluida.
+ * 📦 QUÉ: elimina visualmente .footer-col-brand y .footer-col-links de los
+ * pies de página, tanto en escritorio como en tablet y móvil.
+ */
+.site-footer-pro .footer-col-brand,
+.site-footer-pro .footer-col-links {
+  display: none;
 }
 
 @media (max-width: 850px) {
