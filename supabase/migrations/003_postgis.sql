@@ -5,53 +5,42 @@
 -- - Dotar a Baqueano de consultas de proximidad geográfica de alto rendimiento
 --   (distancias exactas, búsqueda por radio en metros, destinos y cooperativas cercanas).
 -- - Evitar cálculos trigonométricos lentos e imprecisos en el navegador.
+-- - Cumplir con las directrices de seguridad de Supabase instalando extensiones
+--   en el esquema dedicado `extensions`, blindando `spatial_ref_sys` contra exposición pública.
 --
 -- ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
--- - Activa la extensión PostGIS nativa de PostgreSQL.
+-- - Activa PostGIS en el esquema `extensions` para aislar tablas internas del API PostgREST.
 -- - Añade columna `geom` (Point, SRID 4326) con índice espacial GIST.
 -- - Función trigger para sincronizar `geom` automáticamente cuando se crean o modifican
 --   las coordenadas `(latitude, longitude)`.
--- - Funciones RPC optimizadas `get_nearby_destinations` y `get_nearby_businesses` con `ST_DWithin` y `ST_DistanceSphere`.
+-- - Funciones RPC optimizadas `get_nearby_destinations` y `get_nearby_businesses` con `ST_DWithin` y `ST_Distance`.
+-- - Funciones configuradas con `SET search_path = public, extensions` para prevenir advertencias de mutabilidad.
 --
 -- 📦 3. QUÉ (WHAT / ENTIDADES CREADAS):
--- - Extensión `postgis`.
+-- - Extensión `postgis` en esquema `extensions`.
 -- - Columnas `geom` en `destinations`, `places` y `businesses`.
--- - Funciones de búsqueda geográfica por radio en metros.
+-- - Triggers `trg_sync_*_geom`.
+-- - Índices `idx_*_geom`.
+-- - Funciones RPC `get_nearby_destinations` y `get_nearby_businesses`.
 -- ============================================================================
 
-CREATE EXTENSION IF NOT EXISTS postgis;
-
--- Blindaje RLS defensivo para la tabla del sistema de PostGIS (resuelve advertencia de Supabase Advisor)
-DO $$
-BEGIN
-  BEGIN
-    ALTER TABLE IF EXISTS public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;
-    DROP POLICY IF EXISTS "Permitir lectura publica de spatial_ref_sys" ON public.spatial_ref_sys;
-    CREATE POLICY "Permitir lectura publica de spatial_ref_sys"
-      ON public.spatial_ref_sys FOR SELECT
-      USING (true);
-  EXCEPTION WHEN insufficient_privilege THEN
-    -- La tabla pertenece a supabase_admin; continuar sin interrumpir el despliegue
-    NULL;
-  END;
-END $$;
-
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA extensions;
 
 -- 1. COLUMNAS GEOGRÁFICAS
-ALTER TABLE public.destinations ADD COLUMN IF NOT EXISTS geom geometry(Point, 4326);
-ALTER TABLE public.places ADD COLUMN IF NOT EXISTS geom geometry(Point, 4326);
-ALTER TABLE public.businesses ADD COLUMN IF NOT EXISTS geom geometry(Point, 4326);
+ALTER TABLE public.destinations ADD COLUMN IF NOT EXISTS geom extensions.geometry(Point, 4326);
+ALTER TABLE public.places ADD COLUMN IF NOT EXISTS geom extensions.geometry(Point, 4326);
+ALTER TABLE public.businesses ADD COLUMN IF NOT EXISTS geom extensions.geometry(Point, 4326);
 
 -- 2. FUNCIÓN TRIGGER PARA ACTUALIZAR GEOMETRÍA DESDE LAT/LNG
 CREATE OR REPLACE FUNCTION public.sync_point_geometry()
 RETURNS TRIGGER AS $$
 BEGIN
   IF NEW.longitude IS NOT NULL AND NEW.latitude IS NOT NULL THEN
-    NEW.geom := ST_SetSRID(ST_MakePoint(NEW.longitude, NEW.latitude), 4326);
+    NEW.geom := extensions.ST_SetSRID(extensions.ST_MakePoint(NEW.longitude, NEW.latitude), 4326);
   END IF;
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = public, extensions;
 
 DROP TRIGGER IF EXISTS trg_sync_destinations_geom ON public.destinations;
 CREATE TRIGGER trg_sync_destinations_geom
@@ -91,9 +80,9 @@ RETURNS TABLE (
   distance_meters DOUBLE PRECISION
 ) AS $$
 DECLARE
-  center_point geometry;
+  center_point extensions.geometry;
 BEGIN
-  center_point := ST_SetSRID(ST_MakePoint(lng, lat), 4326);
+  center_point := extensions.ST_SetSRID(extensions.ST_MakePoint(lng, lat), 4326);
 
   RETURN QUERY
   SELECT
@@ -104,17 +93,17 @@ BEGIN
     d.longitude,
     d.cover_image,
     d.rating,
-    ST_Distance(d.geom::geography, center_point::geography) AS distance_meters
+    extensions.ST_Distance(d.geom::extensions.geography, center_point::extensions.geography) AS distance_meters
   FROM public.destinations d
   WHERE d.geom IS NOT NULL
     AND d.status = 'published'
     AND d.deleted_at IS NULL
     AND (filter_category IS NULL OR d.category ILIKE '%' || filter_category || '%')
-    AND ST_DWithin(d.geom::geography, center_point::geography, radius_meters)
+    AND extensions.ST_DWithin(d.geom::extensions.geography, center_point::extensions.geography, radius_meters)
   ORDER BY distance_meters ASC
   LIMIT 50;
 END;
-$$ LANGUAGE plpgsql STABLE;
+$$ LANGUAGE plpgsql STABLE SET search_path = public, extensions;
 
 -- 5. FUNCIÓN RPC: OBTENER NEGOCIOS CERCANOS
 CREATE OR REPLACE FUNCTION public.get_nearby_businesses(
@@ -136,9 +125,9 @@ RETURNS TABLE (
   distance_meters DOUBLE PRECISION
 ) AS $$
 DECLARE
-  center_point geometry;
+  center_point extensions.geometry;
 BEGIN
-  center_point := ST_SetSRID(ST_MakePoint(lng, lat), 4326);
+  center_point := extensions.ST_SetSRID(extensions.ST_MakePoint(lng, lat), 4326);
 
   RETURN QUERY
   SELECT
@@ -151,14 +140,14 @@ BEGIN
     b.latitude,
     b.longitude,
     b.verified,
-    ST_Distance(b.geom::geography, center_point::geography) AS distance_meters
+    extensions.ST_Distance(b.geom::extensions.geography, center_point::extensions.geography) AS distance_meters
   FROM public.businesses b
   WHERE b.geom IS NOT NULL
     AND b.verified = true
     AND b.deleted_at IS NULL
     AND (filter_category IS NULL OR b.category ILIKE '%' || filter_category || '%')
-    AND ST_DWithin(b.geom::geography, center_point::geography, radius_meters)
+    AND extensions.ST_DWithin(b.geom::extensions.geography, center_point::extensions.geography, radius_meters)
   ORDER BY distance_meters ASC
   LIMIT 50;
 END;
-$$ LANGUAGE plpgsql STABLE;
+$$ LANGUAGE plpgsql STABLE SET search_path = public, extensions;

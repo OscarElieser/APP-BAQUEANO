@@ -92,4 +92,5 @@ BEGIN
   ORDER BY kd.embedding <=> query_embedding ASC
   LIMIT match_count;
 END;
-$$ LANGUAGE plpgsql STABLE;
+$$ LANGUAGE plpgsql STABLE SET search_path = public, extensions;
+
