@@ -245,27 +245,46 @@
     const { palette } = theme;
     const root = document.documentElement;
 
+    // 1. Tokens de Identidad Oficial Baqueano (Globales en toda la web)
+    root.style.setProperty('--baqueano-primary', palette.primary);
+    root.style.setProperty('--baqueano-orange', palette.terracotta);
+    root.style.setProperty('--baqueano-cream', palette.goldLight);
+    root.style.setProperty('--baqueano-night', palette.background);
+    root.style.setProperty('--baqueano-green', palette.primaryLight);
+
+    // 2. Tokens de paleta primaria (Teal / Primario)
     root.style.setProperty('--petroleo-teal', palette.primary);
     root.style.setProperty('--petroleo-light', palette.primaryLight);
     root.style.setProperty('--petroleo-dark', palette.primaryDark);
     root.style.setProperty('--petroleo-glow', palette.primaryLight);
 
+    // 3. Tokens de acento y fuego (Terracota / Naranja / Acento)
     root.style.setProperty('--terracotta', palette.terracotta);
     root.style.setProperty('--terracotta-light', palette.terracottaLight);
     root.style.setProperty('--terracotta-dark', palette.terracottaDark);
     root.style.setProperty('--terracotta-glow', palette.terracottaLight);
 
+    // 4. Tokens de oro, arena y acentos cálidos
     root.style.setProperty('--arena-pinolera', palette.goldLight);
+    root.style.setProperty('--arena-light', palette.goldLight);
     root.style.setProperty('--oro-noble', palette.gold);
     root.style.setProperty('--oro-light', palette.goldLight);
+    root.style.setProperty('--text-cream', palette.goldLight);
 
+    // 5. Fondos y superficies del sistema
     root.style.setProperty('--bg-space', palette.background);
     root.style.setProperty('--bg-dark', palette.surface);
     root.style.setProperty('--bg-surface', palette.surfaceElevated);
+    root.style.setProperty('--bg-card', `rgba(${hexToRgb(palette.surface)}, 0.85)`);
+    root.style.setProperty('--bg-card-hover', `rgba(${hexToRgb(palette.primary)}, 0.3)`);
+    root.style.setProperty('--bg-glass', `rgba(${hexToRgb(palette.surface)}, 0.75)`);
+    root.style.setProperty('--bg-glass-strong', `rgba(${hexToRgb(palette.background)}, 0.92)`);
 
-    root.style.setProperty('--border-glow', `rgba(${hexToRgb(palette.terracotta)}, 0.45)`);
-    root.style.setProperty('--border-teal', `rgba(${hexToRgb(palette.primaryLight)}, 0.35)`);
+    // 6. Bordes y resplandores
+    root.style.setProperty('--border-glow', `rgba(${hexToRgb(palette.terracotta)}, 0.5)`);
+    root.style.setProperty('--border-teal', `rgba(${hexToRgb(palette.primaryLight)}, 0.4)`);
 
+    // 7. Gradientes dinámicos del sistema
     root.style.setProperty(
       '--grad-sunset',
       `linear-gradient(135deg, ${palette.terracotta} 0%, ${palette.terracottaLight} 50%, ${palette.goldLight} 100%)`
@@ -278,6 +297,9 @@
       '--grad-cyber',
       `linear-gradient(135deg, ${palette.primary} 0%, ${palette.terracotta} 50%, ${palette.gold} 100%)`
     );
+
+    // 8. Atributo global para selectores CSS avanzados
+    root.setAttribute('data-theme', themeId);
   }
 
   function hexToRgb(hex) {
@@ -299,11 +321,18 @@
   }
 
   /**
-   * Inyecta el botón en la barra de navegación (.nav-actions-right)
+   * Inyecta o enlaza el botón en la barra de navegación (.nav-actions-right)
    */
   function injectNavbarButton() {
+    const existing = document.getElementById('navThemeSwitcherBtn') || document.querySelector('.nav-theme-btn');
+    if (existing) {
+      existing.removeEventListener('click', openModal);
+      existing.addEventListener('click', openModal);
+      return;
+    }
+
     const navActionsRight = document.querySelector('.nav-actions-right');
-    if (!navActionsRight || navActionsRight.querySelector('.nav-theme-btn')) return;
+    if (!navActionsRight) return;
 
     const themeBtn = document.createElement('button');
     themeBtn.className = 'nav-theme-btn';
@@ -327,25 +356,13 @@
   }
 
   /**
-   * Inyecta el botón flotante en la esquina inferior izquierda
+   * Oculta el lanzador flotante: la paleta solo sale al tocar el botón Tema en el navbar
    */
   function injectFloatingTrigger() {
-    if (document.getElementById('baqFloatingThemeBtn')) return;
-
-    const floatBtn = document.createElement('button');
-    floatBtn.className = 'baq-theme-float-btn';
-    floatBtn.id = 'baqFloatingThemeBtn';
-    floatBtn.type = 'button';
-    floatBtn.title = 'Paletas de Color de Alta Gama';
-    floatBtn.setAttribute('aria-label', 'Abrir catálogo de paletas de color');
-    floatBtn.innerHTML = `
-      <span class="float-icon-box" aria-hidden="true"><i class="fa-solid fa-palette"></i></span>
-      <span class="float-label">Paleta</span>
-      <span class="float-badge">Pro</span>
-    `;
-
-    floatBtn.addEventListener('click', openModal);
-    document.body.appendChild(floatBtn);
+    const existing = document.getElementById('baqFloatingThemeBtn');
+    if (existing) {
+      existing.remove();
+    }
   }
 
   /**
@@ -496,9 +513,9 @@
   }
 
   /**
-   * Aplica un tema seleccionado y guarda el estado
+   * Aplica un tema seleccionado, guarda el estado y esconde el modal
    */
-  function applyTheme(themeId) {
+  function applyTheme(themeId, autoClose = true) {
     const theme = THEMES_CATALOG.find((t) => t.themeId === themeId);
     if (!theme) return;
 
@@ -511,6 +528,13 @@
 
     renderCards(document.querySelector('.baq-theme-filter-pill.is-active')?.dataset.category || 'all');
     showToast(`Paleta activada: ${theme.name}`);
+
+    // Esconde el modal automáticamente tras seleccionar el tema
+    if (autoClose) {
+      setTimeout(() => {
+        closeModal();
+      }, 350);
+    }
   }
 
   /**

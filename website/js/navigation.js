@@ -517,6 +517,79 @@ window.toggleFavoriteReal = async function(placeId, btnElement) {
 };
 
 /**
+ * 🧭 Buscador Rápido Desplegable en el Menú Superior
+ * POR QUÉ: Permite buscar destinos y atractivos desde la lupa del menú sin estorbar en el contenido central.
+ * CÓMO: Abre un dropdown glassmorphic anclado a la lupa del navbar con autofocus, control ARIA y cierre con Escape/click outside.
+ * QUÉ: Alternancia de visibilidad, autofocus automático y enlaces rápidos a categorías.
+ */
+function initNavbarQuickSearch() {
+  const searchWrap = document.getElementById('navSearchWrap');
+  const searchBtn = document.getElementById('navSearchBtn');
+  const dropdown = document.getElementById('navSearchDropdown');
+  const searchInput = document.getElementById('navSearchInput');
+  const closeBtn = document.getElementById('navSearchCloseBtn');
+
+  if (!searchBtn || !dropdown) return;
+
+  function openDropdown() {
+    dropdown.classList.add('is-open');
+    dropdown.removeAttribute('hidden');
+    dropdown.setAttribute('aria-hidden', 'false');
+    searchBtn.setAttribute('aria-expanded', 'true');
+    searchBtn.classList.add('active');
+    setTimeout(() => {
+      if (searchInput) searchInput.focus();
+    }, 80);
+  }
+
+  function closeDropdown() {
+    dropdown.classList.remove('is-open');
+    dropdown.setAttribute('aria-hidden', 'true');
+    searchBtn.setAttribute('aria-expanded', 'false');
+    searchBtn.classList.remove('active');
+  }
+
+  searchBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = dropdown.classList.contains('is-open');
+    if (isOpen) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeDropdown();
+      searchBtn.focus();
+    });
+  }
+
+  // Prevenir que clics dentro del dropdown lo cierren
+  dropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    if (searchWrap && !searchWrap.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  // Cerrar con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdown.classList.contains('is-open')) {
+      closeDropdown();
+      searchBtn.focus();
+    }
+  });
+}
+
+/**
  * Inicializa la telemetría en vivo, seguidor de luz ambiental y micro-interacciones del footer táctico futurista.
  */
 function initDynamicFooter() {
@@ -968,6 +1041,7 @@ function initializeNavigationModules() {
   buildAboutDropdown();
   initNavbarScroll();
   initDynamicNavbar();
+  initNavbarQuickSearch();
   initMobileMenu();
   initActiveNavHighlight();
   initSosModal();
