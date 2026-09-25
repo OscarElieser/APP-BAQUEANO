@@ -21,12 +21,21 @@
 
 CREATE EXTENSION IF NOT EXISTS postgis;
 
--- Blindaje RLS para la tabla del sistema de PostGIS (resuelve advertencia crítica de Supabase Advisor)
-ALTER TABLE IF EXISTS public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS "Permitir lectura publica de spatial_ref_sys" ON public.spatial_ref_sys;
-CREATE POLICY "Permitir lectura publica de spatial_ref_sys"
-  ON public.spatial_ref_sys FOR SELECT
-  USING (true);
+-- Blindaje RLS defensivo para la tabla del sistema de PostGIS (resuelve advertencia de Supabase Advisor)
+DO $$
+BEGIN
+  BEGIN
+    ALTER TABLE IF EXISTS public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;
+    DROP POLICY IF EXISTS "Permitir lectura publica de spatial_ref_sys" ON public.spatial_ref_sys;
+    CREATE POLICY "Permitir lectura publica de spatial_ref_sys"
+      ON public.spatial_ref_sys FOR SELECT
+      USING (true);
+  EXCEPTION WHEN insufficient_privilege THEN
+    -- La tabla pertenece a supabase_admin; continuar sin interrumpir el despliegue
+    NULL;
+  END;
+END $$;
+
 
 -- 1. COLUMNAS GEOGRÁFICAS
 ALTER TABLE public.destinations ADD COLUMN IF NOT EXISTS geom geometry(Point, 4326);
