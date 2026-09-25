@@ -7,14 +7,14 @@
 // evitando copiar bloques HTML extensos y propensos a quedar desalineados.
 //
 // ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// Un catálogo declarativo valida cada registro, omite identificadores repetidos
-// e inserta tarjetas con la misma estructura semántica del resto del sitio.
-// Cada ficha incluye coordenadas en su botón de ruta para que baqueano-map.js la
-// descubra y cree su pin. Todo se ejecuta al final del DOM, sin trabajo pesado.
+// Primero normaliza las fichas heredadas y las mueve como hijas directas de la
+// cuadrícula; esto repara cierres HTML antiguos que el navegador interpretaba
+// como tarjetas anidadas. Luego valida e inserta el catálogo complementario.
+// Cada ficha incluye coordenadas para que baqueano-map.js cree su pin.
 //
 // 📦 QUÉ (WHAT / FUNCIONALIDAD & ENTREGABLES):
-// Seis volcanes oficiales y Reserva Privada Kilimanjaro, con imagen, ubicación,
-// descripción, datos orientativos, acciones, categoría y coordenadas de mapa.
+// Cuadrícula plana y ordenada, seis volcanes oficiales y Reserva Privada
+// Kilimanjaro, con imagen, datos, acciones, categoría y coordenadas de mapa.
 // ============================================================================
 (function () {
   'use strict';
@@ -69,6 +69,14 @@
 
   const grid = document.querySelector('.destinations-showcase-grid');
   if (!grid) return;
+
+  // Algunos bloques históricos tienen cierres incompletos. El DOM del navegador
+  // sigue siendo recuperable: promover cada tarjeta a hija directa conserva su
+  // orden documental y garantiza que CSS Grid controle todas por igual.
+  Array.from(grid.querySelectorAll('.dest-card-pro')).forEach((card) => {
+    if (card.parentElement !== grid) grid.appendChild(card);
+  });
+
   additions.forEach((place) => {
     if (!document.querySelector(`.dest-card-pro[data-id="${place.id}"]`)) {
       grid.insertAdjacentHTML('beforeend', cardTemplate(place));

@@ -8665,3 +8665,27 @@ img {
 .legal-article-content ul { margin:.8rem 0 1rem; padding-left:1.25rem; color:var(--text-muted); }
 .legal-article-content li { margin:.4rem 0; line-height:1.55; }
 .legal-review-note { margin:2rem 0; padding:1.15rem 1.3rem; border-left:4px solid #F65E01; border-radius:0 14px 14px 0; background:rgba(246,94,1,.1); color:#F4E6C1; line-height:1.6; }
+
+/* ==========================================================================
+   🎯 POR QUÉ: Evitar filas incompletas y tarjetas excesivamente anchas en tablet.
+   ⚙️ CÓMO: Breakpoints finales específicos, con prioridad por orden CSS.
+   📦 QUÉ: 3 columnas en escritorio/tablet horizontal, 2 en tablet vertical
+      y 1 en móvil, conservando ancho y altura uniformes por fila.
+   ========================================================================== */
+@media (min-width: 900px) {
+  .destinations-showcase-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 681px) and (max-width: 899px) {
+  .destinations-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .destinations-showcase-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
