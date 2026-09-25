@@ -1444,3 +1444,1203 @@
     height: 160px;
   }
 }
+
+
+/* ==========================================================================
+   14. REDISEÑO DEFINITIVO DE ALTA GAMA — JERARQUÍA DE 16 SECCIONES
+   ========================================================================== */
+
+/* ─── 01. HERO CINEMATOGRÁFICO DIVIDIDO (55% / 45%) ─── */
+.hero-split-cinematic {
+  position: relative;
+  min-height: 94vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(90px, 12vh, 130px) 0 clamp(48px, 6vh, 80px);
+  background: radial-gradient(circle at 70% 35%, rgba(22, 93, 111, 0.45) 0%, rgba(13, 27, 42, 0.95) 65%, #070B14 100%);
+  overflow: hidden;
+}
+
+.hero-petroglyph-texture {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(244, 230, 193, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-cinematic-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  width: 100%;
+}
+
+.hero-cinematic-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-manifesto-subtle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--baqueano-cream);
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  font-style: italic;
+  opacity: 0.92;
+  margin-top: -4px;
+}
+
+.hero-manifesto-subtle i {
+  color: var(--baqueano-orange);
+}
+
+.hero-cinematic-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-phone-stage {
+  position: relative;
+  width: 100%;
+  max-width: 330px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-phone-wrap {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(22, 93, 111, 0.35);
+  border-radius: 44px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero-phone-wrap:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(246, 94, 1, 0.3);
+}
+
+.hero-phone-ambient-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 380px;
+  height: 520px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(246, 94, 1, 0.22) 0%, rgba(22, 93, 111, 0.2) 40%, transparent 75%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+
+.hero-scroll-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: rgba(244, 230, 193, 0.75);
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-scroll-link:hover {
+  color: var(--baqueano-orange);
+  transform: translateY(2px);
+}
+
+.indicator-arrow {
+  animation: bounceIndicator 2s infinite ease-in-out;
+}
+
+@keyframes bounceIndicator {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ─── 02. BUSCADOR Y CHIPS EXPANDIBLES ─── */
+.chip-toggle-all {
+  background: rgba(246, 94, 1, 0.18) !important;
+  border-color: rgba(246, 94, 1, 0.45) !important;
+  color: var(--baqueano-cream) !important;
+  cursor: pointer;
+}
+
+.chip-toggle-all:hover {
+  background: var(--baqueano-orange) !important;
+  color: #fff !important;
+}
+
+.home-search-chips-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(244, 230, 193, 0.15);
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── 03. QUÉ QUERÉS VIVIR (CARRUSEL HORIZONTAL) ─── */
+.experiences-living-section {
+  padding: clamp(60px, 8vh, 100px) 0;
+  background: #0B1320;
+  position: relative;
+}
+
+.living-carousel-wrap {
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 4px 20px 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--baqueano-orange) rgba(255, 255, 255, 0.06);
+}
+
+.living-carousel-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+.living-carousel-wrap::-webkit-scrollbar-thumb {
+  background: var(--baqueano-orange);
+  border-radius: 3px;
+}
+
+.living-cards-carousel {
+  display: flex;
+  gap: 22px;
+  min-width: min-content;
+}
+
+.living-card {
+  flex: 0 0 320px;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.living-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65), 0 0 25px rgba(22, 93, 111, 0.3);
+  border-color: rgba(246, 94, 1, 0.45);
+}
+
+.living-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.living-card:hover .living-card-img {
+  transform: scale(1.06);
+}
+
+.living-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 11, 20, 0.1) 0%, rgba(13, 27, 42, 0.6) 45%, rgba(7, 11, 20, 0.96) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+  gap: 10px;
+}
+
+.living-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--baqueano-cream);
+  background: rgba(246, 94, 1, 0.25);
+  border: 1px solid rgba(246, 94, 1, 0.5);
+  padding: 4px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.living-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.living-card-desc {
+  font-size: 13px;
+  color: rgba(244, 230, 193, 0.85);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.living-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--baqueano-orange);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 4px;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.living-card-link:hover {
+  color: #fff;
+  gap: 10px;
+}
+
+.activities-substrip {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(244, 230, 193, 0.1);
+  border-radius: 16px;
+  padding: 12px 18px;
+}
+
+.substrip-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--baqueano-cream);
+  white-space: nowrap;
+}
+
+.substrip-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.substrip-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.substrip-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(22, 93, 111, 0.2);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.substrip-chip:hover {
+  background: rgba(246, 94, 1, 0.25);
+  border-color: var(--baqueano-orange);
+  color: var(--baqueano-cream);
+  transform: translateY(-2px);
+}
+
+/* ─── 04. DESTINOS QUE INSPIRAN ─── */
+.destinations-pro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.destination-card-pro {
+  background: rgba(13, 27, 42, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.destination-card-pro:hover {
+  transform: translateY(-6px);
+  border-color: rgba(246, 94, 1, 0.45);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.65), 0 0 25px rgba(22, 93, 111, 0.25);
+}
+
+.dest-card-media-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.dest-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.destination-card-pro:hover .dest-card-img {
+  transform: scale(1.08);
+}
+
+.dest-card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(7, 11, 20, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  color: var(--baqueano-cream);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.dest-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.dest-card-territory {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--baqueano-orange);
+  letter-spacing: 0.5px;
+}
+
+.dest-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.dest-card-desc {
+  font-size: 13px;
+  color: rgba(244, 230, 193, 0.8);
+  line-height: 1.45;
+  margin: 0 0 12px 0;
+  flex: 1;
+}
+
+.dest-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid rgba(244, 230, 193, 0.1);
+}
+
+.dest-card-type {
+  font-size: 12px;
+  color: var(--baqueano-cream);
+  opacity: 0.85;
+}
+
+.dest-card-cta {
+  color: var(--baqueano-orange);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease;
+}
+
+.dest-card-cta:hover {
+  gap: 8px;
+  color: #fff;
+}
+
+.destinations-pro-cta-wrap {
+  text-align: center;
+  margin-top: 36px;
+}
+
+/* ─── 05. MAPA VIVO UNIFICADO [ MAPA | SATÉLITE | 3D ] ─── */
+.unified-map-section {
+  position: relative;
+  padding: clamp(60px, 8vh, 100px) 0;
+}
+
+.map-unified-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(7, 11, 20, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 30px;
+  padding: 4px;
+}
+
+.map-mode-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: transparent;
+  border: none;
+  border-radius: 24px;
+  color: rgba(244, 230, 193, 0.75);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.map-mode-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.map-mode-tab.active {
+  background: linear-gradient(135deg, var(--baqueano-primary) 0%, rgba(22, 93, 111, 0.85) 100%);
+  color: #fff;
+  border: 1px solid rgba(246, 94, 1, 0.45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(22, 93, 111, 0.35);
+}
+
+.map-view-pane {
+  display: none;
+}
+
+.map-view-pane.is-active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ─── 06. BAQUEANO DIGITAL IA & PLANIFICADOR ─── */
+.digital-ai-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.route-builder-collapse-wrap {
+  animation: fadeIn 0.3s ease;
+}
+
+/* ─── 07. NICARAGUA VIVA (3 PILARES) ─── */
+.culture-pillars-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.culture-pillar-card {
+  background: rgba(13, 27, 42, 0.65);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.culture-pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(246, 94, 1, 0.45);
+}
+
+.pillar-media-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.pillar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.culture-pillar-card:hover .pillar-img {
+  transform: scale(1.06);
+}
+
+.pillar-badge-top {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(7, 11, 20, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  color: var(--baqueano-cream);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pillar-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.pillar-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.pillar-desc {
+  font-size: 13.5px;
+  color: rgba(244, 230, 193, 0.85);
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+  flex: 1;
+}
+
+.pillar-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-pillar-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(246, 94, 1, 0.2);
+  border: 1px solid rgba(246, 94, 1, 0.45);
+  border-radius: 20px;
+  color: var(--baqueano-cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-pillar-action:hover {
+  background: var(--baqueano-orange);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-pillar-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 20px;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-pillar-primary:hover {
+  background: var(--baqueano-primary);
+  border-color: var(--baqueano-cream);
+  transform: translateY(-2px);
+}
+
+/* ─── 08. SERVICIOS PARA TU VIAJE ─── */
+.services-travel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.service-travel-card {
+  background: rgba(13, 27, 42, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 18px;
+  padding: 22px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.service-travel-card:hover {
+  transform: translateY(-5px);
+  background: rgba(22, 93, 111, 0.25);
+  border-color: rgba(246, 94, 1, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.service-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(246, 94, 1, 0.15);
+  color: var(--baqueano-orange);
+  font-size: 18px;
+}
+
+.service-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.service-desc {
+  font-size: 12.5px;
+  color: rgba(244, 230, 193, 0.75);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ─── 09. LOCALES ALIADOS (FILTROS) ─── */
+.allies-filters-strip {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.ally-filter-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(7, 11, 20, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  color: rgba(244, 230, 193, 0.8);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ally-filter-chip:hover {
+  color: #fff;
+  border-color: var(--baqueano-cream);
+}
+
+.ally-filter-chip.active {
+  background: var(--baqueano-orange);
+  border-color: var(--baqueano-orange);
+  color: #fff;
+}
+
+/* ─── 10. NICARAGUA EN CIFRAS ─── */
+.nicaragua-stats-section {
+  padding: clamp(60px, 8vh, 100px) 0;
+  background: #080E18;
+}
+
+.stats-counter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.stat-counter-card {
+  background: rgba(13, 27, 42, 0.65);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 18px;
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.stat-counter-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(246, 94, 1, 0.45);
+}
+
+.stat-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(22, 93, 111, 0.3);
+  color: var(--baqueano-cream);
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.stat-number-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  color: var(--baqueano-orange);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-plus {
+  font-size: 24px;
+  color: var(--baqueano-cream);
+  margin-left: 2px;
+}
+
+.stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  margin: 4px 0 0 0;
+}
+
+.stat-meta {
+  font-size: 11px;
+  color: rgba(244, 230, 193, 0.65);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* ─── 11. IMPACTO Y PROGRESSIVE DISCLOSURE ─── */
+.impacts-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.impact-interactive-card {
+  background: rgba(13, 27, 42, 0.6);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.impact-interactive-card:hover {
+  border-color: rgba(246, 94, 1, 0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.impact-interactive-card.is-open {
+  border-color: var(--baqueano-orange);
+  background: rgba(22, 93, 111, 0.2);
+}
+
+.impact-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.impact-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(246, 94, 1, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--baqueano-orange);
+  font-size: 15px;
+}
+
+.impact-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.impact-thesis {
+  font-size: 12.5px;
+  color: rgba(244, 230, 193, 0.85);
+  line-height: 1.45;
+  margin: 0;
+  flex: 1;
+}
+
+.btn-impact-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 10px;
+  color: var(--baqueano-cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-impact-toggle:hover {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: var(--baqueano-orange);
+}
+
+.impact-card-drawer {
+  animation: fadeIn 0.3s ease;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(244, 230, 193, 0.15);
+}
+
+.impact-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.impact-details-list li {
+  font-size: 11.5px;
+  color: rgba(244, 230, 193, 0.8);
+  line-height: 1.35;
+  display: flex;
+  gap: 6px;
+}
+
+.impact-details-list li i {
+  color: #10B981;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+/* ─── 15. RED DE ANFITRIONES & BOLETÍN ─── */
+.hosts-network-section {
+  padding: clamp(50px, 7vh, 90px) 0;
+  background: #070B14;
+}
+
+.compact-newsletter-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 36px;
+  padding: 20px 28px;
+  background: rgba(13, 27, 42, 0.65);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 18px;
+}
+
+.compact-nl-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.compact-nl-info i {
+  font-size: 26px;
+  color: var(--baqueano-orange);
+}
+
+.compact-nl-info strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.compact-nl-info p {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: rgba(244, 230, 193, 0.7);
+}
+
+.compact-nl-form {
+  display: flex;
+  gap: 8px;
+  min-width: 340px;
+}
+
+.compact-nl-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(7, 11, 20, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.compact-nl-input:focus {
+  outline: none;
+  border-color: var(--baqueano-orange);
+}
+
+.compact-nl-btn {
+  padding: 10px 18px;
+  background: var(--baqueano-orange);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.compact-nl-btn:hover {
+  background: #ff6f1e;
+  transform: translateY(-2px);
+}
+
+/* ─── 16. CTA FINAL ─── */
+.final-cta-section {
+  position: relative;
+  padding: clamp(90px, 14vh, 140px) 0;
+  background: radial-gradient(circle at 50% 40%, rgba(22, 93, 111, 0.45) 0%, rgba(13, 27, 42, 0.95) 70%, #070B14 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.final-cta-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(244, 230, 193, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.final-cta-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.final-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(246, 94, 1, 0.18);
+  border: 1px solid rgba(246, 94, 1, 0.45);
+  border-radius: 30px;
+  color: var(--baqueano-cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+}
+
+.final-cta-headline {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  margin: 0 0 16px 0;
+}
+
+.final-cta-subtext {
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: rgba(244, 230, 193, 0.85);
+  max-width: 680px;
+  line-height: 1.55;
+  margin: 0 0 28px 0;
+}
+
+.final-cta-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.final-cta-bot-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 30px;
+  color: var(--baqueano-cream);
+  font-size: 12.5px;
+}
+
+.final-bot-avatar {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* ─── RESPONSIVE BREAKPOINTS PARA LAS 16 SECCIONES ─── */
+@media (max-width: 1200px) {
+  .destinations-pro-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-counter-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .impacts-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .services-travel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-cinematic-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-cinematic-left {
+    align-items: center;
+  }
+  .hero-actions-strip {
+    justify-content: center;
+  }
+  .culture-pillars-trio {
+    grid-template-columns: 1fr;
+  }
+  .compact-newsletter-wrap {
+    flex-direction: column;
+    text-align: center;
+  }
+  .compact-nl-info {
+    flex-direction: column;
+  }
+  .compact-nl-form {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .destinations-pro-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-counter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .impacts-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .services-travel-grid {
+    grid-template-columns: 1fr;
+  }
+  .living-card {
+    flex: 0 0 280px;
+    height: 380px;
+  }
+  .map-unified-switcher {
+    width: 100%;
+    flex-direction: column;
+    border-radius: 18px;
+  }
+  .map-mode-tab {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-counter-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-main-title {
+    font-size: 26px;
+  }
+  .hero-main-subtitle {
+    font-size: 14px;
+  }
+  .compact-nl-form {
+    flex-direction: column;
+  }
+  .compact-nl-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
