@@ -107,7 +107,13 @@ window.BaqueanoMap = (function() {
     ometepe: { center: [11.5200, -85.5500], zoom: 11, label: '🌋 Isla de Ometepe' },
     norte: { center: [13.2500, -86.1000], zoom: 9, label: '🌲 Selva Negra & Somoto' },
     caribe: { center: [12.1720, -83.0580], zoom: 12, label: '🏝️ Corn Island' },
-    riosanjuan: { center: [11.0180, -84.3970], zoom: 11, label: '🛶 Río San Juan' }
+    riosanjuan: { center: [11.0180, -84.3970], zoom: 11, label: '🛶 Río San Juan' },
+    leon: { center: [12.4370, -86.8790], zoom: 11, label: '🏖️ León & Las Peñitas' },
+    chinandega: { center: [12.6500, -87.2700], zoom: 10, label: '🌊 Chinandega & Playas' },
+    carazo: { center: [11.6900, -86.3550], zoom: 11, label: '🌊 Carazo & Playas' },
+    matagalpa: { center: [12.9250, -85.9200], zoom: 11, label: '☕ Matagalpa & Montañas' },
+    jinotega: { center: [13.2500, -85.7800], zoom: 10, label: '🌲 Jinotega & Cascadas' },
+    segovias: { center: [13.5600, -86.4900], zoom: 10, label: '⛰️ Madriz & N. Segovia' }
   };
 
   // --------------------------------------------------------------------------
@@ -322,6 +328,11 @@ window.BaqueanoMap = (function() {
       'gastronomia': ['gastronomia'],
       'museo': ['museos', 'museo'],
       'museos': ['museos', 'museo'],
+      'playas': ['playas', 'bahias'],
+      'rios': ['rios'],
+      'volcanes': ['volcanes'],
+      'selva': ['selva'],
+      'islas': ['islas'],
       'naturaleza-all': ['playas', 'bahias', 'rios', 'volcanes', 'selva', 'islas'],
       'estadias-all': ['hoteles', 'hostales', 'hospedajes', 'casas-alquiler'],
       'cultura-all': ['gastronomia', 'museos', 'discotecas']
@@ -521,6 +532,12 @@ window.BaqueanoMap = (function() {
         <button type="button" class="map-region-btn" data-region="norte">🌲 Norte</button>
         <button type="button" class="map-region-btn" data-region="caribe">🏝️ Corn Island</button>
         <button type="button" class="map-region-btn" data-region="riosanjuan">🛶 Río S. Juan</button>
+        <button type="button" class="map-region-btn" data-region="leon">🏖️ León</button>
+        <button type="button" class="map-region-btn" data-region="chinandega">🌊 Chinandega</button>
+        <button type="button" class="map-region-btn" data-region="carazo">🌊 Carazo</button>
+        <button type="button" class="map-region-btn" data-region="matagalpa">☕ Matagalpa</button>
+        <button type="button" class="map-region-btn" data-region="jinotega">🌲 Jinotega</button>
+        <button type="button" class="map-region-btn" data-region="segovias">⛰️ Las Segovias</button>
       </div>
 
       <!-- Filtro por Experiencia & Servicios -->
@@ -529,8 +546,20 @@ window.BaqueanoMap = (function() {
         <button type="button" class="map-category-btn active" data-category="all" title="Ver todos los destinos">
           <i class="fa-solid fa-border-all"></i> Todos
         </button>
-        <button type="button" class="map-category-btn" data-category="playa" title="Playas y Costas del Pacífico y Caribe">
-          <i class="fa-solid fa-umbrella-beach"></i> Playa
+        <button type="button" class="map-category-btn" data-category="playas" title="Playas y Costas del Pacífico y Caribe">
+          <i class="fa-solid fa-umbrella-beach"></i> Playas
+        </button>
+        <button type="button" class="map-category-btn" data-category="rios" title="Ríos, Cascadas y Lagunas">
+          <i class="fa-solid fa-water"></i> Ríos & Cascadas
+        </button>
+        <button type="button" class="map-category-btn" data-category="volcanes" title="Volcanes y Senderos">
+          <i class="fa-solid fa-volcano"></i> Volcanes
+        </button>
+        <button type="button" class="map-category-btn" data-category="selva" title="Reservas Naturales y Bosques">
+          <i class="fa-solid fa-tree"></i> Reservas
+        </button>
+        <button type="button" class="map-category-btn" data-category="islas" title="Islas y Archipiélagos">
+          <i class="fa-solid fa-fish"></i> Islas
         </button>
         <button type="button" class="map-category-btn" data-category="bares" title="Bares, Discotecas y Vida Nocturna">
           <i class="fa-solid fa-martini-glass"></i> Bares

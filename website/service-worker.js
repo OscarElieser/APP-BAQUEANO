@@ -9,7 +9,7 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-public-v9';
+const CACHE_VERSION = 'baqueano-public-v10';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE_URLS = [OFFLINE_URL, '/index.html', '/destinos.html', '/assets/images/baqueano_launcher_solid.png', '/assets/images/logo.png'];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
