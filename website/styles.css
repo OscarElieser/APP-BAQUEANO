@@ -5096,6 +5096,7 @@ img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  align-items: stretch;
 }
 
 .dest-card-pro {
@@ -5109,7 +5110,22 @@ img {
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: 0;
+  height: 100%;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+/* Mantiene alineados los bloques internos aunque cambie la longitud del texto. */
+.dest-card-pro .dest-body-pro {
+  display: grid;
+  grid-template-rows: auto auto minmax(5.25rem, auto) auto auto auto auto;
+  align-content: start;
+  height: 100%;
+}
+
+.dest-card-pro .dest-card-action-bar,
+.dest-card-pro .dest-footer-strip {
+  margin-top: auto;
 }
 
 .dest-card-pro:hover {
