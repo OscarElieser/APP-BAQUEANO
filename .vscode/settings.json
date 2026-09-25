@@ -1,4 +1,12 @@
 {
   "vscode-edge-devtools.webhint": false,
-  "cmake.sourceDirectory": "C:/Users/PC 1/APP BAQUEANO/windows"
+  "cmake.sourceDirectory": "C:/Users/PC 1/APP BAQUEANO/windows",
+  "files.associations": {
+    "*.sql": "postgres",
+    "**/supabase/**/*.sql": "postgres"
+  },
+  "sql.lint.enable": false,
+  "mssql.intelliSense.enableErrorLowering": false,
+  "mssql.intelliSense.enableSuggestions": false
 }
+

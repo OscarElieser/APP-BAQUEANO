@@ -6,12 +6,12 @@
 // ============================================================================
 (function (window, document) {
   'use strict';
-  if (window.BaqueanoAssistant?.version === '4') return;
+  if (window.BaqueanoAssistant?.version === '5') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-4'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-5'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
-  const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: '/api/v1/ai/chat' });
+  const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: '/api/v1/ai/chat', healthEndpoint: '/health', healthInterval: 45000, requestAttempts: 3 });
   const KEYS = Object.freeze({ session: 'baqueano_assistant_session_v2', preferences: 'baqueano_assistant_preferences_v2', weather: 'baqueano_weather_v1' });
   const EXCLUDED = /(?:admin|perfil|privacidad|terminos|cookies|aviso-legal|offline|denuncias)(?:\.html)?$/i;
   const ACTIONS = new Set(['open_destination','open_department','open_map','show_place','search_places','search_destination','search_business','search_experience','build_itinerary','calculate_budget','calculate_distance','save_favorite','show_nearby','show_emergency','open_booking','request_booking','check_availability','check_weather','search_events','create_route','share_itinerary','open_route','play_audio','pause_audio','show_food','show_history']);
@@ -21,7 +21,7 @@
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
   const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, lastSuggestion: 0 }, safeJson(sessionStorage.getItem(KEYS.session), {}));
   const preferences = Object.assign({ voice: false, edge: 'right', y: null, enabled: true, suggestions: true }, safeJson(localStorage.getItem(KEYS.preferences), {}));
-  const state = { open: false, busy: false, minimized: false, dragging: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio' };
+  const state = { open: false, busy: false, minimized: false, dragging: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio', service: 'checking' };
   const saveSession = () => sessionStorage.setItem(KEYS.session, JSON.stringify(session));
   const savePreferences = () => localStorage.setItem(KEYS.preferences, JSON.stringify(preferences));
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -44,7 +44,7 @@
     root.innerHTML = `
       <div class="bq-suggestion" id="bqSuggestion" role="status" hidden><button type="button" class="bq-suggestion-close" data-command="dismiss-suggestion" aria-label="Cerrar sugerencia">×</button><p></p><div class="bq-suggestion-actions"><button type="button" data-command="suggestion-listen"><i class="fa-solid fa-volume-high"></i> Escuchar</button><button type="button" data-command="suggestion-open"><i class="fa-solid fa-comments"></i> Abrir panel</button><button type="button" data-command="snooze">Ahora no</button></div></div>
       <aside class="bq-drawer" id="bqDrawer" aria-hidden="true" aria-label="Baqüi, guía digital de Nicaragua">
-        <header class="bq-header"><picture><img src="assets/images/baqui.png" alt=""></picture><div><strong>Baqüi</strong><span><i></i> <b id="bqModuleLabel">Guía IA de Nicaragua</b></span></div><div class="bq-header-actions"><button data-command="voice" aria-label="Activar voz" title="Voz"><i class="fa-solid fa-volume-xmark"></i></button><button data-command="minimize" aria-label="Minimizar"><i class="fa-solid fa-minus"></i></button><button data-command="close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div></header>
+        <header class="bq-header"><picture><img src="assets/images/baqui.png" alt=""></picture><div><strong>Baqüi</strong><span><i id="bqServiceDot"></i> <b id="bqModuleLabel">Verificando inteligencia…</b></span></div><div class="bq-header-actions"><button data-command="voice" aria-label="Activar voz" title="Voz"><i class="fa-solid fa-volume-xmark"></i></button><button data-command="minimize" aria-label="Minimizar"><i class="fa-solid fa-minus"></i></button><button data-command="close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div></header>
         <section class="bq-live" aria-label="Información útil"><div class="bq-live-card"><i class="fa-regular fa-clock"></i><span>Hora en Nicaragua</span><strong id="bqClock">--:--</strong></div><button class="bq-live-card" type="button" data-command="weather"><i class="fa-solid fa-cloud-sun"></i><span id="bqWeatherPlace">Managua</span><strong id="bqWeather">Consultar clima</strong></button><button class="bq-live-card bq-promo" type="button" data-command="promotion"><i class="fa-solid fa-tags"></i><span>Promociones</span><strong id="bqPromotion">Verificadas</strong></button></section>
         <div class="bq-messages" id="bqMessages" aria-live="polite" aria-busy="false"></div>
         <div class="bq-quick" aria-label="Acciones rápidas">
@@ -87,6 +87,25 @@
     const key = currentModule(); const profile = MODULES[key] || MODULES.index; state.module = key;
     root.dataset.module = key; $('#bqContextIcon').textContent = profile.icon; $('#bqModuleLabel').textContent = profile.label;
     if (!state.open && state.character === 'idle') setCharacter(profile.motion);
+  }
+
+  function updateServiceStatus(next) {
+    state.service = next;
+    root.dataset.service = next;
+    const profile = MODULES[currentModule()] || MODULES.index;
+    const label = $('#bqModuleLabel');
+    if (label) label.textContent = next === 'online' ? profile.label : next === 'checking' ? 'Verificando inteligencia…' : 'IA temporalmente sin conexión';
+    const mascot = $('#bqMascot');
+    if (mascot) mascot.setAttribute('aria-label', next === 'online' ? 'Abrir a Baqüi, inteligencia territorial activa' : 'Abrir a Baqüi, servicio inteligente sin conexión');
+  }
+
+  async function checkServiceHealth() {
+    if (!navigator.onLine) return updateServiceStatus('offline');
+    updateServiceStatus('checking');
+    try {
+      const response = await fetch(CONFIG.healthEndpoint, { cache: 'no-store', signal: AbortSignal.timeout?.(6000) });
+      updateServiceStatus(response.ok ? 'online' : 'offline');
+    } catch (_) { updateServiceStatus('offline'); }
   }
 
   function updateClock() {
@@ -151,13 +170,20 @@
     $('#bqMessages').setAttribute('aria-busy', 'true'); $('[data-command="stop"]').hidden = false; setCharacter('thinking');
     const thinking = appendMessage('Baqüi está pensando…', 'status', false); const started = performance.now();
     try {
-      const response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), context: context() }) });
+      let response;
+      for (let attempt = 1; attempt <= CONFIG.requestAttempts; attempt += 1) {
+        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), context: context() }) });
+        if (response.ok || response.status < 500) break;
+        if (attempt < CONFIG.requestAttempts) await new Promise(resolve => setTimeout(resolve, 500 * (2 ** (attempt - 1))));
+      }
       if (!response.ok) throw new Error('gateway'); const data = await response.json(); if (!data.ok) throw new Error('contract');
+      updateServiceStatus('online');
       thinking?.closest('article')?.remove(); session.tripProfile = Object.assign({}, session.tripProfile, data.tripProfilePatch || {}); if (CHARACTER_STATES.has(data.animation)) setCharacter(data.animation); await streamText(data.message); renderActions(data.actions || []); track('assistant_response', { mode: data.mode, latency_ms: Math.round(performance.now() - started) });
     } catch (error) {
       thinking?.closest('article')?.remove();
       if (error.name !== 'AbortError') {
-        appendMessage('No pude conectarme con el servicio de inteligencia en este momento. Tu pregunta no fue respondida ni sustituida por contenido automático. Intentá nuevamente en unos instantes.', 'status', false);
+        updateServiceStatus('offline');
+        appendMessage('La inteligencia territorial está temporalmente fuera de línea. Probé la conexión nuevamente y no sustituí tu pregunta con una respuesta automática. Tu consulta permanece visible para que podás reenviarla cuando el indicador vuelva a verde.', 'status', false);
         setCharacter('idle');
         track('assistant_error', { code: 'AI_UNAVAILABLE', latency_ms: Math.round(performance.now() - started) });
       }
@@ -285,11 +311,11 @@
   ['music_playing','music_paused','music_changed','department_viewed','municipality_viewed','history_opened','gastronomy_opened','food_viewed','destination_viewed','business_viewed','map_opened','search_started','search_no_results','itinerary_started','emergency_opened','favorite_added'].forEach(type => window.addEventListener(`baqueano:${type}`, event => reactToContext(type, event.detail)));
   window.addEventListener('resize', () => restorePosition(root), { passive: true });
   window.addEventListener('baqueano:promotion', event => { if (!event.detail?.verified) return; const items = safeJson(sessionStorage.getItem('baqueano_verified_promotions'), []); items.push(event.detail); sessionStorage.setItem('baqueano_verified_promotions', JSON.stringify(items.slice(-5))); $('#bqPromotion').textContent = `${items.length} nueva${items.length === 1 ? '' : 's'}`; if (!isSensitiveInteraction()) showSuggestion(`🏷️ Promoción verificada: ${event.detail.title}`); });
-  applyModulePersonality(); updateClock(); state.timers.push(setInterval(updateClock, 30000)); loadWeather(); const promoCount = verifiedPromotions().length; $('#bqPromotion').textContent = promoCount ? `${promoCount} activa${promoCount === 1 ? '' : 's'}` : 'Sin alertas';
+  applyModulePersonality(); updateServiceStatus('checking'); checkServiceHealth(); state.timers.push(setInterval(checkServiceHealth, CONFIG.healthInterval)); window.addEventListener('online', checkServiceHealth); window.addEventListener('offline', () => updateServiceStatus('offline')); updateClock(); state.timers.push(setInterval(updateClock, 30000)); loadWeather(); const promoCount = verifiedPromotions().length; $('#bqPromotion').textContent = promoCount ? `${promoCount} activa${promoCount === 1 ? '' : 's'}` : 'Sin alertas';
   state.timers.push(setInterval(() => { if (!state.open && !state.busy && !state.dragging && Date.now() - state.lastActivity >= CONFIG.sleepDelay) setCharacter('sleeping'); }, 5000));
   state.timers.push(setTimeout(() => { if (!session.greeted && !isSnoozed()) { session.greeted = true; saveSession(); showSuggestion('👋 ¡Hola! Soy Baqüi. ¿Qué rincón de Nicaragua querés descubrir?'); } }, CONFIG.greetingDelay));
   state.timers.push(setTimeout(contextualSuggestion, CONFIG.contextDelay)); state.timers.push(setInterval(contextualSuggestion, CONFIG.cooldown));
   state.timers.push(setInterval(() => { if (root.classList.contains('is-snoozed') && !isSnoozed()) reopen(); }, 15000)); schedulePeek();
 
-  window.BaqueanoAssistant = { version: '4', open, close, ask, speak: text => { preferences.voice = true; savePreferences(); speak(text); }, setState: setCharacter, show: () => { root.hidden = false; reopen(); }, hide, context, refreshWeather: requestWeather, showPromotions };
+  window.BaqueanoAssistant = { version: '5', open, close, ask, speak: text => { preferences.voice = true; savePreferences(); speak(text); }, setState: setCharacter, show: () => { root.hidden = false; reopen(); }, hide, context, refreshWeather: requestWeather, showPromotions, checkService: checkServiceHealth };
 })(window, document);

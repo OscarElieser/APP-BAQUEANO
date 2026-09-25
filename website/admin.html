@@ -302,6 +302,11 @@
             <i class="fa-solid fa-tags ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Gestión de Tarifas</span>
           </a>
+          <a class="ops-nav-item" data-tab="35-backup">
+            <i class="fa-solid fa-cloud-arrow-up ops-nav-item-icon"></i>
+            <span class="ops-nav-item-label">Backup &amp; Sincronización</span>
+            <span class="ops-nav-badge" id="badgeCount-35" style="background:var(--bq-accent);color:#fff;">Sync</span>
+          </a>
         </div>
       </nav>
     </aside>
@@ -727,6 +732,192 @@
           <div class="ops-empty-state"><i class="fa-solid fa-database ops-empty-icon"></i><div class="ops-empty-title">Catálogo verificable de precios</div><div class="ops-empty-desc">Servicios, vigencia, fuente, moneda, disponibilidad y trazabilidad histórica.</div></div>
         </section>
 
+        <!-- ═══════════════════════════════════════════════════════════════
+             VISTA 35: SISTEMA → BACKUP Y SINCRONIZACIÓN (FAILOVER MULTI-NUBE)
+             ═══════════════════════════════════════════════════════════════ -->
+        <section class="ops-view-panel" id="view-35-backup">
+          <div class="ops-view-header">
+            <div class="ops-view-title-group">
+              <h1><i class="fa-solid fa-cloud-arrow-up" style="color: var(--bq-secondary);"></i> Sistema → Backup y Sincronización</h1>
+              <p class="ops-view-subtitle">ARQUITECTURA FIREBASE FIRST, SUPABASE FALLBACK · AUDITORÍA DE FAILOVER Y RESGUARDO TRANSACCIONAL</p>
+            </div>
+            <div class="ops-view-actions">
+              <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.scrollToSyncErrors()">
+                <i class="fa-solid fa-triangle-exclamation" style="color:var(--bq-accent);"></i> Ver Errores
+              </button>
+              <button type="button" class="btn-ops-matte accent" id="btnOpsRetrySync" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.triggerManualBackupSync()">
+                <i class="fa-solid fa-rotate"></i> Reintentar Sincronización
+              </button>
+              <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.refreshBackupStatus()">
+                <i class="fa-solid fa-arrows-rotate"></i> Actualizar Telemetría
+              </button>
+            </div>
+          </div>
+
+          <!-- REJILLA DE ESTADO DE SALUD MULTI-PROVEEDOR -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+            <!-- FIREBASE ENGINE -->
+            <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #FFA000;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
+                  <i class="fa-solid fa-fire" style="color:#FFA000;"></i> Firebase (Principal)
+                </strong>
+                <span class="ops-badge-status published" id="statusBadgeFirebase">🟢 OPERATIVO</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+                Auth, Firestore, Hosting, App Check y Secret Manager.
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
+                <span>Estado de Red:</span>
+                <strong id="stateTextFirebase" style="color:var(--bq-jungle);">ONLINE</strong>
+              </div>
+            </div>
+
+            <!-- SUPABASE BACKUP -->
+            <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #3ECF8E;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
+                  <i class="fa-solid fa-bolt" style="color:#3ECF8E;"></i> Supabase (Respaldo)
+                </strong>
+                <span class="ops-badge-status published" id="statusBadgeSupabase">🟢 OPERATIVO</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+                PostgreSQL, PostGIS, pgvector, Realtime y Contingencia.
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
+                <span>Estado de Red:</span>
+                <strong id="stateTextSupabase" style="color:var(--bq-jungle);">ONLINE</strong>
+              </div>
+            </div>
+
+            <!-- FIREBASE STORAGE -->
+            <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #4285F4;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
+                  <i class="fa-solid fa-box-archive" style="color:#4285F4;"></i> Firebase Storage
+                </strong>
+                <span class="ops-badge-status published" id="statusBadgeFirebaseStorage">🟢 OPERATIVO</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+                Almacenamiento primario CDN de imágenes y archivos.
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
+                <span>Estado Bucket:</span>
+                <strong id="stateTextFirebaseStorage" style="color:var(--bq-jungle);">ONLINE</strong>
+              </div>
+            </div>
+
+            <!-- SUPABASE STORAGE -->
+            <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #00B4D8;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
+                  <i class="fa-solid fa-cloud-arrow-down" style="color:#00B4D8;"></i> Supabase Storage
+                </strong>
+                <span class="ops-badge-status published" id="statusBadgeSupabaseStorage">🟢 OPERATIVO</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+                Copia secundaria y espejo con integridad SHA-256.
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
+                <span>Estado Bucket:</span>
+                <strong id="stateTextSupabaseStorage" style="color:var(--bq-jungle);">ONLINE</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPIS DE SINCRONIZACIÓN Y COLA DE CONTINGENCIA -->
+          <div class="ops-kpi-grid-matte" style="margin-bottom: 1.5rem;">
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header"><span class="ops-kpi-title">Operaciones Pendientes</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-accent);"><i class="fa-solid fa-hourglass-half"></i></div></div>
+              <div class="ops-kpi-value-num" id="kpiSyncPending" style="color:var(--bq-accent);">0</div>
+              <div class="ops-kpi-subtext">En espera de sincronización</div>
+            </div>
+
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header"><span class="ops-kpi-title">Operaciones Sincronizadas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-jungle);"><i class="fa-solid fa-circle-check"></i></div></div>
+              <div class="ops-kpi-value-num" id="kpiSyncCompleted" style="color:var(--bq-jungle);">0</div>
+              <div class="ops-kpi-subtext">Confirmadas en base principal</div>
+            </div>
+
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header"><span class="ops-kpi-title">Operaciones Fallidas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-crimson);"><i class="fa-solid fa-triangle-exclamation"></i></div></div>
+              <div class="ops-kpi-value-num" id="kpiSyncFailed" style="color:var(--bq-crimson);">0</div>
+              <div class="ops-kpi-subtext">Requieren reintento manual</div>
+            </div>
+
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header"><span class="ops-kpi-title">Conflictos Detectados</span><div class="ops-kpi-icon-wrap" style="color:#F59E0B;"><i class="fa-solid fa-code-compare"></i></div></div>
+              <div class="ops-kpi-value-num" id="kpiSyncConflicts" style="color:#F59E0B;">0</div>
+              <div class="ops-kpi-subtext">Resueltos por marca de tiempo</div>
+            </div>
+          </div>
+
+          <!-- AUDITORÍA DE METADATOS Y TIEMPOS OFICIALES -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="ops-table-container-matte" style="padding: 1.25rem;">
+              <h4 style="color:#fff; margin:0 0 0.75rem 0; font-size:0.92rem; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fa-solid fa-shield-halved" style="color:var(--bq-secondary);"></i> Política de Protección y Resiliencia
+              </h4>
+              <div style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.82rem; color:var(--ops-text-secondary); line-height:1.5;">
+                <div>• <strong>Principio Rector:</strong> Firebase es el sistema primario. Supabase mantiene el resguardo relacional y geoespacial.</div>
+                <div>• <strong>Conmutador Circuit Breaker:</strong> Monitoreo continuo de Firestore con conmutación instantánea a cola de contingencia.</div>
+                <div>• <strong>Garantía de Cero Pérdida:</strong> Reservas, reseñas y perfiles nunca se descartan ante caídas de red o servidor.</div>
+                <div>• <strong>Integridad de Archivos:</strong> Hash SHA-256 verificado en cada replicación entre buckets.</div>
+              </div>
+            </div>
+
+            <div class="ops-table-container-matte" style="padding: 1.25rem;">
+              <h4 style="color:#fff; margin:0 0 0.75rem 0; font-size:0.92rem; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fa-solid fa-clock-rotate-left" style="color:var(--bq-accent);"></i> Cronología de Sincronización
+              </h4>
+              <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.82rem;">
+                <div style="display:flex; justify-content:space-between; padding-bottom:0.5rem; border-bottom:1px solid var(--ops-border-subtle);">
+                  <span style="color:var(--ops-text-muted);">Último Backup Registrado:</span>
+                  <strong id="txtLastBackupTimestamp" style="color:#fff;">Comprobando...</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding-bottom:0.5rem; border-bottom:1px solid var(--ops-border-subtle);">
+                  <span style="color:var(--ops-text-muted);">Última Sincronización Exitosa:</span>
+                  <strong id="txtLastSyncTimestamp" style="color:var(--bq-jungle);">Comprobando...</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                  <span style="color:var(--ops-text-muted);">Circuit Breaker Firestore:</span>
+                  <span class="ops-badge-status published" id="badgeCircuitBreaker">CLOSED (Normal)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TABLA DE OPERACIONES Y ERRORES DE CONTINGENCIA -->
+          <div class="ops-table-container-matte" id="syncErrorsSection">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.25rem; border-bottom:1px solid var(--ops-border-subtle);">
+              <h3 style="margin:0; font-size:0.95rem; color:#fff; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fa-solid fa-list-check" style="color:var(--bq-secondary);"></i> Cola de Operaciones Transaccionales
+              </h3>
+              <span style="font-size:0.75rem; color:var(--ops-text-muted);" id="syncOperationsCount">Cargando...</span>
+            </div>
+            <table class="ops-table-matte">
+              <thead>
+                <tr>
+                  <th>ID Operación</th>
+                  <th>Entidad</th>
+                  <th>Tipo</th>
+                  <th>Estado</th>
+                  <th>Reintentos</th>
+                  <th>Último Error / Detalle</th>
+                  <th style="text-align:right;">Fecha</th>
+                </tr>
+              </thead>
+              <tbody id="syncOperationsTableBody">
+                <tr>
+                  <td colspan="7" style="text-align:center; padding:2rem; color:var(--ops-text-muted);">
+                    Consultando estado del servicio central de respaldo...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
       </main>
     </div>
   </div>
@@ -757,6 +948,9 @@
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('27-auditoria')">
           <i class="fa-solid fa-file-shield"></i> <span>Ver Registro de Auditoría</span>
+        </div>
+        <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('35-backup')">
+          <i class="fa-solid fa-cloud-arrow-up"></i> <span>Sistema: Backup y Sincronización</span>
         </div>
       </div>
     </div>

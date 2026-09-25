@@ -16,11 +16,33 @@ const { createAiChatService } = require("./lib/ai-chat");
 const { createPublicMetricsReader } = require("./lib/public-metrics");
 if (getApps().length === 0) initializeApp();
 const runtimeOptions = {region: "us-central1", timeoutSeconds: 30, memory: "256MiB", maxInstances: 10};
-const readPublicMetrics = createPublicMetricsReader(getFirestore());
-const geminiApiKey = defineSecret("GEMINI_API_KEY");
-const handleAiChat = createAiChatService({db: getFirestore(), getApiKey: () => geminiApiKey.value()});
+// Resolución flexible de claves: variables de entorno (.env) por defecto
+// para compatibilidad sin requerir Google Secret Manager ni cuenta de facturación.
+let geminiApiKey = null;
+if (process.env.USE_SECRET_MANAGER === "true") {
+  try {
+    geminiApiKey = defineSecret("GEMINI_API_KEY");
+  } catch (e) {
+    geminiApiKey = null;
+  }
+}
+
+const getApiKey = () => {
+  try {
+    if (geminiApiKey && typeof geminiApiKey.value === "function") {
+      const val = geminiApiKey.value();
+      if (val) return val;
+    }
+  } catch (e) {}
+  return process.env.GEMINI_API_KEY || "";
+};
+
+const handleAiChat = createAiChatService({db: getFirestore(), getApiKey});
 exports.healthCheck = onRequest(runtimeOptions, createHealthHandler());
-exports.api = onRequest({...runtimeOptions, secrets: [geminiApiKey]}, createApiHandler({readPublicMetrics, handleAiChat}));
+exports.api = onRequest(
+  geminiApiKey ? {...runtimeOptions, secrets: [geminiApiKey]} : runtimeOptions,
+  createApiHandler({readPublicMetrics, handleAiChat})
+);
 
 exports.auditTourismServicePrice = onDocumentWritten(
   {document: "tourism_services/{serviceId}", region: "us-central1", memory: "256MiB", maxInstances: 10},

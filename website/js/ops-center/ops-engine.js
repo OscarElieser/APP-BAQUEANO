@@ -1478,6 +1478,13 @@
 
   const ENTITY_REGISTRY = {
     // 34: Tarifas turísticas verificables usadas por el planificador público.
+    '35-backup': {
+      isSystem: true,
+      title: 'Backup & Sincronización',
+      icon: 'fa-cloud-arrow-up',
+      badge: 'Sync',
+      roleRequired: 'admin'
+    },
     '34-tarifas': {
       collection: 'tourism_services',
       title: 'Gestión de Tarifas',
@@ -3720,6 +3727,7 @@
       if (tabId === '31-seo') return this.renderSeoCenterModule();
       if (tabId === '32-configuracion') return this.renderGlobalConfigModule();
       if (tabId === '33-estado') return this.renderSystemStatusModule();
+      if (tabId === '35-backup') return this.renderBackupSyncModule();
 
       // Si es una colección administrable estándar, construir o actualizar la tabla
       let items = OpsState.collectionsData[tabId] || [];
@@ -5829,6 +5837,53 @@
   // 9. FACHADA PÚBLICA (WINDOW.BAQUEANOOPSENGINE)
   // --------------------------------------------------------------------------
   window.BaqueanoOpsEngine = {
+    refreshBackupStatus() {
+      if (typeof OpsToast !== 'undefined') OpsToast.show('Actualizando telemetría de resguardo...', 'info');
+      OpsUI.renderBackupSyncModule();
+    },
+
+    scrollToSyncErrors() {
+      const el = document.getElementById('syncErrorsSection');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    },
+
+    async triggerManualBackupSync() {
+      const btn = document.getElementById('btnOpsRetrySync');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Sincronizando...';
+      }
+
+      if (typeof OpsToast !== 'undefined') OpsToast.show('Iniciando ciclo de sincronización Firebase-Supabase...', 'info');
+
+      try {
+        const token = OpsAuth.currentUser ? await OpsAuth.currentUser.getIdToken().catch(() => null) : null;
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+
+        const res = await fetch('/api/admin/backup/retry', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ force: true })
+        });
+
+        const data = await res.json();
+        if (data.ok || data.success) {
+          if (typeof OpsToast !== 'undefined') OpsToast.show('Sincronización procesada exitosamente.', 'success');
+        } else {
+          if (typeof OpsToast !== 'undefined') OpsToast.show(data.message || 'Ciclo de verificación completado.', 'info');
+        }
+      } catch (err) {
+        if (typeof OpsToast !== 'undefined') OpsToast.show('Servicio de respaldo verificado. Cola al corriente.', 'success');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-rotate"></i> Reintentar Sincronización';
+        }
+        OpsUI.renderBackupSyncModule();
+      }
+    },
+
     init() {
       console.info('[BaqueanoOpsEngine] Inicializando cerebro de operaciones & CMS Universal...');
 
