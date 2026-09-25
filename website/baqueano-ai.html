@@ -16,10 +16,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260925-footer-2">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/baqueano-ai.css?v=20260925-4">
+  <link rel="stylesheet" href="css/baqueano-ai.css?v=20260925-footer-5">
   <link rel="stylesheet" href="css/baqueano-assistant.css?v=20260925-baqui-5">
 </head>
 <body class="page-baqueano-ai">
@@ -111,7 +111,87 @@
 
     <section class="ai-result" id="result" aria-live="polite" hidden></section>
   </main>
-  <footer><img src="assets/images/logo.png" alt=""><span>BAQUEANO NICARAGUA</span><p>Descubre lo que no sale en el mapa.</p><a href="index.html#sos">SOS 24/7</a></footer>
+  <!--
+    🎯 POR QUÉ: unificar el cierre del planificador con el sistema institucional
+    usado en el resto del sitio y evitar un pie compacto visualmente desconectado.
+    ⚙️ CÓMO: reutiliza las clases globales del footer, conserva una sola columna
+    de contacto y omite las tarjetas de identidad y módulos retiradas del proyecto.
+    📦 QUÉ: boletín, redes oficiales, contacto, enlaces legales y estado operativo.
+  -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <div class="footer-top-utility-bar">
+        <div class="footer-newsletter-wrap">
+          <div class="footer-newsletter-title">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>Boletín de Senderos &amp; Cosechas Campesinas</span>
+          </div>
+          <p class="footer-newsletter-desc">
+            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
+          </p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <button type="submit" class="footer-newsletter-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-social-section">
+          <div class="footer-social-label">
+            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+          </div>
+          <div class="footer-social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-columns-grid">
+        <div class="footer-col-contact">
+          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div><span>Correo Oficial:</span><br><a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a></div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div><span>Mesa de Enlace:</span><br><a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div><span>Sede Territorial:</span><br><span>Managua • 17 Departamentos, Nicaragua</span></div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <div><span>Horario de Atención:</span><br><span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos &amp; Condiciones</a><span class="separator">|</span>
+        <a href="privacidad.html">Política de Privacidad</a><span class="separator">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a><span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a><span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde &amp; Huella Cero</a><span class="separator">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.</div>
+        <div class="ai-footer-status-row">
+          <span class="ai-footer-live-status"><span></span>Telemetría GPS 24/7 Activa</span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
+        </div>
+      </div>
+    </div>
+  </footer>
   <script src="js/navigation.js?v=20260925-baqui-4"></script>
   <script src="js/baqueano-ai.js?v=20260925-5"></script>
 </body>
