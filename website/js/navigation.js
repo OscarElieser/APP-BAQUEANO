@@ -1154,12 +1154,12 @@ function loadBaqueanoDigital() {
   if (excluded.test(window.location.pathname.replace(/\/$/, ''))) return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-1'; style.dataset.baqueanoAssistant = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-2'; style.dataset.baqueanoAssistant = 'true';
     document.head.appendChild(style);
   }
   if (!document.querySelector('script[data-baqueano-assistant]') && !window.BaqueanoAssistant) {
     const script = document.createElement('script');
-    script.src = 'js/baqueano-assistant.js?v=20260925-baqui-1'; script.defer = true; script.dataset.baqueanoAssistant = 'true';
+    script.src = 'js/baqueano-assistant.js?v=20260925-baqui-2'; script.defer = true; script.dataset.baqueanoAssistant = 'true';
     document.body.appendChild(script);
   }
 }
