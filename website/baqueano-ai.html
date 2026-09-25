@@ -16,17 +16,36 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Montserrat:wght@700;800;900&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="css/baqueano-ai.css?v=20260925-3">
-  <link rel="stylesheet" href="css/baqueano-assistant.css?v=20260925-3">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/baqueano-ai.css?v=20260925-4">
+  <link rel="stylesheet" href="css/baqueano-assistant.css?v=20260925-baqui-4">
 </head>
-<body>
+<body class="page-baqueano-ai">
   <a class="skip-link" href="#planner">Ir al planificador</a>
   <div class="ai-ambient" aria-hidden="true"><span></span><span></span><span></span></div>
-  <header class="ai-nav">
-    <a class="ai-brand" href="index.html" aria-label="Baqueano Nicaragua, inicio"><img src="assets/images/logo.png" alt=""><span><b>BAQUEANO</b><small>NICARAGUA</small></span></a>
-    <nav aria-label="Navegación principal"><a href="destinos.html">Destinos</a><a href="index.html#mapaVivo3DNicaragua">Mapa vivo</a><a href="index.html#routeBuilderSection">Rutas</a><a href="#planner" class="active"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano AI</a></nav>
-    <a class="ai-nav-cta" href="index.html"><i class="fa-solid fa-arrow-left"></i><span>Volver al portal</span></a>
-  </header>
+  <nav class="main-navbar ai-main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="nav-ambient-glow" aria-hidden="true"></div><div class="nav-bottom-light" aria-hidden="true"></div>
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box" aria-label="Baqueano Nicaragua — Inicio"><span class="brand-logo-halo" aria-hidden="true"></span><img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img" width="52" height="52"><div class="brand-text"><span class="brand-title">BAQUEANO</span><span class="brand-tagline">NICARAGUA</span></div><span class="brand-accent-bar" aria-hidden="true"></span></a>
+      <div class="nav-links-menu" id="navLinksMenu" role="menubar">
+        <span class="nav-pill-indicator" aria-hidden="true"></span>
+        <div class="nav-dropdown" role="none">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem"><span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Explorar</span></span></span><span class="nav-dropdown-caret"><i class="fa-solid fa-chevron-down"></i></span></button>
+          <div class="nav-dropdown-menu nav-mega-menu" role="menu"><div class="mega-menu-header"><span class="mega-menu-header-icon"><i class="fa-solid fa-earth-americas"></i></span><span class="mega-menu-header-title">Territorio &amp; Naturaleza</span><span class="mega-menu-header-line"></span></div><a href="destinos.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span><div class="nav-dd-text"><span class="nav-dd-title">Destinos</span><span class="nav-dd-desc">Playas, volcanes, reservas y hospedaje</span></div></a><a href="destinos.html#mapa" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-map"></i></span><div class="nav-dd-text"><span class="nav-dd-title">Mapa Vivo</span><span class="nav-dd-desc">Exploración territorial interactiva</span></div></a><a href="ambiental.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-leaf"></i></span><div class="nav-dd-text"><span class="nav-dd-title">Naturaleza</span><span class="nav-dd-desc">Custodia y turismo responsable</span></div></a></div>
+        </div>
+        <div class="nav-dropdown" role="none">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true" role="menuitem"><span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-landmark nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Mi País</span></span></span><span class="nav-dropdown-caret"><i class="fa-solid fa-chevron-down"></i></span></button>
+          <div class="nav-dropdown-menu nav-mega-menu" role="menu"><div class="mega-menu-header"><span class="mega-menu-header-icon"><i class="fa-solid fa-masks-theater"></i></span><span class="mega-menu-header-title">Identidad, Cultura &amp; Sabor</span><span class="mega-menu-header-line"></span></div><a href="historia.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span><div class="nav-dd-text"><span class="nav-dd-title">Historia</span><span class="nav-dd-desc">Memoria y raíces ancestrales</span></div></a><a href="gastronomia.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span><div class="nav-dd-text"><span class="nav-dd-title">Gastronomía</span><span class="nav-dd-desc">Sabores del maíz y fogón campesino</span></div></a><a href="musica.html" class="nav-dropdown-item" role="menuitem"><span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span><div class="nav-dd-text"><span class="nav-dd-title">Música</span><span class="nav-dd-desc">Son Nica, marimba y patrimonio sonoro</span></div></a></div>
+        </div>
+        <a href="aliados.html" role="menuitem"><span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Servicios</span></span></span></a>
+        <a href="#planner" class="active" role="menuitem"><span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-wand-magic-sparkles nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Planificar</span></span></span></a>
+        <a href="nosotros.html" role="menuitem"><span class="nav-item-content"><span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span><span class="nav-text-group"><span class="nav-label">Comunidad</span></span></span></a>
+      </div>
+      <div class="nav-actions-right"><a class="nav-ai-status" href="#planner"><span></span> IA territorial</a><a class="sos-quick-btn" href="index.html#sos"><i class="fa-solid fa-tower-broadcast"></i><span>SOS 24/7</span></a><button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button></div>
+    </div>
+  </nav>
 
   <main>
     <section class="ai-hero">
@@ -45,7 +64,19 @@
         <div class="ai-orbit ai-orbit-one"></div><div class="ai-orbit ai-orbit-two"></div>
         <div class="ai-compass-ring"><span>N</span><i class="fa-solid fa-location-arrow"></i><small>RUMBO<br>BAQUEANO</small></div>
         <div class="ai-float-card ai-float-territory"><i class="fa-solid fa-location-dot"></i><span>Territorio</span><strong id="aiLiveTerritory">León</strong></div>
-        <div class="ai-float-card ai-float-budget"><i class="fa-solid fa-wallet"></i><span>Presupuesto</span><strong id="aiLiveBudget">$600</strong></div>
+        <div class="ai-float-card ai-float-budget"><i class="fa-solid fa-wallet"></i><span>Presupuesto</span><strong id="aiLiveBudget">C$ 21,990</strong></div>
+      </div>
+    </section>
+
+    <section class="ai-capability-deck" aria-labelledby="aiCapabilityTitle">
+      <div class="ai-capability-heading"><div><span>Elegí una inspiración</span><h2 id="aiCapabilityTitle">¿Qué querés descubrir hoy?</h2></div><p>Seleccioná una experiencia para comenzar; después podés personalizar cada detalle.</p></div>
+      <div class="ai-capability-grid">
+        <button type="button" data-ai-capability="Quiero volcanes, aventura y paisajes en Nicaragua" data-style="aventura"><i class="fa-solid fa-volcano"></i><span><strong>Volcanes</strong><small>Aventura soberana</small></span><b>01</b></button>
+        <button type="button" data-ai-capability="Quiero conocer historia, museos, arte y cultura de Nicaragua" data-style="cultura"><i class="fa-solid fa-landmark"></i><span><strong>Cultura viva</strong><small>Historia, museos y arte</small></span><b>02</b></button>
+        <button type="button" data-ai-capability="Quiero una ruta de gastronomía tradicional y comida local" data-style="cultura"><i class="fa-solid fa-bowl-food"></i><span><strong>Sabores</strong><small>Fogón y maíz ancestral</small></span><b>03</b></button>
+        <button type="button" data-ai-capability="Quiero naturaleza, reservas, café y comunidades rurales" data-style="naturaleza"><i class="fa-solid fa-leaf"></i><span><strong>Naturaleza</strong><small>Bosques y comunidades</small></span><b>04</b></button>
+        <button type="button" data-ai-capability="Quiero descubrir música, marimba y tradiciones de Nicaragua" data-style="cultura"><i class="fa-solid fa-music"></i><span><strong>Música</strong><small>Son Nica y tradición</small></span><b>05</b></button>
+        <button type="button" data-ai-capability="Sorpréndeme con lugares menos conocidos y experiencias auténticas" data-style="aventura"><i class="fa-solid fa-route"></i><span><strong>Fuera del mapa</strong><small>Rincones auténticos</small></span><b>06</b></button>
       </div>
     </section>
 
@@ -62,9 +93,9 @@
         <div class="ai-panel-title"><span>01</span><div><p>Tu aventura</p><h2 id="plannerTitle">Define el rumbo</h2></div></div>
         <label>Territorio<select id="territory"><option>León</option><option>Granada</option><option>Ometepe</option><option>Rivas</option><option>Matagalpa</option><option>Madriz</option></select></label>
         <div class="ai-fields"><label>Días<input id="days" type="number" min="1" max="14" value="3"></label><label>Viajeros<input id="travelers" type="number" min="1" max="12" value="2"></label></div>
-        <label>Presupuesto máximo (USD)<div class="ai-money"><span>$</span><input id="budget" type="number" min="100" max="10000" step="50" value="600"></div></label>
+        <label>Presupuesto máximo (córdobas)<div class="ai-money"><span>C$</span><input id="budget" type="number" min="500" max="366500" step="100" value="21990"></div><small id="budgetEquivalent">Equivale a US$ 600.00</small></label>
         <fieldset><legend>Tu ritmo</legend><div class="ai-options"><label><input type="radio" name="style" value="aventura" checked><span><i class="fa-solid fa-person-hiking"></i>Aventura</span></label><label><input type="radio" name="style" value="cultura"><span><i class="fa-solid fa-landmark"></i>Cultura</span></label><label><input type="radio" name="style" value="naturaleza"><span><i class="fa-solid fa-leaf"></i>Naturaleza</span></label></div></fieldset>
-        <div class="ai-note"><i class="fa-solid fa-circle-info"></i><p>Las cifras son orientativas. Confirma precio y disponibilidad con cada prestador antes de reservar.</p></div>
+        <div class="ai-note"><i class="fa-solid fa-circle-info"></i><p>Moneda principal: córdoba nicaragüense. Equivalencia de referencia: 1 US$ = C$ 36.65. Confirma la tasa, el precio y la disponibilidad antes de reservar.</p></div>
       </aside>
 
       <section class="ai-panel ai-conversation">
@@ -81,7 +112,7 @@
     <section class="ai-result" id="result" aria-live="polite" hidden></section>
   </main>
   <footer><img src="assets/images/logo.png" alt=""><span>BAQUEANO NICARAGUA</span><p>Descubre lo que no sale en el mapa.</p><a href="index.html#sos">SOS 24/7</a></footer>
-  <script src="js/baqueano-ai.js?v=20260925-3"></script>
-  <script src="js/baqueano-assistant.js?v=20260925-3"></script>
+  <script src="js/navigation.js?v=20260925-baqui-4"></script>
+  <script src="js/baqueano-ai.js?v=20260925-5"></script>
 </body>
 </html>

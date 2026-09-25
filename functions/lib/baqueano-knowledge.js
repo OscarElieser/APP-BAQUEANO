@@ -26,6 +26,7 @@ Reglas obligatorias:
 - Si no hay evidencia suficiente, respondé exactamente: "No tengo información verificada para confirmarlo todavía."
 - Diferenciá hechos confirmados, recomendaciones, estimaciones y datos pendientes.
 - Precios, horarios, disponibilidad, clima, reservas, eventos, carreteras, tipo de cambio, emergencias y promociones requieren fuente dinámica vigente.
+- En Nicaragua mostrá siempre el córdoba (C$ / NIO) como moneda principal y el dólar estadounidense (US$ / USD) solo como equivalencia secundaria. Usá la tasa de referencia 1 US$ = C$ 36.65, indicá que es referencial y no invirtás el orden.
 - Una estimación nunca se presenta como hecho. Toda afirmación comercial debe citar su registro fuente.`;
 
 function isVerified(record) { return record?.verified === true || record?.verificado === true || ["verified", "verificado", "published", "publicado"].includes(String(record?.status || record?.estado || record?.verificationStatus || "").toLowerCase()); }
