@@ -352,3 +352,106 @@
   background: #10B981;
   box-shadow: 0 0 6px #10B981;
 }
+
+/*
+ * 🎯 POR QUÉ: la navegación del planificador acumulaba una entrada repetida,
+ * demasiados anchos variables y acciones sin una jerarquía visual clara.
+ * ⚙️ CÓMO: distribuye marca, rutas y acciones en tres columnas; elimina solo
+ * el acceso duplicado a esta misma vista y compacta progresivamente en laptops.
+ * 📦 QUÉ: barra del planificador equilibrada, legible y estable entre 961 px
+ * y pantallas amplias, conservando intacto el drawer móvil compartido.
+ */
+.page-baqueano-ai .ai-main-navbar {
+  padding-block: 0.7rem;
+}
+
+.page-baqueano-ai .ai-main-navbar .nav-inner {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: clamp(1rem, 1.7vw, 1.75rem);
+}
+
+.page-baqueano-ai .ai-main-navbar .brand-box {
+  min-width: 190px;
+}
+
+.page-baqueano-ai .ai-main-navbar .nav-links-menu {
+  justify-self: center;
+  min-width: 0;
+  padding: 0.32rem;
+  gap: 0.12rem;
+  background: rgba(15, 23, 42, 0.58);
+  border-color: rgba(244, 230, 193, 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+
+.page-baqueano-ai .ai-main-navbar .nav-links-menu > .nav-link-ai {
+  display: none;
+}
+
+.page-baqueano-ai .ai-main-navbar .nav-links-menu > a,
+.page-baqueano-ai .ai-main-navbar .nav-dropdown-trigger {
+  min-height: 38px;
+  padding: 0.5rem 0.78rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.page-baqueano-ai .ai-main-navbar .nav-links-menu > a.active {
+  background: linear-gradient(135deg, rgba(246, 94, 1, 0.18), rgba(22, 93, 111, 0.2));
+  border: 1px solid rgba(246, 94, 1, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 5px 16px rgba(246, 94, 1, 0.14);
+}
+
+.page-baqueano-ai .ai-main-navbar .nav-actions-right {
+  justify-self: end;
+  gap: 0.55rem;
+}
+
+.page-baqueano-ai .ai-main-navbar :is(.nav-ai-status, .sos-quick-btn) {
+  min-height: 42px;
+}
+
+@media (max-width: 1320px) and (min-width: 961px) {
+  .page-baqueano-ai .ai-main-navbar .nav-inner {
+    gap: 0.75rem;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .brand-box {
+    min-width: 158px;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .brand-logo-img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .brand-title {
+    font-size: 1rem;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .nav-links-menu > a,
+  .page-baqueano-ai .ai-main-navbar .nav-dropdown-trigger {
+    padding-inline: 0.58rem;
+    font-size: 0.75rem;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .nav-ai-status {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .page-baqueano-ai .ai-main-navbar .nav-inner {
+    display: flex;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .brand-box {
+    min-width: 0;
+  }
+
+  .page-baqueano-ai .ai-main-navbar .nav-links-menu > .nav-link-ai {
+    display: none !important;
+  }
+}
