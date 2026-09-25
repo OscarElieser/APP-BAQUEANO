@@ -370,8 +370,24 @@
     initImpactDisclosure();
     initCategoryChipsToggle();
     initHeroReelsAutoAdvance();
+    initHeroBackgroundVideo();
     initNicaraguaVivaInteractions();
     initAlliesFilter();
+  }
+
+  // Reproducción defensiva del video de fondo del Hero
+  function initHeroBackgroundVideo() {
+    const video = document.querySelector('.hero-nicaragua-bg-media');
+    if (video && typeof video.play === 'function') {
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Si el navegador bloquea autoplay, se reproducirá al primer gesto
+          window.addEventListener('click', () => { video.play().catch(() => {}); }, { once: true });
+        });
+      }
+    }
   }
 
   if (document.readyState === 'loading') {
