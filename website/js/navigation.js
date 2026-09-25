@@ -676,6 +676,62 @@ function initNavbarQuickSearch() {
 }
 
 /**
+ * 🎯 POR QUÉ: impedir que las páginas públicas mantengan versiones distintas del
+ * pie institucional y asegurar que index.html sea la referencia visual del portal.
+ * ⚙️ CÓMO: sustituye el contenido de cualquier .site-footer-pro por una sola
+ * plantilla compartida antes de activar telemetría y microinteracciones.
+ * 📦 QUÉ: contacto oficial, enlaces legales, derechos y estado territorial.
+ */
+function normalizeInstitutionalFooter() {
+  const footer = document.querySelector('.site-footer-pro');
+  if (!footer) return;
+
+  footer.innerHTML = `
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div class="footer-col-contact">
+          <h4 class="footer-col-header">INFORMACIÓN OFICIAL</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <div><span>Correo Oficial:</span><br><a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a></div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+              <div><span>Mesa de Enlace:</span><br><a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <div><span>Sede Territorial:</span><br><span>Managua · 17 Territorios de Nicaragua</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos &amp; Condiciones</a><span class="separator" aria-hidden="true">|</span>
+        <a href="privacidad.html">Política de Privacidad</a><span class="separator" aria-hidden="true">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a><span class="separator" aria-hidden="true">|</span>
+        <a href="cookies.html">Política de Cookies</a><span class="separator" aria-hidden="true">|</span>
+        <a href="ambiental.html">Decálogo Verde &amp; Huella Cero</a><span class="separator" aria-hidden="true">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a><span class="separator" aria-hidden="true">|</span>
+        <a href="admin.html">Baqueano Ops Center</a>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.</div>
+        <div class="footer-status-row">
+          <span class="footer-live-status"><span class="footer-live-dot" aria-hidden="true"></span>Telemetría GPS 24/7 Activa</span>
+          <a href="ambiental.html"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Decálogo Verde</a>
+          <a href="admin.html"><i class="fa-solid fa-satellite" aria-hidden="true"></i> Ops Center</a>
+        </div>
+      </div>
+    </div>`;
+
+  footer.dataset.canonicalFooter = 'true';
+}
+
+/**
  * Inicializa la telemetría en vivo, seguidor de luz ambiental y micro-interacciones del footer táctico futurista.
  */
 function initDynamicFooter() {
@@ -1124,6 +1180,7 @@ function initializeNavigationModules() {
   initPublicServiceWorker();
   ensureUserSessionLoaded();
   ensureThemeSwitcherLoaded();
+  normalizeInstitutionalFooter();
   buildAboutDropdown();
   initBaqueanoAiNavLink();
   initNavbarScroll();

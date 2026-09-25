@@ -867,6 +867,50 @@ ESQUEMA JSON:
     // Enriquecer el plan con negocios reales y enlaces específicos a WhatsApp
     const plan = enhancePlanWithBusinesses(rawPlan, input);
 
+    // Persistir itinerario en Supabase (public.travel_plans)
+    try {
+      const anonKey = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+      const user = (window.BaqueanoSession && window.BaqueanoSession.getUser) ? window.BaqueanoSession.getUser() : null;
+      const uid = user ? user.firebaseUid : null;
+      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+        window.baqueanoSupabase.from('travel_plans').insert({
+          user_uid: uid,
+          plan_title: plan.plan_title || ('Ruta Baqueano en ' + (plan.destino_principal || 'Nicaragua')),
+          destination: plan.destino_principal || input.origin || 'Nicaragua',
+          days: Number(input.days) || 3,
+          budget: Number(input.budgetUsd) || 300,
+          currency: 'USD',
+          payload: plan,
+          source: plan._source || 'route-builder'
+        }).then(({ error }) => {
+          if (error) console.warn('[Supabase Sync] Aviso en travel_plans:', error.message);
+          else console.info('🟢 [Supabase Sync] Plan de viaje registrado en Supabase.');
+        }).catch(err => console.warn('[Supabase Sync] Error plan:', err.message));
+      } else {
+        fetch('https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/travel_plans', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': anonKey,
+            'Authorization': `Bearer ${anonKey}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            user_uid: uid,
+            plan_title: plan.plan_title || ('Ruta Baqueano en ' + (plan.destino_principal || 'Nicaragua')),
+            destination: plan.destino_principal || input.origin || 'Nicaragua',
+            days: Number(input.days) || 3,
+            budget: Number(input.budgetUsd) || 300,
+            currency: 'USD',
+            payload: plan,
+            source: plan._source || 'route-builder'
+          })
+        }).catch(e => console.warn('[Supabase Sync] Error REST plan:', e.message));
+      }
+    } catch (saveErr) {
+      console.warn('[RouteBuilder] No se pudo guardar en Supabase:', saveErr);
+    }
+
     showcase.style.display = 'block';
     showcase.setAttribute('aria-hidden', 'false');
 

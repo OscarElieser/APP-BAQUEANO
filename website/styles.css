@@ -8517,6 +8517,41 @@ img {
   display: none;
 }
 
+/*
+ * ESTADO OPERATIVO DEL FOOTER CANÓNICO
+ * 🎯 POR QUÉ: todas las páginas necesitan el mismo cierre visual que index.html.
+ * ⚙️ CÓMO: usa una fila flexible y un distintivo compartido sin estilos embebidos.
+ * 📦 QUÉ: telemetría activa y accesos finales adaptables a cualquier viewport.
+ */
+.site-footer-pro .footer-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-footer-pro .footer-live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+  font-family: var(--font-tech);
+  font-size: 0.75rem;
+}
+
+.site-footer-pro .footer-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
 @media (max-width: 850px) {
   .site-footer-pro .footer-columns-grid {
     grid-template-columns: 1fr;
