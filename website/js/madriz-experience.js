@@ -264,31 +264,6 @@
         </div>
       </section>
 
-      <!-- GALERÍA DE ROTACIÓN INFINITA (PAUSABLE) -->
-      <section class="infinite-gallery-section">
-        <div class="container-fluid" style="padding: 0;">
-          <div class="infinite-carousel-container">
-            <div class="infinite-track" onclick="this.classList.toggle('is-paused')" title="Haz clic para pausar/reanudar">
-              <!-- Elementos duplicados para el scroll infinito suave -->
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_panoramica.jpg" alt="Madriz 1" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_interior.png" alt="Madriz 2" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_bote.png" alt="Madriz 3" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Madriz 4" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/destinos/cascada_la_luna.jpg" alt="Madriz 5" loading="lazy"></div>
-              <!-- Duplicado -->
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_panoramica.jpg" alt="Madriz 1" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_interior.png" alt="Madriz 2" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_bote.png" alt="Madriz 3" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Madriz 4" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/destinos/cascada_la_luna.jpg" alt="Madriz 5" loading="lazy"></div>
-            </div>
-          </div>
-          <div style="text-align: center; margin-top: 1rem;">
-             <span class="sub-label-tag" style="font-size: 0.75rem; background: rgba(0,0,0,0.3);"><i class="fa-solid fa-hand-pointer"></i> Haz clic en la galería para pausar</span>
-          </div>
-        </div>
-      </section>
-
       <!-- GALERÍA DE VIDEO DE MADRIZ -->
       <section class="madriz-video-gallery">
         <div class="container">
