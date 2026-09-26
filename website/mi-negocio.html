@@ -366,16 +366,16 @@
                   </div>
 
                   <div class="field-group">
-                    <label class="field-label" for="bizName">Nombre del Negocio o Cooperativa <span class="field-required">*</span></label>
-                    <input type="text" id="bizName" name="bizName" class="form-control-input"
+                    <label class="field-label" for="portalBizName">Nombre del Negocio o Cooperativa <span class="field-required">*</span></label>
+                    <input type="text" id="portalBizName" name="bizName" class="form-control-input"
                            placeholder="Ej: Coop. Ecoturismo Las Nubes, Posada Don Marcos..."
                            required maxlength="120">
-                    <span class="field-error-msg" id="bizName_error">Este campo es obligatorio.</span>
+                    <span class="field-error-msg" id="portalBizName_error">Este campo es obligatorio.</span>
                   </div>
 
                   <div class="field-group">
-                    <label class="field-label" for="bizType">Tipo de Negocio <span class="field-required">*</span></label>
-                    <select id="bizType" name="bizType" class="form-select-input" required>
+                    <label class="field-label" for="portalBizType">Tipo de Negocio <span class="field-required">*</span></label>
+                    <select id="portalBizType" name="bizType" class="form-select-input" required>
                       <option value="">— Selecciona el tipo —</option>
                       <option value="Cooperativa Ecoturística">Cooperativa Ecoturística</option>
                       <option value="Posada / Alojamiento Campesino">Posada / Alojamiento Campesino</option>
@@ -386,13 +386,13 @@
                       <option value="Artesanía & Cultura">Artesanía & Cultura</option>
                       <option value="Aventura & Senderismo">Aventura & Senderismo</option>
                     </select>
-                    <span class="field-error-msg" id="bizType_error">Selecciona el tipo de negocio.</span>
+                    <span class="field-error-msg" id="portalBizType_error">Selecciona el tipo de negocio.</span>
                   </div>
 
                   <div class="field-row-2">
                     <div class="field-group">
-                      <label class="field-label" for="bizDepartment">Departamento <span class="field-required">*</span></label>
-                      <select id="bizDepartment" name="bizDepartment" class="form-select-input" required>
+                      <label class="field-label" for="portalBizDepartment">Departamento <span class="field-required">*</span></label>
+                      <select id="portalBizDepartment" name="bizDepartment" class="form-select-input" required>
                         <option value="">— Departamento —</option>
                         <option>Boaco</option>
                         <option>Carazo</option>
@@ -412,22 +412,22 @@
                         <option>RACCS</option>
                         <option>RACCN</option>
                       </select>
-                      <span class="field-error-msg" id="bizDepartment_error">Selecciona tu departamento.</span>
+                      <span class="field-error-msg" id="portalBizDepartment_error">Selecciona tu departamento.</span>
                     </div>
                     <div class="field-group">
-                      <label class="field-label" for="bizMunicipality">Municipio <span class="field-required">*</span></label>
-                      <input type="text" id="bizMunicipality" name="bizMunicipality" class="form-control-input"
+                      <label class="field-label" for="portalBizMunicipality">Municipio <span class="field-required">*</span></label>
+                      <input type="text" id="portalBizMunicipality" name="bizMunicipality" class="form-control-input"
                              placeholder="Ej: Somoto, El Cuá..." required maxlength="80">
-                      <span class="field-error-msg" id="bizMunicipality_error">Ingresa el municipio.</span>
+                      <span class="field-error-msg" id="portalBizMunicipality_error">Ingresa el municipio.</span>
                     </div>
                   </div>
 
                   <div class="field-group">
-                    <label class="field-label" for="bizDescription">Descripción de tus Servicios <span class="field-required">*</span></label>
-                    <textarea id="bizDescription" name="bizDescription" class="form-textarea-input"
+                    <label class="field-label" for="portalBizDescription">Descripción de tus Servicios <span class="field-required">*</span></label>
+                    <textarea id="portalBizDescription" name="bizDescription" class="form-textarea-input"
                               placeholder="Describe los tours, alojamientos, gastronomía o experiencias que ofreces y por qué son únicos para el viajero responsable..."
                               required maxlength="800"></textarea>
-                    <span class="field-error-msg" id="bizDescription_error">Describe tus servicios.</span>
+                    <span class="field-error-msg" id="portalBizDescription_error">Describe tus servicios.</span>
                     <span class="field-hint">Máximo 800 caracteres. Sé específico: menciona precios, duración y grupos máximos.</span>
                   </div>
 
@@ -438,8 +438,8 @@
                              placeholder="Ej: 12" min="1" max="200">
                     </div>
                     <div class="field-group">
-                      <label class="field-label" for="bizPrice">Precio Base por Persona (USD)</label>
-                      <input type="number" id="bizPrice" name="bizPrice" class="form-control-input"
+                      <label class="field-label" for="portalBizPrice">Precio Base por Persona (USD)</label>
+                      <input type="number" id="portalBizPrice" name="bizPrice" class="form-control-input"
                              placeholder="Ej: 35" min="1" max="500" step="1">
                     </div>
                   </div>
@@ -478,22 +478,22 @@
                   </div>
 
                   <div class="field-group">
-                    <label class="field-label" for="bizEmail">Correo Electrónico <span class="field-required">*</span></label>
-                    <input type="email" id="bizEmail" name="bizEmail" class="form-control-input"
+                    <label class="field-label" for="portalBizEmail">Correo Electrónico <span class="field-required">*</span></label>
+                    <input type="email" id="portalBizEmail" name="bizEmail" class="form-control-input"
                            placeholder="tucorreo@ejemplo.com" required maxlength="120">
-                    <span class="field-error-msg" id="bizEmail_error">Correo electrónico inválido.</span>
+                    <span class="field-error-msg" id="portalBizEmail_error">Correo electrónico inválido.</span>
                   </div>
 
                   <div class="field-row-2">
                     <div class="field-group">
-                      <label class="field-label" for="bizPhone">Teléfono de Contacto <span class="field-required">*</span></label>
-                      <input type="tel" id="bizPhone" name="bizPhone" class="form-control-input"
+                      <label class="field-label" for="portalBizPhone">Teléfono de Contacto <span class="field-required">*</span></label>
+                      <input type="tel" id="portalBizPhone" name="bizPhone" class="form-control-input"
                              placeholder="+505 8XXX-XXXX" required maxlength="20">
-                      <span class="field-error-msg" id="bizPhone_error">Teléfono inválido.</span>
+                      <span class="field-error-msg" id="portalBizPhone_error">Teléfono inválido.</span>
                     </div>
                     <div class="field-group">
-                      <label class="field-label" for="bizWhatsapp">WhatsApp (Opcional)</label>
-                      <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="form-control-input"
+                      <label class="field-label" for="portalBizWhatsapp">WhatsApp (Opcional)</label>
+                      <input type="tel" id="portalBizWhatsapp" name="bizWhatsapp" class="form-control-input"
                              placeholder="+505 8XXX-XXXX" maxlength="20">
                       <span class="field-hint">Para contacto directo de exploradores.</span>
                     </div>
@@ -747,7 +747,7 @@
           <div class="biz-trigger-wrap">
             <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
               <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
+                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
             </button>
           </div>
         </div>

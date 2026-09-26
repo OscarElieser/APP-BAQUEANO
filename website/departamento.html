@@ -51,7 +51,7 @@
 
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.10.0/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
 
   <!-- Estilos Baqueano -->
   <link rel="stylesheet" href="styles.css?v=20260925-shell-1">
@@ -277,6 +277,29 @@
             <h3>3. Lugares Turísticos Principales & Áreas Protegidas</h3>
           </div>
           <div class="dept-places-grid" id="deptPlacesGrid"></div>
+        </div>
+
+        <!--
+          POR QUÉ: los 17 territorios necesitan la misma referencia cartográfica.
+          CÓMO: el controlador recibe las coordenadas verificadas del catálogo territorial
+          y reutiliza una sola instancia MapLibre con marcadores publicados de Firestore.
+          QUÉ: mapa genérico para los departamentos y regiones sin experiencia especial.
+        -->
+        <div class="dept-section-card" aria-labelledby="territoryMapTitle">
+          <div class="madriz-map-heading">
+            <div class="sub-label-tag"><i class="fa-solid fa-map-location-dot"></i> CARTOGRAFÍA TERRITORIAL</div>
+            <h2 id="territoryMapTitle">Ubicación exacta del territorio</h2>
+            <p id="territoryMapDescription">Mapa centrado en las coordenadas oficiales del departamento o región seleccionada.</p>
+          </div>
+          <div class="baqueano-map-wrapper" id="territoryMapShell">
+            <div id="territoryMap" role="application" aria-label="Mapa interactivo del territorio seleccionado"></div>
+            <div class="madriz-map-topbar">
+              <span class="madriz-map-live"><i class="fa-solid fa-satellite-dish"></i> Datos territoriales BAQUEANO</span>
+              <button type="button" class="madriz-map-expand" id="territoryMapExpand" aria-label="Ampliar mapa">Ampliar <i class="fa-solid fa-expand"></i></button>
+            </div>
+            <div class="madriz-map-status" id="territoryMapStatus" role="status" aria-live="polite"><i class="fa-solid fa-circle-notch fa-spin"></i> Preparando ubicación territorial…</div>
+            <div id="territoryMapPlacesCarousel" class="map-places-carousel" aria-label="Lugares disponibles en el mapa"></div>
+          </div>
         </div>
 
         <!-- 4. QUÉ PUEDE HACER EL TURISTA (ACTIVIDADES) -->
@@ -870,7 +893,7 @@
   <script src="js/territories-data.js"></script>
   <script src="js/madriz-experience.js"></script>
   <script src="js/chinandega-experience.js"></script>
-  <script src="https://unpkg.com/maplibre-gl@6.10.0/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
   <script src="js/madriz-territory-map.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function initDepartmentPage() {
@@ -1035,6 +1058,22 @@
         if (reachEl) reachEl.textContent = dept.howToReach;
         const recEl = document.getElementById('deptRecommendationsText');
         if (recEl) recEl.textContent = dept.recommendations;
+
+        const mapTitle = document.getElementById('territoryMapTitle');
+        const mapDescription = document.getElementById('territoryMapDescription');
+        const mapCanvas = document.getElementById('territoryMap');
+        if (mapTitle) mapTitle.textContent = `Ubicación exacta de ${dept.name}`;
+        if (mapDescription) mapDescription.textContent = `Mapa centrado en ${dept.name}, con lugares publicados que disponen de coordenadas verificables.`;
+        if (mapCanvas) mapCanvas.setAttribute('aria-label', `Mapa interactivo de ${dept.name}`);
+        if (window.BaqueanoMadrizMap && Number.isFinite(Number(dept.lat)) && Number.isFinite(Number(dept.lng))) {
+          window.BaqueanoMadrizMap.mount({
+            departmentId: dept.id,
+            elementPrefix: 'territory',
+            territoryName: dept.name,
+            center: [Number(dept.lng), Number(dept.lat)],
+            zoom: dept.id === 'raccn' || dept.id === 'raccs' || dept.id === 'rio-san-juan' ? 7.35 : 8.25
+          });
+        }
 
         renderSelectorGrid(dept.id);
       }

@@ -1,12 +1,12 @@
 // ============================================================================
-// BAQUEANO — MAPA TERRITORIAL DINÁMICO DE MADRIZ
+// BAQUEANO — MAPA TERRITORIAL DINÁMICO DE NICARAGUA
 // ============================================================================
-// 🎯 POR QUÉ: conectar la guía de Madriz con lugares reales sin inventar
-// coordenadas, autores de reseñas ni valoraciones para llenar el mapa.
+// 🎯 POR QUÉ: conectar las 17 guías territoriales con ubicaciones reales sin
+// inventar coordenadas, autores de reseñas ni valoraciones para llenar el mapa.
 // ⚙️ CÓMO: MapLibre renderiza la cartografía; Firestore aporta únicamente
 // documentos publicados de tourismPlaces y reviews calcula la media visible.
-// 📦 QUÉ: mapa oscuro, marcadores accesibles, fichas inferiores, enfoque,
-// pantalla completa, estados vacíos y limpieza al cambiar de departamento.
+// 📦 QUÉ: mapa reutilizable, centro territorial exacto, marcadores accesibles,
+// fichas inferiores, pantalla completa y limpieza al cambiar de departamento.
 // ============================================================================
 
 (function (window, document) {
@@ -14,7 +14,19 @@
 
   let departmentId = 'madriz';
   let elementPrefix = 'madriz';
-  const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+  let territoryName = 'Madriz';
+  const MAP_STYLE = {
+    version: 8,
+    sources: {
+      arcgisWorld: {
+        type: 'raster',
+        tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'],
+        tileSize: 256,
+        attribution: 'Tiles &copy; Esri'
+      }
+    },
+    layers: [{ id: 'arcgis-world', type: 'raster', source: 'arcgisWorld' }]
+  };
   let defaultCenter = [-86.6, 13.45];
   let defaultZoom = 8.45;
   let map = null;
@@ -70,7 +82,7 @@
   async function waitForDependencies(runId) {
     for (let attempt = 0; attempt < 40; attempt += 1) {
       if (runId !== generation) return false;
-      if (window.maplibregl && window.firebase?.firestore && window.BaqueanoFirebase?.isReady) return true;
+      if (window.maplibregl) return true;
       await new Promise((resolve) => window.setTimeout(resolve, 150));
     }
     return false;
@@ -100,6 +112,7 @@
   }
 
   async function loadPlaces() {
+    if (!window.firebase?.firestore || !window.BaqueanoFirebase?.isReady) return [];
     const db = window.firebase.firestore();
     const snapshot = await db.collection('tourismPlaces')
       .where('departmentId', '==', departmentId)
@@ -127,7 +140,7 @@
 
     const content = document.createElement('div');
     const title = document.createElement('h3');
-    title.textContent = String(place.name || 'Lugar de Madriz');
+    title.textContent = String(place.name || `Lugar de ${territoryName}`);
     const description = document.createElement('p');
     description.textContent = String(place.shortDescription || place.categoryLabel || 'Lugar publicado en el catálogo territorial.');
     content.append(title, description);
@@ -165,7 +178,7 @@
     const markerButton = document.createElement('button');
     markerButton.type = 'button';
     markerButton.className = place.reviewRating ? 'baqueano-rating-marker' : 'baqueano-map-marker';
-    markerButton.setAttribute('aria-label', `Mostrar ${place.name || 'lugar de Madriz'}`);
+    markerButton.setAttribute('aria-label', `Mostrar ${place.name || `lugar de ${territoryName}`}`);
     markerButton.textContent = place.reviewRating ? ratingLabel(place) : '';
     if (!place.reviewRating) markerButton.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
 
@@ -192,12 +205,12 @@
     const copy = document.createElement('span');
     copy.className = 'map-place-copy';
     const name = document.createElement('strong');
-    name.textContent = String(place.name || 'Lugar de Madriz');
+    name.textContent = String(place.name || `Lugar de ${territoryName}`);
     const meta = document.createElement('span');
     const parts = [];
     if (place.reviewRating) parts.push(`${ratingLabel(place)} (${place.reviewRating.count})`);
     if (place.categoryLabel || place.category) parts.push(String(place.categoryLabel || place.category).replaceAll('_', ' '));
-    meta.textContent = parts.join(' · ') || String(place.municipality || 'Madriz');
+    meta.textContent = parts.join(' · ') || String(place.municipality || territoryName);
     copy.append(name, meta);
     card.append(image, copy);
     card.addEventListener('click', () => focusPlace(place, marker, card));
@@ -230,6 +243,7 @@
     const config = options || {};
     departmentId = String(config.departmentId || 'madriz');
     elementPrefix = String(config.elementPrefix || departmentId);
+    territoryName = String(config.territoryName || (departmentId === 'madriz' ? 'Madriz' : departmentId));
     defaultCenter = Array.isArray(config.center) ? config.center : [-86.6, 13.45];
     defaultZoom = Number.isFinite(config.zoom) ? config.zoom : 8.45;
     const runId = generation;
@@ -255,12 +269,27 @@
       map.addControl(new window.maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
       bindExpandButton();
 
-      const places = await loadPlaces();
+      const centerMarkerElement = document.createElement('button');
+      centerMarkerElement.type = 'button';
+      centerMarkerElement.className = 'baqueano-map-marker baqueano-territory-center-marker';
+      centerMarkerElement.setAttribute('aria-label', `Centro territorial de ${territoryName}`);
+      centerMarkerElement.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>';
+      const centerMarker = new window.maplibregl.Marker({ element: centerMarkerElement, anchor: 'bottom' })
+        .setLngLat(defaultCenter)
+        .addTo(map);
+      markers.push(centerMarker);
+
+      let places = [];
+      try {
+        places = await loadPlaces();
+      } catch (error) {
+        console.warn(`[Mapa ${territoryName}] No fue posible consultar lugares publicados:`, error.message);
+      }
       if (runId !== generation || !map) return;
       const carousel = byId('mapPlacesCarousel');
       if (carousel) carousel.replaceChildren();
       if (!places.length) {
-        setStatus('Aún no hay lugares de Madriz publicados con coordenadas verificadas.', 'empty');
+        setStatus(`Mapa centrado en ${territoryName}. Aún no hay lugares publicados con coordenadas verificadas.`, 'empty');
         return;
       }
 
@@ -273,7 +302,7 @@
       });
       setStatus(`${places.length} ${places.length === 1 ? 'lugar publicado' : 'lugares publicados'} con ubicación verificable.`, 'ready');
     } catch (error) {
-      console.error('[Mapa Madriz]', error);
+      console.error(`[Mapa ${territoryName}]`, error);
       setStatus('No fue posible cargar el catálogo territorial en este momento.', 'error');
     }
   }
@@ -293,6 +322,7 @@
     mount: () => mount({
       departmentId: 'chinandega',
       elementPrefix: 'chinandega',
+      territoryName: 'Chinandega',
       center: [-87.13, 12.63],
       zoom: 8.25
     }),

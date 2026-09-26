@@ -112,6 +112,7 @@ website/
 │   └── pages/               # Ajustes específicos por página
 ├── js/                      # Módulos del portal estático
 ├── docs/                    # Arquitectura, seguridad, operaciones y gobierno
+│   └── audits/             # Capturas y evidencia de revisiones visuales
 ├── scripts/                 # Pruebas y auditorías automatizadas
 ├── tests/                   # Recursos de pruebas de interfaz
 ├── index.html               # Portada y referencia visual pública
@@ -127,6 +128,9 @@ website/
 
 No deben versionarse como fuentes los resultados locales de `.next/`, `node_modules/`,
 logs, capturas temporales o reportes generados.
+
+La ubicación y reglas detalladas de cada tipo de archivo están documentadas en
+[`docs/WEBSITE_STRUCTURE.md`](docs/WEBSITE_STRUCTURE.md).
 
 ---
 

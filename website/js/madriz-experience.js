@@ -300,7 +300,7 @@
           
           <div class="video-grid">
              <div class="video-card-showcase">
-               <video src="assets/videos/madriz_canon.mp4" controls poster="assets/images/madriz/canon_somoto_panoramica.jpg"></video>
+               <video src="assets/videos/video%20nicaragua.mp4" controls preload="metadata" poster="assets/images/madriz/canon_somoto_panoramica.jpg"></video>
                <div class="video-info">
                  <h4>Navegando el Cañón de Somoto</h4>
                  <p>Turismo comunitario guiado por los baqueanos locales.</p>
@@ -308,7 +308,7 @@
              </div>
              
              <div class="video-card-showcase">
-               <video src="assets/videos/madriz_rosquillas.mp4" controls poster="assets/images/madriz/canon_somoto_interior.png"></video>
+               <video src="assets/videos/gastronomia.mp4" controls preload="metadata" poster="assets/images/madriz/canon_somoto_interior.png"></video>
                <div class="video-info">
                  <h4>Elaboración de Rosquillas</h4>
                  <p>Tradición centenaria en hornos de barro.</p>
@@ -1240,7 +1240,7 @@
       <!-- MODAL PARA EXPLORAR CADA UNO DE LOS 9 MUNICIPIOS -->
       <div class="modal-backdrop-pro" id="munDetailModal" aria-hidden="true" role="dialog">
         <div class="mun-modal-dialog">
-          <button class="modal-close-x" id="closeMunModalBtn" onclick="window.BaqueanoMadriz.closeMunicipalityModal()"><i class="fa-solid fa-xmark"></i></button>
+          <button class="modal-close-x" id="closeMunModalBtn" aria-label="Cerrar información del municipio" onclick="window.BaqueanoMadriz.closeMunicipalityModal()"><i class="fa-solid fa-xmark"></i></button>
           <div id="munModalBody"></div>
         </div>
       </div>
@@ -1248,7 +1248,7 @@
       <!-- LIGHTBOX PARA FOTOS -->
       <div class="modal-backdrop-pro" id="photoLightboxModal" aria-hidden="true" role="dialog" onclick="window.BaqueanoMadriz.closePhotoModal()">
         <div class="lightbox-dialog" onclick="event.stopPropagation()">
-          <button class="modal-close-x" onclick="window.BaqueanoMadriz.closePhotoModal()"><i class="fa-solid fa-xmark"></i></button>
+          <button class="modal-close-x" aria-label="Cerrar fotografía" onclick="window.BaqueanoMadriz.closePhotoModal()"><i class="fa-solid fa-xmark"></i></button>
           <img id="lightboxImg" src="" alt="Ampliación">
           <div id="lightboxCaption" class="lightbox-caption"></div>
         </div>
