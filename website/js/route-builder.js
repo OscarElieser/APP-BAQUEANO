@@ -786,7 +786,58 @@ ESQUEMA JSON:
   "nota_ia": "Itinerario asistido con IA fundamentado en destinos verificados de Nicaragua."
 }`;
 
-    // 6.1 Intento prioritario con OpenAI API (GPT-4o Mini)
+    // 6.1 Gateway seguro: recupera información web fundamentada sin exponer
+    // secretos del proveedor en el navegador y conserva las fuentes consultadas.
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 14000);
+      const response = await fetch('/api/baqueano-ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          prompt,
+          department: input.origin,
+          days: input.days,
+          groupSize: input.adults + input.children,
+          budgetNio: input.currency === 'NIO' ? input.budget : input.budget * OFFICIAL_BCN_RATE_2026,
+          budgetUsd: input.currency === 'USD' ? input.budget : input.budget / OFFICIAL_BCN_RATE_2026,
+          travelStyle: input.interests[0] || 'aventura'
+        })
+      });
+      clearTimeout(timeoutId);
+      if (response.ok) {
+        const data = await response.json();
+        const itinerary = data?.itinerary;
+        if (data?.success && itinerary) {
+          return {
+            plan_title: itinerary.title,
+            destino_principal: itinerary.territory,
+            resumen: itinerary.summary,
+            presupuesto_estimado: null,
+            days: (itinerary.days || []).map((day, index) => ({
+              day: day.dayNumber || index + 1,
+              titulo: day.title,
+              activities: (day.stops || []).map(stop => ({
+                nombre: stop.name,
+                tipo: 'actividad',
+                descripcion: stop.desc,
+                precio_publicado: null,
+                fuente: itinerary.informationMode === 'grounded-web' ? 'Fuente web consultada' : 'Catálogo territorial'
+              }))
+            })),
+            recomendacion_final: itinerary.sustainabilityNote,
+            sources: itinerary.sources || [],
+            informationMode: itinerary.informationMode || 'local-catalog',
+            _source: data.provider || 'baqueano-gateway'
+          };
+        }
+      }
+    } catch (error) {
+      console.warn('[RouteBuilder] Gateway fundamentado no disponible:', error.message);
+    }
+
+    // 6.2 Intento alternativo con OpenAI API (GPT-4o Mini)
     if (OPENAI_API_KEY) {
       try {
         const resp = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -1030,6 +1081,15 @@ ESQUEMA JSON:
           </div>
           <div class="rb-budget-reserve"><i class="fa-solid fa-shield-heart"></i> Reserva para imprevistos (20%): <strong>${dualMoney(budgetAllocation.reserve, input.currency)}</strong></div>
           <small>Conversión de referencia: US$1 = C$${OFFICIAL_BCN_RATE_2026}, tipo de cambio oficial BCN 2026.</small>
+        </section>` : ''}
+
+      ${plan.informationMode === 'grounded-web' && Array.isArray(plan.sources) && plan.sources.length ? `
+        <section class="rb-budget-allocation" aria-labelledby="rbWebSourcesTitle">
+          <div class="rb-budget-allocation-head"><div><span>INFORMACIÓN FUNDAMENTADA</span><h4 id="rbWebSourcesTitle">Fuentes consultadas en la web</h4></div></div>
+          <div class="rb-budget-allocation-grid">
+            ${plan.sources.map(source => `<article><i class="fa-solid fa-link"></i><span>${escapeHtml(source.label || 'Fuente web')}</span><strong><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">Consultar fuente</a></strong></article>`).join('')}
+          </div>
+          <small>Estas referencias respaldan datos generales; no validan precios que no estén publicados en BAQUEANO.</small>
         </section>` : ''}
 
       <!-- LISTA DE DÍAS Y ACTIVIDADES CON SUS ANFITRIONES -->
