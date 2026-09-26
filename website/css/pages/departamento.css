@@ -2310,6 +2310,15 @@ button.territory-pill-card span {
   background: #0F172A;
 }
 
+.territory-unified-layout .chinandega-logistics-card,
+.territory-unified-layout .territory-closing-card {
+  margin-top: 2rem;
+}
+
+.territory-unified-layout .territory-closing-card {
+  margin-bottom: 2rem;
+}
+
 @media (max-width: 720px) {
   .territory-media-experience .gallery-header-row {
     align-items: flex-start;

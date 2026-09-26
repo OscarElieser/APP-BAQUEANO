@@ -1053,6 +1053,10 @@
          */
         if (dept.id === 'madriz' && window.BaqueanoMadriz) {
           if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.unmount();
+          if (mainContainer) {
+            mainContainer.classList.remove('territory-unified-layout');
+            mainContainer.dataset.territory = 'madriz';
+          }
           window.BaqueanoMadriz.renderMadrizExperience(mainContainer, dept);
           renderSelectorGrid('madriz');
           return;
@@ -1064,6 +1068,10 @@
 
         if (dept.id === 'chinandega' && window.BaqueanoChinandega) {
           if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.unmount();
+          if (mainContainer) {
+            mainContainer.classList.remove('territory-unified-layout');
+            mainContainer.dataset.territory = 'chinandega';
+          }
           window.BaqueanoChinandega.renderChinandegaExperience(mainContainer, dept);
           renderSelectorGrid('chinandega');
           return;
