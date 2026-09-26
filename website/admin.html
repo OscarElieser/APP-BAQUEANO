@@ -373,7 +373,7 @@
             <div class="ops-view-actions">
               <span style="font-size: 0.78rem; color: var(--ops-text-muted);" id="opsMetricsLastUpdated">Actualizando...</span>
               <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.seedInitialContent()"><i class="fa-solid fa-cloud-arrow-up"></i> Migrar Catálogo Inicial</button>
-              <button class="btn-ops-matte primary" onclick="location.reload()"><i class="fa-solid fa-rotate"></i> Sincronizar</button>
+              <button class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> Sincronizar</button>
             </div>
           </div>
 
@@ -1359,7 +1359,7 @@
         <h2 style="font-size: 1.25rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.65rem; font-family: 'Montserrat', sans-serif;">
           <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-accent);"></i> Copia de Seguridad &amp; Restauración
         </h2>
-        <button type="button" class="ops-drawer-close-btn" onclick="document.getElementById('opsBackupModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+      <button type="button" class="ops-drawer-close-btn" aria-label="Cerrar respaldo" onclick="document.getElementById('opsBackupModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <p style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.55; margin-bottom: 1.5rem;">
         Genera una copia de seguridad integral fechada (año, mes, día y hora exacta) con todos los 33 módulos, destinos, leyes y configuraciones del ecosistema para restauraciones seguras en cualquier momento.

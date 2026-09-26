@@ -933,6 +933,35 @@ function ensureThemeSwitcherLoaded() {
 }
 
 /**
+ * POR QUE: los controles con solo iconos o placeholders necesitan un nombre
+ * accesible para lectores de pantalla y navegacion asistida.
+ * COMO: conserva etiquetas HTML existentes y completa un aria-label defensivo
+ * usando title, placeholder, name o un identificador humanizado.
+ * QUE: normaliza botones, campos y selectores publicos sin cambiar su diseno.
+ */
+function ensureAccessibleControlNames(root = document) {
+  root.querySelectorAll('button, input:not([type="hidden"]), select, textarea').forEach((control) => {
+    if (control.getAttribute('aria-hidden') === 'true') return;
+    if (control.getAttribute('aria-label') || control.getAttribute('aria-labelledby')) return;
+    if (control.closest('label')) return;
+    if (control.id && document.querySelector(`label[for="${CSS.escape(control.id)}"]`)) return;
+
+    const rawName = control.getAttribute('title')
+      || control.getAttribute('placeholder')
+      || control.getAttribute('name')
+      || control.id;
+    if (!rawName) return;
+
+    const accessibleName = rawName
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/[-_]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (accessibleName) control.setAttribute('aria-label', accessibleName);
+  });
+}
+
+/**
  * Inicializa el acordeón desplegable y la interactividad del registro de negocios en el footer.
  */
 function initFooterBizRegister() {
@@ -1198,6 +1227,7 @@ function initializeNavigationModules() {
   initFooterBizRegister();
   initDropdownMiPais();
   loadBaqueanoDigital();
+  ensureAccessibleControlNames();
 }
 
 // ============================================================================

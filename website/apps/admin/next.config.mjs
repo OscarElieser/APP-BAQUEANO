@@ -1,4 +1,10 @@
-/** @type {import('next').NextConfig} */
+/**
+ * POR QUE: construir el Ops Center de forma reproducible dentro del monorepo.
+ * COMO: fija la raiz de trazado y mantiene Genkit/OpenTelemetry como paquetes
+ * de servidor para que Next.js no intente empaquetar exportadores opcionales.
+ * QUE: configuracion de compilacion, seguridad HTTP y paquetes compartidos.
+ * @type {import('next').NextConfig}
+ */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,6 +12,8 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 
 const nextConfig = {
   reactStrictMode: true,
+  outputFileTracingRoot: workspaceRoot,
+  serverExternalPackages: ["genkit", "@genkit-ai/core", "@opentelemetry/sdk-node"],
   transpilePackages: ["@baqueano/config", "@baqueano/firebase", "@baqueano/types", "@baqueano/ui", "@baqueano/validators", "@baqueano/ai-core"],
   async headers() {
     return [
