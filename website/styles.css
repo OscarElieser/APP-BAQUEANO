@@ -1884,11 +1884,31 @@ input[type="range"] {
 /* ==========================================================================
    14. FOOTER INSTITUCIONAL ULTRA-FUTURISTA & HUD INTERACTIVO
    ========================================================================== */
+/* ==========================================================================
+   🧭 FOOTER INSTITUCIONAL — PANORAMA OFICIAL NICARAGUA & HUD DE ALTA GAMA
+   --------------------------------------------------------------------------
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Enmarcar el pie de página de todo el ecosistema web Baqueano en la riqueza
+     paisajística y soberanía de Nicaragua: volcanes sagrados, Lago Cocibolca,
+     el Guardabarranco nacional, el café maduro y los petroglifos ancestrales.
+   
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Fondo panorámico oficial 'footer-nicaragua-panorama.png' con gradiente
+     semitransparente superior para garantizar máximo contraste y legibilidad.
+   - Posicionamiento cover centrado en la base con acento en borde naranja (#F65E01).
+   - Rejilla táctica HUD atenuada (opacity: 0.22) para permitir apreciar el arte.
+   ========================================================================== */
 .site-footer-pro {
   position: relative;
-  background: radial-gradient(ellipse at 50% 0%, #0c172a 0%, #050811 100%);
-  border-top: 1px solid rgba(246, 94, 1, 0.35);
-  padding: 3.5rem 0 2rem;
+  background-color: #050811;
+  background-image: 
+    linear-gradient(180deg, rgba(12, 23, 42, 0.86) 0%, rgba(5, 8, 17, 0.58) 38%, rgba(5, 8, 17, 0.92) 100%),
+    url('assets/images/footer-nicaragua-panorama.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  border-top: 1px solid rgba(246, 94, 1, 0.45);
+  padding: 4rem 0 2rem;
   overflow: hidden;
   z-index: 10;
 }
@@ -1902,12 +1922,12 @@ input[type="range"] {
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(rgba(22, 93, 111, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 93, 111, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(22, 93, 111, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 93, 111, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
   background-position: center top;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.22;
 }
 
 /* Luz ambiental reactiva que sigue al cursor */
@@ -8579,9 +8599,11 @@ img {
   border: 1px solid rgba(246, 94, 1, 0.28);
   border-radius: 22px;
   background:
-    radial-gradient(circle at 5% 0%, rgba(246, 94, 1, 0.12), transparent 34%),
-    radial-gradient(circle at 95% 100%, rgba(22, 93, 111, 0.2), transparent 38%),
-    linear-gradient(125deg, rgba(15, 23, 42, 0.92), rgba(6, 16, 24, 0.96));
+    radial-gradient(circle at 5% 0%, rgba(246, 94, 1, 0.15), transparent 34%),
+    radial-gradient(circle at 95% 100%, rgba(22, 93, 111, 0.22), transparent 38%),
+    linear-gradient(125deg, rgba(15, 23, 42, 0.72), rgba(6, 16, 24, 0.78));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
