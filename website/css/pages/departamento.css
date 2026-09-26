@@ -2257,32 +2257,13 @@ button.territory-pill-card span {
 }
 
 /* ============================================================================
-   EXPERIENCIA MULTIMEDIA TERRITORIAL COMPARTIDA
-   🎯 POR QUÉ: extender la jerarquía visual de Madriz a los demás territorios.
-   ⚙️ CÓMO: ajustes aislados sobre el componente compartido, sin cambiar las
-      experiencias especiales de Madriz y Chinandega.
-   📦 QUÉ: títulos, ayudas, fotografías y comportamiento móvil accesible.
+   ARCHIVO FOTOGRÁFICO TERRITORIAL COMPARTIDO
+   🎯 POR QUÉ: presentar imágenes propias sin repeticiones ni atribuciones dudosas.
+   ⚙️ CÓMO: ajustes aislados que conservan los diseños de Madriz y Chinandega.
+   📦 QUÉ: tarjetas fotográficas y comportamiento móvil accesible.
    ============================================================================ */
 .territory-media-experience {
   background: linear-gradient(180deg, #0F172A 0%, #1a0d08 52%, #0F172A 100%);
-}
-
-.territory-gallery-help {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.territory-movement-title {
-  margin: 0.5rem 0 0;
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.7rem);
-}
-
-.territory-video-gallery .video-gallery-header > p {
-  max-width: 640px;
-  margin: 0.75rem 0 2rem;
-  color: var(--text-secondary);
 }
 
 .territory-photo-card {
@@ -2294,29 +2275,9 @@ button.territory-pill-card span {
 }
 
 @media (max-width: 720px) {
-  .territory-media-experience .infinite-item {
-    width: 260px;
-    height: 180px;
-    margin-right: 1rem;
-  }
-
-  .territory-media-experience .video-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .territory-media-experience .video-card-showcase video {
-    height: 210px;
-  }
-
   .territory-media-experience .gallery-header-row {
     align-items: flex-start;
     flex-direction: column;
     gap: 1rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .territory-media-experience .infinite-track {
-    animation-play-state: paused;
   }
 }
