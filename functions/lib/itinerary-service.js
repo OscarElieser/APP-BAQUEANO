@@ -29,6 +29,7 @@ const { BAQUEANO_FALLBACK_TERRITORIES } = require("./baqueano-knowledge");
 const BCN_RATE = 36.6243;
 const GROUNDED_MODEL = process.env.GEMINI_GROUNDED_MODEL || "gemini-2.5-flash";
 const TRUSTED_SOURCE_DOMAINS = [
+  "mapanicaragua.com",
   "visitanicaragua.com",
   "intur.gob.ni",
   "bcn.gob.ni",
@@ -95,6 +96,7 @@ async function buildGroundedWebItinerary(payload, territory, apiKey, fetchImpl =
   const timeout = setTimeout(() => controller.abort(), 12000);
   const prompt = `Crea un itinerario turístico verificable de Nicaragua en JSON estricto.
 Consulta la web y prioriza estas fuentes oficiales: ${TRUSTED_SOURCE_DOMAINS.join(", ")}.
+Usa Mapa Nacional de Turismo (mapanicaragua.com), publicado por INTUR, para contrastar departamentos, regiones, atractivos, servicios turísticos y ubicación.
 Solicitud: ${payload.prompt}. Departamento: ${payload.department}. Días: ${payload.days}. Viajeros: ${payload.groupSize}. Interés: ${payload.travelStyle}.
 Reglas: no inventes lugares, teléfonos, horarios, disponibilidad ni precios. No incluyas precios; si no hay evidencia suficiente, omite el lugar. Usa solo información pertinente a Nicaragua.
 Esquema: {"title":"...","summary":"...","territory":"...","days":[{"title":"...","summary":"...","stops":[{"name":"...","desc":"..."}]}]}`;
