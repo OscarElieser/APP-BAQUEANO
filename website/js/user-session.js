@@ -101,11 +101,54 @@
   /**
    * Guarda los datos de sesión en almacenamiento local.
    */
+  /**
+   * Guarda los datos de sesión en almacenamiento local y sincroniza la identidad
+   * y trazabilidad de usuario en tiempo real con Cloud Firestore (Ops Command Center).
+   */
   function saveSession(userObj) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(userObj));
     } catch (e) {
       console.warn('[Baqueano Session] Error guardando localStorage:', e);
+    }
+
+    // Trazabilidad de Usuario en Tiempo Real hacia el Ops Center
+    if (userObj && userObj.isLoggedIn && (userObj.firebaseUid || userObj.uid)) {
+      try {
+        if (typeof window !== 'undefined' && window.firebase && window.firebase.firestore) {
+          const db = window.firebase.firestore();
+          const uid = userObj.firebaseUid || userObj.uid;
+          const userDoc = {
+            id: uid,
+            uid: uid,
+            displayName: userObj.name || userObj.displayName || 'Explorador',
+            email: userObj.email || '',
+            photoURL: userObj.avatar || userObj.photoURL || '',
+            role: userObj.role || 'explorer',
+            platform: 'web',
+            explorerLevel: userObj.explorerLevel || 'Novato',
+            status: 'active',
+            lastLogin: window.firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
+          };
+
+          // 1. Guardar/actualizar perfil en colección 'users'
+          db.collection('users').doc(uid).set(userDoc, { merge: true }).catch(() => {});
+
+          // 2. Registrar evento de auditoría en 'audit_logs'
+          db.collection('audit_logs').add({
+            action: 'USER_LOGIN_WEB',
+            platform: 'web',
+            userId: uid,
+            userEmail: userObj.email || '',
+            performedBy: userObj.name || userObj.email || 'Explorador Web',
+            details: 'Inicio de sesión verificado en Portal Web Baqueano',
+            timestamp: window.firebase.firestore.FieldValue.serverTimestamp()
+          }).catch(() => {});
+        }
+      } catch (syncErr) {
+        console.debug('[Baqueano Session] Telemetría web diferida:', syncErr);
+      }
     }
   }
 

@@ -102,8 +102,12 @@ class AuthService extends ChangeNotifier {
         databaseId: _databaseId,
       );
     } catch (error) {
-      debugPrint('Firestore de perfiles no estÃ¡ disponible: $error');
-      return null;
+      try {
+        return FirebaseFirestore.instance;
+      } catch (_) {
+        debugPrint('Firestore de perfiles no está disponible: $error');
+        return null;
+      }
     }
   }
 
@@ -168,6 +172,7 @@ class AuthService extends ChangeNotifier {
     _currentUser = profile;
     _isLoading = false;
     _notifySafely();
+    unawaited(_persistAndroidUserSession(firebaseUser, profile));
   }
 
   Future<UserProfile> _buildVerifiedProfile(
@@ -480,6 +485,50 @@ class AuthService extends ChangeNotifier {
     } finally {
       _isLoading = false;
       _notifySafely();
+    }
+  }
+
+
+  Future<void> _persistAndroidUserSession(
+    firebase_auth.User firebaseUser,
+    UserProfile profile,
+  ) async {
+    final firestore = _firestore;
+    if (firestore == null) return;
+    try {
+      final userMap = <String, dynamic>{
+        'uid': firebaseUser.uid,
+        'email': profile.email,
+        'displayName': profile.displayName,
+        'photoUrl': profile.photoUrl,
+        'role': profile.role,
+        'platform': 'android',
+        'explorerLevel': profile.explorerLevel,
+        'status': 'active',
+        'lastLogin': FieldValue.serverTimestamp(),
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
+      await firestore
+          .collection(_usersCollection)
+          .doc(firebaseUser.uid)
+          .set(userMap, SetOptions(merge: true));
+
+      await firestore.collection('audit_logs').add({
+        'action': 'USER_LOGIN_ANDROID',
+        'platform': 'android',
+        'userId': firebaseUser.uid,
+        'userEmail': profile.email,
+        'performedBy':
+            profile.displayName.isNotEmpty
+                ? profile.displayName
+                : (profile.email.isNotEmpty
+                    ? profile.email
+                    : 'Explorador Android'),
+        'details': 'Inicio de sesión verificado en App Android Baqueano',
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    } catch (error) {
+      debugPrint('Aviso: telemetría de usuario Android diferida: $error');
     }
   }
 
