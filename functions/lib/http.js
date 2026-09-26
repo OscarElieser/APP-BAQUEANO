@@ -229,7 +229,8 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
           budgetNio,
           budgetUsd,
           groupSize,
-          travelStyle
+          travelStyle,
+          apiKey: getApiKey()
         });
 
         return sendJson(response, 200, result);

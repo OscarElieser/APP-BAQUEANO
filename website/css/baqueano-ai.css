@@ -318,6 +318,46 @@
 .ai-profile > label > small{display:block;margin-top:.55rem;color:#92a4b7;font-size:.72rem;font-weight:700;letter-spacing:.02em}
 .ai-total small{display:block;margin-top:.28rem;color:#92a4b7;font-size:.68rem;font-weight:600}
 /*
+ * 🎯 POR QUÉ: hacer visible qué información proviene de una consulta web real.
+ * ⚙️ CÓMO: presenta enlaces devueltos por el servidor en una cuadrícula flexible,
+ * sin interpretar esas referencias como evidencia automática de una tarifa.
+ * 📦 QUÉ: panel accesible de fuentes para cada itinerario fundamentado.
+ */
+.ai-web-sources {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(22, 93, 111, .45);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, .78);
+}
+.ai-web-sources > div { display: flex; align-items: center; gap: .55rem; color: #f65e01; }
+.ai-web-sources h3 { margin: 0; color: #f4e6c1; font-size: 1rem; }
+.ai-web-sources ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+  margin: .8rem 0;
+  padding: 0;
+  list-style: none;
+}
+.ai-web-sources a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  min-height: 44px;
+  padding: .65rem .75rem;
+  border: 1px solid rgba(244, 230, 193, .12);
+  border-radius: 11px;
+  color: #e2e8f0;
+  background: rgba(22, 93, 111, .15);
+  text-decoration: none;
+}
+.ai-web-sources a:hover,
+.ai-web-sources a:focus-visible { border-color: #f65e01; color: #fff; }
+.ai-web-sources small { color: #92a4b7; line-height: 1.45; }
+@media (max-width: 680px) { .ai-web-sources ul { grid-template-columns: 1fr; } }
+/*
  * 🎯 POR QUÉ: completar la integración del footer institucional sin estilos
  * embebidos y mantener una lectura consistente en cualquier ancho de pantalla.
  * ⚙️ CÓMO: agrupa el estado operativo y permite que sus acciones se reorganicen

@@ -32,7 +32,7 @@
   'use strict';
 
   // Constantes monetarias y operativas oficiales
-  const BCN_RATE = 36.65;
+  const BCN_RATE = 36.6243;
   const SUPABASE_EDGE_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-ai';
   const SUPABASE_STATUS_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-status';
   const SUPABASE_ANON_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
@@ -161,8 +161,14 @@
           .join('')}
       </div>
       <p class="ai-result-note">
-        <i class="fa-solid fa-circle-check"></i> Ruta creada con el catálogo territorial. Los precios deben consultarse cuando no exista una tarifa publicada y vigente en la plataforma.
+        <i class="fa-solid fa-circle-check"></i> ${plan.informationMode === 'grounded-web' ? 'Ruta enriquecida con búsqueda web y fuentes consultables.' : 'Ruta creada con el catálogo territorial local.'} Los precios deben consultarse cuando no exista una tarifa publicada y vigente en la plataforma.
       </p>
+      ${Array.isArray(plan.sources) && plan.sources.length ? `
+        <section class="ai-web-sources" aria-labelledby="aiWebSourcesTitle">
+          <div><i class="fa-solid fa-link"></i><h3 id="aiWebSourcesTitle">Fuentes consultadas en la web</h3></div>
+          <ul>${plan.sources.map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label || 'Fuente web')}<i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>`).join('')}</ul>
+          <small>Las fuentes respaldan los lugares y datos generales. Una tarifa solo es válida cuando está publicada y vigente en BAQUEANO.</small>
+        </section>` : ''}
     `;
     result.hidden = false;
     result.scrollIntoView({
@@ -398,7 +404,7 @@
       // TIER 1: Probar Gateway Local / Hosting (/api/baqueano-ai) con timeout seguro de 3.5s
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const timeoutId = setTimeout(() => controller.abort(), 14000);
 
         const response = await fetch('/api/baqueano-ai', {
           method: 'POST',
@@ -467,6 +473,8 @@
       renderPlan({
         territory: itinerary.territory || payload.department,
         totalUsd: itinerary.totalEstimatedCostUsd || payload.budgetUsd,
+        informationMode: itinerary.informationMode || 'local-catalog',
+        sources: itinerary.sources || [],
         items: days.map((day, index) => ({
           day: day.dayNumber || index + 1,
           title: day.title || `Día ${index + 1}`,
@@ -482,6 +490,8 @@
       renderPlan({
         territory: emergencyPlan.territory,
         totalUsd: emergencyPlan.totalEstimatedCostUsd,
+        informationMode: 'local-catalog',
+        sources: [],
         items: (emergencyPlan.days || []).map((d) => ({
           day: d.dayNumber,
           title: d.title,

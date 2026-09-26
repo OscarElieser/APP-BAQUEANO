@@ -26,7 +26,109 @@
 const { getSupabase } = require("./supabase-client");
 const { BAQUEANO_FALLBACK_TERRITORIES } = require("./baqueano-knowledge");
 
-const BCN_RATE = 36.65;
+const BCN_RATE = 36.6243;
+const GROUNDED_MODEL = process.env.GEMINI_GROUNDED_MODEL || "gemini-2.5-flash";
+const TRUSTED_SOURCE_DOMAINS = [
+  "visitanicaragua.com",
+  "intur.gob.ni",
+  "bcn.gob.ni",
+  "ineter.gob.ni",
+  "marena.gob.ni",
+  "unesco.org"
+];
+
+function cleanJsonResponse(value) {
+  return String(value || "").replace(/^```json\s*/i, "").replace(/```\s*$/i, "").trim();
+}
+
+function safeWebSources(metadata) {
+  const chunks = Array.isArray(metadata?.groundingChunks) ? metadata.groundingChunks : [];
+  const seen = new Set();
+  return chunks.flatMap((chunk, index) => {
+    const uri = String(chunk?.web?.uri || "");
+    if (!/^https:\/\//i.test(uri) || seen.has(uri)) return [];
+    seen.add(uri);
+    return [{
+      id: `web-${index + 1}`,
+      label: String(chunk?.web?.title || "Fuente web").slice(0, 120),
+      url: uri,
+      type: "web"
+    }];
+  }).slice(0, 6);
+}
+
+function sanitizeGroundedItinerary(candidate, fallbackTerritory, payload) {
+  if (!candidate || typeof candidate !== "object" || !Array.isArray(candidate.days)) return null;
+  const days = candidate.days.slice(0, payload.days).map((day, index) => ({
+    dayNumber: index + 1,
+    title: String(day.title || `Día ${index + 1} en ${fallbackTerritory.department}`).slice(0, 180),
+    summary: String(day.summary || "Consulta condiciones y acceso antes de viajar.").slice(0, 500),
+    dayBudgetUsd: null,
+    dayBudgetNio: null,
+    stops: (Array.isArray(day.stops) ? day.stops : []).slice(0, 4).map(stop => ({
+      name: String(stop?.name || "Lugar por confirmar").slice(0, 140),
+      desc: String(stop?.desc || "Información respaldada por las fuentes del itinerario.").slice(0, 420),
+      publishedPrice: null
+    }))
+  }));
+  if (!days.length || days.some(day => !day.stops.length)) return null;
+  return {
+    title: String(candidate.title || `Ruta Baqueano en ${fallbackTerritory.department}`).slice(0, 180),
+    summary: String(candidate.summary || fallbackTerritory.summary).slice(0, 700),
+    territory: String(candidate.territory || fallbackTerritory.department).slice(0, 80),
+    daysCount: days.length,
+    groupSize: payload.groupSize,
+    travelStyle: payload.travelStyle,
+    totalEstimatedCostUsd: payload.budgetUsd,
+    totalEstimatedCostNio: payload.budgetNio,
+    exchangeRate: BCN_RATE,
+    days,
+    sustainabilityNote: "Verifica clima, accesos, disponibilidad y cualquier tarifa directamente antes de reservar.",
+    generatedAt: new Date().toISOString(),
+    informationMode: "grounded-web"
+  };
+}
+
+async function buildGroundedWebItinerary(payload, territory, apiKey, fetchImpl = fetch) {
+  if (!apiKey) return null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  const prompt = `Crea un itinerario turístico verificable de Nicaragua en JSON estricto.
+Consulta la web y prioriza estas fuentes oficiales: ${TRUSTED_SOURCE_DOMAINS.join(", ")}.
+Solicitud: ${payload.prompt}. Departamento: ${payload.department}. Días: ${payload.days}. Viajeros: ${payload.groupSize}. Interés: ${payload.travelStyle}.
+Reglas: no inventes lugares, teléfonos, horarios, disponibilidad ni precios. No incluyas precios; si no hay evidencia suficiente, omite el lugar. Usa solo información pertinente a Nicaragua.
+Esquema: {"title":"...","summary":"...","territory":"...","days":[{"title":"...","summary":"...","stops":[{"name":"...","desc":"..."}]}]}`;
+  try {
+    const response = await fetchImpl(`https://generativelanguage.googleapis.com/v1beta/models/${GROUNDED_MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      signal: controller.signal,
+      body: JSON.stringify({
+        contents: [{parts: [{text: prompt}]}],
+        tools: [{google_search: {}}],
+        generationConfig: {temperature: 0.15, maxOutputTokens: 2600}
+      })
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    const first = data?.candidates?.[0];
+    const text = first?.content?.parts?.map(part => part.text || "").join("");
+    const sources = safeWebSources(first?.groundingMetadata);
+    if (!text || !sources.length) return null;
+    const itinerary = sanitizeGroundedItinerary(JSON.parse(cleanJsonResponse(text)), territory, payload);
+    if (!itinerary) return null;
+    itinerary.sources = sources;
+    itinerary.webSearchQueries = Array.isArray(first?.groundingMetadata?.webSearchQueries)
+      ? first.groundingMetadata.webSearchQueries.slice(0, 5)
+      : [];
+    return itinerary;
+  } catch (error) {
+    console.warn("[ItineraryService] Búsqueda fundamentada no disponible:", error.message);
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 
 const NICARAGUA_TERRITORY_CATALOG = [
   {
@@ -135,14 +237,27 @@ async function buildBaqueanoItinerary({
   budgetUsd = 327.42,
   groupSize = 2,
   travelStyle = "aventura",
-  userUid = null
+  userUid = null,
+  apiKey = "",
+  fetchImpl = fetch
 }) {
   const numDays = Math.max(1, Math.min(Number(days) || 3, 14));
   const territory = resolveTerritory(prompt, department);
   const places = territory.places;
 
-  const costPerDayUsd = Math.round(budgetUsd / numDays);
-  const costPerDayNio = Math.round(budgetNio / numDays);
+  const groundedItinerary = await buildGroundedWebItinerary({
+    prompt,
+    department,
+    days: numDays,
+    budgetNio,
+    budgetUsd,
+    groupSize,
+    travelStyle
+  }, territory, apiKey, fetchImpl);
+  if (groundedItinerary) {
+    await persistItinerary(groundedItinerary, userUid, "baqueano-grounded-web");
+    return {success: true, ok: true, provider: "baqueano-grounded-web", itinerary: groundedItinerary};
+  }
 
   const itineraryDays = [];
   for (let i = 0; i < numDays; i++) {
@@ -151,23 +266,23 @@ async function buildBaqueanoItinerary({
     const place2 = places[(i + 1) % places.length];
 
     const stops = [
-      { name: place1.name, desc: place1.desc, estimatedCostUsd: Math.round(place1.costUsd * groupSize) },
-      { name: place2.name, desc: place2.desc, estimatedCostUsd: Math.round(place2.costUsd * groupSize) }
+      { name: place1.name, desc: place1.desc, publishedPrice: null },
+      { name: place2.name, desc: place2.desc, publishedPrice: null }
     ];
 
     itineraryDays.push({
       dayNumber: dayNum,
       title: `Día ${dayNum}: ${place1.name} y Experiencia Local en ${territory.department}`,
       summary: `${place1.desc} Posterior traslado y descanso en ${place2.name}.`,
-      dayBudgetUsd: costPerDayUsd,
-      dayBudgetNio: costPerDayNio,
+      dayBudgetUsd: null,
+      dayBudgetNio: null,
       stops: stops
     });
   }
 
   const generatedItinerary = {
     title: `Ruta Baqueano: ${numDays} Días en ${territory.department} (${territory.title})`,
-    summary: `Itinerario personalizado para ${groupSize} viajeros en modalidad ${travelStyle}. Basado en registros reales de ${territory.title}. Presupuesto diario estimado: US$ ${costPerDayUsd} (C$ ${costPerDayNio.toLocaleString("es-NI")}). Precios sugeridos directos con anfitriones locales.`,
+    summary: `Itinerario para ${groupSize} viajeros en modalidad ${travelStyle}, basado en el catálogo territorial de ${territory.title}. El presupuesto indicado es el límite del viajero y no una tarifa.`,
     territory: territory.department,
     daysCount: numDays,
     groupSize: groupSize,
@@ -180,24 +295,10 @@ async function buildBaqueanoItinerary({
     generatedAt: new Date().toISOString()
   };
 
-  // Persistir inmediatamente en Supabase (travel_plans)
-  const sb = getSupabase();
-  if (sb) {
-    try {
-      await sb.from("travel_plans").insert({
-        user_uid: userUid || "web_explorer",
-        plan_title: generatedItinerary.title,
-        destination: territory.department,
-        days: numDays,
-        budget: budgetUsd,
-        currency: "USD",
-        payload: generatedItinerary,
-        source: "baqueano-territorial-engine"
-      });
-    } catch (err) {
-      console.warn("[ItineraryService] Aviso: no se pudo guardar en travel_plans:", err.message);
-    }
-  }
+  generatedItinerary.informationMode = "local-catalog";
+  generatedItinerary.sources = [];
+
+  await persistItinerary(generatedItinerary, userUid, "baqueano-territorial-engine");
 
   return {
     success: true,
@@ -207,8 +308,33 @@ async function buildBaqueanoItinerary({
   };
 }
 
+async function persistItinerary(itinerary, userUid, source) {
+  // Persistir inmediatamente en Supabase (travel_plans)
+  const sb = getSupabase();
+  if (sb) {
+    try {
+      await sb.from("travel_plans").insert({
+        user_uid: userUid || "web_explorer",
+        plan_title: itinerary.title,
+        destination: itinerary.territory,
+        days: itinerary.daysCount,
+        budget: itinerary.totalEstimatedCostUsd,
+        currency: "USD",
+        payload: itinerary,
+        source
+      });
+    } catch (err) {
+      console.warn("[ItineraryService] Aviso: no se pudo guardar en travel_plans:", err.message);
+    }
+  }
+
+}
+
 module.exports = {
   buildBaqueanoItinerary,
   NICARAGUA_TERRITORY_CATALOG,
-  resolveTerritory
+  resolveTerritory,
+  buildGroundedWebItinerary,
+  safeWebSources,
+  sanitizeGroundedItinerary
 };
