@@ -2623,3 +2623,80 @@ html body .index-inline-066 {
   }
 }
 
+
+
+/* ============================================================================
+   🧭 FONDOS PANORÁMICOS OFICIALES PARA LAS 3 SECCIONES EMBLEMÁTICAS
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Cada sección emblemática refleja una dimensión visual viva de Nicaragua:
+     1) 'Destinos que Inspiran' (#destinosDestacadosSection) -> footer1.png
+     2) 'Nicaragua se Escucha, se Saborea y se Cuenta' (#culturaVivaNicaragua) -> footer2.png
+     3) 'Todo lo que Necesitas Durante tu Viaje' (#serviciosTuristicosSection) -> footer3.png
+   - La imagen de fondo debe ser claramente apreciable ("que se vea la imagen")
+     combinada con un gradiente tenue de contraste óptico para lectura AAA.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Selectores por ID prioritarios (#id) con background-size: cover y center center.
+   - Gradiente multicapa de 0.45 a 0.20 para permitir que el arte destaque vívido.
+   - Tarjetas hijas con glassmorphism semitransparente para dejar respirar el fondo.
+
+   📦 3. QUÉ (WHAT / ENTREGABLES):
+   - #destinosDestacadosSection -> footer1.png
+   - #culturaVivaNicaragua -> footer2.png
+   - #serviciosTuristicosSection -> footer3.png
+   ============================================================================ */
+
+#destinosDestacadosSection,
+.destinations-section-pro {
+  position: relative !important;
+  background-color: #060c18 !important;
+  background-image: 
+    linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+    url('../../assets/images/footer1.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  border-top: 1px solid rgba(246, 94, 1, 0.35) !important;
+  border-bottom: 1px solid rgba(22, 93, 111, 0.35) !important;
+}
+
+#culturaVivaNicaragua,
+.culture-alive-section {
+  position: relative !important;
+  background-color: #060c18 !important;
+  background-image: 
+    linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+    url('../../assets/images/footer2.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  border-top: 1px solid rgba(246, 94, 1, 0.35) !important;
+  border-bottom: 1px solid rgba(22, 93, 111, 0.35) !important;
+}
+
+#serviciosTuristicosSection,
+.services-travel-section {
+  position: relative !important;
+  background-color: #060c18 !important;
+  background-image: 
+    linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+    url('../../assets/images/footer3.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  border-top: 1px solid rgba(246, 94, 1, 0.35) !important;
+  border-bottom: 1px solid rgba(22, 93, 111, 0.35) !important;
+}
+
+/* Efecto de nitidez de tipografía sobre fondos artísticos */
+#destinosDestacadosSection .section-headline,
+#culturaVivaNicaragua .culture-title,
+#serviciosTuristicosSection .section-headline {
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+#destinosDestacadosSection .section-subtext,
+#culturaVivaNicaragua .culture-sub,
+#serviciosTuristicosSection .section-subtext {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+}
