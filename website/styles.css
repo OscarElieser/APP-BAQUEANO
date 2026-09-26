@@ -8813,9 +8813,14 @@ img {
     gap: 8px;
   }
 
-  .main-navbar .nav-profile-btn,
   .main-navbar .nav-separator {
     display: none !important;
+  }
+
+  .main-navbar .nav-profile-btn {
+    display: inline-flex !important;
+    min-height: 46px;
+    padding: 6px 11px;
   }
 
   .main-navbar .brand-text {
@@ -8952,7 +8957,9 @@ img {
   .nav-drawer-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 1550;
+    /* El navbar crea un contexto z-index 1000; el fondo debe quedar debajo
+       para no cubrir el drawer que vive dentro de esa barra. */
+    z-index: 999;
     display: block;
     width: 100%;
     height: 100%;
@@ -8986,7 +8993,7 @@ img {
   .main-navbar .brand-tagline { font-size: 0.54rem; }
   .main-navbar .sos-quick-btn { min-width: 96px; min-height: 44px; padding-inline: 10px; }
   .main-navbar .nav-profile-btn,
-  .main-navbar .nav-separator { display: none; }
+  .main-navbar .nav-separator { display: none !important; }
 }
 
 @media (max-width: 480px) {

@@ -25,6 +25,13 @@
   }
 
   function renderGroundedAnswer(data) {
+    if (data?.type === 'conversation' && data.message) {
+      const sources = Array.isArray(data.sources) ? data.sources.map((source) => {
+        const href = safeSourceUrl(source?.url || source?.uri);
+        return href ? `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.title || source.label || new URL(href).hostname)}</a>` : '';
+      }).filter(Boolean).join(' · ') : '';
+      return `<p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>${sources ? `<p><small>Fuentes: ${sources}</small></p>` : ''}`;
+    }
     const itinerary = data?.itinerary;
     if (!itinerary) return '<strong>No se recibió un resultado territorial válido.</strong> Agregá el destino, cantidad de días y viajeros para volver a consultar.';
     const days = Array.isArray(itinerary.days) ? itinerary.days.slice(0, 7).map((day) => {

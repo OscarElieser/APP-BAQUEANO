@@ -113,13 +113,18 @@
   // QUE: estado explicito de campos personalizados para inferir el resto del viaje.
   const plannerFieldIds = ['territory', 'days', 'travelers', 'budget'];
   const touchedPlannerFields = new Set();
+  const SHARED_SESSION_KEY = 'baqueano_assistant_session_v2';
+  const sharedSession = (() => {
+    try { return Object.assign({ messages: [] }, JSON.parse(sessionStorage.getItem(SHARED_SESSION_KEY) || '{}')); }
+    catch (_) { return { messages: [] }; }
+  })();
 
   if (!form || !input || !messages || !result) return;
 
   const escapeHtml = (value) =>
     String(value || '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
 
-  function addMessage(text, type) {
+  function addMessage(text, type, persist = true) {
     const article = document.createElement('article');
     article.className = `ai-message ${type}`;
     article.innerHTML = `
@@ -131,6 +136,16 @@
     `;
     messages.appendChild(article);
     messages.scrollTop = messages.scrollHeight;
+    if (persist) {
+      sharedSession.messages.push({ role: type === 'user' ? 'user' : 'assistant', content: String(text).slice(0, 1200) });
+      sharedSession.messages = sharedSession.messages.slice(-20);
+      sessionStorage.setItem(SHARED_SESSION_KEY, JSON.stringify(sharedSession));
+    }
+  }
+
+  if (Array.isArray(sharedSession.messages) && sharedSession.messages.length) {
+    messages.innerHTML = '';
+    sharedSession.messages.slice(-14).forEach((message) => addMessage(message.content, message.role === 'user' ? 'user' : 'assistant', false));
   }
 
   function renderPlan(plan) {
@@ -257,6 +272,7 @@
       interests: [travelStyle],
       travelStyle,
       prompt: message,
+      history: sharedSession.messages.slice(-12),
       assumptions
     };
   }
@@ -400,6 +416,7 @@
 
       let itinerary = null;
       let providerName = '';
+      let conversationReply = null;
 
       // TIER 1: Supabase Edge es el motor principal; Firebase conserva solo autenticación.
       try {
@@ -416,13 +433,20 @@
 
         if (response.ok) {
           const data = await response.json();
-          if (data && data.success && data.itinerary) {
+          if (data?.ok && data.type === 'conversation' && data.message) {
+            conversationReply = data.message;
+          } else if (data && data.success && data.itinerary) {
             itinerary = data.itinerary;
             providerName = data.provider === 'baqueano-supabase-grounded-web' ? 'Supabase Edge + búsqueda web' : 'Supabase Edge';
           }
         }
       } catch (errEdge) {
         console.warn('[Baqueano AI] Supabase Edge no disponible:', errEdge.message);
+      }
+
+      if (conversationReply) {
+        addMessage(conversationReply, 'assistant');
+        return;
       }
 
       // TIER 2: si Supabase falla o no hay conexión, usar el catálogo local.

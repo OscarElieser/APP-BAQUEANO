@@ -277,6 +277,62 @@ No inventes lugares, contactos, horarios, disponibilidad ni precios. No incluyas
   }
 }
 
+// ============================================================================
+// CONVERSACIÓN TURÍSTICA AUTÓNOMA
+// 🎯 POR QUÉ: una expresión social o una pregunta no debe convertirse en itinerario.
+// ⚙️ CÓMO: clasifica intención, responde cortesías localmente y fundamenta
+//    preguntas turísticas abiertas mediante URL Context sobre fuentes autorizadas.
+// 📦 QUÉ: saludos, despedidas, ayuda contextual y conversación dedicada a Nicaragua.
+// ============================================================================
+function normalizeIntentText(value: unknown): string {
+  return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" | "help" | "planning" | "tourism" {
+  const text = normalizeIntentText(prompt);
+  const words = text.split(/\s+/).filter(Boolean);
+  if (words.length <= 8 && /^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|saludos|que tal)[!.? ]*$/.test(text)) return "greeting";
+  if (/\b(adios|hasta luego|nos vemos|hasta pronto|me despido|chao|bye)\b/.test(text)) return "farewell";
+  if (words.length <= 12 && /\b(gracias|muchas gracias|te agradezco|excelente ayuda)\b/.test(text)) return "thanks";
+  if (/^(ayuda|que puedes hacer|como funciona|en que me ayudas)[!.? ]*$/.test(text)) return "help";
+  if (/\b(itinerario|planifica|planificar|ruta|viaje|vacaciones|dias|noches|presupuesto|viajeros|hospedaje|quedarme|recorrido)\b/.test(text)) return "planning";
+  return "tourism";
+}
+
+async function buildGroundedTourismAnswer(prompt: string, history: unknown) {
+  const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
+    .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
+  if (!apiKeys.length) return {message: null, sources: [], status: "missing_secret"};
+  const recentHistory = Array.isArray(history) ? history.slice(-8).map((item: Record<string, unknown>) => `${String(item.role || "user")}: ${String(item.content || "").slice(0, 500)}`).join("\n") : "";
+  const instruction = `Sos Baqüi, asistente autónomo, interactivo y respetuoso dedicado exclusivamente al turismo integral de Nicaragua.
+Respondé en español natural y cordial. Conservá el contexto. Ayudá con destinos, cultura, gastronomía, naturaleza, transporte, clima, seguridad, accesibilidad, presupuesto y turismo comunitario.
+Consulta y prioriza mediante URL Context: ${TRUSTED_SOURCE_URLS.join(" ")}.
+No inventes precios, teléfonos, horarios, disponibilidad ni hechos. Si el usuario pregunta algo ajeno al turismo de Nicaragua, explicá amablemente tu especialidad y ofrecé una alternativa turística relacionada.
+No construyas un itinerario salvo que el usuario lo solicite. Para emergencias recomendá confirmar con autoridades oficiales.
+Historial reciente:\n${recentHistory || "Sin historial previo."}\nPregunta actual: ${prompt}`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    let response: Response | null = null;
+    let lastStatus = 0;
+    for (const apiKey of apiKeys) {
+      response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "x-goog-api-key": apiKey},
+        signal: controller.signal,
+        body: JSON.stringify({model: GROUNDED_MODEL, input: instruction, tools: [{type: "url_context"}]})
+      });
+      lastStatus = response.status;
+      if (response.ok) break;
+    }
+    if (!response?.ok) return {message: null, sources: [], status: `all_keys_http_${lastStatus}`};
+    const interaction = extractInteractionOutput(await response.json());
+    return {message: interaction.text || null, sources: interaction.sources, status: interaction.text ? "grounded" : "empty_model_response"};
+  } catch (_) {
+    return {message: null, sources: [], status: "grounding_exception"};
+  } finally { clearTimeout(timeout); }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: CORS_HEADERS });
@@ -300,6 +356,25 @@ Deno.serve(async (req: Request) => {
     const budgetNio = Number(body.budgetNio) || (daysRequested * groupSize * 2000);
     const budgetUsd = Number(body.budgetUsd) || Number((budgetNio / BCN_RATE).toFixed(2));
     const userUid = body.userUid ? String(body.userUid) : null;
+
+    const intent = conversationIntent(prompt);
+    if (intent !== "planning") {
+      const localMessages: Record<string, string> = {
+        greeting: "¡Hola! Soy Baqüi, tu asistente de turismo de Nicaragua. Puedo ayudarte a descubrir destinos, cultura, gastronomía, naturaleza, rutas, seguridad y opciones según tus días, viajeros y presupuesto. ¿Qué te gustaría conocer?",
+        farewell: "¡Hasta pronto! Ha sido un gusto acompañarte. Cuando regresés, conservaré el contexto de esta conversación para seguir preparando tu experiencia por Nicaragua.",
+        thanks: "¡Con mucho gusto! Estoy aquí para seguir ayudándote a conocer Nicaragua de manera responsable, informada y conectada con sus comunidades.",
+        help: "Puedo conversar sobre cualquier aspecto turístico de Nicaragua: destinos, departamentos, cultura, comida, naturaleza, clima, transporte, accesibilidad, seguridad y presupuestos. También puedo crear un itinerario cuando me indiqués destino, días y viajeros."
+      };
+      const groundedAnswer = localMessages[intent] ? null : await buildGroundedTourismAnswer(prompt, body.history);
+      const message = localMessages[intent] || groundedAnswer?.message || "No pude verificar esa información en este momento. Puedo seguir ayudándote con turismo de Nicaragua sin inventar datos.";
+      return new Response(JSON.stringify({
+        success: true, ok: true, type: "conversation", intent, message,
+        provider: localMessages[intent] ? "baqueano-conversation" : "baqueano-supabase-grounded-web",
+        groundingStatus: groundedAnswer?.status || "not_required",
+        sources: groundedAnswer?.sources || [],
+        actions: intent === "greeting" || intent === "help" ? [{type: "build_itinerary", label: "Abrir planificador completo"}] : []
+      }, null, 2), {status: 200, headers: CORS_HEADERS});
+    }
 
     const territory = resolveTerritory(prompt, requestedDept);
     const places = territory.places;
