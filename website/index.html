@@ -2809,6 +2809,11 @@
       const form = document.getElementById('registerBusinessForm');
       if (!form) return;
 
+      // POR QUE: la portada incluye validacion, modal y persistencia propios.
+      // COMO: esta marca impide que navigation.js registre listeners duplicados.
+      // QUE: un solo clic abre el acordeon y un solo submit procesa la postulacion.
+      window.__bizRegisterInitialized = true;
+
       const descInput = document.getElementById('bizDescription');
       const charCounter = document.getElementById('bizCharCounter');
       const photoInput = document.getElementById('bizPhoto');

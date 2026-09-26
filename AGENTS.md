@@ -29,3 +29,8 @@
    - Prevención de fugas de memoria (Memory Leaks) y OOM Crashes: todo renderizado de imágenes debe acotar `cacheWidth`/`cacheHeight` al viewport del dispositivo.
    - Manejo de excepciones defensivo estricto (`try/catch`), verificación `if (mounted)` en contextos asíncronos y validación rigurosa de valores nulos o no finitos.
    - El ciclo de vida de componentes reciclables debe implementar `didUpdateWidget` y `ValueKey` estable para erradicar estados huérfanos o desincronizados.
+
+6. **Autonomía Operativa Total (Auto-Decision / Default Opción 1)**:
+   - Queda prohibido detener el flujo solicitando modales o cuestionarios interactivos de confirmación (`ask_question`) ante decisiones predecibles o configuraciones estándar.
+   - El asistente debe actuar de forma autónoma e inmediata, seleccionando siempre por defecto la **Opción 1 (la recomendada y de mejor estándar técnico)** y ejecutando la solución completa de punta a punta.
+   - Solo se requerirá intervención del usuario en casos donde una acción cause pérdida destructiva e irreversible de datos.

@@ -108,6 +108,11 @@
   const messages = document.getElementById('messages');
   const result = document.getElementById('result');
   const liveBadge = document.querySelector('.ai-live');
+  // POR QUE: el mensaje debe bastar aunque el panel conserve valores visuales iniciales.
+  // COMO: solo priorizamos un control cuando la persona realmente interactuo con el.
+  // QUE: estado explicito de campos personalizados para inferir el resto del viaje.
+  const plannerFieldIds = ['territory', 'days', 'travelers', 'budget'];
+  const touchedPlannerFields = new Set();
 
   if (!form || !input || !messages || !result) return;
 
@@ -172,6 +177,82 @@
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .trim();
+  }
+
+  function inferTripPreferences(message) {
+    const normalized = normalizeText(message);
+    const numberBefore = (words) => {
+      const match = normalized.match(new RegExp(`(\\d{1,6})\\s*(?:${words})`));
+      return match ? Number(match[1]) : null;
+    };
+    const numberAfter = (words) => {
+      const match = normalized.match(new RegExp(`(?:${words})\\s*(?:de|:)?\\s*(\\d{1,6})`));
+      return match ? Number(match[1]) : null;
+    };
+
+    const territory = CLIENT_TERRITORIES.find((item) => {
+      const aliases = [item.key, item.department, item.title].map(normalizeText);
+      return aliases.some((alias) => alias && normalized.includes(alias));
+    });
+    const days = numberBefore('dias?|noches?') || numberAfter('dias?|noches?');
+    const travelers =
+      numberBefore('personas?|viajeros?|adultos?|amigos?|familiares?') ||
+      numberAfter('somos|viajamos');
+    const budgetMatch = normalized.match(/(?:c\$|cordobas?|nio)\s*([\d.,]+)|([\d.,]+)\s*(?:cordobas?|nio)/);
+    const parsedBudget = budgetMatch
+      ? Number(String(budgetMatch[1] || budgetMatch[2]).replace(/[^\d]/g, ''))
+      : null;
+
+    let style = null;
+    if (/playa|descans|relaja|tranquil|romantic|pareja/.test(normalized)) style = 'naturaleza';
+    if (/cultura|historia|museo|gastronom|comida|musica|tradicion/.test(normalized)) style = 'cultura';
+    if (/aventura|volcan|sender|surf|kayak|sandboard|canon/.test(normalized)) style = 'aventura';
+
+    return {
+      territory: territory?.department || null,
+      days: days && days >= 1 && days <= 14 ? days : null,
+      travelers: travelers && travelers >= 1 && travelers <= 20 ? travelers : null,
+      budgetNio: parsedBudget && parsedBudget >= 500 ? parsedBudget : null,
+      style
+    };
+  }
+
+  function buildPlannerPayload(message) {
+    const inferred = inferTripPreferences(message);
+    const selectedStyle = document.querySelector('input[name="style"]:checked')?.value;
+    const useField = (id, fallback) => {
+      if (!touchedPlannerFields.has(id)) return fallback;
+      return document.getElementById(id)?.value || fallback;
+    };
+
+    const days = Number(useField('days', inferred.days)) || 3;
+    const groupSize = Number(useField('travelers', inferred.travelers)) || 2;
+    const budgetNio = Number(useField('budget', inferred.budgetNio)) || 21990;
+    const department = useField('territory', inferred.territory) || 'Nicaragua';
+    const travelStyle = touchedPlannerFields.has('style')
+      ? selectedStyle || 'aventura'
+      : inferred.style || 'aventura';
+
+    const assumptions = [];
+    if (!touchedPlannerFields.has('territory') && !inferred.territory) assumptions.push('un destino acorde a la experiencia solicitada');
+    if (!touchedPlannerFields.has('days') && !inferred.days) assumptions.push('3 dias');
+    if (!touchedPlannerFields.has('travelers') && !inferred.travelers) assumptions.push('2 viajeros');
+    if (!touchedPlannerFields.has('budget') && !inferred.budgetNio) assumptions.push('un presupuesto orientativo de C$ 21,990');
+    if (!touchedPlannerFields.has('style') && !inferred.style) assumptions.push('un ritmo de aventura moderada');
+
+    return {
+      days,
+      groupSize,
+      budgetNio,
+      budgetUsd: Number((budgetNio / BCN_RATE).toFixed(2)),
+      currency: 'NIO',
+      exchangeRate: BCN_RATE,
+      department,
+      interests: [travelStyle],
+      travelStyle,
+      prompt: message,
+      assumptions
+    };
   }
 
   function resolveTerritory(prompt, requestedDept) {
@@ -305,20 +386,14 @@
     button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Preparando</span>';
 
     try {
-      const budgetNio = Number(document.getElementById('budget').value);
-      const budgetUsd = Number((budgetNio / BCN_RATE).toFixed(2));
-      const payload = {
-        days: Number(document.getElementById('days').value),
-        groupSize: Number(document.getElementById('travelers').value),
-        budgetNio,
-        budgetUsd,
-        currency: 'NIO',
-        exchangeRate: BCN_RATE,
-        department: document.getElementById('territory').value,
-        interests: [document.querySelector('input[name="style"]:checked').value],
-        travelStyle: document.querySelector('input[name="style"]:checked').value,
-        prompt: text
-      };
+      const payload = buildPlannerPayload(text);
+
+      if (payload.assumptions.length) {
+        addMessage(
+          `Puedo ayudarte sin que llenes el panel. Para darte una solucion completa asumire ${payload.assumptions.join(', ')}; podes cambiar cualquier dato y volver a generar la ruta.`,
+          'assistant'
+        );
+      }
 
       let itinerary = null;
       let providerName = '';
@@ -404,17 +479,7 @@
     } catch (unexpected) {
       console.error('[Baqueano AI] Error inesperado:', unexpected);
       // Fallback absoluto garantizado: jamás dejar al usuario con pantalla rota o error
-      const budgetNio = Number(document.getElementById('budget').value) || 21990;
-      const budgetUsd = Number((budgetNio / BCN_RATE).toFixed(2));
-      const fallbackPayload = {
-        days: Number(document.getElementById('days').value) || 3,
-        groupSize: Number(document.getElementById('travelers').value) || 2,
-        budgetNio,
-        budgetUsd,
-        department: document.getElementById('territory').value || 'Ometepe',
-        travelStyle: 'aventura',
-        prompt: text
-      };
+      const fallbackPayload = buildPlannerPayload(text);
       const emergencyPlan = buildLocalItinerary(fallbackPayload);
       addMessage('Ruta generada mediante el catálogo territorial verificado de Nicaragua.', 'assistant');
       renderPlan({
@@ -471,6 +536,14 @@
   const liveBudget = document.getElementById('aiLiveBudget');
   const surpriseButton = document.getElementById('aiSurpriseRoute');
 
+  plannerFieldIds.forEach((id) => {
+    document.getElementById(id)?.addEventListener('input', () => touchedPlannerFields.add(id));
+    document.getElementById(id)?.addEventListener('change', () => touchedPlannerFields.add(id));
+  });
+  document.querySelectorAll('input[name="style"]').forEach((radio) => {
+    radio.addEventListener('change', () => touchedPlannerFields.add('style'));
+  });
+
   const syncHero = () => {
     const amount = Number(budgetInput?.value || 0);
     if (liveTerritory) liveTerritory.textContent = territoryInput?.value || 'Nicaragua';
@@ -491,6 +564,8 @@
     const styles = [...document.querySelectorAll('input[name="style"]')];
     const style = styles[Math.floor(Math.random() * styles.length)];
     if (style) style.checked = true;
+    plannerFieldIds.forEach((id) => touchedPlannerFields.add(id));
+    touchedPlannerFields.add('style');
     syncHero();
     const styleLabel = style?.value || 'aventura';
     input.value = `Sorpréndeme con una ruta de ${styleLabel} por ${territoryInput.value}, combinando lugares emblemáticos y experiencias comunitarias.`;
