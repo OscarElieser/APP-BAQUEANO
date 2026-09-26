@@ -124,7 +124,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <!-- Estilos del Ecosistema Baqueano -->
-  <link rel="stylesheet" href="styles.css?v=20260926-footer-1">
+  <link rel="stylesheet" href="styles.css?v=20260926-footer-clear">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
   <link rel="stylesheet" href="css/theme-switcher.css?v=20260924-hd">
@@ -188,13 +188,43 @@
     }
     .site-footer-pro {
       position: relative !important;
-      background-color: var(--section-bg-color, #050811) !important;
+      background-color: transparent !important;
       background-image: 
-        linear-gradient(180deg, var(--section-bg-tint, rgba(12, 23, 42, 0.70)) 0%, var(--section-bg-tint-mid, rgba(5, 8, 17, 0.35)) 42%, var(--section-bg-tint-bot, rgba(5, 8, 17, 0.85)) 100%),
+        linear-gradient(180deg, rgba(8, 14, 26, 0.18) 0%, rgba(5, 8, 17, 0.02) 40%, rgba(5, 8, 17, 0.32) 100%),
         url('assets/images/footer.png') !important;
       background-repeat: no-repeat !important;
       background-position: center bottom !important;
       background-size: cover !important;
+    }
+    .site-footer-pro .footer-col-brand,
+    .site-footer-pro .footer-col-links,
+    .site-footer-pro .footer-col-emergency,
+    .site-footer-pro .footer-col-badges {
+      background: rgba(8, 14, 26, 0.18) !important;
+      backdrop-filter: blur(2px) !important;
+      -webkit-backdrop-filter: blur(2px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .site-footer-pro .footer-col-contact {
+      background: rgba(8, 14, 26, 0.12) !important;
+      backdrop-filter: blur(2px) !important;
+      -webkit-backdrop-filter: blur(2px) !important;
+      border: 1px solid rgba(246, 94, 1, 0.22) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+    }
+    .site-footer-pro .footer-col-contact::before {
+      opacity: 0.05 !important;
+    }
+    .site-footer-pro .footer-col-contact .footer-contact-item {
+      background: rgba(8, 14, 26, 0.18) !important;
+      backdrop-filter: blur(2px) !important;
+      -webkit-backdrop-filter: blur(2px) !important;
+      border: 1px solid rgba(246, 94, 1, 0.18) !important;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
+    }
+    .site-footer-pro .footer-col-contact .footer-contact-item:hover {
+      background: rgba(246, 94, 1, 0.14) !important;
+      border-color: rgba(246, 94, 1, 0.45) !important;
     }
     #destinosDestacadosSection .section-headline,
     #culturaVivaNicaragua .culture-title,
