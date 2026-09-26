@@ -46,6 +46,7 @@
   const GEMINI_API_KEY    = window.__BQ_GEMINI_KEY || '';
   const GEMINI_MODELS     = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite'];
   const MESA_CENTRAL_PHONE = '50584431289';
+  const OFFICIAL_BCN_RATE_2026 = 36.6243;
 
   const SERVICE_LABELS = {
     transporte:               'Transporte',
@@ -157,6 +158,61 @@
       maximumFractionDigits: 2
     }).format(value || 0);
 
+  function normalizePriceKey(value) {
+    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  }
+
+  function applyPublishedPrices(plan) {
+    plan.presupuesto_estimado = null;
+    (plan.days || []).forEach(day => {
+      (day.activities || []).forEach(activity => {
+        const activityKey = normalizePriceKey(activity.nombre);
+        const service = state.services.find(item => {
+          if (!item.usable) return false;
+          const serviceKey = normalizePriceKey(item.nombre || item.name || item.title);
+          return serviceKey && (activityKey.includes(serviceKey) || serviceKey.includes(activityKey));
+        });
+        activity.precio_publicado = service
+          ? money(service.precio, service.moneda || service.currency)
+          : null;
+        delete activity.precio_estimado;
+      });
+    });
+    return plan;
+  }
+
+  function buildBudgetAllocation(input) {
+    const total = Number(input.budget) || 0;
+    const available = total * 0.8;
+    const overnight = Number(input.days) > 1;
+    const weights = overnight
+      ? [
+          ['Transporte o renta de vehículo', 0.30, 'fa-car-side'],
+          ['Hospedaje', 0.25, 'fa-bed'],
+          ['Comida y agua', 0.25, 'fa-utensils'],
+          ['Entradas y actividades', 0.15, 'fa-ticket'],
+          ['Gastos menores', 0.05, 'fa-bag-shopping']
+        ]
+      : [
+          ['Transporte o renta de vehículo', 0.40, 'fa-car-side'],
+          ['Comida y agua', 0.30, 'fa-utensils'],
+          ['Entradas y actividades', 0.20, 'fa-ticket'],
+          ['Gastos menores', 0.10, 'fa-bag-shopping']
+        ];
+    return {
+      available,
+      reserve: total * 0.2,
+      items: weights.map(([label, weight, icon]) => ({ label, icon, amount: available * weight }))
+    };
+  }
+
+  function dualMoney(value, currency) {
+    const isUsd = currency === 'USD';
+    const nio = isUsd ? value * OFFICIAL_BCN_RATE_2026 : value;
+    const usd = isUsd ? value : value / OFFICIAL_BCN_RATE_2026;
+    return `${money(nio, 'NIO')} · ${money(usd, 'USD')}`;
+  }
+
   function db() {
     return window.firebase?.firestore ? window.firebase.firestore() : null;
   }
@@ -243,15 +299,15 @@
       msg += 'La IA de Baqueano me recomendó tu servicio para la siguiente actividad de mi ruta:\n';
       msg += '📍 *Actividad:* ' + specificActivity.nombre + '\n';
       msg += '🗺️ *Destino:* ' + (plan.destino_principal || input.origin) + '\n';
-      if (specificActivity.precio_estimado) {
-        msg += '🏷️ *Tarifa estimada en plataforma:* ' + specificActivity.precio_estimado + '\n';
+      if (specificActivity.precio_publicado) {
+        msg += '🏷️ *Tarifa publicada en plataforma:* ' + specificActivity.precio_publicado + '\n';
       }
       msg += '👥 *Viajeros:* ' + input.adults + ' adultos' + (input.children ? ', ' + input.children + ' niños' : '') + '\n';
     } else {
       msg += 'La IA de Baqueano generó mi itinerario de aventura: *' + (plan.plan_title || plan.destino_principal) + '*.\n';
       msg += '📅 *Duración:* ' + input.days + ' días\n';
       msg += '👥 *Viajeros:* ' + input.adults + ' adultos' + (input.children ? ', ' + input.children + ' niños' : '') + ' (' + input.travelType + ')\n';
-      msg += '💰 *Presupuesto estimado:* ' + (plan.presupuesto_estimado || money(input.budget, input.currency)) + '\n';
+      msg += '💰 *Presupuesto máximo indicado por mí:* ' + money(input.budget, input.currency) + '\n';
       msg += '\nMe gustaría consultar tu disponibilidad para coordinar directamente contigo con 0% de comisiones foráneas.';
     }
 
@@ -289,13 +345,18 @@
         type: 'Coordinación y Enlace Territorial',
         host: 'Mesa Oficial Baqueano',
         phone: MESA_CENTRAL_PHONE,
-        category: 'guia'
+        category: 'guia',
+        isFallbackContact: true
       };
       fallbackBiz.whatsappUrl = buildWhatsAppUrl(fallbackBiz, plan, input);
       plan.recommended_businesses.push(fallbackBiz);
     }
 
     plan.selected_business = plan.recommended_businesses[0];
+    plan.hasDirectContact = plan.recommended_businesses.some(business => {
+      const phone = String(business.phone || business.whatsapp || '').replace(/\D/g, '');
+      return !business.isFallbackContact && phone.length >= 11;
+    });
     return plan;
   }
 
@@ -538,7 +599,7 @@
       children: travelType === 'familia_ninos' ? 2 : 0
     };
 
-    const reserve = budgetVal * 0.1;
+    const reserve = budgetVal * 0.2;
     const available = budgetVal - reserve;
 
     return {
@@ -577,7 +638,9 @@
           id: doc.id,
           ...raw,
           precio: Number(raw.precio) || 0,
-          usable: raw.disponibilidad === true && Number(raw.precio) > 0
+          usable: (raw.published === true || raw.status === 'published')
+            && raw.disponibilidad === true
+            && Number(raw.precio) > 0
         };
       });
 
@@ -621,10 +684,6 @@
     let target = territories.find(t => t.name.toLowerCase().includes(input.origin.toLowerCase()))
       || territories[Math.floor(Math.random() * territories.length)];
 
-    const rate = input.currency === 'USD' ? 1 : 36.8;
-    const isUsd = input.currency === 'USD';
-    const factor = isUsd ? 1 : rate;
-
     const daysArray = [];
     for (let d = 1; d <= input.days; d++) {
       const dayActivities = [];
@@ -636,7 +695,7 @@
         nombre: placeName,
         tipo: 'actividad',
         descripcion: actName + '. Acompañamiento por guía campesino acreditado.',
-        precio_estimado: isUsd ? '$15 – $25' : 'C$ ' + Math.round(15 * factor) + ' – ' + Math.round(25 * factor),
+        precio_publicado: null,
         fuente: 'Baqueano Oficial (Territorio Verificado)'
       });
 
@@ -644,7 +703,7 @@
         nombre: 'Hospedaje Rural Comunitario en ' + target.name.split('&')[0].trim(),
         tipo: 'hospedaje',
         descripcion: 'Habitación ecológica administrada directamente por familias locales con baño privado y vistas naturales.',
-        precio_estimado: isUsd ? '$20 – $35' : 'C$ ' + Math.round(20 * factor) + ' – ' + Math.round(35 * factor),
+        precio_publicado: null,
         fuente: 'Red de Anfitriones Baqueano'
       });
 
@@ -652,7 +711,7 @@
         nombre: 'Alimentación Autóctona del Maíz y Café',
         tipo: 'alimentacion',
         descripcion: 'Desayuno campesino y cena típica con productos de la milpa local.',
-        precio_estimado: isUsd ? '$8 – $14' : 'C$ ' + Math.round(8 * factor) + ' – ' + Math.round(14 * factor),
+        precio_publicado: null,
         fuente: 'Cocina Local Campesina'
       });
 
@@ -663,17 +722,14 @@
       });
     }
 
-    const totalMin = Math.round(input.budget * 0.7);
-    const totalMax = Math.round(input.budget * 0.95);
-
     return {
       plan_title: input.days + ' Días de Ecoturismo Auténtico en ' + target.name,
       destino_principal: target.name,
       resumen: 'Itinerario equilibrado saliendo desde ' + input.origin + '. Diseñado para vivir naturaleza auténtica, apoyar cooperativas rurales y maximizar tu presupuesto sin intermediarios.',
-      presupuesto_estimado: money(totalMin, input.currency) + ' – ' + money(totalMax, input.currency),
+      presupuesto_estimado: null,
       days: daysArray,
       recomendacion_final: 'Llevá calzado cómodo de senderismo, botella reutilizable para huella cero y dinero en efectivo (córdobas) para apoyar a los artesanos locales.',
-      nota_ia: 'Este itinerario fue fundamentado en destinos reales y verificados de Baqueano Nicaragua. Los precios son rangos estimados para coordinar directamente con los anfitriones.',
+      nota_ia: 'Cuando no existe una tarifa publicada en el catálogo, el precio debe consultarse directamente al anfitrión.',
       _source: 'territory'
     };
   }
@@ -692,7 +748,7 @@ Genera un itinerario turístico REAL, AUTÉNTICO y VERIFICABLE en formato JSON e
 
 REGLAS:
 - Solo usa lugares reales de Nicaragua.
-- No inventes precios fijos, usa rangos estimados razonables.
+- No inventes precios ni rangos. Usa null cuando no exista una tarifa publicada y verificable en el contexto.
 - Formato de respuesta: ÚNICAMENTE JSON sin Markdown alrededor.
 
 CONTEXTO REAL:
@@ -720,7 +776,7 @@ ESQUEMA JSON:
           "nombre": "...",
           "tipo": "actividad | hospedaje | alimentacion | transporte",
           "descripcion": "...",
-          "precio_estimado": "...",
+          "precio_publicado": null,
           "fuente": "Baqueano Verificado"
         }
       ]
@@ -865,7 +921,8 @@ ESQUEMA JSON:
     if (!showcase || !result) return;
 
     // Enriquecer el plan con negocios reales y enlaces específicos a WhatsApp
-    const plan = enhancePlanWithBusinesses(rawPlan, input);
+    const plan = enhancePlanWithBusinesses(applyPublishedPrices(rawPlan), input);
+    const budgetAllocation = !plan.hasDirectContact ? buildBudgetAllocation(input) : null;
 
     // Persistir itinerario en Supabase (public.travel_plans)
     try {
@@ -938,8 +995,8 @@ ESQUEMA JSON:
       <div class="rb-ai-disclaimer" style="margin-top: 0.8rem;">
         <i class="fa-solid fa-circle-check"></i>
         <div>
-          <strong>Conexión Directa con Anfitriones y Negocios Verificados</strong>
-          Todos los destinos, cooperativas y tarifas son reales. Al conectarte por WhatsApp lo hacés directamente con los anfitriones locales recomendados por la IA sin comisiones foráneas.
+          <strong>Conexión directa con anfitriones registrados</strong>
+          Solo mostramos tarifas publicadas en el catálogo. Cuando no existe una tarifa vigente, debés consultar precio y disponibilidad directamente.
         </div>
       </div>
 
@@ -950,7 +1007,7 @@ ESQUEMA JSON:
         </div>
         <div class="rb-quality rb-quality--ai">
           <i class="fa-solid fa-shield-halved"></i>
-          <span>100% Real</span>
+          <span>Datos del catálogo</span>
         </div>
       </div>
 
@@ -960,6 +1017,20 @@ ESQUEMA JSON:
         <div class="rb-exchange-note">
           <i class="fa-solid fa-wallet"></i> Inversión Estimada: <strong>${plan.presupuesto_estimado}</strong> (Presupuesto definido: ${money(input.budget, input.currency)})
         </div>` : ''}
+
+      ${budgetAllocation ? `
+        <section class="rb-budget-allocation" aria-labelledby="rbBudgetAllocationTitle">
+          <div class="rb-budget-allocation-head">
+            <div><span>ORIENTACIÓN SIN CONTACTO DIRECTO</span><h4 id="rbBudgetAllocationTitle">Distribución sugerida del 80% de tu presupuesto</h4></div>
+            <strong>${dualMoney(budgetAllocation.available, input.currency)}</strong>
+          </div>
+          <p>Esto no es una tarifa del destino. Es un límite de gasto para organizarte mientras no exista un teléfono directo registrado.</p>
+          <div class="rb-budget-allocation-grid">
+            ${budgetAllocation.items.map(item => `<article><i class="fa-solid ${item.icon}"></i><span>${item.label}</span><strong>${dualMoney(item.amount, input.currency)}</strong></article>`).join('')}
+          </div>
+          <div class="rb-budget-reserve"><i class="fa-solid fa-shield-heart"></i> Reserva para imprevistos (20%): <strong>${dualMoney(budgetAllocation.reserve, input.currency)}</strong></div>
+          <small>Conversión de referencia: US$1 = C$${OFFICIAL_BCN_RATE_2026}, tipo de cambio oficial BCN 2026.</small>
+        </section>` : ''}
 
       <!-- LISTA DE DÍAS Y ACTIVIDADES CON SUS ANFITRIONES -->
       <div class="rb-day-list">
@@ -973,7 +1044,7 @@ ESQUEMA JSON:
                   <h5>${act.nombre}</h5>
                   <p>${act.descripcion}</p>
                   <div>
-                    <span class="rb-price-state is-ai"><i class="fa-solid fa-tag"></i> Tarifa Estimada</span>
+                    <span class="rb-price-state is-ai"><i class="fa-solid fa-tag"></i> ${act.precio_publicado ? 'Tarifa publicada' : 'Consultar precio'}</span>
                     ${act.fuente ? `<span class="rb-updated"><i class="fa-solid fa-link"></i> ${act.fuente}</span>` : ''}
                   </div>
                   <!-- Chip del Anfitrión Recomendado para esta actividad -->
@@ -987,8 +1058,8 @@ ESQUEMA JSON:
                   ` : ''}
                 </div>
                 <div class="rb-service-price">
-                  <strong>${act.precio_estimado || 'Consultar'}</strong>
-                  <span>por persona</span>
+                  <strong>${act.precio_publicado || 'Consultar precio'}</strong>
+                  <span>${act.precio_publicado ? 'según publicación' : 'con el anfitrión'}</span>
                 </div>
               </article>
             `).join('')}

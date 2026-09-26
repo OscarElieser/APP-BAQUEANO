@@ -143,8 +143,8 @@
           <h2>Tu aventura toma forma</h2>
         </div>
         <div class="ai-total">
-          Estimado total <strong>${formatNio(totalNio)}</strong>
-          <small>≈ ${formatUsd(totalUsd)} · tasa de referencia BCN ${BCN_RATE}</small>
+          Presupuesto máximo indicado <strong>${formatNio(totalNio)}</strong>
+          <small>≈ ${formatUsd(totalUsd)} · no representa una tarifa</small>
         </div>
       </div>
       <div class="ai-days">
@@ -161,7 +161,7 @@
           .join('')}
       </div>
       <p class="ai-result-note">
-        <i class="fa-solid fa-circle-check"></i> Ruta verificada creada con la inteligencia territorial comunitaria. Los importes se expresan en córdobas con equivalencia en dólares. Guardado en Supabase con éxito.
+        <i class="fa-solid fa-circle-check"></i> Ruta creada con el catálogo territorial. Los precios deben consultarse cuando no exista una tarifa publicada y vigente en la plataforma.
       </p>
     `;
     result.hidden = false;
@@ -291,9 +291,6 @@
     const territory = resolveTerritory(payload.prompt, payload.department);
     const places = territory.places;
 
-    const costPerDayUsd = Math.round(budgetUsd / numDays);
-    const costPerDayNio = Math.round(costPerDayUsd * BCN_RATE);
-
     const itineraryDays = [];
     for (let i = 0; i < numDays; i++) {
       const dayNum = i + 1;
@@ -304,18 +301,18 @@
         dayNumber: dayNum,
         title: `Día ${dayNum}: ${place1.name} y Experiencia Local en ${territory.department}`,
         summary: `${place1.desc} Posterior traslado y descanso en ${place2.name}.`,
-        dayBudgetUsd: costPerDayUsd,
-        dayBudgetNio: costPerDayNio,
+        dayBudgetUsd: null,
+        dayBudgetNio: null,
         stops: [
-          { name: place1.name, desc: place1.desc, estimatedCostUsd: Math.round(place1.costUsd * groupSize) },
-          { name: place2.name, desc: place2.desc, estimatedCostUsd: Math.round(place2.costUsd * groupSize) }
+          { name: place1.name, desc: place1.desc, publishedPrice: null },
+          { name: place2.name, desc: place2.desc, publishedPrice: null }
         ]
       });
     }
 
     return {
       title: `Ruta Baqueano: ${numDays} Días en ${territory.department} (${territory.title})`,
-      summary: `Itinerario personalizado para ${groupSize} viajeros en modalidad ${payload.travelStyle || 'aventura'}. Basado en registros de ${territory.title}. Presupuesto diario estimado: US$ ${costPerDayUsd} (C$ ${costPerDayNio.toLocaleString('es-NI')}). Precios sugeridos directos con anfitriones locales.`,
+      summary: `Itinerario para ${groupSize} viajeros en modalidad ${payload.travelStyle || 'aventura'}, basado en registros territoriales de ${territory.title}. El presupuesto indicado funciona como límite del viajero, no como precio de los servicios.`,
       territory: territory.department,
       daysCount: numDays,
       groupSize: groupSize,

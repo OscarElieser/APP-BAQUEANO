@@ -26,6 +26,7 @@
   'use strict';
 
   const STORAGE_KEY = 'baqueano_active_theme';
+  const CUSTOM_COLORS_STORAGE_KEY = 'baqueano_custom_section_colors';
   const DEFAULT_THEME_ID = 'baqueano_origen';
 
   // Colección de los 8 temas oficiales de alta gama
@@ -226,6 +227,57 @@
 
   let currentThemeId = DEFAULT_THEME_ID;
 
+  // Valores por defecto de personalización cromática de secciones
+  const defaultCustomColors = {
+    bgColor: '#080D1A',
+    titleColor: '#FFFFFF',
+    textColor: '#E2E8F0',
+    accentColor: '#F65E01',
+    opacity: 45 // 45% filtro, dejando 55% de luz a la imagen panorámica
+  };
+
+  let activeCustomColors = { ...defaultCustomColors };
+
+  try {
+    const savedCustom = localStorage.getItem(CUSTOM_COLORS_STORAGE_KEY);
+    if (savedCustom) {
+      activeCustomColors = { ...defaultCustomColors, ...JSON.parse(savedCustom) };
+    }
+  } catch (_) {}
+
+  function applyCustomSectionColors(colors, save = true) {
+    activeCustomColors = { ...activeCustomColors, ...colors };
+    const root = document.documentElement;
+    const { bgColor, titleColor, textColor, accentColor, opacity } = activeCustomColors;
+
+    // Calcular valores rgba derivados para gradiente atmosférico
+    const rgb = hexToRgb(bgColor);
+    const alphaTop = Math.min(0.9, (opacity / 100) * 1.2).toFixed(2);
+    const alphaMid = Math.max(0.1, (opacity / 100) * 0.45).toFixed(2);
+    const alphaBot = Math.min(0.95, (opacity / 100) * 1.4).toFixed(2);
+
+    root.style.setProperty('--section-bg-color', bgColor);
+    root.style.setProperty('--section-bg-tint', `rgba(${rgb}, ${alphaTop})`);
+    root.style.setProperty('--section-bg-tint-mid', `rgba(${rgb}, ${alphaMid})`);
+    root.style.setProperty('--section-bg-tint-bot', `rgba(${rgb}, ${alphaBot})`);
+    root.style.setProperty('--section-title-color', titleColor);
+    root.style.setProperty('--section-text-color', textColor);
+    root.style.setProperty('--section-accent-color', accentColor);
+
+    if (save) {
+      try {
+        localStorage.setItem(CUSTOM_COLORS_STORAGE_KEY, JSON.stringify(activeCustomColors));
+      } catch (_) {}
+    }
+
+    // Actualizar campos en el modal si está abierto
+    syncColorControlsUI();
+  }
+
+  // Aplicar inmediatamente al iniciar
+  applyCustomSectionColors(activeCustomColors, false);
+
+
   // Iniciar tema inmediatamente desde almacenamiento
   try {
     const savedTheme = localStorage.getItem(STORAGE_KEY);
@@ -355,14 +407,24 @@
     }
   }
 
-  /**
-   * Oculta el lanzador flotante: la paleta solo sale al tocar el botón Tema en el navbar
+    /**
+   * Inyecta el botón flotante ergonómico para abrir el selector en cualquier momento
    */
   function injectFloatingTrigger() {
-    const existing = document.getElementById('baqFloatingThemeBtn');
-    if (existing) {
-      existing.remove();
-    }
+    if (document.getElementById('baqFloatingThemeBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'baq-theme-float-btn';
+    btn.id = 'baqFloatingThemeBtn';
+    btn.type = 'button';
+    btn.title = 'Personalizar Colores de Fondo y Letras';
+    btn.setAttribute('aria-label', 'Personalizar colores de fondo y letras');
+    btn.innerHTML = `
+      <div class="float-icon-box"><i class="fa-solid fa-palette"></i></div>
+      <span class="float-text">Colores</span>
+      <span class="float-badge">Personalizar</span>
+    `;
+    btn.addEventListener('click', openModal);
+    document.body.appendChild(btn);
   }
 
   /**
@@ -394,19 +456,152 @@
           </button>
         </div>
 
-        <!-- Filtros por categoría -->
-        <div class="baq-theme-filters" id="baqThemeFilters">
-          <button class="baq-theme-filter-pill is-active" data-category="all" type="button">Todos (8)</button>
-          <button class="baq-theme-filter-pill" data-category="Identidad" type="button">Identidad</button>
-          <button class="baq-theme-filter-pill" data-category="Fuego & Volcanes" type="button">Fuego & Volcanes</button>
-          <button class="baq-theme-filter-pill" data-category="Naturaleza" type="button">Naturaleza</button>
-          <button class="baq-theme-filter-pill" data-category="Costas" type="button">Costas</button>
-          <button class="baq-theme-filter-pill" data-category="Cultura" type="button">Cultura</button>
+                <!-- Selector de Pestañas del Modal -->
+        <div class="baq-theme-modal-nav-tabs">
+          <button type="button" class="baq-modal-tab-btn is-active" id="tabBtnCatalog" data-view="catalog">
+            <i class="fa-solid fa-palette"></i> <span>Temas de Nicaragua</span>
+          </button>
+          <button type="button" class="baq-modal-tab-btn" id="tabBtnStudio" data-view="studio">
+            <i class="fa-solid fa-sliders"></i> <span>Personalizar Fondo &amp; Letras</span>
+          </button>
         </div>
 
-        <!-- Cuerpo de tarjetas -->
-        <div class="baq-theme-modal-body" id="baqThemeModalBody">
-          <!-- Renderizado dinámico -->
+        <!-- VISTA 1: CATÁLOGO REGIONAL -->
+        <div id="baqModalViewCatalog" class="baq-modal-view-panel is-active">
+          <!-- Filtros por categoría -->
+          <div class="baq-theme-filters" id="baqThemeFilters">
+            <button class="baq-theme-filter-pill is-active" data-category="all" type="button">Todos (8)</button>
+            <button class="baq-theme-filter-pill" data-category="Identidad" type="button">Identidad</button>
+            <button class="baq-theme-filter-pill" data-category="Fuego & Volcanes" type="button">Fuego & Volcanes</button>
+            <button class="baq-theme-filter-pill" data-category="Naturaleza" type="button">Naturaleza</button>
+            <button class="baq-theme-filter-pill" data-category="Costas" type="button">Costas</button>
+            <button class="baq-theme-filter-pill" data-category="Cultura" type="button">Cultura</button>
+          </div>
+
+          <!-- Cuerpo de tarjetas -->
+          <div class="baq-theme-modal-body" id="baqThemeModalBody">
+            <!-- Renderizado dinámico -->
+          </div>
+        </div>
+
+        <!-- VISTA 2: COLOR STUDIO (PERSONALIZADOR DE SECCIONES & LETRAS) -->
+        <div id="baqModalViewStudio" class="baq-modal-view-panel">
+          <div class="baq-studio-container">
+            <div class="baq-studio-intro">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <div>
+                <strong>Estudio Cromático en Vivo</strong>
+                <p>Modifica el tono de fondo, el color de los títulos y el color de las letras en las secciones. La imagen panorámica de fondo se adaptará con el color que elijas en tiempo real.</p>
+              </div>
+            </div>
+
+            <div class="baq-studio-grid">
+              <!-- CONTROL 1: FONDO DE SECCIONES -->
+              <div class="baq-studio-card">
+                <div class="baq-studio-card-head">
+                  <span class="baq-studio-icon"><i class="fa-solid fa-image"></i></span>
+                  <div>
+                    <h4>Tinte de Fondo de Secciones</h4>
+                    <p>Color base que baña los paisajes de cada sección</p>
+                  </div>
+                </div>
+                <div class="baq-studio-swatches-row" id="studioBgSwatches">
+                  <button type="button" class="studio-swatch-chip" data-color="#080D1A" style="--c:#080D1A" title="Noche Azul Baqueano"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#0B0707" style="--c:#0B0707" title="Magma Masaya"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#04121F" style="--c:#04121F" title="Océano Caribe"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#061510" style="--c:#061510" title="Selva Esmeralda"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#12081E" style="--c:#12081E" title="Crepúsculo Ometepe"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#150C07" style="--c:#150C07" title="Barro Precolombino"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#020408" style="--c:#020408" title="Obsidiana Pura"></button>
+                </div>
+                <div class="baq-studio-picker-row">
+                  <label for="inputCustomBgColor"><i class="fa-solid fa-eye-dropper"></i> Color Libre:</label>
+                  <div class="baq-color-input-wrap">
+                    <input type="color" id="inputCustomBgColor" value="#080D1A">
+                    <span id="labelCustomBgVal">#080D1A</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTROL 2: COLOR DE TÍTULOS -->
+              <div class="baq-studio-card">
+                <div class="baq-studio-card-head">
+                  <span class="baq-studio-icon" style="color:#FBBF24"><i class="fa-solid fa-heading"></i></span>
+                  <div>
+                    <h4>Color de los Títulos</h4>
+                    <p>Tipografía de los titulares principales en cada sección</p>
+                  </div>
+                </div>
+                <div class="baq-studio-swatches-row" id="studioTitleSwatches">
+                  <button type="button" class="studio-swatch-chip" data-color="#FFFFFF" style="--c:#FFFFFF" title="Blanco Nieve"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#F4E6C1" style="--c:#F4E6C1" title="Crema Pinolera"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#FBBF24" style="--c:#FBBF24" title="Oro Solentiname"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#F65E01" style="--c:#F65E01" title="Naranja Fuego"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#38BDF8" style="--c:#38BDF8" title="Cian Caribeño"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#34D399" style="--c:#34D399" title="Verde Menta"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#FB7185" style="--c:#FB7185" title="Coral Ometepe"></button>
+                </div>
+                <div class="baq-studio-picker-row">
+                  <label for="inputCustomTitleColor"><i class="fa-solid fa-eye-dropper"></i> Color Libre:</label>
+                  <div class="baq-color-input-wrap">
+                    <input type="color" id="inputCustomTitleColor" value="#FFFFFF">
+                    <span id="labelCustomTitleVal">#FFFFFF</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTROL 3: COLOR DE LETRAS Y PÁRRAFOS -->
+              <div class="baq-studio-card">
+                <div class="baq-studio-card-head">
+                  <span class="baq-studio-icon" style="color:#38BDF8"><i class="fa-solid fa-paragraph"></i></span>
+                  <div>
+                    <h4>Color de Textos y Letras</h4>
+                    <p>Subtítulos, descripciones y textos secundarios</p>
+                  </div>
+                </div>
+                <div class="baq-studio-swatches-row" id="studioTextSwatches">
+                  <button type="button" class="studio-swatch-chip" data-color="#E2E8F0" style="--c:#E2E8F0" title="Gris Perla Suave"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#F4E6C1" style="--c:#F4E6C1" title="Crema Cálido"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#CBD5E1" style="--c:#CBD5E1" title="Plata Claro"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#94A3B8" style="--c:#94A3B8" title="Pizarra Atenuado"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#FFFFFF" style="--c:#FFFFFF" title="Blanco Total"></button>
+                </div>
+                <div class="baq-studio-picker-row">
+                  <label for="inputCustomTextColor"><i class="fa-solid fa-eye-dropper"></i> Color Libre:</label>
+                  <div class="baq-color-input-wrap">
+                    <input type="color" id="inputCustomTextColor" value="#E2E8F0">
+                    <span id="labelCustomTextVal">#E2E8F0</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTROL 4: VISIBILIDAD DE LA IMAGEN DE FONDO -->
+              <div class="baq-studio-card">
+                <div class="baq-studio-card-head">
+                  <span class="baq-studio-icon" style="color:#F65E01"><i class="fa-solid fa-circle-half-stroke"></i></span>
+                  <div>
+                    <h4>Visibilidad de Imagen Panorámica</h4>
+                    <p>Ajusta el brillo y nitidez del paisaje de fondo</p>
+                  </div>
+                </div>
+                <div class="baq-slider-group">
+                  <div class="baq-slider-labels">
+                    <span><i class="fa-solid fa-moon"></i> Más Oscuro</span>
+                    <strong id="labelOpacityVal">55% Nitidez</strong>
+                    <span><i class="fa-solid fa-sun"></i> Más Brillante</span>
+                  </div>
+                  <input type="range" id="inputCustomOpacity" min="10" max="85" value="45" class="baq-range-slider">
+                </div>
+              </div>
+            </div>
+
+            <!-- Previsualizador de Muestra Rápida -->
+            <div class="baq-studio-preview-box">
+              <div class="baq-preview-badge">Vista Previa de Secciones</div>
+              <h3 class="baq-preview-title">Destinos que Inspiran Nicaragua</h3>
+              <p class="baq-preview-desc">Volcanes sagrados, reservas de biósfera, joyas coloniales y paraísos costeros que definen la grandeza de nuestra patria.</p>
+            </div>
+          </div>
         </div>
 
         <!-- Pie del modal -->
@@ -439,6 +634,8 @@
     // Evento restablecer
     document.getElementById('baqThemeResetBtn').addEventListener('click', () => {
       applyTheme(DEFAULT_THEME_ID);
+      applyCustomSectionColors(defaultCustomColors);
+      showToast('Colores restablecidos a los valores oficiales de Baqueano.');
     });
 
     // Eventos de filtros
