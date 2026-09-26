@@ -507,13 +507,38 @@ img {
 
 
 /* ==========================================================================
-   FOOTER INSTITUCIONAL ULTRA-FUTURISTA & HUD INTERACTIVO
+   🧭 FOOTER INSTITUCIONAL — PANORAMA NICARAGUA & HUD DE ALTA GAMA
+   --------------------------------------------------------------------------
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Enmarcar el cierre de cada experiencia digital en la riqueza paisajística,
+     cultural y natural de Nicaragua: volcanes sagrados, Lago Cocibolca, el
+     Guardabarranco nacional, el café de montaña y petroglifos ancestrales.
+   - Brindar una atmósfera visual inmersiva que consolide la soberanía territorial
+     y el orgullo nacional campesino.
+   
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Fondo panorámico oficial 'footer-nicaragua-panorama.png' combinado con
+     gradiente vertical multi-parada para asegurar legibilidad óptica AAA del texto.
+   - Soporte para cover centrado abajo, scroll suave y acento con borde superior
+     naranja fuego (#F65E01).
+   - Rejilla táctica HUD atenuada al 25% para armonizar con el arte visual.
+   - Glassmorphism translúcido en tarjetas de columnas con soporte responsive total.
+
+   📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
+   - .site-footer-pro: Contenedor raíz con panorama nicaragüense y gradiente de contraste.
+   - .site-footer-pro::before: Capa de textura y líneas sutiles.
    ========================================================================== */
 .site-footer-pro {
   position: relative;
-  background: radial-gradient(ellipse at 50% 0%, #0c172a 0%, #050811 100%);
-  border-top: 1px solid rgba(246, 94, 1, 0.35);
-  padding: 3.5rem 0 2rem;
+  background-color: #050811;
+  background-image: 
+    linear-gradient(180deg, rgba(12, 23, 42, 0.88) 0%, rgba(5, 8, 17, 0.62) 42%, rgba(5, 8, 17, 0.94) 100%),
+    url('../assets/images/footer-nicaragua-panorama.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  border-top: 1px solid rgba(246, 94, 1, 0.45);
+  padding: 4rem 0 2rem;
   overflow: hidden;
   z-index: 10;
 }
@@ -526,12 +551,12 @@ img {
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(rgba(22, 93, 111, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 93, 111, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(22, 93, 111, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 93, 111, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
   background-position: center top;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.25;
 }
 
 .site-footer-pro::after {

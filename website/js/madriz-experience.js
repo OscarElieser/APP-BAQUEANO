@@ -264,6 +264,36 @@
         </div>
       </section>
 
+      <!--
+        POR QUÉ: Madriz debe conservar el recorrido visual continuo solicitado.
+        CÓMO: cinco fotografías reales forman la secuencia y una copia técnica,
+        oculta semánticamente, cierra el bucle sin presentar contenido adicional.
+        QUÉ: carrusel infinito con control explícito para pausar y reanudar.
+      -->
+      <section class="infinite-gallery-section territory-infinite-gallery" aria-label="Galería continua de Madriz">
+        <div class="infinite-carousel-container">
+          <div class="infinite-track" id="madrizInfiniteTrack">
+            <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_panoramica.jpg" alt="Panorámica del Cañón de Somoto" loading="lazy"></div>
+            <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_interior.png" alt="Interior del Cañón de Somoto" loading="lazy"></div>
+            <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_bote.png" alt="Recorrido en bote por el Cañón de Somoto" loading="lazy"></div>
+            <div class="infinite-item"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Paisaje del Cañón de Somoto" loading="lazy"></div>
+            <div class="infinite-item"><img src="assets/images/departamentos/somoto.jpg" alt="Paisaje territorial de Somoto" loading="lazy"></div>
+            <div class="territory-carousel-clone" aria-hidden="true">
+              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_panoramica.jpg" alt="" loading="lazy"></div>
+              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_interior.png" alt="" loading="lazy"></div>
+              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_bote.png" alt="" loading="lazy"></div>
+              <div class="infinite-item"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="" loading="lazy"></div>
+              <div class="infinite-item"><img src="assets/images/departamentos/somoto.jpg" alt="" loading="lazy"></div>
+            </div>
+          </div>
+        </div>
+        <div class="territory-gallery-controls">
+          <button type="button" class="territory-gallery-toggle" id="madrizGalleryToggle" aria-pressed="false">
+            <i class="fa-solid fa-pause"></i><span>Pausar galería</span>
+          </button>
+        </div>
+      </section>
+
       <!-- GALERÍA DE VIDEO DE MADRIZ -->
       <section class="madriz-video-gallery">
         <div class="container">
@@ -1386,6 +1416,18 @@
   }
 
   function initLocalEvents() {
+    const galleryTrack = document.getElementById('madrizInfiniteTrack');
+    const galleryToggle = document.getElementById('madrizGalleryToggle');
+    if (galleryTrack && galleryToggle) {
+      galleryToggle.addEventListener('click', () => {
+        const paused = galleryTrack.classList.toggle('is-paused');
+        galleryToggle.setAttribute('aria-pressed', String(paused));
+        galleryToggle.innerHTML = paused
+          ? '<i class="fa-solid fa-play"></i><span>Reanudar galería</span>'
+          : '<i class="fa-solid fa-pause"></i><span>Pausar galería</span>';
+      });
+    }
+
     // Botón Guardar en Mi Viaje
     const btnSave = document.getElementById('btnSaveMadrizTrip');
     if (btnSave) {

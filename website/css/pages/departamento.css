@@ -2266,6 +2266,42 @@ button.territory-pill-card span {
   background: linear-gradient(180deg, #0F172A 0%, #1a0d08 52%, #0F172A 100%);
 }
 
+.territory-carousel-clone {
+  display: flex;
+}
+
+.territory-gallery-controls {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1rem 0;
+}
+
+.territory-gallery-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 42px;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid rgba(244, 230, 193, 0.28);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.88);
+  color: #F4E6C1;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.territory-gallery-toggle:hover,
+.territory-gallery-toggle:focus-visible {
+  border-color: #F65E01;
+  background: rgba(22, 93, 111, 0.9);
+  outline: none;
+  transform: translateY(-2px);
+}
+
 .territory-photo-card {
   cursor: default;
 }
