@@ -16,16 +16,11 @@ const { createAiChatService } = require("./lib/ai-chat");
 const { createPublicMetricsReader } = require("./lib/public-metrics");
 if (getApps().length === 0) initializeApp();
 const runtimeOptions = {region: "us-central1", timeoutSeconds: 30, memory: "256MiB", maxInstances: 10};
-// Resolución flexible de claves: variables de entorno (.env) por defecto
-// para compatibilidad sin requerir Google Secret Manager ni cuenta de facturación.
-let geminiApiKey = null;
-if (process.env.USE_SECRET_MANAGER === "true") {
-  try {
-    geminiApiKey = defineSecret("GEMINI_API_KEY");
-  } catch (e) {
-    geminiApiKey = null;
-  }
-}
+// POR QUÉ: Search Grounding requiere una credencial privada que nunca debe
+// incluirse en el repositorio, Hosting ni código entregado al navegador.
+// CÓMO: Secret Manager inyecta GEMINI_API_KEY únicamente en la función API.
+// QUÉ: referencia declarativa al secreto usado por el planificador fundamentado.
+const geminiApiKey = defineSecret("GEMINI_API_KEY");
 
 const getApiKey = () => {
   try {
@@ -34,7 +29,7 @@ const getApiKey = () => {
       if (val) return val;
     }
   } catch (e) {}
-  return process.env.GEMINI_API_KEY || "";
+  return "";
 };
 
 const db = getFirestore();
@@ -43,7 +38,7 @@ const handleAiChat = createAiChatService({db, getApiKey});
 
 exports.healthCheck = onRequest(runtimeOptions, createHealthHandler());
 exports.api = onRequest(
-  geminiApiKey ? {...runtimeOptions, secrets: [geminiApiKey]} : runtimeOptions,
+  {...runtimeOptions, secrets: [geminiApiKey]},
   createApiHandler({readPublicMetrics, handleAiChat, getApiKey})
 );
 

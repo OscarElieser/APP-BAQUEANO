@@ -401,14 +401,14 @@
       let itinerary = null;
       let providerName = '';
 
-      // TIER 1: Probar Gateway Local / Hosting (/api/baqueano-ai) con timeout seguro de 3.5s
+      // TIER 1: Supabase Edge es el motor principal; Firebase conserva solo autenticación.
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 14000);
 
-        const response = await fetch('/api/baqueano-ai', {
+        const response = await fetch(SUPABASE_EDGE_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
           body: JSON.stringify(payload),
           signal: controller.signal
         });
@@ -418,43 +418,14 @@
           const data = await response.json();
           if (data && data.success && data.itinerary) {
             itinerary = data.itinerary;
-            providerName = 'Gateway Oficial';
+            providerName = data.provider === 'baqueano-supabase-grounded-web' ? 'Supabase Edge + búsqueda web' : 'Supabase Edge';
           }
         }
-      } catch (errLocal) {
-        console.info('[Baqueano AI] Gateway local en espera. Activando Supabase Edge Runtime...');
+      } catch (errEdge) {
+        console.warn('[Baqueano AI] Supabase Edge no disponible:', errEdge.message);
       }
 
-      // TIER 2: Si el gateway local no respondió, invocar Supabase Edge Function directamente
-      if (!itinerary) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-          const edgeRes = await fetch(SUPABASE_EDGE_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY
-            },
-            body: JSON.stringify(payload),
-            signal: controller.signal
-          });
-          clearTimeout(timeoutId);
-
-          if (edgeRes.ok) {
-            const edgeData = await edgeRes.json();
-            if (edgeData && edgeData.success && edgeData.itinerary) {
-              itinerary = edgeData.itinerary;
-              providerName = 'Supabase Edge';
-            }
-          }
-        } catch (errEdge) {
-          console.warn('[Baqueano AI] Supabase Edge no disponible:', errEdge.message);
-        }
-      }
-
-      // TIER 3: Si ambos fallaron o estamos offline, activar Motor Territorial Determinista Local
+      // TIER 2: si Supabase falla o no hay conexión, usar el catálogo local.
       if (!itinerary) {
         console.info('[Baqueano AI] Generando itinerario mediante Motor Territorial de Contingencia...');
         itinerary = buildLocalItinerary(payload);

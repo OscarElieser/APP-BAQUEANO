@@ -28,7 +28,9 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "@supabase/supabase-js";
 
-const BCN_RATE = 36.65;
+const BCN_RATE = 36.6243;
+const GROUNDED_MODEL = "gemini-2.5-flash";
+const TRUSTED_SOURCES = ["mapanicaragua.com", "visitanicaragua.com", "intur.gob.ni", "bcn.gob.ni", "ineter.gob.ni", "marena.gob.ni", "unesco.org"];
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -148,6 +150,88 @@ function resolveTerritory(prompt: string, department: string): TerritoryCatalogI
   return TERRITORY_CATALOG[0];
 }
 
+function cleanJson(value: string): string {
+  return value.replace(/^```json\s*/i, "").replace(/```\s*$/i, "").trim();
+}
+
+function extractSources(metadata: Record<string, unknown> | undefined) {
+  const chunks = Array.isArray(metadata?.groundingChunks) ? metadata.groundingChunks : [];
+  const seen = new Set<string>();
+  return chunks.flatMap((chunk: Record<string, unknown>, index: number) => {
+    const web = chunk?.web as Record<string, unknown> | undefined;
+    const url = String(web?.uri || "");
+    if (!url.startsWith("https://") || seen.has(url)) return [];
+    seen.add(url);
+    return [{id: `web-${index + 1}`, label: String(web?.title || "Fuente web").slice(0, 120), url, type: "web"}];
+  }).slice(0, 6);
+}
+
+async function buildGroundedItinerary(input: Record<string, unknown>, territory: TerritoryCatalogItem) {
+  const apiKey = Deno.env.get("GEMINI_API_KEY");
+  if (!apiKey) return null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  const days = Number(input.days) || 3;
+  const prompt = `Crea un itinerario turístico verificable de Nicaragua en JSON estricto.
+Busca en la web y prioriza ${TRUSTED_SOURCES.join(", ")}. Usa mapanicaragua.com, publicado por INTUR, para contrastar territorio, atractivos, servicios y ubicación.
+Solicitud: ${String(input.prompt || "")}. Departamento: ${String(input.department || territory.department)}. Días: ${days}. Viajeros: ${Number(input.groupSize) || 2}. Interés: ${String(input.travelStyle || "aventura")}.
+No inventes lugares, contactos, horarios, disponibilidad ni precios. No incluyas precios. Si no hay evidencia suficiente, omite el lugar.
+Devuelve solamente: {"title":"...","summary":"...","territory":"...","days":[{"title":"...","summary":"...","stops":[{"name":"...","desc":"..."}]}]}`;
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GROUNDED_MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      signal: controller.signal,
+      body: JSON.stringify({
+        contents: [{parts: [{text: prompt}]}],
+        tools: [{google_search: {}}],
+        generationConfig: {temperature: 0.15, maxOutputTokens: 2600}
+      })
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    const candidate = data?.candidates?.[0];
+    const text = candidate?.content?.parts?.map((part: Record<string, unknown>) => String(part.text || "")).join("");
+    const sources = extractSources(candidate?.groundingMetadata);
+    if (!text || !sources.length) return null;
+    const parsed = JSON.parse(cleanJson(text));
+    const groundedDays = (Array.isArray(parsed.days) ? parsed.days : []).slice(0, days).map((day: Record<string, unknown>, index: number) => ({
+      dayNumber: index + 1,
+      title: String(day.title || `Día ${index + 1} en ${territory.department}`).slice(0, 180),
+      summary: String(day.summary || "Verifica las condiciones antes de viajar.").slice(0, 500),
+      dayBudgetUsd: null,
+      dayBudgetNio: null,
+      stops: (Array.isArray(day.stops) ? day.stops : []).slice(0, 4).map((stop: Record<string, unknown>) => ({
+        name: String(stop.name || "Lugar por confirmar").slice(0, 140),
+        desc: String(stop.desc || "Información respaldada por las fuentes consultadas.").slice(0, 420),
+        publishedPrice: null
+      }))
+    })).filter((day: Record<string, unknown>) => Array.isArray(day.stops) && day.stops.length);
+    if (!groundedDays.length) return null;
+    return {
+      title: String(parsed.title || `Ruta Baqueano en ${territory.department}`).slice(0, 180),
+      summary: String(parsed.summary || territory.summary).slice(0, 700),
+      territory: String(parsed.territory || territory.department).slice(0, 80),
+      daysCount: groundedDays.length,
+      groupSize: Number(input.groupSize) || 2,
+      travelStyle: String(input.travelStyle || "aventura"),
+      totalEstimatedCostUsd: Number(input.budgetUsd) || 0,
+      totalEstimatedCostNio: Number(input.budgetNio) || 0,
+      exchangeRate: BCN_RATE,
+      days: groundedDays,
+      sources,
+      informationMode: "grounded-web",
+      sustainabilityNote: "Verifica clima, accesos, disponibilidad y cualquier tarifa directamente antes de reservar.",
+      generatedAt: new Date().toISOString()
+    };
+  } catch (error) {
+    console.warn("[Baqueano AI Edge] Grounding no disponible:", error);
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: CORS_HEADERS });
@@ -175,8 +259,7 @@ Deno.serve(async (req: Request) => {
     const territory = resolveTerritory(prompt, requestedDept);
     const places = territory.places;
 
-    const costPerDayUsd = Math.round(budgetUsd / daysRequested);
-    const costPerDayNio = Math.round(budgetNio / daysRequested);
+    const grounded = await buildGroundedItinerary({prompt, department: requestedDept, days: daysRequested, groupSize, travelStyle, budgetNio, budgetUsd}, territory);
 
     const itineraryDays = [];
     for (let i = 0; i < daysRequested; i++) {
@@ -185,23 +268,23 @@ Deno.serve(async (req: Request) => {
       const place2 = places[(i + 1) % places.length];
 
       const stops = [
-        { name: place1.name, desc: place1.desc, estimatedCostUsd: Math.round(place1.costUsd * groupSize) },
-        { name: place2.name, desc: place2.desc, estimatedCostUsd: Math.round(place2.costUsd * groupSize) }
+        { name: place1.name, desc: place1.desc, publishedPrice: null },
+        { name: place2.name, desc: place2.desc, publishedPrice: null }
       ];
 
       itineraryDays.push({
         dayNumber: dayNum,
         title: `Día ${dayNum}: ${place1.name} y Experiencia Local en ${territory.department}`,
         summary: `${place1.desc} Posterior traslado y descanso en ${place2.name}.`,
-        dayBudgetUsd: costPerDayUsd,
-        dayBudgetNio: costPerDayNio,
+        dayBudgetUsd: null,
+        dayBudgetNio: null,
         stops: stops
       });
     }
 
-    const generatedItinerary = {
+    const localItinerary = {
       title: `Ruta Baqueano: ${daysRequested} Días en ${territory.department} (${territory.title})`,
-      summary: `Itinerario personalizado para ${groupSize} viajeros en modalidad ${travelStyle}. Basado en registros territoriales verificados de ${territory.title}. Presupuesto diario estimado: US$ ${costPerDayUsd} (C$ ${costPerDayNio.toLocaleString("es-NI")}). Precios sugeridos directos con anfitriones locales.`,
+      summary: `Itinerario para ${groupSize} viajeros en modalidad ${travelStyle}, basado en el catálogo territorial de ${territory.title}. El presupuesto indicado es un límite y no una tarifa.`,
       territory: territory.department,
       daysCount: daysRequested,
       groupSize: groupSize,
@@ -210,9 +293,13 @@ Deno.serve(async (req: Request) => {
       totalEstimatedCostNio: budgetNio,
       exchangeRate: BCN_RATE,
       days: itineraryDays,
-      sustainabilityNote: "Ruta 100% comunitaria: tus gastos se canalizan directamente a cooperativas y familias anfitrionas sin comisiones de intermediarios.",
+      sources: [],
+      informationMode: "local-catalog",
+      sustainabilityNote: "Verifica disponibilidad y cualquier tarifa directamente antes de reservar.",
       generatedAt: new Date().toISOString()
     };
+    const generatedItinerary = grounded || localItinerary;
+    const provider = grounded ? "baqueano-supabase-grounded-web" : "baqueano-supabase-catalog";
 
     // Persistir de forma garantizada en Supabase PostgreSQL (travel_plans)
     let planId: string | null = null;
@@ -232,7 +319,7 @@ Deno.serve(async (req: Request) => {
             budget: budgetUsd,
             currency: "USD",
             payload: generatedItinerary,
-            source: "baqueano-edge-ai"
+            source: provider
           })
           .select("id")
           .single();
@@ -250,7 +337,7 @@ Deno.serve(async (req: Request) => {
         {
           success: true,
           ok: true,
-          provider: "baqueano-edge-ai",
+          provider,
           planId: planId,
           itinerary: generatedItinerary
         },
