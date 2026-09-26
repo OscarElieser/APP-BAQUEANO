@@ -918,6 +918,7 @@
   <script src="js/territories-data.js"></script>
   <script src="js/madriz-experience.js"></script>
   <script src="js/chinandega-experience.js"></script>
+  <script src="js/territory-media-experience.js?v=20260926-1"></script>
   <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
   <script src="js/madriz-territory-map.js"></script>
   <script>
@@ -928,8 +929,10 @@
       const navContainer = document.getElementById('territoriesNavPills');
       const selectorGrid = document.getElementById('deptSelectorGrid');
       const mainContainer = document.querySelector('main');
-      const sectionContainer = document.querySelector('.dept-section-block .container');
-      const standardTemplateHtml = sectionContainer ? sectionContainer.innerHTML : '';
+      // POR QUÉ: los renderizadores especiales sustituyen todo el contenido de main.
+      // CÓMO: conservamos la plantilla completa para restaurarla al cambiar de territorio.
+      // QUÉ: navegación estable desde Madriz o Chinandega hacia los otros 15 territorios.
+      const standardTemplateHtml = mainContainer ? mainContainer.innerHTML : '';
 
       // 1. Obtener ID inicial (Por defecto 'madriz' o por parámetro URL)
       const urlParams = new URLSearchParams(window.location.search);
@@ -1016,6 +1019,7 @@
          * QUÉ: dos experiencias especiales intactas y una base común coherente.
          */
         if (dept.id === 'madriz' && window.BaqueanoMadriz) {
+          if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.unmount();
           window.BaqueanoMadriz.renderMadrizExperience(mainContainer, dept);
           renderSelectorGrid('madriz');
           return;
@@ -1026,14 +1030,15 @@
         }
 
         if (dept.id === 'chinandega' && window.BaqueanoChinandega) {
+          if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.unmount();
           window.BaqueanoChinandega.renderChinandegaExperience(mainContainer, dept);
           renderSelectorGrid('chinandega');
           return;
         }
 
         // Restaurar la plantilla compartida si una experiencia especial la sustituyó.
-        if (sectionContainer && sectionContainer.innerHTML !== standardTemplateHtml) {
-          sectionContainer.innerHTML = standardTemplateHtml;
+        if (mainContainer && !mainContainer.querySelector('#deptHeroBg')) {
+          mainContainer.innerHTML = standardTemplateHtml;
         }
 
         if (mainContainer) {
@@ -1046,6 +1051,10 @@
         document.getElementById('deptShortDesc').textContent = dept.shortDesc;
         document.getElementById('deptHeroBg').style.backgroundImage = `url('${dept.heroImage}')`;
         document.getElementById('deptBadgeText').textContent = `${dept.coopCount} Cooperativas Locales Registradas`;
+
+        // POR QUÉ/CÓMO/QUÉ: replica las galerías de Madriz mediante el componente
+        // compartido, sin intervenir sus diseños especiales ni el de Chinandega.
+        if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.mount(dept);
 
         // Historia
         const historyEl = document.getElementById('deptHistoryText');
