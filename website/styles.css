@@ -8798,7 +8798,7 @@ img {
 @media (max-width: 1699px) {
   .main-navbar .nav-inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     min-height: 72px;
     gap: 12px;
     padding-right: max(16px, env(safe-area-inset-right));
@@ -8839,36 +8839,38 @@ img {
   .main-navbar .nav-links-menu,
   .main-navbar .nav-links-menu.mobile-open {
     position: fixed;
-    top: calc(78px + env(safe-area-inset-top));
-    right: max(16px, env(safe-area-inset-right));
-    bottom: auto;
-    left: max(16px, env(safe-area-inset-left));
-    z-index: 1500;
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 1600;
     display: flex;
-    width: min(560px, calc(100vw - 32px));
-    max-width: 560px;
-    max-height: calc(100dvh - 96px - env(safe-area-inset-bottom));
-    margin-inline: auto;
-    padding: 14px;
+    width: min(390px, 88vw);
+    max-width: 88vw;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: max(18px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
     overflow-x: hidden;
     overflow-y: auto;
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
-    border: 1px solid rgba(244, 230, 193, 0.2);
-    border-radius: 20px;
-    background: linear-gradient(155deg, rgba(9, 22, 32, 0.99), rgba(5, 12, 21, 0.99));
-    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.72);
+    border: 0;
+    border-right: 1px solid rgba(244, 230, 193, 0.2);
+    border-radius: 0 24px 24px 0;
+    background: linear-gradient(155deg, rgba(9, 28, 39, 0.99), rgba(5, 12, 21, 0.995));
+    box-shadow: 28px 0 70px rgba(0, 0, 0, 0.62);
     backdrop-filter: blur(24px) saturate(145%);
     -webkit-backdrop-filter: blur(24px) saturate(145%);
-    transform: translateY(-10px) scale(0.98);
+    transform: translateX(-105%);
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
   }
 
   .main-navbar .nav-links-menu.mobile-open {
-    transform: translateY(0) scale(1);
+    transform: translateX(0);
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
@@ -8886,6 +8888,89 @@ img {
   .main-navbar .nav-links-menu.mobile-open .nav-dropdown-menu {
     width: 100%;
     min-width: 0;
+  }
+
+  .main-navbar .nav-drawer-header {
+    display: flex;
+    min-height: 64px;
+    margin-bottom: 8px;
+    padding: 4px 2px 14px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(244, 230, 193, 0.15);
+  }
+
+  .main-navbar .nav-drawer-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    color: #fff;
+    letter-spacing: 0.1em;
+  }
+
+  .main-navbar .nav-drawer-identity small {
+    color: #F65E01;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .main-navbar .nav-drawer-close {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(244, 230, 193, 0.22);
+    border-radius: 14px;
+    color: #F4E6C1;
+    background: rgba(15, 23, 42, 0.86);
+    cursor: pointer;
+  }
+}
+
+/*
+ * 🎯 POR QUÉ: separar visualmente el panel del contenido y evitar pulsaciones accidentales.
+ * ⚙️ CÓMO: una capa global acompaña al drawer y el cuerpo bloquea su desplazamiento.
+ * 📦 QUÉ: cierre por toque exterior, transición suave y contexto visual conservado.
+ */
+.nav-drawer-backdrop {
+  display: none;
+}
+
+@media (min-width: 1700px) {
+  .nav-drawer-header { display: none; }
+}
+
+@media (max-width: 1699px) {
+  body.nav-drawer-open {
+    overflow: hidden;
+  }
+
+  .nav-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1550;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(2, 8, 15, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 260ms ease, visibility 260ms ease;
+  }
+
+  body.nav-drawer-open .nav-drawer-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 }
 

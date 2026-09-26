@@ -325,7 +325,10 @@ function initActionRipples() {
 }
 
 /**
- * Menú desplegable táctico y dinámico para pantallas táctiles y smartphones.
+ * 🎯 POR QUÉ: el menú horizontal se saturaba en tablets, portátiles y escritorios medianos.
+ * ⚙️ CÓMO: convierte la navegación compartida en un drawer izquierdo accesible, con
+ * fondo de cierre, bloqueo del documento, tecla Escape y restauración del foco.
+ * 📦 QUÉ: panel lateral reutilizable en todas las páginas sin duplicar su HTML.
  */
 function initMobileMenu() {
   const toggleBtn = document.getElementById('mobileNavToggle');
@@ -333,17 +336,49 @@ function initMobileMenu() {
 
   if (!toggleBtn || !navMenu) return;
 
-  const toggleMenu = () => {
-    const isOpen = navMenu.classList.toggle('mobile-open');
+  const compactNavigation = window.matchMedia('(max-width: 1699px)');
+  const navInner = toggleBtn.closest('.nav-inner');
+  const brand = navInner?.querySelector('.brand-box');
+  const drawerHeader = document.createElement('div');
+  const backdrop = document.createElement('button');
+  drawerHeader.className = 'nav-drawer-header';
+  drawerHeader.innerHTML = `
+    <span class="nav-drawer-identity">
+      <strong>BAQUEANO</strong>
+      <small>Explorá Nicaragua</small>
+    </span>
+    <button class="nav-drawer-close" type="button" aria-label="Cerrar menú de navegación">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>`;
+  backdrop.className = 'nav-drawer-backdrop';
+  backdrop.type = 'button';
+  backdrop.tabIndex = -1;
+  backdrop.setAttribute('aria-label', 'Cerrar menú de navegación');
+  backdrop.setAttribute('aria-hidden', 'true');
+  if (navInner && brand) navInner.insertBefore(toggleBtn, brand);
+  navMenu.prepend(drawerHeader);
+  document.body.appendChild(backdrop);
+
+  const closeBtn = drawerHeader.querySelector('.nav-drawer-close');
+
+  const setMenuState = (isOpen, restoreFocus = false) => {
+    navMenu.classList.toggle('mobile-open', isOpen);
+    document.body.classList.toggle('nav-drawer-open', isOpen && compactNavigation.matches);
     toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    // La animación X es manejada por CSS via aria-expanded, no se cambia innerHTML
+    toggleBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    backdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    if (compactNavigation.matches) navMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    else navMenu.removeAttribute('aria-hidden');
+    if (isOpen) window.requestAnimationFrame(() => closeBtn?.focus());
+    else if (restoreFocus) toggleBtn.focus();
   };
 
-  const closeMenu = () => {
-    if (navMenu.classList.contains('mobile-open')) {
-      navMenu.classList.remove('mobile-open');
-      toggleBtn.setAttribute('aria-expanded', 'false');
-    }
+  const toggleMenu = () => {
+    setMenuState(!navMenu.classList.contains('mobile-open'));
+  };
+
+  const closeMenu = (restoreFocus = false) => {
+    if (navMenu.classList.contains('mobile-open')) setMenuState(false, restoreFocus);
   };
 
   toggleBtn.addEventListener('click', (e) => {
@@ -351,9 +386,12 @@ function initMobileMenu() {
     toggleMenu();
   });
 
+  closeBtn?.addEventListener('click', () => closeMenu(true));
+  backdrop.addEventListener('click', () => closeMenu(true));
+
   // Cerrar al hacer clic en cualquier enlace
   navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', () => closeMenu());
   });
 
   // Cerrar al hacer clic fuera del menú o presionar la tecla Escape
@@ -364,8 +402,11 @@ function initMobileMenu() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape') closeMenu(true);
   });
+
+  compactNavigation.addEventListener?.('change', () => setMenuState(false));
+  setMenuState(false);
 }
 
 /**

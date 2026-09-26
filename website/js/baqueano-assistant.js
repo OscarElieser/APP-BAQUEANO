@@ -11,7 +11,10 @@
     const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-6'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
-  const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: '/api/v1/ai/chat', healthEndpoint: '/health', healthInterval: 45000, requestAttempts: 3 });
+  // 🎯 POR QUÉ: Firebase Hosting no expone /health y su 404 pintaba el asistente en rojo aunque Supabase estuviera operativo.
+  // ⚙️ CÓMO: la verificación consulta el monitor Edge real que respalda IA, Grounding y persistencia territorial.
+  // 📦 QUÉ: indicador visual sincronizado con la infraestructura activa, sin falsos estados de desconexión.
+  const CONFIG = Object.freeze({ greetingDelay: 4500, contextDelay: 18000, cooldown: 120000, autoPeek: 14000, sleepDelay: 90000, snoozeTime: 1800000, endpoint: 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-ai', healthEndpoint: 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-status', healthInterval: 45000, requestAttempts: 3 });
   const KEYS = Object.freeze({ session: 'baqueano_assistant_session_v2', preferences: 'baqueano_assistant_preferences_v2', weather: 'baqueano_weather_v1' });
   const EXCLUDED = /(?:admin|perfil|privacidad|terminos|cookies|aviso-legal|offline|denuncias)(?:\.html)?$/i;
   const ACTIONS = new Set(['open_destination','open_department','open_map','show_place','search_places','search_destination','search_business','search_experience','build_itinerary','calculate_budget','calculate_distance','save_favorite','show_nearby','show_emergency','open_booking','request_booking','check_availability','check_weather','search_events','create_route','share_itinerary','open_route','play_audio','pause_audio','show_food','show_history']);
@@ -105,7 +108,8 @@
     updateServiceStatus('checking');
     try {
       const response = await fetch(CONFIG.healthEndpoint, { cache: 'no-store', signal: AbortSignal.timeout?.(6000) });
-      updateServiceStatus(response.ok ? 'online' : 'offline');
+      const health = response.ok ? await response.json().catch(() => null) : null;
+      updateServiceStatus(response.ok && health?.ok !== false && health?.status !== 'error' ? 'online' : 'offline');
     } catch (_) { updateServiceStatus('offline'); }
   }
 
@@ -162,6 +166,15 @@
     if (preferences.voice && text) speak(text); else setCharacter('idle');
   }
 
+  function itineraryReply(itinerary) {
+    if (!itinerary) return 'La conexión está activa, pero no recibí suficiente información para construir una recomendación. Indicame el departamento, los días y cuántas personas viajan.';
+    const days = Array.isArray(itinerary.days) ? itinerary.days.slice(0, 4).map(day => {
+      const stops = Array.isArray(day.stops) ? day.stops.map(stop => stop.name).filter(Boolean).join(', ') : '';
+      return `${day.title || `Día ${day.dayNumber || ''}`}${stops ? `: ${stops}` : ''}`;
+    }).join(' · ') : '';
+    return [itinerary.title, itinerary.summary, days, itinerary.sustainabilityNote].filter(Boolean).join('\n\n');
+  }
+
   function speak(text) { if (!('speechSynthesis' in window) || !preferences.voice) return; speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(String(text).slice(0, 1200)); utterance.lang = 'es-NI'; utterance.rate = .96; utterance.onend = () => setCharacter('idle'); utterance.onerror = () => setCharacter('idle'); speechSynthesis.speak(utterance); }
 
   async function ask(raw) {
@@ -179,7 +192,7 @@
       }
       if (!response.ok) throw new Error('gateway'); const data = await response.json(); if (!data.ok) throw new Error('contract');
       updateServiceStatus('online');
-      thinking?.closest('article')?.remove(); session.tripProfile = Object.assign({}, session.tripProfile, data.tripProfilePatch || {}); if (CHARACTER_STATES.has(data.animation)) setCharacter(data.animation); await streamText(data.message); renderActions(data.actions || []); track('assistant_response', { mode: data.mode, latency_ms: Math.round(performance.now() - started) });
+      thinking?.closest('article')?.remove(); session.tripProfile = Object.assign({}, session.tripProfile, data.tripProfilePatch || {}); if (CHARACTER_STATES.has(data.animation)) setCharacter(data.animation); await streamText(data.message || itineraryReply(data.itinerary)); renderActions(data.actions || [{ type: 'build_itinerary', label: 'Abrir planificador completo' }]); track('assistant_response', { mode: data.mode || data.provider, grounding: data.groundingStatus, latency_ms: Math.round(performance.now() - started) });
     } catch (error) {
       thinking?.closest('article')?.remove();
       if (error.name !== 'AbortError') {

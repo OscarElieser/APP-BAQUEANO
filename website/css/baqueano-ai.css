@@ -28,6 +28,16 @@
 .ai-hero-copy{position:relative;z-index:2}
 .ai-hero-copy::before{content:"";position:absolute;z-index:-1;top:-80px;left:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(246,94,1,.11),transparent 68%);filter:blur(20px)}
 .ai-status span,.ai-live b{animation:ai-status-pulse 2s ease-in-out infinite}
+
+/*
+ * 🎯 POR QUÉ: distinguir un servicio verificado de un fallo o una comprobación pendiente.
+ * ⚙️ CÓMO: el estado recibido desde Supabase Edge controla color y animación.
+ * 📦 QUÉ: verde operativo, ámbar verificando y rojo solo ante un error real.
+ */
+.ai-live.is-checking { color:#f4b942; }
+.ai-live.is-checking b { background:#f4b942; box-shadow:0 0 0 6px rgba(244,185,66,.12); }
+.ai-live.is-offline { color:#ef4444; }
+.ai-live.is-offline b { background:#ef4444; box-shadow:0 0 0 6px rgba(239,68,68,.12); animation:none; }
 .ai-hero h1 em{color:transparent;background:linear-gradient(90deg,var(--sand),#ffb47d 55%,var(--orange));background-clip:text;-webkit-background-clip:text}
 .ai-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 24px}
 .ai-primary-cta,.ai-surprise-cta{display:inline-flex;min-height:52px;align-items:center;justify-content:center;gap:11px;padding:0 20px;border-radius:15px;font-size:12px;font-weight:900;text-decoration:none;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}

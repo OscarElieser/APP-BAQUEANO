@@ -434,9 +434,11 @@
         persistToSupabase(itinerary, payload);
       }
 
-      // Celebración y mensaje al explorador
+      const groundedResponse = itinerary.informationMode === 'grounded-web';
       addMessage(
-        `¡Excelente elección! La inteligencia territorial completó el análisis para ${itinerary.territory || payload.department}. Hemos estructurado una ruta auténtica basada en destinos verificados y anfitriones comunitarios (${providerName}). Revisá el itinerario a continuación.`,
+        groundedResponse
+          ? `Search Grounding completó una consulta real para ${itinerary.territory || payload.department} mediante ${providerName}. Revisá el itinerario y sus fuentes a continuación.`
+          : `La IA no estuvo disponible. Para no inventar información, te muestro una ruta de contingencia basada solamente en el catálogo territorial local; no es una respuesta generada ni contiene precios confirmados.`,
         'assistant'
       );
 
@@ -477,8 +479,7 @@
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const text = input.value.trim();
-    if (!text) return;
+    const text = input.value.trim() || `Prepará una ruta por ${document.getElementById('territory')?.value || 'Nicaragua'} usando los datos seleccionados, sin inventar precios.`;
     addMessage(text, 'user');
     input.value = '';
     requestPlan(text);
@@ -567,14 +568,16 @@
       const res = await fetch(SUPABASE_STATUS_URL, {
         signal: AbortSignal.timeout ? AbortSignal.timeout(4000) : undefined
       });
-      if (res.ok) {
-        liveBadge.innerHTML = '<b></b><span>En línea (Edge)</span>';
+      const health = res.ok ? await res.json().catch(() => null) : null;
+      if (res.ok && health?.ok !== false && health?.status !== 'error') {
+        liveBadge.innerHTML = '<b></b><span>IA + Grounding activos</span>';
       } else {
-        liveBadge.innerHTML = '<b></b><span>En línea</span>';
+        liveBadge.innerHTML = '<b></b><span>Servicio no disponible</span>';
+        liveBadge.classList.add('is-offline');
       }
     } catch (_) {
-      // Incluso ante timeout el servicio local de contingencia funciona
-      liveBadge.innerHTML = '<b></b><span>En línea</span>';
+      liveBadge.innerHTML = '<b></b><span>Verificación pendiente</span>';
+      liveBadge.classList.add('is-checking');
     }
   }
 

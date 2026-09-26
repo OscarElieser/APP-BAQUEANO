@@ -845,6 +845,13 @@ ESQUEMA JSON:
       console.warn('[RouteBuilder] Supabase Edge fundamentado no disponible:', error.message);
     }
 
+    // 🎯 POR QUÉ: ninguna clave ni proveedor generativo debe invocarse desde el navegador.
+    // ⚙️ CÓMO: si Edge no responde, se usa el catálogo local identificado como contingencia.
+    // 📦 QUÉ: una sola integración real y auditable; nunca se presenta el respaldo como IA.
+    return buildTerritoryFallbackPlan(input);
+
+    if (false) { // Código heredado aislado: ningún proveedor se invoca desde el navegador.
+
     // 6.2 Intento alternativo con OpenAI API (GPT-4o Mini)
     if (OPENAI_API_KEY) {
       try {
@@ -969,6 +976,7 @@ ESQUEMA JSON:
 
     // 6.4 Respaldo seguro y determinista: Motor Territorial Baqueano
     return buildTerritoryFallbackPlan(input);
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -1030,11 +1038,12 @@ ESQUEMA JSON:
     showcase.style.display = 'block';
     showcase.setAttribute('aria-hidden', 'false');
 
-    const isAi = plan._source === 'openai' || plan._source === 'deepseek' || plan._source === 'gemini';
+    const isAi = plan._source === 'baqueano-supabase-grounded-web';
     const aiProviderMap = {
       openai: 'OpenAI GPT-4o',
       deepseek: 'DeepSeek Chat',
-      gemini: 'Google Gemini'
+      gemini: 'Google Gemini',
+      'baqueano-supabase-grounded-web': 'Supabase Edge + Search Grounding'
     };
     const aiProviderName = aiProviderMap[plan._source] || 'IA Inteligente';
     const sourceBadge = isAi
