@@ -1,11 +1,11 @@
 // ============================================================================
 // BAQUEANO — EXPERIENCIA MULTIMEDIA TERRITORIAL COMPARTIDA
 // ============================================================================
-// 🎯 POR QUÉ: cada territorio necesita una presentación visual propia, sin
-// repetir fotografías ni atribuir videos generales a un departamento concreto.
-// ⚙️ CÓMO: cada archivo local aparece una sola vez y los textos se obtienen del
-// catálogo territorial respaldado por las fuentes oficiales ya publicadas.
-// 📦 QUÉ: monta y desmonta un registro fotográfico adaptable para 15 territorios.
+// 🎯 POR QUÉ: cada territorio necesita una presentación visual propia, continua
+// y controlable, sin atribuir material general a un departamento concreto.
+// ⚙️ CÓMO: las fotos únicas se clonan solo para cerrar el bucle visual; la copia
+// técnica se oculta semánticamente y un botón permite pausar o reanudar.
+// 📦 QUÉ: carrusel infinito accesible y registro fotográfico para 15 territorios.
 // ============================================================================
 (function initTerritoryMediaExperience(global) {
   'use strict';
@@ -68,6 +68,21 @@
     suite.id = 'territoryMediaExperience';
     suite.className = 'territory-media-experience';
     suite.innerHTML = `
+      <section class="infinite-gallery-section territory-infinite-gallery" aria-label="Galería continua de ${escapeHtml(dept.name)}">
+        <div class="infinite-carousel-container">
+          <div class="infinite-track" id="territoryInfiniteTrack">
+            ${images.map((image, index) => `<div class="infinite-item"><img src="${image}" alt="Paisaje de ${escapeHtml(dept.name)} ${index + 1}" loading="lazy" decoding="async"></div>`).join('')}
+            <div class="territory-carousel-clone" aria-hidden="true">
+              ${images.map(image => `<div class="infinite-item"><img src="${image}" alt="" loading="lazy" decoding="async"></div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="territory-gallery-controls">
+          <button type="button" class="territory-gallery-toggle" aria-pressed="false">
+            <i class="fa-solid fa-pause"></i><span>Pausar galería</span>
+          </button>
+        </div>
+      </section>
       <section class="madriz-gallery-strip territory-gallery-strip" aria-labelledby="territoryPhotoTitle"><div class="container">
         <div class="gallery-header-row"><div><div class="sub-label-tag"><i class="fa-solid fa-camera"></i> ARCHIVO FOTOGRÁFICO TERRITORIAL</div>
           <h2 class="section-title-clean" id="territoryPhotoTitle">${escapeHtml(dept.name)} en imágenes</h2></div>
@@ -75,6 +90,15 @@
         </div><div class="madriz-photo-grid">${buildPhotoCards(dept, images)}</div>
       </div></section>`;
     hero.insertAdjacentElement('afterend', suite);
+    const track = suite.querySelector('#territoryInfiniteTrack');
+    const toggle = suite.querySelector('.territory-gallery-toggle');
+    toggle.addEventListener('click', () => {
+      const paused = track.classList.toggle('is-paused');
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.innerHTML = paused
+        ? '<i class="fa-solid fa-play"></i><span>Reanudar galería</span>'
+        : '<i class="fa-solid fa-pause"></i><span>Pausar galería</span>';
+    });
   }
 
   global.BaqueanoTerritoryMedia = Object.freeze({ mount, unmount });

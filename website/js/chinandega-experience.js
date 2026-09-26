@@ -272,9 +272,12 @@
         <div class="container-fluid chinandega-gallery-fluid">
           <div class="infinite-carousel-container">
             <div class="infinite-track" id="chinandegaInfiniteTrack" title="Haz clic para pausar o reanudar">
-              ${GALLERY_IMAGES.concat(GALLERY_IMAGES).map((file, index) => `
-                <div class="infinite-item"><img src="assets/images/departamentos/${file}" alt="Chinandega: territorio, cultura y naturaleza ${index % GALLERY_IMAGES.length + 1}" loading="lazy"></div>
+              ${GALLERY_IMAGES.map((file, index) => `
+                <div class="infinite-item"><img src="assets/images/departamentos/${file}" alt="Chinandega: territorio, cultura y naturaleza ${index + 1}" loading="lazy"></div>
               `).join('')}
+              <div class="territory-carousel-clone" aria-hidden="true">
+                ${GALLERY_IMAGES.map(file => `<div class="infinite-item"><img src="assets/images/departamentos/${file}" alt="" loading="lazy"></div>`).join('')}
+              </div>
             </div>
           </div>
           <button type="button" class="chinandega-gallery-toggle" id="chinandegaGalleryToggle"><i class="fa-solid fa-pause"></i> Pausar galería</button>

@@ -372,6 +372,39 @@
           CÓMO: cada territorio aporta hallazgos y enlaces oficiales opcionales, sin reemplazar su contenido existente.
           QUÉ: bloque de ampliaciones verificadas en Visita Nicaragua e INTUR con fecha de consulta.
         -->
+        <!--
+          POR QUÉ: el cierre y la planificación deben identificar siempre el territorio activo.
+          CÓMO: nombres y datos se completan desde el catálogo territorial al navegar.
+          QUÉ: planificación y acciones contextualizadas para los 17 territorios.
+        -->
+        <section class="dept-section-card chinandega-logistics-card" aria-labelledby="deptPlanningTitle">
+          <header>
+            <span><i class="fa-solid fa-compass"></i> PLANIFICACIÓN HONESTA</span>
+            <h2 id="deptPlanningTitle">Cómo llegar, cuándo viajar y cuánto cuesta</h2>
+            <p id="deptPlanningIntro"></p>
+          </header>
+          <div class="chinandega-logistics-grid">
+            <article><i class="fa-solid fa-bus-simple"></i><h3>Transporte</h3><p id="deptPlanningTransport"></p></article>
+            <article><i class="fa-solid fa-cloud-sun"></i><h3>Condiciones</h3><p id="deptPlanningConditions"></p></article>
+            <article><i class="fa-solid fa-tags"></i><h3>Precios reales</h3><p>Los precios deben estar publicados recientemente o consultarse directamente. No mostramos estimaciones como tarifas vigentes.</p></article>
+            <article><i class="fa-solid fa-kit-medical"></i><h3 id="deptPlanningSosTitle">SOS del territorio</h3><p id="deptPlanningSosText"></p></article>
+          </div>
+        </section>
+
+        <section class="chinandega-closing-card territory-closing-card" aria-labelledby="deptClosingTitle">
+          <p class="chinandega-overline">TU VIAJE COMIENZA CON UNA DECISIÓN INFORMADA</p>
+          <h2 id="deptClosingTitle">Ya conocés un poco de este territorio. Ahora vivilo.</h2>
+          <div class="chinandega-closing-actions">
+            <a href="#deptTerritorialProfile" id="deptClosingMunicipalities"><i class="fa-solid fa-map"></i> Explorar territorio</a>
+            <a href="#deptPlacesGrid" id="deptClosingNature"><i class="fa-solid fa-mountain-sun"></i> Conocer naturaleza</a>
+            <a href="#deptGastroGrid" id="deptClosingFood"><i class="fa-solid fa-bowl-food"></i> Probar sabores locales</a>
+            <a href="musica.html" id="deptClosingMusic"><i class="fa-solid fa-music"></i> Escuchar el territorio</a>
+            <a href="aliados.html"><i class="fa-solid fa-handshake"></i> Conocer anfitriones</a>
+            <a href="destinos.html#cotizadorModal"><i class="fa-solid fa-wand-magic-sparkles"></i> Construir mi aventura</a>
+            <button type="button" class="open-sos-btn" id="deptClosingSos"><i class="fa-solid fa-tower-broadcast"></i> SOS del territorio</button>
+          </div>
+        </section>
+
         <div class="dept-section-card" id="deptOfficialSourcesSection" hidden>
           <div class="dept-card-header">
             <i class="fa-solid fa-circle-check"></i>
@@ -1122,6 +1155,34 @@
         if (recEl) recEl.textContent = dept.recommendations;
 
         // Información oficial adicional: nunca sustituye la narrativa territorial existente.
+        // POR QUÉ: estas llamadas a la acción deben nombrar siempre el territorio activo.
+        // CÓMO: se actualizan después de restaurar la plantilla y en cada navegación.
+        // QUÉ: planificación, municipios, cultura, gastronomía y SOS contextualizados.
+        const municipalityCount = Array.isArray(dept.municipalities) ? dept.municipalities.length : 0;
+        const dynamicTerritoryCopy = {
+          deptPlanningIntro: `Información práctica para organizar una visita responsable a ${dept.name}.`,
+          deptPlanningTransport: dept.howToReach,
+          deptPlanningConditions: dept.bestSeason,
+          deptPlanningSosTitle: `SOS ${dept.name}`,
+          deptPlanningSosText: `Hospitales, centros de salud, Policía, Bomberos, Cruz Roja, guías y rutas médicas de ${dept.name} deben consultarse en el directorio actualizado.`,
+          deptClosingTitle: `Ya conocés un poco de ${dept.name}. Ahora vivilo.`
+        };
+        Object.entries(dynamicTerritoryCopy).forEach(([id, copy]) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = copy || '';
+        });
+        const dynamicTerritoryActions = {
+          deptClosingMunicipalities: ['fa-map', municipalityCount ? `Explorar ${municipalityCount} municipios` : `Explorar ${dept.name}`],
+          deptClosingNature: ['fa-mountain-sun', `Conocer ${dept.name}`],
+          deptClosingFood: ['fa-bowl-food', `Sabores de ${dept.name}`],
+          deptClosingMusic: ['fa-music', `Escuchar ${dept.name}`],
+          deptClosingSos: ['fa-tower-broadcast', `SOS ${dept.name}`]
+        };
+        Object.entries(dynamicTerritoryActions).forEach(([id, action]) => {
+          const element = document.getElementById(id);
+          if (element) element.innerHTML = `<i class="fa-solid ${action[0]}"></i> ${action[1]}`;
+        });
+
         const officialSection = document.getElementById('deptOfficialSourcesSection');
         const officialHighlights = document.getElementById('deptOfficialHighlights');
         const officialVerificationDate = document.getElementById('deptOfficialVerificationDate');
