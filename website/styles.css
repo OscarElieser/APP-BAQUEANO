@@ -243,6 +243,28 @@ h2::after {
 }
 
 /* ==========================================================================
+   TITULARES INSTITUCIONALES — BLANCO PURO DE ALTA LEGIBILIDAD (#FFFFFF)
+   Garantiza máxima legibilidad sobre fondos fotográficos y panoramas.
+   ========================================================================== */
+h2.section-headline,
+h2.culture-title,
+.section-headline,
+.culture-title {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.85) !important;
+  animation: none !important;
+}
+
+h2.section-headline::after,
+h2.culture-title::after {
+  display: none !important;
+}
+
+/* ==========================================================================
    KINETIC TYPOGRAPHY — LETRAS EN MOVIMIENTO ANIMADAS (ESTILO MOTION GRAPHICS)
    ========================================================================== */
 h1 {
@@ -8767,13 +8789,13 @@ img {
 
 /* ============================================================================
    NAVEGACIÓN ADAPTABLE — TABLET, PORTÁTIL, MÓVIL Y PANTALLA GRANDE
-   🎯 POR QUÉ: reglas históricas se contradecían entre 769 y 1200 px y podían
-      ocultar o comprimir el menú en tablets, especialmente en orientación horizontal.
+   🎯 POR QUÉ: el menú horizontal completo se comprimía en portátiles y tablets,
+      haciendo difíciles de leer y pulsar sus opciones principales.
    ⚙️ CÓMO: una capa final autoritativa usa drawer centrado, altura dinámica,
       objetivos táctiles de 48 px y zonas seguras compatibles con iOS/iPadOS.
    📦 QUÉ: menú estable desde teléfonos hasta tablets y navegación normal en desktop/TV.
    ============================================================================ */
-@media (max-width: 1200px) {
+@media (max-width: 1699px) {
   .main-navbar .nav-inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -8789,6 +8811,11 @@ img {
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+  }
+
+  .main-navbar .nav-profile-btn,
+  .main-navbar .nav-separator {
+    display: none !important;
   }
 
   .main-navbar .brand-text {
@@ -8890,7 +8917,7 @@ img {
 }
 
 /* Ocultar elementos redundantes fuera del menú principal en escritorio */
-@media (min-width: 1201px) {
+@media (min-width: 1700px) {
   .mobile-nav-toggle,
   .main-navbar .mobile-nav-toggle,
   .nav-profile-btn,

@@ -124,13 +124,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <!-- Estilos del Ecosistema Baqueano -->
-  <link rel="stylesheet" href="styles.css?v=20260926-footer-clear">
+  <link rel="stylesheet" href="styles.css?v=20260926-white-titles">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
   <link rel="stylesheet" href="css/theme-switcher.css?v=20260924-hd">
   <link rel="stylesheet" href="css/nicaragua-branding.css?v=20260925-2">
   <link rel="stylesheet" href="css/baqueano-reels.css">
-  <link rel="stylesheet" href="css/pages/index.css">
+  <link rel="stylesheet" href="css/pages/index.css?v=20260926-white-titles">
   <link rel="stylesheet" href="css/baqueano-3d.css?v=20260925-2">
 
   <!-- Favicon Oficial -->
@@ -228,15 +228,23 @@
     }
     #destinosDestacadosSection .section-headline,
     #culturaVivaNicaragua .culture-title,
-    #serviciosTuristicosSection .section-headline {
-      color: var(--section-title-color, #FFFFFF) !important;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+    #serviciosTuristicosSection .section-headline,
+    .section-lead-header .section-headline,
+    .culture-header .culture-title {
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.85) !important;
       transition: color 0.25s ease;
     }
     #destinosDestacadosSection .section-subtext,
     #culturaVivaNicaragua .culture-sub,
-    #serviciosTuristicosSection .section-subtext {
-      color: var(--section-text-color, #E2E8F0) !important;
+    #serviciosTuristicosSection .section-subtext,
+    .section-lead-header .section-subtext {
+      color: #F1F5F9 !important;
+      -webkit-text-fill-color: #F1F5F9 !important;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
       transition: color 0.25s ease;
     }
