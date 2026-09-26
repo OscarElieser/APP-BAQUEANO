@@ -712,8 +712,16 @@
    ========================================================================== */
 .services-travel-section {
   padding: 80px 0;
-  background: #0A0F1D;
-  border-top: 1px solid rgba(244, 230, 193, 0.08);
+  position: relative;
+  background-color: #060c18;
+  background-image: 
+    linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+    url('../assets/images/footer3.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-top: 1px solid rgba(246, 94, 1, 0.35);
+  border-bottom: 1px solid rgba(22, 93, 111, 0.35);
 }
 
 .services-chips-grid {
@@ -763,12 +771,15 @@
   overflow: hidden;
   padding: 100px 0;
   color: #F4E6C1;
-  background:
-    radial-gradient(circle at 12% 12%, rgba(246, 94, 1, 0.13), transparent 30%),
-    radial-gradient(circle at 88% 80%, rgba(22, 93, 111, 0.36), transparent 36%),
-    linear-gradient(145deg, #080d17 0%, #0d1925 52%, #0b2731 100%);
-  border-top: 1px solid rgba(244, 230, 193, 0.08);
-  border-bottom: 1px solid rgba(244, 230, 193, 0.08);
+  background-color: #060c18;
+  background-image: 
+    linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+    url('../assets/images/footer2.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-top: 1px solid rgba(246, 94, 1, 0.35);
+  border-bottom: 1px solid rgba(22, 93, 111, 0.35);
 }
 
 /* Patrón petroglífico sutil a 5% opacidad */

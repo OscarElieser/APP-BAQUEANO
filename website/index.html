@@ -136,6 +136,69 @@
   <!-- Favicon Oficial -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
   <link rel="apple-touch-icon" href="assets/images/logo.png">
+
+  <!-- ========================================================================
+       🧭 FONDOS PANORÁMICOS ARTÍSTICOS DE ALTA GAMA (footer1, footer2, footer3)
+       ======================================================================== -->
+  <style id="baqueanoPanoramicSectionsStyle">
+    #destinosDestacadosSection {
+      position: relative !important;
+      background-color: #060c18 !important;
+      background-image: 
+        linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+        url('assets/images/footer1.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
+      background-size: cover !important;
+      border-top: 1px solid rgba(246, 94, 1, 0.35) !important;
+      border-bottom: 1px solid rgba(22, 93, 111, 0.35) !important;
+    }
+    #culturaVivaNicaragua {
+      position: relative !important;
+      background-color: #060c18 !important;
+      background-image: 
+        linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+        url('assets/images/footer2.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
+      background-size: cover !important;
+      border-top: 1px solid rgba(246, 94, 1, 0.35) !important;
+      border-bottom: 1px solid rgba(22, 93, 111, 0.35) !important;
+    }
+    #serviciosTuristicosSection {
+      position: relative !important;
+      background-color: #060c18 !important;
+      background-image: 
+        linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+        url('assets/images/footer3.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
+      background-size: cover !important;
+      border-top: 1px solid rgba(246, 94, 1, 0.35) !important;
+      border-bottom: 1px solid rgba(22, 93, 111, 0.35) !important;
+    }
+    .site-footer-pro {
+      position: relative !important;
+      background-color: #050811 !important;
+      background-image: 
+        linear-gradient(180deg, rgba(12, 23, 42, 0.70) 0%, rgba(5, 8, 17, 0.35) 42%, rgba(5, 8, 17, 0.85) 100%),
+        url('assets/images/footer.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center bottom !important;
+      background-size: cover !important;
+    }
+    #destinosDestacadosSection .section-headline,
+    #culturaVivaNicaragua .culture-title,
+    #serviciosTuristicosSection .section-headline {
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+    }
+    #destinosDestacadosSection .section-subtext,
+    #culturaVivaNicaragua .culture-sub,
+    #serviciosTuristicosSection .section-subtext {
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+    }
+  </style>
+
 </head>
 
 <body class="page-index-definitive">
@@ -966,10 +1029,10 @@
             </p>
 
             <div class="digital-ai-actions">
-              <button type="button" class="btn-cta-explore" id="btnLaunchBaqueanoAi"
-                onclick="if(window.BaqueanoAssistant && typeof window.BaqueanoAssistant.open === 'function'){ window.BaqueanoAssistant.open(); } else if(window.BaqueanoAssistant && typeof window.BaqueanoAssistant.openAssistant === 'function'){ window.BaqueanoAssistant.openAssistant(); } else { const box = document.getElementById('baqueanoAssistantBox') || document.getElementById('assistantChatDrawer'); if(box) box.classList.add('is-open'); }">
+              <a class="btn-cta-explore" id="btnLaunchBaqueanoAi" href="baqueano-ai.html#planner"
+                aria-label="Abrir Baqueano IA para preparar mi aventura">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> ✨ Preparar mi aventura
-              </button>
+              </a>
               <button type="button" class="btn-cta-route" id="btnToggleAdvancedPlanner" aria-expanded="false"
                 aria-controls="routeBuilderSection">
                 <i class="fa-solid fa-sliders"></i> Usar planificador avanzado <i class="fa-solid fa-chevron-down"

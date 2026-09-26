@@ -24,7 +24,9 @@
       "qa-*.png",
       "audit-*.png",
       "**/*.md",
-      "**/*.apk"
+      "**/*.apk",
+      "**/*.mp4",
+      "**/*.crdownload"
     ],
     "rewrites": [
       {
