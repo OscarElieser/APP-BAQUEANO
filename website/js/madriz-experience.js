@@ -231,6 +231,9 @@
   // Función principal de renderizado
   function renderMadrizExperience(container, dept) {
     if (!container) return;
+    const media = window.BAQUEANO_MEDIA_CATALOG?.madriz || {};
+    const carouselImages = Array.isArray(media.carousel) ? media.carousel : [];
+    const territoryVideos = Array.isArray(media.videos) ? media.videos : [];
 
     // Actualizar Hero específico de Madriz
     updateHeroMadriz(dept);
@@ -273,17 +276,9 @@
       <section class="infinite-gallery-section territory-infinite-gallery" aria-label="Galería continua de Madriz">
         <div class="infinite-carousel-container">
           <div class="infinite-track" id="madrizInfiniteTrack">
-            <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_panoramica.jpg" alt="Panorámica del Cañón de Somoto" loading="lazy"></div>
-            <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_interior.png" alt="Interior del Cañón de Somoto" loading="lazy"></div>
-            <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_bote.png" alt="Recorrido en bote por el Cañón de Somoto" loading="lazy"></div>
-            <div class="infinite-item"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Paisaje del Cañón de Somoto" loading="lazy"></div>
-            <div class="infinite-item"><img src="assets/images/departamentos/somoto.jpg" alt="Paisaje territorial de Somoto" loading="lazy"></div>
+            ${carouselImages.map((src, index) => `<div class="infinite-item"><img src="${src}" alt="Paisaje de Madriz ${index + 1}" loading="lazy"></div>`).join('')}
             <div class="territory-carousel-clone" aria-hidden="true">
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_panoramica.jpg" alt="" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_interior.png" alt="" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/madriz/canon_somoto_bote.png" alt="" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="" loading="lazy"></div>
-              <div class="infinite-item"><img src="assets/images/departamentos/somoto.jpg" alt="" loading="lazy"></div>
+              ${carouselImages.map(src => `<div class="infinite-item"><img src="${src}" alt="" loading="lazy"></div>`).join('')}
             </div>
           </div>
         </div>
@@ -304,21 +299,10 @@
           </div>
           
           <div class="video-grid">
-             <div class="video-card-showcase">
-               <video src="assets/videos/video%20nicaragua.mp4" controls preload="metadata" poster="assets/images/madriz/canon_somoto_panoramica.jpg"></video>
-               <div class="video-info">
-                 <h4>Navegando el Cañón de Somoto</h4>
-                 <p>Turismo comunitario guiado por los baqueanos locales.</p>
-               </div>
-             </div>
-             
-             <div class="video-card-showcase">
-               <video src="assets/videos/gastronomia.mp4" controls preload="metadata" poster="assets/images/madriz/canon_somoto_interior.png"></video>
-               <div class="video-info">
-                 <h4>Elaboración de Rosquillas</h4>
-                 <p>Tradición centenaria en hornos de barro.</p>
-               </div>
-             </div>
+            ${territoryVideos.map(video => `<div class="video-card-showcase">
+              <video src="${video.src}" controls preload="metadata" poster="${video.poster}"></video>
+              <div class="video-info"><h4>${video.title}</h4><p>${video.description}</p></div>
+            </div>`).join('')}
           </div>
         </div>
       </section>

@@ -1250,6 +1250,72 @@
 .rb-ai-disclaimer i { font-size: 1.2rem; color: #f65e01; margin-top: .1rem; }
 .rb-ai-disclaimer strong { display: block; color: #f4e6c1; margin-bottom: .2rem; }
 
+/*
+ * 🎯 POR QUÉ: orientar el presupuesto cuando BAQUEANO aún no dispone de un
+ * teléfono directo, sin presentar aproximaciones como tarifas del destino.
+ * ⚙️ CÓMO: distribuye visualmente el 80% disponible y separa una reserva del
+ * 20%; la cuadrícula pasa a una columna en pantallas compactas.
+ * 📦 QUÉ: bloque de transporte, hospedaje cuando corresponde, alimentación,
+ * entradas, gastos menores y fondo para imprevistos en córdobas y dólares.
+ */
+.rb-budget-allocation {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(244, 230, 193, .16);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(22, 93, 111, .18), rgba(15, 23, 42, .88));
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22);
+}
+.rb-budget-allocation-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.rb-budget-allocation-head span {
+  color: #f65e01;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+.rb-budget-allocation-head h4 { margin: .25rem 0 0; color: #fff; font-size: 1.05rem; }
+.rb-budget-allocation-head > strong { color: #f4e6c1; text-align: right; white-space: nowrap; }
+.rb-budget-allocation > p,
+.rb-budget-allocation > small { color: #94a3b8; line-height: 1.45; }
+.rb-budget-allocation > p { margin: .65rem 0; }
+.rb-budget-allocation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem;
+  margin: .8rem 0;
+}
+.rb-budget-allocation-grid article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .25rem .6rem;
+  padding: .75rem;
+  border: 1px solid rgba(22, 93, 111, .42);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, .72);
+}
+.rb-budget-allocation-grid article i { grid-row: 1 / 3; align-self: center; color: #f65e01; }
+.rb-budget-allocation-grid article span { color: #cbd5e1; }
+.rb-budget-allocation-grid article strong { color: #fff; }
+.rb-budget-reserve {
+  margin-bottom: .6rem;
+  padding: .7rem .8rem;
+  border-radius: 11px;
+  color: #f4e6c1;
+  background: rgba(22, 93, 111, .24);
+}
+.rb-budget-reserve i { margin-right: .35rem; color: #f65e01; }
+
+@media (max-width: 680px) {
+  .rb-budget-allocation-head { flex-direction: column; }
+  .rb-budget-allocation-head > strong { text-align: left; white-space: normal; }
+  .rb-budget-allocation-grid { grid-template-columns: 1fr; }
+}
+
 .rb-quality--ai { color: #fde68a; }
 .rb-quality--ai i { font-size: 1.7rem; color: #fde68a; }
 .rb-ai-resumen { margin: 1rem 0; color: #cbd5e1; font-size: .85rem; line-height: 1.5; font-style: italic; }

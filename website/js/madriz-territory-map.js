@@ -111,8 +111,18 @@
     }
   }
 
-  async function loadPlaces() {
-    if (!window.firebase?.firestore || !window.BaqueanoFirebase?.isReady) return [];
+  async function waitForFirestore(runId) {
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      if (runId !== generation) return false;
+      if (window.firebase?.firestore && window.BaqueanoFirebase?.isReady) return true;
+      await new Promise((resolve) => window.setTimeout(resolve, 150));
+    }
+    return false;
+  }
+
+  async function loadPlaces(runId) {
+    const firestoreReady = await waitForFirestore(runId);
+    if (!firestoreReady || runId !== generation) return [];
     const db = window.firebase.firestore();
     const snapshot = await db.collection('tourismPlaces')
       .where('departmentId', '==', departmentId)
@@ -123,17 +133,16 @@
       const data = doc.data() || {};
       if (validCoordinates(data)) places.push({ id: doc.id, ...data });
     });
-    await Promise.all(places.map(async (place) => {
-      place.reviewRating = await loadReviewRating(db, place.id);
-    }));
+    // Los pines no deben esperar una consulta adicional por cada reseña.
+    // Las valoraciones son complementarias; la ubicación aparece primero.
     return places;
   }
 
-  async function loadPlacesWithTimeout() {
+  async function loadPlacesWithTimeout(runId) {
     const timeout = new Promise((resolve) => {
-      window.setTimeout(() => resolve([]), 4500);
+      window.setTimeout(() => resolve([]), 8000);
     });
-    return Promise.race([loadPlaces(), timeout]);
+    return Promise.race([loadPlaces(runId), timeout]);
   }
 
   function createPopup(place) {
@@ -288,7 +297,7 @@
 
       let places = [];
       try {
-        places = await loadPlacesWithTimeout();
+        places = await loadPlacesWithTimeout(runId);
       } catch (error) {
         console.warn(`[Mapa ${territoryName}] No fue posible consultar lugares publicados:`, error.message);
       }

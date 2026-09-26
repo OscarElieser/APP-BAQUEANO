@@ -96,14 +96,8 @@
     ['Norte rural', 'Somotillo → Cinco Pinos → San Pedro → San Francisco → Santo Tomás.', 'fa-mountain-sun']
   ];
 
-  const GALLERY_IMAGES = [
-    'chinandega.jpg', 'chinandega1.png', 'chinandega2.jfif', 'chinandega3.jfif',
-    'chinandega4.jfif', 'chinandega5.jfif', 'chinandega6.jfif', 'chinandega7.jpg',
-    'chinandega8.jfif', 'chinandega9.jfif', 'chinandega10.jfif', 'chinandega11.jfif',
-    'chinandega12.jfif', 'chinandega13.jfif', 'chinandega14.jfif', 'chinandega15.jfif',
-    'chinandega16.jfif', 'chinandega17.jfif', 'chinandega18.jfif', 'chinandega19.jfif',
-    'chinandega20.jfif', 'chinandega21.jfif', 'chinandega22.jfif'
-  ];
+  // El contenido del carrusel se administra únicamente en territory-media-catalog.js.
+  const GALLERY_IMAGES = window.BAQUEANO_MEDIA_CATALOG?.chinandega?.carousel || [];
 
   const DEEP_DIVES = [
     {
@@ -273,10 +267,10 @@
           <div class="infinite-carousel-container">
             <div class="infinite-track" id="chinandegaInfiniteTrack" title="Haz clic para pausar o reanudar">
               ${GALLERY_IMAGES.map((file, index) => `
-                <div class="infinite-item"><img src="assets/images/departamentos/${file}" alt="Chinandega: territorio, cultura y naturaleza ${index + 1}" loading="lazy"></div>
+                <div class="infinite-item"><img src="${file}" alt="Chinandega: territorio, cultura y naturaleza ${index + 1}" loading="lazy"></div>
               `).join('')}
               <div class="territory-carousel-clone" aria-hidden="true">
-                ${GALLERY_IMAGES.map(file => `<div class="infinite-item"><img src="assets/images/departamentos/${file}" alt="" loading="lazy"></div>`).join('')}
+                ${GALLERY_IMAGES.map(file => `<div class="infinite-item"><img src="${file}" alt="" loading="lazy"></div>`).join('')}
               </div>
             </div>
           </div>
