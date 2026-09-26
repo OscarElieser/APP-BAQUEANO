@@ -47,6 +47,8 @@
   const GEMINI_MODELS     = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-2.5-flash-lite'];
   const MESA_CENTRAL_PHONE = '50584431289';
   const OFFICIAL_BCN_RATE_2026 = 36.6243;
+  const SUPABASE_EDGE_AI_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-ai';
+  const SUPABASE_PUBLIC_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
 
   const SERVICE_LABELS = {
     transporte:               'Transporte',
@@ -797,9 +799,9 @@ ESQUEMA JSON:
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 14000);
-      const response = await fetch('/api/baqueano-ai', {
+      const response = await fetch(SUPABASE_EDGE_AI_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLIC_KEY },
         signal: controller.signal,
         body: JSON.stringify({
           prompt,
@@ -840,7 +842,7 @@ ESQUEMA JSON:
         }
       }
     } catch (error) {
-      console.warn('[RouteBuilder] Gateway fundamentado no disponible:', error.message);
+      console.warn('[RouteBuilder] Supabase Edge fundamentado no disponible:', error.message);
     }
 
     // 6.2 Intento alternativo con OpenAI API (GPT-4o Mini)
