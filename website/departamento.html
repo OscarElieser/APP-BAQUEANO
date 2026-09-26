@@ -252,6 +252,29 @@
     <section class="dept-section-block">
       <div class="container">
 
+        <!--
+          POR QUÉ: todos los territorios necesitan la misma entrada editorial de Madriz.
+          CÓMO: la composición visual es compartida y sus textos se rellenan con el
+          territorio activo; no se copian datos, cifras ni lugares de Madriz.
+          QUÉ: manifiesto territorial, indicadores y accesos rápidos estandarizados.
+        -->
+        <section class="madriz-manifesto-strip territory-standard-manifesto" aria-labelledby="deptManifestoTitle">
+          <div class="manifesto-card-alta-gama">
+            <div class="manifesto-badge-row">
+              <span class="m-badge-primary"><i class="fa-solid fa-location-dot"></i> <span id="deptManifestoTerritory">Territorio</span></span>
+              <span class="m-badge-secondary"><i class="fa-solid fa-map"></i> <span id="deptManifestoMunicipalities">Municipios</span></span>
+              <span class="m-badge-accent"><i class="fa-solid fa-people-group"></i> <span id="deptManifestoCooperatives">Red local</span></span>
+            </div>
+            <h2 class="manifesto-headline" id="deptManifestoTitle">Comprendé el territorio antes de recorrerlo.</h2>
+            <p class="manifesto-copy" id="deptManifestoText"></p>
+            <div class="manifesto-action-bar">
+              <a href="#deptPlacesGrid" class="btn-hero-primary"><i class="fa-solid fa-compass"></i> Explorar lugares</a>
+              <a href="#deptTerritorialProfile" class="btn-hero-secondary"><i class="fa-solid fa-map-location-dot"></i> Conocer municipios</a>
+              <button type="button" class="btn-hero-glass open-planner-btn"><i class="fa-solid fa-route"></i> Planificar visita</button>
+            </div>
+          </div>
+        </section>
+
         <!-- 1. HISTORIA Y LEGADO -->
         <div class="dept-section-card">
           <div class="dept-card-header">
@@ -391,17 +414,20 @@
           </div>
         </section>
 
-        <section class="chinandega-closing-card territory-closing-card" aria-labelledby="deptClosingTitle">
-          <p class="chinandega-overline">TU VIAJE COMIENZA CON UNA DECISIÓN INFORMADA</p>
-          <h2 id="deptClosingTitle">Ya conocés un poco de este territorio. Ahora vivilo.</h2>
-          <div class="chinandega-closing-actions">
-            <a href="#deptTerritorialProfile" id="deptClosingMunicipalities"><i class="fa-solid fa-map"></i> Explorar territorio</a>
-            <a href="#deptPlacesGrid" id="deptClosingNature"><i class="fa-solid fa-mountain-sun"></i> Conocer naturaleza</a>
-            <a href="#deptGastroGrid" id="deptClosingFood"><i class="fa-solid fa-bowl-food"></i> Probar sabores locales</a>
-            <a href="musica.html" id="deptClosingMusic"><i class="fa-solid fa-music"></i> Escuchar el territorio</a>
-            <a href="aliados.html"><i class="fa-solid fa-handshake"></i> Conocer anfitriones</a>
-            <a href="destinos.html#cotizadorModal"><i class="fa-solid fa-wand-magic-sparkles"></i> Construir mi aventura</a>
-            <button type="button" class="open-sos-btn" id="deptClosingSos"><i class="fa-solid fa-tower-broadcast"></i> SOS del territorio</button>
+        <section class="madriz-closing-strip territory-closing-card" aria-labelledby="deptClosingTitle">
+          <div class="closing-card-alta-gama">
+            <span class="closing-pretitle">TU EXPEDICIÓN COMIENZA AQUÍ</span>
+            <h2 class="closing-title" id="deptClosingTitle">Ya conocés un poco de este territorio. Ahora vivilo.</h2>
+            <p class="closing-desc" id="deptClosingDescription"></p>
+            <div class="closing-actions-grid">
+              <a class="closing-action-btn" href="#deptTerritorialProfile" id="deptClosingMunicipalities"><i class="fa-solid fa-map"></i> Explorar territorio</a>
+              <a class="closing-action-btn" href="#deptPlacesGrid" id="deptClosingNature"><i class="fa-solid fa-mountain-sun"></i> Conocer naturaleza</a>
+              <a class="closing-action-btn" href="#deptGastroGrid" id="deptClosingFood"><i class="fa-solid fa-bowl-food"></i> Probar sabores locales</a>
+              <a class="closing-action-btn" href="musica.html" id="deptClosingMusic"><i class="fa-solid fa-music"></i> Escuchar el territorio</a>
+              <a class="closing-action-btn" href="aliados.html"><i class="fa-solid fa-handshake"></i> Conocer anfitriones</a>
+              <button type="button" class="closing-action-btn open-planner-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Construir mi aventura</button>
+              <button type="button" class="closing-action-btn open-sos-btn" id="deptClosingSos"><i class="fa-solid fa-tower-broadcast"></i> SOS del territorio</button>
+            </div>
           </div>
         </section>
 
@@ -1093,6 +1119,19 @@
         document.getElementById('deptHeroBg').style.backgroundImage = `url('${dept.heroImage}')`;
         document.getElementById('deptBadgeText').textContent = `${dept.coopCount} Cooperativas Locales Registradas`;
 
+        const manifestoMunicipalityCount = Array.isArray(dept.municipalities) ? dept.municipalities.length : 0;
+        const manifestoCopy = {
+          deptManifestoTerritory: dept.name,
+          deptManifestoMunicipalities: `${manifestoMunicipalityCount} municipios`,
+          deptManifestoCooperatives: `${dept.coopCount} cooperativas locales`,
+          deptManifestoTitle: `No vengás solamente a conocer ${dept.name}. Vení a comprenderlo.`,
+          deptManifestoText: dept.shortDesc
+        };
+        Object.entries(manifestoCopy).forEach(([id, copy]) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = copy;
+        });
+
         // POR QUÉ/CÓMO/QUÉ: replica las galerías de Madriz mediante el componente
         // compartido, sin intervenir sus diseños especiales ni el de Chinandega.
         if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.mount(dept);
@@ -1173,7 +1212,8 @@
           deptPlanningConditions: dept.bestSeason,
           deptPlanningSosTitle: `SOS ${dept.name}`,
           deptPlanningSosText: `Hospitales, centros de salud, Policía, Bomberos, Cruz Roja, guías y rutas médicas de ${dept.name} deben consultarse en el directorio actualizado.`,
-          deptClosingTitle: `Ya conocés un poco de ${dept.name}. Ahora vivilo.`
+          deptClosingTitle: `¿Ya conocés ${dept.name} o querés empezar a comprenderlo?`,
+          deptClosingDescription: `Elegí cómo querés conectar hoy con ${dept.name}, su gente, sus paisajes y su cultura local.`
         };
         Object.entries(dynamicTerritoryCopy).forEach(([id, copy]) => {
           const element = document.getElementById(id);
