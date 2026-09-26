@@ -75,5 +75,7 @@ website/js/local-keys.js
 website/test-results/
 supabase/.temp/
 
-
-
+# Archivos temporales y videos pesados que exceden el limite de 100MB de GitHub
+*.crdownload
+website/assets/images/departamentos/*.mp4
+website/assets/videos/

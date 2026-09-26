@@ -6225,6 +6225,29 @@
   // 9. FACHADA PÚBLICA (WINDOW.BAQUEANOOPSENGINE)
   // --------------------------------------------------------------------------
   window.BaqueanoOpsEngine = {
+    async seedInitialContent() {
+      const btn = document.querySelector('button[onclick*="seedInitialContent"]');
+      const originalHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Migrando Catálogo...';
+      }
+      try {
+        await OpsCMS.seedInitialContent();
+        await this.syncAll();
+      } catch (err) {
+        console.error('[BaqueanoOpsEngine] Error en migración de catálogo:', err);
+        if (typeof OpsToast !== 'undefined') {
+          OpsToast.show('Aviso de migración: ' + (err.message || 'error de conexión'), 'warning', 4500);
+        }
+        await this.syncAll();
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalHtml || '<i class="fa-solid fa-cloud-arrow-up"></i> Migrar Catálogo Inicial';
+        }
+      }
+    },
     async syncAll() {
       const btn = document.getElementById('btnOpsSyncAll');
       if (btn) {

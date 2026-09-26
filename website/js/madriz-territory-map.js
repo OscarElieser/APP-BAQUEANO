@@ -129,6 +129,13 @@
     return places;
   }
 
+  async function loadPlacesWithTimeout() {
+    const timeout = new Promise((resolve) => {
+      window.setTimeout(() => resolve([]), 4500);
+    });
+    return Promise.race([loadPlaces(), timeout]);
+  }
+
   function createPopup(place) {
     const root = document.createElement('article');
     root.className = 'madriz-map-popup';
@@ -281,7 +288,7 @@
 
       let places = [];
       try {
-        places = await loadPlaces();
+        places = await loadPlacesWithTimeout();
       } catch (error) {
         console.warn(`[Mapa ${territoryName}] No fue posible consultar lugares publicados:`, error.message);
       }

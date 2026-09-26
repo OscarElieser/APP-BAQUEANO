@@ -259,6 +259,16 @@
             <h3>1. Historia, Origen & Memoria Viva</h3>
           </div>
           <p id="deptHistoryText" class="departamento-inline-001"></p>
+          <!--
+            POR QUÉ: los departamentos documentados necesitan presentar su identidad territorial y sus municipios sin mezclar sus datos.
+            CÓMO: este bloque opcional se alimenta desde el catálogo y permanece oculto cuando el territorio no aporta esa información.
+            QUÉ: descripción ampliada y fichas municipales exclusivas del departamento seleccionado.
+          -->
+          <div id="deptTerritorialProfile" hidden>
+            <p id="deptExpandedDescription" class="departamento-inline-001"></p>
+            <h4>Municipios e identidad turística</h4>
+            <div class="dept-places-grid" id="deptMunicipalitiesGrid"></div>
+          </div>
         </div>
 
         <!-- 2. GASTRONOMÍA TÍPICA ANCESTRAL -->
@@ -357,11 +367,26 @@
           </div>
         </div>
 
-        <!-- 7. SELECTOR COMPLETO DE LOS 17 TERRITORIOS: CAMBIO INSTANTÁNEO -->
+        <!--
+          POR QUÉ: el viajero necesita distinguir la narrativa editorial de los datos confirmados por autoridades turísticas.
+          CÓMO: cada territorio aporta hallazgos y enlaces oficiales opcionales, sin reemplazar su contenido existente.
+          QUÉ: bloque de ampliaciones verificadas en Visita Nicaragua e INTUR con fecha de consulta.
+        -->
+        <div class="dept-section-card" id="deptOfficialSourcesSection" hidden>
+          <div class="dept-card-header">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>7. Información oficial verificada</h3>
+          </div>
+          <ul class="dept-activities-list" id="deptOfficialHighlights"></ul>
+          <p class="departamento-inline-001" id="deptOfficialVerificationDate"></p>
+          <div class="dept-cta-bar" id="deptOfficialSources"></div>
+        </div>
+
+        <!-- 8. SELECTOR COMPLETO DE LOS 17 TERRITORIOS: CAMBIO INSTANTÁNEO -->
         <div class="dept-section-card" id="selectorTerritoriosSection">
           <div class="dept-card-header">
             <i class="fa-solid fa-map-location-dot"></i>
-            <h3>7. Explorar Otro Departamento o Región (17 Territorios)</h3>
+            <h3>8. Explorar Otro Departamento o Región (17 Territorios)</h3>
           </div>
           <p class="departamento-inline-001">
             Selecciona cualquiera de los 15 departamentos y 2 regiones autónomas de Nicaragua para cambiar inmediatamente esta guía oficial a ese territorio:
@@ -1014,6 +1039,22 @@
         const historyEl = document.getElementById('deptHistoryText');
         if (historyEl) historyEl.textContent = dept.history;
 
+        // Perfil territorial opcional para los departamentos documentados en el catálogo.
+        const territorialProfile = document.getElementById('deptTerritorialProfile');
+        const expandedDescription = document.getElementById('deptExpandedDescription');
+        const municipalitiesGrid = document.getElementById('deptMunicipalitiesGrid');
+        const municipalities = Array.isArray(dept.municipalities) ? dept.municipalities : [];
+        if (territorialProfile) territorialProfile.hidden = municipalities.length === 0;
+        if (expandedDescription) expandedDescription.textContent = dept.expandedDescription || '';
+        if (municipalitiesGrid) {
+          municipalitiesGrid.innerHTML = municipalities.map(municipality => `
+            <div class="dept-place-item">
+              <div class="dept-item-title"><i class="fa-solid fa-location-dot departamento-inline-030"></i> ${municipality.name}</div>
+              <div class="dept-item-desc">${municipality.identity}</div>
+            </div>
+          `).join('');
+        }
+
         // Gastronomía
         const gastroGrid = document.getElementById('deptGastroGrid');
         if (gastroGrid) {
@@ -1058,6 +1099,32 @@
         if (reachEl) reachEl.textContent = dept.howToReach;
         const recEl = document.getElementById('deptRecommendationsText');
         if (recEl) recEl.textContent = dept.recommendations;
+
+        // Información oficial adicional: nunca sustituye la narrativa territorial existente.
+        const officialSection = document.getElementById('deptOfficialSourcesSection');
+        const officialHighlights = document.getElementById('deptOfficialHighlights');
+        const officialVerificationDate = document.getElementById('deptOfficialVerificationDate');
+        const officialSources = document.getElementById('deptOfficialSources');
+        const verifiedHighlights = Array.isArray(dept.officialHighlights) ? dept.officialHighlights : [];
+        const verifiedSources = Array.isArray(dept.officialSources) ? dept.officialSources : [];
+        if (officialSection) officialSection.hidden = verifiedHighlights.length === 0 && verifiedSources.length === 0;
+        if (officialHighlights) {
+          officialHighlights.innerHTML = verifiedHighlights.map(item => `
+            <li class="dept-activity-li"><i class="fa-solid fa-building-circle-check"></i><span>${item}</span></li>
+          `).join('');
+        }
+        if (officialVerificationDate) {
+          officialVerificationDate.textContent = dept.officialVerifiedAt
+            ? `Fuentes oficiales consultadas el ${dept.officialVerifiedAt}.`
+            : '';
+        }
+        if (officialSources) {
+          officialSources.innerHTML = verifiedSources.map(source => `
+            <a class="btn-hero-secondary" href="${source.url}" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> ${source.label}
+            </a>
+          `).join('');
+        }
 
         const mapTitle = document.getElementById('territoryMapTitle');
         const mapDescription = document.getElementById('territoryMapDescription');
