@@ -141,11 +141,20 @@
        🧭 FONDOS PANORÁMICOS ARTÍSTICOS DE ALTA GAMA (footer1, footer2, footer3)
        ======================================================================== -->
   <style id="baqueanoPanoramicSectionsStyle">
+    :root {
+      --section-bg-color: #060c18;
+      --section-bg-tint: rgba(8, 14, 26, 0.48);
+      --section-bg-tint-mid: rgba(5, 8, 17, 0.18);
+      --section-bg-tint-bot: rgba(5, 8, 17, 0.65);
+      --section-title-color: #FFFFFF;
+      --section-text-color: #E2E8F0;
+      --section-accent-color: #F65E01;
+    }
     #destinosDestacadosSection {
       position: relative !important;
-      background-color: #060c18 !important;
+      background-color: var(--section-bg-color, #060c18) !important;
       background-image: 
-        linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+        linear-gradient(180deg, var(--section-bg-tint, rgba(8, 14, 26, 0.48)) 0%, var(--section-bg-tint-mid, rgba(5, 8, 17, 0.18)) 45%, var(--section-bg-tint-bot, rgba(5, 8, 17, 0.65)) 100%),
         url('assets/images/footer1.png') !important;
       background-repeat: no-repeat !important;
       background-position: center center !important;
@@ -155,9 +164,9 @@
     }
     #culturaVivaNicaragua {
       position: relative !important;
-      background-color: #060c18 !important;
+      background-color: var(--section-bg-color, #060c18) !important;
       background-image: 
-        linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+        linear-gradient(180deg, var(--section-bg-tint, rgba(8, 14, 26, 0.48)) 0%, var(--section-bg-tint-mid, rgba(5, 8, 17, 0.18)) 45%, var(--section-bg-tint-bot, rgba(5, 8, 17, 0.65)) 100%),
         url('assets/images/footer2.png') !important;
       background-repeat: no-repeat !important;
       background-position: center center !important;
@@ -167,9 +176,9 @@
     }
     #serviciosTuristicosSection {
       position: relative !important;
-      background-color: #060c18 !important;
+      background-color: var(--section-bg-color, #060c18) !important;
       background-image: 
-        linear-gradient(180deg, rgba(8, 14, 26, 0.48) 0%, rgba(5, 8, 17, 0.18) 45%, rgba(5, 8, 17, 0.65) 100%),
+        linear-gradient(180deg, var(--section-bg-tint, rgba(8, 14, 26, 0.48)) 0%, var(--section-bg-tint-mid, rgba(5, 8, 17, 0.18)) 45%, var(--section-bg-tint-bot, rgba(5, 8, 17, 0.65)) 100%),
         url('assets/images/footer3.png') !important;
       background-repeat: no-repeat !important;
       background-position: center center !important;
@@ -179,9 +188,9 @@
     }
     .site-footer-pro {
       position: relative !important;
-      background-color: #050811 !important;
+      background-color: var(--section-bg-color, #050811) !important;
       background-image: 
-        linear-gradient(180deg, rgba(12, 23, 42, 0.70) 0%, rgba(5, 8, 17, 0.35) 42%, rgba(5, 8, 17, 0.85) 100%),
+        linear-gradient(180deg, var(--section-bg-tint, rgba(12, 23, 42, 0.70)) 0%, var(--section-bg-tint-mid, rgba(5, 8, 17, 0.35)) 42%, var(--section-bg-tint-bot, rgba(5, 8, 17, 0.85)) 100%),
         url('assets/images/footer.png') !important;
       background-repeat: no-repeat !important;
       background-position: center bottom !important;
@@ -190,12 +199,16 @@
     #destinosDestacadosSection .section-headline,
     #culturaVivaNicaragua .culture-title,
     #serviciosTuristicosSection .section-headline {
+      color: var(--section-title-color, #FFFFFF) !important;
       text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+      transition: color 0.25s ease;
     }
     #destinosDestacadosSection .section-subtext,
     #culturaVivaNicaragua .culture-sub,
     #serviciosTuristicosSection .section-subtext {
+      color: var(--section-text-color, #E2E8F0) !important;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+      transition: color 0.25s ease;
     }
   </style>
 
