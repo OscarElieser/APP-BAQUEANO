@@ -1008,6 +1008,13 @@
 
       // 5. Poblar datos en la interfaz
       function renderDepartment(dept) {
+        /*
+         * POR QUÉ: Madriz y Chinandega poseen experiencias editoriales propias
+         * que deben conservarse, mientras el resto necesita coherencia visual.
+         * CÓMO: se mantienen sus renderizadores especializados y se utiliza la
+         * plantilla territorial compartida únicamente para los otros territorios.
+         * QUÉ: dos experiencias especiales intactas y una base común coherente.
+         */
         if (dept.id === 'madriz' && window.BaqueanoMadriz) {
           window.BaqueanoMadriz.renderMadrizExperience(mainContainer, dept);
           renderSelectorGrid('madriz');
@@ -1024,9 +1031,14 @@
           return;
         }
 
-        // Si no es Madriz, restaurar plantilla estándar si fue sustituida
+        // Restaurar la plantilla compartida si una experiencia especial la sustituyó.
         if (sectionContainer && sectionContainer.innerHTML !== standardTemplateHtml) {
           sectionContainer.innerHTML = standardTemplateHtml;
+        }
+
+        if (mainContainer) {
+          mainContainer.dataset.territory = dept.id;
+          mainContainer.classList.add('territory-unified-layout');
         }
 
         document.getElementById('deptTitle').textContent = dept.name;
