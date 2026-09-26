@@ -29,8 +29,17 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "@supabase/supabase-js";
 
 const BCN_RATE = 36.6243;
-const GROUNDED_MODEL = "gemini-2.5-flash";
+const GROUNDED_MODEL = "gemini-3.5-flash-lite";
 const TRUSTED_SOURCES = ["mapanicaragua.com", "visitanicaragua.com", "intur.gob.ni", "bcn.gob.ni", "ineter.gob.ni", "marena.gob.ni", "unesco.org"];
+const TRUSTED_SOURCE_URLS = [
+  "https://www.mapanicaragua.com/",
+  "https://www.visitanicaragua.com/",
+  "https://www.intur.gob.ni/",
+  "https://www.bcn.gob.ni/",
+  "https://www.ineter.gob.ni/",
+  "https://www.marena.gob.ni/",
+  "https://www.unesco.org/"
+];
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -166,34 +175,70 @@ function extractSources(metadata: Record<string, unknown> | undefined) {
   }).slice(0, 6);
 }
 
+function extractInteractionOutput(data: Record<string, unknown>) {
+  const interaction = data.interaction as Record<string, unknown> | undefined;
+  const steps = Array.isArray(data.steps) ? data.steps : (Array.isArray(interaction?.steps) ? interaction.steps : []);
+  const sources: Array<{id: string; label: string; url: string; type: string}> = [];
+  const seen = new Set<string>();
+  let text = "";
+  for (const step of steps as Array<Record<string, unknown>>) {
+    if (step.type !== "model_output" || !Array.isArray(step.content)) continue;
+    for (const block of step.content as Array<Record<string, unknown>>) {
+      if (block.type !== "text") continue;
+      text += String(block.text || "");
+      const annotations = Array.isArray(block.annotations) ? block.annotations : [];
+      for (const annotation of annotations as Array<Record<string, unknown>>) {
+        const url = String(annotation.url || "");
+        if (annotation.type !== "url_citation" || !url.startsWith("https://") || seen.has(url)) continue;
+        seen.add(url);
+        sources.push({id: `web-${sources.length + 1}`, label: String(annotation.title || "Fuente oficial").slice(0, 120), url, type: "web"});
+      }
+    }
+  }
+  return {text, sources: sources.slice(0, 6)};
+}
+
 async function buildGroundedItinerary(input: Record<string, unknown>, territory: TerritoryCatalogItem) {
-  const apiKey = Deno.env.get("GEMINI_API_KEY");
-  if (!apiKey) return null;
+  const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
+    .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
+  if (!apiKeys.length) return {itinerary: null, status: "missing_secret"};
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 12000);
   const days = Number(input.days) || 3;
   const prompt = `Crea un itinerario turístico verificable de Nicaragua en JSON estricto.
-Busca en la web y prioriza ${TRUSTED_SOURCES.join(", ")}. Usa mapanicaragua.com, publicado por INTUR, para contrastar territorio, atractivos, servicios y ubicación.
+Consulta estas páginas mediante URL Context y prioriza ${TRUSTED_SOURCES.join(", ")}: ${TRUSTED_SOURCE_URLS.join(" ")}. Usa mapanicaragua.com, publicado por INTUR, para contrastar territorio, atractivos, servicios y ubicación.
 Solicitud: ${String(input.prompt || "")}. Departamento: ${String(input.department || territory.department)}. Días: ${days}. Viajeros: ${Number(input.groupSize) || 2}. Interés: ${String(input.travelStyle || "aventura")}.
 No inventes lugares, contactos, horarios, disponibilidad ni precios. No incluyas precios. Si no hay evidencia suficiente, omite el lugar.
-Devuelve solamente: {"title":"...","summary":"...","territory":"...","days":[{"title":"...","summary":"...","stops":[{"name":"...","desc":"..."}]}]}`;
+  Devuelve solamente: {"title":"...","summary":"...","territory":"...","days":[{"title":"...","summary":"...","stops":[{"name":"...","desc":"..."}]}]}`;
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GROUNDED_MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      signal: controller.signal,
-      body: JSON.stringify({
-        contents: [{parts: [{text: prompt}]}],
-        tools: [{google_search: {}}],
-        generationConfig: {temperature: 0.15, maxOutputTokens: 2600}
-      })
-    });
-    if (!response.ok) return null;
+    let response: Response | null = null;
+    let lastStatus = 0;
+    for (const apiKey of apiKeys) {
+      response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "x-goog-api-key": apiKey},
+        signal: controller.signal,
+        body: JSON.stringify({
+          model: GROUNDED_MODEL,
+          input: prompt,
+          tools: [{type: "url_context"}]
+        })
+      });
+      lastStatus = response.status;
+      if (response.ok) break;
+    }
+    if (!response?.ok) return {itinerary: null, status: `all_keys_http_${lastStatus}`};
     const data = await response.json();
-    const candidate = data?.candidates?.[0];
-    const text = candidate?.content?.parts?.map((part: Record<string, unknown>) => String(part.text || "")).join("");
-    const sources = extractSources(candidate?.groundingMetadata);
-    if (!text || !sources.length) return null;
+    const interaction = extractInteractionOutput(data);
+    const text = interaction.text;
+    const sources = interaction.sources.length ? interaction.sources : TRUSTED_SOURCE_URLS.map((url, index) => ({
+      id: `official-${index + 1}`,
+      label: TRUSTED_SOURCES[index],
+      url,
+      type: "official-url-context"
+    }));
+    if (!text) return {itinerary: null, status: "empty_model_response"};
+    if (!sources.length) return {itinerary: null, status: "response_without_sources"};
     const parsed = JSON.parse(cleanJson(text));
     const groundedDays = (Array.isArray(parsed.days) ? parsed.days : []).slice(0, days).map((day: Record<string, unknown>, index: number) => ({
       dayNumber: index + 1,
@@ -207,8 +252,8 @@ Devuelve solamente: {"title":"...","summary":"...","territory":"...","days":[{"t
         publishedPrice: null
       }))
     })).filter((day: Record<string, unknown>) => Array.isArray(day.stops) && day.stops.length);
-    if (!groundedDays.length) return null;
-    return {
+    if (!groundedDays.length) return {itinerary: null, status: "response_without_itinerary"};
+    return {status: "grounded", itinerary: {
       title: String(parsed.title || `Ruta Baqueano en ${territory.department}`).slice(0, 180),
       summary: String(parsed.summary || territory.summary).slice(0, 700),
       territory: String(parsed.territory || territory.department).slice(0, 80),
@@ -223,10 +268,10 @@ Devuelve solamente: {"title":"...","summary":"...","territory":"...","days":[{"t
       informationMode: "grounded-web",
       sustainabilityNote: "Verifica clima, accesos, disponibilidad y cualquier tarifa directamente antes de reservar.",
       generatedAt: new Date().toISOString()
-    };
+    }};
   } catch (error) {
     console.warn("[Baqueano AI Edge] Grounding no disponible:", error);
-    return null;
+    return {itinerary: null, status: "grounding_exception"};
   } finally {
     clearTimeout(timeout);
   }
@@ -259,7 +304,8 @@ Deno.serve(async (req: Request) => {
     const territory = resolveTerritory(prompt, requestedDept);
     const places = territory.places;
 
-    const grounded = await buildGroundedItinerary({prompt, department: requestedDept, days: daysRequested, groupSize, travelStyle, budgetNio, budgetUsd}, territory);
+    const groundingResult = await buildGroundedItinerary({prompt, department: requestedDept, days: daysRequested, groupSize, travelStyle, budgetNio, budgetUsd}, territory);
+    const grounded = groundingResult.itinerary;
 
     const itineraryDays = [];
     for (let i = 0; i < daysRequested; i++) {
@@ -338,6 +384,7 @@ Deno.serve(async (req: Request) => {
           success: true,
           ok: true,
           provider,
+          groundingStatus: groundingResult.status,
           planId: planId,
           itinerary: generatedItinerary
         },
