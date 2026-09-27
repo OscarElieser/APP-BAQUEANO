@@ -248,3 +248,26 @@
      4. **Validación:**
         - Verificación sintáctica con balance perfecto de llaves en todas las hojas modificadas.
         - 100% libre de términos restringidos y 100% compatible con eventos y presentaciones institucionales.
+
+- **Consulta 13 (26 de Septiembre de 2026, 21:56):**
+   > *"Reorganización de jerarquía comercial y narrativa del index.html para competencia nacional sin borrar nada: Hero de Marca (declaración de impacto + 3 CTAs) -> Problema/Solución (flujo 5 pasos + 4 pilares de valor) -> Crea tu viaje con IA ('¿Qué querés vivir en Nicaragua?') -> Explora Nicaragua -> Mapa de los 17 territorios -> Destinos -> Cultura Viva -> Servicios Turísticos -> Negocios y Comunidades -> Impacto -> Seguridad/SOS -> Historias/Experiencias -> Red de Anfitriones -> Ficha Técnica App Android (APK) -> CTA Final -> Footer."*
+   - **Ejecución y Entregables:**
+     1. **Preservación Integral al 100%:**
+        - Cero eliminación de módulos o scripts existentes.
+        - Toda la funcionalidad (Leaflet, Three.js 3D, reproductor de audio, selector de territorios, Baqüi IA, formularios y modales) se preservó intacta.
+     2. **Nueva Jerarquía Comercial de Producto (Nivel Competencia Nacional):**
+        - **01. Cinematic Brand Hero:** Declaración de marca contundente ("NICARAGUA NO SE VISITA. SE DESCUBRE."), subtítulo narrativo y 3 CTAs estratégicos: "Explorar Nicaragua", "✨ Crear mi aventura con IA" y "▶ Ver cómo funciona".
+        - **02. El Problema → La Solución Baqueano (#problemaSolucionSection):**
+          * Explica en 15 segundos el reto del viajero (fragmentación de 10 plataformas diferentes vs ecosistema unificado Baqueano).
+          * Flujo visual interactivo de viaje en 5 pasos: `Descubrir → Planificar → Conectar → Reservar → Viajar`.
+          * 4 Pilares estratégicos de la propuesta de valor: 🧭 Descubre, 🤖 Planifica, 🤝 Conecta y 🌿 Impacta.
+        - **03. Crea tu viaje con IA (#baqueanoDigitalSection):** Elevado al inicio de la experiencia con la nueva caja conversacional interactiva "¿Qué querés vivir en Nicaragua?", sugerencias rápidas ("3 días en León y Las Peñitas", "Ometepe", "Cañón de Somoto") y conexión en vivo con Baqüi y el planificador.
+        - **04. Explora Nicaragua (#queQueresVivir):** Pilares experienciales con botón de revelación progresiva ("Ver todas las experiencias").
+        - **05. Mapa Vivo de los 17 Territorios (#territorioMapaSection):** Presentación turística priorizada ("Explora Nicaragua en un mapa vivo: 15 Departamentos + 2 Regiones Autónomas"), con selector interactivo y sello técnico secundario WebGL / WGS-84.
+        - **06 a 09. Destinos, Cultura Viva, Servicios Turísticos y Negocios Aliados:** Con etiquetas de credibilidad profesional ("Red de Emprendimientos Locales · Prototipo Funcional de Demostración").
+        - **10 y 11. Cifras, Impacto y Seguridad SOS:** Indicadores verificables, asistencia en ruta y geolocalización GPS satelital.
+        - **12 a 15. Historias, Red de Anfitriones, Ficha Técnica App Android (APK v2.4.0 Beta) y CTA Final.**
+     3. **Estilos e Integridad Sintáctica:**
+        - Incorporación de estilos de jerarquía comercial en `website/css/pages/index.css` con Golden Circle, paleta oficial y cero uso de términos prohibidos.
+        - Verificación de balance de etiquetas HTML (16/16 secciones, 464/464 divs, 1/1 main, 1/1 footer, 5/5 forms).
+        - Validación JavaScript con `node --check` (código 0).

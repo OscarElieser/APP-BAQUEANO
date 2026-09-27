@@ -2710,3 +2710,717 @@ html body .index-inline-066 {
   -webkit-text-fill-color: #F1F5F9 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
 }
+
+/* ============================================================================
+   🧭 BAQUEANO — JERARQUÍA COMERCIAL & NARRATIVA COMPETENCIA NACIONAL
+   🎯 1. POR QUÉ (WHY):
+   - Estructurar visualmente la propuesta de valor comercial en los primeros segundos
+     de la experiencia para el jurado nacional: Problema -> Solución -> IA -> Ecosistema.
+   ⚙️ 2. CÓMO (HOW):
+   - Contenedores Glassmorphism, flujo de viaje 5-step responsive, pilares en cuadrícula
+     y caja interactiva de llamada a la IA de planificación con atajos en vivo.
+   📦 3. QUÉ (WHAT):
+   - .hero-main-subtitle, .hero-cta-actions, .problem-solution-section, .ps-journey-flow,
+     .ps-pillars-grid, .quick-ia-prompt-box, .app-download-section, .baq-credibility-badge.
+   ============================================================================ */
+
+/* ── HERO BRAND CTA & SUBTITLE ── */
+.hero-brand-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  border-radius: 999px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #F4E6C1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-main-subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  color: #E2E8F0;
+  max-width: 720px;
+  margin: 1.2rem auto 2rem;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #F65E01 0%, #FF7B26 100%);
+  color: #FFFFFF !important;
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(246, 94, 1, 0.4), 0 0 15px rgba(246, 94, 1, 0.25);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(246, 94, 1, 0.6);
+  color: #FFFFFF !important;
+}
+
+.hero-btn-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 26px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #F4E6C1 !important;
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  border: 1.5px solid rgba(244, 230, 193, 0.45);
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-btn-ai:hover {
+  transform: translateY(-3px) scale(1.03);
+  background: rgba(22, 93, 111, 0.55);
+  border-color: #F65E01;
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 30px rgba(22, 93, 111, 0.4);
+}
+
+.hero-btn-tertiary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  background: transparent;
+  color: #CBD5E1 !important;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.hero-btn-tertiary:hover {
+  color: #F65E01 !important;
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   02. SECCIÓN: PROBLEMA -> SOLUCIÓN BAQUEANO & PROPUESTA DE VALOR
+   ========================================================================== */
+.problem-solution-section {
+  padding: 5rem 0 4.5rem;
+  background: linear-gradient(180deg, #070B14 0%, #0A0F1D 50%, #0F172A 100%);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.1);
+}
+
+.problem-solution-section::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(22, 93, 111, 0.25) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.ps-header-block {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 3.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ps-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background: rgba(246, 94, 1, 0.15);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  border-radius: 999px;
+  color: #F65E01;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.ps-title {
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+}
+
+.ps-subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+  color: #CBD5E1;
+  line-height: 1.65;
+}
+
+.ps-subtitle strong {
+  color: #F4E6C1;
+}
+
+/* ── FLUJO INTERACTIVO EN 5 PASOS ── */
+.ps-journey-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.ps-step-card {
+  flex: 1 1 180px;
+  max-width: 220px;
+  min-height: 155px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.14);
+  border-radius: 18px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ps-step-card:hover {
+  transform: translateY(-4px);
+  border-color: #F65E01;
+  background: rgba(22, 93, 111, 0.25);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(246, 94, 1, 0.2);
+}
+
+.ps-step-num {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(244, 230, 193, 0.35);
+}
+
+.ps-step-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.75rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(246, 94, 1, 0.2), rgba(22, 93, 111, 0.25));
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  border-radius: 12px;
+  color: #F65E01;
+  font-size: 18px;
+}
+
+.ps-step-card strong {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.ps-step-card p {
+  font-size: 11.5px;
+  color: #94A3B8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.ps-step-card.ps-step-highlight {
+  border-color: #F65E01;
+  background: linear-gradient(145deg, rgba(22, 93, 111, 0.4), rgba(246, 94, 1, 0.25));
+}
+
+.ps-step-card.ps-step-highlight .ps-step-icon {
+  background: #F65E01;
+  color: #FFFFFF;
+}
+
+.ps-flow-arrow {
+  color: rgba(244, 230, 193, 0.35);
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .ps-flow-arrow {
+    display: none;
+  }
+}
+
+/* ── LOS 4 PILARES DE LA PROPUESTA DE VALOR ── */
+.ps-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.ps-pillar-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.8rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ps-pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #165D6F 0%, #F65E01 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ps-pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(246, 94, 1, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(22, 93, 111, 0.2);
+}
+
+.ps-pillar-card:hover::before {
+  opacity: 1;
+}
+
+.ps-pillar-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(22, 93, 111, 0.3);
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  color: #2DD4BF;
+  font-size: 22px;
+  margin-bottom: 1.2rem;
+}
+
+.ps-pillar-icon.icon-ai {
+  background: rgba(246, 94, 1, 0.2);
+  border-color: rgba(246, 94, 1, 0.5);
+  color: #F65E01;
+}
+
+.ps-pillar-icon.icon-connect {
+  background: rgba(244, 230, 193, 0.15);
+  border-color: rgba(244, 230, 193, 0.35);
+  color: #F4E6C1;
+}
+
+.ps-pillar-icon.icon-impact {
+  background: rgba(45, 180, 112, 0.2);
+  border-color: rgba(45, 180, 112, 0.5);
+  color: #34D399;
+}
+
+.ps-pillar-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.6rem;
+}
+
+.ps-pillar-card p {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: #94A3B8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   03. CAJA CONVERSACIONAL RÁPIDA: "¿QUÉ QUERÉS VIVIR?"
+   ========================================================================== */
+.quick-ia-prompt-box {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(7, 11, 20, 0.98));
+  border: 1.5px solid rgba(246, 94, 1, 0.4);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(246, 94, 1, 0.2);
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-ia-prompt-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(246, 94, 1, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.quick-ia-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #F65E01;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.quick-ia-title {
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 0.5rem;
+}
+
+.quick-ia-desc {
+  font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+  color: #CBD5E1;
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+}
+
+.quick-ia-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(10, 15, 29, 0.85);
+  border: 1.5px solid rgba(244, 230, 193, 0.2);
+  border-radius: 16px;
+  padding: 6px 8px 6px 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.25s ease;
+}
+
+.quick-ia-input-wrap:focus-within {
+  border-color: #F65E01;
+  box-shadow: 0 0 0 3px rgba(246, 94, 1, 0.25);
+}
+
+.quick-ia-icon {
+  color: #F65E01;
+  font-size: 18px;
+}
+
+.quick-ia-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  outline: none;
+  min-width: 0;
+}
+
+.quick-ia-input::placeholder {
+  color: #64748B;
+}
+
+.quick-ia-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #F65E01 0%, #FF7B26 100%);
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(246, 94, 1, 0.4);
+  transition: all 0.25s ease;
+}
+
+.quick-ia-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(246, 94, 1, 0.6);
+}
+
+.quick-ia-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.quick-ia-shortcut-label {
+  font-size: 11.5px;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.quick-ia-chip {
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  border-radius: 999px;
+  color: #CBD5E1;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-ia-chip:hover {
+  background: rgba(22, 93, 111, 0.35);
+  border-color: #F65E01;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .quick-ia-input-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+  }
+  .quick-ia-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   14. FICHA TÉCNICA Y DESCARGA APP ANDROID (APK)
+   ========================================================================== */
+.app-download-section {
+  padding: 4.5rem 0;
+  background: linear-gradient(180deg, #0A0F1D 0%, #070B14 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-download-card {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+  background: linear-gradient(150deg, rgba(15, 23, 42, 0.95), rgba(22, 93, 111, 0.25));
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  border-radius: 28px;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-download-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #34D399;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.app-download-title {
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 1rem;
+  line-height: 1.25;
+}
+
+.app-download-desc {
+  font-size: 15px;
+  color: #CBD5E1;
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+.app-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+
+.app-spec-item {
+  background: rgba(10, 15, 29, 0.7);
+  border: 1px solid rgba(244, 230, 193, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.app-spec-label {
+  display: block;
+  font-size: 11px;
+  color: #94A3B8;
+  margin-bottom: 2px;
+}
+
+.app-spec-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13.5px;
+  color: #F4E6C1;
+}
+
+.app-download-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.app-download-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 26px;
+  background: linear-gradient(135deg, #165D6F 0%, #2DD4BF 100%);
+  color: #FFFFFF !important;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(22, 93, 111, 0.4);
+  transition: all 0.25s ease;
+}
+
+.app-download-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(45, 212, 191, 0.5);
+  color: #FFFFFF !important;
+}
+
+.app-download-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 999px;
+  color: #E2E8F0 !important;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.app-download-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #F65E01;
+  color: #FFFFFF !important;
+}
+
+.app-download-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-phone-mockup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px;
+  background: rgba(10, 15, 29, 0.85);
+  border: 2px solid rgba(246, 94, 1, 0.4);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.app-preview-icon {
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(246, 94, 1, 0.35);
+}
+
+.app-mockup-badge {
+  padding: 4px 12px;
+  background: rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 999px;
+  color: #34D399;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .app-download-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ── ETIQUETAS DE CREDIBILIDAD PARA EL JURADO ── */
+.baq-credibility-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #F4E6C1;
+  letter-spacing: 0.5px;
+  margin-top: 0.6rem;
+}
+
+.baq-credibility-badge i {
+  color: #2DD4BF;
+  font-size: 12px;
+}
