@@ -14,17 +14,18 @@ La portada carga su fuente de forma prioritaria. Los videos secundarios cargan m
 
 | Slot / uso | Temática | Fuente local |
 | :--- | :--- | :--- |
-| `indexHero` | Vistas aéreas panorámicas de Nicaragua | `assets/videos/video nicaragua.mp4` |
-| `destinationsFeature` | Lagos, volcanes, costas y reservas | `assets/videos/destinos.mp4` |
-| `cultureMusic` | Música, danza e identidad cultural | `assets/videos/video.mp4` |
-| `cultureGastronomy` | Fuego campesino, maíz y cocina ancestral | `assets/videos/gastronomia.mp4` |
-| `cultureHistory` | Ciudades, memoria y paisajes históricos | `assets/videos/historia.mp4` |
-| Reserva territorial | Material disponible para futura asignación | `assets/videos/video 2.mp4` |
+| `indexHero` | Vistas aéreas panorámicas de Nicaragua | `video nicaragua.mp4` · 2244×1586 · 30 fps |
+| `destinationsFeature` | Lagos, volcanes, costas y reservas | `destinos.mp4` · 848×478 · 24 fps |
+| `cultureMusic` | Música, danza e identidad cultural | `video.mp4` · 848×478 · 30 fps |
+| `cultureGastronomy` | Fuego campesino, maíz y cocina ancestral | `gastronomia.mp4` · 848×478 · 24 fps |
+| `cultureHistory` | Ciudades, memoria y paisajes históricos | `historia.mp4` · 848×478 · 24 fps |
+| Reserva territorial | Material disponible para futura asignación | `video 2.mp4` · 478×850 · 30 fps |
 
 ## Estándares técnicos y de gobernanza
 
 - Formato recomendado: MP4 H.264 o H.265 con póster optimizado.
-- Calidad recomendada para nuevas cargas: 2160p o 1080p con alta tasa de bits.
+- Calidad requerida para reemplazos principales: 3840×2160 o, como mínimo, 1920×1080 con alta tasa de bits.
+- Los clips de 848×478 actuales son aptos únicamente para tarjetas pequeñas; deben sustituirse desde Ops Center para cumplir UHD real.
 - La web entrega el archivo fuente original; no reduce ni sustituye su resolución.
 - Los slots permanecen fijos hasta una publicación explícita del Ops Center.
 - La configuración se registra con `locked: true`, `status: published` y auditoría administrativa.

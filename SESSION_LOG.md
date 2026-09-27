@@ -394,6 +394,19 @@
   - **Enfoque de diseño:** jerarquía 60-30-10, contraste WCAG, equilibrio de temperatura, consistencia de superficies y protección de legibilidad sobre fotografía y video.
   - **Aplicación futura:** evaluar cada paleta simultáneamente desde la perspectiva de marca, marketing turístico, conversión y diseño gráfico.
 
+- **Verificación solicitada de videos (26 de Septiembre de 2026):**
+  > *"verifica lo de los videos"*
+  - **Alcance:** comprobar archivos, slots, URLs, carga pública, reproducción optimizada y administración exclusiva desde Ops Center.
+  - **Resultados técnicos:**
+    1. Los seis archivos tienen firma MP4 válida.
+    2. Los cinco videos publicados responden HTTP 200 con `Content-Type: video/mp4` y tamaño completo.
+    3. Los cinco slots del HTML coinciden con el catálogo de `video-registry.js`.
+    4. La gobernanza `app_config/site_videos`, bloqueo editorial, auditoría e IntersectionObserver están conectados.
+    5. `video nicaragua.mp4`: 2244×1586, 30 fps y aproximadamente 8.4 Mbps; apto como fuente principal de alta resolución.
+    6. `destinos.mp4`, `video.mp4`, `gastronomia.mp4` e `historia.mp4`: 848×478 y aproximadamente 1.36 Mbps; funcionales en tarjetas pequeñas, pero no califican como UHD.
+    7. `video 2.mp4`: 478×850, formato vertical de reserva.
+  - **Decisión:** conservar los clips contextuales en tarjetas pequeñas y marcar su sustitución por 1080p/2160p real desde Ops Center; no simular ni declarar una resolución inexistente.
+
 - **Corrección integral y rediseño de alta fidelidad del menú lateral (26 de Septiembre de 2026):**
   > *"el menu se ve feo asi a como esta"* — acompañado de captura de pantalla con colisión de capas flotantes.
   - **Diagnóstico del problema visual:**
@@ -407,5 +420,19 @@
     4. **Aislamiento del botón flotante de temas:** Se añadió la regla autoritativa `body.nav-drawer-open #baqFloatingThemeBtn { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }`, ocultándolo limpiamente mientras el drawer esté abierto.
     5. **Jerarquía Z-Index autoritativa:** El drawer opera en `z-index: 10050` y su fondo en `10040`, garantizando que ninguna capa o componente flotante de la web interfiera con la navegación.
     6. **Invalidación de caché:** Se actualizó la versión de activos a `v=20260926-ops-nav-4` en las 17 páginas HTML del ecosistema Baqueano.
-  - **Archivos modificados:** `website/styles.css`, `website/js/navigation.js`, las 17 páginas `.html` del portal y `SESSION_LOG.md`.
+  - **Validaciones:** `node --check` limpio (código 0), `git diff --check` limpio (código 0).
+
+- **Corrección de apilamiento Z-Index y visibilidad cristalina del drawer (26 de Septiembre de 2026):**
+  > *"mira como queda el menu"* — captura mostrando el drawer oscurecido y desenfocado detrás de un velo.
+  - **Diagnóstico del problema de renderizado:**
+    1. `.main-navbar` conservaba `z-index: 1000` en su regla base, mientras que `.nav-drawer-backdrop` tenía `z-index: 10040`. Al ser el backdrop un hijo directo de `<body>` y tener mayor índice que el contexto de apilamiento del navbar, el fondo oscuro con desenfoque (`backdrop-filter: blur(5px); background: rgba(2, 8, 15, 0.7)`) se renderizaba **por encima del drawer**, velándolo, oscureciéndolo y haciéndolo ilegible.
+    2. El ancho del panel (`min(336px, 94vw)`) resultaba estrecho para pantallas de escritorio amplias, y los textos secundarios carecían de suficiente luminosidad.
+  - **Solución implementada:**
+    1. **Corrección de apilamiento en 3 niveles:**
+       - Nivel 1: `.nav-drawer-backdrop` en `z-index: 10040 !important` (cubre y desenfoca únicamente el contenido de la página: hero, texto, media).
+       - Nivel 2: `.main-navbar` en `z-index: 10050 !important` (supera al backdrop).
+       - Nivel 3: `.main-navbar .nav-links-menu.mobile-open` en `z-index: 10060 !important` (el drawer queda completamente al frente, nítido, sin ningún velo ni desenfoque encima).
+    2. **Amplitud y legibilidad:** Se amplió el ancho a `min(390px, 92vw)`, con tipografía en blanco puro (`#FFFFFF`), acentos territoriales en `#F65E01`, iconos en crema `#F4E6C1` y descripciones en `#CBD5E1`.
+    3. **Invalidación de caché:** Se actualizó la versión de activos a `v=20260926-ops-nav-5` en las 17 páginas HTML.
+  - **Archivos modificados:** `website/styles.css`, las 17 páginas `.html` del portal y `SESSION_LOG.md`.
   - **Validaciones:** `node --check` limpio (código 0), `git diff --check` limpio (código 0).

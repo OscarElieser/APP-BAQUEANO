@@ -29,12 +29,12 @@
     publicUrl: `assets/audio/${file}`, status: 'published', source: 'website_catalog'
   }));
   const videos = [
-    ['video nicaragua.mp4', 'Portada nacional', '2160p/1080p fuente original'],
-    ['destinos.mp4', 'Destinos', 'Alta resolución web'],
-    ['video.mp4', 'Patrimonio sonoro', 'Alta resolución web'],
-    ['gastronomia.mp4', 'Gastronomía', 'Alta resolución web'],
-    ['historia.mp4', 'Historia', 'Alta resolución web'],
-    ['video 2.mp4', 'Territorio', 'Alta resolución web']
+    ['video nicaragua.mp4', 'Portada nacional', '2244×1586 · 30 fps · fuente de alta resolución'],
+    ['destinos.mp4', 'Destinos', '848×478 · 24 fps · reemplazo UHD recomendado'],
+    ['video.mp4', 'Patrimonio sonoro', '848×478 · 30 fps · reemplazo UHD recomendado'],
+    ['gastronomia.mp4', 'Gastronomía', '848×478 · 24 fps · reemplazo UHD recomendado'],
+    ['historia.mp4', 'Historia', '848×478 · 24 fps · reemplazo UHD recomendado'],
+    ['video 2.mp4', 'Territorio', '478×850 · 30 fps · formato vertical']
   ];
   videos.forEach(([file, category, quality]) => media.push({
     id: `media-video-${slug(file)}`,
