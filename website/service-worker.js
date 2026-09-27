@@ -9,7 +9,7 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-offline-v12';
+const CACHE_VERSION = 'baqueano-offline-v13';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE_URLS = [
   OFFLINE_URL,
@@ -18,6 +18,8 @@ const PRECACHE_URLS = [
   '/manifest.json',
   '/styles.css',
   '/css/mobile-first-core.css',
+  '/css/demo-hackathon.css',
+  '/js/demo-hackathon-tour.js',
   '/assets/images/baqueano_launcher_solid.png',
   '/assets/images/logo.png'
 ];

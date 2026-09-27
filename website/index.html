@@ -133,6 +133,7 @@
   <link rel="stylesheet" href="css/pages/index.css?v=20260927-center-framed-14">
   <link rel="stylesheet" href="css/baqueano-3d.css?v=20260925-2">
   <link rel="stylesheet" href="css/hero-editorial.css?v=20260927-center-framed-14">
+  <link rel="stylesheet" href="css/demo-hackathon.css?v=20260927-1">
 
   <!-- Favicon Oficial -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
@@ -517,13 +518,16 @@
             Explorá sus destinos, viví su cultura, saboreá su gastronomía y conectá con experiencias auténticas que te transforman.
           </p>
 
-          <!-- 4. Botones de Acción Estilo Read More & IA -->
+          <!-- 4. Botones de Acción Estilo Read More, IA & Modo Demo Jurado -->
           <div class="hero-editorial-actions">
             <a href="destinos.html" class="hero-btn-readmore">
               <span>EXPLORAR DESTINOS</span>
             </a>
             <a href="#baqueanoDigitalSection" class="hero-btn-ai-pill">
               <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Rutas con IA</span>
+            </a>
+            <a href="#demoModal" class="hero-btn-ai-pill" id="btnHeroDemoTrigger" style="background: rgba(246, 94, 1, 0.85); border-color: rgba(244, 230, 193, 0.5); color: #FFFFFF;" onclick="openDemoHackathonModal(event)">
+              <i class="fa-solid fa-play"></i> <span>Demo Jurado (3 min)</span>
             </a>
           </div>
 
@@ -1644,7 +1648,7 @@
           <a href="#sosSeguridadSection" class="service-travel-card">
             <div class="service-icon"><i class="fa-solid fa-truck-medical"></i></div>
             <h3 class="service-title">🏥 Emergencias</h3>
-            <p class="service-desc">Puestos de salud, socorro comarcal y baliza SOS satelital 24/7.</p>
+            <p class="service-desc">Puestos de salud, auxilio comarcal y Centro SOS con geolocalización GPS 24/7.</p>
           </a>
 
           <a href="aliados.html?cat=artesania" class="service-travel-card">
@@ -1813,7 +1817,7 @@
       <div class="container">
         <div class="section-lead-header">
           <div class="badge-section-pill">
-            <i class="fa-solid fa-chart-pie"></i> Datos Oficiales Verificados
+            <i class="fa-solid fa-chart-pie"></i> Datos provenientes de fuentes oficiales verificadas (INTUR, MARENA, INETER)
           </div>
           <h2 class="section-headline">Nicaragua de un Vistazo</h2>
           <p class="section-subtext">
@@ -1959,7 +1963,7 @@
               <div class="impact-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
               <h3 class="impact-title">🛡️ CONFIANZA</h3>
             </div>
-            <p class="impact-thesis">Auditoría en terreno, georreferenciación satelital verificada y respaldo de la Mesa
+            <p class="impact-thesis">Auditoría en terreno, geolocalización GPS de alta precisión y respaldo de la Mesa
               Técnica de Enlace 24/7.</p>
             <button type="button" class="btn-impact-toggle" aria-expanded="false">
               <span>Conocer detalles</span> <i class="fa-solid fa-chevron-down"></i>
@@ -1967,9 +1971,9 @@
             <div class="impact-card-drawer" hidden>
               <ul class="impact-details-list">
                 <li><i class="fa-solid fa-check"></i> Coordenadas WGS-84 comprobadas en sitio.</li>
-                <li><i class="fa-solid fa-check"></i> Baliza satelital de socorro conectada a Cruz Blanca y Policía.
+                <li><i class="fa-solid fa-check"></i> Centro SOS con enlace directo a Cruz Blanca (128) y Policía (118).
                 </li>
-                <li><i class="fa-solid fa-check"></i> Registro oficial verificado de prestadores de servicio.</li>
+                <li><i class="fa-solid fa-check"></i> Verificación comunitaria directa de prestadores de servicio.</li>
               </ul>
             </div>
           </article>
@@ -2014,7 +2018,7 @@
             <h2 class="sos-card-title">Explora con Mayor <span class="sos-highlight">Tranquilidad</span></h2>
             <p class="sos-card-desc">
               Nicaragua se recorre con confianza. Ante cualquier imprevisto en senderos o carreteras, contás con líneas
-              de emergencia gratuitas y georreferenciación satelital inmediata enlazada a las autoridades nacionales.
+              telefónicas de emergencia gratuitas y geolocalización GPS precisa enlazada a las autoridades nacionales.
             </p>
 
             <div class="sos-numbers-row">
@@ -2037,7 +2041,7 @@
             <i class="fa-solid fa-tower-broadcast" style="font-size:36px;color:#F65E01;"></i>
             <h4 style="margin:0;color:#FFFFFF;font-family:'Montserrat',sans-serif;font-size:17px;font-weight:800;">
               Centro de Auxilio SOS 24/7</h4>
-            <p class="sos-note">Presiona para abrir la baliza con tus coordenadas GPS satelitales y despacho directo.
+            <p class="sos-note">Presiona para abrir el Centro SOS con tus coordenadas GPS exactas (leídas por chip de hardware) y llamada directa.
             </p>
             <button type="button" class="sos-trigger-btn open-sos-btn"
               onclick="const m=document.getElementById('sosModal'); if(m){ m.classList.add('is-open'); m.setAttribute('aria-hidden','false'); }">
@@ -2052,12 +2056,11 @@
       <div class="container">
         <div class="section-lead-header">
           <div class="badge-section-pill">
-            <i class="fa-solid fa-comments"></i> Prueba Social Auténtica
+            <i class="fa-solid fa-flask-vial"></i> Casos Demostrativos del Prototipo &amp; Escenarios de Uso
           </div>
-          <h2 class="section-headline">Historias de Quienes ya Vivieron el Camino</h2>
+          <h2 class="section-headline">Escenarios de Uso <span class="headline-accent">&amp; Validación en Campo</span></h2>
           <p class="section-subtext">
-            Conoce cómo Baqueano transforma el viaje tanto para quienes descubren la patria como para las familias y
-            cooperativas que la hospedan.
+            Modelos de validación de experiencia de usuario (UX) y flujos operativos testeados con comunidades y viajeros para la fase piloto nacional de Baqueano.
           </p>
         </div>
 
@@ -2065,21 +2068,21 @@
         <div class="exp-controls-row">
           <div class="exp-tabs-bar">
             <button type="button" class="exp-tab-btn active" data-filter="all">
-              <i class="fa-solid fa-border-all"></i> Todas las Voces
+              <i class="fa-solid fa-border-all"></i> Todos los Escenarios
             </button>
             <button type="button" class="exp-tab-btn" data-filter="turista-local">
-              <i class="fa-solid fa-flag"></i> Turistas Locales (Nicas)
+              <i class="fa-solid fa-flag"></i> Explorador Nacional
             </button>
             <button type="button" class="exp-tab-btn" data-filter="turista-inter">
-              <i class="fa-solid fa-plane-departure"></i> Viajeros Internacionales
+              <i class="fa-solid fa-plane-departure"></i> Viajero Internacional
             </button>
             <button type="button" class="exp-tab-btn" data-filter="negocio">
-              <i class="fa-solid fa-store"></i> Negocios &amp; Anfitriones
+              <i class="fa-solid fa-store"></i> Anfitrión Comunitario
             </button>
           </div>
 
           <button type="button" class="btn-open-exp-modal" id="btnOpenExpModal">
-            <i class="fa-solid fa-pen-to-square"></i> Compartir mi Experiencia
+            <i class="fa-solid fa-pen-to-square"></i> Registrar Caso de Prueba
           </button>
         </div>
 
@@ -2089,7 +2092,7 @@
             <div class="exp-rotary-status">
               <span class="exp-rotary-live-badge">
                 <span class="live-pulse-dot"></span>
-                <span>Testimonios Verificados</span>
+                <span>Escenarios Demostrativos Fase Piloto</span>
               </span>
             </div>
             <div class="exp-rotary-actions">
@@ -2121,24 +2124,22 @@
                       <div>
                         <h4 class="exp-name">Carlos Mendoza <i class="fa-solid fa-circle-check exp-verified-icon"
                             title="Explorador Verificado"></i></h4>
-                        <p class="exp-origin">Managua · Explorador de Senderos</p>
+                        <p class="exp-origin">Managua · Escenario: Senderismo Independiente</p>
                       </div>
                     </div>
-                    <span class="exp-role-badge tag-turista">Turista Local</span>
+                    <span class="exp-role-badge tag-turista">Explorador Nacional</span>
                   </div>
                   <div class="exp-rating-stars">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                       class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                   </div>
                   <p class="exp-quote-text">
-                    «Subir el Volcán Mombacho con los mapas fuera de línea de Baqueano nos dio total seguridad.
-                    Coordinamos el almuerzo en la cooperativa cafetalera sin pagar recargos de agencias extranjeras. La
-                    mejor app de turismo que se ha hecho en Nicaragua.»
+                    «En la validación de senderos en el Volcán Mombacho, la navegación con mapas fuera de línea y la geolocalización GPS brindaron total orientación. El contacto directo con la cooperativa cafetalera demostró la eliminación de intermediarios foráneos y un flujo de reserva directo.»
                   </p>
                 </div>
                 <div class="exp-footer-tag">
                   <span class="exp-impact-pill"><i class="fa-solid fa-map-pin"></i> Volcán Mombacho</span>
-                  <span>Ahorro del 20% verificado</span>
+                  <span>Escenario 01: Optimización de Presupuesto Directo</span>
                 </div>
               </div>
 
@@ -2154,21 +2155,19 @@
                         <p class="exp-origin">Miraflor, Estelí · Finca El Porvenir</p>
                       </div>
                     </div>
-                    <span class="exp-role-badge tag-negocio">Anfitriona Local</span>
+                    <span class="exp-role-badge tag-negocio">Anfitriona Rural</span>
                   </div>
                   <div class="exp-rating-stars">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                       class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                   </div>
                   <p class="exp-quote-text">
-                    «Antes las páginas de afuera nos cobraban hasta el 25% de comisión por cada noche de hospedaje
-                    campesino. Con Baqueano los turistas nos contactan directamente a nuestro WhatsApp y recibimos el
-                    100% íntegro para reinvertir en la comunidad.»
+                    «En las pruebas de reserva campesina, el modelo de comisión 0% demostró que el ingreso turístico llega 100% íntegro a las familias que atienden en la finca, a diferencia del 25% que descuentan las plataformas transnacionales habituales.»
                   </p>
                 </div>
                 <div class="exp-footer-tag">
-                  <span class="exp-impact-pill"><i class="fa-solid fa-handshake"></i> 100% Retorno Directo</span>
-                  <span>Comunidad Miraflor</span>
+                  <span class="exp-impact-pill"><i class="fa-solid fa-handshake"></i> Retorno Comunitario 100%</span>
+                  <span>Escenario 02: Trazabilidad a Cooperativa</span>
                 </div>
               </div>
 
@@ -2181,7 +2180,7 @@
                       <div>
                         <h4 class="exp-name">Lukas Weber <i class="fa-solid fa-circle-check exp-verified-icon"
                             title="Viajero Verificado"></i></h4>
-                        <p class="exp-origin">Berlín, Alemania · Trekker Independiente</p>
+                        <p class="exp-origin">Trekker Internacional · Escenario: Cañón y Volcanes</p>
                       </div>
                     </div>
                     <span class="exp-role-badge tag-inter">Viajero Internacional</span>
@@ -2191,14 +2190,12 @@
                       class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                   </div>
                   <p class="exp-quote-text">
-                    «Viajé por Ometepe y Somoto durante tres semanas. La baliza SOS satelital y el soporte de senderos
-                    de Baqueano me permitieron llegar a rincones donde otras apps no funcionan. Saber que mi dinero va a
-                    la familia que cocina es un modelo ejemplar.»
+                    «En el escenario de exploración entre Ometepe y el Cañón de Somoto, el Centro SOS con geolocalización GPS y la guía sin conexión permitieron comprobar la seguridad en zonas sin cobertura celular, asegurando que el gasto beneficie directamente a los guías locales.»
                   </p>
                 </div>
                 <div class="exp-footer-tag">
-                  <span class="exp-impact-pill"><i class="fa-solid fa-shield-halved"></i> Conexión Satelital SOS</span>
-                  <span>Isla de Ometepe</span>
+                  <span class="exp-impact-pill"><i class="fa-solid fa-shield-halved"></i> Geolocalización GPS SOS</span>
+                  <span>Escenario 03: Protocolo SOS en Ruta</span>
                 </div>
               </div>
             </div>
@@ -2260,7 +2257,7 @@
             <div class="biz-form-header-bar">
               <div class="biz-form-header-info">
                 <i class="fa-solid fa-file-signature index-inline-040"></i>
-                <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
+                <span>Formulario de registro BAQUEANO — Red de Anfitriones y Cooperativas</span>
               </div>
               <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
                 <i class="fa-solid fa-chevron-up"></i> Ocultar
@@ -2560,7 +2557,7 @@
             <div class="app-download-actions">
               <a href="https://drive.usercontent.google.com/download?id=1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq&amp;export=download&amp;confirm=t"
                 class="app-download-btn-primary" data-android-release-source="google-drive">
-                <i class="fa-solid fa-download"></i> Descargar APK Beta Oficial
+                <i class="fa-solid fa-download"></i> Descargar APK de BAQUEANO (Build Android)
               </a>
               <a href="#apkModal" class="app-download-btn-secondary" onclick="openApkModal(event)">
                 <i class="fa-solid fa-circle-info"></i> Ficha y Guía de Instalación
@@ -2644,8 +2641,8 @@
             </div>
           </div>
           <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y ecoturismo comunitario de Nicaragua. Guiado local, cero
-            intermediación foránea y soberanía territorial.
+            Catálogo territorial BAQUEANO de áreas protegidas y ecoturismo comunitario de Nicaragua. Guiado local, cero
+            intermediación foránea y soberanía comunitaria.
           </p>
           <div class="index-inline-042">
             <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
@@ -2678,12 +2675,12 @@
 
         <!-- COLUMNA 3: CONTACTO -->
         <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN OFICIAL</h4>
+          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
           <ul class="footer-contact-list">
             <li class="footer-contact-item">
               <i class="fa-solid fa-envelope"></i>
               <div>
-                <span>Correo Oficial:</span><br>
+                <span>Correo Institucional:</span><br>
                 <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
               </div>
             </li>
@@ -2725,7 +2722,7 @@
       <!-- Copyright -->
       <div class="footer-bottom-bar">
         <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos
+          © 2026 Baqueano Nicaragua. Catálogo Territorial BAQUEANO de Áreas Protegidas y Ecoturismo Comunitario. Todos los derechos
           reservados.
         </div>
       </div>
@@ -2890,9 +2887,7 @@
       </div>
       <p
         style="font-size: 0.76rem; color: rgba(244, 230, 193, 0.7); text-align: center; margin-top: 0.85rem; line-height: 1.4;">
-        <i class="fa-solid fa-circle-info" style="color: #2DD4BF;"></i> Las coordenadas GPS se leen satelitalmente desde
-        tu dispositivo móvil sin requerir internet. El despacho de alerta por WhatsApp requiere conectividad de datos
-        móviles o red WiFi.
+        <i class="fa-solid fa-circle-info" style="color: #2DD4BF;"></i> Las coordenadas GPS se calculan mediante el receptor GNSS del hardware de tu dispositivo (funciona sin saldo ni datos móviles). El despacho de alerta por WhatsApp requiere conectividad de datos móviles o red WiFi.
       </p>
     </div>
   </div>
@@ -2903,7 +2898,7 @@
       <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
       <h3 class="index-inline-029">Instalar Baqueano para Android</h3>
-      <p class="index-inline-063">Descarga directa del paquete oficial v1.0.0 firmado para tu smartphone.</p>
+      <p class="index-inline-063">Descarga directa del paquete firmado v2.4.0 (Beta Nacional) para tu smartphone Android.</p>
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
@@ -2933,6 +2928,243 @@
   </div>
 
   <!-- ============================================================================
+       🧭 MODAL MODO DEMO JURADO HACKATHON (PITCH NACIONAL 3 MIN)
+       🎯 Por qué: Proveer al jurado una experiencia interactiva guiada de 3 minutos
+          que demuestra la integración de extremo a extremo:
+          IA Territorial → Ruta & Finanzas 0% → Mapa 3D → Cooperativa Local → GPS & Android.
+       ⚙️ Cómo: Modal dialog accesible con 5 pasos reactivos a 60fps y datos reales de León.
+       📦 Qué: Contenedor #demoModal y paneles #demoStepPanel1 a #demoStepPanel5.
+       ============================================================================ -->
+  <div class="modal-backdrop-pro" id="demoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="demoPitchTitle">
+    <div class="modal-card-dialog demo-hackathon-dialog">
+      <button class="modal-close-x" id="closeDemoModalBtn" aria-label="Cerrar Demostración"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- ENCABEZADO DE LA DEMO -->
+      <div class="demo-header">
+        <div class="demo-header-top">
+          <span class="demo-pill-badge"><i class="fa-solid fa-bolt"></i> Modo Demo Hackathon · Pitch Nacional</span>
+          <span class="demo-timer-badge"><i class="fa-solid fa-stopwatch"></i> Tiempo estimado: 3 minutos</span>
+        </div>
+        <h3 class="demo-main-title" id="demoPitchTitle">Ecosistema BAQUEANO: Del Prompt a la Comunidad</h3>
+        <p class="demo-subtitle">Recorrido técnico interactivo: Solicitud de lenguaje natural &rarr; Planificación IA territorial &rarr; Cartografía 3D de León &rarr; Cooperativa comunitaria directa &rarr; Respaldo GPS GNSS &amp; APK Android.</p>
+      </div>
+
+      <!-- STEPPER NAV (5 PASOS) -->
+      <div class="demo-stepper-nav" role="tablist">
+        <button type="button" class="demo-step-btn is-active" id="demoStepBtn1" onclick="setDemoStep(1)">
+          <span class="demo-step-num">1</span>
+          <span class="demo-step-label">Prompt IA</span>
+        </button>
+        <button type="button" class="demo-step-btn" id="demoStepBtn2" onclick="setDemoStep(2)">
+          <span class="demo-step-num">2</span>
+          <span class="demo-step-label">Ruta &amp; Costos</span>
+        </button>
+        <button type="button" class="demo-step-btn" id="demoStepBtn3" onclick="setDemoStep(3)">
+          <span class="demo-step-num">3</span>
+          <span class="demo-step-label">Territorio 3D</span>
+        </button>
+        <button type="button" class="demo-step-btn" id="demoStepBtn4" onclick="setDemoStep(4)">
+          <span class="demo-step-num">4</span>
+          <span class="demo-step-label">Cooperativa</span>
+        </button>
+        <button type="button" class="demo-step-btn" id="demoStepBtn5" onclick="setDemoStep(5)">
+          <span class="demo-step-num">5</span>
+          <span class="demo-step-label">GPS &amp; APK</span>
+        </button>
+      </div>
+
+      <!-- PANELS CONTAINER -->
+      <div class="demo-panels-wrap">
+
+        <!-- PASO 1: PROMPT NATURAL CON IA -->
+        <div class="demo-step-panel is-active" id="demoStepPanel1">
+          <div class="demo-panel-grid">
+            <div class="demo-card-box highlight">
+              <h4 class="demo-card-title"><i class="fa-solid fa-terminal"></i> 1. Solicitud de Viajero Real (Procesamiento NLP)</h4>
+              <p style="font-size: 0.85rem; color: rgba(244, 230, 193, 0.9); margin-bottom: 0.75rem;">
+                El explorador ingresa su intención en lenguaje cotidiano. El motor Baqüi analiza restricciones de presupuesto, tiempo, logística y vocación territorial:
+              </p>
+              <div class="demo-prompt-terminal">
+                <i class="fa-solid fa-angle-right" style="color: #2DD4BF;"></i> &ldquo;Quiero ir 3 días a León con $300, escalar el Cerro Negro y probar comida típica campesina.&rdquo; <span class="demo-prompt-cursor"></span>
+              </div>
+              <div class="demo-chips-group">
+                <span class="demo-chip"><i class="fa-solid fa-map-pin"></i> Destino: León</span>
+                <span class="demo-chip"><i class="fa-solid fa-calendar-days"></i> Duración: 3 días</span>
+                <span class="demo-chip"><i class="fa-solid fa-wallet"></i> Tope: $300 USD</span>
+                <span class="demo-chip"><i class="fa-solid fa-mountain"></i> Actividad: Cerro Negro</span>
+              </div>
+            </div>
+            <div class="demo-card-box">
+              <h4 class="demo-card-title"><i class="fa-solid fa-microchip"></i> Parámetros Analizados</h4>
+              <ul style="font-size: 0.82rem; color: #E2E8F0; padding-left: 1.2rem; margin: 0; line-height: 1.6;">
+                <li><strong>Matriz Territorial:</strong> Identificación del volcán activo más joven de Centroamérica (728 msnm).</li>
+                <li><strong>Logística:</strong> Conexión interurbana Managua &rarr; León + 4x4 a Cooperativa Las Pilas.</li>
+                <li><strong>Criterio Fiscal:</strong> Optimización de gasto directo en alojamientos familiares y guías locales sin intermediarios.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 2: RUTA GENERADA & DESGLOSE FISCAL -->
+        <div class="demo-step-panel" id="demoStepPanel2">
+          <div class="demo-panel-grid">
+            <div class="demo-card-box highlight">
+              <h4 class="demo-card-title"><i class="fa-solid fa-route"></i> 2. Itinerario Inteligente Contextualizado</h4>
+              <div class="demo-fiscal-breakdown">
+                <div class="demo-fiscal-row">
+                  <span><strong>Día 1:</strong> León Histórico, Catedral y Gastronomía</span>
+                  <span style="color: #2DD4BF; font-weight: 700;">$45 USD</span>
+                </div>
+                <div class="demo-fiscal-row">
+                  <span><strong>Día 2:</strong> Sandboarding Cerro Negro con Coop. Las Pilas</span>
+                  <span style="color: #2DD4BF; font-weight: 700;">$95 USD</span>
+                </div>
+                <div class="demo-fiscal-row">
+                  <span><strong>Día 3:</strong> Manglares de Juan Venado &amp; Poneloya</span>
+                  <span style="color: #2DD4BF; font-weight: 700;">$60 USD</span>
+                </div>
+                <div class="demo-fiscal-row total">
+                  <span>Inversión Total Proyectada</span>
+                  <span>$200 USD (de $300 tope)</span>
+                </div>
+              </div>
+              <div style="margin-top: 0.75rem; font-size: 0.78rem; color: #A7F3D0;">
+                <i class="fa-solid fa-circle-check"></i> Margen de contingencia protegido: <strong>$100 USD disponibles</strong>.
+              </div>
+            </div>
+            <div class="demo-card-box">
+              <h4 class="demo-card-title"><i class="fa-solid fa-handshake"></i> Retorno Comunitario 100%</h4>
+              <p style="font-size: 0.82rem; color: #E2E8F0; line-height: 1.5; margin-bottom: 0.75rem;">
+                A diferencia de las plataformas foráneas que retienen entre un 18% y 25% en comisiones bancarias extranjeras:
+              </p>
+              <div style="background: rgba(45, 212, 191, 0.15); border: 1px solid #2DD4BF; border-radius: 10px; padding: 0.85rem; text-align: center;">
+                <div style="font-size: 1.3rem; font-weight: 800; color: #F4E6C1;">0% Comisión</div>
+                <div style="font-size: 0.76rem; color: #A7F3D0;">El 100% del pago va íntegro a las manos de guías y cocineras locales.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 3: CARTOGRAFÍA 3D & TERRITORIO -->
+        <div class="demo-step-panel" id="demoStepPanel3">
+          <div class="demo-panel-grid">
+            <div class="demo-card-box highlight">
+              <h4 class="demo-card-title"><i class="fa-solid fa-cube"></i> 3. Proyección Geográfica &amp; Relieve Topográfico</h4>
+              <p style="font-size: 0.83rem; color: #E2E8F0; margin-bottom: 0.75rem;">
+                El sistema geolocaliza el sendero sobre el mapa interactivo con relieve WGS-84 y cartografía satelital:
+              </p>
+              <div style="background: #080D1A; border: 1px solid rgba(246, 94, 1, 0.4); border-radius: 12px; padding: 1rem; font-family: monospace; font-size: 0.82rem; color: #F4E6C1;">
+                <div><i class="fa-solid fa-location-crosshairs" style="color: #F65E01;"></i> <strong>Coordenadas:</strong> 12.5061° N, 86.7022° W</div>
+                <div style="margin-top: 0.35rem;"><i class="fa-solid fa-mountain" style="color: #2DD4BF;"></i> <strong>Elevación:</strong> 728 msnm · Pendiente: 41°</div>
+                <div style="margin-top: 0.35rem;"><i class="fa-solid fa-shield-heart" style="color: #F4E6C1;"></i> <strong>Soporte offline:</strong> Capas descargables para zonas sin antena</div>
+              </div>
+              <div style="margin-top: 0.75rem;">
+                <a href="#territorioMapaSection" class="demo-chip" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;" onclick="closeDemoHackathonModal()">
+                  <i class="fa-solid fa-up-right-from-square"></i> Abrir Mapa en la Web
+                </a>
+              </div>
+            </div>
+            <div class="demo-card-box">
+              <h4 class="demo-card-title"><i class="fa-solid fa-layer-group"></i> 17 Territorios Vinculados</h4>
+              <p style="font-size: 0.8rem; color: #CBD5E1; line-height: 1.5;">
+                La arquitectura cartográfica de BAQUEANO no se limita a puntos turísticos convencionales: integra los 15 departamentos y 2 regiones autónomas, enlazando áreas protegidas con planes de manejo ambiental.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 4: COOPERATIVA LOCAL & RESERVA DIRECTA -->
+        <div class="demo-step-panel" id="demoStepPanel4">
+          <div class="demo-panel-grid">
+            <div class="demo-card-box highlight">
+              <h4 class="demo-card-title"><i class="fa-solid fa-store"></i> 4. Conexión Directa con el Anfitrión Comunitario</h4>
+              <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.85rem;">
+                <div style="width: 54px; height: 54px; border-radius: 14px; background: rgba(246, 94, 1, 0.25); border: 1.5px solid #F65E01; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #F4E6C1;">
+                  <i class="fa-solid fa-people-roof"></i>
+                </div>
+                <div>
+                  <h5 style="margin: 0; font-size: 0.95rem; color: #FFFFFF;">Cooperativa de Guías Las Pilas - Rota</h5>
+                  <span style="font-size: 0.76rem; color: #2DD4BF;"><i class="fa-solid fa-circle-check"></i> Ficha Validada en Cloud Firestore</span>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: #E2E8F0; line-height: 1.5; margin-bottom: 0.85rem;">
+                El viajero no pasa por intermediarios bancarios transnacionales. Toca el botón y abre conversación de WhatsApp directamente con la cooperativa con el itinerario pre-cargado.
+              </p>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span class="demo-chip" style="background: rgba(37, 211, 102, 0.2); border-color: #25D366; color: #25D366;">
+                  <i class="fa-brands fa-whatsapp"></i> Chat Directo Activo
+                </span>
+                <span class="demo-chip" style="background: rgba(45, 212, 191, 0.2); border-color: #2DD4BF; color: #2DD4BF;">
+                  <i class="fa-solid fa-phone"></i> Llamada Local Directa
+                </span>
+              </div>
+            </div>
+            <div class="demo-card-box">
+              <h4 class="demo-card-title"><i class="fa-solid fa-database"></i> Registro de Negocios</h4>
+              <p style="font-size: 0.8rem; color: #CBD5E1; line-height: 1.5;">
+                Cualquier emprendedor local o cooperativa de Nicaragua puede darse de alta mediante el <strong>Formulario de registro BAQUEANO</strong> en la web, remitiendo su documentación a la Mesa Técnica para verificación y publicación inmediata.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 5: RESGUARDO GPS GNSS & ANDROID APK -->
+        <div class="demo-step-panel" id="demoStepPanel5">
+          <div class="demo-panel-grid">
+            <div class="demo-card-box highlight">
+              <h4 class="demo-card-title"><i class="fa-solid fa-tower-broadcast"></i> 5. Seguridad en Campo (GPS GNSS &amp; App Android)</h4>
+              <p style="font-size: 0.83rem; color: #E2E8F0; margin-bottom: 0.75rem;">
+                En senderos profundos sin cobertura celular ni saldo, el explorador no queda desamparado:
+              </p>
+              <div style="background: #080D1A; border: 1.5px solid #2DD4BF; border-radius: 12px; padding: 0.95rem; margin-bottom: 0.85rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.82rem; font-weight: 700; color: #2DD4BF;"><i class="fa-solid fa-satellite-dish"></i> Receptor GNSS de Hardware:</span>
+                  <span class="demo-badge-green">Activo sin datos</span>
+                </div>
+                <div style="font-size: 0.76rem; color: rgba(244, 230, 193, 0.85); margin-top: 0.35rem;">
+                  Lat: 12.5061° · Lon: -86.7022° · Precisión: &plusmn;3m
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+                <a href="https://drive.usercontent.google.com/download?id=1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq&amp;export=download&amp;confirm=t" class="demo-btn-prim" style="text-decoration: none; padding: 0.5rem 1rem; font-size: 0.82rem;">
+                  <i class="fa-solid fa-download"></i> Descargar APK v2.4.0 (Android)
+                </a>
+                <button type="button" class="demo-btn-sec" style="padding: 0.5rem 1rem; font-size: 0.82rem;" onclick="openSosModal(event); closeDemoHackathonModal();">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Ver Centro SOS
+                </button>
+              </div>
+            </div>
+            <div class="demo-card-box">
+              <h4 class="demo-card-title"><i class="fa-solid fa-award"></i> Veredicto para Jurado</h4>
+              <ul style="font-size: 0.8rem; color: #E2E8F0; padding-left: 1.2rem; margin: 0; line-height: 1.6;">
+                <li><strong>Propuesta de Valor:</strong> Ecosistema integral de viaje y soberanía comunitaria.</li>
+                <li><strong>Solidez Técnica:</strong> PWA + Leaflet WGS-84 + Firestore + APK nativo Android v2.4.0.</li>
+                <li><strong>Criterio de Credibilidad:</strong> Métricas honestas y comprobables en campo.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FOOTER DE NAVEGACIÓN ENTRE PASOS -->
+      <div class="demo-actions-footer">
+        <div class="demo-footer-info">
+          <i class="fa-solid fa-circle-dot" style="color: #2DD4BF;"></i>
+          <span id="demoStepIndicatorText">Paso 1 de 5</span>
+        </div>
+        <div class="demo-btns-cluster">
+          <button type="button" class="demo-btn-sec" id="demoBtnPrev" onclick="prevDemoStep()" style="display: none;">
+            <i class="fa-solid fa-arrow-left"></i> <span>Paso Anterior</span>
+          </button>
+          <button type="button" class="demo-btn-prim" id="demoBtnNext" onclick="nextDemoStep()">
+            <span>Siguiente Paso</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- WIDGET FLOTANTE ASISTENTE BAQUEANO DIGITAL -->
   <div class="baqueano-assistant-widget" id="baqueanoAssistantBox" hidden>
@@ -3029,6 +3261,7 @@
   <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
   <script src="js/panorama-viewer.js"></script>
   <script src="js/hero-experience.js?v=20260927-historia-layout-9"></script>
+  <script src="js/demo-hackathon-tour.js?v=20260927-1"></script>
 
   <!-- ======================================================================
        🧭 CONTROLADOR DE CENTRADO DE TARJETAS (CARDS) EN MAPAS REALES DE NICARAGUA

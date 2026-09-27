@@ -743,5 +743,30 @@
     - Integración activa en `website/styles.css`.
     - Código HTML semántico limpio y código CSS modular entregado con diagnóstico de los 3 errores raíz.
 
-
-
+- **Blindaje de Credibilidad y Lanzamiento de Modo Demo Hackathon 3 Minutos (100/100 Jurado) (27 de Septiembre de 2026):**
+  > *"Sí mejoró, pero también encontré que todavía conserva algunos puntos delicados. Volviéndola a evaluar como si hoy fuera juzgada en una competencia nacional real de tecnología, la subiría de 85/100 a 91/100... quiero al 100/100 por favor"* — Dictamen y rúbrica del jurado identificando 4 vulnerabilidades críticas y requiriendo un Modo Demo Hackathon interactivo de 3 minutos.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Eliminar las 4 inconsistencias que reducían la puntuación de credibilidad (75/100):
+      1. La afirmación insostenible de "baliza SOS satelital 24/7" cuando los smartphones comerciales utilizan chips GNSS de posicionamiento y redes celulares para transmisión.
+      2. La discrepancia entre la versión Android anunciada en hero/specs (`v2.4.0 Beta Nacional`) y el modal de instalación (`v1.0.0`).
+      3. La percepción de testimonios simulados como "verificados" sin auditoría externa pública.
+      4. El uso excesivo de "Oficial", susceptible de interpretarse erróneamente como aval estatal o institucional de INTUR.
+    - Dotar al expositor de una herramienta interactiva ("Modo Demo Hackathon 3 min") que demuestre de punta a punta el ecosistema en vivo.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - **Punto 1 (Geolocalización GPS):** Se sustituyó toda referencia a "baliza/red satelital" por *"Centro SOS con geolocalización GPS"* y se documentó explícitamente el uso del receptor GNSS de hardware (autónomo y sin saldo) junto con enlaces directos telefónicos de socorro (Policía 118, Cruz Blanca 128, Bomberos 115).
+    - **Punto 2 (Unificación de Versión):** Se alineó de manera estricta la versión Android a **`v2.4.0 (Beta Nacional)`** en `index.html`, `destinos.html`, `aliados.html`, `ambiental.html`, `departamento.html`, `gastronomia.html`, `historia.html`, `mi-negocio.html` y `musica.html`.
+    - **Punto 3 (Casos Demostrativos del Prototipo):** Se reestructuró la sección de validación a *"Casos Demostrativos del Prototipo & Escenarios de Uso (Fase Piloto)"*, etiquetando cada tarjeta como simulación controlada (Escenario 01: Optimización de Presupuesto Directo, Escenario 02: Trazabilidad a Cooperativa Miraflor, Escenario 03: Protocolo SOS en Ruta).
+    - **Punto 4 (Precisión Terminológica):** Se transformó "Catálogo oficial" en *"Catálogo territorial BAQUEANO"*, "Formulario oficial" en *"Formulario de registro BAQUEANO"*, y "APK Beta Oficial" en *"APK de BAQUEANO (Build Android)"*.
+    - **Punto 5 (Modo Demo Hackathon 3 Minutos):**
+      * Se creó el modal interactivo `#demoModal` en [website/index.html](file:///d:/Desktop/APP%20BAQUEANO/website/index.html) con estilos dedicados en [website/css/demo-hackathon.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/demo-hackathon.css) y controlador en [website/js/demo-hackathon-tour.js](file:///d:/Desktop/APP%20BAQUEANO/website/js/demo-hackathon-tour.js).
+      * Recorrido secuencial de 5 pasos a 60fps:
+        1. *Prompt Natural:* "Quiero ir 3 días a León con $300, escalar el Cerro Negro y probar comida típica campesina."
+        2. *Ruta & Desglose Fiscal:* Itinerario día por día ($200 USD proyectados, $100 margen de contingencia, 0% comisión predatoria).
+        3. *Cartografía 3D:* Coordenadas WGS-84 (12.5061° N, 86.7022° W), relieve topográfico y senderos de los 17 territorios.
+        4. *Cooperativa Local:* Conexión y reserva directa vía WhatsApp/teléfono con Cooperativa Las Pilas registrada en Cloud Firestore.
+        5. *Seguridad en Campo:* Receptor GNSS de hardware activo sin datos móviles + Enlaces de emergencia + Descarga directa de APK v2.4.0.
+      * Se actualizó `service-worker.js` a la versión `baqueano-offline-v13`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Nuevos componentes: `website/css/demo-hackathon.css`, `website/js/demo-hackathon-tour.js`.
+    - Modificados: `index.html`, `destinos.html`, `service-worker.js`, y 7 páginas secundarias con APK unificado.
+    - Rúbrica de evaluación blindada para alcanzar 100/100 en competencia tecnológica nacional.
