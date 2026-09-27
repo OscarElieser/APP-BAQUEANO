@@ -612,3 +612,20 @@
       * `titleFontSize`: **`32.8px`** (Imponente, enérgico y legible).
       * `carouselBottom`: **`587px`** (Totalmente contenido dentro de los 599px/621px del viewport, sin cortes).
       * Capturas registradas: `hero_initial_state_1790493837663.png`, `hero_ometepe_selected_1790493856900.png` y `hero_somoto_selected_1790493878492.png`.
+
+- **Ampliación Responsiva del Hero y Recuperación Robusta del Video (27 de Septiembre de 2026):**
+  > *"hacerlo mas grande pero que no pierda lo que llevamos y tambien que paso con el video corregirlo haz tu magia"* — solicitud acompañada de captura a 1024 × 600 con el contenido reducido y el fondo audiovisual sin renderizar.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Recuperar una jerarquía visual grande y protagonista sin eliminar ni reordenar el titular, texto, acciones, redes, carrusel, controles o identidad ya aprobados.
+    - Corregir la pantalla vacía provocada por usar archivos de 51 MB a 115 MB como fuentes iniciales e interactivas, carga excesiva que retrasaba o impedía la decodificación en equipos y conexiones reales.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se incrementó la escala fluida del titular hasta `clamp(2.75rem, 4.35vw, 4.35rem)`, y en laptops compactas a `clamp(2.55rem, 7vh, 3rem)`; también crecieron subtítulo, botones, redes y tarjetas.
+    - El carrusel pasó a un máximo de 660px y sus tarjetas compactas a 124 × 148px, preservando el ajuste completo dentro del viewport.
+    - Las fuentes audiovisuales del hero se cambiaron a las versiones MP4 optimizadas para web: `video nicaragua.mp4`, `destinos.mp4`, `video.mp4` e `historia.mp4`, manteniendo cero imágenes estáticas.
+    - El cambio de clip ahora es transaccional: conserva visibilidad, espera `canplay`, reintenta reproducción y restaura automáticamente el video anterior si ocurre un error o una espera mayor de ocho segundos.
+    - Se renovó el versionado de CSS y JavaScript para invalidar caché antigua del navegador.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos actualizados: `website/index.html`, `website/css/hero-editorial.css`, `website/js/video-registry.js` y `website/js/hero-experience.js`.
+    - `node --check` limpio para ambos controladores JavaScript.
+    - Verificación real en Microsoft Edge a 1024 × 600: video visible, titular ampliado, contenido completo y carrusel sin corte.
+    - Captura de control: `.snapshots/hero-expanded-video.png`.

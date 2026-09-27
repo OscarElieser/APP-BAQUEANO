@@ -25,7 +25,7 @@
   const VIDEO_CATALOG = Object.freeze({
     indexHero: Object.freeze({
       label: 'Hero principal de Nicaragua',
-      src: 'assets/videos/video%20nicaragua%20(1).mp4',
+      src: 'assets/videos/video%20nicaragua.mp4',
       poster: '',
       title: 'Paisajes aéreos y territorio vivo de Nicaragua'
     }),

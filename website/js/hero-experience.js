@@ -35,6 +35,57 @@
     const soundBtn = document.getElementById('heroVideoSoundToggle');
     const playBtn = document.getElementById('heroVideoPlayToggle');
     const cards = Array.from(heroSection.querySelectorAll('.hero-destination-card'));
+    let videoSwitchToken = 0;
+
+    const playVideo = () => {
+      if (!bgVideo) return;
+      const playPromise = bgVideo.play();
+      if (playPromise !== undefined) playPromise.catch(() => {});
+    };
+
+    // Mantiene el fotograma actual hasta que la nueva fuente pueda reproducirse.
+    // Si la carga falla o excede ocho segundos, restaura el clip anterior.
+    const switchHeroVideo = (targetVideo) => {
+      if (!bgVideo || !targetVideo || bgVideo.getAttribute('src') === targetVideo) {
+        playVideo();
+        return;
+      }
+
+      const token = ++videoSwitchToken;
+      const previousSrc = bgVideo.getAttribute('src') || 'assets/videos/video%20nicaragua.mp4';
+      let settled = false;
+      let failureTimer = 0;
+
+      const cleanup = () => {
+        window.clearTimeout(failureTimer);
+        bgVideo.removeEventListener('canplay', handleReady);
+        bgVideo.removeEventListener('error', handleFailure);
+      };
+      const handleReady = () => {
+        if (settled || token !== videoSwitchToken) return;
+        settled = true;
+        cleanup();
+        bgVideo.style.opacity = '1';
+        playVideo();
+      };
+      const handleFailure = () => {
+        if (settled || token !== videoSwitchToken) return;
+        settled = true;
+        cleanup();
+        bgVideo.src = previousSrc;
+        bgVideo.load();
+        bgVideo.style.opacity = '1';
+        playVideo();
+      };
+
+      bgVideo.addEventListener('canplay', handleReady);
+      bgVideo.addEventListener('error', handleFailure);
+      bgVideo.style.opacity = '0.72';
+      bgVideo.src = targetVideo;
+      bgVideo.load();
+      playVideo();
+      failureTimer = window.setTimeout(handleFailure, 8000);
+    };
 
     // --- 0. Preservar Título Editorial en 3 Líneas y Acento Naranja Oficial ---
     const heroTitle = heroSection.querySelector('.hero-editorial-title');
@@ -94,22 +145,7 @@
         card.classList.add('is-active');
 
         const targetVideo = card.getAttribute('data-dest-video');
-        if (bgVideo && targetVideo) {
-          const currentSrc = bgVideo.getAttribute('src');
-          if (currentSrc !== targetVideo) {
-            bgVideo.style.opacity = '0.4';
-            bgVideo.style.transition = 'opacity 0.2s ease';
-
-            setTimeout(() => {
-              bgVideo.src = targetVideo;
-              const playPromise = bgVideo.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(() => {});
-              }
-              bgVideo.style.opacity = '1';
-            }, 180);
-          }
-        }
+        switchHeroVideo(targetVideo);
 
         // En caso de doble toque o clic directo sobre el texto, ir al destino
         if (e.detail > 1) {
