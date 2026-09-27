@@ -33,7 +33,14 @@
       "**/*.com",
       "**/*.dll",
       "**/*.bin",
-      "**/*.mp4",
+      "assets/videos/video 2.mp4",
+      "assets/videos/video 2 (1).mp4",
+      "assets/videos/video nicaragua (1).mp4",
+      "assets/videos/destinos (1).mp4",
+      "assets/videos/gastronomia (1).mp4",
+      "assets/videos/historia (1).mp4",
+      "assets/videos/video (1).mp4",
+      "assets/videos/[[]preview[]]destinos.mp4",
       "**/*.crdownload"
     ],
     "redirects": [

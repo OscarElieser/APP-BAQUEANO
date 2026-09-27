@@ -627,5 +627,70 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Archivos actualizados: `website/index.html`, `website/css/hero-editorial.css`, `website/js/video-registry.js` y `website/js/hero-experience.js`.
     - `node --check` limpio para ambos controladores JavaScript.
+
+- **Portada Principal Alineada con la Composición Cinematográfica de Historia (27 de Septiembre de 2026):**
+  > *"quiero que vea https://app-baqueano.web.app/historia.html asi tiene que quedar pero a lo que tenemos https://app-baqueano.web.app/index.html"* — referencia explícita del módulo Historia para reconstruir la jerarquía de Inicio conservando su contenido.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Igualar la presencia visual de Inicio con `historia.html`: escenario audiovisual completo, relato centrado, insignia superior y titular monumental sin espacios muertos laterales.
+    - Mantener todo lo aprobado en Inicio —mensaje, acento naranja, botones, redes, video único y galería automática— sin permitir que el carrusel comprima la identidad principal.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se centró `.hero-editorial-content` en un lienzo máximo de 1080px y se escaló el titular mediante `clamp(3rem, 6vw, 5.6rem)` con interlineado compacto y sombra profunda equivalente a Historia.
+    - La ceja territorial se transformó en una insignia glassmorphism redondeada, con borde fuego y contraste de alta legibilidad.
+    - Se sustituyó la máscara lateral por un gradiente radial central que permite contemplar el video de borde a borde y sostiene el texto sobre cualquier fotograma.
+    - Acciones, subtítulo y redes se centraron con proporciones equivalentes al hero de referencia.
+    - La galería infinita se desacopló visualmente del primer viewport mediante posicionamiento posterior al hero y una reserva vertical responsiva; conserva sus cinco destinos, controles y movimiento continuo.
+    - Se añadieron adaptaciones específicas para escritorio, tablet y móvil sin modificar directorios ajenos a la plataforma autorizada.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos actualizados: `website/index.html` y `website/css/hero-editorial.css`.
+    - Validación visual local a 1366 × 768 comparada con la captura en vivo de Historia.
+    - Capturas de referencia y resultado: `.snapshots/historia-reference-live.png`, `.snapshots/index-history-layout.png` y `.snapshots/index-history-layout-live.png`.
+    - Publicación exitosa en Firebase Hosting y comprobación visual directa de `https://app-baqueano.web.app/index.html` con video visible y versión `historia-layout-9` activa.
+
+- **Presentación Oficial Sin Interferencias del Asistente (27 de Septiembre de 2026):**
+  > *"que no se presente en esa seccion recuerda que es presetancion oficial de baqueano"* — captura señalando a Baqüi y su sugerencia sobre el hero institucional.
+  - 🎯 **POR QUÉ (Why / Propósito):** Preservar la portada como declaración oficial limpia, sin mascota, mensajes, botones conversacionales ni elementos flotantes superpuestos al video y al titular.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):** Se enlazó la visibilidad del asistente al estado existente `body.hero-active`; mientras el hero esté visible, tanto `.bq-assistant` como el widget heredado quedan fuera del renderizado y sin interacción. La protección adicional `body:not(.scrolled)` evita cualquier destello durante la carga inicial.
+  - 📦 **QUÉ (What / Entregables & Validaciones):** `website/css/hero-editorial.css` actualizado y versión de estilo `clean-hero-10` aplicada en `website/index.html`. Baqüi permanece disponible después de abandonar la presentación principal.
+
+- **Claridad y Luminosidad del Video Principal (27 de Septiembre de 2026):**
+  > *"no puede hacer que el video se vea mas claro mas visible siento que se mira como opaco"*.
+  - 🎯 **POR QUÉ (Why / Propósito):** Recuperar detalle, color y profundidad en el paisaje del hero sin debilitar la legibilidad de la presentación oficial.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):** La máscara central pasó de una oscuridad acumulada notable a transparencia total en el foco, 10% en la zona media y un máximo de 42% en los bordes; el velo inferior se redujo a 34%. Se aplicó una calibración moderada de `brightness(1.12)`, `saturate(1.1)` y `contrast(1.03)` al video.
+  - 📦 **QUÉ (What / Entregables & Validaciones):** `website/css/hero-editorial.css` y la versión `bright-video-11` de `website/index.html`, preservando sombras tipográficas para que el texto continúe siendo legible.
     - Verificación real en Microsoft Edge a 1024 × 600: video visible, titular ampliado, contenido completo y carrusel sin corte.
     - Captura de control: `.snapshots/hero-expanded-video.png`.
+
+- **Portada Viva: Carrusel Automático y Video Publicado en Producción (27 de Septiembre de 2026):**
+  > *"que sea con movimiento automatico y ademas se ve igual recuerda que esta es la cara principal de baqueano"* — nueva captura del sitio productivo mostrando el fondo vacío y tarjetas todavía pequeñas.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Convertir el hero en una portada viva y representativa de Baqueano, con escala visual protagonista y narrativa territorial en movimiento sin exigir interacción manual.
+    - Resolver el origen real del fondo vacío en producción: Firebase Hosting excluía todos los archivos `.mp4`, por lo que cada solicitud audiovisual devolvía `404 Not Found`.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se amplió el carrusel a 780px y las tarjetas a una escala fluida de 148–174px de ancho por 176–204px de alto.
+    - Se incorporó rotación automática cada seis segundos; cada avance centra suavemente la tarjeta, actualiza el estado activo y cambia el video de fondo correspondiente.
+    - La rotación se pausa durante hover, foco o interacción táctil y continúa al terminar; también respeta la visibilidad de la pestaña para evitar trabajo innecesario.
+    - `firebase.json` ahora excluye únicamente los másteres pesados y permite publicar las versiones web efectivamente utilizadas.
+    - Se actualizaron las versiones de CSS y JavaScript a `editorial-7` para invalidar caché anterior.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos actualizados: `firebase.json`, `website/index.html`, `website/css/hero-editorial.css` y `website/js/hero-experience.js`.
+    - Publicación exitosa en Firebase Hosting: `https://app-baqueano.web.app`.
+    - Video productivo verificado con respuesta `HTTP 200`, `Content-Type: video/mp4`, soporte de rangos y 44,368,248 bytes disponibles.
+    - Verificación visual productiva a 1024 × 600 tras 7.5 segundos: fondo en movimiento, segunda tarjeta activa automáticamente, tarjetas ampliadas y composición completa.
+    - Capturas: `.snapshots/hero-auto-motion.png` y `.snapshots/hero-live-auto-motion.png`.
+
+- **Video Único y Galería Fotográfica Infinita de Gran Formato (27 de Septiembre de 2026):**
+  > *"hacerlo mas grande y mas llamativos y siento que reproduce todos los videos solo quiero que se reproduzca uno nada mas y el giro de movimiento de la galeria de foto sigue estatica"* — ajuste final solicitado para la cara principal de Baqueano.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Eliminar la sensación de múltiples videos compitiendo entre sí y otorgar estabilidad narrativa a la portada mediante un solo paisaje audiovisual.
+    - Hacer evidente el movimiento de las fotografías y aumentar su escala, contraste y presencia visual.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se eliminaron todos los enlaces de video de las tarjetas; el hero fija exclusivamente `video nicaragua.mp4` con reproducción continua en bucle.
+    - La galería duplica internamente las cinco tarjetas como copias inaccesibles para lectores de pantalla y avanza mediante `requestAnimationFrame` a 55 píxeles por segundo.
+    - El ciclo se reinicia con la distancia geométrica exacta entre el primer original y la primera copia, produciendo una cinta infinita sin salto visible.
+    - Se mantiene navegación manual en ambos sentidos y doble clic para abrir cada destino, sin detener la marcha automática.
+    - El registro audiovisual pausa cualquier otro reproductor antes de iniciar uno visible, garantizando una sola reproducción simultánea en toda la página.
+    - Las tarjetas crecieron a 174–206px por 208–238px, el carrusel a 960px y los controles a 44px; se añadieron bordes luminosos, sombras profundas y una línea cromática oficial.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos actualizados: `website/index.html`, `website/css/hero-editorial.css`, `website/js/hero-experience.js` y `website/js/video-registry.js`.
+    - Cero atributos `data-dest-video`, cero lógica de intercambio de clips y una sola fuente audiovisual dentro del controlador del hero.
+    - `node --check` limpio para ambos controladores JavaScript.

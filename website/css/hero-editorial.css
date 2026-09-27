@@ -264,7 +264,7 @@
 /* 5. Carrusel de Tarjetas de Destinos (Fiel al pie izquierdo de la referencia) */
 .hero-destinations-carousel-wrap {
   position: relative !important;
-  max-width: 660px !important;
+  max-width: 960px !important;
   width: 100% !important;
   margin-top: auto !important;
 }
@@ -277,9 +277,9 @@
 }
 
 .hero-carousel-nav-btn {
-  width: 34px !important;
-  height: 34px !important;
-  flex: 0 0 34px !important;
+  width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
   border-radius: 50% !important;
   border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
   background: rgba(6, 16, 24, 0.65) !important;
@@ -308,9 +308,9 @@
   align-items: center !important;
   gap: 12px !important;
   overflow-x: auto !important;
-  scroll-behavior: smooth !important;
-  scroll-snap-type: x mandatory !important;
-  padding: 6px 3px !important;
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+  padding: 10px 5px 14px !important;
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
@@ -320,18 +320,18 @@
 }
 
 .hero-destination-card {
-  flex: 0 0 clamp(124px, 10.5vw, 152px) !important;
-  width: clamp(124px, 10.5vw, 152px) !important;
-  height: clamp(148px, 18vh, 182px) !important;
-  border-radius: 12px !important;
+  flex: 0 0 clamp(174px, 14vw, 206px) !important;
+  width: clamp(174px, 14vw, 206px) !important;
+  height: clamp(208px, 24vh, 238px) !important;
+  border-radius: 18px !important;
   overflow: hidden !important;
   position: relative !important;
   cursor: pointer !important;
-  scroll-snap-align: start !important;
-  border: 2px solid rgba(255, 255, 255, 0.25) !important;
+  scroll-snap-align: none !important;
+  border: 2px solid rgba(244, 230, 193, 0.52) !important;
   background: #07111C !important;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.58), 0 0 20px rgba(22, 93, 111, 0.2) !important;
   user-select: none !important;
 }
 
@@ -343,20 +343,31 @@
   transition: transform 0.5s ease !important;
 }
 
+.hero-destination-card::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  height: 4px !important;
+  z-index: 3 !important;
+  background: linear-gradient(90deg, #F65E01, #F4E6C1, #165D6F) !important;
+  box-shadow: 0 0 16px rgba(246, 94, 1, 0.72) !important;
+  pointer-events: none !important;
+}
+
 .hero-destination-card .hero-card-meta {
   position: absolute !important;
   inset: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-end !important;
-  padding: 8px 10px !important;
-  background: linear-gradient(180deg, transparent 40%, rgba(6, 16, 24, 0.94) 100%) !important;
+  padding: 14px !important;
+  background: linear-gradient(180deg, transparent 30%, rgba(6, 16, 24, 0.98) 100%) !important;
   pointer-events: none !important;
 }
 
 .hero-card-tag {
   font-family: 'Space Grotesk', sans-serif !important;
-  font-size: 0.62rem !important;
+  font-size: 0.7rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   color: #F4E6C1 !important;
@@ -366,7 +377,7 @@
 
 .hero-card-name {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 0.84rem !important;
+  font-size: 1rem !important;
   font-weight: 800 !important;
   color: #FFFFFF !important;
   line-height: 1.15 !important;
@@ -454,7 +465,7 @@
     font-size: 0.70rem !important;
   }
   .hero-editorial-title {
-    font-size: clamp(2.55rem, 7vh, 3rem) !important;
+    font-size: clamp(2.9rem, 7.8vh, 3.35rem) !important;
     line-height: 1.04 !important;
     margin-bottom: 6px !important;
   }
@@ -481,18 +492,18 @@
     font-size: 1rem !important;
   }
   .hero-destination-card {
-    height: 148px !important;
-    flex: 0 0 124px !important;
-    width: 124px !important;
+    height: 208px !important;
+    flex: 0 0 174px !important;
+    width: 174px !important;
   }
   .hero-card-meta {
     padding: 6px 8px !important;
   }
   .hero-card-name {
-    font-size: 0.84rem !important;
+    font-size: 0.96rem !important;
   }
   .hero-card-tag {
-    font-size: 0.58rem !important;
+    font-size: 0.66rem !important;
   }
 }
 
@@ -504,6 +515,17 @@ body:not(.scrolled) .baq-theme-float-btn {
   pointer-events: none !important;
   transform: translateY(24px) scale(0.85) !important;
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease !important;
+}
+
+/* La presentación oficial permanece libre de asistentes y mensajes flotantes. */
+body.hero-active .bq-assistant,
+body.hero-active .baqueano-assistant-widget,
+body:not(.scrolled) .bq-assistant,
+body:not(.scrolled) .baqueano-assistant-widget {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* Indicador de scroll de la propuesta */
@@ -564,5 +586,181 @@ body:not(.scrolled) .baq-theme-float-btn {
   }
   .hero-video-controls {
     display: none !important;
+  }
+}
+
+/* ============================================================================
+   PORTADA PRINCIPAL ALINEADA CON EL LENGUAJE CINEMATOGRÁFICO DE HISTORIA
+   ============================================================================
+   POR QUÉ: La página inicial debe comunicar la marca con la misma escala,
+   claridad y presencia emocional que el módulo Historia de Mi País.
+   CÓMO: Se centra el relato sobre el video a pantalla completa y la galería se
+   convierte en una franja independiente inmediatamente posterior al hero.
+   QUÉ: Reglas autoritativas para hero, contenido, insignia, título, acciones,
+   redes y cinta territorial sin alterar sus funciones existentes.
+   ============================================================================ */
+
+#heroNicaragua.hero-editorial-mode {
+  min-height: 100svh !important;
+  overflow: visible !important;
+  margin-bottom: clamp(246px, 31vh, 310px) !important;
+  isolation: isolate !important;
+}
+
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay {
+  background:
+    radial-gradient(circle at 50% 42%, transparent 0%, rgba(6, 16, 24, 0.10) 62%, rgba(6, 16, 24, 0.42) 100%),
+    linear-gradient(180deg, rgba(6, 16, 24, 0.06) 0%, transparent 48%, rgba(6, 16, 24, 0.34) 100%) !important;
+}
+
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media {
+  filter: brightness(1.12) saturate(1.1) contrast(1.03) !important;
+}
+
+#heroNicaragua.hero-editorial-mode .hero-editorial-container {
+  max-width: 1366px !important;
+  min-height: 100svh !important;
+  max-height: none !important;
+  padding: clamp(110px, 15vh, 150px) clamp(24px, 4vw, 56px) clamp(72px, 10vh, 104px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+#heroNicaragua.hero-editorial-mode .hero-editorial-content {
+  width: min(100%, 1080px) !important;
+  max-width: 1080px !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+#heroNicaragua .hero-editorial-eyebrow {
+  margin: 0 0 clamp(18px, 2.7vh, 28px) !important;
+  padding: 10px 20px !important;
+  border: 1px solid rgba(246, 94, 1, 0.48) !important;
+  border-radius: 999px !important;
+  background: rgba(15, 23, 42, 0.84) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.46), 0 0 20px rgba(246, 94, 1, 0.15) !important;
+  backdrop-filter: blur(16px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+}
+
+#heroNicaragua .hero-eyebrow-text {
+  font-size: clamp(0.72rem, 0.85vw, 0.88rem) !important;
+  letter-spacing: 0.11em !important;
+  text-align: center !important;
+}
+
+#heroNicaragua .hero-editorial-title {
+  font-size: clamp(3rem, 6vw, 5.6rem) !important;
+  line-height: 0.94 !important;
+  letter-spacing: -0.045em !important;
+  text-align: center !important;
+  text-wrap: balance !important;
+  margin: 0 0 clamp(18px, 2.5vh, 28px) !important;
+  text-shadow: 0 6px 9px rgba(0, 0, 0, 0.84), 0 20px 52px rgba(0, 0, 0, 0.5) !important;
+}
+
+#heroNicaragua .hero-editorial-subtitle {
+  max-width: 780px !important;
+  margin: 0 auto clamp(20px, 2.8vh, 30px) !important;
+  font-size: clamp(1rem, 1.35vw, 1.2rem) !important;
+  line-height: 1.62 !important;
+  text-align: center !important;
+  color: rgba(255, 255, 255, 0.94) !important;
+}
+
+#heroNicaragua .hero-editorial-actions,
+#heroNicaragua .hero-editorial-social {
+  justify-content: center !important;
+}
+
+#heroNicaragua .hero-editorial-actions {
+  margin-bottom: 18px !important;
+}
+
+#heroNicaragua .hero-btn-readmore,
+#heroNicaragua .hero-btn-ai-pill {
+  min-height: 48px !important;
+  padding: 12px 28px !important;
+}
+
+#heroNicaragua .hero-editorial-social {
+  margin: 0 !important;
+  gap: 20px !important;
+}
+
+#heroNicaragua .hero-editorial-social a {
+  font-size: 1.08rem !important;
+}
+
+#heroNicaragua .hero-destinations-carousel-wrap {
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  width: 100vw !important;
+  max-width: none !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+  padding: 24px clamp(18px, 3vw, 44px) 30px !important;
+  background: linear-gradient(180deg, #08111D 0%, #0F172A 100%) !important;
+  border-top: 1px solid rgba(244, 230, 193, 0.18) !important;
+  border-bottom: 1px solid rgba(22, 93, 111, 0.38) !important;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38) !important;
+  box-sizing: border-box !important;
+}
+
+#heroNicaragua .hero-destinations-carousel {
+  width: min(100%, 1280px) !important;
+  margin: 0 auto !important;
+}
+
+#heroNicaragua .hero-destination-card {
+  flex-basis: clamp(190px, 16vw, 230px) !important;
+  width: clamp(190px, 16vw, 230px) !important;
+  height: clamp(190px, 24vh, 230px) !important;
+}
+
+@media (max-width: 992px) {
+  #heroNicaragua.hero-editorial-mode {
+    margin-bottom: 242px !important;
+  }
+  #heroNicaragua.hero-editorial-mode .hero-editorial-container {
+    padding: 104px 22px 56px !important;
+  }
+  #heroNicaragua .hero-editorial-title {
+    font-size: clamp(2.7rem, 8.8vw, 4.5rem) !important;
+  }
+  #heroNicaragua .hero-destination-card {
+    flex-basis: 168px !important;
+    width: 168px !important;
+    height: 188px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #heroNicaragua.hero-editorial-mode {
+    margin-bottom: 214px !important;
+  }
+  #heroNicaragua.hero-editorial-mode .hero-editorial-container {
+    padding: 92px 18px 42px !important;
+  }
+  #heroNicaragua .hero-editorial-eyebrow {
+    padding: 8px 13px !important;
+  }
+  #heroNicaragua .hero-eyebrow-text {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.07em !important;
+  }
+  #heroNicaragua .hero-editorial-title {
+    font-size: clamp(2.45rem, 12vw, 3.35rem) !important;
+  }
+  #heroNicaragua .hero-editorial-actions {
+    width: min(100%, 360px) !important;
+  }
+  #heroNicaragua .hero-destination-card {
+    flex-basis: 148px !important;
+    width: 148px !important;
+    height: 164px !important;
   }
 }

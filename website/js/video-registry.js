@@ -135,6 +135,9 @@
           video.pause();
           return;
         }
+        document.querySelectorAll('video[data-baqueano-video-slot]').forEach((otherVideo) => {
+          if (otherVideo !== video) otherVideo.pause();
+        });
         video.play().catch(() => {});
       });
     }, { rootMargin: '160px 0px', threshold: 0.18 });
