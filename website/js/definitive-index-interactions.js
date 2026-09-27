@@ -292,9 +292,9 @@
     reelsRoot.addEventListener('touchend', () => { isUserInteracting = false; startTimer(); }, { passive: true });
   }
 
-  // 8. INTERACCIONES DE NICARAGUA VIVA (Música, Sabores, Relato con Robot Baqueano)
+  // 8. INTERACCIONES DE NICARAGUA VIVA (Música, Sabores, Relato con Baqüi el Guardabarranco)
   function initNicaraguaVivaInteractions() {
-    // 1. Reproducir Son Nica y hacer bailar al robot
+    // 1. Reproducir Son Nica y activar animación de Baqüi el Guardabarranco
     const btnPlaySon = document.getElementById('btnPlaySonNica');
     if (btnPlaySon) {
       btnPlaySon.addEventListener('click', () => {

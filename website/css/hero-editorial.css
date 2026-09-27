@@ -82,12 +82,14 @@
   width: 100% !important;
   max-width: 1440px !important;
   margin: 0 auto !important;
-  padding: clamp(80px, 11vh, 105px) clamp(24px, 4vw, 56px) 24px !important;
+  padding: max(74px, 8.5vh) clamp(24px, 4vw, 56px) max(10px, 1.8vh) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   min-height: 100vh !important;
   min-height: 100svh !important;
+  max-height: 100vh !important;
+  max-height: 100svh !important;
   box-sizing: border-box !important;
 }
 
@@ -104,15 +106,15 @@
 .hero-editorial-eyebrow {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 14px !important;
-  margin-bottom: 0.65rem !important;
+  gap: 12px !important;
+  margin-bottom: 0.35rem !important;
 }
 
 .hero-eyebrow-text {
   font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
-  font-size: clamp(0.74rem, 0.9vw, 0.88rem) !important;
+  font-size: clamp(0.68rem, 0.78vw, 0.82rem) !important;
   font-weight: 700 !important;
-  letter-spacing: 0.22em !important;
+  letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
   color: #FFFFFF !important;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75) !important;
@@ -120,7 +122,7 @@
 
 .hero-eyebrow-divider {
   display: inline-block !important;
-  width: clamp(40px, 5vw, 75px) !important;
+  width: clamp(32px, 4vw, 55px) !important;
   height: 2px !important;
   background: rgba(255, 255, 255, 0.85) !important;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
@@ -129,13 +131,13 @@
 /* Gran Título Editorial Asimétrico */
 .hero-editorial-title {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: clamp(2.3rem, 4.8vw, 4.4rem) !important;
+  font-size: clamp(1.85rem, min(3.8vw, 6vh), 3.2rem) !important;
   font-weight: 900 !important;
-  line-height: 1.04 !important;
+  line-height: 1.05 !important;
   letter-spacing: -0.02em !important;
   text-transform: uppercase !important;
   color: #FFFFFF !important;
-  margin: 0 0 0.85rem 0 !important;
+  margin: 0 0 0.45rem 0 !important;
   text-shadow: 0 4px 28px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.9) !important;
   text-align: left !important;
 }
@@ -151,12 +153,12 @@
 /* Párrafo Narrativo Limpio */
 .hero-editorial-subtitle {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem) !important;
+  font-size: clamp(0.8rem, 0.95vw, 0.95rem) !important;
   font-weight: 400 !important;
-  line-height: 1.6 !important;
+  line-height: 1.45 !important;
   color: rgba(255, 255, 255, 0.88) !important;
-  max-width: 52ch !important;
-  margin: 0 0 1.15rem 0 !important;
+  max-width: 50ch !important;
+  margin: 0 0 0.65rem 0 !important;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
   text-align: left !important;
 }
@@ -166,15 +168,15 @@
   display: flex !important;
   align-items: center !important;
   flex-wrap: wrap !important;
-  gap: 12px !important;
-  margin-bottom: 1rem !important;
+  gap: 10px !important;
+  margin-bottom: 0.55rem !important;
 }
 
 .hero-btn-readmore {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 11px 28px !important;
+  padding: 8px 22px !important;
   border-radius: 8px !important;
   border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
   background: rgba(255, 255, 255, 0.08) !important;
@@ -182,7 +184,7 @@
   -webkit-backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
   font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
-  font-size: 0.84rem !important;
+  font-size: 0.8rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
@@ -202,8 +204,8 @@
 .hero-btn-ai-pill {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  padding: 11px 22px !important;
+  gap: 7px !important;
+  padding: 8px 18px !important;
   border-radius: 8px !important;
   border: 1.5px solid rgba(244, 230, 193, 0.35) !important;
   background: rgba(22, 93, 111, 0.45) !important;
@@ -211,7 +213,7 @@
   -webkit-backdrop-filter: blur(12px) !important;
   color: #F4E6C1 !important;
   font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
-  font-size: 0.84rem !important;
+  font-size: 0.8rem !important;
   font-weight: 600 !important;
   text-decoration: none !important;
   transition: all 0.3s ease !important;
@@ -229,13 +231,13 @@
 .hero-editorial-social {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
-  margin-bottom: 0.5rem !important;
+  gap: 14px !important;
+  margin-bottom: 0.4rem !important;
 }
 
 .hero-editorial-social a {
   color: rgba(255, 255, 255, 0.75) !important;
-  font-size: 1.05rem !important;
+  font-size: 0.95rem !important;
   transition: all 0.25s ease !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -250,7 +252,7 @@
 
 /* 5. Carrusel de Tarjetas de Destinos (Fiel al pie izquierdo de la referencia) */
 .hero-destinations-carousel-wrap {
-  margin-top: 0.5rem !important;
+  margin-top: 0.25rem !important;
   position: relative !important;
   max-width: 540px !important;
   width: 100% !important;
@@ -259,21 +261,21 @@
 .hero-destinations-carousel {
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
   position: relative !important;
 }
 
 .hero-carousel-nav-btn {
-  width: 36px !important;
-  height: 36px !important;
-  flex: 0 0 36px !important;
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
   border-radius: 50% !important;
   border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
   background: rgba(6, 16, 24, 0.6) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
-  font-size: 0.85rem !important;
+  font-size: 0.75rem !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -293,7 +295,7 @@
 .hero-cards-scroller {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 10px !important;
   overflow-x: auto !important;
   scroll-behavior: smooth !important;
   scroll-snap-type: x mandatory !important;
@@ -307,10 +309,10 @@
 }
 
 .hero-destination-card {
-  flex: 0 0 128px !important;
-  width: 128px !important;
-  height: 160px !important;
-  border-radius: 12px !important;
+  flex: 0 0 clamp(98px, 8.5vw, 118px) !important;
+  width: clamp(98px, 8.5vw, 118px) !important;
+  height: clamp(108px, 17vh, 132px) !important;
+  border-radius: 10px !important;
   overflow: hidden !important;
   position: relative !important;
   cursor: pointer !important;
@@ -391,24 +393,24 @@
 /* 6. Controles HUD de Video Discretos (Esquina Inferior Derecha) */
 .hero-video-controls {
   position: absolute !important;
-  right: clamp(24px, 4vw, 56px) !important;
-  bottom: 28px !important;
+  right: clamp(20px, 3.5vw, 48px) !important;
+  bottom: max(16px, 2.5vh) !important;
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
   z-index: 5 !important;
 }
 
 .hero-video-toggle-btn {
-  width: 40px !important;
-  height: 40px !important;
+  width: 34px !important;
+  height: 34px !important;
   border-radius: 50% !important;
   border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
   background: rgba(6, 16, 24, 0.6) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
-  font-size: 0.9rem !important;
+  font-size: 0.82rem !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -426,6 +428,65 @@
 .hero-video-toggle-btn.is-unmuted {
   border-color: #F65E01 !important;
   color: #F65E01 !important;
+}
+
+/* Reglas Especiales para Viewports Compactos en Altura (Laptops 1366x768 / 1354x621) */
+@media (max-height: 780px) {
+  #heroNicaragua.hero-editorial-mode .hero-editorial-container {
+    padding-top: 88px !important;
+    padding-bottom: 12px !important;
+  }
+  .hero-editorial-eyebrow {
+    margin-bottom: 0.2rem !important;
+  }
+  .hero-eyebrow-text {
+    font-size: 0.65rem !important;
+  }
+  .hero-editorial-title {
+    font-size: clamp(1.55rem, 4vh, 1.95rem) !important;
+    line-height: 1.04 !important;
+    margin-bottom: 0.28rem !important;
+  }
+  .hero-editorial-subtitle {
+    font-size: 0.77rem !important;
+    line-height: 1.34 !important;
+    margin-bottom: 0.35rem !important;
+    max-width: 48ch !important;
+  }
+  .hero-editorial-actions {
+    margin-bottom: 0.32rem !important;
+    gap: 8px !important;
+  }
+  .hero-btn-readmore,
+  .hero-btn-ai-pill {
+    padding: 6px 16px !important;
+    font-size: 0.74rem !important;
+  }
+  .hero-editorial-social {
+    margin-bottom: 0.22rem !important;
+    gap: 12px !important;
+  }
+  .hero-editorial-social a {
+    font-size: 0.88rem !important;
+  }
+  .hero-destinations-carousel-wrap {
+    margin-top: 0.12rem !important;
+  }
+  .hero-destination-card {
+    height: 102px !important;
+    flex: 0 0 90px !important;
+    width: 90px !important;
+    border-radius: 8px !important;
+  }
+  .hero-card-meta {
+    padding: 5px 7px !important;
+  }
+  .hero-card-name {
+    font-size: 0.68rem !important;
+  }
+  .hero-card-tag {
+    font-size: 0.5rem !important;
+  }
 }
 
 /* 7. Ocultar baliza flotante de tema cuando se esté en el Hero para cero choques */

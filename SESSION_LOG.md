@@ -552,3 +552,39 @@
       * `textCenteredDiffFromBarCenter`: `0` px (centrado horizontal matemático perfecto).
       * `footerHeight`: **250px** (óptimo y dentro del rango requerido).
       * Captura registrada: `footer_screenshot_1790491868401.png`.
+
+- **Reafirmación de Identidad Soberana: Baqüi el Guardabarranco (27 de Septiembre de 2026):**
+  > *"no confunda identidad recuerda que estamos usando al guardabarranco"* — captura de la píldora final de despedida mostrando un robot genérico en lugar de la mascota oficial.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Proteger de forma irrestricta la identidad visual y cultural del proyecto: **Baqüi**, el **Guardabarranco** (ave nacional de Nicaragua), es el único guía virtual y emblema del ecosistema Baqueano.
+    - Erradicar cualquier residuo visual de robots o figuras genéricas foráneas que confundan la experiencia y el arraigo territorial del explorador.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - En `website/index.html` (sección final CTA previo al footer), se sustituyó `assets/images/assistant/robot-baqueano.png` por `assets/images/baqui.png` con `alt="Baqüi el Guardabarranco"`.
+    - En `website/css/nicaragua-branding.css`, se jerarquizó la clase `.final-bot-avatar` (`width: 32px; height: 32px; filter: drop-shadow(0 2px 6px rgba(22, 93, 111, 0.45));`) con micro-interacción hover sutil a 60fps.
+    - En `website/js/definitive-index-interactions.js`, se corrigieron los comentarios de interacción para referenciar a Baqüi el Guardabarranco.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos actualizados: `website/index.html`, `website/css/nicaragua-branding.css`, `website/js/definitive-index-interactions.js`.
+    - Verificación visual con `browser_subagent` en navegador real:
+      * Avatar activo: `assets/images/baqui.png` (cargado al 100%, `naturalWidth > 0`).
+      * Coherencia total con el asistente flotante inferior ("Hablar con Baqüi").
+      * Captura de pantalla de verificación registrada: `bot_hint_verification_1790492112898.png`.
+
+- **Calibración del Hero Editorial para Visibilidad Total Sin Cortes en Pantalla (27 de Septiembre de 2026):**
+  > *"quiero que sea ver completo sin corte si se tiene que ajustar hazlo"* — captura de pantalla mostrando el título superior cortado bajo la barra de navegación y las tarjetas de destinos cortadas en la base.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Resolver la discordancia de escala en pantallas de laptop y monitores compactos (como 1366x768 / 1354x621), donde el contenido vertical del Hero (navbar, ceja, titular en 3 líneas, párrafo, botones de acción, redes sociales y carrusel de tarjetas) superaba la altura visible, forzando cortes indeseados.
+    - Asegurar que el 100% de la experiencia inicial de expedición se aprecie de forma simultánea, armoniosa y sin scroll en cualquier pantalla de escritorio.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se recalibró `website/css/hero-editorial.css`:
+      * `padding-top: max(74px, 8.5vh)` y en `@media (max-height: 780px)` `padding-top: 88px !important;`, garantizando una holgura segura de +12px por debajo de la barra fija de navegación.
+      * Tipografía del gran titular en escala fluida `clamp(1.55rem, 4vh, 1.95rem)` para pantallas compactas, reduciendo su huella vertical de 203px a 113px con perfecta legibilidad.
+      * Párrafo descriptivo, botones de acción y fila de redes sociales condensados armónicamente.
+      * Tarjetas de destinos escaladas a `102px` de altura y `90px` de ancho con bordes estilizados (`border-radius: 8px`).
+    - Actualización del versionado de estilos en `website/index.html` a `css/hero-editorial.css?v=20260927-editorial-4`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Verificación técnica y visual con `browser_subagent` en viewport 1354x621:
+      * `eyebrowClearanceBelowNavbar`: `+12.0px` (totalmente visible y despejado bajo la barra).
+      * `titleClearanceBelowNavbar`: `+27.8px` (titular completo en 3 líneas 100% visible).
+      * `carouselClearanceAboveScreenBottom`: `+12.0px` (carrusel de tarjetas flotando con holgura sobre la base de la pantalla).
+      * `isEverythingInsideViewportWithoutCuts`: `true`.
+      * Captura registrada: `hero_full_viewport_1790492520317.png`.
