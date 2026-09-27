@@ -517,4 +517,19 @@
       * Ancho medido: `1354px`.
       * Captura de pantalla de verificación registrada: `footer_verified_280px_1790491061251.png`.
 
-
+- **Ajuste de Visibilidad Completa Sin Cortes en Pie Institucional (27 de Septiembre de 2026):**
+  > *"que se vea si pero que se vea completo sin corte"* — captura mostrando la línea de derechos parcialmente cortada horizontalmente por desborde y altura rígida.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Garantizar que el 100% de la información (cinta HUD, canales de contacto, enlaces legales y barra de derechos de autor con telemetría GPS) sea legible y visible de forma íntegra, sin cortes horizontales ni solapamientos, respetando estrictamente el rango de 250px a 310px.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se reemplazó el `overflow: hidden` por `overflow: visible !important;` y `height: auto !important;` con cotas `min-height: 250px !important; max-height: 310px !important;`.
+    - Se recalibró el espaciado vertical de `.site-footer-pro > .container` con `justify-content: center` y `gap: 0.25rem`, reduciendo márgenes en la tarjeta de contacto (tarjetas a 40px e iconos a 28px).
+    - Se otorgó un padding inferior de holgura (`padding-bottom: 0.75rem`) a la barra de derechos, asegurando un margen de seguridad de +42px por encima de la base del viewport.
+    - Se actualizó el versionado de estilos en `website/index.html` a `styles.css?v=20260927-compact-footer-2`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - `website/styles.css` y `website/index.html` sincronizados.
+    - Verificación en navegador real con `browser_subagent`:
+      * `footerHeight`: **250px** (dentro del rango estricto de 250px a 310px).
+      * `bottomBarBottomWithinFooter`: `true`.
+      * `distanceFromBottomBarToFooterBottom`: `42.09px` de margen inferior libre.
+      * Cero cortes o textos seccionados. Captura registrada: `footer_full_view_1790491485760.png`.
