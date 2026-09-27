@@ -710,3 +710,19 @@
     - Despliegue productivo en Firebase Hosting.
     - Comprobación visual y técnica automatizada en navegador con subagente confirmando eliminación de overlay y reproducción vívida del video a 100% nitidez.
 
+- **Reencuadre Vertical del Hero Video: Ocultamiento del Corte Superior y Centrado de Toma Central (27 de Septiembre de 2026):**
+  > *"podemos subir el video para arriba para no ver ese error lo que pasa que este video son 3 en uno en vertical pero lo que quiero es que se vea el del centro que se esta presentando"* — captura de pantalla enviada por el usuario señalando la franja/borde de corte visible en la parte superior bajo la barra de navegación.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - El archivo de video `video nicaragua.mp4` está compuesto por 3 tomas apiladas verticalmente. Con el encuadre por defecto (`center center`), en la parte superior asomaba la franja de corte del clip previo bajo la barra de navegación.
+    - Es mandatorio ocultar esa línea de corte y enfocar nítidamente la toma central del video (el *Cristo de la Misericordia*, el volcán *Masaya*, la *Catedral de León* y las *Isletas de Granada*).
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se calibró experimentalmente en vivo mediante el agente de navegación web:
+      * `object-position: center 60% !important;`: desplaza el foco vertical 10% hacia arriba, expulsando la línea de corte superior fuera del viewport y centrando el motivo principal tras el título editorial.
+      * `transform: scale(1.12) translate3d(0, 0, 0) !important;` y `transform-origin: center 60% !important;`: añade un zoom de seguridad del 12% que erradica cualquier sangrado de bordes en pantallas ultrapanorámicas y dispositivos móviles.
+    - Se aplicó sincrónicamente en `website/css/hero-editorial.css`, `website/css/pages/index.css`, `website/css/videos.css`, `website/css/nicaragua-branding.css` y en los estilos inline de `website/index.html`.
+    - Se actualizaron las firmas de caché a `v=20260927-center-framed-14`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Despliegue a Firebase Hosting (`firebase deploy --only hosting`).
+    - Verificación visual con capturas reales demostrando desaparición total de la franja y encuadre majestuoso de la toma central.
+
+

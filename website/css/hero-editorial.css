@@ -58,14 +58,15 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center center !important;
+  object-position: center 60% !important;
   z-index: 1 !important;
   pointer-events: none !important;
   opacity: 1 !important;
   filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;
   mix-blend-mode: normal !important;
   transition: opacity 0.3s ease !important;
-  transform: translate3d(0, 0, 0) !important;
+  transform: scale(1.12) translate3d(0, 0, 0) !important;
+  transform-origin: center 60% !important;
   will-change: transform, opacity !important;
 }
 
@@ -798,6 +799,9 @@ html[data-theme] .hero-nicaragua-bg-media,
 #heroNicaragua .hero-nicaragua-bg-media,
 .hero-nicaragua-bg-media {
   opacity: 1 !important;
+  object-position: center 60% !important;
+  transform: scale(1.12) translate3d(0, 0, 0) !important;
+  transform-origin: center 60% !important;
   filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;
   mix-blend-mode: normal !important;
 }

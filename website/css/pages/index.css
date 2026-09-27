@@ -3690,7 +3690,9 @@ html[data-section-colors-custom] .index-main-flow :is(
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 42%;
+  object-position: center 60% !important;
+  transform: scale(1.12) translate3d(0, 0, 0) !important;
+  transform-origin: center 60% !important;
   filter: saturate(1.08) contrast(1.04);
 }
 
@@ -4051,8 +4053,11 @@ html[data-section-colors-custom] .index-main-flow :is(
   .index-main-flow :is(.section-lead-header, .culture-head-box, .partners-infinity-header) { margin-bottom: 2rem; text-align: left; }
   .index-main-flow :is(.section-headline, .culture-title, .partners-infinity-title, .section-subtext, .culture-sub, .partners-infinity-sub) { margin-inline: 0; }
   .index-main-flow :is(.section-headline, .culture-title, .partners-infinity-title) { font-size: clamp(1.9rem, 9vw, 2.65rem) !important; }
-  #heroNicaragua { min-height: 760px; align-items: end; }
-  #heroNicaragua .hero-nicaragua-bg-media { object-position: 62% center; }
+  #heroNicaragua .hero-nicaragua-bg-media {
+    object-position: center 60% !important;
+    transform: scale(1.12) translate3d(0, 0, 0) !important;
+    transform-origin: center 60% !important;
+  }
   #heroNicaragua .hero-nicaragua-overlay {
     display: none !important;
     opacity: 0 !important;
