@@ -9,9 +9,18 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-public-v11';
+const CACHE_VERSION = 'baqueano-offline-v12';
 const OFFLINE_URL = '/offline.html';
-const PRECACHE_URLS = [OFFLINE_URL, '/index.html', '/destinos.html', '/assets/images/baqueano_launcher_solid.png', '/assets/images/logo.png'];
+const PRECACHE_URLS = [
+  OFFLINE_URL,
+  '/index.html',
+  '/destinos.html',
+  '/manifest.json',
+  '/styles.css',
+  '/css/mobile-first-core.css',
+  '/assets/images/baqueano_launcher_solid.png',
+  '/assets/images/logo.png'
+];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
 const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/'];
 function isPrivatePath(pathname) {
