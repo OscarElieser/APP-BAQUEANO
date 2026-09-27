@@ -335,29 +335,38 @@ function initMobileMenu() {
   const navMenu = document.getElementById('navLinksMenu');
 
   if (!toggleBtn || !navMenu) return;
+  if (navMenu.dataset.drawerInitialized === 'true') return;
+  navMenu.dataset.drawerInitialized = 'true';
 
   const compactNavigation = window.matchMedia('(max-width: 1699px)');
   const navInner = toggleBtn.closest('.nav-inner');
   const brand = navInner?.querySelector('.brand-box');
-  const drawerHeader = document.createElement('div');
-  const backdrop = document.createElement('button');
-  drawerHeader.className = 'nav-drawer-header';
-  drawerHeader.innerHTML = `
-    <span class="nav-drawer-identity">
-      <strong>BAQUEANO</strong>
-      <small>Explorá Nicaragua</small>
-    </span>
-    <button class="nav-drawer-close" type="button" aria-label="Cerrar menú de navegación">
-      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>`;
-  backdrop.className = 'nav-drawer-backdrop';
-  backdrop.type = 'button';
-  backdrop.tabIndex = -1;
-  backdrop.setAttribute('aria-label', 'Cerrar menú de navegación');
-  backdrop.setAttribute('aria-hidden', 'true');
-  if (navInner && brand) navInner.insertBefore(toggleBtn, brand);
-  navMenu.prepend(drawerHeader);
-  document.body.appendChild(backdrop);
+
+  let drawerHeader = navMenu.querySelector('.nav-drawer-header');
+  if (!drawerHeader) {
+    drawerHeader = document.createElement('div');
+    drawerHeader.className = 'nav-drawer-header';
+    drawerHeader.innerHTML = `
+      <span class="nav-drawer-identity">
+        <strong>BAQUEANO</strong>
+        <small>Explorá Nicaragua</small>
+      </span>
+      <button class="nav-drawer-close" type="button" aria-label="Cerrar menú de navegación">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>`;
+    navMenu.prepend(drawerHeader);
+  }
+
+  let backdrop = document.querySelector('.nav-drawer-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('button');
+    backdrop.className = 'nav-drawer-backdrop';
+    backdrop.type = 'button';
+    backdrop.tabIndex = -1;
+    backdrop.setAttribute('aria-label', 'Cerrar menú de navegación');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(backdrop);
+  }
 
   const closeBtn = drawerHeader.querySelector('.nav-drawer-close');
 
@@ -382,6 +391,7 @@ function initMobileMenu() {
   };
 
   toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     e.stopPropagation();
     toggleMenu();
   });
@@ -1245,6 +1255,25 @@ function initFooterBizRegister() {
 }
 
 // Auto-inicialización completa y defensiva para páginas directas.
+
+  // Delegación global infalible para el botón hamburguesa móvil
+  document.addEventListener('click', (e) => {
+    const burger = e.target.closest('#mobileNavToggle, .mobile-nav-toggle');
+    if (burger) {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = document.getElementById('navLinksMenu');
+      if (menu) {
+        const willOpen = !menu.classList.contains('mobile-open');
+        menu.classList.toggle('mobile-open', willOpen);
+        document.body.classList.toggle('nav-drawer-open', willOpen);
+        burger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        const bdrop = document.querySelector('.nav-drawer-backdrop');
+        if (bdrop) bdrop.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+      }
+    }
+  });
+
 function initializeNavigationModules() {
   initRuntimeObservability();
   initPublicServiceWorker();

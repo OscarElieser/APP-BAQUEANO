@@ -8408,8 +8408,7 @@ img {
     display: none;
   }
 
-  .main-navbar .nav-links-menu,
-  .main-navbar .nav-links-menu.mobile-open {
+  .main-navbar .nav-links-menu {
     position: relative;
     top: auto;
     left: auto;
@@ -9053,5 +9052,34 @@ img {
 @media (max-width: 680px) {
   .destinations-showcase-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* REGLAS AUTORITATIVAS DE NAVEGACIÓN Y SELECTOR DE TEMA */
+.main-navbar .mobile-nav-toggle,
+#mobileNavToggle {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 1002 !important;
+}
+
+.main-navbar .nav-theme-btn,
+#navThemeSwitcherBtn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 1002 !important;
+}
+
+@media (max-width: 1699px) {
+  .main-navbar #navLinksMenu.mobile-open,
+  .main-navbar .nav-links-menu.mobile-open {
+    display: flex !important;
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 2000 !important;
   }
 }

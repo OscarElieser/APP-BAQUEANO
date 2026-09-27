@@ -245,6 +245,38 @@
     }
   } catch (_) {}
 
+  
+  /**
+   * Sincroniza los controles del Color Studio con los valores en memoria
+   */
+  function syncColorControlsUI() {
+    const bgInput = document.getElementById('inputCustomBgColor');
+    const bgVal = document.getElementById('labelCustomBgVal');
+    const titleInput = document.getElementById('inputCustomTitleColor');
+    const titleVal = document.getElementById('labelCustomTitleVal');
+    const textInput = document.getElementById('inputCustomTextColor');
+    const textVal = document.getElementById('labelCustomTextVal');
+    const opacityInput = document.getElementById('inputCustomOpacity');
+    const opacityVal = document.getElementById('labelOpacityVal');
+
+    if (bgInput && activeCustomColors.bgColor) {
+      bgInput.value = activeCustomColors.bgColor;
+      if (bgVal) bgVal.textContent = activeCustomColors.bgColor;
+    }
+    if (titleInput && activeCustomColors.titleColor) {
+      titleInput.value = activeCustomColors.titleColor;
+      if (titleVal) titleVal.textContent = activeCustomColors.titleColor;
+    }
+    if (textInput && activeCustomColors.textColor) {
+      textInput.value = activeCustomColors.textColor;
+      if (textVal) textVal.textContent = activeCustomColors.textColor;
+    }
+    if (opacityInput && activeCustomColors.opacity !== undefined) {
+      opacityInput.value = activeCustomColors.opacity;
+      if (opacityVal) opacityVal.textContent = `${100 - activeCustomColors.opacity}% Nitidez`;
+    }
+  }
+
   function applyCustomSectionColors(colors, save = true) {
     activeCustomColors = { ...activeCustomColors, ...colors };
     const root = document.documentElement;
@@ -639,6 +671,77 @@
     });
 
     // Eventos de filtros
+    
+    // Eventos de Pestañas (Catálogo vs Color Studio)
+    const tabBtnCatalog = document.getElementById('tabBtnCatalog');
+    const tabBtnStudio = document.getElementById('tabBtnStudio');
+    const viewCatalog = document.getElementById('baqModalViewCatalog');
+    const viewStudio = document.getElementById('baqModalViewStudio');
+
+    if (tabBtnCatalog && tabBtnStudio && viewCatalog && viewStudio) {
+      tabBtnCatalog.addEventListener('click', () => {
+        tabBtnCatalog.classList.add('is-active');
+        tabBtnStudio.classList.remove('is-active');
+        viewCatalog.classList.add('is-active');
+        viewStudio.classList.remove('is-active');
+      });
+
+      tabBtnStudio.addEventListener('click', () => {
+        tabBtnStudio.classList.add('is-active');
+        tabBtnCatalog.classList.remove('is-active');
+        viewStudio.classList.add('is-active');
+        viewCatalog.classList.remove('is-active');
+        syncColorControlsUI();
+      });
+    }
+
+    // Controles de Color Studio en Vivo
+    const inputBg = document.getElementById('inputCustomBgColor');
+    if (inputBg) {
+      inputBg.addEventListener('input', (e) => {
+        applyCustomSectionColors({ bgColor: e.target.value });
+      });
+    }
+    document.querySelectorAll('#studioBgSwatches .studio-swatch-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const color = chip.dataset.color;
+        if (color) applyCustomSectionColors({ bgColor: color });
+      });
+    });
+
+    const inputTitle = document.getElementById('inputCustomTitleColor');
+    if (inputTitle) {
+      inputTitle.addEventListener('input', (e) => {
+        applyCustomSectionColors({ titleColor: e.target.value });
+      });
+    }
+    document.querySelectorAll('#studioTitleSwatches .studio-swatch-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const color = chip.dataset.color;
+        if (color) applyCustomSectionColors({ titleColor: color });
+      });
+    });
+
+    const inputText = document.getElementById('inputCustomTextColor');
+    if (inputText) {
+      inputText.addEventListener('input', (e) => {
+        applyCustomSectionColors({ textColor: e.target.value });
+      });
+    }
+    document.querySelectorAll('#studioTextSwatches .studio-swatch-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const color = chip.dataset.color;
+        if (color) applyCustomSectionColors({ textColor: color });
+      });
+    });
+
+    const inputOpacity = document.getElementById('inputCustomOpacity');
+    if (inputOpacity) {
+      inputOpacity.addEventListener('input', (e) => {
+        applyCustomSectionColors({ opacity: parseInt(e.target.value, 10) });
+      });
+    }
+
     const filters = document.getElementById('baqThemeFilters');
     filters.querySelectorAll('.baq-theme-filter-pill').forEach((pill) => {
       pill.addEventListener('click', () => {
@@ -793,6 +896,17 @@
   }
 
   // API global para integración externa
+  
+  // Delegación global infalible para el botón Tema
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('#navThemeSwitcherBtn, .nav-theme-btn, #baqFloatingThemeBtn, [data-open-theme-modal]');
+    if (trigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal();
+    }
+  });
+
   window.BaqueanoThemeManager = {
     applyTheme,
     openModal,
