@@ -479,4 +479,21 @@
     - Verificación con subagente en navegador real: botón flotante ausente en el 100% de la pantalla, apertura fluida del modal al pulsar el botón "Tema" del navbar y cierre impecable.
     - `node --check website/js/theme-switcher.js` limpio (código 0).
 
+- **Alineación Tipográfica Exacta de Portada y Acento Fuego (27 de Septiembre de 2026):**
+  > Captura de pantalla enviada por el usuario con la composición tipográfica exacta:
+  > - Eyebrow: `AVENTURA · CULTURA · NATURALEZA · GASTRONOMÍA · GENTE INCREÍBLE`
+  > - Titular en 3 líneas:
+  >   `NICARAGUA` (blanco)
+  >   `NO SE VISITA,` (blanco, con coma)
+  >   `SE DESCUBRE` (Naranja Terracota Fuego `#F65E01`, sin punto final)
+  > - Copia narrativa en voz nicaragüense: `Explorá sus destinos, viví su cultura, saboreá su gastronomía y conectá con experiencias auténticas que te transforman.`
+  - **Diagnóstico:** El script general de tipografía cinética (`app.js`) transformaba el contenido del encabezado dividiendo las palabras y eliminando etiquetas internas como `<br>` y `<span>`.
+  - **Solución implementada:**
+    1. Se añadió `data-no-kinetic="true"` al elemento `<h1>` en `website/index.html` y se blindó la regla de exclusión en `app.js` (`heading.classList.contains('hero-editorial-title')`).
+    2. Se garantizó la preservación estructural y cromática en `website/js/hero-experience.js`.
+    3. Se aplicó `-webkit-text-fill-color: #F65E01 !important;` y `color: #F65E01 !important;` con máxima especificidad en `website/css/hero-editorial.css`.
+  - **Validaciones:**
+    - Verificación visual con subagente en navegador real: renderizado perfecto en 3 líneas, "SE DESCUBRE" en tono naranja fuego oficial (#F65E01) y texto narrativo con voseo local auténtico.
+    - `node --check website/app.js` y `node --check website/js/hero-experience.js` limpios (código 0).
+
 

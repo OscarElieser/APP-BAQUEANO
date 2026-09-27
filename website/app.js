@@ -91,6 +91,7 @@ function initKineticHeadings() {
     if (
       heading.getAttribute('data-kinetic-ready') === 'true' ||
       heading.getAttribute('data-no-kinetic') === 'true' ||
+      heading.classList.contains('hero-editorial-title') ||
       heading.classList.contains('profile-name-title') ||
       heading.querySelector('#userHeaderName, #userHeaderRole')
     ) {

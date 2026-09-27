@@ -140,9 +140,12 @@
   text-align: left !important;
 }
 
+#heroNicaragua .hero-editorial-title .hero-editorial-title-accent,
 .hero-editorial-title-accent {
-  color: #FFFFFF !important;
+  color: #F65E01 !important;
+  -webkit-text-fill-color: #F65E01 !important;
   display: inline-block !important;
+  text-shadow: 0 4px 28px rgba(246, 94, 1, 0.4) !important;
 }
 
 /* Párrafo Narrativo Limpio */

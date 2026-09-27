@@ -33,8 +33,15 @@
     const prevBtn = document.getElementById('heroCarouselPrev');
     const nextBtn = document.getElementById('heroCarouselNext');
     const soundBtn = document.getElementById('heroVideoSoundToggle');
-    const playBtn = document.getElementById('heroVideoPlayToggle');
     const cards = Array.from(heroSection.querySelectorAll('.hero-destination-card'));
+
+    // --- 0. Preservar Título Editorial en 3 Líneas y Acento Naranja Oficial ---
+    const heroTitle = heroSection.querySelector('.hero-editorial-title');
+    if (heroTitle) {
+      heroTitle.setAttribute('data-no-kinetic', 'true');
+      heroTitle.setAttribute('data-kinetic-ready', 'true');
+      heroTitle.innerHTML = 'NICARAGUA<br>NO SE VISITA,<br><span class="hero-editorial-title-accent" style="color: #F65E01 !important; -webkit-text-fill-color: #F65E01 !important; display: inline-block;">SE DESCUBRE</span>';
+    }
 
     // --- 1. Control de Visibilidad del Botón Flotante de Tema en el Hero ---
     if ('IntersectionObserver' in window) {
