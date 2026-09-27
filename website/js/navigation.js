@@ -951,11 +951,7 @@ function normalizeInstitutionalFooter() {
 
       <div class="footer-bottom-bar">
         <div>© 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.</div>
-        <div class="footer-status-row">
-          <span class="footer-live-status"><span class="footer-live-dot" aria-hidden="true"></span>Telemetría GPS 24/7 Activa</span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite" aria-hidden="true"></i> Ops Center</a>
-        </div>
+        
       </div>
     </div>`;
 

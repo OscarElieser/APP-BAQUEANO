@@ -533,3 +533,22 @@
       * `bottomBarBottomWithinFooter`: `true`.
       * `distanceFromBottomBarToFooterBottom`: `42.09px` de margen inferior libre.
       * Cero cortes o textos seccionados. Captura registrada: `footer_full_view_1790491485760.png`.
+
+- **Supresión de Botones Inferiores y Centrado de Derechos Reservados (27 de Septiembre de 2026):**
+  > *"quitar los botones y poner el derechos reservado al centro"* — captura del pie indicando remover los botones de la barra inferior y centrar el texto de derechos reservados.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Eliminar la sobrecarga visual de botones e insignias en la franja inferior del pie (`.footer-status-row` / `.index-inline-044`), brindando un cierre minimalista, simétrico y perfectamente balanceado.
+    - Centrar con precisión matemática el texto institucional de derechos reservados (`© 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.`).
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se eliminó el bloque `.footer-status-row` de la plantilla canónica en `website/js/navigation.js` y de `website/index.html`.
+    - Se declaró `display: none !important; visibility: hidden !important; pointer-events: none !important;` de forma autoritativa en `website/styles.css` para `.footer-status-row` y `.index-inline-044`.
+    - Se aplicó `display: flex !important; justify-content: center !important; text-align: center !important; width: 100% !important;` en `.footer-bottom-bar` y su elemento de texto en `website/styles.css`.
+    - Se actualizó el versionado de estilos en `website/index.html` a `styles.css?v=20260927-compact-footer-3`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos sincronizados: `website/js/navigation.js`, `website/styles.css`, `website/index.html`.
+    - Verificación con subagente en navegador real:
+      * `isStatusRowPresentOrVisible`: `false`.
+      * `isInline044PresentOrVisible`: `false`.
+      * `textCenteredDiffFromBarCenter`: `0` px (centrado horizontal matemático perfecto).
+      * `footerHeight`: **250px** (óptimo y dentro del rango requerido).
+      * Captura registrada: `footer_screenshot_1790491868401.png`.
