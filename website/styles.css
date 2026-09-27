@@ -9608,3 +9608,213 @@ img {
     transition: opacity 0.2s ease, transform 0.22s ease, visibility 0.2s ease !important;
   }
 }
+
+/* ==========================================================================
+   🧭 PIE DE PÁGINA INSTITUCIONAL DE ALTA GAMA (DESKTOP COMPACTO: 250px - 310px)
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Reducir la huella vertical del pie institucional (.site-footer-pro) en
+     pantallas de escritorio al rango estricto entre 250px y 310px.
+   - Brindar un cierre visual panorámico, nítido y balanceado sin scroll excesivo,
+     preservando la accesibilidad táctica de telemetría GPS, canales de contacto y
+     enlaces regulatorios del ecoturismo soberano campesino de Nicaragua.
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Media query autoritativo para escritorio (min-width: 992px) con altura acotada
+     entre 250px y 310px (altura objetivo exacta: 280px).
+   - Centrado vertical simétrico con display flex en .site-footer-pro y contenedor.
+   - Optimización de escala espacial:
+     * Cinta HUD de telemetría compacta en píldora con micro-LED pulsante.
+     * Tarjeta de contacto con distribución horizontal de 3 nodos (correo, whatsapp, sede).
+     * Enlaces legales en una sola línea sutil con separadores terracota.
+     * Barra de derechos y telemetría en línea sin desbordes.
+   📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
+   - .site-footer-pro: Contenedor con altura delimitada [250px, 310px], padding reducido.
+   - .site-footer-pro > .container: Caja flex vertical ajustada.
+   - .footer-telemetry-hud: Altura compacta (~28px) y márgenes reducidos.
+   - .footer-columns-grid & .footer-col-contact: Altura optimizada (~80px).
+   - .footer-contact-item: Altura 44px con iconos escalados a 30px.
+   - .footer-legal-stack & .footer-bottom-bar: Tipografía y espaciado condensado.
+   ========================================================================== */
+@media (min-width: 992px) {
+  .site-footer-pro {
+    height: 280px !important;
+    min-height: 250px !important;
+    max-height: 310px !important;
+    padding: 0.65rem 0 0.5rem 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  .site-footer-pro > .container {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    padding-top: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Cinta HUD de Telemetría Superior */
+  .site-footer-pro .footer-telemetry-hud {
+    margin-bottom: 0.35rem !important;
+    padding: 0.25rem 0.85rem !important;
+    border-radius: 9999px !important;
+    gap: 0.5rem !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    background: rgba(15, 23, 42, 0.7) !important;
+    border: 1px solid rgba(22, 93, 111, 0.3) !important;
+  }
+
+  .site-footer-pro .hud-stat-item {
+    font-size: clamp(0.64rem, 0.72vw, 0.72rem) !important;
+    gap: 0.35rem !important;
+    white-space: nowrap !important;
+  }
+
+  .site-footer-pro .hud-beacon-led {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  /* Grid de Columnas y Tarjeta de Contacto */
+  .site-footer-pro .footer-columns-grid {
+    margin-bottom: 0.35rem !important;
+    gap: 0.4rem !important;
+  }
+
+  .site-footer-pro .footer-col-contact {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 0.45rem 1rem !important;
+    border-radius: 14px !important;
+    background: rgba(8, 14, 26, 0.16) !important;
+    border: 1px solid rgba(246, 94, 1, 0.2) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  .site-footer-pro .footer-col-contact::after {
+    top: -40px !important;
+    height: 100px !important;
+    opacity: 0.5 !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-col-header {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.14em !important;
+    margin: 0 auto 0.3rem !important;
+    padding: 0 1.2rem 0.2rem !important;
+    text-shadow: 0 0 16px rgba(246, 94, 1, 0.3) !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-contact-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.65rem !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-contact-item {
+    min-height: 44px !important;
+    height: 44px !important;
+    padding: 0.3rem 0.65rem !important;
+    gap: 0.55rem !important;
+    border-radius: 10px !important;
+    background: rgba(8, 14, 26, 0.22) !important;
+    border: 1px solid rgba(246, 94, 1, 0.16) !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-contact-item:hover {
+    transform: translateY(-2px) !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-contact-item > i {
+    width: 30px !important;
+    height: 30px !important;
+    flex: 0 0 30px !important;
+    font-size: 0.8rem !important;
+    border-radius: 8px !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-contact-item span:first-child {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.1 !important;
+  }
+
+  .site-footer-pro .footer-col-contact .footer-contact-item a,
+  .site-footer-pro .footer-col-contact .footer-contact-item div > span:last-child {
+    font-size: 0.74rem !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Pila de Enlaces Legales */
+  .site-footer-pro .footer-legal-stack {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.2rem !important;
+    padding: 0.15rem 0 !important;
+    gap: 0.45rem !important;
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .site-footer-pro .footer-legal-stack a {
+    font-size: 0.7rem !important;
+    color: var(--text-muted) !important;
+  }
+
+  .site-footer-pro .footer-legal-stack .separator {
+    color: rgba(246, 94, 1, 0.4) !important;
+    font-size: 0.68rem !important;
+  }
+
+  /* Barra de Copyright e Indicadores */
+  .site-footer-pro .footer-bottom-bar {
+    margin-top: 0.2rem !important;
+    padding-top: 0.25rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    font-size: 0.69rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .site-footer-pro .footer-bottom-bar > div:first-child {
+    font-size: 0.69rem !important;
+    color: var(--text-muted) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .site-footer-pro .footer-status-row,
+  .site-footer-pro .index-inline-044 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    flex-wrap: nowrap !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .site-footer-pro .footer-live-status,
+  .site-footer-pro .index-inline-045 {
+    padding: 0.15rem 0.5rem !important;
+    font-size: 0.68rem !important;
+  }
+
+  .site-footer-pro .footer-bottom-bar a {
+    padding: 0.18rem 0.55rem !important;
+    font-size: 0.68rem !important;
+    border-radius: 9999px !important;
+  }
+}

@@ -496,4 +496,25 @@
     - Verificación visual con subagente en navegador real: renderizado perfecto en 3 líneas, "SE DESCUBRE" en tono naranja fuego oficial (#F65E01) y texto narrativo con voseo local auténtico.
     - `node --check website/app.js` y `node --check website/js/hero-experience.js` limpios (código 0).
 
+- **Optimización y Reducción del Pie Institucional en Escritorio a 250px - 310px (27 de Septiembre de 2026):**
+  > *"reducir el footer a :250 y 310 px en escritorio."*
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Reducir la huella vertical excesiva del pie institucional (`.site-footer-pro`) en pantallas de escritorio, la cual alcanzaba más de 650px de altura.
+    - Proporcionar un cierre de página equilibrado, panorámico y de alta gama visual entre 250px y 310px, preservando la visibilidad del arte de fondo, el rayo láser de escaneo, la telemetría GPS en tiempo real, los canales de contacto oficial y los enlaces regulatorios del ecoturismo nicaragüense sin necesidad de desplazamientos prolongados.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se incorporó un bloque autoritativo `@media (min-width: 992px)` en `website/styles.css` con altura delimitada exactamente en 280px (`height: 280px !important; min-height: 250px !important; max-height: 310px !important; box-sizing: border-box !important;`).
+    - Centrado vertical simétrico con `display: flex; flex-direction: column; justify-content: center;` en `.site-footer-pro` y `.container`.
+    - Condensación armónica de los componentes internos:
+      * Cinta HUD de telemetría superior en píldora con micro-LED pulsante (`padding: 0.25rem 0.85rem; font-size: clamp(0.64rem, 0.72vw, 0.72rem)`).
+      * Tarjeta de contacto oficial (`.footer-col-contact`) con cabecera táctica compacta y rejilla de 3 nodos (correo, WhatsApp y sede territorial) en tarjetas de 44px con micro-iconos de 30px.
+      * Pila de enlaces legales (`.footer-legal-stack`) y barra inferior de derechos y estado GPS (`.footer-bottom-bar`) en una sola línea sutil, eliminando márgenes inflados.
+    - Actualización del versionado de estilos en `website/index.html` (`styles.css?v=20260927-compact-footer-1`).
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - `website/styles.css`: Nuevas reglas de alta fidelidad para escritorio compacto.
+    - `website/index.html`: Versionado de activos actualizado.
+    - Verificación visual y matemática con `browser_subagent` en navegador real (viewport 1354x621):
+      * Altura medida: `280px` (dentro del rango estricto de 250px a 310px: `isWithinRange = true`).
+      * Ancho medido: `1354px`.
+      * Captura de pantalla de verificación registrada: `footer_verified_280px_1790491061251.png`.
+
 
