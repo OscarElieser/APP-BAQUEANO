@@ -261,6 +261,13 @@
     byId('epicCurrentTime').textContent = '0:00';
     byId('epicScrubber').value = 0;
     renderPlaylist();
+    window.dispatchEvent(new CustomEvent('baqueano:music_changed', { detail: {
+      title: track.title,
+      artist: track.artist,
+      territory: track.territory,
+      credit: track.credit,
+      verified: track.verified
+    } }));
     if (autoplay) audio.play().catch(() => setPlayingUi(false));
   }
 
@@ -337,7 +344,18 @@
     byId('epicMuteBtn').addEventListener('click', () => { audio.muted = !audio.muted; });
     byId('epicVolumeSlider').addEventListener('input', event => { audio.volume = Number(event.target.value); });
     byId('epicScrubber').addEventListener('input', event => { if (Number.isFinite(audio.duration)) audio.currentTime = audio.duration * Number(event.target.value) / 100; });
-    audio.addEventListener('play', () => { setPlayingUi(true); persistAudioSession(); });
+    audio.addEventListener('play', () => {
+      const track = tracks[currentIndex];
+      setPlayingUi(true);
+      persistAudioSession();
+      if (track) window.dispatchEvent(new CustomEvent('baqueano:music_playing', { detail: {
+        title: track.title,
+        artist: track.artist,
+        territory: track.territory,
+        credit: track.credit,
+        verified: track.verified
+      } }));
+    });
     audio.addEventListener('pause', () => { setPlayingUi(false); persistAudioSession(); });
     audio.addEventListener('ended', () => step(1));
     audio.addEventListener('loadedmetadata', () => { byId('epicDurationTime').textContent = formatTime(audio.duration); });

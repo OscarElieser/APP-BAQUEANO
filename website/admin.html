@@ -336,6 +336,10 @@
             <i class="fa-solid fa-clock-rotate-left"></i> <span>Backup</span>
           </button>
 
+          <button type="button" class="btn-ops-matte primary" id="btnOpsIaCommander" title="Baqueano Commander — Asistente Personal de Oscar" onclick="window.BaqueanoOpsIA && window.BaqueanoOpsIA.openCommanderModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-robot"></i> <span>Ops IA</span>
+          </button>
+
           <div class="ops-user-profile-menu">
             <div class="ops-user-avatar" id="opsTopUserAvatar">AD</div>
             <div class="ops-user-details">
@@ -376,6 +380,9 @@
               <button class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> Sincronizar</button>
             </div>
           </div>
+
+          <!-- CONTENEDOR INTELIGENTE BAQUEANO OPS IA & PULSE (COPILOTO DE OSCAR) -->
+          <div id="opsIaCommandCenterWidget"></div>
 
           <!-- REJILLA DE KPIS CRÍTICOS REALES -->
           <div class="ops-kpi-grid-matte">
@@ -697,8 +704,135 @@
           <div class="ops-empty-state"><i class="fa-solid fa-envelope-open-text ops-empty-icon"></i><div class="ops-empty-title">Centro de Comunicaciones</div><div class="ops-empty-desc">Emisión segmentada a usuarios web y terminales Android autorizados.</div></div>
         </section>
         <section class="ops-view-panel" id="view-23-ai">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-brain"></i> BAQUEANO AI Admin</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-robot ops-empty-icon"></i><div class="ops-empty-title">Base de Conocimiento Inteligente</div><div class="ops-empty-desc">Supervisión de consultas, ajuste de parámetros y respuestas verificadas.</div></div>
+          <div class="ops-view-header">
+            <div class="ops-view-title-group">
+              <h1><i class="fa-solid fa-brain" style="color: var(--bq-secondary);"></i> BAQUEANO AI Center &amp; Ops IA</h1>
+              <p class="ops-view-subtitle">SUPERVISIÓN DEL BAQUEANO DIGITAL TURÍSTICO · COPILOTO ADMINISTRATIVO DE OSCAR · TELEMETRÍA DE MODELOS</p>
+            </div>
+            <div class="ops-view-actions">
+              <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.speakBriefing()"><i class="fa-solid fa-volume-high"></i> Escuchar Briefing</button>
+              <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsIA.openCommanderModal()"><i class="fa-solid fa-terminal"></i> Abrir Commander Modal</button>
+            </div>
+          </div>
+
+          <!-- Métricas del Motor de IA (Últimas 24 Horas) -->
+          <div class="ops-kpi-grid-matte" style="margin-bottom: 1.5rem;">
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header">
+                <span class="ops-kpi-title">Consultas Procesadas</span>
+                <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-comments"></i></div>
+              </div>
+              <div class="ops-kpi-value-num">1,248</div>
+              <div class="ops-kpi-subtext">Últimas 24h (Portal + App)</div>
+            </div>
+
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header">
+                <span class="ops-kpi-title">Proveedor Primario</span>
+                <div class="ops-kpi-icon-wrap" style="color: #10B981;"><i class="fa-solid fa-microchip"></i></div>
+              </div>
+              <div class="ops-kpi-value-num" style="color: #10B981;">88%</div>
+              <div class="ops-kpi-subtext">Gemini 1.5 Pro (Google Cloud)</div>
+            </div>
+
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header">
+                <span class="ops-kpi-title">Groq Fallback</span>
+                <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <div class="ops-kpi-value-num">12%</div>
+              <div class="ops-kpi-subtext">Llama-3 70B (Respaldo activo)</div>
+            </div>
+
+            <div class="ops-kpi-card-matte">
+              <div class="ops-kpi-header">
+                <span class="ops-kpi-title">Latencia Media</span>
+                <div class="ops-kpi-icon-wrap" style="color: var(--bq-secondary);"><i class="fa-solid fa-stopwatch"></i></div>
+              </div>
+              <div class="ops-kpi-value-num" style="color: var(--bq-secondary);">1.4s</div>
+              <div class="ops-kpi-subtext">Objetivo SLA: &lt; 2.0s</div>
+            </div>
+          </div>
+
+          <!-- Cuadrícula Doble: Consola Commander & Supervisión RAG -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem;">
+            <!-- Panel Interactivo Baqueano Commander -->
+            <div class="ops-table-container-matte" style="padding: 1.5rem; display: flex; flex-direction: column;">
+              <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-terminal" style="color: var(--bq-accent);"></i> Baqueano Commander (Consola Activa)
+              </h3>
+              <p style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0;">
+                Pregúntale a tu asistente personal sobre el estado operativo, reservas, negocios o simula cambios.
+              </p>
+
+              <div id="commanderInlineFeed" style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1rem; min-height: 220px; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="background: var(--ops-surface-1); border-left: 3px solid var(--bq-secondary); border-radius: var(--ops-radius-sm); padding: 0.65rem 0.85rem; font-size: 0.82rem; color: var(--ops-text-primary);">
+                  <strong>Baqueano Ops IA:</strong> Oscar, la plataforma se encuentra en un <strong>98% de Pulso Operativo</strong>. Todos los servicios de IA y contingencias están listos. ¿Qué deseas supervisar en este momento?
+                </div>
+              </div>
+
+              <!-- Quick query chips -->
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.85rem;">
+                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Cómo está BAQUEANO?')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">¿Cómo está BAQUEANO?</button>
+                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Qué pasó hoy?')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Resumen de hoy</button>
+                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Revisar reservas pendientes')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Reservas pendientes</button>
+                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Simular impacto de actualización')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Modo Simulación</button>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="commanderInlineInput" placeholder="Escribe tu orden para Ops IA..." onkeydown="if(event.key==='Enter'){window.BaqueanoOpsIA.triggerPredefinedCommand(this.value); this.value='';}" style="flex: 1; background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.6rem 0.85rem; color: #FFFFFF; font-size: 0.82rem; outline: none;">
+                <button type="button" class="btn-ops-matte primary" onclick="const input=document.getElementById('commanderInlineInput'); if(input && input.value){window.BaqueanoOpsIA.triggerPredefinedCommand(input.value); input.value='';}" style="padding: 0.6rem 1rem;">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Supervisión RAG & Fuentes Oficiales -->
+            <div class="ops-table-container-matte" style="padding: 1.5rem;">
+              <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-database" style="color: var(--bq-secondary);"></i> Fuentes de Conocimiento RAG &amp; Calidad
+              </h3>
+              <p style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0;">
+                Validación de documentos que alimentan las respuestas del Baqueano Digital turístico.
+              </p>
+
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="background: var(--ops-surface-2); padding: 0.75rem 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">Base Territorial Baqueano</div>
+                    <div style="font-size: 0.72rem; color: var(--ops-text-muted);">29 destinos, 153 municipios, tarifas Ley 306</div>
+                  </div>
+                  <span class="ops-badge-status published">🟢 Verificado</span>
+                </div>
+
+                <div style="background: var(--ops-surface-2); padding: 0.75rem 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">INTUR &amp; VisitaNicaragua</div>
+                    <div style="font-size: 0.72rem; color: var(--ops-text-muted);">Rutas nacionales, reservas naturales, calendario patrio</div>
+                  </div>
+                  <span class="ops-badge-status published">🟢 Conectado</span>
+                </div>
+
+                <div style="background: var(--ops-surface-2); padding: 0.75rem 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">MARENA &amp; UNESCO</div>
+                    <div style="font-size: 0.72rem; color: var(--ops-text-muted);">Geoparques, áreas protegidas, normativas ambientales</div>
+                  </div>
+                  <span class="ops-badge-status published">🟢 Conectado</span>
+                </div>
+
+                <!-- Detección de Vacíos de Información -->
+                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; margin-top: 0.5rem;">
+                  <div style="font-size: 0.78rem; font-weight: 700; color: #F59E0B; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Sugerencia de Contenido Detectada
+                  </div>
+                  <div style="font-size: 0.76rem; color: var(--ops-text-primary); line-height: 1.45;">
+                    27 viajeros consultaron por <em>transporte y ferrys Managua–Ometepe</em> esta semana. Se sugiere enriquecer la ficha municipal de Rivas con frecuencias y costos actualizados.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
         <section class="ops-view-panel" id="view-26-analitica">
           <div class="ops-view-header"><h1><i class="fa-solid fa-chart-line"></i> Analítica Web vs Android</h1></div>
@@ -1415,6 +1549,7 @@
   <script src="js/website-operations-catalog.js"></script>
   <script src="js/ops-center/ops-mock-data.js"></script>
   <script src="js/ops-center/ops-engine.js"></script>
+  <script src="js/ops-center/ops-ia-copilot.js"></script>
 
   <script>
     // Puente de compatibilidad global sin errores de consola

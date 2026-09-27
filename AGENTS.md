@@ -34,3 +34,8 @@
    - Queda prohibido detener el flujo solicitando modales o cuestionarios interactivos de confirmación (`ask_question`) ante decisiones predecibles o configuraciones estándar.
    - El asistente debe actuar de forma autónoma e inmediata, seleccionando siempre por defecto la **Opción 1 (la recomendada y de mejor estándar técnico)** y ejecutando la solución completa de punta a punta.
    - Solo se requerirá intervención del usuario en casos donde una acción cause pérdida destructiva e irreversible de datos.
+
+7. **Bitácora Persistente de Consultas y Sesión Antigolpes (Crash & Interruption Resilience)**:
+   - Toda consulta del usuario, directiva técnica, archivo modificado y avance del proyecto debe registrarse y actualizarse de manera obligatoria en `SESSION_LOG.md` en la raíz del proyecto.
+   - Ante cualquier apagón, corte de energía o pérdida de sesión, el asistente consultará inmediatamente este archivo para reanudar el trabajo exactamente en el último punto sin pérdida de contexto.
+

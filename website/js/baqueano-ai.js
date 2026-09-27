@@ -40,6 +40,18 @@
   // Catálogo factual de respaldo territorial para contingencia inmediata sin conexión
   const CLIENT_TERRITORIES = [
     {
+      key: 'playas-rivas',
+      department: 'Rivas',
+      title: 'Costas del Pacífico Sur: San Juan del Sur y Tola',
+      summary: 'Bahías protegidas, surf mundial en Playa Maderas y Popoyo, miradores costeros y gastronomía marina de cooperativas.',
+      places: [
+        { name: 'Bahía de San Juan del Sur & Mirador del Cristo', desc: 'Bahía en herradura con malecón gastronómico y vista panorámica desde el Cristo de la Misericordia.', costUsd: 15 },
+        { name: 'Playa Maderas (Santuario del Surf)', desc: 'Olas consistentes de clase mundial, escuelas comunitarias de surf y atardeceres dorados frente a formaciones rocosas.', costUsd: 20 },
+        { name: 'Playa Popoyo & Piscinas Naturales en Tola', desc: 'Pozas de marea en roca volcánica y olas oceánicas entre paisajes vírgenes.', costUsd: 18 },
+        { name: 'Refugio de Vida Silvestre La Flor', desc: 'Santuario costero protegido por MARENA para el desove masivo de tortugas marinas paslama.', costUsd: 10 }
+      ]
+    },
+    {
       key: 'ometepe',
       department: 'Rivas',
       title: 'Isla de Ometepe y Bahías del Sur',
@@ -280,21 +292,31 @@
   function resolveTerritory(prompt, requestedDept) {
     const normPrompt = normalizeText(prompt);
     const normDept = normalizeText(requestedDept);
+    const getByKey = (k) => CLIENT_TERRITORIES.find(t => t.key === k) || CLIENT_TERRITORIES[0];
 
-    if (normPrompt.includes('ometepe') || normPrompt.includes('concepcion') || normPrompt.includes('maderas') || normPrompt.includes('rivas') || normPrompt.includes('san juan')) {
-      return CLIENT_TERRITORIES[0];
+    // 1. Playas y Costas de Rivas (San Juan del Sur, Tola, Maderas, Popoyo)
+    if (normPrompt.includes('san juan') || normPrompt.includes('playa') || normPrompt.includes('costa') || normPrompt.includes('mar') || normPrompt.includes('surf') || normPrompt.includes('tola') || normPrompt.includes('popoyo') || (normPrompt.includes('hotel') && !normPrompt.includes('volcan'))) {
+      return getByKey('playas-rivas');
     }
+    // 2. Isla de Ometepe
+    if (normPrompt.includes('ometepe') || normPrompt.includes('concepcion') || normPrompt.includes('charco verde')) {
+      return getByKey('ometepe');
+    }
+    // 3. Somoto
     if (normPrompt.includes('somoto') || normPrompt.includes('canon') || normPrompt.includes('madriz') || normPrompt.includes('rosquilla') || normPrompt.includes('cusmapa')) {
-      return CLIENT_TERRITORIES[1];
+      return getByKey('somoto');
     }
-    if (normPrompt.includes('cerro negro') || normPrompt.includes('leon') || normPrompt.includes('penitas') || normPrompt.includes('sandboard')) {
-      return CLIENT_TERRITORIES[2];
+    // 4. León
+    if (normPrompt.includes('cerro negro') || normPrompt.includes('leon') || normPrompt.includes('sandboard')) {
+      return getByKey('leon');
     }
+    // 5. Granada
     if (normPrompt.includes('granada') || normPrompt.includes('isletas') || normPrompt.includes('mombacho') || normPrompt.includes('apoyo')) {
-      return CLIENT_TERRITORIES[3];
+      return getByKey('granada');
     }
+    // 6. Matagalpa
     if (normPrompt.includes('matagalpa') || normPrompt.includes('cafe') || normPrompt.includes('selva negra') || normPrompt.includes('cascada')) {
-      return CLIENT_TERRITORIES[4];
+      return getByKey('matagalpa');
     }
 
     for (const t of CLIENT_TERRITORIES) {
@@ -303,7 +325,7 @@
       }
     }
 
-    return CLIENT_TERRITORIES[0];
+    return getByKey('playas-rivas');
   }
 
   function buildLocalItinerary(payload) {
