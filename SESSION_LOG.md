@@ -725,4 +725,23 @@
     - Despliegue a Firebase Hosting (`firebase deploy --only hosting`).
     - Verificación visual con capturas reales demostrando desaparición total de la franja y encuadre majestuoso de la toma central.
 
+- **Auditoría y Refactorización Integral de Arquitectura CSS Mobile-First (27 de Septiembre de 2026):**
+  > *"Actúa como un desarrollador Frontend experto en CSS moderno y diseño web responsivo (Mobile-First)... Necesito que audites y refactorices mi estructura HTML y hojas de estilo CSS para que sea 100% responsivo..."*
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Resolver las desconfiguraciones visuales, saltos de proporción y posibles desbordamientos horizontales al cambiar entre móviles compactos, tabletas y escritorios.
+    - Transformar la base CSS hacia un estándar Mobile-First estricto, con fluid scaling y objetivos táctiles conformes a WCAG AAA.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se creó la hoja modular [mobile-first-core.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/mobile-first-core.css) importada globalmente en `styles.css`.
+    - Implementación de:
+      1. Reset universal con `box-sizing: border-box`, `overflow-x: clip`, y soporte de Safe Area Insets.
+      2. Tipografía fluida con funciones `clamp(min, val, max)` que escalan armónicamente sin saltos de breakpoint.
+      3. Contenedores relativos fluidos `max-width: min(1280px, calc(100% - 2rem))` y multimedia 100% adaptable (`max-width: 100%; height: auto; display: block;`).
+      4. Rejillas CSS Grid `repeat(auto-fit, minmax(...))` y Flexbox con `flex-wrap: wrap` para erradicar cualquier desbordamiento horizontal.
+      5. Breakpoints limpios y aditivos estructurados exclusivamente con `@media (min-width: 768px)` y `@media (min-width: 1024px)`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivo nuevo: `website/css/mobile-first-core.css`.
+    - Integración activa en `website/styles.css`.
+    - Código HTML semántico limpio y código CSS modular entregado con diagnóstico de los 3 errores raíz.
+
+
 
