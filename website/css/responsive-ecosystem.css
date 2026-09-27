@@ -108,9 +108,9 @@ p, h1, h2, h3, h4, h5, h6, span, a, label {
    3. ERGONOMÍA DE ELEMENTOS FLOTANTES (MODAL TEMA, BAQÜI & SOS)
    ========================================================================== */
 .baq-theme-float-btn {
-  bottom: max(20px, calc(14px + env(safe-area-inset-bottom)));
-  left: max(18px, calc(14px + env(safe-area-inset-left)));
-  touch-action: manipulation;
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* El backdrop y modal del tema nunca deben quedar fuera de pantalla */

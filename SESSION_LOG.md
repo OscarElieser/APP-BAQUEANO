@@ -467,6 +467,16 @@
      - Detección con `IntersectionObserver` para ocultar automáticamente la baliza flotante de personalización de temas mientras el usuario se encuentre en el Hero, evitando cualquier solapamiento con los botones.
   3. **Integración en `website/index.html`:** Enlace de la nueva hoja de estilos y script modular preservando todos los metadatos y enlaces de navegación previos.
 - **Validaciones:**
-  - Verificación visual con subagente de navegador en resoluciones de 1370x750 y 1370x659: comprobación de ajuste vertical, carga fluida del video panorámico, visibilidad de las 5 tarjetas de destinos, interacción de cambio de video al pulsar Ometepe y cero solapamientos.
-  - `git diff --check` limpio (código 0).
+- **Supresión Definitiva de Baliza Flotante de Tema (27 de Septiembre de 2026):**
+  > *"quitalo te ahi que funcione nada mas cuando toque el boton principal"* — acompañado de captura de pantalla del botón flotante "Colores PERSONALIZAR".
+  - **Diagnóstico:** El botón flotante `.baq-theme-float-btn` se insertaba de forma persistente en `<body>` en la esquina inferior izquierda. Aunque resultaba accesible, generaba ruido visual y superposiciones indeseadas sobre la interfaz limpia del Hero y los botones de acción.
+  - **Solución implementada:**
+    1. Se eliminó la inyección en el DOM de `.baq-theme-float-btn` y `#baqFloatingThemeBtn` en `website/js/theme-switcher.js`, asegurando que si ya existía en memoria sea retirado inmediatamente con `.remove()`.
+    2. Se configuró `.baq-theme-float-btn, #baqFloatingThemeBtn { display: none !important; visibility: hidden !important; pointer-events: none !important; opacity: 0 !important; }` en `website/css/theme-switcher.css` y `website/css/responsive-ecosystem.css`.
+    3. El catálogo y personalizador de paletas y colores opera de forma exclusiva al pulsar el botón principal **"Tema"** (`#navThemeSwitcherBtn`) ubicado en la barra superior de navegación.
+    4. Se actualizó la versión de activos a `v=20260926-global-theme-2` en `website/index.html`.
+  - **Validaciones:**
+    - Verificación con subagente en navegador real: botón flotante ausente en el 100% de la pantalla, apertura fluida del modal al pulsar el botón "Tema" del navbar y cierre impecable.
+    - `node --check website/js/theme-switcher.js` limpio (código 0).
+
 

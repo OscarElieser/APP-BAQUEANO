@@ -747,23 +747,13 @@
   }
 
     /**
-   * Inyecta el botón flotante ergonómico para abrir el selector en cualquier momento
+   * Eliminación del botón flotante — El selector de temas opera exclusivamente desde el botón principal del navbar
    */
   function injectFloatingTrigger() {
-    if (document.getElementById('baqFloatingThemeBtn')) return;
-    const btn = document.createElement('button');
-    btn.className = 'baq-theme-float-btn';
-    btn.id = 'baqFloatingThemeBtn';
-    btn.type = 'button';
-    btn.title = 'Personalizar Colores de Fondo y Letras';
-    btn.setAttribute('aria-label', 'Personalizar colores de fondo y letras');
-    btn.innerHTML = `
-      <div class="float-icon-box"><i class="fa-solid fa-palette"></i></div>
-      <span class="float-text">Colores</span>
-      <span class="float-badge">Personalizar</span>
-    `;
-    btn.addEventListener('click', openModal);
-    document.body.appendChild(btn);
+    const existing = document.getElementById('baqFloatingThemeBtn');
+    if (existing) {
+      existing.remove();
+    }
   }
 
   /**
