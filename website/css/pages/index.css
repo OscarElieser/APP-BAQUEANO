@@ -2664,9 +2664,11 @@ html[data-theme] .index-main-flow > :is(
 }
 
 html[data-theme] #heroNicaragua .hero-nicaragua-overlay {
-  background:
-    linear-gradient(90deg, rgba(var(--theme-background-rgb), 0.97), rgba(var(--theme-background-rgb), 0.72) 42%, rgba(var(--theme-primary-rgb), 0.16) 78%),
-    linear-gradient(180deg, rgba(var(--theme-primary-rgb), 0.2), transparent 48%, var(--bg-space)) !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  pointer-events: none !important;
 }
 
 html[data-theme] #ctaFinalNicaragua .final-cta-backdrop {
@@ -3693,9 +3695,11 @@ html[data-section-colors-custom] .index-main-flow :is(
 }
 
 #heroNicaragua .hero-nicaragua-overlay {
-  background:
-    linear-gradient(90deg, rgba(4, 10, 18, 0.96) 0%, rgba(4, 10, 18, 0.78) 38%, rgba(4, 10, 18, 0.18) 72%, rgba(4, 10, 18, 0.28) 100%),
-    linear-gradient(180deg, rgba(4, 10, 18, 0.32) 0%, rgba(4, 10, 18, 0.05) 55%, #07111C 100%);
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  pointer-events: none !important;
 }
 
 #heroNicaragua .hero-cinematic-container {
@@ -4031,7 +4035,11 @@ html[data-section-colors-custom] .index-main-flow :is(
   #heroNicaragua .hero-cinematic-content { width: min(720px, 100%); }
   #heroNicaragua .hero-main-title { max-width: 11ch; font-size: clamp(3rem, 11vw, 5.5rem); }
   #heroNicaragua .hero-nicaragua-overlay {
-    background: linear-gradient(90deg, rgba(4, 10, 18, 0.94), rgba(4, 10, 18, 0.48)), linear-gradient(180deg, transparent 40%, #07111C 100%);
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    background: transparent !important;
+    pointer-events: none !important;
   }
   #problemaSolucionSection .ps-journey-flow { grid-template-columns: 1fr 1fr; }
   #problemaSolucionSection .ps-flow-arrow { display: none; }
@@ -4046,7 +4054,11 @@ html[data-section-colors-custom] .index-main-flow :is(
   #heroNicaragua { min-height: 760px; align-items: end; }
   #heroNicaragua .hero-nicaragua-bg-media { object-position: 62% center; }
   #heroNicaragua .hero-nicaragua-overlay {
-    background: linear-gradient(180deg, rgba(4, 10, 18, 0.2) 0%, rgba(4, 10, 18, 0.68) 38%, #07111C 82%);
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    background: transparent !important;
+    pointer-events: none !important;
   }
   #heroNicaragua .hero-cinematic-container { padding-top: 7rem; padding-bottom: 8.5rem; }
   #heroNicaragua .hero-brand-kicker { max-width: 100%; font-size: 0.64rem; line-height: 1.35; }

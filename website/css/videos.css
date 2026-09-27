@@ -340,8 +340,7 @@ body:has(.video-hero-wrapper) .main-navbar.scrolled {
 
 .video-hero-media,
 .hero-bg-video,
-.institucional-hero-bg,
-.hero-nicaragua-bg-media {
+.institucional-hero-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -350,6 +349,18 @@ body:has(.video-hero-wrapper) .main-navbar.scrolled {
   transform: translateZ(0);
   backface-visibility: hidden;
   filter: saturate(1.08) contrast(1.04) brightness(0.84) !important;
+}
+
+.hero-nicaragua-bg-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  opacity: 1 !important;
+  filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;
 }
 
 .institucional-hero-bg {

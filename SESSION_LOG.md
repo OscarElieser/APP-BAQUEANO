@@ -694,3 +694,19 @@
     - Archivos actualizados: `website/index.html`, `website/css/hero-editorial.css`, `website/js/hero-experience.js` y `website/js/video-registry.js`.
     - Cero atributos `data-dest-video`, cero lógica de intercambio de clips y una sola fuente audiovisual dentro del controlador del hero.
     - `node --check` limpio para ambos controladores JavaScript.
+
+- **Erradicación Absoluta de Opacidad y Resalte Vívido del Video Hero (27 de Septiembre de 2026):**
+  > *"https://app-baqueano.web.app/index.html no puede hacer que el video se muestre sin opacacidad es que se ve feo asi quiero que el video resalte me entiende verdad"* — requerimiento enfático para mostrar el video del hero con su máxima nitidez, brillo y colores vivos sin capas opacas ni velos oscuros.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - El usuario detectó con precisión que el video se veía "con opacidad" y "apagado", restando vistosidad y espectacularidad a la cara principal del ecosistema Baqueano.
+    - Se identificó técnicamente que la regla CSS `html[data-theme] #heroNicaragua .hero-nicaragua-overlay` imponía un gradiente con 97% de opacidad (`rgba(..., 0.97)`) sobre el video, además de `filter: brightness(0.84)` residual en `css/videos.css`.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se erradicó por completo el overlay oscuro (`.hero-nicaragua-overlay`), configurándolo con `display: none !important; opacity: 0 !important; visibility: hidden !important; background: transparent !important; pointer-events: none !important;` tanto en reglas generales como en selectores con temas dinámicos (`html[data-theme]`) y media queries responsivas.
+    - Se independizó `.hero-nicaragua-bg-media` en `css/videos.css`, fijando `opacity: 1 !important; filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;` y `mix-blend-mode: normal !important;`.
+    - Se fortalecieron las sombras de texto (`text-shadow`) multinivel de alta densidad en títulos (`.hero-editorial-title`), subtítulos (`.hero-editorial-subtitle`) y eyebrow (`.hero-eyebrow-text`) para garantizar legibilidad 100% nítida contra cualquier fotograma en movimiento sin requerir ningún velo oscuro sobre el video.
+    - Se implementaron estilos inline defensivos en `website/index.html` e invalidación de caché con nuevas versiones de CSS (`v=20260927-crystal-video-*`).
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos actualizados: `website/css/pages/index.css`, `website/css/videos.css`, `website/css/hero-editorial.css`, `website/css/nicaragua-branding.css` y `website/index.html`.
+    - Despliegue productivo en Firebase Hosting.
+    - Comprobación visual y técnica automatizada en navegador con subagente confirmando eliminación de overlay y reproducción vívida del video a 100% nitidez.
+

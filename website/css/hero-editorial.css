@@ -49,8 +49,10 @@
   margin: 0 !important;
 }
 
-/* 1. Video de Fondo Panorámico en Alta Definición — Máxima Nitidez 1:1 */
-#heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media {
+/* 1. Video de Fondo Panorámico en Alta Definición — Máxima Nitidez 1:1 Sin Opacidad */
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media,
+#heroNicaragua .hero-nicaragua-bg-media,
+.hero-nicaragua-bg-media {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
@@ -59,31 +61,23 @@
   object-position: center center !important;
   z-index: 1 !important;
   pointer-events: none !important;
-  filter: none !important;
+  opacity: 1 !important;
+  filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;
+  mix-blend-mode: normal !important;
   transition: opacity 0.3s ease !important;
   transform: translate3d(0, 0, 0) !important;
   will-change: transform, opacity !important;
 }
 
-/* 2. Máscara de Gradiente Asimétrica: Luminosa y de Alta Claridad */
-#heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 2 !important;
+/* 2. Erradicación Absoluta de Opacidad, Velos y Máscaras Oscuras Sobre el Video */
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay,
+#heroNicaragua .hero-nicaragua-overlay,
+.hero-nicaragua-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
   pointer-events: none !important;
-  background:
-    linear-gradient(90deg, 
-      rgba(6, 16, 24, 0.76) 0%, 
-      rgba(6, 16, 24, 0.50) 34%, 
-      rgba(6, 16, 24, 0.12) 60%, 
-      transparent 88%
-    ),
-    linear-gradient(180deg, 
-      rgba(6, 16, 24, 0.38) 0%, 
-      transparent 22%, 
-      transparent 72%, 
-      rgba(6, 16, 24, 0.48) 100%
-    ) !important;
 }
 
 /* 3. Contenedor Principal Editorial */
@@ -608,13 +602,17 @@ body:not(.scrolled) .baqueano-assistant-widget {
 }
 
 #heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay {
-  background:
-    radial-gradient(circle at 50% 42%, transparent 0%, rgba(6, 16, 24, 0.10) 62%, rgba(6, 16, 24, 0.42) 100%),
-    linear-gradient(180deg, rgba(6, 16, 24, 0.06) 0%, transparent 48%, rgba(6, 16, 24, 0.34) 100%) !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  pointer-events: none !important;
 }
 
 #heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media {
-  filter: brightness(1.12) saturate(1.1) contrast(1.03) !important;
+  opacity: 1 !important;
+  filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;
+  mix-blend-mode: normal !important;
 }
 
 #heroNicaragua.hero-editorial-mode .hero-editorial-container {
@@ -764,3 +762,64 @@ body:not(.scrolled) .baqueano-assistant-widget {
     height: 164px !important;
   }
 }
+
+/* ============================================================================
+   🧭 ERRADICACIÓN DEFINITIVA DE OPACIDAD Y VELOS OSCUROS — HERO VIDEO VIBRANTE
+   ============================================================================
+   🎯 POR QUÉ:
+   - Eliminar cualquier velo, gradiente u opacidad oscura superpuesta al video
+     del hero para que los paisajes de Nicaragua resalten con su máxima luz,
+     color y nitidez 100% natural tal como solicita el usuario.
+   ⚙️ CÓMO:
+   - Forzar display: none y fondo transparente sobre todos los selectores de
+     overlay (incluyendo html[data-theme]).
+   - Fijar opacity: 1 y filtro nítido en el elemento de video.
+   - Reforzar text-shadow de alta definición en títulos y textos para garantizar
+     legibilidad perfecta sobre cualquier fotograma del video sin requerir velos.
+   📦 QUÉ:
+   - .hero-nicaragua-overlay desactivado por completo.
+   - .hero-nicaragua-bg-media con luminosidad natural 100% visible.
+   ============================================================================ */
+html[data-theme] #heroNicaragua .hero-nicaragua-overlay,
+html[data-theme] .hero-nicaragua-overlay,
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay,
+#heroNicaragua .hero-nicaragua-overlay,
+.hero-nicaragua-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+
+html[data-theme] #heroNicaragua .hero-nicaragua-bg-media,
+html[data-theme] .hero-nicaragua-bg-media,
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media,
+#heroNicaragua .hero-nicaragua-bg-media,
+.hero-nicaragua-bg-media {
+  opacity: 1 !important;
+  filter: brightness(1.04) saturate(1.08) contrast(1.02) !important;
+  mix-blend-mode: normal !important;
+}
+
+#heroNicaragua .hero-editorial-title {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.95), 
+    0 4px 16px rgba(0, 0, 0, 0.95), 
+    0 8px 32px rgba(0, 0, 0, 0.98),
+    0 16px 48px rgba(0, 0, 0, 0.9) !important;
+}
+
+#heroNicaragua .hero-editorial-subtitle {
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 3px 12px rgba(0, 0, 0, 0.98),
+    0 6px 24px rgba(0, 0, 0, 0.95) !important;
+}
+
+#heroNicaragua .hero-eyebrow-text {
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.98),
+    0 4px 16px rgba(0, 0, 0, 0.95) !important;
+}
+
