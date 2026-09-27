@@ -204,6 +204,14 @@
   - **Ejecución:** se amplió `hosting.ignore` en `firebase.json` para excluir APK, AAB y formatos ejecutables de Windows o binarios, sin borrar los archivos locales del usuario.
   - **Resultado:** `firebase deploy --only hosting` finalizó correctamente, publicó 491 archivos y liberó la versión `999e64d12ec4b8ff` en `https://app-baqueano.web.app`. La página principal, el panel administrativo y el script con la función `publishExternalAndroidRelease` respondieron HTTP 200 en la verificación posterior.
 
+- **Consulta 13 (26 de Septiembre de 2026):**
+  > *"Quiero que este menú sea más similar al menú del Ops Center."*
+  - **Ejecución:**
+    1. Se incorporaron tres grupos operativos numerados: Descubrir Nicaragua, Planificar y conectar, y Cuenta e inteligencia.
+    2. Se compactaron ancho, filas, iconos, tipografía y espaciado para replicar la densidad visual del sidebar administrativo.
+    3. Se conservaron el riel activo, estados, accesibilidad, enlaces públicos y comportamiento responsivo sin exponer módulos internos.
+  - **Publicación:** Firebase Hosting desplegó correctamente la versión `9facdb39d931383d` en el canal público.
+
 - **Consulta 10 (26 de Septiembre de 2026, 21:28):**
   > *"📸 Instagram: https://www.instagram.com/baqueano_nicaragua 📲 Facebook: https://www.facebook.com/share/1S71xwJKse/ 🎬 TikTok: https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e a los iconos de redes sociales agregarla por favor"*
   - **Ejecución y Entregables:**
@@ -288,7 +296,28 @@
         - **06 a 09. Destinos, Cultura Viva, Servicios Turísticos y Negocios Aliados:** Con etiquetas de credibilidad profesional ("Red de Emprendimientos Locales · Prototipo Funcional de Demostración").
         - **10 y 11. Cifras, Impacto y Seguridad SOS:** Indicadores verificables, asistencia en ruta y geolocalización GPS satelital.
         - **12 a 15. Historias, Red de Anfitriones, Ficha Técnica App Android (APK v2.4.0 Beta) y CTA Final.**
-     3. **Estilos e Integridad Sintáctica:**
+    3. **Estilos e Integridad Sintáctica:**
         - Incorporación de estilos de jerarquía comercial en `website/css/pages/index.css` con Golden Circle, paleta oficial y cero uso de términos prohibidos.
         - Verificación de balance de etiquetas HTML (16/16 secciones, 464/464 divs, 1/1 main, 1/1 footer, 5/5 forms).
         - Validación JavaScript con `node --check` (código 0).
+
+- **Consulta de recuperación (26 de Septiembre de 2026):**
+  > *"puede recuperar la ultima orientacion ante que se interrumpiera"*
+  - **Estado recuperado:**
+    1. La última orientación estratégica registrada fue reorganizar `website/index.html` para la competencia nacional, preservando todos los módulos y ordenando la narrativa desde el Hero de Marca hasta el CTA final y el footer.
+    2. La intervención técnica más reciente fue refinar el menú público para acercarlo visualmente al sidebar del Ops Center mediante tres grupos operativos, mayor densidad visual y conservación de accesibilidad y respuesta multidispositivo.
+    3. Los cambios de esa intervención permanecen en disco, aún sin consolidar en Git, dentro de `website/js/navigation.js`, `website/styles.css` y esta bitácora.
+    4. No se detectó pérdida de los cambios anteriores ni necesidad de modificar `lib/`, `ios/` o `web/`.
+
+- **Confirmación del punto de reanudación (26 de Septiembre de 2026):**
+  > *"La intervención más reciente fue adaptar el menú público al estilo del Ops Center, con tres grupos operativos y diseño más compacto."*
+  - **Punto confirmado:** se continuará desde la adaptación del menú público conservada en `website/js/navigation.js` y `website/styles.css`.
+  - **Grupos implementados:** `01 Descubrir Nicaragua`, `02 Planificar y conectar` y `03 Cuenta e inteligencia`.
+  - **Estado:** cambios locales intactos; no se realizaron modificaciones funcionales adicionales durante esta confirmación.
+
+- **Continuación del menú público desplegable (26 de Septiembre de 2026):**
+  > *"continua porque no se ve muy bien y recuerda que se iba hacer desplegable como el ops center"*
+  - **Decisión:** convertir los tres rótulos operativos en controles de acordeón accesibles, conservando todos los enlaces públicos.
+  - **Implementación:** apertura exclusiva por grupo, cierre de los demás bloques, apertura inicial de la sección correspondiente a la página actual, contador de accesos y chevrón animado.
+  - **Ajuste visual:** drawer ampliado de forma responsiva, encabezados de grupo con mayor área táctil, contraste reforzado y jerarquía equivalente al Ops Center.
+  - **Archivos modificados:** `website/js/navigation.js`, `website/styles.css` y `SESSION_LOG.md`.

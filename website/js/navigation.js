@@ -359,6 +359,82 @@ function initMobileMenu() {
     navMenu.prepend(drawerHeader);
   }
 
+  // ========================================================================
+  // JERARQUÍA OPERATIVA DEL DRAWER PÚBLICO
+  // POR QUÉ: una lista plana dificulta escanear el menú y no replica la lectura
+  // por módulos que caracteriza al sidebar del centro de operaciones.
+  // CÓMO: inserta controles de acordeón antes de cada bloque y asocia cada
+  // destino directo con su grupo, sin duplicar ni alterar sus enlaces.
+  // QUÉ: tres grupos públicos desplegables: descubrir, planificar/conectar y cuenta/IA.
+  // ========================================================================
+  if (!navMenu.querySelector('.nav-ops-group-title')) {
+    const directNavigationItems = () => [...navMenu.children].filter((item) =>
+      item.matches('a, .nav-dropdown') && !item.classList.contains('nav-drawer-footer')
+    );
+    const insertGroupBefore = (targetLabel, number, title) => {
+      const target = directNavigationItems().find((item) => item.querySelector('.nav-label')?.textContent.trim() === targetLabel);
+      if (!target) return;
+      const heading = document.createElement('button');
+      heading.className = 'nav-ops-group-title';
+      heading.type = 'button';
+      heading.dataset.groupId = `public-nav-group-${number}`;
+      heading.setAttribute('aria-expanded', 'false');
+      heading.setAttribute('aria-controls', heading.dataset.groupId);
+      heading.innerHTML = `<span class="nav-ops-group-number">${number}</span><b>${title}</b><small></small><i class="fa-solid fa-chevron-down" aria-hidden="true"></i>`;
+      navMenu.insertBefore(heading, target);
+    };
+    insertGroupBefore('Explorar', '01', 'Descubrir Nicaragua');
+    insertGroupBefore('Servicios', '02', 'Planificar y conectar');
+    const hasProfile = directNavigationItems().some((item) => item.querySelector('.nav-label')?.textContent.trim() === 'Perfil');
+    insertGroupBefore(hasProfile ? 'Perfil' : 'Baqueano AI', '03', 'Cuenta e inteligencia');
+  }
+
+  const groupButtons = [...navMenu.querySelectorAll(':scope > .nav-ops-group-title')];
+  const groupItems = new Map();
+  groupButtons.forEach((button, index) => {
+    const items = [];
+    let sibling = button.nextElementSibling;
+    while (sibling && !sibling.classList.contains('nav-ops-group-title') && !sibling.classList.contains('nav-drawer-footer')) {
+      if (sibling.matches('a, .nav-dropdown')) {
+        sibling.dataset.navGroup = button.dataset.groupId;
+        items.push(sibling);
+      }
+      sibling = sibling.nextElementSibling;
+    }
+    groupItems.set(button.dataset.groupId, items);
+    const counter = button.querySelector('small');
+    if (counter) counter.textContent = `${items.length} accesos`;
+    button.dataset.groupIndex = String(index);
+  });
+
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const activeGroupButton = groupButtons.find((button) =>
+    (groupItems.get(button.dataset.groupId) || []).some((item) =>
+      [...item.querySelectorAll('a[href]'), ...(item.matches('a[href]') ? [item] : [])]
+        .some((link) => (link.getAttribute('href') || '').split('/').pop().split('#')[0] === currentPage)
+    )
+  );
+
+  const setExpandedGroup = (selectedButton) => {
+    groupButtons.forEach((button) => {
+      const isExpanded = button === selectedButton;
+      button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      button.classList.toggle('is-expanded', isExpanded);
+      (groupItems.get(button.dataset.groupId) || []).forEach((item) => {
+        item.classList.toggle('nav-ops-item-collapsed', !isExpanded);
+      });
+    });
+  };
+
+  const initialGroupButton = activeGroupButton || groupButtons[0];
+  if (initialGroupButton) setExpandedGroup(initialGroupButton);
+  groupButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextButton = button.classList.contains('is-expanded') ? null : button;
+      setExpandedGroup(nextButton);
+    });
+  });
+
   let drawerFooter = navMenu.querySelector('.nav-drawer-footer');
   if (!drawerFooter) {
     drawerFooter = document.createElement('div');
