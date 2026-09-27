@@ -27,6 +27,7 @@
 
   const STORAGE_KEY = 'baqueano_active_theme';
   const CUSTOM_COLORS_STORAGE_KEY = 'baqueano_custom_section_colors';
+  const SITE_BG_STORAGE_KEY = 'baqueano_site_bg';
   const DEFAULT_THEME_ID = 'baqueano_origen';
 
   // Colección de los 8 temas oficiales de alta gama
@@ -225,6 +226,141 @@
     }
   ];
 
+  // Colección de fondos del sitio (Negro, Blanco y Colores de Alto Contraste con nuestra paleta oficial)
+  const SITE_BACKGROUND_PRESETS = [
+    {
+      id: 'negro',
+      name: 'Negro Obsidiana (OLED)',
+      badge: 'Contraste OLED',
+      tagline: 'Fondo negro absoluto (#000000) que hace resaltar el naranja fuego #F65E01 y verde petróleo #165D6F con cero emisión lumínica.',
+      icon: 'fa-moon',
+      type: 'dark',
+      bgSpace: '#000000',
+      bgDark: '#080A10',
+      bgSurface: '#0E1320',
+      bgCard: 'rgba(14, 19, 32, 0.92)',
+      bgCardHover: 'rgba(246, 94, 1, 0.25)',
+      bgGlass: 'rgba(10, 14, 24, 0.85)',
+      bgGlassStrong: 'rgba(0, 0, 0, 0.96)',
+      textPrimary: '#FFFFFF',
+      textSecondary: '#E2E8F0',
+      textMuted: '#94A3B8',
+      borderSubtle: 'rgba(255, 255, 255, 0.16)',
+      swatch: '#000000'
+    },
+    {
+      id: 'blanco',
+      name: 'Blanco Luz Solar',
+      badge: 'Modo Día Luminoso',
+      tagline: 'Fondo blanco puro (#FFFFFF) con tipografía oscura contrastada (#0F172A), lectura diurna nítida y acentos oficiales Baqueano.',
+      icon: 'fa-sun',
+      type: 'light',
+      bgSpace: '#FFFFFF',
+      bgDark: '#F8FAFC',
+      bgSurface: '#F1F5F9',
+      bgCard: 'rgba(255, 255, 255, 0.96)',
+      bgCardHover: 'rgba(22, 93, 111, 0.12)',
+      bgGlass: 'rgba(255, 255, 255, 0.92)',
+      bgGlassStrong: 'rgba(248, 250, 252, 0.98)',
+      textPrimary: '#0F172A',
+      textSecondary: '#334155',
+      textMuted: '#64748B',
+      borderSubtle: 'rgba(15, 23, 42, 0.12)',
+      swatch: '#FFFFFF'
+    },
+    {
+      id: 'crema',
+      name: 'Crema Arena Pinolera',
+      badge: 'Contraste Editorial',
+      tagline: 'Tono cálido de arena volcánica y maíz criollo (#FAF6ED) con tipografía café oscuro y terracota, evocando la tierra campesina.',
+      icon: 'fa-wheat-awn',
+      type: 'light',
+      bgSpace: '#FAF6ED',
+      bgDark: '#F3ECE0',
+      bgSurface: '#EBE2D2',
+      bgCard: 'rgba(250, 246, 237, 0.94)',
+      bgCardHover: 'rgba(246, 94, 1, 0.14)',
+      bgGlass: 'rgba(250, 246, 237, 0.9)',
+      bgGlassStrong: 'rgba(243, 236, 224, 0.97)',
+      textPrimary: '#1E1610',
+      textSecondary: '#4A3B32',
+      textMuted: '#786558',
+      borderSubtle: 'rgba(74, 59, 50, 0.15)',
+      swatch: '#F4E6C1'
+    },
+    {
+      id: 'petroleo',
+      name: 'Petróleo Selva Profunda',
+      badge: 'Verde Azulado Místico',
+      tagline: 'Fondo petróleo (#05191F) de selvas y lagunas nicaragüenses; contraste natural que hace vibrar el naranja fuego.',
+      icon: 'fa-tree',
+      type: 'dark',
+      bgSpace: '#05191F',
+      bgDark: '#0A262E',
+      bgSurface: '#103742',
+      bgCard: 'rgba(10, 38, 46, 0.88)',
+      bgCardHover: 'rgba(246, 94, 1, 0.25)',
+      bgGlass: 'rgba(10, 38, 46, 0.82)',
+      bgGlassStrong: 'rgba(5, 25, 31, 0.96)',
+      textPrimary: '#FFFFFF',
+      textSecondary: '#F4E6C1',
+      textMuted: '#A7C4CC',
+      borderSubtle: 'rgba(244, 230, 193, 0.18)',
+      swatch: '#165D6F'
+    },
+    {
+      id: 'pacifico',
+      name: 'Azul Océano Pacífico',
+      badge: 'Profundidad Marina',
+      tagline: 'Fondo azul noche marino (#06101E) inspirado en las costas del Pacífico y arrecifes del Caribe; contraste náutico de alta gama.',
+      icon: 'fa-water',
+      type: 'dark',
+      bgSpace: '#06101E',
+      bgDark: '#0C1C33',
+      bgSurface: '#142747',
+      bgCard: 'rgba(12, 28, 51, 0.88)',
+      bgCardHover: 'rgba(246, 94, 1, 0.25)',
+      bgGlass: 'rgba(12, 28, 51, 0.82)',
+      bgGlassStrong: 'rgba(6, 16, 30, 0.96)',
+      textPrimary: '#FFFFFF',
+      textSecondary: '#E2E8F0',
+      textMuted: '#94A3B8',
+      borderSubtle: 'rgba(56, 189, 248, 0.22)',
+      swatch: '#0B2545'
+    },
+    {
+      id: 'carbon',
+      name: 'Carbón Volcánico Fuego',
+      badge: 'Magma & Ceniza',
+      tagline: 'Roca basáltica carbón (#120804) que hace resplandecer las brasas y tonos dorados inspirados en el Volcán Masaya.',
+      icon: 'fa-volcano',
+      type: 'dark',
+      bgSpace: '#120804',
+      bgDark: '#201008',
+      bgSurface: '#2F180E',
+      bgCard: 'rgba(32, 16, 8, 0.88)',
+      bgCardHover: 'rgba(246, 94, 1, 0.28)',
+      bgGlass: 'rgba(32, 16, 8, 0.82)',
+      bgGlassStrong: 'rgba(18, 8, 4, 0.96)',
+      textPrimary: '#FFFFFF',
+      textSecondary: '#FEF3C7',
+      textMuted: '#D4B8A3',
+      borderSubtle: 'rgba(246, 94, 1, 0.28)',
+      swatch: '#1F0F07'
+    }
+  ];
+
+  let activeSiteBg = 'default';
+  let activeCustomBgHex = null;
+
+  try {
+    const savedBg = JSON.parse(localStorage.getItem(SITE_BG_STORAGE_KEY) || 'null');
+    if (savedBg && savedBg.id) {
+      activeSiteBg = savedBg.id;
+      activeCustomBgHex = savedBg.customHex || null;
+    }
+  } catch (_) {}
+
   let currentThemeId = DEFAULT_THEME_ID;
 
   // Valores por defecto de personalización cromática de secciones
@@ -244,6 +380,141 @@
       activeCustomColors = { ...defaultCustomColors, ...JSON.parse(savedCustom) };
     }
   } catch (_) {}
+
+  function isColorLight(hex) {
+    if (!hex || typeof hex !== 'string') return false;
+    const clean = hex.replace('#', '');
+    const num = parseInt(clean.length === 3 ? clean.split('').map(c => c + c).join('') : clean, 16);
+    if (Number.isNaN(num)) return false;
+    const r = (num >> 16) & 255;
+    const g = (num >> 8) & 255;
+    const b = num & 255;
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 155;
+  }
+
+  function applySiteBackground(bgId, customHex = null, save = true) {
+    activeSiteBg = bgId || 'default';
+    if (customHex) activeCustomBgHex = customHex;
+    const root = document.documentElement;
+    const preset = SITE_BACKGROUND_PRESETS.find(p => p.id === bgId);
+
+    if (preset) {
+      root.style.setProperty('--bg-space', preset.bgSpace);
+      root.style.setProperty('--bg-dark', preset.bgDark);
+      root.style.setProperty('--bg-surface', preset.bgSurface);
+      root.style.setProperty('--bg-card', preset.bgCard);
+      root.style.setProperty('--bg-card-hover', preset.bgCardHover);
+      root.style.setProperty('--bg-glass', preset.bgGlass);
+      root.style.setProperty('--bg-glass-strong', preset.bgGlassStrong);
+      root.style.setProperty('--text-primary', preset.textPrimary);
+      root.style.setProperty('--text-secondary', preset.textSecondary);
+      root.style.setProperty('--text-muted', preset.textMuted);
+      root.style.setProperty('--border-subtle', preset.borderSubtle);
+
+      root.setAttribute('data-site-bg', preset.id);
+      root.setAttribute('data-bg-mode', preset.type);
+    } else if (bgId === 'custom' && (customHex || activeCustomBgHex)) {
+      const hex = customHex || activeCustomBgHex;
+      const rgb = hexToRgb(hex);
+      const isLight = isColorLight(hex);
+      const textPrimary = isLight ? '#0F172A' : '#FFFFFF';
+      const textSecondary = isLight ? '#334155' : '#E2E8F0';
+      const textMuted = isLight ? '#64748B' : '#94A3B8';
+
+      root.style.setProperty('--bg-space', hex);
+      root.style.setProperty('--bg-dark', hex);
+      root.style.setProperty('--bg-surface', isLight ? '#F1F5F9' : '#0F172A');
+      root.style.setProperty('--bg-card', `rgba(${rgb}, 0.9)`);
+      root.style.setProperty('--bg-glass', `rgba(${rgb}, 0.85)`);
+      root.style.setProperty('--bg-glass-strong', `rgba(${rgb}, 0.96)`);
+      root.style.setProperty('--text-primary', textPrimary);
+      root.style.setProperty('--text-secondary', textSecondary);
+      root.style.setProperty('--text-muted', textMuted);
+
+      root.setAttribute('data-site-bg', 'custom');
+      root.setAttribute('data-bg-mode', isLight ? 'light' : 'dark');
+    } else {
+      // Revertir al fondo del tema activo
+      const activeTheme = THEMES_CATALOG.find(t => t.themeId === currentThemeId) || THEMES_CATALOG[0];
+      root.style.setProperty('--bg-space', activeTheme.palette.background);
+      root.style.setProperty('--bg-dark', activeTheme.palette.surface);
+      root.style.setProperty('--bg-surface', activeTheme.palette.surfaceElevated);
+      root.style.setProperty('--bg-card', `rgba(${hexToRgb(activeTheme.palette.surface)}, 0.85)`);
+      root.style.setProperty('--bg-card-hover', `rgba(${hexToRgb(activeTheme.palette.primary)}, 0.3)`);
+      root.style.setProperty('--bg-glass', `rgba(${hexToRgb(activeTheme.palette.surface)}, 0.75)`);
+      root.style.setProperty('--bg-glass-strong', `rgba(${hexToRgb(activeTheme.palette.background)}, 0.92)`);
+      root.style.setProperty('--text-primary', '#FFFFFF');
+      root.style.setProperty('--text-secondary', '#E2E8F0');
+      root.style.setProperty('--text-muted', '#94A3B8');
+
+      root.removeAttribute('data-site-bg');
+      root.setAttribute('data-bg-mode', 'dark');
+    }
+
+    if (save) {
+      try {
+        localStorage.setItem(SITE_BG_STORAGE_KEY, JSON.stringify({ id: activeSiteBg, customHex: activeCustomBgHex }));
+      } catch (_) {}
+      const name = preset ? preset.name : bgId === 'custom' ? 'Color Libre' : 'Fondo del Tema';
+      showToast(`Fondo del sitio: ${name}`);
+    }
+
+    syncSiteBgUI();
+  }
+
+  function syncSiteBgUI() {
+    // Sincronizar pills rápidas
+    document.querySelectorAll('.baq-quick-bg-pill').forEach(pill => {
+      pill.classList.toggle('is-active', pill.dataset.bg === activeSiteBg);
+    });
+
+    // Sincronizar tarjetas en el panel
+    document.querySelectorAll('.baq-sitebg-card').forEach(card => {
+      card.classList.toggle('is-active', card.dataset.bg === activeSiteBg);
+    });
+
+    // Sincronizar input libre
+    const customInput = document.getElementById('inputSiteBgCustomColor');
+    const customVal = document.getElementById('labelSiteBgCustomVal');
+    if (customInput && activeCustomBgHex) {
+      customInput.value = activeCustomBgHex;
+      if (customVal) customVal.textContent = activeCustomBgHex;
+    }
+  }
+
+  function renderSiteBackgroundCards() {
+    const grid = document.getElementById('baqSiteBgCardsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    SITE_BACKGROUND_PRESETS.forEach(preset => {
+      const isActive = activeSiteBg === preset.id;
+      const card = document.createElement('div');
+      card.className = `baq-sitebg-card ${isActive ? 'is-active' : ''}`;
+      card.dataset.bg = preset.id;
+
+      card.innerHTML = `
+        <div class="baq-sitebg-card-top">
+          <div class="baq-sitebg-swatch" style="background:${preset.swatch}"></div>
+          <div class="baq-sitebg-title-wrap">
+            <h3 class="baq-sitebg-name">${escapeHtml(preset.name)}</h3>
+            <span class="baq-sitebg-badge">${escapeHtml(preset.badge)}</span>
+          </div>
+        </div>
+        <p class="baq-sitebg-desc">${escapeHtml(preset.tagline)}</p>
+        <button type="button" class="baq-sitebg-action-btn">
+          ${isActive ? '✓ Fondo Activo' : 'Aplicar Fondo'}
+        </button>
+      `;
+
+      card.addEventListener('click', () => {
+        applySiteBackground(preset.id);
+      });
+
+      grid.appendChild(card);
+    });
+  }
 
   
   /**
@@ -488,13 +759,30 @@
           </button>
         </div>
 
-                <!-- Selector de Pestañas del Modal -->
+        <!-- Barra de Acceso Rápido a Fondos de Alto Contraste -->
+        <div class="baq-quick-bg-strip">
+          <span class="baq-quick-bg-label"><i class="fa-solid fa-brush"></i> Fondo Rápido:</span>
+          <div class="baq-quick-bg-pills">
+            <button type="button" class="baq-quick-bg-pill" data-bg="default" title="Fondo del Tema Activo">Original</button>
+            <button type="button" class="baq-quick-bg-pill" data-bg="negro" title="Negro OLED de Máximo Contraste">Negro</button>
+            <button type="button" class="baq-quick-bg-pill" data-bg="blanco" title="Blanco Solar de Alta Lectura">Blanco</button>
+            <button type="button" class="baq-quick-bg-pill" data-bg="crema" title="Crema Arena Pinolera">Crema</button>
+            <button type="button" class="baq-quick-bg-pill" data-bg="selva" title="Petróleo Selva Profunda">Selva</button>
+            <button type="button" class="baq-quick-bg-pill" data-bg="oceano" title="Azul Océano Pacífico">Océano</button>
+            <button type="button" class="baq-quick-bg-pill" data-bg="carbon" title="Carbón Masaya Fuego">Carbón</button>
+          </div>
+        </div>
+
+        <!-- Selector de Pestañas del Modal -->
         <div class="baq-theme-modal-nav-tabs">
           <button type="button" class="baq-modal-tab-btn is-active" id="tabBtnCatalog" data-view="catalog">
             <i class="fa-solid fa-palette"></i> <span>Temas de Nicaragua</span>
           </button>
+          <button type="button" class="baq-modal-tab-btn" id="tabBtnSiteBg" data-view="sitebg">
+            <i class="fa-solid fa-fill-drip"></i> <span>Fondo del Sitio</span>
+          </button>
           <button type="button" class="baq-modal-tab-btn" id="tabBtnStudio" data-view="studio">
-            <i class="fa-solid fa-sliders"></i> <span>Personalizar Fondo &amp; Letras</span>
+            <i class="fa-solid fa-sliders"></i> <span>Tinte &amp; Letras de Secciones</span>
           </button>
         </div>
 
@@ -516,7 +804,57 @@
           </div>
         </div>
 
-        <!-- VISTA 2: COLOR STUDIO (PERSONALIZADOR DE SECCIONES & LETRAS) -->
+        <!-- VISTA 2: FONDO DEL SITIO (NEGRO, BLANCO Y CONTRASTES DE IDENTIDAD) -->
+        <div id="baqModalViewSiteBg" class="baq-modal-view-panel">
+          <div class="baq-sitebg-container">
+            <div class="baq-sitebg-intro">
+              <i class="fa-solid fa-circle-half-stroke"></i>
+              <div>
+                <strong>Fondos Globales de Alto Contraste</strong>
+                <p>Cambia el fondo de toda la plataforma: negro puro para resaltar colores, blanco limpio para lectura diurna, o tonalidades en contraste armónico con la identidad de Baqueano.</p>
+              </div>
+            </div>
+
+            <!-- Grid de tarjetas de fondos predefinidos -->
+            <div class="baq-sitebg-grid" id="baqSiteBgCardsGrid">
+              <!-- Renderizado dinámico -->
+            </div>
+
+            <!-- Selector de Color Libre para el Fondo del Sitio -->
+            <div class="baq-sitebg-custom-card">
+              <div class="baq-sitebg-custom-head">
+                <span class="baq-sitebg-custom-icon"><i class="fa-solid fa-eye-dropper"></i></span>
+                <div>
+                  <h4>Fondo Libre Personalizado</h4>
+                  <p>Elige cualquier color para el fondo de la web. Los textos se adaptarán automáticamente para garantizar alto contraste.</p>
+                </div>
+              </div>
+              <div class="baq-sitebg-custom-body">
+                <div class="baq-sitebg-custom-picker">
+                  <input type="color" id="inputSiteBgCustomColor" value="#0A0F1D">
+                  <span id="labelSiteBgCustomVal">#0A0F1D</span>
+                </div>
+                <button type="button" class="baq-sitebg-custom-btn" id="btnApplyCustomSiteBg">
+                  <i class="fa-solid fa-check"></i> Aplicar Fondo Libre
+                </button>
+              </div>
+            </div>
+
+            <!-- Tarjeta de previsualización -->
+            <div class="baq-sitebg-preview-card">
+              <div class="baq-sitebg-preview-badge">Muestra de Contraste Activo</div>
+              <h3 class="baq-sitebg-preview-title">Baqueano Nicaragua</h3>
+              <p class="baq-sitebg-preview-text">Turismo auténtico, reservas naturales y comunidades vivas. Contraste optimizado para una lectura descansada y de alta gama.</p>
+              <div class="baq-sitebg-preview-chips">
+                <span class="baq-sitebg-preview-chip chip-primary">Petróleo Teal</span>
+                <span class="baq-sitebg-preview-chip chip-orange">Naranja Fuego</span>
+                <span class="baq-sitebg-preview-chip chip-cream">Arena Pinolera</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA 3: COLOR STUDIO (PERSONALIZADOR DE SECCIONES & LETRAS) -->
         <div id="baqModalViewStudio" class="baq-modal-view-panel">
           <div class="baq-studio-container">
             <div class="baq-studio-intro">
@@ -665,33 +1003,65 @@
 
     // Evento restablecer
     document.getElementById('baqThemeResetBtn').addEventListener('click', () => {
-      applyTheme(DEFAULT_THEME_ID);
+      applySiteBackground('default', null, true);
+      applyTheme(DEFAULT_THEME_ID, false);
       applyCustomSectionColors(defaultCustomColors);
-      showToast('Colores restablecidos a los valores oficiales de Baqueano.');
+      showToast('Tema y fondo restablecidos a los valores oficiales de Baqueano.');
     });
 
-    // Eventos de filtros
-    
-    // Eventos de Pestañas (Catálogo vs Color Studio)
+    // Eventos de Pestañas (Catálogo vs Fondo del Sitio vs Color Studio)
     const tabBtnCatalog = document.getElementById('tabBtnCatalog');
+    const tabBtnSiteBg = document.getElementById('tabBtnSiteBg');
     const tabBtnStudio = document.getElementById('tabBtnStudio');
     const viewCatalog = document.getElementById('baqModalViewCatalog');
+    const viewSiteBg = document.getElementById('baqModalViewSiteBg');
     const viewStudio = document.getElementById('baqModalViewStudio');
 
-    if (tabBtnCatalog && tabBtnStudio && viewCatalog && viewStudio) {
-      tabBtnCatalog.addEventListener('click', () => {
-        tabBtnCatalog.classList.add('is-active');
-        tabBtnStudio.classList.remove('is-active');
-        viewCatalog.classList.add('is-active');
-        viewStudio.classList.remove('is-active');
+    function switchModalTab(targetTab) {
+      const tabs = [
+        { btn: tabBtnCatalog, panel: viewCatalog, id: 'catalog' },
+        { btn: tabBtnSiteBg, panel: viewSiteBg, id: 'sitebg' },
+        { btn: tabBtnStudio, panel: viewStudio, id: 'studio' }
+      ];
+
+      tabs.forEach(({ btn, panel, id }) => {
+        if (!btn || !panel) return;
+        const isActive = id === targetTab;
+        btn.classList.toggle('is-active', isActive);
+        panel.classList.toggle('is-active', isActive);
       });
 
-      tabBtnStudio.addEventListener('click', () => {
-        tabBtnStudio.classList.add('is-active');
-        tabBtnCatalog.classList.remove('is-active');
-        viewStudio.classList.add('is-active');
-        viewCatalog.classList.remove('is-active');
+      if (targetTab === 'sitebg') {
+        renderSiteBackgroundCards();
+        syncSiteBgUI();
+      } else if (targetTab === 'studio') {
         syncColorControlsUI();
+      }
+    }
+
+    if (tabBtnCatalog) tabBtnCatalog.addEventListener('click', () => switchModalTab('catalog'));
+    if (tabBtnSiteBg) tabBtnSiteBg.addEventListener('click', () => switchModalTab('sitebg'));
+    if (tabBtnStudio) tabBtnStudio.addEventListener('click', () => switchModalTab('studio'));
+
+    // Eventos de pills rápidas de fondo
+    document.querySelectorAll('.baq-quick-bg-pill').forEach((pill) => {
+      pill.addEventListener('click', () => {
+        applySiteBackground(pill.dataset.bg);
+      });
+    });
+
+    // Eventos de color libre para fondo del sitio
+    const inputSiteBgCustom = document.getElementById('inputSiteBgCustomColor');
+    const labelSiteBgCustom = document.getElementById('labelSiteBgCustomVal');
+    const btnApplyCustomSiteBg = document.getElementById('btnApplyCustomSiteBg');
+    if (inputSiteBgCustom) {
+      inputSiteBgCustom.addEventListener('input', (e) => {
+        if (labelSiteBgCustom) labelSiteBgCustom.textContent = e.target.value.toUpperCase();
+      });
+    }
+    if (btnApplyCustomSiteBg && inputSiteBgCustom) {
+      btnApplyCustomSiteBg.addEventListener('click', () => {
+        applySiteBackground('custom', inputSiteBgCustom.value);
       });
     }
 
@@ -822,6 +1192,11 @@
     currentThemeId = themeId;
     applyCssVariables(themeId);
 
+    // Si hay un fondo de sitio activo diferente al default, reaplicarlo para conservar su contraste
+    if (activeSiteBg !== 'default') {
+      applySiteBackground(activeSiteBg, activeCustomBgHex, false);
+    }
+
     try {
       localStorage.setItem(STORAGE_KEY, themeId);
     } catch (_) {}
@@ -861,6 +1236,8 @@
   function openModal() {
     buildModal();
     renderCards('all');
+    renderSiteBackgroundCards();
+    syncSiteBgUI();
     const backdrop = document.getElementById('baqThemeModalBackdrop');
     if (backdrop) {
       backdrop.classList.add('is-open');
@@ -885,6 +1262,7 @@
    */
   function init() {
     ensureStylesLoaded();
+    applySiteBackground(activeSiteBg, activeCustomBgHex, false);
     injectNavbarButton();
     injectFloatingTrigger();
   }
@@ -909,10 +1287,16 @@
 
   window.BaqueanoThemeManager = {
     applyTheme,
+    applySiteBackground,
     openModal,
     closeModal,
-    resetTheme: () => applyTheme(DEFAULT_THEME_ID),
+    resetTheme: () => {
+      applySiteBackground('default', null, true);
+      applyTheme(DEFAULT_THEME_ID);
+    },
     getActiveTheme: () => currentThemeId,
+    getActiveSiteBackground: () => activeSiteBg,
+    getSiteBackgroundPresets: () => SITE_BACKGROUND_PRESETS,
     getCatalog: () => THEMES_CATALOG
   };
 })();

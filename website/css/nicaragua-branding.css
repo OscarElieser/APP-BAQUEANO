@@ -2838,7 +2838,14 @@
 .compact-nl-form {
   display: flex;
   gap: 8px;
-  min-width: 340px;
+  min-width: min(340px, 100%);
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .compact-nl-form {
+    flex-direction: column;
+  }
 }
 
 .compact-nl-input {

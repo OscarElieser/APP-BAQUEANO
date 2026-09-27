@@ -1620,14 +1620,14 @@ html body .index-inline-066 {
 
 /* Tarjeta de testimonio rotatoria */
 .exp-card {
-  min-width: 380px;
-  max-width: 380px;
-  width: 380px;
+  min-width: min(380px, calc(100vw - 2.5rem));
+  max-width: min(380px, calc(100vw - 2.5rem));
+  width: min(380px, calc(100vw - 2.5rem));
   flex-shrink: 0;
   background: rgba(15, 23, 42, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 1.6rem;
+  padding: clamp(1.1rem, 3.5vw, 1.6rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

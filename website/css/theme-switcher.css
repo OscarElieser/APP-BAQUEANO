@@ -76,8 +76,8 @@
   align-items: center;
   gap: 10px;
   position: fixed;
-  bottom: 24px;
-  left: 24px;
+  bottom: max(20px, calc(16px + env(safe-area-inset-bottom)));
+  left: max(20px, calc(16px + env(safe-area-inset-left)));
   z-index: 9999;
   background: rgba(15, 23, 42, 0.88);
   border: 1px solid rgba(246, 94, 1, 0.5);
@@ -662,7 +662,7 @@
 
 .baq-studio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 16px;
 }
 
@@ -832,3 +832,425 @@
   max-width: 650px;
   transition: color 0.2s ease;
 }
+
+/* ==========================================================================
+   BARRA DE ACCESO RÁPIDO DE FONDO (FONDO DEL SITIO)
+   ========================================================================== */
+.baq-quick-bg-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 28px;
+  background: rgba(10, 15, 29, 0.65);
+  border-bottom: 1px solid rgba(244, 230, 193, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.baq-quick-bg-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.baq-quick-bg-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #F4E6C1;
+  white-space: nowrap;
+}
+
+.baq-quick-bg-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.baq-quick-bg-pill {
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(244, 230, 193, 0.14);
+  border-radius: 16px;
+  color: #CBD5E1;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.baq-quick-bg-pill:hover,
+.baq-quick-bg-pill.is-active {
+  background: rgba(246, 94, 1, 0.25);
+  border-color: #F65E01;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   VISTA: FONDO DEL SITIO (NEGRO, BLANCO Y CONTRASTE)
+   ========================================================================== */
+.baq-sitebg-container {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.baq-sitebg-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(22, 93, 111, 0.22) 0%, rgba(15, 23, 42, 0.6) 100%);
+  border: 1px solid rgba(22, 93, 111, 0.4);
+  border-radius: 16px;
+  color: #F4E6C1;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.baq-sitebg-intro i {
+  color: #F65E01;
+  font-size: 22px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.baq-sitebg-intro strong {
+  display: block;
+  font-size: 15px;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.baq-sitebg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 680px) {
+  .baq-sitebg-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.baq-sitebg-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(244, 230, 193, 0.14);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
+}
+
+.baq-sitebg-card:hover {
+  transform: translateY(-3px);
+  background: rgba(15, 23, 42, 0.96);
+  border-color: #F65E01;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(246, 94, 1, 0.3);
+}
+
+.baq-sitebg-card.is-active {
+  border-color: #F65E01;
+  background: rgba(22, 93, 111, 0.28);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(246, 94, 1, 0.4);
+}
+
+.baq-sitebg-card.is-active::after {
+  content: '✓ FONDO ACTIVO';
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 3px 9px;
+  background: linear-gradient(135deg, #F65E01, #FF7B26);
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.baq-sitebg-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.baq-sitebg-swatch {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+}
+
+.baq-sitebg-title-wrap {
+  flex: 1;
+}
+
+.baq-sitebg-name {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.baq-sitebg-badge {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #F65E01;
+}
+
+.baq-sitebg-desc {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  color: #CBD5E1;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.baq-sitebg-action-btn {
+  align-self: flex-start;
+  padding: 6px 16px;
+  background: rgba(22, 93, 111, 0.4);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 14px;
+  color: #F4E6C1;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.baq-sitebg-card:hover .baq-sitebg-action-btn,
+.baq-sitebg-card.is-active .baq-sitebg-action-btn {
+  background: #F65E01;
+  border-color: #F65E01;
+  color: #FFFFFF;
+}
+
+/* ── SELECTOR DE COLOR LIBRE DE FONDO ── */
+.baq-sitebg-custom-card {
+  padding: 18px 22px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px dashed rgba(246, 94, 1, 0.45);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.baq-sitebg-custom-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.baq-sitebg-custom-head h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.baq-sitebg-custom-head p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+.baq-sitebg-custom-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.baq-sitebg-apply-custom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: #165D6F;
+  border: 1px solid rgba(244, 230, 193, 0.25);
+  border-radius: 14px;
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.baq-sitebg-apply-custom-btn:hover {
+  background: #F65E01;
+  border-color: #F65E01;
+  transform: translateY(-1px);
+}
+
+/* ── PREVIEW CARD DE CONTRASTE ── */
+.baq-sitebg-preview-card {
+  background: var(--bg-space);
+  border: 1.5px solid var(--border-subtle, rgba(246, 94, 1, 0.3));
+  border-radius: 18px;
+  padding: 22px 26px;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  transition: all 0.3s ease;
+}
+
+.baq-sitebg-preview-card .sample-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #F65E01;
+  letter-spacing: 1px;
+}
+
+.baq-sitebg-preview-card .sample-tag {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted, #94A3B8);
+}
+
+.baq-sitebg-preview-card .baq-preview-title {
+  margin: 12px 0 8px;
+  color: var(--text-primary, #FFFFFF);
+}
+
+.baq-sitebg-preview-card .baq-preview-desc {
+  color: var(--text-secondary, #CBD5E1);
+  margin-bottom: 14px;
+}
+
+.baq-preview-sample-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.baq-preview-sample-buttons .sample-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.baq-preview-sample-buttons .sample-btn.primary {
+  background: #F65E01;
+  color: #FFFFFF;
+}
+
+.baq-preview-sample-buttons .sample-btn.secondary {
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(22, 93, 111, 0.6);
+  color: var(--text-primary, #FFFFFF);
+}
+
+/* ==========================================================================
+   ADAPTACIONES DE ALTO CONTRASTE PARA MODO CLARO (FONDO BLANCO / CREMA)
+   ========================================================================== */
+[data-bg-mode="light"] {
+  --text-primary: #0F172A !important;
+  --text-secondary: #334155 !important;
+  --text-muted: #64748B !important;
+  --text-light: #1E293B !important;
+  --border-subtle: rgba(15, 23, 42, 0.12) !important;
+  --bg-card: rgba(255, 255, 255, 0.94) !important;
+  --bg-surface: #F1F5F9 !important;
+  --bg-glass: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-bg-mode="light"] body {
+  color: #0F172A !important;
+  background-color: var(--bg-space) !important;
+}
+
+[data-bg-mode="light"] .main-navbar {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-bg-mode="light"] .main-navbar .brand-title {
+  color: #0F172A !important;
+}
+
+[data-bg-mode="light"] .nav-links-menu > a,
+[data-bg-mode="light"] .nav-dropdown-trigger {
+  color: #1E293B !important;
+}
+
+[data-bg-mode="light"] .nav-links-menu > a:hover,
+[data-bg-mode="light"] .nav-dropdown-trigger:hover {
+  color: #F65E01 !important;
+}
+
+[data-bg-mode="light"] .site-footer-pro {
+  background: linear-gradient(180deg, var(--bg-space) 0%, rgba(22, 93, 111, 0.08) 100%) !important;
+  border-top: 1px solid rgba(15, 23, 42, 0.12) !important;
+  color: #334155 !important;
+}
+
+[data-bg-mode="light"] .footer-col-header {
+  color: #0F172A !important;
+}
+
+[data-bg-mode="light"] .footer-bio-text {
+  color: #475569 !important;
+}
+
+[data-bg-mode="light"] .footer-link-list a,
+[data-bg-mode="light"] .footer-contact-item a {
+  color: #334155 !important;
+}
+
+[data-bg-mode="light"] .footer-link-list a:hover,
+[data-bg-mode="light"] .footer-contact-item a:hover {
+  color: #F65E01 !important;
+}
+
+[data-bg-mode="light"] .footer-legal-stack a {
+  color: #64748B !important;
+}
+
+[data-bg-mode="light"] .footer-legal-stack a:hover {
+  color: #F65E01 !important;
+}
+
+/* ==========================================================================
+   ADAPTACIONES DE ALTO CONTRASTE PARA MODO NEGRO PURO (OLED)
+   ========================================================================== */
+[data-site-bg="negro"] body,
+[data-site-bg="negro"] html {
+  background-color: #000000 !important;
+}
+
+[data-site-bg="negro"] .main-navbar {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-site-bg="negro"] .site-footer-pro {
+  background: #000000 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+

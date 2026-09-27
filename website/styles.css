@@ -29,6 +29,8 @@
 ============================================================================
 */
 
+@import url('css/responsive-ecosystem.css');
+
 /* ==========================================================================
    1. VARIABLES & DESIGN TOKENS
    ========================================================================== */
@@ -9005,6 +9007,157 @@ img {
     width: min(92vw, 1760px);
     max-width: 1760px;
   }
+}
+
+/* ========================================================================== */
+/* NAVEGACIÓN PÚBLICA — LENGUAJE VISUAL DEL CENTRO DE OPERACIONES            */
+/* 🎯 POR QUÉ: dar al drawer público la jerarquía, confianza y lectura rápida */
+/*    del centro operativo sin confundirlo con herramientas administrativas.  */
+/* ⚙️ CÓMO: cabecera de producto, filas compactas, riel activo, estados y pie */
+/*    informativo usando únicamente composición y animaciones aceleradas.      */
+/* 📦 QUÉ: acabado compartido, accesible y responsivo para navegación lateral. */
+/* ========================================================================== */
+@media (max-width: 1699px) {
+  .main-navbar .nav-links-menu,
+  .main-navbar .nav-links-menu.mobile-open {
+    width: min(360px, 92vw);
+    max-width: 92vw;
+    padding: 0 12px max(16px, env(safe-area-inset-bottom));
+    gap: 4px;
+    border-right: 1px solid rgba(244, 230, 193, 0.14);
+    border-radius: 0;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(22, 93, 111, 0.24), transparent 34%),
+      linear-gradient(180deg, #071520 0%, #08111d 48%, #060d17 100%);
+    box-shadow: 30px 0 80px rgba(0, 0, 0, 0.62);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(244, 230, 193, 0.18) transparent;
+  }
+
+  .main-navbar .nav-drawer-header {
+    position: sticky;
+    z-index: 4;
+    top: 0;
+    min-height: 88px;
+    margin: 0 -12px 14px;
+    padding: max(14px, env(safe-area-inset-top)) 16px 14px;
+    justify-content: flex-start;
+    gap: 11px;
+    border-bottom: 1px solid rgba(244, 230, 193, 0.12);
+    background: rgba(7, 21, 32, 0.94);
+    backdrop-filter: blur(18px);
+  }
+
+  .main-navbar .nav-drawer-brand-mark {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    flex: 0 0 44px;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(244, 230, 193, 0.22);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(22, 93, 111, 0.7), rgba(15, 23, 42, 0.96));
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), inset 0 1px rgba(255,255,255,0.08);
+  }
+
+  .main-navbar .nav-drawer-brand-mark img { width: 38px; height: 38px; object-fit: contain; }
+  .main-navbar .nav-drawer-identity { flex: 1; gap: 1px; min-width: 0; }
+  .main-navbar .nav-drawer-kicker { color: #F65E01; font-size: 0.56rem; font-weight: 900; letter-spacing: 0.16em; }
+  .main-navbar .nav-drawer-identity strong { color: #fff; font-size: 0.93rem; letter-spacing: 0.13em; }
+  .main-navbar .nav-drawer-identity small { display: flex; align-items: center; gap: 5px; color: #9db2c1; font-size: 0.61rem; letter-spacing: 0.04em; text-transform: none; }
+  .main-navbar .nav-drawer-identity small i { width: 6px; height: 6px; border-radius: 50%; background: #48d6a0; box-shadow: 0 0 10px rgba(72,214,160,0.75); }
+
+  .main-navbar .nav-drawer-close {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.035);
+  }
+
+  .main-navbar .nav-links-menu.mobile-open > a,
+  .main-navbar .nav-links-menu.mobile-open .nav-dropdown-trigger {
+    position: relative;
+    min-height: 54px;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .main-navbar .nav-links-menu.mobile-open > a:hover,
+  .main-navbar .nav-links-menu.mobile-open > a.active,
+  .main-navbar .nav-links-menu.mobile-open .nav-dropdown.is-open > .nav-dropdown-trigger {
+    color: #fff;
+    border-color: rgba(244, 230, 193, 0.12);
+    background: linear-gradient(90deg, rgba(22, 93, 111, 0.36), rgba(255,255,255,0.025));
+    box-shadow: inset 0 1px rgba(255,255,255,0.035);
+    transform: translateX(2px);
+  }
+
+  .main-navbar .nav-links-menu.mobile-open > a.active::before,
+  .main-navbar .nav-links-menu.mobile-open .nav-dropdown.is-open > .nav-dropdown-trigger::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 11px;
+    bottom: 11px;
+    width: 3px;
+    border-radius: 0 4px 4px 0;
+    background: #F65E01;
+    box-shadow: 0 0 12px rgba(246, 94, 1, 0.58);
+  }
+
+  .main-navbar .nav-links-menu.mobile-open :is(a,.nav-dropdown-trigger) .nav-icon-box {
+    width: 34px;
+    height: 34px;
+    border-color: rgba(244, 230, 193, 0.11);
+    border-radius: 9px;
+    background: rgba(255,255,255,0.035);
+  }
+
+  .main-navbar .nav-links-menu.mobile-open :is(a,.nav-dropdown-trigger) .nav-icon-box .nav-icon {
+    color: #F4E6C1;
+    font-size: 0.9rem;
+  }
+
+  .main-navbar .nav-links-menu.mobile-open :is(a,.nav-dropdown-trigger):hover .nav-icon-box,
+  .main-navbar .nav-links-menu.mobile-open > a.active .nav-icon-box {
+    border-color: rgba(246, 94, 1, 0.32);
+    background: rgba(246, 94, 1, 0.12);
+    transform: none;
+    box-shadow: none;
+  }
+
+  .main-navbar .nav-links-menu.mobile-open :is(a,.nav-dropdown-trigger) .nav-label { font-size: 0.79rem; letter-spacing: 0.02em; }
+  .main-navbar .nav-links-menu.mobile-open :is(a,.nav-dropdown-trigger) .nav-sublabel { margin-top: 2px; color: #8095a6; font-size: 0.62rem; }
+  .main-navbar .nav-links-menu.mobile-open .nav-dropdown-menu { border-color: rgba(244, 230, 193, 0.1); border-radius: 10px; background: rgba(2, 10, 18, 0.56); }
+
+  .main-navbar .nav-drawer-footer {
+    display: flex;
+    min-height: 62px;
+    margin-top: auto;
+    padding: 11px 10px;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(244, 230, 193, 0.1);
+    border-radius: 12px;
+    background: rgba(22, 93, 111, 0.12);
+  }
+
+  .main-navbar .nav-drawer-footer > span { display: grid; grid-template-columns: 18px 1fr; flex: 1; align-items: center; }
+  .main-navbar .nav-drawer-footer > span > i { grid-row: 1 / 3; color: #48d6a0; }
+  .main-navbar .nav-drawer-footer b { color: #e7eef3; font-size: 0.68rem; }
+  .main-navbar .nav-drawer-footer small { color: #718696; font-size: 0.58rem; }
+  .main-navbar .nav-drawer-footer > a { width: 34px; height: 34px; display: grid; flex: 0 0 34px; place-items: center; padding: 0; border: 1px solid rgba(246,94,1,0.28); border-radius: 9px; color: #fff; background: rgba(246,94,1,0.12); }
+}
+
+@media (min-width: 1700px) {
+  .main-navbar .nav-drawer-brand-mark,
+  .main-navbar .nav-drawer-footer { display: none; }
 }
 
 /* Ocultar elementos redundantes fuera del menú principal en escritorio */

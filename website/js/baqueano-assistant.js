@@ -251,17 +251,49 @@
       .trim();
   }
 
+  // ============================================================================
+  // CONTROL ÚNICO DE VOZ
+  // POR QUÉ: la preferencia, el icono y la locución deben representar siempre el
+  // mismo estado para que un segundo clic detenga la lectura de forma inmediata.
+  // CÓMO: una sola función sincroniza la interfaz y una referencia identifica la
+  // locución vigente, evitando que callbacks antiguos alteren una lectura nueva.
+  // QUÉ: activación con lectura actual, apagado instantáneo y continuidad futura.
+  // ============================================================================
+  function syncVoiceButton() {
+    const button = root?.querySelector('[data-command="voice"]');
+    if (!button) return;
+    const enabled = Boolean(preferences.voice);
+    const icon = button.querySelector('i');
+    if (icon) icon.className = enabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    button.setAttribute('aria-pressed', String(enabled));
+    button.setAttribute('aria-label', enabled ? 'Apagar voz y detener lectura' : 'Activar voz y leer mensaje');
+    button.title = enabled ? 'Apagar voz' : 'Activar voz';
+  }
+
+  function stopSpeaking() {
+    state.activeUtterance = null;
+    window.speechSynthesis?.cancel();
+    if (state.character === 'speaking') setCharacter('idle');
+  }
+
+  function currentSpeechText() {
+    const latestAssistant = [...session.messages].reverse().find(message => message.role === 'assistant')?.content;
+    return state.suggestionText || latestAssistant || 'La voz de Baqüi está activada. Seguiré leyendo mis próximos mensajes.';
+  }
+
   function speak(text) {
     if (!('speechSynthesis' in window) || !preferences.voice) return;
-    speechSynthesis.cancel();
+    stopSpeaking();
     const spoken = cleanTextForSpeech(text).slice(0, 1000);
     if (!spoken) return;
     const utterance = new SpeechSynthesisUtterance(spoken);
+    state.activeUtterance = utterance;
     utterance.lang = 'es-NI';
     utterance.rate = 0.95;
     utterance.pitch = 1.0;
-    utterance.onend = () => setCharacter('idle');
-    utterance.onerror = () => setCharacter('idle');
+    utterance.onstart = () => { if (state.activeUtterance === utterance) setCharacter('speaking'); };
+    utterance.onend = () => { if (state.activeUtterance === utterance) { state.activeUtterance = null; setCharacter('idle'); } };
+    utterance.onerror = () => { if (state.activeUtterance === utterance) { state.activeUtterance = null; setCharacter('idle'); } };
     speechSynthesis.speak(utterance);
   }
 
@@ -621,6 +653,38 @@ En Baqueano integramos todas estas fuentes oficiales en nuestras fichas territor
       };
     }
 
+    // 4b. CONSULTAS SOBRE REDES SOCIALES Y CANALES OFICIALES
+    if (/redes|red social|instagram|facebook|tiktok|canal|seguir|contacto/.test(text)) {
+      const message = `¡Conectate con nuestra comunidad viva de exploradores y baqueanos en nuestras redes sociales oficiales!
+
+📸 Instagram Oficial:
+• Cuenta: @baqueano_nicaragua
+• Enlace: https://www.instagram.com/baqueano_nicaragua
+
+📲 Facebook Oficial:
+• Comunidad Baqueano Nicaragua
+• Enlace: https://www.facebook.com/share/1S71xwJKse/
+
+🎬 TikTok Oficial:
+• Cuenta: @baqueano.nicaragu
+• Enlace: https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e
+
+💬 Canal Oficial de WhatsApp:
+• Línea directa comunitaria: +505 8443-1289 (https://wa.me/50584431289)
+
+Seguinos para descubrir contenido en video, historias de artesanos locales y el estado de los senderos en tiempo real.`;
+
+      return {
+        message,
+        animation: 'celebrating',
+        actions: [
+          { type: 'open_destination', label: '📸 Abrir Instagram', url: 'https://www.instagram.com/baqueano_nicaragua' },
+          { type: 'open_destination', label: '📲 Abrir Facebook', url: 'https://www.facebook.com/share/1S71xwJKse/' },
+          { type: 'open_destination', label: '🎬 Abrir TikTok', url: 'https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e' }
+        ]
+      };
+    }
+
     // 5. RESPUESTA GENERAL ASISTENCIAL (Nivel ChatGPT/Gemini con identidad Baqueano)
     const message = `¡Hola explorador! Qué alegría conversar con vos. Como Baqüi, tu guía y guardabarranco virtual, estoy nutrido con la información oficial de INTUR, VisitaNicaragua, MARENA, UNESCO, Google y la red comunitaria de Baqueano.
 
@@ -742,6 +806,10 @@ Puedo ayudarte con:
     if (action.type === 'play_audio') { document.querySelector('audio')?.play().catch(() => {}); return; }
     if (action.type === 'pause_audio') { document.querySelectorAll('audio').forEach(audio => audio.pause()); return; }
     if (action.type === 'save_favorite') { if (!confirm('¿Guardar este destino en tus favoritos de este dispositivo?')) return; const favorites = safeJson(localStorage.getItem('baqueano_favorites'), []); if (action.id && !favorites.includes(action.id)) favorites.push(action.id); localStorage.setItem('baqueano_favorites', JSON.stringify(favorites)); appendMessage('Destino guardado en tus favoritos.', 'assistant'); return; }
+    if (action.url && /^https?:\/\//i.test(action.url) && !action.url.startsWith(location.origin)) {
+      window.open(action.url, '_blank', 'noopener,noreferrer');
+      return;
+    }
     location.href = safeLocalPath(action.url, routes[action.type] || 'destinos.html');
   }
 
@@ -753,7 +821,7 @@ Puedo ayudarte con:
 
   function isSnoozed() { return Number(session.hiddenUntil || 0) > Date.now(); }
   function open() { if (isSnoozed()) return; wakeCharacter(); state.open = true; state.minimized = false; $('#bqDrawer').classList.add('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'false'); $('#bqMascot').setAttribute('aria-expanded', 'true'); root.classList.remove('is-peeking'); hideSuggestion(); setTimeout(() => $('#bqInput')?.focus(), 120); track('assistant_opened'); }
-  function close() { state.open = false; $('#bqDrawer').classList.remove('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'true'); $('#bqMascot').setAttribute('aria-expanded', 'false'); window.speechSynthesis?.cancel(); track('assistant_closed'); schedulePeek(); }
+  function close() { state.open = false; $('#bqDrawer').classList.remove('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'true'); $('#bqMascot').setAttribute('aria-expanded', 'false'); stopSpeaking(); track('assistant_closed'); schedulePeek(); }
   function minimizeMascot() { session.minimized = true; state.minimized = true; saveSession(); close(); hideSuggestion(); root.classList.add('is-minimized'); track('assistant_minimized'); }
   function hide() { session.hidden = false; session.hiddenUntil = Date.now() + CONFIG.snoozeTime; saveSession(); close(); hideSuggestion(); root.classList.add('is-snoozed'); track('assistant_hidden', { minutes: 30 }); }
   function reopen() { session.hidden = false; session.hiddenUntil = 0; session.minimized = false; state.minimized = false; saveSession(); root.classList.remove('is-snoozed', 'is-minimized'); wakeCharacter(); showSuggestion(pageGuidance()); track('assistant_reopened'); }
@@ -819,6 +887,7 @@ Puedo ayudarte con:
 
   session.hidden = false;
   const root = buildUi(); if (!preferences.enabled) root.hidden = true; if (isSnoozed()) root.classList.add('is-snoozed'); else if (session.minimized) { state.minimized = true; root.classList.add('is-minimized'); }
+  syncVoiceButton();
   session.messages.length ? session.messages.forEach(message => appendMessage(message.content, message.role, false)) : appendMessage('¡Hola! Soy Baqüi, tu guardabarranco guía. Puedo ayudarte a descubrir Nicaragua con información territorial y acciones concretas.', 'assistant');
   initDrag($('#bqMascot'));
   $('#bqForm').addEventListener('submit', event => { event.preventDefault(); const input = $('#bqInput'), value = input.value; input.value = ''; ask(value); track('assistant_message_sent'); });
@@ -827,9 +896,15 @@ Puedo ayudarte con:
   root.addEventListener('click', event => {
     const command = event.target.closest('[data-command]')?.dataset.command; const quick = event.target.closest('[data-quick]')?.dataset.quick;
     if (quick) { track('assistant_quick_action', { action: quick }); if (ACTIONS.has(quick)) return executeAction({ type: quick }); const prompts = { lodging: 'Busco hospedaje con información registrada.', food: '¿Dónde puedo comer comida local?', music: 'Quiero conocer la música de Nicaragua.', history: 'Contame una historia verificada de Nicaragua.', experiences: 'Mostrame aventuras y experiencias.', favorites: 'Quiero ver mis favoritos.', country: 'Quiero conocer Nicaragua.', surprise: 'Sorpréndeme con un destino verificado.' }; return ask(prompts[quick]); }
-    if (command === 'close' || command === 'minimize') close(); if (command === 'minimize-mascot') minimizeMascot(); if (command === 'hide' || command === 'snooze') hide(); if (command === 'reopen') reopen(); if (command === 'suggestion-open') open(); if (command === 'suggestion-listen') { preferences.voice = true; savePreferences(); speak(state.suggestionText || 'Estoy listo para ayudarte a descubrir Nicaragua.'); } if (command === 'clear') { session.messages = []; session.tripProfile = {}; saveSession(); $('#bqMessages').replaceChildren(); appendMessage('Conversación limpia. ¿Qué querés descubrir?', 'assistant'); }
-    if (command === 'stop') { state.busy = false; state.controller?.abort(); window.speechSynthesis?.cancel(); }
-    if (command === 'voice') { preferences.voice = !preferences.voice; savePreferences(); const icon = event.target.closest('button').querySelector('i'); icon.className = preferences.voice ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'; track('assistant_voice_enabled', { enabled: preferences.voice }); }
+    if (command === 'close' || command === 'minimize') close(); if (command === 'minimize-mascot') minimizeMascot(); if (command === 'hide' || command === 'snooze') hide(); if (command === 'reopen') reopen(); if (command === 'suggestion-open') open(); if (command === 'suggestion-listen') { preferences.voice = true; savePreferences(); syncVoiceButton(); speak(state.suggestionText || 'Estoy listo para ayudarte a descubrir Nicaragua.'); } if (command === 'clear') { session.messages = []; session.tripProfile = {}; saveSession(); $('#bqMessages').replaceChildren(); appendMessage('Conversación limpia. ¿Qué querés descubrir?', 'assistant'); }
+    if (command === 'stop') { state.busy = false; state.controller?.abort(); stopSpeaking(); }
+    if (command === 'voice') {
+      preferences.voice = !preferences.voice;
+      savePreferences();
+      syncVoiceButton();
+      if (preferences.voice) speak(currentSpeechText()); else stopSpeaking();
+      track('assistant_voice_enabled', { enabled: preferences.voice });
+    }
     if (command === 'microphone') startRecognition(); if (command === 'weather') requestWeather(); if (command === 'promotion') showPromotions(); if (command === 'dismiss-suggestion') { session.lastSuggestion = Date.now(); saveSession(); hideSuggestion(); }
   });
   function wakeCharacter() { state.lastActivity = Date.now(); if (state.character === 'sleeping') { setCharacter('greeting'); setTimeout(() => { if (state.character === 'greeting') setCharacter('idle'); }, 1100); } }
@@ -876,5 +951,5 @@ Puedo ayudarte con:
   state.timers.push(setTimeout(contextualSuggestion, CONFIG.contextDelay)); state.timers.push(setInterval(contextualSuggestion, CONFIG.cooldown));
   state.timers.push(setInterval(() => { if (root.classList.contains('is-snoozed') && !isSnoozed()) reopen(); }, 15000)); schedulePeek();
 
-  window.BaqueanoAssistant = { version: '6', open, close, minimize: minimizeMascot, ask, speak: text => { preferences.voice = true; savePreferences(); speak(text); }, setState: setCharacter, show: () => { root.hidden = false; reopen(); }, hide, context, refreshWeather: requestWeather, showPromotions, checkService: checkServiceHealth };
+  window.BaqueanoAssistant = { version: '6', open, close, minimize: minimizeMascot, ask, speak: text => { preferences.voice = true; savePreferences(); syncVoiceButton(); speak(text); }, setState: setCharacter, show: () => { root.hidden = false; reopen(); }, hide, context, refreshWeather: requestWeather, showPromotions, checkService: checkServiceHealth };
 })(window, document);

@@ -164,3 +164,87 @@
     2. Se integró Baqüi en `404`, Baqueano IA, perfil, aviso legal, privacidad, términos, cookies, denuncias y modo sin conexión.
     3. Se añadieron mensajes contextuales específicos para cada una de esas páginas y se redujo la exclusión global únicamente a `admin.html`, que conserva su copiloto Ops IA independiente.
     4. La cobertura resultante es de 19 páginas públicas con Baqüi y 1 página administrativa con su asistente especializado.
+
+- **Consulta 9 (26 de Septiembre de 2026):**
+  > *"Revisar si la voz funciona: que se apague al dar clic sobre ella o que siga leyendo."*
+  - **Diagnóstico:** el botón cambiaba la preferencia visual, pero no detenía formalmente la locución al apagarse, no leía el contenido visible al activarse y podía mostrar un icono distinto al estado persistido tras recargar.
+  - **Ejecución:**
+    1. Un clic para activar ahora lee el mensaje contextual o la última respuesta de Baqüi y mantiene la lectura automática para mensajes posteriores.
+    2. Un segundo clic apaga la voz y cancela inmediatamente cualquier locución en curso.
+    3. Se sincronizaron icono, `aria-pressed`, etiqueta accesible y título con la preferencia guardada.
+    4. Se protegieron los callbacks de voz para que una locución cancelada no interrumpa visualmente una lectura nueva.
+
+- **Consulta 10 (26 de Septiembre de 2026):**
+  > *"Quiero hacer el menú de navegación más refinado, tipo Ops Center."*
+  - **Ejecución:**
+    1. Se rediseñó el drawer público con el lenguaje visual del Ops Center sin incorporar controles administrativos.
+    2. Se añadió cabecera de producto con logotipo, estado territorial activo y cierre compacto.
+    3. Se incorporaron filas operativas, riel naranja para la ruta activa, iconografía contenida y submenús de alta legibilidad.
+    4. Se agregó un pie de navegación con estado protegido y acceso directo al planificador.
+    5. El diseño mantiene adaptación móvil, tablet y escritorio compacto mediante composición compartida.
+
+- **Consulta 10 (26 de Septiembre de 2026, 21:28):**
+  > *"📸 Instagram: https://www.instagram.com/baqueano_nicaragua 📲 Facebook: https://www.facebook.com/share/1S71xwJKse/ 🎬 TikTok: https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e a los iconos de redes sociales agregarla por favor"*
+  - **Ejecución y Entregables:**
+    1. **Actualización Masiva de Enlaces Oficiales (17 Páginas Web):**
+       - Se sustituyeron los enlaces genéricos por las cuentas oficiales de Baqueano Nicaragua en:
+         * Instagram: `https://www.instagram.com/baqueano_nicaragua`
+         * Facebook: `https://www.facebook.com/share/1S71xwJKse/`
+         * TikTok: `https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e`
+       - Páginas actualizadas: `index.html` (se incorporó la barra de redes sociales que faltaba en su pie de página), `destinos.html`, `aliados.html`, `gastronomia.html`, `historia.html`, `ambiental.html`, `departamento.html`, `nosotros.html`, `musica.html`, `mi-negocio.html`, `perfil.html`, `baqueano-ai.html`, `terminos.html`, `privacidad.html`, `aviso-legal.html`, `cookies.html` y `denuncias.html`.
+    2. **Integración Cognitiva en Baqüi (`baqueano-assistant.js`):**
+       - Se añadió detección de intención para consultas sobre redes sociales, cuentas, Instagram, Facebook y TikTok.
+       - Baqüi ahora responde con los enlaces oficiales y botones de acción directa con apertura segura en nueva pestaña (`window.open(..., '_blank')`).
+    3. **Validación:**
+       - `node --check website/js/baqueano-assistant.js` verificado con código de salida 0.
+       - Verificación con `grep_search` en todo el proyecto confirmando 100% de consistencia en los 17 archivos HTML.
+
+- **Consulta 11 (26 de Septiembre de 2026, 21:35):**
+   > *"quiero que tema aiga una seccion de cambiar fondo del sitio ya sea negro, blanco o buscas colores que hagan constrante a la nuestra, en tema"*
+   - **Ejecución y Entregables:**
+     1. **Nueva Pestaña "Fondo del Sitio" y Barra de Acceso Rápido (theme-switcher.js y theme-switcher.css):**
+        - Se añadió una pestaña dedicada en el modal de temas: "Fondo del Sitio" (#tabBtnSiteBg), situada entre el catálogo de temas de Nicaragua y el estudio de tinte de secciones.
+        - Se incorporó una barra superior de acceso rápido con pills (.baq-quick-bg-strip) en la cabecera del modal para cambiar de fondo con 1 solo toque desde cualquier vista.
+     2. **Paleta de Fondos de Alto Contraste Curada para Baqueano:**
+        - **Original / Tema:** Restaura el fondo ambiental autóctono del tema seleccionado.
+        - **Negro OLED (#000000):** Fondo negro absoluto de máximo contraste que resalta la iconografía, el Naranja Fuego (#F65E01) y el Petróleo Teal (#165D6F).
+        - **Blanco Solar (#FFFFFF):** Modo claro de alta legibilidad con tipografía oscura adaptativa (#0F172A) conforme a WCAG AAA para lectura descansada bajo la luz del sol.
+        - **Crema Arena Pinolera (#FAF6ED):** Tono editorial cálido inspirado en el maíz y las costas de Nicaragua, suave para la vista.
+        - **Petróleo Selva Profunda (#05191F):** Verde/petróleo nocturno de alto contraste orgánico.
+        - **Azul Océano Pacífico (#06101E):** Azul ultramar náutico de gran elegancia y profundidad.
+        - **Carbón Masaya Fuego (#120804):** Basalto volcánico cálido que armoniza con los acentos de lava y fogata.
+        - **Fondo Libre Personalizado:** Selector hexadecimal interactivo (#inputSiteBgCustomColor) con detección algorítmica de luminancia (isColorLight) para adaptar automáticamente el color de tipografía y tarjetas.
+     3. **Adaptabilidad y Persistencia Automática:**
+        - El fondo seleccionado se guarda en localStorage (baqueano_site_bg) y se aplica instantáneamente en toda la web a través de variables CSS (--bg-space, --bg-dark, --bg-surface, --bg-card, --text-primary, --text-secondary, etc.).
+        - Se implementaron selectores [data-bg-mode="light"] y [data-site-bg="negro"] en theme-switcher.css para ajustar barras de navegación, bordes, sombras de tarjetas y textos con nitidez absoluta.
+     4. **Validación:**
+        - Verificación de sintaxis con node --check website/js/theme-switcher.js (código de salida 0).
+        - Validación de no uso de términos prohibidos.
+
+- **Consulta 12 (26 de Septiembre de 2026, 21:46):**
+   > *"tambien quiero que revise la responsabilidad y la adaptabilidad quiero que se adapte a cualquier dispositivo electronico. es una regla fundamental ya que es para un evento nacional y si quiero ganar"*
+   - **Ejecución y Entregables:**
+     1. **Auditoría Integral de Viewports y Safe Area (20 Páginas HTML):**
+        - Se estandarizó el meta viewport a `<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">` en los 20 archivos HTML del sitio web.
+        - Se habilitó la cobertura visual completa bajo notches, Dynamic Island (iPhone) y barras de navegación por gestos (Android).
+     2. **Nueva Hoja Maestra de Arquitectura Responsiva Universal (`responsive-ecosystem.css`):**
+        - Se creó el módulo central con documentación bajo el estándar del Círculo Dorado.
+        - **Cero Desbordamiento Horizontal:** Reglas estrictas en `html`, `body`, contenedores, tablas, bloques pre, imágenes y vídeos para erradicar cualquier fuga o scroll lateral no deseado.
+        - **Soporte Nativo de Safe Area Insets:** Integrado en `.main-navbar`, `.site-footer-pro`, `.baq-theme-float-btn` y modales flotantes mediante `env(safe-area-inset-top)`, `env(safe-area-inset-bottom)`, `env(safe-area-inset-left)` y `env(safe-area-inset-right)`.
+        - **Matriz de Breakpoints Universales:**
+          * Ultracompactos (<= 375px: iPhone SE, Galaxy A).
+          * Gama Alta / Estándar (376px - 480px: iPhone 14/15/16 Pro, Galaxy S24).
+          * Plegables desplegados y Tablets en retrato (481px - 768px).
+          * Tablets en paisaje y portátiles (769px - 1024px).
+          * Monitores de escritorio estándar (1025px - 1440px).
+          * Pantallas Ultra-Wide y 4K institucionales (> 1680px y > 2200px) con escala tipográfica fluida (`clamp`).
+          * Modo Paisaje en smartphones (`@media (max-height: 520px) and (orientation: landscape)`) para evitar recortes de interfaz.
+          * Pantallas táctiles (`@media (pointer: coarse)`) con áreas de pulsación mínimas de 40px-44px conformes a WCAG 2.1 AA/AAA.
+     3. **Corrección Quirúrgica de Anchos Rígidos Identificados:**
+        - `website/css/pages/index.css`: `.exp-card` convertido a fluido con `min-width: min(380px, calc(100vw - 2.5rem))` para evitar desbordamientos en teléfonos de 360px-390px.
+        - `website/css/nicaragua-branding.css`: `.compact-nl-form` adaptado con `min-width: min(340px, 100%)` y colapso vertical en <= 480px.
+        - `website/css/theme-switcher.css`: `.baq-studio-grid` y `.baq-sitebg-grid` optimizados para adaptarse a pantallas estrechas sin romper columnas.
+        - `website/css/layout.css` y `website/styles.css`: Vinculación universal mediante `@import url('css/responsive-ecosystem.css');`.
+     4. **Validación:**
+        - Verificación sintáctica con balance perfecto de llaves en todas las hojas modificadas.
+        - 100% libre de términos restringidos y 100% compatible con eventos y presentaciones institucionales.

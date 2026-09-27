@@ -347,14 +347,26 @@ function initMobileMenu() {
     drawerHeader = document.createElement('div');
     drawerHeader.className = 'nav-drawer-header';
     drawerHeader.innerHTML = `
+      <span class="nav-drawer-brand-mark"><img src="assets/images/logo.png" alt="" width="42" height="42"></span>
       <span class="nav-drawer-identity">
+        <span class="nav-drawer-kicker">CENTRO DE EXPLORACIÓN</span>
         <strong>BAQUEANO</strong>
-        <small>Explorá Nicaragua</small>
+        <small><i aria-hidden="true"></i> Red territorial activa</small>
       </span>
       <button class="nav-drawer-close" type="button" aria-label="Cerrar menú de navegación">
         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>`;
     navMenu.prepend(drawerHeader);
+  }
+
+  let drawerFooter = navMenu.querySelector('.nav-drawer-footer');
+  if (!drawerFooter) {
+    drawerFooter = document.createElement('div');
+    drawerFooter.className = 'nav-drawer-footer';
+    drawerFooter.innerHTML = `
+      <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><b>Navegación protegida</b><small>Asistencia territorial disponible</small></span>
+      <a href="baqueano-ai.html#planner" aria-label="Abrir el planificador de Baqueano"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`;
+    navMenu.appendChild(drawerFooter);
   }
 
   let backdrop = document.querySelector('.nav-drawer-backdrop');
