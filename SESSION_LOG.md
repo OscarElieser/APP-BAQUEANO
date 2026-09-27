@@ -321,3 +321,11 @@
   - **Implementación:** apertura exclusiva por grupo, cierre de los demás bloques, apertura inicial de la sección correspondiente a la página actual, contador de accesos y chevrón animado.
   - **Ajuste visual:** drawer ampliado de forma responsiva, encabezados de grupo con mayor área táctil, contraste reforzado y jerarquía equivalente al Ops Center.
   - **Archivos modificados:** `website/js/navigation.js`, `website/styles.css` y `SESSION_LOG.md`.
+
+- **Corrección del menú horizontal visible en escritorio (26 de Septiembre de 2026):**
+  > *"mira eso es un menu desplegable"* — acompañado de evidencia visual donde la navegación aparecía como una píldora horizontal.
+  - **Diagnóstico:** el drawer solo se activaba hasta 1699 px; en pantallas más amplias reaparecía la barra horizontal comprimida.
+  - **Corrección:** el patrón lateral desplegable del Ops Center queda activo en todos los tamaños de pantalla y la barra horizontal deja de renderizarse como navegación principal.
+  - **Interacción:** el botón de menú abre el drawer, el fondo exterior lo cierra y los tres grupos internos permanecen desplegables tipo acordeón.
+  - **Caché:** se actualizaron las versiones de `styles.css` y `navigation.js` en las 18 páginas que cargan la navegación para impedir que el navegador conserve la barra anterior.
+  - **Validación:** sintaxis JavaScript limpia, balance CSS correcto y `git diff --check` sin errores.

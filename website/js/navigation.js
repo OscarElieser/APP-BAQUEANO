@@ -338,7 +338,8 @@ function initMobileMenu() {
   if (navMenu.dataset.drawerInitialized === 'true') return;
   navMenu.dataset.drawerInitialized = 'true';
 
-  const compactNavigation = window.matchMedia('(max-width: 1699px)');
+  // El menú público conserva el patrón lateral del Ops Center en cualquier viewport.
+  const compactNavigation = window.matchMedia('(min-width: 0px)');
   const navInner = toggleBtn.closest('.nav-inner');
   const brand = navInner?.querySelector('.brand-box');
 

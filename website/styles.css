@@ -8794,9 +8794,9 @@ img {
       haciendo difíciles de leer y pulsar sus opciones principales.
    ⚙️ CÓMO: una capa final autoritativa usa drawer centrado, altura dinámica,
       objetivos táctiles de 48 px y zonas seguras compatibles con iOS/iPadOS.
-   📦 QUÉ: menú estable desde teléfonos hasta tablets y navegación normal en desktop/TV.
+   📦 QUÉ: drawer lateral estable desde teléfonos hasta pantallas desktop/TV.
    ============================================================================ */
-@media (max-width: 1699px) {
+@media (max-width: 9999px) {
   .main-navbar .nav-inner {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
@@ -8946,11 +8946,11 @@ img {
   display: none;
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 10000px) {
   .nav-drawer-header { display: none; }
 }
 
-@media (max-width: 1699px) {
+@media (max-width: 9999px) {
   body.nav-drawer-open {
     overflow: hidden;
   }
@@ -9017,7 +9017,7 @@ img {
 /*    informativo usando únicamente composición y animaciones aceleradas.      */
 /* 📦 QUÉ: acabado compartido, accesible y responsivo para navegación lateral. */
 /* ========================================================================== */
-@media (max-width: 1699px) {
+@media (max-width: 9999px) {
   .main-navbar .nav-links-menu,
   .main-navbar .nav-links-menu.mobile-open {
     width: min(336px, 94vw);
@@ -9201,14 +9201,14 @@ img {
   .main-navbar .nav-links-menu.mobile-open .nav-item-badge { padding: 2px 6px; font-size: 0.5rem; letter-spacing: 0.04em; }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 10000px) {
   .main-navbar .nav-drawer-brand-mark,
   .main-navbar .nav-drawer-footer,
   .main-navbar .nav-ops-group-title { display: none; }
 }
 
 /* Ocultar elementos redundantes fuera del menú principal en escritorio */
-@media (min-width: 1700px) {
+@media (min-width: 10000px) {
   .mobile-nav-toggle,
   .main-navbar .mobile-nav-toggle,
   .nav-profile-btn,
@@ -9272,7 +9272,7 @@ img {
   z-index: 1002 !important;
 }
 
-@media (max-width: 1699px) {
+@media (max-width: 9999px) {
   .main-navbar #navLinksMenu.mobile-open,
   .main-navbar .nav-links-menu.mobile-open {
     display: flex !important;
