@@ -370,3 +370,24 @@
   - **Implementación:** el botón principal de Android utiliza la ruta directa `drive.usercontent.google.com/download`, sin atributo `download`, para delegar la entrega a Google Drive.
   - **Prueba de descarga:** respuesta HTTP 200, `Content-Type: application/octet-stream`, `Content-Disposition: attachment; filename="BaqueanoNicaragua.apk"` y tamaño reportado de 95,441,231 bytes.
   - **Ops Center:** el formulario de publicación externa queda precargado con el enlace compartido; una publicación administrativa futura puede reemplazarlo mediante `app_config/android_release` sin modificar código.
+
+- **Auditoría integral del selector de tema y colores (26 de Septiembre de 2026):**
+  > *"revisa bien el selector de tema que función tiene; no quiero que solo una sección cambie, el objetivo es que cambie todo el color de cada sección de la página y también el fondo"*
+  - **Objetivo:** garantizar que paleta y fondo afecten globalmente secciones, superficies, tarjetas, textos, bordes y controles, manteniendo contraste y persistencia.
+  - **Plan:** auditar variables y selectores, localizar colores rígidos, crear cobertura temática completa y probar todos los modos.
+
+- **Corrección integral y rediseño de alta fidelidad del menú lateral (26 de Septiembre de 2026):**
+  > *"el menu se ve feo asi a como esta"* — acompañado de captura de pantalla con colisión de capas flotantes.
+  - **Diagnóstico del problema visual:**
+    1. Las opciones con submenú (`Explorar` y `Mi País`) dentro del drawer lateral conservaban reglas de megamenú de escritorio (`position: absolute; width: 390px; top: calc(100% + 12px)`). Al activarse por clic o cursor, la tarjeta flotante cubría de forma desordenada las opciones inferiores (`Experiencias`, `Mi País`, `02 Planificar y conectar`).
+    2. El botón flotante `#baqFloatingThemeBtn` ("Colores PERSONALIZAR") con `z-index: 9999` quedaba superpuesto sobre el pie del drawer (`Navegación protegida`), generando choque de elementos en la esquina inferior izquierda.
+    3. Tipografías, alturas y anchos de tarjetas secundarias resultaban desproporcionadas y saturaban el espacio del drawer.
+  - **Solución implementada:**
+    1. **Arquitectura in-flow / Acordeón integrado:** El submenú dentro de `.nav-links-menu.mobile-open` se convirtió estrictamente a flujo natural en bloque (`position: static !important; width: 100% !important; transform: none !important`), empujando suavemente las opciones inferiores sin ningún solapamiento ni invasión de texto.
+    2. **Sangría jerárquica territorial:** Los ítems anidados (`Destinos & Volcanes`, `17 Territorios`, `Mapa Vivo & 3D`, `Naturaleza & Conservación`) se presentan con sangría elegante (`margin-left: 12px`, `padding-left: 10px`), borde guía luminosa en `#F65E01` (Naranja Terracota Fuego), micro-iconos compactos y tarjetas estilizadas.
+    3. **Micro-interacciones y control de estado:** Rotación suave de 180° en el chevrón indicador al expandir. Al contraer un grupo operativo, cualquier submenú abierto en su interior se repliega automáticamente para conservar el orden. Se eliminó la apertura accidental por `:hover` en el drawer.
+    4. **Aislamiento del botón flotante de temas:** Se añadió la regla autoritativa `body.nav-drawer-open #baqFloatingThemeBtn { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }`, ocultándolo limpiamente mientras el drawer esté abierto.
+    5. **Jerarquía Z-Index autoritativa:** El drawer opera en `z-index: 10050` y su fondo en `10040`, garantizando que ninguna capa o componente flotante de la web interfiera con la navegación.
+    6. **Invalidación de caché:** Se actualizó la versión de activos a `v=20260926-ops-nav-4` en las 17 páginas HTML del ecosistema Baqueano.
+  - **Archivos modificados:** `website/styles.css`, `website/js/navigation.js`, las 17 páginas `.html` del portal y `SESSION_LOG.md`.
+  - **Validaciones:** `node --check` limpio (código 0), `git diff --check` limpio (código 0).

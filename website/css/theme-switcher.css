@@ -1254,3 +1254,125 @@
   border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
 }
 
+/* ========================================================================== */
+/* COBERTURA CROMÁTICA GLOBAL DEL ECOSISTEMA                                  */
+/* ========================================================================== */
+/* 🎯 POR QUÉ: las páginas heredadas contienen colores rígidos que impedían   */
+/*    que el selector modificara visualmente todas las secciones.              */
+/* ⚙️ CÓMO: los atributos globales del gestor gobiernan fondos, superficies,  */
+/*    texto, bordes y acciones mediante tokens semánticos de alta prioridad.   */
+/* 📦 QUÉ: tematización completa de main, secciones, tarjetas y controles.      */
+/* ========================================================================== */
+
+html[data-theme] body,
+html[data-theme] main,
+html[data-theme] .page-wrapper {
+  background-color: var(--bg-space) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme] main > section:not(.hero-section-nicaragua, .final-cta-section),
+html[data-theme] .page-wrapper > section:not(.hero-section-nicaragua, .final-cta-section) {
+  background-color: var(--bg-space) !important;
+  background-image:
+    radial-gradient(circle at 88% 12%, rgba(var(--theme-primary-rgb), 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(var(--theme-surface-rgb), 0.92), rgba(var(--theme-background-rgb), 0.98)) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme] main > section:nth-of-type(even):not(.hero-section-nicaragua, .final-cta-section),
+html[data-theme] .page-wrapper > section:nth-of-type(even):not(.hero-section-nicaragua, .final-cta-section) {
+  background-image:
+    radial-gradient(circle at 12% 82%, rgba(var(--theme-accent-rgb), 0.13), transparent 30%),
+    linear-gradient(180deg, rgba(var(--theme-background-rgb), 0.98), rgba(var(--theme-surface-rgb), 0.88)) !important;
+}
+
+html[data-theme] main :is(
+  .card, [class$="-card"], [class*="-card "],
+  .glass-panel, .content-panel, .section-panel
+) {
+  border-color: var(--border-subtle) !important;
+}
+
+html[data-theme] main :is(
+  .ps-step-card, .ps-pillar-card, .quick-ia-prompt-box, .digital-chat-simulator,
+  .index-map-card, .travel-service-card, .partner-chip, .stat-pro-card,
+  .impact-interactive-card, .app-download-card, .app-spec-item,
+  .host-benefit-card, .register-biz-form-card, .exp-card
+) {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html[data-theme] main :is(h1, h2, h3, h4, h5, h6, .section-headline, .section-title-nicaragua, .culture-title) {
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+html[data-theme] main :is(p, li, .section-subtext, .section-sub-nicaragua, .culture-sub) {
+  color: var(--text-secondary);
+}
+
+html[data-theme] main :is(
+  .badge-section-pill, .section-tag-pill, .culture-tag-pill, .partners-pill-badge,
+  .baq-credibility-badge, .dest-card-badge, .living-card-tag
+) {
+  border-color: rgba(var(--theme-accent-rgb), 0.38) !important;
+  color: var(--theme-cream) !important;
+}
+
+html[data-theme] main :is(
+  .btn-cta-explore, .hero-btn-primary, .quick-ia-submit-btn,
+  .app-download-btn-primary, .partners-cta-btn
+) {
+  background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-light)) !important;
+  border-color: var(--theme-accent) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme] main :is(
+  .btn-cta-route, .hero-btn-ai, .app-download-btn-secondary,
+  .index-layer-btn.active, .map-mode-tab.active
+) {
+  background: rgba(var(--theme-primary-rgb), 0.34) !important;
+  border-color: var(--theme-primary-light) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme] :is(.main-navbar, .nav-links-menu, .site-footer-pro) {
+  border-color: var(--border-subtle) !important;
+}
+
+html[data-theme] .site-footer-pro {
+  background: linear-gradient(180deg, var(--bg-dark), var(--bg-space)) !important;
+  color: var(--text-secondary) !important;
+}
+
+html[data-bg-mode="light"] main :is(
+  .living-card-overlay, .dest-card-overlay, .pillar-media-wrap,
+  .final-cta-inner, .hero-cinematic-content
+) :is(h1, h2, h3, h4, p, span) {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+html[data-section-colors-custom] main > section:not(.hero-section-nicaragua, .final-cta-section),
+html[data-section-colors-custom] .page-wrapper > section:not(.hero-section-nicaragua, .final-cta-section) {
+  background-color: var(--section-bg-color) !important;
+  background-image: linear-gradient(180deg, var(--section-bg-tint), var(--section-bg-tint-mid), var(--section-bg-tint-bot)) !important;
+}
+
+html[data-section-colors-custom] main :is(h1, h2, h3, h4, h5, h6, .section-headline, .culture-title) {
+  color: var(--section-title-color) !important;
+  -webkit-text-fill-color: var(--section-title-color) !important;
+}
+
+html[data-section-colors-custom] main :is(p, li, .section-subtext, .culture-sub) {
+  color: var(--section-text-color) !important;
+}
+
+html[data-section-colors-custom] main :is(.badge-section-pill, .section-tag-pill, .culture-tag-pill) {
+  color: var(--section-accent-color) !important;
+  border-color: var(--section-accent-color) !important;
+}

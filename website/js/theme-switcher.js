@@ -373,11 +373,13 @@
   };
 
   let activeCustomColors = { ...defaultCustomColors };
+  let customSectionColorsEnabled = false;
 
   try {
     const savedCustom = localStorage.getItem(CUSTOM_COLORS_STORAGE_KEY);
     if (savedCustom) {
       activeCustomColors = { ...defaultCustomColors, ...JSON.parse(savedCustom) };
+      customSectionColorsEnabled = true;
     }
   } catch (_) {}
 
@@ -411,6 +413,8 @@
       root.style.setProperty('--text-secondary', preset.textSecondary);
       root.style.setProperty('--text-muted', preset.textMuted);
       root.style.setProperty('--border-subtle', preset.borderSubtle);
+      root.style.setProperty('--theme-background-rgb', hexToRgb(preset.bgSpace));
+      root.style.setProperty('--theme-surface-rgb', hexToRgb(preset.bgSurface));
 
       root.setAttribute('data-site-bg', preset.id);
       root.setAttribute('data-bg-mode', preset.type);
@@ -431,6 +435,9 @@
       root.style.setProperty('--text-primary', textPrimary);
       root.style.setProperty('--text-secondary', textSecondary);
       root.style.setProperty('--text-muted', textMuted);
+      root.style.setProperty('--border-subtle', isLight ? 'rgba(15, 23, 42, 0.14)' : 'rgba(255, 255, 255, 0.16)');
+      root.style.setProperty('--theme-background-rgb', rgb);
+      root.style.setProperty('--theme-surface-rgb', hexToRgb(isLight ? '#F1F5F9' : '#0F172A'));
 
       root.setAttribute('data-site-bg', 'custom');
       root.setAttribute('data-bg-mode', isLight ? 'light' : 'dark');
@@ -447,6 +454,9 @@
       root.style.setProperty('--text-primary', '#FFFFFF');
       root.style.setProperty('--text-secondary', '#E2E8F0');
       root.style.setProperty('--text-muted', '#94A3B8');
+      root.style.setProperty('--border-subtle', `rgba(${hexToRgb(activeTheme.palette.goldLight)}, 0.16)`);
+      root.style.setProperty('--theme-background-rgb', hexToRgb(activeTheme.palette.background));
+      root.style.setProperty('--theme-surface-rgb', hexToRgb(activeTheme.palette.surface));
 
       root.removeAttribute('data-site-bg');
       root.setAttribute('data-bg-mode', 'dark');
@@ -567,6 +577,9 @@
     root.style.setProperty('--section-text-color', textColor);
     root.style.setProperty('--section-accent-color', accentColor);
 
+    if (save) customSectionColorsEnabled = true;
+    root.toggleAttribute('data-section-colors-custom', customSectionColorsEnabled);
+
     if (save) {
       try {
         localStorage.setItem(CUSTOM_COLORS_STORAGE_KEY, JSON.stringify(activeCustomColors));
@@ -575,6 +588,14 @@
 
     // Actualizar campos en el modal si está abierto
     syncColorControlsUI();
+  }
+
+  function resetCustomSectionColors() {
+    activeCustomColors = { ...defaultCustomColors };
+    customSectionColorsEnabled = false;
+    try { localStorage.removeItem(CUSTOM_COLORS_STORAGE_KEY); } catch (_) {}
+    document.documentElement.removeAttribute('data-section-colors-custom');
+    applyCustomSectionColors(activeCustomColors, false);
   }
 
   // Aplicar inmediatamente al iniciar
@@ -606,6 +627,17 @@
     root.style.setProperty('--baqueano-cream', palette.goldLight);
     root.style.setProperty('--baqueano-night', palette.background);
     root.style.setProperty('--baqueano-green', palette.primaryLight);
+    root.style.setProperty('--theme-primary', palette.primary);
+    root.style.setProperty('--theme-primary-light', palette.primaryLight);
+    root.style.setProperty('--theme-primary-dark', palette.primaryDark);
+    root.style.setProperty('--theme-accent', palette.terracotta);
+    root.style.setProperty('--theme-accent-light', palette.terracottaLight);
+    root.style.setProperty('--theme-gold', palette.gold);
+    root.style.setProperty('--theme-cream', palette.goldLight);
+    root.style.setProperty('--theme-primary-rgb', hexToRgb(palette.primary));
+    root.style.setProperty('--theme-accent-rgb', hexToRgb(palette.terracotta));
+    root.style.setProperty('--theme-background-rgb', hexToRgb(palette.background));
+    root.style.setProperty('--theme-surface-rgb', hexToRgb(palette.surface));
 
     // 2. Tokens de paleta primaria (Teal / Primario)
     root.style.setProperty('--petroleo-teal', palette.primary);
@@ -634,6 +666,10 @@
     root.style.setProperty('--bg-card-hover', `rgba(${hexToRgb(palette.primary)}, 0.3)`);
     root.style.setProperty('--bg-glass', `rgba(${hexToRgb(palette.surface)}, 0.75)`);
     root.style.setProperty('--bg-glass-strong', `rgba(${hexToRgb(palette.background)}, 0.92)`);
+    root.style.setProperty('--text-primary', '#FFFFFF');
+    root.style.setProperty('--text-secondary', palette.goldLight);
+    root.style.setProperty('--text-muted', '#A8B6C7');
+    root.style.setProperty('--border-subtle', `rgba(${hexToRgb(palette.goldLight)}, 0.16)`);
 
     // 6. Bordes y resplandores
     root.style.setProperty('--border-glow', `rgba(${hexToRgb(palette.terracotta)}, 0.5)`);
@@ -1005,7 +1041,7 @@
     document.getElementById('baqThemeResetBtn').addEventListener('click', () => {
       applySiteBackground('default', null, true);
       applyTheme(DEFAULT_THEME_ID, false);
-      applyCustomSectionColors(defaultCustomColors);
+      resetCustomSectionColors();
       showToast('Tema y fondo restablecidos a los valores oficiales de Baqueano.');
     });
 
@@ -1292,6 +1328,7 @@
     closeModal,
     resetTheme: () => {
       applySiteBackground('default', null, true);
+      resetCustomSectionColors();
       applyTheme(DEFAULT_THEME_ID);
     },
     getActiveTheme: () => currentThemeId,

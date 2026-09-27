@@ -423,6 +423,10 @@ function initMobileMenu() {
       button.classList.toggle('is-expanded', isExpanded);
       (groupItems.get(button.dataset.groupId) || []).forEach((item) => {
         item.classList.toggle('nav-ops-item-collapsed', !isExpanded);
+        if (!isExpanded && item.classList.contains('is-open')) {
+          item.classList.remove('is-open');
+          item.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+        }
       });
     });
   };
