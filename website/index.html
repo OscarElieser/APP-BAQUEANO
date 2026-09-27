@@ -132,6 +132,7 @@
   <link rel="stylesheet" href="css/baqueano-reels.css">
   <link rel="stylesheet" href="css/pages/index.css?v=20260926-global-theme-1">
   <link rel="stylesheet" href="css/baqueano-3d.css?v=20260925-2">
+  <link rel="stylesheet" href="css/hero-editorial.css?v=20260926-editorial-1">
 
   <!-- Favicon Oficial -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
@@ -486,7 +487,7 @@
          🧭 01. HERO DE MARCA CINEMATOGRÁFICO
          Declaración de marca de alto impacto para competencia nacional.
          ============================================================================ -->
-    <section class="hero-section-nicaragua hero-cinematic-centered" id="heroNicaragua">
+    <section class="hero-section-nicaragua hero-editorial-mode" id="heroNicaragua">
       <!-- Media de fondo inmersiva en video Full HD / Alta Resolución -->
       <video class="hero-nicaragua-bg-media" data-baqueano-video-slot="indexHero" autoplay loop muted playsinline
         preload="auto" poster="assets/images/destinos/isla_de_ometepe.jpg"
@@ -494,26 +495,108 @@
         src="assets/videos/video%20nicaragua.mp4"></video>
       <div class="hero-nicaragua-overlay"></div>
 
-      <div class="container hero-cinematic-container">
-        <div class="hero-cinematic-content">
-          <span class="hero-brand-kicker"><i class="fa-solid fa-compass"></i> BAQUEANO NICARAGUA · ECOSISTEMA DE TURISMO INTELIGENTE</span>
-          <h1 class="hero-main-title">
-            NICARAGUA NO SE VISITA. <span class="highlight-terra">SE DESCUBRE.</span>
+      <div class="container hero-editorial-container">
+        <!-- Bloque Principal Izquierdo: Textos, Acciones y Redes Sociales (Fiel a la Referencia) -->
+        <div class="hero-editorial-content">
+          <!-- 1. Eyebrow con línea horizontal característica -->
+          <div class="hero-editorial-eyebrow">
+            <span class="hero-eyebrow-text">TIERRA DE LAGOS Y VOLCANES</span>
+            <span class="hero-eyebrow-divider" aria-hidden="true"></span>
+          </div>
+
+          <!-- 2. Gran Título Editorial Asimétrico -->
+          <h1 class="hero-editorial-title">
+            NICARAGUA NO SE VISITA.<br>
+            <span class="hero-editorial-title-accent">SE DESCUBRE.</span>
           </h1>
-          <p class="hero-main-subtitle">
-            Descubre destinos, cultura, gastronomía y experiencias auténticas conectándote directamente con quienes conocen el territorio.
+
+          <!-- 3. Párrafo Narrativo Limpio -->
+          <p class="hero-editorial-subtitle">
+            Descubre destinos vírgenes, cultura ancestral y gastronomía auténtica conectándote directamente con baqueanos y comunidades que custodian el territorio.
           </p>
-          <div class="hero-cta-actions">
-            <a href="#queQueresVivir" class="hero-btn-primary">
-              <i class="fa-solid fa-compass"></i> Explorar Nicaragua
+
+          <!-- 4. Botones de Acción Estilo Read More & IA -->
+          <div class="hero-editorial-actions">
+            <a href="destinos.html" class="hero-btn-readmore">
+              <span>EXPLORAR DESTINOS</span>
             </a>
-            <a href="#baqueanoDigitalSection" class="hero-btn-ai">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> ✨ Crear mi aventura con IA
-            </a>
-            <a href="#problemaSolucionSection" class="hero-btn-tertiary">
-              <i class="fa-solid fa-circle-play"></i> ▶ Ver cómo funciona
+            <a href="#baqueanoDigitalSection" class="hero-btn-ai-pill">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Rutas con IA</span>
             </a>
           </div>
+
+          <!-- 5. Franja de Redes y Comunidad (Social Row de la Referencia) -->
+          <div class="hero-editorial-social">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram de Baqueano"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook de Baqueano"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://x.com" target="_blank" rel="noopener" aria-label="X / Twitter de Baqueano"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube de Baqueano"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok de Baqueano"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <!-- Bloque Inferior Izquierdo: Carrusel de Tarjetas de Destinos (Fiel a la Referencia) -->
+        <div class="hero-destinations-carousel-wrap">
+          <div class="hero-destinations-carousel" id="heroDestinationsCarousel">
+            <button type="button" class="hero-carousel-nav-btn prev" id="heroCarouselPrev" aria-label="Destino anterior">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="hero-cards-scroller" id="heroCardsScroller">
+              <!-- Tarjeta 1: Corn Island (Paraíso Tropical) -->
+              <div class="hero-destination-card is-active" data-dest-title="Corn Island" data-dest-region="Caribe Sur" data-dest-video="assets/videos/video%20nicaragua.mp4">
+                <img src="assets/images/destinos/corn_island.jpg" alt="Corn Island · Paraíso Caribeño" loading="eager">
+                <div class="hero-card-meta">
+                  <span class="hero-card-tag">Caribe Sur</span>
+                  <span class="hero-card-name">Corn Island</span>
+                </div>
+              </div>
+              <!-- Tarjeta 2: Isla de Ometepe -->
+              <div class="hero-destination-card" data-dest-title="Isla de Ometepe" data-dest-region="Rivas" data-dest-video="assets/videos/destinos.mp4">
+                <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe · Oasis de Paz" loading="lazy">
+                <div class="hero-card-meta">
+                  <span class="hero-card-tag">Rivas</span>
+                  <span class="hero-card-name">Isla de Ometepe</span>
+                </div>
+              </div>
+              <!-- Tarjeta 3: Cañón de Somoto -->
+              <div class="hero-destination-card" data-dest-title="Cañón de Somoto" data-dest-region="Madriz" data-dest-video="assets/videos/video.mp4">
+                <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto · Monumento Nacional" loading="lazy">
+                <div class="hero-card-meta">
+                  <span class="hero-card-tag">Madriz</span>
+                  <span class="hero-card-name">Cañón de Somoto</span>
+                </div>
+              </div>
+              <!-- Tarjeta 4: San Juan del Sur -->
+              <div class="hero-destination-card" data-dest-title="San Juan del Sur" data-dest-region="Pacífico Sur" data-dest-video="assets/videos/video%20nicaragua.mp4">
+                <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="San Juan del Sur · Santuario del Surf" loading="lazy">
+                <div class="hero-card-meta">
+                  <span class="hero-card-tag">Pacífico Sur</span>
+                  <span class="hero-card-name">San Juan del Sur</span>
+                </div>
+              </div>
+              <!-- Tarjeta 5: Granada & Isletas -->
+              <div class="hero-destination-card" data-dest-title="Granada Colonial" data-dest-region="Granada" data-dest-video="assets/videos/historia.mp4">
+                <img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada Colonial & Isletas" loading="lazy">
+                <div class="hero-card-meta">
+                  <span class="hero-card-tag">Granada</span>
+                  <span class="hero-card-name">Granada &amp; Isletas</span>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="hero-carousel-nav-btn next" id="heroCarouselNext" aria-label="Destino siguiente">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Controles de Video HUD Discretos (Esquina Derecha) -->
+        <div class="hero-video-controls" id="heroVideoControls">
+          <button type="button" class="hero-video-toggle-btn" id="heroVideoSoundToggle" aria-label="Activar audio de fondo" title="Activar/Silenciar Sonido">
+            <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="hero-video-toggle-btn" id="heroVideoPlayToggle" aria-label="Pausar video" title="Pausar/Reproducir">
+            <i class="fa-solid fa-pause" aria-hidden="true"></i>
+          </button>
         </div>
 
         <!-- Elemento de reels preservado oculto para mantener compatibilidad con scripts existentes -->
@@ -2951,6 +3034,7 @@
   <script src="js/route-builder.js?v=20260925-2"></script>
   <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
   <script src="js/panorama-viewer.js"></script>
+  <script src="js/hero-experience.js?v=20260926-editorial-1"></script>
 
   <!-- ======================================================================
        🧭 CONTROLADOR DE CENTRADO DE TARJETAS (CARDS) EN MAPAS REALES DE NICARAGUA

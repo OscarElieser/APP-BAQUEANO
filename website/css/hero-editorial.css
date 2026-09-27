@@ -1,0 +1,497 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — HERO CINEMATOGRÁFICO EDITORIAL (ESTILO EXPEDICIÓN)
+   ============================================================================
+
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Crear una portada moderna, limpia y asimétrica de alto impacto visual,
+     fiel al estándar de portales de expedición y turismo de aventura internacional.
+   - Dejar el flanco derecho abierto y luminoso para que el video Full HD de Nicaragua
+     se aprecie sin obstáculos, concentrando en el flanco izquierdo tipografía
+     editorial de alto contraste, llamada a la acción y un carrusel al pie con
+     tarjetas de destinos icónicos en miniatura visibles simultáneamente en el viewport.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Capa de fondo con elemento <video> en alta definición con aceleración GPU.
+   - Máscara de gradiente asimétrica (90deg) que oscurece el tercio izquierdo
+     para legibilidad impecable, dejando el resto transparente para el video.
+   - Tipografía editorial sans-serif (Montserrat/Outfit) con pesos optimizados.
+   - Eyebrow con línea divisoria horizontal luminosa, botón minimalista
+     "EXPLORAR DESTINOS", franja de redes sociales y carrusel deslizable
+     con miniaturas de Corn Island, Ometepe, Somoto, San Juan del Sur y Granada.
+   - Dimensionamiento ergonómico y armónico para que todos los componentes,
+     incluidas las tarjetas del carrusel, convivan dentro del viewport de 100vh.
+
+   📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
+   - #heroNicaragua.hero-editorial-mode
+   ============================================================================ */
+
+#heroNicaragua.hero-editorial-mode {
+  position: relative !important;
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  overflow: hidden !important;
+  background: #061018 !important;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.15) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 1. Video de Fondo Panorámico en Alta Definición */
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  filter: brightness(0.95) contrast(1.06) saturate(1.15) !important;
+  transition: opacity 0.4s ease !important;
+  transform: translate3d(0, 0, 0) !important;
+  will-change: transform, opacity !important;
+}
+
+/* 2. Máscara de Gradiente Asimétrica: Oscurece izquierda, ilumina derecha */
+#heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, 
+      rgba(6, 16, 24, 0.94) 0%, 
+      rgba(6, 16, 24, 0.84) 34%, 
+      rgba(6, 16, 24, 0.35) 65%, 
+      rgba(6, 16, 24, 0.08) 100%
+    ),
+    linear-gradient(180deg, 
+      rgba(6, 16, 24, 0.55) 0%, 
+      transparent 30%, 
+      rgba(6, 16, 24, 0.72) 100%
+    ) !important;
+}
+
+/* 3. Contenedor Principal Editorial */
+#heroNicaragua.hero-editorial-mode .hero-editorial-container {
+  position: relative !important;
+  z-index: 3 !important;
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: clamp(80px, 11vh, 105px) clamp(24px, 4vw, 56px) 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+  box-sizing: border-box !important;
+}
+
+/* 4. Bloque de Textos y Contenido Izquierdo */
+#heroNicaragua.hero-editorial-mode .hero-editorial-content {
+  max-width: 720px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+/* Eyebrow con línea horizontal característica de la referencia */
+.hero-editorial-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin-bottom: 0.65rem !important;
+}
+
+.hero-eyebrow-text {
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
+  font-size: clamp(0.74rem, 0.9vw, 0.88rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75) !important;
+}
+
+.hero-eyebrow-divider {
+  display: inline-block !important;
+  width: clamp(40px, 5vw, 75px) !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Gran Título Editorial Asimétrico */
+.hero-editorial-title {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: clamp(2.3rem, 4.8vw, 4.4rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+  margin: 0 0 0.85rem 0 !important;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+  text-align: left !important;
+}
+
+.hero-editorial-title-accent {
+  color: #FFFFFF !important;
+  display: inline-block !important;
+}
+
+/* Párrafo Narrativo Limpio */
+.hero-editorial-subtitle {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  max-width: 52ch !important;
+  margin: 0 0 1.15rem 0 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
+  text-align: left !important;
+}
+
+/* Botones de Acción Estilo Read More & IA */
+.hero-editorial-actions {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-bottom: 1rem !important;
+}
+
+.hero-btn-readmore {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 11px 28px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #FFFFFF !important;
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
+}
+
+.hero-btn-readmore:hover {
+  background: #F65E01 !important;
+  border-color: #F65E01 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 14px 34px rgba(246, 94, 1, 0.45) !important;
+}
+
+.hero-btn-ai-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 11px 22px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid rgba(244, 230, 193, 0.35) !important;
+  background: rgba(22, 93, 111, 0.45) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #F4E6C1 !important;
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.hero-btn-ai-pill:hover {
+  background: rgba(22, 93, 111, 0.75) !important;
+  border-color: #F4E6C1 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px rgba(22, 93, 111, 0.4) !important;
+}
+
+/* Franja de Redes y Comunidad (Social Row de la Referencia) */
+.hero-editorial-social {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.hero-editorial-social a {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 1.05rem !important;
+  transition: all 0.25s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+.hero-editorial-social a:hover {
+  color: #F65E01 !important;
+  transform: translateY(-2px) scale(1.18) !important;
+}
+
+/* 5. Carrusel de Tarjetas de Destinos (Fiel al pie izquierdo de la referencia) */
+.hero-destinations-carousel-wrap {
+  margin-top: 0.5rem !important;
+  position: relative !important;
+  max-width: 540px !important;
+  width: 100% !important;
+}
+
+.hero-destinations-carousel {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  position: relative !important;
+}
+
+.hero-carousel-nav-btn {
+  width: 36px !important;
+  height: 36px !important;
+  flex: 0 0 36px !important;
+  border-radius: 50% !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+  background: rgba(6, 16, 24, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #FFFFFF !important;
+  font-size: 0.85rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 5 !important;
+}
+
+.hero-carousel-nav-btn:hover {
+  background: #F65E01 !important;
+  border-color: #F65E01 !important;
+  color: #FFFFFF !important;
+  transform: scale(1.12) !important;
+  box-shadow: 0 8px 22px rgba(246, 94, 1, 0.45) !important;
+}
+
+.hero-cards-scroller {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  padding: 4px 2px !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.hero-cards-scroller::-webkit-scrollbar {
+  display: none !important;
+}
+
+.hero-destination-card {
+  flex: 0 0 128px !important;
+  width: 128px !important;
+  height: 160px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  cursor: pointer !important;
+  scroll-snap-align: start !important;
+  border: 2px solid rgba(255, 255, 255, 0.22) !important;
+  background: #07111C !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4) !important;
+  user-select: none !important;
+}
+
+.hero-destination-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  transition: transform 0.5s ease !important;
+}
+
+.hero-destination-card .hero-card-meta {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  padding: 8px 10px !important;
+  background: linear-gradient(180deg, transparent 40%, rgba(6, 16, 24, 0.94) 100%) !important;
+  pointer-events: none !important;
+}
+
+.hero-card-tag {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.6rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  color: #F4E6C1 !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 2px !important;
+}
+
+.hero-card-name {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  line-height: 1.15 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+}
+
+.hero-destination-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hero-destination-card:hover img {
+  transform: scale(1.08) !important;
+}
+
+.hero-destination-card.is-active {
+  border-color: #F65E01 !important;
+  box-shadow: 0 10px 26px rgba(246, 94, 1, 0.5) !important;
+  transform: translateY(-3px) !important;
+}
+
+.hero-destination-card.is-active::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 7px !important;
+  right: 7px !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: #F65E01 !important;
+  box-shadow: 0 0 8px #F65E01 !important;
+}
+
+/* 6. Controles HUD de Video Discretos (Esquina Inferior Derecha) */
+.hero-video-controls {
+  position: absolute !important;
+  right: clamp(24px, 4vw, 56px) !important;
+  bottom: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  z-index: 5 !important;
+}
+
+.hero-video-toggle-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  background: rgba(6, 16, 24, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #FFFFFF !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.25s ease !important;
+}
+
+.hero-video-toggle-btn:hover {
+  background: #165D6F !important;
+  border-color: #F4E6C1 !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 8px 24px rgba(22, 93, 111, 0.5) !important;
+}
+
+.hero-video-toggle-btn.is-unmuted {
+  border-color: #F65E01 !important;
+  color: #F65E01 !important;
+}
+
+/* 7. Ocultar baliza flotante de tema cuando se esté en el Hero para cero choques */
+body.hero-active .baq-theme-float-btn,
+body:not(.scrolled) .baq-theme-float-btn {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(24px) scale(0.85) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease !important;
+}
+
+/* Indicador de scroll de la propuesta */
+#heroNicaragua.hero-editorial-mode .hero-scroll-indicator {
+  display: none !important;
+}
+
+/* 8. Responsividad y Adaptabilidad Multi-Pantalla */
+@media (max-width: 992px) {
+  #heroNicaragua.hero-editorial-mode .hero-editorial-container {
+    padding-top: 96px !important;
+    padding-bottom: 20px !important;
+  }
+  .hero-editorial-title {
+    font-size: clamp(2.1rem, 7vw, 3.4rem) !important;
+  }
+  .hero-editorial-subtitle {
+    font-size: 0.92rem !important;
+    line-height: 1.54 !important;
+  }
+  .hero-destinations-carousel-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .hero-destination-card {
+    flex: 0 0 118px !important;
+    width: 118px !important;
+    height: 150px !important;
+  }
+  .hero-video-controls {
+    bottom: 20px !important;
+    right: 20px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #heroNicaragua.hero-editorial-mode .hero-editorial-container {
+    padding-top: 88px !important;
+    padding-bottom: 16px !important;
+  }
+  .hero-editorial-eyebrow {
+    gap: 8px !important;
+  }
+  .hero-eyebrow-divider {
+    width: 32px !important;
+  }
+  .hero-editorial-title {
+    font-size: clamp(1.85rem, 8.5vw, 2.5rem) !important;
+    margin-bottom: 0.65rem !important;
+  }
+  .hero-editorial-actions {
+    width: 100% !important;
+  }
+  .hero-btn-readmore,
+  .hero-btn-ai-pill {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .hero-video-controls {
+    display: none !important;
+  }
+}

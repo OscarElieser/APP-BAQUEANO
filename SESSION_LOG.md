@@ -436,3 +436,37 @@
     3. **Invalidación de caché:** Se actualizó la versión de activos a `v=20260926-ops-nav-5` en las 17 páginas HTML.
   - **Archivos modificados:** `website/styles.css`, las 17 páginas `.html` del portal y `SESSION_LOG.md`.
   - **Validaciones:** `node --check` limpio (código 0), `git diff --check` limpio (código 0).
+## 2026-09-26 — Diagnóstico de videos fuente 8K
+
+- 🎯 **POR QUÉ:** El usuario informó que convirtió los videos a 8K y solicitó una solución para reducir su peso sin perder la calidad visual del sitio.
+- ⚙️ **CÓMO:** Se inspeccionaron de forma no destructiva los MP4 de `website/assets/videos/`, sus tamaños, nombres y la disponibilidad local de herramientas de transcodificación.
+- 📦 **QUÉ:** Se confirmó que las seis copias nuevas con sufijo `(1)` pesan aproximadamente 492 MB en conjunto y todavía no están enlazadas por el registro público. Los originales permanecen activos. `ffmpeg` y `ffprobe` no están instalados, por lo que no se realizó ninguna conversión. Se recomienda conservar las fuentes 8K fuera de la entrega pública y generar derivados web AV1/WebM y MP4 H.264 en 1440p/1080p según el tamaño visible de cada sección.
+
+---
+
+### 📅 Sesión del 27 de Septiembre de 2026 (~00:00) — Rediseño Editorial del Hero con Video y Carrusel de Destinos
+
+- **Consulta del Usuario:**
+  > *"no me gusta el diseño se puede hacer como la segunda imagen pero con video"* — acompañado de captura del hero actual y de imagen de referencia estilo expedición de clase mundial con video, titular editorial asimétrico, botón de acción en caja y carrusel de tarjetas al pie.
+- **Diagnóstico y Análisis de la Referencia:**
+  1. La portada previa presentaba un titular centrado, denso y macizo que cubría casi la totalidad del fondo, impidiendo apreciar el video panorámico de Nicaragua.
+  2. La imagen de referencia plantea una arquitectura editorial de expedición:
+     - Flanco izquierdo con ceja (*eyebrow*) `TIERRA DE LAGOS Y VOLCANES` acompañada de una línea horizontal luminosa.
+     - Titular asimétrico nítido `NICARAGUA NO SE VISITA. SE DESCUBRE.` alineado a la izquierda.
+     - Párrafo narrativo limpio y legible.
+     - Botón minimalista `EXPLORAR DESTINOS` en caja con fondo traslúcido y borde fino, complementado con acceso a IA territorial.
+     - Franja de redes sociales con micro-iconos monocromáticos alineados al margen izquierdo.
+     - Carrusel al pie con tarjetas redondeadas de destinos icónicos (Corn Island, Isla de Ometepe, Cañón de Somoto, San Juan del Sur, Granada Colonial & Isletas) con botones circulares `<` y `>` para desplazarse.
+     - Flanco derecho completamente abierto para reproducir el video panorámico en alta definición sin obstáculos, protegido por una máscara asimétrica de gradiente de 90°.
+- **Solución Técnica Implementada:**
+  1. **Hoja de Estilos Especializada:** Se creó `website/css/hero-editorial.css` bajo el estándar de la paleta oficial (`#165D6F`, `#F65E01`, `#F4E6C1`, `#061018`), con gradiente asimétrico, micro-interacciones a 60fps, y compatibilidad estricta con viewports de laptops y pantallas de 1366x768 / 1370x659 para asegurar que todos los componentes (incluyendo las tarjetas al pie) convivan dentro del viewport sin desbordes.
+  2. **Controlador Interactivo:** Se programó `website/js/hero-experience.js` para:
+     - Desplazamiento horizontal del carrusel con botones circulares de navegación y gestos táctiles.
+     - Intercambio dinámico de video de fondo al seleccionar cualquier tarjeta con transición suave.
+     - Controles HUD de video discretos en la esquina inferior derecha (Mute/Unmute y Play/Pause).
+     - Detección con `IntersectionObserver` para ocultar automáticamente la baliza flotante de personalización de temas mientras el usuario se encuentre en el Hero, evitando cualquier solapamiento con los botones.
+  3. **Integración en `website/index.html`:** Enlace de la nueva hoja de estilos y script modular preservando todos los metadatos y enlaces de navegación previos.
+- **Validaciones:**
+  - Verificación visual con subagente de navegador en resoluciones de 1370x750 y 1370x659: comprobación de ajuste vertical, carga fluida del video panorámico, visibilidad de las 5 tarjetas de destinos, interacción de cambio de video al pulsar Ometepe y cero solapamientos.
+  - `git diff --check` limpio (código 0).
+
