@@ -707,7 +707,7 @@
     const link = document.createElement('link');
     link.id = 'baqueanoThemeSwitcherStyles';
     link.rel = 'stylesheet';
-    link.href = 'css/theme-switcher.css';
+    link.href = 'css/theme-switcher.css?v=20260926-global-theme-1';
     document.head.appendChild(link);
   }
 
@@ -1224,6 +1224,15 @@
   function applyTheme(themeId, autoClose = true) {
     const theme = THEMES_CATALOG.find((t) => t.themeId === themeId);
     if (!theme) return;
+
+    // Una selección manual de tema representa una apariencia completa. Se
+    // liberan overrides anteriores para evitar que oculten la nueva paleta.
+    if (autoClose) {
+      if (customSectionColorsEnabled) resetCustomSectionColors();
+      activeSiteBg = 'default';
+      activeCustomBgHex = null;
+      try { localStorage.setItem(SITE_BG_STORAGE_KEY, JSON.stringify({ id: 'default', customHex: null })); } catch (_) {}
+    }
 
     currentThemeId = themeId;
     applyCssVariables(themeId);

@@ -375,6 +375,24 @@
   > *"revisa bien el selector de tema que función tiene; no quiero que solo una sección cambie, el objetivo es que cambie todo el color de cada sección de la página y también el fondo"*
   - **Objetivo:** garantizar que paleta y fondo afecten globalmente secciones, superficies, tarjetas, textos, bordes y controles, manteniendo contraste y persistencia.
   - **Plan:** auditar variables y selectores, localizar colores rígidos, crear cobertura temática completa y probar todos los modos.
+  - **Diagnóstico:** la portada contenía más de 200 declaraciones cromáticas rígidas; el Estudio de Color solo modificaba su vista previa y un fondo previamente seleccionado podía ocultar visualmente una nueva paleta.
+  - **Correcciones:**
+    1. Se añadieron tokens semánticos RGB y cromáticos para identidad, acento, fondos, superficies, bordes y textos.
+    2. Se creó cobertura global para `main`, secciones, tarjetas, encabezados, párrafos, insignias, botones, navegación y footer.
+    3. Las 16 secciones de `index.html` cuentan con una capa final que supera los antiguos fondos rígidos y alterna superficies pertenecientes a la paleta activa.
+    4. Los modos Blanco, Crema, Negro, Petróleo, Pacífico, Carbón y color libre actualizan el fondo y las superficies de todas las secciones.
+    5. El Estudio de Color aplica ahora fondo, título, texto y acento sobre las secciones reales; su estado personalizado se puede restablecer completamente.
+    6. Al seleccionar manualmente un tema oficial se liberan overrides anteriores de fondo o estudio para aplicar la apariencia completa.
+    7. Los textos ubicados sobre fotografías y videos conservan blanco de alto contraste incluso en modo claro.
+    8. Se actualizaron versiones de caché de CSS y JavaScript para propagar el cambio inmediatamente.
+  - **Archivos modificados:** `website/js/theme-switcher.js`, `website/css/theme-switcher.css`, `website/css/pages/index.css`, `website/js/navigation.js`, `website/index.html` y `SESSION_LOG.md`.
+
+- **Directiva estratégica de teoría del color (26 de Septiembre de 2026):**
+  > *"recuerda usar la teoría de color aquí en esa parte; quiero que vaya de todo: marketing, mercadólogo y diseñador gráfico"*
+  - **Criterio obligatorio:** toda decisión cromática del selector debe integrar psicología del color, armonía, contraste, accesibilidad, identidad territorial y objetivos de conversión.
+  - **Enfoque comercial:** naranja para acción y energía; petróleo/teal para confianza y tecnología; crema para cercanía cultural; verdes para sostenibilidad; azules para seguridad y exploración.
+  - **Enfoque de diseño:** jerarquía 60-30-10, contraste WCAG, equilibrio de temperatura, consistencia de superficies y protección de legibilidad sobre fotografía y video.
+  - **Aplicación futura:** evaluar cada paleta simultáneamente desde la perspectiva de marca, marketing turístico, conversión y diseño gráfico.
 
 - **Corrección integral y rediseño de alta fidelidad del menú lateral (26 de Septiembre de 2026):**
   > *"el menu se ve feo asi a como esta"* — acompañado de captura de pantalla con colisión de capas flotantes.

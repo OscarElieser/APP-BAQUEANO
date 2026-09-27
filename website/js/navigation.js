@@ -1158,7 +1158,7 @@ function ensureThemeSwitcherLoaded() {
   if (!window.BaqueanoThemeManager && !document.getElementById('baqueanoThemeSwitcherScript')) {
     const script = document.createElement('script');
     script.id = 'baqueanoThemeSwitcherScript';
-    script.src = 'js/theme-switcher.js';
+    script.src = 'js/theme-switcher.js?v=20260926-global-theme-1';
     document.head.appendChild(script);
   }
 }

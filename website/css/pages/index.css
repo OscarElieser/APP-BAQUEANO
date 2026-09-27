@@ -2623,6 +2623,160 @@ html body .index-inline-066 {
   }
 }
 
+/* ============================================================================
+   PORTADA — COBERTURA TOTAL DEL SELECTOR DE TEMA
+   ============================================================================
+   🎯 POR QUÉ: los fondos artísticos y módulos históricos de la portada tenían
+      reglas con ID y prioridad alta que bloqueaban las paletas seleccionadas.
+   ⚙️ CÓMO: esta capa final consume exclusivamente los tokens semánticos del
+      gestor y alterna dos superficies de la misma familia cromática.
+   📦 QUÉ: las 16 secciones, tarjetas, títulos, textos, bordes y CTAs responden
+      al tema, al fondo global y al estudio de color personalizado.
+   ============================================================================ */
+
+html[data-theme] .index-main-flow {
+  background: var(--bg-space) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme] .index-main-flow > :is(
+  #problemaSolucionSection, #baqueanoDigitalSection, #queQueresVivir,
+  #territorioMapaSection, #destinosDestacadosSection, #culturaVivaNicaragua,
+  #serviciosTuristicosSection, #partnersInfinitySection, #nicaraguaEnCifrasSection,
+  #impactosBaqueanoSection, #sosSeguridadSection, #experienciasComunidad,
+  #redDeAnfitrionesSection, #appAndroidSection
+) {
+  background-color: var(--bg-space) !important;
+  background-image:
+    radial-gradient(circle at 86% 12%, rgba(var(--theme-primary-rgb), 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(var(--theme-surface-rgb), 0.92), rgba(var(--theme-background-rgb), 0.98)) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html[data-theme] .index-main-flow > :is(
+  #baqueanoDigitalSection, #territorioMapaSection, #culturaVivaNicaragua,
+  #partnersInfinitySection, #impactosBaqueanoSection, #experienciasComunidad,
+  #appAndroidSection
+) {
+  background-image:
+    radial-gradient(circle at 12% 84%, rgba(var(--theme-accent-rgb), 0.13), transparent 30%),
+    linear-gradient(180deg, rgba(var(--theme-background-rgb), 0.98), rgba(var(--theme-surface-rgb), 0.88)) !important;
+}
+
+html[data-theme] #heroNicaragua .hero-nicaragua-overlay {
+  background:
+    linear-gradient(90deg, rgba(var(--theme-background-rgb), 0.97), rgba(var(--theme-background-rgb), 0.72) 42%, rgba(var(--theme-primary-rgb), 0.16) 78%),
+    linear-gradient(180deg, rgba(var(--theme-primary-rgb), 0.2), transparent 48%, var(--bg-space)) !important;
+}
+
+html[data-theme] #ctaFinalNicaragua .final-cta-backdrop {
+  background:
+    linear-gradient(90deg, rgba(var(--theme-background-rgb), 0.94), rgba(var(--theme-primary-rgb), 0.54)),
+    linear-gradient(180deg, transparent, var(--bg-space)) !important;
+}
+
+html[data-theme] .index-main-flow :is(
+  .ps-step-card, .ps-pillar-card, .quick-ia-prompt-box, .digital-chat-simulator,
+  .index-map-card, .index-map-header, .travel-service-card, .partner-chip,
+  .stat-pro-card, .impact-interactive-card, .exp-card, .app-download-card,
+  .app-spec-item, .host-benefit-card, .register-biz-form-card
+) {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html[data-theme] .index-main-flow :is(
+  .section-headline, .section-title-nicaragua, .culture-title,
+  .partners-infinity-title, .ps-title, .quick-ia-title,
+  .app-download-title, .impact-title
+) {
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] .index-main-flow :is(
+  .section-subtext, .section-sub-nicaragua, .culture-sub,
+  .partners-infinity-sub, .ps-subtitle, .quick-ia-desc,
+  .app-download-desc, .impact-thesis
+) {
+  color: var(--text-secondary) !important;
+  -webkit-text-fill-color: var(--text-secondary) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] .index-main-flow :is(
+  .badge-section-pill, .section-tag-pill, .culture-tag-pill,
+  .partners-pill-badge, .ps-badge, .quick-ia-badge,
+  .app-download-kicker, .baq-credibility-badge
+) {
+  color: var(--theme-cream) !important;
+  border-color: rgba(var(--theme-accent-rgb), 0.42) !important;
+  background: rgba(var(--theme-primary-rgb), 0.2) !important;
+}
+
+html[data-theme] .index-main-flow :is(
+  .hero-btn-primary, .quick-ia-submit-btn, .btn-cta-explore,
+  .partners-cta-btn, .app-download-btn-primary
+) {
+  background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-light)) !important;
+  border-color: var(--theme-accent) !important;
+}
+
+html[data-theme] .index-main-flow :is(
+  .hero-btn-ai, .btn-cta-route, .app-download-btn-secondary,
+  .index-layer-btn.active, .map-mode-tab.active
+) {
+  background: rgba(var(--theme-primary-rgb), 0.34) !important;
+  border-color: var(--theme-primary-light) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-bg-mode="light"] .index-main-flow > :is(
+  #problemaSolucionSection, #baqueanoDigitalSection, #queQueresVivir,
+  #territorioMapaSection, #destinosDestacadosSection, #culturaVivaNicaragua,
+  #serviciosTuristicosSection, #partnersInfinitySection, #nicaraguaEnCifrasSection,
+  #impactosBaqueanoSection, #sosSeguridadSection, #experienciasComunidad,
+  #redDeAnfitrionesSection, #appAndroidSection
+) {
+  box-shadow: inset 0 1px rgba(15, 23, 42, 0.08);
+}
+
+html[data-bg-mode="light"] .index-main-flow :is(
+  .living-card-overlay, .dest-card-overlay, .pillar-body,
+  .hero-cinematic-content, .final-cta-inner
+) :is(h1, h2, h3, h4, p, span, a) {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+html[data-section-colors-custom] .index-main-flow > :is(
+  #problemaSolucionSection, #baqueanoDigitalSection, #queQueresVivir,
+  #territorioMapaSection, #destinosDestacadosSection, #culturaVivaNicaragua,
+  #serviciosTuristicosSection, #partnersInfinitySection, #nicaraguaEnCifrasSection,
+  #impactosBaqueanoSection, #sosSeguridadSection, #experienciasComunidad,
+  #redDeAnfitrionesSection, #appAndroidSection
+) {
+  background-color: var(--section-bg-color) !important;
+  background-image: linear-gradient(180deg, var(--section-bg-tint), var(--section-bg-tint-mid), var(--section-bg-tint-bot)) !important;
+}
+
+html[data-section-colors-custom] .index-main-flow :is(
+  .section-headline, .section-title-nicaragua, .culture-title,
+  .partners-infinity-title, .ps-title, .quick-ia-title, .app-download-title
+) {
+  color: var(--section-title-color) !important;
+  -webkit-text-fill-color: var(--section-title-color) !important;
+}
+
+html[data-section-colors-custom] .index-main-flow :is(
+  .section-subtext, .section-sub-nicaragua, .culture-sub,
+  .partners-infinity-sub, .ps-subtitle, .quick-ia-desc, .app-download-desc
+) {
+  color: var(--section-text-color) !important;
+  -webkit-text-fill-color: var(--section-text-color) !important;
+}
+
 
 
 /* ============================================================================
