@@ -352,3 +352,21 @@
   - **Objetivo:** asignar material audiovisual de alta resolución a las secciones pertinentes del sitio.
   - **Regla de gobernanza:** impedir rotaciones o sustituciones automáticas; cada video permanecerá fijo hasta una actualización explícita desde el Ops Center.
   - **Plan:** auditar activos y registro multimedia, definir contrato persistente, integrar reproducción optimizada y validar rendimiento.
+  - **Implementación:**
+    1. Se sustituyó el registro externo y variable por cinco slots audiovisuales fijos con respaldo local: portada, destinos, cultura musical, gastronomía e historia.
+    2. El hero dejó de encadenar cuatro fuentes alternativas; ahora utiliza una única fuente aprobada y no cambia según disponibilidad de terceros.
+    3. Se integraron videos contextuales en la primera tarjeta de destinos y en los tres pilares de Cultura Viva, conservando las imágenes originales como pósteres.
+    4. `video-registry.js` reproduce solo material visible, pausa al ocultarse la pestaña y respeta la preferencia de movimiento reducido.
+    5. Se creó el contrato `app_config/site_videos`: la web aplica exclusivamente la última configuración publicada y conserva el catálogo local ante fallos de red.
+    6. La Biblioteca Multimedia del Ops Center incorpora editores por slot, previsualización, URL MP4, póster, descripción y publicación auditada.
+    7. El inventario operativo ahora registra los seis MP4 locales como recursos reales del sitio.
+  - **Gobernanza:** `locked: true`, estado publicado y auditoría `SITE_VIDEOS_PUBLISHED`; no existe rotación automática.
+  - **Archivos modificados:** `website/index.html`, `website/admin.html`, `website/js/video-registry.js`, `website/js/website-operations-catalog.js`, `website/js/ops-center/ops-engine.js`, `website/css/pages/index.css`, `website/assets/videos/README.md` y `SESSION_LOG.md`.
+
+- **Enlace compartido para publicación de APK (26 de Septiembre de 2026):**
+  > `https://drive.google.com/file/d/1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq/view?usp=sharing`
+  - **Objetivo:** utilizar el archivo compartido como descarga oficial transitoria de la aplicación Android.
+  - **Validación:** Google Drive respondió HTTP 200 y el identificador `1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq` cumple el formato esperado.
+  - **Implementación:** el botón principal de Android utiliza la ruta directa `drive.usercontent.google.com/download`, sin atributo `download`, para delegar la entrega a Google Drive.
+  - **Prueba de descarga:** respuesta HTTP 200, `Content-Type: application/octet-stream`, `Content-Disposition: attachment; filename="BaqueanoNicaragua.apk"` y tamaño reportado de 95,441,231 bytes.
+  - **Ops Center:** el formulario de publicación externa queda precargado con el enlace compartido; una publicación administrativa futura puede reemplazarlo mediante `app_config/android_release` sin modificar código.

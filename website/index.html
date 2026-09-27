@@ -488,15 +488,10 @@
          ============================================================================ -->
     <section class="hero-section-nicaragua hero-cinematic-centered" id="heroNicaragua">
       <!-- Media de fondo inmersiva en video Full HD / Alta Resolución -->
-      <video class="hero-nicaragua-bg-media" autoplay loop muted playsinline preload="metadata"
-        poster="assets/images/destinos/isla_de_ometepe.jpg" aria-label="Nicaragua Paisajes y Ecoturismo">
-        <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
-        <source src="https://www.visitanicaragua.com/wp-content/uploads/2026/09/volcan.mp4" type="video/mp4">
-        <source
-          src="https://www.visitanicaragua.com/wp-content/uploads/2026/07/Descubre-un-destino-que-lo-tiene-todo-720p.mp4"
-          type="video/mp4">
-        <source src="assets/videos/destinos.mp4" type="video/mp4">
-      </video>
+      <video class="hero-nicaragua-bg-media" data-baqueano-video-slot="indexHero" autoplay loop muted playsinline
+        preload="auto" poster="assets/images/destinos/isla_de_ometepe.jpg"
+        aria-label="Paisajes aéreos y territorio vivo de Nicaragua"
+        src="assets/videos/video%20nicaragua.mp4"></video>
       <div class="hero-nicaragua-overlay"></div>
 
       <div class="container hero-cinematic-container">
@@ -1260,8 +1255,10 @@
           <!-- 1. Isla de Ometepe -->
           <article class="destination-card-pro" data-destination="ometepe" data-href="destinos.html?q=ometepe" onclick="window.location.href='destinos.html?q=ometepe'" role="link" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=ometepe'">
             <div class="dest-card-media-wrap">
-              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe, Rivas" class="dest-card-img"
-                loading="lazy">
+              <video class="dest-card-img" data-baqueano-video-slot="destinationsFeature" muted loop playsinline
+                preload="metadata" poster="assets/images/destinos/isla_de_ometepe.jpg"
+                aria-label="Isla de Ometepe y destinos naturales de Nicaragua"
+                src="assets/videos/destinos.mp4"></video>
               <span class="dest-card-badge"><i class="fa-solid fa-water"></i> Rivas · Gran Lago</span>
             </div>
             <div class="dest-card-content">
@@ -1405,8 +1402,10 @@
           <!-- 1. Escucha Nicaragua -->
           <article class="culture-pillar-card card-audio">
             <div class="pillar-media-wrap">
-              <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg"
-                alt="Música tradicional de Nicaragua" class="pillar-img" loading="lazy">
+              <video class="pillar-img" data-baqueano-video-slot="cultureMusic" muted loop playsinline
+                preload="metadata" poster="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg"
+                aria-label="Música tradicional e identidad cultural de Nicaragua"
+                src="assets/videos/video.mp4"></video>
               <div class="pillar-badge-top"><i class="fa-solid fa-music"></i> Patrimonio Sonoro</div>
             </div>
             <div class="pillar-body">
@@ -1424,8 +1423,10 @@
           <!-- 2. Saborea Nicaragua -->
           <article class="culture-pillar-card card-gastronomy">
             <div class="pillar-media-wrap">
-              <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg"
-                alt="Gastronomía y maíz de Nicaragua" class="pillar-img" loading="lazy">
+              <video class="pillar-img" data-baqueano-video-slot="cultureGastronomy" muted loop playsinline
+                preload="metadata" poster="assets/images/comida/nacatamal.jpg"
+                aria-label="Gastronomía, maíz y fogón ancestral de Nicaragua"
+                src="assets/videos/gastronomia.mp4"></video>
               <div class="pillar-badge-top"><i class="fa-solid fa-bowl-food"></i> Sabor Campesino</div>
             </div>
             <div class="pillar-body">
@@ -1444,8 +1445,10 @@
           <!-- 3. Descubre Nicaragua -->
           <article class="culture-pillar-card card-history">
             <div class="pillar-media-wrap">
-              <img src="assets/images/destinos/isletas_de_granada.jpg" alt="Historia y literatura de Nicaragua"
-                class="pillar-img" loading="lazy">
+              <video class="pillar-img" data-baqueano-video-slot="cultureHistory" muted loop playsinline
+                preload="metadata" poster="assets/images/destinos/isletas_de_granada.jpg"
+                aria-label="Historia, literatura y patrimonio de Nicaragua"
+                src="assets/videos/historia.mp4"></video>
               <div class="pillar-badge-top"><i class="fa-solid fa-scroll"></i> Memoria Viva</div>
             </div>
             <div class="pillar-body">
@@ -2470,7 +2473,8 @@
               </div>
             </div>
             <div class="app-download-actions">
-              <a href="assets/downloads/baqueano_v2.4.0_preview.apk" download class="app-download-btn-primary">
+              <a href="https://drive.usercontent.google.com/download?id=1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq&amp;export=download&amp;confirm=t"
+                class="app-download-btn-primary" data-android-release-source="google-drive">
                 <i class="fa-solid fa-download"></i> Descargar APK Beta Oficial
               </a>
               <a href="#apkModal" class="app-download-btn-secondary" onclick="openApkModal(event)">
@@ -2927,7 +2931,7 @@
 
   <!-- Scripts Modulares del Ecosistema -->
   <script src="js/navigation.js?v=20260926-ops-nav-3"></script>
-  <script src="js/video-registry.js"></script>
+  <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <script src="js/firestore-realtime.js"></script>
   <script src="app.js"></script>
 

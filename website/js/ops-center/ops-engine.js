@@ -1782,6 +1782,7 @@
     aiAutonomyEnabled: false,
     aiAutonomyTimer: null,
     androidRelease: null,
+    videoConfig: null,
 
     // Caché reactivo por colección
     collectionsData: {},
@@ -2296,6 +2297,7 @@
       this.listenToCollection('34-tarifas');
       this.listenToAuditLogs();
       this.listenToAppConfig();
+      this.listenToSiteVideos();
       this.listenToAndroidRelease();
       this.listenToAiTasks();
     },
@@ -2407,6 +2409,20 @@
           }
         },
         (error) => console.warn('[OpsCMS] Config global:', error.message)
+      );
+      OpsState.listeners.push(unsub);
+    },
+
+    // Configuración audiovisual editorial: solo el Ops Center publica cambios.
+    listenToSiteVideos() {
+      const db = this.getDb();
+      if (!db) return;
+      const unsub = db.collection('app_config').doc('site_videos').onSnapshot(
+        (doc) => {
+          OpsState.videoConfig = doc.exists ? { id: doc.id, ...doc.data() } : null;
+          if (OpsState.activeTab === '21-multimedia') OpsUI.renderMediaLibraryModule();
+        },
+        (error) => console.warn('[OpsCMS] Configuración audiovisual:', error.message)
       );
       OpsState.listeners.push(unsub);
     },
@@ -5233,6 +5249,26 @@
       const panel = document.getElementById('view-21-multimedia');
       if (!panel) return;
 
+      const catalog = window.BaqueanoVideos?.catalog || {};
+      const publishedSlots = OpsState.videoConfig?.slots || {};
+      const videoEditors = Object.entries(catalog).map(([slotId, fallback]) => {
+        const current = { ...fallback, ...(publishedSlots[slotId] || {}) };
+        return `
+          <article class="ops-section-card" style="padding:1rem;display:grid;gap:.8rem">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:.75rem">
+              <div><strong style="color:#fff">${OpsUI.escape(fallback.label || slotId)}</strong><small style="display:block;color:var(--ops-text-muted);margin-top:.2rem">Slot fijo: ${OpsUI.escape(slotId)}</small></div>
+              <span class="ops-nav-badge live">FIJO</span>
+            </div>
+            <video muted controls preload="metadata" poster="${OpsUI.escape(current.poster || '')}" src="${OpsUI.escape(current.src || '')}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:#02060a"></video>
+            <label class="ops-form-label" for="videoSrc-${slotId}">URL MP4 publicada</label>
+            <input class="ops-form-input ops-site-video-src" id="videoSrc-${slotId}" data-slot="${slotId}" value="${OpsUI.escape(current.src || '')}" placeholder="https://.../video.mp4">
+            <label class="ops-form-label" for="videoPoster-${slotId}">Póster de respaldo</label>
+            <input class="ops-form-input ops-site-video-poster" id="videoPoster-${slotId}" data-slot="${slotId}" value="${OpsUI.escape(current.poster || '')}" placeholder="assets/images/...">
+            <label class="ops-form-label" for="videoTitle-${slotId}">Descripción accesible</label>
+            <input class="ops-form-input ops-site-video-title" id="videoTitle-${slotId}" data-slot="${slotId}" maxlength="180" value="${OpsUI.escape(current.title || '')}">
+          </article>`;
+      }).join('');
+
       panel.innerHTML = `
         <div class="ops-view-header">
           <div class="ops-view-title-group">
@@ -5259,6 +5295,20 @@
             <li><code>/pages/{pageId}</code> — Banners y fondos dinámicos del Website Builder.</li>
             <li><code>/multimedia/{id}</code> — Archivos de audio folclórico, marimba y documentos patrimoniales.</li>
           </ul>
+        </div>
+
+        <div style="margin-top:1.5rem;background:var(--ops-surface-1);border:1px solid var(--ops-border-subtle);border-radius:var(--ops-radius-md);padding:1.25rem">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+            <div>
+              <h3 style="font-size:1rem;color:#fff;margin:0 0 .35rem"><i class="fa-solid fa-film" style="color:var(--bq-secondary)"></i> Videos oficiales del portal</h3>
+              <p style="margin:0;color:var(--ops-text-secondary);font-size:.8rem">Cada slot permanece inmóvil hasta publicar una sustitución desde este panel. Se recomienda MP4 H.264/H.265, 2160p o 1080p de alta tasa y póster optimizado.</p>
+            </div>
+            <button type="button" class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.saveSiteVideoConfiguration()"><i class="fa-solid fa-floppy-disk"></i> Publicar videos</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1rem">${videoEditors}</div>
+          <div style="margin-top:1rem;padding:.85rem 1rem;border:1px solid rgba(72,214,160,.25);border-radius:10px;background:rgba(72,214,160,.07);color:var(--ops-text-secondary);font-size:.78rem">
+            <i class="fa-solid fa-lock" style="color:#48d6a0"></i> Gobernanza activa: la web no rota ni elige videos por sí sola. Solo lee la última configuración publicada aquí.
+          </div>
         </div>
       `;
     },
@@ -5320,7 +5370,7 @@
             </div>
             <div class="ops-form-group">
               <label class="ops-form-label" for="androidApkExternalUrl">Enlace compartido de Google Drive</label>
-              <input id="androidApkExternalUrl" class="ops-form-input" type="url" inputmode="url" maxlength="1000" placeholder="https://drive.google.com/file/d/ID_DEL_ARCHIVO/view?usp=sharing" value="${OpsUI.escape(release?.externalSourceUrl || '')}">
+              <input id="androidApkExternalUrl" class="ops-form-input" type="url" inputmode="url" maxlength="1000" placeholder="https://drive.google.com/file/d/ID_DEL_ARCHIVO/view?usp=sharing" value="${OpsUI.escape(release?.externalSourceUrl || 'https://drive.google.com/file/d/1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq/view?usp=sharing')}">
               <small style="color:var(--ops-text-secondary)">El archivo debe estar compartido como «Cualquier persona con el enlace». Baqueano convertirá el vínculo en una descarga directa.</small>
             </div>
             <label style="display:flex;align-items:center;gap:.65rem;margin-top:1rem;color:var(--ops-text-secondary)">
@@ -6296,6 +6346,72 @@
         }
       }
     },
+
+    async saveSiteVideoConfiguration() {
+      const db = OpsCMS.getDb();
+      if (!db) {
+        OpsToast.show('Firestore no está disponible para publicar los videos.', 'error');
+        return;
+      }
+
+      const catalog = window.BaqueanoVideos?.catalog || {};
+      const slots = {};
+      const isSafeUrl = (value, kind) => {
+        if (kind === 'video' && /^assets\/videos\//i.test(value)) return true;
+        if (kind === 'poster' && /^assets\/images\//i.test(value)) return true;
+        try {
+          const parsed = new URL(value, window.location.href);
+          return parsed.protocol === 'https:' || (parsed.protocol === 'http:' && /^(localhost|127\.0\.0\.1)$/.test(parsed.hostname));
+        } catch (_) {
+          return false;
+        }
+      };
+
+      for (const [slotId, fallback] of Object.entries(catalog)) {
+        const src = document.querySelector(`.ops-site-video-src[data-slot="${slotId}"]`)?.value.trim() || fallback.src;
+        const poster = document.querySelector(`.ops-site-video-poster[data-slot="${slotId}"]`)?.value.trim() || fallback.poster;
+        const title = document.querySelector(`.ops-site-video-title[data-slot="${slotId}"]`)?.value.trim() || fallback.title;
+        if (!isSafeUrl(src, 'video') || !isSafeUrl(poster, 'poster')) {
+          OpsToast.show(`Revisa las URLs del slot ${fallback.label || slotId}.`, 'warning');
+          return;
+        }
+        slots[slotId] = { src, poster, title: title.slice(0, 180) };
+      }
+
+      const button = document.querySelector('button[onclick*="saveSiteVideoConfiguration"]');
+      const original = button?.innerHTML || '';
+      if (button) {
+        button.disabled = true;
+        button.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Publicando...';
+      }
+
+      try {
+        const payload = {
+          slots,
+          status: 'published',
+          locked: true,
+          qualityPolicy: 'source_original',
+          updatedAt: new Date().toISOString(),
+          updatedBy: OpsState.currentUser?.email || 'admin'
+        };
+        await db.collection('app_config').doc('site_videos').set(payload, { merge: true });
+        await OpsCMS.logAuditEvent({
+          action: 'SITE_VIDEOS_PUBLISHED',
+          module: 'Multimedia',
+          description: `Configuración fija publicada para ${Object.keys(slots).length} slots audiovisuales.`,
+          status: 'success'
+        });
+        OpsToast.show('Videos publicados. Permanecerán fijos hasta la próxima actualización del Ops Center.', 'success', 5000);
+      } catch (error) {
+        OpsToast.show(`No fue posible publicar los videos: ${error.message}`, 'error');
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.innerHTML = original || '<i class="fa-solid fa-floppy-disk"></i> Publicar videos';
+        }
+      }
+    },
+
     refreshBackupStatus() {
       if (typeof OpsToast !== 'undefined') OpsToast.show('Actualizando telemetría de resguardo...', 'info');
       OpsUI.renderBackupSyncModule();
@@ -6708,7 +6824,7 @@
           channel,
           notes,
           fileName: `baqueano-${version}.apk`,
-          downloadUrl: `https://drive.google.com/uc?export=download&id=${encodeURIComponent(fileId)}`,
+          downloadUrl: `https://drive.usercontent.google.com/download?id=${encodeURIComponent(fileId)}&export=download&confirm=t`,
           externalSourceUrl: sourceUrl.href,
           externalFileId: fileId,
           storageProvider: 'google_drive',

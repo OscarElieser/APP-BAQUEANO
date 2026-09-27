@@ -28,6 +28,26 @@
     type: 'audio', category: 'Patrimonio sonoro', audioUrl: `assets/audio/${file}`,
     publicUrl: `assets/audio/${file}`, status: 'published', source: 'website_catalog'
   }));
+  const videos = [
+    ['video nicaragua.mp4', 'Portada nacional', '2160p/1080p fuente original'],
+    ['destinos.mp4', 'Destinos', 'Alta resolución web'],
+    ['video.mp4', 'Patrimonio sonoro', 'Alta resolución web'],
+    ['gastronomia.mp4', 'Gastronomía', 'Alta resolución web'],
+    ['historia.mp4', 'Historia', 'Alta resolución web'],
+    ['video 2.mp4', 'Territorio', 'Alta resolución web']
+  ];
+  videos.forEach(([file, category, quality]) => media.push({
+    id: `media-video-${slug(file)}`,
+    title: file.replace(/\.mp4$/i, '').replace(/_/g, ' '),
+    name: file,
+    type: 'video',
+    category,
+    description: `${quality} · MP4 administrado por Ops Center`,
+    videoUrl: `assets/videos/${encodeURIComponent(file)}`,
+    publicUrl: `assets/videos/${encodeURIComponent(file)}`,
+    status: 'published',
+    source: 'website_catalog'
+  }));
   window.BaqueanoWebsiteMedia = media;
   window.BaqueanoWebsiteNotifications = [
     { id: 'notification-sos', title: 'Centro SOS 24/7 disponible', message: 'Para emergencias nacionales utiliza la linea 118.', targetPlatform: 'web_android', link: 'tel:118', category: 'Seguridad', status: 'published', source: 'website_catalog' },

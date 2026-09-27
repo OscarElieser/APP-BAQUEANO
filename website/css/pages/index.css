@@ -3749,6 +3749,14 @@ html body .index-inline-066 {
 #destinosDestacadosSection .dest-card-img { aspect-ratio: 16 / 10; }
 #culturaVivaNicaragua .pillar-img { aspect-ratio: 16 / 9; }
 
+#destinosDestacadosSection video.dest-card-img,
+#culturaVivaNicaragua video.pillar-img {
+  display: block;
+  background: #02070C;
+  object-fit: cover;
+  object-position: center;
+}
+
 #territorioMapaSection {
   background:
     radial-gradient(circle at 16% 22%, rgba(246, 94, 1, 0.08), transparent 28%),

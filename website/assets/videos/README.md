@@ -1,24 +1,31 @@
-# 🎥 BAQUEANO VIDEO ASSETS REGISTRY
+# BAQUEANO — Registro de activos audiovisuales
 
-Este directorio modular gestiona y documenta los recursos audiovisuales cinematográficos oficiales para los encabezados principales del ecosistema Baqueano Nicaragua.
+## 🎯 POR QUÉ
 
-## 📂 Catálogo de Fondos de Video por Módulo:
+Este directorio conserva las fuentes audiovisuales oficiales del portal. Cada video se asigna a un espacio editorial fijo para evitar cambios inesperados, dependencias externas o rotaciones automáticas.
 
-| Módulo / Página | Temática del Video | Fuente / Archivo |
+## ⚙️ CÓMO
+
+`js/video-registry.js` relaciona cada elemento `data-baqueano-video-slot` con este catálogo local. El documento público `app_config/site_videos` puede sustituir una fuente solamente cuando el Ops Center publica una configuración nueva.
+
+La portada carga su fuente de forma prioritaria. Los videos secundarios cargan metadatos y se reproducen únicamente al entrar en el viewport. Cuando el usuario prefiere movimiento reducido, permanece visible el póster.
+
+## 📦 QUÉ
+
+| Slot / uso | Temática | Fuente local |
 | :--- | :--- | :--- |
-| **Gastronomía Ancestral** (`gastronomia.html`) | Fuego campesino, maíz, cocina ancestral y ollas de barro | `assets/videos/gastronomia_hero.mp4` |
-| **Historia de Mi País** (`historia.html`) | Ciudades coloniales, paisajes patrimoniales y volcanes | `assets/videos/historia_hero.mp4` |
-| **Campaña Ambiental** (`ambiental.html`) | Bosques nubosos, cascadas de agua prístina y ríos | `assets/videos/ambiental_hero.mp4` |
-| **Patrimonio Sonoro** (`musica.html`) | Marimbas tradicionales, guitarras campesinas y danzas | `assets/videos/musica_hero.mp4` |
-| **Cooperativas Aliadas** (`aliados.html`) | Cosecha de café, comunidades agrícolas y campesinos | `assets/videos/aliados_hero.mp4` |
-| **Portal Anfitriones** (`mi-negocio.html`) | Hospedajes ecológicos, cabañas en la selva y hospitalidad | `assets/videos/negocio_hero.mp4` |
-| **Destinos Protegidos** (`destinos.html`) | Cañones acuáticos, lagunas y reservas naturales | `assets/videos/destinos_hero.mp4` |
-| **Página de Inicio** (`index.html`) | Vistas aéreas panorámicas de Nicaragua y Pacífico | `assets/videos/index_hero.mp4` |
+| `indexHero` | Vistas aéreas panorámicas de Nicaragua | `assets/videos/video nicaragua.mp4` |
+| `destinationsFeature` | Lagos, volcanes, costas y reservas | `assets/videos/destinos.mp4` |
+| `cultureMusic` | Música, danza e identidad cultural | `assets/videos/video.mp4` |
+| `cultureGastronomy` | Fuego campesino, maíz y cocina ancestral | `assets/videos/gastronomia.mp4` |
+| `cultureHistory` | Ciudades, memoria y paisajes históricos | `assets/videos/historia.mp4` |
+| Reserva territorial | Material disponible para futura asignación | `assets/videos/video 2.mp4` |
 
----
+## Estándares técnicos y de gobernanza
 
-## ⚙️ Estándares Técnicos:
-- **Formato**: MP4 H.264 optimizado para web.
-- **Configuración de Reproducción**: `autoplay loop muted playsinline`.
-- **Accesibilidad**: Respeto al modo `prefers-reduced-motion` mediante `css/videos.css`.
-- **Controlador JS**: Sincronizado centralmente en `js/video-registry.js`.
+- Formato recomendado: MP4 H.264 o H.265 con póster optimizado.
+- Calidad recomendada para nuevas cargas: 2160p o 1080p con alta tasa de bits.
+- La web entrega el archivo fuente original; no reduce ni sustituye su resolución.
+- Los slots permanecen fijos hasta una publicación explícita del Ops Center.
+- La configuración se registra con `locked: true`, `status: published` y auditoría administrativa.
+- Reproducción: `muted`, `loop` y `playsinline`; pausa automática fuera del viewport.
