@@ -25,8 +25,8 @@
   const VIDEO_CATALOG = Object.freeze({
     indexHero: Object.freeze({
       label: 'Hero principal de Nicaragua',
-      src: 'assets/videos/video%20nicaragua.mp4',
-      poster: 'assets/images/destinos/isla_de_ometepe.jpg',
+      src: 'assets/videos/video%20nicaragua%20(1).mp4',
+      poster: '',
       title: 'Paisajes aéreos y territorio vivo de Nicaragua'
     }),
     destinationsFeature: Object.freeze({
@@ -97,7 +97,11 @@
     const sourceChanged = currentSrc !== media.src;
     video.querySelectorAll('source').forEach((source) => source.remove());
     video.setAttribute('src', media.src);
-    video.setAttribute('poster', media.poster);
+    if (media.poster) {
+      video.setAttribute('poster', media.poster);
+    } else {
+      video.removeAttribute('poster');
+    }
     video.setAttribute('aria-label', media.title);
     video.dataset.videoSource = media.source;
     video.muted = true;

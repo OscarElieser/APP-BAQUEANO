@@ -5,24 +5,34 @@
    🎯 1. POR QUÉ (WHY / PROPÓSITO):
    - Crear una portada moderna, limpia y asimétrica de alto impacto visual,
      fiel al estándar de portales de expedición y turismo de aventura internacional.
-   - Dejar el flanco derecho abierto y luminoso para que el video Full HD de Nicaragua
-     se aprecie sin obstáculos, concentrando en el flanco izquierdo tipografía
-     editorial de alto contraste, llamada a la acción y un carrusel al pie con
-     tarjetas de destinos icónicos en miniatura visibles simultáneamente en el viewport.
+   - Mostrar el video en alta definición y con máxima luminosidad y nitidez,
+     sin velos oscuros que apaguen los colores del territorio vivo de Nicaragua.
+   - Garantizar una jerarquía tipográfica imponente y majestuosa para la
+     pantalla principal, con tarjetas de destinos proporcionales y estéticas
+     que se aprecian íntegras dentro del viewport sin cortes ni recortes.
 
    ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-   - Capa de fondo con elemento <video> en alta definición con aceleración GPU.
-   - Máscara de gradiente asimétrica (90deg) que oscurece el tercio izquierdo
-     para legibilidad impecable, dejando el resto transparente para el video.
-   - Tipografía editorial sans-serif (Montserrat/Outfit) con pesos optimizados.
-   - Eyebrow con línea divisoria horizontal luminosa, botón minimalista
-     "EXPLORAR DESTINOS", franja de redes sociales y carrusel deslizable
-     con miniaturas de Corn Island, Ometepe, Somoto, San Juan del Sur y Granada.
-   - Dimensionamiento ergonómico y armónico para que todos los componentes,
-     incluidas las tarjetas del carrusel, convivan dentro del viewport de 100vh.
+   - Capa de video sin filtros destructivos GPU (filter: none) para nitidez 1:1.
+   - Máscara de gradiente asimétrica luminosa: sombra suave en el flanco izquierdo
+     exclusivamente para contraste del texto y 100% de transparencia en el centro
+     y derecha para que el video brille en todo su esplendor.
+   - Tipografía editorial sans-serif pesada (Montserrat 900) con sombreado de alta
+     legibilidad sobre cualquier fotograma del video.
+   - Carrusel inferior armónico con tarjetas estilizadas y proporciones de
+     revista de viajes internacional (116px-138px de ancho, 138px-168px de alto).
+   - Ajustes responsivos ergonómicos que mantienen la grandeza visual sin
+     generar cortes en viewports reducidos (pantallas de laptop ~620px de alto).
 
    📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
    - #heroNicaragua.hero-editorial-mode
+   - .hero-nicaragua-bg-media
+   - .hero-nicaragua-overlay
+   - .hero-editorial-container
+   - .hero-editorial-content
+   - .hero-editorial-title
+   - .hero-editorial-subtitle
+   - .hero-editorial-actions
+   - .hero-destinations-carousel-wrap
    ============================================================================ */
 
 #heroNicaragua.hero-editorial-mode {
@@ -39,7 +49,7 @@
   margin: 0 !important;
 }
 
-/* 1. Video de Fondo Panorámico en Alta Definición */
+/* 1. Video de Fondo Panorámico en Alta Definición — Máxima Nitidez 1:1 */
 #heroNicaragua.hero-editorial-mode .hero-nicaragua-bg-media {
   position: absolute !important;
   inset: 0 !important;
@@ -49,13 +59,13 @@
   object-position: center center !important;
   z-index: 1 !important;
   pointer-events: none !important;
-  filter: brightness(0.95) contrast(1.06) saturate(1.15) !important;
-  transition: opacity 0.4s ease !important;
+  filter: none !important;
+  transition: opacity 0.3s ease !important;
   transform: translate3d(0, 0, 0) !important;
   will-change: transform, opacity !important;
 }
 
-/* 2. Máscara de Gradiente Asimétrica: Oscurece izquierda, ilumina derecha */
+/* 2. Máscara de Gradiente Asimétrica: Luminosa y de Alta Claridad */
 #heroNicaragua.hero-editorial-mode .hero-nicaragua-overlay {
   position: absolute !important;
   inset: 0 !important;
@@ -63,15 +73,16 @@
   pointer-events: none !important;
   background:
     linear-gradient(90deg, 
-      rgba(6, 16, 24, 0.94) 0%, 
-      rgba(6, 16, 24, 0.84) 34%, 
-      rgba(6, 16, 24, 0.35) 65%, 
-      rgba(6, 16, 24, 0.08) 100%
+      rgba(6, 16, 24, 0.76) 0%, 
+      rgba(6, 16, 24, 0.50) 34%, 
+      rgba(6, 16, 24, 0.12) 60%, 
+      transparent 88%
     ),
     linear-gradient(180deg, 
-      rgba(6, 16, 24, 0.55) 0%, 
-      transparent 30%, 
-      rgba(6, 16, 24, 0.72) 100%
+      rgba(6, 16, 24, 0.38) 0%, 
+      transparent 22%, 
+      transparent 72%, 
+      rgba(6, 16, 24, 0.48) 100%
     ) !important;
 }
 
@@ -82,7 +93,7 @@
   width: 100% !important;
   max-width: 1440px !important;
   margin: 0 auto !important;
-  padding: max(74px, 8.5vh) clamp(24px, 4vw, 56px) max(10px, 1.8vh) !important;
+  padding: clamp(76px, 9vh, 92px) clamp(24px, 4vw, 56px) clamp(16px, 2.5vh, 28px) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
@@ -102,22 +113,22 @@
   text-align: left !important;
 }
 
-/* Eyebrow con línea horizontal característica de la referencia */
+/* Eyebrow con pilares territoriales */
 .hero-editorial-eyebrow {
   display: inline-flex !important;
   align-items: center !important;
   gap: 12px !important;
-  margin-bottom: 0.35rem !important;
+  margin-bottom: clamp(6px, 1vh, 12px) !important;
 }
 
 .hero-eyebrow-text {
   font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
-  font-size: clamp(0.68rem, 0.78vw, 0.82rem) !important;
+  font-size: clamp(0.72rem, 0.82vw, 0.88rem) !important;
   font-weight: 700 !important;
-  letter-spacing: 0.2em !important;
+  letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
-  color: #FFFFFF !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75) !important;
+  color: #F4E6C1 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85) !important;
 }
 
 .hero-eyebrow-divider {
@@ -128,17 +139,17 @@
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Gran Título Editorial Asimétrico */
+/* Gran Título Editorial Asimétrico — Imponente y Majestuoso */
 .hero-editorial-title {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: clamp(1.85rem, min(3.8vw, 6vh), 3.2rem) !important;
+  font-size: clamp(2.35rem, 3.6vw, 3.5rem) !important;
   font-weight: 900 !important;
   line-height: 1.05 !important;
   letter-spacing: -0.02em !important;
   text-transform: uppercase !important;
   color: #FFFFFF !important;
-  margin: 0 0 0.45rem 0 !important;
-  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+  margin: 0 0 clamp(8px, 1.2vh, 16px) 0 !important;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85), 0 2px 4px rgba(0, 0, 0, 0.95) !important;
   text-align: left !important;
 }
 
@@ -147,19 +158,19 @@
   color: #F65E01 !important;
   -webkit-text-fill-color: #F65E01 !important;
   display: inline-block !important;
-  text-shadow: 0 4px 28px rgba(246, 94, 1, 0.4) !important;
+  text-shadow: 0 4px 26px rgba(246, 94, 1, 0.55), 0 1px 3px rgba(0, 0, 0, 0.95) !important;
 }
 
-/* Párrafo Narrativo Limpio */
+/* Párrafo Narrativo Limpio y Auténtico */
 .hero-editorial-subtitle {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: clamp(0.8rem, 0.95vw, 0.95rem) !important;
+  font-size: clamp(0.88rem, 1.02vw, 1.05rem) !important;
   font-weight: 400 !important;
   line-height: 1.45 !important;
-  color: rgba(255, 255, 255, 0.88) !important;
-  max-width: 50ch !important;
-  margin: 0 0 0.65rem 0 !important;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  max-width: 52ch !important;
+  margin: 0 0 clamp(10px, 1.5vh, 18px) 0 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85) !important;
   text-align: left !important;
 }
 
@@ -168,29 +179,29 @@
   display: flex !important;
   align-items: center !important;
   flex-wrap: wrap !important;
-  gap: 10px !important;
-  margin-bottom: 0.55rem !important;
+  gap: 12px !important;
+  margin-bottom: clamp(10px, 1.4vh, 16px) !important;
 }
 
 .hero-btn-readmore {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 8px 22px !important;
+  padding: clamp(9px, 1.2vh, 13px) clamp(22px, 2vw, 30px) !important;
   border-radius: 8px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+  background: rgba(15, 23, 42, 0.45) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
   font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
-  font-size: 0.8rem !important;
+  font-size: clamp(0.78rem, 0.85vw, 0.86rem) !important;
   font-weight: 700 !important;
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
 }
 
 .hero-btn-readmore:hover {
@@ -204,23 +215,23 @@
 .hero-btn-ai-pill {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 7px !important;
-  padding: 8px 18px !important;
-  border-radius: 8px !important;
-  border: 1.5px solid rgba(244, 230, 193, 0.35) !important;
-  background: rgba(22, 93, 111, 0.45) !important;
+  gap: 8px !important;
+  padding: clamp(9px, 1.2vh, 13px) clamp(18px, 1.6vw, 24px) !important;
+  border-radius: 999px !important;
+  border: 1.5px solid rgba(244, 230, 193, 0.4) !important;
+  background: rgba(22, 93, 111, 0.55) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   color: #F4E6C1 !important;
   font-family: 'Space Grotesk', 'Montserrat', sans-serif !important;
-  font-size: 0.8rem !important;
+  font-size: clamp(0.78rem, 0.85vw, 0.86rem) !important;
   font-weight: 600 !important;
   text-decoration: none !important;
   transition: all 0.3s ease !important;
 }
 
 .hero-btn-ai-pill:hover {
-  background: rgba(22, 93, 111, 0.75) !important;
+  background: rgba(22, 93, 111, 0.85) !important;
   border-color: #F4E6C1 !important;
   color: #FFFFFF !important;
   transform: translateY(-2px) !important;
@@ -231,13 +242,13 @@
 .hero-editorial-social {
   display: flex !important;
   align-items: center !important;
-  gap: 14px !important;
-  margin-bottom: 0.4rem !important;
+  gap: 16px !important;
+  margin-bottom: clamp(6px, 1vh, 14px) !important;
 }
 
 .hero-editorial-social a {
-  color: rgba(255, 255, 255, 0.75) !important;
-  font-size: 0.95rem !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 1rem !important;
   transition: all 0.25s ease !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -252,30 +263,30 @@
 
 /* 5. Carrusel de Tarjetas de Destinos (Fiel al pie izquierdo de la referencia) */
 .hero-destinations-carousel-wrap {
-  margin-top: 0.25rem !important;
   position: relative !important;
-  max-width: 540px !important;
+  max-width: 580px !important;
   width: 100% !important;
+  margin-top: auto !important;
 }
 
 .hero-destinations-carousel {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 10px !important;
   position: relative !important;
 }
 
 .hero-carousel-nav-btn {
-  width: 30px !important;
-  height: 30px !important;
-  flex: 0 0 30px !important;
+  width: 34px !important;
+  height: 34px !important;
+  flex: 0 0 34px !important;
   border-radius: 50% !important;
   border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-  background: rgba(6, 16, 24, 0.6) !important;
+  background: rgba(6, 16, 24, 0.65) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
-  font-size: 0.75rem !important;
+  font-size: 0.82rem !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -295,11 +306,11 @@
 .hero-cards-scroller {
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 12px !important;
   overflow-x: auto !important;
   scroll-behavior: smooth !important;
   scroll-snap-type: x mandatory !important;
-  padding: 4px 2px !important;
+  padding: 6px 3px !important;
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
@@ -309,18 +320,18 @@
 }
 
 .hero-destination-card {
-  flex: 0 0 clamp(98px, 8.5vw, 118px) !important;
-  width: clamp(98px, 8.5vw, 118px) !important;
-  height: clamp(108px, 17vh, 132px) !important;
-  border-radius: 10px !important;
+  flex: 0 0 clamp(116px, 9.5vw, 138px) !important;
+  width: clamp(116px, 9.5vw, 138px) !important;
+  height: clamp(138px, 15vh, 168px) !important;
+  border-radius: 12px !important;
   overflow: hidden !important;
   position: relative !important;
   cursor: pointer !important;
   scroll-snap-align: start !important;
-  border: 2px solid rgba(255, 255, 255, 0.22) !important;
+  border: 2px solid rgba(255, 255, 255, 0.25) !important;
   background: #07111C !important;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
   user-select: none !important;
 }
 
@@ -345,7 +356,7 @@
 
 .hero-card-tag {
   font-family: 'Space Grotesk', sans-serif !important;
-  font-size: 0.6rem !important;
+  font-size: 0.62rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   color: #F4E6C1 !important;
@@ -355,17 +366,17 @@
 
 .hero-card-name {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 0.8rem !important;
-  font-weight: 700 !important;
+  font-size: 0.84rem !important;
+  font-weight: 800 !important;
   color: #FFFFFF !important;
   line-height: 1.15 !important;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95) !important;
 }
 
 .hero-destination-card:hover {
   transform: translateY(-4px) !important;
-  border-color: rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55) !important;
 }
 
 .hero-destination-card:hover img {
@@ -374,17 +385,17 @@
 
 .hero-destination-card.is-active {
   border-color: #F65E01 !important;
-  box-shadow: 0 10px 26px rgba(246, 94, 1, 0.5) !important;
+  box-shadow: 0 0 18px rgba(246, 94, 1, 0.5), 0 10px 26px rgba(0, 0, 0, 0.6) !important;
   transform: translateY(-3px) !important;
 }
 
 .hero-destination-card.is-active::after {
   content: '' !important;
   position: absolute !important;
-  top: 7px !important;
-  right: 7px !important;
-  width: 7px !important;
-  height: 7px !important;
+  top: 8px !important;
+  right: 8px !important;
+  width: 8px !important;
+  height: 8px !important;
   border-radius: 50% !important;
   background: #F65E01 !important;
   box-shadow: 0 0 8px #F65E01 !important;
@@ -430,62 +441,58 @@
   color: #F65E01 !important;
 }
 
-/* Reglas Especiales para Viewports Compactos en Altura (Laptops 1366x768 / 1354x621) */
-@media (max-height: 780px) {
+/* Reglas Especiales para Viewports Compactos en Altura (Laptops ~620px-740px) */
+@media (max-height: 740px) {
   #heroNicaragua.hero-editorial-mode .hero-editorial-container {
-    padding-top: 88px !important;
+    padding-top: 76px !important;
     padding-bottom: 12px !important;
   }
   .hero-editorial-eyebrow {
-    margin-bottom: 0.2rem !important;
+    margin-bottom: 4px !important;
   }
   .hero-eyebrow-text {
-    font-size: 0.65rem !important;
+    font-size: 0.70rem !important;
   }
   .hero-editorial-title {
-    font-size: clamp(1.55rem, 4vh, 1.95rem) !important;
+    font-size: clamp(2.05rem, 4.4vh, 2.35rem) !important;
     line-height: 1.04 !important;
-    margin-bottom: 0.28rem !important;
+    margin-bottom: 6px !important;
   }
   .hero-editorial-subtitle {
-    font-size: 0.77rem !important;
-    line-height: 1.34 !important;
-    margin-bottom: 0.35rem !important;
+    font-size: 0.84rem !important;
+    line-height: 1.36 !important;
+    margin-bottom: 8px !important;
     max-width: 48ch !important;
   }
   .hero-editorial-actions {
-    margin-bottom: 0.32rem !important;
-    gap: 8px !important;
+    margin-bottom: 8px !important;
+    gap: 10px !important;
   }
   .hero-btn-readmore,
   .hero-btn-ai-pill {
-    padding: 6px 16px !important;
-    font-size: 0.74rem !important;
+    padding: 8px 20px !important;
+    font-size: 0.78rem !important;
   }
   .hero-editorial-social {
-    margin-bottom: 0.22rem !important;
-    gap: 12px !important;
+    margin-bottom: 6px !important;
+    gap: 14px !important;
   }
   .hero-editorial-social a {
-    font-size: 0.88rem !important;
-  }
-  .hero-destinations-carousel-wrap {
-    margin-top: 0.12rem !important;
+    font-size: 0.92rem !important;
   }
   .hero-destination-card {
-    height: 102px !important;
-    flex: 0 0 90px !important;
-    width: 90px !important;
-    border-radius: 8px !important;
+    height: 132px !important;
+    flex: 0 0 110px !important;
+    width: 110px !important;
   }
   .hero-card-meta {
-    padding: 5px 7px !important;
+    padding: 6px 8px !important;
   }
   .hero-card-name {
-    font-size: 0.68rem !important;
+    font-size: 0.78rem !important;
   }
   .hero-card-tag {
-    font-size: 0.5rem !important;
+    font-size: 0.58rem !important;
   }
 }
 

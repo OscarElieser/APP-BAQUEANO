@@ -33,6 +33,7 @@
     const prevBtn = document.getElementById('heroCarouselPrev');
     const nextBtn = document.getElementById('heroCarouselNext');
     const soundBtn = document.getElementById('heroVideoSoundToggle');
+    const playBtn = document.getElementById('heroVideoPlayToggle');
     const cards = Array.from(heroSection.querySelectorAll('.hero-destination-card'));
 
     // --- 0. Preservar Título Editorial en 3 Líneas y Acento Naranja Oficial ---
@@ -85,7 +86,7 @@
       updateArrows();
     }
 
-    // --- 3. Selección de Destino e Intercambio de Video ---
+    // --- 3. Selección de Destino e Intercambio de Video Fluido ---
     cards.forEach((card) => {
       card.addEventListener('click', (e) => {
         // Remover clase activa previa y marcar la seleccionada
@@ -93,16 +94,21 @@
         card.classList.add('is-active');
 
         const targetVideo = card.getAttribute('data-dest-video');
-        if (bgVideo && targetVideo && bgVideo.getAttribute('src') !== targetVideo) {
-          bgVideo.style.opacity = '0.3';
-          bgVideo.style.transition = 'opacity 0.35s ease';
+        if (bgVideo && targetVideo) {
+          const currentSrc = bgVideo.getAttribute('src');
+          if (currentSrc !== targetVideo) {
+            bgVideo.style.opacity = '0.4';
+            bgVideo.style.transition = 'opacity 0.2s ease';
 
-          setTimeout(() => {
-            bgVideo.src = targetVideo;
-            bgVideo.load();
-            bgVideo.play().catch(() => {});
-            bgVideo.style.opacity = '1';
-          }, 320);
+            setTimeout(() => {
+              bgVideo.src = targetVideo;
+              const playPromise = bgVideo.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+              }
+              bgVideo.style.opacity = '1';
+            }, 180);
+          }
         }
 
         // En caso de doble toque o clic directo sobre el texto, ir al destino

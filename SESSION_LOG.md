@@ -588,3 +588,27 @@
       * `carouselClearanceAboveScreenBottom`: `+12.0px` (carrusel de tarjetas flotando con holgura sobre la base de la pantalla).
       * `isEverythingInsideViewportWithoutCuts`: `true`.
       * Captura registrada: `hero_full_viewport_1790492520317.png`.
+
+- **Optimización de Nitidez de Video UHD, Supresión de Imágenes Estáticas y Jerarquía Majestuosa de Pantalla Principal (27 de Septiembre de 2026):**
+  > *"siento que el video no se ve claro y me pregunto porque se pone una imagen si estamos con video, mejorarlo por favor . y ese tamaño asi seve horrible por favor acomodalo que asi a como esta va ser nuestra pantalla principal"* — retroalimentación solicitando clarificar la luminosidad del video, erradicar cualquier imagen estática (póster) y restablecer un tamaño imponente y de alta gama acorde a la portada principal.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Eliminar la turbidez y oscuridad del video causada por una sobrecapa de gradientes negros densos (94% de opacidad) y filtros de contraste/brillo por software que degradaban la nitidez del territorio nicaragüense.
+    - Erradicar la aparición de cualquier imagen estática (`poster="assets/images/destinos/isla_de_ometepe.jpg"`), asegurando que el reproductor trabaje exclusivamente con secuencias de video continuas y fluidas.
+    - Corregir el encogimiento artificial previo (titular reducido a 25px y tarjetas de 90px x 102px pareciendo sellos postales), dotando a la portada principal de una jerarquía visual cinematográfica, dominante y elegante (`Montserrat 900`, tarjetas generosas de 110px-138px de ancho y 132px-168px de alto), manteniendo al 100% la ausencia de cortes en pantalla.
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - **Nitidez de Video Máxima**: Se eliminó `filter: brightness() contrast() saturate()` en `.hero-nicaragua-bg-media` en `website/css/hero-editorial.css`, activando renderizado nativo 1:1 por hardware.
+    - **Máscara Luminosa de Alto Contraste**: Se sustituyó el velo negro por un gradiente sutil y elegante en el flanco izquierdo (76% a 0%, dejando el 70% central y derecho 100% transparente para que el video brille a plena luz).
+    - **Erradicación de Imágenes Estáticas**: Se eliminó el atributo `poster` en `website/index.html` y en `website/js/video-registry.js` (`indexHero.poster: ''` y `applySlot` con remoción defensiva `removeAttribute('poster')`).
+    - **Enlaces Master UHD**: Se actualizaron las tarjetas para cargar los clips master en alta resolución (`video nicaragua (1).mp4` a 6112x4321, `destinos (1).mp4` a 7664x4320 y `video (1).mp4` a 7664x4320).
+    - **Jerarquía y Escala de Pantalla Principal**: Titular escalado a `clamp(2.05rem, 4.4vh, 2.35rem)` en pantallas compactas y hasta `3.5rem` en monitores convencionales; tarjetas a `110px x 132px` (compactas) y `138px x 168px` (estándar), conservando holgura vertical total.
+    - **Defensa en Script**: Definición corregida de `playBtn` en `website/js/hero-experience.js` y transición acelerada a 180ms sin parpadeos.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Archivos sincronizados: `website/index.html`, `website/css/hero-editorial.css`, `website/js/video-registry.js`, `website/js/hero-experience.js`.
+    - Verificación técnica y visual mediante `browser_subagent` en viewport 1354x621:
+      * `video.hasAttribute('poster')`: **`false`** (Cero imágenes estáticas).
+      * `video.videoWidth` / `video.videoHeight`: **`6112px × 4321px`** (UHD Master).
+      * `video.paused`: **`false`** (Reproducción continua y fluida).
+      * `navbarBottom` vs `eyebrowTop`: **`76px` vs `76px`** (Alineación exacta sin colisión).
+      * `titleFontSize`: **`32.8px`** (Imponente, enérgico y legible).
+      * `carouselBottom`: **`587px`** (Totalmente contenido dentro de los 599px/621px del viewport, sin cortes).
+      * Capturas registradas: `hero_initial_state_1790493837663.png`, `hero_ometepe_selected_1790493856900.png` y `hero_somoto_selected_1790493878492.png`.
