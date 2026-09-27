@@ -1024,8 +1024,8 @@
               </h4>
               <div style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.82rem; color:var(--ops-text-secondary); line-height:1.5;">
                 <div>• <strong>Principio Rector:</strong> Firebase es el sistema primario. Supabase mantiene el resguardo relacional y geoespacial.</div>
-                <div>• <strong>Conmutador Circuit Breaker:</strong> Monitoreo continuo de Firestore con conmutación instantánea a cola de contingencia.</div>
-                <div>• <strong>Garantía de Cero Pérdida:</strong> Reservas, reseñas y perfiles nunca se descartan ante caídas de red o servidor.</div>
+                <div>• <strong>Conmutador Circuit Breaker:</strong> Monitoreo continuo de conectividad para desviar solicitudes a cola de contingencia local.</div>
+                <div>• <strong>Resiliencia de Datos:</strong> Diseñado para minimizar pérdida de datos mediante cola de contingencia y respaldo secundario.</div>
                 <div>• <strong>Integridad de Archivos:</strong> Hash SHA-256 verificado en cada replicación entre buckets.</div>
               </div>
             </div>

@@ -770,3 +770,27 @@
     - Nuevos componentes: `website/css/demo-hackathon.css`, `website/js/demo-hackathon-tour.js`.
     - Modificados: `index.html`, `destinos.html`, `service-worker.js`, y 7 páginas secundarias con APK unificado.
     - Rúbrica de evaluación blindada para alcanzar 100/100 en competencia tecnológica nacional.
+
+- **Auditoría Integral de Todo el Ecosistema y Blindaje de 10 Puntos para Victoria Nacional (27 de Septiembre de 2026):**
+  > *"Esta vez la evaluación es del sitio completo, no solo del index. Revisé la portada, catálogo de destinos, historia, gastronomía, aliados, campaña ambiental, canal de denuncias, páginas legales y también el Ops Center público... sin borrar datos subirlo al 100/100 por favor quiero ganar esta competencia en la app vamos a dejar la Versión oficial v1.0.0"* — Evaluación profunda del jurado técnico examinando la totalidad de páginas y módulos del proyecto.
+  - 🎯 **POR QUÉ (Why / Propósito):**
+    - Erradicar las 10 inconsistencias internas detectadas al inspeccionar la totalidad de páginas y subsistemas del ecosistema:
+      1. Unificación global de la versión Android a **`v1.0.0 (Versión Oficial)`** requerida explícitamente por el usuario para alinearse perfectamente con la APK construida y el Ops Center.
+      2. Corrección de 14 errores tipográficos de conversión USD en `destinos.html` (valores truncados como `.40`, `.60`, `.90` y `$5.00 – 2.00 USD`).
+      3. Inyección de barra de metadatos de procedencia, fuente y fecha en todas las fichas del catálogo (`.dest-provenance-bar`).
+      4. Precisión territorial en `gastronomia.html`: corrección de "17 departamentos" a "17 territorios administrativos: 15 departamentos y 2 regiones autónomas".
+      5. Rigor histórico en `historia.html`: ajuste de afirmaciones absolutas y panel visible de fuentes bibliográficas académicas (Crónicas de Indias, AGHN, UNESCO, INC).
+      6. Incorporación del **Protocolo de Verificación BAQUEANO** de 8 puntos en `aliados.html` para sustentar la insignia de auditoría.
+      7. Corrección de recomendación de consumo de agua en `ambiental.html` hacia fuentes confirmadas aptas para consumo humano.
+      8. Ajuste institucional en `denuncias.html` orientando hacia la facilitación y canalización con autoridades y brigadas.
+      9. Transparencia arquitectónica en `admin.html`: banner explicativo de *Catálogo Editorial Precargado (29 destinos)* vs. *Registros Dinámicos Firestore*, etiqueta de *MODO DEMOSTRACIÓN* en AI Center y políticas de resiliencia con circuit breaker.
+      10. Desacoplamiento de `admin.html` del footer público regular para cumplir mejores prácticas de seguridad, manteniendo acceso directo vía URL `/admin.html` para la demo.
+      11. Moderación del lenguaje en encabezados secundarios para una experiencia más humana y balanceada ("Todo lo que necesitas en el camino", "Historia & Memoria", etc.).
+  - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+    - Se creó [website/js/destinos-provenance.js](file:///d:/Desktop/APP%20BAQUEANO/website/js/destinos-provenance.js) para inyección no invasiva de metadatos de auditoría en todas las tarjetas de destinos.
+    - Se añadieron estilos en [website/styles.css](file:///d:/Desktop/APP%20BAQUEANO/website/styles.css) para `.dest-provenance-bar`.
+    - Se corrigieron punto por punto los archivos `index.html`, `destinos.html`, `admin.html`, `gastronomia.html`, `historia.html`, `aliados.html`, `ambiental.html`, `denuncias.html`, `departamento.html`, `mi-negocio.html` y `musica.html`.
+    - Se actualizó el Service Worker a `baqueano-offline-v14`.
+  - 📦 **QUÉ (What / Entregables & Validaciones):**
+    - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
+    - Bitácora persistente sincronizada bajo el Círculo Dorado.
