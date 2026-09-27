@@ -5313,7 +5313,15 @@
             <div class="ops-form-group" style="margin-top:1rem">
               <label class="ops-form-label" for="androidApkFile">Archivo APK *</label>
               <input id="androidApkFile" class="ops-form-input" type="file" accept=".apk,application/vnd.android.package-archive">
-              <small style="color:var(--ops-text-secondary)">El archivo permanece vacío hasta que un superadministrador seleccione una versión. No se publica automáticamente.</small>
+              <small style="color:var(--ops-text-secondary)">Usá este campo solamente si el almacenamiento directo está disponible.</small>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:.8rem;align-items:center;margin:1rem 0;color:var(--ops-text-muted)">
+              <span style="height:1px;background:var(--ops-border-subtle)"></span><strong style="font-size:.7rem;letter-spacing:.12em">O PUBLICÁ DESDE GOOGLE DRIVE</strong><span style="height:1px;background:var(--ops-border-subtle)"></span>
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label" for="androidApkExternalUrl">Enlace compartido de Google Drive</label>
+              <input id="androidApkExternalUrl" class="ops-form-input" type="url" inputmode="url" maxlength="1000" placeholder="https://drive.google.com/file/d/ID_DEL_ARCHIVO/view?usp=sharing" value="${OpsUI.escape(release?.externalSourceUrl || '')}">
+              <small style="color:var(--ops-text-secondary)">El archivo debe estar compartido como «Cualquier persona con el enlace». Baqueano convertirá el vínculo en una descarga directa.</small>
             </div>
             <label style="display:flex;align-items:center;gap:.65rem;margin-top:1rem;color:var(--ops-text-secondary)">
               <input id="androidApkPublish" type="checkbox">
@@ -5323,6 +5331,9 @@
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem">
               <button class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine.uploadAndroidRelease()">
                 <i class="fa-solid fa-cloud-arrow-up"></i> Subir nueva versión
+              </button>
+              <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.publishExternalAndroidRelease()">
+                <i class="fa-brands fa-google-drive"></i> Publicar enlace de Drive
               </button>
               ${hasRelease && release.published ? `
                 <button class="btn-ops-matte" onclick="window.BaqueanoOpsEngine.unpublishAndroidRelease()">
@@ -6636,6 +6647,94 @@
         console.error('[AndroidRelease] No se pudo cargar el APK:', error);
         if (progress) progress.textContent = 'La carga no pudo completarse. La versión pública no cambió.';
         OpsToast.show(`No se pudo cargar el APK: ${error.message || 'almacenamiento no disponible'}`, 'error', 7000);
+      }
+    },
+
+    // ========================================================================
+    // PUBLICACIÓN EXTERNA DE APK DESDE GOOGLE DRIVE
+    // POR QUÉ: permitir distribución provisional sin consumir almacenamiento
+    // adicional ni cargar archivos grandes desde el navegador administrativo.
+    // CÓMO: valida un vínculo HTTPS de Drive, extrae su ID y guarda una URL de
+    // descarga directa dentro del mismo contrato público usado por el sitio.
+    // QUÉ: versión Android publicable, auditable y reversible desde Ops Center.
+    // ========================================================================
+    async publishExternalAndroidRelease() {
+      const version = document.getElementById('androidApkVersion')?.value.trim() || '';
+      const channel = document.getElementById('androidApkChannel')?.value || 'production';
+      const notes = document.getElementById('androidApkNotes')?.value.trim() || '';
+      const rawUrl = document.getElementById('androidApkExternalUrl')?.value.trim() || '';
+      const publish = Boolean(document.getElementById('androidApkPublish')?.checked);
+      const progress = document.getElementById('androidApkProgress');
+
+      if (!version || !rawUrl) {
+        OpsToast.show('Indicá la versión y pegá el enlace compartido de Google Drive.', 'warning');
+        return;
+      }
+
+      let sourceUrl;
+      let fileId = '';
+      try {
+        sourceUrl = new URL(rawUrl);
+        const trustedHost = sourceUrl.hostname === 'drive.google.com' || sourceUrl.hostname === 'docs.google.com';
+        if (sourceUrl.protocol !== 'https:' || !trustedHost) throw new Error('host');
+        fileId = sourceUrl.pathname.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1]
+          || sourceUrl.searchParams.get('id')
+          || sourceUrl.pathname.match(/\/d\/([a-zA-Z0-9_-]+)/)?.[1]
+          || '';
+        if (!/^[a-zA-Z0-9_-]{10,}$/.test(fileId)) throw new Error('id');
+      } catch (_) {
+        OpsToast.show('El enlace no parece ser un archivo compartido válido de Google Drive.', 'error');
+        return;
+      }
+
+      const confirmed = await OpsDialog.confirm({
+        title: publish ? '¿Publicar descarga desde Google Drive?' : '¿Guardar enlace como borrador?',
+        message: publish
+          ? 'El botón público descargará la APK alojada en Google Drive. Confirmá que el acceso sea «Cualquier persona con el enlace».'
+          : 'El enlace se guardará como borrador y todavía no aparecerá en la web.',
+        confirmText: publish ? 'Publicar enlace' : 'Guardar borrador'
+      });
+      if (!confirmed) return;
+
+      try {
+        if (progress) { progress.style.display = 'block'; progress.textContent = 'Validando y registrando enlace…'; }
+        const db = OpsCMS.getDb();
+        if (!db) throw new Error('Firestore no está disponible para registrar la versión.');
+        const now = new Date().toISOString();
+        const releaseId = `android_drive_${version.replace(/[^a-zA-Z0-9.-]/g, '_')}_${Date.now()}`;
+        const release = {
+          id: releaseId,
+          version,
+          channel,
+          notes,
+          fileName: `baqueano-${version}.apk`,
+          downloadUrl: `https://drive.google.com/uc?export=download&id=${encodeURIComponent(fileId)}`,
+          externalSourceUrl: sourceUrl.href,
+          externalFileId: fileId,
+          storageProvider: 'google_drive',
+          published: publish,
+          status: publish ? 'published' : 'draft',
+          updatedAt: now,
+          updatedBy: OpsState.currentUser?.email || 'admin'
+        };
+        const batch = db.batch();
+        batch.set(db.collection('android_releases').doc(releaseId), release);
+        batch.set(db.collection('app_config').doc('android_release'), release, { merge: true });
+        await batch.commit();
+        await OpsCMS.logAuditEvent({
+          action: publish ? 'ANDROID_DRIVE_LINK_PUBLISHED' : 'ANDROID_DRIVE_LINK_SAVED',
+          module: 'Android',
+          collection: 'android_releases',
+          recordId: releaseId,
+          description: `Enlace de Google Drive registrado para APK ${version}.`,
+          status: 'success'
+        });
+        if (progress) progress.textContent = publish ? 'Enlace publicado correctamente.' : 'Borrador guardado correctamente.';
+        OpsToast.show(publish ? 'La descarga desde Google Drive ya está publicada.' : 'Enlace guardado como borrador.', 'success');
+      } catch (error) {
+        console.error('[AndroidRelease] No se pudo publicar el enlace externo:', error);
+        if (progress) progress.textContent = 'No fue posible registrar el enlace.';
+        OpsToast.show(`No se pudo guardar el enlace: ${error.message || 'error desconocido'}`, 'error', 7000);
       }
     },
 

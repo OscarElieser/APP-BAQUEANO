@@ -183,6 +183,27 @@
     4. Se agregó un pie de navegación con estado protegido y acceso directo al planificador.
     5. El diseño mantiene adaptación móvil, tablet y escritorio compacto mediante composición compartida.
 
+- **Consulta 11 (26 de Septiembre de 2026):**
+  > *"¿Todavía no puedo subir la APK? ¿Qué solución habría mediante un enlace de Google para que el usuario descargue sin varios procedimientos?"*
+  - **Diagnóstico:**
+    1. El Ops Center contiene interfaz y lógica de carga, pero su operación real requiere probar un APK firmado contra los servicios desplegados.
+    2. El respaldo de Supabase limita actualmente cada archivo a 50 MB y los intentos de Firebase/Supabase vencen a los 3.5 segundos, plazo insuficiente para la mayoría de APK.
+    3. Google Drive permite compartir archivos, pero puede mostrar confirmaciones, límites temporales de descarga y advertencias; no es una distribución estable para instaladores públicos.
+  - **Recomendación:** publicación final mediante Google Play para instalación normal con un botón; como transición, alojamiento en Google Cloud Storage o Firebase Storage con enlace estable desde `baqueano.com/descargar-app`. Android puede exigir autorización de fuentes externas cuando la instalación no proviene de Google Play.
+  - **Aclaración del usuario:** Google Play todavía no se utilizará por limitación presupuestaria. Se mantiene como ruta futura y se prioriza una descarga directa desde la infraestructura existente, corrigiendo límites y tiempos de carga antes de publicar el APK.
+  - **Implementación autorizada:**
+    1. Se añadió al módulo Android del Ops Center un campo para pegar enlaces compartidos de Google Drive y un botón independiente de publicación.
+    2. El sistema valida protocolo, dominio e identificador del archivo, genera el enlace de descarga y conserva la URL original para edición y auditoría.
+    3. La versión se registra en `android_releases` y `app_config/android_release`, respetando estado publicado o borrador.
+    4. La navegación pública consume el mismo contrato y evita el atributo `download` para Drive, permitiendo que Google gestione correctamente la respuesta del archivo.
+    5. Se reparó el selector del portal Android en `index.html`: al publicarse una versión, el botón dinámico se inserta ahora en `.app-download-actions` y actualiza la versión visible.
+
+- **Consulta 12 (26 de Septiembre de 2026):**
+  > *"Firebase Hosting falla con HTTP 400: Executable files are forbidden on the Spark billing plan."*
+  - **Diagnóstico:** el APK ya estaba excluido del Hosting, pero `website/assets/videos/` contiene tres instaladores `.exe` de Roblox que Firebase intentaba incluir entre los 494 archivos públicos.
+  - **Ejecución:** se amplió `hosting.ignore` en `firebase.json` para excluir APK, AAB y formatos ejecutables de Windows o binarios, sin borrar los archivos locales del usuario.
+  - **Resultado:** `firebase deploy --only hosting` finalizó correctamente, publicó 491 archivos y liberó la versión `999e64d12ec4b8ff` en `https://app-baqueano.web.app`. La página principal, el panel administrativo y el script con la función `publishExternalAndroidRelease` respondieron HTTP 200 en la verificación posterior.
+
 - **Consulta 10 (26 de Septiembre de 2026, 21:28):**
   > *"📸 Instagram: https://www.instagram.com/baqueano_nicaragua 📲 Facebook: https://www.facebook.com/share/1S71xwJKse/ 🎬 TikTok: https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e a los iconos de redes sociales agregarla por favor"*
   - **Ejecución y Entregables:**

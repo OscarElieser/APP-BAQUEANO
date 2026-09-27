@@ -630,7 +630,7 @@ function initDownloadModal() {
 }
 
 async function initAndroidReleaseDownload(retryCount = 0) {
-  const container = document.querySelector('.download-cta-double');
+  const container = document.querySelector('.app-download-actions, .download-cta-double');
   if (!container) return;
   if (!window.firebase || !window.firebase.firestore) {
     if (retryCount < 3) setTimeout(() => initAndroidReleaseDownload(retryCount + 1), 1000);
@@ -642,11 +642,14 @@ async function initAndroidReleaseDownload(retryCount = 0) {
     if (!release?.published || !release.downloadUrl) return;
     const link = document.createElement('a');
     link.href = release.downloadUrl;
-    link.className = 'btn-hero-primary';
-    link.rel = 'noopener';
-    link.setAttribute('download', release.fileName || 'baqueanonicaragua.apk');
+    link.className = container.classList.contains('app-download-actions') ? 'app-download-btn-primary' : 'btn-hero-primary';
+    link.rel = 'noopener noreferrer';
+    link.referrerPolicy = 'no-referrer';
+    if (release.storageProvider !== 'google_drive') link.setAttribute('download', release.fileName || 'baqueanonicaragua.apk');
     link.innerHTML = '<i class="fa-solid fa-download"></i> Descargar aplicación Android';
     container.prepend(link);
+    const versionLabel = document.querySelector('.app-spec-item:first-child .app-spec-val');
+    if (versionLabel && release.version) versionLabel.textContent = `v${release.version}${release.channel === 'beta' ? ' (Beta)' : ''}`;
   } catch (error) {
     console.warn('[AndroidRelease] No se pudo consultar la versión pública:', error.message);
   }
