@@ -9001,6 +9001,29 @@ img {
   .main-navbar .brand-text { display: none; }
 }
 
+/* ========================================================================== */
+/* NAVEGACIÓN ULTRACOMPACTA — PRIORIDAD AL MENÚ Y AL AUXILIO                  */
+/* 🎯 POR QUÉ: evitar que los accesos secundarios desplacen el botón drawer.  */
+/* ⚙️ CÓMO: reduce identidad y rótulos, conservando búsqueda, SOS y menú.      */
+/* 📦 QUÉ: barra superior íntegra entre 320 px y 680 px.                       */
+/* ========================================================================== */
+@media (max-width: 680px) {
+  .main-navbar .brand-text,
+  .main-navbar .theme-btn-label { display: none !important; }
+  .main-navbar .nav-inner { grid-template-columns: auto minmax(0, 1fr) auto; padding-inline: 10px; gap: 7px; }
+  .main-navbar .nav-actions-right { gap: 6px; }
+  .main-navbar .nav-theme-btn,
+  .main-navbar .nav-search-btn,
+  .main-navbar .mobile-nav-toggle { width: 42px; height: 42px; min-width: 42px; flex-basis: 42px; padding: 0; }
+  .main-navbar .sos-quick-btn { min-width: 82px; min-height: 42px; padding-inline: 9px; font-size: 0.7rem; }
+}
+
+@media (max-width: 390px) {
+  .main-navbar .nav-theme-btn { display: none !important; }
+  .main-navbar .sos-quick-btn { min-width: 44px; width: 44px; padding: 0; }
+  .main-navbar .sos-quick-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
 @media (min-width: 1600px) {
   .main-navbar .nav-inner,
   .site-footer-pro > .container {

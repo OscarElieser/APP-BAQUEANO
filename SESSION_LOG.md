@@ -329,3 +329,26 @@
   - **Interacción:** el botón de menú abre el drawer, el fondo exterior lo cierra y los tres grupos internos permanecen desplegables tipo acordeón.
   - **Caché:** se actualizaron las versiones de `styles.css` y `navigation.js` en las 18 páginas que cargan la navegación para impedir que el navegador conserve la barra anterior.
   - **Validación:** sintaxis JavaScript limpia, balance CSS correcto y `git diff --check` sin errores.
+
+- **Autorización de mejora integral del `index.html` (26 de Septiembre de 2026):**
+  > *"ok hagamosla que todas lleguen al 10/10 pero sin borra la informacion que tenemos . haz tu magia eres libre pero me tiene que informar lo que hiciste"*
+  - **Alcance autorizado:** elevar claridad, identidad, narrativa comercial, diseño, respuesta multidispositivo y preparación para competencia nacional.
+  - **Restricción central:** conservar íntegramente la información, módulos, enlaces y capacidades funcionales existentes.
+  - **Método:** auditoría estructural, capa visual cohesionada, optimización por secciones, validaciones técnicas y reporte detallado al usuario.
+  - **Ejecución completada:**
+    1. Se preservaron las 16 secciones de la portada, todos sus textos, mapas, formularios, carruseles, destinos, enlaces y scripts.
+    2. Se creó una capa editorial unificada en `website/css/pages/index.css` con tokens locales, ancho editorial, espaciado fluido, radios, sombras y estados accesibles.
+    3. Se reconstruyó la jerarquía del hero: promesa principal de gran impacto, alineación editorial izquierda, contraste reforzado y tres niveles claros de acción.
+    4. La propuesta Problema/Solución se convirtió en un tablero legible; el planificador con IA recibió prioridad visual como núcleo del producto.
+    5. Se normalizaron encabezados, tarjetas e imágenes en experiencias, destinos, cultura, servicios, mapa, aliados, cifras, impacto, SOS, comunidad, anfitriones y Android.
+    6. Se reforzaron el mapa vivo, la descarga Android y el CTA final mediante superficies, profundidad y escalas tipográficas consistentes.
+    7. Se incorporaron foco visible por teclado, soporte para movimiento reducido, `content-visibility` y contención intrínseca para secciones fuera del viewport.
+    8. La prueba visual real detectó desbordamiento del hero y saturación de la barra móvil; ambos fueron corregidos con tipografía fluida y navegación ultracompacta.
+    9. Se actualizó la versión de carga de `index.css` para invalidar caché del navegador.
+  - **Archivos afectados:** `website/index.html`, `website/css/pages/index.css`, `website/styles.css` y `SESSION_LOG.md`.
+
+- **Solicitud de videos fijos administrados por Ops Center (26 de Septiembre de 2026):**
+  > *"quiero que aplique los videos donde corresponden además que sean de ultra alta calidad. y que no cambien. hasta que el ops center lo cambie"*
+  - **Objetivo:** asignar material audiovisual de alta resolución a las secciones pertinentes del sitio.
+  - **Regla de gobernanza:** impedir rotaciones o sustituciones automáticas; cada video permanecerá fijo hasta una actualización explícita desde el Ops Center.
+  - **Plan:** auditar activos y registro multimedia, definir contrato persistente, integrar reproducción optimizada y validar rendimiento.

@@ -1,96 +1,176 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — REGISTRO & GESTOR DE FONDOS DE VIDEO (video-registry.js)
+// BAQUEANO — REGISTRO AUDIOVISUAL FIJO Y GOBERNADO POR OPS CENTER
 // ============================================================================
+// 🎯 POR QUÉ (WHY / PROPÓSITO):
+// - Garantizar que cada espacio audiovisual muestre siempre el video editorial
+//   aprobado, sin rotaciones, fuentes aleatorias ni cambios por disponibilidad.
+// - Permitir que únicamente una publicación explícita del Ops Center reemplace
+//   el material visible mediante el documento app_config/site_videos.
 //
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una fuente centralizada y configurable para los fondos de video
-//   de todos los encabezados principales (Gastronomía, Historia, Ambiental,
-//   Música, Aliados, Negocios, Destinos e Inicio).
-// - Asegurar carga asíncrona, control de reproducción de bajo consumo y
-//   accesibilidad para usuarios con preferencias de movimiento reducido.
+// ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Un catálogo local inmutable ofrece videos MP4 y pósteres de respaldo.
+// - Los elementos se vinculan mediante data-baqueano-video-slot.
+// - Firestore puede reemplazar src/poster/título por slot usando onSnapshot;
+//   si no existe configuración o falla la red, permanece el material local.
+// - IntersectionObserver reproduce únicamente videos visibles; el modo de
+//   movimiento reducido mantiene el póster y evita consumo innecesario.
 //
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Objeto inmutable `VIDEO_CATALOG` con URLs y posters de respaldo.
-// - Método `initVideoHeroes()` que vincula botones de pausa/reproducción
-//   y maneja eventos de ahorro de batería o fallos de red.
-//
-// 📦 3. QUÉ (WHAT / MÉTODOS EXPUESTOS):
-// - window.BaqueanoVideos = { catalog, init, togglePlay }
+// 📦 QUÉ (WHAT / ENTREGABLES):
+// - Catálogo fijo, sincronización Ops, validación defensiva de URLs, control de
+//   ciclo de vida y API window.BaqueanoVideos.
 // ============================================================================
-
-window.BaqueanoVideos = (function() {
+(function exposeBaqueanoVideos(window, document) {
   'use strict';
 
-  const VIDEO_CATALOG = {
-    gastronomia: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4',
-      poster: 'assets/images/comida/nacatamal.jpg',
-      title: 'Gastronomía Ancestral y Fogón Campesino'
-    },
-    historia: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/4079ee5e-5883-4a18-a6d1-4db81d6fbb5c/38584852.mp4',
-      poster: 'assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg',
-      title: 'Historia, Soberanía y Ciudades Coloniales'
-    },
-    ambiental: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/5b0907d7-d779-4560-8438-fbcaef40be44/47942699.mp4',
-      poster: 'assets/images/destinos/selva_negra.jpg',
-      title: 'Bosques Vírgenes, Cuencas y Selva Tropical'
-    },
-    musica: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/7a0fcda5-1f91-4c6e-8260-264bc80fe3ea/24016149.mp4',
-      poster: 'assets/images/destinos/calle_la_calzada.jpg',
-      title: 'Patrimonio Sonoro, Marimba y Danza Tradicional'
-    },
-    aliados: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/e2815183-b78f-4aa7-ae49-166fefbce78d/33924376.mp4',
-      poster: 'assets/images/destinos/finca_magdalena.jpg',
-      title: 'Comunidades Rurales y Cooperativas Agroecológicas'
-    },
-    negocio: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/92e8508e-5b1a-4648-8dfa-80bb4c995fa4/32236543.mp4',
-      poster: 'assets/images/destinos/morgans_rock.jpg',
-      title: 'Hospitalidad Campesina y Eco-Lodges de Nicaragua'
-    },
-    destinos: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/1b40667e-50b4-470f-82f8-6dc087bfbafe/22747651.mp4',
-      poster: 'assets/images/destinos/canon_de_somoto.jpg',
-      title: 'Catálogo de Destinos y Áreas Protegidas'
-    },
-    index: {
-      src: 'https://video-previews.elements.envatousercontent.com/h264-video-previews/3e536ec6-3694-4342-9908-ca45d94bc6fb/41551065.mp4',
+  const VIDEO_CATALOG = Object.freeze({
+    indexHero: Object.freeze({
+      label: 'Hero principal de Nicaragua',
+      src: 'assets/videos/video%20nicaragua.mp4',
       poster: 'assets/images/destinos/isla_de_ometepe.jpg',
-      title: 'Expediciones y Ecoturismo Soberano en Nicaragua'
-    }
+      title: 'Paisajes aéreos y territorio vivo de Nicaragua'
+    }),
+    destinationsFeature: Object.freeze({
+      label: 'Destinos destacados',
+      src: 'assets/videos/destinos.mp4',
+      poster: 'assets/images/destinos/cerro_negro.jpg',
+      title: 'Destinos naturales y aventura en Nicaragua'
+    }),
+    cultureMusic: Object.freeze({
+      label: 'Cultura y patrimonio sonoro',
+      src: 'assets/videos/video.mp4',
+      poster: 'assets/images/destinos/Calle%20La%20Calzada%20%26%20Zona%20Bohemia.jpg',
+      title: 'Música, danza e identidad cultural nicaragüense'
+    }),
+    cultureGastronomy: Object.freeze({
+      label: 'Gastronomía ancestral',
+      src: 'assets/videos/gastronomia.mp4',
+      poster: 'assets/images/comida/nacatamal.jpg',
+      title: 'Fogón, maíz y gastronomía ancestral'
+    }),
+    cultureHistory: Object.freeze({
+      label: 'Historia y patrimonio',
+      src: 'assets/videos/historia.mp4',
+      poster: 'assets/images/destinos/isletas_de_granada.jpg',
+      title: 'Historia, arquitectura y memoria viva de Nicaragua'
+    })
+  });
+
+  const state = {
+    initialized: false,
+    observer: null,
+    unsubscribe: null,
+    config: null
   };
 
-  function init() {
-    // Configurar botones de control de reproducción de video en la página
-    document.querySelectorAll('.video-hero-wrapper').forEach(wrapper => {
-      const video = wrapper.querySelector('video');
-      const ctrlBtn = wrapper.querySelector('.video-hero-ctrl-btn');
-
-      if (video && ctrlBtn) {
-        ctrlBtn.addEventListener('click', () => {
-          if (video.paused) {
-            video.play();
-            ctrlBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            ctrlBtn.setAttribute('title', 'Pausar video de fondo');
-          } else {
-            video.pause();
-            ctrlBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-            ctrlBtn.setAttribute('title', 'Reproducir video de fondo');
-          }
-        });
+  function safeMediaUrl(value, fallback) {
+    const candidate = String(value || '').trim();
+    if (!candidate) return fallback;
+    if (/^assets\/(?:videos|images)\//i.test(candidate)) return candidate;
+    try {
+      const parsed = new URL(candidate, window.location.href);
+      if (parsed.protocol === 'https:' || (parsed.protocol === 'http:' && /^(localhost|127\.0\.0\.1)$/.test(parsed.hostname))) {
+        return parsed.href;
       }
+    } catch (_) {}
+    return fallback;
+  }
+
+  function resolveSlot(slotName) {
+    const fallback = VIDEO_CATALOG[slotName];
+    if (!fallback) return null;
+    const published = state.config?.slots?.[slotName] || {};
+    return {
+      ...fallback,
+      src: safeMediaUrl(published.src, fallback.src),
+      poster: safeMediaUrl(published.poster, fallback.poster),
+      title: String(published.title || fallback.title).trim().slice(0, 180),
+      source: published.src ? 'ops_center' : 'local_catalog'
+    };
+  }
+
+  function applySlot(video) {
+    const slotName = video.dataset.baqueanoVideoSlot;
+    const media = resolveSlot(slotName);
+    if (!media) return;
+
+    const currentSrc = video.getAttribute('src') || '';
+    const sourceChanged = currentSrc !== media.src;
+    video.querySelectorAll('source').forEach((source) => source.remove());
+    video.setAttribute('src', media.src);
+    video.setAttribute('poster', media.poster);
+    video.setAttribute('aria-label', media.title);
+    video.dataset.videoSource = media.source;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = slotName === 'indexHero' ? 'auto' : 'metadata';
+    video.disablePictureInPicture = true;
+    video.disableRemotePlayback = true;
+    if (sourceChanged && typeof video.load === 'function') video.load();
+  }
+
+  function observePlayback(video) {
+    if (!state.observer) return;
+    state.observer.observe(video);
+  }
+
+  function applyAll() {
+    document.querySelectorAll('video[data-baqueano-video-slot]').forEach((video) => {
+      applySlot(video);
+      observePlayback(video);
     });
   }
 
-  // Inicializar al cargar el DOM
-  document.addEventListener('DOMContentLoaded', init);
+  function createPlaybackObserver() {
+    if (state.observer || !('IntersectionObserver' in window)) return;
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+    state.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (!entry.isIntersecting || reducedMotion || document.hidden) {
+          video.pause();
+          return;
+        }
+        video.play().catch(() => {});
+      });
+    }, { rootMargin: '160px 0px', threshold: 0.18 });
+  }
 
-  return {
+  function connectOpsConfiguration() {
+    if (!window.firebase?.firestore) return;
+    try {
+      const docRef = window.firebase.firestore().collection('app_config').doc('site_videos');
+      state.unsubscribe = docRef.onSnapshot((snapshot) => {
+        if (!snapshot.exists) return;
+        const data = snapshot.data() || {};
+        if (data.status && data.status !== 'published') return;
+        state.config = data;
+        applyAll();
+      }, (error) => console.warn('[BaqueanoVideos] Configuración remota no disponible:', error.message));
+    } catch (error) {
+      console.warn('[BaqueanoVideos] Se conserva el catálogo audiovisual local:', error.message);
+    }
+  }
+
+  function init() {
+    if (state.initialized) return;
+    state.initialized = true;
+    createPlaybackObserver();
+    applyAll();
+    connectOpsConfiguration();
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) document.querySelectorAll('video[data-baqueano-video-slot]').forEach((video) => video.pause());
+      else applyAll();
+    });
+  }
+
+  window.BaqueanoVideos = Object.freeze({
     catalog: VIDEO_CATALOG,
-    init: init
-  };
-})();
+    init,
+    applyAll,
+    getResolvedSlot: resolveSlot
+  });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})(window, document);

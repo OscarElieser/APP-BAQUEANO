@@ -3424,3 +3424,498 @@ html body .index-inline-066 {
   color: #2DD4BF;
   font-size: 12px;
 }
+
+/* ============================================================================
+   BAQUEANO — CAPA EDITORIAL DE COMPETENCIA NACIONAL
+   ============================================================================
+   🎯 POR QUÉ (WHY / PROPÓSITO):
+   - Convertir los quince módulos funcionales de la portada en una experiencia
+     coherente, memorable y fácil de explicar ante visitantes y jurado.
+   - Preservar toda la información existente, reduciendo únicamente el ruido
+     visual mediante ritmo, jerarquía, contraste y dimensiones consistentes.
+
+   ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Define tokens locales para superficies, radios, sombras y ancho editorial.
+   - Normaliza encabezados, tarjetas, botones, imágenes, estados de foco y ritmo.
+   - Refuerza el hero, la propuesta de valor, la IA, el mapa, el ecosistema
+     territorial, la seguridad y la aplicación con una misma gramática visual.
+   - Usa transformaciones aceleradas, contención de pintura y carga diferida
+     nativa; no incorpora transformaciones síncronas en el hilo principal.
+
+   📦 QUÉ (WHAT / FUNCIONALIDAD & ENTREGABLES):
+   - Sistema visual unificado para #heroNicaragua hasta #ctaFinalNicaragua.
+   - Adaptación fluida para móvil, tablet, portátil, escritorio y pantallas 4K.
+   - Accesibilidad visible por teclado y soporte para movimiento reducido.
+   ============================================================================ */
+
+.index-main-flow {
+  --index-content: 1240px;
+  --index-gutter: clamp(1rem, 3vw, 2rem);
+  --index-section-space: clamp(4.75rem, 8vw, 7.5rem);
+  --index-radius-sm: 14px;
+  --index-radius-md: 22px;
+  --index-radius-lg: 32px;
+  --index-ink: #0F172A;
+  --index-teal: #165D6F;
+  --index-orange: #F65E01;
+  --index-cream: #F4E6C1;
+  --index-night: #07111C;
+  --index-line: rgba(244, 230, 193, 0.16);
+  --index-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+  overflow: clip;
+  background: var(--index-night);
+}
+
+.index-main-flow > section:not(#heroNicaragua) {
+  isolation: isolate;
+  scroll-margin-top: 88px;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+.index-main-flow > section:not(#heroNicaragua, #partnersInfinitySection, #ctaFinalNicaragua) {
+  padding-block: var(--index-section-space);
+}
+
+.index-main-flow .container {
+  width: min(var(--index-content), calc(100% - (var(--index-gutter) * 2)));
+  margin-inline: auto;
+}
+
+.index-main-flow :is(.section-lead-header, .culture-head-box, .partners-infinity-header) {
+  width: min(780px, 100%);
+  margin: 0 auto clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+}
+
+.index-main-flow :is(.section-headline, .culture-title, .partners-infinity-title) {
+  max-width: 18ch;
+  margin-inline: auto;
+  font-size: clamp(2rem, 4vw, 3.55rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.045em !important;
+  text-wrap: balance;
+}
+
+.index-main-flow :is(.section-subtext, .culture-sub, .partners-infinity-sub) {
+  max-width: 68ch;
+  margin-inline: auto;
+  font-size: clamp(0.95rem, 1.35vw, 1.08rem) !important;
+  line-height: 1.75 !important;
+  text-wrap: pretty;
+}
+
+.index-main-flow :is(.badge-section-pill, .culture-tag-pill, .partners-pill-badge, .section-tag-pill) {
+  min-height: 32px;
+  padding: 7px 13px;
+  border: 1px solid rgba(246, 94, 1, 0.28);
+  border-radius: 999px;
+  background: rgba(7, 17, 28, 0.7);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.07);
+  color: var(--index-cream);
+  letter-spacing: 0.075em;
+}
+
+.index-main-flow :is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(246, 94, 1, 0.78) !important;
+  outline-offset: 3px;
+}
+
+/* Hero: una sola promesa, lectura inmediata y CTAs con peso diferenciado. */
+#heroNicaragua {
+  min-height: max(760px, 92svh);
+  display: grid;
+  align-items: center;
+  border-bottom: 1px solid rgba(244, 230, 193, 0.18);
+  background: #07111C;
+}
+
+#heroNicaragua .hero-nicaragua-bg-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+#heroNicaragua .hero-nicaragua-overlay {
+  background:
+    linear-gradient(90deg, rgba(4, 10, 18, 0.96) 0%, rgba(4, 10, 18, 0.78) 38%, rgba(4, 10, 18, 0.18) 72%, rgba(4, 10, 18, 0.28) 100%),
+    linear-gradient(180deg, rgba(4, 10, 18, 0.32) 0%, rgba(4, 10, 18, 0.05) 55%, #07111C 100%);
+}
+
+#heroNicaragua .hero-cinematic-container {
+  position: relative;
+  z-index: 2;
+  width: min(var(--index-content), calc(100% - (var(--index-gutter) * 2)));
+  padding-top: clamp(6rem, 11vh, 9rem);
+  padding-bottom: clamp(8rem, 14vh, 11rem);
+  justify-content: flex-start;
+}
+
+#heroNicaragua .hero-cinematic-content {
+  width: min(760px, 68vw);
+  margin: 0;
+  align-items: flex-start;
+  text-align: left;
+}
+
+#heroNicaragua .hero-brand-kicker {
+  min-height: 34px;
+  padding: 8px 13px;
+  border-color: rgba(244, 230, 193, 0.2);
+  background: rgba(7, 17, 28, 0.56);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--index-cream);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+  white-space: normal;
+  text-align: left;
+}
+
+#heroNicaragua .hero-main-title {
+  max-width: 10.5ch;
+  margin: 1.15rem 0 1.25rem;
+  font-size: clamp(3.35rem, 7.2vw, 7.25rem);
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+  text-shadow: 0 18px 54px rgba(0, 0, 0, 0.52);
+  text-align: left;
+}
+
+#heroNicaragua .hero-main-title .highlight-terra {
+  display: inline-block;
+  color: var(--index-orange);
+  -webkit-text-fill-color: var(--index-orange);
+}
+
+#heroNicaragua .hero-main-subtitle {
+  max-width: 60ch;
+  margin-inline: 0;
+  color: #EDF4F6;
+  font-size: clamp(1rem, 1.45vw, 1.22rem);
+  line-height: 1.7;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.85);
+  text-align: left;
+}
+
+#heroNicaragua .hero-cta-actions {
+  justify-content: flex-start;
+  gap: 0.8rem;
+  margin-top: 1.75rem;
+}
+
+#heroNicaragua :is(.hero-btn-primary, .hero-btn-ai, .hero-btn-tertiary) {
+  min-height: 52px;
+  padding: 0.8rem 1.3rem;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+}
+
+#heroNicaragua .hero-btn-primary {
+  background: linear-gradient(135deg, #F65E01, #E65000);
+  box-shadow: 0 16px 36px rgba(246, 94, 1, 0.32);
+}
+
+#heroNicaragua .hero-btn-ai {
+  border-color: rgba(244, 230, 193, 0.34);
+  background: rgba(7, 17, 28, 0.64);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+#heroNicaragua .hero-btn-tertiary {
+  border-color: transparent;
+  background: transparent;
+}
+
+/* Propuesta de valor: tablero compacto con recorrido entendible en segundos. */
+#problemaSolucionSection {
+  background:
+    radial-gradient(circle at 84% 12%, rgba(22, 93, 111, 0.2), transparent 32%),
+    linear-gradient(180deg, #07111C, #091827);
+}
+
+#problemaSolucionSection .ps-header-block {
+  width: min(900px, 100%);
+  margin-inline: auto;
+}
+
+#problemaSolucionSection .ps-title {
+  max-width: 22ch;
+  margin-inline: auto;
+  font-size: clamp(2rem, 4.1vw, 3.7rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+#problemaSolucionSection .ps-subtitle {
+  max-width: 76ch;
+  margin-inline: auto;
+  line-height: 1.72;
+}
+
+#problemaSolucionSection :is(.ps-step-card, .ps-pillar-card) {
+  border-color: rgba(244, 230, 193, 0.13);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(22, 93, 111, 0.08));
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.18);
+}
+
+#problemaSolucionSection :is(.ps-step-card, .ps-pillar-card):hover {
+  border-color: rgba(246, 94, 1, 0.42);
+  transform: translateY(-5px);
+}
+
+/* IA: el planificador funciona como el núcleo del producto, no como otro bloque. */
+#baqueanoDigitalSection {
+  background:
+    linear-gradient(135deg, rgba(22, 93, 111, 0.19), transparent 44%),
+    #050B13;
+}
+
+#baqueanoDigitalSection .quick-ia-prompt-box {
+  width: min(1040px, 100%);
+  margin: 0 auto clamp(2.5rem, 5vw, 4.5rem);
+  padding: clamp(1.4rem, 3.5vw, 2.75rem);
+  border: 1px solid rgba(246, 94, 1, 0.32);
+  border-radius: var(--index-radius-lg);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(246, 94, 1, 0.13), transparent 25%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(8, 30, 39, 0.96));
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.44), inset 0 1px rgba(255, 255, 255, 0.07);
+}
+
+#baqueanoDigitalSection .quick-ia-title {
+  max-width: 16ch;
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+#baqueanoDigitalSection .quick-ia-input-wrap {
+  min-height: 68px;
+  padding: 8px 9px 8px 18px;
+  border-radius: 18px;
+  background: rgba(2, 8, 15, 0.76);
+}
+
+#baqueanoDigitalSection .quick-ia-submit-btn {
+  min-height: 50px;
+  border-radius: 13px;
+}
+
+#baqueanoDigitalSection .digital-ai-grid {
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+}
+
+#baqueanoDigitalSection .digital-chat-simulator {
+  border: 1px solid rgba(244, 230, 193, 0.16);
+  border-radius: var(--index-radius-md);
+  box-shadow: var(--index-shadow);
+}
+
+/* Exploración y catálogo: imágenes consistentes y tarjetas con lectura estable. */
+#queQueresVivir .living-card,
+#destinosDestacadosSection .dest-card-pro,
+#culturaVivaNicaragua .culture-pillar-card {
+  overflow: hidden;
+  border: 1px solid rgba(244, 230, 193, 0.16);
+  border-radius: var(--index-radius-md);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
+}
+
+#queQueresVivir .living-card:hover,
+#destinosDestacadosSection .dest-card-pro:hover,
+#culturaVivaNicaragua .culture-pillar-card:hover {
+  border-color: rgba(246, 94, 1, 0.5);
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+}
+
+#queQueresVivir .living-card-img,
+#destinosDestacadosSection .dest-card-img,
+#culturaVivaNicaragua .pillar-img {
+  width: 100%;
+  object-fit: cover;
+}
+
+#queQueresVivir .living-card-img { aspect-ratio: 4 / 5; }
+#destinosDestacadosSection .dest-card-img { aspect-ratio: 16 / 10; }
+#culturaVivaNicaragua .pillar-img { aspect-ratio: 16 / 9; }
+
+#territorioMapaSection {
+  background:
+    radial-gradient(circle at 16% 22%, rgba(246, 94, 1, 0.08), transparent 28%),
+    linear-gradient(180deg, #06121D, #071923);
+}
+
+#territorioMapaSection .index-map-card {
+  border: 1px solid rgba(244, 230, 193, 0.18);
+  border-radius: var(--index-radius-lg);
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.48);
+}
+
+#territorioMapaSection .index-map-header {
+  min-height: 74px;
+  padding: 0.9rem 1.15rem;
+  background: rgba(7, 17, 28, 0.9);
+}
+
+#serviciosTuristicosSection .travel-services-grid,
+#impactosBaqueanoSection .impacts-cards-grid {
+  gap: clamp(0.75rem, 1.7vw, 1.25rem);
+}
+
+#serviciosTuristicosSection .travel-service-card,
+#impactosBaqueanoSection .impact-interactive-card {
+  border-radius: var(--index-radius-sm);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.22);
+}
+
+#partnersInfinitySection {
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+  background: linear-gradient(180deg, #07111C, #091824);
+}
+
+#partnersInfinitySection .partners-infinity-header {
+  padding-inline: var(--index-gutter);
+}
+
+#nicaraguaEnCifrasSection .stats-pro-grid {
+  gap: clamp(0.75rem, 2vw, 1.4rem);
+}
+
+#nicaraguaEnCifrasSection .stat-pro-card {
+  border: 1px solid rgba(244, 230, 193, 0.14);
+  border-radius: var(--index-radius-md);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.2);
+}
+
+#impactosBaqueanoSection .impact-interactive-card {
+  min-height: 100%;
+  border-color: rgba(244, 230, 193, 0.14);
+  background: linear-gradient(155deg, rgba(15, 23, 42, 0.94), rgba(22, 93, 111, 0.16));
+}
+
+/* Seguridad y Android: dos cierres funcionales con máxima claridad de acción. */
+#sosSeguridadSection {
+  border-block: 1px solid rgba(244, 230, 193, 0.14);
+}
+
+#sosSeguridadSection .sos-security-grid,
+#appAndroidSection .app-download-card {
+  border-radius: var(--index-radius-lg);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+#experienciasComunidad .exp-card,
+#redDeAnfitrionesSection :is(.host-benefit-card, .register-biz-form-card) {
+  border-radius: var(--index-radius-md);
+}
+
+#appAndroidSection {
+  background:
+    radial-gradient(circle at 82% 42%, rgba(22, 93, 111, 0.28), transparent 30%),
+    linear-gradient(180deg, #07111C, #050A11);
+}
+
+#appAndroidSection .app-download-card {
+  border-color: rgba(246, 94, 1, 0.32);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(9, 45, 55, 0.82));
+}
+
+#appAndroidSection .app-download-title {
+  max-width: 19ch;
+  font-size: clamp(2rem, 4vw, 3.65rem);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+#appAndroidSection .app-phone-mockup {
+  transform: rotate(4deg);
+  border-color: rgba(244, 230, 193, 0.28);
+  background: linear-gradient(160deg, rgba(5, 11, 19, 0.98), rgba(22, 93, 111, 0.3));
+}
+
+#ctaFinalNicaragua {
+  min-height: 660px;
+  display: grid;
+  align-items: center;
+  padding-block: clamp(6rem, 12vw, 10rem);
+}
+
+#ctaFinalNicaragua .final-cta-inner {
+  width: min(900px, calc(100% - (var(--index-gutter) * 2)));
+}
+
+#ctaFinalNicaragua .final-cta-headline {
+  font-size: clamp(2.35rem, 5.5vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+@media (max-width: 900px) {
+  .index-main-flow { --index-section-space: clamp(4rem, 10vw, 5.5rem); }
+  #heroNicaragua { min-height: max(700px, 92svh); }
+  #heroNicaragua .hero-cinematic-content { width: min(720px, 100%); }
+  #heroNicaragua .hero-main-title { max-width: 11ch; font-size: clamp(3rem, 11vw, 5.5rem); }
+  #heroNicaragua .hero-nicaragua-overlay {
+    background: linear-gradient(90deg, rgba(4, 10, 18, 0.94), rgba(4, 10, 18, 0.48)), linear-gradient(180deg, transparent 40%, #07111C 100%);
+  }
+  #problemaSolucionSection .ps-journey-flow { grid-template-columns: 1fr 1fr; }
+  #problemaSolucionSection .ps-flow-arrow { display: none; }
+}
+
+@media (max-width: 640px) {
+  .index-main-flow { --index-gutter: 1rem; --index-radius-lg: 24px; }
+  .index-main-flow > section:not(#heroNicaragua, #partnersInfinitySection, #ctaFinalNicaragua) { padding-block: 4.25rem; }
+  .index-main-flow :is(.section-lead-header, .culture-head-box, .partners-infinity-header) { margin-bottom: 2rem; text-align: left; }
+  .index-main-flow :is(.section-headline, .culture-title, .partners-infinity-title, .section-subtext, .culture-sub, .partners-infinity-sub) { margin-inline: 0; }
+  .index-main-flow :is(.section-headline, .culture-title, .partners-infinity-title) { font-size: clamp(1.9rem, 9vw, 2.65rem) !important; }
+  #heroNicaragua { min-height: 760px; align-items: end; }
+  #heroNicaragua .hero-nicaragua-bg-media { object-position: 62% center; }
+  #heroNicaragua .hero-nicaragua-overlay {
+    background: linear-gradient(180deg, rgba(4, 10, 18, 0.2) 0%, rgba(4, 10, 18, 0.68) 38%, #07111C 82%);
+  }
+  #heroNicaragua .hero-cinematic-container { padding-top: 7rem; padding-bottom: 8.5rem; }
+  #heroNicaragua .hero-brand-kicker { max-width: 100%; font-size: 0.64rem; line-height: 1.35; }
+  #heroNicaragua .hero-main-title { max-width: 9.5ch; font-size: clamp(2.65rem, 12vw, 3.7rem); line-height: 0.9; overflow-wrap: normal; word-break: normal; }
+  #heroNicaragua .hero-main-subtitle { font-size: 0.98rem; line-height: 1.58; }
+  #heroNicaragua .hero-cta-actions { display: grid; grid-template-columns: 1fr; width: 100%; }
+  #heroNicaragua :is(.hero-btn-primary, .hero-btn-ai, .hero-btn-tertiary) { width: 100%; justify-content: center; }
+  #problemaSolucionSection .ps-header-block { text-align: left; }
+  #problemaSolucionSection .ps-title { margin-inline: 0; font-size: clamp(2rem, 9vw, 2.8rem); }
+  #problemaSolucionSection .ps-journey-flow { grid-template-columns: 1fr; }
+  #baqueanoDigitalSection .quick-ia-input-wrap { padding: 12px; }
+  #baqueanoDigitalSection .quick-ia-title { font-size: clamp(2rem, 10vw, 3rem); }
+  #territorioMapaSection .index-map-header { align-items: flex-start; }
+  #appAndroidSection .app-specs-grid { grid-template-columns: 1fr; }
+  #appAndroidSection .app-phone-mockup { transform: none; }
+  #ctaFinalNicaragua { min-height: 600px; }
+  #ctaFinalNicaragua .final-cta-headline { font-size: clamp(2.3rem, 11vw, 3.7rem); }
+}
+
+@media (min-width: 1800px) {
+  .index-main-flow { --index-content: 1440px; }
+  #heroNicaragua .hero-cinematic-content { width: min(840px, 58vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .index-main-flow *,
+  .index-main-flow *::before,
+  .index-main-flow *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
