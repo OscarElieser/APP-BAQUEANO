@@ -8,7 +8,7 @@
 //   completa en 3 minutos.
 // - Conectar de extremo a extremo:
 //   "Quiero ir 3 días a León con $300" → IA → Ruta → Mapa 3D → Cooperativa Local
-//   → Reserva 0% Comisión → GPS GNSS Offline → Android APK v2.4.0.
+//   → Reserva 0% Comisión → GPS GNSS Offline → Android APK v1.0.0.
 // - Elimina la necesidad de "explicar" el ecosistema: lo demuestra en vivo.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
