@@ -34,7 +34,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
-  String _currentCoordinates = '12.1364° N, 86.2514° W (Managua)';
+  String _currentCoordinates = '12.136400, -86.251400';
   bool _isLoadingGps = false;
 
   @override
@@ -67,13 +67,14 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
       }
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
-          timeLimit: Duration(seconds: 5),
+          accuracy: LocationAccuracy.high,
+          timeLimit: Duration(seconds: 8),
         ),
       );
       if (mounted) {
         setState(() {
           _currentCoordinates =
-              '${position.latitude.toStringAsFixed(5)}° N, ${position.longitude.toStringAsFixed(5)}° W';
+              '${position.latitude.toStringAsFixed(6)}, ${position.longitude.toStringAsFixed(6)}';
           _isLoadingGps = false;
         });
       }
@@ -106,11 +107,11 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
       SnackBar(
         content: Row(
           children: [
-            const Icon(Icons.check_circle_rounded, color: Color(0xFFD4AF37)),
+            const Icon(Icons.check_circle_rounded, color: Color(0xFF10B981)),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                'Coordenadas copiadas: $_currentCoordinates',
+                'Coordenadas copiadas: $_currentCoordinates (Listo para Google Maps)',
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
@@ -121,6 +122,15 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
+  }
+
+  Future<void> _openGoogleMaps() async {
+    final uri = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=$_currentCoordinates',
+    );
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 
   @override
@@ -300,7 +310,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
                       onPressed: _copyCoordinates,
                       icon: const Icon(Icons.copy_rounded, size: 18),
                       label: const Text(
-                        'COPIAR COORDENADAS PARA SMS / LLAMADA',
+                        'COPIAR COORDENADAS PARA GOOGLE MAPS / SMS',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w800,
@@ -310,6 +320,32 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFC86432),
                         foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      onPressed: _openGoogleMaps,
+                      icon: const Icon(Icons.map_rounded, size: 18, color: Color(0xFF38BDF8)),
+                      label: const Text(
+                        'VER MI UBICACIÓN EN GOOGLE MAPS',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.6,
+                          color: Color(0xFF38BDF8),
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: const Color(0xFF38BDF8).withValues(alpha: 0.5),
+                        ),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),

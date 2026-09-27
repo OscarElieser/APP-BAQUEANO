@@ -420,8 +420,15 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
               const SizedBox(height: 10),
 
               // Opciones de Métodos Bancarios
-              Column(
-                children: [
+              RadioGroup<PaymentMethodType>(
+                groupValue: _selectedMethod,
+                onChanged: (val) {
+                  if (val != null) {
+                    setState(() => _selectedMethod = val);
+                  }
+                },
+                child: Column(
+                  children: [
                     _buildMethodCard(
                       type: PaymentMethodType.card,
                       badgeText: 'MULTI-BANCO',
@@ -447,6 +454,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                     ),
                   ],
                 ),
+              ),
               const SizedBox(height: 16),
 
               // Nota de seguridad y privacidad PCI-DSS
@@ -593,12 +601,6 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             ),
             Radio<PaymentMethodType>(
               value: type,
-              groupValue: _selectedMethod,
-              onChanged: (val) {
-                if (val != null) {
-                  setState(() => _selectedMethod = val);
-                }
-              },
               activeColor: AppColors.gold,
             ),
           ],

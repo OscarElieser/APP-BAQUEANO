@@ -304,15 +304,15 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
       if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
         final pos = await Geolocator.getCurrentPosition(
           locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.medium,
-            timeLimit: Duration(seconds: 4),
+            accuracy: LocationAccuracy.high,
+            timeLimit: Duration(seconds: 6),
           ),
         );
-        final latStr = pos.latitude.toStringAsFixed(4);
-        final lngStr = pos.longitude.toStringAsFixed(4);
+        final latStr = pos.latitude.toStringAsFixed(6);
+        final lngStr = pos.longitude.toStringAsFixed(6);
 
         _sendMessage(
-          '📍 [Ubicación GPS en Tiempo Real]: Lat: $latStr°, Lng: $lngStr°. ¡Voy en camino hacia el punto de encuentro!',
+          '📍 [Ubicación GPS en Tiempo Real]: $latStr, $lngStr\n🗺️ Ver en Google Maps: https://www.google.com/maps?q=$latStr,$lngStr\n¡Voy en camino hacia el punto de encuentro!',
           bookingCode: bookingCode,
         );
         if (context.mounted) CustomToast.success(context, 'Ubicación GPS compartida');

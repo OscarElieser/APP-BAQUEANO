@@ -51,7 +51,7 @@ class SosSafetyModal extends StatelessWidget {
   Future<void> _sendWhatsAppSOS(BuildContext context) async {
     HapticFeedback.mediumImpact();
     const rescueText =
-        '🚨 *ALERTA DE EMERGENCIA BAQUEANO* 🚨\nRequiero asistencia urgente en ruta turística.\n📍 Coordenadas estimadas: Lat 12.8654° N, Lng -85.2072° W\nRegión Central / Cordillera Dariense, Nicaragua.\nFavor notificar a Policía Turística (118) o Cruz Blanca (128).';
+        '🚨 *ALERTA DE EMERGENCIA BAQUEANO* 🚨\nRequiero asistencia urgente en ruta turística.\n📍 Coordenadas: 12.8654, -85.2072\n🗺️ Ver en Google Maps: https://www.google.com/maps?q=12.8654,-85.2072\nRegión Central / Cordillera Dariense, Nicaragua.\nFavor notificar a Policía Turística (118) o Cruz Blanca (128).';
     final uri = Uri.parse('https://wa.me/?text=${Uri.encodeComponent(rescueText)}');
     try {
       if (await canLaunchUrl(uri)) {
@@ -247,7 +247,7 @@ class SosSafetyModal extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'Lat: 12.8654° N  ·  Lng: -85.2072° W\n(Región Central / Cordillera Dariense)',
+                            '12.865400, -85.207200\n(Región Central / Cordillera Dariense · Formato Google Maps)',
                             style: GoogleFonts.spaceGrotesk(
                               fontSize: 12,
                               color: Colors.white,
@@ -267,9 +267,9 @@ class SosSafetyModal extends StatelessWidget {
                                   onPressed: () {
                                     HapticFeedback.lightImpact();
                                     const rescueText =
-                                        '¡EMERGENCIA BAQUEANO! Requiero asistencia en ruta turística. Ubicación estimada: Lat 12.8654° N, Lng -85.2072° W. Por favor alertar a Policía (118) o Cruz Blanca (128).';
+                                        '¡EMERGENCIA BAQUEANO! Coordenadas: 12.8654, -85.2072 (https://www.google.com/maps?q=12.8654,-85.2072). Favor alertar a Policía (118) o Cruz Blanca (128).';
                                     Clipboard.setData(const ClipboardData(text: rescueText));
-                                    CustomToast.success(context, 'Texto de auxilio copiado al portapapeles.');
+                                    CustomToast.success(context, 'Coordenadas copiadas para Google Maps.');
                                   },
                                 ),
                               ),

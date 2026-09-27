@@ -440,6 +440,28 @@ function initActiveNavHighlight() {
   });
 }
 
+// ============================================================================
+// 🧭 CENTRO DE AUXILIO SOS Y GEOLOCALIZACIÓN SATELITAL EN VIVO
+// ============================================================================
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer auxilio inmediato en senderos de Nicaragua con geolocalización satelital
+//   precisa en cualquier dispositivo, garantizando que las coordenadas sean 100%
+//   compatibles con Google Maps, Waze, Policía Nacional y Cruz Blanca sin errores de búsqueda.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Invoca navigator.geolocation con enableHighAccuracy: true para activar sensores GPS
+//   reales en teléfonos móviles y ordenadores (evitando aproximaciones erradas por IP).
+// - Formatea las coordenadas como números decimales puros ("LAT, LON") sin prefijos "Lat:"
+//   ni símbolos "°" que provocan fallos de "No se han encontrado resultados" en Google Maps.
+// - Genera enlace universal directo (https://www.google.com/maps?q=lat,lon) e inyecta
+//   el botón interactivo para abrir Google Maps con un solo clic.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - initSosModal(): Gestiona ciclo de vida del modal SOS, lectura GPS, copia limpia
+//   al portapapeles, despacho a WhatsApp y navegación directa satelital.
+// ============================================================================
+let currentGpsData = null;
+
 function initSosModal() {
   const openBtns = document.querySelectorAll('.open-sos-btn, #openSosModalBtn');
   const modal = document.getElementById('sosModal');
@@ -452,22 +474,73 @@ function initSosModal() {
 
   const fetchGps = () => {
     if (navigator.geolocation) {
-      if (gpsDisplay) gpsDisplay.textContent = "Solicitando ubicación al dispositivo...";
+      if (gpsDisplay) {
+        gpsDisplay.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: #2DD4BF; font-size: 0.85rem; padding: 6px 0;">
+            <i class="fa-solid fa-satellite fa-spin"></i> Conectando con satélites GPS en tiempo real...
+          </div>
+        `;
+      }
+
       navigator.geolocation.getCurrentPosition(
         pos => {
-          const lat = pos.coords.latitude.toFixed(5);
-          const lon = pos.coords.longitude.toFixed(5);
-          currentGpsCoords = `Lat: ${lat}°, Lon: ${lon}°`;
-          if (gpsDisplay) gpsDisplay.innerHTML = `<i class="fa-solid fa-satellite" style="color: #10B981;"></i> ${currentGpsCoords}`;
+          const lat = pos.coords.latitude.toFixed(6);
+          const lon = pos.coords.longitude.toFixed(6);
+          const accuracy = Math.round(pos.coords.accuracy || 0);
+          const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+          
+          currentGpsCoords = `${lat}, ${lon}`;
+          currentGpsData = { lat, lon, accuracy, mapsUrl };
+
+          if (gpsDisplay) {
+            gpsDisplay.innerHTML = `
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 4px 0;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; padding: 6px 14px;">
+                  <i class="fa-solid fa-satellite" style="color: #10B981; font-size: 1.1rem;"></i>
+                  <span id="sosGpsValue" style="color: #FFFFFF; font-family: monospace; font-size: 1.15rem; font-weight: 800; user-select: all; cursor: text;" title="Doble clic para seleccionar">${lat}, ${lon}</span>
+                </div>
+                <div style="font-size: 0.72rem; color: #2DD4BF; font-weight: 500; margin-top: 2px;">
+                  <i class="fa-solid fa-bullseye"></i> Margen GPS: ±${accuracy}m · Formato universal para Google Maps
+                </div>
+              </div>
+            `;
+          }
+
+          // Garantizar botón directo "Abrir en Google Maps"
+          let btnOpenMaps = document.getElementById('btnOpenGoogleMapsSos');
+          if (!btnOpenMaps && btnCopyGps && btnCopyGps.parentNode) {
+            btnOpenMaps = document.createElement('a');
+            btnOpenMaps.id = 'btnOpenGoogleMapsSos';
+            btnOpenMaps.className = 'btn-hero-glass';
+            btnOpenMaps.target = '_blank';
+            btnOpenMaps.rel = 'noopener noreferrer';
+            btnOpenMaps.style.cssText = 'display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; width: 100%; border-color: rgba(45, 212, 191, 0.5); color: #2DD4BF; margin-top: 6px; padding: 10px 16px; border-radius: 12px; font-weight: 700; font-size: 0.86rem;';
+            btnOpenMaps.innerHTML = '<i class="fa-solid fa-map-location-dot"></i> Ver mi ubicación exacta en Google Maps';
+            btnCopyGps.parentNode.appendChild(btnOpenMaps);
+          }
+          if (btnOpenMaps) {
+            btnOpenMaps.href = mapsUrl;
+            btnOpenMaps.style.display = 'inline-flex';
+          }
         },
-        () => {
-          currentGpsCoords = "Ubicación no compartida por el dispositivo";
-          if (gpsDisplay) gpsDisplay.innerHTML = `<i class="fa-solid fa-location-crosshairs" style="color: var(--terracotta);"></i> ${currentGpsCoords}`;
+        err => {
+          console.warn("Aviso GPS:", err.message);
+          currentGpsData = null;
+          currentGpsCoords = "Permiso de ubicación pendiente";
+          if (gpsDisplay) {
+            gpsDisplay.innerHTML = `
+              <div style="color: #F65E01; font-size: 0.8rem; line-height: 1.35; padding: 4px;">
+                <i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i>
+                Por favor activa el GPS o concede permiso de ubicación al navegador para geolocalizar tu auxilio.
+              </div>
+            `;
+          }
         },
-        { timeout: 8000 }
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
       );
     } else {
-      currentGpsCoords = "Geolocalización no disponible en este dispositivo";
+      currentGpsData = null;
+      currentGpsCoords = "Geolocalización no soportada por el navegador";
       if (gpsDisplay) gpsDisplay.textContent = currentGpsCoords;
     }
   };
@@ -499,7 +572,12 @@ function initSosModal() {
 
   if (btnSendWa) {
     btnSendWa.addEventListener('click', () => {
-      const sosMsg = `🚨 ¡AUXILIO SOS EN SENDERO! Necesito asistencia urgente en territorio nicaragüense. Mis coordenadas satelitales son: ${currentGpsCoords} - Emitido desde Baqueano SOS.`;
+      let sosMsg;
+      if (currentGpsData) {
+        sosMsg = `🚨 *¡AUXILIO SOS EN SENDERO - BAQUEANO!* 🚨\nRequiero asistencia urgente en territorio nicaragüense.\n\n📍 *Coordenadas GPS:* ${currentGpsData.lat}, ${currentGpsData.lon}\n🎯 *Precisión satelital:* ±${currentGpsData.accuracy} metros\n🗺️ *Ver ubicación directa en Google Maps:* ${currentGpsData.mapsUrl}\n\n_Emitido desde el Centro de Auxilio Baqueano SOS_`;
+      } else {
+        sosMsg = `🚨 *¡AUXILIO SOS EN SENDERO - BAQUEANO!* 🚨\nRequiero asistencia urgente en territorio nicaragüense. Mi dispositivo no compartió coordenadas satelitales automáticas.\n\n_Emitido desde el Centro de Auxilio Baqueano SOS_`;
+      }
       const waUrl = `https://api.whatsapp.com/send?phone=50584431289&text=${encodeURIComponent(sosMsg)}`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
     });
@@ -507,19 +585,25 @@ function initSosModal() {
 
   if (btnCopyGps) {
     btnCopyGps.addEventListener('click', async () => {
+      if (!currentGpsData && (!currentGpsCoords || currentGpsCoords.includes('no') || currentGpsCoords.includes('pendiente'))) {
+        alert("Primero concede acceso a la ubicación GPS para capturar las coordenadas exactas.");
+        return;
+      }
+      const textToCopy = currentGpsData ? `${currentGpsData.lat}, ${currentGpsData.lon}` : currentGpsCoords;
       try {
-        await navigator.clipboard.writeText(currentGpsCoords);
-        btnCopyGps.innerHTML = '<i class="fa-solid fa-check"></i> ¡Coordenadas Copiadas!';
+        await navigator.clipboard.writeText(textToCopy);
+        const originalHtml = btnCopyGps.innerHTML;
+        btnCopyGps.innerHTML = `<i class="fa-solid fa-check" style="color: #10B981;"></i> ¡Copiado para Google Maps! (${textToCopy})`;
         btnCopyGps.style.background = '#165D6F';
         btnCopyGps.style.color = '#FFFFFF';
 
         setTimeout(() => {
-          btnCopyGps.innerHTML = '<i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles';
+          btnCopyGps.innerHTML = originalHtml;
           btnCopyGps.style.background = '';
           btnCopyGps.style.color = '';
-        }, 2000);
+        }, 3000);
       } catch (e) {
-        alert("Coordenadas: " + currentGpsCoords);
+        prompt("Copia tus coordenadas para Google Maps:", textToCopy);
       }
     });
   }
