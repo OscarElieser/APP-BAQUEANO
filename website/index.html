@@ -495,11 +495,7 @@
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper index-main-flow" id="mainContent">
-    <!-- ============================================================================
-         🧭 01. HERO DE MARCA CINEMATOGRÁFICO
-         Declaración de marca de alto impacto para competencia nacional.
-         ============================================================================ -->
-    <section class="hero-section-nicaragua hero-editorial-mode" id="heroNicaragua">
+<section class="hero-section-nicaragua hero-editorial-mode" id="heroNicaragua">
       <!-- Media de fondo inmersiva en video Full HD / Alta Resolución con Poster Frame LCP -->
       <video class="hero-nicaragua-bg-media" data-baqueano-video-slot="indexHero" autoplay loop muted playsinline
         preload="metadata" poster="assets/images/destinos/isla_de_ometepe.jpg"
@@ -534,10 +530,10 @@
           <!-- 4. Botones de Acción Estilo Read More, IA & Modo Demo Jurado -->
           <div class="hero-editorial-actions">
             <a href="destinos.html" class="hero-btn-readmore">
-              <span>EXPLORAR DESTINOS</span>
+              <span>EXPLORAR NICARAGUA</span>
             </a>
             <a href="#baqueanoDigitalSection" class="hero-btn-ai-pill">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Rutas con IA</span>
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Crear mi ruta con IA</span>
             </a>
             <a href="#demoModal" class="hero-btn-ai-pill" id="btnHeroDemoTrigger"
               style="background: rgba(246, 94, 1, 0.85); border-color: rgba(244, 230, 193, 0.5); color: #FFFFFF;"
@@ -651,15 +647,7 @@
       </div>
     </section>
 
-    <!-- ============================================================================
-         🧭 02. EL PROBLEMA → LA SOLUCIÓN BAQUEANO & PROPUESTA DE VALOR
-         🎯 POR QUÉ: Para que el jurado y el visitante entiendan en 15 segundos qué problema
-            resuelve BAQUEANO y qué lo hace único frente a guías tradicionales.
-         ⚙️ CÓMO: Layout cinematográfico de alto contraste con flujo interactivo en 5 pasos
-            y 4 pilares estratégicos de valor territorial.
-         📦 QUÉ: Sección interactiva #problemaSolucionSection
-         ============================================================================ -->
-    <section class="problem-solution-section" id="problemaSolucionSection">
+<section class="problem-solution-section" id="problemaSolucionSection">
       <div class="container">
         <!-- El Problema -->
         <div class="ps-header-block">
@@ -740,7 +728,543 @@
       </div>
     </section>
 
-    <section class="digital-assistant-showcase" id="baqueanoDigitalSection">
+<section class="experiences-living-section" id="queQueresVivir">
+      <!-- Ancla de compatibilidad -->
+      <span id="exploraNicaragua" class="anchor-compat" aria-hidden="true"></span>
+      <span id="experienciasNicaragua" class="anchor-compat" aria-hidden="true"></span>
+
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-compass"></i> Elegí tu Estilo de Viaje
+          </div>
+          <h2 class="section-headline">¿Qué Querés Vivir en Nicaragua?</h2>
+          <p class="section-subtext">
+            Explora según la experiencia que te apasiona: adrenalina volcánica, sol y olas en el Pacífico, el misterio sagrado de la selva o el calor del fogón campesino.
+          </p>
+        </div>
+
+        <!-- Carrusel Horizontal de 6 Pilares Grandes -->
+        <div class="living-carousel-wrap">
+          <div class="living-cards-carousel" id="livingCarouselTrack">
+            <!-- 1. Aventura -->
+            <article class="living-card">
+              <img src="assets/images/destinos/cerro_negro.jpg" alt="Aventura volcánica en Nicaragua"
+                class="living-card-img" loading="lazy">
+              <div class="living-card-overlay">
+                <span class="living-card-tag"><i class="fa-solid fa-person-hiking"></i> Adrenalina</span>
+                <h3 class="living-card-title">Aventura en la Naturaleza</h3>
+                <p class="living-card-desc">Sandboarding en Cerro Negro, rafting en Somoto y senderismo en cadenas
+                  volcánicas activas.</p>
+                <a href="destinos.html?cat=aventura" class="living-card-link">Explorar Aventura <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- 2. Playa & Surf -->
+            <article class="living-card">
+              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg"
+                alt="Playas y costas de Nicaragua" class="living-card-img" loading="lazy">
+              <div class="living-card-overlay">
+                <span class="living-card-tag"><i class="fa-solid fa-umbrella-beach"></i> Costas</span>
+                <h3 class="living-card-title">Playas &amp; Surf</h3>
+                <p class="living-card-desc">Olas de clase mundial en Rivas, atardeceres dorados en Las Peñitas y aguas
+                  turquesas en Corn Island.</p>
+                <a href="destinos.html?cat=playas" class="living-card-link">Explorar Playas <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- 3. Naturaleza & Biósfera -->
+            <article class="living-card">
+              <img src="assets/images/destinos/selva_negra.jpg" alt="Naturaleza y nebliselva en Nicaragua"
+                class="living-card-img" loading="lazy">
+              <div class="living-card-overlay">
+                <span class="living-card-tag"><i class="fa-solid fa-leaf"></i> Biósfera</span>
+                <h3 class="living-card-title">Naturaleza &amp; Selva</h3>
+                <p class="living-card-desc">Bosques nubosos de Selva Negra, santuarios de orquídeas en Jinotega y
+                  reservas biológicas sagradas.</p>
+                <a href="destinos.html?cat=naturaleza" class="living-card-link">Explorar Naturaleza <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- 4. Cultura Viva -->
+            <article class="living-card">
+              <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg"
+                alt="Cultura y tradiciones coloniales" class="living-card-img" loading="lazy">
+              <div class="living-card-overlay">
+                <span class="living-card-tag"><i class="fa-solid fa-landmark"></i> Patrimonio</span>
+                <h3 class="living-card-title">Cultura &amp; Tradición</h3>
+                <p class="living-card-desc">Calles coloniales de León y Granada, El Güegüense patrimonio UNESCO y el
+                  alma viva de los pueblos blancos.</p>
+                <a href="historia.html" class="living-card-link">Conocer Cultura <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- 5. Gastronomía Ancestral -->
+            <article class="living-card">
+              <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg"
+                alt="Gastronomía ancestral de Nicaragua" class="living-card-img" loading="lazy">
+              <div class="living-card-overlay">
+                <span class="living-card-tag"><i class="fa-solid fa-bowl-food"></i> Sazón Nica</span>
+                <h3 class="living-card-title">Gastronomía del Fogón</h3>
+                <p class="living-card-desc">Nacatamal campesino, quesillos de La Paz Centro, vigorón granadino y el
+                  sagrado grano del maíz ancestral.</p>
+                <a href="gastronomia.html" class="living-card-link">Saborear Tradición <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <!-- 6. Turismo Comunitario -->
+            <article class="living-card">
+              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Turismo comunitario y campesino"
+                class="living-card-img" loading="lazy">
+              <div class="living-card-overlay">
+                <span class="living-card-tag"><i class="fa-solid fa-handshake-angle"></i> Comunidad</span>
+                <h3 class="living-card-title">Turismo Comunitario</h3>
+                <p class="living-card-desc">Fincas cafetaleras cooperativas, posadas rurales familiares y guías
+                  baqueanos nativos sin intermediarios.</p>
+                <a href="aliados.html" class="living-card-link">Conectar con Familias <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Tira Desplazable de Actividades Específicas -->
+        <div class="activities-substrip">
+          <span class="substrip-label"><i class="fa-solid fa-sliders"></i> Actividades destacadas:</span>
+          <div class="substrip-scroll">
+            <a href="destinos.html?q=senderismo" class="substrip-chip"><i class="fa-solid fa-person-hiking"></i>
+              Senderismo</a>
+            <a href="destinos.html?q=surf" class="substrip-chip"><i class="fa-solid fa-water"></i> Surf</a>
+            <a href="destinos.html?q=sandboarding" class="substrip-chip"><i class="fa-solid fa-volcano"></i>
+              Sandboarding</a>
+            <a href="destinos.html?q=aviturismo" class="substrip-chip"><i class="fa-solid fa-dove"></i> Aviturismo</a>
+            <a href="destinos.html?q=kayak" class="substrip-chip"><i class="fa-solid fa-sailboat"></i> Kayak</a>
+            <a href="destinos.html?q=ciclismo" class="substrip-chip"><i class="fa-solid fa-person-biking"></i>
+              Ciclismo</a>
+            <a href="destinos.html?q=cabalgata" class="substrip-chip"><i class="fa-solid fa-horse"></i> Cabalgata</a>
+            <a href="destinos.html?q=agroturismo" class="substrip-chip"><i class="fa-solid fa-seedling"></i>
+              Agroturismo</a>
+            <a href="destinos.html?q=fotografia" class="substrip-chip"><i class="fa-solid fa-camera"></i> Fotografía</a>
+          </div>
+        </div>
+        <!-- Botón de revelación progresiva para explorar más -->
+        <div class="exp-living-cta-wrap" style="text-align: center; margin-top: 2.5rem;">
+          <a href="destinos.html" class="hero-btn-primary" style="display: inline-flex; align-items: center; gap: 9px;">
+            <i class="fa-solid fa-compass"></i> Ver todas las experiencias de Nicaragua
+          </a>
+        </div>
+      </div>
+    </section>
+
+<section class="destinations-section-pro" id="destinosDestacadosSection">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-star"></i> Destinos Emblemáticos
+          </div>
+          <h2 class="section-headline">Destinos que Inspiran</h2>
+          <p class="section-subtext">
+            Volcanes sagrados, reservas de biósfera, joyas coloniales y paraísos costeros que definen la grandeza y
+            diversidad de nuestra patria.
+          </p>
+        </div>
+
+        <div class="destinations-pro-grid">
+          <!-- 1. Isla de Ometepe -->
+          <article class="destination-card-pro" data-destination="ometepe" data-href="destinos.html?q=ometepe"
+            onclick="window.location.href='destinos.html?q=ometepe'" role="link" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=ometepe'">
+            <div class="dest-card-media-wrap">
+              <video class="dest-card-img" data-baqueano-video-slot="destinationsFeature" muted loop playsinline
+                preload="metadata" poster="assets/images/destinos/isla_de_ometepe.jpg"
+                aria-label="Isla de Ometepe y destinos naturales de Nicaragua" src="assets/videos/destinos.mp4"></video>
+              <span class="dest-card-badge"><i class="fa-solid fa-water"></i> Rivas · Gran Lago</span>
+            </div>
+            <div class="dest-card-content">
+              <span class="dest-card-territory">Territorio de Rivas</span>
+              <h3 class="dest-card-title">Isla de Ometepe</h3>
+              <p class="dest-card-desc">Reserva de Biósfera esculpida por dos volcanes sagrados (Concepción y Maderas)
+                en el Gran Lago Cocibolca.</p>
+              <div class="dest-card-footer">
+                <span class="dest-card-type"><i class="fa-solid fa-mountain-sun"></i> Volcanes &amp; Lago</span>
+                <a href="destinos.html?q=ometepe" class="dest-card-cta">Explorar <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Granada Colonial -->
+          <article class="destination-card-pro" data-destination="granada" data-href="destinos.html?q=granada"
+            onclick="window.location.href='destinos.html?q=granada'" role="link" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=granada'">
+            <div class="dest-card-media-wrap">
+              <img src="assets/images/destinos/isletas_de_granada.jpg" alt="Isletas y Granada Colonial"
+                class="dest-card-img" loading="lazy">
+              <span class="dest-card-badge"><i class="fa-solid fa-landmark"></i> Granada</span>
+            </div>
+            <div class="dest-card-content">
+              <span class="dest-card-territory">Territorio de Granada</span>
+              <h3 class="dest-card-title">Granada Colonial &amp; Isletas</h3>
+              <p class="dest-card-desc">La Gran Sultana con arquitectura perenne, plazas empedradas y navegación entre
+                365 isletas volcánicas.</p>
+              <div class="dest-card-footer">
+                <span class="dest-card-type"><i class="fa-solid fa-archway"></i> Ciudad Colonial</span>
+                <a href="destinos.html?q=granada" class="dest-card-cta">Explorar <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Volcán Cerro Negro -->
+          <article class="destination-card-pro" data-destination="cerro-negro" data-href="destinos.html?q=cerro%20negro"
+            onclick="window.location.href='destinos.html?q=cerro%20negro'" role="link" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=cerro%20negro'">
+            <div class="dest-card-media-wrap">
+              <img src="assets/images/destinos/cerro_negro.jpg" alt="Volcán Cerro Negro, León" class="dest-card-img"
+                loading="lazy">
+              <span class="dest-card-badge"><i class="fa-solid fa-volcano"></i> León</span>
+            </div>
+            <div class="dest-card-content">
+              <span class="dest-card-territory">Territorio de León</span>
+              <h3 class="dest-card-title">Volcán Cerro Negro</h3>
+              <p class="dest-card-desc">El volcán más joven de Centroamérica y la meca mundial del sandboarding
+                volcánico a más de 70 km/h.</p>
+              <div class="dest-card-footer">
+                <span class="dest-card-type"><i class="fa-solid fa-person-hiking"></i> Sandboarding Activo</span>
+                <a href="destinos.html?q=cerro%20negro" class="dest-card-cta">Explorar <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Cañón de Somoto -->
+          <article class="destination-card-pro" data-destination="somoto" data-href="destinos.html?q=somoto"
+            onclick="window.location.href='destinos.html?q=somoto'" role="link" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=somoto'">
+            <div class="dest-card-media-wrap">
+              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Monumento Nacional Cañón de Somoto, Madriz"
+                class="dest-card-img" loading="lazy">
+              <span class="dest-card-badge"><i class="fa-solid fa-mountain"></i> Madriz</span>
+            </div>
+            <div class="dest-card-content">
+              <span class="dest-card-territory">Territorio de Madriz</span>
+              <h3 class="dest-card-title">Cañón de Somoto</h3>
+              <p class="dest-card-desc">Monumento nacional con desfiladeros de piedra caliza esculpidos por el Río Coco
+                y travesía acuática comunitaria.</p>
+              <div class="dest-card-footer">
+                <span class="dest-card-type"><i class="fa-solid fa-water"></i> Cañón &amp; Fluvial</span>
+                <a href="destinos.html?q=somoto" class="dest-card-cta">Explorar <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. San Juan del Sur -->
+          <article class="destination-card-pro" data-destination="san-juan-del-sur"
+            data-href="destinos.html?q=san%20juan%20del%20sur"
+            onclick="window.location.href='destinos.html?q=san%20juan%20del%20sur'" role="link" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=san%20juan%20del%20sur'">
+            <div class="dest-card-media-wrap">
+              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg"
+                alt="Bahía de San Juan del Sur, Rivas" class="dest-card-img" loading="lazy">
+              <span class="dest-card-badge"><i class="fa-solid fa-umbrella-beach"></i> Rivas</span>
+            </div>
+            <div class="dest-card-content">
+              <span class="dest-card-territory">Territorio de Rivas</span>
+              <h3 class="dest-card-title">San Juan del Sur</h3>
+              <p class="dest-card-desc">Bahía emblemática del Pacífico sur, santuario del surf en Playa Maderas y
+                atardeceres dorados inolvidables.</p>
+              <div class="dest-card-footer">
+                <span class="dest-card-type"><i class="fa-solid fa-sun"></i> Playa &amp; Surf</span>
+                <a href="destinos.html?q=san%20juan%20del%20sur" class="dest-card-cta">Explorar <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Volcán Masaya -->
+          <article class="destination-card-pro" data-destination="masaya" data-href="destinos.html?q=masaya"
+            onclick="window.location.href='destinos.html?q=masaya'" role="link" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=masaya'">
+            <div class="dest-card-media-wrap">
+              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Parque Nacional Volcán Masaya"
+                class="dest-card-img" loading="lazy">
+              <span class="dest-card-badge"><i class="fa-solid fa-fire"></i> Masaya</span>
+            </div>
+            <div class="dest-card-content">
+              <span class="dest-card-territory">Territorio de Masaya</span>
+              <h3 class="dest-card-title">Volcán Masaya</h3>
+              <p class="dest-card-desc">Parque Nacional y Cráter Santiago activo; contemplación nocturna de gases
+                incandescentes y magma vivo.</p>
+              <div class="dest-card-footer">
+                <span class="dest-card-type"><i class="fa-solid fa-volcano"></i> Cráter Activo</span>
+                <a href="destinos.html?q=masaya" class="dest-card-cta">Explorar <i
+                    class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Botón para ver todos los destinos -->
+        <div class="destinations-pro-cta-wrap">
+          <a href="destinos.html" class="btn-cta-explore">
+            <i class="fa-solid fa-grid-2"></i> Explorar todos los destinos →
+          </a>
+        </div>
+      </div>
+    </section>
+
+<section class="index-map-section-pro unified-map-section" id="territorioMapaSection">
+      <!-- Ancla de compatibilidad para 3D -->
+      <span id="mapaVivo3DNicaragua" class="anchor-compat" aria-hidden="true"></span>
+
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-earth-americas"></i> Cartografía Territorial Interactiva
+          </div>
+          <h2 class="section-headline">Explora Nicaragua en el Mapa</h2>
+          <p class="section-subtext">
+            15 Departamentos · 2 Regiones Autónomas (17 Territorios). Cartografía satelital viva, relieve topográfico 3D
+            y conexión con cooperativas campesinas.
+          </p>
+        </div>
+
+        <div class="index-map-card">
+          <!-- Barra superior unificada de control y selector de vista -->
+          <div class="index-map-header">
+            <div class="index-map-title-wrap">
+              <span class="live-pulse-dot" title="Sistema en Tiempo Real"></span>
+              <h3 class="index-map-title"><i class="fa-solid fa-compass"></i> Territorio Baqueano Nicaragua</h3>
+            </div>
+
+            <!-- SELECTOR DE VISTA UNIFICADO: [ MAPA | SATÉLITE | 3D ] -->
+            <div class="map-unified-switcher" role="tablist" aria-label="Modo de mapa">
+              <button type="button" class="map-mode-tab active" id="tabModeTerritorial" data-map-mode="territorial"
+                role="tab" aria-selected="true">
+                <i class="fa-solid fa-map"></i> <span>Mapa Territorial</span>
+              </button>
+              <button type="button" class="map-mode-tab" id="tabModeSatellite" data-map-mode="satellite" role="tab"
+                aria-selected="false">
+                <i class="fa-solid fa-satellite"></i> <span>Satélite HD</span>
+              </button>
+              <button type="button" class="map-mode-tab" id="tabMode3D" data-map-mode="3d" role="tab"
+                aria-selected="false">
+                <i class="fa-solid fa-cube"></i> <span>Relieve 3D WebGL</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- CONTENEDOR CARTOGRÁFICO UNIFICADO -->
+          <div class="map-unified-viewport">
+
+            <!-- CAPA 1: MAPA LEAFLET 2D (Satelital y Territorial) -->
+            <div class="map-view-pane is-active" id="paneMap2D">
+              <div class="index-map-body-grid">
+                <!-- Columna Izquierda: Mapa Leaflet -->
+                <div class="index-map-frame">
+                  <div id="indexTerritoryMap"></div>
+                  <div class="index-map-layer-badge" id="indexMapLayerBadge">
+                    <i class="fa-solid fa-satellite-dish"></i> Satélite HD
+                  </div>
+                </div>
+
+                <!-- Columna Derecha: Controles y Filtros -->
+                <div class="index-map-controls-col">
+                  <!-- Capas Satelitales Oficiales -->
+                  <div>
+                    <div class="control-group-title"><i class="fa-solid fa-layer-group"></i> Capa Cartográfica</div>
+                    <div class="index-layers-strip">
+                      <button type="button" class="index-layer-btn active" data-layer="satellite"
+                        title="Google Maps Satélite HD">
+                        <i class="fa-solid fa-satellite"></i> Satélite
+                      </button>
+                      <button type="button" class="index-layer-btn" data-layer="hybrid"
+                        title="Google Maps Satélite Híbrido">
+                        <i class="fa-solid fa-globe"></i> Híbrido
+                      </button>
+                      <button type="button" class="index-layer-btn" data-layer="streets" title="Rutas & Playas">
+                        <i class="fa-solid fa-road"></i> Rutas
+                      </button>
+                      <button type="button" class="index-layer-btn" data-layer="osm" title="Mapa Claro Cartográfico">
+                        <i class="fa-solid fa-map"></i> Claro
+                      </button>
+                      <button type="button" class="index-layer-btn" data-layer="dark" title="Modo Noche">
+                        <i class="fa-solid fa-moon"></i> Noche
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Salto Rápido a Región -->
+                  <div>
+                    <div class="control-group-title"><i class="fa-solid fa-compass"></i> Salto Rápido a Región</div>
+                    <div class="index-regions-grid">
+                      <button type="button" class="index-region-btn active" data-region="nicaragua"
+                        title="Ver todo el país">
+                        <i class="fa-solid fa-flag"></i> Toda Nicaragua
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="rivas"
+                        title="Playas y costas del Pacífico Sur">
+                        <i class="fa-solid fa-umbrella-beach"></i> Rivas &amp; San Juan
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="volcanes"
+                        title="Volcanes activos del Pacífico">
+                        <i class="fa-solid fa-volcano"></i> Cadena Volcánica
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="granada"
+                        title="Patrimonio Colonial e Isletas">
+                        <i class="fa-solid fa-landmark"></i> Granada Colonial
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="ometepe"
+                        title="Reserva de Biósfera en el Gran Lago">
+                        <i class="fa-solid fa-water"></i> Isla de Ometepe
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="norte"
+                        title="Tierras altas y fincas cafetaleras">
+                        <i class="fa-solid fa-tree"></i> Nebliselva Norte
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="caribe"
+                        title="Caribe Sur y arrecifes">
+                        <i class="fa-solid fa-fish"></i> Corn Island
+                      </button>
+                      <button type="button" class="index-region-btn" data-region="riosanjuan"
+                        title="Fortaleza y selva fluvial">
+                        <i class="fa-solid fa-ferry"></i> Río San Juan
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Filtro por Experiencia -->
+                  <div>
+                    <div class="control-group-title"><i class="fa-solid fa-sliders"></i> Filtrar por Experiencia</div>
+                    <div class="index-exp-grid">
+                      <button type="button" class="index-exp-btn active" data-exp="all">
+                        <i class="fa-solid fa-border-all"></i> Todos (29)
+                      </button>
+                      <button type="button" class="index-exp-btn" data-exp="playa">
+                        <i class="fa-solid fa-umbrella-beach"></i> Playa
+                      </button>
+                      <button type="button" class="index-exp-btn" data-exp="bares">
+                        <i class="fa-solid fa-martini-glass-citrus"></i> Bares
+                      </button>
+                      <button type="button" class="index-exp-btn" data-exp="hospedaje">
+                        <i class="fa-solid fa-hotel"></i> Hospedaje
+                      </button>
+                      <button type="button" class="index-exp-btn" data-exp="gastronomia">
+                        <i class="fa-solid fa-utensils"></i> Gastronomía
+                      </button>
+                      <button type="button" class="index-exp-btn" data-exp="museo">
+                        <i class="fa-solid fa-monument"></i> Museo
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Botón a Mapa Completo -->
+                  <a href="destinos.html#mapa" class="index-btn-map-full">
+                    <i class="fa-solid fa-map-location-dot"></i> Abrir Mapa Completo <i
+                      class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Inspector Interactivo de los 17 Territorios -->
+              <div class="territories-interactive-wrap">
+                <div class="control-group-title" style="color:var(--baqueano-cream);font-size:13px;padding:0 4px;">
+                  <i class="fa-solid fa-map-pin" style="color:var(--baqueano-orange)"></i> Selecciona uno de los 17
+                  Territorios de Nicaragua:
+                </div>
+                <div class="territory-chips-scroll" id="territoryChipsBar">
+                  <!-- Generado dinámicamente por territory-inspector.js -->
+                </div>
+                <div class="territory-inspector-card" id="territoryInspectorCard">
+                  <!-- Cargado dinámicamente por territory-inspector.js -->
+                </div>
+              </div>
+            </div>
+
+            <!-- CAPA 2: MAPA 3D WEBGL (Three.js Relieve Topográfico) -->
+            <div class="map-view-pane" id="paneMap3D" hidden>
+              <div class="mapa-3d-stage">
+                <!-- Barra de control de cámara 3D -->
+                <div class="mapa-3d-hud-header">
+                  <div class="mapa-3d-status-wrap">
+                    <span class="live-pulse-dot" title="Sincronización WebGL Activa"></span>
+                    <span class="mapa-3d-title-text"><i class="fa-solid fa-mountain-sun"></i> Relieve 3D Interactivo ·
+                      WebGL</span>
+                  </div>
+                  <div class="mapa-3d-actions-bar">
+                    <button type="button" class="btn-map-action" id="btnToggle3DRotation"
+                      title="Pausar o Reanudar rotación automática">
+                      <i class="fa-solid fa-rotate"></i>
+                    </button>
+                    <button type="button" class="btn-map-action" id="btnReset3DView"
+                      title="Restablecer perspectiva panorámica">
+                      <i class="fa-solid fa-compass"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="baqueano3dCanvasWrap"></div>
+
+                <!-- Capa de Instrucciones / Controles táctiles -->
+                <div class="mapa-3d-hints-overlay">
+                  <span><i class="fa-solid fa-hand-pointer"></i> Arrastra para rotar en 360°</span>
+                  <span><i class="fa-solid fa-magnifying-glass-plus"></i> Rueda o pellizca para acercar</span>
+                  <span><i class="fa-solid fa-location-crosshairs"></i> Toca un destino o volcán</span>
+                </div>
+
+                <!-- Drawer lateral para destino 3D seleccionado -->
+                <div class="map-3d-detail-drawer" id="map3dDetailDrawer" aria-hidden="true">
+                  <button type="button" class="drawer-close-btn" id="btnCloseMap3dDrawer"
+                    aria-label="Cerrar ficha">&times;</button>
+                  <div class="drawer-header">
+                    <div class="drawer-badge-pill" id="drawerBadge">Destino Baqueano</div>
+                    <h3 class="drawer-title" id="drawerTitle">Cargando territorio...</h3>
+                    <p class="drawer-location" id="drawerLocation">Nicaragua</p>
+                  </div>
+                  <div class="drawer-img-wrap" id="drawerImgWrap">
+                    <img id="drawerImg" src="assets/images/destinos/canon_de_somoto.jpg" alt="Destino 3D"
+                      onerror="this.src='assets/images/destinos/canon_de_somoto.jpg'">
+                    <button type="button" class="btn-drawer-360" id="btnDrawer360">
+                      <i class="fa-solid fa-vr-cardboard"></i> Vista 360°
+                    </button>
+                  </div>
+                  <p class="drawer-desc" id="drawerDesc">Descripción geográfica y comunitaria del punto seleccionado.
+                  </p>
+                  <div class="drawer-metrics-row">
+                    <div class="drawer-metric-box">
+                      <span class="metric-label">Precio Aprox.</span>
+                      <strong class="metric-val" id="drawerPrice">C$ 500</strong>
+                    </div>
+                    <div class="drawer-metric-box">
+                      <span class="metric-label">Dificultad</span>
+                      <strong class="metric-val" id="drawerDifficulty">Moderada</strong>
+                    </div>
+                    <div class="drawer-metric-box">
+                      <span class="metric-label">Comunidad</span>
+                      <strong class="metric-val" id="drawerCommunity">Coop. Local</strong>
+                    </div>
+                  </div>
+                  <div class="drawer-actions">
+                    <a href="destinos.html" class="btn-drawer-explore" id="drawerExploreLink">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Explorar Ficha Completa
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- /map-unified-viewport -->
+        </div> <!-- /index-map-card -->
+      </div>
+    </section>
+
+<section class="digital-assistant-showcase" id="baqueanoDigitalSection">
       <div class="container">
         <!-- CAJA CONVERSACIONAL RÁPIDA: "¿QUÉ QUERÉS VIVIR EN NICARAGUA?" -->
         <div class="quick-ia-prompt-box">
@@ -990,544 +1514,7 @@
       </div>
     </section>
 
-    <section class="experiences-living-section" id="queQueresVivir">
-      <!-- Ancla de compatibilidad -->
-      <span id="exploraNicaragua" class="anchor-compat" aria-hidden="true"></span>
-      <span id="experienciasNicaragua" class="anchor-compat" aria-hidden="true"></span>
-
-      <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill">
-            <i class="fa-solid fa-compass"></i> Diversidad Geográfica &amp; Experiencial
-          </div>
-          <h2 class="section-headline">¿Qué Querés Vivir en Nicaragua?</h2>
-          <p class="section-subtext">
-            Explora por la emoción de tu viaje. Desde la adrenalina en arenas volcánicas hasta el fogón ancestral y el
-            silencio sagrado de las reservas campesinas.
-          </p>
-        </div>
-
-        <!-- Carrusel Horizontal de 6 Pilares Grandes -->
-        <div class="living-carousel-wrap">
-          <div class="living-cards-carousel" id="livingCarouselTrack">
-            <!-- 1. Aventura -->
-            <article class="living-card">
-              <img src="assets/images/destinos/cerro_negro.jpg" alt="Aventura volcánica en Nicaragua"
-                class="living-card-img" loading="lazy">
-              <div class="living-card-overlay">
-                <span class="living-card-tag"><i class="fa-solid fa-person-hiking"></i> Adrenalina</span>
-                <h3 class="living-card-title">Aventura en la Naturaleza</h3>
-                <p class="living-card-desc">Sandboarding en Cerro Negro, rafting en Somoto y senderismo en cadenas
-                  volcánicas activas.</p>
-                <a href="destinos.html?cat=aventura" class="living-card-link">Explorar Aventura <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </article>
-
-            <!-- 2. Playa & Surf -->
-            <article class="living-card">
-              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg"
-                alt="Playas y costas de Nicaragua" class="living-card-img" loading="lazy">
-              <div class="living-card-overlay">
-                <span class="living-card-tag"><i class="fa-solid fa-umbrella-beach"></i> Costas</span>
-                <h3 class="living-card-title">Playas &amp; Surf</h3>
-                <p class="living-card-desc">Olas de clase mundial en Rivas, atardeceres dorados en Las Peñitas y aguas
-                  turquesas en Corn Island.</p>
-                <a href="destinos.html?cat=playas" class="living-card-link">Explorar Playas <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </article>
-
-            <!-- 3. Naturaleza & Biósfera -->
-            <article class="living-card">
-              <img src="assets/images/destinos/selva_negra.jpg" alt="Naturaleza y nebliselva en Nicaragua"
-                class="living-card-img" loading="lazy">
-              <div class="living-card-overlay">
-                <span class="living-card-tag"><i class="fa-solid fa-leaf"></i> Biósfera</span>
-                <h3 class="living-card-title">Naturaleza &amp; Selva</h3>
-                <p class="living-card-desc">Bosques nubosos de Selva Negra, santuarios de orquídeas en Jinotega y
-                  reservas biológicas sagradas.</p>
-                <a href="destinos.html?cat=naturaleza" class="living-card-link">Explorar Naturaleza <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </article>
-
-            <!-- 4. Cultura Viva -->
-            <article class="living-card">
-              <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg"
-                alt="Cultura y tradiciones coloniales" class="living-card-img" loading="lazy">
-              <div class="living-card-overlay">
-                <span class="living-card-tag"><i class="fa-solid fa-landmark"></i> Patrimonio</span>
-                <h3 class="living-card-title">Cultura &amp; Tradición</h3>
-                <p class="living-card-desc">Calles coloniales de León y Granada, El Güegüense patrimonio UNESCO y el
-                  alma viva de los pueblos blancos.</p>
-                <a href="historia.html" class="living-card-link">Conocer Cultura <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </article>
-
-            <!-- 5. Gastronomía Ancestral -->
-            <article class="living-card">
-              <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg"
-                alt="Gastronomía ancestral de Nicaragua" class="living-card-img" loading="lazy">
-              <div class="living-card-overlay">
-                <span class="living-card-tag"><i class="fa-solid fa-bowl-food"></i> Sazón Nica</span>
-                <h3 class="living-card-title">Gastronomía del Fogón</h3>
-                <p class="living-card-desc">Nacatamal campesino, quesillos de La Paz Centro, vigorón granadino y el
-                  sagrado grano del maíz ancestral.</p>
-                <a href="gastronomia.html" class="living-card-link">Saborear Tradición <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </article>
-
-            <!-- 6. Turismo Comunitario -->
-            <article class="living-card">
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Turismo comunitario y campesino"
-                class="living-card-img" loading="lazy">
-              <div class="living-card-overlay">
-                <span class="living-card-tag"><i class="fa-solid fa-handshake-angle"></i> Comunidad</span>
-                <h3 class="living-card-title">Turismo Comunitario</h3>
-                <p class="living-card-desc">Fincas cafetaleras cooperativas, posadas rurales familiares y guías
-                  baqueanos nativos sin intermediarios.</p>
-                <a href="aliados.html" class="living-card-link">Conectar con Familias <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <!-- Tira Desplazable de Actividades Específicas -->
-        <div class="activities-substrip">
-          <span class="substrip-label"><i class="fa-solid fa-sliders"></i> Actividades destacadas:</span>
-          <div class="substrip-scroll">
-            <a href="destinos.html?q=senderismo" class="substrip-chip"><i class="fa-solid fa-person-hiking"></i>
-              Senderismo</a>
-            <a href="destinos.html?q=surf" class="substrip-chip"><i class="fa-solid fa-water"></i> Surf</a>
-            <a href="destinos.html?q=sandboarding" class="substrip-chip"><i class="fa-solid fa-volcano"></i>
-              Sandboarding</a>
-            <a href="destinos.html?q=aviturismo" class="substrip-chip"><i class="fa-solid fa-dove"></i> Aviturismo</a>
-            <a href="destinos.html?q=kayak" class="substrip-chip"><i class="fa-solid fa-sailboat"></i> Kayak</a>
-            <a href="destinos.html?q=ciclismo" class="substrip-chip"><i class="fa-solid fa-person-biking"></i>
-              Ciclismo</a>
-            <a href="destinos.html?q=cabalgata" class="substrip-chip"><i class="fa-solid fa-horse"></i> Cabalgata</a>
-            <a href="destinos.html?q=agroturismo" class="substrip-chip"><i class="fa-solid fa-seedling"></i>
-              Agroturismo</a>
-            <a href="destinos.html?q=fotografia" class="substrip-chip"><i class="fa-solid fa-camera"></i> Fotografía</a>
-          </div>
-        </div>
-        <!-- Botón de revelación progresiva para explorar más -->
-        <div class="exp-living-cta-wrap" style="text-align: center; margin-top: 2.5rem;">
-          <a href="destinos.html" class="hero-btn-primary" style="display: inline-flex; align-items: center; gap: 9px;">
-            <i class="fa-solid fa-compass"></i> Ver todas las experiencias de Nicaragua
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="index-map-section-pro unified-map-section" id="territorioMapaSection">
-      <!-- Ancla de compatibilidad para 3D -->
-      <span id="mapaVivo3DNicaragua" class="anchor-compat" aria-hidden="true"></span>
-
-      <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill">
-            <i class="fa-solid fa-earth-americas"></i> Cartografía Territorial Interactiva
-          </div>
-          <h2 class="section-headline">Explora Nicaragua en el Mapa</h2>
-          <p class="section-subtext">
-            15 Departamentos · 2 Regiones Autónomas (17 Territorios). Cartografía satelital viva, relieve topográfico 3D
-            y conexión con cooperativas campesinas.
-          </p>
-        </div>
-
-        <div class="index-map-card">
-          <!-- Barra superior unificada de control y selector de vista -->
-          <div class="index-map-header">
-            <div class="index-map-title-wrap">
-              <span class="live-pulse-dot" title="Sistema en Tiempo Real"></span>
-              <h3 class="index-map-title"><i class="fa-solid fa-compass"></i> Territorio Baqueano Nicaragua</h3>
-            </div>
-
-            <!-- SELECTOR DE VISTA UNIFICADO: [ MAPA | SATÉLITE | 3D ] -->
-            <div class="map-unified-switcher" role="tablist" aria-label="Modo de mapa">
-              <button type="button" class="map-mode-tab active" id="tabModeTerritorial" data-map-mode="territorial"
-                role="tab" aria-selected="true">
-                <i class="fa-solid fa-map"></i> <span>Mapa Territorial</span>
-              </button>
-              <button type="button" class="map-mode-tab" id="tabModeSatellite" data-map-mode="satellite" role="tab"
-                aria-selected="false">
-                <i class="fa-solid fa-satellite"></i> <span>Satélite HD</span>
-              </button>
-              <button type="button" class="map-mode-tab" id="tabMode3D" data-map-mode="3d" role="tab"
-                aria-selected="false">
-                <i class="fa-solid fa-cube"></i> <span>Relieve 3D WebGL</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- CONTENEDOR CARTOGRÁFICO UNIFICADO -->
-          <div class="map-unified-viewport">
-
-            <!-- CAPA 1: MAPA LEAFLET 2D (Satelital y Territorial) -->
-            <div class="map-view-pane is-active" id="paneMap2D">
-              <div class="index-map-body-grid">
-                <!-- Columna Izquierda: Mapa Leaflet -->
-                <div class="index-map-frame">
-                  <div id="indexTerritoryMap"></div>
-                  <div class="index-map-layer-badge" id="indexMapLayerBadge">
-                    <i class="fa-solid fa-satellite-dish"></i> Satélite HD
-                  </div>
-                </div>
-
-                <!-- Columna Derecha: Controles y Filtros -->
-                <div class="index-map-controls-col">
-                  <!-- Capas Satelitales Oficiales -->
-                  <div>
-                    <div class="control-group-title"><i class="fa-solid fa-layer-group"></i> Capa Cartográfica</div>
-                    <div class="index-layers-strip">
-                      <button type="button" class="index-layer-btn active" data-layer="satellite"
-                        title="Google Maps Satélite HD">
-                        <i class="fa-solid fa-satellite"></i> Satélite
-                      </button>
-                      <button type="button" class="index-layer-btn" data-layer="hybrid"
-                        title="Google Maps Satélite Híbrido">
-                        <i class="fa-solid fa-globe"></i> Híbrido
-                      </button>
-                      <button type="button" class="index-layer-btn" data-layer="streets" title="Rutas & Playas">
-                        <i class="fa-solid fa-road"></i> Rutas
-                      </button>
-                      <button type="button" class="index-layer-btn" data-layer="osm" title="Mapa Claro Cartográfico">
-                        <i class="fa-solid fa-map"></i> Claro
-                      </button>
-                      <button type="button" class="index-layer-btn" data-layer="dark" title="Modo Noche">
-                        <i class="fa-solid fa-moon"></i> Noche
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Salto Rápido a Región -->
-                  <div>
-                    <div class="control-group-title"><i class="fa-solid fa-compass"></i> Salto Rápido a Región</div>
-                    <div class="index-regions-grid">
-                      <button type="button" class="index-region-btn active" data-region="nicaragua"
-                        title="Ver todo el país">
-                        <i class="fa-solid fa-flag"></i> Toda Nicaragua
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="rivas"
-                        title="Playas y costas del Pacífico Sur">
-                        <i class="fa-solid fa-umbrella-beach"></i> Rivas &amp; San Juan
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="volcanes"
-                        title="Volcanes activos del Pacífico">
-                        <i class="fa-solid fa-volcano"></i> Cadena Volcánica
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="granada"
-                        title="Patrimonio Colonial e Isletas">
-                        <i class="fa-solid fa-landmark"></i> Granada Colonial
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="ometepe"
-                        title="Reserva de Biósfera en el Gran Lago">
-                        <i class="fa-solid fa-water"></i> Isla de Ometepe
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="norte"
-                        title="Tierras altas y fincas cafetaleras">
-                        <i class="fa-solid fa-tree"></i> Nebliselva Norte
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="caribe"
-                        title="Caribe Sur y arrecifes">
-                        <i class="fa-solid fa-fish"></i> Corn Island
-                      </button>
-                      <button type="button" class="index-region-btn" data-region="riosanjuan"
-                        title="Fortaleza y selva fluvial">
-                        <i class="fa-solid fa-ferry"></i> Río San Juan
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Filtro por Experiencia -->
-                  <div>
-                    <div class="control-group-title"><i class="fa-solid fa-sliders"></i> Filtrar por Experiencia</div>
-                    <div class="index-exp-grid">
-                      <button type="button" class="index-exp-btn active" data-exp="all">
-                        <i class="fa-solid fa-border-all"></i> Todos (29)
-                      </button>
-                      <button type="button" class="index-exp-btn" data-exp="playa">
-                        <i class="fa-solid fa-umbrella-beach"></i> Playa
-                      </button>
-                      <button type="button" class="index-exp-btn" data-exp="bares">
-                        <i class="fa-solid fa-martini-glass-citrus"></i> Bares
-                      </button>
-                      <button type="button" class="index-exp-btn" data-exp="hospedaje">
-                        <i class="fa-solid fa-hotel"></i> Hospedaje
-                      </button>
-                      <button type="button" class="index-exp-btn" data-exp="gastronomia">
-                        <i class="fa-solid fa-utensils"></i> Gastronomía
-                      </button>
-                      <button type="button" class="index-exp-btn" data-exp="museo">
-                        <i class="fa-solid fa-monument"></i> Museo
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Botón a Mapa Completo -->
-                  <a href="destinos.html#mapa" class="index-btn-map-full">
-                    <i class="fa-solid fa-map-location-dot"></i> Abrir Mapa Completo <i
-                      class="fa-solid fa-arrow-up-right-from-square"></i>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Inspector Interactivo de los 17 Territorios -->
-              <div class="territories-interactive-wrap">
-                <div class="control-group-title" style="color:var(--baqueano-cream);font-size:13px;padding:0 4px;">
-                  <i class="fa-solid fa-map-pin" style="color:var(--baqueano-orange)"></i> Selecciona uno de los 17
-                  Territorios de Nicaragua:
-                </div>
-                <div class="territory-chips-scroll" id="territoryChipsBar">
-                  <!-- Generado dinámicamente por territory-inspector.js -->
-                </div>
-                <div class="territory-inspector-card" id="territoryInspectorCard">
-                  <!-- Cargado dinámicamente por territory-inspector.js -->
-                </div>
-              </div>
-            </div>
-
-            <!-- CAPA 2: MAPA 3D WEBGL (Three.js Relieve Topográfico) -->
-            <div class="map-view-pane" id="paneMap3D" hidden>
-              <div class="mapa-3d-stage">
-                <!-- Barra de control de cámara 3D -->
-                <div class="mapa-3d-hud-header">
-                  <div class="mapa-3d-status-wrap">
-                    <span class="live-pulse-dot" title="Sincronización WebGL Activa"></span>
-                    <span class="mapa-3d-title-text"><i class="fa-solid fa-mountain-sun"></i> Relieve 3D Interactivo ·
-                      WebGL</span>
-                  </div>
-                  <div class="mapa-3d-actions-bar">
-                    <button type="button" class="btn-map-action" id="btnToggle3DRotation"
-                      title="Pausar o Reanudar rotación automática">
-                      <i class="fa-solid fa-rotate"></i>
-                    </button>
-                    <button type="button" class="btn-map-action" id="btnReset3DView"
-                      title="Restablecer perspectiva panorámica">
-                      <i class="fa-solid fa-compass"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div id="baqueano3dCanvasWrap"></div>
-
-                <!-- Capa de Instrucciones / Controles táctiles -->
-                <div class="mapa-3d-hints-overlay">
-                  <span><i class="fa-solid fa-hand-pointer"></i> Arrastra para rotar en 360°</span>
-                  <span><i class="fa-solid fa-magnifying-glass-plus"></i> Rueda o pellizca para acercar</span>
-                  <span><i class="fa-solid fa-location-crosshairs"></i> Toca un destino o volcán</span>
-                </div>
-
-                <!-- Drawer lateral para destino 3D seleccionado -->
-                <div class="map-3d-detail-drawer" id="map3dDetailDrawer" aria-hidden="true">
-                  <button type="button" class="drawer-close-btn" id="btnCloseMap3dDrawer"
-                    aria-label="Cerrar ficha">&times;</button>
-                  <div class="drawer-header">
-                    <div class="drawer-badge-pill" id="drawerBadge">Destino Baqueano</div>
-                    <h3 class="drawer-title" id="drawerTitle">Cargando territorio...</h3>
-                    <p class="drawer-location" id="drawerLocation">Nicaragua</p>
-                  </div>
-                  <div class="drawer-img-wrap" id="drawerImgWrap">
-                    <img id="drawerImg" src="assets/images/destinos/canon_de_somoto.jpg" alt="Destino 3D"
-                      onerror="this.src='assets/images/destinos/canon_de_somoto.jpg'">
-                    <button type="button" class="btn-drawer-360" id="btnDrawer360">
-                      <i class="fa-solid fa-vr-cardboard"></i> Vista 360°
-                    </button>
-                  </div>
-                  <p class="drawer-desc" id="drawerDesc">Descripción geográfica y comunitaria del punto seleccionado.
-                  </p>
-                  <div class="drawer-metrics-row">
-                    <div class="drawer-metric-box">
-                      <span class="metric-label">Precio Aprox.</span>
-                      <strong class="metric-val" id="drawerPrice">C$ 500</strong>
-                    </div>
-                    <div class="drawer-metric-box">
-                      <span class="metric-label">Dificultad</span>
-                      <strong class="metric-val" id="drawerDifficulty">Moderada</strong>
-                    </div>
-                    <div class="drawer-metric-box">
-                      <span class="metric-label">Comunidad</span>
-                      <strong class="metric-val" id="drawerCommunity">Coop. Local</strong>
-                    </div>
-                  </div>
-                  <div class="drawer-actions">
-                    <a href="destinos.html" class="btn-drawer-explore" id="drawerExploreLink">
-                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Explorar Ficha Completa
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- /map-unified-viewport -->
-        </div> <!-- /index-map-card -->
-      </div>
-    </section>
-
-    <section class="destinations-section-pro" id="destinosDestacadosSection">
-      <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill">
-            <i class="fa-solid fa-star"></i> Destinos Emblemáticos
-          </div>
-          <h2 class="section-headline">Destinos que Inspiran</h2>
-          <p class="section-subtext">
-            Volcanes sagrados, reservas de biósfera, joyas coloniales y paraísos costeros que definen la grandeza y
-            diversidad de nuestra patria.
-          </p>
-        </div>
-
-        <div class="destinations-pro-grid">
-          <!-- 1. Isla de Ometepe -->
-          <article class="destination-card-pro" data-destination="ometepe" data-href="destinos.html?q=ometepe"
-            onclick="window.location.href='destinos.html?q=ometepe'" role="link" tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=ometepe'">
-            <div class="dest-card-media-wrap">
-              <video class="dest-card-img" data-baqueano-video-slot="destinationsFeature" muted loop playsinline
-                preload="metadata" poster="assets/images/destinos/isla_de_ometepe.jpg"
-                aria-label="Isla de Ometepe y destinos naturales de Nicaragua" src="assets/videos/destinos.mp4"></video>
-              <span class="dest-card-badge"><i class="fa-solid fa-water"></i> Rivas · Gran Lago</span>
-            </div>
-            <div class="dest-card-content">
-              <span class="dest-card-territory">Territorio de Rivas</span>
-              <h3 class="dest-card-title">Isla de Ometepe</h3>
-              <p class="dest-card-desc">Reserva de Biósfera esculpida por dos volcanes sagrados (Concepción y Maderas)
-                en el Gran Lago Cocibolca.</p>
-              <div class="dest-card-footer">
-                <span class="dest-card-type"><i class="fa-solid fa-mountain-sun"></i> Volcanes &amp; Lago</span>
-                <a href="destinos.html?q=ometepe" class="dest-card-cta">Explorar <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 2. Granada Colonial -->
-          <article class="destination-card-pro" data-destination="granada" data-href="destinos.html?q=granada"
-            onclick="window.location.href='destinos.html?q=granada'" role="link" tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=granada'">
-            <div class="dest-card-media-wrap">
-              <img src="assets/images/destinos/isletas_de_granada.jpg" alt="Isletas y Granada Colonial"
-                class="dest-card-img" loading="lazy">
-              <span class="dest-card-badge"><i class="fa-solid fa-landmark"></i> Granada</span>
-            </div>
-            <div class="dest-card-content">
-              <span class="dest-card-territory">Territorio de Granada</span>
-              <h3 class="dest-card-title">Granada Colonial &amp; Isletas</h3>
-              <p class="dest-card-desc">La Gran Sultana con arquitectura perenne, plazas empedradas y navegación entre
-                365 isletas volcánicas.</p>
-              <div class="dest-card-footer">
-                <span class="dest-card-type"><i class="fa-solid fa-archway"></i> Ciudad Colonial</span>
-                <a href="destinos.html?q=granada" class="dest-card-cta">Explorar <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 3. Volcán Cerro Negro -->
-          <article class="destination-card-pro" data-destination="cerro-negro" data-href="destinos.html?q=cerro%20negro"
-            onclick="window.location.href='destinos.html?q=cerro%20negro'" role="link" tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=cerro%20negro'">
-            <div class="dest-card-media-wrap">
-              <img src="assets/images/destinos/cerro_negro.jpg" alt="Volcán Cerro Negro, León" class="dest-card-img"
-                loading="lazy">
-              <span class="dest-card-badge"><i class="fa-solid fa-volcano"></i> León</span>
-            </div>
-            <div class="dest-card-content">
-              <span class="dest-card-territory">Territorio de León</span>
-              <h3 class="dest-card-title">Volcán Cerro Negro</h3>
-              <p class="dest-card-desc">El volcán más joven de Centroamérica y la meca mundial del sandboarding
-                volcánico a más de 70 km/h.</p>
-              <div class="dest-card-footer">
-                <span class="dest-card-type"><i class="fa-solid fa-person-hiking"></i> Sandboarding Activo</span>
-                <a href="destinos.html?q=cerro%20negro" class="dest-card-cta">Explorar <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 4. Cañón de Somoto -->
-          <article class="destination-card-pro" data-destination="somoto" data-href="destinos.html?q=somoto"
-            onclick="window.location.href='destinos.html?q=somoto'" role="link" tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=somoto'">
-            <div class="dest-card-media-wrap">
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Monumento Nacional Cañón de Somoto, Madriz"
-                class="dest-card-img" loading="lazy">
-              <span class="dest-card-badge"><i class="fa-solid fa-mountain"></i> Madriz</span>
-            </div>
-            <div class="dest-card-content">
-              <span class="dest-card-territory">Territorio de Madriz</span>
-              <h3 class="dest-card-title">Cañón de Somoto</h3>
-              <p class="dest-card-desc">Monumento nacional con desfiladeros de piedra caliza esculpidos por el Río Coco
-                y travesía acuática comunitaria.</p>
-              <div class="dest-card-footer">
-                <span class="dest-card-type"><i class="fa-solid fa-water"></i> Cañón &amp; Fluvial</span>
-                <a href="destinos.html?q=somoto" class="dest-card-cta">Explorar <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 5. San Juan del Sur -->
-          <article class="destination-card-pro" data-destination="san-juan-del-sur"
-            data-href="destinos.html?q=san%20juan%20del%20sur"
-            onclick="window.location.href='destinos.html?q=san%20juan%20del%20sur'" role="link" tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=san%20juan%20del%20sur'">
-            <div class="dest-card-media-wrap">
-              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg"
-                alt="Bahía de San Juan del Sur, Rivas" class="dest-card-img" loading="lazy">
-              <span class="dest-card-badge"><i class="fa-solid fa-umbrella-beach"></i> Rivas</span>
-            </div>
-            <div class="dest-card-content">
-              <span class="dest-card-territory">Territorio de Rivas</span>
-              <h3 class="dest-card-title">San Juan del Sur</h3>
-              <p class="dest-card-desc">Bahía emblemática del Pacífico sur, santuario del surf en Playa Maderas y
-                atardeceres dorados inolvidables.</p>
-              <div class="dest-card-footer">
-                <span class="dest-card-type"><i class="fa-solid fa-sun"></i> Playa &amp; Surf</span>
-                <a href="destinos.html?q=san%20juan%20del%20sur" class="dest-card-cta">Explorar <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 6. Volcán Masaya -->
-          <article class="destination-card-pro" data-destination="masaya" data-href="destinos.html?q=masaya"
-            onclick="window.location.href='destinos.html?q=masaya'" role="link" tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' ') window.location.href='destinos.html?q=masaya'">
-            <div class="dest-card-media-wrap">
-              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Parque Nacional Volcán Masaya"
-                class="dest-card-img" loading="lazy">
-              <span class="dest-card-badge"><i class="fa-solid fa-fire"></i> Masaya</span>
-            </div>
-            <div class="dest-card-content">
-              <span class="dest-card-territory">Territorio de Masaya</span>
-              <h3 class="dest-card-title">Volcán Masaya</h3>
-              <p class="dest-card-desc">Parque Nacional y Cráter Santiago activo; contemplación nocturna de gases
-                incandescentes y magma vivo.</p>
-              <div class="dest-card-footer">
-                <span class="dest-card-type"><i class="fa-solid fa-volcano"></i> Cráter Activo</span>
-                <a href="destinos.html?q=masaya" class="dest-card-cta">Explorar <i
-                    class="fa-solid fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Botón para ver todos los destinos -->
-        <div class="destinations-pro-cta-wrap">
-          <a href="destinos.html" class="btn-cta-explore">
-            <i class="fa-solid fa-grid-2"></i> Explorar todos los destinos →
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="culture-alive-section" id="culturaVivaNicaragua">
+<section class="culture-alive-section" id="culturaVivaNicaragua">
       <div class="container">
         <div class="culture-head-box">
           <div class="culture-tag-pill">
@@ -1647,19 +1634,33 @@
       </div>
     </section>
 
-    <section class="services-travel-section" id="serviciosTuristicosSection">
+    <!-- ============================================================================
+         🧭 08. SERVICIOS Y NEGOCIOS VERIFICADOS EN RUTA (FUSIÓN ESTRATÉGICA)
+         🎯 POR QUÉ: Unificar qué servicios necesita el viajero con los negocios reales
+            locales que los proveen, reduciendo el scroll vertical en un 30%.
+         ⚙️ CÓMO: Bloque de 8 categorías funcionales + vitrina de recomendados del territorio
+            + carrusel interactivo infinito con verificación Baqueano y 0% comisiones.
+         📦 QUÉ: Sección unificada #serviciosTuristicosSection con ancla #partnersInfinitySection
+         ============================================================================ -->
+    <section class="services-travel-section services-allies-unified-section" id="serviciosTuristicosSection">
+      <!-- Ancla de compatibilidad para enlaces y scripts existentes -->
+      <span id="partnersInfinitySection" class="anchor-compat" aria-hidden="true"></span>
+
       <div class="container">
         <div class="section-lead-header">
           <div class="badge-section-pill">
-            <i class="fa-solid fa-suitcase"></i> Todo lo que necesitas en el camino
+            <i class="fa-solid fa-store"></i> Servicios &amp; Negocios Verificados
           </div>
           <h2 class="section-headline">Todo lo que Necesitas Durante tu Viaje</h2>
           <p class="section-subtext">
-            Conecta de forma directa con los servicios verificados del territorio sin pagar comisiones a intermediarios
-            extranjeros.
+            Categorías indispensables para tu ruta conectadas directamente con cooperativas, guías, posadas y comedores familiares verificados sin intermediarios.
           </p>
+          <div style="margin-top: 0.6rem;">
+            <span class="baq-credibility-badge"><i class="fa-solid fa-hand-holding-dollar"></i> 0% intermediación · Trato directo · Negocios verificados en campo</span>
+          </div>
         </div>
 
+        <!-- 1. CATEGORÍAS ESENCIALES DE SERVICIO -->
         <div class="services-travel-grid">
           <a href="destinos.html?cat=hoteles" class="service-travel-card">
             <div class="service-icon"><i class="fa-solid fa-hotel"></i></div>
@@ -1709,35 +1710,122 @@
             <p class="service-desc">Mercados populares, artesanía de barro negro y recuerdos campesinos.</p>
           </a>
         </div>
-      </div>
-    </section>
+      
 
-    <section class="partners-infinity-section" id="partnersInfinitySection"
-      aria-label="Red de locales aliados Baqueano">
-      <div class="partners-infinity-header">
-        <div class="partners-pill-badge">
-          <i class="fa-solid fa-store"></i> Red Comunitaria Activa
+        <!-- 2. NEGOCIOS RECOMENDADOS DEL TERRITORIO -->
+        <div class="unified-allies-showcase">
+          <div class="unified-allies-lead">
+            <div>
+              <span class="unified-allies-kicker"><i class="fa-solid fa-award"></i> Anfitriones Destacados</span>
+              <h3 class="unified-allies-title">Recomendados en el Territorio</h3>
+            </div>
+            <a href="aliados.html" class="unified-ally-link">
+              Ver red completa de locales <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="unified-allies-grid">
+            <!-- Negocio 1 -->
+            <article class="unified-ally-card">
+              <div class="unified-ally-header">
+                <div class="unified-ally-icon"><i class="fa-solid fa-water"></i></div>
+                <div class="unified-ally-meta">
+                  <h4 class="unified-ally-name">Coop. Cañón de Somoto</h4>
+                  <span class="unified-ally-territory">Madriz · Guías y Travesía Acuática</span>
+                </div>
+              </div>
+              <p class="unified-ally-desc">Baqueanos nativos del Río Coco con chalecos certificados, lanchas y expediciones en cañón de piedra caliza.</p>
+              <div class="unified-ally-footer">
+                <span class="unified-ally-badge"><i class="fa-solid fa-circle-check"></i> Verificado Baqueano</span>
+                <a href="aliados.html?negocio=somoto" class="unified-ally-link">Detalles <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Negocio 2 -->
+            <article class="unified-ally-card">
+              <div class="unified-ally-header">
+                <div class="unified-ally-icon"><i class="fa-solid fa-bed"></i></div>
+                <div class="unified-ally-meta">
+                  <h4 class="unified-ally-name">Posada Ecológica La Abuela</h4>
+                  <span class="unified-ally-territory">Masaya · Laguna de Apoyo</span>
+                </div>
+              </div>
+              <p class="unified-ally-desc">Cabañas familiares frente a la laguna cratérica con kayaks, alimentación típica y descanso absoluto.</p>
+              <div class="unified-ally-footer">
+                <span class="unified-ally-badge"><i class="fa-solid fa-circle-check"></i> Verificado Baqueano</span>
+                <a href="aliados.html?negocio=la-abuela" class="unified-ally-link">Detalles <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Negocio 3 -->
+            <article class="unified-ally-card">
+              <div class="unified-ally-header">
+                <div class="unified-ally-icon"><i class="fa-solid fa-volcano"></i></div>
+                <div class="unified-ally-meta">
+                  <h4 class="unified-ally-name">Baqueanos del Cerro Negro</h4>
+                  <span class="unified-ally-territory">León · Sandboarding &amp; Ecoturismo</span>
+                </div>
+              </div>
+              <p class="unified-ally-desc">Cooperativa Las Pilas con tablas de sandboarding reforzadas, trajes de protección y guías comunitarios.</p>
+              <div class="unified-ally-footer">
+                <span class="unified-ally-badge"><i class="fa-solid fa-circle-check"></i> Verificado Baqueano</span>
+                <a href="aliados.html?negocio=cerro-negro" class="unified-ally-link">Detalles <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Negocio 4 -->
+            <article class="unified-ally-card">
+              <div class="unified-ally-header">
+                <div class="unified-ally-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+                <div class="unified-ally-meta">
+                  <h4 class="unified-ally-name">Surf Camp Las Peñitas</h4>
+                  <span class="unified-ally-territory">León · Clases de Surf &amp; Playa</span>
+                </div>
+              </div>
+              <p class="unified-ally-desc">Hospedaje de pescadores, clases de surf para principiantes y atardeceres frente a las olas del Pacífico.</p>
+              <div class="unified-ally-footer">
+                <span class="unified-ally-badge"><i class="fa-solid fa-circle-check"></i> Verificado Baqueano</span>
+                <a href="aliados.html?negocio=las-penitas" class="unified-ally-link">Detalles <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Negocio 5 -->
+            <article class="unified-ally-card">
+              <div class="unified-ally-header">
+                <div class="unified-ally-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="unified-ally-meta">
+                  <h4 class="unified-ally-name">Ecolodge Selva Negra</h4>
+                  <span class="unified-ally-territory">Matagalpa · Reserva &amp; Nebliselva</span>
+                </div>
+              </div>
+              <p class="unified-ally-desc">Finca agroecológica con senderos entre orquídeas, café sostenible de altura y avistamiento de quetzales.</p>
+              <div class="unified-ally-footer">
+                <span class="unified-ally-badge"><i class="fa-solid fa-circle-check"></i> Verificado Baqueano</span>
+                <a href="aliados.html?negocio=selva-negra" class="unified-ally-link">Detalles <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
+            </article>
+
+            <!-- Negocio 6 -->
+            <article class="unified-ally-card">
+              <div class="unified-ally-header">
+                <div class="unified-ally-icon"><i class="fa-solid fa-utensils"></i></div>
+                <div class="unified-ally-meta">
+                  <h4 class="unified-ally-name">Comedor Doña Chepita</h4>
+                  <span class="unified-ally-territory">Estelí · Sazón Tradicional del Norte</span>
+                </div>
+              </div>
+              <p class="unified-ally-desc">Platos típicos norteños al fogón de leña, cuajada fresca, tortillas comaleadas y güirilas de temporada.</p>
+              <div class="unified-ally-footer">
+                <span class="unified-ally-badge"><i class="fa-solid fa-circle-check"></i> Verificado Baqueano</span>
+                <a href="aliados.html?negocio=dona-chepita" class="unified-ally-link">Detalles <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
+            </article>
+          </div>
         </div>
-        <h2 class="partners-infinity-title">Locales Aliados en Todo Nicaragua</h2>
-        <p class="partners-infinity-sub">Cooperativas, posadas, guías y comedores verificados sin intermediarios</p>
 
-        <!-- Filtros de Categorías para Locales Aliados -->
-        <div class="allies-filters-strip">
-          <button type="button" class="ally-filter-chip active" data-filter="all"><i class="fa-solid fa-border-all"></i>
-            Todos</button>
-          <button type="button" class="ally-filter-chip" data-filter="hospedaje"><i class="fa-solid fa-hotel"></i>
-            Hospedaje</button>
-          <button type="button" class="ally-filter-chip" data-filter="comida"><i class="fa-solid fa-utensils"></i>
-            Comida</button>
-          <button type="button" class="ally-filter-chip" data-filter="experiencias"><i
-              class="fa-solid fa-person-hiking"></i> Experiencias</button>
-          <button type="button" class="ally-filter-chip" data-filter="guias"><i class="fa-solid fa-compass"></i>
-            Guías</button>
-        </div>
-      </div>
-
-      <!-- Track 1: izquierda → derecha -->
-      <div class="partners-track-viewport" aria-hidden="true">
+        <!-- 3. CARRUSEL INFINITO DE LOCALES ALIADOS (PRESERVADO PARA CMS Y SINCRONIZACIÓN) -->
+        <div style="margin-top: 2.5rem;">
+          <div class="partners-track-viewport" aria-hidden="true">
         <div class="partners-track partners-track--fwd" id="partnersTrackA">
           <div class="partner-chip">
             <span class="partner-chip-icon"><i class="fa-solid fa-water"></i></span>
@@ -1863,86 +1951,18 @@
           <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
-    </section>
-
-    <section class="nicaragua-stats-section" id="nicaraguaEnCifrasSection">
-      <div class="container">
-        <div class="section-lead-header">
-          <div class="badge-section-pill">
-            <i class="fa-solid fa-chart-pie"></i> Datos provenientes de fuentes oficiales verificadas (INTUR, MARENA,
-            INETER)
-          </div>
-          <h2 class="section-headline">Nicaragua de un Vistazo</h2>
-          <p class="section-subtext">
-            Cifras territoriales respaldadas por la Constitución Política, SINAP y MARENA que fundamentan la grandeza de
-            nuestra patria.
-          </p>
-          <div><span class="baq-credibility-badge"><i class="fa-solid fa-chart-line"></i> Modelo de Impacto Territorial
-              · Objetivo del Sistema</span></div>
-        </div>
-
-        <div class="stats-counter-grid">
-          <!-- 1. 17 Territorios -->
-          <div class="stat-counter-card" data-val="17" data-source="Constitución Política de Nicaragua"
-            data-sourcedate="2026">
-            <div class="stat-card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
-            <div class="stat-number-wrap">
-              <span class="stat-count-num" data-target="17">0</span>
-            </div>
-            <h3 class="stat-label">17 Territorios</h3>
-            <p class="stat-meta">15 Departamentos · 2 Regiones Autónomas</p>
-          </div>
-
-          <!-- 2. 78+ Áreas Protegidas -->
-          <div class="stat-counter-card" data-val="78" data-source="SINAP / MARENA" data-sourcedate="2026">
-            <div class="stat-card-icon"><i class="fa-solid fa-tree"></i></div>
-            <div class="stat-number-wrap">
-              <span class="stat-count-num" data-target="78">0</span><span class="stat-plus">+</span>
-            </div>
-            <h3 class="stat-label">Áreas Protegidas</h3>
-            <p class="stat-meta">Reservas de Biósfera, parques y santuarios</p>
-          </div>
-
-          <!-- 3. 26 Volcanes -->
-          <div class="stat-counter-card" data-val="26" data-source="INETER" data-sourcedate="2026">
-            <div class="stat-card-icon"><i class="fa-solid fa-volcano"></i></div>
-            <div class="stat-number-wrap">
-              <span class="stat-count-num" data-target="26">0</span>
-            </div>
-            <h3 class="stat-label">Estructuras Volcánicas</h3>
-            <p class="stat-meta">Cordillera de los Maribios y conos activos</p>
-          </div>
-
-          <!-- 4. 0% Comisión -->
-          <div class="stat-counter-card" data-val="0" data-source="Baqueano Comercio Justo" data-sourcedate="2026">
-            <div class="stat-card-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-            <div class="stat-number-wrap">
-              <span class="stat-count-num" data-target="0">0</span><span class="stat-plus">%</span>
-            </div>
-            <h3 class="stat-label">Comisión a Intermediarios</h3>
-            <p class="stat-meta">100% del pago directo a familias anfitrionas</p>
-          </div>
-
-          <!-- 5. 2 Patrimonios UNESCO -->
-          <div class="stat-counter-card" data-val="2" data-source="UNESCO" data-sourcedate="2026">
-            <div class="stat-card-icon"><i class="fa-solid fa-award"></i></div>
-            <div class="stat-number-wrap">
-              <span class="stat-count-num" data-target="2">0</span>
-            </div>
-            <h3 class="stat-label">Patrimonios de la Humanidad</h3>
-            <p class="stat-meta">Catedral de León &amp; El Güegüense</p>
-          </div>
+    
         </div>
       </div>
     </section>
 
-    <section class="impacts-section-pro" id="impactosBaqueanoSection">
+<section class="impacts-section-pro" id="impactosBaqueanoSection">
       <div class="container">
         <div class="section-lead-header">
           <div class="badge-section-pill">
             <i class="fa-solid fa-shield-heart"></i> Ecoturismo Consciente
           </div>
-          <h2 class="section-headline">Impacto y Turismo Responsable</h2>
+          <h2 class="section-headline">Impacto y Turismo Responsable · ¿Por qué BAQUEANO?</h2>
           <p class="section-subtext">
             Cinco pilares de sostenibilidad y desarrollo local que garantizan que el turismo regenere el ecosistema y
             dignifique a
@@ -2018,16 +2038,15 @@
               <div class="impact-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
               <h3 class="impact-title">🛡️ CONFIANZA</h3>
             </div>
-            <p class="impact-thesis">Auditoría en terreno, geolocalización GPS de alta precisión y respaldo de la Mesa
-              Técnica de Enlace 24/7.</p>
+            <p class="impact-thesis">Auditoría en terreno, georreferenciación WGS-84 comprobada y verificación comunitaria directa en cada territorio.</p>
             <button type="button" class="btn-impact-toggle" aria-expanded="false">
               <span>Conocer detalles</span> <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="impact-card-drawer" hidden>
               <ul class="impact-details-list">
-                <li><i class="fa-solid fa-check"></i> Coordenadas WGS-84 comprobadas en sitio.</li>
-                <li><i class="fa-solid fa-check"></i> Centro SOS con enlace directo a Cruz Blanca (128) y Policía (118).
-                </li>
+                <li><i class="fa-solid fa-check"></i> Coordenadas geográficas WGS-84 comprobadas en sitio.</li>
+                <li><i class="fa-solid fa-check"></i> Verificación comunitaria directa de prestadores y anfitriones.</li>
+                <li><i class="fa-solid fa-check"></i> Transparencia absoluta en precios y condiciones de viaje.</li>
                 <li><i class="fa-solid fa-check"></i> Verificación comunitaria directa de prestadores de servicio.</li>
               </ul>
             </div>
@@ -2062,7 +2081,7 @@
       </div>
     </section>
 
-    <section class="sos-security-section" id="sosSeguridadSection">
+<section class="sos-security-section" id="sosSeguridadSection">
       <div class="container">
         <div class="sos-security-card">
           <div class="sos-info-side">
@@ -2108,7 +2127,78 @@
       </div>
     </section>
 
-    <section class="community-experiences-section" id="experienciasComunidad">
+<section class="nicaragua-stats-section" id="nicaraguaEnCifrasSection">
+      <div class="container">
+        <div class="section-lead-header">
+          <div class="badge-section-pill">
+            <i class="fa-solid fa-chart-pie"></i> Datos provenientes de fuentes oficiales verificadas (INTUR, MARENA,
+            INETER)
+          </div>
+          <h2 class="section-headline">Nicaragua de un Vistazo</h2>
+          <p class="section-subtext">
+            Cifras territoriales respaldadas por la Constitución Política, SINAP y MARENA que fundamentan la grandeza de
+            nuestra patria.
+          </p>
+          <div><span class="baq-credibility-badge"><i class="fa-solid fa-chart-line"></i> Modelo de Impacto Territorial
+              · Objetivo del Sistema</span></div>
+        </div>
+
+        <div class="stats-counter-grid">
+          <!-- 1. 17 Territorios -->
+          <div class="stat-counter-card" data-val="17" data-source="Constitución Política de Nicaragua"
+            data-sourcedate="2026">
+            <div class="stat-card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-count-num" data-target="17">0</span>
+            </div>
+            <h3 class="stat-label">17 Territorios</h3>
+            <p class="stat-meta">15 Departamentos · 2 Regiones Autónomas</p>
+          </div>
+
+          <!-- 2. 78+ Áreas Protegidas -->
+          <div class="stat-counter-card" data-val="78" data-source="SINAP / MARENA" data-sourcedate="2026">
+            <div class="stat-card-icon"><i class="fa-solid fa-tree"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-count-num" data-target="78">0</span><span class="stat-plus">+</span>
+            </div>
+            <h3 class="stat-label">Áreas Protegidas</h3>
+            <p class="stat-meta">Reservas de Biósfera, parques y santuarios</p>
+          </div>
+
+          <!-- 3. 26 Volcanes -->
+          <div class="stat-counter-card" data-val="26" data-source="INETER" data-sourcedate="2026">
+            <div class="stat-card-icon"><i class="fa-solid fa-volcano"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-count-num" data-target="26">0</span>
+            </div>
+            <h3 class="stat-label">Estructuras Volcánicas</h3>
+            <p class="stat-meta">Cordillera de los Maribios y conos activos</p>
+          </div>
+
+          <!-- 4. 0% Comisión -->
+          <div class="stat-counter-card" data-val="0" data-source="Baqueano Comercio Justo" data-sourcedate="2026">
+            <div class="stat-card-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-count-num" data-target="0">0</span><span class="stat-plus">%</span>
+            </div>
+            <h3 class="stat-label">Comisión a Intermediarios</h3>
+            <p class="stat-meta">100% del pago directo a familias anfitrionas</p>
+          </div>
+
+          <!-- 5. 2 Patrimonios UNESCO -->
+          <div class="stat-counter-card" data-val="2" data-source="UNESCO" data-sourcedate="2026">
+            <div class="stat-card-icon"><i class="fa-solid fa-award"></i></div>
+            <div class="stat-number-wrap">
+              <span class="stat-count-num" data-target="2">0</span>
+            </div>
+            <h3 class="stat-label">Patrimonios de la Humanidad</h3>
+            <p class="stat-meta">Catedral de León &amp; El Güegüense</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="community-experiences-section" id="experienciasComunidad">
       <div class="container">
         <div class="section-lead-header">
           <div class="badge-section-pill">
@@ -2270,31 +2360,36 @@
       </div>
     </section>
 
+    <!-- ============================================================================
+         🧭 13. RED DE ANFITRIONES & COMERCIO JUSTO (CTA COMPACTO)
+         🎯 POR QUÉ: Convertir el registro en una llamada a la acción ágil de alta conversión
+            sin saturar el scroll vertical, abriendo el formulario de 16 campos en modal.
+         ⚙️ CÓMO: Tarjeta editorial compacta con 4 atributos de valor, botón modal y enlace al portal.
+         📦 QUÉ: Sección #redDeAnfitrionesSection optimizada
+         ============================================================================ -->
     <section class="hosts-network-section" id="redDeAnfitrionesSection">
       <div class="container">
-        <!-- Tarjeta de Registro de Negocios -->
+        <!-- Tarjeta de Registro de Negocios Ágil -->
         <div class="footer-biz-register-card" id="registroNegocios">
           <div class="footer-biz-header-wrap">
             <div class="footer-biz-tag">
               <i class="fa-solid fa-handshake-angle"></i> RED DE ANFITRIONES &amp; COMERCIO JUSTO
             </div>
             <h3 class="footer-biz-title">
-              ¿Tenés un Negocio o Experiencia Turística? Formá Parte de Baqueano
+              ¿Tenés un Negocio o Experiencia Turística? Sumate a la Red BAQUEANO
             </h3>
             <p class="footer-biz-subtitle">
-              Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente
-              con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica y senderos
-              seguros.
+              Conecta directamente con exploradores de todo el mundo sin comisiones intermediarias. El 100% de lo pactado entra a tu familia y tu emprendimiento obtiene presencia satelital HD en el mapa nacional.
             </p>
 
             <div class="footer-biz-benefits-strip">
               <div class="footer-biz-benefit-item">
                 <i class="fa-solid fa-percent"></i>
-                <span><strong>0% Comisiones</strong> a intermediarios</span>
+                <span><strong>0% Comisiones</strong> a intermediarios foráneos</span>
               </div>
               <div class="footer-biz-benefit-item">
                 <i class="fa-brands fa-whatsapp"></i>
-                <span><strong>Contacto Directo</strong> con el viajero</span>
+                <span><strong>Contacto Directo</strong> vía WhatsApp</span>
               </div>
               <div class="footer-biz-benefit-item">
                 <i class="fa-solid fa-satellite"></i>
@@ -2302,21 +2397,354 @@
               </div>
               <div class="footer-biz-benefit-item">
                 <i class="fa-solid fa-shield-heart"></i>
-                <span><strong>Auditoría &amp; Respaldo</strong> Mesa Baqueano</span>
+                <span><strong>Insignia Oficial</strong> Mesa Baqueano</span>
               </div>
             </div>
 
-            <!-- Botón de apertura del formulario -->
-            <div class="biz-trigger-wrap">
-              <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false"
-                aria-controls="bizFormCollapse">
+            <!-- Botones de Acción: Modal Inmediato + Portal Dedicado -->
+            <div class="biz-actions-compact-row">
+              <button type="button" class="biz-btn-submit" id="btnToggleBizForm" onclick="openBizRegisterModal(event)">
                 <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Registrar mi negocio</span>
-                <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
+                <i class="fa-solid fa-arrow-right btn-arrow"></i>
               </button>
+              <a href="mi-negocio.html" class="biz-btn-secondary">
+                <i class="fa-solid fa-store"></i> Conocer requisitos y portal
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOLETÍN CAMPESINO COMPACTO -->
+        <div class="compact-newsletter-wrap">
+          <div class="compact-nl-info">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <div>
+              <strong>Boletín de Senderos &amp; Cosechas Campesinas</strong>
+              <p>Nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas.</p>
+            </div>
+          </div>
+          <form class="compact-nl-form"
+            onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+            <input type="email" class="compact-nl-input" placeholder="Tu correo electrónico..." required
+              aria-label="Correo para boletín">
+            <button type="submit" class="compact-nl-btn">
+              <i class="fa-solid fa-paper-plane"></i> Suscribirme
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+<section class="app-download-section" id="appAndroidSection">
+      <div class="container">
+        <div class="app-download-card">
+          <div class="app-download-content">
+            <span class="app-download-kicker"><i class="fa-brands fa-android"></i> BAQUEANO PARA ANDROID</span>
+            <h2 class="app-download-title">Lleva a Baqueano en tu bolsillo, incluso sin conexión</h2>
+            <p class="app-download-desc">
+              Diseñada específicamente para Android con mapas sin conexión, brújula territorial, geolocalización GPS por
+              satélite y asistente Baqüi autónomo en ruta.
+            </p>
+            <div class="app-specs-grid">
+              <div class="app-spec-item">
+                <span class="app-spec-label">Versión</span>
+                <strong class="app-spec-val">v1.0.0 (Versión Oficial)</strong>
+              </div>
+              <div class="app-spec-item">
+                <span class="app-spec-label">Compatibilidad</span>
+                <strong class="app-spec-val">Android 8.0+ (Oreo a 15)</strong>
+              </div>
+              <div class="app-spec-item">
+                <span class="app-spec-label">Seguridad SHA-256</span>
+                <strong class="app-spec-val">Firmada y Verificada</strong>
+              </div>
+              <div class="app-spec-item">
+                <span class="app-spec-label">Modo Offline</span>
+                <strong class="app-spec-val">100% Funcional sin Internet</strong>
+              </div>
+            </div>
+            <div class="app-download-actions">
+              <a href="https://drive.usercontent.google.com/download?id=1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq&amp;export=download&amp;confirm=t"
+                class="app-download-btn-primary" data-android-release-source="google-drive">
+                <i class="fa-solid fa-download"></i> Descargar APK de BAQUEANO (Build Android)
+              </a>
+              <a href="#apkModal" class="app-download-btn-secondary" onclick="openApkModal(event)">
+                <i class="fa-solid fa-circle-info"></i> Ficha y Guía de Instalación
+              </a>
+            </div>
+          </div>
+          <div class="app-download-visual">
+            <div class="app-phone-mockup">
+              <img src="assets/images/baqueano_launcher_solid.png" alt="Baqueano Android App" width="120" height="120"
+                class="app-preview-icon">
+              <span class="app-mockup-badge">Android Nativo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="final-cta-section" id="ctaFinalNicaragua">
+      <div class="final-cta-backdrop"></div>
+      <div class="container final-cta-inner">
+        <span class="final-cta-badge"><i class="fa-solid fa-feather-pointed"></i> Tu Próxima Gran Aventura</span>
+        <h2 class="final-cta-headline">
+          HAY UNA NICARAGUA QUE NO APARECE EN LOS MAPAS.<br>
+          <span class="highlight-terra">VENÍ A DESCUBRIRLA.</span>
+        </h2>
+        <p class="final-cta-subtext">
+          El sendero lo abren las comunidades, los volcanes esperan tu huella y el fuego del comal sigue encendido en
+          cada rincón de nuestra tierra.
+        </p>
+        <div class="final-cta-buttons">
+          <a href="#queQueresVivir" class="btn-cta-explore">
+            <i class="fa-solid fa-compass"></i> Explorar Nicaragua
+          </a>
+          <a href="#baqueanoDigitalSection" class="btn-cta-route">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> ✨ Crear mi aventura
+          </a>
+        </div>
+        <div class="final-cta-bot-hint">
+          <img src="assets/images/baqui.png" alt="Baqüi el Guardabarranco" class="final-bot-avatar"
+            onerror="this.src='assets/images/logo.png'">
+          <span>«Buen camino, explorador. La patria te da la bienvenida.»</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================================
+       🧭 FOOTER OFICIAL INSTITUCIONAL
+       ============================================================================ -->
+  <footer class="site-footer-pro">
+    <div class="container">
+      <!-- FRANJA DE REDES SOCIALES OFICIALES -->
+      <div class="footer-social-section">
+        <div class="footer-social-label">
+          <i class="fa-solid fa-hashtag"></i> Conéctate con la Comunidad Baqueano
+        </div>
+        <div class="footer-social-row">
+          <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer"
+            class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer"
+            class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank"
+            rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn"
+            title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grid de Columnas Institucionales -->
+      <div class="footer-columns-grid">
+        <!-- COLUMNA 1: IDENTIDAD -->
+        <div class="footer-col-brand">
+          <div class="brand-box index-inline-041">
+            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+            <div class="brand-text">
+              <span class="brand-title">BAQUEANO</span>
+              <span class="brand-tagline">NICARAGUA</span>
+            </div>
+          </div>
+          <p class="footer-bio-text">
+            Catálogo territorial BAQUEANO de áreas protegidas y ecoturismo comunitario de Nicaragua. Guiado local, cero
+            intermediación foránea y soberanía comunitaria.
+          </p>
+          <div class="index-inline-042">
+            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
+          </div>
+          <div class="footer-trust-strip">
+            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 &amp; 1211
+              INTUR</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
+            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
+          </div>
+        </div>
+
+        <!-- COLUMNA 2: NAVEGACIÓN -->
+        <div class="footer-col-links">
+          <h4 class="footer-col-header">MÓDULOS WEB</h4>
+          <ul class="footer-link-list">
+            <li><a href="index.html">Inicio Institucional</a></li>
+            <li><a href="#territorioMapaSection"><i class="fa-solid fa-satellite"></i> Territorio Baqueano</a></li>
+            <li><a href="#experienciasComunidad"><i class="fa-solid fa-comments"></i> Experiencias Vivas</a></li>
+            <li><a href="destinos.html">Destinos Protegidos</a></li>
+            <li><a href="historia.html">Historia de Mi País</a></li>
+            <li><a href="ambiental.html">Campaña Ambiental</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
+            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i
+                  class="fa-solid fa-handshake-angle index-inline-043"></i> Registrar Mi Negocio</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMNA 3: CONTACTO -->
+        <div class="footer-col-contact">
+          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <span>Correo Institucional:</span><br>
+                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <span>Mesa de Enlace:</span><br>
+                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <span>Sede Territorial:</span><br>
+                <span>Managua · 17 Territorios de Nicaragua</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Legal Stack -->
+      <div class="footer-legal-stack">
+        <a href="terminos.html">Términos &amp; Condiciones</a>
+        <span class="separator">|</span>
+        <a href="privacidad.html">Política de Privacidad</a>
+        <span class="separator">|</span>
+        <a href="aviso-legal.html">Aviso Legal</a>
+        <span class="separator">|</span>
+        <a href="cookies.html">Política de Cookies</a>
+        <span class="separator">|</span>
+        <a href="ambiental.html">Decálogo Verde &amp; Huella Cero</a>
+        <span class="separator">|</span>
+        <a href="denuncias.html">Canal Ético Ambiental</a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Baqueano Nicaragua. Catálogo Territorial BAQUEANO de Áreas Protegidas y Ecoturismo Comunitario. Todos
+          los derechos
+          reservados.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================================
+       MODALES DEL SISTEMA (100% PRESERVADOS)
+       ============================================================================ -->
+  <!-- MODAL INTERACTIVO PARA COMPARTIR EXPERIENCIA -->
+  <div class="exp-modal-backdrop" id="modalAddExperience" aria-hidden="true" role="dialog">
+    <div class="exp-modal-card">
+      <div class="exp-modal-header">
+        <h3 class="exp-modal-title"><i class="fa-solid fa-comment-dots"></i> Comparte tu Experiencia</h3>
+        <button type="button" class="exp-modal-close-btn" id="btnCloseExpModal" aria-label="Cerrar">&times;</button>
+      </div>
+
+      <form id="formAddExperience">
+        <div class="exp-form-field">
+          <label for="expAuthor" class="exp-form-label">Tu Nombre Completo *</label>
+          <input type="text" id="expAuthor" class="exp-form-input" placeholder="Ej: María José Morales" required>
+        </div>
+
+        <div class="exp-form-field">
+          <label for="expRoleType" class="exp-form-label">¿Cuál es tu rol en el territorio? *</label>
+          <select id="expRoleType" class="exp-form-select">
+            <option value="turista-local">Turista Nacional (Nicaragüense)</option>
+            <option value="turista-inter">Viajero / Turista Internacional</option>
+            <option value="negocio">Dueño de Negocio / Anfitrión Campesino</option>
+          </select>
+        </div>
+
+        <div class="exp-form-field">
+          <label for="expLocation" class="exp-form-label">Tu Ciudad, País o Comunidad</label>
+          <input type="text" id="expLocation" class="exp-form-input"
+            placeholder="Ej: Estelí, Nicaragua o Madrid, España">
+        </div>
+
+        <div class="exp-form-field">
+          <label for="expRating" class="exp-form-label">Valoración General *</label>
+          <select id="expRating" class="exp-form-select">
+            <option value="5">★★★★★ (5 Estrellas - Extraordinario)</option>
+            <option value="4">★★★★☆ (4 Estrellas - Muy Bueno)</option>
+            <option value="3">★★★☆☆ (3 Estrellas - Bueno)</option>
+          </select>
+        </div>
+
+        <div class="exp-form-field">
+          <label for="expComment" class="exp-form-label">Cuéntanos tu experiencia *</label>
+          <textarea id="expComment" class="exp-form-textarea" rows="3"
+            placeholder="¿Cómo fue tu visita o cómo ha beneficiado Baqueano a tu comunidad o negocio local?"
+            required></textarea>
+        </div>
+
+        <!-- ZONA DE UPLOAD FOTO / VIDEO -->
+        <div class="exp-form-field">
+          <label class="exp-form-label">
+            <i class="fa-solid fa-photo-film" style="color:#F65E01;margin-right:0.35rem;"></i>
+            Foto o Video de tu Experiencia
+            <span class="exp-upload-badge">Opcional</span>
+          </label>
+
+          <!-- Drop Zone -->
+          <div class="exp-upload-zone" id="expUploadZone" role="button" tabindex="0" aria-label="Subir foto o video">
+            <input type="file" id="expMediaInput" class="exp-upload-hidden" accept="image/*,video/*" multiple
+              aria-hidden="true">
+            <div class="exp-upload-zone-inner">
+              <div class="exp-upload-icon-wrap">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <p class="exp-upload-hint-primary">Arrastra o haz clic para subir</p>
+              <p class="exp-upload-hint-secondary">Imágenes (JPG, PNG, WEBP) · Videos (MP4, MOV) · Máx. 4 archivos</p>
+              <div class="exp-upload-pills">
+                <span class="exp-upload-pill"><i class="fa-solid fa-image"></i> Foto</span>
+                <span class="exp-upload-pill"><i class="fa-solid fa-clapperboard"></i> Video</span>
+              </div>
             </div>
           </div>
 
-          <!-- Formulario Completo de 16 Campos en Contenedor Desplegable -->
+          <!-- Previews -->
+          <div class="exp-media-preview-grid" id="expMediaPreviewGrid" aria-live="polite"></div>
+        </div>
+
+        <div class="exp-modal-actions">
+          <button type="button" class="btn-exp-cancel" id="btnCancelExpModal">Cancelar</button>
+          <button type="submit" class="btn-exp-submit">
+            <i class="fa-solid fa-paper-plane"></i> Publicar Experiencia
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <!-- ============================================================================
+       🧭 MODAL DE REGISTRO DE NEGOCIO Y COOPERATIVAS (16 CAMPOS PRESERVADOS)
+       🎯 POR QUÉ: Permitir el registro completo y riguroso de prestadores locales
+          sin sobrecargar el flujo visual de la página principal.
+       ⚙️ CÓMO: Modal dialog accesible con backdrop-filter blur, scroll interno y validación en tiempo real.
+       📦 QUÉ: Contenedor #bizRegisterModal con #bizFormCollapse y #registerBusinessForm
+       ============================================================================ -->
+  <div class="modal-backdrop-pro" id="bizRegisterModal" aria-hidden="true" role="dialog" aria-labelledby="bizRegisterModalTitle">
+    <div class="modal-card-dialog biz-register-modal-dialog">
+      <button class="modal-close-x" id="closeBizRegisterModalBtn" onclick="closeBizRegisterModal()" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="biz-modal-header-top">
+        <span class="badge-section-pill" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-store"></i> Red de Anfitriones Baqueano</span>
+        <h3 id="bizRegisterModalTitle" style="color: #FFFFFF; font-size: 1.35rem; font-weight: 800; margin: 0 0 0.5rem; font-family: 'Montserrat', sans-serif;">Registrar Negocio o Cooperativa</h3>
+        <p style="color: #CBD5E1; font-size: 0.85rem; margin: 0 0 1rem; line-height: 1.5;">Completa los datos de tu establecimiento para ser auditado por la Mesa Técnica e integrado al mapa satelital HD y catálogo territorial.</p>
+      </div>
+
+      <!-- Formulario Completo de 16 Campos en Contenedor Desplegable -->
           <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
             <div class="biz-form-header-bar">
               <div class="biz-form-header-info">
@@ -2563,324 +2991,6 @@
               </div>
             </form>
           </div> <!-- /bizFormCollapse -->
-        </div>
-
-        <!-- BOLETÍN CAMPESINO COMPACTO -->
-        <div class="compact-newsletter-wrap">
-          <div class="compact-nl-info">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <div>
-              <strong>Boletín de Senderos &amp; Cosechas Campesinas</strong>
-              <p>Nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas.</p>
-            </div>
-          </div>
-          <form class="compact-nl-form"
-            onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="compact-nl-input" placeholder="Tu correo electrónico..." required
-              aria-label="Correo para boletín">
-            <button type="submit" class="compact-nl-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================================
-         🧭 14. FICHA TÉCNICA Y DESCARGA OFICIAL APP ANDROID (APK VERIFICADA)
-         🎯 POR QUÉ: Presentar la aplicación nativa Android para el jurado con credibilidad
-            técnica profesional (versión, SHA-256, compatibilidad y arquitectura offline-first).
-         ============================================================================ -->
-    <section class="app-download-section" id="appAndroidSection">
-      <div class="container">
-        <div class="app-download-card">
-          <div class="app-download-content">
-            <span class="app-download-kicker"><i class="fa-brands fa-android"></i> BAQUEANO PARA ANDROID</span>
-            <h2 class="app-download-title">Lleva a Baqueano en tu bolsillo, incluso sin conexión</h2>
-            <p class="app-download-desc">
-              Diseñada específicamente para Android con mapas sin conexión, brújula territorial, geolocalización GPS por
-              satélite y asistente Baqüi autónomo en ruta.
-            </p>
-            <div class="app-specs-grid">
-              <div class="app-spec-item">
-                <span class="app-spec-label">Versión</span>
-                <strong class="app-spec-val">v1.0.0 (Versión Oficial)</strong>
-              </div>
-              <div class="app-spec-item">
-                <span class="app-spec-label">Compatibilidad</span>
-                <strong class="app-spec-val">Android 8.0+ (Oreo a 15)</strong>
-              </div>
-              <div class="app-spec-item">
-                <span class="app-spec-label">Seguridad SHA-256</span>
-                <strong class="app-spec-val">Firmada y Verificada</strong>
-              </div>
-              <div class="app-spec-item">
-                <span class="app-spec-label">Modo Offline</span>
-                <strong class="app-spec-val">100% Funcional sin Internet</strong>
-              </div>
-            </div>
-            <div class="app-download-actions">
-              <a href="https://drive.usercontent.google.com/download?id=1gtk1uIlr5lLWhY0sVs6e-p-i-Kl51Nkq&amp;export=download&amp;confirm=t"
-                class="app-download-btn-primary" data-android-release-source="google-drive">
-                <i class="fa-solid fa-download"></i> Descargar APK de BAQUEANO (Build Android)
-              </a>
-              <a href="#apkModal" class="app-download-btn-secondary" onclick="openApkModal(event)">
-                <i class="fa-solid fa-circle-info"></i> Ficha y Guía de Instalación
-              </a>
-            </div>
-          </div>
-          <div class="app-download-visual">
-            <div class="app-phone-mockup">
-              <img src="assets/images/baqueano_launcher_solid.png" alt="Baqueano Android App" width="120" height="120"
-                class="app-preview-icon">
-              <span class="app-mockup-badge">Android Nativo</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="final-cta-section" id="ctaFinalNicaragua">
-      <div class="final-cta-backdrop"></div>
-      <div class="container final-cta-inner">
-        <span class="final-cta-badge"><i class="fa-solid fa-feather-pointed"></i> Tu Próxima Gran Aventura</span>
-        <h2 class="final-cta-headline">
-          HAY UNA NICARAGUA QUE NO APARECE EN LOS MAPAS.<br>
-          <span class="highlight-terra">VENÍ A DESCUBRIRLA.</span>
-        </h2>
-        <p class="final-cta-subtext">
-          El sendero lo abren las comunidades, los volcanes esperan tu huella y el fuego del comal sigue encendido en
-          cada rincón de nuestra tierra.
-        </p>
-        <div class="final-cta-buttons">
-          <a href="#queQueresVivir" class="btn-cta-explore">
-            <i class="fa-solid fa-compass"></i> Explorar Nicaragua
-          </a>
-          <a href="#baqueanoDigitalSection" class="btn-cta-route">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> ✨ Crear mi aventura
-          </a>
-        </div>
-        <div class="final-cta-bot-hint">
-          <img src="assets/images/baqui.png" alt="Baqüi el Guardabarranco" class="final-bot-avatar"
-            onerror="this.src='assets/images/logo.png'">
-          <span>«Buen camino, explorador. La patria te da la bienvenida.»</span>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============================================================================
-       🧭 FOOTER OFICIAL INSTITUCIONAL
-       ============================================================================ -->
-  <footer class="site-footer-pro">
-    <div class="container">
-      <!-- FRANJA DE REDES SOCIALES OFICIALES -->
-      <div class="footer-social-section">
-        <div class="footer-social-label">
-          <i class="fa-solid fa-hashtag"></i> Conéctate con la Comunidad Baqueano
-        </div>
-        <div class="footer-social-row">
-          <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer"
-            class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer"
-            class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank"
-            rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-            <i class="fa-brands fa-tiktok"></i>
-          </a>
-          <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn"
-            title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Grid de Columnas Institucionales -->
-      <div class="footer-columns-grid">
-        <!-- COLUMNA 1: IDENTIDAD -->
-        <div class="footer-col-brand">
-          <div class="brand-box index-inline-041">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo territorial BAQUEANO de áreas protegidas y ecoturismo comunitario de Nicaragua. Guiado local, cero
-            intermediación foránea y soberanía comunitaria.
-          </p>
-          <div class="index-inline-042">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 &amp; 1211
-              INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
-          </div>
-        </div>
-
-        <!-- COLUMNA 2: NAVEGACIÓN -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="#territorioMapaSection"><i class="fa-solid fa-satellite"></i> Territorio Baqueano</a></li>
-            <li><a href="#experienciasComunidad"><i class="fa-solid fa-comments"></i> Experiencias Vivas</a></li>
-            <li><a href="destinos.html">Destinos Protegidos</a></li>
-            <li><a href="historia.html">Historia de Mi País</a></li>
-            <li><a href="ambiental.html">Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html">Cooperativas Aliadas</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i
-                  class="fa-solid fa-handshake-angle index-inline-043"></i> Registrar Mi Negocio</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMNA 3: CONTACTO -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Institucional:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua · 17 Territorios de Nicaragua</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Legal Stack -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos &amp; Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde &amp; Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-      </div>
-
-      <!-- Copyright -->
-      <div class="footer-bottom-bar">
-        <div>
-          © 2026 Baqueano Nicaragua. Catálogo Territorial BAQUEANO de Áreas Protegidas y Ecoturismo Comunitario. Todos
-          los derechos
-          reservados.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============================================================================
-       MODALES DEL SISTEMA (100% PRESERVADOS)
-       ============================================================================ -->
-  <!-- MODAL INTERACTIVO PARA COMPARTIR EXPERIENCIA -->
-  <div class="exp-modal-backdrop" id="modalAddExperience" aria-hidden="true" role="dialog">
-    <div class="exp-modal-card">
-      <div class="exp-modal-header">
-        <h3 class="exp-modal-title"><i class="fa-solid fa-comment-dots"></i> Comparte tu Experiencia</h3>
-        <button type="button" class="exp-modal-close-btn" id="btnCloseExpModal" aria-label="Cerrar">&times;</button>
-      </div>
-
-      <form id="formAddExperience">
-        <div class="exp-form-field">
-          <label for="expAuthor" class="exp-form-label">Tu Nombre Completo *</label>
-          <input type="text" id="expAuthor" class="exp-form-input" placeholder="Ej: María José Morales" required>
-        </div>
-
-        <div class="exp-form-field">
-          <label for="expRoleType" class="exp-form-label">¿Cuál es tu rol en el territorio? *</label>
-          <select id="expRoleType" class="exp-form-select">
-            <option value="turista-local">Turista Nacional (Nicaragüense)</option>
-            <option value="turista-inter">Viajero / Turista Internacional</option>
-            <option value="negocio">Dueño de Negocio / Anfitrión Campesino</option>
-          </select>
-        </div>
-
-        <div class="exp-form-field">
-          <label for="expLocation" class="exp-form-label">Tu Ciudad, País o Comunidad</label>
-          <input type="text" id="expLocation" class="exp-form-input"
-            placeholder="Ej: Estelí, Nicaragua o Madrid, España">
-        </div>
-
-        <div class="exp-form-field">
-          <label for="expRating" class="exp-form-label">Valoración General *</label>
-          <select id="expRating" class="exp-form-select">
-            <option value="5">★★★★★ (5 Estrellas - Extraordinario)</option>
-            <option value="4">★★★★☆ (4 Estrellas - Muy Bueno)</option>
-            <option value="3">★★★☆☆ (3 Estrellas - Bueno)</option>
-          </select>
-        </div>
-
-        <div class="exp-form-field">
-          <label for="expComment" class="exp-form-label">Cuéntanos tu experiencia *</label>
-          <textarea id="expComment" class="exp-form-textarea" rows="3"
-            placeholder="¿Cómo fue tu visita o cómo ha beneficiado Baqueano a tu comunidad o negocio local?"
-            required></textarea>
-        </div>
-
-        <!-- ZONA DE UPLOAD FOTO / VIDEO -->
-        <div class="exp-form-field">
-          <label class="exp-form-label">
-            <i class="fa-solid fa-photo-film" style="color:#F65E01;margin-right:0.35rem;"></i>
-            Foto o Video de tu Experiencia
-            <span class="exp-upload-badge">Opcional</span>
-          </label>
-
-          <!-- Drop Zone -->
-          <div class="exp-upload-zone" id="expUploadZone" role="button" tabindex="0" aria-label="Subir foto o video">
-            <input type="file" id="expMediaInput" class="exp-upload-hidden" accept="image/*,video/*" multiple
-              aria-hidden="true">
-            <div class="exp-upload-zone-inner">
-              <div class="exp-upload-icon-wrap">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-              </div>
-              <p class="exp-upload-hint-primary">Arrastra o haz clic para subir</p>
-              <p class="exp-upload-hint-secondary">Imágenes (JPG, PNG, WEBP) · Videos (MP4, MOV) · Máx. 4 archivos</p>
-              <div class="exp-upload-pills">
-                <span class="exp-upload-pill"><i class="fa-solid fa-image"></i> Foto</span>
-                <span class="exp-upload-pill"><i class="fa-solid fa-clapperboard"></i> Video</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Previews -->
-          <div class="exp-media-preview-grid" id="expMediaPreviewGrid" aria-live="polite"></div>
-        </div>
-
-        <div class="exp-modal-actions">
-          <button type="button" class="btn-exp-cancel" id="btnCancelExpModal">Cancelar</button>
-          <button type="submit" class="btn-exp-submit">
-            <i class="fa-solid fa-paper-plane"></i> Publicar Experiencia
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 
@@ -3863,6 +3973,44 @@
       });
     })();
   </script>
+
+  <script>
+    // Helpers para apertura y cierre del Modal de Registro de Negocios
+    function openBizRegisterModal(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      var m = document.getElementById('bizRegisterModal');
+      if (m) {
+        m.classList.add('is-open');
+        m.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        var formCollapse = document.getElementById('bizFormCollapse');
+        if (formCollapse) {
+          formCollapse.classList.add('is-expanded');
+          formCollapse.setAttribute('aria-hidden', 'false');
+        }
+        var first = document.getElementById('bizName');
+        if (first) setTimeout(function() { first.focus(); }, 120);
+      }
+    }
+    function closeBizRegisterModal() {
+      var m = document.getElementById('bizRegisterModal');
+      if (m) {
+        m.classList.remove('is-open');
+        m.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      }
+    }
+    // Cerrar al hacer clic en el backdrop
+    document.addEventListener('DOMContentLoaded', function() {
+      var m = document.getElementById('bizRegisterModal');
+      if (m) {
+        m.addEventListener('click', function(ev) {
+          if (ev.target === m) closeBizRegisterModal();
+        });
+      }
+    });
+  </script>
+
 </body>
 
 </html>

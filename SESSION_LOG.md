@@ -22,7 +22,35 @@
 ============================================================================
 -->
 
-# 🧭 BITÁCORA DE SESIONES Y CONSULTAS — BAQUEANO NICARAGUA
+<!-- Consulta completada (27-09-2026): rediseño del menú lateral plegable de Android. -->
+
+## Menú lateral plegable de la aplicación Android
+
+### Ajuste solicitado — todos los botones individuales
+
+- **Consulta:** Mostrar todos los accesos como botones independientes y habilitar desplazamiento vertical cuando excedan la altura disponible.
+- **Decisión:** Mantener categorías únicamente como separadores visuales; cada ruta será un botón visible dentro de un `ListView` vertical, sin ocultarla en submenús.
+- **Estado:** Completado. Todos los accesos anteriores están visibles como botones independientes; el menú amplio y el móvil cuentan con scroll vertical y una guía de desplazamiento discreta.
+- **Validación:** Análisis estático limpio y 31 pruebas automatizadas aprobadas.
+
+- **POR QUÉ:** El menú anterior tenía demasiada densidad visual y no ofrecía la apertura y contracción lateral solicitada.
+- **CÓMO:** `ResponsiveScaffold` ahora usa un sidebar izquierdo animado en tablet/pantalla amplia (272 px expandido y 76 px contraído) y un drawer refinado desde el borde izquierdo en móvil. Se añadieron iconos consistentes, búsqueda, agrupación semántica, ruta activa, tooltips y `RepaintBoundary`.
+- **QUÉ:** Se modificó `lib/core/widgets/responsive_scaffold.dart`; no se eliminaron rutas y se conservaron la navegación inferior y los accesos existentes.
+- **Validación:** `flutter analyze lib/core/widgets/responsive_scaffold.dart` sin incidencias y `flutter test` con 31 pruebas aprobadas.
+## Reorganización Narrativa del Index y Reducción del Scroll Vertical (27-09-2026)
+
+- **POR QUÉ:** El inicio presentaba reiteraciones temáticas de la misma propuesta de valor ("0% comisión / sin intermediarios", duplicación de SOS en Confianza y catálogo redundante de servicios con locales aliados), produciendo una sensación de "mucho scroll" y catálogo interminable antes de presentar las funcionalidades más innovadoras.
+- **CÓMO:**
+  1. **Reorganización en 15 Secciones Estratégicas:**
+     `Hero cinematográfico → El problema + propuesta → ¿Qué querés vivir? → Destinos que Inspiran → Mapa Interactivo → BAQUEANO DIGITAL (IA) → Nicaragua Viva → Servicios + Negocios Verificados (Fusión ①) → ¿Por qué BAQUEANO? (Pilares) → SOS 24/7 (Fusión ②) → Impacto / Cifras → Historias / experiencias → Para Negocios (Fusión ③) → App Android → CTA Final`.
+  2. **Fusión ① (Servicios Turísticos + Locales Aliados):** Se integraron en `#serviciosTuristicosSection` las 8 categorías de servicios (`Dormir, Comer, Guías, Transporte, Experiencias, Servicios, Emergencias, Comercio`) con una nueva vitrina destacada de 6 establecimientos reales recomendados en el territorio, preservando además los tracks infinitos `#partnersTrackA` y `#partnersTrackB` para sincronización dinámica con el CMS.
+  3. **Fusión ② (Confianza + SOS 24/7):** En `#impactosBaqueanoSection` (Pilar Confianza), se eliminaron los detalles y teléfonos de emergencia duplicados, enfocándolo estrictamente en cartografía satelital WGS-84 y auditoría comunitaria. La sección `#sosSeguridadSection` queda como el punto único de auxilio (128 Cruz Blanca, 115 Bomberos, 118 Policía y Centro SOS con hardware GNSS).
+  4. **Fusión ③ (Turismo Comunitario + Economía Local + Red de Anfitriones):** Se sintetizó el discurso de "0% comisiones" convirtiéndolo en un atributo de marca recurrente (`0% intermediación · Trato directo · Negocios verificados en campo`). La sección `#redDeAnfitrionesSection` se redujo a una tarjeta editorial ágil con 4 micro-atributos de valor, trasladando el formulario completo de 16 campos al modal dialog `#bizRegisterModal`, preservando validaciones, Firestore y WhatsApp sin saturar la página principal.
+- **QUÉ:**
+  - Modificación de [index.html](file:///d:/Desktop/APP%20BAQUEANO/website/index.html) con balance exacto de etiquetas (15/15 secciones, 1/1 main, 5/5 forms).
+  - Modificación de [index.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/pages/index.css) con estilos para `.services-allies-unified-section`, `.unified-allies-showcase` y `.biz-register-modal-dialog`.
+  - Reducción aproximada del 25% al 30% del largo visual del index sin pérdida de interactividad ni código existente.
+  - Cero incidencias en consola y 100% de cumplimiento de directivas de no uso de términos prohibidos.
 
 ---
 

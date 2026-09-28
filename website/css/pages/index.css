@@ -4098,3 +4098,215 @@ html[data-section-colors-custom] .index-main-flow :is(
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================================
+   🧭 ARQUITECTURA DE FUSIÓN EDITORIAL: SERVICIOS + NEGOCIOS VERIFICADOS & MODAL
+   🎯 POR QUÉ: Disminuir el scroll vertical en un 25-30% unificando categorías con
+      establecimientos reales recomendados y alojando el registro en modal ágil.
+   ⚙️ CÓMO: Grid responsivo, glassmorphism con #165D6F, #F65E01, #F4E6C1 y #0F172A,
+      micro-interacciones a 60fps y safe-area insets.
+   📦 QUÉ: .services-allies-unified-section, .unified-allies-showcase, .biz-register-modal-dialog
+   ============================================================================ */
+.services-allies-unified-section {
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.services-allies-unified-section .services-travel-grid {
+  margin-bottom: 2.5rem;
+}
+
+.unified-allies-showcase {
+  margin-top: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(244, 230, 193, 0.12);
+}
+
+.unified-allies-lead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.unified-allies-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #F65E01;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.unified-allies-title {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.unified-allies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.unified-ally-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(22, 93, 111, 0.16);
+  border: 1px solid rgba(244, 230, 193, 0.14);
+  border-radius: 16px;
+  padding: 1.25rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.unified-ally-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(246, 94, 1, 0.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.unified-ally-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.unified-ally-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(246, 94, 1, 0.18);
+  border: 1px solid rgba(246, 94, 1, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F65E01;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.unified-ally-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.unified-ally-name {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.unified-ally-territory {
+  font-size: 0.78rem;
+  color: #F4E6C1;
+  opacity: 0.88;
+}
+
+.unified-ally-desc {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #CBD5E1;
+  margin: 0 0 1rem;
+  flex-grow: 1;
+}
+
+.unified-ally-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.75rem;
+  margin-top: auto;
+}
+
+.unified-ally-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.74rem;
+  color: #10B981;
+  font-weight: 600;
+}
+
+.unified-ally-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #F65E01;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.unified-ally-link:hover {
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+/* Modal de Registro de Negocios Agilizado */
+.biz-register-modal-dialog {
+  width: min(820px, calc(100vw - 2rem));
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(246, 94, 1, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  color: #FFFFFF;
+}
+
+.biz-modal-header-top {
+  margin-bottom: 1.25rem;
+}
+
+.biz-register-modal-dialog .biz-form-collapse {
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.biz-actions-compact-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+.biz-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(22, 93, 111, 0.35);
+  border: 1px solid rgba(244, 230, 193, 0.28);
+  color: #F4E6C1;
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.biz-btn-secondary:hover {
+  background: rgba(22, 93, 111, 0.6);
+  border-color: #F65E01;
+  color: #FFFFFF;
+}
+
