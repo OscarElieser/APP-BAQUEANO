@@ -197,7 +197,8 @@
         tab.classList.toggle('active', tab === button); tab.setAttribute('aria-pressed', String(tab === button));
       });
       const view = button.dataset.view;
-      mapPanel.hidden = view === 'list'; listPanel.hidden = view === 'map';
+      mapPanel.hidden = false; mapPanel.classList.toggle('view-controls-only', view === 'list');
+      listPanel.hidden = view === 'map';
       splitGrid.classList.toggle('single-panel', view !== 'both');
       if (view !== 'list') setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
     }));

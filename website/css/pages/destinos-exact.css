@@ -866,6 +866,9 @@
    ============================================================================ */
 .destinos-split-grid.single-panel { grid-template-columns: 1fr; }
 .destinos-map-panel[hidden], .destinos-destacados-panel[hidden], .dest-catalog-card[hidden], .dest-highlight-card[hidden] { display: none !important; }
+.destinos-map-panel.view-controls-only { min-height: 0; background: transparent; box-shadow: none; overflow: visible; }
+.destinos-map-panel.view-controls-only .destinos-map-viewport,
+.destinos-map-panel.view-controls-only .destinos-map-preview-card { display: none !important; }
 .destinos-filters-left { position: relative; }
 .dest-filter-menu {
   position: absolute; z-index: 1200; top: calc(100% + 6px); min-width: 180px;

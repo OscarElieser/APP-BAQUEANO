@@ -412,7 +412,7 @@
                   <h3>Explorá Nicaragua en el mapa</h3>
                   <p>Descubrí destinos, negocios locales y experiencias cerca de vos.</p>
                 </div>
-                <a href="destinos.html" class="map-btn-interactive">
+                <a href="mapa.html" class="map-btn-interactive">
                   Abrir mapa interactivo <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
@@ -452,17 +452,17 @@
               <p class="ai-desc-text">
                 Contame qué querés vivir y te creo un itinerario personalizado con destinos, precios y mapa.
               </p>
-              <button type="button" class="ai-btn-plan" id="btnLaunchIaPlanner" onclick="openBaqueanoAssistant('Recomiéndame una ruta personalizada por Nicaragua con presupuesto y mapa')">
+              <a class="ai-btn-plan" id="btnLaunchIaPlanner" href="baqueano-ai.html?prompt=ruta-personalizada">
                 Planificar mi aventura <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
-              </button>
+              </a>
 
               <!-- Chips de Solicitudes Rápidas -->
               <div class="ai-chips-wrap">
-                <button type="button" class="ai-quick-chip" onclick="openBaqueanoAssistant('Tengo C$1,500 para viajar por Nicaragua')">💵 Tengo C$1,500</button>
-                <button type="button" class="ai-quick-chip" onclick="openBaqueanoAssistant('Quiero conocer las mejores playas de Nicaragua')">🏖️ Quiero playa</button>
-                <button type="button" class="ai-quick-chip" onclick="openBaqueanoAssistant('Viajo con niños por Nicaragua, qué actividades familiares recomiendas')">👨‍👩‍👧 Viajo con niños</button>
-                <button type="button" class="ai-quick-chip" onclick="openBaqueanoAssistant('Quiero aventura extrema y senderismo volcánico')">🧗 Quiero aventura</button>
-                <button type="button" class="ai-quick-chip" onclick="openBaqueanoAssistant('Qué destinos y comidas auténticas tengo cerca de mi ubicación')">📍 Algo cerca</button>
+                <a class="ai-quick-chip" href="baqueano-ai.html?prompt=presupuesto-1500">💵 Tengo C$1,500</a>
+                <a class="ai-quick-chip" href="baqueano-ai.html?prompt=playas">🏖️ Quiero playa</a>
+                <a class="ai-quick-chip" href="baqueano-ai.html?prompt=viaje-con-ninos">👨‍👩‍👧 Viajo con niños</a>
+                <a class="ai-quick-chip" href="baqueano-ai.html?prompt=aventura">🧗 Quiero aventura</a>
+                <a class="ai-quick-chip" href="baqueano-ai.html?prompt=cerca-de-mi">📍 Algo cerca</a>
               </div>
             </div>
           </div>
@@ -552,12 +552,12 @@
             <h2>Experiencias Destacadas</h2>
             <p>Viví Nicaragua de una forma diferente.</p>
           </div>
-          <a href="destinos.html?cat=aventura" class="section-header-link">Ver todas las experiencias <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="experiencias.html" class="section-header-link">Ver todas las experiencias <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="experiences-row-exact">
           <!-- 1. Aventura en Volcanes -->
-          <a href="destinos.html?cat=volcanes" class="exp-card-exact">
+          <a href="experiencias.html?categoria=volcan" class="exp-card-exact">
             <img src="assets/images/destinos/cerro_negro.jpg" alt="Aventura en Volcanes" class="exp-card-bg" loading="lazy">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
@@ -583,7 +583,7 @@
           </a>
 
           <!-- 3. Comunidades Vivas -->
-          <a href="destinos.html?cat=comunitario" class="exp-card-exact">
+          <a href="experiencias.html?categoria=comunitario" class="exp-card-exact">
             <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Comunidades Vivas de Nicaragua" class="exp-card-bg" loading="lazy">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
@@ -596,7 +596,7 @@
           </a>
 
           <!-- 4. Playas de Ensueño -->
-          <a href="destinos.html?cat=playas" class="exp-card-exact">
+          <a href="experiencias.html?categoria=playa" class="exp-card-exact">
             <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Playas de Ensueño" class="exp-card-bg" loading="lazy">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
@@ -620,7 +620,7 @@
           <div class="title-group">
             <h2>Testimonios</h2>
           </div>
-          <a href="destinos.html" class="section-header-link">Ver más testimonios <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="historia.html" class="section-header-link">Ver más historias <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="testimonials-row-exact">
@@ -704,7 +704,7 @@
             <p>Viví experiencias auténticas, conectá con nuestra gente y sé parte de un turismo que cuida.</p>
             <div class="scenic-btns-row">
               <a href="destinos.html" class="scenic-btn-explore">Explorar Nicaragua <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="#baqueanoDigitalCard" class="scenic-btn-route"><i class="fa-solid fa-wand-magic-sparkles"></i> Crear mi ruta con IA</a>
+              <a href="baqueano-ai.html?prompt=crear-ruta" class="scenic-btn-route"><i class="fa-solid fa-wand-magic-sparkles"></i> Crear mi ruta con IA</a>
             </div>
           </div>
         </div>
@@ -1137,83 +1137,18 @@
       }
     }
 
-    // Lanzador de Baqueano Digital Asistente IA
+    // Lanzador defensivo de Baqueano Digital: abre el asistente o su página dedicada.
     function openBaqueanoAssistant(promptText) {
       if (window.BaqueanoAssistant && typeof window.BaqueanoAssistant.sendUserPrompt === 'function') {
         window.BaqueanoAssistant.openDrawer();
         window.BaqueanoAssistant.sendUserPrompt(promptText);
         return;
       }
-    // Inicialización del Mapa Interactivo de Portada (#homeInteractiveMap)
-    document.addEventListener('DOMContentLoaded', function () {
-      const mapEl = document.getElementById('homeInteractiveMap');
-      if (mapEl && typeof L !== 'undefined') {
-        try {
-          const map = L.map('homeInteractiveMap', {
-            center: [12.6, -85.6],
-            zoom: 7,
-            zoomControl: true,
-            attributionControl: false
-          });
-
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
-          }).addTo(map);
-
-          const homePins = [
-            { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "destinos", color: "#10B981" },
-            { name: "Granada Colonial", lat: 11.9344, lng: -85.9560, cat: "destinos", color: "#F65E01" },
-            { name: "San Juan del Sur", lat: 11.2529, lng: -85.8705, cat: "destinos", color: "#0284C7" },
-            { name: "Volcán Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "experiencias", color: "#DC2626" },
-            { name: "Cañón de Somoto", lat: 13.4833, lng: -86.5833, cat: "experiencias", color: "#0D9488" },
-            { name: "Volcán Masaya", lat: 11.9842, lng: -86.1611, cat: "destinos", color: "#DC2626" },
-            { name: "Coop. San Ramón", lat: 11.5200, lng: -85.5500, cat: "negocios", color: "#16A34A" },
-            { name: "Corn Island", lat: 12.1736, lng: -83.0560, cat: "destinos", color: "#0284C7" }
-          ];
-
-          let markers = [];
-          homePins.forEach(function (p) {
-            const m = L.circleMarker([p.lat, p.lng], {
-              radius: 8,
-              fillColor: p.color,
-              color: '#FFFFFF',
-              weight: 2,
-              opacity: 1,
-              fillOpacity: 0.95
-            }).addTo(map).bindPopup(`<strong>${p.name}</strong><br><a href="destinos.html" style="color:#F65E01;font-weight:700;">Ver detalles &rarr;</a>`);
-            m.cat = p.cat;
-            markers.push(m);
-          });
-
-          // Filtros del mapa en el HUD
-          const filterChips = document.querySelectorAll('[data-map-filter]');
-          filterChips.forEach(chip => {
-            chip.addEventListener('click', function () {
-              const filter = this.getAttribute('data-map-filter');
-              if (filter === 'sos') return;
-              filterChips.forEach(c => c.classList.remove('active'));
-              this.classList.add('active');
-
-              markers.forEach(m => {
-                if (filter === 'destinos' || m.cat === filter) {
-                  m.addTo(map);
-                } else {
-                  map.removeLayer(m);
-                }
-              });
-            });
-          });
-
-          setTimeout(() => map.invalidateSize(), 300);
-        } catch (e) {
-          console.warn('[HomeMap] Error:', e);
-        }
-      }
-    });
+      const url = new URL('baqueano-ai.html', window.location.href);
+      if (promptText) url.searchParams.set('consulta', promptText);
+      window.location.href = url.href;
+    }
   </script>
-
-  <!-- Leaflet JS Cartografía -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 </body>
 
 </html>

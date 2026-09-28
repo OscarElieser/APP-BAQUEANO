@@ -1216,3 +1216,42 @@
 - **Consulta del usuario:** Recordatorio explícito de compatibilidad universal entre dispositivos y confirmación de la distribución tecnológica entre Supabase y Firebase.
 - **Archivo actualizado:** `SESSION_LOG.md`.
 - **Estado:** Directiva confirmada y registrada; no se solicitaron cambios de código adicionales en esta consulta.
+
+# 2026-09-27 — Auditoría funcional de botones del catálogo de destinos
+
+- 🎯 **POR QUÉ (Propósito):** Corregir los controles que solo tenían presentación visual y asegurar que el explorador pueda buscar, filtrar, guardar, navegar y consultar destinos desde cualquier dispositivo.
+- ⚙️ **CÓMO (Arquitectura e implementación):** Se añadió un controlador desacoplado que indexa las tarjetas renderizadas, administra estado accesible, conserva favoritos y destinos de viaje en `localStorage`, sincroniza parámetros con la URL y adapta las vistas de mapa/lista sin bloquear la interfaz.
+- 📦 **QUÉ (Entregables):** Quedaron funcionales la búsqueda, categorías, departamento, precio, valoración, verificados, cerca de mí, ordenamiento, Mapa/Lista/Ambos, favoritos, Mi Viaje, detalle, Ver todos, paginación, menú Más y acceso SOS de `destinos.html`.
+- **Corrección adicional detectada en pruebas:** El modo Lista ocultaba inicialmente el selector de vistas; se mantuvo visible para permitir regresar a Mapa o Ambos.
+- **Archivos modificados:** `website/destinos.html`, `website/css/pages/destinos-exact.css`, `website/js/destinos-interactions.js` y `SESSION_LOG.md`.
+- **Validación:** Sintaxis JavaScript limpia; pruebas de humo de producción aprobadas; recorrido Playwright aprobado en móvil (390×844), tablet (820×1180) y escritorio (1440×1000), sin errores de página.
+
+# 2026-09-27 — Alineación 1:1 del Footer Oficial de BAQUEANO con Imagen de Referencia
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - Dotar a la plataforma web de un pie de página institucional definitivo y de alta fidelidad visual que refleje con total exactitud la identidad soberana de BAQUEANO.
+  - Ofrecer al explorador una navegación perimetral clara hacia los 4 pilares informativos del ecosistema (Explorá, Nosotros, Información, Legal), reforzando el arraigo cultural con el sello de identidad "Nicaragua Auténtica".
+
+- ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+  - **Fondo Panorámico Oficial:** Integración de `website/assets/images/footer.png` como fondo de alta resolución (2172×724) con gradiente multi-parada sutil (`rgba(7, 22, 38, 0.50)` a `rgba(5, 16, 28, 0.70)`), eliminando cualquier texto fantasma o duplicidad con el diseño de fondo.
+  - **Columna de Marca:**
+    - Logo oficial del volcán con ojo central (`assets/images/logo.png`), título "BAQUEANO", subtítulo "NICARAGUA AUTÉNTICA" y lema institucional "DESCUBRE LO QUE NO SALE EN EL MAPA."
+    - Tres botones circulares de redes sociales oficiales (Instagram, Facebook, TikTok) con microinteracciones de elevación y tono verde esmeralda al posar el cursor.
+  - **Cuatro Columnas de Navegación Temática:**
+    - *Explorá:* Inicio, Destinos, Mapa, Experiencias, Baqueano Digital.
+    - *Nosotros:* Nuestra historia, Misión y visión, Equipo, Aliados, Impacto.
+    - *Información:* Blog, Contacto, Preguntas frecuentes.
+    - *Legal:* Términos y condiciones, Política de privacidad, Cookies, Aviso legal.
+    - Cada encabezado (`h4`) cuenta con una barra de acento horizontal verde esmeralda (`#10B981`) de 22px de ancho.
+  - **Flanco Derecho — Sello "Nicaragua Auténtica":**
+    - Tipografía caligráfica artesanal `'Caveat', 'Brush Script MT', cursive` en ángulo ascendente (-6°), con isotipo de hoja verde (`#10B981`) y trazo curvado de pincel subrayado con resplandor suave.
+  - **Subfooter de Copyright Centrado:**
+    - Barra inferior delimitada por borde sutil con texto `© 2026 BAQUEANO. Todos los derechos reservados. | Hecho con ❤️ en Nicaragua`.
+  - **Validación Visual en Navegador:** Verificado mediante subagente de navegación con captura de pantalla (`footer_rendered_1790573404473.png`), comprobando resolución nítida y correspondencia 1:1 en móvil y escritorio.
+
+- 📦 **QUÉ (What / Entregables):**
+  - Clase `.official-footer-exact` y subcomponentes responsivos en `website/css/layout.css`.
+  - Integración del footer oficial y corrección de rutas de logotipo en `website/404.html`.
+  - Auditoría global de enlaces: 0 enlaces rotos, 0 términos prohibidos en 25 documentos HTML.
+  - Registro de sesión en `SESSION_LOG.md`.
+
