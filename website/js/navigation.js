@@ -47,7 +47,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-v10-final'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-hnav-v1'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
@@ -489,10 +489,11 @@ function initActionRipples() {
 }
 
 /**
- * 🎯 POR QUÉ: el menú horizontal se saturaba en tablets, portátiles y escritorios medianos.
- * ⚙️ CÓMO: convierte la navegación compartida en un drawer izquierdo accesible, con
- * fondo de cierre, bloqueo del documento, tecla Escape y restauración del foco.
- * 📦 QUÉ: panel lateral reutilizable en todas las páginas sin duplicar su HTML.
+ * 🎯 POR QUÉ: Brindar un menú móvil desplegable limpio, accesible y fluido
+ * sin alterar la estructura del menú horizontal en pantallas medianas y de escritorio.
+ * ⚙️ CÓMO: Maneja la clase .mobile-open sobre navLinksMenu sin inyectar elementos
+ * invasivos en el DOM que contaminen la barra de navegación horizontal.
+ * 📦 QUÉ: Controlador reactivo de apertura/cierre, backdrop y navegación móvil.
  */
 function initMobileMenu() {
   const toggleBtn = document.getElementById('mobileNavToggle');
@@ -502,117 +503,8 @@ function initMobileMenu() {
   if (navMenu.dataset.drawerInitialized === 'true') return;
   navMenu.dataset.drawerInitialized = 'true';
 
-  // El menú público conserva el patrón lateral del Ops Center en cualquier viewport.
-  const compactNavigation = window.matchMedia('(min-width: 0px)');
-  const navInner = toggleBtn.closest('.nav-inner');
-  const brand = navInner?.querySelector('.brand-box');
-
-  let drawerHeader = navMenu.querySelector('.nav-drawer-header');
-  if (!drawerHeader) {
-    drawerHeader = document.createElement('div');
-    drawerHeader.className = 'nav-drawer-header';
-    drawerHeader.innerHTML = `
-      <span class="nav-drawer-brand-mark"><img src="assets/images/logo.png" alt="" width="42" height="42"></span>
-      <span class="nav-drawer-identity">
-        <span class="nav-drawer-kicker">CENTRO DE EXPLORACIÓN</span>
-        <strong>BAQUEANO</strong>
-        <small><i aria-hidden="true"></i> Red territorial activa</small>
-      </span>
-      <button class="nav-drawer-close" type="button" aria-label="Cerrar menú de navegación">
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-      </button>`;
-    navMenu.prepend(drawerHeader);
-  }
-
-  // ========================================================================
-  // JERARQUÍA OPERATIVA DEL DRAWER PÚBLICO
-  // POR QUÉ: una lista plana dificulta escanear el menú y no replica la lectura
-  // por módulos que caracteriza al sidebar del centro de operaciones.
-  // CÓMO: inserta controles de acordeón antes de cada bloque y asocia cada
-  // destino directo con su grupo, sin duplicar ni alterar sus enlaces.
-  // QUÉ: tres grupos públicos desplegables: descubrir, planificar/conectar y cuenta/IA.
-  // ========================================================================
-  if (!navMenu.querySelector('.nav-ops-group-title')) {
-    const directNavigationItems = () => [...navMenu.children].filter((item) =>
-      item.matches('a, .nav-dropdown') && !item.classList.contains('nav-drawer-footer')
-    );
-    const insertGroupBefore = (targetLabel, number, title) => {
-      const target = directNavigationItems().find((item) => item.querySelector('.nav-label')?.textContent.trim() === targetLabel);
-      if (!target) return;
-      const heading = document.createElement('button');
-      heading.className = 'nav-ops-group-title';
-      heading.type = 'button';
-      heading.dataset.groupId = `public-nav-group-${number}`;
-      heading.setAttribute('aria-expanded', 'false');
-      heading.setAttribute('aria-controls', heading.dataset.groupId);
-      heading.innerHTML = `<span class="nav-ops-group-number">${number}</span><b>${title}</b><small></small><i class="fa-solid fa-chevron-down" aria-hidden="true"></i>`;
-      navMenu.insertBefore(heading, target);
-    };
-    insertGroupBefore('Explorar', '01', 'Descubrir Nicaragua');
-    insertGroupBefore('Servicios', '02', 'Planificar y conectar');
-    const hasProfile = directNavigationItems().some((item) => item.querySelector('.nav-label')?.textContent.trim() === 'Perfil');
-    insertGroupBefore(hasProfile ? 'Perfil' : 'Baqueano AI', '03', 'Cuenta e inteligencia');
-  }
-
-  const groupButtons = [...navMenu.querySelectorAll(':scope > .nav-ops-group-title')];
-  const groupItems = new Map();
-  groupButtons.forEach((button, index) => {
-    const items = [];
-    let sibling = button.nextElementSibling;
-    while (sibling && !sibling.classList.contains('nav-ops-group-title') && !sibling.classList.contains('nav-drawer-footer')) {
-      if (sibling.matches('a, .nav-dropdown')) {
-        sibling.dataset.navGroup = button.dataset.groupId;
-        items.push(sibling);
-      }
-      sibling = sibling.nextElementSibling;
-    }
-    groupItems.set(button.dataset.groupId, items);
-    const counter = button.querySelector('small');
-    if (counter) counter.textContent = `${items.length} accesos`;
-    button.dataset.groupIndex = String(index);
-  });
-
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const activeGroupButton = groupButtons.find((button) =>
-    (groupItems.get(button.dataset.groupId) || []).some((item) =>
-      [...item.querySelectorAll('a[href]'), ...(item.matches('a[href]') ? [item] : [])]
-        .some((link) => (link.getAttribute('href') || '').split('/').pop().split('#')[0] === currentPage)
-    )
-  );
-
-  const setExpandedGroup = (selectedButton) => {
-    groupButtons.forEach((button) => {
-      const isExpanded = button === selectedButton;
-      button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-      button.classList.toggle('is-expanded', isExpanded);
-      (groupItems.get(button.dataset.groupId) || []).forEach((item) => {
-        item.classList.toggle('nav-ops-item-collapsed', !isExpanded);
-        if (!isExpanded && item.classList.contains('is-open')) {
-          item.classList.remove('is-open');
-          item.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-  };
-
-  const initialGroupButton = activeGroupButton || groupButtons[0];
-  if (initialGroupButton) setExpandedGroup(initialGroupButton);
-  groupButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const nextButton = button.classList.contains('is-expanded') ? null : button;
-      setExpandedGroup(nextButton);
-    });
-  });
-
-  let drawerFooter = navMenu.querySelector('.nav-drawer-footer');
-  if (!drawerFooter) {
-    drawerFooter = document.createElement('div');
-    drawerFooter.className = 'nav-drawer-footer';
-    drawerFooter.innerHTML = `
-      <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><b>Navegación protegida</b><small>Asistencia territorial disponible</small></span>
-      <a href="baqueano-ai.html#planner" aria-label="Abrir el planificador de Baqueano"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`;
-    navMenu.appendChild(drawerFooter);
-  }
+  // Limpieza defensiva de cualquier residuo invasivo que contamine el menú horizontal
+  navMenu.querySelectorAll('.nav-drawer-header, .nav-ops-group-title, .nav-drawer-footer').forEach((el) => el.remove());
 
   let backdrop = document.querySelector('.nav-drawer-backdrop');
   if (!backdrop) {
@@ -625,18 +517,22 @@ function initMobileMenu() {
     document.body.appendChild(backdrop);
   }
 
-  const closeBtn = drawerHeader.querySelector('.nav-drawer-close');
-
   const setMenuState = (isOpen, restoreFocus = false) => {
     navMenu.classList.toggle('mobile-open', isOpen);
-    document.body.classList.toggle('nav-drawer-open', isOpen && compactNavigation.matches);
+    document.body.classList.toggle('nav-drawer-open', isOpen);
     toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     toggleBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
     backdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    if (compactNavigation.matches) navMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    else navMenu.removeAttribute('aria-hidden');
-    if (isOpen) window.requestAnimationFrame(() => closeBtn?.focus());
-    else if (restoreFocus) toggleBtn.focus();
+    const icon = toggleBtn.querySelector('i');
+    if (icon) {
+      icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    }
+    if (isOpen) {
+      const firstLink = navMenu.querySelector('a');
+      if (firstLink) window.requestAnimationFrame(() => firstLink.focus());
+    } else if (restoreFocus) {
+      toggleBtn.focus();
+    }
   };
 
   const toggleMenu = () => {
@@ -653,32 +549,36 @@ function initMobileMenu() {
     toggleMenu();
   });
 
-  closeBtn?.addEventListener('click', () => closeMenu(true));
   backdrop.addEventListener('click', () => closeMenu(true));
 
-  // Cerrar al hacer clic en cualquier enlace
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => closeMenu());
+  // Cerrar al hacer clic en enlaces en móvil
+  navMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) closeMenu();
+    });
   });
 
-  // Cerrar al hacer clic fuera del menú o presionar la tecla Escape
+  // Cerrar al hacer clic fuera
   document.addEventListener('click', (e) => {
     if (!navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
       closeMenu();
     }
   });
 
+  // Cerrar con Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu(true);
   });
 
-  compactNavigation.addEventListener?.('change', () => setMenuState(false));
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 992 && navMenu.classList.contains('mobile-open')) {
+      setMenuState(false);
+    }
+  });
+
   setMenuState(false);
 }
 
-/**
- * Identifica la página activa actual y le asigna la clase .active.
- */
 function initActiveNavHighlight() {
   const currentPath = window.location.pathname;
   const pageName = currentPath.split('/').pop() || 'index.html';

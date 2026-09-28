@@ -53,7 +53,7 @@
       { id: 'bq-styles',    href: 'styles.css?v=20260927-exact-1' },
       { id: 'bq-modules',   href: 'css/modules.css' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
-      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
+      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-hnav-v1' },
       { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
