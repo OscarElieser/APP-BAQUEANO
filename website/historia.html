@@ -46,6 +46,25 @@
   <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
   <link rel="stylesheet" href="css/nicaragua-branding.css">
   <link rel="stylesheet" href="css/pages/historia.css">
+  <style id="historyReferenceLayout">
+    /* ======================================================================
+       HISTORIA VIVA — ADAPTACIÓN FIEL DE LA REFERENCIA
+       POR QUÉ: hacer la memoria nacional explorable, visual y fácil de leer.
+       CÓMO: reutiliza la cronología y los 17 territorios en formato compacto.
+       QUÉ: hero, línea del tiempo, mapa territorial y colecciones históricas.
+       ====================================================================== */
+    .page-historia{background:#f7f9fc;color:#0b2947}.page-historia .main-navbar{background:rgba(3,39,66,.96);border-bottom:1px solid rgba(255,255,255,.18)}
+    .page-historia .video-hero-wrapper{height:min(42vw,410px);min-height:370px}.page-historia .video-hero-media{filter:brightness(.75) saturate(1.12);object-position:center 52%}.page-historia .video-hero-gradient{background:linear-gradient(90deg,rgba(3,31,49,.94),rgba(3,31,49,.34) 62%,rgba(3,31,49,.08))}.page-historia .video-hero-scanlines{display:none}.page-historia .video-hero-content{max-width:1180px;width:100%;left:50%;transform:translate(-50%,-44%);padding:0 30px;text-align:left;align-items:flex-start}.page-historia .video-hero-badge{background:transparent!important;border:0!important;padding:0!important;color:#09c985!important;letter-spacing:.14em!important}.page-historia .video-hero-title{max-width:700px;font:900 clamp(2.8rem,5.3vw,5rem)/.93 'Montserrat',sans-serif;letter-spacing:-.045em;text-shadow:0 4px 24px rgba(0,0,0,.45)}.history-title-accent{color:#ff6813;font-style:italic}.page-historia .video-hero-subtitle{max-width:570px;font-size:1rem;color:#fff}.history-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.history-hero-action{min-height:44px;padding:0 20px;border-radius:13px;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:800 .8rem 'Inter',sans-serif}.history-hero-action.primary{background:#ff6813;color:#fff}.history-hero-action.secondary{border:1px solid rgba(255,255,255,.84);background:rgba(3,39,66,.34);color:#fff;backdrop-filter:blur(10px)}
+    .page-historia .page-wrapper{padding:0}.page-historia .history-section-pro{padding:18px 24px 40px}.page-historia .history-section-pro>.container{max-width:1180px}.history-section-heading{display:flex;gap:12px;align-items:center;margin:0 0 12px}.history-section-heading i{font-size:1.55rem;color:#ff6813}.history-section-heading h2{margin:0;font:900 1.4rem 'Montserrat',sans-serif}.history-section-heading p{margin:3px 0 0;color:#60758b;font-size:.78rem}
+    .page-historia .timeline-periods-flow{display:grid!important;grid-template-columns:repeat(7,minmax(145px,1fr))!important;gap:10px!important;overflow-x:auto!important;padding:4px 2px 12px!important;margin:0 0 18px!important;scrollbar-width:thin}.page-historia .timeline-period-card{min-width:145px!important;margin:0!important;padding:0!important;border:1px solid #e1e8ed!important;border-radius:14px!important;background:#fff!important;box-shadow:0 6px 18px rgba(12,44,70,.07)!important;overflow:hidden!important}.page-historia .timeline-period-badge{position:absolute!important;left:8px!important;top:94px!important;width:22px!important;height:22px!important;font-size:.65rem!important;background:#ff6813!important;z-index:3}.page-historia .timeline-content-box{display:flex!important;flex-direction:column-reverse!important;padding:0!important;background:#fff!important;border:0!important;box-shadow:none!important}.page-historia .timeline-text-side{padding:10px!important}.page-historia .timeline-era-tag{padding:0!important;background:none!important;color:#60758b!important;font-size:.6rem!important}.page-historia .timeline-text-side h3{margin:4px 0!important;color:#0b2947!important;font-size:.76rem!important;line-height:1.2!important}.page-historia .timeline-text-side p{font-size:.62rem!important;line-height:1.35!important;color:#60758b!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.page-historia .timeline-img-side{width:100%!important;height:112px!important}.page-historia .timeline-media-img{height:112px!important;width:100%!important;object-fit:cover!important}.page-historia .timeline-img-caption{display:none!important}
+    .page-historia .history-section-pro>.container>div[style*="background: rgba(15, 23, 42"]{display:none!important}.page-historia .section-lead-header{margin:20px 0 10px!important;text-align:left!important}.page-historia .section-lead-header .badge-section-pill{display:none!important}.page-historia .section-headline{color:#0b2947!important;-webkit-text-fill-color:#0b2947!important;background:none!important;font:900 1.4rem 'Montserrat',sans-serif!important}.page-historia .section-subtext{color:#60758b!important;font-size:.78rem!important}
+    .history-territory-layout{display:grid;grid-template-columns:1.25fr .9fr;gap:14px;align-items:stretch;margin-bottom:22px}.history-map-visual{position:relative;min-height:390px;border-radius:16px;overflow:hidden;background:linear-gradient(rgba(7,111,100,.12),rgba(7,111,100,.12)),url('assets/images/footer-nicaragua-panorama.png') center/cover;box-shadow:0 10px 26px rgba(12,44,70,.12)}.history-map-visual::after{content:'NICARAGUA';position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font:900 2.1rem 'Montserrat',sans-serif;letter-spacing:.15em;color:rgba(255,255,255,.7);text-shadow:0 2px 12px rgba(0,0,0,.5)}.history-map-pin{position:absolute;z-index:2;width:42px;height:42px;border:3px solid #fff;border-radius:50%;overflow:hidden;box-shadow:0 5px 12px rgba(0,0,0,.3)}.history-map-pin img{width:100%;height:100%;object-fit:cover}.history-map-pin.m1{left:20%;top:30%}.history-map-pin.m2{left:39%;top:20%}.history-map-pin.m3{left:49%;top:44%}.history-map-pin.m4{left:65%;top:58%}.history-map-pin.m5{right:13%;bottom:14%}.history-map-pin.m6{left:27%;bottom:14%}.page-historia .territories-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:5px!important;padding:14px!important;border:1px solid #e1e8ed!important;border-radius:16px!important;background:#fff!important;max-height:390px!important;overflow-y:auto!important}.page-historia .territory-pill-card{min-height:37px!important;padding:4px 7px!important;border:1px solid #e5ebef!important;border-radius:8px!important;background:#fff!important;display:flex!important;align-items:center!important;gap:7px!important}.page-historia .territory-pill-img-wrap{width:42px!important;height:28px!important;min-width:42px!important;border-radius:5px!important}.page-historia .territory-pill-thumb{width:100%!important;height:100%!important;object-fit:cover!important}.page-historia .territory-pill-video-tag,.page-historia .territory-pill-info span{display:none!important}.page-historia .territory-pill-info h5{font-size:.67rem!important;color:#0b2947!important;margin:0!important}.page-historia .territories-action-banner{display:none!important}
+    .history-collection{margin:22px 0}.history-collection-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}.history-collection h2{margin:0;font:900 1.25rem 'Montserrat',sans-serif}.history-collection p{margin:2px 0 0;font-size:.75rem;color:#60758b}.history-card-grid{display:grid;gap:10px}.history-card-grid.five{grid-template-columns:repeat(5,1fr)}.history-card-grid.six{grid-template-columns:repeat(6,1fr)}.history-mini-card{position:relative;min-height:165px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #e1e8ed;box-shadow:0 6px 16px rgba(12,44,70,.07)}.history-mini-card img{width:100%;height:105px;object-fit:cover}.history-mini-card-body{padding:9px}.history-mini-card strong{display:block;font-size:.73rem;color:#0b2947}.history-mini-card span{display:block;margin-top:3px;font-size:.61rem;line-height:1.3;color:#60758b}.history-compare-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.history-compare-card{border-radius:13px;overflow:hidden;background:#fff;border:1px solid #e1e8ed}.history-compare-images{height:125px;display:grid;grid-template-columns:1fr 1fr;gap:2px}.history-compare-images img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}.history-compare-images img:last-child{filter:none}.history-compare-card strong{display:block;padding:9px;font-size:.7rem}
+    .history-listen{margin:22px 0;padding:18px 22px;display:flex;align-items:center;gap:16px;border:1px solid #dfe7ec;border-radius:17px;background:linear-gradient(120deg,#f1fbf9,#f5f8ff)}.history-listen-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#0b4c63;color:#fff;font-size:1.3rem}.history-listen-copy{flex:1}.history-listen h2{margin:0;font:900 1.2rem 'Montserrat',sans-serif}.history-listen p{margin:3px 0;color:#60758b;font-size:.75rem}.history-wave{height:36px;min-width:240px;background:repeating-linear-gradient(90deg,#66b8ce 0 2px,transparent 2px 6px);mask:linear-gradient(0deg,transparent 10%,#000 30% 70%,transparent 90%)}.history-sources{margin:20px 0;padding:16px;border-radius:15px;background:#fff;border:1px solid #e1e8ed}.history-source-row{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:10px}.history-source-pill{min-height:54px;padding:8px;border:1px solid #e5eaee;border-radius:10px;display:grid;place-items:center;text-align:center;font-size:.66rem;font-weight:800;color:#173b5c}
+    .history-final-banner{margin:26px -24px -40px;padding:38px max(24px,calc((100vw - 1180px)/2));background:linear-gradient(90deg,rgba(3,31,49,.88),rgba(3,31,49,.25)),url('assets/images/footer-nicaragua-panorama.png') center/cover;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px}.history-final-banner h2{margin:0;font:900 1.5rem 'Montserrat',sans-serif}.history-final-banner p{margin:4px 0 0;font-size:.8rem}.history-final-banner a{padding:13px 18px;border-radius:12px;background:#ff6813;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap}
+    @media(max-width:900px){.history-territory-layout{grid-template-columns:1fr}.history-card-grid.five{grid-template-columns:repeat(3,1fr)}.history-card-grid.six{grid-template-columns:repeat(3,1fr)}.history-compare-grid{grid-template-columns:repeat(2,1fr)}.history-source-row{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.page-historia .video-hero-wrapper{height:530px;min-height:530px}.page-historia .video-hero-content{padding:0 20px}.page-historia .video-hero-title{font-size:2.8rem}.page-historia .history-section-pro{padding-left:12px;padding-right:12px}.history-card-grid.five,.history-card-grid.six{grid-template-columns:repeat(2,1fr)}.history-listen{flex-wrap:wrap}.history-wave{width:100%}.history-final-banner{margin-left:-12px;margin-right:-12px;flex-direction:column;align-items:flex-start}}
+  </style>
 </head>
 <body class="has-video-hero page-historia">
 
@@ -198,11 +217,14 @@
       <div class="video-hero-badge">
         <i class="fa-solid fa-landmark"></i> Módulo Insignia de Identidad
       </div>
-      <h1 class="video-hero-title">Historia de Mi País: Nicaragua</h1>
+      <h1 class="video-hero-title">UNA HISTORIA<br>QUE SIGUE <span class="history-title-accent">VIVA</span></h1>
       <p class="video-hero-subtitle">
-        Conocer la tierra que pisamos es el primer acto de respeto. Nicaragua no es solo volcanes y lagos;
-        es la epopeya viva de pueblos indígenas insumisos, poetas inmortales y comunidades campesinas de dignidad inquebrantable.
+        Pueblos, culturas, luchas y tradiciones que han dado forma a nuestra identidad.
       </p>
+      <div class="history-hero-actions">
+        <a class="history-hero-action primary" href="#historyTimeline"><i class="fa-solid fa-book-open"></i> Explorar línea del tiempo →</a>
+        <a class="history-hero-action secondary" href="#territoriesGrid"><i class="fa-regular fa-map"></i> Explorar territorios</a>
+      </div>
     </div>
     <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
   </div>
@@ -213,6 +235,7 @@
       <div class="container">
 
         <!-- LÍNEA DE TIEMPO DE 7 PERIODOS -->
+        <div class="history-section-heading" id="historyTimeline"><i class="fa-regular fa-rectangle-list"></i><div><h2>Línea del tiempo de Nicaragua</h2><p>Un recorrido por los momentos que construyeron nuestra nación.</p></div></div>
         <div class="timeline-periods-flow">
           <!-- Periodo 1 -->
           <div class="timeline-period-card">
@@ -385,6 +408,15 @@
           </p>
         </div>
 
+        <div class="history-territory-layout">
+          <div class="history-map-visual" aria-label="Mapa visual de los territorios de Nicaragua">
+            <span class="history-map-pin m1"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Norte"></span>
+            <span class="history-map-pin m2"><img src="assets/images/destinos/selva_negra.jpg" alt="Montañas"></span>
+            <span class="history-map-pin m3"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Masaya"></span>
+            <span class="history-map-pin m4"><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada"></span>
+            <span class="history-map-pin m5"><img src="assets/images/destinos/corn_island.jpg" alt="Caribe"></span>
+            <span class="history-map-pin m6"><img src="assets/images/destinos/cerro_negro.jpg" alt="Occidente"></span>
+          </div>
         <div class="territories-grid" id="territoriesGrid">
           <a href="departamento.html?id=madriz" class="territory-pill-card territory-media-pill" data-territory="madriz">
             <div class="territory-pill-img-wrap">
@@ -573,6 +605,64 @@
             </div>
           </a>
         </div>
+        </div>
+
+        <section class="history-collection" aria-labelledby="originariosTitle">
+          <div class="history-collection-head"><div><h2 id="originariosTitle">Pueblos originarios y memoria viva</h2><p>Culturas que mantienen vivo el espíritu de Nicaragua.</p></div></div>
+          <div class="history-card-grid five">
+            <article class="history-mini-card"><img src="assets/images/historia/Pueblos Originarios &amp; Cosmovisión del Xolotlán.png" alt="Pueblo Chorotega" loading="lazy"><div class="history-mini-card-body"><strong>Chorotegas</strong><span>Raíces del Pacífico, tradición cerámica y legado cultural.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Pueblo Nicarao" loading="lazy"><div class="history-mini-card-body"><strong>Nicaraos</strong><span>Pueblo del gran lago y la fertilidad de la tierra.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/destinos/selva_negra.jpg" alt="Pueblo Matagalpa" loading="lazy"><div class="history-mini-card-body"><strong>Matagalpas</strong><span>Guardianes de las montañas del norte.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/destinos/corn_island.jpg" alt="Pueblo Miskito" loading="lazy"><div class="history-mini-card-body"><strong>Miskitos</strong><span>Cultura del Caribe, mar, ríos y biodiversidad.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/departamentos/biosfera bosawas.jpg" alt="Pueblo Mayangna" loading="lazy"><div class="history-mini-card-body"><strong>Mayangnas</strong><span>Sabiduría ancestral de la Reserva de Biósfera.</span></div></article>
+          </div>
+        </section>
+
+        <section class="history-collection" aria-labelledby="figuresTitle">
+          <div class="history-collection-head"><div><h2 id="figuresTitle">Personajes que marcaron nuestra historia</h2><p>Líderes, pensadores y artistas que dejaron un legado.</p></div></div>
+          <div class="history-card-grid five">
+            <article class="history-mini-card"><img src="assets/images/historia/Resistencia Indígena_El Encuentro y Diriangén.png" alt="Diriangén" loading="lazy"><div class="history-mini-card-body"><strong>Diriangén</strong><span>Líder chorotega y símbolo de resistencia y dignidad.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/historia/Defensa Nacional &amp; La Pedrada de Andrés Castro.png" alt="Andrés Castro" loading="lazy"><div class="history-mini-card-body"><strong>Andrés Castro</strong><span>Héroe de la Guerra Nacional y defensor de la soberanía.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="José Dolores Estrada" loading="lazy"><div class="history-mini-card-body"><strong>José Dolores Estrada</strong><span>Líder liberal y figura clave de la construcción nacional.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/aliados/hotel_dario.jpg" alt="Rubén Darío" loading="lazy"><div class="history-mini-card-body"><strong>Rubén Darío</strong><span>Poeta universal, orgullo de Nicaragua.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/historia/General de Hombres Libres_ Augusto C. Sandino.png" alt="Augusto C. Sandino" loading="lazy"><div class="history-mini-card-body"><strong>Augusto C. Sandino</strong><span>Defensa de la soberanía y autodeterminación.</span></div></article>
+          </div>
+        </section>
+
+        <section class="history-collection" aria-labelledby="heritageTitle">
+          <div class="history-collection-head"><div><h2 id="heritageTitle">Patrimonio vivo</h2><p>Nuestra cultura sigue presente en cada expresión.</p></div></div>
+          <div class="history-card-grid six">
+            <article class="history-mini-card"><img src="assets/images/historia/Fundación de Ciudades &amp; Sincretismo Cultural.png" alt="El Güegüense" loading="lazy"><div class="history-mini-card-body"><strong>El Güegüense</strong><span>Patrimonio de la Humanidad reconocido por UNESCO.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/historia/Pueblos Originarios &amp; Cosmovisión del Xolotlán1.png" alt="Huellas de Acahualinca" loading="lazy"><div class="history-mini-card-body"><strong>Huellas de Acahualinca</strong><span>Testimonios milenarios de nuestra historia.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/departamentos/leon.png" alt="León Viejo" loading="lazy"><div class="history-mini-card-body"><strong>León Viejo</strong><span>Ciudad colonial reconocida por UNESCO.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/departamentos/granada.jpg" alt="Granada" loading="lazy"><div class="history-mini-card-body"><strong>Granada</strong><span>Historia viva a orillas del Gran Lago.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Petroglifos de Ometepe" loading="lazy"><div class="history-mini-card-body"><strong>Petroglifos de Ometepe</strong><span>Arte ancestral en piedra volcánica.</span></div></article>
+            <article class="history-mini-card"><img src="assets/images/destinos/Calle La Calzada &amp; Zona Bohemia.jpg" alt="Música, danza y tradiciones" loading="lazy"><div class="history-mini-card-body"><strong>Música, danza y tradiciones</strong><span>Expresiones que nos identifican.</span></div></article>
+          </div>
+        </section>
+
+        <section class="history-collection" aria-labelledby="beforeAfterTitle">
+          <div class="history-collection-head"><div><h2 id="beforeAfterTitle">Antes y ahora</h2><p>Descubrí cómo nuestros sitios históricos se mantienen vivos.</p></div></div>
+          <div class="history-compare-grid">
+            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/departamentos/leon1.png" alt="León histórico"><img src="assets/images/departamentos/leon.png" alt="León actual"></div><strong>León: antes y ahora</strong></article>
+            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/departamentos/granada1.jpg" alt="Granada histórica"><img src="assets/images/departamentos/granada.jpg" alt="Granada actual"></div><strong>Granada: antes y ahora</strong></article>
+            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/historia/Fundación de Ciudades &amp; Sincretismo Cultural1.png" alt="León Viejo histórico"><img src="assets/images/destinos/Museo y Convento San Francisco (1529).jpg" alt="León Viejo actual"></div><strong>León Viejo: antes y ahora</strong></article>
+            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/historia/Paz, Soberanía y Ecoturismo de Custodia Local.png" alt="Momotombo histórico"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Paisaje volcánico actual"></div><strong>Patrimonio volcánico: antes y ahora</strong></article>
+          </div>
+        </section>
+
+        <section class="history-listen" aria-labelledby="listenHistoryTitle">
+          <button type="button" class="history-listen-icon" aria-label="Reproducir narración" onclick="document.querySelector('.baqueano-assistant-toggle, #baqueanoAssistantToggle')?.click()"><i class="fa-solid fa-play"></i></button>
+          <div class="history-listen-copy"><h2 id="listenHistoryTitle">Escuchá nuestra historia</h2><p>Relatos, música y personajes en voz de Baqueano Digital.</p></div>
+          <div class="history-wave" aria-hidden="true"></div>
+        </section>
+
+        <section class="history-sources" aria-labelledby="sourcesTitle">
+          <div class="history-collection-head"><div><h2 id="sourcesTitle">Fuentes y referencias</h2><p>Contenido basado en instituciones y documentación histórica.</p></div></div>
+          <div class="history-source-row"><div class="history-source-pill">INTUR</div><div class="history-source-pill">INC</div><div class="history-source-pill">MINED</div><div class="history-source-pill">BCN</div><div class="history-source-pill">MARENA</div><div class="history-source-pill">UNESCO</div></div>
+        </section>
+
+        <div class="history-final-banner"><div><h2>Conocer nuestra historia también es viajar por Nicaragua</h2><p>Explorá sus territorios, viví sus tradiciones y sé parte de su futuro.</p></div><a href="destinos.html">Explorar territorios →</a></div>
 
         <!-- BANNER INFORMATIVO DE GUÍAS DEPARTAMENTALES INDEPENDIENTES (CENTRADO) -->
         <div class="territories-action-banner territories-action-banner-centered">

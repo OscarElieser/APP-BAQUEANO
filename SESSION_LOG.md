@@ -26,6 +26,10 @@
 
 <!-- Consulta 27-09-2026: adaptación visual coordinada de index.html y destinos.html según referencias entregadas. Se conservaron recursos, contenido y funciones; se añadieron una portada editorial compacta y un explorador territorial paginado. Validación de JavaScript inline y git diff completada. -->
 
+<!-- Consulta 27-09-2026: adaptación de ambiental.html a la referencia de Custodia Territorial. Se preservaron Decálogo, reportes, evidencias, pasaporte y formularios; se añadieron hero editorial, métricas, credencial, centro visual de alertas e historias ambientales. -->
+
+<!-- Consulta 27-09-2026: adaptación fiel de historia.html a la referencia visual entregada. Se conservaron los siete periodos y los 17 territorios; se añadieron colecciones de pueblos, personajes, patrimonio, comparativas, narración, fuentes y CTA final con la paleta azul, verde, naranja y fondo claro. -->
+
 ## Menú lateral plegable de la aplicación Android
 
 ### Ajuste solicitado — todos los botones individuales
@@ -53,6 +57,8 @@
   - Modificación de [index.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/pages/index.css) con estilos para `.services-allies-unified-section`, `.unified-allies-showcase` y `.biz-register-modal-dialog`.
   - Reducción aproximada del 25% al 30% del largo visual del index sin pérdida de interactividad ni código existente.
   - Cero incidencias en consola y 100% de cumplimiento de directivas de no uso de términos prohibidos.
+  - Despliegue en producción completado con éxito a Firebase Hosting (`https://app-baqueano.web.app`, 502 archivos públicos) y sincronización con GitHub (`main 6498f29 actualizacion oscar112`).
+  - Actualización global de la CLI `firebase-tools` completada y verificada en versión `15.31.0` (`D:\npm_global\firebase.ps1`).
 
 ---
 

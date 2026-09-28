@@ -44,6 +44,25 @@
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
   <link rel="stylesheet" href="css/pages/ambiental.css">
+  <style id="ambientalReferenceLayout">
+    /* ======================================================================
+       CUSTODIA TERRITORIAL — ADAPTACIÓN VISUAL DE LA REFERENCIA
+       POR QUÉ: transformar la campaña en una experiencia clara y accionable.
+       CÓMO: conserva el Decálogo, reportes y pasaporte; compacta su presentación.
+       QUÉ: hero, métricas, credencial, mapa de alertas, niveles e historias.
+       ====================================================================== */
+    .page-ambiental{background:#f6f8fb;color:#0b2947}.page-ambiental .main-navbar{background:rgba(3,39,66,.95);border-bottom:1px solid rgba(255,255,255,.2)}
+    .page-ambiental .video-hero-wrapper{height:min(46vw,470px);min-height:420px}.page-ambiental .video-hero-media{filter:brightness(.78) saturate(1.08);object-position:center 55%}.page-ambiental .video-hero-gradient{background:linear-gradient(90deg,rgba(3,31,49,.9),rgba(3,31,49,.35) 65%,rgba(3,31,49,.08))}.page-ambiental .video-hero-scanlines{display:none}.page-ambiental .video-hero-content{max-width:1180px;width:100%;left:50%;transform:translate(-50%,-45%);padding:0 30px;text-align:left;align-items:flex-start}.page-ambiental .video-hero-badge{background:transparent!important;border:0!important;padding:0!important;letter-spacing:.18em!important}.page-ambiental .video-hero-title{max-width:720px;font:900 clamp(2.8rem,5.6vw,5rem)/.96 'Montserrat',sans-serif;letter-spacing:-.05em;text-shadow:0 4px 24px rgba(0,0,0,.4)}.page-ambiental .video-hero-title .hero-script-accent{display:block;color:#ff6b16;font-style:italic;font-weight:800}.page-ambiental .video-hero-subtitle{max-width:650px;font-size:1.05rem;color:#fff}.environment-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.environment-hero-action{min-height:46px;padding:0 20px;border-radius:14px;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:800 .82rem 'Inter',sans-serif}.environment-hero-action.primary{background:#07965a;color:#fff}.environment-hero-action.secondary{border:1px solid rgba(255,255,255,.85);color:#fff;background:rgba(3,39,66,.35);backdrop-filter:blur(10px)}
+    .environment-status-strip{position:relative;z-index:5;max-width:1180px;margin:-30px auto 22px;padding:16px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border-radius:17px;box-shadow:0 14px 38px rgba(12,44,70,.13)}.environment-status-item{display:flex;align-items:center;justify-content:center;gap:12px;min-height:48px;border-right:1px solid #e6ebef}.environment-status-item:last-child{border:0}.environment-status-item i{font-size:1.65rem;color:#078e52}.environment-status-item strong{display:block;font:800 .8rem 'Inter',sans-serif}.environment-status-item span{display:block;margin-top:2px;color:#60758b;font-size:.66rem}
+    .page-ambiental .page-wrapper{padding:0}.page-ambiental .environmental-section-pro{padding:12px 24px 36px}.page-ambiental .environmental-section-pro>.container{max-width:1180px}.page-ambiental .decalogo-header-center{text-align:left}.page-ambiental .decalogo-main-title{font:900 1.55rem 'Montserrat',sans-serif;color:#0b2947}.page-ambiental .decalogo-header-center>p{font-size:.82rem;color:#60758b}.page-ambiental .decalogo-dashboard-panel{padding:12px 16px;border-radius:15px;background:#fff;border:1px solid #e1e8ed;box-shadow:0 5px 18px rgba(12,44,70,.06)}.page-ambiental .decalogo-filter-pills{display:none}.page-ambiental .decalogo-controls-row{justify-content:flex-end}.page-ambiental .decalogo-sign-all-btn{height:38px;padding:0 18px;border-radius:10px}
+    .decalogo-content-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:14px;align-items:start;margin-top:14px}.page-ambiental .decalogo-cards-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;margin:0!important}.page-ambiental .decalogo-interactive-card{min-height:118px!important;padding:10px!important;border:1px solid #e0e7ec!important;border-radius:13px!important;background:#fff!important;box-shadow:0 5px 15px rgba(12,44,70,.06)!important;display:grid!important;grid-template-columns:42px 1fr!important;gap:9px!important}.page-ambiental .decalogo-card-sparkle,.page-ambiental .decalogo-tip-box{display:none!important}.page-ambiental .decalogo-card-top{display:block!important}.page-ambiental .decalogo-num-badge{width:28px!important;height:28px!important;font-size:.75rem!important;background:#ff7414!important}.page-ambiental .decalogo-icon-circle{width:40px!important;height:40px!important;margin-top:7px!important}.page-ambiental .decalogo-check-toggle{position:absolute!important;top:9px!important;right:9px!important;width:26px!important;height:26px!important}.page-ambiental .decalogo-card-body{padding-right:20px!important}.page-ambiental .decalogo-rule-title{font-size:.78rem!important;margin:3px 0 4px!important;color:#0b2947!important}.page-ambiental .decalogo-rule-desc{font-size:.65rem!important;line-height:1.35!important;color:#60758b!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .guardian-credential-card{position:sticky;top:86px;min-height:402px;padding:22px 18px;border-radius:17px;background:linear-gradient(155deg,#073d27,#031e17);color:#fff;box-shadow:0 14px 30px rgba(2,40,24,.24);overflow:hidden}.guardian-credential-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 12%,rgba(76,209,118,.28),transparent 36%)}.guardian-emblem{position:relative;width:150px;height:170px;margin:0 auto 18px;display:grid;place-items:center;border-radius:45% 45% 50% 50%;border:4px solid #d8bd55;background:linear-gradient(145deg,#0a7644,#06341f);box-shadow:0 0 0 7px rgba(255,255,255,.06),0 15px 28px rgba(0,0,0,.3);text-align:center}.guardian-emblem img{width:68px}.guardian-emblem strong{display:block;font:900 .9rem 'Montserrat',sans-serif}.guardian-credential-card h3{position:relative;margin:0 0 5px;font:900 1.05rem 'Montserrat',sans-serif}.guardian-credential-card p{position:relative;margin:0 0 14px;font-size:.72rem;color:#d8ebe1}.guardian-credential-list{position:relative;display:grid;gap:8px;font-size:.69rem}.guardian-credential-list i{width:18px;color:#72db9d}.guardian-progress-button{position:relative;margin-top:18px;width:100%;height:38px;border:0;border-radius:999px;background:#fff;color:#073d27;font-weight:800;cursor:pointer}
+    .environment-report-hub{margin:22px 0;padding:18px;border-radius:20px;background:linear-gradient(130deg,#073a43,#0b5f51);display:grid;grid-template-columns:.72fr 1.1fr .9fr;gap:14px;box-shadow:0 15px 32px rgba(8,67,63,.2)}.report-intro{padding:22px;color:#fff}.report-intro h2{margin:0 0 8px;font:900 1.45rem 'Montserrat',sans-serif}.report-intro p{font-size:.8rem;line-height:1.5;color:#e0f2ea}.report-intro button{margin-top:14px;height:42px;padding:0 17px;border:0;border-radius:12px;background:#ff6b16;color:#fff;font-weight:800;cursor:pointer}.environment-map-visual{position:relative;min-height:320px;border-radius:15px;overflow:hidden;background:linear-gradient(rgba(0,127,117,.15),rgba(0,127,117,.15)),url('assets/images/footer-nicaragua-panorama.png') center/cover}.environment-map-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(140deg,rgba(33,173,192,.35),rgba(17,107,78,.06))}.eco-map-pin{position:absolute;z-index:2;width:38px;height:38px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;color:#fff;border:2px solid #fff;box-shadow:0 5px 12px rgba(0,0,0,.25)}.eco-map-pin i{transform:rotate(45deg)}.eco-map-pin.p1{left:18%;top:54%;background:#176fa6}.eco-map-pin.p2{left:42%;top:35%;background:#0c8c54}.eco-map-pin.p3{left:62%;top:48%;background:#ff6b16}.eco-map-pin.p4{right:14%;bottom:16%;background:#0c8c54}.report-quick-form{padding:18px;background:#fff;border-radius:15px}.report-quick-form h3{margin:0 0 12px;font:900 1rem 'Montserrat',sans-serif;color:#0b2947}.report-step-row{display:flex;gap:14px;margin-bottom:12px;font-size:.65rem;color:#8a9aaa}.report-step-row strong{color:#078e52}.report-field{width:100%;min-height:39px;margin-bottom:8px;padding:9px 11px;border:1px solid #dce5ea;border-radius:9px;background:#fbfcfd;color:#546b7c;font:500 .7rem 'Inter',sans-serif}.report-submit{width:100%;height:40px;border:0;border-radius:10px;background:#07965a;color:#fff;font-weight:800;cursor:pointer}
+    .page-ambiental .denuncia-cta-card{display:none!important}.page-ambiental .passport-card-wrap{padding:18px!important;border-radius:18px!important;background:#fff!important;border:1px solid #e1e7ec!important;box-shadow:0 8px 22px rgba(12,44,70,.08)!important}.page-ambiental .passport-card-wrap>.ambiental-inline-026{text-align:left!important}.page-ambiental .passport-stamps-grid{grid-template-columns:repeat(6,1fr)!important;gap:12px!important}.page-ambiental .passport-stamp-badge{min-height:125px!important;border-radius:13px!important;background:linear-gradient(160deg,rgba(5,37,50,.12),rgba(5,37,50,.02)),url('assets/images/destinos/isla_de_ometepe.jpg') center/cover!important;color:#fff!important;text-shadow:0 2px 7px rgba(0,0,0,.7)}.page-ambiental .stamp-icon{background:rgba(4,40,35,.75)!important}.page-ambiental .stamp-name,.page-ambiental .stamp-status{color:#fff!important}
+    .inspiring-actions{margin:22px 0}.inspiring-actions-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:12px}.inspiring-actions h2{margin:0;font:900 1.35rem 'Montserrat',sans-serif}.inspiring-actions p{margin:3px 0 0;font-size:.78rem;color:#60758b}.inspiring-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}.inspiring-card{position:relative;min-height:150px;border-radius:14px;overflow:hidden;color:#fff}.inspiring-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.inspiring-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,28,36,.9),transparent 75%)}.inspiring-card-copy{position:absolute;z-index:2;left:13px;right:13px;bottom:12px}.inspiring-card strong{display:block;font-size:.78rem}.inspiring-card span{font-size:.64rem;color:#e3eee9}
+    @media(max-width:1000px){.environment-status-strip{margin:-24px 18px 18px;grid-template-columns:repeat(2,1fr)}.decalogo-content-layout{grid-template-columns:1fr}.guardian-credential-card{position:relative;top:auto;min-height:auto}.environment-report-hub{grid-template-columns:1fr 1fr}.report-intro{grid-column:1/-1}.page-ambiental .passport-stamps-grid{grid-template-columns:repeat(3,1fr)!important}.inspiring-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:680px){.page-ambiental .video-hero-wrapper{height:570px;min-height:570px}.page-ambiental .video-hero-content{padding:0 20px}.page-ambiental .video-hero-title{font-size:2.7rem}.environment-status-strip{grid-template-columns:1fr}.environment-status-item{border-right:0;border-bottom:1px solid #e6ebef}.page-ambiental .environmental-section-pro{padding-left:12px;padding-right:12px}.page-ambiental .decalogo-cards-grid{grid-template-columns:1fr!important}.environment-report-hub{grid-template-columns:1fr;padding:12px}.page-ambiental .passport-stamps-grid{grid-template-columns:repeat(2,1fr)!important}.inspiring-grid{grid-template-columns:1fr 1fr}}
+  </style>
 </head>
 <body class="has-video-hero page-ambiental">
 
@@ -196,13 +215,24 @@
       <div class="video-hero-badge ambiental-inline-001">
         <i class="fa-solid fa-seedling"></i> Custodia del Territorio
       </div>
-      <h1 class="video-hero-title">Campaña Ambiental & Custodia en Sendero</h1>
+      <h1 class="video-hero-title">Custodiá lo que venís <span class="hero-script-accent">a descubrir</span></h1>
       <p class="video-hero-subtitle">
         Nuestros bosques, lagunas de cráter y ríos son sagrados. El turismo verdadero no extrae ni destruye;
         custodia, restaura y deja el sendero más limpio de lo que lo encontró.
       </p>
+      <div class="environment-hero-actions">
+        <a class="environment-hero-action primary" href="#decalogoCardsGrid"><i class="fa-solid fa-leaf"></i> Asumir el Decálogo</a>
+        <a class="environment-hero-action secondary" href="#environmentReportHub"><i class="fa-solid fa-triangle-exclamation"></i> Reportar daño ambiental</a>
+      </div>
     </div>
     <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
+  </div>
+
+  <div class="environment-status-strip" aria-label="Estado de custodia territorial">
+    <div class="environment-status-item"><i class="fa-solid fa-leaf"></i><div><strong>Exploradores responsables</strong><span>Cuidando hoy, más mañana</span></div></div>
+    <div class="environment-status-item"><i class="fa-solid fa-seedling"></i><div><strong>10 compromisos</strong><span>Decálogo Verde interactivo</span></div></div>
+    <div class="environment-status-item"><i class="fa-solid fa-shield-heart"></i><div><strong>Tu nivel de Guardián</strong><span>Comienza tu aventura</span></div></div>
+    <div class="environment-status-item"><i class="fa-solid fa-map"></i><div><strong>Pasaporte del Explorador</strong><span>Sumá acciones y niveles</span></div></div>
   </div>
 
   <!-- CONTENIDO PRINCIPAL -->
@@ -257,6 +287,7 @@
           </div>
 
           <!-- GRID DE LAS 10 TARJETAS HOLOGRÁFICAS INTERACTIVAS -->
+          <div class="decalogo-content-layout">
           <div class="decalogo-cards-grid" id="decalogoCardsGrid">
 
             <!-- Regla 1 -->
@@ -460,6 +491,21 @@
             </div>
 
           </div>
+          <aside class="guardian-credential-card" aria-label="Credencial digital de Guardián Baqueano">
+            <div class="guardian-emblem">
+              <div><img src="assets/images/logo.png" alt="Emblema Baqueano"><strong>GUARDIÁN<br>BAQUEANO</strong></div>
+            </div>
+            <h3>Tu Credencial Digital</h3>
+            <p>Asumí los 10 compromisos y recibí tu insignia de Guardián de la Naturaleza.</p>
+            <div class="guardian-credential-list">
+              <span><i class="fa-regular fa-square-check"></i> Certificado digital</span>
+              <span><i class="fa-solid fa-trophy"></i> Puntos en tu pasaporte</span>
+              <span><i class="fa-solid fa-award"></i> Reconocimientos territoriales</span>
+              <span><i class="fa-solid fa-people-group"></i> Comunidad de custodios</span>
+            </div>
+            <button type="button" class="guardian-progress-button" onclick="document.getElementById('decalogoCardsGrid').scrollIntoView({behavior:'smooth'})">Ver mi progreso →</button>
+          </aside>
+          </div>
         </div>
 
         <!-- MODAL DE CERTIFICADO DE GUARDIÁN DE LA NATURALEZA -->
@@ -589,6 +635,28 @@
           </div><!-- /denuncia-cta-inner -->
         </div><!-- /denuncia-cta-card -->
 
+        <section class="environment-report-hub" id="environmentReportHub" aria-labelledby="environmentReportTitle">
+          <div class="report-intro">
+            <h2 id="environmentReportTitle"><i class="fa-solid fa-bullhorn"></i> Alerta Ciudadana Ambiental</h2>
+            <p>Si observás una actividad que afecte el ambiente, podés reportarla de forma confidencial con ubicación, detalles y evidencia.</p>
+            <button type="button" onclick="document.getElementById('btnOpenDenunciaModal').click()"><i class="fa-solid fa-location-arrow"></i> Realizar un reporte →</button>
+          </div>
+          <div class="environment-map-visual" role="img" aria-label="Mapa visual de alertas ambientales de Nicaragua">
+            <span class="eco-map-pin p1"><i class="fa-solid fa-water"></i></span>
+            <span class="eco-map-pin p2"><i class="fa-solid fa-tree"></i></span>
+            <span class="eco-map-pin p3"><i class="fa-solid fa-fire"></i></span>
+            <span class="eco-map-pin p4"><i class="fa-solid fa-leaf"></i></span>
+          </div>
+          <div class="report-quick-form">
+            <h3><i class="fa-solid fa-leaf"></i> Reportar daño ambiental</h3>
+            <div class="report-step-row"><strong>1 Ubicación</strong><span>2 Detalles</span><span>3 Evidencia</span></div>
+            <button class="report-field" type="button" onclick="document.getElementById('btnOpenDenunciaModal').click()">Seleccioná el tipo de afectación</button>
+            <button class="report-field" type="button" onclick="document.getElementById('btnOpenDenunciaModal').click()">Describí lo que observaste</button>
+            <button class="report-field" type="button" onclick="document.getElementById('btnOpenDenunciaModal').click()"><i class="fa-solid fa-camera"></i> Agregar fotos o videos</button>
+            <button class="report-submit" type="button" onclick="document.getElementById('btnOpenDenunciaModal').click()">Completar y enviar reporte →</button>
+          </div>
+        </section>
+
         <!-- PASAPORTE DEL EXPLORADOR ÉTICO -->
         <div class="passport-card-wrap">
           <div class="ambiental-inline-026">
@@ -635,6 +703,17 @@
             </div>
           </div>
         </div>
+
+        <section class="inspiring-actions" aria-labelledby="inspiringActionsTitle">
+          <div class="inspiring-actions-head"><div><h2 id="inspiringActionsTitle">Acciones que inspiran</h2><p>Historias de viajeros y comunidades que cuidan Nicaragua.</p></div></div>
+          <div class="inspiring-grid">
+            <article class="inspiring-card"><img src="assets/images/destinos/Playa Maderas (Santuario del Surf).jpg" alt="Limpieza responsable de playas" loading="lazy"><div class="inspiring-card-copy"><strong>Limpieza de playas</strong><span>Pequeñas acciones, grandes cambios.</span></div></article>
+            <article class="inspiring-card"><img src="assets/images/destinos/selva_negra.jpg" alt="Reforestación comunitaria" loading="lazy"><div class="inspiring-card-copy"><strong>Reforestación comunitaria</strong><span>Árboles para el futuro.</span></div></article>
+            <article class="inspiring-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Turismo responsable" loading="lazy"><div class="inspiring-card-copy"><strong>Turismo responsable</strong><span>Viajeros que también cuidan.</span></div></article>
+            <article class="inspiring-card"><img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Comunidades guardianas" loading="lazy"><div class="inspiring-card-copy"><strong>Comunidades guardianas</strong><span>Cultura y naturaleza juntas.</span></div></article>
+            <article class="inspiring-card"><img src="assets/images/departamentos/biosfera bosawas.jpg" alt="Fauna nicaragüense" loading="lazy"><div class="inspiring-card-copy"><strong>Fauna que nos inspira</strong><span>Protejamos su hogar.</span></div></article>
+          </div>
+        </section>
 
       </div>
     </section>
