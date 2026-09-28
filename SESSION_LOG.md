@@ -32,23 +32,25 @@
 
 <!-- Consulta 27-09-2026: adaptación fiel de historia.html a la referencia visual entregada. Se conservaron los siete periodos y los 17 territorios; se añadieron colecciones de pueblos, personajes, patrimonio, comparativas, narración, fuentes y CTA final con la paleta azul, verde, naranja y fondo claro. -->
 
-<!-- Consulta 28-09-2026 / 29-09-2026 (CHECKPOINT 6 — Menú Horizontal Ordenado y No Recargado):
-  USUARIO: "asi se ve mejor pero falta ordenamiento y no quiero un menu recargado"
+<!-- Consulta 28-09-2026 / 29-09-2026 (CHECKPOINT 7 — Mega Menú 100% Centrado y Prevención Definitiva de Colisiones):
+  USUARIO: "sigue viendose feo y ahora el boton de mas el los menu me sales a un lado tiene que salir al centro"
   DIAGNÓSTICO TÉCNICO:
-    1. initDynamicNavbar() en navigation.js calculaba coordenadas y movía dinámicamente un span (.nav-pill-indicator) como caja flotante que se superponía sobre el logo "BAQUEANO".
-    2. La barra estaba recargada con elementos no esenciales (clima "25°C", switch de sol/luna grande de 60px y divisor vertical), lo que apretaba los enlaces y hacía colisionar el botón "Más" con la lupa y las acciones en pantallas estándar.
-  SOLUCIÓN APLICADA:
-    1. Despeje de controles redundantes: Eliminados clima, switch complejo de tema, divisores y el indicador pill flotante.
-    2. Acciones esenciales derechas limpias: Únicamente Buscador (lupa), SOS (alerta), Iniciar sesión (verde esmeralda), Idioma (ES) y hamburguesa (solo móvil).
-    3. Separación de marca y enlaces: Se asignó margen derecho amplio a la marca (margin-right: 18px), espaciado natural de enlaces (gap: 8px) y alineación ordenada sin cajas invasivas.
-    4. Versión de caché actualizada a ?v=20260929-hnav-v2 en todos los archivos HTML y JS.
+    1. El panel desplegable del mega menú (#globalMegaMenu) estaba anclado al contenedor .global-more-dropdown con left: 0, por lo que se abría desfasado hacia la derecha del viewport y tapaba la mitad de la pantalla.
+    2. En laptops con zoom del sistema operativo (125%/150%, ancho útil ~1050px), los enlaces centrales alcanzaban a rozar el botón de la lupa a la derecha.
+  SOLUCIÓN IMPLEMENTADA:
+    1. Mega menú 100% centrado en la pantalla: Se fijó con position: fixed; top: 72px; left: 50%; transform: translateX(-50%); width: min(920px, calc(100vw - 40px)); con 4 columnas simétricas (repeat(4, 1fr)). Se despliega perfectamente alineado al centro del monitor.
+    2. Elevación del breakpoint móvil a 1120px (@media max-width: 1120px): Evita cualquier roce o desborde en pantallas de laptops medianas o navegadores con zoom activo, activando la navegación móvil limpia cuando el ancho útil es inferior a 1120px.
+    3. Estilo visual activo refinado: Acento inferior naranja (#F65E01) y fondo suave transparente para "Inicio", erradicando cualquier apariencia tosca.
+    4. Versión de caché actualizada a ?v=20260929-hnav-v4 en todos los archivos.
   ARCHIVOS MODIFICADOS:
     - website/css/navigation-mega.css
     - website/js/navigation.js
+    - website/js/global-injector.js
     - website/index.html
     - website/404.html, website/aviso-legal.html, website/baqueano-ai.html, website/cookies.html, website/legal.html, website/offline.html
     - SESSION_LOG.md
   ESTADO: Implementado y verificado. -->
+
 
 
 

@@ -1,37 +1,41 @@
 /*
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — NAVBAR INSTITUCIONAL HORIZONTAL LIMPIO & NO RECARGADO
+🧭 BAQUEANO ECOSYSTEM — NAVBAR INSTITUCIONAL HORIZONTAL & MEGA MENÚ CENTRADO
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Ofrecer un menú horizontal normal, limpio, perfectamente ordenado y libre de recargos.
-- Eliminar colisiones entre la marca y los enlaces, proporcionando una jerarquía visual
-  espaciada y descansada donde cada sección (Brand, Enlaces centrales, Acciones esenciales)
-  respire naturalmente sin solaparse.
+- Proveer una barra horizontal perfectamente ordenada, limpia y espaciada que
+  nunca colisione entre el logo, los enlaces de navegación y las acciones.
+- Desplegar el Mega Menú de "Más" rigurosamente centrado en la pantalla (viewport),
+  brindando una vista arquitectónica equilibrada, simétrica e intuitiva para el
+  explorador territorial.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Layout horizontal estándar a ancho completo fijado arriba con position: sticky; top: 0;.
-- Estructura flexbox con 3 bloques bien definidos:
-  * Izquierda: Logo y nombre Baqueano con separación clara a la derecha (margin-right: 24px).
-  * Centro: Enlaces directos (Inicio, Explorar, Cultura, Baqueano IA, Mi Viaje, Más) con
-    espaciado natural (gap: 8px) y sin cajas flotantes invasivas.
-  * Derecha: Acciones esenciales desaturadas (Buscador, SOS, Iniciar sesión, Idioma, Hamburguesa).
-- Se suprimen elementos redundantes que saturaban la barra (clima, switch de tema voluminoso,
-  divisores y pastillas flotantes de seguimiento dinámico).
-- Menú móvil desplegable limpio en smartphones (< 992px) controlado por botón hamburguesa.
-- Version: 20260929-hnav-v2
+- Layout horizontal con 'position: sticky; top: 0;' en la parte superior sin huecos.
+- Contenedor interno estructurado con flexbox espaciado:
+  * Brand (Izquierda): Logo + Nombre Baqueano con separación fija.
+  * Menú Central (Centro): Enlaces en línea recta con gap controlado (gap: 8px)
+    y estado activo de acento inferior naranja (#F65E01) sin cajas invasivas.
+  * Acciones Rápidas (Derecha): Buscador, SOS, Iniciar sesión e Idioma alineados a la derecha.
+- Mega Menú "Más" centrado:
+  * 'position: fixed; top: 70px; left: 50%; transform: translateX(-50%);'
+  * 4 columnas iguales en grid ('repeat(4, 1fr)') centradas en el viewport.
+- Breakpoint responsivo inteligente a 1120px:
+  * En viewports < 1120px (o laptops con zoom del sistema al 125%/150%), se activa
+    la hamburguesa para garantizar que nunca se monten los elementos.
+- Version: 20260929-hnav-v3
 
-📦 3. QUÉ (WHAT / SELECTORES PRINCIPALES):
+📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
 - #mainNavbar — Barra horizontal sticky full-width.
-- .exact-container, .nav-inner — Contenedor centrado max-width: 1400px.
-- .exact-nav-brand — Identidad visual Baqueano.
-- .exact-nav-menu — Enlaces centrales en línea recta sin saltos.
-- .global-more-dropdown — Dropdown "Más" con mega menú de 4 columnas.
-- .global-nav-actions — Botones funcionales esenciales a la derecha.
+- .exact-container, .nav-inner — Contenedor centralizado max-width: 1380px.
+- .exact-nav-brand — Logotipo y submarca Baqueano.
+- .exact-nav-menu — Enlaces centrales ordenados.
+- .global-more-dropdown, .global-mega-menu — Mega menú de 4 columnas centrado.
+- .exact-nav-actions — Botones funcionales esenciales.
 ============================================================================
 */
 
-/* ── Supresión de barras secundarias ── */
+/* ── Neutralización de navbars secundarios ── */
 .bq-global-navbar {
   display: none !important;
 }
@@ -62,8 +66,8 @@ body {
 
   /* Fondo institucional con glassmorphism sutil y elegante */
   background: rgba(11, 37, 58, 0.98) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
   border: none !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 0 !important;
@@ -89,17 +93,17 @@ body {
    ============================================================================ */
 #mainNavbar .exact-container,
 #mainNavbar .nav-inner {
-  max-width: 1400px !important;
+  max-width: 1380px !important;
   width: 100% !important;
   height: 100% !important;
   margin: 0 auto !important;
-  padding: 0 28px !important;
+  padding: 0 24px !important;
   box-sizing: border-box !important;
 
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 20px !important;
+  gap: 16px !important;
   position: relative !important;
   overflow: visible !important;
 }
@@ -111,14 +115,14 @@ body {
 #mainNavbar .navbar-brand-pill {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 10px !important;
   text-decoration: none !important;
   color: #FFFFFF !important;
   flex-shrink: 0 !important;
   border: none !important;
   background: transparent !important;
   padding: 0 !important;
-  margin-right: 18px !important;
+  margin-right: 14px !important;
   outline: none !important;
   cursor: pointer !important;
   user-select: none !important;
@@ -126,8 +130,8 @@ body {
 
 #mainNavbar .exact-nav-logo,
 #mainNavbar .navbar-brand-logo {
-  width: 38px !important;
-  height: 38px !important;
+  width: 36px !important;
+  height: 36px !important;
   object-fit: contain !important;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35)) !important;
   transition: transform 0.25s ease !important;
@@ -149,7 +153,7 @@ body {
 #mainNavbar .navbar-brand-title {
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 900 !important;
-  font-size: 1.15rem !important;
+  font-size: 1.1rem !important;
   letter-spacing: 0.08em !important;
   color: #FFFFFF !important;
   margin: 0 !important;
@@ -159,7 +163,7 @@ body {
 #mainNavbar .navbar-brand-sub {
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 700 !important;
-  font-size: 0.5rem !important;
+  font-size: 0.48rem !important;
   letter-spacing: 0.2em !important;
   color: #F4E6C1 !important;
   text-transform: uppercase !important;
@@ -168,14 +172,14 @@ body {
 }
 
 /* ============================================================================
-   2. ENLACES HORIZONTALES ORDENADOS (CENTRO-IZQUIERDA)
+   2. ENLACES HORIZONTALES ORDENADOS (CENTRO)
    ============================================================================ */
 #mainNavbar .exact-nav-menu,
 #mainNavbar .nav-links-menu {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 8px !important;
+  justify-content: center !important;
+  gap: 6px !important;
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
@@ -194,11 +198,11 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 8px 14px !important;
+  padding: 7px 13px !important;
   color: rgba(255, 255, 255, 0.85) !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.88rem !important;
+  font-size: 0.86rem !important;
   font-weight: 600 !important;
   border-radius: 8px !important;
   transition: all 0.2s ease !important;
@@ -217,18 +221,19 @@ body {
   color: #FFFFFF !important;
 }
 
-/* Enlace activo: resaltado limpio y contenido */
+/* Enlace activo: elegante acento inferior naranja con fondo sutil */
 #mainNavbar .exact-nav-link.active,
 #mainNavbar .nav-link-item.active,
 #mainNavbar .nav-links-menu > a.active {
-  background: rgba(22, 93, 111, 0.7) !important;
+  background: rgba(22, 93, 111, 0.45) !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
-  border-radius: 8px !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 -2px 0 #F65E01 !important;
 }
 
 /* ============================================================================
-   DROPDOWN "MÁS" Y MEGA MENÚ
+   DROPDOWN "MÁS" Y MEGA MENÚ CENTRADO EN LA PANTALLA
    ============================================================================ */
 #mainNavbar .nav-dropdown,
 #mainNavbar .global-more-dropdown {
@@ -242,14 +247,14 @@ body {
 #mainNavbar .exact-nav-dropdown-btn {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  padding: 8px 14px !important;
+  gap: 5px !important;
+  padding: 7px 13px !important;
   color: rgba(255, 255, 255, 0.85) !important;
   background: transparent !important;
   border: none !important;
   border-radius: 8px !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.88rem !important;
+  font-size: 0.86rem !important;
   font-weight: 600 !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
@@ -268,7 +273,7 @@ body {
 #mainNavbar .nav-dropdown-trigger i,
 #mainNavbar .exact-nav-dropdown-btn i {
   color: #F65E01 !important;
-  font-size: 0.72rem !important;
+  font-size: 0.7rem !important;
   transition: transform 0.2s ease !important;
 }
 
@@ -277,32 +282,34 @@ body {
   transform: rotate(180deg) !important;
 }
 
-/* Panel Desplegable */
+/* ── Mega Menú 100% Centrado en el Viewport ── */
 #mainNavbar .global-mega-menu,
 #mainNavbar .exact-dropdown-menu {
   display: none !important;
-  position: absolute !important;
-  top: calc(100% + 6px) !important;
-  left: 0 !important;
+  position: fixed !important;
+  top: 72px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(920px, calc(100vw - 40px)) !important;
   background: #0B253A !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65) !important;
-  padding: 22px 26px !important;
-  min-width: 760px !important;
-  grid-template-columns: repeat(4, 170px) !important;
-  gap: 20px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  padding: 26px 30px !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 22px !important;
   z-index: 99999 !important;
+  box-sizing: border-box !important;
 }
 
 #mainNavbar .global-more-dropdown.is-open .global-mega-menu {
   display: grid !important;
-  animation: megaFadeIn 0.2s ease-out !important;
+  animation: megaFadeInCenter 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-@keyframes megaFadeIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes megaFadeInCenter {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }
 
 #mainNavbar .global-mega-column {
@@ -391,16 +398,15 @@ body {
 #mainNavbar .global-nav-actions {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 8px !important;
   flex-shrink: 0 !important;
-  margin-left: auto !important;
 }
 
 /* Botón Búsqueda (Lupa Circular) */
 #mainNavbar .global-search,
 #mainNavbar .navbar-search-btn {
-  width: 36px !important;
-  height: 36px !important;
+  width: 34px !important;
+  height: 34px !important;
   border-radius: 50% !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -409,9 +415,10 @@ body {
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
-  font-size: 0.85rem !important;
+  font-size: 0.82rem !important;
   transition: all 0.2s ease !important;
   outline: none !important;
+  flex-shrink: 0 !important;
 }
 
 #mainNavbar .global-search:hover {
@@ -425,14 +432,14 @@ body {
 #mainNavbar .navbar-sos-btn {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  padding: 7px 15px !important;
+  gap: 5px !important;
+  padding: 6px 13px !important;
   background: #DC2626 !important;
   color: #FFFFFF !important;
   border: none !important;
   border-radius: 20px !important;
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.04em !important;
   cursor: pointer !important;
@@ -440,6 +447,7 @@ body {
   transition: all 0.2s ease !important;
   white-space: nowrap !important;
   outline: none !important;
+  flex-shrink: 0 !important;
 }
 
 #mainNavbar .sos-quick-btn:hover {
@@ -448,7 +456,7 @@ body {
 }
 
 #mainNavbar .sos-quick-btn i {
-  font-size: 0.9rem !important;
+  font-size: 0.85rem !important;
 }
 
 /* Botón Iniciar Sesión */
@@ -458,13 +466,13 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  padding: 8px 16px !important;
+  padding: 7px 15px !important;
   background: #10B981 !important;
   color: #FFFFFF !important;
   border: none !important;
   border-radius: 20px !important;
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 0.84rem !important;
+  font-size: 0.82rem !important;
   font-weight: 700 !important;
   text-decoration: none !important;
   cursor: pointer !important;
@@ -472,6 +480,7 @@ body {
   transition: all 0.2s ease !important;
   white-space: nowrap !important;
   outline: none !important;
+  flex-shrink: 0 !important;
 }
 
 #mainNavbar .exact-nav-btn-login:hover {
@@ -480,7 +489,7 @@ body {
 }
 
 #mainNavbar .exact-nav-btn-login i {
-  font-size: 0.95rem !important;
+  font-size: 0.9rem !important;
 }
 
 /* Selector Idioma */
@@ -489,17 +498,18 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
-  padding: 6px 12px !important;
+  padding: 5px 10px !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 20px !important;
   color: #FFFFFF !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
   font-weight: 600 !important;
   cursor: pointer !important;
   outline: none !important;
   transition: background 0.2s ease !important;
+  flex-shrink: 0 !important;
 }
 
 #mainNavbar .global-language:hover {
@@ -507,7 +517,7 @@ body {
 }
 
 #mainNavbar .global-language i {
-  font-size: 0.68rem !important;
+  font-size: 0.65rem !important;
   color: #94A3B8 !important;
 }
 
@@ -527,6 +537,7 @@ body {
   cursor: pointer !important;
   outline: none !important;
   transition: background 0.2s ease !important;
+  flex-shrink: 0 !important;
 }
 
 #mainNavbar .exact-nav-mobile-toggle:hover {
@@ -549,33 +560,9 @@ body {
 }
 
 /* ============================================================================
-   RESPONSIVIDAD Y MENÚ MÓVIL
+   RESPONSIVIDAD INTELIGENTE (BREAKPOINT A 1120px)
    ============================================================================ */
-@media (max-width: 1080px) {
-  #mainNavbar .exact-container,
-  #mainNavbar .nav-inner {
-    padding: 0 16px !important;
-    gap: 12px !important;
-  }
-
-  #mainNavbar .exact-nav-brand {
-    margin-right: 10px !important;
-  }
-
-  #mainNavbar .exact-nav-link,
-  #mainNavbar .nav-links-menu > a,
-  #mainNavbar .exact-nav-dropdown-btn {
-    padding: 7px 10px !important;
-    font-size: 0.84rem !important;
-  }
-
-  #mainNavbar .exact-nav-actions,
-  #mainNavbar .global-nav-actions {
-    gap: 8px !important;
-  }
-}
-
-@media (max-width: 991px) {
+@media (max-width: 1120px) {
   #mainNavbar .exact-nav-mobile-toggle,
   #mainNavbar .mobile-nav-toggle {
     display: inline-flex !important;
@@ -635,6 +622,7 @@ body {
     position: static !important;
     transform: none !important;
     min-width: 100% !important;
+    width: 100% !important;
     box-shadow: none !important;
     border: none !important;
     grid-template-columns: 1fr !important;
