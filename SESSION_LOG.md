@@ -1207,3 +1207,12 @@
 - Implementación: sistema tipográfico contextual para títulos de sección, tarjetas, paneles, fondos oscuros, iconos, mega menú y pantallas móviles.
 - Alcance: se enlaza al final del `<head>` de los 25 documentos HTML para ejecutarse después de las hojas particulares; `navigation.js` mantiene un respaldo para páginas generadas dinámicamente.
 - Archivos modificados: `website/js/navigation.js` y `website/css/headings-system.css`.
+
+# 2026-09-27 — Reglas de oro: adaptabilidad y arquitectura de servicios
+
+- 🎯 **POR QUÉ (Propósito):** Garantizar una experiencia correcta en cualquier dispositivo y mantener una única responsabilidad clara para la persistencia, el despliegue y el acceso de usuarios.
+- ⚙️ **CÓMO (Arquitectura e implementación):** Todo el sitio web deberá diseñarse y validarse de forma adaptable y responsive, sin depender de un tamaño de pantalla específico. Supabase será la fuente principal para guardar toda la información de la plataforma. Firebase permanecerá activo exclusivamente para Hosting y autenticación.
+- 📦 **QUÉ (Directiva registrada):** Estas condiciones se consideran reglas permanentes para cada desarrollo, ajuste, prueba y despliegue posterior del portal.
+- **Consulta del usuario:** Recordatorio explícito de compatibilidad universal entre dispositivos y confirmación de la distribución tecnológica entre Supabase y Firebase.
+- **Archivo actualizado:** `SESSION_LOG.md`.
+- **Estado:** Directiva confirmada y registrada; no se solicitaron cambios de código adicionales en esta consulta.

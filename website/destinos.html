@@ -135,17 +135,17 @@
     <div class="exact-container">
       <div class="destinos-cat-bar">
         <div class="destinos-cat-scroller" role="navigation" aria-label="Filtro de categorías">
-          <button type="button" class="destinos-cat-chip active"><i class="fa-solid fa-table-cells-large"></i> Todos</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-water"></i> Playas</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-volcano"></i> Volcanes</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-water-ladder"></i> Ríos y lagunas</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-leaf"></i> Naturaleza</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-landmark"></i> Cultura</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-utensils"></i> Gastronomía</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-bed"></i> Hospedaje</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-person-hiking"></i> Aventura</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-tree"></i> Aventura</button>
-          <button type="button" class="destinos-cat-chip"><i class="fa-solid fa-moon"></i> Vida nocturna</button>
+          <button type="button" class="destinos-cat-chip active" data-category="todos"><i class="fa-solid fa-table-cells-large"></i> Todos</button>
+          <button type="button" class="destinos-cat-chip" data-category="playa"><i class="fa-solid fa-water"></i> Playas</button>
+          <button type="button" class="destinos-cat-chip" data-category="volcan"><i class="fa-solid fa-volcano"></i> Volcanes</button>
+          <button type="button" class="destinos-cat-chip" data-category="agua"><i class="fa-solid fa-water-ladder"></i> Ríos y lagunas</button>
+          <button type="button" class="destinos-cat-chip" data-category="naturaleza"><i class="fa-solid fa-leaf"></i> Naturaleza</button>
+          <button type="button" class="destinos-cat-chip" data-category="cultura"><i class="fa-solid fa-landmark"></i> Cultura</button>
+          <button type="button" class="destinos-cat-chip" data-category="gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía</button>
+          <button type="button" class="destinos-cat-chip" data-category="hospedaje"><i class="fa-solid fa-bed"></i> Hospedaje</button>
+          <button type="button" class="destinos-cat-chip" data-category="aventura"><i class="fa-solid fa-person-hiking"></i> Aventura</button>
+          <button type="button" class="destinos-cat-chip" data-category="bosque"><i class="fa-solid fa-tree"></i> Bosques</button>
+          <button type="button" class="destinos-cat-chip" data-category="nocturna"><i class="fa-solid fa-moon"></i> Vida nocturna</button>
         </div>
       </div>
 
@@ -154,17 +154,17 @@
            ============================================================================ -->
       <div class="destinos-filter-bar">
         <div class="destinos-filters-left">
-          <button type="button" class="dest-dropdown-btn">Departamento <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn">Precio <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn">Valoración <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-toggle-btn">
+          <button type="button" class="dest-dropdown-btn" data-filter="department" aria-expanded="false">Departamento <i class="fa-solid fa-chevron-down"></i></button>
+          <button type="button" class="dest-dropdown-btn" data-filter="price" aria-expanded="false">Precio <i class="fa-solid fa-chevron-down"></i></button>
+          <button type="button" class="dest-dropdown-btn" data-filter="rating" aria-expanded="false">Valoración <i class="fa-solid fa-chevron-down"></i></button>
+          <button type="button" class="dest-toggle-btn" aria-pressed="false">
             <span class="toggle-switch-ui"></span> Verificados
           </button>
-          <button type="button" class="dest-dropdown-btn"><i class="fa-solid fa-location-crosshairs" style="color: #10B981;"></i> Cerca de mí</button>
+          <button type="button" class="dest-dropdown-btn" data-action="nearby"><i class="fa-solid fa-location-crosshairs" style="color: #10B981;"></i> Cerca de mí</button>
         </div>
         <div class="dest-order-right">
           <span>Ordenar por:</span>
-          <select class="dest-order-select">
+          <select class="dest-order-select" aria-label="Ordenar destinos">
             <option>Más populares</option>
             <option>Mejor valorados</option>
             <option>Precio: menor a mayor</option>
@@ -180,9 +180,9 @@
         <!-- Izquierda: Mapa de Nicaragua -->
         <div class="destinos-map-panel">
           <div class="destinos-map-top-bar">
-            <button type="button" class="destinos-view-tab active">Mapa</button>
-            <button type="button" class="destinos-view-tab">Lista</button>
-            <button type="button" class="destinos-view-tab">Ambos</button>
+            <button type="button" class="destinos-view-tab active" data-view="map" aria-pressed="true">Mapa</button>
+            <button type="button" class="destinos-view-tab" data-view="list" aria-pressed="false">Lista</button>
+            <button type="button" class="destinos-view-tab" data-view="both" aria-pressed="false">Ambos</button>
           </div>
           <div class="destinos-map-viewport" id="destinosInteractiveMap"></div>
 
@@ -632,6 +632,7 @@
 
   <!-- Leaflet JS y Scripts Modulares -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="js/destinos-interactions.js?v=20260927-1"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
