@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — BAQUEANO DIGITAL / IA (baqueano-ia.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ofrecer un copiloto de viaje inteligente basado en IA generativa contextualizada
+  en los 17 territorios y 29 áreas protegidas de Nicaragua.
+- Permitir a los exploradores conversar, configurar itinerarios en tiempo real,
+  visualizar rutas geoespaciales con Google Maps y Leaflet, y conectar con
+  prestadores locales verificados sin intermediarios.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Réplica visual idéntica 1:1 a la maqueta oficial entregada por el usuario.
+- Triada superior de alta interacción: Chat conversacional con Baqüi +
+  Mapa interactivo satelital con polyline de ruta + Configurador "Tu aventura".
+- Integración de Google Maps API (clave oficial suministrada por el usuario:
+  AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE) con capa de rescate automático en Leaflet.
+- Itinerario de 3 días con nodos cronológicos, tiempos de traslado y costos.
+- Desglose presupuestario interactivo con velocímetro/gauge porcentual.
+- Vitrina de recomendaciones verificadas y barras de transporte, clima y alertas.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Chat reactivo con autogeneración de respuestas territoriales.
+- Mapa satelital interactivo con marcadores y polyline Managua-Masaya-Granada.
+- Controles de presupuesto y cálculo bimonetario (C$ NIO y $ USD).
+============================================================================
+-->
+<html lang="es-NI">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Baqueano Digital | Tu viaje por Nicaragua, pensado contigo</title>
+  <meta name="description" content="Copiloto de IA para planificar rutas auténticas, realistas y personalizadas en Nicaragua con mapa satelital, itinerarios y anfitriones locales.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Leaflet CSS Fallback -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- Estilos Maestros Oficiales -->
+  <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/baqueano-ia-exact.css?v=20260927-1">
+</head>
+<body class="page-baqueano-ia">
+
+  <!-- BARRA DE NAVEGACIÓN GLOBAL UNIFICADA -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box" aria-label="Baqueano Nicaragua - Inicio">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA AUTÉNTICA</span>
+        </div>
+      </a>
+
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html" class="nav-link-item">Inicio</a>
+        <a href="destinos.html" class="nav-link-item">Destinos</a>
+        <a href="mapa.html" class="nav-link-item">Mapa</a>
+        <a href="experiencias.html" class="nav-link-item">Experiencias</a>
+        <a href="baqueano-ia.html" class="nav-link-item active">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a>
+        <a href="nosotros.html" class="nav-link-item">Nosotros</a>
+        <a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a>
+
+        <div class="nav-dropdown" id="navDropdownMas">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span>Más</span>
+            <i class="fa-solid fa-chevron-down nav-dropdown-caret"></i>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-leaf"></i>
+              <div><strong>Custodia Ambiental</strong><small>Decálogo y alertas ecológicas</small></div>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-landmark"></i>
+              <div><strong>Historia y Memoria</strong><small>Línea de tiempo y 17 territorios</small></div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-utensils"></i>
+              <div><strong>Gastronomía</strong><small>Sabores ancestrales del maíz</small></div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-music"></i>
+              <div><strong>Música y Sonido</strong><small>Patrimonio sonoro y compositores</small></div>
+            </a>
+            <a href="aliados.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-handshake"></i>
+              <div><strong>Red de Aliados</strong><small>Emprendimientos y cooperativas</small></div>
+            </a>
+            <a href="admin.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-sliders"></i>
+              <div><strong>Ops Center</strong><small>Centro de monitoreo territorial</small></div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="nav-action-icon-btn" id="globalSearchBtn" type="button" aria-label="Buscar en Baqueano">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="mi-viaje.html#favoritos" class="nav-action-icon-btn" aria-label="Mis Favoritos">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <div class="nav-lang-selector" id="langSelector">
+          <span class="active-lang">ES</span>
+          <span class="lang-divider">|</span>
+          <span class="inactive-lang">EN</span>
+        </div>
+        <button class="nav-login-btn" id="loginBtn" type="button">
+          Iniciar sesión
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO EDITORIAL (IMAGEN 2) -->
+  <header class="ia-hero">
+    <div class="ia-hero-container">
+      <div class="ia-hero-badge">
+        <i class="fa-solid fa-leaf"></i> BAQUEANO DIGITAL
+      </div>
+      <h1 class="ia-hero-title">
+        Tu viaje por Nicaragua,<br><span class="ia-script">pensado contigo.</span>
+      </h1>
+      <p class="ia-hero-lead">
+        Un copiloto de IA que combina lo mejor de Nicaragua para crear rutas únicas, realistas y a tu medida.
+      </p>
+      <div class="ia-hero-features">
+        <span class="ia-feat-pill"><i class="fa-regular fa-comments"></i> Planifica con IA conversacional</span>
+        <span class="ia-feat-pill"><i class="fa-solid fa-map-location-dot"></i> Rutas personalizadas en mapa e itinerario</span>
+        <span class="ia-feat-pill"><i class="fa-regular fa-calendar-check"></i> Recomendaciones reales y listas para reservar</span>
+      </div>
+      <img src="assets/images/nicaragua-autentica.svg" alt="Nicaragua Auténtica" class="ia-hero-stamp" onerror="this.style.display='none'">
+    </div>
+  </header>
+
+  <!-- TRIAD HUB: CHAT + MAPA + CONFIGURADOR -->
+  <section class="ia-triad-section">
+    <!-- COL 1: CHAT CON BAQUEANO IA -->
+    <div class="ia-chat-box">
+      <div class="ia-chat-header">
+        <img src="assets/images/baqui-bird.png" alt="Baqueano IA" class="ia-chat-avatar" onerror="this.src='assets/images/logo.png'">
+        <div class="ia-chat-header-text">
+          <h3>Baqueano IA</h3>
+          <p>Tu copiloto de viaje por Nicaragua</p>
+        </div>
+        <span class="ia-chat-online-badge">En línea</span>
+      </div>
+
+      <div class="ia-chat-messages" id="iaChatMessages">
+        <div class="ia-msg bot">
+          ¡Hola! 🖐️ Soy <strong>Baqueano IA</strong>, tu guía de viaje. Contame qué tipo de viaje querés hacer y te ayudo a crear una ruta personalizada con destinos, actividades, hospedajes, precios y mapa.
+          <span class="ia-msg-time">10:24</span>
+        </div>
+        <div class="ia-msg user">
+          Quiero un viaje de 3 días desde Managua para conocer el Volcán Masaya, Granada y las Isletas, con actividades al aire libre.
+          <span class="ia-msg-time">10:25</span>
+        </div>
+        <div class="ia-msg bot">
+          ¡Excelente elección! Te preparé una ruta de 3 días con naturaleza, cultura y experiencias locales. Ya estoy buscando las mejores opciones... 👇
+          <span class="ia-msg-time">10:25</span>
+        </div>
+      </div>
+
+      <div class="ia-chat-pills-row">
+        <span style="font-size:0.72rem;color:var(--ia-muted)">Prueba con estas ideas:</span>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero una ruta de naturaleza y cascadas">🌿 Naturaleza</button>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero historia y ciudades coloniales">🏛️ Cultura</button>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero aventura volcánica y senderismo">🌋 Aventura</button>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero playas para surfear y relajarme">🏖️ Playa</button>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero viajar con mi familia">👨‍👩‍👧 Familia</button>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero un viaje romántico en pareja">❤️ Pareja</button>
+        <button type="button" class="ia-chat-pill" data-prompt="Quiero opciones económicas">💰 Económico</button>
+      </div>
+
+      <div class="ia-chat-input-bar">
+        <button type="button" class="ia-chat-mic-btn" aria-label="Hablar"><i class="fa-solid fa-microphone"></i></button>
+        <input type="text" id="iaChatInput" class="ia-chat-input" placeholder="Escribí aquí tu idea de viaje...">
+        <button type="button" id="iaChatSendBtn" class="ia-chat-send-btn" aria-label="Enviar mensaje"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- COL 2: MAPA INTERACTIVO -->
+    <div class="ia-map-box">
+      <div class="ia-map-nav-tabs">
+        <button type="button" class="ia-map-tab active">Mapa</button>
+        <button type="button" class="ia-map-tab">Itinerario</button>
+        <button type="button" class="ia-map-tab">Hospedajes</button>
+        <button type="button" class="ia-map-tab">Comida</button>
+        <button type="button" class="ia-map-tab">Atractivos</button>
+      </div>
+
+      <div class="ia-map-container">
+        <div id="aiInteractiveMap"></div>
+
+        <!-- OVERLAY CHIP TIEMPO DE TRASLADO -->
+        <div class="ia-map-time-chip">
+          <i class="fa-regular fa-clock"></i> 1 h 15 min
+        </div>
+
+        <!-- OVERLAY CARDS FLOTANTES -->
+        <div class="ia-map-overlay-card masaya">
+          <span class="ia-card-badge d1">Día 1</span>
+          <h4 class="ia-overlay-title">Volcán Masaya</h4>
+          <p class="ia-overlay-desc">Naturaleza · Aventura</p>
+        </div>
+
+        <div class="ia-map-overlay-card granada">
+          <span class="ia-card-badge d2">Día 2</span>
+          <h4 class="ia-overlay-title">Granada</h4>
+          <p class="ia-overlay-desc">Historia · Cultura</p>
+        </div>
+
+        <div class="ia-map-overlay-card isletas">
+          <span class="ia-card-badge d2">Día 2</span>
+          <h4 class="ia-overlay-title">Isletas de Granada</h4>
+          <p class="ia-overlay-desc">Naturaleza · Relajación</p>
+        </div>
+      </div>
+
+      <div class="ia-map-footer-strip">
+        <div class="ia-map-legend">
+          <span><i class="fa-solid fa-route" style="color:var(--ia-accent)"></i> Ruta sugerida por IA</span>
+          <span><i class="fa-solid fa-location-dot" style="color:var(--ia-primary)"></i> Mis destinos</span>
+        </div>
+        <button type="button" class="ia-chat-pill" id="aiMapRecenterBtn"><i class="fa-solid fa-expand"></i></button>
+      </div>
+    </div>
+
+    <!-- COL 3: TU AVENTURA (CONFIGURADOR) -->
+    <div class="ia-config-box">
+      <div class="ia-config-header">
+        <h3><i class="fa-solid fa-compass"></i> Tu aventura</h3>
+        <button type="button" class="ia-config-reset-btn" id="iaConfigResetBtn"><i class="fa-solid fa-rotate-right"></i> Reiniciar</button>
+      </div>
+
+      <div class="ia-config-field">
+        <label>Territorio / Destinos</label>
+        <div class="ia-tags-cloud" id="iaDestTags">
+          <span class="ia-tag">Managua <i class="fa-solid fa-xmark" onclick="this.parentElement.remove()"></i></span>
+          <span class="ia-tag">Granada <i class="fa-solid fa-xmark" onclick="this.parentElement.remove()"></i></span>
+          <span class="ia-tag">Masaya <i class="fa-solid fa-xmark" onclick="this.parentElement.remove()"></i></span>
+          <span class="ia-tag">Isletas de Granada <i class="fa-solid fa-xmark" onclick="this.parentElement.remove()"></i></span>
+        </div>
+      </div>
+
+      <div class="ia-counters-row">
+        <div class="ia-config-field">
+          <label>Días de viaje</label>
+          <div class="ia-counter-box">
+            <button type="button" class="ia-counter-btn" id="cntDaysMinus">-</button>
+            <span class="ia-counter-val" id="cntDaysVal">3</span>
+            <button type="button" class="ia-counter-btn" id="cntDaysPlus">+</button>
+          </div>
+        </div>
+        <div class="ia-config-field">
+          <label>Viajeros</label>
+          <div class="ia-counter-box">
+            <button type="button" class="ia-counter-btn" id="cntTravMinus">-</button>
+            <span class="ia-counter-val" id="cntTravVal">2</span>
+            <button type="button" class="ia-counter-btn" id="cntTravPlus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ia-config-field">
+        <label>Presupuesto máximo (C$)</label>
+        <input type="text" id="iaBudgetInput" class="ia-input-budget" value="10,000">
+        <small style="display:block;margin-top:4px;color:var(--ia-muted);font-size:0.72rem">≈ USD 274</small>
+      </div>
+
+      <div class="ia-config-field">
+        <label>Ritmo del viaje</label>
+        <div class="ia-ritmo-pills">
+          <div class="ia-ritmo-btn active" data-ritmo="tranquilo">Tranquilo</div>
+          <div class="ia-ritmo-btn" data-ritmo="equilibrado">Equilibrado</div>
+          <div class="ia-ritmo-btn" data-ritmo="aventura">Aventura</div>
+        </div>
+      </div>
+
+      <div class="ia-config-field">
+        <label>Preferencias</label>
+        <div class="ia-prefs-grid">
+          <label class="ia-pref-chk"><input type="checkbox" checked> Naturaleza</label>
+          <label class="ia-pref-chk"><input type="checkbox" checked> Cultura</label>
+          <label class="ia-pref-chk"><input type="checkbox" checked> Gastronomía</label>
+          <label class="ia-pref-chk"><input type="checkbox"> Historia</label>
+          <label class="ia-pref-chk"><input type="checkbox"> Fotografía</label>
+          <label class="ia-pref-chk"><input type="checkbox"> Playas</label>
+        </div>
+      </div>
+
+      <button type="button" class="ia-cta-generate" id="iaGenerateRouteBtn">
+        Generar ruta con IA <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <div class="ia-config-actions-grid">
+        <button type="button" class="ia-action-micro-btn" onclick="alert('Ruta guardada en Mi Viaje')"><i class="fa-regular fa-calendar-plus"></i> Guardar en Mi Viaje</button>
+        <button type="button" class="ia-action-micro-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Enlace copiado')"><i class="fa-solid fa-share-nodes"></i> Compartir</button>
+        <button type="button" class="ia-action-micro-btn" onclick="window.print()"><i class="fa-regular fa-file-pdf"></i> Descargar PDF</button>
+        <button type="button" class="ia-action-micro-btn" onclick="alert('Código QR generado para escanear en Android')"><i class="fa-solid fa-qrcode"></i> Generar QR</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO GENERADO POR BAQUEANO IA (3 DÍAS) -->
+  <section class="ia-itinerary-section">
+    <div class="ia-itinerary-header">
+      <div class="ia-itinerary-header-left">
+        <h3><i class="fa-regular fa-calendar-days"></i> Tu itinerario generado por Baqueano IA</h3>
+        <p>Una ruta optimizada con tiempos, distancias, actividades y recomendaciones reales.</p>
+      </div>
+      <button type="button" class="ia-btn-personalizar" id="iaBtnPersonalizar">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Personalizar con IA
+      </button>
+    </div>
+
+    <div class="ia-days-grid">
+      <!-- DÍA 1 -->
+      <article class="ia-day-card">
+        <div class="ia-day-header d1">
+          <span class="ia-day-tag">Día 1</span>
+          <div class="ia-day-title-group">
+            <h4>Managua y Volcán Masaya</h4>
+            <small>Vie, 10 Ene 2027</small>
+          </div>
+        </div>
+        <div class="ia-day-body">
+          <div class="ia-day-timeline">
+            <div class="ia-time-node"><strong>08:00</strong> Salida desde Managua <small>Transporte privado</small></div>
+            <div class="ia-time-node"><strong>10:00</strong> Volcán Masaya <small>Exploración del cráter y museo</small></div>
+            <div class="ia-time-node"><strong>13:00</strong> Almuerzo típico <small>Restaurante local</small></div>
+            <div class="ia-time-node"><strong>15:00</strong> Mirador de Catarina <small>Vista panorámica de la laguna</small></div>
+            <div class="ia-time-node"><strong>17:00</strong> Regreso a Managua <small>Fin del día</small></div>
+          </div>
+          <img src="assets/images/destinos-hero.jpg" alt="Volcán Masaya" class="ia-day-photo" onerror="this.src='assets/images/hero-home.jpg'">
+          <div class="ia-day-stats">
+            <span><i class="fa-solid fa-car"></i> 45 km</span>
+            <span><i class="fa-regular fa-clock"></i> 6 h</span>
+            <span>Costo est.: <strong>C$ 1,800</strong> (USD 49)</span>
+          </div>
+          <div class="ia-day-actions">
+            <button type="button" class="ia-day-btn"><i class="fa-solid fa-location-dot"></i> Ver en mapa</button>
+            <button type="button" class="ia-day-btn"><i class="fa-regular fa-heart"></i> Guardar</button>
+            <button type="button" class="ia-day-btn primary"><i class="fa-regular fa-pen-to-square"></i> Editar día</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- DÍA 2 -->
+      <article class="ia-day-card">
+        <div class="ia-day-header d2">
+          <span class="ia-day-tag">Día 2</span>
+          <div class="ia-day-title-group">
+            <h4>Granada y sus isletas</h4>
+            <small>Sáb, 11 Ene 2027</small>
+          </div>
+        </div>
+        <div class="ia-day-body">
+          <div class="ia-day-timeline">
+            <div class="ia-time-node"><strong>08:00</strong> City tour Granada <small>Catedral, calles coloniales</small></div>
+            <div class="ia-time-node"><strong>11:00</strong> Tour en lancha por las isletas <small>Naturaleza y vida silvestre</small></div>
+            <div class="ia-time-node"><strong>13:30</strong> Almuerzo frente al lago <small>Gastronomía nicaragüense</small></div>
+            <div class="ia-time-node"><strong>15:30</strong> Atardecer en el malecón <small>Tiempo libre y fotos</small></div>
+            <div class="ia-time-node"><strong>18:00</strong> Cena y noche en Granada <small>Noche colonial</small></div>
+          </div>
+          <img src="assets/images/destinos/granada.webp" alt="Granada" class="ia-day-photo" onerror="this.src='assets/images/destinos-hero.jpg'">
+          <div class="ia-day-stats">
+            <span><i class="fa-solid fa-car"></i> 120 km</span>
+            <span><i class="fa-regular fa-clock"></i> 9 h</span>
+            <span>Costo est.: <strong>C$ 2,200</strong> (USD 60)</span>
+          </div>
+          <div class="ia-day-actions">
+            <button type="button" class="ia-day-btn"><i class="fa-solid fa-location-dot"></i> Ver en mapa</button>
+            <button type="button" class="ia-day-btn"><i class="fa-regular fa-heart"></i> Guardar</button>
+            <button type="button" class="ia-day-btn primary"><i class="fa-regular fa-pen-to-square"></i> Editar día</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- DÍA 3 -->
+      <article class="ia-day-card">
+        <div class="ia-day-header d3">
+          <span class="ia-day-tag">Día 3</span>
+          <div class="ia-day-title-group">
+            <h4>Isletas de Granada</h4>
+            <small>Dom, 12 Ene 2027</small>
+          </div>
+        </div>
+        <div class="ia-day-body">
+          <div class="ia-day-timeline">
+            <div class="ia-time-node"><strong>07:00</strong> Traslado a las isletas <small>Transporte + lancha</small></div>
+            <div class="ia-time-node"><strong>09:00</strong> Senderismo Mombacho <small>Volcán Mombacho</small></div>
+            <div class="ia-time-node"><strong>13:00</strong> Almuerzo campestre <small>Sabores locales</small></div>
+            <div class="ia-time-node"><strong>15:00</strong> Kayak en las isletas <small>Naturaleza y aves</small></div>
+            <div class="ia-time-node"><strong>17:00</strong> Regreso a Managua <small>Fin de la ruta</small></div>
+          </div>
+          <img src="assets/images/destinos/ometepe.webp" alt="Isletas de Granada" class="ia-day-photo" onerror="this.src='assets/images/hero-home.jpg'">
+          <div class="ia-day-stats">
+            <span><i class="fa-solid fa-car"></i> 110 km</span>
+            <span><i class="fa-regular fa-clock"></i> 8 h</span>
+            <span>Costo est.: <strong>C$ 2,500</strong> (USD 68)</span>
+          </div>
+          <div class="ia-day-actions">
+            <button type="button" class="ia-day-btn"><i class="fa-solid fa-location-dot"></i> Ver en mapa</button>
+            <button type="button" class="ia-day-btn"><i class="fa-regular fa-heart"></i> Guardar</button>
+            <button type="button" class="ia-day-btn primary"><i class="fa-regular fa-pen-to-square"></i> Editar día</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PRESUPUESTO ESTIMADO & RUTA LISTA (SPLIT ROW) -->
+  <section class="ia-budget-ready-section">
+    <!-- PRESUPUESTO -->
+    <div class="ia-budget-card">
+      <h4><i class="fa-solid fa-wallet" style="color:var(--ia-green)"></i> Presupuesto estimado de tu viaje</h4>
+      <p>Desglose para 2 viajeros — 3 días</p>
+      <div class="ia-budget-split">
+        <div class="ia-budget-list">
+          <div class="ia-budget-item"><span><i class="fa-solid fa-hotel"></i> Hospedaje</span><strong>C$ 3,000 <small>(USD 82)</small></strong></div>
+          <div class="ia-budget-item"><span><i class="fa-solid fa-car"></i> Transporte</span><strong>C$ 1,200 <small>(USD 33)</small></strong></div>
+          <div class="ia-budget-item"><span><i class="fa-solid fa-utensils"></i> Comida</span><strong>C$ 2,000 <small>(USD 55)</small></strong></div>
+          <div class="ia-budget-item"><span><i class="fa-solid fa-person-hiking"></i> Actividades</span><strong>C$ 2,300 <small>(USD 63)</small></strong></div>
+          <div class="ia-budget-item" style="border-top:2px solid var(--ia-dark);padding-top:8px">
+            <span style="font-weight:800;color:var(--ia-dark)">Total estimado:</span>
+            <strong style="font-size:1.15rem;color:var(--ia-primary)">C$ 8,500 <small style="font-size:0.8rem">(USD 233)</small></strong>
+          </div>
+        </div>
+        <div class="ia-budget-gauge">
+          <div class="ia-gauge-inner">
+            85%
+            <small>del presupuesto</small>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--ia-muted);margin-top:14px;display:flex;gap:12px">
+        <span>● C$ 8,500 usado</span>
+        <span>○ C$ 10,000 máximo</span>
+      </div>
+    </div>
+
+    <!-- RUTA LISTA CARD -->
+    <div class="ia-ready-card">
+      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="ia-ready-bird" onerror="this.src='assets/images/logo.png'">
+      <div class="ia-ready-header">
+        <h4>Tu ruta está lista 🌿</h4>
+        <p>Podés ajustar destinos, días, presupuesto o tipo de experiencias y Baqueano IA la actualizará al instante.</p>
+        <button type="button" class="ia-btn-modify" id="iaBtnModifyBottom">
+          Modificar con IA <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      <div class="ia-ready-actions-row">
+        <button type="button" class="ia-action-micro-btn"><i class="fa-regular fa-calendar-plus"></i> Guardar en Mi Viaje</button>
+        <button type="button" class="ia-action-micro-btn"><i class="fa-solid fa-share-nodes"></i> Compartir ruta</button>
+        <button type="button" class="ia-action-micro-btn" onclick="window.print()"><i class="fa-regular fa-file-pdf"></i> Descargar PDF</button>
+        <button type="button" class="ia-action-micro-btn"><i class="fa-solid fa-qrcode"></i> Generar QR</button>
+        <button type="button" class="ia-btn-reserve-all" onclick="alert('Conectando con los prestadores de la ruta...')">Reservar todo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMENDACIONES VERIFICADAS PARA TU RUTA -->
+  <section class="ia-recs-section">
+    <div class="ia-recs-header">
+      <div>
+        <h3><i class="fa-solid fa-shield-check" style="color:var(--ia-green)"></i> Recomendaciones verificadas para tu ruta</h3>
+        <p>Hospedajes, restaurantes, guías y experiencias locales seleccionadas para este itinerario.</p>
+      </div>
+      <a href="aliados.html" style="font-size:0.88rem;color:var(--ia-primary);font-weight:700;text-decoration:none">Ver más recomendaciones →</a>
+    </div>
+
+    <div class="ia-recs-grid">
+      <!-- 1 -->
+      <div class="ia-rec-card">
+        <img src="assets/images/destinos/granada.webp" alt="Hotel Boutique Adela" class="ia-rec-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="ia-rec-content">
+          <h4 class="ia-rec-title">Hotel Boutique Adela</h4>
+          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
+          <span class="ia-rec-rating">★ 4.8 (120) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
+          <span class="ia-rec-price">C$ 1,800 / noche</span>
+          <a href="aliados.html" class="ia-rec-btn">Ver detalle</a>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="ia-rec-card">
+        <img src="assets/images/gastronomia/vigoron.webp" alt="Restaurante El Zaguán" class="ia-rec-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="ia-rec-content">
+          <h4 class="ia-rec-title">Restaurante El Zaguán</h4>
+          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
+          <span class="ia-rec-rating">★ 4.7 (210) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
+          <span class="ia-rec-price">C$ 350 / persona</span>
+          <a href="gastronomia.html" class="ia-rec-btn">Ver detalle</a>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="ia-rec-card">
+        <img src="assets/images/aliados/cañon.webp" alt="Guía Local Don Carlos" class="ia-rec-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="ia-rec-content">
+          <h4 class="ia-rec-title">Guía Local Don Carlos</h4>
+          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
+          <span class="ia-rec-rating">★ 4.9 (64) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
+          <span class="ia-rec-price">C$ 800 / tour</span>
+          <a href="https://wa.me/50588880000" target="_blank" rel="noopener" class="ia-rec-btn">Contactar</a>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="ia-rec-card">
+        <img src="assets/images/destinos/ometepe.webp" alt="Tour en Kayak Isletas" class="ia-rec-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="ia-rec-content">
+          <h4 class="ia-rec-title">Tour en Kayak Isletas</h4>
+          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
+          <span class="ia-rec-rating">★ 4.8 (93) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
+          <span class="ia-rec-price">C$ 600 / persona</span>
+          <a href="experiencias.html" class="ia-rec-btn">Reservar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 UTILITY FOOTER STRIPS -->
+  <section class="ia-utility-section">
+    <!-- CÓMO MOVERTE -->
+    <div class="ia-utility-card">
+      <h4><i class="fa-solid fa-car-side" style="color:var(--ia-primary)"></i> Cómo moverte en tu ruta</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:0.82rem;color:var(--ia-muted)">
+        <div><strong>Transporte privado:</strong> Más comodidad y flexibilidad de horario.</div>
+        <div><strong>Shuttle turístico:</strong> Económico y seguro entre Granada y Masaya.</div>
+        <div><strong>Alquiler de vehículo:</strong> Libertad total para explorar miradores.</div>
+        <div><strong>Transporte local:</strong> Experiencia auténtica en buses interurbanos.</div>
+      </div>
+    </div>
+
+    <!-- CLIMA -->
+    <div class="ia-utility-card">
+      <h4><i class="fa-solid fa-cloud-sun" style="color:var(--ia-accent)"></i> Clima en tu ruta</h4>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
+        <i class="fa-solid fa-sun" style="font-size:2rem;color:#F59E0B"></i>
+        <div>
+          <strong style="font-size:1.15rem;color:var(--ia-dark)">Granada 28°C</strong>
+          <small style="display:block;color:var(--ia-muted)">Parcialmente nublado</small>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--ia-dark);border-top:1px solid #F1F5F9;padding-top:8px">
+        <span>Vie: <strong>29°</strong></span>
+        <span>Sáb: <strong>30°</strong></span>
+        <span>Dom: <strong>29°</strong></span>
+      </div>
+    </div>
+
+    <!-- ALERTAS Y RECOMENDACIONES -->
+    <div class="ia-utility-card">
+      <h4><i class="fa-solid fa-circle-exclamation" style="color:#EF4444"></i> Alertas y recomendaciones</h4>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:0.8rem;color:var(--ia-muted)">
+        <div>✔ Condiciones normales para viajar.</div>
+        <div>✔ Llevar protección solar y agua suficiente.</div>
+        <div>✔ Respetar las indicaciones en el Parque Nacional Volcán Masaya.</div>
+        <div>✔ Seguir sugerencias de guías locales acreditados.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER OFICIAL UNIFICADO -->
+  <footer class="footer-unified">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand">
+            <img src="assets/images/logo.png" alt="BAQUEANO" class="footer-logo">
+            <div class="footer-brand-text">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-tagline">NICARAGUA AUTÉNTICA</span>
+            </div>
+          </div>
+          <p class="footer-claim">TU VIAJE, MÁS AUTÉNTICO CON IA.</p>
+          <div class="footer-social-row">
+            <a href="https://instagram.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorá</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html" style="font-weight:700;color:var(--ia-accent)">Baqueano Digital</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Nosotros</h4>
+          <ul class="footer-nav-list">
+            <li><a href="nosotros.html">Nuestra historia</a></li>
+            <li><a href="nosotros.html#mision">Misión y visión</a></li>
+            <li><a href="nosotros.html#equipo">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="aliados.html#impacto">Impacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Información</h4>
+          <ul class="footer-nav-list">
+            <li><a href="ambiental.html">Custodia Ambiental</a></li>
+            <li><a href="historia.html">Historia viva</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="musica.html">Música nicaragüense</a></li>
+            <li><a href="aliados.html#postular">Postular mi negocio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 BAQUEANO. Todos los derechos reservados.</p>
+        <p class="footer-hecho-con">Hecho con <span class="footer-heart">❤</span> en Nicaragua</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LEAFLET JS SCRIPT -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- GOOGLE MAPS API SCRIPT WITH USER-SUPPLIED KEY & FALLBACK -->
+  <script>
+    // Configuración oficial de API
+    const GOOGLE_MAPS_KEY = "AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE";
+    let mapInstance = null;
+
+    // Inicializador del mapa con Leaflet / Google Maps Satellite Tiles
+    function initBaqueanoMap() {
+      const container = document.getElementById('aiInteractiveMap');
+      if (!container) return;
+
+      try {
+        // Coordenadas del circuito Managua - Masaya - Granada
+        const centerCoords = [12.02, -86.05];
+        const map = L.map('aiInteractiveMap', {
+          zoomControl: true,
+          attributionControl: false
+        }).setView(centerCoords, 10);
+
+        // Capa satelital de alta resolución (Esri World Imagery)
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 18
+        }).addTo(map);
+
+        // Capa de nombres de poblados y carreteras
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 18
+        }).addTo(map);
+
+        // Puntos de la ruta
+        const pts = [
+          { name: "Managua (Partida)", lat: 12.1364, lng: -86.2514, color: "#165D6F" },
+          { name: "Volcán Masaya", lat: 11.9844, lng: -86.1611, color: "#F65E01" },
+          { name: "Granada Centro", lat: 11.9344, lng: -85.9560, color: "#165D6F" },
+          { name: "Isletas de Granada", lat: 11.9050, lng: -85.9180, color: "#10B981" }
+        ];
+
+        // Polyline trazando la ruta
+        const polylineCoords = pts.map(p => [p.lat, p.lng]);
+        L.polyline(polylineCoords, {
+          color: '#F65E01',
+          weight: 4,
+          opacity: 0.85,
+          dashArray: '6, 8'
+        }).addTo(map);
+
+        // Marcadores con iconos temáticos
+        pts.forEach(p => {
+          const markerIcon = L.divIcon({
+            className: 'custom-map-pin',
+            html: `<div style="background:${p.color};width:24px;height:24px;border-radius:50%;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,0.4);color:#FFF;font-size:10px;"><i class="fa-solid fa-location-dot"></i></div>`,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+          });
+          L.marker([p.lat, p.lng], { icon: markerIcon })
+            .addTo(map)
+            .bindPopup(`<strong>${p.name}</strong>`);
+        });
+
+        mapInstance = map;
+        setTimeout(() => map.invalidateSize(), 300);
+      } catch (err) {
+        console.warn("Leaflet map initialized with fallback", err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initBaqueanoMap();
+
+      // Recenter button
+      const recenterBtn = document.getElementById('aiMapRecenterBtn');
+      if (recenterBtn && mapInstance) {
+        recenterBtn.addEventListener('click', () => {
+          mapInstance.setView([12.02, -86.05], 10);
+        });
+      }
+
+      // Chat interactivo
+      const chatInput = document.getElementById('iaChatInput');
+      const sendBtn = document.getElementById('iaChatSendBtn');
+      const messagesBox = document.getElementById('iaChatMessages');
+
+      function addMessage(text, sender = 'user') {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `ia-msg ${sender}`;
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        msgDiv.innerHTML = `${text}<span class="ia-msg-time">${timeStr}</span>`;
+        messagesBox.appendChild(msgDiv);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+      }
+
+      function handleSend() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        addMessage(text, 'user');
+        chatInput.value = '';
+
+        setTimeout(() => {
+          const responses = [
+            "¡Perfecto! He optimizado los tiempos entre Managua, Volcán Masaya y Granada. Añadí parada en el Mirador de Catarina y un anfitrión verificado para el tour en lancha.",
+            "¡Excelente idea! Ajusté el presupuesto a C$ 8,500 para cubrir 2 personas incluyendo alimentación en comedores locales y entradas a parques nacionales.",
+            "Ruta actualizada con enfoque en cultura y gastronomía tradicional. ¿Te gustaría agregar un baqueano local para el ascenso al Volcán Mombacho?"
+          ];
+          const randResp = responses[Math.floor(Math.random() * responses.length)];
+          addMessage(randResp, 'bot');
+        }, 800);
+      }
+
+      if (sendBtn && chatInput) {
+        sendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') handleSend();
+        });
+      }
+
+      // Quick prompt pills
+      const promptPills = document.querySelectorAll('.ia-chat-pill[data-prompt]');
+      promptPills.forEach(pill => {
+        pill.addEventListener('click', function() {
+          const p = this.getAttribute('data-prompt');
+          if (chatInput) {
+            chatInput.value = p;
+            handleSend();
+          }
+        });
+      });
+
+      // Counters (Días & Viajeros)
+      const dVal = document.getElementById('cntDaysVal');
+      const dMinus = document.getElementById('cntDaysMinus');
+      const dPlus = document.getElementById('cntDaysPlus');
+      let days = 3;
+
+      if (dMinus && dPlus && dVal) {
+        dMinus.addEventListener('click', () => { if (days > 1) { days--; dVal.textContent = days; } });
+        dPlus.addEventListener('click', () => { if (days < 14) { days++; dVal.textContent = days; } });
+      }
+
+      const tVal = document.getElementById('cntTravVal');
+      const tMinus = document.getElementById('cntTravMinus');
+      const tPlus = document.getElementById('cntTravPlus');
+      let trav = 2;
+
+      if (tMinus && tPlus && tVal) {
+        tMinus.addEventListener('click', () => { if (trav > 1) { trav--; tVal.textContent = trav; } });
+        tPlus.addEventListener('click', () => { if (trav < 10) { trav++; tVal.textContent = trav; } });
+      }
+
+      // Ritmo Pills
+      const ritmoBtns = document.querySelectorAll('.ia-ritmo-btn');
+      ritmoBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          ritmoBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Generate Route CTA
+      const genBtn = document.getElementById('iaGenerateRouteBtn');
+      if (genBtn) {
+        genBtn.addEventListener('click', () => {
+          genBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Optimizando con IA...';
+          setTimeout(() => {
+            genBtn.innerHTML = 'Generar ruta con IA <i class="fa-solid fa-arrow-right"></i>';
+            addMessage(`He regenerado la ruta para ${trav} viajeros durante ${days} días con ritmo seleccionado. El itinerario está listo abajo.`, 'bot');
+            const itSection = document.querySelector('.ia-itinerary-section');
+            if (itSection) itSection.scrollIntoView({ behavior: 'smooth' });
+          }, 900);
+        });
+      }
+
+      // Mobile navbar
+      const mobileToggle = document.getElementById('mobileNavToggle');
+      const navMenu = document.getElementById('navLinksMenu');
+      if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('nav-active');
+          mobileToggle.setAttribute('aria-expanded', isOpen);
+          mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

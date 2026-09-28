@@ -1,14 +1,842 @@
-/*
- * 🎯 POR QUÉ: reproducir fielmente la lámina institucional suministrada sin perder información.
- * ⚙️ CÓMO: composición responsive compacta sobre los módulos existentes y los nuevos bloques editoriales.
- * 📦 QUÉ: hero, razón, misión, visión, valores, modelo, identidad, cifras, manifiesto, red y equipo.
- */
-:root{--about-navy:#082b48;--about-green:#087b50;--about-teal:#165d6f;--about-orange:#f65e01;--about-sand:#efd8a9}.page-nosotros{background:#f7fafc;color:var(--about-navy)}
-.page-nosotros .institucional-hero{height:42vh;min-height:390px;max-height:520px}.page-nosotros .institucional-hero-bg{filter:saturate(1.15) contrast(1.04)}.page-nosotros .institucional-hero-gradient{background:linear-gradient(90deg,rgba(2,20,33,.94),rgba(4,33,39,.62) 50%,rgba(3,27,37,.08) 80%)}.page-nosotros .institucional-hero-content{top:52%;left:max(7vw,calc((100vw - 1420px)/2));width:min(650px,86vw);transform:translateY(-48%)}.page-nosotros .institucional-hero-badge{border:0;background:transparent;padding:0;letter-spacing:.18em;text-transform:uppercase}.page-nosotros .institucional-hero-title{font-size:clamp(2.7rem,5vw,5rem);line-height:.92;text-transform:uppercase}.about-title-accent{display:block;color:var(--about-orange);font-family:"Brush Script MT","Segoe Script",cursive}.page-nosotros .institucional-hero-subtitle{max-width:590px;font-size:1.05rem;line-height:1.42}.about-hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.about-hero-actions a{padding:.8rem 1.2rem;border:1px solid #fff;border-radius:999px;color:#fff;background:#0217248c;font-weight:800;text-decoration:none}.about-hero-actions a:first-child{border-color:var(--about-orange);background:var(--about-orange)}
-.page-nosotros main>.container{max-width:1460px!important;padding-top:1rem!important;padding-bottom:2rem!important}.page-nosotros .manifesto-quote-card{margin:0 0 1rem;padding:1rem 1.25rem;border:0;border-radius:0;background:#fff;box-shadow:none}.page-nosotros .manifesto-quote-text{font-size:.93rem}.page-nosotros .about-intro-card,.page-nosotros .purpose-card,.page-nosotros .emblem-card{display:none}.about-reason{display:grid;grid-template-columns:1.1fr 1.5fr;gap:14px;margin-bottom:14px}.about-reason-copy{position:relative;min-height:155px;padding:1.2rem 1.2rem 1.2rem 7.5rem;border-radius:12px;background:#fff;box-shadow:0 7px 20px #082b481a}.about-reason-copy img{position:absolute;left:-10px;bottom:0;width:125px;height:150px;object-fit:contain}.about-reason-copy h2{margin:0 0 .5rem;font-size:1.7rem}.about-reason-copy p{margin:0;line-height:1.45}.reason-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.reason-pillar{overflow:hidden;border-radius:10px;background:#fff;box-shadow:0 6px 18px #082b481a}.reason-pillar img{width:100%;height:76px;object-fit:cover}.reason-pillar div{display:grid;grid-template-columns:38px 1fr;gap:.5rem;padding:.6rem}.reason-pillar i{color:var(--about-green);font-size:1.5rem}.reason-pillar h3,.reason-pillar p{margin:0}.reason-pillar h3{font-size:.82rem}.reason-pillar p{font-size:.68rem;line-height:1.3}
-.page-nosotros .mv-grid{gap:12px;margin:0 0 1rem}.page-nosotros .mv-card{min-height:220px;padding:1.6rem!important;border:0!important;border-radius:12px!important;color:#fff;background-position:center!important;background-size:cover!important;box-shadow:0 8px 22px #082b4824}.page-nosotros .mv-card.mision{background:linear-gradient(90deg,#041c2df2,#041c2d61),url('../../assets/images/destinos/isla_de_ometepe.jpg')}.page-nosotros .mv-card.vision{background:linear-gradient(90deg,#041c2df2,#041c2d61),url('../../assets/images/footer-nicaragua-panorama.png')}.page-nosotros .mv-title,.page-nosotros .mv-text{color:#fff!important}.page-nosotros .meaning-section{margin:1rem 0}.page-nosotros .section-eyebrow{display:none}.page-nosotros .section-title{font-size:1.55rem!important}.page-nosotros .meaning-grid{grid-template-columns:repeat(6,1fr)!important;gap:9px!important}.page-nosotros .meaning-card{min-height:160px;padding:5.8rem .75rem .7rem!important;border-radius:10px!important;text-align:left!important;background:linear-gradient(0deg,#fff 54%,transparent 55%),url('../../assets/images/destinos/isla_de_ometepe.jpg') center/cover!important;box-shadow:0 5px 16px #082b481a!important}.page-nosotros .meaning-card i{font-size:1.5rem!important}.page-nosotros .meaning-card h3{font-size:.84rem!important}.page-nosotros .meaning-card p{font-size:.68rem!important;line-height:1.28!important}
-.about-model,.about-network,.about-team{margin:1rem 0}.about-model h2,.about-network h2,.about-team h2{margin:0;font-size:1.55rem}.model-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:.65rem}.model-step{position:relative;display:grid;grid-template-columns:64px 1fr;gap:.65rem;align-items:center;min-height:92px;padding:.65rem;border-radius:10px;background:#fff;box-shadow:0 5px 16px #082b4817}.model-step:not(:last-child)::after{content:'➜';position:absolute;right:-18px;color:var(--about-orange);font-size:1.5rem}.model-step img{width:64px;height:70px;border-radius:8px;object-fit:cover}.model-step h3,.model-step p{margin:0}.model-step h3{font-size:.78rem}.model-step p{font-size:.66rem;line-height:1.25}
-.page-nosotros .nosotros-inline-010{margin:1rem 0!important;padding:1rem!important;border-radius:12px!important;background:linear-gradient(90deg,#fff 68%,#efd8a97a),url('../../assets/images/logo.png') right 4% center/180px no-repeat!important}.page-nosotros .nosotros-inline-011{margin:0!important;font-size:1.55rem!important}.page-nosotros .nosotros-inline-012,.page-nosotros .color-gallery-status{display:none}.page-nosotros .color-meaning-grid{display:grid!important;grid-template-columns:repeat(5,1fr)!important;transform:none!important;gap:10px!important}.page-nosotros .color-item-card{min-width:0!important;padding:.7rem!important;border:0!important;box-shadow:none!important}.page-nosotros .color-item-card p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}.page-nosotros .numbers-heading{margin:1rem 0 .5rem}.page-nosotros .numbers-heading p{font-size:.7rem}.page-nosotros .stats-trio-grid{grid-template-columns:repeat(4,1fr)!important;gap:10px!important}.page-nosotros .stat-box-card{min-height:100px!important;padding:.85rem!important;border-radius:10px!important}.page-nosotros .stat-number{font-size:1.8rem!important}.page-nosotros .stat-box-card p{display:none}.page-nosotros .stats-note{font-size:.65rem}
-.page-nosotros .manifesto-masterpiece-card{min-height:190px;margin:1rem calc(50% - 50vw)!important;padding:1.2rem max(8vw,calc((100vw - 1300px)/2))!important;border-radius:0!important;text-align:left!important;background:linear-gradient(90deg,#031928f0,#03192861),url('../../assets/images/footer-nicaragua-panorama.png') center/cover!important}.page-nosotros .manifesto-seal-glow,.page-nosotros .manifesto-masterpiece-card .hero-badge-pill,.page-nosotros .manifesto-big-quote,.page-nosotros .manifesto-pillars-grid,.page-nosotros .manifesto-action-slogan,.page-nosotros .manifesto-signature{display:none!important}.page-nosotros .manifesto-master-title{font-size:1.5rem!important}.page-nosotros .manifesto-text-block{max-width:850px!important;margin:0!important}.page-nosotros .manifesto-text-block p{font-size:.82rem!important;line-height:1.4!important}.page-nosotros .manifesto-text-block p+p{display:none}.network-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:.6rem}.network-card{overflow:hidden;border-radius:9px;background:#fff;box-shadow:0 5px 16px #082b481a}.network-card img{width:100%;height:84px;object-fit:cover}.network-card div{padding:.55rem;text-align:center}.network-card h3{margin:0;font-size:.75rem}.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:.6rem}.team-card{display:grid;grid-template-columns:70px 1fr;gap:.6rem;align-items:center;padding:.55rem;border-radius:9px;background:#fff;box-shadow:0 5px 14px #082b4817}.team-card img{width:70px;height:55px;border-radius:7px;object-fit:cover}.team-card h3,.team-card p{margin:0}.team-card h3{font-size:.75rem}.team-card p{font-size:.66rem}.about-final{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:120px;margin:0 calc(50% - 50vw);padding:1.2rem max(7vw,calc((100vw - 1380px)/2));color:#fff;background:linear-gradient(90deg,#021b2bdb,#021b2b26),url('../../assets/images/footer-nicaragua-panorama.png') center/cover}.about-final h2{margin:0;font-size:1.7rem}.about-final-actions{display:flex;gap:.6rem}.about-final-actions a{padding:.75rem 1rem;border:1px solid #fff;border-radius:999px;color:#fff;font-weight:800;text-decoration:none}.about-final-actions a:first-child{border-color:var(--about-orange);background:var(--about-orange)}.page-nosotros .footer-biz-register-card{display:none!important}
-@media(max-width:1000px){.about-reason{grid-template-columns:1fr}.page-nosotros .meaning-grid{grid-template-columns:repeat(3,1fr)!important}.model-flow,.page-nosotros .color-meaning-grid{grid-template-columns:repeat(2,1fr)!important}.network-grid{grid-template-columns:repeat(3,1fr)}.team-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:680px){.page-nosotros .institucional-hero{height:72vh;min-height:590px}.page-nosotros .institucional-hero-content{top:47%}.reason-pillars{display:flex;overflow-x:auto}.reason-pillar{flex:0 0 72vw}.about-reason-copy{padding-left:1rem;padding-bottom:7rem}.about-reason-copy img{height:105px}.page-nosotros .meaning-grid{display:flex!important;overflow-x:auto}.page-nosotros .meaning-card{flex:0 0 68vw}.page-nosotros .mv-grid{grid-template-columns:1fr!important}.model-flow{display:flex;overflow-x:auto}.model-step{flex:0 0 78vw}.model-step::after{display:none}.page-nosotros .color-meaning-grid,.page-nosotros .stats-trio-grid,.network-grid,.team-grid{grid-template-columns:1fr 1fr!important}.about-final{align-items:flex-start;flex-direction:column}.about-final-actions{flex-wrap:wrap}}
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — NOSOTROS (nosotros-exact.css)
+   ============================================================================
+   🎯 POR QUÉ: Replicar 1:1 la identidad institucional de BAQUEANO Nicaragua,
+      mostrando el propósito de ecoturismo campesino, la misión comunitaria y el equipo.
+   ⚙️ CÓMO: Layout estructurado con hero escénico, razón de existir, misión y visión,
+      los 6 pilares de ser baqueano, modelo operativo en 5 pasos, cromática y petroglifo,
+      manifiesto editorial, red territorial y llamada final.
+   📦 QUÉ: Estilos específicos para nosotros.html.
+   ============================================================================ */
+
+:root {
+  --nos-primary: #165D6F;
+  --nos-accent: #F65E01;
+  --nos-sand: #EFDBA9;
+  --nos-dark: #0F172A;
+  --nos-text: #1E293B;
+  --nos-muted: #64748B;
+  --nos-border: #E2E8F0;
+  --nos-radius: 16px;
+  --nos-green: #10B981;
+}
+
+body.page-nosotros {
+  background-color: #F8FAFC;
+  color: var(--nos-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* HERO EDITORIAL */
+.nos-hero {
+  position: relative;
+  min-height: 480px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.85) 100%),
+              url('../../assets/images/destinos-hero.jpg') center/cover no-repeat;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 120px 24px 70px;
+}
+
+.nos-hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.nos-hero-eyebrow {
+  color: var(--nos-accent);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.nos-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.nos-hero-title .nos-script {
+  color: var(--nos-accent);
+}
+
+.nos-hero-sub {
+  max-width: 680px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #E2E8F0;
+  margin: 0 0 28px;
+}
+
+.nos-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.nos-btn-primary {
+  background: var(--nos-accent);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nos-btn-primary:hover {
+  background: #DD5200;
+}
+
+.nos-btn-glass {
+  background: rgba(15, 23, 42, 0.7);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+}
+
+.nos-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nos-hero-stamp {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 140px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   NUESTRA RAZÓN DE EXISTIR
+   ============================================================================ */
+.nos-reason-section {
+  max-width: 1280px;
+  margin: -30px auto 40px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 20px;
+}
+
+.nos-reason-copy {
+  background: #FFFFFF;
+  border-radius: var(--nos-radius);
+  border: 1px solid var(--nos-border);
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nos-reason-bird {
+  width: 90px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.nos-reason-text h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nos-reason-text p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+.nos-reason-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.nos-pillar-card {
+  background: #FFFFFF;
+  border-radius: var(--nos-radius);
+  border: 1px solid var(--nos-border);
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.nos-pillar-img {
+  width: 100%;
+  height: 85px;
+  object-fit: cover;
+}
+
+.nos-pillar-content {
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.nos-pillar-content i {
+  color: var(--nos-primary);
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.nos-pillar-content h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 2px;
+}
+
+.nos-pillar-content p {
+  font-size: 0.74rem;
+  color: var(--nos-muted);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* ============================================================================
+   NUESTRA MISIÓN & VISIÓN
+   ============================================================================ */
+.nos-mv-section {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.nos-mv-card {
+  position: relative;
+  border-radius: var(--nos-radius);
+  padding: 32px;
+  color: #FFFFFF;
+  overflow: hidden;
+  min-height: 160px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nos-mv-card.mision {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(22, 93, 111, 0.8) 100%),
+              url('../../assets/images/destinos-hero.jpg') center/cover;
+}
+
+.nos-mv-card.vision {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(246, 94, 1, 0.8) 100%),
+              url('../../assets/images/footer-nicaragua-panorama.png') center/cover;
+}
+
+.nos-mv-card h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nos-mv-card p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+/* ============================================================================
+   ¿QUÉ SIGNIFICA SER BAQUEANO? (6 CARDS)
+   ============================================================================ */
+.nos-meaning-section {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.nos-meaning-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.nos-meaning-header h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nos-meaning-header span {
+  font-size: 0.85rem;
+  color: var(--nos-muted);
+}
+
+.nos-meaning-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.nos-meaning-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--nos-border);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.nos-meaning-img {
+  width: 100%;
+  height: 95px;
+  object-fit: cover;
+}
+
+.nos-meaning-content {
+  padding: 10px;
+}
+
+.nos-meaning-content i {
+  color: var(--nos-primary);
+  font-size: 1rem;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.nos-meaning-content h4 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 2px;
+}
+
+.nos-meaning-content p {
+  font-size: 0.72rem;
+  color: var(--nos-muted);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* ============================================================================
+   CÓMO FUNCIONA NUESTRO MODELO (5 STEPS)
+   ============================================================================ */
+.nos-model-section {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.nos-model-header {
+  margin-bottom: 20px;
+}
+
+.nos-model-header h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nos-model-header p {
+  font-size: 0.88rem;
+  color: var(--nos-muted);
+  margin: 0;
+}
+
+.nos-model-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.nos-model-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--nos-border);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  position: relative;
+}
+
+.nos-model-card:not(:last-child)::after {
+  content: '➔';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--nos-accent);
+  font-size: 1rem;
+  z-index: 2;
+}
+
+.nos-model-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.nos-model-info h4 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 2px;
+}
+
+.nos-model-info p {
+  font-size: 0.7rem;
+  color: var(--nos-muted);
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ============================================================================
+   NUESTRA IDENTIDAD (CROMÁTICA & PETROGLIFO)
+   ============================================================================ */
+.nos-identity-section {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.nos-identity-card {
+  background: #FFFFFF;
+  border-radius: var(--nos-radius);
+  border: 1px solid var(--nos-border);
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
+  gap: 20px;
+  align-items: center;
+}
+
+.nos-id-left {
+  text-align: center;
+}
+
+.nos-id-logo {
+  width: 70px;
+  margin-bottom: 8px;
+}
+
+.nos-id-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--nos-dark);
+  margin: 0;
+}
+
+.nos-id-claim {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--nos-muted);
+}
+
+.nos-swatches-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.nos-swatch {
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.nos-swatch-box {
+  width: 100%;
+  height: 38px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.nos-swatch h5 {
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin: 0 0 2px;
+  color: var(--nos-dark);
+}
+
+.nos-swatch code {
+  font-size: 0.68rem;
+  color: var(--nos-muted);
+}
+
+.nos-swatch p {
+  font-size: 0.68rem;
+  color: var(--nos-muted);
+  margin: 2px 0 0;
+}
+
+.nos-petroglyph-box {
+  background: #F8FAFC;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #EDF2F7;
+}
+
+.nos-petroglyph-img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.nos-petroglyph-box p {
+  font-size: 0.74rem;
+  color: var(--nos-muted);
+  margin: 0;
+}
+
+/* ============================================================================
+   BAQUEANO EN NÚMEROS (4 METRICS)
+   ============================================================================ */
+.nos-numbers-section {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.nos-numbers-header {
+  margin-bottom: 16px;
+}
+
+.nos-numbers-header h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nos-numbers-header small {
+  font-size: 0.78rem;
+  color: var(--nos-muted);
+}
+
+.nos-numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.nos-number-card {
+  background: #FFFFFF;
+  border-radius: var(--nos-radius);
+  border: 1px solid var(--nos-border);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.nos-num-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(22, 93, 111, 0.1);
+  color: var(--nos-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.nos-num-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--nos-dark);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.nos-num-lbl {
+  font-size: 0.78rem;
+  color: var(--nos-muted);
+  line-height: 1.3;
+}
+
+/* ============================================================================
+   MANIFIESTO BAQUEANO
+   ============================================================================ */
+.nos-manifesto-section {
+  max-width: 1280px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.nos-manifesto-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.75) 100%),
+              url('../../assets/images/destinos-hero.jpg') center/cover;
+  border-radius: var(--nos-radius);
+  padding: 36px 40px;
+  color: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.nos-manifesto-left {
+  max-width: 780px;
+}
+
+.nos-manifesto-left h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--nos-accent);
+}
+
+.nos-manifesto-left p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #F1F5F9;
+  margin: 0;
+}
+
+.nos-manifesto-quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--nos-sand);
+  text-align: right;
+  border-left: 2px solid var(--nos-accent);
+  padding-left: 18px;
+}
+
+/* ============================================================================
+   RED TERRITORIAL & EQUIPO
+   ============================================================================ */
+.nos-network-section {
+  max-width: 1280px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.nos-network-header {
+  margin-bottom: 20px;
+}
+
+.nos-network-header h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nos-network-header p {
+  font-size: 0.88rem;
+  color: var(--nos-muted);
+  margin: 0;
+}
+
+.nos-network-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.nos-net-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--nos-border);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.nos-net-img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+}
+
+.nos-net-content {
+  padding: 8px;
+  text-align: center;
+}
+
+.nos-net-content h4 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0;
+}
+
+/* EQUIPO Y GUARDIANES */
+.nos-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.nos-team-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--nos-border);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.nos-team-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.nos-team-info h4 {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--nos-dark);
+  margin: 0 0 2px;
+}
+
+.nos-team-info p {
+  font-size: 0.72rem;
+  color: var(--nos-muted);
+  margin: 0;
+}
+
+/* ============================================================================
+   BANNER FINAL CTA
+   ============================================================================ */
+.nos-final-cta {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.7) 100%),
+              url('../../assets/images/footer-nicaragua-panorama.png') center/cover;
+  padding: 40px 24px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto 60px;
+  border-radius: var(--nos-radius);
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nos-final-cta h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 900;
+  margin: 0;
+}
+
+.nos-final-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 1100px) {
+  .nos-meaning-grid, .nos-network-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .nos-model-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nos-model-card::after { display: none; }
+  .nos-identity-card {
+    grid-template-columns: 1fr;
+  }
+  .nos-swatches-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .nos-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nos-reason-section, .nos-mv-section, .nos-numbers-grid {
+    grid-template-columns: 1fr;
+  }
+  .nos-meaning-grid, .nos-network-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nos-swatches-grid {
+    grid-template-columns: 1fr;
+  }
+  .nos-final-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

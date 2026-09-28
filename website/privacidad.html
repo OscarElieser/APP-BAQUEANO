@@ -1,946 +1,476 @@
 <!DOCTYPE html>
 <!--
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — POLÍTICA DE PRIVACIDAD & SEGURIDAD CLOUD (privacidad.html)
+🧭 BAQUEANO ECOSYSTEM — POLÍTICA DE PRIVACIDAD & SEGURIDAD (privacidad.html)
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Garantizar a los exploradores y prestadores locales la máxima transparencia
-  en el manejo de sus datos personales, coordenadas satelitales y reservas.
-- Consagrar la política innegociable de cero venta de información a terceros,
-  cero rastreadores publicitarios invasivos y soberanía de datos del usuario.
+- Garantizar a los exploradores, anfitriones y cooperativas comunitarias la
+  máxima transparencia y control absoluto sobre sus datos personales.
+- Consagrar la política de cero venta de información a terceros, geolocalización
+  voluntaria y confidencialidad en el uso de herramientas de inteligencia artificial.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Basado directamente en PrivacyScreen de Baqueano Android
-  (lib/features/institutional/screens/privacy_screen.dart).
-- Desglose de arquitectura cloud segura (Google Cloud Platform, Cloud Firestore,
-  Firebase Auth con cifrado TLS/SSL en tránsito y AES-256 en reposo).
-- Índice lateral inteligente con riel y cursor dinámico de arriba hacia abajo
-  sincronizado a 60fps con la lectura del documento.
-- Paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
-- Menú principal integrado con el submenú de "Mi País", drawer móvil y footer oficial.
+- Réplica visual idéntica 1:1 a la maqueta oficial entregada por el usuario.
+- Layout modular responsivo: Hero con 4 garantías flotantes, tarjetas comparativas
+  de datos recopilados vs. no recopilados, y diagrama interactivo del flujo de datos
+  entre Usuario, App/Web, Firebase, Supabase y módulos del sistema.
+- Derechos ARCO claramente detallados y proveedores de nube debidamente transparentados.
 
 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-- 15 Artículos formales de protección de datos personales y derechos ARCO.
-- Riel de cursor vertical deslizante y barra de progreso lector.
-- Canales de contacto con el Oficial de Privacidad (privacidad@baqueano.ni).
+- Compromisos de protección de datos, catálogo de proveedores de confianza y
+  canales de contacto con el oficial de privacidad (privacidad@baqueano.com.ni).
 ============================================================================
 -->
-<html lang="es">
+<html lang="es-NI">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Política de Privacidad & Seguridad Cloud | Baqueano Nicaragua</title>
-  <meta name="description" content="Política de privacidad y protección de datos de Baqueano Nicaragua. Cero venta de datos, cifrado en la nube y respeto absoluto por tu privacidad.">
+  <title>Privacidad & Seguridad de tus Datos | BAQUEANO Nicaragua</title>
+  <meta name="description" content="Política de privacidad de BAQUEANO Nicaragua. Tus datos bajo tu control: cero venta de información, privacidad en IA y seguridad cloud.">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
 
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <!-- Estilos Maestros Oficiales -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/pages/institucional.css">
-  <link rel="stylesheet" href="css/pages/privacidad-exact.css?v=20260927-1">
+  <link rel="stylesheet" href="css/pages/privacidad-exact.css?v=20260927-2">
 </head>
 <body class="page-privacidad">
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <!-- BARRA DE NAVEGACIÓN GLOBAL UNIFICADA -->
   <nav class="main-navbar" id="mainNavbar">
     <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
+      <a href="index.html" class="brand-box" aria-label="Baqueano Nicaragua - Inicio">
         <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
         <div class="brand-text">
           <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+          <span class="brand-tagline">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
       <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+        <a href="index.html" class="nav-link-item">Inicio</a>
+        <a href="destinos.html" class="nav-link-item">Destinos</a>
+        <a href="mapa.html" class="nav-link-item">Mapa</a>
+        <a href="experiencias.html" class="nav-link-item">Experiencias</a>
+        <a href="baqueano-ia.html" class="nav-link-item">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a>
+        <a href="nosotros.html" class="nav-link-item">Nosotros</a>
+        <a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
+        <div class="nav-dropdown" id="navDropdownMas">
           <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
+            <span>Más</span>
+            <i class="fa-solid fa-chevron-down nav-dropdown-caret"></i>
           </button>
           <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
+            <a href="ambiental.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-leaf"></i>
+              <div><strong>Custodia Ambiental</strong><small>Decálogo y alertas ecológicas</small></div>
             </a>
             <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
+              <i class="fa-solid fa-landmark"></i>
+              <div><strong>Historia y Memoria</strong><small>Línea de tiempo y 17 territorios</small></div>
             </a>
             <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
+              <i class="fa-solid fa-utensils"></i>
+              <div><strong>Gastronomía</strong><small>Sabores ancestrales del maíz</small></div>
             </a>
             <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
+              <i class="fa-solid fa-music"></i>
+              <div><strong>Música y Sonido</strong><small>Patrimonio sonoro y compositores</small></div>
+            </a>
+            <a href="aliados.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-handshake"></i>
+              <div><strong>Red de Aliados</strong><small>Emprendimientos y cooperativas</small></div>
+            </a>
+            <a href="admin.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-sliders"></i>
+              <div><strong>Ops Center</strong><small>Centro de monitoreo territorial</small></div>
             </a>
           </div>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Consola Satelital</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">ACTIVO</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
       </div>
 
-      <div class="nav-right-actions">
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menú de Navegación">
+      <div class="nav-actions-right">
+        <button class="nav-action-icon-btn" id="globalSearchBtn" type="button" aria-label="Buscar en Baqueano">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="mi-viaje.html#favoritos" class="nav-action-icon-btn" aria-label="Mis Favoritos">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <div class="nav-lang-selector" id="langSelector">
+          <span class="active-lang">ES</span>
+          <span class="lang-divider">|</span>
+          <span class="inactive-lang">EN</span>
+        </div>
+        <button class="nav-login-btn" id="loginBtn" type="button">
+          Iniciar sesión
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main>
-    <!-- HERO CINEMATOGRÁFICO CON ESTILO OFICIAL INDEX.HTML -->
-    <section class="institucional-hero">
-      <img src="assets/images/destinos/selva_negra.jpg" alt="Privacidad y Seguridad Cloud" class="institucional-hero-bg">
-      <div class="institucional-hero-gradient"></div>
-      <div class="institucional-hero-content">
-        <div class="hero-badge-pill">
-          <span class="pulse-dot"></span> Privacidad & Soberanía de Datos
-        </div>
-        <h1 class="hero-headline">
-          Tus datos, <span class="privacy-title-accent">bajo tu control</span>
-        </h1>
-        <p class="hero-subtext">
-          En BAQUEANO protegemos tu información y la usamos solo para ofrecerte una experiencia de viaje segura, auténtica y personalizada en Nicaragua.
-        </p>
+  <!-- HERO EDITORIAL (IMAGEN 3) -->
+  <header class="priv-hero">
+    <div class="priv-hero-container">
+      <div class="priv-hero-badge">
+        <i class="fa-solid fa-shield-halved"></i> PRIVACIDAD Y SEGURIDAD
       </div>
-    </section>
+      <h1 class="priv-hero-title">
+        Tus datos, <span class="priv-script">bajo tu control</span>
+      </h1>
+      <p class="priv-hero-sub">
+        En BAQUEANO protegemos tu información y la usamos solo para ofrecerte una experiencia de viaje segura, auténtica y personalizada en Nicaragua.
+      </p>
+      <img src="assets/images/nicaragua-autentica.svg" alt="Nicaragua Auténtica" class="priv-hero-stamp" onerror="this.style.display='none'">
+    </div>
+  </header>
 
-    <section class="privacy-trust-strip" aria-label="Compromisos de privacidad">
-      <div class="privacy-trust-item"><i class="fa-solid fa-lock"></i><span>No vendemos<br>tus datos</span></div>
-      <div class="privacy-trust-item"><i class="fa-solid fa-location-dot"></i><span>Ubicación solo<br>cuando la activás</span></div>
-      <div class="privacy-trust-item"><i class="fa-solid fa-trash-can"></i><span>Podés solicitar<br>eliminación de tus datos</span></div>
-      <div class="privacy-trust-item"><i class="fa-solid fa-shield-halved"></i><span>IA y servicios externos<br>identificados claramente</span></div>
-    </section>
-
-    <section class="privacy-summary" aria-label="Resumen de la política">
-      <article><h2>📄 ¿Qué es esta Política de Privacidad?</h2><p>Te explicamos de forma clara y transparente qué información recopilamos, cómo la usamos, con quién la compartimos y cuáles son tus derechos al utilizar BAQUEANO.</p></article>
-      <article class="privacy-confidence"><img src="assets/images/logo.png" alt="Baqueano"><h2>Tu confianza también viaja con nosotros</h2><p>Protegemos tu información para que solo te enfoques en lo más importante: vivir Nicaragua.</p></article>
-    </section>
-
-    <!-- LAYOUT INTERACTIVO DOS COLUMNAS -->
-    <section class="container institucional-layout">
-      
-      <!-- SIDEBAR (ÍNDICE CON CURSOR DINÁMICO DE ARRIBA A ABAJO) -->
-      <aside class="institucional-sidebar">
-        <div class="toc-header-bar">
-          <div class="sidebar-title">
-            <i class="fa-solid fa-list-ul"></i> Índice de Privacidad
-          </div>
-          <span class="toc-active-counter">01 / 15</span>
-        </div>
-
-        <div class="toc-progress-track" title="Progreso de lectura">
-          <div class="toc-progress-fill"></div>
-        </div>
-
-        <div class="toc-jump-controls">
-          <button type="button" class="toc-jump-btn" id="tocBtnPrev" title="Artículo anterior o ir al inicio">
-            <i class="fa-solid fa-arrow-up"></i> Arriba
-          </button>
-          <button type="button" class="toc-jump-btn" id="tocBtnNext" title="Artículo siguiente o ir al final">
-            <i class="fa-solid fa-arrow-down"></i> Abajo
-          </button>
-        </div>
-
-        <div class="sidebar-nav-container">
-          <div class="toc-cursor-rail">
-            <div class="toc-cursor-pip"></div>
-          </div>
-          <nav class="sidebar-nav" id="institucionalScrollspy" aria-label="Índice de artículos de privacidad">
-            <a href="#article-01" class="sidebar-nav-link active"><span class="toc-nav-num">01</span><span class="toc-nav-title">Compromiso de privacidad</span></a>
-            <a href="#article-02" class="sidebar-nav-link"><span class="toc-nav-num">02</span><span class="toc-nav-title">Información recopilada</span></a>
-            <a href="#article-03" class="sidebar-nav-link"><span class="toc-nav-num">03</span><span class="toc-nav-title">Finalidad del tratamiento</span></a>
-            <a href="#article-04" class="sidebar-nav-link"><span class="toc-nav-num">04</span><span class="toc-nav-title">Infraestructura Cloud</span></a>
-            <a href="#article-05" class="sidebar-nav-link"><span class="toc-nav-num">05</span><span class="toc-nav-title">Almacenamiento offline</span></a>
-            <a href="#article-06" class="sidebar-nav-link"><span class="toc-nav-num">06</span><span class="toc-nav-title">Geolocalización & SOS</span></a>
-            <a href="#article-07" class="sidebar-nav-link"><span class="toc-nav-num">07</span><span class="toc-nav-title">Cero venta de datos</span></a>
-            <a href="#article-08" class="sidebar-nav-link"><span class="toc-nav-num">08</span><span class="toc-nav-title">Conservación y borrado</span></a>
-            <a href="#article-09" class="sidebar-nav-link"><span class="toc-nav-num">09</span><span class="toc-nav-title">Derechos y control</span></a>
-            <a href="#article-10" class="sidebar-nav-link"><span class="toc-nav-num">10</span><span class="toc-nav-title">Servicios de terceros</span></a>
-            <a href="#article-11" class="sidebar-nav-link"><span class="toc-nav-num">11</span><span class="toc-nav-title">Seguridad de cuentas</span></a>
-            <a href="#article-12" class="sidebar-nav-link"><span class="toc-nav-num">12</span><span class="toc-nav-title">Gestión de incidentes</span></a>
-            <a href="#article-13" class="sidebar-nav-link"><span class="toc-nav-num">13</span><span class="toc-nav-title">Privacidad por diseño</span></a>
-            <a href="#article-14" class="sidebar-nav-link"><span class="toc-nav-num">14</span><span class="toc-nav-title">Actualizaciones legales</span></a>
-            <a href="#article-15" class="sidebar-nav-link"><span class="toc-nav-num">15</span><span class="toc-nav-title">Contacto oficial</span></a>
-          </nav>
-        </div>
-      </aside>
-
-      <!-- CONTENIDO PRINCIPAL: TARJETAS DE ARTÍCULOS ESTILIZADAS -->
-      <div class="institucional-content">
-        
-        <div class="legal-document-meta">
-          <span><i class="fa-solid fa-calendar-check text-terracotta"></i> <strong>Última actualización:</strong> 18 de septiembre de 2026</span>
-          <span><i class="fa-solid fa-shield-halved text-terracotta"></i> <strong>Versión:</strong> 1.0 Soberana</span>
-          <span><i class="fa-solid fa-cloud-arrow-up text-terracotta"></i> <strong>Infraestructura:</strong> Google Cloud Platform & Firebase</span>
-        </div>
-
-        <div class="legal-document-intro">
-          <p>
-            <strong>Protección de datos personales, infraestructura tecnológica segura y control transparente de la información del usuario.</strong>
-          </p>
-          <p>
-            BAQUEANO NICARAGUA adopta medidas técnicas, administrativas y organizativas de vanguardia destinadas a proteger la información de exploradores, prestadores locales, negocios, baqueanos y demás usuarios de nuestra plataforma web, aplicación Android y servicios digitales asociados.
-          </p>
-          <p>
-            Nuestra política se basa en principios de privacidad desde el diseño, minimización de datos, transparencia, seguridad, consentimiento y soberanía del usuario sobre su propia información.
-          </p>
-        </div>
-
-        <section class="privacy-flow" aria-labelledby="privacyFlowTitle"><h2 id="privacyFlowTitle">🔗 ¿Cómo fluye tu información?</h2><p>Así funciona el flujo de datos en BAQUEANO.</p><div class="flow-row">
-          <article class="flow-node"><i class="fa-solid fa-user"></i><h3>Vos</h3><p>Usuario</p></article><div class="flow-arrow">→</div>
-          <article class="flow-node"><i class="fa-solid fa-mobile-screen"></i><h3>Web / App Android BAQUEANO</h3><p>Enviás tu información de forma segura.</p></article><div class="flow-arrow">→</div>
-          <div><article class="flow-node"><i class="fa-solid fa-fire"></i><h3>Firebase</h3><p>Autenticación y hosting.</p></article><article class="flow-node"><i class="fa-solid fa-database"></i><h3>Supabase</h3><p>Base de datos principal.</p></article></div><div class="flow-arrow">→</div>
-          <div class="flow-services"><div class="flow-service"><strong>✈️ Experiencias y rutas</strong>Destinos, reservas y favoritos</div><div class="flow-service"><strong>🧠 Baqueano Digital</strong>Recomendaciones personalizadas</div><div class="flow-service"><strong>💳 Pagos y aliados</strong>Procesamiento seguro</div><div class="flow-service"><strong>🆘 SOS 24/7</strong>Emergencias y asistencia</div><div class="flow-service"><strong>📊 Mejora continua</strong>Analítica anónima</div></div>
-        </div></section>
-
-        <!-- ARTÍCULO 01 -->
-        <article class="legal-card" id="article-01">
-          <div class="legal-card-num">01</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-shield-heart"></i> Compromiso con la Privacidad</h2>
-          <div class="legal-card-body">
-            <p>En BAQUEANO NICARAGUA reconocemos la privacidad y la protección de los datos personales como elementos esenciales e innegociables de nuestra plataforma comunitaria.</p>
-            <p>Esta política explica de forma clara, transparente y accesible:</p>
-            <ul>
-              <li>Qué información puntual podemos recopilar para prestar el servicio.</li>
-              <li>Para qué finalidades operativas la utilizamos.</li>
-              <li>Dónde se almacena bajo esquemas de alta seguridad en la nube.</li>
-              <li>Qué tecnologías de cifrado utilizamos para resguardarla en reposo y en tránsito.</li>
-              <li>Durante cuánto tiempo se conserva en nuestros registros activos.</li>
-              <li>Con qué proveedores tecnológicos esenciales puede ser procesada.</li>
-              <li>Y qué opciones inmediatas tiene el usuario para administrar, corregir o solicitar la eliminación total de su información.</li>
-            </ul>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-circle-info legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                Esta política rige para la aplicación móvil Android, plataforma web, paneles administrativos, servicios de reservas campesinas, mapas satelitales, funciones de emergencia y Baqueano AI.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 02 -->
-        <article class="legal-card" id="article-02">
-          <div class="legal-card-num">02</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-database"></i> Información que Podemos Recopilar</h2>
-          <div class="legal-card-body">
-            <p>BAQUEANO aplica con rigor el principio de <strong>minimización de datos</strong>, recopilando únicamente los elementos indispensables para habilitar las funcionalidades solicitadas por el usuario.</p>
-            <p><strong>Datos de identificación y cuenta:</strong></p>
-            <ul>
-              <li>Nombre y apellidos para identificación en reservas y contacto con guías.</li>
-              <li>Correo electrónico verificado para autenticación y avisos de seguridad.</li>
-              <li>Fotografía de perfil, cuando el usuario decida añadirla voluntariamente.</li>
-              <li>Identificador único de usuario (UID) generado por Firebase Authentication.</li>
-            </ul>
-            <p><strong>Información de servicios y rutas:</strong></p>
-            <ul>
-              <li>Destinos guardados en favoritos y rutas personalizadas.</li>
-              <li>Historial de consultas e interacciones con cooperativas y emprendimientos locales.</li>
-              <li>Solicitudes de reserva o cotización directa sin comisiones intermediarias.</li>
-            </ul>
-            <p><strong>Datos de ubicación satelital:</strong></p>
-            <p>BAQUEANO solicita acceso a la ubicación GPS únicamente cuando el usuario interactúa activamente con mapas interactivos, cálculo de rutas en sendero o al activar el Centro SOS de auxilio. No se efectúa seguimiento en segundo plano sin permiso explícito.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 03 -->
-        <article class="legal-card" id="article-03">
-          <div class="legal-card-num">03</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-bullseye"></i> Finalidad del Tratamiento de la Información</h2>
-          <div class="legal-card-body">
-            <p>La información recopilada se utiliza exclusivamente para finalidades vinculadas a la operación soberana y la mejora técnica continua de BAQUEANO:</p>
-            <ul>
-              <li>Administrar perfiles de usuario y asegurar accesos protegidos.</li>
-              <li>Sincronizar favoritos, destinos y mapas fuera de línea entre dispositivos.</li>
-              <li>Facilitar la comunicación directa y expedita entre el viajero y el prestador local.</li>
-              <li>Habilitar la cartografía viva de los 17 departamentos y áreas naturales.</li>
-              <li>Despachar coordenadas geográficas precisas en caso de activación del Centro SOS.</li>
-              <li>Generar sugerencias territoriales hiperlocales a través del asistente Baqueano AI.</li>
-              <li>Prevenir fraudes, accesos indebidos y anomalías en la red comunitaria.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 04 -->
-        <article class="legal-card" id="article-04">
-          <div class="legal-card-num">04</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-cloud-arrow-up"></i> Infraestructura Cloud y Seguridad de la Información</h2>
-          <div class="legal-card-body">
-            <p>BAQUEANO opera sobre infraestructura de primer nivel mundial provista por Google Cloud Platform (GCP) y Google Firebase, garantizando los más altos estándares internacionales de disponibilidad y seguridad informática.</p>
-            <div class="legal-callout-box terracotta">
-              <i class="fa-solid fa-lock legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                Todas las transmisiones de datos se realizan obligatoriamente mediante protocolos seguros con cifrado TLS/SSL (HTTPS) de 256 bits, y los repositorios de Cloud Firestore implementan cifrado avanzado AES-256 en reposo.
-              </p>
-            </div>
-            <p>Controles de seguridad activos implementados:</p>
-            <ul>
-              <li>Reglas de seguridad granulares de Firestore para aislar datos por usuario.</li>
-              <li>Autenticación multifactor y tokens criptográficos JWT de vida acotada.</li>
-              <li>Separación estricta de privilegios administrativos en Ops Center.</li>
-              <li>Monitoreo de seguridad y auditoría continua de integridad de registros.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 05 -->
-        <article class="legal-card" id="article-05">
-          <div class="legal-card-num">05</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-hard-drive"></i> Almacenamiento Local y Funcionamiento Offline</h2>
-          <div class="legal-card-body">
-            <p>Para permitir que los exploradores se adentren en reservas naturales y volcanes sin conectividad celular, BAQUEANO almacena en la memoria local del dispositivo:</p>
-            <ul>
-              <li>Mapas satelitales previamente descargados y coordenadas geodésicas.</li>
-              <li>Fichas de senderos, información de flora, fauna y decálogos ambientales.</li>
-              <li>Caché de imágenes optimizadas para reducir el consumo de datos móviles.</li>
-              <li>Credenciales de sesión cifradas localmente.</li>
-            </ul>
-            <p>BAQUEANO no incorpora librerías de seguimiento conductual publicitario ni scripts espías en el almacenamiento del usuario.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 06 -->
-        <article class="legal-card" id="article-06">
-          <div class="legal-card-num">06</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-tower-broadcast"></i> Geolocalización y Centro SOS</h2>
-          <div class="legal-card-body">
-            <p>El uso de la geolocalización satelital en BAQUEANO está bajo el control permanente del explorador. La plataforma únicamente consulta los sensores GPS cuando el usuario solicita una función que lo requiere.</p>
-            <p><strong>Operación del Centro SOS:</strong></p>
-            <p>Al pulsar el botón SOS 24/7, el sistema extrae las coordenadas geodésicas exactas (latitud, longitud y precisión) en el dispositivo del usuario para que éste pueda transmitirlas a Cruz Blanca, Bomberos Unificados, Policía Nacional o la Mesa Baqueano.</p>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-triangle-exclamation legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                El Centro SOS es una herramienta tecnológica de soporte y coordinación, y no sustituye la autoridad ni la actuación de los organismos de rescate del Estado de Nicaragua.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 07 -->
-        <article class="legal-card" id="article-07">
-          <div class="legal-card-num">07</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-ban"></i> Política de Cero Venta de Datos Personales</h2>
-          <div class="legal-card-body">
-            <p><strong>BAQUEANO NICARAGUA tiene una política categórica: jamás vendemos, alquilamos ni comercializamos los datos personales de nuestros usuarios.</strong></p>
-            <p>Esto significa que BAQUEANO nunca compartirá tus perfiles de viaje, ubicaciones, búsquedas o correos con:</p>
-            <ul>
-              <li>Redes publicitarias o intermediarios de monetización de tráfico.</li>
-              <li>Empresas de telemercadeo o mercadeo masivo no solicitado.</li>
-              <li>Corredores de datos (data brokers) o corporaciones transnacionales de perfilamiento.</li>
-            </ul>
-            <div class="legal-callout-box terracotta">
-              <i class="fa-solid fa-hand-holding-dollar legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                El modelo de BAQUEANO se sustenta en la dignidad del turismo comunitario y el comercio campesino justo, no en la explotación comercial de la privacidad de los viajeros.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 08 -->
-        <article class="legal-card" id="article-08">
-          <div class="legal-card-num">08</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-trash-can"></i> Conservación y Eliminación de Información</h2>
-          <div class="legal-card-body">
-            <p>Los datos se resguardan únicamente durante el tiempo estrictamente requerido para proveer los servicios contratados y dar cumplimiento a las obligaciones legales nicaragüenses.</p>
-            <p>Cualquier usuario puede solicitar en cualquier momento la <strong>eliminación total y definitiva de su cuenta</strong> y de todos los registros asociados a través de su panel de perfil o escribiendo a <a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a>.</p>
-            <p>Tras la confirmación de la solicitud, los datos serán purgados de las bases de datos activas en un plazo máximo de 72 horas hábiles.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 09 -->
-        <article class="legal-card" id="article-09">
-          <div class="legal-card-num">09</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-user-gear"></i> Derechos y Control del Usuario (Derechos ARCO)</h2>
-          <div class="legal-card-body">
-            <p>Garantizamos el ejercicio pleno de los derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO):</p>
-            <ul>
-              <li><strong>Acceso:</strong> Saber qué datos tuyos obran en nuestros sistemas.</li>
-              <li><strong>Rectificación:</strong> Corregir información inexacta o desactualizada.</li>
-              <li><strong>Cancelación:</strong> Solicitar el borrado definitivo de tu perfil.</li>
-              <li><strong>Oposición:</strong> Oponerte al tratamiento de datos no indispensables para el servicio.</li>
-            </ul>
-            <p>Las solicitudes son procesadas sin costo alguno previa verificación de la identidad del titular.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 10 -->
-        <article class="legal-card" id="article-10">
-          <div class="legal-card-num">10</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-server"></i> Proveedores y Servicios de Terceros</h2>
-          <div class="legal-card-body">
-            <p>Para garantizar una experiencia tecnológica óptima, BAQUEANO se apoya en proveedores de clase mundial sujetos a estrictos contratos de confidencialidad técnica:</p>
-            <ul>
-              <li><strong>Google Firebase / Google Cloud:</strong> Autenticación, hosting seguro y base de datos distribuida.</li>
-              <li><strong>Google Maps Platform:</strong> Cartografía interactiva y georreferenciación de senderos.</li>
-              <li><strong>WhatsApp Business API:</strong> Canal voluntario de enlace directo con guías y cooperativas.</li>
-            </ul>
-            <p>Cada proveedor procesa únicamente los datos estrictamente necesarios para su función técnica.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 11 -->
-        <article class="legal-card" id="article-11">
-          <div class="legal-card-num">11</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-key"></i> Seguridad de las Cuentas</h2>
-          <div class="legal-card-body">
-            <p>La seguridad de la cuenta es una responsabilidad compartida. Recomendamos a todos los miembros de la red:</p>
-            <ul>
-              <li>Utilizar contraseñas robustas y únicas para su acceso a BAQUEANO.</li>
-              <li>No compartir credenciales ni códigos de verificación con terceras personas.</li>
-              <li>Cerrar sesión al utilizar terminales públicas o dispositivos de terceros.</li>
-              <li>Notificar de inmediato a la Mesa Técnica ante cualquier sospecha de vulneración.</li>
-            </ul>
-            <p>El equipo de BAQUEANO jamás te solicitará tu contraseña por teléfono, correo o mensajería.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 12 -->
-        <article class="legal-card" id="article-12">
-          <div class="legal-card-num">12</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-shield-halved"></i> Gestión de Incidentes de Seguridad</h2>
-          <div class="legal-card-body">
-            <p>Disponemos de un protocolo estructurado de respuesta ante incidentes para identificar, contener y remediar cualquier anomalía que pudiera comprometer la confidencialidad de la información:</p>
-            <p>1. Detección inmediata y aislamiento de servicios afectados.</p>
-            <p>2. Análisis forense y erradicación de la causa raíz.</p>
-            <p>3. Restauración íntegra desde respaldos protegidos.</p>
-            <p>4. Comunicación transparente a los usuarios afectados y a las autoridades pertinentes según la ley.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 13 -->
-        <article class="legal-card" id="article-13">
-          <div class="legal-card-num">13</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-compass-drafting"></i> Privacidad desde el Diseño</h2>
-          <div class="legal-card-body">
-            <p>En el ecosistema BAQUEANO, cada nueva funcionalidad, pantalla o servicio se diseña desde sus cimientos bajo el principio de <em>Privacy by Design</em>:</p>
-            <ul>
-              <li>La opción predeterminada es siempre la de mayor privacidad.</li>
-              <li>Los permisos de Android son solicitados en tiempo de ejecución solo cuando son requeridos.</li>
-              <li>La telemetría interna es anónima y destinada exclusivamente al diagnóstico de caídas técnicas.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 14 -->
-        <article class="legal-card" id="article-14">
-          <div class="legal-card-num">14</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-clock-rotate-left"></i> Actualizaciones de esta Política</h2>
-          <div class="legal-card-body">
-            <p>Esta política puede ser modificada para reflejar mejoras en la plataforma, cambios normativos o actualizaciones en la infraestructura tecnológica.</p>
-            <p>Cualquier modificación sustancial será notificada de manera visible mediante aviso destacado en la aplicación Android y el portal web oficial antes de entrar en vigencia.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 15 -->
-        <article class="legal-card" id="article-15">
-          <div class="legal-card-num">15</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-envelope-open-text"></i> Contacto Oficial de Privacidad</h2>
-          <div class="legal-card-body">
-            <p>Para cualquier inquietud, ejercicio de derechos ARCO o consulta sobre nuestras medidas de protección de datos, puedes dirigirte directamente a nuestro Oficial de Privacidad:</p>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-envelope legal-callout-icon"></i>
-              <div>
-                <p class="legal-callout-text"><strong>Canal Oficial:</strong> <a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a></p>
-                <p class="legal-callout-text"><strong>Mesa de Enlace:</strong> <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></p>
-                <p class="legal-callout-text"><strong>Sede:</strong> Managua, Nicaragua • Cobertura en 17 Departamentos</p>
-              </div>
-            </div>
-            <p style="margin-top: 1.5rem; font-weight: 700; color: #F4E6C1;">
-              Descubrí. Conectá. Protegé. Viví Nicaragua con total soberanía y seguridad sobre tus datos.
-            </p>
-          </div>
-        </article>
-
-        <section class="privacy-docs" aria-label="Información legal y contacto">
-          <article class="privacy-doc-card"><h3>📄 Nuestros documentos legales</h3><div class="privacy-doc-links"><a href="terminos.html">Términos y condiciones →</a><a href="aviso-legal.html">Aviso legal →</a><a href="cookies.html">Política de cookies →</a></div></article>
-          <article class="privacy-doc-card"><h3>✉️ Contacto sobre privacidad</h3><p>Si tenés preguntas sobre esta política o tus datos:</p><a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a></article>
-          <article class="privacy-doc-card"><h3>📅 Actualización</h3><p>26 de septiembre de 2026</p><strong>Versión 1.0</strong></article>
-        </section>
-
+  <!-- 4-PILL FLOATING STRIP -->
+  <section class="priv-strip-section">
+    <div class="priv-trust-strip">
+      <div class="priv-trust-item">
+        <div class="priv-trust-icon green"><i class="fa-solid fa-lock"></i></div>
+        <span>No vendemos tus datos</span>
       </div>
-    </section>
-  </main>
+      <div class="priv-trust-item">
+        <div class="priv-trust-icon orange"><i class="fa-solid fa-location-dot"></i></div>
+        <span>Ubicación solo cuando la activás</span>
+      </div>
+      <div class="priv-trust-item">
+        <div class="priv-trust-icon green"><i class="fa-solid fa-trash-can"></i></div>
+        <span>Podés solicitar eliminación de tus datos</span>
+      </div>
+      <div class="priv-trust-item">
+        <div class="priv-trust-icon green"><i class="fa-solid fa-shield-check"></i></div>
+        <span>IA y servicios externos identificados claramente</span>
+      </div>
+    </div>
+  </section>
 
-  <!-- FOOTER INSTITUCIONAL OFICIAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
+  <!-- TOP SPLIT: QUÉ ES ESTA POLÍTICA & CARD BAQUÏ -->
+  <section class="priv-top-split">
+    <div class="priv-card">
+      <h3><i class="fa-regular fa-file-lines" style="color:var(--priv-green)"></i> ¿Qué es esta Política de Privacidad?</h3>
+      <p>
+        Te explicamos de forma clara y transparente qué información recopilamos, cómo la usamos, con quién la compartimos y cuáles son tus derechos al utilizar BAQUEANO (sitio web, app Android y servicios digitales).
+      </p>
+    </div>
+    <div class="priv-card priv-confidence-card">
+      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="priv-confidence-bird" onerror="this.src='assets/images/logo.png'">
+      <div class="priv-confidence-text">
+        <h4>Tu confianza también viaja con nosotros</h4>
+        <p>Protegemos tu información para que solo te enfoques en lo más importante: vivir Nicaragua.</p>
+      </div>
+    </div>
+  </section>
 
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
+  <!-- 3-COLUMNS GRID (DATOS RECOPILADOS / NO RECOPILADOS / USO) -->
+  <section class="priv-3cols-grid">
+    <!-- COL 1: QUÉ RECOPILAMOS -->
+    <div class="priv-list-card">
+      <div class="priv-list-header">
+        <div class="priv-list-icon green"><i class="fa-solid fa-database"></i></div>
+        <div class="priv-list-title">
+          <h4>¿Qué datos recopilamos?</h4>
+          <small>Solo la información necesaria para brindarte nuestros servicios.</small>
+        </div>
+      </div>
+      <ul class="priv-items-list positives">
+        <li><i class="fa-solid fa-user"></i> Datos de cuenta (nombre, correo, foto de perfil)</li>
+        <li><i class="fa-solid fa-sliders"></i> Información de perfil y preferencias de viaje</li>
+        <li><i class="fa-solid fa-location-dot"></i> Ubicación (solo cuando la activás)</li>
+        <li><i class="fa-solid fa-bookmark"></i> Reservas, favoritos y actividades en la plataforma</li>
+        <li><i class="fa-solid fa-message"></i> Mensajes y soporte</li>
+        <li><i class="fa-solid fa-mobile-screen"></i> Información de dispositivos y uso de la app/sitio</li>
+      </ul>
+    </div>
+
+    <!-- COL 2: QUÉ NO RECOPILAMOS -->
+    <div class="priv-list-card">
+      <div class="priv-list-header">
+        <div class="priv-list-icon red"><i class="fa-solid fa-ban"></i></div>
+        <div class="priv-list-title">
+          <h4>¿Qué NO recopilamos?</h4>
+          <small>No solicitamos información sensible o innecesaria.</small>
+        </div>
+      </div>
+      <ul class="priv-items-list negatives">
+        <li><i class="fa-solid fa-circle-xmark"></i> No recopilamos datos financieros de tarjetas</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> No solicitamos tu número de cédula</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> No accedemos a tus contactos, fotos o archivos personales (sin tu permiso)</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> No vendemos tus datos a terceros</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> No recopilamos información que no sea necesaria para el funcionamiento del servicio</li>
+      </ul>
+    </div>
+
+    <!-- COL 3: PARA QUÉ USAMOS TUS DATOS -->
+    <div class="priv-list-card">
+      <div class="priv-list-header">
+        <div class="priv-list-icon blue"><i class="fa-solid fa-gear"></i></div>
+        <div class="priv-list-title">
+          <h4>¿Para qué usamos tus datos?</h4>
+          <small>Utilizamos tu información para:</small>
+        </div>
+      </div>
+      <ul class="priv-items-list uses">
+        <li><i class="fa-solid fa-shield-heart"></i> Brindar y mejorar nuestros servicios turísticos</li>
+        <li><i class="fa-solid fa-route"></i> Personalizar recomendaciones y rutas</li>
+        <li><i class="fa-solid fa-handshake"></i> Gestionar reservas y pagos (a través de aliados)</li>
+        <li><i class="fa-solid fa-map-pin"></i> Mostrar destinos, experiencias y contenido relevante</li>
+        <li><i class="fa-solid fa-comments"></i> Comunicarnos contigo sobre tu viaje o solicitudes</li>
+        <li><i class="fa-solid fa-lock"></i> Garantizar la seguridad, prevención de fraudes y mejora continua de la plataforma</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DIAGRAMA DE FLUJO DE DATOS -->
+  <section class="priv-flow-section">
+    <div class="priv-flow-card">
+      <div class="priv-flow-header">
+        <h3><i class="fa-solid fa-diagram-project" style="color:var(--priv-primary)"></i> ¿Cómo fluye tu información?</h3>
+        <p>Así funciona el flujo de datos en BAQUEANO.</p>
+      </div>
+
+      <div class="priv-flow-diagram">
+        <!-- NODO 1 -->
+        <div class="priv-flow-node user">
+          <i class="fa-solid fa-user-circle" style="font-size:2rem;color:var(--priv-primary);margin-bottom:6px;display:block"></i>
+          <strong style="font-size:0.95rem;color:var(--priv-dark)">Tú</strong>
+          <small style="display:block;color:var(--priv-muted)">Usuario</small>
+        </div>
+
+        <div class="priv-flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <!-- NODO 2 -->
+        <div class="priv-flow-node app">
+          <i class="fa-solid fa-mobile-screen-button" style="font-size:1.8rem;color:var(--priv-accent);margin-bottom:6px;display:block"></i>
+          <strong style="font-size:0.88rem;color:var(--priv-dark)">Web / App Android BAQUEANO</strong>
+          <small style="display:block;color:var(--priv-muted)">Envías tu información de forma segura.</small>
+        </div>
+
+        <div class="priv-flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <!-- NODO 3 -->
+        <div class="priv-flow-node cloud">
+          <div style="margin-bottom:8px">
+            <strong style="color:#D97706;display:block"><i class="fa-solid fa-fire"></i> Firebase</strong>
+            <small style="color:var(--priv-muted)">Autenticación y Hosting seguro.</small>
           </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
+          <div>
+            <strong style="color:var(--priv-green);display:block"><i class="fa-solid fa-bolt"></i> Supabase</strong>
+            <small style="color:var(--priv-muted)">Base de datos principal cifrada.</small>
           </div>
         </div>
 
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
+        <div class="priv-flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
-                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
-              </div>
-
-              <!-- 2. Categoría -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
-                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
-                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
-                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
-                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
-                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
-                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
-                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
-                </select>
-                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
-              </div>
-
-              <!-- 3. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
-              </div>
-
-              <!-- 4. Municipio o Comunidad -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
-                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
-              </div>
-
-              <!-- 5. Nombre del Contacto / Anfitrión -->
-              <div class="biz-field-group">
-                <label for="bizContactName" class="biz-label">
-                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
-                </label>
-                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
-                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
-              </div>
-
-              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
-                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
-                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
-              </div>
-
-              <!-- 7. Correo Electrónico (Opcional) -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
-                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
-              </div>
-
-              <!-- 8. Dirección / Cómo Llegar -->
-              <div class="biz-field-group">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
-                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
-              </div>
-
-              <!-- 9. Breve Descripción del Servicio -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
-                </label>
-                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
-                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
-                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
-              </div>
-
-              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
-                </label>
-                <div class="biz-file-dropzone" id="bizDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
-                  <div class="dropzone-content" id="dropzonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
-                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
-                  </div>
-                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
-                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
-                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
-                      <i class="fa-solid fa-xmark"></i> Quitar
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Botón de Envío y Términos -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
+        <!-- NODO 4 (RAMAS DE SALIDA) -->
+        <div class="priv-flow-branches">
+          <div class="priv-branch-item"><i class="fa-solid fa-map-location-dot"></i> Experiencias y rutas</div>
+          <div class="priv-branch-item"><i class="fa-solid fa-brain"></i> Baqueano Digital (IA)</div>
+          <div class="priv-branch-item"><i class="fa-solid fa-credit-card"></i> Pagos y aliados</div>
+          <div class="priv-branch-item"><i class="fa-solid fa-tower-broadcast"></i> SOS 24/7 (Asistencia)</div>
+          <div class="priv-branch-item"><i class="fa-solid fa-chart-line"></i> Mejora continua anónima</div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
+  <!-- FILA MEDIA DE 3 CARDS -->
+  <section class="priv-feature-grid">
+    <!-- 1 -->
+    <div class="priv-feature-card">
+      <h4><i class="fa-solid fa-location-dot" style="color:var(--priv-accent)"></i> Geolocalización y permisos</h4>
+      <p>Solo usamos tu ubicación cuando la activás para mostrarte destinos cercanos, rutas, clima y servicios locales.</p>
+      <div style="background:#F8FAFC;border:1px solid #EDF2F7;border-radius:8px;padding:8px;font-size:0.78rem;color:var(--priv-muted);display:flex;align-items:center;gap:6px">
+        <i class="fa-solid fa-circle-check" style="color:var(--priv-green)"></i>
+        <span>Tú decides cuándo compartir tu ubicación. Podés desactivarla en cualquier momento.</span>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="priv-feature-card">
+      <h4><i class="fa-solid fa-robot" style="color:var(--priv-blue)"></i> Baqueano Digital (IA)</h4>
+      <p>Nuestras herramientas de IA pueden procesar tu consulta (destino, días, presupuesto) para generar recomendaciones.</p>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;color:#334155">
+        <div>✔ No se usan tus datos para entrenar modelos.</div>
+        <div>✔ Las conversaciones se usan solo para mejorar el servicio.</div>
+        <div>✔ Proveedores de IA identificados (Gemini, Groq u otros).</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="priv-feature-card">
+      <h4><i class="fa-solid fa-shield-check" style="color:var(--priv-green)"></i> Seguridad de tu información</h4>
+      <p>Aplicamos medidas técnicas y organizativas para proteger tus datos personales contra accesos no autorizados.</p>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;color:#334155">
+        <div>✔ Conexiones seguras (HTTPS y cifrado TLS/SSL).</div>
+        <div>✔ Autenticación segura con Firebase.</div>
+        <div>✔ Control estricto de accesos y copias de seguridad.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILA INFERIOR DE 3 CARDS -->
+  <section class="priv-feature-grid">
+    <!-- 1 -->
+    <div class="priv-feature-card">
+      <h4><i class="fa-solid fa-trash-can" style="color:var(--priv-accent)"></i> Conservación y eliminación</h4>
+      <p>Conservamos tus datos solo por el tiempo necesario para cumplir con las finalidades de esta política.</p>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;color:#334155">
+        <div>✔ Podés solicitar la eliminación de tu cuenta en cualquier momento.</div>
+        <div>✔ Ciertas informaciones se mantienen solo por obligaciones legales.</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="priv-feature-card">
+      <h4><i class="fa-solid fa-id-card" style="color:var(--priv-blue)"></i> Tus derechos (ARCO)</h4>
+      <p>Tenés derecho legal a ejercer la soberanía sobre tus datos:</p>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:0.78rem;color:#334155">
+        <div>✔ Acceder a tus datos personales.</div>
+        <div>✔ Rectificar información incorrecta.</div>
+        <div>✔ Cancelar o cerrar tu cuenta.</div>
+        <div>✔ Oponerte al tratamiento y solicitar portabilidad.</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="priv-feature-card">
+      <h4><i class="fa-solid fa-cloud" style="color:var(--priv-primary)"></i> Proveedores y servicios externos</h4>
+      <p>Trabajamos con servicios confiables que cumplen con estándares de seguridad y privacidad:</p>
+      <div class="priv-providers-grid">
+        <div class="priv-provider-pill"><i class="fa-solid fa-fire" style="color:#D97706"></i> Firebase</div>
+        <div class="priv-provider-pill"><i class="fa-solid fa-bolt" style="color:var(--priv-green)"></i> Supabase</div>
+        <div class="priv-provider-pill"><i class="fa-solid fa-cloud" style="color:var(--priv-blue)"></i> Google Cloud</div>
+        <div class="priv-provider-pill"><i class="fa-solid fa-sparkles" style="color:var(--priv-accent)"></i> Gemini</div>
+        <div class="priv-provider-pill"><i class="fa-solid fa-microchip" style="color:#9333EA"></i> Groq</div>
+        <div class="priv-provider-pill"><i class="fa-solid fa-handshake" style="color:var(--priv-primary)"></i> Otros aliados</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTOS LEGALES & CONTACTO STRIP -->
+  <section class="priv-bottom-strip">
+    <div class="priv-legal-links-card">
+      <h4><i class="fa-regular fa-file-lines"></i> Nuestros documentos legales</h4>
+      <div class="priv-legal-links-row">
+        <a href="terminos.html" class="priv-legal-btn">Términos y Condiciones <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="legal.html" class="priv-legal-btn">Aviso Legal (Ley 1210 / 1211) <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="cookies.html" class="priv-legal-btn">Política de Cookies <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="priv-contact-box">
+      <h4><i class="fa-regular fa-envelope"></i> Contacto sobre privacidad</h4>
+      <p style="margin:0 0 4px;font-size:0.8rem;color:var(--priv-muted)">Si tenés preguntas o querés ejercer tus derechos ARCO:</p>
+      <a href="mailto:privacidad@baqueano.com.ni"><i class="fa-solid fa-paper-plane"></i> privacidad@baqueano.com.ni</a>
+    </div>
+
+    <div class="priv-meta-box">
+      <div>Última actualización: <strong>26 de septiembre de 2026</strong></div>
+      <div>Versión del documento: <strong>1.0</strong></div>
+    </div>
+  </section>
+
+  <!-- FOOTER OFICIAL UNIFICADO -->
+  <footer class="footer-unified">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand">
+            <img src="assets/images/logo.png" alt="BAQUEANO" class="footer-logo">
+            <div class="footer-brand-text">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-tagline">NICARAGUA AUTÉNTICA</span>
+            </div>
           </div>
+          <p class="footer-claim">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
           <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
+            <a href="https://instagram.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
 
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorá</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html">Baqueano Digital</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Nosotros</h4>
+          <ul class="footer-nav-list">
+            <li><a href="nosotros.html">Nuestra historia</a></li>
+            <li><a href="nosotros.html#mision">Misión y visión</a></li>
+            <li><a href="nosotros.html#equipo">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="aliados.html#impacto">Impacto</a></li>
           </ul>
         </div>
 
+        <div class="footer-col">
+          <h4 class="footer-col-title">Información</h4>
+          <ul class="footer-nav-list">
+            <li><a href="ambiental.html">Custodia Ambiental</a></li>
+            <li><a href="historia.html">Historia viva</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="musica.html">Música nicaragüense</a></li>
+            <li><a href="aliados.html#postular">Postular mi negocio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html" style="font-weight:700;color:var(--priv-accent)">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html" style="color: var(--arena-pinolera); font-weight: 700;">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
-        <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
-        </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
-        </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 BAQUEANO. Todos los derechos reservados.</p>
+        <p class="footer-hecho-con">Hecho con <span class="footer-heart">❤</span> en Nicaragua</p>
       </div>
     </div>
   </footer>
 
-  <!-- SDK Firebase & Sincronización Universal CMS -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
-
-  <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/legal-scrollspy.js"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileToggle = document.getElementById('mobileNavToggle');
+      const navMenu = document.getElementById('navLinksMenu');
+      if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('nav-active');
+          mobileToggle.setAttribute('aria-expanded', isOpen);
+          mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        });
+      }
+    });
+  </script>
 </body>
 </html>

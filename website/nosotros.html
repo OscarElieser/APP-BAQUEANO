@@ -1,910 +1,612 @@
 <!DOCTYPE html>
 <!--
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — ACERCA DE NOSOTROS & MANIFIESTO (nosotros.html)
+🧭 BAQUEANO ECOSYSTEM — NOSOTROS / IDENTIDAD & PROPÓSITO (nosotros.html)
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Presentar la identidad institucional, misión fundacional, visión y valores
-  del ecosistema Baqueano Nicaragua a exploradores, cooperativas y aliados.
-- Comunicar con transparencia el origen del término "Baqueano": el conocedor
-  nato de senderos secretos, volcanes y ríos donde ningún mapa tradicional llega.
-- Respaldar el turismo comunitario campesino con 0% intermediación financiera,
-  soberanía territorial y protección ecológica estricta.
+- Presentar la filosofía, misión comunitaria y modelo operativo de BAQUEANO:
+  el puente tecnológico entre el conocimiento campesino/indígena y los viajeros
+  que buscan vivencias auténticas, seguras y responsables en Nicaragua.
+- Reivindicar el turismo regenerativo sin intermediarios extractivos, protegiendo
+  el patrimonio biocultural de las 29 áreas protegidas y los 17 territorios.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Datos fidedignos extraídos de la arquitectura institucional de Baqueano Android
-  (BrandScreen / lib/features/institutional/screens/brand_screen.dart).
-- Diseño ultra-responsivo basado en CSS Grid y Flexbox, efectos glassmorphism
-  con BackdropFilter, tarjetas volumétricas y micro-interacciones a 60fps.
-- Paleta oficial: Petróleo Teal (#165D6F), Naranja Terracota Fuego (#F65E01),
-  Crema Arena Pinolera (#F4E6C1), Noche Profunda (#0F172A).
-- Menú principal integrado con el submenú de "Mi País", drawer móvil y footer oficial.
+- Réplica visual idéntica 1:1 a la maqueta oficial entregada por el usuario.
+- Hero editorial "DESCUBRÍ LO QUE NO SALE EN EL MAPA" con acento cromático naranja.
+- Razón de existir con Baqüi y pilares de Territorio, Comunidad y Tecnología ética.
+- Tarjetas escénicas de Misión y Visión con fotografía territorial.
+- 6 Valores fundamentales de la identidad Baqueano (Conocer, Conectar, Proteger,
+  Respetar, Compartir, Descubrir).
+- Diagrama secuencial de 5 pasos del modelo de impacto directo.
+- Muestra cromática oficial de 5 tonos ancestrales y petroglifo indígena.
+- Indicadores métricos verificables (17 territorios, 29+ áreas, 0% comisión).
+- Manifiesto institucional, red territorial comunitaria y presentación del equipo.
 
 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-- Hero cinematográfico con el Manifiesto Baqueano oficial.
-- Desglose interactivo de Misión y Visión 2030.
-- Decodificador del Emblema de la "Q" Ancestral y Simbolismo de la Paleta.
-- Métricas territoriales de soberanía comunitaria.
-- Voces de cooperativas campesinas y sellos legales bajo Leyes No. 1210 y 1211 INTUR.
+- Estructura HTML5 semántica y accesible.
+- Enlaces y botones 100% operativos conectando a destinos, aliados y registro.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es-NI">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Acerca de Nosotros & Manifiesto | Baqueano Nicaragua</title>
-  <meta name="description" content="Conoce la misión, visión y manifiesto de Baqueano Nicaragua. Dignificamos a los guías comunitarios y protegemos el patrimonio natural con tecnología ética y cero intermediarios.">
+  <title>Nosotros | BAQUEANO Nicaragua Auténtica</title>
+  <meta name="description" content="Conocé el propósito, misión y equipo de BAQUEANO Nicaragua. El puente tecnológico para el turismo comunitario, soberano y regenerativo.">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
-  <link rel="apple-touch-icon" href="assets/images/logo.png">
 
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <!-- Estilos Maestros Oficiales -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
-  <link rel="stylesheet" href="css/pages/nosotros.css">
-  <link rel="stylesheet" href="css/pages/institucional.css">
-  <link rel="stylesheet" href="css/pages/nosotros-exact.css?v=20260927-1">
+  <link rel="stylesheet" href="css/pages/nosotros-exact.css?v=20260927-2">
 </head>
-<body class="has-cinematic-header page-nosotros">
+<body class="page-nosotros">
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <!-- BARRA DE NAVEGACIÓN GLOBAL UNIFICADA -->
   <nav class="main-navbar" id="mainNavbar">
     <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
+      <a href="index.html" class="brand-box" aria-label="Baqueano Nicaragua - Inicio">
         <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
         <div class="brand-text">
           <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+          <span class="brand-tagline">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
       <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+        <a href="index.html" class="nav-link-item">Inicio</a>
+        <a href="destinos.html" class="nav-link-item">Destinos</a>
+        <a href="mapa.html" class="nav-link-item">Mapa</a>
+        <a href="experiencias.html" class="nav-link-item">Experiencias</a>
+        <a href="baqueano-ia.html" class="nav-link-item">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a>
+        <a href="nosotros.html" class="nav-link-item active">Nosotros</a>
+        <a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
+        <div class="nav-dropdown" id="navDropdownMas">
           <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
+            <span>Más</span>
+            <i class="fa-solid fa-chevron-down nav-dropdown-caret"></i>
           </button>
           <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
+            <a href="ambiental.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-leaf"></i>
+              <div><strong>Custodia Ambiental</strong><small>Decálogo y alertas ecológicas</small></div>
             </a>
             <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
+              <i class="fa-solid fa-landmark"></i>
+              <div><strong>Historia y Memoria</strong><small>Línea de tiempo y 17 territorios</small></div>
             </a>
             <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
+              <i class="fa-solid fa-utensils"></i>
+              <div><strong>Gastronomía</strong><small>Sabores ancestrales del maíz</small></div>
             </a>
             <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
+              <i class="fa-solid fa-music"></i>
+              <div><strong>Música y Sonido</strong><small>Patrimonio sonoro y compositores</small></div>
+            </a>
+            <a href="aliados.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-handshake"></i>
+              <div><strong>Red de Aliados</strong><small>Emprendimientos y cooperativas</small></div>
+            </a>
+            <a href="admin.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-sliders"></i>
+              <div><strong>Ops Center</strong><small>Centro de monitoreo territorial</small></div>
             </a>
           </div>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- NUEVO BOTÓN NOSOTROS -->
-        <a href="nosotros.html" class="active">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Consola Satelital</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">ACTIVO</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
       </div>
 
       <div class="nav-actions-right">
-        <button class="sos-quick-btn open-sos-btn" id="sosBtnNav" type="button" title="Auxilio SOS 24/7" aria-label="Abrir centro de auxilio SOS 24/7">
-          <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
-          <span>SOS 24/7</span>
+        <button class="nav-action-icon-btn" id="globalSearchBtn" type="button" aria-label="Buscar en Baqueano">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button>
+        <a href="mi-viaje.html#favoritos" class="nav-action-icon-btn" aria-label="Mis Favoritos">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <div class="nav-lang-selector" id="langSelector">
+          <span class="active-lang">ES</span>
+          <span class="lang-divider">|</span>
+          <span class="inactive-lang">EN</span>
+        </div>
+        <button class="nav-login-btn" id="loginBtn" type="button">
+          Iniciar sesión
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </div>
   </nav>
 
-  <!-- SECCIÓN PRINCIPAL: HERO IDENTIDAD & PROPÓSITO -->
-  <main>
-    <section class="institucional-hero">
-      <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Identidad Institucional" class="institucional-hero-bg" width="3840" height="2160" fetchpriority="high" decoding="async" onerror="this.src='assets/images/destinos/cerro_negro.jpg'">
-      <div class="institucional-hero-gradient"></div>
-      <div class="institucional-hero-content">
-        <div class="institucional-hero-badge">
-          <i class="fa-solid fa-shield-halved"></i> Identidad & Propósito
-        </div>
-        <h1 class="institucional-hero-title">
-          Descubrí lo que <span class="about-title-accent">no sale en el mapa</span>
-        </h1>
-        <p class="institucional-hero-subtitle">
-          Somos el puente tecnológico entre el conocimiento territorial de quienes conocen Nicaragua desde adentro y el viajero que busca descubrirla de forma auténtica, segura y responsable.
+  <!-- HERO EDITORIAL (IMAGEN 4) -->
+  <header class="nos-hero">
+    <div class="nos-hero-container">
+      <div class="nos-hero-eyebrow">NOSOTROS</div>
+      <h1 class="nos-hero-title">
+        DESCUBRÍ LO QUE <br><span class="nos-script">NO SALE EN EL MAPA</span>
+      </h1>
+      <p class="nos-hero-sub">
+        BAQUEANO es el puente tecnológico entre el conocimiento territorial y los viajeros que buscan experiencias auténticas, seguras y responsables.
+      </p>
+      <div class="nos-hero-actions">
+        <a href="#proposito" class="nos-btn-primary">Conocer nuestro propósito <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="destinos.html" class="nos-btn-glass"><i class="fa-solid fa-location-dot"></i> Explorar Nicaragua</a>
+      </div>
+      <img src="assets/images/nicaragua-autentica.svg" alt="Nicaragua Auténtica" class="nos-hero-stamp" onerror="this.style.display='none'">
+    </div>
+  </header>
+
+  <!-- NUESTRA RAZÓN DE EXISTIR -->
+  <section class="nos-reason-section" id="proposito">
+    <div class="nos-reason-copy">
+      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="nos-reason-bird" onerror="this.src='assets/images/logo.png'">
+      <div class="nos-reason-text">
+        <h3><i class="fa-solid fa-leaf" style="color:var(--nos-primary)"></i> Nuestra razón de existir</h3>
+        <p>
+          Conectamos viajeros con comunidades, emprendedores locales, guías, cooperativas y lugares únicos, para que el turismo genere oportunidades reales, conserve nuestro patrimonio y mantenga viva la identidad de Nicaragua.
         </p>
-        <div class="about-hero-actions"><a href="#propositoBaqueano">Conocer nuestro propósito →</a><a href="destinos.html"><i class="fa-solid fa-circle-play"></i> Explorar Nicaragua</a></div>
       </div>
-    </section>
+    </div>
 
-    <section class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
-      <!-- CITA DEL MANIFIESTO OFICIAL ANDROID -->
-        <div class="manifesto-quote-card">
-          <i class="fa-solid fa-quote-left nosotros-inline-003"></i>
-          <p class="manifesto-quote-text">
-            «Un baqueano conoce el territorio más allá de las rutas convencionales: sus caminos, montañas, ríos, comunidades, historias y formas de vivir. BAQUEANO nace para conectar ese conocimiento con quienes desean descubrir Nicaragua respetando a su gente y protegiendo su tierra.»
-          </p>
-        </div>
-
-        <!--
-          POR QUÉ: explicar qué distingue a BAQUEANO antes de presentar sus objetivos.
-          CÓMO: dos ideas breves conectan la promesa de marca con el impacto territorial.
-          QUÉ: introducción institucional tomada del documento “Sobre nosotros”.
-        -->
-        <div class="about-intro-card">
-          <p>BAQUEANO no busca llevar más viajeros a los mismos lugares.</p>
-          <p>Busca abrir nuevas rutas hacia comunidades, paisajes, emprendimientos y experiencias que forman parte de la Nicaragua que todavía no sale en el mapa.</p>
-        </div>
-
-        <section class="about-reason" id="propositoBaqueano" aria-labelledby="reasonTitle">
-          <article class="about-reason-copy"><img src="assets/images/logo.png" alt="Símbolo Baqueano"><h2 id="reasonTitle">🌿 Nuestra razón de existir</h2><p>Conectamos viajeros con comunidades, emprendedores locales, guías, cooperativas y lugares únicos, para que el turismo genere oportunidades reales, conserve nuestro patrimonio y mantenga viva la identidad de Nicaragua.</p></article>
-          <div class="reason-pillars">
-            <article class="reason-pillar"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Territorio"><div><i class="fa-solid fa-mountain-sun"></i><span><h3>Territorio</h3><p>Valoramos naturaleza, cultura e historia.</p></span></div></article>
-            <article class="reason-pillar"><img src="assets/images/comida/vigoron.jpg" alt="Comunidad"><div><i class="fa-solid fa-people-group"></i><span><h3>Comunidad</h3><p>Impulsamos a quienes hacen posible cada experiencia.</p></span></div></article>
-            <article class="reason-pillar"><img src="assets/images/destinos/cerro_negro.jpg" alt="Tecnología responsable"><div><i class="fa-solid fa-seedling"></i><span><h3>Tecnología responsable</h3><p>Para acercar, no para reemplazar.</p></span></div></article>
-          </div>
-        </section>
-
-        <!-- MISIÓN Y VISIÓN -->
-        <div class="mv-grid">
-          <div class="mv-card mision">
-            <div class="mv-title">
-              <i class="fa-solid fa-bullseye"></i>
-              <span>NUESTRA MISIÓN</span>
-            </div>
-            <p class="mv-text">
-              Impulsar a comunidades rurales, cooperativas, emprendimientos locales, guías y baqueanos de Nicaragua mediante tecnología digital accesible e inteligencia artificial responsable. Creamos herramientas que conectan al viajero con quienes habitan y conocen cada territorio, brindan visibilidad a prestadores locales y favorecen oportunidades económicas más justas.
-            </p>
-          </div>
-
-          <div class="mv-card vision">
-            <div class="mv-title">
-              <i class="fa-solid fa-binoculars"></i>
-              <span>NUESTRA VISIÓN</span>
-            </div>
-            <p class="mv-text">
-              Convertir a BAQUEANO en un ecosistema digital de referencia para el turismo comunitario, sostenible y regenerativo de Nicaragua, con capacidad de proyectarse hacia Centroamérica. Queremos que cada viaje contribuya a fortalecer comunidades, proteger ecosistemas y mantener viva la identidad cultural de cada territorio.
-            </p>
-          </div>
-        </div>
-
-        <section class="purpose-card" aria-labelledby="purposeTitle">
-          <div class="purpose-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></div>
+    <div class="nos-reason-pillars">
+      <!-- 1 -->
+      <div class="nos-pillar-card">
+        <img src="assets/images/destinos-hero.jpg" alt="Territorio" class="nos-pillar-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-pillar-content">
+          <i class="fa-solid fa-mountain"></i>
           <div>
-            <span class="section-eyebrow">Nuestro propósito</span>
-            <h2 id="purposeTitle">Tecnología que conecta. Territorio que transforma.</h2>
-            <p>BAQUEANO utiliza tecnología no para reemplazar al guía local, sino para darle mayor visibilidad y capacidad de conexión. La inteligencia artificial ayuda al viajero a encontrar, comprender y valorar mejor ese conocimiento humano.</p>
-            <strong>Porque ningún algoritmo conoce un sendero como quien lo ha recorrido toda su vida.</strong>
-          </div>
-        </section>
-
-        <section class="meaning-section" aria-labelledby="meaningTitle">
-          <span class="section-eyebrow">Nuestra forma de avanzar</span>
-          <h2 id="meaningTitle" class="section-title">¿Qué significa ser BAQUEANO?</h2>
-          <div class="meaning-grid">
-            <article class="meaning-card"><i class="fa-solid fa-map" aria-hidden="true"></i><h3>Conocer</h3><p>El territorio, sus caminos, historias y comunidades.</p></article>
-            <article class="meaning-card"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i><h3>Conectar</h3><p>Viajeros con personas y experiencias locales.</p></article>
-            <article class="meaning-card"><i class="fa-solid fa-seedling" aria-hidden="true"></i><h3>Proteger</h3><p>Naturaleza, patrimonio y cultura.</p></article>
-            <article class="meaning-card"><i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i><h3>Respetar</h3><p>La identidad y dinámica de cada comunidad.</p></article>
-            <article class="meaning-card"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i><h3>Compartir</h3><p>El conocimiento territorial de manera responsable.</p></article>
-            <article class="meaning-card"><i class="fa-solid fa-compass" aria-hidden="true"></i><h3>Descubrir</h3><p>La Nicaragua que todavía no aparece en las rutas tradicionales.</p></article>
-          </div>
-        </section>
-
-        <section class="about-model" aria-labelledby="modelTitle"><h2 id="modelTitle">⚙️ Cómo funciona nuestro modelo</h2><p>La tecnología facilita el encuentro, pero el protagonismo siempre es local.</p><div class="model-flow">
-          <article class="model-step"><img src="assets/images/destinos/cerro_negro.jpg" alt="Viajero"><div><h3>Viajero</h3><p>Busca experiencias auténticas y seguras.</p></div></article>
-          <article class="model-step"><img src="assets/images/logo.png" alt="Baqueano Digital"><div><h3>Baqueano Digital</h3><p>Conecta, informa y personaliza la ruta.</p></div></article>
-          <article class="model-step"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Territorio"><div><h3>Territorio / Comunidad</h3><p>Guías y emprendimientos locales.</p></div></article>
-          <article class="model-step"><img src="assets/images/comida/nacatamal.jpg" alt="Experiencia local"><div><h3>Experiencia local</h3><p>Naturaleza, cultura y gastronomía.</p></div></article>
-          <article class="model-step"><img src="assets/images/comida/gallo_pinto.jpg" alt="Impacto económico"><div><h3>Impacto económico directo</h3><p>Beneficio real para familias y comunidades.</p></div></article>
-        </div></section>
-
-        <!-- EL EMBLEMA BAQUEANO: LA "Q" ANCESTRAL -->
-        <div class="emblem-card">
-          <div class="emblem-logo-wrap">
-            <img src="assets/images/logo.png" alt="Emblema Baqueano Oficial">
-          </div>
-          <div class="nosotros-inline-004">
-            <div class="nosotros-inline-005">
-              SIMBOLOGÍA DE IDENTIDAD VISUAL
-            </div>
-            <h3 class="nosotros-inline-006">
-              El Emblema Baqueano: La "Q" Ancestral
-            </h3>
-            <p class="nosotros-inline-007">
-              El anillo circular en Naranja Fuego (<code class="nosotros-inline-008">#F65E01</code>) representa la energía del sol pinolero y el sendero que guía al viajero. En su corazón, la silueta volcánica y el río serpenteante en Petróleo Teal (<code class="nosotros-inline-009">#165D6F</code>) simbolizan la cordillera viva de los Maribios y las aguas vírgenes de Nicaragua.
-            </p>
+            <h4>Territorio</h4>
+            <p>Valoramos nuestra naturaleza, cultura e historia.</p>
           </div>
         </div>
-
-        <!-- PALETA DE COLORES EXPLICADA -->
-        <div class="nosotros-inline-010">
-          <h2 class="nosotros-inline-011">
-            Nuestra Paleta Territorial & Qué Nos Representa
-          </h2>
-          <p class="nosotros-inline-012">
-            Cada tonalidad de la identidad Baqueano encapsula la geografía viva y la dignidad campesina de Nicaragua.
-          </p>
-
-          <div class="color-gallery-shell" id="territorialColorGallery" aria-label="Galería automática de la paleta territorial">
-          <div class="color-meaning-grid" id="territorialColorTrack">
-            <div class="color-item-card">
-              <div class="color-swatch-box nosotros-inline-013"></div>
-              <div>
-                <h4 class="nosotros-inline-014">Verde Selva Profundo</h4>
-                <p class="nosotros-inline-015">
-                  Representa la inmensidad de las reservas naturales vírgenes (Indio Maíz, Peñas Blancas y Bosawás), encarnando nuestro compromiso con la protección ecológica.
-                </p>
-              </div>
-            </div>
-
-            <div class="color-item-card">
-              <div class="color-swatch-box nosotros-inline-016"></div>
-              <div>
-                <h4 class="nosotros-inline-014">Teal Aguas de Cráter</h4>
-                <p class="nosotros-inline-015">
-                  Evoca las aguas minerales de la Laguna de Apoyo, las pozas del Cañón de Somoto, la Cascada La Luna y las corrientes fluviales de Nicaragua.
-                </p>
-              </div>
-            </div>
-
-            <div class="color-item-card">
-              <div class="color-swatch-box nosotros-inline-017"></div>
-              <div>
-                <h4 class="nosotros-inline-014">Arena Costera & Calidez</h4>
-                <p class="nosotros-inline-015">
-                  Simboliza las costas del Pacífico, las orillas de la Isla de Ometepe y la calidez hospitalaria con la que las familias rurales acogen a cada visitante.
-                </p>
-              </div>
-            </div>
-
-            <div class="color-item-card">
-              <div class="color-swatch-box nosotros-inline-018"></div>
-              <div>
-                <h4 class="nosotros-inline-014">Terracota Fuego & Volcanes</h4>
-                <p class="nosotros-inline-015">
-                  El color insigne de Baqueano: encarna el fuego de la cordillera volcánica activa (Masaya, Cerro Negro, Telica) y la pasión comunitaria.
-                </p>
-              </div>
-            </div>
-
-            <div class="color-item-card">
-              <div class="color-swatch-box nosotros-inline-019"></div>
-              <div>
-                <h4 class="nosotros-inline-014">Oro Ancestral Pinolero</h4>
-                <p class="nosotros-inline-015">
-                  Representa el valor sagrado de la cultura precolombina, los maizales maduros y el estándar de excelencia en cada expedición.
-                </p>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div class="color-gallery-status" id="territorialColorStatus" aria-live="polite">
-            Selecciona una tarjeta para pausar el recorrido
-          </div>
-        </div>
-
-        <!--
-          POR QUÉ: mostrar alcance sin presentar como verificadas cifras que aún evolucionan.
-          CÓMO: cada dato incluye contexto y evita promesas económicas absolutas.
-          QUÉ: indicadores territoriales públicos y su nota de alcance.
-        -->
-        <div class="numbers-heading">
-          <span class="section-eyebrow">Alcance territorial</span>
-          <h2 class="section-title">BAQUEANO en números</h2>
-          <p>Las cifras públicas corresponden a información comprobable y deben mantenerse actualizadas.</p>
-        </div>
-        <div class="stats-trio-grid">
-          <div class="stat-box-card">
-            <div class="stat-number">17</div>
-            <div class="stat-label">Territorios administrativos</div>
-            <p>15 departamentos y 2 Regiones Autónomas dentro de nuestra visión territorial.</p>
-          </div>
-          <div class="stat-box-card">
-            <div class="stat-number">29+</div>
-            <div class="stat-label">Áreas naturales y territorios referenciados</div>
-            <p>Espacios incorporados progresivamente al ecosistema informativo.</p>
-          </div>
-          <div class="stat-box-card">
-            <div class="stat-number">0%</div>
-            <div class="stat-label">Comisión de intermediación de BAQUEANO*</div>
-            <p>Cuando el servicio permite contacto y pago directo con el prestador local.</p>
-          </div>
-          <div class="stat-box-card">
-            <div class="stat-number stat-number-text">Conexión directa</div>
-            <div class="stat-label">Con prestadores y comunidades locales</div>
-            <p>Priorizamos modelos donde el valor generado permanezca principalmente en el territorio.</p>
-          </div>
-        </div>
-        <p class="stats-note">*Las condiciones pueden variar según el servicio, método de pago, proveedor externo o modalidad de reserva.</p>
-
-        <!--
-          🎯 POR QUÉ: Elevar la declaración fundacional de BAQUEANO a una pieza central de honor.
-          ⚙️ CÓMO: Alineación centrada perfecta, glassmorphism con brillo sutil y 4 pilares de acción territorial.
-          📦 QUÉ: Manifiesto "Nicaragua no termina donde termina la carretera" con sello y pilares.
-        -->
-        <section class="manifesto-masterpiece-card" aria-labelledby="manifestoMasterTitle">
-          <div class="manifesto-seal-glow" title="Sello Soberano Baqueano">
-            <i class="fa-solid fa-compass" aria-hidden="true"></i>
-          </div>
-
-          <div class="hero-badge-pill" style="margin: 0 auto 1.25rem;">
-            <span class="pulse-dot"></span> Manifiesto Soberano Baqueano
-          </div>
-
-          <span class="manifesto-big-quote">“</span>
-          <h2 id="manifestoMasterTitle" class="manifesto-master-title">
-            Creemos que Nicaragua no termina donde <span class="highlight-sunset">termina la carretera</span>.
-          </h2>
-
-          <div class="manifesto-text-block">
-            <p>
-              Creemos en los caminos que conoce la comunidad, en la finca detrás de la montaña, en el comedor que todavía no aparece en un mapa convencional, en el río que surca el baqueano y en las manos artesanas que mantienen vivo el patrimonio de la patria.
-            </p>
-            <p>
-              La tecnología ética y la inteligencia artificial son herramientas para dignificar esos saberes sin alterar su esencia. BAQUEANO no busca mostrarte únicamente hacia dónde viajar: busca conectarte con quién vive allí, comprender la memoria del territorio y proteger su soberanía para las futuras generaciones.
-            </p>
-          </div>
-
-          <!-- Pilares de Acción Territorial Centrados -->
-          <div class="manifesto-pillars-grid">
-            <div class="manifesto-pillar-card">
-              <i class="fa-solid fa-compass manifesto-pillar-icon"></i>
-              <span class="manifesto-pillar-title">Descubrí</span>
-              <p class="manifesto-pillar-desc">Senderos y parajes que ningún mapa tradicional registra.</p>
-            </div>
-            <div class="manifesto-pillar-card">
-              <i class="fa-solid fa-people-roof manifesto-pillar-icon"></i>
-              <span class="manifesto-pillar-title">Conectá</span>
-              <p class="manifesto-pillar-desc">De tú a tú con guías nativos y familias campesinas.</p>
-            </div>
-            <div class="manifesto-pillar-card">
-              <i class="fa-solid fa-leaf manifesto-pillar-icon"></i>
-              <span class="manifesto-pillar-title">Protegé</span>
-              <p class="manifesto-pillar-desc">Ecoturismo de huella cero y respeto a las comunidades.</p>
-            </div>
-            <div class="manifesto-pillar-card">
-              <i class="fa-solid fa-volcano manifesto-pillar-icon"></i>
-              <span class="manifesto-pillar-title">Viví Nicaragua</span>
-              <p class="manifesto-pillar-desc">Auténtica, indómita, soberana y en paz.</p>
-            </div>
-          </div>
-
+      </div>
+      <!-- 2 -->
+      <div class="nos-pillar-card">
+        <img src="assets/images/aliados/cañon.webp" alt="Comunidad" class="nos-pillar-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-pillar-content">
+          <i class="fa-solid fa-users"></i>
           <div>
-            <span class="manifesto-action-slogan">Descubrí • Conectá • Protegé • Viví Nicaragua</span>
-          </div>
-          <div class="manifesto-signature">
-            Mesa Técnica Territorial & Red de Guardianes Baqueano • 153 Municipios
-          </div>
-        </section>
-
-        <section class="about-network" aria-labelledby="networkTitle"><h2 id="networkTitle">🔗 Nuestra red territorial</h2><p>Trabajamos de la mano con quienes hacen posible experiencias auténticas en todo el país.</p><div class="network-grid">
-          <article class="network-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Comunidades"><div><h3>Comunidades Anfitrionas</h3></div></article>
-          <article class="network-card"><img src="assets/images/comida/vigoron.jpg" alt="Cooperativas"><div><h3>Cooperativas Locales</h3></div></article>
-          <article class="network-card"><img src="assets/images/destinos/cerro_negro.jpg" alt="Guías"><div><h3>Guías y Baqueanos</h3></div></article>
-          <article class="network-card"><img src="assets/images/comida/nacatamal.jpg" alt="Emprendimientos"><div><h3>Emprendimientos Locales</h3></div></article>
-          <article class="network-card"><img src="assets/images/destinos/selva_negra.jpg" alt="Eco alojamientos"><div><h3>Eco-Lodges y Cabañas</h3></div></article>
-          <article class="network-card"><img src="assets/images/footer-nicaragua-panorama.png" alt="Aliados"><div><h3>Aliados Estratégicos</h3></div></article>
-        </div></section>
-
-        <section class="about-team" aria-labelledby="teamTitle"><h2 id="teamTitle">👥 Equipo y guardianes del territorio</h2><p>Un equipo multidisciplinario comprometido con un turismo más humano y sostenible.</p><div class="team-grid">
-          <article class="team-card"><img src="assets/images/comida/vigoron.jpg" alt="Coordinación"><div><h3>Coordinación</h3><p>Estrategia y alianzas</p></div></article>
-          <article class="team-card"><img src="assets/images/logo.png" alt="Tecnología"><div><h3>Tecnología</h3><p>Desarrollo e innovación</p></div></article>
-          <article class="team-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Comunidad"><div><h3>Comunidad</h3><p>Vinculación territorial</p></div></article>
-          <article class="team-card"><img src="assets/images/comida/nacatamal.jpg" alt="Cultura"><div><h3>Cultura y Territorio</h3><p>Contenido y patrimonio</p></div></article>
-        </div></section>
-
-        <section class="about-final" aria-label="Construir la Nicaragua auténtica"><h2>La Nicaragua auténtica<br>se construye con su gente</h2><div class="about-final-actions"><a href="destinos.html">Explorar territorios →</a><a href="aliados.html">Sumarme a BAQUEANO →</a><a href="#registroNegocios">Registrar mi negocio</a></div></section>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER INSTITUCIONAL OFICIAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
-                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
-              </div>
-
-              <!-- 2. Categoría -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
-                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
-                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
-                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
-                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
-                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
-                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
-                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
-                </select>
-                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
-              </div>
-
-              <!-- 3. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
-              </div>
-
-              <!-- 4. Municipio o Comunidad -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
-                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
-              </div>
-
-              <!-- 5. Nombre del Contacto / Anfitrión -->
-              <div class="biz-field-group">
-                <label for="bizContactName" class="biz-label">
-                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
-                </label>
-                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
-                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
-              </div>
-
-              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
-                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
-                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
-              </div>
-
-              <!-- 7. Correo Electrónico (Opcional) -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
-                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
-              </div>
-
-              <!-- 8. Dirección / Cómo Llegar -->
-              <div class="biz-field-group">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
-                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
-              </div>
-
-              <!-- 9. Breve Descripción del Servicio -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
-                </label>
-                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
-                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
-                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
-              </div>
-
-              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
-                </label>
-                <div class="biz-file-dropzone" id="bizDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
-                  <div class="dropzone-content" id="dropzonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
-                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
-                  </div>
-                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
-                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
-                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
-                      <i class="fa-solid fa-xmark"></i> Quitar
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Botón de Envío y Términos -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
-          <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+            <h4>Comunidad</h4>
+            <p>Impulsamos a quienes hacen posible cada experiencia.</p>
           </div>
         </div>
       </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
+      <!-- 3 -->
+      <div class="nos-pillar-card">
+        <img src="assets/images/destinos/granada.webp" alt="Tecnología responsable" class="nos-pillar-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-pillar-content">
+          <i class="fa-solid fa-microchip"></i>
+          <div>
+            <h4>Tecnología responsable</h4>
+            <p>Usamos la tecnología para acercar, no para reemplazar.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
-          </ul>
+  <!-- NUESTRA MISIÓN & VISIÓN -->
+  <section class="nos-mv-section" id="mision">
+    <div class="nos-mv-card mision">
+      <h3><i class="fa-solid fa-bullseye" style="color:var(--nos-accent)"></i> Nuestra Misión</h3>
+      <p>
+        Impulsar comunidades rurales, cooperativas, emprendimientos locales, guías y baqueanos mediante tecnología digital accesible e inteligencia artificial responsable, para generar oportunidades reales y un turismo más justo y sostenible.
+      </p>
+    </div>
+    <div class="nos-mv-card vision">
+      <h3><i class="fa-solid fa-eye" style="color:var(--nos-sand)"></i> Nuestra Visión</h3>
+      <p>
+        Convertir a BAQUEANO en un ecosistema digital referente para el turismo comunitario, sostenible y regenerativo de Nicaragua, con proyección regional, reconocido por su impacto positivo en las comunidades, el patrimonio y la conservación del territorio.
+      </p>
+    </div>
+  </section>
+
+  <!-- ¿QUÉ SIGNIFICA SER BAQUEANO? (6 CARDS) -->
+  <section class="nos-meaning-section">
+    <div class="nos-meaning-header">
+      <h3><i class="fa-solid fa-person-hiking"></i> ¿Qué significa ser BAQUEANO?</h3>
+      <span>Más que viajar, es vivir, aprender y dejar huella.</span>
+    </div>
+
+    <div class="nos-meaning-grid">
+      <!-- 1 -->
+      <div class="nos-meaning-card">
+        <img src="assets/images/destinos/ometepe.webp" alt="Conocer" class="nos-meaning-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-meaning-content">
+          <i class="fa-solid fa-binoculars"></i>
+          <h4>Conocer</h4>
+          <p>Exploramos con curiosidad y mente abierta.</p>
         </div>
-
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
-          </ul>
+      </div>
+      <!-- 2 -->
+      <div class="nos-meaning-card">
+        <img src="assets/images/aliados/somoto.webp" alt="Conectar" class="nos-meaning-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-meaning-content">
+          <i class="fa-solid fa-hands-holding"></i>
+          <h4>Conectar</h4>
+          <p>Unimos personas, comunidades y territorios.</p>
         </div>
+      </div>
+      <!-- 3 -->
+      <div class="nos-meaning-card">
+        <img src="assets/images/destinos-hero.jpg" alt="Proteger" class="nos-meaning-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-meaning-content">
+          <i class="fa-solid fa-shield-heart"></i>
+          <h4>Proteger</h4>
+          <p>Cuidamos nuestra naturaleza y patrimonio.</p>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="nos-meaning-card">
+        <img src="assets/images/gastronomia/nacatamal.webp" alt="Respetar" class="nos-meaning-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-meaning-content">
+          <i class="fa-solid fa-heart"></i>
+          <h4>Respetar</h4>
+          <p>Valoramos nuestras raíces, culturas y tradiciones.</p>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="nos-meaning-card">
+        <img src="assets/images/gastronomia/vigoron.webp" alt="Compartir" class="nos-meaning-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-meaning-content">
+          <i class="fa-solid fa-share-nodes"></i>
+          <h4>Compartir</h4>
+          <p>Difundimos lo bueno de nuestra gente.</p>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="nos-meaning-card">
+        <img src="assets/images/destinos/granada.webp" alt="Descubrir" class="nos-meaning-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-meaning-content">
+          <i class="fa-solid fa-compass"></i>
+          <h4>Descubrir</h4>
+          <p>Te llevamos a lugares que no salen en el mapa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CÓMO FUNCIONA NUESTRO MODELO (5 STEPS) -->
+  <section class="nos-model-section">
+    <div class="nos-model-header">
+      <h3><i class="fa-solid fa-gears" style="color:var(--nos-primary)"></i> Cómo funciona nuestro modelo</h3>
+      <p>La tecnología facilita el encuentro, pero el protagonismo siempre es local.</p>
+    </div>
+
+    <div class="nos-model-grid">
+      <!-- STEP 1 -->
+      <div class="nos-model-card">
+        <img src="assets/images/destinos/ometepe.webp" alt="Viajero" class="nos-model-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-model-info">
+          <h4>1. Viajero</h4>
+          <p>Busca experiencias auténticas y seguras en Nicaragua.</p>
+        </div>
+      </div>
+      <!-- STEP 2 -->
+      <div class="nos-model-card">
+        <img src="assets/images/baqui-bird.png" alt="Baqueano Digital" class="nos-model-img" onerror="this.src='assets/images/logo.png'">
+        <div class="nos-model-info">
+          <h4>2. Baqueano Digital</h4>
+          <p>Conecta, informa y personaliza la ruta con IA.</p>
+        </div>
+      </div>
+      <!-- STEP 3 -->
+      <div class="nos-model-card">
+        <img src="assets/images/aliados/cañon.webp" alt="Territorio / Comunidad" class="nos-model-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-model-info">
+          <h4>3. Territorio / Comunidad</h4>
+          <p>Guías, cooperativas y emprendedores locales.</p>
+        </div>
+      </div>
+      <!-- STEP 4 -->
+      <div class="nos-model-card">
+        <img src="assets/images/destinos/granada.webp" alt="Experiencia local" class="nos-model-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-model-info">
+          <h4>4. Experiencia local</h4>
+          <p>Naturaleza, cultura, gastronomía y vivencias únicas.</p>
+        </div>
+      </div>
+      <!-- STEP 5 -->
+      <div class="nos-model-card">
+        <img src="assets/images/destinos-hero.jpg" alt="Impacto económico directo" class="nos-model-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-model-info">
+          <h4>5. Impacto económico directo</h4>
+          <p>Beneficio real para las familias y comunidades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTRA IDENTIDAD (CROMÁTICA & PETROGLIFO) -->
+  <section class="nos-identity-section">
+    <div class="nos-identity-card">
+      <div class="nos-id-left">
+        <img src="assets/images/logo.png" alt="BAQUEANO" class="nos-id-logo">
+        <h4 class="nos-id-title">BAQUEANO</h4>
+        <span class="nos-id-claim">NICARAGUA AUTÉNTICA</span>
+        <p style="font-size:0.7rem;color:var(--nos-muted);margin-top:6px">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
+      <div class="nos-swatches-grid">
+        <!-- 1 -->
+        <div class="nos-swatch">
+          <div class="nos-swatch-box" style="background:#4A7A5A"></div>
+          <h5>Verde Selva Profundo</h5>
+          <code>#4A7A5A</code>
+          <p>Naturaleza y vida</p>
+        </div>
+        <!-- 2 -->
+        <div class="nos-swatch">
+          <div class="nos-swatch-box" style="background:#165D6F"></div>
+          <h5>Teal Aguas de Cráter</h5>
+          <code>#165D6F</code>
+          <p>Confianza y territorio</p>
+        </div>
+        <!-- 3 -->
+        <div class="nos-swatch">
+          <div class="nos-swatch-box" style="background:#EFDBA9"></div>
+          <h5>Arena Costera</h5>
+          <code>#EFDBA9</code>
+          <p>Nuestras playas y raíces</p>
+        </div>
+        <!-- 4 -->
+        <div class="nos-swatch">
+          <div class="nos-swatch-box" style="background:#F65E01"></div>
+          <h5>Terracota Fuego</h5>
+          <code>#F65E01</code>
+          <p>Energía y aventura</p>
+        </div>
+        <!-- 5 -->
+        <div class="nos-swatch">
+          <div class="nos-swatch-box" style="background:#D4A017"></div>
+          <h5>Oro Ancestral Pinolero</h5>
+          <code>#D4A017</code>
+          <p>Cultura y tradición</p>
+        </div>
       </div>
 
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
+      <div class="nos-petroglyph-box">
+        <img src="assets/images/destinos/ometepe.webp" alt="Petroglifo Indígena" class="nos-petroglyph-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <p><strong>Inspirados en nuestra tierra,</strong> nuestra gente y nuestras raíces ancestrales.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAQUEANO EN NÚMEROS (4 METRICS) -->
+  <section class="nos-numbers-section">
+    <div class="nos-numbers-header">
+      <h3><i class="fa-solid fa-chart-simple"></i> BAQUEANO en números</h3>
+      <small>Indicadores actuales de nuestra plataforma territorial comunitaria.</small>
+    </div>
+
+    <div class="nos-numbers-grid">
+      <!-- 1 -->
+      <div class="nos-number-card">
+        <div class="nos-num-icon"><i class="fa-solid fa-map-location-dot"></i></div>
         <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+          <div class="nos-num-val">17</div>
+          <div class="nos-num-lbl">territorios administrativos de Nicaragua</div>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+      </div>
+      <!-- 2 -->
+      <div class="nos-number-card">
+        <div class="nos-num-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+        <div>
+          <div class="nos-num-val">29+</div>
+          <div class="nos-num-lbl">áreas y territorios referenciados</div>
         </div>
+      </div>
+      <!-- 3 -->
+      <div class="nos-number-card">
+        <div class="nos-num-icon" style="color:var(--nos-accent)"><i class="fa-solid fa-percent"></i></div>
+        <div>
+          <div class="nos-num-val">0%</div>
+          <div class="nos-num-lbl">comisión de intermediación directa con prestadores</div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="nos-number-card">
+        <div class="nos-num-icon" style="color:var(--nos-green)"><i class="fa-solid fa-handshake"></i></div>
+        <div>
+          <div class="nos-num-val">Conexión directa</div>
+          <div class="nos-num-lbl">con prestadores y comunidades locales</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFIESTO BAQUEANO -->
+  <section class="nos-manifesto-section">
+    <div class="nos-manifesto-card">
+      <div class="nos-manifesto-left">
+        <h3><i class="fa-solid fa-book-open"></i> Manifiesto BAQUEANO</h3>
+        <p>
+          Creemos en una Nicaragua que se descubre caminando, navegando y compartiendo con su gente. En los caminos fuera de las rutas convencionales vive nuestra verdadera riqueza: sus comunidades, su patrimonio, su naturaleza y su cultura. Usamos la tecnología como una herramienta ética para conectar, impulsar y proteger lo nuestro, porque viajar también puede transformar vidas.
+        </p>
+      </div>
+      <div class="nos-manifesto-quote">
+        "Más territorios, más historias, una sola Nicaragua."
+      </div>
+    </div>
+  </section>
+
+  <!-- RED TERRITORIAL & EQUIPO -->
+  <section class="nos-network-section" id="equipo">
+    <div class="nos-network-header">
+      <h3><i class="fa-solid fa-network-wired" style="color:var(--nos-primary)"></i> Nuestra red territorial</h3>
+      <p>Trabajamos de la mano con quienes hacen posible experiencias auténticas en todo el país.</p>
+    </div>
+
+    <div class="nos-network-grid">
+      <div class="nos-net-card">
+        <img src="assets/images/aliados/cañon.webp" alt="Comunidades" class="nos-net-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-net-content"><h4>Comunidades Anfitrionas</h4></div>
+      </div>
+      <div class="nos-net-card">
+        <img src="assets/images/aliados/somoto.webp" alt="Cooperativas" class="nos-net-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-net-content"><h4>Cooperativas Locales</h4></div>
+      </div>
+      <div class="nos-net-card">
+        <img src="assets/images/destinos-hero.jpg" alt="Guías" class="nos-net-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-net-content"><h4>Guías y Baqueanos</h4></div>
+      </div>
+      <div class="nos-net-card">
+        <img src="assets/images/gastronomia/vigoron.webp" alt="Emprendimientos" class="nos-net-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-net-content"><h4>Emprendimientos Locales</h4></div>
+      </div>
+      <div class="nos-net-card">
+        <img src="assets/images/destinos/ometepe.webp" alt="Eco-Lodges" class="nos-net-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+        <div class="nos-net-content"><h4>Eco-Lodges y Cabañas</h4></div>
+      </div>
+      <div class="nos-net-card">
+        <img src="assets/images/destinos/granada.webp" alt="Aliados" class="nos-net-img" onerror="this.src='assets/images/hero-home.jpg'">
+        <div class="nos-net-content"><h4>Aliados Estratégicos</h4></div>
+      </div>
+    </div>
+
+    <!-- EQUIPO Y GUARDIANES DEL TERRITORIO -->
+    <div class="nos-network-header" style="margin-top:30px">
+      <h3><i class="fa-solid fa-user-shield" style="color:var(--nos-accent)"></i> Equipo y guardianes del territorio</h3>
+      <p>Un equipo multidisciplinario comprometido con el desarrollo de un turismo más humano y sostenible.</p>
+    </div>
+
+    <div class="nos-team-grid">
+      <div class="nos-team-card">
+        <img src="assets/images/aliados/somoto.webp" alt="Coordinación" class="nos-team-img" onerror="this.src='assets/images/logo.png'">
+        <div class="nos-team-info">
+          <h4>Coordinación</h4>
+          <p>Estrategia y alianzas comunitarias</p>
+        </div>
+      </div>
+      <div class="nos-team-card">
+        <img src="assets/images/destinos/granada.webp" alt="Tecnología" class="nos-team-img" onerror="this.src='assets/images/logo.png'">
+        <div class="nos-team-info">
+          <h4>Tecnología</h4>
+          <p>Desarrollo e innovación geoespacial</p>
+        </div>
+      </div>
+      <div class="nos-team-card">
+        <img src="assets/images/aliados/cañon.webp" alt="Comunidad" class="nos-team-img" onerror="this.src='assets/images/logo.png'">
+        <div class="nos-team-info">
+          <h4>Comunidad</h4>
+          <p>Vinculación y verificación territorial</p>
+        </div>
+      </div>
+      <div class="nos-team-card">
+        <img src="assets/images/destinos/ometepe.webp" alt="Cultura" class="nos-team-img" onerror="this.src='assets/images/logo.png'">
+        <div class="nos-team-info">
+          <h4>Cultura y Territorio</h4>
+          <p>Contenido y memoria viva</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER FINAL CTA -->
+  <section class="nos-final-cta">
+    <h3>La Nicaragua auténtica se construye con su gente</h3>
+    <div class="nos-final-actions">
+      <a href="destinos.html" class="nos-btn-primary">Explorar territorios <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="aliados.html" class="nos-btn-glass">Sumarme a BAQUEANO <i class="fa-solid fa-handshake"></i></a>
+      <a href="aliados.html#bizRegisterModal" class="nos-btn-glass"><i class="fa-solid fa-store"></i> Registrar mi negocio</a>
+    </div>
+  </section>
+
+  <!-- FOOTER OFICIAL UNIFICADO -->
+  <footer class="footer-unified">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand">
+            <img src="assets/images/logo.png" alt="BAQUEANO" class="footer-logo">
+            <div class="footer-brand-text">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-tagline">NICARAGUA AUTÉNTICA</span>
+            </div>
+          </div>
+          <p class="footer-claim">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-row">
+            <a href="https://instagram.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorá</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html">Baqueano Digital</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Nosotros</h4>
+          <ul class="footer-nav-list">
+            <li><a href="nosotros.html" style="font-weight:700;color:var(--nos-accent)">Nuestra historia</a></li>
+            <li><a href="nosotros.html#mision">Misión y visión</a></li>
+            <li><a href="nosotros.html#equipo">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="aliados.html#impacto">Impacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Información</h4>
+          <ul class="footer-nav-list">
+            <li><a href="ambiental.html">Custodia Ambiental</a></li>
+            <li><a href="historia.html">Historia viva</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="musica.html">Música nicaragüense</a></li>
+            <li><a href="aliados.html#postular">Postular mi negocio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 BAQUEANO. Todos los derechos reservados.</p>
+        <p class="footer-hecho-con">Hecho con <span class="footer-heart">❤</span> en Nicaragua</p>
       </div>
     </div>
   </footer>
 
-  <!--
-    POR QUÉ: ofrecer acceso inmediato a canales reales de auxilio desde cualquier dispositivo.
-    CÓMO: el controlador compartido abre este diálogo, solicita ubicación y prepara el contacto directo.
-    QUÉ: números nacionales, WhatsApp de enlace y herramientas de coordenadas GPS.
-  -->
-  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
-    <div class="sos-modal-dialog">
-      <button class="modal-close-x" id="closeSosModalBtn" type="button" aria-label="Cerrar centro SOS"><i class="fa-solid fa-xmark"></i></button>
-      <div class="nosotros-inline-023">
-        <i class="fa-solid fa-triangle-exclamation nosotros-inline-024"></i>
-        <h3 id="sosModalTitle" class="nosotros-inline-025">Centro de Auxilio SOS 24/7</h3>
-        <p class="nosotros-inline-026">Líneas de emergencia nacional y geolocalización del dispositivo</p>
-      </div>
-      <div class="sos-gps-card nosotros-inline-027">
-        <span class="nosotros-inline-028">TUS COORDENADAS:</span>
-        <div id="sosGpsDisplay" class="nosotros-inline-029">Solicitando ubicación segura…</div>
-      </div>
-      <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical nosotros-inline-030"></i><div><h5 class="nosotros-inline-031">Cruz Blanca</h5><span>128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher nosotros-inline-008"></i><div><h5 class="nosotros-inline-031">Bomberos</h5><span>115</span></div></a>
-        <a href="tel:118" class="sos-phone-card"><i class="fa-solid fa-shield-halved nosotros-inline-032"></i><div><h5 class="nosotros-inline-031">Policía Nacional</h5><span>118</span></div></a>
-        <a href="https://wa.me/50584431289" class="sos-phone-card" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp nosotros-inline-033"></i><div><h5 class="nosotros-inline-031">Mesa Baqueano</h5><span>WhatsApp SOS</span></div></a>
-      </div>
-      <div class="nosotros-inline-034">
-        <button class="btn-hero-primary nosotros-inline-035" id="btnSendWhatsAppSos" type="button"><i class="fa-brands fa-whatsapp"></i> Enviar alerta con coordenadas</button>
-        <button class="btn-hero-glass nosotros-inline-036" id="btnCopyGpsSos" type="button"><i class="fa-solid fa-copy"></i> Copiar coordenadas</button>
-      </div>
-    </div>
-  </div>
-  <!-- SDK Firebase & Sincronización Universal CMS -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
-
-  <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/color-gallery.js"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileToggle = document.getElementById('mobileNavToggle');
+      const navMenu = document.getElementById('navLinksMenu');
+      if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('nav-active');
+          mobileToggle.setAttribute('aria-expanded', isOpen);
+          mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        });
+      }
+    });
+  </script>
 </body>
 </html>

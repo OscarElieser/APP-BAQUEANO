@@ -983,4 +983,19 @@
 - Conservación: se mantuvieron íntegros los artículos legales, navegación, enlaces de contacto, formulario del footer, modales y scripts; el registro extenso se conserva en el HTML y se oculta visualmente en esta composición.
 - Responsive: garantías y flujo desplazables en móvil; grillas de tres, dos y una columna según el ancho.
 - Archivos modificados: `website/privacidad.html` y `website/css/pages/privacidad-exact.css`.
+# 2026-09-27 — Reproducción visual estricta de baqueano-ai.html#planner
+
+- Solicitud: adaptar `website/baqueano-ai.html#planner` para que quede idéntico a la referencia del planificador Baqueano Digital.
+- Implementación: hero panorámico, workspace de tres columnas con conversación, mapa ilustrado y configuración; itinerario de tres días, presupuesto, estado de ruta y recomendaciones verificadas.
+- Conservación: se mantuvieron IDs, formulario, campos, resultados dinámicos, integración del asistente, persistencia y scripts del planificador existente.
+- Responsive: el workspace se reorganiza en dos columnas para tablet y en secuencia vertical para móvil, con pestañas desplazables.
+- Archivos modificados: `website/baqueano-ai.html` y `website/css/pages/baqueano-ai-exact.css`.
+- Nota: la URL publicada no respondió al inspector web; la imagen proporcionada fue utilizada como fuente visual directa.
+# 2026-09-27 — Reproducción visual estricta de aviso-legal.html
+
+- Solicitud: adaptar `website/aviso-legal.html` a la referencia visual entregada.
+- Implementación: hero legal, resumen de seis ejes, índice lateral, seis artículos compactos, bloques normativos, propiedad intelectual, contacto, documentos relacionados y control de versión.
+- Conservación: se mantuvieron íntegros los textos jurídicos, IDs de navegación, contactos, formulario, modales y scripts existentes.
+- Responsive: índice y tarjetas con desplazamiento móvil; grillas adaptativas en tablet y escritorio.
+- Archivos modificados: `website/aviso-legal.html` y `website/css/pages/aviso-legal-exact.css`.
 

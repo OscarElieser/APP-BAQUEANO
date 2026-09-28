@@ -1,0 +1,802 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — TÉRMINOS & CONDICIONES (terminos-exact.css)
+   ============================================================================
+   🎯 POR QUÉ: Replicar 1:1 la interfaz oficial de Términos y Condiciones de Uso,
+      garantizando claridad jurídica, búsqueda reactiva y navegación fluida.
+   ⚙️ CÓMO: Layout responsivo con hero escénico, 8 puntos clave, índice lateral
+      de 30 secciones, 4 callouts preventivos, acordeones interactivos y footer.
+   📦 QUÉ: Estilos específicos para terminos.html.
+   ============================================================================ */
+
+:root {
+  --term-primary: #165D6F;
+  --term-accent: #F65E01;
+  --term-sand: #F4E6C1;
+  --term-dark: #0F172A;
+  --term-text: #1E293B;
+  --term-muted: #64748B;
+  --term-light: #F8FAFC;
+  --term-border: #E2E8F0;
+  --term-radius: 18px;
+  --term-green: #10B981;
+}
+
+body.page-terminos {
+  background-color: #F1F5F9;
+  color: var(--term-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ============================================================================
+   HERO EDITORIAL
+   ============================================================================ */
+.term-hero {
+  position: relative;
+  min-height: 480px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.85) 100%),
+              url('../../assets/images/destinos-hero.jpg') center/cover no-repeat;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 120px 24px 60px;
+}
+
+.term-hero-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.term-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.term-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+
+.term-hero-title .term-script {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--term-accent);
+}
+
+.term-hero-sub {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: #F8FAFC;
+  margin: 0 0 14px;
+}
+
+.term-hero-desc {
+  max-width: 760px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin: 0 0 24px;
+}
+
+.term-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.88rem;
+  color: #94A3B8;
+}
+
+.term-hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.term-hero-stamp {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 140px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   PUNTOS CLAVE (SUMMARY GRID)
+   ============================================================================ */
+.term-summary-section {
+  max-width: 1240px;
+  margin: -40px auto 40px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.term-summary-card {
+  background: #FFFFFF;
+  border-radius: var(--term-radius);
+  padding: 32px;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--term-border);
+}
+
+.term-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #F1F5F9;
+  padding-bottom: 16px;
+}
+
+.term-summary-header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(22, 93, 111, 0.1);
+  color: var(--term-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.term-summary-header-text h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--term-dark);
+  margin: 0 0 4px;
+}
+
+.term-summary-header-text p {
+  font-size: 0.9rem;
+  color: var(--term-muted);
+  margin: 0;
+}
+
+.term-key-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.term-key-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 1px solid #EDF2F7;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.term-key-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+}
+
+.term-key-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.term-key-icon.teal { background: rgba(22, 93, 111, 0.12); color: var(--term-primary); }
+.term-key-icon.orange { background: rgba(246, 94, 1, 0.12); color: var(--term-accent); }
+.term-key-icon.green { background: rgba(16, 185, 129, 0.12); color: var(--term-green); }
+.term-key-icon.blue { background: rgba(59, 130, 246, 0.12); color: #3B82F6; }
+.term-key-icon.red { background: rgba(239, 68, 68, 0.12); color: #EF4444; }
+
+.term-key-info h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--term-dark);
+  margin: 0 0 4px;
+}
+
+.term-key-info p {
+  font-size: 0.8rem;
+  color: var(--term-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ============================================================================
+   MAIN TWO-COLUMN LAYOUT
+   ============================================================================ */
+.term-content-section {
+  max-width: 1240px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR CONTENIDO */
+.term-sidebar {
+  background: #FFFFFF;
+  border-radius: var(--term-radius);
+  border: 1px solid var(--term-border);
+  padding: 24px 18px;
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.term-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.term-sidebar::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 999px;
+}
+
+.term-sidebar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--term-dark);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #F1F5F9;
+}
+
+.term-index-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.term-index-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--term-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.term-index-link:hover {
+  background: #F1F5F9;
+  color: var(--term-primary);
+}
+
+.term-index-link.active {
+  background: var(--term-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.term-index-link span.num {
+  font-size: 0.76rem;
+  opacity: 0.7;
+  min-width: 18px;
+}
+
+/* ============================================================================
+   MAIN CONTENT AREA
+   ============================================================================ */
+.term-main {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* BUSCADOR CARD */
+.term-search-card {
+  background: #FFFFFF;
+  border-radius: var(--term-radius);
+  border: 1px solid var(--term-border);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.term-search-bird {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  width: 90px;
+  height: auto;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.term-search-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--term-dark);
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.term-search-bar {
+  display: flex;
+  align-items: center;
+  background: #F8FAFC;
+  border: 1.5px solid var(--term-border);
+  border-radius: 999px;
+  padding: 4px 6px 4px 18px;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+.term-search-bar:focus-within {
+  border-color: var(--term-primary);
+  box-shadow: 0 0 0 3px rgba(22, 93, 111, 0.15);
+}
+
+.term-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.92rem;
+  color: var(--term-text);
+  width: 100%;
+}
+
+.term-search-btn {
+  background: var(--term-primary);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.term-search-btn:hover {
+  background: #0E4B5A;
+}
+
+.term-search-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--term-muted);
+}
+
+.term-pill-btn {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #334155;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.term-pill-btn:hover {
+  background: var(--term-primary);
+  color: #FFFFFF;
+  border-color: var(--term-primary);
+}
+
+/* 4 WARNING / NOTICE CALLOUT CARDS */
+.term-callouts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.term-callout-card {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.term-callout-card.orange {
+  background: #FFF7ED;
+  border-color: #FFEDD5;
+  color: #9A3412;
+}
+
+.term-callout-card.blue {
+  background: #EFF6FF;
+  border-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.term-callout-card.red {
+  background: #FEF2F2;
+  border-color: #FEE2E2;
+  color: #991B1B;
+}
+
+.term-callout-card.green {
+  background: #ECFDF5;
+  border-color: #D1FAE5;
+  color: #065F46;
+}
+
+.term-callout-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* ACCORDIONS LIST */
+.term-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.term-accordion-item {
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid var(--term-border);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.term-accordion-item:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+}
+
+.term-accordion-item.open {
+  border-color: var(--term-primary);
+}
+
+.term-acc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  cursor: pointer;
+  background: #FFFFFF;
+  user-select: none;
+}
+
+.term-acc-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.term-acc-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.term-acc-badge.b-green { background: #10B981; }
+.term-acc-badge.b-yellow { background: #F59E0B; }
+.term-acc-badge.b-teal { background: #165D6F; }
+.term-acc-badge.b-orange { background: #F65E01; }
+.term-acc-badge.b-blue { background: #3B82F6; }
+
+.term-acc-title-group h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--term-dark);
+  margin: 0 0 4px;
+}
+
+.term-acc-title-group p {
+  font-size: 0.86rem;
+  color: var(--term-muted);
+  margin: 0;
+}
+
+.term-acc-chevron {
+  font-size: 1rem;
+  color: var(--term-muted);
+  transition: transform 0.25s ease;
+}
+
+.term-accordion-item.open .term-acc-chevron {
+  transform: rotate(180deg);
+  color: var(--term-primary);
+}
+
+.term-acc-body {
+  padding: 0 24px 24px 72px;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #334155;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 16px;
+  display: none;
+}
+
+.term-accordion-item.open .term-acc-body {
+  display: block;
+}
+
+.term-expand-all-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.term-expand-all-btn {
+  background: #FFFFFF;
+  border: 1.5px solid var(--term-border);
+  color: var(--term-dark);
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.term-expand-all-btn:hover {
+  border-color: var(--term-primary);
+  color: var(--term-primary);
+  background: #F8FAFC;
+}
+
+/* DOCUMENTOS RELACIONADOS CARD */
+.term-related-card {
+  background: #FFFFFF;
+  border-radius: var(--term-radius);
+  border: 1px solid var(--term-border);
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.term-related-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.term-related-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--term-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.term-related-info h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--term-dark);
+  margin: 0 0 4px;
+}
+
+.term-related-info p {
+  font-size: 0.86rem;
+  color: var(--term-muted);
+  margin: 0 0 12px;
+}
+
+.term-related-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.term-btn-primary {
+  background: var(--term-primary);
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.term-btn-primary:hover {
+  background: #0E4B5A;
+}
+
+.term-btn-outline {
+  background: transparent;
+  color: var(--term-text);
+  border: 1px solid var(--term-border);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.term-btn-outline:hover {
+  border-color: var(--term-primary);
+  color: var(--term-primary);
+}
+
+.term-btn-download {
+  background: #0F172A;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.term-btn-download:hover {
+  background: #1E293B;
+}
+
+/* CONTACTO Y VIGENCIA CARD */
+.term-contact-card {
+  background: #FFFFFF;
+  border-radius: var(--term-radius);
+  border: 1px solid var(--term-border);
+  padding: 22px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.term-contact-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.term-contact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(22, 93, 111, 0.1);
+  color: var(--term-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.term-contact-info h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--term-dark);
+  margin: 0 0 4px;
+}
+
+.term-contact-info p {
+  font-size: 0.85rem;
+  color: var(--term-muted);
+  margin: 0;
+}
+
+.term-contact-pills {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.term-contact-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F8FAFC;
+  border: 1px solid #EDF2F7;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--term-text);
+}
+
+.term-contact-pill i {
+  color: var(--term-primary);
+}
+
+/* ============================================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================================ */
+@media (max-width: 1080px) {
+  .term-key-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .term-callouts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .term-content-section {
+    grid-template-columns: 1fr;
+  }
+  .term-sidebar {
+    display: none; /* Accessible via accordion on mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .term-key-grid {
+    grid-template-columns: 1fr;
+  }
+  .term-callouts-grid {
+    grid-template-columns: 1fr;
+  }
+  .term-acc-body {
+    padding: 0 16px 16px 16px;
+  }
+  .term-related-card, .term-contact-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
