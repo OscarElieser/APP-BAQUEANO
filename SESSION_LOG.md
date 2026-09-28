@@ -32,25 +32,24 @@
 
 <!-- Consulta 27-09-2026: adaptación fiel de historia.html a la referencia visual entregada. Se conservaron los siete periodos y los 17 territorios; se añadieron colecciones de pueblos, personajes, patrimonio, comparativas, narración, fuentes y CTA final con la paleta azul, verde, naranja y fondo claro. -->
 
-<!-- Consulta 28-09-2026 / 29-09-2026 (CHECKPOINT 5 — Menú Horizontal Normal en Navbar Global):
-  USUARIO: "totalmente feo hagamos un menu horizontal normal en el nav"
-  PROBLEMA DETECTADO:
-    1. En navigation.js, la función initMobileMenu() inyectaba elementos del drawer vertical (.nav-drawer-header, .nav-ops-group-title con acordeones "01 Descubrir Nicaragua", y .nav-drawer-footer) dentro del mismo contenedor navLinksMenu horizontal, causando que los textos y títulos del drawer se montaran sobre el logo y los enlaces de navegación.
-    2. La cápsula flotante anterior (position: fixed separada 16px arriba) causaba cortes y desbordamiento visual.
-    3. En index.html faltaba el bloque inicial <head> estándar HTML5, corregido y restaurado íntegramente.
-  SOLUCIÓN IMPLEMENTADA:
-    1. Rediseño completo de website/css/navigation-mega.css: navbar horizontal estándar de ancho completo con position: sticky; top: 0; left: 0; height: 72px; fondo #0B253A al 98% con glassmorphism sutil; tres zonas claras: izquierda (Logo + Baqueano Nicaragua Auténtica), centro (enlaces horizontales directos: Inicio, Explorar, Cultura, Baqueano IA, Mi Viaje, Más) y derecha (Clima, Lupa, Switch de tema, SOS, Iniciar sesión, Idioma, Hamburguesa).
-    2. En navigation.js: refactorización limpia de initMobileMenu() eliminando la inyección invasiva en navLinksMenu. El menú móvil ahora se despliega limpio en pantallas < 992px mediante hamburguesa sin alterar el nav horizontal de escritorio.
-    3. Actualización de versión de caché a ?v=20260929-hnav-v1 en global-injector.js, navigation.js, index.html, offline.html, legal.html, cookies.html, baqueano-ai.html, aviso-legal.html y 404.html.
-    4. Validación de sintaxis JS limpia (Node.js sin errores).
+<!-- Consulta 28-09-2026 / 29-09-2026 (CHECKPOINT 6 — Menú Horizontal Ordenado y No Recargado):
+  USUARIO: "asi se ve mejor pero falta ordenamiento y no quiero un menu recargado"
+  DIAGNÓSTICO TÉCNICO:
+    1. initDynamicNavbar() en navigation.js calculaba coordenadas y movía dinámicamente un span (.nav-pill-indicator) como caja flotante que se superponía sobre el logo "BAQUEANO".
+    2. La barra estaba recargada con elementos no esenciales (clima "25°C", switch de sol/luna grande de 60px y divisor vertical), lo que apretaba los enlaces y hacía colisionar el botón "Más" con la lupa y las acciones en pantallas estándar.
+  SOLUCIÓN APLICADA:
+    1. Despeje de controles redundantes: Eliminados clima, switch complejo de tema, divisores y el indicador pill flotante.
+    2. Acciones esenciales derechas limpias: Únicamente Buscador (lupa), SOS (alerta), Iniciar sesión (verde esmeralda), Idioma (ES) y hamburguesa (solo móvil).
+    3. Separación de marca y enlaces: Se asignó margen derecho amplio a la marca (margin-right: 18px), espaciado natural de enlaces (gap: 8px) y alineación ordenada sin cajas invasivas.
+    4. Versión de caché actualizada a ?v=20260929-hnav-v2 en todos los archivos HTML y JS.
   ARCHIVOS MODIFICADOS:
     - website/css/navigation-mega.css
     - website/js/navigation.js
-    - website/js/global-injector.js
     - website/index.html
     - website/404.html, website/aviso-legal.html, website/baqueano-ai.html, website/cookies.html, website/legal.html, website/offline.html
     - SESSION_LOG.md
   ESTADO: Implementado y verificado. -->
+
 
 
 

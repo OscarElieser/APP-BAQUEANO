@@ -47,7 +47,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-hnav-v1'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-hnav-v2'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
@@ -59,7 +59,6 @@ function buildGlobalMegaNavigation() {
     const activeClass = (files) => files.includes(current) ? ' active' : '';
 
     navMenu.innerHTML = `
-      <span class="nav-pill-indicator" aria-hidden="true"></span>
       <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
       <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
       <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
@@ -113,25 +112,15 @@ function buildGlobalMegaNavigation() {
       </div>`;
   }
 
-  // Divisor Vertical
-  if (navMenu && !navbar.querySelector('.nav-vertical-divider')) {
-    const divider = document.createElement('div');
-    divider.className = 'nav-vertical-divider';
-    divider.setAttribute('aria-hidden', 'true');
-    navMenu.after(divider);
-  }
+  // Eliminar divisor vertical previo si existiese
+  const existingDivider = navbar.querySelector('.nav-vertical-divider');
+  if (existingDivider) existingDivider.remove();
 
   const actions = navbar.querySelector('.nav-actions-right, .nav-right-actions, .exact-nav-actions, .global-nav-actions');
   if (actions) {
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
-      <span class="global-weather navbar-weather-pill" title="Clima actual"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
-      <a class="global-search navbar-search-btn" href="destinos.html" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <button class="global-theme navbar-theme-pill global-theme-toggle-switch" id="globalThemeToggle" type="button" aria-label="Cambiar tema">
-        <i class="fa-solid fa-sun theme-sun-icon"></i>
-        <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
-        <i class="fa-solid fa-moon theme-moon-icon"></i>
-      </button>
+      <a class="global-search navbar-search-btn" href="destinos.html" aria-label="Buscar en Nicaragua" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
       <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
       <a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html"><i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span></a>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>
@@ -358,115 +347,20 @@ function initNavbarScroll() {
 }
 
 /**
- * Píldora deslizante magnética que sigue el cursor y regresa al elemento activo.
+ * 🎯 POR QUÉ: Garantizar un menú horizontal estable, ordenado y libre de saltos.
+ * ⚙️ CÓMO: Neutraliza el cálculo dinámico de la píldora flotante, delegando el
+ * estilo activo a CSS puro sin colisiones ni desalineaciones de texto.
+ * 📦 QUÉ: Mantiene las micro-interacciones de botones de acción.
  */
 function initDynamicNavbar() {
-  const navbar = document.getElementById('mainNavbar');
   const navMenu = document.getElementById('navLinksMenu');
-  if (!navMenu) return;
-
-  // Crear o reutilizar la píldora indicadora flotante
-  let indicator = navMenu.querySelector('.nav-pill-indicator');
-  if (!indicator) {
-    indicator = document.createElement('div');
-    indicator.className = 'nav-pill-indicator';
-    indicator.setAttribute('aria-hidden', 'true');
-    navMenu.appendChild(indicator);
+  if (navMenu) {
+    navMenu.querySelectorAll('.nav-pill-indicator').forEach((el) => el.remove());
+    navMenu.classList.remove('has-indicator');
   }
-
-  // Seleccionar solo los elementos de nivel superior (enlaces directos o trigger de dropdown)
-  const topNavItems = Array.from(navMenu.querySelectorAll(':scope > a, :scope > .nav-dropdown > .nav-dropdown-trigger'));
-  if (topNavItems.length === 0) return;
-
-  navMenu.classList.add('has-indicator');
-
-  const moveIndicatorTo = (targetEl) => {
-    if (!targetEl || !indicator) return;
-    const menuRect = navMenu.getBoundingClientRect();
-    const targetRect = targetEl.getBoundingClientRect();
-
-    const left = targetRect.left - menuRect.left;
-    const width = targetRect.width;
-
-    indicator.style.transform = `translateX(${left}px)`;
-    indicator.style.width = `${width}px`;
-    indicator.style.opacity = '1';
-  };
-
-  const getActiveItem = () => {
-    // Si un enlace dentro del dropdown "Mi País" está activo, el trigger es el activo
-    const dropdownActiveLink = navMenu.querySelector('.nav-dropdown-menu a.active');
-    if (dropdownActiveLink) {
-      const trigger = navMenu.querySelector('.nav-dropdown-trigger');
-      if (trigger) return trigger;
-    }
-    return navMenu.querySelector(':scope > a.active') || topNavItems[0];
-  };
-
-  const syncActivePosition = () => {
-    const activeItem = getActiveItem();
-    if (activeItem) {
-      moveIndicatorTo(activeItem);
-    }
-  };
-
-  // Posicionamiento inicial con retraso mínimo para asegurar cálculo de fuentes
-  requestAnimationFrame(syncActivePosition);
-  setTimeout(syncActivePosition, 100);
-
-  // Escuchadores de interacción sobre los elementos superiores
-  topNavItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      topNavItems.forEach(l => l.classList.remove('hovered'));
-      item.classList.add('hovered');
-      moveIndicatorTo(item);
-    });
-
-    item.addEventListener('focus', () => {
-      topNavItems.forEach(l => l.classList.remove('hovered'));
-      item.classList.add('hovered');
-      moveIndicatorTo(item);
-    });
-  });
-
-  // Al salir del menú, regresar suavemente al elemento activo
-  navMenu.addEventListener('mouseleave', () => {
-    topNavItems.forEach(l => l.classList.remove('hovered'));
-    syncActivePosition();
-  });
-
-  navMenu.addEventListener('focusout', (e) => {
-    if (!navMenu.contains(e.relatedTarget)) {
-      topNavItems.forEach(l => l.classList.remove('hovered'));
-      syncActivePosition();
-    }
-  });
-
-  // Recalcular en cambio de resolución de pantalla con debounce
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(syncActivePosition, 80);
-  }, { passive: true });
-
-  // Seguimiento del puntero para iluminación ambiental en el HUD
-  if (navbar) {
-    navbar.addEventListener('mousemove', (e) => {
-      const rect = navbar.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      navbar.style.setProperty('--nav-mouse-x', `${x}px`);
-      navbar.style.setProperty('--nav-mouse-y', `${y}px`);
-    }, { passive: true });
-  }
-
-  // Inicializar micro-interacciones de ondas en botones de acción
   initActionRipples();
 }
 
-/**
- * Micro-interacciones con efecto ripple táctil en botones de acción.
- */
 function initActionRipples() {
   const interactiveBtns = document.querySelectorAll('.btn-nav-download, .sos-quick-btn, .mobile-nav-toggle');
   interactiveBtns.forEach(btn => {
