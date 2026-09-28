@@ -1528,3 +1528,32 @@
   - `website/js/navigation.js`
   - 24 archivos `.html` actualizados (`index.html`, `destinos.html`, `departamento.html`, `mapa.html`, `experiencias.html`, `baqueano-ia.html`, `baqueano-ai.html`, `mi-viaje.html`, `historia.html`, `gastronomia.html`, `musica.html`, `ambiental.html`, `aliados.html`, `mi-negocio.html`, `denuncias.html`, `perfil.html`, `nosotros.html`, `terminos.html`, `privacidad.html`, `cookies.html`, `aviso-legal.html`, `legal.html`, `offline.html`, `404.html`)
   - `SESSION_LOG.md` actualizado.
+
+---
+
+## [2026-09-28] CHECKPOINT 8 — Rediseño Total: Navbar Horizontal Sin Hamburguesa en Desktop
+
+- **POR QUÉ:** El usuario rechazó totalmente el menú hamburguesa en desktop como "horrible" y exige un menú horizontal de primer nivel limpio, elegante y sin elementos recargados. Versión v10-final.
+- **CÓMO:**
+  1. Reescritura completa de `navigation-mega.css` (v10-final) con 3 zonas flex: Marca · Links centrales · Acciones.
+  2. Hamburguesa `display: none !important` en todos los tamaños EXCEPTO dentro del breakpoint `@media (max-width: 768px)`.
+  3. Breakpoint tablet comprimido `@media (max-width: 900px) and (min-width: 769px)` — links comprimidos sin hamburguesa.
+  4. Conflicto eliminado en `index-exact.css` — se neutralizó la regla `.exact-nav-menu { display: none; }` del breakpoint 1024px que ocultaba el menú en laptops.
+  5. Mega panel "Más": `position: fixed`, `left: 50%`, `transform: translateX(-50%)`, 4 columnas, animación `bqnPanelIn`.
+  6. Cache-busting actualizado a `v10-final` en `global-injector.js` y `navigation.js`.
+- **QUÉ:** `navigation-mega.css` reescrito · `index-exact.css` corregido · versiones bump en `global-injector.js` y `navigation.js`.
+
+
+- **POR QUÉ (Why / Propósito):** Resolver definitivamente la inconsistencia reportada por el usuario donde el menú no coincidía con el diseño de la imagen ni aparecía de forma global en todas las páginas. La auditoría reveló que más de 20 páginas HTML tenían barras desactualizadas, incompletas o sin la estructura requerida, y faltaban detalles clave como el divisor vertical, las píldoras ovaladas completas en SOS/Login/Idioma/Clima, y el track interactivo del conmutador de tema.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. Se estandarizó el 100% de las páginas públicas del portal (24 archivos HTML) insertando estáticamente en el código fuente la misma barra canónica `#mainNavbar` con mega menú de 4 columnas y estados activos específicos por ruta.
+  2. Se incorporó el divisor vertical (`.nav-vertical-divider`) entre los enlaces centrales y las acciones derechas.
+  3. Se aplicó `border-radius: 9999px !important;` en todos los componentes de botón y píldora (SOS rojo, Iniciar sesión verde, selector de idioma ES, píldora de clima y botón Más).
+  4. Se integró el control de cambio de tema con interruptor de pista (`.theme-switch-track`) y botón deslizable (`.theme-switch-thumb`) flanqueado por iconos de sol y luna.
+  5. Se ancló el mega menú `.global-mega-menu` de forma absoluta al contenedor de la cápsula (`top: calc(100% + 14px); right: 0; border-radius: 24px;`), garantizando que el caret naranja de "Más ˇ" apunte con precisión milimétrica al panel desplegable.
+  6. Se actualizó `website/js/navigation.js` y se incrementó el versionado de caché a `nav-fix-7`.
+- **QUÉ (What / Entregables):**
+  - `website/css/navigation-mega.css`
+  - `website/js/navigation.js`
+  - 24 archivos `.html` actualizados (`index.html`, `destinos.html`, `departamento.html`, `mapa.html`, `experiencias.html`, `baqueano-ia.html`, `baqueano-ai.html`, `mi-viaje.html`, `historia.html`, `gastronomia.html`, `musica.html`, `ambiental.html`, `aliados.html`, `mi-negocio.html`, `denuncias.html`, `perfil.html`, `nosotros.html`, `terminos.html`, `privacidad.html`, `cookies.html`, `aviso-legal.html`, `legal.html`, `offline.html`, `404.html`)
+  - `SESSION_LOG.md` actualizado.
