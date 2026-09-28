@@ -1255,3 +1255,29 @@
   - Auditoría global de enlaces: 0 enlaces rotos, 0 términos prohibidos en 25 documentos HTML.
   - Registro de sesión en `SESSION_LOG.md`.
 
+
+
+## [2026-09-28] Botones Mi Viaje — Funcionalidad Completa
+
+**Archivos modificados:**
+- website/mi-viaje.html — Reconstruido completamente con todos los componentes visuales (tarjetas, mapa Leaflet, recomendaciones, clima, sidebar)
+- website/js/mi-viaje-interactions.js — Nuevo controlador JS con todas las interacciones
+
+**Botones implementados y funcionales:**
+| Botón | Acción |
+|---|---|
+| Ver en mapa | Abre Google Maps con coordenadas del destino + sesionStorage para mapa.html |
+| Guardar | Toggle favorito en localStorage + badge visual |
+| Editar día | Modal CRUD para title/desc/nota con persistencia localStorage |
+| Modificar con IA | Redirige a baqueano-ia.html |
+| Guardar en Mi Viaje | Persiste en localStorage, feedback visual |
+| Compartir ruta | navigator.share() + fallback clipboard |
+| Descargar PDF | window.print() con hoja de estilos dedicada |
+| Generar QR | Modal con QR via api.qrserver.com |
+| Reservar todo | Redirige a aliados.html |
+| Ver detalle (rec.) | Redirige a destinos.html |
+| Contactar (rec.) | Redirige a nosotros.html#contacto |
+| Reservar (rec.) | Redirige a mi-negocio.html |
+| Tabs mapa | Leaflet con marcadores naranja y polyline de ruta |
+
+**Commit:** eat(mi-viaje): todos los botones funcionales
