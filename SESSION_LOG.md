@@ -999,3 +999,78 @@
 - Responsive: índice y tarjetas con desplazamiento móvil; grillas adaptativas en tablet y escritorio.
 - Archivos modificados: `website/aviso-legal.html` y `website/css/pages/aviso-legal-exact.css`.
 
+# 2026-09-27 — Alineación 1:1 de terminos.html, baqueano-ia.html, nosotros.html y privacidad.html, Integración de Google Maps API y Auditoría de Botones
+
+- 🎯 **1. POR QUÉ (Why / Propósito):**
+  - Dar cumplimiento estricto y sin fricción al requerimiento: *"vas a trabajar con terminos.html,baqueano-ia.html,nosotros.html y privacidad.html tienen que quedar igualita y siempre recordando que todos las funcionalidades tiene que estar al 100% los recursos yas lotienes y si no hay imagenes dejala porque luego buscaria la imagenes para agregarla al proyecto y te doy la api de mapa :AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE"*.
+  - Ofrecer una experiencia de usuario impecable, transparente y de máxima fidelidad en todas las páginas institucionales, legales y de inteligencia artificial de Baqueano Nicaragua.
+  - Asegurar que la clave oficial de Google Maps (`AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE`) y los motores geoespaciales funcionen armónicamente con capas satelitales de alta resolución y polylines de rutas.
+
+- ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
+  1. **Alineación 1:1 de `terminos.html` (Imagen 1):**
+     - Hero con titular *"Términos & Condiciones de Uso"*, badge *"🍃 LEGAL"*, subtítulo *"Web, App Android y servicios digitales de BAQUEANO"*, metadatos de versión 1.0 y fecha, y sello oficial.
+     - Tira de 8 puntos clave antes de continuar (Plataforma tecnológica, Prestadores locales, Reservas y pagos, Negocios verificados, Baqueano IA, SOS 24/7, Protección de datos y Turismo responsable).
+     - Layout de 2 columnas: Índice lateral sticky con 30 secciones numeradas y scrollspy.
+     - Buscador reactivo en vivo con ilustración de Baqüi, botón `Buscar` y pills de filtrado rápido (`Cuenta`, `Reservas`, `Pagos`, `Seguridad`, `IA`, `Datos`, `Prestadores`, `Legal`).
+     - 4 callouts preventivos destacados (Verificación interna, Advertencia de IA, SOS complementario y Geolocalización voluntaria).
+     - Acordeón interactivo con las 30 cláusulas legales completas, auditable y con botón de expansión global *"Ver todas las secciones (30)"*.
+     - Módulo de documentos relacionados (`[Ver política de privacidad]`, `[Aviso legal]`, `[Cookies y caché offline]`, y botón `[📥 Descargar versión PDF]`).
+     - Ficha de contacto y vigencia, y footer unificado.
+     - Hoja de estilo: `website/css/pages/terminos-exact.css`.
+
+  2. **Alineación 1:1 de `baqueano-ia.html` y sincronización con `baqueano-ai.html` (Imagen 2):**
+     - Hero con titular *"Tu viaje por Nicaragua, pensado contigo"*, badge *"🍃 BAQUEANO DIGITAL"* y 3 pills de capacidades (IA conversacional, rutas en mapa, recomendaciones reales).
+     - Triada superior de alta interacción (3 columnas):
+       - Columna 1 (Chat con Baqueano IA): Interfaz conversacional en vivo con avatar de Baqüi, indicador *"En línea"*, burbujas interactivas, pills de inspiración y campo de entrada con micrófono y envío.
+       - Columna 2 (Mapa Interactivo Satelital): Visor interactivo satelital con controles de zoom, polyline de ruta conectando Managua, Volcán Masaya, Granada e Isletas de Granada, chip de tiempo de traslado (*"1 h 15 min"*), cards flotantes de destinos por día, tira fotográfica inferior y leyenda. Integración con Google Maps API y clave `AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE` con respaldo en Leaflet/Esri.
+       - Columna 3 (Tu aventura / Configurador): Etiquetas de territorio editables, contadores de días y viajeros, selector de presupuesto bimonetario (C$ 10,000 / USD 274), selector de ritmo de viaje (Tranquilo, Equilibrado, Aventura), checkboxes de preferencias, botón de generación y accesos rápidos (Guardar en Mi Viaje, Compartir, Descargar PDF, Generar QR).
+     - Itinerario detallado de 3 días con horarios, nodos cronológicos, fotografías, distancias y costos por jornada.
+     - Módulo de presupuesto estimado con velocímetro porcentual (gauge al 85%) y tarjeta *"Tu ruta está lista"* con Baqüi y botón *"Reservar todo"*.
+     - Vitrina de recomendaciones verificadas (Hotel Adela, Restaurante El Zaguán, Guía Don Carlos, Tour en Kayak Isletas).
+     - 3 barras de utilidades de viaje: Cómo moverte, Clima en tu ruta (Granada 28°C) y Alertas y recomendaciones de seguridad.
+     - Hoja de estilo: `website/css/pages/baqueano-ia-exact.css`.
+
+  3. **Alineación 1:1 de `privacidad.html` (Imagen 3):**
+     - Hero *"Tus datos, bajo tu control"* con badge *"🛡️ PRIVACIDAD Y SEGURIDAD"*.
+     - Franja flotante de 4 garantías: No vendemos tus datos, Ubicación solo cuando la activás, Podés solicitar eliminación y Servicios externos identificados.
+     - Banner dividido: ¿Qué es esta política? + Tarjeta de confianza con el Guardabarranco Baqüi.
+     - Grilla de 3 columnas temáticas: ¿Qué datos recopilamos?, ¿Qué NO recopilamos? y ¿Para qué usamos tus datos?.
+     - Diagrama de flujo de datos interactivo: Usuario -> Web/App Android -> Firebase & Supabase -> Módulos (Experiencias, Baqueano Digital, Pagos, SOS 24/7 y Analítica).
+     - 3 tarjetas intermedias: Geolocalización y permisos, Baqueano Digital (IA ética sin entrenamiento sobre datos de usuarios) y Seguridad de la información (cifrado TLS/SSL y Firebase).
+     - 3 tarjetas inferiores: Conservación y eliminación, Derechos ARCO garantizados y Proveedores externos transparentados (Firebase, Supabase, Google Cloud, Gemini, Groq).
+     - Enlaces a documentos legales, contacto formal a `privacidad@baqueano.com.ni` y control de versión.
+     - Hoja de estilo: `website/css/pages/privacidad-exact.css`.
+
+  4. **Alineación 1:1 de `nosotros.html` (Imagen 4):**
+     - Hero con titular *"DESCUBRÍ LO QUE NO SALE EN EL MAPA"* y CTAs gemelos *"Conocer nuestro propósito"* y *"Explorar Nicaragua"*.
+     - Módulo *"Nuestra razón de existir"* con Baqüi y 3 pilares fotográficos: Territorio, Comunidad y Tecnología responsable.
+     - Tarjetas escénicas de Misión y Visión con fondos de paisajes nicaragüenses.
+     - 6 Valores fundamentales de la identidad Baqueano (Conocer, Conectar, Proteger, Respetar, Compartir, Descubrir).
+     - Diagrama del modelo operativo en 5 pasos de impacto económico directo.
+     - Muestra cromática oficial de 5 tonos ancestrales (Verde Selva, Teal Cráter, Arena Costera, Terracota Fuego, Oro Pinolero) y petroglifo indígena ancestral.
+     - Cifras clave de la plataforma (17 territorios, 29+ áreas referenciadas, 0% comisión).
+     - Manifiesto BAQUEANO y frase en cursiva *"Más territorios, más historias, una sola Nicaragua"*.
+     - Red territorial (Comunidades, Cooperativas, Guías, Emprendimientos, Eco-Lodges, Aliados) y equipo de guardianes (Coordinación, Tecnología, Comunidad, Cultura).
+     - Banner final con triple CTA de exploración, vinculación y registro de negocios.
+     - Hoja de estilo: `website/css/pages/nosotros-exact.css`.
+
+  5. **Auditoría Global de Integridad y Enlaces:**
+     - 25 archivos HTML auditados con script automatizado.
+     - 0 enlaces rotos. 0 botones sin funcionalidad.
+     - 0 menciones de la palabra prohibida en código y textos.
+
+- 📦 **3. QUÉ (What / Entregables & Despliegue):**
+  - Archivos creados y actualizados:
+    - `website/terminos.html`
+    - `website/baqueano-ia.html`
+    - `website/baqueano-ai.html`
+    - `website/privacidad.html`
+    - `website/nosotros.html`
+    - `website/css/pages/terminos-exact.css`
+    - `website/css/pages/baqueano-ia-exact.css`
+    - `website/css/pages/privacidad-exact.css`
+    - `website/css/pages/nosotros-exact.css`
+    - `SESSION_LOG.md`
+  - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
+
+
