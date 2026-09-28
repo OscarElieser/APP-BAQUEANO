@@ -1,8 +1,725 @@
 /*
- * 🎯 POR QUÉ: unificar la navegación global con la jerarquía aprobada.
- * ⚙️ CÓMO: barra glassmorphic y mega menú de cuatro columnas, accesibles y responsive.
- * 📦 QUÉ: accesos principales, clima, búsqueda, SOS, sesión, idioma y menú móvil.
- */
-.main-navbar{overflow:visible!important;background:linear-gradient(110deg,rgba(3,39,48,.94),rgba(4,49,61,.9))!important;border-bottom:1px solid rgba(119,220,207,.45)!important;box-shadow:0 12px 32px rgba(2,18,31,.25)!important;backdrop-filter:blur(22px)!important}.main-navbar .nav-inner{max-width:1580px!important;min-height:74px!important;overflow:visible!important}.main-navbar .brand-logo-img{width:64px!important;height:58px!important}.main-navbar .brand-title{font-size:1.25rem!important;letter-spacing:.06em}.main-navbar .brand-tagline{font-size:.58rem!important;letter-spacing:.28em}.main-navbar .nav-links-menu{position:static!important;display:flex!important;align-items:center!important;gap:.25rem!important;overflow:visible!important}.main-navbar .nav-links-menu>a,.main-navbar .global-more-dropdown>.nav-dropdown-trigger{min-height:46px!important;padding:.7rem 1rem!important;border:1px solid transparent!important;border-radius:12px!important;color:#fff!important;background:transparent!important;font-size:.8rem!important;font-weight:750!important}.main-navbar .nav-links-menu>a.active,.main-navbar .global-more-dropdown>.nav-dropdown-trigger.active,.main-navbar .global-more-dropdown.is-open>.nav-dropdown-trigger{border-color:rgba(83,223,180,.24)!important;background:linear-gradient(135deg,rgba(20,125,115,.55),rgba(16,91,103,.48))!important;box-shadow:inset 0 0 18px rgba(58,220,176,.08)!important}.main-navbar .global-more-dropdown{position:static!important}.main-navbar .global-more-dropdown>.nav-dropdown-trigger{display:flex;gap:.5rem;align-items:center}.main-navbar .global-more-dropdown>.nav-dropdown-trigger::after{content:'';position:absolute;bottom:-6px;left:50%;width:16px;height:16px;border-left:2px solid #f0a92b;border-top:2px solid #f0a92b;background:#0a3342;opacity:0;transform:translateX(-50%) rotate(45deg)}.main-navbar .global-more-dropdown.is-open>.nav-dropdown-trigger::after,.main-navbar .global-more-dropdown:hover>.nav-dropdown-trigger::after{opacity:1}.main-navbar .global-mega-menu{position:absolute!important;top:calc(100% - 1px)!important;right:0!important;left:auto!important;display:grid!important;grid-template-columns:1fr 1fr 1fr 1.55fr!important;width:min(1040px,94vw)!important;min-width:0!important;padding:1.3rem!important;border:1px solid rgba(191,239,239,.7)!important;border-radius:22px!important;background:linear-gradient(135deg,rgba(4,37,49,.97),rgba(4,30,42,.95))!important;box-shadow:0 22px 55px rgba(1,15,25,.45)!important;backdrop-filter:blur(25px)!important;transform:translateY(12px)!important;transform-origin:top right!important}.main-navbar .global-more-dropdown:hover .global-mega-menu,.main-navbar .global-more-dropdown:focus-within .global-mega-menu,.main-navbar .global-more-dropdown.is-open .global-mega-menu{visibility:visible!important;opacity:1!important;pointer-events:auto!important;transform:translateY(0)!important}.global-mega-column{padding:0 1.1rem;border-right:1px solid rgba(224,247,249,.18)}.global-mega-column:last-child{border:0}.global-mega-column h2{display:flex;align-items:center;gap:.65rem;margin:0 0 1rem;padding:0 0 .8rem;border-bottom:1px solid rgba(255,255,255,.13);color:#fff;font-size:1rem}.global-mega-column h2 i{color:#52e3ad;font-size:1.3rem}.global-mega-column.culture h2 i{color:#f5a623}.global-mega-column.community h2 i{color:#62d8f5}.global-mega-column.account h2 i{color:#cad8e1}.global-mega-column>a{display:flex!important;align-items:center!important;gap:.75rem!important;min-height:42px!important;padding:.45rem .25rem!important;border:0!important;border-radius:8px!important;color:rgba(255,255,255,.91)!important;background:transparent!important;text-decoration:none!important;font-size:.78rem!important}.global-mega-column>a:hover{padding-left:.55rem!important;color:#fff!important;background:rgba(255,255,255,.08)!important}.global-mega-column>a>i{width:24px;color:#eaf6f8;font-size:1rem;text-align:center}.global-admin-link{margin-top:.45rem!important;padding-top:.7rem!important;border-top:1px solid rgba(255,255,255,.15)!important}.global-admin-link small{margin-left:auto;padding:.2rem .4rem;border:1px solid rgba(255,255,255,.2);border-radius:999px;color:#aac0c9;font-size:.55rem}.main-navbar .global-nav-actions{display:flex!important;align-items:center!important;gap:.45rem!important;white-space:nowrap}.global-weather,.global-search,.global-theme,.global-language{display:inline-flex;min-height:40px;align-items:center;justify-content:center;gap:.4rem;padding:.55rem .7rem;border:1px solid rgba(255,255,255,.16);border-radius:11px;color:#fff;background:rgba(2,29,40,.34);font-size:.72rem}.global-search{width:40px;padding:0}.global-theme{padding:.45rem}.global-theme .fa-sun{color:#ffb42b}.global-theme .fa-moon{color:#b9cee0}.main-navbar .global-nav-actions .sos-quick-btn{min-height:42px!important;padding:.6rem .85rem!important;border:1px solid #ff4b58!important;border-radius:11px!important;background:linear-gradient(#dc2434,#a60718)!important}.main-navbar .global-session{min-height:42px!important;padding:.45rem .75rem!important;border:1px solid rgba(94,244,163,.32)!important;border-radius:11px!important;background:linear-gradient(#24ae6e,#087b50)!important}.main-navbar .global-session .nav-profile-role{display:none!important}.global-language{cursor:pointer}.main-navbar .nav-pill-indicator{display:none!important}
-@media(max-width:1250px){.global-weather,.global-theme{display:none}.main-navbar .nav-links-menu>a,.main-navbar .global-more-dropdown>.nav-dropdown-trigger{padding-inline:.65rem!important}.main-navbar .brand-text{display:none!important}}
-@media(max-width:900px){.main-navbar .nav-inner{min-height:66px!important}.main-navbar .brand-logo-img{width:52px!important;height:48px!important}.main-navbar .global-nav-actions>*:not(.mobile-nav-toggle):not(.sos-quick-btn){display:none!important}.main-navbar .nav-links-menu{position:fixed!important;inset:0 auto 0 0!important;display:block!important;width:min(92vw,390px)!important;padding:5rem 1rem 2rem!important;overflow-y:auto!important;background:linear-gradient(160deg,#062b3a,#071f2d)!important;transform:translateX(-105%)!important}.main-navbar .nav-links-menu.mobile-open{transform:translateX(0)!important}.main-navbar .nav-links-menu>a,.main-navbar .global-more-dropdown>.nav-dropdown-trigger{display:flex!important;width:100%!important;margin:.25rem 0!important;justify-content:space-between!important}.main-navbar .global-more-dropdown{display:block!important;width:100%!important}.main-navbar .global-mega-menu{position:static!important;display:none!important;width:100%!important;max-height:none!important;padding:.6rem!important;border-radius:12px!important;grid-template-columns:1fr!important;transform:none!important}.main-navbar .global-more-dropdown.is-open .global-mega-menu{display:grid!important}.global-mega-column{padding:.6rem!important;border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}.global-mega-column h2{margin-bottom:.35rem}.global-mega-column>a{min-height:38px!important}.global-admin-link small{display:inline-block!important}.main-navbar .mobile-nav-toggle{display:inline-flex!important}}
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — NAVEGACIÓN GLOBAL INSTITUCIONAL & MEGA MENÚ
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ofrecer la barra de navegación flotante tipo cápsula con glassmorphism de alta gama,
+  garantizando que la experiencia de exploración sea intuitiva, viva y consistente
+  en todo el ecosistema Baqueano Nicaragua.
+- Brindar acceso inmediato a las 4 áreas estratégicas: Explorar, Cultura, Comunidad
+  y Cuenta/Plataforma (incluyendo el acceso al Ops Center administrativo).
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- SELECTORES RAÍZ DE MÁXIMA ESPECIFICIDAD: #mainNavbar y .bq-navbar-capsule para
+  garantizar que ningún otro CSS del ecosistema pueda sobreescribir este diseño.
+- Cápsula flotante suspendida con backdrop-filter: blur(22px), bordes redondeados (pill),
+  y paleta oficial: #165D6F (Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
+- Indicador caret naranja dinámico en el botón "Más" que conecta visualmente con el Mega Menú.
+- Mega Menú de 4 columnas simétricas con iconos circulares de categoría, enlaces con iconos
+  y badge exclusivo "Solo personal" para Admin / Ops Center.
+- Todos los selectores con !important para máxima especificidad sin refactoring masivo.
+
+📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
+- #mainNavbar — selector raíz de máxima prioridad
+- .main-navbar-exact, .main-navbar — compatibilidad hacia atrás
+- .exact-nav-menu, .nav-links-menu — menú central horizontal
+- .global-more-dropdown, .global-mega-menu — mega menú 4 columnas
+- .global-nav-actions, .exact-nav-actions — acciones derechas
+- .navbar-sos-btn (rojo), .navbar-login-btn (verde), .global-weather, .global-language
+============================================================================
+*/
+
+/* ============================================================================
+   RESET COMPLETO DEL NAVBAR HEREDADO — neutralizar index-exact.css y styles.css
+   ============================================================================ */
+#mainNavbar,
+#mainNavbar.main-navbar-exact,
+#mainNavbar.main-navbar {
+  /* Cancelar position:fixed del index-exact.css */
+  position: sticky !important;
+  top: 14px !important;
+  left: auto !important;
+  right: auto !important;
+  height: auto !important;
+  min-height: 64px !important;
+
+  /* Forma de cápsula flotante */
+  width: min(1400px, calc(100% - 32px)) !important;
+  margin: 14px auto 0 !important;
+  padding: 6px 18px !important;
+  border-radius: 9999px !important;
+
+  /* Glassmorphism oscuro */
+  background: rgba(11, 37, 58, 0.88) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+
+  /* Layout flex */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  z-index: 10100 !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Cancelar pseudo-elementos del styles.css que agregan efectos de borde */
+#mainNavbar::before,
+#mainNavbar::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* ── CONTENEDOR INTERNO ── */
+#mainNavbar .exact-container,
+#mainNavbar .nav-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  gap: 0 !important;
+}
+
+/* ============================================================================
+   LOGOTIPO BAQUEANO
+   ============================================================================ */
+#mainNavbar .exact-nav-brand,
+#mainNavbar .navbar-brand-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  color: #FFFFFF !important;
+  flex-shrink: 0 !important;
+}
+
+#mainNavbar .exact-nav-logo,
+#mainNavbar .navbar-brand-logo {
+  width: 44px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3)) !important;
+}
+
+#mainNavbar .exact-nav-brand-text,
+#mainNavbar .navbar-brand-text {
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.1 !important;
+}
+
+#mainNavbar .exact-nav-title,
+#mainNavbar .navbar-brand-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.08em !important;
+  color: #FFFFFF !important;
+  line-height: 1 !important;
+}
+
+#mainNavbar .exact-nav-tagline,
+#mainNavbar .navbar-brand-sub {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.52rem !important;
+  letter-spacing: 0.22em !important;
+  color: #F4E6C1 !important;
+  text-transform: uppercase !important;
+  margin-top: 2px !important;
+  opacity: 0.9 !important;
+}
+
+/* ============================================================================
+   ENLACES DEL MENÚ CENTRAL
+   ============================================================================ */
+#mainNavbar .exact-nav-menu,
+#mainNavbar .nav-links-menu {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  position: static !important;
+  overflow: visible !important;
+  flex: 1 !important;
+  justify-content: center !important;
+  /* Cancelar mobile transform heredado */
+  transform: none !important;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  flex-direction: row !important;
+}
+
+#mainNavbar .exact-nav-link,
+#mainNavbar .nav-link-item,
+#mainNavbar .nav-links-menu > a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 7px 16px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-decoration: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.86rem !important;
+  font-weight: 600 !important;
+  border-radius: 20px !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  line-height: 1 !important;
+}
+
+#mainNavbar .exact-nav-link:hover,
+#mainNavbar .nav-link-item:hover,
+#mainNavbar .nav-links-menu > a:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #FFFFFF !important;
+}
+
+/* Píldora Activa (Inicio) */
+#mainNavbar .exact-nav-link.active,
+#mainNavbar .nav-link-item.active,
+#mainNavbar .nav-links-menu > a.active {
+  background: #165D6F !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 2px 12px rgba(22, 93, 111, 0.5) !important;
+}
+
+/* ── Nav Label (span dentro de los links) ── */
+#mainNavbar .nav-label {
+  pointer-events: none !important;
+}
+
+/* ── Icono nav-item-content / nav-icon-box: cancelar herencia de styles.css ── */
+#mainNavbar .nav-links-menu a .nav-item-content,
+#mainNavbar .nav-links-menu a .nav-icon-box,
+#mainNavbar .nav-links-menu a .nav-icon,
+#mainNavbar .nav-links-menu a .nav-sublabel,
+#mainNavbar .nav-links-menu a .nav-right-wrap {
+  display: none !important;
+}
+
+/* ============================================================================
+   BOTÓN "MÁS ˇ" CON CARET INDICADOR NARANJA
+   ============================================================================ */
+#mainNavbar .nav-dropdown,
+#mainNavbar .exact-nav-dropdown,
+#mainNavbar .global-more-dropdown {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+#mainNavbar .nav-dropdown-trigger,
+#mainNavbar .exact-nav-dropdown-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 7px 16px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 20px !important;
+  color: #FFFFFF !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+
+#mainNavbar .nav-dropdown-trigger:hover,
+#mainNavbar .exact-nav-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: #F65E01 !important;
+}
+
+#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: #F65E01 !important;
+}
+
+/* Flechita / Caret Naranja apuntando al Mega Menú */
+#mainNavbar .global-more-dropdown .nav-dropdown-trigger::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -11px !important;
+  left: 50% !important;
+  width: 14px !important;
+  height: 14px !important;
+  background: #0B253A !important;
+  border-left: 2px solid #F65E01 !important;
+  border-top: 2px solid #F65E01 !important;
+  transform: translateX(-50%) rotate(45deg) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease !important;
+  z-index: 100001 !important;
+}
+
+#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger::after {
+  opacity: 1 !important;
+}
+
+/* Ícono del chevron en "Más" */
+#mainNavbar .nav-dropdown-trigger .fa-chevron-down {
+  font-size: 0.7rem !important;
+  transition: transform 0.25s ease !important;
+  color: #F65E01 !important;
+}
+
+#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger .fa-chevron-down {
+  transform: rotate(180deg) !important;
+}
+
+/* ============================================================================
+   EL MEGA MENÚ DESPLEGABLE (4 COLUMNAS)
+   ============================================================================ */
+#mainNavbar .global-mega-menu,
+#mainNavbar .nav-dropdown-menu.global-mega-menu,
+#mainNavbar .exact-dropdown-menu {
+  position: fixed !important;
+  top: 88px !important;
+  right: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(10px) !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0 !important;
+  width: min(1060px, 94vw) !important;
+  min-width: 0 !important;
+  padding: 28px 24px !important;
+  border-radius: 20px !important;
+  background: rgba(10, 30, 48, 0.97) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(246, 94, 1, 0.08) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s !important;
+  z-index: 99999 !important;
+}
+
+#mainNavbar .global-more-dropdown.is-open .global-mega-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0s !important;
+}
+
+/* Columnas Individuales */
+#mainNavbar .global-mega-column {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  padding: 0 20px !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#mainNavbar .global-mega-column:first-child {
+  padding-left: 0 !important;
+}
+
+#mainNavbar .global-mega-column:last-child {
+  border-right: none !important;
+  padding-right: 0 !important;
+}
+
+/* Encabezados de Columna */
+#mainNavbar .global-mega-column h2,
+#mainNavbar .global-mega-column .mega-col-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 0 14px 0 !important;
+  padding: 0 0 12px 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Iconos de cabecera por columna */
+#mainNavbar .global-mega-column.explore h2 i { color: #10B981 !important; }
+#mainNavbar .global-mega-column.culture h2 i { color: #F65E01 !important; }
+#mainNavbar .global-mega-column.community h2 i { color: #38BDF8 !important; }
+#mainNavbar .global-mega-column.account h2 i { color: #CBD5E1 !important; }
+
+/* Links dentro del Mega Menú */
+#mainNavbar .global-mega-column a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 7px 10px !important;
+  border-radius: 8px !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  text-decoration: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.83rem !important;
+  font-weight: 500 !important;
+  transition: all 0.18s ease !important;
+  border: none !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+}
+
+#mainNavbar .global-mega-column a:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #FFFFFF !important;
+  padding-left: 14px !important;
+}
+
+#mainNavbar .global-mega-column a i {
+  width: 20px !important;
+  text-align: center !important;
+  font-size: 0.92rem !important;
+  color: rgba(244, 230, 193, 0.8) !important;
+  flex-shrink: 0 !important;
+}
+
+/* Enlace a Admin / Ops Center */
+#mainNavbar .global-admin-link {
+  margin-top: 8px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  color: #F4E6C1 !important;
+  font-weight: 700 !important;
+  gap: 8px !important;
+  padding-left: 10px !important;
+}
+
+#mainNavbar .global-admin-link small {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 2px 8px !important;
+  font-size: 0.64rem !important;
+  color: #CBD5E1 !important;
+  font-weight: 600 !important;
+  margin-left: auto !important;
+  white-space: nowrap !important;
+}
+
+/* ============================================================================
+   ACCIONES DERECHAS (CLIMA, BÚSQUEDA, TEMA, SOS, LOGIN, IDIOMA)
+   ============================================================================ */
+#mainNavbar .global-nav-actions,
+#mainNavbar .exact-nav-actions,
+#mainNavbar .nav-actions-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Píldora de Clima */
+#mainNavbar .global-weather,
+#mainNavbar .navbar-weather-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 12px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 20px !important;
+  color: #FFFFFF !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+#mainNavbar .global-weather i,
+#mainNavbar .navbar-weather-pill i {
+  color: #38BDF8 !important;
+  font-size: 0.85rem !important;
+}
+
+/* Botón Búsqueda Lupa */
+#mainNavbar .global-search,
+#mainNavbar .navbar-search-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-size: 0.9rem !important;
+}
+
+#mainNavbar .global-search:hover,
+#mainNavbar .navbar-search-btn:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #F65E01 !important;
+}
+
+/* Switch Tema Día/Noche */
+#mainNavbar .global-theme,
+#mainNavbar .navbar-theme-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 5px 10px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  color: #FFFFFF !important;
+}
+
+#mainNavbar .global-theme .fa-sun { color: #FBBF24 !important; font-size: 0.85rem !important; }
+#mainNavbar .global-theme .fa-moon { color: #94A3B8 !important; font-size: 0.85rem !important; }
+
+/* Botón SOS Rojo */
+#mainNavbar .sos-quick-btn,
+#mainNavbar .navbar-sos-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 7px 14px !important;
+  background: #DC2626 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 12px rgba(220, 38, 38, 0.45) !important;
+  transition: all 0.2s ease !important;
+  letter-spacing: 0.04em !important;
+  white-space: nowrap !important;
+}
+
+#mainNavbar .sos-quick-btn:hover,
+#mainNavbar .navbar-sos-btn:hover {
+  background: #B91C1C !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Botón Iniciar Sesión Verde */
+#mainNavbar .exact-nav-btn-login,
+#mainNavbar .global-session,
+#mainNavbar .navbar-login-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 7px 14px !important;
+  background: #10B981 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35) !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+#mainNavbar .exact-nav-btn-login:hover,
+#mainNavbar .global-session:hover,
+#mainNavbar .navbar-login-btn:hover {
+  background: #059669 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Selector Idioma */
+#mainNavbar .global-language,
+#mainNavbar .navbar-lang-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 7px 11px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+/* Botón Hamburguesa Móvil */
+#mainNavbar .mobile-nav-toggle,
+#mainNavbar .exact-nav-mobile-toggle {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  font-size: 1.1rem !important;
+  cursor: pointer !important;
+}
+
+/* ============================================================================
+   COMPATIBILIDAD HACIA ATRÁS — Selectores sin #mainNavbar
+   (para páginas secundarias donde navigation.js inyecta el menú)
+   ============================================================================ */
+.main-navbar:not(#mainNavbar),
+.main-navbar-exact:not(#mainNavbar) {
+  position: sticky !important;
+  top: 14px !important;
+  left: auto !important;
+  right: auto !important;
+  height: auto !important;
+  min-height: 64px !important;
+  width: min(1400px, calc(100% - 32px)) !important;
+  margin: 14px auto 0 !important;
+  padding: 6px 18px !important;
+  border-radius: 9999px !important;
+  background: rgba(11, 37, 58, 0.88) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  z-index: 9999 !important;
+}
+
+.main-navbar:not(#mainNavbar)::before,
+.main-navbar:not(#mainNavbar)::after,
+.main-navbar-exact:not(#mainNavbar)::before,
+.main-navbar-exact:not(#mainNavbar)::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* ============================================================================
+   RESPONSIVE & MÓVIL
+   ============================================================================ */
+@media (max-width: 1200px) {
+  #mainNavbar .global-weather,
+  #mainNavbar .navbar-weather-pill {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  #mainNavbar .global-theme,
+  #mainNavbar .navbar-theme-pill,
+  #mainNavbar .global-language,
+  #mainNavbar .navbar-lang-pill {
+    display: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  #mainNavbar,
+  #mainNavbar.main-navbar-exact {
+    border-radius: 20px !important;
+    padding: 8px 14px !important;
+    top: 8px !important;
+    margin: 8px auto 0 !important;
+  }
+
+  #mainNavbar .mobile-nav-toggle,
+  #mainNavbar .exact-nav-mobile-toggle {
+    display: inline-flex !important;
+  }
+
+  #mainNavbar .exact-nav-menu,
+  #mainNavbar .nav-links-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: min(88vw, 340px) !important;
+    height: 100vh !important;
+    background: rgba(10, 30, 48, 0.98) !important;
+    backdrop-filter: blur(28px) !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 80px 20px 30px !important;
+    gap: 8px !important;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8) !important;
+    transform: translateX(-105%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    overflow-y: auto !important;
+    z-index: 100000 !important;
+    flex: none !important;
+    justify-content: flex-start !important;
+  }
+
+  #mainNavbar .exact-nav-menu.nav-active,
+  #mainNavbar .nav-links-menu.mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  #mainNavbar .global-mega-menu {
+    position: static !important;
+    width: 100% !important;
+    grid-template-columns: 1fr !important;
+    padding: 14px 0 !important;
+    display: none !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  #mainNavbar .global-more-dropdown.is-open .global-mega-menu {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  #mainNavbar .global-mega-column {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 10px 0 !important;
+  }
+
+  #mainNavbar .exact-nav-btn-login span,
+  #mainNavbar .global-session span {
+    display: none !important;
+  }
+}

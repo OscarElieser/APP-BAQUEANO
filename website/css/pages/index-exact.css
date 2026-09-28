@@ -309,7 +309,7 @@
   background-position: center 48%;
   display: flex;
   align-items: center;
-  padding-top: 70px;
+  padding-top: 0;
   box-sizing: border-box;
   overflow: hidden;
 }
