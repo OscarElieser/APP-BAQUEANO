@@ -44,8 +44,9 @@
   <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/pages/perfil.css">
+  <link rel="stylesheet" href="css/pages/perfil-exact.css?v=20260927-1">
 </head>
-<body>
+<body class="page-perfil-exact">
   <!-- POR QUE: El perfil historico debe enlazar viajes sin duplicarlos.
        COMO: Enlace a la ruta moderna canonica.
        QUE: Acceso directo a Mi Viaje. -->
@@ -215,6 +216,7 @@
   </nav>
 
   <!-- SECCIÓN HERO DEL PERFIL -->
+  <section class="profile-scenic-hero"><div><span>Mi Perfil</span><h1>Un viajero,<em>mil historias</em></h1><p>Gestioná tu información, tus viajes y viví Nicaragua a tu manera.</p></div></section>
   <header class="profile-hero-section">
     <div class="container">
 
@@ -296,6 +298,26 @@
   </section>
   <main class="page-wrapper profile-section-content">
     <div class="container">
+
+      <section class="profile-dashboard" aria-label="Resumen completo del perfil">
+        <nav class="profile-overview-tabs"><a href="#dashboardSummary" class="active">Resumen</a><a href="mi-viaje.html">Mi Viaje</a><a href="#dashboardBookings">Reservas</a><a href="#dashboardFavorites">Favoritos</a><a href="#dashboardPreferences">Preferencias</a><a href="#dashboardSecurity">Seguridad</a><a href="#dashboardPayments">Pagos</a><a href="#dashboardPrivacy">Privacidad</a></nav>
+        <div class="profile-top-grid" id="dashboardSummary">
+          <article class="profile-feature-card"><div class="profile-card-image"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya"><span>12 – 14 oct. 2026</span></div><h2>Próximo viaje</h2><h3>Volcán Masaya, Granada y Ometepe</h3><p>3 días · 2 viajeros · Naturaleza · Cultura</p><a href="mi-viaje.html">Abrir Mi Viaje →</a></article>
+          <article class="profile-list-card" id="dashboardBookings"><h2>🧳 Mis reservas</h2><div><img src="assets/images/destinos/selva_negra.jpg" alt=""><span><strong>Eco-Lodge Finca Magdalena</strong><small>12 – 14 oct. 2026 · Confirmada</small></span></div><div><img src="assets/images/destinos/isla_de_ometepe.jpg" alt=""><span><strong>Tour Isla de Ometepe</strong><small>15 oct. 2026 · Confirmada</small></span></div></article>
+          <article class="profile-favorites" id="dashboardFavorites"><h2>💗 Favoritos recientes</h2><div><span><img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo"><strong>Laguna de Apoyo</strong></span><span><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada"><strong>Granada</strong></span><span><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Ometepe"><strong>Isla de Ometepe</strong></span></div></article>
+        </div>
+        <section class="profile-preferences-banner" id="dashboardPreferences"><div><h2>🎟️ Mis preferencias de viaje</h2><p>Seleccioná tus intereses para recibir recomendaciones personalizadas.</p><div><span>🏖️ Playas</span><span>⛰️ Volcanes</span><span>🥾 Senderismo</span><span>🍴 Gastronomía</span><span>☕ Café</span><span>💧 Cascadas</span><span>🏛️ Cultura</span><span>👨‍👩‍👧 Turismo familiar</span></div></div></section>
+        <div class="profile-settings-grid">
+          <article><h2>👤 Información personal</h2><p><small>Nombre completo</small><strong>Oscar Elieser Chamorro Guzmán</strong></p><p><small>Correo electrónico</small><strong>oscar.chamorro@gmail.com</strong></p><p><small>Ubicación</small><strong>Managua, Nicaragua</strong></p></article>
+          <article><h2>🌐 Idioma y moneda</h2><label>Idioma<select><option>🇪🇸 Español</option></select></label><label>Moneda<select><option>C$ Córdoba (NIO)</option></select></label></article>
+          <article><h2>💚 Salud, accesibilidad y bienestar</h2><p><small>Alergias o restricciones</small><strong>Ninguna</strong></p><p><small>Accesibilidad</small><strong>Sin requerimientos especiales</strong></p></article>
+          <article id="dashboardSecurity"><h2>🛡️ Seguridad de la cuenta</h2><p>🔒 Contraseña <strong>Segura</strong></p><p>Google <strong>Conectado</strong></p><p>Autenticación en dos pasos <strong>Activada</strong></p></article>
+          <article id="dashboardPayments"><h2>💳 Pagos y facturación</h2><div class="profile-empty-payment">No hay métodos de pago guardados</div><button type="button">Abrir checkout seguro →</button></article>
+          <article id="dashboardPrivacy"><h2>🔐 Privacidad y datos</h2><p>Permisos de ubicación <strong>●</strong></p><p>Personalización de contenido <strong>●</strong></p><p>Analítica opcional <strong>○</strong></p><a href="privacidad.html">Ver Política de Privacidad →</a></article>
+        </div>
+        <section class="profile-achievements"><img src="assets/images/logo.png" alt="Explorador Baqueano"><div><h2>Tu identidad de explorador</h2><strong>Nivel Explorador</strong><p>Seguí descubriendo Nicaragua y desbloqueá nuevos niveles y recompensas.</p><progress value="320" max="500"></progress></div><div class="achievement-row"><span>Primer viaje ✓</span><span>Amante de la Naturaleza ✓</span><span>Explorador Cultural</span><span>Gastronomía Local 🔒</span></div></section>
+        <section class="profile-final-cta"><h2>Tu próxima aventura<br><em>empieza desde tu perfil</em></h2><div><a href="baqueano-ai.html#planner">Planificar con Baqueano Digital →</a><a href="destinos.html">Explorar destinos →</a></div></section>
+      </section>
 
       <!-- ====================================================================
            PESTAÑA 1: DATOS PERSONALES & CUENTA

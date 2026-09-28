@@ -1073,4 +1073,11 @@
     - `SESSION_LOG.md`
   - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
 
+# 2026-09-27 — Reproducción visual de perfil.html y cookies.html
+
+- Solicitud: adaptar `perfil.html` (mencionado como `perl.html`) y `cookies.html` a las dos referencias visuales compartidas.
+- Perfil: hero panorámico, identidad del explorador, navegación de cuenta, próximo viaje, reservas, favoritos, preferencias, información personal, seguridad, pagos, privacidad, logros y CTA final.
+- Cookies: hero legal, cuatro garantías, centro de preferencias, borrado selectivo del almacenamiento BAQUEANO, flujo técnico, artículos compactos, servicios y marco legal.
+- Conservación: formularios, autenticación, datos reactivos, pestañas, artículos legales, IDs, navegación, modales y scripts originales permanecen disponibles.
+- Archivos modificados: `website/perfil.html`, `website/cookies.html`, `website/css/pages/perfil-exact.css` y `website/css/pages/cookies-exact.css`.
 

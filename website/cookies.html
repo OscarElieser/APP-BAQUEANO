@@ -65,8 +65,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/institucional.css">
+  <link rel="stylesheet" href="css/pages/cookies-exact.css?v=20260927-1">
 </head>
-<body>
+<body class="page-cookies-exact">
 
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
   <nav class="main-navbar" id="mainNavbar">
@@ -212,13 +213,15 @@
           <span class="pulse-dot"></span> Almacenamiento Local & Caché Offline
         </div>
         <h1 class="hero-headline">
-          Política de <span class="highlight-sunset">Cookies</span> & Almacenamiento Soberano
+          Cookies, <span class="cookies-title-accent">almacenamiento local</span> y uso sin conexión
         </h1>
         <p class="hero-subtext">
-          Transparencia técnica total sobre cookies esenciales, almacenamiento PWA offline para senderos de montaña y cero rastreadores comerciales en Baqueano Nicaragua.
+          Transparencia sobre cómo utilizamos cookies, tecnologías de almacenamiento y datos locales para brindarte una experiencia de viaje segura, auténtica y personalizada en Nicaragua.
         </p>
       </div>
     </section>
+
+    <section class="cookies-promises" aria-label="Principios de almacenamiento"><article><i class="fa-solid fa-shield-halved"></i><div><h3>Sin publicidad invasiva</h3><p>No usamos cookies para mostrar publicidad de terceros.</p></div></article><article><i class="fa-solid fa-location-dot"></i><div><h3>Ubicación solo con permiso</h3><p>Tu ubicación se solicita únicamente cuando la activás.</p></div></article><article><i class="fa-solid fa-database"></i><div><h3>Control de almacenamiento</h3><p>Podés gestionar y eliminar tus datos locales.</p></div></article><article><i class="fa-solid fa-plane"></i><div><h3>Modo offline</h3><p>Disfrutá contenido, rutas y guías aun sin conexión.</p></div></article></section>
 
     <!-- LAYOUT INTERACTIVO DOS COLUMNAS (SIDEBAR STICKY + ARTÍCULOS) -->
     <section class="container institucional-layout">
@@ -272,6 +275,10 @@
 
       <!-- COLUMNA PRINCIPAL DE ARTÍCULOS LEGALES -->
       <div class="legal-content-column">
+
+        <section class="cookies-control-panel" aria-labelledby="cookiesControlTitle"><div><h2 id="cookiesControlTitle">⚙️ Tus preferencias de cookies y almacenamiento</h2><p>Podés personalizar el uso de cookies y datos locales según tus preferencias.</p><div class="cookies-options"><div><i class="fa-solid fa-shield-halved"></i><span><strong>Cookies esenciales</strong><small>Necesarias para funcionamiento y autenticación.</small></span><b>Siempre activas</b></div><div><i class="fa-solid fa-gear"></i><span><strong>Preferencias</strong><small>Guardan idioma, tema, región y configuraciones.</small></span><button type="button" class="cookie-toggle on">Activadas</button></div><div><i class="fa-solid fa-database"></i><span><strong>Contenido offline</strong><small>Rutas, guías y mapas para uso sin conexión.</small></span><button type="button">Administrar datos</button></div><div><i class="fa-solid fa-chart-simple"></i><span><strong>Analítica opcional</strong><small>Nos ayuda a mejorar la experiencia.</small></span><button type="button" class="cookie-toggle">Desactivada</button></div></div></div><aside><h3>💡 Tú tienes el control</h3><p>Podés cambiar tus preferencias y eliminar tus datos locales desde este dispositivo.</p><button type="button" id="clearBaqueanoStorage">🗑 Borrar almacenamiento BAQUEANO</button></aside></section>
+
+        <section class="cookies-flow" aria-labelledby="cookiesFlowTitle"><h2 id="cookiesFlowTitle">🔗 ¿Cómo funcionan los datos en BAQUEANO?</h2><div><article><i class="fa-solid fa-user"></i><strong>Tú</strong><small>Usuario viajero</small></article><b>→</b><article><i class="fa-solid fa-mobile-screen"></i><strong>Web / App BAQUEANO</strong><small>Sitio web y aplicación Android</small></article><b>→</b><article><strong>🔥 Firebase</strong><small>Autenticación y hosting</small><strong>🟩 Supabase</strong><small>Base de datos principal</small></article><b>→</b><article><strong>⚙️ Preferencias</strong><small>Idioma, tema y región</small><strong>📍 Rutas y destinos</strong><small>Favoritos e itinerarios</small><strong>💾 Contenido offline</strong><small>Mapas y recursos</small></article></div></section>
 
         <!-- METADATOS Y MANIFIESTO SOBERANO -->
         <div class="legal-document-meta" style="margin-bottom: 2rem;">
@@ -984,6 +991,22 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    /* 🎯 POR QUÉ: dar control real sobre preferencias locales. ⚙️ CÓMO: alterna opciones y elimina solo claves BAQUEANO. 📦 QUÉ: controles accesibles sin afectar datos ajenos. */
+    document.querySelectorAll('.cookie-toggle').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var enabled = button.classList.toggle('on');
+        button.textContent = enabled ? 'Activadas' : 'Desactivada';
+        button.setAttribute('aria-pressed', String(enabled));
+      });
+    });
+    document.getElementById('clearBaqueanoStorage')?.addEventListener('click', function () {
+      Object.keys(localStorage).filter(function (key) { return key.toLowerCase().includes('baqueano'); }).forEach(function (key) { localStorage.removeItem(key); });
+      Object.keys(sessionStorage).filter(function (key) { return key.toLowerCase().includes('baqueano'); }).forEach(function (key) { sessionStorage.removeItem(key); });
+      this.textContent = '✓ Almacenamiento BAQUEANO eliminado';
+    });
+  </script>
 
   <!-- SDK Firebase & Sincronización Universal CMS -->
   <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
