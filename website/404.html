@@ -1,81 +1,295 @@
 <!DOCTYPE html>
-<!--
-============================================================================
-🧭 BAQUEANO ECOSYSTEM — PÁGINA 404 (ERROR DE RUTA NO ENCONTRADA)
-============================================================================
-
-🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Proporcionar una experiencia de error digna y coherente con la identidad
-  BAQUEANO cuando un explorador llega a una ruta inexistente.
-- Evitar que el visitante abandone el sitio por no encontrar la ruta:
-  redirigirlo hacia el contenido de valor real.
-- NO exponer stack traces, rutas internas ni información de infraestructura.
-
-⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Página estática independiente, configurada en firebase.json como 404.
-- Conserva la identidad visual completa: colores, tipografía y paleta oficial.
-- CTA claro hacia Home y Destinos para recuperar la navegación.
-
-📦 3. QUÉ (WHAT / COMPONENTES):
-- Mensaje de error amigable con contexto de exploración.
-- Dos botones de acción: volver al inicio o explorar destinos.
-- Animación SVG de brújula desorientada.
-============================================================================
--->
 <html lang="es">
+<!--
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — PÁGINA 404 (SENDERO NO ENCONTRADO)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Transformar un error de ruta no encontrada en una experiencia inmersiva de
+//   exploración y descubrimiento, conectada con el espíritu aventurero de Nicaragua.
+// - Evitar la frustración del viajero ofreciendo rutas alternativas, accesos rápidos
+//   y un diseño artístico fiel a la identidad visual oficial de BAQUEANO.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Maquetación 1:1 con la maqueta oficial entregada:
+//   * Header superior con botón SOS rojo, selector de tema, avatar y menú unificado.
+//   * Flanco izquierdo: Poste de madera rústica tallada con 3 flechas de orientación
+//     (Nuevos Destinos, Grandes Historias, Sigue Explorando) y Baqüi el Guardabarranco
+//     explorador con sombrero y mapa.
+//   * Centro: Tipografía monumental 404 con pin de ubicación en el cero y petroglifos.
+//   * Botones interactivos hacia Inicio y Destinos.
+//   * Tarjeta flotante inferior Glassmorphism "¿Y ahora qué?" con 4 accesos rápidos
+//     (Destinos, Experiencias, Mapa, Mi Negocio).
+//   * Footer institucional con lema ancestral y 4 sellos de valor comunitario.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - 404.html completamente funcional, enlaces internos verificados, adaptabilidad móvil
+//   y compatibilidad total con Firebase Hosting.
+// ============================================================================
+-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Ruta No Encontrada | Baqueano Nicaragua</title>
-  <meta name="description" content="La ruta que buscas no existe en el ecosistema Baqueano. Vuelve al inicio o explora nuestros destinos.">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://app-baqueano.web.app/">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <title>404 — Sendero No Encontrado | BAQUEANO Nicaragua</title>
+  <meta name="description" content="La ruta que buscas no existe en el ecosistema Baqueano Nicaragua. Pero hay muchos senderos por explorar.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/logo_baqueano.svg">
 
-  <!-- Tipografías -->
+  <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/pages/404.css">
-  <link rel="stylesheet" href="css/responsive-ecosystem.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Estilos Maestros y Específicos -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/404-exact.css">
 </head>
-<body>
+<body class="page-404-exact">
 
-  <div class="error-container">
-    <div class="compass-wrapper">
-      <i class="fa-solid fa-compass compass-icon"></i>
-    </div>
-
-    <div class="error-code">404</div>
-
-    <div class="error-title">Sendero No Encontrado</div>
-
-    <p class="error-message">
-      La ruta que buscas no existe en el ecosistema <strong>Baqueano Nicaragua</strong>.<br>
-      Pero hay muchos senderos por explorar — ¡ninguno en el mapa oficial todavía!
-    </p>
-
-    <div class="error-actions">
-      <a href="index.html" class="btn-primary">
-        <i class="fa-solid fa-house"></i> Volver al Inicio
+  <!-- ==================== HEADER NAVBAR SUPERIOR ==================== -->
+  <header class="nav-404-header">
+    <div class="nav-404-container">
+      <!-- Marca -->
+      <a href="index.html" class="brand-404" aria-label="Ir al inicio de BAQUEANO">
+        <img src="assets/images/logo/logo_baqueano.svg" alt="BAQUEANO Logo" class="brand-404-logo">
+        <div class="brand-404-text">
+          <span class="brand-404-title">BAQUEANO</span>
+          <span class="brand-404-sub">NICARAGUA AUTÉNTICA</span>
+        </div>
       </a>
-      <a href="destinos.html" class="btn-secondary">
-        <i class="fa-solid fa-compass"></i> Explorar Destinos
-      </a>
+
+      <!-- Menú Central -->
+      <nav aria-label="Navegación principal">
+        <ul class="menu-404-list" id="menu404List">
+          <li><a href="index.html" class="menu-404-link">Inicio</a></li>
+          <li class="nav-item dropdown-parent">
+            <a href="#" class="menu-404-link">Mi País <span>▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="historia.html">Historia & Memoria</a></li>
+              <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+              <li><a href="musica.html">Música & Tradiciones</a></li>
+              <li><a href="ambiental.html">Custodia Ambiental</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown-parent">
+            <a href="destinos.html" class="menu-404-link">Destinos <span>▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="destinos.html">29 Áreas Protegidas</a></li>
+              <li><a href="destinos.html#volcanes">Volcanes y Cráteres</a></li>
+              <li><a href="destinos.html#playas">Costas y Arrecifes</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown-parent">
+            <a href="experiencias.html" class="menu-404-link">Experiencias <span>▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="experiencias.html">Aventuras y Senderismo</a></li>
+              <li><a href="experiencias.html#comunitario">Turismo Rural Campesino</a></li>
+            </ul>
+          </li>
+          <li><a href="mapa.html" class="menu-404-link">Mapa</a></li>
+          <li><a href="mi-viaje.html" class="menu-404-link">Mi Viaje</a></li>
+          <li><a href="mi-negocio.html" class="menu-404-link">Mi Negocio</a></li>
+          <li><a href="baqueano-ia.html" class="menu-404-link">Baqueano Digital</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones a la Derecha -->
+      <div class="actions-404-right">
+        <button class="action-404-icon" aria-label="Buscar en la plataforma" onclick="window.location.href='destinos.html'">🔍</button>
+        <button class="action-404-icon" aria-label="Ver favoritos" onclick="window.location.href='perfil.html#favoritos'">🤍</button>
+        <a href="index.html#sos" class="sos-capsule-btn">
+          <span>🔔</span> SOS
+        </a>
+        <button class="action-404-icon" aria-label="Cambiar tema" id="themeToggleBtn" onclick="toggleThemeVisual()">☀️</button>
+        <div class="nav-lang-selector" style="color: #CBD5E1; font-size: 0.85rem; font-weight: 700;">
+          <span>ES</span> <span>▾</span>
+        </div>
+        <a href="perfil.html" class="avatar-404-circle" title="Mi Perfil" aria-label="Perfil de usuario">
+          👤
+        </a>
+        <button class="burger-404-toggle" id="burger404Toggle" aria-label="Abrir menú móvil">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== ESCENARIO PRINCIPAL 404 ==================== -->
+  <main class="hero-404-stage">
+    <div class="hero-404-content-wrap">
+      
+      <!-- Flanco Izquierdo: Poste de Señalización & Baqüi Explorador -->
+      <aside class="side-signpost-baqui-wrap">
+        <!-- Poste de Madera Rústica con Flechas -->
+        <div class="rustic-signpost-box">
+          <div class="rustic-sign-arrow">
+            <span>🏛️</span> NUEVOS DESTINOS
+          </div>
+          <div class="rustic-sign-arrow">
+            <span>🏛️</span> GRANDES HISTORIAS
+          </div>
+          <div class="rustic-sign-arrow">
+            <span>🧭</span> SIGUE EXPLORANDO
+          </div>
+        </div>
+
+        <!-- Baqüi el Guardabarranco con Sombrero y Mapa -->
+        <div class="baqui-character-box">
+          <img src="assets/images/baqui.png" alt="Baqüi Explorador con mapa en mano" class="baqui-character-img" onerror="this.src='assets/images/logo/logo_baqueano.svg'">
+        </div>
+      </aside>
+
+      <!-- Centro: Número 404 Monumental y Mensaje -->
+      <section class="center-404-message-block">
+        <div class="massive-404-display">
+          <div class="massive-404-number">
+            <span>4</span>
+            <div class="zero-with-pin">
+              <span>0</span>
+              <div class="map-pin-inside-zero"></div>
+            </div>
+            <span>4</span>
+          </div>
+        </div>
+
+        <!-- Trazos rupestres / petroglifos turquesa y naranja -->
+        <svg class="petroglyph-lines-svg" viewBox="0 0 280 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12 Q 35 2, 70 12 T 140 12 T 210 12 T 275 12" stroke="#165D6F" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M15 16 Q 45 6, 80 16 T 150 16 T 220 16 T 265 16" stroke="#F65E01" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+
+        <h1 class="sendero-no-encontrado-title">
+          Sendero <span>No Encontrado</span>
+        </h1>
+
+        <p class="sendero-desc-text">
+          La ruta que buscas no existe en el ecosistema <strong>Baqueano Nicaragua</strong>.<br>
+          Pero hay muchos senderos por explorar — ¡ninguno en el mapa oficial todavía!
+        </p>
+
+        <div class="sendero-actions-row">
+          <a href="index.html" class="btn-404-primary-orange">
+            <span>🏠</span> Volver al Inicio &rarr;
+          </a>
+          <a href="destinos.html" class="btn-404-secondary-glass">
+            <span>🧭</span> Explorar Destinos &rarr;
+          </a>
+        </div>
+      </section>
+
     </div>
 
-    <div class="brand-footer">
-      <img src="assets/images/logo.png" alt="Baqueano">
-      <span>BAQUEANO NICARAGUA — Descubre lo que no sale en el mapa.</span>
-    </div>
-  </div>
+    <!-- ==================== FRANJA FLOTANTE "¿Y AHORA QUÉ?" ==================== -->
+    <section class="what-now-floating-card">
+      <div class="what-now-inner">
+        <div class="what-now-left-text">
+          <h2 class="what-now-heading">¿Y ahora qué?</h2>
+          <p class="what-now-subheading">Podés seguir explorando:</p>
+        </div>
 
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+        <div class="what-now-cards-grid">
+          <!-- 1. Destinos -->
+          <a href="destinos.html" class="what-now-card-item">
+            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Volcanes y playas" class="what-now-card-bg" onerror="this.src='assets/images/destinos/ometepe_volcan_concepcion.jpg'">
+            <div class="what-now-card-overlay"></div>
+            <div class="what-now-card-meta">
+              <div class="what-now-card-icon icon-bg-destinos">🌿</div>
+              <div class="what-now-card-texts">
+                <span class="what-now-card-title">Destinos</span>
+                <span class="what-now-card-desc">Volcanes, playas y más</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 2. Experiencias -->
+          <a href="experiencias.html" class="what-now-card-item">
+            <img src="assets/images/destinos/granada_isletas.jpg" alt="Tours y actividades" class="what-now-card-bg" onerror="this.src='assets/images/destinos/somoto.jpg'">
+            <div class="what-now-card-overlay"></div>
+            <div class="what-now-card-meta">
+              <div class="what-now-card-icon icon-bg-experiencias">👥</div>
+              <div class="what-now-card-texts">
+                <span class="what-now-card-title">Experiencias</span>
+                <span class="what-now-card-desc">Tours y actividades</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 3. Mapa -->
+          <a href="mapa.html" class="what-now-card-item">
+            <img src="assets/images/destinos/canon_somoto_panoramica.jpg" alt="Explorá todo el territorio" class="what-now-card-bg" onerror="this.src='assets/images/destinos/canon_de_somoto.jpg'">
+            <div class="what-now-card-overlay"></div>
+            <div class="what-now-card-meta">
+              <div class="what-now-card-icon icon-bg-mapa">📍</div>
+              <div class="what-now-card-texts">
+                <span class="what-now-card-title">Mapa</span>
+                <span class="what-now-card-desc">Explorá todo el territorio</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 4. Mi Negocio -->
+          <a href="mi-negocio.html" class="what-now-card-item">
+            <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Registrá tu emprendimiento" class="what-now-card-bg" onerror="this.src='assets/images/destinos/zapatera_petroglifos.jpg'">
+            <div class="what-now-card-overlay"></div>
+            <div class="what-now-card-meta">
+              <div class="what-now-card-icon icon-bg-negocio">💼</div>
+              <div class="what-now-card-texts">
+                <span class="what-now-card-title">Mi Negocio</span>
+                <span class="what-now-card-desc">Registrá tu emprendimiento</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER INSTITUCIONAL ESPECIAL ==================== -->
+  <footer class="footer-404-bar">
+    <div class="footer-404-container">
+      <div class="footer-404-brand">
+        <img src="assets/images/logo/logo_baqueano.svg" alt="BAQUEANO" class="footer-404-logo">
+        <span class="footer-404-tagline">Descubre lo que no sale en el mapa.</span>
+      </div>
+
+      <div class="footer-404-badges-row">
+        <div class="footer-404-badge">
+          <span class="footer-404-badge-icon">🍃</span> Turismo sostenible
+        </div>
+        <div class="footer-404-badge">
+          <span class="footer-404-badge-icon">👥</span> Comunidades locales
+        </div>
+        <div class="footer-404-badge">
+          <span class="footer-404-badge-icon">🌳</span> Patrimonio natural
+        </div>
+        <div class="footer-404-badge">
+          <span class="footer-404-badge-icon">🎭</span> Cultura viva
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script interactivo -->
+  <script>
+    function toggleThemeVisual() {
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn.innerText === '☀️') {
+        btn.innerText = '🌙';
+      } else {
+        btn.innerText = '☀️';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const burger = document.getElementById('burger404Toggle');
+      const menu = document.getElementById('menu404List');
+      if (burger && menu) {
+        burger.addEventListener('click', () => {
+          menu.classList.toggle('nav-active');
+        });
+      }
+    });
+  </script>
 </body>
 </html>

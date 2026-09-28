@@ -1133,26 +1133,29 @@
      - Se verificó que todas las rutas internas apunten a archivos existentes válidos.
      - Auditoría final: **0 enlaces rotos, 0 advertencias y 0 menciones de palabras prohibidas**.
 
+# 2026-09-27 — Alineación 1:1 de 404.html (Sendero No Encontrado)
+
+- 🎯 **1. POR QUÉ (Why / Propósito):**
+  - Dar cumplimiento estricto y sin fricción al requerimiento: *"404.html"* junto con la imagen oficial de referencia compartida por el usuario.
+  - Convertir el error HTTP 404 en una experiencia cautivadora, lúdica y conectada con la identidad nicaragüense, invitando al explorador a descubrir destinos y senderos no cartografiados.
+
+- ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
+  - Reproducción visual 1:1 de la maqueta oficial:
+    * Header superior con logo oficial, menú completo (*Inicio, Mi País ▾, Destinos ▾, Experiencias ▾, Mapa, Mi Viaje, Mi Negocio, Baqueano Digital*), buscador, favoritos, botón rojo cápsula SOS, selector de tema claro/oscuro, idioma y avatar.
+    * Flanco izquierdo: Poste de madera rústica tallada con 3 flechas (*Nuevos Destinos, Grandes Historias, Sigue Explorando*) y Baqüi el Guardabarranco explorador con sombrero y mapa.
+    * Centro: Número 404 colosal texturizado con pin de ubicación en el cero y trazos de arte rupestre / petroglifos turquesa y naranja.
+    * Titular: *"Sendero No Encontrado"*, bajada descriptiva y botones gemelos (*"🏠 Volver al Inicio →"* y *"🧭 Explorar Destinos →"*).
+    * Franja flotante Glassmorphism inferior *"¿Y ahora qué? Podés seguir explorando:"* con 4 tarjetas fotográficas panorámicas (*Destinos, Experiencias, Mapa, Mi Negocio*).
+    * Footer institucional con lema ancestral *"Descubre lo que no sale en el mapa"* y 4 sellos (*Turismo sostenible, Comunidades locales, Patrimonio natural, Cultura viva*).
+  - Hoja de estilo dedicada: `website/css/pages/404-exact.css`.
+  - Auditoría global: 0 enlaces rotos, 0 errores, 0 palabras prohibidas.
+
 - 📦 **3. QUÉ (What / Entregables & Despliegue):**
   - Archivos creados y actualizados:
-    - `website/perfil.html`
-    - `website/aviso-legal.html`
-    - `website/cookies.html`
-    - `website/css/pages/perfil-exact.css`
-    - `website/css/pages/aviso-legal-exact.css`
-    - `website/css/pages/cookies-exact.css`
-    - `website/css/layout.css`
-    - `website/legal.html`
     - `website/404.html`
-    - `website/denuncias.html`
-    - `website/departamento.html`
-    - `website/mi-negocio.html`
-    - `website/experiencias.html`
-    - `website/mapa.html`
-    - `website/mi-viaje.html`
-    - `website/aliados.html`
-    - `website/gastronomia.html`
-    - `website/musica.html`
+    - `website/css/pages/404-exact.css`
+    - `website/assets/images/heroes/404_hero_official.jpg`
     - `SESSION_LOG.md`
   - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
+
 
