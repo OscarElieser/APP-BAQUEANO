@@ -7,72 +7,102 @@
 - Ofrecer la barra de navegación flotante tipo cápsula con glassmorphism de alta gama,
   garantizando que la experiencia de exploración sea intuitiva, viva y consistente
   en todo el ecosistema Baqueano Nicaragua.
-- Brindar acceso inmediato a las 4 áreas estratégicas: Explorar, Cultura, Comunidad
-  y Cuenta/Plataforma (incluyendo el acceso al Ops Center administrativo).
+- Coincidir al 100% con el diseño de referencia oficial: cápsula oscura flotante
+  centrada en la parte superior de la página, separada de los bordes laterales,
+  con efecto blur, bordes redondeados y paleta oficial.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- SELECTORES RAÍZ DE MÁXIMA ESPECIFICIDAD: #mainNavbar y .bq-navbar-capsule para
-  garantizar que ningún otro CSS del ecosistema pueda sobreescribir este diseño.
-- Cápsula flotante suspendida con backdrop-filter: blur(22px), bordes redondeados (pill),
-  y paleta oficial: #165D6F (Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
-- Indicador caret naranja dinámico en el botón "Más" que conecta visualmente con el Mega Menú.
-- Mega Menú de 4 columnas simétricas con iconos circulares de categoría, enlaces con iconos
-  y badge exclusivo "Solo personal" para Admin / Ops Center.
-- Todos los selectores con !important para máxima especificidad sin refactoring masivo.
+- POSICIÓN FIJA: position: fixed con top/left/right/transform para centrado perfecto.
+- Glassmorphism: backdrop-filter: blur(22px), fondo rgba(11, 37, 58, 0.92).
+- Cápsula: border-radius: 9999px con width controlado (max 1440px - 48px).
+- Mega menú de 4 columnas con backdrop-filter, bordes redondeados y sombras.
+- Todos los selectores con !important para máxima especificidad.
+- Version: 20260929-v10-final
 
 📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
-- #mainNavbar — selector raíz de máxima prioridad
-- .main-navbar-exact, .main-navbar — compatibilidad hacia atrás
-- .exact-nav-menu, .nav-links-menu — menú central horizontal
-- .global-more-dropdown, .global-mega-menu — mega menú 4 columnas
-- .global-nav-actions, .exact-nav-actions — acciones derechas
-- .navbar-sos-btn (rojo), .navbar-login-btn (verde), .global-weather, .global-language
+- #mainNavbar — navbar raíz fija flotante tipo cápsula
+- .exact-nav-menu / .nav-links-menu — enlaces horizontales centrales
+- .global-more-dropdown / .global-mega-menu — mega menú 4 columnas
+- .global-nav-actions — acciones derechas (clima, SOS, login, idioma)
 ============================================================================
 */
 
 /* ============================================================================
-   RESET COMPLETO DEL NAVBAR HEREDADO — neutralizar index-exact.css y styles.css
+   RESET AGRESIVO — neutralizar TODOS los estilos heredados de index-exact.css,
+   styles.css y bq-global-injector-styles que puedan entrar en conflicto.
+   ============================================================================ */
+
+/* Ocultar navbars legacy injertados por global-injector que NO sean #mainNavbar */
+.bq-global-navbar {
+  display: none !important;
+}
+
+/* ============================================================================
+   NAVBAR PRINCIPAL — CÁPSULA FLOTANTE FIJA
    ============================================================================ */
 #mainNavbar,
 #mainNavbar.main-navbar-exact,
 #mainNavbar.main-navbar {
-  /* Cancelar position:fixed del index-exact.css */
-  position: sticky !important;
-  top: 14px !important;
-  left: auto !important;
+  /* Posición fija flotante — cápsula separada de los bordes */
+  position: fixed !important;
+  top: 16px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   right: auto !important;
+  bottom: auto !important;
   height: auto !important;
-  min-height: 64px !important;
+  min-height: 60px !important;
 
-  /* Forma de cápsula flotante */
-  width: min(1640px, calc(100% - 32px)) !important;
-  margin: 18px auto 0 !important;
-  padding: 9px 20px !important;
+  /* Ancho controlado — mismo que en la imagen de referencia */
+  width: calc(100% - 48px) !important;
+  max-width: 1440px !important;
+  margin: 0 !important;
+  padding: 10px 20px !important;
+  box-sizing: border-box !important;
+
+  /* Cápsula perfecta */
   border-radius: 9999px !important;
 
-  /* Glassmorphism oscuro */
-  background: rgba(11, 37, 58, 0.88) !important;
-  backdrop-filter: blur(22px) !important;
-  -webkit-backdrop-filter: blur(22px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  /* Glassmorphism oscuro profundo */
+  background: rgba(9, 30, 50, 0.93) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 
   /* Layout flex */
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
+  gap: 0 !important;
   overflow: visible !important;
-  box-sizing: border-box !important;
-  z-index: 10100 !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 99990 !important;
+
+  /* Transición suave al scroll */
+  transition: background 0.35s ease, box-shadow 0.35s ease, top 0.3s ease !important;
 }
 
-/* Cancelar pseudo-elementos del styles.css que agregan efectos de borde */
+/* Estado scrolled — más opaco */
+#mainNavbar.scrolled {
+  background: rgba(9, 30, 50, 0.98) !important;
+  box-shadow:
+    0 16px 56px rgba(0, 0, 0, 0.7),
+    0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Cancelar pseudo-elementos legacy */
 #mainNavbar::before,
 #mainNavbar::after {
   display: none !important;
   content: none !important;
+}
+
+/* Empujar el body para que el contenido no quede debajo de la navbar fija */
+body {
+  padding-top: 92px !important;
 }
 
 /* ── CONTENEDOR INTERNO ── */
@@ -107,10 +137,10 @@
 
 #mainNavbar .exact-nav-logo,
 #mainNavbar .navbar-brand-logo {
-  width: 44px !important;
-  height: 44px !important;
+  width: 42px !important;
+  height: 42px !important;
   object-fit: contain !important;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3)) !important;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4)) !important;
 }
 
 #mainNavbar .exact-nav-brand-text,
@@ -124,8 +154,8 @@
 #mainNavbar .navbar-brand-title {
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 900 !important;
-  font-size: 1.15rem !important;
-  letter-spacing: 0.08em !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 0.09em !important;
   color: #FFFFFF !important;
   line-height: 1 !important;
 }
@@ -134,12 +164,12 @@
 #mainNavbar .navbar-brand-sub {
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 700 !important;
-  font-size: 0.52rem !important;
-  letter-spacing: 0.22em !important;
+  font-size: 0.48rem !important;
+  letter-spacing: 0.25em !important;
   color: #F4E6C1 !important;
   text-transform: uppercase !important;
   margin-top: 2px !important;
-  opacity: 0.9 !important;
+  opacity: 0.85 !important;
 }
 
 /* ============================================================================
@@ -149,7 +179,7 @@
 #mainNavbar .nav-links-menu {
   display: flex !important;
   align-items: center !important;
-  gap: 4px !important;
+  gap: 2px !important;
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
@@ -157,7 +187,6 @@
   overflow: visible !important;
   flex: 1 !important;
   justify-content: center !important;
-  /* Cancelar mobile transform heredado */
   transform: none !important;
   width: auto !important;
   height: auto !important;
@@ -173,16 +202,16 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 7px 16px !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 7px 15px !important;
+  color: rgba(255, 255, 255, 0.88) !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.86rem !important;
+  font-size: 0.875rem !important;
   font-weight: 600 !important;
   border-radius: 20px !important;
-  transition: all 0.2s ease !important;
+  transition: background 0.2s ease, color 0.2s ease !important;
   white-space: nowrap !important;
-  border: 1px solid transparent !important;
+  border: none !important;
   background: transparent !important;
   line-height: 1 !important;
 }
@@ -194,29 +223,27 @@
   color: #FFFFFF !important;
 }
 
-/* Píldora Activa (Inicio) */
+/* Píldora Activa */
 #mainNavbar .exact-nav-link.active,
 #mainNavbar .nav-link-item.active,
 #mainNavbar .nav-links-menu > a.active {
   background: #165D6F !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 2px 12px rgba(22, 93, 111, 0.5) !important;
+  box-shadow: 0 2px 10px rgba(22, 93, 111, 0.5) !important;
 }
 
-/* ── Nav Label (span dentro de los links) ── */
-#mainNavbar .nav-label {
-  pointer-events: none !important;
-}
-
-/* ── Icono nav-item-content / nav-icon-box: cancelar herencia de styles.css ── */
+/* Cancelar herencia de estilos legacy */
 #mainNavbar .nav-links-menu a .nav-item-content,
 #mainNavbar .nav-links-menu a .nav-icon-box,
 #mainNavbar .nav-links-menu a .nav-icon,
 #mainNavbar .nav-links-menu a .nav-sublabel,
 #mainNavbar .nav-links-menu a .nav-right-wrap {
   display: none !important;
+}
+
+#mainNavbar .nav-label {
+  pointer-events: none !important;
 }
 
 /* ============================================================================
@@ -235,92 +262,111 @@
   display: inline-flex !important;
   align-items: center !important;
   gap: 5px !important;
-  padding: 7px 16px !important;
-  background: rgba(255, 255, 255, 0.07) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  padding: 7px 15px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
   border-radius: 9999px !important;
   color: #FFFFFF !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.86rem !important;
+  font-size: 0.875rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
-  transition: all 0.2s ease !important;
-  position: relative !important;
+  transition: background 0.2s ease, border-color 0.2s ease !important;
   white-space: nowrap !important;
   line-height: 1 !important;
+  position: relative !important;
 }
 
 #mainNavbar .nav-dropdown-trigger:hover,
 #mainNavbar .exact-nav-dropdown-btn:hover {
-  background: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
-#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger {
-  background: rgba(255, 255, 255, 0.14) !important;
+#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger,
+#mainNavbar .global-more-dropdown.is-open .exact-nav-dropdown-btn {
+  background: rgba(246, 94, 1, 0.18) !important;
+  border-color: rgba(246, 94, 1, 0.4) !important;
+  color: #F65E01 !important;
 }
 
-/* Flechita / Caret Naranja apuntando al Mega Menú */
-#mainNavbar .global-more-dropdown .nav-dropdown-trigger::after {
+/* Caret naranja — indicador visual debajo del botón Más */
+#mainNavbar .global-more-dropdown .nav-dropdown-trigger::after,
+#mainNavbar .global-more-dropdown .exact-nav-dropdown-btn::after {
   content: '' !important;
   position: absolute !important;
-  bottom: -15px !important;
+  bottom: -18px !important;
   left: 50% !important;
-  width: 14px !important;
-  height: 14px !important;
+  width: 12px !important;
+  height: 12px !important;
   background: #0A1E30 !important;
   border-left: 2px solid #F65E01 !important;
   border-top: 2px solid #F65E01 !important;
   transform: translateX(-50%) rotate(45deg) !important;
   opacity: 0 !important;
   pointer-events: none !important;
-  transition: opacity 0.25s ease !important;
+  transition: opacity 0.2s ease !important;
   z-index: 100001 !important;
 }
 
-#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger::after {
+#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger::after,
+#mainNavbar .global-more-dropdown.is-open .exact-nav-dropdown-btn::after {
   opacity: 1 !important;
 }
 
-/* Ícono del chevron en "Más" */
-#mainNavbar .nav-dropdown-trigger .fa-chevron-down {
-  font-size: 0.7rem !important;
-  transition: transform 0.25s ease !important;
-  color: #FFFFFF !important;
+/* Chevron del botón Más */
+#mainNavbar .nav-dropdown-trigger .fa-chevron-down,
+#mainNavbar .exact-nav-dropdown-btn .fa-chevron-down {
+  font-size: 0.68rem !important;
+  transition: transform 0.25s ease, color 0.2s ease !important;
 }
 
-#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger .fa-chevron-down {
+#mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger .fa-chevron-down,
+#mainNavbar .global-more-dropdown.is-open .exact-nav-dropdown-btn .fa-chevron-down {
   transform: rotate(180deg) !important;
   color: #F65E01 !important;
 }
 
 /* ============================================================================
-   EL MEGA MENÚ DESPLEGABLE (4 COLUMNAS)
+   MEGA MENÚ DESPLEGABLE — 4 COLUMNAS
    ============================================================================ */
 #mainNavbar .global-mega-menu,
 #mainNavbar .nav-dropdown-menu.global-mega-menu,
 #mainNavbar .exact-dropdown-menu {
   position: absolute !important;
-  top: calc(100% + 14px) !important;
+  top: calc(100% + 16px) !important;
   right: 0 !important;
   left: auto !important;
-  transform: translateY(10px) !important;
+  transform: translateY(8px) !important;
+
+  /* Oculto por defecto */
   display: none !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 0 !important;
-  width: min(1080px, calc(100vw - 40px)) !important;
-  min-width: 0 !important;
-  padding: 28px 24px !important;
-  border-radius: 24px !important;
-  background: rgba(10, 30, 48, 0.97) !important;
-  backdrop-filter: blur(28px) !important;
-  -webkit-backdrop-filter: blur(28px) !important;
-  border: 1px solid rgba(56, 189, 248, 0.22) !important;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(246, 94, 1, 0.08) !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s !important;
-  z-index: 99999 !important;
+
+  /* Grid 4 columnas */
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0 !important;
+
+  /* Dimensiones */
+  width: min(1060px, calc(100vw - 48px)) !important;
+  min-width: 0 !important;
+  padding: 28px 0 20px !important;
+
+  /* Estilo glassmorphism oscuro */
+  border-radius: 22px !important;
+  background: rgba(8, 24, 40, 0.98) !important;
+  backdrop-filter: blur(32px) !important;
+  -webkit-backdrop-filter: blur(32px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(246, 94, 1, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s !important;
+  z-index: 99980 !important;
 }
 
 #mainNavbar .global-more-dropdown.is-open .global-mega-menu {
@@ -329,138 +375,140 @@
   visibility: visible !important;
   pointer-events: auto !important;
   transform: translateY(0) !important;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0s !important;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0s !important;
 }
 
-/* Columnas Individuales */
+/* ── Columnas individuales ── */
 #mainNavbar .global-mega-column {
   display: flex !important;
   flex-direction: column !important;
-  gap: 2px !important;
-  padding: 0 20px !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  gap: 1px !important;
+  padding: 0 24px !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 #mainNavbar .global-mega-column:first-child {
-  padding-left: 0 !important;
+  padding-left: 24px !important;
 }
 
 #mainNavbar .global-mega-column:last-child {
   border-right: none !important;
-  padding-right: 0 !important;
+  padding-right: 24px !important;
 }
 
-/* Encabezados de Columna */
+/* ── Encabezados de columna ── */
 #mainNavbar .global-mega-column h2,
 #mainNavbar .global-mega-column .mega-col-title {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
   margin: 0 0 14px 0 !important;
-  padding: 0 0 12px 0 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  padding: 0 8px 12px 8px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 0.95rem !important;
+  font-size: 0.92rem !important;
   font-weight: 800 !important;
   color: #FFFFFF !important;
   letter-spacing: 0.01em !important;
 }
 
-/* Iconos de cabecera por columna */
-#mainNavbar .global-mega-column.explore h2 i { color: #10B981 !important; }
-#mainNavbar .global-mega-column.culture h2 i { color: #F65E01 !important; }
+/* Colores de iconos por columna */
+#mainNavbar .global-mega-column.explore h2 i  { color: #10B981 !important; }
+#mainNavbar .global-mega-column.culture h2 i  { color: #F65E01 !important; }
 #mainNavbar .global-mega-column.community h2 i { color: #38BDF8 !important; }
-#mainNavbar .global-mega-column.account h2 i { color: #CBD5E1 !important; }
+#mainNavbar .global-mega-column.account h2 i  { color: #A8B8CC !important; }
 
-/* Links dentro del Mega Menú */
+/* ── Links dentro del mega menú ── */
 #mainNavbar .global-mega-column a {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
   padding: 7px 10px !important;
   border-radius: 8px !important;
-  color: rgba(255, 255, 255, 0.82) !important;
+  color: rgba(255, 255, 255, 0.78) !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.83rem !important;
+  font-size: 0.845rem !important;
   font-weight: 500 !important;
-  transition: all 0.18s ease !important;
+  transition: background 0.16s ease, color 0.16s ease, padding-left 0.16s ease !important;
   border: none !important;
   background: transparent !important;
   white-space: nowrap !important;
 }
 
 #mainNavbar .global-mega-column a:hover {
-  background: rgba(255, 255, 255, 0.09) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   color: #FFFFFF !important;
   padding-left: 14px !important;
 }
 
 #mainNavbar .global-mega-column a i {
-  width: 20px !important;
+  width: 18px !important;
   text-align: center !important;
-  font-size: 0.92rem !important;
-  color: rgba(244, 230, 193, 0.8) !important;
+  font-size: 0.9rem !important;
+  color: rgba(244, 230, 193, 0.75) !important;
   flex-shrink: 0 !important;
 }
 
-/* Enlace a Admin / Ops Center */
+/* ── Admin / Ops Center ── */
 #mainNavbar .global-admin-link {
-  margin-top: 8px !important;
-  padding-top: 10px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+  margin-top: 10px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  gap: 8px !important;
   color: #F4E6C1 !important;
   font-weight: 700 !important;
-  gap: 8px !important;
   padding-left: 10px !important;
+  justify-content: flex-start !important;
 }
 
 #mainNavbar .global-admin-link small {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 12px !important;
-  padding: 2px 8px !important;
-  font-size: 0.64rem !important;
-  color: #CBD5E1 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 20px !important;
+  padding: 2px 9px !important;
+  font-size: 0.65rem !important;
+  color: #94A3B8 !important;
   font-weight: 600 !important;
   margin-left: auto !important;
   white-space: nowrap !important;
 }
 
 /* ============================================================================
-   ACCIONES DERECHAS (DIVISOR, CLIMA, BÚSQUEDA, TEMA, SOS, LOGIN, IDIOMA)
+   DIVISOR VERTICAL
    ============================================================================ */
-/* Divisor Vertical entre Menú Central y Acciones Derechas */
 #mainNavbar .nav-vertical-divider {
   width: 1px !important;
-  height: 24px !important;
-  background: rgba(255, 255, 255, 0.22) !important;
-  margin: 0 8px !important;
+  height: 22px !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  margin: 0 10px !important;
   flex-shrink: 0 !important;
   display: inline-block !important;
 }
 
+/* ============================================================================
+   ACCIONES DERECHAS (CLIMA, BÚSQUEDA, TEMA, SOS, LOGIN, IDIOMA)
+   ============================================================================ */
 #mainNavbar .global-nav-actions,
 #mainNavbar .exact-nav-actions,
 #mainNavbar .nav-actions-right {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 7px !important;
   flex-shrink: 0 !important;
 }
 
-/* Píldora de Clima */
+/* Píldora Clima */
 #mainNavbar .global-weather,
 #mainNavbar .navbar-weather-pill {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  padding: 6px 14px !important;
+  padding: 6px 13px !important;
   background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   border-radius: 9999px !important;
   color: #FFFFFF !important;
   font-family: 'Inter', sans-serif !important;
@@ -475,7 +523,7 @@
   font-size: 0.85rem !important;
 }
 
-/* Botón Búsqueda Lupa */
+/* Botón Búsqueda */
 #mainNavbar .global-search,
 #mainNavbar .navbar-search-btn {
   display: inline-flex !important;
@@ -486,10 +534,10 @@
   border-radius: 50% !important;
   background: transparent !important;
   border: none !important;
-  color: #FFFFFF !important;
+  color: rgba(255, 255, 255, 0.85) !important;
   text-decoration: none !important;
   cursor: pointer !important;
-  transition: all 0.2s ease !important;
+  transition: color 0.2s ease !important;
   font-size: 0.95rem !important;
 }
 
@@ -498,20 +546,25 @@
   color: #F65E01 !important;
 }
 
-/* Switch Tema Día/Noche con track y thumb */
+/* Switch Tema Día/Noche */
 #mainNavbar .global-theme,
 #mainNavbar .navbar-theme-pill,
 #mainNavbar .global-theme-toggle-switch {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  padding: 4px 6px !important;
+  gap: 5px !important;
+  padding: 5px 7px !important;
   background: transparent !important;
   border: none !important;
   border-radius: 9999px !important;
   cursor: pointer !important;
-  transition: all 0.2s ease !important;
+  transition: background 0.2s ease !important;
   color: #FFFFFF !important;
+}
+
+#mainNavbar .global-theme:hover,
+#mainNavbar .global-theme-toggle-switch:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 #mainNavbar .global-theme .fa-sun,
@@ -529,7 +582,7 @@
 #mainNavbar .theme-switch-track {
   width: 26px !important;
   height: 14px !important;
-  background: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
   border-radius: 9999px !important;
   position: relative !important;
   display: inline-block !important;
@@ -554,24 +607,24 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
   transform: translateX(12px) !important;
 }
 
-/* Botón SOS Rojo */
+/* ── Botón SOS Rojo ── */
 #mainNavbar .sos-quick-btn,
 #mainNavbar .navbar-sos-btn {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  padding: 7px 16px !important;
+  padding: 7px 15px !important;
   background: #DC2626 !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: none !important;
   border-radius: 9999px !important;
   color: #FFFFFF !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.78rem !important;
+  font-size: 0.8rem !important;
   font-weight: 800 !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 12px rgba(220, 38, 38, 0.45) !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 14px rgba(220, 38, 38, 0.5) !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
   letter-spacing: 0.04em !important;
   white-space: nowrap !important;
 }
@@ -582,29 +635,28 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
   transform: translateY(-1px) !important;
 }
 
-/* Botón Iniciar Sesión Verde */
+/* ── Botón Iniciar Sesión Verde ── */
 #mainNavbar .exact-nav-btn-login,
 #mainNavbar .global-session,
 #mainNavbar .navbar-login-btn {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  padding: 7px 16px !important;
+  gap: 7px !important;
+  padding: 7px 15px !important;
   background: #10B981 !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: none !important;
   border-radius: 9999px !important;
   color: #FFFFFF !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.8rem !important;
+  font-size: 0.82rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35) !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 14px rgba(16, 185, 129, 0.4) !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
   white-space: nowrap !important;
 }
 
-/* Forzar que se muestre el span en desktop */
 #mainNavbar .exact-nav-btn-login span,
 #mainNavbar .global-session span,
 #mainNavbar .navbar-login-btn span {
@@ -618,24 +670,30 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
   transform: translateY(-1px) !important;
 }
 
-/* Selector Idioma */
+/* ── Selector Idioma ── */
 #mainNavbar .global-language,
 #mainNavbar .navbar-lang-pill {
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
-  padding: 7px 13px !important;
+  padding: 7px 12px !important;
   background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   border-radius: 9999px !important;
   color: #FFFFFF !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.78rem !important;
+  font-size: 0.8rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
+  transition: background 0.2s ease !important;
 }
 
-/* Botón Hamburguesa Móvil */
+#mainNavbar .global-language:hover,
+#mainNavbar .navbar-lang-pill:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ── Botón Hamburguesa Móvil ── */
 #mainNavbar .mobile-nav-toggle,
 #mainNavbar .exact-nav-mobile-toggle {
   display: none !important;
@@ -643,140 +701,110 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
   justify-content: center !important;
   width: 38px !important;
   height: 38px !important;
-  background: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px !important;
   color: #FFFFFF !important;
-  font-size: 1.1rem !important;
+  font-size: 1.05rem !important;
   cursor: pointer !important;
+  transition: background 0.2s ease !important;
+}
+
+#mainNavbar .mobile-nav-toggle:hover,
+#mainNavbar .exact-nav-mobile-toggle:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── Indicador Píldora Deslizante ── */
+#mainNavbar .nav-pill-indicator {
+  position: absolute !important;
+  height: 32px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  pointer-events: none !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  opacity: 0 !important;
+  z-index: -1 !important;
+  left: 0 !important;
+  width: 70px !important;
+}
+
+/* ── Efectos del navbar con luz ambiental ── */
+#mainNavbar::before {
+  display: none !important;
 }
 
 /* ============================================================================
-   COMPATIBILIDAD HACIA ATRÁS — Selectores sin #mainNavbar
-   (para páginas secundarias donde navigation.js inyecta el menú)
+   COMPATIBILIDAD HACIA ATRÁS — páginas sin #mainNavbar explícito
    ============================================================================ */
-.main-navbar:not(#mainNavbar),
-.main-navbar-exact:not(#mainNavbar) {
-  position: sticky !important;
-  top: 14px !important;
-  left: auto !important;
-  right: auto !important;
-  height: auto !important;
-  min-height: 64px !important;
-  width: min(1640px, calc(100% - 32px)) !important;
-  margin: 18px auto 0 !important;
-  padding: 9px 20px !important;
+nav.main-navbar:not(#mainNavbar),
+nav.main-navbar-exact:not(#mainNavbar) {
+  position: fixed !important;
+  top: 16px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 48px) !important;
+  max-width: 1440px !important;
+  margin: 0 !important;
+  padding: 10px 20px !important;
   border-radius: 9999px !important;
-  background: rgba(11, 37, 58, 0.88) !important;
-  backdrop-filter: blur(22px) !important;
-  -webkit-backdrop-filter: blur(22px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  background: rgba(9, 30, 50, 0.93) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   overflow: visible !important;
   box-sizing: border-box !important;
-  z-index: 9999 !important;
+  z-index: 99990 !important;
+  min-height: 60px !important;
+  height: auto !important;
 }
 
-.main-navbar:not(#mainNavbar)::before,
-.main-navbar:not(#mainNavbar)::after,
-.main-navbar-exact:not(#mainNavbar)::before,
-.main-navbar-exact:not(#mainNavbar)::after {
+nav.main-navbar:not(#mainNavbar)::before,
+nav.main-navbar:not(#mainNavbar)::after,
+nav.main-navbar-exact:not(#mainNavbar)::before,
+nav.main-navbar-exact:not(#mainNavbar)::after {
   display: none !important;
   content: none !important;
 }
 
 /* ============================================================================
-   RESPONSIVE & MÓVIL
+   RESPONSIVE — 1200px
    ============================================================================ */
 @media (max-width: 1200px) {
-  #mainNavbar .global-weather,
-  #mainNavbar .navbar-weather-pill {
-    display: inline-flex !important;
-  }
-}
-
-@media (max-width: 1024px) {
-  #mainNavbar .global-theme,
-  #mainNavbar .navbar-theme-pill,
-  #mainNavbar .global-language,
-  #mainNavbar .navbar-lang-pill {
-    display: inline-flex !important;
-  }
-}
-
-@media (min-width: 961px) and (max-width: 1200px) {
   #mainNavbar,
   #mainNavbar.main-navbar-exact {
-    padding-right: 12px !important;
-    padding-left: 12px !important;
+    width: calc(100% - 32px) !important;
   }
+}
 
-  #mainNavbar .exact-nav-logo,
-  #mainNavbar .navbar-brand-logo {
-    width: 38px !important;
-    height: 38px !important;
-  }
-
-  #mainNavbar .exact-nav-brand,
-  #mainNavbar .navbar-brand-pill {
-    gap: 7px !important;
-  }
-
-  #mainNavbar .exact-nav-title,
-  #mainNavbar .navbar-brand-title {
-    font-size: 0.96rem !important;
-  }
-
-  #mainNavbar .exact-nav-tagline,
-  #mainNavbar .navbar-brand-sub {
-    font-size: 0.42rem !important;
-  }
-
-  #mainNavbar .exact-nav-menu,
-  #mainNavbar .nav-links-menu {
-    gap: 2px !important;
-  }
-
+/* ============================================================================
+   RESPONSIVE — 1100px (reducir espacio elementos)
+   ============================================================================ */
+@media (max-width: 1100px) {
   #mainNavbar .exact-nav-link,
   #mainNavbar .nav-link-item,
   #mainNavbar .nav-links-menu > a,
   #mainNavbar .nav-dropdown-trigger,
   #mainNavbar .exact-nav-dropdown-btn {
-    padding: 7px 7px !important;
-    font-size: 0.76rem !important;
-  }
-
-  #mainNavbar .global-nav-actions,
-  #mainNavbar .exact-nav-actions,
-  #mainNavbar .nav-actions-right {
-    gap: 5px !important;
+    padding: 7px 10px !important;
+    font-size: 0.82rem !important;
   }
 
   #mainNavbar .global-weather,
   #mainNavbar .navbar-weather-pill {
-    padding: 6px 8px !important;
-    font-size: 0.7rem !important;
+    padding: 6px 9px !important;
+    font-size: 0.75rem !important;
   }
 
-  #mainNavbar .global-search,
-  #mainNavbar .navbar-search-btn {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
-  #mainNavbar .global-theme,
-  #mainNavbar .navbar-theme-pill {
-    padding: 5px 7px !important;
-  }
-
-  #mainNavbar .global-language,
-  #mainNavbar .navbar-lang-pill {
-    padding: 7px 8px !important;
-    font-size: 0.7rem !important;
+  #mainNavbar .global-nav-actions,
+  #mainNavbar .exact-nav-actions {
+    gap: 5px !important;
   }
 
   #mainNavbar .sos-quick-btn,
@@ -784,52 +812,54 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
   #mainNavbar .exact-nav-btn-login,
   #mainNavbar .global-session,
   #mainNavbar .navbar-login-btn {
-    padding-right: 10px !important;
-    padding-left: 10px !important;
-  }
-
-  #mainNavbar .exact-nav-btn-login span,
-  #mainNavbar .global-session span,
-  #mainNavbar .navbar-login-btn span {
-    display: inline-flex !important;
-    font-size: 0.74rem !important;
+    padding: 7px 11px !important;
   }
 }
 
+/* ============================================================================
+   RESPONSIVE — 960px MÓVIL (Drawer lateral)
+   ============================================================================ */
 @media (max-width: 960px) {
-  #mainNavbar,
-  #mainNavbar.main-navbar-exact {
-    border-radius: 20px !important;
-    padding: 8px 14px !important;
-    top: 8px !important;
-    margin: 8px auto 0 !important;
+  body {
+    padding-top: 84px !important;
   }
 
+  #mainNavbar,
+  #mainNavbar.main-navbar-exact {
+    top: 10px !important;
+    width: calc(100% - 24px) !important;
+    padding: 8px 14px !important;
+    border-radius: 20px !important;
+  }
+
+  /* Mostrar hamburguesa */
   #mainNavbar .mobile-nav-toggle,
   #mainNavbar .exact-nav-mobile-toggle {
     display: inline-flex !important;
   }
 
+  /* Ocultar menú horizontal → drawer lateral */
   #mainNavbar .exact-nav-menu,
   #mainNavbar .nav-links-menu {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: min(88vw, 340px) !important;
-    height: 100vh !important;
-    background: rgba(10, 30, 48, 0.98) !important;
-    backdrop-filter: blur(28px) !important;
+    width: min(85vw, 320px) !important;
+    height: 100dvh !important;
+    background: rgba(9, 25, 40, 0.99) !important;
+    backdrop-filter: blur(32px) !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    padding: 80px 20px 30px !important;
-    gap: 8px !important;
-    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8) !important;
-    transform: translateX(-105%) !important;
+    padding: 80px 18px 28px !important;
+    gap: 6px !important;
+    box-shadow: 12px 0 48px rgba(0, 0, 0, 0.8) !important;
+    transform: translateX(-110%) !important;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     overflow-y: auto !important;
     z-index: 100000 !important;
     flex: none !important;
     justify-content: flex-start !important;
+    border-radius: 0 !important;
   }
 
   #mainNavbar .exact-nav-menu.nav-active,
@@ -837,6 +867,7 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
     transform: translateX(0) !important;
   }
 
+  /* Mega menú en móvil: estático dentro del drawer */
   #mainNavbar .global-more-dropdown {
     display: flex !important;
     flex-direction: column !important;
@@ -844,84 +875,108 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
     width: 100% !important;
   }
 
-  #mainNavbar .global-more-dropdown .nav-dropdown-trigger {
+  #mainNavbar .global-more-dropdown .nav-dropdown-trigger,
+  #mainNavbar .global-more-dropdown .exact-nav-dropdown-btn {
     width: 100% !important;
     justify-content: flex-start !important;
+    border-radius: 10px !important;
   }
 
-  #mainNavbar .global-more-dropdown .nav-dropdown-trigger .fa-chevron-down {
+  #mainNavbar .global-more-dropdown .nav-dropdown-trigger .fa-chevron-down,
+  #mainNavbar .global-more-dropdown .exact-nav-dropdown-btn .fa-chevron-down {
     margin-left: auto !important;
   }
 
-  #mainNavbar .global-more-dropdown .nav-dropdown-menu.global-mega-menu {
+  #mainNavbar .global-mega-menu,
+  #mainNavbar .nav-dropdown-menu.global-mega-menu {
     position: static !important;
     width: 100% !important;
     grid-template-columns: 1fr !important;
-    padding: 14px 0 !important;
+    padding: 10px 0 !important;
     display: none !important;
-    max-height: none !important;
-    margin: 0 !important;
-    overflow: visible !important;
+    border-radius: 10px !important;
     box-shadow: none !important;
-    border-radius: 12px !important;
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
     transform: none !important;
-    left: auto !important;
-    right: auto !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
   }
 
+  #mainNavbar .global-more-dropdown.is-open .global-mega-menu,
   #mainNavbar .global-more-dropdown.is-open .nav-dropdown-menu.global-mega-menu {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    transform: none !important;
   }
 
   #mainNavbar .global-mega-column {
     border-right: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 10px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    padding: 8px 12px !important;
   }
 
+  #mainNavbar .global-mega-column:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Ocultar texto en botones SOS y Login en móvil pequeño */
   #mainNavbar .exact-nav-btn-login span,
-  #mainNavbar .global-session span {
+  #mainNavbar .global-session span,
+  #mainNavbar .navbar-login-btn span {
+    display: none !important;
+  }
+
+  /* Divisor vertical oculto en móvil */
+  #mainNavbar .nav-vertical-divider {
+    display: none !important;
+  }
+
+  /* Clima oculto en móvil */
+  #mainNavbar .global-weather,
+  #mainNavbar .navbar-weather-pill {
     display: none !important;
   }
 }
 
+/* ============================================================================
+   RESPONSIVE — 520px (pantallas muy pequeñas)
+   ============================================================================ */
 @media (max-width: 520px) {
+  #mainNavbar,
+  #mainNavbar.main-navbar-exact {
+    width: calc(100% - 16px) !important;
+    top: 8px !important;
+    padding: 7px 12px !important;
+  }
+
+  body {
+    padding-top: 76px !important;
+  }
+
   #mainNavbar .exact-nav-brand-text,
   #mainNavbar .navbar-brand-text {
     display: none !important;
   }
 
-  #mainNavbar .global-weather,
-  #mainNavbar .navbar-weather-pill {
-    width: 34px !important;
-    height: 34px !important;
-    padding: 0 !important;
-    justify-content: center !important;
-    font-size: 0 !important;
-  }
-
   #mainNavbar .global-theme,
   #mainNavbar .navbar-theme-pill {
-    width: 34px !important;
-    height: 34px !important;
-    padding: 0 !important;
-    justify-content: center !important;
+    display: none !important;
   }
 
-  #mainNavbar .global-search,
-  #mainNavbar .navbar-search-btn {
-    width: 32px !important;
-    height: 32px !important;
+  #mainNavbar .global-language,
+  #mainNavbar .navbar-lang-pill {
+    display: none !important;
+  }
+
+  #mainNavbar .global-nav-actions,
+  #mainNavbar .exact-nav-actions {
+    gap: 4px !important;
   }
 
   #mainNavbar .sos-quick-btn,
   #mainNavbar .navbar-sos-btn {
-    width: 40px !important;
+    width: 38px !important;
     height: 34px !important;
     padding: 0 !important;
     justify-content: center !important;
@@ -940,20 +995,214 @@ html[data-theme="dark"] #mainNavbar .theme-switch-thumb {
     padding: 0 !important;
     justify-content: center !important;
   }
+}
 
-  #mainNavbar .global-language,
-  #mainNavbar .navbar-lang-pill {
-    padding: 6px !important;
-  }
+/* ============================================================================
+   BACKDROP DEL DRAWER MÓVIL
+   ============================================================================ */
+.nav-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
 
-  #mainNavbar .mobile-nav-toggle,
-  #mainNavbar .exact-nav-mobile-toggle {
-    width: 36px !important;
-    height: 36px !important;
-  }
+body.nav-drawer-open .nav-drawer-backdrop {
+  display: block;
+}
 
-  #mainNavbar .global-nav-actions,
-  #mainNavbar .exact-nav-actions {
-    gap: 3px !important;
-  }
+/* ============================================================================
+   DRAWER HEADER Y FOOTER MÓVIL
+   ============================================================================ */
+.nav-drawer-header {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 16px 18px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.nav-drawer-brand-mark img {
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: contain !important;
+}
+
+.nav-drawer-identity {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  line-height: 1.2 !important;
+}
+
+.nav-drawer-kicker {
+  font-size: 0.48rem !important;
+  letter-spacing: 0.18em !important;
+  color: #F4E6C1 !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  opacity: 0.75 !important;
+}
+
+.nav-drawer-identity strong {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;
+}
+
+.nav-drawer-identity small {
+  font-size: 0.68rem !important;
+  color: #94A3B8 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.nav-drawer-close {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease !important;
+  font-size: 1rem !important;
+}
+
+.nav-drawer-close:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.nav-drawer-footer {
+  margin-top: auto !important;
+  padding: 14px 10px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+
+.nav-drawer-footer span {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.nav-drawer-footer b {
+  font-size: 0.78rem !important;
+  color: #F4E6C1 !important;
+  font-weight: 700 !important;
+}
+
+.nav-drawer-footer small {
+  font-size: 0.68rem !important;
+  color: #64748B !important;
+}
+
+.nav-drawer-footer i {
+  color: #165D6F !important;
+  margin-right: 6px !important;
+}
+
+.nav-drawer-footer a {
+  color: #F65E01 !important;
+  text-decoration: none !important;
+  width: 32px !important;
+  height: 32px !important;
+  background: rgba(246, 94, 1, 0.15) !important;
+  border: 1px solid rgba(246, 94, 1, 0.3) !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background 0.2s ease !important;
+}
+
+.nav-drawer-footer a:hover {
+  background: rgba(246, 94, 1, 0.3) !important;
+}
+
+/* ============================================================================
+   GRUPOS DE NAVEGACIÓN OPS (DRAWER MÓVIL)
+   ============================================================================ */
+.nav-ops-group-title {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 6px 10px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease, background 0.2s ease !important;
+  margin-top: 8px !important;
+}
+
+.nav-ops-group-title.is-expanded {
+  color: #F65E01 !important;
+}
+
+.nav-ops-group-title .nav-ops-group-number {
+  font-size: 0.62rem !important;
+  opacity: 0.6 !important;
+}
+
+.nav-ops-group-title small {
+  margin-left: auto !important;
+  font-size: 0.62rem !important;
+  opacity: 0.5 !important;
+}
+
+.nav-ops-group-title .fa-chevron-down {
+  font-size: 0.62rem !important;
+  transition: transform 0.2s ease !important;
+}
+
+.nav-ops-group-title.is-expanded .fa-chevron-down {
+  transform: rotate(180deg) !important;
+}
+
+.nav-ops-item-collapsed {
+  display: none !important;
+}
+
+/* ============================================================================
+   ANIMACIÓN RIPPLE EN BOTONES
+   ============================================================================ */
+.nav-click-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  animation: navRippleAnim 0.6s ease-out forwards;
+  pointer-events: none;
+  transform: scale(0);
+}
+
+@keyframes navRippleAnim {
+  to { opacity: 0; transform: scale(2.5); }
 }

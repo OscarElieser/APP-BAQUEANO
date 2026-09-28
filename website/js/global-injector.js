@@ -53,7 +53,7 @@
       { id: 'bq-styles',    href: 'styles.css?v=20260927-exact-1' },
       { id: 'bq-modules',   href: 'css/modules.css' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
-      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260928-nav-fix-6' },
+      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
       { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
@@ -65,90 +65,11 @@
       }
     });
 
-    // Estilos inline del navbar y footer globales
+    // Estilos inline mínimos para footer y utilidades globales (navbar controlado por navigation-mega.css)
     if (!document.getElementById('bq-global-injector-styles')) {
       var style = document.createElement('style');
       style.id = 'bq-global-injector-styles';
       style.textContent = `
-        /* ── Navbar Oficial Baqueano ── */
-        .bq-global-navbar {
-          position: sticky; top: 0; z-index: 1000; width: 100%;
-          background: rgba(11,37,58,.97); backdrop-filter: blur(14px);
-          border-bottom: 1px solid rgba(246,94,1,.18);
-          font-family: 'Inter', system-ui, sans-serif;
-        }
-        .bq-nav-inner {
-          max-width: 1380px; margin: 0 auto; padding: 0 24px;
-          display: flex; align-items: center; height: 64px; gap: 0;
-        }
-        .bq-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
-        .bq-nav-brand img { height: 38px; width: 38px; object-fit: contain; }
-        .bq-brand-name { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; line-height: 1; }
-        .bq-brand-sub  { font-size: .6rem; color: #94A3B8; letter-spacing: .08em; font-weight: 600; }
-        .bq-nav-links  { display: flex; align-items: center; gap: 2px; margin-left: 28px; flex: 1; }
-        .bq-nav-links a {
-          color: rgba(255,255,255,.8); text-decoration: none; padding: 6px 14px;
-          border-radius: 8px; font-size: .88rem; font-weight: 600; transition: all .2s;
-          white-space: nowrap;
-        }
-        .bq-nav-links a:hover, .bq-nav-links a.active { color: #F65E01; background: rgba(246,94,1,.1); }
-        .bq-nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-        .bq-nav-btn {
-          background: none; border: none; color: rgba(255,255,255,.7); cursor: pointer;
-          padding: 7px; border-radius: 8px; font-size: .9rem; transition: all .2s;
-          font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 6px;
-        }
-        .bq-nav-btn:hover { color: #FFF; background: rgba(255,255,255,.1); }
-        .bq-nav-sos {
-          background: rgba(239,68,68,.15); color: #EF4444; border: 1px solid rgba(239,68,68,.3);
-          padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: .82rem;
-          cursor: pointer; font-family: 'Montserrat', sans-serif; white-space: nowrap;
-          transition: all .2s; display: flex; align-items: center; gap: 6px;
-        }
-        .bq-nav-sos:hover { background: #EF4444; color: #FFF; }
-        .bq-nav-login {
-          background: #F65E01; color: #FFF; border: none; padding: 8px 18px;
-          border-radius: 9px; font-weight: 700; font-size: .85rem; cursor: pointer;
-          font-family: 'Montserrat', sans-serif; text-decoration: none; transition: background .2s;
-        }
-        .bq-nav-login:hover { background: #D94E00; color: #FFF; }
-        /* Dropdown Más */
-        .bq-nav-dropdown { position: relative; }
-        .bq-nav-dropdown-btn {
-          color: rgba(255,255,255,.8); background: none; border: none; padding: 6px 14px;
-          border-radius: 8px; font-size: .88rem; font-weight: 600; cursor: pointer;
-          display: flex; align-items: center; gap: 6px; transition: all .2s; white-space: nowrap;
-          font-family: 'Inter', sans-serif;
-        }
-        .bq-nav-dropdown-btn:hover { color: #F65E01; background: rgba(246,94,1,.1); }
-        .bq-dropdown-menu {
-          position: absolute; top: calc(100% + 10px); right: 0; min-width: 220px;
-          background: #0B253A; border: 1px solid rgba(255,255,255,.08); border-radius: 14px;
-          padding: 8px; box-shadow: 0 16px 48px rgba(0,0,0,.5);
-          display: none; z-index: 999; animation: bqDropIn .2s ease;
-        }
-        @keyframes bqDropIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
-        .bq-nav-dropdown:hover .bq-dropdown-menu,
-        .bq-nav-dropdown-btn[aria-expanded="true"] + .bq-dropdown-menu { display: block; }
-        .bq-dropdown-item {
-          display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.8);
-          text-decoration: none; padding: 9px 12px; border-radius: 9px; font-size: .85rem;
-          font-weight: 600; transition: all .18s;
-        }
-        .bq-dropdown-item:hover { background: rgba(246,94,1,.12); color: #F65E01; }
-        .bq-dropdown-item.ops { border-top: 1px solid rgba(255,255,255,.08); margin-top: 6px; padding-top: 12px; color: #F4E6C1; }
-        .bq-dropdown-item.ops:hover { background: rgba(244,230,193,.1); color: #F4E6C1; }
-        .bq-burger {
-          display: none; background: none; border: none; color: #FFF; font-size: 1.3rem;
-          cursor: pointer; padding: 8px; border-radius: 8px;
-        }
-        @media (max-width: 768px) {
-          .bq-nav-links { display: none; }
-          .bq-nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #0B253A; padding: 16px; gap: 4px; border-bottom: 2px solid rgba(246,94,1,.3); }
-          .bq-burger { display: flex; }
-          .bq-nav-actions .bq-nav-btn { display: none; }
-        }
-
         /* ── Footer Oficial Baqueano ── */
         .bq-global-footer {
           background: #081827; color: #94A3B8;

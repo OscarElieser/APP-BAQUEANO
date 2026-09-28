@@ -32,6 +32,18 @@
 
 <!-- Consulta 27-09-2026: adaptación fiel de historia.html a la referencia visual entregada. Se conservaron los siete periodos y los 17 territorios; se añadieron colecciones de pueblos, personajes, patrimonio, comparativas, narración, fuentes y CTA final con la paleta azul, verde, naranja y fondo claro. -->
 
+<!-- Consulta 29-09-2026 (CHECKPOINT 4 — Corrección Visual Definitiva del Menú Global):
+  PROBLEMA RAÍZ: Dos sistemas CSS en conflicto: estilos inline del global-injector.js
+  (.bq-global-navbar con position:sticky) sobrescribían navigation-mega.css.
+  SOLUCIÓN: Reescritura completa navigation-mega.css (v10-final, 560 líneas).
+  position:fixed + left:50% + transform:translateX(-50%) → cápsula flotante centrada.
+  Eliminados ~80 líneas de estilos inline conflictivos del global-injector.js.
+  Versiones de caché actualizadas: v20260929-v10-final en global-injector.js y navigation.js.
+  ARCHIVOS: website/css/navigation-mega.css, website/js/global-injector.js, website/js/navigation.js
+  ESTADO: Completado. Pendiente validación visual del usuario. -->
+
+
+
 ## Menú lateral plegable de la aplicación Android
 
 ### Ajuste solicitado — todos los botones individuales

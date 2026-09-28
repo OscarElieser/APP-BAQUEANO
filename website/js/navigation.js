@@ -47,7 +47,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260928-nav-fix-7'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-v10-final'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
