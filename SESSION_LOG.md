@@ -860,3 +860,21 @@
 - Conservación: se mantuvieron el archivo de 93 grabaciones, reproductores, búsquedas, filtros, fichas, modales, scripts y footer existentes.
 - Responsive: colecciones táctiles con desplazamiento horizontal en móvil y grillas adaptativas en pantallas mayores.
 - Archivo modificado: `website/musica.html`.
+
+# 2026-09-27 — Alineación 1:1 de index.html, destinos.html, ambiental.html e historia.html con Imágenes de Referencia
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - El usuario compartió 4 imágenes de referencia oficiales para `index.html`, `destinos.html`, `ambiental.html` e `historia.html` con la directiva estricta de que el diseño y el menú superior deben ser idénticos a las capturas proporcionadas, conservando toda la información existente y los recursos multimedia.
+- ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+  - **Barra de navegación horizontal unificada:** Se implementó el menú horizontal idéntico en todas las páginas: logotipo a la izquierda, enlaces centrales (`Inicio`, `Destinos`, `Mapa`, `Experiencias`, `Baqueano Digital`, `Mi Viaje`, `SOS`, `Más ∨`) y acciones a la derecha (`🔍`, `🤍`, selector `ES | EN`, botón verde `#10B981` `Iniciar sesión`, y menú móvil).
+  - **`website/index.html` (Imagen 4):** Hero con pill de búsqueda triple, 10 categorías temáticas circulares, 5 destinos destacados, split 2 columnas (Mapa Leaflet + Baqueano Digital), 6 pilares de compromiso, 4 experiencias únicas, 3 testimonios de viajeros, CTA escénico y red de anfitriones.
+  - **`website/destinos.html` (Imagen 3):** Hero con ficha destacada de Ometepe y selectores de vista, 11 categorías, barra de filtros avanzada (departamento, precio, valoración, anfitrión verificado, cerca de mí, orden), layout dividido (mapa interactivo con card flotante de Granada + 6 destinos en grid 3x2), catálogo completo (128), "Más destinos", paginación `< 1 2 3 4 5 ... 13 >`, módulo "¿No sabés dónde ir? Preguntale a Baqüi" y banner CTA final.
+  - **`website/ambiental.html` (Imagen 2):** Hero "Custodiá lo que venís a descubrir", tira de 4 métricas, Decálogo Verde en 4 columnas con cálculo reactivo de nivel de Guardián y Credencial Digital, módulo Alerta Ciudadana Ambiental con mapa interactivo y formulario de denuncia, Pasaporte del Guardián (6 niveles) y 5 Acciones que inspiran.
+  - **`website/historia.html` (Imagen 1):** Hero "UNA HISTORIA QUE SIGUE VIVA", línea de tiempo navegable de 7 hitos, 17 territorios con memoria (mapa interactivo + ficha destacada de León + listado departamental), 5 pueblos originarios, 5 personajes históricos, 6 expresiones de patrimonio vivo, módulo "Antes y Ahora", y reproductor de audioguía Baqueano con onda sonora.
+  - **Hojas de estilo dedicadas:** `website/css/pages/index-exact.css`, `website/css/pages/destinos-exact.css`, `website/css/pages/ambiental-exact.css` e `website/css/pages/historia-exact.css`.
+  - **Auditoría de cumplimiento:** Cero uso de la palabra prohibida en todo el código y comentarios.
+- 📦 **QUÉ (What / Entregables & Despliegue):**
+  - Archivos creados y actualizados en `website/`.
+  - Confirmación Git: commit `4a7794f` consolidado y subido a `origin/main`.
+  - Despliegue en producción en Firebase Hosting exitoso (`https://app-baqueano.web.app`).
+
