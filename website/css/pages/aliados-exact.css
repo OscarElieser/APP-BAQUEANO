@@ -1,0 +1,1134 @@
+/* ============================================================================
+ * 🧭 BAQUEANO ECOSYSTEM — ESTILOS EXACTOS ALIADOS (aliados-exact.css)
+ * ============================================================================
+ *
+ * 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+ * - Replicar al 100% la interfaz de la captura de referencia de Aliados Baqueano
+ *   para conectar directamente al viajero con cooperativas campesinas, eco-lodges,
+ *   y anfitriones comunitarios de Nicaragua con tarifas transparentes y sin comisiones.
+ *
+ * ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+ * - Sistema CSS modular con tokens cromáticos oficiales (#165D6F, #F65E01, #F4E6C1, #0F172A, #10B981).
+ * - Grilla responsiva de 10 aliados destacados en formato 5x2 (desktop) y carrusel/scroll táctil (móvil).
+ * - Barra de métricas de impacto, barra de filtros avanzados con selector de departamento y cercanía.
+ * - Sección de mapa interactivo dividida con lista de aliados cercanos verificados.
+ * - Módulo de 8 pasos del protocolo de verificación y sección de impacto con productor local.
+ *
+ * 📦 3. QUÉ (WHAT / ENTREGABLES):
+ * - Clases exactas .page-aliados-exact, .aliados-hero-exact, .aliados-metrics-strip,
+ *   .aliados-filter-bar, .aliados-grid-exact, .aliados-map-split, .aliados-verification-strip,
+ *   .aliados-impact-section, .aliados-biz-cta, .aliados-triad-strip.
+ * ============================================================================
+ */
+
+:root {
+  --aliados-petroleo: #165D6F;
+  --aliados-naranja: #F65E01;
+  --aliados-crema: #F4E6C1;
+  --aliados-noche: #0F172A;
+  --aliados-verde: #10B981;
+  --aliados-bg: #F8FAFC;
+  --aliados-card-bg: #FFFFFF;
+  --aliados-text: #1E293B;
+  --aliados-muted: #64748B;
+  --aliados-border: #E2E8F0;
+  --aliados-radius: 14px;
+}
+
+body.page-aliados-exact {
+  margin: 0;
+  padding: 0;
+  background-color: var(--aliados-bg);
+  color: var(--aliados-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================================
+   1. HERO ALIADOS
+   ============================================================================ */
+.aliados-hero-exact {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  background-color: #0A1E29;
+  background-image: linear-gradient(90deg, rgba(10, 30, 41, 0.92) 0%, rgba(10, 30, 41, 0.75) 50%, rgba(10, 30, 41, 0.4) 100%),
+                    url('../../assets/images/destinos/Posada Rural San Ramón Ometepe.avif');
+  background-size: cover;
+  background-position: center;
+  padding: 90px 0 60px;
+  color: #FFFFFF;
+}
+
+.aliados-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.aliados-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.aliados-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.08;
+  margin: 0 0 18px;
+  color: #FFFFFF;
+}
+
+.aliados-hero-title span {
+  color: var(--aliados-naranja);
+}
+
+.aliados-hero-desc {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.55;
+  color: #E2E8F0;
+  max-width: 680px;
+  margin: 0 0 28px;
+}
+
+.aliados-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn-aliados-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--aliados-naranja);
+  color: #FFFFFF;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(246, 94, 1, 0.35);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-aliados-hero-primary:hover {
+  background-color: #E05300;
+  transform: translateY(-2px);
+}
+
+.btn-aliados-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-aliados-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.aliados-hero-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px dashed rgba(244, 230, 193, 0.4);
+  backdrop-filter: blur(12px);
+  padding: 24px 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 200px;
+}
+
+.aliados-hero-stamp-text {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--aliados-crema);
+  line-height: 1.25;
+}
+
+/* ============================================================================
+   2. FRANJA DE MÉTRICAS DE ALIADOS
+   ============================================================================ */
+.aliados-metrics-strip {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--aliados-border);
+  padding: 18px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.aliados-metrics-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.aliados-metric-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #F1F5F9;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--aliados-noche);
+}
+
+.aliados-metric-item i {
+  color: var(--aliados-petroleo);
+  font-size: 1rem;
+}
+
+.aliados-metric-item.verified-badge {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065F46;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.aliados-metric-item.verified-badge i {
+  color: var(--aliados-verde);
+}
+
+/* ============================================================================
+   3. BARRA DE FILTROS DE ALIADOS
+   ============================================================================ */
+.aliados-filter-section {
+  padding: 24px 0 12px;
+}
+
+.aliados-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background: #FFFFFF;
+  padding: 14px 20px;
+  border-radius: var(--aliados-radius);
+  border: 1px solid var(--aliados-border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.aliados-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 170px;
+  background: #F8FAFC;
+  border: 1px solid var(--aliados-border);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.aliados-filter-group i {
+  color: var(--aliados-muted);
+  font-size: 0.95rem;
+}
+
+.aliados-filter-select {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--aliados-noche);
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-near-me {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F1F5F9;
+  border: 1px solid var(--aliados-border);
+  color: var(--aliados-noche);
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.btn-near-me:hover {
+  background: #E2E8F0;
+}
+
+.btn-search-aliados {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--aliados-verde);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-search-aliados:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+/* ============================================================================
+   4. SECCIÓN: ALIADOS DESTACADOS (10 TARJETAS EN GRID 5x2)
+   ============================================================================ */
+.aliados-showcase-section {
+  padding: 30px 0 50px;
+}
+
+.aliados-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.aliados-title-group h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--aliados-noche);
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aliados-title-group h2 i {
+  color: #F59E0B;
+}
+
+.aliados-title-group p {
+  margin: 0;
+  color: var(--aliados-muted);
+  font-size: 0.92rem;
+}
+
+.aliados-head-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.aliados-view-all-link {
+  color: var(--aliados-petroleo);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.aliados-view-all-link:hover {
+  color: var(--aliados-naranja);
+}
+
+.aliados-nav-arrows {
+  display: flex;
+  gap: 6px;
+}
+
+.aliados-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--aliados-border);
+  background: #FFFFFF;
+  color: var(--aliados-noche);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.aliados-arrow-btn:hover {
+  background: var(--aliados-petroleo);
+  color: #FFFFFF;
+  border-color: var(--aliados-petroleo);
+}
+
+/* Grilla de 5 columnas para 10 aliados */
+.aliados-grid-exact {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.aliado-card-exact {
+  background: #FFFFFF;
+  border: 1px solid var(--aliados-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.aliado-card-exact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+.aliado-img-box {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+
+.aliado-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.aliado-card-exact:hover .aliado-card-img {
+  transform: scale(1.05);
+}
+
+.aliado-fav-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  backdrop-filter: blur(4px);
+}
+
+.aliado-verified-pill {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(16, 185, 129, 0.92);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.aliado-card-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.aliado-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--aliados-noche);
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+
+.aliado-card-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--aliados-muted);
+  margin-bottom: 6px;
+}
+
+.aliado-card-location i {
+  color: var(--aliados-naranja);
+}
+
+.aliado-card-desc {
+  font-size: 0.75rem;
+  color: #475569;
+  line-height: 1.4;
+  margin: 0 0 10px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.aliado-card-audit {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  color: var(--aliados-muted);
+  margin-bottom: 12px;
+  border-top: 1px dashed var(--aliados-border);
+  padding-top: 6px;
+}
+
+.aliado-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.btn-aliado-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #10B981;
+  color: #FFFFFF;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn-aliado-whatsapp:hover {
+  background-color: #059669;
+}
+
+.btn-aliado-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: #F1F5F9;
+  color: var(--aliados-noche);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--aliados-border);
+  transition: all 0.2s;
+}
+
+.btn-aliado-profile:hover {
+  background: #E2E8F0;
+}
+
+/* ============================================================================
+   5. SECCIÓN SPLIT: MAPA DE ALIADOS + CERCANOS VERIFICADOS
+   ============================================================================ */
+.aliados-map-split-section {
+  padding: 20px 0 50px;
+}
+
+.aliados-map-split-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.aliados-map-card {
+  position: relative;
+  background: #0B253A;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.aliados-map-header-overlay {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 500;
+  max-width: 320px;
+  background: rgba(11, 37, 58, 0.88);
+  backdrop-filter: blur(10px);
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.aliados-map-header-overlay h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.aliados-map-header-overlay p {
+  font-size: 0.78rem;
+  color: #CBD5E1;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.btn-ver-mapa-completo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--aliados-naranja);
+  color: #FFFFFF;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.aliados-map-viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+}
+
+/* Columna derecha: Aliados cercanos y verificados */
+.aliados-nearby-box {
+  background: #FFFFFF;
+  border: 1px solid var(--aliados-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.aliados-nearby-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--aliados-border);
+}
+
+.aliados-nearby-head h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--aliados-noche);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.aliados-nearby-head h4 i {
+  color: var(--aliados-petroleo);
+}
+
+.aliados-nearby-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--aliados-muted);
+  text-decoration: none;
+}
+
+.aliados-nearby-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.aliado-nearby-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #F8FAFC;
+  border: 1px solid var(--aliados-border);
+}
+
+.aliado-nearby-img {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.aliado-nearby-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.aliado-nearby-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--aliados-noche);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.aliado-nearby-loc {
+  font-size: 0.72rem;
+  color: var(--aliados-muted);
+  margin: 0 0 2px;
+}
+
+.aliado-nearby-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: #059669;
+  font-weight: 600;
+}
+
+.aliado-nearby-arrow {
+  color: var(--aliados-muted);
+  font-size: 0.85rem;
+  padding-right: 4px;
+}
+
+/* ============================================================================
+   6. SECCIÓN: ¿CÓMO VERIFICAMOS A NUESTROS ALIADOS? (8 PASOS)
+   ============================================================================ */
+.aliados-verification-section {
+  padding: 40px 0;
+  background: #FFFFFF;
+  border-top: 1px solid var(--aliados-border);
+  border-bottom: 1px solid var(--aliados-border);
+}
+
+.aliados-verif-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.aliados-verif-head h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--aliados-noche);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aliados-verif-head p {
+  color: var(--aliados-muted);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.aliados-verif-link {
+  color: var(--aliados-petroleo);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.aliados-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.aliado-step-card {
+  background: #F8FAFC;
+  border: 1px solid var(--aliados-border);
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aliado-step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(22, 93, 111, 0.1);
+  color: var(--aliados-petroleo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.aliado-step-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--aliados-noche);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.aliado-step-desc {
+  font-size: 0.65rem;
+  color: var(--aliados-muted);
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* ============================================================================
+   7. SECCIÓN DE IMPACTO EN NUESTRAS COMUNIDADES
+   ============================================================================ */
+.aliados-impact-section {
+  padding: 50px 0;
+}
+
+.aliados-impact-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.3) 100%),
+              url('../../assets/images/comida/delicias del norte.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  color: #FFFFFF;
+}
+
+.aliados-impact-content {
+  max-width: 600px;
+}
+
+.aliados-impact-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.aliados-impact-desc {
+  font-size: 0.9rem;
+  color: #CBD5E1;
+  margin: 0 0 24px;
+}
+
+.aliados-impact-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.aliados-impact-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aliados-impact-stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--aliados-crema);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.aliados-impact-stat-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1;
+}
+
+.aliados-impact-stat-lbl {
+  font-size: 0.68rem;
+  color: #CBD5E1;
+  margin: 0;
+}
+
+.aliados-impact-quote-side {
+  margin-left: auto;
+  text-align: right;
+  max-width: 280px;
+}
+
+.aliados-impact-quote-side p {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--aliados-crema);
+  line-height: 1.3;
+  margin: 0 0 8px;
+}
+
+/* ============================================================================
+   8. BANNER: ¿TENÉS UN NEGOCIO TURÍSTICO?
+   ============================================================================ */
+.aliados-biz-cta-section {
+  padding: 10px 0 40px;
+}
+
+.aliados-biz-cta-card {
+  background: #FFFFFF;
+  border: 1px solid var(--aliados-border);
+  border-radius: 16px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.aliados-biz-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.aliados-biz-bird {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.aliados-biz-text h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--aliados-noche);
+  margin: 0 0 4px;
+}
+
+.aliados-biz-text p {
+  font-size: 0.85rem;
+  color: var(--aliados-muted);
+  margin: 0;
+  max-width: 520px;
+}
+
+.btn-postular-negocio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--aliados-naranja);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(246, 94, 1, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-postular-negocio:hover {
+  background-color: #E05300;
+  transform: translateY(-2px);
+}
+
+.aliados-biz-badges {
+  display: flex;
+  gap: 16px;
+}
+
+.aliados-biz-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--aliados-noche);
+}
+
+.aliados-biz-pill i {
+  color: var(--aliados-petroleo);
+  font-size: 1.1rem;
+}
+
+/* ============================================================================
+   9. TIRA DE 3 ACCIONES INFERIOR
+   ============================================================================ */
+.aliados-triad-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 10px 0 50px;
+}
+
+.aliados-triad-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.aliados-triad-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.aliados-triad-item.sos {
+  background: #DC2626;
+}
+
+.aliados-triad-item.digital {
+  background: var(--aliados-petroleo);
+}
+
+.aliados-triad-item.explore {
+  background: #0284C7;
+}
+
+.triad-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.triad-left i {
+  font-size: 1.4rem;
+}
+
+.triad-text h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 2px;
+}
+
+.triad-text p {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.triad-arrow {
+  font-size: 1rem;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN (BREAKPOINTS)
+   ============================================================================ */
+@media (max-width: 1200px) {
+  .aliados-grid-exact {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .aliados-steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .aliados-grid-exact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .aliados-map-split-grid {
+    grid-template-columns: 1fr;
+  }
+  .aliados-impact-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .aliados-triad-strip {
+    grid-template-columns: 1fr;
+  }
+  .aliados-biz-cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .aliados-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .aliados-hero-stamp {
+    display: none;
+  }
+  .aliados-grid-exact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .aliados-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .aliados-filter-bar {
+    flex-direction: column;
+  }
+  .aliados-filter-group {
+    width: 100%;
+  }
+  .btn-search-aliados, .btn-near-me {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .aliados-grid-exact {
+    grid-template-columns: 1fr;
+  }
+  .aliados-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

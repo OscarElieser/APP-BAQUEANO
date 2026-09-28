@@ -5,956 +5,1017 @@
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Conectar sensorial y espiritualmente al explorador con las raíces sonoras
-  de Nicaragua mediante la marimba de arco de Masaya, la guitarra campesina y
-  las creaciones inmortales de los grandes maestros del son nica.
-- Difundir y preservar el folklore tradicional sin barreras ni publicidad intrusiva.
+- Conectar sensorial y culturalmente al explorador con las raíces musicales
+  de Nicaragua: el Son Nica de Camilo Zapata, la marimba de arco de Masaya,
+  la trova de Carlos y Luis Enrique Mejía Godoy, y los ritmos del Caribe.
+- Preservar y difundir el archivo sonoro soberano sin muros de pago ni anuncios.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Reproductor HTML5 Audio nativo orquestado por js/audio-player.js.
-- Tarjetas interactivas con estado dinámico de reproducción a 1 toque.
-- Estética inmersiva con gradientes volcánicos, resplandores dorados y ecualizador animado.
+- Alineación 1:1 con la interfaz de referencia oficial (Imagen 1).
+- Reproductor de audio HTML5 enriquecido con visualizador de onda y estado persistente.
+- Mapeo interactivo Leaflet de los ritmos y sonidos por departamento.
+- Barra sticky flotante en la parte inferior para reproducción ininterrumpida.
+- Conexión reactiva con Baqueano Digital para recomendaciones personalizadas.
 
-📦 3. QUÉ (WHAT / CONTENIDOS):
-- Reproductor Épico Soberano con Tornamesa Virtual, Vinilo y Ecualizador de Espectro Hi-Fi.
-- Catálogo Integral de Folklore Campesino, Son Nica y Música Revolucionaria Histórica.
-- Galería Interactiva de 16 Maestros y Compositores de la Patria.
-- Footer Institucional Soberano alineado con los 4 canales oficiales.
+📦 3. QUÉ (WHAT / CONTENIDOS & FUNCIONALIDAD):
+- Hero editorial "EL SONIDO DE NICARAGUA SIGUE VIVO".
+- Reproductor destacado bajo el hero con ficha técnica.
+- 7 Géneros musicales de Nicaragua.
+- 8 Artistas y compositores insignes de la patria.
+- Mapa sonoro interactivo con pines de ritmos y filtro territorial.
+- 4 Hitos de historia viva del sonido pinolero.
+- 6 Instrumentos vernáculos de nuestra tierra.
+- Archivo sonoro con buscador en vivo y catálogo de 93 piezas.
+- Módulo Baqueano Digital con chips temáticos.
+- Reproductor inferior permanente.
 ============================================================================
 -->
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Patrimonio Sonoro Folclórico | Baqueano Nicaragua</title>
-  <meta name="description" content="Escucha a un toque las obras maestras de la música tradicional de Nicaragua: La Mora Limpia, El Solar de Monimbó, Marimba y son nica.">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <title>Música &amp; Patrimonio Sonoro | Baqueano Nicaragua</title>
+  <meta name="description" content="Música, identidad y tradición que conectan nuestra gente. Escucha son nica, marimba, trova campesina y ritmos del Caribe.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
 
-  <!-- Google Fonts Oficiales -->
+  <!-- Tipografías Oficiales Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome Icons -->
+  <!-- Iconografía FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Estilos Modulares Baqueano -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
-  <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
-  <link rel="stylesheet" href="css/nicaragua-branding.css">
-  <link rel="stylesheet" href="css/pages/musica.css">
-  <style id="musica-reference-layout">
-    /*
-     * 🎯 POR QUÉ: trasladar la identidad visual de la referencia al archivo sonoro sin perder su catálogo.
-     * ⚙️ CÓMO: una capa editorial responsive reorganiza visualmente hero, reproductor y colecciones existentes.
-     * 📦 QUÉ: portada musical, reproductor destacado, géneros, mapa, historia, instrumentos, asistente y cierre.
-     */
-    :root{--music-navy:#082b48;--music-green:#087b50;--music-orange:#f65e01;--music-cream:#f4e6c1}
-    .page-musica{background:#f7fafc;color:var(--music-navy)}.page-musica .video-hero-wrapper{height:48vh;min-height:450px;max-height:590px}.page-musica .video-hero-media{filter:saturate(1.18) contrast(1.05)}.page-musica .video-hero-gradient{background:linear-gradient(90deg,rgba(2,19,32,.94),rgba(5,31,39,.65) 46%,rgba(3,25,37,.1) 78%)}.page-musica .video-hero-content{width:min(670px,88vw);left:max(6vw,calc((100vw - 1440px)/2));top:50%;transform:translateY(-48%)}.page-musica .video-hero-badge{border:0!important;background:transparent!important;padding:0!important;letter-spacing:.2em;text-transform:uppercase}.page-musica .video-hero-title{font-size:clamp(2.7rem,5vw,5rem);line-height:.88;text-transform:uppercase;text-shadow:0 5px 18px rgba(0,0,0,.55)}.music-title-orange{display:block;color:var(--music-orange)}.page-musica .video-hero-subtitle{max-width:580px;font-size:1.05rem;line-height:1.42}.music-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}.music-hero-actions a{display:inline-flex;align-items:center;gap:.55rem;padding:.8rem 1.25rem;border:1px solid #fff;border-radius:999px;color:#fff;background:rgba(2,20,34,.52);font-weight:800;text-decoration:none;backdrop-filter:blur(12px)}.music-hero-actions a:first-child{border-color:var(--music-orange);background:var(--music-orange)}
-    .page-musica .page-wrapper{padding-top:0!important}.page-musica .environmental-section-pro{padding:0 0 2rem;background:linear-gradient(#fff,#f5f9fc)}.page-musica .environmental-section-pro>.container{max-width:1460px}.page-musica .epic-music-section{position:relative;z-index:5;margin-top:-46px}.page-musica .epic-player-chassis{border:4px solid #fff;border-radius:18px;background:linear-gradient(100deg,#092c47,#154c5a 58%,#05263e);box-shadow:0 16px 34px rgba(4,31,48,.24)}.page-musica .epic-player-main-grid{min-height:auto}.page-musica .epic-turntable-deck{transform:scale(.83)}.page-musica .archive-editorial-note{display:none}.page-musica .epic-music-search{border-radius:12px}.page-musica .epic-playlist-tracks-grid{max-height:360px;overflow-y:auto}.page-musica .music-player-panel{margin-top:1.3rem;border:0;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(8,43,72,.1)}.page-musica .sonora-artists-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}.page-musica .section-lead-header{text-align:left}.page-musica .impacts-hex-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.page-musica .impact-hex-card{border-radius:12px;clip-path:none;background:#fff;box-shadow:0 5px 18px rgba(8,43,72,.09)}
-    .music-section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin:1.4rem 0 .65rem}.music-section-head h2{margin:0;font-size:1.55rem}.music-section-head p{margin:.2rem 0 0;color:#526d81}.music-card-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.music-image-card{position:relative;overflow:hidden;min-height:125px;border-radius:10px;color:#fff;background:#123}.music-image-card img{width:100%;height:100%;min-height:125px;object-fit:cover;transition:transform .3s}.music-image-card:hover img{transform:scale(1.06)}.music-image-card div{position:absolute;inset:auto 0 0;padding:.75rem;background:linear-gradient(transparent,rgba(1,16,27,.94))}.music-image-card h3,.music-image-card p{margin:0}.music-image-card h3{font-size:.87rem}.music-image-card p{font-size:.68rem}.music-map-layout{display:grid;grid-template-columns:3fr 1fr;gap:14px;margin:1.4rem 0}.music-map-card{position:relative;min-height:350px;overflow:hidden;padding:1.5rem;border-radius:14px;color:#fff;background:linear-gradient(90deg,rgba(2,28,49,.96),rgba(2,38,56,.24)),url('assets/images/destinos/isla_de_ometepe.jpg') center/cover;box-shadow:0 10px 24px rgba(8,43,72,.16)}.music-map-card h2{max-width:260px;margin:0;font-size:2rem}.music-map-card p{max-width:300px;line-height:1.5}.music-map-btn{display:inline-flex;margin-top:.8rem;padding:.8rem 1.15rem;border-radius:999px;color:#fff;background:var(--music-orange);font-weight:800;text-decoration:none}.music-note-cloud{position:absolute;right:8%;bottom:12%;display:grid;grid-template-columns:repeat(3,56px);gap:25px}.music-note-cloud i{display:grid;width:56px;height:56px;place-items:center;border:4px solid #fff;border-radius:50%;background:#099560;box-shadow:0 8px 18px #0018}.music-note-cloud i:nth-child(even){background:#1686ef}.music-territory-card{overflow:hidden;border-radius:14px;color:#fff;background:#082b48;box-shadow:0 10px 24px rgba(8,43,72,.15)}.music-territory-card img{width:100%;height:235px;object-fit:cover}.music-territory-card div{padding:1rem}.music-territory-card h3{margin:0}.music-instruments{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.music-instrument{overflow:hidden;border-radius:10px;background:#fff;box-shadow:0 5px 15px rgba(8,43,72,.1)}.music-instrument img{width:100%;height:115px;object-fit:cover}.music-instrument div{padding:.7rem}.music-instrument h3,.music-instrument p{margin:0}.music-instrument h3{font-size:.86rem}.music-instrument p{font-size:.7rem;color:#526d81}.music-ai-strip{display:flex;align-items:center;gap:1.2rem;margin:1.5rem 0 0;padding:1rem 1.4rem;border-radius:15px;background:linear-gradient(100deg,#e7f7ff,#fff 52%,#fff1dc);box-shadow:0 7px 20px rgba(8,43,72,.1)}.music-ai-strip img{width:100px}.music-ai-strip h2{margin:.1rem 0;color:#063aa7}.music-ai-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-left:auto}.music-ai-chips span{padding:.55rem .8rem;border:1px solid #dbe5eb;border-radius:999px;background:#fff;font-size:.72rem;font-weight:700}.music-final-banner{display:flex;align-items:end;justify-content:space-between;min-height:260px;margin-top:1.5rem;padding:clamp(1.5rem,4vw,4rem);color:#fff;background:linear-gradient(90deg,rgba(2,24,39,.82),rgba(2,24,39,.08)),url('assets/images/footer-nicaragua-panorama.png') center/cover}.music-final-banner h2{max-width:530px;margin:0;font-family:"Brush Script MT",cursive;font-size:clamp(2.3rem,4.5vw,4.5rem);line-height:.9}.music-final-banner a{padding:.85rem 1.2rem;border-radius:999px;color:#fff;background:var(--music-orange);font-weight:800;text-decoration:none}
-    @media(max-width:1100px){.page-musica .sonora-artists-grid{grid-template-columns:repeat(4,1fr)}.music-card-grid{grid-template-columns:repeat(4,1fr)}.music-instruments{grid-template-columns:repeat(3,1fr)}.page-musica .impacts-hex-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:720px){.page-musica .video-hero-wrapper{height:76vh;min-height:610px}.page-musica .video-hero-content{top:44%}.page-musica .epic-music-section{margin-top:-25px}.page-musica .epic-player-chassis{border-width:2px}.page-musica .sonora-artists-grid,.music-card-grid,.music-instruments{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}.music-image-card,.music-instrument{flex:0 0 72vw;scroll-snap-align:start}.music-map-layout{grid-template-columns:1fr}.music-territory-card{display:none}.music-ai-strip{align-items:flex-start;flex-direction:column}.music-ai-chips{margin-left:0}.music-final-banner{align-items:flex-start;flex-direction:column}.page-musica .impacts-hex-grid{grid-template-columns:1fr}}
-  </style>
-</head>
-<body class="has-video-hero page-musica">
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
-  <nav class="main-navbar" id="mainNavbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-        <div class="brand-text">
-          <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+  <!-- Hojas de Estilos del Ecosistema -->
+  <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/pages/musica-exact.css?v=20260927-exact-1">
+</head>
+
+<body class="page-musica-exact">
+
+  <!-- ============================================================================
+       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL (IDÉNTICA A LAS IMÁGENES 1-4)
+       ============================================================================ -->
+  <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container">
+      <!-- Izquierda: Logotipo Oficial -->
+      <a href="index.html" class="exact-brand" aria-label="Volver al inicio de Baqueano">
+        <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="exact-logo-img">
+        <div class="exact-brand-text">
+          <span class="exact-brand-name">BAQUEANO</span>
+          <span class="exact-brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+      <!-- Centro: Enlaces Horizontales de Primer Nivel -->
+      <div class="exact-nav-links" id="exactNavLinks" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem">Inicio</a>
+        <a href="destinos.html" class="exact-nav-link" role="menuitem">Destinos</a>
+        <a href="mapa.html" class="exact-nav-link" role="menuitem">Mapa</a>
+        <a href="experiencias.html" class="exact-nav-link" role="menuitem">Experiencias</a>
+        <a href="baqueano-ai.html" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem">Mi Viaje</a>
+        <a href="musica.html" class="exact-nav-link active" role="menuitem">Música</a>
+        <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
-          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
+        <!-- Menú Desplegable 'Más ∨' -->
+        <div class="exact-nav-dropdown" id="navDropdownMas">
+          <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Más <i class="fa-solid fa-chevron-down exact-caret"></i>
           </button>
-          <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
-            </a>
-            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
-            </a>
-            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
-            </a>
-            <a href="musica.html" class="nav-dropdown-item active" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
-            </a>
+          <div class="exact-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf"></i> Custodia Ambiental</a>
+            <a href="historia.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-landmark"></i> Historia &amp; Memoria</a>
+            <a href="gastronomia.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
+            <a href="aliados.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake"></i> Red de Aliados</a>
+            <a href="nosotros.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-users"></i> Quiénes Somos</a>
+            <a href="denuncias.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-shield-halved"></i> Canal de Denuncias</a>
           </div>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- BOTÓN NOSOTROS -->
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Comando & Telemetría</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">● 24/7</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
       </div>
 
-      <div class="nav-actions-right">
-        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
-          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
-        </button>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+      <!-- Derecha: Acciones de Usuario -->
+      <div class="exact-nav-actions">
+        <a href="destinos.html" class="exact-icon-btn" title="Buscar" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="perfil.html" class="exact-icon-btn" title="Favoritos" aria-label="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <span class="exact-lang-switch" title="Idioma">ES | EN</span>
+        <a href="perfil.html" class="btn-exact-login" role="button">Iniciar sesión</a>
+
+        <!-- Botón Hamburguesa Móvil -->
+        <button type="button" class="exact-burger-btn" id="burgerToggle" aria-label="Abrir menú" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- VIDEO HERO CINEMATOGRÁFICO DE MÚSICA -->
-  <div class="video-hero-wrapper">
-    <video class="video-hero-media" autoplay loop muted playsinline preload="metadata" poster="assets/images/destinos/isla_de_ometepe.jpg">
-      <source src="https://video-previews.elements.envatousercontent.com/h264-video-previews/7a0fcda5-1f91-4c6e-8260-264bc80fe3ea/24016149.mp4" type="video/mp4">
-      <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
-    </video>
-    <div class="video-hero-gradient"></div>
-    <div class="video-hero-scanlines"></div>
-    <div class="video-hero-content">
-      <div class="video-hero-badge musica-inline-001">
-        <i class="fa-solid fa-music"></i> Galería Sonora de Nicaragua
-      </div>
-      <h1 class="video-hero-title">El sonido de <span class="music-title-orange">Nicaragua</span> sigue vivo</h1>
-      <p class="video-hero-subtitle">
-        Compositores históricos, creadores del Son Nica, cantautores de nueva canción, maestros de la música clásica y ritmos caribeños. Descubre las obras inmortales y la tierra donde nacieron.
-      </p>
-      <div class="music-hero-actions"><a href="#epicMusicPlayer"><i class="fa-solid fa-circle-play"></i> Escuchar ahora →</a><a href="#mapaSonoro"><i class="fa-solid fa-location-dot"></i> Explorar mapa sonoro</a></div>
-    </div>
-    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
-  </div>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper has-hero-header">
-    <section class="environmental-section-pro">
-      <div class="container">
-        <!-- =================================================================
-             REPRODUCTOR ÉPICO BAQUEANO: TORNAMESA VIRTUAL & MÚSICA DE LA PATRIA
-             ================================================================= -->
-        <div class="epic-music-section" id="epicMusicPlayer">
-          <div class="epic-player-chassis" id="epicPlayerChassis">
-            <div class="epic-player-topbar">
-              <div class="epic-brand-tag">
-                <div class="epic-brand-icon-box">
-                  <i class="fa-solid fa-compact-disc fa-spin-pulse"></i>
-                </div>
-                <div class="epic-brand-titles">
-                  <h2>Archivo Sonoro BAQUEANO</h2>
-                  <p>93 grabaciones preservadas · atribuciones solo con respaldo documental</p>
-                </div>
-              </div>
-              <div class="epic-player-badges">
-                <span class="epic-badge-pill epic-badge-hi-res"><i class="fa-solid fa-box-archive"></i> 93 MP3 disponibles</span>
-                <span class="epic-badge-pill epic-badge-heritage"><i class="fa-solid fa-shield-halved"></i> Catálogo responsable</span>
-              </div>
-            </div>
-
-            <!-- Panel Central: Vinilo + Metadatos + Espectro -->
-            <div class="epic-player-main-grid">
-              <!-- Deck del Vinilo -->
-              <div class="epic-turntable-deck">
-                <div class="epic-vinyl-platter" id="epicVinylPlatter">
-                  <div class="epic-vinyl-grooves"></div>
-                  <div class="epic-vinyl-label">
-                    <img src="assets/images/destinos/volcan_masaya.jpg" alt="Portada de la Obra" id="epicVinylImg">
-                  </div>
-                  <div class="epic-vinyl-center-hole"></div>
-                </div>
-                <!-- Brazo Tonearm -->
-                <div class="epic-tonearm">
-                  <div class="epic-tonearm-base"></div>
-                  <div class="epic-tonearm-arm"></div>
-                  <div class="epic-tonearm-head"></div>
-                </div>
-              </div>
-
-              <!-- Información y Controles de la Pista Actual -->
-              <div class="epic-player-info-col">
-                <div class="epic-track-metadata-box">
-                  <span class="epic-track-genre-pill" id="epicTrackGenre">
-                    <i class="fa-solid fa-circle-check"></i> Ficha verificada
-                  </span>
-                  <h3 class="epic-track-title-now" id="epicTrackTitle">La Mora Limpia</h3>
-                  <div class="epic-track-author-now">
-                    <span id="epicTrackArtist"><i class="fa-solid fa-microphone-lines"></i> Justo Santos</span>
-                    <span class="epic-track-territory-tag" id="epicTrackTerritory">• Rivas • Segundo Himno Nacional</span>
-                  </div>
-                </div>
-
-                <!-- Visualizador de Frecuencias de Audio -->
-                <div class="epic-visualizer-container" id="epicSpectrumVisualizer" aria-label="Ecualizador de audio en tiempo real">
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                  <div class="epic-spectrum-bar"></div>
-                </div>
-
-                <!-- Línea de Tiempo / Scrubber -->
-                <div class="epic-timeline-wrap">
-                  <input type="range" class="epic-scrubber-slider" id="epicScrubber" min="0" max="100" value="0" aria-label="Control de posición de audio">
-                  <div class="epic-timestamps">
-                    <span id="epicCurrentTime">0:00</span>
-                    <span id="epicDurationTime">3:15</span>
-                  </div>
-                </div>
-
-                <!-- Botonera de Control Táctil -->
-                <div class="epic-controls-cluster">
-                  <div class="epic-mode-toggles">
-                    <button type="button" class="epic-btn-mode" id="epicShuffleBtn" title="Modo Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
-                    <button type="button" class="epic-btn-mode" id="epicRepeatBtn" title="Repetir Canción"><i class="fa-solid fa-repeat"></i></button>
-                  </div>
-
-                  <div class="epic-main-transport">
-                    <button type="button" class="epic-btn-step" id="epicPrevBtn" title="Canción Anterior"><i class="fa-solid fa-backward-step"></i></button>
-                    <button type="button" class="epic-btn-play-hero" id="epicPlayBtn" title="Reproducir"><i class="fa-solid fa-play"></i></button>
-                    <button type="button" class="epic-btn-step" id="epicNextBtn" title="Siguiente Canción"><i class="fa-solid fa-forward-step"></i></button>
-                  </div>
-
-                  <div class="epic-volume-wrap">
-                    <button type="button" class="epic-btn-mute" id="epicMuteBtn" title="Silenciar / Activar sonido"><i class="fa-solid fa-volume-high"></i></button>
-                    <input type="range" class="epic-volume-slider" id="epicVolumeSlider" min="0" max="1" step="0.05" value="0.85" aria-label="Control de volumen">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <aside class="archive-editorial-note" aria-label="Criterio editorial del archivo sonoro">
-              <i class="fa-solid fa-file-shield"></i>
-              <div><strong>Escuchar no equivale a atribuir.</strong> Las pistas verificadas enlazan composición, interpretación y tradición cuando existe respaldo. Las demás siguen disponibles en este reproductor, marcadas para revisión, sin inventar créditos ni procedencias.</div>
-            </aside>
-
-            <!-- BUSCADOR GENERAL DEL ARCHIVO MUSICAL -->
-            <section class="epic-music-search" role="search" aria-labelledby="epicMusicSearchTitle">
-              <div class="epic-music-search-copy">
-                <span class="epic-music-search-kicker"><i class="fa-solid fa-magnifying-glass"></i> Explorador musical</span>
-                <h3 id="epicMusicSearchTitle">Busca canciones, artistas y géneros</h3>
-                <p>Consulta todo el archivo por título, intérprete, agrupación, género, crédito o territorio.</p>
-              </div>
-              <div class="epic-music-search-control">
-                <i class="fa-solid fa-music" aria-hidden="true"></i>
-                <input type="search" id="epicMusicSearchInput" autocomplete="off" spellcheck="false" placeholder="Ej. cumbia, Katia Cardenal, marimba, Managua..." aria-describedby="epicMusicSearchStatus">
-                <button type="button" id="epicMusicSearchClear" aria-label="Limpiar búsqueda musical" title="Limpiar búsqueda"><i class="fa-solid fa-xmark"></i></button>
-              </div>
-              <div class="epic-music-search-status" id="epicMusicSearchStatus" role="status" aria-live="polite">Mostrando todo el archivo musical</div>
-            </section>
-
-            <!-- Selector de estado documental -->
-            <div class="epic-playlist-tabs">
-              <button type="button" class="epic-tab-btn is-active"><i class="fa-solid fa-box-archive"></i> Archivo completo (93)</button>
-            </div>
-
-            <!-- Grilla Dinámica de Canciones -->
-            <div class="epic-playlist-tracks-grid" id="epicPlaylistGrid">
-              <!-- Renderizado dinámicamente por epic-music-player.js -->
-            </div>
-          </div>
-        </div>
-
-
-        <section aria-labelledby="musicGenresTitle">
-          <div class="music-section-head"><div><h2 id="musicGenresTitle">🎵 Explorá por géneros</h2><p>Ritmos que cuentan la historia de nuestra tierra.</p></div><a href="#epicPlaylistGrid">Ver todos los géneros →</a></div>
-          <div class="music-card-grid">
-            <article class="music-image-card"><img src="assets/artistas/camilo zapata.jpg" alt="Son Nica"><div><h3>Son Nica</h3><p>Ritmo e identidad</p></div></article>
-            <article class="music-image-card"><img src="assets/artistas/La Marimba de Arco de Monimbó.jpg" alt="Marimba"><div><h3>Marimba</h3><p>Sonido ancestral</p></div></article>
-            <article class="music-image-card"><img src="assets/artistas/carlos mejia godoy.jpg" alt="Nueva Canción"><div><h3>Nueva Canción</h3><p>Voz del pueblo</p></div></article>
-            <article class="music-image-card"><img src="assets/artistas/Música de El Güegüense.jpg" alt="Folclor"><div><h3>Folclor</h3><p>Tradición viva</p></div></article>
-            <article class="music-image-card"><img src="assets/artistas/Dimensión Costeña.jpg" alt="Caribe"><div><h3>Caribe</h3><p>Ritmos del Atlántico</p></div></article>
-            <article class="music-image-card"><img src="assets/artistas/José de la Cruz Mena.jpg" alt="Música clásica"><div><h3>Música Clásica</h3><p>Legado universal</p></div></article>
-            <article class="music-image-card"><img src="assets/artistas/justo santos.jpg" alt="Música tradicional"><div><h3>Tradicional</h3><p>Raíces de nuestra tierra</p></div></article>
-          </div>
-        </section>
-
-        <!-- CONSOLA FOLCLÓRICA BAQUEANO -->
-        <div class="music-player-panel">
-          <div class="sonora-console-bar">
-            <div class="musica-inline-002">
-              <div class="musica-inline-003">
-                <i class="fa-solid fa-compact-disc"></i>
-              </div>
-              <div>
-                <div class="musica-inline-004">
-                  <h3 class="musica-inline-005">Consola Sonora Baqueano</h3>
-                  <div class="sonora-wave-anim" id="sonoraWaveAnimation">
-                    <div class="sonora-wave-bar"></div>
-                    <div class="sonora-wave-bar"></div>
-                    <div class="sonora-wave-bar"></div>
-                    <div class="sonora-wave-bar"></div>
-                  </div>
-                </div>
-                <div id="currentTrackDisplay" class="musica-inline-006">
-                  <i class="fa-solid fa-circle-play"></i> Selecciona un compositor u obra para iniciar el viaje sonoro
-                </div>
-              </div>
-            </div>
-
-            <div class="musica-inline-002">
-              <button class="btn-hero-glass musica-inline-007" id="btnStopSonoraPlayback">
-                <i class="fa-solid fa-stop"></i> Detener
-              </button>
-              <div class="musica-inline-008">
-                <i class="fa-solid fa-shield-halved"></i> PATRIMONIO EDUCATIVO MINED
-              </div>
-            </div>
-          </div>
-
-          <!-- BARRA DE BÚSQUEDA TÁCTICA -->
-          <div class="musica-inline-009">
-            <div class="sonora-search-bar">
-              <i class="fa-solid fa-magnifying-glass sonora-search-icon"></i>
-              <input type="text" id="sonoraSearchInput" class="sonora-search-input" placeholder="Buscar artista, canción o territorio (ej. Camilo Zapata, Mora Limpia, Somoto)...">
-              <button class="sonora-search-clear" id="sonoraSearchClear" title="Limpiar"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="musica-inline-010">
-              Toca <strong>«Escuchar»</strong> para la melodía o <strong>«Ficha»</strong> para su biografía y territorio.
-            </div>
-          </div>
-
-          <!-- FILTROS POR LAS 4 CATEGORÍAS MUSICALES -->
-          <div class="sonora-categories-bar" id="sonoraCategoryPills">
-            <!-- Renderizado dinámico desde sonora-data.js -->
-          </div>
-
-          <!-- GRID DOCUMENTAL DE COMPOSITORES, INTÉRPRETES Y AGRUPACIONES -->
-          <div class="sonora-artists-grid" id="sonoraArtistsGrid">
-            <!-- Generado dinámicamente -->
-          </div>
-
-          <!-- Elemento de Audio Oculto -->
-          <audio id="globalFolkloreAudio" preload="none"></audio>
-        </div>
-
-        <!-- CONTEXTO CULTURAL & HISTÓRICO RIGUROSO -->
-        <div class="section-lead-header musica-inline-011">
-          <div class="badge-section-pill"><i class="fa-solid fa-landmark"></i> Pilares de la Identidad Musical</div>
-          <h2 class="section-headline">Historia Viva del Sonido Pinolero</h2>
-          <p class="section-subtext">Fundamentos rítmicos, organología y obras cumbres reconocidas por el Ministerio de Educación.</p>
-        </div>
-
-        <div class="impacts-hex-grid">
-          <div class="impact-hex-card">
-            <div class="impact-icon-circle"><i class="fa-solid fa-guitar"></i></div>
-            <h3 class="impact-card-title">El Son Nica de Camilo Zapata</h3>
-            <p class="impact-card-desc">
-              Creado en compás de 6/8 con acentuación única en el tercer tiempo, imitando el zapateo y el contoneo
-              del campesino pinolero en el baile popular.
-            </p>
-          </div>
-
-          <div class="impact-hex-card">
-            <div class="impact-icon-circle"><i class="fa-solid fa-music"></i></div>
-            <h3 class="impact-card-title">La Mora Limpia de Justo Santos</h3>
-            <p class="impact-card-desc">
-              Compuesta en 1946 por el rivense Justo Santos, es unánimemente reconocida como el segundo himno nacional de Nicaragua, capturando la luz y fertilidad del campo.
-            </p>
-          </div>
-
-          <div class="impact-hex-card">
-            <div class="impact-icon-circle"><i class="fa-solid fa-drum"></i></div>
-            <h3 class="impact-card-title">La Marimba de Arco Indígena</h3>
-            <p class="impact-card-desc">
-              Construida con teclas de madera de ñábaro o coyote y calabazas de jícaro como resonadores.
-              Monimbó (Masaya) es la capital artesanal de este instrumento sagrado.
-            </p>
-          </div>
-
-          <div class="impact-hex-card">
-            <div class="impact-icon-circle"><i class="fa-solid fa-masks-theater"></i></div>
-            <h3 class="impact-card-title">El Güegüense y la Resistencia</h3>
-            <p class="impact-card-desc">
-              Melodías centenarias de pito de caña y tamboril que satirizan a la autoridad colonial con humor inteligente
-              y dignidad popular. Patrimonio de la Humanidad por la UNESCO.
-            </p>
-          </div>
-        </div>
-
-        <!-- ================================================================
-             🎯 POR QUÉ: relacionar música, territorio e instrumentos nacionales.
-             ⚙️ CÓMO: módulos visuales usan imágenes y rutas locales ya disponibles.
-             📦 QUÉ: mapa sonoro, territorio destacado, instrumentos y recomendador.
-             ================================================================ -->
-        <section class="music-map-layout" id="mapaSonoro" aria-label="Mapa sonoro de Nicaragua">
-          <article class="music-map-card"><h2>Mapa sonoro de Nicaragua</h2><p>Explorá cómo suenan nuestros territorios. Descubrí los ritmos, artistas y expresiones musicales de cada región.</p><a class="music-map-btn" href="destinos.html">Abrir mapa interactivo →</a><div class="music-note-cloud" aria-hidden="true"><i class="fa-solid fa-music"></i><i class="fa-solid fa-music"></i><i class="fa-solid fa-drum"></i><i class="fa-solid fa-guitar"></i><i class="fa-solid fa-music"></i><i class="fa-solid fa-drum"></i></div></article>
-          <article class="music-territory-card"><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada"><div><h3>Granada</h3><p>Cuna de compositores, serenatas y tradición musical.</p><a class="music-map-btn" href="destinos.html">Explorar Granada →</a></div></article>
-        </section>
-
-        <section aria-labelledby="instrumentsTitle">
-          <div class="music-section-head"><div><h2 id="instrumentsTitle">🏛️ Instrumentos tradicionales</h2><p>Sonidos que nacen de nuestra tierra.</p></div></div>
-          <div class="music-instruments">
-            <article class="music-instrument"><img src="assets/artistas/La Marimba de Arco de Monimbó.jpg" alt="Marimba de arco"><div><h3>Marimba de Arco</h3><p>Patrimonio de la Humanidad</p></div></article>
-            <article class="music-instrument"><img src="assets/artistas/camilo zapata.jpg" alt="Guitarra nicaragüense"><div><h3>Guitarra Nicaragüense</h3><p>Acompaña nuestra identidad</p></div></article>
-            <article class="music-instrument"><img src="assets/artistas/Música de El Güegüense.jpg" alt="Pito tradicional"><div><h3>Pito</h3><p>Sonidos del pueblo</p></div></article>
-            <article class="music-instrument"><img src="assets/artistas/carlos mejia godoy.jpg" alt="Tambor"><div><h3>Tambor</h3><p>Ritmo que une</p></div></article>
-            <article class="music-instrument"><img src="assets/artistas/Dimensión Costeña.jpg" alt="Quijongo"><div><h3>Quijongo</h3><p>Herencia afroindígena</p></div></article>
-            <article class="music-instrument"><img src="assets/artistas/Fuzion 4.jpg" alt="Percusión"><div><h3>Percusión</h3><p>Energía del Caribe</p></div></article>
-          </div>
-        </section>
-
-        <aside class="music-ai-strip"><img src="assets/images/logo.png" alt="Baqueano Digital"><div><strong>Baqueano Digital</strong><h2>¿Qué música querés disfrutar hoy?</h2><p>Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio.</p></div><div class="music-ai-chips"><span>🎶 Quiero Son Nica</span><span>🥁 Música del Caribe</span><span>🎼 Marimba</span><span>📜 Canciones históricas</span></div></aside>
-
-      </div>
-    </section>
-    <section class="music-final-banner" aria-label="Experiencias musicales de Nicaragua"><h2>Escuchá Nicaragua, conocé su historia</h2><a href="#epicMusicPlayer">Explorar experiencias musicales →</a></section>
-  </main>
-
-  <!-- MODAL DE FICHA ENRIQUECIDA DE ARTISTA (MÚSICA + TERRITORIO) -->
-  <div class="modal-backdrop-pro" id="sonoraArtistModal" aria-hidden="true" role="dialog">
-    <div class="sonora-modal-dialog">
-      <button class="modal-close-x" id="closeSonoraModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div id="sonoraModalContent">
-        <!-- Rellenado dinámicamente -->
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER OFICIAL -->
-    <!-- FOOTER OFICIAL CON IDENTIDAD TERRITORIAL Y TRANSPARENCIA FISCAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
-                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
-              </div>
-
-              <!-- 2. Categoría -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
-                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
-                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
-                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
-                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
-                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
-                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
-                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
-                </select>
-                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
-              </div>
-
-              <!-- 3. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
-              </div>
-
-              <!-- 4. Municipio o Comunidad -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
-                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
-              </div>
-
-              <!-- 5. Nombre del Contacto / Anfitrión -->
-              <div class="biz-field-group">
-                <label for="bizContactName" class="biz-label">
-                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
-                </label>
-                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
-                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
-              </div>
-
-              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
-                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
-                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
-              </div>
-
-              <!-- 7. Correo Electrónico (Opcional) -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
-                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
-              </div>
-
-              <!-- 8. Dirección / Cómo Llegar -->
-              <div class="biz-field-group">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
-                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
-              </div>
-
-              <!-- 9. Breve Descripción del Servicio -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
-                </label>
-                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
-                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
-                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
-              </div>
-
-              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
-                </label>
-                <div class="biz-file-dropzone" id="bizDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
-                  <div class="dropzone-content" id="dropzonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
-                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
-                  </div>
-                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
-                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
-                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
-                      <i class="fa-solid fa-xmark"></i> Quitar
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Botón de Envío y Términos -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
-          <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
-          </div>
-        </div>
-
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
+  <!-- ============================================================================
+       1. HERO MÚSICA (IMAGEN 1)
+       ============================================================================ -->
+  <header class="musica-hero-exact">
+    <div class="exact-container">
+      <div class="musica-hero-grid">
         <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+          <span class="musica-hero-badge">NICARAGUA</span>
+          <h1 class="musica-hero-title">
+            EL SONIDO DE NICARAGUA <span>SIGUE VIVO</span>
+          </h1>
+          <p class="musica-hero-desc">
+            Música, identidad y tradición que conectan nuestra gente y hacen del mundo un lugar más humano.
+          </p>
+          <div class="musica-hero-actions">
+            <button type="button" class="btn-musica-hero-primary" onclick="toggleMainTrack()">
+              <i class="fa-solid fa-play"></i> Escuchar ahora &rarr;
+            </button>
+            <a href="#mapaSonoro" class="btn-musica-hero-secondary">
+              <i class="fa-solid fa-location-dot"></i> Explorar mapa sonoro
+            </a>
+          </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+
+        <div class="musica-hero-stamp">
+          <span>Nuestra música también es paisaje 🍃</span>
         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================
+       2. REPRODUCTOR DESTACADO (IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-featured-player-section">
+    <div class="exact-container">
+      <div class="featured-player-chassis">
+        <!-- Izquierda: Portada + Meta -->
+        <div class="featured-player-left">
+          <div class="featured-player-cover-box">
+            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="featured-player-cover">
+            <div class="featured-player-disc"><i class="fa-solid fa-compact-disc"></i></div>
+          </div>
+          <div class="featured-player-meta">
+            <h4 id="featuredTrackTitle">La Mora Limpia</h4>
+            <span>Justo Santos <button type="button" class="btn-player-heart" title="Me gusta"><i class="fa-regular fa-heart"></i></button></span>
+          </div>
+        </div>
+
+        <!-- Centro: Controles + Onda -->
+        <div class="featured-player-center">
+          <div class="featured-player-waveform" id="waveformVisualizer">
+            <span class="wave-bar" style="height: 12px;"></span>
+            <span class="wave-bar" style="height: 18px;"></span>
+            <span class="wave-bar" style="height: 8px;"></span>
+            <span class="wave-bar" style="height: 22px;"></span>
+            <span class="wave-bar" style="height: 14px;"></span>
+            <span class="wave-bar" style="height: 20px;"></span>
+            <span class="wave-bar" style="height: 16px;"></span>
+            <span class="wave-bar" style="height: 10px;"></span>
+            <span class="wave-bar" style="height: 24px;"></span>
+            <span class="wave-bar" style="height: 15px;"></span>
+            <span class="wave-bar" style="height: 19px;"></span>
+            <span class="wave-bar" style="height: 11px;"></span>
+            <span class="wave-bar" style="height: 21px;"></span>
+            <span class="wave-bar" style="height: 13px;"></span>
+          </div>
+          <div class="featured-player-controls">
+            <button type="button" class="player-ctrl-btn" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
+            <button type="button" class="player-ctrl-btn" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
+            <button type="button" class="player-ctrl-btn play-circle" id="btnMainPlay" onclick="toggleMainTrack()" title="Reproducir">
+              <i class="fa-solid fa-play" id="mainPlayIcon"></i>
+            </button>
+            <button type="button" class="player-ctrl-btn" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
+            <button type="button" class="player-ctrl-btn" title="Repetir"><i class="fa-solid fa-repeat"></i></button>
+          </div>
+        </div>
+
+        <!-- Derecha: Tiempo + Ficha -->
+        <div class="featured-player-right">
+          <span class="player-time-display" id="playerTime">1:24 / 3:52</span>
+          <i class="fa-solid fa-volume-high" style="color: #94A3B8; font-size: 0.85rem;"></i>
+          <input type="range" min="0" max="100" value="80" class="player-volume-slider" aria-label="Volumen">
+          <a href="#archivoSonoro" class="btn-player-ficha">Ver ficha &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       3. SECCIÓN: EXPLORÁ POR GÉNEROS (7 TARJETAS - IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common">
+    <div class="exact-container">
+      <div class="musica-head-row">
+        <div class="musica-head-title">
+          <h2><i class="fa-solid fa-music"></i> Explorá por géneros</h2>
+          <p>Ritmos que cuentan la historia de nuestra tierra.</p>
+        </div>
+        <div class="musica-head-actions">
+          <a href="#archivoSonoro" class="musica-view-link">Ver todos los géneros &rarr;</a>
+          <div class="musica-carousel-arrows">
+            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="musica-genres-grid">
+        <!-- 1. Son Nica -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Son Nica" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Son Nica</h3>
+            <p>Ritmo e identidad</p>
+          </div>
+        </a>
+
+        <!-- 2. Marimba -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Marimba" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Marimba</h3>
+            <p>Sonido ancestral</p>
+          </div>
+        </a>
+
+        <!-- 3. Nueva Canción -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Nueva Canción" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Nueva Canción</h3>
+            <p>Voz del pueblo</p>
+          </div>
+        </a>
+
+        <!-- 4. Folclor -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/Reserva Natural Volcán Mombacho & Bosque Nuboso.jpg" alt="Folclor" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Folclor</h3>
+            <p>Tradición viva</p>
+          </div>
+        </a>
+
+        <!-- 5. Caribe -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/corn_island.jpg" alt="Caribe" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Caribe</h3>
+            <p>Ritmos del Atlántico</p>
+          </div>
+        </a>
+
+        <!-- 6. Música Clásica -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/hotel_dario.jpg" alt="Música Clásica" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Música Clásica</h3>
+            <p>Legado universal</p>
+          </div>
+        </a>
+
+        <!-- 7. Tradicional -->
+        <a href="#archivoSonoro" class="genre-card-exact">
+          <img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Tradicional" class="genre-card-bg">
+          <div class="genre-card-overlay"></div>
+          <div class="genre-card-content">
+            <h3>Tradicional</h3>
+            <p>Raíces de nuestra tierra</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       4. SECCIÓN: ARTISTAS Y COMPOSITORES (8 AVATARES - IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common">
+    <div class="exact-container">
+      <div class="musica-head-row">
+        <div class="musica-head-title">
+          <h2><i class="fa-solid fa-user-group"></i> Artistas y compositores</h2>
+          <p>Voces que han puesto a Nicaragua en el corazón del mundo.</p>
+        </div>
+        <div class="musica-head-actions">
+          <a href="#archivoSonoro" class="musica-view-link">Ver todos los artistas &rarr;</a>
+          <div class="musica-carousel-arrows">
+            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="musica-artists-grid">
+        <!-- 1. Camilo Zapata -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/cerro_negro.jpg" alt="Camilo Zapata" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Camilo Zapata</h4>
+          <p class="artist-tagline">El poeta de la montaña</p>
+        </div>
+
+        <!-- 2. Justo Santos -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Justo Santos" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Justo Santos</h4>
+          <p class="artist-tagline">Ícono del Son Nica</p>
+        </div>
+
+        <!-- 3. Carlos Mejía Godoy -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/volcan_masaya.jpg" alt="Carlos Mejía Godoy" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Carlos Mejía Godoy</h4>
+          <p class="artist-tagline">Voz de nuestra gente</p>
+        </div>
+
+        <!-- 4. Luis Enrique Mejía Godoy -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/dona_haydee.jpg" alt="Luis Enrique Mejía Godoy" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Luis Enrique Mejía Godoy</h4>
+          <p class="artist-tagline">Canciones que nos unen</p>
+        </div>
+
+        <!-- 5. Salvador Cardenal -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/hotel_dario.jpg" alt="Salvador Cardenal" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Salvador Cardenal</h4>
+          <p class="artist-tagline">Alma de Nicaragua</p>
+        </div>
+
+        <!-- 6. Katia Cardenal -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Katia Cardenal" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Katia Cardenal</h4>
+          <p class="artist-tagline">Música con sentido</p>
+        </div>
+
+        <!-- 7. Norma Helena Gadea -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Norma Helena Gadea" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Norma Helena Gadea</h4>
+          <p class="artist-tagline">La flor de la canción</p>
+        </div>
+
+        <!-- 8. Alejandro Vega Matus -->
+        <div class="artist-card-exact">
+          <div class="artist-avatar-wrap">
+            <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Alejandro Vega Matus" class="artist-avatar-img">
+          </div>
+          <h4 class="artist-name">Alejandro Vega Matus</h4>
+          <p class="artist-tagline">Cronista musical</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       5. SECCIÓN SPLIT: MAPA SONORO DE NICARAGUA (IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common" id="mapaSonoro">
+    <div class="exact-container">
+      <div class="musica-map-split-grid">
+        <!-- Izquierda: Mapa de Ritmos Leaflet -->
+        <div class="musica-map-card">
+          <div class="musica-map-left-overlay">
+            <h3><i class="fa-solid fa-map-location-dot"></i> Mapa sonoro de Nicaragua</h3>
+            <p>Explorá cómo suenan nuestros territorios. Descubrí los ritmos, artistas y expresiones musicales de cada región.</p>
+            <a href="mapa.html" class="btn-open-sound-map">
+              Abrir mapa interactivo &rarr;
+            </a>
+          </div>
+
+          <!-- Filtro Flotante Sobre el Mapa -->
+          <div class="musica-map-filter-box">
+            <h5>Filtrar mapa sonoro</h5>
+            <select class="musica-filter-select" id="soundFilterDepto" aria-label="Filtrar departamento">
+              <option value="">Departamento: Todos</option>
+              <option value="masaya">Masaya (Marimba)</option>
+              <option value="granada">Granada (Serenatas)</option>
+              <option value="leon">León (Trova)</option>
+              <option value="caribe">Caribe (Palo de Mayo)</option>
+              <option value="matagalpa">Matagalpa (Polkas)</option>
+            </select>
+            <select class="musica-filter-select" id="soundFilterGenre" aria-label="Filtrar género">
+              <option value="">Género musical: Todos</option>
+              <option value="son-nica">Son Nica</option>
+              <option value="marimba">Marimba</option>
+              <option value="caribe">Caribe</option>
+            </select>
+            <select class="musica-filter-select" id="soundFilterEpoch" aria-label="Filtrar época">
+              <option value="">Época: Todos</option>
+              <option value="tradicional">Tradicional</option>
+              <option value="moderno">Contemporáneo</option>
+            </select>
+            <button type="button" class="btn-map-filter-search" id="btnSoundMapSearch">Buscar</button>
+          </div>
+
+          <div id="musicaInteractiveMap" class="musica-map-viewport"></div>
+        </div>
+
+        <!-- Derecha: Ficha de Destino Musical (Granada) -->
+        <div class="musica-featured-dest-card">
+          <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Granada Musical" class="featured-dest-img">
+          <div class="featured-dest-body">
+            <h4>Granada</h4>
+            <p>Cuna de compositores, serenatas y tradición musical frente al Gran Lago Cocibolca.</p>
+            <a href="departamento.html?depto=granada" class="btn-explore-musical-dest">
+              Explorar Granada &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       6. SECCIÓN: HISTORIA VIVA DEL SONIDO PINOLERO (4 TARJETAS - IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common">
+    <div class="exact-container">
+      <div class="musica-head-row">
+        <div class="musica-head-title">
+          <h2><i class="fa-solid fa-book-open"></i> Historia viva del sonido pinolero</h2>
+          <p>Momentos, expresiones y movimientos que marcaron nuestra identidad.</p>
+        </div>
+        <div class="musica-head-actions">
+          <a href="historia.html" class="musica-view-link">Ver toda la historia &rarr;</a>
+          <div class="musica-carousel-arrows">
+            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="musica-history-grid">
+        <!-- 1. El Son Nica -->
+        <a href="#archivoSonoro" class="history-card-exact">
+          <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="El Son Nica" class="history-card-bg">
+          <div class="history-card-overlay"></div>
+          <div class="history-card-content">
+            <div class="history-card-info">
+              <h3>El Son Nica</h3>
+              <p>Raíces de un pueblo</p>
+            </div>
+            <span class="history-card-arrow">&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 2. La Mora Limpia -->
+        <a href="#archivoSonoro" class="history-card-exact">
+          <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="history-card-bg">
+          <div class="history-card-overlay"></div>
+          <div class="history-card-content">
+            <div class="history-card-info">
+              <h3>La Mora Limpia</h3>
+              <p>La canción que nos representa</p>
+            </div>
+            <span class="history-card-arrow">&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 3. Marimba de Arco -->
+        <a href="#archivoSonoro" class="history-card-exact">
+          <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Marimba de Arco" class="history-card-bg">
+          <div class="history-card-overlay"></div>
+          <div class="history-card-content">
+            <div class="history-card-info">
+              <h3>Marimba de Arco</h3>
+              <p>Patrimonio ancestral</p>
+            </div>
+            <span class="history-card-arrow">&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 4. El Güegüense -->
+        <a href="#archivoSonoro" class="history-card-exact">
+          <img src="assets/images/destinos/dona_haydee.jpg" alt="El Güegüense" class="history-card-bg">
+          <div class="history-card-overlay"></div>
+          <div class="history-card-content">
+            <div class="history-card-info">
+              <h3>El Güegüense</h3>
+              <p>Arte, sátira y resistencia</p>
+            </div>
+            <span class="history-card-arrow">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       7. SECCIÓN: INSTRUMENTOS TRADICIONALES (6 TARJETAS - IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common">
+    <div class="exact-container">
+      <div class="musica-head-row">
+        <div class="musica-head-title">
+          <h2><i class="fa-solid fa-guitar"></i> Instrumentos tradicionales</h2>
+          <p>Sonidos que nacen de nuestra tierra.</p>
+        </div>
+        <div class="musica-head-actions">
+          <a href="#archivoSonoro" class="musica-view-link">Ver todos los instrumentos &rarr;</a>
+          <div class="musica-carousel-arrows">
+            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="musica-instruments-grid">
+        <!-- 1. Marimba de Arco -->
+        <div class="instrument-card-exact">
+          <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Marimba de Arco" class="instrument-img">
+          <div class="instrument-body">
+            <h4>Marimba de Arco</h4>
+            <p>Patrimonio de la Humanidad</p>
+          </div>
+        </div>
+
+        <!-- 2. Guitarra Nicaragüense -->
+        <div class="instrument-card-exact">
+          <img src="assets/images/destinos/cerro_negro.jpg" alt="Guitarra Nicaragüense" class="instrument-img">
+          <div class="instrument-body">
+            <h4>Guitarra Nicaragüense</h4>
+            <p>Acompaña nuestra identidad</p>
+          </div>
+        </div>
+
+        <!-- 3. Pito -->
+        <div class="instrument-card-exact">
+          <img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Pito" class="instrument-img">
+          <div class="instrument-body">
+            <h4>Pito</h4>
+            <p>Sonidos del pueblo</p>
+          </div>
+        </div>
+
+        <!-- 4. Tambor -->
+        <div class="instrument-card-exact">
+          <img src="assets/images/destinos/volcan_masaya.jpg" alt="Tambor" class="instrument-img">
+          <div class="instrument-body">
+            <h4>Tambor</h4>
+            <p>Ritmo que une</p>
+          </div>
+        </div>
+
+        <!-- 5. Quijongo -->
+        <div class="instrument-card-exact">
+          <img src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Quijongo" class="instrument-img">
+          <div class="instrument-body">
+            <h4>Quijongo</h4>
+            <p>Herencia afroindígena</p>
+          </div>
+        </div>
+
+        <!-- 6. Percusión -->
+        <div class="instrument-card-exact">
+          <img src="assets/images/destinos/corn_island.jpg" alt="Percusión" class="instrument-img">
+          <div class="instrument-body">
+            <h4>Percusión</h4>
+            <p>Energía del Caribe</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       8. SECCIÓN: ARCHIVO SONORO (93 GRABACIONES - 6 CARDS - IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common" id="archivoSonoro">
+    <div class="exact-container">
+      <div class="musica-head-row">
+        <div class="musica-head-title">
+          <h2><i class="fa-solid fa-compact-disc"></i> Archivo sonoro</h2>
+          <p>Grabaciones, canciones y recopilaciones para escuchar y aprender.</p>
+        </div>
+        <div class="musica-head-actions">
+          <span class="musica-archive-count"><strong>93</strong> Grabaciones preservadas</span>
+          <a href="#archivoSonoro" class="musica-view-link">Ver archivo completo &rarr;</a>
+          <div class="musica-carousel-arrows">
+            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buscador del Archivo -->
+      <div class="musica-archive-bar">
+        <div class="musica-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="trackSearchInput" class="musica-search-input" placeholder="Buscar canción, artista, género o territorio..." aria-label="Buscar en archivo sonoro">
+        </div>
+      </div>
+
+      <!-- Grid de 6 Canciones -->
+      <div class="musica-archive-grid" id="tracksGrid">
+        <!-- 1. Son de Mi Tierra -->
+        <div class="track-card-exact" data-title="Son de Mi Tierra" data-artist="Anónimo">
+          <img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Son de Mi Tierra" class="track-thumb">
+          <div class="track-info">
+            <h5 class="track-title">Son de Mi Tierra</h5>
+            <p class="track-artist">Anónimo</p>
+          </div>
+          <button type="button" class="track-play-btn" onclick="playSong('Son de Mi Tierra', 'Anónimo')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+        </div>
+
+        <!-- 2. Sirena del Lago -->
+        <div class="track-card-exact" data-title="Sirena del Lago" data-artist="Camilo Zapata">
+          <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Sirena del Lago" class="track-thumb">
+          <div class="track-info">
+            <h5 class="track-title">Sirena del Lago</h5>
+            <p class="track-artist">Camilo Zapata</p>
+          </div>
+          <button type="button" class="track-play-btn" onclick="playSong('Sirena del Lago', 'Camilo Zapata')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+        </div>
+
+        <!-- 3. Nicaragua Nicaragüita -->
+        <div class="track-card-exact" data-title="Nicaragua Nicaragüita" data-artist="Carlos Mejía Godoy">
+          <img src="assets/images/destinos/volcan_masaya.jpg" alt="Nicaragua Nicaragüita" class="track-thumb">
+          <div class="track-info">
+            <h5 class="track-title">Nicaragua Nicaragüita</h5>
+            <p class="track-artist">Carlos Mejía Godoy</p>
+          </div>
+          <button type="button" class="track-play-btn" onclick="playSong('Nicaragua Nicaragüita', 'Carlos Mejía Godoy')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+        </div>
+
+        <!-- 4. El Solar de Monimbó -->
+        <div class="track-card-exact" data-title="El Solar de Monimbó" data-artist="Luis Enrique Mejía Godoy">
+          <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="El Solar de Monimbó" class="track-thumb">
+          <div class="track-info">
+            <h5 class="track-title">El Solar de Monimbó</h5>
+            <p class="track-artist">Luis Enrique Mejía Godoy</p>
+          </div>
+          <button type="button" class="track-play-btn" onclick="playSong('El Solar de Monimbó', 'Luis Enrique Mejía Godoy')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+        </div>
+
+        <!-- 5. Palo de Mayo -->
+        <div class="track-card-exact" data-title="Palo de Mayo" data-artist="Tradicional">
+          <img src="assets/images/destinos/corn_island.jpg" alt="Palo de Mayo" class="track-thumb">
+          <div class="track-info">
+            <h5 class="track-title">Palo de Mayo</h5>
+            <p class="track-artist">Tradicional</p>
+          </div>
+          <button type="button" class="track-play-btn" onclick="playSong('Palo de Mayo', 'Tradicional')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+        </div>
+
+        <!-- 6. Danza del Güegüense -->
+        <div class="track-card-exact" data-title="Danza del Güegüense" data-artist="Folclor Nacional">
+          <img src="assets/images/destinos/dona_haydee.jpg" alt="Danza del Güegüense" class="track-thumb">
+          <div class="track-info">
+            <h5 class="track-title">Danza del Güegüense</h5>
+            <p class="track-artist">Folclor Nacional</p>
+          </div>
+          <button type="button" class="track-play-btn" onclick="playSong('Danza del Güegüense', 'Folclor Nacional')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       9. SECCIÓN: BAQUEANO DIGITAL ASISTENTE (IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common">
+    <div class="exact-container">
+      <div class="musica-digital-strip">
+        <div class="musica-digital-left">
+          <img src="assets/images/baqui.png" alt="Baqüi Asistente" class="musica-digital-bird">
+          <div class="musica-digital-text">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano Digital: ¿Qué música querés disfrutar hoy?</h3>
+            <p>Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio que estés explorando.</p>
+          </div>
+        </div>
+
+        <div class="musica-digital-chips">
+          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Quiero escuchar el mejor Son Nica tradicional')">🎵 Quiero Son Nica</button>
+          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Recomiéndame música del Caribe y Palo de Mayo')">🌊 Música del Caribe</button>
+          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Música de marimba de Masaya')">🪵 Marimba</button>
+          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Canciones históricas y de la patria')">📜 Canciones históricas</button>
+          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Artistas destacados y compositores')">⭐ Artistas destacados</button>
+          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Rutas musicales de Nicaragua')">🗺️ Rutas musicales</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       10. BANNER ESCÉNICO ATARDECER (IMAGEN 1)
+       ============================================================================ -->
+  <section class="musica-section-common">
+    <div class="exact-container">
+      <div class="musica-sunset-banner">
+        <div class="musica-sunset-text">
+          <h2>Escuchá Nicaragua, conocé su historia</h2>
+          <p>De sus pueblos, su gente y sus paisajes nacen sonidos que trascienden.</p>
+        </div>
+        <a href="experiencias.html" class="btn-musica-sunset">
+          Explorar experiencias musicales &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       11. PIE DE PÁGINA INSTITUCIONAL UNIFICADO (4 COLUMNAS - IMÁGENES 1-4)
+       ============================================================================ -->
+  <footer class="site-footer-exact" role="contentinfo">
+    <div class="exact-container">
+      <div class="footer-grid-exact">
+        <!-- Columna 1: Marca y Redes -->
+        <div class="footer-col-exact">
+          <div class="footer-brand-wrap">
+            <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="footer-logo-img">
+            <div class="footer-brand-text">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-tagline">NICARAGUA AUTÉNTICA</span>
+            </div>
+          </div>
+          <p class="footer-tagline-text">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-row">
+            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com/@baqueanonicaragua" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Explorá -->
+        <div class="footer-col-exact">
+          <h4>Explorá</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ai.html">Baqueano Digital</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Música -->
+        <div class="footer-col-exact">
+          <h4>Música</h4>
+          <ul class="footer-links-list">
+            <li><a href="#archivoSonoro">Géneros</a></li>
+            <li><a href="#archivoSonoro">Artistas</a></li>
+            <li><a href="#archivoSonoro">Instrumentos</a></li>
+            <li><a href="#mapaSonoro">Mapa sonoro</a></li>
+            <li><a href="#archivoSonoro">Archivo sonoro</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Información & Legal -->
+        <div class="footer-col-exact">
+          <h4>Información</h4>
+          <ul class="footer-links-list">
+            <li><a href="nosotros.html">Sobre BAQUEANO</a></li>
+            <li><a href="nosotros.html#blog">Blog</a></li>
+            <li><a href="nosotros.html#contacto">Contacto</a></li>
+            <li><a href="nosotros.html#faqs">Preguntas frecuentes</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Copyright -->
+    <div class="footer-bottom-bar">
+      <div class="exact-container">
+        <span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>
+        <span>Hecho con <i class="fa-solid fa-heart" style="color: #EF4444;"></i> en Nicaragua</span>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL DE AUXILIO SOS -->
-  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
-    <div class="sos-modal-dialog">
-      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="musica-inline-014">
-        <i class="fa-solid fa-triangle-exclamation musica-inline-015"></i>
-        <h3 class="musica-inline-016">Centro de Auxilio SOS 24/7</h3>
-        <p class="musica-inline-017">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+  <!-- ============================================================================
+       12. BARRA STICKY INFERIOR DE REPRODUCCIÓN (IMAGEN 1)
+       ============================================================================ -->
+  <aside class="musica-sticky-bottom-bar" id="stickyMusicBar" aria-label="Reproductor persistente">
+    <div class="sticky-track-info">
+      <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Track Activo" class="sticky-thumb" id="stickyTrackThumb">
+      <div class="sticky-meta">
+        <h5 id="stickyTrackTitle">La Mora Limpia</h5>
+        <span id="stickyTrackArtist">Justo Santos</span>
       </div>
-      <div class="sos-gps-card musica-inline-018">
-        <span class="musica-inline-019">TUS COORDENADAS GPS:</span>
-        <div id="sosGpsDisplay" class="musica-inline-020">Obteniendo señal GPS...</div>
+      <button type="button" class="btn-player-heart" title="Favorito"><i class="fa-regular fa-heart"></i></button>
+    </div>
+
+    <div class="sticky-controls">
+      <button type="button" class="player-ctrl-btn" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
+      <button type="button" class="player-ctrl-btn" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="sticky-btn-play" onclick="toggleMainTrack()" title="Pausar / Reproducir">
+        <i class="fa-solid fa-play" id="stickyPlayIcon"></i>
+      </button>
+      <button type="button" class="player-ctrl-btn" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
+    </div>
+
+    <div class="sticky-progress-wrap">
+      <div class="sticky-progress-bar">
+        <div class="sticky-progress-fill" id="stickyProgressFill"></div>
       </div>
-      <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical musica-inline-021"></i><div><h5 class="musica-inline-022">Cruz Blanca</h5><span class="musica-inline-023">128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher musica-inline-024"></i><div><h5 class="musica-inline-022">Bomberos</h5><span class="musica-inline-023">115</span></div></a>
-        <a href="tel:118" class="sos-phone-card"><i class="fa-solid fa-shield-halved musica-inline-025"></i><div><h5 class="musica-inline-022">Policía Nacional</h5><span class="musica-inline-023">118</span></div></a>
-        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp musica-inline-026"></i><div><h5 class="musica-inline-022">Mesa Baqueano</h5><span class="musica-inline-023">WhatsApp SOS</span></div></a>
+      <span class="player-time-display" id="stickyTimeDisplay">1:24 / 3:52</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <i class="fa-solid fa-volume-high" style="color: #94A3B8; font-size: 0.85rem;"></i>
+      <span style="font-size: 0.75rem; color: #94A3B8;">15 | EN</span>
+      <button type="button" class="player-ctrl-btn" title="Lista de reproducción"><i class="fa-solid fa-list"></i></button>
+    </div>
+  </aside>
+
+  <!-- MODAL SOS -->
+  <div class="exact-modal-backdrop" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
+    <div class="exact-modal-window sos-modal">
+      <button type="button" class="exact-modal-close" onclick="closeSosModal()" aria-label="Cerrar modal">&times;</button>
+      <div class="exact-modal-header">
+        <h3 id="sosModalTitle"><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS &amp; Auxilio Inmediato</h3>
+        <p>Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
       </div>
-      <div class="musica-inline-027">
-        <button class="btn-hero-primary musica-inline-028" id="btnSendWhatsAppSos">
-          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
-        </button>
-        <button class="btn-hero-glass musica-inline-029" id="btnCopyGpsSos">
-          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
-        </button>
+      <div class="sos-gps-card">
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital Autónomo</div>
+        <div class="sos-gps-coords" id="sosGpsDisplay">12.5061° N, 86.7022° W (Referencia Nacional)</div>
+        <small style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin saldo.</small>
+      </div>
+      <div class="sos-emergency-buttons">
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía Nacional (118)</a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Blanca (128)</a>
+        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> Bomberos Unificados (115)</a>
       </div>
     </div>
   </div>
 
-  <!-- MODAL DE DESCARGA DE APK -->
-  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
-    <div class="modal-card-dialog">
-      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 class="musica-inline-030">Instalar Baqueano para Android</h3>
-      <p class="musica-inline-031">Descarga directa del paquete firmado v1.0.0 (Versión Oficial) para tu smartphone Android.</p>
-      <div class="install-steps-vertical">
-        <div class="step-row-item">
-          <div class="step-badge-num">1</div>
-          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro baqueanonicaragua.apk en tu almacenamiento.</p></div>
-        </div>
-        <div class="step-row-item">
-          <div class="step-badge-num">2</div>
-          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
-        </div>
-        <div class="step-row-item">
-          <div class="step-badge-num">3</div>
-          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
-        </div>
-      </div>
-      <div class="musica-inline-032">
-      </div>
-    </div>
-  </div>
+  <!-- Leaflet Map JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 
-  <!-- SDK Firebase & Sincronización Universal CMS -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
+  <script>
+    // --------------------------------------------------------------------------
+    // LÓGICA DE REPRODUCCIÓN & MAPA SONORO
+    // --------------------------------------------------------------------------
+    let isPlaying = false;
 
-  <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/video-registry.js"></script>
-  <script src="js/sonora-data.js"></script>
-  <script src="js/audio-player.js"></script>
-  <script src="js/epic-music-player.js?v=20260926-context-1"></script>
-  <script src="app.js"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+    function toggleMainTrack() {
+      isPlaying = !isPlaying;
+      const mainIcon = document.getElementById('mainPlayIcon');
+      const stickyIcon = document.getElementById('stickyPlayIcon');
+      const wave = document.getElementById('waveformVisualizer');
+
+      if (isPlaying) {
+        if (mainIcon) mainIcon.className = 'fa-solid fa-pause';
+        if (stickyIcon) stickyIcon.className = 'fa-solid fa-pause';
+        if (wave) {
+          Array.from(wave.children).forEach(b => {
+            b.style.height = `${Math.floor(Math.random() * 20) + 8}px`;
+          });
+        }
+      } else {
+        if (mainIcon) mainIcon.className = 'fa-solid fa-play';
+        if (stickyIcon) stickyIcon.className = 'fa-solid fa-play';
+      }
+    }
+
+    function playSong(title, artist) {
+      document.getElementById('featuredTrackTitle').textContent = title;
+      document.getElementById('stickyTrackTitle').textContent = title;
+      document.getElementById('stickyTrackArtist').textContent = artist;
+      isPlaying = false;
+      toggleMainTrack();
+    }
+
+    function askBaquiMusic(query) {
+      if (window.BaqueanoAssistant && typeof window.BaqueanoAssistant.sendUserPrompt === 'function') {
+        window.BaqueanoAssistant.openDrawer();
+        window.BaqueanoAssistant.sendUserPrompt(query);
+      } else {
+        alert(`Baqüi te sugiere las mejores composiciones y rutas para: "${query}".`);
+      }
+    }
+
+    // Inicialización del Mapa Sonoro
+    document.addEventListener('DOMContentLoaded', function () {
+      const mapEl = document.getElementById('musicaInteractiveMap');
+      if (mapEl && typeof L !== 'undefined') {
+        try {
+          const map = L.map('musicaInteractiveMap', {
+            center: [12.6, -85.5],
+            zoom: 7,
+            zoomControl: true,
+            attributionControl: false
+          });
+
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            maxZoom: 18
+          }).addTo(map);
+
+          // Pines Sonoros por Territorio
+          const soundPins = [
+            { name: "Masaya: Cuna de la Marimba de Arco", lat: 11.9700, lng: -86.0900, genre: "Marimba", color: "#F65E01" },
+            { name: "Granada: Serenatas y Compositores", lat: 11.9344, lng: -85.9560, genre: "Clásica y Canción", color: "#165D6F" },
+            { name: "León: Cuna de la Trova y Poesía", lat: 12.4379, lng: -86.8780, genre: "Trova y Son Nica", color: "#8B5CF6" },
+            { name: "Caribe Sur: Palo de Mayo & Afrobeat", lat: 12.0131, lng: -83.7635, genre: "Palo de Mayo", color: "#10B981" },
+            { name: "Matagalpa & Jinotega: Polkas y Mazurcas", lat: 12.9256, lng: -85.9172, genre: "Mazurcas Campesinas", color: "#F59E0B" }
+          ];
+
+          soundPins.forEach(function (s) {
+            L.circleMarker([s.lat, s.lng], {
+              radius: 9,
+              fillColor: s.color,
+              color: '#FFFFFF',
+              weight: 2,
+              opacity: 1,
+              fillOpacity: 0.95
+            }).addTo(map).bindPopup(`<strong>${s.name}</strong><br><span style="color:#0284C7;">Género: ${s.genre}</span>`);
+          });
+
+          setTimeout(() => map.invalidateSize(), 300);
+        } catch (e) {
+          console.warn('[MusicaMap] Error inicializando:', e);
+        }
+      }
+
+      // Filtro de Búsqueda de Canciones
+      const trackSearch = document.getElementById('trackSearchInput');
+      if (trackSearch) {
+        trackSearch.addEventListener('input', function (e) {
+          const val = e.target.value.toLowerCase();
+          const cards = document.querySelectorAll('.track-card-exact');
+          cards.forEach(c => {
+            const t = (c.getAttribute('data-title') || '').toLowerCase();
+            const a = (c.getAttribute('data-artist') || '').toLowerCase();
+            if (t.includes(val) || a.includes(val)) {
+              c.style.display = 'flex';
+            } else {
+              c.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Menú móvil
+      const burger = document.getElementById('burgerToggle');
+      const navLinks = document.getElementById('exactNavLinks');
+      if (burger && navLinks) {
+        burger.addEventListener('click', function () {
+          const isOpen = navLinks.classList.toggle('is-open');
+          burger.setAttribute('aria-expanded', isOpen);
+          if (isOpen) {
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = '#0B253A';
+            navLinks.style.padding = '20px';
+          } else {
+            navLinks.style.display = '';
+          }
+        });
+      }
+    });
+
+    function openSosModal(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const modal = document.getElementById('sosModal');
+      if (modal) {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function closeSosModal() {
+      const modal = document.getElementById('sosModal');
+      if (modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+  </script>
 </body>
+
 </html>

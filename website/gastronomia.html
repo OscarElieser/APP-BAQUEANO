@@ -5,1307 +5,859 @@
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Enaltecer la soberanía alimentaria campesina y la tradición culinaria originaria
-  de Nicaragua, fundamentada en el maíz criollo (hijos del maíz).
-- Orientar al visitante a consumir en comiderías tradicionales y puestos comunitarios,
-  evitando cadenas transnacionales y canalizando los ingresos a las cocineras locales.
+- Enaltecer la soberanía alimentaria popular y la tradición culinaria milenaria
+  de Nicaragua, fundada en el maíz criollo ("Hijos del Maíz").
+- Conectar al explorador con las cocineras tradicionales, comedores populares
+  y mercados locales para generar derrama económica directa a las familias campesinas.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Grid responsivo de tarjetas gastronómicas con imágenes locales de alta resolución.
-- Detalle de ingredientes autóctonos de la milpa (achiote, naranja agria, hojas de plátano,
-  yuca, frijol rojo criollo).
-- Estilo visual de alta gama alineado a la paleta Baqueano con efectos hover dinámicos.
+- Alineación 1:1 con la interfaz de referencia oficial (Imagen 4).
+- Barra horizontal de 8 categorías gastronómicas con filtro instantáneo.
+- Fichas culinarias enriquecidas con modal de historia y recomendación de degustación.
+- Mapa interactivo Leaflet de los sabores y comedores por territorio nacional.
+- Recomendador gastronómico interactivo conectado a Baqueano Digital.
 
-📦 3. QUÉ (WHAT / CONTENIDOS):
-- 14 Platillos Insignes Tradicionales de los 17 Departamentos y Regiones Autónomas.
-- 7 Bebidas Típicas Nacionales (Pinolillo, Cacao con Leche, Chicha de Maíz, Tiste, Pozol, etc.).
-- 6 Dulces y Repostería Típica Nacional (Cajetas de Masaya, Buñuelos, Pío Quinto, Almíbar, etc.).
-- Manifiesto del Maíz Criollo y Soberanía Alimentaria Popular.
-- Footer Institucional Soberano alineado con los 4 canales sociales oficiales.
+📦 3. QUÉ (WHAT / CONTENIDOS & FUNCIONALIDAD):
+- Hero editorial "Gastronomía Ancestral de los Hijos del Maíz".
+- 8 Pastillas de navegación culinaria.
+- 8 Platillos insignia de la patria.
+- Mapa gastronómico interactivo con filtros de precio y tipo de comida.
+- Catálogo de 5 Bebidas autóctonas y 6 Dulces tradicionales.
+- Manifiesto cultural "Somos hombres y mujeres de maíz".
+- 4 Comedores tradicionales verificados.
+- Asistente de rutas culinarias con Baqüi.
 ============================================================================
 -->
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Gastronomía Ancestral del Maíz | Baqueano Nicaragua</title>
-  <meta name="description" content="Descubre los sabores sagrados de la cocina nicaragüense: Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho e Indio Viejo.">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <title>Gastronomía Ancestral de los Hijos del Maíz | Baqueano Nicaragua</title>
+  <meta name="description" content="Sabores, tradiciones y saberes que dan vida a nuestra cultura. Descubrí Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho, Rondón e Indio Viejo.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
 
-  <!-- Google Fonts Oficiales -->
+  <!-- Tipografías Oficiales Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome Icons -->
+  <!-- Iconografía FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Estilos Modulares Baqueano -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
-  <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
-  <link rel="stylesheet" href="css/nicaragua-branding.css">
-  <link rel="stylesheet" href="css/pages/gastronomia.css">
-  <style id="gastronomia-reference-layout">
-    /*
-     * 🎯 POR QUÉ: reproducir la narrativa visual gastronómica suministrada sin perder el catálogo existente.
-     * ⚙️ CÓMO: una capa responsive reutiliza el hero, las tarjetas y los recursos actuales.
-     * 📦 QUÉ: hero editorial, categorías, catálogos compactos, mapa, relato, comercios y cierre fotográfico.
-     */
-    :root{--gastro-navy:#092a46;--gastro-green:#087b50;--gastro-orange:#f65e01;--gastro-cream:#f4e6c1}
-    .page-gastronomia{background:#f7fafc;color:var(--gastro-navy)}
-    .page-gastronomia .video-hero-wrapper{min-height:430px;height:56vh;max-height:610px;margin-top:0}
-    .page-gastronomia .video-hero-media{filter:saturate(1.16) contrast(1.04)}
-    .page-gastronomia .video-hero-gradient{background:linear-gradient(90deg,rgba(2,18,31,.94),rgba(3,29,36,.7) 43%,rgba(3,25,37,.1) 76%),linear-gradient(0deg,rgba(0,20,32,.3),transparent 48%)}
-    .page-gastronomia .video-hero-content{width:min(700px,88vw);left:max(5vw,calc((100vw - 1440px)/2));top:50%;transform:translateY(-46%)}
-    .page-gastronomia .video-hero-badge{background:transparent;border:0;padding:0;letter-spacing:.18em;text-transform:uppercase}
-    .page-gastronomia .video-hero-title{max-width:700px;font-size:clamp(2.5rem,5vw,5.2rem);line-height:.9;text-shadow:0 4px 18px rgba(0,0,0,.5)}
-    .gastro-title-accent{color:var(--gastro-orange);font-family:"Brush Script MT","Segoe Script",cursive;font-weight:700}
-    .page-gastronomia .video-hero-subtitle{max-width:620px;margin-top:1.1rem;font-size:clamp(.95rem,1.35vw,1.2rem);line-height:1.45}
-    .gastro-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.35rem}.gastro-hero-actions a{display:inline-flex;align-items:center;gap:.65rem;min-height:48px;padding:.75rem 1.45rem;border:1px solid rgba(255,255,255,.8);border-radius:999px;color:#fff;background:rgba(2,20,34,.58);font-weight:800;text-decoration:none;backdrop-filter:blur(12px)}.gastro-hero-actions a:first-child{border-color:var(--gastro-orange);background:var(--gastro-orange);box-shadow:0 10px 24px rgba(246,94,1,.28)}
-    .gastro-category-shell{position:relative;z-index:4;width:min(1440px,94vw);margin:-28px auto 0;padding:8px;border-radius:15px;background:rgba(255,255,255,.97);box-shadow:0 14px 38px rgba(15,23,42,.16)}.gastro-categories{display:grid;grid-template-columns:repeat(8,minmax(90px,1fr));overflow-x:auto}.gastro-category{min-width:108px;padding:.75rem .45rem;border-right:1px solid #e5ebef;color:var(--gastro-navy);text-align:center;text-decoration:none;font-size:.74rem;font-weight:700}.gastro-category i{display:block;margin-bottom:.35rem;color:#07945b;font-size:1.35rem}.gastro-category:first-child{border-radius:11px;color:#fff;background:var(--gastro-green)}.gastro-category:first-child i{color:#fff}
-    .page-gastronomia .page-wrapper{padding-top:0!important}.page-gastronomia .destinations-section-pro{padding:2rem 0 0;background:linear-gradient(180deg,#fff,#f7fafc 52%,#fff)}.page-gastronomia .destinations-section-pro>.container{max-width:1480px}.page-gastronomia .gastro-section-header{margin:1.25rem 0 .85rem;text-align:left}.page-gastronomia .gastro-section-badge{display:none}.page-gastronomia .gastro-section-title{margin:0;color:var(--gastro-navy);font-size:clamp(1.35rem,2vw,2rem)}.page-gastronomia .gastro-section-desc{max-width:none;margin:.25rem 0 0;color:#456177;font-size:.9rem}
-    .page-gastronomia .gastronomy-grid,.page-gastronomia .sweets-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}.page-gastronomia .gastro-card{overflow:hidden;min-width:0;border:1px solid #e1e8ed;border-radius:11px;background:#fff;box-shadow:0 5px 14px rgba(9,42,70,.08);transform:none}.page-gastronomia .gastro-card:hover{transform:translateY(-4px);box-shadow:0 12px 25px rgba(9,42,70,.15)}.page-gastronomia .gastro-img-wrap{height:135px}.page-gastronomia .gastro-img{width:100%;height:100%;object-fit:cover}.page-gastronomia .gastro-body{padding:.7rem}.page-gastronomia .gastro-title{margin:.1rem 0 .35rem;font-size:.88rem;line-height:1.15;color:var(--gastro-navy)}.page-gastronomia .gastro-origin-tag,.page-gastronomia .gastro-ingredients{font-size:.66rem;line-height:1.3}.page-gastronomia .gastro-desc,.page-gastronomia .gastronomia-inline-001{display:-webkit-box;overflow:hidden;margin:.35rem 0;color:#587083;font-size:.68rem;line-height:1.35;-webkit-box-orient:vertical;-webkit-line-clamp:3}.page-gastronomia .gastro-footer-meta{gap:.3rem;flex-wrap:wrap;font-size:.61rem}
-    .gastro-feature-grid{display:grid;grid-template-columns:1.03fr 1fr;gap:16px;margin:1.2rem 0}.gastro-map-card,.gastro-maiz-story,.gastro-ai-card,.gastro-venues{overflow:hidden;border-radius:15px;box-shadow:0 8px 24px rgba(9,42,70,.12)}.gastro-map-card{position:relative;min-height:420px;padding:1.35rem;color:#fff;background:linear-gradient(90deg,rgba(3,30,51,.95),rgba(3,30,51,.24)),url('assets/images/destinos/isla_de_ometepe.jpg') center/cover}.gastro-map-card h2{max-width:290px;margin:0;font-size:2rem}.gastro-map-card p{max-width:275px;line-height:1.5}.gastro-map-markers{position:absolute;right:7%;bottom:8%;display:grid;grid-template-columns:repeat(3,58px);gap:28px;transform:rotate(-8deg)}.gastro-map-markers i{display:grid;width:58px;height:58px;place-items:center;border:4px solid #fff;border-radius:50%;color:#fff;background:var(--gastro-orange);box-shadow:0 8px 18px rgba(0,0,0,.28)}.gastro-map-markers i:nth-child(even){background:#07945b}.gastro-map-btn,.gastro-story-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:.75rem;padding:.8rem 1.15rem;border-radius:999px;color:#fff;background:var(--gastro-orange);font-weight:800;text-decoration:none}.gastro-maiz-story{min-height:270px;margin-top:14px;padding:1.5rem;color:#fff;background:linear-gradient(90deg,rgba(8,27,25,.94),rgba(8,27,25,.25)),url('assets/images/comida/delicias del norte.jpg') center/cover}.gastro-maiz-story h2{margin:0 0 .6rem;font-size:1.8rem}.gastro-maiz-story p{max-width:520px;line-height:1.5}.gastro-ai-card{display:flex;align-items:center;gap:1.2rem;margin-top:14px;padding:1.2rem;background:linear-gradient(110deg,#e7f7ff,#fff 55%,#fff1dc)}.gastro-ai-card img{width:110px;height:110px;object-fit:contain}.gastro-ai-card h2{margin:.2rem 0;color:#063aa7}.gastro-venues{padding:1.1rem;background:#fff}.gastro-venues h2{margin:0 0 .2rem}.venue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:1rem}.venue-card{overflow:hidden;border:1px solid #dfe8ed;border-radius:10px}.venue-card img{width:100%;height:110px;object-fit:cover}.venue-card div{padding:.65rem}.venue-card h3{margin:0 0 .3rem;font-size:.88rem}.venue-card a{color:var(--gastro-green);font-size:.72rem;font-weight:800;text-decoration:none}
-    .gastro-final-banner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:240px;margin-top:2rem;padding:clamp(1.5rem,4vw,4rem);color:#fff;background:linear-gradient(90deg,rgba(2,25,38,.88),rgba(2,25,38,.12)),url('assets/images/footer-nicaragua-panorama.png') center/cover}.gastro-final-banner h2{max-width:590px;margin:0;font-size:clamp(1.8rem,3.6vw,3.4rem);line-height:1.02}.gastro-final-actions{display:flex;flex-wrap:wrap;gap:.7rem}.gastro-final-actions a{padding:.8rem 1.2rem;border:1px solid #fff;border-radius:999px;color:#fff;font-weight:800;text-decoration:none}.gastro-final-actions a:first-child{border-color:var(--gastro-orange);background:var(--gastro-orange)}.page-gastronomia .calc-panel-box.gastronomia-inline-002{display:none}
-    @media(max-width:1100px){.page-gastronomia .gastronomy-grid,.page-gastronomia .sweets-grid{grid-template-columns:repeat(4,1fr)}.gastro-feature-grid{grid-template-columns:1fr}}
-    @media(max-width:720px){.page-gastronomia .video-hero-wrapper{min-height:600px;height:78vh}.page-gastronomia .video-hero-content{top:46%}.gastro-category-shell{width:100%;margin:-18px 0 0;border-radius:14px 14px 0 0}.gastro-categories{display:flex}.page-gastronomia .destinations-section-pro{padding-top:1rem}.page-gastronomia .gastronomy-grid,.page-gastronomia .sweets-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.65rem}.page-gastronomia .gastro-card{flex:0 0 76vw;scroll-snap-align:start}.gastro-feature-grid{display:block}.gastro-map-card{min-height:360px}.gastro-final-banner{align-items:flex-start;flex-direction:column}.venue-grid{grid-template-columns:1fr 1fr}}
-  </style>
-</head>
-<body class="has-video-hero page-gastronomia">
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
-  <nav class="main-navbar" id="mainNavbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-        <div class="brand-text">
-          <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+  <!-- Hojas de Estilos del Ecosistema -->
+  <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/pages/gastronomia-exact.css?v=20260927-exact-1">
+</head>
+
+<body class="page-gastro-exact">
+
+  <!-- ============================================================================
+       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL (IDÉNTICA A LAS IMÁGENES 1-4)
+       ============================================================================ -->
+  <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container">
+      <!-- Izquierda: Logotipo Oficial -->
+      <a href="index.html" class="exact-brand" aria-label="Volver al inicio de Baqueano">
+        <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="exact-logo-img">
+        <div class="exact-brand-text">
+          <span class="exact-brand-name">BAQUEANO</span>
+          <span class="exact-brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+      <!-- Centro: Enlaces Horizontales de Primer Nivel -->
+      <div class="exact-nav-links" id="exactNavLinks" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem">Inicio</a>
+        <a href="destinos.html" class="exact-nav-link" role="menuitem">Destinos</a>
+        <a href="mapa.html" class="exact-nav-link" role="menuitem">Mapa</a>
+        <a href="experiencias.html" class="exact-nav-link" role="menuitem">Experiencias</a>
+        <a href="baqueano-ai.html" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem">Mi Viaje</a>
+        <a href="gastronomia.html" class="exact-nav-link active" role="menuitem">Gastronomía</a>
+        <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
-          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
+        <!-- Menú Desplegable 'Más ∨' -->
+        <div class="exact-nav-dropdown" id="navDropdownMas">
+          <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Más <i class="fa-solid fa-chevron-down exact-caret"></i>
           </button>
-          <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
-            </a>
-            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
-            </a>
-            <a href="gastronomia.html" class="nav-dropdown-item active" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
-            </a>
-            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
-            </a>
+          <div class="exact-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf"></i> Custodia Ambiental</a>
+            <a href="historia.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-landmark"></i> Historia &amp; Memoria</a>
+            <a href="musica.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-music"></i> Son Sonoro Folk</a>
+            <a href="aliados.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake"></i> Red de Aliados</a>
+            <a href="nosotros.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-users"></i> Quiénes Somos</a>
+            <a href="denuncias.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-shield-halved"></i> Canal de Denuncias</a>
           </div>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- BOTÓN NOSOTROS -->
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Comando & Telemetría</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">● 24/7</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
       </div>
 
-      <div class="nav-actions-right">
-        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
-          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
-        </button>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+      <!-- Derecha: Acciones de Usuario -->
+      <div class="exact-nav-actions">
+        <a href="destinos.html" class="exact-icon-btn" title="Buscar" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="perfil.html" class="exact-icon-btn" title="Favoritos" aria-label="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <span class="exact-lang-switch" title="Idioma">ES | EN</span>
+        <a href="perfil.html" class="btn-exact-login" role="button">Iniciar sesión</a>
+
+        <!-- Botón Hamburguesa Móvil -->
+        <button type="button" class="exact-burger-btn" id="burgerToggle" aria-label="Abrir menú" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- VIDEO HERO CINEMATOGRÁFICO DE GASTRONOMÍA -->
-  <div class="video-hero-wrapper">
-    <video class="video-hero-media" autoplay loop muted playsinline preload="metadata" poster="assets/images/comida/delicias del norte.jpg" aria-label="Gastronomía tradicional de Nicaragua">
-      <source src="https://www.visitanicaragua.com/wp-content/uploads/2026/09/gastro.mp4" type="video/mp4">
-      <source src="assets/videos/gastronomia.mp4" type="video/mp4">
-    </video>
-    <div class="video-hero-gradient"></div>
-    <div class="video-hero-scanlines"></div>
-    <div class="video-hero-content">
-      <div class="video-hero-badge">
-        <i class="fa-solid fa-bowl-rice"></i> Patrimonio Gastronómico
-      </div>
-      <h1 class="video-hero-title">Gastronomía Ancestral<br>de los <span class="gastro-title-accent">Hijos del Maíz</span></h1>
-      <p class="video-hero-subtitle">
-        Nicaragua sabe a fogón de leña, a nixtamal al amanecer y a hojas de chagüite al vapor.
-        Nuestra cocina es la resistencia viva de nuestras abuelas indígenas y campesinas.
-      </p>
-      <div class="gastro-hero-actions">
-        <a href="#platillosInsignes"><i class="fa-solid fa-utensils"></i> Explorar sabores <span aria-hidden="true">→</span></a>
-        <a href="#dondeProbarlo"><i class="fa-solid fa-location-dot"></i> Dónde probarlo</a>
-      </div>
-    </div>
-    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
-  </div>
-
-  <nav class="gastro-category-shell" aria-label="Categorías gastronómicas">
-    <div class="gastro-categories">
-      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-bowl-food"></i>Platos típicos</a>
-      <a class="gastro-category" href="#bebidasTipicas"><i class="fa-solid fa-bottle-water"></i>Bebidas</a>
-      <a class="gastro-category" href="#dulcesTipicos"><i class="fa-solid fa-candy-cane"></i>Dulces</a>
-      <a class="gastro-category" href="#historiaMaiz"><i class="fa-solid fa-wheat-awn"></i>Maíz ancestral</a>
-      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-water"></i>Caribe</a>
-      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-water"></i>Pacífico</a>
-      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-mountain-sun"></i>Norte</a>
-      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-volcano"></i>Centro</a>
-    </div>
-  </nav>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper has-hero-header">
-    <section class="destinations-section-pro">
-      <div class="container">
-        <!-- GRID GASTRONÓMICO -->
-                <!-- =================================================================
-             SECCIÓN 1: PLATILLOS INSIGNES Y COSTUMBRES CULINARIAS
-             ================================================================= -->
-        <div class="gastro-section-header" id="platillosInsignes">
-          <div class="gastro-section-badge">
-            <i class="fa-solid fa-utensils"></i> Fogón Tradicional
-          </div>
-          <h2 class="gastro-section-title">Sabores que cuentan nuestra historia</h2>
-          <p class="gastro-section-desc">
-            Sabores auténticos cocinados en ollas de barro y leña de quebracho a lo largo de los 17 territorios administrativos: 15 departamentos y 2 regiones autónomas, desde el Pacífico ganadero hasta la Costa Caribe multicultural.
-          </p>
-        </div>
-
-        <div class="gastronomy-grid">
-          <!-- Platillo 1: Gallo Pinto -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <img src="assets/images/comida/gallo_pinto.jpg" alt="Gallo Pinto Nicaragüense" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <h3 class="gastro-title">Gallo Pinto Campesino</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Arroz, frijol rojo criollo, cebolla picada y chiltoma frita en manteca.</div>
-              <p class="gastronomia-inline-001">
-                El corazón de la mesa nicaragüense. Preparado con frijol cocido del día anterior y frito hasta dorar. Se acompaña de queso frito, maduro frito y tortilla caliente de maíz blanco.
-              </p>
-            </div>
-          </div>
-
-          <!-- Platillo 2: Nacatamal -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <img src="assets/images/comida/nacatamal.jpg" alt="Nacatamal Criollo" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <h3 class="gastro-title">Nacatamal de Domingo</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Masa de maíz nixtamalizado, cerdo marinado en naranja agria y hojas de plátano.</div>
-              <p class="gastronomia-inline-001">
-                Monumental banquete envuelto en hojas de chagüite. Relleno de tocino, papa, arroz, tomate, hierbabuena, pasas y chile congo. Cocido a fuego lento durante 5 horas.
-              </p>
-            </div>
-          </div>
-
-          <!-- Platillo 3: Vigorón -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <img src="assets/images/comida/vigoron.jpg" alt="Vigorón de Granada" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <h3 class="gastro-title">Vigorón Granadino</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Yuca cocida harinosa, chicharrón crujiente con carne y ensalada de repollo.</div>
-              <p class="gastronomia-inline-001">
-                Nacido bajo los laureles de la Plaza Central de Granada. Servido tradicionalmente sobre hoja de plátano fresca, aderezado con vinagre de guineo y muserola de mimbro.
-              </p>
-            </div>
-          </div>
-
-          <!-- Platillo 4: Quesillo -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <img src="assets/images/comida/quesillo.jpg" alt="Quesillo Nagaroteño" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <h3 class="gastro-title">Quesillo Chontaleño y de Nagarote</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Queso tierno elástico, tortilla caliente, cebollita en vinagre negro y crema espesa.</div>
-              <p class="gastronomia-inline-001">
-                Manjar artesanal servido envuelto en papel plástico o chimbomba. Una explosión láctea de la cuenca ganadera de Chontales y el Pacífico occidental.
-              </p>
-            </div>
-          </div>
-
-          <!-- Platillo 5: Baho -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <img src="assets/images/comida/baho.jpg" alt="Baho Tradicional" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <h3 class="gastro-title">Baho Criollo</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Carne de res cecina curada al sol, plátano verde, plátano maduro y yuca al vapor.</div>
-              <p class="gastronomia-inline-001">
-                Cocinado al vapor durante la noche entera en una olla sellada con hojas de plátano. La carne se deshace al toque y el maduro aporta una dulzura acaramelada inigualable.
-              </p>
-            </div>
-          </div>
-
-          <!-- Platillo 6: Indio Viejo -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <img src="assets/images/comida/indio_viejo.jpg" alt="Indio Viejo Ancestral" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <h3 class="gastro-title">Indio Viejo Ancestral</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Masa de maíz desmoronada, carne de res mechada, hierbabuena fresca y achiote.</div>
-              <p class="gastronomia-inline-001">
-                Uno de los guisos prehispánicos más antiguos de América Latina. Su textura cremosa aromatizada con naranja agria y hierbabuena es símbolo de fiesta patronal campesina.
-              </p>
-            </div>
-          </div>
-
-          <!-- Platillo 7: Rondón Costeño -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-water"></i> Caribe</span>
-              <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Rondón Caribeño Costeño" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Costa Caribe Norte y Sur</span>
-              <h3 class="gastro-title">Rondón Costeño Tradicional</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Leche de coco fresca, pescado o mariscos, yuca, malanga, quequisque y fruta de pan.</div>
-              <p class="gastro-desc">
-                Emblema culinario afrodescendiente e indígena miskito y creole. La leche de coco extraída a mano cocina a fuego lento los tubérculos caribeños hasta formar un caldo aromático, cremoso y espeso de profundo sabor marino.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-fire-burner"></i> Fuego de Leña</span>
-                <span><i class="fa-solid fa-drumstick-bite"></i> Pescado / Mariscos</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 8: Sopa de Mondongo -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-mountain-sun"></i> Meseta</span>
-              <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80" alt="Sopa de Mondongo de Masatepe" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Masatepe, Masaya</span>
-              <h3 class="gastro-title">Sopa de Mondongo de Masatepe</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Panza y pata de res, quequisque, chayote, elote tierno, repollo y naranja agria.</div>
-              <p class="gastro-desc">
-                Reina de los domingos nicaragüenses. La tripa se lava minuciosamente con limón y se hierve durante horas con verduras frescas de la meseta. Servida hirviendo con tortillas recién salidas del comal, aguacate y chile congo.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-clock"></i> 6 Horas Cocción</span>
-                <span><i class="fa-solid fa-bowl-hot"></i> Plato Fuerte</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 9: Güirilas con Cuajada -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-seedling"></i> Norte</span>
-              <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80" alt="Güirilas con Cuajada y Crema" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Sébaco, Matagalpa y Jinotega</span>
-              <h3 class="gastro-title">Güirilas con Cuajada y Crema</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Maíz tierno dulce molido, asadas en hoja de plátano, cuajada campesina y crema pura.</div>
-              <p class="gastro-desc">
-                Manjar dorado de las carreteras del norte. Elaboradas únicamente con granos de elote tierno tierno, sin harina procesada. Su sabor dulce natural contrasta magistralmente con la cuajada salada y la crema espesa de montaña.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-leaf"></i> En Hoja de Plátano</span>
-                <span><i class="fa-solid fa-cheese"></i> Cuajada Serrana</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 10: Chancho con Yuca -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-store"></i> Tradicional</span>
-              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Chancho con Yuca Tradicional" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Managua y Pacífico</span>
-              <h3 class="gastro-title">Chancho con Yuca</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Yuca cocida suave, carne de cerdo adobada en achiote y ensalada criolla de repollo.</div>
-              <p class="gastro-desc">
-                El plato popular por antonomasia de las fritangas de barrio. Trozos magros de cerdo marinados en naranja agria, ajo y achiote fritos hasta dorar, servidos sobre una montaña de yuca humeante con ensalada crujiente y vinagre de guineo.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-utensils"></i> Fritanga Popular</span>
-                <span><i class="fa-solid fa-bacon"></i> Cerdo Criollo</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 11: Sopa de Queso Cuaresmeña -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-sun"></i> Cuaresma</span>
-              <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?auto=format&fit=crop&w=800&q=80" alt="Sopa de Queso Tradicional" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> León, Granada y Masaya</span>
-              <h3 class="gastro-title">Sopa de Queso Tradicional</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Caldo de masa nixtamalizada aromatizada con achiote, leche fresca y rosquillas doradas de queso.</div>
-              <p class="gastro-desc">
-                La joya gastronómica de la Semana Mayor. Caldo sedoso sazonado con cebolla, chiltoma y hierbabuena donde flotan rosquillas de masa mezcladas con abundante queso seco criollo, fritas previamente para conservar su textura crocante.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-church"></i> Tradición Santa</span>
-                <span><i class="fa-solid fa-mortar-pestle"></i> Masa & Queso Seco</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 12: Salpicón Criollo Campesino -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-wheat-awn"></i> Campesino</span>
-              <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Salpicón Criollo Campesino" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Chontales y Boaco</span>
-              <h3 class="gastro-title">Salpicón Criollo Campesino</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Posta de res magra cocida y finamente picada, chiltoma, cebolla, naranja agria y arroz blanco.</div>
-              <p class="gastro-desc">
-                Almuerzo predilecto de las fincas ganaderas. La carne se cocina con hierbas del huerto y luego se pica meticulosamente a mano, aderezada con zumo fresco de naranja agria. Acompañada de plátano maduro frito y frijoles rojos recién cocidos.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-cow"></i> Carne de Pastoreo</span>
-                <span><i class="fa-solid fa-lemon"></i> Naranja Agria</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 13: Caballo Bayo Festivo -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-champagne-glasses"></i> Banquete</span>
-              <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80" alt="Caballo Bayo Tradicional" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Todo el Territorio Nacional</span>
-              <h3 class="gastro-title">Caballo Bayo de Fiesta Campesina</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Frijoles molidos, chicharrón, carne desmenuzada, moronga, cuajada, guacamole y tortillas.</div>
-              <p class="gastro-desc">
-                El gran festín comunitario nicaragüense por excelencia. Servido en cazuelas rústicas de barro cocido sobre petates tradicionales para que cada comensal arme sus tacos con tortilla caliente y todos los manjares de la tierra.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-users"></i> Festín Colectivo</span>
-                <span><i class="fa-solid fa-bowl-rice"></i> Cazuelas de Barro</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platillo 14: Sopa de Gallina India -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-house-chimney-window"></i> Patio</span>
-              <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80" alt="Sopa de Gallina India" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Carazo, Madriz y Nueva Segovia</span>
-              <h3 class="gastro-title">Sopa de Gallina India con Albóndigas</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-pepper-hot"></i> Gallina criada libre de patio, albóndigas de masa sazonada, hierbabuena fresca y elote tierno.</div>
-              <p class="gastro-desc">
-                Reconfortante infusión de salud y afecto campesino. Las abuelas cocinan la gallina entera al fogón con culantro coyote, hierbabuena y chile relleno. Las albóndigas esponjosas absorben el concentrado dorado del caldo rústico.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-egg"></i> Gallina de Patio</span>
-                <span><i class="fa-solid fa-leaf"></i> Albóndigas de Masa</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-
-        <!-- =================================================================
-             SECCIÓN 2: BEBIDAS TÍPICAS Y REFRESCANTES NACIONALES
-             ================================================================= -->
-        <div class="gastro-section-header" id="bebidasTipicas">
-          <div class="gastro-section-badge">
-            <i class="fa-solid fa-glass-water"></i> Patrimonio Líquido Ancestral
-          </div>
-          <h2 class="gastro-section-title">Bebidas de nuestra tierra</h2>
-          <p class="gastro-section-desc">
-            De la jícara labrada al cantarito de barro: infusiones de maíz tostado, cacao sagrado fermentado y frutos tropicales que calman la sed del caminante.
-          </p>
-        </div>
-
-        <div class="beverages-grid">
-          <!-- Bebida 1: Pinolillo -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-award"></i> Bebida Patria</span>
-              <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80" alt="Pinolillo Nicaragüense" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Masaya, Granada y Todo el País</span>
-              <h3 class="gastro-title">Pinolillo en Jícara Artesanal</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Maíz blanco tostado en comal, semillas de cacao fermentado, pimienta dulce y canela.</div>
-              <p class="gastro-desc">
-                La bebida sagrada que otorga a los nicaragüenses el gentilicio de «pinoleros». Molido finamente hasta crear un polvo sedoso que se bate en agua fría con hielo o leche, servido con orgullo en jícara tradicional grabada a mano.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-star"></i> Símbolo Nacional</span>
-                <span><i class="fa-solid fa-mug-hot"></i> Con Agua o Leche</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bebida 2: Cacao con Leche -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-heart"></i> Favorito</span>
-              <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=800&q=80" alt="Cacao con Leche Nicaragüense" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Río San Juan, Matagalpa y Rivas</span>
-              <h3 class="gastro-title">Cacao Tradicional con Leche</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Granos de cacao criollo tostados artesanalmente, arroz blanco remojado, canela y leche fresca.</div>
-              <p class="gastro-desc">
-                Elixir de los dioses mesoamericanos transformado en un refresco celestial. Los granos de cacao seleccionados se muelen junto con arroz para dar cuerpo y suavidad, batiéndose con leche cremosa, azúcar de caña y abundante hielo picado.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-certificate"></i> Cacao Trinitario</span>
-                <span><i class="fa-solid fa-snowflake"></i> Frío & Espumoso</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bebida 3: Chicha de Maíz / Chicha Bruja -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-fire"></i> Ancestral</span>
-              <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80" alt="Chicha de Maíz Rosada" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Monimbó, Masaya y León</span>
-              <h3 class="gastro-title">Chicha de Maíz y Chicha Bruja</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Maíz quebrado fermentado, raspadura de dulce de atado, vainilla y frambuesa natural.</div>
-              <p class="gastro-desc">
-                Bebida ceremonial indígena de color rosado brillante o ámbar profundo. El maíz se remoja durante días para permitir la fermentación silvestre que desata sus azúcares naturales. Protagonista indispensable en la fiesta de Santo Domingo y la Purísima.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-glass-cheers"></i> Festividades</span>
-                <span><i class="fa-solid fa-wand-magic-sparkles"></i> Fermentación Rústica</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bebida 4: Tiste Frío -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-bolt"></i> Refrescante</span>
-              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80" alt="Tiste Frío Cobrizo" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> El Viejo, Chinandega y León</span>
-              <h3 class="gastro-title">Tiste Tradicional Cobrizo</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Maíz tostado en comal, cacao en grano, achiote de árbol, canela molida y azúcar.</div>
-              <p class="gastro-desc">
-                Hermano cobrizo del pinolillo con una molienda ligeramente más gruesa que deja sentir la textura de los granos en boca. El achiote de huerto le confiere un cautivador tono teja y un aroma inconfundible que apaga el calor del occidente.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-sun"></i> Alivio del Calor</span>
-                <span><i class="fa-solid fa-palette"></i> Achiote Natural</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bebida 5: Pozol con Leche -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-bowl-rice"></i> Nutritivo</span>
-              <img src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=800&q=80" alt="Pozol con Leche" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Chinandega, León y Boaco</span>
-              <h3 class="gastro-title">Pozol con Leche Campesino</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Maíz blanco cocido hasta reventar (sin ceniza), leche fresca ordeñada y azúcar de caña.</div>
-              <p class="gastro-desc">
-                La bebida de la jornada laboral en los campos nicaragüenses. El maíz se cuece lentamente hasta florecer; luego se martaja groseramente para que al beberlo con leche bien fría se mastiquen los trozos suaves del grano sagrado.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-tractor"></i> Alimento de Jornada</span>
-                <span><i class="fa-solid fa-droplet"></i> Leche Fresca</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bebida 6: Fresco de Grama con Limón -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-spa"></i> Botánico</span>
-              <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80" alt="Fresco de Grama Granadino" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Granada y Rivas</span>
-              <h3 class="gastro-title">Fresco de Grama Granadino</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Raíz de grama silvestre hervida, limón criollo o mandarina, azúcar y hielo picado.</div>
-              <p class="gastro-desc">
-                Original de las calles empedradas de la Gran Sultana. La infusión de la raíz limpia de grama produce un elixir medicinal y refrescante de color fucsia natural con notas cítricas, ideal tras un paseo en coche por el centro colonial.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-gem"></i> Curativo & Digestivo</span>
-                <span><i class="fa-solid fa-lemon"></i> Cítrico Puro</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bebida 7: Semilla de Jícaro -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-tree"></i> Silvestre</span>
-              <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80" alt="Semilla de Jícaro" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Carazo y Granada</span>
-              <h3 class="gastro-title">Horchata de Semilla de Jícaro</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-seedling"></i> Semillas de jícaro tostadas al comal, arroz quebrado, nuez moscada, canela y leche.</div>
-              <p class="gastro-desc">
-                Las semillas extraídas de los frutos duros del árbol de jícaro se secan al sol de verano y se tuestan a fuego manso. Su molido con arroz y especias dulces produce una horchata de sabor único, sedosa y sumamente perfumada.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-seedling"></i> Semilla Nativa</span>
-                <span><i class="fa-solid fa-wind"></i> Sabor Aromático</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================================
-             SECCIÓN 3: DULCES Y REPOSTERÍA TÍPICA TRADICIONAL
-             ================================================================= -->
-        <div class="gastro-section-header" id="dulcesTipicos">
-          <div class="gastro-section-badge">
-            <i class="fa-solid fa-cookie-bite"></i> El Almíbar y la Miel Pinolera
-          </div>
-          <h2 class="gastro-section-title">Dulces y hornos de tradición</h2>
-          <p class="gastro-section-desc">
-            Manjares de panela y leña: desde los peroles de cobre de Masaya hasta las rosquillas crujientes de Somoto que endulzan la vida en familia.
-          </p>
-        </div>
-
-        <div class="sweets-grid">
-          <!-- Dulce 1: Cajetas de Masaya -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-gift"></i> Monimbó</span>
-              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80" alt="Cajetas Artesanales de Masaya" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Ciudad de las Flores, Masaya</span>
-              <h3 class="gastro-title">Cajetas Artesanales de Masaya</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-candy-cane"></i> Leche de vaca, coco rallado, zapoyol molido, toronja en miel y leche de burra.</div>
-              <p class="gastro-desc">
-                El pináculo de la confitería tradicional indígena. Preparadas en peroles gigantescos de cobre movidos sin pausa con paletas de madera. Una sinfonía de texturas donde destacan la cajeta de leche quemadita y la crocante cajeta de coco negro.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-store"></i> Mercado de Artesanías</span>
-                <span><i class="fa-solid fa-spoon"></i> Perol de Cobre</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dulce 2: Buñuelos de Yuca -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-fire"></i> Crujiente</span>
-              <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80" alt="Buñuelos de Yuca en Miel" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Pueblos Blancos y Pacífico</span>
-              <h3 class="gastro-title">Buñuelos de Yuca y Queso en Miel</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-candy-cane"></i> Yuca fresca rallada, queso blanco artesanal, manteca y miel espesa de atado de dulce con canela.</div>
-              <p class="gastro-desc">
-                Esferas doradas y crujientes por fuera, con un interior esponjoso donde el queso salado fundido armoniza mágicamente al sumergirse en miel de panela hirviendo aromatizada con clavo de olor y pimienta chapa.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-temperature-arrow-up"></i> Servido Caliente</span>
-                <span><i class="fa-solid fa-cheese"></i> Queso Criollo</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dulce 3: Pío Quinto -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-crown"></i> Señorial</span>
-              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Pío Quinto Tradicional" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Diriamba, Carazo y Granada</span>
-              <h3 class="gastro-title">Pío Quinto con Manjar de Leche</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-candy-cane"></i> Marquesote de harina y huevo, almíbar de ron nicaragüense, manjar blanco y canela molida.</div>
-              <p class="gastro-desc">
-                El postre de gala en las celebraciones patronales de San Sebastián. El bizcocho ligero (marquesote) se baña en licor de caña dulce y se corona con una capa sedosa de manjar blanco elaborado con leche campesina y canela espolvoreada.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-wine-glass"></i> Toque de Ron</span>
-                <span><i class="fa-solid fa-cake-candles"></i> Marquesote Real</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dulce 4: Almíbar de Frutas de Cuaresma -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-sun"></i> Cuaresma</span>
-              <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800&q=80" alt="Almíbar Criollo de Semana Santa" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Tradición Nacional en Todo el Territorio</span>
-              <h3 class="gastro-title">Almíbar Criollo de Frutas</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-candy-cane"></i> Mango maduro, jocotes criollos, papaya verde, grosellas, piña y dulce de rapadura de caña.</div>
-              <p class="gastro-desc">
-                El néctar dulce de la Semana Santa. Las familias se reúnen alrededor de ollas monumentales para cocer a fuego lento frutas de estación peladas a mano en jarabe espeso de dulce de caña y canela hasta que adquieren un color caoba oscuro brillante.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-calendar-days"></i> Semana Mayor</span>
-                <span><i class="fa-solid fa-apple-whole"></i> 5 Frutas Nativas</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dulce 5: Ayote en Miel -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-leaf"></i> De la Huerto</span>
-              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" alt="Ayote en Miel de Caña" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Rivas, Matagalpa y León</span>
-              <h3 class="gastro-title">Ayote en Miel de Atado</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-candy-cane"></i> Ayote criollo con cáscara, dulce de rapadura, jengibre machacado y canela en raja.</div>
-              <p class="gastro-desc">
-                Tradición hogareña de los huertos campesinos. Trozos generosos de ayote maduro con su cáscara firme se dejan cocer durante horas en un almíbar espeso aromatizado con jengibre fresco hasta tornarse suaves, transparentes y acaramelados.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-fire"></i> Cocción de Antaño</span>
-                <span><i class="fa-solid fa-seedling"></i> Ayote de Huerto</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dulce 6: Cosa de Horno y Rosquillas Somoteñas -->
-          <div class="gastro-card">
-            <div class="gastro-img-wrap">
-              <span class="gastro-badge-floating"><i class="fa-solid fa-wheat-awn"></i> Somoto</span>
-              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" alt="Rosquillas Somoteñas y Cosa de Horno" class="gastro-img" loading="lazy">
-            </div>
-            <div class="gastro-body">
-              <span class="gastro-origin-tag"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz y Rivas</span>
-              <h3 class="gastro-title">Cosa de Horno y Rosquillas Somoteñas</h3>
-              <div class="gastro-ingredients"><i class="fa-solid fa-candy-cane"></i> Masa de maíz nixtamalizado con queso seco, cuajada, dulce de caña (viejitas) y manteca.</div>
-              <p class="gastro-desc">
-                Horneadas en hornos de barro con leña de quebracho en el cañón de Somoto y Yalagüina. Las famosas rosquillas tostadas, las viejitas con miel de atado en su centro y las empanaditas de queso son el acompañamiento inseparable de una taza de café recién colado.
-              </p>
-              <div class="gastro-footer-meta">
-                <span><i class="fa-solid fa-mug-saucer"></i> Con Café de Altura</span>
-                <span><i class="fa-solid fa-cubes-stacked"></i> Horno de Barro</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- ================================================================
-             🎯 POR QUÉ: conectar cada sabor con el territorio y sus anfitriones.
-             ⚙️ CÓMO: módulos editoriales enlazados a las rutas ya disponibles.
-             📦 QUÉ: mapa, memoria del maíz, asistente y comercios sugeridos.
-             ================================================================ -->
-        <div class="gastro-feature-grid" id="dondeProbarlo">
-          <div>
-            <article class="gastro-map-card">
-              <h2>Mapa gastronómico de Nicaragua</h2>
-              <p>Explorá los sabores de cada departamento y descubrí dónde probarlos.</p>
-              <a class="gastro-map-btn" href="destinos.html">Abrir mapa interactivo <span aria-hidden="true">→</span></a>
-              <div class="gastro-map-markers" aria-hidden="true">
-                <i class="fa-solid fa-bowl-food"></i><i class="fa-solid fa-mug-hot"></i><i class="fa-solid fa-fish"></i>
-                <i class="fa-solid fa-wheat-awn"></i><i class="fa-solid fa-pepper-hot"></i><i class="fa-solid fa-candy-cane"></i>
-              </div>
-            </article>
-            <article class="gastro-maiz-story" id="historiaMaiz">
-              <h2>Somos hombres y mujeres de maíz</h2>
-              <p>Nuestra gastronomía nace de la tierra, del trabajo de nuestra gente y de una herencia que se mantiene viva. En cada plato, el maíz es nuestra identidad, nuestra historia y nuestro futuro.</p>
-              <a class="gastro-story-btn" href="historia.html">Conocer el origen <span aria-hidden="true">→</span></a>
-            </article>
-            <article class="gastro-ai-card">
-              <img src="assets/images/logo.png" alt="Baqueano Digital">
-              <div><strong>Baqueano Digital</strong><h2>¿Qué querés probar hoy?</h2><p>Decime tus gustos y te recomiendo lugares, platos y rutas gastronómicas en Nicaragua.</p><a class="gastro-map-btn" href="baqueano-ai.html">Crear ruta gastronómica con IA →</a></div>
-            </article>
-          </div>
-          <section class="gastro-venues" aria-labelledby="venuesTitle">
-            <h2 id="venuesTitle"><i class="fa-solid fa-building-columns"></i> Dónde vivir estos sabores</h2>
-            <p>Cocineras tradicionales, mercados y emprendimientos locales.</p>
-            <div class="venue-grid">
-              <article class="venue-card"><img src="assets/images/comida/gallo_pinto.jpg" alt="Comedor tradicional"><div><h3>Comedor Doña Rosa</h3><p>Granada · Comida típica nicaragüense.</p><a href="destinos.html">Ver ubicación</a></div></article>
-              <article class="venue-card"><img src="assets/images/comida/vigoron.jpg" alt="Mercado de Masaya"><div><h3>Mercado de Masaya</h3><p>Masaya · Sabores artesanales.</p><a href="destinos.html">Ver ubicación</a></div></article>
-              <article class="venue-card"><img src="assets/images/comida/nacatamal.jpg" alt="Cocina tradicional"><div><h3>Cocina Tradicional El Güegüense</h3><p>León · Platos típicos y cultura.</p><a href="destinos.html">Ver ubicación</a></div></article>
-              <article class="venue-card"><img src="assets/images/comida/baho.jpg" alt="Sazón caribeña"><div><h3>Sazón Caribeña</h3><p>Bluefields · Especialidad costeña.</p><a href="destinos.html">Ver ubicación</a></div></article>
-            </div>
-          </section>
-        </div>
-
-        <!-- MANIFIESTO DEL MAÍZ CRIOLLO -->
-        <div class="calc-panel-box gastronomia-inline-002">
-          <div class="gastronomia-inline-003">
-            <div class="badge-section-pill">
-              <i class="fa-solid fa-wheat-awn"></i> La Sagrada Milpa Pinolera
-            </div>
-            <h2 class="gastronomia-inline-004">«Somos Hombres y Mujeres de Maíz»</h2>
-            <p class="gastronomia-inline-005">
-              En Nicaragua, el maíz no es un grano mercantil; es un lazo sagrado de comunión campesina.
-              De la milpa brotan las tortillas calientes, las güirilas de Chontales con cuajada fresca,
-              el pozol con leche, el tiste norteño, la chicha bruja y el pinolillo espumoso.
-              Apoyar a los baqueanos es salvaguardar las semillas criollas libres de transgénicos.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="gastro-final-banner" aria-label="Explorar la gastronomía de Nicaragua">
-      <h2>Nicaragua también se descubre con el paladar</h2>
-      <div class="gastro-final-actions"><a href="#platillosInsignes">Explorar gastronomía →</a><a href="baqueano-ai.html">Planificar mi ruta</a></div>
-    </section>
-  </main>
-
-  <!-- FOOTER OFICIAL -->
-    <!-- FOOTER OFICIAL CON IDENTIDAD TERRITORIAL Y TRANSPARENCIA FISCAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
-                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
-              </div>
-
-              <!-- 2. Categoría -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
-                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
-                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
-                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
-                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
-                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
-                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
-                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
-                </select>
-                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
-              </div>
-
-              <!-- 3. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
-              </div>
-
-              <!-- 4. Municipio o Comunidad -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
-                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
-              </div>
-
-              <!-- 5. Nombre del Contacto / Anfitrión -->
-              <div class="biz-field-group">
-                <label for="bizContactName" class="biz-label">
-                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
-                </label>
-                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
-                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
-              </div>
-
-              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
-                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
-                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
-              </div>
-
-              <!-- 7. Correo Electrónico (Opcional) -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
-                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
-              </div>
-
-              <!-- 8. Dirección / Cómo Llegar -->
-              <div class="biz-field-group">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
-                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
-              </div>
-
-              <!-- 9. Breve Descripción del Servicio -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
-                </label>
-                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
-                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
-                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
-              </div>
-
-              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
-                </label>
-                <div class="biz-file-dropzone" id="bizDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
-                  <div class="dropzone-content" id="dropzonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
-                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
-                  </div>
-                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
-                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
-                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
-                      <i class="fa-solid fa-xmark"></i> Quitar
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Botón de Envío y Términos -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
-          <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
-          </div>
-        </div>
-
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
+  <!-- ============================================================================
+       1. HERO GASTRONOMÍA (IMAGEN 4)
+       ============================================================================ -->
+  <header class="gastro-hero-exact">
+    <div class="exact-container">
+      <div class="gastro-hero-grid">
         <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+          <span class="gastro-hero-badge">NICARAGUA</span>
+          <h1 class="gastro-hero-title">
+            Gastronomía Ancestral de los <span>Hijos del Maíz</span>
+          </h1>
+          <p class="gastro-hero-desc">
+            Sabores, tradiciones y saberes que dan vida a nuestra cultura. Descubrí la riqueza gastronómica de Nicaragua en cada territorio, desde sus raíces indígenas hasta sus influencias afrocaribeñas.
+          </p>
+          <div class="gastro-hero-actions">
+            <a href="#saboresNuestraHistoria" class="btn-gastro-hero-primary">
+              <i class="fa-solid fa-utensils"></i> Explorar sabores &rarr;
+            </a>
+            <a href="#dondeVivirSabores" class="btn-gastro-hero-secondary">
+              <i class="fa-solid fa-location-dot"></i> Dónde probarlo
+            </a>
+          </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+
+        <div class="gastro-hero-stamp">
+          <span>Nicaragua se saborea 🍃</span>
         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================
+       2. BARRA DE PASTILLAS DE CATEGORÍAS (8 ITEMS - IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-cat-section">
+    <div class="exact-container">
+      <div class="gastro-cat-bar" role="tablist" aria-label="Categorías gastronómicas">
+        <button type="button" class="gastro-cat-pill active" onclick="filterGastroCategory('todos', this)" role="tab" aria-selected="true">
+          <i class="fa-solid fa-bowl-food"></i> Platos típicos
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('bebidas', this)" role="tab">
+          <i class="fa-solid fa-mug-hot"></i> Bebidas
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('dulces', this)" role="tab">
+          <i class="fa-solid fa-cookie-bite"></i> Dulces
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('maiz', this)" role="tab">
+          <i class="fa-solid fa-wheat-awn"></i> Maíz ancestral
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('caribe', this)" role="tab">
+          <i class="fa-solid fa-water"></i> Caribe
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('pacifico', this)" role="tab">
+          <i class="fa-solid fa-sun"></i> Pacífico
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('norte', this)" role="tab">
+          <i class="fa-solid fa-mountain"></i> Norte
+        </button>
+        <button type="button" class="gastro-cat-pill" onclick="filterGastroCategory('centro', this)" role="tab">
+          <i class="fa-solid fa-compass"></i> Centro
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       3. SECCIÓN: SABORES QUE CUENTAN NUESTRA HISTORIA (8 TARJETAS - IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-section-common" id="saboresNuestraHistoria">
+    <div class="exact-container">
+      <div class="gastro-head-row">
+        <div class="gastro-head-title">
+          <h2><i class="fa-solid fa-utensils"></i> Sabores que cuentan nuestra historia</h2>
+          <p>Platos tradicionales con identidad, historia y el auténtico sabor de Nicaragua.</p>
+        </div>
+        <a href="#saboresNuestraHistoria" class="gastro-view-link">Ver todos los platos &rarr;</a>
+      </div>
+
+      <div class="gastro-dishes-grid" id="dishesGrid">
+        <!-- 1. Gallo Pinto -->
+        <article class="dish-card-exact" data-cat="todos pacifico norte centro">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/gallo pinto con huevo.jpg" alt="Gallo Pinto" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Gallo Pinto</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Todo el país</span>
+            <p class="dish-desc">El sabor que nos une cada mañana: arroz y frijol criollo fritos con cebolla y chiltoma.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Gallo Pinto', 'Alimento fundamental del nicaragüense, combinación de frijol rojo criollo y arroz fritos al punto exacto.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Nacatamal de Domingo -->
+        <article class="dish-card-exact" data-cat="todos maiz pacifico norte">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/nacatamal.jpg" alt="Nacatamal de Domingo" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Nacatamal de Domingo</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Todo el país</span>
+            <p class="dish-desc">Una tradición familiar dominical que trasciende generaciones en hoja de plátano.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Nacatamal', 'Masa de maíz nixtamalizado con manteca de cerdo, carne marinada con naranja agria, papa, arroz y yerbabuena en hoja de plátano.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Vigorón Granadino -->
+        <article class="dish-card-exact" data-cat="todos pacifico">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/vigoron.jpg" alt="Vigorón Granadino" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Vigorón Granadino</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Granada</span>
+            <p class="dish-desc">Yuca cocida suave, chicharrón crujiente con carne y ensalada de repollo con mimbro.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Vigorón Granadino', 'Creado en Granada en 1914 por María Luisa Cisneros (La Loca), servido tradicionalmente sobre hoja de plátano.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Quesillo -->
+        <article class="dish-card-exact" data-cat="todos pacifico">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/quesillo.jpg" alt="Quesillo" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Quesillo</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> La Paz Centro &amp; Nagarote</span>
+            <p class="dish-desc">El antojo callejero que enamora: tortilla caliente, queso trenzado, cebolla picada y crema.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Quesillo', 'Tortilla de maíz recién salida del comal envolviendo queso hilado artesanal, con abundante cebolla encurtida y crema pura de vaca.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Baho -->
+        <article class="dish-card-exact" data-cat="todos caribe pacifico">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/baho.jpg" alt="Baho" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Baho</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Caribe Sur &amp; Pacífico</span>
+            <p class="dish-desc">Cocido al vapor de tradición afrocaribeña: carne de res cecinada, plátano maduro y yuca.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Baho', 'Platillo mestizo cocinado lentamente al vapor durante más de 6 horas envuelto en hojas de chagüite.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Indio Viejo -->
+        <article class="dish-card-exact" data-cat="todos maiz centro norte">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/indio viejo.jpg" alt="Indio Viejo" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Indio Viejo</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Todo el país</span>
+            <p class="dish-desc">Un guiso con profunda historia y raíces indígenas: masa de maíz deshecha con carne mechada.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Indio Viejo', 'Guiso prehispánico a base de masa de maíz con naranja agria, achiote, cebolla, chiltoma y yerbabuena.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7. Rondón Costeño -->
+        <article class="dish-card-exact" data-cat="todos caribe">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/pescado frito con tostones.jpg" alt="Rondón Costeño" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Rondón Costeño</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Caribe Sur (Bluefields)</span>
+            <p class="dish-desc">Sopa isleña con sabores del mar: pescado, mariscos, yuca, quequisque y leche de coco fresca.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Rondón Costeño', 'Herencia criolla y garífuna de la Costa Caribe, cocinado en leche de coco con tubérculos y hierbas aromáticas.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8. Güirilas -->
+        <article class="dish-card-exact" data-cat="todos maiz norte">
+          <div class="dish-img-wrap">
+            <img src="assets/images/comida/tacos de carne con salsa y ensalada.jpg" alt="Güirilas" class="dish-img" loading="lazy">
+            <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-title">Güirilas</h3>
+            <span class="dish-region"><i class="fa-solid fa-location-dot"></i> Matagalpa &amp; Jinotega</span>
+            <p class="dish-desc">Tortilla dulce tradicional de maíz tierno (choclo) servida con cuajada fresca y crema.</p>
+            <div class="dish-actions">
+              <button type="button" class="btn-dish-history" onclick="showDishInfo('Güirilas', 'Especialidad de las montañas del norte elaborada moliendo el maíz tierno directamente a la hoja de plátano sobre el comal.')">Conocer historia</button>
+              <a href="#dondeVivirSabores" class="btn-dish-taste">Dónde probarlo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       4. SECCIÓN SPLIT: MAPA GASTRONÓMICO + BEBIDAS & DULCES (IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-section-common">
+    <div class="exact-container">
+      <div class="gastro-map-split-grid">
+        <!-- Izquierda: Mapa Gastronómico Leaflet -->
+        <div class="gastro-map-card">
+          <div class="gastro-map-overlay-head">
+            <h3>Mapa gastronómico de Nicaragua</h3>
+            <p>Explorá los sabores de cada departamento y descubrí dónde probarlos.</p>
+            <a href="mapa.html" class="btn-open-gastro-map">
+              Abrir mapa interactivo &rarr;
+            </a>
+          </div>
+
+          <!-- Filtro Flotante de Mapa -->
+          <div class="gastro-map-filters-pill">
+            <h5>Filtrar por:</h5>
+            <select id="gastroMapDepto" aria-label="Departamento">
+              <option value="">Departamento: Todos</option>
+              <option value="granada">Granada</option>
+              <option value="masaya">Masaya</option>
+              <option value="leon">León</option>
+              <option value="matagalpa">Matagalpa</option>
+              <option value="bluefields">Caribe Sur</option>
+            </select>
+            <select id="gastroMapTipo" aria-label="Tipo de comida">
+              <option value="">Tipo: Todos</option>
+              <option value="maiz">Maíz tradicional</option>
+              <option value="mar">Mariscos</option>
+              <option value="carnes">Carnes y guisos</option>
+            </select>
+            <select id="gastroMapPrecio" aria-label="Precio">
+              <option value="">Precio: Todos</option>
+              <option value="economico">Económico (C$ 60 - C$ 150)</option>
+              <option value="medio">Medio (C$ 150 - C$ 350)</option>
+            </select>
+            <label><input type="checkbox" id="checkGastroVerif" checked> Verificados</label>
+            <label><input type="checkbox" id="checkGastroCerca"> Cerca de mí</label>
+            <button type="button" class="btn-gastro-map-search" id="btnGastroMapSearch">Buscar</button>
+          </div>
+
+          <div id="gastroInteractiveMap" class="gastro-map-viewport"></div>
+        </div>
+
+        <!-- Derecha: Bebidas de nuestra tierra (5) + Dulces y hornos (6) -->
+        <div class="gastro-side-catalogs">
+          <!-- Bloque Bebidas -->
+          <div class="gastro-side-block">
+            <div class="gastro-side-head">
+              <h4><i class="fa-solid fa-mug-hot"></i> Bebidas de nuestra tierra</h4>
+              <a href="#saboresNuestraHistoria">Ver todas &rarr;</a>
+            </div>
+            <div class="gastro-beverages-grid">
+              <!-- 1. Pinolillo -->
+              <div class="beverage-card-exact">
+                <img src="assets/images/comida/fresco de cacao con leche.jpg" alt="Pinolillo" class="beverage-img">
+                <h5 class="beverage-name">Pinolillo</h5>
+                <span class="beverage-loc">Todo el país</span>
+                <p class="beverage-desc">La bebida emblemática de Nicaragua a base de maíz tostado y cacao.</p>
+              </div>
+
+              <!-- 2. Cacao con leche -->
+              <div class="beverage-card-exact">
+                <img src="assets/images/comida/fresco de cacao con leche.jpg" alt="Cacao con leche" class="beverage-img">
+                <h5 class="beverage-name">Cacao con leche</h5>
+                <span class="beverage-loc">Todo el país</span>
+                <p class="beverage-desc">Sabor ancestral del trópico nica con canela y vainilla.</p>
+              </div>
+
+              <!-- 3. Chicha de maíz -->
+              <div class="beverage-card-exact">
+                <img src="assets/images/comida/fresco de cacao con leche.jpg" alt="Chicha de maíz" class="beverage-img">
+                <h5 class="beverage-name">Chicha de maíz</h5>
+                <span class="beverage-loc">Todo el país</span>
+                <p class="beverage-desc">Tradición indígena de maíz fermentado que sigue viva.</p>
+              </div>
+
+              <!-- 4. Tiste -->
+              <div class="beverage-card-exact">
+                <img src="assets/images/comida/fresco de cacao con leche.jpg" alt="Tiste" class="beverage-img">
+                <h5 class="beverage-name">Tiste</h5>
+                <span class="beverage-loc">Masaya</span>
+                <p class="beverage-desc">Refrescante y único con tortilla tostada y cacao fino.</p>
+              </div>
+
+              <!-- 5. Pozol -->
+              <div class="beverage-card-exact">
+                <img src="assets/images/comida/fresco de cacao con leche.jpg" alt="Pozol" class="beverage-img">
+                <h5 class="beverage-name">Pozol</h5>
+                <span class="beverage-loc">Caribe</span>
+                <p class="beverage-desc">Energía natural de nuestra gente con maíz cocido.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloque Dulces -->
+          <div class="gastro-side-block">
+            <div class="gastro-side-head">
+              <h4><i class="fa-solid fa-cookie-bite"></i> Dulces y hornos de tradición</h4>
+              <a href="#saboresNuestraHistoria">Ver todos &rarr;</a>
+            </div>
+            <div class="gastro-sweets-grid">
+              <!-- 1. Cajetas de Masaya -->
+              <div class="sweet-card-exact">
+                <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Cajetas" class="sweet-img">
+                <h5 class="sweet-name">Cajetas</h5>
+                <span class="sweet-loc">Masaya</span>
+                <p class="sweet-desc">Un dulce con historia.</p>
+              </div>
+
+              <!-- 2. Buñuelos en miel -->
+              <div class="sweet-card-exact">
+                <img src="assets/images/comida/vigoron.jpg" alt="Buñuelos" class="sweet-img">
+                <h5 class="sweet-name">Buñuelos</h5>
+                <span class="sweet-loc">Todo el país</span>
+                <p class="sweet-desc">Yuca y queso con miel.</p>
+              </div>
+
+              <!-- 3. Pío Quinto -->
+              <div class="sweet-card-exact">
+                <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Pío Quinto" class="sweet-img">
+                <h5 class="sweet-name">Pío Quinto</h5>
+                <span class="sweet-loc">Granada</span>
+                <p class="sweet-desc">Bizcocho con licor.</p>
+              </div>
+
+              <!-- 4. Almíbar de frutas -->
+              <div class="sweet-card-exact">
+                <img src="assets/images/comida/nacatamal.jpg" alt="Almíbar" class="sweet-img">
+                <h5 class="sweet-name">Almíbar</h5>
+                <span class="sweet-loc">Semana Santa</span>
+                <p class="sweet-desc">Jocotes, papaya y mango.</p>
+              </div>
+
+              <!-- 5. Ayote en miel -->
+              <div class="sweet-card-exact">
+                <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Ayote" class="sweet-img">
+                <h5 class="sweet-name">Ayote en miel</h5>
+                <span class="sweet-loc">Tradicional</span>
+                <p class="sweet-desc">Dulce de panela pura.</p>
+              </div>
+
+              <!-- 6. Rosquillas somoteñas -->
+              <div class="sweet-card-exact">
+                <img src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Rosquillas" class="sweet-img">
+                <h5 class="sweet-name">Rosquillas</h5>
+                <span class="sweet-loc">Madriz</span>
+                <p class="sweet-desc">El sabor de Somoto.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       5. SECCIÓN: SOMOS HOMBRES Y MUJERES DE MAÍZ (IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-maiz-manifesto-section">
+    <div class="exact-container">
+      <div class="gastro-maiz-card">
+        <div class="gastro-maiz-content">
+          <h2 class="gastro-maiz-title"><i class="fa-solid fa-wheat-awn"></i> Somos hombres y mujeres de maíz</h2>
+          <p class="gastro-maiz-desc">
+            Nuestra gastronomía nace de la tierra, del trabajo de nuestra gente y de una herencia que se mantiene viva en cada plato. El maíz es nuestra identidad, nuestra historia y nuestro futuro.
+          </p>
+          <a href="historia.html" class="btn-gastro-maiz">
+            Conocer el origen &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       6. SECCIÓN: DÓNDE VIVIR ESTOS SABORES (4 COMEDORES - IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-section-common" id="dondeVivirSabores">
+    <div class="exact-container">
+      <div class="gastro-head-row">
+        <div class="gastro-head-title">
+          <h2><i class="fa-solid fa-store"></i> Dónde vivir estos sabores</h2>
+          <p>Cocineras tradicionales, comedores, mercados y emprendimientos locales.</p>
+        </div>
+        <a href="#dondeVivirSabores" class="gastro-view-link">Ver todos &rarr;</a>
+      </div>
+
+      <div class="gastro-places-grid">
+        <!-- 1. Comedor Doña Rosa -->
+        <article class="place-card-exact">
+          <div class="place-img-wrap">
+            <img src="assets/images/destinos/dona_haydee.jpg" alt="Comedor Doña Rosa" class="place-img" loading="lazy">
+          </div>
+          <div class="place-body">
+            <h3 class="place-name">Comedor Doña Rosa</h3>
+            <span class="place-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
+            <div class="place-rating"><i class="fa-solid fa-star"></i> 4.8 (320 reseñas)</div>
+            <p class="place-desc">Comida típica nicaragüense, vigorón auténtico y guisos campesinos recién hechos.</p>
+            <div class="place-actions">
+              <a href="departamento.html?depto=granada" class="btn-place-loc">Ver ubicación</a>
+              <a href="https://wa.me/50588880011" target="_blank" rel="noopener noreferrer" class="btn-place-contact">Contactar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Mercado de Masaya -->
+        <article class="place-card-exact">
+          <div class="place-img-wrap">
+            <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Mercado de Masaya" class="place-img" loading="lazy">
+          </div>
+          <div class="place-body">
+            <h3 class="place-name">Mercado de Masaya</h3>
+            <span class="place-loc"><i class="fa-solid fa-location-dot"></i> Masaya</span>
+            <div class="place-rating"><i class="fa-solid fa-star"></i> 4.7 (295 reseñas)</div>
+            <p class="place-desc">Sabores populares, nacatamales, cajetas y refrescos tradicionales en un solo lugar.</p>
+            <div class="place-actions">
+              <a href="departamento.html?depto=masaya" class="btn-place-loc">Ver ubicación</a>
+              <a href="https://wa.me/50588880012" target="_blank" rel="noopener noreferrer" class="btn-place-contact">Contactar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Cocina Tradicional El Güegüense -->
+        <article class="place-card-exact">
+          <div class="place-img-wrap">
+            <img src="assets/images/destinos/cerro_negro.jpg" alt="Cocina Tradicional El Güegüense" class="place-img" loading="lazy">
+          </div>
+          <div class="place-body">
+            <h3 class="place-name">Cocina Tradicional El Güegüense</h3>
+            <span class="place-loc"><i class="fa-solid fa-location-dot"></i> León</span>
+            <div class="place-rating"><i class="fa-solid fa-star"></i> 4.9 (410 reseñas)</div>
+            <p class="place-desc">Platos típicos del occidente, indio viejo, chanfaina y sopas criollas los fines de semana.</p>
+            <div class="place-actions">
+              <a href="departamento.html?depto=leon" class="btn-place-loc">Ver ubicación</a>
+              <a href="https://wa.me/50588880013" target="_blank" rel="noopener noreferrer" class="btn-place-contact">Contactar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Sazón Caribeña -->
+        <article class="place-card-exact">
+          <div class="place-img-wrap">
+            <img src="assets/images/destinos/corn_island.jpg" alt="Sazón Caribeña" class="place-img" loading="lazy">
+          </div>
+          <div class="place-body">
+            <h3 class="place-name">Sazón Caribeña</h3>
+            <span class="place-loc"><i class="fa-solid fa-location-dot"></i> Bluefields (RACCS)</span>
+            <div class="place-rating"><i class="fa-solid fa-star"></i> 4.8 (180 reseñas)</div>
+            <p class="place-desc">Especialidad en rondón con mariscos frescos, pan de coco y patí recién horneado.</p>
+            <div class="place-actions">
+              <a href="departamento.html?depto=raccs" class="btn-place-loc">Ver ubicación</a>
+              <a href="https://wa.me/50588880014" target="_blank" rel="noopener noreferrer" class="btn-place-contact">Contactar</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       7. SECCIÓN: BAQUEANO DIGITAL ASISTENTE GASTRONÓMICO (IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-ai-section">
+    <div class="exact-container">
+      <div class="gastro-ai-card">
+        <div class="gastro-ai-left">
+          <img src="assets/images/baqui.png" alt="Baqüi Asistente" class="gastro-ai-bird">
+          <div class="gastro-ai-text">
+            <h3>Baqueano Digital: ¿Qué querés probar hoy?</h3>
+            <p>Decime tus gustos y te recomiendo los mejores lugares, platos y rutas gastronómicas en Nicaragua.</p>
+            <button type="button" class="btn-create-gastro-route" onclick="askBaquiGastro('Crear ruta gastronómica personalizada en Nicaragua')">
+              Crear ruta gastronómica con IA &rarr;
+            </button>
+          </div>
+        </div>
+
+        <div class="gastro-ai-chips-wrap">
+          <span style="font-size: 0.75rem; font-weight: 700; color: #64748B;">Sugerencias rápidas:</span>
+          <div class="gastro-chips-row">
+            <button type="button" class="gastro-chip-btn" onclick="askBaquiGastro('Recomiéndame los mejores platillos con maíz ancestral')">🌽 Algo con maíz</button>
+            <button type="button" class="gastro-chip-btn" onclick="askBaquiGastro('Dónde probar comida del Caribe y rondón')">🍲 Comida del Caribe</button>
+            <button type="button" class="gastro-chip-btn" onclick="askBaquiGastro('Los mejores dulces y cajetas tradicionales')">🍮 Dulces tradicionales</button>
+            <button type="button" class="gastro-chip-btn" onclick="askBaquiGastro('Qué comedores típicos tengo cerca de mi ubicación')">📍 Quiero comer cerca</button>
+            <button type="button" class="gastro-chip-btn" onclick="askBaquiGastro('Quiero comida típica popular nicaragüense')">🍛 Comida típica</button>
+            <button type="button" class="gastro-chip-btn" onclick="askBaquiGastro('Opciones gastronómicas económicas en Nicaragua')">💵 Opciones económicas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       8. BANNER ATARDECER GASTRONÓMICO (IMAGEN 4)
+       ============================================================================ -->
+  <section class="gastro-section-common">
+    <div class="exact-container">
+      <div class="gastro-sunset-banner">
+        <div class="gastro-sunset-text">
+          <h2>Nicaragua también se descubre con el paladar</h2>
+          <p>Cada plato es un viaje por nuestra historia, naturaleza y gente. Sabores que conectan territorios 🍃</p>
+        </div>
+        <div class="gastro-sunset-actions">
+          <a href="#saboresNuestraHistoria" class="btn-gastro-sunset-primary">
+            Explorar gastronomía &rarr;
+          </a>
+          <a href="baqueano-ai.html" class="btn-gastro-sunset-secondary">
+            Planificar mi ruta
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       9. PIE DE PÁGINA INSTITUCIONAL UNIFICADO (4 COLUMNAS - IMÁGENES 1-4)
+       ============================================================================ -->
+  <footer class="site-footer-exact" role="contentinfo">
+    <div class="exact-container">
+      <div class="footer-grid-exact">
+        <!-- Columna 1: Marca y Redes -->
+        <div class="footer-col-exact">
+          <div class="footer-brand-wrap">
+            <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="footer-logo-img">
+            <div class="footer-brand-text">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-tagline">NICARAGUA AUTÉNTICA</span>
+            </div>
+          </div>
+          <p class="footer-tagline-text">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-row">
+            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com/@baqueanonicaragua" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Explorá -->
+        <div class="footer-col-exact">
+          <h4>Explorá</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ai.html">Baqueano Digital</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Gastronomía -->
+        <div class="footer-col-exact">
+          <h4>Gastronomía</h4>
+          <ul class="footer-links-list">
+            <li><a href="#saboresNuestraHistoria">Platos típicos</a></li>
+            <li><a href="#saboresNuestraHistoria">Bebidas</a></li>
+            <li><a href="#saboresNuestraHistoria">Dulces</a></li>
+            <li><a href="#dondeVivirSabores">Ruta gastronómica</a></li>
+            <li><a href="#dondeVivirSabores">Mercados y comedores</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Información & Legal -->
+        <div class="footer-col-exact">
+          <h4>Información</h4>
+          <ul class="footer-links-list">
+            <li><a href="nosotros.html">Sobre BAQUEANO</a></li>
+            <li><a href="nosotros.html#blog">Blog</a></li>
+            <li><a href="nosotros.html#contacto">Contacto</a></li>
+            <li><a href="nosotros.html#faqs">Preguntas frecuentes</a></li>
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Copyright -->
+    <div class="footer-bottom-bar">
+      <div class="exact-container">
+        <span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>
+        <span>Hecho con <i class="fa-solid fa-heart" style="color: #EF4444;"></i> en Nicaragua</span>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL DE AUXILIO SOS -->
-  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
-    <div class="sos-modal-dialog">
-      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="gastronomia-inline-008">
-        <i class="fa-solid fa-triangle-exclamation gastronomia-inline-009"></i>
-        <h3 class="gastronomia-inline-010">Centro de Auxilio SOS 24/7</h3>
-        <p class="gastronomia-inline-011">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+  <!-- MODAL SOS -->
+  <div class="exact-modal-backdrop" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
+    <div class="exact-modal-window sos-modal">
+      <button type="button" class="exact-modal-close" onclick="closeSosModal()" aria-label="Cerrar modal">&times;</button>
+      <div class="exact-modal-header">
+        <h3 id="sosModalTitle"><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS &amp; Auxilio Inmediato</h3>
+        <p>Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
       </div>
-      <div class="sos-gps-card gastronomia-inline-012">
-        <span class="gastronomia-inline-013">TUS COORDENADAS GPS:</span>
-        <div id="sosGpsDisplay" class="gastronomia-inline-014">Obteniendo señal GPS...</div>
+      <div class="sos-gps-card">
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital Autónomo</div>
+        <div class="sos-gps-coords" id="sosGpsDisplay">12.5061° N, 86.7022° W (Referencia Nacional)</div>
+        <small style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin saldo.</small>
       </div>
-      <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card"><i class="fa-solid fa-truck-medical gastronomia-inline-015"></i><div><h5 class="gastronomia-inline-016">Cruz Blanca</h5><span class="gastronomia-inline-017">128</span></div></a>
-        <a href="tel:115" class="sos-phone-card"><i class="fa-solid fa-fire-extinguisher gastronomia-inline-018"></i><div><h5 class="gastronomia-inline-016">Bomberos</h5><span class="gastronomia-inline-017">115</span></div></a>
-        <a href="tel:118" class="sos-phone-card"><i class="fa-solid fa-shield-halved gastronomia-inline-019"></i><div><h5 class="gastronomia-inline-016">Policía Nacional</h5><span class="gastronomia-inline-017">118</span></div></a>
-        <a href="tel:50584431289" class="sos-phone-card"><i class="fa-brands fa-whatsapp gastronomia-inline-020"></i><div><h5 class="gastronomia-inline-016">Mesa Baqueano</h5><span class="gastronomia-inline-017">WhatsApp SOS</span></div></a>
-      </div>
-      <div class="gastronomia-inline-021">
-        <button class="btn-hero-primary gastronomia-inline-022" id="btnSendWhatsAppSos">
-          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
-        </button>
-        <button class="btn-hero-glass gastronomia-inline-023" id="btnCopyGpsSos">
-          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
-        </button>
+      <div class="sos-emergency-buttons">
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía Nacional (118)</a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Blanca (128)</a>
+        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> Bomberos Unificados (115)</a>
       </div>
     </div>
   </div>
 
-  <!-- MODAL DE DESCARGA DE APK -->
-  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
-    <div class="modal-card-dialog">
-      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 class="gastronomia-inline-024">Instalar Baqueano para Android</h3>
-      <p class="gastronomia-inline-025">Descarga directa del paquete firmado v1.0.0 (Versión Oficial) para tu smartphone Android.</p>
-      <div class="install-steps-vertical">
-        <div class="step-row-item">
-          <div class="step-badge-num">1</div>
-          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro baqueanonicaragua.apk en tu almacenamiento.</p></div>
-        </div>
-        <div class="step-row-item">
-          <div class="step-badge-num">2</div>
-          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
-        </div>
-        <div class="step-row-item">
-          <div class="step-badge-num">3</div>
-          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
-        </div>
-      </div>
-      <div class="gastronomia-inline-026">
-      </div>
-    </div>
-  </div>
+  <!-- Leaflet Map JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 
-  <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/video-registry.js"></script>
-  <script src="app.js"></script>
+  <script>
+    // Filtrado de Categorías de Platos
+    function filterGastroCategory(cat, el) {
+      document.querySelectorAll('.gastro-cat-pill').forEach(p => p.classList.remove('active'));
+      if (el) el.classList.add('active');
 
-  <!-- SDK Firebase & Sincronización en Tiempo Real -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+      const cards = document.querySelectorAll('.dish-card-exact');
+      cards.forEach(card => {
+        const c = card.getAttribute('data-cat') || '';
+        if (cat === 'todos' || c.includes(cat)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function showDishInfo(title, desc) {
+      alert(`🍴 ${title}\n\n${desc}`);
+    }
+
+    function askBaquiGastro(prompt) {
+      if (window.BaqueanoAssistant && typeof window.BaqueanoAssistant.sendUserPrompt === 'function') {
+        window.BaqueanoAssistant.openDrawer();
+        window.BaqueanoAssistant.sendUserPrompt(prompt);
+      } else {
+        alert(`Baqüi te sugiere los mejores comedores y platillos para: "${prompt}".`);
+      }
+    }
+
+    // Inicialización del Mapa Gastronómico
+    document.addEventListener('DOMContentLoaded', function () {
+      const mapEl = document.getElementById('gastroInteractiveMap');
+      if (mapEl && typeof L !== 'undefined') {
+        try {
+          const map = L.map('gastroInteractiveMap', {
+            center: [12.6, -85.5],
+            zoom: 7,
+            zoomControl: true,
+            attributionControl: false
+          });
+
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            maxZoom: 18
+          }).addTo(map);
+
+          // Pines Gastronómicos
+          const gastroPins = [
+            { name: "Granada: Vigorón y Pío Quinto", lat: 11.9344, lng: -85.9560, color: "#F65E01" },
+            { name: "La Paz Centro: Quesillos de Hoja", lat: 12.3397, lng: -86.6756, color: "#F59E0B" },
+            { name: "Masaya: Nacatamales y Cajetas", lat: 11.9700, lng: -86.0900, color: "#10B981" },
+            { name: "Matagalpa: Güirilas del Norte", lat: 12.9256, lng: -85.9172, color: "#165D6F" },
+            { name: "Bluefields: Rondón Costeño y Patí", lat: 12.0131, lng: -83.7635, color: "#0284C7" },
+            { name: "Somoto: Rosquillas Somoteñas", lat: 13.4833, lng: -86.5833, color: "#DC2626" }
+          ];
+
+          gastroPins.forEach(function (g) {
+            L.circleMarker([g.lat, g.lng], {
+              radius: 9,
+              fillColor: g.color,
+              color: '#FFFFFF',
+              weight: 2,
+              opacity: 1,
+              fillOpacity: 0.95
+            }).addTo(map).bindPopup(`<strong>${g.name}</strong><br><span style="color:#059669;font-weight:700;">Gastronomía Tradicional</span>`);
+          });
+
+          setTimeout(() => map.invalidateSize(), 300);
+        } catch (e) {
+          console.warn('[GastroMap] Error inicializando:', e);
+        }
+      }
+
+      // Menú móvil
+      const burger = document.getElementById('burgerToggle');
+      const navLinks = document.getElementById('exactNavLinks');
+      if (burger && navLinks) {
+        burger.addEventListener('click', function () {
+          const isOpen = navLinks.classList.toggle('is-open');
+          burger.setAttribute('aria-expanded', isOpen);
+          if (isOpen) {
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = '#0B253A';
+            navLinks.style.padding = '20px';
+          } else {
+            navLinks.style.display = '';
+          }
+        });
+      }
+    });
+
+    function openSosModal(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const modal = document.getElementById('sosModal');
+      if (modal) {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function closeSosModal() {
+      const modal = document.getElementById('sosModal');
+      if (modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+  </script>
 </body>
+
 </html>

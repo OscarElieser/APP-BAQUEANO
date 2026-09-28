@@ -1,0 +1,1023 @@
+/* ============================================================================
+ * 🧭 BAQUEANO ECOSYSTEM — ESTILOS EXACTOS GASTRONOMÍA (gastronomia-exact.css)
+ * ============================================================================
+ *
+ * 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+ * - Replicar con fidelidad 1:1 la interfaz de la captura de referencia de
+ *   Gastronomía (Imagen 4) para enaltecer la soberanía alimentaria popular y
+ *   la tradición culinaria milenaria de los Hijos del Maíz.
+ *
+ * ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+ * - Barra de categorías temáticas en pills superiores con estado activo esmeralda.
+ * - Grilla de 8 platillos típicos insignes en formato 4x2 / 8 columnas responsivas.
+ * - Split cartográfico gastronómico Leaflet interactivo con filtros integrados.
+ * - Grillas compactas para Bebidas de nuestra tierra (5) y Dulces tradicionales (6).
+ * - Sección de relato cultural del maíz, 4 comedores tradicionales y recomendador IA.
+ *
+ * 📦 3. QUÉ (WHAT / ENTREGABLES):
+ * - Clases .page-gastro-exact, .gastro-hero-exact, .gastro-cat-pills, .gastro-dishes-grid,
+ *   .gastro-map-split, .gastro-beverages-grid, .gastro-sweets-grid, .gastro-maiz-manifesto,
+ *   .gastro-places-grid, .gastro-ai-card, .gastro-sunset-banner.
+ * ============================================================================
+ */
+
+:root {
+  --gastro-petroleo: #165D6F;
+  --gastro-naranja: #F65E01;
+  --gastro-crema: #F4E6C1;
+  --gastro-noche: #0F172A;
+  --gastro-verde: #10B981;
+  --gastro-bg: #F8FAFC;
+  --gastro-border: #E2E8F0;
+  --gastro-radius: 14px;
+}
+
+body.page-gastro-exact {
+  margin: 0;
+  padding: 0;
+  background-color: var(--gastro-bg);
+  color: #1E293B;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================================
+   1. HERO GASTRONOMÍA
+   ============================================================================ */
+.gastro-hero-exact {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  background-color: #0E1D28;
+  background-image: linear-gradient(90deg, rgba(14, 29, 40, 0.94) 0%, rgba(14, 29, 40, 0.75) 48%, rgba(14, 29, 40, 0.35) 100%),
+                    url('../../assets/images/comida/delicias del norte.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 90px 0 70px;
+  color: #FFFFFF;
+}
+
+.gastro-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: center;
+}
+
+.gastro-hero-badge {
+  display: inline-block;
+  color: #94A3B8;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.gastro-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.3rem, 4.8vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  color: #FFFFFF;
+}
+
+.gastro-hero-title span {
+  color: var(--gastro-naranja);
+}
+
+.gastro-hero-desc {
+  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+  line-height: 1.5;
+  color: #E2E8F0;
+  max-width: 650px;
+  margin: 0 0 26px;
+}
+
+.gastro-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn-gastro-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--gastro-naranja);
+  color: #FFFFFF;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(246, 94, 1, 0.4);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-gastro-hero-primary:hover {
+  background-color: #E05300;
+  transform: translateY(-2px);
+}
+
+.btn-gastro-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+}
+
+.btn-gastro-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.gastro-hero-stamp {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px dashed rgba(244, 230, 193, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 24px 28px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.gastro-hero-stamp span {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--gastro-crema);
+  display: block;
+}
+
+/* ============================================================================
+   2. BARRA DE PASTILLAS DE CATEGORÍAS (8 ITEMS)
+   ============================================================================ */
+.gastro-cat-section {
+  position: relative;
+  z-index: 20;
+  margin-top: -30px;
+  padding-bottom: 24px;
+}
+
+.gastro-cat-bar {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--gastro-border);
+}
+
+.gastro-cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #475569;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.gastro-cat-pill:hover {
+  background: #F1F5F9;
+  color: var(--gastro-noche);
+}
+
+.gastro-cat-pill.active {
+  background: #065F46;
+  color: #FFFFFF;
+}
+
+.gastro-cat-pill i {
+  font-size: 1rem;
+}
+
+/* ============================================================================
+   3. SECCIÓN: SABORES QUE CUENTAN NUESTRA HISTORIA (8 TARJETAS)
+   ============================================================================ */
+.gastro-section-common {
+  padding: 30px 0 40px;
+}
+
+.gastro-head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.gastro-head-title h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--gastro-noche);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gastro-head-title h2 i {
+  color: var(--gastro-naranja);
+}
+
+.gastro-head-title p {
+  color: #64748B;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.gastro-view-link {
+  color: var(--gastro-petroleo);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+/* Grilla de 8 columnas para platos típicos */
+.gastro-dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 12px;
+}
+
+.dish-card-exact {
+  background: #FFFFFF;
+  border: 1px solid var(--gastro-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dish-card-exact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dish-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 115px;
+  overflow: hidden;
+}
+
+.dish-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.dish-card-exact:hover .dish-img {
+  transform: scale(1.06);
+}
+
+.dish-fav-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.dish-body {
+  padding: 10px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dish-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--gastro-noche);
+  margin: 0 0 2px;
+  line-height: 1.2;
+}
+
+.dish-region {
+  font-size: 0.7rem;
+  color: var(--gastro-naranja);
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dish-desc {
+  font-size: 0.7rem;
+  color: #64748B;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dish-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-dish-history {
+  display: block;
+  text-align: center;
+  background: #F1F5F9;
+  color: var(--gastro-noche);
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-dish-history:hover {
+  background: #E2E8F0;
+}
+
+.btn-dish-taste {
+  display: block;
+  text-align: center;
+  background: var(--gastro-petroleo);
+  color: #FFFFFF;
+  padding: 5px 6px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn-dish-taste:hover {
+  background: #0F4957;
+}
+
+/* ============================================================================
+   4. SECCIÓN SPLIT: MAPA GASTRONÓMICO + BEBIDAS & DULCES
+   ============================================================================ */
+.gastro-map-split-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.35fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Columna Izquierda: Mapa */
+.gastro-map-card {
+  position: relative;
+  background: #0B253A;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.gastro-map-overlay-head {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 500;
+  max-width: 280px;
+  background: rgba(11, 37, 58, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.gastro-map-overlay-head h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.gastro-map-overlay-head p {
+  font-size: 0.78rem;
+  color: #CBD5E1;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.btn-open-gastro-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gastro-naranja);
+  color: #FFFFFF;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.gastro-map-filters-pill {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 500;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  padding: 12px;
+  border-radius: 12px;
+  width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gastro-map-filters-pill h5 {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--gastro-noche);
+  margin: 0 0 6px;
+}
+
+.gastro-map-filters-pill select {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--gastro-border);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  margin-bottom: 5px;
+  outline: none;
+}
+
+.gastro-map-filters-pill label {
+  font-size: 0.68rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+  color: var(--gastro-noche);
+}
+
+.btn-gastro-map-search {
+  width: 100%;
+  background: var(--gastro-naranja);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gastro-map-viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+}
+
+/* Columna Derecha: Bebidas (5) + Dulces (6) */
+.gastro-side-catalogs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gastro-side-block {
+  background: #FFFFFF;
+  border: 1px solid var(--gastro-border);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.gastro-side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.gastro-side-head h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gastro-noche);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gastro-side-head h4 i {
+  color: var(--gastro-naranja);
+}
+
+.gastro-side-head a {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gastro-petroleo);
+  text-decoration: none;
+}
+
+/* Grilla de Bebidas (5) */
+.gastro-beverages-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.beverage-card-exact {
+  background: #F8FAFC;
+  border: 1px solid var(--gastro-border);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.beverage-img {
+  width: 100%;
+  height: 75px;
+  object-fit: cover;
+}
+
+.beverage-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gastro-noche);
+  margin: 4px 0 2px;
+}
+
+.beverage-loc {
+  font-size: 0.65rem;
+  color: #64748B;
+  margin: 0 0 2px;
+}
+
+.beverage-desc {
+  font-size: 0.62rem;
+  color: #475569;
+  line-height: 1.25;
+  margin: 0;
+  padding: 0 4px;
+}
+
+/* Grilla de Dulces (6) */
+.gastro-sweets-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.sweet-card-exact {
+  background: #F8FAFC;
+  border: 1px solid var(--gastro-border);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 6px;
+}
+
+.sweet-img {
+  width: 100%;
+  height: 65px;
+  object-fit: cover;
+}
+
+.sweet-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--gastro-noche);
+  margin: 4px 0 1px;
+}
+
+.sweet-loc {
+  font-size: 0.62rem;
+  color: #64748B;
+  margin: 0 0 1px;
+}
+
+.sweet-desc {
+  font-size: 0.6rem;
+  color: #475569;
+  margin: 0;
+  padding: 0 3px;
+  line-height: 1.2;
+}
+
+/* ============================================================================
+   5. SECCIÓN: SOMOS HOMBRES Y MUJERES DE MAÍZ
+   ============================================================================ */
+.gastro-maiz-manifesto-section {
+  padding: 20px 0 40px;
+}
+
+.gastro-maiz-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(14, 29, 40, 0.94) 0%, rgba(14, 29, 40, 0.75) 45%, rgba(14, 29, 40, 0.3) 100%),
+              url('../../assets/images/comida/delicias del norte.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  color: #FFFFFF;
+}
+
+.gastro-maiz-content {
+  max-width: 580px;
+}
+
+.gastro-maiz-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gastro-maiz-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin: 0 0 20px;
+}
+
+.btn-gastro-maiz {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gastro-naranja);
+  color: #FFFFFF;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+/* ============================================================================
+   6. SECCIÓN: DÓNDE VIVIR ESTOS SABORES (4 COMEDORES)
+   ============================================================================ */
+.gastro-places-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.place-card-exact {
+  background: #FFFFFF;
+  border: 1px solid var(--gastro-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.place-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 130px;
+}
+
+.place-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.place-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.place-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--gastro-noche);
+  margin: 0 0 4px;
+}
+
+.place-loc {
+  font-size: 0.75rem;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.place-rating {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.place-desc {
+  font-size: 0.74rem;
+  color: #475569;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  flex: 1;
+}
+
+.place-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.btn-place-loc {
+  text-align: center;
+  background: var(--gastro-petroleo);
+  color: #FFFFFF;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-place-contact {
+  text-align: center;
+  background: var(--gastro-verde);
+  color: #FFFFFF;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ============================================================================
+   7. SECCIÓN: BAQUEANO DIGITAL ASISTENTE GASTRONÓMICO
+   ============================================================================ */
+.gastro-ai-section {
+  padding: 10px 0 40px;
+}
+
+.gastro-ai-card {
+  background: #FFFFFF;
+  border: 1px solid var(--gastro-border);
+  border-radius: 16px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.gastro-ai-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.gastro-ai-bird {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.gastro-ai-text h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gastro-noche);
+  margin: 0 0 4px;
+}
+
+.gastro-ai-text p {
+  font-size: 0.85rem;
+  color: #64748B;
+  margin: 0 0 12px;
+  max-width: 520px;
+}
+
+.btn-create-gastro-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--gastro-naranja);
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(246, 94, 1, 0.35);
+}
+
+.gastro-ai-chips-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.gastro-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.gastro-chip-btn {
+  background: #F8FAFC;
+  border: 1px solid var(--gastro-border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gastro-noche);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.gastro-chip-btn:hover {
+  background: #E2E8F0;
+}
+
+/* ============================================================================
+   8. BANNER ATARDECER GASTRONÓMICO
+   ============================================================================ */
+.gastro-sunset-banner {
+  margin-top: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  background: linear-gradient(90deg, rgba(14, 29, 40, 0.92) 0%, rgba(14, 29, 40, 0.5) 60%, rgba(14, 29, 40, 0.15) 100%),
+              url('../../assets/images/footer-nicaragua-panorama.png');
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+}
+
+.gastro-sunset-text h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  margin: 0 0 6px;
+  line-height: 1.1;
+}
+
+.gastro-sunset-text p {
+  font-size: 0.95rem;
+  color: #CBD5E1;
+  margin: 0;
+}
+
+.gastro-sunset-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-gastro-sunset-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gastro-naranja);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-gastro-sunset-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+@media (max-width: 1200px) {
+  .gastro-dishes-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .gastro-beverages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .gastro-sweets-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .gastro-map-split-grid {
+    grid-template-columns: 1fr;
+  }
+  .gastro-places-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gastro-ai-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .gastro-ai-chips-wrap {
+    align-items: flex-start;
+  }
+  .gastro-chips-row {
+    justify-content: flex-start;
+  }
+  .gastro-sunset-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gastro-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .gastro-hero-stamp {
+    display: none;
+  }
+  .gastro-dishes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gastro-beverages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gastro-sweets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gastro-places-grid {
+    grid-template-columns: 1fr;
+  }
+}

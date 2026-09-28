@@ -47,8 +47,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/institucional.css">
+  <link rel="stylesheet" href="css/pages/privacidad-exact.css?v=20260927-1">
 </head>
-<body>
+<body class="page-privacidad">
 
   <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
   <nav class="main-navbar" id="mainNavbar">
@@ -194,12 +195,24 @@
           <span class="pulse-dot"></span> Privacidad & Soberanía de Datos
         </div>
         <h1 class="hero-headline">
-          Política de <span class="highlight-sunset">Privacidad</span> & Seguridad Cloud
+          Tus datos, <span class="privacy-title-accent">bajo tu control</span>
         </h1>
         <p class="hero-subtext">
-          Cómo BAQUEANO recopila, utiliza, protege y garantiza el control soberano de tu información personal y telemetría satelital sin intermediarios ni comercialización de datos.
+          En BAQUEANO protegemos tu información y la usamos solo para ofrecerte una experiencia de viaje segura, auténtica y personalizada en Nicaragua.
         </p>
       </div>
+    </section>
+
+    <section class="privacy-trust-strip" aria-label="Compromisos de privacidad">
+      <div class="privacy-trust-item"><i class="fa-solid fa-lock"></i><span>No vendemos<br>tus datos</span></div>
+      <div class="privacy-trust-item"><i class="fa-solid fa-location-dot"></i><span>Ubicación solo<br>cuando la activás</span></div>
+      <div class="privacy-trust-item"><i class="fa-solid fa-trash-can"></i><span>Podés solicitar<br>eliminación de tus datos</span></div>
+      <div class="privacy-trust-item"><i class="fa-solid fa-shield-halved"></i><span>IA y servicios externos<br>identificados claramente</span></div>
+    </section>
+
+    <section class="privacy-summary" aria-label="Resumen de la política">
+      <article><h2>📄 ¿Qué es esta Política de Privacidad?</h2><p>Te explicamos de forma clara y transparente qué información recopilamos, cómo la usamos, con quién la compartimos y cuáles son tus derechos al utilizar BAQUEANO.</p></article>
+      <article class="privacy-confidence"><img src="assets/images/logo.png" alt="Baqueano"><h2>Tu confianza también viaja con nosotros</h2><p>Protegemos tu información para que solo te enfoques en lo más importante: vivir Nicaragua.</p></article>
     </section>
 
     <!-- LAYOUT INTERACTIVO DOS COLUMNAS -->
@@ -271,6 +284,13 @@
             Nuestra política se basa en principios de privacidad desde el diseño, minimización de datos, transparencia, seguridad, consentimiento y soberanía del usuario sobre su propia información.
           </p>
         </div>
+
+        <section class="privacy-flow" aria-labelledby="privacyFlowTitle"><h2 id="privacyFlowTitle">🔗 ¿Cómo fluye tu información?</h2><p>Así funciona el flujo de datos en BAQUEANO.</p><div class="flow-row">
+          <article class="flow-node"><i class="fa-solid fa-user"></i><h3>Vos</h3><p>Usuario</p></article><div class="flow-arrow">→</div>
+          <article class="flow-node"><i class="fa-solid fa-mobile-screen"></i><h3>Web / App Android BAQUEANO</h3><p>Enviás tu información de forma segura.</p></article><div class="flow-arrow">→</div>
+          <div><article class="flow-node"><i class="fa-solid fa-fire"></i><h3>Firebase</h3><p>Autenticación y hosting.</p></article><article class="flow-node"><i class="fa-solid fa-database"></i><h3>Supabase</h3><p>Base de datos principal.</p></article></div><div class="flow-arrow">→</div>
+          <div class="flow-services"><div class="flow-service"><strong>✈️ Experiencias y rutas</strong>Destinos, reservas y favoritos</div><div class="flow-service"><strong>🧠 Baqueano Digital</strong>Recomendaciones personalizadas</div><div class="flow-service"><strong>💳 Pagos y aliados</strong>Procesamiento seguro</div><div class="flow-service"><strong>🆘 SOS 24/7</strong>Emergencias y asistencia</div><div class="flow-service"><strong>📊 Mejora continua</strong>Analítica anónima</div></div>
+        </div></section>
 
         <!-- ARTÍCULO 01 -->
         <article class="legal-card" id="article-01">
@@ -529,6 +549,12 @@
             </p>
           </div>
         </article>
+
+        <section class="privacy-docs" aria-label="Información legal y contacto">
+          <article class="privacy-doc-card"><h3>📄 Nuestros documentos legales</h3><div class="privacy-doc-links"><a href="terminos.html">Términos y condiciones →</a><a href="aviso-legal.html">Aviso legal →</a><a href="cookies.html">Política de cookies →</a></div></article>
+          <article class="privacy-doc-card"><h3>✉️ Contacto sobre privacidad</h3><p>Si tenés preguntas sobre esta política o tus datos:</p><a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a></article>
+          <article class="privacy-doc-card"><h3>📅 Actualización</h3><p>26 de septiembre de 2026</p><strong>Versión 1.0</strong></article>
+        </section>
 
       </div>
     </section>

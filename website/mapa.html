@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — MAPA GEOGRÁFICO INTERACTIVO (mapa.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ofrecer al explorador una experiencia cartográfica integral y soberana de
+  los 17 territorios de Nicaragua (15 departamentos y 2 regiones autónomas).
+- Integrar en un solo mapa interactivo los destinos protegidos, cooperativas
+  campesinas, rutas volcánicas, gastronomía autóctona y balizas de seguridad SOS.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Motor Leaflet 1.9.4 con soporte para capas satelitales, topográficas y de calles.
+- Filtros reactivos por categoría (Naturaleza, Volcanes, Playas, Cultura, Aliados).
+- Geolocalización satelital en tiempo real con chip GNSS.
+- Controles de capa de alta resolución y popups informativos enriquecidos.
+
+📦 3. QUÉ (WHAT / ENTREGABLES):
+- Barra de navegación horizontal oficial.
+- Barra de filtros cartográficos en vivo y buscador territorial.
+- Visor de mapa Leaflet a pantalla completa interactiva.
+- Panel lateral retráctil con detalles del destino seleccionado y botón de ruta.
+- Modal de emergencia SOS con coordenadas satelitales.
+- Footer unificado institucional.
+============================================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mapa Interactivo de Nicaragua | Baqueano</title>
+  <meta name="description" content="Explorá los 17 territorios de Nicaragua en nuestro mapa interactivo. Volcanes, playas, cooperativas campesinas y rutas culturales.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+  <!-- Estilos del Ecosistema -->
+  <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+
+  <style>
+    .page-mapa-exact {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .map-hub-toolbar {
+      background: #0B253A;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px 0;
+      position: sticky;
+      top: 60px;
+      z-index: 500;
+    }
+
+    .map-hub-toolbar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .map-search-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 6px 16px;
+      width: min(320px, 100%);
+    }
+
+    .map-search-group input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      width: 100%;
+      margin-left: 8px;
+    }
+
+    .map-cat-filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .map-chip-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #CBD5E1;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .map-chip-btn.active, .map-chip-btn:hover {
+      background: var(--aliados-naranja, #F65E01);
+      color: #FFFFFF;
+      border-color: var(--aliados-naranja, #F65E01);
+    }
+
+    .map-view-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-map-action {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-map-action:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .map-main-viewport-container {
+      position: relative;
+      flex: 1;
+      min-height: calc(100vh - 160px);
+      width: 100%;
+    }
+
+    #fullInteractiveMap {
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 160px);
+    }
+
+    /* Tarjeta flotante de información de destino */
+    .map-floating-drawer {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      z-index: 600;
+      background: rgba(11, 37, 58, 0.94);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 18px;
+      max-width: 360px;
+      color: #FFFFFF;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      display: none;
+    }
+
+    .map-floating-drawer.is-active {
+      display: block;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .drawer-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .drawer-img {
+      width: 100%;
+      height: 140px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .drawer-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .drawer-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: #94A3B8;
+      margin-bottom: 8px;
+    }
+
+    .drawer-desc {
+      font-size: 0.8rem;
+      color: #E2E8F0;
+      line-height: 1.4;
+      margin: 0 0 14px;
+    }
+
+    .drawer-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-drawer-primary {
+      flex: 1;
+      text-align: center;
+      background: #F65E01;
+      color: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn-drawer-secondary {
+      flex: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body class="page-mapa-exact">
+
+  <!-- ============================================================================
+       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL
+       ============================================================================ -->
+  <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container">
+      <a href="index.html" class="exact-brand">
+        <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="exact-logo-img">
+        <div class="exact-brand-text">
+          <span class="exact-brand-name">BAQUEANO</span>
+          <span class="exact-brand-sub">NICARAGUA AUTÉNTICA</span>
+        </div>
+      </a>
+
+      <div class="exact-nav-links" id="exactNavLinks" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem">Inicio</a>
+        <a href="destinos.html" class="exact-nav-link" role="menuitem">Destinos</a>
+        <a href="mapa.html" class="exact-nav-link active" role="menuitem">Mapa</a>
+        <a href="experiencias.html" class="exact-nav-link" role="menuitem">Experiencias</a>
+        <a href="baqueano-ai.html" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem">Mi Viaje</a>
+        <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
+
+        <div class="exact-nav-dropdown">
+          <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Más <i class="fa-solid fa-chevron-down exact-caret"></i>
+          </button>
+          <div class="exact-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="exact-dropdown-item"><i class="fa-solid fa-leaf"></i> Custodia Ambiental</a>
+            <a href="historia.html" class="exact-dropdown-item"><i class="fa-solid fa-landmark"></i> Historia &amp; Memoria</a>
+            <a href="gastronomia.html" class="exact-dropdown-item"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
+            <a href="musica.html" class="exact-dropdown-item"><i class="fa-solid fa-music"></i> Son Sonoro Folk</a>
+            <a href="aliados.html" class="exact-dropdown-item"><i class="fa-solid fa-handshake"></i> Red de Aliados</a>
+            <a href="nosotros.html" class="exact-dropdown-item"><i class="fa-solid fa-users"></i> Quiénes Somos</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exact-nav-actions">
+        <a href="destinos.html" class="exact-icon-btn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="perfil.html" class="exact-icon-btn" title="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <span class="exact-lang-switch">ES | EN</span>
+        <a href="perfil.html" class="btn-exact-login">Iniciar sesión</a>
+        <button type="button" class="exact-burger-btn" id="burgerToggle" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BARRA DE HERRAMIENTAS Y FILTROS DEL MAPA -->
+  <div class="map-hub-toolbar">
+    <div class="exact-container map-hub-toolbar-inner">
+      <div class="map-search-group">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="mapSearchInput" placeholder="Buscar destino, volcán o departamento...">
+      </div>
+
+      <div class="map-cat-filter-chips">
+        <button type="button" class="map-chip-btn active" data-cat="all">Todos (29)</button>
+        <button type="button" class="map-chip-btn" data-cat="volcan">🌋 Volcanes</button>
+        <button type="button" class="map-chip-btn" data-cat="playa">🏖️ Playas</button>
+        <button type="button" class="map-chip-btn" data-cat="naturaleza">🌿 Naturaleza</button>
+        <button type="button" class="map-chip-btn" data-cat="cultura">🏛️ Cultura</button>
+        <button type="button" class="map-chip-btn" data-cat="coop">🤝 Cooperativas</button>
+      </div>
+
+      <div class="map-view-actions">
+        <button type="button" class="btn-map-action" id="btnGeolocateUser" title="Mi ubicación GPS">
+          <i class="fa-solid fa-location-crosshairs"></i> Mi GPS
+        </button>
+        <button type="button" class="btn-map-action" id="btnSwitchTileLayer" title="Cambiar tipo de mapa">
+          <i class="fa-solid fa-layer-group"></i> Satélite / Relieve
+        </button>
+        <button type="button" class="btn-map-action" onclick="openSosModal(event)" style="background: #DC2626; border-color: #EF4444;">
+          <i class="fa-solid fa-phone-volume"></i> SOS
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR DEL MAPA PRINCIPAL LEAFLET -->
+  <main class="map-main-viewport-container">
+    <div id="fullInteractiveMap"></div>
+
+    <!-- Tarjeta flotante de destino seleccionado -->
+    <div class="map-floating-drawer" id="mapPlaceDrawer">
+      <button type="button" class="drawer-close-btn" onclick="closeDrawer()">&times;</button>
+      <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Destino" class="drawer-img" id="drawerImg">
+      <h3 class="drawer-title" id="drawerTitle">Isla de Ometepe</h3>
+      <div class="drawer-meta">
+        <span id="drawerCat"><i class="fa-solid fa-tag"></i> Naturaleza</span>
+        <span id="drawerDept"><i class="fa-solid fa-location-dot"></i> Rivas</span>
+      </div>
+      <p class="drawer-desc" id="drawerDesc">Oasis de fuego y agua en el Gran Lago Cocibolca con volcanes Concepción y Maderas.</p>
+      <div class="drawer-actions">
+        <a href="destinos.html" class="btn-drawer-primary" id="drawerLinkDest">Ver ficha completa</a>
+        <a href="https://wa.me/50588880000" target="_blank" rel="noopener" class="btn-drawer-secondary" id="drawerLinkWa"><i class="fa-brands fa-whatsapp"></i> Contactar</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL SOS -->
+  <div class="exact-modal-backdrop" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="exact-modal-window sos-modal">
+      <button type="button" class="exact-modal-close" onclick="closeSosModal()">&times;</button>
+      <div class="exact-modal-header">
+        <h3><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS &amp; Auxilio Inmediato</h3>
+        <p>Tu ubicación satelital está calculada para asistencia en ruta.</p>
+      </div>
+      <div class="sos-gps-card">
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital Autónomo</div>
+        <div class="sos-gps-coords" id="sosGpsDisplay">12.5061° N, 86.7022° W (Nicaragua)</div>
+      </div>
+      <div class="sos-emergency-buttons">
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía Nacional (118)</a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Blanca (128)</a>
+        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> Bomberos (115)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <script>
+    // Inventario Maestro de Destinos Georreferenciados de Nicaragua
+    const NICARAGUA_PLACES = [
+      { id: 'ometepe', name: 'Isla de Ometepe', lat: 11.5399, lng: -85.6174, cat: 'volcan', dept: 'Rivas', desc: 'Reserva de Biósfera UNESCO con los volcanes Concepción y Maderas.', img: 'assets/images/destinos/isla_de_ometepe.jpg', color: '#10B981' },
+      { id: 'granada', name: 'Granada Colonial & Isletas', lat: 11.9344, lng: -85.9560, cat: 'cultura', dept: 'Granada', desc: 'Ciudad colonial con 365 isletas volcánicas en el Gran Lago Cocibolca.', img: 'assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp', color: '#F65E01' },
+      { id: 'sjds', name: 'San Juan del Sur', lat: 11.2529, lng: -85.8705, cat: 'playa', dept: 'Rivas', desc: 'Bahía icónica del Pacífico con surf de clase mundial y avistamiento de ballenas.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#0284C7' },
+      { id: 'cerro_negro', name: 'Volcán Cerro Negro', lat: 12.5061, lng: -86.7022, cat: 'volcan', dept: 'León', desc: 'El volcán más joven de Centroamérica, ideal para sandboarding extremo.', img: 'assets/images/destinos/Volcán Cerro Negro Sandboarding Extremo.webp', color: '#DC2626' },
+      { id: 'somoto', name: 'Cañón de Somoto', lat: 13.4833, lng: -86.5833, cat: 'naturaleza', dept: 'Madriz', desc: 'Monumento Nacional con farallones rocosos de hasta 150 metros y aguas esmeraldas.', img: 'assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp', color: '#0D9488' },
+      { id: 'masaya', name: 'Volcán Masaya', lat: 11.9842, lng: -86.1611, cat: 'volcan', dept: 'Masaya', desc: 'Parque Nacional con lago de lava incandescente visible y cuevas de murciélagos.', img: 'assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg', color: '#DC2626' },
+      { id: 'corn_island', name: 'Corn Island & Little Corn', lat: 12.1736, lng: -83.0560, cat: 'playa', dept: 'Caribe Sur', desc: 'Paraíso de arena blanca, aguas turquesas y arrecifes de coral en el Caribe.', img: 'assets/images/destinos/corn_island.jpg', color: '#0284C7' },
+      { id: 'mombacho', name: 'Reserva Volcán Mombacho', lat: 11.8267, lng: -85.9681, cat: 'naturaleza', dept: 'Granada', desc: 'Bosque nuboso con orquídeas endémicas y vistas panorámicas a las Isletas.', img: 'assets/images/destinos/Reserva Natural Volcán Mombacho & Bosque Nuboso.jpg', color: '#10B981' },
+      { id: 'san_ramon', name: 'Posada Rural San Ramón', lat: 11.5200, lng: -85.5500, cat: 'coop', dept: 'Rivas', desc: 'Cooperativa comunitaria en Ometepe con senderos a la cascada de San Ramón.', img: 'assets/images/destinos/Posada Rural San Ramón Ometepe.avif', color: '#16A34A' },
+      { id: 'las_penitas', name: 'Playa Las Peñitas & Juan Venado', lat: 12.3556, lng: -87.0319, cat: 'playa', dept: 'León', desc: 'Reserva Natural Isla Juan Venado con manglares y playas salvajes del Pacífico.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#0284C7' }
+    ];
+
+    let mapInstance = null;
+    let markersList = [];
+    let currentTileLayer = null;
+    let isSatellite = false;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initMap();
+      setupControls();
+    });
+
+    function initMap() {
+      const container = document.getElementById('fullInteractiveMap');
+      if (!container || typeof L === 'undefined') return;
+
+      mapInstance = L.map('fullInteractiveMap', {
+        center: [12.6, -85.6],
+        zoom: 8,
+        minZoom: 6,
+        maxZoom: 18,
+        zoomControl: true,
+        attributionControl: false
+      });
+
+      // Capa base inicial (Voyager / Relieve)
+      currentTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 18
+      }).addTo(mapInstance);
+
+      renderMarkers('all');
+    }
+
+    function renderMarkers(categoryFilter, searchQuery = '') {
+      markersList.forEach(m => mapInstance.removeLayer(m));
+      markersList = [];
+
+      const query = searchQuery.toLowerCase().trim();
+
+      NICARAGUA_PLACES.forEach(place => {
+        const matchCat = categoryFilter === 'all' || place.cat === categoryFilter;
+        const matchQuery = !query || place.name.toLowerCase().includes(query) || place.dept.toLowerCase().includes(query);
+
+        if (matchCat && matchQuery) {
+          const marker = L.circleMarker([place.lat, place.lng], {
+            radius: 9,
+            fillColor: place.color,
+            color: '#FFFFFF',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.95
+          }).addTo(mapInstance);
+
+          marker.on('click', () => showPlaceDetails(place));
+          marker.bindTooltip(`<strong>${place.name}</strong><br>${place.dept}`, { direction: 'top', offset: [0, -6] });
+
+          markersList.push(marker);
+        }
+      });
+    }
+
+    function showPlaceDetails(place) {
+      const drawer = document.getElementById('mapPlaceDrawer');
+      if (!drawer) return;
+
+      document.getElementById('drawerImg').src = place.img;
+      document.getElementById('drawerTitle').textContent = place.name;
+      document.getElementById('drawerCat').innerHTML = `<i class="fa-solid fa-tag"></i> ${place.cat.toUpperCase()}`;
+      document.getElementById('drawerDept').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${place.dept}`;
+      document.getElementById('drawerDesc').textContent = place.desc;
+
+      drawer.classList.add('is-active');
+      mapInstance.flyTo([place.lat, place.lng], 10, { duration: 1.2 });
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('mapPlaceDrawer');
+      if (drawer) drawer.classList.remove('is-active');
+    }
+
+    function setupControls() {
+      // Filtros por Categoría
+      const chips = document.querySelectorAll('.map-chip-btn');
+      chips.forEach(chip => {
+        chip.addEventListener('click', function () {
+          chips.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          const cat = this.getAttribute('data-cat');
+          const q = document.getElementById('mapSearchInput').value;
+          renderMarkers(cat, q);
+        });
+      });
+
+      // Buscador
+      const search = document.getElementById('mapSearchInput');
+      if (search) {
+        search.addEventListener('input', function (e) {
+          const activeChip = document.querySelector('.map-chip-btn.active');
+          const cat = activeChip ? activeChip.getAttribute('data-cat') : 'all';
+          renderMarkers(cat, e.target.value);
+        });
+      }
+
+      // Alternar Capas Satélite / Relieve
+      const btnTile = document.getElementById('btnSwitchTileLayer');
+      if (btnTile) {
+        btnTile.addEventListener('click', function () {
+          if (!mapInstance) return;
+          mapInstance.removeLayer(currentTileLayer);
+          isSatellite = !isSatellite;
+
+          if (isSatellite) {
+            currentTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+              maxZoom: 18
+            }).addTo(mapInstance);
+            this.innerHTML = '<i class="fa-solid fa-map"></i> Mapa Calles';
+          } else {
+            currentTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+              maxZoom: 18
+            }).addTo(mapInstance);
+            this.innerHTML = '<i class="fa-solid fa-layer-group"></i> Satélite / Relieve';
+          }
+        });
+      }
+
+      // Botón Mi GPS
+      const btnGps = document.getElementById('btnGeolocateUser');
+      if (btnGps) {
+        btnGps.addEventListener('click', function () {
+          if (navigator.geolocation && mapInstance) {
+            btnGps.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Conectando...';
+            navigator.geolocation.getCurrentPosition(
+              pos => {
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                mapInstance.flyTo([lat, lng], 13, { duration: 1.5 });
+                L.circleMarker([lat, lng], {
+                  radius: 12,
+                  fillColor: '#3B82F6',
+                  color: '#FFFFFF',
+                  weight: 3,
+                  fillOpacity: 0.9
+                }).addTo(mapInstance).bindPopup("<strong>Tu ubicación satelital actual</strong>").openPopup();
+                btnGps.innerHTML = '<i class="fa-solid fa-check"></i> Ubicado';
+              },
+              () => {
+                alert('No se pudo acceder a la geolocalización. Centrando en Nicaragua.');
+                mapInstance.flyTo([12.6, -85.6], 8);
+                btnGps.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Mi GPS';
+              }
+            );
+          }
+        });
+      }
+
+      // Menú móvil
+      const burger = document.getElementById('burgerToggle');
+      const navLinks = document.getElementById('exactNavLinks');
+      if (burger && navLinks) {
+        burger.addEventListener('click', function () {
+          const isOpen = navLinks.classList.toggle('is-open');
+          if (isOpen) {
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = '#0B253A';
+            navLinks.style.padding = '20px';
+          } else {
+            navLinks.style.display = '';
+          }
+        });
+      }
+    }
+
+    function openSosModal(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const modal = document.getElementById('sosModal');
+      if (modal) {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function closeSosModal() {
+      const modal = document.getElementById('sosModal');
+      if (modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+  </script>
+</body>
+
+</html>

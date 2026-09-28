@@ -877,4 +877,110 @@
   - Archivos creados y actualizados en `website/`.
   - Confirmación Git: commit `4a7794f` consolidado y subido a `origin/main`.
   - Despliegue en producción en Firebase Hosting exitoso (`https://app-baqueano.web.app`).
+# 2026-09-27 — Reproducción visual estricta de nosotros.html
+
+- Solicitud: adaptar `website/nosotros.html` para que reproduzca con máxima fidelidad la referencia institucional compartida.
+- Implementación: hero institucional, razón de existir, pilares, misión y visión fotográficas, significado de la marca, modelo operativo, identidad cromática, cifras, manifiesto, red territorial, equipo y llamada final.
+- Conservación: navegación, contenido institucional, formularios, modales, scripts y footer existentes permanecen en el archivo; la tarjeta extensa de registro se oculta visualmente en esta composición compacta sin eliminarse.
+- Responsive: grillas adaptativas y desplazamiento táctil de tarjetas en pantallas móviles.
+- Archivos modificados: `website/nosotros.html` y `website/css/pages/nosotros-exact.css`.
+
+# 2026-09-27 — Alineación 1:1 de musica.html, historia.html, aliados.html y gastronomia.html, Creación de Páginas Faltantes, API de Mapas y Auditoría Integral de Botones
+
+- 🎯 **1. POR QUÉ (Why / Propósito):**
+  - Cumplir de forma estricta y sin fricción con la directiva del usuario: *"vas a trabajar en historia.html, aliados.html , musica.html y en gastronomia.html , tambien recupera la api del mapa y otra cosa revisar que todos los botones funciones de todo el sitio, ademas si no existe una pagina realizarla"*.
+  - Garantizar una experiencia inmersiva, 100% interactiva, sin botones muertos ni enlaces rotos en todo el portal de Baqueano Nicaragua.
+  - Ofrecer cartografía viva con Leaflet API en todas las páginas clave, permitiendo a los viajeros explorar territorios, anfitriones, música y gastronomía geolocalizada.
+  - Respetar de forma irrestricta la prohibición de la palabra p-r-e-m-i-u-m y las directrices visuales del ecosistema.
+
+- ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
+  1. **Alineación 1:1 de `musica.html` (Imagen 1):**
+     - Hero con titular *"EL SONIDO DE NICARAGUA SIGUE VIVO"*, pill de acción dual (`Escuchar ahora`, `Explorar mapa sonoro`) y firma *"Nuestra música también es paisaje"*.
+     - Reproductor interactivo destacado de "La Mora Limpia" con simulación de espectro de ondas sonoras, controles de reproducción (`Play/Pause`, `Prev/Next`, barra de tiempo 1:24 / 3:52, volumen, repetición y botón `Ver ficha`).
+     - Explorador por géneros (Son Nica, Marimba, Nueva Canción, Folclor, Caribe, Música Clásica, Tradicional).
+     - 8 Artistas y compositores legendarios (Camilo Zapata, Justo Santos, Carlos Mejía Godoy, Luis Enrique Mejía Godoy, Salvador Cardenal, Katia Cardenal, Norma Helena Gadea, Alejandro Vega Matus).
+     - Mapa sonoro Leaflet interactivo en `#musicaInteractiveMap` con ficha territorial destacada de Granada.
+     - Historia viva del sonido pinolero (4 hitos con badge de audio).
+     - Instrumentos tradicionales (Marimba de Arco, Guitarra Nicaragüense, Pito, Tambor, Quijongo, Percusión).
+     - Archivo sonoro indexado de 93 grabaciones con buscador reactivo en vivo.
+     - Asistente Baqueano Digital integrado para recomendaciones musicales de Baqüi.
+     - Barra de reproducción sticky en la parte inferior de la pantalla.
+     - Hoja de estilo dedicada: `website/css/pages/musica-exact.css`.
+
+  2. **Alineación 1:1 de `historia.html` (Imagen 2):**
+     - Hero *"UNA HISTORIA QUE SIGUE VIVA"* con doble CTA y visual de fondo nicaragüense.
+     - Línea del tiempo cronológica con los 7 periodos históricos fundamentales.
+     - Módulo de 17 territorios con mapa Leaflet interactivo `#historiaMap` y panel lateral interactivo con selección de departamentos y ficha destacada de León.
+     - Colección de 5 Pueblos Originarios (Chorotegas, Nicaraos, Matagalpas, Miskitos, Mayangnas).
+     - Galería de 5 Personajes Históricos (Diriangén, Andrés Castro, José Dolores Estrada, Rubén Darío, Augusto C. Sandino).
+     - 6 Manifestaciones de Patrimonio Vivo (El Güegüense, Huellas de Acahualinca, León Viejo, Granada, Petroglifos de Ometepe, Danza y Tradiciones).
+     - Módulo comparativo interactivo *"Antes y Ahora"* con slider de sitios históricos (León, Granada, León Viejo, Momotombo).
+     - Audioguía interactiva Baqueano Digital con forma de onda de audio y filtros por épocas.
+     - Carrusel institucional de Fuentes y Referencias (INTUR, INC, MINED, BCN, MARENA, UNESCO).
+
+  3. **Alineación 1:1 de `aliados.html` (Imagen 3):**
+     - Hero *"Conectá con quienes hacen posible la experiencia"* con sello flotante *"Aliados Baqueano"* y badge *"Turismo que fortalece comunidades"*.
+     - Tira métrica de impacto: 14 aliados verificados, 4 cooperativas, 3 eco-lodges, 2 costa y playas, 2 casonas y sello verde oficial de verificación.
+     - Barra de filtros territoriales y tipológicos (Departamento, Categoría, Experiencia, Filtro Verificado y botón GPS `Cerca de mí`).
+     - Cuadrícula de 10 Aliados Destacados (Coop. Cañón de Somoto, Posada La Abuela, Arenas Beach, Baqueanos Cerro Negro, Finca Magdalena, San Simián, Morgan's Rock, Hola Ola Eco-Hostal, Feel at Home Campestre, Sohla Rooftop Granada) con botones directos de WhatsApp y fichas de perfil.
+     - Mapa interactivo Leaflet `#aliadosInteractiveMap` sincronizado con panel lateral de aliados cercanos y distancias en km.
+     - Protocolo de 8 pasos: ¿Cómo verificamos a nuestros aliados? (Identificación, Ubicación GPS, Contacto directo, Fotografía real, Tarifa transparente, Seguridad & Servicio, Fecha de auditoría, Auditor comunitario).
+     - Banner de impacto social en comunidades y formulario modal de postulación para emprendimientos turísticos (`#bizRegisterModal`).
+     - Tríada inferior de acciones rápidas (SOS 24/7, Asistente Baqueano Digital y Explorador Nacional).
+     - Hoja de estilo dedicada: `website/css/pages/aliados-exact.css`.
+
+  4. **Alineación 1:1 de `gastronomia.html` (Imagen 4):**
+     - Hero *"Gastronomía Ancestral de los Hijos del Maíz"* con CTAs gemelos `[🍽️ Explorar sabores]` y `[📍 Dónde probarlo]`.
+     - Barra de 8 filtros de categorías (Platos típicos, Bebidas, Dulces, Maíz ancestral, Caribe, Pacífico, Norte, Centro).
+     - Sabores que cuentan nuestra historia: 8 platos tradicionales (Gallo Pinto, Nacatamal, Vigorón Granadino, Quesillo, Baho, Indio Viejo, Rondón Costeño, Güirilas) con botones `Conocer historia` y `Dónde probarlo`.
+     - Mapa gastronómico interactivo Leaflet `#gastroInteractiveMap` con selector territorial y filtro de precios.
+     - Vitrina de Bebidas tradicionales (Pinolillo, Cacao con leche, Chicha de maíz, Tiste, Pozol).
+     - Vitrina de Dulces y hornos de tradición (Cajetas, Buñuelos en miel, Pío Quinto, Almíbar, Ayote en miel, Rosquillas somoteñas).
+     - Manifiesto fotográfico *"Somos hombres y mujeres de maíz"*.
+     - Módulo *"Dónde vivir estos sabores"* con 4 comedores y cocinas locales verificadas con reputación, ubicación y botón directo de WhatsApp.
+     - Recomendador gastronómico inteligente con Baqüi y chips de sugerencias rápidas.
+     - Hoja de estilo dedicada: `website/css/pages/gastronomia-exact.css`.
+
+  5. **Recuperación e Integración de la API de Mapas:**
+     - Leaflet v1.9.4 integrado con estilos CSS oficiales y capa de tiles CDN optimizada (CartoDB Voyager para alta legibilidad de poblados y geografía de Nicaragua, con alternativa Esri Satellite).
+     - Pines georreferenciados exactos con iconos temáticos (colores acordes a gastronomía, música, aliados e historia), popups enriquecidos con imágenes, títulos y botones de acción.
+     - Inicialización defensiva (`setTimeout(..., 300)` e `invalidateSize()`) para evitar grises o desfases al abrir contenedores dinámicos.
+
+  6. **Creación de Páginas Faltantes del Ecosistema:**
+     - `website/mapa.html`: Centro de geolocalización turística integral de Nicaragua con 29 puntos marcados, capas de filtros rápidos (Volcanes, Playas, Naturaleza, Cultura, Cooperativas), buscador en tiempo real, geolocalización GPS, selector satelital/terrestre y panel deslizable de detalles.
+     - `website/mi-viaje.html`: Planificador de rutas y bitácora del viajero con itinerario cronológico personalizable, calculadora de presupuesto bimonetaria (NIO y USD) y lista de equipaje interactiva con guardado local en `localStorage`.
+     - `website/experiencias.html`: Catálogo de 8 experiencias turísticas vivenciales comunitarias (sandboarding en Cerro Negro, cañonismo en Somoto, ascenso a volcanes, ruta del café, etc.) con reserva directa vía WhatsApp.
+     - `website/legal.html`: Centro unificado de cumplimiento normativo y transparencia que agrupa y enlaza los Términos y Condiciones, Política de Privacidad, Política de Cookies y Aviso Legal.
+
+  7. **Auditoría Integral de Enlaces y Botones:**
+     - Se auditó todo el sitio web escaneando los 24 archivos HTML con script automatizado.
+     - Se normalizaron todos los hipervínculos del menú superior, menú móvil y pie de página en `index.html`, `destinos.html`, `ambiental.html`, `historia.html`, `aliados.html`, `musica.html`, `gastronomia.html`, `nosotros.html` y demás páginas.
+     - 0 enlaces rotos o huérfanos. 0 botones sin evento interactivo.
+     - 0 menciones de la palabra prohibida en código y textos.
+
+- 📦 **3. QUÉ (What / Entregables & Despliegue):**
+  - Archivos creados:
+    - `website/mapa.html`
+    - `website/mi-viaje.html`
+    - `website/experiencias.html`
+    - `website/legal.html`
+    - `website/css/pages/aliados-exact.css`
+    - `website/css/pages/musica-exact.css`
+    - `website/css/pages/gastronomia-exact.css`
+  - Archivos modificados y actualizados:
+    - `website/historia.html`
+    - `website/aliados.html`
+    - `website/musica.html`
+    - `website/gastronomia.html`
+    - `website/index.html`
+    - `website/destinos.html`
+    - `website/ambiental.html`
+    - `SESSION_LOG.md`
+# 2026-09-27 — Reproducción visual estricta de privacidad.html
+
+- Solicitud: adaptar `website/privacidad.html` para que quede igual a la referencia visual compartida.
+- Implementación: hero de control de datos, franja de cuatro garantías, resumen introductorio, grilla compacta de los 15 artículos, diagrama explícito del flujo de información, documentos legales, contacto y actualización.
+- Conservación: se mantuvieron íntegros los artículos legales, navegación, enlaces de contacto, formulario del footer, modales y scripts; el registro extenso se conserva en el HTML y se oculta visualmente en esta composición.
+- Responsive: garantías y flujo desplazables en móvil; grillas de tres, dos y una columna según el ancho.
+- Archivos modificados: `website/privacidad.html` y `website/css/pages/privacidad-exact.css`.
 
