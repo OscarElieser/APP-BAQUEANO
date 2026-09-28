@@ -596,8 +596,114 @@
     </div>
   </footer>
 
+  <!-- ═══════════════════════════════════════════════════════
+       FORMULARIO DE CONTACTO BAQUEANO OFICIAL
+       ═══════════════════════════════════════════════════════ -->
+  <section id="contacto" style="background:#F8FAFC;padding:70px 0;">
+    <div class="container" style="max-width:760px;margin:0 auto;padding:0 24px;">
+      <div style="text-align:center;margin-bottom:40px;">
+        <span style="font-size:.78rem;font-weight:800;letter-spacing:.15em;color:#F65E01;text-transform:uppercase">CONTÁCTANOS</span>
+        <h2 style="font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:#0B253A;margin:10px 0 12px">¿Tenés algo que decirnos?</h2>
+        <p style="color:#64748B;font-size:1rem;max-width:520px;margin:0 auto">Escribinos para alianzas, reportar un problema, proponer un destino comunitario o simplemente compartir tu experiencia por Nicaragua.</p>
+      </div>
+
+      <form id="baqueanoContactForm" novalidate
+        style="background:#FFF;border:1px solid #E2E8F0;border-radius:20px;padding:36px;box-shadow:0 4px 24px rgba(0,0,0,.06);">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;">
+          <label style="display:flex;flex-direction:column;gap:6px;">
+            <span style="font-size:.78rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">Tu nombre</span>
+            <input type="text" name="nombre" placeholder="José Martínez" required
+              style="border:1.5px solid #E2E8F0;border-radius:10px;padding:11px 14px;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s"
+              onfocus="this.style.borderColor='#165D6F'" onblur="this.style.borderColor='#E2E8F0'">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px;">
+            <span style="font-size:.78rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">Correo electrónico</span>
+            <input type="email" name="email" placeholder="jose@ejemplo.com" required
+              style="border:1.5px solid #E2E8F0;border-radius:10px;padding:11px 14px;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s"
+              onfocus="this.style.borderColor='#165D6F'" onblur="this.style.borderColor='#E2E8F0'">
+          </label>
+        </div>
+
+        <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:18px;">
+          <span style="font-size:.78rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">Tipo de consulta</span>
+          <select name="tipo"
+            style="border:1.5px solid #E2E8F0;border-radius:10px;padding:11px 14px;font-size:.9rem;font-family:'Inter',sans-serif;background:#FFF;outline:none;transition:border-color .2s"
+            onfocus="this.style.borderColor='#165D6F'" onblur="this.style.borderColor='#E2E8F0'">
+            <option value="">Seleccioná una opción...</option>
+            <option value="alianza">Propuesta de Alianza Comunitaria</option>
+            <option value="destino">Proponer un Destino o Experiencia</option>
+            <option value="negocio">Registrar mi Negocio en BAQUEANO</option>
+            <option value="guia">Quiero ser Guía Baqueano</option>
+            <option value="reporte">Reportar un Problema o Denuncia</option>
+            <option value="prensa">Prensa & Medios de Comunicación</option>
+            <option value="otro">Otra consulta</option>
+          </select>
+        </label>
+
+        <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:18px;">
+          <span style="font-size:.78rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">Departamento de Nicaragua (opcional)</span>
+          <select name="departamento"
+            style="border:1.5px solid #E2E8F0;border-radius:10px;padding:11px 14px;font-size:.9rem;font-family:'Inter',sans-serif;background:#FFF;outline:none;transition:border-color .2s"
+            onfocus="this.style.borderColor='#165D6F'" onblur="this.style.borderColor='#E2E8F0'">
+            <option value="">Seleccioná tu departamento...</option>
+            <option>Managua</option><option>Granada</option><option>Masaya</option>
+            <option>Rivas</option><option>León</option><option>Chinandega</option>
+            <option>Estelí</option><option>Matagalpa</option><option>Jinotega</option>
+            <option>Nueva Segovia</option><option>Madriz</option><option>Boaco</option>
+            <option>Chontales</option><option>RACN (Caribe Norte)</option><option>RACS (Caribe Sur)</option>
+            <option>Río San Juan</option>
+          </select>
+        </label>
+
+        <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:24px;">
+          <span style="font-size:.78rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">Tu mensaje</span>
+          <textarea name="mensaje" rows="5" placeholder="Contanos tu idea, experiencia o propuesta para el ecoturismo comunitario de Nicaragua..." required
+            style="border:1.5px solid #E2E8F0;border-radius:10px;padding:11px 14px;font-size:.9rem;font-family:'Inter',sans-serif;resize:vertical;outline:none;transition:border-color .2s"
+            onfocus="this.style.borderColor='#165D6F'" onblur="this.style.borderColor='#E2E8F0'"></textarea>
+        </label>
+
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <button type="submit" id="contactSubmitBtn"
+            style="background:#F65E01;color:#FFF;border:none;padding:13px 32px;border-radius:12px;font-weight:700;font-size:.95rem;font-family:'Montserrat',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .2s">
+            <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
+          </button>
+          <p style="font-size:.78rem;color:#94A3B8;margin:0">
+            <i class="fa-solid fa-shield-halved" style="color:#10B981"></i>
+            Tu información está protegida y nunca será compartida con terceros.
+          </p>
+        </div>
+
+      </form>
+
+      <!-- Canales alternativos -->
+      <div style="display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;">
+        <a href="https://wa.me/50588888888" target="_blank" rel="noopener"
+          style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
+          onmouseover="this.style.borderColor='#25D366'" onmouseout="this.style.borderColor='#E2E8F0'">
+          <i class="fa-brands fa-whatsapp" style="font-size:1.4rem;color:#25D366"></i>
+          <span>WhatsApp<br><small style="color:#64748B;font-weight:400">Respuesta en minutos</small></span>
+        </a>
+        <a href="mailto:hola@baqueano.nic"
+          style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
+          onmouseover="this.style.borderColor='#F65E01'" onmouseout="this.style.borderColor='#E2E8F0'">
+          <i class="fa-solid fa-envelope" style="font-size:1.4rem;color:#F65E01"></i>
+          <span>Email<br><small style="color:#64748B;font-weight:400">hola@baqueano.nic</small></span>
+        </a>
+        <a href="https://instagram.com/baqueano.nic" target="_blank" rel="noopener"
+          style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
+          onmouseover="this.style.borderColor='#E1306C'" onmouseout="this.style.borderColor='#E2E8F0'">
+          <i class="fa-brands fa-instagram" style="font-size:1.4rem;color:#E1306C"></i>
+          <span>Instagram<br><small style="color:#64748B;font-weight:400">@baqueano.nic</small></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
       const mobileToggle = document.getElementById('mobileNavToggle');
       const navMenu = document.getElementById('navLinksMenu');
       if (mobileToggle && navMenu) {
