@@ -1158,4 +1158,12 @@
     - `SESSION_LOG.md`
   - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
 
+# 2026-09-27 — Mega menú global BAQUEANO
+
+- Solicitud: ordenar el menú global según la referencia compartida.
+- Implementación: accesos principales Inicio, Explorar, Cultura, Baqueano IA y Mi Viaje; desplegable Más con columnas Explorar, Cultura, Comunidad y Cuenta y Plataforma.
+- Acciones: clima de referencia, búsqueda, apariencia, SOS, inicio de sesión/perfil, idioma y botón móvil.
+- Alcance: la navegación se normaliza desde `website/js/navigation.js`, por lo que se aplica a todas las páginas que utilizan el controlador compartido.
+- Responsive: mega menú de cuatro columnas en escritorio y drawer vertical desplazable en móvil.
+- Archivos modificados: `website/js/navigation.js` y `website/css/navigation-mega.css`.
 

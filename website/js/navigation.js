@@ -32,6 +32,46 @@
 let currentGpsCoords = "Ubicación aún no disponible";
 
 // ============================================================================
+// 🎯 POR QUÉ: mantener un único orden de navegación en todo el portal.
+// ⚙️ CÓMO: normaliza la barra existente antes de activar sus controladores.
+// 📦 QUÉ: cinco accesos principales y un mega menú de cuatro columnas.
+// ============================================================================
+function buildGlobalMegaNavigation() {
+  const navbar = document.getElementById('mainNavbar');
+  const navMenu = document.getElementById('navLinksMenu');
+  if (!navbar || !navMenu || navMenu.dataset.globalMegaReady === 'true') return;
+  if (!document.querySelector('link[data-global-mega-nav]')) {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260927-1'; style.dataset.globalMegaNav = 'true';
+    document.head.appendChild(style);
+  }
+  const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const activeClass = (files) => files.includes(current) ? ' active' : '';
+  navMenu.dataset.globalMegaReady = 'true';
+  navMenu.innerHTML = `
+    <span class="nav-pill-indicator" aria-hidden="true"></span>
+    <a href="index.html" class="${activeClass(['index.html'])}" role="menuitem"><span class="nav-item-content"><span class="nav-label">Inicio</span></span></a>
+    <a href="destinos.html" class="${activeClass(['destinos.html','departamento.html','mapa.html'])}" role="menuitem"><span class="nav-item-content"><span class="nav-label">Explorar</span></span></a>
+    <a href="historia.html" class="${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-item-content"><span class="nav-label">Cultura</span></span></a>
+    <a href="baqueano-ai.html#planner" class="${activeClass(['baqueano-ai.html'])}" role="menuitem"><span class="nav-item-content"><span class="nav-label">Baqueano IA</span></span></a>
+    <a href="mi-viaje.html" class="${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-item-content"><span class="nav-label">Mi Viaje</span></span></a>
+    <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
+      <button class="nav-dropdown-trigger${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem"><span class="nav-item-content"><span class="nav-label">Más</span></span><i class="fa-solid fa-chevron-down"></i></button>
+      <div class="nav-dropdown-menu global-mega-menu" id="globalMegaMenu" role="menu">
+        <section class="global-mega-column explore"><h2><i class="fa-solid fa-location-dot"></i> Explorar</h2><a href="departamento.html"><i class="fa-regular fa-map"></i>Departamentos</a><a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i>Destinos</a><a href="mapa.html"><i class="fa-regular fa-map"></i>Mapa</a><a href="index.html#experiencias"><i class="fa-solid fa-person-hiking"></i>Experiencias</a></section>
+        <section class="global-mega-column culture"><h2><i class="fa-solid fa-landmark"></i> Cultura</h2><a href="historia.html"><i class="fa-regular fa-file-lines"></i>Historia</a><a href="gastronomia.html"><i class="fa-solid fa-utensils"></i>Gastronomía</a><a href="musica.html"><i class="fa-solid fa-music"></i>Música</a><a href="ambiental.html"><i class="fa-regular fa-leaf"></i>Ambiental</a></section>
+        <section class="global-mega-column community"><h2><i class="fa-solid fa-people-group"></i> Comunidad</h2><a href="aliados.html"><i class="fa-regular fa-handshake"></i>Aliados</a><a href="mi-negocio.html"><i class="fa-solid fa-shop"></i>Mi Negocio</a><a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i>Denuncia</a></section>
+        <section class="global-mega-column account"><h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2><a href="perfil.html"><i class="fa-regular fa-user"></i>Perfil</a><a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i>Reservas</a><a href="perfil.html#dashboardFavorites"><i class="fa-regular fa-heart"></i>Favoritos</a><a href="index.html#ayuda"><i class="fa-regular fa-circle-question"></i>Ayuda</a><a href="nosotros.html"><i class="fa-solid fa-people-group"></i>Nosotros</a><a href="terminos.html"><i class="fa-regular fa-file-lines"></i>Términos</a><a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i>Privacidad</a><a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i>Cookies</a><a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i>Admin / Ops Center <small>Solo personal</small></a></section>
+      </div>
+    </div>`;
+  const actions = navbar.querySelector('.nav-actions-right, .nav-right-actions');
+  if (actions) {
+    actions.classList.add('global-nav-actions');
+    actions.innerHTML = `<span class="global-weather"><i class="fa-solid fa-cloud-sun"></i> 25.0°C</span><a class="global-search" href="destinos.html" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a><button class="global-theme" type="button" aria-label="Cambiar apariencia"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-moon"></i></button><a class="sos-quick-btn open-sos-btn" href="index.html#sos"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></a><a class="nav-profile-btn global-session" href="perfil.html"><span class="nav-profile-avatar"><i class="fa-solid fa-user"></i></span><span class="nav-profile-info"><span class="nav-profile-name">Iniciar sesión</span><span class="nav-profile-role">Explorador</span></span></a><button class="global-language" type="button" aria-label="Cambiar idioma">ES <i class="fa-solid fa-chevron-down"></i></button><button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button>`;
+  }
+}
+
+// ============================================================================
 // CONTADOR GLOBAL DE DESTINOS PUBLICADOS
 // 🎯 POR QUÉ: impedir que el menú muestre una cifra obsoleta al crecer el catálogo.
 // ⚙️ CÓMO: escucha /places en tiempo real; si no hay red, usa catálogo local o caché.
@@ -1456,6 +1496,7 @@ function initializeNavigationModules() {
   ensureUserSessionLoaded();
   ensureThemeSwitcherLoaded();
   normalizeInstitutionalFooter();
+  buildGlobalMegaNavigation();
   buildAboutDropdown();
   initBaqueanoAiNavLink();
   initNavbarScroll();
