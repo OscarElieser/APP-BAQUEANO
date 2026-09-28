@@ -1280,4 +1280,49 @@
 | Reservar (rec.) | Redirige a mi-negocio.html |
 | Tabs mapa | Leaflet con marcadores naranja y polyline de ruta |
 
-**Commit:** eat(mi-viaje): todos los botones funcionales
+**Commit:** feat(mi-viaje): todos los botones funcionales
+
+---
+
+## [2026-09-28] Integración de Fotos Provisionales de Baqüi en Tarjetas de Recomendaciones
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - Solucionar los espacios en blanco o recuadros sin foto en las tarjetas de recomendaciones de la ruta (`Hotel Boutique Adela`, `Restaurante El Zaguán`, `Guía Local Don Carlos`, `Tour en Kayak Isletas`).
+  - Proporcionar presencia visual identitaria de alta gama mediante **Baqüi** (la mascota y guardián de Baqueano) mientras se incorporan las fotos reales de cada locación.
+
+- ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+  - Se vinculó el asset oficial `assets/images/baqui.png` con `onerror="this.src='assets/images/logo.png'"` y alias `assets/images/baqui-bird.png`.
+  - Se construyó el contenedor visual `.ia-rec-img-wrap` y `.rec-card-img` con gradientes temáticos (`#165D6F`, `#F65E01`, `#10B981`, `#0284C7` hacia `#0B253A`).
+  - Se añadieron badges de categoría con glassmorphism (`Hospedaje`, `Gastronomía`, `Guía Local`, `Tour Acuático`) para una presentación estética completa.
+
+- 📦 **QUÉ (What / Entregables):**
+  - `website/baqueano-ia.html`: Tarjetas de recomendaciones actualizadas con contenedor `.ia-rec-img-wrap`, imagen de Baqüi y badges.
+  - `website/css/pages/baqueano-ia-exact.css`: Reglas de estilo para imagen, hover con microinteracción y badges.
+  - `website/mi-viaje.html`: Sincronización idéntica con `.rec-img` y `.rec-badge` con paleta oficial.
+  - `website/assets/images/baqui-bird.png`: Generación de copia del asset para prevenir fallos 404 en referencias previas.
+  - `SESSION_LOG.md`: Actualización de la bitácora de sesión.
+
+---
+
+## [2026-09-28] Simulador Transparente de Presupuesto Real de Viaje & Redes Sociales Oficiales
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - Proporcionar transparencia total en la estimación de costos en Nicaragua ("hablar claro") validando que los precios varían según la modalidad de transporte (bus vs carro propio vs alquiler), tipo de local gastronómico (comedores populares vs restaurantes típicos vs turísticos), hospedaje (hostales vs hoteles vs alquiler de casa) e incorporando el rubro de utilerías, recuerdos y apoyo a niños y comunidades locales.
+  - Unificar y activar los enlaces oficiales de redes sociales de Baqueano en todo el ecosistema web.
+
+- ⚙️ **CÓMO (How / Arquitectura & Implementación):**
+  - Se implementó un motor reactivo de cálculo en `website/baqueano-ia.html` con selectores interactivos (`.ia-budget-chip`) para transporte, comida y hospedaje con recálculo dinámico en tiempo real de totales en córdobas (C$) y dólares (USD a tasa BCN ~36.62).
+  - Indicador de estado frente al presupuesto máximo (C$ 10,000) con badge dinámico (verde para "Dentro del presupuesto" con saldo restante, y alerta si se excede).
+  - Integración del rubro "Otros gastos & Utilerías" (artesanías, propinas, recuerdos y apoyo comunitario).
+  - Se sincronizaron las redes sociales oficiales en todos los documentos HTML y `global-injector.js`:
+    - Instagram: `https://www.instagram.com/baqueano_nicaragua`
+    - Facebook: `https://www.facebook.com/share/1S71xwJKse/`
+    - TikTok: `https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e`
+
+- 📦 **QUÉ (What / Entregables):**
+  - `website/baqueano-ia.html`: Simulador interactivo con chips de selección, desglose detallado, indicador visual y nota de transparencia.
+  - `website/css/pages/baqueano-ia-exact.css`: Estilos visuales de selectores, badges y animaciones.
+  - `website/mi-viaje.html`: Actualización de `tabPresupuesto` y `sidebar-budget-mini` con el nuevo desglose coherente.
+  - 12 archivos HTML y `website/js/global-injector.js` actualizados con los enlaces oficiales de Instagram, Facebook y TikTok.
+  - `SESSION_LOG.md`: Bitácora actualizada.
+
