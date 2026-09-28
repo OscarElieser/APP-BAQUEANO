@@ -1480,3 +1480,27 @@
 - **QUÉ (What / Entregables):** `website/js/global-injector.js`, `website/js/navigation.js`, `website/css/navigation-mega.css`, `website/baqueano-ia.html` y `website/mi-viaje.html`.
 
 ---
+
+## [2026-09-28] Ajuste de alta fidelidad al diseño de menú original
+
+- **POR QUÉ (Why / Propósito):** Cumplir con la exigencia de replicar el diseño exacto de la segunda imagen proporcionada por el usuario (cápsula unificada, sin bordes en el logo, texto de login visible, sin bordes circulares en iconos).
+- **CÓMO (How / Arquitectura e Implementación):** Se eliminaron los bordes (`border: none !important`) en el logo, la lupa de búsqueda y el toggle de tema. Se eliminó el fondo y borde del botón "Más" para que coincida con el estilo oscuro sin trazos. Se forzó el display de `span` dentro del botón de login en resoluciones de escritorio para mostrar el texto "Iniciar sesión" junto al icono.
+- **QUÉ (What / Entregables):** `website/css/navigation-mega.css` actualizado con estilos limpios sin bordes extra.
+
+---
+
+## [2026-09-28] Implementación global definitiva del Navbar cápsula y Mega Menú idéntico a la imagen
+
+- **POR QUÉ (Why / Propósito):** Resolver definitivamente la inconsistencia reportada por el usuario donde el menú no coincidía con el diseño de la imagen ni aparecía de forma global en todas las páginas. La auditoría reveló que más de 20 páginas HTML tenían barras desactualizadas, incompletas o sin la estructura requerida, y faltaban detalles clave como el divisor vertical, las píldoras ovaladas completas en SOS/Login/Idioma/Clima, y el track interactivo del conmutador de tema.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. Se estandarizó el 100% de las páginas públicas del portal (24 archivos HTML) insertando estáticamente en el código fuente la misma barra canónica `#mainNavbar` con mega menú de 4 columnas y estados activos específicos por ruta.
+  2. Se incorporó el divisor vertical (`.nav-vertical-divider`) entre los enlaces centrales y las acciones derechas.
+  3. Se aplicó `border-radius: 9999px !important;` en todos los componentes de botón y píldora (SOS rojo, Iniciar sesión verde, selector de idioma ES, píldora de clima y botón Más).
+  4. Se integró el control de cambio de tema con interruptor de pista (`.theme-switch-track`) y botón deslizable (`.theme-switch-thumb`) flanqueado por iconos de sol y luna.
+  5. Se ancló el mega menú `.global-mega-menu` de forma absoluta al contenedor de la cápsula (`top: calc(100% + 14px); right: 0; border-radius: 24px;`), garantizando que el caret naranja de "Más ˇ" apunte con precisión milimétrica al panel desplegable.
+  6. Se actualizó `website/js/navigation.js` y se incrementó el versionado de caché a `nav-fix-7`.
+- **QUÉ (What / Entregables):**
+  - `website/css/navigation-mega.css`
+  - `website/js/navigation.js`
+  - 24 archivos `.html` actualizados (`index.html`, `destinos.html`, `departamento.html`, `mapa.html`, `experiencias.html`, `baqueano-ia.html`, `baqueano-ai.html`, `mi-viaje.html`, `historia.html`, `gastronomia.html`, `musica.html`, `ambiental.html`, `aliados.html`, `mi-negocio.html`, `denuncias.html`, `perfil.html`, `nosotros.html`, `terminos.html`, `privacidad.html`, `cookies.html`, `aviso-legal.html`, `legal.html`, `offline.html`, `404.html`)
+  - `SESSION_LOG.md` actualizado.

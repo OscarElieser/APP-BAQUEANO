@@ -47,82 +47,95 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260928-nav-fix-6'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260928-nav-fix-7'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
   const navMenu = navbar.querySelector('#navLinksMenu, .exact-nav-menu, .nav-links-menu');
-  if (!navMenu || navMenu.dataset.globalMegaReady === 'true') return;
-  navMenu.dataset.globalMegaReady = 'true';
+  if (navMenu && navMenu.dataset.globalMegaReady !== 'true') {
+    navMenu.dataset.globalMegaReady = 'true';
 
-  const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  const activeClass = (files) => files.includes(current) ? ' active' : '';
+    const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    const activeClass = (files) => files.includes(current) ? ' active' : '';
 
-  navMenu.innerHTML = `
-    <span class="nav-pill-indicator" aria-hidden="true"></span>
-    <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
-    <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
-    <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
-    <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
-    <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
-    <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
-      <button class="nav-dropdown-trigger${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
-        <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
-      </button>
-      <div class="nav-dropdown-menu global-mega-menu" id="globalMegaMenu" role="menu">
-        <!-- 1. EXPLORAR -->
-        <section class="global-mega-column explore">
-          <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
-          <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
-          <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
-          <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
-          <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-        </section>
+    navMenu.innerHTML = `
+      <span class="nav-pill-indicator" aria-hidden="true"></span>
+      <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
+      <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
+      <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
+      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
+      <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
+      <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
+        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
+          <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
+        </button>
+        <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
+          <!-- 1. EXPLORAR -->
+          <section class="global-mega-column explore">
+            <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
+            <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
+            <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
+            <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
+            <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
+          </section>
 
-        <!-- 2. CULTURA -->
-        <section class="global-mega-column culture">
-          <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
-          <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
-          <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
-          <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
-          <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
-        </section>
+          <!-- 2. CULTURA -->
+          <section class="global-mega-column culture">
+            <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
+            <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
+            <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
+            <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
+            <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
+          </section>
 
-        <!-- 3. COMUNIDAD -->
-        <section class="global-mega-column community">
-          <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
-          <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
-          <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-          <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
-        </section>
+          <!-- 3. COMUNIDAD -->
+          <section class="global-mega-column community">
+            <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
+            <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
+            <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
+            <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
+          </section>
 
-        <!-- 4. CUENTA Y PLATAFORMA -->
-        <section class="global-mega-column account">
-          <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
-          <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
-          <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
-          <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-          <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
-          <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
-          <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
-          <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
-          <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-          <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
-        </section>
-      </div>
-    </div>`;
+          <!-- 4. CUENTA Y PLATAFORMA -->
+          <section class="global-mega-column account">
+            <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
+            <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
+            <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
+            <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
+            <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
+            <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
+            <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
+            <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
+            <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
+            <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
+          </section>
+        </div>
+      </div>`;
+  }
+
+  // Divisor Vertical
+  if (navMenu && !navbar.querySelector('.nav-vertical-divider')) {
+    const divider = document.createElement('div');
+    divider.className = 'nav-vertical-divider';
+    divider.setAttribute('aria-hidden', 'true');
+    navMenu.after(divider);
+  }
 
   const actions = navbar.querySelector('.nav-actions-right, .nav-right-actions, .exact-nav-actions, .global-nav-actions');
   if (actions) {
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
-      <span class="global-weather"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
-      <a class="global-search" href="destinos.html" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <button class="global-theme" id="globalThemeToggle" type="button" aria-label="Cambiar tema"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-moon"></i></button>
-      <button type="button" class="sos-quick-btn open-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
-      <a class="global-session" href="perfil.html"><i class="fa-regular fa-user"></i><span>Iniciar sesión</span></a>
-      <button class="global-language" type="button" aria-label="Cambiar idioma">ES <i class="fa-solid fa-chevron-down" style="font-size:0.68rem"></i></button>
-      <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button>
+      <span class="global-weather navbar-weather-pill" title="Clima actual"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
+      <a class="global-search navbar-search-btn" href="destinos.html" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <button class="global-theme navbar-theme-pill global-theme-toggle-switch" id="globalThemeToggle" type="button" aria-label="Cambiar tema">
+        <i class="fa-solid fa-sun theme-sun-icon"></i>
+        <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
+        <i class="fa-solid fa-moon theme-moon-icon"></i>
+      </button>
+      <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
+      <a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html"><i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span></a>
+      <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>
+      <button class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button>
     `;
   }
 

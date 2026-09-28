@@ -1,118 +1,10 @@
 <!DOCTYPE html>
-<!--
-============================================================================
-🧭 BAQUEANO ECOSYSTEM — PORTAL OFICIAL & ECOSISTEMA WEB (index.html)
-============================================================================
-
-🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Servir como la puerta de entrada de máxima fidelidad y soberanía turística a Nicaragua:
-  NICARAGUA + TURISMO + CULTURA + NATURALEZA + COMUNIDAD + TECNOLOGÍA.
-- Replicar de manera idéntica el menú global institucional y la composición editorial
-  completa aprobada en la referencia oficial (Imagen 4 de Portada e Imágenes 1-3 de Navegación).
-- Visibilizar de forma soberana el territorio, volcanes, lagos, costas y cooperativas
-  campesinas sin intermediarios foráneos (0% comisión).
-
-⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Navegación global con logo oficial, enlaces directos a secciones clave, dropdown "Más",
-  buscador, favoritos, selector ES|EN y acceso a inicio de sesión.
-- Secuencia editorial pura de 10 bloques sincronizados:
-  1. Hero Cinematográfico con buscador pill, llamadas dobles y botón "Ver video".
-  2. Franja horizontal de 10 categorías temáticas con iconos interactivos.
-  3. Destinos que Inspiran: 5 tarjetas emblemáticas con ratings y tags geográficos.
-  4. Módulo 2-Columnas: Mapa interactivo de Nicaragua + Baqueano Digital Asistente IA.
-  5. ¿Por qué BAQUEANO?: 6 pilares de confianza, economía campesina y soberanía.
-  6. Experiencias Destacadas: 4 tarjetas panorámicas de aventura y gastronomía.
-  7. Testimonios: 3 testimonios reales de viajeros de la región centroamericana.
-  8. Banner Escénico al atardecer: "Hay una Nicaragua que no aparece en los mapas".
-  9. Súmate a la Comunidad: Red de anfitriones con registro directo en modal.
-  10. Pie Institucional cuádruple con sello Nicaragua Auténtica y copyright.
-- Modales de soporte operativo preservados: #bizRegisterModal, #sosModal, #demoModal, #downloadModal, #videoModal.
-
-📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
-- Estructura HTML5 semántica y accesible validada con Google Fonts, FontAwesome 6 y Leaflet 1.9.4.
-- Integración reactiva con Baqüi IA, Leaflet WGS-84 y Mesa Técnica de Registro.
-============================================================================
--->
-<html lang="es">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-  <!-- SEO PRIMARIO — Metadatos Esenciales -->
-  <title>Baqueano Nicaragua | Descubre lo que no sale en el mapa</title>
-  <meta name="description"
-    content="Portal oficial de turismo comunitario y ecoturismo en Nicaragua. Explora volcanes, lagos, reservas de biósfera, playas y cooperativas campesinas sin intermediarios foráneos.">
-  <meta name="keywords"
-    content="turismo Nicaragua, ecoturismo, volcanes Nicaragua, Ometepe, Cerro Negro, Cañón de Somoto, turismo comunitario, Baqueano Nicaragua, mapa Nicaragua">
-  <meta name="author" content="Baqueano Nicaragua — Ecosistema Digital de Ecoturismo">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="theme-color" content="#0B253A">
-
-  <!-- URL Canonical — Producción Firebase Hosting -->
-  <link rel="canonical" href="https://app-baqueano.web.app/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://app-baqueano.web.app/">
-  <meta property="og:title" content="Baqueano Nicaragua | Descubre lo que no sale en el mapa">
-  <meta property="og:description"
-    content="Entrá a Nicaragua antes de viajar. Volcanes, playas, gastronomía ancestral y experiencias auténticas guiadas por quienes conocen el territorio.">
-  <meta property="og:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Baqueano Nicaragua — Portal Oficial de Ecoturismo">
-  <meta property="og:site_name" content="Baqueano Nicaragua">
-  <meta property="og:locale" content="es_NI">
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Baqueano Nicaragua | Descubre lo que no sale en el mapa">
-  <meta name="twitter:description" content="Portal oficial de turismo comunitario y ecoturismo soberano en Nicaragua.">
-  <meta name="twitter:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
-
-  <!-- Tipografía Oficial Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
-    rel="stylesheet">
-
-  <!-- FontAwesome Icon Suite -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-
-  <!-- Estilos del Ecosistema Baqueano -->
-  <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
-  <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/videos.css?v=20260927-center-framed-14">
-  <link rel="stylesheet" href="css/theme-switcher.css?v=20260926-global-theme-2">
-  <link rel="stylesheet" href="css/nicaragua-branding.css?v=20260927-center-framed-14">
-  <link rel="stylesheet" href="css/baqueano-reels.css">
-  <link rel="stylesheet" href="css/pages/index.css?v=20260927-center-framed-14">
-  <link rel="stylesheet" href="css/demo-hackathon.css?v=20260927-1">
-
-  <!-- Hoja de Estilos de Fidelidad 1:1 Oficial (Imagen 4) -->
-  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
-  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
-
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
-  <link rel="apple-touch-icon" href="assets/images/logo.png">
-
-  <!-- ⚡ NAVBAR CÁPSULA — CARGA AL FINAL = MÁXIMA PRIORIDAD EN CASCADA CSS -->
-  <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
-</head>
-
-<body class="page-index-exact">
-
   <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL (IDÉNTICA A LAS IMÁGENES 1, 2, 3 Y 4)
+       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
        ============================================================================ -->
   <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
     <div class="exact-container nav-inner">
-      <!-- Marca / Logo -->
+      <!-- Marca / Logo Oficial -->
       <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
         <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
         <div class="exact-nav-brand-text navbar-brand-text">
@@ -178,23 +70,28 @@
         </div>
       </div>
 
+      <!-- Divisor Vertical entre Enlaces y Acciones -->
+      <div class="nav-vertical-divider" aria-hidden="true"></div>
+
       <!-- Acciones a la Derecha (Clima, Buscador, Switch Tema, SOS, Iniciar Sesión, Idioma) -->
       <div class="exact-nav-actions global-nav-actions">
-        <span class="global-weather navbar-weather-pill"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
+        <span class="global-weather navbar-weather-pill" title="Clima actual"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
         <a href="destinos.html" class="global-search navbar-search-btn" title="Buscar en Nicaragua" aria-label="Buscar">
           <i class="fa-solid fa-magnifying-glass"></i>
         </a>
-        <button type="button" class="global-theme navbar-theme-pill" id="globalThemeToggle" aria-label="Cambiar tema">
-          <i class="fa-solid fa-sun"></i><i class="fa-solid fa-moon"></i>
+        <button type="button" class="global-theme navbar-theme-pill global-theme-toggle-switch" id="globalThemeToggle" aria-label="Cambiar tema">
+          <i class="fa-solid fa-sun theme-sun-icon"></i>
+          <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
+          <i class="fa-solid fa-moon theme-moon-icon"></i>
         </button>
         <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS">
           <i class="fa-solid fa-shield-heart"></i><span>SOS</span>
         </button>
         <a href="perfil.html" class="exact-nav-btn-login global-session navbar-login-btn">
-          <i class="fa-regular fa-user"></i><span>Iniciar sesión</span>
+          <i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span>
         </a>
         <button type="button" class="global-language navbar-lang-pill" aria-label="Cambiar idioma">
-          ES <i class="fa-solid fa-chevron-down" style="font-size:0.68rem"></i>
+          <span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem; margin-left: 2px;"></i>
         </button>
         <button type="button" class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú móvil">
           <i class="fa-solid fa-bars"></i>
