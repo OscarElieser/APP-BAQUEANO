@@ -101,7 +101,7 @@
     .catalog-load-more-wrap{text-align:center;padding:22px 0 4px}.catalog-load-more{height:46px;padding:0 26px;border:0;border-radius:14px;background:#0b2947;color:#fff;font:800 .84rem 'Inter',sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(11,41,71,.18)}.catalog-load-more:hover{background:#078b52}.catalog-load-more[hidden]{display:none}
     .weekly-highlights{margin:36px 0 22px}.weekly-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}.weekly-title h2{margin:0;font:900 1.3rem 'Montserrat',sans-serif;color:#0b2947}.weekly-title p{margin:3px 0 0;color:#60758b}.weekly-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.weekly-card{position:relative;min-height:180px;border-radius:16px;overflow:hidden;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(13,42,68,.12)}.weekly-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.weekly-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,27,46,.88),rgba(3,27,46,.04) 75%)}.weekly-card-copy{position:absolute;z-index:2;left:15px;right:15px;bottom:14px}.weekly-card-copy span{display:inline-block;margin-bottom:5px;padding:4px 7px;border-radius:999px;background:#07965a;font:800 .62rem 'Inter',sans-serif}.weekly-card-copy strong{display:block;font:800 .9rem/1.25 'Montserrat',sans-serif}
     .digital-planner{margin:28px 0 38px;padding:26px 30px;border:1px solid #dddffc;border-radius:20px;background:linear-gradient(120deg,#f2f9ff,#f4efff);display:flex;align-items:center;gap:20px}.digital-planner-icon{width:64px;height:64px;display:grid;place-items:center;border-radius:18px;background:#0b2947;color:#54e2c0;font-size:1.65rem}.digital-planner-copy{flex:1}.digital-planner h2{margin:0 0 4px;font:900 1.35rem 'Montserrat',sans-serif;color:#173e9c}.digital-planner p{margin:0;color:#173b5c}.planner-prompts{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.planner-prompt{padding:8px 11px;border:1px solid #d9ddf4;border-radius:999px;background:#fff;color:#24445e;font:700 .68rem 'Inter',sans-serif;cursor:pointer}.planner-action{padding:14px 20px;border:0;border-radius:13px;background:linear-gradient(135deg,#6742e8,#7b36db);color:#fff;font:800 .8rem 'Inter',sans-serif;white-space:nowrap;cursor:pointer}
-    .page-destinos .calc-panel-box{margin-top:36px}.page-destinos .map-section-wrapper:not(#mapPrioritySlot .map-section-wrapper){display:none}
+    .page-destinos .calc-panel-box{margin-top:36px}
     @media(max-width:1050px){.territory-trust-strip{margin:-26px 18px 22px;grid-template-columns:repeat(3,1fr)}.explorer-layout{grid-template-columns:1fr}.explorer-map-column{order:0}.explorer-results-column{order:1}#mapPrioritySlot #baqueanoInteractiveMap{height:460px!important;min-height:460px}.discovery-category-row{grid-template-columns:repeat(10,104px)}.page-destinos .destinations-showcase-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
     @media(max-width:720px){.page-destinos .destinations-video-hero{height:570px;min-height:570px}.page-destinos .hero-video-content{padding:90px 20px 28px}.page-destinos .hero-video-content .section-headline{font-size:2.45rem}.territory-trust-strip{grid-template-columns:repeat(2,1fr);padding:16px 12px}.territory-trust-item{font-size:.7rem}.explorer-layout{display:block}.explorer-map-column{margin-bottom:22px}#mapPrioritySlot #baqueanoInteractiveMap{height:390px!important;min-height:390px}.page-destinos .destinations-showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.weekly-grid{grid-template-columns:repeat(2,1fr)}.digital-planner{padding:22px;align-items:flex-start;flex-wrap:wrap}.planner-action{width:100%}}
     @media(max-width:470px){.page-destinos .dest-search-btn{min-width:48px}.page-destinos .dest-search-btn::after{display:none}.page-destinos .destinations-showcase-grid{grid-template-columns:1fr!important}.weekly-grid{grid-template-columns:1fr}.smart-filter-spacer{display:none}.territory-trust-item:nth-child(n+5){display:none}}
@@ -292,10 +292,55 @@
     </div>
   </div>
 
+  <div class="territory-trust-strip" aria-label="Ejes del explorador territorial">
+    <div class="territory-trust-item"><i class="fa-solid fa-location-dot"></i> 17 territorios</div>
+    <div class="territory-trust-item"><i class="fa-solid fa-leaf"></i> Naturaleza</div>
+    <div class="territory-trust-item"><i class="fa-solid fa-landmark"></i> Cultura</div>
+    <div class="territory-trust-item"><i class="fa-solid fa-water"></i> Playas</div>
+    <div class="territory-trust-item"><i class="fa-solid fa-mountain-sun"></i> Aventura</div>
+    <div class="territory-trust-item"><i class="fa-solid fa-utensils"></i> Gastronomía</div>
+  </div>
+
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper has-hero-header">
     <section class="destinations-section-pro">
       <div class="container">
+        <div class="discovery-heading">
+          <h2>¿Qué querés encontrar?</h2>
+          <p>Explorá por tipo de experiencia y afiná los resultados según tu viaje.</p>
+        </div>
+        <div class="discovery-category-row" id="modernCategoryFilters" role="group" aria-label="Tipos de experiencias">
+          <button class="discovery-chip active" type="button" data-modern-filter="all"><i class="fa-solid fa-border-all"></i>Todos</button>
+          <button class="discovery-chip" type="button" data-modern-filter="naturaleza-all"><i class="fa-solid fa-mountain-sun"></i>Destinos</button>
+          <button class="discovery-chip" type="button" data-modern-filter="playas"><i class="fa-solid fa-umbrella-beach"></i>Playas</button>
+          <button class="discovery-chip" type="button" data-modern-filter="volcanes"><i class="fa-solid fa-volcano"></i>Volcanes</button>
+          <button class="discovery-chip" type="button" data-modern-filter="rios"><i class="fa-solid fa-water"></i>Ríos y lagunas</button>
+          <button class="discovery-chip" type="button" data-modern-filter="selva"><i class="fa-solid fa-leaf"></i>Naturaleza</button>
+          <button class="discovery-chip" type="button" data-modern-filter="museos"><i class="fa-solid fa-landmark"></i>Cultura</button>
+          <button class="discovery-chip" type="button" data-modern-filter="gastronomia"><i class="fa-solid fa-utensils"></i>Gastronomía</button>
+          <button class="discovery-chip" type="button" data-modern-filter="estadias-all"><i class="fa-solid fa-bed"></i>Hospedaje</button>
+          <button class="discovery-chip" type="button" data-modern-filter="discotecas"><i class="fa-solid fa-moon"></i>Vida nocturna</button>
+        </div>
+        <div class="smart-filter-row" aria-label="Filtros inteligentes">
+          <button class="smart-filter-control" type="button"><i class="fa-solid fa-location-dot"></i>Departamento <i class="fa-solid fa-chevron-down"></i></button>
+          <button class="smart-filter-control" type="button"><i class="fa-solid fa-coins"></i>Precio <i class="fa-solid fa-chevron-down"></i></button>
+          <button class="smart-filter-control" type="button"><i class="fa-solid fa-star"></i>Valoración <i class="fa-solid fa-chevron-down"></i></button>
+          <button class="smart-filter-control smart-filter-toggle" type="button" id="verifiedOnlyFilter"><i class="fa-solid fa-circle-check"></i>Verificados</button>
+          <button class="smart-filter-control" type="button" id="nearMeFilter"><i class="fa-solid fa-location-crosshairs"></i>Cerca de mí</button>
+          <span class="smart-filter-spacer"></span>
+          <button class="smart-filter-control" type="button"><i class="fa-solid fa-arrow-down-wide-short"></i>Más populares</button>
+        </div>
+
+        <div class="explorer-layout">
+          <div class="explorer-map-column">
+            <div class="explorer-section-title"><h2>Explorá Nicaragua en el mapa</h2></div>
+            <div id="mapPrioritySlot"></div>
+          </div>
+          <div class="explorer-results-column">
+            <div class="explorer-section-title">
+              <h2>Resultados</h2>
+              <span class="results-live-count" id="modernResultsCount" aria-live="polite">Cargando destinos…</span>
+            </div>
         <!-- SUITE DE NAVEGACIÓN POR CATEGORÍAS & SUBMENÚS -->
         <div class="dest-category-nav-suite" id="destCategoryNav">
           
@@ -7565,6 +7610,36 @@
             </div>
           </div>
         </div>
+            <div class="catalog-load-more-wrap">
+              <button type="button" class="catalog-load-more" id="catalogLoadMore"><i class="fa-solid fa-plus"></i> Cargar más destinos</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="weekly-highlights" aria-labelledby="weeklyHighlightsTitle">
+          <div class="weekly-title">
+            <div><h2 id="weeklyHighlightsTitle">🔥 Destacados de la semana</h2><p>Lugares que están inspirando a más viajeros.</p></div>
+            <a href="#modernCategoryFilters">Ver todos →</a>
+          </div>
+          <div class="weekly-grid">
+            <a class="weekly-card" href="#modernCategoryFilters"><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Isletas de Granada" loading="lazy"><span class="weekly-card-copy"><span>Tendencia</span><strong>Las Isletas de Granada</strong></span></a>
+            <a class="weekly-card" href="#modernCategoryFilters"><img src="assets/images/destinos/selva_negra.jpg" alt="Reserva Miraflor" loading="lazy"><span class="weekly-card-copy"><span>Nuevo en Baqueano</span><strong>Reserva Natural Miraflor</strong></span></a>
+            <a class="weekly-card" href="#modernCategoryFilters"><img src="assets/images/destinos/Bahía de San Juan del Sur &amp; Mirador del Cristo.jpg" alt="San Juan del Sur" loading="lazy"><span class="weekly-card-copy"><span>Escapada de fin de semana</span><strong>San Juan del Sur</strong></span></a>
+            <a class="weekly-card" href="#modernCategoryFilters"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" loading="lazy"><span class="weekly-card-copy"><span>Experiencia auténtica</span><strong>Cañón de Somoto y sus comunidades</strong></span></a>
+          </div>
+        </section>
+
+        <section class="digital-planner" id="digitalPlanner" aria-labelledby="digitalPlannerTitle">
+          <div class="digital-planner-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="digital-planner-copy">
+            <h2 id="digitalPlannerTitle">¿No sabés dónde ir?</h2>
+            <p>Contame qué buscás y Baqueano Digital encuentra lugares para vos.</p>
+            <div class="planner-prompts">
+              <button class="planner-prompt" type="button">Tengo C$1,500</button><button class="planner-prompt" type="button">Quiero naturaleza</button><button class="planner-prompt" type="button">Viajo con niños</button><button class="planner-prompt" type="button">Quiero playa</button><button class="planner-prompt" type="button">Quiero aventura</button><button class="planner-prompt" type="button">Algo cerca</button><button class="planner-prompt" type="button">Tengo solo un día</button>
+            </div>
+          </div>
+          <button class="planner-action" id="openDigitalPlanner" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Planificar con Baqueano Digital</button>
+        </section>
 
         <!-- MAPA INTERACTIVO DE DESTINOS — FIRESTORE EN TIEMPO REAL -->
         <div class="map-section-wrapper destinos-inline-004">
@@ -8719,6 +8794,132 @@
       document.addEventListener('DOMContentLoaded', initDestinationsCarousel);
     } else {
       setTimeout(initDestinationsCarousel, 100);
+    }
+  })();
+  </script>
+
+  <script>
+  /* ========================================================================
+     MOTOR DEL EXPLORADOR TERRITORIAL 2026
+     POR QUÉ: mantener todo el catálogo sin obligar a cargarlo visualmente de golpe.
+     CÓMO: enlaza filtros existentes, mueve el mapa sin recrearlo y pagina el DOM.
+     QUÉ: filtros rápidos, conteo unificado, 12 resultados por tanda y acceso a IA.
+     ======================================================================== */
+  (function () {
+    'use strict';
+
+    var PAGE_SIZE = 12;
+    var visibleLimit = PAGE_SIZE;
+
+    function allCards() {
+      return Array.prototype.slice.call(document.querySelectorAll('.destinations-showcase-grid > .dest-card-pro'));
+    }
+
+    function clearPageHiding() {
+      allCards().forEach(function (card) {
+        if (card.dataset.pageHidden === 'true') {
+          card.style.removeProperty('display');
+          delete card.dataset.pageHidden;
+        }
+      });
+    }
+
+    function applyPagination(reset) {
+      if (reset) visibleLimit = PAGE_SIZE;
+      clearPageHiding();
+
+      var matching = allCards().filter(function (card) {
+        return window.getComputedStyle(card).display !== 'none';
+      });
+
+      matching.forEach(function (card, index) {
+        if (index >= visibleLimit) {
+          card.style.setProperty('display', 'none', 'important');
+          card.dataset.pageHidden = 'true';
+        }
+      });
+
+      var count = document.getElementById('modernResultsCount');
+      var loadMore = document.getElementById('catalogLoadMore');
+      if (count) count.textContent = matching.length + ' destinos encontrados';
+      if (loadMore) loadMore.hidden = matching.length <= visibleLimit;
+    }
+
+    function selectModernChip(button) {
+      document.querySelectorAll('.discovery-chip').forEach(function (chip) {
+        chip.classList.toggle('active', chip === button);
+      });
+    }
+
+    function connectModernFilters() {
+      document.querySelectorAll('[data-modern-filter]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          clearPageHiding();
+          selectModernChip(button);
+          var filter = button.dataset.modernFilter;
+          var legacy = document.querySelector('.cat-filter-btn[data-filter="' + filter + '"]');
+          if (legacy) legacy.click();
+          window.setTimeout(function () { applyPagination(true); }, 80);
+        });
+      });
+
+      var search = document.getElementById('destSearchInput');
+      if (search) {
+        search.addEventListener('input', function () {
+          clearPageHiding();
+          window.setTimeout(function () { applyPagination(true); }, 90);
+        }, true);
+      }
+
+      var loadMore = document.getElementById('catalogLoadMore');
+      if (loadMore) {
+        loadMore.addEventListener('click', function () {
+          visibleLimit += PAGE_SIZE;
+          applyPagination(false);
+        });
+      }
+    }
+
+    function prioritizeMap() {
+      var slot = document.getElementById('mapPrioritySlot');
+      var mapSection = document.querySelector('.map-section-wrapper');
+      if (!slot || !mapSection) return;
+      slot.appendChild(mapSection);
+      window.setTimeout(function () {
+        window.dispatchEvent(new Event('resize'));
+      }, 350);
+    }
+
+    function connectPlanner() {
+      function openAssistant(prompt) {
+        var chatInput = document.getElementById('aiUserInput');
+        var chatWidget = document.getElementById('aiChatWidget');
+        if (chatInput && prompt) chatInput.value = prompt;
+        if (chatWidget) chatWidget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var assistantToggle = document.querySelector('[data-baqueano-assistant-toggle], .baqueano-assistant-toggle, #baqueanoAssistantToggle');
+        if (assistantToggle) assistantToggle.click();
+      }
+
+      document.querySelectorAll('.planner-prompt').forEach(function (button) {
+        button.addEventListener('click', function () {
+          openAssistant('Recomendame destinos: ' + button.textContent.trim());
+        });
+      });
+      var action = document.getElementById('openDigitalPlanner');
+      if (action) action.addEventListener('click', function () { openAssistant('Ayudame a planificar mi viaje por Nicaragua'); });
+    }
+
+    function initModernExplorer() {
+      prioritizeMap();
+      connectModernFilters();
+      connectPlanner();
+      window.setTimeout(function () { applyPagination(true); }, 500);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initModernExplorer, { once: true });
+    } else {
+      initModernExplorer();
     }
   })();
   </script>

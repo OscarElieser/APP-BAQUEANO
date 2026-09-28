@@ -24,6 +24,8 @@
 
 <!-- Consulta completada (27-09-2026): rediseño del menú lateral plegable de Android. -->
 
+<!-- Consulta 27-09-2026: adaptación visual coordinada de index.html y destinos.html según referencias entregadas. Se conservaron recursos, contenido y funciones; se añadieron una portada editorial compacta y un explorador territorial paginado. Validación de JavaScript inline y git diff completada. -->
+
 ## Menú lateral plegable de la aplicación Android
 
 ### Ajuste solicitado — todos los botones individuales
