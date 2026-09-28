@@ -1,42 +1,40 @@
 /*
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — NAVEGACIÓN GLOBAL INSTITUCIONAL & MEGA MENÚ
+🧭 BAQUEANO ECOSYSTEM — NAVEGACIÓN GLOBAL INSTITUCIONAL & MEGA MENÚ (BLANCO LUMINOSO)
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Ofrecer la barra de navegación flotante tipo cápsula con glassmorphism de alta gama,
-  garantizando que la experiencia de exploración sea intuitiva, viva y consistente
-  en todo el ecosistema Baqueano Nicaragua.
-- Brindar acceso inmediato a las 4 áreas estratégicas: Explorar, Cultura, Comunidad
-  y Cuenta/Plataforma (incluyendo el acceso al Ops Center administrativo).
+- Devolver la estética original y luminosa del Navbar Cápsula Flotante con fondo
+  blanco (#FFFFFF) de alta gama, máxima legibilidad y contraste superior (#0F172A).
+- Garantizar que los enlaces centrales (Inicio, Explorar, Cultura, Baqueano IA,
+  Mi Viaje, Más) sean 100% visibles e interactivos en todos los dispositivos y resoluciones.
+- Proveer acceso unificado al Mega Menú de 4 columnas simétricas y al sistema de
+  internacionalización bilingüe (ES / EN).
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- SELECTORES RAÍZ DE MÁXIMA ESPECIFICIDAD: #mainNavbar y .bq-navbar-capsule para
-  garantizar que ningún otro CSS del ecosistema pueda sobreescribir este diseño.
-- Cápsula flotante suspendida con backdrop-filter: blur(22px), bordes redondeados (pill),
-  y paleta oficial: #165D6F (Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
-- Indicador caret naranja dinámico en el botón "Más" que conecta visualmente con el Mega Menú.
-- Mega Menú de 4 columnas simétricas con iconos circulares de categoría, enlaces con iconos
-  y badge exclusivo "Solo personal" para Admin / Ops Center.
-- Todos los selectores con !important para máxima especificidad sin refactoring masivo.
+- Cápsula flotante suspendida con background: rgba(255, 255, 255, 0.98), backdrop-filter
+  y sombra refinada contra el fondo de la página.
+- Tipografía oscura de alta fidelidad (#0F172A Noche Profunda) con hover en terracota (#F65E01)
+  y píldora activa en petróleo teal (#165D6F).
+- Reglas explícitas de visualización para que ningún selector heredado oculte los ítems centrales.
+- Mega Menú de 4 columnas sobre fondo blanco con bordes limpios y tarjeta de acceso seguro a Admin.
 
-📦 3. QUÉ (WHAT / ENTREGABLES & SELECTORES):
-- #mainNavbar — selector raíz de máxima prioridad
-- .main-navbar-exact, .main-navbar — compatibilidad hacia atrás
-- .exact-nav-menu, .nav-links-menu — menú central horizontal
-- .global-more-dropdown, .global-mega-menu — mega menú 4 columnas
-- .global-nav-actions, .exact-nav-actions — acciones derechas
-- .navbar-sos-btn (rojo), .navbar-login-btn (verde), .global-weather, .global-language
+📦 3. QUÉ (WHAT / SELECTORES & ENTREGABLES):
+- #mainNavbar, .main-navbar-exact, .bq-navbar-capsule: cápsula blanca flotante.
+- .exact-nav-menu, .nav-links-menu: contenedor central visible flex.
+- .exact-nav-link: enlaces con texto oscuro y active pill teal.
+- .global-mega-menu: mega menú de 4 columnas blanco con bordes refinados.
+- .navbar-sos-btn (rojo vivo), .navbar-login-btn (verde esmeralda), .navbar-lang-pill (ES / EN).
 ============================================================================
 */
 
 /* ============================================================================
-   RESET COMPLETO DEL NAVBAR HEREDADO — neutralizar index-exact.css y styles.css
+   CÁPSULA PRINCIPAL FLOTANTE — BLANCO LUMINOSO DE ALTA GAMA
    ============================================================================ */
 #mainNavbar,
 #mainNavbar.main-navbar-exact,
-#mainNavbar.main-navbar {
-  /* Cancelar position:fixed del index-exact.css */
+#mainNavbar.main-navbar,
+.bq-navbar-capsule {
   position: sticky !important;
   top: 14px !important;
   left: auto !important;
@@ -47,16 +45,16 @@
   /* Forma de cápsula flotante */
   width: min(1400px, calc(100% - 32px)) !important;
   margin: 14px auto 0 !important;
-  padding: 6px 18px !important;
+  padding: 6px 20px !important;
   border-radius: 9999px !important;
 
-  /* Glassmorphism oscuro */
-  background: rgba(11, 37, 58, 0.88) !important;
-  backdrop-filter: blur(22px) !important;
-  -webkit-backdrop-filter: blur(22px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  /* Glassmorphism Blanco Luminoso Oficial */
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04) !important;
 
   /* Layout flex */
   display: flex !important;
@@ -68,7 +66,6 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Cancelar pseudo-elementos del styles.css que agregan efectos de borde */
 #mainNavbar::before,
 #mainNavbar::after {
   display: none !important;
@@ -86,11 +83,11 @@
   padding: 0 !important;
   margin: 0 !important;
   overflow: visible !important;
-  gap: 0 !important;
+  gap: 12px !important;
 }
 
 /* ============================================================================
-   LOGOTIPO BAQUEANO
+   LOGOTIPO BAQUEANO — CONTRASTE ALTO SOBRE BLANCO
    ============================================================================ */
 #mainNavbar .exact-nav-brand,
 #mainNavbar .navbar-brand-pill {
@@ -98,7 +95,7 @@
   align-items: center !important;
   gap: 10px !important;
   text-decoration: none !important;
-  color: #FFFFFF !important;
+  color: #0F172A !important;
   flex-shrink: 0 !important;
 }
 
@@ -107,7 +104,7 @@
   width: 44px !important;
   height: 44px !important;
   object-fit: contain !important;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3)) !important;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.15)) !important;
 }
 
 #mainNavbar .exact-nav-brand-text,
@@ -123,28 +120,30 @@
   font-weight: 900 !important;
   font-size: 1.15rem !important;
   letter-spacing: 0.08em !important;
-  color: #FFFFFF !important;
+  color: #0F172A !important;
   line-height: 1 !important;
 }
 
 #mainNavbar .exact-nav-tagline,
 #mainNavbar .navbar-brand-sub {
   font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   font-size: 0.52rem !important;
   letter-spacing: 0.22em !important;
-  color: #F4E6C1 !important;
+  color: #F65E01 !important;
   text-transform: uppercase !important;
   margin-top: 2px !important;
-  opacity: 0.9 !important;
+  opacity: 1 !important;
 }
 
 /* ============================================================================
-   ENLACES DEL MENÚ CENTRAL
+   ENLACES DEL MENÚ CENTRAL — 100% VISIBLES Y DESTACADOS
    ============================================================================ */
 #mainNavbar .exact-nav-menu,
 #mainNavbar .nav-links-menu {
   display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   align-items: center !important;
   gap: 4px !important;
   margin: 0 !important;
@@ -154,7 +153,6 @@
   overflow: visible !important;
   flex: 1 !important;
   justify-content: center !important;
-  /* Cancelar mobile transform heredado */
   transform: none !important;
   width: auto !important;
   height: auto !important;
@@ -167,52 +165,54 @@
 #mainNavbar .nav-link-item,
 #mainNavbar .nav-links-menu > a {
   display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 7px 16px !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 7px 15px !important;
+  color: #0F172A !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.86rem !important;
-  font-weight: 600 !important;
-  border-radius: 20px !important;
-  transition: all 0.2s ease !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  border-radius: 9999px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   white-space: nowrap !important;
   border: 1px solid transparent !important;
   background: transparent !important;
   line-height: 1 !important;
 }
 
+#mainNavbar .exact-nav-link .nav-label,
+#mainNavbar .nav-links-menu a span {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
 #mainNavbar .exact-nav-link:hover,
 #mainNavbar .nav-link-item:hover,
 #mainNavbar .nav-links-menu > a:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #FFFFFF !important;
+  background: rgba(246, 94, 1, 0.08) !important;
+  color: #F65E01 !important;
 }
 
-/* Píldora Activa (Inicio) */
+/* Píldora Activa (Inicio u otra sección) */
 #mainNavbar .exact-nav-link.active,
 #mainNavbar .nav-link-item.active,
 #mainNavbar .nav-links-menu > a.active {
   background: #165D6F !important;
   color: #FFFFFF !important;
-  font-weight: 700 !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 2px 12px rgba(22, 93, 111, 0.5) !important;
+  font-weight: 800 !important;
+  border-color: rgba(22, 93, 111, 0.4) !important;
+  box-shadow: 0 3px 12px rgba(22, 93, 111, 0.35) !important;
 }
 
-/* ── Nav Label (span dentro de los links) ── */
-#mainNavbar .nav-label {
-  pointer-events: none !important;
-}
-
-/* ── Icono nav-item-content / nav-icon-box: cancelar herencia de styles.css ── */
-#mainNavbar .nav-links-menu a .nav-item-content,
-#mainNavbar .nav-links-menu a .nav-icon-box,
-#mainNavbar .nav-links-menu a .nav-icon,
-#mainNavbar .nav-links-menu a .nav-sublabel,
-#mainNavbar .nav-links-menu a .nav-right-wrap {
-  display: none !important;
+#mainNavbar .exact-nav-link.active .nav-label,
+#mainNavbar .nav-links-menu > a.active span {
+  color: #FFFFFF !important;
 }
 
 /* ============================================================================
@@ -231,13 +231,13 @@
   display: inline-flex !important;
   align-items: center !important;
   gap: 5px !important;
-  padding: 7px 16px !important;
-  background: rgba(255, 255, 255, 0.07) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
-  border-radius: 20px !important;
-  color: #FFFFFF !important;
+  padding: 7px 15px !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border: 1.5px solid rgba(15, 23, 42, 0.14) !important;
+  border-radius: 9999px !important;
+  color: #0F172A !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.86rem !important;
+  font-size: 0.88rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
@@ -248,13 +248,15 @@
 
 #mainNavbar .nav-dropdown-trigger:hover,
 #mainNavbar .exact-nav-dropdown-btn:hover {
-  background: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(246, 94, 1, 0.08) !important;
   border-color: #F65E01 !important;
+  color: #F65E01 !important;
 }
 
 #mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger {
-  background: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(246, 94, 1, 0.1) !important;
   border-color: #F65E01 !important;
+  color: #F65E01 !important;
 }
 
 /* Flechita / Caret Naranja apuntando al Mega Menú */
@@ -265,7 +267,7 @@
   left: 50% !important;
   width: 14px !important;
   height: 14px !important;
-  background: #0B253A !important;
+  background: #FFFFFF !important;
   border-left: 2px solid #F65E01 !important;
   border-top: 2px solid #F65E01 !important;
   transform: translateX(-50%) rotate(45deg) !important;
@@ -279,9 +281,8 @@
   opacity: 1 !important;
 }
 
-/* Ícono del chevron en "Más" */
 #mainNavbar .nav-dropdown-trigger .fa-chevron-down {
-  font-size: 0.7rem !important;
+  font-size: 0.72rem !important;
   transition: transform 0.25s ease !important;
   color: #F65E01 !important;
 }
@@ -291,7 +292,7 @@
 }
 
 /* ============================================================================
-   EL MEGA MENÚ DESPLEGABLE (4 COLUMNAS)
+   EL MEGA MENÚ DESPLEGABLE (4 COLUMNAS BLANCAS)
    ============================================================================ */
 #mainNavbar .global-mega-menu,
 #mainNavbar .nav-dropdown-menu.global-mega-menu,
@@ -304,15 +305,15 @@
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 0 !important;
-  width: min(1060px, 94vw) !important;
+  width: min(1080px, 94vw) !important;
   min-width: 0 !important;
-  padding: 28px 24px !important;
+  padding: 24px 20px !important;
   border-radius: 20px !important;
-  background: rgba(10, 30, 48, 0.97) !important;
+  background: #FFFFFF !important;
   backdrop-filter: blur(28px) !important;
   -webkit-backdrop-filter: blur(28px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(246, 94, 1, 0.08) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(246, 94, 1, 0.1) !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -332,18 +333,18 @@
 #mainNavbar .global-mega-column {
   display: flex !important;
   flex-direction: column !important;
-  gap: 2px !important;
-  padding: 0 20px !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  gap: 3px !important;
+  padding: 0 18px !important;
+  border-right: 1px solid rgba(15, 23, 42, 0.08) !important;
 }
 
 #mainNavbar .global-mega-column:first-child {
-  padding-left: 0 !important;
+  padding-left: 4px !important;
 }
 
 #mainNavbar .global-mega-column:last-child {
   border-right: none !important;
-  padding-right: 0 !important;
+  padding-right: 4px !important;
 }
 
 /* Encabezados de Columna */
@@ -352,34 +353,33 @@
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
-  margin: 0 0 14px 0 !important;
-  padding: 0 0 12px 0 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  margin: 0 0 12px 0 !important;
+  padding: 0 0 10px 0 !important;
+  border-bottom: 2px solid rgba(22, 93, 111, 0.15) !important;
   font-family: 'Montserrat', sans-serif !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #FFFFFF !important;
+  color: #165D6F !important;
   letter-spacing: 0.01em !important;
 }
 
-/* Iconos de cabecera por columna */
-#mainNavbar .global-mega-column.explore h2 i { color: #10B981 !important; }
+#mainNavbar .global-mega-column.explore h2 i { color: #165D6F !important; }
 #mainNavbar .global-mega-column.culture h2 i { color: #F65E01 !important; }
-#mainNavbar .global-mega-column.community h2 i { color: #38BDF8 !important; }
-#mainNavbar .global-mega-column.account h2 i { color: #CBD5E1 !important; }
+#mainNavbar .global-mega-column.community h2 i { color: #0284C7 !important; }
+#mainNavbar .global-mega-column.account h2 i { color: #475569 !important; }
 
 /* Links dentro del Mega Menú */
 #mainNavbar .global-mega-column a {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
-  padding: 7px 10px !important;
+  padding: 8px 10px !important;
   border-radius: 8px !important;
-  color: rgba(255, 255, 255, 0.82) !important;
+  color: #0F172A !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.83rem !important;
-  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
   transition: all 0.18s ease !important;
   border: none !important;
   background: transparent !important;
@@ -387,8 +387,8 @@
 }
 
 #mainNavbar .global-mega-column a:hover {
-  background: rgba(255, 255, 255, 0.09) !important;
-  color: #FFFFFF !important;
+  background: #FFF7ED !important;
+  color: #F65E01 !important;
   padding-left: 14px !important;
 }
 
@@ -396,32 +396,39 @@
   width: 20px !important;
   text-align: center !important;
   font-size: 0.92rem !important;
-  color: rgba(244, 230, 193, 0.8) !important;
+  color: #165D6F !important;
   flex-shrink: 0 !important;
+  transition: color 0.18s ease !important;
 }
 
-/* Enlace a Admin / Ops Center */
+#mainNavbar .global-mega-column a:hover i {
+  color: #F65E01 !important;
+}
+
+/* Enlace a Admin / Ops Center en Columna 4 */
 #mainNavbar .global-admin-link {
   margin-top: 8px !important;
   padding-top: 10px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  color: #F4E6C1 !important;
+  background: rgba(246, 94, 1, 0.05) !important;
+  border-radius: 8px !important;
+  color: #0F172A !important;
   font-weight: 700 !important;
   gap: 8px !important;
-  padding-left: 10px !important;
+  padding: 8px 10px !important;
 }
 
 #mainNavbar .global-admin-link small {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(246, 94, 1, 0.12) !important;
+  border: 1px solid rgba(246, 94, 1, 0.3) !important;
   border-radius: 12px !important;
   padding: 2px 8px !important;
   font-size: 0.64rem !important;
-  color: #CBD5E1 !important;
-  font-weight: 600 !important;
+  color: #F65E01 !important;
+  font-weight: 700 !important;
   margin-left: auto !important;
   white-space: nowrap !important;
 }
@@ -434,7 +441,7 @@
 #mainNavbar .nav-actions-right {
   display: flex !important;
   align-items: center !important;
-  gap: 7px !important;
+  gap: 8px !important;
   flex-shrink: 0 !important;
 }
 
@@ -445,19 +452,19 @@
   align-items: center !important;
   gap: 6px !important;
   padding: 6px 12px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 20px !important;
-  color: #FFFFFF !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  border-radius: 9999px !important;
+  color: #0F172A !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 0.78rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   white-space: nowrap !important;
 }
 
 #mainNavbar .global-weather i,
 #mainNavbar .navbar-weather-pill i {
-  color: #38BDF8 !important;
+  color: #0284C7 !important;
   font-size: 0.85rem !important;
 }
 
@@ -470,9 +477,9 @@
   width: 36px !important;
   height: 36px !important;
   border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  color: #FFFFFF !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  color: #0F172A !important;
   text-decoration: none !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
@@ -481,8 +488,9 @@
 
 #mainNavbar .global-search:hover,
 #mainNavbar .navbar-search-btn:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(246, 94, 1, 0.08) !important;
   border-color: #F65E01 !important;
+  color: #F65E01 !important;
 }
 
 /* Switch Tema Día/Noche */
@@ -492,89 +500,115 @@
   align-items: center !important;
   gap: 5px !important;
   padding: 5px 10px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 20px !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  border-radius: 9999px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  color: #FFFFFF !important;
+  color: #0F172A !important;
 }
 
-#mainNavbar .global-theme .fa-sun { color: #FBBF24 !important; font-size: 0.85rem !important; }
-#mainNavbar .global-theme .fa-moon { color: #94A3B8 !important; font-size: 0.85rem !important; }
+#mainNavbar .global-theme .fa-sun { color: #D97706 !important; font-size: 0.85rem !important; }
+#mainNavbar .global-theme .fa-moon { color: #2563EB !important; font-size: 0.85rem !important; }
 
-/* Botón SOS Rojo */
+/* Botón SOS Rojo Vivo de Máximo Rescate */
 #mainNavbar .sos-quick-btn,
-#mainNavbar .navbar-sos-btn {
+#mainNavbar .navbar-sos-btn,
+.bq-nav-sos {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 5px !important;
-  padding: 7px 14px !important;
-  background: #DC2626 !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
+  gap: 6px !important;
+  padding: 7px 15px !important;
+  background: #EF4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  border-radius: 9999px !important;
   color: #FFFFFF !important;
   text-decoration: none !important;
-  font-family: 'Inter', sans-serif !important;
-  font-size: 0.78rem !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.80rem !important;
   font-weight: 800 !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 12px rgba(220, 38, 38, 0.45) !important;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4) !important;
   transition: all 0.2s ease !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.05em !important;
   white-space: nowrap !important;
 }
 
 #mainNavbar .sos-quick-btn:hover,
-#mainNavbar .navbar-sos-btn:hover {
-  background: #B91C1C !important;
+#mainNavbar .navbar-sos-btn:hover,
+.bq-nav-sos:hover {
+  background: #DC2626 !important;
   transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5) !important;
 }
 
-/* Botón Iniciar Sesión Verde */
+#mainNavbar .sos-quick-btn i,
+#mainNavbar .navbar-sos-btn i {
+  color: #FFFFFF !important;
+}
+
+/* Botón Iniciar Sesión Verde Esmeralda */
 #mainNavbar .exact-nav-btn-login,
 #mainNavbar .global-session,
-#mainNavbar .navbar-login-btn {
+#mainNavbar .navbar-login-btn,
+.bq-nav-login {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  padding: 7px 14px !important;
+  padding: 7px 16px !important;
   background: #10B981 !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  border-radius: 9999px !important;
   color: #FFFFFF !important;
   text-decoration: none !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.78rem !important;
+  font-size: 0.82rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.35) !important;
   transition: all 0.2s ease !important;
   white-space: nowrap !important;
 }
 
 #mainNavbar .exact-nav-btn-login:hover,
 #mainNavbar .global-session:hover,
-#mainNavbar .navbar-login-btn:hover {
+#mainNavbar .navbar-login-btn:hover,
+.bq-nav-login:hover {
   background: #059669 !important;
   transform: translateY(-1px) !important;
+  box-shadow: 0 5px 16px rgba(5, 150, 105, 0.45) !important;
 }
 
-/* Selector Idioma */
+/* Selector Idioma (ES / EN) */
 #mainNavbar .global-language,
 #mainNavbar .navbar-lang-pill {
+  position: relative !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 4px !important;
-  padding: 7px 11px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 8px !important;
-  color: #FFFFFF !important;
+  gap: 5px !important;
+  padding: 6px 12px !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border: 1.5px solid rgba(15, 23, 42, 0.14) !important;
+  border-radius: 9999px !important;
+  color: #0F172A !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.78rem !important;
-  font-weight: 700 !important;
+  font-size: 0.80rem !important;
+  font-weight: 800 !important;
   cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+#mainNavbar .global-language:hover,
+#mainNavbar .navbar-lang-pill:hover {
+  background: rgba(246, 94, 1, 0.08) !important;
+  border-color: #F65E01 !important;
+  color: #F65E01 !important;
+}
+
+#mainNavbar .global-language i,
+#mainNavbar .navbar-lang-pill i {
+  color: #F65E01 !important;
+  font-size: 0.68rem !important;
 }
 
 /* Botón Hamburguesa Móvil */
@@ -585,72 +619,30 @@
   justify-content: center !important;
   width: 38px !important;
   height: 38px !important;
-  background: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
   border-radius: 8px !important;
-  color: #FFFFFF !important;
+  color: #0F172A !important;
   font-size: 1.1rem !important;
   cursor: pointer !important;
 }
 
 /* ============================================================================
-   COMPATIBILIDAD HACIA ATRÁS — Selectores sin #mainNavbar
-   (para páginas secundarias donde navigation.js inyecta el menú)
-   ============================================================================ */
-.main-navbar:not(#mainNavbar),
-.main-navbar-exact:not(#mainNavbar) {
-  position: sticky !important;
-  top: 14px !important;
-  left: auto !important;
-  right: auto !important;
-  height: auto !important;
-  min-height: 64px !important;
-  width: min(1400px, calc(100% - 32px)) !important;
-  margin: 14px auto 0 !important;
-  padding: 6px 18px !important;
-  border-radius: 9999px !important;
-  background: rgba(11, 37, 58, 0.88) !important;
-  backdrop-filter: blur(22px) !important;
-  -webkit-backdrop-filter: blur(22px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  overflow: visible !important;
-  box-sizing: border-box !important;
-  z-index: 9999 !important;
-}
-
-.main-navbar:not(#mainNavbar)::before,
-.main-navbar:not(#mainNavbar)::after,
-.main-navbar-exact:not(#mainNavbar)::before,
-.main-navbar-exact:not(#mainNavbar)::after {
-  display: none !important;
-  content: none !important;
-}
-
-/* ============================================================================
-   RESPONSIVE & MÓVIL
+   RESPONSIVIDAD Y BREAKPOINTS (MENÚ MÓVIL Y TABLET)
    ============================================================================ */
 @media (max-width: 1200px) {
-  #mainNavbar .global-weather,
-  #mainNavbar .navbar-weather-pill {
-    display: none !important;
+  #mainNavbar .global-mega-menu {
+    width: min(960px, 96vw) !important;
+    padding: 20px 16px !important;
+  }
+  #mainNavbar .exact-nav-link,
+  #mainNavbar .nav-links-menu > a {
+    padding: 7px 12px !important;
+    font-size: 0.84rem !important;
   }
 }
 
-@media (max-width: 1024px) {
-  #mainNavbar .global-theme,
-  #mainNavbar .navbar-theme-pill,
-  #mainNavbar .global-language,
-  #mainNavbar .navbar-lang-pill {
-    display: none !important;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 860px) {
   #mainNavbar,
   #mainNavbar.main-navbar-exact {
     border-radius: 20px !important;
@@ -664,6 +656,7 @@
     display: inline-flex !important;
   }
 
+  /* Drawer Lateral Móvil en Blanco Limpio */
   #mainNavbar .exact-nav-menu,
   #mainNavbar .nav-links-menu {
     position: fixed !important;
@@ -671,13 +664,13 @@
     left: 0 !important;
     width: min(88vw, 340px) !important;
     height: 100vh !important;
-    background: rgba(10, 30, 48, 0.98) !important;
+    background: #FFFFFF !important;
     backdrop-filter: blur(28px) !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     padding: 80px 20px 30px !important;
     gap: 8px !important;
-    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 10px 0 40px rgba(15, 23, 42, 0.25) !important;
     transform: translateX(-105%) !important;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     overflow-y: auto !important;
@@ -687,8 +680,17 @@
   }
 
   #mainNavbar .exact-nav-menu.nav-active,
-  #mainNavbar .nav-links-menu.mobile-open {
+  #mainNavbar .nav-links-menu.mobile-open,
+  #mainNavbar .nav-links-menu.open {
     transform: translateX(0) !important;
+  }
+
+  #mainNavbar .exact-nav-menu a,
+  #mainNavbar .nav-links-menu a {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    padding: 10px 14px !important;
+    color: #0F172A !important;
   }
 
   #mainNavbar .global-mega-menu {
@@ -698,6 +700,7 @@
     padding: 14px 0 !important;
     display: none !important;
     box-shadow: none !important;
+    border: none !important;
     border-radius: 12px !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -714,12 +717,16 @@
 
   #mainNavbar .global-mega-column {
     border-right: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
     padding: 10px 0 !important;
   }
 
   #mainNavbar .exact-nav-btn-login span,
   #mainNavbar .global-session span {
+    display: none !important;
+  }
+
+  #mainNavbar .global-weather {
     display: none !important;
   }
 }

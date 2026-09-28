@@ -1607,13 +1607,19 @@
    13. ADAPTABILIDAD RESPONSIVA (MOBILE & TABLET BREAKPOINTS)
    ============================================================================ */
 @media (max-width: 1024px) {
-  .exact-nav-menu { display: none; }
-  .exact-nav-mobile-toggle { display: block; }
+  /* Menú central visible en tablets y laptops */
+  .exact-nav-menu { display: flex !important; }
+  .exact-nav-mobile-toggle { display: none; }
   .destinations-row-exact { grid-template-columns: repeat(3, 1fr); }
   .map-ai-grid-exact { grid-template-columns: 1fr; }
   .why-baqueano-grid { grid-template-columns: 1fr; gap: 20px; }
   .experiences-row-exact { grid-template-columns: repeat(2, 1fr); }
   .footer-top-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+@media (max-width: 860px) {
+  .exact-nav-menu { display: none !important; }
+  .exact-nav-mobile-toggle { display: inline-flex !important; }
 }
 
 @media (max-width: 768px) {
