@@ -1326,3 +1326,58 @@
   - 12 archivos HTML y `website/js/global-injector.js` actualizados con los enlaces oficiales de Instagram, Facebook y TikTok.
   - `SESSION_LOG.md`: Bitácora actualizada.
 
+
+---
+
+## Sesión 28-09-2026 — Corrección Definitiva del Menú Cápsula (Continuación)
+
+### 🎯 Directiva del Usuario
+- **"el menu esta totalmente horrible"** → Reconstrucción pixel-perfect del navbar flotante tipo cápsula.
+- **"CONTINUAR"** → Reanudación desde el punto de compactación de sesión.
+
+### ⚙️ Cambios Técnicos Aplicados
+
+#### 1. website/css/navigation-mega.css — Reescritura con Selector ID #mainNavbar
+- **Problema raíz identificado:** styles.css define .main-navbar { position: fixed; z-index: 10050 !important } y index-exact.css define .main-navbar-exact { position: fixed; height: 70px }, ambos aplastando el diseño de cápsula.
+- **Solución:** Todo el CSS del navbar fue reescrito usando #mainNavbar como selector raíz (ID = mayor especificidad que clase), con !important en todos los valores críticos.
+- **z-index:** Elevado a 10100 !important para superar el 10050 !important de styles.css.
+- **Pseudo-elementos cancelados:** #mainNavbar::before, #mainNavbar::after { display: none !important } para eliminar el filamento de luz animado del styles.css que rompía el borde de la cápsula.
+- **Mega Menú:** Reposicionado con position: fixed; left: 50%; transform: translateX(-50%) para centrado perfecto bajo la cápsula.
+
+#### 2. website/index.html — Orden de carga de CSS optimizado
+- 
+avigation-mega.css movido al final del <head> para máxima prioridad en cascada.
+- Versión actualizada a ?v=20260928-nav-fix-2.
+
+#### 3. website/css/pages/index-exact.css — Hero padding eliminado
+- .hero-exact { padding-top: 70px } → padding-top: 0 (navbar ya es sticky, no fixed).
+
+#### 4. website/js/navigation.js — Versión CSS sincronizada
+- String de versión actualizado a 
+av-fix-2.
+
+#### 5. 19 páginas HTML secundarias — CSS del navbar inyectado
+- Todas las páginas secundarias recibieron el <link> de 
+avigation-mega.css al final del <head>.
+- Páginas actualizadas: aliados, ambiental, baqueano-ai, cookies, denuncias, departamento, destinos, experiencias, gastronomia, historia, legal, mapa, mi-negocio, musica, nosotros, perfil, privacidad, terminos, aviso-legal.
+
+#### 6. website/js/global-injector.js — Llamada a uildGlobalMegaNavigation() en init()
+- El init() ahora llama uildGlobalMegaNavigation() si está disponible, activando el mega menú en todas las páginas donde navigation.js esté cargado.
+
+### ✅ Estado de Verificación
+- index.html: 8/8 checks pasados ✓
+- aqueano-ia.html: 11/11 checks pasados ✓
+- mi-viaje.html: 10/10 checks pasados ✓
+- Todas las 23 páginas HTML tienen 
+avigation-mega.css linkeado ✓
+- Todas las páginas con id="mainNavbar" detectadas: 19 páginas ✓
+
+### 📦 Commits Realizados
+- d085cc3: fix(navbar): rewrite nav CSS with #mainNavbar ID for max specificity
+- e63598c: fix(navbar): inject navigation-mega.css in all 19 pages + call buildGlobalMegaNavigation
+- 95af7be: actualizacion oscar122 (commit del usuario)
+
+### 🔜 Próximos Pasos Sugeridos
+1. Verificar visualmente el menú abriendo http://localhost:3000/ en el navegador
+2. Revisar 404.html y offline.html que aún no tienen el navbar actualizado
+3. Revisar si dmin.html (Ops Center) necesita el mismo navbar para coherencia visual
