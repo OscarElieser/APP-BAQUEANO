@@ -152,7 +152,7 @@
       <div class="prof-user-left">
         <div class="prof-avatar-box">
           <img src="assets/images/destinos/ometepe.webp" alt="Oscar Elieser" class="prof-avatar-img" onerror="this.src='assets/images/logo.png'">
-          <button type="button" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></button>
+          <a href="perfil.html?editar=foto#perfil-personal" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></a>
         </div>
         <div class="prof-user-info">
           <h3>Oscar Elieser <span class="prof-user-badge">Explorador BAQUEANO</span></h3>
@@ -183,7 +183,7 @@
           <i class="fa-solid fa-star prof-stat-icon yellow"></i>
           <div><div class="prof-stat-val">8</div><span class="prof-stat-lbl">Reseñas realizadas</span></div>
         </div>
-        <button type="button" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> Editar perfil</button>
+        <a href="#perfil-personal" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> Editar perfil</a>
       </div>
     </div>
   </section>
@@ -191,19 +191,19 @@
   <!-- TABS DE NAVEGACIÓN -->
   <section class="prof-tabs-section">
     <div class="prof-tabs-bar">
-      <button type="button" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> Resumen</button>
+      <a href="#resumen" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> Resumen</a>
       <a href="mi-viaje.html" class="prof-tab-btn"><i class="fa-solid fa-route"></i> Mi Viaje</a>
-      <button type="button" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> Reservas</button>
+      <a href="#reservas" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
       <a href="mi-viaje.html#favoritos" class="prof-tab-btn"><i class="fa-regular fa-heart"></i> Favoritos</a>
-      <button type="button" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> Preferencias</button>
-      <button type="button" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> Seguridad</button>
-      <button type="button" class="prof-tab-btn"><i class="fa-regular fa-credit-card"></i> Pagos</button>
+      <a href="#preferencias" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> Preferencias</a>
+      <a href="#seguridad" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> Seguridad</a>
+      <a href="#pagos" class="prof-tab-btn"><i class="fa-regular fa-credit-card"></i> Pagos</a>
       <a href="privacidad.html" class="prof-tab-btn"><i class="fa-solid fa-lock"></i> Privacidad</a>
     </div>
   </section>
 
   <!-- TOP 3 CARDS: PRÓXIMO VIAJE, MIS RESERVAS, FAVORITOS RECIENTES -->
-  <section class="prof-top-cards">
+  <section class="prof-top-cards" id="resumen">
     <!-- PRÓXIMO VIAJE -->
     <div class="prof-card">
       <div class="prof-card-header">
@@ -224,15 +224,15 @@
     </div>
 
     <!-- MIS RESERVAS -->
-    <div class="prof-card">
+    <div class="prof-card" id="reservas">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-bag-shopping" style="color:var(--prof-green)"></i> Mis reservas</h4>
-        <a href="#">Ver todas →</a>
+        <a href="mi-viaje.html#reservas">Ver todas →</a>
       </div>
       <div class="prof-res-tabs">
-        <button type="button" class="prof-res-pill active">Próximas 2</button>
-        <button type="button" class="prof-res-pill">Completadas 5</button>
-        <button type="button" class="prof-res-pill">Canceladas 0</button>
+        <button type="button" class="prof-res-pill active" data-reservation-filter="proximas">Próximas 2</button>
+        <button type="button" class="prof-res-pill" data-reservation-filter="completadas">Completadas 5</button>
+        <button type="button" class="prof-res-pill" data-reservation-filter="canceladas">Canceladas 0</button>
       </div>
       <div class="prof-res-list">
         <div class="prof-res-item">
@@ -287,7 +287,7 @@
   </section>
 
   <!-- MIS PREFERENCIAS DE VIAJE & BANNER PANORÁMICO -->
-  <section class="prof-prefs-section">
+  <section class="prof-prefs-section" id="preferencias">
     <div class="prof-prefs-card">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-compass" style="color:var(--prof-primary)"></i> Mis preferencias de viaje</h4>
@@ -316,12 +316,12 @@
   </section>
 
   <!-- MIDDLE ROW: INFORMACIÓN PERSONAL, IDIOMA/MONEDA, SALUD/BIENESTAR -->
-  <section class="prof-mid-cards">
+  <section class="prof-mid-cards" id="perfil-personal">
     <!-- INFO PERSONAL -->
     <div class="prof-card">
       <div class="prof-card-header">
         <h4><i class="fa-regular fa-user" style="color:var(--prof-primary)"></i> Información personal</h4>
-        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</button>
+        <a href="perfil.html?editar=datos#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div class="prof-field-list">
         <div class="prof-field-item"><i class="fa-solid fa-id-badge"></i><div><small>Nombre completo</small><strong>Oscar Elieser Chamorro Guzmán</strong></div></div>
@@ -336,7 +336,7 @@
     <div class="prof-card">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-globe" style="color:var(--prof-green)"></i> Idioma y moneda</h4>
-        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</button>
+        <a href="perfil.html?editar=idioma#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div>
@@ -363,7 +363,7 @@
     <div class="prof-card">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-heart-pulse" style="color:#EF4444"></i> Salud, accesibilidad y bienestar</h4>
-        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</button>
+        <a href="perfil.html?editar=accesibilidad#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div class="prof-field-list">
         <div class="prof-field-item"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><div><small>Alergias o restricciones</small><strong>Ninguna</strong></div></div>
@@ -379,10 +379,10 @@
   <!-- BOTTOM ROW: SEGURIDAD, PAGOS, PRIVACIDAD -->
   <section class="prof-bottom-cards">
     <!-- SEGURIDAD -->
-    <div class="prof-card">
+    <div class="prof-card" id="seguridad">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-shield-halved" style="color:var(--prof-green)"></i> Seguridad de la cuenta</h4>
-        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Configurar seguridad</button>
+        <a href="privacidad.html" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Configurar seguridad</a>
       </div>
       <div class="prof-field-list">
         <div class="prof-field-item"><i class="fa-solid fa-lock"></i><div><small>Contraseña</small><strong>Última actualización: 15 ago. 2026</strong> <span class="prof-res-status" style="margin-left:6px">Segura</span></div></div>
@@ -390,22 +390,22 @@
         <div class="prof-field-item"><i class="fa-solid fa-key"></i><div><small>Autenticación en dos pasos (2FA)</small><strong>Activada</strong> <span class="prof-res-status" style="margin-left:6px">Activada</span></div></div>
         <div style="font-size:0.75rem;color:var(--prof-muted);border-top:1px dashed #EDF2F7;padding-top:8px;display:flex;justify-content:space-between">
           <span>Windows · Managua, NIC · Hace 2 horas</span>
-          <a href="#" style="color:var(--prof-primary);font-weight:700">Ver todas →</a>
+          <a href="privacidad.html" style="color:var(--prof-primary);font-weight:700">Ver todas →</a>
         </div>
       </div>
     </div>
 
     <!-- PAGOS Y FACTURACIÓN -->
-    <div class="prof-card">
+    <div class="prof-card" id="pagos">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-wallet" style="color:var(--prof-accent)"></i> Pagos y facturación</h4>
-        <a href="#">Ver historial →</a>
+        <a href="mi-viaje.html#reservas">Ver historial →</a>
       </div>
       <div style="text-align:center;padding:12px 0">
         <i class="fa-regular fa-credit-card" style="font-size:2rem;color:var(--prof-muted);margin-bottom:8px"></i>
         <h6 style="font-size:0.86rem;font-weight:800;color:var(--prof-dark);margin:0 0 4px">No hay métodos de pago guardados</h6>
         <p style="font-size:0.74rem;color:var(--prof-muted);margin:0 0 12px">Tus pagos se procesan de forma segura a través de nuestros proveedores aliados.</p>
-        <button type="button" class="prof-btn-primary" style="padding:8px 16px;font-size:0.8rem">Abrir checkout seguro <i class="fa-solid fa-arrow-right"></i></button>
+        <a href="mi-viaje.html#reservas" class="prof-btn-primary" style="padding:8px 16px;font-size:0.8rem">Abrir checkout seguro <i class="fa-solid fa-arrow-right"></i></a>
       </div>
       <div style="border-top:1px solid #F1F5F9;padding-top:10px;font-size:0.76rem">
         <strong style="color:var(--prof-dark)">Transacciones recientes:</strong>
@@ -436,8 +436,8 @@
           <input type="checkbox" style="accent-color:var(--prof-green)">
         </div>
         <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:0.78rem">
-          <a href="#" style="color:var(--prof-dark);text-decoration:none"><i class="fa-solid fa-download"></i> Descargar mis datos →</a>
-          <a href="#" style="color:#EF4444;text-decoration:none"><i class="fa-solid fa-trash-can"></i> Solicitar eliminación de cuenta →</a>
+          <a href="privacidad.html" style="color:var(--prof-dark);text-decoration:none"><i class="fa-solid fa-download"></i> Descargar mis datos →</a>
+          <a href="privacidad.html" style="color:#EF4444;text-decoration:none"><i class="fa-solid fa-trash-can"></i> Solicitar eliminación de cuenta →</a>
           <a href="privacidad.html" style="color:var(--prof-primary);text-decoration:none"><i class="fa-solid fa-file-shield"></i> Ver Política de Privacidad →</a>
         </div>
       </div>
@@ -486,7 +486,7 @@
           <strong>Guardián</strong>
           <small style="display:block;color:var(--prof-muted)">Bloqueado</small>
         </div>
-        <button type="button" class="prof-btn-edit" style="margin-left:10px">Ver todos mis logros →</button>
+        <a href="pasaporte.html" class="prof-btn-edit" style="margin-left:10px">Ver todos mis logros →</a>
       </div>
     </div>
   </section>
@@ -582,6 +582,40 @@
       prefTags.forEach(tag => {
         tag.addEventListener('click', function() {
           this.classList.toggle('active');
+        });
+      });
+
+      // Navegación global del perfil.
+      document.getElementById('globalSearchBtn')?.addEventListener('click', () => {
+        window.location.href = 'destinos.html';
+      });
+      const dropdownTrigger = document.querySelector('.nav-dropdown-trigger');
+      const dropdown = dropdownTrigger?.closest('.nav-dropdown');
+      dropdownTrigger?.addEventListener('click', () => {
+        const open = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+        dropdownTrigger.setAttribute('aria-expanded', String(!open));
+        dropdown?.classList.toggle('open', !open);
+      });
+
+      // Filtrado accesible de las reservas visibles.
+      const reservationPills = document.querySelectorAll('[data-reservation-filter]');
+      const reservationList = document.querySelector('#reservas .prof-res-list');
+      reservationPills.forEach(pill => {
+        pill.addEventListener('click', function() {
+          reservationPills.forEach(item => item.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.dataset.reservationFilter;
+          if (!reservationList) return;
+          reservationList.querySelectorAll('.prof-res-item').forEach(item => {
+            item.hidden = filter !== 'proximas';
+          });
+          let empty = reservationList.querySelector('.prof-res-empty');
+          if (filter === 'proximas') {
+            empty?.remove();
+          } else {
+            if (!empty) { empty = document.createElement('p'); empty.className = 'prof-res-empty'; empty.setAttribute('role', 'status'); reservationList.appendChild(empty); }
+            empty.textContent = filter === 'completadas' ? 'Consultá el historial completo en Mi Viaje.' : 'No tenés reservas canceladas.';
+          }
         });
       });
 
