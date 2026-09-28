@@ -1,0 +1,150 @@
+/*
+ * 🎯 POR QUÉ: corregir las reglas históricas contradictorias que deformaban los H2.
+ * ⚙️ CÓMO: escala tipográfica contextual cargada al final del sistema visual.
+ * 📦 QUÉ: títulos de sección, tarjetas, paneles, superficies oscuras y móvil.
+ */
+:root {
+  --heading-ink: #082b4b;
+  --heading-muted: #165d6f;
+  --heading-on-dark: #ffffff;
+  --heading-font: 'Montserrat', 'Inter', system-ui, sans-serif;
+}
+
+body main h2:not(.title-handwritten):not(.handwriting-h2) {
+  max-width: 100%;
+  margin-block: 0 0.55rem !important;
+  padding: 0 !important;
+  color: var(--heading-ink) !important;
+  background: none !important;
+  font-family: var(--heading-font) !important;
+  font-size: clamp(1.35rem, 2.2vw, 2rem) !important;
+  font-style: normal !important;
+  font-weight: 850 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.035em !important;
+  text-align: left;
+  text-wrap: balance;
+  text-shadow: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  animation: none !important;
+}
+
+body main h2:not(.title-handwritten):not(.handwriting-h2)::before,
+body main h2:not(.title-handwritten):not(.handwriting-h2)::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Encabezados principales de sección: presencia clara sin ocupar demasiado alto. */
+body main :is(
+  .section-lead-header,
+  .section-header-exact,
+  .gastro-section-header,
+  .music-section-head,
+  .ai-preview-head,
+  .numbers-heading,
+  .legal-essential-head,
+  .privacy-summary,
+  .cookies-flow,
+  .profile-preferences-banner
+) h2 {
+  font-size: clamp(1.45rem, 2.5vw, 2.2rem) !important;
+  line-height: 1.08 !important;
+}
+
+/* Tarjetas y paneles: títulos compactos, alineados con su contenido. */
+body main :is(
+  article,
+  .profile-card-box,
+  .legal-card,
+  .mv-card,
+  .impact-hex-card,
+  .ai-panel,
+  .ai-summary-grid,
+  .privacy-doc-card,
+  .cookies-control-panel,
+  .profile-settings-grid,
+  .profile-top-grid,
+  .gastro-card,
+  .venue-card
+) h2:not(.title-handwritten):not(.handwriting-h2) {
+  margin-bottom: 0.42rem !important;
+  font-size: clamp(1rem, 1.25vw, 1.22rem) !important;
+  line-height: 1.18 !important;
+  letter-spacing: -0.022em !important;
+}
+
+/* Encabezados pequeños internos del planificador y reproductores. */
+body main :is(.ai-panel-title, .epic-brand-titles, .toc-header-bar) h2 {
+  font-size: 1rem !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Superficies fotográficas u oscuras: contraste blanco controlado. */
+body main :is(
+  .dark-section,
+  .hero,
+  .hero-section,
+  .video-hero-wrapper,
+  .institucional-hero,
+  .manifesto-masterpiece-card,
+  .gastro-map-card,
+  .gastro-maiz-story,
+  .gastro-final-banner,
+  .music-map-card,
+  .music-final-banner,
+  .about-final,
+  .profile-final-cta,
+  .epic-player-chassis
+) h2:not(.title-handwritten):not(.handwriting-h2) {
+  color: var(--heading-on-dark) !important;
+  -webkit-text-fill-color: var(--heading-on-dark) !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.38) !important;
+}
+
+/* Iconos que forman parte del título. */
+body main h2 > i:first-child {
+  margin-right: 0.42em;
+  color: var(--heading-muted);
+  font-size: 0.92em;
+  vertical-align: 0.03em;
+}
+
+body main :is(.dark-section, .manifesto-masterpiece-card, .gastro-map-card, .music-map-card) h2 > i:first-child {
+  color: #65ddb1;
+}
+
+/* El mega menú requiere su propia escala y no hereda estilos del contenido. */
+.main-navbar .global-mega-column h2 {
+  margin: 0 0 1rem !important;
+  padding: 0 0 0.8rem !important;
+  color: #fff !important;
+  background: none !important;
+  font-family: var(--heading-font) !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.015em !important;
+  -webkit-text-fill-color: #fff !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 700px) {
+  body main h2:not(.title-handwritten):not(.handwriting-h2) {
+    margin-bottom: 0.45rem !important;
+    font-size: clamp(1.25rem, 6vw, 1.65rem) !important;
+    line-height: 1.14 !important;
+    letter-spacing: -0.027em !important;
+  }
+
+  body main :is(article, .legal-card, .ai-panel, .profile-card-box, .profile-settings-grid) h2 {
+    font-size: 1.05rem !important;
+    line-height: 1.2 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body main h2 { animation: none !important; transition: none !important; }
+}

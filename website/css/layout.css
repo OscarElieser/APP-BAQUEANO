@@ -1634,4 +1634,256 @@ h2:not(.handwriting-h2):not(.title-handwritten)::after {
   content: none !important;
 }
 
+/* ============================================================================
+   FOOTER OFICIAL BAQUEANO (IDÉNTICO 1:1 A LA IMAGEN DE REFERENCIA)
+   ============================================================================ */
+.official-footer-exact {
+  position: relative;
+  background-color: #071626;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 22, 38, 0.92) 0%, rgba(5, 16, 28, 0.94) 100%),
+    url('../assets/images/footer_official_banner.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  padding-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.footer-main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px 40px 24px;
+}
+
+.footer-top-columns-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1.3fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Columna Marca */
+.footer-col-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.footer-brand-logo-img {
+  height: 42px;
+  width: auto;
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-name {
+  font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.footer-brand-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #F4E6C1;
+  letter-spacing: 0.12em;
+  margin-top: 4px;
+}
+
+.footer-brand-tagline {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.08em;
+  margin: 10px 0 16px 0;
+  text-transform: uppercase;
+}
+
+.footer-social-circles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-circle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+.social-circle-btn:hover {
+  background: #10B981;
+  border-color: #10B981;
+  transform: translateY(-2px);
+}
+
+/* Columnas de Navegación */
+.footer-nav-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-col-header {
+  margin-bottom: 14px;
+}
+
+.footer-col-header h4 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.02em;
+}
+
+.footer-header-accent-line {
+  display: block;
+  width: 22px;
+  height: 2.5px;
+  background-color: #10B981;
+  border-radius: 2px;
+}
+
+.footer-nav-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-links-list a {
+  color: #CBD5E1;
+  font-size: 0.84rem;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-nav-links-list a:hover {
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+/* Flanco Derecho: Sello Nicaragua Auténtica */
+.footer-stamp-branding-col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nicaragua-autentica-script-badge {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 38px;
+}
+
+.nicaragua-autentica-script-badge .script-title {
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: 2.3rem;
+  line-height: 0.95;
+  color: #FFFFFF;
+  transform: rotate(-4deg);
+}
+
+.nicaragua-autentica-script-badge .script-subtitle {
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: 2.3rem;
+  line-height: 0.95;
+  color: #FFFFFF;
+  transform: rotate(-4deg);
+  margin-top: 2px;
+}
+
+.nicaragua-autentica-script-badge .leaf-accent-svg {
+  position: absolute;
+  top: 6px;
+  right: 2px;
+  width: 32px;
+  height: 32px;
+}
+
+.nicaragua-autentica-script-badge .green-brush-underline {
+  display: block;
+  width: 95%;
+  height: 3px;
+  background: #10B981;
+  border-radius: 3px;
+  margin-top: 6px;
+  transform: rotate(-2deg);
+}
+
+/* Subfooter de Copyright */
+.footer-sub-bottom-bar {
+  background: #040B14;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 20px;
+}
+
+.footer-sub-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: #94A3B8;
+  flex-wrap: wrap;
+}
+
+.footer-sub-container .divider-pipe {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-sub-container .heart-icon {
+  color: #EF4444;
+}
+
+/* Responsividad Footer */
+@media (max-width: 1100px) {
+  .footer-top-columns-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .footer-stamp-branding-col {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-top-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+
 

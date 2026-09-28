@@ -39,6 +39,11 @@ let currentGpsCoords = "Ubicación aún no disponible";
 function buildGlobalMegaNavigation() {
   const navbar = document.getElementById('mainNavbar');
   const navMenu = document.getElementById('navLinksMenu');
+  if (!document.querySelector('link[data-global-headings]')) {
+    const headings = document.createElement('link');
+    headings.rel = 'stylesheet'; headings.href = 'css/headings-system.css?v=20260927-1'; headings.dataset.globalHeadings = 'true';
+    document.head.appendChild(headings);
+  }
   if (!navbar || !navMenu || navMenu.dataset.globalMegaReady === 'true') return;
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');

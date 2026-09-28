@@ -1200,4 +1200,10 @@
     - `website/destinos.html`
     - `SESSION_LOG.md`
   - Despliegue a producción en Firebase Hosting (`https://app-baqueano.web.app`).
+# 2026-09-27 — Rectificación global de títulos H2
 
+- Solicitud: revisar y mejorar todos los encabezados `h2` del sitio.
+- Diagnóstico: coexistían reglas globales contradictorias que forzaban colores blancos, tamaños excesivos, degradados y prioridades `!important` en contextos incorrectos.
+- Implementación: sistema tipográfico contextual para títulos de sección, tarjetas, paneles, fondos oscuros, iconos, mega menú y pantallas móviles.
+- Alcance: se enlaza al final del `<head>` de los 25 documentos HTML para ejecutarse después de las hojas particulares; `navigation.js` mantiene un respaldo para páginas generadas dinámicamente.
+- Archivos modificados: `website/js/navigation.js` y `website/css/headings-system.css`.
