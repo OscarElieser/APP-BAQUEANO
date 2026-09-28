@@ -426,8 +426,8 @@
       });
 
       // Capa base inicial (Voyager / Relieve)
-      currentTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 18
+      currentTileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
       }).addTo(mapInstance);
 
       renderMarkers('all');
@@ -517,8 +517,8 @@
             }).addTo(mapInstance);
             this.innerHTML = '<i class="fa-solid fa-map"></i> Mapa Calles';
           } else {
-            currentTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-              maxZoom: 18
+            currentTileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
             }).addTo(mapInstance);
             this.innerHTML = '<i class="fa-solid fa-layer-group"></i> Satélite / Relieve';
           }

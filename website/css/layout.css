@@ -1600,4 +1600,38 @@ img {
   }
 }
 
+/* ============================================================================
+   ESTÁNDAR VISUAL GLOBAL DE ENCABEZADOS H2 (ALTO CONTRASTE Y NITIDEZ)
+   ============================================================================ */
+h2:not(.handwriting-h2):not(.title-handwritten):not(.text-gradient-fire) {
+  font-family: var(--font-display, 'Montserrat', 'Plus Jakarta Sans', sans-serif) !important;
+  font-weight: 800 !important;
+  color: #0B253A !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  text-shadow: none !important;
+  animation: none !important;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+/* En fondos oscuros */
+.dark-section h2,
+[data-theme="dark"] h2,
+.hero h2,
+.hero-section h2,
+.legal-hero-section h2,
+.cookies-hero-section h2,
+.page-404-exact h2,
+.exact-hero h2 {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Erradicar barras decorativas forzadas h2::after */
+h2:not(.handwriting-h2):not(.title-handwritten)::after {
+  display: none !important;
+  content: none !important;
+}
+
 

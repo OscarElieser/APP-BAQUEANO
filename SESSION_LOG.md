@@ -1166,4 +1166,38 @@
 - Alcance: la navegación se normaliza desde `website/js/navigation.js`, por lo que se aplica a todas las páginas que utilizan el controlador compartido.
 - Responsive: mega menú de cuatro columnas en escritorio y drawer vertical desplazable en móvil.
 - Archivos modificados: `website/js/navigation.js` y `website/css/navigation-mega.css`.
+# 2026-09-27 — Corrección de mapas con aviso API KEY REQUIRED
+
+- Diagnóstico: los mapas Leaflet utilizaban mosaicos públicos de CARTO; la clave compartida pertenece a la configuración Google/Firebase y no autentica el servicio CARTO.
+- Corrección: se sustituyeron las capas CARTO afectadas por la URL oficial de mosaicos OpenStreetMap, con atribución visible y nivel máximo 19.
+- Alcance: portada, destinos, mapa, ambiental, aliados, música, historia, gastronomía y controladores cartográficos compartidos.
+- Seguridad: no se duplicó ni incorporó la clave compartida en las nuevas capas. Se recomienda mantener claves separadas y restringidas para Firebase y Google Maps.
+- Limpieza: se eliminó de `baqueano-ia.html` una constante Google Maps sin uso; ese mapa funciona con Leaflet y Esri.
+
+# 2026-09-27 — Rectificación Global de Titulares H2 (Erradicación de Degradados Transparentes y Barras Forzadas)
+
+- 🎯 **1. POR QUÉ (Why / Propósito):**
+  - Dar cumplimiento estricto y sin dilación al requerimiento: *"todos los h2 rectificar que se vean asi se ven feo"*, donde el usuario aportó la captura de *"Todos los destinos (128)"* completamente descolorida/blanca e ilegible sobre fondo claro, acompañada de una barra subrayada invasiva de degradado.
+  - Asegurar que todo encabezado `h2` a nivel global en el ecosistema Baqueano posea un contraste tipográfico nítido, sólido y accesible (WCAG AAA) con la paleta oficial (#0B253A / #0F172A), erradicando estéticas cursivas forzadas que degradaban la presentación visual.
+
+- ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
+  - Se identificó la causa raíz: tanto `website/css/typography.css` como `website/styles.css` aplicaban una regla genérica sobre la etiqueta `h2` con `font-family: var(--font-handwriting, cursive)`, `-webkit-text-fill-color: transparent` con degradado `linear-gradient(135deg, #FFFFFF 0%, #F4E6C1 45%, #F65E01 100%)`, y un pseudo-elemento `h2::after` con barra tricolor y animación `strokeDraw`.
+  - Se reestructuró la regla global de encabezados en `website/css/typography.css` y `website/styles.css`:
+    * `h1, h2, h3, h4, h5, h6` ahora comparten tipografía sans-serif geométrica sólida (`Montserrat`, `Plus Jakarta Sans`).
+    * `h2` genérico: color sólido de alto contraste `var(--text-primary, #0B253A)`, `background: none`, `-webkit-text-fill-color: initial`, sin sombras ni animaciones flotantes.
+    * Se eliminó el pseudo-elemento `h2::after` de la etiqueta genérica `h2`.
+    * El estilo caligráfico decorativo se confinó estrictamente a las clases opcionales `.handwriting-h2` y `h2.title-handwritten`.
+  - Se incorporó un blindaje de alta prioridad en `website/css/layout.css` para forzar legibilidad y erradicar cualquier barra subrayada residual en los 25 archivos HTML del portal.
+  - En `website/destinos.html`, se estilizó el contador numérico: `<h2>Todos los destinos <span style="color: #F65E01; font-weight: 800;">(128)</span></h2>` y `<h2>Más destinos que te encantarán</h2>`.
+  - En `website/css/pages/destinos-exact.css`, se establecieron estilos específicos para `.section-header-exact .title-group h2`.
+
+- 📦 **3. QUÉ (What / Entregables & Despliegue):**
+  - Archivos actualizados:
+    - `website/css/typography.css`
+    - `website/styles.css`
+    - `website/css/layout.css`
+    - `website/css/pages/destinos-exact.css`
+    - `website/destinos.html`
+    - `SESSION_LOG.md`
+  - Despliegue a producción en Firebase Hosting (`https://app-baqueano.web.app`).
 

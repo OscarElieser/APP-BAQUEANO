@@ -304,7 +304,7 @@
            ============================================================================ -->
       <div class="section-header-exact">
         <div class="title-group">
-          <h2>Todos los destinos (128)</h2>
+          <h2>Todos los destinos <span style="color: #F65E01; font-weight: 800;">(128)</span></h2>
         </div>
         <a href="destinos.html" class="section-header-link">Ver todos <i class="fa-solid fa-arrow-right"></i></a>
       </div>
@@ -645,8 +645,8 @@
             attributionControl: false
           });
 
-          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            maxZoom: 18
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
           }).addTo(map);
 
           const dests = [

@@ -802,7 +802,49 @@
 }
 
 /* ============================================================================
-   9. RESPONSIVO
+   9. ENCABEZADOS DE SECCIÓN Y TÍTULOS H2 LEGIBLES
+   ============================================================================ */
+.section-header-exact {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 36px;
+  margin-bottom: 20px;
+}
+
+.section-header-exact .title-group h2 {
+  font-family: var(--bq-font-heading, 'Montserrat', sans-serif);
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #0B253A;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.section-header-exact .title-group p {
+  font-size: 0.9rem;
+  color: #64748B;
+  margin: 4px 0 0 0;
+}
+
+.section-header-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0B253A;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.section-header-link:hover {
+  color: #F65E01;
+}
+
+/* ============================================================================
+   10. RESPONSIVO
    ============================================================================ */
 @media (max-width: 1024px) {
   .destinos-split-grid { grid-template-columns: 1fr; }
@@ -818,3 +860,4 @@
   .destinos-catalog-row { grid-template-columns: 1fr; }
   .destinos-cta-banner { flex-direction: column; align-items: flex-start; }
 }
+

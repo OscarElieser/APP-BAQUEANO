@@ -990,8 +990,8 @@
           });
 
           // Capa de satélite / topografía con estilo oscuro integrado
-          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            maxZoom: 18
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
           }).addTo(map);
 
           // Pines emblemáticos de Nicaragua (Referencia Imagen 4)
@@ -1155,8 +1155,8 @@
             attributionControl: false
           });
 
-          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            maxZoom: 18
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
           }).addTo(map);
 
           const homePins = [

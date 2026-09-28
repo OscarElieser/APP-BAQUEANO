@@ -8,15 +8,14 @@
 - Ofrecer un copiloto de viaje inteligente basado en IA generativa contextualizada
   en los 17 territorios y 29 áreas protegidas de Nicaragua.
 - Permitir a los exploradores conversar, configurar itinerarios en tiempo real,
-  visualizar rutas geoespaciales con Google Maps y Leaflet, y conectar con
+  visualizar rutas geoespaciales con Leaflet, y conectar con
   prestadores locales verificados sin intermediarios.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 - Réplica visual idéntica 1:1 a la maqueta oficial entregada por el usuario.
 - Triada superior de alta interacción: Chat conversacional con Baqüi +
   Mapa interactivo satelital con polyline de ruta + Configurador "Tu aventura".
-- Integración de Google Maps API (clave oficial suministrada por el usuario:
-  AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE) con capa de rescate automático en Leaflet.
+- Integración cartográfica con Leaflet y capas satelitales Esri sin clave embebida.
 - Itinerario de 3 días con nodos cronológicos, tiempos de traslado y costos.
 - Desglose presupuestario interactivo con velocímetro/gauge porcentual.
 - Vitrina de recomendaciones verificadas y barras de transporte, clima y alertas.
@@ -654,13 +653,11 @@
   <!-- LEAFLET JS SCRIPT -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- GOOGLE MAPS API SCRIPT WITH USER-SUPPLIED KEY & FALLBACK -->
+  <!-- MAPA LEAFLET CON CAPAS ESRI Y RESPALDO INDEPENDIENTE -->
   <script>
-    // Configuración oficial de API
-    const GOOGLE_MAPS_KEY = "AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE";
     let mapInstance = null;
 
-    // Inicializador del mapa con Leaflet / Google Maps Satellite Tiles
+    // Inicializador del mapa con Leaflet y mosaicos satelitales Esri
     function initBaqueanoMap() {
       const container = document.getElementById('aiInteractiveMap');
       if (!container) return;
