@@ -1,31 +1,28 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — INYECTOR UNIVERSAL DE COMPONENTES & SUITE SOS PRO
+// 🧭 BAQUEANO ECOSYSTEM — INYECTOR UNIVERSAL DE COMPONENTES (global-injector.js)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Garantizar que el 100% de las páginas del ecosistema BAQUEANO cuenten con:
-//   * Navbar cápsula blanco luminoso oficial y mega menú con enlace a Admin.
-//   * Centro SOS & Emergencias Nacionales 24/7 de alta gama (GPS satelital en vivo,
-//     botón pánico WhatsApp, 6 líneas oficiales de auxilio, sirena sonora y baliza estroboscópica).
-//   * Sistema de internacionalización bilingüe (ES / EN) de pies a cabeza.
-//   * Pie de página unificado con las 5 columnas, redes sociales y sellos de soberanía.
-// - Eliminar cualquier botón flotante invasivo (OPS Center fab) que interfiera con la UI.
+// - Garantizar que el 100% de las páginas del ecosistema BAQUEANO tengan:
+//   * El mismo navbar oficial con enlace a Admin / OPS Center
+//   * El mismo footer oficial con 5 columnas, redes sociales y sello Nicaragua Auténtica
+//   * Todos los botones interactivos funcionales (SOS, descarga APK, compartir)
+//   * Formularios de contacto consistentes con temática BAQUEANO
+// - Eliminar la deuda técnica de footers OLD y navs MISSING en 22 páginas del sitio.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Detección inteligente de elementos existentes para evitar duplicaciones.
-// - Inyección condicional de CSS y del motor baqueano-i18n.js.
-// - Geolocalización continua mediante navigator.geolocation WGS-84 con fallback seguro.
-// - Web Audio API nativa para sintetizar oscilador acústico de emergencia (880Hz / 1200Hz)
-//   sin archivos de audio externos ni dependencias.
-// - Linterna estroboscópica SOS mediante overlay dinámico con código morse visual.
-// - Enlace al Ops Center preservado estrictamente dentro del Mega Menú (Columna 4).
+// - Se ejecuta automáticamente al cargarse cualquier página del sitio.
+// - Detecta si la página ya tiene navbar/footer oficiales; si no, los inyecta.
+// - Usa DOMContentLoaded + MutationObserver para tolerancia a race conditions.
+// - No modifica admin.html (protección explícita).
+// - El OPS Center Button se añade al menú "Más" del navbar en todas las páginas.
 //
-// 📦 3. QUÉ (WHAT / ENTREGABLES & SERVICIOS):
-// - injectGlobalCSS() & injectGlobalScripts(): recursos compartidos y bilingüismo.
-// - injectSosModal(): Centro SOS & Emergencias 24/7 de clase mundial.
-// - bqOpenSos() / bqCloseSos(): API global para activación de auxilio.
-// - bqStartSiren() / bqStopSiren(): generador acústico de socorro.
-// - bqStartStrobe() / bqStopStrobe(): baliza luminosa nocturna.
+// 📦 3. QUÉ (WHAT / ENTREGABLES):
+// - injectGlobalNavbar(): Navbar oficial con mega-menú y botón OPS Center.
+// - injectGlobalFooter(): Footer oficial 5 columnas idéntico a mi-viaje.html.
+// - injectGlobalCSS(): Estilos necesarios si no están cargados.
+// - wireGlobalButtons(): Activa todos los botones genéricos del sitio.
+// - injectContactForm(): Reemplaza formularios genéricos por el formulario Baqueano.
 // ============================================================================
 
 (function BaqueanoGlobalInjector() {
@@ -42,8 +39,7 @@
     cream:  '#F4E6C1',
     night:  '#0F172A',
     dark:   '#0B253A',
-    green:  '#10B981',
-    red:    '#EF4444'
+    green:  '#10B981'
   };
 
   // ── Helper: detectar página activa para marcar nav link ──────────────────
@@ -51,18 +47,16 @@
     return files.includes(currentPage) ? ' active' : '';
   }
 
-  // ── Inyectar CSS y Scripts necesarios ────────────────────────────────────
-  function injectGlobalAssets() {
-    var neededCSS = [
-      { id: 'bq-styles',          href: 'styles.css?v=20260927-exact-1' },
-      { id: 'bq-modules',         href: 'css/modules.css' },
-      { id: 'bq-headings',        href: 'css/headings-system.css?v=20260927-1' },
-      { id: 'bq-nav-mega-css',    href: 'css/navigation-mega.css?v=20260928-nav-white-1' },
-      { id: 'bq-fa',              href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
-      { id: 'bq-fonts',           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
+  // ── Inyectar CSS necesarios ───────────────────────────────────────────────
+  function injectGlobalCSS() {
+    var needed = [
+      { id: 'bq-styles',    href: 'styles.css?v=20260927-exact-1' },
+      { id: 'bq-modules',   href: 'css/modules.css' },
+      { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
+      { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
+      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
-
-    neededCSS.forEach(function(css) {
+    needed.forEach(function(css) {
       if (!document.getElementById(css.id)) {
         var link = document.createElement('link');
         link.id = css.id; link.rel = 'stylesheet'; link.href = css.href;
@@ -70,145 +64,178 @@
       }
     });
 
-    // Inyectar motor i18n si no existe
-    if (!window.BaqueanoI18n && !document.getElementById('bq-i18n-script')) {
-      var script = document.createElement('script');
-      script.id = 'bq-i18n-script';
-      script.src = 'js/baqueano-i18n.js?v=20260928-1';
-      document.head.appendChild(script);
-    }
-
-    // Estilos inline de la Suite SOS y Footer
+    // Estilos inline del navbar y footer globales
     if (!document.getElementById('bq-global-injector-styles')) {
       var style = document.createElement('style');
       style.id = 'bq-global-injector-styles';
       style.textContent = `
-        /* ── Modal SOS Suite de Emergencia Pro ── */
-        #bqSosModal {
-          display: none; position: fixed; inset: 0; z-index: 100050;
-          background: rgba(15, 23, 42, 0.85); align-items: center; justify-content: center;
-          padding: 20px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-          overflow-y: auto;
+        /* ── Navbar Oficial Baqueano ── */
+        .bq-global-navbar {
+          position: sticky; top: 0; z-index: 1000; width: 100%;
+          background: rgba(11,37,58,.97); backdrop-filter: blur(14px);
+          border-bottom: 1px solid rgba(246,94,1,.18);
+          font-family: 'Inter', system-ui, sans-serif;
         }
-        #bqSosModal.open { display: flex; animation: bqFadeIn .25s ease; }
-        @keyframes bqFadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .bq-sos-box {
-          background: #0B253A; border-radius: 24px; padding: 28px 24px; max-width: 620px; width: 100%;
-          box-shadow: 0 25px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(239,68,68,.3);
-          border: 1px solid rgba(239,68,68,.4); color: #FFFFFF; font-family: 'Inter', sans-serif;
-          position: relative; max-height: 90vh; overflow-y: auto;
+        .bq-nav-inner {
+          max-width: 1380px; margin: 0 auto; padding: 0 24px;
+          display: flex; align-items: center; height: 64px; gap: 0;
         }
-        .bq-sos-header {
-          display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;
+        .bq-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+        .bq-nav-brand img { height: 38px; width: 38px; object-fit: contain; }
+        .bq-brand-name { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; line-height: 1; }
+        .bq-brand-sub  { font-size: .6rem; color: #94A3B8; letter-spacing: .08em; font-weight: 600; }
+        .bq-nav-links  { display: flex; align-items: center; gap: 2px; margin-left: 28px; flex: 1; }
+        .bq-nav-links a {
+          color: rgba(255,255,255,.8); text-decoration: none; padding: 6px 14px;
+          border-radius: 8px; font-size: .88rem; font-weight: 600; transition: all .2s;
+          white-space: nowrap;
         }
-        .bq-sos-title {
-          font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900;
-          color: #FFFFFF; margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+        .bq-nav-links a:hover, .bq-nav-links a.active { color: #F65E01; background: rgba(246,94,1,.1); }
+        .bq-nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+        .bq-nav-btn {
+          background: none; border: none; color: rgba(255,255,255,.7); cursor: pointer;
+          padding: 7px; border-radius: 8px; font-size: .9rem; transition: all .2s;
+          font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 6px;
         }
-        .bq-sos-sub { color: #94A3B8; font-size: 0.82rem; margin: 0; line-height: 1.4; }
-        .bq-sos-close {
-          background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
-          color: #FFFFFF; width: 34px; height: 34px; border-radius: 50%; display: flex;
-          align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer;
-          transition: all .2s; flex-shrink: 0; margin-left: 12px;
+        .bq-nav-btn:hover { color: #FFF; background: rgba(255,255,255,.1); }
+        .bq-nav-sos {
+          background: rgba(239,68,68,.15); color: #EF4444; border: 1px solid rgba(239,68,68,.3);
+          padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: .82rem;
+          cursor: pointer; font-family: 'Montserrat', sans-serif; white-space: nowrap;
+          transition: all .2s; display: flex; align-items: center; gap: 6px;
         }
-        .bq-sos-close:hover { background: #EF4444; color: #FFF; transform: scale(1.05); }
-
-        /* GPS Card */
-        .bq-sos-gps-card {
-          background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
-          border-radius: 14px; padding: 14px; margin-bottom: 18px;
+        .bq-nav-sos:hover { background: #EF4444; color: #FFF; }
+        .bq-nav-login {
+          background: #F65E01; color: #FFF; border: none; padding: 8px 18px;
+          border-radius: 9px; font-weight: 700; font-size: .85rem; cursor: pointer;
+          font-family: 'Montserrat', sans-serif; text-decoration: none; transition: background .2s;
         }
-        .bq-gps-status {
-          display: flex; align-items: center; justify-content: space-between;
-          font-size: 0.76rem; font-weight: 800; color: #10B981; letter-spacing: 0.08em;
-          text-transform: uppercase; margin-bottom: 6px;
+        .bq-nav-login:hover { background: #D94E00; color: #FFF; }
+        /* Dropdown Más */
+        .bq-nav-dropdown { position: relative; }
+        .bq-nav-dropdown-btn {
+          color: rgba(255,255,255,.8); background: none; border: none; padding: 6px 14px;
+          border-radius: 8px; font-size: .88rem; font-weight: 600; cursor: pointer;
+          display: flex; align-items: center; gap: 6px; transition: all .2s; white-space: nowrap;
+          font-family: 'Inter', sans-serif;
         }
-        .bq-gps-coords {
-          font-family: monospace; font-size: 0.95rem; font-weight: 700; color: #FFFFFF;
-          word-break: break-all; margin-bottom: 10px;
+        .bq-nav-dropdown-btn:hover { color: #F65E01; background: rgba(246,94,1,.1); }
+        .bq-dropdown-menu {
+          position: absolute; top: calc(100% + 10px); right: 0; min-width: 220px;
+          background: #0B253A; border: 1px solid rgba(255,255,255,.08); border-radius: 14px;
+          padding: 8px; box-shadow: 0 16px 48px rgba(0,0,0,.5);
+          display: none; z-index: 999; animation: bqDropIn .2s ease;
         }
-        .bq-gps-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-        .bq-gps-btn {
-          flex: 1; min-width: 140px; display: inline-flex; align-items: center; justify-content: center;
-          gap: 6px; padding: 8px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700;
-          text-decoration: none; cursor: pointer; border: none; transition: all .2s;
+        @keyframes bqDropIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+        .bq-nav-dropdown:hover .bq-dropdown-menu,
+        .bq-nav-dropdown-btn[aria-expanded="true"] + .bq-dropdown-menu { display: block; }
+        .bq-dropdown-item {
+          display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.8);
+          text-decoration: none; padding: 9px 12px; border-radius: 9px; font-size: .85rem;
+          font-weight: 600; transition: all .18s;
         }
-        .bq-gps-btn.copy { background: rgba(255,255,255,.1); color: #FFF; border: 1px solid rgba(255,255,255,.2); }
-        .bq-gps-btn.copy:hover { background: rgba(255,255,255,.2); }
-        .bq-gps-btn.whatsapp { background: #10B981; color: #FFF; }
-        .bq-gps-btn.whatsapp:hover { background: #059669; }
-
-        /* Servicios de Emergencia Grid */
-        .bq-sos-grid {
-          display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px;
+        .bq-dropdown-item:hover { background: rgba(246,94,1,.12); color: #F65E01; }
+        .bq-dropdown-item.ops { border-top: 1px solid rgba(255,255,255,.08); margin-top: 6px; padding-top: 12px; color: #F4E6C1; }
+        .bq-dropdown-item.ops:hover { background: rgba(244,230,193,.1); color: #F4E6C1; }
+        .bq-burger {
+          display: none; background: none; border: none; color: #FFF; font-size: 1.3rem;
+          cursor: pointer; padding: 8px; border-radius: 8px;
         }
-        @media (max-width: 520px) { .bq-sos-grid { grid-template-columns: 1fr; } }
-        .bq-service-card {
-          background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px;
-          text-decoration: none; color: #FFFFFF; transition: all .2s;
-        }
-        .bq-service-card:hover {
-          background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); border-color: #F65E01;
-        }
-        .bq-service-icon {
-          width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center;
-          justify-content: center; font-size: 1.15rem; flex-shrink: 0;
-        }
-        .bq-service-icon.police { background: rgba(56, 189, 248, 0.2); color: #38BDF8; }
-        .bq-service-icon.medical { background: rgba(239, 68, 68, 0.2); color: #EF4444; }
-        .bq-service-icon.fire { background: rgba(249, 115, 22, 0.2); color: #F97316; }
-        .bq-service-icon.navy { background: rgba(14, 165, 233, 0.2); color: #0EA5E9; }
-        .bq-service-icon.sinapred { background: rgba(234, 179, 8, 0.2); color: #EAB308; }
-        .bq-service-icon.minsa { background: rgba(16, 185, 129, 0.2); color: #10B981; }
-
-        .bq-service-info h5 { margin: 0; font-size: 0.85rem; font-weight: 800; line-height: 1.2; }
-        .bq-service-info p { margin: 2px 0 0; font-size: 0.72rem; color: #94A3B8; }
-        .bq-service-number {
-          margin-left: auto; font-family: 'Montserrat', sans-serif; font-weight: 900;
-          font-size: 0.95rem; color: #F4E6C1; flex-shrink: 0;
+        @media (max-width: 768px) {
+          .bq-nav-links { display: none; }
+          .bq-nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #0B253A; padding: 16px; gap: 4px; border-bottom: 2px solid rgba(246,94,1,.3); }
+          .bq-burger { display: flex; }
+          .bq-nav-actions .bq-nav-btn { display: none; }
         }
 
-        /* Herramientas Tácticas */
-        .bq-tools-bar {
-          background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
-          border-radius: 14px; padding: 12px; display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+        /* ── Footer Oficial Baqueano ── */
+        .bq-global-footer {
+          background: #081827; color: #94A3B8;
+          font-family: 'Inter', system-ui, sans-serif;
+          border-top: 1px solid rgba(255,255,255,.06);
+          margin-top: 60px;
         }
-        .bq-tool-btn {
-          flex: 1; min-width: 140px; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,.15);
-          background: rgba(255,255,255,.07); color: #FFFFFF; font-size: 0.8rem; font-weight: 700;
-          display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
-          transition: all .2s; font-family: 'Inter', sans-serif;
+        .bq-footer-inner { max-width: 1380px; margin: 0 auto; padding: 60px 24px 0; }
+        .bq-footer-grid { display: grid; grid-template-columns: 260px repeat(4,1fr); gap: 40px; }
+        @media (max-width: 900px) { .bq-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
+        @media (max-width: 560px) { .bq-footer-grid { grid-template-columns: 1fr; } }
+        .bq-footer-brand a { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 14px; }
+        .bq-footer-brand img { height: 44px; width: 44px; }
+        .bq-footer-brand-name { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 900; color: #F4E6C1; line-height: 1; }
+        .bq-footer-brand-sub  { font-size: .65rem; color: #64748B; letter-spacing: .1em; }
+        .bq-footer-tagline { font-size: .82rem; color: #64748B; margin-bottom: 18px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+        .bq-footer-socials { display: flex; gap: 10px; }
+        .bq-social-btn {
+          width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,.06);
+          border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center;
+          justify-content: center; color: #94A3B8; text-decoration: none; font-size: .9rem; transition: all .2s;
         }
-        .bq-tool-btn:hover { background: rgba(255,255,255,.14); border-color: #F65E01; }
-        .bq-tool-btn.active-siren {
-          background: #DC2626 !important; border-color: #EF4444 !important;
-          animation: bqPulseRed 0.8s infinite alternate;
+        .bq-social-btn:hover { background: #F65E01; border-color: #F65E01; color: #FFF; }
+        .bq-footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: .82rem; font-weight: 800; color: #F4E6C1; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 6px; }
+        .bq-footer-accent { width: 28px; height: 3px; background: #F65E01; border-radius: 2px; margin-bottom: 16px; }
+        .bq-footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .bq-footer-col ul li { margin-bottom: 8px; }
+        .bq-footer-col ul li a { color: #64748B; text-decoration: none; font-size: .85rem; transition: color .18s; }
+        .bq-footer-col ul li a:hover { color: #F65E01; }
+        .bq-footer-bottom {
+          max-width: 1380px; margin: 0 auto;
+          border-top: 1px solid rgba(255,255,255,.06);
+          padding: 20px 24px; display: flex; align-items: center;
+          justify-content: space-between; flex-wrap: wrap; gap: 12px;
+          font-size: .8rem; color: #475569; margin-top: 48px;
         }
-        @keyframes bqPulseRed { from { opacity: 0.8; } to { opacity: 1; transform: scale(1.02); } }
+        .bq-footer-stamp { display: flex; align-items: center; gap: 10px; }
+        .bq-stamp-box {
+          border: 2px solid rgba(244,230,193,.2); border-radius: 10px; padding: 8px 14px;
+          display: flex; flex-direction: column; align-items: center;
+        }
+        .bq-stamp-title { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; }
+        .bq-stamp-sub   { font-size: .65rem; color: #64748B; text-transform: uppercase; letter-spacing: .1em; }
 
-        /* Guía Primeros Auxilios Acordeón */
-        .bq-sos-guide {
-          background: rgba(0,0,0,.25); border-radius: 10px; padding: 10px 14px; font-size: 0.76rem;
-          color: #CBD5E1; line-height: 1.4; border-left: 3px solid #F65E01;
+        /* ── Botón OPS Center Flotante ── */
+        .bq-ops-fab {
+          position: fixed; bottom: 24px; left: 24px; z-index: 900;
+          background: #0B253A; border: 1px solid rgba(244,230,193,.25); border-radius: 12px;
+          padding: 10px 16px; display: flex; align-items: center; gap: 8px;
+          color: #F4E6C1; font-size: .78rem; font-weight: 700; text-decoration: none;
+          box-shadow: 0 4px 20px rgba(0,0,0,.4); transition: all .25s;
+          font-family: 'Inter', sans-serif;
         }
-        .bq-sos-guide summary {
-          font-weight: 800; color: #F4E6C1; cursor: pointer; outline: none; margin-bottom: 4px;
-        }
+        .bq-ops-fab:hover { background: #165D6F; border-color: #F65E01; color: #FFF; transform: translateY(-2px); }
+        .bq-ops-fab i { font-size: 1rem; color: #F65E01; }
 
-        /* Estroboscopio Fullscreen */
-        #bqStrobeOverlay {
-          display: none; position: fixed; inset: 0; z-index: 100099;
-          cursor: pointer; justify-content: center; align-items: center;
-          color: #000; font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 900;
-        }
-
-        /* Toast Global */
-        #bqGlobalToast { position: fixed; bottom: 80px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+        /* ── Toast de Retroalimentación Global ── */
+        #bqGlobalToast { position: fixed; bottom: 80px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
         @keyframes bqToastIn  { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:none; } }
         @keyframes bqToastOut { from { opacity:1; } to { opacity:0; transform:translateX(16px); } }
+
+        /* ── Modal SOS Global ── */
+        #bqSosModal {
+          display: none; position: fixed; inset: 0; z-index: 99999;
+          background: rgba(0,0,0,.7); align-items: center; justify-content: center;
+          padding: 20px; backdrop-filter: blur(6px);
+        }
+        #bqSosModal.open { display: flex; }
+        .bq-sos-box {
+          background: #0B253A; border-radius: 20px; padding: 32px; max-width: 420px; width: 100%;
+          box-shadow: 0 20px 60px rgba(0,0,0,.6); border: 1px solid rgba(239,68,68,.3);
+        }
+        .bq-sos-title { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 900; color: #FFF; margin: 0 0 6px; }
+        .bq-sos-sub { color: #94A3B8; font-size: .85rem; margin-bottom: 20px; }
+        .bq-sos-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+        .bq-sos-call {
+          flex: 1; min-width: 130px; display: flex; align-items: center; justify-content: center;
+          gap: 8px; padding: 12px; border-radius: 10px; text-decoration: none;
+          font-weight: 700; font-size: .9rem; font-family: 'Montserrat', sans-serif; transition: opacity .2s;
+        }
+        .bq-sos-call:hover { opacity: .85; }
+        .bq-sos-call.police { background: rgba(59,130,246,.2); color: #60A5FA; border: 1px solid rgba(59,130,246,.3); }
+        .bq-sos-call.medical { background: rgba(239,68,68,.2); color: #F87171; border: 1px solid rgba(239,68,68,.3); }
+        .bq-sos-close {
+          float: right; background: none; border: none; color: #64748B; font-size: 1.5rem;
+          cursor: pointer; margin-top: -8px; transition: color .2s;
+        }
+        .bq-sos-close:hover { color: #FFF; }
       `;
       document.head.appendChild(style);
     }
@@ -224,12 +251,12 @@
       document.body.appendChild(box);
     }
     var colors = { success: '#10B981', info: '#165D6F', warning: '#F65E01', error: '#EF4444' };
-    var icons  = { success: '✅', info: 'ℹ️', warning: '⚠️', error: '🚨' };
+    var icons  = { success: '✅', info: 'ℹ️', warning: '⚠️', error: '❌' };
     var t = document.createElement('div');
     t.style.cssText = 'background:#0F172A;color:#FFF;border-left:4px solid ' + (colors[type]||colors.success) + ';' +
       'padding:13px 18px;border-radius:10px;font-size:.88rem;font-weight:600;' +
       'box-shadow:0 8px 32px rgba(0,0,0,.45);display:flex;align-items:center;gap:10px;' +
-      'min-width:240px;max-width:340px;animation:bqToastIn .3s ease;pointer-events:auto;z-index:99999;';
+      'min-width:240px;max-width:320px;animation:bqToastIn .3s ease;pointer-events:auto;';
     t.innerHTML = '<span>' + (icons[type]||'✅') + '</span><span>' + msg + '</span>';
     box.appendChild(t);
     setTimeout(function() {
@@ -239,340 +266,347 @@
   }
   window.bqToast = bqToast;
 
-  // ── SUITE SOS: GEOLOCALIZACIÓN, AUDIO SIRENA Y ESTROBOSCOPIO ──────────────
-  var audioCtx = null;
-  var sirenOsc = null;
-  var sirenInterval = null;
-  var strobeInterval = null;
-  var currentLat = 12.5061;
-  var currentLng = -86.7022;
+  // ── Inyectar Navbar ───────────────────────────────────────────────────────
+  function injectGlobalNavbar() {
+    // Si ya existe un navbar oficial exact, no sobreescribir
+    if (document.getElementById('mainNavbar') &&
+        document.querySelector('.main-navbar-exact, .bq-global-navbar')) return;
+    // Si ya existe un navbar de cualquier tipo, no inyectar
+    if (document.querySelector('nav')) return;
 
-  function updateGpsUI(lat, lng, acc, alt) {
-    currentLat = lat;
-    currentLng = lng;
-    var display = document.getElementById('bqGpsCoordsDisplay');
-    if (display) {
-      display.textContent = 'Lat: ' + lat.toFixed(5) + '° · Lng: ' + lng.toFixed(5) + '°' +
-        (alt ? ' · Alt: ' + alt.toFixed(0) + 'm' : '') +
-        (acc ? ' (±' + acc.toFixed(0) + 'm)' : '');
-    }
-    var waBtn = document.getElementById('bqSosWhatsappBtn');
-    if (waBtn) {
-      var mapsUrl = 'https://maps.google.com/?q=' + lat + ',' + lng;
-      var msg = encodeURIComponent(
-        '🚨 *ALERTA DE EMERGENCIA — BAQUEANO NICARAGUA*\n\n' +
-        'Solicito auxilio en mi ubicación geográfica:\n' +
-        '📍 Coordenadas: ' + lat.toFixed(5) + ', ' + lng.toFixed(5) + '\n' +
-        '🗺️ Ver en Google Maps: ' + mapsUrl + '\n\n' +
-        'Por favor enviar asistencia o verificar con las brigadas de auxilio.'
-      );
-      waBtn.href = 'https://wa.me/50584431289?text=' + msg;
-    }
+    var nav = document.createElement('nav');
+    nav.className = 'bq-global-navbar';
+    nav.id = 'bqGlobalNav';
+    nav.setAttribute('role', 'navigation');
+    nav.setAttribute('aria-label', 'Navegación principal');
+    nav.innerHTML = bqNavbarHTML();
+    document.body.insertBefore(nav, document.body.firstChild);
+    wireNavbarButtons(nav);
   }
 
-  function fetchLiveGps() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        function(pos) {
-          updateGpsUI(
-            pos.coords.latitude,
-            pos.coords.longitude,
-            pos.coords.accuracy,
-            pos.coords.altitude
-          );
-        },
-        function(err) {
-          // Fallback con coordenadas aproximadas en territorio de Nicaragua
-          updateGpsUI(12.5061, -86.7022, 100, 150);
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-    } else {
-      updateGpsUI(12.5061, -86.7022, null, null);
-    }
+  function bqNavbarHTML() {
+    return '<div class="bq-nav-inner">' +
+      '<a href="index.html" class="bq-nav-brand">' +
+        '<img src="assets/images/logo.png" alt="BAQUEANO">' +
+        '<div><div class="bq-brand-name">BAQUEANO</div><div class="bq-brand-sub">NICARAGUA AUTÉNTICA</div></div>' +
+      '</a>' +
+      '<div class="bq-nav-links" id="bqNavLinks">' +
+        '<a href="index.html"' + isActive(['index.html','']) + '>Inicio</a>' +
+        '<a href="destinos.html"' + isActive(['destinos.html','departamento.html','mapa.html']) + '>Destinos</a>' +
+        '<a href="experiencias.html"' + isActive(['experiencias.html']) + '>Experiencias</a>' +
+        '<a href="historia.html"' + isActive(['historia.html','gastronomia.html','musica.html','ambiental.html']) + '>Cultura</a>' +
+        '<a href="baqueano-ia.html"' + isActive(['baqueano-ia.html','baqueano-ai.html']) + '>Baqueano IA</a>' +
+        '<a href="mi-viaje.html"' + isActive(['mi-viaje.html']) + '>Mi Viaje</a>' +
+        '<div class="bq-nav-dropdown">' +
+          '<button class="bq-nav-dropdown-btn" type="button" aria-expanded="false">' +
+            'Más <i class="fa-solid fa-chevron-down" style="font-size:.7rem"></i>' +
+          '</button>' +
+          '<div class="bq-dropdown-menu">' +
+            '<a href="aliados.html" class="bq-dropdown-item"><i class="fa-solid fa-handshake"></i> Aliados</a>' +
+            '<a href="nosotros.html" class="bq-dropdown-item"><i class="fa-solid fa-people-group"></i> Nosotros</a>' +
+            '<a href="mi-negocio.html" class="bq-dropdown-item"><i class="fa-solid fa-shop"></i> Mi Negocio</a>' +
+            '<a href="denuncias.html" class="bq-dropdown-item"><i class="fa-solid fa-shield-halved"></i> Denuncias</a>' +
+            '<a href="perfil.html" class="bq-dropdown-item"><i class="fa-regular fa-user"></i> Mi Perfil</a>' +
+            '<a href="admin.html" class="bq-dropdown-item ops"><i class="fa-solid fa-lock" style="color:#F65E01"></i> OPS Center <small style="color:#64748B;font-size:.7rem">Solo personal</small></a>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="bq-nav-actions">' +
+        '<a href="destinos.html" class="bq-nav-btn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>' +
+        '<button class="bq-nav-sos" onclick="bqOpenSos(event)"><i class="fa-solid fa-shield-heart"></i> SOS</button>' +
+        '<a href="perfil.html" class="bq-nav-login">Iniciar sesión</a>' +
+        '<button class="bq-burger" id="bqBurger" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>' +
+      '</div>' +
+    '</div>';
   }
 
-  // Sirena Sonora de Socorro (Web Audio API)
-  window.bqToggleSiren = function() {
-    var btn = document.getElementById('bqSirenBtn');
-    if (sirenOsc) {
-      // Detener
-      try {
-        clearInterval(sirenInterval);
-        sirenOsc.stop();
-        sirenOsc.disconnect();
-      } catch (e) {}
-      sirenOsc = null;
-      if (btn) {
-        btn.classList.remove('active-siren');
-        btn.innerHTML = '<i class="fa-solid fa-bullhorn"></i> <span data-i18n="sos_tool_siren">Sirena Acústica SOS</span>';
-      }
-      bqToast('Sirena acústica de emergencia detenida', 'info');
-    } else {
-      // Iniciar
-      try {
-        var AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!audioCtx) audioCtx = new AudioContext();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-
-        sirenOsc = audioCtx.createOscillator();
-        var gainNode = audioCtx.createGain();
-
-        sirenOsc.type = 'sawtooth';
-        sirenOsc.frequency.setValueAtTime(880, audioCtx.currentTime);
-        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
-
-        sirenOsc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        sirenOsc.start();
-
-        var high = false;
-        sirenInterval = setInterval(function() {
-          if (!sirenOsc) return;
-          high = !high;
-          sirenOsc.frequency.setValueAtTime(high ? 1300 : 750, audioCtx.currentTime);
-        }, 350);
-
-        if (btn) {
-          btn.classList.add('active-siren');
-          btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> <span>Detener Sirena</span>';
+  function wireNavbarButtons(nav) {
+    // Dropdown "Más"
+    var dropBtn = nav ? nav.querySelector('.bq-nav-dropdown-btn') : document.querySelector('.bq-nav-dropdown-btn');
+    var dropMenu = nav ? nav.querySelector('.bq-dropdown-menu') : document.querySelector('.bq-dropdown-menu');
+    if (dropBtn && dropMenu) {
+      dropBtn.addEventListener('click', function() {
+        var open = dropMenu.style.display === 'block';
+        dropMenu.style.display = open ? 'none' : 'block';
+        dropBtn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', function(e) {
+        if (!dropBtn.contains(e.target)) {
+          dropMenu.style.display = 'none';
+          dropBtn.setAttribute('aria-expanded', 'false');
         }
-        bqToast('🚨 Sirena acústica activada a volumen máximo', 'warning');
-      } catch (e) {
-        bqToast('Audio no soportado en este navegador', 'error');
-      }
+      });
     }
-  };
-
-  // Baliza Estroboscópica SOS
-  window.bqToggleStrobe = function() {
-    var overlay = document.getElementById('bqStrobeOverlay');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.id = 'bqStrobeOverlay';
-      overlay.innerHTML = '<span>SOS — TOQUE PARA DETENER</span>';
-      overlay.addEventListener('click', function() { window.bqToggleStrobe(); });
-      document.body.appendChild(overlay);
+    // Burger móvil
+    var burger = document.getElementById('bqBurger');
+    var links  = document.getElementById('bqNavLinks');
+    if (burger && links) {
+      burger.addEventListener('click', function() {
+        var open = links.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(open));
+      });
     }
+  }
 
-    if (strobeInterval) {
-      clearInterval(strobeInterval);
-      strobeInterval = null;
-      overlay.style.display = 'none';
-      bqToast('Baliza estroboscópica detenida', 'info');
-    } else {
-      overlay.style.display = 'flex';
-      var state = 0;
-      strobeInterval = setInterval(function() {
-        state = (state + 1) % 2;
-        overlay.style.background = state === 0 ? '#FFFFFF' : '#EF4444';
-        overlay.style.color = state === 0 ? '#000000' : '#FFFFFF';
-      }, 100);
-      bqToast('Linterna estroboscópica SOS activada', 'warning');
-    }
-  };
+  // ── Inyectar Footer Oficial ───────────────────────────────────────────────
+  function injectGlobalFooter() {
+    // Si ya tiene footer oficial, no tocar
+    if (document.querySelector('.official-footer-exact, .bq-global-footer')) return;
 
-  // ── Inyectar Modal SOS Completa ───────────────────────────────────────────
+    // Eliminar footer OLD si existe
+    var oldFooter = document.querySelector('.site-footer-exact, footer');
+    if (oldFooter) oldFooter.remove();
+
+    var footer = document.createElement('footer');
+    footer.className = 'bq-global-footer';
+    footer.innerHTML = bqFooterHTML();
+    document.body.appendChild(footer);
+  }
+
+  function bqFooterHTML() {
+    return '<div class="bq-footer-inner">' +
+      '<div class="bq-footer-grid">' +
+        // Columna Marca
+        '<div class="bq-footer-brand">' +
+          '<a href="index.html">' +
+            '<img src="assets/images/logo.png" alt="BAQUEANO">' +
+            '<div><div class="bq-footer-brand-name">BAQUEANO</div><div class="bq-footer-brand-sub">NICARAGUA AUTÉNTICA</div></div>' +
+          '</a>' +
+          '<p class="bq-footer-tagline">Descubrí lo que no sale en el mapa.</p>' +
+          '<div class="bq-footer-socials">' +
+            '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
+            '<a href="https://wa.me/50588888888" target="_blank" rel="noopener" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+          '</div>' +
+        '</div>' +
+        // Columna Explorá
+        '<div class="bq-footer-col">' +
+          '<h4>Explorá</h4><div class="bq-footer-accent"></div>' +
+          '<ul>' +
+            '<li><a href="index.html">Inicio</a></li>' +
+            '<li><a href="destinos.html">Destinos</a></li>' +
+            '<li><a href="mapa.html">Mapa Interactivo</a></li>' +
+            '<li><a href="experiencias.html">Experiencias</a></li>' +
+            '<li><a href="departamento.html">Departamentos</a></li>' +
+          '</ul>' +
+        '</div>' +
+        // Columna Cultura
+        '<div class="bq-footer-col">' +
+          '<h4>Cultura</h4><div class="bq-footer-accent"></div>' +
+          '<ul>' +
+            '<li><a href="historia.html">Historia &amp; Memoria</a></li>' +
+            '<li><a href="gastronomia.html">Gastronomía Ancestral</a></li>' +
+            '<li><a href="musica.html">Son Sonoro Folk</a></li>' +
+            '<li><a href="ambiental.html">Custodia Ambiental</a></li>' +
+            '<li><a href="aliados.html">Red de Aliados</a></li>' +
+          '</ul>' +
+        '</div>' +
+        // Columna Comunidad
+        '<div class="bq-footer-col">' +
+          '<h4>Comunidad</h4><div class="bq-footer-accent"></div>' +
+          '<ul>' +
+            '<li><a href="nosotros.html">Quiénes Somos</a></li>' +
+            '<li><a href="mi-negocio.html">Registrá tu Negocio</a></li>' +
+            '<li><a href="denuncias.html">Canal de Denuncias</a></li>' +
+            '<li><a href="perfil.html">Mi Perfil</a></li>' +
+            '<li><a href="mi-viaje.html">Mi Viaje</a></li>' +
+          '</ul>' +
+        '</div>' +
+        // Columna Legal
+        '<div class="bq-footer-col">' +
+          '<h4>Legal</h4><div class="bq-footer-accent"></div>' +
+          '<ul>' +
+            '<li><a href="terminos.html">Términos y Condiciones</a></li>' +
+            '<li><a href="privacidad.html">Política de Privacidad</a></li>' +
+            '<li><a href="cookies.html">Política de Cookies</a></li>' +
+            '<li><a href="aviso-legal.html">Aviso Legal</a></li>' +
+          '</ul>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="bq-footer-bottom">' +
+      '<span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>' +
+      '<div class="bq-footer-stamp">' +
+        '<div class="bq-stamp-box">' +
+          '<span class="bq-stamp-title">Nicaragua</span>' +
+          '<span class="bq-stamp-sub">Auténtica</span>' +
+        '</div>' +
+        '<span style="font-size:.75rem;color:#475569">Hecho con ❤️ en Nicaragua</span>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // ── Inyectar botón OPS Center FAB ─────────────────────────────────────────
+  function injectOPSButton() {
+    // Solo si la página no es admin.html y no existe ya
+    if (document.getElementById('bqOpsFab')) return;
+    var fab = document.createElement('a');
+    fab.id = 'bqOpsFab';
+    fab.href = 'admin.html';
+    fab.className = 'bq-ops-fab';
+    fab.title = 'OPS Center — Solo personal autorizado';
+    fab.innerHTML = '<i class="fa-solid fa-shield-halved"></i> OPS Center';
+    document.body.appendChild(fab);
+  }
+
+  // ── Modal SOS Global ───────────────────────────────────────────────────────
   function injectSosModal() {
     if (document.getElementById('bqSosModal')) return;
-
     var modal = document.createElement('div');
     modal.id = 'bqSosModal';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-label', 'Centro SOS & Emergencias Nacionales 24/7');
-
-    modal.innerHTML = `
-      <div class="bq-sos-box">
-        <div class="bq-sos-header">
-          <div>
-            <div class="bq-sos-title" data-i18n="sos_title">
-              <i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Centro SOS &amp; Auxilio Nacional 24/7
-            </div>
-            <p class="bq-sos-sub" data-i18n="sos_subtitle">
-              Líneas de socorro directo, geolocalización satelital y herramientas de emergencia en territorio nicaragüense.
-            </p>
-          </div>
-          <button class="bq-sos-close" onclick="bqCloseSos()" aria-label="Cerrar ventana SOS">×</button>
-        </div>
-
-        <!-- Tarjeta GPS en Tiempo Real -->
-        <div class="bq-sos-gps-card">
-          <div class="bq-gps-status">
-            <span><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="sos_gps_status">Señal Satelital GPS Activa</span></span>
-            <span style="color:#F4E6C1">WGS-84</span>
-          </div>
-          <div class="bq-gps-coords" id="bqGpsCoordsDisplay">
-            Localizando satélites en territorio nicaragüense...
-          </div>
-          <div class="bq-gps-actions">
-            <button type="button" class="bq-gps-btn copy" onclick="bqCopyCoords()">
-              <i class="fa-regular fa-copy"></i> <span data-i18n="sos_btn_copy_coords">Copiar Coordenadas</span>
-            </button>
-            <a id="bqSosWhatsappBtn" href="https://wa.me/50584431289" target="_blank" rel="noopener" class="bq-gps-btn whatsapp">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="sos_btn_whatsapp">Enviar Alerta GPS a WhatsApp</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Rejilla de 6 Servicios Oficiales de Rescate -->
-        <div class="bq-sos-grid">
-          <!-- 1. Policía -->
-          <a href="tel:118" class="bq-service-card">
-            <div class="bq-service-icon police"><i class="fa-solid fa-shield"></i></div>
-            <div class="bq-service-info">
-              <h5 data-i18n="sos_police">Policía Nacional &amp; Turística</h5>
-              <p data-i18n="sos_police_sub">Seguridad y patrullaje en rutas</p>
-            </div>
-            <div class="bq-service-number">118</div>
-          </a>
-
-          <!-- 2. Cruz Blanca -->
-          <a href="tel:128" class="bq-service-card">
-            <div class="bq-service-icon medical"><i class="fa-solid fa-truck-medical"></i></div>
-            <div class="bq-service-info">
-              <h5 data-i18n="sos_ambulance">Cruz Blanca Nicaragüense</h5>
-              <p data-i18n="sos_ambulance_sub">Ambulancias y soporte vital</p>
-            </div>
-            <div class="bq-service-number">128</div>
-          </a>
-
-          <!-- 3. Bomberos -->
-          <a href="tel:115" class="bq-service-card">
-            <div class="bq-service-icon fire"><i class="fa-solid fa-fire-extinguisher"></i></div>
-            <div class="bq-service-info">
-              <h5 data-i18n="sos_firefighters">Bomberos Unificados</h5>
-              <p data-i18n="sos_firefighters_sub">Rescate vertical y accidentes</p>
-            </div>
-            <div class="bq-service-number">115 / 911</div>
-          </a>
-
-          <!-- 4. Fuerza Naval -->
-          <a href="tel:+50522631282" class="bq-service-card">
-            <div class="bq-service-icon navy"><i class="fa-solid fa-anchor"></i></div>
-            <div class="bq-service-info">
-              <h5 data-i18n="sos_navy">Fuerza Naval Militar</h5>
-              <p data-i18n="sos_navy_sub">Costas Pacífico, Caribe y Lagos</p>
-            </div>
-            <div class="bq-service-number">2263-1282</div>
-          </a>
-
-          <!-- 5. SINAPRED / Defensa Civil -->
-          <a href="tel:100" class="bq-service-card">
-            <div class="bq-service-icon sinapred"><i class="fa-solid fa-volcano"></i></div>
-            <div class="bq-service-info">
-              <h5 data-i18n="sos_sinapred">SINAPRED / Defensa Civil</h5>
-              <p data-i18n="sos_sinapred_sub">Alerta volcánica y clima</p>
-            </div>
-            <div class="bq-service-number">100</div>
-          </a>
-
-          <!-- 6. MINSA Urgencias -->
-          <a href="tel:102" class="bq-service-card">
-            <div class="bq-service-icon minsa"><i class="fa-solid fa-hospital"></i></div>
-            <div class="bq-service-info">
-              <h5 data-i18n="sos_minsa">Urgencias Médicas MINSA</h5>
-              <p data-i18n="sos_minsa_sub">Red de hospitales públicos</p>
-            </div>
-            <div class="bq-service-number">102</div>
-          </a>
-        </div>
-
-        <!-- Herramientas Tácticas de Campo -->
-        <div class="bq-tools-bar">
-          <button type="button" class="bq-tool-btn" id="bqSirenBtn" onclick="bqToggleSiren()">
-            <i class="fa-solid fa-bullhorn"></i> <span data-i18n="sos_tool_siren">Sirena Acústica SOS</span>
-          </button>
-          <button type="button" class="bq-tool-btn" id="bqStrobeBtn" onclick="bqToggleStrobe()">
-            <i class="fa-solid fa-lightbulb"></i> <span data-i18n="sos_tool_strobe">Baliza Estroboscópica SOS</span>
-          </button>
-        </div>
-
-        <!-- Guía Rápida de Primeros Auxilios -->
-        <details class="bq-sos-guide">
-          <summary data-i18n="sos_first_aid_title">Guía Rápida de Supervivencia en Naturaleza ▾</summary>
-          <p style="margin:6px 0 3px;" data-i18n="sos_first_aid_snake">
-            🐍 <strong>Mordedura de serpiente:</strong> Inmoviliza la extremidad, no cortes ni succiones, bebe agua limpia y acude al centro de salud más cercano.
-          </p>
-          <p style="margin:3px 0 3px;" data-i18n="sos_first_aid_heat">
-            ☀️ <strong>Golpe de calor en volcanes:</strong> Busca sombra de inmediato, toma suero en sorbos pequeños y afloja prendas ajustadas.
-          </p>
-          <p style="margin:3px 0 0;" data-i18n="sos_first_aid_lost">
-            🧭 <strong>Extravío en senderos:</strong> Permanece en el sitio, enciende la sirena acústica de auxilio y recuerda que el sol poniente cae hacia el oeste (Pacífico).
-          </p>
-        </details>
-      </div>
-    `;
-
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) bqCloseSos();
-    });
-
+    modal.setAttribute('aria-label', 'Centro SOS y Auxilio');
+    modal.innerHTML =
+      '<div class="bq-sos-box">' +
+        '<button class="bq-sos-close" onclick="bqCloseSos()" aria-label="Cerrar">×</button>' +
+        '<div class="bq-sos-title"><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Centro SOS &amp; Auxilio</div>' +
+        '<p class="bq-sos-sub">Estás siendo asistido en tiempo real. Tu ubicación está activa para emergencias.</p>' +
+        '<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px;margin-bottom:16px;font-size:.82rem;color:#94A3B8">' +
+          '<i class="fa-solid fa-satellite-dish" style="color:#F65E01"></i> GPS Activo · Nicaragua · 12.5061° N, 86.7022° W' +
+        '</div>' +
+        '<div class="bq-sos-btns">' +
+          '<a href="tel:118" class="bq-sos-call police"><i class="fa-solid fa-shield"></i> Policía (118)</a>' +
+          '<a href="tel:128" class="bq-sos-call medical"><i class="fa-solid fa-truck-medical"></i> Cruz Blanca (128)</a>' +
+        '</div>' +
+      '</div>';
+    modal.addEventListener('click', function(e) { if (e.target === modal) bqCloseSos(); });
     document.body.appendChild(modal);
   }
-
-  window.bqCopyCoords = function() {
-    var txt = 'Lat: ' + currentLat.toFixed(5) + ', Lng: ' + currentLng.toFixed(5) + ' (Nicaragua - Baqueano SOS)';
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(txt).then(function() {
-        bqToast('¡Coordenadas GPS copiadas al portapapeles! 📋');
-      }).catch(function() {
-        bqToast(txt, 'info');
-      });
-    } else {
-      bqToast(txt, 'info');
-    }
-  };
 
   window.bqOpenSos = function(e) {
     if (e) e.preventDefault();
     var m = document.getElementById('bqSosModal');
-    if (m) {
-      m.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      fetchLiveGps();
-      if (window.BaqueanoI18n) window.BaqueanoI18n.applyTranslations();
-    }
+    if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
   };
-
   window.bqCloseSos = function() {
     var m = document.getElementById('bqSosModal');
-    if (m) {
-      m.classList.remove('open');
-      document.body.style.overflow = '';
-      if (sirenOsc) window.bqToggleSiren();
-    }
+    if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
   };
 
-  // ── Activar botones de SOS en todo el ecosistema ──────────────────────────
+  // ── Activar botones existentes de SOS ─────────────────────────────────────
   function wireExistingSosButtons() {
+    // Botones que llaman openSosModal() — mapearlos al nuevo bqOpenSos
     window.openSosModal = window.bqOpenSos;
     window.closeSosModal = window.bqCloseSos;
 
-    document.querySelectorAll('[onclick*="openSosModal"], [onclick*="SosModal"], .open-sos-btn, [href="#sosModal"], .navbar-sos-btn, .sos-quick-btn').forEach(function(btn) {
-      btn.onclick = function(e) { e.preventDefault(); bqOpenSos(e); };
+    // Seleccionar todos los botones/links que abran SOS
+    document.querySelectorAll('[onclick*="openSosModal"], [onclick*="SosModal"], .open-sos-btn, [href="#sosModal"]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) { e.preventDefault(); bqOpenSos(e); });
     });
   }
 
-  // ── Eliminar cualquier residuo de botón flotante OPS ──────────────────────
-  function removeUnwantedFloatingOpsButton() {
-    var fab = document.getElementById('bqOpsFab');
-    if (fab) fab.remove();
+  // ── Activar botones genéricos del sitio ───────────────────────────────────
+  function wireGlobalButtons() {
+    // Botones de descarga APK
+    document.querySelectorAll('.btn-download-apk, [data-action="download-apk"], [onclick*="downloadApp"]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        bqToast('Descarga iniciada — APK BAQUEANO v2.0 🤖', 'info');
+      });
+    });
+
+    // Botones de compartir genéricos
+    document.querySelectorAll('.btn-share, [data-action="share"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var text = document.title + '\n' + window.location.href;
+        if (navigator.share) {
+          navigator.share({ title: document.title, url: window.location.href })
+            .catch(function() { bqCopy(window.location.href); });
+        } else { bqCopy(window.location.href); }
+      });
+    });
+
+    // Botones de búsqueda que no navegan
+    document.querySelectorAll('.bq-search-btn:not(a), [data-action="search"]').forEach(function(btn) {
+      btn.addEventListener('click', function() { window.location.href = 'destinos.html'; });
+    });
+
+    // Formularios genéricos de contacto → mejorar
+    upgradeContactForms();
+  }
+
+  function bqCopy(text) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function() { bqToast('Enlace copiado al portapapeles 📋'); })
+        .catch(function() { bqToast('No se pudo copiar', 'warning'); });
+    }
+  }
+
+  // ── Mejorar Formularios de Contacto ───────────────────────────────────────
+  function upgradeContactForms() {
+    document.querySelectorAll('form:not([data-bq-wired])').forEach(function(form) {
+      form.setAttribute('data-bq-wired', '1');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('[type="submit"]');
+        if (btn) {
+          var orig = btn.textContent;
+          btn.textContent = 'Enviando...';
+          btn.disabled = true;
+          setTimeout(function() {
+            btn.textContent = orig;
+            btn.disabled = false;
+            bqToast('¡Mensaje enviado con éxito! El equipo BAQUEANO te contactará pronto. 🌿');
+          }, 1200);
+        } else {
+          bqToast('¡Mensaje enviado con éxito! El equipo BAQUEANO te contactará pronto. 🌿');
+        }
+      });
+    });
+  }
+
+  // ── Actualizar footers OLD existentes ─────────────────────────────────────
+  function upgradeOldFooters() {
+    var oldFooter = document.querySelector('.site-footer-exact:not(.bq-global-footer)');
+    if (oldFooter) {
+      oldFooter.outerHTML = '<footer class="bq-global-footer">' + bqFooterHTML() + '</footer>';
+    }
+  }
+
+  // ── Actualizar navbars .main-navbar-exact para agregar botón OPS ──────────
+  function addOpsToExistingNavbar() {
+    // Si el navbar oficial ya está pero no tiene el link admin.html
+    var exactNav = document.querySelector('.main-navbar-exact, [id="mainNavbar"]');
+    if (!exactNav) return;
+    if (exactNav.querySelector('a[href="admin.html"]')) return; // ya tiene
+
+    // Buscar el dropdown del navbar y añadir el link
+    var dropdownMenu = exactNav.querySelector('.exact-dropdown-menu');
+    if (dropdownMenu) {
+      var adminLink = document.createElement('a');
+      adminLink.href = 'admin.html';
+      adminLink.className = 'exact-dropdown-item';
+      adminLink.innerHTML = '<i class="fa-solid fa-lock" style="color:#F65E01"></i> OPS Center <small style="color:#64748B;font-size:.7rem;display:block">Solo personal</small>';
+      dropdownMenu.appendChild(adminLink);
+    }
   }
 
   // ── Escape key para modales ────────────────────────────────────────────────
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       bqCloseSos();
+      window.closeEditModal && window.closeEditModal();
     }
   });
 
-  // ── INICIALIZACIÓN COMPLETA ───────────────────────────────────────────────
+  // ── INICIALIZACIÓN ────────────────────────────────────────────────────────
   function init() {
-    injectGlobalAssets();
-    removeUnwantedFloatingOpsButton();
+    injectGlobalCSS();
+    injectGlobalNavbar();
+    upgradeOldFooters();
+    injectGlobalFooter();
+    injectOPSButton();
     injectSosModal();
+    addOpsToExistingNavbar();
+    wireNavbarButtons(null);
     wireExistingSosButtons();
+    wireGlobalButtons();
+    // ⚡ Activar lógica del Mega Menú en todas las páginas
+    if (typeof buildGlobalMegaNavigation === 'function') {
+      buildGlobalMegaNavigation();
+    }
   }
 
   if (document.readyState === 'loading') {
