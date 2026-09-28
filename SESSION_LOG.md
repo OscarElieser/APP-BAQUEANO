@@ -1381,3 +1381,45 @@ avigation-mega.css linkeado ✓
 1. Verificar visualmente el menú abriendo http://localhost:3000/ en el navegador
 2. Revisar 404.html y offline.html que aún no tienen el navbar actualizado
 3. Revisar si dmin.html (Ops Center) necesita el mismo navbar para coherencia visual
+
+
+---
+
+## Sesión del 28 de Septiembre de 2026 - Consolidación del Banco Maestro Nacional de Información Turística
+
+### Directiva del Usuario:
+> *"RECUERDA QUE TODAS ESTA INFORMACION LA VAS A PONER EN SU LUGAR CORRESPONDIENTE , SI YA ESTA OMITILA Y SINO AGREGARLA . RECUERDA QUE NO VAS A BORRAR NADA DE LO QUE TENEMOS."*
+> Integración de los atractivos, paquetes y normativas de INTUR / Visita Nicaragua, Mapa Nacional de Turismo, riosanjuan.com.ni y Tripadvisor.
+
+### Implementación y Distribución en su Lugar Correspondiente:
+1. **website/gastronomia.html**:
+   - Agregados platos típicos principales: **Sopa de Mondongo** (Masatepe, Masaya) y **Fritanga Tradicional** (Nacional / Managua) con modal de historia y receta.
+   - Agregado en bebidas: **Fresco de Grama** (Granada: infusión medicinal y refrescante con limón criollo).
+   - Agregado en repostería: **Tres Leches** nicaragüense tradicional.
+2. **website/historia.html**:
+   - Insertada la sección completa **Monumentos Históricos y Red Nacional de Museos Oficiales de INTUR**:
+     * 6 Monumentos Clave: Fortaleza de la Inmaculada Concepción, Ruinas de León Viejo (UNESCO), Antigua Catedral de Santiago de Managua, Hacienda San Jacinto, Cripta de Rubén Darío en Catedral de León, Fortaleza La Pólvora (1748).
+     * 8 Museos Nacionales Oficiales: Palacio Nacional de la Cultura, Casa Natal Rubén Darío (Ciudad Darío), Casa Museo Sandino (Niquinohomo), Museo Convento San Francisco (Granada), Museo Archivo Rubén Darío (León), Museo de Mitos y Leyendas (La XXI, León), Centro de Arte Fundación Ortiz Gurdián (León), Museo Dr. Alejandro Dávila Bolaños (Juigalpa).
+3. **website/experiencias.html**:
+   - Insertada la sección maestra de **Paquetes Turísticos Oficiales de Mapa Nacional de Turismo & INTUR**:
+     * 1. Entre Nubes y Olas (Managua: El Crucero + Pochomil, 2D/1N, C$3,100 por persona).
+     * 2. Managua, Raíces, Historia y Encanto (Centro Histórico, 1 día, C$880 por persona).
+     * 3. Night Tour Volcán Mombacho (Granada, cráter nocturno y fauna, C$1,100 por persona).
+     * 4. Boca de Sábalos & Fortaleza El Castillo (Río San Juan, 2D/1N, C$1,700 por persona).
+     * 5. Cañón Cerros Pegados (Nueva Segovia, Zipote Vago Tours, C$1,200 por persona).
+     * 6. Travesía Cayos Perlas (RACCS, 2D/1N, arrecife y kayaks, C$2,910 por persona).
+   - Insertada la sección especializada de **Rutas Temáticas de Río San Juan**:
+     * Ruta del Oro (6 días de travesía interoceánica).
+     * Ruta Colonial (Fortaleza Inmaculada Concepción y Desaguadero).
+     * Ruta de las Aves (+270 especies en humedales y Solentiname).
+     * Ruta de los Naturalistas (Selva virgen de Indio Maíz y Bartola).
+     * Experiencia Comunitaria Rama en Reserva Cantagallo.
+4. **website/mi-negocio.html**:
+   - Insertada la sección oficial de **Marco Jurídico & Fomento Oficial**:
+     * Ley No. 1210 (Ley General de Turismo) y desglose de las **13 Modalidades Oficiales de Turismo** (Art. 16).
+     * Ley No. 1211 (Ley de Incentivos para los Desarrollos Turísticos).
+     * Beneficios de la formalización y doble sello Baqueano + INTUR para Pymes y cooperativas.
+5. **website/js/baqueano-master-catalog.js**:
+   - Creado el Banco Maestro Nacional consolidado bajo window.BAQUEANO_MASTER_CATALOG.
+   - Sistema de procedencia en 3 niveles de fuentes (Oficial, Territorial, Mercado).
+   - Vinculado e inyectado en index.html, destinos.html, experiencias.html, baqueano-ia.html y mi-viaje.html.
