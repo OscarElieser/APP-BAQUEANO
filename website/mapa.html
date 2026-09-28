@@ -594,6 +594,22 @@
       }
     }
   </script>
+<script>
+    // Mobile navigation toggle handler
+    const bToggle = document.getElementById('burgerToggle') || document.getElementById('mobileNavToggle');
+    const nLinks = document.getElementById('exactNavLinks') || document.getElementById('navLinksMenu');
+    if (bToggle && nLinks) {
+      bToggle.addEventListener('click', () => {
+        nLinks.classList.toggle('nav-active');
+        nLinks.classList.toggle('is-open');
+        if (nLinks.style.display === 'flex') {
+          nLinks.style.display = 'none';
+        } else {
+          nLinks.style.display = 'flex';
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

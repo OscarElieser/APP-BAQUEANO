@@ -1,752 +1,605 @@
 <!DOCTYPE html>
-<!--
-============================================================================
-🧭 BAQUEANO ECOSYSTEM — AVISO LEGAL & PROPIEDAD INTELECTUAL (aviso-legal.html)
-============================================================================
-
-🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Definir la titularidad jurídica, régimen regulatorio nacional e internacional
-  y las condiciones de operación de la plataforma oficial Baqueano Nicaragua.
-- Certificar el amparo de la Ley N° 1210 (Ley General de Turismo), Ley N° 306
-  (Fomento a la Industria Turística) y las regulaciones de MARENA e INTUR.
-
-⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Formato de encabezado H1 idéntico al de index.html con hero-badge-pill,
-  pulse-dot, highlight-sunset y subtítulo de alta legibilidad.
-- Índice lateral inteligente con riel vertical iluminado (.toc-cursor-rail) y
-  cursor deslizante (.toc-cursor-pip) sincronizado a 60fps con la lectura.
-- Paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
-- Menú principal integrado con el submenú de "Mi País", drawer móvil y footer oficial.
-
-📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-- 6 Artículos formales de titularidad, naturaleza tecnológica, marco legal,
-  propiedad intelectual, limitación de responsabilidad y domicilio de notificaciones.
-- Enlace al Oficial Legal (legal@baqueano.ni).
-============================================================================
--->
 <html lang="es">
+<!--
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — AVISO LEGAL & PROPIEDAD INTELECTUAL
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proporcionar un marco jurídico sólido, transparente e inalterable sobre la
+//   operación digital de BAQUEANO en Nicaragua, protegiendo los derechos de autor,
+//   marcas registradas y la soberanía del turismo comunitario nicaragüense.
+// - Clarificar la naturaleza de facilitación tecnológica e independencia institucional
+//   de la plataforma frente a entes gubernamentales y terceros.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Interfaz web estructurada en HTML5 semántico bajo el estándar visual oficial.
+// - Menú unificado con selector de idiomas, barra de búsqueda, navegación rápida
+//   y sistema de navegación lateral sticky con acceso directo por anclas (01-06).
+// - Cuadrícula de 6 principios fundamentales, desglose de las 4 leyes rectoras
+//   (Ley 1210, Ley 1211, Ley 842, Ley 306) y canales oficiales de asesoría jurídica.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - aviso-legal.html con diseño 1:1, enlace a términos, privacidad, cookies y ambiental,
+//   soporte de descarga de versión PDF y adaptabilidad móvil total.
+// ============================================================================
+-->
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Aviso Legal & Propiedad Intelectual | Baqueano Nicaragua</title>
-  <meta name="description" content="Aviso legal oficial y marco normativo de Baqueano Nicaragua. Información societaria, derechos de propiedad intelectual y cumplimiento de las Leyes No. 1210 y 1211 INTUR.">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
-
-  <!-- Google Fonts Oficiales -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviso Legal & Propiedad Intelectual | BAQUEANO Nicaragua</title>
+  <meta name="description" content="Marco jurídico, transparencia y condiciones de operación de BAQUEANO, plataforma digital comprometida con un turismo auténtico, responsable y seguro en Nicaragua.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/logo_baqueano.svg">
+  
+  <!-- Tipografía Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
-
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Estilos Maestros Oficiales -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de Estilo Base y Específicas -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/pages/institucional.css">
-  <link rel="stylesheet" href="css/pages/aviso-legal-exact.css?v=20260927-1">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/aviso-legal-exact.css">
 </head>
-<body class="page-aviso-legal">
+<body>
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
-  <nav class="main-navbar" id="mainNavbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-        <div class="brand-text">
-          <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+  <!-- ==================== HEADER & NAVBAR GLOBAL ==================== -->
+  <header class="main-header sticky-top">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo-container" aria-label="Ir a Inicio BAQUEANO">
+        <img src="assets/images/logo/logo_baqueano.svg" alt="BAQUEANO Nicaragua" class="brand-logo-img">
+        <div class="brand-text-block">
+          <span class="brand-name">BAQUEANO</span>
+          <span class="brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+      <!-- Menú Central -->
+      <nav class="main-navbar" aria-label="Navegación principal">
+        <ul class="nav-links-menu" id="navLinksMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link-item">Inicio</a></li>
+          <li class="nav-item"><a href="destinos.html" class="nav-link-item">Destinos</a></li>
+          <li class="nav-item"><a href="mapa.html" class="nav-link-item">Mapa</a></li>
+          <li class="nav-item"><a href="experiencias.html" class="nav-link-item">Experiencias</a></li>
+          <li class="nav-item"><a href="baqueano-ia.html" class="nav-link-item">Baqueano Digital</a></li>
+          <li class="nav-item"><a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link-item">Nosotros</a></li>
+          <li class="nav-item"><a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a></li>
+          <li class="nav-item dropdown-parent">
+            <a href="#" class="nav-link-item dropdown-toggle">Más <span>▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="ambiental.html">Política Ambiental</a></li>
+              <li><a href="historia.html">Historia & Memoria</a></li>
+              <li><a href="gastronomia.html">Gastronomía Auténtica</a></li>
+              <li><a href="musica.html">Música & Tradiciones</a></li>
+              <li><a href="aliados.html">Red de Aliados</a></li>
+              <li><a href="admin.html">Panel Aliados</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
-          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
-          </button>
-          <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
-            </a>
-            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
-            </a>
-            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
-            </a>
-            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
-            </a>
-          </div>
+      <!-- Acciones de Cabecera -->
+      <div class="nav-actions-right">
+        <button class="nav-action-icon-btn" aria-label="Buscar en la plataforma" onclick="window.location.href='destinos.html'">🔍</button>
+        <button class="nav-action-icon-btn" aria-label="Favoritos" onclick="window.location.href='perfil.html#favoritos'">🤍</button>
+        <div class="nav-lang-selector">
+          <span class="lang-opt active">ES</span> | <span class="lang-opt">EN</span>
         </div>
+        <a href="perfil.html" class="nav-login-btn">Iniciar sesión</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú de navegación">☰</button>
+      </div>
+    </div>
+  </header>
 
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="legal-hero-section">
+    <div class="legal-hero-container">
+      <div class="legal-badge-pill">🛡️ LEGAL</div>
+      <h1 class="legal-hero-title">
+        Aviso Legal &
+        <span>Propiedad Intelectual</span>
+      </h1>
+      <p class="legal-hero-desc">
+        Marco jurídico, transparencia y condiciones de operación de BAQUEANO, una plataforma digital comprometida con un turismo auténtico, responsable y seguro en Nicaragua.
+      </p>
 
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Consola Satelital</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">ACTIVO</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+      <div class="legal-meta-strip">
+        <div class="legal-meta-pill">📅 Última actualización: <strong>18 de septiembre de 2026</strong></div>
+        <div class="legal-meta-pill">📄 Versión: <strong>1.0</strong></div>
+        <div class="legal-meta-pill">⚖️ Régimen jurídico aplicable: <strong>Nicaragua</strong></div>
       </div>
 
-      <div class="nav-right-actions">
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menú de Navegación">
-          <i class="fa-solid fa-bars"></i>
+      <div class="legal-stamp-floating">
+        <span class="nicaragua-stamp-text">Nicaragua Auténtica</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LO ESENCIAL DEL AVISO LEGAL ==================== -->
+  <section class="essential-section">
+    <div class="essential-card">
+      <div class="essential-header">
+        <div class="essential-icon-box">📋</div>
+        <div>
+          <h2 class="essential-title">Lo esencial del Aviso Legal</h2>
+          <p class="essential-subtitle">Conoce los aspectos más importantes sobre la operación, uso, propiedad intelectual y marco normativo de BAQUEANO.</p>
+        </div>
+      </div>
+
+      <div class="essential-grid">
+        <!-- 1 -->
+        <div class="essential-item">
+          <div class="essential-item-icon item-icon-teal">🏛️</div>
+          <h3 class="essential-item-title">Titularidad y responsable</h3>
+          <p class="essential-item-text">Operado desde Managua, Nicaragua. Alcance nacional.</p>
+        </div>
+        <!-- 2 -->
+        <div class="essential-item">
+          <div class="essential-item-icon item-icon-orange">💻</div>
+          <h3 class="essential-item-title">Naturaleza de la plataforma</h3>
+          <p class="essential-item-text">Conexión, información y facilitación digital entre viajeros y prestadores locales.</p>
+        </div>
+        <!-- 3 -->
+        <div class="essential-item">
+          <div class="essential-item-icon item-icon-green">🤝</div>
+          <h3 class="essential-item-title">Independencia institucional</h3>
+          <p class="essential-item-text">Iniciativa independiente. No representa a instituciones del Estado.</p>
+        </div>
+        <!-- 4 -->
+        <div class="essential-item">
+          <div class="essential-item-icon item-icon-blue">⚖️</div>
+          <h3 class="essential-item-title">Marco normativo</h3>
+          <p class="essential-item-text">Cumplimiento de leyes turísticas, ambientales, comercio electrónico y protección de datos.</p>
+        </div>
+        <!-- 5 -->
+        <div class="essential-item">
+          <div class="essential-item-icon item-icon-amber">©️</div>
+          <h3 class="essential-item-title">Propiedad intelectual</h3>
+          <p class="essential-item-text">Marca, contenidos, interfaces, código y base de datos protegidos.</p>
+        </div>
+        <!-- 6 -->
+        <div class="essential-item">
+          <div class="essential-item-icon item-icon-emerald">✉️</div>
+          <h3 class="essential-item-title">Contacto legal</h3>
+          <p class="essential-item-text">legal@baqueano.ni<br>+505 8443-1289<br>Managua, Nicaragua.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CUERPO PRINCIPAL (2 COLUMNAS) ==================== -->
+  <main class="legal-main-layout">
+    <!-- Sidebar Izquierdo -->
+    <aside class="legal-sidebar">
+      <div class="sidebar-index-card">
+        <div class="sidebar-index-header">
+          <span>📋</span> Índice del Aviso Legal
+        </div>
+        <ul class="sidebar-index-list">
+          <li>
+            <a href="#titularidad" class="sidebar-index-link active">
+              <span class="num-label"><span class="idx-num">01</span> Titularidad y responsable</span>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="#naturaleza" class="sidebar-index-link">
+              <span class="num-label"><span class="idx-num">02</span> Naturaleza de la plataforma</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="#independencia" class="sidebar-index-link">
+              <span class="num-label"><span class="idx-num">03</span> Independencia institucional</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="#marco-normativo" class="sidebar-index-link">
+              <span class="num-label"><span class="idx-num">04</span> Marco normativo aplicable</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="#propiedad-intelectual" class="sidebar-index-link">
+              <span class="num-label"><span class="idx-num">05</span> Propiedad intelectual</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contacto-legal" class="sidebar-index-link">
+              <span class="num-label"><span class="idx-num">06</span> Contacto legal</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Banner Estela Monolítica Indígena -->
+      <div class="sidebar-petroglyph-banner">
+        <img src="assets/images/destinos/zapatera_petroglifos.jpg" alt="Patrimonio ancestral nicaragüense" class="petroglyph-banner-bg" onerror="this.src='assets/images/destinos/ometepe_charco_verde.jpg'">
+        <div class="petroglyph-banner-overlay"></div>
+        <div class="petroglyph-banner-text">
+          “Tecnología que conecta nuestra tierra, con responsabilidad.”
+        </div>
+      </div>
+    </aside>
+
+    <!-- Columna de Contenido Derecho -->
+    <div class="legal-content-column">
+      <!-- 01 Titularidad y responsable -->
+      <section id="titularidad" class="legal-section-card">
+        <div class="legal-card-header">
+          <div class="legal-card-title-wrap">
+            <span class="section-num-circle">01</span>
+            <h2 class="legal-card-title">Titularidad y responsable</h2>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <div class="legal-card-body-layout">
+          <p class="legal-card-text">
+            BAQUEANO es una plataforma digital operada y administrada desde Managua, Nicaragua, con alcance en todo el territorio nacional. Está orientada a promover el turismo sostenible mediante el uso de tecnología, facilitando la conexión entre viajeros y prestadores locales (emprendedores, guías, cooperativas, fincas, hospedajes, comedores y experiencias).
+          </p>
+          <img src="assets/images/destinos/catedral_leon_patrimonio.jpg" alt="Catedral de León, Patrimonio de la Humanidad" class="legal-card-thumb" onerror="this.src='assets/images/destinos/granada_isletas.jpg'">
+        </div>
+      </section>
+
+      <!-- 02 Naturaleza de la plataforma -->
+      <section id="naturaleza" class="legal-section-card">
+        <div class="legal-card-header">
+          <div class="legal-card-title-wrap">
+            <span class="section-num-circle">02</span>
+            <h2 class="legal-card-title">Naturaleza de la plataforma</h2>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <div class="legal-card-body-full">
+          <div class="legal-card-body-layout">
+            <p class="legal-card-text">
+              BAQUEANO es una plataforma tecnológica de información, conexión directa y facilitación digital. No proporciona directamente servicios turísticos, sino que ofrece herramientas para que los viajeros descubran destinos, contacten prestadores locales y organicen sus experiencias de manera segura y responsable.
+            </p>
+            <img src="assets/images/destinos/ometepe_volcan_concepcion.jpg" alt="Isla de Ometepe, Reserva de Biósfera" class="legal-card-thumb" onerror="this.src='assets/images/destinos/volcan_masaya_lava.jpg'">
+          </div>
+
+          <div class="platform-features-grid">
+            <div class="platform-feature-box">
+              <span class="feat-icon">📍</span>
+              <span class="feat-title">Información de destinos</span>
+              <p class="feat-desc">Contenido turístico, cultural y natural verificado.</p>
+            </div>
+            <div class="platform-feature-box">
+              <span class="feat-icon">👥</span>
+              <span class="feat-title">Conexión directa</span>
+              <p class="feat-desc">Entre viajeros y prestadores locales sin abusos.</p>
+            </div>
+            <div class="platform-feature-box">
+              <span class="feat-icon">🗺️</span>
+              <span class="feat-title">Mapas y geolocalización</span>
+              <p class="feat-desc">Rutas, distancias y puntos de interés en tiempo real.</p>
+            </div>
+            <div class="platform-feature-box">
+              <span class="feat-icon">🤖</span>
+              <span class="feat-title">Baqueano AI</span>
+              <p class="feat-desc">Asistente de viaje con recomendaciones personalizadas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 Independencia institucional -->
+      <section id="independencia" class="legal-section-card">
+        <div class="legal-card-header">
+          <div class="legal-card-title-wrap">
+            <span class="section-num-circle">03</span>
+            <h2 class="legal-card-title">Independencia institucional</h2>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <div class="independence-layout">
+          <p class="legal-card-text">
+            BAQUEANO es una iniciativa independiente y no representa a ninguna institución gubernamental. La mención de entidades como INTUR, MARENA, alcaldías, Policía Nacional, Bomberos, Cruz Roja u otros organismos se realiza únicamente con fines informativos para orientar al usuario. Su inclusión no implica patrocinio, afiliación ni representación oficial de dichas instituciones.
+          </p>
+          <div class="alert-callout-box">
+            <div class="alert-icon">!</div>
+            <p class="alert-text">
+              <strong>BAQUEANO no es un sitio oficial del Estado de Nicaragua.</strong> Somos una plataforma independiente orientada a la promoción del turismo sostenible y comunitario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 Marco normativo aplicable -->
+      <section id="marco-normativo" class="legal-section-card">
+        <div class="legal-card-header">
+          <div class="legal-card-title-wrap">
+            <span class="section-num-circle">04</span>
+            <h2 class="legal-card-title">Marco normativo aplicable</h2>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <p class="legal-card-text">
+          La operación de BAQUEANO se rige por la legislación vigente en la República de Nicaragua, incluyendo:
+        </p>
+
+        <div class="laws-cards-grid">
+          <!-- Ley 1210 -->
+          <div class="law-card-item">
+            <div class="law-card-head">
+              <span class="law-card-icon">🍃</span>
+              <div>
+                <h3 class="law-card-title">Ley 1210</h3>
+              </div>
+            </div>
+            <span class="law-card-subtitle">Ley General de Turismo</span>
+            <p class="law-card-desc">Establece el marco para el desarrollo, regulación y promoción del turismo en Nicaragua.</p>
+          </div>
+
+          <!-- Ley 1211 -->
+          <div class="law-card-item">
+            <div class="law-card-head">
+              <span class="law-card-icon">🌊</span>
+              <div>
+                <h3 class="law-card-title">Ley 1211</h3>
+              </div>
+            </div>
+            <span class="law-card-subtitle">Ley de Incentivos para la Industria Turística</span>
+            <p class="law-card-desc">Promueve el desarrollo de inversiones y actividades turísticas sostenibles.</p>
+          </div>
+
+          <!-- Ley 842 -->
+          <div class="law-card-item">
+            <div class="law-card-head">
+              <span class="law-card-icon">🛡️</span>
+              <div>
+                <h3 class="law-card-title">Ley 842</h3>
+              </div>
+            </div>
+            <span class="law-card-subtitle">Ley de Protección del Medio Ambiente</span>
+            <p class="law-card-desc">Regula la conservación de los recursos naturales y el uso sostenible del patrimonio ambiental.</p>
+          </div>
+
+          <!-- Ley 306 -->
+          <div class="law-card-item">
+            <div class="law-card-head">
+              <span class="law-card-icon">📜</span>
+              <div>
+                <h3 class="law-card-title">Ley 306</h3>
+              </div>
+            </div>
+            <span class="law-card-subtitle">Ley de Comercio Electrónico</span>
+            <p class="law-card-desc">Regula las transacciones digitales, validez de información electrónica y servicios en línea.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 Propiedad intelectual -->
+      <section id="propiedad-intelectual" class="legal-section-card">
+        <div class="legal-card-header">
+          <div class="legal-card-title-wrap">
+            <span class="section-num-circle">05</span>
+            <h2 class="legal-card-title">Propiedad intelectual</h2>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <div class="ip-layout">
+          <p class="legal-card-text">
+            Todos los contenidos, diseño, logotipo, identidad visual, interfaces, código fuente, base de datos, textos, fotografías, mapas, íconos y demás elementos de BAQUEANO están protegidos por las leyes de propiedad intelectual y derechos de autor. Queda prohibida su reproducción, distribución, modificación o uso no autorizado sin el consentimiento previo y por escrito del titular.
+          </p>
+          <div class="ip-brand-box">
+            <img src="assets/images/logo/logo_baqueano.svg" alt="Logotipo BAQUEANO" class="ip-brand-logo">
+            <p class="ip-brand-legend">Marca registrada y elementos protegidos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 Contacto legal -->
+      <section id="contacto-legal" class="legal-section-card">
+        <div class="legal-card-header">
+          <div class="legal-card-title-wrap">
+            <span class="section-num-circle">06</span>
+            <h2 class="legal-card-title">Contacto legal</h2>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <p class="legal-card-text">
+          Si tenés consultas sobre este Aviso Legal, propiedad intelectual o cualquier asunto jurídico, podés contactarnos a través de nuestros canales oficiales:
+        </p>
+
+        <div class="legal-contact-grid">
+          <div class="legal-contact-pill">
+            <div class="legal-contact-icon">✉️</div>
+            <div class="legal-contact-info">
+              <span class="contact-lbl">Correo electrónico</span>
+              <span class="contact-val">legal@baqueano.ni</span>
+            </div>
+          </div>
+          <div class="legal-contact-pill">
+            <div class="legal-contact-icon">💬</div>
+            <div class="legal-contact-info">
+              <span class="contact-lbl">WhatsApp</span>
+              <span class="contact-val">+505 8443-1289</span>
+            </div>
+          </div>
+          <div class="legal-contact-pill">
+            <div class="legal-contact-icon">📍</div>
+            <div class="legal-contact-info">
+              <span class="contact-lbl">Sede</span>
+              <span class="contact-val">Managua, Nicaragua</span>
+            </div>
+          </div>
+          <div class="legal-contact-pill">
+            <div class="legal-contact-icon">⏰</div>
+            <div class="legal-contact-info">
+              <span class="contact-lbl">Horario de atención</span>
+              <span class="contact-val">Lun – Vie: 8:00 a.m. – 5:00 p.m.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ==================== SECCIÓN INFERIOR DE DOCUMENTOS & TRANSPARENCIA ==================== -->
+  <section class="legal-bottom-strip">
+    <!-- Documentos Relacionados -->
+    <div class="legal-docs-card">
+      <div class="legal-docs-header">
+        <span>📄</span> Documentos relacionados
+      </div>
+      <p class="legal-docs-sub">Conocé más sobre nuestras políticas y condiciones.</p>
+      <div class="legal-docs-buttons-row">
+        <a href="terminos.html" class="legal-doc-btn">
+          <span>📜</span> Términos y Condiciones
+        </a>
+        <a href="privacidad.html" class="legal-doc-btn">
+          <span>🛡️</span> Política de Privacidad
+        </a>
+        <a href="cookies.html" class="legal-doc-btn">
+          <span>🍪</span> Cookies y Caché Offline
+        </a>
+        <a href="ambiental.html" class="legal-doc-btn">
+          <span>🌿</span> Política Ambiental
+        </a>
+      </div>
+    </div>
+
+    <!-- Transparencia y Versiones -->
+    <div class="transparency-card">
+      <div>
+        <div class="transparency-header">
+          <span>🛡️</span> Transparencia y versiones
+        </div>
+        <p class="transparency-sub">Historial y control de actualizaciones de este documento.</p>
+      </div>
+      <div class="transparency-row">
+        <div class="transparency-version-pill">
+          Versión: <strong>1.0</strong>
+        </div>
+        <div class="transparency-version-pill">
+          Última actualización: <strong>18 de septiembre de 2026</strong>
+        </div>
+        <button class="pdf-download-btn" onclick="window.print()">
+          <span>📥</span> Descargar versión PDF
         </button>
       </div>
     </div>
-  </nav>
+  </section>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main>
-    <!-- HERO CINEMATOGRÁFICO CON FORMATO OFICIAL INDEX.HTML -->
-    <section class="institucional-hero">
-      <img src="assets/images/destinos/cerro_negro.jpg" alt="Aviso Legal" class="institucional-hero-bg">
-      <div class="institucional-hero-gradient"></div>
-      <div class="institucional-hero-content">
-        <div class="hero-badge-pill">
-          <span class="pulse-dot"></span> Marco Jurídico & Transparencia
-        </div>
-        <h1 class="hero-headline">
-          Aviso Legal & <span class="highlight-sunset">Propiedad Intelectual</span>
-        </h1>
-        <p class="hero-subtext">
-          Titularidad tecnológica, régimen regulatorio de turismo sostenible y condiciones jurídicas de Baqueano Nicaragua bajo las Leyes No. 1210 y 1211 INTUR.
-        </p>
-      </div>
-    </section>
-
-    <section class="legal-essential" aria-labelledby="legalEssentialTitle">
-      <div class="legal-essential-head"><i class="fa-solid fa-file-lines"></i><div><h2 id="legalEssentialTitle">Lo esencial del Aviso Legal</h2><p>Conocé los aspectos más importantes sobre la operación, uso, propiedad intelectual y marco normativo de BAQUEANO.</p></div></div>
-      <div class="legal-essential-grid">
-        <article><i class="fa-solid fa-building-columns"></i><h3>Titularidad y responsable</h3><p>Operado desde Managua, Nicaragua. Alcance nacional.</p></article>
-        <article><i class="fa-solid fa-laptop"></i><h3>Naturaleza de la plataforma</h3><p>Conexión, información y facilitación digital.</p></article>
-        <article><i class="fa-solid fa-handshake"></i><h3>Independencia institucional</h3><p>Iniciativa independiente. No representa al Estado.</p></article>
-        <article><i class="fa-solid fa-scale-balanced"></i><h3>Marco normativo</h3><p>Cumplimiento de leyes turísticas, ambientales y digitales.</p></article>
-        <article><i class="fa-solid fa-copyright"></i><h3>Propiedad intelectual</h3><p>Marca, contenidos, interfaces y código protegidos.</p></article>
-        <article><i class="fa-solid fa-envelope"></i><h3>Contacto legal</h3><p><strong>legal@baqueano.ni</strong><br>+505 8443-1289</p></article>
-      </div>
-    </section>
-
-    <!-- LAYOUT INTERACTIVO DOS COLUMNAS -->
-    <section class="container institucional-layout">
-      
-      <!-- SIDEBAR (ÍNDICE CON CURSOR DINÁMICO DE ARRIBA A ABAJO) -->
-      <aside class="institucional-sidebar">
-        <div class="toc-header-bar">
-          <div class="sidebar-title">
-            <i class="fa-solid fa-list-ul"></i> Índice Legal
-          </div>
-          <span class="toc-active-counter">01 / 06</span>
-        </div>
-
-        <div class="toc-progress-track" title="Progreso de lectura">
-          <div class="toc-progress-fill"></div>
-        </div>
-
-        <div class="toc-jump-controls">
-          <button type="button" class="toc-jump-btn" id="tocBtnPrev" title="Artículo anterior o ir al inicio">
-            <i class="fa-solid fa-arrow-up"></i> Arriba
-          </button>
-          <button type="button" class="toc-jump-btn" id="tocBtnNext" title="Artículo siguiente o ir al final">
-            <i class="fa-solid fa-arrow-down"></i> Abajo
-          </button>
-        </div>
-
-        <div class="sidebar-nav-container">
-          <div class="toc-cursor-rail">
-            <div class="toc-cursor-pip"></div>
-          </div>
-          <nav class="sidebar-nav" id="institucionalScrollspy" aria-label="Índice de aviso legal">
-            <a href="#titularidad" class="sidebar-nav-link active"><span class="toc-nav-num">01</span><span class="toc-nav-title">Titularidad y sede</span></a>
-            <a href="#naturaleza" class="sidebar-nav-link"><span class="toc-nav-num">02</span><span class="toc-nav-title">Naturaleza plataforma</span></a>
-            <a href="#independencia" class="sidebar-nav-link"><span class="toc-nav-num">03</span><span class="toc-nav-title">Independencia</span></a>
-            <a href="#marco" class="sidebar-nav-link"><span class="toc-nav-num">04</span><span class="toc-nav-title">Marco normativo</span></a>
-            <a href="#propiedad" class="sidebar-nav-link"><span class="toc-nav-num">05</span><span class="toc-nav-title">Propiedad intelectual</span></a>
-            <a href="#contacto" class="sidebar-nav-link"><span class="toc-nav-num">06</span><span class="toc-nav-title">Contacto legal</span></a>
-          </nav>
-        </div>
-      </aside>
-
-      <!-- CONTENIDO PRINCIPAL (TARJETAS DE ARTÍCULOS) -->
-      <div class="institucional-content">
-        
-        <div class="legal-document-meta">
-          <span><i class="fa-solid fa-calendar-check text-terracotta"></i> <strong>Última actualización:</strong> 18 de septiembre de 2026</span>
-          <span><i class="fa-solid fa-scale-balanced text-terracotta"></i> <strong>Régimen:</strong> Leyes No. 1210 y 1211 INTUR</span>
-          <span><i class="fa-solid fa-file-shield text-terracotta"></i> <strong>Versión:</strong> 1.0 Oficial</span>
-        </div>
-
-        <!-- ARTÍCULO 01 -->
-        <article class="legal-card" id="titularidad">
-          <div class="legal-card-num">01</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-scale-balanced"></i> Titularidad y Responsable</h2>
-          <div class="legal-card-body">
-            <p>El ecosistema digital BAQUEANO NICARAGUA, integrado por su portal web, aplicación móvil nativa Android, modelo Baqueano AI, bases de datos territoriales, cartografía satelital y demás servicios conexos, es administrado y operado desde la ciudad de Managua, República de Nicaragua.</p>
-            <p>La plataforma mantiene un alcance de cobertura técnica proyectado para los 15 departamentos y las 2 Regiones Autónomas de la Costa Caribe (RACCN y RACCS), sumando 153 municipios conectados.</p>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-envelope-open-text legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                Para cualquier requerimiento institucional, notificación de índole legal o consultas societarias: <a href="mailto:legal@baqueano.ni">legal@baqueano.ni</a>.
-              </p>
+  <!-- ==================== FOOTER OFICIAL BAQUEANO ==================== -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Columna Marca -->
+        <div class="footer-brand-col">
+          <div class="footer-brand">
+            <img src="assets/images/logo/logo_baqueano.svg" alt="BAQUEANO" class="footer-logo">
+            <div>
+              <span class="footer-brand-name">BAQUEANO</span>
+              <span class="footer-brand-sub">NICARAGUA AUTÉNTICA</span>
             </div>
           </div>
-        </article>
-
-        <!-- ARTÍCULO 02 -->
-        <article class="legal-card" id="naturaleza">
-          <div class="legal-card-num">02</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-network-wired"></i> Naturaleza de la Plataforma</h2>
-          <div class="legal-card-body">
-            <p>BAQUEANO es una plataforma tecnológica soberana de información, conexión directa y facilitación digital entre viajeros y prestadores campesinos. Entre sus funciones principales se destacan:</p>
-            <ul>
-              <li>Descubrimiento georreferenciado de destinos, reservas naturales y volcanes.</li>
-              <li>Contacto directo entre el explorador y las cooperativas sin comisiones intermediarias.</li>
-              <li>Geolocalización satelital fuera de línea (offline) en senderos y parajes protegidos.</li>
-              <li>Asistencia personalizada mediante inteligencia artificial ética (Baqueano AI).</li>
-            </ul>
-            <div class="legal-callout-box terracotta">
-              <i class="fa-solid fa-shield-halved legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                BAQUEANO no es una agencia de viajes extractiva ni una operadora de transporte. La ejecución material del servicio ecoturístico recae exclusivamente en los prestadores locales verificados.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 03 -->
-        <article class="legal-card" id="independencia">
-          <div class="legal-card-num">03</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-landmark-dome"></i> Independencia Institucional</h2>
-          <div class="legal-card-body">
-            <p>BAQUEANO NICARAGUA es una iniciativa tecnológica y social independiente. La difusión y referencia a normativas públicas, números de socorro nacional (128 Cruz Blanca, 115 Bomberos, 118 Policía Nacional) o datos del Instituto Nicaragüense de Turismo (INTUR) y del Ministerio del Ambiente y los Recursos Naturales (MARENA) tiene como fin exclusivo informar y proteger al visitante en territorio nacional, sin que ello implique representación o vínculo societario directo con dichas entidades estatales.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 04 -->
-        <article class="legal-card" id="marco">
-          <div class="legal-card-num">04</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-book-open"></i> Marco Jurídico Turístico</h2>
-          <div class="legal-card-body">
-            <p>BAQUEANO estructura sus operaciones de acuerdo con el marco regulatorio vigente de la República de Nicaragua:</p>
-            <ul>
-              <li><strong>Ley N.º 1210:</strong> Ley General de Turismo, que fomenta el turismo sostenible, regenerativo y la protección de la identidad cultural y natural del país.</li>
-              <li><strong>Ley N.º 1211:</strong> Fomento al Turismo Interno y Comunitario sin intermediación perjudicial para las familias rurales.</li>
-              <li><strong>Ley N.º 842:</strong> Ley de Protección de los Derechos de las Personas Consumidoras y Usuarias.</li>
-              <li><strong>Ley N.º 306:</strong> Ley de Incentivos para la Industria Turística de la República de Nicaragua.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 05 -->
-        <article class="legal-card" id="propiedad">
-          <div class="legal-card-num">05</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-copyright"></i> Propiedad Intelectual & Signos Distintivos</h2>
-          <div class="legal-card-body">
-            <p>Todos los elementos que integran la identidad visual, conceptual y técnica de BAQUEANO NICARAGUA están amparados por la legislación de propiedad intelectual y derecho de autor de Nicaragua (Ley N.º 312) y tratados internacionales suscritos ante la OMPI:</p>
-            <ul>
-              <li>El emblema de la "Q" Ancestral, la silueta de los Maribios y la paleta cromática oficial (#165D6F, #F65E01, #F4E6C1, #0F172A).</li>
-              <li>El código fuente, arquitectura de software de la app Android, interfaces web y diseño UI/UX.</li>
-              <li>Los textos institucionales, fichas de 29 destinos protegidos, recetas gastronómicas y contenidos históricos.</li>
-              <li>Los modelos de datos y algoritmos del motor Baqueano AI y cartografía territorial.</li>
-            </ul>
-            <p>Queda prohibida su reproducción, ingeniería inversa o explotación comercial sin autorización expresa y por escrito de la titularidad.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 06 -->
-        <article class="legal-card" id="contacto">
-          <div class="legal-card-num">06</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-headset"></i> Contacto Legal & Notificaciones</h2>
-          <div class="legal-card-body">
-            <p>Para la presentación de requerimientos formales, consultas sobre propiedad intelectual, solicitudes de rectificación o cualquier comunicación jurídica:</p>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-location-dot legal-callout-icon"></i>
-              <div>
-                <p class="legal-callout-text"><strong>Dirección Electrónica Legal:</strong> <a href="mailto:legal@baqueano.ni">legal@baqueano.ni</a></p>
-                <p class="legal-callout-text"><strong>Mesa de Enlace WhatsApp:</strong> <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></p>
-                <p class="legal-callout-text"><strong>Sede Central:</strong> Managua, República de Nicaragua</p>
-                <p class="legal-callout-text"><strong>Horario de Atención Administrativa:</strong> Lunes a Viernes, 8:00 AM - 5:00 PM</p>
-              </div>
-            </div>
-            <p style="margin-top: 1.5rem; font-weight: 700; color: #F4E6C1;">
-              BAQUEANO NICARAGUA — Soberanía territorial, tecnología ética y turismo comunitario con dignidad.
-            </p>
-          </div>
-        </article>
-
-        <section class="legal-related" aria-label="Documentos y versiones"><article><h3>📄 Documentos relacionados</h3><div><a href="terminos.html">Términos y condiciones</a><a href="privacidad.html">Política de privacidad</a><a href="cookies.html">Cookies y caché offline</a><a href="ambiental.html">Política ambiental</a></div></article><article><h3>🛡️ Transparencia y versiones</h3><p>Versión <strong>1.0</strong> · Última actualización <strong>18 de septiembre de 2026</strong></p><button type="button">Descargar versión PDF</button></article></section>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER INSTITUCIONAL OFICIAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
+          <p class="footer-tagline">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
           </div>
         </div>
 
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
-                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
-              </div>
-
-              <!-- 2. Categoría -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
-                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
-                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
-                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
-                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
-                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
-                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
-                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
-                </select>
-                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
-              </div>
-
-              <!-- 3. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
-              </div>
-
-              <!-- 4. Municipio o Comunidad -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
-                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
-              </div>
-
-              <!-- 5. Nombre del Contacto / Anfitrión -->
-              <div class="biz-field-group">
-                <label for="bizContactName" class="biz-label">
-                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
-                </label>
-                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
-                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
-              </div>
-
-              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
-                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
-                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
-              </div>
-
-              <!-- 7. Correo Electrónico (Opcional) -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
-                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
-              </div>
-
-              <!-- 8. Dirección / Cómo Llegar -->
-              <div class="biz-field-group">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
-                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
-              </div>
-
-              <!-- 9. Breve Descripción del Servicio -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
-                </label>
-                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
-                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
-                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
-              </div>
-
-              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
-                </label>
-                <div class="biz-file-dropzone" id="bizDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
-                  <div class="dropzone-content" id="dropzonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
-                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
-                  </div>
-                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
-                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
-                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
-                      <i class="fa-solid fa-xmark"></i> Quitar
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Botón de Envío y Términos -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
-          <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
-          </div>
-        </div>
-
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
+        <!-- Columna 1: Explorá -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorá</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html">Baqueano Digital</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
+        <!-- Columna 2: Nosotros -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Nosotros</h4>
+          <ul class="footer-links">
+            <li><a href="historia.html">Nuestra historia</a></li>
+            <li><a href="nosotros.html">Misión y visión</a></li>
+            <li><a href="aliados.html">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="ambiental.html">Impacto</a></li>
           </ul>
         </div>
 
+        <!-- Columna 3: Información -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Información</h4>
+          <ul class="footer-links">
+            <li><a href="gastronomia.html">Blog</a></li>
+            <li><a href="nosotros.html#contacto">Contacto</a></li>
+            <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Legal -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html" class="active">Aviso legal</a></li>
+          </ul>
+        </div>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html" style="color: var(--arena-pinolera); font-weight: 700;">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
-        <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+      <!-- Sello y Copyright -->
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 BAQUEANO. Todos los derechos reservados.</p>
+        <div class="nicaragua-stamp-badge">
+          <span>Nicaragua Auténtica</span> 🌿
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
-        </div>
+        <p class="made-with-love">Hecho con ❤️ en Nicaragua</p>
       </div>
     </div>
   </footer>
 
-  <!-- SDK Firebase & Sincronización Universal CMS -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
+  <!-- Script interactivo de navegación y menú -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle móvil
+      const mobileNavToggle = document.getElementById('mobileNavToggle');
+      const navLinksMenu = document.getElementById('navLinksMenu');
+      if (mobileNavToggle && navLinksMenu) {
+        mobileNavToggle.addEventListener('click', () => {
+          navLinksMenu.classList.toggle('nav-active');
+        });
+      }
 
-  <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/legal-scrollspy.js"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+      // Scroll activo para el índice lateral
+      const indexLinks = document.querySelectorAll('.sidebar-index-link');
+      const sections = document.querySelectorAll('.legal-section-card');
+
+      window.addEventListener('scroll', () => {
+        let currentSection = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 120;
+          if (window.pageYOffset >= sectionTop) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+
+        indexLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentSection) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

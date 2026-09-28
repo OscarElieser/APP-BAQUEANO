@@ -158,8 +158,9 @@
         <a href="destinos.html" class="exact-nav-link">Destinos</a>
         <a href="mapa.html" class="exact-nav-link">Mapa</a>
         <a href="experiencias.html" class="exact-nav-link">Experiencias</a>
-        <a href="baqueano-ai.html" class="exact-nav-link">Baqueano Digital</a>
+        <a href="baqueano-ia.html" class="exact-nav-link">Baqueano Digital</a>
         <a href="mi-viaje.html" class="exact-nav-link">Mi Viaje</a>
+        <a href="nosotros.html" class="exact-nav-link">Nosotros</a>
         <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)">SOS</a>
       </div>
 
@@ -168,6 +169,9 @@
         <a href="perfil.html" class="exact-icon-btn"><i class="fa-regular fa-heart"></i></a>
         <span class="exact-lang-switch">ES | EN</span>
         <a href="perfil.html" class="btn-exact-login">Iniciar sesión</a>
+        <button type="button" class="exact-burger-btn" id="burgerToggle" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -233,6 +237,19 @@
     function openSosModal(e) {
       if (e && e.preventDefault) e.preventDefault();
       alert('Centro SOS activo: Policía 118, Cruz Blanca 128, Bomberos 115.');
+    }
+
+    const bToggle = document.getElementById('burgerToggle');
+    const nLinks = document.getElementById('exactNavLinks');
+    if (bToggle && nLinks) {
+      bToggle.addEventListener('click', () => {
+        nLinks.classList.toggle('nav-active');
+        if (nLinks.style.display === 'flex') {
+          nLinks.style.display = 'none';
+        } else {
+          nLinks.style.display = 'flex';
+        }
+      });
     }
   </script>
 </body>

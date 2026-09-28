@@ -1,1023 +1,705 @@
 <!DOCTYPE html>
-<!--
-============================================================================
-🧭 BAQUEANO ECOSYSTEM — POLÍTICA DE COOKIES & ALMACENAMIENTO SOBERANO (cookies.html)
-============================================================================
-
-🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Garantizar total transparencia técnica y soberana sobre las tecnologías de almacenamiento
-  local (IndexedDB, LocalStorage, Caché de Service Workers y cookies de sesión estrictamente necesarias).
-- Proteger la privacidad del explorador: certificar el compromiso inquebrantable de CERO
-  rastreadores comerciales invasivos, CERO venta de datos y CERO publicidad programática.
-- Facilitar una experiencia ultra-rápida y funcional en rutas de montaña donde la conectividad
-  móvil es nula o intermitente, permitiendo almacenar fichas satelitales y preferencias bimoneda.
-
-⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Hero institucional con insignia pulsante, gradiente H1 oficial y subtítulo de alta gama.
-- Arquitectura responsiva de dos columnas (grid con sidebar sticky y columna legal).
-- Índice interactivo con cursor deslizante de arriba a abajo (.toc-cursor-rail, .toc-cursor-pip)
-  sincronizado con IntersectionObserver a 60fps (legal-scrollspy.js).
-- Controles de salto rápido táctil (botones Arriba / Abajo) y barra de progreso lector.
-- Tarjetas jurídicas (.legal-card) con glassmorphism, tablas comparativas de tipos de cookies,
-  cajas de llamada técnica (.legal-callout-box) y referencias normativas (Leyes 1210, 1211 y 306).
-- Footer oficial idéntico al master de index.html con tarjeta de registro de negocios comunitaria,
-  boletín campesino, redes oficiales y telemetría satelital 24/7.
-
-📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-- 16 Artículos regulatorios exhaustivos:
-  01. ¿Qué son las Cookies y el Almacenamiento Local?
-  02. Cookies y Almacenamiento Técnicamente Necesarios
-  03. Preferencias del Usuario (Bimoneda C$/USD, Idioma, Interfaz)
-  04. Caché de Contenido y Rendimiento
-  05. Almacenamiento Offline para Exploración Territorial (PWA / IndexedDB)
-  06. Mapas y Datos Cartográficos (Leaflet / OpenStreetMap / Mapbox Tiles)
-  07. Geolocalización & Centro SOS
-  08. Funcionamiento en Android (Room DB, SharedPreferences Seguras)
-  09. Servicios Cloud Esenciales (Firebase Authentication, Supabase Storage)
-  10. Cero Publicidad Basada en Rastreo ni Retargeting
-  11. Analítica y Diagnóstico de Rendimiento Soberano
-  12. Ciclo de Vida y Duración del Almacenamiento
-  13. Control, Administración y Borrado por el Usuario
-  14. Consentimiento y Mecanismos de Configuración
-  15. Actualizaciones Normativas y Vigencia
-  16. Canal Oficial de Contacto & Oficial de Privacidad
-- Integración con Firebase SDK, legal-scrollspy.js, navigation.js y user-session.js.
-============================================================================
--->
 <html lang="es">
+<!--
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — POLÍTICA DE COOKIES Y ALMACENAMIENTO LOCAL
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Garantizar total transparencia al explorador sobre cómo y para qué se utilizan
+//   cookies, almacenamiento local (LocalStorage, IndexedDB) y Service Workers.
+// - Asegurar la navegación sin conexión en zonas remotas de Nicaragua (volcanes,
+//   cañones, selvas y cayos) respetando la privacidad sin publicidad invasiva ni
+//   rastreo abusivo.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Interfaz modular interactiva con interruptores de consentimiento en tiempo real.
+// - Diagrama arquitectónico visual del flujo de datos (Usuario -> App -> Firebase / Supabase -> Caché offline).
+// - Botón de depuración y borrado seguro de datos locales con confirmación en el cliente.
+// - Menú unificado responsive y panel FAQ desplegable.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - cookies.html con diseño 1:1 con la maqueta oficial, enlace a políticas hermanas
+//   (Privacidad, Términos, Aviso Legal y Ambiental) y adaptabilidad móvil.
+// ============================================================================
+-->
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Política de Cookies & Almacenamiento Soberano | Baqueano Nicaragua</title>
-  <meta name="description" content="Política oficial de cookies, almacenamiento local y caché offline de Baqueano Nicaragua. Cero rastreadores publicitarios, telemetría satelital y respeto soberano a tu privacidad.">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookies y Almacenamiento Local | BAQUEANO Nicaragua</title>
+  <meta name="description" content="Transparencia sobre el uso de cookies, tecnologías de almacenamiento y datos locales para brindarte una experiencia de viaje segura y sin conexión en Nicaragua.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/logo_baqueano.svg">
 
-  <!-- Google Fonts Oficiales -->
+  <!-- Tipografía Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Estilos Maestros Oficiales -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <!-- Hojas de Estilo Base y Específicas -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/pages/institucional.css">
-  <link rel="stylesheet" href="css/pages/cookies-exact.css?v=20260927-1">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/cookies-exact.css">
 </head>
-<body class="page-cookies-exact">
+<body>
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
-  <nav class="main-navbar" id="mainNavbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-        <div class="brand-text">
-          <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+  <!-- ==================== HEADER & NAVBAR GLOBAL ==================== -->
+  <header class="main-header sticky-top">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo-container" aria-label="Ir a Inicio BAQUEANO">
+        <img src="assets/images/logo/logo_baqueano.svg" alt="BAQUEANO Nicaragua" class="brand-logo-img">
+        <div class="brand-text-block">
+          <span class="brand-name">BAQUEANO</span>
+          <span class="brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+      <!-- Menú Central -->
+      <nav class="main-navbar" aria-label="Navegación principal">
+        <ul class="nav-links-menu" id="navLinksMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link-item">Inicio</a></li>
+          <li class="nav-item"><a href="destinos.html" class="nav-link-item">Destinos</a></li>
+          <li class="nav-item"><a href="mapa.html" class="nav-link-item">Mapa</a></li>
+          <li class="nav-item"><a href="experiencias.html" class="nav-link-item">Experiencias</a></li>
+          <li class="nav-item"><a href="baqueano-ia.html" class="nav-link-item">Baqueano Digital</a></li>
+          <li class="nav-item"><a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a></li>
+          <li class="nav-item"><a href="nosotros.html" class="nav-link-item">Nosotros</a></li>
+          <li class="nav-item"><a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a></li>
+          <li class="nav-item dropdown-parent">
+            <a href="#" class="nav-link-item dropdown-toggle">Más <span>▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="ambiental.html">Política Ambiental</a></li>
+              <li><a href="historia.html">Historia & Memoria</a></li>
+              <li><a href="gastronomia.html">Gastronomía Auténtica</a></li>
+              <li><a href="musica.html">Música & Tradiciones</a></li>
+              <li><a href="aliados.html">Red de Aliados</a></li>
+              <li><a href="admin.html">Panel Aliados</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
-          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
-          </button>
-          <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
-            </a>
-            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
-            </a>
-            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
-            </a>
-            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
-            </a>
-          </div>
+      <!-- Acciones de Cabecera -->
+      <div class="nav-actions-right">
+        <button class="nav-action-icon-btn" aria-label="Buscar en la plataforma" onclick="window.location.href='destinos.html'">🔍</button>
+        <button class="nav-action-icon-btn" aria-label="Favoritos" onclick="window.location.href='perfil.html#favoritos'">🤍</button>
+        <div class="nav-lang-selector">
+          <span class="lang-opt active">ES</span> | <span class="lang-opt">EN</span>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Consola Satelital</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">ACTIVO</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-      </div>
-
-      <div class="nav-right-actions">
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menú de Navegación">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <a href="perfil.html" class="nav-login-btn">Iniciar sesión</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú de navegación">☰</button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main>
-    <!-- HERO CINEMATOGRÁFICO CON ESTILO OFICIAL INDEX.HTML -->
-    <section class="institucional-hero">
-      <img src="assets/images/destinos/selva_negra.jpg" alt="Almacenamiento Local y Caché Offline" class="institucional-hero-bg">
-      <div class="institucional-hero-gradient"></div>
-      <div class="institucional-hero-content">
-        <div class="hero-badge-pill">
-          <span class="pulse-dot"></span> Almacenamiento Local & Caché Offline
-        </div>
-        <h1 class="hero-headline">
-          Cookies, <span class="cookies-title-accent">almacenamiento local</span> y uso sin conexión
-        </h1>
-        <p class="hero-subtext">
-          Transparencia sobre cómo utilizamos cookies, tecnologías de almacenamiento y datos locales para brindarte una experiencia de viaje segura, auténtica y personalizada en Nicaragua.
-        </p>
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="cookies-hero-section">
+    <div class="cookies-hero-container">
+      <div class="cookies-badge-pill">🛡️ LEGAL</div>
+      <h1 class="cookies-hero-title">
+        Cookies,
+        <span>almacenamiento local y uso sin conexión</span>
+      </h1>
+      <p class="cookies-hero-desc">
+        Transparencia sobre cómo utilizamos cookies, tecnologías de almacenamiento y datos locales para brindarte una experiencia de viaje segura, auténtica y personalizada en Nicaragua.
+      </p>
+
+      <div class="cookies-meta-strip">
+        <div class="cookies-meta-pill">📅 Última actualización: <strong>26 de septiembre de 2026</strong></div>
+        <div class="cookies-meta-pill">📄 Versión: <strong>1.0</strong></div>
+        <div class="cookies-meta-pill">📍 <strong>Nicaragua</strong></div>
       </div>
-    </section>
 
-    <section class="cookies-promises" aria-label="Principios de almacenamiento"><article><i class="fa-solid fa-shield-halved"></i><div><h3>Sin publicidad invasiva</h3><p>No usamos cookies para mostrar publicidad de terceros.</p></div></article><article><i class="fa-solid fa-location-dot"></i><div><h3>Ubicación solo con permiso</h3><p>Tu ubicación se solicita únicamente cuando la activás.</p></div></article><article><i class="fa-solid fa-database"></i><div><h3>Control de almacenamiento</h3><p>Podés gestionar y eliminar tus datos locales.</p></div></article><article><i class="fa-solid fa-plane"></i><div><h3>Modo offline</h3><p>Disfrutá contenido, rutas y guías aun sin conexión.</p></div></article></section>
+      <div class="cookies-stamp-floating">
+        <span class="nicaragua-stamp-text">Nicaragua Auténtica</span>
+      </div>
+    </div>
+  </section>
 
-    <!-- LAYOUT INTERACTIVO DOS COLUMNAS (SIDEBAR STICKY + ARTÍCULOS) -->
-    <section class="container institucional-layout">
+  <!-- ==================== 4 FLOATING TRUST STRIP ==================== -->
+  <section class="trust-strip-section">
+    <div class="trust-strip-grid">
+      <!-- 1 -->
+      <div class="trust-card">
+        <div class="trust-icon-box trust-icon-green">🛡️</div>
+        <div>
+          <h3 class="trust-card-title">Sin publicidad invasiva</h3>
+          <p class="trust-card-desc">No usamos cookies para mostrar publicidad de terceros ni rastrear tus hábitos.</p>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="trust-card">
+        <div class="trust-icon-box trust-icon-orange">📍</div>
+        <div>
+          <h3 class="trust-card-title">Ubicación solo con permiso</h3>
+          <p class="trust-card-desc">Tu ubicación se solicita únicamente cuando la activas para rutas y mapas.</p>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="trust-card">
+        <div class="trust-icon-box trust-icon-blue">💾</div>
+        <div>
+          <h3 class="trust-card-title">Control de almacenamiento</h3>
+          <p class="trust-card-desc">Puedes gestionar y eliminar tus datos locales cuando lo desees con un clic.</p>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="trust-card">
+        <div class="trust-icon-box trust-icon-purple">✈️</div>
+        <div>
+          <h3 class="trust-card-title">Modo offline</h3>
+          <p class="trust-card-desc">Disfruta contenido, mapas, rutas y guías aun sin conexión en zonas remotas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CUERPO PRINCIPAL (2 COLUMNAS) ==================== -->
+  <main class="cookies-main-layout">
+    <!-- Sidebar Izquierdo -->
+    <aside class="cookies-sidebar">
+      <div class="cookies-index-card">
+        <div class="cookies-index-header">
+          <span>📋</span> Índice de la política
+        </div>
+        <ul class="cookies-index-list">
+          <li><a href="#general" class="cookies-index-link active">1. Información general</a></li>
+          <li><a href="#esenciales" class="cookies-index-link">2. Cookies esenciales</a></li>
+          <li><a href="#preferencias" class="cookies-index-link">3. Preferencias</a></li>
+          <li><a href="#offline" class="cookies-index-link">4. Almacenamiento local y modo offline</a></li>
+          <li><a href="#ubicacion" class="cookies-index-link">5. Ubicación y mapas</a></li>
+          <li><a href="#externos" class="cookies-index-link">6. Servicios externos</a></li>
+          <li><a href="#duracion" class="cookies-index-link">7. Duración y borrado</a></li>
+          <li><a href="#control" class="cookies-index-link">8. Control del usuario</a></li>
+          <li><a href="#faq" class="cookies-index-link">9. Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <!-- Banner Estela Monolítica Indígena -->
+      <div class="sidebar-petroglyph-banner">
+        <img src="assets/images/destinos/zapatera_petroglifos.jpg" alt="Patrimonio ancestral nicaragüense" class="petroglyph-banner-bg" onerror="this.src='assets/images/destinos/ometepe_charco_verde.jpg'">
+        <div class="petroglyph-banner-overlay"></div>
+        <div class="petroglyph-banner-text">
+          “Tu información también viaja segura.”
+        </div>
+      </div>
+    </aside>
+
+    <!-- Columna de Contenido Derecho -->
+    <div class="cookies-content-column">
       
-      <!-- SIDEBAR (ÍNDICE CON CURSOR DINÁMICO DE ARRIBA A ABAJO) -->
-      <aside class="institucional-sidebar">
-        <div class="toc-header-bar">
-          <div class="sidebar-title">
-            <i class="fa-solid fa-cookie-bite"></i> Índice de Cookies
-          </div>
-          <span class="toc-active-counter">01 / 16</span>
+      <!-- Card Superior: Tus preferencias de cookies y almacenamiento -->
+      <section id="preferencias" class="preferences-control-card">
+        <div class="preferences-head">
+          <span class="preferences-head-icon">⚙️</span>
+          <h2 class="preferences-title">Tus preferencias de cookies y almacenamiento</h2>
         </div>
+        <p class="preferences-subtitle">
+          Podés personalizar el uso de cookies y datos locales según tus preferencias. Las cookies esenciales y el almacenamiento necesario son obligatorios para el funcionamiento del sitio.
+        </p>
 
-        <div class="toc-progress-track" title="Progreso de lectura">
-          <div class="toc-progress-fill"></div>
-        </div>
+        <div class="preferences-grid-panel">
+          <!-- Lista de Switches -->
+          <div class="preferences-items-list">
+            <!-- Esenciales -->
+            <div class="pref-row-item">
+              <div class="pref-row-left">
+                <div class="pref-icon-circle item-icon-green">🛡️</div>
+                <div class="pref-meta">
+                  <h4>Cookies esenciales</h4>
+                  <p>Necesarias para el funcionamiento, seguridad y autenticación.</p>
+                </div>
+              </div>
+              <span class="pref-action-btn-green">🔒 Siempre activas</span>
+            </div>
 
-        <div class="toc-jump-controls">
-          <button type="button" class="toc-jump-btn" id="tocBtnPrev" title="Artículo anterior o ir al inicio">
-            <i class="fa-solid fa-arrow-up"></i> Arriba
-          </button>
-          <button type="button" class="toc-jump-btn" id="tocBtnNext" title="Artículo siguiente o ir al final">
-            <i class="fa-solid fa-arrow-down"></i> Abajo
-          </button>
-        </div>
+            <!-- Preferencias -->
+            <div class="pref-row-item">
+              <div class="pref-row-left">
+                <div class="pref-icon-circle item-icon-orange">🟧</div>
+                <div class="pref-meta">
+                  <h4>Preferencias</h4>
+                  <p>Guardan tu idioma, tema, región y configuraciones.</p>
+                </div>
+              </div>
+              <label class="switch-label">
+                <input type="checkbox" id="prefToggle" checked>
+                <span class="switch-slider"></span>
+              </label>
+            </div>
 
-        <div class="sidebar-nav-container">
-          <div class="toc-cursor-rail">
-            <div class="toc-cursor-pip"></div>
-          </div>
-          <nav class="sidebar-nav" id="institucionalScrollspy" aria-label="Índice de artículos de cookies">
-            <a href="#article-01" class="sidebar-nav-link active"><span class="toc-nav-num">01</span><span class="toc-nav-title">¿Qué son las Cookies?</span></a>
-            <a href="#article-02" class="sidebar-nav-link"><span class="toc-nav-num">02</span><span class="toc-nav-title">Cookies Técnicas Necesarias</span></a>
-            <a href="#article-03" class="sidebar-nav-link"><span class="toc-nav-num">03</span><span class="toc-nav-title">Preferencias del Usuario</span></a>
-            <a href="#article-04" class="sidebar-nav-link"><span class="toc-nav-num">04</span><span class="toc-nav-title">Caché de Rendimiento</span></a>
-            <a href="#article-05" class="sidebar-nav-link"><span class="toc-nav-num">05</span><span class="toc-nav-title">Almacenamiento Offline</span></a>
-            <a href="#article-06" class="sidebar-nav-link"><span class="toc-nav-num">06</span><span class="toc-nav-title">Mapas y Cartografía</span></a>
-            <a href="#article-07" class="sidebar-nav-link"><span class="toc-nav-num">07</span><span class="toc-nav-title">Geolocalización & GPS</span></a>
-            <a href="#article-08" class="sidebar-nav-link"><span class="toc-nav-num">08</span><span class="toc-nav-title">Funcionamiento en Android</span></a>
-            <a href="#article-09" class="sidebar-nav-link"><span class="toc-nav-num">09</span><span class="toc-nav-title">Servicios de Terceros</span></a>
-            <a href="#article-10" class="sidebar-nav-link"><span class="toc-nav-num">10</span><span class="toc-nav-title">Cero Publicidad Invasiva</span></a>
-            <a href="#article-11" class="sidebar-nav-link"><span class="toc-nav-num">11</span><span class="toc-nav-title">Analítica y Diagnóstico</span></a>
-            <a href="#article-12" class="sidebar-nav-link"><span class="toc-nav-num">12</span><span class="toc-nav-title">Duración del Almacenamiento</span></a>
-            <a href="#article-13" class="sidebar-nav-link"><span class="toc-nav-num">13</span><span class="toc-nav-title">Administración y Borrado</span></a>
-            <a href="#article-14" class="sidebar-nav-link"><span class="toc-nav-num">14</span><span class="toc-nav-title">Consentimiento y Control</span></a>
-            <a href="#article-15" class="sidebar-nav-link"><span class="toc-nav-num">15</span><span class="toc-nav-title">Actualizaciones Normativas</span></a>
-            <a href="#article-16" class="sidebar-nav-link"><span class="toc-nav-num">16</span><span class="toc-nav-title">Contacto Oficial</span></a>
-          </nav>
-        </div>
-      </aside>
+            <!-- Contenido Offline -->
+            <div class="pref-row-item">
+              <div class="pref-row-left">
+                <div class="pref-icon-circle item-icon-purple">🟣</div>
+                <div class="pref-meta">
+                  <h4>Contenido offline</h4>
+                  <p>Rutas, guías, mapas y recursos para uso sin conexión.</p>
+                </div>
+              </div>
+              <button class="pref-action-btn-neutral" onclick="alert('Almacenamiento offline: 4.2 MB sincronizados.')">🗄️ Administrar datos</button>
+            </div>
 
-      <!-- COLUMNA PRINCIPAL DE ARTÍCULOS LEGALES -->
-      <div class="legal-content-column">
-
-        <section class="cookies-control-panel" aria-labelledby="cookiesControlTitle"><div><h2 id="cookiesControlTitle">⚙️ Tus preferencias de cookies y almacenamiento</h2><p>Podés personalizar el uso de cookies y datos locales según tus preferencias.</p><div class="cookies-options"><div><i class="fa-solid fa-shield-halved"></i><span><strong>Cookies esenciales</strong><small>Necesarias para funcionamiento y autenticación.</small></span><b>Siempre activas</b></div><div><i class="fa-solid fa-gear"></i><span><strong>Preferencias</strong><small>Guardan idioma, tema, región y configuraciones.</small></span><button type="button" class="cookie-toggle on">Activadas</button></div><div><i class="fa-solid fa-database"></i><span><strong>Contenido offline</strong><small>Rutas, guías y mapas para uso sin conexión.</small></span><button type="button">Administrar datos</button></div><div><i class="fa-solid fa-chart-simple"></i><span><strong>Analítica opcional</strong><small>Nos ayuda a mejorar la experiencia.</small></span><button type="button" class="cookie-toggle">Desactivada</button></div></div></div><aside><h3>💡 Tú tienes el control</h3><p>Podés cambiar tus preferencias y eliminar tus datos locales desde este dispositivo.</p><button type="button" id="clearBaqueanoStorage">🗑 Borrar almacenamiento BAQUEANO</button></aside></section>
-
-        <section class="cookies-flow" aria-labelledby="cookiesFlowTitle"><h2 id="cookiesFlowTitle">🔗 ¿Cómo funcionan los datos en BAQUEANO?</h2><div><article><i class="fa-solid fa-user"></i><strong>Tú</strong><small>Usuario viajero</small></article><b>→</b><article><i class="fa-solid fa-mobile-screen"></i><strong>Web / App BAQUEANO</strong><small>Sitio web y aplicación Android</small></article><b>→</b><article><strong>🔥 Firebase</strong><small>Autenticación y hosting</small><strong>🟩 Supabase</strong><small>Base de datos principal</small></article><b>→</b><article><strong>⚙️ Preferencias</strong><small>Idioma, tema y región</small><strong>📍 Rutas y destinos</strong><small>Favoritos e itinerarios</small><strong>💾 Contenido offline</strong><small>Mapas y recursos</small></article></div></section>
-
-        <!-- METADATOS Y MANIFIESTO SOBERANO -->
-        <div class="legal-document-meta" style="margin-bottom: 2rem;">
-          <span><i class="fa-solid fa-calendar-check" style="color: var(--terracotta);"></i> <strong>Última actualización:</strong> 19 de septiembre de 2026</span>
-          <span><i class="fa-solid fa-shield-halved" style="color: var(--petroleo-glow);"></i> <strong>Versión:</strong> 2.0 Soberana</span>
-          <span><i class="fa-solid fa-scale-balanced" style="color: var(--arena-pinolera);"></i> <strong>Régimen:</strong> Ley 1210 & 1211 INTUR</span>
-        </div>
-
-        <div class="legal-callout-box" style="margin-bottom: 2.5rem;">
-          <i class="fa-solid fa-cookie-bite legal-callout-icon"></i>
-          <div>
-            <h4 style="margin: 0 0 0.4rem; color: #FFFFFF; font-family: var(--font-heading); font-size: 1.15rem;">
-              Principio Rector Baqueano: Tecnología Necesaria, Cero Vigilancia Comercial
-            </h4>
-            <p class="legal-callout-text">
-              En BAQUEANO NICARAGUA utilizamos tecnologías de almacenamiento local únicamente para acelerar la navegación, recordar tus preferencias bimoneda (C$/USD) y permitir que consultes senderos y áreas protegidas incluso cuando estés sin conexión en zonas remotas del país.
-            </p>
-          </div>
-        </div>
-
-        <!-- ARTÍCULO 01 -->
-        <article class="legal-card" id="article-01">
-          <div class="legal-card-num">01</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-file-code"></i> ¿Qué son las Cookies y el Almacenamiento Local?</h2>
-          <div class="legal-card-body">
-            <p>Las cookies son pequeños archivos de texto o identificadores temporales que una aplicación web deposita en el navegador del usuario para asegurar su operatividad técnica, autenticación y personalización inmediata.</p>
-            <p>En el ecosistema integral de BAQUEANO NICARAGUA, además de cookies estándar, implementamos tecnologías avanzadas de almacenamiento del lado del cliente como:</p>
-            <ul>
-              <li><strong>IndexedDB:</strong> Base de datos transaccional local en el navegador para almacenar fichas completas de destinos, coordenadas cartográficas y catálogos comunitarios para consulta offline.</li>
-              <li><strong>LocalStorage:</strong> Para recordar tus elecciones persistentes, como la moneda preferida (Córdobas C$ / Dólares USD), el idioma y el estado de la barra lateral.</li>
-              <li><strong>SessionStorage:</strong> Para resguardar de forma efímera datos de cotizaciones, búsquedas en curso y tokens de formulario que se purgan al cerrar la pestaña.</li>
-              <li><strong>Service Workers & Cache Storage:</strong> Arquitectura PWA que almacena recursos gráficos, mapas vectoriales y scripts para ejecución instantánea sin conexión a internet.</li>
-              <li><strong>Almacenamiento Seguro Android:</strong> Uso de SharedPreferences cifradas y base de datos local Room en la versión nativa de la aplicación.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 02 -->
-        <article class="legal-card" id="article-02">
-          <div class="legal-card-num">02</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-shield-virus"></i> Cookies y Almacenamiento Técnicamente Necesarios</h2>
-          <div class="legal-card-body">
-            <p>Existen elementos de almacenamiento estrictamente requeridos para la operación técnica, seguridad y gobernanza de la plataforma. Su desactivación impediría que el sitio funcione con normalidad.</p>
-            <p>Estas tecnologías esenciales se implementan para:</p>
-            <ul>
-              <li><strong>Gestión de Sesión Soberana:</strong> Identificación del explorador autenticado a través de Firebase Authentication y Supabase Cloud.</li>
-              <li><strong>Protección Antifraude y Seguridad CSRF:</strong> Detección de peticiones no autorizadas y blindaje contra manipulaciones en formularios de postulación y reservas directas.</li>
-              <li><strong>Continuidad Operativa:</strong> Preservar la sesión activa del auditor o administrador en la consola satelital Baqueano Ops Center.</li>
-              <li><strong>Balanceo de Carga y Rendimiento:</strong> Almacenamiento temporal de peticiones para evitar saturaciones en el ancho de banda del explorador.</li>
-            </ul>
-            <div class="legal-callout-box" style="margin-top: 1.25rem;">
-              <i class="fa-solid fa-circle-info legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                <strong>Garantía Estricta:</strong> Estas tecnologías no son utilizadas para construir perfiles comerciales, no realizan seguimiento cruzado entre sitios web ajenos y no transmiten tu información a intermediarios publicitarios.
-              </p>
+            <!-- Analítica -->
+            <div class="pref-row-item">
+              <div class="pref-row-left">
+                <div class="pref-icon-circle item-icon-blue">🔵</div>
+                <div class="pref-meta">
+                  <h4>Analítica opcional</h4>
+                  <p>Nos ayuda a mejorar la experiencia de BAQUEANO.</p>
+                </div>
+              </div>
+              <label class="switch-label">
+                <input type="checkbox" id="analyticsToggle">
+                <span class="switch-slider"></span>
+              </label>
             </div>
           </div>
-        </article>
 
-        <!-- ARTÍCULO 03 -->
-        <article class="legal-card" id="article-03">
-          <div class="legal-card-num">03</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-sliders"></i> Preferencias del Usuario y Bimoneda</h2>
-          <div class="legal-card-body">
-            <p>Para evitar que tengas que configurar la plataforma cada vez que regresas a explorar un volcán o reservar con una cooperativa, guardamos tus elecciones en tu almacenamiento local:</p>
-            <ul>
-              <li><strong>Régimen Bimoneda:</strong> Guardado de la preferencia de visualización entre Córdobas nicaragüenses (C$) y Dólares estadounidenses (USD), respetando las tarifas oficiales de los anfitriones locales.</li>
-              <li><strong>Idioma y Localización:</strong> Selección entre español e inglés para la traducción contextual del catálogo territorial.</li>
-              <li><strong>Modo Visual y Contraste:</strong> Parámetros de tema de alta gama (contraste optimizado para visión nocturna bajo cielo abierto en sendero).</li>
-              <li><strong>Filtros Guardados:</strong> Últimas búsquedas por departamento (Rivas, Matagalpa, León, etc.) o por categoría (Volcanes, Gastronomía, Historia).</li>
-            </ul>
-            <p>Estos valores permanecen en tu dispositivo hasta que decidas cambiarlos o limpiar los datos del navegador desde el panel de configuración.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 04 -->
-        <article class="legal-card" id="article-04">
-          <div class="legal-card-num">04</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-bolt"></i> Caché de Contenido y Rendimiento</h2>
-          <div class="legal-card-body">
-            <p>En el territorio nicaragüense, los exploradores suelen desplazarse por cañones, selvas y litorales con cobertura móvil débil. Por ello, BAQUEANO implementa una política agresiva de optimización y caché local para acelerar la carga y minimizar el consumo de datos de tu paquete celular:</p>
-            <ul>
-              <li><strong>Imágenes Comprimidas WebP/AVIF:</strong> Fotografías de alta fidelidad de reservas naturales cacheadas en el almacenamiento temporal del navegador.</li>
-              <li><strong>Tipografías Institucionales:</strong> Familias tipográficas (Montserrat, Space Grotesk, Inter) descargadas una sola vez para renderizado a 60fps continuo.</li>
-              <li><strong>Fichas Descriptivas Pre-Cargadas:</strong> Textos de biodiversidad, historia campesina y teléfonos comunitarios precargados para respuesta inmediata.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 05 -->
-        <article class="legal-card" id="article-05">
-          <div class="legal-card-num">05</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-mountain-sun"></i> Almacenamiento Offline para Exploración Territorial</h2>
-          <div class="legal-card-body">
-            <p>La capacidad fuera de línea es uno de los pilares de soberanía y auxilio de BAQUEANO NICARAGUA. Cuando activas la descarga de un destino protegido, nuestro motor PWA almacena en IndexedDB:</p>
-            <ul>
-              <li>Coordenadas georreferenciadas de senderos, refugios, miradores y pozas.</li>
-              <li>Líneas de emergencia locales (Cruz Blanca, Bomberos, Policía Nacional y Mesa Baqueano).</li>
-              <li>Guía de supervivencia ambiental y decálogo verde de huella cero.</li>
-              <li>Información de contacto directo de guías comunitarios acreditados.</li>
-            </ul>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-plane-slash legal-callout-icon"></i>
-              <p class="legal-callout-text">
-                <strong>Modo Selva Seguro:</strong> Puedes colocar tu dispositivo en modo avión durante tu caminata; toda la información descargada seguirá estando 100% disponible sin requerir conexión a internet.
-              </p>
+          <!-- Panel Derecho: Tú tienes el control -->
+          <div class="control-sidebar-card">
+            <div>
+              <div class="control-bulb-icon">💡</div>
+              <h3 class="control-card-title">Tú tienes el control</h3>
+              <p class="control-card-desc">Podés cambiar tus preferencias en cualquier momento y eliminar tus datos locales desde este dispositivo.</p>
             </div>
+            <button class="danger-purge-btn" id="purgeStorageBtn" onclick="handlePurgeStorage()">
+              🗑️ Borrar almacenamiento BAQUEANO
+            </button>
           </div>
-        </article>
+        </div>
+      </section>
 
-        <!-- ARTÍCULO 06 -->
-        <article class="legal-card" id="article-06">
-          <div class="legal-card-num">06</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-map-location-dot"></i> Mapas y Datos Cartográficos</h2>
-          <div class="legal-card-body">
-            <p>Los mapas interactivos de la plataforma utilizan capas geográficas provistas mediante estándares abiertos (Leaflet, OpenStreetMap y capas satelitales autorizadas):</p>
-            <p>Las baldosas (tiles) del mapa consultadas se almacenan temporalmente en la memoria caché del navegador para agilizar el paneo y zoom. BAQUEANO no transfiere tu información personal a los proveedores de mapas cartográficos ni utiliza capas de cartografía para rastreo publicitario encubierto.</p>
-            <p>El almacenamiento de cartografía se realiza cumpliendo estrictamente los términos de licencia y sin violar derechos de propiedad intelectual de los proveedores.</p>
+      <!-- Diagrama de Flujo: ¿Cómo funcionan los datos en BAQUEANO? -->
+      <section class="flow-diagram-card">
+        <h3 class="flow-title">¿Cómo funcionan los datos en BAQUEANO?</h3>
+        <p class="flow-subtitle">Así se conectan las tecnologías para brindarte una experiencia segura y personalizada.</p>
+
+        <div class="flow-architecture-grid">
+          <!-- Nodo Usuario -->
+          <div class="flow-node-user">
+            <div class="user-avatar">👤</div>
+            <h5>Tú</h5>
+            <p>Usuario viajero</p>
           </div>
-        </article>
 
-        <!-- ARTÍCULO 07 -->
-        <article class="legal-card" id="article-07">
-          <div class="legal-card-num">07</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-location-crosshairs"></i> Geolocalización y Centro SOS</h2>
-          <div class="legal-card-body">
-            <p>Tu ubicación física por satélite (GPS) jamás se rastrea de manera pasiva ni se almacena mediante cookies ocultas. La geolocalización opera bajo las siguientes reglas inquebrantables:</p>
-            <ul>
-              <li><strong>Consentimiento Explícito:</strong> Tu navegador o teléfono Android solicita tu permiso expreso mediante el cuadro nativo del sistema operativo antes de acceder a tus coordenadas.</li>
-              <li><strong>Finalidad Exclusiva de Navegación y Auxilio:</strong> Las coordenadas se procesan en la memoria volátil del dispositivo para centrar el mapa en tu posición o generar la alerta en el Centro SOS 24/7.</li>
-              <li><strong>Cero Venta de Ubicaciones:</strong> Jamás compartimos tus rutas ni tu ubicación con empresas de mercadeo, agencias de publicidad o redes de monetización comercial.</li>
-            </ul>
+          <div class="flow-arrow">→</div>
+
+          <!-- Nodo Web / App -->
+          <div class="flow-node-app">
+            <img src="assets/images/logo/logo_baqueano.svg" alt="App Baqueano">
+            <h5>Web / App BAQUEANO</h5>
+            <p>Sitio web y aplicación Android</p>
           </div>
-        </article>
 
-        <!-- ARTÍCULO 08 -->
-        <article class="legal-card" id="article-08">
-          <div class="legal-card-num">08</div>
-          <h2 class="legal-card-title"><i class="fa-brands fa-android"></i> Funcionamiento en la Aplicación Android</h2>
-          <div class="legal-card-body">
-            <p>En la versión nativa de BAQUEANO para el sistema operativo Android, los mecanismos de persistencia técnica se rigen por los estándares de seguridad de Android Sandbox:</p>
-            <ul>
-              <li>Uso de <code>EncryptedSharedPreferences</code> para identificadores de sesión y llaves de sincronización.</li>
-              <li>Base de datos SQLite local mediante la biblioteca Room para el inventario de 29 destinos y música nacional.</li>
-              <li>Caché de imágenes administrada localmente con depuración automática al superar los límites de almacenamiento definidos por el usuario.</li>
-            </ul>
-            <p>El usuario puede eliminar todos los datos almacenados en cualquier momento desde <em>Ajustes de Android &gt; Aplicaciones &gt; Baqueano &gt; Almacenamiento &gt; Borrar datos</em>.</p>
-          </div>
-        </article>
+          <div class="flow-arrow">→</div>
 
-        <!-- ARTÍCULO 09 -->
-        <article class="legal-card" id="article-09">
-          <div class="legal-card-num">09</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-cloud-arrow-up"></i> Servicios Cloud Esenciales de Infraestructura</h2>
-          <div class="legal-card-body">
-            <p>Para respaldar la estabilidad y la soberanía de los datos comunitarios, BAQUEANO se apoya en infraestructura cloud de alta disponibilidad:</p>
-            <ul>
-              <li><strong>Google Cloud & Firebase:</strong> Almacena de forma segura las credenciales de inicio de sesión de exploradores y anfitriones, y sincroniza las reservas y postulaciones de negocios comunitarios.</li>
-              <li><strong>Supabase Cloud Storage:</strong> Respaldo distribuido de fichas territoriales, imágenes verificadas de cooperativas y telemetría de auditoría.</li>
-              <li><strong>FontAwesome & Google Fonts:</strong> Entrega de iconografía y fuentes optimizadas mediante servidores CDN con protección de privacidad.</li>
-            </ul>
-            <p>Estos proveedores actúan exclusivamente como encargados de procesamiento bajo estrictos acuerdos de confidencialidad y no están autorizados a utilizar los datos con propósitos comerciales propios.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 10 -->
-        <article class="legal-card" id="article-10">
-          <div class="legal-card-num">10</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-ban"></i> Cero Publicidad Basada en Rastreo ni Retargeting</h2>
-          <div class="legal-card-body">
-            <p>La filosofía de BAQUEANO NICARAGUA es el ecoturismo de base campesina sin intermediarios. Por mandato estatutario:</p>
-            <ul>
-              <li><strong>NO</strong> utilizamos píxeles de remarketing publicitario (Meta Pixel, Google Ads Remarketing, TikTok Pixel comercial).</li>
-              <li><strong>NO</strong> vendemos ni alquilamos historiales de navegación a agencias de marketing digital ni data brokers.</li>
-              <li><strong>NO</strong> permitimos que redes publicitarias externas inserten cookies de terceros para mostrarte anuncios invasivos después de visitar nuestro portal.</li>
-              <li><strong>NO</strong> realizamos perfilamiento socioeconómico invasivo para alterar precios turísticos según tu dispositivo.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 11 -->
-        <article class="legal-card" id="article-11">
-          <div class="legal-card-num">11</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-chart-line"></i> Analítica y Diagnóstico de Rendimiento Soberano</h2>
-          <div class="legal-card-body">
-            <p>Para garantizar que la aplicación no falle en teléfonos de gama de entrada en comunidades rurales, recopilamos métricas técnicas estrictamente agregadas y anónimas:</p>
-            <ul>
-              <li>Tiempos de carga de página y velocidad de renderizado (Largest Contentful Paint).</li>
-              <li>Registro de errores de JavaScript o excepciones en peticiones de red offline.</li>
-              <li>Destinos con mayor demanda para priorizar la verificación presencial de senderos por parte de los guías Baqueano.</li>
-            </ul>
-            <p>Estas métricas se procesan sin vincular la navegación a la identidad real del usuario y se utilizan únicamente para mejoras de infraestructura y estabilidad.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 12 -->
-        <article class="legal-card" id="article-12">
-          <div class="legal-card-num">12</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-clock-rotate-left"></i> Ciclo de Vida y Duración del Almacenamiento</h2>
-          <div class="legal-card-body">
-            <p>Los datos almacenados en tu dispositivo se conservan según los siguientes plazos y criterios técnicos:</p>
-            <ul>
-              <li><strong>Cookies de Sesión:</strong> Se eliminan inmediatamente al cerrar el navegador o la pestaña activa.</li>
-              <li><strong>Cookies y LocalStorage de Preferencias:</strong> Permanecen activas por un período máximo de 12 meses o hasta que el usuario borre manualmente sus datos.</li>
-              <li><strong>Caché de Mapas y Multimedia:</strong> Se renueva periódicamente para asegurar que los números de auxilio y estados de senderos reflejen la información más reciente de la Mesa Técnica.</li>
-              <li><strong>Almacenamiento Offline en IndexedDB:</strong> Se conserva de forma persistente mientras la aplicación esté instalada o hasta que el usuario decida limpiar el espacio de almacenamiento.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 13 -->
-        <article class="legal-card" id="article-13">
-          <div class="legal-card-num">13</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-trash-can"></i> Control, Administración y Borrado por el Usuario</h2>
-          <div class="legal-card-body">
-            <p>Tienes en todo momento el control absoluto sobre las cookies y los datos almacenados en tu navegador o dispositivo móvil:</p>
-            <ul>
-              <li><strong>Google Chrome / Android:</strong> Ve a <em>Configuración &gt; Privacidad y seguridad &gt; Borrar datos de navegación</em> (selecciona Cookies y Archivos en caché).</li>
-              <li><strong>Mozilla Firefox:</strong> Accede a <em>Ajustes &gt; Privacidad y Seguridad &gt; Cookies y datos del sitio &gt; Limpiar datos</em>.</li>
-              <li><strong>Apple Safari (iOS / macOS):</strong> Selecciona <em>Preferencias &gt; Privacidad &gt; Administrar datos de sitios web &gt; Eliminar todo</em>.</li>
-              <li><strong>Microsoft Edge:</strong> Ve a <em>Configuración &gt; Privacidad, búsqueda y servicios &gt; Borrar datos de navegación</em>.</li>
-            </ul>
-            <p>Ten en cuenta que si eliminas las cookies y el almacenamiento local de BAQUEANO, se restablecerá tu selección de moneda (volviendo al valor predeterminado C$) y deberás volver a descargar el contenido offline de senderos.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 14 -->
-        <article class="legal-card" id="article-14">
-          <div class="legal-card-num">14</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-toggle-on"></i> Consentimiento y Mecanismos de Configuración</h2>
-          <div class="legal-card-body">
-            <p>Al acceder por primera vez a BAQUEANO NICARAGUA, se te notifica con claridad sobre el uso de tecnologías técnicas esenciales para el funcionamiento de la plataforma y el soporte fuera de línea.</p>
-            <p>Dado que nuestra plataforma NO despliega cookies de rastreo comercial invasivo ni monetiza perfiles de usuario, no te abrumamos con pantallas engañosas o muros de cookies oscuros. Si en el futuro incorporamos herramientas opcionales de diagnóstico avanzado, tendrás la opción de habilitarlas o mantener únicamente el modo esencial.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 15 -->
-        <article class="legal-card" id="article-15">
-          <div class="legal-card-num">15</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-book-bookmark"></i> Marco Legal Soberano y Actualizaciones</h2>
-          <div class="legal-card-body">
-            <p>Esta Política de Cookies y Almacenamiento se fundamenta en las leyes vigentes de la República de Nicaragua:</p>
-            <ul>
-              <li><strong>Ley N° 1210:</strong> Ley General de Turismo y Protección al Usuario Turístico.</li>
-              <li><strong>Ley N° 1211:</strong> Ley de Fortalecimiento y Modernización del Sector Turismo Comunitario de Nicaragua.</li>
-              <li><strong>Ley N° 306:</strong> Ley de Incentivos para la Industria Turística de la República de Nicaragua.</li>
-            </ul>
-            <p>Cualquier modificación a esta política será publicada en este mismo documento con indicación visible de la fecha de última actualización y la versión vigente.</p>
-          </div>
-        </article>
-
-        <!-- ARTÍCULO 16 -->
-        <article class="legal-card" id="article-16">
-          <div class="legal-card-num">16</div>
-          <h2 class="legal-card-title"><i class="fa-solid fa-envelope-open-text"></i> Contacto Oficial & Oficial de Privacidad</h2>
-          <div class="legal-card-body">
-            <p>Si tienes preguntas técnicas sobre cómo se almacenan tus datos, deseas reportar una anomalía o necesitas asistencia en el borrado de información local:</p>
-            <div class="legal-callout-box">
-              <i class="fa-solid fa-headset legal-callout-icon"></i>
-              <div>
-                <p class="legal-callout-text"><strong>Canal Oficial de Privacidad:</strong> <a href="mailto:privacidad@baqueano.ni">privacidad@baqueano.ni</a></p>
-                <p class="legal-callout-text"><strong>Mesa de Enlace Técnico:</strong> <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></p>
-                <p class="legal-callout-text"><strong>Sede Territorial:</strong> Managua, Nicaragua • Cobertura en los 153 Municipios</p>
+          <!-- Nodos Servicios Centrales -->
+          <div class="flow-stack-branches">
+            <div class="branch-pill">
+              <span class="branch-icon">🔥</span>
+              <div class="branch-info">
+                <h6>Firebase</h6>
+                <p>Autenticación y Hosting: Gestión de cuentas y seguridad.</p>
               </div>
             </div>
-            <p style="margin-top: 1.5rem; font-weight: 700; color: #F4E6C1;">
-              Descubrí • Conectá • Protegé • Viví Nicaragua con total soberanía y seguridad sobre tu información.
-            </p>
+            <div class="branch-pill">
+              <span class="branch-icon">⚡</span>
+              <div class="branch-info">
+                <h6>Supabase</h6>
+                <p>Base de datos principal: Destinos, reservas y contenido.</p>
+              </div>
+            </div>
           </div>
-        </article>
 
+          <!-- Resultados / Funciones -->
+          <div class="flow-data-outcomes">
+            <div class="outcome-tag">⚙️ Preferencias y configuración</div>
+            <div class="outcome-tag">🗺️ Rutas y destinos</div>
+            <div class="outcome-tag">💼 Reservas y pagos</div>
+            <div class="outcome-tag">📦 Contenido offline</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card Explicativa: ¿Qué son las cookies y el almacenamiento local? -->
+      <section id="general" class="cookies-faq-box">
+        <div class="cookies-faq-box-head">
+          <div class="cookies-faq-title-wrap">
+            <span>📄</span>
+            <h3 class="cookies-faq-title">¿Qué son las cookies y el almacenamiento local?</h3>
+          </div>
+          <span class="legal-chevron">▾</span>
+        </div>
+        <p class="cookies-faq-body">
+          Las cookies son pequeños archivos de texto que se guardan en tu navegador o dispositivo para recordar información y mejorar tu experiencia. Además, BAQUEANO utiliza tecnologías de almacenamiento local (LocalStorage, SessionStorage e IndexedDB) y Service Workers para permitir funciones avanzadas como el modo offline, rutas guardadas y un mejor rendimiento en expediciones sin señal.
+        </p>
+      </section>
+
+      <!-- Grid 2x2 de Categorías Detalladas -->
+      <section class="cookies-categories-grid">
+        <!-- 1: Cookies esenciales -->
+        <div id="esenciales" class="category-accordion-item">
+          <div class="category-acc-head">
+            <div class="category-acc-title-wrap">
+              <span class="item-icon-green">🛡️</span>
+              <div>
+                <h4 class="category-acc-title">Cookies esenciales</h4>
+                <p class="category-acc-sub">Necesarias para el funcionamiento y seguridad.</p>
+              </div>
+            </div>
+            <span class="legal-chevron">▾</span>
+          </div>
+        </div>
+
+        <!-- 2: Ubicación y mapas -->
+        <div id="ubicacion" class="category-accordion-item">
+          <div class="category-acc-head">
+            <div class="category-acc-title-wrap">
+              <span class="item-icon-orange">📍</span>
+              <div>
+                <h4 class="category-acc-title">Ubicación y mapas</h4>
+                <p class="category-acc-sub">Uso de tu ubicación y funcionamiento de mapas.</p>
+              </div>
+            </div>
+            <span class="legal-chevron">▾</span>
+          </div>
+        </div>
+
+        <!-- 3: Cookies de preferencias -->
+        <div class="category-accordion-item">
+          <div class="category-acc-head">
+            <div class="category-acc-title-wrap">
+              <span class="item-icon-amber">⚙️</span>
+              <div>
+                <h4 class="category-acc-title">Cookies de preferencias</h4>
+                <p class="category-acc-sub">Guardan tus ajustes de idioma, tema y región.</p>
+              </div>
+            </div>
+            <span class="legal-chevron">▾</span>
+          </div>
+        </div>
+
+        <!-- 4: Servicios externos -->
+        <div id="externos" class="category-accordion-item">
+          <div class="category-acc-head">
+            <div class="category-acc-title-wrap">
+              <span class="item-icon-blue">🔗</span>
+              <div>
+                <h4 class="category-acc-title">Servicios externos</h4>
+                <p class="category-acc-sub">Tecnologías de terceros que utilizamos.</p>
+              </div>
+            </div>
+            <span class="legal-chevron">▾</span>
+          </div>
+        </div>
+
+        <!-- 5: Almacenamiento local y modo offline -->
+        <div id="offline" class="category-accordion-item">
+          <div class="category-acc-head">
+            <div class="category-acc-title-wrap">
+              <span class="item-icon-purple">💾</span>
+              <div>
+                <h4 class="category-acc-title">Almacenamiento local y modo offline</h4>
+                <p class="category-acc-sub">Cómo guardamos mapas, rutas y contenido.</p>
+              </div>
+            </div>
+            <span class="legal-chevron">▾</span>
+          </div>
+        </div>
+
+        <!-- 6: Duración, borrado y control del usuario -->
+        <div id="duracion" class="category-accordion-item">
+          <div class="category-acc-head">
+            <div class="category-acc-title-wrap">
+              <span class="item-icon-emerald">🗑️</span>
+              <div>
+                <h4 class="category-acc-title">Duración, borrado y control del usuario</h4>
+                <p class="category-acc-sub">Cómo gestionar y eliminar tus datos.</p>
+              </div>
+            </div>
+            <span class="legal-chevron">▾</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Servicios Externos que Utilizamos -->
+      <section class="preferences-control-card">
+        <h3 class="preferences-title" style="font-size: 1.15rem; margin-bottom: 4px;">Servicios externos que utilizamos</h3>
+        <p class="preferences-subtitle" style="margin-bottom: 16px;">Trabajamos con servicios confiables que cumplen con estándares de seguridad y privacidad.</p>
+
+        <div class="external-services-grid">
+          <!-- Firebase -->
+          <div class="service-card">
+            <div class="service-card-icon">🔥</div>
+            <h4 class="service-card-title">Firebase</h4>
+            <span class="service-card-sub">Autenticación y Hosting</span>
+            <p class="service-card-desc">Seguridad, gestión de cuentas y entrega de contenido.</p>
+          </div>
+
+          <!-- Supabase -->
+          <div class="service-card">
+            <div class="service-card-icon">⚡</div>
+            <h4 class="service-card-title">Supabase</h4>
+            <span class="service-card-sub">Base de datos principal</span>
+            <p class="service-card-desc">Destinos, experiencias, negocios y reservas.</p>
+          </div>
+
+          <!-- OpenStreetMap -->
+          <div class="service-card">
+            <div class="service-card-icon">🗺️</div>
+            <h4 class="service-card-title">OpenStreetMap + Leaflet</h4>
+            <span class="service-card-sub">Mapas y geolocalización</span>
+            <p class="service-card-desc">Mapas interactivos y rutas turísticas sin rastreo comercial.</p>
+          </div>
+
+          <!-- Google Fonts -->
+          <div class="service-card">
+            <div class="service-card-icon">🔤</div>
+            <h4 class="service-card-title">Google Fonts</h4>
+            <span class="service-card-sub">Tipografías web</span>
+            <p class="service-card-desc">Mejora la legibilidad y experiencia visual.</p>
+          </div>
+
+          <!-- Otros Servicios -->
+          <div class="service-card">
+            <div class="service-card-icon">☁️</div>
+            <h4 class="service-card-title">Otros servicios</h4>
+            <span class="service-card-sub">(IA, clima, pagos)</span>
+            <p class="service-card-desc">Integraciones para mejorar tu experiencia de viaje.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Marco Legal & FAQ Grid -->
+      <div class="legal-faq-split-grid">
+        <!-- Marco Legal -->
+        <div class="legal-laws-card">
+          <h3><span>⚖️</span> Marco legal de referencia</h3>
+          <p>El uso de datos en BAQUEANO se ajusta a la normativa vigente en Nicaragua y buenas prácticas internacionales:</p>
+          <ul class="laws-checklist">
+            <li><span class="check-icon">✓</span> <strong>Ley 1210</strong> — Ley General de Turismo</li>
+            <li><span class="check-icon">✓</span> <strong>Ley 1211</strong> — Ley de Incentivos para los Desarrollos Turísticos</li>
+            <li><span class="check-icon">✓</span> <strong>Ley 842</strong> — Ley de Protección del Medio Ambiente</li>
+            <li><span class="check-icon">✓</span> <strong>Ley 787</strong> — Ley de Protección de Datos Personales</li>
+            <li><span class="check-icon">✓</span> Otras normativas relacionadas con comercio electrónico y servicios digitales</li>
+          </ul>
+        </div>
+
+        <!-- Preguntas Frecuentes -->
+        <div id="faq" class="faq-list-card">
+          <h3><span>❓</span> Preguntas frecuentes</h3>
+          <div class="faq-accordion-group">
+            <div class="faq-acc-item" onclick="toggleFaq(this)">
+              <div class="faq-acc-header">
+                <span>¿Puedo usar BAQUEANO sin cookies opcionales?</span>
+                <span>▾</span>
+              </div>
+              <div class="faq-acc-content">
+                Sí, totalmente. Podés explorar destinos, leer artículos y revisar mapas sin activar cookies analíticas ni de preferencias secundarias.
+              </div>
+            </div>
+
+            <div class="faq-acc-item" onclick="toggleFaq(this)">
+              <div class="faq-acc-header">
+                <span>¿Cómo borro mis datos locales?</span>
+                <span>▾</span>
+              </div>
+              <div class="faq-acc-content">
+                Podés hacer clic en el botón rojo superior "Borrar almacenamiento BAQUEANO" o limpiar el almacenamiento de tu navegador en cualquier momento.
+              </div>
+            </div>
+
+            <div class="faq-acc-item" onclick="toggleFaq(this)">
+              <div class="faq-acc-header">
+                <span>¿La ubicación se guarda?</span>
+                <span>▾</span>
+              </div>
+              <div class="faq-acc-content">
+                No almacenamos un histórico de tu ubicación en nuestros servidores. Solo se procesa en tu dispositivo para centrar los mapas y calcular rutas.
+              </div>
+            </div>
+
+            <div class="faq-acc-item" onclick="toggleFaq(this)">
+              <div class="faq-acc-header">
+                <span>¿Qué pasa si uso modo avión?</span>
+                <span>▾</span>
+              </div>
+              <div class="faq-acc-content">
+                Todo el contenido previamente descargado en el Service Worker y LocalStorage continuará funcionando con total normalidad gracias al modo offline.
+              </div>
+            </div>
+
+            <div class="faq-acc-item" onclick="toggleFaq(this)">
+              <div class="faq-acc-header">
+                <span>¿Las cookies se comparten con terceros?</span>
+                <span>▾</span>
+              </div>
+              <div class="faq-acc-content">
+                No vendemos ni compartimos tus cookies con agencias publicitarias de terceros bajo ninguna circunstancia.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+
+      <!-- Sección de Documentos Relacionados & Dudas -->
+      <section class="legal-bottom-strip" style="margin: 0; padding: 0;">
+        <div class="legal-docs-card">
+          <div class="legal-docs-header">
+            <span>📄</span> Documentos relacionados
+          </div>
+          <p class="legal-docs-sub">Consultá nuestras políticas hermanas:</p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terminos.html" class="sidebar-index-link">📜 Términos y Condiciones <span style="margin-left:auto">→</span></a>
+            <a href="privacidad.html" class="sidebar-index-link">🛡️ Política de Privacidad <span style="margin-left:auto">→</span></a>
+            <a href="aviso-legal.html" class="sidebar-index-link">⚖️ Aviso Legal <span style="margin-left:auto">→</span></a>
+          </div>
+        </div>
+
+        <div class="transparency-card">
+          <div>
+            <div class="transparency-header">
+              <span>✉️</span> ¿Dudas sobre cookies?
+            </div>
+            <p class="transparency-sub">
+              Si tenés preguntas sobre el uso de cookies o almacenamiento local, escribinos a:
+            </p>
+            <p style="font-weight: 700; color: #165D6F; font-size: 0.95rem; margin-bottom: 12px;">privacidad@baqueano.com.ni</p>
+          </div>
+          <a href="nosotros.html#contacto" class="pdf-download-btn" style="text-align: center; justify-content: center;">
+            Contactar al equipo
+          </a>
+        </div>
+      </section>
+
+    </div>
   </main>
 
-  <!-- FOOTER OFICIAL CON IDENTIDAD TERRITORIAL Y TRANSPARENCIA FISCAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
+  <!-- ==================== FOOTER OFICIAL BAQUEANO ==================== -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Columna Marca -->
+        <div class="footer-brand-col">
+          <div class="footer-brand">
+            <img src="assets/images/logo/logo_baqueano.svg" alt="BAQUEANO" class="footer-logo">
+            <div>
+              <span class="footer-brand-name">BAQUEANO</span>
+              <span class="footer-brand-sub">NICARAGUA AUTÉNTICA</span>
             </div>
           </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
+          <p class="footer-tagline">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
           </div>
         </div>
 
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: #2DD4BF; font-size: 1.1rem;"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre del Negocio / Emprendimiento <span class="req">*</span>
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej: Comedor Doña María / Eco-Lodge Las Brisas" required>
-                <span class="biz-error-msg" id="err-bizName"></span>
-              </div>
-
-              <!-- 2. Tipo de Negocio -->
-              <div class="biz-field-group">
-                <label for="bizType" class="biz-label">
-                  <i class="fa-solid fa-tags"></i> Tipo de Negocio <span class="req">*</span>
-                </label>
-                <select id="bizType" name="bizType" class="biz-select" required>
-                  <option value="">Selecciona el tipo de negocio...</option>
-                  <option value="Comedor Tradicional / Restaurante Campesino">Comedor Tradicional / Restaurante Campesino</option>
-                  <option value="Hotel / Eco-Lodge">Hotel / Eco-Lodge</option>
-                  <option value="Hostal Comunitario">Hostal Comunitario</option>
-                  <option value="Hospedaje Rural Familiar">Hospedaje Rural Familiar</option>
-                  <option value="Casa de Alquiler Vacacional">Casa de Alquiler Vacacional</option>
-                  <option value="Guía Baqueano Comunitario">Guía Baqueano Comunitario</option>
-                  <option value="Cooperativa Agroecológica">Cooperativa Agroecológica</option>
-                  <option value="Taller de Artesanías / Recuerdos">Taller de Artesanías / Recuerdos</option>
-                  <option value="Bar / Sunset Lounge Frente al Mar">Bar / Sunset Lounge Frente al Mar</option>
-                  <option value="Museo / Patrimonio Histórico">Museo / Patrimonio Histórico</option>
-                  <option value="Transporte Turístico / Bote">Transporte Turístico / Bote</option>
-                  <option value="Otro">Otro Emprendimiento Local</option>
-                </select>
-                <span class="biz-error-msg" id="err-bizType"></span>
-              </div>
-
-              <!-- 3. Nombre del Propietario -->
-              <div class="biz-field-group">
-                <label for="bizOwner" class="biz-label">
-                  <i class="fa-solid fa-user-tie"></i> Propietario o Responsable Directo <span class="req">*</span>
-                </label>
-                <input type="text" id="bizOwner" name="bizOwner" class="biz-input" placeholder="Ej: María Hernández Gómez" required>
-                <span class="biz-error-msg" id="err-bizOwner"></span>
-              </div>
-
-              <!-- 4. Categoría Baqueano -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-layer-group"></i> Categoría en Catálogo Baqueano <span class="req">*</span>
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="">Selecciona una categoría oficial...</option>
-                  <option value="gastronomia">Gastronomía Ancestral (Comedores, Baho, Quesillos)</option>
-                  <option value="hoteles">Hoteles & Eco-Lodges</option>
-                  <option value="hostales">Hostales de Aventura & Mochileros</option>
-                  <option value="hospedajes">Hospedajes Rurales & Cabañas</option>
-                  <option value="casas-alquiler">Casas de Alquiler & Villas</option>
-                  <option value="museos">Museos, Cultura & Talleres</option>
-                  <option value="discotecas">Vida Nocturna & Clubes de Playa</option>
-                  <option value="rios">Ríos, Cascadas & Cañones</option>
-                  <option value="volcanes">Volcanes & Sandboarding</option>
-                  <option value="playas">Playas & Surf del Pacífico</option>
-                </select>
-                <span class="biz-error-msg" id="err-bizCategory"></span>
-              </div>
-
-              <!-- 5. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map"></i> Departamento de Nicaragua <span class="req">*</span>
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="">Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte (RACCN)">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur (RACCS)">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <span class="biz-error-msg" id="err-bizDepartment"></span>
-              </div>
-
-              <!-- 6. Municipio -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-location-dot"></i> Municipio <span class="req">*</span>
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej: San Juan del Sur, Somoto, Nagarote..." required>
-                <span class="biz-error-msg" id="err-bizMunicipality"></span>
-              </div>
-
-              <!-- 7. Dirección Exacta -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-compass"></i> Dirección Exacta o Punto de Referencia <span class="req">*</span>
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej: Del Parque Central 2 c. al lago, frente a la ermita comunitaria" required>
-                <span class="biz-error-msg" id="err-bizAddress"></span>
-              </div>
-
-              <!-- 8. Teléfono Principal -->
-              <div class="biz-field-group">
-                <label for="bizPhone" class="biz-label">
-                  <i class="fa-solid fa-phone"></i> Teléfono Principal de Llamadas <span class="req">*</span>
-                </label>
-                <input type="tel" id="bizPhone" name="bizPhone" class="biz-input" placeholder="+505 8888-0000" required>
-                <span class="biz-error-msg" id="err-bizPhone"></span>
-              </div>
-
-              <!-- 9. WhatsApp de Reservas -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> WhatsApp para Reservas Directas
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="+505 8443-0000">
-              </div>
-
-              <!-- 10. Correo Electrónico -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tunegocio.com">
-              </div>
-
-              <!-- 11. Red Social / Sitio Web -->
-              <div class="biz-field-group">
-                <label for="bizWebsite" class="biz-label">
-                  <i class="fa-solid fa-globe"></i> Sitio Web o Red Social (Facebook / Instagram)
-                </label>
-                <input type="url" id="bizWebsite" name="bizWebsite" class="biz-input" placeholder="https://instagram.com/mi_local_nica">
-              </div>
-
-              <!-- 12. Rango de Precios -->
-              <div class="biz-field-group">
-                <label for="bizPrice" class="biz-label">
-                  <i class="fa-solid fa-money-bill-wave"></i> Rango o Precio Base Estimado (C$)
-                </label>
-                <input type="number" id="bizPrice" name="bizPrice" class="biz-input" placeholder="Ej: 150" min="0">
-              </div>
-
-              <!-- 13. Horario de Atención -->
-              <div class="biz-field-group">
-                <label for="bizSchedule" class="biz-label">
-                  <i class="fa-solid fa-clock"></i> Horario de Atención
-                </label>
-                <input type="text" id="bizSchedule" name="bizSchedule" class="biz-input" placeholder="Ej: Lunes a Domingo, 7:00 AM - 9:00 PM">
-              </div>
-
-              <!-- 14. Breve Descripción -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-align-left"></i> Breve Descripción del Servicio o Menú Típico <span class="req">*</span>
-                  <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
-                </label>
-                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Describe qué ofreces al visitante, especialidad culinaria, tipo de habitaciones o atractivos naturales cercanos..." required></textarea>
-                <span class="biz-error-msg" id="err-bizDescription"></span>
-              </div>
-
-              <!-- 15. Fotografía Principal -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Fotografía del Negocio o Platillo Principal
-                </label>
-                <div class="biz-file-dropzone" id="bizFileDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
-                  <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Toca o arrastra una imagen de tu establecimiento (Máx 5MB)</span>
-                  </div>
-                  <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
-                    <img id="bizPreviewImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Vista previa de foto">
-                    <button type="button" class="biz-btn-remove-photo" id="bizBtnRemovePhoto" title="Eliminar foto">
-                      <i class="fa-solid fa-xmark"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 16. Términos y Compromiso -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-checkbox-label">
-                  <input type="checkbox" id="bizTerms" name="bizTerms" required>
-                  <span class="biz-checkbox-custom"></span>
-                  <span class="biz-checkbox-text">
-                    Acepto los principios de <strong>turismo ético y trato justo</strong> de Baqueano Nicaragua. Confirmo que los precios y datos suministrados son reales y que la atención al visitante se realizará sin intermediarios foráneos. <span class="req">*</span>
-                  </span>
-                </label>
-                <span class="biz-error-msg" id="err-bizTerms"></span>
-              </div>
-
-              <!-- Botón de Envío -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
-          <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
-          </div>
-        </div>
-
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
+        <!-- Columna 1: Explorá -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorá</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html">Baqueano Digital</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
+        <!-- Columna 2: Nosotros -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Nosotros</h4>
+          <ul class="footer-links">
+            <li><a href="historia.html">Nuestra historia</a></li>
+            <li><a href="nosotros.html">Misión y visión</a></li>
+            <li><a href="aliados.html">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="ambiental.html">Impacto</a></li>
           </ul>
         </div>
 
+        <!-- Columna 3: Información -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Información</h4>
+          <ul class="footer-links">
+            <li><a href="gastronomia.html">Blog</a></li>
+            <li><a href="nosotros.html#contacto">Contacto</a></li>
+            <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Legal -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html" class="active">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
       </div>
 
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html" style="color: var(--arena-pinolera); font-weight: 700;">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
-        <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+      <!-- Sello y Copyright -->
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 BAQUEANO. Todos los derechos reservados.</p>
+        <div class="nicaragua-stamp-badge">
+          <span>Nicaragua Auténtica</span> 🌿
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
-        </div>
+        <p class="made-with-love">Hecho con ❤️ en Nicaragua</p>
       </div>
     </div>
   </footer>
 
+  <!-- Scripts interactivos -->
   <script>
-    /* 🎯 POR QUÉ: dar control real sobre preferencias locales. ⚙️ CÓMO: alterna opciones y elimina solo claves BAQUEANO. 📦 QUÉ: controles accesibles sin afectar datos ajenos. */
-    document.querySelectorAll('.cookie-toggle').forEach(function (button) {
-      button.addEventListener('click', function () {
-        var enabled = button.classList.toggle('on');
-        button.textContent = enabled ? 'Activadas' : 'Desactivada';
-        button.setAttribute('aria-pressed', String(enabled));
-      });
-    });
-    document.getElementById('clearBaqueanoStorage')?.addEventListener('click', function () {
-      Object.keys(localStorage).filter(function (key) { return key.toLowerCase().includes('baqueano'); }).forEach(function (key) { localStorage.removeItem(key); });
-      Object.keys(sessionStorage).filter(function (key) { return key.toLowerCase().includes('baqueano'); }).forEach(function (key) { sessionStorage.removeItem(key); });
-      this.textContent = '✓ Almacenamiento BAQUEANO eliminado';
+    function toggleFaq(el) {
+      el.classList.toggle('open');
+    }
+
+    function handlePurgeStorage() {
+      if (confirm('¿Estás seguro de que deseas eliminar los datos locales y la caché de BAQUEANO en este dispositivo? Tus preferencias se restablecerán a los valores predeterminados.')) {
+        try {
+          localStorage.clear();
+          sessionStorage.clear();
+          alert('El almacenamiento local de BAQUEANO ha sido purgado con éxito.');
+          window.location.reload();
+        } catch (e) {
+          alert('Los datos locales se han restablecido.');
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle menú móvil
+      const mobileNavToggle = document.getElementById('mobileNavToggle');
+      const navLinksMenu = document.getElementById('navLinksMenu');
+      if (mobileNavToggle && navLinksMenu) {
+        mobileNavToggle.addEventListener('click', () => {
+          navLinksMenu.classList.toggle('nav-active');
+        });
+      }
+
+      // Persistir switches en LocalStorage
+      const prefToggle = document.getElementById('prefToggle');
+      const analyticsToggle = document.getElementById('analyticsToggle');
+
+      if (prefToggle) {
+        prefToggle.addEventListener('change', (e) => {
+          localStorage.setItem('baqueano_pref_enabled', e.target.checked);
+        });
+      }
+      if (analyticsToggle) {
+        analyticsToggle.addEventListener('change', (e) => {
+          localStorage.setItem('baqueano_analytics_enabled', e.target.checked);
+        });
+      }
     });
   </script>
-
-  <!-- SDK Firebase & Sincronización Universal CMS -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
-
-  <!-- Scripts Modulares Oficiales -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/legal-scrollspy.js"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 </body>
 </html>

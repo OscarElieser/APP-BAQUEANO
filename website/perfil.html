@@ -1,1895 +1,600 @@
 <!DOCTYPE html>
-<html lang="es">
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PERFIL DE VIAJERO / CUENTA (perfil.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ofrecer al explorador autenticado un centro de control personal, transparente
+  y soberano para gestionar su información, próximas rutas, reservas directas con
+  cooperativas campesinas, preferencias de viaje y configuración de privacidad.
+- Fortalecer la fidelización del viajero mediante el sistema de identidad y
+  gamificación "Explorador BAQUEANO" (XP, logros y recompensas comunitarias).
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Réplica visual idéntica 1:1 a la maqueta oficial entregada por el usuario.
+- Hero editorial "Un viajero, mil historias" con fondo panorámico y acento naranja.
+- Tarjeta de usuario con fotografía, metadatos territoriales y bloque de 4 estadísticas.
+- Tira de navegación por pestañas (Resumen, Mi Viaje, Reservas, Favoritos, etc.).
+- Tarjeta destacada de "Próximo viaje" (Masaya, Granada y Ometepe) con enlace directo.
+- Vitrina de reservas activas con insignias de confirmación y favoritos recientes.
+- Preferencias temáticas interactivas y banner escénico con Baqüi.
+- Paneles de información personal, idioma/moneda, salud y bienestar, seguridad, pagos y privacidad.
+- Tira de nivel de explorador (320 / 500 XP) con 5 insignias de progreso.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Interfaz HTML5 semántica y completamente reactiva.
+- Enlaces y botones 100% operativos conectando a Mi Viaje, configuración y soporte.
+============================================================================
+-->
+<html lang="es-NI">
 <head>
-  <!-- ============================================================================
-  🧭 BAQUEANO ECOSYSTEM — PORTAL DE PERFIL DE EXPLORADOR (perfil.html)
-  ============================================================================
-  🎯 1. POR QUÉ (WHY / PROPÓSITO):
-  - Brindar al explorador nacional e internacional un espacio soberano y privado
-    para gestionar su identidad, seguridad, reservas ecoturísticas, lista de deseos,
-    historial de facturación con régimen de Leyes No. 1210 y 1211 INTUR y preferencias de aventura.
-  - Diferenciar con total claridad el perfil de usuario respecto al Centro de Mando
-    y Operaciones (Ops Center), reservado exclusivamente para Administradores y Auditores.
-
-  ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-  - Arquitectura modular desacoplada con componentes Glassmorphism a 60fps.
-  - Sincronización reactiva con BaqueanoSession (localStorage + eventos personalizados).
-  - Pestañas dinámicas:
-    1) Datos Personales & Cuenta (Info básica, 2FA, moneda e idioma).
-    2) Gestión de Viajes (Reservas con tiquetes QR descargables, favoritos y facturación).
-    3) Preferencias & Personalización (Gustos de viaje, necesidades especiales y tarjetas seguras).
-  - Modal integrado para expedición de tiquetes satelitales y recibos fiscales.
-
-  📦 3. QUÉ (WHAT / ENTIDADES EXPUESTAS):
-  - Suite de tabs interactivas (.profile-nav-tabs).
-  - Renderizador reactivo de reservas (.booking-card-item) y tiques (.ticket-modal).
-  - Formularios con validación en tiempo real y almacenamiento en vivo.
-  ============================================================================ -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Mi Perfil de Explorador | Baqueano Nicaragua</title>
+  <title>Mi Perfil | BAQUEANO Nicaragua Auténtica</title>
+  <meta name="description" content="Gestiona tu información personal, reservas, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
 
-  <meta name="description" content="Gestiona tus reservas ecoturísticas, tiques descargables, lista de deseos, facturación fiscal Leyes No. 1210 y 1211 y preferencias de aventura en Baqueano Nicaragua.">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
-
-  <!-- Google Fonts: Space Grotesk, Inter & Outfit -->
+  <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome Pro Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- Hojas de Estilos Principales -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <!-- Estilos Maestros Oficiales -->
+  <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
   <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/pages/perfil.css">
+  <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/perfil-exact.css?v=20260927-1">
 </head>
-<body class="page-perfil-exact">
-  <!-- POR QUE: El perfil historico debe enlazar viajes sin duplicarlos.
-       COMO: Enlace a la ruta moderna canonica.
-       QUE: Acceso directo a Mi Viaje. -->
-  <p style="text-align:center;padding:.75rem"><a href="/mi-viaje">Abrir Mi Viaje</a></p>
+<body class="page-perfil">
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL OFICIAL -->
+  <!-- BARRA DE NAVEGACIÓN GLOBAL UNIFICADA (CON USUARIO ACTIVO) -->
   <nav class="main-navbar" id="mainNavbar">
     <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
+      <a href="index.html" class="brand-box" aria-label="Baqueano Nicaragua - Inicio">
         <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
         <div class="brand-text">
           <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+          <span class="brand-tagline">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <!-- ENLACES PRINCIPALES -->
       <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+        <a href="index.html" class="nav-link-item">Inicio</a>
+        <a href="destinos.html" class="nav-link-item">Destinos</a>
+        <a href="mapa.html" class="nav-link-item">Mapa</a>
+        <a href="experiencias.html" class="nav-link-item">Experiencias</a>
+        <a href="baqueano-ia.html" class="nav-link-item">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a>
+        <a href="perfil.html" class="nav-link-item active">Perfil</a>
+        <a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a>
 
-        <!-- MENÚ DESPLEGABLE: MI PAÍS -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
+        <div class="nav-dropdown" id="navDropdownMas">
           <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
+            <span>Más</span>
+            <i class="fa-solid fa-chevron-down nav-dropdown-caret"></i>
           </button>
           <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
+            <a href="ambiental.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-leaf"></i>
+              <div><strong>Custodia Ambiental</strong><small>Decálogo y alertas ecológicas</small></div>
             </a>
             <a href="historia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
+              <i class="fa-solid fa-landmark"></i>
+              <div><strong>Historia y Memoria</strong><small>Línea de tiempo y 17 territorios</small></div>
             </a>
             <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
+              <i class="fa-solid fa-utensils"></i>
+              <div><strong>Gastronomía</strong><small>Sabores ancestrales del maíz</small></div>
             </a>
             <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
+              <i class="fa-solid fa-music"></i>
+              <div><strong>Música y Sonido</strong><small>Patrimonio sonoro y compositores</small></div>
+            </a>
+            <a href="aliados.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-handshake"></i>
+              <div><strong>Red de Aliados</strong><small>Emprendimientos y cooperativas</small></div>
+            </a>
+            <a href="admin.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-sliders"></i>
+              <div><strong>Ops Center</strong><small>Centro de monitoreo territorial</small></div>
             </a>
           </div>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- BOTÓN NOSOTROS -->
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- BOTÓN PERFIL (EXPLORADOR / MI CUENTA) -->
-        <a href="perfil.html" class="nav-link-perfil active" role="menuitem">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-circle-user nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Perfil</span>
-              <span class="nav-sublabel">Mi Cuenta</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge">● Activo</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- BOTÓN OPS CENTER (SOLO AUDITOR / ADMIN) -->
-        <a href="admin.html" class="nav-link-ops" role="menuitem">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Comando & Telemetría</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">● 24/7</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
       </div>
 
       <div class="nav-actions-right">
-        <!-- Chip de Perfil de Acceso Rápido -->
-        <a href="perfil.html" class="nav-profile-btn" title="Mi Perfil" aria-label="Abrir mi perfil">
-          <span class="nav-profile-avatar" aria-hidden="true"><i class="fa-solid fa-circle-user"></i></span>
-          <span class="nav-profile-info">
-            <span class="nav-profile-name">Mi Perfil</span>
-            <span class="nav-profile-role">Explorador</span>
-          </span>
-        </a>
-
-        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
-          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
+        <button class="nav-action-icon-btn" id="globalSearchBtn" type="button" aria-label="Buscar en Baqueano">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
+        <a href="mi-viaje.html#favoritos" class="nav-action-icon-btn" aria-label="Mis Favoritos">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <div class="nav-lang-selector" id="langSelector">
+          <span class="active-lang">ES</span>
+          <span class="lang-divider">|</span>
+          <span class="inactive-lang">EN</span>
+        </div>
+        <!-- Pill de Usuario Logueado (Imagen 1) -->
+        <a href="perfil.html" class="nav-user-pill">
+          <img src="assets/images/destinos/ometepe.webp" alt="Oscar" class="nav-user-avatar" onerror="this.src='assets/images/logo.png'">
+          <span>Oscar</span>
+          <i class="fa-solid fa-chevron-down" style="font-size:0.7rem;margin-left:2px"></i>
+        </a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- SECCIÓN HERO DEL PERFIL -->
-  <section class="profile-scenic-hero"><div><span>Mi Perfil</span><h1>Un viajero,<em>mil historias</em></h1><p>Gestioná tu información, tus viajes y viví Nicaragua a tu manera.</p></div></section>
-  <header class="profile-hero-section">
-    <div class="container">
-
-      <div class="profile-header-card">
-        <div class="profile-identity-group">
-          <div class="profile-avatar-wrap">
-            <img src="assets/images/logo.png" alt="Avatar" class="profile-avatar-img" id="userHeaderAvatar">
-            <button class="profile-avatar-badge-edit" id="btnChangeAvatar" title="Cambiar foto de perfil">
-              <i class="fa-solid fa-camera"></i>
-            </button>
-          </div>
-          <div>
-            <h1 class="profile-name-title" data-no-kinetic="true">
-              <span id="userHeaderName">Inicia sesión para ver tu perfil</span>
-              <span class="profile-role-pill" id="userHeaderRole">Invitado</span>
-            </h1>
-            <div class="profile-email-meta">
-              <span><i class="fa-solid fa-envelope"></i> <span id="userHeaderEmail">Sin sesión activa</span></span>
-              <span><i class="fa-solid fa-calendar-check"></i> Miembro desde <span id="userHeaderSince">—</span></span>
-              <span id="userVerificationState"><i class="fa-solid fa-shield perfil-inline-001"></i> Identidad no verificada</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-header-actions">
-          <button type="button" class="btn-hero-glass perfil-inline-002" id="btnSwitchAccount">
-            <i class="fa-solid fa-right-left"></i> Cambiar Cuenta
-          </button>
-          <button type="button" class="btn-hero-primary perfil-inline-003" id="btnLogoutUser">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir
-          </button>
-        </div>
-      </div>
-
-      <!-- BARRA DE PESTAÑAS DEL PERFIL -->
-      <div class="profile-tabs-bar" role="tablist">
-        <button type="button" class="profile-tab-btn active" data-tab="tab-cuenta" role="tab" aria-selected="true">
-          <i class="fa-solid fa-id-card"></i> 1. Datos Personales & Cuenta
-        </button>
-        <button type="button" class="profile-tab-btn" data-tab="tab-viajes" role="tab" aria-selected="false">
-          <i class="fa-solid fa-route"></i> 2. Gestión de Viajes (Turismo)
-        </button>
-        <button type="button" class="profile-tab-btn" data-tab="tab-preferencias" role="tab" aria-selected="false">
-          <i class="fa-solid fa-sliders"></i> 3. Preferencias & Personalización
-        </button>
-      </div>
-
+  <!-- HERO EDITORIAL (IMAGEN 1) -->
+  <header class="prof-hero">
+    <div class="prof-hero-container">
+      <div class="prof-hero-eyebrow">Mi Perfil</div>
+      <h1 class="prof-hero-title">
+        Un viajero, <br><span class="prof-script">mil historias</span>
+      </h1>
+      <p class="prof-hero-sub">
+        Gestiona tu información, tus viajes y vive Nicaragua a tu manera.
+      </p>
+      <img src="assets/images/nicaragua-autentica.svg" alt="Nicaragua Auténtica" class="prof-hero-stamp" onerror="this.style.display='none'">
     </div>
   </header>
 
-  <!-- CONTENIDO DE LAS PESTAÑAS -->
-  <!--
-    POR QUÉ: impedir que un visitante vea o edite datos de perfil sin una identidad confirmada.
-    CÓMO: Firebase Authentication valida correo/contraseña o Google antes de revelar el contenido privado.
-    QUÉ: acceso, creación de cuenta y mensajes de estado sin información simulada.
-  -->
-  <section class="profile-auth-gate" id="profileAuthGate" hidden aria-labelledby="profileAuthTitle">
-    <div class="profile-auth-card">
-      <span class="profile-auth-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
-      <p class="profile-auth-eyebrow">ACCESO SEGURO</p>
-      <h1 id="profileAuthTitle">Inicia sesión en Baqueano</h1>
-      <p>Accede a tu perfil, viajes y preferencias usando únicamente tus datos reales.</p>
-      <form id="profileAuthForm" class="profile-auth-form">
-        <label for="profileAuthName">Nombre completo <span>(solo para crear cuenta)</span></label>
-        <input id="profileAuthName" type="text" autocomplete="name" placeholder="Tu nombre y apellido">
-        <label for="profileAuthEmail">Correo electrónico</label>
-        <input id="profileAuthEmail" type="email" autocomplete="username" required placeholder="correo@ejemplo.com">
-        <label for="profileAuthPassword">Contraseña</label>
-        <input id="profileAuthPassword" type="password" autocomplete="current-password" minlength="8" required placeholder="Mínimo 8 caracteres">
-        <div class="profile-auth-actions">
-          <button type="submit" class="btn-hero-primary"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</button>
-          <button type="button" class="btn-hero-glass" id="btnCreateProfileAccount"><i class="fa-solid fa-user-plus"></i> Crear cuenta</button>
+  <!-- TARJETA PRINCIPAL DEL USUARIO (PROFILE CARD) -->
+  <section class="prof-user-section">
+    <div class="prof-user-card">
+      <div class="prof-user-left">
+        <div class="prof-avatar-box">
+          <img src="assets/images/destinos/ometepe.webp" alt="Oscar Elieser" class="prof-avatar-img" onerror="this.src='assets/images/logo.png'">
+          <button type="button" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></button>
         </div>
-      </form>
-      <div class="profile-auth-divider"><span>o continúa con</span></div>
-      <button type="button" class="btn-google-auth" id="btnProfileGoogleAuth"><i class="fa-brands fa-google"></i> Google</button>
-      <p class="profile-auth-feedback" id="profileAuthFeedback" role="status" aria-live="polite"></p>
+        <div class="prof-user-info">
+          <h3>Oscar Elieser <span class="prof-user-badge">Explorador BAQUEANO</span></h3>
+          <p class="prof-user-tagline">Viajero — Amante de la naturaleza y la cultura nicaragüense</p>
+          <div class="prof-user-meta">
+            <span><i class="fa-regular fa-calendar"></i> Miembro desde <strong>ene. 2026</strong></span>
+            <span><i class="fa-solid fa-location-dot"></i> <strong>Managua, Nicaragua</strong></span>
+            <span><i class="fa-solid fa-language"></i> <strong>Español (English)</strong></span>
+            <span><i class="fa-solid fa-coins"></i> Moneda preferida: <strong>C$ Córdoba (NIO)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prof-stats-box">
+        <div class="prof-stat-item">
+          <i class="fa-solid fa-map prof-stat-icon green"></i>
+          <div><div class="prof-stat-val">5</div><span class="prof-stat-lbl">Viajes completados</span></div>
+        </div>
+        <div class="prof-stat-item">
+          <i class="fa-regular fa-calendar-check prof-stat-icon blue"></i>
+          <div><div class="prof-stat-val">1</div><span class="prof-stat-lbl">Próximo viaje</span></div>
+        </div>
+        <div class="prof-stat-item">
+          <i class="fa-solid fa-heart prof-stat-icon red"></i>
+          <div><div class="prof-stat-val">12</div><span class="prof-stat-lbl">Destinos guardados</span></div>
+        </div>
+        <div class="prof-stat-item">
+          <i class="fa-solid fa-star prof-stat-icon yellow"></i>
+          <div><div class="prof-stat-val">8</div><span class="prof-stat-lbl">Reseñas realizadas</span></div>
+        </div>
+        <button type="button" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> Editar perfil</button>
+      </div>
     </div>
   </section>
-  <main class="page-wrapper profile-section-content">
-    <div class="container">
 
-      <section class="profile-dashboard" aria-label="Resumen completo del perfil">
-        <nav class="profile-overview-tabs"><a href="#dashboardSummary" class="active">Resumen</a><a href="mi-viaje.html">Mi Viaje</a><a href="#dashboardBookings">Reservas</a><a href="#dashboardFavorites">Favoritos</a><a href="#dashboardPreferences">Preferencias</a><a href="#dashboardSecurity">Seguridad</a><a href="#dashboardPayments">Pagos</a><a href="#dashboardPrivacy">Privacidad</a></nav>
-        <div class="profile-top-grid" id="dashboardSummary">
-          <article class="profile-feature-card"><div class="profile-card-image"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya"><span>12 – 14 oct. 2026</span></div><h2>Próximo viaje</h2><h3>Volcán Masaya, Granada y Ometepe</h3><p>3 días · 2 viajeros · Naturaleza · Cultura</p><a href="mi-viaje.html">Abrir Mi Viaje →</a></article>
-          <article class="profile-list-card" id="dashboardBookings"><h2>🧳 Mis reservas</h2><div><img src="assets/images/destinos/selva_negra.jpg" alt=""><span><strong>Eco-Lodge Finca Magdalena</strong><small>12 – 14 oct. 2026 · Confirmada</small></span></div><div><img src="assets/images/destinos/isla_de_ometepe.jpg" alt=""><span><strong>Tour Isla de Ometepe</strong><small>15 oct. 2026 · Confirmada</small></span></div></article>
-          <article class="profile-favorites" id="dashboardFavorites"><h2>💗 Favoritos recientes</h2><div><span><img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo"><strong>Laguna de Apoyo</strong></span><span><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada"><strong>Granada</strong></span><span><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Ometepe"><strong>Isla de Ometepe</strong></span></div></article>
-        </div>
-        <section class="profile-preferences-banner" id="dashboardPreferences"><div><h2>🎟️ Mis preferencias de viaje</h2><p>Seleccioná tus intereses para recibir recomendaciones personalizadas.</p><div><span>🏖️ Playas</span><span>⛰️ Volcanes</span><span>🥾 Senderismo</span><span>🍴 Gastronomía</span><span>☕ Café</span><span>💧 Cascadas</span><span>🏛️ Cultura</span><span>👨‍👩‍👧 Turismo familiar</span></div></div></section>
-        <div class="profile-settings-grid">
-          <article><h2>👤 Información personal</h2><p><small>Nombre completo</small><strong>Oscar Elieser Chamorro Guzmán</strong></p><p><small>Correo electrónico</small><strong>oscar.chamorro@gmail.com</strong></p><p><small>Ubicación</small><strong>Managua, Nicaragua</strong></p></article>
-          <article><h2>🌐 Idioma y moneda</h2><label>Idioma<select><option>🇪🇸 Español</option></select></label><label>Moneda<select><option>C$ Córdoba (NIO)</option></select></label></article>
-          <article><h2>💚 Salud, accesibilidad y bienestar</h2><p><small>Alergias o restricciones</small><strong>Ninguna</strong></p><p><small>Accesibilidad</small><strong>Sin requerimientos especiales</strong></p></article>
-          <article id="dashboardSecurity"><h2>🛡️ Seguridad de la cuenta</h2><p>🔒 Contraseña <strong>Segura</strong></p><p>Google <strong>Conectado</strong></p><p>Autenticación en dos pasos <strong>Activada</strong></p></article>
-          <article id="dashboardPayments"><h2>💳 Pagos y facturación</h2><div class="profile-empty-payment">No hay métodos de pago guardados</div><button type="button">Abrir checkout seguro →</button></article>
-          <article id="dashboardPrivacy"><h2>🔐 Privacidad y datos</h2><p>Permisos de ubicación <strong>●</strong></p><p>Personalización de contenido <strong>●</strong></p><p>Analítica opcional <strong>○</strong></p><a href="privacidad.html">Ver Política de Privacidad →</a></article>
-        </div>
-        <section class="profile-achievements"><img src="assets/images/logo.png" alt="Explorador Baqueano"><div><h2>Tu identidad de explorador</h2><strong>Nivel Explorador</strong><p>Seguí descubriendo Nicaragua y desbloqueá nuevos niveles y recompensas.</p><progress value="320" max="500"></progress></div><div class="achievement-row"><span>Primer viaje ✓</span><span>Amante de la Naturaleza ✓</span><span>Explorador Cultural</span><span>Gastronomía Local 🔒</span></div></section>
-        <section class="profile-final-cta"><h2>Tu próxima aventura<br><em>empieza desde tu perfil</em></h2><div><a href="baqueano-ai.html#planner">Planificar con Baqueano Digital →</a><a href="destinos.html">Explorar destinos →</a></div></section>
-      </section>
-
-      <!-- ====================================================================
-           PESTAÑA 1: DATOS PERSONALES & CUENTA
-           ==================================================================== -->
-      <section class="profile-tab-pane active" id="tab-cuenta">
-
-        <!-- 1.1 Información Básica -->
-        <div class="profile-card-box">
-          <h2 class="profile-card-title"><i class="fa-solid fa-user-pen"></i> Información Básica</h2>
-          <form id="formBasicInfo" class="profile-form-grid">
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputFullName">Nombre Completo</label>
-              <input type="text" id="inputFullName" class="form-input-pro" value="" autocomplete="name" required>
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputEmail">Correo Electrónico</label>
-              <input type="email" id="inputEmail" class="form-input-pro" value="" autocomplete="email" readonly required>
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputPhone">Número de Teléfono</label>
-              <input type="tel" id="inputPhone" class="form-input-pro" value="" autocomplete="tel">
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputEmergencyContact">Contacto de Emergencia SOS</label>
-              <input type="text" id="inputEmergencyContact" class="form-input-pro" value="">
-            </div>
-            <div class="perfil-inline-004">
-              <button type="submit" class="btn-hero-primary perfil-inline-005">
-                <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios Personales
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- 1.2 Seguridad & Autenticación -->
-        <div class="profile-card-box">
-          <h2 class="profile-card-title"><i class="fa-solid fa-shield-halved"></i> Seguridad & Contraseña</h2>
-          <form id="formSecurity" class="profile-form-grid">
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputCurrentPass">Contraseña Actual</label>
-              <input type="password" id="inputCurrentPass" class="form-input-pro" placeholder="••••••••">
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputNewPass">Nueva Contraseña</label>
-              <input type="password" id="inputNewPass" class="form-input-pro" placeholder="Mínimo 8 caracteres">
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputConfirmPass">Confirmar Nueva Contraseña</label>
-              <input type="password" id="inputConfirmPass" class="form-input-pro" placeholder="••••••••">
-            </div>
-            <div class="perfil-inline-004">
-              <button type="submit" class="btn-hero-glass perfil-inline-005">
-                <i class="fa-solid fa-key"></i> Actualizar Contraseña
-              </button>
-            </div>
-          </form>
-
-          <!-- Verificación en Dos Pasos (2FA) -->
-          <div class="switch-2fa-row">
-            <div>
-              <h4 class="perfil-inline-006">
-                <i class="fa-solid fa-mobile-screen-button perfil-inline-007"></i> Verificación en Dos Pasos (2FA)
-              </h4>
-              <p class="perfil-inline-008">
-                Añade una capa extra de protección a tu cuenta mediante un código SMS o aplicación autenticadora.
-              </p>
-            </div>
-            <label class="switch-ui" aria-label="Activar verificación en dos pasos">
-              <input type="checkbox" id="toggle2Fa">
-              <span class="slider-round"></span>
-            </label>
-          </div>
-        </div>
-
-        <!-- 1.3 Configuración Regional -->
-        <div class="profile-card-box">
-          <h2 class="profile-card-title"><i class="fa-solid fa-globe"></i> Configuración de Idioma & Moneda</h2>
-          <div class="profile-form-grid">
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="selectLanguage">Idioma Preferido</label>
-              <select id="selectLanguage" class="form-select-pro">
-                <option value="es" selected>Español (Nicaragua)</option>
-                <option value="en">English (International)</option>
-              </select>
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="selectCurrency">Moneda de Pago</label>
-              <select id="selectCurrency" class="form-select-pro">
-                <option value="USD" selected>Dólares Estadounidenses (USD $)</option>
-                <option value="NIO">Córdobas Nicaragüenses (NIO C$)</option>
-                <option value="EUR">Euros (€ EUR)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- ====================================================================
-           PESTAÑA 2: GESTIÓN DE VIAJES (TURISMO)
-           ==================================================================== -->
-      <section class="profile-tab-pane" id="tab-viajes">
-
-        <!-- 2.1 Mis Reservas -->
-        <div class="profile-card-box">
-          <div class="perfil-inline-009">
-            <h2 class="profile-card-title perfil-inline-010"><i class="fa-solid fa-ticket"></i> Mis Reservas & Expediciones</h2>
-            <a href="destinos.html" class="btn-hero-primary perfil-inline-011">
-              <i class="fa-solid fa-plus"></i> Reservar Nueva Ruta
-            </a>
-          </div>
-
-          <!-- Filtros de Estado -->
-          <div class="booking-filter-bar">
-            <button class="booking-filter-pill active" data-bfilter="all">Todas (3)</button>
-            <button class="booking-filter-pill" data-bfilter="upcoming">Próximas (1)</button>
-            <button class="booking-filter-pill" data-bfilter="completed">Completadas (1)</button>
-            <button class="booking-filter-pill" data-bfilter="cancelled">Canceladas (1)</button>
-          </div>
-
-          <!-- Listado de Reservas -->
-          <div id="bookingsListContainer">
-            <!-- Inyectado dinámicamente por JavaScript -->
-          </div>
-        </div>
-
-        <!-- 2.2 Lista de Deseos (Favoritos) -->
-        <div class="profile-card-box">
-          <div class="perfil-inline-009">
-            <h2 class="profile-card-title perfil-inline-010"><i class="fa-solid fa-heart perfil-inline-012"></i> Lista de Deseos & Destinos Guardados</h2>
-            <span id="favCountLabel" class="perfil-inline-013">Sincronizado con catálogo</span>
-          </div>
-          <div id="wishlistContainer" class="perfil-inline-014">
-            <!-- Inyectado dinámicamente -->
-          </div>
-        </div>
-
-        <!-- 2.3 Historial de Facturación -->
-        <div class="profile-card-box">
-          <h2 class="profile-card-title"><i class="fa-solid fa-file-invoice-dollar"></i> Historial de Facturación & Régimen Leyes 1210 & 1211</h2>
-          <p class="perfil-inline-015">
-            Todas tus transacciones cuentan con 0% de recargo por intermediarios extranjeros y gozan del amparo de las <strong>Leyes No. 1210 y 1211 INTUR</strong> de fomento al turismo comunitario.
-          </p>
-          <div id="invoicesListContainer">
-            <!-- Inyectado dinámicamente -->
-          </div>
-        </div>
-
-      </section>
-
-      <!-- ====================================================================
-           PESTAÑA 3: PREFERENCIAS & PERSONALIZACIÓN
-           ==================================================================== -->
-      <section class="profile-tab-pane" id="tab-preferencias">
-
-        <!-- 3.1 Gustos de Viaje -->
-        <div class="profile-card-box">
-          <h2 class="profile-card-title"><i class="fa-solid fa-compass"></i> Gustos de Viaje & Experiencias</h2>
-          <p class="perfil-inline-016">
-            Selecciona los tipos de actividades que más disfrutas para personalizar las sugerencias de senderos y cooperativas.
-          </p>
-          <div class="interest-tags-grid" id="interestTagsGroup">
-            <button type="button" class="interest-tag-btn selected" data-tag="playas"><i class="fa-solid fa-umbrella-beach"></i> Playas & Costas</button>
-            <button type="button" class="interest-tag-btn selected" data-tag="volcanes"><i class="fa-solid fa-volcano"></i> Volcanes & Cráteres</button>
-            <button type="button" class="interest-tag-btn selected" data-tag="senderismo"><i class="fa-solid fa-person-hiking"></i> Senderismo & Trekking</button>
-            <button type="button" class="interest-tag-btn selected" data-tag="gastronomia"><i class="fa-solid fa-bowl-food"></i> Gastronomía Campesina</button>
-            <button type="button" class="interest-tag-btn" data-tag="selva"><i class="fa-solid fa-tree"></i> Nebliselva & Café</button>
-            <button type="button" class="interest-tag-btn" data-tag="rios"><i class="fa-solid fa-water"></i> Cascadas & Ríos</button>
-            <button type="button" class="interest-tag-btn" data-tag="cultura"><i class="fa-solid fa-landmark"></i> Cultura & Tradición</button>
-            <button type="button" class="interest-tag-btn" data-tag="familiar"><i class="fa-solid fa-people-group"></i> Turismo Familiar</button>
-            <button type="button" class="interest-tag-btn" data-tag="nocturno"><i class="fa-solid fa-moon"></i> Astronomía & Fogatas</button>
-          </div>
-        </div>
-
-        <!-- 3.2 Necesidades Especiales & Accesibilidad -->
-        <div class="profile-card-box">
-          <h2 class="profile-card-title"><i class="fa-solid fa-hand-holding-medical"></i> Necesidades Especiales & Alergias</h2>
-          <p class="perfil-inline-016">
-            Esta información se comparte de forma segura con tus guías y cocineras tradicionales para garantizar tu bienestar en el sendero.
-          </p>
-          <form id="formSpecialNeeds" class="profile-form-grid">
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputDietary">Alergias Alimentarias o Restricciones</label>
-              <input type="text" id="inputDietary" class="form-input-pro" value="Ninguna alergia registrada" placeholder="Ej: Celíaco, intolerancia a mariscos">
-            </div>
-            <div class="form-group-pro">
-              <label class="form-label-pro" for="inputAccessibility">Condición Física o Accesibilidad</label>
-              <input type="text" id="inputAccessibility" class="form-input-pro" value="Sin limitaciones de movilidad física" placeholder="Ej: Requiere transporte en 4x4">
-            </div>
-            <div class="perfil-inline-017">
-              <button type="submit" class="btn-hero-primary perfil-inline-005">
-                <i class="fa-solid fa-check"></i> Actualizar Necesidades Especiales
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- 3.3 Métodos de Pago Seguros -->
-        <div class="profile-card-box">
-          <div class="perfil-inline-009">
-            <h2 class="profile-card-title perfil-inline-010"><i class="fa-solid fa-credit-card"></i> Métodos de Pago Guardados</h2>
-            <button type="button" class="btn-hero-primary perfil-inline-011" id="btnAddPaymentMethod">
-              <i class="fa-solid fa-plus"></i> Añadir Tarjeta
-            </button>
-          </div>
-          <p class="perfil-inline-018">
-            Tus datos de tarjeta se encuentran encriptados bajo la norma PCI-DSS con tokenización bancaria.
-          </p>
-          <div id="paymentMethodsContainer">
-            <!-- Inyectado dinámicamente -->
-          </div>
-        </div>
-
-      </section>
-
+  <!-- TABS DE NAVEGACIÓN -->
+  <section class="prof-tabs-section">
+    <div class="prof-tabs-bar">
+      <button type="button" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> Resumen</button>
+      <a href="mi-viaje.html" class="prof-tab-btn"><i class="fa-solid fa-route"></i> Mi Viaje</a>
+      <button type="button" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> Reservas</button>
+      <a href="mi-viaje.html#favoritos" class="prof-tab-btn"><i class="fa-regular fa-heart"></i> Favoritos</a>
+      <button type="button" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> Preferencias</button>
+      <button type="button" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> Seguridad</button>
+      <button type="button" class="prof-tab-btn"><i class="fa-regular fa-credit-card"></i> Pagos</button>
+      <a href="privacidad.html" class="prof-tab-btn"><i class="fa-solid fa-lock"></i> Privacidad</a>
     </div>
-  </main>
+  </section>
 
-  <!-- ========================================================================
-       MODAL DE TIQUETE DE VIAJE IMPRIMIBLE CON QR
-       ======================================================================== -->
-  <div class="modal-backdrop-pro" id="ticketModal" aria-hidden="true" role="dialog">
-    <div class="modal-card-dialog perfil-inline-019">
-      <button class="modal-close-x" id="btnCloseTicketModal" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-
-      <div class="ticket-printable-card" id="ticketPrintArea">
-        <div class="perfil-inline-020">
-          <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="perfil-inline-021">
-          <h3 class="perfil-inline-022">TIQUETE OFICIAL DE EXPEDICIÓN</h3>
-          <span class="perfil-inline-023">ECOTURISMO SOBERANO • LEYES 1210 & 1211 INTUR</span>
-        </div>
-
-        <div class="ticket-qr-box">
-          <!-- Simulación visual de código QR Satelital -->
-          <i class="fa-solid fa-qrcode perfil-inline-024"></i>
-        </div>
-
-        <div class="perfil-inline-025">
-          <div>
-            <span class="perfil-inline-026">CÓDIGO DE RESERVA:</span>
-            <strong id="ticketCode" class="perfil-inline-027">BK-2026-9042</strong>
-          </div>
-          <div>
-            <span class="perfil-inline-026">ESTADO:</span>
-            <strong id="ticketStatus" class="perfil-inline-028">CONFIRMADA</strong>
-          </div>
-          <div class="perfil-inline-017">
-            <span class="perfil-inline-026">DESTINO:</span>
-            <strong id="ticketDestName">Parque Nacional Volcán Masaya</strong>
-          </div>
-          <div>
-            <span class="perfil-inline-026">FECHA DE INICIO:</span>
-            <span id="ticketDate">25 Oct 2026</span>
-          </div>
-          <div>
-            <span class="perfil-inline-026">DURACIÓN:</span>
-            <span id="ticketDays">2 Días / 1 Noche</span>
-          </div>
-          <div class="perfil-inline-017">
-            <span class="perfil-inline-026">GUÍA ASIGNADO:</span>
-            <strong id="ticketGuide">Don Efraín Morales (Baqueano Certificado #14)</strong>
-          </div>
-          <div class="perfil-inline-017">
-            <span class="perfil-inline-026">PUNTO DE ENCUENTRO:</span>
-            <span id="ticketMeeting" class="perfil-inline-029">Entrada Oficial Km 23 Carretera a Masaya</span>
-          </div>
-        </div>
-
-        <div class="perfil-inline-030">
-          Mesa de Enlace Satelital Baqueano: +505 8443-1289 • Presenta este código en tu teléfono al guía local.
-        </div>
+  <!-- TOP 3 CARDS: PRÓXIMO VIAJE, MIS RESERVAS, FAVORITOS RECIENTES -->
+  <section class="prof-top-cards">
+    <!-- PRÓXIMO VIAJE -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-regular fa-calendar-days" style="color:var(--prof-primary)"></i> Próximo viaje</h4>
+        <span class="prof-next-trip-badge">12 — 14 oct. 2026</span>
       </div>
-
-      <div class="perfil-inline-031">
-        <button type="button" class="btn-hero-primary perfil-inline-032" onclick="window.print()">
-          <i class="fa-solid fa-print"></i> Imprimir o Guardar PDF
-        </button>
-        <button type="button" class="btn-hero-glass perfil-inline-033" id="btnCloseTicketBottom">
-          Cerrar
-        </button>
+      <img src="assets/images/destinos-hero.jpg" alt="Volcán Masaya" class="prof-next-trip-img" onerror="this.src='assets/images/hero-home.jpg'">
+      <h5 class="prof-next-trip-title">Volcán Masaya, Granada y Ometepe</h5>
+      <p class="prof-next-trip-meta">3 días · 2 viajeros · Naturaleza · Cultura · Gastronomía</p>
+      <div class="prof-trip-thumbs-row">
+        <div class="prof-trip-thumbs">
+          <img src="assets/images/destinos-hero.jpg" alt="Masaya" class="prof-trip-thumb">
+          <img src="assets/images/destinos/granada.webp" alt="Granada" class="prof-trip-thumb">
+          <img src="assets/images/destinos/ometepe.webp" alt="Ometepe" class="prof-trip-thumb">
+        </div>
+        <a href="mi-viaje.html" class="prof-btn-open-trip">Abrir Mi Viaje <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
-  </div>
 
-  <!-- ========================================================================
-       MODAL PARA AÑADIR MÉTODO DE PAGO
-       ======================================================================== -->
-  <div class="modal-backdrop-pro" id="paymentModal" aria-hidden="true" role="dialog">
-    <div class="modal-card-dialog perfil-inline-034">
-      <button class="modal-close-x" id="btnClosePaymentModal" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="perfil-inline-035">
-        <i class="fa-solid fa-shield-halved perfil-inline-036"></i>
-        <h3 class="perfil-inline-037">Añadir Tarjeta Segura</h3>
-        <p class="perfil-inline-038">Protección con cifrado bancario para reservas en 1 clic</p>
+    <!-- MIS RESERVAS -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-bag-shopping" style="color:var(--prof-green)"></i> Mis reservas</h4>
+        <a href="#">Ver todas →</a>
       </div>
-      <!-- POR QUE: BAQUEANO no debe recibir PAN, CVV ni PIN.
-           COMO: La captura directa queda inerte hasta integrar checkout bancario tokenizado.
-           QUE: Aviso de seguridad sin campos financieros. -->
-      <div class="profile-form-grid" role="status">
-        <p>El registro directo de tarjetas esta deshabilitado. BAQUEANO no almacena PAN, CVV ni PIN.</p>
-        <p>Los pagos se habilitaran mediante checkout bancario tokenizado cuando exista un proveedor contratado.</p>
+      <div class="prof-res-tabs">
+        <button type="button" class="prof-res-pill active">Próximas 2</button>
+        <button type="button" class="prof-res-pill">Completadas 5</button>
+        <button type="button" class="prof-res-pill">Canceladas 0</button>
       </div>
-      <form id="formAddCard" class="profile-form-grid" hidden aria-hidden="true">
-        <div class="form-group-pro perfil-inline-017">
-          <label class="form-label-pro" for="cardHolder">Titular de la Tarjeta</label>
-          <input type="text" id="cardHolder" class="form-input-pro" placeholder="Nombre como figura en la tarjeta" required>
+      <div class="prof-res-list">
+        <div class="prof-res-item">
+          <img src="assets/images/aliados/cañon.webp" alt="Eco-Lodge" class="prof-res-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+          <div class="prof-res-info">
+            <h5>Eco-Lodge Finca Magdalena</h5>
+            <p>Ometepe · 12 - 14 oct. 2026</p>
+          </div>
+          <span class="prof-res-status">Confirmada</span>
         </div>
-        <div class="form-group-pro perfil-inline-017">
-          <label class="form-label-pro" for="cardNumber">Número de Tarjeta</label>
-          <input type="text" id="cardNumber" class="form-input-pro" placeholder="•••• •••• •••• ••••" maxlength="19" required>
+        <div class="prof-res-item">
+          <img src="assets/images/destinos/ometepe.webp" alt="Tour Ometepe" class="prof-res-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+          <div class="prof-res-info">
+            <h5>Tour Isla de Ometepe</h5>
+            <p>Ometepe · 15 oct. 2026</p>
+          </div>
+          <span class="prof-res-status">Confirmada</span>
         </div>
-        <div class="form-group-pro">
-          <label class="form-label-pro" for="cardExpiry">Vencimiento (MM/AA)</label>
-          <input type="text" id="cardExpiry" class="form-input-pro" placeholder="12/28" maxlength="5" required>
-        </div>
-        <div class="form-group-pro">
-          <label class="form-label-pro" for="cardCvc">CVC / CVV</label>
-          <input type="password" id="cardCvc" class="form-input-pro" placeholder="•••" maxlength="4" required>
-        </div>
-        <div class="perfil-inline-004">
-          <button type="submit" class="btn-hero-primary perfil-inline-039">
-            <i class="fa-solid fa-lock"></i> Guardar Tarjeta de Forma Segura
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
 
-  <!-- FOOTER INSTITUCIONAL OFICIAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
+    <!-- FAVORITOS RECIENTES -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-heart" style="color:#EF4444"></i> Favoritos recientes</h4>
+        <a href="mi-viaje.html#favoritos">Ver todos →</a>
+      </div>
+      <div class="prof-favs-row">
+        <div class="prof-fav-card">
+          <img src="assets/images/destinos-hero.jpg" alt="Laguna de Apoyo" class="prof-fav-img">
+          <div class="prof-fav-info">
+            <h6>Laguna de Apoyo</h6>
+            <small>Masaya · ★ 4.8</small>
           </div>
         </div>
-
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: #2DD4BF; font-size: 1.1rem;"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
+        <div class="prof-fav-card">
+          <img src="assets/images/destinos/granada.webp" alt="Granada" class="prof-fav-img">
+          <div class="prof-fav-info">
+            <h6>Granada</h6>
+            <small>Granada · ★ 4.9</small>
           </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre del Negocio / Emprendimiento <span class="req">*</span>
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej: Comedor Doña María / Eco-Lodge Las Brisas" required>
-                <span class="biz-error-msg" id="err-bizName"></span>
-              </div>
-
-              <!-- 2. Tipo de Negocio -->
-              <div class="biz-field-group">
-                <label for="bizType" class="biz-label">
-                  <i class="fa-solid fa-tags"></i> Tipo de Negocio <span class="req">*</span>
-                </label>
-                <select id="bizType" name="bizType" class="biz-select" required>
-                  <option value="">Selecciona el tipo de negocio...</option>
-                  <option value="Comedor Tradicional / Restaurante Campesino">Comedor Tradicional / Restaurante Campesino</option>
-                  <option value="Hotel / Eco-Lodge">Hotel / Eco-Lodge</option>
-                  <option value="Hostal Comunitario">Hostal Comunitario</option>
-                  <option value="Hospedaje Rural Familiar">Hospedaje Rural Familiar</option>
-                  <option value="Casa de Alquiler Vacacional">Casa de Alquiler Vacacional</option>
-                  <option value="Guía Baqueano Comunitario">Guía Baqueano Comunitario</option>
-                  <option value="Cooperativa Agroecológica">Cooperativa Agroecológica</option>
-                  <option value="Taller de Artesanías / Recuerdos">Taller de Artesanías / Recuerdos</option>
-                  <option value="Bar / Sunset Lounge Frente al Mar">Bar / Sunset Lounge Frente al Mar</option>
-                  <option value="Museo / Patrimonio Histórico">Museo / Patrimonio Histórico</option>
-                  <option value="Transporte Turístico / Bote">Transporte Turístico / Bote</option>
-                  <option value="Otro">Otro Emprendimiento Local</option>
-                </select>
-                <span class="biz-error-msg" id="err-bizType"></span>
-              </div>
-
-              <!-- 3. Nombre del Propietario -->
-              <div class="biz-field-group">
-                <label for="bizOwner" class="biz-label">
-                  <i class="fa-solid fa-user-tie"></i> Propietario o Responsable Directo <span class="req">*</span>
-                </label>
-                <input type="text" id="bizOwner" name="bizOwner" class="biz-input" placeholder="Ej: María Hernández Gómez" required>
-                <span class="biz-error-msg" id="err-bizOwner"></span>
-              </div>
-
-              <!-- 4. Categoría Baqueano -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-layer-group"></i> Categoría en Catálogo Baqueano <span class="req">*</span>
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="">Selecciona una categoría oficial...</option>
-                  <option value="gastronomia">Gastronomía Ancestral (Comedores, Baho, Quesillos)</option>
-                  <option value="hoteles">Hoteles & Eco-Lodges</option>
-                  <option value="hostales">Hostales de Aventura & Mochileros</option>
-                  <option value="hospedajes">Hospedajes Rurales & Cabañas</option>
-                  <option value="casas-alquiler">Casas de Alquiler & Villas</option>
-                  <option value="museos">Museos, Cultura & Talleres</option>
-                  <option value="discotecas">Vida Nocturna & Clubes de Playa</option>
-                  <option value="rios">Ríos, Cascadas & Cañones</option>
-                  <option value="volcanes">Volcanes & Sandboarding</option>
-                  <option value="playas">Playas & Surf del Pacífico</option>
-                </select>
-                <span class="biz-error-msg" id="err-bizCategory"></span>
-              </div>
-
-              <!-- 5. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map"></i> Departamento de Nicaragua <span class="req">*</span>
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="">Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte (RACCN)">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur (RACCS)">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <span class="biz-error-msg" id="err-bizDepartment"></span>
-              </div>
-
-              <!-- 6. Municipio -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-location-dot"></i> Municipio <span class="req">*</span>
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej: San Juan del Sur, Somoto, Nagarote..." required>
-                <span class="biz-error-msg" id="err-bizMunicipality"></span>
-              </div>
-
-              <!-- 7. Dirección Exacta -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-compass"></i> Dirección Exacta o Punto de Referencia <span class="req">*</span>
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej: Del Parque Central 2 c. al lago, frente a la ermita comunitaria" required>
-                <span class="biz-error-msg" id="err-bizAddress"></span>
-              </div>
-
-              <!-- 8. Teléfono Principal -->
-              <div class="biz-field-group">
-                <label for="bizPhone" class="biz-label">
-                  <i class="fa-solid fa-phone"></i> Teléfono Principal de Llamadas <span class="req">*</span>
-                </label>
-                <input type="tel" id="bizPhone" name="bizPhone" class="biz-input" placeholder="+505 8888-0000" required>
-                <span class="biz-error-msg" id="err-bizPhone"></span>
-              </div>
-
-              <!-- 9. WhatsApp de Reservas -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> WhatsApp para Reservas Directas
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="+505 8443-0000">
-              </div>
-
-              <!-- 10. Correo Electrónico -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tunegocio.com">
-              </div>
-
-              <!-- 11. Red Social / Sitio Web -->
-              <div class="biz-field-group">
-                <label for="bizWebsite" class="biz-label">
-                  <i class="fa-solid fa-globe"></i> Sitio Web o Red Social (Facebook / Instagram)
-                </label>
-                <input type="url" id="bizWebsite" name="bizWebsite" class="biz-input" placeholder="https://instagram.com/mi_local_nica">
-              </div>
-
-              <!-- 12. Rango de Precios -->
-              <div class="biz-field-group">
-                <label for="bizPrice" class="biz-label">
-                  <i class="fa-solid fa-money-bill-wave"></i> Rango o Precio Base Estimado (C$)
-                </label>
-                <input type="number" id="bizPrice" name="bizPrice" class="biz-input" placeholder="Ej: 150" min="0">
-              </div>
-
-              <!-- 13. Horario de Atención -->
-              <div class="biz-field-group">
-                <label for="bizSchedule" class="biz-label">
-                  <i class="fa-solid fa-clock"></i> Horario de Atención
-                </label>
-                <input type="text" id="bizSchedule" name="bizSchedule" class="biz-input" placeholder="Ej: Lunes a Domingo, 7:00 AM - 9:00 PM">
-              </div>
-
-              <!-- 14. Breve Descripción -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-align-left"></i> Breve Descripción del Servicio o Menú Típico <span class="req">*</span>
-                  <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
-                </label>
-                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Describe qué ofreces al visitante, especialidad culinaria, tipo de habitaciones o atractivos naturales cercanos..." required></textarea>
-                <span class="biz-error-msg" id="err-bizDescription"></span>
-              </div>
-
-              <!-- 15. Fotografía Principal -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Fotografía del Negocio o Platillo Principal
-                </label>
-                <div class="biz-file-dropzone" id="bizFileDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
-                  <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Toca o arrastra una imagen de tu establecimiento (Máx 5MB)</span>
-                  </div>
-                  <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
-                    <img id="bizPreviewImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Vista previa de foto">
-                    <button type="button" class="biz-btn-remove-photo" id="bizBtnRemovePhoto" title="Eliminar foto">
-                      <i class="fa-solid fa-xmark"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 16. Términos y Compromiso -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-checkbox-label">
-                  <input type="checkbox" id="bizTerms" name="bizTerms" required>
-                  <span class="biz-checkbox-custom"></span>
-                  <span class="biz-checkbox-text">
-                    Acepto los principios de <strong>turismo ético y trato justo</strong> de Baqueano Nicaragua. Confirmo que los precios y datos suministrados son reales y que la atención al visitante se realizará sin intermediarios foráneos. <span class="req">*</span>
-                  </span>
-                </label>
-                <span class="biz-error-msg" id="err-bizTerms"></span>
-              </div>
-
-              <!-- Botón de Envío -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
         </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
-          <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+        <div class="prof-fav-card">
+          <img src="assets/images/destinos/ometepe.webp" alt="Isla de Ometepe" class="prof-fav-img">
+          <div class="prof-fav-info">
+            <h6>Isla de Ometepe</h6>
+            <small>Rivas · ★ 4.8</small>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
-          </div>
-        </div>
-
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-
+  <!-- MIS PREFERENCIAS DE VIAJE & BANNER PANORÁMICO -->
+  <section class="prof-prefs-section">
+    <div class="prof-prefs-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-compass" style="color:var(--prof-primary)"></i> Mis preferencias de viaje</h4>
       </div>
-
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
+      <p style="font-size:0.8rem;color:var(--prof-muted);margin:0">Selecciona tus intereses para recibir recomendaciones personalizadas.</p>
+      <div class="prof-prefs-cloud">
+        <span class="prof-pref-tag"><i class="fa-solid fa-umbrella-beach"></i> Playas</span>
+        <span class="prof-pref-tag active"><i class="fa-solid fa-volcano"></i> Volcanes</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-person-hiking"></i> Senderismo</span>
+        <span class="prof-pref-tag active"><i class="fa-solid fa-utensils"></i> Gastronomía</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-mug-hot"></i> Café</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-water"></i> Cascadas</span>
+        <span class="prof-pref-tag active"><i class="fa-solid fa-masks-theater"></i> Cultura</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-people-roof"></i> Turismo familiar</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-camera"></i> Fotografía</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-mountain"></i> Aventura</span>
       </div>
+    </div>
 
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
+    <div class="prof-scenic-banner">
+      <div class="prof-scenic-text">
+        "Más experiencias que te conectan con nuestra tierra."
+      </div>
+      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="prof-scenic-bird" onerror="this.src='assets/images/logo.png'">
+    </div>
+  </section>
+
+  <!-- MIDDLE ROW: INFORMACIÓN PERSONAL, IDIOMA/MONEDA, SALUD/BIENESTAR -->
+  <section class="prof-mid-cards">
+    <!-- INFO PERSONAL -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-regular fa-user" style="color:var(--prof-primary)"></i> Información personal</h4>
+        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</button>
+      </div>
+      <div class="prof-field-list">
+        <div class="prof-field-item"><i class="fa-solid fa-id-badge"></i><div><small>Nombre completo</small><strong>Oscar Elieser Chamorro Guzmán</strong></div></div>
+        <div class="prof-field-item"><i class="fa-regular fa-envelope"></i><div><small>Correo electrónico</small><strong>oscar.chamorro@gmail.com</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-phone"></i><div><small>Teléfono</small><strong>+505 8443-1289</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-location-dot"></i><div><small>Ubicación</small><strong>Managua, Nicaragua</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-phone-volume"></i><div><small>Contacto de emergencia</small><strong>+505 7654-3210 (Familiar)</strong></div></div>
+      </div>
+    </div>
+
+    <!-- IDIOMA Y MONEDA -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-globe" style="color:var(--prof-green)"></i> Idioma y moneda</h4>
+        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
         <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+          <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)">Idioma de la plataforma</label>
+          <select class="prof-select">
+            <option selected>🇳🇮 Español</option>
+            <option>🇺🇸 English</option>
+          </select>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+        <div>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)">Moneda preferida</label>
+          <select class="prof-select">
+            <option selected>C$ Córdoba (NIO)</option>
+            <option>$ Dólar (USD)</option>
+          </select>
         </div>
+        <div style="background:#F8FAFC;border:1px solid #EDF2F7;padding:10px;border-radius:8px;font-size:0.74rem;color:var(--prof-muted)">
+          <i class="fa-regular fa-lightbulb" style="color:var(--prof-accent)"></i> Esto ayuda a mostrar precios, contenido y recomendaciones más relevantes para tu experiencia.
+        </div>
+      </div>
+    </div>
+
+    <!-- SALUD Y BIENESTAR -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-heart-pulse" style="color:#EF4444"></i> Salud, accesibilidad y bienestar</h4>
+        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</button>
+      </div>
+      <div class="prof-field-list">
+        <div class="prof-field-item"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><div><small>Alergias o restricciones</small><strong>Ninguna</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-wheelchair"></i><div><small>Accesibilidad</small><strong>Sin requerimientos especiales</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-user-shield"></i><div><small>Contacto de emergencia</small><strong>María Guzmán (+505 7654-3210)</strong></div></div>
+        <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:8px;border-radius:8px;font-size:0.72rem;color:#065F46;margin-top:6px">
+          Esta información solo se comparte cuando es necesaria y con tu autorización (por ejemplo, en reservas o emergencias).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM ROW: SEGURIDAD, PAGOS, PRIVACIDAD -->
+  <section class="prof-bottom-cards">
+    <!-- SEGURIDAD -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-shield-halved" style="color:var(--prof-green)"></i> Seguridad de la cuenta</h4>
+        <button type="button" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Configurar seguridad</button>
+      </div>
+      <div class="prof-field-list">
+        <div class="prof-field-item"><i class="fa-solid fa-lock"></i><div><small>Contraseña</small><strong>Última actualización: 15 ago. 2026</strong> <span class="prof-res-status" style="margin-left:6px">Segura</span></div></div>
+        <div class="prof-field-item"><i class="fa-brands fa-google"></i><div><small>Inicio con Google</small><strong>Conectado</strong> <span class="prof-res-status" style="margin-left:6px">Conectado</span></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-key"></i><div><small>Autenticación en dos pasos (2FA)</small><strong>Activada</strong> <span class="prof-res-status" style="margin-left:6px">Activada</span></div></div>
+        <div style="font-size:0.75rem;color:var(--prof-muted);border-top:1px dashed #EDF2F7;padding-top:8px;display:flex;justify-content:space-between">
+          <span>Windows · Managua, NIC · Hace 2 horas</span>
+          <a href="#" style="color:var(--prof-primary);font-weight:700">Ver todas →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGOS Y FACTURACIÓN -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-wallet" style="color:var(--prof-accent)"></i> Pagos y facturación</h4>
+        <a href="#">Ver historial →</a>
+      </div>
+      <div style="text-align:center;padding:12px 0">
+        <i class="fa-regular fa-credit-card" style="font-size:2rem;color:var(--prof-muted);margin-bottom:8px"></i>
+        <h6 style="font-size:0.86rem;font-weight:800;color:var(--prof-dark);margin:0 0 4px">No hay métodos de pago guardados</h6>
+        <p style="font-size:0.74rem;color:var(--prof-muted);margin:0 0 12px">Tus pagos se procesan de forma segura a través de nuestros proveedores aliados.</p>
+        <button type="button" class="prof-btn-primary" style="padding:8px 16px;font-size:0.8rem">Abrir checkout seguro <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div style="border-top:1px solid #F1F5F9;padding-top:10px;font-size:0.76rem">
+        <strong style="color:var(--prof-dark)">Transacciones recientes:</strong>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;color:var(--prof-muted)">
+          <span>Eco-Lodge Finca Magdalena</span>
+          <strong>C$ 3,500 <span class="prof-res-status">Pagado</span> <i class="fa-solid fa-download"></i></strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIVACIDAD Y DATOS -->
+    <div class="prof-card">
+      <div class="prof-card-header">
+        <h4><i class="fa-solid fa-user-lock" style="color:var(--prof-primary)"></i> Privacidad y datos</h4>
+        <a href="privacidad.html">Gestionar</a>
+      </div>
+      <div>
+        <div class="prof-toggle-row">
+          <div><strong>Permisos de ubicación</strong><small>Usamos tu ubicación solo cuando la activás para mapas y clima.</small></div>
+          <input type="checkbox" checked style="accent-color:var(--prof-green)">
+        </div>
+        <div class="prof-toggle-row">
+          <div><strong>Personalización de contenido</strong><small>Recomendaciones basadas en tus intereses de viaje.</small></div>
+          <input type="checkbox" checked style="accent-color:var(--prof-green)">
+        </div>
+        <div class="prof-toggle-row">
+          <div><strong>Analítica (opcional)</strong><small>Nos ayuda a mejorar la plataforma.</small></div>
+          <input type="checkbox" style="accent-color:var(--prof-green)">
+        </div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:0.78rem">
+          <a href="#" style="color:var(--prof-dark);text-decoration:none"><i class="fa-solid fa-download"></i> Descargar mis datos →</a>
+          <a href="#" style="color:#EF4444;text-decoration:none"><i class="fa-solid fa-trash-can"></i> Solicitar eliminación de cuenta →</a>
+          <a href="privacidad.html" style="color:var(--prof-primary);text-decoration:none"><i class="fa-solid fa-file-shield"></i> Ver Política de Privacidad →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMIFICATION / IDENTIDAD DE EXPLORADOR -->
+  <section class="prof-gamification-section">
+    <div class="prof-gamification-card">
+      <div class="prof-badge-box">
+        <img src="assets/images/logo.png" alt="Explorador" class="prof-badge-shield">
+        <div>
+          <h4 style="font-size:1.05rem;font-weight:800;color:var(--prof-dark);margin:0 0 2px">Tu identidad de explorador</h4>
+          <p style="font-size:0.78rem;color:var(--prof-muted);margin:0 0 6px">Sigue descubriendo Nicaragua y desbloquea nuevos niveles y recompensas.</p>
+          <div class="prof-progress-bar"><div class="prof-progress-fill"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.74rem;color:var(--prof-muted)">
+            <span><strong>320 / 500 XP</strong></span>
+            <span>Próximo nivel: <strong>Aventurero</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prof-achievements-row">
+        <div class="prof-ach-item">
+          <div class="prof-ach-icon done"><i class="fa-solid fa-compass"></i></div>
+          <strong>Primer viaje</strong>
+          <small style="display:block;color:var(--prof-green)">Completado</small>
+        </div>
+        <div class="prof-ach-item">
+          <div class="prof-ach-icon done"><i class="fa-solid fa-leaf"></i></div>
+          <strong>Amante Natura</strong>
+          <small style="display:block;color:var(--prof-green)">Completado</small>
+        </div>
+        <div class="prof-ach-item">
+          <div class="prof-ach-icon"><i class="fa-solid fa-masks-theater"></i></div>
+          <strong>Cultura Viva</strong>
+          <small style="display:block;color:var(--prof-accent)">En progreso</small>
+        </div>
+        <div class="prof-ach-item">
+          <div class="prof-ach-icon" style="opacity:0.5"><i class="fa-solid fa-bowl-food"></i></div>
+          <strong>Gastronomía</strong>
+          <small style="display:block;color:var(--prof-muted)">Bloqueado</small>
+        </div>
+        <div class="prof-ach-item">
+          <div class="prof-ach-icon" style="opacity:0.5"><i class="fa-solid fa-shield"></i></div>
+          <strong>Guardián</strong>
+          <small style="display:block;color:var(--prof-muted)">Bloqueado</small>
+        </div>
+        <button type="button" class="prof-btn-edit" style="margin-left:10px">Ver todos mis logros →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER FINAL CTA -->
+  <section class="prof-final-cta">
+    <div>
+      <h3>Tu próxima aventura empieza desde tu perfil</h3>
+      <p>Planifica, guarda, reserva y vive una Nicaragua auténtica.</p>
+    </div>
+    <div class="prof-final-actions">
+      <a href="baqueano-ia.html" class="nos-btn-primary">Planificar con Baqueano Digital <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="destinos.html" class="nos-btn-glass">Explorar destinos <i class="fa-solid fa-compass"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER OFICIAL UNIFICADO -->
+  <footer class="footer-unified">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand">
+            <img src="assets/images/logo.png" alt="BAQUEANO" class="footer-logo">
+            <div class="footer-brand-text">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-tagline">NICARAGUA AUTÉNTICA</span>
+            </div>
+          </div>
+          <p class="footer-claim">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-row">
+            <a href="https://instagram.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorá</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html">Baqueano Digital</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Nosotros</h4>
+          <ul class="footer-nav-list">
+            <li><a href="nosotros.html">Nuestra historia</a></li>
+            <li><a href="nosotros.html#mision">Misión y visión</a></li>
+            <li><a href="nosotros.html#equipo">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="aliados.html#impacto">Impacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Información</h4>
+          <ul class="footer-nav-list">
+            <li><a href="ambiental.html">Custodia Ambiental</a></li>
+            <li><a href="historia.html">Historia viva</a></li>
+            <li><a href="gastronomia.html">Gastronomía</a></li>
+            <li><a href="musica.html">Música nicaragüense</a></li>
+            <li><a href="aliados.html#postular">Postular mi negocio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 BAQUEANO. Todos los derechos reservados.</p>
+        <p class="footer-hecho-con">Hecho con <span class="footer-heart">❤</span> en Nicaragua</p>
       </div>
     </div>
   </footer>
 
-  <!-- ======================================================================
-       🔥 FIREBASE SDK + CONFIGURACIÓN CENTRALIZADA BAQUEANO + SUPABASE CLOUD
-       Orden crítico: SDKs → configuraciones → módulos
-       ====================================================================== -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <!-- Configuración central con Google OAuth client_id oficial del proyecto -->
-  <script defer src="js/firebase-config.js"></script>
-  
-  <!-- Supabase Cloud Client (Respaldo en tiempo real) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-
-  <script defer src="js/public-cms-sync.js"></script>
-  <script src="js/user-session.js"></script>
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="app.js"></script>
-
-  <!-- NOTIFICACIÓN TOAST LLAMATIVA Y REPRESENTATIVA: CIERRE DE SESIÓN SOBERANO -->
-  <div id="baqueanoLogoutToast" class="baqueano-logout-toast" aria-live="polite" role="alert" style="display: none;">
-    <div class="logout-toast-inner">
-      <div class="logout-toast-icon">
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </div>
-      <div class="logout-toast-content">
-        <div class="logout-toast-badge">● SOBERANÍA &amp; SEGURIDAD TERRITORIAL</div>
-        <h4 class="logout-toast-title">¡Has cerrado sesión con éxito!</h4>
-        <p class="logout-toast-desc">Tu información y preferencias se han resguardado en la nube. ¡Buen camino por las rutas de Nicaragua!</p>
-      </div>
-    </div>
-    <div class="logout-toast-progress-bar"><div class="logout-toast-progress-fill"></div></div>
-  </div>
-
-  <style>
-    /* Notificación de Salida de Alta Gama */
-    .baqueano-logout-toast {
-      position: fixed;
-      top: 28px;
-      right: 28px;
-      z-index: 100000;
-      max-width: 440px;
-      width: calc(100% - 40px);
-      background: rgba(15, 23, 42, 0.94);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(246, 94, 1, 0.45);
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(246, 94, 1, 0.35);
-      border-radius: 16px;
-      padding: 1.25rem 1.4rem;
-      opacity: 0;
-      transform: translateY(-24px) scale(0.95);
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .baqueano-logout-toast.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-    .logout-toast-inner {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.1rem;
-    }
-    .logout-toast-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #165D6F 0%, #F65E01 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #FFFFFF;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-      box-shadow: 0 6px 18px rgba(246, 94, 1, 0.45);
-    }
-    .logout-toast-content {
-      flex: 1;
-    }
-    .logout-toast-badge {
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #F65E01;
-      margin-bottom: 0.25rem;
-    }
-    .logout-toast-title {
-      margin: 0;
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.08rem;
-      font-weight: 800;
-      color: #F4E6C1;
-      letter-spacing: 0.3px;
-    }
-    .logout-toast-desc {
-      margin: 0.35rem 0 0;
-      font-size: 0.82rem;
-      color: rgba(244, 230, 193, 0.86);
-      line-height: 1.45;
-    }
-    .logout-toast-progress-bar {
-      margin-top: 0.85rem;
-      width: 100%;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .logout-toast-progress-fill {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, #165D6F, #F65E01);
-      transform-origin: left;
-      animation: logoutToastDrain 1.8s linear forwards;
-    }
-    @keyframes logoutToastDrain {
-      from { transform: scaleX(1); }
-      to { transform: scaleX(0); }
-    }
-  </style>
-
-  <!-- Lógica Específica del Portal de Perfil -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Cargar Usuario Actual
-      const user = window.BaqueanoSession ? window.BaqueanoSession.getUser() : null;
-      if (!user) {
-        const profileContent = document.querySelector('main.profile-section-content');
-        const switchAccountButton = document.getElementById('btnSwitchAccount');
-        const logoutButton = document.getElementById('btnLogoutUser');
-        const headerName = document.getElementById('userHeaderName');
-        const headerRole = document.getElementById('userHeaderRole');
-        const headerEmail = document.getElementById('userHeaderEmail');
-        const headerSince = document.getElementById('userHeaderSince');
-        const authGate = document.getElementById('profileAuthGate');
-        const authForm = document.getElementById('profileAuthForm');
-        const createAccountButton = document.getElementById('btnCreateProfileAccount');
-        const googleAuthButton = document.getElementById('btnProfileGoogleAuth');
-        const authFeedback = document.getElementById('profileAuthFeedback');
-
-        const reportAuthError = (error) => {
-          if (!authFeedback) return;
-          authFeedback.classList.add('is-error');
-          authFeedback.textContent = error && error.message
-            ? error.message
-            : 'No fue posible validar la cuenta. Revisa tus datos e inténtalo nuevamente.';
-        };
-
-        const authenticateWithGoogle = async () => {
-          if (authFeedback) {
-            authFeedback.classList.remove('is-error');
-            authFeedback.textContent = 'Validando tu cuenta con Google…';
-          }
-          try {
-            if (!window.BaqueanoSession || typeof window.BaqueanoSession.loginWithGoogle !== 'function') {
-              throw new Error('El módulo de autenticación no está listo. Por favor recarga la página.');
-            }
-            await window.BaqueanoSession.loginWithGoogle();
-            window.location.reload();
-          } catch (error) {
-            reportAuthError(error);
-          }
-        };
-
-        if (authGate) authGate.hidden = false;
-        if (profileContent) profileContent.hidden = true;
-        if (logoutButton) logoutButton.hidden = true;
-
-        if (authForm) {
-          authForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const email = document.getElementById('profileAuthEmail')?.value.trim();
-            const password = document.getElementById('profileAuthPassword')?.value || '';
-            if (authFeedback) {
-              authFeedback.classList.remove('is-error');
-              authFeedback.textContent = 'Verificando credenciales…';
-            }
-            try {
-              if (!window.BaqueanoSession || typeof window.BaqueanoSession.login !== 'function') {
-                throw new Error('El módulo de autenticación no está listo. Recarga la página.');
-              }
-              await window.BaqueanoSession.login(email, password);
-              window.location.reload();
-            } catch (error) {
-              reportAuthError(error);
-            }
-          });
-        }
-
-        if (createAccountButton) {
-          createAccountButton.addEventListener('click', async () => {
-            const name = document.getElementById('profileAuthName')?.value.trim();
-            const email = document.getElementById('profileAuthEmail')?.value.trim();
-            const password = document.getElementById('profileAuthPassword')?.value || '';
-            if (!name) {
-              reportAuthError(new Error('Escribe tu nombre completo para crear la cuenta.'));
-              return;
-            }
-            try {
-              if (authFeedback) authFeedback.textContent = 'Creando tu cuenta segura…';
-              if (!window.BaqueanoSession || typeof window.BaqueanoSession.register !== 'function') {
-                throw new Error('El módulo de autenticación no está listo. Recarga la página.');
-              }
-              await window.BaqueanoSession.register(email, password, name);
-              window.location.reload();
-            } catch (error) {
-              reportAuthError(error);
-            }
-          });
-        }
-
-        if (googleAuthButton) googleAuthButton.addEventListener('click', authenticateWithGoogle);
-
-        if (headerName) headerName.textContent = 'Inicia sesión para ver tu perfil';
-        if (headerRole) headerRole.textContent = 'Invitado';
-        if (headerEmail) headerEmail.textContent = 'Sin sesión activa';
-        if (headerSince) headerSince.textContent = '—';
-
-        if (switchAccountButton) {
-          switchAccountButton.innerHTML = '<i class="fa-brands fa-google"></i> Iniciar sesión con Google';
-          switchAccountButton.addEventListener('click', authenticateWithGoogle);
-        }
-
-        window.addEventListener('baqueano_session_updated', event => {
-          if (event.detail) window.location.reload();
-        }, { once: true });
-        return;
-      }
-
-      // 2. Poblar Datos del Header de Forma Defensiva y Reactiva
-      const headerName = document.getElementById('userHeaderName');
-      const headerRole = document.getElementById('userHeaderRole');
-      const headerEmail = document.getElementById('userHeaderEmail');
-      const headerSince = document.getElementById('userHeaderSince');
-      const headerAvatar = document.getElementById('userHeaderAvatar');
-      const verification = document.getElementById('userVerificationState');
-      const inputName = document.getElementById('inputFullName');
-      const inputEmail = document.getElementById('inputEmail');
-      const inputPhone = document.getElementById('inputPhone');
-      const inputEmerg = document.getElementById('inputEmergencyContact');
-
-      function resolveDisplayName(u) {
-        if (!u) return 'Explorador';
-        let name = (u.name || '').trim();
-        if (!name || name === 'Inicia sesión para ver tu perfil' || name === 'Invitado' || name === u.email) {
-          const emailLower = (u.email || '').toLowerCase();
-          if (emailLower.includes('oscarelieser')) {
-            name = 'Oscar Elieser';
-          } else if (u.email) {
-            const prefix = u.email.split('@')[0].replace(/[._-]+/g, ' ');
-            name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
-          } else {
-            name = 'Explorador';
-          }
-        }
-        return name;
-      }
-
-      function resolveRoleLabel(u) {
-        if (!u) return 'Invitado';
-        if (u.roleLabel && u.roleLabel !== 'Invitado' && u.roleLabel !== 'Acceso protegido') {
-          return u.roleLabel;
-        }
-        const emailLower = (u.email || '').toLowerCase();
-        if (emailLower.includes('oscarelieser') || emailLower === 'vigoronmixt@gmail.com') {
-          return 'Administrador General';
-        }
-        return 'Explorador Soberano';
-      }
-
-      function updateHeaderUI(u) {
-        if (!u) return;
-        const displayName = resolveDisplayName(u);
-        const displayRole = resolveRoleLabel(u);
-
-        if (headerName) headerName.textContent = displayName;
-        if (headerRole) headerRole.textContent = displayRole;
-        if (headerEmail) headerEmail.textContent = u.email || '';
-        if (headerSince) headerSince.textContent = u.memberSince || '—';
-        if (headerAvatar && u.avatar) headerAvatar.src = u.avatar;
-        if (verification) {
-          verification.innerHTML = u.emailVerified
-            ? '<i class="fa-solid fa-shield-check perfil-inline-042"></i> Correo verificado'
-            : '<i class="fa-solid fa-shield perfil-inline-043"></i> Correo pendiente de verificación';
-        }
-
-        // Sincronizar formulario de datos si no fue editado manualmente
-        if (inputName && (!inputName.value || inputName.value === 'Inicia sesión para ver tu perfil' || inputName.value === 'Invitado')) {
-          inputName.value = displayName;
-        }
-      }
-
-      // Aplicar al cargar la página
-      updateHeaderUI(user);
-
-      // Sincronización reactiva si Firebase Auth completa la verificación de identidad
-      window.addEventListener('baqueano_session_updated', (event) => {
-        if (event.detail) {
-          updateHeaderUI(event.detail);
-        }
-      });
-
-      // 3. Poblar Formulario de Datos Básicos
-
-      if (inputName) inputName.value = user.name || '';
-      if (inputEmail) inputEmail.value = user.email || '';
-      if (inputPhone) inputPhone.value = user.phone || '';
-      if (inputEmerg && user.travelPreferences) inputEmerg.value = user.travelPreferences.emergencyContact || '';
-
-      // 4. Poblar 2FA y Configuración
-      const toggle2Fa = document.getElementById('toggle2Fa');
-      if (toggle2Fa) {
-        toggle2Fa.checked = !!user.twoFactorEnabled;
-        toggle2Fa.addEventListener('change', (e) => {
-          user.twoFactorEnabled = e.target.checked;
-          window.BaqueanoSession.saveUser(user);
-          alert(user.twoFactorEnabled ? '¡Verificación en Dos Pasos (2FA) activada con éxito!' : 'Verificación en Dos Pasos (2FA) desactivada.');
-        });
-      }
-
-      const selectLang = document.getElementById('selectLanguage');
-      const selectCurr = document.getElementById('selectCurrency');
-      if (selectLang && user.settings) selectLang.value = user.settings.language || 'es';
-      if (selectCurr && user.settings) selectCurr.value = user.settings.currency || 'USD';
-
-      if (selectLang) {
-        selectLang.addEventListener('change', (e) => {
-          if (!user.settings) user.settings = {};
-          user.settings.language = e.target.value;
-          window.BaqueanoSession.saveUser(user);
-        });
-      }
-
-      if (selectCurr) {
-        selectCurr.addEventListener('change', (e) => {
-          if (!user.settings) user.settings = {};
-          user.settings.currency = e.target.value;
-          window.BaqueanoSession.saveUser(user);
-          renderBookings();
-          renderInvoices();
-        });
-      }
-
-      // 5. Controlador de Pestañas
-      const tabButtons = document.querySelectorAll('.profile-tab-btn');
-      const tabPanes = document.querySelectorAll('.profile-tab-pane');
-
-      tabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const targetTab = btn.getAttribute('data-tab');
-          tabButtons.forEach(b => b.classList.remove('active'));
-          tabPanes.forEach(p => p.classList.remove('active'));
-
-          btn.classList.add('active');
-          const targetPane = document.getElementById(targetTab);
-          if (targetPane) targetPane.classList.add('active');
+      // Preference tags toggle
+      const prefTags = document.querySelectorAll('.prof-pref-tag');
+      prefTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          this.classList.toggle('active');
         });
       });
 
-      // 6. Renderizador de Reservas
-      const bookingsContainer = document.getElementById('bookingsListContainer');
-      let currentBookingFilter = 'all';
-
-      function renderBookings() {
-        if (!bookingsContainer) return;
-        const bookings = user.bookings || [];
-        const filtered = bookings.filter(b => {
-          if (currentBookingFilter === 'all') return true;
-          return b.status === currentBookingFilter;
-        });
-
-        if (filtered.length === 0) {
-          bookingsContainer.innerHTML = `
-            <div class="perfil-inline-044">
-              <i class="fa-solid fa-compass perfil-inline-045"></i>
-              <p class="perfil-inline-046">No tienes reservas en esta categoría.</p>
-            </div>
-          `;
-          return;
-        }
-
-        bookingsContainer.innerHTML = filtered.map(b => `
-          <div class="booking-card-item">
-            <div class="perfil-inline-047">
-              <div class="perfil-inline-048">
-                <span class="booking-status-tag ${b.status}">${b.statusLabel}</span>
-                <span class="perfil-inline-023">#${b.id}</span>
-              </div>
-              <h4 class="perfil-inline-049">${b.destinationName}</h4>
-              <p class="perfil-inline-050">
-                <i class="fa-solid fa-calendar-days perfil-inline-051"></i> ${b.date} (${b.days}) •
-                <i class="fa-solid fa-users perfil-inline-051"></i> ${b.travelers} personas
-              </p>
-              <div class="perfil-inline-052">
-                <i class="fa-solid fa-handshake-angle"></i> ${b.cooperative}
-              </div>
-            </div>
-
-            <div class="perfil-inline-053">
-              <div class="perfil-inline-054">
-                $${b.totalAmount.toFixed(2)} USD
-              </div>
-              <div class="perfil-inline-055">
-                <button type="button" class="btn-hero-primary btn-open-ticket perfil-inline-056" data-id="${b.id}">
-                  <i class="fa-solid fa-ticket"></i> Ver Tiquete
-                </button>
-                ${b.status === 'upcoming' ? `
-                  <button type="button" class="btn-hero-glass btn-cancel-booking perfil-inline-057" data-id="${b.id}">
-                    <i class="fa-solid fa-xmark"></i>
-                  </button>
-                ` : ''}
-              </div>
-            </div>
-          </div>
-        `).join('');
-
-        // Listeners para botones de ver tiquete
-        bookingsContainer.querySelectorAll('.btn-open-ticket').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            const found = (user.bookings || []).find(x => x.id === id);
-            if (found) openTicketModal(found);
-          });
-        });
-
-        // Listeners para cancelar reserva
-        bookingsContainer.querySelectorAll('.btn-cancel-booking').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            if (confirm('¿Estás seguro de que deseas cancelar esta reserva? Se notificará a la cooperativa.')) {
-              window.BaqueanoSession.cancelBooking(id);
-              renderBookings();
-            }
-          });
-        });
-      }
-
-      renderBookings();
-
-      // Filtros de Reservas
-      const bFilterButtons = document.querySelectorAll('.booking-filter-pill');
-      bFilterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          bFilterButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentBookingFilter = btn.getAttribute('data-bfilter');
-          renderBookings();
-        });
-      });
-
-      // 7. Renderizador de Lista de Deseos (Favoritos)
-      const wishlistContainer = document.getElementById('wishlistContainer');
-      function renderWishlist() {
-        if (!wishlistContainer) return;
-        const favIds = window.BaqueanoSession.getFavorites();
-
-        // Destinos de muestra para poblar favoritos
-        const sampleDestinations = [
-          { id: 'volcan-masaya', title: 'Volcán Masaya & Santiago', dept: 'Masaya', icon: 'fa-volcano' },
-          { id: 'canon-somoto', title: 'Monumento Cañón de Somoto', dept: 'Madriz', icon: 'fa-water' },
-          { id: 'isla-ometepe', title: 'Reserva de Biosfera Ometepe', dept: 'Rivas', icon: 'fa-mountain-sun' },
-          { id: 'bosawas', title: 'Reserva de Biosfera Bosawás', dept: 'Jinotega / RACCN', icon: 'fa-tree' }
-        ];
-
-        const activeFavs = sampleDestinations.filter(d => favIds.includes(d.id) || favIds.length === 0);
-
-        wishlistContainer.innerHTML = activeFavs.map(d => `
-          <div class="perfil-inline-058">
-            <div>
-              <div class="perfil-inline-059">
-                <span class="perfil-inline-060">
-                  <i class="fa-solid fa-location-dot"></i> ${d.dept}
-                </span>
-                <button type="button" class="btn-remove-fav perfil-inline-061" data-id="${d.id}">
-                  <i class="fa-solid fa-heart"></i>
-                </button>
-              </div>
-              <h4 class="perfil-inline-062">
-                <i class="fa-solid ${d.icon} perfil-inline-063"></i> ${d.title}
-              </h4>
-            </div>
-            <div class="perfil-inline-064">
-              <a href="destinos.html" class="btn-hero-primary perfil-inline-065">
-                <i class="fa-solid fa-calculator"></i> Cotizar
-              </a>
-              <a href="destinos.html" class="btn-hero-glass perfil-inline-066">
-                Detalles
-              </a>
-            </div>
-          </div>
-        `).join('');
-
-        const countEl = document.getElementById('favCountLabel');
-        if (countEl) countEl.textContent = `${activeFavs.length} destinos guardados`;
-
-        wishlistContainer.querySelectorAll('.btn-remove-fav').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            window.BaqueanoSession.toggleFavorite(id);
-            renderWishlist();
-          });
-        });
-      }
-
-      renderWishlist();
-
-      // 8. Renderizador de Facturas
-      const invoicesContainer = document.getElementById('invoicesListContainer');
-      function renderInvoices() {
-        if (!invoicesContainer) return;
-        const invoices = user.billingHistory || [];
-        invoicesContainer.innerHTML = invoices.map(inv => `
-          <div class="perfil-inline-067">
-            <div>
-              <div class="perfil-inline-068">
-                RECIBO OFICIAL: <strong>${inv.id}</strong> • <i class="fa-solid fa-calendar"></i> ${inv.date}
-              </div>
-              <h4 class="perfil-inline-006">${inv.concept}</h4>
-              <span class="perfil-inline-069">
-                <i class="fa-solid fa-stamp"></i> ${inv.fiscalRegime}
-              </span>
-            </div>
-            <div class="perfil-inline-070">
-              <div class="perfil-inline-071">
-                $${inv.total.toFixed(2)} USD
-              </div>
-              <button type="button" class="btn-hero-glass perfil-inline-072" onclick="alert('Recibo fiscal oficial ${inv.id} descargado con respaldo Leyes No. 1210 y 1211 INTUR.')">
-                <i class="fa-solid fa-download"></i> Descargar Recibo
-              </button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      renderInvoices();
-
-      // 9. Métodos de Pago
-      const paymentsContainer = document.getElementById('paymentMethodsContainer');
-      function renderPayments() {
-        if (!paymentsContainer) return;
-        const methods = user.savedPaymentMethods || [];
-        paymentsContainer.innerHTML = methods.map(pm => `
-          <div class="payment-card-row">
-            <div class="payment-card-left">
-              <i class="fa-brands fa-cc-${pm.brand.toLowerCase()} payment-card-icon"></i>
-              <div>
-                <strong class="perfil-inline-073">${pm.brand} •••• ${pm.last4}</strong>
-                <div class="perfil-inline-074">Expira: ${pm.expiry} • Titular: ${pm.holder}</div>
-              </div>
-            </div>
-            <div class="perfil-inline-075">
-              ${pm.isDefault ? `
-                <span class="perfil-inline-076">
-                  PREDETERMINADA
-                </span>
-              ` : `
-                <button type="button" class="btn-hero-glass btn-set-default perfil-inline-077" data-id="${pm.id}">
-                  Hacer Principal
-                </button>
-              `}
-              <button type="button" class="btn-hero-glass btn-remove-pm perfil-inline-078" data-id="${pm.id}">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        `).join('');
-
-        // Listeners de tarjetas
-        paymentsContainer.querySelectorAll('.btn-set-default').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            user.savedPaymentMethods.forEach(m => m.isDefault = (m.id === id));
-            window.BaqueanoSession.saveUser(user);
-            renderPayments();
-          });
-        });
-
-        paymentsContainer.querySelectorAll('.btn-remove-pm').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            user.savedPaymentMethods = user.savedPaymentMethods.filter(m => m.id !== id);
-            window.BaqueanoSession.saveUser(user);
-            renderPayments();
-          });
-        });
-      }
-
-      renderPayments();
-
-      // 10. Tags de Interés
-      const interestTags = document.querySelectorAll('.interest-tag-btn');
-      interestTags.forEach(t => {
-        t.addEventListener('click', () => {
-          t.classList.toggle('selected');
-          const selected = Array.from(document.querySelectorAll('.interest-tag-btn.selected')).map(el => el.getAttribute('data-tag'));
-          if (!user.travelPreferences) user.travelPreferences = {};
-          user.travelPreferences.interests = selected;
-          window.BaqueanoSession.saveUser(user);
-        });
-      });
-
-      // 11. Formularios de Guardado (Persistencia Dual: Firebase Principal + Supabase Respaldo)
-      const formBasic = document.getElementById('formBasicInfo');
-      if (formBasic) {
-        formBasic.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const submitBtn = formBasic.querySelector('button[type="submit"]');
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
-          }
-          user.name = inputName.value.trim() || resolveDisplayName(user);
-          user.email = inputEmail.value.trim();
-          user.phone = inputPhone.value.trim();
-          if (!user.travelPreferences) user.travelPreferences = {};
-          user.travelPreferences.emergencyContact = inputEmerg.value.trim();
-
-          await window.BaqueanoSession.saveUser(user);
-          updateHeaderUI(user);
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Guardado en Firebase &amp; Supabase!';
-            setTimeout(() => {
-              submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios Personales';
-            }, 2500);
-          }
-        });
-      }
-
-      const formNeeds = document.getElementById('formSpecialNeeds');
-      if (formNeeds) {
-        formNeeds.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const submitBtn = formNeeds.querySelector('button[type="submit"]');
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
-          }
-          const dietary = document.getElementById('inputDietary').value.trim();
-          const access = document.getElementById('inputAccessibility').value.trim();
-          if (!user.travelPreferences) user.travelPreferences = {};
-          user.travelPreferences.dietaryRestrictions = dietary;
-          user.travelPreferences.accessibilityNeeds = access;
-
-          await window.BaqueanoSession.saveUser(user);
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Preferencias sincronizadas!';
-            setTimeout(() => {
-              submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Requerimientos Especiales';
-            }, 2500);
-          }
-        });
-      }
-
-      // 12. Modal de Tique
-      const ticketModal = document.getElementById('ticketModal');
-      const closeTicketBtn = document.getElementById('btnCloseTicketModal');
-      const closeTicketBottom = document.getElementById('btnCloseTicketBottom');
-
-      function openTicketModal(booking) {
-        if (!ticketModal) return;
-        document.getElementById('ticketCode').textContent = booking.id;
-        document.getElementById('ticketDestName').textContent = booking.destinationName;
-        document.getElementById('ticketDate').textContent = booking.date;
-        document.getElementById('ticketDays').textContent = booking.days;
-        document.getElementById('ticketGuide').textContent = booking.guideName || 'Guía Baqueano Comunitario';
-        document.getElementById('ticketMeeting').textContent = booking.meetingPoint || 'Punto de encuentro territorial';
-
-        ticketModal.classList.add('active');
-        ticketModal.setAttribute('aria-hidden', 'false');
-      }
-
-      function closeTicketModal() {
-        if (ticketModal) {
-          ticketModal.classList.remove('active');
-          ticketModal.setAttribute('aria-hidden', 'true');
-        }
-      }
-
-      if (closeTicketBtn) closeTicketBtn.addEventListener('click', closeTicketModal);
-      if (closeTicketBottom) closeTicketBottom.addEventListener('click', closeTicketModal);
-
-      // 13. Modal de Añadir Tarjeta
-      const paymentModal = document.getElementById('paymentModal');
-      const btnAddPm = document.getElementById('btnAddPaymentMethod');
-      const btnClosePm = document.getElementById('btnClosePaymentModal');
-      const formCard = document.getElementById('formAddCard');
-
-      if (btnAddPm && paymentModal) {
-        btnAddPm.addEventListener('click', () => {
-          paymentModal.classList.add('active');
-          paymentModal.setAttribute('aria-hidden', 'false');
-        });
-      }
-
-      if (btnClosePm && paymentModal) {
-        btnClosePm.addEventListener('click', () => {
-          paymentModal.classList.remove('active');
-          paymentModal.setAttribute('aria-hidden', 'true');
-        });
-      }
-
-      if (formCard) {
-        formCard.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const cardNum = document.getElementById('cardNumber').value.replace(/\s+/g, '');
-          const cardHolder = document.getElementById('cardHolder').value.trim();
-          const cardExp = document.getElementById('cardExpiry').value.trim();
-          const last4 = cardNum.slice(-4) || '9988';
-
-          const newPm = {
-            id: 'pm-' + Date.now(),
-            brand: cardNum.startsWith('4') ? 'Visa' : 'Mastercard',
-            last4: last4,
-            holder: cardHolder,
-            expiry: cardExp,
-            isDefault: (user.savedPaymentMethods || []).length === 0
-          };
-
-          if (!user.savedPaymentMethods) user.savedPaymentMethods = [];
-          user.savedPaymentMethods.push(newPm);
-          await window.BaqueanoSession.saveUser(user);
-
-          formCard.reset();
-          if (paymentModal) {
-            paymentModal.classList.remove('active');
-            paymentModal.setAttribute('aria-hidden', 'true');
-          }
-          renderPayments();
-        });
-      }
-
-      // 14. Cambiar Cuenta / Iniciar Sesión
-      const btnSwitchAcc = document.getElementById('btnSwitchAccount');
-      if (btnSwitchAcc) {
-        btnSwitchAcc.addEventListener('click', async () => {
-          try {
-            await window.BaqueanoSession.loginWithGoogle();
-            window.location.reload();
-          } catch (error) {
-            alert('No fue posible validar la cuenta con Google: ' + error.message);
-          }
-        });
-      }
-
-      // 15. Cierre de Sesión 100% Funcional con Notificación Toast Representativa
-      const btnLogout = document.getElementById('btnLogoutUser');
-      if (btnLogout) {
-        btnLogout.addEventListener('click', async (e) => {
-          e.preventDefault();
-          btnLogout.disabled = true;
-          btnLogout.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cerrando...';
-
-          try {
-            if (window.BaqueanoSession && typeof window.BaqueanoSession.logout === 'function') {
-              await window.BaqueanoSession.logout();
-            } else {
-              localStorage.removeItem('baqueano_user_session_v1');
-              sessionStorage.clear();
-            }
-          } catch (err) {
-            console.warn('[Baqueano Session] Aviso al cerrar sesión:', err);
-            localStorage.removeItem('baqueano_user_session_v1');
-          }
-
-          // Desplegar notificación llamativa y representativa
-          const toast = document.getElementById('baqueanoLogoutToast');
-          if (toast) {
-            toast.style.display = 'block';
-            // Trigger animation frame for CSS transition
-            requestAnimationFrame(() => {
-              toast.classList.add('show');
-            });
-
-            // Auto-desaparecer tras 1.9 segundos y redirigir
-            setTimeout(() => {
-              toast.classList.remove('show');
-              setTimeout(() => {
-                window.location.href = 'index.html';
-              }, 400);
-            }, 1900);
-          } else {
-            window.location.href = 'index.html';
-          }
-        });
-      }
-
-      const btnChangeAv = document.getElementById('btnChangeAvatar');
-      if (btnChangeAv) {
-        btnChangeAv.addEventListener('click', async () => {
-          const url = prompt('Ingresa el enlace o nombre de tu nueva foto de explorador:', 'assets/images/logo.png');
-          if (url && url.trim()) {
-            user.avatar = url.trim();
-            await window.BaqueanoSession.saveUser(user);
-            const avImg = document.getElementById('userHeaderAvatar');
-            if (avImg) avImg.src = user.avatar;
-          }
+      // Mobile nav
+      const mobileToggle = document.getElementById('mobileNavToggle');
+      const navMenu = document.getElementById('navLinksMenu');
+      if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('nav-active');
+          mobileToggle.setAttribute('aria-expanded', isOpen);
+          mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
         });
       }
     });
   </script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 </body>
 </html>

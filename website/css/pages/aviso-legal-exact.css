@@ -1,6 +1,797 @@
-/* 🎯 POR QUÉ: igualar la referencia legal. ⚙️ CÓMO: hero panorámico, resumen, índice fijo y artículos compactos. 📦 QUÉ: seis ejes legales, normativa, contacto y versiones. */
-:root{--ln:#092b4b;--lg:#087b50;--lo:#f65e01;--lb:#176bd6}.page-aviso-legal{background:#f6fafc;color:var(--ln)}.page-aviso-legal .institucional-hero{height:34vh;min-height:340px;max-height:430px}.page-aviso-legal .institucional-hero-bg{content:url('../../assets/images/footer-nicaragua-panorama.png');filter:saturate(1.12) contrast(1.03)}.page-aviso-legal .institucional-hero-gradient{background:linear-gradient(90deg,#021522f2,#03243188 55%,#031b2814)}.page-aviso-legal .institucional-hero-content{top:52%;left:max(7vw,calc((100vw - 1420px)/2));width:min(690px,86vw);transform:translateY(-48%)}.page-aviso-legal .hero-badge-pill{border:0;background:transparent;padding:0;letter-spacing:.14em;text-transform:uppercase}.page-aviso-legal .hero-headline{font-size:clamp(2.7rem,5vw,4.9rem);line-height:.9}.page-aviso-legal .highlight-sunset{display:block;color:var(--lo);font-family:"Brush Script MT","Segoe Script",cursive}.page-aviso-legal .hero-subtext{max-width:650px;font-size:1rem;line-height:1.4}
-.legal-essential{position:relative;z-index:4;width:min(1420px,94vw);margin:-20px auto 1rem;padding:.8rem;border-radius:14px;background:#fff;box-shadow:0 9px 25px #092b4b1c}.legal-essential-head{display:flex;align-items:center;gap:.8rem;padding:.1rem .6rem .6rem}.legal-essential-head>i{display:grid;width:48px;height:48px;place-items:center;border-radius:8px;color:#fff;background:#076e68;font-size:1.5rem}.legal-essential h2,.legal-essential p{margin:.1rem 0}.legal-essential h2{font-size:1.45rem}.legal-essential-head p{font-size:.76rem}.legal-essential-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.legal-essential-grid article{min-height:160px;padding:1rem .7rem;border:1px solid #dfe8ee;border-radius:10px;text-align:center;background:#fff;box-shadow:0 4px 12px #092b4810}.legal-essential-grid i{color:var(--lg);font-size:2rem}.legal-essential-grid article:nth-child(2) i,.legal-essential-grid article:nth-child(5) i{color:var(--lo)}.legal-essential-grid article:nth-child(4) i{color:var(--lb)}.legal-essential-grid h3{font-size:.85rem}.legal-essential-grid p{font-size:.72rem;line-height:1.35}
-.page-aviso-legal .institucional-layout{grid-template-columns:300px 1fr;gap:12px;max-width:1420px;padding-top:0}.page-aviso-legal .institucional-sidebar{top:86px;height:max-content;padding:.75rem;border:1px solid #dce7ed;border-radius:12px;background:linear-gradient(#fff,#f2faff);box-shadow:0 7px 20px #092b4815}.page-aviso-legal .toc-header-bar{margin-bottom:.5rem}.page-aviso-legal .toc-progress-track,.page-aviso-legal .toc-jump-controls{display:none}.page-aviso-legal .sidebar-nav-link{margin:.25rem 0;padding:.72rem;border-radius:8px;font-size:.74rem}.page-aviso-legal .sidebar-nav-link.active{color:#fff;background:#075c73}.page-aviso-legal .institucional-content{display:grid;gap:10px}.page-aviso-legal .legal-document-meta{grid-row:1;display:flex;gap:1.3rem;margin:0;padding:.6rem 0;color:#fff;background:transparent;position:absolute;top:300px;left:max(7vw,calc((100vw - 1420px)/2));z-index:5;font-size:.72rem}.page-aviso-legal .legal-card{margin:0!important;padding:.85rem 1rem!important;border:1px solid #dde7ed!important;border-radius:11px!important;background:#fff!important;box-shadow:0 5px 16px #092b4813!important}.page-aviso-legal .legal-card-num{display:grid;float:left;width:52px;height:52px;margin-right:.8rem;place-items:center;border-radius:50%;color:#fff;background:linear-gradient(135deg,#087b50,#075272);font-weight:900}.page-aviso-legal .legal-card-title{margin:.15rem 0 .4rem!important;color:var(--ln)!important;font-size:1.15rem!important}.page-aviso-legal .legal-card-title i{display:none}.page-aviso-legal .legal-card-body{font-size:.72rem;line-height:1.35}.page-aviso-legal .legal-card-body p{margin:.3rem 0}.page-aviso-legal .legal-card-body ul{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.6rem 0;padding:0;list-style:none}.page-aviso-legal .legal-card-body li{padding:.65rem;border:1px solid #e1e8ed;border-radius:8px;background:#fff}.page-aviso-legal .legal-callout-box{padding:.55rem!important}.page-aviso-legal #independencia .legal-card-body{display:grid;grid-template-columns:1fr 280px;gap:10px}.page-aviso-legal #marco .legal-card-body ul{grid-template-columns:repeat(4,1fr)}.page-aviso-legal #propiedad{background:linear-gradient(100deg,#fff 72%,#fff8e8)!important}.page-aviso-legal #contacto .legal-callout-box>div{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}.legal-related{display:grid;grid-template-columns:1.2fr 1fr;gap:10px}.legal-related article{padding:.85rem;border-radius:10px;background:#fff;box-shadow:0 5px 16px #092b4813}.legal-related h3{margin:0 0 .4rem}.legal-related article>div{display:flex;gap:.45rem;flex-wrap:wrap}.legal-related a{padding:.55rem .7rem;border:1px solid #dbe5eb;border-radius:8px;color:var(--ln);font-size:.68rem;font-weight:800;text-decoration:none}.legal-related button{padding:.6rem .8rem;border:0;border-radius:8px;color:#fff;background:#075c73}.page-aviso-legal .footer-biz-register-card{display:none!important}
-@media(max-width:950px){.legal-essential-grid{grid-template-columns:repeat(3,1fr)}.page-aviso-legal .institucional-layout{grid-template-columns:1fr}.page-aviso-legal .institucional-sidebar{position:static}.page-aviso-legal .legal-document-meta{position:static;color:var(--ln)}.page-aviso-legal .legal-card-body ul{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:650px){.page-aviso-legal .institucional-hero{height:68vh;min-height:560px}.page-aviso-legal .institucional-hero-content{top:46%}.legal-essential{margin-top:-15px}.legal-essential-grid{display:flex;overflow-x:auto}.legal-essential-grid article{flex:0 0 68vw}.page-aviso-legal .institucional-layout{padding-inline:.7rem}.page-aviso-legal .sidebar-nav{display:flex;overflow-x:auto}.page-aviso-legal .sidebar-nav-link{min-width:190px}.page-aviso-legal .legal-card-body ul,.page-aviso-legal #independencia .legal-card-body,.page-aviso-legal #contacto .legal-callout-box>div,.legal-related{grid-template-columns:1fr}.page-aviso-legal .legal-document-meta{display:block}}
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — AVISO LEGAL & PROPIEDAD INTELECTUAL CSS
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proporcionar un diseño visual de alta fidelidad 1:1 para aviso-legal.html,
+//   garantizando claridad jurídica, confianza ciudadana y protección intelectual
+//   con la paleta oficial de BAQUEANO (#165D6F, #F65E01, #F4E6C1, #0F172A).
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Maquetación responsiva con CSS Grid y Flexbox.
+// - Efectos de elevación, esquinas redondeadas modernas, tarjetas de síntesis jurídica,
+//   acordeones expandibles, callouts de advertencia y compatibilidad móvil total.
+// - Cero uso de .withOpacity() o sintaxis deprecada; uso de colores armónicos con rgba.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
+// - Clases especializadas para el hero con banner panorámico de Nicaragua,
+//   la barra de 6 puntos esenciales, el sidebar con índice interactivo y estela monolítica,
+//   las 6 secciones legales con badges de leyes nicaragüenses y footer de transparencia.
+// ============================================================================
+
+/* Hero Section */
+.legal-hero-section {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(22, 93, 111, 0.82) 60%, rgba(15, 23, 42, 0.92) 100%),
+              url('../../assets/images/heroes/nicaragua_hero_panoramico.jpg') center/cover no-repeat;
+  color: #FFFFFF;
+  padding: 50px 24px 70px 24px;
+  border-bottom: 3px solid #F65E01;
+}
+
+.legal-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.legal-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(22, 93, 111, 0.4);
+  border: 1px solid rgba(244, 230, 193, 0.4);
+  color: #F4E6C1;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.legal-hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 14px 0;
+  color: #FFFFFF;
+}
+
+.legal-hero-title span {
+  color: #F65E01;
+  display: block;
+}
+
+.legal-hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #E2E8F0;
+  max-width: 780px;
+  margin: 0 0 24px 0;
+}
+
+.legal-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.legal-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #CBD5E1;
+}
+
+.legal-meta-pill strong {
+  color: #FFFFFF;
+}
+
+.legal-stamp-floating {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.nicaragua-stamp-text {
+  font-family: 'Brush Script MT', cursive, sans-serif;
+  font-size: 1.7rem;
+  color: #F4E6C1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transform: rotate(-4deg);
+}
+
+/* Lo esencial del Aviso Legal Card */
+.essential-section {
+  max-width: 1200px;
+  margin: -35px auto 40px auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.essential-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid #E2E8F0;
+  padding: 28px 30px;
+}
+
+.essential-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.essential-icon-box {
+  width: 44px;
+  height: 44px;
+  background: rgba(22, 93, 111, 0.1);
+  color: #165D6F;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.essential-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.essential-subtitle {
+  font-size: 0.92rem;
+  color: #64748B;
+  margin: 4px 0 0 0;
+}
+
+.essential-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.essential-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.essential-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+  border-color: #CBD5E1;
+}
+
+.essential-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+
+.item-icon-teal { background: rgba(22, 93, 111, 0.12); color: #165D6F; }
+.item-icon-orange { background: rgba(246, 94, 1, 0.12); color: #F65E01; }
+.item-icon-green { background: rgba(16, 185, 129, 0.12); color: #10B981; }
+.item-icon-blue { background: rgba(2, 132, 199, 0.12); color: #0284C7; }
+.item-icon-amber { background: rgba(217, 119, 6, 0.12); color: #D97706; }
+.item-icon-emerald { background: rgba(5, 150, 105, 0.12); color: #059669; }
+
+.essential-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.essential-item-text {
+  font-size: 0.78rem;
+  color: #64748B;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Layout Principal de 2 Columnas */
+.legal-main-layout {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Sidebar Izquierdo */
+.legal-sidebar {
+  position: sticky;
+  top: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar-index-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid #E2E8F0;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.sidebar-index-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #E2E8F0;
+  margin-bottom: 12px;
+}
+
+.sidebar-index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-index-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.sidebar-index-link .num-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-index-link .idx-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94A3B8;
+}
+
+.sidebar-index-link:hover {
+  background: #F1F5F9;
+  color: #165D6F;
+}
+
+.sidebar-index-link.active {
+  background: #165D6F;
+  color: #FFFFFF;
+}
+
+.sidebar-index-link.active .idx-num {
+  color: #F4E6C1;
+}
+
+.sidebar-index-link.active .arrow {
+  color: #FFFFFF;
+}
+
+/* Banner de Piedra / Petroglifo Indígena */
+.sidebar-petroglyph-banner {
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  background: #0F172A;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  min-height: 280px;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.petroglyph-banner-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.petroglyph-banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.85) 100%);
+}
+
+.petroglyph-banner-text {
+  position: relative;
+  z-index: 2;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* Columna de Contenido Derecho */
+.legal-content-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.legal-section-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
+  padding: 26px 28px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+.legal-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.legal-card-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-num-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #165D6F;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.legal-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.legal-chevron {
+  color: #94A3B8;
+  font-size: 1.1rem;
+}
+
+.legal-card-body-layout {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 20px;
+  align-items: center;
+}
+
+.legal-card-body-full {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legal-card-text {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+.legal-card-thumb {
+  width: 100%;
+  height: 110px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #E2E8F0;
+}
+
+/* 4 Mini Cards de Naturaleza de Plataforma */
+.platform-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.platform-feature-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.platform-feature-box .feat-icon {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.platform-feature-box .feat-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.platform-feature-box .feat-desc {
+  font-size: 0.72rem;
+  color: #64748B;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* Independencia Institucional Callout */
+.independence-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.alert-callout-box {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-left: 4px solid #F65E01;
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.alert-callout-box .alert-icon {
+  width: 28px;
+  height: 28px;
+  background: #F65E01;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.alert-callout-box .alert-text {
+  font-size: 0.82rem;
+  color: #92400E;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.alert-callout-box .alert-text strong {
+  color: #78350F;
+}
+
+/* Marco Normativo - 4 Leyes */
+.laws-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.law-card-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.law-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.law-card-icon {
+  font-size: 1.2rem;
+}
+
+.law-card-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0;
+}
+
+.law-card-subtitle {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #165D6F;
+  margin: 0 0 6px 0;
+}
+
+.law-card-desc {
+  font-size: 0.74rem;
+  color: #64748B;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Propiedad Intelectual Layout */
+.ip-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.ip-brand-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ip-brand-logo {
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.ip-brand-legend {
+  font-size: 0.76rem;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Contacto Legal Pills */
+.legal-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.legal-contact-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.legal-contact-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(22, 93, 111, 0.1);
+  color: #165D6F;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.legal-contact-info .contact-lbl {
+  font-size: 0.72rem;
+  color: #64748B;
+  display: block;
+}
+
+.legal-contact-info .contact-val {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+/* Sección Inferior de Documentos & Transparencia */
+.legal-bottom-strip {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.legal-docs-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+
+.legal-docs-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+
+.legal-docs-sub {
+  font-size: 0.82rem;
+  color: #64748B;
+  margin: 0 0 16px 0;
+}
+
+.legal-docs-buttons-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.legal-doc-btn {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #165D6F;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.legal-doc-btn:hover {
+  background: #165D6F;
+  color: #FFFFFF;
+}
+
+.transparency-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.transparency-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+
+.transparency-sub {
+  font-size: 0.82rem;
+  color: #64748B;
+  margin: 0 0 14px 0;
+}
+
+.transparency-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.transparency-version-pill {
+  font-size: 0.82rem;
+  color: #64748B;
+}
+
+.transparency-version-pill strong {
+  color: #0F172A;
+}
+
+.pdf-download-btn {
+  background: #165D6F;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.pdf-download-btn:hover {
+  background: #0F172A;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .essential-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .legal-main-layout {
+    grid-template-columns: 1fr;
+  }
+  .legal-sidebar {
+    position: static;
+  }
+  .platform-features-grid, .laws-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .legal-bottom-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .legal-hero-title {
+    font-size: 1.9rem;
+  }
+  .essential-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .legal-card-body-layout, .independence-layout, .ip-layout {
+    grid-template-columns: 1fr;
+  }
+  .platform-features-grid, .laws-cards-grid, .legal-contact-grid, .legal-docs-buttons-row {
+    grid-template-columns: 1fr;
+  }
+}

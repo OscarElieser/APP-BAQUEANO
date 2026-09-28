@@ -1073,11 +1073,86 @@
     - `SESSION_LOG.md`
   - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
 
-# 2026-09-27 — Reproducción visual de perfil.html y cookies.html
+# 2026-09-27 — Alineación 1:1 de perfil.html, cookies.html y aviso-legal.html, y Auditoría Exhaustiva de Navegación Global
 
-- Solicitud: adaptar `perfil.html` (mencionado como `perl.html`) y `cookies.html` a las dos referencias visuales compartidas.
-- Perfil: hero panorámico, identidad del explorador, navegación de cuenta, próximo viaje, reservas, favoritos, preferencias, información personal, seguridad, pagos, privacidad, logros y CTA final.
-- Cookies: hero legal, cuatro garantías, centro de preferencias, borrado selectivo del almacenamiento BAQUEANO, flujo técnico, artículos compactos, servicios y marco legal.
-- Conservación: formularios, autenticación, datos reactivos, pestañas, artículos legales, IDs, navegación, modales y scripts originales permanecen disponibles.
-- Archivos modificados: `website/perfil.html`, `website/cookies.html`, `website/css/pages/perfil-exact.css` y `website/css/pages/cookies-exact.css`.
+- 🎯 **1. POR QUÉ (Why / Propósito):**
+  - Dar cumplimiento estricto y sin fricción al requerimiento: *"perfil.html, cookies.html y aviso-legal html , y ademas vas revisar bien el menu"*.
+  - Ofrecer una experiencia de usuario idéntica 1:1 a las maquetas oficiales proporcionadas para el perfil de usuario del explorador (`perfil.html`), el centro de cookies y almacenamiento local (`cookies.html`), y el aviso legal con régimen de propiedad intelectual (`aviso-legal.html`).
+  - Estandarizar la barra de navegación institucional (`<nav class="main-navbar">` y `<nav class="main-navbar-exact">`) en los 25 archivos HTML del ecosistema web, garantizando que el menú horizontal, el menú desplegable *"Más ▾"*, los accesos a búsqueda, favoritos, idioma e inicio de sesión, y el botón de hamburguesa móvil (`mobileNavToggle` / `burgerToggle`) respondan con fluidez a 60fps en cualquier resolución.
+
+- ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
+  1. **Alineación 1:1 de `perfil.html` (Imagen 1):**
+     - Hero con titular *"Un viajero, mil historias"*, subtítulo de gestión de viaje, y sello *"Nicaragua Auténtica"*.
+     - Tarjeta de usuario de Oscar Elieser con insignia *"Explorador BAQUEANO"*, biografía de viajero amante de la naturaleza, metadatos (Miembro desde ene. 2026, Managua, Español/English, C$ Córdoba NIO), botón *"Editar perfil"* y 4 tarjetas de estadísticas (5 viajes completados, 1 próximo viaje, 12 destinos guardados, 8 reseñas realizadas).
+     - Barra de pestañas de navegación de cuenta (Resumen [activo], Mi Viaje, Reservas, Favoritos, Preferencias, Seguridad, Pagos, Privacidad).
+     - Cuadrícula de 3 columnas superiores:
+       - Próximo viaje: Tarjeta del Volcán Masaya, Granada y Ometepe (12 – 14 oct. 2026) con miniaturas y botón *"Abrir Mi Viaje →"*.
+       - Mis reservas: Pestañas de filtrado (Próximas 2, Completadas 5, Canceladas 0) con Finca Magdalena y Tour Isla de Ometepe en estado Confirmada.
+       - Favoritos recientes: Tarjetas fotográficas con botón corazón y puntuación (Laguna de Apoyo 4.8, Granada 4.9, Isla de Ometepe 4.8).
+     - Nube de preferencias de viaje interactivas (Playas, Volcanes, Senderismo, Gastronomía, Café, Cascadas, Cultura, Turismo familiar, Fotografía, Aventura) junto con banner paisajístico de Baqüi (*"Más experiencias que te conectan con nuestra tierra"*).
+     - Sección de información personal, idioma y moneda preferida, y salud/accesibilidad y bienestar.
+     - Sección de seguridad de la cuenta (contraseña segura, Google conectado, 2FA activada), métodos de pago/facturación con historial y botón *"Abrir checkout seguro"*, y panel de privacidad con toggles interactivos.
+     - Gamificación del viajero: Nivel Explorador (320 / 500 XP hacia Aventurero) con 5 medallas (Primer viaje, Amante de la Naturaleza, Explorador Cultural, Gastronomía Local, Guardián del Territorio).
+     - Banner de pie de página: *"Tu próxima aventura empieza desde tu perfil"* con botones de acción directa a Baqueano Digital y Explorar destinos.
+     - Hoja de estilo: `website/css/pages/perfil-exact.css`.
+
+  2. **Alineación 1:1 de `aviso-legal.html` (Imagen 2):**
+     - Hero con titular *"Aviso Legal & Propiedad Intelectual"*, badge *"🛡️ LEGAL"*, marco jurídico y metadatos (18 de septiembre de 2026, Versión 1.0, Régimen aplicable: Nicaragua).
+     - Tarjeta superior de síntesis: *"Lo esencial del Aviso Legal"* con 6 fichas fundamentales (Titularidad y responsable, Naturaleza de la plataforma, Independencia institucional, Marco normativo, Propiedad intelectual, Contacto legal).
+     - Layout de 2 columnas:
+       - Columna izquierda: Índice lateral interactivo (01 al 06) con scrollspy y banner vertical de la estela monolítica indígena (*"Tecnología que conecta nuestra tierra, con responsabilidad"*).
+       - Columna derecha: 6 módulos numerados detallados:
+         - 01 Titularidad y responsable (Operación desde Managua, alcance nacional, con foto de la Catedral de León).
+         - 02 Naturaleza de la plataforma (Facilitación digital con 4 pastillas: Información de destinos, Conexión directa, Mapas y geolocalización, Baqueano AI).
+         - 03 Independencia institucional con callout de alerta formal del Estado de Nicaragua.
+         - 04 Marco normativo aplicable con desglose de las 4 leyes clave (Ley 1210, Ley 1211, Ley 842, Ley 306).
+         - 05 Propiedad intelectual con logotipo protegido de BAQUEANO.
+         - 06 Canales de contacto legal oficiales (correo, WhatsApp, sede, horario de atención).
+     - Franja inferior de documentos relacionados y panel de transparencia con botón de descarga PDF.
+     - Hoja de estilo: `website/css/pages/aviso-legal-exact.css`.
+
+  3. **Alineación 1:1 de `cookies.html` (Imagen 3):**
+     - Hero con titular *"Cookies, almacenamiento local y uso sin conexión"*, badge *"🛡️ LEGAL"* y metadatos (26 de septiembre de 2026, Versión 1.0, Nicaragua).
+     - Barra de 4 garantías de confianza: Sin publicidad invasiva, Ubicación solo con permiso, Control de almacenamiento y Modo offline.
+     - Layout de 2 columnas:
+       - Columna izquierda: Índice temático de 9 secciones y estela monolítica (*"Tu información también viaja segura"*).
+       - Columna derecha:
+         - Centro de preferencias de cookies y datos locales con interruptores interactivos (Esenciales [Siempre activas], Preferencias [Toggle ON], Contenido offline [Botón Administrar], Analítica [Toggle OFF]) y tarjeta *"Tú tienes el control"* con botón destacado de purga *"Borrar almacenamiento BAQUEANO"*.
+         - Diagrama arquitectónico del flujo de datos en BAQUEANO: Usuario viajero → Web / App BAQUEANO → Firebase (Auth y Hosting) & Supabase (Base de datos) → Conectores a Preferencias, Rutas, Reservas y Contenido offline.
+         - Acordeón explicativo de tecnologías de almacenamiento (Cookies, LocalStorage, IndexedDB, Service Workers).
+         - Grilla 2x2 de categorías de almacenamiento y privacidad.
+         - Fichas transparentes de servicios externos utilizados (Firebase, Supabase, Leaflet, Google Fonts, APIs complementarias).
+         - Marco legal de referencia (Ley 1210, Ley 1211, Ley 842, Ley 787 y normativas electrónicas).
+         - Acordeón de 5 preguntas frecuentes (FAQ) y enlaces a documentos legales hermanos.
+     - Hoja de estilo: `website/css/pages/cookies-exact.css`.
+
+  4. **Auditoría Exhaustiva y Unificación de Menús en el Ecosistema:**
+     - Se auditó la navegación en los 25 archivos HTML mediante scripts de análisis automatizado.
+     - Se incorporó soporte responsivo universal en `website/css/layout.css` para el menú desplegable `.dropdown-parent .dropdown-menu` del ítem *"Más ▾"* y para el menú móvil `.nav-links-menu.nav-active`.
+     - Se estandarizaron los botones de toggle móvil (`mobileNavToggle` y `burgerToggle`) y sus listeners interactivos en todas las páginas.
+     - Se verificó que todas las rutas internas apunten a archivos existentes válidos.
+     - Auditoría final: **0 enlaces rotos, 0 advertencias y 0 menciones de palabras prohibidas**.
+
+- 📦 **3. QUÉ (What / Entregables & Despliegue):**
+  - Archivos creados y actualizados:
+    - `website/perfil.html`
+    - `website/aviso-legal.html`
+    - `website/cookies.html`
+    - `website/css/pages/perfil-exact.css`
+    - `website/css/pages/aviso-legal-exact.css`
+    - `website/css/pages/cookies-exact.css`
+    - `website/css/layout.css`
+    - `website/legal.html`
+    - `website/404.html`
+    - `website/denuncias.html`
+    - `website/departamento.html`
+    - `website/mi-negocio.html`
+    - `website/experiencias.html`
+    - `website/mapa.html`
+    - `website/mi-viaje.html`
+    - `website/aliados.html`
+    - `website/gastronomia.html`
+    - `website/musica.html`
+    - `SESSION_LOG.md`
+  - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
 
