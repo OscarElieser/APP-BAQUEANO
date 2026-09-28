@@ -11,208 +11,223 @@
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 - Almacenamiento local (localStorage) para persistencia sin conexión.
-- Calculadora presupuestaria en tiempo real bimoneda (C$ NIO y $ USD).
-- Lista de equipaje interactiva con guardado de estado.
-- Conexión con Baqueano Digital IA para generación instantánea de rutas.
+- Todos los botones funcionales a través de mi-viaje-interactions.js:
+  Ver en mapa, Guardar, Editar día, Modificar con IA, Guardar en Mi Viaje,
+  Compartir ruta, Descargar PDF, Generar QR, Reservar todo, Ver detalle,
+  Contactar, Reservar, tabs del mapa con Leaflet embebido.
+- Widget de clima contextual.
+- Mapa de ruta interactivo con marcadores numerados naranja.
 
 📦 3. QUÉ (WHAT / ENTREGABLES):
-- Navbar horizontal unificada.
-- Tablero de 4 herramientas: Itinerario Dinámico, Calculadora de Gastos,
-  Checklist de Equipaje y Mis Destinos Guardados.
+- Navbar global oficial.
+- Itinerario dinámico con tarjetas de días.
+- Bloque "Tu ruta está lista" con acciones completas.
+- Sección de recomendaciones verificadas.
+- Widget de clima en ruta.
+- Mapa con 5 pestañas (Mapa, Itinerario, Hospedajes, Comida, Atractivos).
 - Modal SOS y footer institucional.
 ============================================================================
 -->
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Mi Viaje &amp; Planificador | Baqueano Nicaragua</title>
+  <title>Mi Viaje & Planificador | Baqueano Nicaragua</title>
   <meta name="description" content="Planificá tu aventura por Nicaragua: armá tu itinerario día a día, calculá tu presupuesto y guardá tus destinos favoritos.">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
 
-  <!-- Google Fonts Oficiales -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome 6 Icons -->
+  <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <!-- Estilos del Ecosistema -->
   <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
 
   <style>
-    .page-viaje-exact {
-      background-color: #F8FAFC;
-      color: #1E293B;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
+    /* ── Variables de Página ── */
+    .page-viaje-exact { background: #F8FAFC; color: #1E293B; font-family: 'Inter', system-ui, sans-serif; }
 
+    /* ── Hero ── */
     .viaje-hero {
-      background: linear-gradient(90deg, rgba(11, 37, 58, 0.94) 0%, rgba(22, 93, 111, 0.82) 100%),
-                  url('assets/images/destinos/Posada Rural San Ramón Ometepe.avif');
-      background-size: cover;
-      background-position: center;
-      padding: 70px 0 50px;
-      color: #FFFFFF;
+      background: linear-gradient(90deg, rgba(11,37,58,.94) 0%, rgba(22,93,111,.82) 100%),
+                  url('assets/images/destinos/Posada Rural San Ramón Ometepe.avif') center/cover;
+      padding: 70px 0 50px; color: #FFF;
     }
+    .viaje-hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 900; margin: 0 0 12px; }
+    .viaje-hero p  { font-size: 1.05rem; color: #CBD5E1; max-width: 620px; margin: 0; }
 
-    .viaje-hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 900;
-      margin: 0 0 12px;
-    }
+    /* ── Layout ── */
+    .viaje-body-layout { display: grid; grid-template-columns: 1fr 300px; gap: 28px; padding: 36px 0 60px; align-items: start; }
+    @media (max-width: 900px) { .viaje-body-layout { grid-template-columns: 1fr; } }
 
-    .viaje-hero p {
-      font-size: 1.05rem;
-      color: #CBD5E1;
-      max-width: 620px;
-      margin: 0;
-    }
-
-    .viaje-dashboard-section {
-      padding: 40px 0 60px;
-    }
-
-    .viaje-tabs-nav {
-      display: flex;
-      gap: 12px;
-      border-bottom: 2px solid #E2E8F0;
-      margin-bottom: 30px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
+    /* ── Pestañas Planificador ── */
+    .viaje-tabs-nav { display: flex; gap: 10px; border-bottom: 2px solid #E2E8F0; margin-bottom: 24px; overflow-x: auto; padding-bottom: 3px; }
     .viaje-tab-btn {
-      background: none;
-      border: none;
-      padding: 10px 20px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #64748B;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -6px;
-      transition: all 0.2s;
-      white-space: nowrap;
+      background: none; border: none; padding: 9px 18px; font-size: .9rem; font-weight: 700;
+      color: #64748B; cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+      border-bottom: 3px solid transparent; margin-bottom: -5px; transition: all .2s; white-space: nowrap;
     }
+    .viaje-tab-btn.active { color: #F65E01; border-bottom-color: #F65E01; }
+    .viaje-tab-panel { display: none; }
+    .viaje-tab-panel.active { display: block; animation: fadeUp .3s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-    .viaje-tab-btn.active {
-      color: #F65E01;
-      border-bottom-color: #F65E01;
-    }
-
-    .viaje-tab-panel {
-      display: none;
-    }
-
-    .viaje-tab-panel.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Tarjetas del Planificador */
+    /* ── Tarjetas del Itinerario ── */
     .itinerary-day-card {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      background: #FFF; border: 1px solid #E2E8F0; border-radius: 14px;
+      padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.04);
     }
-
     .itinerary-day-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #F1F5F9;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #F1F5F9;
     }
+    .itinerary-day-badge { background: rgba(246,94,1,.1); color: #F65E01; padding: 4px 12px; border-radius: 999px; font-weight: 700; font-size: .8rem; }
+    .day-location-label  { font-size: .82rem; color: #64748B; }
+    .day-extra-tag       { font-size: .78rem; color: #165D6F; font-weight: 700; margin: 6px 0 10px; }
+    .day-stats-row       { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+    .day-stat            { font-size: .8rem; color: #475569; display: flex; align-items: center; gap: 5px; }
 
-    .itinerary-day-badge {
-      background: rgba(246, 94, 1, 0.1);
-      color: #F65E01;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.8rem;
+    /* ── Botones de Acción por Día ── */
+    .viaje-action-row    { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-day-map, .btn-day-save, .btn-day-edit {
+      border: 1.5px solid; padding: 7px 14px; border-radius: 8px; font-size: .82rem;
+      font-weight: 600; cursor: pointer; display: inline-flex; align-items: center;
+      gap: 6px; transition: all .18s; font-family: 'Inter', sans-serif; background: none;
     }
+    .btn-day-map  { border-color: #165D6F; color: #165D6F; }
+    .btn-day-map:hover { background: #165D6F; color: #FFF; }
+    .btn-day-save { border-color: #E2E8F0; color: #64748B; }
+    .btn-day-save:hover, .btn-day-save.saved { border-color: #EF4444; color: #EF4444; }
+    .btn-day-edit { border-color: #F65E01; color: #F65E01; background: #FFF; }
+    .btn-day-edit:hover { background: #F65E01; color: #FFF; }
 
-    .budget-calc-box {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 600px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    /* ── Bloque Ruta Lista ── */
+    .route-ready-card {
+      background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
     }
+    .route-ready-body h3  { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0B253A; margin: 0 0 6px; }
+    .route-ready-body p   { font-size: .85rem; color: #64748B; margin: 0 0 14px; max-width: 420px; }
+    .btn-modify-ai {
+      display: inline-flex; align-items: center; gap: 8px; background: #165D6F;
+      color: #FFF; border: none; padding: 10px 22px; border-radius: 10px;
+      font-weight: 700; font-size: .9rem; cursor: pointer; font-family: 'Montserrat', sans-serif;
+      transition: background .2s; text-decoration: none;
+    }
+    .btn-modify-ai:hover { background: #0B253A; color: #FFF; }
+    .route-logo-icon { width: 72px; height: 72px; flex-shrink: 0; }
 
-    .calc-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px dashed #E2E8F0;
-      font-size: 0.9rem;
+    /* ── Botones de Acción Global ── */
+    .route-action-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+    .btn-route-action {
+      border: 1.5px solid #E2E8F0; background: #FFF; color: #475569;
+      padding: 9px 16px; border-radius: 9px; font-size: .84rem; font-weight: 600;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+      transition: all .18s; font-family: 'Inter', sans-serif;
     }
+    .btn-route-action:hover { border-color: #165D6F; color: #165D6F; background: rgba(22,93,111,.05); }
+    .btn-reserve-all {
+      background: #F65E01; color: #FFF; border: none; padding: 10px 22px;
+      border-radius: 10px; font-weight: 700; font-size: .92rem; cursor: pointer;
+      font-family: 'Montserrat', sans-serif; display: inline-flex; align-items: center;
+      gap: 8px; transition: background .2s; margin-left: auto;
+    }
+    .btn-reserve-all:hover { background: #D94E00; }
 
-    .calc-total {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 0 0;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #165D6F;
-    }
+    /* ── Calculadora ── */
+    .budget-calc-box { background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; max-width: 600px; box-shadow: 0 4px 16px rgba(0,0,0,.04); }
+    .calc-row  { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #E2E8F0; font-size: .9rem; }
+    .calc-total { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 0; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 800; color: #165D6F; }
 
-    /* Checklist */
-    .checklist-wrap {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 600px;
-    }
+    /* ── Checklist ── */
+    .checklist-wrap { background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; max-width: 600px; }
+    .check-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; font-size: .9rem; cursor: pointer; }
+    .check-item input { accent-color: #10B981; width: 18px; height: 18px; }
 
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid #F1F5F9;
-      font-size: 0.9rem;
-      cursor: pointer;
+    /* ── Recomendaciones ── */
+    .recommendations-section { margin-top: 28px; }
+    .rec-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .rec-section-head h2 { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0; }
+    .rec-section-head a  { font-size: .85rem; color: #165D6F; font-weight: 700; text-decoration: none; }
+    .rec-section-head a:hover { text-decoration: underline; }
+    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .rec-card { background: #FFF; border: 1px solid #E2E8F0; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .rec-card-img { height: 120px; background: linear-gradient(135deg,#165D6F 0%,#0B253A 100%); display: flex; align-items: center; justify-content: center; }
+    .rec-card-img i { font-size: 2.5rem; color: rgba(255,255,255,.3); }
+    .rec-card-body { padding: 14px; }
+    .rec-card-name { font-weight: 800; font-size: .95rem; color: #0B253A; margin-bottom: 3px; }
+    .rec-card-loc  { font-size: .78rem; color: #64748B; display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
+    .rec-card-rating { font-size: .78rem; display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+    .rec-stars { color: #F59E0B; }
+    .rec-verified { color: #10B981; font-weight: 700; font-size: .72rem; }
+    .rec-price { font-size: .85rem; color: #165D6F; font-weight: 700; margin-bottom: 12px; }
+    .btn-rec-action {
+      width: 100%; border: 1.5px solid #E2E8F0; background: #FFF; color: #475569;
+      padding: 8px; border-radius: 8px; font-size: .82rem; font-weight: 600;
+      cursor: pointer; transition: all .18s; font-family: 'Inter', sans-serif;
     }
+    .btn-rec-action.primary { background: #F65E01; color: #FFF; border-color: #F65E01; }
+    .btn-rec-action:hover { border-color: #F65E01; color: #F65E01; }
+    .btn-rec-action.primary:hover { background: #D94E00; color: #FFF; }
 
-    .check-item input {
-      accent-color: #10B981;
-      width: 18px;
-      height: 18px;
+    /* ── Sidebar Derecho ── */
+    .viaje-sidebar { display: flex; flex-direction: column; gap: 18px; }
+
+    /* ── Widget Clima ── */
+    .weather-card { background: #FFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .weather-header { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #0B253A; margin-bottom: 14px; font-size: .9rem; }
+    .weather-main   { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .weather-icon   { font-size: 2.2rem; }
+    .weather-city   { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: #0B253A; }
+    .weather-cond   { font-size: .82rem; color: #64748B; margin-top: 2px; }
+    .weather-forecast { display: flex; gap: 0; border-top: 1px solid #F1F5F9; padding-top: 12px; }
+    .forecast-day { flex: 1; text-align: center; }
+    .forecast-day span { display: block; font-size: .75rem; color: #94A3B8; margin-bottom: 3px; }
+    .forecast-day strong { font-size: .92rem; color: #0B253A; }
+
+    /* ── Sección Mapa ── */
+    .map-section-wrap { background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.04); margin-top: 28px; }
+    .map-tabs-nav { display: flex; border-bottom: 2px solid #E2E8F0; overflow-x: auto; }
+    .map-tab-btn {
+      flex: 1; min-width: 90px; padding: 12px 10px; background: none; border: none;
+      font-size: .85rem; font-weight: 700; color: #64748B; cursor: pointer;
+      border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .2s;
+      white-space: nowrap; font-family: 'Inter', sans-serif;
     }
+    .map-tab-btn.active { color: #F65E01; border-bottom-color: #F65E01; }
+    .map-tab-panel { display: none; }
+    .map-tab-panel.active { display: block; }
+    #leafletMapContainer { height: 380px; width: 100%; }
+    .map-day-cards { display: flex; flex-direction: column; gap: 0; }
+    .map-day-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border-bottom: 1px solid #F1F5F9; }
+    .map-day-num { width: 34px; height: 34px; background: #F65E01; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9rem; flex-shrink: 0; }
+    .map-day-info h5 { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 800; color: #0B253A; margin: 0 0 3px; }
+    .map-day-info span { font-size: .8rem; color: #64748B; }
+
+    /* ── Calculadora Presupuesto Panel ── */
+    .sidebar-budget-mini { background: #FFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; }
+    .sidebar-budget-mini h4 { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 800; color: #0B253A; margin: 0 0 14px; }
+    .budget-mini-row { display: flex; justify-content: space-between; font-size: .82rem; padding: 7px 0; border-bottom: 1px dashed #F1F5F9; color: #475569; }
+    .budget-mini-total { display: flex; justify-content: space-between; padding: 10px 0 0; font-weight: 800; color: #165D6F; font-size: .95rem; font-family: 'Montserrat', sans-serif; }
   </style>
-  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
 </head>
 
 <body class="page-viaje-exact">
 
-  <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL
-       ============================================================================ -->
+  <!-- ═══════════════════════════════════════════════════════
+       BARRA DE NAVEGACIÓN GLOBAL OFICIAL
+       ═══════════════════════════════════════════════════════ -->
   <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
     <div class="exact-container">
       <a href="index.html" class="exact-brand">
@@ -231,7 +246,6 @@
         <a href="baqueano-ai.html" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
         <a href="mi-viaje.html" class="exact-nav-link active" role="menuitem">Mi Viaje</a>
         <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
-
         <div class="exact-nav-dropdown">
           <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
             Más <i class="fa-solid fa-chevron-down exact-caret"></i>
@@ -259,143 +273,424 @@
     </div>
   </nav>
 
-  <!-- HERO MI VIAJE -->
+  <!-- ═══════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════ -->
   <header class="viaje-hero">
     <div class="exact-container">
-      <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.15em; color: #F65E01; text-transform: uppercase;">PLANIFICADOR SOBERANO</span>
+      <span style="font-size:.8rem;font-weight:800;letter-spacing:.15em;color:#F65E01;text-transform:uppercase">PLANIFICADOR SOBERANO</span>
       <h1>Mi Aventura por Nicaragua</h1>
       <p>Organizá tus días, calculá tus gastos con tarifas reales y guardá tus destinos favoritos para recorrer la patria sin intermediarios.</p>
     </div>
   </header>
 
-  <!-- TABLERO PRINCIPAL -->
-  <main class="viaje-dashboard-section">
+  <!-- ═══════════════════════════════════════════════════════
+       CUERPO PRINCIPAL
+       ═══════════════════════════════════════════════════════ -->
+  <main id="printableItinerary">
     <div class="exact-container">
-      <!-- Pestañas -->
-      <div class="viaje-tabs-nav" role="tablist">
-        <button type="button" class="viaje-tab-btn active" onclick="switchViajeTab('itinerario', this)" role="tab">
-          <i class="fa-solid fa-route"></i> Itinerario Activo
-        </button>
-        <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('presupuesto', this)" role="tab">
-          <i class="fa-solid fa-calculator"></i> Calculadora de Gastos
-        </button>
-        <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('checklist', this)" role="tab">
-          <i class="fa-solid fa-list-check"></i> Equipaje de Campo
-        </button>
-        <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('favoritos', this)" role="tab">
-          <i class="fa-regular fa-heart"></i> Mis Favoritos Guardados
-        </button>
-      </div>
+      <div class="viaje-body-layout">
 
-      <!-- PANEL 1: ITINERARIO -->
-      <div class="viaje-tab-panel active" id="tabItinerario">
-        <div class="itinerary-day-card">
-          <div class="itinerary-day-head">
-            <span class="itinerary-day-badge">Día 1 · Llegada &amp; Ciudad Colonial</span>
-            <span style="font-size: 0.85rem; color: #64748B;"><i class="fa-solid fa-location-dot"></i> Granada Colonial</span>
+        <!-- ── COLUMNA PRINCIPAL ── -->
+        <div>
+
+          <!-- Pestañas del Planificador -->
+          <div class="viaje-tabs-nav" role="tablist">
+            <button type="button" class="viaje-tab-btn active" onclick="switchViajeTab('itinerario', this)" role="tab" aria-selected="true">
+              <i class="fa-solid fa-route"></i> Itinerario Activo
+            </button>
+            <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('presupuesto', this)" role="tab" aria-selected="false">
+              <i class="fa-solid fa-calculator"></i> Calculadora de Gastos
+            </button>
+            <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('checklist', this)" role="tab" aria-selected="false">
+              <i class="fa-solid fa-list-check"></i> Equipaje de Campo
+            </button>
+            <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('favoritos', this)" role="tab" aria-selected="false">
+              <i class="fa-regular fa-heart"></i> Mis Favoritos
+            </button>
           </div>
-          <h4>Granada colonial y atardecer en las Isletas</h4>
-          <p style="font-size: 0.85rem; color: #475569; margin: 0 0 10px;">
-            Recorrido a pie por la Plaza de la Independencia, ascenso a la torre de La Merced para fotografía panorámica y paseo en lancha con pescador local por las 365 Isletas del Cocibolca.
-          </p>
-          <div style="font-size: 0.78rem; color: #165D6F; font-weight: 700;">
-            🍽️ Comida sugerida: Vigorón en el kiosco de Doña Rosa · 🏨 Hospedaje: Hotel Colonial céntrico
+
+          <!-- ── PANEL 1: Itinerario ── -->
+          <div class="viaje-tab-panel active" id="tabItinerario">
+
+            <!-- Tarjetas renderizadas por JS -->
+            <div id="itineraryDaysContainer">
+              <!-- Se rellena por mi-viaje-interactions.js -->
+            </div>
+
+            <!-- Bloque Tu Ruta está Lista -->
+            <div class="route-ready-card">
+              <div class="route-ready-body">
+                <h3>Tu ruta está lista 🌿</h3>
+                <p>Podés ajustar destinos, días, presupuesto o tipo de experiencias y Baqueano IA la actualizará al instante.</p>
+                <button type="button" class="btn-modify-ai" onclick="modifyWithAI()">
+                  Modificar con IA &nbsp;→
+                </button>
+              </div>
+              <img src="assets/images/logo.png" alt="Baqueano" class="route-logo-icon">
+            </div>
+
+            <!-- Botones de Acción Global -->
+            <div class="route-action-btns">
+              <button type="button" id="saveTripBtn" class="btn-route-action" onclick="saveTrip(this)">
+                <i class="fa-regular fa-calendar-check"></i> Guardar en Mi Viaje
+              </button>
+              <button type="button" class="btn-route-action" onclick="shareRoute()">
+                <i class="fa-solid fa-share-nodes"></i> Compartir ruta
+              </button>
+              <button type="button" class="btn-route-action" onclick="downloadPDF()">
+                <i class="fa-regular fa-file-pdf"></i> Descargar PDF
+              </button>
+              <button type="button" class="btn-route-action" onclick="generateQR()">
+                <i class="fa-solid fa-qrcode"></i> Generar QR
+              </button>
+              <button type="button" class="btn-reserve-all" onclick="reserveAll()">
+                Reservar todo
+              </button>
+            </div>
+          </div>
+
+          <!-- ── PANEL 2: Calculadora ── -->
+          <div class="viaje-tab-panel" id="tabPresupuesto">
+            <div class="budget-calc-box">
+              <h3 style="font-family:'Montserrat',sans-serif;margin:0 0 16px">Estimación de Gastos (3 Días / 2 Personas)</h3>
+              <div class="calc-row"><span>Transporte local (Expresos y lanchas)</span><strong>C$ 950 (~$26 USD)</strong></div>
+              <div class="calc-row"><span>Hospedaje rural y posadas comunitarias (2 noches)</span><strong>C$ 2,200 (~$60 USD)</strong></div>
+              <div class="calc-row"><span>Alimentación campesina típica (3 tiempos)</span><strong>C$ 1,800 (~$49 USD)</strong></div>
+              <div class="calc-row"><span>Guías baqueanos y entradas a reservas</span><strong>C$ 1,200 (~$33 USD)</strong></div>
+              <div class="calc-total">
+                <span>Total Estimado:</span>
+                <span>C$ 6,150 (~$168 USD)</span>
+              </div>
+              <small style="display:block;margin-top:12px;color:#64748B;font-size:.75rem">
+                * Precios directos sin comisiones predatorias · Red BAQUEANO verificada.
+              </small>
+            </div>
+          </div>
+
+          <!-- ── PANEL 3: Checklist ── -->
+          <div class="viaje-tab-panel" id="tabChecklist">
+            <div class="checklist-wrap">
+              <h3 style="font-family:'Montserrat',sans-serif;margin:0 0 16px">Lista de Equipaje para el Sendero</h3>
+              <label class="check-item"><input type="checkbox" checked> Botella de agua reutilizable (evitar plásticos de un solo uso)</label>
+              <label class="check-item"><input type="checkbox" checked> Protector solar biodegradable y repelente de insectos</label>
+              <label class="check-item"><input type="checkbox"> Calzado de senderismo con buen agarre para terreno volcánico</label>
+              <label class="check-item"><input type="checkbox"> Capa impermeable para nebliselvas y lluvias repentinas</label>
+              <label class="check-item"><input type="checkbox"> Dinero en efectivo en córdobas para cooperativas y pulperías</label>
+              <label class="check-item"><input type="checkbox"> Linterna frontal o de mano con batería de respaldo</label>
+              <label class="check-item"><input type="checkbox"> Botiquín básico de primeros auxilios y antihistamínicos</label>
+              <label class="check-item"><input type="checkbox"> Documento de identidad y fotocopia de emergencia</label>
+            </div>
+          </div>
+
+          <!-- ── PANEL 4: Favoritos ── -->
+          <div class="viaje-tab-panel" id="tabFavoritos">
+            <div style="background:#FFF;border:1px solid #E2E8F0;border-radius:14px;padding:30px;text-align:center">
+              <i class="fa-solid fa-heart" style="font-size:2.5rem;color:#EF4444;display:block;margin-bottom:12px"></i>
+              <h3 style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Tus destinos favoritos</h3>
+              <p style="color:#64748B;max-width:450px;margin:0 auto 18px">
+                Al hacer clic en el corazón de cualquier destino, cooperativa o platillo típico, quedará registrado aquí para tu próxima ruta.
+              </p>
+              <a href="destinos.html" class="btn-modify-ai">
+                <i class="fa-solid fa-compass"></i> Explorar catálogo
+              </a>
+            </div>
+          </div>
+
+          <!-- ── SECCIÓN RECOMENDACIONES VERIFICADAS ── -->
+          <div class="recommendations-section">
+            <div class="rec-section-head">
+              <h2>Recomendaciones verificadas para tu ruta</h2>
+              <a href="aliados.html">Ver más recomendaciones →</a>
+            </div>
+            <p style="font-size:.85rem;color:#64748B;margin:0 0 18px">Hospedajes, restaurantes, guías y experiencias locales seleccionadas para este itinerario.</p>
+            <div class="rec-grid">
+
+              <!-- Tarjeta 1 -->
+              <div class="rec-card">
+                <div class="rec-card-img"><i class="fa-solid fa-hotel"></i></div>
+                <div class="rec-card-body">
+                  <div class="rec-card-name">Hotel Boutique Adela</div>
+                  <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
+                  <div class="rec-card-rating">
+                    <span class="rec-stars">★ 4.8</span> <span style="color:#64748B">(120)</span>
+                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                  </div>
+                  <div class="rec-price">C$ 1,800 / noche</div>
+                  <button type="button" class="btn-rec-action" onclick="viewDetail('Hotel Boutique Adela')">Ver detalle</button>
+                </div>
+              </div>
+
+              <!-- Tarjeta 2 -->
+              <div class="rec-card">
+                <div class="rec-card-img" style="background:linear-gradient(135deg,#F65E01,#0B253A)"><i class="fa-solid fa-utensils"></i></div>
+                <div class="rec-card-body">
+                  <div class="rec-card-name">Restaurante El Zaguán</div>
+                  <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
+                  <div class="rec-card-rating">
+                    <span class="rec-stars">★ 4.7</span> <span style="color:#64748B">(210)</span>
+                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                  </div>
+                  <div class="rec-price">C$ 350 / persona</div>
+                  <button type="button" class="btn-rec-action" onclick="viewDetail('Restaurante El Zaguán')">Ver detalle</button>
+                </div>
+              </div>
+
+              <!-- Tarjeta 3 -->
+              <div class="rec-card">
+                <div class="rec-card-img" style="background:linear-gradient(135deg,#10B981,#0B253A)"><i class="fa-solid fa-person-hiking"></i></div>
+                <div class="rec-card-body">
+                  <div class="rec-card-name">Guía Local Don Carlos</div>
+                  <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
+                  <div class="rec-card-rating">
+                    <span class="rec-stars">★ 4.9</span> <span style="color:#64748B">(64)</span>
+                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                  </div>
+                  <div class="rec-price">C$ 800 / tour</div>
+                  <button type="button" class="btn-rec-action primary" onclick="contactRec('Guía Local Don Carlos')">Contactar</button>
+                </div>
+              </div>
+
+              <!-- Tarjeta 4 -->
+              <div class="rec-card">
+                <div class="rec-card-img" style="background:linear-gradient(135deg,#38BDF8,#0B253A)"><i class="fa-solid fa-water"></i></div>
+                <div class="rec-card-body">
+                  <div class="rec-card-name">Tour en Kayak Isletas</div>
+                  <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
+                  <div class="rec-card-rating">
+                    <span class="rec-stars">★ 4.8</span> <span style="color:#64748B">(93)</span>
+                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                  </div>
+                  <div class="rec-price">C$ 600 / persona</div>
+                  <button type="button" class="btn-rec-action primary" onclick="reserveRec('Tour en Kayak Isletas')">Reservar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── SECCIÓN MAPA CON PESTAÑAS ── -->
+          <div class="map-section-wrap" style="margin-top:30px">
+            <div class="map-tabs-nav" role="tablist">
+              <button type="button" class="map-tab-btn active" data-tab="mapa" onclick="switchMapTab('mapa', this)" role="tab">Mapa</button>
+              <button type="button" class="map-tab-btn" data-tab="itinerario" onclick="switchMapTab('itinerario', this)" role="tab">Itinerario</button>
+              <button type="button" class="map-tab-btn" data-tab="hospedajes" onclick="switchMapTab('hospedajes', this)" role="tab">Hospedajes</button>
+              <button type="button" class="map-tab-btn" data-tab="comida" onclick="switchMapTab('comida', this)" role="tab">Comida</button>
+              <button type="button" class="map-tab-btn" data-tab="atractivos" onclick="switchMapTab('atractivos', this)" role="tab">Atractivos</button>
+            </div>
+
+            <!-- Mapa Leaflet -->
+            <div class="map-tab-panel active" id="mapPanelMapa">
+              <div id="leafletMapContainer"></div>
+            </div>
+
+            <!-- Panel Itinerario del mapa -->
+            <div class="map-tab-panel" id="mapPanelItinerario">
+              <div class="map-day-cards">
+                <div class="map-day-row">
+                  <div class="map-day-num">1</div>
+                  <div class="map-day-info"><h5>Granada colonial y atardecer en las Isletas</h5><span>Granada Colonial · 45 km · 6 h</span></div>
+                </div>
+                <div class="map-day-row">
+                  <div class="map-day-num">2</div>
+                  <div class="map-day-info"><h5>Lago de lava en Volcán Masaya y artesanías de Monimbó</h5><span>Masaya &amp; Sandboarding · 120 km · 9 h</span></div>
+                </div>
+                <div class="map-day-row">
+                  <div class="map-day-num">3</div>
+                  <div class="map-day-info"><h5>Ferry a Ometepe, Ojo de Agua y senderismo en Finca Magdalena</h5><span>Isla de Ometepe · 110 km · 8 h</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel Hospedajes -->
+            <div class="map-tab-panel" id="mapPanelHospedajes">
+              <div class="map-day-cards">
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#165D6F"><i class="fa-solid fa-bed" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>Hotel Boutique Adela · Granada</h5><span>C$ 1,800/noche · 4.8 ★ · Verificado</span></div>
+                </div>
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#165D6F"><i class="fa-solid fa-bed" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>Posada Rural San Ramón · Ometepe</h5><span>C$ 1,200/noche · 4.6 ★ · Verificado</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel Comida -->
+            <div class="map-tab-panel" id="mapPanelComida">
+              <div class="map-day-cards">
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#10B981"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>Restaurante El Zaguán · Granada</h5><span>C$ 350/persona · 4.7 ★ · Gastronomía típica</span></div>
+                </div>
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#10B981"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>Kiosco Doña Rosa · Granada</h5><span>Vigorón artesanal · C$ 80/porción · Campesino</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel Atractivos -->
+            <div class="map-tab-panel" id="mapPanelAtractivos">
+              <div class="map-day-cards">
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#A855F7"><i class="fa-solid fa-star" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>365 Isletas del Cocibolca</h5><span>Granada · Paseo en lancha con pescador local</span></div>
+                </div>
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#A855F7"><i class="fa-solid fa-star" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>Cráter Santiago · Volcán Masaya</h5><span>Masaya · Único lago de lava visible en auto de Nicaragua</span></div>
+                </div>
+                <div class="map-day-row">
+                  <div class="map-day-num" style="background:#A855F7"><i class="fa-solid fa-star" style="font-size:.9rem"></i></div>
+                  <div class="map-day-info"><h5>Manantial Ojo de Agua · Ometepe</h5><span>Isla de Ometepe · Aguas cristalinas de origen volcánico</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- fin columna principal -->
+
+        <!-- ── SIDEBAR DERECHO ── -->
+        <aside class="viaje-sidebar">
+
+          <!-- Widget Clima -->
+          <div id="weatherWidget">
+            <!-- Renderizado por mi-viaje-interactions.js -->
+          </div>
+
+          <!-- Calculadora Mini -->
+          <div class="sidebar-budget-mini">
+            <h4>Resumen de Presupuesto</h4>
+            <div class="budget-mini-row"><span>Transporte</span><strong>C$ 950</strong></div>
+            <div class="budget-mini-row"><span>Hospedaje</span><strong>C$ 2,200</strong></div>
+            <div class="budget-mini-row"><span>Alimentación</span><strong>C$ 1,800</strong></div>
+            <div class="budget-mini-row"><span>Guías &amp; entradas</span><strong>C$ 1,200</strong></div>
+            <div class="budget-mini-total"><span>Total estimado</span><span>C$ 6,150</span></div>
+          </div>
+
+          <!-- Acceso Rápido a Baqueano IA -->
+          <div style="background:linear-gradient(135deg,#0B253A 0%,#165D6F 100%);border-radius:14px;padding:20px;color:#FFF;text-align:center">
+            <i class="fa-solid fa-robot" style="font-size:2rem;margin-bottom:10px;display:block;color:#F4E6C1"></i>
+            <h4 style="font-family:'Montserrat',sans-serif;margin:0 0 8px;font-size:.95rem">Baqueano Digital IA</h4>
+            <p style="font-size:.82rem;color:#CBD5E1;margin:0 0 14px">Generá una ruta personalizada o ajustá esta en segundos.</p>
+            <a href="baqueano-ia.html" class="btn-modify-ai" style="width:100%;justify-content:center;box-sizing:border-box">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Abrir asistente
+            </a>
+          </div>
+
+        </aside>
+
+      </div><!-- fin viaje-body-layout -->
+    </div><!-- fin exact-container -->
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER OFICIAL
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="official-footer-exact">
+    <div class="footer-main-container">
+      <div class="footer-top-columns-grid">
+        <!-- Columna Marca -->
+        <div class="footer-col-brand">
+          <a href="index.html" class="footer-brand-logo-link" aria-label="BAQUEANO Nicaragua">
+            <img src="assets/images/logo.png" alt="BAQUEANO Logo" class="footer-brand-logo-img">
+            <div class="footer-brand-text">
+              <span class="footer-brand-name">BAQUEANO</span>
+              <span class="footer-brand-sub">NICARAGUA AUTÉNTICA</span>
+            </div>
+          </a>
+          <p class="footer-brand-tagline">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>
+          <div class="footer-social-circles">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-circle-btn" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="social-circle-btn" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-circle-btn" aria-label="TikTok">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
           </div>
         </div>
 
-        <div class="itinerary-day-card">
-          <div class="itinerary-day-head">
-            <span class="itinerary-day-badge">Día 2 · Aventura Volcánica</span>
-            <span style="font-size: 0.85rem; color: #64748B;"><i class="fa-solid fa-location-dot"></i> Masaya &amp; Sandboarding</span>
+        <!-- Columna Explorá -->
+        <div class="footer-nav-column">
+          <div class="footer-col-header">
+            <h4>Explorá</h4>
+            <span class="footer-header-accent-line"></span>
           </div>
-          <h4>Lago de lava en Volcán Masaya y artesanías de Monimbó</h4>
-          <p style="font-size: 0.85rem; color: #475569; margin: 0 0 10px;">
-            Visita al Parque Nacional Volcán Masaya para contemplar los gases del Cráter Santiago. Almuerzo tradicional en el Mercado de Artesanías y compra de hamacas tejidas a mano.
-          </p>
-          <div style="font-size: 0.78rem; color: #165D6F; font-weight: 700;">
-            ☕ Merienda: Tiste frío con buñuelos en miel de Masaya
-          </div>
+          <ul class="footer-nav-links-list">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="mapa.html">Mapa</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="baqueano-ia.html">Baqueano Digital</a></li>
+          </ul>
         </div>
 
-        <div class="itinerary-day-card">
-          <div class="itinerary-day-head">
-            <span class="itinerary-day-badge">Día 3 · Oasis de Fuego y Agua</span>
-            <span style="font-size: 0.85rem; color: #64748B;"><i class="fa-solid fa-location-dot"></i> Isla de Ometepe</span>
+        <!-- Columna Nosotros -->
+        <div class="footer-nav-column">
+          <div class="footer-col-header">
+            <h4>Nosotros</h4>
+            <span class="footer-header-accent-line"></span>
           </div>
-          <h4>Ferry a Ometepe, Ojo de Agua y senderismo en Finca Magdalena</h4>
-          <p style="font-size: 0.85rem; color: #475569; margin: 0 0 10px;">
-            Cruce lacustre desde San Jorge hasta Moyogalpa. Baño en las aguas cristalinas del manantial Ojo de Agua y caminata por los cafetales de la cooperativa comunitaria Finca Magdalena.
-          </p>
-          <div style="font-size: 0.78rem; color: #165D6F; font-weight: 700;">
-            🌿 Impacto local: Apoyo directo a la cooperativa cafetalera campesina
-          </div>
+          <ul class="footer-nav-links-list">
+            <li><a href="historia.html">Nuestra historia</a></li>
+            <li><a href="nosotros.html">Misión y visión</a></li>
+            <li><a href="aliados.html">Equipo</a></li>
+            <li><a href="aliados.html">Aliados</a></li>
+            <li><a href="ambiental.html">Impacto</a></li>
+          </ul>
         </div>
-      </div>
 
-      <!-- PANEL 2: CALCULADORA -->
-      <div class="viaje-tab-panel" id="tabPresupuesto">
-        <div class="budget-calc-box">
-          <h3 style="font-family: 'Montserrat', sans-serif; margin: 0 0 16px;">Estimación de Gastos (3 Días / 2 Personas)</h3>
-          <div class="calc-row">
-            <span>Transporte local (Expresos y lanchas)</span>
-            <strong>C$ 950 (~ $26 USD)</strong>
+        <!-- Columna Información -->
+        <div class="footer-nav-column">
+          <div class="footer-col-header">
+            <h4>Información</h4>
+            <span class="footer-header-accent-line"></span>
           </div>
-          <div class="calc-row">
-            <span>Hospedaje rural y posadas comunitarias (2 noches)</span>
-            <strong>C$ 2,200 (~ $60 USD)</strong>
-          </div>
-          <div class="calc-row">
-            <span>Alimentación campesina típica (3 tiempos)</span>
-            <strong>C$ 1,800 (~ $49 USD)</strong>
-          </div>
-          <div class="calc-row">
-            <span>Guías baqueanos y entradas a reservas</span>
-            <strong>C$ 1,200 (~ $33 USD)</strong>
-          </div>
-          <div class="calc-total">
-            <span>Presupuesto Total Estimado:</span>
-            <span>C$ 6,150 (~ $168 USD)</span>
-          </div>
-          <small style="display: block; margin-top: 12px; color: #64748B; font-size: 0.75rem;">
-            * Precios directos sin comisiones predatorias calculados en base a tarifas verificadas de la Red BAQUEANO.
-          </small>
+          <ul class="footer-nav-links-list">
+            <li><a href="gastronomia.html">Blog</a></li>
+            <li><a href="nosotros.html#contacto">Contacto</a></li>
+            <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+          </ul>
         </div>
-      </div>
 
-      <!-- PANEL 3: CHECKLIST EQUIPAJE -->
-      <div class="viaje-tab-panel" id="tabChecklist">
-        <div class="checklist-wrap">
-          <h3 style="font-family: 'Montserrat', sans-serif; margin: 0 0 16px;">Lista de Equipaje para el Sendero</h3>
-          <label class="check-item"><input type="checkbox" checked> Botella de agua reutilizable (evitar plásticos de un solo uso)</label>
-          <label class="check-item"><input type="checkbox" checked> Protector solar biodegradable y repelente de insectos</label>
-          <label class="check-item"><input type="checkbox"> Calzado de senderismo con buen agarre para terreno volcánico</label>
-          <label class="check-item"><input type="checkbox"> Capa impermeable para nebliselvas y lluvias repentinas</label>
-          <label class="check-item"><input type="checkbox"> Dinero en efectivo en córdobas para cooperativas y pulperías</label>
-          <label class="check-item"><input type="checkbox"> Linterna frontal o de mano con batería de respaldo</label>
-          <label class="check-item"><input type="checkbox"> Botiquín básico de primeros auxilios y antihistamínicos</label>
+        <!-- Columna Legal -->
+        <div class="footer-nav-column">
+          <div class="footer-col-header">
+            <h4>Legal</h4>
+            <span class="footer-header-accent-line"></span>
+          </div>
+          <ul class="footer-nav-links-list">
+            <li><a href="terminos.html">Términos y condiciones</a></li>
+            <li><a href="privacidad.html">Política de privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+          </ul>
         </div>
-      </div>
 
-      <!-- PANEL 4: FAVORITOS -->
-      <div class="viaje-tab-panel" id="tabFavoritos">
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 30px; text-align: center;">
-          <i class="fa-solid fa-heart" style="font-size: 2.5rem; color: #EF4444; margin-bottom: 12px;"></i>
-          <h3>Tus destinos favoritos se guardan aquí</h3>
-          <p style="color: #64748B; max-width: 450px; margin: 0 auto 18px;">
-            Al hacer clic en el corazón de cualquier destino, cooperativa o platillo típico, quedará registrado en tu memoria para tu próxima ruta.
-          </p>
-          <a href="destinos.html" class="btn-aliados-hero-primary" style="display: inline-block;">Explorar catálogo de destinos</a>
+        <!-- Sello Nicaragua Auténtica -->
+        <div class="footer-stamp-branding-col">
+          <div class="nicaragua-autentica-script-badge">
+            <span class="script-title">Nicaragua</span>
+            <span class="script-subtitle">Auténtica</span>
+            <svg class="leaf-accent-svg" viewBox="0 0 32 32" fill="none">
+              <path d="M6 26C8 16 16 8 26 6C24 16 16 24 6 26Z" fill="#10B981" stroke="#10B981" stroke-width="2"/>
+              <path d="M6 26C12 20 18 14 26 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="green-brush-underline"></span>
+          </div>
         </div>
       </div>
     </div>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer-exact">
-    <div class="exact-container">
-      <div class="footer-bottom-bar">
+    <div class="footer-sub-bottom-bar">
+      <div class="footer-sub-container">
         <span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>
-        <span>Hecho con <i class="fa-solid fa-heart" style="color: #EF4444;"></i> en Nicaragua</span>
+        <span class="divider-pipe">|</span>
+        <span>Hecho con <span class="heart-icon">❤️</span> en Nicaragua</span>
       </div>
     </div>
   </footer>
@@ -405,7 +700,7 @@
     <div class="exact-modal-window sos-modal">
       <button type="button" class="exact-modal-close" onclick="closeSosModal()">&times;</button>
       <div class="exact-modal-header">
-        <h3><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS &amp; Auxilio</h3>
+        <h3><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Centro SOS &amp; Auxilio</h3>
         <p>Tu ubicación GPS está activa para asistencia en ruta.</p>
       </div>
       <div class="sos-gps-card">
@@ -419,49 +714,45 @@
     </div>
   </div>
 
+  <!-- Leaflet JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- Controlador Principal de Mi Viaje -->
+  <script src="js/mi-viaje-interactions.js"></script>
+
+  <!-- Navegación Global -->
+  <script src="js/navigation.js"></script>
+
   <script>
-    function switchViajeTab(tabId, el) {
-      document.querySelectorAll('.viaje-tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.viaje-tab-panel').forEach(p => p.classList.remove('active'));
-      if (el) el.classList.add('active');
-
-      const target = document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
-      if (target) target.classList.add('active');
-    }
-
+    // ─── SOS Modal ─────────────────────────────────────────────────────────
     function openSosModal(e) {
       if (e && e.preventDefault) e.preventDefault();
-      const modal = document.getElementById('sosModal');
-      if (modal) {
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-      }
+      var m = document.getElementById('sosModal');
+      if (m) { m.classList.add('is-open'); m.setAttribute('aria-hidden', 'false'); }
     }
-
     function closeSosModal() {
-      const modal = document.getElementById('sosModal');
-      if (modal) {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
+      var m = document.getElementById('sosModal');
+      if (m) { m.classList.remove('is-open'); m.setAttribute('aria-hidden', 'true'); }
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeSosModal();
+    });
+
+    // ─── Menú móvil ────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function() {
+      var burger = document.getElementById('burgerToggle');
+      var nav    = document.getElementById('exactNavLinks');
+      if (burger && nav) {
+        burger.addEventListener('click', function() {
+          var open = nav.classList.toggle('nav-active');
+          burger.setAttribute('aria-expanded', String(open));
+        });
       }
-    }
-  </script>
-<script>
-    // Mobile navigation toggle handler
-    const bToggle = document.getElementById('burgerToggle') || document.getElementById('mobileNavToggle');
-    const nLinks = document.getElementById('exactNavLinks') || document.getElementById('navLinksMenu');
-    if (bToggle && nLinks) {
-      bToggle.addEventListener('click', () => {
-        nLinks.classList.toggle('nav-active');
-        nLinks.classList.toggle('is-open');
-        if (nLinks.style.display === 'flex') {
-          nLinks.style.display = 'none';
-        } else {
-          nLinks.style.display = 'flex';
-        }
-      });
-    }
+      // Activar mapa por defecto
+      if (typeof initLeafletMap === 'undefined' && typeof switchMapTab !== 'undefined') {
+        // initLeafletMap se llama desde mi-viaje-interactions.js al DOMContentLoaded
+      }
+    });
   </script>
 </body>
-
 </html>
