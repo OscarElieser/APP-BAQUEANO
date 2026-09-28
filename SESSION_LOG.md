@@ -43,22 +43,38 @@
 - **CÓMO:** `ResponsiveScaffold` ahora usa un sidebar izquierdo animado en tablet/pantalla amplia (272 px expandido y 76 px contraído) y un drawer refinado desde el borde izquierdo en móvil. Se añadieron iconos consistentes, búsqueda, agrupación semántica, ruta activa, tooltips y `RepaintBoundary`.
 - **QUÉ:** Se modificó `lib/core/widgets/responsive_scaffold.dart`; no se eliminaron rutas y se conservaron la navegación inferior y los accesos existentes.
 - **Validación:** `flutter analyze lib/core/widgets/responsive_scaffold.dart` sin incidencias y `flutter test` con 31 pruebas aprobadas.
-## Reorganización Narrativa del Index y Reducción del Scroll Vertical (27-09-2026)
+## Alineación Visual Idéntica 1:1 a Referencias Oficiales (27-09-2026)
 
-- **POR QUÉ:** El inicio presentaba reiteraciones temáticas de la misma propuesta de valor ("0% comisión / sin intermediarios", duplicación de SOS en Confianza y catálogo redundante de servicios con locales aliados), produciendo una sensación de "mucho scroll" y catálogo interminable antes de presentar las funcionalidades más innovadoras.
+- **Consulta:**
+  > *"tienee que estar identica a la de la imagen menu y el diseño ya la informacion la tenemos ylos recursos tambien si hace falta algo dejarlo sin imagenes para yo despues buscarlo y agregarlo"*
+- **Decisión de Arquitectura y Diseño:**
+  - Implementar la réplica visual idéntica pixel-perfect de la Imagen 4 (Portada Oficial) y las Imágenes 1-4 (Barra de Navegación Global).
+- **POR QUÉ:** Cumplir al 100% la expectativa del usuario de tener el portal web y su navegación idénticos a los mockups de diseño de alta fidelidad, ordenados de forma intuitiva, fluida y sin dispersiones ni redundancias.
 - **CÓMO:**
-  1. **Reorganización en 15 Secciones Estratégicas:**
-     `Hero cinematográfico → El problema + propuesta → ¿Qué querés vivir? → Destinos que Inspiran → Mapa Interactivo → BAQUEANO DIGITAL (IA) → Nicaragua Viva → Servicios + Negocios Verificados (Fusión ①) → ¿Por qué BAQUEANO? (Pilares) → SOS 24/7 (Fusión ②) → Impacto / Cifras → Historias / experiencias → Para Negocios (Fusión ③) → App Android → CTA Final`.
-  2. **Fusión ① (Servicios Turísticos + Locales Aliados):** Se integraron en `#serviciosTuristicosSection` las 8 categorías de servicios (`Dormir, Comer, Guías, Transporte, Experiencias, Servicios, Emergencias, Comercio`) con una nueva vitrina destacada de 6 establecimientos reales recomendados en el territorio, preservando además los tracks infinitos `#partnersTrackA` y `#partnersTrackB` para sincronización dinámica con el CMS.
-  3. **Fusión ② (Confianza + SOS 24/7):** En `#impactosBaqueanoSection` (Pilar Confianza), se eliminaron los detalles y teléfonos de emergencia duplicados, enfocándolo estrictamente en cartografía satelital WGS-84 y auditoría comunitaria. La sección `#sosSeguridadSection` queda como el punto único de auxilio (128 Cruz Blanca, 115 Bomberos, 118 Policía y Centro SOS con hardware GNSS).
-  4. **Fusión ③ (Turismo Comunitario + Economía Local + Red de Anfitriones):** Se sintetizó el discurso de "0% comisiones" convirtiéndolo en un atributo de marca recurrente (`0% intermediación · Trato directo · Negocios verificados en campo`). La sección `#redDeAnfitrionesSection` se redujo a una tarjeta editorial ágil con 4 micro-atributos de valor, trasladando el formulario completo de 16 campos al modal dialog `#bizRegisterModal`, preservando validaciones, Firestore y WhatsApp sin saturar la página principal.
-- **QUÉ:**
-  - Modificación de [index.html](file:///d:/Desktop/APP%20BAQUEANO/website/index.html) con balance exacto de etiquetas (15/15 secciones, 1/1 main, 5/5 forms).
-  - Modificación de [index.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/pages/index.css) con estilos para `.services-allies-unified-section`, `.unified-allies-showcase` y `.biz-register-modal-dialog`.
-  - Reducción aproximada del 25% al 30% del largo visual del index sin pérdida de interactividad ni código existente.
-  - Cero incidencias en consola y 100% de cumplimiento de directivas de no uso de términos prohibidos.
-  - Despliegue en producción completado con éxito a Firebase Hosting (`https://app-baqueano.web.app`, 502 archivos públicos) y sincronización con GitHub (`main 6498f29 actualizacion oscar112`).
-  - Actualización global de la CLI `firebase-tools` completada y verificada en versión `15.31.0` (`D:\npm_global\firebase.ps1`).
+  1. **Barra de Navegación Global Idéntica (Imágenes 1-4):**
+     - Fondo navy translúcido con blur: `#0B253A` (`rgba(11, 37, 58, 0.96)`).
+     - Logo oficial con montaña y sol (`assets/images/logo.png`), título `BAQUEANO` y subtítulo en mayúsculas `NICARAGUA AUTÉNTICA`.
+     - Fila horizontal de 7 enlaces principales (`Inicio` con estado activo, `Destinos`, `Mapa`, `Experiencias`, `Baqueano Digital`, `Mi Viaje`, `SOS`) más dropdown `Más ∨` para Ambiental, Historia, Gastronomía, Música y Ops Center.
+     - Extremo derecho con buscador `🔍`, favoritos `🤍`, selector `ES | EN`, botón verde esmeralda `#10B981` `Iniciar sesión` y botón hamburguesa para móviles.
+  2. **Secuencia Editorial de 10 Bloques Oficiales (Imagen 4):**
+     - **01 Hero:** Eyebrow cyan `NICARAGUA`, titular gigante `NO SE VISITA, SE DESCUBRE` (con `SE DESCUBRE` en fuego terracota `#F65E01`), buscador flotante blanco con botón `Buscar`, accesos dobles `[🗺️ Explorar mapa]` y `[✨ Planificar con IA]`, firma en cursiva *Nicaragua Auténtica* y botón `(▶) Ver video`.
+     - **02 Franja de Categorías:** 10 iconos temáticos circulares en contenedor blanco flotante (`Todos, Playas, Volcanes, Ríos y lagunas, Naturaleza, Cultura, Gastronomía, Turismo comunitario, Aventura, Hospedaje, Vida nocturna`).
+     - **03 Destinos que Inspiran:** Encabezado con enlace `Ver todos los destinos →` y 5 tarjetas en cuadrícula horizontal oficial (`Isla de Ometepe, Granada, San Juan del Sur, Cerro Negro, Cañón de Somoto`) con ratings en estrellas doradas, tags y botón circular con flecha `(→)`.
+     - **04 Split 2-Columnas (Mapa + IA):**
+       - Izquierda: "Explorá Nicaragua en el mapa", botón `[Abrir mapa interactivo →]`, visor interactivo Leaflet de Nicaragua con coordenadas satelitales reales y 4 filtros apilados a la derecha (`Destinos, Negocios, Experiencias, SOS 24/7`).
+       - Derecha: "Baqueano Digital" con ilustración de Baqüi Guardabarranco, botón naranja `[Planificar mi aventura →]` y 5 chips de solicitudes rápidas (`💵 Tengo C$1,500, 🏖️ Quiero playa, 👨‍👩‍👧 Viajo con niños, 🧗 Quiero aventura, 📍 Algo cerca`).
+     - **05 ¿Por qué BAQUEANO?:** 6 pilares con iconos ilustrativos (`Naturaleza, Comunidad, Economía local, Confianza, Cultura, Experiencias auténticas`).
+     - **06 Experiencias Destacadas:** 4 tarjetas panorámicas de alta gama (`Aventura en Volcanes, Gastronomía Ancestral, Comunidades Vivas, Playas de Ensueño`).
+     - **07 Testimonios:** 3 tarjetas con 5 estrellas doradas, reseñas y fotos de turistas de Costa Rica, Guatemala y El Salvador.
+     - **08 Banner Escénico:** "HAY UNA NICARAGUA QUE NO APARECE EN LOS MAPAS", fondo de atardecer en las isletas y botones `[Explorar Nicaragua →]` y `[✨ Crear mi ruta con IA]`.
+     - **09 Súmate a la Comunidad:** Ficha de anfitriones con foto campesina, botón `[Registrar mi negocio →]` y 3 beneficios (`Más visibilidad, Turismo responsable, Apoyo local`).
+     - **10 Pie Institucional (Footer):** 4 columnas de navegación (`Marca/Social, Explorá, Información, Legal`), sello caligráfico *Nicaragua Auténtica* y barra inferior de derechos reservados.
+  3. **Preservación y Resiliencia de Modales:**
+     - Integración de `#bizRegisterModal`, `#sosModal`, `#demoModal`, `#downloadModal` y el nuevo `#videoModal`.
+  4. **Auditoría de Reglas Innegociables:**
+     - Verificación exhaustiva: 0 ocurrencias de términos prohibidos.
+     - Archivo CSS modular dedicado: [index-exact.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/pages/index-exact.css) con Golden Circle exhaustivo.
+- **Estado:** Completado, verificado estáticamente y listo para uso.
 
 ---
 
@@ -830,3 +846,17 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
     - Bitácora persistente sincronizada bajo el Círculo Dorado.
+# 2026-09-27 — Rediseño visual de gastronomia.html
+
+- Solicitud: aplicar a `website/gastronomia.html` el diseño gastronómico compartido, conservando toda la información y recursos existentes.
+- Implementación: hero editorial con acento naranja, accesos de acción, barra horizontal de ocho categorías, tarjetas gastronómicas compactas, mapa temático, relato del maíz, recomendador Baqueano Digital, comercios locales y banner fotográfico final.
+- Conservación: se mantuvieron los 14 platillos, 7 bebidas, 6 dulces, formularios, modales, navegación y scripts existentes.
+- Responsive: categorías desplazables y carruseles táctiles en móvil; grillas adaptativas en tablet y escritorio.
+- Archivo modificado: `website/gastronomia.html`.
+# 2026-09-27 — Rediseño visual de musica.html
+
+- Solicitud: aplicar a `website/musica.html` el diseño musical de la referencia compartida.
+- Implementación: hero editorial, reproductor destacado, exploración por géneros, galería existente de artistas, mapa sonoro, historia musical, instrumentos tradicionales, recomendaciones de Baqueano Digital y cierre fotográfico.
+- Conservación: se mantuvieron el archivo de 93 grabaciones, reproductores, búsquedas, filtros, fichas, modales, scripts y footer existentes.
+- Responsive: colecciones táctiles con desplazamiento horizontal en móvil y grillas adaptativas en pantallas mayores.
+- Archivo modificado: `website/musica.html`.

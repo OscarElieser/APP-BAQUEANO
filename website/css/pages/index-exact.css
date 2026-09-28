@@ -1,0 +1,1773 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — ESTILOS EDITORIALES FIDELIDAD 1:1 (index-exact.css)
+   ============================================================================
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Proporcionar la réplica visual exacta y pixel-perfect de la interfaz oficial
+     de BAQUEANO Nicaragua (Referencia Image 4: Portada e Imagen 1-3: Menú).
+   - Unificar la navegación institucional, el buscador de alta gama, la franja de 10
+     categorías, los 5 destinos destacados, el split 2-columnas (Mapa + IA),
+     los 6 pilares de valor, experiencias, testimonios y red de anfitriones.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Paleta oficial: Petróleo Teal (#165D6F), Fuego Terracota (#F65E01), Arena (#F4E6C1),
+     Noche Profunda (#081827 / #0B253A) y Verde Esmeralda (#10B981).
+   - Layout responsivo con CSS Grid y Flexbox adaptativo para móviles, tablets y desktop.
+   - Microinteracciones suaves a 60fps con curvas cubic-bezier(0.16, 1, 0.3, 1).
+   - Componentes modulares con nombres descriptivos y cero dependencias pesadas.
+
+   📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+   - .main-navbar-exact : Barra de navegación horizontal idéntica a la referencia.
+   - .hero-exact : Hero cinematográfico con buscador pill y dobles llamadas a la acción.
+   - .category-strip-exact : Franja de 10 categorías temáticas con iconos circulares.
+   - .destinations-exact : Grilla de 5 tarjetas de destinos con tags, ratings y flecha circular.
+   - .map-ai-exact : Módulo dividido en 2 columnas (Mapa Interactivo + Asistente IA Baqüi).
+   - .why-baqueano-exact : 6 pilares con iconos ilustrativos de soberanía y turismo justo.
+   - .experiences-exact : 4 tarjetas horizontales panorámicas de experiencias.
+   - .testimonials-exact : 3 tarjetas limpias con estrellas doradas y prueba social.
+   - .scenic-cta-exact : Banner panorámico al atardecer con mensaje institucional.
+   - .community-exact : Ficha de anfitriones locales con foto campesina y beneficios.
+   - .footer-exact : Pie institucional con navegación cuádruple y sello Nicaragua Auténtica.
+   ============================================================================ */
+
+:root {
+  --bq-navy: #0B253A;
+  --bq-navy-dark: #081827;
+  --bq-navy-card: #0A2F45;
+  --bq-teal: #165D6F;
+  --bq-teal-light: #0D6E77;
+  --bq-orange: #F65E01;
+  --bq-green: #10B981;
+  --bq-cream: #F4E6C1;
+  --bq-bg-light: #F7F9FC;
+  --bq-text-dark: #0B253A;
+  --bq-text-muted: #64748B;
+  --bq-border-light: #E2E8F0;
+  --bq-font-heading: 'Montserrat', sans-serif;
+  --bq-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ============================================================================
+   1. RESET Y CONFIGURACIÓN GENERAL DE LA PÁGINA
+   ============================================================================ */
+.page-index-exact {
+  background-color: var(--bq-bg-light);
+  color: var(--bq-text-dark);
+  font-family: var(--bq-font-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.exact-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* ============================================================================
+   2. NAVBAR INSTITUCIONAL IDÉNTICA A LA REFERENCIA (IMÁGENES 1-4)
+   ============================================================================ */
+.main-navbar-exact {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(11, 37, 58, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-navbar-exact .exact-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Marca / Logo */
+.exact-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.exact-nav-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.exact-nav-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.exact-nav-title {
+  font-family: var(--bq-font-heading);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.exact-nav-tagline {
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bq-cream);
+  text-transform: uppercase;
+  margin-top: 3px;
+  opacity: 0.9;
+}
+
+/* Enlaces de Navegación */
+.exact-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exact-nav-link {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.exact-nav-link:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.exact-nav-link.active {
+  color: #FFFFFF;
+  font-weight: 700;
+  background: rgba(22, 93, 111, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Dropdown "Más ∨" */
+.exact-nav-dropdown {
+  position: relative;
+}
+
+.exact-nav-dropdown-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.exact-nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 200px;
+  background: #0B253A;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  padding: 8px 0;
+  display: none;
+  flex-direction: column;
+  z-index: 1010;
+}
+
+.exact-nav-dropdown:hover .exact-nav-dropdown-menu,
+.exact-nav-dropdown:focus-within .exact-nav-dropdown-menu {
+  display: flex;
+}
+
+.exact-nav-dropdown-item {
+  padding: 10px 18px;
+  color: #E2E8F0;
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.exact-nav-dropdown-item:hover {
+  background: rgba(246, 94, 1, 0.15);
+  color: #FFFFFF;
+}
+
+/* Acciones a la Derecha */
+.exact-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.exact-nav-icon-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.exact-nav-icon-btn:hover {
+  color: var(--bq-orange);
+  transform: scale(1.1);
+}
+
+.exact-nav-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.exact-lang-item {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.exact-lang-item.active {
+  color: #FFFFFF;
+}
+
+.exact-nav-btn-login {
+  background: var(--bq-green);
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+.exact-nav-btn-login:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
+}
+
+.exact-nav-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* ============================================================================
+   3. HERO PRINCIPAL CINEMATOGRÁFICO (SECCIÓN 1 - IMAGEN 4)
+   ============================================================================ */
+.hero-exact {
+  position: relative;
+  min-height: 580px;
+  max-height: 640px;
+  height: 62vw;
+  background-color: var(--bq-navy);
+  background-image: 
+    linear-gradient(90deg, rgba(8, 24, 39, 0.94) 0%, rgba(8, 24, 39, 0.75) 45%, rgba(8, 24, 39, 0.22) 100%),
+    url('../../assets/images/destinos/isla_de_ometepe.jpg');
+  background-size: cover;
+  background-position: center 48%;
+  display: flex;
+  align-items: center;
+  padding-top: 70px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-exact .exact-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-exact-content {
+  max-width: 660px;
+}
+
+.hero-exact-pill {
+  display: inline-block;
+  background: rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(6, 182, 212, 0.6);
+  color: #38BDF8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  padding: 4px 12px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.hero-exact-title {
+  font-family: var(--bq-font-heading);
+  font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+  font-weight: 900;
+  line-height: 0.92;
+  color: #FFFFFF;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+.hero-exact-title-accent {
+  color: var(--bq-orange);
+  font-style: italic;
+  display: inline-block;
+}
+
+.hero-exact-subtitle {
+  font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+  line-height: 1.45;
+  color: #F1F5F9;
+  margin: 0 0 20px 0;
+  max-width: 580px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Buscador Flotante Pill */
+.hero-exact-search {
+  width: min(100%, 540px);
+  height: 52px;
+  background: #FFFFFF;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  padding: 4px 5px 4px 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  margin-bottom: 16px;
+}
+
+.hero-exact-search i {
+  color: var(--bq-navy);
+  font-size: 1.05rem;
+  margin-right: 12px;
+}
+
+.hero-exact-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--bq-font-body);
+  font-size: 0.92rem;
+  color: var(--bq-navy);
+  background: transparent;
+}
+
+.hero-exact-search input::placeholder {
+  color: #94A3B8;
+}
+
+.hero-exact-search button {
+  height: 44px;
+  min-width: 95px;
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 22px;
+  font-family: var(--bq-font-body);
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-exact-search button:hover {
+  background: #E05400;
+  transform: translateY(-1px);
+}
+
+/* Acciones Secundarias */
+.hero-exact-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-exact-btn {
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 21px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.hero-exact-btn.map {
+  background: var(--bq-teal);
+  color: #FFFFFF;
+}
+
+.hero-exact-btn.map:hover {
+  background: #114B59;
+  transform: translateY(-1px);
+}
+
+.hero-exact-btn.ai {
+  background: rgba(11, 37, 58, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+}
+
+.hero-exact-btn.ai:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* Lateral Derecho: Firma Nicaragua Auténtica y Ver Video */
+.hero-exact-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.hero-autentica-badge {
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: #FFFFFF;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+  transform: rotate(-6deg);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hero-video-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--bq-font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  transition: transform 0.2s ease;
+}
+
+.hero-video-pill:hover {
+  transform: scale(1.05);
+}
+
+.hero-video-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================================
+   4. FRANJA DE 10 CATEGORÍAS (SECCIÓN 2 - IMAGEN 4)
+   ============================================================================ */
+.category-strip-section {
+  position: relative;
+  z-index: 10;
+  margin-top: -24px;
+  margin-bottom: 34px;
+}
+
+.category-strip-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(11, 37, 58, 0.08);
+  border: 1px solid var(--bq-border-light);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 8px;
+}
+
+.category-strip-card::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  min-width: 82px;
+  flex: 1;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.category-item:hover {
+  background: #F1F5F9;
+  transform: translateY(-2px);
+}
+
+.category-item.active {
+  background: #ECFDF5;
+}
+
+.category-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
+}
+
+.category-item:hover .category-icon-circle {
+  transform: scale(1.08);
+}
+
+/* Variantes cromáticas idénticas a la referencia */
+.category-icon-circle.all { background: #059669; color: #FFFFFF; }
+.category-icon-circle.beach { background: #E0F2FE; color: #0284C7; }
+.category-icon-circle.volcano { background: #F1F5F9; color: #334155; }
+.category-icon-circle.water { background: #E0F2FE; color: #0369A1; }
+.category-icon-circle.nature { background: #DCFCE7; color: #16A34A; }
+.category-icon-circle.culture { background: #FEF3C7; color: #D97706; }
+.category-icon-circle.food { background: #FFEDD5; color: #EA580C; }
+.category-icon-circle.lodge { background: #EFF6FF; color: #2563EB; }
+.category-icon-circle.adventure { background: #CCFBF1; color: #0D9488; }
+.category-icon-circle.leaf { background: #DCFCE7; color: #15803D; }
+.category-icon-circle.night { background: #F3E8FF; color: #9333EA; }
+
+.category-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--bq-navy);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   5. DESTINOS QUE INSPIRAN (SECCIÓN 3 - IMAGEN 4)
+   ============================================================================ */
+.section-header-exact {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.section-header-exact .title-group h2 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--bq-navy);
+  margin: 0 0 4px 0;
+}
+
+.section-header-exact .title-group p {
+  font-size: 0.88rem;
+  color: var(--bq-text-muted);
+  margin: 0;
+}
+
+.section-header-link {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--bq-navy);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.section-header-link:hover {
+  color: var(--bq-orange);
+}
+
+.destinations-row-exact {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.dest-card-exact {
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(11, 37, 58, 0.06);
+  border: 1px solid var(--bq-border-light);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.dest-card-exact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(11, 37, 58, 0.12);
+}
+
+.dest-card-media {
+  position: relative;
+  height: 155px;
+  overflow: hidden;
+  background: #E2E8F0;
+}
+
+.dest-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.dest-card-exact:hover .dest-card-media img {
+  transform: scale(1.06);
+}
+
+.dest-tag-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  text-transform: capitalize;
+  z-index: 2;
+}
+
+.dest-tag-pill.nature { background: rgba(16, 185, 129, 0.9); color: #FFFFFF; }
+.dest-tag-pill.culture { background: rgba(246, 94, 1, 0.9); color: #FFFFFF; }
+.dest-tag-pill.beach { background: rgba(2, 132, 199, 0.9); color: #FFFFFF; }
+.dest-tag-pill.adventure { background: rgba(13, 148, 136, 0.9); color: #FFFFFF; }
+
+.dest-heart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dest-heart-btn:hover {
+  background: rgba(246, 94, 1, 0.9);
+  transform: scale(1.1);
+}
+
+.dest-card-body {
+  padding: 12px 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dest-card-title {
+  font-family: var(--bq-font-heading);
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0 0 2px 0;
+  text-decoration: none;
+}
+
+.dest-card-location {
+  font-size: 0.74rem;
+  color: var(--bq-text-muted);
+  margin-bottom: 10px;
+}
+
+.dest-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.dest-card-rating {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--bq-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dest-card-rating i {
+  color: #F59E0B;
+  font-size: 0.72rem;
+}
+
+.dest-card-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #F1F5F9;
+  color: var(--bq-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.dest-card-arrow:hover {
+  background: var(--bq-navy);
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+/* ============================================================================
+   6. SPLIT 2-COLUMNAS: MAPA INTERACTIVO + BAQUEANO DIGITAL (SECCIÓN 4)
+   ============================================================================ */
+.map-ai-grid-exact {
+  display: grid;
+  grid-template-columns: 1.42fr 1fr;
+  gap: 18px;
+  margin-bottom: 44px;
+}
+
+/* Tarjeta Izquierda: Mapa de Nicaragua */
+.map-card-exact {
+  background: #08283C;
+  border-radius: 20px;
+  padding: 22px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(11, 37, 58, 0.15);
+}
+
+.map-card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.65fr;
+  gap: 18px;
+  align-items: stretch;
+  height: 100%;
+}
+
+.map-text-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.map-text-side h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin: 0 0 10px 0;
+}
+
+.map-text-side p {
+  font-size: 0.84rem;
+  color: #CBD5E1;
+  line-height: 1.45;
+  margin: 0 0 18px 0;
+}
+
+.map-btn-interactive {
+  background: var(--bq-green);
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.map-btn-interactive:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.map-visual-wrap {
+  position: relative;
+  background: #051C2C;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-visual-viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+}
+
+/* Botones de filtro del mapa a la derecha */
+.map-filter-stack {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.map-filter-chip {
+  background: rgba(11, 37, 58, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.map-filter-chip:hover,
+.map-filter-chip.active {
+  background: var(--bq-orange);
+  border-color: var(--bq-orange);
+}
+
+/* Controles de zoom */
+.map-zoom-controls {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+}
+
+.map-zoom-btn {
+  width: 26px;
+  height: 26px;
+  background: rgba(11, 37, 58, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Tarjeta Derecha: Baqueano Digital */
+.ai-card-exact {
+  background: linear-gradient(145deg, #F0F6FA 0%, #E9F1F8 100%);
+  border: 1px solid var(--bq-border-light);
+  border-radius: 20px;
+  padding: 22px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 12px 32px rgba(11, 37, 58, 0.06);
+}
+
+.ai-avatar-side {
+  flex-shrink: 0;
+}
+
+.ai-avatar-img {
+  width: 95px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+}
+
+.ai-content-side {
+  flex: 1;
+}
+
+.ai-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.ai-title-row i {
+  color: #8B5CF6;
+  font-size: 1.05rem;
+}
+
+.ai-title-row h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0;
+}
+
+.ai-desc-text {
+  font-size: 0.82rem;
+  color: #475569;
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+}
+
+.ai-btn-plan {
+  width: 100%;
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-family: var(--bq-font-body);
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.ai-btn-plan:hover {
+  background: #E05400;
+  transform: translateY(-1px);
+}
+
+.ai-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.ai-quick-chip {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #334155;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-quick-chip:hover {
+  background: #F1F5F9;
+  border-color: var(--bq-orange);
+  color: var(--bq-orange);
+}
+
+/* ============================================================================
+   7. ¿POR QUÉ BAQUEANO? (SECCIÓN 5 - IMAGEN 4)
+   ============================================================================ */
+.why-baqueano-section {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 32px 36px;
+  margin-bottom: 44px;
+  border: 1px solid var(--bq-border-light);
+  box-shadow: 0 8px 26px rgba(11, 37, 58, 0.04);
+}
+
+.why-baqueano-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.4fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.why-left h2 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: var(--bq-navy);
+  margin: 0 0 8px 0;
+}
+
+.why-left p {
+  font-size: 0.88rem;
+  color: var(--bq-text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.why-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.why-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.why-pillar-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.why-pillar-icon.green { background: #DCFCE7; color: #16A34A; }
+.why-pillar-icon.blue { background: #E0F2FE; color: #0284C7; }
+.why-pillar-icon.orange { background: #FFEDD5; color: #EA580C; }
+.why-pillar-icon.teal { background: #CCFBF1; color: #0D9488; }
+.why-pillar-icon.purple { background: #F3E8FF; color: #9333EA; }
+.why-pillar-icon.red { background: #FEE2E2; color: #DC2626; }
+
+.why-pillar-text h4 {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0 0 2px 0;
+}
+
+.why-pillar-text p {
+  font-size: 0.74rem;
+  color: var(--bq-text-muted);
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* ============================================================================
+   8. EXPERIENCIAS DESTACADAS (SECCIÓN 6 - IMAGEN 4)
+   ============================================================================ */
+.experiences-row-exact {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.exp-card-exact {
+  position: relative;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(11, 37, 58, 0.08);
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.exp-card-exact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(11, 37, 58, 0.16);
+}
+
+.exp-card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.exp-card-exact:hover .exp-card-bg {
+  transform: scale(1.06);
+}
+
+.exp-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 24, 39, 0.1) 0%, rgba(8, 24, 39, 0.85) 85%);
+  pointer-events: none;
+}
+
+.exp-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.exp-card-info h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 2px 0;
+}
+
+.exp-card-info p {
+  font-size: 0.74rem;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+.exp-card-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   9. TESTIMONIOS (SECCIÓN 7 - IMAGEN 4)
+   ============================================================================ */
+.testimonials-row-exact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 44px;
+}
+
+.test-card-exact {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid var(--bq-border-light);
+  box-shadow: 0 6px 20px rgba(11, 37, 58, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.test-stars-row {
+  color: #F59E0B;
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 3px;
+}
+
+.test-quote-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #334155;
+  margin: 0 0 18px 0;
+  flex: 1;
+}
+
+.test-author-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.test-avatar-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #CBD5E1;
+}
+
+.test-author-info h4 {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0;
+}
+
+.test-author-info span {
+  font-size: 0.72rem;
+  color: var(--bq-text-muted);
+}
+
+/* ============================================================================
+   10. SCENIC CTA BANNER (SECCIÓN 8 - IMAGEN 4)
+   ============================================================================ */
+.scenic-banner-section {
+  margin-bottom: 44px;
+}
+
+.scenic-banner-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--bq-navy-dark);
+  background-image: 
+    linear-gradient(90deg, rgba(8, 24, 39, 0.94) 0%, rgba(8, 24, 39, 0.7) 50%, rgba(8, 24, 39, 0.85) 100%),
+    url('../../assets/images/footer.png');
+  background-size: cover;
+  background-position: center;
+  padding: 38px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  box-shadow: 0 14px 36px rgba(11, 37, 58, 0.18);
+}
+
+.scenic-banner-left {
+  max-width: 480px;
+}
+
+.scenic-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--bq-cream);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.scenic-title {
+  font-family: var(--bq-font-heading);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.scenic-banner-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  max-width: 460px;
+  text-align: right;
+}
+
+.scenic-banner-right p {
+  font-size: 0.88rem;
+  color: #F1F5F9;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.scenic-btns-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.scenic-btn-explore {
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  padding: 10px 22px;
+  border-radius: 22px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.scenic-btn-explore:hover {
+  background: #E05400;
+  transform: translateY(-1px);
+}
+
+.scenic-btn-route {
+  background: rgba(11, 37, 58, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 22px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.scenic-btn-route:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #FFFFFF;
+}
+
+/* ============================================================================
+   11. SUMATE A LA COMUNIDAD BAQUEANO (SECCIÓN 9 - IMAGEN 4)
+   ============================================================================ */
+.community-section-exact {
+  margin-bottom: 50px;
+}
+
+.community-card-exact {
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: 1px solid var(--bq-border-light);
+  box-shadow: 0 8px 28px rgba(11, 37, 58, 0.05);
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.community-left-host {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1.2;
+}
+
+.host-avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #E2E8F0;
+  flex-shrink: 0;
+}
+
+.host-info-text h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.22rem;
+  font-weight: 900;
+  color: var(--bq-navy);
+  margin: 0 0 4px 0;
+}
+
+.host-info-text p {
+  font-size: 0.82rem;
+  color: var(--bq-text-muted);
+  margin: 0 0 12px 0;
+}
+
+.community-btn-register {
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 9px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.community-btn-register:hover {
+  background: #E05400;
+  transform: translateY(-1px);
+}
+
+.community-perks-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex: 1.3;
+  justify-content: flex-end;
+}
+
+.community-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.community-perk-item i {
+  font-size: 1.25rem;
+}
+
+.community-perk-item i.orange { color: var(--bq-orange); }
+.community-perk-item i.blue { color: #0284C7; }
+.community-perk-item i.green { color: #16A34A; }
+
+.perk-text h5 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0 0 1px 0;
+}
+
+.perk-text span {
+  font-size: 0.72rem;
+  color: var(--bq-text-muted);
+}
+
+/* ============================================================================
+   12. FOOTER INSTITUCIONAL (SECCIÓN 10 - IMAGEN 4)
+   ============================================================================ */
+.site-footer-exact {
+  background: var(--bq-navy-dark);
+  color: #FFFFFF;
+  padding-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
+  gap: 28px;
+  padding-bottom: 40px;
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+
+.footer-logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.footer-brand-title {
+  font-family: var(--bq-font-heading);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+}
+
+.footer-tagline-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bq-cream);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.footer-social-row {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social-link {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social-link:hover {
+  background: var(--bq-orange);
+  transform: translateY(-2px);
+}
+
+.footer-nav-col h4 {
+  font-family: var(--bq-font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 14px 0;
+}
+
+.footer-nav-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-col a {
+  color: #94A3B8;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-nav-col a:hover {
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+.footer-badge-col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer-badge-script {
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: 2.2rem;
+  color: #FFFFFF;
+  text-align: right;
+  line-height: 1.1;
+  opacity: 0.9;
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 18px 0;
+}
+
+.footer-bottom-bar .exact-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: #64748B;
+}
+
+/* ============================================================================
+   13. ADAPTABILIDAD RESPONSIVA (MOBILE & TABLET BREAKPOINTS)
+   ============================================================================ */
+@media (max-width: 1024px) {
+  .exact-nav-menu { display: none; }
+  .exact-nav-mobile-toggle { display: block; }
+  .destinations-row-exact { grid-template-columns: repeat(3, 1fr); }
+  .map-ai-grid-exact { grid-template-columns: 1fr; }
+  .why-baqueano-grid { grid-template-columns: 1fr; gap: 20px; }
+  .experiences-row-exact { grid-template-columns: repeat(2, 1fr); }
+  .footer-top-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .hero-exact {
+    min-height: 520px;
+    height: auto;
+    padding: 85px 0 35px 0;
+  }
+  .hero-exact .exact-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .hero-exact-right {
+    align-items: flex-start;
+  }
+  .destinations-row-exact { grid-template-columns: repeat(2, 1fr); }
+  .why-pillars-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-row-exact { grid-template-columns: 1fr; }
+  .scenic-banner-card { flex-direction: column; align-items: flex-start; padding: 28px 22px; }
+  .scenic-banner-right { align-items: flex-start; text-align: left; }
+  .scenic-btns-row { justify-content: flex-start; }
+  .community-card-exact { flex-direction: column; align-items: flex-start; }
+  .community-perks-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-top-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .destinations-row-exact { grid-template-columns: 1fr; }
+  .experiences-row-exact { grid-template-columns: 1fr; }
+  .why-pillars-grid { grid-template-columns: 1fr; }
+  .map-card-inner { grid-template-columns: 1fr; }
+  .hero-exact-title { font-size: 2.5rem; }
+}
+
+/* ============================================================================
+   14. ESTILOS DE MODALES ACCESIBLES (#bizRegisterModal, #sosModal, #videoModal)
+   ============================================================================ */
+.modal-backdrop-pro {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 15, 26, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop-pro.is-open,
+.modal-backdrop-pro.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card-dialog,
+.sos-modal-dialog {
+  background: #0B253A;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 580px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  position: relative;
+  transform: scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #FFFFFF;
+}
+
+.modal-backdrop-pro.is-open .modal-card-dialog,
+.modal-backdrop-pro.is-open .sos-modal-dialog,
+.modal-backdrop-pro.active .modal-card-dialog,
+.modal-backdrop-pro.active .sos-modal-dialog {
+  transform: scale(1);
+}
+
+.modal-close-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.modal-close-x:hover {
+  background: var(--bq-orange);
+  transform: rotate(90deg);
+}
+
+.biz-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.biz-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.biz-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+
+.biz-input,
+.biz-select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.biz-input:focus,
+.biz-select:focus {
+  border-color: var(--bq-orange);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.biz-select option {
+  background: #0B253A;
+  color: #FFFFFF;
+}
+
+.biz-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+

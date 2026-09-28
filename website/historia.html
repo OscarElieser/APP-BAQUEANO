@@ -1,1154 +1,709 @@
 <!DOCTYPE html>
 <!--
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — MÓDULO INSIGNIA: HISTORIA DE MI PAÍS (historia.html)
+🧭 BAQUEANO ECOSYSTEM — MEMORIA VIVA & HISTORIA (historia.html)
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Dotar al explorador y a las nuevas generaciones de una comprensión profunda
-  de la identidad, soberanía y resistencia histórica de Nicaragua, desde las
-  culturas originarias prehispánicas hasta el país resiliente de hoy.
-- Promover un turismo culturalmente consciente que valore la memoria comunitaria,
-  los sitios arqueológicos y la riqueza viva de los 17 departamentos y regiones.
+- Presentar la memoria histórica y patrimonio cultural de Nicaragua
+  idéntico a la referencia oficial (Imagen 1).
+- Dotar al explorador de un viaje cronológico y territorial desde las culturas
+  prehispánicas hasta la Nicaragua soberana y contemporánea de hoy.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Línea de tiempo interactiva vertical con acentos en oro noble (#D4AF37) y
-  tarjetas de lectura con desenfoque de fondo.
-- Explorador interactivo de los 17 territorios nicaragüenses con fichas informativas.
-- Integración completa con el sistema de estilos modulares (colors, typography, layout, components, modules).
+- Misma barra de navegación horizontal global con "Historia" activo.
+- Hero editorial "UNA HISTORIA QUE SIGUE VIVA" con accesos a la cronología y territorios.
+- Línea de tiempo de 7 periodos fundamentales con fichas de época.
+- Split de Exploración territorial (Mapa departamental + Directorio de los 17 territorios).
+- Colecciones de Pueblos originarios, Personajes ilustres, Patrimonio vivo y Antes y Ahora.
+- Audioguía Baqueano con waveform interactiva, fuentes oficiales verificadas y footer.
 
-📦 3. QUÉ (WHAT / CONTENIDOS):
-- 7 Periodos Históricos Clave: Orígenes Indígenas, Resistencia Indígena, Época Colonial,
-  Independencia de Centroamérica, Batalla de San Jacinto, Lucha de Sandino, Resiliencia Contemporánea.
-- Explorador de los 17 Departamentos y Regiones Autónomas (Costa Caribe Norte y Sur).
-- Barra de navegación y pie institucional Baqueano con centro de auxilio SOS.
+📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
+- HTML5 semántico con Leaflet 1.9.4, FontAwesome 6 y Google Fonts.
+- Estilos en css/pages/historia-exact.css y modales oficiales.
 ============================================================================
 -->
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Historia de Nicaragua | Baqueano Nicaragua</title>
-  <meta name="description" content="Recorre la memoria histórica de Nicaragua: 7 periodos fundamentales y el explorador de los 17 departamentos y regiones autónomas.">
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <meta name="description" content="Recorre la memoria histórica de Nicaragua: 7 periodos, pueblos originarios, personajes y los 17 territorios.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
 
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome Icons -->
+  <!-- FontAwesome Icons Suite -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Estilos Modulares Baqueano -->
-  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
-  <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
-  <link rel="stylesheet" href="css/nicaragua-branding.css">
-  <link rel="stylesheet" href="css/pages/historia.css">
-  <style id="historyReferenceLayout">
-    /* ======================================================================
-       HISTORIA VIVA — ADAPTACIÓN FIEL DE LA REFERENCIA
-       POR QUÉ: hacer la memoria nacional explorable, visual y fácil de leer.
-       CÓMO: reutiliza la cronología y los 17 territorios en formato compacto.
-       QUÉ: hero, línea del tiempo, mapa territorial y colecciones históricas.
-       ====================================================================== */
-    .page-historia{background:#f7f9fc;color:#0b2947}.page-historia .main-navbar{background:rgba(3,39,66,.96);border-bottom:1px solid rgba(255,255,255,.18)}
-    .page-historia .video-hero-wrapper{height:min(42vw,410px);min-height:370px}.page-historia .video-hero-media{filter:brightness(.75) saturate(1.12);object-position:center 52%}.page-historia .video-hero-gradient{background:linear-gradient(90deg,rgba(3,31,49,.94),rgba(3,31,49,.34) 62%,rgba(3,31,49,.08))}.page-historia .video-hero-scanlines{display:none}.page-historia .video-hero-content{max-width:1180px;width:100%;left:50%;transform:translate(-50%,-44%);padding:0 30px;text-align:left;align-items:flex-start}.page-historia .video-hero-badge{background:transparent!important;border:0!important;padding:0!important;color:#09c985!important;letter-spacing:.14em!important}.page-historia .video-hero-title{max-width:700px;font:900 clamp(2.8rem,5.3vw,5rem)/.93 'Montserrat',sans-serif;letter-spacing:-.045em;text-shadow:0 4px 24px rgba(0,0,0,.45)}.history-title-accent{color:#ff6813;font-style:italic}.page-historia .video-hero-subtitle{max-width:570px;font-size:1rem;color:#fff}.history-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.history-hero-action{min-height:44px;padding:0 20px;border-radius:13px;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:800 .8rem 'Inter',sans-serif}.history-hero-action.primary{background:#ff6813;color:#fff}.history-hero-action.secondary{border:1px solid rgba(255,255,255,.84);background:rgba(3,39,66,.34);color:#fff;backdrop-filter:blur(10px)}
-    .page-historia .page-wrapper{padding:0}.page-historia .history-section-pro{padding:18px 24px 40px}.page-historia .history-section-pro>.container{max-width:1180px}.history-section-heading{display:flex;gap:12px;align-items:center;margin:0 0 12px}.history-section-heading i{font-size:1.55rem;color:#ff6813}.history-section-heading h2{margin:0;font:900 1.4rem 'Montserrat',sans-serif}.history-section-heading p{margin:3px 0 0;color:#60758b;font-size:.78rem}
-    .page-historia .timeline-periods-flow{display:grid!important;grid-template-columns:repeat(7,minmax(145px,1fr))!important;gap:10px!important;overflow-x:auto!important;padding:4px 2px 12px!important;margin:0 0 18px!important;scrollbar-width:thin}.page-historia .timeline-period-card{min-width:145px!important;margin:0!important;padding:0!important;border:1px solid #e1e8ed!important;border-radius:14px!important;background:#fff!important;box-shadow:0 6px 18px rgba(12,44,70,.07)!important;overflow:hidden!important}.page-historia .timeline-period-badge{position:absolute!important;left:8px!important;top:94px!important;width:22px!important;height:22px!important;font-size:.65rem!important;background:#ff6813!important;z-index:3}.page-historia .timeline-content-box{display:flex!important;flex-direction:column-reverse!important;padding:0!important;background:#fff!important;border:0!important;box-shadow:none!important}.page-historia .timeline-text-side{padding:10px!important}.page-historia .timeline-era-tag{padding:0!important;background:none!important;color:#60758b!important;font-size:.6rem!important}.page-historia .timeline-text-side h3{margin:4px 0!important;color:#0b2947!important;font-size:.76rem!important;line-height:1.2!important}.page-historia .timeline-text-side p{font-size:.62rem!important;line-height:1.35!important;color:#60758b!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.page-historia .timeline-img-side{width:100%!important;height:112px!important}.page-historia .timeline-media-img{height:112px!important;width:100%!important;object-fit:cover!important}.page-historia .timeline-img-caption{display:none!important}
-    .page-historia .history-section-pro>.container>div[style*="background: rgba(15, 23, 42"]{display:none!important}.page-historia .section-lead-header{margin:20px 0 10px!important;text-align:left!important}.page-historia .section-lead-header .badge-section-pill{display:none!important}.page-historia .section-headline{color:#0b2947!important;-webkit-text-fill-color:#0b2947!important;background:none!important;font:900 1.4rem 'Montserrat',sans-serif!important}.page-historia .section-subtext{color:#60758b!important;font-size:.78rem!important}
-    .history-territory-layout{display:grid;grid-template-columns:1.25fr .9fr;gap:14px;align-items:stretch;margin-bottom:22px}.history-map-visual{position:relative;min-height:390px;border-radius:16px;overflow:hidden;background:linear-gradient(rgba(7,111,100,.12),rgba(7,111,100,.12)),url('assets/images/footer-nicaragua-panorama.png') center/cover;box-shadow:0 10px 26px rgba(12,44,70,.12)}.history-map-visual::after{content:'NICARAGUA';position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font:900 2.1rem 'Montserrat',sans-serif;letter-spacing:.15em;color:rgba(255,255,255,.7);text-shadow:0 2px 12px rgba(0,0,0,.5)}.history-map-pin{position:absolute;z-index:2;width:42px;height:42px;border:3px solid #fff;border-radius:50%;overflow:hidden;box-shadow:0 5px 12px rgba(0,0,0,.3)}.history-map-pin img{width:100%;height:100%;object-fit:cover}.history-map-pin.m1{left:20%;top:30%}.history-map-pin.m2{left:39%;top:20%}.history-map-pin.m3{left:49%;top:44%}.history-map-pin.m4{left:65%;top:58%}.history-map-pin.m5{right:13%;bottom:14%}.history-map-pin.m6{left:27%;bottom:14%}.page-historia .territories-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:5px!important;padding:14px!important;border:1px solid #e1e8ed!important;border-radius:16px!important;background:#fff!important;max-height:390px!important;overflow-y:auto!important}.page-historia .territory-pill-card{min-height:37px!important;padding:4px 7px!important;border:1px solid #e5ebef!important;border-radius:8px!important;background:#fff!important;display:flex!important;align-items:center!important;gap:7px!important}.page-historia .territory-pill-img-wrap{width:42px!important;height:28px!important;min-width:42px!important;border-radius:5px!important}.page-historia .territory-pill-thumb{width:100%!important;height:100%!important;object-fit:cover!important}.page-historia .territory-pill-video-tag,.page-historia .territory-pill-info span{display:none!important}.page-historia .territory-pill-info h5{font-size:.67rem!important;color:#0b2947!important;margin:0!important}.page-historia .territories-action-banner{display:none!important}
-    .history-collection{margin:22px 0}.history-collection-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}.history-collection h2{margin:0;font:900 1.25rem 'Montserrat',sans-serif}.history-collection p{margin:2px 0 0;font-size:.75rem;color:#60758b}.history-card-grid{display:grid;gap:10px}.history-card-grid.five{grid-template-columns:repeat(5,1fr)}.history-card-grid.six{grid-template-columns:repeat(6,1fr)}.history-mini-card{position:relative;min-height:165px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #e1e8ed;box-shadow:0 6px 16px rgba(12,44,70,.07)}.history-mini-card img{width:100%;height:105px;object-fit:cover}.history-mini-card-body{padding:9px}.history-mini-card strong{display:block;font-size:.73rem;color:#0b2947}.history-mini-card span{display:block;margin-top:3px;font-size:.61rem;line-height:1.3;color:#60758b}.history-compare-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.history-compare-card{border-radius:13px;overflow:hidden;background:#fff;border:1px solid #e1e8ed}.history-compare-images{height:125px;display:grid;grid-template-columns:1fr 1fr;gap:2px}.history-compare-images img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}.history-compare-images img:last-child{filter:none}.history-compare-card strong{display:block;padding:9px;font-size:.7rem}
-    .history-listen{margin:22px 0;padding:18px 22px;display:flex;align-items:center;gap:16px;border:1px solid #dfe7ec;border-radius:17px;background:linear-gradient(120deg,#f1fbf9,#f5f8ff)}.history-listen-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#0b4c63;color:#fff;font-size:1.3rem}.history-listen-copy{flex:1}.history-listen h2{margin:0;font:900 1.2rem 'Montserrat',sans-serif}.history-listen p{margin:3px 0;color:#60758b;font-size:.75rem}.history-wave{height:36px;min-width:240px;background:repeating-linear-gradient(90deg,#66b8ce 0 2px,transparent 2px 6px);mask:linear-gradient(0deg,transparent 10%,#000 30% 70%,transparent 90%)}.history-sources{margin:20px 0;padding:16px;border-radius:15px;background:#fff;border:1px solid #e1e8ed}.history-source-row{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:10px}.history-source-pill{min-height:54px;padding:8px;border:1px solid #e5eaee;border-radius:10px;display:grid;place-items:center;text-align:center;font-size:.66rem;font-weight:800;color:#173b5c}
-    .history-final-banner{margin:26px -24px -40px;padding:38px max(24px,calc((100vw - 1180px)/2));background:linear-gradient(90deg,rgba(3,31,49,.88),rgba(3,31,49,.25)),url('assets/images/footer-nicaragua-panorama.png') center/cover;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px}.history-final-banner h2{margin:0;font:900 1.5rem 'Montserrat',sans-serif}.history-final-banner p{margin:4px 0 0;font-size:.8rem}.history-final-banner a{padding:13px 18px;border-radius:12px;background:#ff6813;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap}
-    @media(max-width:900px){.history-territory-layout{grid-template-columns:1fr}.history-card-grid.five{grid-template-columns:repeat(3,1fr)}.history-card-grid.six{grid-template-columns:repeat(3,1fr)}.history-compare-grid{grid-template-columns:repeat(2,1fr)}.history-source-row{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:600px){.page-historia .video-hero-wrapper{height:530px;min-height:530px}.page-historia .video-hero-content{padding:0 20px}.page-historia .video-hero-title{font-size:2.8rem}.page-historia .history-section-pro{padding-left:12px;padding-right:12px}.history-card-grid.five,.history-card-grid.six{grid-template-columns:repeat(2,1fr)}.history-listen{flex-wrap:wrap}.history-wave{width:100%}.history-final-banner{margin-left:-12px;margin-right:-12px;flex-direction:column;align-items:flex-start}}
-  </style>
-</head>
-<body class="has-video-hero page-historia">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
-  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
-  <nav class="main-navbar" id="mainNavbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand-box">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-        <div class="brand-text">
-          <span class="brand-title">BAQUEANO</span>
-          <span class="brand-tagline">NICARAGUA</span>
+  <!-- Estilos del Ecosistema Baqueano -->
+  <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/pages/historia-exact.css?v=20260927-exact-1">
+</head>
+
+<body class="page-historia-exact">
+
+  <!-- ============================================================================
+       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL (IDÉNTICA A LAS IMÁGENES 1-4)
+       ============================================================================ -->
+  <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container">
+      <a href="index.html" class="exact-nav-brand" aria-label="Baqueano Nicaragua — Inicio">
+        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo">
+        <div class="exact-nav-brand-text">
+          <span class="exact-nav-title">BAQUEANO</span>
+          <span class="exact-nav-tagline">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <div class="nav-links-menu" id="navLinksMenu">
-        <a href="index.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Inicio</span>
-              <span class="nav-sublabel">Portal Soberano</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
+      <div class="exact-nav-menu" id="navLinksMenu" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem">Inicio</a>
+        <a href="destinos.html" class="exact-nav-link" role="menuitem">Destinos</a>
+        <a href="index.html#mapaAiSection" class="exact-nav-link" role="menuitem">Mapa</a>
+        <a href="index.html#experienciasSection" class="exact-nav-link" role="menuitem">Experiencias</a>
+        <a href="index.html#baqueanoDigitalCard" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem">Mi Viaje</a>
+        <a href="historia.html" class="exact-nav-link active" role="menuitem">Historia</a>
+        <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
 
-        <!-- BOTÓN PRINCIPAL MI PAÍS CON SUBMENÚ -->
-        <div class="nav-dropdown" id="navDropdownMiPais">
-          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
-            <span class="nav-item-content">
-              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
-              <span class="nav-text-group">
-                <span class="nav-label">Mi País</span>
-              </span>
-            </span>
-            <span class="nav-dropdown-caret">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
+        <div class="exact-nav-dropdown">
+          <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Más <i class="fa-solid fa-chevron-down" style="font-size: 0.72rem; margin-left: 2px;"></i>
           </button>
-          <div class="nav-dropdown-menu" role="menu">
-            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Destinos</span>
-                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
-              </div>
-              <span class="nav-dd-badge">29</span>
-            </a>
-            <a href="historia.html" class="nav-dropdown-item active" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Historia</span>
-                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
-              </div>
-            </a>
-            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Gastronomía</span>
-                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
-              </div>
-            </a>
-            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
-              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
-              <div class="nav-dd-text">
-                <span class="nav-dd-title">Música</span>
-                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
-              </div>
-            </a>
+          <div class="exact-nav-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf" style="color: #10B981;"></i> Ambiental</a>
+            <a href="gastronomia.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-utensils" style="color: #F65E01;"></i> Gastronomía</a>
+            <a href="musica.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-guitar" style="color: #A855F7;"></i> Música</a>
+            <a href="admin.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-gauge" style="color: #F4E6C1;"></i> Ops Center</a>
           </div>
         </div>
-
-        <a href="ambiental.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ambiental</span>
-              <span class="nav-sublabel">Huella Cero & Decálogo</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="aliados.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Aliados</span>
-              <span class="nav-sublabel">Cooperativas Campesinas</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <!-- BOTÓN NOSOTROS -->
-        <a href="nosotros.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Nosotros</span>
-              <span class="nav-sublabel">Marca & Manifiesto</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
-
-        <a href="admin.html">
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">Ops Center</span>
-              <span class="nav-sublabel">Comando & Telemetría</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">● 24/7</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        </a>
       </div>
 
-      <div class="nav-actions-right">
-        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
-          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
-        </button>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+      <div class="exact-nav-actions">
+        <a href="destinos.html" class="exact-nav-icon-btn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="destinos.html?favs=1" class="exact-nav-icon-btn" title="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <div class="exact-nav-lang">
+          <span class="exact-lang-item active">ES</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="exact-lang-item">EN</span>
+        </div>
+        <a href="perfil.html" class="exact-nav-btn-login">Iniciar sesión</a>
+        <button type="button" class="exact-nav-mobile-toggle" id="mobileNavToggle" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
   </nav>
 
-  <!-- VIDEO HERO CINEMATOGRÁFICO DE HISTORIA -->
-  <div class="video-hero-wrapper">
-    <video class="video-hero-media" autoplay loop muted playsinline preload="metadata" poster="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" aria-label="Patrimonio histórico y cultural de Nicaragua">
-      <source src="https://www.visitanicaragua.com/wp-content/uploads/2026/09/Islas.mp4" type="video/mp4">
-      <source src="assets/videos/historia.mp4" type="video/mp4">
-    </video>
-    <div class="video-hero-gradient"></div>
-    <div class="video-hero-scanlines"></div>
-    <div class="video-hero-content">
-      <div class="video-hero-badge">
-        <i class="fa-solid fa-landmark"></i> Módulo Insignia de Identidad
-      </div>
-      <h1 class="video-hero-title">UNA HISTORIA<br>QUE SIGUE <span class="history-title-accent">VIVA</span></h1>
-      <p class="video-hero-subtitle">
-        Pueblos, culturas, luchas y tradiciones que han dado forma a nuestra identidad.
-      </p>
-      <div class="history-hero-actions">
-        <a class="history-hero-action primary" href="#historyTimeline"><i class="fa-solid fa-book-open"></i> Explorar línea del tiempo →</a>
-        <a class="history-hero-action secondary" href="#territoriesGrid"><i class="fa-regular fa-map"></i> Explorar territorios</a>
-      </div>
-    </div>
-    <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
-  </div>
-
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="page-wrapper has-hero-header">
-    <section class="history-section-pro">
-      <div class="container">
+  <main id="mainContent">
 
-        <!-- LÍNEA DE TIEMPO DE 7 PERIODOS -->
-        <div class="history-section-heading" id="historyTimeline"><i class="fa-regular fa-rectangle-list"></i><div><h2>Línea del tiempo de Nicaragua</h2><p>Un recorrido por los momentos que construyeron nuestra nación.</p></div></div>
-        <div class="timeline-periods-flow">
-          <!-- Periodo 1 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">1</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Época Prehispánica (~8,000 a.C. - 1502 d.C.)</div>
-                <h3>Pueblos Originarios & Cosmovisión del Xolotlán</h3>
-                <p>
-                  Asentamientos Chorotegas, Nicaraos, Maribios, Matagalpas, Miskitos y Mayangnas que veneraban el agua,
-                  los volcanes sagrados y cultivaban el maíz como génesis divina. Las Huellas de Acahualinca y los petroglifos
-                  de Ometepe testimonian milenios de armonía territorial comunitaria.
-                </p>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Petroglifos y Cosmovisión de Ometepe" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-camera"></i> Petroglifos Ancestrales · Ometepe</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Periodo 2 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">2</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Siglo XVI (1523 - 1524)</div>
-                <h3>Resistencia Indígena: El Encuentro y Diriangén</h3>
-                <p>
-                  El Cacique Nicarao dialoga filosóficamente con Gil González Dávila, mientras el gran jefe Diriangén
-                  organiza el primer combate documentado de resistencia indígena frente a la expedición colonizadora, consagrando
-                  la rebeldía que caracteriza el temple del pueblo nicaragüense.
-                </p>
-                <div style="margin-top: 0.65rem; font-size: 0.72rem; color: #2DD4BF; display: inline-flex; align-items: center; gap: 0.35rem;">
-                  <i class="fa-solid fa-book-bookmark"></i>
-                  <span>Fuente: <em>Historia General y Natural de las Indias</em> (G. Fernández de Oviedo) &amp; Archivo Histórico de la AGHN.</span>
-                </div>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/volcan_masaya.jpg" alt="Rebeldía y Fuego de Diriangén" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-fire"></i> Fuego Sagrado · Volcán Masaya</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Periodo 3 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">3</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Periodo Colonial (1524 - 1821)</div>
-                <h3>Fundación de Ciudades & Sincretismo Cultural</h3>
-                <p>
-                  Francisco Hernández de Córdoba funda Santiago de los Caballeros de León y Granada. Surge el mestizaje
-                  arquitectónico, el habla popular pinolera y la inmortal comedia bailete de protesta popular: <em>El Güegüense</em>,
-                  declarado Patrimonio Oral e Intangible de la Humanidad por la UNESCO.
-                </p>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/Casa Señorial Colonial Granada.jpg" alt="Arquitectura Colonial de Granada" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-landmark"></i> Arquitectura Colonial · Granada</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Periodo 4 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">4</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Independencia (1821)</div>
-                <h3>Ruptura con la Corona Española</h3>
-                <p>
-                  El 15 de septiembre de 1821 se proclama el Acta de Independencia de Centroamérica. Nicaragua inicia su senda
-                  como nación soberana, superando las confrontaciones locales y defendiendo su autodeterminación territorial.
-                </p>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/Museo y Convento San Francisco (1529).jpg" alt="Claustros y Memoria Histórica" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-scroll"></i> Convento San Francisco (1529)</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Periodo 5 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">5</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Guerra Nacional (1856)</div>
-                <h3>Defensa Nacional & La Pedrada de Andrés Castro</h3>
-                <p>
-                  Frente a la invasión del filibustero William Walker que pretendía esclavizar Centroamérica, el pueblo
-                  se levanta en la gloriosa Batalla de San Jacinto (14 de septiembre de 1856). Andrés Castro derriba al invasor
-                  de una certera pedrada, símbolo eterno de dignidad nacional.
-                </p>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Baluarte de Defensa Soberana" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-shield"></i> Fortaleza y Soberanía Patria</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Periodo 6 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">6</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Siglo XX (1927 - 1934)</div>
-                <h3>General de Hombres Libres: Augusto C. Sandino</h3>
-                <p>
-                  Desde las montañas de Las Segovias, Sandino y su Ejército Defensor de la Soberanía Nacional expulsan
-                  a las tropas de ocupación extranjera con tácticas de guerrilla comunitaria y cooperativismo agrícola
-                  sobre el Río Coco, cuna del ecoturismo campesino.
-                </p>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Las Segovias y Río Coco" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-mountain"></i> Las Segovias · Cuna Cooperativa</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Periodo 7 -->
-          <div class="timeline-period-card">
-            <div class="timeline-period-badge">7</div>
-            <div class="timeline-content-box timeline-with-media">
-              <div class="timeline-text-side">
-                <div class="timeline-era-tag">Época Contemporánea & Turismo Comunitario</div>
-                <h3>Paz, Soberanía y Ecoturismo de Custodia Local</h3>
-                <p>
-                  Nicaragua avanza protegiendo su patrimonio ecológico: Reservas de Biosfera Bosawás, Río San Juan e Isla de Ometepe.
-                  Baqueano surge para que cada viajero respete las tradiciones campesinas y apoye a las familias locales de forma directa.
-                </p>
-              </div>
-              <div class="timeline-img-side">
-                <img src="assets/images/destinos/cerro_negro.jpg" alt="Ecoturismo y Aventura Soberana" class="timeline-media-img" loading="lazy">
-                <span class="timeline-img-caption"><i class="fa-solid fa-person-hiking"></i> Aventura y Ecoturismo · Cerro Negro</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- FUENTES Y RIGOR HISTÓRICO CONSULTADO -->
-        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(244, 230, 193, 0.2); border-radius: 14px; padding: 1.25rem 1.5rem; margin: 2rem auto; max-width: 900px; backdrop-filter: blur(8px);">
-          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem; color: #2DD4BF; font-weight: 700; font-size: 0.92rem;">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Fuentes Históricas y Referencias Bibliográficas Consultadas</span>
-          </div>
-          <p style="font-size: 0.8rem; color: #CBD5E1; margin: 0 0 0.75rem; line-height: 1.5;">
-            La narrativa de memoria territorial de BAQUEANO se fundamenta en crónicas de época, estudios antropológicos y documentación histórica académica para garantizar objetividad, rigor y respeto al patrimonio cultural:
+    <!-- ============================================================================
+         1. HERO HISTORIA (IMAGEN 1)
+         ============================================================================ -->
+    <section class="hist-hero-exact">
+      <div class="exact-container">
+        <div class="hist-hero-left">
+          <span class="hist-hero-badge">NICARAGUA</span>
+          <h1 class="hist-hero-title">
+            UNA HISTORIA<br>
+            <span class="hist-hero-title-accent">QUE SIGUE VIVA</span>
+          </h1>
+          <p class="hist-hero-subtitle">
+            Pueblos, culturas, luchas y tradiciones que han dado forma a nuestra identidad.
           </p>
-          <ul style="font-size: 0.76rem; color: #94A3B8; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
-            <li><strong>Período Prehispánico y Resistencia:</strong> Gonzalo Fernández de Oviedo (<em>Historia General y Natural de las Indias</em>) y Academia de Geografía e Historia de Nicaragua (AGHN).</li>
-            <li><strong>Patrimonio Colonial y Barroco:</strong> Archivos Coloniales de León Viejo y Granada (UNESCO, Criterios de Inscripción de Patrimonio Mundial).</li>
-            <li><strong>Gesta Nacional y Soberanía (1856 - 1934):</strong> José Dolores Gámez (<em>Historia de Nicaragua</em>) y Crónicas de la Batalla de San Jacinto.</li>
-            <li><strong>Identidad y Ecosistemas:</strong> Anuarios del Instituto Nicaragüense de Cultura (INC) y registros etnográficos comunitarios.</li>
-          </ul>
+          <div class="hist-hero-btns">
+            <a href="#lineaTiempoSeccion" class="hist-btn-orange"><i class="fa-solid fa-book-open"></i> Explorar línea del tiempo <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#territoriosSeccion" class="hist-btn-glass"><i class="fa-regular fa-map"></i> Explorar territorios</a>
+          </div>
         </div>
 
-        <!-- EXPLORADOR DE LOS 17 TERRITORIOS -->
-        <div class="section-lead-header historia-inline-001">
-          <div class="badge-section-pill">
-            <i class="fa-solid fa-map-location-dot"></i> Geografía Soberana
+        <div class="hist-hero-right">
+          <div class="hist-hero-script">
+            Nuestra historia<br>también se viaja
           </div>
-          <h2 class="section-headline">Explorador de los 17 Territorios de Nicaragua</h2>
-          <p class="section-subtext">
-            15 Departamentos y 2 Regiones Autónomas. Haz clic sobre cada territorio para explorar su identidad turística comunitaria.
-          </p>
-        </div>
-
-        <div class="history-territory-layout">
-          <div class="history-map-visual" aria-label="Mapa visual de los territorios de Nicaragua">
-            <span class="history-map-pin m1"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Norte"></span>
-            <span class="history-map-pin m2"><img src="assets/images/destinos/selva_negra.jpg" alt="Montañas"></span>
-            <span class="history-map-pin m3"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Masaya"></span>
-            <span class="history-map-pin m4"><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada"></span>
-            <span class="history-map-pin m5"><img src="assets/images/destinos/corn_island.jpg" alt="Caribe"></span>
-            <span class="history-map-pin m6"><img src="assets/images/destinos/cerro_negro.jpg" alt="Occidente"></span>
-          </div>
-        <div class="territories-grid" id="territoriesGrid">
-          <a href="departamento.html?id=madriz" class="territory-pill-card territory-media-pill" data-territory="madriz">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Madriz" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Madriz</h5>
-              <span>Cañón de Somoto & Rosquillas</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=leon" class="territory-pill-card territory-media-pill" data-territory="leon">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/cerro_negro.jpg" alt="León" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>León</h5>
-              <span>Cerro Negro & Catedral Insigne</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=rivas" class="territory-pill-card territory-media-pill" data-territory="rivas">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Rivas" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Rivas</h5>
-              <span>Isla de Ometepe & Playas de Sur</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=jinotega" class="territory-pill-card territory-media-pill" data-territory="jinotega">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/cascada_la_luna.jpg" alt="Jinotega" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Jinotega</h5>
-              <span>Cascada La Luna & Café Nebliselva</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=masaya" class="territory-pill-card territory-media-pill" data-territory="masaya">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Masaya" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Masaya</h5>
-              <span>Volcán Activo & Cuna del Folklore</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=granada" class="territory-pill-card territory-media-pill" data-territory="granada">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/Casa Señorial Colonial Granada.jpg" alt="Granada" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Granada</h5>
-              <span>Isletas, Mombacho & Arquitectura</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=matagalpa" class="territory-pill-card territory-media-pill" data-territory="matagalpa">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/selva_negra.jpg" alt="Matagalpa" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Matagalpa</h5>
-              <span>Selva Negra, Cacao & Guías Indígenas</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=esteli" class="territory-pill-card territory-media-pill" data-territory="esteli">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Estelí" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Estelí</h5>
-              <span>Salto La Estanzuela & Muralismo</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=chinandega" class="territory-pill-card territory-media-pill" data-territory="chinandega">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/cerro_negro.jpg" alt="Chinandega" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Chinandega</h5>
-              <span>Volcán San Cristóbal & Cosigüina</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=managua" class="territory-pill-card territory-media-pill" data-territory="managua">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Managua" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Managua</h5>
-              <span>Capital, Xolotlán & Reserva El Chocoyero</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=carazo" class="territory-pill-card territory-media-pill" data-territory="carazo">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/comida/gallo_pinto.jpg" alt="Carazo" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Carazo</h5>
-              <span>El Güegüense & Bosques Secos del Pacífico</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=chontales" class="territory-pill-card territory-media-pill" data-territory="chontales">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Chontales" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Chontales</h5>
-              <span>Arqueología Amerrisque & Ganadería Sostenible</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=boaco" class="territory-pill-card territory-media-pill" data-territory="boaco">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/selva_negra.jpg" alt="Boaco" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Boaco</h5>
-              <span>Ciudad de Dos Pisos & Cerros Vírgenes</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=nueva-segovia" class="territory-pill-card territory-media-pill" data-territory="nueva-segovia">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Nueva Segovia" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Nueva Segovia</h5>
-              <span>Cerro Mogotón (Punto Más Alto) & Pinares</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=rio-san-juan" class="territory-pill-card territory-media-pill" data-territory="rio-san-juan">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Río San Juan" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>Río San Juan</h5>
-              <span>Castillo de la Inmaculada & Humedales Indio Maíz</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=raccn" class="territory-pill-card territory-media-pill" data-territory="raccn">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/selva_negra.jpg" alt="RACCN Caribe Norte" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>RACCN (Caribe Norte)</h5>
-              <span>Cultura Miskita, Mayangna & Bosawás Profunda</span>
-            </div>
-          </a>
-
-          <a href="departamento.html?id=raccs" class="territory-pill-card territory-media-pill" data-territory="raccs">
-            <div class="territory-pill-img-wrap">
-              <img src="assets/images/destinos/corn_island.jpg" alt="RACCS Caribe Sur" class="territory-pill-thumb" loading="lazy">
-              <span class="territory-pill-video-tag"><i class="fa-solid fa-play"></i> Video Guía</span>
-            </div>
-            <div class="territory-pill-info">
-              <h5>RACCS (Caribe Sur)</h5>
-              <span>Corn Island, Bluefields & Bahía de Perlas</span>
-            </div>
-          </a>
-        </div>
-        </div>
-
-        <section class="history-collection" aria-labelledby="originariosTitle">
-          <div class="history-collection-head"><div><h2 id="originariosTitle">Pueblos originarios y memoria viva</h2><p>Culturas que mantienen vivo el espíritu de Nicaragua.</p></div></div>
-          <div class="history-card-grid five">
-            <article class="history-mini-card"><img src="assets/images/historia/Pueblos Originarios &amp; Cosmovisión del Xolotlán.png" alt="Pueblo Chorotega" loading="lazy"><div class="history-mini-card-body"><strong>Chorotegas</strong><span>Raíces del Pacífico, tradición cerámica y legado cultural.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Pueblo Nicarao" loading="lazy"><div class="history-mini-card-body"><strong>Nicaraos</strong><span>Pueblo del gran lago y la fertilidad de la tierra.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/destinos/selva_negra.jpg" alt="Pueblo Matagalpa" loading="lazy"><div class="history-mini-card-body"><strong>Matagalpas</strong><span>Guardianes de las montañas del norte.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/destinos/corn_island.jpg" alt="Pueblo Miskito" loading="lazy"><div class="history-mini-card-body"><strong>Miskitos</strong><span>Cultura del Caribe, mar, ríos y biodiversidad.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/departamentos/biosfera bosawas.jpg" alt="Pueblo Mayangna" loading="lazy"><div class="history-mini-card-body"><strong>Mayangnas</strong><span>Sabiduría ancestral de la Reserva de Biósfera.</span></div></article>
-          </div>
-        </section>
-
-        <section class="history-collection" aria-labelledby="figuresTitle">
-          <div class="history-collection-head"><div><h2 id="figuresTitle">Personajes que marcaron nuestra historia</h2><p>Líderes, pensadores y artistas que dejaron un legado.</p></div></div>
-          <div class="history-card-grid five">
-            <article class="history-mini-card"><img src="assets/images/historia/Resistencia Indígena_El Encuentro y Diriangén.png" alt="Diriangén" loading="lazy"><div class="history-mini-card-body"><strong>Diriangén</strong><span>Líder chorotega y símbolo de resistencia y dignidad.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/historia/Defensa Nacional &amp; La Pedrada de Andrés Castro.png" alt="Andrés Castro" loading="lazy"><div class="history-mini-card-body"><strong>Andrés Castro</strong><span>Héroe de la Guerra Nacional y defensor de la soberanía.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="José Dolores Estrada" loading="lazy"><div class="history-mini-card-body"><strong>José Dolores Estrada</strong><span>Líder liberal y figura clave de la construcción nacional.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/aliados/hotel_dario.jpg" alt="Rubén Darío" loading="lazy"><div class="history-mini-card-body"><strong>Rubén Darío</strong><span>Poeta universal, orgullo de Nicaragua.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/historia/General de Hombres Libres_ Augusto C. Sandino.png" alt="Augusto C. Sandino" loading="lazy"><div class="history-mini-card-body"><strong>Augusto C. Sandino</strong><span>Defensa de la soberanía y autodeterminación.</span></div></article>
-          </div>
-        </section>
-
-        <section class="history-collection" aria-labelledby="heritageTitle">
-          <div class="history-collection-head"><div><h2 id="heritageTitle">Patrimonio vivo</h2><p>Nuestra cultura sigue presente en cada expresión.</p></div></div>
-          <div class="history-card-grid six">
-            <article class="history-mini-card"><img src="assets/images/historia/Fundación de Ciudades &amp; Sincretismo Cultural.png" alt="El Güegüense" loading="lazy"><div class="history-mini-card-body"><strong>El Güegüense</strong><span>Patrimonio de la Humanidad reconocido por UNESCO.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/historia/Pueblos Originarios &amp; Cosmovisión del Xolotlán1.png" alt="Huellas de Acahualinca" loading="lazy"><div class="history-mini-card-body"><strong>Huellas de Acahualinca</strong><span>Testimonios milenarios de nuestra historia.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/departamentos/leon.png" alt="León Viejo" loading="lazy"><div class="history-mini-card-body"><strong>León Viejo</strong><span>Ciudad colonial reconocida por UNESCO.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/departamentos/granada.jpg" alt="Granada" loading="lazy"><div class="history-mini-card-body"><strong>Granada</strong><span>Historia viva a orillas del Gran Lago.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Petroglifos de Ometepe" loading="lazy"><div class="history-mini-card-body"><strong>Petroglifos de Ometepe</strong><span>Arte ancestral en piedra volcánica.</span></div></article>
-            <article class="history-mini-card"><img src="assets/images/destinos/Calle La Calzada &amp; Zona Bohemia.jpg" alt="Música, danza y tradiciones" loading="lazy"><div class="history-mini-card-body"><strong>Música, danza y tradiciones</strong><span>Expresiones que nos identifican.</span></div></article>
-          </div>
-        </section>
-
-        <section class="history-collection" aria-labelledby="beforeAfterTitle">
-          <div class="history-collection-head"><div><h2 id="beforeAfterTitle">Antes y ahora</h2><p>Descubrí cómo nuestros sitios históricos se mantienen vivos.</p></div></div>
-          <div class="history-compare-grid">
-            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/departamentos/leon1.png" alt="León histórico"><img src="assets/images/departamentos/leon.png" alt="León actual"></div><strong>León: antes y ahora</strong></article>
-            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/departamentos/granada1.jpg" alt="Granada histórica"><img src="assets/images/departamentos/granada.jpg" alt="Granada actual"></div><strong>Granada: antes y ahora</strong></article>
-            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/historia/Fundación de Ciudades &amp; Sincretismo Cultural1.png" alt="León Viejo histórico"><img src="assets/images/destinos/Museo y Convento San Francisco (1529).jpg" alt="León Viejo actual"></div><strong>León Viejo: antes y ahora</strong></article>
-            <article class="history-compare-card"><div class="history-compare-images"><img src="assets/images/historia/Paz, Soberanía y Ecoturismo de Custodia Local.png" alt="Momotombo histórico"><img src="assets/images/destinos/volcan_masaya.jpg" alt="Paisaje volcánico actual"></div><strong>Patrimonio volcánico: antes y ahora</strong></article>
-          </div>
-        </section>
-
-        <section class="history-listen" aria-labelledby="listenHistoryTitle">
-          <button type="button" class="history-listen-icon" aria-label="Reproducir narración" onclick="document.querySelector('.baqueano-assistant-toggle, #baqueanoAssistantToggle')?.click()"><i class="fa-solid fa-play"></i></button>
-          <div class="history-listen-copy"><h2 id="listenHistoryTitle">Escuchá nuestra historia</h2><p>Relatos, música y personajes en voz de Baqueano Digital.</p></div>
-          <div class="history-wave" aria-hidden="true"></div>
-        </section>
-
-        <section class="history-sources" aria-labelledby="sourcesTitle">
-          <div class="history-collection-head"><div><h2 id="sourcesTitle">Fuentes y referencias</h2><p>Contenido basado en instituciones y documentación histórica.</p></div></div>
-          <div class="history-source-row"><div class="history-source-pill">INTUR</div><div class="history-source-pill">INC</div><div class="history-source-pill">MINED</div><div class="history-source-pill">BCN</div><div class="history-source-pill">MARENA</div><div class="history-source-pill">UNESCO</div></div>
-        </section>
-
-        <div class="history-final-banner"><div><h2>Conocer nuestra historia también es viajar por Nicaragua</h2><p>Explorá sus territorios, viví sus tradiciones y sé parte de su futuro.</p></div><a href="destinos.html">Explorar territorios →</a></div>
-
-        <!-- BANNER INFORMATIVO DE GUÍAS DEPARTAMENTALES INDEPENDIENTES (CENTRADO) -->
-        <div class="territories-action-banner territories-action-banner-centered">
-          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(22, 93, 111, 0.35); border: 1px solid rgba(45, 212, 191, 0.45); padding: 0.4rem 1.2rem; border-radius: 999px; font-size: 0.82rem; font-weight: 800; color: #2DD4BF;">
-            <i class="fa-solid fa-compass"></i> Guías Oficiales Territoriales
-          </div>
-          <h3 style="color: #FFFFFF; font-size: 1.8rem; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 800;">17 Páginas Territoriales Dedicadas</h3>
-          <p style="color: #CBD5E1; font-size: 1rem; margin: 0; line-height: 1.7; max-width: 680px;">
-            Haz clic en cualquiera de los 15 departamentos o 2 regiones autónomas para abrir su guía completa en una página especializada con historia viva, gastronomía ancestral, áreas protegidas, actividades y recomendaciones directas del Baqueano.
-          </p>
-          <a href="departamento.html?id=leon" class="btn-hero-primary" style="white-space: nowrap; padding: 0.95rem 2.2rem; border-radius: 12px; font-size: 0.95rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.7rem; box-shadow: 0 4px 20px rgba(246, 94, 1, 0.4);">
-            <i class="fa-solid fa-map-location-dot"></i> Abrir Guía de León &rarr;
-          </a>
         </div>
       </div>
     </section>
+
+    <div class="exact-container">
+      <!-- ============================================================================
+           2. LÍNEA DEL TIEMPO DE NICARAGUA (7 PERIODOS - IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-timeline-section" id="lineaTiempoSeccion">
+        <div class="hist-timeline-header">
+          <div class="hist-timeline-title-group">
+            <h2><i class="fa-solid fa-clock-rotate-left" style="color: #F65E01;"></i> Línea del tiempo de Nicaragua</h2>
+            <p>Un recorrido por los momentos que construyeron nuestra nación.</p>
+          </div>
+          <div class="hist-timeline-arrows">
+            <button type="button" class="hist-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="hist-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+
+        <div class="hist-timeline-scroller">
+          <!-- 1. Época Prehispánica -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Época Prehispánica" class="hist-era-thumb">
+            <h4>Época Prehispánica</h4>
+            <span class="dates">10,000 a.C. - 1523</span>
+            <p>Primeros pobladores, grandes culturas y legado ancestral.</p>
+            <a href="#epocaPrehispanica" class="hist-era-link">Conocer más</a>
+          </article>
+
+          <!-- 2. Resistencia Indígena -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/volcan_masaya.jpg" alt="Resistencia Indígena" class="hist-era-thumb">
+            <h4>Resistencia Indígena</h4>
+            <span class="dates">1524 - 1699</span>
+            <p>Lucha por la tierra, la libertad y la identidad.</p>
+            <a href="#resistenciaIndigena" class="hist-era-link">Conocer más</a>
+          </article>
+
+          <!-- 3. Periodo Colonial -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/Casa Señorial Colonial Granada.jpg" alt="Periodo Colonial" class="hist-era-thumb">
+            <h4>Periodo Colonial</h4>
+            <span class="dates">1700 - 1821</span>
+            <p>Transformaciones sociales, culturales y económicas.</p>
+            <a href="#periodoColonial" class="hist-era-link">Conocer más</a>
+          </article>
+
+          <!-- 4. Independencia de 1821 -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/Museo y Convento San Francisco (1529).jpg" alt="Independencia de 1821" class="hist-era-thumb">
+            <h4>Independencia de 1821</h4>
+            <span class="dates">1821 - 1855</span>
+            <p>Nacimiento de la nación y búsqueda de soberanía.</p>
+            <a href="#independencia" class="hist-era-link">Conocer más</a>
+          </article>
+
+          <!-- 5. Guerra Nacional -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Guerra Nacional" class="hist-era-thumb">
+            <h4>Guerra Nacional</h4>
+            <span class="dates">1856 - 1895</span>
+            <p>Defensa de nuestra soberanía e identidad.</p>
+            <a href="#guerraNacional" class="hist-era-link">Conocer más</a>
+          </article>
+
+          <!-- 6. Siglo XX -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Siglo XX" class="hist-era-thumb">
+            <h4>Siglo XX</h4>
+            <span class="dates">1900 - 1979</span>
+            <p>Cambios políticos, sociales y culturales que marcaron al país.</p>
+            <a href="#sigloXX" class="hist-era-link">Conocer más</a>
+          </article>
+
+          <!-- 7. Nicaragua contemporánea -->
+          <article class="hist-era-card">
+            <img src="assets/images/destinos/corn_island.jpg" alt="Nicaragua contemporánea" class="hist-era-thumb">
+            <h4>Nicaragua contemporánea</h4>
+            <span class="dates">1980 - Actualidad</span>
+            <p>Un país que avanza con su gente, su cultura y su patrimonio.</p>
+            <a href="#nicaraguaActual" class="hist-era-link">Conocer más</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           3. EXPLORÁ LOS 17 TERRITORIOS (IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-territories-section" id="territoriosSeccion">
+        <div class="hist-territories-grid">
+          <!-- Izquierda: Mapa Departamental -->
+          <div class="hist-dept-map-card">
+            <div class="hist-dept-map-header">
+              <h3><i class="fa-solid fa-map-pin" style="color: #10B981;"></i> Explorá los 17 territorios</h3>
+              <p>Conocé la riqueza histórica, cultural y natural de cada departamento y región autónoma de Nicaragua.</p>
+            </div>
+            <div id="historiaDeptMap" class="hist-dept-map-viewport"></div>
+          </div>
+
+          <!-- Derecha: Explorador con ficha destacada y listado -->
+          <div class="hist-dept-explorer-card">
+            <div class="hist-section-header" style="margin-bottom: 10px;">
+              <div>
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; margin: 0; color: #0B253A;"><i class="fa-solid fa-book-bookmark" style="color: #10B981;"></i> Explorador de los 17 territorios</h3>
+                <p style="font-size: 0.72rem; color: #64748B; margin: 2px 0 0 0;">Seleccioná un territorio para descubrir su historia, cultura, personajes y sitios emblemáticos.</p>
+              </div>
+            </div>
+
+            <!-- Ficha Destacada: León -->
+            <div class="hist-explorer-top-highlight">
+              <img src="assets/images/departamentos/leon.png" alt="León" class="hist-highlight-img">
+              <div class="hist-highlight-info">
+                <h4>León</h4>
+                <p>Cuna de la independencia, ciudad de arte, historia y tradiciones.</p>
+                <a href="destinos.html?id=leon" class="hist-btn-explore-dept">Explorar León <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+
+            <!-- Listado 2 columnas de los 17 Departamentos -->
+            <div class="hist-depts-list-grid">
+              <a href="destinos.html?dept=Managua" class="hist-dept-pill"><img src="assets/images/departamentos/managua.png" alt="Managua" class="hist-dept-thumb"> Managua</a>
+              <a href="destinos.html?dept=Jinotega" class="hist-dept-pill"><img src="assets/images/departamentos/jinotega.jpg" alt="Jinotega" class="hist-dept-thumb"> Jinotega</a>
+              <a href="destinos.html?dept=Masaya" class="hist-dept-pill"><img src="assets/images/departamentos/masaya.png" alt="Masaya" class="hist-dept-thumb"> Masaya</a>
+              <a href="destinos.html?dept=Matagalpa" class="hist-dept-pill"><img src="assets/images/departamentos/matagalpa.png" alt="Matagalpa" class="hist-dept-thumb"> Matagalpa</a>
+              <a href="destinos.html?dept=Granada" class="hist-dept-pill"><img src="assets/images/departamentos/granada.jpg" alt="Granada" class="hist-dept-thumb"> Granada</a>
+              <a href="destinos.html?dept=Esteli" class="hist-dept-pill"><img src="assets/images/departamentos/esteli.png" alt="Estelí" class="hist-dept-thumb"> Estelí</a>
+              <a href="destinos.html?dept=Carazo" class="hist-dept-pill"><img src="assets/images/departamentos/carazo.png" alt="Carazo" class="hist-dept-thumb"> Carazo</a>
+              <a href="destinos.html?dept=Boaco" class="hist-dept-pill"><img src="assets/images/departamentos/boaco.png" alt="Boaco" class="hist-dept-thumb"> Boaco</a>
+              <a href="destinos.html?dept=Rivas" class="hist-dept-pill"><img src="assets/images/departamentos/rivas.png" alt="Rivas" class="hist-dept-thumb"> Rivas</a>
+              <a href="destinos.html?dept=Chontales" class="hist-dept-pill"><img src="assets/images/departamentos/chontales.png" alt="Chontales" class="hist-dept-thumb"> Chontales</a>
+              <a href="destinos.html?dept=Leon" class="hist-dept-pill"><img src="assets/images/departamentos/leon.png" alt="León" class="hist-dept-thumb"> León</a>
+              <a href="destinos.html?dept=RioSanJuan" class="hist-dept-pill"><img src="assets/images/departamentos/rio san juan.png" alt="Río San Juan" class="hist-dept-thumb"> Río San Juan</a>
+              <a href="destinos.html?dept=Chinandega" class="hist-dept-pill"><img src="assets/images/departamentos/chinandega.jpg" alt="Chinandega" class="hist-dept-thumb"> Chinandega</a>
+              <a href="destinos.html?dept=RACCN" class="hist-dept-pill"><img src="assets/images/departamentos/RAAN1.png" alt="RACCN" class="hist-dept-thumb"> RACCN</a>
+              <a href="destinos.html?dept=Madriz" class="hist-dept-pill"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Madriz" class="hist-dept-thumb"> Madriz</a>
+              <a href="destinos.html?dept=RACCS" class="hist-dept-pill"><img src="assets/images/departamentos/RAAS.png" alt="RACCS" class="hist-dept-thumb"> RACCS</a>
+              <a href="destinos.html?dept=NuevaSegovia" class="hist-dept-pill"><img src="assets/images/departamentos/nueva segovia.png" alt="Nueva Segovia" class="hist-dept-thumb"> Nueva Segovia</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           4. PUEBLOS ORIGINARIOS Y MEMORIA VIVA (IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-peoples-section">
+        <div class="hist-section-header">
+          <div>
+            <h2><i class="fa-solid fa-users" style="color: #10B981;"></i> Pueblos originarios y memoria viva</h2>
+            <p>Culturas que mantienen vivo el espíritu de Nicaragua.</p>
+          </div>
+          <a href="#pueblosOriginarios" class="hist-section-link">Ver más sobre nuestros pueblos <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="hist-peoples-row">
+          <!-- 1. Chorotegas -->
+          <article class="hist-people-card">
+            <div class="hist-people-media">
+              <img src="assets/images/destinos/Casa Señorial Colonial Granada.jpg" alt="Chorotegas" loading="lazy">
+            </div>
+            <div class="hist-people-body">
+              <h4>Chorotegas</h4>
+              <p>Raíces del Pacífico, tradición cerámica y legado cultural.</p>
+              <span class="hist-people-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </article>
+
+          <!-- 2. Nicaraos -->
+          <article class="hist-people-card">
+            <div class="hist-people-media">
+              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Nicaraos" loading="lazy">
+            </div>
+            <div class="hist-people-body">
+              <h4>Nicaraos</h4>
+              <p>Pueblo del gran lago y la fertilidad de la tierra.</p>
+              <span class="hist-people-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </article>
+
+          <!-- 3. Matagalpas -->
+          <article class="hist-people-card">
+            <div class="hist-people-media">
+              <img src="assets/images/destinos/selva_negra.jpg" alt="Matagalpas" loading="lazy">
+            </div>
+            <div class="hist-people-body">
+              <h4>Matagalpas</h4>
+              <p>Guardianes de las montañas del norte.</p>
+              <span class="hist-people-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </article>
+
+          <!-- 4. Miskitos -->
+          <article class="hist-people-card">
+            <div class="hist-people-media">
+              <img src="assets/images/destinos/corn_island.jpg" alt="Miskitos" loading="lazy">
+            </div>
+            <div class="hist-people-body">
+              <h4>Miskitos</h4>
+              <p>Cultura del Caribe, mar, ríos y biodiversidad.</p>
+              <span class="hist-people-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </article>
+
+          <!-- 5. Mayangnas -->
+          <article class="hist-people-card">
+            <div class="hist-people-media">
+              <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Mayangnas" loading="lazy">
+            </div>
+            <div class="hist-people-body">
+              <h4>Mayangnas</h4>
+              <p>Sabiduría ancestral de la Reserva de Biósfera.</p>
+              <span class="hist-people-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           5. PERSONAJES QUE MARCARON NUESTRA HISTORIA (IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-characters-section">
+        <div class="hist-section-header">
+          <div>
+            <h2><i class="fa-solid fa-user-tie" style="color: #0284C7;"></i> Personajes que marcaron nuestra historia</h2>
+            <p>Líderes, pensadores, artistas y hombres y mujeres que dejaron un legado.</p>
+          </div>
+          <a href="#personajes" class="hist-section-link">Ver más personajes <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="hist-characters-row">
+          <!-- 1. Diriangén -->
+          <article class="hist-character-card">
+            <div class="hist-character-media">
+              <img src="assets/images/destinos/volcan_masaya.jpg" alt="Diriangén" loading="lazy">
+            </div>
+            <div class="hist-character-body">
+              <h4>Diriangén</h4>
+              <span class="years">(?-1523)</span>
+              <p>Líder chorotega, símbolo de resistencia y dignidad.</p>
+            </div>
+          </article>
+
+          <!-- 2. Andrés Castro -->
+          <article class="hist-character-card">
+            <div class="hist-character-media">
+              <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Andrés Castro" loading="lazy">
+            </div>
+            <div class="hist-character-body">
+              <h4>Andrés Castro</h4>
+              <span class="years">(1831-1876)</span>
+              <p>Héroe de la Guerra Nacional y defensor de la soberanía.</p>
+            </div>
+          </article>
+
+          <!-- 3. José Dolores Estrada -->
+          <article class="hist-character-card">
+            <div class="hist-character-media">
+              <img src="assets/images/destinos/Museo y Convento San Francisco (1529).jpg" alt="José Dolores Estrada" loading="lazy">
+            </div>
+            <div class="hist-character-body">
+              <h4>José Dolores Estrada</h4>
+              <span class="years">(1792-1869)</span>
+              <p>Líder militar y figura clave en la defensa nacional.</p>
+            </div>
+          </article>
+
+          <!-- 4. Rubén Darío -->
+          <article class="hist-character-card">
+            <div class="hist-character-media">
+              <img src="assets/images/departamentos/leon.png" alt="Rubén Darío" loading="lazy">
+            </div>
+            <div class="hist-character-body">
+              <h4>Rubén Darío</h4>
+              <span class="years">(1867-1916)</span>
+              <p>Poeta universal, orgullo de Nicaragua y padre del modernismo.</p>
+            </div>
+          </article>
+
+          <!-- 5. Augusto C. Sandino -->
+          <article class="hist-character-card">
+            <div class="hist-character-media">
+              <img src="assets/images/destinos/cerro_negro.jpg" alt="Augusto C. Sandino" loading="lazy">
+            </div>
+            <div class="hist-character-body">
+              <h4>Augusto C. Sandino</h4>
+              <span class="years">(1895-1934)</span>
+              <p>Defensa de la soberanía y la autodeterminación.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           6. PATRIMONIO VIVO (IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-heritage-section">
+        <div class="hist-section-header">
+          <div>
+            <h2><i class="fa-solid fa-landmark" style="color: #10B981;"></i> Patrimonio vivo</h2>
+            <p>Nuestra cultura sigue presente en cada expresión.</p>
+          </div>
+          <a href="#patrimonio" class="hist-section-link">Ver más patrimonios <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="hist-heritage-row">
+          <div class="hist-heritage-card">
+            <div class="hist-heritage-media"><img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="El Güegüense"></div>
+            <div class="hist-heritage-body">
+              <h4>El Güegüense</h4>
+              <p>Patrimonio de la Humanidad (UNESCO)</p>
+            </div>
+          </div>
+          <div class="hist-heritage-card">
+            <div class="hist-heritage-media"><img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Huellas de Acahualinca"></div>
+            <div class="hist-heritage-body">
+              <h4>Huellas de Acahualinca</h4>
+              <p>Testimonios milenarios de nuestra historia.</p>
+            </div>
+          </div>
+          <div class="hist-heritage-card">
+            <div class="hist-heritage-media"><img src="assets/images/destinos/cerro_negro.jpg" alt="León Viejo"></div>
+            <div class="hist-heritage-body">
+              <h4>León Viejo</h4>
+              <p>Ciudad colonial (UNESCO)</p>
+            </div>
+          </div>
+          <div class="hist-heritage-card">
+            <div class="hist-heritage-media"><img src="assets/images/departamentos/granada.jpg" alt="Granada"></div>
+            <div class="hist-heritage-body">
+              <h4>Granada</h4>
+              <p>Historia viva a orillas del Gran Lago.</p>
+            </div>
+          </div>
+          <div class="hist-heritage-card">
+            <div class="hist-heritage-media"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Petroglifos de Ometepe"></div>
+            <div class="hist-heritage-body">
+              <h4>Petroglifos de Ometepe</h4>
+              <p>Arte ancestral en piedra.</p>
+            </div>
+          </div>
+          <div class="hist-heritage-card">
+            <div class="hist-heritage-media"><img src="assets/images/comida/nacatamal.jpg" alt="Música y danza"></div>
+            <div class="hist-heritage-body">
+              <h4>Música, danza y tradiciones</h4>
+              <p>Expresiones que nos identifican.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           7. ANTES Y AHORA (IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-before-after-section">
+        <div class="hist-section-header">
+          <div>
+            <h2><i class="fa-solid fa-camera-rotate" style="color: #0284C7;"></i> Antes y ahora</h2>
+            <p>Descubrí cómo nuestros sitios históricos se mantienen vivos.</p>
+          </div>
+        </div>
+
+        <div class="hist-before-after-row">
+          <div class="hist-compare-card">
+            <img src="assets/images/departamentos/leon.png" alt="León (antes y ahora)">
+            <div class="hist-compare-label">León (antes y ahora)</div>
+          </div>
+          <div class="hist-compare-card">
+            <img src="assets/images/departamentos/granada.jpg" alt="Granada (antes y ahora)">
+            <div class="hist-compare-label">Granada (antes y ahora)</div>
+          </div>
+          <div class="hist-compare-card">
+            <img src="assets/images/destinos/cerro_negro.jpg" alt="León Viejo (antes y ahora)">
+            <div class="hist-compare-label">León Viejo (antes y ahora)</div>
+          </div>
+          <div class="hist-compare-card">
+            <img src="assets/images/destinos/volcan_masaya.jpg" alt="Momotombo (antes y ahora)">
+            <div class="hist-compare-label">Momotombo (antes y ahora)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           8. ESCUCHÁ NUESTRA HISTORIA (AUDIO AUDIOGUÍA - IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-audio-section">
+        <div class="hist-audio-left">
+          <img src="assets/images/baqui.png" alt="Baqüi" class="hist-bird-avatar">
+          <button type="button" class="hist-audio-play-btn" aria-label="Reproducir audioguía"><i class="fa-solid fa-play"></i></button>
+          <div>
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0;">Escuchá nuestra historia</h3>
+            <p style="font-size: 0.76rem; color: #64748B; margin: 2px 0 6px 0;">Relatos, música y personajes en voz de Baqueano Digital.</p>
+            <div class="hist-waveform-bar">
+              <span style="height: 8px;"></span><span style="height: 14px;"></span><span style="height: 22px;"></span>
+              <span style="height: 16px;"></span><span style="height: 26px;"></span><span style="height: 12px;"></span>
+              <span style="height: 20px;"></span><span style="height: 10px;"></span><span style="height: 18px;"></span>
+              <span style="font-size: 0.7rem; color: #64748B; margin-left: 8px; font-weight: 700;">0:00 / 2:45</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hist-audio-categories">
+          <span class="hist-audio-tag">🏛️ Época Prehispánica</span>
+          <span class="hist-audio-tag">⛪ Colonia</span>
+          <span class="hist-audio-tag">📜 Independencia</span>
+          <span class="hist-audio-tag">⚔️ Guerra Nacional</span>
+          <span class="hist-audio-tag">🎖️ Siglo XX</span>
+          <span class="hist-audio-tag">🇳🇮 Nicaragua Actual</span>
+          <span class="hist-audio-tag">🎶 Música y Tradiciones</span>
+        </div>
+      </section>
+
+      <!-- ============================================================================
+           9. FUENTES Y REFERENCIAS OFICIALES (IMAGEN 1)
+           ============================================================================ -->
+      <section class="hist-sources-section">
+        <div class="hist-sources-logos">
+          <div class="hist-source-pill"><i class="fa-solid fa-landmark-dome" style="color: #0284C7;"></i> INTUR</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-masks-theater" style="color: #F65E01;"></i> INC</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-graduation-cap" style="color: #10B981;"></i> MINED</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-building-columns" style="color: #D97706;"></i> BCN</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> MARENA</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-globe" style="color: #2563EB;"></i> UNESCO</div>
+        </div>
+        <a href="#fuentes" class="hist-btn-all-sources">Ver todas las fuentes <i class="fa-solid fa-arrow-right"></i></a>
+      </section>
+
+      <!-- ============================================================================
+           10. CTA BANNER (IMAGEN 1)
+           ============================================================================ -->
+      <div class="hist-cta-banner">
+        <div class="hist-cta-left">
+          <h3>Conocer nuestra historia también es viajar por Nicaragua</h3>
+          <p>Explorá sus territorios, viví sus tradiciones y sé parte de su futuro.</p>
+        </div>
+        <div class="hist-cta-btns">
+          <a href="#territoriosSeccion" class="hist-btn-orange">Explorar territorios <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="index.html#baqueanoDigitalCard" class="hist-btn-glass">Planificar con Baqueano Digital</a>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <!-- FOOTER OFICIAL -->
-    <!-- FOOTER OFICIAL INSTITUCIONAL -->
-  <footer class="site-footer-pro">
-    <div class="container">
-
-      <!-- ======================================================================
-           🏪 TARJETA EN FOOTER: RED DE ANFITRIONES & COMERCIO JUSTO (ALTA GAMA)
-           🎯 Conectar directamente a emprendedores campesinos, guías y hospedajes
-              con el ecosistema Baqueano sin intermediarios foráneos.
-           ⚙️ Glassmorphism con bordes sutiles, micro-interacciones a 60fps,
-              acordeón reactivo y guardado asíncrono en Firestore + WhatsApp.
-           📦 Tarjeta #registroNegocios integrada en el footer institucional.
-           ====================================================================== -->
-      <div class="footer-biz-register-card" id="registroNegocios">
-        <!-- Encabezado de la Tarjeta -->
-        <div class="footer-biz-header-wrap">
-          <div class="footer-biz-tag">
-            <i class="fa-solid fa-handshake-angle" style="color: var(--terracotta);"></i> RED DE ANFITRIONES & COMERCIO JUSTO
-          </div>
-          <h3 class="footer-biz-title">
-            Registra tu Local, Hospedaje o Emprendimiento en Baqueano
-          </h3>
-          <p class="footer-biz-subtitle">
-            Plataforma comunitaria para el ecoturismo responsable sin intermediarios foráneos. Conecta directamente con exploradores nacionales e internacionales que buscan autenticidad, gastronomía típica, senderos seguros y aventura soberana.
-          </p>
-
-          <!-- Tiras de Ventajas Tácticas -->
-          <div class="footer-biz-benefits-strip">
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-percent"></i>
-              <span><strong>0% Comisiones</strong> intermediarios</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <span><strong>Contacto Directo</strong> con el viajero</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-satellite"></i>
-              <span><strong>Mapa Satelital HD</strong> georreferenciado</span>
-            </div>
-            <div class="footer-biz-benefit-item">
-              <i class="fa-solid fa-shield-heart"></i>
-              <span><strong>Auditoría & Respaldo</strong> Mesa Baqueano</span>
-            </div>
-          </div>
-
-          <!-- Botón de Acción Principal para Abrir la Postulación -->
-          <div class="biz-trigger-wrap">
-            <button type="button" class="biz-btn-submit biz-btn-toggle" id="btnToggleBizForm" aria-expanded="false" aria-controls="bizFormCollapse">
-              <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-              <i class="fa-solid fa-arrow-right btn-arrow" id="toggleBizArrow"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Contenedor Desplegable del Formulario (Abre al dar click) -->
-        <div id="bizFormCollapse" class="biz-form-collapse" aria-hidden="true">
-          <div class="biz-form-header-bar">
-            <div class="biz-form-header-info">
-              <i class="fa-solid fa-file-signature" style="color: var(--terracotta);"></i>
-              <span>Formulario Oficial de Inscripción — Red de Anfitriones Baqueano</span>
-            </div>
-            <button type="button" class="biz-btn-close-form" id="btnCloseBizFormTop" title="Ocultar formulario">
-              <i class="fa-solid fa-chevron-up"></i> Ocultar
-            </button>
-          </div>
-
-          <!-- Formulario de Registro -->
-          <form id="registerBusinessForm" class="biz-form" novalidate>
-            <div class="biz-form-grid">
-              
-              <!-- 1. Nombre del Negocio -->
-              <div class="biz-field-group">
-                <label for="bizName" class="biz-label">
-                  <i class="fa-solid fa-store"></i> Nombre Comercial del Emprendimiento *
-                </label>
-                <input type="text" id="bizName" name="bizName" class="biz-input" placeholder="Ej. Comedor Doña María / Finca El Mirador" required autocomplete="organization">
-                <div class="biz-error-msg" id="errBizName">Por favor ingresa el nombre de tu negocio.</div>
-              </div>
-
-              <!-- 2. Categoría -->
-              <div class="biz-field-group">
-                <label for="bizCategory" class="biz-label">
-                  <i class="fa-solid fa-tag"></i> Categoría del Servicio *
-                </label>
-                <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu rubro campesino o comunitario...</option>
-                  <option value="gastronomia">Gastronomía Ancestral & Comedor Típico</option>
-                  <option value="hospedaje">Hospedaje Rural / Cabañas / Posada Familiar</option>
-                  <option value="guiado">Guía Local Nativo / Baqueano Comunitario</option>
-                  <option value="artesanias">Artesanías & Productos de la Finca / Café / Cacao</option>
-                  <option value="transporte">Transporte Rural / Acuático / Mular</option>
-                  <option value="aventura">Tour Operador Local / Senderismo de Montaña</option>
-                  <option value="agroecologia">Finca Agroecológica / Educación Ambiental</option>
-                </select>
-                <div class="biz-error-msg" id="errBizCategory">Selecciona una categoría válida.</div>
-              </div>
-
-              <!-- 3. Departamento -->
-              <div class="biz-field-group">
-                <label for="bizDepartment" class="biz-label">
-                  <i class="fa-solid fa-map-location-dot"></i> Departamento *
-                </label>
-                <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="" disabled selected>Selecciona tu departamento...</option>
-                  <option value="Boaco">Boaco</option>
-                  <option value="Carazo">Carazo</option>
-                  <option value="Chinandega">Chinandega</option>
-                  <option value="Chontales">Chontales</option>
-                  <option value="Costa Caribe Norte">Costa Caribe Norte (RACCN)</option>
-                  <option value="Costa Caribe Sur">Costa Caribe Sur (RACCS)</option>
-                  <option value="Estelí">Estelí</option>
-                  <option value="Granada">Granada</option>
-                  <option value="Jinotega">Jinotega</option>
-                  <option value="León">León</option>
-                  <option value="Madriz">Madriz</option>
-                  <option value="Managua">Managua</option>
-                  <option value="Masaya">Masaya</option>
-                  <option value="Matagalpa">Matagalpa</option>
-                  <option value="Nueva Segovia">Nueva Segovia</option>
-                  <option value="Río San Juan">Río San Juan</option>
-                  <option value="Rivas">Rivas</option>
-                </select>
-                <div class="biz-error-msg" id="errBizDepartment">Indica tu departamento.</div>
-              </div>
-
-              <!-- 4. Municipio o Comunidad -->
-              <div class="biz-field-group">
-                <label for="bizMunicipality" class="biz-label">
-                  <i class="fa-solid fa-tree-city"></i> Municipio o Comunidad Rural *
-                </label>
-                <input type="text" id="bizMunicipality" name="bizMunicipality" class="biz-input" placeholder="Ej. San Ramón, Cañón de Somoto, Altagracia" required>
-                <div class="biz-error-msg" id="errBizMunicipality">Ingresa el municipio o comarca.</div>
-              </div>
-
-              <!-- 5. Nombre del Contacto / Anfitrión -->
-              <div class="biz-field-group">
-                <label for="bizContactName" class="biz-label">
-                  <i class="fa-solid fa-user-check"></i> Nombre del Representante / Anfitrión *
-                </label>
-                <input type="text" id="bizContactName" name="bizContactName" class="biz-input" placeholder="Tu nombre completo" required autocomplete="name">
-                <div class="biz-error-msg" id="errBizContactName">Indica el nombre de quien responde.</div>
-              </div>
-
-              <!-- 6. WhatsApp Oficial (Contacto Directo) -->
-              <div class="biz-field-group">
-                <label for="bizWhatsapp" class="biz-label">
-                  <i class="fa-brands fa-whatsapp"></i> Número de WhatsApp de Atención *
-                </label>
-                <input type="tel" id="bizWhatsapp" name="bizWhatsapp" class="biz-input" placeholder="Ej. +505 8888-9999 o 88889999" required autocomplete="tel">
-                <div class="biz-help-text">Los exploradores te contactarán directamente a este número.</div>
-                <div class="biz-error-msg" id="errBizWhatsapp">Ingresa un número de WhatsApp válido (8 dígitos mínimo).</div>
-              </div>
-
-              <!-- 7. Correo Electrónico (Opcional) -->
-              <div class="biz-field-group">
-                <label for="bizEmail" class="biz-label">
-                  <i class="fa-solid fa-envelope"></i> Correo Electrónico de Contacto
-                </label>
-                <input type="email" id="bizEmail" name="bizEmail" class="biz-input" placeholder="contacto@tuempresa.com (opcional)" autocomplete="email">
-                <div class="biz-error-msg" id="errBizEmail">Ingresa un correo electrónico válido.</div>
-              </div>
-
-              <!-- 8. Dirección / Cómo Llegar -->
-              <div class="biz-field-group">
-                <label for="bizAddress" class="biz-label">
-                  <i class="fa-solid fa-location-arrow"></i> Dirección o Referencia en Sendero *
-                </label>
-                <input type="text" id="bizAddress" name="bizAddress" class="biz-input" placeholder="Ej. Del empalme 2km al este, comarca La Ceiba" required>
-                <div class="biz-error-msg" id="errBizAddress">Proporciona una referencia de acceso.</div>
-              </div>
-
-              <!-- 9. Breve Descripción del Servicio -->
-              <div class="biz-field-group biz-col-full">
-                <label for="bizDescription" class="biz-label">
-                  <i class="fa-solid fa-comment-dots"></i> ¿Qué experiencia, plato o servicio ofreces al explorador? *
-                </label>
-                <textarea id="bizDescription" name="bizDescription" rows="3" class="biz-textarea" placeholder="Describe tu oferta: comida típica cocinada a leña, caminata guiada a miradores, venta de café cosechado en la finca, cabañas con baño privado, etc." required maxlength="600"></textarea>
-                <div class="biz-char-counter"><span id="charCountBizDesc">0</span>/600 caracteres</div>
-                <div class="biz-error-msg" id="errBizDescription">Cuéntanos un poco sobre tu servicio (mínimo 20 caracteres).</div>
-              </div>
-
-              <!-- 10. Fotografía o Imagen Representativa (Opcional) -->
-              <div class="biz-field-group biz-col-full">
-                <label class="biz-label">
-                  <i class="fa-solid fa-camera"></i> Foto de tu Local, Comida o Entorno Campesino
-                </label>
-                <div class="biz-file-dropzone" id="bizDropzone">
-                  <input type="file" id="bizPhoto" name="bizPhoto" accept="image/jpeg,image/png,image/webp" class="biz-file-input">
-                  <div class="dropzone-content" id="dropzonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-title">Haz clic o arrastra una fotografía aquí</p>
-                    <span class="dropzone-subtitle">JPG, PNG o WEBP (Máx. 5 MB)</span>
-                  </div>
-                  <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
-                    <img id="bizPreviewImg" src="" alt="Vista previa de negocio">
-                    <button type="button" class="biz-btn-remove-photo" id="btnRemoveBizPhoto" title="Eliminar imagen">
-                      <i class="fa-solid fa-xmark"></i> Quitar
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Botón de Envío y Términos -->
-              <div class="biz-field-group biz-col-full biz-submit-wrap">
-                <button type="submit" class="biz-btn-submit" id="btnSubmitBiz">
-                  <span class="btn-text"><i class="fa-brands fa-whatsapp"></i> Postular Negocio a Mesa Baqueano</span>
-                  <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                </button>
-                <div class="biz-security-note">
-                  <i class="fa-solid fa-lock"></i> Tu postulación se procesa de inmediato en Firestore y se envía directamente al WhatsApp oficial (+505 8443-1289) de la Mesa Técnica Baqueano.
-                </div>
-              </div>
-
-            </div>
-          </form>
-        </div> <!-- /bizFormCollapse -->
-
-      </div> <!-- /footer-biz-register-card -->
-
-      <!-- FRANJA SUPERIOR: BOLETÍN & REDES SOCIALES OFICIALES -->
-      <div class="footer-top-utility-bar">
-        <div class="footer-newsletter-wrap">
-          <div class="footer-newsletter-title">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <span>Boletín de Senderos & Cosechas Campesinas</span>
-          </div>
-          <p class="footer-newsletter-desc">
-            Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
-          </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
-            <button type="submit" class="footer-newsletter-btn">
-              <i class="fa-solid fa-paper-plane"></i> Suscribirme
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-social-section">
-          <div class="footer-social-label">
-            <i class="fa-solid fa-hashtag"></i> Conéctate con las Comunidades
-          </div>
+  <!-- ============================================================================
+       PIE INSTITUCIONAL (FOOTER COMPARTIDO)
+       ============================================================================ -->
+  <footer class="site-footer-exact" id="siteFooter">
+    <div class="exact-container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="footer-logo-row">
+            <img src="assets/images/logo.png" alt="Baqueano" class="footer-logo-img">
+            <span class="footer-brand-title">BAQUEANO</span>
+          </a>
+          <span class="footer-tagline-text">DESCUBRÍ LO QUE NO SALE EN EL MAPA</span>
           <div class="footer-social-row">
-            <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook Oficial" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Instagram Oficial" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="TikTok Oficial" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Canal WhatsApp Baqueano" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GRID PRINCIPAL DE COLUMNAS INSTITUCIONALES -->
-      <div class="footer-columns-grid">
-        
-        <!-- COLUMNA 1: IDENTIDAD DE MARCA & TERRITORIO -->
-        <div class="footer-col-brand">
-          <div class="brand-box" style="margin-bottom: 1.1rem;">
-            <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">BAQUEANO</span>
-              <span class="brand-tagline">NICARAGUA</span>
-            </div>
-          </div>
-          <p class="footer-bio-text">
-            Catálogo oficial de áreas protegidas y turismo comunitario de Nicaragua. Guiado local, cero intermediación y soberanía territorial.
-          </p>
-          <div style="font-family: var(--font-tech); font-size: 0.8rem; font-weight: 700; color: var(--terracotta-light); margin-top: 0.4rem;">
-            <i class="fa-solid fa-map-pin"></i> Territorio Baqueano Nicaragua
-          </div>
-          <!-- Sellos de Confianza y Régimen Legal -->
-          <div class="footer-trust-strip">
-            <span class="footer-trust-pill"><i class="fa-solid fa-scale-balanced"></i> Leyes 1210 & 1211 INTUR</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 0% Comisión</span>
-            <span class="footer-trust-pill"><i class="fa-solid fa-seedling"></i> Huella Cero</span>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
 
-        <!-- COLUMNA 2: NAVEGACIÓN & MAPA DEL SITIO -->
-        <div class="footer-col-links">
-          <h4 class="footer-col-header">MÓDULOS WEB</h4>
-          <ul class="footer-link-list">
-            <li><a href="index.html">Inicio Institucional</a></li>
-            <li><a href="destinos.html"><i class="fa-solid fa-map-location-dot"></i> Destinos Protegidos</a></li>
-            <li><a href="historia.html"><i class="fa-solid fa-scroll"></i> Historia de Mi País</a></li>
-            <li><a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Campaña Ambiental</a></li>
-            <li><a href="gastronomia.html"><i class="fa-solid fa-bowl-food"></i> Gastronomía Ancestral</a></li>
-            <li><a href="aliados.html"><i class="fa-solid fa-handshake-angle"></i> Cooperativas Aliadas</a></li>
-            <li><a href="nosotros.html"><i class="fa-solid fa-people-roof"></i> Nosotros & Manifiesto</a></li>
-            <li><a href="#registroNegocios" id="footerLinkRegBiz"><i class="fa-solid fa-handshake-angle" style="color: var(--terracotta); font-size: 0.8rem;"></i> Registrar Mi Negocio</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-satellite-dish"></i> Baqueano Ops Center</a></li>
+        <div class="footer-nav-col">
+          <h4>Explorá</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="destinos.html">Destinos</a></li>
+            <li><a href="index.html#mapaAiSection">Mapa</a></li>
+            <li><a href="index.html#experienciasSection">Experiencias</a></li>
+            <li><a href="index.html#baqueanoDigitalCard">Baqueano Digital</a></li>
           </ul>
         </div>
 
-        <!-- COLUMNA 3: INFORMACIÓN DE CONTACTO OFICIAL -->
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN DE CONTACTO</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp"></i>
-              <div>
-                <span>Mesa de Enlace:</span><br>
-                <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <span>Sede Territorial:</span><br>
-                <span>Managua • 17 Departamentos, Nicaragua</span>
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <div>
-                <span>Horario de Atención:</span><br>
-                <span>24/7 en Sendero • Soporte 8:00 AM - 6:00 PM</span>
-              </div>
-            </li>
+        <div class="footer-nav-col">
+          <h4>Información</h4>
+          <ul>
+            <li><a href="mi-viaje.html">Mi Viaje</a></li>
+            <li><a href="#sosModal" onclick="openSosModal(event)">SOS 24/7</a></li>
+            <li><a href="historia.html">Blog &amp; Crónicas</a></li>
+            <li><a href="index.html#comunidadSeccion">Preguntas frecuentes</a></li>
+            <li><a href="mailto:soporte@baqueano.ni">Contacto</a></li>
           </ul>
         </div>
 
-      </div>
-
-      <!-- BLOQUE LEGAL (LEGAL STACK) -->
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos & Condiciones</a>
-        <span class="separator">|</span>
-        <a href="privacidad.html">Política de Privacidad</a>
-        <span class="separator">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <span class="separator">|</span>
-        <a href="cookies.html">Política de Cookies</a>
-        <span class="separator">|</span>
-        <a href="ambiental.html">Decálogo Verde & Huella Cero</a>
-        <span class="separator">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a>
-        <span class="separator">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <!-- DERECHOS DE AUTOR (COPYRIGHT) & ESTADO SATELITAL -->
-      <div class="footer-bottom-bar">
-        <div>
-          © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
+        <div class="footer-nav-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="legal.html">Términos y condiciones</a></li>
+            <li><a href="legal.html#privacidad">Política de privacidad</a></li>
+            <li><a href="legal.html#cookies">Cookies</a></li>
+            <li><a href="legal.html#aviso">Aviso legal</a></li>
+          </ul>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
-            Telemetría GPS 24/7 Activa
-          </span>
-          <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
-          <a href="admin.html"><i class="fa-solid fa-satellite"></i> Ops Center</a>
+
+        <div class="footer-badge-col">
+          <div class="footer-badge-script">
+            Nicaragua<br>Auténtica
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <div class="exact-container">
+        <span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>
+        <span>Hecho con <i class="fa-solid fa-heart" style="color: #EF4444;"></i> en Nicaragua</span>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL DE AUXILIO SOS -->
-  <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
-    <div class="sos-modal-dialog">
-      <button class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="historia-inline-016">
-        <i class="fa-solid fa-triangle-exclamation historia-inline-017"></i>
-        <h3 class="historia-inline-018">Centro de Auxilio SOS 24/7</h3>
-        <p class="historia-inline-019">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
-      </div>
-      <div class="sos-gps-card historia-inline-020">
-        <span class="historia-inline-021">TUS COORDENADAS GPS:</span>
-        <div id="sosGpsDisplay" class="historia-inline-022">Obteniendo señal GPS...</div>
-      </div>
-      <div class="sos-lines-grid">
-        <a href="tel:128" class="sos-phone-card">
-          <i class="fa-solid fa-truck-medical historia-inline-023"></i>
-          <div><h5 class="historia-inline-024">Cruz Blanca</h5><span class="historia-inline-025">Marcar 128</span></div>
-        </a>
-        <a href="tel:115" class="sos-phone-card">
-          <i class="fa-solid fa-fire-extinguisher historia-inline-026"></i>
-          <div><h5 class="historia-inline-024">Bomberos</h5><span class="historia-inline-025">Marcar 115</span></div>
-        </a>
-        <a href="tel:118" class="sos-phone-card">
-          <i class="fa-solid fa-shield-halved historia-inline-027"></i>
-          <div><h5 class="historia-inline-024">Policía Nacional</h5><span class="historia-inline-025">Marcar 118</span></div>
-        </a>
-        <a href="tel:50584431289" class="sos-phone-card">
-          <i class="fa-brands fa-whatsapp historia-inline-028"></i>
-          <div><h5 class="historia-inline-024">Mesa Baqueano</h5><span class="historia-inline-025">WhatsApp SOS</span></div>
-        </a>
-      </div>
-      <div class="historia-inline-029">
-        <button class="btn-hero-primary historia-inline-030" id="btnSendWhatsAppSos">
-          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
-        </button>
-        <button class="btn-hero-glass historia-inline-031" id="btnCopyGpsSos">
-          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE DESCARGA DE APK -->
-  <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
-    <div class="modal-card-dialog">
-      <button class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK"></div>
-      <h3 class="historia-inline-032">Instalar Baqueano para Android</h3>
-      <p class="historia-inline-033">Descarga directa del paquete firmado v1.0.0 (Versión Oficial) para tu smartphone Android.</p>
-      <div class="install-steps-vertical">
-        <div class="step-row-item">
-          <div class="step-badge-num">1</div>
-          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro baqueanonicaragua.apk en tu almacenamiento.</p></div>
-        </div>
-        <div class="step-row-item">
-          <div class="step-badge-num">2</div>
-          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
-        </div>
-        <div class="step-row-item">
-          <div class="step-badge-num">3</div>
-          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
-        </div>
-      </div>
-      <div class="historia-inline-034">
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20260926-ops-nav-5"></script>
-  <script src="js/baqueano-assistant.js?v=20260926-voice-1"></script>
-  <script src="js/territories-data.js"></script>
-  <script src="js/video-registry.js"></script>
-  <script src="app.js"></script>
-
-  <!-- SDK Firebase & Sincronización en Tiempo Real -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="js/firebase-config.js"></script>
-  <script defer src="js/public-cms-sync.js"></script>
+  <!-- Leaflet JS y Scripts Modulares -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 
   <script>
-    // ========================================================================
-    // 🗺️ ENRUTADOR DIRECTO A GUÍAS DEPARTAMENTALES INDEPENDIENTES
-    // ========================================================================
-    (function initTerritoryLinks() {
-      const cards = document.querySelectorAll('.territory-pill-card');
-      cards.forEach(card => {
-        card.addEventListener('click', (e) => {
-          e.preventDefault();
-          const deptId = card.dataset.territory || 'leon';
-          window.location.href = `departamento.html?id=${deptId}`;
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Inicializar Mapa Departamental en #historiaDeptMap
+      const mapEl = document.getElementById('historiaDeptMap');
+      if (mapEl && typeof L !== 'undefined') {
+        try {
+          const map = L.map('historiaDeptMap', {
+            center: [12.6, -85.5],
+            zoom: 7,
+            zoomControl: false,
+            attributionControl: false
+          });
+
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            maxZoom: 18
+          }).addTo(map);
+
+          const depts = [
+            { name: "León (Cuna de Independencia)", lat: 12.4379, lng: -86.8780 },
+            { name: "Granada (Ciudad Colonial)", lat: 11.9344, lng: -85.9560 },
+            { name: "Managua (Capital Histórica)", lat: 12.1364, lng: -86.2514 },
+            { name: "Masaya (Cuna del Folclore)", lat: 11.9744, lng: -86.0942 },
+            { name: "Rivas (Tierra de Caciques)", lat: 11.4372, lng: -85.8263 },
+            { name: "Matagalpa (Pueblos del Norte)", lat: 12.9256, lng: -85.9178 },
+            { name: "Madriz (Somoto y Cañón)", lat: 13.4833, lng: -86.5833 }
+          ];
+
+          depts.forEach(function (d) {
+            L.circleMarker([d.lat, d.lng], {
+              radius: 8,
+              fillColor: '#F65E01',
+              color: '#FFFFFF',
+              weight: 2,
+              fillOpacity: 0.95
+            }).addTo(map).bindPopup(`<strong>${d.name}</strong>`);
+          });
+
+          setTimeout(() => map.invalidateSize(), 300);
+        } catch (e) {
+          console.warn('[HistoriaMap] Error:', e);
+        }
+      }
+
+      // 2. Menú Móvil
+      const mobileToggle = document.getElementById('mobileNavToggle');
+      const navMenu = document.getElementById('navLinksMenu');
+      if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', function () {
+          const isOpen = navMenu.style.display === 'flex';
+          navMenu.style.display = isOpen ? 'none' : 'flex';
+          navMenu.style.flexDirection = 'column';
+          navMenu.style.position = 'absolute';
+          navMenu.style.top = '70px';
+          navMenu.style.left = '0';
+          navMenu.style.right = '0';
+          navMenu.style.background = '#0B253A';
+          navMenu.style.padding = '20px';
         });
-      });
-    })();
+      }
+    });
   </script>
-  <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 </body>
+
 </html>

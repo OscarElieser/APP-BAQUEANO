@@ -46,6 +46,31 @@
   <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
   <link rel="stylesheet" href="css/nicaragua-branding.css">
   <link rel="stylesheet" href="css/pages/gastronomia.css">
+  <style id="gastronomia-reference-layout">
+    /*
+     * 🎯 POR QUÉ: reproducir la narrativa visual gastronómica suministrada sin perder el catálogo existente.
+     * ⚙️ CÓMO: una capa responsive reutiliza el hero, las tarjetas y los recursos actuales.
+     * 📦 QUÉ: hero editorial, categorías, catálogos compactos, mapa, relato, comercios y cierre fotográfico.
+     */
+    :root{--gastro-navy:#092a46;--gastro-green:#087b50;--gastro-orange:#f65e01;--gastro-cream:#f4e6c1}
+    .page-gastronomia{background:#f7fafc;color:var(--gastro-navy)}
+    .page-gastronomia .video-hero-wrapper{min-height:430px;height:56vh;max-height:610px;margin-top:0}
+    .page-gastronomia .video-hero-media{filter:saturate(1.16) contrast(1.04)}
+    .page-gastronomia .video-hero-gradient{background:linear-gradient(90deg,rgba(2,18,31,.94),rgba(3,29,36,.7) 43%,rgba(3,25,37,.1) 76%),linear-gradient(0deg,rgba(0,20,32,.3),transparent 48%)}
+    .page-gastronomia .video-hero-content{width:min(700px,88vw);left:max(5vw,calc((100vw - 1440px)/2));top:50%;transform:translateY(-46%)}
+    .page-gastronomia .video-hero-badge{background:transparent;border:0;padding:0;letter-spacing:.18em;text-transform:uppercase}
+    .page-gastronomia .video-hero-title{max-width:700px;font-size:clamp(2.5rem,5vw,5.2rem);line-height:.9;text-shadow:0 4px 18px rgba(0,0,0,.5)}
+    .gastro-title-accent{color:var(--gastro-orange);font-family:"Brush Script MT","Segoe Script",cursive;font-weight:700}
+    .page-gastronomia .video-hero-subtitle{max-width:620px;margin-top:1.1rem;font-size:clamp(.95rem,1.35vw,1.2rem);line-height:1.45}
+    .gastro-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.35rem}.gastro-hero-actions a{display:inline-flex;align-items:center;gap:.65rem;min-height:48px;padding:.75rem 1.45rem;border:1px solid rgba(255,255,255,.8);border-radius:999px;color:#fff;background:rgba(2,20,34,.58);font-weight:800;text-decoration:none;backdrop-filter:blur(12px)}.gastro-hero-actions a:first-child{border-color:var(--gastro-orange);background:var(--gastro-orange);box-shadow:0 10px 24px rgba(246,94,1,.28)}
+    .gastro-category-shell{position:relative;z-index:4;width:min(1440px,94vw);margin:-28px auto 0;padding:8px;border-radius:15px;background:rgba(255,255,255,.97);box-shadow:0 14px 38px rgba(15,23,42,.16)}.gastro-categories{display:grid;grid-template-columns:repeat(8,minmax(90px,1fr));overflow-x:auto}.gastro-category{min-width:108px;padding:.75rem .45rem;border-right:1px solid #e5ebef;color:var(--gastro-navy);text-align:center;text-decoration:none;font-size:.74rem;font-weight:700}.gastro-category i{display:block;margin-bottom:.35rem;color:#07945b;font-size:1.35rem}.gastro-category:first-child{border-radius:11px;color:#fff;background:var(--gastro-green)}.gastro-category:first-child i{color:#fff}
+    .page-gastronomia .page-wrapper{padding-top:0!important}.page-gastronomia .destinations-section-pro{padding:2rem 0 0;background:linear-gradient(180deg,#fff,#f7fafc 52%,#fff)}.page-gastronomia .destinations-section-pro>.container{max-width:1480px}.page-gastronomia .gastro-section-header{margin:1.25rem 0 .85rem;text-align:left}.page-gastronomia .gastro-section-badge{display:none}.page-gastronomia .gastro-section-title{margin:0;color:var(--gastro-navy);font-size:clamp(1.35rem,2vw,2rem)}.page-gastronomia .gastro-section-desc{max-width:none;margin:.25rem 0 0;color:#456177;font-size:.9rem}
+    .page-gastronomia .gastronomy-grid,.page-gastronomia .sweets-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}.page-gastronomia .gastro-card{overflow:hidden;min-width:0;border:1px solid #e1e8ed;border-radius:11px;background:#fff;box-shadow:0 5px 14px rgba(9,42,70,.08);transform:none}.page-gastronomia .gastro-card:hover{transform:translateY(-4px);box-shadow:0 12px 25px rgba(9,42,70,.15)}.page-gastronomia .gastro-img-wrap{height:135px}.page-gastronomia .gastro-img{width:100%;height:100%;object-fit:cover}.page-gastronomia .gastro-body{padding:.7rem}.page-gastronomia .gastro-title{margin:.1rem 0 .35rem;font-size:.88rem;line-height:1.15;color:var(--gastro-navy)}.page-gastronomia .gastro-origin-tag,.page-gastronomia .gastro-ingredients{font-size:.66rem;line-height:1.3}.page-gastronomia .gastro-desc,.page-gastronomia .gastronomia-inline-001{display:-webkit-box;overflow:hidden;margin:.35rem 0;color:#587083;font-size:.68rem;line-height:1.35;-webkit-box-orient:vertical;-webkit-line-clamp:3}.page-gastronomia .gastro-footer-meta{gap:.3rem;flex-wrap:wrap;font-size:.61rem}
+    .gastro-feature-grid{display:grid;grid-template-columns:1.03fr 1fr;gap:16px;margin:1.2rem 0}.gastro-map-card,.gastro-maiz-story,.gastro-ai-card,.gastro-venues{overflow:hidden;border-radius:15px;box-shadow:0 8px 24px rgba(9,42,70,.12)}.gastro-map-card{position:relative;min-height:420px;padding:1.35rem;color:#fff;background:linear-gradient(90deg,rgba(3,30,51,.95),rgba(3,30,51,.24)),url('assets/images/destinos/isla_de_ometepe.jpg') center/cover}.gastro-map-card h2{max-width:290px;margin:0;font-size:2rem}.gastro-map-card p{max-width:275px;line-height:1.5}.gastro-map-markers{position:absolute;right:7%;bottom:8%;display:grid;grid-template-columns:repeat(3,58px);gap:28px;transform:rotate(-8deg)}.gastro-map-markers i{display:grid;width:58px;height:58px;place-items:center;border:4px solid #fff;border-radius:50%;color:#fff;background:var(--gastro-orange);box-shadow:0 8px 18px rgba(0,0,0,.28)}.gastro-map-markers i:nth-child(even){background:#07945b}.gastro-map-btn,.gastro-story-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:.75rem;padding:.8rem 1.15rem;border-radius:999px;color:#fff;background:var(--gastro-orange);font-weight:800;text-decoration:none}.gastro-maiz-story{min-height:270px;margin-top:14px;padding:1.5rem;color:#fff;background:linear-gradient(90deg,rgba(8,27,25,.94),rgba(8,27,25,.25)),url('assets/images/comida/delicias del norte.jpg') center/cover}.gastro-maiz-story h2{margin:0 0 .6rem;font-size:1.8rem}.gastro-maiz-story p{max-width:520px;line-height:1.5}.gastro-ai-card{display:flex;align-items:center;gap:1.2rem;margin-top:14px;padding:1.2rem;background:linear-gradient(110deg,#e7f7ff,#fff 55%,#fff1dc)}.gastro-ai-card img{width:110px;height:110px;object-fit:contain}.gastro-ai-card h2{margin:.2rem 0;color:#063aa7}.gastro-venues{padding:1.1rem;background:#fff}.gastro-venues h2{margin:0 0 .2rem}.venue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:1rem}.venue-card{overflow:hidden;border:1px solid #dfe8ed;border-radius:10px}.venue-card img{width:100%;height:110px;object-fit:cover}.venue-card div{padding:.65rem}.venue-card h3{margin:0 0 .3rem;font-size:.88rem}.venue-card a{color:var(--gastro-green);font-size:.72rem;font-weight:800;text-decoration:none}
+    .gastro-final-banner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:240px;margin-top:2rem;padding:clamp(1.5rem,4vw,4rem);color:#fff;background:linear-gradient(90deg,rgba(2,25,38,.88),rgba(2,25,38,.12)),url('assets/images/footer-nicaragua-panorama.png') center/cover}.gastro-final-banner h2{max-width:590px;margin:0;font-size:clamp(1.8rem,3.6vw,3.4rem);line-height:1.02}.gastro-final-actions{display:flex;flex-wrap:wrap;gap:.7rem}.gastro-final-actions a{padding:.8rem 1.2rem;border:1px solid #fff;border-radius:999px;color:#fff;font-weight:800;text-decoration:none}.gastro-final-actions a:first-child{border-color:var(--gastro-orange);background:var(--gastro-orange)}.page-gastronomia .calc-panel-box.gastronomia-inline-002{display:none}
+    @media(max-width:1100px){.page-gastronomia .gastronomy-grid,.page-gastronomia .sweets-grid{grid-template-columns:repeat(4,1fr)}.gastro-feature-grid{grid-template-columns:1fr}}
+    @media(max-width:720px){.page-gastronomia .video-hero-wrapper{min-height:600px;height:78vh}.page-gastronomia .video-hero-content{top:46%}.gastro-category-shell{width:100%;margin:-18px 0 0;border-radius:14px 14px 0 0}.gastro-categories{display:flex}.page-gastronomia .destinations-section-pro{padding-top:1rem}.page-gastronomia .gastronomy-grid,.page-gastronomia .sweets-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.65rem}.page-gastronomia .gastro-card{flex:0 0 76vw;scroll-snap-align:start}.gastro-feature-grid{display:block}.gastro-map-card{min-height:360px}.gastro-final-banner{align-items:flex-start;flex-direction:column}.venue-grid{grid-template-columns:1fr 1fr}}
+  </style>
 </head>
 <body class="has-video-hero page-gastronomia">
 
@@ -198,14 +223,31 @@
       <div class="video-hero-badge">
         <i class="fa-solid fa-bowl-rice"></i> Patrimonio Gastronómico
       </div>
-      <h1 class="video-hero-title">Gastronomía Ancestral de los Hijos del Maíz</h1>
+      <h1 class="video-hero-title">Gastronomía Ancestral<br>de los <span class="gastro-title-accent">Hijos del Maíz</span></h1>
       <p class="video-hero-subtitle">
         Nicaragua sabe a fogón de leña, a nixtamal al amanecer y a hojas de chagüite al vapor.
         Nuestra cocina es la resistencia viva de nuestras abuelas indígenas y campesinas.
       </p>
+      <div class="gastro-hero-actions">
+        <a href="#platillosInsignes"><i class="fa-solid fa-utensils"></i> Explorar sabores <span aria-hidden="true">→</span></a>
+        <a href="#dondeProbarlo"><i class="fa-solid fa-location-dot"></i> Dónde probarlo</a>
+      </div>
     </div>
     <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
   </div>
+
+  <nav class="gastro-category-shell" aria-label="Categorías gastronómicas">
+    <div class="gastro-categories">
+      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-bowl-food"></i>Platos típicos</a>
+      <a class="gastro-category" href="#bebidasTipicas"><i class="fa-solid fa-bottle-water"></i>Bebidas</a>
+      <a class="gastro-category" href="#dulcesTipicos"><i class="fa-solid fa-candy-cane"></i>Dulces</a>
+      <a class="gastro-category" href="#historiaMaiz"><i class="fa-solid fa-wheat-awn"></i>Maíz ancestral</a>
+      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-water"></i>Caribe</a>
+      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-water"></i>Pacífico</a>
+      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-mountain-sun"></i>Norte</a>
+      <a class="gastro-category" href="#platillosInsignes"><i class="fa-solid fa-volcano"></i>Centro</a>
+    </div>
+  </nav>
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="page-wrapper has-hero-header">
@@ -219,7 +261,7 @@
           <div class="gastro-section-badge">
             <i class="fa-solid fa-utensils"></i> Fogón Tradicional
           </div>
-          <h2 class="gastro-section-title">Comidas y Costumbres Típicas de Nicaragua</h2>
+          <h2 class="gastro-section-title">Sabores que cuentan nuestra historia</h2>
           <p class="gastro-section-desc">
             Sabores auténticos cocinados en ollas de barro y leña de quebracho a lo largo de los 17 territorios administrativos: 15 departamentos y 2 regiones autónomas, desde el Pacífico ganadero hasta la Costa Caribe multicultural.
           </p>
@@ -480,7 +522,7 @@
           <div class="gastro-section-badge">
             <i class="fa-solid fa-glass-water"></i> Patrimonio Líquido Ancestral
           </div>
-          <h2 class="gastro-section-title">Bebidas Típicas Nacionales</h2>
+          <h2 class="gastro-section-title">Bebidas de nuestra tierra</h2>
           <p class="gastro-section-desc">
             De la jícara labrada al cantarito de barro: infusiones de maíz tostado, cacao sagrado fermentado y frutos tropicales que calman la sed del caminante.
           </p>
@@ -635,7 +677,7 @@
           <div class="gastro-section-badge">
             <i class="fa-solid fa-cookie-bite"></i> El Almíbar y la Miel Pinolera
           </div>
-          <h2 class="gastro-section-title">Dulces Típicos Nacionales</h2>
+          <h2 class="gastro-section-title">Dulces y hornos de tradición</h2>
           <p class="gastro-section-desc">
             Manjares de panela y leña: desde los peroles de cobre de Masaya hasta las rosquillas crujientes de Somoto que endulzan la vida en familia.
           </p>
@@ -764,6 +806,44 @@
         </div>
 
 
+        <!-- ================================================================
+             🎯 POR QUÉ: conectar cada sabor con el territorio y sus anfitriones.
+             ⚙️ CÓMO: módulos editoriales enlazados a las rutas ya disponibles.
+             📦 QUÉ: mapa, memoria del maíz, asistente y comercios sugeridos.
+             ================================================================ -->
+        <div class="gastro-feature-grid" id="dondeProbarlo">
+          <div>
+            <article class="gastro-map-card">
+              <h2>Mapa gastronómico de Nicaragua</h2>
+              <p>Explorá los sabores de cada departamento y descubrí dónde probarlos.</p>
+              <a class="gastro-map-btn" href="destinos.html">Abrir mapa interactivo <span aria-hidden="true">→</span></a>
+              <div class="gastro-map-markers" aria-hidden="true">
+                <i class="fa-solid fa-bowl-food"></i><i class="fa-solid fa-mug-hot"></i><i class="fa-solid fa-fish"></i>
+                <i class="fa-solid fa-wheat-awn"></i><i class="fa-solid fa-pepper-hot"></i><i class="fa-solid fa-candy-cane"></i>
+              </div>
+            </article>
+            <article class="gastro-maiz-story" id="historiaMaiz">
+              <h2>Somos hombres y mujeres de maíz</h2>
+              <p>Nuestra gastronomía nace de la tierra, del trabajo de nuestra gente y de una herencia que se mantiene viva. En cada plato, el maíz es nuestra identidad, nuestra historia y nuestro futuro.</p>
+              <a class="gastro-story-btn" href="historia.html">Conocer el origen <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="gastro-ai-card">
+              <img src="assets/images/logo.png" alt="Baqueano Digital">
+              <div><strong>Baqueano Digital</strong><h2>¿Qué querés probar hoy?</h2><p>Decime tus gustos y te recomiendo lugares, platos y rutas gastronómicas en Nicaragua.</p><a class="gastro-map-btn" href="baqueano-ai.html">Crear ruta gastronómica con IA →</a></div>
+            </article>
+          </div>
+          <section class="gastro-venues" aria-labelledby="venuesTitle">
+            <h2 id="venuesTitle"><i class="fa-solid fa-building-columns"></i> Dónde vivir estos sabores</h2>
+            <p>Cocineras tradicionales, mercados y emprendimientos locales.</p>
+            <div class="venue-grid">
+              <article class="venue-card"><img src="assets/images/comida/gallo_pinto.jpg" alt="Comedor tradicional"><div><h3>Comedor Doña Rosa</h3><p>Granada · Comida típica nicaragüense.</p><a href="destinos.html">Ver ubicación</a></div></article>
+              <article class="venue-card"><img src="assets/images/comida/vigoron.jpg" alt="Mercado de Masaya"><div><h3>Mercado de Masaya</h3><p>Masaya · Sabores artesanales.</p><a href="destinos.html">Ver ubicación</a></div></article>
+              <article class="venue-card"><img src="assets/images/comida/nacatamal.jpg" alt="Cocina tradicional"><div><h3>Cocina Tradicional El Güegüense</h3><p>León · Platos típicos y cultura.</p><a href="destinos.html">Ver ubicación</a></div></article>
+              <article class="venue-card"><img src="assets/images/comida/baho.jpg" alt="Sazón caribeña"><div><h3>Sazón Caribeña</h3><p>Bluefields · Especialidad costeña.</p><a href="destinos.html">Ver ubicación</a></div></article>
+            </div>
+          </section>
+        </div>
+
         <!-- MANIFIESTO DEL MAÍZ CRIOLLO -->
         <div class="calc-panel-box gastronomia-inline-002">
           <div class="gastronomia-inline-003">
@@ -780,6 +860,10 @@
           </div>
         </div>
       </div>
+    </section>
+    <section class="gastro-final-banner" aria-label="Explorar la gastronomía de Nicaragua">
+      <h2>Nicaragua también se descubre con el paladar</h2>
+      <div class="gastro-final-actions"><a href="#platillosInsignes">Explorar gastronomía →</a><a href="baqueano-ai.html">Planificar mi ruta</a></div>
     </section>
   </main>
 

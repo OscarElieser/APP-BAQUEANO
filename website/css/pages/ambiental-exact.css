@@ -1,0 +1,844 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — ESTILOS AMBIENTAL 1:1 (ambiental-exact.css)
+   ============================================================================
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Replicar con fidelidad absoluta la interfaz de ambiental.html (Imagen 2).
+   - Integrar la navegación superior compartida, el hero de Custodia Territorial,
+     la franja de 4 métricas, el Decálogo Verde en 4 columnas con credencial digital,
+     el módulo de Alerta Ciudadana Ambiental y formulario de reporte, el Pasaporte,
+     las Acciones que inspiran, la barra triple y el footer.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Paleta oficial: Verde Esmeralda (#10B981), Verde Bosque (#073D27), Navy (#0B253A),
+     Naranja Terracota (#F65E01) y Crema (#F4E6C1).
+   - Layout responsivo con Grid y Flexbox.
+   - 0% comisiones, soberanía ambiental y Cero uso de términos prohibidos.
+
+   📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+   - .amb-hero-exact : Hero con titular "Custodiá lo que venís a descubrir" y botones.
+   - .amb-metrics-strip : 4 cajas de estadísticas (Exploradores, 10 Compromisos, Nivel, Pasaporte).
+   - .amb-decalogo-grid : Decálogo en 3 columnas de reglas + 4ta columna Credencial Digital.
+   - .amb-alerts-split : Split de mapa de afectaciones + formulario con stepper 1-2-3.
+   - .amb-passport-row : 6 niveles progresivos del pasaporte con flechas de avance.
+   - .amb-inspiring-row : 5 tarjetas de acciones comunitarias de protección.
+   - .amb-triple-bar : 3 cajas (SOS 24/7, Negocio turístico, Únete a la comunidad).
+   ============================================================================ */
+
+:root {
+  --bq-navy: #0B253A;
+  --bq-navy-dark: #081827;
+  --bq-green: #10B981;
+  --bq-green-dark: #073D27;
+  --bq-orange: #F65E01;
+  --bq-cream: #F4E6C1;
+  --bq-bg-light: #F7F9FC;
+  --bq-text-dark: #0B253A;
+  --bq-text-muted: #64748B;
+  --bq-border-light: #E2E8F0;
+  --bq-font-heading: 'Montserrat', sans-serif;
+  --bq-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.page-ambiental-exact {
+  background-color: var(--bq-bg-light);
+  color: var(--bq-text-dark);
+  font-family: var(--bq-font-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================================
+   1. HERO AMBIENTAL (IMAGEN 2)
+   ============================================================================ */
+.amb-hero-exact {
+  position: relative;
+  min-height: 480px;
+  background-color: var(--bq-navy);
+  background-image: 
+    linear-gradient(90deg, rgba(8, 24, 39, 0.94) 0%, rgba(8, 24, 39, 0.72) 48%, rgba(8, 24, 39, 0.18) 100%),
+    url('../../assets/images/destinos/isla_de_ometepe.jpg');
+  background-size: cover;
+  background-position: center 52%;
+  padding-top: 95px;
+  padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.amb-hero-exact .exact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.amb-hero-left {
+  max-width: 650px;
+}
+
+.amb-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #38BDF8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.amb-hero-title {
+  font-family: var(--bq-font-heading);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.05;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.02em;
+}
+
+.amb-hero-title-accent {
+  color: var(--bq-orange);
+  font-style: italic;
+}
+
+.amb-hero-subtitle {
+  font-size: 0.98rem;
+  color: #F1F5F9;
+  line-height: 1.5;
+  margin: 0 0 22px 0;
+  max-width: 580px;
+}
+
+.amb-hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.amb-btn-green {
+  background: var(--bq-green);
+  color: #FFFFFF;
+  padding: 11px 22px;
+  border-radius: 20px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.amb-btn-green:hover {
+  background: #059669;
+}
+
+.amb-btn-glass {
+  background: rgba(11, 37, 58, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #FFFFFF;
+  padding: 11px 22px;
+  border-radius: 20px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amb-hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.amb-hero-script {
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: 2.5rem;
+  color: #FFFFFF;
+  transform: rotate(-6deg);
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* ============================================================================
+   2. FRANJA DE 4 MÉTRICAS (IMAGEN 2)
+   ============================================================================ */
+.amb-metrics-section {
+  margin-top: -24px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.amb-metrics-strip {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(11, 37, 58, 0.08);
+  border: 1px solid var(--bq-border-light);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 14px 20px;
+}
+
+.amb-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-right: 1px solid var(--bq-border-light);
+}
+
+.amb-metric-item:last-child {
+  border-right: none;
+}
+
+.amb-metric-icon {
+  font-size: 1.6rem;
+  color: var(--bq-green);
+}
+
+.amb-metric-text h5 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+}
+
+.amb-metric-text p {
+  margin: 2px 0 0 0;
+  font-size: 0.68rem;
+  color: var(--bq-text-muted);
+}
+
+/* ============================================================================
+   3. EL DECÁLOGO VERDE Y CREDENCIAL DIGITAL (IMAGEN 2)
+   ============================================================================ */
+.amb-decalogo-section {
+  margin-bottom: 40px;
+}
+
+.amb-decalogo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.amb-decalogo-title-group h2 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--bq-navy);
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.amb-decalogo-title-group p {
+  font-size: 0.84rem;
+  color: var(--bq-text-muted);
+  margin: 0;
+}
+
+.amb-decalogo-progress-side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.amb-progress-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.amb-progress-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--bq-navy);
+}
+
+.amb-progress-track {
+  width: 130px;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.amb-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--bq-green);
+  transition: width 0.3s ease;
+}
+
+.amb-btn-sign-all {
+  background: var(--bq-green);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 16px;
+  padding: 8px 18px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.amb-decalogo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.05fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.amb-decalogo-col {
+  background: #FFFFFF;
+  border: 1px solid var(--bq-border-light);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.amb-col-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--bq-border-light);
+}
+
+.amb-col-header h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0;
+}
+
+.amb-col-header span {
+  font-size: 0.68rem;
+  color: var(--bq-text-muted);
+}
+
+.amb-rule-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.amb-rule-item:last-child {
+  border-bottom: none;
+}
+
+.amb-rule-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.amb-rule-body {
+  flex: 1;
+}
+
+.amb-rule-body h5 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0;
+}
+
+.amb-rule-body p {
+  font-size: 0.66rem;
+  color: var(--bq-text-muted);
+  margin: 2px 0 0 0;
+  line-height: 1.3;
+}
+
+.amb-rule-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--bq-green);
+}
+
+/* Columna 4: Tu Credencial Digital */
+.amb-credential-card {
+  background: linear-gradient(150deg, #073D27 0%, #031E17 100%);
+  border-radius: 16px;
+  padding: 20px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 24px rgba(7, 61, 39, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.amb-emblem-box {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 12px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0F633E 0%, #052A18 100%);
+  border: 3px solid #D4AF37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.amb-emblem-box img {
+  width: 55px;
+  height: auto;
+}
+
+.amb-credential-card h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 0 0 4px 0;
+}
+
+.amb-credential-card p.desc {
+  font-size: 0.7rem;
+  color: #D1FAE5;
+  text-align: center;
+  margin: 0 0 14px 0;
+  line-height: 1.35;
+}
+
+.amb-perks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: #E2E8F0;
+}
+
+.amb-perks-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amb-perks-list li i {
+  color: #34D399;
+}
+
+.amb-btn-credential {
+  width: 100%;
+  height: 36px;
+  background: #FFFFFF;
+  color: var(--bq-green-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* ============================================================================
+   4. ALERTA CIUDADANA Y REPORTE (IMAGEN 2)
+   ============================================================================ */
+.amb-alerts-section {
+  margin-bottom: 40px;
+}
+
+.amb-alerts-split {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Izquierda: Alerta Ciudadana Ambiental */
+.amb-alert-panel {
+  background: #08343D;
+  border-radius: 18px;
+  padding: 20px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.amb-alert-panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.amb-alert-intro h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amb-alert-intro p {
+  font-size: 0.8rem;
+  color: #CBD5E1;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 480px;
+}
+
+.amb-alert-map-wrap {
+  background: #052129;
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 240px;
+  position: relative;
+  flex: 1;
+}
+
+.amb-alert-map-viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+}
+
+/* Derecha: Formulario de Reporte */
+.amb-form-panel {
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid var(--bq-border-light);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.amb-form-panel h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.amb-stepper-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.68rem;
+  color: var(--bq-text-muted);
+}
+
+.amb-stepper-step.active {
+  color: var(--bq-green);
+  font-weight: 700;
+}
+
+.amb-field {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--bq-border-light);
+  font-size: 0.76rem;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.amb-upload-box {
+  border: 1px dashed #CBD5E1;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--bq-text-muted);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.amb-confidential-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  color: var(--bq-navy);
+  margin-bottom: 12px;
+}
+
+.amb-btn-submit-report {
+  width: 100%;
+  height: 38px;
+  background: var(--bq-green);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ============================================================================
+   5. PASAPORTE DEL EXPLORADOR (IMAGEN 2)
+   ============================================================================ */
+.amb-passport-section {
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid var(--bq-border-light);
+  padding: 22px;
+  margin-bottom: 40px;
+}
+
+.amb-passport-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 18px;
+}
+
+.amb-passport-head h2 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--bq-navy);
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amb-passport-head p {
+  font-size: 0.8rem;
+  color: var(--bq-text-muted);
+  margin: 0;
+}
+
+.amb-passport-levels-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.amb-level-card {
+  position: relative;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.amb-level-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.amb-level-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+}
+
+.amb-level-info {
+  position: relative;
+  z-index: 2;
+}
+
+.amb-level-info span {
+  font-size: 0.6rem;
+  color: #34D399;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.amb-level-info h4 {
+  font-size: 0.74rem;
+  font-weight: 800;
+  margin: 1px 0 0 0;
+}
+
+/* ============================================================================
+   6. ACCIONES QUE INSPIRAN (IMAGEN 2)
+   ============================================================================ */
+.amb-inspiring-section {
+  margin-bottom: 40px;
+}
+
+.amb-inspiring-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.amb-inspiring-card {
+  position: relative;
+  height: 140px;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.amb-inspiring-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.amb-inspiring-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.amb-inspiring-text {
+  position: relative;
+  z-index: 2;
+}
+
+.amb-inspiring-text h4 {
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.amb-inspiring-text p {
+  font-size: 0.64rem;
+  color: #E2E8F0;
+  margin: 2px 0 0 0;
+}
+
+/* ============================================================================
+   7. BARRA TRIPLE INFERIOR (IMAGEN 2)
+   ============================================================================ */
+.amb-triple-section {
+  margin-bottom: 44px;
+}
+
+.amb-triple-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 14px;
+}
+
+.amb-triple-box {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid var(--bq-border-light);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.amb-triple-box.sos {
+  background: #0B253A;
+  color: #FFFFFF;
+}
+
+.amb-box-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.amb-box-icon {
+  font-size: 1.4rem;
+}
+
+.amb-triple-box.sos .amb-box-icon { color: #EF4444; }
+.amb-triple-box:not(.sos) .amb-box-icon { color: var(--bq-green); }
+
+.amb-box-text h4 {
+  font-size: 0.86rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.amb-box-text p {
+  font-size: 0.7rem;
+  margin: 2px 0 0 0;
+  color: var(--bq-text-muted);
+}
+
+.amb-triple-box.sos .amb-box-text p { color: #CBD5E1; }
+
+.amb-btn-box {
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.amb-btn-box.green { background: var(--bq-green); color: #FFFFFF; }
+.amb-btn-box.outline { background: #FFFFFF; border: 1px solid var(--bq-border-light); color: var(--bq-navy); }
+
+/* ============================================================================
+   8. RESPONSIVO
+   ============================================================================ */
+@media (max-width: 1024px) {
+  .amb-decalogo-grid { grid-template-columns: 1fr 1fr; }
+  .amb-alerts-split { grid-template-columns: 1fr; }
+  .amb-passport-levels-row { grid-template-columns: repeat(3, 1fr); }
+  .amb-inspiring-row { grid-template-columns: repeat(3, 1fr); }
+  .amb-triple-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .amb-hero-exact .exact-container { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .amb-metrics-strip { grid-template-columns: 1fr; }
+  .amb-metric-item { border-right: none; border-bottom: 1px solid var(--bq-border-light); }
+  .amb-decalogo-grid { grid-template-columns: 1fr; }
+  .amb-passport-levels-row { grid-template-columns: repeat(2, 1fr); }
+  .amb-inspiring-row { grid-template-columns: 1fr 1fr; }
+}

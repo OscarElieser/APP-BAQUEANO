@@ -44,6 +44,19 @@
   <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
   <link rel="stylesheet" href="css/nicaragua-branding.css">
   <link rel="stylesheet" href="css/pages/musica.css">
+  <style id="musica-reference-layout">
+    /*
+     * 🎯 POR QUÉ: trasladar la identidad visual de la referencia al archivo sonoro sin perder su catálogo.
+     * ⚙️ CÓMO: una capa editorial responsive reorganiza visualmente hero, reproductor y colecciones existentes.
+     * 📦 QUÉ: portada musical, reproductor destacado, géneros, mapa, historia, instrumentos, asistente y cierre.
+     */
+    :root{--music-navy:#082b48;--music-green:#087b50;--music-orange:#f65e01;--music-cream:#f4e6c1}
+    .page-musica{background:#f7fafc;color:var(--music-navy)}.page-musica .video-hero-wrapper{height:48vh;min-height:450px;max-height:590px}.page-musica .video-hero-media{filter:saturate(1.18) contrast(1.05)}.page-musica .video-hero-gradient{background:linear-gradient(90deg,rgba(2,19,32,.94),rgba(5,31,39,.65) 46%,rgba(3,25,37,.1) 78%)}.page-musica .video-hero-content{width:min(670px,88vw);left:max(6vw,calc((100vw - 1440px)/2));top:50%;transform:translateY(-48%)}.page-musica .video-hero-badge{border:0!important;background:transparent!important;padding:0!important;letter-spacing:.2em;text-transform:uppercase}.page-musica .video-hero-title{font-size:clamp(2.7rem,5vw,5rem);line-height:.88;text-transform:uppercase;text-shadow:0 5px 18px rgba(0,0,0,.55)}.music-title-orange{display:block;color:var(--music-orange)}.page-musica .video-hero-subtitle{max-width:580px;font-size:1.05rem;line-height:1.42}.music-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}.music-hero-actions a{display:inline-flex;align-items:center;gap:.55rem;padding:.8rem 1.25rem;border:1px solid #fff;border-radius:999px;color:#fff;background:rgba(2,20,34,.52);font-weight:800;text-decoration:none;backdrop-filter:blur(12px)}.music-hero-actions a:first-child{border-color:var(--music-orange);background:var(--music-orange)}
+    .page-musica .page-wrapper{padding-top:0!important}.page-musica .environmental-section-pro{padding:0 0 2rem;background:linear-gradient(#fff,#f5f9fc)}.page-musica .environmental-section-pro>.container{max-width:1460px}.page-musica .epic-music-section{position:relative;z-index:5;margin-top:-46px}.page-musica .epic-player-chassis{border:4px solid #fff;border-radius:18px;background:linear-gradient(100deg,#092c47,#154c5a 58%,#05263e);box-shadow:0 16px 34px rgba(4,31,48,.24)}.page-musica .epic-player-main-grid{min-height:auto}.page-musica .epic-turntable-deck{transform:scale(.83)}.page-musica .archive-editorial-note{display:none}.page-musica .epic-music-search{border-radius:12px}.page-musica .epic-playlist-tracks-grid{max-height:360px;overflow-y:auto}.page-musica .music-player-panel{margin-top:1.3rem;border:0;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(8,43,72,.1)}.page-musica .sonora-artists-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}.page-musica .section-lead-header{text-align:left}.page-musica .impacts-hex-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.page-musica .impact-hex-card{border-radius:12px;clip-path:none;background:#fff;box-shadow:0 5px 18px rgba(8,43,72,.09)}
+    .music-section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin:1.4rem 0 .65rem}.music-section-head h2{margin:0;font-size:1.55rem}.music-section-head p{margin:.2rem 0 0;color:#526d81}.music-card-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.music-image-card{position:relative;overflow:hidden;min-height:125px;border-radius:10px;color:#fff;background:#123}.music-image-card img{width:100%;height:100%;min-height:125px;object-fit:cover;transition:transform .3s}.music-image-card:hover img{transform:scale(1.06)}.music-image-card div{position:absolute;inset:auto 0 0;padding:.75rem;background:linear-gradient(transparent,rgba(1,16,27,.94))}.music-image-card h3,.music-image-card p{margin:0}.music-image-card h3{font-size:.87rem}.music-image-card p{font-size:.68rem}.music-map-layout{display:grid;grid-template-columns:3fr 1fr;gap:14px;margin:1.4rem 0}.music-map-card{position:relative;min-height:350px;overflow:hidden;padding:1.5rem;border-radius:14px;color:#fff;background:linear-gradient(90deg,rgba(2,28,49,.96),rgba(2,38,56,.24)),url('assets/images/destinos/isla_de_ometepe.jpg') center/cover;box-shadow:0 10px 24px rgba(8,43,72,.16)}.music-map-card h2{max-width:260px;margin:0;font-size:2rem}.music-map-card p{max-width:300px;line-height:1.5}.music-map-btn{display:inline-flex;margin-top:.8rem;padding:.8rem 1.15rem;border-radius:999px;color:#fff;background:var(--music-orange);font-weight:800;text-decoration:none}.music-note-cloud{position:absolute;right:8%;bottom:12%;display:grid;grid-template-columns:repeat(3,56px);gap:25px}.music-note-cloud i{display:grid;width:56px;height:56px;place-items:center;border:4px solid #fff;border-radius:50%;background:#099560;box-shadow:0 8px 18px #0018}.music-note-cloud i:nth-child(even){background:#1686ef}.music-territory-card{overflow:hidden;border-radius:14px;color:#fff;background:#082b48;box-shadow:0 10px 24px rgba(8,43,72,.15)}.music-territory-card img{width:100%;height:235px;object-fit:cover}.music-territory-card div{padding:1rem}.music-territory-card h3{margin:0}.music-instruments{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.music-instrument{overflow:hidden;border-radius:10px;background:#fff;box-shadow:0 5px 15px rgba(8,43,72,.1)}.music-instrument img{width:100%;height:115px;object-fit:cover}.music-instrument div{padding:.7rem}.music-instrument h3,.music-instrument p{margin:0}.music-instrument h3{font-size:.86rem}.music-instrument p{font-size:.7rem;color:#526d81}.music-ai-strip{display:flex;align-items:center;gap:1.2rem;margin:1.5rem 0 0;padding:1rem 1.4rem;border-radius:15px;background:linear-gradient(100deg,#e7f7ff,#fff 52%,#fff1dc);box-shadow:0 7px 20px rgba(8,43,72,.1)}.music-ai-strip img{width:100px}.music-ai-strip h2{margin:.1rem 0;color:#063aa7}.music-ai-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-left:auto}.music-ai-chips span{padding:.55rem .8rem;border:1px solid #dbe5eb;border-radius:999px;background:#fff;font-size:.72rem;font-weight:700}.music-final-banner{display:flex;align-items:end;justify-content:space-between;min-height:260px;margin-top:1.5rem;padding:clamp(1.5rem,4vw,4rem);color:#fff;background:linear-gradient(90deg,rgba(2,24,39,.82),rgba(2,24,39,.08)),url('assets/images/footer-nicaragua-panorama.png') center/cover}.music-final-banner h2{max-width:530px;margin:0;font-family:"Brush Script MT",cursive;font-size:clamp(2.3rem,4.5vw,4.5rem);line-height:.9}.music-final-banner a{padding:.85rem 1.2rem;border-radius:999px;color:#fff;background:var(--music-orange);font-weight:800;text-decoration:none}
+    @media(max-width:1100px){.page-musica .sonora-artists-grid{grid-template-columns:repeat(4,1fr)}.music-card-grid{grid-template-columns:repeat(4,1fr)}.music-instruments{grid-template-columns:repeat(3,1fr)}.page-musica .impacts-hex-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){.page-musica .video-hero-wrapper{height:76vh;min-height:610px}.page-musica .video-hero-content{top:44%}.page-musica .epic-music-section{margin-top:-25px}.page-musica .epic-player-chassis{border-width:2px}.page-musica .sonora-artists-grid,.music-card-grid,.music-instruments{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}.music-image-card,.music-instrument{flex:0 0 72vw;scroll-snap-align:start}.music-map-layout{grid-template-columns:1fr}.music-territory-card{display:none}.music-ai-strip{align-items:flex-start;flex-direction:column}.music-ai-chips{margin-left:0}.music-final-banner{align-items:flex-start;flex-direction:column}.page-musica .impacts-hex-grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body class="has-video-hero page-musica">
 
@@ -196,10 +209,11 @@
       <div class="video-hero-badge musica-inline-001">
         <i class="fa-solid fa-music"></i> Galería Sonora de Nicaragua
       </div>
-      <h1 class="video-hero-title">Patrimonio Musical & Galería Sonora</h1>
+      <h1 class="video-hero-title">El sonido de <span class="music-title-orange">Nicaragua</span> sigue vivo</h1>
       <p class="video-hero-subtitle">
         Compositores históricos, creadores del Son Nica, cantautores de nueva canción, maestros de la música clásica y ritmos caribeños. Descubre las obras inmortales y la tierra donde nacieron.
       </p>
+      <div class="music-hero-actions"><a href="#epicMusicPlayer"><i class="fa-solid fa-circle-play"></i> Escuchar ahora →</a><a href="#mapaSonoro"><i class="fa-solid fa-location-dot"></i> Explorar mapa sonoro</a></div>
     </div>
     <button class="video-hero-ctrl-btn" aria-label="Pausar o reproducir video" title="Pausar video"><i class="fa-solid fa-pause"></i></button>
   </div>
@@ -344,6 +358,19 @@
         </div>
 
 
+        <section aria-labelledby="musicGenresTitle">
+          <div class="music-section-head"><div><h2 id="musicGenresTitle">🎵 Explorá por géneros</h2><p>Ritmos que cuentan la historia de nuestra tierra.</p></div><a href="#epicPlaylistGrid">Ver todos los géneros →</a></div>
+          <div class="music-card-grid">
+            <article class="music-image-card"><img src="assets/artistas/camilo zapata.jpg" alt="Son Nica"><div><h3>Son Nica</h3><p>Ritmo e identidad</p></div></article>
+            <article class="music-image-card"><img src="assets/artistas/La Marimba de Arco de Monimbó.jpg" alt="Marimba"><div><h3>Marimba</h3><p>Sonido ancestral</p></div></article>
+            <article class="music-image-card"><img src="assets/artistas/carlos mejia godoy.jpg" alt="Nueva Canción"><div><h3>Nueva Canción</h3><p>Voz del pueblo</p></div></article>
+            <article class="music-image-card"><img src="assets/artistas/Música de El Güegüense.jpg" alt="Folclor"><div><h3>Folclor</h3><p>Tradición viva</p></div></article>
+            <article class="music-image-card"><img src="assets/artistas/Dimensión Costeña.jpg" alt="Caribe"><div><h3>Caribe</h3><p>Ritmos del Atlántico</p></div></article>
+            <article class="music-image-card"><img src="assets/artistas/José de la Cruz Mena.jpg" alt="Música clásica"><div><h3>Música Clásica</h3><p>Legado universal</p></div></article>
+            <article class="music-image-card"><img src="assets/artistas/justo santos.jpg" alt="Música tradicional"><div><h3>Tradicional</h3><p>Raíces de nuestra tierra</p></div></article>
+          </div>
+        </section>
+
         <!-- CONSOLA FOLCLÓRICA BAQUEANO -->
         <div class="music-player-panel">
           <div class="sonora-console-bar">
@@ -447,8 +474,33 @@
           </div>
         </div>
 
+        <!-- ================================================================
+             🎯 POR QUÉ: relacionar música, territorio e instrumentos nacionales.
+             ⚙️ CÓMO: módulos visuales usan imágenes y rutas locales ya disponibles.
+             📦 QUÉ: mapa sonoro, territorio destacado, instrumentos y recomendador.
+             ================================================================ -->
+        <section class="music-map-layout" id="mapaSonoro" aria-label="Mapa sonoro de Nicaragua">
+          <article class="music-map-card"><h2>Mapa sonoro de Nicaragua</h2><p>Explorá cómo suenan nuestros territorios. Descubrí los ritmos, artistas y expresiones musicales de cada región.</p><a class="music-map-btn" href="destinos.html">Abrir mapa interactivo →</a><div class="music-note-cloud" aria-hidden="true"><i class="fa-solid fa-music"></i><i class="fa-solid fa-music"></i><i class="fa-solid fa-drum"></i><i class="fa-solid fa-guitar"></i><i class="fa-solid fa-music"></i><i class="fa-solid fa-drum"></i></div></article>
+          <article class="music-territory-card"><img src="assets/images/destinos/isletas_de_granada.jpg" alt="Granada"><div><h3>Granada</h3><p>Cuna de compositores, serenatas y tradición musical.</p><a class="music-map-btn" href="destinos.html">Explorar Granada →</a></div></article>
+        </section>
+
+        <section aria-labelledby="instrumentsTitle">
+          <div class="music-section-head"><div><h2 id="instrumentsTitle">🏛️ Instrumentos tradicionales</h2><p>Sonidos que nacen de nuestra tierra.</p></div></div>
+          <div class="music-instruments">
+            <article class="music-instrument"><img src="assets/artistas/La Marimba de Arco de Monimbó.jpg" alt="Marimba de arco"><div><h3>Marimba de Arco</h3><p>Patrimonio de la Humanidad</p></div></article>
+            <article class="music-instrument"><img src="assets/artistas/camilo zapata.jpg" alt="Guitarra nicaragüense"><div><h3>Guitarra Nicaragüense</h3><p>Acompaña nuestra identidad</p></div></article>
+            <article class="music-instrument"><img src="assets/artistas/Música de El Güegüense.jpg" alt="Pito tradicional"><div><h3>Pito</h3><p>Sonidos del pueblo</p></div></article>
+            <article class="music-instrument"><img src="assets/artistas/carlos mejia godoy.jpg" alt="Tambor"><div><h3>Tambor</h3><p>Ritmo que une</p></div></article>
+            <article class="music-instrument"><img src="assets/artistas/Dimensión Costeña.jpg" alt="Quijongo"><div><h3>Quijongo</h3><p>Herencia afroindígena</p></div></article>
+            <article class="music-instrument"><img src="assets/artistas/Fuzion 4.jpg" alt="Percusión"><div><h3>Percusión</h3><p>Energía del Caribe</p></div></article>
+          </div>
+        </section>
+
+        <aside class="music-ai-strip"><img src="assets/images/logo.png" alt="Baqueano Digital"><div><strong>Baqueano Digital</strong><h2>¿Qué música querés disfrutar hoy?</h2><p>Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio.</p></div><div class="music-ai-chips"><span>🎶 Quiero Son Nica</span><span>🥁 Música del Caribe</span><span>🎼 Marimba</span><span>📜 Canciones históricas</span></div></aside>
+
       </div>
     </section>
+    <section class="music-final-banner" aria-label="Experiencias musicales de Nicaragua"><h2>Escuchá Nicaragua, conocé su historia</h2><a href="#epicMusicPlayer">Explorar experiencias musicales →</a></section>
   </main>
 
   <!-- MODAL DE FICHA ENRIQUECIDA DE ARTISTA (MÚSICA + TERRITORIO) -->

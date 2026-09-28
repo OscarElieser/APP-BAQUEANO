@@ -1,0 +1,820 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — ESTILOS EDITORIALES DESTINOS 1:1 (destinos-exact.css)
+   ============================================================================
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Replicar de forma idéntica la interfaz oficial de destinos.html (Imagen 3).
+   - Integrar la barra de navegación global oficial, el hero con buscador y pin,
+     la franja de filtros de categoría, barra de controles y ordenamiento,
+     el split prioritario (Mapa de Nicaragua + Destinos destacados),
+     la grilla de Todos los destinos (128), Más destinos que te encantarán,
+     la paginación, el módulo Baqueano Digital y el banner comunitario.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Paleta oficial: Navy (#0B253A / #081827), Teal (#165D6F), Naranja (#F65E01),
+     Verde Esmeralda (#10B981) y Fondo Claro (#F7F9FC).
+   - Layout responsivo con CSS Grid y Flexbox.
+   - Cero uso de términos prohibidos y 100% fidelidad visual.
+
+   📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+   - .destinos-hero-exact : Hero con buscador y pin de Ometepe.
+   - .destinos-cat-strip : Franja de categorías con chips activos.
+   - .destinos-filter-bar : Filtros de departamento, precio, valoración y toggle verificados.
+   - .destinos-split-grid : Layout 2 columnas (Mapa interactivo + 6 Destinos destacados).
+   - .destinos-catalog-row : Grillas de 5 tarjetas horizontales para catálogo completo.
+   - .destinos-pagination : Barra de paginación numérica y controles prev/next.
+   - .destinos-ai-box : Tarjeta de recomendación con Baqüi y chips de consulta.
+   - .destinos-cta-banner : Banner panorámico al atardecer con anfitrión campesino.
+   ============================================================================ */
+
+:root {
+  --bq-navy: #0B253A;
+  --bq-navy-dark: #081827;
+  --bq-teal: #165D6F;
+  --bq-teal-light: #0D6E77;
+  --bq-orange: #F65E01;
+  --bq-green: #10B981;
+  --bq-cream: #F4E6C1;
+  --bq-bg-light: #F7F9FC;
+  --bq-text-dark: #0B253A;
+  --bq-text-muted: #64748B;
+  --bq-border-light: #E2E8F0;
+  --bq-font-heading: 'Montserrat', sans-serif;
+  --bq-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.page-destinos-exact {
+  background-color: var(--bq-bg-light);
+  color: var(--bq-text-dark);
+  font-family: var(--bq-font-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================================
+   1. HERO DESTINOS (IMAGEN 3)
+   ============================================================================ */
+.destinos-hero-exact {
+  position: relative;
+  min-height: 380px;
+  background-color: var(--bq-navy);
+  background-image: 
+    linear-gradient(90deg, rgba(8, 24, 39, 0.92) 0%, rgba(8, 24, 39, 0.65) 45%, rgba(8, 24, 39, 0.15) 100%),
+    url('../../assets/images/destinos/isla_de_ometepe.jpg');
+  background-size: cover;
+  background-position: center 50%;
+  padding-top: 90px;
+  padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.destinos-hero-exact .exact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.destinos-hero-left {
+  max-width: 600px;
+}
+
+.destinos-hero-title {
+  font-family: var(--bq-font-heading);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.destinos-hero-subtitle {
+  font-size: 1rem;
+  color: #F1F5F9;
+  margin: 0 0 18px 0;
+  line-height: 1.4;
+}
+
+.destinos-hero-search {
+  width: min(100%, 540px);
+  height: 50px;
+  background: #FFFFFF;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  padding: 4px 5px 4px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.destinos-hero-search i {
+  color: var(--bq-navy);
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.destinos-hero-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--bq-navy);
+  background: transparent;
+}
+
+.destinos-hero-search button {
+  height: 42px;
+  min-width: 90px;
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 21px;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.destinos-hero-search button:hover {
+  background: #E05400;
+}
+
+.destinos-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.destinos-script-badge {
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: 2.2rem;
+  color: #FFFFFF;
+  transform: rotate(-6deg);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+
+.destinos-location-tag {
+  font-size: 0.76rem;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+/* ============================================================================
+   2. CATEGORÍAS EN CHIPS (IMAGEN 3)
+   ============================================================================ */
+.destinos-cat-bar {
+  margin: 16px 0 12px 0;
+}
+
+.destinos-cat-scroller {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+
+.destinos-cat-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.destinos-cat-chip {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid var(--bq-border-light);
+  background: #FFFFFF;
+  color: var(--bq-navy);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(11, 37, 58, 0.04);
+  transition: all 0.2s ease;
+}
+
+.destinos-cat-chip:hover {
+  border-color: var(--bq-green);
+  color: var(--bq-green);
+}
+
+.destinos-cat-chip.active {
+  background: var(--bq-green);
+  color: #FFFFFF;
+  border-color: var(--bq-green);
+}
+
+/* ============================================================================
+   3. BARRA DE FILTROS Y ORDENAMIENTO (IMAGEN 3)
+   ============================================================================ */
+.destinos-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.destinos-filters-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dest-dropdown-btn {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid var(--bq-border-light);
+  background: #FFFFFF;
+  color: var(--bq-navy);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.dest-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid var(--bq-border-light);
+  background: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--bq-navy);
+  cursor: pointer;
+}
+
+.toggle-switch-ui {
+  width: 28px;
+  height: 16px;
+  background: #059669;
+  border-radius: 8px;
+  position: relative;
+}
+
+.toggle-switch-ui::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-radius: 50%;
+}
+
+.dest-order-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--bq-text-muted);
+}
+
+.dest-order-select {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 18px;
+  border: 1px solid var(--bq-border-light);
+  background: #FFFFFF;
+  color: var(--bq-navy);
+  font-weight: 700;
+  font-size: 0.78rem;
+  outline: none;
+}
+
+/* ============================================================================
+   4. SPLIT PRINCIPAL: MAPA + DESTINOS DESTACADOS (IMAGEN 3)
+   ============================================================================ */
+.destinos-split-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 18px;
+  margin-bottom: 34px;
+  align-items: start;
+}
+
+/* Columna Izquierda: Mapa de Nicaragua */
+.destinos-map-panel {
+  background: #08283C;
+  border-radius: 18px;
+  border: 1px solid var(--bq-border-light);
+  box-shadow: 0 8px 24px rgba(11, 37, 58, 0.08);
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.destinos-map-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.destinos-view-tab {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.destinos-view-tab.active {
+  background: var(--bq-green);
+  border-color: var(--bq-green);
+}
+
+.destinos-map-viewport {
+  width: 100%;
+  height: 480px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #051C2C;
+  position: relative;
+}
+
+/* Mini Preview Card dentro del Mapa */
+.destinos-map-preview-card {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 500;
+}
+
+.destinos-preview-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.destinos-preview-info {
+  flex: 1;
+}
+
+.destinos-preview-info h4 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+}
+
+.destinos-preview-info span {
+  font-size: 0.72rem;
+  color: var(--bq-text-muted);
+}
+
+.destinos-preview-btn {
+  background: #0284C7;
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Columna Derecha: Destinos Destacados (Grilla 3x2) */
+.destinos-destacados-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.destinos-destacados-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.dest-highlight-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid var(--bq-border-light);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(11, 37, 58, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dest-highlight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(11, 37, 58, 0.1);
+}
+
+.dest-highlight-media {
+  position: relative;
+  height: 110px;
+}
+
+.dest-highlight-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dest-highlight-heart {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.dest-highlight-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dest-highlight-body h4 {
+  font-family: var(--bq-font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0 0 2px 0;
+}
+
+.dest-highlight-body span.location {
+  font-size: 0.7rem;
+  color: var(--bq-text-muted);
+  margin-bottom: 6px;
+}
+
+.dest-highlight-rating {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--bq-navy);
+  margin-bottom: 6px;
+}
+
+.dest-highlight-rating i {
+  color: #F59E0B;
+}
+
+.dest-highlight-price {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin-top: auto;
+  margin-bottom: 8px;
+}
+
+.dest-btn-green {
+  width: 100%;
+  height: 32px;
+  background: var(--bq-green);
+  color: #FFFFFF;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.dest-btn-green:hover {
+  background: #059669;
+}
+
+/* ============================================================================
+   5. FILAS DE CATÁLOGO GENERAL (5 TARJETAS HORIZONTALES)
+   ============================================================================ */
+.destinos-catalog-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.dest-catalog-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid var(--bq-border-light);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(11, 37, 58, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.dest-catalog-media {
+  position: relative;
+  height: 110px;
+}
+
+.dest-catalog-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dest-catalog-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.dest-catalog-tag.orange { background: var(--bq-orange); color: #FFFFFF; }
+.dest-catalog-tag.blue { background: #0284C7; color: #FFFFFF; }
+.dest-catalog-tag.green { background: #16A34A; color: #FFFFFF; }
+.dest-catalog-tag.purple { background: #8B5CF6; color: #FFFFFF; }
+
+.dest-catalog-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dest-catalog-body h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--bq-navy);
+  margin: 0 0 2px 0;
+}
+
+.dest-catalog-body span.location {
+  font-size: 0.7rem;
+  color: var(--bq-text-muted);
+  margin-bottom: 6px;
+}
+
+.dest-catalog-dual-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dest-btn-subtle {
+  height: 30px;
+  border: 1px solid var(--bq-border-light);
+  border-radius: 6px;
+  background: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--bq-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.dest-btn-subtle:hover {
+  background: #F1F5F9;
+}
+
+/* ============================================================================
+   6. PAGINACIÓN NUMÉRICA (IMAGEN 3)
+   ============================================================================ */
+.destinos-pagination-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 34px 0;
+}
+
+.pagination-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--bq-border-light);
+  background: #FFFFFF;
+  color: var(--bq-navy);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover {
+  border-color: #0284C7;
+  color: #0284C7;
+}
+
+.pagination-btn.active {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #0284C7;
+}
+
+/* ============================================================================
+   7. ¿NO SABÉS DÓNDE IR? (BAQÜI ASISTENTE - IMAGEN 3)
+   ============================================================================ */
+.destinos-ai-box {
+  background: linear-gradient(135deg, #F0F6FB 0%, #EEF2FD 100%);
+  border: 1px solid var(--bq-border-light);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 34px;
+  box-shadow: 0 8px 24px rgba(11, 37, 58, 0.05);
+}
+
+.destinos-ai-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.destinos-ai-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.destinos-ai-avatar {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+}
+
+.destinos-ai-text h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--bq-navy);
+  margin: 0 0 4px 0;
+}
+
+.destinos-ai-text p {
+  font-size: 0.86rem;
+  color: #475569;
+  margin: 0;
+}
+
+.destinos-ai-btn-purple {
+  background: #7C3AED;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 22px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.destinos-ai-btn-purple:hover {
+  background: #6D28D9;
+}
+
+.destinos-ai-chips-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dest-ai-chip {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #334155;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dest-ai-chip:hover {
+  border-color: #7C3AED;
+  color: #7C3AED;
+}
+
+/* ============================================================================
+   8. BANNER CTA AL ATARDECER (IMAGEN 3)
+   ============================================================================ */
+.destinos-cta-banner {
+  border-radius: 20px;
+  background-color: var(--bq-navy-dark);
+  background-image: 
+    linear-gradient(90deg, rgba(8, 24, 39, 0.94) 0%, rgba(8, 24, 39, 0.65) 50%, rgba(8, 24, 39, 0.85) 100%),
+    url('../../assets/images/footer.png');
+  background-size: cover;
+  background-position: center;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 44px;
+}
+
+.destinos-cta-copy h3 {
+  font-family: var(--bq-font-heading);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0 0 4px 0;
+}
+
+.destinos-cta-copy p {
+  font-size: 0.84rem;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+.destinos-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.destinos-btn-register {
+  background: var(--bq-orange);
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.destinos-host-thumb {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+}
+
+/* ============================================================================
+   9. RESPONSIVO
+   ============================================================================ */
+@media (max-width: 1024px) {
+  .destinos-split-grid { grid-template-columns: 1fr; }
+  .destinos-catalog-row { grid-template-columns: repeat(3, 1fr); }
+  .destinos-destacados-grid { grid-template-columns: repeat(2, 1fr); }
+  .destinos-ai-top-row { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 680px) {
+  .destinos-hero-exact .exact-container { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .destinos-hero-right { align-items: flex-start; }
+  .destinos-destacados-grid { grid-template-columns: 1fr; }
+  .destinos-catalog-row { grid-template-columns: 1fr; }
+  .destinos-cta-banner { flex-direction: column; align-items: flex-start; }
+}
