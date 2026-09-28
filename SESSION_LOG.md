@@ -1,3 +1,5 @@
+# 🧭 BAQUEANO — Bitácora Persistente de Sesiones
+
 <!--
 ============================================================================
 🧭 BAQUEANO ECOSYSTEM — BITÁCORA Y REGISTRO PERSISTENTE DE SESIONES
@@ -43,6 +45,7 @@
 - **CÓMO:** `ResponsiveScaffold` ahora usa un sidebar izquierdo animado en tablet/pantalla amplia (272 px expandido y 76 px contraído) y un drawer refinado desde el borde izquierdo en móvil. Se añadieron iconos consistentes, búsqueda, agrupación semántica, ruta activa, tooltips y `RepaintBoundary`.
 - **QUÉ:** Se modificó `lib/core/widgets/responsive_scaffold.dart`; no se eliminaron rutas y se conservaron la navegación inferior y los accesos existentes.
 - **Validación:** `flutter analyze lib/core/widgets/responsive_scaffold.dart` sin incidencias y `flutter test` con 31 pruebas aprobadas.
+
 ## Alineación Visual Idéntica 1:1 a Referencias Oficiales (27-09-2026)
 
 - **Consulta:**
@@ -265,13 +268,13 @@
   - **Publicación:** Firebase Hosting desplegó correctamente la versión `9facdb39d931383d` en el canal público.
 
 - **Consulta 10 (26 de Septiembre de 2026, 21:28):**
-  > *"📸 Instagram: https://www.instagram.com/baqueano_nicaragua 📲 Facebook: https://www.facebook.com/share/1S71xwJKse/ 🎬 TikTok: https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e a los iconos de redes sociales agregarla por favor"*
+  > *"📸 Instagram: <https://www.instagram.com/baqueano_nicaragua> 📲 Facebook: <https://www.facebook.com/share/1S71xwJKse/> 🎬 TikTok: <https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e> a los iconos de redes sociales agregarla por favor"*
   - **Ejecución y Entregables:**
     1. **Actualización Masiva de Enlaces Oficiales (17 Páginas Web):**
        - Se sustituyeron los enlaces genéricos por las cuentas oficiales de Baqueano Nicaragua en:
-         * Instagram: `https://www.instagram.com/baqueano_nicaragua`
-         * Facebook: `https://www.facebook.com/share/1S71xwJKse/`
-         * TikTok: `https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e`
+         - Instagram: `<https://www.instagram.com/baqueano_nicaragua>`
+         - Facebook: `<https://www.facebook.com/share/1S71xwJKse/>`
+         - TikTok: `<https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e>`
        - Páginas actualizadas: `index.html` (se incorporó la barra de redes sociales que faltaba en su pie de página), `destinos.html`, `aliados.html`, `gastronomia.html`, `historia.html`, `ambiental.html`, `departamento.html`, `nosotros.html`, `musica.html`, `mi-negocio.html`, `perfil.html`, `baqueano-ai.html`, `terminos.html`, `privacidad.html`, `aviso-legal.html`, `cookies.html` y `denuncias.html`.
     2. **Integración Cognitiva en Baqüi (`baqueano-assistant.js`):**
        - Se añadió detección de intención para consultas sobre redes sociales, cuentas, Instagram, Facebook y TikTok.
@@ -282,7 +285,7 @@
 
 - **Consulta 11 (26 de Septiembre de 2026, 21:35):**
    > *"quiero que tema aiga una seccion de cambiar fondo del sitio ya sea negro, blanco o buscas colores que hagan constrante a la nuestra, en tema"*
-   - **Ejecución y Entregables:**
+  - **Ejecución y Entregables:**
      1. **Nueva Pestaña "Fondo del Sitio" y Barra de Acceso Rápido (theme-switcher.js y theme-switcher.css):**
         - Se añadió una pestaña dedicada en el modal de temas: "Fondo del Sitio" (#tabBtnSiteBg), situada entre el catálogo de temas de Nicaragua y el estudio de tinte de secciones.
         - Se incorporó una barra superior de acceso rápido con pills (.baq-quick-bg-strip) en la cabecera del modal para cambiar de fondo con 1 solo toque desde cualquier vista.
@@ -304,7 +307,7 @@
 
 - **Consulta 12 (26 de Septiembre de 2026, 21:46):**
    > *"tambien quiero que revise la responsabilidad y la adaptabilidad quiero que se adapte a cualquier dispositivo electronico. es una regla fundamental ya que es para un evento nacional y si quiero ganar"*
-   - **Ejecución y Entregables:**
+  - **Ejecución y Entregables:**
      1. **Auditoría Integral de Viewports y Safe Area (20 Páginas HTML):**
         - Se estandarizó el meta viewport a `<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">` en los 20 archivos HTML del sitio web.
         - Se habilitó la cobertura visual completa bajo notches, Dynamic Island (iPhone) y barras de navegación por gestos (Android).
@@ -313,14 +316,14 @@
         - **Cero Desbordamiento Horizontal:** Reglas estrictas en `html`, `body`, contenedores, tablas, bloques pre, imágenes y vídeos para erradicar cualquier fuga o scroll lateral no deseado.
         - **Soporte Nativo de Safe Area Insets:** Integrado en `.main-navbar`, `.site-footer-pro`, `.baq-theme-float-btn` y modales flotantes mediante `env(safe-area-inset-top)`, `env(safe-area-inset-bottom)`, `env(safe-area-inset-left)` y `env(safe-area-inset-right)`.
         - **Matriz de Breakpoints Universales:**
-          * Ultracompactos (<= 375px: iPhone SE, Galaxy A).
-          * Gama Alta / Estándar (376px - 480px: iPhone 14/15/16 Pro, Galaxy S24).
-          * Plegables desplegados y Tablets en retrato (481px - 768px).
-          * Tablets en paisaje y portátiles (769px - 1024px).
-          * Monitores de escritorio estándar (1025px - 1440px).
-          * Pantallas Ultra-Wide y 4K institucionales (> 1680px y > 2200px) con escala tipográfica fluida (`clamp`).
-          * Modo Paisaje en smartphones (`@media (max-height: 520px) and (orientation: landscape)`) para evitar recortes de interfaz.
-          * Pantallas táctiles (`@media (pointer: coarse)`) con áreas de pulsación mínimas de 40px-44px conformes a WCAG 2.1 AA/AAA.
+          - Ultracompactos (<= 375px: iPhone SE, Galaxy A).
+          - Gama Alta / Estándar (376px - 480px: iPhone 14/15/16 Pro, Galaxy S24).
+          - Plegables desplegados y Tablets en retrato (481px - 768px).
+          - Tablets en paisaje y portátiles (769px - 1024px).
+          - Monitores de escritorio estándar (1025px - 1440px).
+          - Pantallas Ultra-Wide y 4K institucionales (> 1680px y > 2200px) con escala tipográfica fluida (`clamp`).
+          - Modo Paisaje en smartphones (`@media (max-height: 520px) and (orientation: landscape)`) para evitar recortes de interfaz.
+          - Pantallas táctiles (`@media (pointer: coarse)`) con áreas de pulsación mínimas de 40px-44px conformes a WCAG 2.1 AA/AAA.
      3. **Corrección Quirúrgica de Anchos Rígidos Identificados:**
         - `website/css/pages/index.css`: `.exp-card` convertido a fluido con `min-width: min(380px, calc(100vw - 2.5rem))` para evitar desbordamientos en teléfonos de 360px-390px.
         - `website/css/nicaragua-branding.css`: `.compact-nl-form` adaptado con `min-width: min(340px, 100%)` y colapso vertical en <= 480px.
@@ -332,23 +335,23 @@
 
 - **Consulta 13 (26 de Septiembre de 2026, 21:56):**
    > *"Reorganización de jerarquía comercial y narrativa del index.html para competencia nacional sin borrar nada: Hero de Marca (declaración de impacto + 3 CTAs) -> Problema/Solución (flujo 5 pasos + 4 pilares de valor) -> Crea tu viaje con IA ('¿Qué querés vivir en Nicaragua?') -> Explora Nicaragua -> Mapa de los 17 territorios -> Destinos -> Cultura Viva -> Servicios Turísticos -> Negocios y Comunidades -> Impacto -> Seguridad/SOS -> Historias/Experiencias -> Red de Anfitriones -> Ficha Técnica App Android (APK) -> CTA Final -> Footer."*
-   - **Ejecución y Entregables:**
+  - **Ejecución y Entregables:**
      1. **Preservación Integral al 100%:**
         - Cero eliminación de módulos o scripts existentes.
         - Toda la funcionalidad (Leaflet, Three.js 3D, reproductor de audio, selector de territorios, Baqüi IA, formularios y modales) se preservó intacta.
      2. **Nueva Jerarquía Comercial de Producto (Nivel Competencia Nacional):**
         - **01. Cinematic Brand Hero:** Declaración de marca contundente ("NICARAGUA NO SE VISITA. SE DESCUBRE."), subtítulo narrativo y 3 CTAs estratégicos: "Explorar Nicaragua", "✨ Crear mi aventura con IA" y "▶ Ver cómo funciona".
         - **02. El Problema → La Solución Baqueano (#problemaSolucionSection):**
-          * Explica en 15 segundos el reto del viajero (fragmentación de 10 plataformas diferentes vs ecosistema unificado Baqueano).
-          * Flujo visual interactivo de viaje en 5 pasos: `Descubrir → Planificar → Conectar → Reservar → Viajar`.
-          * 4 Pilares estratégicos de la propuesta de valor: 🧭 Descubre, 🤖 Planifica, 🤝 Conecta y 🌿 Impacta.
+          - Explica en 15 segundos el reto del viajero (fragmentación de 10 plataformas diferentes vs ecosistema unificado Baqueano).
+          - Flujo visual interactivo de viaje en 5 pasos: `Descubrir → Planificar → Conectar → Reservar → Viajar`.
+          - 4 Pilares estratégicos de la propuesta de valor: 🧭 Descubre, 🤖 Planifica, 🤝 Conecta y 🌿 Impacta.
         - **03. Crea tu viaje con IA (#baqueanoDigitalSection):** Elevado al inicio de la experiencia con la nueva caja conversacional interactiva "¿Qué querés vivir en Nicaragua?", sugerencias rápidas ("3 días en León y Las Peñitas", "Ometepe", "Cañón de Somoto") y conexión en vivo con Baqüi y el planificador.
         - **04. Explora Nicaragua (#queQueresVivir):** Pilares experienciales con botón de revelación progresiva ("Ver todas las experiencias").
         - **05. Mapa Vivo de los 17 Territorios (#territorioMapaSection):** Presentación turística priorizada ("Explora Nicaragua en un mapa vivo: 15 Departamentos + 2 Regiones Autónomas"), con selector interactivo y sello técnico secundario WebGL / WGS-84.
         - **06 a 09. Destinos, Cultura Viva, Servicios Turísticos y Negocios Aliados:** Con etiquetas de credibilidad profesional ("Red de Emprendimientos Locales · Prototipo Funcional de Demostración").
         - **10 y 11. Cifras, Impacto y Seguridad SOS:** Indicadores verificables, asistencia en ruta y geolocalización GPS satelital.
         - **12 a 15. Historias, Red de Anfitriones, Ficha Técnica App Android (APK v2.4.0 Beta) y CTA Final.**
-    3. **Estilos e Integridad Sintáctica:**
+    1. **Estilos e Integridad Sintáctica:**
         - Incorporación de estilos de jerarquía comercial en `website/css/pages/index.css` con Golden Circle, paleta oficial y cero uso de términos prohibidos.
         - Verificación de balance de etiquetas HTML (16/16 secciones, 464/464 divs, 1/1 main, 1/1 footer, 5/5 forms).
         - Validación JavaScript con `node --check` (código 0).
@@ -488,6 +491,7 @@
     3. **Invalidación de caché:** Se actualizó la versión de activos a `v=20260926-ops-nav-5` en las 17 páginas HTML.
   - **Archivos modificados:** `website/styles.css`, las 17 páginas `.html` del portal y `SESSION_LOG.md`.
   - **Validaciones:** `node --check` limpio (código 0), `git diff --check` limpio (código 0).
+
 ## 2026-09-26 — Diagnóstico de videos fuente 8K
 
 - 🎯 **POR QUÉ:** El usuario informó que convirtió los videos a 8K y solicitó una solución para reducir su peso sin perder la calidad visual del sitio.
@@ -557,17 +561,17 @@
     - Se incorporó un bloque autoritativo `@media (min-width: 992px)` en `website/styles.css` con altura delimitada exactamente en 280px (`height: 280px !important; min-height: 250px !important; max-height: 310px !important; box-sizing: border-box !important;`).
     - Centrado vertical simétrico con `display: flex; flex-direction: column; justify-content: center;` en `.site-footer-pro` y `.container`.
     - Condensación armónica de los componentes internos:
-      * Cinta HUD de telemetría superior en píldora con micro-LED pulsante (`padding: 0.25rem 0.85rem; font-size: clamp(0.64rem, 0.72vw, 0.72rem)`).
-      * Tarjeta de contacto oficial (`.footer-col-contact`) con cabecera táctica compacta y rejilla de 3 nodos (correo, WhatsApp y sede territorial) en tarjetas de 44px con micro-iconos de 30px.
-      * Pila de enlaces legales (`.footer-legal-stack`) y barra inferior de derechos y estado GPS (`.footer-bottom-bar`) en una sola línea sutil, eliminando márgenes inflados.
+      - Cinta HUD de telemetría superior en píldora con micro-LED pulsante (`padding: 0.25rem 0.85rem; font-size: clamp(0.64rem, 0.72vw, 0.72rem)`).
+      - Tarjeta de contacto oficial (`.footer-col-contact`) con cabecera táctica compacta y rejilla de 3 nodos (correo, WhatsApp y sede territorial) en tarjetas de 44px con micro-iconos de 30px.
+      - Pila de enlaces legales (`.footer-legal-stack`) y barra inferior de derechos y estado GPS (`.footer-bottom-bar`) en una sola línea sutil, eliminando márgenes inflados.
     - Actualización del versionado de estilos en `website/index.html` (`styles.css?v=20260927-compact-footer-1`).
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - `website/styles.css`: Nuevas reglas de alta fidelidad para escritorio compacto.
     - `website/index.html`: Versionado de activos actualizado.
     - Verificación visual y matemática con `browser_subagent` en navegador real (viewport 1354x621):
-      * Altura medida: `280px` (dentro del rango estricto de 250px a 310px: `isWithinRange = true`).
-      * Ancho medido: `1354px`.
-      * Captura de pantalla de verificación registrada: `footer_verified_280px_1790491061251.png`.
+      - Altura medida: `280px` (dentro del rango estricto de 250px a 310px: `isWithinRange = true`).
+      - Ancho medido: `1354px`.
+      - Captura de pantalla de verificación registrada: `footer_verified_280px_1790491061251.png`.
 
 - **Ajuste de Visibilidad Completa Sin Cortes en Pie Institucional (27 de Septiembre de 2026):**
   > *"que se vea si pero que se vea completo sin corte"* — captura mostrando la línea de derechos parcialmente cortada horizontalmente por desborde y altura rígida.
@@ -581,10 +585,10 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - `website/styles.css` y `website/index.html` sincronizados.
     - Verificación en navegador real con `browser_subagent`:
-      * `footerHeight`: **250px** (dentro del rango estricto de 250px a 310px).
-      * `bottomBarBottomWithinFooter`: `true`.
-      * `distanceFromBottomBarToFooterBottom`: `42.09px` de margen inferior libre.
-      * Cero cortes o textos seccionados. Captura registrada: `footer_full_view_1790491485760.png`.
+      - `footerHeight`: **250px** (dentro del rango estricto de 250px a 310px).
+      - `bottomBarBottomWithinFooter`: `true`.
+      - `distanceFromBottomBarToFooterBottom`: `42.09px` de margen inferior libre.
+      - Cero cortes o textos seccionados. Captura registrada: `footer_full_view_1790491485760.png`.
 
 - **Supresión de Botones Inferiores y Centrado de Derechos Reservados (27 de Septiembre de 2026):**
   > *"quitar los botones y poner el derechos reservado al centro"* — captura del pie indicando remover los botones de la barra inferior y centrar el texto de derechos reservados.
@@ -599,11 +603,11 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Archivos sincronizados: `website/js/navigation.js`, `website/styles.css`, `website/index.html`.
     - Verificación con subagente en navegador real:
-      * `isStatusRowPresentOrVisible`: `false`.
-      * `isInline044PresentOrVisible`: `false`.
-      * `textCenteredDiffFromBarCenter`: `0` px (centrado horizontal matemático perfecto).
-      * `footerHeight`: **250px** (óptimo y dentro del rango requerido).
-      * Captura registrada: `footer_screenshot_1790491868401.png`.
+      - `isStatusRowPresentOrVisible`: `false`.
+      - `isInline044PresentOrVisible`: `false`.
+      - `textCenteredDiffFromBarCenter`: `0` px (centrado horizontal matemático perfecto).
+      - `footerHeight`: **250px** (óptimo y dentro del rango requerido).
+      - Captura registrada: `footer_screenshot_1790491868401.png`.
 
 - **Reafirmación de Identidad Soberana: Baqüi el Guardabarranco (27 de Septiembre de 2026):**
   > *"no confunda identidad recuerda que estamos usando al guardabarranco"* — captura de la píldora final de despedida mostrando un robot genérico en lugar de la mascota oficial.
@@ -617,9 +621,9 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Archivos actualizados: `website/index.html`, `website/css/nicaragua-branding.css`, `website/js/definitive-index-interactions.js`.
     - Verificación visual con `browser_subagent` en navegador real:
-      * Avatar activo: `assets/images/baqui.png` (cargado al 100%, `naturalWidth > 0`).
-      * Coherencia total con el asistente flotante inferior ("Hablar con Baqüi").
-      * Captura de pantalla de verificación registrada: `bot_hint_verification_1790492112898.png`.
+      - Avatar activo: `assets/images/baqui.png` (cargado al 100%, `naturalWidth > 0`).
+      - Coherencia total con el asistente flotante inferior ("Hablar con Baqüi").
+      - Captura de pantalla de verificación registrada: `bot_hint_verification_1790492112898.png`.
 
 - **Calibración del Hero Editorial para Visibilidad Total Sin Cortes en Pantalla (27 de Septiembre de 2026):**
   > *"quiero que sea ver completo sin corte si se tiene que ajustar hazlo"* — captura de pantalla mostrando el título superior cortado bajo la barra de navegación y las tarjetas de destinos cortadas en la base.
@@ -628,18 +632,18 @@
     - Asegurar que el 100% de la experiencia inicial de expedición se aprecie de forma simultánea, armoniosa y sin scroll en cualquier pantalla de escritorio.
   - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
     - Se recalibró `website/css/hero-editorial.css`:
-      * `padding-top: max(74px, 8.5vh)` y en `@media (max-height: 780px)` `padding-top: 88px !important;`, garantizando una holgura segura de +12px por debajo de la barra fija de navegación.
-      * Tipografía del gran titular en escala fluida `clamp(1.55rem, 4vh, 1.95rem)` para pantallas compactas, reduciendo su huella vertical de 203px a 113px con perfecta legibilidad.
-      * Párrafo descriptivo, botones de acción y fila de redes sociales condensados armónicamente.
-      * Tarjetas de destinos escaladas a `102px` de altura y `90px` de ancho con bordes estilizados (`border-radius: 8px`).
+      - `padding-top: max(74px, 8.5vh)` y en `@media (max-height: 780px)` `padding-top: 88px !important;`, garantizando una holgura segura de +12px por debajo de la barra fija de navegación.
+      - Tipografía del gran titular en escala fluida `clamp(1.55rem, 4vh, 1.95rem)` para pantallas compactas, reduciendo su huella vertical de 203px a 113px con perfecta legibilidad.
+      - Párrafo descriptivo, botones de acción y fila de redes sociales condensados armónicamente.
+      - Tarjetas de destinos escaladas a `102px` de altura y `90px` de ancho con bordes estilizados (`border-radius: 8px`).
     - Actualización del versionado de estilos en `website/index.html` a `css/hero-editorial.css?v=20260927-editorial-4`.
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Verificación técnica y visual con `browser_subagent` en viewport 1354x621:
-      * `eyebrowClearanceBelowNavbar`: `+12.0px` (totalmente visible y despejado bajo la barra).
-      * `titleClearanceBelowNavbar`: `+27.8px` (titular completo en 3 líneas 100% visible).
-      * `carouselClearanceAboveScreenBottom`: `+12.0px` (carrusel de tarjetas flotando con holgura sobre la base de la pantalla).
-      * `isEverythingInsideViewportWithoutCuts`: `true`.
-      * Captura registrada: `hero_full_viewport_1790492520317.png`.
+      - `eyebrowClearanceBelowNavbar`: `+12.0px` (totalmente visible y despejado bajo la barra).
+      - `titleClearanceBelowNavbar`: `+27.8px` (titular completo en 3 líneas 100% visible).
+      - `carouselClearanceAboveScreenBottom`: `+12.0px` (carrusel de tarjetas flotando con holgura sobre la base de la pantalla).
+      - `isEverythingInsideViewportWithoutCuts`: `true`.
+      - Captura registrada: `hero_full_viewport_1790492520317.png`.
 
 - **Optimización de Nitidez de Video UHD, Supresión de Imágenes Estáticas y Jerarquía Majestuosa de Pantalla Principal (27 de Septiembre de 2026):**
   > *"siento que el video no se ve claro y me pregunto porque se pone una imagen si estamos con video, mejorarlo por favor . y ese tamaño asi seve horrible por favor acomodalo que asi a como esta va ser nuestra pantalla principal"* — retroalimentación solicitando clarificar la luminosidad del video, erradicar cualquier imagen estática (póster) y restablecer un tamaño imponente y de alta gama acorde a la portada principal.
@@ -657,13 +661,13 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Archivos sincronizados: `website/index.html`, `website/css/hero-editorial.css`, `website/js/video-registry.js`, `website/js/hero-experience.js`.
     - Verificación técnica y visual mediante `browser_subagent` en viewport 1354x621:
-      * `video.hasAttribute('poster')`: **`false`** (Cero imágenes estáticas).
-      * `video.videoWidth` / `video.videoHeight`: **`6112px × 4321px`** (UHD Master).
-      * `video.paused`: **`false`** (Reproducción continua y fluida).
-      * `navbarBottom` vs `eyebrowTop`: **`76px` vs `76px`** (Alineación exacta sin colisión).
-      * `titleFontSize`: **`32.8px`** (Imponente, enérgico y legible).
-      * `carouselBottom`: **`587px`** (Totalmente contenido dentro de los 599px/621px del viewport, sin cortes).
-      * Capturas registradas: `hero_initial_state_1790493837663.png`, `hero_ometepe_selected_1790493856900.png` y `hero_somoto_selected_1790493878492.png`.
+      - `video.hasAttribute('poster')`: **`false`** (Cero imágenes estáticas).
+      - `video.videoWidth` / `video.videoHeight`: **`6112px × 4321px`** (UHD Master).
+      - `video.paused`: **`false`** (Reproducción continua y fluida).
+      - `navbarBottom` vs `eyebrowTop`: **`76px` vs `76px`** (Alineación exacta sin colisión).
+      - `titleFontSize`: **`32.8px`** (Imponente, enérgico y legible).
+      - `carouselBottom`: **`587px`** (Totalmente contenido dentro de los 599px/621px del viewport, sin cortes).
+      - Capturas registradas: `hero_initial_state_1790493837663.png`, `hero_ometepe_selected_1790493856900.png` y `hero_somoto_selected_1790493878492.png`.
 
 - **Ampliación Responsiva del Hero y Recuperación Robusta del Video (27 de Septiembre de 2026):**
   > *"hacerlo mas grande pero que no pierda lo que llevamos y tambien que paso con el video corregirlo haz tu magia"* — solicitud acompañada de captura a 1024 × 600 con el contenido reducido y el fondo audiovisual sin renderizar.
@@ -681,7 +685,7 @@
     - `node --check` limpio para ambos controladores JavaScript.
 
 - **Portada Principal Alineada con la Composición Cinematográfica de Historia (27 de Septiembre de 2026):**
-  > *"quiero que vea https://app-baqueano.web.app/historia.html asi tiene que quedar pero a lo que tenemos https://app-baqueano.web.app/index.html"* — referencia explícita del módulo Historia para reconstruir la jerarquía de Inicio conservando su contenido.
+  > *"quiero que vea <https://app-baqueano.web.app/historia.html> asi tiene que quedar pero a lo que tenemos https://app-baqueano.web.app/index.html"* — referencia explícita del módulo Historia para reconstruir la jerarquía de Inicio conservando su contenido.
   - 🎯 **POR QUÉ (Why / Propósito):**
     - Igualar la presencia visual de Inicio con `historia.html`: escenario audiovisual completo, relato centrado, insignia superior y titular monumental sin espacios muertos laterales.
     - Mantener todo lo aprobado en Inicio —mensaje, acento naranja, botones, redes, video único y galería automática— sin permitir que el carrusel comprima la identidad principal.
@@ -696,7 +700,7 @@
     - Archivos actualizados: `website/index.html` y `website/css/hero-editorial.css`.
     - Validación visual local a 1366 × 768 comparada con la captura en vivo de Historia.
     - Capturas de referencia y resultado: `.snapshots/historia-reference-live.png`, `.snapshots/index-history-layout.png` y `.snapshots/index-history-layout-live.png`.
-    - Publicación exitosa en Firebase Hosting y comprobación visual directa de `https://app-baqueano.web.app/index.html` con video visible y versión `historia-layout-9` activa.
+    - Publicación exitosa en Firebase Hosting y comprobación visual directa de `<https://app-baqueano.web.app/index.html>` con video visible y versión `historia-layout-9` activa.
 
 - **Presentación Oficial Sin Interferencias del Asistente (27 de Septiembre de 2026):**
   > *"que no se presente en esa seccion recuerda que es presetancion oficial de baqueano"* — captura señalando a Baqüi y su sugerencia sobre el hero institucional.
@@ -769,8 +773,8 @@
     - Es mandatorio ocultar esa línea de corte y enfocar nítidamente la toma central del video (el *Cristo de la Misericordia*, el volcán *Masaya*, la *Catedral de León* y las *Isletas de Granada*).
   - ⚙️ **CÓMO (How / Arquitectura & Implementación):**
     - Se calibró experimentalmente en vivo mediante el agente de navegación web:
-      * `object-position: center 60% !important;`: desplaza el foco vertical 10% hacia arriba, expulsando la línea de corte superior fuera del viewport y centrando el motivo principal tras el título editorial.
-      * `transform: scale(1.12) translate3d(0, 0, 0) !important;` y `transform-origin: center 60% !important;`: añade un zoom de seguridad del 12% que erradica cualquier sangrado de bordes en pantallas ultrapanorámicas y dispositivos móviles.
+      - `object-position: center 60% !important;`: desplaza el foco vertical 10% hacia arriba, expulsando la línea de corte superior fuera del viewport y centrando el motivo principal tras el título editorial.
+      - `transform: scale(1.12) translate3d(0, 0, 0) !important;` y `transform-origin: center 60% !important;`: añade un zoom de seguridad del 12% que erradica cualquier sangrado de bordes en pantallas ultrapanorámicas y dispositivos móviles.
     - Se aplicó sincrónicamente en `website/css/hero-editorial.css`, `website/css/pages/index.css`, `website/css/videos.css`, `website/css/nicaragua-branding.css` y en los estilos inline de `website/index.html`.
     - Se actualizaron las firmas de caché a `v=20260927-center-framed-14`.
   - 📦 **QUÉ (What / Entregables & Validaciones):**
@@ -810,14 +814,14 @@
     - **Punto 3 (Casos Demostrativos del Prototipo):** Se reestructuró la sección de validación a *"Casos Demostrativos del Prototipo & Escenarios de Uso (Fase Piloto)"*, etiquetando cada tarjeta como simulación controlada (Escenario 01: Optimización de Presupuesto Directo, Escenario 02: Trazabilidad a Cooperativa Miraflor, Escenario 03: Protocolo SOS en Ruta).
     - **Punto 4 (Precisión Terminológica):** Se transformó "Catálogo oficial" en *"Catálogo territorial BAQUEANO"*, "Formulario oficial" en *"Formulario de registro BAQUEANO"*, y "APK Beta Oficial" en *"APK de BAQUEANO (Build Android)"*.
     - **Punto 5 (Modo Demo Hackathon 3 Minutos):**
-      * Se creó el modal interactivo `#demoModal` en [website/index.html](file:///d:/Desktop/APP%20BAQUEANO/website/index.html) con estilos dedicados en [website/css/demo-hackathon.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/demo-hackathon.css) y controlador en [website/js/demo-hackathon-tour.js](file:///d:/Desktop/APP%20BAQUEANO/website/js/demo-hackathon-tour.js).
-      * Recorrido secuencial de 5 pasos a 60fps:
+      - Se creó el modal interactivo `#demoModal` en [website/index.html](file:///d:/Desktop/APP%20BAQUEANO/website/index.html) con estilos dedicados en [website/css/demo-hackathon.css](file:///d:/Desktop/APP%20BAQUEANO/website/css/demo-hackathon.css) y controlador en [website/js/demo-hackathon-tour.js](file:///d:/Desktop/APP%20BAQUEANO/website/js/demo-hackathon-tour.js).
+      - Recorrido secuencial de 5 pasos a 60fps:
         1. *Prompt Natural:* "Quiero ir 3 días a León con $300, escalar el Cerro Negro y probar comida típica campesina."
         2. *Ruta & Desglose Fiscal:* Itinerario día por día ($200 USD proyectados, $100 margen de contingencia, 0% comisión predatoria).
         3. *Cartografía 3D:* Coordenadas WGS-84 (12.5061° N, 86.7022° W), relieve topográfico y senderos de los 17 territorios.
         4. *Cooperativa Local:* Conexión y reserva directa vía WhatsApp/teléfono con Cooperativa Las Pilas registrada en Cloud Firestore.
         5. *Seguridad en Campo:* Receptor GNSS de hardware activo sin datos móviles + Enlaces de emergencia + Descarga directa de APK v2.4.0.
-      * Se actualizó `service-worker.js` a la versión `baqueano-offline-v13`.
+      - Se actualizó `service-worker.js` a la versión `baqueano-offline-v13`.
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Nuevos componentes: `website/css/demo-hackathon.css`, `website/js/demo-hackathon-tour.js`.
     - Modificados: `index.html`, `destinos.html`, `service-worker.js`, y 7 páginas secundarias con APK unificado.
@@ -846,6 +850,7 @@
   - 📦 **QUÉ (What / Entregables & Validaciones):**
     - Despliegue en producción en Firebase Hosting (`https://app-baqueano.web.app`).
     - Bitácora persistente sincronizada bajo el Círculo Dorado.
+
 # 2026-09-27 — Rediseño visual de gastronomia.html
 
 - Solicitud: aplicar a `website/gastronomia.html` el diseño gastronómico compartido, conservando toda la información y recursos existentes.
@@ -853,6 +858,7 @@
 - Conservación: se mantuvieron los 14 platillos, 7 bebidas, 6 dulces, formularios, modales, navegación y scripts existentes.
 - Responsive: categorías desplazables y carruseles táctiles en móvil; grillas adaptativas en tablet y escritorio.
 - Archivo modificado: `website/gastronomia.html`.
+
 # 2026-09-27 — Rediseño visual de musica.html
 
 - Solicitud: aplicar a `website/musica.html` el diseño musical de la referencia compartida.
@@ -877,6 +883,7 @@
   - Archivos creados y actualizados en `website/`.
   - Confirmación Git: commit `4a7794f` consolidado y subido a `origin/main`.
   - Despliegue en producción en Firebase Hosting exitoso (`https://app-baqueano.web.app`).
+
 # 2026-09-27 — Reproducción visual estricta de nosotros.html
 
 - Solicitud: adaptar `website/nosotros.html` para que reproduzca con máxima fidelidad la referencia institucional compartida.
@@ -976,6 +983,7 @@
     - `website/destinos.html`
     - `website/ambiental.html`
     - `SESSION_LOG.md`
+
 # 2026-09-27 — Reproducción visual estricta de privacidad.html
 
 - Solicitud: adaptar `website/privacidad.html` para que quede igual a la referencia visual compartida.
@@ -983,6 +991,7 @@
 - Conservación: se mantuvieron íntegros los artículos legales, navegación, enlaces de contacto, formulario del footer, modales y scripts; el registro extenso se conserva en el HTML y se oculta visualmente en esta composición.
 - Responsive: garantías y flujo desplazables en móvil; grillas de tres, dos y una columna según el ancho.
 - Archivos modificados: `website/privacidad.html` y `website/css/pages/privacidad-exact.css`.
+
 # 2026-09-27 — Reproducción visual estricta de baqueano-ai.html#planner
 
 - Solicitud: adaptar `website/baqueano-ai.html#planner` para que quede idéntico a la referencia del planificador Baqueano Digital.
@@ -991,6 +1000,7 @@
 - Responsive: el workspace se reorganiza en dos columnas para tablet y en secuencia vertical para móvil, con pestañas desplazables.
 - Archivos modificados: `website/baqueano-ai.html` y `website/css/pages/baqueano-ai-exact.css`.
 - Nota: la URL publicada no respondió al inspector web; la imagen proporcionada fue utilizada como fuente visual directa.
+
 # 2026-09-27 — Reproducción visual estricta de aviso-legal.html
 
 - Solicitud: adaptar `website/aviso-legal.html` a la referencia visual entregada.
@@ -1141,12 +1151,12 @@
 
 - ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
   - Reproducción visual 1:1 de la maqueta oficial:
-    * Header superior con logo oficial, menú completo (*Inicio, Mi País ▾, Destinos ▾, Experiencias ▾, Mapa, Mi Viaje, Mi Negocio, Baqueano Digital*), buscador, favoritos, botón rojo cápsula SOS, selector de tema claro/oscuro, idioma y avatar.
-    * Flanco izquierdo: Poste de madera rústica tallada con 3 flechas (*Nuevos Destinos, Grandes Historias, Sigue Explorando*) y Baqüi el Guardabarranco explorador con sombrero y mapa.
-    * Centro: Número 404 colosal texturizado con pin de ubicación en el cero y trazos de arte rupestre / petroglifos turquesa y naranja.
-    * Titular: *"Sendero No Encontrado"*, bajada descriptiva y botones gemelos (*"🏠 Volver al Inicio →"* y *"🧭 Explorar Destinos →"*).
-    * Franja flotante Glassmorphism inferior *"¿Y ahora qué? Podés seguir explorando:"* con 4 tarjetas fotográficas panorámicas (*Destinos, Experiencias, Mapa, Mi Negocio*).
-    * Footer institucional con lema ancestral *"Descubre lo que no sale en el mapa"* y 4 sellos (*Turismo sostenible, Comunidades locales, Patrimonio natural, Cultura viva*).
+    - Header superior con logo oficial, menú completo (*Inicio, Mi País ▾, Destinos ▾, Experiencias ▾, Mapa, Mi Viaje, Mi Negocio, Baqueano Digital*), buscador, favoritos, botón rojo cápsula SOS, selector de tema claro/oscuro, idioma y avatar.
+    - Flanco izquierdo: Poste de madera rústica tallada con 3 flechas (*Nuevos Destinos, Grandes Historias, Sigue Explorando*) y Baqüi el Guardabarranco explorador con sombrero y mapa.
+    - Centro: Número 404 colosal texturizado con pin de ubicación en el cero y trazos de arte rupestre / petroglifos turquesa y naranja.
+    - Titular: *"Sendero No Encontrado"*, bajada descriptiva y botones gemelos (*"🏠 Volver al Inicio →"* y *"🧭 Explorar Destinos →"*).
+    - Franja flotante Glassmorphism inferior *"¿Y ahora qué? Podés seguir explorando:"* con 4 tarjetas fotográficas panorámicas (*Destinos, Experiencias, Mapa, Mi Negocio*).
+    - Footer institucional con lema ancestral *"Descubre lo que no sale en el mapa"* y 4 sellos (*Turismo sostenible, Comunidades locales, Patrimonio natural, Cultura viva*).
   - Hoja de estilo dedicada: `website/css/pages/404-exact.css`.
   - Auditoría global: 0 enlaces rotos, 0 errores, 0 palabras prohibidas.
 
@@ -1166,6 +1176,7 @@
 - Alcance: la navegación se normaliza desde `website/js/navigation.js`, por lo que se aplica a todas las páginas que utilizan el controlador compartido.
 - Responsive: mega menú de cuatro columnas en escritorio y drawer vertical desplazable en móvil.
 - Archivos modificados: `website/js/navigation.js` y `website/css/navigation-mega.css`.
+
 # 2026-09-27 — Corrección de mapas con aviso API KEY REQUIRED
 
 - Diagnóstico: los mapas Leaflet utilizaban mosaicos públicos de CARTO; la clave compartida pertenece a la configuración Google/Firebase y no autentica el servicio CARTO.
@@ -1183,10 +1194,10 @@
 - ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
   - Se identificó la causa raíz: tanto `website/css/typography.css` como `website/styles.css` aplicaban una regla genérica sobre la etiqueta `h2` con `font-family: var(--font-handwriting, cursive)`, `-webkit-text-fill-color: transparent` con degradado `linear-gradient(135deg, #FFFFFF 0%, #F4E6C1 45%, #F65E01 100%)`, y un pseudo-elemento `h2::after` con barra tricolor y animación `strokeDraw`.
   - Se reestructuró la regla global de encabezados en `website/css/typography.css` y `website/styles.css`:
-    * `h1, h2, h3, h4, h5, h6` ahora comparten tipografía sans-serif geométrica sólida (`Montserrat`, `Plus Jakarta Sans`).
-    * `h2` genérico: color sólido de alto contraste `var(--text-primary, #0B253A)`, `background: none`, `-webkit-text-fill-color: initial`, sin sombras ni animaciones flotantes.
-    * Se eliminó el pseudo-elemento `h2::after` de la etiqueta genérica `h2`.
-    * El estilo caligráfico decorativo se confinó estrictamente a las clases opcionales `.handwriting-h2` y `h2.title-handwritten`.
+    - `h1, h2, h3, h4, h5, h6` ahora comparten tipografía sans-serif geométrica sólida (`Montserrat`, `Plus Jakarta Sans`).
+    - `h2` genérico: color sólido de alto contraste `var(--text-primary, #0B253A)`, `background: none`, `-webkit-text-fill-color: initial`, sin sombras ni animaciones flotantes.
+    - Se eliminó el pseudo-elemento `h2::after` de la etiqueta genérica `h2`.
+    - El estilo caligráfico decorativo se confinó estrictamente a las clases opcionales `.handwriting-h2` y `h2.title-handwritten`.
   - Se incorporó un blindaje de alta prioridad en `website/css/layout.css` para forzar legibilidad y erradicar cualquier barra subrayada residual en los 25 archivos HTML del portal.
   - En `website/destinos.html`, se estilizó el contador numérico: `<h2>Todos los destinos <span style="color: #F65E01; font-weight: 800;">(128)</span></h2>` y `<h2>Más destinos que te encantarán</h2>`.
   - En `website/css/pages/destinos-exact.css`, se establecieron estilos específicos para `.section-header-exact .title-group h2`.
@@ -1200,6 +1211,7 @@
     - `website/destinos.html`
     - `SESSION_LOG.md`
   - Despliegue a producción en Firebase Hosting (`https://app-baqueano.web.app`).
+
 # 2026-09-27 — Rectificación global de títulos H2
 
 - Solicitud: revisar y mejorar todos los encabezados `h2` del sitio.
@@ -1255,8 +1267,6 @@
   - Auditoría global de enlaces: 0 enlaces rotos, 0 términos prohibidos en 25 documentos HTML.
   - Registro de sesión en `SESSION_LOG.md`.
 
-
-
 ## [2026-09-28] Botones Mi Viaje — Funcionalidad Completa
 
 **Archivos modificados:**
@@ -1264,8 +1274,9 @@
 - website/js/mi-viaje-interactions.js — Nuevo controlador JS con todas las interacciones
 
 **Botones implementados y funcionales:**
+
 | Botón | Acción |
-|---|---|
+| --- | --- |
 | Ver en mapa | Abre Google Maps con coordenadas del destino + sesionStorage para mapa.html |
 | Guardar | Toggle favorito en localStorage + badge visual |
 | Editar día | Modal CRUD para title/desc/nota con persistencia localStorage |
@@ -1315,9 +1326,9 @@
   - Indicador de estado frente al presupuesto máximo (C$ 10,000) con badge dinámico (verde para "Dentro del presupuesto" con saldo restante, y alerta si se excede).
   - Integración del rubro "Otros gastos & Utilerías" (artesanías, propinas, recuerdos y apoyo comunitario).
   - Se sincronizaron las redes sociales oficiales en todos los documentos HTML y `global-injector.js`:
-    - Instagram: `https://www.instagram.com/baqueano_nicaragua`
-    - Facebook: `https://www.facebook.com/share/1S71xwJKse/`
-    - TikTok: `https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e`
+    - Instagram: `<https://www.instagram.com/baqueano_nicaragua>`
+    - Facebook: `<https://www.facebook.com/share/1S71xwJKse/>`
+    - TikTok: `<https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e>`
 
 - 📦 **QUÉ (What / Entregables):**
   - `website/baqueano-ia.html`: Simulador interactivo con chips de selección, desglose detallado, indicador visual y nota de transparencia.
@@ -1326,18 +1337,19 @@
   - 12 archivos HTML y `website/js/global-injector.js` actualizados con los enlaces oficiales de Instagram, Facebook y TikTok.
   - `SESSION_LOG.md`: Bitácora actualizada.
 
-
 ---
 
 ## Sesión 28-09-2026 — Corrección Definitiva del Menú Cápsula (Continuación)
 
 ### 🎯 Directiva del Usuario
+
 - **"el menu esta totalmente horrible"** → Reconstrucción pixel-perfect del navbar flotante tipo cápsula.
 - **"CONTINUAR"** → Reanudación desde el punto de compactación de sesión.
 
 ### ⚙️ Cambios Técnicos Aplicados
 
 #### 1. website/css/navigation-mega.css — Reescritura con Selector ID #mainNavbar
+
 - **Problema raíz identificado:** styles.css define .main-navbar { position: fixed; z-index: 10050 !important } y index-exact.css define .main-navbar-exact { position: fixed; height: 70px }, ambos aplastando el diseño de cápsula.
 - **Solución:** Todo el CSS del navbar fue reescrito usando #mainNavbar como selector raíz (ID = mayor especificidad que clase), con !important en todos los valores críticos.
 - **z-index:** Elevado a 10100 !important para superar el 10050 !important de styles.css.
@@ -1345,81 +1357,126 @@
 - **Mega Menú:** Reposicionado con position: fixed; left: 50%; transform: translateX(-50%) para centrado perfecto bajo la cápsula.
 
 #### 2. website/index.html — Orden de carga de CSS optimizado
-- 
-avigation-mega.css movido al final del <head> para máxima prioridad en cascada.
+
+- navigation-mega.css movido al final del head para máxima prioridad en cascada.
 - Versión actualizada a ?v=20260928-nav-fix-2.
 
 #### 3. website/css/pages/index-exact.css — Hero padding eliminado
+
 - .hero-exact { padding-top: 70px } → padding-top: 0 (navbar ya es sticky, no fixed).
 
 #### 4. website/js/navigation.js — Versión CSS sincronizada
-- String de versión actualizado a 
-av-fix-2.
+
+- String de versión actualizado a nav-fix-2.
 
 #### 5. 19 páginas HTML secundarias — CSS del navbar inyectado
-- Todas las páginas secundarias recibieron el <link> de 
-avigation-mega.css al final del <head>.
+
+- Todas las páginas secundarias recibieron el link de navigation-mega.css al final del head.
 - Páginas actualizadas: aliados, ambiental, baqueano-ai, cookies, denuncias, departamento, destinos, experiencias, gastronomia, historia, legal, mapa, mi-negocio, musica, nosotros, perfil, privacidad, terminos, aviso-legal.
 
-#### 6. website/js/global-injector.js — Llamada a uildGlobalMegaNavigation() en init()
-- El init() ahora llama uildGlobalMegaNavigation() si está disponible, activando el mega menú en todas las páginas donde navigation.js esté cargado.
+#### 6. website/js/global-injector.js — Llamada a buildGlobalMegaNavigation en init
+
+- El init() ahora llama buildGlobalMegaNavigation() si está disponible, activando el mega menú en todas las páginas donde navigation.js esté cargado.
 
 ### ✅ Estado de Verificación
+
 - index.html: 8/8 checks pasados ✓
-- aqueano-ia.html: 11/11 checks pasados ✓
+- baqueano-ia.html: 11/11 checks pasados ✓
 - mi-viaje.html: 10/10 checks pasados ✓
-- Todas las 23 páginas HTML tienen 
-avigation-mega.css linkeado ✓
+- Todas las 23 páginas HTML tienen navigation-mega.css linkeado ✓
 - Todas las páginas con id="mainNavbar" detectadas: 19 páginas ✓
 
 ### 📦 Commits Realizados
+
 - d085cc3: fix(navbar): rewrite nav CSS with #mainNavbar ID for max specificity
 - e63598c: fix(navbar): inject navigation-mega.css in all 19 pages + call buildGlobalMegaNavigation
 - 95af7be: actualizacion oscar122 (commit del usuario)
 
 ### 🔜 Próximos Pasos Sugeridos
-1. Verificar visualmente el menú abriendo http://localhost:3000/ en el navegador
-2. Revisar 404.html y offline.html que aún no tienen el navbar actualizado
-3. Revisar si dmin.html (Ops Center) necesita el mismo navbar para coherencia visual
 
+1. Verificar visualmente el menú abriendo <http://localhost:3000/> en el navegador
+2. Revisar 404.html y offline.html que aún no tienen el navbar actualizado
+3. Revisar si admin.html (Ops Center) necesita el mismo navbar para coherencia visual
 
 ---
 
 ## Sesión del 28 de Septiembre de 2026 - Consolidación del Banco Maestro Nacional de Información Turística
 
-### Directiva del Usuario:
+### Directiva del Usuario
+
 > *"RECUERDA QUE TODAS ESTA INFORMACION LA VAS A PONER EN SU LUGAR CORRESPONDIENTE , SI YA ESTA OMITILA Y SINO AGREGARLA . RECUERDA QUE NO VAS A BORRAR NADA DE LO QUE TENEMOS."*
 > Integración de los atractivos, paquetes y normativas de INTUR / Visita Nicaragua, Mapa Nacional de Turismo, riosanjuan.com.ni y Tripadvisor.
 
-### Implementación y Distribución en su Lugar Correspondiente:
+### Implementación y Distribución en su Lugar Correspondiente
+
 1. **website/gastronomia.html**:
    - Agregados platos típicos principales: **Sopa de Mondongo** (Masatepe, Masaya) y **Fritanga Tradicional** (Nacional / Managua) con modal de historia y receta.
    - Agregado en bebidas: **Fresco de Grama** (Granada: infusión medicinal y refrescante con limón criollo).
    - Agregado en repostería: **Tres Leches** nicaragüense tradicional.
 2. **website/historia.html**:
    - Insertada la sección completa **Monumentos Históricos y Red Nacional de Museos Oficiales de INTUR**:
-     * 6 Monumentos Clave: Fortaleza de la Inmaculada Concepción, Ruinas de León Viejo (UNESCO), Antigua Catedral de Santiago de Managua, Hacienda San Jacinto, Cripta de Rubén Darío en Catedral de León, Fortaleza La Pólvora (1748).
-     * 8 Museos Nacionales Oficiales: Palacio Nacional de la Cultura, Casa Natal Rubén Darío (Ciudad Darío), Casa Museo Sandino (Niquinohomo), Museo Convento San Francisco (Granada), Museo Archivo Rubén Darío (León), Museo de Mitos y Leyendas (La XXI, León), Centro de Arte Fundación Ortiz Gurdián (León), Museo Dr. Alejandro Dávila Bolaños (Juigalpa).
+     - 6 Monumentos Clave: Fortaleza de la Inmaculada Concepción, Ruinas de León Viejo (UNESCO), Antigua Catedral de Santiago de Managua, Hacienda San Jacinto, Cripta de Rubén Darío en Catedral de León, Fortaleza La Pólvora (1748).
+     - 8 Museos Nacionales Oficiales: Palacio Nacional de la Cultura, Casa Natal Rubén Darío (Ciudad Darío), Casa Museo Sandino (Niquinohomo), Museo Convento San Francisco (Granada), Museo Archivo Rubén Darío (León), Museo de Mitos y Leyendas (La XXI, León), Centro de Arte Fundación Ortiz Gurdián (León), Museo Dr. Alejandro Dávila Bolaños (Juigalpa).
 3. **website/experiencias.html**:
    - Insertada la sección maestra de **Paquetes Turísticos Oficiales de Mapa Nacional de Turismo & INTUR**:
-     * 1. Entre Nubes y Olas (Managua: El Crucero + Pochomil, 2D/1N, C$3,100 por persona).
-     * 2. Managua, Raíces, Historia y Encanto (Centro Histórico, 1 día, C$880 por persona).
-     * 3. Night Tour Volcán Mombacho (Granada, cráter nocturno y fauna, C$1,100 por persona).
-     * 4. Boca de Sábalos & Fortaleza El Castillo (Río San Juan, 2D/1N, C$1,700 por persona).
-     * 5. Cañón Cerros Pegados (Nueva Segovia, Zipote Vago Tours, C$1,200 por persona).
-     * 6. Travesía Cayos Perlas (RACCS, 2D/1N, arrecife y kayaks, C$2,910 por persona).
+     - 1. Entre Nubes y Olas (Managua: El Crucero + Pochomil, 2D/1N, C$3,100 por persona).
+     - 2. Managua, Raíces, Historia y Encanto (Centro Histórico, 1 día, C$880 por persona).
+     - 3. Night Tour Volcán Mombacho (Granada, cráter nocturno y fauna, C$1,100 por persona).
+     - 4. Boca de Sábalos & Fortaleza El Castillo (Río San Juan, 2D/1N, C$1,700 por persona).
+     - 5. Cañón Cerros Pegados (Nueva Segovia, Zipote Vago Tours, C$1,200 por persona).
+     - 6. Travesía Cayos Perlas (RACCS, 2D/1N, arrecife y kayaks, C$2,910 por persona).
    - Insertada la sección especializada de **Rutas Temáticas de Río San Juan**:
-     * Ruta del Oro (6 días de travesía interoceánica).
-     * Ruta Colonial (Fortaleza Inmaculada Concepción y Desaguadero).
-     * Ruta de las Aves (+270 especies en humedales y Solentiname).
-     * Ruta de los Naturalistas (Selva virgen de Indio Maíz y Bartola).
-     * Experiencia Comunitaria Rama en Reserva Cantagallo.
+     - Ruta del Oro (6 días de travesía interoceánica).
+     - Ruta Colonial (Fortaleza Inmaculada Concepción y Desaguadero).
+     - Ruta de las Aves (+270 especies en humedales y Solentiname).
+     - Ruta de los Naturalistas (Selva virgen de Indio Maíz y Bartola).
+     - Experiencia Comunitaria Rama en Reserva Cantagallo.
 4. **website/mi-negocio.html**:
    - Insertada la sección oficial de **Marco Jurídico & Fomento Oficial**:
-     * Ley No. 1210 (Ley General de Turismo) y desglose de las **13 Modalidades Oficiales de Turismo** (Art. 16).
-     * Ley No. 1211 (Ley de Incentivos para los Desarrollos Turísticos).
-     * Beneficios de la formalización y doble sello Baqueano + INTUR para Pymes y cooperativas.
+     - Ley No. 1210 (Ley General de Turismo) y desglose de las **13 Modalidades Oficiales de Turismo** (Art. 16).
+     - Ley No. 1211 (Ley de Incentivos para los Desarrollos Turísticos).
+     - Beneficios de la formalización y doble sello Baqueano + INTUR para Pymes y cooperativas.
 5. **website/js/baqueano-master-catalog.js**:
    - Creado el Banco Maestro Nacional consolidado bajo window.BAQUEANO_MASTER_CATALOG.
    - Sistema de procedencia en 3 niveles de fuentes (Oficial, Territorial, Mercado).
    - Vinculado e inyectado en index.html, destinos.html, experiencias.html, baqueano-ia.html y mi-viaje.html.
+## [2026-09-28] Registro canónico de superadministradores en Supabase
+
+- **POR QUÉ (Why / Propósito):** Registrar como máxima autoridad administrativa a `oscarelieser.informatica.inatec@gmail.com`, `byoscarelieser@gmail.com` y `vigoronmixt@gmail.com`, evitando divergencias entre la base y el middleware.
+- **CÓMO (How / Arquitectura e Implementación):** Se creó una migración idempotente con tabla protegida por RLS, acceso exclusivo de `service_role`, seed de las tres cuentas y sincronización de perfiles existentes. El middleware ahora reconoce los tres correos en `verifySuperAdmin` y una prueba bloquea regresiones.
+- **QUÉ (What / Entregables):** `supabase/migrations/20260928192057_register_official_super_admins.sql`, `functions/lib/auth-middleware.js`, `functions/test/auth-middleware.test.js` y esta bitácora.
+- **Estado remoto:** La consulta pública confirmó que actualmente no existen perfiles coincidentes. La migración quedó preparada, pero no pudo desplegarse al proyecto remoto porque esta estación no tiene `SUPABASE_ACCESS_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY` ni una sesión activa de Supabase CLI.
+- **Validación:** `functions` completó 21/21 pruebas y `npm run check`; `flutter analyze` no reportó incidencias; `flutter test` completó 31/31 pruebas. `git diff --check` quedó limpio.
+
+---
+## [2026-09-28] Corrección definitiva del menú cápsula y mega menú adaptable
+
+- **POR QUÉ (Why / Propósito):** Corregir la barra que ocultaba toda la navegación central en escritorio y reproducir la referencia `menu.png` con enlaces principales, controles de utilidad y mega menú de cuatro categorías.
+- **CÓMO (How / Arquitectura e Implementación):** Se eliminó el alcance global accidental de una media query `max-width: 9999px`, se consolidó el cambio a drawer en 1280 px, se amplió la cápsula, se centró el mega menú y se restringió la apertura por hover a punteros finos de escritorio. En tablet/móvil, “Más” funciona como acordeón vertical de ancho completo.
+- **QUÉ (What / Entregables):** `website/styles.css`, `website/css/navigation-mega.css`, `website/js/navigation.js` y actualización de caché `nav-fix-3` en 20 páginas HTML.
+- **Validación visual:** Playwright comprobó escritorio 1440 px, tablet 1280/1024 px y móvil 390 px; navegación completa en escritorio, hamburguesa en tablet/móvil, cuatro columnas disponibles y cero desbordamiento horizontal.
+
+---
+## [2026-09-28] Menú horizontal persistente hasta ancho móvil real
+
+- **POR QUÉ (Why / Propósito):** Ajustar la directiva del usuario para conservar el menú principal en formato horizontal mientras el navegador tenga espacio útil, mostrando la hamburguesa únicamente en ventanas pequeñas.
+- **CÓMO (How / Arquitectura e Implementación):** El breakpoint del drawer se trasladó de 1280 px a 960 px. Entre 961 y 1100 px se reducen de forma controlada los espacios internos de enlaces y acciones, manteniendo todos los textos visibles sin colisiones.
+- **QUÉ (What / Entregables):** `website/css/navigation-mega.css`, `website/styles.css`, `website/js/navigation.js` y caché global `nav-fix-5`.
+- **Validación:** Playwright verificó 1280, 1100, 1024, 961, 960, 820 y 390 px; menú horizontal con seis accesos hasta 961 px, hamburguesa desde 960 px, cero solapamientos y cero desbordamiento horizontal.
+
+---
+## [2026-09-28] Refinamiento elegante y restitución de utilidades del navbar
+
+- **POR QUÉ (Why / Propósito):** Recuperar clima, selector de idioma y cambio de tema sin volver a saturar la navegación horizontal solicitada por el usuario.
+- **CÓMO (How / Arquitectura e Implementación):** Se creó una escala compacta entre 961 y 1200 px para logo, tipografía, enlaces y acciones. Los tres controles permanecen visibles; en teléfonos menores de 520 px conservan su iconografía en botones compactos y el texto secundario de marca se oculta para proteger el espacio.
+- **QUÉ (What / Entregables):** `website/css/navigation-mega.css` y versión global de caché `nav-fix-6`.
+- **Validación visual:** Playwright comprobó presencia de clima, tema e idioma en 1440, 1200, 1100, 1024, 961, 960, 820, 520 y 390 px, sin desbordamiento de documento.
+
+---
+## [2026-09-28] Unificación global del navbar en todas las páginas públicas
+
+- **POR QUÉ (Why / Propósito):** Garantizar que el menú aprobado sea un componente global único y eliminar barras antiguas o variantes divergentes entre Inicio, páginas legales, 404, modo offline, Baqueano IA y Mi Viaje.
+- **CÓMO (How / Arquitectura e Implementación):** `global-injector.js` ahora carga `nav-fix-6`, normaliza cualquier `nav.main-navbar` legado al esqueleto canónico y crea el mismo `#mainNavbar` cuando no existe. La cabecera autónoma de 404 se preserva oculta para evitar navegación duplicada. También se corrigió la inserción obsoleta del enlace IA que producía `NotFoundError`.
+- **QUÉ (What / Entregables):** `website/js/global-injector.js`, `website/js/navigation.js`, `website/css/navigation-mega.css`, `website/baqueano-ia.html` y `website/mi-viaje.html`.
+
+---

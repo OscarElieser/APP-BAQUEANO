@@ -45,9 +45,9 @@
   min-height: 64px !important;
 
   /* Forma de cápsula flotante */
-  width: min(1400px, calc(100% - 32px)) !important;
-  margin: 14px auto 0 !important;
-  padding: 6px 18px !important;
+  width: min(1640px, calc(100% - 32px)) !important;
+  margin: 18px auto 0 !important;
+  padding: 9px 20px !important;
   border-radius: 9999px !important;
 
   /* Glassmorphism oscuro */
@@ -100,6 +100,9 @@
   text-decoration: none !important;
   color: #FFFFFF !important;
   flex-shrink: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
 }
 
 #mainNavbar .exact-nav-logo,
@@ -159,6 +162,7 @@
   width: auto !important;
   height: auto !important;
   background: transparent !important;
+  border: 0 !important;
   box-shadow: none !important;
   flex-direction: row !important;
 }
@@ -233,7 +237,7 @@
   gap: 5px !important;
   padding: 7px 16px !important;
   background: rgba(255, 255, 255, 0.07) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+  border: none !important;
   border-radius: 20px !important;
   color: #FFFFFF !important;
   font-family: 'Inter', sans-serif !important;
@@ -249,12 +253,10 @@
 #mainNavbar .nav-dropdown-trigger:hover,
 #mainNavbar .exact-nav-dropdown-btn:hover {
   background: rgba(255, 255, 255, 0.14) !important;
-  border-color: #F65E01 !important;
 }
 
 #mainNavbar .global-more-dropdown.is-open .nav-dropdown-trigger {
   background: rgba(255, 255, 255, 0.14) !important;
-  border-color: #F65E01 !important;
 }
 
 /* Flechita / Caret Naranja apuntando al Mega Menú */
@@ -297,14 +299,14 @@
 #mainNavbar .nav-dropdown-menu.global-mega-menu,
 #mainNavbar .exact-dropdown-menu {
   position: fixed !important;
-  top: 88px !important;
+  top: 96px !important;
   right: auto !important;
-  left: 50% !important;
+  left: calc(50% + 138px) !important;
   transform: translateX(-50%) translateY(10px) !important;
-  display: grid !important;
+  display: none !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 0 !important;
-  width: min(1060px, 94vw) !important;
+  width: min(1090px, calc(100vw - 40px)) !important;
   min-width: 0 !important;
   padding: 28px 24px !important;
   border-radius: 20px !important;
@@ -321,6 +323,7 @@
 }
 
 #mainNavbar .global-more-dropdown.is-open .global-mega-menu {
+  display: grid !important;
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
@@ -470,8 +473,8 @@
   width: 36px !important;
   height: 36px !important;
   border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  background: transparent !important;
+  border: none !important;
   color: #FFFFFF !important;
   text-decoration: none !important;
   cursor: pointer !important;
@@ -481,8 +484,7 @@
 
 #mainNavbar .global-search:hover,
 #mainNavbar .navbar-search-btn:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: #F65E01 !important;
+  color: #F65E01 !important;
 }
 
 /* Switch Tema Día/Noche */
@@ -492,8 +494,8 @@
   align-items: center !important;
   gap: 5px !important;
   padding: 5px 10px !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: transparent !important;
+  border: none !important;
   border-radius: 20px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
@@ -553,6 +555,13 @@
   white-space: nowrap !important;
 }
 
+/* Forzar que se muestre el span en desktop */
+#mainNavbar .exact-nav-btn-login span,
+#mainNavbar .global-session span,
+#mainNavbar .navbar-login-btn span {
+  display: inline-flex !important;
+}
+
 #mainNavbar .exact-nav-btn-login:hover,
 #mainNavbar .global-session:hover,
 #mainNavbar .navbar-login-btn:hover {
@@ -605,9 +614,9 @@
   right: auto !important;
   height: auto !important;
   min-height: 64px !important;
-  width: min(1400px, calc(100% - 32px)) !important;
-  margin: 14px auto 0 !important;
-  padding: 6px 18px !important;
+  width: min(1640px, calc(100% - 32px)) !important;
+  margin: 18px auto 0 !important;
+  padding: 9px 20px !important;
   border-radius: 9999px !important;
   background: rgba(11, 37, 58, 0.88) !important;
   backdrop-filter: blur(22px) !important;
@@ -637,7 +646,7 @@
 @media (max-width: 1200px) {
   #mainNavbar .global-weather,
   #mainNavbar .navbar-weather-pill {
-    display: none !important;
+    display: inline-flex !important;
   }
 }
 
@@ -646,11 +655,97 @@
   #mainNavbar .navbar-theme-pill,
   #mainNavbar .global-language,
   #mainNavbar .navbar-lang-pill {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1200px) {
+  #mainNavbar,
+  #mainNavbar.main-navbar-exact {
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+  }
+
+  #mainNavbar .exact-nav-logo,
+  #mainNavbar .navbar-brand-logo {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  #mainNavbar .exact-nav-brand,
+  #mainNavbar .navbar-brand-pill {
+    gap: 7px !important;
+  }
+
+  #mainNavbar .exact-nav-title,
+  #mainNavbar .navbar-brand-title {
+    font-size: 0.96rem !important;
+  }
+
+  #mainNavbar .exact-nav-tagline,
+  #mainNavbar .navbar-brand-sub {
+    font-size: 0.42rem !important;
+  }
+
+  #mainNavbar .exact-nav-menu,
+  #mainNavbar .nav-links-menu {
+    gap: 2px !important;
+  }
+
+  #mainNavbar .exact-nav-link,
+  #mainNavbar .nav-link-item,
+  #mainNavbar .nav-links-menu > a,
+  #mainNavbar .nav-dropdown-trigger,
+  #mainNavbar .exact-nav-dropdown-btn {
+    padding: 7px 7px !important;
+    font-size: 0.76rem !important;
+  }
+
+  #mainNavbar .global-nav-actions,
+  #mainNavbar .exact-nav-actions,
+  #mainNavbar .nav-actions-right {
+    gap: 5px !important;
+  }
+
+  #mainNavbar .global-weather,
+  #mainNavbar .navbar-weather-pill {
+    padding: 6px 8px !important;
+    font-size: 0.7rem !important;
+  }
+
+  #mainNavbar .global-search,
+  #mainNavbar .navbar-search-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #mainNavbar .global-theme,
+  #mainNavbar .navbar-theme-pill {
+    padding: 5px 7px !important;
+  }
+
+  #mainNavbar .global-language,
+  #mainNavbar .navbar-lang-pill {
+    padding: 7px 8px !important;
+    font-size: 0.7rem !important;
+  }
+
+  #mainNavbar .sos-quick-btn,
+  #mainNavbar .navbar-sos-btn,
+  #mainNavbar .exact-nav-btn-login,
+  #mainNavbar .global-session,
+  #mainNavbar .navbar-login-btn {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  #mainNavbar .exact-nav-btn-login span,
+  #mainNavbar .global-session span {
     display: none !important;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   #mainNavbar,
   #mainNavbar.main-navbar-exact {
     border-radius: 20px !important;
@@ -691,12 +786,31 @@
     transform: translateX(0) !important;
   }
 
-  #mainNavbar .global-mega-menu {
+  #mainNavbar .global-more-dropdown {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  #mainNavbar .global-more-dropdown .nav-dropdown-trigger {
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+
+  #mainNavbar .global-more-dropdown .nav-dropdown-trigger .fa-chevron-down {
+    margin-left: auto !important;
+  }
+
+  #mainNavbar .global-more-dropdown .nav-dropdown-menu.global-mega-menu {
     position: static !important;
     width: 100% !important;
     grid-template-columns: 1fr !important;
     padding: 14px 0 !important;
     display: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
     box-shadow: none !important;
     border-radius: 12px !important;
     opacity: 1 !important;
@@ -707,9 +821,10 @@
     right: auto !important;
   }
 
-  #mainNavbar .global-more-dropdown.is-open .global-mega-menu {
+  #mainNavbar .global-more-dropdown.is-open .nav-dropdown-menu.global-mega-menu {
     display: grid !important;
     grid-template-columns: 1fr !important;
+    transform: none !important;
   }
 
   #mainNavbar .global-mega-column {
@@ -721,5 +836,73 @@
   #mainNavbar .exact-nav-btn-login span,
   #mainNavbar .global-session span {
     display: none !important;
+  }
+}
+
+@media (max-width: 520px) {
+  #mainNavbar .exact-nav-brand-text,
+  #mainNavbar .navbar-brand-text {
+    display: none !important;
+  }
+
+  #mainNavbar .global-weather,
+  #mainNavbar .navbar-weather-pill {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    font-size: 0 !important;
+  }
+
+  #mainNavbar .global-theme,
+  #mainNavbar .navbar-theme-pill {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  #mainNavbar .global-search,
+  #mainNavbar .navbar-search-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #mainNavbar .sos-quick-btn,
+  #mainNavbar .navbar-sos-btn {
+    width: 40px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  #mainNavbar .sos-quick-btn span,
+  #mainNavbar .navbar-sos-btn span {
+    display: none !important;
+  }
+
+  #mainNavbar .exact-nav-btn-login,
+  #mainNavbar .global-session,
+  #mainNavbar .navbar-login-btn {
+    width: 36px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  #mainNavbar .global-language,
+  #mainNavbar .navbar-lang-pill {
+    padding: 6px !important;
+  }
+
+  #mainNavbar .mobile-nav-toggle,
+  #mainNavbar .exact-nav-mobile-toggle {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  #mainNavbar .global-nav-actions,
+  #mainNavbar .exact-nav-actions {
+    gap: 3px !important;
   }
 }

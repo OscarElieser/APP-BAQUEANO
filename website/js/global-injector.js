@@ -53,6 +53,7 @@
       { id: 'bq-styles',    href: 'styles.css?v=20260927-exact-1' },
       { id: 'bq-modules',   href: 'css/modules.css' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
+      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260928-nav-fix-6' },
       { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
@@ -268,15 +269,27 @@
 
   // ── Inyectar Navbar ───────────────────────────────────────────────────────
   function injectGlobalNavbar() {
-    // Si ya existe un navbar oficial exact, no sobreescribir
-    if (document.getElementById('mainNavbar') &&
-        document.querySelector('.main-navbar-exact, .bq-global-navbar')) return;
-    // Si ya existe un navbar de cualquier tipo, no inyectar
-    if (document.querySelector('nav')) return;
+    if (document.getElementById('mainNavbar')) return;
+
+    var legacyNav = document.querySelector('nav.main-navbar, nav.main-navbar-exact');
+    if (legacyNav) {
+      legacyNav.id = 'mainNavbar';
+      legacyNav.className = 'main-navbar-exact main-navbar';
+      legacyNav.setAttribute('role', 'navigation');
+      legacyNav.setAttribute('aria-label', 'Navegación principal');
+      legacyNav.innerHTML = bqNavbarHTML();
+      return;
+    }
+
+    var legacyPageHeader = document.querySelector('.nav-404-header');
+    if (legacyPageHeader) {
+      legacyPageHeader.hidden = true;
+      legacyPageHeader.setAttribute('aria-hidden', 'true');
+    }
 
     var nav = document.createElement('nav');
-    nav.className = 'bq-global-navbar';
-    nav.id = 'bqGlobalNav';
+    nav.className = 'main-navbar-exact main-navbar';
+    nav.id = 'mainNavbar';
     nav.setAttribute('role', 'navigation');
     nav.setAttribute('aria-label', 'Navegación principal');
     nav.innerHTML = bqNavbarHTML();
@@ -285,38 +298,16 @@
   }
 
   function bqNavbarHTML() {
-    return '<div class="bq-nav-inner">' +
-      '<a href="index.html" class="bq-nav-brand">' +
-        '<img src="assets/images/logo.png" alt="BAQUEANO">' +
-        '<div><div class="bq-brand-name">BAQUEANO</div><div class="bq-brand-sub">NICARAGUA AUTÉNTICA</div></div>' +
-      '</a>' +
-      '<div class="bq-nav-links" id="bqNavLinks">' +
-        '<a href="index.html"' + isActive(['index.html','']) + '>Inicio</a>' +
-        '<a href="destinos.html"' + isActive(['destinos.html','departamento.html','mapa.html']) + '>Destinos</a>' +
-        '<a href="experiencias.html"' + isActive(['experiencias.html']) + '>Experiencias</a>' +
-        '<a href="historia.html"' + isActive(['historia.html','gastronomia.html','musica.html','ambiental.html']) + '>Cultura</a>' +
-        '<a href="baqueano-ia.html"' + isActive(['baqueano-ia.html','baqueano-ai.html']) + '>Baqueano IA</a>' +
-        '<a href="mi-viaje.html"' + isActive(['mi-viaje.html']) + '>Mi Viaje</a>' +
-        '<div class="bq-nav-dropdown">' +
-          '<button class="bq-nav-dropdown-btn" type="button" aria-expanded="false">' +
-            'Más <i class="fa-solid fa-chevron-down" style="font-size:.7rem"></i>' +
-          '</button>' +
-          '<div class="bq-dropdown-menu">' +
-            '<a href="aliados.html" class="bq-dropdown-item"><i class="fa-solid fa-handshake"></i> Aliados</a>' +
-            '<a href="nosotros.html" class="bq-dropdown-item"><i class="fa-solid fa-people-group"></i> Nosotros</a>' +
-            '<a href="mi-negocio.html" class="bq-dropdown-item"><i class="fa-solid fa-shop"></i> Mi Negocio</a>' +
-            '<a href="denuncias.html" class="bq-dropdown-item"><i class="fa-solid fa-shield-halved"></i> Denuncias</a>' +
-            '<a href="perfil.html" class="bq-dropdown-item"><i class="fa-regular fa-user"></i> Mi Perfil</a>' +
-            '<a href="admin.html" class="bq-dropdown-item ops"><i class="fa-solid fa-lock" style="color:#F65E01"></i> OPS Center <small style="color:#64748B;font-size:.7rem">Solo personal</small></a>' +
-          '</div>' +
+    return '<div class="exact-container nav-inner">' +
+      '<a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">' +
+        '<img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">' +
+        '<div class="exact-nav-brand-text navbar-brand-text">' +
+          '<span class="exact-nav-title navbar-brand-title">BAQUEANO</span>' +
+          '<span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>' +
         '</div>' +
-      '</div>' +
-      '<div class="bq-nav-actions">' +
-        '<a href="destinos.html" class="bq-nav-btn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>' +
-        '<button class="bq-nav-sos" onclick="bqOpenSos(event)"><i class="fa-solid fa-shield-heart"></i> SOS</button>' +
-        '<a href="perfil.html" class="bq-nav-login">Iniciar sesión</a>' +
-        '<button class="bq-burger" id="bqBurger" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>' +
-      '</div>' +
+      '</a>' +
+      '<div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar"></div>' +
+      '<div class="exact-nav-actions global-nav-actions"></div>' +
     '</div>';
   }
 

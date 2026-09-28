@@ -47,7 +47,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260928-nav-fix-2'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260928-nav-fix-6'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
@@ -130,6 +130,7 @@ function buildGlobalMegaNavigation() {
   const moreDropdown = document.getElementById('navDropdownGlobalMore');
   const moreBtn = document.getElementById('btnGlobalMoreTrigger');
   const megaMenu = document.getElementById('globalMegaMenu');
+  const desktopHoverQuery = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
   let closeTimer = null;
 
   if (moreDropdown && moreBtn) {
@@ -140,12 +141,14 @@ function buildGlobalMegaNavigation() {
     });
 
     moreDropdown.addEventListener('mouseenter', () => {
+      if (!desktopHoverQuery.matches) return;
       clearTimeout(closeTimer);
       moreDropdown.classList.add('is-open');
       moreBtn.setAttribute('aria-expanded', 'true');
     });
 
     moreDropdown.addEventListener('mouseleave', () => {
+      if (!desktopHoverQuery.matches) return;
       closeTimer = setTimeout(() => {
         moreDropdown.classList.remove('is-open');
         moreBtn.setAttribute('aria-expanded', 'false');
@@ -288,7 +291,7 @@ function initRuntimeObservability() {
 // Acceso global al planificador territorial desde la navegación pública.
 function initBaqueanoAiNavLink() {
   const menu = document.querySelector('.nav-links-menu');
-  if (!menu || menu.querySelector('a[href^="baqueano-ai.html"]')) return;
+  if (!menu || menu.querySelector('a[href^="baqueano-ia.html"], a[href^="baqueano-ai.html"]')) return;
   const link = document.createElement('a');
   link.href = 'baqueano-ai.html#planner';
   link.className = 'nav-link-ai';
@@ -298,7 +301,7 @@ function initBaqueanoAiNavLink() {
       <span class="nav-text-group"><span class="nav-label">Baqueano AI</span><span class="nav-sublabel">Planifica tu ruta</span></span>
     </span>
     <span class="nav-right-wrap"><span class="nav-item-badge live">● En línea</span><i class="fa-solid fa-chevron-right nav-arrow"></i></span>`;
-  const profileLink = menu.querySelector('a[href="perfil.html"]');
+  const profileLink = menu.querySelector(':scope > a[href="perfil.html"]');
   menu.insertBefore(link, profileLink || null);
 }
 

@@ -71,7 +71,9 @@ async function verifySuperAdmin(request) {
   if (!authResult.ok) return authResult;
 
   const user = authResult.user;
-  const isSuper = user.role === "superadmin" || user.role === "super_admin" || (user.email && user.email.toLowerCase() === "oscarelieser.informatica.inatec@gmail.com");
+  const isSuper = user.role === "superadmin" ||
+    user.role === "super_admin" ||
+    (user.email && OFFICIAL_ADMIN_EMAILS.has(user.email.toLowerCase()));
 
   if (!isSuper) {
     return { ok: false, status: 403, error: { code: "FORBIDDEN", message: "Acceso denegado: se requieren privilegios de Super Administrador." } };

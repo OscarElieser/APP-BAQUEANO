@@ -8760,7 +8760,7 @@ img {
       objetivos táctiles de 48 px y zonas seguras compatibles con iOS/iPadOS.
    📦 QUÉ: drawer lateral estable desde teléfonos hasta pantallas desktop/TV.
    ============================================================================ */
-@media (max-width: 9999px) {
+@media (max-width: 960px) {
   .main-navbar .nav-inner {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
@@ -9813,5 +9813,3 @@ img {
   align-items: center !important;
   gap: 0.35rem !important;
 }
-
-
