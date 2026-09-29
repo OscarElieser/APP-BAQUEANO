@@ -129,25 +129,32 @@
         }
         #bqSosModal.open { display: flex; }
         .bq-sos-box {
-          background: #0B253A; border-radius: 20px; padding: 32px; max-width: 420px; width: 100%;
+          background: #0B253A; border-radius: 22px; padding: 28px; max-width: 680px; width: 100%; max-height: min(88vh,760px); overflow-y: auto;
           box-shadow: 0 20px 60px rgba(0,0,0,.6); border: 1px solid rgba(239,68,68,.3);
         }
         .bq-sos-title { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 900; color: #FFF; margin: 0 0 6px; }
         .bq-sos-sub { color: #94A3B8; font-size: .85rem; margin-bottom: 20px; }
-        .bq-sos-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+        .bq-sos-location { background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.24);border-radius:12px;padding:13px 14px;margin-bottom:16px;font-size:.82rem;color:#CBD5E1;display:flex;gap:10px;align-items:flex-start; }
+        .bq-sos-location strong{display:block;color:#FFF;margin-bottom:3px}.bq-sos-location a{color:#7DD3FC;font-weight:700;text-decoration:none}.bq-sos-btns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
         .bq-sos-call {
-          flex: 1; min-width: 130px; display: flex; align-items: center; justify-content: center;
-          gap: 8px; padding: 12px; border-radius: 10px; text-decoration: none;
+          display: flex; align-items: center; justify-content: flex-start;
+          gap: 10px; padding: 13px; border-radius: 12px; text-decoration: none;
           font-weight: 700; font-size: .9rem; font-family: 'Montserrat', sans-serif; transition: opacity .2s;
         }
         .bq-sos-call:hover { opacity: .85; }
         .bq-sos-call.police { background: rgba(59,130,246,.2); color: #60A5FA; border: 1px solid rgba(59,130,246,.3); }
         .bq-sos-call.medical { background: rgba(239,68,68,.2); color: #F87171; border: 1px solid rgba(239,68,68,.3); }
+        .bq-sos-call.fire { background:rgba(246,94,1,.16);color:#FDBA74;border:1px solid rgba(246,94,1,.35) }
+        .bq-sos-call.general { background:rgba(16,185,129,.14);color:#6EE7B7;border:1px solid rgba(16,185,129,.3) }
+        .bq-sos-call span{display:block}.bq-sos-call small{display:block;font:500 .68rem/1.3 'Inter',sans-serif;color:#94A3B8;margin-top:2px}
+        .bq-sos-tools{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.bq-sos-tool{flex:1;min-width:180px;border:1px solid rgba(148,163,184,.25);background:rgba(255,255,255,.05);color:#E2E8F0;border-radius:11px;padding:11px 13px;font-weight:750;cursor:pointer;text-align:center}
+        .bq-sos-guide{margin-top:17px;padding-top:16px;border-top:1px solid rgba(148,163,184,.16)}.bq-sos-guide h3{font:800 .88rem/1.3 'Montserrat',sans-serif;color:#F4E6C1;margin:0 0 9px}.bq-sos-guide ol{margin:0;padding-left:20px;color:#CBD5E1;font-size:.78rem;line-height:1.55}.bq-sos-note{margin:12px 0 0;color:#94A3B8;font-size:.7rem;line-height:1.45}
         .bq-sos-close {
           float: right; background: none; border: none; color: #64748B; font-size: 1.5rem;
           cursor: pointer; margin-top: -8px; transition: color .2s;
         }
         .bq-sos-close:hover { color: #FFF; }
+        @media(max-width:560px){.bq-sos-box{padding:20px}.bq-sos-btns{grid-template-columns:1fr}.bq-sos-tool{min-width:100%}}
       `;
       document.head.appendChild(style);
     }
@@ -426,14 +433,18 @@
       '<div class="bq-sos-box">' +
         '<button class="bq-sos-close" onclick="bqCloseSos()" aria-label="Cerrar">×</button>' +
         '<div class="bq-sos-title"><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Centro SOS &amp; Auxilio</div>' +
-        '<p class="bq-sos-sub">Estás siendo asistido en tiempo real. Tu ubicación está activa para emergencias.</p>' +
-        '<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px;margin-bottom:16px;font-size:.82rem;color:#94A3B8">' +
-          '<i class="fa-solid fa-satellite-dish" style="color:#F65E01"></i> GPS Activo · Nicaragua · 12.5061° N, 86.7022° W' +
+        '<p class="bq-sos-sub">Acceso inmediato a servicios de emergencia en Nicaragua. Presioná un contacto para llamar.</p>' +
+        '<div class="bq-sos-location">' +
+          '<i class="fa-solid fa-satellite-dish" style="color:#F65E01;margin-top:3px"></i><div><strong id="bqSosGpsStatus">Obteniendo ubicación segura…</strong><span id="bqSosCoordinates">Permití el acceso al GPS para compartir coordenadas exactas.</span><br><a id="bqSosMapLink" href="https://maps.google.com/?q=Nicaragua" target="_blank" rel="noopener">Abrir ubicación en el mapa</a></div>' +
         '</div>' +
         '<div class="bq-sos-btns">' +
-          '<a href="tel:118" class="bq-sos-call police"><i class="fa-solid fa-shield"></i> Policía (118)</a>' +
-          '<a href="tel:128" class="bq-sos-call medical"><i class="fa-solid fa-truck-medical"></i> Cruz Blanca (128)</a>' +
+          '<a href="tel:118" class="bq-sos-call police"><i class="fa-solid fa-shield"></i><span>Policía Nacional<small>Emergencias: 118</small></span></a>' +
+          '<a href="tel:128" class="bq-sos-call medical"><i class="fa-solid fa-truck-medical"></i><span>Ambulancia<small>Atención prehospitalaria: 128</small></span></a>' +
+          '<a href="tel:115" class="bq-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i><span>Bomberos<small>Incendios y rescate: 115</small></span></a>' +
+          '<a href="tel:911" class="bq-sos-call general"><i class="fa-solid fa-tower-broadcast"></i><span>Emergencia general<small>Línea alternativa: 911</small></span></a>' +
         '</div>' +
+        '<div class="bq-sos-tools"><button type="button" class="bq-sos-tool" onclick="bqShareSosLocation()"><i class="fa-solid fa-location-arrow"></i> Compartir mi ubicación</button><button type="button" class="bq-sos-tool" onclick="bqCopySosLocation()"><i class="fa-regular fa-copy"></i> Copiar coordenadas</button></div>' +
+        '<div class="bq-sos-guide"><h3><i class="fa-solid fa-list-check"></i> Mientras llega la ayuda</h3><ol><li>Indicá tu ubicación, puntos de referencia y tipo de emergencia.</li><li>Mantené la línea disponible y seguí las instrucciones del operador.</li><li>No movás a una persona lesionada salvo que exista peligro inmediato.</li><li>En una zona remota, compartí estas coordenadas con un contacto de confianza.</li></ol><p class="bq-sos-note">La cobertura y los tiempos de respuesta pueden variar según el territorio y la señal disponible.</p></div>' +
       '</div>';
     modal.addEventListener('click', function(e) { if (e.target === modal) bqCloseSos(); });
     var footerBoundary = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
@@ -444,7 +455,40 @@
   window.bqOpenSos = function(e) {
     if (e) e.preventDefault();
     var m = document.getElementById('bqSosModal');
-    if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; bqLocateForSos(); }
+  };
+
+  // 🎯 POR QUÉ: una ubicación real reduce ambigüedad durante una emergencia.
+  // ⚙️ CÓMO: solicita geolocalización de alta precisión solo al abrir SOS.
+  // 📦 QUÉ: coordenadas, mapa, copia y uso del diálogo nativo para compartir.
+  var bqSosPosition = null;
+  function bqLocateForSos() {
+    var status = document.getElementById('bqSosGpsStatus');
+    var coords = document.getElementById('bqSosCoordinates');
+    var map = document.getElementById('bqSosMapLink');
+    if (!navigator.geolocation) { if (status) status.textContent = 'GPS no disponible'; return; }
+    if (status) status.textContent = 'Solicitando ubicación…';
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = Number(position.coords.latitude).toFixed(6);
+      var lng = Number(position.coords.longitude).toFixed(6);
+      bqSosPosition = { lat: lat, lng: lng, accuracy: Math.round(position.coords.accuracy || 0) };
+      if (status) status.textContent = 'Ubicación lista para compartir';
+      if (coords) coords.textContent = lat + ', ' + lng + ' · Precisión aproximada: ' + bqSosPosition.accuracy + ' m';
+      if (map) map.href = 'https://maps.google.com/?q=' + encodeURIComponent(lat + ',' + lng);
+    }, function() {
+      if (status) status.textContent = 'Ubicación no autorizada';
+      if (coords) coords.textContent = 'Podés llamar igualmente y describir un punto de referencia cercano.';
+    }, { enableHighAccuracy: true, timeout: 9000, maximumAge: 30000 });
+  }
+  window.bqCopySosLocation = function() {
+    if (!bqSosPosition) { bqToast('Activá el permiso de ubicación para obtener coordenadas.', 'warning'); return; }
+    bqCopy(bqSosPosition.lat + ', ' + bqSosPosition.lng);
+  };
+  window.bqShareSosLocation = function() {
+    if (!bqSosPosition) { bqToast('Activá el permiso de ubicación para compartirla.', 'warning'); return; }
+    var url = 'https://maps.google.com/?q=' + encodeURIComponent(bqSosPosition.lat + ',' + bqSosPosition.lng);
+    if (navigator.share) navigator.share({ title: 'Mi ubicación de emergencia', text: 'Necesito asistencia. Mi ubicación actual:', url: url }).catch(function() {});
+    else bqCopy(url);
   };
   window.bqCloseSos = function() {
     var m = document.getElementById('bqSosModal');
@@ -586,6 +630,82 @@
   }
 
   // ========================================================================
+  // 🎯 POR QUÉ: permitir encontrar contenido del ecosistema sin salir de BAQUEANO.
+  // ⚙️ CÓMO: consulta un índice local curado, normaliza acentos y pondera título,
+  //    categoría, descripción y palabras clave antes de ordenar los resultados.
+  // 📦 QUÉ: buscador interno con resultados enlazados a páginas y secciones reales.
+  // ========================================================================
+  function initInternalSiteSearch() {
+    if (document.getElementById('bqSiteSearchResults')) return;
+    var records = [
+      ['Destinos de Nicaragua','Destinos','Volcanes, playas, montañas, reservas y ciudades para explorar.','destinos.html','destinos viajar turismo volcan playa montaña naturaleza aventura'],
+      ['Departamentos y territorios','Explorar','Información de los 17 territorios de Nicaragua.','departamento.html','departamentos territorios leon managua granada masaya rivas carazo chinandega matagalpa esteli boaco chontales madriz nueva segovia rio san juan caribe racccn racs'],
+      ['Mapa interactivo','Explorar','Ubicá destinos, servicios y puntos de interés en el mapa nacional.','mapa.html','mapa ubicacion gps lugares rutas coordenadas'],
+      ['Experiencias','Explorar','Actividades, senderos y vivencias comunitarias.','experiencias.html','experiencias tours senderismo aventura comunidades guia'],
+      ['Baqueano IA','Planificación','Asistente para crear rutas y consultar clima por territorio.','baqueano-ia.html','ia inteligencia artificial ruta itinerario clima viaje planificar'],
+      ['Mi viaje','Planificación','Organizá destinos, presupuesto, días y experiencias.','mi-viaje.html','viaje ruta itinerario presupuesto reservas plan'],
+      ['Historia y memoria','Cultura','Historia nacional, personajes, museos y sitios de memoria.','historia.html','historia museos monumentos independencia cultura memoria ruben dario sandino'],
+      ['Gastronomía nicaragüense','Cultura','Platos, bebidas, recetas y tradiciones culinarias.','gastronomia.html','comida gastronomia recetas nacatamal vigoron gallo pinto quesillo'],
+      ['Música de Nicaragua','Cultura','Archivo sonoro, artistas, géneros e instrumentos.','musica.html','musica canciones artistas marimba son nica audio folklor'],
+      ['Custodia ambiental','Naturaleza','Conservación, áreas protegidas y buenas prácticas ambientales.','ambiental.html','ambiental naturaleza conservacion areas protegidas huella cero'],
+      ['Red de aliados','Comunidad','Organizaciones y actores vinculados al turismo nacional.','aliados.html','aliados organizaciones instituciones comunidad socios'],
+      ['Mi negocio','Negocios','Registro y herramientas para emprendimientos turísticos.','mi-negocio.html','negocio negocios empresa emprendimiento comercio hospedaje restaurante guia registrar local'],
+      ['Canal de denuncias','Seguridad','Reporte confidencial de incidencias ambientales.','denuncias.html','denuncia reportar emergencia ambiental seguridad'],
+      ['Perfil y cuenta','Cuenta','Datos personales, favoritos y configuración de usuario.','perfil.html','perfil cuenta usuario iniciar sesion configuracion favoritos'],
+      ['Reservas','Cuenta','Consultá y administrá tus viajes reservados.','perfil.html#tab-viajes','reservas reservar viaje boleto confirmacion'],
+      ['Favoritos','Cuenta','Accedé a los destinos que guardaste.','favoritos.html','favoritos guardados lista deseos'],
+      ['Quiénes somos','Institucional','Propósito, misión y equipo de BAQUEANO.','nosotros.html','nosotros quienes somos mision vision contacto ayuda faq'],
+      ['Términos y condiciones','Legal','Reglas y condiciones de uso de la plataforma.','terminos.html','terminos condiciones reglas legal'],
+      ['Privacidad','Legal','Tratamiento y protección de datos personales.','privacidad.html','privacidad datos personales seguridad'],
+      ['Política de cookies','Legal','Preferencias, almacenamiento local y uso sin conexión.','cookies.html','cookies consentimiento almacenamiento offline preferencias'],
+      ['Centro SOS y Auxilio','Emergencias','Números nacionales, GPS y herramientas para solicitar ayuda.','#sos','sos emergencia policia ambulancia bomberos auxilio 118 128 115 911']
+    ].map(function(item) { return { title:item[0], category:item[1], description:item[2], url:item[3], keywords:item[4] }; });
+
+    var style = document.createElement('style');
+    style.id = 'bq-site-search-styles';
+    style.textContent = `
+      .bq-search-overlay{position:fixed;inset:0;z-index:2147481000;background:rgba(15,23,42,.56);backdrop-filter:blur(7px);display:grid;place-items:start center;padding:9vh 18px 24px}.bq-search-overlay[hidden]{display:none!important}
+      .bq-search-panel{width:min(780px,100%);max-height:82vh;overflow:hidden;background:#fff;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 28px 80px rgba(15,23,42,.3);font-family:'Inter',system-ui,sans-serif;color:#0F172A}
+      .bq-search-head{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid #E2E8F0}.bq-search-head i{color:#165D6F}.bq-search-field{flex:1;border:0;outline:0;font-size:1rem;color:#0F172A;background:transparent}.bq-search-close{border:0;background:#F1F5F9;color:#475569;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem}
+      .bq-search-meta{padding:11px 18px;color:#64748B;font-size:.78rem;background:#F8FAFC}.bq-search-list{max-height:calc(82vh - 112px);overflow:auto;padding:10px}.bq-search-result{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:13px;border-radius:14px;color:inherit;text-decoration:none;border:1px solid transparent}.bq-search-result:hover,.bq-search-result:focus{background:#F4F9FA;border-color:#CFE0E4;outline:0}.bq-search-result-icon{width:42px;height:42px;border-radius:12px;background:#EDF6F7;color:#165D6F;display:grid;place-items:center}.bq-search-result h3{font:800 .9rem/1.25 'Montserrat',sans-serif;margin:0 0 3px}.bq-search-result p{font-size:.78rem;color:#64748B;margin:0;line-height:1.4}.bq-search-tag{font-size:.68rem;font-weight:800;color:#C84B00;background:#FFF1E8;padding:5px 8px;border-radius:99px}.bq-search-empty{text-align:center;padding:42px 20px;color:#64748B}.bq-search-empty i{display:block;font-size:2rem;color:#CBD5E1;margin-bottom:12px}
+      @media(max-width:600px){.bq-search-overlay{padding:12px}.bq-search-panel{max-height:94vh}.bq-search-result{grid-template-columns:38px 1fr}.bq-search-tag{display:none}.bq-search-list{max-height:calc(94vh - 112px)}}`;
+    document.head.appendChild(style);
+
+    var overlay = document.createElement('div');
+    overlay.id = 'bqSiteSearchResults'; overlay.className = 'bq-search-overlay'; overlay.hidden = true;
+    overlay.innerHTML = '<section class="bq-search-panel" role="dialog" aria-modal="true" aria-labelledby="bqSearchLabel"><div class="bq-search-head"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label id="bqSearchLabel" class="sr-only" for="bqSearchField">Buscar en BAQUEANO</label><input id="bqSearchField" class="bq-search-field" type="search" placeholder="Buscar dentro de BAQUEANO…" autocomplete="off"><button class="bq-search-close" type="button" aria-label="Cerrar búsqueda">×</button></div><div class="bq-search-meta" id="bqSearchMeta">Escribí para buscar páginas y servicios</div><div class="bq-search-list" id="bqSearchList"></div></section>';
+    document.body.appendChild(overlay);
+
+    function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9ñ]+/g,' ').trim(); }
+    function search(query) {
+      var terms = normalize(query).split(/\s+/).filter(Boolean);
+      if (!terms.length) return [];
+      return records.map(function(record) {
+        var title = normalize(record.title), category = normalize(record.category), body = normalize(record.description + ' ' + record.keywords);
+        var score = terms.reduce(function(total, term) { return total + (title.includes(term) ? 12 : 0) + (category.includes(term) ? 6 : 0) + (body.includes(term) ? 3 : 0); }, 0);
+        return { record:record, score:score };
+      }).filter(function(item){ return item.score > 0; }).sort(function(a,b){ return b.score-a.score || a.record.title.localeCompare(b.record.title); }).slice(0,10);
+    }
+    function render(query) {
+      var results = search(query), list = document.getElementById('bqSearchList'), meta = document.getElementById('bqSearchMeta');
+      meta.textContent = results.length ? results.length + ' resultado' + (results.length === 1 ? '' : 's') + ' dentro de BAQUEANO' : 'Búsqueda interna de BAQUEANO';
+      if (!results.length) { list.innerHTML = '<div class="bq-search-empty"><i class="fa-regular fa-compass"></i><strong>No encontramos coincidencias</strong><p>Probá con destino, negocio, música, mapa o departamento.</p></div>'; return; }
+      list.innerHTML = results.map(function(item) { var r=item.record; return '<a class="bq-search-result" href="'+r.url+'"><span class="bq-search-result-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span><span><h3>'+r.title+'</h3><p>'+r.description+'</p></span><span class="bq-search-tag">'+r.category+'</span></a>'; }).join('');
+      var sos = list.querySelector('a[href="#sos"]'); if (sos) sos.addEventListener('click', function(event){ event.preventDefault(); overlay.hidden=true; bqOpenSos(event); });
+    }
+    function open(query) { overlay.hidden=false; var field=document.getElementById('bqSearchField'); field.value=query||''; render(field.value); setTimeout(function(){field.focus();field.select();},30); }
+    function close() { overlay.hidden=true; }
+    document.getElementById('bqSearchField').addEventListener('input', function(event){ render(event.target.value); });
+    overlay.querySelector('.bq-search-close').addEventListener('click', close);
+    overlay.addEventListener('click', function(event){ if(event.target===overlay) close(); });
+    document.addEventListener('keydown', function(event){ if(event.key==='Escape'&&!overlay.hidden) close(); });
+    document.querySelectorAll('form.hero-exact-search, form.destinos-hero-search').forEach(function(form){
+      form.addEventListener('submit', function(event){ event.preventDefault(); var input=form.querySelector('input[type="search"],input[name="q"]'); var value=input?input.value.trim():''; if(value) open(value); else input && input.focus(); });
+    });
+    window.BaqueanoSiteSearch = { open:open, search:search };
+  }
+
+  // ========================================================================
   // 🎯 POR QUÉ: solicitar una decisión informada antes de activar funciones opcionales.
   // ⚙️ CÓMO: guarda una versión del consentimiento, sincroniza preferencias y
   //    emite un evento para que cada módulo respete la selección del visitante.
@@ -668,6 +788,7 @@
     injectGlobalCSS();
     injectCookieConsent();
     removeGlobalSearchButtons();
+    initInternalSiteSearch();
     injectGlobalNavbar();
     upgradeOldFooters();
     injectGlobalFooter();

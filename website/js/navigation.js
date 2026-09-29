@@ -65,7 +65,7 @@ function buildGlobalMegaNavigation() {
       <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
       <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
       <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
-        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
+        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','favoritos.html','ayuda.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
           <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
         </button>
         <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
@@ -100,8 +100,8 @@ function buildGlobalMegaNavigation() {
             <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
             <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
             <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
-            <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-            <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
+            <a href="favoritos.html"><i class="fa-regular fa-heart"></i> Favoritos</a>
+            <a href="ayuda.html"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
             <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
             <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
             <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>

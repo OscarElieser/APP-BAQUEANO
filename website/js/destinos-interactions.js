@@ -14,14 +14,17 @@
   const normalize = (value) => String(value || '').normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   const numberFrom = (value) => Number(String(value || '').replace(/[^0-9.]/g, '')) || 0;
-  const safeStorage = {
+    const safeStorage = {
     read(key) {
       try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch (_) { return []; }
     },
     write(key, value) {
       try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (_) { return false; }
     }
-  };
+    };
+    function favoriteIds() {
+      return [...new Set(['baqueano-favorites','baqueano_favs','baqueano_favs_local'].flatMap((key) => safeStorage.read(key)).map((item) => typeof item === 'string' ? item : (item.id || item.destinationId || '')).filter(Boolean))];
+    }
 
   document.addEventListener('DOMContentLoaded', () => {
     const page = document.querySelector('.page-destinos-exact');
@@ -83,7 +86,7 @@
         (!state.department || card.dataset.location.includes(normalize(state.department))) &&
         priceMatch && Number(card.dataset.rating) >= state.rating &&
         (!state.verified || card.dataset.verified === 'true') &&
-        (!state.favoritesOnly || safeStorage.read('baqueano-favorites').includes(card.dataset.destinationId));
+        (!state.favoritesOnly || favoriteIds().includes(card.dataset.destinationId));
     }
 
     function applyFilters() {
@@ -225,6 +228,7 @@
       const stored = safeStorage.read(key); const exists = stored.includes(id);
       const next = exists ? stored.filter((item) => item !== id) : [...stored, id];
       if (!safeStorage.write(key, next)) return toast('No fue posible guardar en este navegador.');
+      if (key === 'baqueano-favorites') safeStorage.write('baqueano_favs', next);
       button.classList.toggle('active', !exists); button.setAttribute('aria-pressed', String(!exists));
       const icon = button.querySelector('i'); if (icon) icon.className = `${exists ? 'fa-regular' : 'fa-solid'} fa-heart`;
       toast(exists ? 'Destino eliminado.' : addedText);
@@ -235,9 +239,9 @@
       button.textContent = button.classList.contains('active') ? '✓ En Mi viaje' : '+ Mi viaje';
     }));
 
-    const favoriteIds = safeStorage.read('baqueano-favorites');
+    const savedFavoriteIds = favoriteIds();
     document.querySelectorAll('.dest-highlight-heart').forEach((button) => {
-      const saved = favoriteIds.includes(button.closest('article')?.dataset.destinationId);
+      const saved = savedFavoriteIds.includes(button.closest('article')?.dataset.destinationId);
       button.classList.toggle('active', saved); button.setAttribute('aria-pressed', String(saved));
       const icon = button.querySelector('i'); if (icon && saved) icon.className = 'fa-solid fa-heart';
     });
