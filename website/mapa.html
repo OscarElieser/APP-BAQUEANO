@@ -262,6 +262,7 @@
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
+  <link rel="stylesheet" href="css/pages/mapa-exact.css?v=20260929-map-light-1">
 </head>
 
 <body class="page-mapa-exact">
@@ -316,6 +317,26 @@
   </nav>
 
   <!-- BARRA DE HERRAMIENTAS Y FILTROS DEL MAPA -->
+  <!--
+    POR QUÉ: orientar al visitante antes de presentar una herramienta cartográfica compleja.
+    CÓMO: una cabecera editorial clara resume la cobertura, el inventario y el uso del mapa.
+    QUÉ: título, descripción, indicadores territoriales y acceso visual a la exploración.
+  -->
+  <header class="map-intro" aria-labelledby="mapPageTitle">
+    <div class="exact-container map-intro-grid">
+      <div class="map-intro-copy">
+        <span class="map-eyebrow"><i class="fa-solid fa-compass"></i> Atlas interactivo de Nicaragua</span>
+        <h1 id="mapPageTitle">Descubrí Nicaragua<br><span>territorio por territorio</span></h1>
+        <p>Explorá destinos, volcanes, playas, naturaleza, cultura y comunidades locales desde un mapa diseñado para planificar mejor cada recorrido.</p>
+      </div>
+      <div class="map-intro-stats" aria-label="Resumen del mapa">
+        <div class="map-stat"><strong>17</strong><span>territorios</span></div>
+        <div class="map-stat"><strong>10</strong><span>lugares destacados</span></div>
+        <div class="map-stat"><strong>5</strong><span>categorías</span></div>
+      </div>
+    </div>
+  </header>
+
   <div class="map-hub-toolbar">
     <div class="exact-container map-hub-toolbar-inner">
       <div class="map-search-group">
@@ -324,7 +345,7 @@
       </div>
 
       <div class="map-cat-filter-chips">
-        <button type="button" class="map-chip-btn active" data-cat="all">Todos (29)</button>
+        <button type="button" class="map-chip-btn active" data-cat="all">Todos (10)</button>
         <button type="button" class="map-chip-btn" data-cat="volcan">🌋 Volcanes</button>
         <button type="button" class="map-chip-btn" data-cat="playa">🏖️ Playas</button>
         <button type="button" class="map-chip-btn" data-cat="naturaleza">🌿 Naturaleza</button>
@@ -349,6 +370,16 @@
   <!-- CONTENEDOR DEL MAPA PRINCIPAL LEAFLET -->
   <main class="map-main-viewport-container">
     <div id="fullInteractiveMap"></div>
+
+    <div class="map-live-badge" aria-hidden="true"><span></span> Mapa interactivo</div>
+
+    <aside class="map-legend" aria-label="Leyenda de categorías">
+      <strong>Leyenda</strong>
+      <span><i class="legend-dot is-volcano"></i> Volcanes</span>
+      <span><i class="legend-dot is-beach"></i> Playas</span>
+      <span><i class="legend-dot is-nature"></i> Naturaleza</span>
+      <span><i class="legend-dot is-culture"></i> Cultura</span>
+    </aside>
 
     <!-- Tarjeta flotante de destino seleccionado -->
     <div class="map-floating-drawer" id="mapPlaceDrawer">

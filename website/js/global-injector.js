@@ -52,6 +52,7 @@
     var needed = [
       { id: 'bq-styles',    href: 'styles.css?v=20260927-exact-1' },
       { id: 'bq-modules',   href: 'css/modules.css' },
+      { id: 'bq-index-ui',  href: 'css/pages/index-exact.css?v=20260927-exact-1' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
       { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
@@ -230,6 +231,68 @@
       '<div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar"></div>' +
       '<div class="exact-nav-actions global-nav-actions"></div>' +
     '</div>';
+  }
+
+  // Sincroniza literalmente los dos componentes institucionales con index.html.
+  // POR QUÉ: evita que páginas heredadas mantengan versiones visuales distintas.
+  // CÓMO: obtiene el documento raíz, clona sus componentes y conserva el estado
+  // activo correspondiente a la página que el visitante está consultando.
+  // QUÉ: un solo menú y un solo footer para todo el portal público.
+  async function syncShellWithIndex() {
+    if (currentPage === 'index.html' || currentPage === 'admin.html') return;
+
+    try {
+      var response = await fetch('index.html', { cache: 'no-store' });
+      if (!response.ok) throw new Error('No se pudo cargar la interfaz raíz');
+
+      var source = new DOMParser().parseFromString(await response.text(), 'text/html');
+      var sourceNav = source.querySelector('#mainNavbar');
+      var sourceFooter = source.querySelector('#siteFooter');
+      var currentNav = document.querySelector('#mainNavbar, nav.main-navbar, nav.main-navbar-exact');
+      var currentFooter = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
+
+      if (sourceNav) {
+        var navClone = document.importNode(sourceNav, true);
+        navClone.querySelectorAll('.active').forEach(function (item) { item.classList.remove('active'); });
+
+        var activeGroups = {
+          'destinos.html': 'destinos.html',
+          'departamento.html': 'destinos.html',
+          'mapa.html': 'destinos.html',
+          'experiencias.html': 'destinos.html',
+          'historia.html': 'historia.html',
+          'gastronomia.html': 'historia.html',
+          'musica.html': 'historia.html',
+          'ambiental.html': 'historia.html',
+          'baqueano-ai.html': 'baqueano-ai.html',
+          'baqueano-ia.html': 'baqueano-ai.html',
+          'mi-viaje.html': 'mi-viaje.html'
+        };
+        var activeHref = activeGroups[currentPage];
+        if (activeHref) {
+          var activeLink = navClone.querySelector('a[href="' + activeHref + '"]');
+          if (activeLink) activeLink.classList.add('active');
+        } else {
+          var moreTrigger = navClone.querySelector('.nav-dropdown-trigger, .exact-nav-dropdown-btn');
+          if (moreTrigger) moreTrigger.classList.add('active');
+        }
+
+        if (currentNav) currentNav.replaceWith(navClone);
+        else document.body.insertBefore(navClone, document.body.firstChild);
+      }
+
+      if (sourceFooter) {
+        var footerClone = document.importNode(sourceFooter, true);
+        if (currentFooter) currentFooter.replaceWith(footerClone);
+        else document.body.appendChild(footerClone);
+      }
+
+      if (typeof buildGlobalMegaNavigation === 'function') buildGlobalMegaNavigation();
+      wireNavbarButtons(document.getElementById('mainNavbar'));
+      wireExistingSosButtons();
+    } catch (error) {
+      console.warn('[BaqueanoShell] Se conservó la interfaz local:', error);
+    }
   }
 
   function wireNavbarButtons(nav) {
@@ -519,6 +582,7 @@
     if (typeof buildGlobalMegaNavigation === 'function') {
       buildGlobalMegaNavigation();
     }
+    syncShellWithIndex();
   }
 
   if (document.readyState === 'loading') {

@@ -1,0 +1,70 @@
+/*
+============================================================================
+BAQUEANO — EXPERIENCIA CARTOGRÁFICA CLARA
+============================================================================
+POR QUÉ:
+- El mapa debe ser una herramienta de viaje cuidada, legible y fácil de usar.
+- La superficie blanca permite que el territorio sea el protagonista.
+
+CÓMO:
+- Jerarquía de tres niveles: introducción, herramientas y mapa.
+- Paleta institucional para estados, acciones y detalles sin saturación.
+- Controles táctiles amplios y respuesta fluida en todos los tamaños.
+
+QUÉ:
+- Cabecera editorial, métricas, filtros claros, mapa enmarcado, leyenda y ficha.
+============================================================================
+*/
+.page-mapa-exact {
+  --map-teal: #165D6F; --map-orange: #F65E01; --map-cream: #F4E6C1;
+  --map-ink: #0F172A; --map-muted: #64748B; --map-line: #E2E8F0;
+  background: #FFFFFF !important; color: var(--map-ink) !important; min-height: 100vh;
+}
+.map-intro { position: relative; overflow: hidden; padding: clamp(44px,6vw,82px) 0 clamp(36px,5vw,68px); background: radial-gradient(circle at 88% 20%,rgba(244,230,193,.78),transparent 28%),radial-gradient(circle at 7% 100%,rgba(22,93,111,.09),transparent 30%),#FFF; border-bottom: 1px solid #EDF2F7; }
+.map-intro::after { content:''; position:absolute; width:280px; height:280px; right:-110px; top:-150px; border:48px solid rgba(246,94,1,.08); border-radius:50%; pointer-events:none; }
+.map-intro-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr); align-items:end; gap:clamp(32px,7vw,96px); }
+.map-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:17px; color:var(--map-teal); font-size:.76rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.map-eyebrow i { color:var(--map-orange); }
+.map-intro h1 { max-width:790px; margin:0; color:var(--map-ink); font-family:'Montserrat',sans-serif; font-size:clamp(2.25rem,5vw,4.65rem); font-weight:900; letter-spacing:-.055em; line-height:.98; }
+.map-intro h1 span { color:var(--map-teal); }
+.map-intro-copy p { max-width:720px; margin:24px 0 0; color:var(--map-muted); font-size:clamp(.98rem,1.35vw,1.12rem); line-height:1.75; }
+.map-intro-stats { display:grid; grid-template-columns:repeat(3,1fr); padding:19px; background:rgba(255,255,255,.82); border:1px solid rgba(22,93,111,.13); border-radius:22px; box-shadow:0 22px 60px rgba(15,23,42,.09); backdrop-filter:blur(16px); }
+.map-stat { display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 10px; text-align:center; }
+.map-stat + .map-stat { border-left:1px solid var(--map-line); }
+.map-stat strong { color:var(--map-orange); font:900 1.6rem/1 'Montserrat',sans-serif; }
+.map-stat span { color:var(--map-muted); font-size:.68rem; font-weight:700; line-height:1.2; }
+.page-mapa-exact .map-hub-toolbar { position:relative; top:auto; z-index:700; padding:20px 0; background:rgba(255,255,255,.96); border-bottom:1px solid var(--map-line); box-shadow:0 12px 30px rgba(15,23,42,.05); }
+.page-mapa-exact .map-hub-toolbar-inner { gap:14px; }
+.page-mapa-exact .map-search-group { min-height:48px; padding:5px 17px; background:#F8FAFC; border:1px solid #CBD5E1; border-radius:14px; color:var(--map-teal); box-shadow:inset 0 1px 0 #FFF; }
+.page-mapa-exact .map-search-group:focus-within { border-color:var(--map-teal); box-shadow:0 0 0 4px rgba(22,93,111,.1); }
+.page-mapa-exact .map-search-group input { color:var(--map-ink); font-size:.86rem; }
+.page-mapa-exact .map-search-group input::placeholder { color:#94A3B8; }
+.page-mapa-exact .map-cat-filter-chips { scrollbar-width:none; }
+.page-mapa-exact .map-cat-filter-chips::-webkit-scrollbar { display:none; }
+.page-mapa-exact .map-chip-btn { min-height:40px; padding:8px 14px; background:#FFF; border:1px solid var(--map-line); color:#475569; box-shadow:0 3px 10px rgba(15,23,42,.035); }
+.page-mapa-exact .map-chip-btn:hover { background:#F1F7F8; border-color:rgba(22,93,111,.35); color:var(--map-teal); transform:translateY(-1px); }
+.page-mapa-exact .map-chip-btn.active { background:var(--map-teal); border-color:var(--map-teal); color:#FFF; box-shadow:0 8px 20px rgba(22,93,111,.2); }
+.page-mapa-exact .btn-map-action { min-height:40px; padding:8px 13px; background:#FFF; border:1px solid #CBD5E1; border-radius:11px; color:var(--map-ink); box-shadow:0 4px 12px rgba(15,23,42,.05); }
+.page-mapa-exact .btn-map-action:hover { background:#F8FAFC; border-color:var(--map-teal); color:var(--map-teal); transform:translateY(-1px); }
+.page-mapa-exact .map-main-viewport-container { min-height:680px; padding:clamp(16px,2.5vw,34px); background:#F8FAFC; }
+.page-mapa-exact #fullInteractiveMap { min-height:640px; height:min(72vh,780px); overflow:hidden; border:1px solid #D8E1E8; border-radius:26px; box-shadow:0 24px 70px rgba(15,23,42,.14); }
+.map-live-badge { position:absolute; z-index:610; top:55px; left:58px; display:inline-flex; align-items:center; gap:8px; padding:9px 13px; background:rgba(255,255,255,.93); border:1px solid rgba(22,93,111,.15); border-radius:999px; color:var(--map-ink); font-size:.72rem; font-weight:800; box-shadow:0 8px 24px rgba(15,23,42,.14); backdrop-filter:blur(12px); }
+.map-live-badge span { width:8px; height:8px; background:#10B981; border-radius:50%; box-shadow:0 0 0 5px rgba(16,185,129,.14); }
+.map-legend { position:absolute; z-index:610; right:56px; bottom:55px; display:grid; grid-template-columns:repeat(2,auto); gap:9px 18px; padding:16px 18px; background:rgba(255,255,255,.94); border:1px solid rgba(22,93,111,.13); border-radius:16px; color:#475569; font-size:.72rem; font-weight:700; box-shadow:0 12px 35px rgba(15,23,42,.15); backdrop-filter:blur(14px); }
+.map-legend strong { grid-column:1/-1; color:var(--map-ink); font:800 .74rem 'Montserrat',sans-serif; }
+.map-legend span { display:flex; align-items:center; gap:7px; }
+.legend-dot { width:9px; height:9px; border-radius:50%; }
+.legend-dot.is-volcano { background:#DC2626; } .legend-dot.is-beach { background:#0284C7; } .legend-dot.is-nature { background:#10B981; } .legend-dot.is-culture { background:var(--map-orange); }
+.page-mapa-exact .map-floating-drawer { bottom:58px; left:58px; max-width:390px; padding:18px; background:rgba(255,255,255,.97); border:1px solid rgba(22,93,111,.15); border-radius:20px; color:var(--map-ink); box-shadow:0 24px 65px rgba(15,23,42,.2); }
+.page-mapa-exact .drawer-close-btn { color:#475569; } .page-mapa-exact .drawer-close-btn:hover { color:var(--map-orange); }
+.page-mapa-exact .drawer-img { height:165px; border-radius:13px; }
+.page-mapa-exact .drawer-title { color:var(--map-ink); font-size:1.25rem; }
+.page-mapa-exact .drawer-meta { color:var(--map-teal); font-weight:700; }
+.page-mapa-exact .drawer-desc { color:var(--map-muted); font-size:.86rem; line-height:1.6; }
+.page-mapa-exact .btn-drawer-primary { padding:11px 13px; border-radius:10px; }
+.page-mapa-exact .btn-drawer-secondary { padding:11px 13px; background:#E9F2F4; color:var(--map-teal); border-radius:10px; }
+.page-mapa-exact .leaflet-control-zoom { overflow:hidden; border:0; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.18); }
+.page-mapa-exact .leaflet-control-zoom a { color:var(--map-ink); border-color:var(--map-line); }
+@media (max-width:1120px) { .map-intro-grid { grid-template-columns:1fr; } .map-intro-stats { max-width:620px; } .page-mapa-exact .map-hub-toolbar-inner { align-items:stretch; } .page-mapa-exact .map-search-group { width:100%; } .page-mapa-exact .map-cat-filter-chips { order:3; width:100%; } }
+@media (max-width:720px) { .map-intro { padding:34px 0 30px; } .map-intro h1 { font-size:clamp(2rem,11vw,3.2rem); } .map-intro-copy p { margin-top:18px; line-height:1.6; } .map-intro-stats { padding:12px 6px; border-radius:17px; } .map-stat strong { font-size:1.3rem; } .page-mapa-exact .map-hub-toolbar { padding:14px 0; } .page-mapa-exact .map-view-actions { width:100%; overflow-x:auto; } .page-mapa-exact .btn-map-action { flex:1 0 auto; justify-content:center; } .page-mapa-exact .map-main-viewport-container { min-height:560px; padding:10px; } .page-mapa-exact #fullInteractiveMap { min-height:540px; height:68vh; border-radius:18px; } .map-live-badge { top:25px; left:24px; } .map-legend { right:24px; bottom:25px; grid-template-columns:1fr; } .map-legend strong { grid-column:auto; } .page-mapa-exact .map-floating-drawer { left:20px; right:20px; bottom:20px; width:auto; max-width:none; } }
+@media (prefers-reduced-motion:reduce) { .page-mapa-exact *,.page-mapa-exact *::before,.page-mapa-exact *::after { transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }

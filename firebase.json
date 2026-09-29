@@ -70,6 +70,16 @@
         "type": 301
       },
       {
+        "source": "/departamentos",
+        "destination": "/departamento.html",
+        "type": 302
+      },
+      {
+        "source": "/departamentos.html",
+        "destination": "/departamento.html",
+        "type": 302
+      },
+      {
         "source": "/ops",
         "destination": "/admin.html",
         "type": 301

@@ -235,42 +235,54 @@
 
           <!-- Derecha: Explorador con ficha destacada y listado -->
           <div class="hist-dept-explorer-card">
-            <div class="hist-section-header" style="margin-bottom: 10px;">
+            <div class="hist-section-header hist-territory-heading">
               <div>
-                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; margin: 0; color: #0B253A;"><i class="fa-solid fa-book-bookmark" style="color: #10B981;"></i> Explorador de los 17 territorios</h3>
-                <p style="font-size: 0.72rem; color: #64748B; margin: 2px 0 0 0;">Seleccioná un territorio para descubrir su historia, cultura, personajes y sitios emblemáticos.</p>
+                <span class="hist-territory-kicker">RUTA TERRITORIAL</span>
+                <h3><i class="fa-solid fa-compass"></i> Explorador de los 17 territorios</h3>
+                <p>Un recorrido continuo por la historia, cultura y naturaleza de Nicaragua.</p>
               </div>
+              <a href="departamentos.html" class="hist-territory-directory-link">Ver guía completa <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </div>
 
-            <!-- Ficha Destacada: León -->
-            <div class="hist-explorer-top-highlight">
-              <img src="assets/images/departamentos/leon.png" alt="León" class="hist-highlight-img">
+            <!-- Ficha destacada sincronizada con el recorrido automático -->
+            <div class="hist-explorer-top-highlight" id="territoryHighlight" aria-live="polite">
+              <span class="hist-territory-count"><strong id="territoryCurrent">01</strong> / 17</span>
+              <img src="assets/images/departamentos/leon.png" alt="León" class="hist-highlight-img" id="territoryHighlightImage">
               <div class="hist-highlight-info">
-                <h4>León</h4>
-                <p>Cuna de la independencia, ciudad de arte, historia y tradiciones.</p>
-                <a href="destinos.html?id=leon" class="hist-btn-explore-dept">Explorar León <i class="fa-solid fa-arrow-right"></i></a>
+                <span class="hist-highlight-eyebrow" id="territoryHighlightRegion">Occidente cultural</span>
+                <h4 id="territoryHighlightTitle">León</h4>
+                <p id="territoryHighlightDescription">Cuna de la independencia, ciudad de arte, historia y tradiciones.</p>
+                <a href="departamento.html?id=leon" class="hist-btn-explore-dept" id="territoryHighlightLink">Explorar León <i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
 
-            <!-- Listado 2 columnas de los 17 Departamentos -->
-            <div class="hist-depts-list-grid">
-              <a href="destinos.html?dept=Managua" class="hist-dept-pill"><img src="assets/images/departamentos/managua.png" alt="Managua" class="hist-dept-thumb"> Managua</a>
-              <a href="destinos.html?dept=Jinotega" class="hist-dept-pill"><img src="assets/images/departamentos/jinotega.jpg" alt="Jinotega" class="hist-dept-thumb"> Jinotega</a>
-              <a href="destinos.html?dept=Masaya" class="hist-dept-pill"><img src="assets/images/departamentos/masaya.png" alt="Masaya" class="hist-dept-thumb"> Masaya</a>
-              <a href="destinos.html?dept=Matagalpa" class="hist-dept-pill"><img src="assets/images/departamentos/matagalpa.png" alt="Matagalpa" class="hist-dept-thumb"> Matagalpa</a>
-              <a href="destinos.html?dept=Granada" class="hist-dept-pill"><img src="assets/images/departamentos/granada.jpg" alt="Granada" class="hist-dept-thumb"> Granada</a>
-              <a href="destinos.html?dept=Esteli" class="hist-dept-pill"><img src="assets/images/departamentos/esteli.png" alt="Estelí" class="hist-dept-thumb"> Estelí</a>
-              <a href="destinos.html?dept=Carazo" class="hist-dept-pill"><img src="assets/images/departamentos/carazo.png" alt="Carazo" class="hist-dept-thumb"> Carazo</a>
-              <a href="destinos.html?dept=Boaco" class="hist-dept-pill"><img src="assets/images/departamentos/boaco.png" alt="Boaco" class="hist-dept-thumb"> Boaco</a>
-              <a href="destinos.html?dept=Rivas" class="hist-dept-pill"><img src="assets/images/departamentos/rivas.png" alt="Rivas" class="hist-dept-thumb"> Rivas</a>
-              <a href="destinos.html?dept=Chontales" class="hist-dept-pill"><img src="assets/images/departamentos/chontales.png" alt="Chontales" class="hist-dept-thumb"> Chontales</a>
-              <a href="destinos.html?dept=Leon" class="hist-dept-pill"><img src="assets/images/departamentos/leon.png" alt="León" class="hist-dept-thumb"> León</a>
-              <a href="destinos.html?dept=RioSanJuan" class="hist-dept-pill"><img src="assets/images/departamentos/rio san juan.png" alt="Río San Juan" class="hist-dept-thumb"> Río San Juan</a>
-              <a href="destinos.html?dept=Chinandega" class="hist-dept-pill"><img src="assets/images/departamentos/chinandega.jpg" alt="Chinandega" class="hist-dept-thumb"> Chinandega</a>
-              <a href="destinos.html?dept=RACCN" class="hist-dept-pill"><img src="assets/images/departamentos/RAAN1.png" alt="RACCN" class="hist-dept-thumb"> RACCN</a>
-              <a href="destinos.html?dept=Madriz" class="hist-dept-pill"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Madriz" class="hist-dept-thumb"> Madriz</a>
-              <a href="destinos.html?dept=RACCS" class="hist-dept-pill"><img src="assets/images/departamentos/RAAS.png" alt="RACCS" class="hist-dept-thumb"> RACCS</a>
-              <a href="destinos.html?dept=NuevaSegovia" class="hist-dept-pill"><img src="assets/images/departamentos/nueva segovia.png" alt="Nueva Segovia" class="hist-dept-thumb"> Nueva Segovia</a>
+            <!-- Carrusel infinito de los 17 territorios -->
+            <div class="hist-territory-carousel" id="territoryCarousel">
+              <div class="hist-depts-list-grid" id="territoryTrack">
+                <a href="departamento.html?id=leon" class="hist-dept-pill is-active" data-name="León" data-region="Occidente cultural" data-description="Cuna de la independencia, ciudad de arte, historia y tradiciones." data-image="assets/images/departamentos/leon.png"><img src="assets/images/departamentos/leon.png" alt="León" class="hist-dept-thumb"><span>León</span></a>
+                <a href="departamento.html?id=managua" class="hist-dept-pill" data-name="Managua" data-region="Capital viva" data-description="Memoria nacional, arquitectura, lagunas y cultura urbana frente al Xolotlán." data-image="assets/images/departamentos/managua.png"><img src="assets/images/departamentos/managua.png" alt="Managua" class="hist-dept-thumb"><span>Managua</span></a>
+                <a href="departamento.html?id=jinotega" class="hist-dept-pill" data-name="Jinotega" data-region="Montañas del norte" data-description="Café, neblina, reservas naturales y comunidades entre montañas." data-image="assets/images/departamentos/jinotega.jpg"><img src="assets/images/departamentos/jinotega.jpg" alt="Jinotega" class="hist-dept-thumb"><span>Jinotega</span></a>
+                <a href="departamento.html?id=masaya" class="hist-dept-pill" data-name="Masaya" data-region="Cuna del folclore" data-description="Artesanía, marimba, tradiciones y la fuerza viva del volcán." data-image="assets/images/departamentos/masaya.png"><img src="assets/images/departamentos/masaya.png" alt="Masaya" class="hist-dept-thumb"><span>Masaya</span></a>
+                <a href="departamento.html?id=matagalpa" class="hist-dept-pill" data-name="Matagalpa" data-region="Ruta del café" data-description="Bosques de altura, fincas cafetaleras y memoria indígena del norte." data-image="assets/images/departamentos/matagalpa.png"><img src="assets/images/departamentos/matagalpa.png" alt="Matagalpa" class="hist-dept-thumb"><span>Matagalpa</span></a>
+                <a href="departamento.html?id=granada" class="hist-dept-pill" data-name="Granada" data-region="Ciudad colonial" data-description="Arquitectura histórica, isletas y tradición junto al Gran Lago." data-image="assets/images/departamentos/granada.jpg"><img src="assets/images/departamentos/granada.jpg" alt="Granada" class="hist-dept-thumb"><span>Granada</span></a>
+                <a href="departamento.html?id=esteli" class="hist-dept-pill" data-name="Estelí" data-region="Norte creativo" data-description="Murales, tabaco, reservas y una identidad cultural profundamente viva." data-image="assets/images/departamentos/esteli.png"><img src="assets/images/departamentos/esteli.png" alt="Estelí" class="hist-dept-thumb"><span>Estelí</span></a>
+                <a href="departamento.html?id=carazo" class="hist-dept-pill" data-name="Carazo" data-region="Meseta de los pueblos" data-description="Café, playas, fiestas patronales y tradición en la meseta del Pacífico." data-image="assets/images/departamentos/carazo.png"><img src="assets/images/departamentos/carazo.png" alt="Carazo" class="hist-dept-thumb"><span>Carazo</span></a>
+                <a href="departamento.html?id=boaco" class="hist-dept-pill" data-name="Boaco" data-region="Corazón ganadero" data-description="Paisajes ondulados, tradición campesina y rutas rurales auténticas." data-image="assets/images/departamentos/boaco.png"><img src="assets/images/departamentos/boaco.png" alt="Boaco" class="hist-dept-thumb"><span>Boaco</span></a>
+                <a href="departamento.html?id=rivas" class="hist-dept-pill" data-name="Rivas" data-region="Tierra de volcanes" data-description="Ometepe, playas del Pacífico y una historia marcada por el Gran Lago." data-image="assets/images/departamentos/rivas.png"><img src="assets/images/departamentos/rivas.png" alt="Rivas" class="hist-dept-thumb"><span>Rivas</span></a>
+                <a href="departamento.html?id=chontales" class="hist-dept-pill" data-name="Chontales" data-region="Sierra y tradición" data-description="Ganadería, arqueología, montañas y cultura del centro nicaragüense." data-image="assets/images/departamentos/chontales.png"><img src="assets/images/departamentos/chontales.png" alt="Chontales" class="hist-dept-thumb"><span>Chontales</span></a>
+                <a href="departamento.html?id=rio-san-juan" class="hist-dept-pill" data-name="Río San Juan" data-region="Ruta del agua" data-description="Fortalezas, selva tropical y navegación por una frontera histórica." data-image="assets/images/departamentos/rio san juan.png"><img src="assets/images/departamentos/rio san juan.png" alt="Río San Juan" class="hist-dept-thumb"><span>Río San Juan</span></a>
+                <a href="departamento.html?id=chinandega" class="hist-dept-pill" data-name="Chinandega" data-region="Occidente volcánico" data-description="Volcanes, manglares, playas y ciudades llenas de tradición." data-image="assets/images/departamentos/chinandega.jpg"><img src="assets/images/departamentos/chinandega.jpg" alt="Chinandega" class="hist-dept-thumb"><span>Chinandega</span></a>
+                <a href="departamento.html?id=raccn" class="hist-dept-pill" data-name="Costa Caribe Norte" data-region="Caribe ancestral" data-description="Pueblos originarios, ríos, bosques y diversidad cultural caribeña." data-image="assets/images/departamentos/RAAN1.png"><img src="assets/images/departamentos/RAAN1.png" alt="Costa Caribe Norte" class="hist-dept-thumb"><span>RACCN</span></a>
+                <a href="departamento.html?id=madriz" class="hist-dept-pill" data-name="Madriz" data-region="Cañón y montaña" data-description="El Cañón de Somoto, artesanía y comunidades del corredor seco." data-image="assets/images/destinos/canon_de_somoto.jpg"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Madriz" class="hist-dept-thumb"><span>Madriz</span></a>
+                <a href="departamento.html?id=raccs" class="hist-dept-pill" data-name="Costa Caribe Sur" data-region="Caribe insular" data-description="Islas, arrecifes, sabores afrocaribeños y selvas de enorme riqueza." data-image="assets/images/departamentos/RAAS.png"><img src="assets/images/departamentos/RAAS.png" alt="Costa Caribe Sur" class="hist-dept-thumb"><span>RACCS</span></a>
+                <a href="departamento.html?id=nueva-segovia" class="hist-dept-pill" data-name="Nueva Segovia" data-region="Frontera norte" data-description="Pinares, café de altura, historia y pueblos entre montañas." data-image="assets/images/departamentos/nueva segovia.png"><img src="assets/images/departamentos/nueva segovia.png" alt="Nueva Segovia" class="hist-dept-thumb"><span>Nueva Segovia</span></a>
+              </div>
+            </div>
+            <div class="hist-territory-controls" aria-label="Controles del explorador territorial">
+              <button type="button" id="territoryPrevious" aria-label="Territorio anterior"><i class="fa-solid fa-arrow-left"></i></button>
+              <button type="button" id="territoryPause" class="hist-territory-pause" aria-label="Pausar recorrido" aria-pressed="false"><i class="fa-solid fa-pause"></i><span>Pausar</span></button>
+              <button type="button" id="territoryNext" aria-label="Territorio siguiente"><i class="fa-solid fa-arrow-right"></i></button>
+              <span class="hist-territory-progress" aria-hidden="true"><span id="territoryProgressBar"></span></span>
             </div>
           </div>
         </div>
@@ -825,6 +837,7 @@
       }
     });
   </script>
+<script src="js/territory-carousel.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/global-injector.js"></script>
 </body>
