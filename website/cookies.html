@@ -41,6 +41,12 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages/cookies-exact.css">
+  <!--
+    🎯 POR QUÉ: cargar los ajustes de contraste y consistencia visual de esta vista legal.
+    ⚙️ CÓMO: la capa de refinamiento se aplica después de la maqueta base.
+    📦 QUÉ: tema claro, cabecera única y componentes con lectura accesible.
+  -->
+  <link rel="stylesheet" href="css/pages/cookies.css?v=20260929-light-v1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
     <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
@@ -769,14 +775,45 @@
       const prefToggle = document.getElementById('prefToggle');
       const analyticsToggle = document.getElementById('analyticsToggle');
 
+      // 🎯 POR QUÉ: reflejar aquí la misma decisión tomada en el aviso global.
+      // ⚙️ CÓMO: lee y actualiza el registro versionado de consentimiento local.
+      // 📦 QUÉ: interruptores sincronizados con Aceptar, Rechazar y Configurar.
+      const consentKey = 'baqueano_cookie_consent_v1';
+      const readConsent = () => {
+        try { return JSON.parse(localStorage.getItem(consentKey) || 'null'); }
+        catch (error) { return null; }
+      };
+      const syncConsentControls = (consent) => {
+        if (!consent) return;
+        if (prefToggle) prefToggle.checked = Boolean(consent.preferences);
+        if (analyticsToggle) analyticsToggle.checked = Boolean(consent.analytics);
+      };
+      const saveConsentControls = () => {
+        const consent = {
+          essential: true,
+          preferences: prefToggle ? prefToggle.checked : false,
+          analytics: analyticsToggle ? analyticsToggle.checked : false,
+          version: 1,
+          updatedAt: new Date().toISOString()
+        };
+        localStorage.setItem(consentKey, JSON.stringify(consent));
+        window.BaqueanoConsent = consent;
+        window.dispatchEvent(new CustomEvent('baqueano:consent', { detail: consent }));
+      };
+
+      syncConsentControls(readConsent());
+      window.addEventListener('baqueano:consent', (event) => syncConsentControls(event.detail));
+
       if (prefToggle) {
         prefToggle.addEventListener('change', (e) => {
           localStorage.setItem('baqueano_pref_enabled', e.target.checked);
+          saveConsentControls();
         });
       }
       if (analyticsToggle) {
         analyticsToggle.addEventListener('change', (e) => {
           localStorage.setItem('baqueano_analytics_enabled', e.target.checked);
+          saveConsentControls();
         });
       }
     });

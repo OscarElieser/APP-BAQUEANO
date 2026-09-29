@@ -447,7 +447,9 @@
         '</div>' +
       '</div>';
     modal.addEventListener('click', function(e) { if (e.target === modal) bqCloseSos(); });
-    document.body.appendChild(modal);
+    var footerBoundary = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
+    if (footerBoundary && footerBoundary.parentNode) footerBoundary.parentNode.insertBefore(modal, footerBoundary);
+    else document.body.appendChild(modal);
   }
 
   window.bqOpenSos = function(e) {
@@ -567,8 +569,127 @@
   });
 
   // ── INICIALIZACIÓN ────────────────────────────────────────────────────────
-  function init() {
+  // POR QUÉ: el footer representa el cierre semántico y visual del documento.
+  // CÓMO: mueve ventanas auxiliares heredadas justo antes del footer y fuerza
+  // su estado cerrado; los scripts conservan su posición porque no renderizan.
+  // QUÉ: ninguna tarjeta SOS vuelve a aparecer como contenido posterior al pie.
+  function normalizeFooterBoundary() {
+    var footer = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
+    if (!footer || !footer.parentNode) return;
+    var boundaryParent = footer.parentNode;
+    document.querySelectorAll('.exact-modal-backdrop').forEach(function(modal) {
+      if (!modal.classList.contains('is-open') && !modal.classList.contains('active') && !modal.classList.contains('open')) {
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      if (footer.parentNode === boundaryParent && boundaryParent.contains(footer)) {
+        boundaryParent.insertBefore(modal, footer);
+      }
+    });
+  }
+
+  // ========================================================================
+  // 🎯 POR QUÉ: solicitar una decisión informada antes de activar funciones opcionales.
+  // ⚙️ CÓMO: guarda una versión del consentimiento, sincroniza preferencias y
+  //    emite un evento para que cada módulo respete la selección del visitante.
+  // 📦 QUÉ: aviso global, panel configurable y acceso permanente para revisarlo.
+  // ========================================================================
+  function injectCookieConsent() {
+    var STORAGE_KEY = 'baqueano_cookie_consent_v1';
+    var COOKIE_NAME = 'bq_consent';
+    if (document.getElementById('bqCookieConsent')) return;
+
+    var style = document.createElement('style');
+    style.id = 'bq-cookie-consent-styles';
+    style.textContent = `
+      .bq-cookie-layer{position:fixed;inset:0;z-index:2147483000;background:rgba(15,23,42,.5);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:20px}
+      .bq-cookie-layer[hidden],.bq-cookie-settings[hidden],.bq-cookie-manage[hidden]{display:none!important}
+      .bq-cookie-card{width:min(1120px,100%);background:#fff;color:#0F172A;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 24px 70px rgba(15,23,42,.25);padding:24px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;font-family:'Inter',system-ui,sans-serif}
+      .bq-cookie-copy{display:flex;gap:16px;align-items:flex-start}.bq-cookie-icon{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:#FFF1E8;color:#F65E01;display:grid;place-items:center;font-size:1.35rem}
+      .bq-cookie-title{font:800 1.15rem/1.25 'Montserrat',sans-serif;margin:0 0 7px;color:#0F172A}.bq-cookie-text{margin:0;color:#52627A;font-size:.91rem;line-height:1.55}.bq-cookie-text a{color:#165D6F;font-weight:800}
+      .bq-cookie-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.bq-cookie-btn{border-radius:12px;padding:11px 16px;font-weight:800;font-size:.84rem;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid #CBD5E1;background:#fff;color:#0F172A}.bq-cookie-btn:hover{transform:translateY(-1px)}
+      .bq-cookie-reject{color:#165D6F;border-color:#165D6F}.bq-cookie-accept{color:#fff;background:#165D6F;border-color:#165D6F;box-shadow:0 8px 18px rgba(22,93,111,.22)}
+      .bq-cookie-settings{grid-column:1/-1;border-top:1px solid #E2E8F0;padding-top:18px}.bq-cookie-option{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:12px 0}.bq-cookie-option+ .bq-cookie-option{border-top:1px solid #EEF2F6}.bq-cookie-option strong{display:block;font-size:.9rem}.bq-cookie-option small{display:block;color:#64748B;margin-top:3px}.bq-cookie-check{width:20px;height:20px;accent-color:#165D6F}
+      .bq-cookie-manage{position:fixed;left:16px;bottom:16px;z-index:2147482000;border:1px solid #D7E2E6;border-radius:999px;background:#fff;color:#165D6F;box-shadow:0 8px 24px rgba(15,23,42,.16);padding:9px 13px;font-weight:800;font-size:.78rem;cursor:pointer}
+      @media(max-width:760px){.bq-cookie-layer{padding:10px}.bq-cookie-card{grid-template-columns:1fr;padding:18px;border-radius:18px;gap:17px}.bq-cookie-copy{gap:12px}.bq-cookie-icon{width:42px;height:42px;flex-basis:42px}.bq-cookie-actions{justify-content:stretch}.bq-cookie-btn{flex:1 1 46%;}.bq-cookie-accept{flex-basis:100%}.bq-cookie-option{align-items:flex-start}}
+    `;
+    document.head.appendChild(style);
+
+    var layer = document.createElement('div');
+    layer.id = 'bqCookieConsent';
+    layer.className = 'bq-cookie-layer';
+    layer.setAttribute('role', 'dialog');
+    layer.setAttribute('aria-modal', 'true');
+    layer.setAttribute('aria-labelledby', 'bqCookieTitle');
+    layer.innerHTML = `
+      <div class="bq-cookie-card">
+        <div class="bq-cookie-copy"><div class="bq-cookie-icon" aria-hidden="true"><i class="fa-solid fa-cookie-bite"></i></div><div><h2 class="bq-cookie-title" id="bqCookieTitle">Tu privacidad y tus preferencias</h2><p class="bq-cookie-text">Usamos almacenamiento esencial para que BAQUEANO funcione y, con tu permiso, preferencias y analítica para mejorar tu experiencia. Podés aceptar, rechazar o configurar. <a href="cookies.html">Ver política de cookies</a>.</p></div></div>
+        <div class="bq-cookie-actions"><button type="button" class="bq-cookie-btn bq-cookie-reject" data-cookie-action="reject">Rechazar opcionales</button><button type="button" class="bq-cookie-btn" data-cookie-action="settings">Configurar</button><button type="button" class="bq-cookie-btn bq-cookie-accept" data-cookie-action="accept">Aceptar todas</button></div>
+        <div class="bq-cookie-settings" id="bqCookieSettings" hidden>
+          <div class="bq-cookie-option"><div><strong>Cookies esenciales</strong><small>Seguridad, navegación y conservación de tu elección.</small></div><input class="bq-cookie-check" type="checkbox" checked disabled aria-label="Cookies esenciales siempre activas"></div>
+          <div class="bq-cookie-option"><div><strong>Preferencias</strong><small>Idioma, tema, región y personalización.</small></div><input class="bq-cookie-check" id="bqConsentPreferences" type="checkbox"></div>
+          <div class="bq-cookie-option"><div><strong>Analítica opcional</strong><small>Mediciones anónimas para mejorar el servicio.</small></div><input class="bq-cookie-check" id="bqConsentAnalytics" type="checkbox"></div>
+          <div class="bq-cookie-actions"><button type="button" class="bq-cookie-btn bq-cookie-accept" data-cookie-action="save">Guardar selección</button></div>
+        </div>
+      </div>`;
+    document.body.appendChild(layer);
+
+    var manage = document.createElement('button');
+    manage.type = 'button';
+    manage.className = 'bq-cookie-manage';
+    manage.innerHTML = '<i class="fa-solid fa-cookie-bite" aria-hidden="true"></i> Cookies';
+    manage.setAttribute('aria-label', 'Administrar preferencias de cookies');
+    document.body.appendChild(manage);
+
+    function readConsent() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch (error) { return null; }
+    }
+    function applyConsent(preferences, analytics) {
+      var consent = { essential: true, preferences: !!preferences, analytics: !!analytics, version: 1, updatedAt: new Date().toISOString() };
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+        localStorage.setItem('baqueano_pref_enabled', String(consent.preferences));
+        localStorage.setItem('baqueano_analytics_enabled', String(consent.analytics));
+      } catch (error) { /* La navegación continúa aun si el navegador bloquea almacenamiento. */ }
+      document.cookie = COOKIE_NAME + '=' + (consent.analytics ? 'all' : consent.preferences ? 'preferences' : 'essential') + '; Max-Age=31536000; Path=/; SameSite=Lax; Secure';
+      window.BaqueanoConsent = consent;
+      window.dispatchEvent(new CustomEvent('baqueano:consent', { detail: consent }));
+      layer.hidden = true;
+      manage.hidden = false;
+    }
+    function openSettings() {
+      var saved = readConsent() || {};
+      document.getElementById('bqConsentPreferences').checked = !!saved.preferences;
+      document.getElementById('bqConsentAnalytics').checked = !!saved.analytics;
+      document.getElementById('bqCookieSettings').hidden = false;
+      layer.hidden = false;
+      manage.hidden = true;
+    }
+
+    layer.addEventListener('click', function(event) {
+      var action = event.target.closest('[data-cookie-action]');
+      if (!action) return;
+      var type = action.getAttribute('data-cookie-action');
+      if (type === 'accept') applyConsent(true, true);
+      if (type === 'reject') applyConsent(false, false);
+      if (type === 'settings') document.getElementById('bqCookieSettings').hidden = false;
+      if (type === 'save') applyConsent(document.getElementById('bqConsentPreferences').checked, document.getElementById('bqConsentAnalytics').checked);
+    });
+    manage.addEventListener('click', openSettings);
+
+    var existing = readConsent();
+    if (existing && existing.version === 1) {
+      window.BaqueanoConsent = existing;
+      layer.hidden = true;
+      manage.hidden = false;
+    } else {
+      manage.hidden = true;
+      layer.hidden = false;
+    }
+  }
+
+  async function init() {
     injectGlobalCSS();
+    injectCookieConsent();
     injectGlobalNavbar();
     upgradeOldFooters();
     injectGlobalFooter();
@@ -582,7 +703,8 @@
     if (typeof buildGlobalMegaNavigation === 'function') {
       buildGlobalMegaNavigation();
     }
-    syncShellWithIndex();
+    await syncShellWithIndex();
+    normalizeFooterBoundary();
   }
 
   if (document.readyState === 'loading') {

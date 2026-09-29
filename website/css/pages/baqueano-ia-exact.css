@@ -838,6 +838,7 @@ body.page-baqueano-ia {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  align-items: start;
 }
 
 .ia-budget-card {
@@ -877,7 +878,7 @@ body.page-baqueano-ia {
 
 .ia-budget-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-bottom: 6px;
   border-bottom: 1px dashed #EDF2F7;
   transition: background-color 0.2s ease;
@@ -1084,6 +1085,47 @@ body.page-baqueano-ia {
   cursor: pointer;
   margin-left: auto;
 }
+
+/*
+============================================================================
+BAQUEANO — AUTORÍA DE RUTA Y CLIMA TERRITORIAL EN VIVO
+============================================================================
+POR QUÉ:
+- El viajero debe distinguir sus decisiones de la optimización hecha por la IA.
+- El clima debe responder al territorio activo y no mostrar valores estáticos.
+
+CÓMO:
+- Una microguía explica el reparto de responsabilidades y las etiquetas reciben
+  un estado territorial activo.
+- La tarjeta meteorológica presenta condiciones actuales y tres días de previsión.
+
+QUÉ:
+- Mensaje de autoría, selección territorial visible y panel climático responsivo.
+============================================================================
+*/
+.ia-config-ownership { margin: 5px 0 10px; color: #64748B; font-size: .72rem; line-height: 1.45; }
+.ia-config-ownership i { color: #F65E01; margin-right: 4px; }
+.ia-tag { cursor: pointer; transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+.ia-tag.is-weather-active { background: #165D6F; border-color: #165D6F; color: #FFFFFF; box-shadow: 0 5px 15px rgba(22,93,111,.2); }
+.ia-tag.is-weather-active i { color: #FFFFFF; }
+.ia-weather-card { position: relative; overflow: hidden; background: linear-gradient(145deg,#FFFFFF 0%,#F7FBFC 100%); }
+.ia-weather-card::after { content:''; position:absolute; width:150px; height:150px; top:-85px; right:-65px; border-radius:50%; background:rgba(244,230,193,.6); pointer-events:none; }
+.ia-weather-current { display:flex; align-items:center; gap:15px; margin-bottom:16px; }
+.ia-weather-main-icon { width:54px; height:54px; display:grid; place-items:center; flex:0 0 54px; border-radius:17px; background:#FFF7ED; color:#F59E0B; font-size:1.75rem; box-shadow:0 8px 22px rgba(245,158,11,.15); }
+.ia-weather-location { display:block; margin-bottom:3px; color:#165D6F; font-size:.7rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.ia-weather-temperature { display:block; color:#0F172A; font:900 1.35rem/1.2 'Montserrat',sans-serif; }
+.ia-weather-condition { display:block; margin-top:3px; color:#64748B; font-size:.76rem; }
+.ia-weather-details { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-bottom:14px; }
+.ia-weather-details > span { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:1px 6px; padding:9px; background:#FFFFFF; border:1px solid #E2E8F0; border-radius:11px; }
+.ia-weather-details i { grid-row:1/3; color:#165D6F; font-size:.8rem; }
+.ia-weather-details small { color:#94A3B8; font-size:.59rem; }
+.ia-weather-details strong { color:#0F172A; font-size:.7rem; }
+.ia-weather-forecast { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; padding-top:13px; border-top:1px solid #E2E8F0; }
+.ia-weather-day { display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 5px; background:rgba(255,255,255,.76); border-radius:10px; color:#64748B; font-size:.66rem; }
+.ia-weather-day i { color:#F59E0B; font-size:1rem; }
+.ia-weather-day strong { color:#0F172A; font-size:.75rem; }
+.ia-weather-updated { display:flex; align-items:center; justify-content:flex-end; gap:6px; margin-top:10px; color:#94A3B8; font-size:.59rem; }
+.ia-weather-live-dot { width:6px; height:6px; border-radius:50%; background:#10B981; box-shadow:0 0 0 4px rgba(16,185,129,.12); }
 
 /* ============================================================================
    RECOMENDACIONES VERIFICADAS

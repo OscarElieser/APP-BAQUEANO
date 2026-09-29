@@ -117,3 +117,25 @@ html body .cookies-inline-008 {
   background: #10B981 !important;
   box-shadow: 0 0 6px #10B981 !important;
 }
+
+/*
+ * 🎯 POR QUÉ: elevar legibilidad, orden visual y coherencia con el fondo blanco institucional.
+ * ⚙️ CÓMO: aplica contraste AA, profundidad contenida y acentos de la paleta oficial.
+ * 📦 QUÉ: hero, indicadores, paneles legales y controles responsivos más claros.
+ */
+html body { background: #FFFFFF; color: #0F172A; }
+html body .main-header > .header-container > .brand-logo-container,
+html body .main-header > .header-container > .nav-actions-right { display: none !important; }
+html body .main-header,
+html body .main-header > .header-container { display: contents; }
+html body .cookies-hero-section { background: radial-gradient(circle at 12% 18%, rgba(244, 230, 193, 0.8), transparent 36%), radial-gradient(circle at 88% 16%, rgba(22, 93, 111, 0.14), transparent 34%), #FFFFFF; color: #0F172A; border-bottom: 1px solid #DCE6E9; padding-top: clamp(3.5rem, 7vw, 5.5rem); }
+html body .cookies-badge-pill { background: #FFF1E8; border-color: rgba(246, 94, 1, 0.28); color: #C84B00; }
+html body .cookies-hero-title { color: #0F172A; }
+html body .cookies-hero-desc { color: #475569; }
+html body .cookies-meta-pill { color: #475569; background: rgba(255, 255, 255, 0.9); border: 1px solid #D7E2E6; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06); }
+html body .cookies-meta-pill strong { color: #0F172A; }
+html body .cookies-stamp-floating { opacity: 0.12; color: #165D6F; }
+html body .trust-card, html body .cookies-index-card, html body .preferences-control-card, html body .flow-diagram-card, html body .cookies-faq-box, html body .service-card, html body .legal-laws-card, html body .faq-list-card { border-color: #D7E2E6; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07); }
+html body .trust-card-desc, html body .preferences-subtitle, html body .control-card-desc, html body .service-card-desc, html body .legal-laws-card p { color: #52627A; }
+html body .cookies-main-layout { margin-bottom: 3rem; }
+@media (max-width: 640px) { html body .cookies-hero-section { padding-inline: 18px; } html body .cookies-meta-strip { gap: 8px; } html body .cookies-meta-pill { width: 100%; } html body .trust-strip-section { margin-top: -22px; } }
