@@ -41,7 +41,12 @@
       "assets/videos/historia (1).mp4",
       "assets/videos/video (1).mp4",
       "assets/videos/[[]preview[]]destinos.mp4",
-      "**/*.crdownload"
+      "**/*.crdownload",
+      "assets/BaqueanoNicaragua.apk",
+      "assets/videos/*preview*",
+      "assets/videos/*(1)*",
+      "assets/videos/* (1)*",
+      "assets/videos/[preview]destinos.mp4"
     ],
     "redirects": [
       {
