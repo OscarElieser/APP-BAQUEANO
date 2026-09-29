@@ -21,16 +21,16 @@ test("healthCheck publica estado verificable", () => {
   assert.equal(response.statusCode, 200);
   assert.deepEqual(response.body, {ok: true, service: "baqueano-functions", timestamp: "2026-09-17T12:00:00.000Z"});
 });
-test("métricas conserva valores entregados por Firestore", async () => {
+test("métricas conserva valores reales entregados por Supabase", async () => {
   const response = responseDouble();
   const values = {publishedDestinations: 7, verifiedBusinesses: 3, publishedReviews: 11};
   await createApiHandler({now: fixedNow, readPublicMetrics: async () => values})(
     {method: "GET", path: "/api/v1/public/metrics"}, response);
   assert.equal(response.statusCode, 200);
-  assert.equal(response.body.source, "firestore-aggregations");
+  assert.equal(response.body.source, "supabase-postgresql");
   assert.deepEqual(response.body.data, values);
 });
-test("fallo Firestore no se reemplaza con cifras inventadas", async () => {
+test("fallo Supabase no se reemplaza con cifras inventadas", async () => {
   const response = responseDouble(); const original = console.error; console.error = () => {};
   try {
     await createApiHandler({readPublicMetrics: async () => { throw new Error("offline"); }})(

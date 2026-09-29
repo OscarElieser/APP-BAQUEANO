@@ -1,0 +1,378 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — FICHA DINÁMICA DE DESTINO (destination-dossier.css)
+   ============================================================================
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Proveer un diseño de alta gama y fidelidad visual para la Ficha Dinámica
+     Territorial de Destinos de Nicaragua en Baqueano (destinos.html y destino.html).
+   - Erradicar la navegación que devolvía al catálogo general sin mostrar información
+     profunda, ofreciendo métricas reales, protocolo de verificación territorial,
+     gastronomía local, cooperativas aliadas, logística y microinteracciones 60fps.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Modal y vista de alta definición con Glassmorphism (backdrop-filter: blur(14px)).
+   - Paleta oficial: Petróleo Teal (#165D6F), Naranja Fuego (#F65E01), Arena (#F4E6C1)
+     y Noche Profunda (#081927).
+   - Rejilla responsiva adaptable para smartphones, tablets y monitores ultrawide.
+   - Microinteracciones con transiciones cúbicas (cubic-bezier(0.16, 1, 0.3, 1)).
+
+   📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+   - .bq-dossier-overlay, .bq-dossier-dialog: Contenedor flotante con scroll suave.
+   - .bq-dossier-hero: Portada cinematográfica con etiquetas de verificación.
+   - .bq-dossier-metrics: Rejilla de especificaciones (precio, clima, tiempo, acceso).
+   - .bq-dossier-section: Bloques modulares (descripción, cómo llegar, comida, hospedaje).
+   - .bq-dossier-footer-bar: Barra táctica de acciones (Favoritos, Mi Viaje, IA, Mapa, SOS).
+   ============================================================================ */
+
+.bq-dossier-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(8, 24, 39, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.bq-dossier-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bq-dossier-dialog {
+  background: linear-gradient(175deg, #0D263B 0%, #081927 100%);
+  border: 1px solid rgba(244, 230, 193, 0.2);
+  border-radius: 20px;
+  width: min(940px, 100%);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bq-dossier-overlay.is-open .bq-dossier-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.bq-dossier-hero {
+  position: relative;
+  min-height: 280px;
+  max-height: 320px;
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bq-dossier-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bq-dossier-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8,25,39,0.3) 0%, rgba(8,25,39,0.92) 88%, #0D263B 100%);
+}
+
+.bq-dossier-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.bq-dossier-close:hover {
+  background: #F65E01;
+  border-color: #F65E01;
+  transform: scale(1.08);
+}
+
+.bq-dossier-hero-text {
+  position: absolute;
+  bottom: 20px;
+  left: 28px;
+  right: 28px;
+  z-index: 2;
+}
+
+.bq-dossier-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bq-dossier-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bq-dossier-badge.dept {
+  background: rgba(22, 93, 111, 0.4);
+  border: 1px solid rgba(45, 212, 191, 0.5);
+  color: #2DD4BF;
+}
+
+.bq-dossier-badge.verified {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #34D399;
+}
+
+.bq-dossier-badge.cat {
+  background: rgba(246, 94, 1, 0.2);
+  border: 1px solid rgba(246, 94, 1, 0.5);
+  color: #FDBA74;
+}
+
+.bq-dossier-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.85rem;
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin: 0 0 6px 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.bq-dossier-loc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  color: #F4E6C1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.bq-dossier-scroll-area {
+  padding: 24px 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Rejilla de métricas clave */
+.bq-dossier-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .bq-dossier-metrics { grid-template-columns: repeat(2, 1fr); }
+  .bq-dossier-title { font-size: 1.4rem; }
+  .bq-dossier-hero { min-height: 220px; }
+  .bq-dossier-hero-text { left: 16px; right: 16px; bottom: 14px; }
+  .bq-dossier-scroll-area { padding: 18px 16px; }
+  .bq-dossier-footer-bar { padding: 14px 16px; }
+}
+
+.bq-dossier-metric-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bq-dossier-metric-card i {
+  font-size: 1.25rem;
+  color: #F65E01;
+}
+
+.bq-dossier-metric-label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94A3B8;
+  font-weight: 700;
+}
+
+.bq-dossier-metric-val {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Secciones de contenido */
+.bq-dossier-section {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.bq-dossier-section h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #F4E6C1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bq-dossier-section h4 i {
+  color: #F65E01;
+}
+
+.bq-dossier-section p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin: 0 0 10px 0;
+}
+
+.bq-dossier-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bq-dossier-chip-item {
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  color: #E2E8F0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Sello de verificación */
+.bq-dossier-trust-banner {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bq-dossier-trust-banner i {
+  font-size: 1.3rem;
+  color: #10B981;
+  margin-top: 2px;
+}
+
+.bq-dossier-trust-text h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #34D399;
+  margin: 0 0 4px 0;
+}
+
+.bq-dossier-trust-text p {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Barra inferior de acciones del dossier */
+.bq-dossier-footer-bar {
+  padding: 16px 28px;
+  background: rgba(8, 25, 39, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bq-dossier-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bq-dossier-act-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.bq-dossier-act-btn.primary {
+  background: #F65E01;
+  color: #FFFFFF;
+}
+.bq-dossier-act-btn.primary:hover {
+  background: #ff721a;
+  transform: translateY(-2px);
+}
+
+.bq-dossier-act-btn.secondary {
+  background: #165D6F;
+  color: #FFFFFF;
+}
+.bq-dossier-act-btn.secondary:hover {
+  background: #1b7389;
+  transform: translateY(-2px);
+}
+
+.bq-dossier-act-btn.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #F4E6C1;
+}
+.bq-dossier-act-btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}

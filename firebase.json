@@ -75,6 +75,15 @@
         "type": 301
       }
     ],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "function": {
+          "functionId": "api",
+          "region": "us-central1"
+        }
+      }
+    ],
     "headers": [
       {
         "source": "**",

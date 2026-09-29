@@ -39,15 +39,20 @@ test("GET /api/health retorna reporte de salud multi-proveedor", async () => {
   assert.ok(res.body.firebase);
   assert.ok(res.body.supabase);
   assert.ok(res.body.storage);
-  assert.ok(res.body.backup);
   assert.ok(res.body.ai);
   assert.equal(res.body.timestamp, "2026-09-25T12:00:00.000Z");
 });
 
 test("GET /api/destinations entrega catálogo oficial de territorios", async () => {
+  const records = [{ id: "somoto", name: "Cañón de Somoto", department_id: "madriz" }];
+  const query = {
+    select() { return this; }, eq() { return this; }, is() { return this; },
+    order() { return Promise.resolve({ data: records, error: null }); }
+  };
   const handler = createApiHandler({
     now: fixedNow,
-    readPublicMetrics: async () => ({})
+    readPublicMetrics: async () => ({}),
+    databaseProvider: () => ({ from: () => query })
   });
   const res = mockResponse();
   await handler({ method: "GET", path: "/api/destinations" }, res);
@@ -56,7 +61,8 @@ test("GET /api/destinations entrega catálogo oficial de territorios", async () 
   assert.equal(res.body.ok, true);
   assert.ok(res.body.count > 0);
   assert.ok(Array.isArray(res.body.data));
-  assert.ok(res.body.data.some(d => d.name === "Madriz" || d.name === "León"));
+  assert.ok(res.body.data.some(d => d.name === "Cañón de Somoto"));
+  assert.equal(res.body.source, "supabase-postgresql");
 });
 
 test("GET /api/nearby valida coordenadas geográficas", async () => {

@@ -551,8 +551,8 @@
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Hotel Boutique Adela</h4>
           <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.8 (120) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 1,800 / noche</span>
+          <span class="ia-rec-rating">Sin valoraciones verificadas · <small>Actualización pendiente</small></span>
+          <span class="ia-rec-price">Precio pendiente de verificación</span>
           <a href="aliados.html" class="ia-rec-btn">Ver detalle</a>
         </div>
       </div>
@@ -565,8 +565,8 @@
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Restaurante El Zaguán</h4>
           <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.7 (210) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 350 / persona</span>
+          <span class="ia-rec-rating">Sin valoraciones verificadas · <small>Actualización pendiente</small></span>
+          <span class="ia-rec-price">Precio pendiente de verificación</span>
           <a href="gastronomia.html" class="ia-rec-btn">Ver detalle</a>
         </div>
       </div>
@@ -579,8 +579,8 @@
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Guía Local Don Carlos</h4>
           <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.9 (64) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 800 / tour</span>
+          <span class="ia-rec-rating">Sin valoraciones verificadas · <small>Actualización pendiente</small></span>
+          <span class="ia-rec-price">Precio pendiente de verificación</span>
           <a href="https://wa.me/50588880000" target="_blank" rel="noopener" class="ia-rec-btn">Contactar</a>
         </div>
       </div>
@@ -593,8 +593,8 @@
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Tour en Kayak Isletas</h4>
           <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.8 (93) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 600 / persona</span>
+          <span class="ia-rec-rating">Sin valoraciones verificadas · <small>Actualización pendiente</small></span>
+          <span class="ia-rec-price">Precio pendiente de verificación</span>
           <a href="experiencias.html" class="ia-rec-btn">Reservar</a>
         </div>
       </div>
@@ -988,6 +988,50 @@
       setupBudgetChips();
       updateBudgetUI();
 
+      // ─── Auto-procesamiento de parámetros URL (?prompt=..., ?destino=..., ?presupuesto=...) ───
+      const urlParams = new URLSearchParams(window.location.search);
+      const promptParam = urlParams.get('prompt');
+      const destinoParam = urlParams.get('destino');
+      const presupParam = urlParams.get('presupuesto');
+
+      if (presupParam) {
+        const pNum = parseInt(presupParam.replace(/[^0-9]/g, ''), 10);
+        if (pNum && !isNaN(pNum)) {
+          budgetState.maxBudget = pNum;
+          if (budgetInput) budgetInput.value = pNum.toLocaleString('es-NI');
+          updateBudgetUI();
+        }
+      }
+
+      const PROMPT_MAPPINGS = {
+        'presupuesto-1500': 'Tengo C$ 1,500 de presupuesto. ¿Qué recorrido de 1 o 2 días me recomendás?',
+        'playas': 'Quiero una ruta costera y de playas de surf por el Pacífico y Rivas.',
+        'viaje-con-ninos': 'Viajo en familia con niños pequeños. Busco actividades seguras, cómodas y accesibles.',
+        'aventura': 'Busco adrenalina, senderismo en volcanes, sandboarding y cañones.',
+        'cerca-de-mi': '¿Qué atractivos y cooperativas puedo visitar a menos de 2 horas de mi ubicación actual?',
+        'un-dia': 'Tengo solamente 1 día libre para salir desde Managua. ¿Cuál es el mejor itinerario?',
+        'ruta-personalizada': 'Quiero diseñar una ruta personalizada por los volcanes y pueblos blancos de Nicaragua.',
+        'recomendacion-destinos': 'Recomendame los destinos imperdibles de ecoturismo comunitario para esta temporada.'
+      };
+
+      if (destinoParam) {
+        const destName = destinoParam.replace(/[_-]/g, ' ').toUpperCase();
+        setTimeout(() => {
+          if (chatInput) {
+            chatInput.value = `Quiero planificar un viaje a ${destName}. ¿Cuáles son los mejores días, hospedajes y anfitriones locales?`;
+            handleSend();
+          }
+        }, 350);
+      } else if (promptParam) {
+        const resolvedText = PROMPT_MAPPINGS[promptParam] || promptParam.replace(/[-_]/g, ' ');
+        setTimeout(() => {
+          if (chatInput) {
+            chatInput.value = resolvedText;
+            handleSend();
+          }
+        }, 350);
+      }
+
       // Mobile navbar
       const mobileToggle = document.getElementById('mobileNavToggle');
       const navMenu = document.getElementById('navLinksMenu');
@@ -1002,6 +1046,7 @@
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/navigation.js"></script>
+<script src="js/baqueano-api.js"></script>
 <script src="js/global-injector.js"></script>
 </body>
 </html>

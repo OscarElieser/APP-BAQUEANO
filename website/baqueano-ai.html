@@ -7,9 +7,13 @@
 <html lang="es-NI">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=baqueano-ia.html">
   <title>Baqueano Digital | Redirigiendo a Baqueano IA...</title>
-  <script>window.location.replace("baqueano-ia.html");</script>
+  <script>
+    (function() {
+      var target = 'baqueano-ia.html' + window.location.search + window.location.hash;
+      window.location.replace(target);
+    })();
+  </script>
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
     <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">

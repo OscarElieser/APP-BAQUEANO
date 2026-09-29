@@ -106,9 +106,46 @@
   }
 
   // ─── Render Itinerario ─────────────────────────────────────────────────────
+  window.loadDemoTrip = function() {
+    trip = defaultTrip();
+    trip.saved = true;
+    persistTrip(trip);
+    renderItinerary();
+    renderWeather();
+    toast('¡Itinerario demostrativo cargado con éxito! 🎒');
+  };
+
+  window.clearTrip = function() {
+    trip = { name: 'Mi Aventura por Nicaragua', saved: false, days: [] };
+    persistTrip(trip);
+    renderItinerary();
+    toast('Itinerario vaciado. Comenzá a armar tu nueva ruta.', 'info');
+  };
+
   function renderItinerary() {
     var c = document.getElementById('itineraryDaysContainer');
     if (!c) return;
+
+    if (!trip.days || trip.days.length === 0) {
+      c.innerHTML =
+        '<div style="background:rgba(255,255,255,0.03);border:1.5px dashed rgba(244,230,193,0.25);border-radius:18px;padding:48px 24px;text-align:center;margin-bottom:24px;">' +
+          '<div style="font-size:3rem;margin-bottom:12px;">🎒</div>' +
+          '<h3 style="font-family:Montserrat,sans-serif;color:#FFF;font-size:1.25rem;font-weight:800;margin:0 0 8px">Todavía no tenés un viaje guardado</h3>' +
+          '<p style="color:#94A3B8;max-width:540px;margin:0 auto 24px;font-size:.9rem;line-height:1.6">' +
+            'Descubrí los 17 territorios de Nicaragua, elegí tus atractivos favoritos o dejá que Baqueano Digital planifique una ruta a tu medida según tu presupuesto y días disponibles.' +
+          '</p>' +
+          '<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">' +
+            '<a href="destinos.html" style="background:#165D6F;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
+              '<i class="fa-solid fa-mountain-sun"></i> Explorar destinos</a>' +
+            '<a href="baqueano-ia.html" style="background:#F65E01;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
+              '<i class="fa-solid fa-wand-magic-sparkles"></i> Planificar con Baqueano Digital</a>' +
+            '<button type="button" onclick="loadDemoTrip()" style="background:rgba(255,255,255,.08);color:#F4E6C1;border:1px solid rgba(255,255,255,.18);padding:11px 18px;border-radius:10px;font-weight:600;cursor:pointer">' +
+              'Cargar viaje demostrativo</button>' +
+          '</div>' +
+        '</div>';
+      return;
+    }
+
     c.innerHTML = trip.days.map(function(d) {
       return '<div class="itinerary-day-card" id="dayCard-' + d.id + '">' +
         '<div class="itinerary-day-head">' +

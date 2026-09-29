@@ -29,7 +29,12 @@ function getSupabase() {
   if (supabaseInstance) return supabaseInstance;
 
   const url = process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!key) {
+    console.error("[SupabaseClient] SUPABASE_SERVICE_ROLE_KEY no está configurada.");
+    return null;
+  }
 
   try {
     supabaseInstance = createClient(url, key, {

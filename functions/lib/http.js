@@ -35,16 +35,11 @@
  */
 "use strict";
 
-const { getFirestore } = require("firebase-admin/firestore");
-const { getStorage } = require("firebase-admin/storage");
 const { verifyAuth, verifyAdmin } = require("./auth-middleware");
 const { checkSupabaseHealth, getSupabase } = require("./supabase-client");
-const { recordBackupOperation, syncFirebaseBackup, getBackupMetrics } = require("./backup-service");
-const { getStorageBackupMetrics } = require("./storage-backup-service");
 const { findNearbyEntities } = require("./geospatial-service");
 const { searchCatalog } = require("./search-service");
 const { generateTravelPlan, checkRateLimit } = require("./ai-service");
-const { BAQUEANO_FALLBACK_TERRITORIES } = require("./baqueano-knowledge");
 const { buildBaqueanoItinerary } = require("./itinerary-service");
 
 
@@ -75,6 +70,13 @@ function sendJson(response, status, payload, cacheControl = "no-store") {
   response.setHeader("Cache-Control", cacheControl);
   response.setHeader("X-Content-Type-Options", "nosniff");
   response.status(status).json(payload);
+}
+
+function unavailableDatabase(response) {
+  return sendJson(response, 503, {
+    ok: false,
+    error: { code: "DATABASE_UNAVAILABLE", message: "La fuente canónica Supabase no está disponible." }
+  });
 }
 
 function normalizedPath(request) {
@@ -114,7 +116,7 @@ function createHealthHandler({ now = () => new Date() } = {}) {
 // ----------------------------------------------------------------------------
 // CONTROLADOR CENTRAL DE LA API DE BAQUEANO
 // ----------------------------------------------------------------------------
-function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Date(), getApiKey = () => "" } = {}) {
+function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Date(), getApiKey = () => "", databaseProvider = getSupabase } = {}) {
   if (typeof readPublicMetrics !== "function") throw new TypeError("readPublicMetrics debe ser una función.");
 
   return async function apiHandler(request, response) {
@@ -133,24 +135,16 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
     // ========================================================================
     if ((path === "/health" || path === "health" || path === "/api/health") && method === "GET") {
       try {
-        let firestoreStatus = "connected";
-        try {
-          const db = getFirestore();
-          await db.collection("public_metrics").doc("stats").get();
-        } catch (_) {
-          firestoreStatus = "degraded";
-        }
-
         const supabaseHealth = await checkSupabaseHealth({ timeoutMs: 3000 });
-        const backupMetrics = await getBackupMetrics();
 
         const hasAiKey = Boolean(getApiKey() || process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY || process.env.OPENAI_API_KEY || process.env.DEEPSEEK_API_KEY);
 
         const healthReport = {
-          status: firestoreStatus === "connected" ? "ok" : "degraded",
+          status: supabaseHealth.status === "connected" ? "ok" : "degraded",
           service: "BAQUEANO API",
           firebase: {
-            status: firestoreStatus
+            hosting: "configured",
+            authentication: "configured"
           },
           supabase: {
             status: supabaseHealth.status,
@@ -160,15 +154,8 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
             firebase: "available",
             supabase_backup: supabaseHealth.storage
           },
-          backup: {
-            pending_operations: backupMetrics.pending_operations,
-            failed_operations: backupMetrics.failed_operations,
-            synced_operations: backupMetrics.synced_operations,
-            conflicts: backupMetrics.conflicts,
-            last_sync: backupMetrics.last_sync
-          },
           ai: {
-            status: hasAiKey ? "available" : "fallback_mode",
+            status: hasAiKey ? "available" : "unavailable",
             multi_provider: true
           },
           timestamp: now().toISOString()
@@ -196,7 +183,7 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
       }
       try {
         const metrics = await readPublicMetrics();
-        return sendJson(response, 200, { ok: true, data: metrics, source: "firestore-aggregations", measuredAt: now().toISOString() }, "public, max-age=60, s-maxage=300, stale-while-revalidate=60");
+        return sendJson(response, 200, { ok: true, data: metrics, source: "supabase-postgresql", measuredAt: now().toISOString() }, "public, max-age=60, s-maxage=300, stale-while-revalidate=60");
       } catch (error) {
         console.error("No fue posible agregar las métricas públicas.", error);
         return sendJson(response, 503, { ok: false, error: { code: "METRICS_UNAVAILABLE", message: "Las métricas reales no están disponibles temporalmente." } });
@@ -296,44 +283,37 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
     // 5. CATÁLOGO TURÍSTICO (GET /api/destinations, /api/places, /api/businesses)
     // ========================================================================
     if ((path === "/destinations" || path === "destinations") && method === "GET") {
-      const results = BAQUEANO_FALLBACK_TERRITORIES.map(t => ({
-        id: t.id,
-        name: t.name,
-        shortDesc: t.shortDesc,
-        placesCount: (t.places || []).length,
-        activitiesCount: (t.activities || []).length
-      }));
-      return sendJson(response, 200, { ok: true, count: results.length, data: results });
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      let requestQuery = database.from("destinations")
+        .select("id,name,category,short_desc,description,latitude,longitude,cover_image,rating,reviews_count,verified,confidence_status,source_name,source_url,last_verified_at,department_id,departments(name)")
+        .eq("status", "published").is("deleted_at", null).order("name");
+      if (query.id) requestQuery = requestQuery.eq("id", String(query.id)).limit(1);
+      if (query.department) requestQuery = requestQuery.eq("department_id", String(query.department));
+      const { data, error } = await requestQuery;
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "CATALOG_UNAVAILABLE", message: error.message } });
+      return sendJson(response, 200, { ok: true, count: data.length, data, source: "supabase-postgresql" });
     }
 
     if ((path === "/places" || path === "places") && method === "GET") {
-      const deptFilter = query.department ? query.department.toLowerCase() : null;
-      const allPlaces = [];
-      for (const t of BAQUEANO_FALLBACK_TERRITORIES) {
-        if (!deptFilter || t.name.toLowerCase().includes(deptFilter)) {
-          for (const p of t.places || []) {
-            allPlaces.push({ ...p, department: t.name });
-          }
-        }
-      }
-      return sendJson(response, 200, { ok: true, count: allPlaces.length, data: allPlaces });
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      let requestQuery = database.from("places").select("*,destinations!inner(name,department_id,status)").eq("destinations.status", "published").order("name");
+      if (query.destinationId) requestQuery = requestQuery.eq("destination_id", String(query.destinationId));
+      if (query.department) requestQuery = requestQuery.eq("destinations.department_id", String(query.department));
+      const { data, error } = await requestQuery;
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "PLACES_UNAVAILABLE", message: error.message } });
+      return sendJson(response, 200, { ok: true, count: data.length, data, source: "supabase-postgresql" });
     }
 
     if ((path === "/businesses" || path === "businesses") && method === "GET") {
-      const allBiz = [];
-      for (const t of BAQUEANO_FALLBACK_TERRITORIES) {
-        for (const p of t.places || []) {
-          allBiz.push({
-            id: `biz-${p.id}`,
-            name: `Anfitrión Campesino de ${p.name}`,
-            place_id: p.id,
-            department: t.name,
-            verified: true,
-            commission_rate: 0.00
-          });
-        }
-      }
-      return sendJson(response, 200, { ok: true, count: allBiz.length, data: allBiz });
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      let requestQuery = database.from("businesses").select("id,name,category,department,municipality,phone,whatsapp,address,latitude,longitude,cover_image,verified,metadata,updated_at").eq("verified", true).is("deleted_at", null).order("name");
+      if (query.department) requestQuery = requestQuery.eq("department", String(query.department));
+      const { data, error } = await requestQuery;
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "BUSINESSES_UNAVAILABLE", message: error.message } });
+      return sendJson(response, 200, { ok: true, count: data.length, data, source: "supabase-postgresql" });
     }
 
     // ========================================================================
@@ -382,32 +362,23 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
 
       if (method === "GET") {
         if (!auth.ok) return sendJson(response, auth.status, auth.error);
-        try {
-          const db = getFirestore();
-          const snapshot = await db.collection("reservations").where("userUid", "==", auth.user.uid).limit(50).get();
-          const reservations = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          return sendJson(response, 200, { ok: true, count: reservations.length, data: reservations });
-        } catch (fbErr) {
-          // Fallback a Supabase
-          const sb = getSupabase();
-          if (sb) {
-            const { data } = await sb.from("reservations").select("*").eq("user_uid", auth.user.uid);
-            return sendJson(response, 200, { ok: true, count: data?.length || 0, data: data || [], source: "supabase-fallback" });
-          }
-          return sendJson(response, 503, { ok: false, error: { code: "RESERVATIONS_UNAVAILABLE" } });
-        }
+        const database = databaseProvider();
+        if (!database) return unavailableDatabase(response);
+        const { data, error } = await database.from("reservations").select("*")
+          .eq("user_uid", auth.user.uid).is("deleted_at", null).order("created_at", { ascending: false }).limit(50);
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "RESERVATIONS_UNAVAILABLE", message: error.message } });
+        return sendJson(response, 200, { ok: true, count: data.length, data, source: "supabase-postgresql" });
       }
 
       if (method === "POST") {
+        if (!auth.ok) return sendJson(response, auth.status, auth.error);
         const body = request.body || {};
-        const userUid = auth.ok ? auth.user.uid : (body.userUid || "anonymous");
-        const operationId = request.headers["x-operation-id"] || crypto.randomUUID();
+        const userUid = auth.user.uid;
 
         const reservationPayload = {
           userUid,
-          serviceTitle: body.serviceTitle || "Aventura Baqueano",
-          destination: body.destination || "Nicaragua",
-          travelDate: body.travelDate || new Date().toISOString().split("T")[0],
+          serviceTitle: String(body.serviceTitle || "").trim(),
+          travelDate: body.travelDate,
           peopleCount: Number(body.peopleCount) || 1,
           totalPrice: Number(body.totalPrice) || 0,
           currency: body.currency || "NIO",
@@ -416,60 +387,21 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
           updatedAt: new Date()
         };
 
-        // Guardado directo y prioritario en Supabase
-        const sb = getSupabase();
-        let supabaseResId = null;
-        if (sb) {
-          try {
-            const resCode = "BQ-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
-            const { data: sbData, error: sbError } = await sb.from("reservations").insert({
-              reservation_code: resCode,
-              user_uid: userUid,
-              service_title: reservationPayload.serviceTitle,
-              travel_date: reservationPayload.travelDate,
-              people_count: reservationPayload.peopleCount,
-              total_price: reservationPayload.totalPrice,
-              currency: reservationPayload.currency,
-              status: "pending"
-            }).select().single();
-            if (!sbError && sbData) supabaseResId = sbData.id;
-          } catch (sbErr) {
-            console.warn("[API] Supabase direct reservation:", sbErr.message);
-          }
+        if (!reservationPayload.serviceTitle || !reservationPayload.travelDate) {
+          return sendJson(response, 400, { ok: false, error: { code: "INVALID_RESERVATION", message: "Servicio y fecha son obligatorios." } });
         }
-
-        // Firebase First / Sincronización
-        try {
-          const db = getFirestore();
-          const docRef = await db.collection("reservations").add(reservationPayload);
-          return sendJson(response, 201, {
-            ok: true,
-            message: "Reserva registrada con éxito.",
-            reservationId: docRef.id,
-            supabaseId: supabaseResId,
-            status: "pending"
-          });
-        } catch (fbErr) {
-          // Supabase Contingency Fallback
-          console.warn("[API] Error guardando reserva en Firestore. Registrada en Supabase:", fbErr.message);
-          const backupRes = await recordBackupOperation({
-            operationId,
-            firebaseUid: userUid,
-            entityType: "reservations",
-            entityId: operationId,
-            operationType: "INSERT",
-            payload: reservationPayload,
-            error: fbErr.message
-          });
-
-          return sendJson(response, 201, {
-            ok: true,
-            contingency: true,
-            message: "Reserva registrada con éxito en Supabase.",
-            reservationId: supabaseResId || backupRes.operationId,
-            status: "pending"
-          });
-        }
+        const database = databaseProvider();
+        if (!database) return unavailableDatabase(response);
+        const reservationCode = `BQ-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+        const { data, error } = await database.from("reservations").insert({
+          reservation_code: reservationCode, user_uid: userUid,
+          business_id: body.businessId || null, service_title: reservationPayload.serviceTitle,
+          travel_date: reservationPayload.travelDate, people_count: reservationPayload.peopleCount,
+          total_price: Number.isFinite(reservationPayload.totalPrice) ? reservationPayload.totalPrice : null,
+          currency: reservationPayload.currency, status: "pending", notes: body.notes || null
+        }).select("id,reservation_code,status").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "RESERVATION_SAVE_FAILED", message: error.message } });
+        return sendJson(response, 201, { ok: true, reservationId: data.id, reservationCode: data.reservation_code, status: data.status, source: "supabase-postgresql" });
       }
 
       response.setHeader("Allow", "GET, POST");
@@ -493,37 +425,18 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
         createdAt: new Date()
       };
 
-      // Guardado directo en Supabase
-      const sb = getSupabase();
-      if (sb) {
-        try {
-          await sb.from("reviews").insert({
-            user_uid: auth.user.uid,
-            user_name: reviewData.userName,
-            rating: reviewData.rating,
-            comment: reviewData.comment,
-            destination_id: reviewData.destinationId,
-            status: "published"
-          });
-        } catch (sbErr) {
-          console.warn("[API] Supabase review:", sbErr.message);
-        }
+      if (!reviewData.comment || !reviewData.destinationId) {
+        return sendJson(response, 400, { ok: false, error: { code: "INVALID_REVIEW", message: "Destino, valoración y comentario son obligatorios." } });
       }
-
-      try {
-        const db = getFirestore();
-        const docRef = await db.collection("reviews").add(reviewData);
-        return sendJson(response, 201, { ok: true, reviewId: docRef.id });
-      } catch (fbErr) {
-        await recordBackupOperation({
-          firebaseUid: auth.user.uid,
-          entityType: "reviews",
-          entityId: crypto.randomUUID(),
-          payload: reviewData,
-          error: fbErr.message
-        });
-        return sendJson(response, 201, { ok: true, message: "Reseña registrada con éxito en Supabase." });
-      }
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      const { data, error } = await database.from("reviews").insert({
+        user_uid: auth.user.uid, user_name: reviewData.userName,
+        rating: reviewData.rating, comment: reviewData.comment,
+        destination_id: reviewData.destinationId, status: "moderation"
+      }).select("id,status").single();
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "REVIEW_SAVE_FAILED", message: error.message } });
+      return sendJson(response, 201, { ok: true, reviewId: data.id, status: data.status, source: "supabase-postgresql" });
     }
 
     if ((path === "/favorites" || path === "favorites") && method === "POST") {
@@ -538,34 +451,14 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
         createdAt: new Date()
       };
 
-      // Guardado directo en Supabase
-      const sb = getSupabase();
-      if (sb) {
-        try {
-          await sb.from("favorites").upsert({
-            user_uid: auth.user.uid,
-            entity_type: favData.entityType,
-            entity_id: favData.entityId
-          });
-        } catch (sbErr) {
-          console.warn("[API] Supabase favorite:", sbErr.message);
-        }
-      }
-
-      try {
-        const db = getFirestore();
-        await db.collection("users").doc(auth.user.uid).collection("favorites").doc(`${favData.entityType}_${favData.entityId}`).set(favData);
-        return sendJson(response, 200, { ok: true, favorited: true });
-      } catch (fbErr) {
-        await recordBackupOperation({
-          firebaseUid: auth.user.uid,
-          entityType: "favorites",
-          entityId: `${favData.entityType}_${favData.entityId}`,
-          payload: favData,
-          error: fbErr.message
-        });
-        return sendJson(response, 200, { ok: true, favorited: true, storedIn: "supabase" });
-      }
+      if (!favData.entityId) return sendJson(response, 400, { ok: false, error: { code: "INVALID_FAVORITE" } });
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      const { error } = await database.from("favorites").upsert({
+        user_uid: auth.user.uid, entity_type: favData.entityType, entity_id: favData.entityId
+      }, { onConflict: "user_uid,entity_type,entity_id" });
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "FAVORITE_SAVE_FAILED", message: error.message } });
+      return sendJson(response, 200, { ok: true, favorited: true, source: "supabase-postgresql" });
     }
 
 
@@ -576,54 +469,58 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
       const auth = await verifyAuth(request);
       if (!auth.ok) return sendJson(response, auth.status, auth.error);
 
-      try {
-        const db = getFirestore();
-        const doc = await db.collection("users").doc(auth.user.uid).get();
-        if (doc.exists) {
-          return sendJson(response, 200, { ok: true, profile: { uid: doc.id, ...doc.data() } });
-        }
-        return sendJson(response, 200, {
-          ok: true,
-          profile: { uid: auth.user.uid, email: auth.user.email, displayName: auth.user.name, role: "traveler" }
-        });
-      } catch (err) {
-        return sendJson(response, 500, { ok: false, error: { code: "PROFILE_FETCH_ERROR", message: err.message } });
-      }
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      const { data, error } = await database.from("profiles")
+        .select("firebase_uid,display_name,email,avatar_url,role,phone,explorer_level,xp,metadata,updated_at")
+        .eq("firebase_uid", auth.user.uid).is("deleted_at", null).maybeSingle();
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "PROFILE_FETCH_ERROR", message: error.message } });
+      if (!data) return sendJson(response, 200, { ok: true, profile: null, requiresProfileSetup: true });
+      return sendJson(response, 200, { ok: true, profile: data, source: "supabase-postgresql" });
     }
 
     // ========================================================================
-    // 11. GESTIÓN ADMINISTRATIVA DE BACKUP (GET/POST /api/admin/backup/*)
+    // 11. PLANES DE VIAJE DEL USUARIO (GET/POST /api/travel-plans)
     // ========================================================================
-    if (path.startsWith("/admin/backup") || path.startsWith("admin/backup")) {
+    if (path === "/travel-plans" || path === "travel-plans") {
+      const auth = await verifyAuth(request);
+      if (!auth.ok) return sendJson(response, auth.status, auth.error);
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      if (method === "GET") {
+        const { data, error } = await database.from("travel_plans").select("*")
+          .eq("user_uid", auth.user.uid).order("created_at", { ascending: false }).limit(25);
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "TRAVEL_PLANS_UNAVAILABLE", message: error.message } });
+        return sendJson(response, 200, { ok: true, count: data.length, data, source: "supabase-postgresql" });
+      }
+      if (method === "POST") {
+        const body = request.body || {};
+        if (!body.planTitle || !body.payload) return sendJson(response, 400, { ok: false, error: { code: "INVALID_TRAVEL_PLAN" } });
+        const { data, error } = await database.from("travel_plans").insert({
+          user_uid: auth.user.uid, plan_title: String(body.planTitle).slice(0, 180),
+          destination: body.destination || null, days: Number(body.days) || null,
+          budget: Number.isFinite(Number(body.budget)) ? Number(body.budget) : null,
+          currency: body.currency === "USD" ? "USD" : "NIO", payload: body.payload,
+          source: body.source || "user"
+        }).select("id,created_at").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "TRAVEL_PLAN_SAVE_FAILED", message: error.message } });
+        return sendJson(response, 201, { ok: true, data, source: "supabase-postgresql" });
+      }
+      return sendJson(response, 405, { ok: false, error: { code: "METHOD_NOT_ALLOWED" } });
+    }
+
+    // ========================================================================
+    // 12. MÉTRICAS ADMINISTRATIVAS CANÓNICAS (GET /api/admin/metrics)
+    // ========================================================================
+    if (path === "/admin/metrics" || path === "admin/metrics") {
       const adminAuth = await verifyAdmin(request);
       if (!adminAuth.ok) return sendJson(response, adminAuth.status, adminAuth.error);
-
-      if (path.endsWith("/status") && method === "GET") {
-        const dbMetrics = await getBackupMetrics();
-        const storageMetrics = await getStorageBackupMetrics();
-        const sbHealth = await checkSupabaseHealth();
-
-        return sendJson(response, 200, {
-          ok: true,
-          telemetry: {
-            supabaseStatus: sbHealth.status,
-            database: sbHealth.database,
-            storage: sbHealth.storage,
-            backupOperations: dbMetrics,
-            storageBackups: storageMetrics,
-            serverTimestamp: now().toISOString()
-          }
-        });
-      }
-
-      if (path.endsWith("/retry") && method === "POST") {
-        try {
-          const db = getFirestore();
-          const syncResult = await syncFirebaseBackup(db);
-          return sendJson(response, 200, { ok: true, result: syncResult });
-        } catch (err) {
-          return sendJson(response, 500, { ok: false, error: err.message });
-        }
+      if (method !== "GET") return sendJson(response, 405, { ok: false, error: { code: "METHOD_NOT_ALLOWED" } });
+      try {
+        const metrics = await readPublicMetrics();
+        return sendJson(response, 200, { ok: true, data: metrics, source: "supabase-postgresql", measuredAt: now().toISOString() });
+      } catch (error) {
+        return sendJson(response, 503, { ok: false, error: { code: "METRICS_UNAVAILABLE", message: error.message } });
       }
     }
 

@@ -373,7 +373,7 @@
           <div class="ops-view-header">
             <div class="ops-view-title-group">
               <h1><i class="fa-solid fa-gauge-high" style="color: var(--bq-secondary);"></i> Centro de Operaciones BAQUEANO</h1>
-              <p class="ops-view-subtitle">ARQUITECTURA HÍBRIDA · CATÁLOGO EDITORIAL PRECARGADO (29 DESTINOS) &amp; REGISTROS DINÁMICOS FIRESTORE</p>
+              <p class="ops-view-subtitle">ARQUITECTURA OFICIAL: FIREBASE (AUTH &amp; HOSTING) + SUPABASE (BASE TURÍSTICA &amp; AUDITORÍA)</p>
             </div>
             <div class="ops-view-actions">
               <span style="font-size: 0.78rem; color: var(--ops-text-muted);" id="opsMetricsLastUpdated">Actualizando...</span>
@@ -386,7 +386,7 @@
           <div style="background: rgba(22, 93, 111, 0.25); border: 1px solid rgba(45, 212, 191, 0.4); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.8rem; color: #E2E8F0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.65rem;">
             <div style="display: flex; align-items: center; gap: 0.65rem;">
               <i class="fa-solid fa-layer-group" style="color: #2DD4BF; font-size: 1.1rem;"></i>
-              <span><strong>Diferenciación de Datos:</strong> El ecosistema cuenta con <strong>29 destinos territoriales</strong> y <strong>14 cooperativas</strong> precargados estáticamente en el frontend para navegación instantánea sin consumo de cuota. Los contadores en este panel reflejan registros creados dinámicamente en tiempo real desde la app y portal (/destinations, /businesses en Cloud Firestore).</span>
+              <span><strong>Diferenciación de Datos:</strong> El ecosistema cuenta con <strong>29 destinos territoriales</strong> y <strong>14 cooperativas</strong> verificadas, sincronizadas con <strong>Supabase</strong> como base de datos principal y <strong>Firebase</strong> para autenticación segura (RBAC) y distribución global CDN.</span>
             </div>
             <span style="font-size: 0.7rem; background: rgba(45, 212, 191, 0.15); color: #2DD4BF; padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: 700; white-space: nowrap;">Modo Híbrido Activo</span>
           </div>
@@ -1550,21 +1550,11 @@
   <!-- SCRIPTS CENTRALES DE FIREBASE & MOTOR DE OPERACIONES -->
   <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
   <script defer src="js/firebase-config.js"></script>
-  
-  <!-- Supabase Cloud Storage Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
+  <script src="js/baqueano-api.js"></script>
 
-  <!-- Catalogos publicos reales: el Ops Center los reutiliza sin borrar Firestore. -->
-  <script src="js/firestore-realtime.js"></script>
-  <script src="js/territories-data.js"></script>
-  <script src="js/website-business-catalog.js"></script>
-  <script src="js/website-operations-catalog.js"></script>
+  <!-- El Ops Center no carga catálogos locales ni datos simulados. -->
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
-  <script src="js/ops-center/ops-mock-data.js"></script>
   <script src="js/ops-center/ops-engine.js?v=20260926-fixed-video-governance-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js"></script>
 

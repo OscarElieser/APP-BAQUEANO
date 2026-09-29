@@ -228,16 +228,19 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
 }
 
 #mainNavbar .global-search,
-#mainNavbar .navbar-search-btn {
+#mainNavbar .global-favs,
+#mainNavbar .navbar-search-btn,
+#mainNavbar .navbar-favs-btn {
   width: 34px !important; height: 34px !important; border-radius: 50% !important;
   background: rgba(255,255,255,0.06) !important; border: 1px solid rgba(255,255,255,0.1) !important;
   color: #fff !important; display: inline-flex !important; align-items: center !important;
   justify-content: center !important; text-decoration: none !important;
   font-size: 0.8rem !important; cursor: pointer !important;
-  outline: none !important; flex-shrink: 0 !important; transition: background 0.2s, border-color 0.2s !important;
+  outline: none !important; flex-shrink: 0 !important; transition: background 0.2s, border-color 0.2s, color 0.2s !important;
 }
 
 #mainNavbar .global-search:hover { background: #165D6F !important; border-color: #165D6F !important; }
+#mainNavbar .global-favs:hover { background: rgba(246,94,1,0.2) !important; border-color: #F65E01 !important; color: #F65E01 !important; }
 
 #mainNavbar .sos-quick-btn,
 #mainNavbar .navbar-sos-btn {

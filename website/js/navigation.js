@@ -60,53 +60,53 @@ function buildGlobalMegaNavigation() {
 
     navMenu.innerHTML = `
       <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
-      <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
-      <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
-      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
+      <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','destino.html'])}" role="menuitem"><span class="nav-label">Destinos</span></a>
+      <a href="mapa.html" class="exact-nav-link${activeClass(['mapa.html'])}" role="menuitem"><span class="nav-label">Mapa</span></a>
+      <a href="experiencias.html" class="exact-nav-link${activeClass(['experiencias.html'])}" role="menuitem"><span class="nav-label">Experiencias</span></a>
+      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
       <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
       <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
-        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
+        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['historia.html','gastronomia.html','musica.html','departamento.html','aliados.html','mi-negocio.html','ambiental.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
           <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
         </button>
         <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-          <!-- 1. EXPLORAR -->
-          <section class="global-mega-column explore">
-            <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
-            <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
-            <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
-            <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
-            <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-          </section>
-
-          <!-- 2. CULTURA -->
+          <!-- 1. MI PAÍS -->
           <section class="global-mega-column culture">
-            <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
-            <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
-            <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
-            <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
-            <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
+            <h2><i class="fa-solid fa-landmark"></i> Mi País</h2>
+            <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia &amp; Memoria</a>
+            <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
+            <a href="musica.html"><i class="fa-solid fa-music"></i> Son Sonoro / Música</a>
+            <a href="departamento.html"><i class="fa-solid fa-map-location-dot"></i> 17 Territorios</a>
           </section>
 
-          <!-- 3. COMUNIDAD -->
+          <!-- 2. ECOSISTEMA & COMUNIDAD -->
           <section class="global-mega-column community">
-            <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
-            <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
+            <h2><i class="fa-solid fa-people-group"></i> Ecosistema</h2>
+            <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Red de Aliados</a>
             <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-            <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
+            <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Custodia Ambiental</a>
+            <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Canal Ético</a>
+          </section>
+
+          <!-- 3. BAQUEANO -->
+          <section class="global-mega-column explore">
+            <h2><i class="fa-solid fa-compass"></i> Baqueano</h2>
+            <a href="nosotros.html"><i class="fa-solid fa-circle-info"></i> Quiénes Somos</a>
+            <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Preguntas Frecuentes</a>
+            <a href="mi-viaje.html"><i class="fa-solid fa-route"></i> Planificador</a>
+            <a href="baqueano-ia.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano IA</a>
           </section>
 
           <!-- 4. CUENTA Y PLATAFORMA -->
           <section class="global-mega-column account">
-            <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
-            <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
-            <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
+            <h2><i class="fa-solid fa-gear"></i> Plataforma</h2>
+            <a href="perfil.html"><i class="fa-regular fa-user"></i> Mi Perfil</a>
+            <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Mis Reservas</a>
             <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-            <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
-            <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
             <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
             <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
             <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-            <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
+            <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Acceso restringido</small></a>
           </section>
         </div>
       </div>`;
@@ -120,7 +120,8 @@ function buildGlobalMegaNavigation() {
   if (actions) {
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
-      <a class="global-search navbar-search-btn" href="destinos.html" aria-label="Buscar en Nicaragua" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a class="global-search navbar-search-btn" href="destinos.html" aria-label="Buscar en Nicaragua" title="Buscar en Nicaragua"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a class="global-favs navbar-favs-btn" href="destinos.html?favs=1" aria-label="Favoritos guardados" title="Mis Favoritos"><i class="fa-regular fa-heart"></i></a>
       <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
       <a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html"><i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span></a>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>

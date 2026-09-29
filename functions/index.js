@@ -7,13 +7,9 @@
  */
 "use strict";
 const { getApps, initializeApp } = require("firebase-admin/app");
-const { getFirestore } = require("firebase-admin/firestore");
 const { onRequest } = require("firebase-functions/v2/https");
 const { defineSecret } = require("firebase-functions/params");
-const { onDocumentWritten } = require("firebase-functions/v2/firestore");
 const { createApiHandler, createHealthHandler } = require("./lib/http");
-const { createAiChatService } = require("./lib/ai-chat");
-const { createPublicMetricsReader } = require("./lib/public-metrics");
 if (getApps().length === 0) initializeApp();
 const runtimeOptions = {region: "us-central1", timeoutSeconds: 30, memory: "256MiB", maxInstances: 10};
 // POR QUÉ: Search Grounding requiere una credencial privada que nunca debe
@@ -21,6 +17,7 @@ const runtimeOptions = {region: "us-central1", timeoutSeconds: 30, memory: "256M
 // CÓMO: Secret Manager inyecta GEMINI_API_KEY únicamente en la función API.
 // QUÉ: referencia declarativa al secreto usado por el planificador fundamentado.
 const geminiApiKey = defineSecret("GEMINI_API_KEY");
+const supabaseServiceRoleKey = defineSecret("SUPABASE_SERVICE_ROLE_KEY");
 
 const getApiKey = () => {
   try {
@@ -32,34 +29,18 @@ const getApiKey = () => {
   return "";
 };
 
-const db = getFirestore();
-const readPublicMetrics = createPublicMetricsReader(db);
-const handleAiChat = createAiChatService({db, getApiKey});
+async function readPublicMetrics() {
+  const { getSupabase } = require("./lib/supabase-client");
+  const database = getSupabase();
+  if (!database) throw new Error("Supabase no está configurado.");
+  const { data, error } = await database.from("public_ecosystem_metrics").select("*").single();
+  if (error) throw error;
+  return data;
+}
 
 exports.healthCheck = onRequest(runtimeOptions, createHealthHandler());
 exports.api = onRequest(
-  {...runtimeOptions, secrets: [geminiApiKey]},
-  createApiHandler({readPublicMetrics, handleAiChat, getApiKey})
-);
-
-
-exports.auditTourismServicePrice = onDocumentWritten(
-  {document: "tourism_services/{serviceId}", region: "us-central1", memory: "256MiB", maxInstances: 10},
-  async (event) => {
-    const before = event.data?.before.exists ? event.data.before.data() : null;
-    const after = event.data?.after.exists ? event.data.after.data() : null;
-    if (!after) return;
-    const tracked = ["precio", "moneda", "precioDesde", "precioHasta", "precioAdulto", "precioNino", "dayPassPrecio", "estadoPrecio", "verificado", "fechaVencimiento", "disponibilidad", "estadoDisponibilidad"];
-    const changed = !before || tracked.some((field) => JSON.stringify(before[field] ?? null) !== JSON.stringify(after[field] ?? null));
-    if (!changed) return;
-    await event.data.after.ref.collection("priceHistory").doc().set({
-      serviceId: event.params.serviceId,
-      changedAt: new Date(),
-      changedBy: after.updatedBy || after.verificadoPor || "system",
-      previous: before ? Object.fromEntries(tracked.map((field) => [field, before[field] ?? null])) : null,
-      current: Object.fromEntries(tracked.map((field) => [field, after[field] ?? null])),
-      source: after.fuentePrecio || null,
-    });
-  },
+  {...runtimeOptions, secrets: [geminiApiKey, supabaseServiceRoleKey]},
+  createApiHandler({readPublicMetrics, getApiKey})
 );
 

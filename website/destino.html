@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — FICHA TERRITORIAL DE DESTINO (destino.html)
+============================================================================
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Servir como punto de entrada canónico e indexable para cada ficha territorial
+  individual de Nicaragua (/destino.html?id=ometepe, /destino.html?id=granada, etc.).
+- Ofrecer metadatos enriquecidos (Schema.org TouristAttraction, OpenGraph),
+  portada de alta fidelidad, especificaciones de precios en C$ y USD, cómo llegar,
+  gastronomía cercana, hospedajes y cooperativas comunitarias verificadas.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Lee el parámetro URL 'id' (?id=ometepe) mediante URLSearchParams.
+- Consulta el banco maestro territorial de destination-dossier.js.
+- Si no se especifica 'id', redirige amigablemente al catálogo interactivo de destinos.html.
+- Renderizado de alto contraste respetando la paleta oficial Baqueano y sin .withOpacity().
+
+📦 3. QUÉ (WHAT / COMPONENTES Y VISTA):
+- Encabezado oficial unificado con navigation.js.
+- Ficha territorial a pantalla completa con navegación táctica.
+- Footer oficial de 5 columnas.
+============================================================================
+-->
+<html lang="es-NI">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Ficha de Destino | Baqueano Nicaragua</title>
+  <meta name="description" content="Información territorial oficial, logística de viaje, costos y anfitriones comunitarios verificados en Nicaragua.">
+  <meta name="theme-color" content="#0B253A">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
+  <link rel="stylesheet" href="css/destination-dossier.css?v=20260928-1">
+
+  <style>
+    body {
+      background: #081827;
+      color: #E2E8F0;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .destino-page-wrapper {
+      max-width: 1080px;
+      margin: 40px auto;
+      padding: 0 20px;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .destino-back-bar {
+      margin-bottom: 20px;
+    }
+    .destino-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #F4E6C1;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s ease;
+    }
+    .destino-back-btn:hover {
+      background: #165D6F;
+      color: #FFFFFF;
+      transform: translateX(-3px);
+    }
+    #destinoContentCard {
+      background: linear-gradient(175deg, #0D263B 0%, #081927 100%);
+      border: 1px solid rgba(244, 230, 193, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body class="page-destino-view">
+
+  <!-- ============================================================================
+       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
+       ============================================================================ -->
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
+        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
+        <div class="exact-nav-brand-text navbar-brand-text">
+          <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
+          <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
+        </div>
+      </a>
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="destino-page-wrapper">
+    <div class="destino-back-bar">
+      <a href="destinos.html" class="destino-back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Volver a todos los destinos
+      </a>
+    </div>
+
+    <div id="destinoContentCard">
+      <!-- Se inyecta dinámicamente con JS -->
+      <div style="padding: 60px 20px; text-align: center;">
+        <i class="fa-solid fa-compass fa-spin" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
+        <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Cargando información territorial...</h2>
+        <p style="color: #94A3B8;">Consultando el Banco Maestro Baqueano de Nicaragua.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/baqueano-master-catalog.js"></script>
+  <script src="js/destination-dossier.js?v=20260928-1"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/baqueano-api.js"></script>
+  <script src="js/global-injector.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const destId = params.get('id');
+
+      if (!destId) {
+        window.location.replace('destinos.html');
+        return;
+      }
+
+      const dest = window.BaqueanoDossier ? window.BaqueanoDossier.get(destId) : null;
+      const card = document.getElementById('destinoContentCard');
+
+      if (!dest) {
+        card.innerHTML = `
+          <div style="padding: 60px 20px; text-align: center;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Destino no encontrado</h2>
+            <p style="color: #94A3B8; margin-bottom: 24px;">No encontramos la ficha para el destino solicitado.</p>
+            <a href="destinos.html" class="destino-back-btn"><i class="fa-solid fa-mountain-sun"></i> Ver catálogo completo</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.title = `${dest.title} | Baqueano Nicaragua`;
+
+      // Renderizar ficha completa en el contenedor
+      card.innerHTML = `
+        <div class="bq-dossier-hero">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
+          <div class="bq-dossier-hero-gradient"></div>
+          <div class="bq-dossier-hero-text">
+            <div class="bq-dossier-badges">
+              <span class="bq-dossier-badge dept"><i class="fa-solid fa-location-dot"></i> ${dest.department}</span>
+              <span class="bq-dossier-badge cat"><i class="fa-solid fa-compass"></i> ${dest.category}</span>
+              <span class="bq-dossier-badge verified"><i class="fa-solid fa-certificate"></i> Verificado BAQUEANO · ${dest.verifiedDate}</span>
+            </div>
+            <h1 class="bq-dossier-title" style="margin: 0 0 6px 0;">${dest.title}</h1>
+            <p class="bq-dossier-loc"><i class="fa-solid fa-map-pin"></i> ${dest.municipality}, ${dest.department} · Coordenadas: ${dest.coordinates}</p>
+          </div>
+        </div>
+
+        <div class="bq-dossier-scroll-area">
+          <div class="bq-dossier-metrics">
+            <div class="bq-dossier-metric-card">
+              <i class="fa-solid fa-coins"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Precio Sugerido</span>
+                <span class="bq-dossier-metric-val">${dest.priceNio}</span>
+                <small style="color:#94A3B8;font-size:0.75rem;">(${dest.priceUsd})</small>
+              </div>
+            </div>
+            <div class="bq-dossier-metric-card">
+              <i class="fa-solid fa-cloud-sun"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Clima Promedio</span>
+                <span class="bq-dossier-metric-val">${dest.climate}</span>
+              </div>
+            </div>
+            <div class="bq-dossier-metric-card">
+              <i class="fa-regular fa-clock"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Estadía Ideal</span>
+                <span class="bq-dossier-metric-val">${dest.duration}</span>
+              </div>
+            </div>
+            <div class="bq-dossier-metric-card">
+              <i class="fa-solid fa-person-hiking"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Dificultad</span>
+                <span class="bq-dossier-metric-val">${dest.difficulty}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bq-dossier-trust-banner">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div class="bq-dossier-trust-text">
+              <h5>Protocolo de Verificación Territorial en 8 Puntos Aprobado</h5>
+              <p>✔ Coordenadas georreferenciadas en campo · ✔ Anfitriones y cooperativas acreditadas · ✔ Cero comisiones foráneas añadidas sobre precios locales · ✔ Sincronizado con el Banco Maestro Baqueano.</p>
+            </div>
+          </div>
+
+          <div class="bq-dossier-section">
+            <h4><i class="fa-solid fa-book-open"></i> Sobre este destino</h4>
+            <p>${dest.description}</p>
+          </div>
+
+          <div class="bq-dossier-section">
+            <h4><i class="fa-solid fa-route"></i> Cómo llegar</h4>
+            <p>${dest.howToReach}</p>
+          </div>
+
+          <div class="bq-dossier-section">
+            <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Actividades recomendadas</h4>
+            <div class="bq-dossier-chips-list">
+              ${dest.activities.map(act => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-check" style="color:#10B981"></i> ${act}</div>`).join('')}
+            </div>
+          </div>
+
+          <div class="bq-dossier-section">
+            <h4><i class="fa-solid fa-utensils"></i> Gastronomía ancestral &amp; sabores locales</h4>
+            <div class="bq-dossier-chips-list">
+              ${dest.gastronomy.map(dish => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-bowl-food" style="color:#F65E01"></i> ${dish}</div>`).join('')}
+            </div>
+          </div>
+
+          <div class="bq-dossier-section">
+            <h4><i class="fa-solid fa-handshake"></i> Aliados y Cooperativas Verificadas</h4>
+            <div class="bq-dossier-chips-list">
+              ${dest.allies.map(ally => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-store" style="color:#2DD4BF"></i> ${ally}</div>`).join('')}
+            </div>
+          </div>
+
+          <div class="bq-dossier-section">
+            <h4><i class="fa-solid fa-circle-exclamation"></i> Recomendaciones de seguridad &amp; respeto ambiental</h4>
+            <p>${dest.safetyTips}</p>
+          </div>
+        </div>
+
+        <div class="bq-dossier-footer-bar">
+          <div class="bq-dossier-btn-group">
+            <button type="button" class="bq-dossier-act-btn ghost" id="standaloneFavBtn">
+              <i class="fa-regular fa-heart"></i> <span>Favoritos</span>
+            </button>
+            <button type="button" class="bq-dossier-act-btn ghost" id="standaloneTripBtn">
+              <i class="fa-solid fa-route"></i> <span>+ Mi Viaje</span>
+            </button>
+          </div>
+          <div class="bq-dossier-btn-group">
+            <a href="baqueano-ia.html?destino=${encodeURIComponent(dest.id)}" class="bq-dossier-act-btn primary">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Planificar con IA
+            </a>
+            <a href="mapa.html?q=${encodeURIComponent(dest.title)}" class="bq-dossier-act-btn secondary">
+              <i class="fa-regular fa-map"></i> Ver en Mapa
+            </a>
+          </div>
+        </div>
+      `;
+
+      // Persistencia real: Firebase autentica y Functions guarda en Supabase.
+      document.getElementById('standaloneFavBtn').addEventListener('click', async function() {
+        try {
+          await window.BaqueanoApi.saveFavorite(dest.id, 'destination');
+          this.innerHTML = '<i class="fa-solid fa-heart" style="color:#EF4444"></i> <span>Guardado</span>';
+          if (window.bqToast) window.bqToast('Destino guardado en Supabase.', 'success');
+        } catch (error) {
+          if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar favoritos.' : error.message, 'warning');
+        }
+      });
+
+      document.getElementById('standaloneTripBtn').addEventListener('click', async function() {
+        try {
+          await window.BaqueanoApi.saveTravelPlan({
+            planTitle: `Visita a ${dest.title}`,
+            destination: dest.id,
+            days: 1,
+            currency: 'NIO',
+            source: 'destination_dossier',
+            payload: { destinationId: dest.id, title: dest.title, department: dest.department }
+          });
+          this.innerHTML = '<i class="fa-solid fa-route" style="color:#F65E01"></i> <span>En Mi Viaje</span>';
+          if (window.bqToast) window.bqToast(`${dest.title} se guardó en Supabase.`, 'success');
+        } catch (error) {
+          if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar tu viaje.' : error.message, 'warning');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
