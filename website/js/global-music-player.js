@@ -12,13 +12,13 @@
 
   var KEY = 'baqueano_music_session_v1';
   var tracks = [
-    { title:'La Mora Limpia', artist:'Justo Santos', file:'la_mora_limpia.mp3' },
-    { title:'Son de Mi Tierra', artist:'Tradición nicaragüense', file:'Fiesta Pinolera.mp3' },
-    { title:'Sirena del Lago', artist:'Archivo Cocibolca', file:'Cocibolca.mp3' },
-    { title:'Nicaragua Nicaragüita', artist:'Carlos Mejía Godoy', file:'nicaragua,nicaraguita.mp3' },
-    { title:'El Solar de Monimbó', artist:'Camilo Zapata', file:'el_solar_de_monimbo.mp3' },
-    { title:'Palo de Mayo', artist:'Dimensión Costeña', file:'Sabroso Palo de Mayo.mp3' },
-    { title:'Danza del Güegüense', artist:'Folclor Nacional', file:'🔊Sones del Güegüense.mp3' }
+    { title:'La Mora Limpia', artist:'Justo Santos', file:'la_mora_limpia.mp3', image:'assets/artistas/justo santos.jpg' },
+    { title:'Son de Mi Tierra', artist:'Tradición nicaragüense', file:'Fiesta Pinolera.mp3', image:'assets/images/PROPUESTA/NICARAGUA AUTENTICA.png' },
+    { title:'Sirena del Lago', artist:'Camilo Zapata', file:'Cocibolca.mp3', image:'assets/artistas/camilo zapata.jpg' },
+    { title:'Nicaragua Nicaragüita', artist:'Carlos Mejía Godoy', file:'nicaragua,nicaraguita.mp3', image:'assets/artistas/carlos mejia godoy.jpg' },
+    { title:'El Solar de Monimbó', artist:'Luis Enrique Mejía Godoy', file:'el_solar_de_monimbo.mp3', image:'assets/artistas/Luis Enrique Mejía Godoy.jpg' },
+    { title:'Palo de Mayo', artist:'Tradición caribeña', file:'Sabroso Palo de Mayo.mp3', image:'assets/artistas/Dimensión Costeña.jpg' },
+    { title:'Danza del Güegüense', artist:'Folclor Nacional', file:'🔊Sones del Güegüense.mp3', image:'assets/artistas/Música de El Güegüense.jpg' }
   ];
   function readState() { try { return JSON.parse(sessionStorage.getItem(KEY) || 'null'); } catch (error) { return null; } }
   var state = readState();
@@ -36,11 +36,11 @@
   dock.className = 'bq-music-dock'; dock.setAttribute('aria-label','Reproductor de música persistente');
   dock.innerHTML = '<a class="bq-music-track" href="musica.html" title="Abrir archivo sonoro"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt=""><span class="bq-music-copy"><strong></strong><small></small></span></a><div class="bq-music-controls"><button class="bq-music-btn bq-music-skip" data-step="-1" type="button" aria-label="Canción anterior"><i class="fa-solid fa-backward-step"></i></button><button class="bq-music-btn bq-music-play" type="button" aria-label="Reproducir"><i class="fa-solid fa-play"></i></button><button class="bq-music-btn bq-music-skip" data-step="1" type="button" aria-label="Siguiente canción"><i class="fa-solid fa-forward-step"></i></button></div><div class="bq-music-progress"><div class="bq-music-rail" role="slider" tabindex="0" aria-label="Posición de la canción"><div class="bq-music-fill"></div></div><span class="bq-music-time">0:00 / 0:00</span></div><div class="bq-music-actions"><a class="bq-music-link" href="musica.html#archivoSonoro" aria-label="Abrir lista de reproducción"><i class="fa-solid fa-list"></i></a><button class="bq-music-btn bq-music-close" type="button" aria-label="Cerrar reproductor"><i class="fa-solid fa-xmark"></i></button></div>';
   document.body.appendChild(dock);
-  var title = dock.querySelector('strong'), artist = dock.querySelector('small'), icon = dock.querySelector('.bq-music-play i'), fill = dock.querySelector('.bq-music-fill'), time = dock.querySelector('.bq-music-time');
+  var cover = dock.querySelector('.bq-music-track img'), title = dock.querySelector('strong'), artist = dock.querySelector('small'), icon = dock.querySelector('.bq-music-play i'), fill = dock.querySelector('.bq-music-fill'), time = dock.querySelector('.bq-music-time');
   function format(value) { return Number.isFinite(value) ? Math.floor(value/60) + ':' + String(Math.floor(value%60)).padStart(2,'0') : '0:00'; }
   function save(playing) { try { sessionStorage.setItem(KEY, JSON.stringify({ started:true, dismissed:false, index:index, time:audio.currentTime || 0, playing:playing, updatedAt:Date.now() })); } catch (error) { /* El audio continúa aunque el almacenamiento no esté disponible. */ } }
   function loadTrack(autoplay, restoredTime) {
-    var track = tracks[index]; title.textContent=track.title; artist.textContent=track.artist; audio.src='assets/audio/'+encodeURIComponent(track.file); audio.load();
+    var track = tracks[index]; cover.src=track.image;cover.alt=track.artist;title.textContent=track.title; artist.textContent=track.artist; audio.src='assets/audio/'+encodeURIComponent(track.file); audio.load();
     audio.addEventListener('loadedmetadata', function restore() { audio.removeEventListener('loadedmetadata', restore); if (Number.isFinite(restoredTime)) audio.currentTime=Math.min(restoredTime,audio.duration||restoredTime); if (autoplay) audio.play().catch(function(){ save(false); }); }, { once:true });
   }
   function step(direction) { index=(index+direction+tracks.length)%tracks.length; loadTrack(true,0); }

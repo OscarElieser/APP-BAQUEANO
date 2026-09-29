@@ -785,6 +785,12 @@
   }
 
   async function init() {
+    if (!document.querySelector('script[data-global-assets]')) {
+      var assetScript = document.createElement('script');
+      assetScript.src = 'js/global-asset-curator.js?v=20260929-1';
+      assetScript.dataset.globalAssets = 'true';
+      document.body.appendChild(assetScript);
+    }
     if (!document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
       languageScript.src = 'js/global-language.js?v=20260929-1';

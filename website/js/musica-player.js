@@ -18,13 +18,13 @@
   'use strict';
 
   const TRACKS = [
-    { title:'La Mora Limpia', artist:'Justo Santos', file:'la_mora_limpia.mp3', genre:'Son nica', region:'Managua', period:'Siglo XX', summary:'Pieza fundamental del repertorio popular nicaragüense, reconocida por su melodía de guitarra y su identidad nacional.' },
-    { title:'Son de Mi Tierra', artist:'Tradición nicaragüense', file:'Fiesta Pinolera.mp3', genre:'Son tradicional', region:'Nicaragua', period:'Tradición viva', summary:'Selección del archivo sonoro que reúne el pulso festivo y campesino de la música tradicional.' },
-    { title:'Sirena del Lago', artist:'Camilo Zapata', file:'Cocibolca.mp3', genre:'Son nica', region:'Granada', period:'Siglo XX', summary:'Evocación musical del Gran Lago Cocibolca y del paisaje cultural del Pacífico nicaragüense.' },
-    { title:'Nicaragua Nicaragüita', artist:'Carlos Mejía Godoy', file:'nicaragua,nicaraguita.mp3', genre:'Nueva canción', region:'Nicaragua', period:'Década de 1970', summary:'Una de las composiciones nicaragüenses más reconocidas, convertida en símbolo de identidad y afecto por el país.' },
-    { title:'El Solar de Monimbó', artist:'Luis Enrique Mejía Godoy', file:'el_solar_de_monimbo.mp3', genre:'Nueva canción', region:'Masaya', period:'Siglo XX', summary:'Canción vinculada a la memoria, la comunidad indígena de Monimbó y la identidad cultural de Masaya.' },
-    { title:'Palo de Mayo', artist:'Tradición caribeña', file:'Sabroso Palo de Mayo.mp3', genre:'Palo de Mayo', region:'Costa Caribe', period:'Tradición viva', summary:'Ritmo comunitario afrocaribeño asociado a las celebraciones de mayo, la danza y la herencia creole.' },
-    { title:'Danza del Güegüense', artist:'Folclor Nacional', file:'🔊Sones del Güegüense.mp3', genre:'Son tradicional', region:'Diriamba, Carazo', period:'Época colonial', summary:'Música de la obra danzaria El Güegüense, expresión de sátira, teatro, danza y patrimonio cultural nicaragüense.' }
+    { title:'La Mora Limpia', artist:'Justo Santos', file:'la_mora_limpia.mp3', image:'assets/artistas/justo santos.jpg', genre:'Son nica', region:'Managua', period:'Siglo XX', summary:'Pieza fundamental del repertorio popular nicaragüense, reconocida por su melodía de guitarra y su identidad nacional.' },
+    { title:'Son de Mi Tierra', artist:'Tradición nicaragüense', file:'Fiesta Pinolera.mp3', image:'assets/images/PROPUESTA/NICARAGUA AUTENTICA.png', genre:'Son tradicional', region:'Nicaragua', period:'Tradición viva', summary:'Selección del archivo sonoro que reúne el pulso festivo y campesino de la música tradicional.' },
+    { title:'Sirena del Lago', artist:'Camilo Zapata', file:'Cocibolca.mp3', image:'assets/artistas/camilo zapata.jpg', genre:'Son nica', region:'Granada', period:'Siglo XX', summary:'Evocación musical del Gran Lago Cocibolca y del paisaje cultural del Pacífico nicaragüense.' },
+    { title:'Nicaragua Nicaragüita', artist:'Carlos Mejía Godoy', file:'nicaragua,nicaraguita.mp3', image:'assets/artistas/carlos mejia godoy.jpg', genre:'Nueva canción', region:'Nicaragua', period:'Década de 1970', summary:'Una de las composiciones nicaragüenses más reconocidas, convertida en símbolo de identidad y afecto por el país.' },
+    { title:'El Solar de Monimbó', artist:'Luis Enrique Mejía Godoy', file:'el_solar_de_monimbo.mp3', image:'assets/artistas/Luis Enrique Mejía Godoy.jpg', genre:'Nueva canción', region:'Masaya', period:'Siglo XX', summary:'Canción vinculada a la memoria, la comunidad indígena de Monimbó y la identidad cultural de Masaya.' },
+    { title:'Palo de Mayo', artist:'Tradición caribeña', file:'Sabroso Palo de Mayo.mp3', image:'assets/artistas/Dimensión Costeña.jpg', genre:'Palo de Mayo', region:'Costa Caribe', period:'Tradición viva', summary:'Ritmo comunitario afrocaribeño asociado a las celebraciones de mayo, la danza y la herencia creole.' },
+    { title:'Danza del Güegüense', artist:'Folclor Nacional', file:'🔊Sones del Güegüense.mp3', image:'assets/artistas/Música de El Güegüense.jpg', genre:'Son tradicional', region:'Diriamba, Carazo', period:'Época colonial', summary:'Música de la obra danzaria El Güegüense, expresión de sátira, teatro, danza y patrimonio cultural nicaragüense.' }
   ].map(track => ({...track, src:`assets/audio/${encodeURIComponent(track.file)}`}));
 
   const ARTISTS = {
@@ -67,8 +67,8 @@
   function setTrack(index, autoplay) {
     currentIndex=(index+TRACKS.length)%TRACKS.length;
     const track=TRACKS[currentIndex]; audio.src=track.src; audio.load();
-    const featured=$('#featuredTrackTitle'), featuredArtist=$('#featuredTrackArtist'), stickyTitle=$('#stickyTrackTitle'), stickyArtist=$('#stickyTrackArtist');
-    if(featured) featured.textContent=track.title; if(featuredArtist) featuredArtist.textContent=track.artist; if(stickyTitle) stickyTitle.textContent=track.title; if(stickyArtist) stickyArtist.textContent=track.artist;
+    const featured=$('#featuredTrackTitle'), featuredArtist=$('#featuredTrackArtist'), featuredCover=$('.featured-player-cover'), stickyTitle=$('#stickyTrackTitle'), stickyArtist=$('#stickyTrackArtist'), stickyCover=$('#stickyTrackThumb');
+    if(featured) featured.textContent=track.title; if(featuredArtist) featuredArtist.textContent=track.artist; if(featuredCover){featuredCover.src=track.image;featuredCover.alt=track.artist;} if(stickyTitle) stickyTitle.textContent=track.title; if(stickyArtist) stickyArtist.textContent=track.artist; if(stickyCover){stickyCover.src=track.image;stickyCover.alt=track.artist;}
     $$('.track-card-exact').forEach(card=>card.classList.toggle('is-playing',findTrack(card.dataset.title)===currentIndex));
     if(autoplay) audio.play().catch(()=>notify('El navegador bloqueó el inicio automático. Pulsá reproducir nuevamente.'));
   }
