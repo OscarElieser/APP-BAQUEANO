@@ -274,6 +274,30 @@ assert(territorialContextService.includes("getTerritorialTripContext"), "Trip Hu
 assert(realTripHubService.includes("firestoreCollections.tripBookings"), "Trip Hub must load the requested booking from Firestore.");
 assert(!realTripHubService.includes("SEED_TRIP"), "Trip Hub must not ship a demonstration trip.");
 
+// ============================================================================
+// FOOTER GLOBAL: DESTINOS REALES Y NAVEGACIÓN COMPLETA
+// POR QUÉ: un enlace visualmente correcto no sirve si apunta a relleno o 404.
+// CÓMO: valida el contrato global y resuelve cada archivo HTML local enlazado.
+// QUÉ: protege redes oficiales, WhatsApp y navegación institucional del footer.
+// ============================================================================
+const globalInjector = read("js/global-injector.js");
+const publicHtmlFiles = fs.readdirSync(root).filter((file) => file.endsWith(".html"));
+const publicHtmlSources = publicHtmlFiles.map((file) => [file, read(file)]);
+
+assert(globalInjector.includes("https://www.instagram.com/baqueano_nicaragua"), "Footer must link the official Instagram account.");
+assert(globalInjector.includes("https://www.facebook.com/share/1S71xwJKse/"), "Footer must link the official Facebook page.");
+assert(globalInjector.includes("https://www.tiktok.com/@baqueano.nicaragu"), "Footer must link the official TikTok account.");
+assert(globalInjector.includes("https://wa.me/50584431289"), "Footer must link the official BAQUEANO WhatsApp number.");
+assert(!globalInjector.includes("50588888888"), "Footer must not contain placeholder WhatsApp numbers.");
+
+for (const [sourceName, source] of publicHtmlSources) {
+  assert(!source.includes('href="https://youtube.com"'), `${sourceName} must not link to generic YouTube home.`);
+  for (const match of source.matchAll(/href="([^"?#]+\.html)(?:[?#][^"]*)?"/g)) {
+    const target = match[1].replace(/^\.\//, "");
+    assert(fs.existsSync(path.join(root, target)), `${sourceName} links to missing local page ${target}.`);
+  }
+}
+
 if (failures.length > 0) {
   console.error("Production smoke tests failed:");
   for (const failure of failures) console.error(`- ${failure}`);

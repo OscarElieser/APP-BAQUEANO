@@ -573,7 +573,7 @@
             <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener" class="footer-social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://youtube.com/@baqueanonicaragua" target="_blank" rel="noopener" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
 
@@ -696,13 +696,16 @@
         window.BaqueanoAssistant.sendUserPrompt(promptText);
         return;
       }
-      alert('Baqüi Asistente: ' + promptText);
+      // Redirigir a Baqueano Digital con el prompt como parámetro
+      const url = 'baqueano-ia.html' + (promptText ? '?prompt=' + encodeURIComponent(promptText) : '');
+      window.location.href = url;
     }
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/destination-dossier.js?v=20260928-1"></script>
 <script src="js/navigation.js"></script>
 <script src="js/baqueano-api.js"></script>
+<script src="js/smart-search.js"></script>
 <script src="js/global-injector.js"></script>
 </body>
 

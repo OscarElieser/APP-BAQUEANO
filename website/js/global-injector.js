@@ -53,7 +53,7 @@
       { id: 'bq-styles',    href: 'styles.css?v=20260927-exact-1' },
       { id: 'bq-modules',   href: 'css/modules.css' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
-      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
+      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v11-capsule' },
       { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
@@ -114,17 +114,6 @@
         .bq-stamp-title { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; }
         .bq-stamp-sub   { font-size: .65rem; color: #64748B; text-transform: uppercase; letter-spacing: .1em; }
 
-        /* ── Botón OPS Center Flotante ── */
-        .bq-ops-fab {
-          position: fixed; bottom: 24px; left: 24px; z-index: 900;
-          background: #0B253A; border: 1px solid rgba(244,230,193,.25); border-radius: 12px;
-          padding: 10px 16px; display: flex; align-items: center; gap: 8px;
-          color: #F4E6C1; font-size: .78rem; font-weight: 700; text-decoration: none;
-          box-shadow: 0 4px 20px rgba(0,0,0,.4); transition: all .25s;
-          font-family: 'Inter', sans-serif;
-        }
-        .bq-ops-fab:hover { background: #165D6F; border-color: #F65E01; color: #FFF; transform: translateY(-2px); }
-        .bq-ops-fab i { font-size: 1rem; color: #F65E01; }
 
         /* ── Toast de Retroalimentación Global ── */
         #bqGlobalToast { position: fixed; bottom: 80px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
@@ -286,10 +275,11 @@
           '</a>' +
           '<p class="bq-footer-tagline">Descubrí lo que no sale en el mapa.</p>' +
           '<div class="bq-footer-socials">' +
-            '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
-            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
-            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
-            '<a href="https://wa.me/50588888888" target="_blank" rel="noopener" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+            '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
+            '<a href="https://youtube.com/@baqueanonicaragua" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>' +
+            '<a href="https://wa.me/50584431289?text=Hola%20BAQUEANO%2C%20necesito%20informaci%C3%B3n%20sobre%20Nicaragua" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="WhatsApp de BAQUEANO"><i class="fa-brands fa-whatsapp"></i></a>' +
           '</div>' +
         '</div>' +
         // Columna Explorá
@@ -300,7 +290,8 @@
             '<li><a href="destinos.html">Destinos</a></li>' +
             '<li><a href="mapa.html">Mapa Interactivo</a></li>' +
             '<li><a href="experiencias.html">Experiencias</a></li>' +
-            '<li><a href="departamento.html">Departamentos</a></li>' +
+            '<li><a href="departamento.html">17 Departamentos</a></li>' +
+            '<li><a href="baqueano-ia.html">Baqueano Digital</a></li>' +
           '</ul>' +
         '</div>' +
         // Columna Cultura
@@ -320,9 +311,11 @@
           '<ul>' +
             '<li><a href="nosotros.html">Quiénes Somos</a></li>' +
             '<li><a href="mi-negocio.html">Registrá tu Negocio</a></li>' +
-            '<li><a href="denuncias.html">Canal de Denuncias</a></li>' +
+            '<li><a href="denuncias.html">Canal Ético / Denuncias</a></li>' +
             '<li><a href="perfil.html">Mi Perfil</a></li>' +
             '<li><a href="mi-viaje.html">Mi Viaje</a></li>' +
+            '<li><a href="https://wa.me/50584431289?text=Hola%20BAQUEANO%2C%20necesito%20asistencia" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:5px"></i>Contacto WhatsApp</a></li>' +
+            '<li><a href="javascript:void(0)" onclick="if(window.bqOpenSos)bqOpenSos();else if(window.openSosModal)openSosModal(event);"><i class="fa-solid fa-shield-heart" style="color:#EF4444;margin-right:5px"></i>Centro SOS 24/7</a></li>' +
           '</ul>' +
         '</div>' +
         // Columna Legal
@@ -349,18 +342,7 @@
     '</div>';
   }
 
-  // ── Inyectar botón OPS Center FAB ─────────────────────────────────────────
-  function injectOPSButton() {
-    // Solo si la página no es admin.html y no existe ya
-    if (document.getElementById('bqOpsFab')) return;
-    var fab = document.createElement('a');
-    fab.id = 'bqOpsFab';
-    fab.href = 'admin.html';
-    fab.className = 'bq-ops-fab';
-    fab.title = 'OPS Center — Solo personal autorizado';
-    fab.innerHTML = '<i class="fa-solid fa-shield-halved"></i> OPS Center';
-    document.body.appendChild(fab);
-  }
+
 
   // ── Modal SOS Global ───────────────────────────────────────────────────────
   function injectSosModal() {
@@ -509,7 +491,6 @@
     injectGlobalNavbar();
     upgradeOldFooters();
     injectGlobalFooter();
-    injectOPSButton();
     injectSosModal();
     addOpsToExistingNavbar();
     wireNavbarButtons(null);

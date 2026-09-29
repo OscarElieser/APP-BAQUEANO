@@ -6,3 +6,8 @@ dist
 .env.local
 .env.*.local
 *.tsbuildinfo
+
+# POR QUÉ: Las capturas de validación visual son artefactos locales temporales.
+# CÓMO: Playwright las genera durante auditorías responsivas sin versionarlas.
+# QUÉ: Excluye el directorio local de evidencias visuales del sitio público.
+.snapshots/

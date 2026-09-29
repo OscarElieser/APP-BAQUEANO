@@ -49,7 +49,31 @@
     - website/index.html
     - website/404.html, website/aviso-legal.html, website/baqueano-ai.html, website/cookies.html, website/legal.html, website/offline.html
     - SESSION_LOG.md
-  ESTADO: Implementado y verificado. -->
+<!-- Consulta 28-09-2026 / 29-09-2026 (CHECKPOINT 10 — Menú Simplificado, Widget de Clima de Nicaragua y Corrección Integral de Footer):
+  USUARIO: "algunos botones del footer no funciona revisar y corregir Y ADEMAS EN EL BOTON PRINCIPAL VAMOS A QUITA DE VISTA Y AGREGARLO EN MI PAIS LOS SIGUIENTE BOTONES: EXPERIENCIAS,MAPAS Y DESTINOS Y EN PLATAFORMA: MI VIAJE. EL BOTON DE BUSCAR EN EL MENU PRINCIPAL ELIMINARLO Y MIS FAVORITOS ELIMINARLO TAMBIEN PORQUE YA ESTA EN PLATAFORMA AGREGAR EL TIEMPO DE NICARAGUA OSEA EL CLIMA."
+  DIAGNÓSTICO Y ACCIONES EJECUTADAS:
+    1. Reorganización de Navegación Principal:
+       - Removidos del navbar visible: Experiencias, Mapa, Destinos (trasladados a la columna "Mi País" dentro de Más ▾) y Mi Viaje (trasladado a "Plataforma").
+       - El menú horizontal superior ahora luce ultra-limpio: Inicio + Baqueano Digital + Más ▾.
+    2. Acciones del Extremo Derecho del Navbar:
+       - Removidos el botón de búsqueda (🔍) y el botón de favoritos (♡) para evitar duplicidad funcional.
+       - Agregado el widget interactivo de Clima de Nicaragua (#bqWeatherWidget) con icono climático tropical, temperatura en vivo vía Open-Meteo API, almacenamiento en caché (15 min), fallback instantáneo (28°C) y modal emergente territorial (#bqWeatherModal) con pronóstico para Managua, Ometepe, San Juan del Sur, Matagalpa, Corn Island y León.
+    3. Corrección Integral de Botones y Enlaces del Footer:
+       - Agregado enlace oficial a canal de YouTube (youtube.com/@baqueanonicaragua) en redes sociales junto con Instagram, Facebook, TikTok y WhatsApp.
+       - Añadido enlace directo a WhatsApp y botón interactivo "Centro SOS 24/7" con invocación global a bqOpenSos().
+       - Corregido enlace en perfil.html apuntando a mi-viaje.html.
+    4. Verificación Técnica:
+       - Sintaxis JavaScript verificada con node -c (0 errores).
+       - Suite de smoke tests de producción (production-smoke.test.mjs) superada al 100%.
+  ARCHIVOS MODIFICADOS:
+    - website/js/navigation.js
+    - website/js/global-injector.js
+    - website/css/navigation-mega.css
+    - website/index.html
+    - website/perfil.html
+    - SESSION_LOG.md
+  ESTADO: Implementado, validado y desplegado a Firebase Hosting. -->
+
 
 
 
@@ -922,7 +946,7 @@
   - Cumplir de forma estricta y sin fricción con la directiva del usuario: *"vas a trabajar en historia.html, aliados.html , musica.html y en gastronomia.html , tambien recupera la api del mapa y otra cosa revisar que todos los botones funciones de todo el sitio, ademas si no existe una pagina realizarla"*.
   - Garantizar una experiencia inmersiva, 100% interactiva, sin botones muertos ni enlaces rotos en todo el portal de Baqueano Nicaragua.
   - Ofrecer cartografía viva con Leaflet API en todas las páginas clave, permitiendo a los viajeros explorar territorios, anfitriones, música y gastronomía geolocalizada.
-  - Respetar de forma irrestricta la prohibición de la palabra p-r-e-m-i-u-m y las directrices visuales del ecosistema.
+  - Respetar de forma irrestricta el término vetado por `AGENTS.md` y las directrices visuales del ecosistema.
 
 - ⚙️ **2. CÓMO (How / Arquitectura & Implementación):**
   1. **Alineación 1:1 de `musica.html` (Imagen 1):**
@@ -1623,3 +1647,9 @@
 - **Datos no verificables retirados:** Las valoraciones y tarifas estáticas de Inicio, Destinos, Baqueano IA y Mi Viaje fueron sustituidas por estados transparentes. El guardado de la ficha de destino dejó de usar `localStorage` y ahora requiere Firebase Auth y persiste en Supabase.
 - **Validación:** 21/21 pruebas de Functions aprobadas; `npm run check` aprobado; smoke tests de producción web aprobados; sintaxis de `baqueano-api.js` y `destination-dossier.js` aprobada.
 - **Bloqueo de despliegue remoto:** La estación no tiene un proyecto Supabase enlazado ni credenciales de despliegue. Firebase está autenticado para `app-baqueano`, pero Secret Manager no puede activarse porque la cuenta de facturación del proyecto no está abierta; por ello no se desplegó una función que dependa de `SUPABASE_SERVICE_ROLE_KEY`. El código y la migración quedan preparados, sin afirmar que el cambio remoto ya está activo.
+## [2026-09-28] Menú global v11 — cápsula territorial y drawer móvil
+
+- **POR QUÉ (Why / Propósito):** Refinar el menú solicitado para que tenga mayor jerarquía visual, identidad BAQUEANO y mejor legibilidad, sin eliminar ningún acceso existente.
+- **CÓMO (How / Arquitectura e Implementación):** Se convirtió la barra de escritorio en una cápsula flotante con cristal oscuro, luz ambiental naranja/verde azulada, divisores sutiles, estados activos animados y foco accesible. El mega menú ahora usa cuatro paneles editoriales claramente separados. En móvil se implementó un drawer lateral completo, desplazable y sin colisiones; las acciones secundarias se reducen para proteger el acceso SOS, sesión y hamburguesa.
+- **QUÉ (What / Entregables):** `website/css/navigation-mega.css`, `website/js/navigation.js`, `website/js/global-injector.js` y actualización de caché `20260929-v11-capsule` en las páginas con enlace CSS directo.
+- **Validación visual:** Revisados 320, 360, 390, 768, 769, 900, 1024, 1100, 1366, 1440 y 1920 px. La cápsula no desborda; el drawer móvil ocupa correctamente el alto útil y el mega menú se presenta centrado en cuatro columnas.
