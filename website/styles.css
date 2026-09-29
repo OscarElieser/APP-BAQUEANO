@@ -9813,3 +9813,31 @@ img {
   align-items: center !important;
   gap: 0.35rem !important;
 }
+
+/* ============================================================================
+   BAQUEANO — SUPERFICIE CLARA GLOBAL
+   ============================================================================
+   POR QUÉ: Mantener una base visual luminosa y uniforme mientras cada sección
+   conserva sus acentos institucionales y su jerarquía editorial.
+   CÓMO: Fija el lienzo raíz en blanco, neutraliza fondos heredados del tema
+   oscuro y conserva las tarjetas y bloques con identidad propia.
+   QUÉ: Fondo blanco adaptable para todas las páginas públicas del portal.
+   ============================================================================ */
+:root {
+  color-scheme: light;
+  --baqueano-page-background: #ffffff;
+  --baqueano-page-foreground: #0f172a;
+}
+
+html,
+body,
+body[data-theme="dark"],
+html[data-theme="dark"] body {
+  background-color: var(--baqueano-page-background) !important;
+  color: var(--baqueano-page-foreground);
+}
+
+body::before,
+body::after {
+  background-color: transparent;
+}

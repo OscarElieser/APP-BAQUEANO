@@ -1,99 +1,235 @@
 <!DOCTYPE html>
-  <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
-       ============================================================================ -->
-  <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
-    <div class="exact-container nav-inner">
-      <!-- Marca / Logo Oficial -->
-      <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
-        <div class="exact-nav-brand-text navbar-brand-text">
-          <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
-          <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PORTAL DE ANFITRIONES & NEGOCIOS COMUNITARIOS (mi-negocio.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ser la puerta de entrada oficial para cooperativas campesinas, posadas
+  comunitarias, guías certificados y emprendedores rurales de Nicaragua que
+  desean registrar su negocio turístico en el ecosistema Baqueano.
+- Eliminar la barrera de intermediarios foráneos: el anfitrión registra
+  sus servicios directamente, sin comisiones abusivas de OTAs.
+- Conectar el formulario de registro directamente a Cloud Firestore
+  (/businesses) para supervisión inmediata desde el Ops Center.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Formulario multi-paso (3 pasos) con validación campo por campo.
+- Integración directa con BaqueanoFirestore.registerBusiness() y audit log.
+- Glassmorphism con la paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+- Contador de negocios aliados en tiempo real desde Firestore.
+- Sección de beneficios con modelo económico transparente Leyes No. 1210 y 1211.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Hero Section: Misión del portal de anfitriones.
+- Contadores en Vivo: Negocios aliados, rutas activas, ingresos comunitarios.
+- Formulario Multi-Paso: Datos del negocio → Contacto & Propietario → Confirmación.
+- Panel de Éxito: Confirmación con ID de registro.
+- Sección FAQ: Respuestas a las 6 preguntas más frecuentes de anfitriones.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Portal de Anfitriones & Negocios | Baqueano Nicaragua</title>
+  <meta name="description" content="Registra tu cooperativa, posada o guía turístico en Baqueano Nicaragua. Sin intermediarios, 0% comisión, conectado directamente con exploradores responsables.">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
+  <link rel="stylesheet" href="css/pages/mi-negocio.css">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
+</head>
+<body class="has-video-hero page-mi-negocio">
+
+  <!-- BARRA DE NAVEGACIÓN INSTITUCIONAL -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA</span>
         </div>
       </a>
 
-      <!-- Menú Horizontal Central de Enlaces -->
-      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
-        <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
-        <a href="destinos.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Explorar</span></a>
-        <a href="historia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Cultura</span></a>
-        <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
-        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-compass nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Inicio</span>
+              <span class="nav-sublabel">Portal Soberano</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
 
-        <!-- Menú Desplegable "Más ˇ" con Mega Menú de 4 Columnas -->
-        <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
-          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn active" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
-            <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
+        <!-- MENÚ DESPLEGABLE: MI PAÍS -->
+        <div class="nav-dropdown" id="navDropdownMiPais">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span class="nav-item-content">
+              <span class="nav-icon-box"><i class="fa-solid fa-earth-americas nav-icon"></i></span>
+              <span class="nav-text-group">
+                <span class="nav-label">Mi País</span>
+              </span>
+            </span>
+            <span class="nav-dropdown-caret">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
           </button>
-          <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-            <!-- 1. EXPLORAR -->
-            <section class="global-mega-column explore">
-              <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
-              <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
-              <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
-              <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
-              <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-            </section>
-
-            <!-- 2. CULTURA -->
-            <section class="global-mega-column culture">
-              <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
-              <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
-              <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
-              <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
-              <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
-            </section>
-
-            <!-- 3. COMUNIDAD -->
-            <section class="global-mega-column community">
-              <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
-              <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
-              <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-              <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
-            </section>
-
-            <!-- 4. CUENTA Y PLATAFORMA -->
-            <section class="global-mega-column account">
-              <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
-              <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
-              <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
-              <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-              <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
-              <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
-              <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
-              <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
-              <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-              <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
-            </section>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="destinos.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-map-location-dot"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Destinos</span>
+                <span class="nav-dd-desc">29 Áreas Protegidas y Volcanes</span>
+              </div>
+              <span class="nav-dd-badge">29</span>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-scroll"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Historia</span>
+                <span class="nav-dd-desc">Línea de Tiempo Patria y Raíces</span>
+              </div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-bowl-food"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Gastronomía</span>
+                <span class="nav-dd-desc">Sazón Campesino y Comida Ancestral</span>
+              </div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <span class="nav-dd-icon-box"><i class="fa-solid fa-guitar"></i></span>
+              <div class="nav-dd-text">
+                <span class="nav-dd-title">Música</span>
+                <span class="nav-dd-desc">Patrimonio Sonoro y Marimba</span>
+              </div>
+            </a>
           </div>
         </div>
+
+        
+        <a href="mapa.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-map-location-dot nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Mapa</span>
+              <span class="nav-sublabel">Geolocalización & Rutas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap"><i class="fa-solid fa-chevron-right nav-arrow"></i></span>
+        </a>
+
+        <a href="experiencias.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-person-hiking nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Experiencias</span>
+              <span class="nav-sublabel">Aventuras Auténticas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap"><i class="fa-solid fa-chevron-right nav-arrow"></i></span>
+        </a>
+
+        <a href="baqueano-ia.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-robot nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Baqueano Digital</span>
+              <span class="nav-sublabel">Copiloto Inteligente</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap"><i class="fa-solid fa-chevron-right nav-arrow"></i></span>
+        </a>
+
+        <a href="mi-viaje.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-route nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Mi Viaje</span>
+              <span class="nav-sublabel">Itinerario Personal</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap"><i class="fa-solid fa-chevron-right nav-arrow"></i></span>
+        </a>
+        <a href="ambiental.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-leaf nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ambiental</span>
+              <span class="nav-sublabel">Huella Cero & Decálogo</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="aliados.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-handshake-angle nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Aliados</span>
+              <span class="nav-sublabel">Cooperativas Campesinas</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <!-- BOTÓN NOSOTROS -->
+        <a href="nosotros.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-people-roof nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Nosotros</span>
+              <span class="nav-sublabel">Marca & Manifiesto</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
+
+        <a href="admin.html">
+          <span class="nav-item-content">
+            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
+            <span class="nav-text-group">
+              <span class="nav-label">Ops Center</span>
+              <span class="nav-sublabel">Comando & Telemetría</span>
+            </span>
+          </span>
+          <span class="nav-right-wrap">
+            <span class="nav-item-badge live">● 24/7</span>
+            <i class="fa-solid fa-chevron-right nav-arrow"></i>
+          </span>
+        </a>
       </div>
 
-      <!-- Divisor Vertical entre Enlaces y Acciones -->
-      <div class="nav-vertical-divider" aria-hidden="true"></div>
-
-      <!-- Acciones a la Derecha (Clima, Buscador, Switch Tema, SOS, Iniciar Sesión, Idioma) -->
-      <div class="exact-nav-actions global-nav-actions">
-        <span class="global-weather navbar-weather-pill" title="Clima actual"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
-        <a href="destinos.html" class="global-search navbar-search-btn" title="Buscar en Nicaragua" aria-label="Buscar">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </a>
-        <button type="button" class="global-theme navbar-theme-pill global-theme-toggle-switch" id="globalThemeToggle" aria-label="Cambiar tema">
-          <i class="fa-solid fa-sun theme-sun-icon"></i>
-          <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
-          <i class="fa-solid fa-moon theme-moon-icon"></i>
+      <div class="nav-actions-right">
+        <button class="sos-quick-btn open-sos-btn" title="Auxilio SOS 24/7">
+          <i class="fa-solid fa-tower-broadcast"></i> SOS 24/7
         </button>
-        <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS">
-          <i class="fa-solid fa-shield-heart"></i><span>SOS</span>
-        </button>
-        <a href="perfil.html" class="exact-nav-btn-login global-session navbar-login-btn">
-          <i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span>
-        </a>
-        <button type="button" class="global-language navbar-lang-pill" aria-label="Cambiar idioma">
-          <span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem; margin-left: 2px;"></i>
-        </button>
-        <button type="button" class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú móvil">
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menú">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>

@@ -1,99 +1,314 @@
 <!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — MAPA GEOGRÁFICO INTERACTIVO (mapa.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ofrecer al explorador una experiencia cartográfica integral y soberana de
+  los 17 territorios de Nicaragua (15 departamentos y 2 regiones autónomas).
+- Integrar en un solo mapa interactivo los destinos protegidos, cooperativas
+  campesinas, rutas volcánicas, gastronomía autóctona y balizas de seguridad SOS.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Motor Leaflet 1.9.4 con soporte para capas satelitales, topográficas y de calles.
+- Filtros reactivos por categoría (Naturaleza, Volcanes, Playas, Cultura, Aliados).
+- Geolocalización satelital en tiempo real con chip GNSS.
+- Controles de capa de alta resolución y popups informativos enriquecidos.
+
+📦 3. QUÉ (WHAT / ENTREGABLES):
+- Barra de navegación horizontal oficial.
+- Barra de filtros cartográficos en vivo y buscador territorial.
+- Visor de mapa Leaflet a pantalla completa interactiva.
+- Panel lateral retráctil con detalles del destino seleccionado y botón de ruta.
+- Modal de emergencia SOS con coordenadas satelitales.
+- Footer unificado institucional.
+============================================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mapa Interactivo de Nicaragua | Baqueano</title>
+  <meta name="description" content="Explorá los 17 territorios de Nicaragua en nuestro mapa interactivo. Volcanes, playas, cooperativas campesinas y rutas culturales.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+  <!-- Estilos del Ecosistema -->
+  <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+
+  <style>
+    .page-mapa-exact {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .map-hub-toolbar {
+      background: #0B253A;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px 0;
+      position: sticky;
+      top: 60px;
+      z-index: 500;
+    }
+
+    .map-hub-toolbar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .map-search-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 6px 16px;
+      width: min(320px, 100%);
+    }
+
+    .map-search-group input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      width: 100%;
+      margin-left: 8px;
+    }
+
+    .map-cat-filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .map-chip-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #CBD5E1;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .map-chip-btn.active, .map-chip-btn:hover {
+      background: var(--aliados-naranja, #F65E01);
+      color: #FFFFFF;
+      border-color: var(--aliados-naranja, #F65E01);
+    }
+
+    .map-view-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-map-action {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-map-action:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .map-main-viewport-container {
+      position: relative;
+      flex: 1;
+      min-height: calc(100vh - 160px);
+      width: 100%;
+    }
+
+    #fullInteractiveMap {
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 160px);
+    }
+
+    /* Tarjeta flotante de información de destino */
+    .map-floating-drawer {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      z-index: 600;
+      background: rgba(11, 37, 58, 0.94);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 18px;
+      max-width: 360px;
+      color: #FFFFFF;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      display: none;
+    }
+
+    .map-floating-drawer.is-active {
+      display: block;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .drawer-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .drawer-img {
+      width: 100%;
+      height: 140px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .drawer-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .drawer-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: #94A3B8;
+      margin-bottom: 8px;
+    }
+
+    .drawer-desc {
+      font-size: 0.8rem;
+      color: #E2E8F0;
+      line-height: 1.4;
+      margin: 0 0 14px;
+    }
+
+    .drawer-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-drawer-primary {
+      flex: 1;
+      text-align: center;
+      background: #F65E01;
+      color: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn-drawer-secondary {
+      flex: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
+</head>
+
+<body class="page-mapa-exact">
+
   <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
+       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL
        ============================================================================ -->
-  <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
-    <div class="exact-container nav-inner">
-      <!-- Marca / Logo Oficial -->
-      <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
-        <div class="exact-nav-brand-text navbar-brand-text">
-          <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
-          <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
+  <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container">
+      <a href="index.html" class="exact-brand">
+        <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="exact-logo-img">
+        <div class="exact-brand-text">
+          <span class="exact-brand-name">BAQUEANO</span>
+          <span class="exact-brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <!-- Menú Horizontal Central de Enlaces -->
-      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
-        <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
-        <a href="destinos.html" class="exact-nav-link active" role="menuitem"><span class="nav-label">Explorar</span></a>
-        <a href="historia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Cultura</span></a>
-        <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
-        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
+      <div class="exact-nav-links" id="exactNavLinks" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem">Inicio</a>
+        <a href="destinos.html" class="exact-nav-link" role="menuitem">Destinos</a>
+        <a href="mapa.html" class="exact-nav-link active" role="menuitem">Mapa</a>
+        <a href="experiencias.html" class="exact-nav-link" role="menuitem">Experiencias</a>
+        <a href="baqueano-ai.html" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem">Mi Viaje</a>
+        <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
 
-        <!-- Menú Desplegable "Más ˇ" con Mega Menú de 4 Columnas -->
-        <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
-          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
-            <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
+        <div class="exact-nav-dropdown">
+          <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Más <i class="fa-solid fa-chevron-down exact-caret"></i>
           </button>
-          <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-            <!-- 1. EXPLORAR -->
-            <section class="global-mega-column explore">
-              <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
-              <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
-              <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
-              <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
-              <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-            </section>
-
-            <!-- 2. CULTURA -->
-            <section class="global-mega-column culture">
-              <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
-              <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
-              <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
-              <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
-              <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
-            </section>
-
-            <!-- 3. COMUNIDAD -->
-            <section class="global-mega-column community">
-              <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
-              <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
-              <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-              <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
-            </section>
-
-            <!-- 4. CUENTA Y PLATAFORMA -->
-            <section class="global-mega-column account">
-              <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
-              <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
-              <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
-              <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-              <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
-              <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
-              <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
-              <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
-              <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-              <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
-            </section>
+          <div class="exact-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="exact-dropdown-item"><i class="fa-solid fa-leaf"></i> Custodia Ambiental</a>
+            <a href="historia.html" class="exact-dropdown-item"><i class="fa-solid fa-landmark"></i> Historia &amp; Memoria</a>
+            <a href="gastronomia.html" class="exact-dropdown-item"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
+            <a href="musica.html" class="exact-dropdown-item"><i class="fa-solid fa-music"></i> Son Sonoro Folk</a>
+            <a href="aliados.html" class="exact-dropdown-item"><i class="fa-solid fa-handshake"></i> Red de Aliados</a>
+            <a href="nosotros.html" class="exact-dropdown-item"><i class="fa-solid fa-users"></i> Quiénes Somos</a>
           </div>
         </div>
       </div>
 
-      <!-- Divisor Vertical entre Enlaces y Acciones -->
-      <div class="nav-vertical-divider" aria-hidden="true"></div>
-
-      <!-- Acciones a la Derecha (Clima, Buscador, Switch Tema, SOS, Iniciar Sesión, Idioma) -->
-      <div class="exact-nav-actions global-nav-actions">
-        <span class="global-weather navbar-weather-pill" title="Clima actual"><i class="fa-solid fa-cloud"></i> 25.0°C</span>
-        <a href="destinos.html" class="global-search navbar-search-btn" title="Buscar en Nicaragua" aria-label="Buscar">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </a>
-        <button type="button" class="global-theme navbar-theme-pill global-theme-toggle-switch" id="globalThemeToggle" aria-label="Cambiar tema">
-          <i class="fa-solid fa-sun theme-sun-icon"></i>
-          <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
-          <i class="fa-solid fa-moon theme-moon-icon"></i>
-        </button>
-        <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS">
-          <i class="fa-solid fa-shield-heart"></i><span>SOS</span>
-        </button>
-        <a href="perfil.html" class="exact-nav-btn-login global-session navbar-login-btn">
-          <i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span>
-        </a>
-        <button type="button" class="global-language navbar-lang-pill" aria-label="Cambiar idioma">
-          <span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem; margin-left: 2px;"></i>
-        </button>
-        <button type="button" class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú móvil">
+      <div class="exact-nav-actions">
+        <a href="destinos.html" class="exact-icon-btn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="perfil.html" class="exact-icon-btn" title="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <span class="exact-lang-switch">ES | EN</span>
+        <a href="perfil.html" class="btn-exact-login">Iniciar sesión</a>
+        <button type="button" class="exact-burger-btn" id="burgerToggle" aria-label="Abrir menú">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
