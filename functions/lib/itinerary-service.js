@@ -300,7 +300,7 @@ async function buildBaqueanoItinerary({
   generatedItinerary.informationMode = "local-catalog";
   generatedItinerary.sources = [];
 
-  await persistItinerary(generatedItinerary, userUid, "baqueano-territorial-engine");
+  if (userUid) await persistItinerary(generatedItinerary, userUid, "baqueano-territorial-engine");
 
   return {
     success: true,
@@ -316,7 +316,7 @@ async function persistItinerary(itinerary, userUid, source) {
   if (sb) {
     try {
       await sb.from("travel_plans").insert({
-        user_uid: userUid || "web_explorer",
+        user_uid: userUid,
         plan_title: itinerary.title,
         destination: itinerary.territory,
         days: itinerary.daysCount,

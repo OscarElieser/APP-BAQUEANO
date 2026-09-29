@@ -135,8 +135,8 @@ CONTEXTO REAL DE NICARAGUA:
 ${contextStr}
 
 REGLAS:
-- Solo usa destinos y cooperativas reales de Nicaragua.
-- No inventes precios fijos, usa rangos razonables.
+- Solo usa registros incluidos en el contexto proporcionado.
+- No inventes ni estimes precios. Si el contexto no aporta un precio verificado, usa null.
 - Formato: ÚNICAMENTE JSON sin texto markdown adicional.
 
 ESQUEMA:
@@ -155,8 +155,8 @@ ESQUEMA:
           "nombre": "...",
           "tipo": "actividad | hospedaje | alimentacion | transporte",
           "descripcion": "...",
-          "precio_estimado": "...",
-          "fuente": "Baqueano Verificado"
+          "precio": null,
+          "fuente": "Fuente pendiente"
         }
       ]
     }
@@ -230,15 +230,8 @@ ESQUEMA:
             nombre: place.name,
             tipo: "actividad",
             descripcion: place.desc || "Recorrido guiado por guías locales acreditados.",
-            precio_estimado: `${place.avgPriceUsd || 20} USD`,
-            fuente: "Baqueano Oficial"
-          },
-          {
-            nombre: `Hospedaje Campesino en ${territory.name}`,
-            tipo: "hospedaje",
-            descripcion: "Habitación comunitaria con desayuno de comal tradicional.",
-            precio_estimado: "25-35 USD / noche",
-            fuente: "Red de Anfitriones Baqueano"
+            precio: place.avgPriceUsd == null ? null : `${place.avgPriceUsd} USD`,
+            fuente: place.sourceName || "Fuente pendiente"
           }
         ]
       };
