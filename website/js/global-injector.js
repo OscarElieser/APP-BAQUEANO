@@ -116,17 +116,6 @@
         .bq-stamp-sub   { font-size: .65rem; color: #64748B; text-transform: uppercase; letter-spacing: .1em; }
 
         /* ── Botón OPS Center Flotante ── */
-        .bq-ops-fab {
-          position: fixed; bottom: 24px; left: 24px; z-index: 900;
-          background: #0B253A; border: 1px solid rgba(244,230,193,.25); border-radius: 12px;
-          padding: 10px 16px; display: flex; align-items: center; gap: 8px;
-          color: #F4E6C1; font-size: .78rem; font-weight: 700; text-decoration: none;
-          box-shadow: 0 4px 20px rgba(0,0,0,.4); transition: all .25s;
-          font-family: 'Inter', sans-serif;
-        }
-        .bq-ops-fab:hover { background: #165D6F; border-color: #F65E01; color: #FFF; transform: translateY(-2px); }
-        .bq-ops-fab i { font-size: 1rem; color: #F65E01; }
-
         /* ── Toast de Retroalimentación Global ── */
         #bqGlobalToast { position: fixed; bottom: 80px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
         @keyframes bqToastIn  { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:none; } }
@@ -587,6 +576,15 @@
     });
   }
 
+  // 🎯 POR QUÉ: simplificar la barra superior y evitar un acceso de búsqueda redundante.
+  // ⚙️ CÓMO: elimina cualquier variante heredada antes y después de sincronizar el menú.
+  // 📦 QUÉ: navegación global sin lupa, conservando la búsqueda principal de contenidos.
+  function removeGlobalSearchButtons() {
+    document.querySelectorAll('.global-search, .navbar-search-btn, [data-action="search"]').forEach(function(button) {
+      if (button.closest('nav, header')) button.remove();
+    });
+  }
+
   // ========================================================================
   // 🎯 POR QUÉ: solicitar una decisión informada antes de activar funciones opcionales.
   // ⚙️ CÓMO: guarda una versión del consentimiento, sincroniza preferencias y
@@ -602,14 +600,13 @@
     style.id = 'bq-cookie-consent-styles';
     style.textContent = `
       .bq-cookie-layer{position:fixed;inset:0;z-index:2147483000;background:rgba(15,23,42,.5);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:20px}
-      .bq-cookie-layer[hidden],.bq-cookie-settings[hidden],.bq-cookie-manage[hidden]{display:none!important}
+      .bq-cookie-layer[hidden],.bq-cookie-settings[hidden]{display:none!important}
       .bq-cookie-card{width:min(1120px,100%);background:#fff;color:#0F172A;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 24px 70px rgba(15,23,42,.25);padding:24px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;font-family:'Inter',system-ui,sans-serif}
       .bq-cookie-copy{display:flex;gap:16px;align-items:flex-start}.bq-cookie-icon{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:#FFF1E8;color:#F65E01;display:grid;place-items:center;font-size:1.35rem}
       .bq-cookie-title{font:800 1.15rem/1.25 'Montserrat',sans-serif;margin:0 0 7px;color:#0F172A}.bq-cookie-text{margin:0;color:#52627A;font-size:.91rem;line-height:1.55}.bq-cookie-text a{color:#165D6F;font-weight:800}
       .bq-cookie-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.bq-cookie-btn{border-radius:12px;padding:11px 16px;font-weight:800;font-size:.84rem;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid #CBD5E1;background:#fff;color:#0F172A}.bq-cookie-btn:hover{transform:translateY(-1px)}
       .bq-cookie-reject{color:#165D6F;border-color:#165D6F}.bq-cookie-accept{color:#fff;background:#165D6F;border-color:#165D6F;box-shadow:0 8px 18px rgba(22,93,111,.22)}
       .bq-cookie-settings{grid-column:1/-1;border-top:1px solid #E2E8F0;padding-top:18px}.bq-cookie-option{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:12px 0}.bq-cookie-option+ .bq-cookie-option{border-top:1px solid #EEF2F6}.bq-cookie-option strong{display:block;font-size:.9rem}.bq-cookie-option small{display:block;color:#64748B;margin-top:3px}.bq-cookie-check{width:20px;height:20px;accent-color:#165D6F}
-      .bq-cookie-manage{position:fixed;left:16px;bottom:16px;z-index:2147482000;border:1px solid #D7E2E6;border-radius:999px;background:#fff;color:#165D6F;box-shadow:0 8px 24px rgba(15,23,42,.16);padding:9px 13px;font-weight:800;font-size:.78rem;cursor:pointer}
       @media(max-width:760px){.bq-cookie-layer{padding:10px}.bq-cookie-card{grid-template-columns:1fr;padding:18px;border-radius:18px;gap:17px}.bq-cookie-copy{gap:12px}.bq-cookie-icon{width:42px;height:42px;flex-basis:42px}.bq-cookie-actions{justify-content:stretch}.bq-cookie-btn{flex:1 1 46%;}.bq-cookie-accept{flex-basis:100%}.bq-cookie-option{align-items:flex-start}}
     `;
     document.head.appendChild(style);
@@ -633,13 +630,6 @@
       </div>`;
     document.body.appendChild(layer);
 
-    var manage = document.createElement('button');
-    manage.type = 'button';
-    manage.className = 'bq-cookie-manage';
-    manage.innerHTML = '<i class="fa-solid fa-cookie-bite" aria-hidden="true"></i> Cookies';
-    manage.setAttribute('aria-label', 'Administrar preferencias de cookies');
-    document.body.appendChild(manage);
-
     function readConsent() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch (error) { return null; }
     }
@@ -654,15 +644,6 @@
       window.BaqueanoConsent = consent;
       window.dispatchEvent(new CustomEvent('baqueano:consent', { detail: consent }));
       layer.hidden = true;
-      manage.hidden = false;
-    }
-    function openSettings() {
-      var saved = readConsent() || {};
-      document.getElementById('bqConsentPreferences').checked = !!saved.preferences;
-      document.getElementById('bqConsentAnalytics').checked = !!saved.analytics;
-      document.getElementById('bqCookieSettings').hidden = false;
-      layer.hidden = false;
-      manage.hidden = true;
     }
 
     layer.addEventListener('click', function(event) {
@@ -674,15 +655,11 @@
       if (type === 'settings') document.getElementById('bqCookieSettings').hidden = false;
       if (type === 'save') applyConsent(document.getElementById('bqConsentPreferences').checked, document.getElementById('bqConsentAnalytics').checked);
     });
-    manage.addEventListener('click', openSettings);
-
     var existing = readConsent();
     if (existing && existing.version === 1) {
       window.BaqueanoConsent = existing;
       layer.hidden = true;
-      manage.hidden = false;
     } else {
-      manage.hidden = true;
       layer.hidden = false;
     }
   }
@@ -690,10 +667,10 @@
   async function init() {
     injectGlobalCSS();
     injectCookieConsent();
+    removeGlobalSearchButtons();
     injectGlobalNavbar();
     upgradeOldFooters();
     injectGlobalFooter();
-    injectOPSButton();
     injectSosModal();
     addOpsToExistingNavbar();
     wireNavbarButtons(null);
@@ -704,6 +681,7 @@
       buildGlobalMegaNavigation();
     }
     await syncShellWithIndex();
+    removeGlobalSearchButtons();
     normalizeFooterBoundary();
   }
 

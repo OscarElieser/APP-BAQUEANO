@@ -9877,3 +9877,10 @@ QUÉ:
   background: rgba(15, 23, 42, .78) !important;
   backdrop-filter: blur(10px);
 }
+/*
+ * 🎯 POR QUÉ: mantener la navegación superior enfocada y sin búsqueda redundante.
+ * ⚙️ CÓMO: oculta defensivamente variantes heredadas antes de que el inyector las retire.
+ * 📦 QUÉ: barra global sin botón de lupa en escritorio y móvil.
+ */
+.global-search,
+.navbar-search-btn { display: none !important; }

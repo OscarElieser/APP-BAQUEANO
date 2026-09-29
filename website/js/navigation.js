@@ -106,7 +106,7 @@ function buildGlobalMegaNavigation() {
             <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
             <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
             <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-            <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
+            <a class="global-admin-link" href="admin.html" hidden aria-hidden="true"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
           </section>
         </div>
       </div>`;
@@ -120,7 +120,6 @@ function buildGlobalMegaNavigation() {
   if (actions) {
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
-      <a class="global-search navbar-search-btn" href="destinos.html" aria-label="Buscar en Nicaragua" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
       <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
       <a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html"><i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span></a>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>
