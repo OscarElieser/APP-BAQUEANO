@@ -785,6 +785,18 @@
   }
 
   async function init() {
+    if (!document.querySelector('script[data-global-language]')) {
+      var languageScript = document.createElement('script');
+      languageScript.src = 'js/global-language.js?v=20260929-1';
+      languageScript.dataset.globalLanguage = 'true';
+      document.body.appendChild(languageScript);
+    }
+    if (!document.querySelector('script[data-global-music-player]')) {
+      var musicPlayerScript = document.createElement('script');
+      musicPlayerScript.src = 'js/global-music-player.js?v=20260929-1';
+      musicPlayerScript.dataset.globalMusicPlayer = 'true';
+      document.body.appendChild(musicPlayerScript);
+    }
     injectGlobalCSS();
     injectCookieConsent();
     removeGlobalSearchButtons();
