@@ -47,7 +47,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-v11-capsule'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260930-v12-search'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
@@ -61,6 +61,28 @@ function buildGlobalMegaNavigation() {
     navMenu.innerHTML = `
       <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
       <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
+
+      <!-- ✦ BUSCADOR INTELIGENTE DE NICARAGUA ✦ -->
+      <div class="navbar-search-wrapper" id="navbarSearchWrapper" role="search">
+        <form class="navbar-search-form" id="navbarSearchForm" autocomplete="off" onsubmit="return false;" role="search" aria-label="Buscar en Baqueano Nicaragua">
+          <label for="navbarSearchInput" class="sr-only">Buscar destinos, experiencias, gastronomía...</label>
+          <i class="fa-solid fa-magnifying-glass navbar-search-icon" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="navbarSearchInput"
+            class="navbar-search-input"
+            placeholder="Buscar Nicaragua..."
+            aria-label="Buscar en Baqueano Nicaragua"
+            maxlength="80"
+            spellcheck="false"
+            autocomplete="off"
+          />
+          <button type="button" class="navbar-search-clear" id="navbarSearchClear" aria-label="Limpiar búsqueda" tabindex="-1">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </form>
+      </div>
+
       <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
         <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['destinos.html','destino.html','mapa.html','experiencias.html','mi-viaje.html','historia.html','gastronomia.html','musica.html','departamento.html','aliados.html','mi-negocio.html','ambiental.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
           <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
@@ -240,6 +262,239 @@ function buildGlobalMegaNavigation() {
       mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
     });
   }
+
+  // ─── Inicializar Buscador Inteligente del Navbar ───
+  initNavbarSearch();
+}
+
+// ============================================================================
+// 🧭 BUSCADOR INTELIGENTE DE NICARAGUA — NAVBAR (initNavbarSearch)
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer al usuario un campo de texto real en el navbar donde pueda escribir
+//   cualquier término (destino, categoría, módulo, actividad) y ser redirigido
+//   inteligentemente al módulo correcto del ecosistema Baqueano Nicaragua.
+// - Conectar con BaqueanoSmartSearch para autocompletado en tiempo real.
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Input expansible: colapsa en reposo (ancho mínimo con ícono visible), se expande
+//   en focus con transición suave. Panel de sugerencias fijado al viewport (fixed).
+// - Usa window.BaqueanoSmartSearch (smart-search.js) con retry para esperar su carga.
+// - Enter / botón limpiar / Escape tienen manejo defensivo completo.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES):
+// - initNavbarSearch(): registra todos los event listeners del buscador del navbar.
+// ============================================================================
+function initNavbarSearch() {
+  const input = document.getElementById('navbarSearchInput');
+  const clearBtn = document.getElementById('navbarSearchClear');
+  const wrapper = document.getElementById('navbarSearchWrapper');
+  if (!input || !wrapper) return;
+
+  let suggestPanel = null;
+  let searchReady = false;
+  let retryCount = 0;
+
+  // Esperar a que BaqueanoSmartSearch esté disponible (max ~3s)
+  const waitForSearch = () => {
+    if (window.BaqueanoSmartSearch) {
+      searchReady = true;
+      return;
+    }
+    if (retryCount < 12) {
+      retryCount++;
+      setTimeout(waitForSearch, 250);
+    }
+  };
+  waitForSearch();
+
+  // Crear panel de sugerencias fijado (fixed) al viewport
+  function getOrCreatePanel() {
+    if (!suggestPanel) {
+      suggestPanel = document.createElement('div');
+      suggestPanel.id = 'navbarSuggestPanel';
+      suggestPanel.setAttribute('role', 'listbox');
+      suggestPanel.setAttribute('aria-label', 'Sugerencias de búsqueda');
+      suggestPanel.style.cssText = [
+        'position:fixed',
+        'background:rgba(7,28,44,0.97)',
+        'backdrop-filter:blur(24px)',
+        '-webkit-backdrop-filter:blur(24px)',
+        'border:1px solid rgba(244,230,193,0.20)',
+        'border-radius:16px',
+        'box-shadow:0 20px 60px rgba(0,0,0,0.55),0 0 20px rgba(22,93,111,0.2)',
+        'z-index:200000',
+        'overflow:hidden',
+        'display:none',
+        'max-height:360px',
+        'overflow-y:auto',
+        'min-width:280px'
+      ].join(';');
+      document.body.appendChild(suggestPanel);
+    }
+    return suggestPanel;
+  }
+
+  function positionPanel() {
+    const rect = wrapper.getBoundingClientRect();
+    const panel = getOrCreatePanel();
+    panel.style.top = (rect.bottom + 8) + 'px';
+    panel.style.left = rect.left + 'px';
+    panel.style.width = Math.max(rect.width, 320) + 'px';
+  }
+
+  function renderSuggestions(q) {
+    const panel = getOrCreatePanel();
+    positionPanel();
+
+    const SUGGESTIONS_DB = [
+      { label: '🏖️ Playas del Pacífico',   route: 'destinos.html?cat=playas' },
+      { label: '🌋 Volcán Cerro Negro',     route: 'destinos.html?id=cerro_negro' },
+      { label: '🏝️ Isla de Ometepe',        route: 'destinos.html?id=ometepe' },
+      { label: '🏛️ Granada Colonial',       route: 'destinos.html?id=granada' },
+      { label: '🤿 San Juan del Sur',       route: 'destinos.html?id=sjds' },
+      { label: '🌊 Cañón de Somoto',        route: 'destinos.html?id=somoto' },
+      { label: '🎭 Cultura Nicaragüense',   route: 'destinos.html?cat=cultura' },
+      { label: '🍽️ Gastronomía Típica',    route: 'gastronomia.html' },
+      { label: '🎶 Música Folclórica',      route: 'musica.html' },
+      { label: '🌿 Reservas Naturales',     route: 'destinos.html?cat=naturaleza' },
+      { label: '🗺️ Mapa Interactivo',       route: 'mapa.html' },
+      { label: '✨ Planificar con IA',      route: 'baqueano-ia.html' },
+      { label: '🐦 Laguna de Apoyo',        route: 'destinos.html?id=apoyo' },
+      { label: '🏡 Reserva Miraflor',       route: 'destinos.html?id=miraflor' },
+      { label: '🌺 Volcán Masaya',          route: 'destinos.html?id=masaya' },
+      { label: '🚣 Río San Juan',           route: 'destinos.html?id=riosanjuan' },
+      { label: '🏄 Surf en Nicaragua',      route: 'destinos.html?cat=playas' },
+      { label: '🏨 Hospedajes y Lodges',    route: 'destinos.html?cat=hospedaje' },
+      { label: '🤝 Aliados Comunitarios',   route: 'aliados.html' },
+      { label: '🧳 Mi Viaje',              route: 'mi-viaje.html' },
+    ];
+
+    const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const qn = norm(q);
+
+    let matches;
+    if (qn.length >= 2) {
+      matches = SUGGESTIONS_DB.filter(s => norm(s.label).includes(qn)).slice(0, 6);
+    } else {
+      matches = SUGGESTIONS_DB.slice(0, 6);
+    }
+
+    if (!matches.length) {
+      matches = [{ label: `🔍 Buscar "${q}" en Baqueano`, route: 'destinos.html?q=' + encodeURIComponent(q) }];
+    }
+
+    panel.innerHTML = matches.map((s, i) => `
+      <button
+        type="button"
+        role="option"
+        data-route="${s.route}"
+        style="
+          display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+          padding:11px 16px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.055);
+          color:rgba(244,230,193,0.88);font-family:Inter,sans-serif;font-size:0.875rem;font-weight:500;
+          cursor:pointer;transition:background 0.15s;
+        "
+        onmouseenter="this.style.background='rgba(22,93,111,0.25)';this.style.color='#fff';"
+        onmouseleave="this.style.background='transparent';this.style.color='rgba(244,230,193,0.88)';"
+        tabindex="0"
+      >${s.label}</button>`
+    ).join('');
+
+    panel.style.display = 'block';
+
+    panel.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        window.location.href = btn.dataset.route;
+      });
+    });
+  }
+
+  function hidePanel() {
+    if (suggestPanel) suggestPanel.style.display = 'none';
+  }
+
+  function doSearch() {
+    const q = input.value.trim();
+    if (!q) return;
+    if (searchReady && window.BaqueanoSmartSearch) {
+      window.BaqueanoSmartSearch.search(q);
+    } else {
+      window.location.href = 'destinos.html?q=' + encodeURIComponent(q);
+    }
+  }
+
+  // ─── Eventos ───
+  input.addEventListener('focus', () => {
+    wrapper.classList.add('is-focused');
+    renderSuggestions(input.value.trim());
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim();
+    if (clearBtn) clearBtn.style.display = q ? 'inline-flex' : 'none';
+    renderSuggestions(q);
+    positionPanel();
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      doSearch();
+      hidePanel();
+      input.blur();
+    }
+    if (e.key === 'Escape') {
+      hidePanel();
+      input.blur();
+      wrapper.classList.remove('is-focused');
+    }
+    // Flechas para navegar sugerencias
+    if (suggestPanel && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      e.preventDefault();
+      const btns = [...suggestPanel.querySelectorAll('button')];
+      const curr = document.activeElement;
+      const idx = btns.indexOf(curr);
+      if (e.key === 'ArrowDown') (btns[idx + 1] || btns[0])?.focus();
+      else (btns[idx - 1] || btns[btns.length - 1])?.focus();
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    // Retraso para permitir click en sugerencia
+    setTimeout(() => {
+      hidePanel();
+      wrapper.classList.remove('is-focused');
+    }, 180);
+  });
+
+  if (clearBtn) {
+    clearBtn.style.display = 'none';
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      clearBtn.style.display = 'none';
+      hidePanel();
+      input.focus();
+    });
+  }
+
+  // Reposicionar panel al redimensionar/scroll
+  window.addEventListener('resize', () => {
+    if (suggestPanel && suggestPanel.style.display !== 'none') positionPanel();
+  }, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (suggestPanel && suggestPanel.style.display !== 'none') positionPanel();
+  }, { passive: true });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    if (wrapper && !wrapper.contains(e.target) && suggestPanel && !suggestPanel.contains(e.target)) {
+      hidePanel();
+      wrapper.classList.remove('is-focused');
+    }
+  });
 }
 
 // ============================================================================

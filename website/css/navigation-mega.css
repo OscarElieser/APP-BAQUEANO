@@ -851,3 +851,131 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
   padding-top: 14px !important;
 }
+
+/* ============================================================================
+   🧭 BUSCADOR INTELIGENTE DEL NAVBAR — Estilos v12
+   🎯 POR QUÉ: Buscador real donde el usuario escribe, con sugerencias en vivo.
+   ⚙️ CÓMO: Pill expandible con transición suave. Oculto en móvil (tiene hero search).
+   📦 QUÉ: .navbar-search-wrapper, .navbar-search-form, .navbar-search-input
+   ============================================================================ */
+
+/* ── utilidad screen-reader ── */
+.sr-only {
+  position: absolute !important; width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important; overflow: hidden !important;
+  clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important;
+}
+
+/* ── contenedor del buscador ── */
+#mainNavbar .navbar-search-wrapper {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  margin: 0 4px !important;
+  height: 40px !important;
+}
+
+/* ── formulario / pill ── */
+#mainNavbar .navbar-search-form {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  height: 36px !important;
+  width: 160px !important;
+  min-width: 36px !important;
+  background: rgba(255,255,255,0.055) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 18px !important;
+  padding: 0 10px 0 10px !important;
+  transition:
+    width 0.3s cubic-bezier(0.4,0,0.2,1),
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+#mainNavbar .navbar-search-wrapper.is-focused .navbar-search-form,
+#mainNavbar .navbar-search-form:focus-within {
+  width: 240px !important;
+  background: rgba(22,93,111,0.22) !important;
+  border-color: rgba(244,230,193,0.28) !important;
+  box-shadow: 0 0 0 3px rgba(22,93,111,0.18), 0 4px 16px rgba(0,0,0,0.25) !important;
+}
+
+/* ── ícono lupa ── */
+#mainNavbar .navbar-search-icon {
+  color: rgba(244,230,193,0.65) !important;
+  font-size: 0.82rem !important;
+  flex-shrink: 0 !important;
+  pointer-events: none !important;
+  transition: color 0.2s !important;
+  margin-right: 7px !important;
+}
+
+#mainNavbar .navbar-search-wrapper.is-focused .navbar-search-icon,
+#mainNavbar .navbar-search-form:focus-within .navbar-search-icon {
+  color: #F65E01 !important;
+}
+
+/* ── campo de texto ── */
+#mainNavbar .navbar-search-input {
+  flex: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #fff !important;
+  font-family: Inter, sans-serif !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  caret-color: #F65E01 !important;
+}
+
+#mainNavbar .navbar-search-input::placeholder {
+  color: rgba(244,230,193,0.42) !important;
+  font-weight: 400 !important;
+}
+
+/* Quitar UI nativa del tipo search */
+#mainNavbar .navbar-search-input::-webkit-search-cancel-button,
+#mainNavbar .navbar-search-input::-webkit-search-decoration { display: none !important; }
+
+/* ── botón limpiar ── */
+#mainNavbar .navbar-search-clear {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  border: none !important;
+  background: rgba(255,255,255,0.12) !important;
+  border-radius: 50% !important;
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 0.7rem !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  margin-left: 5px !important;
+  transition: background 0.15s, color 0.15s !important;
+}
+
+#mainNavbar .navbar-search-clear:hover {
+  background: #F65E01 !important;
+  color: #fff !important;
+}
+
+/* ── ocultar buscador en tablet pequeña y móvil ── */
+@media (max-width: 900px) {
+  #mainNavbar .navbar-search-wrapper { display: none !important; }
+}
+
+/* ── en desktop, permitir expansión mayor ── */
+@media (min-width: 1200px) {
+  #mainNavbar .navbar-search-form { width: 180px !important; }
+  #mainNavbar .navbar-search-wrapper.is-focused .navbar-search-form,
+  #mainNavbar .navbar-search-form:focus-within { width: 280px !important; }
+}
