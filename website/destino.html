@@ -17,7 +17,7 @@
 - Renderizado de alto contraste respetando la paleta oficial Baqueano y sin .withOpacity().
 
 📦 3. QUÉ (WHAT / COMPONENTES Y VISTA):
-- Encabezado oficial unificado con navigation.js.
+- Encabezado oficial unificado con navigation.js?v=20260929-v12-centered.
 - Ficha territorial a pantalla completa con navegación táctica.
 - Footer oficial de 5 columnas.
 ============================================================================
@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
-  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-v11-capsule">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-v12-centered">
   <link rel="stylesheet" href="css/destination-dossier.css?v=20260928-1">
 
   <style>
@@ -105,110 +105,61 @@
           <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
-      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar"></div>
-      <div class="exact-nav-actions global-nav-actions"></div>
-    </div>
-  </nav>
+            <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
+        <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <main class="destino-page-wrapper">
-    <div class="destino-back-bar">
-      <a href="destinos.html" class="destino-back-btn">
-        <i class="fa-solid fa-arrow-left"></i> Volver a todos los destinos
-      </a>
-    </div>
+        <!-- Menú Desplegable "Más ˇ" con Mega Menú Centrado de 4 Columnas -->
+        <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
+          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn active" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
+            <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
+          </button>
+          <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
+            <!-- 1. MI PAÍS -->
+            <section class="global-mega-column culture">
+              <h2><i class="fa-solid fa-landmark"></i> Mi País</h2>
+              <a href="destinos.html"><i class="fa-solid fa-map-pin"></i> Destinos</a>
+              <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa Interactivo</a>
+              <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
+              <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia &amp; Memoria</a>
+              <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
+              <a href="musica.html"><i class="fa-solid fa-music"></i> Son Sonoro / Música</a>
+              <a href="departamento.html"><i class="fa-solid fa-map-location-dot"></i> 17 Territorios</a>
+            </section>
 
-    <div id="destinoContentCard">
-      <!-- Se inyecta dinámicamente con JS -->
-      <div style="padding: 60px 20px; text-align: center;">
-        <i class="fa-solid fa-compass fa-spin" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
-        <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Cargando información territorial...</h2>
-        <p style="color: #94A3B8;">Consultando el Banco Maestro Baqueano de Nicaragua.</p>
-      </div>
-    </div>
-  </main>
+            <!-- 2. ECOSISTEMA & COMUNIDAD -->
+            <section class="global-mega-column community">
+              <h2><i class="fa-solid fa-people-group"></i> Ecosistema</h2>
+              <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Red de Aliados</a>
+              <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
+              <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Custodia Ambiental</a>
+              <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Canal Ético</a>
+            </section>
 
-  <script src="js/baqueano-master-catalog.js"></script>
-  <script src="js/destination-dossier.js?v=20260928-1"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/baqueano-api.js"></script>
-  <script src="js/global-injector.js"></script>
+            <!-- 3. BAQUEANO -->
+            <section class="global-mega-column explore">
+              <h2><i class="fa-solid fa-compass"></i> Baqueano</h2>
+              <a href="nosotros.html"><i class="fa-solid fa-circle-info"></i> Quiénes Somos</a>
+              <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Preguntas Frecuentes</a>
+              <a href="baqueano-ia.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano IA</a>
+            </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const params = new URLSearchParams(window.location.search);
-      const destId = params.get('id');
-
-      if (!destId) {
-        window.location.replace('destinos.html');
-        return;
-      }
-
-      const dest = window.BaqueanoDossier ? window.BaqueanoDossier.get(destId) : null;
-      const card = document.getElementById('destinoContentCard');
-
-      if (!dest) {
-        card.innerHTML = `
-          <div style="padding: 60px 20px; text-align: center;">
-            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
-            <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Destino no encontrado</h2>
-            <p style="color: #94A3B8; margin-bottom: 24px;">No encontramos la ficha para el destino solicitado.</p>
-            <a href="destinos.html" class="destino-back-btn"><i class="fa-solid fa-mountain-sun"></i> Ver catálogo completo</a>
-          </div>
-        `;
-        return;
-      }
-
-      document.title = `${dest.title} | Baqueano Nicaragua`;
-
-      // Renderizar ficha completa en el contenedor
-      card.innerHTML = `
-        <div class="bq-dossier-hero">
-          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
-          <div class="bq-dossier-hero-gradient"></div>
-          <div class="bq-dossier-hero-text">
-            <div class="bq-dossier-badges">
-              <span class="bq-dossier-badge dept"><i class="fa-solid fa-location-dot"></i> ${dest.department}</span>
-              <span class="bq-dossier-badge cat"><i class="fa-solid fa-compass"></i> ${dest.category}</span>
-              <span class="bq-dossier-badge verified"><i class="fa-solid fa-certificate"></i> Verificado BAQUEANO · ${dest.verifiedDate}</span>
-            </div>
-            <h1 class="bq-dossier-title" style="margin: 0 0 6px 0;">${dest.title}</h1>
-            <p class="bq-dossier-loc"><i class="fa-solid fa-map-pin"></i> ${dest.municipality}, ${dest.department} · Coordenadas: ${dest.coordinates}</p>
+            <!-- 4. CUENTA Y PLATAFORMA -->
+            <section class="global-mega-column account">
+              <h2><i class="fa-solid fa-gear"></i> Plataforma</h2>
+              <a href="mi-viaje.html"><i class="fa-solid fa-route"></i> Mi Viaje</a>
+              <a href="perfil.html"><i class="fa-regular fa-user"></i> Mi Perfil</a>
+              <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Mis Reservas</a>
+              <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
+              <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
+              <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
+              <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
+              <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Acceso restringido</small></a>
+            </section>
           </div>
         </div>
-
-        <div class="bq-dossier-scroll-area">
-          <div class="bq-dossier-metrics">
-            <div class="bq-dossier-metric-card">
-              <i class="fa-solid fa-coins"></i>
-              <div>
-                <span class="bq-dossier-metric-label">Precio Sugerido</span>
-                <span class="bq-dossier-metric-val">${dest.priceNio}</span>
-                <small style="color:#94A3B8;font-size:0.75rem;">(${dest.priceUsd})</small>
-              </div>
-            </div>
-            <div class="bq-dossier-metric-card">
-              <i class="fa-solid fa-cloud-sun"></i>
-              <div>
-                <span class="bq-dossier-metric-label">Clima Promedio</span>
-                <span class="bq-dossier-metric-val">${dest.climate}</span>
-              </div>
-            </div>
-            <div class="bq-dossier-metric-card">
-              <i class="fa-regular fa-clock"></i>
-              <div>
-                <span class="bq-dossier-metric-label">Estadía Ideal</span>
-                <span class="bq-dossier-metric-val">${dest.duration}</span>
-              </div>
-            </div>
-            <div class="bq-dossier-metric-card">
-              <i class="fa-solid fa-person-hiking"></i>
-              <div>
-                <span class="bq-dossier-metric-label">Dificultad</span>
-                <span class="bq-dossier-metric-val">${dest.difficulty}</span>
-              </div>
-            </div>
-          </div>
+      </div>
 
           <div class="bq-dossier-trust-banner">
             <i class="fa-solid fa-shield-halved"></i>

@@ -1,47 +1,20 @@
-<!DOCTYPE html>
-<!--
-============================================================================
-🧭 BAQUEANO ECOSYSTEM — BAQUEANO DIGITAL / IA (baqueano-ai.html)
-============================================================================
--->
-<html lang="es-NI">
-<head>
-  <meta charset="UTF-8">
-  <title>Baqueano Digital | Redirigiendo a Baqueano IA...</title>
-  <script>
-    (function() {
-      var target = 'baqueano-ia.html' + window.location.search + window.location.hash;
-      window.location.replace(target);
-    })();
-  </script>
-  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
-  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
-    <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-v12-centered">
-</head>
-<body style="font-family:sans-serif;text-align:center;padding:50px;">
-  <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
-       ============================================================================ -->
-  <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
-    <div class="exact-container nav-inner">
-      <!-- Marca / Logo Oficial -->
-      <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
-        <div class="exact-nav-brand-text navbar-brand-text">
-          <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
-          <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
-        </div>
-      </a>
+const fs = require('fs');
+const path = require('path');
 
-      <!-- Menú Horizontal Central de Enlaces -->
-            <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
+const websiteDir = path.join(__dirname, '..');
+
+// 1. Estructura unificada del Menú Central (solo Inicio, Baqueano Digital, Más)
+function buildCentralMenuHTML(currentFile) {
+  const activeClass = (files) => files.includes(currentFile) ? ' active' : '';
+
+  return `      <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
       <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
-        <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
-        <a href="baqueano-ia.html" class="exact-nav-link active" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
+        <a href="index.html" class="exact-nav-link${activeClass(['index.html', ''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
+        <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html', 'baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
 
         <!-- Menú Desplegable "Más ˇ" con Mega Menú Centrado de 4 Columnas -->
         <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
-          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
+          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['destinos.html','destino.html','mapa.html','experiencias.html','mi-viaje.html','historia.html','gastronomia.html','musica.html','departamento.html','aliados.html','mi-negocio.html','ambiental.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
             <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
           </button>
           <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
@@ -88,13 +61,11 @@
             </section>
           </div>
         </div>
-      </div>
+      </div>`;
+}
 
-      <!-- Divisor Vertical entre Enlaces y Acciones -->
-      <div class="nav-vertical-divider" aria-hidden="true"></div>
-
-      <!-- Acciones a la Derecha (Clima, Buscador, Switch Tema, SOS, Iniciar Sesión, Idioma) -->
-            <!-- Acciones a la Derecha (Clima en vivo, SOS, Iniciar Sesión, Idioma) -->
+// 2. Acciones del extremo derecho (Clima, SOS, Sesión, Idioma, Móvil - SIN BUSCADOR Y SIN FAVORITOS)
+const unifiedActionsHTML = `      <!-- Acciones a la Derecha (Clima en vivo, SOS, Iniciar Sesión, Idioma) -->
       <div class="exact-nav-actions global-nav-actions">
         <div class="navbar-weather-pill" id="bqWeatherWidget" title="Clima actual en Nicaragua (clic para ver detalles)" aria-label="Clima en Nicaragua" role="button" tabindex="0">
           <i class="fa-solid fa-cloud-sun" id="bqWeatherIcon"></i>
@@ -113,13 +84,62 @@
         <button type="button" class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú móvil">
           <i class="fa-solid fa-bars"></i>
         </button>
-      </div>
-    </div>
-  </nav>
+      </div>`;
 
-  <p>Cargando Baqueano Digital... Si no redirige automáticamente, <a href="baqueano-ia.html">haz clic aquí</a>.</p>
-<script src="js/navigation.js?v=20260929-v12-centered"></script>
-<script src="js/global-injector.js?v=20260929-v12-centered"></script>
-</body>
-</html>
+// Procesar todos los archivos HTML
+const files = fs.readdirSync(websiteDir).filter(f => f.endsWith('.html'));
+let modifiedCount = 0;
 
+files.forEach(file => {
+  const filePath = path.join(websiteDir, file);
+  let content = fs.readFileSync(filePath, 'utf8');
+  let changed = false;
+
+  // Actualizar versión de cache de CSS y JS de navegación
+  if (content.includes('navigation-mega.css')) {
+    content = content.replace(/navigation-mega\.css(?:\?[^"'>]*)?/g, 'navigation-mega.css?v=20260929-v12-centered');
+    changed = true;
+  }
+  if (content.includes('navigation.js')) {
+    content = content.replace(/navigation\.js(?:\?[^"'>]*)?/g, 'navigation.js?v=20260929-v12-centered');
+    changed = true;
+  }
+  if (content.includes('global-injector.js')) {
+    content = content.replace(/global-injector\.js(?:\?[^"'>]*)?/g, 'global-injector.js?v=20260929-v12-centered');
+    changed = true;
+  }
+
+  // Reemplazar menú central si existe
+  const navMenuRegex = /<div class="exact-nav-menu[^>]*id="navLinksMenu"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/;
+  if (navMenuRegex.test(content)) {
+    content = content.replace(navMenuRegex, buildCentralMenuHTML(file));
+    changed = true;
+  }
+
+  // Reemplazar acciones a la derecha
+  const actionsRegex = /<div class="(?:exact-nav-actions|global-nav-actions)[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<\/nav>/;
+  if (actionsRegex.test(content)) {
+    content = content.replace(actionsRegex, unifiedActionsHTML + '\n    </div>\n  </nav>');
+    changed = true;
+  }
+
+  // Reemplazar botones o enlaces de SOS huérfanos en footers estáticos
+  if (content.includes('onclick="openSosModal(event)"')) {
+    content = content.replace(/onclick="openSosModal\(event\)"/g, 'onclick="if(window.bqOpenSos)bqOpenSos();else if(window.openSosModal)openSosModal(event);"');
+    changed = true;
+  }
+
+  // Sustituir mailto soporte en footer estático por WhatsApp
+  if (content.includes('href="mailto:soporte@baqueano.ni"')) {
+    content = content.replace(/href="mailto:soporte@baqueano\.ni"/g, 'href="https://wa.me/50584431289?text=Hola%20BAQUEANO%2C%20necesito%20asistencia" target="_blank" rel="noopener noreferrer"');
+    changed = true;
+  }
+
+  if (changed) {
+    fs.writeFileSync(filePath, content, 'utf8');
+    modifiedCount++;
+    console.log(`✅ Archivo HTML actualizado: ${file}`);
+  }
+});
+
+console.log(`\n🎉 Total archivos HTML actualizados con el nuevo estándar: ${modifiedCount}`);

@@ -60,7 +60,7 @@
   <link rel="apple-touch-icon" href="assets/images/logo.png">
 
   <!-- 🧭 NAVBAR HORIZONTAL — ESTILOS GLOBALES -->
-  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-v11-capsule">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-v12-centered">
 </head>
 
 <body class="page-index-exact">
@@ -80,11 +80,12 @@
       </a>
 
       <!-- Menú Horizontal Central de Enlaces -->
+            <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
       <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
         <a href="index.html" class="exact-nav-link active" role="menuitem"><span class="nav-label">Inicio</span></a>
         <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
 
-        <!-- Menú Desplegable "Más ˇ" con Mega Menú de 4 Columnas -->
+        <!-- Menú Desplegable "Más ˇ" con Mega Menú Centrado de 4 Columnas -->
         <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
           <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
             <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
@@ -136,6 +137,7 @@
       </div>
 
       <!-- Acciones a la Derecha (Clima, SOS, Iniciar Sesión, Idioma) -->
+            <!-- Acciones a la Derecha (Clima en vivo, SOS, Iniciar Sesión, Idioma) -->
       <div class="exact-nav-actions global-nav-actions">
         <div class="navbar-weather-pill" id="bqWeatherWidget" title="Clima actual en Nicaragua (clic para ver detalles)" aria-label="Clima en Nicaragua" role="button" tabindex="0">
           <i class="fa-solid fa-cloud-sun" id="bqWeatherIcon"></i>
@@ -407,7 +409,7 @@
                   <button type="button" class="map-filter-chip active" data-map-filter="destinos"><i class="fa-solid fa-location-dot"></i> Destinos</button>
                   <button type="button" class="map-filter-chip" data-map-filter="negocios"><i class="fa-solid fa-store"></i> Negocios</button>
                   <button type="button" class="map-filter-chip" data-map-filter="experiencias"><i class="fa-solid fa-person-hiking"></i> Experiencias</button>
-                  <button type="button" class="map-filter-chip" data-map-filter="sos" onclick="openSosModal(event)"><i class="fa-solid fa-tower-broadcast"></i> SOS 24/7</button>
+                  <button type="button" class="map-filter-chip" data-map-filter="sos" onclick="if(window.bqOpenSos)bqOpenSos();else if(window.openSosModal)openSosModal(event);"><i class="fa-solid fa-tower-broadcast"></i> SOS 24/7</button>
                 </div>
 
                 <!-- Contenedor Leaflet de Nicaragua -->
@@ -1018,7 +1020,7 @@
           console.warn('[BaqueanoMap] Inicialización cartográfica en espera:', e);
         }
       }
-      // La hamburguesa móvil es controlada universalmente por js/navigation.js
+      // La hamburguesa móvil es controlada universalmente por js/navigation.js?v=20260929-v12-centered
     });
 
     // Control de Modal Video
@@ -1110,10 +1112,10 @@
     }
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
-<script src="js/navigation.js"></script>
+<script src="js/navigation.js?v=20260929-v12-centered"></script>
 <script src="js/baqueano-api.js"></script>
 <script src="js/smart-search.js"></script>
-<script src="js/global-injector.js"></script>
+<script src="js/global-injector.js?v=20260929-v12-centered"></script>
 </body>
 
 </html>
