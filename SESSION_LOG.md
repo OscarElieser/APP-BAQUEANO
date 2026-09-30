@@ -1663,3 +1663,15 @@
 - **POR QUÉ (Why / Propósito):** Recuperar la apariencia discreta y clara de la firma anterior sin eliminar la imagen gráfica actual solicitada por el usuario.
 - **CÓMO (How / Arquitectura e Implementación):** Se conservó el recurso existente y se ajustaron escala, espacio lateral, alineación, tratamiento monocromático blanco y sombra controlada para evitar que compita con el mensaje principal.
 - **QUÉ (What / Entregables):** Actualizado `website/css/pages/index-exact.css`; el logo del hero mantiene su imagen actual con una presentación similar a la firma blanca anterior, mientras el logo del footer permanece intacto.
+
+### Eliminación del distintivo duplicado en el footer
+
+- **POR QUÉ (Why / Propósito):** Evitar que la imagen de Nicaragua Auténtica aparezca dos veces en franjas consecutivas.
+- **CÓMO (How / Arquitectura e Implementación):** Se identificó que `global-asset-curator.js` ya incorpora la firma original; se retiró únicamente el segundo bloque añadido posteriormente.
+- **QUÉ (What / Entregables):** Actualizados `website/js/global-injector.js`, `website/index.html` y `website/css/pages/index-exact.css`; permanece una sola firma original centrada.
+
+### Separación lateral del contenido principal y la firma gráfica
+
+- **POR QUÉ (Why / Propósito):** Ajustar la composición solicitada: mensaje principal más cerca del borde izquierdo y firma Nicaragua Auténtica desplazada hacia el extremo derecho.
+- **CÓMO (How / Arquitectura e Implementación):** Se amplió el contenedor del hero al ancho disponible, se definieron márgenes laterales fluidos, separación flexible entre columnas y se restauró el color original del recurso gráfico `NICARAGUA AUTENTICA.png` disponible en el proyecto.
+- **QUÉ (What / Entregables):** Actualizado `website/css/pages/index-exact.css`; la distribución mantiene límites legibles en escritorio y vuelve a una sola columna en móvil.

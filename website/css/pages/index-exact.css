@@ -319,12 +319,18 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 100%;
+  flex: 1 1 100%;
+  margin-inline: 0;
+  padding-inline: clamp(46px, 4vw, 72px);
+  gap: clamp(40px, 7vw, 120px);
   position: relative;
   z-index: 2;
 }
 
 .hero-exact-content {
   max-width: 660px;
+  margin-right: auto;
 }
 
 .hero-exact-pill {
@@ -470,16 +476,17 @@
   justify-content: center;
   flex: 0 1 390px;
   min-width: 0;
-  padding: 20px 0 20px 28px;
+  padding: 20px 0;
+  margin-left: auto;
 }
 
 .hero-autentica-badge {
   display: block;
-  width: clamp(245px, 25vw, 350px);
+  width: clamp(270px, 26vw, 390px);
   height: auto;
   object-fit: contain;
-  opacity: 0.96;
-  filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 5px 14px rgba(0, 0, 0, 0.62));
+  opacity: 1;
+  filter: drop-shadow(0 7px 18px rgba(0, 0, 0, 0.48));
   pointer-events: none;
 }
 
@@ -1607,22 +1614,6 @@
   color: #64748B;
 }
 
-.footer-country-mark {
-  min-height: 112px;
-  display: grid;
-  place-items: center;
-  padding: 16px 24px;
-  background: #0B2940;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer-country-mark img {
-  display: block;
-  width: clamp(190px, 20vw, 285px);
-  height: auto;
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.28));
-}
-
 /* ============================================================================
    13. ADAPTABILIDAD RESPONSIVA (MOBILE & TABLET BREAKPOINTS)
    ============================================================================ */
@@ -1645,6 +1636,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    padding-inline: 22px;
   }
   .hero-exact-right {
     align-items: flex-start;

@@ -115,8 +115,6 @@
         }
         .bq-stamp-title { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; }
         .bq-stamp-sub   { font-size: .65rem; color: #64748B; text-transform: uppercase; letter-spacing: .1em; }
-        .bq-footer-country-mark { min-height: 112px; display: grid; place-items: center; padding: 16px 24px; background: #0B2940; border-top: 1px solid rgba(255,255,255,.05); }
-        .bq-footer-country-mark img { display: block; width: clamp(190px,20vw,285px); height: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,.28)); }
 
         /* ── Botón OPS Center Flotante ── */
         /* ── Toast de Retroalimentación Global ── */
@@ -404,9 +402,6 @@
       '<div class="bq-footer-stamp">' +
         '<span style="font-size:.75rem;color:#475569">Hecho con ❤️ en Nicaragua</span>' +
       '</div>' +
-    '</div>' +
-    '<div class="bq-footer-country-mark">' +
-      '<img src="assets/images/PROPUESTA/NICARAGUA%20AUTENTICA.png" alt="Nicaragua Auténtica" width="285" height="114" loading="lazy" decoding="async">' +
     '</div>';
   }
 
