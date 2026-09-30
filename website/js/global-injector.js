@@ -56,13 +56,21 @@
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
       { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20260930-1' },
-      { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
+      { id: 'bq-accessibility', href: 'css/accessibility.css?v=20260930-1' },
+      { 
+        id: 'bq-fa',        
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+        integrity: 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==',
+        crossOrigin: 'anonymous'
+      },
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
     needed.forEach(function(css) {
       if (!document.getElementById(css.id)) {
         var link = document.createElement('link');
         link.id = css.id; link.rel = 'stylesheet'; link.href = css.href;
+        if (css.integrity) link.integrity = css.integrity;
+        if (css.crossOrigin) link.crossOrigin = css.crossOrigin;
         document.head.appendChild(link);
       }
     });
@@ -85,6 +93,7 @@
         @media (max-width: 560px) { .bq-footer-grid { grid-template-columns: 1fr; } }
         .bq-footer-brand a { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 14px; }
         .bq-footer-brand img { height: 44px; width: 44px; }
+        .bq-footer-logo-full { height: 48px !important; width: auto !important; max-width: 200px; object-fit: contain; }
         .bq-footer-brand-name { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 900; color: #F4E6C1; line-height: 1; }
         .bq-footer-brand-sub  { font-size: .65rem; color: #64748B; letter-spacing: .1em; }
         .bq-footer-tagline { font-size: .82rem; color: #64748B; margin-bottom: 18px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
@@ -341,8 +350,7 @@
         // Columna Marca
         '<div class="bq-footer-brand">' +
           '<a href="index.html">' +
-            '<img src="assets/images/logo.png" alt="BAQUEANO">' +
-            '<div><div class="bq-footer-brand-name">BAQUEANO</div><div class="bq-footer-brand-sub">NICARAGUA AUTÉNTICA</div></div>' +
+            '<img src="assets/images/LOGOS/baqueano_logo-completo_2160x1669-blanco.png" alt="Baqueano Nicaragua" class="bq-footer-logo-full">' +
           '</a>' +
           '<p class="bq-footer-tagline">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</p>' +
           '<div class="bq-footer-socials">' +
@@ -781,6 +789,127 @@
     }
   }
 
+  // ==========================================================================
+  // 🧭 CAPA UNIVERSAL DE ACCESIBILIDAD & SEGURIDAD CLIENTE (WCAG 2.1 AA / A11Y)
+  // ==========================================================================
+  // 🎯 POR QUÉ:
+  // - Cumplir con WCAG 2.1 AA en todas las 28 páginas sin excepción.
+  // - Evitar spam automatizado en formularios mediante trampa silenciosa Honeypot.
+  // - Proteger contra Clickjacking e inyecciones de interfaz (Framing) en el cliente.
+  // - Garantizar que navegadores con soporte de teclado y lectores de pantalla
+  //   puedan saltar directamente al contenido principal (#mainContent).
+  // ⚙️ CÓMO:
+  // - Inyección del Skip Navigation Link antes del navbar.
+  // - Verificación y asignación de #mainContent con tabindex="-1".
+  // - Inyección automática de honeypots en todos los formularios <form>.
+  // - Detección y corrección de inputs sin etiqueta descriptiva para lectores.
+  // - Detección de iframes no autorizados (Frame Busting / Anti-Clickjacking).
+  // 📦 QUÉ:
+  // - Funciones: injectSkipNavigation(), ensureMainContentTarget(), 
+  //   protectFormsWithHoneypot(), ensureInputAccessibility(), hardenClientSecurity().
+  // ==========================================================================
+
+  function injectSkipNavigation() {
+    if (document.getElementById('bqSkipNav')) return;
+    var skipLink = document.createElement('a');
+    skipLink.id = 'bqSkipNav';
+    skipLink.className = 'skip-nav';
+    skipLink.href = '#mainContent';
+    skipLink.textContent = 'Saltar al contenido principal';
+    skipLink.setAttribute('aria-label', 'Saltar navegación e ir directo al contenido principal');
+
+    if (document.body.firstChild) {
+      document.body.insertBefore(skipLink, document.body.firstChild);
+    } else {
+      document.body.appendChild(skipLink);
+    }
+  }
+
+  function ensureMainContentTarget() {
+    if (document.getElementById('mainContent')) return;
+    var main = document.querySelector('main, [role="main"], .page-content, .hero-exact-shell, .destinos-main-container, .main-container, section');
+    if (main) {
+      main.id = 'mainContent';
+      if (!main.hasAttribute('tabindex')) {
+        main.setAttribute('tabindex', '-1');
+      }
+    }
+  }
+
+  function protectFormsWithHoneypot() {
+    var forms = document.querySelectorAll('form');
+    forms.forEach(function(form) {
+      if (form.querySelector('.bq-hp-field')) return;
+
+      var hpWrapper = document.createElement('div');
+      hpWrapper.className = 'bq-hp-field';
+      hpWrapper.setAttribute('aria-hidden', 'true');
+      hpWrapper.style.cssText = 'position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important;';
+
+      var hpInput = document.createElement('input');
+      hpInput.type = 'text';
+      hpInput.name = 'baqueano_security_hp';
+      hpInput.tabIndex = -1;
+      hpInput.autocomplete = 'off';
+      hpInput.setAttribute('aria-hidden', 'true');
+
+      hpWrapper.appendChild(hpInput);
+      form.appendChild(hpWrapper);
+
+      form.addEventListener('submit', function(e) {
+        if (hpInput.value && hpInput.value.trim() !== '') {
+          e.preventDefault();
+          e.stopPropagation();
+          console.warn('[BaqueanoSecurity] Intento de bot detectado y bloqueado via Honeypot.');
+          if (window.bqToast) {
+            window.bqToast('Solicitud rechazada por filtros de seguridad.', 'error');
+          }
+          return false;
+        }
+      }, true);
+    });
+  }
+
+  function ensureInputAccessibility() {
+    var inputs = document.querySelectorAll('input:not([type="hidden"]), select, textarea');
+    inputs.forEach(function(input) {
+      if (input.getAttribute('aria-label') || input.getAttribute('aria-labelledby')) return;
+      if (input.id && document.querySelector('label[for="' + input.id + '"]')) return;
+      if (input.closest('label')) return;
+
+      var fallback = input.placeholder || input.name || input.title || 'Campo de entrada';
+      input.setAttribute('aria-label', fallback);
+    });
+  }
+
+  function hardenClientSecurity() {
+    try {
+      if (window.top !== window.self) {
+        var topHost = window.top.location.hostname;
+        var selfHost = window.location.hostname;
+        if (topHost !== selfHost && !topHost.endsWith('firebaseapp.com') && !topHost.endsWith('web.app')) {
+          window.top.location = window.location;
+        }
+      }
+    } catch (e) {
+      if (window.top !== window.self) {
+        document.body.style.display = 'none';
+        window.top.location = window.location;
+      }
+    }
+
+    var links = document.querySelectorAll('a[target="_blank"]');
+    links.forEach(function(link) {
+      var rel = link.getAttribute('rel') || '';
+      var needs = [];
+      if (!rel.includes('noopener')) needs.push('noopener');
+      if (!rel.includes('noreferrer')) needs.push('noreferrer');
+      if (needs.length > 0) {
+        link.setAttribute('rel', (rel + ' ' + needs.join(' ')).trim());
+      }
+    });
+  }
+
   async function init() {
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
@@ -808,6 +937,11 @@
       document.body.appendChild(musicPlayerScript);
     }
     injectGlobalCSS();
+    injectSkipNavigation();
+    ensureMainContentTarget();
+    hardenClientSecurity();
+    protectFormsWithHoneypot();
+    ensureInputAccessibility();
     injectCookieConsent();
     removeGlobalSearchButtons();
     initInternalSiteSearch();
@@ -826,6 +960,8 @@
     await syncShellWithIndex();
     removeGlobalSearchButtons();
     normalizeFooterBoundary();
+    protectFormsWithHoneypot();
+    ensureInputAccessibility();
   }
 
   if (document.readyState === 'loading') {

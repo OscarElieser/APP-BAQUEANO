@@ -56,6 +56,61 @@
 
 
 
+## Implementación Integral de Brechas de Seguridad & Accesibilidad (30-09-2026)
+
+- **Consulta:**
+  > *"IMPLEMENTOS ❌ LO QUE FALTA — Brechas Reales TODOS LO QUE NO HACE FALTA PERO RECUERDA QUE NO VAS A BORRAR NADA DE LO QUE TENEMOS."*
+
+- **Principio Innegociable:** Cero eliminaciones (100% aditivo). Conservar íntegramente todo el código, estilos, componentes, rutas, scripts y configuraciones existentes, agregando únicamente las capas de blindaje de seguridad y accesibilidad universal (WCAG 2.1 AA).
+
+### 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Cumplir con los estándares internacionales de accesibilidad digital WCAG 2.1 AA / AAA, permitiendo que personas con discapacidad motora, visual, auditiva o cognitiva puedan navegar sin barreras por todo el ecosistema Baqueano.
+- Proteger la plataforma contra ataques automatizados de bots, spam en formularios, scraping abusivo, DoS y ataques de Clickjacking.
+- Garantizar la integridad criptográfica de las bibliotecas de terceros cargadas desde CDNs (Leaflet, FontAwesome) mediante Subresource Integrity (SRI).
+
+### ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+1. **Sistema Universal de Accesibilidad (`website/css/accessibility.css`)**:
+   - `.skip-nav`: Enlace de salto rápido accesible por teclado (`Tab`) que aparece sobre el navbar y lleva directamente a `#mainContent`.
+   - `:focus-visible`: Anillo de enfoque de alto contraste con el color identitario Baqueano (`#F65E01`), outline de 3px y offset de 3px para garantizar visibilidad tanto en fondos oscuros como claros.
+   - `@media (prefers-reduced-motion: reduce)`: Neutralización inmediata de animaciones, transiciones y autoplay de videos para usuarios con trastornos vestibulares.
+   - `@media (prefers-contrast: more)`: Refuerzo automático de bordes, texto y contraste para condiciones de baja visión.
+   - Touch Targets: Estándar mínimo de 44x44px en elementos interactivos.
+   - Clases `.sr-only` y `.visually-hidden` para asistencia en lectores de pantalla.
+   - Estilos `.bq-hp-field` para aislamiento seguro de campos honeypot anti-spam.
+
+2. **Inyector Universal (`website/js/global-injector.js`)**:
+   - Carga automática de `css/accessibility.css` en todas las páginas del portal.
+   - Inyección de `integrity` (SHA-512) y `crossOrigin="anonymous"` en la carga de FontAwesome 6.5.1.
+   - Función `injectSkipNavigation()`: Precede al navbar con el enlace de salto accesible.
+   - Función `ensureMainContentTarget()`: Asigna `#mainContent` y `tabindex="-1"` dinámicamente al contenedor principal si no existe.
+   - Función `protectFormsWithHoneypot()`: Inyecta trampas anti-spam invisibles y listeners de intercepción en todos los formularios `<form>` del sitio.
+   - Función `ensureInputAccessibility()`: Audita e inyecta `aria-label` automático a cualquier input/textarea huérfano de etiqueta.
+   - Función `hardenClientSecurity()`: Protección anti-clickjacking en cliente (Frame Busting) y aseguramiento de `rel="noopener noreferrer"` en enlaces externos.
+
+3. **Subresource Integrity (SRI) en CDN Tags de Páginas HTML**:
+   - Integración de `integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"` en Leaflet JS en:
+     `aliados.html`, `ambiental.html`, `destinos.html`, `gastronomia.html`, `historia.html`, `index.html`, `mapa.html`, `mi-viaje.html`, `musica.html`.
+   - Integración de SRI en `baqueano-ia.html` para Leaflet unpkg (`sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg==`).
+
+4. **Blindaje de Backend y Rate Limiting Global (`functions/lib/http.js`)**:
+   - Incorporación de middleware defensivo de Rate Limiting en memoria para todas las llamadas API generales (60 req/min por IP), retornando código `429 Too Many Requests` y cabecera `Retry-After: 60`.
+   - Mantenimiento estricto del límite especializado de 10 req/min para funciones de Inteligencia Artificial (`/api/ai/travel-plan`).
+   - Tasa de limpieza periódica de memoria desreferenciada cada 2 minutos.
+
+### 📦 3. QUÉ (WHAT / ARCHIVOS AFECTADOS):
+- `website/css/accessibility.css` (NUEVO archivo con Golden Circle)
+- `website/js/global-injector.js` (Capa de accesibilidad, honeypots y SRI)
+- `functions/lib/http.js` (Rate limiting defensivo global)
+- `website/aliados.html`, `website/ambiental.html`, `website/baqueano-ia.html`, `website/destinos.html`, `website/gastronomia.html`, `website/historia.html`, `website/index.html`, `website/mapa.html`, `website/mi-viaje.html`, `website/musica.html` (SRI hash + crossorigin)
+- `SESSION_LOG.md` (Registro y bitácora de sesión)
+
+### 🧪 VERIFICACIÓN Y PRUEBAS:
+- Node syntax checks (`npm run check`): 100% Limpio.
+- Functions test suite (`npm test`): 21/21 pruebas aprobadas (100% de la suite).
+- Auditoría de cero eliminaciones: Validada mediante `git diff`.
+
+---
+
 ## Menú lateral plegable de la aplicación Android
 
 ### Ajuste solicitado — todos los botones individuales

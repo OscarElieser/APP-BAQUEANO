@@ -1540,6 +1540,14 @@
   object-fit: contain;
 }
 
+/* Logo completo horizontal en el footer */
+.footer-logo-full {
+  width: auto !important;
+  height: 52px !important;
+  max-width: 210px;
+  object-fit: contain;
+}
+
 .footer-brand-text-block {
   display: flex;
   flex-direction: column;

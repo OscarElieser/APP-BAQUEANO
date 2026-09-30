@@ -1,0 +1,173 @@
+/* ============================================================================
+ * 🧭 BAQUEANO ECOSYSTEM — SISTEMA UNIVERSAL DE ACCESIBILIDAD (accessibility.css)
+ * ============================================================================
+ *
+ * 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+ * - Cumplir rigurosamente con las directrices internacionales WCAG 2.1 nivel AA / AAA
+ *   para garantizar la inclusión digital de todas las personas, incluyendo usuarios con
+ *   discapacidad visual, motora, cognitiva o auditiva.
+ * - Brindar una experiencia de navegación fluida, digna y accesible tanto para
+ *   exploradores nacionales e internacionales como para emprendedores campesinos.
+ * - Asegurar compatibilidad universal con lectores de pantalla (NVDA, JAWS, TalkBack,
+ *   VoiceOver), navegación por teclado exclusivo y preferencias del sistema operativo.
+ *
+ * ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+ * - Skip Navigation Link (.skip-nav): Enlace de salto rápido accesible por teclado
+ *   (Tab) que conduce directamente a #mainContent, evitando ciclos repetitivos en el navbar.
+ * - Anillo de Enfoque Visible (:focus-visible): Indicador nítido de foco con el color
+ *   identitario terracota (#F65E01), con outline-offset para contraste sobre fondos claros u oscuros.
+ * - Reducción de Movimiento (@media prefers-reduced-motion): Neutralización de animaciones
+ *   y transiciones para usuarios con trastornos vestibulares o sensibilidad al movimiento.
+ * - Alto Contraste (@media prefers-contrast: more): Refuerzo automático de bordes y pesos
+ *   tipográficos para condiciones de baja visión o alta luminosidad solar en territorio.
+ * - Objetivos Táctiles (Touch Targets): Cumplimiento del estándar mínimo de 44x44px.
+ * - Clases de Utilidad A11y (.sr-only, .visually-hidden): Ocultamiento visual seguro sin
+ *   invisibilizar para lectores de pantalla.
+ * - Estilos de Honeypot (.bq-hp-field): Ocultamiento técnico de trampas anti-spam sin
+ *   interferir con usuarios legítimos ni lectores accesibles.
+ *
+ * 📦 3. QUÉ (WHAT / ENTREGABLES & REGLAS CSS):
+ * - Selectores globales :focus-visible, .skip-nav, .sr-only, .visually-hidden,
+ *   .bq-touch-target, y bloques de media queries para accesibilidad adaptativa.
+ * ============================================================================
+ */
+
+/* ── 1. ENLACE DE SALTO AL CONTENIDO (SKIP NAVIGATION LINK) ── */
+.skip-nav {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 9999999;
+  background-color: #0F172A;
+  color: #F4E6C1;
+  border: 2px solid #F65E01;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(246, 94, 1, 0.4);
+  transform: translateY(-220%);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  pointer-events: none;
+}
+
+.skip-nav:focus,
+.skip-nav:focus-visible {
+  transform: translateY(0);
+  pointer-events: auto;
+  outline: 3px solid #F4E6C1;
+  outline-offset: 3px;
+}
+
+/* ── 2. INDICADOR DE ENFOQUE POR TECLADO (:focus-visible) ── */
+/* Mantiene el diseño limpio al hacer clic con mouse, pero destaca nítidamente con Tab */
+:focus-visible {
+  outline: 3px solid #F65E01 !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+/* Enlaces y botones específicos para asegurar visibilidad sobre fondos oscuros o claros */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #F65E01 !important;
+  outline-offset: 3px !important;
+}
+
+/* Evitar foco fantasma en clics de ratón en navegadores antiguos */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── 3. PREFERENCIA DE MOVIMIENTO REDUCIDO (PREFERS-REDUCED-MOTION) ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Detener fondos de video decorativos o giros continuos */
+  .hero-video,
+  video[autoplay],
+  .spinning,
+  .rotating-globe,
+  .pulse-animation {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── 4. PREFERENCIA DE ALTO CONTRASTE (PREFERS-CONTRAST: MORE) ── */
+@media (prefers-contrast: more) {
+  body {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+    font-weight: 700 !important;
+  }
+
+  .main-navbar-exact,
+  .site-footer-exact,
+  .bq-global-footer,
+  .exact-card,
+  .biz-card {
+    border: 2px solid #FFFFFF !important;
+  }
+
+  :focus-visible {
+    outline: 4px solid #FFFF00 !important;
+    outline-offset: 4px !important;
+  }
+}
+
+/* ── 5. UTILIDADES DE LECTORES DE PANTALLA (SCREEN READER ONLY) ── */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ── 6. ÁREA TÁCTIL MÍNIMA PARA DISPOSITIVOS TÁCTILES (44x44px) ── */
+.bq-touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 7. CAMPO HONEYPOT DE SEGURIDAD (ANTI-SPAM INVISIBLE) ── */
+.bq-hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
