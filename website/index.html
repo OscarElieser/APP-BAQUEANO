@@ -970,7 +970,10 @@
           if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => map.zoomOut());
 
           // Ajuste de tamaño al renderizar
-          setTimeout(() => map.invalidateSize(), 300);
+          setTimeout(() => { map.invalidateSize(); }, 200);
+          setTimeout(() => { map.invalidateSize(); }, 600);
+          setTimeout(() => { map.invalidateSize(); }, 1200);
+          window.addEventListener('resize', () => { try { map.invalidateSize(); } catch(e){} });
 
         } catch (e) {
           console.warn('[BaqueanoMap] Inicialización cartográfica en espera:', e);

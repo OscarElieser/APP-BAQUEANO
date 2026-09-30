@@ -1820,6 +1820,24 @@
   - Actualizados: 28 archivos `.html`, `website/manifest.json` y `SESSION_LOG.md`.
 - **Validación:** `Select-String` confirmó presencia en `index.html` líneas 8-12. Sin errores.
 
+### Corrección del Mapa Leaflet Negro/Vacío en index.html
+
+- **Consulta:** *"QUE PASO SE FEO FEO EL MAPA REVISA ESA PARTE NO ERA ASI"*
+- **Diagnóstico Técnico:**
+  1. `.map-visual-viewport` tenía `height: 100%` sin un alto fijo en el ancestro → Leaflet calculaba `0px` y no cargaba tiles.
+  2. `.map-visual-wrap` solo tenía `min-height: 240px` sin `height` explícito → el grid no expandía correctamente.
+  3. `invalidateSize()` se llamaba una sola vez a 300ms, insuficiente para el primer render.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. `index-exact.css` — Cambios en la sección del mapa:
+     - `.map-ai-section-exact { padding: 48px 0; background: #F1F5F9; }` — sección definida.
+     - `.map-card-inner { grid-template-columns: 160px 1fr; min-height: 360px; }` — columnas fijas.
+     - `.map-visual-wrap { height: 300px; }` — altura explícita en el contenedor.
+     - `.map-visual-viewport { height: 300px; display: block; }` — altura explícita para Leaflet.
+  2. `index.html` — Script de inicialización: `invalidateSize()` llamado a 200ms, 600ms y 1200ms + listener `resize`.
+- **QUÉ (What / Entregables):**
+  - Actualizados: `website/css/pages/index-exact.css`, `website/index.html`, `SESSION_LOG.md`.
+
+
 
 
 
