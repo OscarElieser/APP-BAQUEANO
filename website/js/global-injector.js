@@ -643,7 +643,7 @@
       ['Departamentos y territorios','Explorar','Información de los 17 territorios de Nicaragua.','departamento.html','departamentos territorios leon managua granada masaya rivas carazo chinandega matagalpa esteli boaco chontales madriz nueva segovia rio san juan caribe racccn racs'],
       ['Mapa interactivo','Explorar','Ubicá destinos, servicios y puntos de interés en el mapa nacional.','mapa.html','mapa ubicacion gps lugares rutas coordenadas'],
       ['Experiencias','Explorar','Actividades, senderos y vivencias comunitarias.','experiencias.html','experiencias tours senderismo aventura comunidades guia'],
-      ['Baqueano IA','Planificación','Asistente para crear rutas y consultar clima por territorio.','baqueano-ia.html','ia inteligencia artificial ruta itinerario clima viaje planificar'],
+      ['BAQUI','Planificación','Asistente para crear rutas y consultar clima por territorio.','baqueano-ia.html','ia inteligencia artificial ruta itinerario clima viaje planificar'],
       ['Mi viaje','Planificación','Organizá destinos, presupuesto, días y experiencias.','mi-viaje.html','viaje ruta itinerario presupuesto reservas plan'],
       ['Historia y memoria','Cultura','Historia nacional, personajes, museos y sitios de memoria.','historia.html','historia museos monumentos independencia cultura memoria ruben dario sandino'],
       ['Gastronomía nicaragüense','Cultura','Platos, bebidas, recetas y tradiciones culinarias.','gastronomia.html','comida gastronomia recetas nacatamal vigoron gallo pinto quesillo'],

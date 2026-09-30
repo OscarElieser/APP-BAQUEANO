@@ -1597,3 +1597,12 @@
 - El usuario aclaró que la entrega debe cubrir íntegramente las capturas y anotaciones del PDF para estas 16 páginas: `departamento.html`, `index.html`, `destinos.html`, `baqueano-ia.html`, `mi-viaje.html`, `mapa.html`, `experiencias.html`, `gastronomia.html`, `ambiental.html`, `musica.html`, `aliados.html`, `denuncias.html`, `ayuda.html`, `terminos.html`, `legal.html` y `aviso-legal.html`.
 - La capa transversal anterior se conserva como base, pero no se considera por sí sola cumplimiento total del documento.
 - Se inicia una segunda auditoría visual de las capturas de las páginas 368–408 para vincular cada anotación con el bloque exacto del HTML antes de continuar la implementación página por página.
+
+### Auditoría visual y segundo bloque aplicado
+
+- Se extrajeron y revisaron temporalmente todas las capturas incrustadas de las páginas 368–408 del PDF; los archivos temporales permanecen fuera del repositorio.
+- Se confirmó la correspondencia visual de las 16 páginas declaradas por el usuario y se conservaron como alcance obligatorio de esta entrega.
+- `index.html`, `destinos.html` e `historia.html` ahora utilizan los videos temáticos locales disponibles en `assets/videos/`, con imagen alternativa, reproducción silenciosa continua y capa de contraste legible.
+- La navegación adopta fondo transparente mientras está sobre el video y recupera su superficie oscura con desenfoque al abandonar el encabezado. El comportamiento resiste el reemplazo asíncrono del componente global.
+- El nombre visible del asistente se unificó como `BAQUI` en portada, navegación, búsqueda global y `baqueano-ia.html`.
+- **Validación:** videos cargados con `readyState=4`, navegación transparente verificada en Destinos e Historia, cero errores JavaScript y cero desbordamiento horizontal.

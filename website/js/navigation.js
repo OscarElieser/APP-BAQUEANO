@@ -62,7 +62,7 @@ function buildGlobalMegaNavigation() {
       <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
       <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
       <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
-      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano IA</span></a>
+      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">BAQUI</span></a>
       <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
       <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
         <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','favoritos.html','ayuda.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">

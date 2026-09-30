@@ -91,6 +91,15 @@
     reset.addEventListener('click',function(){bar.querySelectorAll('select').forEach(function(select){select.selectedIndex=0;select.dispatchEvent(new Event('change',{bubbles:true}));});document.querySelectorAll('.aliado-card,.aliado-card-exact').forEach(function(card){card.hidden=false;card.style.display='';});update();});window.setTimeout(update,100);
   }
 
-  function init(){initLikes();initGalleries();initAllyFilters();new MutationObserver(initLikes).observe(document.body,{childList:true,subtree:true});}
+  function initVideoNavigation(){
+    var hero=document.querySelector('.bq-hero-background');
+    var nav=document.querySelector('#mainNavbar,.main-navbar-exact,.main-navbar');
+    if(!hero||!nav||nav.dataset.bqVideoNavReady==='true')return;
+    nav.dataset.bqVideoNavReady='true';
+    function update(){var overHero=window.scrollY<Math.max(56,hero.closest('section,header').offsetHeight-96);nav.classList.toggle('bq-nav-over-video',overHero);nav.classList.toggle('bq-nav-scrolled',!overHero);}
+    update();window.addEventListener('scroll',update,{passive:true});
+  }
+
+  function init(){initLikes();initGalleries();initAllyFilters();initVideoNavigation();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
