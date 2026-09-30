@@ -12,18 +12,22 @@
   "scope": "/",
   "icons": [
     {
-      "src": "/assets/images/baqueano_launcher_solid.png",
-      "sizes": "1024x1024",
+      "src": "assets/logos/baqueano_icono_2000x2000-blanco.png",
+      "sizes": "2000x2000",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/images/baqueano_launcher_solid.png",
-      "sizes": "1024x1024",
+      "src": "assets/logos/baqueano_icono_2000x2000-blanco.png",
+      "sizes": "2000x2000",
       "type": "image/png",
       "purpose": "any"
     }
   ],
-  "categories": ["travel", "lifestyle", "education"],
+  "categories": [
+    "travel",
+    "lifestyle",
+    "education"
+  ],
   "prefer_related_applications": false
 }

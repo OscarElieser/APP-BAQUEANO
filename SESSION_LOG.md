@@ -1777,6 +1777,28 @@
   - Actualizados: 28 archivos `.html` en `website/`, `website/manifest.json` y `SESSION_LOG.md`.
 - **Validación:** Los 28 archivos HTML cuentan con los enlaces verificados y los recursos gráficos existen y responden en disco.
 
+### Actualización a Icono Blanco Oficial (`baqueano_icono_2000x2000-blanco.png`)
+
+- **Consulta:**
+  > *"cambiarlo poner el otro que dice baqueano_icono_2000x2000-blanco.png"*
+  *(Acompañado de la captura del isotipo blanco circular con la silueta de volcán y río de Baqueano).*
+- **Localización del Recurso:**
+  - Se identificó el archivo fuente de ultra alta resolución en `website/assets/logos/baqueano_icono_2000x2000-blanco.png`.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. Se reemplazaron las fuentes canónicas de favicon (`favicon.ico`, `favicon.png`, `assets/images/logo.png`, `assets/images/LOGOS/logo.png`) por la versión blanca oficial.
+  2. Se actualizaron los 28 documentos `.html` con la referencia directa con invalidación de caché `?v=20260930-white-2`:
+     ```html
+     <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/baqueano_icono_2000x2000-blanco.png?v=20260930-white-2">
+     <link rel="icon" type="image/png" sizes="192x192" href="assets/logos/baqueano_icono_2000x2000-blanco.png?v=20260930-white-2">
+     <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/baqueano_icono_2000x2000-blanco.png?v=20260930-white-2">
+     <link rel="shortcut icon" href="favicon.ico?v=20260930-white-2">
+     ```
+  3. Se actualizó [manifest.json](file:///c:/Users/PC%201/APP%20BAQUEANO/website/manifest.json) con el icono blanco en resolución 2000x2000 para soporte PWA y Android.
+- **QUÉ (What / Entregables):**
+  - Actualizados: 28 archivos `.html`, `website/manifest.json`, `website/favicon.ico`, `website/favicon.png` y `SESSION_LOG.md`.
+- **Validación:** Comprobado en disco, referencias verificadas y sin errores de sintaxis.
+
+
 
 
 
