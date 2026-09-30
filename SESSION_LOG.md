@@ -1675,3 +1675,9 @@
 - **POR QUÉ (Why / Propósito):** Ajustar la composición solicitada: mensaje principal más cerca del borde izquierdo y firma Nicaragua Auténtica desplazada hacia el extremo derecho.
 - **CÓMO (How / Arquitectura e Implementación):** Se amplió el contenedor del hero al ancho disponible, se definieron márgenes laterales fluidos, separación flexible entre columnas y se restauró el color original del recurso gráfico `NICARAGUA AUTENTICA.png` disponible en el proyecto.
 - **QUÉ (What / Entregables):** Actualizado `website/css/pages/index-exact.css`; la distribución mantiene límites legibles en escritorio y vuelve a una sola columna en móvil.
+
+### Retiro de la firma gráfica inferior del footer
+
+- **POR QUÉ (Why / Propósito):** Cumplir la indicación de eliminar la franja independiente con Nicaragua Auténtica situada debajo del copyright.
+- **CÓMO (How / Arquitectura e Implementación):** Se retiró la creación automática de `.bq-national-signature` y sus estilos exclusivos desde el curador global, preservando el resto de la curaduría de imágenes.
+- **QUÉ (What / Entregables):** Actualizado `website/js/global-asset-curator.js`; el footer termina en su barra de copyright y la imagen del hero no cambia.

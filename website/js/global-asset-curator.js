@@ -4,7 +4,7 @@
 // 🎯 POR QUÉ: utilizar la identidad y las fotografías reales disponibles en el proyecto.
 // ⚙️ CÓMO: normaliza rutas antiguas, asigna marca y Baqui oficiales, repara recursos
 //    faltantes y optimiza la carga de imágenes que están fuera del primer viewport.
-// 📦 QUÉ: Propuesta 3 en navegación, Baqui guardabarranco, sello nacional y fallbacks.
+// 📦 QUÉ: Propuesta 3 en navegación, Baqui guardabarranco y fallbacks visuales.
 // ============================================================================
 (function () {
   'use strict';
@@ -53,13 +53,8 @@
     img.decoding='async';img.dataset.assetCurated='true';
     img.addEventListener('error',function fallback(){img.removeEventListener('error',fallback);img.src=icon;img.classList.add('bq-image-fallback');});
   }
-  function addNationalSignature(){
-    var footer=document.querySelector('footer');if(!footer||footer.querySelector('.bq-national-signature'))return;
-    var signature=document.createElement('div');signature.className='bq-national-signature';signature.innerHTML='<img src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica">';
-    var bottom=footer.querySelector('.footer-bottom-bar,.global-footer-bottom');footer.insertBefore(signature,bottom||null);
-  }
-  function run(root){(root.matches&&root.matches('img')?[root]:Array.from(root.querySelectorAll?root.querySelectorAll('img'):[])).forEach(curateImage);addNationalSignature();}
-  var style=document.createElement('style');style.textContent='#mainNavbar .bq-proposal-logo,.main-navbar .bq-proposal-logo{width:150px!important;max-width:150px!important;height:52px!important;object-fit:contain!important;border-radius:0!important}#mainNavbar .bq-proposal-logo~.exact-nav-brand-text,#mainNavbar .bq-proposal-logo~.navbar-brand-text{display:none!important}.bq-footer-proposal-logo{width:min(230px,100%)!important;height:auto!important;max-height:100px!important;object-fit:contain!important}.bq-national-signature{display:flex;justify-content:center;align-items:center;padding:10px 20px 18px;background:#0B253A}.bq-national-signature img{width:min(210px,52vw);height:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.25))}.bq-image-fallback{object-fit:contain!important}@media(max-width:600px){#mainNavbar .bq-proposal-logo,.main-navbar .bq-proposal-logo{width:116px!important;height:44px!important}.bq-national-signature img{width:170px}}';document.head.appendChild(style);
+  function run(root){(root.matches&&root.matches('img')?[root]:Array.from(root.querySelectorAll?root.querySelectorAll('img'):[])).forEach(curateImage);}
+  var style=document.createElement('style');style.textContent='#mainNavbar .bq-proposal-logo,.main-navbar .bq-proposal-logo{width:150px!important;max-width:150px!important;height:52px!important;object-fit:contain!important;border-radius:0!important}#mainNavbar .bq-proposal-logo~.exact-nav-brand-text,#mainNavbar .bq-proposal-logo~.navbar-brand-text{display:none!important}.bq-footer-proposal-logo{width:min(230px,100%)!important;height:auto!important;max-height:100px!important;object-fit:contain!important}.bq-image-fallback{object-fit:contain!important}@media(max-width:600px){#mainNavbar .bq-proposal-logo,.main-navbar .bq-proposal-logo{width:116px!important;height:44px!important}}';document.head.appendChild(style);
   function init(){run(document);new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===1)run(node);});});}).observe(document.body,{childList:true,subtree:true});}
   document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
 }());
