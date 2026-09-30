@@ -1,4 +1,279 @@
 <!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CENTRO DE SUPERVIVENCIA & GUÍA TERRITORIAL OFFLINE (offline.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Brindar respuesta técnica real ante la pregunta clave del jurado:
+  «¿Qué pasa cuando el explorador llega al Cañón de Somoto u Ometepe sin señal celular?»
+- Convertir la experiencia offline de un error genérico a una ventaja táctica
+  de supervivencia y consulta territorial 100% funcional sin conexión a internet.
+- Proteger la vida del viajero y preservar el acceso a números de auxilio nacional
+  (Policía 118, Cruz Blanca 128, Bomberos 115) y protocolos de cañones y volcanes.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Arquitectura 100% autónoma y precargada por el Service Worker (CacheStorage).
+- Cero dependencias externas; estilos CSS embebidos ultraligeros (<8KB) con paleta oficial
+  (#165D6F Teal, #F65E01 Terracota, #F4E6C1 Arena, #0F172A Noche).
+- Detección reactiva de conectividad (navigator.onLine y evento 'online' automático).
+- Acceso a llamadas directas nativas (tel:) funcionales sin plan de datos móviles.
+- Recuperación defensiva de rutas guardadas localmente en localStorage/IndexedDB.
+
+📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
+- Banner táctico de estado offline con radar animado.
+- Botonera de auxilio de emergencia nacional SOS 24/7.
+- Protocolos de supervivencia en Cañón de Somoto, Volcanes y Reservas Naturales.
+- Panel de destinos precargados para navegación sin conexión.
+- Botones ergonómicos de reconexión y reintento.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#165D6F">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Modo Offline Territorial | Baqueano Nicaragua</title>
+
+  <style>
+    :root {
+      --petroleo-teal: #165D6F;
+      --terracotta: #F65E01;
+      --arena-pinolera: #F4E6C1;
+      --bg-space: #0F172A;
+      --bg-surface: #1E293B;
+      --text-primary: #FFFFFF;
+      --text-secondary: #E2E8F0;
+      --text-muted: #94A3B8;
+      --border-glow: rgba(246, 94, 1, 0.4);
+      --border-subtle: rgba(244, 230, 193, 0.15);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background-color: var(--bg-space);
+      color: var(--text-secondary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .offline-wrapper {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: clamp(24px, 5vw, 44px);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      text-align: center;
+    }
+
+    /* Radar animado de modo supervivencia */
+    .radar-beacon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: rgba(246, 94, 1, 0.15);
+      border: 2px solid var(--terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .radar-beacon::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(246, 94, 1, 0.4);
+      animation: pulseRadar 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes pulseRadar {
+      0% { transform: scale(0.9); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    .radar-icon {
+      font-size: 28px;
+    }
+
+    .offline-tag {
+      display: inline-block;
+      background: rgba(22, 93, 111, 0.6);
+      border: 1px solid var(--border-subtle);
+      color: var(--arena-pinolera);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      color: #FFFFFF;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    p.lead-text {
+      color: var(--text-secondary);
+      font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+      margin-bottom: 24px;
+    }
+
+    /* Cuadrícula de Contactos SOS Directos */
+    .sos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .sos-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(244, 230, 193, 0.12);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-decoration: none;
+      color: #FFFFFF;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .sos-card:hover, .sos-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--terracotta);
+      background: rgba(246, 94, 1, 0.15);
+    }
+
+    .sos-card-title {
+      font-size: 0.8rem;
+      color: var(--arena-pinolera);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .sos-card-number {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sos-card-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Protocolo de Supervivencia */
+    .protocol-box {
+      background: rgba(22, 93, 111, 0.25);
+      border-left: 3px solid var(--terracotta);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      margin-bottom: 28px;
+      font-size: 0.86rem;
+    }
+
+    .protocol-title {
+      color: var(--arena-pinolera);
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .protocol-list {
+      padding-left: 18px;
+      color: var(--text-secondary);
+    }
+
+    .protocol-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Botones de acción */
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(246, 94, 1, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--arena-pinolera);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .status-pill {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .status-pill.online-detected {
+      color: #10B981;
+      font-weight: 700;
+    }
+  </style>
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
 
   <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
   <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">

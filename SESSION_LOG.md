@@ -58,6 +58,25 @@
 
 ## Ajuste Visual de Footer — Nombre Baqueano Visible y Sello Nicaragua Auténtica (30-09-2026)
 
+### Auditoría y Restauración Global de Todas las Páginas Web
+
+- **Consulta:** *"Hacer lo mismo en todas las páginas, revisarlas y corregirlas"*.
+- **POR QUÉ:** Detectar y reparar globalmente la pérdida de configuración del encabezado HTML que afectó la identidad, estilos y comportamiento del sitio.
+- **CÓMO:** Auditoría automatizada de cada HTML raíz, comparación con su última versión sana y validación responsiva posterior.
+- **QUÉ:** Restaurados individualmente los encabezados completos de 26 páginas afectadas, conservando `index.html` y `destinos.html` ya corregidas. Se mantuvo el favicon vigente y se recuperaron títulos, metadatos, fuentes, bibliotecas y estilos específicos. También se compactó el navbar bajo 480 px, se corrigieron cuatro recursos de `experiencias.html` y se normalizaron las rutas globales de Baqüi.
+- **Archivos modificados:** 26 HTML raíz, `website/css/navigation-mega.css`, `website/js/baqueano-assistant.js`, `website/destinos.html` y esta bitácora.
+- **Validación:** 28/28 documentos con HTML, `head`, título, charset, viewport y estilos; 54 combinaciones de página/viewport recorridas a 390 y 1440 px, con verificación puntual posterior de falsos positivos; pruebas de humo web y sintaxis JavaScript aprobadas.
+- **Estado:** Restauración local completada. La versión publicada requiere despliegue para reflejar los cambios.
+
+### Auditoría de Configuración Perdida en Destinos
+
+- **Consulta:** *"https://app-baqueano.web.app/destinos.html se perdió toda la configuración, revisar"*.
+- **POR QUÉ:** Verificar la regresión visual y funcional reportada en la página publicada de destinos.
+- **CÓMO:** Comparación de producción, archivo local, dependencias declaradas y versiones recientes del historial; corrección conservadora sin eliminar contenido.
+- **QUÉ:** Restaurado en `website/destinos.html` el documento HTML completo, metadatos, fuentes, FontAwesome, Leaflet y seis hojas de estilo locales; conservado el favicon actual. También se corrigió la ruta de Baqüi hacia `assets/images/assistant/baqui.png`.
+- **Validación:** Producción confirmó la regresión (HTTP 200 con `head` incompleto). Local verificado a 390, 768 y 1440 px sin desbordamiento ni errores JavaScript. Mapa a 480 px, 6 tarjetas destacadas, 10 tarjetas de catálogo, 11 filtros y filtrado de playas funcional. Pruebas de humo web aprobadas.
+- **Estado:** Corrección local completada; falta publicar para que el dominio Firebase refleje el cambio.
+
 - **Consulta:**
   > *"ASI QUIERO FOOTER PERO EL NOMBRE DE BAQUENO SE TIENE QUE VER TAMBIEN"*
 - **Decisión de Diseño y Arquitectura:**

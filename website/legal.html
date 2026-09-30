@@ -1,4 +1,145 @@
 <!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — CENTRO LEGAL & CUMPLIMIENTO (legal.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Servir como centro unificado de transparencia jurídica, protección de datos
+  y términos contractuales para viajeros, anfitriones y cooperativas.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Índice accesible a los 4 documentos oficiales: Términos y Condiciones,
+  Política de Privacidad, Uso de Cookies y Aviso Legal.
+
+📦 3. QUÉ (WHAT / ENTREGABLES):
+- Navbar oficial, tarjetas de navegación jurídica y footer unificado.
+============================================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Centro Legal &amp; Términos | Baqueano Nicaragua</title>
+  <meta name="description" content="Términos y condiciones, política de privacidad, cookies y aviso legal de Baqueano Nicaragua.">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos del Ecosistema -->
+  <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+
+  <style>
+    .page-legal-exact {
+      background-color: #F8FAFC;
+      color: #1E293B;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .legal-hero {
+      background: #0B253A;
+      padding: 60px 0 40px;
+      color: #FFFFFF;
+      text-align: center;
+    }
+
+    .legal-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+
+    .legal-hero p {
+      color: #CBD5E1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .legal-grid-section {
+      padding: 50px 0 70px;
+    }
+
+    .legal-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .legal-nav-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .legal-nav-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .legal-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(22, 93, 111, 0.1);
+      color: #165D6F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .legal-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: #0F172A;
+    }
+
+    .legal-card-desc {
+      font-size: 0.85rem;
+      color: #64748B;
+      line-height: 1.45;
+      margin: 0 0 16px;
+      flex: 1;
+    }
+
+    .legal-card-link {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #F65E01;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 992px) {
+      .legal-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 550px) {
+      .legal-cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
+    <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
 
   <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
   <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">

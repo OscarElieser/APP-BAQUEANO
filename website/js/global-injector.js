@@ -359,7 +359,7 @@
           '</a>' +
           '<p class="bq-footer-tagline">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</p>' +
           '<div class="bq-footer-socials">' +
-
+          '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
             '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
             '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
             '<a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +

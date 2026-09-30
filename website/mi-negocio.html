@@ -1,4 +1,56 @@
 <!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — PORTAL DE ANFITRIONES & NEGOCIOS COMUNITARIOS (mi-negocio.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ser la puerta de entrada oficial para cooperativas campesinas, posadas
+  comunitarias, guías certificados y emprendedores rurales de Nicaragua que
+  desean registrar su negocio turístico en el ecosistema Baqueano.
+- Eliminar la barrera de intermediarios foráneos: el anfitrión registra
+  sus servicios directamente, sin comisiones abusivas de OTAs.
+- Conectar el formulario de registro directamente a Cloud Firestore
+  (/businesses) para supervisión inmediata desde el Ops Center.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Formulario multi-paso (3 pasos) con validación campo por campo.
+- Integración directa con BaqueanoFirestore.registerBusiness() y audit log.
+- Glassmorphism con la paleta oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+- Contador de negocios aliados en tiempo real desde Firestore.
+- Sección de beneficios con modelo económico transparente Leyes No. 1210 y 1211.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Hero Section: Misión del portal de anfitriones.
+- Contadores en Vivo: Negocios aliados, rutas activas, ingresos comunitarios.
+- Formulario Multi-Paso: Datos del negocio → Contacto & Propietario → Confirmación.
+- Panel de Éxito: Confirmación con ID de registro.
+- Sección FAQ: Respuestas a las 6 preguntas más frecuentes de anfitriones.
+============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Portal de Anfitriones & Negocios | Baqueano Nicaragua</title>
+  <meta name="description" content="Registra tu cooperativa, posada o guía turístico en Baqueano Nicaragua. Sin intermediarios, 0% comisión, conectado directamente con exploradores responsables.">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos Modulares Baqueano -->
+  <link rel="stylesheet" href="styles.css?v=20260926-ops-nav-5">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/videos.css?v=20260925-cinematic-1">
+  <link rel="stylesheet" href="css/pages/mi-negocio.css">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
 
   <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
   <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
