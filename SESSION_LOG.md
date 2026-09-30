@@ -1798,6 +1798,29 @@
   - Actualizados: 28 archivos `.html`, `website/manifest.json`, `website/favicon.ico`, `website/favicon.png` y `SESSION_LOG.md`.
 - **Validación:** Comprobado en disco, referencias verificadas y sin errores de sintaxis.
 
+### Cambio a Favicon `Mesa de trabajo 1.webp` (CHECKPOINT 1 — Sesión Reanudada)
+
+- **Consulta:**
+  > *"se ve totalmente feo rectifica y cambiarlo por Mesa de trabajo 1.webp"*
+- **Diagnóstico Técnico:**
+  - El icono blanco `baqueano_icono_2000x2000-blanco.png` se veía mal en la pestaña del navegador por contraste insuficiente sobre fondos claros/oscuros del sistema operativo.
+  - El archivo `website/assets/Mesa de trabajo 1.webp` (88 KB) contiene la imagen de marca correcta.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. Script PowerShell de procesamiento línea por línea aplicado a los 28 `.html` del directorio `website/`.
+  2. Bloque `<!-- Favicon -->` anterior eliminado y reemplazado por:
+     ```html
+     <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
+     <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+     <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+     <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+     <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+     ```
+  3. `manifest.json` actualizado: ícono PWA apunta ahora a `assets/Mesa de trabajo 1.webp`.
+- **QUÉ (What / Entregables):**
+  - Actualizados: 28 archivos `.html`, `website/manifest.json` y `SESSION_LOG.md`.
+- **Validación:** `Select-String` confirmó presencia en `index.html` líneas 8-12. Sin errores.
+
+
 
 
 

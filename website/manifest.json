@@ -12,15 +12,15 @@
   "scope": "/",
   "icons": [
     {
-      "src": "assets/logos/baqueano_icono_2000x2000-blanco.png",
-      "sizes": "2000x2000",
-      "type": "image/png",
+      "src": "assets/Mesa de trabajo 1.webp",
+      "sizes": "any",
+      "type": "image/webp",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/logos/baqueano_icono_2000x2000-blanco.png",
-      "sizes": "2000x2000",
-      "type": "image/png",
+      "src": "assets/Mesa de trabajo 1.webp",
+      "sizes": "any",
+      "type": "image/webp",
       "purpose": "any"
     }
   ],
