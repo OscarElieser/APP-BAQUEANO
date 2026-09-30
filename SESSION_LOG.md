@@ -1681,3 +1681,15 @@
 - **POR QUÉ (Why / Propósito):** Cumplir la indicación de eliminar la franja independiente con Nicaragua Auténtica situada debajo del copyright.
 - **CÓMO (How / Arquitectura e Implementación):** Se retiró la creación automática de `.bq-national-signature` y sus estilos exclusivos desde el curador global, preservando el resto de la curaduría de imágenes.
 - **QUÉ (What / Entregables):** Actualizado `website/js/global-asset-curator.js`; el footer termina en su barra de copyright y la imagen del hero no cambia.
+
+### Ampliación editorial del mensaje principal
+
+- **POR QUÉ (Why / Propósito):** Dar mayor jerarquía y elegancia al contenido principal señalado por el usuario sin reducir la legibilidad del video ni desplazar la firma gráfica derecha.
+- **CÓMO (How / Arquitectura e Implementación):** Se aumentó la escala fluida del título, se refinó el interletrado y las sombras, se amplió el subtítulo y se proporcionaron mejor el distintivo, buscador y llamada a la acción.
+- **QUÉ (What / Entregables):** Actualizado `website/css/pages/index-exact.css`; el conjunto crece en escritorio y conserva su escala específica para móvil.
+
+### Logotipo oficial blanco en la navegación
+
+- **POR QUÉ (Why / Propósito):** Usar la identidad oficial solicitada por el usuario y mejorar su integración sobre el menú transparente.
+- **CÓMO (How / Arquitectura e Implementación):** Se localizó `assets/images/LOGOS/baqueano_icono_500x386-blanco.png`, se estableció como recurso canónico del navbar y se ajustaron dimensiones, sombra y comportamiento móvil sin ocultar el nombre de marca contiguo.
+- **QUÉ (What / Entregables):** Actualizado `website/js/global-asset-curator.js`; el cambio se aplica a la navegación global de las páginas del portal, sin modificar hero ni footer.

@@ -4,11 +4,11 @@
 // 🎯 POR QUÉ: utilizar la identidad y las fotografías reales disponibles en el proyecto.
 // ⚙️ CÓMO: normaliza rutas antiguas, asigna marca y Baqui oficiales, repara recursos
 //    faltantes y optimiza la carga de imágenes que están fuera del primer viewport.
-// 📦 QUÉ: Propuesta 3 en navegación, Baqui guardabarranco y fallbacks visuales.
+// 📦 QUÉ: logotipo oficial blanco en navegación, Baqui guardabarranco y fallbacks visuales.
 // ============================================================================
 (function () {
   'use strict';
-  var logo='assets/images/PROPUESTA/baqueano_propuesta_3_color.png';
+  var logo='assets/images/LOGOS/baqueano_icono_500x386-blanco.png';
   var icon='assets/images/LOGOS/logo.png';
   var baqui='assets/images/assistant/baqui.png';
   var replacements={
@@ -47,14 +47,14 @@
     if(img.dataset.assetCurated==='true')return;
     var source=cleanSource(img.getAttribute('src')||'');
     if(replacements[source])img.src=replacements[source];
-    if(img.closest('#mainNavbar,.main-navbar,.main-navbar-exact')&&img.matches('.exact-nav-logo,.navbar-brand-logo,.exact-logo-img,.brand-logo-img')){img.src=logo;img.classList.add('bq-proposal-logo');}
+    if(img.closest('#mainNavbar,.main-navbar,.main-navbar-exact')&&img.matches('.exact-nav-logo,.navbar-brand-logo,.exact-logo-img,.brand-logo-img')){img.src=logo;img.classList.remove('bq-proposal-logo');img.classList.add('bq-official-nav-logo');}
     if(img.closest('footer')&&img.matches('.footer-logo-img,.footer-brand-logo-img,.footer-logo')){img.src=logo;img.classList.add('bq-footer-proposal-logo');}
     if(!img.closest('#mainNavbar,.main-navbar,.main-navbar-exact')&&!img.hasAttribute('loading'))img.loading='lazy';
     img.decoding='async';img.dataset.assetCurated='true';
     img.addEventListener('error',function fallback(){img.removeEventListener('error',fallback);img.src=icon;img.classList.add('bq-image-fallback');});
   }
   function run(root){(root.matches&&root.matches('img')?[root]:Array.from(root.querySelectorAll?root.querySelectorAll('img'):[])).forEach(curateImage);}
-  var style=document.createElement('style');style.textContent='#mainNavbar .bq-proposal-logo,.main-navbar .bq-proposal-logo{width:150px!important;max-width:150px!important;height:52px!important;object-fit:contain!important;border-radius:0!important}#mainNavbar .bq-proposal-logo~.exact-nav-brand-text,#mainNavbar .bq-proposal-logo~.navbar-brand-text{display:none!important}.bq-footer-proposal-logo{width:min(230px,100%)!important;height:auto!important;max-height:100px!important;object-fit:contain!important}.bq-image-fallback{object-fit:contain!important}@media(max-width:600px){#mainNavbar .bq-proposal-logo,.main-navbar .bq-proposal-logo{width:116px!important;height:44px!important}}';document.head.appendChild(style);
+  var style=document.createElement('style');style.textContent='#mainNavbar .bq-official-nav-logo,.main-navbar .bq-official-nav-logo{width:48px!important;max-width:48px!important;height:48px!important;object-fit:contain!important;border-radius:0!important;filter:drop-shadow(0 4px 10px rgba(0,0,0,.38))!important}.bq-footer-proposal-logo{width:min(230px,100%)!important;height:auto!important;max-height:100px!important;object-fit:contain!important}.bq-image-fallback{object-fit:contain!important}@media(max-width:600px){#mainNavbar .bq-official-nav-logo,.main-navbar .bq-official-nav-logo{width:42px!important;height:42px!important}}';document.head.appendChild(style);
   function init(){run(document);new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===1)run(node);});});}).observe(document.body,{childList:true,subtree:true});}
   document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
 }());
