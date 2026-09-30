@@ -1606,3 +1606,18 @@
 - La navegación adopta fondo transparente mientras está sobre el video y recupera su superficie oscura con desenfoque al abandonar el encabezado. El comportamiento resiste el reemplazo asíncrono del componente global.
 - El nombre visible del asistente se unificó como `BAQUI` en portada, navegación, búsqueda global y `baqueano-ia.html`.
 - **Validación:** videos cargados con `readyState=4`, navegación transparente verificada en Destinos e Historia, cero errores JavaScript y cero desbordamiento horizontal.
+
+### Cierre integral solicitado por el usuario
+
+- **POR QUÉ (Why / Propósito):** Finalizar todas las correcciones y ampliaciones indicadas en las capturas del PDF para el portal, sin eliminar contenido ni intervenir fuera de `website/`.
+- **CÓMO (How / Arquitectura e Implementación):** Se completó la capa progresiva compartida y se conectaron los flujos específicos de cada página con persistencia local defensiva, controles accesibles, rutas coherentes, WhatsApp, impresión, mapas, video, audio y adaptación móvil.
+- **QUÉ (What / Entregables):** Se actualizaron `aliados.html`, `ambiental.html`, `aviso-legal.html`, `baqueano-ia.html`, `historia.html`, `index.html`, `mapa.html`, `sitemap.xml`, `css/platform-enhancements.css`, `js/destinos-interactions.js`, `js/global-injector.js`, `js/mi-viaje-interactions.js` y `js/platform-enhancements.js`. Se añadieron `cronicas.html`, `css/base.css`, `css/variables.css` y `scripts/final-website-audit.mjs`.
+- Portada: video editorial, identidad oficial, BAQUI unificado, comentarios y reacciones persistentes.
+- Destinos y mapa: fichas ampliadas, accesos, horarios, costos, precauciones, rutas, contacto, etiquetas permanentes y búsqueda inicial por consulta.
+- Historia y Departamentos: tarjetas expandibles, enlaces territoriales corregidos y navegación por datos departamentales.
+- BAQUI y Mi Viaje: guardar, compartir por WhatsApp, QR, impresión PDF, reservas, eliminación de jornadas y contacto directo.
+- Experiencias, Gastronomía y Ambiental: galerías controlables, avisos rotativos, detalle gastronómico, puntos ambientales, denuncia formal y accesos comunitarios.
+- Música y Aliados: reproductor minimizable, filtros, búsqueda avanzada, reinicio, conteo de resultados y ancla de historias de impacto.
+- Legal y ayuda: recursos de compatibilidad, logotipo corregido, enlaces a crónicas y preguntas frecuentes, impresión y navegación consolidada.
+- **Validación final:** `npm test` aprobado; comprobación sintáctica de JavaScript aprobada; `git diff --check` sin errores; auditoría Playwright aprobada sobre 17 páginas a 390×844 y 1440×900, sin excepciones JavaScript ni desbordamiento horizontal, incluyendo formularios, comentarios, filtros, guardado, QR, expansión histórica y reproductor.
+- **Estado:** Finalizado.

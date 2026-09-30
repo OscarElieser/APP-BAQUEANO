@@ -219,7 +219,7 @@
   function bqNavbarHTML() {
     return '<div class="exact-container nav-inner">' +
       '<a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">' +
-        '<img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">' +
+        '<img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">' +
         '<div class="exact-nav-brand-text navbar-brand-text">' +
           '<span class="exact-nav-title navbar-brand-title">BAQUEANO</span>' +
           '<span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>' +

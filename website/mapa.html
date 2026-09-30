@@ -465,6 +465,14 @@
       }).addTo(mapInstance);
 
       renderMarkers('all');
+      const initialQuery = new URLSearchParams(window.location.search).get('q');
+      if (initialQuery) {
+        const search = document.getElementById('mapSearchInput');
+        if (search) search.value = initialQuery;
+        renderMarkers('all', initialQuery);
+        const place = NICARAGUA_PLACES.find(item => item.name.toLowerCase().includes(initialQuery.toLowerCase()) || initialQuery.toLowerCase().includes(item.name.toLowerCase()));
+        if (place) setTimeout(() => showPlaceDetails(place), 250);
+      }
     }
 
     function renderMarkers(categoryFilter, searchQuery = '') {
@@ -488,7 +496,7 @@
           }).addTo(mapInstance);
 
           marker.on('click', () => showPlaceDetails(place));
-          marker.bindTooltip(`<strong>${place.name}</strong><br>${place.dept}`, { direction: 'top', offset: [0, -6] });
+          marker.bindTooltip(`<strong>${place.name}</strong>`, { direction: 'top', offset: [0, -6], permanent: true, className: 'bq-map-pin-label' });
 
           markersList.push(marker);
         }
@@ -504,6 +512,10 @@
       document.getElementById('drawerCat').innerHTML = `<i class="fa-solid fa-tag"></i> ${place.cat.toUpperCase()}`;
       document.getElementById('drawerDept').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${place.dept}`;
       document.getElementById('drawerDesc').textContent = place.desc;
+      const detailLink = document.getElementById('drawerLinkDest');
+      const contactLink = document.getElementById('drawerLinkWa');
+      if (detailLink) detailLink.href = `destinos.html?q=${encodeURIComponent(place.name)}`;
+      if (contactLink) contactLink.href = `https://wa.me/50584431289?text=${encodeURIComponent('Hola, necesito información y contacto local verificado para ' + place.name + ', ' + place.dept)}`;
 
       drawer.classList.add('is-active');
       mapInstance.flyTo([place.lat, place.lng], 10, { duration: 1.2 });

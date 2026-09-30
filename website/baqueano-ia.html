@@ -334,10 +334,10 @@
       </button>
 
       <div class="ia-config-actions-grid">
-        <button type="button" class="ia-action-micro-btn" onclick="alert('Ruta guardada en Mi Viaje')"><i class="fa-regular fa-calendar-plus"></i> Guardar en Mi Viaje</button>
-        <button type="button" class="ia-action-micro-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Enlace copiado')"><i class="fa-solid fa-share-nodes"></i> Compartir</button>
-        <button type="button" class="ia-action-micro-btn" onclick="window.print()"><i class="fa-regular fa-file-pdf"></i> Descargar PDF</button>
-        <button type="button" class="ia-action-micro-btn" onclick="alert('Código QR generado para escanear en Android')"><i class="fa-solid fa-qrcode"></i> Generar QR</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="save"><i class="fa-regular fa-calendar-plus"></i> Guardar en Mi Viaje</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="share"><i class="fa-brands fa-whatsapp"></i> Compartir</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="pdf"><i class="fa-regular fa-file-pdf"></i> Descargar PDF</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="qr"><i class="fa-solid fa-qrcode"></i> Generar QR</button>
       </div>
     </div>
   </section>
@@ -572,11 +572,11 @@
         </button>
       </div>
       <div class="ia-ready-actions-row">
-        <button type="button" class="ia-action-micro-btn"><i class="fa-regular fa-calendar-plus"></i> Guardar en Mi Viaje</button>
-        <button type="button" class="ia-action-micro-btn"><i class="fa-solid fa-share-nodes"></i> Compartir ruta</button>
-        <button type="button" class="ia-action-micro-btn" onclick="window.print()"><i class="fa-regular fa-file-pdf"></i> Descargar PDF</button>
-        <button type="button" class="ia-action-micro-btn"><i class="fa-solid fa-qrcode"></i> Generar QR</button>
-        <button type="button" class="ia-btn-reserve-all" onclick="alert('Conectando con los prestadores de la ruta...')">Reservar todo</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="save"><i class="fa-regular fa-calendar-plus"></i> Guardar en Mi Viaje</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="share"><i class="fa-brands fa-whatsapp"></i> Compartir ruta</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="pdf"><i class="fa-regular fa-file-pdf"></i> Descargar PDF</button>
+        <button type="button" class="ia-action-micro-btn" data-baqui-action="qr"><i class="fa-solid fa-qrcode"></i> Generar QR</button>
+        <button type="button" class="ia-btn-reserve-all" data-baqui-action="reserve">Reservar todo</button>
       </div>
     </div>
   </section>

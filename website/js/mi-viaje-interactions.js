@@ -272,6 +272,9 @@
     var text = '🗺️ Mi ruta BAQUEANO Nicaragua:\n' +
       trip.days.map(function(d) { return '• ' + d.badge + ': ' + d.title; }).join('\n') +
       '\n\n🌿 Sin intermediarios · app-baqueano.web.app';
+    window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + window.location.href), '_blank', 'noopener,noreferrer');
+    toast('Abriendo WhatsApp para compartir la ruta', 'info');
+    return;
     if (navigator.share) {
       navigator.share({ title: trip.name, text: text, url: window.location.href })
         .then(function() { toast('Ruta compartida 🚀'); })
@@ -321,6 +324,10 @@
   };
 
   window.reserveAll = function() {
+    var summary = trip.days.map(function(d) { return d.badge + ': ' + d.title; }).join('\n');
+    window.open('https://wa.me/50588888888?text=' + encodeURIComponent('Hola, deseo coordinar las reservas de mi ruta BAQUEANO:\n' + summary), '_blank', 'noopener,noreferrer');
+    toast('Abriendo atención por WhatsApp', 'info');
+    return;
     toast('Redirigiendo a Red de Aliados BAQUEANO...', 'info');
     setTimeout(function() { window.location.href = 'aliados.html'; }, 850);
   };
@@ -331,11 +338,19 @@
   };
 
   window.contactRec = function(name) {
+    var ally = name || 'aliado';
+    window.open('https://wa.me/50588888888?text=' + encodeURIComponent('Hola, deseo contactar a ' + ally + ' desde BAQUEANO.'), '_blank', 'noopener,noreferrer');
+    toast('Abriendo contacto con ' + ally, 'info');
+    return;
     toast('Conectando con ' + (name || 'aliado') + '...', 'info');
     setTimeout(function() { window.location.href = 'nosotros.html#contacto'; }, 800);
   };
 
   window.reserveRec = function(name) {
+    var ally = name || 'aliado';
+    window.open('https://wa.me/50588888888?text=' + encodeURIComponent('Hola, deseo reservar ' + ally + ' desde BAQUEANO.'), '_blank', 'noopener,noreferrer');
+    toast('Abriendo reserva con ' + ally, 'info');
+    return;
     toast('Iniciando reserva con ' + (name || 'aliado') + ' ✅');
     setTimeout(function() { window.location.href = 'mi-negocio.html'; }, 900);
   };
