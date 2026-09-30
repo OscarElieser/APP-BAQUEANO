@@ -1906,4 +1906,10 @@
 
 
 
+### Restauración de Calidad Visual y Orden de la Portada Web
 
+- **Consulta:** *"revisa que se cayó toda la calidad del sitio web; rectifica, no vas a borrar nada, solo ordenar"*.
+- **POR QUÉ:** La portada había perdido en una edición reciente todo el bloque SEO y las hojas de estilo del `head`; además, cuatro recursos canónicos de marca habían quedado eliminados del índice y las rutas históricas dejaban de resolver el logo en numerosas páginas.
+- **CÓMO:** Se restauraron desde el historial inmediato los cuatro recursos de marca sin retirar los logos nuevos. En `website/index.html` se repuso el orden correcto del `head`: metadatos, Open Graph, fuentes, proveedores visuales, sistema global, módulos y estilos específicos de portada. Se conservaron el favicon solicitado, el mapa corregido, el footer vigente y todo el contenido.
+- **QUÉ:** Actualizados `website/index.html` y `SESSION_LOG.md`; restaurados `website/assets/images/logo.png`, `website/assets/images/LOGOS/logo.png`, `website/assets/images/baqueano_icono_2000x2000-blanco.png` y `website/assets/images/LOGOS/baqueano_icono_2000x2000-blanco.png` (3,246,226 bytes cada uno).
+- **Validación final:** `flutter analyze` sin hallazgos; `flutter test` con 31 pruebas aprobadas; pruebas de humo de producción web aprobadas; portada verificada por navegador automatizado a 390, 768 y 1440 px, sin desbordamiento horizontal ni errores JavaScript, con 22 hojas locales activas, logo cargado y mapa estable a 300 px de altura.

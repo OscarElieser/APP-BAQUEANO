@@ -5,6 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+  <!--
+    🎯 POR QUÉ: La portada debe conservar identidad visual, posicionamiento y estilos desde el primer
+    fotograma; cargar estos recursos al final provocaba una interfaz sin formato y una pestaña sin título.
+    ⚙️ CÓMO: Los metadatos, fuentes y hojas de estilo canónicas se declaran en el head, en orden de
+    dependencia: identidad/SEO, proveedores visuales, sistema global y ajustes específicos de portada.
+    📦 QUÉ: Restaura el título, descripción, datos sociales, tipografías, iconos, mapa y estilos
+    responsivos de index.html sin retirar componentes ni contenido existente.
+  -->
+  <title>Baqueano Nicaragua | Descubre lo que no sale en el mapa</title>
+  <meta name="description"
+    content="Portal oficial de turismo comunitario y ecoturismo en Nicaragua. Explora volcanes, lagos, reservas de biósfera, playas y cooperativas campesinas.">
+  <meta name="keywords"
+    content="turismo Nicaragua, ecoturismo, volcanes Nicaragua, Ometepe, Cerro Negro, Cañón de Somoto, turismo comunitario, Baqueano Nicaragua, mapa Nicaragua">
+  <meta name="author" content="Baqueano Nicaragua — Ecosistema Digital de Ecoturismo">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#165D6F">
+  <link rel="canonical" href="https://app-baqueano.web.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://app-baqueano.web.app/">
+  <meta property="og:title" content="Baqueano Nicaragua | Descubre lo que no sale en el mapa">
+  <meta property="og:description"
+    content="Entrá a Nicaragua antes de viajar. Volcanes, playas, gastronomía ancestral y experiencias auténticas guiadas por quienes conocen el territorio.">
+  <meta property="og:image" content="https://app-baqueano.web.app/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Baqueano Nicaragua — Portal Oficial de Ecoturismo">
+  <meta property="og:site_name" content="Baqueano Nicaragua">
+  <meta property="og:locale" content="es_NI">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+  <link rel="stylesheet" href="styles.css?v=20260930-quality-restore-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/videos.css?v=20260927-center-framed-14">
+  <link rel="stylesheet" href="css/theme-switcher.css?v=20260926-global-theme-2">
+  <link rel="stylesheet" href="css/nicaragua-branding.css?v=20260927-center-framed-14">
+  <link rel="stylesheet" href="css/baqueano-reels.css">
+  <link rel="stylesheet" href="css/pages/index.css?v=20260927-center-framed-14">
+  <link rel="stylesheet" href="css/demo-hackathon.css?v=20260927-1">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260930-quality-restore-1">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
+
   <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
   <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
