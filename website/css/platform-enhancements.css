@@ -1,0 +1,25 @@
+/**
+ * BAQUEANO — Capa visual transversal del portal público
+ *
+ * POR QUÉ: unificar legibilidad, respuesta táctil y estados interactivos en las
+ * páginas estáticas sin sustituir sus identidades visuales ni su contenido.
+ * CÓMO: aplica tokens oficiales, estados accesibles y adaptaciones fluidas sobre
+ * controles ya existentes y sobre los complementos creados por el motor global.
+ * QUÉ: contadores, carruseles, barra de filtros, diálogos y mejoras responsivas.
+ */
+:root{--bq-teal:#165D6F;--bq-orange:#F65E01;--bq-cream:#F4E6C1;--bq-night:#0F172A;--bq-focus:0 0 0 4px rgba(246,94,1,.24)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--bq-orange);outline-offset:3px}
+.bq-like-count{min-width:1.5rem;height:1.5rem;padding:0 .42rem;border-radius:999px;display:inline-grid;place-items:center;margin-left:.35rem;background:rgba(15,23,42,.82);color:#fff;font:800 .68rem/1 Inter,system-ui,sans-serif;box-shadow:0 5px 15px rgba(15,23,42,.18)}
+.active>.bq-like-count,[aria-pressed="true"]>.bq-like-count{background:var(--bq-orange)}
+.bq-filter-reset{min-height:44px;padding:.7rem 1rem;border:1px solid rgba(22,93,111,.25);border-radius:999px;background:#fff;color:var(--bq-teal);font:800 .78rem/1 Inter,system-ui,sans-serif;cursor:pointer;transition:transform 180ms ease,box-shadow 180ms ease,background 180ms ease}
+.bq-filter-reset:hover{transform:translateY(-2px);background:#edf7f8;box-shadow:0 10px 25px rgba(22,93,111,.12)}
+.bq-result-status{flex:1 1 100%;margin:0;color:#475569;font:700 .8rem/1.5 Inter,system-ui,sans-serif}
+.bq-continuous-gallery{overflow-x:auto!important;overflow-y:visible;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--bq-orange) rgba(22,93,111,.12);overscroll-behavior-inline:contain}
+.bq-continuous-gallery>*{scroll-snap-align:start}
+.bq-gallery-control{position:sticky;left:max(.75rem,calc(50% - 4.5rem));z-index:6;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:42px;margin:.8rem 0;padding:.65rem 1rem;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(15,23,42,.9);color:#fff;box-shadow:0 12px 30px rgba(15,23,42,.25);backdrop-filter:blur(14px);font:800 .75rem/1 Inter,system-ui,sans-serif;cursor:pointer}
+.bq-info-dialog{width:min(680px,calc(100% - 2rem));max-height:min(82vh,760px);padding:0;overflow:hidden auto;border:1px solid rgba(255,255,255,.26);border-radius:24px;background:#fff;color:var(--bq-night);box-shadow:0 30px 90px rgba(15,23,42,.38)}
+.bq-info-dialog::backdrop{background:rgba(15,23,42,.72);backdrop-filter:blur(9px)}
+.bq-dialog-head{padding:1.4rem 1.5rem;background:linear-gradient(135deg,var(--bq-teal),#0b3340);color:#fff}
+.bq-dialog-head h2{margin:.3rem 0 0;font:900 clamp(1.25rem,3vw,1.8rem)/1.15 Montserrat,sans-serif}.bq-dialog-kicker{color:var(--bq-cream);font:800 .68rem/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase}.bq-dialog-body{padding:1.5rem;line-height:1.65;color:#475569}.bq-dialog-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.2rem}.bq-dialog-action{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1rem;border:0;border-radius:12px;background:var(--bq-teal);color:#fff;text-decoration:none;font-weight:800;cursor:pointer}.bq-dialog-action.accent{background:var(--bq-orange)}.bq-dialog-close{position:absolute;top:.9rem;right:.9rem;width:40px;height:40px;border:1px solid rgba(255,255,255,.32);border-radius:50%;background:rgba(15,23,42,.28);color:#fff;font-size:1.25rem;cursor:pointer}
+@media(max-width:640px){.bq-info-dialog{width:calc(100% - 1rem);border-radius:18px}.bq-dialog-head,.bq-dialog-body{padding:1.15rem}.bq-dialog-actions{display:grid}.bq-dialog-action{width:100%}}
+@media(prefers-reduced-motion:reduce){.bq-continuous-gallery{scroll-behavior:auto!important}.bq-filter-reset{transition:none}}

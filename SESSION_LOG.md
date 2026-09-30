@@ -1557,3 +1557,43 @@
   - `website/js/navigation.js`
   - 24 archivos `.html` actualizados (`index.html`, `destinos.html`, `departamento.html`, `mapa.html`, `experiencias.html`, `baqueano-ia.html`, `baqueano-ai.html`, `mi-viaje.html`, `historia.html`, `gastronomia.html`, `musica.html`, `ambiental.html`, `aliados.html`, `mi-negocio.html`, `denuncias.html`, `perfil.html`, `nosotros.html`, `terminos.html`, `privacidad.html`, `cookies.html`, `aviso-legal.html`, `legal.html`, `offline.html`, `404.html`)
   - `SESSION_LOG.md` actualizado.
+---
+
+## [2026-09-30] Solicitud de mejoras funcionales indicada en PDF
+
+- **POR QUÉ (Why / Propósito):** Atender las correcciones y nuevas funciones descritas por el usuario en `MEJORAR A IMPLMENTAR.pdf`, preservando íntegramente las funcionalidades y el contenido ya existente.
+- **CÓMO (How / Arquitectura e Implementación):** Se revisará el documento completo, se mapeará cada indicación contra las páginas y componentes actuales, y se aplicarán únicamente cambios aditivos o correctivos dentro del alcance Android/Flutter permitido (`lib/` y `android/`), con validación mediante análisis y pruebas.
+- **QUÉ (What / Entregables):** Auditoría inicial del PDF y del repositorio, implementación de los puntos especificados, registro de cada archivo modificado y resultados de verificación en esta bitácora.
+- **Estado:** En curso; iniciada la lectura del PDF y la inspección del código.
+
+### Auditoría inicial del alcance
+
+- Se leyó el documento completo: 408 páginas.
+- Las páginas 1–367 describen contenido territorial departamental y municipal; las páginas 368–408 especifican cambios visuales y funcionales para páginas HTML del portal, incluidos `destinos.html`, `historia.html`, `mi-viaje.html`, `mapa.html`, `experiencias.html`, `gastronomia.html`, `ambiental.html`, `musica.html`, `aliados.html`, `denuncias.html`, `ayuda.html`, `terminos.html`, `legal.html` y `aviso-legal.html`.
+- **Bloqueo de alcance detectado:** las instrucciones vigentes de `AGENTS.md` permiten modificar exclusivamente `android/` y `lib/`, y prohíben expresamente alterar `web/`. El entregable solicitado por el PDF corresponde al portal HTML alojado en `website/`; implementarlo allí requiere que el usuario ajuste explícitamente esa regla del proyecto.
+- No se modificó ni eliminó contenido funcional del portal. El único archivo actualizado durante esta auditoría fue `SESSION_LOG.md`, conforme a la política de bitácora obligatoria.
+
+### Autorización posterior del usuario
+
+- El usuario autorizó expresamente trabajar únicamente dentro de `website/`, dejando sin efecto para esta solicitud la restricción anterior sobre ese directorio.
+- Se mantiene la directiva de no borrar contenido existente: los ajustes se resolverán mediante corrección, ampliación, integración o reubicación segura.
+- Se inicia la auditoría técnica de componentes globales y páginas señaladas antes de aplicar cambios.
+
+### Implementación transversal — lote inicial
+
+- **POR QUÉ (Why / Propósito):** Corregir primero las funciones compartidas que afectan simultáneamente las páginas indicadas en el PDF, sin duplicar lógica ni retirar contenido existente.
+- **CÓMO (How / Arquitectura e Implementación):** Se incorporó una capa progresiva cargada por `global-injector.js`. Esta respeta los manejadores existentes y completa únicamente estados ausentes mediante almacenamiento local defensivo, delegación de eventos, controles accesibles y adaptación móvil.
+- **QUÉ (What / Entregables):** Se añadieron `website/js/platform-enhancements.js` y `website/css/platform-enhancements.css`; se actualizaron `website/js/global-injector.js`, `website/js/mi-viaje-interactions.js` y `website/gastronomia.html`.
+- Los controles de Me gusta muestran contador, mantienen su estado y sincronizan el elemento con favoritos sin ejecutar dos veces la acción preexistente.
+- Las galerías principales de Destinos, Historia, Experiencias, Gastronomía, Ambiental, Música y Aliados reciben movimiento periódico, pausa manual, pausa al interactuar y respeto por `prefers-reduced-motion`.
+- Aliados incorpora contador accesible de resultados y acción para quitar filtros sin recargar la página.
+- Mi Viaje sustituye la acción de edición de jornadas por eliminación confirmada y persistente, conservando el resto del itinerario.
+- Gastronomía sustituye el aviso básico de historia por un diálogo completo con contexto, lugares sugeridos, acceso al mapa y agregado al viaje.
+- **Validación:** `node --check` limpio para los scripts modificados; `npm test` aprobado; `git diff --check` sin errores; Playwright validó las 15 páginas señaladas a 1440×900 y 390×844 sin excepciones JavaScript ni desbordamiento horizontal.
+- **Pruebas funcionales en navegador:** favorito pasa a estado activo y contador 1; dos galerías de Destinos reciben control; Aliados informa 10 resultados; Mi Viaje muestra “Eliminar día”; el diálogo gastronómico abre con dos acciones navegables.
+
+### Rectificación de alcance solicitada por el usuario
+
+- El usuario aclaró que la entrega debe cubrir íntegramente las capturas y anotaciones del PDF para estas 16 páginas: `departamento.html`, `index.html`, `destinos.html`, `baqueano-ia.html`, `mi-viaje.html`, `mapa.html`, `experiencias.html`, `gastronomia.html`, `ambiental.html`, `musica.html`, `aliados.html`, `denuncias.html`, `ayuda.html`, `terminos.html`, `legal.html` y `aviso-legal.html`.
+- La capa transversal anterior se conserva como base, pero no se considera por sí sola cumplimiento total del documento.
+- Se inicia una segunda auditoría visual de las capturas de las páginas 368–408 para vincular cada anotación con el bloque exacto del HTML antes de continuar la implementación página por página.

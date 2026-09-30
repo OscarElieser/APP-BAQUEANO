@@ -128,8 +128,8 @@
             '<i class="fa-solid fa-map-location-dot"></i> Ver en mapa</button>' +
           '<button type="button" class="btn-day-save' + (d.saved ? ' saved' : '') + '" id="saveBtn-' + d.id + '" onclick="saveDay(' + d.id + ',this)">' +
             '<i class="fa-' + (d.saved ? 'solid' : 'regular') + ' fa-heart"></i> ' + (d.saved ? 'Guardado' : 'Guardar') + '</button>' +
-          '<button type="button" class="btn-day-edit" onclick="editDay(' + d.id + ')">' +
-            '<i class="fa-solid fa-pen-to-square"></i> Editar día</button>' +
+          '<button type="button" class="btn-day-edit" onclick="removeDay(' + d.id + ')">' +
+            '<i class="fa-solid fa-trash-can"></i> Eliminar día</button>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -185,6 +185,20 @@
       btn.classList.remove('saved');
       toast(day.location + ' eliminado de favoritos', 'info');
     }
+  };
+
+  window.removeDay = function(dayId) {
+    var day = null;
+    for (var i = 0; i < trip.days.length; i++) {
+      if (trip.days[i].id === dayId) { day = trip.days[i]; break; }
+    }
+    if (!day) return;
+    var accepted = window.confirm('¿Eliminar ' + day.badge + ' de este viaje? El resto del itinerario se conservará.');
+    if (!accepted) return;
+    trip.days = trip.days.filter(function(item) { return item.id !== dayId; });
+    persistTrip(trip);
+    renderItinerary();
+    toast(day.badge + ' eliminado del viaje.', 'info');
   };
 
   window.editDay = function(dayId) {

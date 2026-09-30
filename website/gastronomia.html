@@ -816,7 +816,41 @@
     }
 
     function showDishInfo(title, desc) {
-      alert(`🍴 ${title}\n\n${desc}`);
+      let dialog = document.getElementById('dishHistoryDialog');
+      if (!dialog) {
+        dialog = document.createElement('dialog');
+        dialog.id = 'dishHistoryDialog';
+        dialog.className = 'bq-info-dialog';
+        document.body.appendChild(dialog);
+      }
+      const locations = {
+        'Gallo Pinto': 'Mercados, comedores familiares y restaurantes de todo el país.',
+        'Nacatamal': 'Mercados y cocinas familiares, especialmente durante los fines de semana.',
+        'Vigorón Granadino': 'Granada: Parque Central, mercados y comedores tradicionales.',
+        'Quesillo': 'La Paz Centro, Nagarote y establecimientos del corredor occidental.',
+        'Baho': 'Masaya, Granada y comedores de cocina tradicional del Pacífico.',
+        'Indio Viejo': 'León, Chinandega, Managua y restaurantes de cocina nicaragüense.',
+        'Rondón Costeño': 'Bluefields, Corn Island y cocinas de la Costa Caribe.',
+        'Güirilas': 'Matagalpa, Jinotega, Estelí y fincas del norte.',
+        'Sopa de Mondongo de Masatepe': 'Masatepe y restaurantes tradicionales de Masaya.',
+        'Fritanga Popular': 'Fritangas, mercados y barrios de las ciudades nicaragüenses.'
+      };
+      const where = locations[title] || 'Consultá el mapa gastronómico para ver opciones cercanas.';
+      dialog.innerHTML = `
+        <button type="button" class="bq-dialog-close" aria-label="Cerrar">×</button>
+        <header class="bq-dialog-head"><span class="bq-dialog-kicker">MEMORIA CULINARIA</span><h2>${title}</h2></header>
+        <div class="bq-dialog-body">
+          <p>${desc}</p>
+          <h3>Dónde probarlo</h3><p>${where}</p>
+          <p><strong>Antes de visitar:</strong> confirmá horario, disponibilidad y precio directamente con el establecimiento.</p>
+          <div class="bq-dialog-actions">
+            <a class="bq-dialog-action" href="mapa.html?q=${encodeURIComponent(title)}"><i class="fa-solid fa-map-location-dot"></i> Ver opciones en mapa</a>
+            <a class="bq-dialog-action accent" href="mi-viaje.html"><i class="fa-solid fa-route"></i> Agregar a mi viaje</a>
+          </div>
+        </div>`;
+      dialog.querySelector('.bq-dialog-close').addEventListener('click', () => dialog.close(), { once: true });
+      dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); }, { once: true });
+      dialog.showModal();
     }
 
     function askBaquiGastro(prompt) {

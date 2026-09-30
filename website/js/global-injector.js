@@ -55,6 +55,7 @@
       { id: 'bq-index-ui',  href: 'css/pages/index-exact.css?v=20260927-exact-1' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
+      { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20260930-1' },
       { id: 'bq-fa',        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
     ];
@@ -785,6 +786,13 @@
   }
 
   async function init() {
+    if (!document.querySelector('script[data-platform-enhancements]')) {
+      var enhancementScript = document.createElement('script');
+      enhancementScript.src = 'js/platform-enhancements.js?v=20260930-1';
+      enhancementScript.dataset.platformEnhancements = 'true';
+      enhancementScript.defer = true;
+      document.body.appendChild(enhancementScript);
+    }
     if (!document.querySelector('script[data-global-assets]')) {
       var assetScript = document.createElement('script');
       assetScript.src = 'js/global-asset-curator.js?v=20260929-1';
