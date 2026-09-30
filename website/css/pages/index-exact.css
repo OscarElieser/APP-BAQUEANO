@@ -467,19 +467,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  flex: 0 1 390px;
-  min-width: 0;
-  padding: 20px 0 20px 28px;
+  gap: 20px;
 }
 
 .hero-autentica-badge {
-  display: block;
-  width: clamp(245px, 25vw, 350px);
-  height: auto;
-  object-fit: contain;
-  opacity: 0.96;
-  filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 5px 14px rgba(0, 0, 0, 0.62));
+  font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: #FFFFFF;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+  transform: rotate(-6deg);
+  white-space: nowrap;
   pointer-events: none;
 }
 
@@ -1483,7 +1480,7 @@
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr;
   gap: 28px;
   padding-bottom: 40px;
 }
@@ -1581,15 +1578,14 @@
 .footer-badge-col {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-top: 18px;
+  justify-content: flex-end;
 }
 
 .footer-badge-script {
   font-family: 'Brush Script MT', 'Segoe Script', cursive;
   font-size: 2.2rem;
   color: #FFFFFF;
-  text-align: left;
+  text-align: right;
   line-height: 1.1;
   opacity: 0.9;
 }
@@ -1605,22 +1601,6 @@
   justify-content: space-between;
   font-size: 0.74rem;
   color: #64748B;
-}
-
-.footer-country-mark {
-  min-height: 112px;
-  display: grid;
-  place-items: center;
-  padding: 16px 24px;
-  background: #0B2940;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer-country-mark img {
-  display: block;
-  width: clamp(190px, 20vw, 285px);
-  height: auto;
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.28));
 }
 
 /* ============================================================================
@@ -1648,10 +1628,7 @@
   }
   .hero-exact-right {
     align-items: flex-start;
-    flex-basis: auto;
-    padding: 4px 0 0;
   }
-  .hero-autentica-badge { width: min(68vw, 300px); }
   .destinations-row-exact { grid-template-columns: repeat(2, 1fr); }
   .why-pillars-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-row-exact { grid-template-columns: 1fr; }
