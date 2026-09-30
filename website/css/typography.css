@@ -1,60 +1,132 @@
 /*
 ============================================================================
-🧭 BAQUEANO NICARAGUA — MÓDULO DE TIPOGRAFÍA & JERARQUÍA (TYPOGRAPHY.CSS)
+🧭 BAQUEANO NICARAGUA — MÓDULO CENTRAL DE TIPOGRAFÍA (TYPOGRAPHY.CSS)
 ============================================================================
 
 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-- Establecer una jerarquía tipográfica legible, contundente y moderna que
-  refleje la fuerza de la geografía nicaragüense y la accesibilidad para el explorador.
-- Evitar fuentes predeterminadas del navegador y garantizar consistencia con la app móvil.
+- Establecer un control centralizado e independiente de todas las tipografías,
+  escalas, pesos y jerarquías textuales del ecosistema web Baqueano.
+- Permitir ajustar fácilmente familias, tamaños fluidos con clamp, interletrado
+  y alturas de línea desde un solo archivo CSS sin tocar HTML ni estilos dispersos.
+- Garantizar legibilidad impecable, carácter identitario nicaragüense y soporte
+  para pantallas táctiles y monitores de ultra resolución.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-- Familias oficiales: Montserrat (encabezados display), Space Grotesk (datos técnicos y badges),
-  e Inter (cuerpo de texto y legibilidad general).
-- Escala tipográfica fluida y contrastes óptimos.
+- Familias maestras importadas desde Google Fonts: Montserrat (encabezados e impacto),
+  Inter (cuerpo de alta legibilidad), Space Grotesk (datos técnicos, métricas, tags) y
+  Caveat / Kaushan Script (acentos caligráficos vivos de "Nicaragua Auténtica").
+- Tipografía responsiva fluida mediante funciones CSS `clamp(min, val, max)`.
+- Clases semánticas desacopladas para encabezados, subtítulos, etiquetas y citas.
 
-📦 3. QUÉ (WHAT / CLASES & TOKENS):
-- --font-sans, --font-display, --font-tech.
-- .text-gradient-fire, .section-headline, .section-subtext, .badge-section-pill.
+📦 3. QUÉ (WHAT / TOKENS Y CLASES EXPUESTAS):
+- Variables: `--font-display`, `--font-sans`, `--font-tech`, `--font-handwriting`.
+- Escala: `--font-size-h1`, `--font-size-h2`, `--font-size-h3`, `--font-size-body`, etc.
+- Clases: `.section-lead-header`, `.section-headline`, `.section-subtext`,
+  `.badge-section-pill`, `.text-gradient-fire`, `.handwriting-h2`, `.title-handwritten`.
 ============================================================================
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=Kaushan+Script&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Montserrat', sans-serif;
-  --font-tech: 'Space Grotesk', sans-serif;
+  /* ========================================================================
+     1. FAMILIAS TIPOGRÁFICAS
+     ======================================================================== */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-tech: 'Space Grotesk', monospace, sans-serif;
+  --font-handwriting: 'Caveat', 'Kaushan Script', cursive;
+
+  /* ========================================================================
+     2. ESCALA TIPOGRÁFICA FLUIDA (RESPONSIVE CLAMPS)
+     ======================================================================== */
+  --font-size-hero: clamp(2.4rem, 6vw, 4.2rem);
+  --font-size-h1: clamp(2.0rem, 4.8vw, 3.4rem);
+  --font-size-h2: clamp(1.6rem, 3.4vw, 2.5rem);
+  --font-size-h3: clamp(1.25rem, 2.2vw, 1.85rem);
+  --font-size-h4: clamp(1.1rem, 1.6vw, 1.35rem);
+  --font-size-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+  --font-size-body: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-xs: 0.75rem;
+
+  /* ========================================================================
+     3. PESOS TIPOGRÁFICOS
+     ======================================================================== */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* ========================================================================
+     4. ALTURA DE LÍNEA Y TRACKING (ESPACIADO DE LETRAS)
+     ======================================================================== */
+  --line-height-tight: 1.15;
+  --line-height-snug: 1.3;
+  --line-height-normal: 1.6;
+  --line-height-loose: 1.8;
+
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
+  --letter-spacing-widest: 0.2em;
 }
 
+/* ==========================================================================
+   5. REGLAS BASE DE TEXTO Y ENCABEZADOS
+   ========================================================================== */
 body {
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-secondary);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary, #E2E8F0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
-  color: var(--text-primary, #0B253A);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
+  font-family: var(--font-display);
+  color: var(--text-primary, #FFFFFF);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-snug);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-black);
 }
 
 h2 {
-  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
-  font-weight: 800;
-  color: var(--text-primary, #0B253A);
+  font-size: var(--font-size-h2);
   margin-top: 0.5rem;
   margin-bottom: 0.75rem;
   display: block;
 }
 
-/* Blindaje de legibilidad: erradicar degradados transparentes e h2::after forzados */
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+p {
+  color: var(--text-muted, #94A3B8);
+  line-height: var(--line-height-normal);
+  margin-bottom: 1rem;
+}
+
+/* Blindaje de legibilidad: erradicar degradados rotos e h2::after forzados */
 h2:not(.handwriting-h2):not(.title-handwritten):not(.text-gradient-fire) {
-  -webkit-text-fill-color: var(--text-primary, #0B253A) !important;
-  background: none !important;
-  color: var(--text-primary, #0B253A) !important;
-  text-shadow: none !important;
+  -webkit-text-fill-color: var(--text-primary, #FFFFFF);
+  background: none;
+  color: var(--text-primary, #FFFFFF);
+  text-shadow: none;
 }
 
 h2:not(.handwriting-h2):not(.title-handwritten)::after {
@@ -62,13 +134,11 @@ h2:not(.handwriting-h2):not(.title-handwritten)::after {
   content: none !important;
 }
 
-
-p {
-  color: var(--text-muted);
-}
-
+/* ==========================================================================
+   6. UTILIDADES TIPOGRÁFICAS DE ALTA GAMA
+   ========================================================================== */
 .text-gradient-fire {
-  background: var(--grad-sunset);
+  background: var(--grad-sunset, linear-gradient(135deg, #F65E01 0%, #FF7B26 50%, #F4E6C1 100%));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -83,13 +153,6 @@ p {
   margin: 0 auto 4rem;
 }
 
-/* ============================================================================
- * 🎯 POR QUÉ: las etiquetas de contexto deben introducir el título, no competir
- *    lateralmente con él ni perder su eje visual entre distintas páginas.
- * ⚙️ CÓMO: todo distintivo que precede directamente a un h2 se centra como
- *    elemento independiente, incluso dentro de encabezados con reglas particulares.
- * 📦 QUÉ: jerarquía vertical uniforme: etiqueta arriba, h2 centrado debajo.
- * ============================================================================ */
 .badge-section-pill:has(+ h2) {
   align-self: center;
   margin-inline: auto;
@@ -105,44 +168,38 @@ p {
   gap: 0.5rem;
   padding: 0.35rem 0.9rem;
   background: rgba(246, 94, 1, 0.15);
-  border: 1px solid var(--border-glow);
-  color: var(--terracotta-light);
+  border: 1px solid var(--border-accent, rgba(246, 94, 1, 0.4));
+  color: var(--terracotta-light, #FF7B26);
   border-radius: 9999px;
   font-size: 0.78rem;
   font-family: var(--font-tech);
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-spacing-wider);
   margin-bottom: 1rem;
 }
 
 .section-headline {
-  font-size: 2.5rem;
+  font-size: var(--font-size-h1);
   margin-bottom: 1rem;
 }
 
 .section-subtext {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  line-height: 1.7;
+  font-size: var(--font-size-lead);
+  color: var(--text-muted, #94A3B8);
+  line-height: var(--line-height-loose);
 }
 
-/* ============================================================================
- * ✍️ ANIMATED HANDWRITING & STROKE REVEAL (Estilo Envato Cheer / Trazo Vivo)
- * ============================================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kaushan+Script&display=swap');
-
-:root {
-  --font-handwriting: 'Caveat', 'Kaushan Script', cursive;
-}
-
+/* ==========================================================================
+   7. CALIGRAFÍA AUTÉNTICA VIVA ("Nicaragua Auténtica")
+   ========================================================================== */
 .handwriting-h2,
 h2.title-handwritten {
   font-family: var(--font-handwriting);
   font-weight: 700;
   font-size: clamp(2.2rem, 5vw, 3.8rem);
-  line-height: 1.15;
-  color: var(--sand-pinolero, #F4E6C1);
+  line-height: var(--line-height-tight);
+  color: var(--arena-pinolera, #F4E6C1);
   letter-spacing: 0.01em;
   position: relative;
   display: inline-block;
@@ -154,7 +211,6 @@ h2.title-handwritten {
   animation: handwritingFloat 4s ease-in-out infinite alternate;
 }
 
-/* Efecto de trazo caligráfico animado continuo */
 .handwriting-h2::after,
 h2.title-handwritten::after {
   content: '';
@@ -171,26 +227,14 @@ h2.title-handwritten::after {
 }
 
 @keyframes strokeDraw {
-  0% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
+  0% { transform: scaleX(0); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
 }
 
 @keyframes handwritingFloat {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-3px) rotate(-0.5deg);
-  }
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-3px) rotate(-0.5deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

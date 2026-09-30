@@ -1693,3 +1693,90 @@
 - **POR QUÉ (Why / Propósito):** Usar la identidad oficial solicitada por el usuario y mejorar su integración sobre el menú transparente.
 - **CÓMO (How / Arquitectura e Implementación):** Se localizó `assets/images/LOGOS/baqueano_icono_500x386-blanco.png`, se estableció como recurso canónico del navbar y se ajustaron dimensiones, sombra y comportamiento móvil sin ocultar el nombre de marca contiguo.
 - **QUÉ (What / Entregables):** Actualizado `website/js/global-asset-curator.js`; el cambio se aplica a la navegación global de las páginas del portal, sin modificar hero ni footer.
+
+---
+
+## 🕒 SESIÓN ACTUAL (30 de Septiembre de 2026)
+
+- **Consulta del Usuario:**
+  > *"vamos a trabajar vamos a separar todos los html.css.js por separado no quiero ver nada solo vamos a llamar en a estos archivos me entiende verdad en la carpeta website"*
+- **Diagnóstico y Análisis Técnico:**
+  1. Varios archivos HTML en `website/` contienen bloques internos `<style>...</style>` y scripts en línea `<script>...</script>`.
+  2. El usuario requiere una arquitectura 100% desacoplada: cada archivo `.html` debe ser estrictamente estructural/semántico, llamando exclusivamente a sus hojas de estilo mediante `<link rel="stylesheet" href="...">` y a su lógica mediante `<script src="..."></script>`.
+  3. No debe haber ningún estilo CSS inline ni script JS embebido dentro de los documentos HTML.
+- **Plan de Arquitectura y Separación Modular:**
+  1. Extraer bloques `<style>` a archivos dedicados en `website/css/pages/` o módulos correspondientes con el estándar de documentación del Círculo Dorado (Golden Circle).
+  2. Extraer bloques `<script>` inline a archivos dedicados en `website/js/pages/` o scripts de interacción correspondientes con el estándar de documentación del Círculo Dorado (Golden Circle).
+  3. Reemplazar los bloques en cada `.html` por sus respectivas etiquetas `<link>` y `<script src="...">`.
+  4. Preservar 100% de la funcionalidad, estilos visuales, listeners y variables sin ninguna rotura.
+  5. Asegurar cumplimiento de la paleta oficial y auditoría de cero uso de términos prohibidos.
+- **Estado:** En ejecución activa por fases.
+
+### Módulo Centralizado de Control CSS (Colores, Tipografía, Videos, Imágenes y Menús)
+
+- **Consulta:**
+  > *"ahora quiero que trabaje aparte ahora tema de colores del sitio web, tipografia, video,imagenes,que se pueda cambiar los menu , en css. para tener un mejor control"*
+- **Decisión de Arquitectura:**
+  - Crear e integrar un sistema modular desacoplado compuesto por 5 pilares en CSS independientes, gobernados mediante variables `:root` de control directo y orquestados por un archivo maestro `theme-master.css`.
+- **POR QUÉ (Why / Propósito):**
+  - Dotar al usuario de control total e inmediato sobre la estética del portal desde archivos CSS limpios y bien organizados, sin tener que rastrear estilos dispersos ni tocar la estructura HTML.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. **`theme-colors.css`**: Control centralizado de colores de marca (`#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`), fondos, superficies, bordes y modos de fondo (Oscuro, Claro Solar, Negro OLED, Crema Arena).
+  2. **`typography.css`**: Control centralizado de tipografías (Montserrat, Inter, Space Grotesk, Caveat), escalas responsivas fluidas con `clamp`, pesos, alturas de línea y utilidades.
+  3. **`videos.css`**: Control de alturas, opacidad de superposición (overlays), brillo, contraste, saturación, scanlines y bordes de video mediante variables `:root`.
+  4. **`images.css`**: Proporciones de aspecto (`aspect-ratio`), radios de borde, microinteracciones de zoom en hover a 60fps, filtros fotográficos, sombras y overlays para legibilidad.
+  5. **`menu-control.css`**: Gobernanza total de `#mainNavbar`, enlaces horizontales, estado activo con indicador naranja, dropdowns, Mega Menú y drawer móvil mediante tokens CSS `--nav-*`.
+  6. **`theme-master.css`**: Orquestador central importado al inicio de `styles.css`.
+- **QUÉ (What / Entregables):**
+  - Creados/Actualizados: `website/css/theme-colors.css`, `website/css/typography.css`, `website/css/videos.css`, `website/css/images.css`, `website/css/menu-control.css`, `website/css/theme-master.css` y `website/styles.css`.
+  - Documentación del Círculo Dorado en cada archivo y 0 uso de términos restringidos.
+- **Validación:** Archivos vinculados y probados sin errores de sintaxis.
+
+### Unificación Canónica del Footer Oficial en Todo el Sitio
+
+- **Consulta:**
+  > *"recuerda que el footer es el mismo que el de index.html para todas las paginas ."*
+- **Referencia Visual:** Captura adjunta por el usuario con la estructura exacta:
+  1. **Marca:** Logotipo circular con montaña y río (`assets/images/logo.png`), título `BAQUEANO` y subtítulo `NICARAGUA AUTÉNTICA`, lema en mayúsculas `DESCUBRÍ LO QUE NO SALE EN EL MAPA.` y 4 accesos sociales circulares (`Instagram`, `Facebook`, `TikTok`, `WhatsApp`).
+  2. **4 Columnas de Navegación con Acento Naranja:**
+     - **EXPLORÁ:** Inicio, Destinos, Mapa Interactivo, Experiencias, Departamentos.
+     - **CULTURA:** Historia & Memoria, Gastronomía Ancestral, Son Sonoro Folk, Custodia Ambiental, Red de Aliados.
+     - **COMUNIDAD:** Quiénes Somos, Registrá tu Negocio, Canal de Denuncias, Mi Perfil, Mi Viaje.
+     - **LEGAL:** Términos y Condiciones, Política de Privacidad, Política de Cookies, Aviso Legal.
+  3. **Barra Inferior:**
+     - Izquierda: `© 2026 BAQUEANO. Todos los derechos reservados.`
+     - Derecha: `Hecho con ❤️ en Nicaragua`
+- **CÓMO (How / Arquitectura e Implementación):**
+  - Se sincronizó el HTML estático de [index.html](file:///c:/Users/PC%201/APP%20BAQUEANO/website/index.html) con la estructura exacta de 5 columnas.
+  - Se sincronizaron los estilos en [index-exact.css](file:///c:/Users/PC%201/APP%20BAQUEANO/website/css/pages/index-exact.css) (retícula de 280px + 4 columnas iguales, tipografía Montserrat para encabezados h4 en crema `#F4E6C1`, barra de acento naranja `#F65E01` de 28x3px, transiciones hover en enlaces y adaptación responsiva a 2 columnas en tablet y 1 en móvil).
+  - Se actualizó [global-injector.js](file:///c:/Users/PC%201/APP%20BAQUEANO/website/js/global-injector.js) con el mismo marcado y estilos para garantizar que las 26 páginas adicionales del sitio carguen de forma idéntica e inmutable este mismo footer oficial.
+- **Validación:** Comprobación sintáctica con `node --check` aprobada con código de salida 0.
+
+### Integración del Logo Oficial en la Pestaña del Navegador (Favicon Universal)
+
+- **Consulta:**
+  > *"quiero que le ponga el logo de nuestro proyecto ahi eso es la ventana del navegador me entiende verdad"*
+  *(Acompañado de captura mostrando la pestaña del navegador con el icono genérico de mundito gris `🌐` y el título `Baqueano Nic...`)*
+- **Diagnóstico Técnico:**
+  1. El archivo `assets/images/logo.png` no existía directamente en la raíz de `assets/images/`, sino dentro del subdirectorio `assets/images/LOGOS/logo.png`.
+  2. No existía el archivo raíz `favicon.ico`, por lo que las solicitudes automáticas de los navegadores arrojaban error 404 y recurrían al icono gris predeterminado.
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. Se generaron las copias canónicas de alta resolución del logo oficial:
+     - `website/assets/images/logo.png`
+     - `website/favicon.ico`
+     - `website/favicon.png`
+     - `website/assets/images/baqueano_launcher_solid.png`
+  2. Se ejecutó un script de estandarización universal en los 28 archivos HTML del sitio para incluir:
+     - `<link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png?v=20260930">`
+     - `<link rel="icon" type="image/png" sizes="192x192" href="assets/images/baqueano_launcher_solid.png?v=20260930">`
+     - `<link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo.png?v=20260930">`
+     - `<link rel="shortcut icon" href="favicon.ico?v=20260930">`
+  3. Se sincronizó `manifest.json` para garantizar soporte nativo PWA y marcadores de escritorio.
+- **QUÉ (What / Entregables):**
+  - Creados: `website/favicon.ico`, `website/favicon.png`, `website/assets/images/logo.png`, `website/assets/images/baqueano_launcher_solid.png`.
+  - Actualizados: 28 archivos `.html` en `website/`, `website/manifest.json` y `SESSION_LOG.md`.
+- **Validación:** Los 28 archivos HTML cuentan con los enlaces verificados y los recursos gráficos existen y responden en disco.
+
+
+
+

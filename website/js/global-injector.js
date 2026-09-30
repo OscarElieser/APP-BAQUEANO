@@ -344,17 +344,17 @@
             '<img src="assets/images/logo.png" alt="BAQUEANO">' +
             '<div><div class="bq-footer-brand-name">BAQUEANO</div><div class="bq-footer-brand-sub">NICARAGUA AUTÉNTICA</div></div>' +
           '</a>' +
-          '<p class="bq-footer-tagline">Descubrí lo que no sale en el mapa.</p>' +
+          '<p class="bq-footer-tagline">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</p>' +
           '<div class="bq-footer-socials">' +
             '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
             '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
             '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
-            '<a href="https://wa.me/50588888888" target="_blank" rel="noopener" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+            '<a href="https://wa.me/50584431289" target="_blank" rel="noopener" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
           '</div>' +
         '</div>' +
         // Columna Explorá
         '<div class="bq-footer-col">' +
-          '<h4>Explorá</h4><div class="bq-footer-accent"></div>' +
+          '<h4>EXPLORÁ</h4><div class="bq-footer-accent"></div>' +
           '<ul>' +
             '<li><a href="index.html">Inicio</a></li>' +
             '<li><a href="destinos.html">Destinos</a></li>' +
@@ -365,7 +365,7 @@
         '</div>' +
         // Columna Cultura
         '<div class="bq-footer-col">' +
-          '<h4>Cultura</h4><div class="bq-footer-accent"></div>' +
+          '<h4>CULTURA</h4><div class="bq-footer-accent"></div>' +
           '<ul>' +
             '<li><a href="historia.html">Historia &amp; Memoria</a></li>' +
             '<li><a href="gastronomia.html">Gastronomía Ancestral</a></li>' +
@@ -376,7 +376,7 @@
         '</div>' +
         // Columna Comunidad
         '<div class="bq-footer-col">' +
-          '<h4>Comunidad</h4><div class="bq-footer-accent"></div>' +
+          '<h4>COMUNIDAD</h4><div class="bq-footer-accent"></div>' +
           '<ul>' +
             '<li><a href="nosotros.html">Quiénes Somos</a></li>' +
             '<li><a href="mi-negocio.html">Registrá tu Negocio</a></li>' +
@@ -387,7 +387,7 @@
         '</div>' +
         // Columna Legal
         '<div class="bq-footer-col">' +
-          '<h4>Legal</h4><div class="bq-footer-accent"></div>' +
+          '<h4>LEGAL</h4><div class="bq-footer-accent"></div>' +
           '<ul>' +
             '<li><a href="terminos.html">Términos y Condiciones</a></li>' +
             '<li><a href="privacidad.html">Política de Privacidad</a></li>' +

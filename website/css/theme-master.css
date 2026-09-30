@@ -1,0 +1,31 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — SISTEMA MAESTRO DE CONTROL VISUAL (THEME-MASTER.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Servir como punto único de importación y gobernanza modular para los 5 pilares
+  visuales del ecosistema web Baqueano: Colores, Tipografía, Videos, Imágenes y Menús.
+- Otorgar a desarrolladores y administradores la capacidad de modificar o alternar
+  cualquier aspecto del diseño del sitio web desde CSS desacoplado y predecible.
+- Eliminar código redundante y asegurar cumplimiento estricto del estándar de calidad visual.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Orquesta mediante `@import` los 5 módulos especializados:
+  1. `theme-colors.css`  -> Paleta oficial (#165D6F, #F65E01, #F4E6C1, #0F172A), fondos y superficies.
+  2. `typography.css`    -> Familias tipográficas (Montserrat, Inter, Space Grotesk) y escalas fluidas.
+  3. `videos.css`        -> Alturas, capas de oscurecimiento, filtros y reproductores de video.
+  4. `images.css`        -> Proporciones aspect-ratio, bordes redondeados, overlays y zoom hover.
+  5. `menu-control.css`  -> Control completo de la barra de navegación (#mainNavbar), mega menú y drawer.
+
+📦 3. QUÉ (WHAT / ARCHIVO ENTREGABLE):
+- Módulo orquestador que puede ser vinculado directamente en el <head> de los HTML
+  mediante <link rel="stylesheet" href="css/theme-master.css"> o importado en styles.css.
+============================================================================
+*/
+
+@import url('theme-colors.css');
+@import url('typography.css');
+@import url('videos.css');
+@import url('images.css');
+@import url('menu-control.css');

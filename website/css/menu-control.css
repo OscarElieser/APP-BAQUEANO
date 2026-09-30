@@ -1,0 +1,217 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO MAESTRO DE CONTROL DE MENÚS (MENU-CONTROL.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Permitir la personalización y gobierno absoluto de la barra de navegación (#mainNavbar),
+  mega menús desplegables y menú móvil drawer exclusivamente desde CSS.
+- Otorgar al desarrollador y administrador la capacidad de cambiar colores, alturas,
+  fondos, desenfoques, tipografías y acentos de navegación alterando simples variables
+  sin modificar lógica JavaScript ni reestructurar el HTML.
+- Garantizar que la navegación responda fluidamente en modo escritorio, tablet y smartphone.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Expone un set completo de tokens `:root` con el prefijo `--nav-*`.
+- Sobrescribe y canaliza selectores prioritarios de navegación:
+  * Barra fija superior: `#mainNavbar`, `#mainNavbar.scrolled`.
+  * Enlaces y estado activo: `.exact-nav-link`, `.nav-link-item`.
+  * Mega Menú desplegable: `.global-mega-menu`, `.global-more-dropdown`.
+  * Drawer móvil lateral: `.bq-mobile-drawer`, `.exact-mobile-menu`.
+  * Botones de acción: Iniciar Sesión, SOS Emergencias, Búsqueda.
+- Aplica glassmorphism (`backdrop-filter`) y aceleración por GPU.
+
+📦 3. QUÉ (WHAT / VARIABLES EXPUESTAS Y CONFIGURABLES):
+- Dimensiones: `--nav-height`, `--nav-max-width`, `--nav-border-radius`.
+- Fondos y Blur: `--nav-bg`, `--nav-bg-scrolled`, `--nav-blur`.
+- Enlaces: `--nav-link-color`, `--nav-link-hover-color`, `--nav-link-active-color`,
+  `--nav-link-active-bg`, `--nav-active-bar-color`.
+- Mega Menú: `--nav-mega-bg`, `--nav-mega-title-color`, `--nav-mega-accent`.
+- Acciones: `--nav-btn-login-bg`, `--nav-btn-sos-bg`.
+============================================================================
+*/
+
+:root {
+  /* ========================================================================
+     1. DIMENSIONES Y ESTRUCTURA DE LA BARRA DE NAVEGACIÓN
+     ======================================================================== */
+  --nav-height: 68px;
+  --nav-max-width: 1440px;
+  --nav-padding-x: 28px;
+  --nav-z-index: 9900;
+
+  /* ========================================================================
+     2. FONDOS, GLASSMORPHISM Y BORDES
+     ======================================================================== */
+  --nav-bg: rgba(10, 33, 53, 0.97);
+  --nav-bg-scrolled: rgba(8, 26, 42, 0.99);
+  --nav-blur: 16px;
+  --nav-border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  --nav-border-scrolled: 1px solid rgba(244, 230, 193, 0.2);
+  --nav-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  --nav-shadow-scrolled: 0 4px 28px rgba(0, 0, 0, 0.55);
+
+  /* ========================================================================
+     3. TIPOGRAFÍA Y ENLACES HORIZONTALES
+     ======================================================================== */
+  --nav-font: 'Inter', sans-serif;
+  --nav-font-size: 0.875rem;
+  --nav-font-weight: 600;
+  --nav-link-height: 36px;
+  --nav-link-radius: 7px;
+  --nav-link-color: rgba(255, 255, 255, 0.82);
+  --nav-link-hover-color: #FFFFFF;
+  --nav-link-hover-bg: rgba(255, 255, 255, 0.08);
+
+  /* Estado Activo (Página Actual) */
+  --nav-link-active-color: #FFFFFF;
+  --nav-link-active-bg: rgba(22, 93, 111, 0.35);
+  --nav-active-bar-color: #F65E01;
+  --nav-active-bar-height: 2px;
+
+  /* ========================================================================
+     4. MEGA MENÚ Y DROPDOWNS DESPLEGABLES
+     ======================================================================== */
+  --nav-mega-bg: linear-gradient(145deg, #0C2941 0%, #0A2035 100%);
+  --nav-mega-border: 1px solid rgba(255, 255, 255, 0.1);
+  --nav-mega-radius: 18px;
+  --nav-mega-shadow: 0 24px 64px rgba(0, 0, 0, 0.75);
+  --nav-mega-title-color: #F4E6C1;
+  --nav-mega-accent: #F65E01;
+  --nav-mega-link-color: #8FA5BC;
+  --nav-mega-link-hover: #FFFFFF;
+  --nav-mega-link-hover-bg: rgba(22, 93, 111, 0.25);
+
+  /* ========================================================================
+     5. BOTONES DE ACCIÓN RÁPIDA EN EL MENÚ
+     ======================================================================== */
+  --nav-btn-login-bg: #10B981;
+  --nav-btn-login-hover: #059669;
+  --nav-btn-login-color: #FFFFFF;
+
+  --nav-btn-sos-bg: #DC2626;
+  --nav-btn-sos-hover: #EF4444;
+  --nav-btn-sos-color: #FFFFFF;
+
+  --nav-btn-icon-bg: rgba(255, 255, 255, 0.06);
+  --nav-btn-icon-hover: #165D6F;
+
+  /* ========================================================================
+     6. MENÚ DRAWER MÓVIL
+     ======================================================================== */
+  --nav-drawer-bg: #0A1B2A;
+  --nav-drawer-border: 1px solid rgba(255, 255, 255, 0.1);
+  --nav-drawer-link-color: #E2E8F0;
+  --nav-drawer-link-active: #F65E01;
+}
+
+/* ==========================================================================
+   7. APLICACIÓN DE VARIABLES A LA BARRA DE NAVEGACIÓN
+   ========================================================================== */
+#mainNavbar {
+  height: var(--nav-height) !important;
+  min-height: var(--nav-height) !important;
+  max-height: var(--nav-height) !important;
+  background: var(--nav-bg) !important;
+  backdrop-filter: blur(var(--nav-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--nav-blur)) !important;
+  border-bottom: var(--nav-border-bottom) !important;
+  box-shadow: var(--nav-shadow) !important;
+  z-index: var(--nav-z-index) !important;
+}
+
+#mainNavbar.scrolled {
+  background: var(--nav-bg-scrolled) !important;
+  border-bottom: var(--nav-border-scrolled) !important;
+  box-shadow: var(--nav-shadow-scrolled) !important;
+}
+
+#mainNavbar .exact-container,
+#mainNavbar .nav-inner {
+  max-width: var(--nav-max-width) !important;
+  padding-left: var(--nav-padding-x) !important;
+  padding-right: var(--nav-padding-x) !important;
+  height: var(--nav-height) !important;
+}
+
+/* Enlaces del Menú */
+#mainNavbar .exact-nav-link,
+#mainNavbar .nav-link-item,
+#mainNavbar .nav-links-menu > a {
+  font-family: var(--nav-font) !important;
+  font-size: var(--nav-font-size) !important;
+  font-weight: var(--nav-font-weight) !important;
+  height: var(--nav-link-height) !important;
+  border-radius: var(--nav-link-radius) !important;
+  color: var(--nav-link-color) !important;
+  transition: color 0.18s, background 0.18s !important;
+}
+
+#mainNavbar .exact-nav-link:hover,
+#mainNavbar .nav-link-item:hover,
+#mainNavbar .nav-links-menu > a:hover {
+  background: var(--nav-link-hover-bg) !important;
+  color: var(--nav-link-hover-color) !important;
+}
+
+#mainNavbar .exact-nav-link.active,
+#mainNavbar .nav-link-item.active,
+#mainNavbar .nav-links-menu > a.active {
+  color: var(--nav-link-active-color) !important;
+  background: var(--nav-link-active-bg) !important;
+  box-shadow: inset 0 calc(-1 * var(--nav-active-bar-height)) 0 var(--nav-active-bar-color) !important;
+}
+
+/* Dropdown y Mega Menú */
+#mainNavbar .global-mega-menu,
+#mainNavbar .exact-dropdown-menu {
+  background: var(--nav-mega-bg) !important;
+  border: var(--nav-mega-border) !important;
+  border-radius: var(--nav-mega-radius) !important;
+  box-shadow: var(--nav-mega-shadow) !important;
+}
+
+#mainNavbar .global-mega-column h2 {
+  color: var(--nav-mega-title-color) !important;
+  border-bottom: 2px solid var(--nav-mega-accent) !important;
+}
+
+#mainNavbar .global-mega-column a {
+  color: var(--nav-mega-link-color) !important;
+}
+
+#mainNavbar .global-mega-column a:hover {
+  color: var(--nav-mega-link-hover) !important;
+  background: var(--nav-mega-link-hover-bg) !important;
+}
+
+/* Botones de Acción */
+#mainNavbar .exact-nav-btn-login,
+#mainNavbar .global-session,
+#mainNavbar .navbar-login-btn {
+  background: var(--nav-btn-login-bg) !important;
+  color: var(--nav-btn-login-color) !important;
+}
+
+#mainNavbar .exact-nav-btn-login:hover {
+  background: var(--nav-btn-login-hover) !important;
+}
+
+#mainNavbar .sos-quick-btn,
+#mainNavbar .navbar-sos-btn {
+  background: var(--nav-btn-sos-bg) !important;
+  color: var(--nav-btn-sos-color) !important;
+}
+
+#mainNavbar .sos-quick-btn:hover {
+  background: var(--nav-btn-sos-hover) !important;
+}
+
+#mainNavbar .global-search,
+#mainNavbar .navbar-search-btn {
+  background: var(--nav-btn-icon-bg) !important;
+}
+
+#mainNavbar .global-search:hover {
+  background: var(--nav-btn-icon-hover) !important;
+}

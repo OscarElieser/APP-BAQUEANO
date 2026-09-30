@@ -56,11 +56,13 @@
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
-  <link rel="apple-touch-icon" href="assets/images/logo.png">
-
   <!-- 🧭 NAVBAR HORIZONTAL — ESTILOS GLOBALES -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
+  <!-- Favicon e Iconografía Oficial de Pestaña -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png?v=20260930">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/baqueano_launcher_solid.png?v=20260930">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo.png?v=20260930">
+  <link rel="shortcut icon" href="favicon.ico?v=20260930">
 </head>
 
 <body class="page-index-exact">
@@ -735,56 +737,75 @@
   <!-- ============================================================================
        SECCIÓN 10: PIE INSTITUCIONAL (FOOTER - IMAGEN 4)
        ============================================================================ -->
-  <footer class="site-footer-exact" id="siteFooter">
+    <footer class="site-footer-exact" id="siteFooter">
     <div class="exact-container">
       <div class="footer-top-grid">
         <!-- Columna 1: Marca y Redes -->
         <div class="footer-brand-col">
           <a href="index.html" class="footer-logo-row">
             <img src="assets/images/logo.png" alt="Baqueano" class="footer-logo-img">
-            <span class="footer-brand-title">BAQUEANO</span>
+            <div class="footer-brand-text-block">
+              <span class="footer-brand-title">BAQUEANO</span>
+              <span class="footer-brand-subtitle">NICARAGUA AUTÉNTICA</span>
+            </div>
           </a>
-          <span class="footer-tagline-text">DESCUBRÍ LO QUE NO SALE EN EL MAPA</span>
+          <span class="footer-tagline-text">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</span>
           <div class="footer-social-row">
             <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener" class="footer-social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/50584431289" target="_blank" rel="noopener" class="footer-social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
         </div>
 
         <!-- Columna 2: Explorá -->
         <div class="footer-nav-col">
-          <h4>Explorá</h4>
+          <h4>EXPLORÁ</h4>
+          <div class="footer-accent-bar"></div>
           <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="destinos.html">Destinos</a></li>
-            <li><a href="#mapaAiSection">Mapa</a></li>
-            <li><a href="#experienciasSection">Experiencias</a></li>
-            <li><a href="#baqueanoDigitalCard">BAQUI</a></li>
+            <li><a href="mapa.html">Mapa Interactivo</a></li>
+            <li><a href="experiencias.html">Experiencias</a></li>
+            <li><a href="departamento.html">Departamentos</a></li>
           </ul>
         </div>
 
-        <!-- Columna 3: Información -->
+        <!-- Columna 3: Cultura -->
         <div class="footer-nav-col">
-          <h4>Información</h4>
+          <h4>CULTURA</h4>
+          <div class="footer-accent-bar"></div>
           <ul>
+            <li><a href="historia.html">Historia &amp; Memoria</a></li>
+            <li><a href="gastronomia.html">Gastronomía Ancestral</a></li>
+            <li><a href="musica.html">Son Sonoro Folk</a></li>
+            <li><a href="ambiental.html">Custodia Ambiental</a></li>
+            <li><a href="aliados.html">Red de Aliados</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Comunidad -->
+        <div class="footer-nav-col">
+          <h4>COMUNIDAD</h4>
+          <div class="footer-accent-bar"></div>
+          <ul>
+            <li><a href="nosotros.html">Quiénes Somos</a></li>
+            <li><a href="mi-negocio.html">Registrá tu Negocio</a></li>
+            <li><a href="denuncias.html">Canal de Denuncias</a></li>
+            <li><a href="perfil.html">Mi Perfil</a></li>
             <li><a href="mi-viaje.html">Mi Viaje</a></li>
-            <li><a href="#sosModal" onclick="openSosModal(event)">SOS 24/7</a></li>
-            <li><a href="cronicas.html">Blog &amp; Crónicas</a></li>
-            <li><a href="ayuda.html#preguntas">Preguntas frecuentes</a></li>
-            <li><a href="mailto:soporte@baqueano.ni">Contacto</a></li>
           </ul>
         </div>
 
-        <!-- Columna 4: Legal -->
+        <!-- Columna 5: Legal -->
         <div class="footer-nav-col">
-          <h4>Legal</h4>
+          <h4>LEGAL</h4>
+          <div class="footer-accent-bar"></div>
           <ul>
-            <li><a href="legal.html">Términos y condiciones</a></li>
-            <li><a href="legal.html#privacidad">Política de privacidad</a></li>
-            <li><a href="legal.html#cookies">Cookies</a></li>
-            <li><a href="legal.html#aviso">Aviso legal</a></li>
+            <li><a href="terminos.html">Términos y Condiciones</a></li>
+            <li><a href="privacidad.html">Política de Privacidad</a></li>
+            <li><a href="cookies.html">Política de Cookies</a></li>
+            <li><a href="aviso-legal.html">Aviso Legal</a></li>
           </ul>
         </div>
 

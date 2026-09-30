@@ -1,0 +1,185 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE CONTROL DE IMÁGENES (IMAGES.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Centralizar y estandarizar el tratamiento visual, proporciones, bordes,
+  sombras y microinteracciones de todas las imágenes del portal web Baqueano.
+- Erradicar imágenes deformadas, saltos de layout (CLS - Cumulative Layout Shift)
+  y recortes toscos en tarjetas de destinos, experiencias y anfitriones.
+- Facilitar el cambio global de estilo fotográfico (ratios, redondeo, zoom hover,
+  filtros y overlays de contraste) desde variables CSS unificadas.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Define tokens en `:root` para proporciones (aspect-ratio), radios, tiempos
+  de transición y filtros fotográficos.
+- Aplica aceleración de hardware para transiciones hover a 60fps sin tirones.
+- Clases modulares independientes: `.img-card-frame`, `.img-cover`, `.img-avatar`,
+  `.img-overlay-cinematic`, `.img-panoramic`, `.img-rounded-frame`.
+- Prevención de desbordamientos con `max-width: 100%` y contención intrínseca.
+
+📦 3. QUÉ (WHAT / VARIABLES Y CLASES EXPUESTAS):
+- Variables: `--img-ratio-card`, `--img-radius-md`, `--img-hover-scale`,
+  `--img-filter-cinema`, `--img-overlay-bottom`, `--img-shadow-elevated`.
+- Clases utilitarias y componentes fotográficos para todo el ecosistema web.
+============================================================================
+*/
+
+:root {
+  /* ========================================================================
+     1. PROPORCIONES DE ASPECTO (ASPECT RATIOS)
+     ======================================================================== */
+  --img-ratio-card: 16 / 10;
+  --img-ratio-wide: 16 / 9;
+  --img-ratio-square: 1 / 1;
+  --img-ratio-portrait: 3 / 4;
+  --img-ratio-panoramic: 21 / 9;
+
+  /* ========================================================================
+     2. RADIOS DE BORDE (BORDER RADIUS)
+     ======================================================================== */
+  --img-radius-xs: 6px;
+  --img-radius-sm: 10px;
+  --img-radius-md: 16px;
+  --img-radius-lg: 24px;
+  --img-radius-xl: 32px;
+  --img-radius-circle: 50%;
+  --img-radius-pill: 9999px;
+
+  /* ========================================================================
+     3. MICROINTERACCIONES & HOVER ZOOM
+     ======================================================================== */
+  --img-hover-scale: 1.05;
+  --img-hover-transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  --img-hover-brightness: 1.06;
+
+  /* ========================================================================
+     4. FILTROS Y TONOS CINEMATOGRÁFICOS
+     ======================================================================== */
+  --img-filter-default: brightness(0.96) contrast(1.02) saturate(1.08);
+  --img-filter-warm: brightness(0.98) contrast(1.04) saturate(1.15) sepia(0.08);
+  --img-filter-muted: brightness(0.85) contrast(1.05) saturate(0.9);
+
+  /* ========================================================================
+     5. CAPAS SUPERPUESTAS (OVERLAYS) PARA LEGIBILIDAD
+     ======================================================================== */
+  --img-overlay-bottom: linear-gradient(180deg, rgba(15, 23, 42, 0) 40%, rgba(15, 23, 42, 0.88) 100%);
+  --img-overlay-card: linear-gradient(180deg, rgba(8, 13, 26, 0.1) 0%, rgba(15, 23, 42, 0.92) 100%);
+  --img-overlay-soft: linear-gradient(135deg, rgba(22, 93, 111, 0.25) 0%, rgba(15, 23, 42, 0.6) 100%);
+
+  /* ========================================================================
+     6. SOMBRAS Y BORDES FOTOGRÁFICOS
+     ======================================================================== */
+  --img-shadow-card: 0 10px 24px rgba(0, 0, 0, 0.4);
+  --img-shadow-elevated: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(22, 93, 111, 0.25);
+  --img-border-subtle: 1px solid rgba(255, 255, 255, 0.1);
+  --img-border-brand: 1px solid rgba(22, 93, 111, 0.35);
+  --img-border-accent: 1px solid rgba(246, 94, 1, 0.45);
+}
+
+/* ==========================================================================
+   7. REGLAS UNIVERSALES DE IMAGEN
+   ========================================================================== */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ==========================================================================
+   8. MARCOS DE TARJETAS Y CONTENEDORES FOTOGRÁFICOS
+   ========================================================================== */
+.img-card-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--img-ratio-card);
+  overflow: hidden;
+  border-radius: var(--img-radius-md);
+  background: var(--bg-surface, #0F172A);
+  border: var(--img-border-subtle);
+  box-shadow: var(--img-shadow-card);
+}
+
+.img-card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: var(--img-filter-default);
+  transition: var(--img-hover-transition);
+  will-change: transform;
+}
+
+.img-card-frame:hover img {
+  transform: scale(var(--img-hover-scale));
+  filter: var(--img-filter-default) brightness(var(--img-hover-brightness));
+}
+
+.img-card-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--img-overlay-bottom);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Marco Panorámico */
+.img-panoramic-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--img-ratio-panoramic);
+  overflow: hidden;
+  border-radius: var(--img-radius-lg);
+  border: var(--img-border-brand);
+}
+
+.img-panoramic-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Avatares y fotos circulares de anfitriones campesinos */
+.img-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--img-radius-circle);
+  object-fit: cover;
+  border: 2px solid var(--terracotta, #F65E01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.img-avatar-lg {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--img-radius-circle);
+  object-fit: cover;
+  border: 3px solid var(--petroleo-teal, #165D6F);
+  box-shadow: var(--img-shadow-card);
+  flex-shrink: 0;
+}
+
+/* Badges e Iconos de Identidad */
+.img-logo-brand {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+}
