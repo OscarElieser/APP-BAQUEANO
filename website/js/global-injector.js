@@ -91,13 +91,14 @@
         .bq-footer-grid { display: grid; grid-template-columns: 260px repeat(4,1fr); gap: 40px; }
         @media (max-width: 900px) { .bq-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
         @media (max-width: 560px) { .bq-footer-grid { grid-template-columns: 1fr; } }
-        .bq-footer-brand a { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 14px; }
-        .bq-footer-brand img { height: 44px; width: 44px; }
-        .bq-footer-logo-full { height: 48px !important; width: auto !important; max-width: 200px; object-fit: contain; }
-        .bq-footer-brand-name { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 900; color: #F4E6C1; line-height: 1; }
-        .bq-footer-brand-sub  { font-size: .65rem; color: #64748B; letter-spacing: .1em; }
+        .bq-footer-brand a { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 14px; }
+        .bq-footer-brand img.bq-footer-logo-icon { height: 48px; width: 48px; object-fit: contain; }
+        .bq-footer-brand-text { display: flex; flex-direction: column; }
+        .bq-footer-brand-name { font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 900; color: #FFFFFF; line-height: 1; letter-spacing: 0.08em; }
+        .bq-footer-brand-sub  { font-size: .68rem; color: #F4E6C1; letter-spacing: .12em; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
         .bq-footer-tagline { font-size: .82rem; color: #64748B; margin-bottom: 18px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
-        .bq-footer-socials { display: flex; gap: 10px; }
+        .bq-footer-socials { display: flex; gap: 10px; margin-bottom: 16px; }
+        .bq-footer-autentica-badge { width: 175px; max-width: 100%; height: auto; object-fit: contain; display: block; margin-top: 16px; }
         .bq-social-btn {
           width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,.06);
           border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center;
@@ -349,16 +350,21 @@
       '<div class="bq-footer-grid">' +
         // Columna Marca
         '<div class="bq-footer-brand">' +
-          '<a href="index.html">' +
-            '<img src="assets/images/LOGOS/baqueano_logo-completo_2160x1669-blanco.png" alt="Baqueano Nicaragua" class="bq-footer-logo-full">' +
+          '<a href="index.html" aria-label="Baqueano Nicaragua — Inicio">' +
+            '<img src="assets/logos/BAQUENO%20LOGO.png" alt="Baqueano" class="bq-footer-logo-icon">' +
+            '<div class="bq-footer-brand-text">' +
+              '<span class="bq-footer-brand-name">BAQUEANO</span>' +
+              '<span class="bq-footer-brand-sub">NICARAGUA AUTÉNTICA</span>' +
+            '</div>' +
           '</a>' +
           '<p class="bq-footer-tagline">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</p>' +
           '<div class="bq-footer-socials">' +
-            '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
-            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
-            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
-            '<a href="https://wa.me/50584431289" target="_blank" rel="noopener" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+            '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
+            '<a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
           '</div>' +
+          '<img src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="bq-footer-autentica-badge">' +
         '</div>' +
         // Columna Explorá
         '<div class="bq-footer-col">' +

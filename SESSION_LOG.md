@@ -56,6 +56,15 @@
 
 
 
+## Ajuste Visual de Footer — Nombre Baqueano Visible y Sello Nicaragua Auténtica (30-09-2026)
+
+- **Consulta:**
+  > *"ASI QUIERO FOOTER PERO EL NOMBRE DE BAQUENO SE TIENE QUE VER TAMBIEN"*
+- **Decisión de Diseño y Arquitectura:**
+  - Restaurar la estructura de identidad oficial con el icono circular blanco (`baqueano_icono_500x386-blanco.png`) en 48x48px junto al nombre institucional destacado **`BAQUEANO`** en tipografía Montserrat 900 de 1.35rem color `#FFFFFF` nítido y legible, acompañado del subtítulo `NICARAGUA AUTÉNTICA` en `#F4E6C1`.
+  - Integrar el sello oficial de país a todo color de la propuesta (`NICARAGUA AUTENTICA.png`) con el Guardabarranco y volcán directamente debajo de los 4 botones de redes sociales, tal como solicitó el usuario en la imagen de referencia.
+  - Sincronizar simultáneamente `index.html`, `website/css/pages/index-exact.css` y `website/js/global-injector.js` para asegurar que el pie de página se muestre idéntico y sin discrepancias en todas las 28 páginas del portal.
+
 ## Implementación Integral de Brechas de Seguridad & Accesibilidad (30-09-2026)
 
 - **Consulta:**
