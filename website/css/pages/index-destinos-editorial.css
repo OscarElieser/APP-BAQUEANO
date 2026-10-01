@@ -144,31 +144,48 @@
   isolation: isolate;
 }
 
-.inspire-photo-frame {
+.inspire-photo-frame,
+.baqueano-photo-frame {
   position: absolute;
   inset: 0 0 75px;
   overflow: hidden;
-  clip-path: polygon(8% 5%, 38% 0, 56% 7%, 77% 1%, 96% 11%, 100% 39%, 94% 67%, 100% 90%, 75% 100%, 48% 94%, 25% 100%, 3% 86%, 8% 59%, 0 36%);
+  background: #e9eeee;
+  clip-path: polygon(
+    5% 18%, 13% 8%, 28% 4%, 43% 7%, 56% 3%, 70% 8%, 86% 6%,
+    96% 15%, 99% 31%, 96% 47%, 100% 62%, 93% 79%, 82% 91%,
+    67% 94%, 53% 91%, 39% 96%, 24% 91%, 11% 84%, 4% 70%,
+    7% 54%, 2% 39%
+  );
 }
 
-.inspire-photo-frame::after {
+.inspire-photo-frame::after,
+.baqueano-photo-frame::after {
   content: "";
   position: absolute;
   inset: 0;
-  border: 10px solid rgba(255, 255, 255, .88);
-  filter: drop-shadow(0 18px 25px rgba(15, 23, 42, .18));
   pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .15), transparent 45%, rgba(15, 23, 42, .08));
 }
 
-.inspire-photo-frame img {
+.inspire-photo-frame img,
+.baqueano-photo {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
-  transition: opacity .28s ease, transform .8s ease;
+  object-position: center;
+  will-change: transform;
+  transition: opacity .28s ease, transform .8s cubic-bezier(.2, .8, .2, 1), filter .5s ease;
 }
 
-.inspire-feature:hover .inspire-photo-frame img {
-  transform: scale(1.035);
+.baqueano-photo.is-changing {
+  opacity: .72;
+  filter: saturate(.8);
+}
+
+.inspire-feature:hover .baqueano-photo,
+.baqueano-photo-frame:hover .baqueano-photo {
+  transform: scale(1.055);
 }
 
 .inspire-photo-wash {
@@ -315,23 +332,27 @@
   opacity: .85;
 }
 
-/* ─── WRAP DEL MAPA SVG DE NICARAGUA ─── */
+/*
+ * 🎯 POR QUÉ: El mapa territorial debe ser protagonista y conservar su contorno real.
+ * ⚙️ CÓMO: La imagen transparente usa object-fit contain y mantiene los botones fuera del bitmap.
+ * 📦 QUÉ: Lienzo adaptable para el mapa compartido y sus puntos interactivos.
+ */
 .inspire-nic-map-wrap {
   position: relative;
   width: 100%;
-  height: 490px;
+  height: 510px;
 }
 
 .inspire-nic-map {
   position: absolute;
-  inset: 0 0 60px;
-  width: 100%;
-  height: calc(100% - 60px);
-  filter: drop-shadow(0 20px 28px rgba(15, 23, 42, .2));
-}
-
-.nic-shape {
-  transition: filter .3s ease;
+  inset: 4px 3% 66px 5%;
+  width: 92%;
+  height: calc(100% - 70px);
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 24px 24px rgba(15, 23, 42, .24));
+  user-select: none;
+  pointer-events: none;
 }
 
 /* ─── PINS SOBRE EL MAPA ─── */
@@ -374,15 +395,15 @@
 
 /* Posiciones geográficas sobre el mapa (relativas al wrap) */
 /* Norte: Cañón de Somoto */
-.pin-somoto { top: 10%; right: 12%; }
+.pin-somoto { top: 9%; right: 8%; }
 /* Occidente: León */
-.pin-leon   { top: 33%; left: 2%; }
+.pin-leon   { top: 34%; left: 0; }
 /* Centro-Pacífico: Granada */
-.pin-granada { top: 50%; right: 2%; }
+.pin-granada { top: 52%; right: -1%; }
 /* Occidente volcánico: Cerro Negro */
-.pin-cerro  { top: 63%; right: 4%; }
+.pin-cerro  { top: 66%; right: 1%; }
 /* Sur, Lago Cocibolca: Ometepe */
-.pin-ometepe { top: 71%; left: 12%; }
+.pin-ometepe { top: 76%; left: 9%; }
 
 /* ─── NOTA DEL MAPA ─── */
 .inspire-map-note {
@@ -506,7 +527,15 @@
 
   .inspire-feature { min-height: 620px; }
 
-  .inspire-photo-frame { inset: 0 0 80px; }
+  .inspire-photo-frame,
+  .baqueano-photo-frame {
+    inset: 0 0 80px;
+    clip-path: polygon(
+      4% 14%, 18% 5%, 40% 7%, 58% 3%, 78% 8%, 95% 15%, 98% 35%,
+      94% 57%, 99% 75%, 85% 92%, 62% 96%, 43% 92%, 22% 97%,
+      7% 86%, 3% 64%
+    );
+  }
 
   .inspire-photo-wash {
     background: linear-gradient(0deg, rgba(15, 23, 42, .9) 0%, rgba(15, 23, 42, .35) 54%, transparent 85%);

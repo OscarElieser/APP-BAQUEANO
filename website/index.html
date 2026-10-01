@@ -290,7 +290,17 @@
           </nav>
         </header>
         <article class="inspire-feature" aria-live="polite">
-          <div class="inspire-photo-frame"><img data-inspire-image src="assets/images/destinos/isla_de_ometepe.jpg" alt="Volcanes y costa de la Isla de Ometepe"><div class="inspire-photo-wash" aria-hidden="true"></div></div>
+          <!--
+            🎯 POR QUÉ: La forma pertenece a la identidad visual; la fotografía pertenece a los datos.
+            ⚙️ CÓMO: El marco CSS recorta cualquier URL recibida por el controlador de destinos.
+            📦 QUÉ: Imagen dinámica reutilizable para contenido local o procedente de Supabase.
+          -->
+          <div class="inspire-photo-frame baqueano-photo-frame">
+            <img id="destinoImagen" class="baqueano-photo" data-inspire-image
+              src="assets/images/destinos/isla_de_ometepe.jpg"
+              alt="Volcanes y costa de la Isla de Ometepe" fetchpriority="high">
+            <div class="inspire-photo-wash" aria-hidden="true"></div>
+          </div>
           <div class="inspire-copy"><span class="inspire-badge">Destino destacado</span><h3 data-inspire-title>Isla de Ometepe</h3><p class="inspire-location"><i class="fa-solid fa-location-dot"></i><span data-inspire-location>Rivas · Lago Cocibolca</span></p><p data-inspire-description>Naturaleza, cultura y comunidades que te conectan con la esencia de Nicaragua.</p><div class="inspire-traits" data-inspire-traits></div><a class="inspire-primary" data-inspire-link href="destinos.html?id=ometepe">Explorar destino <i class="fa-solid fa-arrow-right"></i></a></div>
           <div class="inspire-gallery" aria-label="Vistas del destino seleccionado"><img data-inspire-gallery="0" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Vista de Isla de Ometepe"><img data-inspire-gallery="1" src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada entre bosque tropical"><img data-inspire-gallery="2" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Experiencia rural comunitaria"></div>
         </article>
@@ -307,41 +317,15 @@
             <text x="40" y="4" text-anchor="middle" font-size="7" font-weight="800" fill="#f65e01" font-family="Montserrat,sans-serif">N</text>
           </svg>
 
-          <!-- Mapa SVG de Nicaragua (silueta geográfica real) -->
+          <!--
+            🎯 POR QUÉ: Mostrar la riqueza territorial real de Nicaragua, no una silueta genérica.
+            ⚙️ CÓMO: El recorte PNG conserva relieve, lagos y volcanes; los controles HTML
+            permanecen superpuestos para mantener accesibilidad e interacción.
+            📦 QUÉ: Mapa territorial compartido por el propietario con cinco destinos activos.
+          -->
           <div class="inspire-nic-map-wrap">
-            <svg class="inspire-nic-map" viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="mapFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#d4ebe8;stop-opacity:1"/>
-                  <stop offset="100%" style="stop-color:#b3d8d4;stop-opacity:1"/>
-                </linearGradient>
-                <filter id="mapShadow">
-                  <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(15,23,42,0.22)"/>
-                </filter>
-              </defs>
-              <!-- Silueta de Nicaragua -->
-              <path class="nic-shape" filter="url(#mapShadow)" fill="url(#mapFill)" stroke="#165d6f" stroke-width="2.5" stroke-linejoin="round"
-                d="M 60 30
-                   L 95 18  L 130 24  L 165 15  L 205 22  L 238 14
-                   L 272 26  L 308 18  L 340 30  L 368 42  L 390 58
-                   L 408 78  L 418 100 L 422 124 L 415 148 L 402 168
-                   L 388 185 L 378 205 L 372 228 L 365 250 L 358 272
-                   L 352 295 L 348 318 L 344 338 L 350 358 L 358 375
-                   L 362 395 L 356 412 L 342 424 L 325 432 L 308 436
-                   L 290 440 L 272 438 L 255 430 L 238 420 L 220 408
-                   L 202 415 L 184 420 L 165 418 L 148 408 L 132 395
-                   L 118 378 L 105 360 L 92 340  L 80 318  L 70 295
-                   L 62 270  L 55 245  L 50 218  L 48 192  L 50 165
-                   L 54 140  L 58 115  L 58 88   L 60 62   Z"
-              />
-              <!-- Lago de Nicaragua (Cocibolca) -->
-              <ellipse cx="268" cy="360" rx="48" ry="30" fill="rgba(22,93,111,0.3)" stroke="#165d6f" stroke-width="1.5" opacity="0.7"/>
-              <!-- Lago de Managua (Xolotlán) -->
-              <ellipse cx="198" cy="240" rx="32" ry="18" fill="rgba(22,93,111,0.25)" stroke="#165d6f" stroke-width="1" opacity="0.6"/>
-              <!-- Ruta de destinos (línea punteada) -->
-              <path class="inspire-route-svg" fill="none" stroke="rgba(22,93,111,0.45)" stroke-width="2.5" stroke-dasharray="8 7" stroke-linecap="round"
-                d="M 180 68 Q 255 120 238 200 Q 230 265 268 360 M 238 200 Q 310 185 368 165"/>
-            </svg>
+            <img class="inspire-nic-map" src="assets/images/mapa-nicaragua-territorial.png"
+              alt="Mapa territorial ilustrado de Nicaragua con relieve, volcanes, lagos y costas">
 
             <!-- Pins posicionados geográficamente sobre el mapa -->
             <!-- Cañón de Somoto: Norte -->

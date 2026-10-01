@@ -2051,3 +2051,21 @@
 - **POR QUÉ (Why / Propósito):** Garantizar que el workspace local incorpore la totalidad del estado vigente publicado en GitHub antes de continuar el desarrollo.
 - **CÓMO (How / Arquitectura e Implementación):** Se actualizaron todas las referencias remotas mediante `git fetch --all --prune`, se comparó `HEAD` contra `origin/main` y se ejecutó `git pull --ff-only origin main` para impedir merges accidentales o reescrituras de historial.
 - **QUÉ (What / Entregables):** Git confirmó `Already up to date`; la rama local `main` y `origin/main` se encuentran alineadas sin commits pendientes en ninguna dirección.
+
+## [2026-09-30] Integración del mapa territorial real en “Destinos que inspiran”
+
+- **POR QUÉ (Why / Propósito):** Sustituir la silueta vectorial genérica de Nicaragua, que debilitaba la calidad visual de la portada, por el mapa territorial con relieve compartido por el propietario.
+- **CÓMO (How / Arquitectura e Implementación):** Se aisló el mapa suministrado como PNG RGBA transparente, se optimizó a 900 × 1125 px y se integró mediante una imagen semántica con `object-fit: contain`. Los botones de Somoto, León, Granada, Cerro Negro y Ometepe permanecen como controles HTML accesibles sobre el mapa, con posiciones adaptadas para escritorio, tablet y móvil.
+- **QUÉ (What / Entregables):** Nuevo recurso `website/assets/images/mapa-nicaragua-territorial.png`; actualización de `website/index.html` y `website/css/pages/index-destinos-editorial.css`; eliminación del mapa SVG aproximado; comprobaciones visuales locales en 1440 px y 390 px sin deformación del mapa.
+
+## [2026-09-30] Separación entre marco orgánico y fotografías de destinos
+
+- **POR QUÉ (Why / Propósito):** Permitir que la portada cambie entre Ometepe, Granada, Somoto, León, playas, museos o futuros destinos sin fabricar una composición gráfica nueva para cada registro.
+- **CÓMO (How / Arquitectura e Implementación):** El recorte orgánico se define exclusivamente mediante `clip-path` responsive en `.baqueano-photo-frame`; la imagen `.baqueano-photo` recibe su URL desde el catálogo JavaScript. El controlador admite `image` local o `image_url` remoto, conserva una alternativa segura ante errores y construye etiquetas con nodos DOM validados en lugar de insertar contenido externo como HTML.
+- **QUÉ (What / Entregables):** Componente reutilizable en `website/index.html`, forma adaptable en `website/css/pages/index-destinos-editorial.css` y API `window.BaqueanoDestinations.show(id)` / `get(id)` en `website/js/index-destinos-editorial.js`, preparada para integrar datos de Supabase sin acoplar presentación y contenido.
+
+## [2026-09-30] Recuperación del punto de trabajo tras apagado
+
+- **🎯 POR QUÉ (Why / Propósito):** Reconstruir con evidencia el último estado de la sesión y permitir retomar el desarrollo sin perder ni sobrescribir cambios locales.
+- **⚙️ CÓMO (How / Arquitectura e Implementación):** Se contrastó el cierre de `SESSION_LOG.md` con `git status`, el historial reciente, el diff local y las fechas de modificación. No se alteró código funcional durante esta revisión.
+- **📦 QUÉ (What / Funcionalidad & Entregables):** Se confirmó que `main` está alineada con `origin/main` en `906d426` y que permanecen sin commit cuatro archivos modificados (`SESSION_LOG.md`, `website/index.html`, `website/css/pages/index-destinos-editorial.css`, `website/js/index-destinos-editorial.js`) más el recurso nuevo `website/assets/images/mapa-nicaragua-territorial.png`. El último frente fue la integración del mapa territorial real y la separación reutilizable entre marco orgánico y fotografía dinámica de destinos.

@@ -18,7 +18,7 @@
 (function () {
   'use strict';
 
-  const data = {
+  const defaultDestinations = {
     ometepe: {
       title: 'Isla de Ometepe',
       location: 'Rivas · Lago Cocibolca',
@@ -119,25 +119,57 @@
     const pins = [...root.querySelectorAll('[data-destination]')];
     const filters = [...root.querySelectorAll('[data-inspire-filter]')];
 
+    const externalDestinations = window.BAQUEANO_DESTINATIONS;
+    const data = externalDestinations && typeof externalDestinations === 'object'
+      ? { ...defaultDestinations, ...externalDestinations }
+      : defaultDestinations;
+
     function render(id) {
-      const item = data[id];
-      if (!item) return;
+      const source = data[id];
+      if (!source || typeof source !== 'object') return;
+      const item = { ...(defaultDestinations[id] || {}), ...source };
 
       const hero = root.querySelector('[data-inspire-image]');
-      hero.src = item.image;
-      hero.alt = `Paisaje de ${item.title}`;
+      const imageUrl = item.image_url || item.image;
+      if (hero && typeof imageUrl === 'string' && imageUrl.trim()) {
+        hero.classList.add('is-changing');
+        try {
+          hero.addEventListener('load', () => hero.classList.remove('is-changing'), { once: true });
+          hero.addEventListener('error', () => {
+            hero.classList.remove('is-changing');
+            hero.src = defaultDestinations.ometepe.image;
+            hero.alt = 'Isla de Ometepe';
+          }, { once: true });
+          hero.src = imageUrl;
+          hero.alt = item.title ? `Paisaje de ${item.title}` : 'Destino destacado de Nicaragua';
+        } catch (error) {
+          hero.classList.remove('is-changing');
+          console.warn('[BaqueanoDestinations] No fue posible actualizar la imagen.', error);
+        }
+      }
 
       root.querySelector('[data-inspire-title]').textContent = item.title;
       root.querySelector('[data-inspire-location]').textContent = item.location;
       root.querySelector('[data-inspire-description]').textContent = item.description;
       root.querySelector('[data-inspire-link]').href = item.href;
 
-      root.querySelector('[data-inspire-traits]').innerHTML = item.traits
-        .map(([icon, label]) => `<span><i class="fa-solid ${icon}" aria-hidden="true"></i>${label}</span>`)
-        .join('');
+      const traits = Array.isArray(item.traits) ? item.traits : [];
+      const traitsContainer = root.querySelector('[data-inspire-traits]');
+      const traitsFragment = document.createDocumentFragment();
+      traits.forEach(([icon, label]) => {
+        const trait = document.createElement('span');
+        const traitIcon = document.createElement('i');
+        const safeIcon = /^fa-[a-z0-9-]+$/i.test(String(icon || '')) ? icon : 'fa-compass';
+        traitIcon.className = `fa-solid ${safeIcon}`;
+        traitIcon.setAttribute('aria-hidden', 'true');
+        trait.append(traitIcon, document.createTextNode(String(label || '')));
+        traitsFragment.appendChild(trait);
+      });
+      traitsContainer.replaceChildren(traitsFragment);
 
+      const gallery = Array.isArray(item.gallery) ? item.gallery : [];
       root.querySelectorAll('[data-inspire-gallery]').forEach((img, index) => {
-        img.src = item.gallery[index] || item.image;
+        img.src = gallery[index] || imageUrl;
         img.alt = `${item.title}, vista ${index + 1}`;
       });
 
@@ -157,9 +189,15 @@
         button.classList.toggle('is-active', active);
         button.setAttribute('aria-pressed', String(active));
       });
-      const match = Object.entries(data).find(([, item]) => item.categories.includes(category));
+      const match = Object.entries(data).find(([, item]) =>
+        Array.isArray(item.categories) && item.categories.includes(category));
       if (match) render(match[0]);
     }));
+
+    window.BaqueanoDestinations = Object.freeze({
+      show: render,
+      get: id => data[id] || null
+    });
 
     render('ometepe');
   });
