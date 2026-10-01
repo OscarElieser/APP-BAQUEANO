@@ -1,0 +1,313 @@
+/* ============================================================================
+   🧭 BAQUEANO ECOSYSTEM — BAQÜI EVOLUCIONADO (baqui-evolved.css)
+   ============================================================================
+
+   🎯 1. POR QUÉ (WHY / PROPÓSITO):
+   - Añadir la capa visual que convierte a Baqüi de chatbot a acompañante
+     inteligente territorial. Los 10 modos conversacionales deben verse como
+     una barra de herramientas editorial y no como simples botones genéricos.
+   - Respuestas accionables con botones que generan confianza (el usuario ve
+     qué va a pasar antes de hacer clic).
+   - Contexto de viaje visible en todo momento sin contaminar la UI limpia
+     que ya tiene baqueano-assistant.css.
+
+   ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+   - Solo AGREGA clases nuevas; no sobreescribe nada de baqueano-assistant.css.
+   - Paleta BAQUEANO oficial: #165D6F, #F65E01, #F4E6C1, #0F172A.
+   - Glassmorphism, microinteracciones a 60fps, responsivo total.
+   - Respeta prefers-reduced-motion.
+
+   📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+   - .bqe-modes-bar — Barra horizontal de 10 modos con scroll snap.
+   - .bqe-mode-btn — Botón individual de modo con emoji + etiqueta.
+   - .bqe-trip-context-bar — Indicador compacto del contexto de viaje.
+   - .bqe-ctx-tag — Etiqueta de dato del contexto.
+   - .bqe-action-buttons — Contenedor de botones accionables en mensajes.
+   - .bqe-action-btn — Botón de acción individual (Ver mapa, Guardar, etc.)
+   - .bqe-evolved-msg — Clase adicional para mensajes evolucionados.
+   ============================================================================ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BARRA DE MODOS CONVERSACIONALES
+   10 modos visibles con scroll horizontal y snap.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.bqe-modes-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 10px 12px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(15, 23, 42, 0.4);
+  flex-shrink: 0;
+}
+
+.bqe-modes-bar::-webkit-scrollbar { display: none; }
+
+/* Botón individual de modo */
+.bqe-mode-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 10px 5px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(244, 230, 193, 0.65);
+  cursor: pointer;
+  font-family: 'Inter', -apple-system, sans-serif;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  min-width: 64px;
+  max-width: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Color de acento definido por JS vía CSS var */
+.bqe-mode-btn::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--mode-color, #165D6F);
+  transform: scaleX(0);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bqe-mode-btn:hover {
+  border-color: rgba(246, 94, 1, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #F4E6C1;
+  transform: translateY(-2px);
+}
+
+.bqe-mode-btn:hover::before,
+.bqe-mode-btn.is-active::before {
+  transform: scaleX(1);
+}
+
+.bqe-mode-btn.is-active {
+  background: rgba(22, 93, 111, 0.25);
+  border-color: rgba(22, 93, 111, 0.5);
+  color: #F4E6C1;
+  box-shadow: 0 0 12px rgba(22, 93, 111, 0.2);
+}
+
+/* Modo emergencias — rojo */
+.bqe-mode-btn[data-mode="emergencias"].is-active {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.4);
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.15);
+}
+
+/* Modo hidden gem — verde */
+.bqe-mode-btn[data-mode="hidden-gem"].is-active {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+.bqe-mode-emoji {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: block;
+}
+
+.bqe-mode-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 68px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BARRA DE CONTEXTO DE VIAJE
+   Indicador compacto del contexto detectado (presupuesto, días, destino, vivencia).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.bqe-trip-context-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 8px 12px;
+  background: rgba(22, 93, 111, 0.12);
+  border-bottom: 1px solid rgba(22, 93, 111, 0.2);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  animation: ctx-slide-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ctx-slide-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bqe-ctx-label {
+  color: rgba(244, 230, 193, 0.5);
+  font-weight: 500;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+.bqe-ctx-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(22, 93, 111, 0.25);
+  border: 1px solid rgba(22, 93, 111, 0.3);
+  color: #F4E6C1;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.bqe-ctx-clear {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: rgba(244, 230, 193, 0.4);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bqe-ctx-clear:hover { color: #F65E01; }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BOTONES DE ACCIÓN EN MENSAJES
+   Respuestas accionables: [Ver ruta] [Agregar a Mi Viaje] [Ver mapa]
+   El usuario ve qué va a pasar antes de hacer clic.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.bqe-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.bqe-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 13px;
+  border-radius: 20px;
+  border: 1px solid rgba(246, 94, 1, 0.3);
+  background: rgba(246, 94, 1, 0.08);
+  color: #F4E6C1;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.bqe-action-btn:hover {
+  background: rgba(246, 94, 1, 0.18);
+  border-color: rgba(246, 94, 1, 0.55);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(246, 94, 1, 0.15);
+}
+
+.bqe-action-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Variante de emergencia — roja */
+.bqe-action-btn[data-bqe-action="call"] {
+  border-color: rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.1);
+  color: #FCA5A5;
+}
+
+.bqe-action-btn[data-bqe-action="call"]:hover {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.6);
+}
+
+/* Variante de mapa — azul teal */
+.bqe-action-btn[data-bqe-action="open_map"] {
+  border-color: rgba(22, 93, 111, 0.4);
+  background: rgba(22, 93, 111, 0.12);
+  color: #93C5FD;
+}
+
+.bqe-action-btn[data-bqe-action="open_map"]:hover {
+  background: rgba(22, 93, 111, 0.22);
+  border-color: rgba(22, 93, 111, 0.6);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MENSAJE EVOLUCIONADO
+   Clase adicional para mensajes con HTML (saltos, negritas, botones).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.bqe-evolved-msg p {
+  /* Permitir HTML básico en mensajes evolucionados */
+  white-space: normal;
+  line-height: 1.6;
+}
+
+.bqe-evolved-msg strong {
+  color: #F4E6C1;
+  font-weight: 700;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVO
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .bqe-modes-bar {
+    padding: 8px 10px 5px;
+    gap: 5px;
+  }
+
+  .bqe-mode-btn {
+    min-width: 56px;
+    max-width: 70px;
+    padding: 6px 8px 4px;
+  }
+
+  .bqe-mode-emoji { font-size: 1rem; }
+  .bqe-mode-label { font-size: 0.55rem; }
+
+  .bqe-action-btn {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+}
+
+/* Reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .bqe-mode-btn,
+  .bqe-action-btn,
+  .bqe-trip-context-bar {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

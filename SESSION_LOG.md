@@ -2206,3 +2206,66 @@
     - Sintaxis JS validada: `node --check website/js/index-destinos-editorial.js` (código 0).
     - Servidor local verificado: `http://localhost:5000` con entrega HTTP 200 de HTML, CSS y JS.
     - Presencia de tokens en DOM confirmada mediante petición HTTP (100% de los elementos editoriales activos).
+
+## [2026-10-01] Continuación del Roadmap del Ecosistema Digital — Reanudación de Sesión
+
+- **Consulta del Usuario:**
+  > *Continuación de sesión tras checkpoint. Retomar exactamente donde se quedó el trabajo.*
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Reanudar la ejecución del roadmap de 15 fases del Ecosistema Digital Inteligente de BAQUEANO sin perder progreso ni contexto.
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. Verificar estado de salud del sistema: Backend 21/21 tests OK, JS syntax OK, dev server activo en localhost:5000.
+  2. Auditar visualmente el estado actual del sitio para identificar áreas de mejora inmediata.
+  3. Continuar la implementación incremental según la fase correspondiente del roadmap.
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Estado actual verificado: Backend sano, frontend estable, migración SQL 012 lista pero pendiente de ejecución en Supabase.
+  - Próximas acciones: Inspección visual del sitio → identificar mejoras visuales/funcionales inmediatas → implementar.
+
+## [2026-10-01] TRES PILARES CENTRALES DE BAQUEANO — Directiva Estratégica del Propietario
+
+- **Consulta del Usuario:**
+  > *"Hay tres ideas de este prompt que yo convertiría en el corazón de BAQUEANO:*
+  > *1. '¿Qué querés vivir?' en lugar del típico '¿A dónde querés viajar?'. Eso cambia completamente la manera de descubrir Nicaragua.*
+  > *2. 'Mostrarme lo que no sale en el mapa' como una función real que activa comunidades, patrimonio poco conocido, emprendimientos y destinos ocultos. Ya no sería solamente el eslogan de BAQUEANO.*
+  > *3. Y BAQUEANO Digital como un baqueano de verdad, capaz de decirle al visitante qué conocer, cómo llegar, cuánto podría gastar, quién lo recibe, qué historia existe detrás del lugar, dónde comer, dónde dormir, qué está cerca y cómo construir su viaje.*
+  > *Ahí BAQUEANO deja de competir directamente con Booking. Booking vende inventario; BAQUEANO puede vender descubrimiento, conexión, territorio y experiencia nicaragüense."*
+  > Adjuntó también el Prompt Maestro Definitivo completo con la visión del Ecosistema Digital Inteligente.
+
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Consolidar la identidad diferenciadora de BAQUEANO frente a cualquier plataforma turística existente.
+  - Convertir tres conceptos filosóficos en funcionalidades técnicas reales, tangibles e interactivas.
+  - **PILAR 1 — "¿Qué querés vivir?"**: Cambiar el paradigma de búsqueda por destino a búsqueda por experiencia emocional.
+  - **PILAR 2 — "Lo que no sale en el mapa" como función real**: Activar el atributo `hidden_gem` como motor de descubrimiento de comunidades, patrimonio, emprendimientos y destinos ocultos.
+  - **PILAR 3 — BAQUEANO Digital como guía territorial real**: Un asistente que conoce el territorio, las personas, los precios, las historias, la comida, el hospedaje y puede construir un viaje completo.
+
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. Implementar en el Hero del index.html el selector experiencial "¿Qué querés vivir?" con categorías emocionales (aventura, naturaleza, cultura, descanso, historia, gastronomía, comunidades, romance, familia, algo diferente).
+  2. Crear el toggle funcional "Mostrarme lo que no sale en el mapa" que filtra hidden_gem=true en toda la plataforma (destinos, mapa, recomendaciones, IA).
+  3. Evolucionar BAQUEANO Digital/Baqüi de chatbot a guía territorial inteligente con contexto completo (qué, cómo, cuánto, quién, historia, comida, hospedaje, cercanía, ruta).
+
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Pendiente de implementación. Los resultados, archivos afectados, validaciones y punto de continuidad se añadirán al finalizar cada pilar.
+  - **COMPLETADO (Pilares 1 y 2):** `website/css/pages/tres-pilares.css` y `website/js/tres-pilares.js` creados; integrados en `index.html` con CSS link, HTML de `#vivirSelector` + `#hiddenGemToggle` y script al pie. Sintaxis validada (`node --check` código 0).
+
+## [2026-10-01] Evolución de Baqüi — De chatbot a Acompañante Inteligente Territorial
+
+- **Consulta del Usuario:**
+  > *Baqüi debe dejar de ser "un chat que responde" y convertirse en el acompañante inteligente de todo BAQUEANO. Memoria de viaje real, RAG con datos reales, modos conversacionales visibles, herramientas que ejecutan acciones reales (`searchDestinations()`, `buildItinerary()`, `saveFavorite()`, `addToTrip()`, `openMap()`, etc.), planificador día a día con costos, presupuesto inteligente, mapa accionable, favoritos/Mi Viaje desde conversación, reservas, emergencias, clima, multimodalidad, voz, modo conductor, offline parcial, traducción ES/EN, lenguaje nicaragüense natural, historias y cultura, modos visibles en UI (🧭 Explorar, 🗺️ Planificar, ✨ Sorpréndeme, 🌿 No sale en el mapa, 🍲 Comer, 🏛️ Cultura, 👥 Comunidades, 📍 Cerca de mí, 🎒 Mi viaje, 🆘 Emergencias). Baqüi debe poder hacer cosas reales dentro de BAQUEANO, no solo responder texto.*
+
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Posicionar a Baqüi como el centro operativo de toda la experiencia BAQUEANO: el usuario puede navegar casi toda la plataforma conversando con él.
+  - Diferenciación radical: Booking/TripAdvisor venden inventario con filtros; BAQUEANO vende descubrimiento guiado por un asistente que conoce Nicaragua territorialmente.
+
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. Evolucionar `website/js/baqueano-assistant.js` con arquitectura de herramientas (tool-calling pattern), memoria de sesión y modos conversacionales.
+  2. Crear motor de contexto de viaje (`BaqueanoTripContext`) con presupuesto, días, intereses, restricciones, lugares guardados y decisiones anteriores.
+  3. Implementar 10 modos conversacionales con UI visible (botones de modo en el panel de Baqüi).
+  4. Crear herramientas reales que ejecutan acciones en la plataforma (no solo texto).
+  5. Añadir respuestas accionables con botones [Ver ruta] [Agregar a Mi Viaje] [Ver mapa].
+
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Pendiente de implementación. Archivos a modificar: `website/js/baqueano-assistant.js`, `website/css/baqueano-assistant.css` (nuevo motor de UI). Resultados, validaciones y punto de continuidad se añadirán al finalizar.
+
+
+
+

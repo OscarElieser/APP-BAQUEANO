@@ -340,6 +340,7 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
         .eq("status", "published").is("deleted_at", null).order("name");
       if (query.id) requestQuery = requestQuery.eq("id", String(query.id)).limit(1);
       if (query.department) requestQuery = requestQuery.eq("department_id", String(query.department));
+      if (query.hidden_gem === "true" || query.hidden_gem === true) requestQuery = requestQuery.eq("hidden_gem", true);
       const { data, error } = await requestQuery;
       if (error) return sendJson(response, 503, { ok: false, error: { code: "CATALOG_UNAVAILABLE", message: error.message } });
       return sendJson(response, 200, { ok: true, count: data.length, data, source: "supabase-postgresql" });
@@ -572,6 +573,149 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
       } catch (error) {
         return sendJson(response, 503, { ok: false, error: { code: "METRICS_UNAVAILABLE", message: error.message } });
       }
+    }
+
+    // ========================================================================
+    // 13. DOMINIO CULTURAL, PATRIMONIO, GASTRONOMÍA & RUTAS SOBERANAS
+    // ========================================================================
+    const culturalTables = {
+      "/culture": "culture", "culture": "culture",
+      "/heritage": "heritage", "heritage": "heritage",
+      "/museums": "museums", "museums": "museums",
+      "/gastronomy": "gastronomy", "gastronomy": "gastronomy",
+      "/music": "music", "music": "music",
+      "/crafts": "crafts", "crafts": "crafts",
+      "/festivals": "festivals", "festivals": "festivals",
+      "/communities": "communities", "communities": "communities",
+      "/legends": "legends", "legends": "legends",
+      "/historical-figures": "historical_figures", "historical-figures": "historical_figures",
+      "/routes": "routes", "routes": "routes",
+      "/experiences": "experiences", "experiences": "experiences",
+      "/events": "events", "events": "events",
+      "/emergencies": "emergencies", "emergencies": "emergencies",
+      "/day-passes": "day_passes", "day-passes": "day_passes"
+    };
+
+    if (culturalTables[path] && method === "GET") {
+      const targetTable = culturalTables[path];
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      let requestQuery = database.from(targetTable).select("*");
+      if (targetTable !== "emergencies" && targetTable !== "events") {
+        requestQuery = requestQuery.eq("status", "published");
+      }
+      if (targetTable === "events") {
+        requestQuery = requestQuery.in("status", ["published", "historical"]).order("start_date", { ascending: true });
+      }
+      if (query.id) requestQuery = requestQuery.eq("id", String(query.id)).limit(1);
+      if (query.department) requestQuery = requestQuery.eq("department_id", String(query.department));
+      if (query.category) requestQuery = requestQuery.eq("category", String(query.category));
+      if (query.hidden_gem === "true" || query.hidden_gem === true) requestQuery = requestQuery.eq("hidden_gem", true);
+      const limitVal = Math.min(Number(query.limit) || 100, 200);
+      requestQuery = requestQuery.limit(limitVal);
+
+      const { data, error } = await requestQuery;
+      if (error) return sendJson(response, 503, { ok: false, error: { code: targetTable.toUpperCase() + "_UNAVAILABLE", message: error.message } });
+      return sendJson(response, 200, { ok: true, count: data ? data.length : 0, data: data || [], source: "supabase-postgresql" });
+    }
+
+    // ========================================================================
+    // 14. PASAPORTE DIGITAL BAQUEANO (GET /api/passport & POST /api/passport/stamp)
+    // ========================================================================
+    if (path === "/passport" || path === "passport") {
+      const auth = await verifyAuth(request);
+      if (!auth.ok) return sendJson(response, auth.status, auth.error);
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      const { data, error } = await database.from("explorer_passport_stamps").select("*")
+        .eq("user_uid", auth.user.uid).order("stamped_at", { ascending: false });
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "PASSPORT_UNAVAILABLE", message: error.message } });
+      return sendJson(response, 200, { ok: true, count: data ? data.length : 0, stamps: data || [], source: "supabase-postgresql" });
+    }
+
+    if (path === "/passport/stamp" || path === "passport/stamp") {
+      if (method !== "POST") return sendJson(response, 405, { ok: false, error: { code: "METHOD_NOT_ALLOWED" } });
+      const auth = await verifyAuth(request);
+      if (!auth.ok) return sendJson(response, auth.status, auth.error);
+      const body = request.body || {};
+      if (!body.entityId || !body.entityName) return sendJson(response, 400, { ok: false, error: { code: "INVALID_STAMP_PAYLOAD" } });
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+      const { data, error } = await database.from("explorer_passport_stamps").upsert({
+        user_uid: auth.user.uid,
+        entity_type: body.entityType || "destination",
+        entity_id: String(body.entityId),
+        entity_name: String(body.entityName),
+        department_id: body.departmentId || null,
+        stamp_category: body.stampCategory || "territorial",
+        verified_by_qr: Boolean(body.verifiedByQr),
+        stamped_at: new Date().toISOString()
+      }, { onConflict: "user_uid,entity_type,entity_id" }).select("*").single();
+      if (error) return sendJson(response, 503, { ok: false, error: { code: "STAMP_FAILED", message: error.message } });
+      return sendJson(response, 201, { ok: true, stamp: data, source: "supabase-postgresql" });
+    }
+
+    // ========================================================================
+    // 15. OPS CENTER CRUD UNIVERSAL (POST /api/admin/crud)
+    // ========================================================================
+    if (path === "/admin/crud" || path === "admin/crud") {
+      const adminAuth = await verifyAdmin(request);
+      if (!adminAuth.ok) return sendJson(response, adminAuth.status, adminAuth.error);
+      if (method !== "POST") return sendJson(response, 405, { ok: false, error: { code: "METHOD_NOT_ALLOWED" } });
+      const database = databaseProvider();
+      if (!database) return unavailableDatabase(response);
+
+      const { action, table, record, id } = request.body || {};
+      const allowedTables = new Set([
+        "destinations", "places", "businesses", "tourism_services", "culture",
+        "heritage", "museums", "gastronomy", "music", "crafts", "festivals",
+        "communities", "legends", "historical_figures", "routes", "experiences",
+        "events", "emergencies", "day_passes"
+      ]);
+
+      if (!table || !allowedTables.has(table)) {
+        return sendJson(response, 400, { ok: false, error: { code: "INVALID_TABLE", message: "Tabla administrativa no autorizada." } });
+      }
+
+      if (action === "create") {
+        if (!record || typeof record !== "object") return sendJson(response, 400, { ok: false, error: { code: "INVALID_RECORD" } });
+        const { data, error } = await database.from(table).insert(record).select("*").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "CREATE_FAILED", message: error.message } });
+        return sendJson(response, 201, { ok: true, data, source: "supabase-postgresql" });
+      }
+
+      if (action === "update") {
+        if (!id || !record || typeof record !== "object") return sendJson(response, 400, { ok: false, error: { code: "INVALID_UPDATE_PAYLOAD" } });
+        const { data, error } = await database.from(table).update({ ...record, updated_at: new Date().toISOString() }).eq("id", id).select("*").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "UPDATE_FAILED", message: error.message } });
+        return sendJson(response, 200, { ok: true, data, source: "supabase-postgresql" });
+      }
+
+      if (action === "set_status") {
+        const { status } = request.body || {};
+        if (!id || !status) return sendJson(response, 400, { ok: false, error: { code: "INVALID_STATUS_PAYLOAD" } });
+        const { data, error } = await database.from(table).update({ status, updated_at: new Date().toISOString() }).eq("id", id).select("*").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "STATUS_UPDATE_FAILED", message: error.message } });
+        return sendJson(response, 200, { ok: true, data, source: "supabase-postgresql" });
+      }
+
+      if (action === "set_verified") {
+        const { verified } = request.body || {};
+        if (!id || typeof verified !== "boolean") return sendJson(response, 400, { ok: false, error: { code: "INVALID_VERIFIED_PAYLOAD" } });
+        const { data, error } = await database.from(table).update({ verified, last_verified_at: new Date().toISOString() }).eq("id", id).select("*").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "VERIFIED_UPDATE_FAILED", message: error.message } });
+        return sendJson(response, 200, { ok: true, data, source: "supabase-postgresql" });
+      }
+
+      if (action === "set_hidden_gem") {
+        const { hiddenGem } = request.body || {};
+        if (!id || typeof hiddenGem !== "boolean") return sendJson(response, 400, { ok: false, error: { code: "INVALID_HIDDEN_GEM_PAYLOAD" } });
+        const { data, error } = await database.from(table).update({ hidden_gem: hiddenGem, updated_at: new Date().toISOString() }).eq("id", id).select("*").single();
+        if (error) return sendJson(response, 503, { ok: false, error: { code: "HIDDEN_GEM_UPDATE_FAILED", message: error.message } });
+        return sendJson(response, 200, { ok: true, data, source: "supabase-postgresql" });
+      }
+
+      return sendJson(response, 400, { ok: false, error: { code: "UNKNOWN_ACTION", message: "Acción CRUD no reconocida." } });
     }
 
     // Rutas residuales no encontradas

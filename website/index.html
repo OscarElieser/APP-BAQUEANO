@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="css/demo-hackathon.css?v=20260927-1">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260930-quality-restore-1">
   <link rel="stylesheet" href="css/pages/index-destinos-editorial.css?v=20260930-1">
+  <link rel="stylesheet" href="css/pages/tres-pilares.css?v=20261001-pilares-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20260929-hnav-v4">
 
@@ -263,6 +264,84 @@
             <span class="category-label">Vida nocturna</span>
           </a>
         </div>
+      </div>
+    </section>
+
+    <!-- ============================================================================
+         PILAR 1: ¿QUÉ QUERÉS VIVIR? — SELECTOR EXPERIENCIAL EMOCIONAL
+         Cambia el paradigma: en lugar de "¿A dónde querés ir?" preguntamos
+         "¿Qué querés vivir?". Booking vende inventario; BAQUEANO vende
+         descubrimiento, conexión, territorio y experiencia nicaragüense.
+         ============================================================================ -->
+    <section class="vivir-selector" id="vivirSelector" aria-labelledby="vivirTitle">
+      <div class="exact-container">
+        <header class="vivir-header">
+          <p class="vivir-eyebrow"><i class="fa-solid fa-compass" aria-hidden="true"></i> DESCUBRÍ NICARAGUA</p>
+          <h2 class="vivir-title" id="vivirTitle">¿Qué querés <span class="vivir-title-accent">vivir</span>?</h2>
+          <p class="vivir-subtitle">No te preguntamos a dónde querés ir. Te preguntamos qué querés sentir. Nicaragua tiene una experiencia para cada deseo.</p>
+        </header>
+
+        <div class="vivir-grid" data-vivir-grid role="listbox" aria-label="Elegí tu experiencia">
+          <button type="button" class="vivir-option" data-vivencia="aventura" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-person-hiking"></i></span>
+            <span class="vivir-option-label">Aventura</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="naturaleza" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-leaf"></i></span>
+            <span class="vivir-option-label">Naturaleza</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="cultura" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-masks-theater"></i></span>
+            <span class="vivir-option-label">Cultura</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="descanso" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-umbrella-beach"></i></span>
+            <span class="vivir-option-label">Descanso</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="historia" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-scroll"></i></span>
+            <span class="vivir-option-label">Historia</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="gastronomia" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-utensils"></i></span>
+            <span class="vivir-option-label">Gastronomía</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="comunidades" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-people-group"></i></span>
+            <span class="vivir-option-label">Comunidades</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="romance" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-heart"></i></span>
+            <span class="vivir-option-label">Romance</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="familia" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-children"></i></span>
+            <span class="vivir-option-label">Familia</span>
+          </button>
+          <button type="button" class="vivir-option" data-vivencia="algo-diferente" role="option" tabindex="0">
+            <span class="vivir-option-icon"><i class="fa-solid fa-gem"></i></span>
+            <span class="vivir-option-label">Algo diferente</span>
+          </button>
+        </div>
+
+        <!-- ================================================================
+             PILAR 2: "LO QUE NO SALE EN EL MAPA" — TOGGLE FUNCIONAL
+             El eslogan de BAQUEANO convertido en una función real que activa
+             comunidades, patrimonio poco conocido, emprendimientos y destinos
+             ocultos marcados con hidden_gem=true.
+             ================================================================ -->
+        <div class="hidden-gem-bar" role="switch" aria-label="Activar modo Lo que no sale en el mapa">
+          <i class="fa-solid fa-gem hidden-gem-icon" aria-hidden="true"></i>
+          <span class="hidden-gem-text">
+            <em>Descubrí lo que no sale en el mapa</em> — Comunidades, patrimonio oculto, emprendimientos y destinos que no aparecen en guías convencionales.
+            <span class="hidden-gem-count" aria-label="Hidden gems disponibles">0</span>
+          </span>
+          <label class="hidden-gem-switch">
+            <input type="checkbox" id="hiddenGemToggle" aria-label="Activar descubrimiento de lugares ocultos">
+            <span class="hidden-gem-slider"></span>
+          </label>
+        </div>
+
       </div>
     </section>
 
@@ -1332,6 +1411,7 @@
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/index-destinos-editorial.js?v=20260930-1"></script>
+<script src="js/tres-pilares.js?v=20261001-pilares-1"></script>
 <script src="js/navigation.js"></script>
 <script src="js/global-injector.js"></script>
 </body>
