@@ -333,18 +333,31 @@
   margin-right: auto;
 }
 
+.hero-exact-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
 .hero-exact-pill {
   display: inline-block;
-  background: rgba(6, 182, 212, 0.2);
-  border: 1px solid rgba(6, 182, 212, 0.6);
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid rgba(6, 182, 212, 0.5);
   color: #38BDF8;
-  font-size: 0.76rem;
+  font-size: 0.66rem;
   font-weight: 800;
-  letter-spacing: 0.18em;
-  padding: 6px 15px;
+  letter-spacing: 0.2em;
+  padding: 4px 11px;
   border-radius: 999px;
-  margin-bottom: 16px;
   text-transform: uppercase;
+}
+
+.hero-exact-pill--badge {
+  background: rgba(246, 94, 1, 0.18);
+  border-color: rgba(246, 94, 1, 0.55);
+  color: #F97316;
 }
 
 .hero-exact-title {
@@ -470,16 +483,9 @@
   transform: translateY(-1px);
 }
 
-/* Lateral Derecho: Firma Nicaragua Auténtica y Ver Video */
+/* Lateral Derecho: eliminado del layout — styles conservados como referencia */
 .hero-exact-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  flex: 0 1 390px;
-  min-width: 0;
-  padding: 20px 0;
-  margin-left: auto;
+  display: none;
 }
 
 .hero-autentica-badge {
