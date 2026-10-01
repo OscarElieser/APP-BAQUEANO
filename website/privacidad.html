@@ -1,101 +1,134 @@
 <!DOCTYPE html>
-  <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
-       ============================================================================ -->
-  <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
-    <div class="exact-container nav-inner">
-      <!-- Marca / Logo Oficial -->
-      <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
-        <div class="exact-nav-brand-text navbar-brand-text">
-          <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
-          <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — POLÍTICA DE PRIVACIDAD & SEGURIDAD (privacidad.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Garantizar a los exploradores, anfitriones y cooperativas comunitarias la
+  máxima transparencia y control absoluto sobre sus datos personales.
+- Consagrar la política de cero venta de información a terceros, geolocalización
+  voluntaria y confidencialidad en el uso de herramientas de inteligencia artificial.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Réplica visual idéntica 1:1 a la maqueta oficial entregada por el usuario.
+- Layout modular responsivo: Hero con 4 garantías flotantes, tarjetas comparativas
+  de datos recopilados vs. no recopilados, y diagrama interactivo del flujo de datos
+  entre Usuario, App/Web, Firebase, Supabase y módulos del sistema.
+- Derechos ARCO claramente detallados y proveedores de nube debidamente transparentados.
+
+📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
+- Compromisos de protección de datos, catálogo de proveedores de confianza y
+  canales de contacto con el oficial de privacidad (privacidad@baqueano.com.ni).
+============================================================================
+-->
+<html lang="es-NI">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Privacidad & Seguridad de tus Datos | BAQUEANO Nicaragua</title>
+  <meta name="description" content="Política de privacidad de BAQUEANO Nicaragua. Tus datos bajo tu control: cero venta de información, privacidad en IA y seguridad cloud.">
+
+  <!-- Google Fonts Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Estilos Maestros Oficiales -->
+  <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/privacidad-exact.css?v=20260927-2">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
+
+  <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
+  <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+</head>
+<body class="page-privacidad">
+
+  <!-- BARRA DE NAVEGACIÓN GLOBAL UNIFICADA -->
+  <nav class="main-navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-box" aria-label="Baqueano Nicaragua - Inicio">
+        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BAQUEANO</span>
+          <span class="brand-tagline">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <!-- Menú Horizontal Central de Enlaces -->
-            <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
-      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
-        <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
-        <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
+      <div class="nav-links-menu" id="navLinksMenu">
+        <a href="index.html" class="nav-link-item">Inicio</a>
+        <a href="destinos.html" class="nav-link-item">Destinos</a>
+        <a href="mapa.html" class="nav-link-item">Mapa</a>
+        <a href="experiencias.html" class="nav-link-item">Experiencias</a>
+        <a href="baqueano-ia.html" class="nav-link-item">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="nav-link-item">Mi Viaje</a>
+        <a href="nosotros.html" class="nav-link-item">Nosotros</a>
+        <a href="index.html#sos" class="nav-link-item nav-link-sos">SOS</a>
 
-        <!-- Menú Desplegable "Más ˇ" con Mega Menú Centrado de 4 Columnas -->
-        <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
-          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn active" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
-            <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
+        <div class="nav-dropdown" id="navDropdownMas">
+          <button class="nav-dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+            <span>Más</span>
+            <i class="fa-solid fa-chevron-down nav-dropdown-caret"></i>
           </button>
-          </div></div>
-
-      <!-- Divisor Vertical entre Enlaces y Acciones -->
-      <div class="nav-vertical-divider" aria-hidden="true"></div>
-
-      <!-- Acciones a la Derecha (Clima, Buscador, Switch Tema, SOS, Iniciar Sesión, Idioma) -->
-            <!-- Acciones a la Derecha (Clima en vivo, SOS, Iniciar Sesión, Idioma) -->
-      <div class="exact-nav-actions global-nav-actions">
-        <div class="navbar-weather-pill" id="bqWeatherWidget" title="Clima actual en Nicaragua (clic para ver detalles)" aria-label="Clima en Nicaragua" role="button" tabindex="0">
-          <i class="fa-solid fa-cloud-sun" id="bqWeatherIcon"></i>
-          <span class="weather-temp" id="bqWeatherTemp">28°C</span>
-          <span class="weather-label" id="bqWeatherCity">Nicaragua</span>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-leaf"></i>
+              <div><strong>Custodia Ambiental</strong><small>Decálogo y alertas ecológicas</small></div>
+            </a>
+            <a href="historia.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-landmark"></i>
+              <div><strong>Historia y Memoria</strong><small>Línea de tiempo y 17 territorios</small></div>
+            </a>
+            <a href="gastronomia.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-utensils"></i>
+              <div><strong>Gastronomía</strong><small>Sabores ancestrales del maíz</small></div>
+            </a>
+            <a href="musica.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-music"></i>
+              <div><strong>Música y Sonido</strong><small>Patrimonio sonoro y compositores</small></div>
+            </a>
+            <a href="aliados.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-handshake"></i>
+              <div><strong>Red de Aliados</strong><small>Emprendimientos y cooperativas</small></div>
+            </a>
+            <a href="admin.html" class="nav-dropdown-item" role="menuitem">
+              <i class="fa-solid fa-sliders"></i>
+              <div><strong>Ops Center</strong><small>Centro de monitoreo territorial</small></div>
+            </a>
+          </div>
         </div>
-        <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="if(window.bqOpenSos)bqOpenSos();else if(window.openSosModal)openSosModal(event);" aria-label="Centro de auxilio SOS">
-          <i class="fa-solid fa-shield-heart"></i><span>SOS</span>
+      </div>
+
+      <div class="nav-actions-right">
+        <button class="nav-action-icon-btn" id="globalSearchBtn" type="button" aria-label="Buscar en Baqueano">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <a href="perfil.html" class="exact-nav-btn-login global-session navbar-login-btn">
-          <i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span>
+        <a href="mi-viaje.html#favoritos" class="nav-action-icon-btn" aria-label="Mis Favoritos">
+          <i class="fa-regular fa-heart"></i>
         </a>
-        <button type="button" class="global-language navbar-lang-pill" aria-label="Cambiar idioma">
-          <span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem; margin-left: 2px;"></i>
+        <div class="nav-lang-selector" id="langSelector">
+          <span class="active-lang">ES</span>
+          <span class="lang-divider">|</span>
+          <span class="inactive-lang">EN</span>
+        </div>
+        <button class="nav-login-btn" id="loginBtn" type="button">
+          Iniciar sesión
         </button>
-        <button type="button" class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú móvil">
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
-  
-  <!-- MEGA MENÚ DESPLEGABLE EN EL NAV (FUERA DEL DIV Y 100% CENTRADO AL NAV) -->
-  <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-    <!-- 1. MI PAÍS -->
-    <section class="global-mega-column culture">
-      <h2><i class="fa-solid fa-landmark"></i> Mi País</h2>
-      <a href="destinos.html"><i class="fa-solid fa-map-pin"></i> Destinos</a>
-      <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa Interactivo</a>
-      <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-      <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia &amp; Memoria</a>
-      <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
-      <a href="musica.html"><i class="fa-solid fa-music"></i> Son Sonoro / Música</a>
-      <a href="departamento.html"><i class="fa-solid fa-map-location-dot"></i> 17 Territorios</a>
-    </section>
-
-    <!-- 2. ECOSISTEMA & COMUNIDAD -->
-    <section class="global-mega-column community">
-      <h2><i class="fa-solid fa-people-group"></i> Ecosistema</h2>
-      <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Red de Aliados</a>
-      <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-      <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Custodia Ambiental</a>
-      <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Canal Ético</a>
-    </section>
-
-    <!-- 3. BAQUEANO -->
-    <section class="global-mega-column explore">
-      <h2><i class="fa-solid fa-compass"></i> Baqueano</h2>
-      <a href="nosotros.html"><i class="fa-solid fa-circle-info"></i> Quiénes Somos</a>
-      <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Preguntas Frecuentes</a>
-      <a href="baqueano-ia.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano IA</a>
-    </section>
-
-    <!-- 4. CUENTA Y PLATAFORMA -->
-    <section class="global-mega-column account">
-      <h2><i class="fa-solid fa-gear"></i> Plataforma</h2>
-      <a href="mi-viaje.html"><i class="fa-solid fa-route"></i> Mi Viaje</a>
-      <a href="perfil.html"><i class="fa-regular fa-user"></i> Mi Perfil</a>
-      <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Mis Reservas</a>
-      <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-      <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
-      <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
-      <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-      <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Acceso restringido</small></a>
-    </section>
-  </div>
   </nav>
 
   <!-- HERO EDITORIAL (IMAGEN 3) -->
@@ -379,7 +412,7 @@
             <a href="https://www.instagram.com/baqueano_nicaragua" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/share/1S71xwJKse/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
             <a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" class="footer-social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://youtube.com/@baqueanonicaragua" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://youtube.com" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
 
@@ -447,8 +480,8 @@
       }
     });
   </script>
-<script src="js/navigation.js?v=20260929-v12-centered"></script>
-<script src="js/global-injector.js?v=20260929-v12-centered"></script>
+<script src="js/navigation.js"></script>
+<script src="js/global-injector.js"></script>
 </body>
 </html>
 

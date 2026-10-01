@@ -47,7 +47,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260930-v12-search'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-v10-final'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
@@ -60,74 +60,53 @@ function buildGlobalMegaNavigation() {
 
     navMenu.innerHTML = `
       <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
-      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
-
-      <!-- ✦ BUSCADOR INTELIGENTE DE NICARAGUA ✦ -->
-      <div class="navbar-search-wrapper" id="navbarSearchWrapper" role="search">
-        <form class="navbar-search-form" id="navbarSearchForm" autocomplete="off" onsubmit="return false;" role="search" aria-label="Buscar en Baqueano Nicaragua">
-          <label for="navbarSearchInput" class="sr-only">Buscar destinos, experiencias, gastronomía...</label>
-          <i class="fa-solid fa-magnifying-glass navbar-search-icon" aria-hidden="true"></i>
-          <input
-            type="search"
-            id="navbarSearchInput"
-            class="navbar-search-input"
-            placeholder="Buscar Nicaragua..."
-            aria-label="Buscar en Baqueano Nicaragua"
-            maxlength="80"
-            spellcheck="false"
-            autocomplete="off"
-          />
-          <button type="button" class="navbar-search-clear" id="navbarSearchClear" aria-label="Limpiar búsqueda" tabindex="-1">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </form>
-      </div>
-
+      <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
+      <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
+      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">BAQUI</span></a>
+      <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
       <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
-        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['destinos.html','destino.html','mapa.html','experiencias.html','mi-viaje.html','historia.html','gastronomia.html','musica.html','departamento.html','aliados.html','mi-negocio.html','ambiental.html','denuncias.html','perfil.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
+        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','favoritos.html','ayuda.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
           <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
         </button>
         <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-          <!-- 1. MI PAÍS -->
-          <section class="global-mega-column culture">
-            <h2><i class="fa-solid fa-landmark"></i> Mi País</h2>
-            <a href="destinos.html"><i class="fa-solid fa-map-pin"></i> Destinos</a>
-            <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa Interactivo</a>
-            <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-            <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia &amp; Memoria</a>
-            <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
-            <a href="musica.html"><i class="fa-solid fa-music"></i> Son Sonoro / Música</a>
-            <a href="departamento.html"><i class="fa-solid fa-map-location-dot"></i> 17 Territorios</a>
-          </section>
-
-          <!-- 2. ECOSISTEMA &amp; COMUNIDAD -->
-          <section class="global-mega-column community">
-            <h2><i class="fa-solid fa-people-group"></i> Ecosistema</h2>
-            <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Red de Aliados</a>
-            <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-            <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Custodia Ambiental</a>
-            <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Canal Ético</a>
-          </section>
-
-          <!-- 3. BAQUEANO -->
+          <!-- 1. EXPLORAR -->
           <section class="global-mega-column explore">
-            <h2><i class="fa-solid fa-compass"></i> Baqueano</h2>
-            <a href="nosotros.html"><i class="fa-solid fa-circle-info"></i> Quiénes Somos</a>
-            <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Preguntas Frecuentes</a>
-            <a href="baqueano-ia.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano IA</a>
+            <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
+            <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
+            <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
+            <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
+            <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
+          </section>
+
+          <!-- 2. CULTURA -->
+          <section class="global-mega-column culture">
+            <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
+            <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
+            <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
+            <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
+            <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
+          </section>
+
+          <!-- 3. COMUNIDAD -->
+          <section class="global-mega-column community">
+            <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
+            <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
+            <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
+            <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
           </section>
 
           <!-- 4. CUENTA Y PLATAFORMA -->
           <section class="global-mega-column account">
-            <h2><i class="fa-solid fa-gear"></i> Plataforma</h2>
-            <a href="mi-viaje.html"><i class="fa-solid fa-route"></i> Mi Viaje</a>
-            <a href="perfil.html"><i class="fa-regular fa-user"></i> Mi Perfil</a>
-            <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Mis Reservas</a>
-            <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
+            <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
+            <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
+            <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
+            <a href="favoritos.html"><i class="fa-regular fa-heart"></i> Favoritos</a>
+            <a href="ayuda.html"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
+            <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
             <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
             <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
             <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-            <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Acceso restringido</small></a>
+            <a class="global-admin-link" href="admin.html" hidden aria-hidden="true"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
           </section>
         </div>
       </div>`;
@@ -141,114 +120,54 @@ function buildGlobalMegaNavigation() {
   if (actions) {
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
-      <div class="navbar-weather-pill" id="bqWeatherWidget" title="Clima actual en Nicaragua (clic para ver detalles)" aria-label="Clima en Nicaragua" role="button" tabindex="0">
-        <i class="fa-solid fa-cloud-sun" id="bqWeatherIcon"></i>
-        <span class="weather-temp" id="bqWeatherTemp">28°C</span>
-        <span class="weather-label" id="bqWeatherCity">Nicaragua</span>
-      </div>
-      <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="if(window.bqOpenSos)bqOpenSos();else if(window.openSosModal)openSosModal(event);" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
+      <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
       <a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html"><i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span></a>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>
       <button class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button>
     `;
   }
 
-  // ─── Control Interactivo del Mega Menú con Centrado Absoluto en Pantalla ───
+  // ─── Control Interactivo del Mega Menú ───
   const moreDropdown = document.getElementById('navDropdownGlobalMore');
   const moreBtn = document.getElementById('btnGlobalMoreTrigger');
   const megaMenu = document.getElementById('globalMegaMenu');
+  const desktopHoverQuery = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
   let closeTimer = null;
 
-  function syncMegaMenuPosition() {
-    if (!megaMenu) return;
-    if (window.innerWidth > 768) {
-      if (megaMenu.parentElement !== document.body) {
-        document.body.appendChild(megaMenu);
-      }
-      megaMenu.style.position = 'fixed';
-      megaMenu.style.top = '72px';
-      megaMenu.style.left = '50%';
-      megaMenu.style.right = 'auto';
-      megaMenu.style.transform = 'translateX(-50%)';
-      megaMenu.style.margin = '0 auto';
-      megaMenu.style.zIndex = '100050';
-      megaMenu.style.width = 'min(1060px, calc(100vw - 32px))';
-    } else {
-      if (moreDropdown && megaMenu.parentElement !== moreDropdown) {
-        moreDropdown.appendChild(megaMenu);
-      }
-      megaMenu.style.position = '';
-      megaMenu.style.top = '';
-      megaMenu.style.left = '';
-      megaMenu.style.right = '';
-      megaMenu.style.transform = '';
-      megaMenu.style.margin = '';
-      megaMenu.style.zIndex = '';
-      megaMenu.style.width = '';
-    }
-  }
-
-  function openMegaMenu() {
-    clearTimeout(closeTimer);
-    syncMegaMenuPosition();
-    if (moreDropdown) moreDropdown.classList.add('is-open');
-    if (megaMenu) {
-      megaMenu.classList.add('is-open');
-      megaMenu.style.display = 'grid';
-    }
-    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'true');
-  }
-
-  function closeMegaMenu() {
-    if (moreDropdown) moreDropdown.classList.remove('is-open');
-    if (megaMenu) {
-      megaMenu.classList.remove('is-open');
-      if (window.innerWidth > 768) megaMenu.style.display = 'none';
-    }
-    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  if (moreBtn && megaMenu) {
-    syncMegaMenuPosition();
-    window.addEventListener('resize', syncMegaMenuPosition);
-
+  if (moreDropdown && moreBtn) {
     moreBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (megaMenu.classList.contains('is-open')) {
-        closeMegaMenu();
-      } else {
-        openMegaMenu();
-      }
+      const open = moreDropdown.classList.toggle('is-open');
+      moreBtn.setAttribute('aria-expanded', String(open));
     });
 
-    if (moreDropdown) {
-      moreDropdown.addEventListener('mouseenter', () => {
-        if (window.innerWidth <= 768) return;
-        openMegaMenu();
-      });
-      moreDropdown.addEventListener('mouseleave', () => {
-        if (window.innerWidth <= 768) return;
-        closeTimer = setTimeout(closeMegaMenu, 260);
-      });
-    }
-
-    megaMenu.addEventListener('mouseenter', () => {
-      if (window.innerWidth <= 768) return;
+    moreDropdown.addEventListener('mouseenter', () => {
+      if (!desktopHoverQuery.matches) return;
       clearTimeout(closeTimer);
+      moreDropdown.classList.add('is-open');
+      moreBtn.setAttribute('aria-expanded', 'true');
     });
 
-    megaMenu.addEventListener('mouseleave', () => {
-      if (window.innerWidth <= 768) return;
-      closeTimer = setTimeout(closeMegaMenu, 260);
+    moreDropdown.addEventListener('mouseleave', () => {
+      if (!desktopHoverQuery.matches) return;
+      closeTimer = setTimeout(() => {
+        moreDropdown.classList.remove('is-open');
+        moreBtn.setAttribute('aria-expanded', 'false');
+      }, 260);
     });
 
     document.addEventListener('click', (e) => {
-      if (megaMenu.contains(e.target) || (moreDropdown && moreDropdown.contains(e.target))) return;
-      closeMegaMenu();
+      if (!moreDropdown.contains(e.target)) {
+        moreDropdown.classList.remove('is-open');
+        moreBtn.setAttribute('aria-expanded', 'false');
+      }
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMegaMenu();
+      if (e.key === 'Escape') {
+        moreDropdown.classList.remove('is-open');
+        moreBtn.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -262,239 +181,6 @@ function buildGlobalMegaNavigation() {
       mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
     });
   }
-
-  // ─── Inicializar Buscador Inteligente del Navbar ───
-  initNavbarSearch();
-}
-
-// ============================================================================
-// 🧭 BUSCADOR INTELIGENTE DE NICARAGUA — NAVBAR (initNavbarSearch)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer al usuario un campo de texto real en el navbar donde pueda escribir
-//   cualquier término (destino, categoría, módulo, actividad) y ser redirigido
-//   inteligentemente al módulo correcto del ecosistema Baqueano Nicaragua.
-// - Conectar con BaqueanoSmartSearch para autocompletado en tiempo real.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Input expansible: colapsa en reposo (ancho mínimo con ícono visible), se expande
-//   en focus con transición suave. Panel de sugerencias fijado al viewport (fixed).
-// - Usa window.BaqueanoSmartSearch (smart-search.js) con retry para esperar su carga.
-// - Enter / botón limpiar / Escape tienen manejo defensivo completo.
-//
-// 📦 3. QUÉ (WHAT / ENTREGABLES):
-// - initNavbarSearch(): registra todos los event listeners del buscador del navbar.
-// ============================================================================
-function initNavbarSearch() {
-  const input = document.getElementById('navbarSearchInput');
-  const clearBtn = document.getElementById('navbarSearchClear');
-  const wrapper = document.getElementById('navbarSearchWrapper');
-  if (!input || !wrapper) return;
-
-  let suggestPanel = null;
-  let searchReady = false;
-  let retryCount = 0;
-
-  // Esperar a que BaqueanoSmartSearch esté disponible (max ~3s)
-  const waitForSearch = () => {
-    if (window.BaqueanoSmartSearch) {
-      searchReady = true;
-      return;
-    }
-    if (retryCount < 12) {
-      retryCount++;
-      setTimeout(waitForSearch, 250);
-    }
-  };
-  waitForSearch();
-
-  // Crear panel de sugerencias fijado (fixed) al viewport
-  function getOrCreatePanel() {
-    if (!suggestPanel) {
-      suggestPanel = document.createElement('div');
-      suggestPanel.id = 'navbarSuggestPanel';
-      suggestPanel.setAttribute('role', 'listbox');
-      suggestPanel.setAttribute('aria-label', 'Sugerencias de búsqueda');
-      suggestPanel.style.cssText = [
-        'position:fixed',
-        'background:rgba(7,28,44,0.97)',
-        'backdrop-filter:blur(24px)',
-        '-webkit-backdrop-filter:blur(24px)',
-        'border:1px solid rgba(244,230,193,0.20)',
-        'border-radius:16px',
-        'box-shadow:0 20px 60px rgba(0,0,0,0.55),0 0 20px rgba(22,93,111,0.2)',
-        'z-index:200000',
-        'overflow:hidden',
-        'display:none',
-        'max-height:360px',
-        'overflow-y:auto',
-        'min-width:280px'
-      ].join(';');
-      document.body.appendChild(suggestPanel);
-    }
-    return suggestPanel;
-  }
-
-  function positionPanel() {
-    const rect = wrapper.getBoundingClientRect();
-    const panel = getOrCreatePanel();
-    panel.style.top = (rect.bottom + 8) + 'px';
-    panel.style.left = rect.left + 'px';
-    panel.style.width = Math.max(rect.width, 320) + 'px';
-  }
-
-  function renderSuggestions(q) {
-    const panel = getOrCreatePanel();
-    positionPanel();
-
-    const SUGGESTIONS_DB = [
-      { label: '🏖️ Playas del Pacífico',   route: 'destinos.html?cat=playas' },
-      { label: '🌋 Volcán Cerro Negro',     route: 'destinos.html?id=cerro_negro' },
-      { label: '🏝️ Isla de Ometepe',        route: 'destinos.html?id=ometepe' },
-      { label: '🏛️ Granada Colonial',       route: 'destinos.html?id=granada' },
-      { label: '🤿 San Juan del Sur',       route: 'destinos.html?id=sjds' },
-      { label: '🌊 Cañón de Somoto',        route: 'destinos.html?id=somoto' },
-      { label: '🎭 Cultura Nicaragüense',   route: 'destinos.html?cat=cultura' },
-      { label: '🍽️ Gastronomía Típica',    route: 'gastronomia.html' },
-      { label: '🎶 Música Folclórica',      route: 'musica.html' },
-      { label: '🌿 Reservas Naturales',     route: 'destinos.html?cat=naturaleza' },
-      { label: '🗺️ Mapa Interactivo',       route: 'mapa.html' },
-      { label: '✨ Planificar con IA',      route: 'baqueano-ia.html' },
-      { label: '🐦 Laguna de Apoyo',        route: 'destinos.html?id=apoyo' },
-      { label: '🏡 Reserva Miraflor',       route: 'destinos.html?id=miraflor' },
-      { label: '🌺 Volcán Masaya',          route: 'destinos.html?id=masaya' },
-      { label: '🚣 Río San Juan',           route: 'destinos.html?id=riosanjuan' },
-      { label: '🏄 Surf en Nicaragua',      route: 'destinos.html?cat=playas' },
-      { label: '🏨 Hospedajes y Lodges',    route: 'destinos.html?cat=hospedaje' },
-      { label: '🤝 Aliados Comunitarios',   route: 'aliados.html' },
-      { label: '🧳 Mi Viaje',              route: 'mi-viaje.html' },
-    ];
-
-    const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const qn = norm(q);
-
-    let matches;
-    if (qn.length >= 2) {
-      matches = SUGGESTIONS_DB.filter(s => norm(s.label).includes(qn)).slice(0, 6);
-    } else {
-      matches = SUGGESTIONS_DB.slice(0, 6);
-    }
-
-    if (!matches.length) {
-      matches = [{ label: `🔍 Buscar "${q}" en Baqueano`, route: 'destinos.html?q=' + encodeURIComponent(q) }];
-    }
-
-    panel.innerHTML = matches.map((s, i) => `
-      <button
-        type="button"
-        role="option"
-        data-route="${s.route}"
-        style="
-          display:flex;align-items:center;gap:11px;width:100%;text-align:left;
-          padding:11px 16px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.055);
-          color:rgba(244,230,193,0.88);font-family:Inter,sans-serif;font-size:0.875rem;font-weight:500;
-          cursor:pointer;transition:background 0.15s;
-        "
-        onmouseenter="this.style.background='rgba(22,93,111,0.25)';this.style.color='#fff';"
-        onmouseleave="this.style.background='transparent';this.style.color='rgba(244,230,193,0.88)';"
-        tabindex="0"
-      >${s.label}</button>`
-    ).join('');
-
-    panel.style.display = 'block';
-
-    panel.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        window.location.href = btn.dataset.route;
-      });
-    });
-  }
-
-  function hidePanel() {
-    if (suggestPanel) suggestPanel.style.display = 'none';
-  }
-
-  function doSearch() {
-    const q = input.value.trim();
-    if (!q) return;
-    if (searchReady && window.BaqueanoSmartSearch) {
-      window.BaqueanoSmartSearch.search(q);
-    } else {
-      window.location.href = 'destinos.html?q=' + encodeURIComponent(q);
-    }
-  }
-
-  // ─── Eventos ───
-  input.addEventListener('focus', () => {
-    wrapper.classList.add('is-focused');
-    renderSuggestions(input.value.trim());
-  });
-
-  input.addEventListener('input', () => {
-    const q = input.value.trim();
-    if (clearBtn) clearBtn.style.display = q ? 'inline-flex' : 'none';
-    renderSuggestions(q);
-    positionPanel();
-  });
-
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      doSearch();
-      hidePanel();
-      input.blur();
-    }
-    if (e.key === 'Escape') {
-      hidePanel();
-      input.blur();
-      wrapper.classList.remove('is-focused');
-    }
-    // Flechas para navegar sugerencias
-    if (suggestPanel && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
-      e.preventDefault();
-      const btns = [...suggestPanel.querySelectorAll('button')];
-      const curr = document.activeElement;
-      const idx = btns.indexOf(curr);
-      if (e.key === 'ArrowDown') (btns[idx + 1] || btns[0])?.focus();
-      else (btns[idx - 1] || btns[btns.length - 1])?.focus();
-    }
-  });
-
-  input.addEventListener('blur', () => {
-    // Retraso para permitir click en sugerencia
-    setTimeout(() => {
-      hidePanel();
-      wrapper.classList.remove('is-focused');
-    }, 180);
-  });
-
-  if (clearBtn) {
-    clearBtn.style.display = 'none';
-    clearBtn.addEventListener('click', () => {
-      input.value = '';
-      clearBtn.style.display = 'none';
-      hidePanel();
-      input.focus();
-    });
-  }
-
-  // Reposicionar panel al redimensionar/scroll
-  window.addEventListener('resize', () => {
-    if (suggestPanel && suggestPanel.style.display !== 'none') positionPanel();
-  }, { passive: true });
-  window.addEventListener('scroll', () => {
-    if (suggestPanel && suggestPanel.style.display !== 'none') positionPanel();
-  }, { passive: true });
-
-  // Cerrar al hacer clic fuera
-  document.addEventListener('click', (e) => {
-    if (wrapper && !wrapper.contains(e.target) && suggestPanel && !suggestPanel.contains(e.target)) {
-      hidePanel();
-      wrapper.classList.remove('is-focused');
-    }
-  });
 }
 
 // ============================================================================
@@ -1744,7 +1430,6 @@ function initializeNavigationModules() {
   initDynamicFooter();
   initFooterBizRegister();
   initDropdownMiPais();
-  initBaqueanoWeather();
   loadBaqueanoDigital();
   ensureAccessibleControlNames();
 }
@@ -1774,169 +1459,4 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeNavigationModules, { once: true });
 } else {
   initializeNavigationModules();
-}
-
-// ============================================================================
-// 🧭 BAQUEANO — CLIMA DE NICARAGUA EN VIVO (NAVBAR WIDGET)
-// 🎯 POR QUÉ:
-// - Los viajeros y ecoturistas necesitan conocer el clima tropical en tiempo real
-//   para planificar sus rutas por volcanes, lagos, selvas y playas nicaragüenses.
-// ⚙️ CÓMO:
-// - Consulta asíncrona a la API libre Open-Meteo (Managua: 12.1364, -86.2514),
-//   con cache en sessionStorage (15 minutos) y fallback visual instantáneo (28°C).
-// 📦 QUÉ:
-// - Widget interactivo en la barra de navegación con ventana emergente de clima
-//   territorial (Managua, Ometepe, San Juan del Sur, Matagalpa y Corn Island).
-// ============================================================================
-function initBaqueanoWeather() {
-  const widget = document.getElementById('bqWeatherWidget');
-  if (!widget) return;
-
-  const tempEl = document.getElementById('bqWeatherTemp');
-  const iconEl = document.getElementById('bqWeatherIcon');
-  const cityEl = document.getElementById('bqWeatherCity');
-
-  function getWeatherMeta(code) {
-    if (code === 0) return { icon: 'fa-sun', color: '#F65E01', text: 'Despejado' };
-    if ([1, 2].includes(code)) return { icon: 'fa-cloud-sun', color: '#F65E01', text: 'Parcial' };
-    if (code === 3) return { icon: 'fa-cloud', color: '#94A3B8', text: 'Nublado' };
-    if ([45, 48].includes(code)) return { icon: 'fa-smog', color: '#CBD5E1', text: 'Neblina' };
-    if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return { icon: 'fa-cloud-showers-heavy', color: '#38BDF8', text: 'Lluvia' };
-    if ([95, 96, 99].includes(code)) return { icon: 'fa-bolt', color: '#FBBF24', text: 'Tormenta' };
-    return { icon: 'fa-cloud-sun', color: '#F65E01', text: 'Tropical' };
-  }
-
-  function applyWeather(temp, code) {
-    const meta = getWeatherMeta(code);
-    if (tempEl) tempEl.textContent = `${temp}°C`;
-    if (iconEl) {
-      iconEl.className = `fa-solid ${meta.icon}`;
-      iconEl.style.color = meta.color;
-    }
-    if (cityEl) cityEl.textContent = 'Nicaragua';
-    if (widget) widget.setAttribute('title', `Clima actual en Nicaragua: ${temp}°C (${meta.text}). Clic para ver destinos.`);
-  }
-
-  // Comprobar cache local para velocidad instantánea
-  try {
-    const cached = sessionStorage.getItem('bq_weather_cache');
-    if (cached) {
-      const data = JSON.parse(cached);
-      if (Date.now() - data.timestamp < 15 * 60 * 1000) {
-        applyWeather(data.temp, data.code);
-      }
-    }
-  } catch (_) {}
-
-  // Consulta API meteorológica
-  try {
-    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    const timeoutId = controller ? setTimeout(() => controller.abort(), 3500) : null;
-
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=12.1364&longitude=-86.2514&current=temperature_2m,weather_code&timezone=America%2FManagua', {
-      signal: controller ? controller.signal : undefined
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (timeoutId) clearTimeout(timeoutId);
-        if (res && res.current && typeof res.current.temperature_2m === 'number') {
-          const temp = Math.round(res.current.temperature_2m);
-          const code = res.current.weather_code || 2;
-          applyWeather(temp, code);
-          try {
-            sessionStorage.setItem('bq_weather_cache', JSON.stringify({ temp, code, timestamp: Date.now() }));
-          } catch (_) {}
-        }
-      })
-      .catch(() => {
-        // Fallback robusto para clima promedio tropical en Nicaragua
-        applyWeather(28, 2);
-      });
-  } catch (_) {
-    applyWeather(28, 2);
-  }
-
-  // Interacción al hacer clic o presionar Enter
-  widget.addEventListener('click', (e) => {
-    e.stopPropagation();
-    openBaqueanoWeatherModal();
-  });
-  widget.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openBaqueanoWeatherModal();
-    }
-  });
-}
-
-function openBaqueanoWeatherModal() {
-  let modal = document.getElementById('bqWeatherModal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'bqWeatherModal';
-    modal.className = 'bq-weather-modal-backdrop';
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-label', 'Pronóstico del tiempo en Nicaragua');
-    modal.innerHTML = `
-      <div class="bq-weather-card">
-        <button class="bq-weather-close" aria-label="Cerrar modal">&times;</button>
-        <div class="bq-weather-header">
-          <i class="fa-solid fa-cloud-sun weather-header-icon"></i>
-          <div>
-            <h3>Clima en Nicaragua</h3>
-            <p>Monitoreo en tiempo real para planificar tus rutas y aventuras</p>
-          </div>
-        </div>
-        <div class="bq-weather-grid">
-          <div class="bq-weather-item">
-            <span class="city"><i class="fa-solid fa-location-dot"></i> Managua</span>
-            <span class="condition">Cálido tropical</span>
-            <span class="temp">29°C</span>
-          </div>
-          <div class="bq-weather-item">
-            <span class="city"><i class="fa-solid fa-volcano"></i> Isla de Ometepe</span>
-            <span class="condition">Brisa de lago</span>
-            <span class="temp">28°C</span>
-          </div>
-          <div class="bq-weather-item">
-            <span class="city"><i class="fa-solid fa-umbrella-beach"></i> San Juan del Sur</span>
-            <span class="condition">Costero soleado</span>
-            <span class="temp">28°C</span>
-          </div>
-          <div class="bq-weather-item">
-            <span class="city"><i class="fa-solid fa-mountain"></i> Matagalpa (Norte)</span>
-            <span class="condition">Fresco de montaña</span>
-            <span class="temp">22°C</span>
-          </div>
-          <div class="bq-weather-item">
-            <span class="city"><i class="fa-solid fa-water"></i> Corn Island (Caribe)</span>
-            <span class="condition">Brisa marina</span>
-            <span class="temp">27°C</span>
-          </div>
-          <div class="bq-weather-item">
-            <span class="city"><i class="fa-solid fa-sun"></i> León</span>
-            <span class="condition">Soleado y cálido</span>
-            <span class="temp">31°C</span>
-          </div>
-        </div>
-        <div class="bq-weather-footer">
-          <span>🌿 Datos meteorológicos optimizados para turismo responsable en Nicaragua.</span>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-
-    modal.querySelector('.bq-weather-close').addEventListener('click', () => {
-      modal.classList.remove('is-open');
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('is-open');
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-        modal.classList.remove('is-open');
-      }
-    });
-  }
-  modal.classList.add('is-open');
 }

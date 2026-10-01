@@ -211,6 +211,18 @@
       ? user.name.trim().split(/\s+/)[0]
       : (isAuthenticated ? 'Explorador' : 'Mi Cuenta');
 
+    // 🎯 POR QUÉ: ningún acceso operativo debe mostrarse antes de validar una sesión administrativa.
+    // ⚙️ CÓMO: todos los enlaces a admin nacen ocultos y se habilitan únicamente
+    //    cuando el correo autenticado pertenece a la lista operativa autorizada.
+    // 📦 QUÉ: control uniforme para mega menú, navegación móvil y footer.
+    document.querySelectorAll('a[href="admin.html"], a[href="/admin.html"]').forEach((adminLink) => {
+      adminLink.hidden = !navMeta.isPrivileged;
+      adminLink.setAttribute('aria-hidden', navMeta.isPrivileged ? 'false' : 'true');
+      adminLink.style.display = navMeta.isPrivileged ? '' : 'none';
+      if (navMeta.isPrivileged) adminLink.removeAttribute('tabindex');
+      else adminLink.setAttribute('tabindex', '-1');
+    });
+
     const navLinksMenu = document.getElementById('navLinksMenu');
     if (navLinksMenu) {
       // 1. GARANTIZAR QUE EL BOTÓN DE "PERFIL" ESTÉ SIEMPRE PRESENTE EN EL MENÚ (NUNCA SE ELIMINA)
@@ -817,6 +829,23 @@
   // ==========================================================================
   // Asignar a window incondicionalmente para asegurar que nunca sea undefined
   window.BaqueanoSession = BaqueanoSession;
+
+  // 🎯 POR QUÉ: la navegación global puede reconstruirse después de cargar la sesión.
+  // ⚙️ CÓMO: observa únicamente nodos nuevos y vuelve a aplicar el control de acceso.
+  // 📦 QUÉ: evita que OPS aparezca momentáneamente por una actualización tardía del menú.
+  let sessionNavRefreshQueued = false;
+  const sessionNavObserver = new MutationObserver((mutations) => {
+    const addedNavigation = mutations.some((mutation) => Array.from(mutation.addedNodes).some((node) =>
+      node.nodeType === 1 && (node.matches?.('nav, footer, a[href="admin.html"]') || node.querySelector?.('a[href="admin.html"]'))
+    ));
+    if (!addedNavigation || sessionNavRefreshQueued) return;
+    sessionNavRefreshQueued = true;
+    window.requestAnimationFrame(() => {
+      sessionNavRefreshQueued = false;
+      updateNavbar();
+    });
+  });
+  sessionNavObserver.observe(document.documentElement, { childList: true, subtree: true });
 
   // Intentar suscribir al observador de Firebase Auth de forma defensiva
   try {

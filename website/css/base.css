@@ -1,0 +1,7 @@
+/**
+ * BAQUEANO — Base de compatibilidad
+ * POR QUÉ: garantizar una base legible y adaptable en documentos heredados.
+ * CÓMO: normaliza el modelo de caja y elementos multimedia sin sustituir estilos.
+ * QUÉ: reglas mínimas para documento, enlaces, imágenes y controles de formulario.
+ */
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font-body);color:var(--night);background:#F8FAFC}img,video,svg{max-width:100%;height:auto}button,input,select,textarea{font:inherit}a{color:inherit}button{touch-action:manipulation}

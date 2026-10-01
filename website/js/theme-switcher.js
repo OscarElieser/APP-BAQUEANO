@@ -1297,6 +1297,12 @@
    */
   function init() {
     ensureStylesLoaded();
+    // POR QUÉ: la etapa visual actual requiere una superficie clara coherente
+    // en todas las páginas, aun cuando el navegador conserve otra preferencia.
+    // CÓMO: aplicamos el preset blanco al iniciar sin escribir almacenamiento.
+    // QUÉ: fondo blanco inmediato y tipografía oscura con contraste accesible.
+    activeSiteBg = 'blanco';
+    activeCustomBgHex = null;
     applySiteBackground(activeSiteBg, activeCustomBgHex, false);
     injectNavbarButton();
     injectFloatingTrigger();

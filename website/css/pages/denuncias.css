@@ -218,3 +218,23 @@ html body .denuncias-inline-014 {
   background: #10B981 !important;
   box-shadow: 0 0 6px #10B981 !important;
 }
+
+/*
+ * 🎯 POR QUÉ: asegurar contraste legible y continuidad con la identidad clara del sitio.
+ * ⚙️ CÓMO: sustituye superficies oscuras por tarjetas blancas, bordes suaves y acentos oficiales.
+ * 📦 QUÉ: hero, formulario, campos y líneas de atención adaptables y claramente jerarquizados.
+ */
+html body .report-hero-section { padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5rem); background: radial-gradient(circle at 8% 8%, rgba(244, 230, 193, 0.72), transparent 32%), radial-gradient(circle at 92% 18%, rgba(22, 93, 111, 0.12), transparent 30%), #FFFFFF; border-bottom: 1px solid #DDE7EA; }
+html body .report-tag-badge { color: #165D6F; background: #EDF6F7; border-color: rgba(22, 93, 111, 0.24); }
+html body .denuncias-inline-001, html body .denuncias-inline-003, html body .denuncias-inline-007 { color: #0F172A !important; }
+html body .denuncias-inline-002, html body .denuncias-inline-008 { color: #52627A !important; }
+html body .report-card-wrap { background: rgba(255, 255, 255, 0.96); border: 1px solid #D8E3E7; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.10); backdrop-filter: blur(18px); }
+html body .report-form-label { color: #334155; }
+html body .report-input, html body .report-select, html body .report-textarea { background: #F8FAFC; border-color: #CBD5E1; color: #0F172A; }
+html body .report-input::placeholder, html body .report-textarea::placeholder { color: #718096; }
+html body .report-input:focus, html body .report-select:focus, html body .report-textarea:focus { background: #FFFFFF; border-color: #165D6F; box-shadow: 0 0 0 4px rgba(22, 93, 111, 0.13); }
+html body .report-submit-btn { background: linear-gradient(135deg, #165D6F, #0F4B5A); border-color: #165D6F; box-shadow: 0 10px 24px rgba(22, 93, 111, 0.25); }
+html body .report-submit-btn:hover { background: linear-gradient(135deg, #F65E01, #D94F00); box-shadow: 0 12px 28px rgba(246, 94, 1, 0.28); }
+html body .hotline-card { background: #FFFFFF; border-color: #D8E3E7; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07); }
+html body .hotline-icon-box { background: #EDF6F7; border-color: rgba(22, 93, 111, 0.2); color: #165D6F; }
+@media (max-width: 640px) { html body .report-card-wrap { padding: 1.25rem; border-radius: 18px; } html body .hotlines-grid { grid-template-columns: 1fr; } }

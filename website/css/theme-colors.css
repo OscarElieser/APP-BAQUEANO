@@ -1,0 +1,157 @@
+/*
+============================================================================
+🧭 BAQUEANO NICARAGUA — MÓDULO DE COLORIMETRÍA & TEMAS (THEME-COLORS.CSS)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Centralizar el control absoluto de la paleta de colores del ecosistema web Baqueano.
+- Facilitar el ajuste instantáneo de fondos, tonos de marca, superficies, gradientes
+  y bordes desde un único punto en CSS sin dispersión en múltiples archivos.
+- Garantizar contraste óptimo WCAG AAA y armonía cromática inspirada en la geografía
+  volcánica, lagos, selvas y arena de Nicaragua.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Define tokens de diseño CSS3 en el selector `:root` mediante variables de alta especificidad.
+- Agrupa colores por roles funcionales: Marca Primaria, Acento Fuego, Fondo Editorial,
+  Superficies de Tarjetas, Estados Semánticos (Alerta, Éxito, Info) y Sombras Resplandecientes.
+- Provee selectores de modo de fondo (`[data-bg-mode="light"]`, `[data-site-bg="negro"]`,
+  `[data-site-bg="blanco"]`, `[data-site-bg="arena"]`) para personalización inmediata.
+
+📦 3. QUÉ (WHAT / TOKENS Y VARIABLES EXPUESTAS):
+- Paleta Oficial: `--petroleo-teal`, `--terracotta`, `--arena-pinolera`, `--night-space`.
+- Fondos y Superficies: `--bg-body`, `--bg-surface`, `--bg-card`, `--bg-card-hover`.
+- Textos: `--text-primary`, `--text-secondary`, `--text-muted`, `--text-accent`.
+- Bordes y Resplandor: `--border-subtle`, `--border-focus`, `--glow-terracotta`, `--glow-teal`.
+============================================================================
+*/
+
+:root {
+  /* ========================================================================
+     1. PALETA DE MARCA OFICIAL BAQUEANO (IDENTIDAD CENTRAL)
+     ======================================================================== */
+  --petroleo-teal: #165D6F;        /* Azul Petróleo / Verde Laguna */
+  --petroleo-light: #227B91;       /* Tono claro para hovers y bordes */
+  --petroleo-dark: #0C3843;        /* Tono profundo para sombras y contrastes */
+  --petroleo-glow: #2DD4BF;        /* Neón cian para estados activos */
+
+  --terracotta: #F65E01;           /* Naranja Fuego Volcánico / Arcilla */
+  --terracotta-light: #FF7B26;     /* Naranja cálido brillante */
+  --terracotta-dark: #B34400;      /* Terracota oscuro para presiones */
+  --terracotta-glow: #FFA05C;      /* Resplandor cálido */
+
+  --arena-pinolera: #F4E6C1;       /* Crema Arena Pinolera / Maíz */
+  --arena-light: #FCF6E8;          /* Crema claro casi blanco */
+  --arena-dark: #DFCE9F;           /* Arena dorada suave */
+
+  --night-space: #0F172A;          /* Noche Profunda / Basalto volcánico */
+  --night-darker: #080D1A;         /* Fondo ultranegro atmosférico */
+  --night-card: #132438;           /* Superficie de tarjeta nocturna */
+
+  --oro-noble: #D4AF37;            /* Dorado de patrimonios y estrellas */
+  --oro-light: #F4E6C1;
+
+  /* ========================================================================
+     2. ESTADOS SEMÁNTICOS Y FUNCIONALES
+     ======================================================================== */
+  --color-success: #10B981;        /* Verde esmeralda para verificación */
+  --color-success-bg: rgba(16, 185, 129, 0.14);
+  --color-warning: #F59E0B;        /* Ámbar para avisos y recomendaciones */
+  --color-warning-bg: rgba(245, 158, 11, 0.14);
+  --color-danger: #EF4444;         /* Rojo fuego para alertas y emergencias SOS */
+  --color-danger-bg: rgba(239, 68, 68, 0.16);
+  --color-info: #38BDF8;           /* Azul cielo para datos informativos */
+  --color-info-bg: rgba(56, 189, 248, 0.14);
+
+  /* ========================================================================
+     3. SUPERFICIES, FONDOS Y TARJETAS DEL SITIO WEB
+     ======================================================================== */
+  --bg-body: #080D1A;              /* Fondo general de la página */
+  --bg-surface: #0F172A;           /* Superficie de secciones */
+  --bg-surface-elevated: #132438;  /* Superficie elevada (paneles, modales) */
+  --bg-card: rgba(15, 23, 42, 0.78); /* Tarjetas con transparencia */
+  --bg-card-hover: rgba(22, 93, 111, 0.28);
+  --bg-input: rgba(15, 23, 42, 0.85);
+
+  /* ========================================================================
+     4. JERARQUÍA DE COLOR DE TEXTOS
+     ======================================================================== */
+  --text-primary: #FFFFFF;         /* Títulos principales y máxima nitidez */
+  --text-secondary: #E2E8F0;       /* Textos de cuerpo y descripciones */
+  --text-muted: #94A3B8;           /* Notas secundarias y metadatos */
+  --text-accent: #F65E01;          /* Enlaces y acentos dinámicos */
+  --text-cream: #F4E6C1;           /* Títulos destacados o subtítulos cálidos */
+
+  /* ========================================================================
+     5. BORDES Y SEPARADORES
+     ======================================================================== */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(244, 230, 193, 0.16);
+  --border-brand: rgba(22, 93, 111, 0.45);
+  --border-accent: rgba(246, 94, 1, 0.4);
+  --border-active: #F65E01;
+
+  /* ========================================================================
+     6. GRADIENTES CINEMATOGRÁFICOS DE MARCA
+     ======================================================================== */
+  --grad-sunset: linear-gradient(135deg, #F65E01 0%, #FF7B26 48%, #F4E6C1 100%);
+  --grad-volcano: linear-gradient(180deg, #0C3843 0%, #165D6F 50%, #0F172A 100%);
+  --grad-surface: linear-gradient(180deg, #132438 0%, #0F172A 100%);
+  --grad-glass: linear-gradient(135deg, rgba(34, 123, 145, 0.22) 0%, rgba(22, 93, 111, 0.08) 100%);
+  --grad-card-border: linear-gradient(135deg, rgba(246, 94, 1, 0.5) 0%, rgba(22, 93, 111, 0.4) 50%, rgba(244, 230, 193, 0.15) 100%);
+
+  /* ========================================================================
+     7. SOMBRAS Y RESPLANDORES LUMINOSOS
+     ======================================================================== */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6);
+  --glow-terracotta: 0 0 25px rgba(246, 94, 1, 0.4);
+  --glow-teal: 0 0 25px rgba(22, 93, 111, 0.45);
+  --glow-gold: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+/* ==========================================================================
+   8. MODOS Y ESQUEMAS ALTERNATIVOS DE COLOR DEL SITIO
+   ========================================================================== */
+
+/* MODO CLARO SOLAR */
+[data-bg-mode="light"],
+[data-site-bg="blanco"] {
+  --bg-body: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F1F5F9;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --bg-card-hover: rgba(22, 93, 111, 0.08);
+  --bg-input: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-medium: rgba(22, 93, 111, 0.18);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.14);
+}
+
+/* MODO NEGRO OLED */
+[data-site-bg="negro"] {
+  --bg-body: #000000;
+  --bg-surface: #05080F;
+  --bg-surface-elevated: #0B111D;
+  --bg-card: rgba(11, 17, 29, 0.9);
+  --bg-card-hover: rgba(22, 93, 111, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+}
+
+/* MODO CREMA ARENA PINOLERA */
+[data-site-bg="arena"] {
+  --bg-body: #FAF6ED;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F3EBD9;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(246, 94, 1, 0.08);
+  --text-primary: #1C1917;
+  --text-secondary: #44403C;
+  --text-muted: #78716C;
+  --border-subtle: rgba(120, 113, 108, 0.15);
+}

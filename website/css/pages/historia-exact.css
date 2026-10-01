@@ -284,7 +284,7 @@
 
 .hist-territories-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 18px;
   align-items: start;
 }
@@ -297,6 +297,7 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(11, 37, 58, 0.08);
+  min-width: 0;
 }
 
 .hist-dept-map-header {
@@ -332,6 +333,15 @@
   border-radius: 18px;
   padding: 18px;
   box-shadow: 0 8px 24px rgba(11, 37, 58, 0.06);
+  min-width: 0;
+}
+
+html[data-theme] .hist-dept-map-card .hist-dept-map-header h3 {
+  color: #FFFFFF !important;
+}
+
+html[data-theme] .hist-dept-map-card .hist-dept-map-header p {
+  color: #CBD5E1 !important;
 }
 
 .hist-explorer-top-highlight {
@@ -413,6 +423,187 @@
   height: 22px;
   border-radius: 4px;
   object-fit: cover;
+}
+
+/* ============================================================================
+   EXPLORADOR TERRITORIAL EN MOVIMIENTO
+   ============================================================================
+   POR QUÉ: Dar visibilidad continua a los 17 territorios sin obligar a usar
+   una lista vertical estrecha ni ocultar destinos bajo desplazamiento interno.
+   CÓMO: Carril horizontal, ficha sincronizada, controles táctiles y estados de
+   pausa con transiciones basadas en transformaciones aceleradas.
+   QUÉ: Recorrido circular accesible, adaptable y controlable por el visitante.
+   ============================================================================ */
+.hist-territory-heading {
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.hist-territory-kicker,
+.hist-highlight-eyebrow {
+  color: #F65E01;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hist-territory-heading h3 {
+  color: #0F172A;
+  font-family: var(--bq-font-heading);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 900;
+  margin: 4px 0;
+}
+
+.hist-territory-heading h3 i { color: #165D6F; }
+.hist-territory-heading p { color: #64748B; font-size: 0.76rem; margin: 0; }
+
+.hist-territory-directory-link {
+  align-items: center;
+  background: #E8F3F5;
+  border: 1px solid rgba(22, 93, 111, 0.18);
+  border-radius: 999px;
+  color: #165D6F;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-weight: 800;
+  gap: 6px;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.hist-explorer-top-highlight {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F0F8F8 100%);
+  border-color: rgba(22, 93, 111, 0.2);
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.1);
+  min-height: 130px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hist-territory-count {
+  background: #0F172A;
+  border-radius: 0 0 0 14px;
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  padding: 7px 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.hist-territory-count strong { color: #F65E01; font-size: 0.82rem; }
+.hist-highlight-img { height: 106px; width: 138px; }
+.hist-highlight-info { align-self: center; padding-right: 36px; }
+.hist-highlight-info h4 { font-size: 1.15rem; margin: 3px 0; }
+.hist-highlight-info p { font-size: 0.76rem; }
+.hist-btn-explore-dept { border-radius: 999px; padding: 7px 13px; }
+
+.hist-territory-carousel {
+  overflow: hidden;
+  padding: 4px 1px 10px;
+  position: relative;
+}
+
+.hist-depts-list-grid {
+  display: flex;
+  gap: 10px;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  scroll-behavior: smooth;
+  transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.hist-dept-pill {
+  align-items: flex-start;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 13px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  flex: 0 0 118px;
+  flex-direction: column;
+  font-size: 0.72rem;
+  gap: 7px;
+  min-height: 100px;
+  padding: 8px;
+  transform: translateZ(0);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.hist-dept-pill:hover,
+.hist-dept-pill:focus-visible,
+.hist-dept-pill.is-active {
+  background: #FFFFFF;
+  border-color: #F65E01;
+  box-shadow: 0 12px 28px rgba(246, 94, 1, 0.18);
+  transform: translateY(-3px);
+}
+
+.hist-dept-thumb { border-radius: 9px; height: 58px; width: 100%; }
+
+.hist-territory-controls {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.hist-territory-controls button {
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 999px;
+  color: #0F172A;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  gap: 7px;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 12px;
+}
+
+.hist-territory-controls button:hover,
+.hist-territory-controls button:focus-visible { border-color: #165D6F; color: #165D6F; }
+.hist-territory-pause { min-width: 96px; }
+
+.hist-territory-progress {
+  background: #E2E8F0;
+  border-radius: 999px;
+  flex: 1;
+  height: 4px;
+  overflow: hidden;
+}
+
+.hist-territory-progress span {
+  background: linear-gradient(90deg, #165D6F, #F65E01);
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.hist-territory-progress span.is-running { animation: hist-territory-progress 4.8s linear forwards; }
+@keyframes hist-territory-progress { to { transform: scaleX(1); } }
+
+@media (max-width: 640px) {
+  .hist-territory-heading { flex-direction: column; }
+  .hist-explorer-top-highlight { align-items: flex-start; min-height: 150px; }
+  .hist-highlight-img { height: 112px; width: 112px; }
+  .hist-highlight-info { padding-right: 0; }
+  .hist-territory-directory-link { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hist-depts-list-grid { transition: none; }
+  .hist-territory-progress span.is-running { animation: none; }
 }
 
 /* ============================================================================
@@ -821,6 +1012,8 @@
 @media (max-width: 1024px) {
   .hist-timeline-scroller { grid-template-columns: repeat(4, 1fr); }
   .hist-territories-grid { grid-template-columns: 1fr; }
+  .hist-dept-explorer-card { order: -1; }
+  .hist-dept-map-viewport { height: 330px; }
   .hist-peoples-row { grid-template-columns: repeat(3, 1fr); }
   .hist-characters-row { grid-template-columns: repeat(3, 1fr); }
   .hist-heritage-row { grid-template-columns: repeat(3, 1fr); }

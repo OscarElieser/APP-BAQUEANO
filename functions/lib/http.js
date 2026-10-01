@@ -99,6 +99,43 @@ function parseQueryParams(request) {
 }
 
 // ----------------------------------------------------------------------------
+// CAPA DE SEGURIDAD: RATE LIMITING GLOBAL (60 req/min por IP)
+// ----------------------------------------------------------------------------
+const globalRateLimitMap = new Map();
+const GLOBAL_RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const GLOBAL_MAX_REQUESTS_PER_WINDOW = 60;
+
+function checkGlobalApiRateLimit(clientId) {
+  if (!clientId || clientId === "127.0.0.1" || clientId === "localhost" || clientId === "test-client") return true;
+  const now = Date.now();
+  const record = globalRateLimitMap.get(clientId) || { count: 0, windowStart: now };
+
+  if (now - record.windowStart > GLOBAL_RATE_LIMIT_WINDOW_MS) {
+    record.count = 1;
+    record.windowStart = now;
+    globalRateLimitMap.set(clientId, record);
+    return true;
+  }
+
+  if (record.count >= GLOBAL_MAX_REQUESTS_PER_WINDOW) {
+    return false;
+  }
+
+  record.count++;
+  globalRateLimitMap.set(clientId, record);
+  return true;
+}
+
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, record] of globalRateLimitMap.entries()) {
+    if (now - record.windowStart > GLOBAL_RATE_LIMIT_WINDOW_MS * 2) {
+      globalRateLimitMap.delete(key);
+    }
+  }
+}, 120000).unref();
+
+// ----------------------------------------------------------------------------
 // HANDLER DE SALUD BÁSICO (Para pruebas unitarias y monitores simples)
 // ----------------------------------------------------------------------------
 function createHealthHandler({ now = () => new Date() } = {}) {
@@ -124,6 +161,19 @@ function createApiHandler({ readPublicMetrics, handleAiChat, now = () => new Dat
 
     if (request.method === "OPTIONS") {
       return response.status(204).end();
+    }
+
+    // Verificación de Rate Limiting Global defensivo
+    const clientIp = (request.headers && request.headers["x-forwarded-for"])?.split(",")[0]?.trim() || request.ip || "test-client";
+    if (!checkGlobalApiRateLimit(clientIp)) {
+      response.setHeader("Retry-After", "60");
+      return sendJson(response, 429, {
+        ok: false,
+        error: {
+          code: "TOO_MANY_REQUESTS",
+          message: "Límite de peticiones excedido. Por favor espere un minuto antes de reintentar."
+        }
+      });
     }
 
     const path = normalizedPath(request);

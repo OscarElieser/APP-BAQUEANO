@@ -90,6 +90,13 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://app-baqueano.web.app/cronicas.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- EXCLUIDAS EXPLÍCITAMENTE (NO añadir aquí):
        admin.html - Noindex por X-Robots-Tag
        Rutas de Cloud Functions /api/*

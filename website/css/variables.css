@@ -1,0 +1,7 @@
+/**
+ * BAQUEANO — Variables de compatibilidad
+ * POR QUÉ: sostener páginas legales heredadas sin solicitudes de estilos rotas.
+ * CÓMO: expone la paleta y medidas oficiales como propiedades CSS reutilizables.
+ * QUÉ: colores, tipografías, radios, sombras y ancho de contenido.
+ */
+:root{--primary:#165D6F;--accent:#F65E01;--cream:#F4E6C1;--night:#0F172A;--surface:#FFFFFF;--muted:#64748B;--font-body:'Inter',system-ui,sans-serif;--font-display:'Montserrat',sans-serif;--radius-sm:10px;--radius-md:16px;--radius-lg:24px;--shadow-deep:0 24px 70px rgba(15,23,42,.2);--content-width:1380px}

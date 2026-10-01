@@ -1021,3 +1021,92 @@ body.page-gastro-exact {
     grid-template-columns: 1fr;
   }
 }
+/*
+============================================================================
+BAQUEANO — CONTROL DEL MODAL SOS EN GASTRONOMÍA
+============================================================================
+POR QUÉ:
+- El contenido de emergencia pertenece a una ventana modal y nunca debe
+  presentarse como información ordinaria después del pie de página.
+
+CÓMO:
+- El fondo se mantiene fijo, transparente e inaccesible mientras está cerrado.
+- La clase is-open activa visibilidad, interacción y una transición breve.
+- La tarjeta conserva contraste, jerarquía y adaptación para pantallas pequeñas.
+
+QUÉ:
+- Estado cerrado seguro, estado abierto accesible y panel SOS responsivo.
+============================================================================
+*/
+.page-gastro-exact .exact-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, .78);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  transition: opacity .24s ease, visibility .24s ease;
+}
+
+.page-gastro-exact .exact-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.page-gastro-exact .exact-modal-window {
+  position: relative;
+  width: min(100%, 560px);
+  max-height: min(760px, calc(100vh - 40px));
+  overflow-y: auto;
+  padding: clamp(24px, 4vw, 36px);
+  background: #FFFFFF;
+  border: 1px solid rgba(22, 93, 111, .16);
+  border-radius: 24px;
+  color: #0F172A;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, .32);
+  transform: translateY(14px) scale(.98);
+  transition: transform .24s ease;
+}
+
+.page-gastro-exact .exact-modal-backdrop.is-open .exact-modal-window {
+  transform: translateY(0) scale(1);
+}
+
+.page-gastro-exact .exact-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: #F1F5F9;
+  border: 0;
+  border-radius: 50%;
+  color: #0F172A;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.page-gastro-exact .exact-modal-header h3 { margin: 0 42px 8px 0; color: #0F172A; }
+.page-gastro-exact .exact-modal-header p { color: #64748B; line-height: 1.6; }
+.page-gastro-exact .sos-gps-card { margin: 20px 0; padding: 18px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; }
+.page-gastro-exact .sos-gps-badge { color: #165D6F; font-weight: 800; }
+.page-gastro-exact .sos-gps-coords { margin: 8px 0; color: #0F172A; font-weight: 700; }
+.page-gastro-exact .sos-emergency-buttons { display: grid; gap: 10px; }
+.page-gastro-exact .btn-sos-call { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 10px 14px; border-radius: 12px; color: #FFFFFF; font-weight: 800; text-decoration: none; }
+.page-gastro-exact .btn-sos-call.police { background: #165D6F; }
+.page-gastro-exact .btn-sos-call.redcross { background: #DC2626; }
+.page-gastro-exact .btn-sos-call.fire { background: #F65E01; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-gastro-exact .exact-modal-backdrop,
+  .page-gastro-exact .exact-modal-window { transition: none; }
+}

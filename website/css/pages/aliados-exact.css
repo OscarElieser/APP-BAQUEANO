@@ -1124,6 +1124,79 @@ body.page-aliados-exact {
   }
 }
 
+/* ============================================================================
+   VENTANAS DE REGISTRO Y ASISTENCIA
+   ============================================================================
+   POR QUÉ: Los formularios deben permanecer fuera del flujo visual hasta que
+   el visitante solicite abrirlos, evitando contenido residual bajo el footer.
+   CÓMO: Capa fija con estado explícito, panel desplazable y bloqueo visual.
+   QUÉ: Modal de postulación y modal SOS adaptables y accesibles.
+   ============================================================================ */
+.exact-modal-backdrop {
+  align-items: center;
+  background: rgba(8, 24, 39, 0.72);
+  display: none;
+  inset: 0;
+  justify-content: center;
+  padding: 20px;
+  position: fixed;
+  z-index: 10020;
+}
+
+.exact-modal-backdrop.is-open {
+  display: flex;
+}
+
+.exact-modal-window {
+  background: #FFFFFF;
+  border: 1px solid rgba(22, 93, 111, 0.16);
+  border-radius: 22px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+  color: #0F172A;
+  max-height: min(88vh, 760px);
+  max-width: 720px;
+  overflow-y: auto;
+  padding: clamp(22px, 4vw, 36px);
+  position: relative;
+  width: min(100%, 720px);
+}
+
+.exact-modal-close {
+  align-items: center;
+  background: #F1F5F9;
+  border: 0;
+  border-radius: 50%;
+  color: #0F172A;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.4rem;
+  height: 40px;
+  justify-content: center;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 40px;
+}
+
+.exact-modal-form { display: grid; gap: 14px; margin-top: 20px; }
+.exact-form-row { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.exact-form-field { display: grid; gap: 6px; }
+.exact-form-field input,
+.exact-form-field select,
+.exact-form-field textarea {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  color: #0F172A;
+  font: inherit;
+  padding: 11px 12px;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .exact-form-row { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 480px) {
   .aliados-grid-exact {
     grid-template-columns: 1fr;

@@ -379,6 +379,30 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
   #mainNavbar .exact-container, #mainNavbar .nav-inner { height: 62px !important; padding: 0 14px !important; }
   #mainNavbar .exact-nav-menu.mobile-open,
   #mainNavbar .nav-links-menu.mobile-open { top: 62px !important; }
+
+  /*
+   * 🎯 POR QUÉ: En anchos móviles extremos, las acciones secundarias excedían
+   * el viewport y empujaban la hamburguesa fuera de pantalla.
+   * ⚙️ CÓMO: Se priorizan marca y navegación; búsqueda, idioma, sesión y SOS
+   * continúan disponibles dentro del menú desplegable global.
+   * 📦 QUÉ: Barra compacta, estable y sin desplazamiento horizontal hasta 320 px.
+   */
+  #mainNavbar .global-search,
+  #mainNavbar .navbar-search-btn,
+  #mainNavbar .sos-quick-btn,
+  #mainNavbar .navbar-sos-btn,
+  #mainNavbar .global-language,
+  #mainNavbar .navbar-lang-pill,
+  #mainNavbar .exact-nav-btn-login,
+  #mainNavbar .global-session,
+  #mainNavbar .navbar-login-btn { display: none !important; }
+
+  #mainNavbar .exact-nav-actions,
+  #mainNavbar .global-nav-actions {
+    margin-left: auto !important;
+    width: 36px !important;
+    min-width: 36px !important;
+  }
 }
 
 /* ============================================================================

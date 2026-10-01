@@ -165,8 +165,8 @@
             '<i class="fa-solid fa-map-location-dot"></i> Ver en mapa</button>' +
           '<button type="button" class="btn-day-save' + (d.saved ? ' saved' : '') + '" id="saveBtn-' + d.id + '" onclick="saveDay(' + d.id + ',this)">' +
             '<i class="fa-' + (d.saved ? 'solid' : 'regular') + ' fa-heart"></i> ' + (d.saved ? 'Guardado' : 'Guardar') + '</button>' +
-          '<button type="button" class="btn-day-edit" onclick="editDay(' + d.id + ')">' +
-            '<i class="fa-solid fa-pen-to-square"></i> Editar día</button>' +
+          '<button type="button" class="btn-day-edit" onclick="removeDay(' + d.id + ')">' +
+            '<i class="fa-solid fa-trash-can"></i> Eliminar día</button>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -222,6 +222,20 @@
       btn.classList.remove('saved');
       toast(day.location + ' eliminado de favoritos', 'info');
     }
+  };
+
+  window.removeDay = function(dayId) {
+    var day = null;
+    for (var i = 0; i < trip.days.length; i++) {
+      if (trip.days[i].id === dayId) { day = trip.days[i]; break; }
+    }
+    if (!day) return;
+    var accepted = window.confirm('¿Eliminar ' + day.badge + ' de este viaje? El resto del itinerario se conservará.');
+    if (!accepted) return;
+    trip.days = trip.days.filter(function(item) { return item.id !== dayId; });
+    persistTrip(trip);
+    renderItinerary();
+    toast(day.badge + ' eliminado del viaje.', 'info');
   };
 
   window.editDay = function(dayId) {
@@ -295,6 +309,9 @@
     var text = '🗺️ Mi ruta BAQUEANO Nicaragua:\n' +
       trip.days.map(function(d) { return '• ' + d.badge + ': ' + d.title; }).join('\n') +
       '\n\n🌿 Sin intermediarios · app-baqueano.web.app';
+    window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + window.location.href), '_blank', 'noopener,noreferrer');
+    toast('Abriendo WhatsApp para compartir la ruta', 'info');
+    return;
     if (navigator.share) {
       navigator.share({ title: trip.name, text: text, url: window.location.href })
         .then(function() { toast('Ruta compartida 🚀'); })
@@ -344,6 +361,10 @@
   };
 
   window.reserveAll = function() {
+    var summary = trip.days.map(function(d) { return d.badge + ': ' + d.title; }).join('\n');
+    window.open('https://wa.me/50588888888?text=' + encodeURIComponent('Hola, deseo coordinar las reservas de mi ruta BAQUEANO:\n' + summary), '_blank', 'noopener,noreferrer');
+    toast('Abriendo atención por WhatsApp', 'info');
+    return;
     toast('Redirigiendo a Red de Aliados BAQUEANO...', 'info');
     setTimeout(function() { window.location.href = 'aliados.html'; }, 850);
   };
@@ -354,11 +375,19 @@
   };
 
   window.contactRec = function(name) {
+    var ally = name || 'aliado';
+    window.open('https://wa.me/50588888888?text=' + encodeURIComponent('Hola, deseo contactar a ' + ally + ' desde BAQUEANO.'), '_blank', 'noopener,noreferrer');
+    toast('Abriendo contacto con ' + ally, 'info');
+    return;
     toast('Conectando con ' + (name || 'aliado') + '...', 'info');
     setTimeout(function() { window.location.href = 'nosotros.html#contacto'; }, 800);
   };
 
   window.reserveRec = function(name) {
+    var ally = name || 'aliado';
+    window.open('https://wa.me/50588888888?text=' + encodeURIComponent('Hola, deseo reservar ' + ally + ' desde BAQUEANO.'), '_blank', 'noopener,noreferrer');
+    toast('Abriendo reserva con ' + ally, 'info');
+    return;
     toast('Iniciando reserva con ' + (name || 'aliado') + ' ✅');
     setTimeout(function() { window.location.href = 'mi-negocio.html'; }, 900);
   };

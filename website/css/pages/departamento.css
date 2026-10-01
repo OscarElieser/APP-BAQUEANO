@@ -2385,3 +2385,144 @@ button.territory-pill-card span {
     gap: 1rem;
   }
 }
+
+/* ============================================================================
+   GUÍA TERRITORIAL — SUPERFICIE BLANCA
+   ============================================================================
+   POR QUÉ: La lectura extensa de los 17 territorios necesita una base luminosa,
+   clara y coherente con la portada actual del portal.
+   CÓMO: Sustituye superficies nocturnas por blanco y grises suaves, conserva
+   los acentos institucionales y mantiene contraste AA en textos y controles.
+   QUÉ: Tema claro para hero, fichas, logística, selector y contenido territorial.
+   ============================================================================ */
+body,
+body.page-departamento,
+.territory-unified-layout,
+.dept-main-content {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+.dept-hero-gradient {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.9) 48%, rgba(255, 255, 255, 0.28) 100%) !important;
+}
+
+.dept-title-big,
+.dept-short-desc,
+.dept-hero-content :is(p, strong) {
+  color: #0F172A !important;
+  text-shadow: none !important;
+}
+
+.dept-tagline { color: #F65E01 !important; }
+
+.dept-quick-nav-bar {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+.dept-pill-btn {
+  background: #F8FAFC !important;
+  border-color: #CBD5E1 !important;
+  color: #334155 !important;
+}
+
+.dept-pill-btn:hover { background: #FFF7ED !important; color: #C2410C !important; }
+.dept-pill-btn.active {
+  background: #165D6F !important;
+  border-color: #165D6F !important;
+  box-shadow: 0 8px 22px rgba(22, 93, 111, 0.22) !important;
+  color: #FFFFFF !important;
+}
+
+.dept-section-card,
+.manifesto-card-alta-gama,
+.scientific-mode-card,
+.territory-unified-layout .chinandega-logistics-card,
+.territory-unified-layout .territory-closing-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.09) !important;
+  color: #0F172A !important;
+}
+
+.dept-card-header h3,
+.manifesto-headline,
+.section-title-clean,
+.geo-pane-grid h4,
+.baqueano-highlight-quote h5,
+.t-step h5,
+button.territory-pill-card h5 {
+  color: #0F172A !important;
+}
+
+.dept-section-card :is(p, li),
+.manifesto-copy,
+.geo-pane-grid p,
+.geo-bullet-list li,
+.baqueano-highlight-quote p,
+.t-step p,
+.stat-desc,
+button.territory-pill-card span {
+  color: #475569 !important;
+}
+
+.dept-gastro-item,
+.dept-place-item,
+.dept-activity-li,
+.dept-logistic-box,
+.stat-box-alta-gama,
+.t-step,
+.geo-pane,
+button.territory-pill-card {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+.dept-gastro-item:hover,
+.dept-place-item:hover,
+.stat-box-alta-gama:hover,
+button.territory-pill-card:hover,
+button.territory-pill-card.active {
+  background: #FFF7ED !important;
+  border-color: #F65E01 !important;
+  box-shadow: 0 10px 26px rgba(246, 94, 1, 0.12) !important;
+}
+
+.dept-item-title,
+.dept-activity-li,
+.stat-label { color: #0F172A !important; }
+.dept-item-desc,
+.dept-logistic-box p { color: #475569 !important; }
+.dept-logistic-box h5,
+.card-subtitle { color: #165D6F !important; }
+
+.baqueano-highlight-quote {
+  background: #F0F9FA !important;
+  color: #0F172A !important;
+}
+
+.geo-tab-btn {
+  background: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #334155 !important;
+}
+
+.geo-tab-btn:hover,
+.geo-tab-btn.active {
+  background: #165D6F !important;
+  border-color: #165D6F !important;
+  color: #FFFFFF !important;
+}
+
+.madriz-map-heading h2 { color: #0F172A !important; }
+.madriz-map-heading p { color: #475569 !important; }
+.baqueano-map-wrapper { box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16) !important; }
+
+@media (max-width: 760px) {
+  .dept-hero-gradient {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.97) 72%) !important;
+  }
+}

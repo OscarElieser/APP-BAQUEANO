@@ -29,6 +29,7 @@
 ============================================================================
 */
 
+@import url('css/theme-master.css');
 @import url('css/responsive-ecosystem.css');
 @import url('css/mobile-first-core.css');
 
@@ -9813,3 +9814,74 @@ img {
   align-items: center !important;
   gap: 0.35rem !important;
 }
+
+/* ============================================================================
+   BAQUEANO — SUPERFICIE CLARA GLOBAL
+   ============================================================================
+   POR QUÉ: Mantener una base visual luminosa y uniforme mientras cada sección
+   conserva sus acentos institucionales y su jerarquía editorial.
+   CÓMO: Fija el lienzo raíz en blanco, neutraliza fondos heredados del tema
+   oscuro y conserva las tarjetas y bloques con identidad propia.
+   QUÉ: Fondo blanco adaptable para todas las páginas públicas del portal.
+   ============================================================================ */
+:root {
+  color-scheme: light;
+  --baqueano-page-background: #ffffff;
+  --baqueano-page-foreground: #0f172a;
+}
+
+html,
+body,
+body[data-theme="dark"],
+html[data-theme="dark"] body {
+  background-color: var(--baqueano-page-background) !important;
+  color: var(--baqueano-page-foreground);
+}
+
+body::before,
+body::after {
+  background-color: transparent;
+}
+/*
+============================================================================
+BAQUEANO — LÍMITE FINAL DEL FOOTER Y MODALES GLOBALES
+============================================================================
+POR QUÉ:
+- Los paneles auxiliares no deben convertirse en contenido visible después del
+  footer; el pie institucional debe cerrar visualmente cada página.
+
+CÓMO:
+- Todo modal heredado permanece fuera del flujo cuando está cerrado.
+- Solo los estados explícitos de apertura crean una capa fija sobre la página.
+- La regla es global para proteger páginas antiguas con estilos incompletos.
+
+QUÉ:
+- Ocultamiento seguro del SOS cerrado y presentación accesible al abrirlo.
+============================================================================
+*/
+.exact-modal-backdrop[aria-hidden="true"],
+.exact-modal-backdrop:not(.is-open):not(.active):not(.open) {
+  display: none !important;
+}
+
+.exact-modal-backdrop.is-open,
+.exact-modal-backdrop.active,
+.exact-modal-backdrop.open {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+  overflow-y: auto !important;
+  background: rgba(15, 23, 42, .78) !important;
+  backdrop-filter: blur(10px);
+}
+/*
+ * 🎯 POR QUÉ: mantener la navegación superior enfocada y sin búsqueda redundante.
+ * ⚙️ CÓMO: oculta defensivamente variantes heredadas antes de que el inyector las retire.
+ * 📦 QUÉ: barra global sin botón de lupa en escritorio y móvil.
+ */
+.global-search,
+.navbar-search-btn { display: none !important; }

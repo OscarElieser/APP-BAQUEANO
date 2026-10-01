@@ -1,101 +1,124 @@
 <!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO ECOSYSTEM — GASTRONOMÍA ANCESTRAL DEL MAÍZ (gastronomia.html)
+============================================================================
+
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Enaltecer la soberanía alimentaria popular y la tradición culinaria milenaria
+  de Nicaragua, fundada en el maíz criollo ("Hijos del Maíz").
+- Conectar al explorador con las cocineras tradicionales, comedores populares
+  y mercados locales para generar derrama económica directa a las familias campesinas.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Alineación 1:1 con la interfaz de referencia oficial (Imagen 4).
+- Barra horizontal de 8 categorías gastronómicas con filtro instantáneo.
+- Fichas culinarias enriquecidas con modal de historia y recomendación de degustación.
+- Mapa interactivo Leaflet de los sabores y comedores por territorio nacional.
+- Recomendador gastronómico interactivo conectado a Baqueano Digital.
+
+📦 3. QUÉ (WHAT / CONTENIDOS & FUNCIONALIDAD):
+- Hero editorial "Gastronomía Ancestral de los Hijos del Maíz".
+- 8 Pastillas de navegación culinaria.
+- 8 Platillos insignia de la patria.
+- Mapa gastronómico interactivo con filtros de precio y tipo de comida.
+- Catálogo de 5 Bebidas autóctonas y 6 Dulces tradicionales.
+- Manifiesto cultural "Somos hombres y mujeres de maíz".
+- 4 Comedores tradicionales verificados.
+- Asistente de rutas culinarias con Baqüi.
+============================================================================
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Gastronomía Ancestral de los Hijos del Maíz | Baqueano Nicaragua</title>
+  <meta name="description" content="Sabores, tradiciones y saberes que dan vida a nuestra cultura. Descubrí Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho, Rondón e Indio Viejo.">
+
+  <!-- Tipografías Oficiales Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- Iconografía FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+  <!-- Hojas de Estilos del Ecosistema -->
+  <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/pages/gastronomia-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
+  <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
+
+  <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
+  <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+</head>
+
+<body class="page-gastro-exact">
+
   <!-- ============================================================================
-       🧭 BARRA DE NAVEGACIÓN INSTITUCIONAL GLOBAL — BAQUEANO NICARAGUA
+       🧭 BARRA DE NAVEGACIÓN GLOBAL OFICIAL (IDÉNTICA A LAS IMÁGENES 1-4)
        ============================================================================ -->
-  <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
-    <div class="exact-container nav-inner">
-      <!-- Marca / Logo Oficial -->
-      <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
-        <div class="exact-nav-brand-text navbar-brand-text">
-          <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
-          <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
+  <nav class="main-navbar-exact" id="mainNavbar" role="navigation" aria-label="Navegación principal">
+    <div class="exact-container">
+      <!-- Izquierda: Logotipo Oficial -->
+      <a href="index.html" class="exact-brand" aria-label="Volver al inicio de Baqueano">
+        <img src="assets/images/logo.png" alt="Logotipo Baqueano" class="exact-logo-img">
+        <div class="exact-brand-text">
+          <span class="exact-brand-name">BAQUEANO</span>
+          <span class="exact-brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
 
-      <!-- Menú Horizontal Central de Enlaces -->
-            <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
-      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
-        <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
-        <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
+      <!-- Centro: Enlaces Horizontales de Primer Nivel -->
+      <div class="exact-nav-links" id="exactNavLinks" role="menubar">
+        <a href="index.html" class="exact-nav-link" role="menuitem">Inicio</a>
+        <a href="destinos.html" class="exact-nav-link" role="menuitem">Destinos</a>
+        <a href="mapa.html" class="exact-nav-link" role="menuitem">Mapa</a>
+        <a href="experiencias.html" class="exact-nav-link" role="menuitem">Experiencias</a>
+        <a href="baqueano-ai.html" class="exact-nav-link" role="menuitem">Baqueano Digital</a>
+        <a href="mi-viaje.html" class="exact-nav-link" role="menuitem">Mi Viaje</a>
+        <a href="gastronomia.html" class="exact-nav-link active" role="menuitem">Gastronomía</a>
+        <a href="#sosModal" class="exact-nav-link" onclick="openSosModal(event)" role="menuitem">SOS</a>
 
-        <!-- Menú Desplegable "Más ˇ" con Mega Menú Centrado de 4 Columnas -->
-        <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
-          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn active" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
-            <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
+        <!-- Menú Desplegable 'Más ∨' -->
+        <div class="exact-nav-dropdown" id="navDropdownMas">
+          <button type="button" class="exact-nav-link exact-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Más <i class="fa-solid fa-chevron-down exact-caret"></i>
           </button>
-          </div></div>
-
-      <!-- Divisor Vertical entre Enlaces y Acciones -->
-      <div class="nav-vertical-divider" aria-hidden="true"></div>
-
-      <!-- Acciones a la Derecha (Clima, Buscador, Switch Tema, SOS, Iniciar Sesión, Idioma) -->
-            <!-- Acciones a la Derecha (Clima en vivo, SOS, Iniciar Sesión, Idioma) -->
-      <div class="exact-nav-actions global-nav-actions">
-        <div class="navbar-weather-pill" id="bqWeatherWidget" title="Clima actual en Nicaragua (clic para ver detalles)" aria-label="Clima en Nicaragua" role="button" tabindex="0">
-          <i class="fa-solid fa-cloud-sun" id="bqWeatherIcon"></i>
-          <span class="weather-temp" id="bqWeatherTemp">28°C</span>
-          <span class="weather-label" id="bqWeatherCity">Nicaragua</span>
+          <div class="exact-dropdown-menu" role="menu">
+            <a href="ambiental.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf"></i> Custodia Ambiental</a>
+            <a href="historia.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-landmark"></i> Historia &amp; Memoria</a>
+            <a href="musica.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-music"></i> Son Sonoro Folk</a>
+            <a href="aliados.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake"></i> Red de Aliados</a>
+            <a href="nosotros.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-users"></i> Quiénes Somos</a>
+            <a href="denuncias.html" class="exact-dropdown-item" role="menuitem"><i class="fa-solid fa-shield-halved"></i> Canal de Denuncias</a>
+          </div>
         </div>
-        <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="if(window.bqOpenSos)bqOpenSos();else if(window.openSosModal)openSosModal(event);" aria-label="Centro de auxilio SOS">
-          <i class="fa-solid fa-shield-heart"></i><span>SOS</span>
-        </button>
-        <a href="perfil.html" class="exact-nav-btn-login global-session navbar-login-btn">
-          <i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span>
-        </a>
-        <button type="button" class="global-language navbar-lang-pill" aria-label="Cambiar idioma">
-          <span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem; margin-left: 2px;"></i>
-        </button>
-        <button type="button" class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú móvil">
+      </div>
+
+      <!-- Derecha: Acciones de Usuario -->
+      <div class="exact-nav-actions">
+        <a href="destinos.html" class="exact-icon-btn" title="Buscar" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="perfil.html" class="exact-icon-btn" title="Favoritos" aria-label="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <span class="exact-lang-switch" title="Idioma">ES | EN</span>
+        <a href="perfil.html" class="btn-exact-login" role="button">Iniciar sesión</a>
+
+        <!-- Botón Hamburguesa Móvil -->
+        <button type="button" class="exact-burger-btn" id="burgerToggle" aria-label="Abrir menú" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </div>
-  
-  <!-- MEGA MENÚ DESPLEGABLE EN EL NAV (FUERA DEL DIV Y 100% CENTRADO AL NAV) -->
-  <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-    <!-- 1. MI PAÍS -->
-    <section class="global-mega-column culture">
-      <h2><i class="fa-solid fa-landmark"></i> Mi País</h2>
-      <a href="destinos.html"><i class="fa-solid fa-map-pin"></i> Destinos</a>
-      <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa Interactivo</a>
-      <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-      <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia &amp; Memoria</a>
-      <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
-      <a href="musica.html"><i class="fa-solid fa-music"></i> Son Sonoro / Música</a>
-      <a href="departamento.html"><i class="fa-solid fa-map-location-dot"></i> 17 Territorios</a>
-    </section>
-
-    <!-- 2. ECOSISTEMA & COMUNIDAD -->
-    <section class="global-mega-column community">
-      <h2><i class="fa-solid fa-people-group"></i> Ecosistema</h2>
-      <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Red de Aliados</a>
-      <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-      <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Custodia Ambiental</a>
-      <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Canal Ético</a>
-    </section>
-
-    <!-- 3. BAQUEANO -->
-    <section class="global-mega-column explore">
-      <h2><i class="fa-solid fa-compass"></i> Baqueano</h2>
-      <a href="nosotros.html"><i class="fa-solid fa-circle-info"></i> Quiénes Somos</a>
-      <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Preguntas Frecuentes</a>
-      <a href="baqueano-ia.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano IA</a>
-    </section>
-
-    <!-- 4. CUENTA Y PLATAFORMA -->
-    <section class="global-mega-column account">
-      <h2><i class="fa-solid fa-gear"></i> Plataforma</h2>
-      <a href="mi-viaje.html"><i class="fa-solid fa-route"></i> Mi Viaje</a>
-      <a href="perfil.html"><i class="fa-regular fa-user"></i> Mi Perfil</a>
-      <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Mis Reservas</a>
-      <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
-      <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
-      <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
-      <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-      <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Acceso restringido</small></a>
-    </section>
-  </div>
   </nav>
 
   <!-- ============================================================================
@@ -778,7 +801,7 @@
   </div>
 
   <!-- Leaflet Map JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"></script>
 
   <script>
     // Filtrado de Categorías de Platos
@@ -798,7 +821,41 @@
     }
 
     function showDishInfo(title, desc) {
-      alert(`🍴 ${title}\n\n${desc}`);
+      let dialog = document.getElementById('dishHistoryDialog');
+      if (!dialog) {
+        dialog = document.createElement('dialog');
+        dialog.id = 'dishHistoryDialog';
+        dialog.className = 'bq-info-dialog';
+        document.body.appendChild(dialog);
+      }
+      const locations = {
+        'Gallo Pinto': 'Mercados, comedores familiares y restaurantes de todo el país.',
+        'Nacatamal': 'Mercados y cocinas familiares, especialmente durante los fines de semana.',
+        'Vigorón Granadino': 'Granada: Parque Central, mercados y comedores tradicionales.',
+        'Quesillo': 'La Paz Centro, Nagarote y establecimientos del corredor occidental.',
+        'Baho': 'Masaya, Granada y comedores de cocina tradicional del Pacífico.',
+        'Indio Viejo': 'León, Chinandega, Managua y restaurantes de cocina nicaragüense.',
+        'Rondón Costeño': 'Bluefields, Corn Island y cocinas de la Costa Caribe.',
+        'Güirilas': 'Matagalpa, Jinotega, Estelí y fincas del norte.',
+        'Sopa de Mondongo de Masatepe': 'Masatepe y restaurantes tradicionales de Masaya.',
+        'Fritanga Popular': 'Fritangas, mercados y barrios de las ciudades nicaragüenses.'
+      };
+      const where = locations[title] || 'Consultá el mapa gastronómico para ver opciones cercanas.';
+      dialog.innerHTML = `
+        <button type="button" class="bq-dialog-close" aria-label="Cerrar">×</button>
+        <header class="bq-dialog-head"><span class="bq-dialog-kicker">MEMORIA CULINARIA</span><h2>${title}</h2></header>
+        <div class="bq-dialog-body">
+          <p>${desc}</p>
+          <h3>Dónde probarlo</h3><p>${where}</p>
+          <p><strong>Antes de visitar:</strong> confirmá horario, disponibilidad y precio directamente con el establecimiento.</p>
+          <div class="bq-dialog-actions">
+            <a class="bq-dialog-action" href="mapa.html?q=${encodeURIComponent(title)}"><i class="fa-solid fa-map-location-dot"></i> Ver opciones en mapa</a>
+            <a class="bq-dialog-action accent" href="mi-viaje.html"><i class="fa-solid fa-route"></i> Agregar a mi viaje</a>
+          </div>
+        </div>`;
+      dialog.querySelector('.bq-dialog-close').addEventListener('click', () => dialog.close(), { once: true });
+      dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); }, { once: true });
+      dialog.showModal();
     }
 
     function askBaquiGastro(prompt) {
@@ -909,8 +966,8 @@
       });
     }
   </script>
-<script src="js/navigation.js?v=20260929-v12-centered"></script>
-<script src="js/global-injector.js?v=20260929-v12-centered"></script>
+<script src="js/navigation.js"></script>
+<script src="js/global-injector.js"></script>
 </body>
 
 </html>

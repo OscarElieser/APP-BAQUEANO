@@ -14,14 +14,17 @@
   const normalize = (value) => String(value || '').normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   const numberFrom = (value) => Number(String(value || '').replace(/[^0-9.]/g, '')) || 0;
-  const safeStorage = {
+    const safeStorage = {
     read(key) {
       try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch (_) { return []; }
     },
     write(key, value) {
       try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (_) { return false; }
     }
-  };
+    };
+    function favoriteIds() {
+      return [...new Set(['baqueano-favorites','baqueano_favs','baqueano_favs_local'].flatMap((key) => safeStorage.read(key)).map((item) => typeof item === 'string' ? item : (item.id || item.destinationId || '')).filter(Boolean))];
+    }
 
   document.addEventListener('DOMContentLoaded', () => {
     const page = document.querySelector('.page-destinos-exact');
@@ -83,7 +86,7 @@
         (!state.department || card.dataset.location.includes(normalize(state.department))) &&
         priceMatch && Number(card.dataset.rating) >= state.rating &&
         (!state.verified || card.dataset.verified === 'true') &&
-        (!state.favoritesOnly || safeStorage.read('baqueano-favorites').includes(card.dataset.destinationId));
+        (!state.favoritesOnly || favoriteIds().includes(card.dataset.destinationId));
     }
 
     function applyFilters() {
@@ -225,6 +228,7 @@
       const stored = safeStorage.read(key); const exists = stored.includes(id);
       const next = exists ? stored.filter((item) => item !== id) : [...stored, id];
       if (!safeStorage.write(key, next)) return toast('No fue posible guardar en este navegador.');
+      if (key === 'baqueano-favorites') safeStorage.write('baqueano_favs', next);
       button.classList.toggle('active', !exists); button.setAttribute('aria-pressed', String(!exists));
       const icon = button.querySelector('i'); if (icon) icon.className = `${exists ? 'fa-regular' : 'fa-solid'} fa-heart`;
       toast(exists ? 'Destino eliminado.' : addedText);
@@ -235,9 +239,9 @@
       button.textContent = button.classList.contains('active') ? '✓ En Mi viaje' : '+ Mi viaje';
     }));
 
-    const favoriteIds = safeStorage.read('baqueano-favorites');
+    const savedFavoriteIds = favoriteIds();
     document.querySelectorAll('.dest-highlight-heart').forEach((button) => {
-      const saved = favoriteIds.includes(button.closest('article')?.dataset.destinationId);
+      const saved = savedFavoriteIds.includes(button.closest('article')?.dataset.destinationId);
       button.classList.toggle('active', saved); button.setAttribute('aria-pressed', String(saved));
       const icon = button.querySelector('i'); if (icon && saved) icon.className = 'fa-solid fa-heart';
     });
@@ -261,9 +265,23 @@
       const title = card.querySelector('h4')?.textContent.trim() || 'Destino';
       const image = card.querySelector('img')?.getAttribute('src') || '';
       const location = card.querySelector('.location, .destinos-preview-info span')?.textContent.trim() || 'Nicaragua';
+      const detailByDestination = {
+        'Isla de Ometepe': { access:'Ferri desde San Jorge, Rivas', duration:'1–3 días', price:'Accesos y actividades según operador', best:'Temporada seca o salida confirmada', contact:'50588880005' },
+        'Granada': { access:'Carretera desde Managua · buses y transporte privado', duration:'1–2 días', price:'Recorridos desde C$ 350', best:'Todo el año; evitar horas de mayor calor', contact:'50588880010' },
+        'San Juan del Sur': { access:'Carretera Panamericana hacia Rivas', duration:'1–3 días', price:'Actividades desde C$ 920', best:'Según oleaje y condiciones marítimas', contact:'50588880007' },
+        'Cerro Negro': { access:'Desde León con operador y vehículo adecuado', duration:'Medio día', price:'Desde C$ 1,100', best:'Confirmar clima, acceso y equipo', contact:'50588880004' },
+        'Cañón de Somoto': { access:'Desde Somoto hacia comunidad de acceso autorizada', duration:'Medio día o día completo', price:'Desde C$ 550', best:'Confirmar nivel del río y guía', contact:'50588880001' },
+        'Masaya': { access:'Carretera Managua–Masaya', duration:'Medio día', price:'Consultar tarifa oficial vigente', best:'Confirmar estado y horario del parque', contact:'50588880009' },
+        'Las Isletas de Granada': { access:'Muelle de Granada con operador autorizado', duration:'2–4 horas', price:'Desde C$ 660', best:'Confirmar viento y estado del lago', contact:'50588880010' },
+        'Miraflor': { access:'Desde Estelí por vía rural', duration:'1–2 días', price:'Desde C$ 440', best:'Coordinar previamente con finca o guía', contact:'50588880002' },
+        'Laguna de Apoyo': { access:'Desvío entre Masaya y Granada', duration:'Medio día o día completo', price:'Depende del acceso o establecimiento', best:'Confirmar acceso, clima y normas locales', contact:'50588880009' },
+        'Corn Island': { access:'Vuelo nacional o conexión marítima confirmada', duration:'3–5 días', price:'Variable según transporte y temporada', best:'Revisar condiciones marítimas', contact:'50588880014' }
+      };
+      const info = detailByDestination[title] || { access:'Consultá el mapa para una ruta desde tu ubicación', duration:'Según punto de partida', price:'Confirmar con el prestador', best:'Verificar clima, acceso y disponibilidad', contact:'50584431289' };
       const dialog = document.createElement('dialog'); dialog.className = 'dest-detail-dialog';
-      dialog.innerHTML = `<button type="button" class="dest-dialog-close" aria-label="Cerrar">×</button>${image ? `<img src="${image}" alt="${title}">` : ''}<div><span class="dest-dialog-kicker">DESTINO BAQUEANO</span><h2>${title}</h2><p>${location}</p><p>Explorá información, ubicación y opciones para incorporarlo a tu ruta.</p><a href="mapa.html?q=${encodeURIComponent(title)}" class="dest-btn-green">Ver en el mapa</a></div>`;
+      dialog.innerHTML = `<button type="button" class="dest-dialog-close" aria-label="Cerrar">×</button>${image ? `<img src="${image}" alt="${title}">` : ''}<div><span class="dest-dialog-kicker">DESTINO BAQUEANO</span><h2>${title}</h2><p><i class="fa-solid fa-location-dot"></i> ${location}</p><p>Información práctica para planificar una visita responsable y conectar directamente con prestadores locales.</p><div class="bq-destination-facts"><div class="bq-destination-fact"><small>Cómo llegar</small><strong>${info.access}</strong></div><div class="bq-destination-fact"><small>Tiempo recomendado</small><strong>${info.duration}</strong></div><div class="bq-destination-fact"><small>Precio orientativo</small><strong>${info.price}</strong></div><div class="bq-destination-fact"><small>Antes de salir</small><strong>${info.best}</strong></div></div><p class="bq-destination-note"><strong>Dato responsable:</strong> horarios, tarifas, accesos y condiciones pueden cambiar. Confirmalos antes de viajar.</p><div class="bq-destination-actions"><a href="mapa.html?q=${encodeURIComponent(title)}" class="dest-btn-green"><i class="fa-solid fa-map-location-dot"></i> Ver ruta y ubicación</a><a href="https://wa.me/${info.contact}?text=${encodeURIComponent('Hola, deseo información actualizada sobre '+title+' desde BAQUEANO')}" target="_blank" rel="noopener" class="dest-btn-green"><i class="fa-brands fa-whatsapp"></i> Contactar</a><button type="button" class="dest-btn-subtle bq-dialog-trip"><i class="fa-solid fa-route"></i> Agregar a Mi Viaje</button></div></div>`;
       document.body.appendChild(dialog); dialog.querySelector('.dest-dialog-close').addEventListener('click', () => dialog.close());
+      dialog.querySelector('.bq-dialog-trip')?.addEventListener('click', function () { const trip = safeStorage.read('baqueano-trip'); if (!trip.includes(card.dataset.destinationId)) trip.push(card.dataset.destinationId); safeStorage.write('baqueano-trip', trip); this.innerHTML = '<i class="fa-solid fa-check"></i> Agregado'; this.disabled = true; toast(title + ' agregado a Mi Viaje.'); });
       dialog.addEventListener('close', () => dialog.remove()); dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); }); dialog.showModal();
     }
 
