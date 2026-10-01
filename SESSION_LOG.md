@@ -2040,3 +2040,8 @@
 
 - **Estado Final:** MODELO DE LAS 4 F (FLUJO, FUNCIONALIDAD, FEEDBACK, FIDELIZACIÓN) TOTALMENTE AUDITADO, IMPLEMENTADO, VERIFICADO Y OPERATIVO EN BAQUEANO.
 
+## [2026-09-30] Resolución de rechazo non-fast-forward al publicar `main`
+
+- **POR QUÉ (Why / Propósito):** Recuperar el flujo de publicación a GitHub sin sobrescribir el historial remoto ni perder los avances locales de BAQUEANO.
+- **CÓMO (How / Arquitectura e Implementación):** Se ejecutó `git fetch origin --prune`, se compararon `HEAD`, `main` y `origin/main`, y se verificó que la rama activa `backup/2026-09-28-navbar-horizontal-v10` ya contiene la punta remota junto con diez commits locales adicionales. La resolución utiliza exclusivamente avance rápido y un push normal; no emplea reescritura forzada de historial.
+- **QUÉ (What / Entregables):** Diagnóstico confirmado del rechazo, preservación de la rama de respaldo, sincronización segura de `main` con el trabajo vigente y publicación en `origin/main`.
