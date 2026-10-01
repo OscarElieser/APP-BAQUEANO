@@ -275,96 +275,205 @@
         âš™ï¸ CÃ“MO: Relato, filtros y mapa sincronizados actualizan el destino sin recargar.
         ðŸ“¦ QUÃ‰: Selector temÃ¡tico, destino protagonista, galerÃ­a y accesos territoriales.
       -->
+      <!-- Decoración ambiental sutil inspirada en flora y naturaleza nicaragüense -->
+      <div class="inspire-ambient-decor" aria-hidden="true">
+        <span class="ambient-flower-left"></span>
+        <span class="ambient-flower-right"></span>
+      </div>
+
       <div class="inspire-editorial" data-inspire-root>
+        <!-- ─── ZONA 1: IDENTIDAD Y FILTROS ─── -->
         <header class="inspire-intro">
-          <p class="inspire-eyebrow">DESTINOS QUE</p><h2>Inspiran</h2><span class="inspire-stroke" aria-hidden="true"></span>
+          <p class="inspire-eyebrow">DESTINOS QUE</p>
+          <h2 class="inspire-title-calligraphic">Inspiran</h2>
+          <svg class="inspire-brush-underline" viewBox="0 0 200 24" aria-hidden="true">
+            <path d="M 6 13 C 45 4, 130 5, 194 15 C 135 22, 55 18, 6 13 Z" fill="#F65E01"/>
+          </svg>
           <p class="inspire-lead">Lugares únicos, historias reales y experiencias auténticas en cada rincón de Nicaragua.</p>
+          
           <nav class="inspire-filters" aria-label="Explorar por tipo de destino">
-            <button type="button" class="is-active" data-inspire-filter="todos"><i class="fa-solid fa-compass"></i>Todos</button>
-            <button type="button" data-inspire-filter="naturaleza"><i class="fa-solid fa-mountain-sun"></i>Naturaleza</button>
-            <button type="button" data-inspire-filter="cultura"><i class="fa-solid fa-landmark"></i>Cultura</button>
-            <button type="button" data-inspire-filter="playas"><i class="fa-solid fa-water"></i>Playas</button>
-            <button type="button" data-inspire-filter="volcanes"><i class="fa-solid fa-volcano"></i>Volcanes</button>
-            <button type="button" data-inspire-filter="gastronomia"><i class="fa-solid fa-utensils"></i>Gastronomía</button>
-            <button type="button" data-inspire-filter="comunidades"><i class="fa-solid fa-people-group"></i>Comunidades</button>
+            <button type="button" class="is-active" data-inspire-filter="todos">
+              <span class="filter-icon-box"><i class="fa-solid fa-compass"></i></span>
+              <span class="filter-name">Todos</span>
+            </button>
+            <button type="button" data-inspire-filter="naturaleza">
+              <span class="filter-icon-box"><i class="fa-solid fa-mountain-sun"></i></span>
+              <span class="filter-name">Naturaleza</span>
+            </button>
+            <button type="button" data-inspire-filter="cultura">
+              <span class="filter-icon-box"><i class="fa-solid fa-landmark"></i></span>
+              <span class="filter-name">Cultura</span>
+            </button>
+            <button type="button" data-inspire-filter="playas">
+              <span class="filter-icon-box"><i class="fa-solid fa-water"></i></span>
+              <span class="filter-name">Playas</span>
+            </button>
+            <button type="button" data-inspire-filter="volcanes">
+              <span class="filter-icon-box"><i class="fa-solid fa-volcano"></i></span>
+              <span class="filter-name">Volcanes</span>
+            </button>
+            <button type="button" data-inspire-filter="gastronomia">
+              <span class="filter-icon-box"><i class="fa-solid fa-utensils"></i></span>
+              <span class="filter-name">Gastronomía</span>
+            </button>
+            <button type="button" data-inspire-filter="patrimonio">
+              <span class="filter-icon-box"><i class="fa-solid fa-monument"></i></span>
+              <span class="filter-name">Patrimonio</span>
+            </button>
+            <button type="button" data-inspire-filter="museos">
+              <span class="filter-icon-box"><i class="fa-solid fa-building-columns"></i></span>
+              <span class="filter-name">Museos</span>
+            </button>
+            <button type="button" data-inspire-filter="comunidades">
+              <span class="filter-icon-box"><i class="fa-solid fa-people-group"></i></span>
+              <span class="filter-name">Comunidades</span>
+            </button>
           </nav>
         </header>
+
+        <!-- ─── ZONA 2: DESTINO DESTACADO (CENTRAL) ─── -->
         <article class="inspire-feature" aria-live="polite">
-          <!--
-            🎯 POR QUÉ: La forma pertenece a la identidad visual; la fotografía pertenece a los datos.
-            ⚙️ CÓMO: El marco CSS recorta cualquier URL recibida por el controlador de destinos.
-            📦 QUÉ: Imagen dinámica reutilizable para contenido local o procedente de Supabase.
-          -->
+          <!-- Marco Orgánico Pincelada / Papel Rasgado -->
           <div class="inspire-photo-frame baqueano-photo-frame">
             <img id="destinoImagen" class="baqueano-photo" data-inspire-image
               src="assets/images/destinos/isla_de_ometepe.jpg"
               alt="Volcanes y costa de la Isla de Ometepe" fetchpriority="high">
             <div class="inspire-photo-wash" aria-hidden="true"></div>
           </div>
-          <div class="inspire-copy"><span class="inspire-badge">Destino destacado</span><h3 data-inspire-title>Isla de Ometepe</h3><p class="inspire-location"><i class="fa-solid fa-location-dot"></i><span data-inspire-location>Rivas · Lago Cocibolca</span></p><p data-inspire-description>Naturaleza, cultura y comunidades que te conectan con la esencia de Nicaragua.</p><div class="inspire-traits" data-inspire-traits></div><a class="inspire-primary" data-inspire-link href="destinos.html?id=ometepe">Explorar destino <i class="fa-solid fa-arrow-right"></i></a></div>
-          <div class="inspire-gallery" aria-label="Vistas del destino seleccionado"><img data-inspire-gallery="0" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Vista de Isla de Ometepe"><img data-inspire-gallery="1" src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada entre bosque tropical"><img data-inspire-gallery="2" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Experiencia rural comunitaria"></div>
+
+          <!-- Contenido Editorial Superpuesto -->
+          <div class="inspire-copy">
+            <span class="inspire-badge">Destino Destacado</span>
+            
+            <div class="inspire-headline-wrap">
+              <i class="fa-solid fa-location-dot inspire-headline-pin" aria-hidden="true"></i>
+              <div class="inspire-headline-text">
+                <h3 data-inspire-title>Isla de Ometepe</h3>
+                <p class="inspire-location"><span data-inspire-location>Rivas · Lago de Nicaragua</span></p>
+              </div>
+            </div>
+
+            <p class="inspire-description-text" data-inspire-description>Naturaleza, cultura y comunidades que te conectan con la esencia de Nicaragua.</p>
+            
+            <!-- Atributos Circulares de Experiencia (5 badges con colores temáticos) -->
+            <div class="inspire-traits-row" data-inspire-traits>
+              <!-- Rellenado dinámicamente por index-destinos-editorial.js -->
+            </div>
+
+            <a class="inspire-cta-btn" data-inspire-link href="destinos.html?id=ometepe">
+              <span>Explorar destino</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- Mini Galería Superpuesta (4 Polaroids rotadas + botón de avance) -->
+          <div class="inspire-gallery-editorial" aria-label="Colección de fotos del destino">
+            <div class="polaroid-strip" data-inspire-gallery-strip>
+              <button type="button" class="polaroid-item is-active" data-gallery-index="0" aria-label="Ver foto 1">
+                <img data-inspire-gallery="0" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Vista de Ometepe">
+              </button>
+              <button type="button" class="polaroid-item" data-gallery-index="1" aria-label="Ver foto 2">
+                <img data-inspire-gallery="1" src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada San Ramón">
+              </button>
+              <button type="button" class="polaroid-item" data-gallery-index="2" aria-label="Ver foto 3">
+                <img data-inspire-gallery="2" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Finca Magdalena">
+              </button>
+              <button type="button" class="polaroid-item" data-gallery-index="3" aria-label="Ver foto 4">
+                <img data-inspire-gallery="3" src="assets/images/comida/nacatamal.jpg" alt="Tradición gastronómica">
+              </button>
+              <button type="button" class="polaroid-arrow-btn" id="btnNextGalleryItem" aria-label="Ver siguiente foto">
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
         </article>
-        <aside class="inspire-map" aria-label="Mapa ilustrado de destinos destacados de Nicaragua">
 
-          <!-- Brújula decorativa -->
-          <svg class="inspire-compass" viewBox="0 0 80 80" aria-hidden="true">
-            <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(22,93,111,0.25)" stroke-width="2"/>
-            <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(22,93,111,0.12)" stroke-width="1"/>
-            <polygon points="40,6 44,38 40,34 36,38" fill="#f65e01"/>
-            <polygon points="40,74 44,42 40,46 36,42" fill="#165d6f" opacity="0.5"/>
-            <polygon points="6,40 38,36 34,40 38,44" fill="#165d6f" opacity="0.5"/>
-            <polygon points="74,40 42,36 46,40 42,44" fill="#165d6f" opacity="0.5"/>
-            <text x="40" y="4" text-anchor="middle" font-size="7" font-weight="800" fill="#f65e01" font-family="Montserrat,sans-serif">N</text>
-          </svg>
+        <!-- ─── ZONA 3: MAPA TERRITORIAL DE NICARAGUA CON RUTA Y ACCESOS ─── -->
+        <aside class="inspire-map-territorial" aria-label="Mapa ilustrado de destinos destacados de Nicaragua">
+          
+          <!-- Frase de Marca y Brújula de Exploración -->
+          <div class="inspire-brand-callout">
+            <div class="brand-compass">
+              <svg viewBox="0 0 64 64" class="compass-svg" aria-hidden="true">
+                <circle cx="32" cy="32" r="30" fill="none" stroke="rgba(22,93,111,0.24)" stroke-width="1.5"/>
+                <circle cx="32" cy="32" r="23" fill="none" stroke="rgba(246,94,1,0.28)" stroke-width="1" stroke-dasharray="2,3"/>
+                <polygon points="32,5 35,29 32,26 29,29" fill="#F65E01"/>
+                <polygon points="32,59 35,35 32,38 29,35" fill="#165D6F" opacity="0.6"/>
+                <polygon points="5,32 29,29 26,32 29,35" fill="#165D6F" opacity="0.6"/>
+                <polygon points="59,32 35,29 38,32 35,35" fill="#165D6F" opacity="0.6"/>
+                <circle cx="32" cy="32" r="3" fill="#F65E01"/>
+                <text x="32" y="3.5" text-anchor="middle" font-size="6" font-weight="900" fill="#F65E01" font-family="'Montserrat', sans-serif">N</text>
+              </svg>
+            </div>
+            <div class="brand-phrase-group">
+              <p class="brand-phrase">Descubrí lo que no sale en el mapa</p>
+              <svg class="phrase-arrow-svg" viewBox="0 0 42 36" aria-hidden="true">
+                <path d="M 6 4 C 18 10, 28 20, 26 30 M 18 27 L 26 31 L 31 22" fill="none" stroke="#F65E01" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
 
-          <!--
-            🎯 POR QUÉ: Mostrar la riqueza territorial real de Nicaragua, no una silueta genérica.
-            ⚙️ CÓMO: El recorte PNG conserva relieve, lagos y volcanes; los controles HTML
-            permanecen superpuestos para mantener accesibilidad e interacción.
-            📦 QUÉ: Mapa territorial compartido por el propietario con cinco destinos activos.
-          -->
+          <!-- Wrap del Mapa con Relieve y Ruta SVG -->
           <div class="inspire-nic-map-wrap">
             <img class="inspire-nic-map" src="assets/images/mapa-nicaragua-territorial.png"
               alt="Mapa territorial ilustrado de Nicaragua con relieve, volcanes, lagos y costas">
 
-            <!-- Pins posicionados geográficamente sobre el mapa -->
-            <!-- Cañón de Somoto: Norte -->
-            <button type="button" class="inspire-pin pin-somoto" data-destination="somoto">
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="">
-              <span>Cañón de Somoto</span>
+            <!-- Ruta Curva Punteada SVG Conectando los Destinos -->
+            <svg class="map-route-svg" viewBox="0 0 520 480" preserveAspectRatio="none" aria-hidden="true">
+              <path class="route-curve" d="M 405 60 Q 240 100, 140 185 Q 160 270, 235 295 Q 360 320, 410 275 Q 430 330, 250 395"
+                fill="none" stroke="rgba(255, 255, 255, 0.95)" stroke-width="2.8" stroke-dasharray="6, 6" stroke-linecap="round"/>
+            </svg>
+
+            <!-- Puntos de Destinos Interactivos sobre el Mapa -->
+            <!-- 1. Cañón de Somoto: Norte -->
+            <button type="button" class="inspire-pin pin-somoto" data-destination="somoto" aria-label="Destino Cañón de Somoto">
+              <span class="pin-thumb-ring"><img src="assets/images/destinos/canon_de_somoto.jpg" alt=""></span>
+              <span class="pin-label">Cañón de Somoto</span>
             </button>
 
-            <!-- León: Occidente-Centro -->
-            <button type="button" class="inspire-pin pin-leon" data-destination="leon">
-              <img src="assets/images/departamentos/leon.png" alt="">
-              <span>León</span>
+            <!-- 2. León: Occidente -->
+            <button type="button" class="inspire-pin pin-leon" data-destination="leon" aria-label="Destino León">
+              <span class="pin-thumb-ring"><img src="assets/images/departamentos/leon.png" alt=""></span>
+              <span class="pin-label">León</span>
             </button>
 
-            <!-- Granada: Centro-Sur -->
-            <button type="button" class="inspire-pin pin-granada" data-destination="granada">
-              <img src="assets/images/departamentos/granada.jpg" alt="">
-              <span>Granada</span>
+            <!-- 3. Granada: Oriente de Cocibolca -->
+            <button type="button" class="inspire-pin pin-granada" data-destination="granada" aria-label="Destino Granada">
+              <span class="pin-thumb-ring"><img src="assets/images/departamentos/granada.jpg" alt=""></span>
+              <span class="pin-label">Granada</span>
             </button>
 
-            <!-- Cerro Negro: Occidente -->
-            <button type="button" class="inspire-pin pin-cerro" data-destination="cerro-negro">
-              <img src="assets/images/destinos/cerro_negro.jpg" alt="">
-              <span>Cerro Negro</span>
+            <!-- 4. Cerro Negro: Cordillera Maribios -->
+            <button type="button" class="inspire-pin pin-cerro" data-destination="cerro-negro" aria-label="Destino Cerro Negro">
+              <span class="pin-thumb-ring"><img src="assets/images/destinos/cerro_negro.jpg" alt=""></span>
+              <span class="pin-label">Cerro Negro</span>
             </button>
 
-            <!-- Ometepe: Sur (Lago Cocibolca) -->
-            <button type="button" class="inspire-pin pin-ometepe is-active" data-destination="ometepe">
-              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="">
-              <span>Ometepe</span>
+            <!-- 5. Ometepe: Lago Cocibolca (Activo) -->
+            <button type="button" class="inspire-pin pin-ometepe is-active" data-destination="ometepe" aria-label="Destino Isla de Ometepe">
+              <span class="pin-thumb-ring"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt=""></span>
+              <span class="pin-label">Ometepe</span>
+              <span class="pin-active-pulse" aria-hidden="true"></span>
             </button>
           </div>
 
-          <p class="inspire-map-note">Descubrí lo que no sale en el mapa <i class="fa-solid fa-arrow-turn-down"></i></p>
-          <div class="inspire-community">
-            <i class="fa-solid fa-house-chimney"></i>
-            <p><strong>Más que un destino</strong><span>Cada lugar tiene historias, personas y tradiciones que lo hacen único.</span></p>
+          <!-- Pie del Mapa: Bloque "Más que un destino" y CTA "Ver todos los destinos →" -->
+          <div class="inspire-map-footer">
+            <div class="inspire-story-card">
+              <div class="story-thumb-wrap">
+                <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Choza comunitaria tradicional" class="story-thumb">
+              </div>
+              <div class="story-text">
+                <h4 class="story-title">Más que un destino</h4>
+                <p class="story-desc">Cada lugar tiene historias, personas y tradiciones que lo hacen único.</p>
+              </div>
+            </div>
+
+            <a class="inspire-browse-all-btn" href="destinos.html">
+              <span>Ver todos los destinos</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
           </div>
-          <a class="inspire-all" href="destinos.html">Ver todos los destinos <i class="fa-solid fa-arrow-right"></i></a>
         </aside>
 
       </div>

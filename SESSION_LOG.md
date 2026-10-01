@@ -56,6 +56,30 @@
 
 
 
+## 🧭 PROMPT MAESTRO DEFINITIVO — ECOSISTEMA DIGITAL INTELIGENTE DE NICARAGUA (01-10-2026)
+
+- **Consulta:**
+  > *"PROMPT MAESTRO DEFINITIVO — BAQUEANO: ECOSISTEMA DIGITAL INTELIGENTE DEL TURISMO, CULTURA Y EXPERIENCIAS DE NICARAGUA. Lema: 'DESCUBRE LO QUE NO SALE EN EL MAPA'. Misión: transformar, ampliar, integrar, humanizar y evolucionar el BAQUEANO que YA EXISTE hasta convertirlo en una plataforma turística digital única, inmersiva, dinámica, inteligente, sostenible, trazable, rentable y profundamente nicaragüense. No copiar Booking/Airbnb/TripAdvisor. Regla inquebrantable: NO BORRAR, NO REESCRIBIR DE CERO, NO SIMULAR. Criterios reales: Botón ejecuta acción, filtro filtra datos, mapa usa datos, favorito persiste, login autentica, reserva crea registro, IA consulta datos reales (RAG sin alucinaciones), Ops modifica base de datos, modo 'Lo que no sale en el mapa' (hidden_gem), orquestador multiagente, cultura viva y monetización ética."*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Consagrar a BAQUEANO como el ecosistema digital soberano y vivo de Nicaragua, donde cada interacción sea real, humana, culturalmente verídica, trazable y generadora de valor directo para las comunidades campesinas y anfitriones locales.
+  - ⚙️ **CÓMO:** Ejecución secuencial y aditiva por dominios técnicos: (1) Modelo de datos relacional y cultural en Supabase, (2) Ingesta no destructiva de catálogos fácticos, (3) Servicios de API canónicos en Cloud Functions, (4) Plantillas dinámicas vivas con modo 'Lo que no sale en el mapa' y selector sensorial, (5) Ops Center conectado a Supabase para gobernanza total, (6) Motor Multi-LLM y orquestador RAG sobre datos verificados, (7) Pasaporte del explorador, diario de viaje, favoritos y reservas reales.
+  - 📦 **QUÉ:** Hoja de ruta ejecutiva detallada, migración SQL canónica de esquemas culturales y operacionales en Supabase (012_comprehensive_cultural_and_ops_schema.sql), capa de servicios Node.js y conexión interactiva de punta a punta.
+
+---
+
+## 🧭 PROMPT MAESTRO — EVOLUCIÓN INTEGRAL DEL SISTEMA SIN BORRAR (01-10-2026)
+
+- **Consulta:**
+  > *"PROMPT MAESTRO PARA ANTIGRAVITY — PROYECTO: BAQUEANO — OBJETIVO: EVOLUCIONAR EL SISTEMA EXISTENTE SIN BORRAR NI REHACER DESDE CERO. Regla principal: NO BORRAR, NO REEMPLAZAR TODO, NO REESCRIBIR DESDE CERO. Adaptar + Agregar + Integrar + Optimizar + Mejorar. Fase obligatoria inicial: Auditoría antes de tocar código (identificar HTML, CSS, JS, Firebase, Supabase, APIs, tablas, qué funciona, qué está simulado, qué está estático, qué es dinámico, y proponer plan ordenado de las 15 fases, comenzando con explicación y sin tocar código hasta autorización)."*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Preservar el 100% del valor ya construido y probado en BAQUEANO, elevando progresivamente la plataforma a un nivel dinámico, administrable desde Ops Center, seguro, escalable y potenciado con IA y RAG sobre datos territoriales reales.
+  - ⚙️ **CÓMO:** Ejecutar en primer término una auditoría técnica profunda y no invasiva de todo el repositorio (frontend, backend, Supabase, Firebase, Ops Center, Baqueano IA), inventariando el estado actual de cada componente y estructurando el plan de migración incremental en 15 fases reversibles. Cero modificaciones de código hasta recibir confirmación explícita del usuario.
+  - 📦 **QUÉ:** Documento exhaustivo de auditoría técnica actual (estático vs dinámico vs simulado), mapa del modelo de datos de Supabase, análisis de Ops Center y Baqueano IA, y propuesta de ejecución secuencial fase por fase.
+
+---
+
 ## Ajuste Visual de Footer — Nombre Baqueano Visible y Sello Nicaragua Auténtica (30-09-2026)
 
 ### Auditoría y Restauración Global de Todas las Páginas Web
@@ -2069,3 +2093,116 @@
 - **🎯 POR QUÉ (Why / Propósito):** Reconstruir con evidencia el último estado de la sesión y permitir retomar el desarrollo sin perder ni sobrescribir cambios locales.
 - **⚙️ CÓMO (How / Arquitectura e Implementación):** Se contrastó el cierre de `SESSION_LOG.md` con `git status`, el historial reciente, el diff local y las fechas de modificación. No se alteró código funcional durante esta revisión.
 - **📦 QUÉ (What / Funcionalidad & Entregables):** Se confirmó que `main` está alineada con `origin/main` en `906d426` y que permanecen sin commit cuatro archivos modificados (`SESSION_LOG.md`, `website/index.html`, `website/css/pages/index-destinos-editorial.css`, `website/js/index-destinos-editorial.js`) más el recurso nuevo `website/assets/images/mapa-nicaragua-territorial.png`. El último frente fue la integración del mapa territorial real y la separación reutilizable entre marco orgánico y fotografía dinámica de destinos.
+
+## [2026-09-30] Registro previo obligatorio de toda solicitud
+
+- **🎯 POR QUÉ (Why / Propósito):** Evitar la pérdida de contexto ante apagones, cierres inesperados o interrupciones y garantizar que cualquier sesión pueda reanudarse desde la solicitud más reciente.
+- **⚙️ CÓMO (How / Arquitectura e Implementación):** A partir de esta directiva, cada cambio, consulta o solicitud del propietario debe registrarse primero en `SESSION_LOG.md`, antes de inspeccionar archivos, ejecutar comandos, modificar código o iniciar cualquier otra acción relacionada con la tarea.
+- **📦 QUÉ (What / Funcionalidad & Entregables):** Solicitud registrada: “todos los cambios o solicitudes deben guardarse primero en `SESSION_LOG.md`”. La regla será incorporada también en `AGENTS.md` como orden operativo obligatorio.
+  - **Resultado:** `AGENTS.md` quedó actualizado. El registro inicial en la bitácora pasa a ser el primer cambio material de cada solicitud; al cerrar o alcanzar un avance verificable se exige una segunda actualización con resultados, validaciones y punto de continuidad.
+
+## [2026-09-30] Corrección de Cancelar y avatar en testimonios
+
+- **🎯 POR QUÉ (Why / Propósito):** El botón `Cancelar` del formulario “Compartí tu experiencia” no responde y los testimonios publicados necesitan identificar visualmente a la persona que comentó.
+- **⚙️ CÓMO (How / Arquitectura e Implementación):** Se localizará el controlador del formulario y su renderizado, se reparará el cierre o reinicio seguro del compositor y se incorporará la foto del autor como avatar circular pequeño con alternativa visual cuando no exista imagen.
+- **📦 QUÉ (What / Funcionalidad & Entregables):** Solicitud registrada antes de cualquier inspección o ejecución. Alcance previsto: interfaz web de testimonios, estilos asociados, comportamiento JavaScript y validación responsiva/sintáctica.
+  - **Resultado:** Se reforzó `closeCommentForm()` para cancelar mediante el botón, la X o Escape, limpiar el borrador, ocultar el formulario con `hidden`/`aria-hidden` y devolver el foco al botón que lo abrió. Los comentarios nuevos persisten nombre, etiqueta y avatar de `BaqueanoSession`; las tarjetas muestran la fotografía en un círculo de 38 px y una inicial de respaldo cuando no existe una imagen válida. También se eliminó la interpolación de texto del usuario en HTML y se construye el testimonio con nodos DOM seguros.
+  - **Archivos afectados:** `website/js/platform-enhancements.js`, `website/css/platform-enhancements.css`, `website/scripts/test-testimonials.mjs` y `SESSION_LOG.md`.
+  - **Validación:** `node --check website/js/platform-enhancements.js` aprobado. La prueba Playwright enfocada en viewport móvil de 390 × 844 confirmó: Cancelar oculta y limpia, publicación guarda al autor y la foto circular queda visible. El smoke test general conserva fallos heredados ajenos a esta tarea (enlaces genéricos de YouTube y rutas locales faltantes `ayuda.html`/`pasaporte.html`).
+  - **Punto de continuidad:** La corrección de testimonios está implementada y verificada; no se modificaron los fallos generales ajenos ni los cambios locales previos.
+
+## [2026-09-30] Solicitud recibida mediante prompt maestro adjunto
+
+- **🎯 POR QUÉ (Why / Propósito):** Preservar antes de cualquier lectura o ejecución la nueva solicitud cuyo contenido fue entregado en un archivo adjunto.
+- **⚙️ CÓMO (How / Arquitectura e Implementación):** Se registró primero la recepción del archivo `pasted-text.txt`. A continuación se leerá íntegramente, se evaluará su alcance frente a las reglas de BAQUEANO y se ejecutarán las acciones solicitadas de forma no destructiva.
+- **📦 QUÉ (What / Funcionalidad & Entregables):** Solicitud inicial registrada: leer y actuar sobre el “PROMPT MAESTRO PARA ANTIGRAVITY PROYECTO: BAQUEANO”. Los resultados, archivos afectados, validaciones y punto de continuidad se añadirán al finalizar.
+
+## [2026-09-30 / 2026-10-01] Verificación Integral de Estado y Reactivación de Sesión
+
+- **🎯 POR QUÉ (Why / Propósito):** Atender la solicitud de reanudación y revisión del usuario ("continuar donde nos quedamos revisas por favor"), certificando la integridad técnica de todo el stack (Web, Backend y Flutter) antes de proseguir con los siguientes pasos de desarrollo.
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. Auditoría de control de versiones: `git status` y `git diff website/` confirmaron que la rama `main` está al día con `origin/main` (`906d426`) y mantiene en staging/working tree las mejoras editoriales de portada.
+  2. Verificación de sintaxis JavaScript: `node --check website/js/index-destinos-editorial.js` ejecutado con código de salida 0.
+  3. Verificación de suite de pruebas backend: `npm test` en `functions/` aprobó 21/21 pruebas (100% verde).
+  4. Verificación de análisis estático Flutter/Android: `dart analyze lib/` arrojó `No issues found!` limpio al 100%.
+  5. Verificación de recursos gráficos: Confirmada la integridad de `website/assets/images/mapa-nicaragua-territorial.png` (1,440,741 bytes).
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Sistema 100% verificado, sin conflictos ni regresiones.
+  - Listo para continuar con la siguiente directiva o consolidar los cambios editoriales en commit/despliegue según la preferencia del usuario.
+
+## [2026-09-30 / 2026-10-01] Directiva Obligatoria: Registro Primero en SESSION_LOG.md Antes de Cualquier Acción
+
+- **Consulta del Usuario:**
+  > *"regla todos cambio o solicitud que haga primero se tiene que guardar en session_log.md para no tener problema para volver a empezar."*
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Garantizar resiliencia absoluta contra cualquier pérdida de contexto o interrupción súbita (corte de energía, reinicio de editor, desconexión).
+  - Asegurar que la bitácora siempre esté un paso adelante de cualquier modificación de código, actuando como el registro de transacciones maestro (Write-Ahead Log) del proyecto.
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. **Secuencia de Ejecución Estricta (Write-Ahead Logging / WAL Pattern):**
+     - Paso 1: Recibir consulta del usuario.
+     - Paso 2: **INMEDIATAMENTE escribir y guardar la consulta, objetivo y alcance en `SESSION_LOG.md`**.
+     - Paso 3: Proceder a implementar el código, realizar pruebas y validaciones.
+     - Paso 4: Actualizar el cierre de la entrada con los resultados y archivos tocados.
+  2. **Actualización de `AGENTS.md` (Regla 7):**
+     - Se refuerza la Regla 7 para especificar explícitamente la obligatoriedad de que `SESSION_LOG.md` sea siempre el **primer archivo** en actualizarse ante cualquier petición del usuario.
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Entrada registrada en `SESSION_LOG.md`.
+  - Refuerzo de la Regla 7 en `AGENTS.md`.
+
+## [2026-09-30 / 2026-10-01] Ejecución del Entorno Local Web (Localhost)
+
+- **Consulta del Usuario:**
+  > *"correr la web en localhost"*
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Permitir al usuario previsualizar y validar en tiempo real el comportamiento visual, interactividad del mapa territorial, filtros, recursos y responsividad de `website/` en un servidor HTTP local seguro.
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  - Levantar un servidor HTTP estático local apuntando directamente a la raíz de `website/` (utilizando `npx serve`, `python -m http.server` o servidor Node nativo ligero en segundo plano como daemon).
+  - Verificar que el puerto quede escuchando activamente y proveer al usuario la URL exacta (`http://localhost:PORT`) para su apertura en el navegador.
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Servidor local en ejecución en modo daemon mediante [dev-server.js](file:///d:/Desktop/APP%20BAQUEANO/dev-server.js).
+  - URL de acceso local verificada: **`http://localhost:5000`** (HTTP 200 OK verificado).
+  - Recurso del mapa verificado: `http://localhost:5000/assets/images/mapa-nicaragua-territorial.png` (HTTP 200 OK).
+  - Soporte de MIME types completo (.html, .css, .js, .webp, .png, .svg, .json).
+
+## [2026-09-30 / 2026-10-01] Rediseño Editorial Integral de “Destinos que Inspiran” (Alineación con Referencia 2)
+
+- **Consulta del Usuario:**
+  > *"PROMPT PARA ANTIGRAVITY — REDISEÑO DE SECCIÓN “DESTINOS QUE INSPIRAN” DE BAQUEANO. Quiero que rediseñes únicamente la sección “Destinos que Inspiran” de mi proyecto BAQUEANO. Toma como referencia visual principal la segunda imagen adjunta y usa la primera imagen adjunta únicamente para identificar la estructura y contenido actual que ya existe... Transformar la sección actual en una composición editorial, inmersiva, orgánica, de alta gama y propia de BAQUEANO, similar visualmente a la segunda referencia. NO incrustar la referencia como una sola imagen..."*
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Transformar la sección actual (rígida y con apariencia básica) en una experiencia editorial inmersiva, artística y orgánica fiel a la identidad Baqueano (#165D6F, #F65E01, #F4E6C1, #0F172A).
+  - Eliminar cualquier vestigio de marketplace/Booking (sin cards genéricas repetitivas, sin estrellas/precios masivos).
+  - Integrar tipografía caligráfica audaz ("Inspiran" gigante y artístico), pincelada terracota, marco recortado orgánico tipo pincelada/papel rasgado para la foto principal con superposición rica del texto, badges circulares de experiencia con colores de categoría, mini-galería rotada superpuesta de 4 fotos (polaroids/sellos editoriales con botón de avance), mapa de relieve de Nicaragua con ruta punteada interactiva SVG curva conectando los 5 destinos con brújula y la frase "Descubrí lo que no sale en el mapa" en caligrafía con flecha, tarjeta editorial tipo papel/nota "Más que un destino" con choza tradicional, y botón "Ver todos los destinos →" con forma de pincelada azul petróleo.
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. **Análisis de la Referencia 2 vs Actual (Referencia 1):**
+     - **Tipografía Editorial:** Título "DESTINOS QUE" en mayúsculas sobrias y "Inspiran" en tipografía caligráfica/brush (Caveat o SVG de alta fidelidad / pincelada) con acento de pincelada naranja inferior.
+     - **Filtros Laterales Izquierdos:** Píldora orgánica activa naranja `#F65E01` para "Todos" con textura o bordes suaves, iconos limpios para Naturaleza, Cultura, Playas, Volcanes, Gastronomía, Comunidades (más Patrimonio y Museos).
+     - **Destino Central:**
+       - Etiqueta "Destino Destacado" en pastilla terracota cursiva/brush.
+       - Título "Isla de Ometepe" con ubicación y pin naranja.
+       - Indicadores circulares coloreados de atributos: Volcanes (verde bosque), Senderismo (azul pizarra), Cultura (terracota), Gastronomía (mostaza dorado), Comunidades (azul petróleo).
+       - Botón CTA naranja "Explorar destino →" con cápsula redondeada y flecha.
+       - Marco de foto principal: forma orgánica fluida tipo pincelada/paisaje rasgado en los bordes (`clip-path` multipunto refinado o SVG mask).
+       - Mini-galería rotada: 4 tarjetas fotográficas con borde blanco y rotación sutil (-2deg, 0deg, 1.5deg, 3deg) superpuestas en el pie del marco con botón de flecha circular blanco. Al pulsar cualquiera de las 4 fotos, se actualiza la foto principal.
+     - **Zona Derecha - Mapa:**
+       - Mapa territorial con relieve (ya integrado como `mapa-nicaragua-territorial.png`).
+       - Destinos destacados con fotografías circulares con borde blanco y sombra profunda (Somoto, León, Granada, Cerro Negro, Ometepe con indicador activo naranja).
+       - Ruta visual punteada en arco conectando los puntos mediante SVG con animación sutil.
+       - Frase de marca "Descubrí lo que no sale en el mapa" en estilo manuscrito con brújula náutica y flecha curva dibujada.
+       - Bloque "Más que un destino": contenedor tipo pergamino/papel suave con ilustración/foto de choza tradicional indígena y tipografía cursiva.
+       - Botón "Ver todos los destinos →": en azul petróleo `#165D6F` con forma de pincelada asimétrica.
+     - **Ambiente de fondo:** Fondo sutil con follaje tropical/flores de sacuanjoche en las esquinas inferiores con transparencia y desenfoque orgánico.
+  2. **Interconexión Dinámica & Supabase-ready:**
+     - `index-destinos-editorial.js` gestiona el estado reactivo sin recargar: al cambiar destino o categoría, se actualizan título, ubicación, descripción, tags, foto principal, mini galería y enlaces.
+     - Soporte para eventos de teclado y accesibilidad WCAG 2.1 AA.
+  3. **Responsividad:**
+     - Desktop panorámico multi-zona conectada fluida.
+     - Tablet: reorganización fluida en 2 niveles.
+     - Mobile: flujo vertical optimizado con filtros horizontales scrolleables y mapa centrado.
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - **`website/index.html`**: Estructura editorial en 3 zonas conectadas (intro con tipografía caligráfica "Inspiran" + subrayado en pincelada SVG + 9 filtros con iconos limpios; destino protagónico central con marco orgánico `clip-path` + badge caligráfico "Destino Destacado" + 5 badges circulares de experiencia con colores de identidad + botón CTA naranja + mini galería de 4 polaroids rotadas con botón circular de avance; mapa territorial derecho con pins circulares de alta fidelidad, ruta curva punteada SVG, brújula, frase "Descubrí lo que no sale en el mapa", tarjeta kraft "Más que un destino" y botón final en azul petróleo).
+  - **`website/css/pages/index-destinos-editorial.css`**: Implementación CSS con Golden Circle, import de `Caveat`, paleta oficial (`#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`), recortes orgánicos, efectos de rotación sutil (-3deg a +3deg), micro-interacciones a 60fps y reglas responsivas específicas para Desktop panorámico, Tablet (<= 1140px) y Móvil (<= 768px con scroll snap horizontal en filtros).
+  - **`website/js/index-destinos-editorial.js`**: Controlador reactivo desacoplado con catálogo maestro de 5 destinos (Ometepe, Somoto, León, Granada, Cerro Negro), soporte para datos remotos vía `window.BAQUEANO_DESTINATIONS`, animación suave de cambio de fotografía `.is-changing`, sincronización bidireccional entre pins del mapa, filtros, mini polaroids y API pública `window.BaqueanoDestinations`.
+  - **Verificación Técnica**:
+    - Sintaxis JS validada: `node --check website/js/index-destinos-editorial.js` (código 0).
+    - Servidor local verificado: `http://localhost:5000` con entrega HTTP 200 de HTML, CSS y JS.
+    - Presencia de tokens en DOM confirmada mediante petición HTTP (100% de los elementos editoriales activos).

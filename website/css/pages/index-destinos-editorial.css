@@ -4,23 +4,47 @@
  * ============================================================================
  *
  * 🎯 1. POR QUÉ (WHY / PROPÓSITO):
- * - Reemplaza tarjetas comparativas por una experiencia territorial propia.
- * - El mapa SVG de Nicaragua ancla los destinos en su geografía real.
+ * - Reemplazar la presentación rígida y tradicional por una experiencia editorial,
+ *   inmersiva y orgánica que refleje la identidad auténtica de Nicaragua y de BAQUEANO.
+ * - Erradicar tarjetas genéricas de marketplace (estilo Booking/TripAdvisor),
+ *   sustituyéndolas por una narrativa territorial fluida de 3 zonas conectadas.
  *
  * ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
- * - Grid asimétrico 3 columnas: intro | feature photo | mapa interactivo.
- * - Recortes orgánicos, capas de marca y puntos interactivos sobre SVG.
+ * - ZONA 1 (Izquierda): Identidad editorial con tipografía caligráfica audaz ("Inspiran"),
+ *   pincelada terracota (#F65E01) y navegación vertical temática con iconos limpios.
+ * - ZONA 2 (Centro): Destino protagónico con marco de recorte orgánico (clip-path tipo
+ *   pincelada / papel rasgado), 5 indicadores circulares temáticos de experiencia
+ *   (Volcanes, Senderismo, Cultura, Gastronomía, Comunidades) y mini-galería de 4 polaroids
+ *   superpuestas con rotaciones sutiles y botón de avance interactivo.
+ * - ZONA 3 (Derecha): Mapa territorial con relieve de Nicaragua, ruta curva punteada SVG,
+ *   brújula de exploración, frase caligráfica "Descubrí lo que no sale en el mapa",
+ *   tarjeta de nota de viaje "Más que un destino" y botón editorial en azul petróleo (#165D6F).
+ * - Transiciones aceleradas por hardware a 60fps con will-change y cubics suaves.
  *
  * 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
- * - Estilos responsive, estados accesibles y movimiento reducido de la sección.
+ * - Estilos 100% responsivos (Desktop panorámico, Tablet en 2 niveles y Móvil táctil).
+ * - Soporte para temas claro/oscuro y modo de movimiento reducido (prefers-reduced-motion).
  * ============================================================================
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
+
+/* ─── VARIABLES EDITORIALES DE LA SECCIÓN ─── */
+:root {
+  --baq-inspire-orange: #F65E01;
+  --baq-inspire-petrol: #165D6F;
+  --baq-inspire-dark: #0F172A;
+  --baq-inspire-sand: #F4E6C1;
+  --baq-inspire-cream: #FAF7F2;
+  --baq-font-hand: 'Caveat', cursive, 'Brush Script MT', sans-serif;
+  --baq-font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+}
 
 /* ─── CONTENEDOR SECCIÓN ─── */
 .destinations-section-exact {
   position: relative;
   padding: 0 !important;
-  background: #f8f8f4;
+  background: var(--baq-inspire-cream);
   overflow: hidden;
 }
 
@@ -29,75 +53,119 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 79% 20%, rgba(22, 93, 111, .16), transparent 31%),
-    linear-gradient(115deg, #fff 0%, #f8f7f0 62%, #f4e6c1 135%);
+    radial-gradient(circle at 82% 18%, rgba(22, 93, 111, 0.12), transparent 38%),
+    radial-gradient(circle at 18% 85%, rgba(246, 94, 1, 0.08), transparent 42%),
+    linear-gradient(115deg, #FFFFFF 0%, #FAF8F4 55%, #F4ECE1 125%);
   pointer-events: none;
+  z-index: 1;
 }
 
-/* ─── GRID EDITORIAL ─── */
+/* Decoración ambiental sutil */
+.inspire-ambient-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ambient-flower-left,
+.ambient-flower-right {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.14;
+  filter: blur(1px);
+}
+
+.ambient-flower-left {
+  left: -40px;
+  bottom: -40px;
+  background-image: radial-gradient(circle at 40% 40%, #F65E01 0%, rgba(22, 93, 111, 0.4) 60%, transparent 80%);
+  transform: rotate(-15deg);
+}
+
+.ambient-flower-right {
+  right: -50px;
+  bottom: -50px;
+  background-image: radial-gradient(circle at 60% 60%, #D95328 0%, rgba(45, 122, 79, 0.35) 65%, transparent 80%);
+  transform: rotate(25deg);
+}
+
+/* ─── GRID EDITORIAL PANORÁMICO (3 ZONAS CONECTADAS) ─── */
 .inspire-editorial {
   position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: minmax(205px, 15vw) minmax(520px, 1.25fr) minmax(390px, .85fr);
-  min-height: 680px;
-  max-width: 1920px;
-  margin: auto;
-  padding: clamp(40px, 5vw, 76px) clamp(24px, 4.5vw, 86px);
-  gap: clamp(22px, 2.4vw, 46px);
-  color: #0f172a;
+  grid-template-columns: minmax(210px, 16vw) minmax(560px, 1.35fr) minmax(420px, 0.95fr);
+  min-height: 690px;
+  max-width: 1840px;
+  margin: 0 auto;
+  padding: clamp(38px, 4.6vw, 68px) clamp(20px, 4vw, 72px);
+  gap: clamp(24px, 2.5vw, 48px);
+  color: var(--baq-inspire-dark);
 }
 
-/* ─── INTRO IZQUIERDA ─── */
+/* ============================================================================
+   ZONA 1: IDENTIDAD Y FILTROS TEMÁTICOS (IZQUIERDA)
+   ============================================================================ */
 .inspire-intro {
-  z-index: 3;
+  z-index: 4;
   align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .inspire-eyebrow {
   margin: 0;
-  font-size: clamp(.82rem, 1vw, 1.06rem);
+  font-family: var(--baq-font-sans);
+  font-size: clamp(0.85rem, 0.95vw, 1.05rem);
   font-weight: 900;
-  letter-spacing: .12em;
-  color: #123f50;
+  letter-spacing: 0.16em;
+  color: #103B48;
+  text-transform: uppercase;
 }
 
-.inspire-intro h2 {
-  margin: -4px 0 2px;
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(3.3rem, 5.5vw, 6.8rem);
-  font-style: italic;
-  font-weight: 900;
-  line-height: .92;
-  letter-spacing: -.08em;
-  color: #165d6f;
+.inspire-title-calligraphic {
+  margin: -6px 0 0 -4px;
+  font-family: var(--baq-font-hand);
+  font-size: clamp(4.6rem, 7.2vw, 7.8rem);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  color: var(--baq-inspire-petrol);
   transform: rotate(-3deg);
-  transform-origin: left;
+  transform-origin: left bottom;
+  text-shadow: 0 4px 18px rgba(22, 93, 111, 0.18);
 }
 
-.inspire-stroke {
+.inspire-brush-underline {
   display: block;
-  width: 76%;
-  height: 11px;
-  margin: 8px 0 20px 18%;
-  border-radius: 50%;
-  background: #f65e01;
-  transform: rotate(-5deg);
-  clip-path: polygon(0 40%, 100% 0, 94% 70%, 12% 100%);
+  width: min(200px, 85%);
+  height: 20px;
+  margin: 4px 0 16px 8px;
+  overflow: visible;
+  filter: drop-shadow(0 3px 6px rgba(246, 94, 1, 0.28));
 }
 
 .inspire-lead {
-  max-width: 240px;
-  margin: 0;
-  color: #526572;
-  font-size: .94rem;
-  line-height: 1.6;
+  max-width: 250px;
+  margin: 0 0 22px;
+  font-family: var(--baq-font-sans);
+  color: #4A6070;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  font-weight: 500;
 }
 
-/* ─── FILTROS ─── */
+/* Navegación vertical de filtros */
 .inspire-filters {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 5px;
-  margin-top: 22px;
+  width: 100%;
 }
 
 .inspire-filters button {
@@ -105,57 +173,86 @@
   align-items: center;
   gap: 13px;
   width: 100%;
-  min-height: 43px;
-  padding: 8px 14px;
+  min-height: 42px;
+  padding: 7px 16px;
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: #174154;
-  font: 700 .9rem "Montserrat", sans-serif;
+  color: #1B4456;
+  font-family: var(--baq-font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
   text-align: left;
   cursor: pointer;
-  transition: transform .22s ease, background .22s ease, color .22s ease;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.22s ease,
+              color 0.22s ease,
+              box-shadow 0.22s ease;
 }
 
-.inspire-filters button i {
-  width: 22px;
-  font-size: 1.08rem;
-  text-align: center;
+.filter-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.filter-name {
+  flex-grow: 1;
 }
 
 .inspire-filters button:hover,
 .inspire-filters button:focus-visible {
-  transform: translateX(5px);
-  outline: 2px solid #f65e01;
-  outline-offset: 2px;
+  transform: translateX(6px);
+  color: var(--baq-inspire-orange);
+  background: rgba(246, 94, 1, 0.08);
+  outline: none;
 }
 
 .inspire-filters button.is-active {
-  color: #fff;
-  background: linear-gradient(120deg, #f65e01, #ff8a25);
-  box-shadow: 0 12px 25px rgba(246, 94, 1, .25);
+  color: #FFFFFF;
+  background: linear-gradient(115deg, #F65E01, #FF7F24);
+  box-shadow: 0 10px 24px rgba(246, 94, 1, 0.32);
+  transform: translateX(4px);
 }
 
-/* ─── FEATURE FOTO CENTRAL ─── */
+.inspire-filters button.is-active:hover {
+  transform: translateX(6px);
+  color: #FFFFFF;
+}
+
+/* ============================================================================
+   ZONA 2: DESTINO DESTACADO (CENTRAL - RECORTE ORGÁNICO)
+   ============================================================================ */
 .inspire-feature {
   position: relative;
-  min-height: 540px;
+  min-height: 570px;
   align-self: center;
   isolation: isolate;
+  display: flex;
+  align-items: center;
 }
 
+/* Marco Orgánico tipo Pincelada / Papel Rasgado */
 .inspire-photo-frame,
 .baqueano-photo-frame {
   position: absolute;
-  inset: 0 0 75px;
+  inset: 0 0 65px;
   overflow: hidden;
-  background: #e9eeee;
+  background: #E5ECEB;
+  /* Recorte artístico con contorno orgánico vivo */
   clip-path: polygon(
-    5% 18%, 13% 8%, 28% 4%, 43% 7%, 56% 3%, 70% 8%, 86% 6%,
-    96% 15%, 99% 31%, 96% 47%, 100% 62%, 93% 79%, 82% 91%,
-    67% 94%, 53% 91%, 39% 96%, 24% 91%, 11% 84%, 4% 70%,
-    7% 54%, 2% 39%
+    4% 14%, 12% 6%, 26% 3%, 42% 5%, 58% 2%, 74% 6%, 88% 3%,
+    97% 12%, 100% 28%, 97% 45%, 100% 64%, 94% 82%, 84% 94%,
+    68% 97%, 52% 94%, 36% 98%, 20% 93%, 8% 85%, 2% 70%,
+    5% 52%, 1% 34%
   );
+  filter: drop-shadow(0 24px 38px rgba(15, 23, 42, 0.16));
+  will-change: transform;
+  transition: clip-path 0.4s ease;
 }
 
 .inspire-photo-frame::after,
@@ -164,439 +261,782 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(255, 255, 255, .15), transparent 45%, rgba(15, 23, 42, .08));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 40%, rgba(15, 23, 42, 0.12));
 }
 
-.inspire-photo-frame img,
 .baqueano-photo {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center;
-  will-change: transform;
-  transition: opacity .28s ease, transform .8s cubic-bezier(.2, .8, .2, 1), filter .5s ease;
+  object-position: center 40%;
+  will-change: transform, opacity;
+  transition: opacity 0.3s ease, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .baqueano-photo.is-changing {
-  opacity: .72;
-  filter: saturate(.8);
+  opacity: 0.7;
+  filter: blur(2px) saturate(0.85);
 }
 
-.inspire-feature:hover .baqueano-photo,
-.baqueano-photo-frame:hover .baqueano-photo {
-  transform: scale(1.055);
+.inspire-feature:hover .baqueano-photo {
+  transform: scale(1.045);
 }
 
 .inspire-photo-wash {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, .98) 0%, rgba(255, 255, 255, .9) 27%, rgba(255, 255, 255, .06) 68%),
-    linear-gradient(0deg, rgba(15, 23, 42, .2), transparent 55%);
+    linear-gradient(90deg, rgba(250, 248, 244, 0.96) 0%, rgba(250, 248, 244, 0.86) 32%, rgba(250, 248, 244, 0.18) 64%, transparent 100%),
+    linear-gradient(0deg, rgba(15, 23, 42, 0.22) 0%, transparent 45%);
+  pointer-events: none;
 }
 
-/* ─── COPY EDITORIAL ─── */
+/* Contenido Editorial Superpuesto */
 .inspire-copy {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: min(54%, 520px);
-  min-height: 465px;
-  padding: 60px 0 80px 18px;
+  width: min(58%, 560px);
+  min-height: 480px;
+  padding: 42px 0 95px 24px;
 }
 
 .inspire-badge {
   align-self: flex-start;
-  padding: 7px 16px;
-  color: #fff;
-  background: #f65e01;
-  font: 700 italic .9rem "Montserrat", sans-serif;
-  clip-path: polygon(4% 4%, 96% 0, 100% 78%, 4% 100%, 0 30%);
+  padding: 6px 18px;
+  color: #FFFFFF;
+  background: linear-gradient(115deg, #F65E01, #FF7F24);
+  font-family: var(--baq-font-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(246, 94, 1, 0.32);
+  transform: rotate(-1deg);
+  margin-bottom: 8px;
 }
 
-.inspire-copy h3 {
-  margin: 10px 0 2px;
-  color: #123f50;
-  font: 900 clamp(2rem, 3.1vw, 3.5rem)/1 "Montserrat", sans-serif;
-  letter-spacing: -.045em;
+.inspire-headline-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 6px 0 10px;
 }
 
-.inspire-copy > p {
-  margin: 7px 0;
-  color: #315464;
-  line-height: 1.5;
+.inspire-headline-pin {
+  font-size: 1.85rem;
+  color: var(--baq-inspire-orange);
+  margin-top: 6px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(246, 94, 1, 0.35));
+}
+
+.inspire-headline-text h3 {
+  margin: 0;
+  font-family: var(--baq-font-sans);
+  font-size: clamp(2.3rem, 3.8vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: #0F172A;
 }
 
 .inspire-location {
+  margin: 4px 0 0;
+  font-family: var(--baq-font-sans);
+  font-size: 1.05rem;
   font-weight: 600;
+  color: #526572;
 }
 
-.inspire-location i {
-  margin-right: 9px;
-  color: #f65e01;
+.inspire-description-text {
+  margin: 8px 0 16px;
+  font-family: var(--baq-font-sans);
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: #334155;
+  font-weight: 500;
 }
 
-.inspire-traits {
+/* Indicadores Circulares de Experiencia (5 Badges) */
+.inspire-traits-row {
   display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 10px 0 26px;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 15px 0 20px;
 }
 
-.inspire-traits span {
-  padding: 7px 10px;
-  border: 1px solid rgba(22, 93, 111, .18);
-  border-radius: 999px;
-  color: #165d6f;
-  background: rgba(255, 255, 255, .7);
-  font-size: .75rem;
-  font-weight: 750;
-  backdrop-filter: blur(8px);
+.trait-badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 58px;
 }
 
-.inspire-traits i {
-  margin-right: 5px;
-  color: #f65e01;
+.trait-circle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-size: 1.12rem;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
 }
 
-.inspire-primary,
-.inspire-all {
+.trait-circle-icon:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.22);
+}
+
+.trait-label-text {
+  font-family: var(--baq-font-sans);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #165D6F;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+/* Botón CTA Explorar Destino */
+.inspire-cta-btn {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  min-height: 48px;
+  gap: 14px;
+  min-height: 50px;
+  padding: 0 28px;
   border-radius: 999px;
-  color: #fff;
+  background: linear-gradient(115deg, #F65E01, #FF7315);
+  color: #FFFFFF;
   text-decoration: none;
+  font-family: var(--baq-font-sans);
+  font-size: 1rem;
   font-weight: 800;
+  box-shadow: 0 14px 30px rgba(246, 94, 1, 0.32);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-.inspire-primary {
-  align-self: flex-start;
-  padding: 0 23px;
-  background: #f65e01;
-  box-shadow: 0 14px 28px rgba(246, 94, 1, .22);
-  transition: transform .2s ease;
-}
-
-.inspire-primary:hover {
+.inspire-cta-btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(246, 94, 1, 0.4);
 }
 
-/* ─── GALERÍA MINIATURAS ─── */
-.inspire-gallery {
+.inspire-cta-btn i {
+  transition: transform 0.2s ease;
+}
+
+.inspire-cta-btn:hover i {
+  transform: translateX(4px);
+}
+
+/* Mini Galería Superpuesta (Polaroids rotadas + botón siguiente) */
+.inspire-gallery-editorial {
   position: absolute;
-  z-index: 4;
-  right: 4%;
-  bottom: 32px;
+  z-index: 5;
+  right: 6%;
+  bottom: 22px;
+}
+
+.polaroid-strip {
   display: flex;
   align-items: center;
-  padding: 8px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, .92);
-  box-shadow: 0 16px 35px rgba(15, 23, 42, .24);
-  transform: rotate(1deg);
+  gap: 6px;
+  padding: 6px;
+  background: transparent;
 }
 
-.inspire-gallery img {
-  width: 94px;
-  height: 105px;
-  object-fit: cover;
-  border: 3px solid #fff;
-  border-radius: 10px;
-}
-
-.inspire-gallery img + img {
-  margin-left: -5px;
-}
-
-/* ─── PANEL MAPA DERECHO ─── */
-.inspire-map {
+.polaroid-item {
   position: relative;
-  min-height: 560px;
+  width: 82px;
+  height: 98px;
+  padding: 0;
+  margin: 0;
+  border: 3.5px solid #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.22);
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s ease,
+              outline 0.2s ease;
+}
+
+.polaroid-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Rotaciones sutiles para efecto editorial */
+.polaroid-item:nth-child(1) { transform: rotate(-3deg); }
+.polaroid-item:nth-child(2) { transform: rotate(-1deg); }
+.polaroid-item:nth-child(3) { transform: rotate(1.4deg); }
+.polaroid-item:nth-child(4) { transform: rotate(3deg); }
+
+.polaroid-item:hover {
+  transform: scale(1.12) rotate(0deg) translateY(-4px) !important;
+  z-index: 8;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.32);
+}
+
+.polaroid-item.is-active {
+  outline: 3px solid var(--baq-inspire-orange);
+  outline-offset: 1px;
+  box-shadow: 0 16px 32px rgba(246, 94, 1, 0.35);
+  transform: scale(1.08) rotate(0deg) !important;
+  z-index: 7;
+}
+
+.polaroid-arrow-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: 4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(15, 23, 42, 0.08);
+  background: #FFFFFF;
+  color: var(--baq-inspire-petrol);
+  font-size: 0.95rem;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.polaroid-arrow-btn:hover {
+  transform: scale(1.1);
+  background: var(--baq-inspire-orange);
+  color: #FFFFFF;
+}
+
+/* ============================================================================
+   ZONA 3: MAPA TERRITORIAL DE NICARAGUA CON RUTA Y ACCESOS (DERECHA)
+   ============================================================================ */
+.inspire-map-territorial {
+  position: relative;
+  min-height: 590px;
   align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* ─── BRÚJULA DECORATIVA ─── */
-.inspire-compass {
-  position: absolute;
-  top: -10px;
-  right: 0;
-  width: 72px;
-  height: 72px;
-  z-index: 5;
-  opacity: .85;
+/* Frase de Marca y Brújula de Exploración */
+.inspire-brand-callout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-bottom: 2px;
+  padding-right: 12px;
 }
 
-/*
- * 🎯 POR QUÉ: El mapa territorial debe ser protagonista y conservar su contorno real.
- * ⚙️ CÓMO: La imagen transparente usa object-fit contain y mantiene los botones fuera del bitmap.
- * 📦 QUÉ: Lienzo adaptable para el mapa compartido y sus puntos interactivos.
- */
+.brand-compass {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.compass-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(22, 93, 111, 0.16));
+}
+
+.brand-phrase-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.brand-phrase {
+  margin: 0;
+  font-family: var(--baq-font-hand);
+  font-size: clamp(1.4rem, 1.7vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #123F50;
+  transform: rotate(-3deg);
+  text-shadow: 0 2px 6px rgba(18, 63, 80, 0.12);
+}
+
+.phrase-arrow-svg {
+  width: 32px;
+  height: 28px;
+  margin-left: 4px;
+  transform: rotate(6deg);
+  overflow: visible;
+  filter: drop-shadow(0 2px 4px rgba(246, 94, 1, 0.3));
+}
+
+/* Wrap del Mapa con Relieve y Ruta SVG */
 .inspire-nic-map-wrap {
   position: relative;
   width: 100%;
-  height: 510px;
+  height: 470px;
 }
 
 .inspire-nic-map {
   position: absolute;
-  inset: 4px 3% 66px 5%;
-  width: 92%;
-  height: calc(100% - 70px);
+  inset: 0 2% 40px 6%;
+  width: 90%;
+  height: calc(100% - 40px);
   object-fit: contain;
   object-position: center;
-  filter: drop-shadow(0 24px 24px rgba(15, 23, 42, .24));
+  filter: drop-shadow(0 24px 28px rgba(15, 23, 42, 0.22));
   user-select: none;
   pointer-events: none;
 }
 
-/* ─── PINS SOBRE EL MAPA ─── */
-.inspire-pin {
+/* Ruta Curva Punteada SVG */
+.map-route-svg {
   position: absolute;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 40px;
-  padding: 4px 12px 4px 4px;
-  border: 2px solid rgba(255, 255, 255, .85);
-  border-radius: 999px;
-  color: #fff;
-  background: #165d6f;
-  box-shadow: 0 10px 22px rgba(15, 23, 42, .25);
-  font-weight: 800;
-  font-size: .8rem;
-  cursor: pointer;
-  transition: transform .2s ease, background .2s ease;
+  inset: 0 2% 40px 6%;
+  width: 90%;
+  height: calc(100% - 40px);
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
 }
 
-.inspire-pin img {
+.route-curve {
+  filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.45));
+}
+
+/* Pins Interactivos sobre el Mapa */
+.inspire-pin {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 3px 14px 3px 3px;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  color: #FFFFFF;
+  background: #165D6F;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.28);
+  font-family: var(--baq-font-sans);
+  font-weight: 800;
+  font-size: 0.84rem;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.22s ease,
+              box-shadow 0.22s ease;
+}
+
+.pin-thumb-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  object-fit: cover;
+  border: 2.5px solid #FFFFFF;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
 
+.pin-thumb-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pin-label {
+  white-space: nowrap;
+}
+
 .inspire-pin:hover,
-.inspire-pin:focus-visible,
+.inspire-pin:focus-visible {
+  z-index: 6;
+  transform: scale(1.08);
+  background: var(--baq-inspire-orange);
+  box-shadow: 0 14px 30px rgba(246, 94, 1, 0.4);
+  outline: none;
+}
+
 .inspire-pin.is-active {
-  z-index: 5;
-  background: #f65e01;
-  transform: scale(1.06);
-  outline: 3px solid rgba(246, 94, 1, .25);
-  outline-offset: 3px;
+  z-index: 6;
+  background: linear-gradient(115deg, #F65E01, #FF7F24);
+  transform: scale(1.09);
+  box-shadow: 0 14px 32px rgba(246, 94, 1, 0.45);
+  border-color: #FFFFFF;
 }
 
-/* Posiciones geográficas sobre el mapa (relativas al wrap) */
-/* Norte: Cañón de Somoto */
-.pin-somoto { top: 9%; right: 8%; }
-/* Occidente: León */
-.pin-leon   { top: 34%; left: 0; }
-/* Centro-Pacífico: Granada */
-.pin-granada { top: 52%; right: -1%; }
-/* Occidente volcánico: Cerro Negro */
-.pin-cerro  { top: 66%; right: 1%; }
-/* Sur, Lago Cocibolca: Ometepe */
-.pin-ometepe { top: 76%; left: 9%; }
-
-/* ─── NOTA DEL MAPA ─── */
-.inspire-map-note {
+.pin-active-pulse {
   position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 80px;
-  width: 140px;
-  margin: 0;
-  color: #123f50;
-  font: 800 italic 1.15rem/1.25 "Montserrat", sans-serif;
-  transform: rotate(-5deg);
+  left: 2px;
+  top: 2px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #F65E01;
+  pointer-events: none;
+  animation: pinPulse 2s infinite ease-out;
 }
 
-.inspire-map-note i {
-  color: #f65e01;
+@keyframes pinPulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.55); opacity: 0; }
 }
 
-/* ─── CARD COMUNIDAD ─── */
-.inspire-community {
-  position: absolute;
-  z-index: 4;
-  left: 0;
-  bottom: 0;
+/* Posiciones geográficas de los pines sobre el relieve territorial */
+/* 1. Cañón de Somoto: Norte */
+.pin-somoto { top: 8%; right: 7%; }
+
+/* 2. León: Occidente */
+.pin-leon   { top: 35%; left: 0%; }
+
+/* 3. Granada: Oriente de Cocibolca */
+.pin-granada { top: 48%; right: -2%; }
+
+/* 4. Cerro Negro: Cordillera Maribios */
+.pin-cerro  { top: 64%; right: 2%; }
+
+/* 5. Ometepe: Lago Cocibolca (Sur) */
+.pin-ometepe { top: 76%; left: 10%; }
+
+/* Pie del Mapa: Story Card + Botón Ver Todos */
+.inspire-map-footer {
   display: flex;
-  gap: 13px;
   align-items: center;
-  max-width: 285px;
-  padding: 13px 17px;
-  border-radius: 15px;
-  background: rgba(244, 230, 193, .9);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, .12);
-  backdrop-filter: blur(12px);
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 10px;
 }
 
-.inspire-community > i {
-  font-size: 2rem;
-  color: #f65e01;
+/* Tarjeta Editorial "Más que un destino" */
+.inspire-story-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(244, 230, 193, 0.88);
+  border: 1px solid rgba(22, 93, 111, 0.14);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(10px);
 }
 
-.inspire-community p {
-  display: grid;
-  gap: 3px;
+.story-thumb-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.story-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.story-title {
   margin: 0;
+  font-family: var(--baq-font-hand);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #123F50;
 }
 
-.inspire-community strong {
-  color: #123f50;
-}
-
-.inspire-community span {
-  color: #526572;
-  font-size: .72rem;
+.story-desc {
+  margin: 0;
+  font-family: var(--baq-font-sans);
+  font-size: 0.73rem;
   line-height: 1.35;
+  color: #4A6070;
+  font-weight: 600;
 }
 
-/* ─── BOTÓN VER TODOS ─── */
-.inspire-all {
-  position: absolute;
-  right: 0;
-  bottom: 7px;
+/* Botón "Ver todos los destinos →" con estilo editorial */
+.inspire-browse-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
   padding: 0 22px;
-  background: #165d6f;
-  box-shadow: 0 14px 28px rgba(22, 93, 111, .25);
+  border-radius: 999px;
+  background: var(--baq-inspire-petrol);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--baq-font-sans);
+  font-size: 0.92rem;
+  font-weight: 800;
+  box-shadow: 0 12px 28px rgba(22, 93, 111, 0.28);
+  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+  white-space: nowrap;
 }
 
-/* ─── LEGACY HIDDEN ─── */
-.inspire-map-shape,
-.inspire-route {
-  display: none;
+.inspire-browse-all-btn:hover {
+  transform: translateY(-2px);
+  background: #0E4756;
+  box-shadow: 0 16px 34px rgba(22, 93, 111, 0.38);
 }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 1250px) {
+.inspire-browse-all-btn i {
+  transition: transform 0.2s ease;
+}
+
+.inspire-browse-all-btn:hover i {
+  transform: translateX(4px);
+}
+
+/* ============================================================================
+   RESPONSIVIDAD (DESKTOP, TABLET Y MÓVIL)
+   ============================================================================ */
+@media (max-width: 1360px) {
   .inspire-editorial {
-    grid-template-columns: 210px 1fr;
-    padding-inline: 32px;
-  }
-
-  .inspire-map {
-    grid-column: 1 / -1;
-    min-height: 420px;
-  }
-
-  .inspire-nic-map-wrap {
-    height: 400px;
-  }
-
-  .pin-somoto { top: 8%;  right: 30%; }
-  .pin-leon   { top: 30%; left: 18%; }
-  .pin-granada { top: 48%; right: 20%; }
-  .pin-cerro  { top: 62%; right: 22%; }
-  .pin-ometepe { top: 68%; left: 26%; }
-
-  .inspire-map-note { right: 28%; }
-}
-
-@media (max-width: 760px) {
-  .inspire-editorial {
-    display: block;
-    min-height: 0;
-    padding: 42px 18px 52px;
-  }
-
-  .inspire-intro h2 { font-size: 4.2rem; }
-  .inspire-lead     { max-width: 520px; }
-
-  .inspire-filters {
-    display: flex;
-    overflow-x: auto;
-    margin: 22px -18px 20px;
-    padding: 2px 18px 10px;
-    scrollbar-width: none;
-  }
-
-  .inspire-filters button {
-    flex: 0 0 auto;
-    width: auto;
-    padding-inline: 16px;
-  }
-
-  .inspire-feature { min-height: 620px; }
-
-  .inspire-photo-frame,
-  .baqueano-photo-frame {
-    inset: 0 0 80px;
-    clip-path: polygon(
-      4% 14%, 18% 5%, 40% 7%, 58% 3%, 78% 8%, 95% 15%, 98% 35%,
-      94% 57%, 99% 75%, 85% 92%, 62% 96%, 43% 92%, 22% 97%,
-      7% 86%, 3% 64%
-    );
-  }
-
-  .inspire-photo-wash {
-    background: linear-gradient(0deg, rgba(15, 23, 42, .9) 0%, rgba(15, 23, 42, .35) 54%, transparent 85%);
+    grid-template-columns: 210px 1.25fr 1fr;
+    padding-inline: 28px;
+    gap: 28px;
   }
 
   .inspire-copy {
-    justify-content: flex-end;
-    width: 100%;
-    min-height: 530px;
-    padding: 190px 24px 105px;
+    width: 65%;
   }
 
-  .inspire-copy h3,
-  .inspire-copy > p { color: #fff; }
-
-  .inspire-traits span {
-    color: #fff;
-    border-color: rgba(255, 255, 255, .3);
-    background: rgba(15, 23, 42, .38);
+  .inspire-gallery-editorial {
+    right: 2%;
   }
 
-  .inspire-gallery { right: 16px; bottom: 25px; }
-  .inspire-gallery img { width: 70px; height: 74px; }
-
-  .inspire-map {
-    min-height: 480px;
-    margin-top: 20px;
+  .polaroid-item {
+    width: 72px;
+    height: 88px;
   }
-
-  .inspire-nic-map-wrap { height: 400px; }
-
-  .inspire-pin span { display: none; }
-  .inspire-pin { padding: 3px; }
-  .inspire-pin img { width: 40px; height: 40px; }
-
-  .pin-somoto  { top: 8%;  right: 12%; }
-  .pin-leon    { top: 30%; left: 6%; }
-  .pin-granada { top: 50%; right: 8%; }
-  .pin-cerro   { top: 63%; right: 10%; }
-  .pin-ometepe { top: 70%; left: 18%; }
-
-  .inspire-map-note  { right: 0; width: 120px; font-size: .95rem; }
-  .inspire-community { left: 0; bottom: 0; max-width: 210px; padding: 10px; }
-
-  .inspire-all {
-    right: 0;
-    bottom: 7px;
-    width: 130px;
-    padding: 0 14px;
-    text-align: center;
-    font-size: .78rem;
-  }
-
-  .inspire-all i { display: none; }
-
-  .inspire-compass { width: 52px; height: 52px; }
 }
 
+@media (max-width: 1140px) {
+  .inspire-editorial {
+    grid-template-columns: 200px 1fr;
+    min-height: auto;
+  }
+
+  .inspire-map-territorial {
+    grid-column: 1 / -1;
+    min-height: 480px;
+    margin-top: 24px;
+  }
+
+  .inspire-nic-map-wrap {
+    height: 420px;
+  }
+
+  .pin-somoto { top: 8%; right: 28%; }
+  .pin-leon   { top: 34%; left: 16%; }
+  .pin-granada { top: 48%; right: 22%; }
+  .pin-cerro  { top: 62%; right: 24%; }
+  .pin-ometepe { top: 74%; left: 24%; }
+
+  .inspire-brand-callout {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .destinations-section-exact {
+    padding: 24px 0 !important;
+  }
+
+  .inspire-editorial {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 16px 36px;
+    gap: 24px;
+  }
+
+  .inspire-intro {
+    align-self: stretch;
+  }
+
+  .inspire-eyebrow {
+    font-size: 0.82rem;
+  }
+
+  .inspire-title-calligraphic {
+    font-size: 4.4rem;
+  }
+
+  .inspire-lead {
+    max-width: 100%;
+  }
+
+  /* Filtros en carrusel horizontal con snap táctil */
+  .inspire-filters {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    margin: 8px -16px 14px;
+    padding: 4px 16px 12px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .inspire-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .inspire-filters button {
+    flex-shrink: 0;
+    width: auto;
+    min-height: 38px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    background: rgba(22, 93, 111, 0.08);
+  }
+
+  .inspire-filters button.is-active {
+    background: linear-gradient(115deg, #F65E01, #FF7F24);
+  }
+
+  /* Destino destacado en móvil */
+  .inspire-feature {
+    min-height: 520px;
+    width: 100%;
+  }
+
+  .inspire-photo-frame {
+    inset: 0 0 110px;
+    clip-path: polygon(
+      3% 8%, 18% 3%, 45% 4%, 72% 2%, 96% 7%, 99% 26%,
+      96% 50%, 99% 75%, 90% 95%, 65% 97%, 35% 95%, 8% 96%,
+      2% 78%, 4% 44%, 1% 22%
+    );
+  }
+
+  .inspire-copy {
+    width: 100%;
+    min-height: auto;
+    padding: 24px 14px 125px;
+  }
+
+  .inspire-headline-text h3 {
+    font-size: 2rem;
+  }
+
+  .inspire-traits-row {
+    gap: 12px;
+    margin: 8px 0 18px;
+  }
+
+  .trait-circle-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 0.98rem;
+  }
+
+  .trait-label-text {
+    font-size: 0.7rem;
+  }
+
+  /* Mini galería en móvil */
+  .inspire-gallery-editorial {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 12px;
+    width: 94%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .polaroid-strip {
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .polaroid-item {
+    width: 64px;
+    height: 78px;
+    border-width: 2.5px;
+  }
+
+  /* Mapa en móvil */
+  .inspire-map-territorial {
+    min-height: auto;
+  }
+
+  .inspire-nic-map-wrap {
+    height: 360px;
+  }
+
+  .inspire-nic-map {
+    inset: 0 0 20px;
+    width: 100%;
+  }
+
+  .pin-somoto { top: 6%; right: 10%; }
+  .pin-leon   { top: 32%; left: 2%; }
+  .pin-granada { top: 48%; right: 4%; }
+  .pin-cerro  { top: 62%; right: 6%; }
+  .pin-ometepe { top: 74%; left: 8%; }
+
+  .inspire-pin {
+    min-height: 36px;
+    padding: 2px 10px 2px 2px;
+    font-size: 0.74rem;
+  }
+
+  .pin-thumb-ring {
+    width: 32px;
+    height: 32px;
+  }
+
+  .inspire-map-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inspire-story-card {
+    max-width: 100%;
+  }
+
+  .inspire-browse-all-btn {
+    width: 100%;
+  }
+}
+
+/* Modo accesibilidad para movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
-  .inspire-photo-frame img,
+  .baqueano-photo,
   .inspire-filters button,
   .inspire-pin,
-  .inspire-primary { transition: none !important; }
+  .polaroid-item,
+  .inspire-cta-btn,
+  .inspire-browse-all-btn,
+  .pin-active-pulse {
+    transition: none !important;
+    animation: none !important;
+  }
 }

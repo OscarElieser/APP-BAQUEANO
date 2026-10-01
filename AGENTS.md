@@ -35,8 +35,10 @@
    - El asistente debe actuar de forma autónoma e inmediata, seleccionando siempre por defecto la **Opción 1 (la recomendada y de mejor estándar técnico)** y ejecutando la solución completa de punta a punta.
    - Solo se requerirá intervención del usuario en casos donde una acción cause pérdida destructiva e irreversible de datos.
 
-7. **Bitácora Persistente de Consultas y Sesión Antigolpes (Crash & Interruption Resilience)**:
-   - Toda consulta del usuario, directiva técnica, archivo modificado y avance del proyecto debe registrarse y actualizarse de manera obligatoria en `SESSION_LOG.md` en la raíz del proyecto.
+7. **Bitácora Persistente de Consultas y Sesión Antigolpes (Crash & Interruption Resilience — Write-Ahead Logging)**:
+   - **PRIORIDAD ABSOLUTA #1 — REGISTRO PREVIO OBLIGATORIO:** Ante CUALQUIER consulta, cambio o solicitud del usuario, el primerísimo paso innegociable antes de ejecutar cualquier análisis, herramienta, comando o edición de código es escribir y guardar la solicitud en `SESSION_LOG.md`.
+   - Toda directiva técnica, archivo modificado, decisión y avance del proyecto debe registrarse y actualizarse de manera obligatoria en `SESSION_LOG.md` en la raíz del proyecto.
+   - Al finalizar o alcanzar un avance verificable, `SESSION_LOG.md` se actualiza con los entregables, pruebas y estado exacto para garantizar continuidad fluida.
    - Ante cualquier apagón, corte de energía o pérdida de sesión, el asistente consultará inmediatamente este archivo para reanudar el trabajo exactamente en el último punto sin pérdida de contexto.
 
 ## BAQUEANO Agent Skills Orchestration
