@@ -376,3 +376,89 @@
   background: rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
 }
+
+/* ─── 4F Marketing: Feedback & Calidad Territorial ───────────────────────── */
+.bq-dossier-feedback-box {
+  margin: 24px 20px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(244, 230, 193, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bq-dossier-feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bq-dossier-feedback-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #F4E6C1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bq-dossier-feedback-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bq-feedback-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #E2E8F0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.bq-feedback-chip:hover {
+  background: rgba(22, 93, 111, 0.4);
+  border-color: #165D6F;
+  color: #FFFFFF;
+}
+
+.bq-feedback-chip.voted {
+  background: #165D6F;
+  border-color: #2DD4BF;
+  color: #FFFFFF;
+  pointer-events: none;
+}
+
+.bq-report-btn {
+  background: transparent;
+  border: 1px dashed rgba(246, 94, 1, 0.5);
+  color: #F65E01;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.bq-report-btn:hover {
+  background: rgba(246, 94, 1, 0.15);
+  color: #FFA07A;
+}
+

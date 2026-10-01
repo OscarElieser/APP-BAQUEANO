@@ -127,7 +127,7 @@ function buildGlobalMegaNavigation() {
     `;
   }
 
-  // ─── Control Interactivo del Mega Menú ───
+  // ─── Control Interactivo del Mega Menú (Inspirado en 21st MCP Mega Menu Navbar) ───
   const moreDropdown = document.getElementById('navDropdownGlobalMore');
   const moreBtn = document.getElementById('btnGlobalMoreTrigger');
   const megaMenu = document.getElementById('globalMegaMenu');
@@ -139,6 +139,12 @@ function buildGlobalMegaNavigation() {
       e.stopPropagation();
       const open = moreDropdown.classList.toggle('is-open');
       moreBtn.setAttribute('aria-expanded', String(open));
+      if (open && megaMenu) {
+        const firstLink = megaMenu.querySelector('a');
+        if (firstLink && document.activeElement === moreBtn) {
+          // Mantener foco accesible en el botón o permitir navegación con Tab
+        }
+      }
     });
 
     moreDropdown.addEventListener('mouseenter', () => {
@@ -153,7 +159,7 @@ function buildGlobalMegaNavigation() {
       closeTimer = setTimeout(() => {
         moreDropdown.classList.remove('is-open');
         moreBtn.setAttribute('aria-expanded', 'false');
-      }, 260);
+      }, 240);
     });
 
     document.addEventListener('click', (e) => {
@@ -163,22 +169,75 @@ function buildGlobalMegaNavigation() {
       }
     });
 
-    document.addEventListener('keydown', (e) => {
+    // Accesibilidad por teclado: Escape para cerrar y flechas para recorrer ítems
+    moreDropdown.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         moreDropdown.classList.remove('is-open');
         moreBtn.setAttribute('aria-expanded', 'false');
+        moreBtn.focus();
+      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        const links = Array.from(megaMenu ? megaMenu.querySelectorAll('a') : []);
+        if (!links.length) return;
+        const currentIndex = links.indexOf(document.activeElement);
+        e.preventDefault();
+        if (e.key === 'ArrowDown') {
+          const nextIndex = currentIndex + 1 < links.length ? currentIndex + 1 : 0;
+          links[nextIndex].focus();
+        } else {
+          const prevIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : links.length - 1;
+          links[prevIndex].focus();
+        }
       }
     });
   }
 
-  // ─── Control del Menú Móvil ───
+  // ─── Control del Menú Móvil & Drawer Táctil (Inspirado en 21st MCP Mobile Nav) ───
   const mobileToggle = document.getElementById('mobileNavToggle');
+  let navBackdrop = document.querySelector('.nav-drawer-backdrop');
+  if (!navBackdrop) {
+    navBackdrop = document.createElement('div');
+    navBackdrop.className = 'nav-drawer-backdrop';
+    navBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(navBackdrop);
+  }
+
+  const closeMobileMenu = () => {
+    if (!navMenu) return;
+    navMenu.classList.remove('mobile-open', 'nav-active');
+    document.body.classList.remove('nav-drawer-open');
+    if (navBackdrop) navBackdrop.setAttribute('aria-hidden', 'true');
+    if (mobileToggle) {
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      mobileToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }
+  };
+
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = navMenu.classList.toggle('mobile-open') || navMenu.classList.toggle('nav-active');
       mobileToggle.setAttribute('aria-expanded', String(isOpen));
       mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+      document.body.classList.toggle('nav-drawer-open', isOpen);
+      if (navBackdrop) navBackdrop.setAttribute('aria-hidden', String(!isOpen));
+    });
+
+    navBackdrop.addEventListener('click', closeMobileMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-drawer-open')) {
+        closeMobileMenu();
+        mobileToggle.focus();
+      }
+    });
+
+    // Cerrar automáticamente al seleccionar una ruta en móvil
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeMobileMenu();
+        }
+      });
     });
   }
 }

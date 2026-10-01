@@ -72,6 +72,14 @@
     const payload = { event: name, page: location.pathname, ...detail };
     window.dataLayer?.push(payload);
     window.dispatchEvent(new CustomEvent('baqueano:analytics', { detail: payload }));
+    try {
+      if (window.BaqueanoApi && typeof window.BaqueanoApi.trackInteraction === 'function') {
+        window.BaqueanoApi.trackInteraction(name, payload);
+      }
+      const telemetry = safeJson(sessionStorage.getItem('baqueano_assistant_telemetry'), []);
+      telemetry.push({ event: name, payload, timestamp: Date.now() });
+      sessionStorage.setItem('baqueano_assistant_telemetry', JSON.stringify(telemetry.slice(-50)));
+    } catch (_) {}
   }
 
   function buildUi() {
@@ -183,11 +191,33 @@
     return Boolean(active?.matches('input,textarea,select,[contenteditable="true"]') || document.querySelector('[data-payment].is-open,.auth-modal.is-open,.modal-backdrop-pro.is-open'));
   }
 
+  function appendFeedbackActions(messageItem, text) {
+    if (!messageItem || messageItem.querySelector('.bq-msg-feedback-bar') || !text) return;
+    const bar = document.createElement('div');
+    bar.className = 'bq-msg-feedback-bar';
+    bar.style.cssText = 'display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:0.72rem;color:#94A3B8;background:rgba(255,255,255,0.04);padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);';
+    bar.innerHTML = `
+      <span style="opacity:0.8;">¿Útil?</span>
+      <button type="button" class="bq-thumb-btn" data-v="up" aria-label="Respuesta útil" style="background:none;border:none;color:#94A3B8;cursor:pointer;padding:2px 4px;font-size:0.75rem;transition:color 0.2s;"><i class="fa-regular fa-thumbs-up"></i></button>
+      <button type="button" class="bq-thumb-btn" data-v="down" aria-label="Respuesta a mejorar" style="background:none;border:none;color:#94A3B8;cursor:pointer;padding:2px 4px;font-size:0.75rem;transition:color 0.2s;"><i class="fa-regular fa-thumbs-down"></i></button>
+    `;
+    const buttons = bar.querySelectorAll('.bq-thumb-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.v;
+        bar.innerHTML = `<span style="color:#2DD4BF;font-size:0.72rem;"><i class="fa-solid fa-check"></i> ${v === 'up' ? '¡Gracias!' : 'Anotado para mejorar.'}</span>`;
+        track('assistant_feedback', { helpful: v === 'up', snippet: String(text).slice(0, 100) });
+      });
+    });
+    messageItem.appendChild(bar);
+  }
+
   function appendMessage(text, role = 'assistant', persist = true) {
     const body = $('#bqMessages');
     if (!body) return;
     const item = document.createElement('article'); item.className = `bq-message is-${role}`;
     const p = document.createElement('p'); p.textContent = text; item.appendChild(p); body.appendChild(item); body.scrollTop = body.scrollHeight;
+    if (role === 'assistant' && text && persist) appendFeedbackActions(item, text);
     if (persist) { session.messages.push({ role: role === 'user' ? 'user' : 'assistant', content: String(text).slice(0, 1000) }); session.messages = session.messages.slice(-16); saveSession(); }
     return p;
   }
@@ -197,6 +227,7 @@
     const p = appendMessage('', 'assistant', false); if (!p) return;
     const chunks = String(text).split(/(\s+)/); let rendered = '';
     for (const chunk of chunks) { if (!state.busy) break; rendered += chunk; p.textContent = rendered; await new Promise(resolve => setTimeout(resolve, reduceMotion ? 0 : 14)); }
+    appendFeedbackActions(p.closest('article'), text);
     session.messages.push({ role: 'assistant', content: String(text).slice(0, 1000) }); session.messages = session.messages.slice(-16); saveSession();
     if (preferences.voice && text) speak(text); else setCharacter('idle');
   }

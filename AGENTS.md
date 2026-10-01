@@ -39,3 +39,35 @@
    - Toda consulta del usuario, directiva técnica, archivo modificado y avance del proyecto debe registrarse y actualizarse de manera obligatoria en `SESSION_LOG.md` en la raíz del proyecto.
    - Ante cualquier apagón, corte de energía o pérdida de sesión, el asistente consultará inmediatamente este archivo para reanudar el trabajo exactamente en el último punto sin pérdida de contexto.
 
+## BAQUEANO Agent Skills Orchestration
+
+### 🎯 POR QUÉ (Why / Propósito)
+
+Integrar los procedimientos especializados del plugin global `agent-skills` de Antigravity sin reemplazar las normas, la arquitectura ni la identidad de BAQUEANO.
+
+### ⚙️ CÓMO (How / Arquitectura e Implementación)
+
+1. Antigravity evaluará la intención de cada solicitud y cargará progresivamente solo los skills necesarios. Queda prohibido cargar todos los `SKILL.md` simultáneamente.
+2. Los skills son procedimientos de trabajo. No autorizan despliegues, migraciones destructivas, cambios de plataforma ni acciones fuera del alcance solicitado.
+3. La precedencia obligatoria es: protección de datos y seguridad → este `AGENTS.md` → arquitectura comprobada de BAQUEANO → skill especializado → requisitos concretos de la tarea.
+4. Ante cualquier conflicto entre una guía genérica y una regla de BAQUEANO, prevalece BAQUEANO.
+5. Firebase Authentication debe conservarse. Supabase continúa como base de datos principal mientras el propietario no ordene explícitamente otra arquitectura. `website/` continúa siendo la web pública desplegada por Firebase Hosting.
+6. El desarrollo Flutter se limita a Android, principalmente `lib/` y `android/`. No modificar `ios/` ni el directorio Flutter `web/` sin instrucción explícita.
+7. Las invocaciones manuales canónicas usan el namespace `/agent-skills:<skill>`. Los aliases heredados son secundarios y pueden no aparecer en Antigravity 1.x.
+8. Antes de instalar dependencias, modificar autenticación, reglas, RLS, migraciones, CSP o infraestructura, aplicar análisis de restricciones, seguridad, pruebas y revisión proporcional al riesgo.
+9. No copiar el repositorio `addyosmani/agent-skills` dentro de BAQUEANO. La instalación global nativa de Antigravity es la fuente de los skills y agentes.
+
+### 📦 QUÉ (What / Funcionalidad y Entregables)
+
+- Regla operativa detallada: `.agents/rules/agent-skills-baqueano.md`.
+- Manual de instalación, uso, actualización y recuperación: `docs/AGENT_SKILLS_ANTIGRAVITY.md`.
+- Plugin esperado: `agent-skills`, con activación automática por intención y carga bajo demanda.
+
+## 21ST MCP
+
+Use 21st MCP for UI discovery, component research, interface generation and visual refinement. Never copy components blindly. Adapt them to BAQUEANO architecture, design system, accessibility, security and performance standards. 21st is a design/development tool and must not override BAQUEANO architecture or business logic.
+
+## 4C MARKETING MODEL
+
+When implementing marketing, UX, discovery, booking or business features, evaluate the solution against BAQUEANO's 4C model: Consumer, Cost, Convenience and Communication. Refer to `docs/MARKETING_4C_BAQUEANO.md` and `DESIGN.md`.
+

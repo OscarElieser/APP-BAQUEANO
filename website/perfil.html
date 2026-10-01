@@ -199,6 +199,7 @@
   <section class="prof-tabs-section">
     <div class="prof-tabs-bar">
       <a href="#resumen" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> Resumen</a>
+      <a href="#pasaporte" class="prof-tab-btn"><i class="fa-solid fa-passport"></i> Pasaporte Baqueano</a>
       <a href="mi-viaje.html" class="prof-tab-btn"><i class="fa-solid fa-route"></i> Mi Viaje</a>
       <a href="#reservas" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
       <a href="mi-viaje.html#favoritos" class="prof-tab-btn"><i class="fa-regular fa-heart"></i> Favoritos</a>
@@ -288,6 +289,144 @@
             <h6>Isla de Ometepe</h6>
             <small>Rivas · ★ 4.8</small>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       PASAPORTE BAQUEANO: SELLOS TERRITORIALES & FIDELIZACIÓN (4F)
+       ============================================================================ -->
+  <section class="prof-passport-section" id="pasaporte">
+    <div class="prof-passport-card">
+      <div class="prof-passport-header">
+        <div class="prof-passport-title-wrap">
+          <div class="prof-passport-crest">
+            <i class="fa-solid fa-passport"></i>
+          </div>
+          <div class="prof-passport-heading">
+            <h3>PASAPORTE BAQUEANO · EXPEDICIÓN NICARAGUA</h3>
+            <p>Registro oficial de exploración territorial y preservación cultural comunitaria · ID #BQ-2026-8819</p>
+          </div>
+        </div>
+        <div>
+          <button type="button" class="prof-btn-primary" id="btnSharePassport" style="padding:8px 16px;font-size:0.82rem;background:#F65E01;display:inline-flex;align-items:center;gap:6px;">
+            <i class="fa-solid fa-share-nodes"></i> Compartir Pasaporte
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Progreso Territorial -->
+      <div class="prof-passport-progress-box">
+        <div class="prof-passport-progress-meta">
+          <span><i class="fa-solid fa-map-location-dot" style="color:#10B981;margin-right:6px;"></i> Progreso Territorial: 5 de 17 departamentos explorados</span>
+          <span style="color:#2DD4BF;">29.4% del territorio nacional</span>
+        </div>
+        <div class="prof-passport-bar-track">
+          <div class="prof-passport-bar-fill"></div>
+        </div>
+        <div class="prof-passport-badges-summary">
+          <span><i class="fa-solid fa-stamp" style="color:#10B981;"></i> <strong>5 Sellos desbloqueados</strong></span>
+          <span><i class="fa-solid fa-route" style="color:#F65E01;"></i> <strong>1 Territorio en ruta activa</strong></span>
+          <span><i class="fa-solid fa-compass" style="color:#94A3B8;"></i> <strong>11 Territorios por descubrir</strong></span>
+        </div>
+      </div>
+
+      <!-- Cuadrícula de Sellos Territoriales Coleccionables -->
+      <div class="prof-passport-stamps-grid">
+        <!-- 1. Masaya -->
+        <div class="prof-stamp-item unlocked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-volcano"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Masaya</h5>
+            <p>Volcán Masaya &amp; Laguna de Apoyo</p>
+            <span class="prof-stamp-status">Desbloqueado · 14 Feb 2026</span>
+          </div>
+        </div>
+
+        <!-- 2. Rivas -->
+        <div class="prof-stamp-item unlocked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-water"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Rivas</h5>
+            <p>Isla de Ometepe &amp; San Juan del Sur</p>
+            <span class="prof-stamp-status">Desbloqueado · 22 Ene 2026</span>
+          </div>
+        </div>
+
+        <!-- 3. Granada -->
+        <div class="prof-stamp-item unlocked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-landmark"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Granada</h5>
+            <p>Isletas del Cocibolca &amp; Colonial</p>
+            <span class="prof-stamp-status">Desbloqueado · 18 Mar 2026</span>
+          </div>
+        </div>
+
+        <!-- 4. Matagalpa -->
+        <div class="prof-stamp-item unlocked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-mug-hot"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Matagalpa</h5>
+            <p>Selva Negra &amp; Ruta del Café</p>
+            <span class="prof-stamp-status">Desbloqueado · 05 May 2026</span>
+          </div>
+        </div>
+
+        <!-- 5. León -->
+        <div class="prof-stamp-item unlocked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-person-snowboarding"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello León</h5>
+            <p>Sandboarding Cerro Negro &amp; Catedral</p>
+            <span class="prof-stamp-status">Desbloqueado · 12 Jun 2026</span>
+          </div>
+        </div>
+
+        <!-- 6. Madriz (Próximo) -->
+        <div class="prof-stamp-item planned">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Madriz</h5>
+            <p>Cañón de Somoto &amp; Yalagüina</p>
+            <span class="prof-stamp-status">En Plan de Viaje · Oct 2026</span>
+          </div>
+        </div>
+
+        <!-- 7. Caribe Sur (Bloqueado) -->
+        <div class="prof-stamp-item locked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Caribe Sur</h5>
+            <p>Corn Island &amp; Laguna de Perlas</p>
+            <span class="prof-stamp-status">Por Descubrir</span>
+          </div>
+        </div>
+
+        <!-- 8. Jinotega (Bloqueado) -->
+        <div class="prof-stamp-item locked">
+          <div class="prof-stamp-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+          <div class="prof-stamp-info">
+            <h5>Sello Jinotega</h5>
+            <p>Ciudad de las Brumas &amp; Datanlí</p>
+            <span class="prof-stamp-status">Por Descubrir</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones Tácticas del Pasaporte -->
+      <div class="prof-passport-actions">
+        <span style="font-size:0.8rem;color:#94A3B8;">
+          <i class="fa-solid fa-shield-halved" style="color:#10B981;margin-right:4px;"></i> Cada sello acredita tu impacto económico directo en cooperativas comunitarias.
+        </span>
+        <div style="display:flex;gap:10px;">
+          <a href="departamento.html" class="prof-btn-edit" style="color:#FFFFFF;border-color:rgba(255,255,255,0.2);">
+            <i class="fa-solid fa-map"></i> Ver 17 Departamentos
+          </a>
+          <a href="mi-viaje.html" class="prof-btn-primary" style="padding:6px 14px;font-size:0.8rem;background:#165D6F;">
+            <i class="fa-solid fa-plus"></i> Añadir Destino a Mi Viaje
+          </a>
         </div>
       </div>
     </div>
@@ -634,6 +773,27 @@
           const isOpen = navMenu.classList.toggle('nav-active');
           mobileToggle.setAttribute('aria-expanded', isOpen);
           mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+      // Compartir Pasaporte Baqueano
+      const sharePassportBtn = document.getElementById('btnSharePassport');
+      if (sharePassportBtn) {
+        sharePassportBtn.addEventListener('click', () => {
+          const shareData = {
+            title: 'Mi Pasaporte Baqueano Nicaragua',
+            text: '¡He explorado 5 de 17 departamentos de Nicaragua con Baqueano! Descubre lo que no sale en el mapa:',
+            url: window.location.href
+          };
+          if (navigator.share) {
+            navigator.share(shareData).catch(() => copyPassportLink());
+          } else {
+            copyPassportLink();
+          }
+          function copyPassportLink() {
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('¡Enlace de tu Pasaporte Baqueano copiado al portapapeles! 📜');
+              });
+            }
+          }
         });
       }
     });

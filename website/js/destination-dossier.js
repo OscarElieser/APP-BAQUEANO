@@ -532,6 +532,29 @@
             <h4><i class="fa-solid fa-circle-exclamation"></i> Recomendaciones de seguridad &amp; respeto ambiental</h4>
             <p>${dest.safetyTips}</p>
           </div>
+
+          <!-- 9. Feedback de Utilidad Territorial (4 F Marketing Digital) -->
+          <div class="bq-dossier-feedback-box">
+            <div class="bq-dossier-feedback-header">
+              <div class="bq-dossier-feedback-title">
+                <i class="fa-solid fa-comment-dots" style="color:#F65E01;"></i> ¿Te resultó útil esta información territorial?
+              </div>
+              <div class="bq-dossier-feedback-actions">
+                <button type="button" class="bq-feedback-chip ${localStorage.getItem('bq_vote_' + dest.id) === 'up' ? 'voted' : ''}" id="modalVoteUp" aria-label="Sí, muy útil">
+                  <i class="fa-solid fa-thumbs-up" style="color:#10B981;"></i> <span>Sí, útil</span>
+                </button>
+                <button type="button" class="bq-feedback-chip ${localStorage.getItem('bq_vote_' + dest.id) === 'down' ? 'voted' : ''}" id="modalVoteDown" aria-label="Podría mejorar">
+                  <i class="fa-solid fa-thumbs-down" style="color:#F59E0B;"></i> <span>Podría mejorar</span>
+                </button>
+                <button type="button" class="bq-report-btn" id="modalReportBtn" title="Reportar dato desactualizado o incorrecto">
+                  <i class="fa-solid fa-flag"></i> Reportar dato
+                </button>
+              </div>
+            </div>
+            <div id="modalFeedbackMsg" style="display:none;font-size:0.8rem;color:#2DD4BF;margin-top:6px;">
+              <i class="fa-solid fa-circle-check"></i> ¡Gracias por tu valoración! Ayuda a la comunidad viajera y a las cooperativas locales.
+            </div>
+          </div>
         </div>
 
         <!-- Barra Inferior de Acciones Tácticas -->
@@ -611,6 +634,39 @@
           if (window.bqToast) window.bqToast('Enlace copiado al portapapeles 📋', 'success');
         });
       }
+    }
+
+    // Feedback de Utilidad Territorial (4F)
+    const modalVoteUp = document.getElementById('modalVoteUp');
+    const modalVoteDown = document.getElementById('modalVoteDown');
+    const modalFeedbackMsg = document.getElementById('modalFeedbackMsg');
+    const modalReportBtn = document.getElementById('modalReportBtn');
+
+    function handleVote(type) {
+      localStorage.setItem(`bq_vote_${dest.id}`, type);
+      if (modalVoteUp) modalVoteUp.classList.toggle('voted', type === 'up');
+      if (modalVoteDown) modalVoteDown.classList.toggle('voted', type === 'down');
+      if (modalFeedbackMsg) modalFeedbackMsg.style.display = 'block';
+      if (window.bqToast) window.bqToast(type === 'up' ? '¡Gracias por valorar positivamente!' : 'Gracias. Trabajamos para mejorar la información.', 'info');
+      if (window.BaqueanoApi && typeof window.BaqueanoApi.trackInteraction === 'function') {
+        window.BaqueanoApi.trackInteraction('dossier_feedback', { destId: dest.id, vote: type });
+      }
+    }
+
+    if (modalVoteUp) modalVoteUp.addEventListener('click', () => handleVote('up'));
+    if (modalVoteDown) modalVoteDown.addEventListener('click', () => handleVote('down'));
+
+    if (modalReportBtn) {
+      modalReportBtn.addEventListener('click', () => {
+        const reason = prompt(`Reportar actualización para "${dest.title}":\n¿Qué dato deseas reportar o actualizar? (Precios, Ruta, Horarios, Cooperativa, Otro)`);
+        if (reason && reason.trim()) {
+          const reports = JSON.parse(localStorage.getItem('baqueano_data_reports') || '[]');
+          reports.push({ destId: dest.id, destTitle: dest.title, details: reason.trim(), date: new Date().toISOString() });
+          localStorage.setItem('baqueano_data_reports', JSON.stringify(reports));
+          if (window.bqToast) window.bqToast('Reporte registrado para moderación territorial. ¡Muchas gracias!', 'success');
+          else alert('Reporte registrado para moderación territorial. ¡Muchas gracias!');
+        }
+      });
     }
 
     // Abrir overlay

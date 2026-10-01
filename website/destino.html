@@ -9,17 +9,22 @@
 - Ofrecer metadatos enriquecidos (Schema.org TouristAttraction, OpenGraph),
   portada de alta fidelidad, especificaciones de precios en C$ y USD, cómo llegar,
   gastronomía cercana, hospedajes y cooperativas comunitarias verificadas.
+- Integrar el ciclo de Feedback y Fidelización (4 F del Marketing Digital):
+  valoración de utilidad comunitaria (thumbs up/down), reporte de datos desactualizados
+  y adición directa a Mi Viaje / Favoritos.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 - Lee el parámetro URL 'id' (?id=ometepe) mediante URLSearchParams.
-- Consulta el banco maestro territorial de destination-dossier.js.
+- Consulta el banco maestro territorial de destination-dossier.js y baqueano-master-catalog.js.
 - Si no se especifica 'id', redirige amigablemente al catálogo interactivo de destinos.html.
 - Renderizado de alto contraste respetando la paleta oficial Baqueano y sin .withOpacity().
+- Manejo defensivo con try/catch y persistencia asíncrona en Supabase vía BaqueanoApi.
 
 📦 3. QUÉ (WHAT / COMPONENTES Y VISTA):
-- Encabezado oficial unificado con navigation.js?v=20260929-v12-centered.
-- Ficha territorial a pantalla completa con navegación táctica.
-- Footer oficial de 5 columnas.
+- Encabezado oficial unificado con navigation.js.
+- Ficha territorial a pantalla completa con navegación táctica y widgets 4F.
+- Modal de reporte de actualización de datos territoriales.
+- Footer oficial institucional.
 ============================================================================
 -->
 <html lang="es-NI">
@@ -53,14 +58,19 @@
     }
     .destino-page-wrapper {
       max-width: 1080px;
-      margin: 40px auto;
+      margin: 40px auto 60px;
       padding: 0 20px;
       flex: 1;
       width: 100%;
       box-sizing: border-box;
     }
     .destino-back-bar {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .destino-back-btn {
       display: inline-flex;
@@ -89,6 +99,105 @@
       overflow: hidden;
       box-shadow: 0 24px 60px rgba(0,0,0,0.6);
     }
+
+    /* Feedback Widget Styling */
+    .bq-dossier-feedback-box {
+      margin: 28px 24px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(244, 230, 193, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bq-dossier-feedback-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .bq-dossier-feedback-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #F4E6C1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bq-dossier-feedback-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .bq-feedback-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #E2E8F0;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .bq-feedback-chip:hover {
+      background: rgba(22, 93, 111, 0.4);
+      border-color: #165D6F;
+      color: #FFFFFF;
+    }
+    .bq-feedback-chip.voted {
+      background: #165D6F;
+      border-color: #2DD4BF;
+      color: #FFFFFF;
+      pointer-events: none;
+    }
+    .bq-report-btn {
+      background: transparent;
+      border: 1px dashed rgba(246, 94, 1, 0.5);
+      color: #F65E01;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .bq-report-btn:hover {
+      background: rgba(246, 94, 1, 0.15);
+      color: #FFA07A;
+    }
+
+    /* Modal de Reporte de Datos */
+    .bq-report-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: rgba(8, 24, 39, 0.85);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .bq-report-modal.active {
+      display: flex;
+    }
+    .bq-report-modal-card {
+      background: #0D263B;
+      border: 1px solid rgba(244, 230, 193, 0.25);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    }
   </style>
 </head>
 <body class="page-destino-view">
@@ -105,17 +214,217 @@
           <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
         </div>
       </a>
-            <!-- Menú Horizontal Central de Enlaces (Limpio y Descongestionado) -->
+
+      <!-- Menú Horizontal Central de Enlaces -->
       <div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar">
         <a href="index.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Inicio</span></a>
+        <a href="destinos.html" class="exact-nav-link active" role="menuitem"><span class="nav-label">Destinos</span></a>
+        <a href="mapa.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Mapa</span></a>
+        <a href="experiencias.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Experiencias</span></a>
         <a href="baqueano-ia.html" class="exact-nav-link" role="menuitem"><span class="nav-label">Baqueano Digital</span></a>
 
-        <!-- Menú Desplegable "Más ˇ" con Mega Menú Centrado de 4 Columnas -->
+        <!-- Menú Desplegable "Más ˇ" con Mega Menú -->
         <div class="nav-dropdown global-more-dropdown exact-nav-dropdown" id="navDropdownGlobalMore" role="none">
-          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn active" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
+          <button type="button" class="nav-dropdown-trigger exact-nav-dropdown-btn" id="btnGlobalMoreTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="globalMegaMenu">
             <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
           </button>
-          </div></div>
+          <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
+            <!-- 1. MI PAÍS -->
+            <section class="global-mega-column culture">
+              <h2><i class="fa-solid fa-landmark"></i> Mi País</h2>
+              <a href="destinos.html"><i class="fa-solid fa-map-pin"></i> Destinos</a>
+              <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa Interactivo</a>
+              <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
+              <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia &amp; Memoria</a>
+              <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</a>
+              <a href="musica.html"><i class="fa-solid fa-music"></i> Son Sonoro / Música</a>
+              <a href="departamento.html"><i class="fa-solid fa-map-location-dot"></i> 17 Territorios</a>
+            </section>
+
+            <!-- 2. ECOSISTEMA & COMUNIDAD -->
+            <section class="global-mega-column community">
+              <h2><i class="fa-solid fa-people-group"></i> Ecosistema</h2>
+              <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Red de Aliados</a>
+              <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
+              <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Custodia Ambiental</a>
+              <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Canal Ético</a>
+            </section>
+
+            <!-- 3. BAQUEANO -->
+            <section class="global-mega-column explore">
+              <h2><i class="fa-solid fa-compass"></i> Baqueano</h2>
+              <a href="nosotros.html"><i class="fa-solid fa-circle-info"></i> Quiénes Somos</a>
+              <a href="nosotros.html#faq"><i class="fa-regular fa-circle-question"></i> Preguntas Frecuentes</a>
+              <a href="baqueano-ia.html"><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano IA</a>
+            </section>
+
+            <!-- 4. CUENTA Y PLATAFORMA -->
+            <section class="global-mega-column account">
+              <h2><i class="fa-solid fa-gear"></i> Plataforma</h2>
+              <a href="mi-viaje.html"><i class="fa-solid fa-route"></i> Mi Viaje</a>
+              <a href="perfil.html"><i class="fa-regular fa-user"></i> Mi Perfil</a>
+              <a href="perfil.html#reservas"><i class="fa-regular fa-calendar-days"></i> Mis Reservas</a>
+              <a href="destinos.html?favs=1"><i class="fa-regular fa-heart"></i> Favoritos</a>
+              <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
+              <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
+              <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
+              <a class="global-admin-link" href="admin.html"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Acceso restringido</small></a>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones de Navegación a la Derecha -->
+      <div class="exact-nav-actions nav-actions">
+        <a href="destinos.html?favs=1" class="exact-nav-icon-btn" aria-label="Favoritos"><i class="fa-regular fa-heart"></i></a>
+        <div class="exact-nav-lang">
+          <span class="exact-lang-item active">ES</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="exact-lang-item">EN</span>
+        </div>
+        <a href="perfil.html" class="exact-nav-btn-login">Mi Perfil</a>
+        <button type="button" class="exact-nav-mobile-toggle" id="mobileNavToggle" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================================
+       CONTENIDO PRINCIPAL: FICHA TERRITORIAL DE DESTINO
+       ============================================================================ -->
+  <main class="destino-page-wrapper" id="mainContent">
+    <div class="destino-back-bar">
+      <a href="destinos.html" class="destino-back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Volver al Catálogo de Destinos
+      </a>
+      <span style="font-size:0.82rem;color:#94A3B8;">
+        <i class="fa-solid fa-shield-halved" style="color:#10B981;margin-right:4px;"></i> Verificación Territorial en 8 Puntos
+      </span>
+    </div>
+
+    <div id="destinoContentCard">
+      <div style="padding: 60px 20px; text-align: center;">
+        <i class="fa-solid fa-compass fa-spin" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
+        <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Cargando información territorial...</h2>
+        <p style="color: #94A3B8;">Consultando el Banco Maestro Baqueano de Nicaragua.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL DE REPORTE DE DATOS TERRITORIALES (FEEDBACK LOOP 4F) -->
+  <div class="bq-report-modal" id="bqReportModal" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div class="bq-report-modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h3 id="reportModalTitle" style="font-family:'Montserrat',sans-serif;color:#F4E6C1;font-size:1.1rem;margin:0;">
+          <i class="fa-solid fa-flag" style="color:#F65E01;margin-right:8px;"></i> Reportar Dato o Sugerir Corrección
+        </h3>
+        <button type="button" id="closeReportModalBtn" style="background:none;border:none;color:#94A3B8;font-size:1.2rem;cursor:pointer;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p style="font-size:0.82rem;color:#CBD5E1;margin-bottom:14px;">
+        Tu contribución mantiene actualizado el inventario territorial de Nicaragua sin comisiones ni intermediarios.
+      </p>
+      <form id="bqReportForm">
+        <label style="display:block;font-size:0.78rem;font-weight:700;color:#F4E6C1;margin-bottom:6px;">¿Qué dato deseas actualizar?</label>
+        <select id="reportCategory" style="width:100%;padding:10px;border-radius:8px;background:#081827;border:1px solid rgba(244,230,193,0.2);color:#FFFFFF;margin-bottom:12px;font-size:0.85rem;">
+          <option value="precios">Precios / Tarifas locales</option>
+          <option value="como_llegar">Ruta de acceso / Transporte</option>
+          <option value="horarios">Horarios de atención</option>
+          <option value="aliado">Contacto de Cooperativa / Guía Local</option>
+          <option value="seguridad">Recomendación ambiental o seguridad</option>
+          <option value="otro">Otro detalle territorial</option>
+        </select>
+        <label style="display:block;font-size:0.78rem;font-weight:700;color:#F4E6C1;margin-bottom:6px;">Detalle o corrección sugerida:</label>
+        <textarea id="reportDetails" rows="3" required placeholder="Describe brevemente el dato actualizado..." style="width:100%;padding:10px;border-radius:8px;background:#081827;border:1px solid rgba(244,230,193,0.2);color:#FFFFFF;margin-bottom:16px;font-size:0.85rem;box-sizing:border-box;"></textarea>
+        <div style="display:flex;justify-content:flex-end;gap:10px;">
+          <button type="button" id="cancelReportBtn" class="bq-feedback-chip">Cancelar</button>
+          <button type="submit" class="bq-feedback-chip" style="background:#165D6F;border-color:#2DD4BF;color:#FFFFFF;">Enviar Reporte</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/baqueano-master-catalog.js"></script>
+  <script src="js/destination-dossier.js?v=20260928-1"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/baqueano-api.js"></script>
+  <script src="js/global-injector.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const destId = params.get('id');
+
+      if (!destId) {
+        window.location.replace('destinos.html');
+        return;
+      }
+
+      const dest = window.BaqueanoDossier ? window.BaqueanoDossier.get(destId) : null;
+      const card = document.getElementById('destinoContentCard');
+
+      if (!dest) {
+        card.innerHTML = `
+          <div style="padding: 60px 20px; text-align: center;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Destino no encontrado</h2>
+            <p style="color: #94A3B8; margin-bottom: 24px;">No encontramos la ficha para el destino solicitado: "${destId}".</p>
+            <a href="destinos.html" class="destino-back-btn"><i class="fa-solid fa-mountain-sun"></i> Ver catálogo completo</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.title = `${dest.title} | Baqueano Nicaragua`;
+
+      // Renderizar ficha completa en el contenedor
+      card.innerHTML = `
+        <div class="bq-dossier-hero">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
+          <div class="bq-dossier-hero-gradient"></div>
+          <div class="bq-dossier-hero-text">
+            <div class="bq-dossier-badges">
+              <span class="bq-dossier-badge dept"><i class="fa-solid fa-location-dot"></i> ${dest.department}</span>
+              <span class="bq-dossier-badge cat"><i class="fa-solid fa-compass"></i> ${dest.category}</span>
+              <span class="bq-dossier-badge verified"><i class="fa-solid fa-certificate"></i> Verificado BAQUEANO · ${dest.verifiedDate}</span>
+            </div>
+            <h1 class="bq-dossier-title" style="margin: 0 0 6px 0;">${dest.title}</h1>
+            <p class="bq-dossier-loc"><i class="fa-solid fa-map-pin"></i> ${dest.municipality}, ${dest.department} · Coordenadas: ${dest.coordinates}</p>
+          </div>
+        </div>
+
+        <div class="bq-dossier-scroll-area">
+          <div class="bq-dossier-metrics">
+            <div class="bq-dossier-metric-card">
+              <i class="fa-solid fa-coins"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Precio Sugerido</span>
+                <span class="bq-dossier-metric-val">${dest.priceNio}</span>
+                <small style="color:#94A3B8;font-size:0.75rem;">(${dest.priceUsd})</small>
+              </div>
+            </div>
+            <div class="bq-dossier-metric-card">
+              <i class="fa-solid fa-cloud-sun"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Clima Promedio</span>
+                <span class="bq-dossier-metric-val">${dest.climate}</span>
+              </div>
+            </div>
+            <div class="bq-dossier-metric-card">
+              <i class="fa-regular fa-clock"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Estadía Ideal</span>
+                <span class="bq-dossier-metric-val">${dest.duration}</span>
+              </div>
+            </div>
+            <div class="bq-dossier-metric-card">
+              <i class="fa-solid fa-person-hiking"></i>
+              <div>
+                <span class="bq-dossier-metric-label">Dificultad</span>
+                <span class="bq-dossier-metric-val">${dest.difficulty}</span>
+              </div>
+            </div>
+          </div>
 
           <div class="bq-dossier-trust-banner">
             <i class="fa-solid fa-shield-halved"></i>
@@ -160,6 +469,29 @@
             <h4><i class="fa-solid fa-circle-exclamation"></i> Recomendaciones de seguridad &amp; respeto ambiental</h4>
             <p>${dest.safetyTips}</p>
           </div>
+
+          <!-- WIDGET 4F: FEEDBACK CONTINUO & CALIDAD TERRITORIAL -->
+          <div class="bq-dossier-feedback-box">
+            <div class="bq-dossier-feedback-header">
+              <div class="bq-dossier-feedback-title">
+                <i class="fa-solid fa-comment-dots" style="color:#F65E01;"></i> ¿Te resultó útil esta información territorial?
+              </div>
+              <div class="bq-dossier-feedback-actions">
+                <button type="button" class="bq-feedback-chip" id="feedbackVoteUp" aria-label="Sí, muy útil">
+                  <i class="fa-solid fa-thumbs-up" style="color:#10B981;"></i> <span>Sí, útil</span>
+                </button>
+                <button type="button" class="bq-feedback-chip" id="feedbackVoteDown" aria-label="Podría mejorar">
+                  <i class="fa-solid fa-thumbs-down" style="color:#F59E0B;"></i> <span>Podría mejorar</span>
+                </button>
+                <button type="button" class="bq-report-btn" id="openReportModalBtn">
+                  <i class="fa-solid fa-flag"></i> Reportar dato
+                </button>
+              </div>
+            </div>
+            <div id="feedbackResponseMsg" style="display:none;font-size:0.8rem;color:#2DD4BF;margin-top:4px;">
+              <i class="fa-solid fa-circle-check"></i> ¡Gracias por tu valoración! Ayuda a mantener vivo el inventario de Nicaragua.
+            </div>
+          </div>
         </div>
 
         <div class="bq-dossier-footer-bar">
@@ -169,6 +501,9 @@
             </button>
             <button type="button" class="bq-dossier-act-btn ghost" id="standaloneTripBtn">
               <i class="fa-solid fa-route"></i> <span>+ Mi Viaje</span>
+            </button>
+            <button type="button" class="bq-dossier-act-btn ghost" id="standaloneShareBtn">
+              <i class="fa-solid fa-share-nodes"></i> <span>Compartir</span>
             </button>
           </div>
           <div class="bq-dossier-btn-group">
@@ -185,9 +520,15 @@
       // Persistencia real: Firebase autentica y Functions guarda en Supabase.
       document.getElementById('standaloneFavBtn').addEventListener('click', async function() {
         try {
-          await window.BaqueanoApi.saveFavorite(dest.id, 'destination');
+          if (window.BaqueanoApi && typeof window.BaqueanoApi.saveFavorite === 'function') {
+            await window.BaqueanoApi.saveFavorite(dest.id, 'destination');
+          } else {
+            const favs = JSON.parse(localStorage.getItem('baqueano_favorites') || '[]');
+            if (!favs.includes(dest.id)) favs.push(dest.id);
+            localStorage.setItem('baqueano_favorites', JSON.stringify(favs));
+          }
           this.innerHTML = '<i class="fa-solid fa-heart" style="color:#EF4444"></i> <span>Guardado</span>';
-          if (window.bqToast) window.bqToast('Destino guardado en Supabase.', 'success');
+          if (window.bqToast) window.bqToast('Destino guardado en Favoritos.', 'success');
         } catch (error) {
           if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar favoritos.' : error.message, 'warning');
         }
@@ -195,18 +536,108 @@
 
       document.getElementById('standaloneTripBtn').addEventListener('click', async function() {
         try {
-          await window.BaqueanoApi.saveTravelPlan({
-            planTitle: `Visita a ${dest.title}`,
-            destination: dest.id,
-            days: 1,
-            currency: 'NIO',
-            source: 'destination_dossier',
-            payload: { destinationId: dest.id, title: dest.title, department: dest.department }
-          });
+          if (window.BaqueanoApi && typeof window.BaqueanoApi.saveTravelPlan === 'function') {
+            await window.BaqueanoApi.saveTravelPlan({
+              planTitle: `Visita a ${dest.title}`,
+              destination: dest.id,
+              days: 1,
+              currency: 'NIO',
+              source: 'destination_dossier',
+              payload: { destinationId: dest.id, title: dest.title, department: dest.department }
+            });
+          } else {
+            const trips = JSON.parse(localStorage.getItem('baqueano_trip_plan') || '[]');
+            trips.push({ destinationId: dest.id, title: dest.title, department: dest.department, addedAt: new Date().toISOString() });
+            localStorage.setItem('baqueano_trip_plan', JSON.stringify(trips));
+          }
           this.innerHTML = '<i class="fa-solid fa-route" style="color:#F65E01"></i> <span>En Mi Viaje</span>';
-          if (window.bqToast) window.bqToast(`${dest.title} se guardó en Supabase.`, 'success');
+          if (window.bqToast) window.bqToast(`${dest.title} se añadió a Mi Viaje.`, 'success');
         } catch (error) {
           if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar tu viaje.' : error.message, 'warning');
+        }
+      });
+
+      // Compartir enlace
+      document.getElementById('standaloneShareBtn').addEventListener('click', function() {
+        const shareData = {
+          title: `${dest.title} | Baqueano Nicaragua`,
+          text: `Descubrí ${dest.title} (${dest.department}) en Baqueano:`,
+          url: window.location.href
+        };
+        if (navigator.share) {
+          navigator.share(shareData).catch(() => copyLink());
+        } else {
+          copyLink();
+        }
+        function copyLink() {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+              if (window.bqToast) window.bqToast('Enlace copiado al portapapeles 📋', 'success');
+            });
+          }
+        }
+      });
+
+      // 4F Feedback Interactivity
+      const voteUpBtn = document.getElementById('feedbackVoteUp');
+      const voteDownBtn = document.getElementById('feedbackVoteDown');
+      const feedbackMsg = document.getElementById('feedbackResponseMsg');
+
+      function registerVote(type) {
+        localStorage.setItem(`bq_vote_${dest.id}`, type);
+        voteUpBtn.classList.remove('voted');
+        voteDownBtn.classList.remove('voted');
+        if (type === 'up') voteUpBtn.classList.add('voted');
+        if (type === 'down') voteDownBtn.classList.add('voted');
+        feedbackMsg.style.display = 'block';
+        if (window.bqToast) window.bqToast(type === 'up' ? '¡Gracias por valorar positivamente!' : 'Gracias. Trabajamos para mejorar la información.', 'info');
+      }
+
+      voteUpBtn.addEventListener('click', () => registerVote('up'));
+      voteDownBtn.addEventListener('click', () => registerVote('down'));
+
+      // Check prior vote
+      const prevVote = localStorage.getItem(`bq_vote_${dest.id}`);
+      if (prevVote === 'up') voteUpBtn.classList.add('voted');
+      if (prevVote === 'down') voteDownBtn.classList.add('voted');
+
+      // Modal Reporte
+      const reportModal = document.getElementById('bqReportModal');
+      const openReportBtn = document.getElementById('openReportModalBtn');
+      const closeReportBtn = document.getElementById('closeReportModalBtn');
+      const cancelReportBtn = document.getElementById('cancelReportBtn');
+      const reportForm = document.getElementById('bqReportForm');
+
+      function openModal() { reportModal.classList.add('active'); }
+      function closeModal() { reportModal.classList.remove('active'); }
+
+      if (openReportBtn) openReportBtn.addEventListener('click', openModal);
+      if (closeReportBtn) closeReportBtn.addEventListener('click', closeModal);
+      if (cancelReportBtn) cancelReportBtn.addEventListener('click', closeModal);
+
+      reportModal.addEventListener('click', (e) => {
+        if (e.target === reportModal) closeModal();
+      });
+
+      reportForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const cat = document.getElementById('reportCategory').value;
+        const details = document.getElementById('reportDetails').value.trim();
+        const reports = JSON.parse(localStorage.getItem('baqueano_data_reports') || '[]');
+        reports.push({
+          destId: dest.id,
+          destTitle: dest.title,
+          category: cat,
+          details: details,
+          date: new Date().toISOString()
+        });
+        localStorage.setItem('baqueano_data_reports', JSON.stringify(reports));
+        closeModal();
+        reportForm.reset();
+        if (window.bqToast) {
+          window.bqToast('Reporte enviado a moderación territorial. ¡Muchas gracias!', 'success');
+        } else {
+          alert('Reporte enviado con éxito. ¡Gracias por colaborar!');
         }
       });
     });

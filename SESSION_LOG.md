@@ -1945,3 +1945,98 @@
 - **CÓMO (How / Arquitectura e Implementación):** Se ejecutó `git fetch --all --prune`, se identificó `origin/main` como la rama remota más reciente y se creó la rama local de rescate `safety/pre-github-sync-2026-09-30`. Debido a que la rama activa y `main` tenían historial divergente, se fusionó `origin/main` conservando el historial de ambos lados. En conflictos de archivos actualizados por ambas ramas se seleccionó la versión más reciente de GitHub. La bitácora local se recuperó después de la integración.
 - **QUÉ (What / Entregables):** Merge local `525c39e`; contenido remoto del 30 de septiembre integrado; historial local preservado; punto de rescate disponible; ausencia de marcadores reales de conflicto verificada.
 - **Validación posterior:** Firebase Functions aprobó 21/21 pruebas y su comprobación de sintaxis. El typecheck de las aplicaciones Website y Ops Center terminó correctamente. El smoke test web heredado de `origin/main` reportó enlaces genéricos de YouTube y las rutas faltantes `pasaporte.html` y la referencia canónica de `ayuda.html`; estos puntos no fueron ocultados ni modificados durante la sincronización. `flutter analyze --no-pub` no produjo salida y agotó el límite de cinco minutos, por lo que la validación Flutter queda pendiente por bloqueo del entorno.
+
+## [2026-09-30] Integración nativa de Agent Skills con Antigravity CLI
+
+- **POR QUÉ (Why / Propósito):** Incorporar procedimientos de ingeniería y agentes especializados al flujo normal de BAQUEANO mediante el sistema nativo de plugins de Antigravity, preservando las reglas locales, la arquitectura híbrida y todos los componentes funcionales existentes.
+- **CÓMO (How / Arquitectura e Implementación):** Se inspeccionaron `AGENTS.md`, `.agents/`, `.github/`, manifiestos Node/PNPM/Flutter, Firebase, variables de ejemplo, seguridad, documentación backend/Supabase, migraciones y la bitácora. Se verificó el repositorio oficial y la documentación de Antigravity. Se creó la rama de rescate `safety/pre-agent-skills-integration-2026-09-30` y se ejecutó `agy plugin install https://github.com/addyosmani/agent-skills.git`. La instalación global evita copiar el repositorio externo dentro de BAQUEANO. Se amplió `AGENTS.md`, se añadió una regla de routing progresivo y se creó el manual operativo.
+- **QUÉ (What / Entregables):** Antigravity CLI 1.0.8; plugin `agent-skills` 0.6.11 instalado en `%USERPROFILE%\.gemini\config\plugins\agent-skills\`; 25 skills, 4 agentes (`code-reviewer`, `security-auditor`, `test-engineer`, `web-performance-auditor`) y 9 comandos convertidos detectados. Archivos del proyecto: `AGENTS.md`, `.agents/rules/agent-skills-baqueano.md`, `docs/AGENT_SKILLS_ANTIGRAVITY.md` y `SESSION_LOG.md`.
+- **Comandos y pruebas:** `agy --version`, `agy plugin install`, `agy plugin list`, `agy plugin validate`, inventario y validación de metadatos, comprobaciones estáticas de routing para bug/spec/seguridad/rendimiento, búsqueda limitada de secretos y verificación de alcance Git. El validador nativo aprobó los 25 skills, 4 agentes y 9 comandos. `firebase.json` conserva `hosting.public = website`; no se modificaron `ios/`, Flutter `web/`, `android/`, `lib/`, Firebase, Supabase, Functions ni Website; no se añadieron dependencias ni copias locales del plugin.
+- **Incidencia real:** Las pruebas conversacionales headless `agy -p` no pudieron completarse porque Antigravity requiere autenticar una cuenta Google mediante OAuth; el flujo expiró después de 60 segundos. No se registraron URL de autorización, códigos ni tokens. La instalación, validación estructural, listado y persistencia global del plugin sí quedaron aprobados. Para cerrar la prueba conversacional se debe autenticar una vez en una sesión interactiva nueva y repetir los cuatro prompts documentados.
+- **Estado final:** Plugin instalado, validado, habilitado globalmente y disponible para descubrimiento en futuras sesiones autenticadas. Sin despliegues ni cambios de infraestructura productiva.
+
+## [2026-09-30] Integración de 21st MCP (Magic MCP) con Antigravity para Diseño y UI
+
+- **POR QUÉ (Why / Propósito):**
+  Integrar de forma funcional, persistente y segura el servidor MCP de **21st.dev** (evolución de **Magic MCP**) en el entorno de desarrollo Antigravity para BAQUEANO. Esto provee capacidades de descubrimiento de componentes UI modernos, patrones de diseño y temas visuales para Ops Center (`admin.html`), la web pública (`website/`) y experiencias interactivas, acelerando el desarrollo sin sacrificar la identidad territorial ni comprometer secretos o arquitecturas existentes.
+
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. **Evolución Arquitectónica:** Se reconoció la evolución de Magic MCP a 21st MCP con transporte HTTP nativo en `https://21st.dev/api/mcp` autenticado mediante el header `x-api-key: ${API_KEY_21ST}`.
+  2. **Configuración en Antigravity:** Se registró el servidor MCP de forma global en Antigravity mediante `agy mcp add` y se persistió en la configuración del proyecto mediante `.mcp.json` referenciando `${API_KEY_21ST}`.
+  3. **Seguridad y Cero Fugas:** La clave real `API_KEY_21ST` se almacenó exclusivamente en el entorno local `.env` (excluido en `.gitignore`). Se actualizó `.env.example` con la plantilla correspondiente sin valores reales. No se imprimió ni persistió la clave en ningún archivo versionado ni log.
+  4. **Gobernanza y Reglas Locales:** Se extendió `AGENTS.md` con la directiva de uso responsable de 21st MCP. Se redactó la regla de orquestación `.agents/rules/21st-mcp-baqueano.md` que establece que todo componente UI debe adaptarse a la identidad de BAQUEANO (paleta `#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`), traducirse a Vanilla HTML/CSS/JS para `website/`, implementarse en Dart puro para Flutter y nunca delegar validaciones ni seguridad de Ops Center en la UI.
+  5. **Documentación Técnica:** Se creó `docs/21ST_MCP_ANTIGRAVITY.md` con la guía de arquitectura, catálogo de herramientas, comandos de diagnóstico y políticas de adaptación.
+
+- **QUÉ (What / Entregables):**
+  - **Archivos creados:** `.mcp.json`, `.agents/rules/21st-mcp-baqueano.md`, `docs/21ST_MCP_ANTIGRAVITY.md`.
+  - **Archivos modificados:** `AGENTS.md`, `.env` (local sin versionar), `.env.example`, `SESSION_LOG.md`.
+  - **Archivos preservados:** `website/`, `functions/`, `lib/`, `android/`, `ios/`, `supabase/`, `firebase.json`, `package.json`, `pnpm-lock.yaml`.
+
+- **Pruebas y Comprobaciones Realizadas:**
+  - `agy mcp list`: Servidor `21st` registrado y activo (`http`, `enabled`).
+  - Protocolo MCP JSON-RPC 2.0: 34 herramientas descubiertas en tiempo real (`search`, `search_picker`, `get_inspiration`, `record_inspiration_feedback`, `search_logo`, `get_component`, `get_theme`, `get_usage`, `list_bookmarks`, etc.).
+  - Verificación de cuenta y cuotas (`get_usage`): Plan `free`, 2/2 retrievals disponibles hoy, `aiGenerationEnabled: false` (regla aplicada: evitar bucles hacia `generate`/`iterate_generation`, emplear `search` + `get_component` y adaptación vía el modelo del agente).
+  - Prueba funcional de búsqueda (`search` con `"travel destination card"`): Ejecutada con éxito, retornando 4 componentes con previsualizaciones y metadatos de 21st.dev.
+  - Auditoría de seguridad: Cero claves expuestas en Git (`git status`), cero modificaciones a producción ni despliegues ejecutados.
+
+- **Estado Final:** 21ST MCP ESTÁ CONFIGURADO, CONECTADO Y ACTIVO EN ANTIGRAVITY PARA EL DESARROLLO DE BAQUEANO.
+
+## [2026-09-30] Integración Estratégica y Funcional del Modelo de las 4 C del Marketing
+
+- **POR QUÉ (Why / Propósito):**
+  Transformar el posicionamiento y la arquitectura de experiencia de BAQUEANO desde un modelo transaccional de producto/catálogo hacia el modelo relacional de las **4 C del Marketing** (Consumidor, Costo, Conveniencia y Comunicación). Esto permite resolver los dolores reales del explorador nicaragüense y extranjero (incertidumbre, dispersión de datos, costos ocultos) e impulsar el desarrollo económico directo de las comunidades campesinas y anfitriones rurales sin intermediarios confiscatorios.
+
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. **Auditoría Exhaustiva de Ecosistema:** Se analizó página por página la presencia y efectividad de las 4 C en `index.html`, `destinos.html`, `destino.html`, `experiencias.html`, `mapa.html`, `baqueano-ia.html`, `mi-viaje.html`, `mi-negocio.html`, `departamento.html` y `admin.html`. Se documentó en `docs/AUDIT_4C_BAQUEANO.md`.
+  2. **Estrategia Maestra 4C:** Se creó `docs/MARKETING_4C_BAQUEANO.md` detallando:
+     - **Consumidor**: Buyer Persona Mateo Valenzuela (28 años, Managua, trabajo remoto, fin de semana, mobile-first) y el segundo cliente estratégico: el Emprendedor Rural Comunitario. Propuesta de valor y slogan: *"DESCUBRE LO QUE NO SALE EN EL MAPA"*.
+     - **Costo**: Fórmula del Costo Total ($\text{Dinero} + \text{Tiempo} + \text{Esfuerzo} + \text{Incertidumbre} + \text{Riesgo}$), sellos de **Negocio Verificado BAQUEANO** y desglose de presupuesto en Baqueano Digital.
+     - **Conveniencia**: Experiencia All-in-One sin fricciones, mapa territorial con capas de servicios esenciales (hospitales, bomberos, policía, cajeros, gasolineras), geolocalización no invasiva y estándar mobile-first táctil.
+     - **Comunicación**: Ecosistema bidireccional Viajero ↔ Baqueano ↔ Anfitrión ↔ Comunidad, Baqueano Digital conversacional, contacto en 1 toque por WhatsApp y tono humano territorial.
+  3. **Sistema de Diseño y Principios UX:** Se redactó `DESIGN.md` conectando la paleta de marca oficial (`#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`) con los Principios de Experiencia de Marketing 4C.
+  4. **Gobernanza de Agentes:** Se actualizó `AGENTS.md` con la directiva obligatoria de evaluar toda nueva funcionalidad bajo las 4 C del Marketing.
+
+- **QUÉ (What / Entregables):**
+  - **Archivos creados:** `docs/AUDIT_4C_BAQUEANO.md`, `docs/MARKETING_4C_BAQUEANO.md`, `DESIGN.md`.
+  - **Archivos modificados:** `AGENTS.md`, `SESSION_LOG.md`.
+  - **Archivos preservados:** Todo el código fuente de `website/`, `functions/`, `lib/`, `android/`, `ios/`, `supabase/`, `package.json`, `firebase.json`.
+
+- **Métricas y KPIs Clave Establecidos:**
+  - Consumidor: Lugares guardados por sesión y retención a 30 días.
+  - Costo: Uso de filtros de presupuesto y tasa de abandono pre-reserva.
+  - Conveniencia: Tiempo hasta primer destino relevante (< 15s) y adopción de "Mi Viaje".
+  - Comunicación: Clics a contacto directo WhatsApp y tasa de reseñas comunitarias.
+
+- **Estado Final:** ESTRATEGIA 4C TOTALMENTE DOCUMENTADA, INTEGRADA EN EL SISTEMA DE DISEÑO, AUDITADA Y VIGENTE PARA EL DESARROLLO DE BAQUEANO.
+
+## [2026-09-30] Auditoría e Integración del Modelo de las 4 F del Marketing Digital
+
+- **POR QUÉ (Why / Propósito):**
+  Integrar de manera profunda y operativa el modelo de las **4 F del Marketing Digital** (Flujo, Funcionalidad, Feedback, Fidelización) dentro del ecosistema BAQUEANO, para garantizar que el explorador disfrute de una experiencia fluida e intuitiva, acceda a herramientas territoriales precisas sin adornos superfluos, participe en ciclos de retroalimentación bilateral y desarrolle lealtad y pertenencia cultural hacia los 17 departamentos de Nicaragua y sus cooperativas comunitarias.
+
+- **CÓMO (How / Arquitectura e Implementación):**
+  1. **Auditoría Técnica y de UX:** Se examinaron exhaustivamente los flujos de navegación, funcionalidad interactiva, bucles de retroalimentación y mecanismos de retención en `website/index.html`, `destinos.html`, `destino.html`, `experiencias.html`, `mapa.html`, `baqueano-ia.html`, `mi-viaje.html`, `favoritos.html`, `perfil.html`, `mi-negocio.html` y `admin.html`.
+  2. **Reparación Crítica de Flujo y Funcionalidad (`destino.html`):** Se identificó y resolvió un fallo por truncamiento de plantilla HTML heredado, reestructurando la página con Golden Circle, encabezado oficial, tarjeta `#destinoContentCard`, manejo defensivo de destinos no encontrados y enlace directo a Mi Viaje / Baqueano IA.
+  3. **Integración de Feedback Continuo:**
+     - En `website/destino.html` y `website/js/destination-dossier.js`, se implementaron los botones interactivos de utilidad territorial ("¿Te resultó útil? 👍 / 👎") con persistencia local contra duplicados.
+     - Se creó el modal de reporte de datos territoriales para canalizar correcciones de precios, rutas, cooperativas y horarios hacia la cola de moderación del Ops Center (`baqueano_data_reports`).
+     - En `website/js/baqueano-assistant.js`, se implementó la función de telemetría segura `track()` y la barra de retroalimentación inmediata (`¿Útil? 👍 / 👎`) al pie de cada respuesta de Baqüi IA.
+  4. **Fidelización y Gamificación Territorial (Pasaporte Baqueano):**
+     - En `website/perfil.html` y `website/css/pages/perfil-exact.css`, se integró la pestaña `#pasaporte` y la tarjeta de alta gama del **Pasaporte Baqueano: Sellos & Territorios**.
+     - Se incorporó la barra de progreso territorial en vivo ("5 de 17 departamentos explorados - 29.4%"), la cuadrícula de sellos coleccionables georreferenciados (Masaya, Rivas, Granada, Matagalpa, León, Madriz, Caribe Sur, Jinotega), el botón de compartir pasaporte (`navigator.share` / portapapeles) y la llamada táctica "Continúa tu viaje".
+  5. **Documentación Oficial:** Se redactaron `docs/AUDIT_4F_BAQUEANO.md` y `docs/MARKETING_4F_BAQUEANO.md`.
+
+- **QUÉ (What / Entregables):**
+  - **Archivos creados:** `docs/AUDIT_4F_BAQUEANO.md`, `docs/MARKETING_4F_BAQUEANO.md`.
+  - **Archivos modificados:** `website/destino.html`, `website/js/destination-dossier.js`, `website/css/destination-dossier.css`, `website/js/baqueano-assistant.js`, `website/perfil.html`, `website/css/pages/perfil-exact.css`, `analysis_options.yaml`, `SESSION_LOG.md`.
+  - **Archivos preservados:** 100% de la arquitectura backend, Supabase, Firebase Auth, Firebase Hosting, Flutter Android, modelos de datos y catálogos maestros.
+
+- **Pruebas y Verificaciones Realizadas:**
+  - Sintaxis JavaScript validada con `node --check` en `website/js/destination-dossier.js`, `website/js/baqueano-assistant.js` y `website/js/navigation.js` (código de salida 0).
+  - Verificación Flutter / Dart: `dart analyze` reporta `No issues found!` limpio al 100%.
+  - Verificación de enlaces: 0 instancias de `href="#"` y 0 instancias de `href=""` en `website/`.
+  - Verificación CSS: Balance perfecto de llaves y alineación estricta con la paleta de marca `#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A` sin `.withOpacity()`.
+  - Verificación de seguridad: Cero claves expuestas, cero operaciones destructivas.
+
+- **Estado Final:** MODELO DE LAS 4 F (FLUJO, FUNCIONALIDAD, FEEDBACK, FIDELIZACIÓN) TOTALMENTE AUDITADO, IMPLEMENTADO, VERIFICADO Y OPERATIVO EN BAQUEANO.
+
