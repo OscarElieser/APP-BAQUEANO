@@ -1,0 +1,7 @@
+# =====================================================
+# BAQUEANO — Finales de línea para scripts de Azure
+# =====================================================
+# PROPÓSITO: los scripts se ejecutan en Ubuntu (bash). Si Git en Windows los
+# convierte a CRLF, bash falla con "/bin/bash^M: bad interpreter".
+# RELACIÓN: azure/*.sh, azure/nginx/*.conf, azure/systemd/*.
+* text=auto eol=lf
