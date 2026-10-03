@@ -1,9 +1,9 @@
 {
   "meta": { "locale": "pt-BR", "version": "2026.10.01" },
   "language": { "change": "Mudar idioma", "es": "Español", "en": "English", "fr": "Français", "it": "Italiano", "pt": "Português", "de": "Deutsch" },
-  "nav": { "home": "Início", "explore": "Explorar", "destinations": "Destinos", "map": "Mapa", "experiences": "Experiências", "culture": "Cultura", "history": "História", "gastronomy": "Gastronomia", "music": "Música", "trip": "Minha viagem", "more": "Mais" },
+  "nav": { "quick": "Acesso rápido", "home": "Início", "explore": "Explorar", "destinations": "Destinos", "map": "Mapa", "experiences": "Experiências", "culture": "Cultura", "history": "História", "gastronomy": "Gastronomia", "music": "Música", "trip": "Minha viagem", "more": "Mais" },
   "actions": { "search": "Buscar", "close": "Fechar", "back": "Voltar", "continue": "Continuar", "save": "Salvar", "cancel": "Cancelar", "accept": "Aceitar", "send": "Enviar", "viewMore": "Ver mais", "readMore": "Leia mais", "details": "Ver detalhes", "share": "Compartilhar", "retry": "Tentar novamente" },
-  "status": { "loading": "Carregando…", "empty": "Nenhum resultado encontrado.", "saved": "Salvo com sucesso.", "error": "Não foi possível concluir a ação. Tente novamente.", "offline": "Sem conexão" },
+  "status": { "loading": "Explorando a Nicarágua…", "empty": "Nada por aqui ainda. Vamos tentar outra busca.", "saved": "Salvo com sucesso.", "error": "Não foi possível concluir a ação. Tente novamente.", "offline": "Sem conexão" },
   "baqui": { "welcome": "Olá! Sou Baqüi, seu guia guardabarranco. O que você quer descobrir hoje?", "placeholder": "Pergunte sobre destinos, rotas ou experiências…", "inputLabel": "Digite sua pergunta", "open": "Abrir Baqüi, seu guia digital", "send": "Enviar", "clear": "Limpar", "stop": "Parar", "listen": "Ouvir", "openPanel": "Abrir painel", "later": "Agora não" },
   "footer": { "rights": "Todos os direitos reservados.", "tagline": "Descubra o que os mapas não mostram", "madeIn": "Feito na Nicarágua" },
   "seo": { "defaultTitle": "BAQUEANO — Descubra a Nicarágua", "defaultDescription": "Explore destinos, cultura e experiências autênticas da Nicarágua." }

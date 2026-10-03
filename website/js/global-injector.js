@@ -66,7 +66,7 @@
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' },
       // Capa de identidad "Cartografía viva": SIEMPRE la última, para que sus
       // correcciones de contraste y responsive prevalezcan. Ver css/baqueano-identity.css
-      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261003-1' }
+      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261003-2' }
     ];
     needed.forEach(function(css) {
       if (!document.getElementById(css.id)) {
@@ -962,6 +962,7 @@
     wireNavbarButtons(null);
     wireExistingSosButtons();
     wireGlobalButtons();
+    injectThumbBar();
     // ⚡ Activar lógica del Mega Menú en todas las páginas
     if (typeof buildGlobalMegaNavigation === 'function') {
       buildGlobalMegaNavigation();
@@ -971,6 +972,57 @@
     normalizeFooterBoundary();
     protectFormsWithHoneypot();
     ensureInputAccessibility();
+  }
+
+  // ── Barra de pulgar (navegación inferior en celular) ─────────────────────
+  // 🎯 POR QUÉ: en celular la navegación vivía solo en la hamburguesa de
+  //    arriba, lejos del pulgar, y la mascota de BAQUI tapaba contenido.
+  // ⚙️ CÓMO: una barra fija con 5 destinos clave; css/baqueano-identity.css
+  //    la muestra solo con ≤ 768 px de ancho (por espacio, no por modelo) y
+  //    reserva su alto con body.bq-has-thumbbar. Etiquetas con data-i18n para
+  //    los 6 idiomas. El botón BAQUI abre el mismo panel de siempre; si el
+  //    asistente no está cargado en la página, lleva al planificador.
+  // 📦 QUÉ: Inicio · Explorar · Mapa · Mi Viaje · BAQUI, con aria-current.
+  function injectThumbBar() {
+    if (document.getElementById('bqThumbBar')) return;
+    var groups = {
+      home: ['index.html', ''],
+      explore: ['destinos.html', 'destino.html', 'departamento.html', 'experiencias.html'],
+      map: ['mapa.html'],
+      trip: ['mi-viaje.html', 'favoritos.html']
+    };
+    function current(key) {
+      return groups[key].indexOf(currentPage) !== -1 ? ' aria-current="page"' : '';
+    }
+    var bar = document.createElement('nav');
+    bar.id = 'bqThumbBar';
+    bar.className = 'bq-thumbbar';
+    bar.setAttribute('aria-label', 'Accesos rápidos');
+    bar.setAttribute('data-i18n-aria-label', 'nav.quick');
+    bar.innerHTML =
+      '<a href="index.html"' + current('home') + '><i class="fa-solid fa-house" aria-hidden="true"></i><span data-i18n="nav.home">Inicio</span></a>' +
+      '<a href="destinos.html"' + current('explore') + '><i class="fa-solid fa-compass" aria-hidden="true"></i><span data-i18n="nav.explore">Explorar</span></a>' +
+      '<a href="mapa.html"' + current('map') + '><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span data-i18n="nav.map">Mapa</span></a>' +
+      '<a href="mi-viaje.html"' + current('trip') + '><i class="fa-solid fa-route" aria-hidden="true"></i><span data-i18n="nav.trip">Mi Viaje</span></a>' +
+      '<button type="button" class="bq-thumbbar-baqui" aria-label="Hablar con BAQUI" data-i18n-aria-label="baqui.openPanel">' +
+        '<img src="assets/images/assistant/baqui.png" alt="" width="30" height="30" decoding="async">' +
+        '<span class="notranslate">BAQUI</span>' +
+      '</button>';
+    bar.querySelector('.bq-thumbbar-baqui').addEventListener('click', function () {
+      var assistant = window.BaqueanoAssistant;
+      if (assistant && typeof assistant.open === 'function') {
+        try {
+          if (typeof assistant.show === 'function') assistant.show();
+          assistant.open();
+          return;
+        } catch (error) {
+          console.warn('[BAQUEANO] No se pudo abrir BAQUI desde la barra:', error);
+        }
+      }
+      window.location.href = 'baqueano-ia.html';
+    });
+    document.body.appendChild(bar);
+    document.body.classList.add('bq-has-thumbbar');
   }
 
   if (document.readyState === 'loading') {

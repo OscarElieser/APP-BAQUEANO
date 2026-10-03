@@ -10,6 +10,7 @@
     "select": "Seleccioná el idioma"
   },
   "nav": {
+    "quick": "Accesos rápidos",
     "home": "Inicio",
     "explore": "Explorar",
     "destinations": "Destinos",
@@ -100,18 +101,18 @@
     "nextPage": "Página siguiente"
   },
   "status": {
-    "loading": "Cargando...",
-    "empty": "No hay resultados",
-    "error": "Ocurrió un error",
+    "loading": "Explorando Nicaragua…",
+    "empty": "Por aquí no encontramos nada. Probemos otra búsqueda.",
+    "error": "Algo se nos trabó. Probá otra vez.",
     "success": "¡Listo!",
-    "retry": "Reintentar",
+    "retry": "Probar otra vez",
     "offline": "Sin conexión",
-    "saving": "Guardando...",
+    "saving": "Guardando…",
     "saved": "Guardado",
-    "sending": "Enviando...",
+    "sending": "Enviando…",
     "sent": "Enviado",
-    "required": "Campo requerido",
-    "invalid": "Valor inválido",
+    "required": "Nos falta este dato",
+    "invalid": "Revisá este dato",
     "notFound": "No encontrado"
   },
   "home": {
@@ -322,7 +323,7 @@
   "search": {
     "placeholder": "Buscá destinos, experiencias, gastronomía…",
     "results": "Resultados",
-    "noResults": "No encontramos resultados para \"{query}\".",
+    "noResults": "No encontramos nada con \"{query}\". Probá con otra palabra o un lugar cercano.",
     "suggestions": "Sugerencias",
     "recent": "Búsquedas recientes",
     "clear": "Limpiar búsqueda"
@@ -340,15 +341,15 @@
     "password": "Contraseña",
     "submit": "Enviar",
     "required": "* Campo requerido",
-    "invalidEmail": "Correo electrónico inválido",
-    "success": "¡Tu mensaje fue enviado con éxito!",
-    "error": "Ocurrió un error al enviar. Intentá de nuevo.",
+    "invalidEmail": "Ese correo no parece completo. Revisalo, por favor.",
+    "success": "¡Listo! Ya nos llegó tu mensaje.",
+    "error": "No se pudo enviar. Revisá tu conexión y probá otra vez.",
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "tu@correo.com",
     "messagePlaceholder": "Escribí tu mensaje aquí…",
     "selectOption": "Seleccioná una opción",
     "contactTitle": "Contactanos",
-    "contactDesc": "Estamos aquí para ayudarte con tu viaje por Nicaragua."
+    "contactDesc": "Escribinos y te ayudamos a armar tu viaje por Nicaragua."
   },
   "about": {
     "title": "Quiénes Somos",
@@ -373,14 +374,14 @@
   },
   "offline": {
     "title": "Sin conexión",
-    "subtitle": "Estás navegando sin internet",
-    "desc": "Algunas funciones no estarán disponibles.",
-    "retry": "Intentar reconectar"
+    "subtitle": "Se fue la señal",
+    "desc": "Lo que ya cargaste sigue aquí. Cuando vuelva el internet, seguimos.",
+    "retry": "Probar la conexión"
   },
   "notFound": {
-    "title": "Página no encontrada",
-    "subtitle": "Parece que esta ruta no existe en el mapa",
-    "desc": "La página que buscás no existe o fue movida.",
+    "title": "Este camino no lleva a ningún lado",
+    "subtitle": "Ni en el mapa, ni fuera de él",
+    "desc": "Puede que la dirección esté mal escrita o que la página se haya movido. Volvamos a explorar.",
     "homeBtn": "Volver al inicio",
     "exploreBtn": "Explorar destinos"
   },

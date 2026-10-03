@@ -3023,3 +3023,12 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Nota:** el brief incluye un adjetivo vetado por AGENTS.md regla 2; no se usará en archivos ni código.
 - **Estado:** Lote D1 (capa de identidad + portada) en curso.
 - **2026-10-03 — Reanudación:** el propietario reenvía el brief completo. Se retoma el lote D1 desde el estado sin commitear (`css/baqueano-identity.css`, `assets/textures/`, `js/global-injector.js`).
+- **Avance D1 (2026-10-03):** Hallazgos críticos en celular corregidos en `css/baqueano-identity.css` (v=20261003-2):
+  1. Menú móvil fuera de pantalla (hamburguesa en x=405 con viewport 390): contenedor de acciones fijado en 36 px por `navigation-mega.css` mientras `global-language.js` mantiene visible el idioma. Ahora: [marca][SOS][idioma][menú], objetivos táctiles de 44 px; ≤359 px solo logo.
+  2. Menú móvil abierto pero intocable: fondo difuminado (z 10040, styles.css) encima del panel (dentro de #mainNavbar, z 9900). Con el menú abierto el navbar sube a 10050.
+  3. SOS oculto en celular: vuelve como botón circular de 44 px.
+  4. Hero cortado en 320 px: grilla con columna implícita de 386 px por el ancho intrínseco del `<input>`. Ahora `minmax(0,1fr)` + `min-width:0`.
+  5. Tarjeta del mapa (grilla 160+130 px) apilada en móvil; galería polaroid que tapaba "Explorar destino" pasa al flujo; título "¿Qué querés vivir?" centrado; encabezados con enlace se acomodan en móvil.
+- **Nuevo:** barra de pulgar (`injectThumbBar` en `js/global-injector.js`): Inicio · Explorar · Mapa · Mi Viaje · BAQUI, ≤768 px, safe-area, `aria-current`, etiquetas `data-i18n` (+ clave `nav.quick` en 6 idiomas). La mascota flotante se oculta en celular (BAQUI se abre desde la barra; panel y funciones intactos).
+- **Verificado (Playwright, Chromium móvil táctil):** 320/360/390/430/768 px sin desborde; menú abre y recibe toques; BAQUI abre desde la barra; 0 errores JS.
+- **Siguiente:** voz de BAQUI y mensajes del sistema (humanización), revisión de la barra en mapa/destinos/perfil/mi-viaje, escritorio 1440–2560.

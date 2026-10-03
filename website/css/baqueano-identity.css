@@ -166,6 +166,28 @@ html, body { overflow-x: clip; }
   padding-inline: clamp(16px, 5vw, 56px) !important;
 }
 
+/* El hero es una grilla con columna implícita: tomaba el ancho mínimo del
+   buscador (el <input> trae ~194 px por defecto) y medía 386 px en 320 px,
+   cortando título, texto y botones. Columna fluida + input encogible. */
+#heroNicaragua {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+#heroNicaragua :is(.exact-container, .hero-exact-content) {
+  min-width: 0 !important;
+}
+
+#heroNicaragua .hero-exact-search input[type="search"] {
+  min-width: 0 !important;
+  flex: 1 1 auto;
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+#heroNicaragua .hero-exact-actions {
+  flex-wrap: wrap !important;
+}
+
 #heroNicaragua .hero-exact-title {
   font-size: clamp(2.35rem, 10.4vw, 5.6rem) !important;
   line-height: 0.95 !important;
@@ -269,6 +291,8 @@ html, body { overflow-x: clip; }
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 1rem !important;
+    /* En la portada actual la tarjeta es una grilla de 160 px + 130 px. */
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 
   #mapaAiSection .map-visual-wrap,
@@ -330,5 +354,272 @@ html, body { overflow-x: clip; }
 @media (max-width: 640px) {
   .bq-assistant .bq-suggestion {
     display: none !important;
+  }
+}
+
+/* ===================================================
+   6. BARRA SUPERIOR EN MÓVIL
+   =================================================== */
+/* Causa raíz (2026-10-03, 390 px): navigation-mega.css fija el contenedor de
+   acciones en 36 px, pero global-language.js mantiene visible el idioma en
+   móvil; el resultado empujaba la hamburguesa a x=405, fuera de la pantalla,
+   y el celular quedaba sin menú. Además SOS estaba oculto justo en el
+   dispositivo donde más se necesita.
+   Ahora el contenedor mide lo que su contenido y la barra queda:
+   [marca] [SOS] [idioma] [menú]. Iniciar sesión sigue en el menú y en la
+   barra de pulgar (Perfil). */
+@media (max-width: 480px) {
+  #mainNavbar :is(.exact-nav-actions, .global-nav-actions) {
+    width: auto !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    gap: 6px !important;
+    margin-left: auto !important;
+  }
+
+  #mainNavbar :is(.exact-container, .nav-inner) {
+    gap: 8px !important;
+    padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right)) !important;
+  }
+
+  /* La marca cede espacio antes que los controles. */
+  #mainNavbar :is(.exact-nav-brand, .navbar-brand-pill) {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden;
+  }
+
+  #mainNavbar :is(.sos-quick-btn, .navbar-sos-btn) {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+  }
+
+  #mainNavbar :is(.sos-quick-btn, .navbar-sos-btn) span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  #mainNavbar :is(.global-language, .navbar-lang-pill) {
+    min-height: 44px !important;
+    padding: 0 10px !important;
+  }
+
+  #mainNavbar :is(.exact-nav-mobile-toggle, .mobile-nav-toggle) {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+  }
+}
+
+/* Menú móvil intocable (causa raíz 2026-10-03): styles.css pone el fondo
+   difuminado en z-index 10040, pero el panel vive dentro de #mainNavbar, que
+   crea su propio contexto de apilamiento en 9900. El fondo quedaba ENCIMA del
+   panel: se veía borroso y ningún enlace respondía al toque. Mientras el menú
+   está abierto, el navbar completo sube por encima del fondo. */
+body.nav-drawer-open #mainNavbar {
+  z-index: 10050 !important;
+}
+
+body.nav-drawer-open .bq-thumbbar {
+  visibility: hidden;
+}
+
+/* Teléfonos muy estrechos (≤ 359 px): la marca queda solo con el logo. */
+@media (max-width: 359px) {
+  #mainNavbar :is(.exact-nav-brand-text, .navbar-brand-text) {
+    display: none !important;
+  }
+}
+
+/* ===================================================
+   7. BARRA DE PULGAR (navegación inferior en celular)
+   =================================================== */
+/* La crea js/global-injector.js (injectThumbBar). En celular lo importante
+   queda al alcance del pulgar: Inicio, Explorar, Mapa, Mi Viaje y BAQUI.
+   Se activa por espacio disponible (≤ 768 px), no por modelo de teléfono.
+   Respeta la barra de gestos de iOS/Android con safe-area-inset-bottom. */
+.bq-thumbbar { display: none; }
+
+@media (max-width: 768px) {
+  :root { --bq-thumbbar-h: 64px; }
+
+  .bq-thumbbar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 11990; /* bajo BAQUI abierto (12000) y modales; sobre el contenido */
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    min-height: var(--bq-thumbbar-h);
+    padding: 4px max(6px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px, env(safe-area-inset-left));
+    background: rgba(13, 27, 42, 0.94);
+    border-top: 1px solid rgba(244, 230, 193, 0.14);
+    box-shadow: 0 -10px 28px -12px rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    font-family: Inter, system-ui, sans-serif;
+  }
+
+  .bq-thumbbar a,
+  .bq-thumbbar button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-width: 0;
+    min-height: 56px;
+    padding: 6px 2px;
+    border: 0;
+    border-radius: 14px;
+    background: none;
+    color: rgba(248, 250, 252, 0.72);
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s var(--bq-id-ease), background-color 0.2s var(--bq-id-ease);
+  }
+
+  .bq-thumbbar span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Misma caja de 26 px para íconos y la imagen de BAQUI: etiquetas alineadas. */
+  .bq-thumbbar i {
+    font-size: 1.15rem;
+    height: 26px;
+    line-height: 26px;
+  }
+
+  .bq-thumbbar [aria-current="page"] {
+    color: var(--bq-id-sand);
+  }
+
+  /* Marca de brújula sobre la pestaña activa */
+  .bq-thumbbar [aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    width: 22px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--bq-id-orange);
+    transform: translateX(-50%);
+  }
+
+  .bq-thumbbar .bq-thumbbar-baqui {
+    color: #fff;
+  }
+
+  .bq-thumbbar .bq-thumbbar-baqui img {
+    width: 30px;
+    height: 26px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  }
+
+  @media (hover: hover) {
+    .bq-thumbbar :is(a, button):hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+  }
+
+  /* El contenido final nunca queda tapado por la barra. */
+  body.bq-has-thumbbar {
+    padding-bottom: calc(var(--bq-thumbbar-h) + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* BAQUI ya tiene su acceso en la barra: la mascota flotante se oculta en
+     celular para no tapar botones ni textos (antes ocupaba ~96×120 px en todo
+     el recorrido). El panel, la voz y todas sus funciones siguen intactos. */
+  body.bq-has-thumbbar .bq-assistant .bq-mascot,
+  body.bq-has-thumbbar .bq-assistant .bq-mascot-minimize,
+  body.bq-has-thumbbar .bq-assistant .bq-reopen-tab {
+    display: none !important;
+  }
+
+  /* El panel abierto de BAQUI se apoya sobre la barra, no detrás de ella. */
+  body.bq-has-thumbbar .bq-assistant .bq-drawer {
+    bottom: calc(var(--bq-thumbbar-h) + env(safe-area-inset-bottom)) !important;
+    max-height: calc(100dvh - var(--bq-thumbbar-h) - 70px - env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Aviso de cookies y reproductores fijos: por encima de la barra. */
+  body.bq-has-thumbbar :is(#bqCookieConsent, .bq-cookie-consent, .cookie-consent, .persistent-audio-player, .global-music-player, .bq-gallery-control) {
+    margin-bottom: calc(var(--bq-thumbbar-h) + env(safe-area-inset-bottom));
+  }
+}
+
+@media print {
+  .bq-thumbbar { display: none !important; }
+}
+
+/* ===================================================
+   8. PORTADA: AJUSTES DE COMPOSICIÓN
+   =================================================== */
+
+/* 8.1 "¿Qué querés vivir?": el título iba a la izquierda mientras la
+   etiqueta y el párrafo iban centrados. */
+#vivirSelector .vivir-title {
+  text-align: center !important;
+  margin-inline: auto !important;
+}
+
+/* 8.2 Destinos que inspiran: las polaroids estaban en position:absolute
+   encima del botón "Explorar destino" (x 482–888 sobre x 348–572 en 1440 px).
+   Pasan al flujo normal, debajo del botón, con desplazamiento horizontal. */
+.inspire-copy .inspire-gallery-editorial {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 1.25rem !important;
+}
+
+.inspire-copy .polaroid-strip {
+  max-width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding-block: 6px;
+}
+
+.inspire-copy .polaroid-strip::-webkit-scrollbar { display: none; }
+.inspire-copy .polaroid-item { flex: 0 0 auto; scroll-snap-align: start; }
+
+/* 8.3 Encabezados de sección con enlace a la derecha: en celular el enlace
+   bajaba cortado ("Ver todas las experi…"). Ahora se acomoda debajo. */
+@media (max-width: 600px) {
+  :is(#experienciasSection, #testimoniosSection) .section-header-exact {
+    flex-wrap: wrap !important;
+    align-items: flex-end !important;
+    row-gap: 0.5rem !important;
+  }
+
+  :is(#experienciasSection, #testimoniosSection) .section-header-link {
+    white-space: nowrap;
+    min-height: 44px;
+    display: inline-flex !important;
+    align-items: center;
   }
 }

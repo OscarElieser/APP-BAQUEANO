@@ -42,27 +42,30 @@
   // la misma fuente alimenta el saludo inicial, la reaparición y las sugerencias.
   // QUÉ: mensajes contextuales para las secciones públicas y fallback de inicio.
   // ============================================================================
+  // Voz de Baqüi (2026-10-03): cercana, práctica y con voseo natural.
+  // Cada mensaje dice qué hay en la página y propone UN siguiente paso.
+  // Sin "Veo que estás en…": suena a sistema, no a alguien que acompaña.
   const PAGE_GUIDANCE = Object.freeze({
-    index: 'Veo que estás en la página principal. Te recomiendo empezar por Destinos si querés descubrir un lugar, o usar el planificador para crear una ruta según tus intereses.',
-    inicio: 'Veo que estás en la página principal. Te recomiendo empezar por Destinos si querés descubrir un lugar, o usar el planificador para crear una ruta según tus intereses.',
-    destinos: 'Veo que estás en Destinos. Aquí podés explorar lugares de Nicaragua y compararlos; te recomiendo elegir primero el tipo de experiencia que buscás.',
-    departamento: 'Veo que estás explorando un departamento. Esta página reúne sus lugares, cultura y datos territoriales; te recomiendo revisar los atractivos y luego armar una ruta.',
-    gastronomia: 'Veo que estás en Gastronomía. Aquí descubrirás platos, ingredientes y tradiciones culinarias; te recomiendo explorar una receta o buscar dónde probar comida local.',
-    historia: 'Veo que estás en Historia. Esta sección explica hechos, personajes y memoria cultural de Nicaragua; te recomiendo abrir el período que más te interese.',
-    musica: 'Veo que estás en Música. Aquí podés escuchar el archivo sonoro nicaragüense y conocer a sus intérpretes; elegí una canción y te contaré brevemente de qué se trata.',
-    ambiental: 'Veo que estás en la sección Ambiental. Aquí encontrarás naturaleza y prácticas responsables; te recomiendo explorar un ecosistema o destino sostenible.',
-    aliados: 'Veo que estás en Aliados. Aquí podés encontrar artesanos, cooperativas y experiencias locales; te recomiendo filtrar según lo que buscás.',
-    nosotros: 'Veo que estás en Nosotros. Esta página explica cómo Baqueano conecta tecnología, territorio y cultura nicaragüense.',
-    'mi-negocio': 'Veo que estás en Mi Negocio. Aquí podés conocer las herramientas para publicar y gestionar una experiencia turística local.',
-    'baqueano-ai': 'Veo que estás en el planificador inteligente. Contame qué lugar, presupuesto o tipo de experiencia buscás y convertiré esas preferencias en una ruta.',
-    perfil: 'Veo que estás en tu perfil. Aquí podés revisar tus datos y preferencias de exploración; te recomiendo verificar que estén actualizados antes de planificar un viaje.',
-    privacidad: 'Veo que estás consultando la Política de Privacidad. Aquí explicamos qué datos utiliza Baqueano y cómo se protegen; puedo ayudarte a ubicar el tema que buscás.',
-    terminos: 'Veo que estás consultando los Términos de Uso. Aquí encontrarás las reglas y responsabilidades de la plataforma; puedo orientarte hacia la sección que necesitás.',
-    cookies: 'Veo que estás en la Política de Cookies. Esta página explica qué tecnologías utiliza el sitio y para qué sirven.',
-    'aviso-legal': 'Veo que estás en el Aviso Legal. Aquí encontrarás la identificación, alcance y condiciones legales de Baqueano.',
-    denuncias: 'Veo que estás en el canal de denuncias. Aquí podés comunicar una situación de forma responsable; revisá las indicaciones antes de enviar información sensible.',
-    offline: 'Veo que no tenés conexión. Podés intentar recargar la página o volver al inicio cuando se restablezca internet.',
-    404: 'Veo que esta dirección no existe. Te recomiendo volver a la página principal o abrir Destinos para continuar explorando.'
+    index: '¡Qué bueno verte por aquí! Si ya sabés a dónde querés ir, empezá por Destinos. Si todavía no, contame qué te gusta y armamos la ruta juntos.',
+    inicio: '¡Qué bueno verte por aquí! Si ya sabés a dónde querés ir, empezá por Destinos. Si todavía no, contame qué te gusta y armamos la ruta juntos.',
+    destinos: 'Aquí está lo bueno. Elegí primero qué querés vivir (playa, volcán, cultura, comida) y te muestro los lugares que van con eso.',
+    departamento: 'Cada departamento tiene lo suyo. Mirá sus lugares y su gente, y cuando algo te guste, lo metemos en tu ruta.',
+    gastronomia: '¿Con hambre? Aquí están los platos de siempre y la historia detrás de cada uno. Si querés, te digo dónde probarlos.',
+    historia: 'Nicaragua se entiende mejor conociendo su historia. Abrí la época que te llame y te cuento lo importante.',
+    musica: 'Ponete cómodo. Elegí una canción y te cuento de dónde viene y quién la canta.',
+    ambiental: 'La naturaleza de aquí hay que cuidarla. Aquí encontrás reservas, ecosistemas y cómo visitarlos sin dejar huella.',
+    aliados: 'Detrás de cada experiencia hay gente de la comunidad: artesanos, cooperativas, guías. Filtrá por lo que buscás y conocelos.',
+    nosotros: 'Esto es BAQUEANO: gente de aquí usando la tecnología para que conozcás la Nicaragua que no sale en el mapa.',
+    'mi-negocio': '¿Tenés un negocio turístico? Aquí te explico cómo publicarlo para que más viajeros te encuentren.',
+    'baqueano-ai': 'Decime a dónde querés ir, cuántos días tenés y cuánto querés gastar. Con eso te armo una ruta que se ajuste.',
+    perfil: 'Este es tu espacio. Revisá tus datos y gustos; así te recomiendo lugares que de verdad te van a gustar.',
+    privacidad: 'Aquí explicamos qué datos usamos y cómo los cuidamos. Si buscás algo puntual, preguntame y te llevo directo.',
+    terminos: 'Estas son las reglas de la plataforma. Si querés saber algo en específico, preguntame y te ubico la parte que necesitás.',
+    cookies: 'Aquí te contamos qué cookies usamos y para qué. Podés cambiar tus preferencias cuando querás.',
+    'aviso-legal': 'Aquí está quiénes somos legalmente y bajo qué condiciones funciona BAQUEANO.',
+    denuncias: 'Si viste algo que no está bien, aquí lo podés contar. Leé las indicaciones antes de compartir datos personales.',
+    offline: 'Parece que se fue el internet. Lo que ya cargaste sigue aquí; cuando vuelva la señal, seguimos explorando.',
+    404: 'Este camino no lleva a ningún lado. Volvamos al inicio o busquemos un destino.'
   });
 
   function pageGuidance() {
@@ -91,7 +94,7 @@
     root.innerHTML = `
       <div class="bq-suggestion" id="bqSuggestion" role="status" hidden><button type="button" class="bq-suggestion-close" data-command="dismiss-suggestion" aria-label="Cerrar sugerencia">×</button><p></p><div class="bq-suggestion-actions"><button type="button" data-command="suggestion-listen"><i class="fa-solid fa-volume-high"></i> Escuchar</button><button type="button" data-command="suggestion-open"><i class="fa-solid fa-comments"></i> Abrir panel</button><button type="button" data-command="snooze">Ahora no</button></div></div>
       <aside class="bq-drawer" id="bqDrawer" aria-hidden="true" aria-label="Baqüi, guía digital de Nicaragua">
-        <header class="bq-header"><picture><img src="assets/images/assistant/baqui.png" alt=""></picture><div><strong>Baqüi</strong><span><i id="bqServiceDot"></i> <b id="bqModuleLabel">Verificando inteligencia…</b></span></div><div class="bq-header-actions"><button data-command="voice" aria-label="Activar voz" title="Voz"><i class="fa-solid fa-volume-xmark"></i></button><button data-command="minimize" aria-label="Minimizar"><i class="fa-solid fa-minus"></i></button><button data-command="close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div></header>
+        <header class="bq-header"><picture><img src="assets/images/assistant/baqui.png" alt=""></picture><div><strong>Baqüi</strong><span><i id="bqServiceDot"></i> <b id="bqModuleLabel">Despertando…</b></span></div><div class="bq-header-actions"><button data-command="voice" aria-label="Activar voz" title="Voz"><i class="fa-solid fa-volume-xmark"></i></button><button data-command="minimize" aria-label="Minimizar"><i class="fa-solid fa-minus"></i></button><button data-command="close" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div></header>
         <section class="bq-live" aria-label="Información útil"><div class="bq-live-card"><i class="fa-regular fa-clock"></i><span>Hora en Nicaragua</span><strong id="bqClock">--:--</strong></div><button class="bq-live-card" type="button" data-command="weather"><i class="fa-solid fa-cloud-sun"></i><span id="bqWeatherPlace">Managua</span><strong id="bqWeather">Consultar clima</strong></button><button class="bq-live-card bq-promo" type="button" data-command="promotion"><i class="fa-solid fa-tags"></i><span>Promociones</span><strong id="bqPromotion">Verificadas</strong></button></section>
         <div class="bq-messages" id="bqMessages" aria-live="polite" aria-busy="false"></div>
         <div class="bq-quick" aria-label="Acciones rápidas">
@@ -143,7 +146,7 @@
     root.dataset.service = next;
     const profile = MODULES[currentModule()] || MODULES.index;
     const label = $('#bqModuleLabel');
-    if (label) label.textContent = next === 'online' ? profile.label : next === 'checking' ? 'Verificando inteligencia…' : 'IA temporalmente sin conexión';
+    if (label) label.textContent = next === 'online' ? profile.label : next === 'checking' ? 'Despertando…' : 'Sin señal por ahora · respondo con lo que sé';
     const mascot = $('#bqMascot');
     if (mascot) mascot.setAttribute('aria-label', next === 'online' ? 'Abrir a Baqüi, inteligencia territorial activa' : 'Abrir a Baqüi, servicio inteligente sin conexión');
   }
@@ -719,16 +722,15 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
     }
 
     // 5. RESPUESTA GENERAL ASISTENCIAL (Nivel ChatGPT/Gemini con identidad Baqueano)
-    const message = `¡Hola explorador! Qué alegría conversar con vos. Como Baqüi, tu guía y guardabarranco virtual, estoy nutrido con la información oficial de INTUR, VisitaNicaragua, MARENA, UNESCO, Google y la red comunitaria de Baqueano.
+    const message = `¡Dele pues! Soy Baqüi y conozco Nicaragua de punta a punta. Te puedo ayudar con:
 
-Puedo ayudarte con:
-1. 🏖️ Mostrarte nuestros destinos y playas oficiales verificadas con precios comunitarios en córdobas y dólares.
-2. ⚖️ Hacer comparaciones detalladas entre 3 opciones para recomendarte la mejor alternativa según tu presupuesto y personas.
-3. 🗺️ Construir tu ruta paso a paso ajustada al centavo con transporte público o vehículo.
-4. 🚨 Auxilio de emergencia SOS con coordenadas GPS satelitales en vivo.
-5. 🍽️ Recomendarte la mejor gastronomía típica tradicional (mariscos frescos, quesillos, baho, vigorón).
+1. 🏖️ Destinos y playas, con precios en córdobas y dólares cuando los tenemos verificados.
+2. ⚖️ Comparar opciones según tu presupuesto y cuántos van.
+3. 🗺️ Armar tu ruta paso a paso, en bus o en carro.
+4. 🚨 SOS: tu ubicación y los números de emergencia, al toque.
+5. 🍽️ Dónde comer lo nuestro: vigorón, quesillo, baho, mariscos.
 
-¿Qué territorio, playa o inquietud te gustaría consultar en este momento?`;
+¿Por dónde querés empezar?`;
 
     return {
       message,
@@ -746,7 +748,7 @@ Puedo ayudarte con:
     session.tripProfile = Object.assign({}, session.tripProfile, extractTripProfile(message)); saveSession();
     appendMessage(message, 'user'); state.busy = true; state.controller = new AbortController();
     $('#bqMessages').setAttribute('aria-busy', 'true'); $('[data-command="stop"]').hidden = false; setCharacter('thinking');
-    const thinking = appendMessage('Baqüi está pensando…', 'status', false); const started = performance.now();
+    const thinking = appendMessage('Buscando por los caminos…', 'status', false); const started = performance.now();
     try {
       // INTERCEPTOR DE PRECISIÓN LOCAL: Si la consulta solicita catálogo de la web, comparativa o ruta ajustada con rechazo a volcanes,
       // delegamos inmediatamente al motor cognitivo territorial de Baqueano para garantizar datos reales de destinos.html
@@ -779,7 +781,7 @@ Puedo ayudarte con:
       session.tripProfile = Object.assign({}, session.tripProfile, data.tripProfilePatch || {});
       if (CHARACTER_STATES.has(data.animation)) setCharacter(data.animation);
       await streamText(data.message || itineraryReply(data.itinerary));
-      renderActions(data.actions || [{ type: 'open_destination', label: 'Explorar Destinos Baqueano', url: 'destinos.html' }]);
+      renderActions(data.actions || [{ type: 'open_destination', label: 'Ver destinos', url: 'destinos.html' }]);
       track('assistant_response', { mode: data.mode || data.provider, grounding: data.groundingStatus, latency_ms: Math.round(performance.now() - started) });
     } catch (error) {
       thinking?.closest('article')?.remove();
@@ -790,7 +792,7 @@ Puedo ayudarte con:
         session.tripProfile = Object.assign({}, session.tripProfile, localAnswer.tripProfilePatch || {});
         if (CHARACTER_STATES.has(localAnswer.animation)) setCharacter(localAnswer.animation);
         await streamText(localAnswer.message);
-        renderActions(localAnswer.actions || [{ type: 'open_destination', label: 'Explorar Destinos Baqueano', url: 'destinos.html' }]);
+        renderActions(localAnswer.actions || [{ type: 'open_destination', label: 'Ver destinos', url: 'destinos.html' }]);
         track('assistant_response_local_brain', { latency_ms: Math.round(performance.now() - started) });
       }
     } finally {
@@ -915,13 +917,13 @@ Puedo ayudarte con:
     setCharacter('listening'); track('assistant_voice_used');
     state.recognition?.abort(); const recognition = new Recognition(); state.recognition = recognition; recognition.lang = 'es-NI'; recognition.interimResults = false; $('#bqInput').placeholder = 'Escuchando…';
     recognition.onresult = event => { $('#bqInput').value = event.results[0][0].transcript; $('#bqInput').placeholder = 'Entendido. Podés enviarlo o editarlo.'; };
-    recognition.onerror = () => { $('#bqInput').placeholder = 'No pude escuchar. Intentá nuevamente.'; }; recognition.onend = () => { state.recognition = null; setCharacter('idle'); }; recognition.start();
+    recognition.onerror = () => { $('#bqInput').placeholder = 'No te escuché bien. ¿Me lo repetís?'; }; recognition.onend = () => { state.recognition = null; setCharacter('idle'); }; recognition.start();
   }
 
   session.hidden = false;
   const root = buildUi(); if (!preferences.enabled) root.hidden = true; if (isSnoozed()) root.classList.add('is-snoozed'); else if (session.minimized) { state.minimized = true; root.classList.add('is-minimized'); }
   syncVoiceButton();
-  session.messages.length ? session.messages.forEach(message => appendMessage(message.content, message.role, false)) : appendMessage('¡Hola! Soy Baqüi, tu guardabarranco guía. Puedo ayudarte a descubrir Nicaragua con información territorial y acciones concretas.', 'assistant');
+  session.messages.length ? session.messages.forEach(message => appendMessage(message.content, message.role, false)) : appendMessage('¡Hola! Soy Baqüi. ¿Qué querés descubrir hoy? Puedo buscarte lugares, armarte una ruta o decirte qué hay cerca.', 'assistant');
   initDrag($('#bqMascot'));
   $('#bqForm').addEventListener('submit', event => { event.preventDefault(); const input = $('#bqInput'), value = input.value; input.value = ''; ask(value); track('assistant_message_sent'); });
   $('#bqInput').addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); $('#bqForm').requestSubmit(); } });
