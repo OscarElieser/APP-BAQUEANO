@@ -78,7 +78,8 @@ Node puro sin dependencias npm, solo en `127.0.0.1:3000`, ejecutado por systemd 
 | Imagen | Ubuntu Server 22.04 LTS |
 | Tamaño | Standard D2s_v3 (2 vCPU, 8 GiB) — ver "Costes" |
 | Usuario | `baqueano` (solo clave pública SSH) |
-| Red | `vnet-centralus-1` / `snet-centralus-1`, IP pública `vm-baqueano-prod-ip` |
+| Red | `vnet-centralus-1` / `snet-centralus-1`, NIC `vm-baqueano-prod299`, IP privada `172.16.0.4` |
+| IP pública | **`20.80.81.65`** (`vm-baqueano-prod-ip`) |
 | NSG | `vm-baqueano-prod-nsg` (lo crea o ajusta `azure/configure-nsg.sh`) |
 
 ### Paso 0 — Clave SSH nueva (obligatorio)

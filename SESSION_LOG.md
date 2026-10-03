@@ -2962,3 +2962,11 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Pruebas:** API en local → `/health` 200; `/db` 200 con Supabase `departments: 17` (826 ms); caché OK; 404 ruta desconocida; 405 POST; inaccesible desde IP externa. `bash -n` OK en 4 scripts; `node --check` OK. Se detectó y corrigió el fallo ESM/CommonJS gracias a la prueba. El proceso `dev-server.js` (PID 8580) del propietario no se tocó.
 - **Decisión documentada:** no se usa el `rsync` de todo `website/` (publicaría docs/scripts/apps/packages); systemd en lugar de PM2 (misma función, sin npm global).
 - **Estado:** Listo para ejecutar en la VM cuando el propietario confirme IP y clave SSH regenerada.
+## 2026-10-02 — VM Azure creada: verificación externa
+
+- 🎯 **POR QUÉ:** Confirmar el estado real de `vm-baqueano-prod` y su exposición de red antes de aprovisionarla.
+- ⚙️ **CÓMO:** Datos del portal (En ejecución, Central US zona 1, Ubuntu 22.04, D2s v3, IP pública 20.80.81.65, NIC `vm-baqueano-prod299`, IP privada 172.16.0.4, apagado automático deshabilitado). Sondeo TCP externo no intrusivo de los puertos 22, 80, 443, 3000, 3306, 5432.
+- 📦 **QUÉ:** Resultado del sondeo y próximos pasos. El ID de suscripción no se registra en el repositorio.
+- **Estado:** En verificación.
+- **Resultado sondeo (2026-10-03 UTC):** 22 abierto a Internet (`SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.17`); 80, 443, 3000, 3306, 5432 cerrados/filtrados (aún sin servicios). IP y NIC anotadas en `docs/AZURE_DEPLOYMENT.md`.
+- **Estado:** Pendiente que el propietario ejecute `configure-nsg.sh` (restringir 22, abrir 80/443), regenere la clave SSH y active el apagado automático.
