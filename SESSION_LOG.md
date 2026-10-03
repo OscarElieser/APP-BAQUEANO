@@ -3240,3 +3240,52 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - 🎯 **POR QUÉ:** El encabezado del Ops Center dice "Asistente Personal de Oscar" fijo; debe reflejar la cuenta autenticada.
 - ⚙️ **CÓMO:** Tomar el nombre del usuario de Firebase Auth en el Ops Center y renderizarlo; sin nombre fijo en el HTML.
 - **Estado:** En cola (después de perfil.html y del botón de sesión).
+- **Resultado perfil.html (privacidad):** 53 reemplazos con `scratchpad/clean_perfil.py`. Eliminados del HTML: nombre, correo, teléfono, ubicación, contactos de emergencia (dos), salud, viaje 12–14 oct, reservas, favoritos, ID de pasaporte y 5 sellos, transacción C$ 3,500, "2FA activada", contraseña, dispositivo/ubicación de último acceso, 320 XP y logros, consentimientos premarcados, píldora "Oscar". Secciones privadas con `data-private-section hidden` (fallan cerradas). Campos `[data-profile-field]` (name, first-name, email, since, last-login) que `js/auth-panel.js?v=20261003-2` llena SOLO con la cuenta autenticada y restaura al cerrar sesión; sin Firebase o con error → panel de acceso con mensaje, nunca perfil.
+- **Verificado (Playwright, Firebase simulado):** anónimo → 0 fugas, 0 secciones privadas visibles, panel visible; usuario de prueba → sus datos reales (nombre, correo, desde, último acceso), 8 secciones visibles.
+- **Pendiente detectado:** `js/ops-center/ops-mock-data.js` (público) contiene correos de administradores; `admin.html`/`ops-ia-copilot.js` con "Asistente Personal de Oscar" fijo (en cola).
+- **Botón de sesión (resuelto):** `js/user-session.js` → `updateNavbar()` ahora sincroniza `.navbar-login-btn`: con sesión `.is-logged-in`, "Cerrar sesión", ícono de salida, cierra sesión al tocar (+ aviso "Cerraste sesión"); sin sesión vuelve a "Iniciar sesión" → perfil.html. Estilo rojo #C0392B (5.4:1) en `baqueano-system.css?v=20261003-16`. `navigation.js` carga `user-session.js?v=20261003-1`. Verificado con Firebase simulado (1440): rojo/"Cerrar sesión" → tras tocar "Iniciar sesión" y panel de acceso visible. En celular el botón vive en el menú (no en la barra).
+
+## 2026-10-03 — Solicitud (en cola): botones "Conocer más" de la línea de tiempo (historia.html) deben abrir una ventana con más información
+
+- 🎯 **POR QUÉ:** Las 7 tarjetas de época (Prehispánica → Nicaragua contemporánea) tienen "Conocer más" sin acción.
+- ⚙️ **CÓMO:** Modal accesible con contenido por época (hechos verificables), foco atrapado, Escape/cierre, sin quitar nada.
+- **Estado:** En cola (después del encabezado de admin.html).
+- **admin.html (resuelto):** `js/ops-center/ops-ia-copilot.js?v=20261003-1`: `getOperatorName()` toma el primer nombre de Firebase Auth (o BaqueanoSession), respaldo "Administrador"; `OPS_STATE.adminName` es getter; 6 textos fijos "Oscar" → `[data-ops-operator]` + `syncOperatorName()` en `onAuthStateChanged` y `baqueano_session_updated`. Corregida inyección HTML: el mensaje del operador en el Commander ahora se inserta como texto. `admin.html`: título del botón y saludo estático sin nombre fijo. Verificado (usuario simulado "Ana Prueba"): "Asistente Personal de Ana", 0 apariciones de "Oscar".
+## 2026-10-03 — Verificación de mapas territoriales por departamento y región
+
+### 🎯 POR QUÉ
+El mapa de la página territorial publicada aparece vacío y debe representar de forma exacta los lugares mencionados para cada territorio de Nicaragua.
+
+### ⚙️ CÓMO
+Se inspeccionará la implementación local y la página publicada `https://baqueanonicaragua.com/departamento.html?id=matagalpa`, se verificará el origen de datos, coordenadas, filtros territoriales y renderizado responsivo, y se aplicarán correcciones con validación técnica.
+
+### 📦 QUÉ
+Solicitud: verificar y corregir esta sección para que funcione según el departamento, cubriendo los 15 departamentos y las 2 regiones autónomas, mostrando el mapa correcto y los lugares mencionados en cada territorio.
+
+Estado: análisis iniciado; aún sin cambios de implementación.
+
+## 2026-10-03 — Auditoría y Optimización Profunda de Rendimiento (Performance Engineering)
+
+### 🎯 POR QUÉ (WHY / PROPÓSITO)
+- El sitio publicado `https://baqueanonicaragua.com/` presenta lentitud perceptible en navegación y carga, especialmente en dispositivos móviles (Android, iPhone) y conexiones con latencia o ancho de banda restringido.
+- Se requiere una optimización profunda de rendimiento en todo el proyecto (`website/`, assets, CSS, JS, imágenes, fuentes, red, bases de datos), manteniendo el 100% del contenido, secciones, diseño visual y funcionalidades operativas intactas.
+
+### ⚙️ CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN)
+- **Alcance Completo:** Todos los HTML, CSS, JavaScripts y assets (imágenes, fuentes, videos, mapas, BAQUI, Firebase, Supabase).
+- **Estrategia por Fases:**
+  1. **Diagnóstico y Auditoría Baseline:** Medir LCP, CLS, INP, peso total de scripts/estilos y tiempos de bloqueo del hilo principal (render-blocking).
+  2. **Imágenes & Media:** Conversión a WebP/AVIF, atributos `loading="lazy"`, `decoding="async"`, `width`/`height` explícitos, `srcset`/`sizes`, `fetchpriority="high"` exclusivo para el Hero principal, `preload="none"` en videos con pósteres ligeros.
+  3. **Carga Diferida & Módulos Dinámicos:** Lazy loading de Mapas (Leaflet/MapLibre) con `IntersectionObserver`/interacción de usuario; BAQUI, Firebase y Supabase bajo demanda; geolocalización GPS solo bajo interacción explícita.
+  4. **JavaScript & Render-Blocking:** Eliminar scripts duplicados, aplicar `defer`/`type="module"`, imports dinámicos `import()`, y desacoplar listeners huérfanos.
+  5. **CSS & Fuentes:** Limpieza de CSS crítico vs complementario, `font-display: swap`, optimización de preloads de tipografía Google Fonts.
+  6. **Navegación Instantánea:** Prefetch inteligente de enlaces internos con `hover`/`touchstart` y soporte para View Transitions API progresivo.
+  7. **Caché & Headers:** Configuración óptima de caché en `firebase.json` y servidores web.
+  8. **Verificación Funcional Total:** Validar que botones, navegación, autenticación, i18n, mapas, BAQUI, formularios, Supabase, Firebase y responsive funcionen sin errores en consola.
+  9. **Informe Exhaustivo:** Tabla estructurada con archivo, problema, corrección, impacto, antes y después.
+
+### 📦 QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD)
+- Auditoría técnica completa y plan de acción de performance engineering.
+- Implementación incremental de optimizaciones sin rediseño visual ni pérdida de funcionalidad.
+- Pruebas y mediciones antes/después con reporte comparativo.
+
+Estado: Iniciado (Fase 1: Diagnóstico y Auditoría Baseline).

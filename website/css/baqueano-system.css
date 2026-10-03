@@ -1249,3 +1249,15 @@ html[data-bq-page="perfil"] .prof-empty {
 }
 html[data-bq-page="perfil"] .prof-empty > i { font-size: 1.6rem; color: var(--baqueano-secondary); opacity: 0.7; }
 html[data-bq-page="perfil"] .prof-empty p { margin: 0; font-size: 0.86rem; }
+
+/* Botón de sesión con sesión iniciada: rojo y "Cerrar sesión" (user-session.js
+   agrega .is-logged-in). Blanco sobre #C0392B = 5.4:1 (AA). */
+body .navbar-login-btn.is-logged-in,
+body #mainNavbar .navbar-login-btn.is-logged-in {
+  background: #C0392B !important;
+  background-image: none !important;
+  border-color: #A93226 !important;
+  color: #FFFFFF !important;
+}
+body .navbar-login-btn.is-logged-in:is(:hover, :focus-visible) { background: #A93226 !important; }
+body .navbar-login-btn.is-logged-in[aria-busy="true"] { opacity: 0.7; pointer-events: none; }

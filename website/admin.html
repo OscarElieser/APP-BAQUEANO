@@ -341,7 +341,7 @@
             <i class="fa-solid fa-clock-rotate-left"></i> <span>Backup</span>
           </button>
 
-          <button type="button" class="btn-ops-matte primary" id="btnOpsIaCommander" title="Baqueano Commander — Asistente Personal de Oscar" onclick="window.BaqueanoOpsIA && window.BaqueanoOpsIA.openCommanderModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+          <button type="button" class="btn-ops-matte primary" id="btnOpsIaCommander" title="Baqueano Commander — Asistente personal del administrador" onclick="window.BaqueanoOpsIA && window.BaqueanoOpsIA.openCommanderModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
             <i class="fa-solid fa-robot"></i> <span>Ops IA</span>
           </button>
 
@@ -787,7 +787,7 @@
 
               <div id="commanderInlineFeed" style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1rem; min-height: 220px; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
                 <div style="background: var(--ops-surface-1); border-left: 3px solid var(--bq-secondary); border-radius: var(--ops-radius-sm); padding: 0.65rem 0.85rem; font-size: 0.82rem; color: var(--ops-text-primary);">
-                  <strong>Baqueano Ops IA:</strong> Oscar, la plataforma se encuentra en un <strong>98% de Pulso Operativo</strong>. Todos los servicios de IA y contingencias están listos. ¿Qué deseas supervisar en este momento?
+                  <strong>Baqueano Ops IA:</strong> <span data-ops-operator>Administrador</span>, la plataforma se encuentra en un <strong>98% de Pulso Operativo</strong>. Todos los servicios de IA y contingencias están listos. ¿Qué deseas supervisar en este momento?
                 </div>
               </div>
 
@@ -1560,7 +1560,7 @@
   <!-- El Ops Center no carga catálogos locales ni datos simulados. -->
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <script src="js/ops-center/ops-engine.js?v=20260926-fixed-video-governance-1"></script>
-  <script src="js/ops-center/ops-ia-copilot.js"></script>
+  <script src="js/ops-center/ops-ia-copilot.js?v=20261003-1"></script>
 
   <script>
     // Puente de compatibilidad global sin errores de consola

@@ -1158,7 +1158,7 @@ function initDropdownMiPais() {
 function ensureUserSessionLoaded() {
   if (!window.BaqueanoSession) {
     const script = document.createElement('script');
-    script.src = 'js/user-session.js';
+    script.src = 'js/user-session.js?v=20261003-1';
     document.head.appendChild(script);
   }
 }

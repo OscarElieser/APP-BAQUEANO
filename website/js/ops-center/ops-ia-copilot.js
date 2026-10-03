@@ -3,7 +3,7 @@
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Servir como el CEREBRO INTELIGENTE y ASISTENTE PERSONAL EJECUTIVO de Oscar y
+// - Servir como el CEREBRO INTELIGENTE y ASISTENTE PERSONAL EJECUTIVO del operador autenticado y
 //   la dirección operativa de BAQUEANO Nicaragua, transformando el Ops Center en
 //   un centro de mando activo y proactivo (NOC + SOC + AI Operations Center).
 // - Vigilar 24/7 la salud integral de la plataforma: infraestructura (Firebase y
@@ -30,7 +30,7 @@
 // - window.BaqueanoOpsIA:
 //   * init(): Inicializa observadores y calcula el Pulso inicial.
 //   * getPulse(): Retorna estado detallado del Baqueano Pulse y desglose por cuadrante.
-//   * getExecutiveBriefing(): Genera el saludo y resumen dinámico para Oscar.
+//   * getExecutiveBriefing(): Genera el saludo y resumen dinámico para el operador autenticado.
 //   * getOperationalAgenda(): Devuelve la lista priorizada de tareas del día.
 //   * executeQuickAction(actionId, payload): Resuelve incidencias con 1-Click.
 //   * sendCommand(text): Procesa consultas y comandos en lenguaje natural.
@@ -44,9 +44,35 @@
   // --------------------------------------------------------------------------
   // ESTADO Y CONFIGURACIÓN DEL ASISTENTE PERSONAL OPS IA
   // --------------------------------------------------------------------------
+  // Nombre del operador: SIEMPRE el de la cuenta autenticada (Firebase Auth),
+  // nunca un nombre fijo en el código. Respaldo neutro: "Administrador".
+  function getOperatorName() {
+    try {
+      const fbUser = window.firebase && window.firebase.auth && window.firebase.auth().currentUser;
+      const sessionUser = window.BaqueanoSession && window.BaqueanoSession.getUser && window.BaqueanoSession.getUser();
+      const raw = (fbUser && (fbUser.displayName || fbUser.email)) || (sessionUser && sessionUser.isLoggedIn && (sessionUser.name || sessionUser.email)) || '';
+      const first = String(raw).split('@')[0].trim().split(/\s+/)[0];
+      return first || 'Administrador';
+    } catch (_) {
+      return 'Administrador';
+    }
+  }
+
+  function escapeOps(value) {
+    return String(value).replace(/[&<>'"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[ch]));
+  }
+
+  // Actualiza todos los puntos de la interfaz que muestran al operador.
+  function syncOperatorName() {
+    const name = getOperatorName();
+    document.querySelectorAll('[data-ops-operator]').forEach((node) => { node.textContent = name; });
+    const commanderBtn = document.getElementById('btnOpsIaCommander');
+    if (commanderBtn) commanderBtn.title = 'Baqueano Commander — Asistente personal de ' + name;
+  }
+
   const OPS_STATE = {
     initialized: false,
-    adminName: 'Oscar',
+    get adminName() { return getOperatorName(); },
     pulseScore: 98,
     pulseStatus: 'optimal', // optimal (>=95), attention (85-94), degraded (<85)
     lastEvaluation: new Date(),
@@ -292,14 +318,14 @@
 
     if (q.includes('cómo está') || q.includes('estado general') || q.includes('pulso') || q.includes('pulse')) {
       const pulse = calculateBaqueanoPulse();
-      response = `Oscar, el estado general de BAQUEANO está en un **${pulse.score}%** (${pulse.statusLabel}).\n\n` +
+      response = `${escapeOps(OPS_STATE.adminName)}, el estado general de BAQUEANO está en un **${pulse.score}%** (${pulse.statusLabel}).\n\n` +
         `• **Infraestructura:** Firebase 🟢 Operativo (${OPS_STATE.metrics.firebase.latency}) | Supabase 🟢 Backup dual con ${OPS_STATE.metrics.supabaseBackup.diffCount} diff.\n` +
         `• **Inteligencia Artificial:** Gemini 1.5 Pro activo (${OPS_STATE.metrics.aiGemini.avgLatencySec}s latencia) | Groq Llama-3 listo en Standby.\n` +
         `• **Operaciones:** ${OPS_STATE.metrics.bookingsPending} reservas en curso | ${OPS_STATE.metrics.businessesWithoutGps} negocios requieren GPS | 0 alertas SOS.\n` +
         `• **Seguridad:** App Check enforced | 0 amenazas activas.`;
     } 
     else if (q.includes('qué pasó hoy') || q.includes('resumen') || q.includes('hoy') || q.includes('actividad')) {
-      response = `**Resumen Operativo de Hoy para Oscar:**\n\n` +
+      response = `**Resumen Operativo de Hoy para ${escapeOps(OPS_STATE.adminName)}:**\n\n` +
         `1. **Tráfico y Usuarios:** 187 exploradores activos en la plataforma.\n` +
         `2. **Reservas:** 42 consultas de experiencias gestionadas, 3 pendientes de respuesta.\n` +
         `3. **Salud de APIs:** 1,248 peticiones procesadas por Gemini con 1.4s de tiempo medio. Cero caídas.\n` +
@@ -326,7 +352,7 @@
       response = simulateAction('update_tariff');
     } 
     else {
-      response = `Entendido, Oscar. He registrado tu instrucción en la bitácora operativa. ` +
+      response = `Entendido, ${escapeOps(OPS_STATE.adminName)}. He registrado tu instrucción en la bitácora operativa. ` +
         `¿Quieres que evalúe el impacto en la base de datos o que prepare una acción de ejecución rápida?`;
     }
 
@@ -415,7 +441,7 @@
             <div>
               <div style="display: flex; align-items: center; gap: 0.5rem;">
                 <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin: 0;">
-                  Baqueano Ops IA · Asistente Personal de Oscar
+                  Baqueano Ops IA · Asistente Personal de <span data-ops-operator>${escapeOps(OPS_STATE.adminName)}</span>
                 </h2>
                 <span class="ops-badge-status published" style="background: ${pulse.color}22; color: ${pulse.color}; border: 1px solid ${pulse.color}44;">
                   ● ${pulse.statusLabel}
@@ -551,7 +577,7 @@
               </div>
               <div>
                 <h3 style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: #FFFFFF; margin: 0;">Baqueano Commander</h3>
-                <span style="font-size: 0.72rem; color: var(--ops-text-secondary);">Consola de Órdenes &amp; Copiloto Personal de Oscar</span>
+                <span style="font-size: 0.72rem; color: var(--ops-text-secondary);">Consola de Órdenes &amp; Copiloto Personal de <span data-ops-operator>${escapeOps(OPS_STATE.adminName)}</span></span>
               </div>
             </div>
             <button type="button" class="btn-ops-matte" onclick="document.getElementById('baqueanoCommanderModal').style.display='none'" style="padding: 0.3rem 0.6rem;">
@@ -562,7 +588,7 @@
           <!-- Feed de Mensajes -->
           <div id="commanderMessagesFeed" style="flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; min-height: 300px; max-height: 50vh;">
             <div style="background: var(--ops-surface-2); border-left: 3px solid var(--bq-secondary); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; font-size: 0.84rem; color: var(--ops-text-primary);">
-              <strong>Baqueano Ops IA:</strong> Hola Oscar, estoy a tu servicio. Puedes preguntarme el estado de la plataforma, pedirme que revise reservas pendientes, verificar la sincronización con Supabase o simular cambios operativos.
+              <strong>Baqueano Ops IA:</strong> Hola <span data-ops-operator>${escapeOps(OPS_STATE.adminName)}</span>, estoy a tu servicio. Puedes preguntarme el estado de la plataforma, pedirme que revise reservas pendientes, verificar la sincronización con Supabase o simular cambios operativos.
             </div>
           </div>
 
@@ -607,11 +633,13 @@
     const feed = document.getElementById('commanderMessagesFeed');
     if (!feed) return;
 
-    // Mensaje de Oscar
-    const oscarBubble = document.createElement('div');
-    oscarBubble.style.cssText = 'background: var(--bq-primary); align-self: flex-end; border-radius: var(--ops-radius-md); padding: 0.65rem 0.95rem; font-size: 0.84rem; color: #FFFFFF; max-width: 80%;';
-    oscarBubble.innerHTML = `<strong>Oscar:</strong> ${text}`;
-    feed.appendChild(oscarBubble);
+    // Mensaje del operador: texto plano (nunca innerHTML con lo que se escribe).
+    const operatorBubble = document.createElement('div');
+    operatorBubble.style.cssText = 'background: var(--bq-primary); align-self: flex-end; border-radius: var(--ops-radius-md); padding: 0.65rem 0.95rem; font-size: 0.84rem; color: #FFFFFF; max-width: 80%;';
+    const operatorLabel = document.createElement('strong');
+    operatorLabel.textContent = OPS_STATE.adminName + ':';
+    operatorBubble.append(operatorLabel, ' ' + text);
+    feed.appendChild(operatorBubble);
 
     // Respuesta de la IA
     const responseText = processCommanderQuery(text);
@@ -647,6 +675,13 @@
     calculateBaqueanoPulse();
     renderOpsIaDashboardWidget();
     renderPulseIndicatorInTopbar();
+    syncOperatorName();
+
+    // El nombre del operador sigue a la sesión real (llega de forma asíncrona).
+    try {
+      if (window.firebase && window.firebase.auth) window.firebase.auth().onAuthStateChanged(syncOperatorName);
+    } catch (_) { /* sin Auth: queda "Administrador" */ }
+    window.addEventListener('baqueano_session_updated', syncOperatorName);
 
     // Re-evaluación periódica cada 60 segundos
     setInterval(() => {

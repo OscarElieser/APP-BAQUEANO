@@ -355,6 +355,36 @@
       `;
     });
 
+    // 3b. Botón de sesión de la barra (.navbar-login-btn, creado por navigation.js)
+    // 🎯 POR QUÉ: con sesión iniciada seguía diciendo "Iniciar sesión": el viajero
+    //    no sabía si había entrado ni cómo salir.
+    // ⚙️ CÓMO: con sesión → rojo, "Cerrar sesión" y cierra la sesión al tocarlo;
+    //    sin sesión → "Iniciar sesión" hacia perfil.html. Un solo listener por botón.
+    // 📦 QUÉ: estado visible y acción coherente en todas las páginas.
+    document.querySelectorAll('.navbar-login-btn').forEach((loginButton) => {
+      loginButton.classList.toggle('is-logged-in', isAuthenticated);
+      loginButton.setAttribute('href', isAuthenticated ? '#cerrar-sesion' : 'perfil.html');
+      loginButton.setAttribute('aria-label', isAuthenticated ? `Cerrar sesión de ${userFirstName}` : 'Iniciar sesión');
+      loginButton.title = isAuthenticated ? `Sesión de ${userFirstName} · tocá para salir` : 'Iniciar sesión';
+      loginButton.innerHTML = isAuthenticated
+        ? '<i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesión</span>'
+        : '<i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span>';
+      if (!loginButton.dataset.sessionBound) {
+        loginButton.dataset.sessionBound = 'true';
+        loginButton.addEventListener('click', async (event) => {
+          if (!loginButton.classList.contains('is-logged-in')) return; // navega a perfil.html
+          event.preventDefault();
+          loginButton.setAttribute('aria-busy', 'true');
+          try {
+            await window.BaqueanoSession?.logout?.();
+            window.bqToast?.('Cerraste sesión. ¡Volvé pronto!', 'success');
+          } finally {
+            loginButton.removeAttribute('aria-busy');
+          }
+        });
+      }
+    });
+
     // 4. Actualizar enlaces correspondientes en el footer
     const footerPerfilLink = document.querySelector('.footer-link-list a[href="perfil.html"]');
     if (footerPerfilLink) {

@@ -508,7 +508,9 @@
 
     bindSaveAction();
     bindInteractiveExperience();
-    if (window.BaqueanoChinandegaMap) window.BaqueanoChinandegaMap.mount();
+    if (window.BaqueanoChinandegaMap) window.BaqueanoChinandegaMap.mount({
+      catalogPlaces: Array.isArray(dept.places) ? dept.places : []
+    });
   }
 
   const TERRITORY_TABS = {

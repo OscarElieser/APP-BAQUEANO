@@ -32,6 +32,9 @@
   let map = null;
   let markers = [];
   let generation = 0;
+  let catalogPlaces = [];
+  const GEOCODE_CACHE_KEY = 'baqueano-territory-geocodes-v1';
+  const NICARAGUA_BOUNDS = { south: 10.7, north: 15.1, west: -88.1, east: -82.5 };
 
   function byId(id) {
     if (elementPrefix === 'madriz') return document.getElementById(id);
@@ -62,6 +65,96 @@
     const source = String(value || '').trim();
     if (/^assets\/images\//i.test(source) || /^https:\/\//i.test(source)) return source;
     return 'assets/images/logo.png';
+  }
+
+  function readGeocodeCache() {
+    try {
+      const value = JSON.parse(window.localStorage.getItem(GEOCODE_CACHE_KEY) || '{}');
+      return value && typeof value === 'object' ? value : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function writeGeocodeCache(cache) {
+    try {
+      window.localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(cache));
+    } catch (error) {
+      // El mapa conserva su función principal si el navegador bloquea el almacenamiento.
+    }
+  }
+
+  function insideNicaragua(latitude, longitude) {
+    return latitude >= NICARAGUA_BOUNDS.south && latitude <= NICARAGUA_BOUNDS.north
+      && longitude >= NICARAGUA_BOUNDS.west && longitude <= NICARAGUA_BOUNDS.east;
+  }
+
+  function geocodeCacheId(place) {
+    return `${departmentId}:${String(place.name || '').trim().toLocaleLowerCase('es-NI')}`;
+  }
+
+  async function geocodeCatalogPlace(place, runId, cache) {
+    const cacheId = geocodeCacheId(place);
+    const cached = cache[cacheId];
+    if (cached && validCoordinates(cached)) return { ...place, ...cached };
+
+    const query = [place.name, territoryName, 'Nicaragua'].filter(Boolean).join(', ');
+    const url = new URL('https://nominatim.openstreetmap.org/search');
+    url.searchParams.set('q', query);
+    url.searchParams.set('format', 'jsonv2');
+    url.searchParams.set('limit', '1');
+    url.searchParams.set('countrycodes', 'ni');
+    url.searchParams.set('accept-language', 'es');
+
+    try {
+      const response = await fetch(url.toString(), {
+        headers: { Accept: 'application/json' },
+        referrerPolicy: 'strict-origin-when-cross-origin'
+      });
+      if (!response.ok || runId !== generation) return null;
+      const results = await response.json();
+      const match = Array.isArray(results) ? results[0] : null;
+      const latitude = asNumber(match?.lat);
+      const longitude = asNumber(match?.lon);
+      if (latitude === null || longitude === null || !insideNicaragua(latitude, longitude)) return null;
+      cache[cacheId] = { latitude, longitude, geocodedAt: Date.now() };
+      writeGeocodeCache(cache);
+      return { ...place, latitude, longitude };
+    } catch (error) {
+      console.warn(`[Mapa ${territoryName}] No fue posible ubicar ${place.name}:`, error.message);
+      return null;
+    }
+  }
+
+  async function loadCatalogPlaces(runId, onPlace) {
+    const cache = readGeocodeCache();
+    let resolved = 0;
+    for (let index = 0; index < catalogPlaces.length; index += 1) {
+      if (runId !== generation) break;
+      const place = catalogPlaces[index] || {};
+      const cached = cache[geocodeCacheId(place)];
+      const result = await geocodeCatalogPlace(place, runId, cache);
+      if (result && runId === generation) {
+        resolved += 1;
+        onPlace({
+          id: `catalog-${departmentId}-${index}`,
+          name: String(result.name || `Lugar de ${territoryName}`),
+          shortDescription: String(result.type || 'Lugar mencionado en la guía territorial.'),
+          categoryLabel: String(result.type || 'Atractivo territorial'),
+          municipality: territoryName,
+          image: result.image || '',
+          latitude: result.latitude,
+          longitude: result.longitude,
+          verified: false,
+          catalogReference: true
+        });
+      }
+      setStatus(`Ubicando lugares de ${territoryName}: ${index + 1} de ${catalogPlaces.length}…`, 'loading');
+      if (!cached && index < catalogPlaces.length - 1) {
+        await new Promise((resolve) => window.setTimeout(resolve, 1050));
+      }
+    }
+    return resolved;
   }
 
   function setStatus(message, mode) {
@@ -260,6 +353,7 @@
     departmentId = String(config.departmentId || 'madriz');
     elementPrefix = String(config.elementPrefix || departmentId);
     territoryName = String(config.territoryName || (departmentId === 'madriz' ? 'Madriz' : departmentId));
+    catalogPlaces = Array.isArray(config.catalogPlaces) ? config.catalogPlaces : [];
     defaultCenter = Array.isArray(config.center) ? config.center : [-86.6, 13.45];
     defaultZoom = Number.isFinite(config.zoom) ? config.zoom : 8.45;
     const runId = generation;
@@ -304,13 +398,27 @@
       if (runId !== generation || !map) return;
       const carousel = byId('mapPlacesCarousel');
       if (carousel) carousel.replaceChildren();
-      if (!places.length) {
+      if (!places.length && !catalogPlaces.length) {
         setStatus(`Mapa centrado en ${territoryName}. Aún no hay lugares publicados con coordenadas verificadas.`, 'empty');
         return;
       }
 
       const bounds = new window.maplibregl.LngLatBounds();
       places.forEach((place) => addPlace(place, bounds));
+      const publishedCount = places.length;
+      const knownNames = new Set(places.map((place) => String(place.name || '').toLocaleLowerCase('es-NI')));
+      const catalogResolved = await loadCatalogPlaces(runId, (place) => {
+        const normalizedName = String(place.name || '').toLocaleLowerCase('es-NI');
+        if (knownNames.has(normalizedName)) return;
+        knownNames.add(normalizedName);
+        places.push(place);
+        addPlace(place, bounds);
+      });
+      if (runId !== generation || !map) return;
+      if (!places.length) {
+        setStatus(`Mapa centrado en ${territoryName}. No fue posible ubicar lugares en este momento.`, 'empty');
+        return;
+      }
       map.fitBounds(bounds, {
         padding: { top: 90, right: 70, bottom: 190, left: 70 },
         maxZoom: 12,
@@ -335,12 +443,13 @@
 
   window.BaqueanoMadrizMap = { mount, unmount };
   window.BaqueanoChinandegaMap = {
-    mount: () => mount({
+    mount: (options) => mount({
       departmentId: 'chinandega',
       elementPrefix: 'chinandega',
       territoryName: 'Chinandega',
       center: [-87.13, 12.63],
-      zoom: 8.25
+      zoom: 8.25,
+      ...(options || {})
     }),
     unmount
   };

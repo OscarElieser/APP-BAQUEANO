@@ -586,7 +586,9 @@ button.territory-pill-card span {
   border-radius: 0;
 }
 
-#madrizMap {
+#madrizMap,
+#chinandegaMap,
+#territoryMap {
   position: absolute;
   inset: 0;
   width: 100%;

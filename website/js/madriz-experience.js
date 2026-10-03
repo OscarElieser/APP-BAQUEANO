@@ -1267,7 +1267,14 @@
     // Inicializar listeners locales
     initLocalEvents();
     if (window.BaqueanoMadrizMap) {
-      window.BaqueanoMadrizMap.mount();
+      window.BaqueanoMadrizMap.mount({
+        departmentId: dept.id,
+        elementPrefix: 'madriz',
+        territoryName: dept.name,
+        catalogPlaces: Array.isArray(dept.places) ? dept.places : [],
+        center: [Number(dept.lng), Number(dept.lat)],
+        zoom: 8.45
+      });
     }
   }
 
