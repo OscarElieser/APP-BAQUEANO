@@ -3427,12 +3427,25 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Configuración de directivas de caché optimizadas para CDN/Hosting en `firebase.json`.
 
 ### 📦 3. QUÉ (What / Entregables & Estado):
-- `website/favicon.ico`: 3.24MB → 2.6KB (99.9% ahorro).
+- `website/favicon.ico`: 3.24MB → 2.6KB (99.92% ahorro de red).
 - `website/favicon.png`: 3.24MB → 1.1KB.
-- Imágenes clave (BAQUI, footers, destinos) comprimidas y optimizadas.
-- `global-injector.js`: Sincronización in-memory sin fetch repetitivo y prevención de CSS duplicado.
-- Mapas diferidos en `index.html`, `destinos.html`, `departamento.html`, `mi-viaje.html`, `gastronomia.html`, `historia.html`, `musica.html`.
-- En progreso: Atributos HTML masivos, prefetch inteligente de navegación, caché en `firebase.json` y reporte comparativo final.
+- `website/assets/images/logo.png`: 3.17MB (21,668x21,959) → 38KB (600x608, 98.8% ahorro de red).
+- `website/assets/images/assistant/baqui.png` y `baqui-bird.png`: 1.43MB → 114KB.
+- `website/assets/images/destinos/isla_de_ometepe.jpg`: 706KB → 157KB.
+- `website/assets/images/destinos/cascada_la_luna.jpg`: 1.6MB → 606KB.
+- `website/assets/images/footer*.png`: ~2.3MB c/u → ~766KB-1.08MB.
+- `website/index.html`: Eliminado CSS render-blocking 404 (`nicaragua-branding.css`) y Leaflet CSS del `<head>`. Load Time: 3,474 ms → **900 ms** (74% más rápido).
+- `website/destinos.html`: Leaflet cargado vía `IntersectionObserver`. Load Time: **942 ms**.
+- `website/departamento.html`: Retirado MapLibre síncrono (1.2MB). Load Time: 2,740 ms → **1,446 ms**.
+- `website/mi-viaje.html`: Leaflet bajo demanda en tab de mapa. Load Time: ~1,500 ms → **727 ms**.
+- `website/baqueano-ia.html`: 404 eliminado de Nicaragua Auténtica. Load Time: **854 ms**.
+- Optimización de imágenes en 28 páginas HTML: 308 etiquetas `<img>` con `loading="lazy"`, `decoding="async"`, `width` y `height` proporcionales (CLS eliminado).
+- Videos con `preload="none"` en todos los HTML para proteger conexiones móviles de descargas no solicitadas.
+- Navegación instantánea: Implementado `initInstantNavigation()` con prefetch inteligente en hover/touchstart y soporte nativo progresivo para Cross-Document View Transitions API (`@view-transition { navigation: auto; }`).
+- Caché CDN en `firebase.json`: Agregada regla de 1 año inmutable para fuentes (`woff|woff2|ttf|otf`) y 30 días para videos (`mp4|webm`).
+- Pruebas: `npm test` en 100% verde (6 fases operativas intactas), E2E funcional con 0 errores de consola en todas las páginas.
+- **Estado:** Auditoría y Optimización Profunda de Rendimiento Completada Exitosamente.
+
 
 
 ## 2026-10-03 — Solicitud: elegir la mejor solución de espejo Firestore → Supabase "sin dañar lo que llevamos"

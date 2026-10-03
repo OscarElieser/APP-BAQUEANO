@@ -46,9 +46,11 @@ reload_nginx() {
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-auth-proxy.conf" "/etc/nginx/snippets/baqueano-auth-proxy.conf"
   local site_config="/etc/nginx/sites-available/baqueano.conf"
   local site_backup="${site_config}.baqueano-backup"
+
   if ! sudo grep -q "baqueano-auth-proxy.conf" "${site_config}"; then
     sudo cp "${site_config}" "${site_backup}"
-    sudo sed -i "/# --- API propia/i\    include /etc/nginx/snippets/baqueano-auth-proxy.conf;\n" "${site_config}"
+    sudo sed -i "/# API proxy/i\\    include /etc/nginx/snippets/baqueano-auth-proxy.conf;\n" "${site_config}"
+
     if ! sudo nginx -t; then
       sudo cp "${site_backup}" "${site_config}"
       sudo nginx -t
