@@ -1,27 +1,27 @@
-﻿// ============================================================================
-// ðŸ§­ BAQUEANO ECOSYSTEM â€” GESTIÃ“N DE SESIÃ“N, ROLES Y PERFIL DE USUARIO (user-session.js)
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — GESTIÓN DE SESIÓN, ROLES Y PERFIL DE USUARIO (user-session.js)
 // ============================================================================
 //
-// ðŸŽ¯ 1. POR QUÃ‰ (WHY / PROPÃ“SITO):
-// - Proveer una experiencia integral de identidad y personalizaciÃ³n para el explorador
-//   turÃ­stico en Baqueano Nicaragua, separando de forma estricta:
-//   * ðŸ‘‘ ADMINISTRADOR & AUDITOR: Acceso al Centro de Mando y Operaciones ("Ops Center").
-//   * ðŸ‘¤ EXPLORADOR / USUARIO REGISTRADO: Acceso a su portal personal ("Perfil")
-//     para gestionar reservas, favoritos, facturaciÃ³n, seguridad y preferencias.
-// - Respetar la privacidad y soberanÃ­a de los datos turÃ­sticos sin rastreadores invasivos.
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer una experiencia integral de identidad y personalización para el explorador
+//   turístico en Baqueano Nicaragua, separando de forma estricta:
+//   * 👑 ADMINISTRADOR & AUDITOR: Acceso al Centro de Mando y Operaciones ("Ops Center").
+//   * 👤 EXPLORADOR / USUARIO REGISTRADO: Acceso a su portal personal ("Perfil")
+//     para gestionar reservas, favoritos, facturación, seguridad y preferencias.
+// - Respetar la privacidad y soberanía de los datos turísticos sin rastreadores invasivos.
 //
-// âš™ï¸ 2. CÃ“MO (HOW / ARQUITECTURA & IMPLEMENTACIÃ“N):
-// - Persistencia hÃ­brida defensiva (localStorage con fallback a sessionStorage y memoria).
-// - Soporte RBAC: Reconocimiento automÃ¡tico de roles mediante correo electrÃ³nico.
-// - SincronizaciÃ³n en tiempo real del menÃº de navegaciÃ³n (Navbar) en todas las pÃ¡ginas web.
-// - GestiÃ³n reactiva de viajes: Filtro de reservas (Futuras, Pasadas, Canceladas),
-//   generaciÃ³n dinÃ¡mica de tiquetes de viaje con QR satelital, sincronizaciÃ³n de lista de
-//   deseos con el motor de favoritos de destinos.html y emisiÃ³n de recibos Ley 306 INTUR.
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - Persistencia híbrida defensiva (localStorage con fallback a sessionStorage y memoria).
+// - Soporte RBAC: Reconocimiento automático de roles mediante correo electrónico.
+// - Sincronización en tiempo real del menú de navegación (Navbar) en todas las páginas web.
+// - Gestión reactiva de viajes: Filtro de reservas (Futuras, Pasadas, Canceladas),
+//   generación dinámica de tiquetes de viaje con QR satelital, sincronización de lista de
+//   deseos con el motor de favoritos de destinos.html y emisión de recibos Ley 306 INTUR.
 //
-// ðŸ“¦ 3. QUÃ‰ (WHAT / ENTIDADES EXPUESTAS):
-// - BaqueanoSession: Objeto global con mÃ©todos de login, registro, logout y actualizaciÃ³n.
-// - initUserSessionNavbar(): Actualizador dinÃ¡mico del enlace de navegaciÃ³n (Perfil vs Ops Center).
-// - openAuthModal(), closeAuthModal(): Controladores de la ventana modal de autenticaciÃ³n.
+// 📦 3. QUÉ (WHAT / ENTIDADES EXPUESTAS):
+// - BaqueanoSession: Objeto global con métodos de login, registro, logout y actualización.
+// - initUserSessionNavbar(): Actualizador dinámico del enlace de navegación (Perfil vs Ops Center).
+// - openAuthModal(), closeAuthModal(): Controladores de la ventana modal de autenticación.
 // - generateTicketModal(), generateInvoiceModal(): Renderizadores de tiquetes y facturas.
 // ============================================================================
 
@@ -32,26 +32,26 @@
   const STORAGE_KEY = 'baqueano_user_session_v1';
   const FAVS_STORAGE_KEY = 'baqueano_favs';
 
-  // Cuentas de Alta JerarquÃ­a Operativa (Admin & Auditor)
+  // Cuentas de Alta Jerarquía Operativa (Admin & Auditor)
   // Matriz oficial (propietario, 2026-10-03): super_admin = cuenta fundadora;
-  // admin = byoscarelieser y vigoronmixt. Esta tabla SOLO decide quÃ© ve la
+  // admin = byoscarelieser y vigoronmixt. Esta tabla SOLO decide qué ve la
   // interfaz (enlace al Ops Center); los permisos reales los aplican las reglas
-  // de Firestore/Storage y Functions, y Ãºnicamente con correo verificado.
+  // de Firestore/Storage y Functions, y únicamente con correo verificado.
   const PRIVILEGED_ACCOUNTS = {
     'oscarelieser.informatica.inatec@gmail.com': {
       name: 'Oscar Elieser',
       role: 'super_admin', roleLabel: 'Superadministrador', navTitle: 'Ops Center',
-      navDesc: 'Comando & GestiÃ³n', navBadge: 'â— Super Admin', targetUrl: 'admin.html', isPrivileged: true
+      navDesc: 'Comando & Gestión', navBadge: '● Super Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'byoscarelieser@gmail.com': {
       name: 'Oscar Elieser',
       role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
-      navDesc: 'Comando & GestiÃ³n', navBadge: 'â— Admin', targetUrl: 'admin.html', isPrivileged: true
+      navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'vigoronmixt@gmail.com': {
       name: 'Administrador Baqueano',
       role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
-      navDesc: 'Comando & GestiÃ³n', navBadge: 'â— Admin', targetUrl: 'admin.html', isPrivileged: true
+      navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     }
   };
 
@@ -70,7 +70,7 @@
     }
   }
   /**
-   * Carga la sesiÃ³n del usuario desde el almacenamiento local.
+   * Carga la sesión del usuario desde el almacenamiento local.
    */
   function loadSession() {
     try {
@@ -82,7 +82,7 @@
         return null;
       }
       // Auto-corregir nombres residuales de placeholder o texto de invitado
-      if (!session.name || session.name === 'Inicia sesiÃ³n para ver tu perfil' || session.name === 'EntrÃ¡ para ver tu perfil' || session.name === 'Invitado') {
+      if (!session.name || session.name === 'Inicia sesión para ver tu perfil' || session.name === 'Entrá para ver tu perfil' || session.name === 'Invitado') {
         const emailLower = (session.email || '').toLowerCase();
         const priv = PRIVILEGED_ACCOUNTS[emailLower];
         if (priv && priv.name) {
@@ -97,16 +97,16 @@
       }
       return session;
     } catch (error) {
-      console.warn('[Baqueano Session] SesiÃ³n local invÃ¡lida:', error);
+      console.warn('[Baqueano Session] Sesión local inválida:', error);
       return null;
     }
   }
 
   /**
-   * Guarda los datos de sesiÃ³n en almacenamiento local.
+   * Guarda los datos de sesión en almacenamiento local.
    */
   /**
-   * Guarda los datos de sesiÃ³n en almacenamiento local y sincroniza la identidad
+   * Guarda los datos de sesión en almacenamiento local y sincroniza la identidad
    * y trazabilidad de usuario en tiempo real con Cloud Firestore (Ops Command Center).
    */
   function saveSession(userObj) {
@@ -136,35 +136,35 @@
             updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
           };
 
-          // 1. Guardar/actualizar perfil en colecciÃ³n 'users'
+          // 1. Guardar/actualizar perfil en colección 'users'
           db.collection('users').doc(uid).set(userDoc, { merge: true }).catch(() => {});
 
-          // 2. Registrar evento de auditorÃ­a en 'audit_logs'
+          // 2. Registrar evento de auditoría en 'audit_logs'
           db.collection('audit_logs').add({
             action: 'USER_LOGIN_WEB',
             platform: 'web',
             userId: uid,
             userEmail: userObj.email || '',
             performedBy: userObj.name || userObj.email || 'Explorador Web',
-            details: 'Inicio de sesiÃ³n verificado en Portal Web Baqueano',
+            details: 'Inicio de sesión verificado en Portal Web Baqueano',
             timestamp: window.firebase.firestore.FieldValue.serverTimestamp()
           }).catch(() => {});
         }
       } catch (syncErr) {
-        console.debug('[Baqueano Session] TelemetrÃ­a web diferida:', syncErr);
+        console.debug('[Baqueano Session] Telemetría web diferida:', syncErr);
       }
     }
   }
 
   /**
-   * Determina las propiedades de rol para la navegaciÃ³n web.
+   * Determina las propiedades de rol para la navegación web.
    */
   function getRoleNavMetadata(user) {
     if (!user || !user.isLoggedIn) {
       return {
         isPrivileged: false,
         role: 'guest',
-        navTitle: 'Iniciar sesiÃ³n',
+        navTitle: 'Iniciar sesión',
         navSublabel: 'Acceso seguro',
         targetUrl: 'perfil.html',
         badge: null
@@ -172,7 +172,7 @@
     }
 
     const emailKey = (user.email || '').trim().toLowerCase();
-    // El enlace al Ops Center solo aparece si Firebase verificÃ³ el correo.
+    // El enlace al Ops Center solo aparece si Firebase verificó el correo.
     if (PRIVILEGED_ACCOUNTS[emailKey] && user.emailVerified === true) {
       const priv = PRIVILEGED_ACCOUNTS[emailKey];
       return {
@@ -192,18 +192,18 @@
       navTitle: 'Perfil',
       navSublabel: user.name ? user.name.split(' ')[0] : 'Mi Cuenta',
       targetUrl: 'perfil.html',
-      badge: 'â— Activo'
+      badge: '● Activo'
     };
   }
 
   /**
-   * Actualiza los enlaces del Navbar en la pÃ¡gina actual de forma robusta y defensiva.
-   * ðŸŽ¯ Por quÃ©: Garantizar que el botÃ³n "Perfil" SIEMPRE permanezca visible y accesible
-   *    en el menÃº de navegaciÃ³n para todos los usuarios (exploradores y administradores),
+   * Actualiza los enlaces del Navbar en la página actual de forma robusta y defensiva.
+   * 🎯 Por qué: Garantizar que el botón "Perfil" SIEMPRE permanezca visible y accesible
+   *    en el menú de navegación para todos los usuarios (exploradores y administradores),
    *    evitando que sea sobreescrito o eliminado por el enlace de Ops Center.
-   * âš™ï¸ CÃ³mo: Mantener de forma independiente el botÃ³n de "Perfil" (perfil.html) y el
-   *    botÃ³n de "Ops Center" (admin.html), sincronizando estado activo, subetiquetas e insignias.
-   * ðŸ“¦ QuÃ©: BotÃ³n Perfil en menÃº, botÃ³n Ops Center condicional, botÃ³n avatar en cabecera y enlaces de pie de pÃ¡gina.
+   * ⚙️ Cómo: Mantener de forma independiente el botón de "Perfil" (perfil.html) y el
+   *    botón de "Ops Center" (admin.html), sincronizando estado activo, subetiquetas e insignias.
+   * 📦 Qué: Botón Perfil en menú, botón Ops Center condicional, botón avatar en cabecera y enlaces de pie de página.
    */
   function updateNavbar() {
     const user = loadSession();
@@ -216,10 +216,10 @@
       ? user.name.trim().split(/\s+/)[0]
       : (isAuthenticated ? 'Explorador' : 'Mi Cuenta');
 
-    // ðŸŽ¯ POR QUÃ‰: ningÃºn acceso operativo debe mostrarse antes de validar una sesiÃ³n administrativa.
-    // âš™ï¸ CÃ“MO: todos los enlaces a admin nacen ocultos y se habilitan Ãºnicamente
+    // 🎯 POR QUÉ: ningún acceso operativo debe mostrarse antes de validar una sesión administrativa.
+    // ⚙️ CÓMO: todos los enlaces a admin nacen ocultos y se habilitan únicamente
     //    cuando el correo autenticado pertenece a la lista operativa autorizada.
-    // ðŸ“¦ QUÃ‰: control uniforme para mega menÃº, navegaciÃ³n mÃ³vil y footer.
+    // 📦 QUÉ: control uniforme para mega menú, navegación móvil y footer.
     document.querySelectorAll('a[href="admin.html"], a[href="/admin.html"]').forEach((adminLink) => {
       adminLink.hidden = !navMeta.isPrivileged;
       adminLink.setAttribute('aria-hidden', navMeta.isPrivileged ? 'false' : 'true');
@@ -230,11 +230,11 @@
 
     const navLinksMenu = document.getElementById('navLinksMenu');
     if (navLinksMenu) {
-      // 1. GARANTIZAR QUE EL BOTÃ“N DE "PERFIL" ESTÃ‰ SIEMPRE PRESENTE EN EL MENÃš (NUNCA SE ELIMINA)
+      // 1. GARANTIZAR QUE EL BOTÓN DE "PERFIL" ESTÉ SIEMPRE PRESENTE EN EL MENÚ (NUNCA SE ELIMINA)
       let perfilLink = navLinksMenu.querySelector('a[href="perfil.html"], .nav-link-perfil');
 
-      const perfilSublabel = isAuthenticated ? userFirstName : 'Iniciar sesiÃ³n';
-      const perfilBadge = isAuthenticated ? 'â— Activo' : 'Acceso';
+      const perfilSublabel = isAuthenticated ? userFirstName : 'Iniciar sesión';
+      const perfilBadge = isAuthenticated ? '● Activo' : 'Acceso';
 
       const perfilInnerHtml = `
         <span class="nav-item-content">
@@ -261,7 +261,7 @@
         }
         perfilLink.innerHTML = perfilInnerHtml;
       } else {
-        // InyecciÃ³n reactiva si el HTML base no lo incluyÃ³
+        // Inyección reactiva si el HTML base no lo incluyó
         perfilLink = document.createElement('a');
         perfilLink.href = 'perfil.html';
         perfilLink.className = `nav-link-perfil ${isPerfilPage ? 'active' : ''}`;
@@ -277,7 +277,7 @@
         }
       }
 
-      // 2. GESTIONAR EL BOTÃ“N DE "OPS CENTER" (ADMINISTRADOR / AUDITOR) SIN AFECTAR AL PERFIL
+      // 2. GESTIONAR EL BOTÓN DE "OPS CENTER" (ADMINISTRADOR / AUDITOR) SIN AFECTAR AL PERFIL
       let opsLink = navLinksMenu.querySelector('a[href="admin.html"], .nav-link-ops');
       if (navMeta.isPrivileged) {
         if (!opsLink) {
@@ -299,11 +299,11 @@
             <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
             <span class="nav-text-group">
               <span class="nav-label">${escapeHtml(navMeta.navTitle || 'Ops Center')}</span>
-              <span class="nav-sublabel">${escapeHtml(navMeta.navSublabel || 'Comando & GestiÃ³n')}</span>
+              <span class="nav-sublabel">${escapeHtml(navMeta.navSublabel || 'Comando & Gestión')}</span>
             </span>
           </span>
           <span class="nav-right-wrap">
-            <span class="nav-item-badge live">${escapeHtml(navMeta.badge || 'â— 24/7')}</span>
+            <span class="nav-item-badge live">${escapeHtml(navMeta.badge || '● 24/7')}</span>
             <i class="fa-solid fa-chevron-right nav-arrow"></i>
           </span>
         `;
@@ -313,7 +313,7 @@
       }
     }
 
-    // 3. Sincronizar o inyectar el botÃ³n de identidad / avatar situado a la derecha del encabezado (.nav-profile-btn)
+    // 3. Sincronizar o inyectar el botón de identidad / avatar situado a la derecha del encabezado (.nav-profile-btn)
     const navActionsRight = document.querySelector('.nav-actions-right');
     if (navActionsRight && !navActionsRight.querySelector('.nav-profile-btn')) {
       const chip = document.createElement('a');
@@ -329,13 +329,13 @@
 
     document.querySelectorAll('.nav-profile-btn').forEach((profileButton) => {
       profileButton.href = 'perfil.html';
-      profileButton.title = isAuthenticated ? 'Abrir mi perfil' : 'Iniciar sesiÃ³n';
+      profileButton.title = isAuthenticated ? 'Abrir mi perfil' : 'Iniciar sesión';
       profileButton.setAttribute('aria-label', profileButton.title);
 
       if (!isAuthenticated) {
         profileButton.innerHTML = `
           <span class="nav-profile-avatar" aria-hidden="true"><i class="fa-solid fa-right-to-bracket"></i></span>
-          <span class="nav-profile-info"><span class="nav-profile-name">Iniciar sesiÃ³n</span></span>
+          <span class="nav-profile-info"><span class="nav-profile-name">Iniciar sesión</span></span>
         `;
         return;
       }
@@ -355,20 +355,20 @@
       `;
     });
 
-    // 3b. BotÃ³n de sesiÃ³n de la barra (.navbar-login-btn, creado por navigation.js)
-    // ðŸŽ¯ POR QUÃ‰: con sesiÃ³n iniciada seguÃ­a diciendo "Iniciar sesiÃ³n": el viajero
-    //    no sabÃ­a si habÃ­a entrado ni cÃ³mo salir.
-    // âš™ï¸ CÃ“MO: con sesiÃ³n â†’ rojo, "Cerrar sesiÃ³n" y cierra la sesiÃ³n al tocarlo;
-    //    sin sesiÃ³n â†’ "Iniciar sesiÃ³n" hacia perfil.html. Un solo listener por botÃ³n.
-    // ðŸ“¦ QUÃ‰: estado visible y acciÃ³n coherente en todas las pÃ¡ginas.
+    // 3b. Botón de sesión de la barra (.navbar-login-btn, creado por navigation.js)
+    // 🎯 POR QUÉ: con sesión iniciada seguía diciendo "Iniciar sesión": el viajero
+    //    no sabía si había entrado ni cómo salir.
+    // ⚙️ CÓMO: con sesión → rojo, "Cerrar sesión" y cierra la sesión al tocarlo;
+    //    sin sesión → "Iniciar sesión" hacia perfil.html. Un solo listener por botón.
+    // 📦 QUÉ: estado visible y acción coherente en todas las páginas.
     document.querySelectorAll('.navbar-login-btn').forEach((loginButton) => {
       loginButton.classList.toggle('is-logged-in', isAuthenticated);
       loginButton.setAttribute('href', isAuthenticated ? '#cerrar-sesion' : 'perfil.html');
-      loginButton.setAttribute('aria-label', isAuthenticated ? `Cerrar sesiÃ³n de ${userFirstName}` : 'Iniciar sesiÃ³n');
-      loginButton.title = isAuthenticated ? `SesiÃ³n de ${userFirstName} Â· tocÃ¡ para salir` : 'Iniciar sesiÃ³n';
+      loginButton.setAttribute('aria-label', isAuthenticated ? `Cerrar sesión de ${userFirstName}` : 'Iniciar sesión');
+      loginButton.title = isAuthenticated ? `Sesión de ${userFirstName} · tocá para salir` : 'Iniciar sesión';
       loginButton.innerHTML = isAuthenticated
-        ? '<i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesiÃ³n</span>'
-        : '<i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesiÃ³n</span>';
+        ? '<i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesión</span>'
+        : '<i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span>';
       if (!loginButton.dataset.sessionBound) {
         loginButton.dataset.sessionBound = 'true';
         loginButton.addEventListener('click', async (event) => {
@@ -377,7 +377,7 @@
           loginButton.setAttribute('aria-busy', 'true');
           try {
             await window.BaqueanoSession?.logout?.();
-            window.bqToast?.('Cerraste sesiÃ³n. Â¡VolvÃ© pronto!', 'success');
+            window.bqToast?.('Cerraste sesión. ¡Volvé pronto!', 'success');
           } finally {
             loginButton.removeAttribute('aria-busy');
           }
@@ -397,7 +397,7 @@
     }
   }
 
-  // ConfiguraciÃ³n oficial de Firebase Web para el Ecosistema Baqueano Nicaragua
+  // Configuración oficial de Firebase Web para el Ecosistema Baqueano Nicaragua
   const BAQUEANO_FIREBASE_CONFIG = {
     apiKey: 'AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE',
     authDomain: 'app-baqueano.firebaseapp.com',
@@ -409,7 +409,7 @@
   };
 
   /**
-   * Inicializa Firebase de forma segura y defensiva si estÃ¡ presente en el entorno.
+   * Inicializa Firebase de forma segura y defensiva si está presente en el entorno.
    */
   function ensureFirebaseInitialized() {
     try {
@@ -420,13 +420,13 @@
         return true;
       }
     } catch (err) {
-      console.warn('[Baqueano Session] InicializaciÃ³n de Firebase omitida o diferida:', err);
+      console.warn('[Baqueano Session] Inicialización de Firebase omitida o diferida:', err);
     }
     return false;
   }
 
   // ==========================================================================
-  // API PÃšBLICA DE SESIÃ“N (BaqueanoSession)
+  // API PÚBLICA DE SESIÓN (BaqueanoSession)
   // ==========================================================================
   const BaqueanoSession = {
     getUser: function() {
@@ -435,7 +435,7 @@
 
     saveUser: async function(userObj) {
       if (!userObj) return null;
-      // 1. Guardar localmente para reactividad instantÃ¡nea
+      // 1. Guardar localmente para reactividad instantánea
       saveSession(userObj);
       updateNavbar();
       window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: userObj }));
@@ -461,12 +461,12 @@
             billingHistory: userObj.billingHistory || [],
             updatedAt: new Date().toISOString()
           }, { merge: true }).then(() => {
-            console.info('ðŸŸ¢ [Baqueano Session] Perfil y configuraciÃ³n guardados en Firebase Firestore (Principal).');
+            console.info('🟢 [Baqueano Session] Perfil y configuración guardados en Firebase Firestore (Principal).');
           }).catch((err) => {
-            console.warn('ðŸŸ¡ [Baqueano Session] Aviso al guardar en Firestore:', err.message);
+            console.warn('🟡 [Baqueano Session] Aviso al guardar en Firestore:', err.message);
           });
         } catch (fbErr) {
-          console.warn('ðŸŸ¡ [Baqueano Session] ExcepciÃ³n en Firestore:', fbErr.message);
+          console.warn('🟡 [Baqueano Session] Excepción en Firestore:', fbErr.message);
         }
       }
 
@@ -496,15 +496,15 @@
                 data: userObj,
                 syncedAt: new Date().toISOString()
               }));
-              console.info('ðŸ”µ [Baqueano Session] Respaldo Supabase sincronizado en nodo local de seguridad.');
+              console.info('🔵 [Baqueano Session] Respaldo Supabase sincronizado en nodo local de seguridad.');
             } else {
-              console.info('ðŸ”µ [Baqueano Session] Perfil y configuraciÃ³n respaldados con Ã©xito en Supabase Cloud.');
+              console.info('🔵 [Baqueano Session] Perfil y configuración respaldados con éxito en Supabase Cloud.');
             }
           }).catch((sbErr) => {
-            console.warn('ðŸŸ¡ [Baqueano Session] Aviso al guardar en Supabase:', sbErr.message);
+            console.warn('🟡 [Baqueano Session] Aviso al guardar en Supabase:', sbErr.message);
           });
         } catch (sbEx) {
-          console.warn('ðŸŸ¡ [Baqueano Session] ExcepciÃ³n en Supabase:', sbEx.message);
+          console.warn('🟡 [Baqueano Session] Excepción en Supabase:', sbEx.message);
         }
       }
 
@@ -514,20 +514,20 @@
     login: async function(email, password) {
       ensureFirebaseInitialized();
       if (!window.firebase || !window.firebase.auth) {
-        throw new Error('El servicio de autenticaciÃ³n no estÃ¡ disponible en este entorno.');
+        throw new Error('El servicio de autenticación no está disponible en este entorno.');
       }
       if (!email || !password) {
-        throw new Error('Correo y contraseÃ±a son obligatorios.');
+        throw new Error('Correo y contraseña son obligatorios.');
       }
       try {
         const credential = await window.firebase.auth().signInWithEmailAndPassword(email.trim(), password);
         return syncFirebaseIdentity(credential.user);
       } catch (error) {
-        console.error('[Baqueano Session] Error en inicio de sesiÃ³n:', error);
+        console.error('[Baqueano Session] Error en inicio de sesión:', error);
         if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
           throw new Error('Credenciales incorrectas o la cuenta no existe. Si es tu primera vez, pulsa "Crear cuenta".');
         } else if (error.code === 'auth/invalid-email') {
-          throw new Error('El formato del correo electrÃ³nico no es vÃ¡lido.');
+          throw new Error('El formato del correo electrónico no es válido.');
         } else if (error.code === 'auth/too-many-requests') {
           throw new Error('Demasiados intentos fallidos. Espera unos minutos antes de reintentar.');
         }
@@ -538,10 +538,10 @@
     register: async function(email, password, displayName) {
       ensureFirebaseInitialized();
       if (!window.firebase || !window.firebase.auth) {
-        throw new Error('El servicio de autenticaciÃ³n no estÃ¡ disponible en este entorno.');
+        throw new Error('El servicio de autenticación no está disponible en este entorno.');
       }
       if (!email || !password || !displayName) {
-        throw new Error('Nombre, correo y contraseÃ±a son obligatorios.');
+        throw new Error('Nombre, correo y contraseña son obligatorios.');
       }
       try {
         const credential = await window.firebase.auth().createUserWithEmailAndPassword(email.trim(), password);
@@ -560,11 +560,11 @@
       } catch (error) {
         console.error('[Baqueano Session] Error en registro:', error);
         if (error.code === 'auth/email-already-in-use') {
-          throw new Error('Este correo ya estÃ¡ registrado. Ingresa tu contraseÃ±a para iniciar sesiÃ³n.');
+          throw new Error('Este correo ya está registrado. Ingresa tu contraseña para iniciar sesión.');
         } else if (error.code === 'auth/weak-password') {
-          throw new Error('La contraseÃ±a debe tener al menos 8 caracteres seguros.');
+          throw new Error('La contraseña debe tener al menos 8 caracteres seguros.');
         } else if (error.code === 'auth/invalid-email') {
-          throw new Error('El formato del correo electrÃ³nico no es vÃ¡lido.');
+          throw new Error('El formato del correo electrónico no es válido.');
         }
         throw error;
       }
@@ -573,7 +573,7 @@
     loginWithGoogle: async function() {
       ensureFirebaseInitialized();
       if (!window.firebase || !window.firebase.auth) {
-        throw new Error('El servicio de Google Authentication no estÃ¡ disponible. Revisa tu conexiÃ³n a internet.');
+        throw new Error('El servicio de Google Authentication no está disponible. Revisa tu conexión a internet.');
       }
       try {
         const provider = new window.firebase.auth.GoogleAuthProvider();
@@ -583,13 +583,13 @@
       } catch (error) {
         console.error('[Baqueano Session] Error en Google Auth:', error);
         if (error.code === 'auth/popup-closed-by-user') {
-          throw new Error('La ventana de Google fue cerrada antes de completar el inicio de sesiÃ³n.');
+          throw new Error('La ventana de Google fue cerrada antes de completar el inicio de sesión.');
         } else if (error.code === 'auth/popup-blocked') {
-          throw new Error('El navegador bloqueÃ³ la ventana emergente de Google. Por favor permite popups en tu navegador.');
+          throw new Error('El navegador bloqueó la ventana emergente de Google. Por favor permite popups en tu navegador.');
         } else if (error.code === 'auth/unauthorized-domain') {
-          throw new Error('El dominio actual (' + (window.location.hostname || 'local') + ') no estÃ¡ en la lista blanca de Firebase Auth. Usa el Acceso RÃ¡pido de Prueba o autoriza el dominio en Firebase Console.');
+          throw new Error('El dominio actual (' + (window.location.hostname || 'local') + ') no está en la lista blanca de Firebase Auth. Usa el Acceso Rápido de Prueba o autoriza el dominio en Firebase Console.');
         } else if (error.code === 'auth/operation-not-supported-in-this-environment') {
-          throw new Error('La autenticaciÃ³n emergente no estÃ¡ soportada en el protocolo file://. Abre la pÃ¡gina mediante un servidor local (http://localhost) o usa el Acceso RÃ¡pido.');
+          throw new Error('La autenticación emergente no está soportada en el protocolo file://. Abre la página mediante un servidor local (http://localhost) o usa el Acceso Rápido.');
         }
         throw error;
       }
@@ -609,7 +609,7 @@
         role: privileged ? privileged.role : 'explorer',
         roleLabel: privileged ? privileged.roleLabel : 'Explorador',
         memberSince: new Date().toLocaleDateString('es-NI', { month: 'long', year: 'numeric' }),
-        emailVerified: false, // SesiÃ³n local: el correo no fue verificado por Firebase.
+        emailVerified: false, // Sesión local: el correo no fue verificado por Firebase.
         providerIds: ['baqueano.identity'],
         isLoggedIn: true,
         settings: { language: 'es', currency: 'USD' },
@@ -617,7 +617,7 @@
         bookings: [
           {
             id: 'res-bq-001',
-            destinationName: 'Monumento Nacional CaÃ±Ã³n de Somoto',
+            destinationName: 'Monumento Nacional Cañón de Somoto',
             destinationDepartment: 'Madriz',
             date: '2026-10-15',
             time: '08:00 AM',
@@ -625,7 +625,7 @@
             statusLabel: 'Confirmada',
             totalUsd: 15,
             totalNio: 550,
-            guideName: 'Don JosÃ© Baqueano (Comunitario)',
+            guideName: 'Don José Baqueano (Comunitario)',
             pax: 2
           }
         ],
@@ -648,10 +648,10 @@
           ]);
         }
       } catch (err) {
-        console.warn('[Baqueano Session] Aviso en cierre de sesiÃ³n Firebase:', err.message);
+        console.warn('[Baqueano Session] Aviso en cierre de sesión Firebase:', err.message);
       }
 
-      // 2. Cierre seguro de Supabase Auth si estÃ¡ presente
+      // 2. Cierre seguro de Supabase Auth si está presente
       try {
         if (window.baqueanoSupabase && window.baqueanoSupabase.auth) {
           await Promise.race([
@@ -660,10 +660,10 @@
           ]);
         }
       } catch (sbErr) {
-        console.warn('[Baqueano Session] Aviso en cierre de sesiÃ³n Supabase:', sbErr.message);
+        console.warn('[Baqueano Session] Aviso en cierre de sesión Supabase:', sbErr.message);
       }
 
-      // 3. Limpiar almacenamiento local y sesiÃ³n
+      // 3. Limpiar almacenamiento local y sesión
       localStorage.removeItem(STORAGE_KEY);
       sessionStorage.removeItem(STORAGE_KEY);
       updateNavbar();
@@ -693,16 +693,16 @@
         window.baqueanoSupabase.from('reservations').insert({
           reservation_code: reservationCode,
           user_uid: uid,
-          service_title: bookingData.destinationName || 'ExpediciÃ³n Baqueano',
+          service_title: bookingData.destinationName || 'Expedición Baqueano',
           travel_date: bookingData.date || new Date().toISOString().split('T')[0],
           people_count: Number(bookingData.pax) || 1,
           total_price: Number(bookingData.totalNio) || (Number(bookingData.totalUsd || 0) * 36.65),
           currency: 'NIO',
           status: bookingData.status || 'pending',
-          notes: bookingData.guideName ? 'GuÃ­a: ' + bookingData.guideName : null
+          notes: bookingData.guideName ? 'Guía: ' + bookingData.guideName : null
         }).then(({ error }) => {
           if (error) console.warn('[Supabase Sync] Aviso en reserva:', error.message);
-          else console.info('ðŸŸ¢ [Supabase Sync] Reserva respaldada con Ã©xito en Supabase.');
+          else console.info('🟢 [Supabase Sync] Reserva respaldada con éxito en Supabase.');
         }).catch(err => console.warn('[Supabase Sync] Error reserva:', err.message));
       }
 
@@ -725,7 +725,7 @@
             .eq('reservation_code', bookingId)
             .then(({ error }) => {
               if (error) console.warn('[Supabase Sync] Error al cancelar en Supabase:', error.message);
-            }).catch(e => console.warn('[Supabase Sync] ExcepciÃ³n cancelaciÃ³n:', e.message));
+            }).catch(e => console.warn('[Supabase Sync] Excepción cancelación:', e.message));
         }
       }
       return user;
@@ -787,7 +787,7 @@
   function syncFirebaseIdentity(firebaseUser) {
     if (!firebaseUser) {
       const current = loadSession();
-      // Solo limpiar si la sesiÃ³n actual pertenecÃ­a a una sesiÃ³n de Firebase
+      // Solo limpiar si la sesión actual pertenecía a una sesión de Firebase
       if (current && current.firebaseUid && !current.firebaseUid.startsWith('usr_')) {
         localStorage.removeItem(STORAGE_KEY);
         updateNavbar();
@@ -804,8 +804,8 @@
       : '';
 
     let resolvedName = (firebaseUser.displayName || '').trim();
-    if (!resolvedName || resolvedName === email || resolvedName === 'Inicia sesiÃ³n para ver tu perfil' || resolvedName === 'EntrÃ¡ para ver tu perfil' || resolvedName === 'Invitado') {
-      if (existing && existing.name && existing.name !== 'Inicia sesiÃ³n para ver tu perfil' && existing.name !== 'EntrÃ¡ para ver tu perfil' && existing.name !== 'Invitado' && existing.name !== email) {
+    if (!resolvedName || resolvedName === email || resolvedName === 'Inicia sesión para ver tu perfil' || resolvedName === 'Entrá para ver tu perfil' || resolvedName === 'Invitado') {
+      if (existing && existing.name && existing.name !== 'Inicia sesión para ver tu perfil' && existing.name !== 'Entrá para ver tu perfil' && existing.name !== 'Invitado' && existing.name !== email) {
         resolvedName = existing.name;
       } else if (privileged && privileged.name) {
         resolvedName = privileged.name;
@@ -826,7 +826,7 @@
       avatar: firebaseUser.photoURL || (existing && existing.avatar) || '',
       role: privileged ? privileged.role : 'explorer',
       roleLabel: privileged ? privileged.roleLabel : 'Explorador',
-      memberSince: createdAt || (existing && existing.memberSince) || 'â€”',
+      memberSince: createdAt || (existing && existing.memberSince) || '—',
       emailVerified: !!firebaseUser.emailVerified,
       providerIds: (firebaseUser.providerData || []).map(profile => profile.providerId),
       isLoggedIn: true,
@@ -863,14 +863,14 @@
   }
 
   // ==========================================================================
-  // EXPOSICIÃ“N GLOBAL INMEDIATA & MANEJO SEGURO DE EVENTOS
+  // EXPOSICIÓN GLOBAL INMEDIATA & MANEJO SEGURO DE EVENTOS
   // ==========================================================================
   // Asignar a window incondicionalmente para asegurar que nunca sea undefined
   window.BaqueanoSession = BaqueanoSession;
 
-  // ðŸŽ¯ POR QUÃ‰: la navegaciÃ³n global puede reconstruirse despuÃ©s de cargar la sesiÃ³n.
-  // âš™ï¸ CÃ“MO: observa Ãºnicamente nodos nuevos y vuelve a aplicar el control de acceso.
-  // ðŸ“¦ QUÃ‰: evita que OPS aparezca momentÃ¡neamente por una actualizaciÃ³n tardÃ­a del menÃº.
+  // 🎯 POR QUÉ: la navegación global puede reconstruirse después de cargar la sesión.
+  // ⚙️ CÓMO: observa únicamente nodos nuevos y vuelve a aplicar el control de acceso.
+  // 📦 QUÉ: evita que OPS aparezca momentáneamente por una actualización tardía del menú.
   let sessionNavRefreshQueued = false;
   const sessionNavObserver = new MutationObserver((mutations) => {
     const addedNavigation = mutations.some((mutation) => Array.from(mutation.addedNodes).some((node) =>
@@ -894,7 +894,7 @@
     console.warn('[Baqueano Session] Observador de Firebase Auth en espera:', authInitErr);
   }
 
-  // Auto-inicializar Navbar en DOMContentLoaded o de inmediato si ya cargÃ³
+  // Auto-inicializar Navbar en DOMContentLoaded o de inmediato si ya cargó
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateNavbar);
   } else {
