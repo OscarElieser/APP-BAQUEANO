@@ -80,3 +80,14 @@ supabase/.temp/
 *.zip
 website/assets/images/departamentos/*.mp4
 website/assets/videos/
+
+# ----------------------------------------------------------------------------
+# P0 SEGURIDAD (2026-10-02) — Perfiles de navegador usados para capturas QA.
+# POR QUÉ: contienen Cookies, Login Data, Sessions y Session Storage; nunca
+#          deben publicarse (el repositorio es público).
+# CÓMO: se ignoran los directorios de perfil; las capturas PNG y los .md de
+#       .snapshots/ siguen versionados como evidencia para el jurado.
+# QUÉ: ver docs/audit/SECURITY_AUDIT.md (SEC-P0-01).
+# ----------------------------------------------------------------------------
+.snapshots/chrome-*/
+.snapshots/edge-*/

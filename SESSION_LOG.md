@@ -2905,3 +2905,37 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Integridad:** `git status` no reporta cambios rastreados en `website/`, `web/`, `android/`, `lib/`, `pubspec.yaml` ni `pubspec.lock`.
 - **Pruebas:** `flutter analyze` terminó con `No issues found`; `flutter test` terminó con 31 pruebas aprobadas.
 - **Estado:** Limpieza completada sin modificar la estructura funcional solicitada.
+## 2026-10-02 — Solicitud para ejecutar Website localmente
+
+- 🎯 **POR QUÉ:** Permitir la revisión inmediata del Website BAQUEANO en el entorno local.
+- ⚙️ **CÓMO:** Se identificará el script de desarrollo existente, se iniciará sin modificar código y se comprobará la respuesta HTTP local.
+- 📦 **QUÉ:** Ejecución local del Website solicitada; URL y estado pendientes de verificación.
+## 2026-10-02 — Website ejecutándose localmente
+
+- 🎯 **POR QUÉ:** Habilitar la revisión del Website BAQUEANO desde el navegador local.
+- ⚙️ **CÓMO:** Se inició `node dev-server.js`, que sirve el contenido estático de `website/` mediante el servidor nativo existente del proyecto.
+- 📦 **QUÉ:** Website disponible en `http://localhost:5000/` y `http://127.0.0.1:5000/`.
+- **Validación:** HTTP 200, `Content-Type: text/html; charset=utf-8`, título `Baqueano Nicaragua | Descubre lo que no sale en el mapa` y respuesta de 86,017 bytes.
+- **Proceso:** `node`, PID `8580`, iniciado a las `2026-10-02T21:26:56` en una sesión supervisada.
+- **Estado:** Servidor local activo; no se modificó código ni configuración.
+## 2026-10-02 — Solicitud: Prompt Maestro de Evolución (Fase 1: Auditoría integral)
+
+- 🎯 **POR QUÉ:** Evolucionar BAQUEANO (Website + Android + Cloud + IA) hacia plataforma turística profesional para el Hackathon Nicaragua 2026 sin eliminar nada existente.
+- ⚙️ **CÓMO:** Fase 1 exclusivamente de auditoría (sin refactorización masiva ni borrado). Arquitectura oficial: Firebase = identidad, Supabase = información, Hostinger = dominio, Azure = infraestructura Hackathon.
+- 📦 **QUÉ:** Entregar reporte A–T (estado, arquitectura, Android/Website, Sprints 1–3, hallazgos P0–P3, Firebase, Supabase, Azure, i18n 9 idiomas, BAQUI, Ops Center, SEO, seguridad, performance, accesibilidad, estructura recomendada, archivos a mejorar, plan por Sprint) y crear `docs/audit/` con SYSTEM_MAP, ARCHITECTURE, FRONTEND, BACKEND, DATABASE, SECURITY, AZURE, I18N, SEO, ACCESSIBILITY, PERFORMANCE, ASSETS, DEAD_CODE e IMPLEMENTATION_PLAN.
+- **Estado:** Auditoría iniciada.
+## 2026-10-02 — Auditoría integral Fase 1 completada (sin cambios de código)
+
+- 🎯 **POR QUÉ:** Base verificable para evolucionar BAQUEANO hacia los Sprints 1–3 del Hackathon sin eliminar nada.
+- ⚙️ **CÓMO:** Inventario Git, lectura de configuración/reglas/migraciones, verificación en vivo de solo lectura (HTTP de dominios, conteos anónimos Supabase sin descargar filas), `flutter analyze` (sin incidencias), `flutter test` (31/31) y `validate-i18n.mjs`.
+- 📦 **QUÉ:** Creados en `docs/audit/`: SYSTEM_MAP, ARCHITECTURE_AUDIT, FRONTEND_AUDIT, BACKEND_AUDIT, DATABASE_AUDIT, SECURITY_AUDIT, AZURE_AUDIT, I18N_AUDIT, SEO_AUDIT, ACCESSIBILITY_AUDIT, PERFORMANCE_AUDIT, ASSETS_AUDIT, DEAD_CODE_AUDIT, IMPLEMENTATION_PLAN.
+- **P0:** 12 perfiles Chrome/Edge versionados en `.snapshots/` (repo público, incluyen Cookies/Login Data/Sessions); RLS abiertas en `audit_logs`, `ops_backup_entities`, `traffic_sessions` y bucket `baqueano-media`.
+- **P1:** `baqueanonicaragua.com` aparcado en Hostinger; Azure inexistente; Supabase sin integración Firebase Auth (RLS con `auth.uid()` incompatible con UID Firebase) y cliente web sin inicializar; deriva migraciones↔producción (`content_translations` 404, municipios 0); todos los videos 404 en producción; rol Auditor ausente; BAQUI Edge Function pública sin rate-limit.
+- **Corrección registrada:** la firma release Android ya prohíbe la clave debug (correcto); consecuencia: el job CI de AAB release fallará sin keystore en secretos.
+- **Estado:** Fase 1 entregada. Pendiente: autorización del propietario para P0-1 (rotar sesiones) y P0-3 (purga de historial Git, irreversible) antes de iniciar lotes P0.
+## 2026-10-02 — Autorización P0 + datos de Azure recibidos
+
+- 🎯 **POR QUÉ:** Cerrar la exposición P0 de los perfiles de navegador en el repositorio público y arrancar la infraestructura Azure exigida por el Sprint 2.
+- ⚙️ **CÓMO:** El propietario confirma: (P0-1) sesiones cerradas y contraseñas cambiadas; (P0-3) autoriza la purga del historial Git con respaldo `git clone --mirror` previo y force-push. Azure: resumen de creación de VM recibido (suscripción Azure for Students, RG `rg-baqueano-prod`, VM `vm-baqueano-prod`, Central US, zona 1, Ubuntu 22.04 LTS, Standard D2s_v3, usuario `baqueano`, clave SSH RSA `vm-baqueano-prod_key`, solo puerto 22 público, NSG de NIC sin definir).
+- 📦 **QUÉ:** P0-2 (dejar de versionar perfiles), P0-3 (purga del historial) y preparación de `azure/` + `docs/AZURE_DEPLOYMENT.md`. Datos personales del propietario NO se registran en el repositorio.
+- **Estado:** En ejecución.
