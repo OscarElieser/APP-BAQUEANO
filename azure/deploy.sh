@@ -93,8 +93,29 @@ echo "==> 6/6 Activando release"
 ln -sfn "${RELEASE}" "${WEB_ROOT}/current.tmp" && mv -Tf "${WEB_ROOT}/current.tmp" "${WEB_ROOT}/current"
 reload_nginx
 
-# La API se ejecuta desde este mismo checkout: se reinicia para que corra el
-# mismo commit que el Website (GitHub = producción).
+# -----------------------------------------------------
+# API BAQUEANO — Dependencias y reinicio controlado
+# -----------------------------------------------------
+# La API corre directamente desde el checkout activo del repositorio.
+# Antes de reiniciarla instalamos exactamente las dependencias declaradas
+# en package-lock.json usando npm ci.
+#
+# IMPORTANTE:
+# - npm ci garantiza una instalación reproducible.
+# - --omit=dev evita instalar dependencias de desarrollo en producción.
+# - Si npm ci falla, set -e detiene el despliegue antes de reiniciar la API.
+# - Nunca se almacenan secretos dentro del repositorio.
+API_DIR="${REPO_DIR}/azure/api"
+
+if [[ -f "${API_DIR}/package-lock.json" ]]; then
+  echo "==> Instalando dependencias de la API Azure"
+  (
+    cd "${API_DIR}"
+    npm ci --omit=dev
+  )
+fi
+
+# Reinicia la API para que ejecute exactamente el mismo commit desplegado.
 if systemctl list-unit-files baqueano-api.service >/dev/null 2>&1; then
   sudo systemctl restart baqueano-api
 fi

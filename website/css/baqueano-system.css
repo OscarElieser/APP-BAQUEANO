@@ -43,10 +43,14 @@
   /* — Color de marca — */
   --baqueano-primary: var(--terracotta, #F65E01);          /* naranja volcán: acción */
   --baqueano-primary-hover: var(--terracotta-dark, #C94A00);
+  /* Relleno con texto blanco: el naranja de marca da 3.22:1 con blanco (no
+     llega a AA 4.5:1 en texto de botón). Se oscurece al 80 % → 4.79:1. */
+  --baqueano-primary-fill: #C54B01;
+  --baqueano-primary-fill-hover: #A74001;
   --baqueano-secondary: var(--petroleo-teal, #165D6F);     /* laguna: navegación, info */
   --baqueano-secondary-hover: var(--petroleo-dark, #0E4655);
   --baqueano-accent: #4A7A5A;                              /* selva: naturaleza, éxito */
-  --baqueano-dark: #0D1B2A;                                /* noche */
+  --baqueano-dark: #0F172A;                                /* noche */
   --baqueano-dark-2: #102A43;                              /* noche con relieve */
   --baqueano-sand: var(--arena-pinolera, #F4E6C1);         /* arena pinolera */
 
@@ -54,7 +58,7 @@
   --baqueano-light: #F7F3EA;                               /* papel de mapa */
   --baqueano-surface: #FFFFFF;
   --baqueano-surface-alt: #EFE8DA;
-  --baqueano-surface-night: #0D1B2A;
+  --baqueano-surface-night: #0F172A;
 
   /* — Texto — */
   --baqueano-text: #15232F;
@@ -112,9 +116,9 @@
   --baqueano-radius-pill: 999px;  /* chips, etiquetas */
 
   /* — Profundidad: 3 niveles, nada más — */
-  --baqueano-shadow-sm: 0 1px 2px rgba(13, 27, 42, 0.06), 0 2px 10px rgba(13, 27, 42, 0.05);
-  --baqueano-shadow-md: 0 14px 30px -12px rgba(13, 27, 42, 0.22), 0 2px 6px rgba(13, 27, 42, 0.05);
-  --baqueano-shadow-lg: 0 30px 70px -24px rgba(13, 27, 42, 0.42);
+  --baqueano-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 10px rgba(15, 23, 42, 0.05);
+  --baqueano-shadow-md: 0 14px 30px -12px rgba(15, 23, 42, 0.22), 0 2px 6px rgba(15, 23, 42, 0.05);
+  --baqueano-shadow-lg: 0 30px 70px -24px rgba(15, 23, 42, 0.42);
   --baqueano-ring: 0 0 0 3px rgba(246, 94, 1, 0.32);
 
   /* — Movimiento — */
@@ -137,6 +141,15 @@
   --radius-sm: var(--baqueano-radius-sm);
   --radius-md: var(--baqueano-radius-md);
   --radius-lg: var(--baqueano-radius-lg);
+}
+
+/* El relleno sigue al tema territorial activo (js/theme-switcher.js reescribe
+   --terracotta): mismo matiz, 80 % de luminosidad para texto blanco AA. */
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+  :root {
+    --baqueano-primary-fill: color-mix(in srgb, var(--baqueano-primary) 80%, #000);
+    --baqueano-primary-fill-hover: color-mix(in srgb, var(--baqueano-primary) 68%, #000);
+  }
 }
 
 /* ===================================================
@@ -246,7 +259,7 @@ body :is([class*="-hero-badge"], [class*="-hero-eyebrow"], [class*="hero-kicker"
   padding: 0.55em 1.05em;
   border-radius: var(--baqueano-radius-pill);
   border: 1px solid rgba(244, 230, 193, 0.32);
-  background: rgba(13, 27, 42, 0.38);
+  background: rgba(15, 23, 42, 0.38);
   color: var(--baqueano-sand);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -273,7 +286,7 @@ html body :is(.hero-exact, .amb-hero-exact, .aliados-hero-exact, .ia-hero, .chro
   :is(h1, h2, [class*="-hero-title"], [class*="hero-headline"]) {
   color: #FFFFFF !important;
   -webkit-text-fill-color: currentColor;
-  text-shadow: 0 2px 24px rgba(13, 27, 42, 0.45);
+  text-shadow: 0 2px 24px rgba(15, 23, 42, 0.45);
 }
 html body :is(.hero-exact, .amb-hero-exact, .aliados-hero-exact, .ia-hero, .chronicle-hero, .destinos-hero-exact,
   .exp-hero, .gastro-hero-exact, .hist-hero-exact, .legal-hero, .legal-hero-section,
@@ -369,7 +382,7 @@ body :is(
   .ia-cta-generate, .ia-btn-reserve-all, .open-planner-btn, .closing-action-btn,
   .amb-btn-green, .dest-btn-green, .pref-action-btn-green, .btn-search-aliados
 ):not([class*="fa-"]):not(.navbar-login-btn) {
-  background: var(--baqueano-primary) !important;
+  background: var(--baqueano-primary-fill) !important;
   background-image: none !important;
   color: #FFFFFF !important;
   border: 1px solid transparent !important;
@@ -381,12 +394,12 @@ body :is(
   .ia-cta-generate, .ia-btn-reserve-all, .open-planner-btn, .closing-action-btn,
   .amb-btn-green, .dest-btn-green, .pref-action-btn-green, .btn-search-aliados
 ):not([class*="fa-"]):not(.navbar-login-btn):is(:hover, :focus-visible) {
-  background: var(--baqueano-primary-hover) !important;
+  background: var(--baqueano-primary-fill-hover) !important;
 }
 
 /* Rol 2 · Acción secundaria sobre fondo oscuro: vidrio con borde arena. */
 body :is([class*="btn"][class*="glass"], [class*="btn-hero-secondary"], .btn-aliados-hero-secondary, .btn-404-secondary-glass) {
-  background: rgba(13, 27, 42, 0.35) !important;
+  background: rgba(15, 23, 42, 0.35) !important;
   color: #FFFFFF !important;
   border: 1.5px solid rgba(244, 230, 193, 0.55) !important;
   -webkit-backdrop-filter: blur(8px);
@@ -395,7 +408,7 @@ body :is([class*="btn"][class*="glass"], [class*="btn-hero-secondary"], .btn-ali
 }
 body :is([class*="btn"][class*="glass"], [class*="btn-hero-secondary"], .btn-aliados-hero-secondary, .btn-404-secondary-glass):is(:hover, :focus-visible) {
   border-color: var(--baqueano-sand) !important;
-  background: rgba(13, 27, 42, 0.55) !important;
+  background: rgba(15, 23, 42, 0.55) !important;
 }
 
 /* Rol 3 · Acción de navegación/consulta: laguna. */
@@ -879,7 +892,7 @@ body .step-label-text {
 }
 /* Siguiente / Enviar: acción principal. Atrás: acción secundaria sobria. */
 body :is(.btn-reg-next, .btn-reg-submit) {
-  background: var(--baqueano-primary) !important;
+  background: var(--baqueano-primary-fill) !important;
   background-image: none !important;
   color: #FFFFFF !important;
   border: 1px solid transparent !important;
@@ -890,7 +903,7 @@ body :is(.btn-reg-next, .btn-reg-submit) {
   font-weight: 700;
   box-shadow: 0 10px 24px -12px rgba(246, 94, 1, 0.75) !important;
 }
-body :is(.btn-reg-next, .btn-reg-submit):is(:hover, :focus-visible) { background: var(--baqueano-primary-hover) !important; }
+body :is(.btn-reg-next, .btn-reg-submit):is(:hover, :focus-visible) { background: var(--baqueano-primary-fill-hover) !important; }
 body .btn-reg-prev {
   background: transparent !important;
   color: var(--baqueano-text) !important;
@@ -1037,4 +1050,181 @@ html[data-bg-mode="dark"] body main :is(
   :is(h1, h2, h3, h4, h5, h6, p, li, dd, td, th, label, summary, small, strong):not([class*="badge"]):not([class*="pill"]):not([class*="btn"]):not([class*="tag"]):not(:is([class*="overlay"], [class*="caption"], figure) *) {
   color: inherit !important;
   -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===================================================
+   FIRMA · Lema final de la portada (#bannerAtardecer)
+   ---------------------------------------------------
+   POR QUÉ: "Hay una Nicaragua que no aparece en los mapas" es el lema de
+   BAQUEANO y se mostraba noche sobre noche (el h2 hereda el color de la
+   tarjeta, que declara tinta oscura). Debe ser lo último y lo más grande
+   que el viajero lee antes de actuar.
+   CÓMO: tinta papel sobre la tarjeta noche (16:1), acento naranja claro en
+   "en los mapas" (≈7:1 sobre #081827), escala grande y equilibrada.
+   =================================================== */
+#bannerAtardecer .scenic-banner-card { color: var(--baqueano-text-on-dark) !important; }
+#bannerAtardecer .scenic-title {
+  color: var(--baqueano-text-on-dark) !important;
+  -webkit-text-fill-color: currentColor;
+  font-family: var(--baqueano-font-display);
+  font-size: clamp(2rem, 1.2rem + 3.2vw, 3.5rem) !important;
+  font-weight: 900;
+  line-height: 0.98 !important;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+#bannerAtardecer .scenic-title-accent { color: #FF8A3D; display: block; }
+#bannerAtardecer .scenic-banner-left { max-width: 560px; }
+
+/* ===================================================
+   AA · Controles y etiquetas con texto blanco sobre naranja
+   ---------------------------------------------------
+   POR QUÉ: blanco sobre #F65E01 = 3.22:1 (falla AA en texto normal).
+   Rastreo Playwright 2026-10-03: 25 controles con estilo propio de página
+   fuera de los roles de botón (§5). Mismo relleno AA del rol principal
+   (--baqueano-primary-fill, 4.79:1), que sigue al tema activo.
+   Íconos decorativos sin texto (3:1 basta) no se tocan.
+   =================================================== */
+body :is(
+  form[role="search"] button[type="submit"], .hero-exact-search button,
+  .scenic-btn-explore, .ai-btn-plan, .community-btn-register, .map-filter-chip.active,
+  .btn-ver-mapa-completo, .destinos-btn-register, .bq-dialog-action.accent,
+  .favorites-explore-btn, .btn-open-gastro-map, .btn-gastro-map-search, .btn-gastro-maiz,
+  .btn-create-gastro-route, .hist-btn-orange, .hist-btn-explore-dept, .btn-reserve-all,
+  .btn-open-sound-map, .btn-explore-musical-dest, .btn-musica-sunset, #contactSubmitBtn, .help-sos-card button,
+  .t-pill, .artisan-tag, .dest-catalog-tag.orange, .host-hero-tag
+) {
+  background-color: var(--baqueano-primary-fill) !important;
+  background-image: none !important;
+}
+body :is(
+  form[role="search"] button[type="submit"], .hero-exact-search button,
+  .scenic-btn-explore, .ai-btn-plan, .community-btn-register,
+  .btn-ver-mapa-completo, .destinos-btn-register, .bq-dialog-action.accent,
+  .favorites-explore-btn, .btn-open-gastro-map, .btn-gastro-map-search, .btn-gastro-maiz,
+  .btn-create-gastro-route, .hist-btn-orange, .hist-btn-explore-dept, .btn-reserve-all,
+  .btn-open-sound-map, .btn-explore-musical-dest, .btn-musica-sunset, #contactSubmitBtn
+):is(:hover, :focus-visible) {
+  background-color: var(--baqueano-primary-fill-hover) !important;
+}
+
+/* ===================================================
+   POSTALES · Tarjetas de Destinos (data-bq-page="destinos")
+   ---------------------------------------------------
+   POR QUÉ: las tarjetas eran de catálogo genérico (foto de 110 px, pin azul
+   ajeno a la paleta, "Ver destino" partido en 2 líneas). Extiende el lenguaje
+   de postal de la portada: el lugar manda, la tarjeta se siente impresa.
+   CÓMO: solo CSS; HTML, enlaces y "+ Mi viaje" intactos. Foto 4:3 con zoom
+   suave, marco de papel, inclinación leve solo al pasar/enfocar (en reposo,
+   la grilla queda ordenada para comparar precios), pin naranja de marca.
+   =================================================== */
+html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card) {
+  border: 0 !important;
+  border-radius: var(--baqueano-radius-md) !important;
+  overflow: hidden;
+  background: var(--baqueano-surface) !important;
+  box-shadow:
+    0 0 0 4px var(--baqueano-light),
+    0 0 0 5px var(--baqueano-border),
+    var(--baqueano-shadow-sm) !important;
+  transition: transform 420ms var(--baqueano-ease), box-shadow 420ms var(--baqueano-ease);
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card):is(:hover, :focus-within) {
+  transform: rotate(-0.8deg) translateY(-5px);
+  box-shadow:
+    0 0 0 4px var(--baqueano-light),
+    0 0 0 5px rgba(246, 94, 1, 0.45),
+    var(--baqueano-shadow-md) !important;
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card):nth-child(even):is(:hover, :focus-within) {
+  transform: rotate(0.8deg) translateY(-5px);
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-media, .dest-catalog-media) {
+  height: auto !important;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-media, .dest-catalog-media) img {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  transition: transform 700ms var(--baqueano-ease);
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card):is(:hover, :focus-within) :is(.dest-highlight-media, .dest-catalog-media) img {
+  transform: scale(1.06);
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-body, .dest-catalog-body) h4 {
+  font-family: var(--baqueano-font-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+html[data-bq-page="destinos"] :is(.dest-highlight-body, .dest-catalog-body) .location i {
+  color: var(--baqueano-primary-fill) !important;
+}
+html[data-bq-page="destinos"] .dest-highlight-price {
+  font-family: var(--baqueano-font-display);
+  font-weight: 800;
+}
+/* Botones dobles: "Ver destino" en una línea, "+ Mi viaje" a su medida */
+html[data-bq-page="destinos"] .dest-catalog-dual-btns {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+html[data-bq-page="destinos"] .dest-catalog-dual-btns > * {
+  white-space: nowrap;
+  padding-inline: 0.8em !important;
+  min-height: 40px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card),
+  html[data-bq-page="destinos"] :is(.dest-highlight-media, .dest-catalog-media) img { transition: none; }
+}
+/* Aire para el marco de papel y la inclinación (la fila es un carrusel que recorta) */
+html[data-bq-page="destinos"] :is(.destinos-catalog-row, .destinos-destacados-grid) {
+  gap: 18px !important;
+  padding: 10px 8px 12px;
+}
+html[data-bq-page="destinos"] :is(.dest-catalog-dual-btns, .dest-highlight-body) > :is(a, button) {
+  font-size: 0.84rem !important;
+}
+
+/* ===================================================
+   PORTADA · Luz de atardecer (#heroNicaragua)
+   ---------------------------------------------------
+   POR QUÉ: la capa azul marino al 92 % apagaba el video: la primera
+   impresión era fría y nocturna para un sitio de turismo.
+   CÓMO: oscuridad solo donde vive el texto (izquierda, con sus sombras de
+   texto intactas), brillo de atardecer naranja sobre el paisaje (derecha
+   abajo) y un velo superior para la navegación. Video sin tocar.
+   =================================================== */
+#heroNicaragua .bq-hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.55) 0%, rgba(15, 23, 42, 0) 22%),
+    radial-gradient(120% 90% at 85% 100%, rgba(246, 94, 1, 0.38) 0%, rgba(246, 94, 1, 0.12) 38%, rgba(246, 94, 1, 0) 62%),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.86) 0%, rgba(15, 23, 42, 0.58) 42%, rgba(15, 23, 42, 0.12) 78%, rgba(15, 23, 42, 0) 100%) !important;
+}
+#heroNicaragua .bq-hero-background {
+  filter: saturate(1.22) contrast(1.06) brightness(1.06) !important;
+}
+@media (max-width: 760px) {
+  /* En celular el texto ocupa todo el ancho: velo parejo, brillo abajo. */
+  #heroNicaragua .bq-hero-overlay {
+    background:
+      radial-gradient(140% 60% at 50% 100%, rgba(246, 94, 1, 0.34) 0%, rgba(246, 94, 1, 0) 60%),
+      linear-gradient(180deg, rgba(15, 23, 42, 0.82) 0%, rgba(15, 23, 42, 0.5) 18%, rgba(15, 23, 42, 0.5) 55%, rgba(15, 23, 42, 0.72) 100%) !important;
+  }
+}
+@media (max-width: 760px) {
+  /* Barra sobre el video: el desenfoque sobre un video claro se leía como
+     franja gris; un velo noche la integra a la portada. */
+  body.page-index-exact #mainNavbar:not(.bq-nav-scrolled) {
+    background: rgba(15, 23, 42, 0.62) !important;
+  }
+}
+@media (max-width: 760px) {
+  /* El clip trae una franja gris arriba que el recorte vertical deja ver:
+     se amplía 12 % desde abajo para sacarla de cuadro. */
+  #heroNicaragua .bq-hero-background {
+    transform: scale(1.12);
+    transform-origin: 50% 100%;
+  }
 }

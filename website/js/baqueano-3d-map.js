@@ -348,7 +348,7 @@
 
       // Material con textura topográfica de alta gama
       const material = new THREE.MeshStandardMaterial({
-        color: 0x0D1B2A,
+        color: 0x0F172A,
         roughness: 0.72,
         metalness: 0.18,
         wireframe: false,

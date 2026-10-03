@@ -3128,3 +3128,67 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
   - `css/headings-system.css`, `css/theme-switcher.css`, `js/theme-switcher.js` modificados sin quitar funciones.
 - **Pendiente D3:** 76 casos en modo oscuro opcional; optimización de imágenes (WebP/AVIF, 1.2 GB en assets); traducción de textos nuevos/humanizados a EN/FR/IT/PT/DE; Ops Center (36 `<h1>`, tema propio); pruebas en Firefox/WebKit; revisión visual página a página de secciones interiores.
 - **Cierre de sesión D3 (2026-10-03):** auditoría final 224/224 sin problemas; funcional 14/15 (el buscador abre su panel interno al pulsar el botón; la prueba con Enter es la única diferencia de método); contraste modo claro 0, modo oscuro 76 (publicado b8469aef: 177 y 571; cifras previas 144/517 estaban contaminadas porque el servidor "antes" leía HEAD y el propietario commiteó 0b0b6296 a las 12:27). Galería antes/después de 28 páginas: https://claude.ai/code/artifact/e84a9aa7-f9bd-4180-9f36-931bd45dbe02 . Cambios SIN commitear (el propietario decide el commit).
+
+## 2026-10-03 — Solicitud: autorización de conectores (Figma, Supabase, Canva, Vercel, Notion)
+
+- 🎯 **POR QUÉ:** El propietario autoriza el uso de los conectores para el rediseño.
+- ⚙️ **CÓMO:** La autorización OAuth debe hacerla el propietario desde claude.ai → Configuración → Conectores (la sesión del asistente no puede iniciar ese flujo). Tras conectarlos, reiniciar la sesión de Claude Code para que aparezcan las herramientas.
+- **Estado:** En espera de que el propietario conecte las cuentas.
+- **2026-10-03 — Reanudación:** el propietario informa que conectó todos los conectores. Verificado: esta sesión aún no recibe herramientas de Supabase, Figma, Canva, Vercel ni Notion (la lista de herramientas se carga al iniciar). Requiere abrir una sesión nueva de Claude Code.
+- **2026-10-03:** el propietario muestra claude.ai → Conectores con Canva, Figma, Gmail, Google Drive, GitHub, Notion, Supabase y Vercel conectados (✓). En esta sesión siguen sin aparecer sus herramientas (búsqueda repetida). Acción: abrir sesión nueva de Claude Code y retomar desde esta bitácora.
+- **2026-10-03:** el propietario comparte el enlace de configuración de un conector (claude.ai/customize/connectors/…). Las herramientas siguen sin cargarse en esta sesión; se reitera abrir sesión nueva.
+
+## 2026-10-03 — Sesión nueva con conectores: revisión de Supabase (tablas y RLS) y Figma vs sistema de diseño
+
+- 🎯 **POR QUÉ:** El propietario pide leer la bitácora y continuar: auditar Supabase (tablas y políticas RLS) y comparar Figma con el sistema de diseño (`css/baqueano-system.css`, `DESIGN.md`).
+- ⚙️ **CÓMO:** Solo lectura: `list_projects`/`list_tables`/consultas a `pg_policies`/`get_advisors` en Supabase; `whoami`/búsqueda de archivos y variables en Figma; contraste con tokens del sistema. Ningún cambio de esquema ni de RLS sin orden explícita (AGENTS.md: análisis antes de tocar RLS/migraciones).
+- **Estado:** Iniciado.
+- **Resultado Supabase (solo lectura, proyecto `heiudfpthqwtjrtluqlm` APP-BAQUEANO; `nioeuurajsdnharkesyy` inactivo):** 39 tablas en public, todas con RLS activo.
+  - CRÍTICO: `audit_logs` y `ops_backup_entities` con política ALL `true` para public → cualquiera con la clave anon lee, altera o borra la auditoría. `storage.objects` (baqueano-media, bucket público de 50 MB que admite SVG y APK) permite INSERT/UPDATE/DELETE a anon; `storage.buckets` permite INSERT a cualquiera. `traffic_sessions`: lectura y DELETE públicos.
+  - MEDIO: `backup_operations`/`storage_backups` legibles por cualquier `authenticated`; `knowledge_documents` lectura `true` (el nombre dice "verificado"); políticas ALL con `service_role` redundantes (ese rol ignora RLS).
+  - FUNCIONAL: `profiles`, `favorites`, `reservations`, `travel_plans` (31 filas), `verification_requests`, `ai_sessions`, `ai_messages`, `official_super_admins` sin políticas → el cliente anon (`user-session.js`) no puede escribir favoritos/reservas; solo el backend (`functions/lib/http.js`) con service role. Verificar si Firebase está configurado como Third-Party Auth en Supabase.
+  - Advisors: `sync_geography_point` sin search_path; extensión `vector` en public; `rls_auto_enable` (event trigger, no ejecutable por RPC en la práctica).
+  - Dependencia: Ops Center (`js/ops-center/ops-engine.js`) escribe/borra `audit_logs`, `ops_backup_entities`, `destinations`, `businesses` y storage con la clave anon → cerrar las políticas exige primero mover esas operaciones al backend autenticado (`functions/lib/auth-middleware.js`). NO se aplicaron cambios.
+- **Figma:** cuenta conectada (plan starter, admin). No hay enlace de archivo en el repo; las herramientas exigen la URL del archivo → pendiente que el propietario la comparta.
+- **Diseño (código vs documentos):** `baqueano-system.css` usa noche `#0D1B2A` y papel `#EFE8DA`; AGENTS.md define `#0F172A` y `#F4E6C1`. `DESIGN.md` cita Inter/Plus Jakarta; el sistema usa Montserrat + Plus Jakarta Sans. Selva `#4A7A5A` no figura en AGENTS.md.
+- **Estado:** Auditoría completada; esperando decisión del propietario sobre el plan de endurecimiento RLS y enlace de Figma.
+
+## 2026-10-03 — Solicitud: "haz la comparación" (Figma vs sistema de diseño)
+
+- 🎯 **POR QUÉ:** El propietario pide ejecutar la comparación Figma ↔ `baqueano-system.css`/`DESIGN.md`/AGENTS.md.
+- ⚙️ **CÓMO:** Localizar archivo/biblioteca de Figma accesible con la cuenta conectada; extraer variables/estilos; contrastar con tokens del código.
+- **Estado:** Iniciado.
+- **Bloqueo:** el conector de Figma no permite listar archivos; todas sus herramientas requieren la clave del archivo. Búsqueda en todo el repo: 0 enlaces figma.com. Se solicita al propietario la URL del archivo (idealmente con `node-id` del frame o página de estilos).
+- **Estado:** En espera de la URL de Figma.
+
+## 2026-10-03 — Decisión: sin archivo Figma → criterio del asistente ("lucete en el diseño")
+
+- 🎯 **POR QUÉ:** El propietario no tiene archivo de Figma y delega el criterio. Hace falta una sola fuente de verdad de diseño.
+- ⚙️ **CÓMO:** Se omite Figma. Fuente de verdad = paleta oficial de AGENTS.md (regla 2). Se alinean tokens de `css/baqueano-system.css` con la paleta oficial (sin romper contraste), se actualiza `DESIGN.md` con el sistema real (familias, tokens, roles) y se publica una guía visual viva del sistema.
+- **Estado:** Iniciado.
+- **Avance (2026-10-03):**
+  1. Noche unificada a `#0F172A` (paleta oficial; ya usada en 72 archivos): `css/baqueano-system.css` (11), `css/baqueano-identity.css` (7), `css/baqueano-reels.css` (5), `js/baqueano-3d-map.js` (1).
+  2. **Hallazgo AA:** blanco sobre `#F65E01` = 3.22:1 (botón 15.2 px negrita no es "texto grande"); el detector previo usaba umbral 3:1 y no lo marcaba. Nuevos tokens `--baqueano-primary-fill` (#C54B01, 4.79:1) y `--baqueano-primary-fill-hover` (#A74001, 6.22:1), derivados con `color-mix()` del color del tema activo (los 8 temas siguen mandando). Aplicado a Rol 1 de botones y a `.btn-reg-next/.btn-reg-submit`. Verificado en navegador: 404 y mi-negocio → rgb(197,75,1) con texto blanco.
+  3. `DESIGN.md`: colores de apoyo, fuente de verdad (sin Figma), tipografía Montserrat + Plus Jakarta Sans, nueva §5 "Sistema visual web" con tabla de roles.
+  4. Versiones de caché: `baqueano-system.css?v=20261003-5` (29 HTML + injector), `baqueano-identity.css?v=20261003-3`.
+  5. Guía visual publicada "Cartografía Viva": https://claude.ai/code/artifact/cfd088e7-cddc-496b-8c52-30c6f088d004
+  6. Auditoría de contraste (<3:1) tras el cambio: 0 en 1440 px y 0 en 390 px (28 páginas).
+- **Pendiente:** re-auditar contraste con umbral AA real 4.5:1 (texto normal); resultado final de auditoría de desborde; commit a decisión del propietario.
+
+## 2026-10-03 — Solicitud: "que se vea único, es de turismo y queremos llamar la atención"
+
+- 🎯 **POR QUÉ:** El propietario delega el criterio visual: el sitio debe ser memorable y llamativo para turistas, con identidad propia.
+- ⚙️ **CÓMO:** Capturar el estado actual (390/1440 px), elegir una firma visual propia de Nicaragua aplicada globalmente desde el sistema (sin borrar contenido ni funciones), verificar con Playwright (desborde, contraste, errores JS).
+- **Estado:** Iniciado.
+- **Avance (2026-10-03) — firma visual de la portada:**
+  1. **Postales de Nicaragua** ("¿Qué querés vivir?", `index.html` + `css/pages/tres-pilares.css?v=20261003-postales-1`): 10 opciones de íconos genéricos → postales con foto real del lugar que cumple cada deseo (WebP 4:5 de 16–67 KB en `assets/images/vivir/`), pie "lugar · departamento" (`.vivir-option-place`), marco de papel, inclinación alterna que se endereza al pasar/enfocar, sello con el ícono y cinta "Elegido" en estado activo. Grilla 5×2 (≥600 px) y 2×5 (celular): sin huérfanas. `tres-pilares.js` intacto (solo alterna `.is-active`).
+  2. **Lema final** (`#bannerAtardecer`): "Que no aparece en los mapas" estaba noche sobre noche (el h2 heredaba tinta oscura de la tarjeta; el detector lo omitía por el degradado). Ahora papel + "EN LOS MAPAS." en naranja claro, escala grande.
+  3. **AA naranja global:** rastreo Playwright de texto blanco sobre #F65E01 en 28 páginas → 25 controles/etiquetas pasan a `--baqueano-primary-fill` (sistema) + etiqueta Rama inline (`experiencias.html`) + botón SOS de ayuda. Restan solo íconos y números de marcadores (no son texto de lectura).
+  4. Auditoría de desborde previa a postales: 224/224 OK. Index tras postales: 0 desborde, 0 errores JS en 1440 y 390.
+- **2026-10-03:** el propietario pide reabrir la ventana que cerró; se abre en el navegador la galería de diseño (última ventana entregada).
+
+## 2026-10-03 — Solicitud: "continúa" (tras la firma visual de la portada)
+
+- 🎯 **POR QUÉ:** El propietario pide seguir con el rediseño llamativo (la sesión se cortó una vez).
+- ⚙️ **CÓMO:** (1) completar la auditoría de desborde interrumpida; (2) portada más cálida y lenguaje de postal en Destinos/Departamentos, sin borrar contenido ni funciones; verificación Playwright.
+- **Estado:** Iniciado.

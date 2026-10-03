@@ -682,3 +682,170 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================================
+ * POSTALES DE NICARAGUA — "¿Qué querés vivir?" (2026-10-03)
+ * ----------------------------------------------------------------------------
+ * 🎯 POR QUÉ: la grilla de íconos sobre tarjetas blancas era lo más genérico
+ *   de la portada y es lo primero que el viajero elige. Un turista decide con
+ *   imágenes: cada deseo se muestra con el lugar real que lo cumple.
+ * ⚙️ CÓMO: se superpone a las reglas anteriores (no se borran). Foto por
+ *   data-vivencia (WebP 4:5, 16–67 KB en assets/images/vivir/), marco de papel
+ *   e inclinación alterna de postal que se endereza al pasar/enfocar.
+ *   tres-pilares.js solo alterna .is-active: lógica intacta.
+ *   Grilla 5×2 (≥600 px) y 2×5 (celular): las 10 opciones llenan filas
+ *   completas, sin huérfanas.
+ * 📦 QUÉ: postal con deseo (título), lugar · departamento (pie), ícono de
+ *   sello y estado elegido visible (anillo naranja + "Elegido").
+ * ========================================================================== */
+.vivir-selector .vivir-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 22px);
+  max-width: 1180px;
+  padding: 8px 12px 4px;
+}
+
+.vivir-grid .vivir-option {
+  --postal-tilt: -1.4deg;
+  --postal-photo: none;
+  aspect-ratio: 4 / 5;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 2px;
+  padding: clamp(10px, 1.2vw, 16px);
+  border: 0;
+  border-radius: 14px;
+  background:
+    linear-gradient(to top, rgba(15, 23, 42, 0.94) 0%, rgba(15, 23, 42, 0.55) 34%, rgba(15, 23, 42, 0) 62%),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0) 22%),
+    var(--postal-photo) center / cover no-repeat,
+    #165D6F;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  /* Marco de papel de postal impresa */
+  box-shadow:
+    0 0 0 5px #F7F3EA,
+    0 0 0 6px rgba(15, 23, 42, 0.10),
+    0 18px 32px -16px rgba(15, 23, 42, 0.45);
+  color: #FFFFFF;
+  text-align: left;
+  transform: rotate(var(--postal-tilt));
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-size 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vivir-grid .vivir-option:nth-child(even) { --postal-tilt: 1.2deg; }
+.vivir-grid .vivir-option:nth-child(3n) { --postal-tilt: -0.6deg; }
+.vivir-grid .vivir-option::before { display: none; }
+
+.vivir-grid .vivir-option[data-vivencia="aventura"]       { --postal-photo: url("../../assets/images/vivir/aventura.webp"); }
+.vivir-grid .vivir-option[data-vivencia="naturaleza"]     { --postal-photo: url("../../assets/images/vivir/naturaleza.webp"); }
+.vivir-grid .vivir-option[data-vivencia="cultura"]        { --postal-photo: url("../../assets/images/vivir/cultura.webp"); }
+.vivir-grid .vivir-option[data-vivencia="descanso"]       { --postal-photo: url("../../assets/images/vivir/descanso.webp"); }
+.vivir-grid .vivir-option[data-vivencia="historia"]       { --postal-photo: url("../../assets/images/vivir/historia.webp"); }
+.vivir-grid .vivir-option[data-vivencia="gastronomia"]    { --postal-photo: url("../../assets/images/vivir/gastronomia.webp"); }
+.vivir-grid .vivir-option[data-vivencia="comunidades"]    { --postal-photo: url("../../assets/images/vivir/comunidades.webp"); }
+.vivir-grid .vivir-option[data-vivencia="romance"]        { --postal-photo: url("../../assets/images/vivir/romance.webp"); }
+.vivir-grid .vivir-option[data-vivencia="familia"]        { --postal-photo: url("../../assets/images/vivir/familia.webp"); }
+.vivir-grid .vivir-option[data-vivencia="algo-diferente"] { --postal-photo: url("../../assets/images/vivir/algo-diferente.webp"); }
+
+/* Ícono como sello de correo, arriba a la derecha */
+.vivir-grid .vivir-option .vivir-option-icon {
+  position: absolute;
+  top: clamp(8px, 1vw, 12px);
+  right: clamp(8px, 1vw, 12px);
+  width: 38px;
+  height: 38px;
+  font-size: 0.95rem;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.42);
+  border: 1.5px dashed rgba(244, 230, 193, 0.75);
+  color: #F4E6C1;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.vivir-grid .vivir-option .vivir-option-label {
+  font-family: var(--baqueano-font-display, 'Montserrat', sans-serif);
+  font-weight: 800;
+  font-size: clamp(1rem, 0.85rem + 0.55vw, 1.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  text-shadow: 0 1px 12px rgba(15, 23, 42, 0.55);
+}
+.vivir-grid .vivir-option .vivir-option-place {
+  font-family: var(--baqueano-font-text, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.7rem, 0.66rem + 0.2vw, 0.8rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #F4E6C1;
+}
+.vivir-grid .vivir-option .vivir-option-place::before {
+  content: "\f3c5"; /* fa-location-dot */
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", sans-serif;
+  font-weight: 900;
+  margin-right: 0.35em;
+  color: #FF8A3D;
+}
+
+/* Pasar / enfocar: la postal se endereza, se acerca y la foto respira */
+.vivir-grid .vivir-option:is(:hover, :focus-visible) {
+  transform: rotate(0deg) translateY(-6px);
+  background-size: auto, auto, 112%, auto;
+  box-shadow:
+    0 0 0 5px #F7F3EA,
+    0 0 0 6px rgba(246, 94, 1, 0.45),
+    0 28px 44px -18px rgba(15, 23, 42, 0.55);
+}
+.vivir-grid .vivir-option:focus-visible { outline: 3px solid #F65E01; outline-offset: 8px; }
+
+/* Elegida: marco naranja y cinta "Elegido" */
+.vivir-grid .vivir-option.is-active {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow:
+    0 0 0 5px #F65E01,
+    0 0 0 7px #F7F3EA,
+    0 26px 44px -16px rgba(197, 75, 1, 0.55);
+  border: 0;
+}
+.vivir-grid .vivir-option.is-active::after {
+  content: "Elegido";
+  position: absolute;
+  top: clamp(10px, 1.2vw, 14px);
+  left: clamp(10px, 1.2vw, 14px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #C54B01;
+  color: #FFFFFF;
+  font: 700 0.68rem/1.2 var(--baqueano-font-display, 'Montserrat', sans-serif);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.vivir-grid .vivir-option.is-active .vivir-option-icon {
+  background: #F65E01;
+  border-style: solid;
+  border-color: #F7F3EA;
+  color: #FFFFFF;
+}
+
+@media (max-width: 599px) {
+  .vivir-selector .vivir-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 16px;
+    padding-inline: 8px;
+  }
+  .vivir-grid .vivir-option { aspect-ratio: 4 / 4.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vivir-grid .vivir-option,
+  .vivir-grid .vivir-option:is(:hover, :focus-visible),
+  .vivir-grid .vivir-option.is-active {
+    transition: none;
+  }
+}
