@@ -1,0 +1,37 @@
+# =====================================================
+# BAQUEANO — Servicio systemd de la API Azure
+# =====================================================
+# PROPÓSITO: mantener azure/api/server.js siempre activo, reiniciarlo si falla
+#   y arrancarlo al encender la VM (equivalente a "pm2 startup", sin instalar
+#   paquetes globales de npm).
+# SEGURIDAD: se ejecuta como el usuario sin privilegios "baqueano", con el
+#   sistema de archivos protegido y sin posibilidad de escalar privilegios.
+# RELACIÓN: instalado por azure/setup-server.sh; variables opcionales en
+#   /etc/baqueano/api.env (permisos 600, nunca en Git).
+[Unit]
+Description=BAQUEANO API de infraestructura Azure
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=baqueano
+Group=baqueano
+WorkingDirectory=/home/baqueano/APP-BAQUEANO/azure/api
+ExecStart=/usr/bin/node /home/baqueano/APP-BAQUEANO/azure/api/server.js
+EnvironmentFile=-/etc/baqueano/api.env
+Environment=NODE_ENV=production PORT=3000
+Restart=on-failure
+RestartSec=3
+
+# Endurecimiento
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

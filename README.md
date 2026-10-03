@@ -37,6 +37,7 @@
 - [💳 Motor Financiero Bimoneda & Régimen Fiscal](#-motor-financiero-bimoneda--régimen-fiscal)
 - [🛡️ Sistema de Respaldo & Restauración de Versiones](#-sistema-de-respaldo--restauración-de-versiones)
 - [🚀 Instalación y Despliegue en Android](#-instalación-y-despliegue-en-android)
+- [☁️ Despliegue Web en Azure](#-despliegue-web-en-azure)
 - [📄 Licencia & Créditos](#-licencia--créditos)
 
 ---
@@ -444,6 +445,33 @@ flutter analyze
 
 ```bash
 flutter run -d [DEVICE_ID]
+```
+
+---
+
+## ☁️ Despliegue Web en Azure
+
+> Guía completa: [docs/AZURE_DEPLOYMENT.md](docs/AZURE_DEPLOYMENT.md) · Evidencias: [docs/evidencias/azure/](docs/evidencias/azure/README.md) · Auditoría: [docs/audit/](docs/audit/SYSTEM_MAP.md)
+
+| Capa | Tecnología | Rol |
+| --- | --- | --- |
+| Dominio | `https://baqueanonicaragua.com` (DNS en Hostinger) | Dominio público y canónico |
+| Infraestructura | Azure VM `vm-baqueano-prod` · Ubuntu Server 22.04 LTS · NSG | Servidor del Hackathon Nicaragua 2026 |
+| Servidor web | Nginx + TLS Let's Encrypt (HTTPS/443, HTTP/80 solo redirección) | Sirve el Website estático de `website/` |
+| API | Node.js 20 en `127.0.0.1:3000`, systemd, expuesta solo vía Nginx en `/api/azure/*` | Demuestra Azure → datos |
+| Base productiva | Supabase PostgreSQL (RLS) | Fuente única de información |
+| BD en Azure | PostgreSQL local solo `localhost` | Evidencia de la rúbrica, sin datos productivos |
+| Autenticación | Firebase Authentication (Google) | Identidad |
+| Hosting alternativo | Firebase Hosting `https://app-baqueano.web.app` | Respaldo técnico |
+
+**Seguridad:** SSH solo con clave y solo desde la IP del administrador; puertos de base de datos (5432, 3306) y de la API (3000) nunca expuestos; cabeceras CSP/HSTS; RLS en Supabase; roles en Firebase Custom Claims.
+
+**Despliegue reproducible (GitHub = producción):**
+
+```bash
+sudo bash ~/APP-BAQUEANO/azure/setup-server.sh   # una vez
+bash ~/APP-BAQUEANO/azure/deploy.sh              # publica origin/main
+curl https://baqueanonicaragua.com/health        # muestra el commit desplegado
 ```
 
 ---

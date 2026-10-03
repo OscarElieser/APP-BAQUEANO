@@ -67,6 +67,22 @@ node -v
 echo "==> 3/7 Instalando Certbot (certificados TLS de Let's Encrypt)"
 apt-get install -y certbot python3-certbot-nginx
 
+echo "==> 3b/7 Instalando PostgreSQL local (evidencia de BD en Azure para la rúbrica)"
+# POR QUÉ: el Sprint 2 pide comprobar una base de datos funcionando dentro del
+#   servidor Azure. La base PRODUCTIVA sigue siendo Supabase; esta instancia no
+#   guarda datos de BAQUEANO.
+# SEGURIDAD: Ubuntu configura listen_addresses='localhost' por defecto; aquí se
+#   fuerza explícitamente y ufw/NSG nunca abren el 5432.
+apt-get install -y postgresql postgresql-contrib postgresql-client
+PG_CONF="$(find /etc/postgresql -name postgresql.conf | head -1)"
+if [[ -n "${PG_CONF}" ]]; then
+  sed -i -E "s/^#?listen_addresses\s*=.*/listen_addresses = 'localhost'/" "${PG_CONF}"
+fi
+systemctl enable --now postgresql
+systemctl restart postgresql
+# Verificación: solo debe escuchar en 127.0.0.1/::1.
+ss -ltnp | grep 5432 || true
+
 echo "==> 4/7 Endureciendo SSH"
 # Archivo drop-in: no modifica sshd_config original, se puede revertir borrándolo.
 cat > /etc/ssh/sshd_config.d/90-baqueano-hardening.conf <<'EOF'
@@ -125,6 +141,17 @@ rm -f /etc/nginx/sites-enabled/default
 nginx -t
 systemctl enable --now nginx
 systemctl reload nginx
+
+# API Azure (127.0.0.1:3000, solo accesible vía Nginx en /api/azure/).
+install -m 644 "${REPO_DIR}/azure/systemd/baqueano-api.service" /etc/systemd/system/baqueano-api.service
+touch /etc/baqueano/api.env
+chown root:"${APP_USER}" /etc/baqueano /etc/baqueano/api.env
+chmod 640 /etc/baqueano/api.env
+systemctl daemon-reload
+systemctl enable --now baqueano-api
+systemctl restart baqueano-api
+sleep 1
+curl -fsS http://127.0.0.1:3000/api/azure/health >/dev/null && echo "API Azure activa en 127.0.0.1:3000"
 
 echo ""
 echo "Servidor aprovisionado."

@@ -2948,3 +2948,17 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Alerta de seguridad:** el propietario pegó en el chat la clave privada SSH de la VM. No se guardó en ningún archivo. Se considera comprometida: regenerar con ed25519 (Paso 0 de AZURE_DEPLOYMENT.md).
 - **Observaciones VM:** NSG de NIC aparecía como "-" (posible tráfico entrante sin filtrar) → ejecutar `configure-nsg.sh`; D2s_v3 ≈ 80 USD/mes vs crédito de 100 USD → apagado automático o B2s.
 - **Estado:** Esperando IP pública de la VM, rotación de la clave SSH y acceso DNS en Hostinger.
+## 2026-10-02 — Guía Azure de 36 pasos recibida: conciliación con azure/
+
+- 🎯 **POR QUÉ:** Alinear el paquete `azure/` con la guía del propietario y con la rúbrica Sprint 2/3 (BD funcionando dentro de Azure, API Azure→datos, evidencias, README de despliegue).
+- ⚙️ **CÓMO:** Se incorporan los aportes nuevos (PostgreSQL local solo en localhost, API Node en 127.0.0.1:3000 tras Nginx, redirección www→dominio principal, dominios autorizados Firebase, evidencias `docs/evidencias/azure/`, sección README). Se mantiene el despliegue por build con lista permitida en lugar de `rsync` de todo `website/` (este último publicaría `docs/`, `scripts/`, `apps/`, `packages/`).
+- 📦 **QUÉ:** Cambios en `azure/setup-server.sh`, `azure/nginx/baqueano.conf`, nuevo `azure/api/` + servicio systemd, `docs/AZURE_DEPLOYMENT.md`, `docs/evidencias/azure/README.md`, `README.md` (sección añadida, sin borrar contenido).
+- **Estado:** En ejecución.
+## 2026-10-02 — Guía Azure conciliada: API, PostgreSQL local y evidencias
+
+- 🎯 **POR QUÉ:** Cubrir los requisitos de la rúbrica que faltaban (BD dentro de Azure, flujo Azure → datos, evidencias, README de despliegue) sin alterar la arquitectura Firebase/Supabase.
+- ⚙️ **CÓMO:** `azure/api/server.js` (Node puro, 127.0.0.1:3000, rutas `/api/azure/health` y `/api/azure/db`, caché 30 s, timeouts 5 s) + `azure/api/package.json` (`type: commonjs`, aísla del `type: module` de la raíz) + `azure/systemd/baqueano-api.service` (usuario sin privilegios, endurecido). `setup-server.sh` instala PostgreSQL forzando `listen_addresses='localhost'` y activa la API. Nginx: bloque `www → https://baqueanonicaragua.com` y proxy `/api/azure/` (solo GET/HEAD). `deploy.sh` reinicia la API tras desplegar.
+- 📦 **QUÉ:** Docs: `docs/AZURE_DEPLOYMENT.md` (BD rúbrica vs. arquitectura, API, tabla de conciliación con la guía, Paso 7 Firebase/Google OAuth/Supabase, Paso 8 verificación), `docs/evidencias/azure/README.md` (15 capturas con comando), sección "Despliegue Web en Azure" en `README.md` (sin borrar contenido).
+- **Pruebas:** API en local → `/health` 200; `/db` 200 con Supabase `departments: 17` (826 ms); caché OK; 404 ruta desconocida; 405 POST; inaccesible desde IP externa. `bash -n` OK en 4 scripts; `node --check` OK. Se detectó y corrigió el fallo ESM/CommonJS gracias a la prueba. El proceso `dev-server.js` (PID 8580) del propietario no se tocó.
+- **Decisión documentada:** no se usa el `rsync` de todo `website/` (publicaría docs/scripts/apps/packages); systemd en lugar de PM2 (misma función, sin npm global).
+- **Estado:** Listo para ejecutar en la VM cuando el propietario confirme IP y clave SSH regenerada.

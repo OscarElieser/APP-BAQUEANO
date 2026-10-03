@@ -22,14 +22,49 @@ Visitante ──HTTPS──► baqueanonicaragua.com (DNS en Hostinger: A → IP
               │ NSG: 443 Any · 80 Any (301) · 22 solo IP admin · resto denegado │
               │ vm-baqueano-prod · Ubuntu 22.04 LTS · usuario baqueano          │
               │   ufw (espejo del NSG) · fail2ban · SSH solo clave              │
-              │   Nginx :443 TLS Let's Encrypt                                  │
-              │     /          → /var/www/baqueano/current (release de main)    │
-              │     /health    → commit desplegado (evidencia jurado)           │
-              │     /api/*     → proxy a Firebase Functions (temporal)          │
-              └──────────────────────────┬──────────────────────────────────────┘
-                                         │ HTTPS desde el navegador
-                    Firebase Auth · Firestore · Supabase · Gemini (BAQUI)
+              │   Nginx :443 TLS Let's Encrypt   (www → 301 dominio principal)  │
+              │     /             → /var/www/baqueano/current (release de main) │
+              │     /health       → commit desplegado (evidencia jurado)        │
+              │     /api/azure/*  → Node 127.0.0.1:3000 (systemd baqueano-api)  │
+              │     /api/*        → proxy a Firebase Functions (temporal)       │
+              │   PostgreSQL 14 solo localhost (evidencia rúbrica, sin datos)   │
+              └───────────────┬──────────────────────────┬──────────────────────┘
+                              │ HTTPS (API → Supabase)    │ HTTPS desde el navegador
+                    Supabase PostgreSQL (base principal)   Firebase Auth · Firestore · Gemini
 ```
+
+### Base de datos: rúbrica y arquitectura a la vez
+
+La rúbrica del Sprint 2 pide comprobar una base de datos funcionando **dentro** del servidor Azure, pero la base productiva de BAQUEANO es Supabase. Se cumplen ambas cosas:
+
+- **PostgreSQL local** (`setup-server.sh`): instalado y activo, escuchando solo en `localhost`, sin datos de BAQUEANO. Es evidencia técnica.
+- **Supabase**: base principal. La API de Azure demuestra la conexión real en `GET /api/azure/db` (conteo de departamentos publicados, sin descargar filas).
+
+Frase para el jurado: *"Azure tiene PostgreSQL instalado y funcionando, como pide la rúbrica; la arquitectura productiva usa Supabase PostgreSQL como fuente única de verdad, consumida desde Azure por HTTPS. Ningún puerto de base de datos está expuesto a Internet."*
+
+### API de infraestructura (`azure/api/server.js`)
+
+| Ruta pública | Respuesta |
+| --- | --- |
+| `GET /api/azure/health` | hostname de la VM, SO, versión de Node, uptime y commit desplegado |
+| `GET /api/azure/db` | estado de Supabase (HTTP, `departments`, latencia) y de PostgreSQL local |
+
+Node puro sin dependencias npm, solo en `127.0.0.1:3000`, ejecutado por systemd (`azure/systemd/baqueano-api.service`) como usuario sin privilegios, con reinicio automático. Se usa systemd en lugar de PM2 porque viene incluido en Ubuntu y no requiere paquetes npm globales; la función es la misma (reinicio y arranque con la VM). Probado en local: 200 en ambas rutas (Supabase devolvió 17 departamentos), 404 en rutas desconocidas, 405 en POST, caché de 30 s e inaccesible desde fuera de localhost.
+
+### Conciliación con la guía de 36 pasos
+
+| Paso de la guía | Decisión |
+| --- | --- |
+| 8–11, 22, 25, 32 (apt, Node, Nginx, PM2, Certbot, ufw) | Automatizados en `setup-server.sh` y `enable-https.sh` |
+| 13 (clonar en `/var/www/baqueano-repo`) | Se clona en `/home/baqueano/APP-BAQUEANO`: el código fuente queda **fuera** del directorio que sirve Nginx |
+| 14 (`rsync` de todo `website/`) | **No se usa**: publicaría `docs/`, `scripts/`, `apps/`, `packages/` y archivos `.md`. Se usa el build existente con lista permitida (`build-hostinger-static.mjs`) dentro de `deploy.sh` |
+| 15 (configuración Nginx básica) | Sustituida por `azure/nginx/baqueano.conf`: misma idea, más redirecciones heredadas, cabeceras de seguridad equivalentes a `firebase.json` y bloqueo de archivos ocultos |
+| 19 (PostgreSQL en la VM) | Incorporado, solo `localhost` |
+| 20–21 (API Node → Supabase) | Incorporado (`/api/azure/*`); las escrituras con `service_role` llegan en el lote P1-10 |
+| 27 (www → dominio principal) | Incorporado en Nginx |
+| 29–30 (Firebase y Supabase) | Paso 7 de esta guía |
+| 33 (apagado automático) | Ver "Costes" |
+| 34 (evidencias) | `docs/evidencias/azure/README.md` |
 
 ## 📦 QUÉ — Procedimiento
 
@@ -109,6 +144,23 @@ Después, `bash ~/APP-BAQUEANO/azure/deploy.sh`. Comprimir los videos antes (< 5
 sudo CERTBOT_EMAIL=<correo_admin> bash ~/APP-BAQUEANO/azure/enable-https.sh
 ```
 
+### Paso 7 — Autorizar el nuevo dominio en Firebase y Supabase
+
+Sin este paso, el inicio de sesión con Google falla en `baqueanonicaragua.com`.
+
+1. **Firebase Console** → Authentication → Settings → **Authorized domains** → añadir `baqueanonicaragua.com` y `www.baqueanonicaragua.com`.
+2. **Google Cloud Console** → APIs y servicios → Credenciales → cliente OAuth web (`578585227888-47unu…`) → *Orígenes de JavaScript autorizados*: añadir `https://baqueanonicaragua.com` y `https://www.baqueanonicaragua.com`.
+3. **Supabase** → Authentication → URL Configuration: *Site URL* `https://baqueanonicaragua.com`; añadir ambos dominios y `https://app-baqueano.web.app` en *Redirect URLs*. (PostgREST no requiere configurar CORS para la clave publicable.)
+
+### Paso 8 — Comprobación final
+
+```bash
+curl -I http://baqueanonicaragua.com            # 301 → https
+curl -I https://www.baqueanonicaragua.com       # 301 → https://baqueanonicaragua.com
+curl https://baqueanonicaragua.com/health       # commit desplegado
+curl https://baqueanonicaragua.com/api/azure/db # Supabase ok + PostgreSQL local ok
+```
+
 ### Despliegues posteriores y rollback
 
 ```bash
@@ -124,6 +176,9 @@ bash ~/APP-BAQUEANO/azure/deploy.sh --rollback  # release anterior
 | SSH | `ssh -v baqueano@<IP>` (autenticación por clave) |
 | Puertos | Captura de las reglas del NSG; `nmap -Pn <IP>` debe mostrar solo 22, 80 y 443 |
 | No localhost | `curl https://baqueanonicaragua.com/health` → JSON con `commit` |
+| BD en Azure | `systemctl status postgresql`; `ss -ltnp \| grep 5432` → solo `127.0.0.1` |
+| Azure → Supabase | `curl https://baqueanonicaragua.com/api/azure/db` → `"ok":true,"departments":17` |
+| Lista completa de capturas | [docs/evidencias/azure/README.md](evidencias/azure/README.md) |
 | GitHub = producción | El `commit` de `/health` coincide con `git rev-parse --short origin/main` |
 | HTTPS | `curl -I http://baqueanonicaragua.com` → 301 a `https://` |
 | Seguridad | `curl -I https://baqueanonicaragua.com` muestra CSP, HSTS y X-Frame-Options |
@@ -142,5 +197,5 @@ bash ~/APP-BAQUEANO/azure/deploy.sh --rollback  # release anterior
 
 ### Pendiente (lotes siguientes)
 
-- API propia en Azure (`/api/baqui`, escrituras del Ops Center con `service_role` solo en el servidor), lotes P1-8 y P1-10.
+- Ampliar la API de Azure con `/api/baqui` y las escrituras del Ops Center con `service_role` solo en el servidor (lotes P1-8 y P1-10). La prueba CRUD de punta a punta del Sprint 3 (`13-crud.png`) depende de la integración Firebase Auth ↔ Supabase (lote P1-4/P1-5).
 - GitHub Actions para desplegar por SSH en cada push a `main`.

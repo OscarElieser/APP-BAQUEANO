@@ -93,6 +93,12 @@ echo "==> 6/6 Activando release"
 ln -sfn "${RELEASE}" "${WEB_ROOT}/current.tmp" && mv -Tf "${WEB_ROOT}/current.tmp" "${WEB_ROOT}/current"
 reload_nginx
 
+# La API se ejecuta desde este mismo checkout: se reinicia para que corra el
+# mismo commit que el Website (GitHub = producción).
+if systemctl list-unit-files baqueano-api.service >/dev/null 2>&1; then
+  sudo systemctl restart baqueano-api
+fi
+
 # Limpieza de releases antiguas (se conservan las ${KEEP} más recientes).
 ls -1dt "${RELEASES}"/*/ | grep -v bootstrap | tail -n +$((KEEP + 1)) | xargs -r rm -rf
 
