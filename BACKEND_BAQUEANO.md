@@ -1,5 +1,7 @@
 # 🧭 BAQUEANO ECOSYSTEM — ARQUITECTURA DEL BACKEND CENTRAL
 
+> **DOCUMENTO HISTÓRICO PARCIALMENTE SUSTITUIDO:** La regla “Firebase first, Supabase fallback” ya no es vigente para información. Consultar [`docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md): Firebase conserva identidad; Supabase es la fuente única de información; el Website HTML/CSS/JS puede consumirla dinámicamente.
+
 <!--
 ============================================================================
 🧭 BAQUEANO NICARAGUA — ESPECIFICACIÓN Y ARQUITECTURA DEL BACKEND

@@ -1,5 +1,7 @@
 # 🧭 ADR-001: MANTENIMIENTO DE FIREBASE COMO DATASTORE PRINCIPAL
 
+> **ESTADO: SUSTITUIDO.** Esta decisión se conserva como registro histórico, pero ya no gobierna BAQUEANO. Supabase es la fuente única de información y Firebase se limita a identidad y Hosting técnico. Véase [`../../../docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](../../../docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md).
+
 ## 🎯 1. Contexto (Context)
 Baqueano evalúa si la evolución hacia una arquitectura institucional y multi-organización justifica la migración de Cloud Firestore hacia un motor relacional SQL (PostgreSQL, Cloud SQL) o una arquitectura políglota compleja.
 

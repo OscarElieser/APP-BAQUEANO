@@ -1,5 +1,7 @@
 # 🧭 BAQUEANO ECOSYSTEM — ESPECIFICACIÓN TÉCNICA DE SUPABASE
 
+> **DOCUMENTO HISTÓRICO PARCIALMENTE SUSTITUIDO:** Supabase ya no se define como respaldo de información. Es la fuente principal de toda la información dinámica y operativa. La decisión vigente se encuentra en [`docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md).
+
 <!--
 ============================================================================
 🧭 BAQUEANO NICARAGUA — ESPECIFICACIÓN Y ARQUITECTURA DE SUPABASE

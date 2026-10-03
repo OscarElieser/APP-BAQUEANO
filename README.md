@@ -1,5 +1,7 @@
 # 🌋 BAQUEANO NICARAGUA
 
+> **Arquitectura vigente:** [`docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md). El Website público puede conservar HTML/CSS/JavaScript y cargar dinámicamente toda la información desde Supabase. Firebase conserva identidad y Hosting técnico; Hostinger administra el dominio canónico.
+
 ## Plataforma Tecnológica para Turismo Sostenible, Conservación y Bienestar Comunitario
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-3.7+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)

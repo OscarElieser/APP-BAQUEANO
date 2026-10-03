@@ -2782,4 +2782,111 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
   5. Documentación y pruebas: ~50 MB.
 - **Peso real de la web de producción:** 639.7 MB descomprimido (de los cuales 421 MB son las 94 pistas MP3 tradicionales del reproductor cultural y 62 MB son videos web optimizados).
 - **Artefacto limpio empaquetado para Hostinger:** website/dist-hostinger.zip (610.3 MB), verificado con 10 rutas críticas aprobadas por erify-hostinger-static.mjs, libre de 
-ode_modules, .next, scripts y código privado.
+
+
+## 2026-10-02 — Sincronización Completa desde GitHub hacia el Repositorio Local
+
+- **Solicitud recibida:** *"trae todo de github para aca"*
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Traer e incorporar de manera íntegra y segura todos los commits, ramas y cambios remotos existentes en GitHub (`origin/main`) a la copia local de trabajo en Windows.
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. Ejecución de `git status` y verificación de ramas y remotos.
+  2. Ejecución de `git fetch --all --prune` para actualizar todas las referencias remotas.
+  3. Ejecución de `git pull --ff-only origin main` realizando un avance rápido (*fast-forward*) limpio sin conflictos.
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - **Commit remoto incorporado:** `18329d1` (*feat(sync): actualizacion integral de arquitectura, traducciones, mapas y resolucion hostinger*).
+  - **Archivos sincronizados:** 61 archivos actualizados (+10,835 inserciones, -3,503 eliminaciones) abarcando Supabase migrations & functions, `website/` (i18n, scripts de Hostinger, vistas, estilos, traducciones de locales) y documentación de arquitectura.
+  - **Estado Git actual:** Rama `main` 100% al día con `origin/main`, working tree limpio (`nothing to commit, working tree clean`).
+
+---
+
+## 2026-10-02 — Configuración de Stack Profesional de 50 Agent Skills (Web, Mobile, IA)
+
+- **Solicitud recibida:**
+  > *"claude plugin install figma@claude-plugins-official,claude plugin install frontend-design@claude-plugins-official,https://github.com/leonxlnx/taste-skill QUIERO QUE CONFIGURES MI ENTORNO DE DESARROLLO COMO UN STACK PROFESIONAL DE AGENT SKILLS PARA DESARROLLO WEB, MOBILE E INTELIGENCIA ARTIFICIAL. OBJETIVO: Seleccionar, evaluar e instalar las 50 mejores Agent Skills disponibles actualmente para Claude Code, priorizando calidad, mantenimiento, seguridad, adopción y compatibilidad..."*
+- **🎯 POR QUÉ (Why / Propósito):**
+  - Dotar al entorno de trabajo de un stack de grado profesional para desarrollo Web, Mobile (Flutter/Android), Backend, Bases de Datos, Seguridad, DevOps, Testing e IA, convirtiendo el asistente en un equipo multifuncional de ingeniería (Senior UI/UX, Frontend, Backend, DB Architect, Cybersecurity, DevOps, QA, Flutter Dev, AI Engineer, Software Architect).
+- **⚙️ CÓMO (How / Arquitectura & Implementación):**
+  1. Identificar estado del entorno (Claude Code CLI / plugins / `skills` CLI / directorio `~/.claude/skills/`).
+  2. Evaluar y auditar rigurosamente las 50 mejores skills según las categorías especificadas (Frontend, Backend, DB, Seguridad, QA, DevOps, Mobile, IA, Arquitectura/Productividad).
+  3. Comprobar fuentes prioritarias: oficiales (Anthropic, Vercel Labs, tecnologías oficiales), verificadas y comunidad reconocida, sin scripts sospechosos ni riesgos.
+  4. Realizar la instalación global en `~/.claude/skills/` y/o plugins oficiales correspondientes mediante `npx skills add ... -g -y` o comandos oficiales.
+  5. Generar reporte estructurado y validación final de disponibilidad.
+- **📦 QUÉ (What / Funcionalidad & Entregables):**
+  - Entorno configurado con las 50 Agent Skills seleccionadas y validadas.
+  - Tabla de evaluación técnica, categorías y estado de instalación.
+
+
+## 2026-10-02 — Solicitud recibida mediante archivo adjunto
+
+- 🎯 **POR QUÉ:** Preservar la solicitud antes de cualquier lectura, análisis o ejecución, cumpliendo la bitácora antigolpes.
+- ⚙️ **CÓMO:** Se registra que el usuario solicitó leer y actuar sobre `C:\Users\keben\.codex\attachments\74141d02-5aca-4742-b3b5-1222f0424feb\pasted-text.txt`.
+- 📦 **QUÉ:** Solicitud pendiente de interpretación y ejecución; el contenido del adjunto aún no ha sido leído en este punto.
+## 2026-10-02 — Auditoría de fuentes de datos completada
+
+- 🎯 **POR QUÉ:** Establecer el estado real del repositorio antes de evolucionar hacia Firebase para identidad, Supabase para datos y Hostinger para dominio/DNS.
+- ⚙️ **CÓMO:** Se realizó una revisión estática y no destructiva de `website/`, `functions/`, `supabase/`, `lib/`, `admin/`, `assets/`, `src/`, reglas y configuración raíz. Se separó evidencia de código, semillas, datos simulados y conexiones que todavía requieren validación remota.
+- 📦 **QUÉ:** Se creó `docs/audit/DATA_SOURCE_MAP.md` con la matriz obligatoria de módulo, información, origen actual, origen objetivo, estado, riesgo y migración necesaria; incluye inventarios, conflictos arquitectónicos, módulos desconectados y secuencia segura de migración.
+- **Hallazgo central:** Firestore y catálogos locales siguen actuando como fuente operativa en varios flujos; Supabase posee esquema amplio, pero aún funciona parcialmente como ruta paralela o respaldo.
+- **Validación:** `git diff --check` finalizó sin errores para el documento y la bitácora. No se ejecutaron `flutter analyze` ni `flutter test` porque no hubo cambios de código Flutter, Android ni lógica ejecutable.
+- **Estado:** Auditoría local completada. Pendiente futuro, con autorización y acceso: verificar de solo lectura colecciones y recuentos remotos, migraciones/RLS aplicadas, buckets y DNS/SSL/canonical desplegados.
+## 2026-10-02 — Supabase confirmado como fuente principal de información
+
+- 🎯 **POR QUÉ:** Evitar que implementaciones o decisiones futuras vuelvan a tratar Firestore, archivos locales o almacenamiento del navegador como fuente canónica de información.
+- ⚙️ **CÓMO:** Se adopta como regla vigente que Firebase conserva identidad/autenticación y Hosting técnico, mientras Supabase almacena toda la información dinámica y operativa de BAQUEANO.
+- 📦 **QUÉ:** Toda función nueva o migrada debe leer y escribir información en Supabase. Firestore, JSON, HTML, JavaScript, Dart y almacenamiento local existentes solo pueden mantenerse temporalmente como fuentes heredadas, respaldo o caché durante una migración verificada, nunca como autoridad paralela.
+## 2026-10-02 — Nueva solicitud recibida mediante plan adjunto
+
+- 🎯 **POR QUÉ:** Preservar la solicitud antes de leerla o ejecutarla, conforme al registro previo obligatorio.
+- ⚙️ **CÓMO:** Se registra el archivo `C:\Users\keben\.codex\attachments\97c7ab40-8f25-40f0-80dc-c94a669d1b3b\pasted-text.txt` como fuente de la nueva instrucción.
+- 📦 **QUÉ:** Contenido pendiente de lectura y ejecución. Se mantiene como restricción vigente que Supabase es la fuente principal de toda la información dinámica y operativa.
+## 2026-10-02 — Plan de tres sprints convertido en backlog operativo
+
+- 🎯 **POR QUÉ:** Transformar el plan adjunto del Hackathon Nicaragua 2026 en trabajo trazable, priorizado y demostrable sin sustituir la arquitectura oficial.
+- ⚙️ **CÓMO:** Se cruzó la solicitud con `docs/audit/DATA_SOURCE_MAP.md`, `docs/MARKETING_4C_BAQUEANO.md`, `DESIGN.md` y las restricciones de seguridad de Supabase. Se definieron dependencias, prioridades, Definition of Done, evidencias y estado inicial verificable.
+- 📦 **QUÉ:** Se crearon `docs/planning/BAQUEANO_3_SPRINT_EXECUTION_PLAN.md` y `docs/planning/BAQUEANO_TRELLO_IMPORT.csv`.
+- **Resultado:** 72 tarjetas con IDs únicos: 20 de Sprint 1, 26 de Sprint 2 y 26 de Sprint 3. `S1-01` figura terminada por contar con auditoría verificable; las demás no se declararon completas sin evidencia.
+- **Arquitectura aplicada:** Firebase Authentication conserva identidad; Supabase guarda toda la información; Hostinger administra dominio/DNS; Firebase Hosting permanece como respaldo técnico; Azure queda aislado al cumplimiento de la rúbrica.
+- **Validación:** El CSV fue leído correctamente con PowerShell, contiene 72 filas y 72 IDs únicos. `git diff --check` no reportó errores en los nuevos entregables.
+- **Estado externo:** No se creó ni modificó un tablero Trello remoto porque esta sesión no dispone de una conexión Trello autorizada. El CSV queda preparado para importación o automatización posterior.
+## 2026-10-02 — Website dinámico sin migración obligatoria de framework
+
+- 🎯 **POR QUÉ:** Preservar el Website existente y evitar asociar incorrectamente contenido dinámico con una migración forzosa a React o Next.js.
+- ⚙️ **CÓMO:** Se establece que HTML, CSS y JavaScript pueden mantenerse como capa de presentación, cargando toda la información dinámica desde Supabase y usando Firebase exclusivamente para identidad/autenticación y Hosting técnico.
+- 📦 **QUÉ:** Flujo oficial confirmado: `baqueanonicaragua.com → Website → Firebase Auth + Supabase DB → BAQUI`; `app-baqueano.web.app` permanece como URL técnica y de respaldo. La instrucción completa del adjunto `C:\Users\keben\.codex\attachments\2fbc775d-a3c7-47a7-ac54-b5e07f9a3d17\pasted-text.txt` queda pendiente de lectura en este punto.
+## 2026-10-02 — Arquitectura Website dinámico formalizada
+
+- 🎯 **POR QUÉ:** Eliminar la ambigüedad que equiparaba Website dinámico con una migración obligatoria a React o Next.js.
+- ⚙️ **CÓMO:** Se creó un documento canónico que permite conservar HTML/CSS/JavaScript como presentación y define Supabase como autoridad de información, Firebase Authentication como identidad, Hostinger como dominio/DNS, BAQUI como inteligencia y Firebase Hosting como respaldo técnico.
+- 📦 **QUÉ:** Se añadió `docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`; `README.md` enlaza la decisión. `BACKEND_BAQUEANO.md`, `SUPABASE_BAQUEANO.md` y `website/docs/adr/ADR-001_FIREBASE_DATASTORE.md` quedaron marcados como históricos o sustituidos en los puntos incompatibles, sin eliminar contenido.
+- **Decisión:** React y Next.js son opcionales. El Website vigente puede renderizar datos de Supabase mediante JavaScript y plantillas dinámicas, sin crear una página manual por municipio.
+- **Seguridad:** La clave pública solo puede operar bajo RLS; la clave de servicio permanece exclusivamente en backend seguro. Los flujos sensibles requieren autorización y verificación del token Firebase.
+- **Validación:** `git diff --check` finalizó sin errores para los documentos modificados. No hubo cambios ejecutables ni modificaciones en `ios/` o en el directorio Flutter `web/`.
+
+---
+
+## 2026-10-02 — Avance Verificable: Stack Profesional de 50+ Agent Skills Configurado
+
+- 🎯 **POR QUÉ:** Dotar a Claude Code y al entorno de desarrollo del usuario de un ecosistema balanceado de nivel producción, convirtiendo al asistente en un equipo multifuncional de ingeniería (Frontend, Backend, DB, Seguridad, DevOps, Mobile Flutter, QA, AI).
+- ⚙️ **CÓMO:**
+  1. Se evaluaron repositorios canónicos (`anthropics/skills`, `anthropics/claude-plugins-official`, `vercel-labs/agent-skills`, `vercel-labs/skills`, `supabase/agent-skills`, `addyosmani/agent-skills`, `upstash/context7`, `obra/superpowers`, `leonxlnx/taste-skill`, `vp-k/flutter-craft`).
+  2. Se auditaron contenidos, scripts y permisos contra riesgos de seguridad (cero código malicioso, cero descargas ocultas, cero fuga de credenciales).
+  3. Se instalaron globalmente mediante `npx skills add -g -y -a claude-code` y sincronización directa en `~/.claude/skills/`.
+  4. Se validaron las 56 skills con scripts de introspección de frontmatter y comprobación de `SKILL.md`.
+- 📦 **QUÉ:**
+  - 56 Agent Skills globales verificadas e instaladas en `~/.claude/skills/` (cubriendo con creces la meta de 50).
+  - Distribución completa por 9 disciplinas: Frontend/UI/UX (10), Backend/APIs (7), Bases de Datos (6), Seguridad (6), Testing/QA (5), DevOps/Cloud (5), Mobile/Flutter (5), Inteligencia Artificial/RAG (6), Arquitectura/Productividad (6).
+  - Auditoría de seguridad: 100% segura, libre de binarios no verificados o llamadas remotas maliciosas.
+## 2026-10-02 — Solicitud de limpieza de archivos no utilizados
+
+- 🎯 **POR QUÉ:** Reducir basura, temporales, duplicados y archivos sin uso que aumentan el peso y la confusión del repositorio.
+- ⚙️ **CÓMO:** Se realizará primero una auditoría de referencias, configuración, control de versiones y artefactos generados. Los candidatos se clasificarán por certeza y riesgo antes de cualquier eliminación material.
+- 📦 **QUÉ:** Solicitud recibida para eliminar únicamente archivos que no funcionan o no se utilizan. No se autoriza borrar datos, fuentes heredadas pendientes de migración, `ios/`, el directorio Flutter `web/`, respaldos necesarios ni archivos cuya función sea ambigua.
+- **Estado:** Auditoría de limpieza pendiente; todavía no se ha eliminado ningún archivo.
+## 2026-10-02 — Auditoría de limpieza completada, eliminación pendiente
+
+- 🎯 **POR QUÉ:** Evitar una eliminación masiva basada únicamente en nombres, protegiendo código, datos heredados y archivos rastreados.
+- ⚙️ **CÓMO:** Se revisaron referencias, reglas de `.gitignore`, existencia y estado Git. Los objetivos se documentaron en `docs/audit/UNUSED_FILES_CLEANUP.md`.
+- 📦 **QUÉ:** Se identificaron como regenerables `build/`, `.dart_tool/`, `node_modules/`, `.firebase/`, `supabase/.temp/`, `.pnpm-store/` y `flutter_01.log`. También se identificaron tres respaldos rastreados sin referencias: `temp_old_admin.html`, `temp_old_ops.js` y `temp_old_ops2.js`.
+- **Conservar:** `.runtime/`, `.snapshots/`, fuentes heredadas, catálogos, migraciones, configuración, documentación histórica y cualquier información pendiente de migrar a Supabase.
+- **Estado:** No se eliminó nada todavía. La operación destructiva espera confirmación explícita sobre los grupos A y B del manifiesto.
