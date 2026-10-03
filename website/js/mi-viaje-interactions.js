@@ -402,13 +402,30 @@
     if (tabId === 'mapa') initLeafletMap();
   };
 
-  // ─── Mapa Leaflet ──────────────────────────────────────────────────────────
+  // ─── Mapa Leaflet (Carga Dinámica Bajo Demanda) ───────────────────────────
   var bqMap = null;
 
   function initLeafletMap() {
     if (bqMap) { try { bqMap.invalidateSize(); } catch(e) {} return; }
     var el = document.getElementById('leafletMapContainer');
-    if (!el || typeof L === 'undefined') return;
+    if (!el) return;
+
+    if (typeof L === 'undefined') {
+      if (!document.getElementById('bq-leaflet-css')) {
+        var link = document.createElement('link');
+        link.id = 'bq-leaflet-css';
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+        document.head.appendChild(link);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+      script.crossOrigin = 'anonymous';
+      script.onload = initLeafletMap;
+      document.body.appendChild(script);
+      return;
+    }
+
     bqMap = L.map('leafletMapContainer', { scrollWheelZoom: false }).setView([12.1, -86.2], 7);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors', maxZoom: 18
