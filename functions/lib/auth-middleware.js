@@ -21,11 +21,50 @@
 
 const { getAuth } = require("firebase-admin/auth");
 
+// Matriz oficial de cuentas privilegiadas (definida por el propietario, 2026-10-03):
+//   super_admin → oscarelieser.informatica.inatec@gmail.com
+//   admin       → byoscarelieser@gmail.com, vigoronmixt@gmail.com
+// OFFICIAL_ADMIN_EMAILS conserva las tres cuentas (todas son, como mínimo, admin).
 const OFFICIAL_ADMIN_EMAILS = new Set([
   "oscarelieser.informatica.inatec@gmail.com",
   "byoscarelieser@gmail.com",
   "vigoronmixt@gmail.com"
 ]);
+
+const OFFICIAL_SUPER_ADMIN_EMAILS = new Set([
+  "oscarelieser.informatica.inatec@gmail.com"
+]);
+
+const ADMIN_CLAIM_ROLES = new Set(["admin", "superadmin", "super_admin"]);
+const SUPER_ADMIN_CLAIM_ROLES = new Set(["superadmin", "super_admin"]);
+
+// Un correo solo cuenta como identidad si Firebase confirmó que el usuario lo
+// controla (email_verified). Así nadie puede registrarse con correo/contraseña
+// usando una dirección oficial ajena y heredar sus privilegios.
+function verifiedEmail(decodedToken) {
+  if (!decodedToken || decodedToken.email_verified !== true || typeof decodedToken.email !== "string") {
+    return null;
+  }
+  return decodedToken.email.trim().toLowerCase();
+}
+
+// Decisión pura (sin red ni SDK) para poder probarla: ¿es administrador?
+// Custom Claims solo los puede emitir el Admin SDK, por eso se aceptan tal cual.
+function isAdminIdentity(decodedToken) {
+  if (!decodedToken) return false;
+  if (decodedToken.admin === true || ADMIN_CLAIM_ROLES.has(decodedToken.role)) return true;
+  const email = verifiedEmail(decodedToken);
+  return Boolean(email && OFFICIAL_ADMIN_EMAILS.has(email));
+}
+
+// Decisión pura: ¿es superadministrador? Solo claim super_admin o el correo
+// fundador verificado; las cuentas admin NO heredan este nivel.
+function isSuperAdminIdentity(decodedToken) {
+  if (!decodedToken) return false;
+  if (SUPER_ADMIN_CLAIM_ROLES.has(decodedToken.role)) return true;
+  const email = verifiedEmail(decodedToken);
+  return Boolean(email && OFFICIAL_SUPER_ADMIN_EMAILS.has(email));
+}
 
 function extractBearerToken(request) {
   const authHeader = request.headers.authorization || request.headers.Authorization;
@@ -56,10 +95,8 @@ async function verifyAdmin(request) {
   if (!authResult.ok) return authResult;
 
   const user = authResult.user;
-  const isEmailAdmin = user.email && OFFICIAL_ADMIN_EMAILS.has(user.email.toLowerCase());
-  const isClaimAdmin = user.admin === true || user.role === "admin" || user.role === "superadmin" || user.role === "super_admin";
 
-  if (!isEmailAdmin && !isClaimAdmin) {
+  if (!isAdminIdentity(user)) {
     return { ok: false, status: 403, error: { code: "FORBIDDEN", message: "Acceso denegado: se requieren permisos administrativos." } };
   }
 
@@ -71,11 +108,8 @@ async function verifySuperAdmin(request) {
   if (!authResult.ok) return authResult;
 
   const user = authResult.user;
-  const isSuper = user.role === "superadmin" ||
-    user.role === "super_admin" ||
-    (user.email && OFFICIAL_ADMIN_EMAILS.has(user.email.toLowerCase()));
 
-  if (!isSuper) {
+  if (!isSuperAdminIdentity(user)) {
     return { ok: false, status: 403, error: { code: "FORBIDDEN", message: "Acceso denegado: se requieren privilegios de Super Administrador." } };
   }
 
@@ -87,5 +121,8 @@ module.exports = {
   verifyAdmin,
   verifySuperAdmin,
   extractBearerToken,
-  OFFICIAL_ADMIN_EMAILS
+  isAdminIdentity,
+  isSuperAdminIdentity,
+  OFFICIAL_ADMIN_EMAILS,
+  OFFICIAL_SUPER_ADMIN_EMAILS
 };

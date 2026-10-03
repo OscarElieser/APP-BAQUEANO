@@ -33,11 +33,15 @@
   const FAVS_STORAGE_KEY = 'baqueano_favs';
 
   // Cuentas de Alta Jerarquía Operativa (Admin & Auditor)
+  // Matriz oficial (propietario, 2026-10-03): super_admin = cuenta fundadora;
+  // admin = byoscarelieser y vigoronmixt. Esta tabla SOLO decide qué ve la
+  // interfaz (enlace al Ops Center); los permisos reales los aplican las reglas
+  // de Firestore/Storage y Functions, y únicamente con correo verificado.
   const PRIVILEGED_ACCOUNTS = {
     'oscarelieser.informatica.inatec@gmail.com': {
       name: 'Oscar Elieser',
-      role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
-      navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
+      role: 'super_admin', roleLabel: 'Superadministrador', navTitle: 'Ops Center',
+      navDesc: 'Comando & Gestión', navBadge: '● Super Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'byoscarelieser@gmail.com': {
       name: 'Oscar Elieser',
@@ -45,7 +49,7 @@
       navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     },
     'vigoronmixt@gmail.com': {
-      name: 'Auditor Baqueano',
+      name: 'Administrador Baqueano',
       role: 'admin', roleLabel: 'Administrador General', navTitle: 'Ops Center',
       navDesc: 'Comando & Gestión', navBadge: '● Admin', targetUrl: 'admin.html', isPrivileged: true
     }
@@ -168,7 +172,8 @@
     }
 
     const emailKey = (user.email || '').trim().toLowerCase();
-    if (PRIVILEGED_ACCOUNTS[emailKey]) {
+    // El enlace al Ops Center solo aparece si Firebase verificó el correo.
+    if (PRIVILEGED_ACCOUNTS[emailKey] && user.emailVerified === true) {
       const priv = PRIVILEGED_ACCOUNTS[emailKey];
       return {
         isPrivileged: true,
@@ -562,7 +567,9 @@
 
     loginAsExplorer: function(name, email) {
       const explorerEmail = (email || 'explorador@baqueano.ni').trim().toLowerCase();
-      const privileged = PRIVILEGED_ACCOUNTS[explorerEmail];
+      // Acceso local sin Firebase: NUNCA concede privilegios, aunque se escriba
+      // un correo oficial (antes bastaba con teclearlo para obtener rol admin).
+      const privileged = null;
       const session = {
         firebaseUid: 'usr_' + Date.now(),
         name: (name || (privileged ? 'Administrador' : 'Explorador Baqueano')).trim(),
@@ -572,7 +579,7 @@
         role: privileged ? privileged.role : 'explorer',
         roleLabel: privileged ? privileged.roleLabel : 'Explorador',
         memberSince: new Date().toLocaleDateString('es-NI', { month: 'long', year: 'numeric' }),
-        emailVerified: true,
+        emailVerified: false, // Sesión local: el correo no fue verificado por Firebase.
         providerIds: ['baqueano.identity'],
         isLoggedIn: true,
         settings: { language: 'es', currency: 'USD' },
@@ -760,7 +767,8 @@
     }
     const existing = loadSession();
     const email = (firebaseUser.email || '').trim().toLowerCase();
-    const privileged = PRIVILEGED_ACCOUNTS[email];
+    // Rol privilegiado solo con correo verificado por Firebase.
+    const privileged = firebaseUser.emailVerified === true ? PRIVILEGED_ACCOUNTS[email] : null;
     const createdAt = firebaseUser.metadata && firebaseUser.metadata.creationTime
       ? new Date(firebaseUser.metadata.creationTime).toLocaleDateString('es-NI', { month: 'long', year: 'numeric' })
       : '';

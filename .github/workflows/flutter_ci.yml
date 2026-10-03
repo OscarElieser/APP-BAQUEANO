@@ -36,8 +36,36 @@ jobs:
       - name: 🧪 Execute Automated Test Suite (100% Pass Required)
         run: flutter test --coverage
 
-      - name: 🏗️ Build Android App Bundle (Release)
+      # 🎯 POR QUÉ: android/app/build.gradle.kts prohíbe firmar release con la clave debug
+      #    (correcto), así que sin keystore el AAB release falla en cada push.
+      # ⚙️ CÓMO: si existen los secretos de firma, se reconstruyen key.properties y el
+      #    keystore y se compila el AAB release; si no, se compila un APK debug que
+      #    igualmente valida que Android compila.
+      # 📦 QUÉ: secretos ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD,
+      #    ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD (Settings → Secrets → Actions).
+      - name: 🔐 Preparar firma release (solo si hay secretos)
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > android/app/upload-keystore.jks
+            printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=upload-keystore.jks\n' \
+              "$STORE_PASSWORD" "$KEY_PASSWORD" "$KEY_ALIAS" > android/key.properties
+            echo "SIGNED_BUILD=true" >> "$GITHUB_ENV"
+          else
+            echo "::notice::Sin secretos de firma: se compila APK debug para validar Android."
+          fi
+
+      - name: 🏗️ Build Android App Bundle (Release firmado)
+        if: env.SIGNED_BUILD == 'true'
         run: flutter build appbundle --release
+
+      - name: 🏗️ Build Android APK (Debug, validación de compilación)
+        if: env.SIGNED_BUILD != 'true'
+        run: flutter build apk --debug
 
   backend_validation:
     name: ⚡ Genkit Backend Node Validation

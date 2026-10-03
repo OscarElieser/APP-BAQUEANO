@@ -1,0 +1,16 @@
+# =====================================================
+# BAQUEANO — Temporizador del despliegue automático
+# =====================================================
+# PROPÓSITO: comprobar cada 2 minutos si hay un commit nuevo en main.
+# Ver estado: systemctl list-timers baqueano-autodeploy.timer
+[Unit]
+Description=BAQUEANO comprobar GitHub main cada 2 minutos
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+RandomizedDelaySec=15s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,111 @@
+# =====================================================
+# BAQUEANO — Despliegue continuo a producción
+# =====================================================
+#
+# PROPÓSITO:
+#   Cada push a main actualiza la página sin pasos manuales y deja evidencia
+#   pública (pestaña Actions) de que producción = GitHub (Sprint 3).
+#
+# ARQUITECTURA:
+#   1. checks          → valida scripts de Azure y la API (sintaxis).
+#   2. verify-azure    → la VM se actualiza SOLA (azure/autodeploy.sh, cada
+#                        2 min, modelo pull). Este job espera a que
+#                        https://baqueanonicaragua.com/health muestre el commit
+#                        subido y verifica API, Supabase y cabeceras.
+#   3. firebase-hosting→ publica el mismo Website en app-baqueano.web.app
+#                        (respaldo técnico) si existe el secreto
+#                        FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO.
+#
+# SEGURIDAD:
+#   - GitHub no tiene acceso SSH a la VM (sin claves del servidor en GitHub).
+#   - Permisos mínimos del GITHUB_TOKEN (contents: read).
+#   - Solo un despliegue a la vez (concurrency).
+#
+# RELACIÓN: azure/autodeploy.sh, azure/deploy.sh, docs/AZURE_DEPLOYMENT.md.
+# =====================================================
+name: 🚀 BAQUEANO Producción (Azure + Firebase)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    name: ✅ Validación de scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Sintaxis de scripts Azure (bash -n)
+        run: for f in azure/*.sh; do bash -n "$f"; done
+      - name: Sintaxis de la API Azure (node --check)
+        run: node --check azure/api/server.js
+      - name: Build estático del Website (misma lista permitida que producción)
+        working-directory: website
+        run: node scripts/build-hostinger-static.mjs
+
+  verify-azure:
+    name: ☁️ Verificar despliegue en Azure
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SITE: https://baqueanonicaragua.com
+    steps:
+      - name: Esperar a que /health sirva este commit (autodeploy cada 2 min)
+        run: |
+          short="${GITHUB_SHA::7}"
+          for i in $(seq 1 40); do
+            deployed="$(curl -fsS --max-time 10 "$SITE/health" | sed -nE 's/.*"commit":"([0-9a-f]+)".*/\1/p' || true)"
+            echo "Intento $i: producción=${deployed:-?} · esperado=${short}"
+            if [[ -n "$deployed" && "$short" == "$deployed"* ]]; then
+              echo "✅ Producción sirve el commit ${short}"; exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::Producción no sirvió ${short} en 13 minutos. Revise en la VM: journalctl -u baqueano-autodeploy -n 100"
+          exit 1
+      - name: API Azure y conexión con Supabase
+        run: |
+          curl -fsS --max-time 15 "$SITE/api/azure/health"; echo
+          body="$(curl -fsS --max-time 20 "$SITE/api/azure/db")"; echo "$body"
+          echo "$body" | grep -q '"provider":"supabase-postgresql","ok":true' || { echo "::error::Supabase no respondió desde Azure"; exit 1; }
+      - name: Cabeceras de seguridad y redirecciones
+        run: |
+          headers="$(curl -fsSI --max-time 15 "$SITE/")"
+          for h in content-security-policy strict-transport-security x-frame-options x-content-type-options; do
+            echo "$headers" | grep -qi "^$h:" || { echo "::error::Falta la cabecera $h"; exit 1; }
+          done
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://baqueanonicaragua.com/)" = "301"
+          test "$(curl -s -o /dev/null -w '%{http_code}' "$SITE/README.md")" = "404"
+          echo "✅ Cabeceras, redirección HTTPS y bloqueo de archivos internos correctos"
+
+  firebase-hosting:
+    name: 🔥 Publicar respaldo en Firebase Hosting
+    needs: checks
+    runs-on: ubuntu-latest
+    env:
+      HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aviso si falta el secreto
+        if: env.HAS_FIREBASE_SECRET != 'true'
+        run: echo "::notice::Secreto FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO no configurado; se omite Firebase Hosting (ver docs/AZURE_DEPLOYMENT.md)."
+      - name: Desplegar Hosting (canal live)
+        if: env.HAS_FIREBASE_SECRET == 'true'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO }}
+          projectId: app-baqueano
+          channelId: live

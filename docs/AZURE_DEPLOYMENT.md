@@ -162,6 +162,34 @@ curl https://baqueanonicaragua.com/health       # commit desplegado
 curl https://baqueanonicaragua.com/api/azure/db # Supabase ok + PostgreSQL local ok
 ```
 
+### Despliegue automático (cada push a `main`)
+
+```text
+git push origin main
+      │
+      ├─► VM Azure: baqueano-autodeploy.timer (cada 2 min) → azure/autodeploy.sh
+      │      compara origin/main con /health → si cambió, ejecuta deploy.sh
+      │
+      └─► GitHub Actions: .github/workflows/deploy-production.yml
+             checks → verify-azure (espera /health = commit, prueba API, Supabase y cabeceras)
+                    → firebase-hosting (publica el respaldo web.app si hay secreto)
+```
+
+**Por qué pull y no SSH desde GitHub:** GitHub Actions usa IP variables. Para entrar por SSH habría que abrir el puerto 22 a todo Internet y guardar una clave del servidor en GitHub. Con el modelo pull, la VM solo hace conexiones de salida hacia GitHub, el NSG mantiene el 22 restringido a tu IP y no hay credenciales del servidor fuera de Azure.
+
+| Comando en la VM | Para qué |
+| --- | --- |
+| `systemctl list-timers baqueano-autodeploy.timer` | Próxima comprobación |
+| `journalctl -u baqueano-autodeploy -n 50` | Qué desplegó o por qué falló |
+| `sudo systemctl start baqueano-autodeploy` | Forzar comprobación inmediata |
+
+**Configuración en GitHub (una vez):**
+
+1. **Facturación:** GitHub Actions no ejecuta ningún job mientras la cuenta tenga *"account is locked due to a billing issue"* (estado real al 2026-10-03). Resolver en GitHub → Settings → Billing and plans. El despliegue a Azure funciona igual; lo que se detiene es la verificación y el respaldo en Firebase.
+2. **Proteger `main`:** Settings → Branches → regla para `main`: exigir pull request o, como mínimo, impedir force-push. Quien puede escribir en `main` puede publicar en producción.
+3. **Firebase Hosting (opcional):** en tu PC, `firebase init hosting:github` crea el secreto `FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO`. También puedes crear una cuenta de servicio con rol *Firebase Hosting Admin* y pegar su JSON como ese secreto.
+4. **Firma Android (opcional):** secretos `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`. Sin ellos, el CI compila un APK debug.
+
 ### Despliegues posteriores y rollback
 
 ```bash

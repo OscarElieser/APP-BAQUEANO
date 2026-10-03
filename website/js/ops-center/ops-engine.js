@@ -2129,7 +2129,11 @@
 
     handleAuthenticatedUser(user) {
       const email = (user.email || '').toLowerCase().trim();
-      const isAuthorized = this.authorizedAdmins.some((adminEmail) => adminEmail.toLowerCase() === email);
+      // Solo correos de la lista oficial Y verificados por Firebase (emailVerified).
+      // Es una barrera de interfaz: la autorización real la aplican las reglas de
+      // Firestore/Storage y el middleware de Functions con la misma condición.
+      const isAuthorized = user.emailVerified === true &&
+        this.authorizedAdmins.some((adminEmail) => adminEmail.toLowerCase() === email);
 
       if (!isAuthorized) {
         console.warn(`[OpsAuth] Acceso denegado a usuario no autorizado: ${email}`);
@@ -2142,9 +2146,12 @@
             <div style="display:flex;flex-direction:column;gap:0.4rem;text-align:left;">
               <div><i class="fa-solid fa-lock"></i> <strong>Acceso Restringido</strong></div>
               <div style="font-size:0.82rem;color:var(--ops-text-secondary);">
-                La cuenta <code>${email}</code> no cuenta con privilegios administrativos en el Ops Center.
+                La cuenta <code data-ops-denied-email></code> no cuenta con privilegios administrativos verificados en el Ops Center.
               </div>
             </div>`;
+          // El correo se inserta como texto (no HTML) para impedir inyección.
+          const deniedEmailEl = feedbackEl.querySelector('[data-ops-denied-email]');
+          if (deniedEmailEl) deniedEmailEl.textContent = email;
         }
         OpsUI.showLoginGate();
         return;

@@ -163,6 +163,13 @@ for _ in $(seq 1 15); do
 done || true
 systemctl is-active --quiet baqueano-api || echo "AVISO: baqueano-api no está activa. Revise: journalctl -u baqueano-api -n 50"
 
+# Despliegue automático: cada 2 minutos publica origin/main si cambió.
+install -m 644 "${REPO_DIR}/azure/systemd/baqueano-autodeploy.service" /etc/systemd/system/baqueano-autodeploy.service
+install -m 644 "${REPO_DIR}/azure/systemd/baqueano-autodeploy.timer" /etc/systemd/system/baqueano-autodeploy.timer
+systemctl daemon-reload
+systemctl enable --now baqueano-autodeploy.timer
+systemctl list-timers baqueano-autodeploy.timer --no-pager || true
+
 echo ""
 echo "Servidor aprovisionado."
 echo "Siguiente paso: bash ${REPO_DIR}/azure/deploy.sh   (como ${APP_USER}, sin sudo)"

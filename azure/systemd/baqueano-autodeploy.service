@@ -1,0 +1,21 @@
+# =====================================================
+# BAQUEANO — Servicio de despliegue automático (oneshot)
+# =====================================================
+# PROPÓSITO: ejecutar azure/autodeploy.sh, que publica origin/main si cambió.
+# ARQUITECTURA: lo dispara baqueano-autodeploy.timer cada 2 minutos.
+#   flock evita ejecuciones solapadas. No se usa NoNewPrivileges porque
+#   deploy.sh necesita "sudo nginx -t / systemctl reload" (sudo sin
+#   contraseña del usuario administrador de Azure).
+# LOGS: journalctl -u baqueano-autodeploy -n 100
+[Unit]
+Description=BAQUEANO despliegue automatico desde GitHub main
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=baqueano
+Group=baqueano
+Environment=HOME=/home/baqueano
+ExecStart=/usr/bin/flock -n /tmp/baqueano-deploy.lock /bin/bash /home/baqueano/APP-BAQUEANO/azure/autodeploy.sh
+TimeoutStartSec=15min

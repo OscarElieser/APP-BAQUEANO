@@ -33,11 +33,14 @@ service cloud.firestore {
         && (request.auth.token.admin == true
           || request.auth.token.role == 'admin'
           || request.auth.token.role == 'super_admin'
-          || request.auth.token.email in [
+          // Correo oficial solo si Firebase confirmó que el usuario lo controla
+          // (email_verified). Evita heredar privilegios con un correo ajeno.
+          || (request.auth.token.email_verified == true
+            && request.auth.token.email in [
             'oscarelieser.informatica.inatec@gmail.com',
             'byoscarelieser@gmail.com',
             'vigoronmixt@gmail.com'
-          ]);
+          ]));
     }
 
     function isOwner(ownerUid) {
