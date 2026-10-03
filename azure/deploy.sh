@@ -104,4 +104,4 @@ ls -1dt "${RELEASES}"/*/ | grep -v bootstrap | tail -n +$((KEEP + 1)) | xargs -r
 
 echo ""
 echo "Desplegado ${SHA} → ${RELEASE}"
-curl -fsS http://127.0.0.1/health && echo
+curl -fsS --resolve baqueanonicaragua.com:443:127.0.0.1 https://baqueanonicaragua.com/health && echo
