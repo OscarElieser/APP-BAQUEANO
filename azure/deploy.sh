@@ -43,6 +43,19 @@ reload_nginx() {
   # CÓMO: instalamos el snippet antes de validar; nginx -t impide activar una configuración inválida.
   # QUÉ: Permissions-Policy, CSP y demás controles quedan sincronizados con origin/main.
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-security-headers.conf" "/etc/nginx/snippets/baqueano-security-headers.conf"
+  sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-auth-proxy.conf" "/etc/nginx/snippets/baqueano-auth-proxy.conf"
+  local site_config="/etc/nginx/sites-available/baqueano.conf"
+  local site_backup="${site_config}.baqueano-backup"
+  if ! sudo grep -q "baqueano-auth-proxy.conf" "${site_config}"; then
+    sudo cp "${site_config}" "${site_backup}"
+    sudo sed -i "/# --- API propia/i\    include /etc/nginx/snippets/baqueano-auth-proxy.conf;\n" "${site_config}"
+    if ! sudo nginx -t; then
+      sudo cp "${site_backup}" "${site_config}"
+      sudo nginx -t
+      echo "No se pudo instalar el proxy OAuth; se restauró la configuración anterior." >&2
+      return 1
+    fi
+  fi
   sudo nginx -t
   sudo systemctl reload nginx
 }
