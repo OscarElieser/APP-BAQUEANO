@@ -1,0 +1,175 @@
+/*
+=====================================================
+BAQUEANO — Panel de acceso con Google (perfil.html)
+=====================================================
+
+PROPÓSITO:
+  Dar al Website público un punto de entrada real de autenticación con
+  Firebase Auth (Google). Antes, "Iniciar sesión" llevaba a un perfil de
+  ejemplo sin ningún botón de acceso.
+
+ARQUITECTURA:
+  Estilos aislados con prefijo .bq-auth- para no chocar con las 70+ hojas
+  existentes. Usa la paleta oficial (#165D6F, #F65E01, #F4E6C1, #0F172A).
+  El botón de Google respeta las pautas de marca de Google (fondo blanco,
+  logotipo "G" a color, texto "Continuar con Google").
+
+ACCESIBILIDAD:
+  Objetivos táctiles ≥ 48 px, foco visible, contraste AA, mensajes de error
+  en región role="alert" y animaciones desactivadas con prefers-reduced-motion.
+
+RELACIÓN:
+  js/auth-panel.js (lógica), js/user-session.js (BaqueanoSession).
+=====================================================
+*/
+
+.bq-auth-panel {
+  --bq-auth-teal: #165D6F;
+  --bq-auth-orange: #F65E01;
+  --bq-auth-sand: #F4E6C1;
+  --bq-auth-ink: #0F172A;
+  max-width: 34rem;
+  margin: clamp(1.5rem, 4vw, 3rem) auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(22, 93, 111, 0.18);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+  color: var(--bq-auth-ink);
+  text-align: center;
+  box-sizing: border-box;
+  width: calc(100% - 2rem);
+}
+
+.bq-auth-eyebrow {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--bq-auth-sand);
+  color: var(--bq-auth-teal);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bq-auth-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+  line-height: 1.2;
+  color: var(--bq-auth-ink);
+}
+
+.bq-auth-lead {
+  margin: 0 auto 1.5rem;
+  max-width: 28rem;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+/* Botón oficial "Continuar con Google" */
+.bq-auth-google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 22rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #DADCE0;
+  border-radius: 0.75rem;
+  background: #FFFFFF;
+  color: #1F1F1F;
+  font: 600 1rem/1.2 inherit;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.bq-auth-google:hover:not(:disabled) {
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.14);
+  transform: translateY(-1px);
+}
+
+.bq-auth-google:focus-visible,
+.bq-auth-logout:focus-visible {
+  outline: 3px solid var(--bq-auth-orange);
+  outline-offset: 3px;
+}
+
+.bq-auth-google:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.bq-auth-google svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.bq-auth-message {
+  min-height: 1.5rem;
+  margin: 1rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #9A3412;
+}
+
+.bq-auth-message.is-info {
+  color: var(--bq-auth-teal);
+}
+
+.bq-auth-privacy {
+  margin: 1.25rem 0 0;
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+.bq-auth-privacy a {
+  color: var(--bq-auth-teal);
+  font-weight: 600;
+}
+
+/* Botón de cierre de sesión dentro de la tarjeta de usuario */
+.bq-auth-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  margin-top: 0.75rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(22, 93, 111, 0.35);
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--bq-auth-teal, #165D6F);
+  font: 600 0.9rem/1.2 inherit;
+  cursor: pointer;
+}
+
+.bq-auth-logout:hover {
+  background: rgba(22, 93, 111, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bq-auth-panel {
+    background: rgba(15, 23, 42, 0.88);
+    border-color: rgba(244, 230, 193, 0.18);
+    color: #F8FAFC;
+  }
+  .bq-auth-title { color: #F8FAFC; }
+  .bq-auth-lead,
+  .bq-auth-privacy { color: #CBD5E1; }
+  .bq-auth-privacy a { color: var(--bq-auth-sand); }
+  .bq-auth-message { color: #FDBA74; }
+  .bq-auth-message.is-info { color: var(--bq-auth-sand); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bq-auth-google { transition: none; }
+  .bq-auth-google:hover:not(:disabled) { transform: none; }
+}

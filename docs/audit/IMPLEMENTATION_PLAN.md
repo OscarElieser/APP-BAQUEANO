@@ -71,7 +71,7 @@ Cada lote: rama `feature/baqueano-global-platform` (o subrama), cambio acotado, 
 | P1-3 | Canonical, sitemap y robots → dominio principal |
 | P1-4 | Supabase Third-Party Auth (Firebase) + helper `public.firebase_uid()` + reescritura de políticas de usuario |
 | P1-5 | Cliente web Supabase con `accessToken` de Firebase; cargar `supabase-js` (versión fijada) y `supabase-config.js` |
-| P1-6 | Rol **Auditor** (claim Firebase + RLS de solo lectura sobre `audit_logs` y estados) → 3 roles funcionales |
+| P1-6 | Rol **Auditor** (claim Firebase + RLS de solo lectura sobre `audit_logs` y estados) → 3 roles funcionales. Matriz oficial del propietario (2026-10-03): `oscarelieser.informatica.inatec@gmail.com` = **super_admin**; `byoscarelieser@gmail.com` y `vigoronmixt@gmail.com` = **admin**. Corregir desalineaciones: `functions/lib/auth-middleware.js` (`verifySuperAdmin` concede super a los 3), `official_super_admins` en Supabase (3 como super_admin; corregir con migración nueva), `website/js/user-session.js` (los 3 como admin; vigoronmixt etiquetado "Auditor Baqueano") |
 | P1-7 | `email_verified` en `isAdmin()` (Firestore, Storage, Functions) |
 | P1-8 | BAQUI: CORS a dominios oficiales, rate-limit, App Check/ID token; mover a `/api/baqui` en Azure |
 | P1-9 | Publicar videos comprimidos y corregir `baqui.png` (FE-P1-01/02) |
