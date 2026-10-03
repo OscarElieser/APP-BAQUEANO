@@ -1235,3 +1235,17 @@ html[data-bq-page="destinos"] :is(.dest-catalog-dual-btns, .dest-highlight-body)
 html[data-bq-page="baqueano-ia"] #baqueanoAssistantBox :is(.bq-mascot, .bq-mascot-minimize, .bq-suggestion, .bq-reopen-tab) {
   display: none !important;
 }
+
+/* ===================================================
+   PERFIL · Privacidad por defecto
+   POR QUÉ: el perfil mostraba datos de una persona real a cualquier visitante.
+   Las secciones privadas llevan [hidden] desde el HTML y solo auth-panel.js
+   las muestra con sesión confirmada; [hidden] debe ganar a cualquier display.
+   =================================================== */
+html[data-bq-page="perfil"] [data-private-section][hidden] { display: none !important; }
+html[data-bq-page="perfil"] .prof-empty {
+  display: grid; justify-items: center; gap: 8px; text-align: center;
+  padding: 18px 8px; color: var(--baqueano-text-secondary);
+}
+html[data-bq-page="perfil"] .prof-empty > i { font-size: 1.6rem; color: var(--baqueano-secondary); opacity: 0.7; }
+html[data-bq-page="perfil"] .prof-empty p { margin: 0; font-size: 0.86rem; }

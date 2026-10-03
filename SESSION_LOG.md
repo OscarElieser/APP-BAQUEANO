@@ -3234,3 +3234,9 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - 🎯 **POR QUÉ:** La página de perfil muestra nombre, correo, teléfono, ubicación, contacto de emergencia, salud, seguridad y transacciones aunque nadie haya iniciado sesión. Si están en el HTML publicado, son datos personales expuestos a cualquiera.
 - ⚙️ **CÓMO:** Ubicar el origen (HTML estático vs. JS), retirar los datos de ejemplo del marcado, mostrar estado "Iniciá sesión" sin datos para visitantes y cargar los datos reales solo con sesión (Firebase Auth). Verificar sin sesión.
 - **Estado:** Iniciado (prioridad sobre el botón de sesión).
+
+## 2026-10-03 — Solicitud (en cola): admin.html debe mostrar el nombre de quien inició sesión
+
+- 🎯 **POR QUÉ:** El encabezado del Ops Center dice "Asistente Personal de Oscar" fijo; debe reflejar la cuenta autenticada.
+- ⚙️ **CÓMO:** Tomar el nombre del usuario de Firebase Auth en el Ops Center y renderizarlo; sin nombre fijo en el HTML.
+- **Estado:** En cola (después de perfil.html y del botón de sesión).

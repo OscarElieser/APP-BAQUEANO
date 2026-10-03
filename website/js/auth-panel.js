@@ -97,6 +97,36 @@ RELACIÓN:
       var section = document.querySelector(selector);
       if (section) section.hidden = hidden;
     });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-private-section]'), function (section) {
+      section.hidden = hidden;
+    });
+  }
+
+  // Campos [data-profile-field]: guardan su valor neutro del HTML para
+  // restaurarlo al cerrar sesión (no queda nada de la cuenta anterior).
+  function setProfileField(field, value) {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-profile-field="' + field + '"]'), function (node) {
+      if (!node.hasAttribute('data-default')) node.setAttribute('data-default', node.textContent);
+      node.textContent = value != null && value !== '' ? value : node.getAttribute('data-default');
+    });
+  }
+
+  function resetProfileFields() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-profile-field][data-default]'), function (node) {
+      node.textContent = node.getAttribute('data-default');
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.prof-avatar-img, [data-profile-avatar]'), function (img) {
+      img.src = 'assets/images/logo.png';
+      img.alt = '';
+    });
+  }
+
+  function formatDate(value, withTime) {
+    var date = value ? new Date(value) : null;
+    if (!date || !Number.isFinite(date.getTime())) return null;
+    return withTime
+      ? date.toLocaleString('es-NI', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+      : date.toLocaleDateString('es-NI', { month: 'short', year: 'numeric' });
   }
 
   // Construye el panel con nodos DOM; el único HTML estático es el SVG del logotipo.
@@ -181,25 +211,18 @@ RELACIÓN:
   // Sustituye los datos de ejemplo de la tarjeta por los de la cuenta real.
   function renderUser(user) {
     var name = (user.displayName || user.email || 'Explorador').trim();
-    var heading = document.querySelector('.prof-user-info h3');
-    if (heading) {
-      var badge = heading.querySelector('.prof-user-badge');
-      heading.textContent = name + ' ';
-      if (badge) heading.appendChild(badge);
-    }
-    setText('.prof-user-tagline', user.email || '');
+    setProfileField('name', name);
+    setProfileField('first-name', name.split(/\s+/)[0]);
+    setProfileField('email', user.email || '');
+    setProfileField('since', formatDate(user.metadata && user.metadata.creationTime, false));
+    setProfileField('last-login', formatDate(user.metadata && user.metadata.lastSignInTime, true));
 
-    var avatar = document.querySelector('.prof-avatar-img');
-    if (avatar && typeof user.photoURL === 'string' && user.photoURL.indexOf('https://') === 0) {
-      avatar.src = user.photoURL;
-      avatar.alt = name;
-      avatar.referrerPolicy = 'no-referrer';
-    }
-
-    var since = document.querySelector('.prof-user-meta span:first-child strong');
-    var created = user.metadata && user.metadata.creationTime ? new Date(user.metadata.creationTime) : null;
-    if (since && created && Number.isFinite(created.getTime())) {
-      since.textContent = created.toLocaleDateString('es-NI', { month: 'short', year: 'numeric' });
+    if (typeof user.photoURL === 'string' && user.photoURL.indexOf('https://') === 0) {
+      Array.prototype.forEach.call(document.querySelectorAll('.prof-avatar-img, [data-profile-avatar]'), function (img) {
+        img.src = user.photoURL;
+        img.alt = name;
+        img.referrerPolicy = 'no-referrer';
+      });
     }
 
     var info = document.querySelector('.prof-user-info');
@@ -232,6 +255,7 @@ RELACIÓN:
     } else {
       if (panel) panel.hidden = false;
       setPrivateSectionsHidden(true);
+      resetProfileFields();
       var logout = document.getElementById('bq-auth-logout');
       if (logout) logout.remove();
     }
@@ -239,7 +263,12 @@ RELACIÓN:
 
   function init() {
     if (!window.firebase || !window.firebase.auth) {
-      console.warn('[Baqueano Auth] SDK de Firebase Auth no disponible; se mantiene el perfil estático.');
+      // Falla cerrada: sin servicio de acceso no se muestra ningún perfil.
+      console.warn('[Baqueano Auth] SDK de Firebase Auth no disponible; perfil oculto.');
+      setPrivateSectionsHidden(true);
+      buildPanel();
+      googleBtn.disabled = true;
+      setMessage('No pudimos conectar con el servicio de acceso. Revisá tu conexión y recargá la página.', false);
       return;
     }
     try {
@@ -253,8 +282,11 @@ RELACIÓN:
       window.firebase.auth().onAuthStateChanged(onAuthChanged);
     } catch (error) {
       console.error('[Baqueano Auth] No se pudo iniciar el panel de acceso:', error);
-      if (panel) panel.remove();
-      setPrivateSectionsHidden(false);
+      // Falla cerrada: el perfil sigue oculto y el panel explica qué pasó.
+      setPrivateSectionsHidden(true);
+      if (!panel) buildPanel();
+      panel.hidden = false;
+      setMessage('No pudimos verificar tu sesión. Recargá la página para intentarlo de nuevo.', false);
     }
   }
 
