@@ -2970,3 +2970,18 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Estado:** En verificación.
 - **Resultado sondeo (2026-10-03 UTC):** 22 abierto a Internet (`SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.17`); 80, 443, 3000, 3306, 5432 cerrados/filtrados (aún sin servicios). IP y NIC anotadas en `docs/AZURE_DEPLOYMENT.md`.
 - **Estado:** Pendiente que el propietario ejecute `configure-nsg.sh` (restringir 22, abrir 80/443), regenere la clave SSH y active el apagado automático.
+## 2026-10-03 — Propietario reporta Website activo en http://20.80.81.65/
+
+- 🎯 **POR QUÉ:** Validar externamente el despliegue Azure antes de DNS/HTTPS.
+- ⚙️ **CÓMO:** Verificación HTTP, cabeceras, `/health`, `/api/azure/*`, sondeo de puertos y comparación del commit desplegado con `origin/main`.
+- 📦 **QUÉ:** Resultado pendiente.
+- **Resultado (2026-10-03 05:52 UTC):** Website responde 200 en http://20.80.81.65/ (84.515 B, 0,34 s). Pero la VM usa la configuración manual de la guía (rsync de todo `website/` + Nginx básico), no `azure/`: `Server: nginx/1.18.0 (Ubuntu)` visible, sin CSP/HSTS/X-Frame-Options, `/health` y `/api/azure/*` devuelven index.html, y se sirven `README.md`, `scripts/*.js`, `docs/*.md`, `apps/`, `packages/`, `pnpm-lock.yaml`, `i18n-test.html`. `.git/` y `.htaccess` → 403. Sin secretos expuestos (`.env`/`local-keys.js` ignorados por Git). Puertos: 22 y 80 abiertos; 443, 3000, 3306, 5432 cerrados. No se puede distinguir si el 22 ya está restringido porque el sondeo sale desde la misma IP del propietario.
+- **Acción:** migrar la VM a `azure/setup-server.sh` + `deploy.sh`, conservando como respaldo (mv, sin borrar) `/var/www/baqueano` manual y el archivo `sites-available/baqueano`.
+## 2026-10-03 — Propietario reporta migración a azure/ completada
+
+- 🎯 **POR QUÉ:** Verificar externamente que la VM usa `setup-server.sh` + `deploy.sh` (cabeceras, API, health, sin exposición de fuentes).
+- ⚙️ **CÓMO:** Pruebas HTTP de solo lectura contra 20.80.81.65 y sondeo de puertos.
+- 📦 **QUÉ:** Resultado pendiente.
+- **Resultado (2026-10-03 06:10 UTC):** DNS `baqueanonicaragua.com` → 20.80.81.65 ✅; certificado Let's Encrypt CN=baqueanonicaragua.com válido hasta 2027-01-01 ✅; http→https 301 ✅. Pero sigue activa la configuración MANUAL (Certbot se aplicó sobre ella): sin CSP/HSTS/X-Frame, `Server` con versión, `/health` y `/api/azure/*` devuelven index.html, `www` no redirige, y se publican `README.md`, `scripts/`, `docs/`, `apps/`. Por IP en :80 → 404 (bloque de redirección de Certbot).
+- **Registro de la VM aportado por el propietario:** repo clonado en `/var/www/APP-BAQUEANO` con sudo; Node 22.23.3 instalado; PostgreSQL 14 con BD `baqueano_azure_demo` y tabla `evidencia_hackathon` (se conservan); acceso SSH todavía con la clave `.pem` comprometida.
+- **Correcciones:** `setup-server.sh` acepta Node >= 20 (no degrada Node 22) y espera hasta 15 s a la API sin abortar; `enable-https.sh` reutiliza la cuenta/certificado existentes (`--reinstall`, correo opcional); nuevo `azure/migrate-from-manual.sh` (mueve repo de /var/www a ~/APP-BAQUEANO, respalda `/var/www/baqueano` y `sites-available/baqueano` sin borrar, desactiva el enlace manual, ejecuta setup → deploy → https y verifica; se detiene si el repo tiene cambios locales). `bash -n` OK en 5 scripts.

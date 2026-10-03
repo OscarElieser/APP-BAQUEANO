@@ -56,9 +56,11 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install -y nginx ufw fail2ban git rsync curl ca-certificates unattended-upgrades
 
-echo "==> 2/7 Instalando Node.js 20 LTS (repositorio oficial NodeSource)"
-# Se verifica la versión instalada para no reinstalar en cada ejecución.
-if ! command -v node >/dev/null 2>&1 || [[ "$(node -v)" != v20.* ]]; then
+echo "==> 2/7 Verificando Node.js >= 20 LTS (repositorio oficial NodeSource)"
+# Se acepta cualquier LTS >= 20 (p. ej. 22 ya instalado a mano); solo se instala
+# Node 20 si no hay Node o si la versión es anterior. Nunca se degrada.
+NODE_MAJOR="$(node -v 2>/dev/null | sed -E 's/^v([0-9]+).*/\1/' || echo 0)"
+if [[ -z "${NODE_MAJOR}" || "${NODE_MAJOR}" -lt 20 ]]; then
   curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
   apt-get install -y nodejs
 fi
@@ -150,8 +152,16 @@ chmod 640 /etc/baqueano/api.env
 systemctl daemon-reload
 systemctl enable --now baqueano-api
 systemctl restart baqueano-api
-sleep 1
-curl -fsS http://127.0.0.1:3000/api/azure/health >/dev/null && echo "API Azure activa en 127.0.0.1:3000"
+# Espera hasta 15 s a que la API arranque; si no responde, avisa sin abortar
+# (el sitio estático no depende de ella).
+for _ in $(seq 1 15); do
+  if curl -fsS http://127.0.0.1:3000/api/azure/health >/dev/null 2>&1; then
+    echo "API Azure activa en 127.0.0.1:3000"
+    break
+  fi
+  sleep 1
+done || true
+systemctl is-active --quiet baqueano-api || echo "AVISO: baqueano-api no está activa. Revise: journalctl -u baqueano-api -n 50"
 
 echo ""
 echo "Servidor aprovisionado."

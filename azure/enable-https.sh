@@ -25,7 +25,16 @@
 set -euo pipefail
 
 DOMAIN="baqueanonicaragua.com"
-: "${CERTBOT_EMAIL:?Defina CERTBOT_EMAIL con el correo para avisos de expiracion del certificado}"
+
+# Si Certbot ya tiene una cuenta registrada (certificado emitido antes), el
+# correo no es necesario; en una VM nueva sí lo es.
+EMAIL_ARGS=()
+if [[ -n "${CERTBOT_EMAIL:-}" ]]; then
+  EMAIL_ARGS=(-m "${CERTBOT_EMAIL}")
+elif ! compgen -G "/etc/letsencrypt/accounts/*/directory/*" >/dev/null; then
+  echo "Defina CERTBOT_EMAIL con el correo para avisos de expiracion del certificado." >&2
+  exit 1
+fi
 
 if [[ "${EUID}" -ne 0 ]]; then
   echo "Este script debe ejecutarse con sudo." >&2
@@ -44,8 +53,10 @@ for host in "${DOMAIN}" "www.${DOMAIN}"; do
   fi
 done
 
-certbot --nginx --non-interactive --agree-tos --redirect \
-  -m "${CERTBOT_EMAIL}" -d "${DOMAIN}" -d "www.${DOMAIN}"
+# --reinstall: si el certificado ya existe (y aún no vence) se reutiliza y solo
+# se instala en la configuración actual de Nginx; no consume emisiones nuevas.
+certbot --nginx --non-interactive --agree-tos --redirect --reinstall \
+  "${EMAIL_ARGS[@]}" -d "${DOMAIN}" -d "www.${DOMAIN}"
 
 nginx -t
 systemctl reload nginx
