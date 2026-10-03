@@ -400,7 +400,7 @@
   // Configuración oficial de Firebase Web para el Ecosistema Baqueano Nicaragua
   const BAQUEANO_FIREBASE_CONFIG = {
     apiKey: 'AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE',
-    authDomain: 'app-baqueano.firebaseapp.com',
+    authDomain: 'baqueanonicaragua.com',
     databaseURL: 'https://app-baqueano-default-rtdb.firebaseio.com/',
     projectId: 'app-baqueano',
     storageBucket: 'app-baqueano.firebasestorage.app',

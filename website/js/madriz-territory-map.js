@@ -182,10 +182,18 @@
   }
 
   async function waitForDependencies(runId) {
-    for (let attempt = 0; attempt < 40; attempt += 1) {
+    if (window.maplibregl) return true;
+    if (!document.getElementById('bq-maplibre-script')) {
+      const script = document.createElement('script');
+      script.id = 'bq-maplibre-script';
+      script.src = 'https://cdn.jsdelivr.net/npm/maplibre-gl@5.7.1/dist/maplibre-gl.js';
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+    for (let attempt = 0; attempt < 50; attempt += 1) {
       if (runId !== generation) return false;
       if (window.maplibregl) return true;
-      await new Promise((resolve) => window.setTimeout(resolve, 150));
+      await new Promise((resolve) => window.setTimeout(resolve, 120));
     }
     return false;
   }

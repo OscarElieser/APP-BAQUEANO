@@ -26,7 +26,6 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <link rel="stylesheet" href="styles.css?v=20260930-quality-restore-1">
   <link rel="stylesheet" href="css/modules.css">
@@ -626,50 +625,91 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
     </div>
   </footer>
 
-  <!-- Leaflet JS y Scripts Modulares -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"></script>
-  <script src="js/destinos-interactions.js?v=20260927-1"></script>
+  <!-- Scripts Modulares -->
+  <script defer src="js/destinos-interactions.js?v=20260927-1"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // 1. Inicializar Mapa Interactivo en #destinosInteractiveMap
+      // 1. Inicializar Mapa Interactivo con IntersectionObserver
       const mapEl = document.getElementById('destinosInteractiveMap');
-      if (mapEl && typeof L !== 'undefined') {
-        try {
-          const map = L.map('destinosInteractiveMap', {
-            center: [12.6, -85.5],
-            zoom: 7,
-            zoomControl: true,
-            attributionControl: false
-          });
+      if (mapEl) {
+        let initialized = false;
 
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
-          }).addTo(map);
+        const startMap = () => {
+          if (initialized) return;
+          initialized = true;
 
-          const dests = [
-            { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "Naturaleza", color: "#4A7A5A" },
-            { name: "Granada Colonial", lat: 11.9344, lng: -85.9560, cat: "Cultura", color: "#F65E01" },
-            { name: "San Juan del Sur", lat: 11.2529, lng: -85.8705, cat: "Playas", color: "#0284C7" },
-            { name: "Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "Aventura", color: "#4A7A5A" },
-            { name: "Cañón de Somoto", lat: 13.4833, lng: -86.5833, cat: "Naturaleza", color: "#0D9488" },
-            { name: "Volcán Masaya", lat: 11.9842, lng: -86.1611, cat: "Volcanes", color: "#DC2626" },
-            { name: "Corn Island", lat: 12.1736, lng: -83.0560, cat: "Playas", color: "#0284C7" }
-          ];
+          const loadAndMount = () => {
+            if (!window.L) {
+              if (!document.getElementById('bq-leaflet-css')) {
+                const link = document.createElement('link');
+                link.id = 'bq-leaflet-css';
+                link.rel = 'stylesheet';
+                link.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+                document.head.appendChild(link);
+              }
+              const script = document.createElement('script');
+              script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+              script.crossOrigin = 'anonymous';
+              script.onload = mountMap;
+              document.body.appendChild(script);
+            } else {
+              mountMap();
+            }
+          };
 
-          dests.forEach(function (d) {
-            L.circleMarker([d.lat, d.lng], {
-              radius: 8,
-              fillColor: d.color,
-              color: '#FFFFFF',
-              weight: 2,
-              fillOpacity: 0.95
-            }).addTo(map).bindPopup(`<strong>${d.name}</strong><br><span style="font-size:0.75rem;">${d.cat}</span>`);
-          });
+          const mountMap = () => {
+            try {
+              const map = L.map('destinosInteractiveMap', {
+                center: [12.6, -85.5],
+                zoom: 7,
+                zoomControl: true,
+                attributionControl: false
+              });
 
-          setTimeout(() => map.invalidateSize(), 300);
-        } catch (e) {
-          console.warn('[DestinosMap] Error:', e);
+              L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+              }).addTo(map);
+
+              const dests = [
+                { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "Naturaleza", color: "#4A7A5A" },
+                { name: "Granada Colonial", lat: 11.9344, lng: -85.9560, cat: "Cultura", color: "#F65E01" },
+                { name: "San Juan del Sur", lat: 11.2529, lng: -85.8705, cat: "Playas", color: "#0284C7" },
+                { name: "Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "Aventura", color: "#4A7A5A" },
+                { name: "Cañón de Somoto", lat: 13.4833, lng: -86.5833, cat: "Naturaleza", color: "#0D9488" },
+                { name: "Volcán Masaya", lat: 11.9842, lng: -86.1611, cat: "Volcanes", color: "#DC2626" },
+                { name: "Corn Island", lat: 12.1736, lng: -83.0560, cat: "Playas", color: "#0284C7" }
+              ];
+
+              dests.forEach(function (d) {
+                L.circleMarker([d.lat, d.lng], {
+                  radius: 8,
+                  fillColor: d.color,
+                  color: '#FFFFFF',
+                  weight: 2,
+                  fillOpacity: 0.95
+                }).addTo(map).bindPopup(`<strong>${d.name}</strong><br><span style="font-size:0.75rem;">${d.cat}</span>`);
+              });
+
+              setTimeout(() => map.invalidateSize(), 300);
+            } catch (e) {
+              console.warn('[DestinosMap] Error:', e);
+            }
+          };
+
+          loadAndMount();
+        };
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (entries.some(e => e.isIntersecting)) {
+              observer.disconnect();
+              startMap();
+            }
+          }, { rootMargin: '300px' });
+          observer.observe(mapEl);
+        } else {
+          setTimeout(startMap, 2500);
         }
       }
 

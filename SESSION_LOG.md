@@ -3364,8 +3364,49 @@ Ruta objetivo confirmada: `https://baqueanonicaragua.com/baqueano-ia.html`.
 
 Estado: verificación de producción iniciada.
 
+### Avance verificable y cierre en producción
+
+- Se confirmó que `baqueano-ia.html` tenía un botón propio `.ia-chat-mic-btn` sin controlador de reconocimiento de voz.
+- Se conectó ese botón a `SpeechRecognition`/`webkitSpeechRecognition` desde `baqueano-travel-session.js`, con solicitud de permiso, dictado parcial, iniciar/detener, estados accesibles y errores recuperables.
+- Se publicó también el controlador reforzado del micrófono del panel global de Baqüi en esta misma ruta.
+- Producción servía inicialmente `Permissions-Policy: microphone=()` desde Nginx. Se cambió a `microphone=(self)`.
+- Se corrigió `azure/deploy.sh` para sincronizar automáticamente el snippet versionado hacia `/etc/nginx/snippets/baqueano-security-headers.conf`, validar con `nginx -t` y recargar Nginx en cada release.
+- Publicación realizada mediante commits `f2e60d55` y `a5dcf606`, preservando un commit concurrente mediante worktree aislado.
+
+Verificación pública final:
+
+- URL: `https://baqueanonicaragua.com/baqueano-ia.html`
+- HTTP: `200`.
+- Commit activo: `a5dcf60`.
+- Cabecera activa: `geolocation=(self), camera=(), microphone=(self), payment=()`.
+- HTML público contiene `id="iaChatMicBtn"`.
+- HTML público carga la versión `20261003-microphone-1`.
+- Controladores público dedicado y global confirmados.
+
+Estado final: micrófono corregido y desplegado en la ruta HTTPS de producción.
+
 ## 2026-10-03 — Tarea: auditoría de paridad Firestore ↔ Supabase
 
 - 🎯 **POR QUÉ:** Con Firestore como fuente prioritaria y Supabase como espejo completo, hay que saber qué colecciones de Firestore no tienen tabla equivalente en Supabase, qué tablas están bloqueadas para recibir la réplica y qué tablas están abiertas de más.
 - ⚙️ **CÓMO:** Solo lectura. Inventario de colecciones Firestore desde código (website/js, functions, lib/ Dart) y `firestore.rules`; esquema y políticas vivas de Supabase vía MCP; mecanismos de réplica existentes (functions, ops-engine). Informe con matriz y plan.
 - **Estado:** Iniciado.
+## 2026-10-03 — Dominio canónico en el selector de Google
+
+### 🎯 POR QUÉ
+El selector de cuentas de Google muestra “Ir a app-baqueano.firebaseapp.com” y el propietario requiere que identifique el dominio público canónico `baqueanonicaragua.com`.
+
+### ⚙️ CÓMO
+Se auditarán `authDomain`, los dominios autorizados de Firebase, la configuración OAuth y el proxy de los endpoints reservados `/__/auth/*`. El cambio se realizará sin alterar Firebase Authentication ni debilitar el flujo OAuth.
+
+### 📦 QUÉ
+Solicitud: sustituir el dominio visible `app-baqueano.firebaseapp.com` por `baqueanonicaragua.com` durante el inicio de sesión con Google.
+
+Estado: diagnóstico iniciado; aún sin cambios de autenticación.
+- **Resultado auditoría de paridad (solo lectura):**
+  - 0 procesos Firestore → Supabase activos. `syncFirebaseBackup` (functions/lib/backup-service.js) replica Supabase → Firestore (al revés) y Functions no está desplegado (facturación).
+  - El cliente web (`js/supabase-config.js`) usa solo la clave pública, sin token de Firebase → para Supabase todos son anónimos. Prueba real con transacciones deshechas (función temporal `pg_temp.parity_probe`, 0 residuos): rechazan profiles, favorites, reservations, travel_plans (permiso denegado), destinations y businesses (RLS); acepta ops_backup_entities (abierta a todos).
+  - Matriz de 45 filas: 26 colecciones sin tabla en Supabase (pagos, reservation_requests, business_subscriptions, environmental_reports, sos_logs, notifications, conversations, app_config, site_pages…), 9 con tabla bloqueada o insegura, 10 listas. 21 tablas solo existen en Supabase.
+  - Camino viable: Edge Functions de Supabase (ya activas `baqueano-ai`, `baqueano-status`; `baqueano-ai` escribe travel_plans con clave de servicio).
+  - Informe: https://claude.ai/code/artifact/e480ef23-ff0d-4bc5-b055-49396be84d02
+  - **Plan propuesto (NO aplicado, requiere aprobación):** (1) Edge Function `baqueano-mirror` que verifica el token de Firebase y copia con clave de servicio (respaldo genérico en ops_backup_entities); (2) migración de tablas faltantes con `firestore_id` + `payload jsonb`; (3) cerrar permisos públicos y pasar el Ops Center por la función; (4) carga inicial con credencial de administrador de Firebase + control diario de conteos.
+- **Estado:** Auditoría completada; esperando aprobación del plan.

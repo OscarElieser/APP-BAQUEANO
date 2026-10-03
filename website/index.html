@@ -39,7 +39,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
   <link rel="stylesheet" href="styles.css?v=20260930-quality-restore-1">
   <link rel="stylesheet" href="css/modules.css">
@@ -1334,81 +1333,113 @@
     </div>
   </div>
 
-  <!-- Leaflet JS y Scripts Modulares Oficiales -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"></script>
-
   <!-- Script Controlador Oficial de la Portada Exacta -->
   <script>
     /* ============================================================================
        🧭 CONTROLADOR DE LA PORTADA EXACTA (index.html)
-       🎯 Por qué: Dar vida interactiva al mapa, buscador, filtros, modal de video y SOS.
-       ⚙️ Cómo: Leaflet 1.9.4 centrado en Nicaragua, hooks defensivos y eventos táctiles.
+       🎯 Por qué: Dar vida interactiva al mapa, buscador, filtros, modal de video y SOS
+          sin penalizar la velocidad inicial de carga (IntersectionObserver diferido).
+       ⚙️ Cómo: Carga Leaflet CSS y JS únicamente al aproximarse al mapa en pantalla.
        ============================================================================ */
     document.addEventListener('DOMContentLoaded', function () {
-      // 1. Inicializar Mapa Interactivo de Nicaragua en #homeInteractiveMap
+      // 1. Inicialización diferida del Mapa Interactivo con IntersectionObserver
       const mapContainer = document.getElementById('homeInteractiveMap');
-      if (mapContainer && typeof L !== 'undefined') {
-        try {
-          // Centrado oficial de Nicaragua
-          const map = L.map('homeInteractiveMap', {
-            center: [12.6, -85.5],
-            zoom: 7,
-            zoomControl: false,
-            attributionControl: false
-          });
+      if (mapContainer) {
+        let initialized = false;
 
-          // Capa de satélite / topografía con estilo oscuro integrado
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
-          }).addTo(map);
+        const startMap = () => {
+          if (initialized) return;
+          initialized = true;
 
-          // Pines emblemáticos de Nicaragua (Referencia Imagen 4)
-          const destinations = [
-            { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "Naturaleza", dept: "Rivas" },
-            { name: "Granada Colonial", lat: 11.9344, lng: -85.9560, cat: "Cultura", dept: "Granada" },
-            { name: "San Juan del Sur", lat: 11.2529, lng: -85.8705, cat: "Playas", dept: "Rivas" },
-            { name: "Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "Aventura", dept: "León" },
-            { name: "Cañón de Somoto", lat: 13.4833, lng: -86.5833, cat: "Naturaleza", dept: "Madriz" },
-            { name: "Corn Island", lat: 12.1736, lng: -83.0560, cat: "Playas", dept: "RACCS" },
-            { name: "Matagalpa & Selva Negra", lat: 12.9256, lng: -85.9178, cat: "Naturaleza", dept: "Matagalpa" }
-          ];
+          const loadAssetsAndMount = () => {
+            if (!window.L) {
+              if (!document.getElementById('bq-leaflet-css')) {
+                const link = document.createElement('link');
+                link.id = 'bq-leaflet-css';
+                link.rel = 'stylesheet';
+                link.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+                document.head.appendChild(link);
+              }
+              const script = document.createElement('script');
+              script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+              script.crossOrigin = 'anonymous';
+              script.onload = mountMap;
+              document.body.appendChild(script);
+            } else {
+              mountMap();
+            }
+          };
 
-          // Marcadores personalizados con popup
-          destinations.forEach(function (d) {
-            const marker = L.circleMarker([d.lat, d.lng], {
-              radius: 7,
-              fillColor: '#F65E01',
-              color: '#FFFFFF',
-              weight: 2,
-              opacity: 1,
-              fillOpacity: 0.95
-            }).addTo(map);
+          const mountMap = () => {
+            try {
+              const map = L.map('homeInteractiveMap', {
+                center: [12.6, -85.5],
+                zoom: 7,
+                zoomControl: false,
+                attributionControl: false
+              });
 
-            marker.bindPopup(`
-              <div style="font-family: 'Montserrat', sans-serif; padding: 4px 6px;">
-                <strong style="color: #0B253A; font-size: 0.88rem; display:block;">${d.name}</strong>
-                <span style="font-size: 0.74rem; color: #165D6F; font-weight: 600;">${d.cat} · ${d.dept}</span>
-                <div style="margin-top: 6px;">
-                  <a href="destinos.html" style="font-size: 0.72rem; color: #F65E01; font-weight: 700; text-decoration: none;">Ver territorio &rarr;</a>
-                </div>
-              </div>
-            `);
-          });
+              L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+              }).addTo(map);
 
-          // Conectar botones de zoom personalizados
-          const zoomInBtn = document.getElementById('mapZoomIn');
-          const zoomOutBtn = document.getElementById('mapZoomOut');
-          if (zoomInBtn) zoomInBtn.addEventListener('click', () => map.zoomIn());
-          if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => map.zoomOut());
+              const destinations = [
+                { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "Naturaleza", dept: "Rivas" },
+                { name: "Granada Colonial", lat: 11.9344, lng: -85.9560, cat: "Cultura", dept: "Granada" },
+                { name: "San Juan del Sur", lat: 11.2529, lng: -85.8705, cat: "Playas", dept: "Rivas" },
+                { name: "Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "Aventura", dept: "León" },
+                { name: "Cañón de Somoto", lat: 13.4833, lng: -86.5833, cat: "Naturaleza", dept: "Madriz" },
+                { name: "Corn Island", lat: 12.1736, lng: -83.0560, cat: "Playas", dept: "RACCS" },
+                { name: "Matagalpa & Selva Negra", lat: 12.9256, lng: -85.9178, cat: "Naturaleza", dept: "Matagalpa" }
+              ];
 
-          // Ajuste de tamaño al renderizar
-          setTimeout(() => { map.invalidateSize(); }, 200);
-          setTimeout(() => { map.invalidateSize(); }, 600);
-          setTimeout(() => { map.invalidateSize(); }, 1200);
-          window.addEventListener('resize', () => { try { map.invalidateSize(); } catch(e){} });
+              destinations.forEach(function (d) {
+                const marker = L.circleMarker([d.lat, d.lng], {
+                  radius: 7,
+                  fillColor: '#F65E01',
+                  color: '#FFFFFF',
+                  weight: 2,
+                  opacity: 1,
+                  fillOpacity: 0.95
+                }).addTo(map);
 
-        } catch (e) {
-          console.warn('[BaqueanoMap] Inicialización cartográfica en espera:', e);
+                marker.bindPopup(`
+                  <div style="font-family: 'Montserrat', sans-serif; padding: 4px 6px;">
+                    <strong style="color: #0B253A; font-size: 0.88rem; display:block;">${d.name}</strong>
+                    <span style="font-size: 0.74rem; color: #165D6F; font-weight: 600;">${d.cat} · ${d.dept}</span>
+                    <div style="margin-top: 6px;">
+                      <a href="destinos.html" style="font-size: 0.72rem; color: #F65E01; font-weight: 700; text-decoration: none;">Ver territorio &rarr;</a>
+                    </div>
+                  </div>
+                `);
+              });
+
+              const zoomInBtn = document.getElementById('mapZoomIn');
+              const zoomOutBtn = document.getElementById('mapZoomOut');
+              if (zoomInBtn) zoomInBtn.addEventListener('click', () => map.zoomIn());
+              if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => map.zoomOut());
+
+              setTimeout(() => { map.invalidateSize(); }, 200);
+              setTimeout(() => { map.invalidateSize(); }, 600);
+              window.addEventListener('resize', () => { try { map.invalidateSize(); } catch(e){} });
+            } catch (e) {
+              console.warn('[BaqueanoMap] Inicialización cartográfica en espera:', e);
+            }
+          };
+
+          loadAssetsAndMount();
+        };
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (entries.some(e => e.isIntersecting)) {
+              observer.disconnect();
+              startMap();
+            }
+          }, { rootMargin: '300px' });
+          observer.observe(mapContainer);
+        } else {
+          setTimeout(startMap, 2500);
         }
       }
       // La hamburguesa móvil es controlada universalmente por js/navigation.js

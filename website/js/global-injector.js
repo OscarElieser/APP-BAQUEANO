@@ -261,15 +261,47 @@
   async function syncShellWithIndex() {
     if (currentPage === 'index.html' || currentPage === 'admin.html') return;
 
+    var currentNav = document.querySelector('#mainNavbar, nav.main-navbar, nav.main-navbar-exact');
+    var currentFooter = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
+
+    var activeGroups = {
+      'destinos.html': 'destinos.html',
+      'departamento.html': 'destinos.html',
+      'mapa.html': 'destinos.html',
+      'experiencias.html': 'destinos.html',
+      'historia.html': 'historia.html',
+      'gastronomia.html': 'historia.html',
+      'musica.html': 'historia.html',
+      'ambiental.html': 'historia.html',
+      'baqueano-ai.html': 'baqueano-ai.html',
+      'baqueano-ia.html': 'baqueano-ai.html',
+      'mi-viaje.html': 'mi-viaje.html'
+    };
+    var activeHref = activeGroups[currentPage];
+
+    // Si la página ya tiene la barra y pie canónicos, actualizamos el estado sin descargar index.html
+    if (currentNav && currentNav.querySelector('.nav-inner, .nav-links-menu') && currentFooter) {
+      currentNav.querySelectorAll('.active').forEach(function (item) { item.classList.remove('active'); });
+      if (activeHref) {
+        var activeLink = currentNav.querySelector('a[href="' + activeHref + '"]');
+        if (activeLink) activeLink.classList.add('active');
+      } else {
+        var moreTrigger = currentNav.querySelector('.nav-dropdown-trigger, .exact-nav-dropdown-btn');
+        if (moreTrigger) moreTrigger.classList.add('active');
+      }
+      if (typeof buildGlobalMegaNavigation === 'function') buildGlobalMegaNavigation();
+      wireNavbarButtons(currentNav);
+      wireExistingSosButtons();
+      return;
+    }
+
     try {
-      var response = await fetch('index.html', { cache: 'no-store' });
+      var response = await fetch('index.html', { cache: 'default' });
       if (!response.ok) throw new Error('No se pudo cargar la interfaz raíz');
 
       var source = new DOMParser().parseFromString(await response.text(), 'text/html');
       var sourceNav = source.querySelector('#mainNavbar');
       var sourceFooter = source.querySelector('#siteFooter');
-      var currentNav = document.querySelector('#mainNavbar, nav.main-navbar, nav.main-navbar-exact');
-      var currentFooter = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
 
       if (sourceNav) {
         var navClone = document.importNode(sourceNav, true);
@@ -946,12 +978,14 @@
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
       languageScript.src = 'js/global-language.js?v=20261001-i18n-2';
+      languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);
     }
     if (!document.querySelector('script[data-global-music-player]')) {
       var musicPlayerScript = document.createElement('script');
       musicPlayerScript.src = 'js/global-music-player.js?v=20260929-1';
+      musicPlayerScript.defer = true;
       musicPlayerScript.dataset.globalMusicPlayer = 'true';
       document.body.appendChild(musicPlayerScript);
     }
@@ -1028,6 +1062,10 @@
         } catch (error) {
           console.warn('[BAQUEANO] No se pudo abrir BAQUI desde la barra:', error);
         }
+      }
+      if (typeof window.loadBaqueanoDigital === 'function') {
+        window.loadBaqueanoDigital(true);
+        return;
       }
       window.location.href = 'baqueano-ia.html';
     });

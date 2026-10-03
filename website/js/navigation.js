@@ -1489,7 +1489,7 @@ function initializeNavigationModules() {
   initDynamicFooter();
   initFooterBizRegister();
   initDropdownMiPais();
-  loadBaqueanoDigital();
+  scheduleBaqueanoDigitalLoad();
   ensureAccessibleControlNames();
 }
 
@@ -1499,19 +1499,65 @@ function initializeNavigationModules() {
 // ⚙️ CÓMO: carga CSS/JS una vez y respeta rutas sensibles o institucionales.
 // 📦 QUÉ: bootstrap liviano del componente global.
 // ============================================================================
-function loadBaqueanoDigital() {
+// ============================================================================
+// BAQUEANO DIGITAL — CARGA DINÁMICA BAJO DEMANDA & IDLE
+// 🎯 POR QUÉ: no bloquear el renderizado ni competir por ancho de banda inicial.
+// ⚙️ CÓMO: carga CSS/JS al interactuar el usuario o en tiempo ocioso (requestIdleCallback).
+// 📦 QUÉ: interfaz de asistente que se abre inmediatamente al pulsar el botón.
+// ============================================================================
+function loadBaqueanoDigital(openWhenReady) {
   const excluded = /(?:admin|perfil|privacidad|terminos|cookies|aviso-legal|offline|denuncias)(?:\.html)?$/i;
   if (excluded.test(window.location.pathname.replace(/\/$/, ''))) return;
+
   if (!document.querySelector('link[data-baqueano-assistant]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20261003-microphone-1'; style.dataset.baqueanoAssistant = 'true';
+    style.rel = 'stylesheet';
+    style.href = 'css/baqueano-assistant.css?v=20261003-microphone-1';
+    style.dataset.baqueanoAssistant = 'true';
     document.head.appendChild(style);
   }
-  if (!document.querySelector('script[data-baqueano-assistant]') && !window.BaqueanoAssistant) {
+
+  if (window.BaqueanoAssistant) {
+    if (openWhenReady) {
+      if (typeof window.BaqueanoAssistant.show === 'function') window.BaqueanoAssistant.show();
+      if (typeof window.BaqueanoAssistant.open === 'function') window.BaqueanoAssistant.open();
+    }
+    return;
+  }
+
+  if (!document.querySelector('script[data-baqueano-assistant]')) {
     const script = document.createElement('script');
-    script.src = 'js/baqueano-assistant.js?v=20261003-microphone-1'; script.defer = true; script.dataset.baqueanoAssistant = 'true';
+    script.src = 'js/baqueano-assistant.js?v=20261003-microphone-1';
+    script.defer = true;
+    script.dataset.baqueanoAssistant = 'true';
+    if (openWhenReady) {
+      script.onload = function() {
+        if (window.BaqueanoAssistant) {
+          if (typeof window.BaqueanoAssistant.show === 'function') window.BaqueanoAssistant.show();
+          if (typeof window.BaqueanoAssistant.open === 'function') window.BaqueanoAssistant.open();
+        }
+      };
+    }
     document.body.appendChild(script);
   }
+}
+window.loadBaqueanoDigital = loadBaqueanoDigital;
+
+function scheduleBaqueanoDigitalLoad() {
+  let scheduled = false;
+  const trigger = () => {
+    if (scheduled) return;
+    scheduled = true;
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => loadBaqueanoDigital(false), { timeout: 3500 });
+    } else {
+      setTimeout(() => loadBaqueanoDigital(false), 2500);
+    }
+  };
+  ['pointerdown', 'touchstart', 'scroll'].forEach(evt => {
+    window.addEventListener(evt, trigger, { once: true, passive: true });
+  });
+  setTimeout(trigger, 4000);
 }
 
 if (document.readyState === 'loading') {
