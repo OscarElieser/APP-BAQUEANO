@@ -63,8 +63,8 @@
   --bg-glass: rgba(15, 23, 42, 0.65);
   --bg-glass-strong: rgba(10, 15, 29, 0.88);
 
-  --verde-selva: #10B981;
-  --verde-neon: #00FF9D;
+  --verde-selva: #4A7A5A;
+  --verde-neon: #8DBF9A;
   --cyan-cyber: #06B6D4;
   --azul-sat: #38BDF8;
   --rojo-alerta: #EF4444;
@@ -90,7 +90,7 @@
   /* Gradientes Oficiales */
   --grad-sunset: linear-gradient(135deg, #F65E01 0%, #FF7B26 50%, #F4E6C1 100%);
   --grad-volcano: linear-gradient(180deg, #0A2F38 0%, #165D6F 45%, #0A0F1D 100%);
-  --grad-cyber: linear-gradient(135deg, #165D6F 0%, #06B6D4 50%, #10B981 100%);
+  --grad-cyber: linear-gradient(135deg, #165D6F 0%, #06B6D4 50%, #4A7A5A 100%);
   --grad-glass: linear-gradient(135deg, rgba(22, 93, 111, 0.2) 0%, rgba(15, 23, 42, 0.7) 100%);
   --grad-gold: linear-gradient(135deg, #D4AF37 0%, #F4E6C1 100%);
   --grad-card-border: linear-gradient(135deg, rgba(246, 94, 1, 0.5), rgba(22, 93, 111, 0.2), rgba(244, 230, 193, 0.2));
@@ -2029,8 +2029,8 @@ input[type="range"] {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 10px #10B981, 0 0 20px #10B981;
+  background: #4A7A5A;
+  box-shadow: 0 0 10px #4A7A5A, 0 0 20px #4A7A5A;
   animation: hudLedPulse 1.8s ease-in-out infinite;
 }
 
@@ -2212,7 +2212,7 @@ input[type="range"] {
 .emergency-line-item:nth-child(2) { border-left-color: #EF4444; }
 .emergency-line-item:nth-child(3) { border-left-color: #F65E01; }
 .emergency-line-item:nth-child(4) { border-left-color: #3B82F6; }
-.emergency-line-item:nth-child(5) { border-left-color: #10B981; }
+.emergency-line-item:nth-child(5) { border-left-color: #4A7A5A; }
 
 .emergency-line-item i {
   font-size: 0.95rem;
@@ -3353,7 +3353,7 @@ input[type="range"] {
   .nav-links-menu.mobile-open a .nav-item-badge.live {
     background: rgba(16, 185, 129, 0.2);
     border-color: rgba(16, 185, 129, 0.4);
-    color: #10B981;
+    color: #4A7A5A;
   }
 
   .nav-links-menu.mobile-open a .nav-arrow {
@@ -3571,7 +3571,7 @@ input[type="range"] {
   --bg-card-hover: rgba(34, 123, 145, 0.28);
 
   --verde-selva: #2E7D32;
-  --verde-neon: #10B981;
+  --verde-neon: #4A7A5A;
   --rojo-alerta: #EF4444;
   --azul-info: #38BDF8;
 
@@ -4995,7 +4995,7 @@ img {
   font-family: var(--font-tech);
   font-size: 0.76rem;
   font-weight: 700;
-  color: #10B981;
+  color: #4A7A5A;
   background: rgba(16, 185, 129, 0.15);
   padding: 0.1rem 0.45rem;
   border-radius: 9999px;
@@ -5635,7 +5635,7 @@ img {
 
 .comp-pill-win {
   background: rgba(16, 185, 129, 0.2);
-  color: #34D399;
+  color: #8DBF9A;
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-size: 0.75rem;
@@ -5655,7 +5655,7 @@ img {
 }
 
 .comp-figure-big.success {
-  color: #10B981;
+  color: #4A7A5A;
 }
 
 .comp-annual-banner {
@@ -6349,7 +6349,7 @@ img {
   font-size: 0.72rem;
   font-family: var(--font-tech);
   background: rgba(16, 185, 129, 0.2);
-  color: #34D399;
+  color: #8DBF9A;
   border: 1px solid rgba(16, 185, 129, 0.4);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
@@ -6362,7 +6362,7 @@ img {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10B981;
+  background: #4A7A5A;
   animation: pulseGreen 1.5s infinite;
 }
 
@@ -6653,7 +6653,7 @@ img {
 
 .service-status-pill.online {
   background: rgba(16, 185, 129, 0.15);
-  color: #34D399;
+  color: #8DBF9A;
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
@@ -6704,7 +6704,7 @@ img {
 
 .status-badge-table.active {
   background: rgba(16, 185, 129, 0.15);
-  color: #34D399;
+  color: #8DBF9A;
 }
 
 .status-badge-table.warning {
@@ -6979,7 +6979,7 @@ img {
   display: flex;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #34D399;
+  color: #8DBF9A;
 }
 
 /* Barra de Sesión de Usuario Activo en Dashboard */
@@ -7116,8 +7116,8 @@ img {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 10px #10B981;
+  background: #4A7A5A;
+  box-shadow: 0 0 10px #4A7A5A;
   animation: pulseDotLive 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
@@ -7140,7 +7140,7 @@ img {
 }
 
 .map-source-badge.firestore {
-  color: #34D399;
+  color: #8DBF9A;
   border-color: rgba(16, 185, 129, 0.4);
   background: rgba(16, 185, 129, 0.12);
 }
@@ -7728,7 +7728,7 @@ img {
 
 .decalogo-percent-badge {
   background: rgba(16, 185, 129, 0.2);
-  color: #34D399;
+  color: #8DBF9A;
   border: 1px solid rgba(16, 185, 129, 0.4);
   padding: 0.2rem 0.65rem;
   border-radius: 9999px;
@@ -7748,7 +7748,7 @@ img {
 .decalogo-progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #10B981, #34D399);
+  background: linear-gradient(90deg, #4A7A5A, #8DBF9A);
   border-radius: 9999px;
   transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
@@ -7788,7 +7788,7 @@ img {
 }
 
 .decalogo-pill-btn.active {
-  background: linear-gradient(135deg, #10B981, #165D6F);
+  background: linear-gradient(135deg, #4A7A5A, #165D6F);
   color: #FFFFFF;
   border-color: rgba(244, 230, 193, 0.7);
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
@@ -7852,8 +7852,8 @@ img {
 }
 
 .decalogo-interactive-card.committed .decalogo-num-badge {
-  background: linear-gradient(135deg, #10B981, #059669);
-  box-shadow: 0 0 12px #10B981;
+  background: linear-gradient(135deg, #4A7A5A, #4A7A5A);
+  box-shadow: 0 0 12px #4A7A5A;
 }
 
 .decalogo-card-top {
@@ -7903,11 +7903,11 @@ img {
 
 .decalogo-check-toggle:hover {
   transform: scale(1.2);
-  color: #10B981;
+  color: #4A7A5A;
 }
 
 .decalogo-check-toggle.checked {
-  color: #10B981;
+  color: #4A7A5A;
   animation: checkPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -7966,7 +7966,7 @@ img {
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #4A7A5A, #4A7A5A);
   display: flex;
   align-items: center;
   justify-content: center;

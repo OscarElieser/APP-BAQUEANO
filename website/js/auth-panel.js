@@ -117,7 +117,7 @@ RELACIÓN:
 
     var lead = document.createElement('p');
     lead.className = 'bq-auth-lead';
-    lead.textContent = 'Guarda destinos, organiza Mi Viaje y conserva tu Pasaporte Baqueano en cualquier dispositivo.';
+    lead.textContent = 'Guardá destinos, organizá Mi Viaje y llevá tu Pasaporte Baqueano en cualquier dispositivo.';
 
     googleBtn = document.createElement('button');
     googleBtn.type = 'button';

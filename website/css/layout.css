@@ -503,7 +503,7 @@ img {
   font-family: var(--font-tech);
   font-size: 0.7rem;
   font-weight: 800;
-  color: #10B981;
+  color: #4A7A5A;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: 9999px;
@@ -643,8 +643,8 @@ img {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 10px #10B981, 0 0 20px #10B981;
+  background: #4A7A5A;
+  box-shadow: 0 0 10px #4A7A5A, 0 0 20px #4A7A5A;
   animation: hudLedPulse 1.8s ease-in-out infinite;
 }
 
@@ -807,7 +807,7 @@ img {
 .emergency-line-item:nth-child(2) { border-left-color: #EF4444; }
 .emergency-line-item:nth-child(3) { border-left-color: #F65E01; }
 .emergency-line-item:nth-child(4) { border-left-color: #3B82F6; }
-.emergency-line-item:nth-child(5) { border-left-color: #10B981; }
+.emergency-line-item:nth-child(5) { border-left-color: #4A7A5A; }
 
 .emergency-line-item i {
   font-size: 0.95rem;
@@ -1016,7 +1016,7 @@ img {
   .nav-links-menu.mobile-open a .nav-item-badge.live {
     background: rgba(16, 185, 129, 0.2);
     border-color: rgba(16, 185, 129, 0.4);
-    color: #10B981;
+    color: #4A7A5A;
   }
 
   .nav-links-menu.mobile-open a .nav-arrow {
@@ -1473,7 +1473,7 @@ img {
 }
 
 .main-navbar .nav-login-btn {
-  background: #10B981;
+  background: #4A7A5A;
   color: #FFFFFF;
   border: none;
   padding: 8px 18px;
@@ -1489,7 +1489,7 @@ img {
 }
 
 .main-navbar .nav-login-btn:hover {
-  background: #059669;
+  background: #4A7A5A;
   transform: translateY(-1px);
 }
 
@@ -1512,7 +1512,7 @@ img {
   height: 28px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid #10B981;
+  border: 1.5px solid #4A7A5A;
 }
 
 .main-navbar .mobile-nav-toggle {
@@ -1736,8 +1736,8 @@ h2:not(.handwriting-h2):not(.title-handwritten)::after {
 }
 
 .social-circle-btn:hover {
-  background: #10B981;
-  border-color: #10B981;
+  background: #4A7A5A;
+  border-color: #4A7A5A;
   transform: translateY(-2px);
 }
 
@@ -1764,7 +1764,7 @@ h2:not(.handwriting-h2):not(.title-handwritten)::after {
   display: block;
   width: 22px;
   height: 2.5px;
-  background-color: #10B981;
+  background-color: #4A7A5A;
   border-radius: 2px;
 }
 
@@ -1837,7 +1837,7 @@ h2:not(.handwriting-h2):not(.title-handwritten)::after {
   display: block;
   width: 95%;
   height: 3.5px;
-  background: #10B981;
+  background: #4A7A5A;
   border-radius: 4px;
   margin-top: 6px;
   transform: rotate(-1.5deg);

@@ -89,8 +89,8 @@
       region: 'Jinotega & Matagalpa / Cordillera Isabelia',
       category: 'Naturaleza',
       palette: {
-        primary: '#059669',
-        primaryLight: '#10B981',
+        primary: '#4A7A5A',
+        primaryLight: '#4A7A5A',
         primaryDark: '#064E3B',
         terracotta: '#D97706',
         terracottaLight: '#F59E0B',
@@ -100,7 +100,7 @@
         background: '#061510',
         surface: '#0D2A20',
         surfaceElevated: '#143C2E',
-        borderGlow: '#10B981'
+        borderGlow: '#4A7A5A'
       },
       wcag: 'AAA (8.7:1)'
     },
@@ -622,7 +622,12 @@
     const root = document.documentElement;
 
     // 1. Tokens de Identidad Oficial Baqueano (Globales en toda la web)
-    root.style.setProperty('--baqueano-primary', palette.primary);
+    // Roles del sistema de diseño (css/baqueano-system.css): primario = acción
+    // (terracota del tema), secundario = navegación/información (color base del tema).
+    root.style.setProperty('--baqueano-primary', palette.terracotta);
+    root.style.setProperty('--baqueano-primary-hover', palette.terracottaDark);
+    root.style.setProperty('--baqueano-secondary', palette.primary);
+    root.style.setProperty('--baqueano-secondary-hover', palette.primaryDark);
     root.style.setProperty('--baqueano-orange', palette.terracotta);
     root.style.setProperty('--baqueano-cream', palette.goldLight);
     root.style.setProperty('--baqueano-night', palette.background);
@@ -707,7 +712,7 @@
     const link = document.createElement('link');
     link.id = 'baqueanoThemeSwitcherStyles';
     link.rel = 'stylesheet';
-    link.href = 'css/theme-switcher.css?v=20260926-global-theme-1';
+    link.href = 'css/theme-switcher.css?v=20261003-1';
     document.head.appendChild(link);
   }
 
@@ -934,7 +939,7 @@
                   <button type="button" class="studio-swatch-chip" data-color="#FBBF24" style="--c:#FBBF24" title="Oro Solentiname"></button>
                   <button type="button" class="studio-swatch-chip" data-color="#F65E01" style="--c:#F65E01" title="Naranja Fuego"></button>
                   <button type="button" class="studio-swatch-chip" data-color="#38BDF8" style="--c:#38BDF8" title="Cian Caribeño"></button>
-                  <button type="button" class="studio-swatch-chip" data-color="#34D399" style="--c:#34D399" title="Verde Menta"></button>
+                  <button type="button" class="studio-swatch-chip" data-color="#8DBF9A" style="--c:#8DBF9A" title="Verde Menta"></button>
                   <button type="button" class="studio-swatch-chip" data-color="#FB7185" style="--c:#FB7185" title="Coral Ometepe"></button>
                 </div>
                 <div class="baq-studio-picker-row">

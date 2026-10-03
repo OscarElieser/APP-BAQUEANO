@@ -414,7 +414,7 @@
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: #10B981;
+  color: #4A7A5A;
 }
 
 .baq-theme-apply-btn {
@@ -438,8 +438,8 @@
 
 .baq-theme-card.is-active .baq-theme-apply-btn {
   background: rgba(16, 185, 129, 0.2);
-  border-color: #10B981;
-  color: #10B981;
+  border-color: #4A7A5A;
+  color: #4A7A5A;
   cursor: default;
 }
 
@@ -1239,7 +1239,13 @@
 }
 
 /* ========================================================================== */
-/* COBERTURA CROMÁTICA GLOBAL DEL ECOSISTEMA                                  */
+/* COBERTURA CROMÁTICA GLOBAL DEL ECOSISTEMA (solo fondos oscuros)
+   2026-10-03: en modo claro (preset "blanco", el predeterminado) esta capa
+   repintaba las secciones con la superficie oscura de la paleta y forzaba
+   títulos oscuros dentro de tarjetas oscuras. Ahora aplica solo cuando el
+   fondo del sitio es oscuro; en claro manda el diseño de cada página y
+   css/baqueano-system.css. */
+/* —                                  */
 /* ========================================================================== */
 /* 🎯 POR QUÉ: las páginas heredadas contienen colores rígidos que impedían   */
 /*    que el selector modificara visualmente todas las secciones.              */
@@ -1248,15 +1254,15 @@
 /* 📦 QUÉ: tematización completa de main, secciones, tarjetas y controles.      */
 /* ========================================================================== */
 
-html[data-theme] body,
-html[data-theme] main,
-html[data-theme] .page-wrapper {
+html[data-theme]:not([data-bg-mode="light"]) body,
+html[data-theme]:not([data-bg-mode="light"]) main,
+html[data-theme]:not([data-bg-mode="light"]) .page-wrapper {
   background-color: var(--bg-space) !important;
   color: var(--text-primary) !important;
 }
 
-html[data-theme] main > section:not(.hero-section-nicaragua, .final-cta-section),
-html[data-theme] .page-wrapper > section:not(.hero-section-nicaragua, .final-cta-section) {
+html[data-theme]:not([data-bg-mode="light"]) main > section:not(.hero-section-nicaragua, .final-cta-section, [class*="hero"]),
+html[data-theme]:not([data-bg-mode="light"]) .page-wrapper > section:not(.hero-section-nicaragua, .final-cta-section, [class*="hero"]) {
   background-color: var(--bg-space) !important;
   background-image:
     radial-gradient(circle at 88% 12%, rgba(var(--theme-primary-rgb), 0.2), transparent 34%),
@@ -1265,21 +1271,21 @@ html[data-theme] .page-wrapper > section:not(.hero-section-nicaragua, .final-cta
   color: var(--text-primary) !important;
 }
 
-html[data-theme] main > section:nth-of-type(even):not(.hero-section-nicaragua, .final-cta-section),
-html[data-theme] .page-wrapper > section:nth-of-type(even):not(.hero-section-nicaragua, .final-cta-section) {
+html[data-theme]:not([data-bg-mode="light"]) main > section:nth-of-type(even):not(.hero-section-nicaragua, .final-cta-section, [class*="hero"]),
+html[data-theme]:not([data-bg-mode="light"]) .page-wrapper > section:nth-of-type(even):not(.hero-section-nicaragua, .final-cta-section, [class*="hero"]) {
   background-image:
     radial-gradient(circle at 12% 82%, rgba(var(--theme-accent-rgb), 0.13), transparent 30%),
     linear-gradient(180deg, rgba(var(--theme-background-rgb), 0.98), rgba(var(--theme-surface-rgb), 0.88)) !important;
 }
 
-html[data-theme] main :is(
+html[data-theme]:not([data-bg-mode="light"]) main :is(
   .card, [class$="-card"], [class*="-card "],
   .glass-panel, .content-panel, .section-panel
 ) {
   border-color: var(--border-subtle) !important;
 }
 
-html[data-theme] main :is(
+html[data-theme]:not([data-bg-mode="light"]) main :is(
   .ps-step-card, .ps-pillar-card, .quick-ia-prompt-box, .digital-chat-simulator,
   .index-map-card, .travel-service-card, .partner-chip, .stat-pro-card,
   .impact-interactive-card, .app-download-card, .app-spec-item,
@@ -1289,16 +1295,18 @@ html[data-theme] main :is(
   border-color: var(--border-subtle) !important;
 }
 
-html[data-theme] main :is(h1, h2, h3, h4, h5, h6, .section-headline, .section-title-nicaragua, .culture-title) {
+/* Las portadas (clase con "hero") quedan fuera: su titular va sobre fotografía
+   oscura y el color lo define el contrato de portada de baqueano-system.css. */
+html[data-theme]:not([data-bg-mode="light"]) main :is(h1, h2, h3, h4, h5, h6, .section-headline, .section-title-nicaragua, .culture-title):not(:is([class*="hero"]) *) {
   color: var(--text-primary) !important;
   -webkit-text-fill-color: var(--text-primary) !important;
 }
 
-html[data-theme] main :is(p, li, .section-subtext, .section-sub-nicaragua, .culture-sub) {
+html[data-theme]:not([data-bg-mode="light"]) main :is(p, li, .section-subtext, .section-sub-nicaragua, .culture-sub):not(:is([class*="hero"]) *) {
   color: var(--text-secondary);
 }
 
-html[data-theme] main :is(
+html[data-theme]:not([data-bg-mode="light"]) main :is(
   .badge-section-pill, .section-tag-pill, .culture-tag-pill, .partners-pill-badge,
   .baq-credibility-badge, .dest-card-badge, .living-card-tag
 ) {
@@ -1306,7 +1314,7 @@ html[data-theme] main :is(
   color: var(--theme-cream) !important;
 }
 
-html[data-theme] main :is(
+html[data-theme]:not([data-bg-mode="light"]) main :is(
   .btn-cta-explore, .hero-btn-primary, .quick-ia-submit-btn,
   .app-download-btn-primary, .partners-cta-btn
 ) {
@@ -1315,7 +1323,7 @@ html[data-theme] main :is(
   color: #FFFFFF !important;
 }
 
-html[data-theme] main :is(
+html[data-theme]:not([data-bg-mode="light"]) main :is(
   .btn-cta-route, .hero-btn-ai, .app-download-btn-secondary,
   .index-layer-btn.active, .map-mode-tab.active
 ) {
@@ -1341,8 +1349,8 @@ html[data-bg-mode="light"] main :is(
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-html[data-section-colors-custom] main > section:not(.hero-section-nicaragua, .final-cta-section),
-html[data-section-colors-custom] .page-wrapper > section:not(.hero-section-nicaragua, .final-cta-section) {
+html[data-section-colors-custom] main > section:not(.hero-section-nicaragua, .final-cta-section, [class*="hero"]),
+html[data-section-colors-custom] .page-wrapper > section:not(.hero-section-nicaragua, .final-cta-section, [class*="hero"]) {
   background-color: var(--section-bg-color) !important;
   background-image: linear-gradient(180deg, var(--section-bg-tint), var(--section-bg-tint-mid), var(--section-bg-tint-bot)) !important;
 }

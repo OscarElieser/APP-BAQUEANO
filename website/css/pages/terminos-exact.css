@@ -18,7 +18,7 @@
   --term-light: #F8FAFC;
   --term-border: #E2E8F0;
   --term-radius: 18px;
-  --term-green: #10B981;
+  --term-green: #4A7A5A;
 }
 
 body.page-terminos {
@@ -37,7 +37,7 @@ body.page-terminos {
   position: relative;
   min-height: 480px;
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.85) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/splash_bg.jpg') center/cover no-repeat;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -58,7 +58,7 @@ body.page-terminos {
   gap: 8px;
   background: rgba(16, 185, 129, 0.2);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #34D399;
+  color: #8DBF9A;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -69,6 +69,7 @@ body.page-terminos {
 }
 
 .term-hero-title {
+  color: #FFFFFF; /* el H1 global usa --text-primary (oscuro en tema claro); la portada es oscura */
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.4rem, 5vw, 3.8rem);
   font-weight: 900;
@@ -459,7 +460,7 @@ body.page-terminos {
 .term-callout-card.green {
   background: #ECFDF5;
   border-color: #D1FAE5;
-  color: #065F46;
+  color: #2F5A3C;
 }
 
 .term-callout-title {
@@ -523,7 +524,7 @@ body.page-terminos {
   flex-shrink: 0;
 }
 
-.term-acc-badge.b-green { background: #10B981; }
+.term-acc-badge.b-green { background: #4A7A5A; }
 .term-acc-badge.b-yellow { background: #F59E0B; }
 .term-acc-badge.b-teal { background: #165D6F; }
 .term-acc-badge.b-orange { background: #F65E01; }

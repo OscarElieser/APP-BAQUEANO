@@ -515,7 +515,7 @@
 
 .dot-volcano { background: #F65E01; box-shadow: 0 0 6px #F65E01; }
 .dot-lake { background: #165D6F; box-shadow: 0 0 6px #2DD4BF; }
-.dot-eco { background: #10B981; box-shadow: 0 0 6px #10B981; }
+.dot-eco { background: #4A7A5A; box-shadow: 0 0 6px #4A7A5A; }
 .dot-beach { background: #F59E0B; box-shadow: 0 0 6px #F59E0B; }
 .legend-update { color: rgba(244, 230, 193, 0.6); }
 
@@ -711,7 +711,7 @@
 }
 
 .bs-cordobas { color: var(--b3d-volcan); }
-.bs-savings { color: #10B981; }
+.bs-savings { color: #4A7A5A; }
 
 .bs-sub {
   display: block;
@@ -1126,8 +1126,8 @@
 }
 
 .btn-pano-audio.is-active {
-  background: #10B981;
-  border-color: #10B981;
+  background: #4A7A5A;
+  border-color: #4A7A5A;
   color: #FFFFFF;
 }
 
@@ -1418,7 +1418,7 @@
   border-radius: 999px;
   font-size: 0.6rem;
   font-weight: 700;
-  color: #34d399;
+  color: #8DBF9A;
   background: rgba(52, 211, 153, 0.12);
   border: 1px solid rgba(52, 211, 153, 0.25);
 }
@@ -1530,7 +1530,7 @@
   border-radius: 6px;
   background: rgba(37, 211, 102, 0.16);
   border: 1px solid rgba(37, 211, 102, 0.4);
-  color: #4ade80 !important;
+  color: #8DBF9A !important;
   font-size: 0.68rem;
   font-weight: 800;
   text-decoration: none;

@@ -1,31 +1,31 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — CAMPAÑA AMBIENTAL & DENUNCIAS (ambiental.css)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proporcionar una presentación visual de alto impacto para la campaña de
-//   huella cero, el Decálogo Verde del Explorador y la plataforma de denuncias
-//   ambientales con carga de evidencias visuales (fotos y videos) en tiempo real.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
-// - Dropzone interactivo con soporte drag-and-drop y miniaturas dinámicas.
-// - Indicadores de estado de subida y badges de tamaño.
-//
-// 📦 3. QUÉ (WHAT / CLASES EXPUESTAS):
-// - .evidence-dropzone, .evidence-preview-grid, .evidence-item-thumb.
-// - .evidence-stats-bar, .btn-remove-evidence, .badge-media-type.
-// ============================================================================
+/* ============================================================================ */
+/* 🧭 BAQUEANO ECOSYSTEM — CAMPAÑA AMBIENTAL & DENUNCIAS (ambiental.css) */
+/* ============================================================================ */
+/*  */
+/* 🎯 1. POR QUÉ (WHY / PROPÓSITO): */
+/* - Proporcionar una presentación visual de alto impacto para la campaña de */
+/*   huella cero, el Decálogo Verde del Explorador y la plataforma de denuncias */
+/*   ambientales con carga de evidencias visuales (fotos y videos) en tiempo real. */
+/*  */
+/* ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN): */
+/* - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche). */
+/* - Dropzone interactivo con soporte drag-and-drop y miniaturas dinámicas. */
+/* - Indicadores de estado de subida y badges de tamaño. */
+/*  */
+/* 📦 3. QUÉ (WHAT / CLASES EXPUESTAS): */
+/* - .evidence-dropzone, .evidence-preview-grid, .evidence-item-thumb. */
+/* - .evidence-stats-bar, .btn-remove-evidence, .badge-media-type. */
+/* ============================================================================ */
 
 
 
 html body .ambiental-inline-001 {
   border-color: rgba(16, 185, 129, 0.5) !important;
-  color: #34D399 !important;
+  color: #8DBF9A !important;
 }
 
 html body .ambiental-inline-002 {
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .ambiental-inline-003 {
@@ -68,7 +68,7 @@ html body .ambiental-inline-010 {
   font-family: var(--font-tech) !important;
   font-weight: 800 !important;
   font-size: 0.8rem !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .ambiental-inline-011 {
@@ -271,7 +271,7 @@ html body .ambiental-inline-038 {
   font-family: var(--font-tech) !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .ambiental-inline-039 {
@@ -498,7 +498,7 @@ html body .ambiental-inline-050 {
   border: 1px solid rgba(16, 185, 129, 0.25);
   border-radius: 8px;
   font-size: 0.8rem;
-  color: #10B981;
+  color: #4A7A5A;
   font-family: var(--font-tech);
 }
 
@@ -744,7 +744,7 @@ html body .ambiental-inline-050 {
 }
 
 .denuncia-cta-legal i {
-  color: #34D399;
+  color: #8DBF9A;
   font-size: 0.72rem;
 }
 

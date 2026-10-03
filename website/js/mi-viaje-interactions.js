@@ -74,7 +74,7 @@
   // ─── Toast ─────────────────────────────────────────────────────────────────
   function toast(msg, type) {
     type = type || 'success';
-    var colors = { success: '#10B981', info: '#165D6F', warning: '#F65E01', error: '#EF4444' };
+    var colors = { success: '#4A7A5A', info: '#165D6F', warning: '#F65E01', error: '#EF4444' };
     var icons  = { success: '✅', info: 'ℹ️', warning: '⚠️', error: '❌' };
     var box = document.getElementById('bqToastBox');
     if (!box) {
@@ -301,7 +301,7 @@
   window.saveTrip = function(btn) {
     trip.saved = true;
     persistTrip(trip);
-    if (btn) { btn.innerHTML = '<i class="fa-solid fa-check"></i> Guardado'; btn.disabled = true; btn.style.background = '#10B981'; }
+    if (btn) { btn.innerHTML = '<i class="fa-solid fa-check"></i> Guardado'; btn.disabled = true; btn.style.background = '#4A7A5A'; }
     toast('Ruta guardada y disponible sin conexión 🗺️');
   };
 

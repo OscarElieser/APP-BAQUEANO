@@ -721,7 +721,7 @@ html body .index-inline-018 {
 
 html body .index-inline-019 {
   height: 180px !important;
-  background: linear-gradient(135deg, #064E3B, #10B981) !important;
+  background: linear-gradient(135deg, #064E3B, #4A7A5A) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -781,7 +781,7 @@ html body .index-inline-027 {
 
 html body .index-inline-028 {
   font-size: 2.5rem !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .index-inline-029 {
@@ -889,7 +889,7 @@ html body .index-inline-045 {
   gap: 0.4rem !important;
   font-family: var(--font-tech) !important;
   font-size: 0.75rem !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
   background: rgba(16, 185, 129, 0.1) !important;
   border: 1px solid rgba(16, 185, 129, 0.3) !important;
   padding: 0.25rem 0.65rem !important;
@@ -900,8 +900,8 @@ html body .index-inline-046 {
   width: 7px !important;
   height: 7px !important;
   border-radius: 50% !important;
-  background: #10B981 !important;
-  box-shadow: 0 0 6px #10B981 !important;
+  background: #4A7A5A !important;
+  box-shadow: 0 0 6px #4A7A5A !important;
 }
 
 html body .index-inline-047 {
@@ -946,7 +946,7 @@ html body .index-inline-053 {
   font-family: var(--font-tech) !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .index-inline-054 {
@@ -1084,8 +1084,8 @@ html body .index-inline-066 {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 10px #10B981, 0 0 20px #10B981;
+  background: #4A7A5A;
+  box-shadow: 0 0 10px #4A7A5A, 0 0 20px #4A7A5A;
   display: inline-block;
   animation: liveDotPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
@@ -1532,7 +1532,7 @@ html body .index-inline-066 {
   gap: 0.5rem;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #34D399;
+  color: #8DBF9A;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
@@ -3214,7 +3214,7 @@ html[data-section-colors-custom] .index-main-flow :is(
 .ps-pillar-icon.icon-impact {
   background: rgba(45, 180, 112, 0.2);
   border-color: rgba(45, 180, 112, 0.5);
-  color: #34D399;
+  color: #8DBF9A;
 }
 
 .ps-pillar-card h3 {
@@ -3420,7 +3420,7 @@ html[data-section-colors-custom] .index-main-flow :is(
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1px;
-  color: #34D399;
+  color: #8DBF9A;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
@@ -3547,7 +3547,7 @@ html[data-section-colors-custom] .index-main-flow :is(
   background: rgba(52, 211, 153, 0.2);
   border: 1px solid rgba(52, 211, 153, 0.4);
   border-radius: 999px;
-  color: #34D399;
+  color: #8DBF9A;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -4237,7 +4237,7 @@ html[data-section-colors-custom] .index-main-flow :is(
   align-items: center;
   gap: 4px;
   font-size: 0.74rem;
-  color: #10B981;
+  color: #4A7A5A;
   font-weight: 600;
 }
 

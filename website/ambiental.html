@@ -24,7 +24,7 @@
 - Estilos en css/pages/ambiental-exact.css y modales oficiales.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="ambiental" data-bq-group="cultura">
 
 <head>
   <meta charset="UTF-8">
@@ -35,8 +35,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome Icons Suite -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -57,6 +56,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-ambiental-exact">
@@ -92,7 +93,7 @@
             <a href="historia.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-landmark" style="color: #38BDF8;"></i> Historia &amp; Memoria</a>
             <a href="gastronomia.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-utensils" style="color: #F65E01;"></i> Gastronomía Ancestral</a>
             <a href="musica.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-music" style="color: #A855F7;"></i> Son Sonoro Folk</a>
-            <a href="aliados.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake" style="color: #10B981;"></i> Red de Aliados</a>
+            <a href="aliados.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake" style="color: #4A7A5A;"></i> Red de Aliados</a>
             <a href="nosotros.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-users" style="color: #F4E6C1;"></i> Quiénes Somos</a>
           </div>
         </div>
@@ -188,7 +189,7 @@
       <div class="exact-container">
         <div class="amb-decalogo-header">
           <div class="amb-decalogo-title-group">
-            <h2><i class="fa-solid fa-seedling" style="color: #10B981;"></i> El Decálogo Verde del Explorador Baqueano</h2>
+            <h2><i class="fa-solid fa-seedling" style="color: #4A7A5A;"></i> El Decálogo Verde del Explorador Baqueano</h2>
             <p>Pequeñas acciones, grandes cambios. Asumí estos 10 mandamientos y sé parte de la conservación de Nicaragua.</p>
           </div>
           <div class="amb-decalogo-progress-side">
@@ -284,7 +285,7 @@
           <!-- Columna 3: Comunidad & Custodia -->
           <div class="amb-decalogo-col">
             <div class="amb-col-header">
-              <i class="fa-solid fa-people-roof" style="color: #16A34A;"></i>
+              <i class="fa-solid fa-people-roof" style="color: #4A7A5A;"></i>
               <div>
                 <h4>Comunidad &amp; Custodia</h4>
                 <span>El territorio también es su gente.</span>
@@ -320,7 +321,7 @@
           <div class="amb-credential-card">
             <div>
               <div class="amb-emblem-box">
-                <img src="assets/images/baqui.png" alt="Insignia Guardián">
+                <img src="assets/images/assistant/baqui.png" alt="Insignia Guardián">
               </div>
               <h3>Tu Credencial Digital</h3>
               <p class="desc">Asume los 10 compromisos y recibe tu insignia de Guardián de la Naturaleza.</p>
@@ -361,7 +362,7 @@
 
           <!-- Derecha: Formulario de Reporte -->
           <div class="amb-form-panel" id="reportFormPanel">
-            <h3><i class="fa-solid fa-shield-cat" style="color: #10B981;"></i> Reportar daño ambiental</h3>
+            <h3><i class="fa-solid fa-shield-cat" style="color: #4A7A5A;"></i> Reportar daño ambiental</h3>
             <div class="amb-stepper-row">
               <span class="amb-stepper-step active">❶ Ubicación</span>
               <span class="amb-stepper-step">❷ Detalles</span>
@@ -661,10 +662,10 @@
           }).addTo(map);
 
           const alerts = [
-            { name: "Alerta Bosawás (Protegido)", lat: 14.2, lng: -85.0, color: "#10B981" },
+            { name: "Alerta Bosawás (Protegido)", lat: 14.2, lng: -85.0, color: "#4A7A5A" },
             { name: "Monitoreo Volcán Masaya", lat: 11.98, lng: -86.16, color: "#F65E01" },
             { name: "Custodia Cuenca Ometepe", lat: 11.54, lng: -85.61, color: "#0284C7" },
-            { name: "Reserva Marina Refugio La Flor", lat: 11.14, lng: -85.79, color: "#10B981" }
+            { name: "Reserva Marina Refugio La Flor", lat: 11.14, lng: -85.79, color: "#4A7A5A" }
           ];
 
           alerts.forEach(function (a) {

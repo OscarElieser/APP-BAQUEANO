@@ -51,9 +51,9 @@ function initEnvironmentalModule() {
     if (progressBar) {
       progressBar.style.width = `${percent}%`;
       if (percent === 100) {
-        progressBar.style.background = 'linear-gradient(90deg, #10B981, #F65E01)';
+        progressBar.style.background = 'linear-gradient(90deg, #4A7A5A, #F65E01)';
       } else {
-        progressBar.style.background = 'linear-gradient(90deg, #10B981, #34D399)';
+        progressBar.style.background = 'linear-gradient(90deg, #4A7A5A, #8DBF9A)';
       }
     }
 
@@ -66,7 +66,7 @@ function initEnvironmentalModule() {
       if (isCommitted) {
         card.classList.add('committed');
         if (toggleBtn) {
-          toggleBtn.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #10B981;"></i>';
+          toggleBtn.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i>';
           toggleBtn.classList.add('checked');
         }
       } else {

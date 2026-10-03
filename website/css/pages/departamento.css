@@ -215,7 +215,7 @@
       line-height: 1.45;
     }
     .dept-activity-li i {
-      color: #10B981;
+      color: #4A7A5A;
       margin-top: 0.2rem;
       font-size: 1rem;
     }
@@ -282,7 +282,7 @@ html body .departamento-inline-003 {
 }
 
 html body .departamento-inline-004 {
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .departamento-inline-005 {
@@ -356,7 +356,7 @@ html body .departamento-inline-016 {
   font-family: var(--font-tech) !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .departamento-inline-017 {
@@ -881,7 +881,7 @@ button.territory-pill-card span {
 .m-badge-accent {
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #10B981;
+  color: #4A7A5A;
 }
 .manifesto-headline {
   font-size: 2.2rem;
@@ -931,7 +931,7 @@ button.territory-pill-card span {
 .tag-verified-count {
   font-family: var(--font-tech, monospace);
   font-size: 0.78rem;
-  color: #10B981;
+  color: #4A7A5A;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.25);
   padding: 0.25rem 0.7rem;
@@ -1026,7 +1026,7 @@ button.territory-pill-card span {
   margin-top: 1.5rem;
 }
 .baqueano-highlight-quote i {
-  color: #10B981;
+  color: #4A7A5A;
   font-size: 1.4rem;
   margin-top: 0.2rem;
 }
@@ -1498,7 +1498,7 @@ button.territory-pill-card span {
 }
 .verified-badge {
   font-size: 0.75rem;
-  color: #10B981;
+  color: #4A7A5A;
   font-weight: 700;
 }
 
@@ -1562,7 +1562,7 @@ button.territory-pill-card span {
 .event-mini-badge {
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #10B981;
+  color: #4A7A5A;
   font-family: var(--font-tech, monospace);
   font-size: 0.78rem;
   padding: 0.5rem 0.8rem;
@@ -1796,7 +1796,7 @@ button.territory-pill-card span {
   gap: 0.5rem;
 }
 .mun-modal-vivi-box li i {
-  color: #10B981;
+  color: #4A7A5A;
   font-size: 0.75rem;
 }
 .mun-quick-stats {
@@ -1918,7 +1918,7 @@ button.territory-pill-card span {
 }
 .person-footer-badge {
   font-size: 0.72rem;
-  color: #10B981;
+  color: #4A7A5A;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -1979,7 +1979,7 @@ button.territory-pill-card span {
   gap: 0.5rem;
 }
 .decalogo-list li i {
-  color: #10B981;
+  color: #4A7A5A;
   font-size: 0.85rem;
 }
 .report-damage-btn {

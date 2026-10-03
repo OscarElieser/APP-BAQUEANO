@@ -28,7 +28,7 @@
 - Modal SOS y footer institucional.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="mi-viaje" data-bq-group="cuenta">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -38,8 +38,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -153,7 +152,7 @@
     /* ── Checklist ── */
     .checklist-wrap { background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; max-width: 600px; }
     .check-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; font-size: .9rem; cursor: pointer; }
-    .check-item input { accent-color: #10B981; width: 18px; height: 18px; }
+    .check-item input { accent-color: #4A7A5A; width: 18px; height: 18px; }
 
     /* ── Recomendaciones ── */
     .recommendations-section { margin-top: 28px; }
@@ -206,7 +205,7 @@
     .rec-card-loc  { font-size: .78rem; color: #64748B; display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
     .rec-card-rating { font-size: .78rem; display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
     .rec-stars { color: #F59E0B; }
-    .rec-verified { color: #10B981; font-weight: 700; font-size: .72rem; }
+    .rec-verified { color: #4A7A5A; font-weight: 700; font-size: .72rem; }
     .rec-price { font-size: .85rem; color: #165D6F; font-weight: 700; margin-bottom: 12px; }
     .btn-rec-action {
       width: 100%; border: 1.5px solid #E2E8F0; background: #FFF; color: #475569;
@@ -263,6 +262,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-viaje-exact">
@@ -518,7 +519,7 @@
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #165D6F 0%, #0B253A 100%);">
                   <span class="rec-badge"><i class="fa-solid fa-hotel"></i> Hospedaje</span>
-                  <img src="assets/images/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+                  <img src="assets/images/assistant/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
                 </div>
                 <div class="rec-card-body">
                   <div class="rec-card-name">Hotel Boutique Adela</div>
@@ -536,7 +537,7 @@
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #F65E01 0%, #0B253A 100%);">
                   <span class="rec-badge"><i class="fa-solid fa-utensils"></i> Gastronomía</span>
-                  <img src="assets/images/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+                  <img src="assets/images/assistant/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
                 </div>
                 <div class="rec-card-body">
                   <div class="rec-card-name">Restaurante El Zaguán</div>
@@ -552,9 +553,9 @@
 
               <!-- Tarjeta 3 -->
               <div class="rec-card">
-                <div class="rec-card-img" style="background: linear-gradient(135deg, #10B981 0%, #0B253A 100%);">
+                <div class="rec-card-img" style="background: linear-gradient(135deg, #4A7A5A 0%, #0B253A 100%);">
                   <span class="rec-badge"><i class="fa-solid fa-person-hiking"></i> Guía Local</span>
-                  <img src="assets/images/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+                  <img src="assets/images/assistant/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
                 </div>
                 <div class="rec-card-body">
                   <div class="rec-card-name">Guía Local Don Carlos</div>
@@ -572,7 +573,7 @@
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #0284C7 0%, #0B253A 100%);">
                   <span class="rec-badge"><i class="fa-solid fa-water"></i> Tour Acuático</span>
-                  <img src="assets/images/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+                  <img src="assets/images/assistant/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
                 </div>
                 <div class="rec-card-body">
                   <div class="rec-card-name">Tour en Kayak Isletas</div>
@@ -640,11 +641,11 @@
             <div class="map-tab-panel" id="mapPanelComida">
               <div class="map-day-cards">
                 <div class="map-day-row">
-                  <div class="map-day-num" style="background:#10B981"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
+                  <div class="map-day-num" style="background:#4A7A5A"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
                   <div class="map-day-info"><h5>Restaurante El Zaguán · Granada</h5><span>C$ 350/persona · 4.7 ★ · Gastronomía típica</span></div>
                 </div>
                 <div class="map-day-row">
-                  <div class="map-day-num" style="background:#10B981"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
+                  <div class="map-day-num" style="background:#4A7A5A"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
                   <div class="map-day-info"><h5>Kiosco Doña Rosa · Granada</h5><span>Vigorón artesanal · C$ 80/porción · Campesino</span></div>
                 </div>
               </div>
@@ -798,7 +799,7 @@
             <span class="script-title">Nicaragua</span>
             <span class="script-subtitle">Auténtica</span>
             <svg class="leaf-accent-svg" viewBox="0 0 32 32" fill="none">
-              <path d="M6 26C8 16 16 8 26 6C24 16 16 24 6 26Z" fill="#10B981" stroke="#10B981" stroke-width="2"/>
+              <path d="M6 26C8 16 16 8 26 6C24 16 16 24 6 26Z" fill="#4A7A5A" stroke="#4A7A5A" stroke-width="2"/>
               <path d="M6 26C12 20 18 14 26 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <span class="green-brush-underline"></span>

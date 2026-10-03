@@ -18,7 +18,7 @@
   --prof-muted: #64748B;
   --prof-border: #E2E8F0;
   --prof-radius: 16px;
-  --prof-green: #10B981;
+  --prof-green: #4A7A5A;
 }
 
 body.page-perfil {
@@ -35,7 +35,7 @@ body.page-perfil {
   position: relative;
   min-height: 440px;
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.88) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/laguna_de_apoyo.jpg') center/cover no-repeat;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -60,6 +60,7 @@ body.page-perfil {
 }
 
 .prof-hero-title {
+  color: #FFFFFF; /* el H1 global usa --text-primary (oscuro en tema claro); la portada es oscura */
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.4rem, 5vw, 3.8rem);
   font-weight: 900;
@@ -346,7 +347,7 @@ body.page-perfil {
 /* PRÓXIMO VIAJE */
 .prof-next-trip-badge {
   background: #ECFDF5;
-  color: #065F46;
+  color: #2F5A3C;
   border: 1px solid #A7F3D0;
   padding: 3px 8px;
   border-radius: 6px;
@@ -566,7 +567,7 @@ body.page-perfil {
 
 .prof-scenic-banner {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(22, 93, 111, 0.75) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover;
+              url('../../assets/images/destinos/laguna_de_apoyo.jpg') center/cover;
   border-radius: var(--prof-radius);
   padding: 24px;
   color: #FFFFFF;
@@ -906,7 +907,7 @@ body.page-perfil {
 .prof-passport-bar-fill {
   height: 100%;
   width: 29.4%; /* 5 de 17 */
-  background: linear-gradient(90deg, #10B981 0%, #165D6F 50%, #F65E01 100%);
+  background: linear-gradient(90deg, #4A7A5A 0%, #165D6F 50%, #F65E01 100%);
   border-radius: 999px;
   transition: width 1s ease;
 }
@@ -980,8 +981,8 @@ body.page-perfil {
 
 .prof-stamp-item.unlocked .prof-stamp-icon {
   background: rgba(16, 185, 129, 0.2);
-  color: #10B981;
-  border: 1px solid #10B981;
+  color: #4A7A5A;
+  border: 1px solid #4A7A5A;
 }
 
 .prof-stamp-item.planned .prof-stamp-icon {
@@ -1018,7 +1019,7 @@ body.page-perfil {
 }
 
 .prof-stamp-item.unlocked .prof-stamp-status {
-  color: #10B981;
+  color: #4A7A5A;
 }
 .prof-stamp-item.planned .prof-stamp-status {
   color: #F65E01;

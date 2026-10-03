@@ -79,7 +79,7 @@
       geometry.scale(-1, 1, 1);
 
       const textureLoader = new THREE.TextureLoader();
-      const defaultPano = 'assets/images/heroes/hero-bg.jpg';
+      const defaultPano = 'assets/images/destinos/splash_bg.jpg';
       textureLoader.load(imageUrl || defaultPano, (texture) => {
         texture.colorSpace = THREE.SRGBColorSpace;
         const material = new THREE.MeshBasicMaterial({ map: texture });

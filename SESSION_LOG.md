@@ -3068,3 +3068,45 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
   3. **Bug crítico baqueano-ia.html (no terminaba de cargar):** `onerror` apuntaba a imágenes inexistentes que a su vez fallaban → bucle infinito. Fotos reales (volcan_masaya, La Calzada, isletas_de_granada) + `loading=lazy`. Carga: ∞ → ~3 s.
   4. **Prevención global:** `this.onerror=null;` en todos los `onerror="this.src=…"` (13 archivos) + cortafuegos `installImageLoopGuard()` en `js/global-injector.js` (captura de errores de <img>: 2.º fallo → foto local, 3.º → pixel transparente).
   5. Auditoría Playwright 9 páginas × 8 anchos (320–2560): 0 desbordes horizontales; barra de pulgar recibe todos los toques (el "solapamiento" de #baqueanoAssistantBox era contenedor vacío con pointer-events:none).
+  6. **Verificación final:** auditoría ampliada 10 páginas × 16 anchos de control (320→2560 px) = **160/160 OK** (sin desborde, sin errores JS, sin bloqueos de la barra de pulgar). `baqueano-ia.html` carga en ~3 s; `perfil.html` sin errores. `validate-i18n`: es 343/343; en/fr/it/pt/de 46/343 (preexistente; las 9 claves usadas vía data-i18n existen en los 6 idiomas, el resto se traduce por texto en `global-language.js`).
+  7. El propietario commiteó los cambios de D2 como `b8469aef 3octubre`.
+- **Pendiente (Lote D3):** completar las 297 claves de en/fr/it/pt/de transmitiendo la personalidad (sin traducir modismos); revisar imágenes faltantes referenciadas (`destinos-hero.jpg`, `hero-home.jpg`, `granada.webp`, `ometepe.webp`, `aliados/*.webp`) en nosotros/perfil/CSS y apuntarlas a fotos reales; escritorio 1920–2560 (aprovechar el ancho con grillas más ricas); pruebas en Firefox/WebKit; tiempo de carga de perfil.html (~10 s en local).
+
+## 2026-10-03 — Solicitud: mostrar el diseño mejorado
+
+- 🎯 **POR QUÉ:** El propietario quiere ver cómo quedó el diseño tras los lotes D1/D2.
+- ⚙️ **CÓMO:** Capturas Playwright (celular 390 px y escritorio 1440 px) del estado actual y del anterior a D2 (`98681052`, en worktree temporal), publicadas en una galería privada.
+- **Estado:** En curso.
+- **Hallazgo durante las capturas:** las portadas de baqueano-ia, nosotros, perfil, privacidad y terminos pedían `assets/images/destinos-hero.jpg` (inexistente) y el H1 heredaba `--text-primary` (oscuro) → título oscuro sobre gris. Corregido en `css/pages/*-exact.css`: título `#FFFFFF` + fotos reales (volcan_masaya, selva_negra, laguna_de_apoyo, splash_bg). Voseo en el perfil (`perfil.html`, `js/auth-panel.js`).
+- **Entregable:** galería privada antes/después (7 paradas, capturas reales 320/390/1440 px): https://claude.ai/code/artifact/e84a9aa7-f9bd-4180-9f36-931bd45dbe02
+- **Estado:** Completado. Cambios sin commitear: 5 CSS de páginas, perfil.html, auth-panel.js, SESSION_LOG.md.
+
+## 2026-10-03 — Misión: rediseño radical, global y coherente de TODO el sitio (Lote D3)
+
+- 🎯 **POR QUÉ:** El propietario quiere que cualquier página de baqueanonicaragua.com se reconozca al instante como BAQUEANO: un solo producto digital, sin páginas con estilo antiguo. Alcance: todas las páginas, sin excepción, la cantidad no cambia el alcance.
+- ⚙️ **CÓMO (directrices):** NO borrar nada (contenido, rutas, JS, Firebase, Supabase, BAQUI, favoritos, auth, Mi Viaje, SOS, idiomas…). Primero inventario + matriz de cobertura; luego Design System global (tokens --baqueano-*: primary #F65E01, secondary #165D6F, accent/verde #4A7A5A, dark #0D1B2A, #102A43; escala tipográfica fluida con clamp, 1–2 familias); header y footer unificados; aplicar globalmente (no copiar CSS 20 veces); luego página por página (departamentos, municipios, destinos, experiencias, historia, gastronomía, música, ambiental, aliados, nosotros, BAQUI, mapa, perfil, Mi Viaje, registro de negocios, legales, secundarias/ocultas). Prioridad: funcionalidad > navegación > claridad > responsive > rendimiento > accesibilidad > diseño > animación. Textos nuevos integrados al sistema i18n. Control de calidad por página (16 puntos) y re-escaneo final. Autorización global: no detenerse tras la portada.
+- **Nota:** el brief contiene el adjetivo vetado por AGENTS.md regla 2; no se usará en archivos ni código.
+- **Estado:** Iniciado (inventario).
+- **Inventario D3 (2026-10-03):** 30 páginas publicadas (`website/*.html`; `apps/` y `packages/` no se despliegan). Dispersión medida: 390 colores hex, 662 sombras, 148 radios, 12 naranjas, 8 familias tipográficas, 6 variantes de footer, 7 páginas sin `<main>`. Matriz de grupos: home, territorio, cultura, cuenta, baqui, institucional, legal, sistema, ops.
+- **Avance D3-1 — Sistema global:**
+  1. `css/baqueano-system.css` (nuevo): tokens `--baqueano-*` (primary #F65E01, secondary #165D6F, accent #4A7A5A, dark #0D1B2A/#102A43, superficies papel), 2 familias (Montserrat display + Plus Jakarta Sans texto) con escala fluida clamp, 4 radios, 3 sombras; componentes globales (portadas, títulos, etiquetas, botones en 3 roles, tarjetas, chips, formularios 16 px/48 px, acordeones, alertas, vacíos, esqueletos, modales, cabecera, footer de las 6 variantes); grupo legal con medida de lectura; foco visible; reduced-motion.
+  2. `tools/bq-apply-system.cjs` (nuevo, idempotente): `data-bq-page`/`data-bq-group` en `<html>` de las 30 páginas, una sola petición de Google Fonts, enlace al sistema en 29 páginas (admin conserva su tema Ops), `<main id="mainContent">` en aliados, baqueano-ia, gastronomia, musica, nosotros, perfil, privacidad.
+  3. `js/global-injector.js`: el sistema siempre queda como última hoja; no duplica Google Fonts; cortafuegos de imágenes actúa al primer fallo sin onerror y barre imágenes ya rotas.
+- **Causas raíz corregidas:**
+  - `theme-switcher.css` repintaba con !important cada `main > section` (tapaba las fotos de portada) y forzaba color oscuro en todos los titulares → portadas excluidas (`[class*="hero"]`). Contrato de portada oscura (18 portadas) en el sistema.
+  - `theme-switcher.js` publicaba `--baqueano-primary` = teal → ahora primary = terracota del tema, secondary = color base (los 8 temas controlan el sistema).
+  - 7 hojas empezaban con comentarios `//` (inválidos en CSS) y perdían su primera regla (portadas de 404, aviso-legal, cookies) → comentarios válidos.
+  - aviso-legal y cookies: `id="mobileNavToggle"` duplicado por un encabezado heredado → id renombrado; copias redundantes ocultas por el sistema.
+  - 404: fondo era la maqueta con textos dibujados → foto real (cerro_negro); BAQUI apuntaba a archivo inexistente.
+  - `tools/bq-fix-assets.cjs` (nuevo): 195 referencias a 50 imágenes inexistentes → fotos reales del mismo lugar (platos sin foto: imagen regional genérica, nunca otro plato). Restan 3 inofensivas.
+  - Términos: numeración en 4 colores → un solo tono laguna.
+- **Siguiente:** revisión móvil, secciones interiores (tarjetas, grillas, formularios), pruebas funcionales y de desborde en 30 páginas.
+- **Avance D3-2 — Contraste y causas raíz (2026-10-03):** detector WCAG propio (Playwright) sobre 28 páginas: **176 → 0** textos < 3:1 en 1440 px y 390 px.
+  - `theme-switcher.css`: la "cobertura cromática" (pensada para fondo oscuro) se aplicaba también en modo claro, que `theme-switcher.js` fuerza al iniciar → ahora `html[data-theme]:not([data-bg-mode="light"])`. En claro manda el diseño de cada página + sistema; en oscuro, intacta.
+  - `headings-system.css`: h2 con tinta fija !important → hereda el color del contenedor; escala fluida hasta 2.35rem.
+  - Sistema: `h1…h6` y `p` heredan color (las reglas base de la etapa oscura usaban --text-primary/--text-muted fijos y rompían tarjetas oscuras).
+  - `tools/bq-unify-greens.cjs` (nuevo): 10 verdes → familia selva (#4A7A5A / #8DBF9A / #2F5A3C), 352 reemplazos; blanco sobre verde 2.54:1 → 4.9:1.
+  - Fichas de campo: 14 componentes con fondo translúcido (departamento, offline) → noche sólida; offline como pantalla noche autónoma; ajustes puntuales (insignias, píldoras, numeración, estrellas, reproductor).
+  - mi-negocio: formulario por pasos (indicador legible, textarea, roles de botón) + voseo en 24 textos; "Enviar Solicitud a Firestore" → "Enviar mi solicitud". Notas de campo manuscritas unificadas y en flujo normal en celular.
+- **Auditoría responsive:** 224/224 combinaciones (28 páginas × 8 anchos) sin desborde, errores JS ni imágenes rotas visibles.
+- **Siguiente:** pruebas funcionales (SOS, BAQUI, idioma, búsqueda, filtros, mapa, formularios, favoritos, departamentos/destinos por parámetro), modo oscuro del selector de temas, re-auditoría final.

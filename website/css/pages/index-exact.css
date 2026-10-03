@@ -10,7 +10,7 @@
 
    ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
    - Paleta oficial: Petróleo Teal (#165D6F), Fuego Terracota (#F65E01), Arena (#F4E6C1),
-     Noche Profunda (#081827 / #0B253A) y Verde Esmeralda (#10B981).
+     Noche Profunda (#081827 / #0B253A) y Verde Esmeralda (#4A7A5A).
    - Layout responsivo con CSS Grid y Flexbox adaptativo para móviles, tablets y desktop.
    - Microinteracciones suaves a 60fps con curvas cubic-bezier(0.16, 1, 0.3, 1).
    - Componentes modulares con nombres descriptivos y cero dependencias pesadas.
@@ -36,7 +36,7 @@
   --bq-teal: #165D6F;
   --bq-teal-light: #0D6E77;
   --bq-orange: #F65E01;
-  --bq-green: #10B981;
+  --bq-green: #4A7A5A;
   --bq-cream: #F4E6C1;
   --bq-bg-light: #F7F9FC;
   --bq-text-dark: #0B253A;
@@ -278,7 +278,7 @@
 }
 
 .exact-nav-btn-login:hover {
-  background: #059669;
+  background: #4A7A5A;
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
 }
@@ -595,16 +595,16 @@
 }
 
 /* Variantes cromáticas idénticas a la referencia */
-.category-icon-circle.all { background: #059669; color: #FFFFFF; }
+.category-icon-circle.all { background: #4A7A5A; color: #FFFFFF; }
 .category-icon-circle.beach { background: #E0F2FE; color: #0284C7; }
 .category-icon-circle.volcano { background: #F1F5F9; color: #334155; }
 .category-icon-circle.water { background: #E0F2FE; color: #0369A1; }
-.category-icon-circle.nature { background: #DCFCE7; color: #16A34A; }
+.category-icon-circle.nature { background: #DCFCE7; color: #4A7A5A; }
 .category-icon-circle.culture { background: #FEF3C7; color: #D97706; }
 .category-icon-circle.food { background: #FFEDD5; color: #EA580C; }
 .category-icon-circle.lodge { background: #EFF6FF; color: #2563EB; }
 .category-icon-circle.adventure { background: #CCFBF1; color: #0D9488; }
-.category-icon-circle.leaf { background: #DCFCE7; color: #15803D; }
+.category-icon-circle.leaf { background: #DCFCE7; color: #4A7A5A; }
 .category-icon-circle.night { background: #F3E8FF; color: #9333EA; }
 
 .category-label {
@@ -876,7 +876,7 @@
 }
 
 .map-btn-interactive:hover {
-  background: #059669;
+  background: #4A7A5A;
   transform: translateY(-1px);
 }
 
@@ -1115,7 +1115,7 @@
   flex-shrink: 0;
 }
 
-.why-pillar-icon.green { background: #DCFCE7; color: #16A34A; }
+.why-pillar-icon.green { background: #DCFCE7; color: #4A7A5A; }
 .why-pillar-icon.blue { background: #E0F2FE; color: #0284C7; }
 .why-pillar-icon.orange { background: #FFEDD5; color: #EA580C; }
 .why-pillar-icon.teal { background: #CCFBF1; color: #0D9488; }
@@ -1481,7 +1481,7 @@
 
 .community-perk-item i.orange { color: var(--bq-orange); }
 .community-perk-item i.blue { color: #0284C7; }
-.community-perk-item i.green { color: #16A34A; }
+.community-perk-item i.green { color: #4A7A5A; }
 
 .perk-text h5 {
   font-size: 0.82rem;

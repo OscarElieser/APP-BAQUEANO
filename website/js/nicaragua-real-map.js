@@ -50,7 +50,7 @@
   const PIN_CATEGORIES = {
     capital:  { color: '#F65E01', emoji: '🏙️', label: 'Capital' },
     volcano:  { color: '#FF4444', emoji: '🌋', label: 'Volcán' },
-    island:   { color: '#10B981', emoji: '🏝️', label: 'Isla' },
+    island:   { color: '#4A7A5A', emoji: '🏝️', label: 'Isla' },
     canyon:   { color: '#F59E0B', emoji: '🏞️', label: 'Cañón' },
     mountain: { color: '#165D6F', emoji: '⛰️', label: 'Montaña' },
     colonial: { color: '#8B5CF6', emoji: '🏛️', label: 'Colonial' },
@@ -70,7 +70,7 @@
       tagline: 'Corazón de la Nación: Xolotlán, Lagunas y El Chocoyero',
       desc: 'La capital combina modernidad con reservas naturales ocultas, cráteres volcánicos urbanos y las costas del Gran Lago Xolotlán.',
       highlights: ['Lago Xolotlán', 'El Chocoyero-El Brujo', 'Loma de Tiscapa', 'Puerto Salvador Allende'],
-      image: 'assets/images/destinos/dona_haydee.jpg'
+      image: 'assets/images/comida/gallo_pinto.jpg'
     },
     {
       id: 'leon', name: 'León', region: 'pacifico',
@@ -102,7 +102,7 @@
       tagline: 'La Gran Sultana: Isletas, Mombacho y Joya Colonial',
       desc: 'Ciudad colonial más antigua sobre tierra firme de América, con 365 isletas volcánicas y la selva nubosa del Mombacho.',
       highlights: ['Las Isletas', 'Volcán Mombacho', 'Calle La Calzada', 'Convento San Francisco'],
-      image: 'assets/images/destinos/hotel_dario.jpg'
+      image: 'assets/images/aliados/hotel_dario.jpg'
     },
     {
       id: 'rivas', name: 'Rivas & Ometepe', region: 'pacifico',
@@ -118,7 +118,7 @@
       tagline: 'Cuna de El Güegüense, Clima Fresco y Playas de Refugio',
       desc: 'Cuna de la primera obra de teatro del continente. Cafetales, cascadas y playas protegidas en el Pacífico.',
       highlights: ['Diriamba & El Güegüense', 'Laguna La Maquina', 'Chacocente', 'La Boquita'],
-      image: 'assets/images/destinos/villa_redonda.jpg'
+      image: 'assets/images/destinos/Villa Vista Redonda (Emerald Coast).webp'
     },
     {
       id: 'esteli', name: 'Estelí', region: 'centro',
@@ -126,7 +126,7 @@
       tagline: 'Diamante de Las Segovias: Tabaco, Cascadas y Muralismo',
       desc: 'Ciudad Tres Veces Heroica, reconocida mundialmente por los mejores puros de tabaco, cascadas y murales artísticos.',
       highlights: ['Tisey-La Estanzuela', 'Reserva Miraflor', 'Fábricas de Puros', 'Salto La Estanzuela'],
-      image: 'assets/images/destinos/poco_a_poco.jpg'
+      image: 'assets/images/destinos/Casa Señorial Colonial Granada.jpg'
     },
     {
       id: 'matagalpa', name: 'Matagalpa', region: 'centro',
@@ -150,7 +150,7 @@
       tagline: 'Ciudad de Dos Pisos, Cerros Místicos y Quesos Artesanales',
       desc: 'Joya entre montañas quebradas con calles escalonadas únicas, cerros vírgenes y rica tradición quesera artesanal.',
       highlights: ['Calles Escalonadas', 'Cerro de la Vieja', 'Queserías de Camoapa', 'Río Fonseca'],
-      image: 'assets/images/destinos/finca_magdalena.jpg'
+      image: 'assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg'
     },
     {
       id: 'chontales', name: 'Chontales', region: 'centro',
@@ -182,7 +182,7 @@
       tagline: 'Ruta del Agua Sagrada, Fortaleza Colonial e Indio Maíz',
       desc: 'Paraíso fluvial que conecta el Gran Lago con el Mar Caribe, custodiado por la Reserva de Biosfera Indio Maíz.',
       highlights: ['Fortaleza El Castillo', 'Biosfera Indio Maíz', 'Solentiname', 'San Carlos'],
-      image: 'assets/images/destinos/fortaleza_el_castillo.jpg'
+      image: 'assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg'
     },
     {
       id: 'raccn', name: 'RACCN · Caribe Norte', region: 'caribe',

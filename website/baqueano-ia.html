@@ -26,7 +26,7 @@
 - Controles de presupuesto y cálculo bimonetario (C$ NIO y $ USD).
 ============================================================================
 -->
-<html lang="es-NI">
+<html lang="es-NI" data-bq-page="baqueano-ia" data-bq-group="baqui">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -36,8 +36,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -57,6 +56,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 <body class="page-baqueano-ia">
 
@@ -153,6 +154,7 @@
       </div>
     </div>
   </nav>
+  <main id="mainContent" tabindex="-1">
     </div>
   </nav>
 
@@ -182,7 +184,7 @@
     <!-- COL 1: CHAT CON BAQUI -->
     <div class="ia-chat-box">
       <div class="ia-chat-header">
-        <img src="assets/images/baqui-bird.png" alt="BAQUI" class="ia-chat-avatar" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+        <img src="assets/images/assistant/baqui-bird.png" alt="BAQUI" class="ia-chat-avatar" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         <div class="ia-chat-header-text">
           <h3>BAQUI</h3>
           <p>Tu copiloto de viaje por Nicaragua</p>
@@ -574,7 +576,7 @@
 
     <!-- RUTA LISTA CARD -->
     <div class="ia-ready-card">
-      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="ia-ready-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+      <img src="assets/images/assistant/baqui-bird.png" alt="Baqüi" class="ia-ready-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'">
       <div class="ia-ready-header">
         <h4>Tu ruta está lista 🌿</h4>
         <p>Podés ajustar destinos, días, presupuesto o tipo de experiencias y BAQUI la actualizará al instante.</p>
@@ -607,7 +609,7 @@
       <div class="ia-rec-card">
         <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #165D6F 0%, #0B253A 100%);">
           <span class="ia-rec-badge"><i class="fa-solid fa-hotel"></i> Hospedaje</span>
-          <img src="assets/images/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+          <img src="assets/images/assistant/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         </div>
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Hotel Boutique Adela</h4>
@@ -621,7 +623,7 @@
       <div class="ia-rec-card">
         <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #F65E01 0%, #0B253A 100%);">
           <span class="ia-rec-badge"><i class="fa-solid fa-utensils"></i> Gastronomía</span>
-          <img src="assets/images/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+          <img src="assets/images/assistant/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         </div>
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Restaurante El Zaguán</h4>
@@ -633,9 +635,9 @@
       </div>
       <!-- 3 -->
       <div class="ia-rec-card">
-        <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #10B981 0%, #0B253A 100%);">
+        <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #4A7A5A 0%, #0B253A 100%);">
           <span class="ia-rec-badge"><i class="fa-solid fa-person-hiking"></i> Guía Local</span>
-          <img src="assets/images/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+          <img src="assets/images/assistant/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         </div>
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Guía Local Don Carlos</h4>
@@ -649,7 +651,7 @@
       <div class="ia-rec-card">
         <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #0284C7 0%, #0B253A 100%);">
           <span class="ia-rec-badge"><i class="fa-solid fa-water"></i> Tour Acuático</span>
-          <img src="assets/images/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+          <img src="assets/images/assistant/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         </div>
         <div class="ia-rec-content">
           <h4 class="ia-rec-title">Tour en Kayak Isletas</h4>
@@ -708,6 +710,7 @@
   </section>
 
   <!-- FOOTER OFICIAL UNIFICADO -->
+  </main>
   <footer class="footer-unified">
     <div class="footer-container">
       <div class="footer-grid">
@@ -814,7 +817,7 @@
           { name: "Managua (Partida)", lat: 12.1364, lng: -86.2514, color: "#165D6F" },
           { name: "Volcán Masaya", lat: 11.9844, lng: -86.1611, color: "#F65E01" },
           { name: "Granada Centro", lat: 11.9344, lng: -85.9560, color: "#165D6F" },
-          { name: "Isletas de Granada", lat: 11.9050, lng: -85.9180, color: "#10B981" }
+          { name: "Isletas de Granada", lat: 11.9050, lng: -85.9180, color: "#4A7A5A" }
         ];
 
         // Polyline trazando la ruta

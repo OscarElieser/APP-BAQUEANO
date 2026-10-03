@@ -18,7 +18,7 @@
   --nos-muted: #64748B;
   --nos-border: #E2E8F0;
   --nos-radius: 16px;
-  --nos-green: #10B981;
+  --nos-green: #4A7A5A;
 }
 
 body.page-nosotros {
@@ -35,7 +35,7 @@ body.page-nosotros {
   position: relative;
   min-height: 480px;
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.85) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/selva_negra.jpg') center/cover no-repeat;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -60,6 +60,7 @@ body.page-nosotros {
 }
 
 .nos-hero-title {
+  color: #FFFFFF; /* el H1 global usa --text-primary (oscuro en tema claro); la portada es oscura */
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.4rem, 5vw, 4.2rem);
   font-weight: 900;
@@ -260,7 +261,7 @@ body.page-nosotros {
 
 .nos-mv-card.mision {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(22, 93, 111, 0.8) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover;
+              url('../../assets/images/destinos/selva_negra.jpg') center/cover;
 }
 
 .nos-mv-card.vision {
@@ -629,7 +630,7 @@ body.page-nosotros {
 
 .nos-manifesto-card {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.75) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover;
+              url('../../assets/images/destinos/selva_negra.jpg') center/cover;
   border-radius: var(--nos-radius);
   padding: 36px 40px;
   color: #FFFFFF;

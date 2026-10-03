@@ -50,7 +50,7 @@
    */
   var VIVENCIAS = [
     { id: "aventura",     icon: "fa-solid fa-person-hiking",    label: "Aventura",       color: "#E54D00", categories: ["volcanes", "aventura", "senderismo"] },
-    { id: "naturaleza",   icon: "fa-solid fa-leaf",             label: "Naturaleza",     color: "#22C55E", categories: ["naturaleza", "rios", "reservas"] },
+    { id: "naturaleza",   icon: "fa-solid fa-leaf",             label: "Naturaleza",     color: "#4A7A5A", categories: ["naturaleza", "rios", "reservas"] },
     { id: "cultura",      icon: "fa-solid fa-masks-theater",    label: "Cultura",        color: "#8B5CF6", categories: ["cultura", "museos", "patrimonio"] },
     { id: "descanso",     icon: "fa-solid fa-umbrella-beach",   label: "Descanso",       color: "#06B6D4", categories: ["playas", "hospedaje"] },
     { id: "historia",     icon: "fa-solid fa-scroll",           label: "Historia",       color: "#A16207", categories: ["historia", "patrimonio", "arqueologia"] },

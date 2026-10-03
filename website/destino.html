@@ -27,7 +27,7 @@
 - Footer oficial institucional.
 ============================================================================
 -->
-<html lang="es-NI">
+<html lang="es-NI" data-bq-page="destino" data-bq-group="territorio">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -38,7 +38,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
@@ -199,6 +199,8 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.7);
     }
   </style>
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 <body class="page-destino-view">
 
@@ -297,7 +299,7 @@
         <i class="fa-solid fa-arrow-left"></i> Volver al Catálogo de Destinos
       </a>
       <span style="font-size:0.82rem;color:#94A3B8;">
-        <i class="fa-solid fa-shield-halved" style="color:#10B981;margin-right:4px;"></i> Verificación Territorial en 8 Puntos
+        <i class="fa-solid fa-shield-halved" style="color:#4A7A5A;margin-right:4px;"></i> Verificación Territorial en 8 Puntos
       </span>
     </div>
 
@@ -380,7 +382,7 @@
       // Renderizar ficha completa en el contenedor
       card.innerHTML = `
         <div class="bq-dossier-hero">
-          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos/volcan_masaya.jpg'}'">
           <div class="bq-dossier-hero-gradient"></div>
           <div class="bq-dossier-hero-text">
             <div class="bq-dossier-badges">
@@ -447,7 +449,7 @@
           <div class="bq-dossier-section">
             <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Actividades recomendadas</h4>
             <div class="bq-dossier-chips-list">
-              ${dest.activities.map(act => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-check" style="color:#10B981"></i> ${act}</div>`).join('')}
+              ${dest.activities.map(act => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-check" style="color:#4A7A5A"></i> ${act}</div>`).join('')}
             </div>
           </div>
 
@@ -478,7 +480,7 @@
               </div>
               <div class="bq-dossier-feedback-actions">
                 <button type="button" class="bq-feedback-chip" id="feedbackVoteUp" aria-label="Sí, muy útil">
-                  <i class="fa-solid fa-thumbs-up" style="color:#10B981;"></i> <span>Sí, útil</span>
+                  <i class="fa-solid fa-thumbs-up" style="color:#4A7A5A;"></i> <span>Sí, útil</span>
                 </button>
                 <button type="button" class="bq-feedback-chip" id="feedbackVoteDown" aria-label="Podría mejorar">
                   <i class="fa-solid fa-thumbs-down" style="color:#F59E0B;"></i> <span>Podría mejorar</span>

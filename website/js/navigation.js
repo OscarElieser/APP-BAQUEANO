@@ -605,7 +605,7 @@ function initSosModal() {
             gpsDisplay.innerHTML = `
               <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 4px 0;">
                 <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; padding: 6px 14px;">
-                  <i class="fa-solid fa-satellite" style="color: #10B981; font-size: 1.1rem;"></i>
+                  <i class="fa-solid fa-satellite" style="color: #4A7A5A; font-size: 1.1rem;"></i>
                   <span id="sosGpsValue" style="color: #FFFFFF; font-family: monospace; font-size: 1.15rem; font-weight: 800; user-select: all; cursor: text;" title="Doble clic para seleccionar">${lat}, ${lon}</span>
                 </div>
                 <div style="font-size: 0.72rem; color: #2DD4BF; font-weight: 500; margin-top: 2px;">
@@ -702,7 +702,7 @@ function initSosModal() {
       try {
         await navigator.clipboard.writeText(textToCopy);
         const originalHtml = btnCopyGps.innerHTML;
-        btnCopyGps.innerHTML = `<i class="fa-solid fa-check" style="color: #10B981;"></i> ¡Copiado para Google Maps! (${textToCopy})`;
+        btnCopyGps.innerHTML = `<i class="fa-solid fa-check" style="color: #4A7A5A;"></i> ¡Copiado para Google Maps! (${textToCopy})`;
         btnCopyGps.style.background = '#165D6F';
         btnCopyGps.style.color = '#FFFFFF';
 

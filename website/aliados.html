@@ -30,7 +30,7 @@
 - Modales funcionales: Registro de Negocio (#bizRegisterModal) y SOS (#sosModal).
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="aliados" data-bq-group="institucional">
 
 <head>
   <meta charset="UTF-8">
@@ -41,8 +41,7 @@
   <!-- Tipografías Oficiales Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- Iconografía FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -63,6 +62,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-aliados-exact">
@@ -122,6 +123,7 @@
       </div>
     </div>
   </nav>
+  <main id="mainContent" tabindex="-1">
 
   <!-- ============================================================================
        1. HERO ALIADOS BAQUEANO (IMAGEN 3)
@@ -163,7 +165,7 @@
     <div class="exact-container">
       <div class="aliados-metrics-row">
         <div class="aliados-metric-item">
-          <i class="fa-solid fa-circle-check" style="color: #10B981;"></i>
+          <i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i>
           <span><strong>14</strong> Aliados verificados en esta plataforma</span>
         </div>
         <div class="aliados-metric-item">
@@ -285,7 +287,7 @@
         <!-- 1. Coop. Cañón de Somoto -->
         <article class="aliado-card-exact" data-dept="madriz" data-cat="coop">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Coop. Cañón de Somoto" class="aliado-card-img" loading="lazy">
+            <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-card-img" loading="lazy">
             <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
             <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
           </div>
@@ -342,7 +344,7 @@
         <!-- 4. Baqueanos Cerro Negro -->
         <article class="aliado-card-exact" data-dept="leon" data-cat="guias">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Volcán Cerro Negro Sandboarding Extremo.webp" alt="Baqueanos Cerro Negro" class="aliado-card-img" loading="lazy">
+            <img src="assets/images/destinos/cerro_negro.jpg" alt="Baqueanos Cerro Negro" class="aliado-card-img" loading="lazy">
             <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
             <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
           </div>
@@ -361,7 +363,7 @@
         <!-- 5. Finca Magdalena & Ometepe -->
         <article class="aliado-card-exact" data-dept="rivas" data-cat="coop">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Reserva Natural Volcán Mombacho & Bosque Nuboso.jpg" alt="Finca Magdalena & Ometepe" class="aliado-card-img" loading="lazy">
+            <img src="assets/images/destinos/selva_negra.jpg" alt="Finca Magdalena & Ometepe" class="aliado-card-img" loading="lazy">
             <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
             <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
           </div>
@@ -437,7 +439,7 @@
         <!-- 9. Feel at Home Campestre -->
         <article class="aliado-card-exact" data-dept="masaya" data-cat="lodge">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Feel at Home Campestre" class="aliado-card-img" loading="lazy">
+            <img src="assets/images/destinos/volcan_masaya.jpg" alt="Feel at Home Campestre" class="aliado-card-img" loading="lazy">
             <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
             <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
           </div>
@@ -456,7 +458,7 @@
         <!-- 10. Sohla Rooftop Granada -->
         <article class="aliado-card-exact" data-dept="granada" data-cat="gastro">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Sohla Rooftop Granada" class="aliado-card-img" loading="lazy">
+            <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop Granada" class="aliado-card-img" loading="lazy">
             <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
             <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
           </div>
@@ -503,7 +505,7 @@
           <div class="aliados-nearby-list">
             <!-- 1. Coop. Cañón de Somoto -->
             <div class="aliado-nearby-item">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Coop. Cañón de Somoto" class="aliado-nearby-img">
+              <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-nearby-img">
               <div class="aliado-nearby-info">
                 <div class="aliado-nearby-name">Coop. Cañón de Somoto</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
@@ -525,7 +527,7 @@
 
             <!-- 3. Sohla Rooftop Granada -->
             <div class="aliado-nearby-item">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Sohla Rooftop" class="aliado-nearby-img">
+              <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop" class="aliado-nearby-img">
               <div class="aliado-nearby-info">
                 <div class="aliado-nearby-name">Sohla Rooftop Granada</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
@@ -546,7 +548,7 @@
     <div class="exact-container">
       <div class="aliados-verif-head">
         <div>
-          <h3><i class="fa-solid fa-circle-check" style="color: #10B981;"></i> ¿Cómo verificamos a nuestros aliados?</h3>
+          <h3><i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i> ¿Cómo verificamos a nuestros aliados?</h3>
           <p>Para garantizar experiencias seguras, auténticas y de calidad.</p>
         </div>
         <a href="#comoVerificamos" class="aliados-verif-link">Conocé más sobre el proceso &rarr;</a>
@@ -672,7 +674,7 @@
     <div class="exact-container">
       <div class="aliados-biz-cta-card">
         <div class="aliados-biz-left">
-          <img loading="lazy" decoding="async" src="assets/images/baqui.png" alt="Baqüi Guardabarranco" class="aliados-biz-bird">
+          <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Guardabarranco" class="aliados-biz-bird">
           <div class="aliados-biz-text">
             <h3>¿Tenés un negocio turístico?</h3>
             <p>Unite a la red BAQUEANO y mostrá tu experiencia a viajeros de todo el mundo. Juntos impulsamos un turismo justo y responsable.</p>
@@ -745,6 +747,7 @@
   <!-- ============================================================================
        10. PIE DE PÁGINA INSTITUCIONAL UNIFICADO (4 COLUMNAS - IMÁGENES 1-4)
        ============================================================================ -->
+  </main>
   <footer class="site-footer-exact" role="contentinfo">
     <div class="exact-container">
       <div class="footer-grid-exact">
@@ -822,7 +825,7 @@
     <div class="exact-modal-window">
       <button type="button" class="exact-modal-close" onclick="closeBizRegisterModal()" aria-label="Cerrar modal">&times;</button>
       <div class="exact-modal-header">
-        <h3 id="bizModalTitle"><i class="fa-solid fa-store" style="color: #10B981;"></i> Postular mi Negocio a la Red BAQUEANO</h3>
+        <h3 id="bizModalTitle"><i class="fa-solid fa-store" style="color: #4A7A5A;"></i> Postular mi Negocio a la Red BAQUEANO</h3>
         <p>Unite a la plataforma oficial sin comisiones abusivas para impulsar tu cooperativa, hospedaje o servicio.</p>
       </div>
       <form class="exact-modal-form" id="bizRegisterForm" onsubmit="handleBizFormSubmit(event)">
@@ -930,12 +933,12 @@
 
           // Pines de Aliados
           const aliadosPins = [
-            { name: "Coop. Cañón de Somoto", lat: 13.4833, lng: -86.5833, color: "#10B981" },
-            { name: "Posada La Abuela", lat: 12.9167, lng: -85.8333, color: "#10B981" },
+            { name: "Coop. Cañón de Somoto", lat: 13.4833, lng: -86.5833, color: "#4A7A5A" },
+            { name: "Posada La Abuela", lat: 12.9167, lng: -85.8333, color: "#4A7A5A" },
             { name: "Arenas Beach Hotel", lat: 12.3556, lng: -87.0319, color: "#0284C7" },
             { name: "Baqueanos Cerro Negro", lat: 12.5061, lng: -86.7022, color: "#F65E01" },
-            { name: "Finca Magdalena", lat: 11.5206, lng: -85.5700, color: "#10B981" },
-            { name: "San Simián Eco-Lodge", lat: 11.5400, lng: -85.6200, color: "#10B981" },
+            { name: "Finca Magdalena", lat: 11.5206, lng: -85.5700, color: "#4A7A5A" },
+            { name: "San Simián Eco-Lodge", lat: 11.5400, lng: -85.6200, color: "#4A7A5A" },
             { name: "Morgan's Rock", lat: 11.2700, lng: -85.9000, color: "#0284C7" },
             { name: "Hola Ola Eco-Hostal", lat: 11.4500, lng: -86.1000, color: "#0284C7" },
             { name: "Feel at Home Campestre", lat: 11.9700, lng: -86.0900, color: "#F65E01" },
@@ -950,7 +953,7 @@
               weight: 2,
               opacity: 1,
               fillOpacity: 0.95
-            }).addTo(map).bindPopup(`<strong>${a.name}</strong><br><span style="color:#059669;font-weight:700;">Aliado Verificado</span>`);
+            }).addTo(map).bindPopup(`<strong>${a.name}</strong><br><span style="color:#4A7A5A;font-weight:700;">Aliado Verificado</span>`);
           });
 
           setTimeout(() => map.invalidateSize(), 300);

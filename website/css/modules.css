@@ -616,7 +616,7 @@
 
 .price-cordobas {
   font-weight: 800;
-  color: #10B981;
+  color: #4A7A5A;
   font-family: var(--font-tech);
   font-size: 0.92rem;
 }
@@ -855,7 +855,7 @@
 
 .comp-pill-win {
   background: rgba(16, 185, 129, 0.2);
-  color: #34D399;
+  color: #8DBF9A;
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   font-size: 0.75rem;
@@ -875,7 +875,7 @@
 }
 
 .comp-figure-big.success {
-  color: #10B981;
+  color: #4A7A5A;
 }
 
 .comp-annual-banner {
@@ -1440,7 +1440,7 @@
 }
 
 .sonora-artist-card.playing .btn-sonora-play-work {
-  background: #10B981;
+  background: #4A7A5A;
 }
 
 .btn-sonora-view-bio {
@@ -1898,7 +1898,7 @@
   font-size: 0.72rem;
   font-family: var(--font-tech);
   background: rgba(16, 185, 129, 0.2);
-  color: #34D399;
+  color: #8DBF9A;
   border: 1px solid rgba(16, 185, 129, 0.4);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
@@ -1911,7 +1911,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10B981;
+  background: #4A7A5A;
   animation: pulseGreen 1.5s infinite;
 }
 
@@ -2202,7 +2202,7 @@
 
 .service-status-pill.online {
   background: rgba(16, 185, 129, 0.15);
-  color: #34D399;
+  color: #8DBF9A;
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
@@ -2253,7 +2253,7 @@
 
 .status-badge-table.active {
   background: rgba(16, 185, 129, 0.15);
-  color: #34D399;
+  color: #8DBF9A;
 }
 
 .status-badge-table.warning {
@@ -2588,7 +2588,7 @@
   display: flex;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #34D399;
+  color: #8DBF9A;
 }
 
 /* Barra de Sesión de Usuario Activo en Dashboard */

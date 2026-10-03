@@ -176,7 +176,7 @@
       return Array.isArray(data) ? data.map((item) => ({
         id: item.id, name: item.name, category: item.category || 'Servicio local',
         location: item.municipality || item.department, verified: item.verified === true,
-        image: item.cover_image || 'assets/images/baqui.png', price: null
+        image: item.cover_image || 'assets/images/assistant/baqui.png', price: null
       })) : [];
     } catch (_) { return []; }
   }

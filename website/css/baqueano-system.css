@@ -1,0 +1,1040 @@
+/*
+ * ============================================================================
+ * 🧭 BAQUEANO — SISTEMA DE DISEÑO GLOBAL "CARTOGRAFÍA VIVA" (baqueano-system.css)
+ * ============================================================================
+ *
+ * 🎯 POR QUÉ (Propósito):
+ * - El sitio sumaba 390 colores hex, 662 sombras, 148 radios y 8 familias
+ *   tipográficas repartidas en 30 páginas con hojas propias (*-exact.css).
+ *   Cada página parecía de un sitio distinto. Este archivo convierte las 30
+ *   páginas en UN solo producto: misma voz tipográfica, mismos botones,
+ *   tarjetas, formularios, títulos, portadas, estados y footer.
+ *
+ * ⚙️ CÓMO (Arquitectura):
+ * - Se carga ÚLTIMO en todas las páginas (enlace en <head> + respaldo en
+ *   js/global-injector.js), después de styles.css, modules.css, la hoja de
+ *   cada página y baqueano-identity.css.
+ * - Las páginas usan clases con prefijo propio (hist-hero-title,
+ *   gastro-hero-title, term-hero-title…) pero comparten patrones de nombre.
+ *   Los componentes se alcanzan por patrón de atributo ([class*="-hero-title"],
+ *   [class*="btn"][class*="primary"]…) en UNA regla, sin copiar CSS por página.
+ * - Los tokens --baqueano-* derivan de --terracotta y --petroleo-teal, que el
+ *   selector de temas territoriales (js/theme-switcher.js) reescribe: los 8
+ *   temas siguen funcionando.
+ * - <html data-bq-page="…" data-bq-group="…"> permite ajustar familias de
+ *   páginas (legales, territorio, cultura, cuenta…) sin JavaScript.
+ * - No se oculta ni elimina contenido: solo se unifica la presentación.
+ *
+ * 📦 QUÉ (Entregables):
+ * 1. Tokens (color, tipografía, espacio, radios, sombras, movimiento).
+ * 2. Tipografía global de 2 familias con escala fluida clamp().
+ * 3. Componentes: portada, títulos de sección, etiquetas, botones, tarjetas,
+ *    chips, formularios, acordeones, alertas, cargas y estados vacíos.
+ * 4. Footer y cabecera coherentes en las 6 variantes de footer existentes.
+ * 5. Ajustes por grupo: legales (lectura), cuenta, territorio, cultura, BAQUI.
+ * 6. Microinteracciones (hover/focus/pressed) con prefers-reduced-motion.
+ * ============================================================================
+ */
+
+/* ===================================================
+   1. TOKENS
+   =================================================== */
+:root {
+  /* — Color de marca — */
+  --baqueano-primary: var(--terracotta, #F65E01);          /* naranja volcán: acción */
+  --baqueano-primary-hover: var(--terracotta-dark, #C94A00);
+  --baqueano-secondary: var(--petroleo-teal, #165D6F);     /* laguna: navegación, info */
+  --baqueano-secondary-hover: var(--petroleo-dark, #0E4655);
+  --baqueano-accent: #4A7A5A;                              /* selva: naturaleza, éxito */
+  --baqueano-dark: #0D1B2A;                                /* noche */
+  --baqueano-dark-2: #102A43;                              /* noche con relieve */
+  --baqueano-sand: var(--arena-pinolera, #F4E6C1);         /* arena pinolera */
+
+  /* — Superficies (neutros con sesgo cálido hacia la arena) — */
+  --baqueano-light: #F7F3EA;                               /* papel de mapa */
+  --baqueano-surface: #FFFFFF;
+  --baqueano-surface-alt: #EFE8DA;
+  --baqueano-surface-night: #0D1B2A;
+
+  /* — Texto — */
+  --baqueano-text: #15232F;
+  --baqueano-text-secondary: #4F5E6B;
+  --baqueano-text-on-dark: #F7F3EA;
+  --baqueano-text-on-dark-soft: rgba(247, 243, 234, 0.78);
+
+  /* — Líneas — */
+  --baqueano-border: rgba(21, 35, 47, 0.12);
+  --baqueano-border-strong: rgba(21, 35, 47, 0.24);
+  --baqueano-border-on-dark: rgba(244, 230, 193, 0.18);
+
+  /* — Semánticos — */
+  --baqueano-success: #3E7B52;
+  --baqueano-warning: #B7791F;
+  --baqueano-error: #C0392B;
+  --baqueano-info: var(--baqueano-secondary);
+
+  /* — Tipografía: 2 familias — */
+  --baqueano-font-display: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --baqueano-font-text: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Escala fluida (320 px → 1440 px) */
+  --baqueano-size-display: clamp(2.5rem, 1.55rem + 4.75vw, 5.25rem);
+  --baqueano-size-h1: clamp(2.15rem, 1.5rem + 3.25vw, 4rem);
+  --baqueano-size-h2: clamp(1.65rem, 1.25rem + 2vw, 2.65rem);
+  --baqueano-size-h3: clamp(1.2rem, 1.05rem + 0.75vw, 1.55rem);
+  --baqueano-size-h4: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  --baqueano-size-h5: 1rem;
+  --baqueano-size-body-lg: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  --baqueano-size-body: 1rem;
+  --baqueano-size-body-sm: 0.9rem;
+  --baqueano-size-caption: 0.8rem;
+  --baqueano-size-label: 0.74rem;
+  --baqueano-size-nav: 0.92rem;
+  --baqueano-size-button: 0.95rem;
+
+  /* — Espacio (múltiplos de 4) — */
+  --baqueano-space-1: 0.25rem;
+  --baqueano-space-2: 0.5rem;
+  --baqueano-space-3: 0.75rem;
+  --baqueano-space-4: 1rem;
+  --baqueano-space-5: 1.5rem;
+  --baqueano-space-6: 2rem;
+  --baqueano-space-7: 3rem;
+  --baqueano-space-8: clamp(3rem, 2rem + 4vw, 5.5rem);
+  --baqueano-gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  --baqueano-content: 1280px;
+  --baqueano-reading: 70ch;
+
+  /* — Forma: 4 radios, nada más — */
+  --baqueano-radius-sm: 8px;      /* botones, campos */
+  --baqueano-radius-md: 14px;     /* tarjetas */
+  --baqueano-radius-lg: 22px;     /* bloques, modales */
+  --baqueano-radius-pill: 999px;  /* chips, etiquetas */
+
+  /* — Profundidad: 3 niveles, nada más — */
+  --baqueano-shadow-sm: 0 1px 2px rgba(13, 27, 42, 0.06), 0 2px 10px rgba(13, 27, 42, 0.05);
+  --baqueano-shadow-md: 0 14px 30px -12px rgba(13, 27, 42, 0.22), 0 2px 6px rgba(13, 27, 42, 0.05);
+  --baqueano-shadow-lg: 0 30px 70px -24px rgba(13, 27, 42, 0.42);
+  --baqueano-ring: 0 0 0 3px rgba(246, 94, 1, 0.32);
+
+  /* — Movimiento — */
+  --baqueano-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --baqueano-fast: 160ms;
+  --baqueano-base: 280ms;
+
+  /* — Puente: las variables heredadas apuntan al sistema (unifica 10+ alias) — */
+  --font-main: var(--baqueano-font-text);
+  --font-body: var(--baqueano-font-text);
+  --font-sans: var(--baqueano-font-text);
+  --bq-font-body: var(--baqueano-font-text);
+  --font-display: var(--baqueano-font-display);
+  --font-heading: var(--baqueano-font-display);
+  --bq-font-heading: var(--baqueano-font-display);
+  --baq-font-sans: var(--baqueano-font-display);
+  --font-tech: var(--baqueano-font-text);
+  --font-handwriting: var(--baqueano-font-display);
+  --baq-font-hand: var(--baqueano-font-display);
+  --radius-sm: var(--baqueano-radius-sm);
+  --radius-md: var(--baqueano-radius-md);
+  --radius-lg: var(--baqueano-radius-lg);
+}
+
+/* ===================================================
+   2. TIPOGRAFÍA GLOBAL
+   =================================================== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  font-family: var(--baqueano-font-text);
+  font-size: var(--baqueano-size-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Una sola voz de texto: reemplaza Inter, Space Grotesk, Playfair, Caveat,
+   Cinzel y Kaushan declarados a mano en las hojas de cada página.
+   Los íconos (Font Awesome, mapas) quedan excluidos. */
+/* Especificidad (0,0,1) + !important: gana a cualquier font-family de página
+   sin !important, pero pierde ante la regla display de abajo (más específica). */
+body :where(*:not(i, svg, svg *, [class*="fa-"], [class^="fa"], code, pre, kbd, samp)) {
+  font-family: var(--baqueano-font-text) !important;
+}
+
+/* Voz display: titulares, marca, navegación, botones y etiquetas (y su texto interno). */
+body :is(h1, h2, h3, h4, h5,
+  [class*="-hero-title"], [class*="hero-exact-title"], [class*="dept-title"],
+  [class*="section-headline"], [class*="section-title"], [class*="head-title"],
+  [class*="-headline"], [class*="brand-title"], [class*="brand-name"],
+  [class*="exact-nav-title"], [class*="col-title"], [class*="card-title"], [class*="item-title"],
+  .dish-title, .track-title, [class*="nav-link"], [class*="nav-label"], [class*="tagline"],
+  button, [class*="btn"], [class*="eyebrow"], [class*="kicker"], summary,
+  [class*="-badge"], [class*="-script"], .script-title, [class*="title-accent"],
+  .section-header-link, .bq-thumbbar span):not([class*="fa-"]),
+body :is(h1, h2, h3, h4, h5, [class*="-hero-title"], [class*="card-title"], button, [class*="btn"], [class*="-badge"], [class*="eyebrow"]) :where(*:not(i, svg, svg *, [class*="fa-"], [class^="fa"])) {
+  font-family: var(--baqueano-font-display) !important;
+}
+
+body :is(h1, h2, h3, h4, h5) {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+body :is(p, li, dd, blockquote) { text-wrap: pretty; }
+
+/* Escala base para encabezados sin estilo de página. :where() = especificidad 0,
+   así cualquier regla de página con clase sigue mandando en tamaños de tarjeta. */
+:where(main, .page-wrapper, body > section) :where(h1) { font-size: var(--baqueano-size-h1); line-height: 1.05; letter-spacing: -0.025em; font-weight: 900; }
+:where(main, .page-wrapper, body > section) :where(h2) { font-size: var(--baqueano-size-h2); line-height: 1.12; letter-spacing: -0.02em; font-weight: 800; }
+:where(main, .page-wrapper, body > section) :where(h3) { font-size: var(--baqueano-size-h3); line-height: 1.25; letter-spacing: -0.01em; font-weight: 800; }
+:where(main, .page-wrapper, body > section) :where(h4) { font-size: var(--baqueano-size-h4); line-height: 1.3; font-weight: 700; }
+:where(main, .page-wrapper, body > section) :where(h5) { font-size: var(--baqueano-size-h5); line-height: 1.35; font-weight: 700; }
+
+/* Cifras alineadas en precios, contadores y estadísticas. */
+body :is([class*="price"], [class*="precio"], [class*="stat"], [class*="count"], [class*="number"], time, .num) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===================================================
+   3. PORTADAS (hero) — cinematográficas y coherentes
+   =================================================== */
+/* Titular de portada: el mismo en las 22 portadas del sitio. */
+body :is([class*="-hero-title"], .hero-exact-title, .dept-title-big, .favorites-hero h1, .chronicle-hero h1, .help-hero h1, .exp-hero h1, .viaje-hero h1, .legal-hero h1, .bq-dossier-title):not([class*="fa-"]) {
+  font-size: var(--baqueano-size-display);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  max-width: 18ch;
+}
+/* Las portadas legales y de cuenta son de consulta: titular un punto menor. */
+html:is([data-bq-group="legal"], [data-bq-group="cuenta"], [data-bq-group="sistema"]) body :is([class*="-hero-title"], .favorites-hero h1, .legal-hero h1, .viaje-hero h1) {
+  font-size: var(--baqueano-size-h1);
+  max-width: 22ch;
+}
+
+/* Palabra destacada del titular (antes Playfair/Caveat): cursiva de la misma familia. */
+body :is([class*="-script"], [class*="title-accent"], .script-title, [class*="hero-title"] em, [class*="hero-title"] i:not([class*="fa-"])) {
+  font-family: var(--baqueano-font-display);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Bajada de portada. */
+body :is([class*="-hero-sub"], [class*="-hero-desc"], [class*="hero-subtext"], [class*="hero-exact-sub"], [class*="hero-lead"]) {
+  font-size: var(--baqueano-size-body-lg);
+  line-height: 1.6;
+  max-width: 58ch;
+  font-weight: 500;
+}
+
+/* Etiqueta de portada: marca de brújula sobre vidrio. */
+body :is([class*="-hero-badge"], [class*="-hero-eyebrow"], [class*="hero-kicker"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  width: fit-content;
+  font-family: var(--baqueano-font-display);
+  font-size: var(--baqueano-size-label);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  padding: 0.55em 1.05em;
+  border-radius: var(--baqueano-radius-pill);
+  border: 1px solid rgba(244, 230, 193, 0.32);
+  background: rgba(13, 27, 42, 0.38);
+  color: var(--baqueano-sand);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* --- Contrato de PORTADA OSCURA ---
+   Causa raíz de los titulares ilegibles: theme-switcher.css aplica
+   `html[data-theme] main :is(h1…h6){color:var(--text-primary)}` (azul noche en
+   tema claro) y gana por especificidad a la clase de cada título. Sobre una
+   foto oscura eso deja texto oscuro sobre fondo oscuro. Estas 18 portadas son
+   fotográficas u oscuras: título blanco, bajada arena, palabra clave naranja. */
+:root {
+  --bq-dark-heroes: 1; /* marcador de documentación */
+}
+html body :is(.hero-exact, .amb-hero-exact, .aliados-hero-exact, .ia-hero, .chronicle-hero, .destinos-hero-exact,
+  .exp-hero, .gastro-hero-exact, .hist-hero-exact, .legal-hero, .legal-hero-section,
+  .host-hero-section, .viaje-hero, .musica-hero-exact, .nos-hero, .prof-hero, .priv-hero, .term-hero) {
+  isolation: isolate;
+  color: var(--baqueano-text-on-dark);
+}
+html body :is(.hero-exact, .amb-hero-exact, .aliados-hero-exact, .ia-hero, .chronicle-hero, .destinos-hero-exact,
+  .exp-hero, .gastro-hero-exact, .hist-hero-exact, .legal-hero, .legal-hero-section,
+  .host-hero-section, .viaje-hero, .musica-hero-exact, .nos-hero, .prof-hero, .priv-hero, .term-hero)
+  :is(h1, h2, [class*="-hero-title"], [class*="hero-headline"]) {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: currentColor;
+  text-shadow: 0 2px 24px rgba(13, 27, 42, 0.45);
+}
+html body :is(.hero-exact, .amb-hero-exact, .aliados-hero-exact, .ia-hero, .chronicle-hero, .destinos-hero-exact,
+  .exp-hero, .gastro-hero-exact, .hist-hero-exact, .legal-hero, .legal-hero-section,
+  .host-hero-section, .viaje-hero, .musica-hero-exact, .nos-hero, .prof-hero, .priv-hero, .term-hero)
+  :is(h1, [class*="-hero-title"]) :is([class*="-script"], [class*="accent"], [class*="highlight"], em, span[class]) {
+  color: var(--baqueano-primary) !important;
+  -webkit-text-fill-color: currentColor;
+}
+html body :is(.hero-exact, .amb-hero-exact, .aliados-hero-exact, .ia-hero, .chronicle-hero, .destinos-hero-exact,
+  .exp-hero, .gastro-hero-exact, .hist-hero-exact, .legal-hero, .legal-hero-section,
+  .host-hero-section, .viaje-hero, .musica-hero-exact, .nos-hero, .prof-hero, .priv-hero, .term-hero)
+  :is(p, li, [class*="-hero-sub"], [class*="-hero-desc"], [class*="hero-subtext"]):not([class*="badge"]):not([class*="eyebrow"]):not(:is([class*="card"], [class*="panel"], [class*="box"], form, [role="dialog"]) *) {
+  color: var(--baqueano-text-on-dark-soft) !important;
+}
+
+/* Portadas claras (consulta y sistema): texto noche sobre papel, acento naranja. */
+html body :is(.help-hero, .cookies-hero-section, .report-hero-section, .favorites-hero, .map-intro)
+  :is(h1, [class*="-hero-title"]) {
+  color: var(--baqueano-dark) !important;
+}
+
+/* ===================================================
+   4. TÍTULOS DE SECCIÓN Y ETIQUETAS
+   =================================================== */
+body :is(.section-headline, [class*="section-title"], [class*="head-title"], [class*="section-header"] > h2, [class*="section-head"] > h2, [class*="-head"] > h2, main section > h2, main section > header h2):not([class*="hero"]):not([class*="fa-"]) {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+/* Íconos de los títulos: antes cada sección tenía un color distinto
+   (verde, azul, morado, rojo…). Ahora todos llevan el naranja de marca. */
+main :is(h2, h3) > i[class*="fa-"]:first-child,
+:is([class*="section-header"], [class*="section-head"], [class*="-head"]) :is(h2, h3) > i[class*="fa-"]:first-child {
+  color: var(--baqueano-primary) !important;
+  font-size: 0.8em;
+  margin-right: 0.35em;
+  vertical-align: 0.06em;
+}
+
+/* Etiquetas superiores (eyebrow/kicker) fuera de portada. */
+body :is([class*="eyebrow"], [class*="kicker"]):not([class*="hero"]) {
+  font-family: var(--baqueano-font-display);
+  font-size: var(--baqueano-size-label);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Subtítulos de sección: medida de lectura cómoda. */
+body :is(.section-subtext, [class*="section-sub"], [class*="head-sub"], [class*="head-desc"]) {
+  font-size: var(--baqueano-size-body-lg);
+  line-height: 1.6;
+  max-width: 62ch;
+  color: var(--baqueano-text-secondary);
+}
+
+/* Enlaces "Ver todos →" de los encabezados. */
+body :is(.section-header-link, [class*="see-all"], [class*="ver-todos"], [class*="view-all"]) {
+  font-family: var(--baqueano-font-display);
+  font-weight: 700;
+  font-size: var(--baqueano-size-body-sm);
+  color: var(--baqueano-secondary);
+  text-underline-offset: 0.25em;
+}
+
+/* ===================================================
+   5. BOTONES — una sola familia, tres roles
+   =================================================== */
+/* Forma común de todo botón de contenido (la cabecera conserva la suya). */
+body :is(main, section, article, aside, form, .modal-card-dialog, [role="dialog"], footer) :is(a, button)[class*="btn"]:not([class*="fa-"]):not([class*="icon"]):not([class*="close"]):not([class*="arrow"]):not([class*="fav"]):not([class*="mic"]):not([class*="send"]):not([class*="toggle"]):not([class*="remove"]):not([class*="social"]):not([class*="counter"]):not(.pagination-btn):not(.exact-nav-dropdown-btn):not(.navbar-sos-btn):not(.navbar-login-btn):not(.navbar-search-btn) {
+  border-radius: var(--baqueano-radius-sm);
+  font-family: var(--baqueano-font-display);
+  font-size: var(--baqueano-size-button);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  min-height: 46px;
+  padding-inline: 1.35em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  text-decoration: none;
+  transition: background-color var(--baqueano-fast) ease, border-color var(--baqueano-fast) ease, color var(--baqueano-fast) ease, transform var(--baqueano-fast) var(--baqueano-ease), box-shadow var(--baqueano-base) var(--baqueano-ease);
+}
+
+/* Rol 1 · Acción principal: naranja volcán. */
+body :is(
+  [class*="btn"][class*="primary"], .btn-404-primary-orange, .btn-postular-negocio,
+  .biz-btn-submit, .report-submit-btn, .amb-btn-submit-report, .btn-exact-submit,
+  .ia-cta-generate, .ia-btn-reserve-all, .open-planner-btn, .closing-action-btn,
+  .amb-btn-green, .dest-btn-green, .pref-action-btn-green, .btn-search-aliados
+):not([class*="fa-"]):not(.navbar-login-btn) {
+  background: var(--baqueano-primary) !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 10px 24px -12px rgba(246, 94, 1, 0.75);
+}
+body :is(
+  [class*="btn"][class*="primary"], .btn-404-primary-orange, .btn-postular-negocio,
+  .biz-btn-submit, .report-submit-btn, .amb-btn-submit-report, .btn-exact-submit,
+  .ia-cta-generate, .ia-btn-reserve-all, .open-planner-btn, .closing-action-btn,
+  .amb-btn-green, .dest-btn-green, .pref-action-btn-green, .btn-search-aliados
+):not([class*="fa-"]):not(.navbar-login-btn):is(:hover, :focus-visible) {
+  background: var(--baqueano-primary-hover) !important;
+}
+
+/* Rol 2 · Acción secundaria sobre fondo oscuro: vidrio con borde arena. */
+body :is([class*="btn"][class*="glass"], [class*="btn-hero-secondary"], .btn-aliados-hero-secondary, .btn-404-secondary-glass) {
+  background: rgba(13, 27, 42, 0.35) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(244, 230, 193, 0.55) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: none !important;
+}
+body :is([class*="btn"][class*="glass"], [class*="btn-hero-secondary"], .btn-aliados-hero-secondary, .btn-404-secondary-glass):is(:hover, :focus-visible) {
+  border-color: var(--baqueano-sand) !important;
+  background: rgba(13, 27, 42, 0.55) !important;
+}
+
+/* Rol 3 · Acción de navegación/consulta: laguna. */
+body :is(.btn-aliado-profile, .btn-ver-mapa-completo, .ia-btn-personalizar, .ia-btn-modify, .ia-rec-btn, .ia-day-btn, .dest-btn-subtle, .legal-doc-btn, .btn-near-me, .pref-action-btn-neutral, .amb-btn-credential, .amb-btn-sign-all) {
+  border-radius: var(--baqueano-radius-sm) !important;
+}
+
+/* Botón presionado: respuesta física. */
+body :is(button, [class*="btn"], [role="button"]):not([disabled]):active {
+  transform: translateY(1px) scale(0.985);
+}
+body :is(button, [class*="btn"]):disabled,
+body :is(button, [class*="btn"])[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+/* Desktop con mouse: elevación sutil. Celular: sin hover pegajoso. */
+@media (hover: hover) and (pointer: fine) {
+  body :is(
+    [class*="btn"][class*="primary"], .btn-404-primary-orange, .btn-postular-negocio,
+    .biz-btn-submit, .report-submit-btn, .ia-cta-generate, .closing-action-btn
+  ):not(.navbar-login-btn):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px -14px rgba(246, 94, 1, 0.85);
+  }
+}
+
+/* ===================================================
+   6. TARJETAS — "tarjetas territorio"
+   =================================================== */
+/* Raíces de tarjeta: mismo radio, mismo borde, misma profundidad.
+   No se toca el fondo: las tarjetas oscuras siguen oscuras. */
+body :is(
+  [class$="-card"], [class*="-card "], [class$="-card-exact"], [class*="-card-exact "],
+  [class$="-card-item"], [class*="-card-item "], .chronicle-card, .service-card, .trust-card,
+  .essential-card, .law-card-item, .dept-section-card, .aliado-card-exact
+):not([class*="fa-"]):not(.modal-card-dialog):not([class*="sos-"]):not(.what-now-card-bg) {
+  border-radius: var(--baqueano-radius-md);
+  box-shadow: var(--baqueano-shadow-sm);
+  transition: transform var(--baqueano-base) var(--baqueano-ease), box-shadow var(--baqueano-base) var(--baqueano-ease), border-color var(--baqueano-fast) ease;
+}
+/* Fotos dentro de tarjetas: radio interior coherente. */
+body :is([class$="-card"], [class*="-card "], [class$="-card-exact"]) > img:first-child,
+body :is([class*="card-img"], [class*="card-media"], [class*="card-photo"], [class*="card-thumb"]) {
+  border-radius: calc(var(--baqueano-radius-md) - 4px);
+}
+body :is([class$="-card"], [class*="-card "], [class$="-card-exact"]) > img:first-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* Títulos de tarjeta. */
+body :is([class*="card-title"], [class*="item-title"], .dish-title, .track-title):not([class*="fa-"]) {
+  font-family: var(--baqueano-font-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.22;
+}
+/* Mouse: la tarjeta se levanta como una postal tomada de la mesa. */
+@media (hover: hover) and (pointer: fine) {
+  body :is(
+    a[class$="-card"], a[class*="-card "], [class$="-card"]:has(> a), [class$="-card-exact"],
+    .dest-card, .exp-card, .chronicle-card, .aliado-card-exact, .what-now-card-item
+  ):not([class*="sos-"]):hover {
+    transform: translateY(-4px);
+    box-shadow: var(--baqueano-shadow-md);
+  }
+}
+
+/* ===================================================
+   7. CHIPS, PÍLDORAS Y BADGES
+   =================================================== */
+body :is([class*="chip"], [class*="-pill"]:not([class*="pill-btn"]), [class*="-tag"]:not([class*="hashtag"])):not([class*="fa-"]):not(.navbar-brand-pill):not([class*="-hero"]) {
+  border-radius: var(--baqueano-radius-pill);
+  font-family: var(--baqueano-font-text);
+  font-weight: 600;
+  line-height: 1.25;
+}
+body :is([class*="-badge"]):not([class*="hero"]):not([class*="fa-"]) {
+  border-radius: var(--baqueano-radius-pill);
+  font-family: var(--baqueano-font-display);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+/* Filtros táctiles: objetivo mínimo de 44 px en celular. */
+@media (pointer: coarse) {
+  body :is(button[class*="chip"], button[class*="pill"], button[class*="filter"], [role="tab"]) {
+    min-height: 44px;
+  }
+}
+
+/* ===================================================
+   8. FORMULARIOS
+   =================================================== */
+/* 16 px mínimo: Safari iOS hace zoom en campos con letra menor. */
+body :is(main, section, form, [role="dialog"], .modal-card-dialog) :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
+  select, textarea
+) {
+  font-family: var(--baqueano-font-text);
+  font-size: max(16px, 1rem);
+  line-height: 1.4;
+  border-radius: var(--baqueano-radius-sm);
+  transition: border-color var(--baqueano-fast) ease, box-shadow var(--baqueano-fast) ease, background-color var(--baqueano-fast) ease;
+}
+body :is(main, section, form, [role="dialog"], .modal-card-dialog) :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"]):not([type="submit"]):not([type="button"]):not([class*="search"]),
+  select
+) {
+  min-height: 48px;
+}
+body :is(input, select, textarea):focus-visible {
+  outline: none;
+  border-color: var(--baqueano-primary) !important;
+  box-shadow: var(--baqueano-ring) !important;
+}
+body :is(input, select, textarea)[aria-invalid="true"],
+body :is(input, select, textarea).is-invalid,
+body :is(input, select, textarea).error {
+  border-color: var(--baqueano-error) !important;
+}
+/* Formularios de páginas claras: borde y fondo del sistema. */
+html:is([data-bq-group="cuenta"], [data-bq-group="institucional"], [data-bq-group="legal"]) body form :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
+  select, textarea
+) {
+  border: 1.5px solid var(--baqueano-border-strong);
+  background-color: var(--baqueano-surface);
+  color: var(--baqueano-text);
+  padding-inline: 0.95rem;
+}
+body form label:not([class*="check"]):not([class*="radio"]):not([class*="toggle"]):not([class*="switch"]) {
+  font-family: var(--baqueano-font-text);
+  font-weight: 600;
+  font-size: var(--baqueano-size-body-sm);
+  letter-spacing: 0.005em;
+}
+body :is(input[type="checkbox"], input[type="radio"]) {
+  accent-color: var(--baqueano-primary);
+  width: 1.15em;
+  height: 1.15em;
+}
+body :is([class*="form-hint"], [class*="field-hint"], [class*="helper"], small[class*="hint"]) {
+  font-size: var(--baqueano-size-caption);
+  color: var(--baqueano-text-secondary);
+}
+body :is([class*="field-error"], [class*="form-error"], [class*="error-msg"], [class*="error-message"]) {
+  color: var(--baqueano-error);
+  font-size: var(--baqueano-size-caption);
+  font-weight: 600;
+}
+
+/* ===================================================
+   9. ACORDEONES, PREGUNTAS Y DETALLES
+   =================================================== */
+body :is(details, [class*="accordion"], [class*="faq-item"], [class*="acc-item"]) {
+  border-radius: var(--baqueano-radius-md);
+}
+body details > summary {
+  cursor: pointer;
+  font-family: var(--baqueano-font-display);
+  font-weight: 700;
+  min-height: 44px;
+}
+body details > summary:focus-visible { outline: 3px solid var(--baqueano-primary); outline-offset: 3px; }
+/* Numeración de secciones y pasos: antes 4–6 colores al azar por número,
+   ahora un solo hito de sendero. (map-day-num conserva su color: identifica
+   cada día de la ruta en el mapa.) */
+body :is(.term-acc-badge, .section-num-circle, .step-badge-num, .amb-rule-num) {
+  background: var(--baqueano-secondary) !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-radius: var(--baqueano-radius-sm) !important;
+  font-family: var(--baqueano-font-display) !important;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  box-shadow: none !important;
+}
+
+/* ===================================================
+   10. ALERTAS, CARGAS, ESQUELETOS Y VACÍOS
+   =================================================== */
+body :is([class*="alert"]:not([class*="alerts-"]), [class*="notice"], [class*="callout"]):not([class*="fa-"]):not(body):not(html) {
+  border-radius: var(--baqueano-radius-md);
+}
+body :is([class*="empty-state"], [class*="-empty"], .prof-res-empty, [class*="no-results"]) {
+  font-family: var(--baqueano-font-text);
+  color: var(--baqueano-text-secondary);
+  text-align: center;
+  padding: var(--baqueano-space-6) var(--baqueano-space-4);
+  border: 1.5px dashed var(--baqueano-border-strong);
+  border-radius: var(--baqueano-radius-md);
+}
+/* Esqueleto de carga reutilizable (.bq-skeleton). */
+.bq-skeleton {
+  display: block;
+  border-radius: var(--baqueano-radius-sm);
+  background: linear-gradient(100deg, var(--baqueano-surface-alt) 30%, #F8F4EC 50%, var(--baqueano-surface-alt) 70%);
+  background-size: 250% 100%;
+  animation: bq-skeleton 1.4s ease-in-out infinite;
+  min-height: 1em;
+}
+@keyframes bq-skeleton { from { background-position: 100% 0; } to { background-position: -50% 0; } }
+
+/* Toast global (window.bqToast) coherente con el sistema. */
+body :is(.bq-toast, [class*="bq-toast"], [class*="toast-item"]) {
+  font-family: var(--baqueano-font-text);
+  border-radius: var(--baqueano-radius-md);
+  box-shadow: var(--baqueano-shadow-lg);
+}
+
+/* ===================================================
+   11. MODALES Y DIÁLOGOS
+   =================================================== */
+body :is(.modal-card-dialog, [role="dialog"] > div:first-child, dialog) {
+  border-radius: var(--baqueano-radius-lg);
+}
+body :is([class*="modal"], [role="dialog"]) :is(h2, h3):first-of-type {
+  font-family: var(--baqueano-font-display);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+
+/* ===================================================
+   12. CABECERA GLOBAL
+   =================================================== */
+body :is(#mainNavbar, .main-navbar, .main-navbar-exact) :is(.exact-nav-link, .nav-link, [class*="nav-link"]) {
+  font-family: var(--baqueano-font-display);
+  font-weight: 700;
+  font-size: var(--baqueano-size-nav);
+  letter-spacing: 0.005em;
+}
+body :is(#mainNavbar, .main-navbar, .main-navbar-exact) :is(.navbar-brand-title, .exact-nav-title) {
+  font-family: var(--baqueano-font-display);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+body :is(#mainNavbar, .main-navbar, .main-navbar-exact) :is(.navbar-brand-sub, .exact-nav-tagline) {
+  font-family: var(--baqueano-font-display);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+/* ===================================================
+   13. FOOTER GLOBAL — 6 variantes, un solo aspecto
+   =================================================== */
+body :is(footer.site-footer-exact, footer.official-footer-exact, footer.main-footer, footer.footer-unified, footer.site-footer-pro, .bq-global-footer) {
+  background-color: var(--baqueano-dark) !important;
+  background-image:
+    radial-gradient(120% 70% at 100% 0%, rgba(22, 93, 111, 0.30), transparent 60%),
+    radial-gradient(90% 60% at 0% 100%, rgba(246, 94, 1, 0.10), transparent 60%) !important;
+  color: var(--baqueano-text-on-dark-soft);
+  border-top: 3px solid var(--baqueano-primary);
+  font-family: var(--baqueano-font-text);
+}
+body :is(footer.site-footer-exact, footer.official-footer-exact, footer.main-footer, footer.footer-unified, footer.site-footer-pro, .bq-global-footer) :is(h3, h4, h5, [class*="col-title"]) {
+  font-family: var(--baqueano-font-display);
+  font-size: var(--baqueano-size-label) !important;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--baqueano-sand) !important;
+}
+body :is(footer.site-footer-exact, footer.official-footer-exact, footer.main-footer, footer.footer-unified, footer.site-footer-pro, .bq-global-footer) a:not([class*="social"]):not([class*="brand"]):not([class*="btn"]) {
+  color: var(--baqueano-text-on-dark-soft);
+  text-decoration: none;
+  line-height: 1.9;
+  transition: color var(--baqueano-fast) ease;
+}
+body :is(footer.site-footer-exact, footer.official-footer-exact, footer.main-footer, footer.footer-unified, footer.site-footer-pro, .bq-global-footer) a:not([class*="social"]):not([class*="brand"]):not([class*="btn"]):is(:hover, :focus-visible) {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-decoration-color: var(--baqueano-primary);
+  text-underline-offset: 0.3em;
+}
+/* Enlaces del footer con área táctil suficiente en celular. */
+@media (pointer: coarse) {
+  body :is(footer.site-footer-exact, footer.official-footer-exact, footer.main-footer, footer.footer-unified, footer.site-footer-pro, .bq-global-footer) li > a {
+    display: inline-block;
+    padding-block: 0.3rem;
+  }
+}
+
+/* ===================================================
+   14. FONDOS DE PÁGINA
+   =================================================== */
+/* Papel de mapa cálido en lugar de blanco plano, solo donde la página no
+   define fondo propio (las secciones con clase conservan el suyo). */
+html:not([data-bq-group="ops"]) body {
+  background-color: var(--baqueano-light);
+  color: var(--baqueano-text);
+}
+html:is([data-bq-group="legal"], [data-bq-group="cuenta"], [data-bq-group="institucional"]) body :where(main, .page-wrapper) {
+  background-color: transparent;
+}
+
+/* ===================================================
+   15. PÁGINAS LEGALES — prioridad: leer cómodo
+   =================================================== */
+html[data-bq-group="legal"] body :is([class*="legal-card-text"], [class*="legal-card-body"], [class*="term-section"] p, [class*="priv-section"] p, [class*="acc-body"], [class*="accordion-body"], [class*="cookies-section"] p, details > div, details > p) {
+  font-size: 1.02rem;
+  line-height: 1.78;
+  max-width: var(--baqueano-reading);
+  color: var(--baqueano-text);
+}
+html[data-bq-group="legal"] body :is(main, .page-wrapper) :is(h2, h3) {
+  scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px);
+}
+html[data-bq-group="legal"] body :is([class*="sidebar-index"], [class*="index-card"], [class*="toc"]) a {
+  font-family: var(--baqueano-font-text);
+  font-size: var(--baqueano-size-body-sm);
+  line-height: 1.45;
+}
+
+/* ===================================================
+   16. ACCESIBILIDAD Y MOVIMIENTO
+   =================================================== */
+body :is(a, button, [role="button"], [tabindex]:not([tabindex="-1"]), summary):focus-visible {
+  outline: 3px solid var(--baqueano-primary);
+  outline-offset: 3px;
+  border-radius: var(--baqueano-radius-sm);
+}
+/* Enlaces dentro de texto corrido: siempre distinguibles sin depender del color. */
+body :is(main, article, .page-wrapper) :is(p, li) > a:not([class]) {
+  color: var(--baqueano-secondary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+::selection { background: rgba(246, 94, 1, 0.24); color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  body *, body *::before, body *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bq-skeleton { animation: none; }
+}
+
+/* ===================================================
+   17. RESPONSIVE GLOBAL
+   =================================================== */
+/* Nada de scroll lateral por textos largos (alemán, francés) o URLs. */
+body :is(h1, h2, h3, h4, p, li, a, span, label, td, th) { overflow-wrap: break-word; }
+body :is(table) { max-width: 100%; }
+body :is(iframe, video, embed, object) { max-width: 100%; }
+
+@media (max-width: 760px) {
+  /* Botones de portada a todo el ancho: fáciles para el pulgar. */
+  body :is([class*="hero-btns"], [class*="hero-actions"], [class*="hero-cta"], [class*="cta-actions"], [class*="dual-btns"]) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--baqueano-space-3);
+  }
+  body :is([class*="hero-btns"], [class*="hero-actions"], [class*="hero-cta"]) > :is(a, button) {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* Pantallas grandes: el contenido no flota en un mar vacío. */
+@media (min-width: 1920px) {
+  :root {
+    --baqueano-size-body: 1.0625rem;
+    --baqueano-content: 1520px;
+  }
+}
+
+/* ===================================================
+   18. ENCABEZADO HEREDADO (aviso-legal.html, cookies.html)
+   =================================================== */
+/* Estas dos páginas envuelven la barra oficial dentro de un <header class=
+   "main-header"> antiguo con logo, búsqueda, favoritos, "ES | EN" sin función,
+   otro "Iniciar sesión" y un botón de menú repetido. Todo eso ya está en la
+   barra oficial; se conserva en el HTML pero no se muestra dos veces. */
+header.main-header > .header-container > :is(.brand-logo-container, .nav-actions-right) {
+  display: none !important;
+}
+header.main-header,
+header.main-header > .header-container {
+  display: contents;
+}
+
+/* ===================================================
+   19. NOTAS DE CAMPO (leyendas manuscritas de portada)
+   =================================================== */
+/* Antes cada portada traía su leyenda en Caveat/Playfair con tamaños propios
+   (2.2rem en Destinos). Con una sola familia, se presentan como "nota de
+   campo": cursiva contenida, arena, levemente inclinada. En pantallas
+   angostas dejan de flotar sobre el titular y bajan al flujo normal. */
+body :is(.destinos-script-badge, .amb-hero-script, .hist-hero-script, .musica-hero-stamp > span,
+  .aliados-hero-stamp-text, .nicaragua-stamp-text, .gastro-hero-stamp, .ia-hero-stamp,
+  .legal-stamp-floating, .cookies-stamp-floating, .inspire-title-calligraphic, .brand-phrase) {
+  font-family: var(--baqueano-font-display) !important;
+  font-style: italic;
+  font-weight: 700 !important;
+  font-size: clamp(0.95rem, 0.75rem + 0.9vw, 1.45rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.005em;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: min(100%, 22ch);
+}
+@media (max-width: 760px) {
+  body :is(.destinos-script-badge, .amb-hero-script, .hist-hero-script, .musica-hero-stamp,
+    .aliados-hero-stamp, .nicaragua-stamp-badge, .gastro-hero-stamp, .ia-hero-stamp,
+    .legal-stamp-floating, .cookies-stamp-floating, .term-hero-stamp, .priv-hero-stamp,
+    .prof-hero-stamp, .nos-hero-stamp) {
+    position: static !important;
+    transform: none !important;
+    inset: auto !important;
+    margin: var(--baqueano-space-3) 0 0 !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+  body :is(.amb-hero-right, .hist-hero-right) {
+    position: static !important;
+    width: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+/* 404: su portada ahora es fotográfica → contrato oscuro. */
+html[data-bq-page="404"] body .center-404-message-block :is(h1, h2, [class*="title"]) {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: currentColor;
+}
+html[data-bq-page="404"] body .center-404-message-block :is(h1, [class*="title"]) :is(span, em) {
+  color: var(--baqueano-primary) !important;
+}
+html[data-bq-page="404"] body .center-404-message-block p {
+  color: var(--baqueano-text-on-dark-soft) !important;
+}
+
+/* Mi Negocio: el titular completo era naranja sobre una foto cálida. Título
+   blanco; solo la cifra clave ("ganar el 100%") conserva el naranja. */
+html[data-bq-page="mi-negocio"] body .host-hero-headline {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  background: none !important;
+}
+html[data-bq-page="mi-negocio"] body .host-hero-headline > span {
+  color: var(--baqueano-primary) !important;
+  -webkit-text-fill-color: var(--baqueano-primary) !important;
+}
+
+/* ===================================================
+   20. MODO CLARO DEL SELECTOR DE TEMAS
+   =================================================== */
+/* theme-switcher.css pinta etiquetas de sección en arena (pensado para fondo
+   oscuro). Con fondo claro (data-bg-mode="light") quedaban invisibles. */
+html[data-bg-mode="light"] body main :is(.badge-section-pill, .section-tag-pill, .culture-tag-pill, .partners-pill-badge, .baq-credibility-badge, .living-card-tag):not(:is([class*="hero"]) *) {
+  color: var(--baqueano-primary-hover) !important;
+  background: rgba(246, 94, 1, 0.08) !important;
+  border-color: rgba(246, 94, 1, 0.28) !important;
+}
+
+/* ===================================================
+   21. FORMULARIOS POR PASOS (registro de negocios y similares)
+   =================================================== */
+body textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+  line-height: 1.55 !important;
+  padding-block: 0.8rem !important;
+}
+body :is(.reg-steps-indicator) {
+  gap: clamp(1rem, 4vw, 2.75rem) !important;
+  flex-wrap: wrap;
+}
+body .reg-step-indicator { min-width: 4.5rem; text-align: center; }
+body .reg-step-indicator::after { display: none !important; }
+body .step-label-text {
+  font-family: var(--baqueano-font-display) !important;
+  font-size: var(--baqueano-size-caption);
+  font-weight: 700;
+  white-space: nowrap;
+}
+/* Siguiente / Enviar: acción principal. Atrás: acción secundaria sobria. */
+body :is(.btn-reg-next, .btn-reg-submit) {
+  background: var(--baqueano-primary) !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--baqueano-radius-sm) !important;
+  min-height: 48px;
+  padding-inline: 1.5em !important;
+  font-family: var(--baqueano-font-display) !important;
+  font-weight: 700;
+  box-shadow: 0 10px 24px -12px rgba(246, 94, 1, 0.75) !important;
+}
+body :is(.btn-reg-next, .btn-reg-submit):is(:hover, :focus-visible) { background: var(--baqueano-primary-hover) !important; }
+body .btn-reg-prev {
+  background: transparent !important;
+  color: var(--baqueano-text) !important;
+  border: 1.5px solid var(--baqueano-border-strong) !important;
+  border-radius: var(--baqueano-radius-sm) !important;
+  min-height: 48px;
+  font-family: var(--baqueano-font-display) !important;
+  font-weight: 700;
+}
+
+/* ===================================================
+   22. TÍTULOS QUE HEREDAN SU CONTEXTO
+   =================================================== */
+/* styles.css (y 2 hojas más) declaran h1…h6 { color: var(--text-primary) },
+   escrito cuando el sitio era oscuro y esa variable valía blanco. En modo
+   claro vale noche: todo título sin color propio salía oscuro, incluso dentro
+   de tarjetas oscuras que esperan heredar su texto claro. Misma especificidad,
+   hoja posterior: el título hereda el color de su contenedor. */
+h1, h2, h3, h4, h5, h6 { color: inherit; }
+
+/* Familia "selva" (unifica 10 verdes previos: #10B981, #059669, #16A34A,
+   #22C55E, #15803D, #047857 → selva; #34D399, #4ADE80, #00FF9D → selva clara;
+   #065F46 → selva profunda). Blanco sobre selva: 4.9:1 (antes 2.54:1). */
+:root {
+  --baqueano-selva: #4A7A5A;
+  --baqueano-selva-light: #8DBF9A;
+  --baqueano-selva-deep: #2F5A3C;
+  --verde-selva: #4A7A5A;
+}
+/* Igual para párrafos: `p { color: var(--text-muted) }` gris fijo rompía la
+   herencia dentro de tarjetas de color (franja SOS/IA/Explorar de Aliados).
+   Las clases de cada página siguen definiendo sus tonos secundarios. */
+p { color: inherit; }
+
+/* ===================================================
+   23. FICHAS DE CAMPO OSCURAS (superficies que eran translúcidas)
+   =================================================== */
+/* Componentes de la etapa oscura con fondo rgba(…, 0.3–0.8): sobre el papel
+   claro quedaban gris pizarra y su texto claro bajaba a 1.1–1.8:1. Ahora
+   son fichas noche sólidas: el texto claro vuelve a leerse (≥ 7:1). */
+body :is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item,
+  .artisan-card, .video-card-showcase, .infinite-gallery-section, .geo-side-box,
+  .price-policy-box, .music-madriz-player-box, .scientific-rigor-box,
+  .sos-card, .protocol-box) {
+  background-color: var(--baqueano-dark-2) !important;
+  background-image: linear-gradient(160deg, rgba(22, 93, 111, 0.28), transparent 55%) !important;
+  color: var(--baqueano-text-on-dark) !important;
+  border-color: var(--baqueano-border-on-dark) !important;
+}
+body :is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item,
+  .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box,
+  .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box)
+  :is(p, li, span:not([class*="badge"]):not([class*="pill"]):not([class*="tag"]), small, strong, td) {
+  color: var(--baqueano-text-on-dark-soft) !important;
+}
+body :is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item,
+  .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box,
+  .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box)
+  :is(h3, h4, h5, h6, [class*="title"], .stat-number) {
+  color: #FFFFFF !important;
+}
+body .madriz-matrix-table th {
+  background-color: var(--baqueano-dark) !important;
+  color: var(--baqueano-sand) !important;
+}
+
+/* ===================================================
+   24. CONTRASTE PUNTUAL (auditoría WCAG 2026-10-03)
+   =================================================== */
+/* Departamentos: insignias y datos claros sobre tarjetas claras. */
+html[data-bq-page="departamento"] body :is(.m-badge-primary) {
+  color: var(--baqueano-primary-hover) !important; background: rgba(246, 94, 1, 0.1) !important; border-color: rgba(246, 94, 1, 0.3) !important;
+}
+html[data-bq-page="departamento"] body :is(.m-badge-secondary, .verified-badge, .oral-badge) {
+  color: var(--baqueano-secondary) !important; background: rgba(22, 93, 111, 0.09) !important; border-color: rgba(22, 93, 111, 0.28) !important;
+}
+html[data-bq-page="departamento"] body :is(.meta-pill, .wild-tag) {
+  color: var(--baqueano-text) !important; background: var(--baqueano-surface-alt) !important; border-color: var(--baqueano-border) !important;
+}
+html[data-bq-page="departamento"] body :is(.stat-number):not(:is(.mun-card, .c-step, .geo-side-box, .scientific-rigor-box) *) { color: var(--baqueano-secondary) !important; }
+html[data-bq-page="departamento"] body :is(.sub-table-title, .manifesto-headline) { color: var(--baqueano-text) !important; -webkit-text-fill-color: currentColor !important; }
+html[data-bq-page="departamento"] body .manifesto-headline :is(span, em) { color: var(--baqueano-primary) !important; -webkit-text-fill-color: currentColor !important; }
+/* Acciones secundarias sobre tarjeta clara: laguna con texto blanco. */
+html[data-bq-page="departamento"] body :is(.dept-section-block, .madriz-manifesto-strip, .territory-standard-manifesto) :is(.btn-hero-secondary, .btn-hero-glass) {
+  background: var(--baqueano-secondary) !important; color: #FFFFFF !important; border: 1px solid transparent !important; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+html[data-bq-page="departamento"] body .report-damage-btn { background: var(--baqueano-error) !important; color: #FFFFFF !important; }
+
+/* Mi Viaje: días, estrellas y pronóstico legibles. */
+html[data-bq-page="mi-viaje"] body .itinerary-day-badge { color: var(--baqueano-primary-hover) !important; background: rgba(246, 94, 1, 0.1) !important; }
+html[data-bq-page="mi-viaje"] body .rec-stars { color: #8A5A00 !important; }
+
+/* Aviso legal: numeración e indicadores del acordeón. */
+html[data-bq-page="aviso-legal"] body :is(.idx-num, .legal-chevron) { color: var(--baqueano-secondary) !important; }
+
+/* Ayuda: etiqueta superior. */
+body .help-eyebrow { color: var(--baqueano-primary-hover) !important; }
+
+/* Pronósticos y marcas de tiempo pequeñas sobre blanco. */
+body :is([class*="weather"], [class*="forecast"], [class*="clima"]) :is(span, small):not([class*="badge"]) { color: var(--baqueano-text-secondary); }
+
+/* Offline: pantalla noche autónoma (se muestra sin conexión, sin temas). */
+html[data-bq-page="offline"] body {
+  background: var(--baqueano-dark) radial-gradient(120% 80% at 50% 0%, rgba(22, 93, 111, 0.45), transparent 60%) !important;
+  color: var(--baqueano-text-on-dark) !important;
+}
+html[data-bq-page="offline"] body main :is(h1, h2, h3) { color: #FFFFFF !important; }
+html[data-bq-page="offline"] body main :is(p, li, .lead-text) { color: var(--baqueano-text-on-dark-soft) !important; }
+html[data-bq-page="offline"] body main :is(.btn, a.btn) { color: #FFFFFF !important; border-color: rgba(244, 230, 193, 0.4) !important; }
+/* Portada de departamento (clara, foto propia por territorio): textos y
+   acciones legibles sobre cualquier fotografía. */
+html[data-bq-page="departamento"] body .dept-hero-wrap .dept-short-desc span { color: var(--baqueano-text-secondary) !important; }
+html[data-bq-page="departamento"] body .dept-hero-wrap :is(.btn-hero-secondary, .btn-hero-glass) {
+  background: var(--baqueano-secondary) !important; color: #FFFFFF !important; border: 1px solid transparent !important; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+/* Historia: tiempo del reproductor sobre la onda. */
+body .hist-waveform-bar span { color: var(--baqueano-dark) !important; font-variant-numeric: tabular-nums; }
+
+/* ===================================================
+   25. MODO OSCURO DEL SELECTOR DE TEMAS — lienzo noche, tarjetas de papel
+   =================================================== */
+/* Con fondo oscuro, theme-switcher.css aclara todo el texto de <main>, pero
+   las tarjetas, acordeones, formularios y paneles de cada página son claros:
+   quedaba texto claro sobre blanco (517 casos en el sitio publicado).
+   Estrategia: el lienzo y los títulos de sección siguen el tema oscuro; los
+   componentes conservan su papel claro y recuperan su texto oscuro. */
+html[data-bg-mode="dark"] body main :is(
+  [class$="-card"], [class*="-card "], [class$="-card-exact"], [class*="-card-exact "],
+  [class$="-card-item"], [class*="-card-item "], .chronicle-card, .service-card, .trust-card,
+  .essential-card, .law-card-item, .dept-section-card, .aliado-card-exact,
+  [class*="accordion-item"], [class*="faq-item"], details, form, table,
+  [class*="index-card"], [class*="sidebar"], [class*="-panel"], [class*="info-box"]
+):not([class*="hero"]):not(:is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item, .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box, .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box, .modal-card-dialog)) {
+  background-color: var(--baqueano-surface) !important;
+  color: var(--baqueano-text) !important;
+}
+html[data-bg-mode="dark"] body main :is(
+  [class$="-card"], [class*="-card "], [class$="-card-exact"], [class*="-card-exact "],
+  [class$="-card-item"], [class*="-card-item "], .chronicle-card, .service-card, .trust-card,
+  .essential-card, .law-card-item, .dept-section-card, .aliado-card-exact,
+  [class*="accordion-item"], [class*="faq-item"], details, form, table,
+  [class*="index-card"], [class*="sidebar"], [class*="-panel"], [class*="info-box"]
+):not([class*="hero"]):not(:is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item, .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box, .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box, .modal-card-dialog))
+  :is(h1, h2, h3, h4, h5, h6, p, li, dd, td, th, label, summary, small, strong):not([class*="badge"]):not([class*="pill"]):not([class*="btn"]):not([class*="tag"]):not(:is([class*="overlay"], [class*="caption"], figure) *) {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}

@@ -1,29 +1,29 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — AVISO LEGAL & PROPIEDAD INTELECTUAL CSS
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proporcionar un diseño visual de alta fidelidad 1:1 para aviso-legal.html,
-//   garantizando claridad jurídica, confianza ciudadana y protección intelectual
-//   con la paleta oficial de BAQUEANO (#165D6F, #F65E01, #F4E6C1, #0F172A).
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Maquetación responsiva con CSS Grid y Flexbox.
-// - Efectos de elevación, esquinas redondeadas modernas, tarjetas de síntesis jurídica,
-//   acordeones expandibles, callouts de advertencia y compatibilidad móvil total.
-// - Cero uso de .withOpacity() o sintaxis deprecada; uso de colores armónicos con rgba.
-//
-// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
-// - Clases especializadas para el hero con banner panorámico de Nicaragua,
-//   la barra de 6 puntos esenciales, el sidebar con índice interactivo y estela monolítica,
-//   las 6 secciones legales con badges de leyes nicaragüenses y footer de transparencia.
-// ============================================================================
+/* ============================================================================ */
+/* 🧭 BAQUEANO ECOSYSTEM — AVISO LEGAL & PROPIEDAD INTELECTUAL CSS */
+/* ============================================================================ */
+/*  */
+/* 🎯 1. POR QUÉ (WHY / PROPÓSITO): */
+/* - Proporcionar un diseño visual de alta fidelidad 1:1 para aviso-legal.html, */
+/*   garantizando claridad jurídica, confianza ciudadana y protección intelectual */
+/*   con la paleta oficial de BAQUEANO (#165D6F, #F65E01, #F4E6C1, #0F172A). */
+/*  */
+/* ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN): */
+/* - Maquetación responsiva con CSS Grid y Flexbox. */
+/* - Efectos de elevación, esquinas redondeadas modernas, tarjetas de síntesis jurídica, */
+/*   acordeones expandibles, callouts de advertencia y compatibilidad móvil total. */
+/* - Cero uso de .withOpacity() o sintaxis deprecada; uso de colores armónicos con rgba. */
+/*  */
+/* 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD): */
+/* - Clases especializadas para el hero con banner panorámico de Nicaragua, */
+/*   la barra de 6 puntos esenciales, el sidebar con índice interactivo y estela monolítica, */
+/*   las 6 secciones legales con badges de leyes nicaragüenses y footer de transparencia. */
+/* ============================================================================ */
 
 /* Hero Section */
 .legal-hero-section {
   position: relative;
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(22, 93, 111, 0.82) 60%, rgba(15, 23, 42, 0.92) 100%),
-              url('../../assets/images/heroes/nicaragua_hero_panoramico.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/splash_bg.jpg') center/cover no-repeat;
   color: #FFFFFF;
   padding: 50px 24px 70px 24px;
   border-bottom: 3px solid #F65E01;
@@ -200,10 +200,10 @@
 
 .item-icon-teal { background: rgba(22, 93, 111, 0.12); color: #165D6F; }
 .item-icon-orange { background: rgba(246, 94, 1, 0.12); color: #F65E01; }
-.item-icon-green { background: rgba(16, 185, 129, 0.12); color: #10B981; }
+.item-icon-green { background: rgba(16, 185, 129, 0.12); color: #4A7A5A; }
 .item-icon-blue { background: rgba(2, 132, 199, 0.12); color: #0284C7; }
 .item-icon-amber { background: rgba(217, 119, 6, 0.12); color: #D97706; }
-.item-icon-emerald { background: rgba(5, 150, 105, 0.12); color: #059669; }
+.item-icon-emerald { background: rgba(5, 150, 105, 0.12); color: #4A7A5A; }
 
 .essential-item-title {
   font-size: 0.88rem;

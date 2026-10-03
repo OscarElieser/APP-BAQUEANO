@@ -14,10 +14,13 @@ body main h2:not(.title-handwritten):not(.handwriting-h2) {
   max-width: 100%;
   margin-block: 0 0.55rem !important;
   padding: 0 !important;
-  color: var(--heading-ink) !important;
+  /* 2026-10-03: hereda el color del contenedor (antes tinta fija: oscurecía
+     los h2 de tarjetas oscuras no listadas abajo). Escala del sistema global:
+     ver css/baqueano-system.css. */
+  color: inherit !important;
   background: none !important;
-  font-family: var(--heading-font) !important;
-  font-size: clamp(1.35rem, 2.2vw, 2rem) !important;
+  font-family: var(--baqueano-font-display, var(--heading-font)) !important;
+  font-size: clamp(1.45rem, 1.1rem + 1.6vw, 2.35rem) !important;
   font-style: normal !important;
   font-weight: 850 !important;
   line-height: 1.12 !important;

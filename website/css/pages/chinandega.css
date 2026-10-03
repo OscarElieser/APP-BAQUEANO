@@ -27,7 +27,7 @@
   margin:.4rem 0; color:#F4E6C1; font-family:var(--font-display,'Montserrat',sans-serif); font-size:clamp(1.7rem,4vw,3rem); line-height:1.08;
 }
 .chinandega-manifesto-card>p:not(.chinandega-overline),.chinandega-closing-card>p:not(.chinandega-overline) { max-width:850px; margin:1rem auto 1.6rem; color:#CBD5E1; font-size:clamp(.96rem,1.5vw,1.08rem); line-height:1.75; }
-.chinandega-manifesto-actions .is-saved { color:#D1FAE5; border-color:#10B981; }
+.chinandega-manifesto-actions .is-saved { color:#D1FAE5; border-color:#4A7A5A; }
 .chinandega-facts-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; margin:0 0 3rem; }
 .chinandega-facts-strip article { display:grid; min-height:125px; place-content:center; padding:1.2rem; text-align:center; background:linear-gradient(145deg,rgba(22,93,111,.24),rgba(15,23,42,.88)); border:1px solid rgba(255,255,255,.08); border-radius:20px; }
 .chinandega-facts-strip strong { color:#F65E01; font:900 clamp(1.8rem,4vw,2.7rem)/1 var(--font-display,'Montserrat',sans-serif); }
@@ -99,7 +99,7 @@
 .chinandega-conservation-card,.chinandega-logistics-card { display:grid; grid-template-columns:1.25fr 1fr; gap:2rem; padding:clamp(1.5rem,4vw,3rem); background:linear-gradient(145deg,rgba(10,50,47,.9),rgba(15,23,42,.97)); border:1px solid rgba(16,185,129,.25); border-radius:28px; }
 .chinandega-conservation-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
 .chinandega-conservation-list span { display:grid; min-height:105px; padding:1rem; place-content:center; text-align:center; color:#D1FAE5; background:rgba(15,23,42,.55); border:1px solid rgba(16,185,129,.18); border-radius:18px; }
-.chinandega-conservation-list i { margin-bottom:.45rem; color:#34D399; font-size:1.25rem; }
+.chinandega-conservation-list i { margin-bottom:.45rem; color:#8DBF9A; font-size:1.25rem; }
 .chinandega-routes-grid,.chinandega-info-grid,.chinandega-logistics-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
 .chinandega-routes-grid article,.chinandega-info-grid article { padding:1.4rem; border-radius:20px; }
 .chinandega-routes-grid article>span { float:right; color:rgba(244,230,193,.2); font:900 2.5rem/1 var(--font-display,sans-serif); }

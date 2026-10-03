@@ -9,7 +9,7 @@
      las Acciones que inspiran, la barra triple y el footer.
 
    ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-   - Paleta oficial: Verde Esmeralda (#10B981), Verde Bosque (#073D27), Navy (#0B253A),
+   - Paleta oficial: Verde Esmeralda (#4A7A5A), Verde Bosque (#073D27), Navy (#0B253A),
      Naranja Terracota (#F65E01) y Crema (#F4E6C1).
    - Layout responsivo con Grid y Flexbox.
    - 0% comisiones, soberanía ambiental y Cero uso de términos prohibidos.
@@ -27,7 +27,7 @@
 :root {
   --bq-navy: #0B253A;
   --bq-navy-dark: #081827;
-  --bq-green: #10B981;
+  --bq-green: #4A7A5A;
   --bq-green-dark: #073D27;
   --bq-orange: #F65E01;
   --bq-cream: #F4E6C1;
@@ -134,7 +134,7 @@
 }
 
 .amb-btn-green:hover {
-  background: #059669;
+  background: #4A7A5A;
 }
 
 .amb-btn-glass {
@@ -449,7 +449,7 @@
 }
 
 .amb-perks-list li i {
-  color: #34D399;
+  color: #8DBF9A;
 }
 
 .amb-btn-credential {
@@ -686,7 +686,7 @@
 
 .amb-level-info span {
   font-size: 0.6rem;
-  color: #34D399;
+  color: #8DBF9A;
   font-weight: 800;
   text-transform: uppercase;
 }

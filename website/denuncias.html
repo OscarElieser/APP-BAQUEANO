@@ -24,7 +24,7 @@
 - Protocolo de acción inmediata ante emergencias de incendios forestales (SINAPRED).
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="denuncias" data-bq-group="institucional">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -34,8 +34,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -53,6 +52,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 <body>
 
@@ -437,7 +438,7 @@
                   <i class="fa-solid fa-tags"></i> Tipo de Negocio <span class="req">*</span>
                 </label>
                 <select id="bizType" name="bizType" class="biz-select" required>
-                  <option value="">Selecciona el tipo de negocio...</option>
+                  <option value="">Elegí el tipo de negocio…</option>
                   <option value="Comedor Tradicional / Restaurante Campesino">Comedor Tradicional / Restaurante Campesino</option>
                   <option value="Hotel / Eco-Lodge">Hotel / Eco-Lodge</option>
                   <option value="Hostal Comunitario">Hostal Comunitario</option>
@@ -469,7 +470,7 @@
                   <i class="fa-solid fa-layer-group"></i> Categoría en Catálogo Baqueano <span class="req">*</span>
                 </label>
                 <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="">Selecciona una categoría oficial...</option>
+                  <option value="">Elegí una categoría oficial…</option>
                   <option value="gastronomia">Gastronomía Ancestral (Comedores, Baho, Quesillos)</option>
                   <option value="hoteles">Hoteles & Eco-Lodges</option>
                   <option value="hostales">Hostales de Aventura & Mochileros</option>
@@ -490,7 +491,7 @@
                   <i class="fa-solid fa-map"></i> Departamento de Nicaragua <span class="req">*</span>
                 </label>
                 <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="">Selecciona tu departamento...</option>
+                  <option value="">Elegí tu departamento…</option>
                   <option value="Boaco">Boaco</option>
                   <option value="Carazo">Carazo</option>
                   <option value="Chinandega">Chinandega</option>
@@ -585,7 +586,7 @@
                   <i class="fa-solid fa-align-left"></i> Breve Descripción del Servicio o Menú Típico <span class="req">*</span>
                   <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
                 </label>
-                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Describe qué ofreces al visitante, especialidad culinaria, tipo de habitaciones o atractivos naturales cercanos..." required></textarea>
+                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Contá qué le ofrecés al visitante: especialidad de la casa, tipo de habitaciones o atractivos naturales cercanos…" required></textarea>
                 <span class="biz-error-msg" id="err-bizDescription"></span>
               </div>
 
@@ -598,7 +599,7 @@
                   <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
                   <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Toca o arrastra una imagen de tu establecimiento (Máx 5MB)</span>
+                    <span>Tocá o arrastrá una foto de tu negocio (máx. 5 MB)</span>
                   </div>
                   <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
                     <img id="bizPreviewImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Vista previa de foto">
@@ -649,7 +650,7 @@
             Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
           </p>
           <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <input type="email" class="footer-newsletter-input" placeholder="Tu correo electrónico" required aria-label="Correo electrónico para boletín">
             <button type="submit" class="footer-newsletter-btn">
               <i class="fa-solid fa-paper-plane"></i> Suscribirme
             </button>
@@ -779,8 +780,8 @@
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #4A7A5A; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #4A7A5A; box-shadow: 0 0 6px #4A7A5A;"></span>
             Telemetría GPS 24/7 Activa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>

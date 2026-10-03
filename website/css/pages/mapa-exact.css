@@ -49,12 +49,12 @@ QUÉ:
 .page-mapa-exact .map-main-viewport-container { min-height:680px; padding:clamp(16px,2.5vw,34px); background:#F8FAFC; }
 .page-mapa-exact #fullInteractiveMap { min-height:640px; height:min(72vh,780px); overflow:hidden; border:1px solid #D8E1E8; border-radius:26px; box-shadow:0 24px 70px rgba(15,23,42,.14); }
 .map-live-badge { position:absolute; z-index:610; top:55px; left:58px; display:inline-flex; align-items:center; gap:8px; padding:9px 13px; background:rgba(255,255,255,.93); border:1px solid rgba(22,93,111,.15); border-radius:999px; color:var(--map-ink); font-size:.72rem; font-weight:800; box-shadow:0 8px 24px rgba(15,23,42,.14); backdrop-filter:blur(12px); }
-.map-live-badge span { width:8px; height:8px; background:#10B981; border-radius:50%; box-shadow:0 0 0 5px rgba(16,185,129,.14); }
+.map-live-badge span { width:8px; height:8px; background:#4A7A5A; border-radius:50%; box-shadow:0 0 0 5px rgba(16,185,129,.14); }
 .map-legend { position:absolute; z-index:610; right:56px; bottom:55px; display:grid; grid-template-columns:repeat(2,auto); gap:9px 18px; padding:16px 18px; background:rgba(255,255,255,.94); border:1px solid rgba(22,93,111,.13); border-radius:16px; color:#475569; font-size:.72rem; font-weight:700; box-shadow:0 12px 35px rgba(15,23,42,.15); backdrop-filter:blur(14px); }
 .map-legend strong { grid-column:1/-1; color:var(--map-ink); font:800 .74rem 'Montserrat',sans-serif; }
 .map-legend span { display:flex; align-items:center; gap:7px; }
 .legend-dot { width:9px; height:9px; border-radius:50%; }
-.legend-dot.is-volcano { background:#DC2626; } .legend-dot.is-beach { background:#0284C7; } .legend-dot.is-nature { background:#10B981; } .legend-dot.is-culture { background:var(--map-orange); }
+.legend-dot.is-volcano { background:#DC2626; } .legend-dot.is-beach { background:#0284C7; } .legend-dot.is-nature { background:#4A7A5A; } .legend-dot.is-culture { background:var(--map-orange); }
 .page-mapa-exact .map-floating-drawer { bottom:58px; left:58px; max-width:390px; padding:18px; background:rgba(255,255,255,.97); border:1px solid rgba(22,93,111,.15); border-radius:20px; color:var(--map-ink); box-shadow:0 24px 65px rgba(15,23,42,.2); }
 .page-mapa-exact .drawer-close-btn { color:#475569; } .page-mapa-exact .drawer-close-btn:hover { color:var(--map-orange); }
 .page-mapa-exact .drawer-img { height:165px; border-radius:13px; }

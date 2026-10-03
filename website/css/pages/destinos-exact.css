@@ -11,7 +11,7 @@
 
    ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
    - Paleta oficial: Navy (#0B253A / #081827), Teal (#165D6F), Naranja (#F65E01),
-     Verde Esmeralda (#10B981) y Fondo Claro (#F7F9FC).
+     Verde Esmeralda (#4A7A5A) y Fondo Claro (#F7F9FC).
    - Layout responsivo con CSS Grid y Flexbox.
    - Cero uso de términos prohibidos y 100% fidelidad visual.
 
@@ -32,7 +32,7 @@
   --bq-teal: #165D6F;
   --bq-teal-light: #0D6E77;
   --bq-orange: #F65E01;
-  --bq-green: #10B981;
+  --bq-green: #4A7A5A;
   --bq-cream: #F4E6C1;
   --bq-bg-light: #F7F9FC;
   --bq-text-dark: #0B253A;
@@ -268,7 +268,7 @@
 .toggle-switch-ui {
   width: 28px;
   height: 16px;
-  background: #059669;
+  background: #4A7A5A;
   border-radius: 8px;
   position: relative;
 }
@@ -521,7 +521,7 @@
 }
 
 .dest-btn-green:hover {
-  background: #059669;
+  background: #4A7A5A;
 }
 
 /* ============================================================================
@@ -567,7 +567,7 @@
 
 .dest-catalog-tag.orange { background: var(--bq-orange); color: #FFFFFF; }
 .dest-catalog-tag.blue { background: #0284C7; color: #FFFFFF; }
-.dest-catalog-tag.green { background: #16A34A; color: #FFFFFF; }
+.dest-catalog-tag.green { background: #4A7A5A; color: #FFFFFF; }
 .dest-catalog-tag.purple { background: #8B5CF6; color: #FFFFFF; }
 
 .dest-catalog-body {
@@ -877,7 +877,7 @@
 }
 .dest-filter-menu button { border: 0; border-radius: 9px; background: transparent; color: #0F172A; padding: 9px 11px; text-align: left; cursor: pointer; font-weight: 700; }
 .dest-filter-menu button:hover, .dest-filter-menu button:focus-visible { background: #E8F7F3; color: #165D6F; }
-.dest-toggle-btn.active .toggle-switch-ui { background: #10B981; }
+.dest-toggle-btn.active .toggle-switch-ui { background: #4A7A5A; }
 .dest-toggle-btn.active .toggle-switch-ui::after { transform: translateX(16px); }
 .dest-highlight-heart.active { color: #F65E01; }
 .exact-nav-dropdown-menu.open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }

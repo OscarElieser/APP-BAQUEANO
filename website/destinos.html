@@ -11,7 +11,7 @@ y finalmente el sistema global, la navegación y los estilos específicos de des
 paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucional.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="destinos" data-bq-group="territorio">
 
 <head>
   <meta charset="UTF-8">
@@ -24,9 +24,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
@@ -42,6 +40,8 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-destinos-exact">
@@ -73,11 +73,11 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             Más <i class="fa-solid fa-chevron-down" style="font-size: 0.72rem; margin-left: 2px;"></i>
           </button>
           <div class="exact-nav-dropdown-menu" role="menu">
-            <a href="ambiental.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf" style="color: #10B981;"></i> Custodia Ambiental</a>
+            <a href="ambiental.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf" style="color: #4A7A5A;"></i> Custodia Ambiental</a>
             <a href="historia.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-landmark" style="color: #38BDF8;"></i> Historia &amp; Memoria</a>
             <a href="gastronomia.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-utensils" style="color: #F65E01;"></i> Gastronomía Ancestral</a>
             <a href="musica.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-music" style="color: #A855F7;"></i> Son Sonoro Folk</a>
-            <a href="aliados.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake" style="color: #10B981;"></i> Red de Aliados</a>
+            <a href="aliados.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake" style="color: #4A7A5A;"></i> Red de Aliados</a>
             <a href="nosotros.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-users" style="color: #F4E6C1;"></i> Quiénes Somos</a>
           </div>
         </div>
@@ -156,7 +156,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
           <button type="button" class="dest-toggle-btn" aria-pressed="false">
             <span class="toggle-switch-ui"></span> Verificados
           </button>
-          <button type="button" class="dest-dropdown-btn" data-action="nearby"><i class="fa-solid fa-location-crosshairs" style="color: #10B981;"></i> Cerca de mí</button>
+          <button type="button" class="dest-dropdown-btn" data-action="nearby"><i class="fa-solid fa-location-crosshairs" style="color: #4A7A5A;"></i> Cerca de mí</button>
         </div>
         <div class="dest-order-right">
           <span>Ordenar por:</span>
@@ -648,10 +648,10 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
           }).addTo(map);
 
           const dests = [
-            { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "Naturaleza", color: "#10B981" },
+            { name: "Isla de Ometepe", lat: 11.5399, lng: -85.6174, cat: "Naturaleza", color: "#4A7A5A" },
             { name: "Granada Colonial", lat: 11.9344, lng: -85.9560, cat: "Cultura", color: "#F65E01" },
             { name: "San Juan del Sur", lat: 11.2529, lng: -85.8705, cat: "Playas", color: "#0284C7" },
-            { name: "Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "Aventura", color: "#16A34A" },
+            { name: "Cerro Negro", lat: 12.5061, lng: -86.7022, cat: "Aventura", color: "#4A7A5A" },
             { name: "Cañón de Somoto", lat: 13.4833, lng: -86.5833, cat: "Naturaleza", color: "#0D9488" },
             { name: "Volcán Masaya", lat: 11.9842, lng: -86.1611, cat: "Volcanes", color: "#DC2626" },
             { name: "Corn Island", lat: 12.1736, lng: -83.0560, cat: "Playas", color: "#0284C7" }

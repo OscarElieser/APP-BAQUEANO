@@ -481,7 +481,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10B981;
+  background: #4A7A5A;
   animation: status-pulse 2s ease-in-out infinite;
 }
 
@@ -494,7 +494,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
-  color: #10B981;
+  color: #4A7A5A;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }

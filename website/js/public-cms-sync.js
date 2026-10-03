@@ -587,7 +587,7 @@
               const territory = (ally.department || 'Nicaragua').toUpperCase();
               const municipality = (ally.municipality || 'Comunitario').toUpperCase();
               const category = (ally.category || 'Hospedaje Rural').toUpperCase();
-              const image = ally.imageUrl || ally.image || 'assets/images/destinos/finca_magdalena.jpg';
+              const image = ally.imageUrl || ally.image || 'assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg';
               const isVerified = ally.verified === true || ally.verificationStatus === 'verified';
               const description = ally.description || ally.shortDesc || 'Cooperativa campesina dedicada al turismo ecológico sostenible.';
               const rawPhone = ally.phone || ally.whatsapp || '50584431289';
@@ -598,7 +598,7 @@
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
                       <div class="flip-front-img-wrap">
-                        <img src="${image}" alt="${this.escape(name)}" class="flip-front-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/images/destinos/finca_magdalena.jpg'">
+                        <img src="${image}" alt="${this.escape(name)}" class="flip-front-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg'">
                       </div>
                       <div class="flip-front-body">
                         <span class="aliados-inline-002">${this.escape(territory)} • ${this.escape(municipality)}</span>

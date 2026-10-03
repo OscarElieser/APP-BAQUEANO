@@ -461,7 +461,7 @@
       label: "No sale en el mapa",
       prompt: null, // Activa modo hidden_gem y muestra resultados
       hint: "Lugares ocultos",
-      color: "#22C55E",
+      color: "#4A7A5A",
       isHiddenGem: true
     },
     {

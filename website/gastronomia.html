@@ -28,7 +28,7 @@
 - Asistente de rutas culinarias con Baqüi.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="gastronomia" data-bq-group="cultura">
 
 <head>
   <meta charset="UTF-8">
@@ -39,8 +39,7 @@
   <!-- Tipografías Oficiales Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- Iconografía FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -61,6 +60,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-gastro-exact">
@@ -120,6 +121,7 @@
       </div>
     </div>
   </nav>
+  <main id="mainContent" tabindex="-1">
 
   <!-- ============================================================================
        1. HERO GASTRONOMÍA (IMAGEN 4)
@@ -203,7 +205,7 @@
         <!-- 1. Gallo Pinto -->
         <article class="dish-card-exact" data-cat="todos pacifico norte centro">
           <div class="dish-img-wrap">
-            <img src="assets/images/comida/gallo pinto con huevo.jpg" alt="Gallo Pinto" class="dish-img" loading="lazy">
+            <img src="assets/images/comida/gallo_pinto.jpg" alt="Gallo Pinto" class="dish-img" loading="lazy">
             <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="dish-body">
@@ -288,7 +290,7 @@
         <!-- 6. Indio Viejo -->
         <article class="dish-card-exact" data-cat="todos maiz centro norte">
           <div class="dish-img-wrap">
-            <img src="assets/images/comida/indio viejo.jpg" alt="Indio Viejo" class="dish-img" loading="lazy">
+            <img src="assets/images/comida/indio_viejo.jpg" alt="Indio Viejo" class="dish-img" loading="lazy">
             <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="dish-body">
@@ -305,7 +307,7 @@
         <!-- 7. Rondón Costeño -->
         <article class="dish-card-exact" data-cat="todos caribe">
           <div class="dish-img-wrap">
-            <img src="assets/images/comida/pescado frito con tostones.jpg" alt="Rondón Costeño" class="dish-img" loading="lazy">
+            <img src="assets/images/destinos/corn_island.jpg" alt="Rondón Costeño" class="dish-img" loading="lazy">
             <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="dish-body">
@@ -322,7 +324,7 @@
         <!-- 8. Güirilas -->
         <article class="dish-card-exact" data-cat="todos maiz norte">
           <div class="dish-img-wrap">
-            <img src="assets/images/comida/tacos de carne con salsa y ensalada.jpg" alt="Güirilas" class="dish-img" loading="lazy">
+            <img src="assets/images/comida/delicias del norte.jpg" alt="Güirilas" class="dish-img" loading="lazy">
             <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="dish-body">
@@ -356,7 +358,7 @@
         <!-- 10. Fritanga Nicaragüense Tradicional -->
         <article class="dish-card-exact" data-cat="todos carnes pacifico">
           <div class="dish-img-wrap">
-            <img src="assets/images/comida/gallo pinto con huevo.jpg" alt="Fritanga Tradicional" class="dish-img" loading="lazy">
+            <img src="assets/images/comida/gallo_pinto.jpg" alt="Fritanga Tradicional" class="dish-img" loading="lazy">
             <button type="button" class="dish-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="dish-body">
@@ -430,7 +432,7 @@
             <div class="gastro-beverages-grid">
               <!-- 1. Pinolillo -->
               <div class="beverage-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/comida/fresco de cacao con leche.jpg" alt="Pinolillo" class="beverage-img">
+                <img loading="lazy" decoding="async" src="assets/images/comida/delicias del norte.jpg" alt="Pinolillo" class="beverage-img">
                 <h5 class="beverage-name">Pinolillo</h5>
                 <span class="beverage-loc">Todo el país</span>
                 <p class="beverage-desc">La bebida emblemática de Nicaragua a base de maíz tostado y cacao.</p>
@@ -438,7 +440,7 @@
 
               <!-- 2. Cacao con leche -->
               <div class="beverage-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/comida/fresco de cacao con leche.jpg" alt="Cacao con leche" class="beverage-img">
+                <img loading="lazy" decoding="async" src="assets/images/comida/delicias del norte.jpg" alt="Cacao con leche" class="beverage-img">
                 <h5 class="beverage-name">Cacao con leche</h5>
                 <span class="beverage-loc">Todo el país</span>
                 <p class="beverage-desc">Sabor ancestral del trópico nica con canela y vainilla.</p>
@@ -446,7 +448,7 @@
 
               <!-- 3. Chicha de maíz -->
               <div class="beverage-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/comida/fresco de cacao con leche.jpg" alt="Chicha de maíz" class="beverage-img">
+                <img loading="lazy" decoding="async" src="assets/images/comida/delicias del norte.jpg" alt="Chicha de maíz" class="beverage-img">
                 <h5 class="beverage-name">Chicha de maíz</h5>
                 <span class="beverage-loc">Todo el país</span>
                 <p class="beverage-desc">Tradición indígena de maíz fermentado que sigue viva.</p>
@@ -454,7 +456,7 @@
 
               <!-- 4. Tiste -->
               <div class="beverage-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/comida/fresco de cacao con leche.jpg" alt="Tiste" class="beverage-img">
+                <img loading="lazy" decoding="async" src="assets/images/comida/delicias del norte.jpg" alt="Tiste" class="beverage-img">
                 <h5 class="beverage-name">Tiste</h5>
                 <span class="beverage-loc">Masaya</span>
                 <p class="beverage-desc">Refrescante y único con tortilla tostada y cacao fino.</p>
@@ -462,7 +464,7 @@
 
               <!-- 5. Pozol -->
               <div class="beverage-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/comida/fresco de cacao con leche.jpg" alt="Pozol" class="beverage-img">
+                <img loading="lazy" decoding="async" src="assets/images/comida/delicias del norte.jpg" alt="Pozol" class="beverage-img">
                 <h5 class="beverage-name">Pozol</h5>
                 <span class="beverage-loc">Caribe</span>
                 <p class="beverage-desc">Energía natural de nuestra gente con maíz cocido.</p>
@@ -470,7 +472,7 @@
 
               <!-- 6. Fresco de Grama -->
               <div class="beverage-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/comida/fresco de cacao con leche.jpg" alt="Fresco de Grama" class="beverage-img">
+                <img loading="lazy" decoding="async" src="assets/images/comida/delicias del norte.jpg" alt="Fresco de Grama" class="beverage-img">
                 <h5 class="beverage-name">Fresco de Grama</h5>
                 <span class="beverage-loc">Granada</span>
                 <p class="beverage-desc">Infusión medicinal y refrescante con limón criollo y vainilla.</p>
@@ -487,7 +489,7 @@
             <div class="gastro-sweets-grid">
               <!-- 1. Cajetas de Masaya -->
               <div class="sweet-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Cajetas" class="sweet-img">
+                <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Cajetas" class="sweet-img">
                 <h5 class="sweet-name">Cajetas</h5>
                 <span class="sweet-loc">Masaya</span>
                 <p class="sweet-desc">Un dulce con historia.</p>
@@ -503,7 +505,7 @@
 
               <!-- 3. Pío Quinto -->
               <div class="sweet-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Pío Quinto" class="sweet-img">
+                <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Pío Quinto" class="sweet-img">
                 <h5 class="sweet-name">Pío Quinto</h5>
                 <span class="sweet-loc">Granada</span>
                 <p class="sweet-desc">Bizcocho con licor.</p>
@@ -527,7 +529,7 @@
 
               <!-- 6. Rosquillas somoteñas -->
               <div class="sweet-card-exact">
-                <img loading="lazy" decoding="async" src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Rosquillas" class="sweet-img">
+                <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Rosquillas" class="sweet-img">
                 <h5 class="sweet-name">Rosquillas</h5>
                 <span class="sweet-loc">Madriz</span>
                 <p class="sweet-desc">El sabor de Somoto.</p>
@@ -583,7 +585,7 @@
         <!-- 1. Comedor Doña Rosa -->
         <article class="place-card-exact">
           <div class="place-img-wrap">
-            <img src="assets/images/destinos/dona_haydee.jpg" alt="Comedor Doña Rosa" class="place-img" loading="lazy">
+            <img src="assets/images/comida/gallo_pinto.jpg" alt="Comedor Doña Rosa" class="place-img" loading="lazy">
           </div>
           <div class="place-body">
             <h3 class="place-name">Comedor Doña Rosa</h3>
@@ -600,7 +602,7 @@
         <!-- 2. Mercado de Masaya -->
         <article class="place-card-exact">
           <div class="place-img-wrap">
-            <img src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Mercado de Masaya" class="place-img" loading="lazy">
+            <img src="assets/images/destinos/volcan_masaya.jpg" alt="Mercado de Masaya" class="place-img" loading="lazy">
           </div>
           <div class="place-body">
             <h3 class="place-name">Mercado de Masaya</h3>
@@ -658,7 +660,7 @@
     <div class="exact-container">
       <div class="gastro-ai-card">
         <div class="gastro-ai-left">
-          <img loading="lazy" decoding="async" src="assets/images/baqui.png" alt="Baqüi Asistente" class="gastro-ai-bird">
+          <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Asistente" class="gastro-ai-bird">
           <div class="gastro-ai-text">
             <h3>Baqueano Digital: ¿Qué querés probar hoy?</h3>
             <p>Decime tus gustos y te recomiendo los mejores lugares, platos y rutas gastronómicas en Nicaragua.</p>
@@ -708,6 +710,7 @@
   <!-- ============================================================================
        9. PIE DE PÁGINA INSTITUCIONAL UNIFICADO (4 COLUMNAS - IMÁGENES 1-4)
        ============================================================================ -->
+  </main>
   <footer class="site-footer-exact" role="contentinfo">
     <div class="exact-container">
       <div class="footer-grid-exact">
@@ -887,7 +890,7 @@
           const gastroPins = [
             { name: "Granada: Vigorón y Pío Quinto", lat: 11.9344, lng: -85.9560, color: "#F65E01" },
             { name: "La Paz Centro: Quesillos de Hoja", lat: 12.3397, lng: -86.6756, color: "#F59E0B" },
-            { name: "Masaya: Nacatamales y Cajetas", lat: 11.9700, lng: -86.0900, color: "#10B981" },
+            { name: "Masaya: Nacatamales y Cajetas", lat: 11.9700, lng: -86.0900, color: "#4A7A5A" },
             { name: "Matagalpa: Güirilas del Norte", lat: 12.9256, lng: -85.9172, color: "#165D6F" },
             { name: "Bluefields: Rondón Costeño y Patí", lat: 12.0131, lng: -83.7635, color: "#0284C7" },
             { name: "Somoto: Rosquillas Somoteñas", lat: 13.4833, lng: -86.5833, color: "#DC2626" }
@@ -901,7 +904,7 @@
               weight: 2,
               opacity: 1,
               fillOpacity: 0.95
-            }).addTo(map).bindPopup(`<strong>${g.name}</strong><br><span style="color:#059669;font-weight:700;">Gastronomía Tradicional</span>`);
+            }).addTo(map).bindPopup(`<strong>${g.name}</strong><br><span style="color:#4A7A5A;font-weight:700;">Gastronomía Tradicional</span>`);
           });
 
           setTimeout(() => map.invalidateSize(), 300);

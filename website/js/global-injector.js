@@ -39,7 +39,7 @@
     cream:  '#F4E6C1',
     night:  '#0F172A',
     dark:   '#0B253A',
-    green:  '#10B981'
+    green:  '#4A7A5A'
   };
 
   // ── Helper: detectar página activa para marcar nav link ──────────────────
@@ -63,12 +63,16 @@
         integrity: 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==',
         crossOrigin: 'anonymous'
       },
-      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' },
-      // Capa de identidad "Cartografía viva": SIEMPRE la última, para que sus
-      // correcciones de contraste y responsive prevalezcan. Ver css/baqueano-identity.css
-      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261003-2' }
+      // Dos familias del sistema (Montserrat + Plus Jakarta Sans). Si la página ya
+      // pide Google Fonts en su <head>, no se repite la petición.
+      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
+      // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
+      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261003-2' },
+      // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
+      { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261003-3' }
     ];
     needed.forEach(function(css) {
+      if (css.id === 'bq-fonts' && document.querySelector('link[href*="fonts.googleapis.com/css2"]')) return;
       if (!document.getElementById(css.id)) {
         var link = document.createElement('link');
         link.id = css.id; link.rel = 'stylesheet'; link.href = css.href;
@@ -77,6 +81,10 @@
         document.head.appendChild(link);
       }
     });
+    // El sistema enlazado en el <head> quedaría antes de las hojas recién
+    // inyectadas; se mueve al final para que siga siendo la última palabra.
+    var system = document.getElementById('bq-system');
+    if (system && system !== document.head.lastElementChild) document.head.appendChild(system);
 
     // Estilos inline mínimos para footer y utilidades globales (navbar controlado por navigation-mega.css)
     if (!document.getElementById('bq-global-injector-styles')) {
@@ -183,7 +191,7 @@
       box.id = 'bqGlobalToast';
       document.body.appendChild(box);
     }
-    var colors = { success: '#10B981', info: '#165D6F', warning: '#F65E01', error: '#EF4444' };
+    var colors = { success: '#4A7A5A', info: '#165D6F', warning: '#F65E01', error: '#EF4444' };
     var icons  = { success: '✅', info: 'ℹ️', warning: '⚠️', error: '❌' };
     var t = document.createElement('div');
     t.style.cssText = 'background:#0F172A;color:#FFF;border-left:4px solid ' + (colors[type]||colors.success) + ';' +
@@ -1042,6 +1050,9 @@
       var img = event.target;
       if (!img || img.tagName !== 'IMG') return;
       var fails = (parseInt(img.getAttribute('data-bq-img-fails'), 10) || 0) + 1;
+      // Sin respaldo propio (onerror), el primer fallo ya mostraría el texto
+      // alternativo roto: se salta directo a la fotografía local.
+      if (fails === 1 && !img.hasAttribute('onerror') && typeof img.onerror !== 'function') fails = 2;
       img.setAttribute('data-bq-img-fails', String(fails));
       if (fails < 2) return;
       img.onerror = null;
@@ -1052,6 +1063,20 @@
         img.src = BQ_IMG_BLANK;
       }
     }, true);
+    // Imágenes que fallaron antes de que este script cargara (el listener no
+    // las vio): se detectan por naturalWidth 0 una vez completas.
+    function sweepBrokenImages() {
+      Array.prototype.forEach.call(document.images, function (img) {
+        if (!img.complete || img.naturalWidth > 0 || !img.currentSrc && !img.src) return;
+        if (img.src.indexOf('data:') === 0 || img.hasAttribute('data-bq-img-fails')) return;
+        img.setAttribute('data-bq-img-fails', '2');
+        img.onerror = null;
+        img.removeAttribute('srcset');
+        img.src = BQ_IMG_FALLBACK;
+      });
+    }
+    if (document.readyState === 'complete') sweepBrokenImages();
+    else window.addEventListener('load', sweepBrokenImages, { once: true });
   }
   installImageLoopGuard();
 

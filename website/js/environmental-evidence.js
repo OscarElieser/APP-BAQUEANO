@@ -175,8 +175,8 @@
 
             btnGps.innerHTML = `<i class="fa-solid fa-circle-check"></i> GPS: ${lat}, ${lng} (±${accuracy}m)`;
             btnGps.style.background = 'rgba(16, 185, 129, 0.2)';
-            btnGps.style.borderColor = '#10B981';
-            btnGps.style.color = '#10B981';
+            btnGps.style.borderColor = '#4A7A5A';
+            btnGps.style.color = '#4A7A5A';
             btnGps.disabled = false;
 
             // Anexar texto al textarea si aún no está

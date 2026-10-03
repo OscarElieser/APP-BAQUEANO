@@ -1183,7 +1183,7 @@
             <!-- Código del explorador -->
             <div class="dept-section-card inner-card">
               <div class="dept-card-header">
-                <i class="fa-solid fa-leaf" style="color: #10B981;"></i>
+                <i class="fa-solid fa-leaf" style="color: #4A7A5A;"></i>
                 <div>
                   <h3>24. Código del Explorador</h3>
                   <span class="card-subtitle">Decálogo Verde de Visita Soberana</span>
@@ -1421,8 +1421,8 @@
           trips.push('madriz');
           localStorage.setItem('baqueano_saved_trips', JSON.stringify(trips));
           btnSave.innerHTML = `<i class="fa-solid fa-check"></i> ¡Guardado en Mi Viaje!`;
-          btnSave.style.borderColor = '#10B981';
-          btnSave.style.color = '#10B981';
+          btnSave.style.borderColor = '#4A7A5A';
+          btnSave.style.color = '#4A7A5A';
         } else {
           alert('Madriz ya forma parte de tu libreta de viaje en Baqueano.');
         }

@@ -1,29 +1,29 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — COOKIES Y ALMACENAMIENTO LOCAL CSS
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Definir la presentación visual 1:1 para cookies.html según la maqueta oficial,
-//   exponiendo las políticas de almacenamiento local, funcionamiento offline
-//   y respeto riguroso de la privacidad digital de los viajeros en Nicaragua.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Estilos CSS estructurados para la barra de 4 pilares de confianza,
-//   el panel de control de preferencias con interruptores interactivos,
-//   el diagrama de arquitectura de flujo de datos (Firebase + Supabase + Cache),
-//   la rejilla de acordeones y las tarjetas de servicios de terceros.
-// - Cero uso de .withOpacity(); soporte responsivo para móviles y tablets.
-//
-// 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD):
-// - Clases especializadas para switches, botón de purga de caché, diagrama de
-//   flujo SVG/CSS, acordeones expandibles y widgets de FAQ.
-// ============================================================================
+/* ============================================================================ */
+/* 🧭 BAQUEANO ECOSYSTEM — COOKIES Y ALMACENAMIENTO LOCAL CSS */
+/* ============================================================================ */
+/*  */
+/* 🎯 1. POR QUÉ (WHY / PROPÓSITO): */
+/* - Definir la presentación visual 1:1 para cookies.html según la maqueta oficial, */
+/*   exponiendo las políticas de almacenamiento local, funcionamiento offline */
+/*   y respeto riguroso de la privacidad digital de los viajeros en Nicaragua. */
+/*  */
+/* ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN): */
+/* - Estilos CSS estructurados para la barra de 4 pilares de confianza, */
+/*   el panel de control de preferencias con interruptores interactivos, */
+/*   el diagrama de arquitectura de flujo de datos (Firebase + Supabase + Cache), */
+/*   la rejilla de acordeones y las tarjetas de servicios de terceros. */
+/* - Cero uso de .withOpacity(); soporte responsivo para móviles y tablets. */
+/*  */
+/* 📦 3. QUÉ (WHAT / ENTREGABLES & FUNCIONALIDAD): */
+/* - Clases especializadas para switches, botón de purga de caché, diagrama de */
+/*   flujo SVG/CSS, acordeones expandibles y widgets de FAQ. */
+/* ============================================================================ */
 
 /* Hero Section */
 .cookies-hero-section {
   position: relative;
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(22, 93, 111, 0.82) 60%, rgba(15, 23, 42, 0.92) 100%),
-              url('../../assets/images/heroes/nicaragua_hero_panoramico.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/splash_bg.jpg') center/cover no-repeat;
   color: #FFFFFF;
   padding: 50px 24px 70px 24px;
   border-bottom: 3px solid #F65E01;
@@ -149,7 +149,7 @@
   flex-shrink: 0;
 }
 
-.trust-icon-green { background: rgba(16, 185, 129, 0.12); color: #10B981; }
+.trust-icon-green { background: rgba(16, 185, 129, 0.12); color: #4A7A5A; }
 .trust-icon-orange { background: rgba(246, 94, 1, 0.12); color: #F65E01; }
 .trust-icon-blue { background: rgba(2, 132, 199, 0.12); color: #0284C7; }
 .trust-icon-purple { background: rgba(139, 92, 246, 0.12); color: #8B5CF6; }
@@ -336,7 +336,7 @@
 
 .pref-action-btn-green {
   background: rgba(16, 185, 129, 0.12);
-  color: #059669;
+  color: #4A7A5A;
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 20px;
   padding: 6px 14px;
@@ -404,7 +404,7 @@
 }
 
 input:checked + .switch-slider {
-  background-color: #10B981;
+  background-color: #4A7A5A;
 }
 
 input:checked + .switch-slider:before {
@@ -791,7 +791,7 @@ input:checked + .switch-slider:before {
 }
 
 .laws-checklist .check-icon {
-  color: #10B981;
+  color: #4A7A5A;
   font-weight: 800;
 }
 

@@ -28,7 +28,7 @@
 - Enlaces y botones 100% operativos conectando a destinos, aliados y registro.
 ============================================================================
 -->
-<html lang="es-NI">
+<html lang="es-NI" data-bq-page="nosotros" data-bq-group="institucional">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -38,8 +38,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -57,6 +56,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 <body class="page-nosotros">
 
@@ -136,6 +137,7 @@
       </div>
     </div>
   </nav>
+  <main id="mainContent" tabindex="-1">
 
   <!-- HERO EDITORIAL (IMAGEN 4) -->
   <header class="nos-hero">
@@ -158,7 +160,7 @@
   <!-- NUESTRA RAZÓN DE EXISTIR -->
   <section class="nos-reason-section" id="proposito">
     <div class="nos-reason-copy">
-      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="nos-reason-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+      <img src="assets/images/assistant/baqui-bird.png" alt="Baqüi" class="nos-reason-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'">
       <div class="nos-reason-text">
         <h3><i class="fa-solid fa-leaf" style="color:var(--nos-primary)"></i> Nuestra razón de existir</h3>
         <p>
@@ -170,7 +172,7 @@
     <div class="nos-reason-pillars">
       <!-- 1 -->
       <div class="nos-pillar-card">
-        <img src="assets/images/destinos-hero.jpg" alt="Territorio" class="nos-pillar-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/volcan_masaya.jpg" alt="Territorio" class="nos-pillar-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-pillar-content">
           <i class="fa-solid fa-mountain"></i>
           <div>
@@ -181,7 +183,7 @@
       </div>
       <!-- 2 -->
       <div class="nos-pillar-card">
-        <img src="assets/images/aliados/cañon.webp" alt="Comunidad" class="nos-pillar-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Comunidad" class="nos-pillar-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-pillar-content">
           <i class="fa-solid fa-users"></i>
           <div>
@@ -192,7 +194,7 @@
       </div>
       <!-- 3 -->
       <div class="nos-pillar-card">
-        <img src="assets/images/destinos/granada.webp" alt="Tecnología responsable" class="nos-pillar-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Tecnología responsable" class="nos-pillar-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-pillar-content">
           <i class="fa-solid fa-microchip"></i>
           <div>
@@ -230,7 +232,7 @@
     <div class="nos-meaning-grid">
       <!-- 1 -->
       <div class="nos-meaning-card">
-        <img src="assets/images/destinos/ometepe.webp" alt="Conocer" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Conocer" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-meaning-content">
           <i class="fa-solid fa-binoculars"></i>
           <h4>Conocer</h4>
@@ -239,7 +241,7 @@
       </div>
       <!-- 2 -->
       <div class="nos-meaning-card">
-        <img src="assets/images/aliados/somoto.webp" alt="Conectar" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Conectar" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-meaning-content">
           <i class="fa-solid fa-hands-holding"></i>
           <h4>Conectar</h4>
@@ -248,7 +250,7 @@
       </div>
       <!-- 3 -->
       <div class="nos-meaning-card">
-        <img src="assets/images/destinos-hero.jpg" alt="Proteger" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/volcan_masaya.jpg" alt="Proteger" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-meaning-content">
           <i class="fa-solid fa-shield-heart"></i>
           <h4>Proteger</h4>
@@ -257,7 +259,7 @@
       </div>
       <!-- 4 -->
       <div class="nos-meaning-card">
-        <img src="assets/images/gastronomia/nacatamal.webp" alt="Respetar" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/comida/nacatamal.jpg" alt="Respetar" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-meaning-content">
           <i class="fa-solid fa-heart"></i>
           <h4>Respetar</h4>
@@ -266,7 +268,7 @@
       </div>
       <!-- 5 -->
       <div class="nos-meaning-card">
-        <img src="assets/images/gastronomia/vigoron.webp" alt="Compartir" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/comida/vigoron.jpg" alt="Compartir" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-meaning-content">
           <i class="fa-solid fa-share-nodes"></i>
           <h4>Compartir</h4>
@@ -275,7 +277,7 @@
       </div>
       <!-- 6 -->
       <div class="nos-meaning-card">
-        <img src="assets/images/destinos/granada.webp" alt="Descubrir" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Descubrir" class="nos-meaning-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-meaning-content">
           <i class="fa-solid fa-compass"></i>
           <h4>Descubrir</h4>
@@ -295,7 +297,7 @@
     <div class="nos-model-grid">
       <!-- STEP 1 -->
       <div class="nos-model-card">
-        <img src="assets/images/destinos/ometepe.webp" alt="Viajero" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Viajero" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-model-info">
           <h4>1. Viajero</h4>
           <p>Busca experiencias auténticas y seguras en Nicaragua.</p>
@@ -303,7 +305,7 @@
       </div>
       <!-- STEP 2 -->
       <div class="nos-model-card">
-        <img src="assets/images/baqui-bird.png" alt="Baqueano Digital" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+        <img src="assets/images/assistant/baqui-bird.png" alt="Baqueano Digital" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         <div class="nos-model-info">
           <h4>2. Baqueano Digital</h4>
           <p>Conecta, informa y personaliza la ruta con IA.</p>
@@ -311,7 +313,7 @@
       </div>
       <!-- STEP 3 -->
       <div class="nos-model-card">
-        <img src="assets/images/aliados/cañon.webp" alt="Territorio / Comunidad" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Territorio / Comunidad" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-model-info">
           <h4>3. Territorio / Comunidad</h4>
           <p>Guías, cooperativas y emprendedores locales.</p>
@@ -319,7 +321,7 @@
       </div>
       <!-- STEP 4 -->
       <div class="nos-model-card">
-        <img src="assets/images/destinos/granada.webp" alt="Experiencia local" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Experiencia local" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-model-info">
           <h4>4. Experiencia local</h4>
           <p>Naturaleza, cultura, gastronomía y vivencias únicas.</p>
@@ -327,7 +329,7 @@
       </div>
       <!-- STEP 5 -->
       <div class="nos-model-card">
-        <img src="assets/images/destinos-hero.jpg" alt="Impacto económico directo" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/volcan_masaya.jpg" alt="Impacto económico directo" class="nos-model-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-model-info">
           <h4>5. Impacto económico directo</h4>
           <p>Beneficio real para las familias y comunidades.</p>
@@ -385,7 +387,7 @@
       </div>
 
       <div class="nos-petroglyph-box">
-        <img src="assets/images/destinos/ometepe.webp" alt="Petroglifo Indígena" class="nos-petroglyph-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Petroglifo Indígena" class="nos-petroglyph-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <p><strong>Inspirados en nuestra tierra,</strong> nuestra gente y nuestras raíces ancestrales.</p>
       </div>
     </div>
@@ -458,27 +460,27 @@
 
     <div class="nos-network-grid">
       <div class="nos-net-card">
-        <img src="assets/images/aliados/cañon.webp" alt="Comunidades" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Comunidades" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-net-content"><h4>Comunidades Anfitrionas</h4></div>
       </div>
       <div class="nos-net-card">
-        <img src="assets/images/aliados/somoto.webp" alt="Cooperativas" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cooperativas" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-net-content"><h4>Cooperativas Locales</h4></div>
       </div>
       <div class="nos-net-card">
-        <img src="assets/images/destinos-hero.jpg" alt="Guías" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/volcan_masaya.jpg" alt="Guías" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-net-content"><h4>Guías y Baqueanos</h4></div>
       </div>
       <div class="nos-net-card">
-        <img src="assets/images/gastronomia/vigoron.webp" alt="Emprendimientos" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/comida/vigoron.jpg" alt="Emprendimientos" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-net-content"><h4>Emprendimientos Locales</h4></div>
       </div>
       <div class="nos-net-card">
-        <img src="assets/images/destinos/ometepe.webp" alt="Eco-Lodges" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
+        <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Eco-Lodges" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos/volcan_masaya.jpg'">
         <div class="nos-net-content"><h4>Eco-Lodges y Cabañas</h4></div>
       </div>
       <div class="nos-net-card">
-        <img src="assets/images/destinos/granada.webp" alt="Aliados" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
+        <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Aliados" class="nos-net-img" onerror="this.onerror=null;this.src='assets/images/destinos/splash_bg.jpg'">
         <div class="nos-net-content"><h4>Aliados Estratégicos</h4></div>
       </div>
     </div>
@@ -491,28 +493,28 @@
 
     <div class="nos-team-grid">
       <div class="nos-team-card">
-        <img src="assets/images/aliados/somoto.webp" alt="Coordinación" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Coordinación" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         <div class="nos-team-info">
           <h4>Coordinación</h4>
           <p>Estrategia y alianzas comunitarias</p>
         </div>
       </div>
       <div class="nos-team-card">
-        <img src="assets/images/destinos/granada.webp" alt="Tecnología" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+        <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Tecnología" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         <div class="nos-team-info">
           <h4>Tecnología</h4>
           <p>Desarrollo e innovación geoespacial</p>
         </div>
       </div>
       <div class="nos-team-card">
-        <img src="assets/images/aliados/cañon.webp" alt="Comunidad" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+        <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Comunidad" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         <div class="nos-team-info">
           <h4>Comunidad</h4>
           <p>Vinculación y verificación territorial</p>
         </div>
       </div>
       <div class="nos-team-card">
-        <img src="assets/images/destinos/ometepe.webp" alt="Cultura" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
+        <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Cultura" class="nos-team-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         <div class="nos-team-info">
           <h4>Cultura y Territorio</h4>
           <p>Contenido y memoria viva</p>
@@ -532,6 +534,7 @@
   </section>
 
   <!-- FOOTER OFICIAL UNIFICADO -->
+  </main>
   <footer class="footer-unified">
     <div class="footer-container">
       <div class="footer-grid">
@@ -676,7 +679,7 @@
             <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
           </button>
           <p style="font-size:.78rem;color:#94A3B8;margin:0">
-            <i class="fa-solid fa-shield-halved" style="color:#10B981"></i>
+            <i class="fa-solid fa-shield-halved" style="color:#4A7A5A"></i>
             Tu información está protegida y nunca será compartida con terceros.
           </p>
         </div>

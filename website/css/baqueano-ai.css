@@ -390,7 +390,7 @@
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 9999px;
   background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  color: #4A7A5A;
   font-family: var(--font-tech);
   font-size: 0.75rem;
 }
@@ -399,8 +399,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 6px #10B981;
+  background: #4A7A5A;
+  box-shadow: 0 0 6px #4A7A5A;
 }
 
 /*

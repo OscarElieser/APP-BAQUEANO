@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bq-page="404" data-bq-group="sistema">
 <!--
 // ============================================================================
 // 🧭 BAQUEANO ECOSYSTEM — PÁGINA 404 (SENDERO NO ENCONTRADO)
@@ -37,8 +37,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- Estilos Maestros y Específicos -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -53,6 +52,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 <body class="page-404-exact">
 
@@ -178,7 +179,7 @@
 
         <!-- Baqüi el Guardabarranco con Sombrero y Mapa -->
         <div class="baqui-character-box">
-          <img src="assets/images/baqui.png" alt="Baqüi Explorador con mapa en mano" class="baqui-character-img" onerror="this.onerror=null;this.src='assets/images/logo/logo_baqueano.svg'">
+          <img src="assets/images/assistant/baqui.png" alt="BAQUI, el guardabarranco explorador, con su mapa" class="baqui-character-img" width="320" height="320" decoding="async" onerror="this.onerror=null;this.src='assets/images/logo.png'">
         </div>
       </aside>
 
@@ -233,7 +234,7 @@
         <div class="what-now-cards-grid">
           <!-- 1. Destinos -->
           <a href="destinos.html" class="what-now-card-item">
-            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Volcanes y playas" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/ometepe_volcan_concepcion.jpg'">
+            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Volcanes y playas" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/isla_de_ometepe.jpg'">
             <div class="what-now-card-overlay"></div>
             <div class="what-now-card-meta">
               <div class="what-now-card-icon icon-bg-destinos">🌿</div>
@@ -246,7 +247,7 @@
 
           <!-- 2. Experiencias -->
           <a href="experiencias.html" class="what-now-card-item">
-            <img loading="lazy" decoding="async" src="assets/images/destinos/granada_isletas.jpg" alt="Tours y actividades" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/somoto.jpg'">
+            <img loading="lazy" decoding="async" src="assets/images/destinos/isletas_de_granada.jpg" alt="Tours y actividades" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/canon_de_somoto.jpg'">
             <div class="what-now-card-overlay"></div>
             <div class="what-now-card-meta">
               <div class="what-now-card-icon icon-bg-experiencias">👥</div>
@@ -259,7 +260,7 @@
 
           <!-- 3. Mapa -->
           <a href="mapa.html" class="what-now-card-item">
-            <img loading="lazy" decoding="async" src="assets/images/destinos/canon_somoto_panoramica.jpg" alt="Explorá todo el territorio" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/canon_de_somoto.jpg'">
+            <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Explorá todo el territorio" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/canon_de_somoto.jpg'">
             <div class="what-now-card-overlay"></div>
             <div class="what-now-card-meta">
               <div class="what-now-card-icon icon-bg-mapa">📍</div>
@@ -272,7 +273,7 @@
 
           <!-- 4. Mi Negocio -->
           <a href="mi-negocio.html" class="what-now-card-item">
-            <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Registrá tu emprendimiento" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/zapatera_petroglifos.jpg'">
+            <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Registrá tu emprendimiento" class="what-now-card-bg" onerror="this.onerror=null;this.src='assets/images/destinos/isletas_de_granada.jpg'">
             <div class="what-now-card-overlay"></div>
             <div class="what-now-card-meta">
               <div class="what-now-card-icon icon-bg-negocio">💼</div>
@@ -379,7 +380,7 @@
             <span class="script-title">Nicaragua</span>
             <span class="script-subtitle">Auténtica</span>
             <svg class="leaf-accent-svg" viewBox="0 0 32 32" fill="none">
-              <path d="M6 26C8 16 16 8 26 6C24 16 16 24 6 26Z" fill="#10B981" stroke="#10B981" stroke-width="2"/>
+              <path d="M6 26C8 16 16 8 26 6C24 16 16 24 6 26Z" fill="#4A7A5A" stroke="#4A7A5A" stroke-width="2"/>
               <path d="M6 26C12 20 18 14 26 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <span class="green-brush-underline"></span>

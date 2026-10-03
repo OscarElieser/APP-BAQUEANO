@@ -19,7 +19,7 @@
   --ia-light: #F8FAFC;
   --ia-border: #E2E8F0;
   --ia-radius: 18px;
-  --ia-green: #10B981;
+  --ia-green: #4A7A5A;
 }
 
 body.page-baqueano-ia {
@@ -38,7 +38,7 @@ body.page-baqueano-ia {
   position: relative;
   min-height: 480px;
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%),
-              url('../../assets/images/destinos-hero.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/volcan_masaya.jpg') center/cover no-repeat;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@ body.page-baqueano-ia {
   gap: 8px;
   background: rgba(16, 185, 129, 0.2);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #34D399;
+  color: #8DBF9A;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -70,6 +70,7 @@ body.page-baqueano-ia {
 }
 
 .ia-hero-title {
+  color: #FFFFFF; /* el H1 global usa --text-primary (oscuro en tema claro); la portada es oscura */
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 900;
@@ -976,7 +977,7 @@ body.page-baqueano-ia {
 
 .ia-budget-status-pill.ok {
   background: #DCFCE7;
-  color: #15803D;
+  color: #4A7A5A;
 }
 
 .ia-budget-status-pill.over {
@@ -1125,7 +1126,7 @@ QUÉ:
 .ia-weather-day i { color:#F59E0B; font-size:1rem; }
 .ia-weather-day strong { color:#0F172A; font-size:.75rem; }
 .ia-weather-updated { display:flex; align-items:center; justify-content:flex-end; gap:6px; margin-top:10px; color:#94A3B8; font-size:.59rem; }
-.ia-weather-live-dot { width:6px; height:6px; border-radius:50%; background:#10B981; box-shadow:0 0 0 4px rgba(16,185,129,.12); }
+.ia-weather-live-dot { width:6px; height:6px; border-radius:50%; background:#4A7A5A; box-shadow:0 0 0 4px rgba(16,185,129,.12); }
 
 /* ============================================================================
    RECOMENDACIONES VERIFICADAS

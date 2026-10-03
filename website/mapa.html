@@ -25,7 +25,7 @@
 - Footer unificado institucional.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="mapa" data-bq-group="territorio">
 
 <head>
   <meta charset="UTF-8">
@@ -36,8 +36,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -268,6 +267,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-mapa-exact">
@@ -429,15 +430,15 @@
   <script>
     // Inventario Maestro de Destinos Georreferenciados de Nicaragua
     const NICARAGUA_PLACES = [
-      { id: 'ometepe', name: 'Isla de Ometepe', lat: 11.5399, lng: -85.6174, cat: 'volcan', dept: 'Rivas', desc: 'Reserva de Biósfera UNESCO con los volcanes Concepción y Maderas.', img: 'assets/images/destinos/isla_de_ometepe.jpg', color: '#10B981' },
-      { id: 'granada', name: 'Granada Colonial & Isletas', lat: 11.9344, lng: -85.9560, cat: 'cultura', dept: 'Granada', desc: 'Ciudad colonial con 365 isletas volcánicas en el Gran Lago Cocibolca.', img: 'assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp', color: '#F65E01' },
+      { id: 'ometepe', name: 'Isla de Ometepe', lat: 11.5399, lng: -85.6174, cat: 'volcan', dept: 'Rivas', desc: 'Reserva de Biósfera UNESCO con los volcanes Concepción y Maderas.', img: 'assets/images/destinos/isla_de_ometepe.jpg', color: '#4A7A5A' },
+      { id: 'granada', name: 'Granada Colonial & Isletas', lat: 11.9344, lng: -85.9560, cat: 'cultura', dept: 'Granada', desc: 'Ciudad colonial con 365 isletas volcánicas en el Gran Lago Cocibolca.', img: 'assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg', color: '#F65E01' },
       { id: 'sjds', name: 'San Juan del Sur', lat: 11.2529, lng: -85.8705, cat: 'playa', dept: 'Rivas', desc: 'Bahía icónica del Pacífico con surf de clase mundial y avistamiento de ballenas.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#0284C7' },
-      { id: 'cerro_negro', name: 'Volcán Cerro Negro', lat: 12.5061, lng: -86.7022, cat: 'volcan', dept: 'León', desc: 'El volcán más joven de Centroamérica, ideal para sandboarding extremo.', img: 'assets/images/destinos/Volcán Cerro Negro Sandboarding Extremo.webp', color: '#DC2626' },
-      { id: 'somoto', name: 'Cañón de Somoto', lat: 13.4833, lng: -86.5833, cat: 'naturaleza', dept: 'Madriz', desc: 'Monumento Nacional con farallones rocosos de hasta 150 metros y aguas esmeraldas.', img: 'assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp', color: '#0D9488' },
-      { id: 'masaya', name: 'Volcán Masaya', lat: 11.9842, lng: -86.1611, cat: 'volcan', dept: 'Masaya', desc: 'Parque Nacional con lago de lava incandescente visible y cuevas de murciélagos.', img: 'assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg', color: '#DC2626' },
+      { id: 'cerro_negro', name: 'Volcán Cerro Negro', lat: 12.5061, lng: -86.7022, cat: 'volcan', dept: 'León', desc: 'El volcán más joven de Centroamérica, ideal para sandboarding extremo.', img: 'assets/images/destinos/cerro_negro.jpg', color: '#DC2626' },
+      { id: 'somoto', name: 'Cañón de Somoto', lat: 13.4833, lng: -86.5833, cat: 'naturaleza', dept: 'Madriz', desc: 'Monumento Nacional con farallones rocosos de hasta 150 metros y aguas esmeraldas.', img: 'assets/images/destinos/canon_de_somoto.jpg', color: '#0D9488' },
+      { id: 'masaya', name: 'Volcán Masaya', lat: 11.9842, lng: -86.1611, cat: 'volcan', dept: 'Masaya', desc: 'Parque Nacional con lago de lava incandescente visible y cuevas de murciélagos.', img: 'assets/images/destinos/volcan_masaya.jpg', color: '#DC2626' },
       { id: 'corn_island', name: 'Corn Island & Little Corn', lat: 12.1736, lng: -83.0560, cat: 'playa', dept: 'Caribe Sur', desc: 'Paraíso de arena blanca, aguas turquesas y arrecifes de coral en el Caribe.', img: 'assets/images/destinos/corn_island.jpg', color: '#0284C7' },
-      { id: 'mombacho', name: 'Reserva Volcán Mombacho', lat: 11.8267, lng: -85.9681, cat: 'naturaleza', dept: 'Granada', desc: 'Bosque nuboso con orquídeas endémicas y vistas panorámicas a las Isletas.', img: 'assets/images/destinos/Reserva Natural Volcán Mombacho & Bosque Nuboso.jpg', color: '#10B981' },
-      { id: 'san_ramon', name: 'Posada Rural San Ramón', lat: 11.5200, lng: -85.5500, cat: 'coop', dept: 'Rivas', desc: 'Cooperativa comunitaria en Ometepe con senderos a la cascada de San Ramón.', img: 'assets/images/destinos/Posada Rural San Ramón Ometepe.avif', color: '#16A34A' },
+      { id: 'mombacho', name: 'Reserva Volcán Mombacho', lat: 11.8267, lng: -85.9681, cat: 'naturaleza', dept: 'Granada', desc: 'Bosque nuboso con orquídeas endémicas y vistas panorámicas a las Isletas.', img: 'assets/images/destinos/selva_negra.jpg', color: '#4A7A5A' },
+      { id: 'san_ramon', name: 'Posada Rural San Ramón', lat: 11.5200, lng: -85.5500, cat: 'coop', dept: 'Rivas', desc: 'Cooperativa comunitaria en Ometepe con senderos a la cascada de San Ramón.', img: 'assets/images/destinos/Posada Rural San Ramón Ometepe.avif', color: '#4A7A5A' },
       { id: 'las_penitas', name: 'Playa Las Peñitas & Juan Venado', lat: 12.3556, lng: -87.0319, cat: 'playa', dept: 'León', desc: 'Reserva Natural Isla Juan Venado con manglares y playas salvajes del Pacífico.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#0284C7' }
     ];
 

@@ -30,7 +30,7 @@
 - Reproductor inferior permanente.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="musica" data-bq-group="cultura">
 
 <head>
   <meta charset="UTF-8">
@@ -41,8 +41,7 @@
   <!-- Tipografías Oficiales Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- Iconografía FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -63,6 +62,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-musica-exact">
@@ -122,6 +123,7 @@
       </div>
     </div>
   </nav>
+  <main id="mainContent" tabindex="-1">
 
   <!-- ============================================================================
        1. HERO MÚSICA (IMAGEN 1)
@@ -234,7 +236,7 @@
       <div class="musica-genres-grid">
         <!-- 1. Son Nica -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Son Nica" class="genre-card-bg">
+          <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Son Nica" class="genre-card-bg">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
             <h3>Son Nica</h3>
@@ -244,7 +246,7 @@
 
         <!-- 2. Marimba -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Marimba" class="genre-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba" class="genre-card-bg">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
             <h3>Marimba</h3>
@@ -254,7 +256,7 @@
 
         <!-- 3. Nueva Canción -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Nueva Canción" class="genre-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Nueva Canción" class="genre-card-bg">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
             <h3>Nueva Canción</h3>
@@ -264,7 +266,7 @@
 
         <!-- 4. Folclor -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Reserva Natural Volcán Mombacho & Bosque Nuboso.jpg" alt="Folclor" class="genre-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/selva_negra.jpg" alt="Folclor" class="genre-card-bg">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
             <h3>Folclor</h3>
@@ -284,7 +286,7 @@
 
         <!-- 6. Música Clásica -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/hotel_dario.jpg" alt="Música Clásica" class="genre-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/aliados/hotel_dario.jpg" alt="Música Clásica" class="genre-card-bg">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
             <h3>Música Clásica</h3>
@@ -446,7 +448,7 @@
 
         <!-- Derecha: Ficha de Destino Musical (Granada) -->
         <div class="musica-featured-dest-card">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="Granada Musical" class="featured-dest-img">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Granada Musical" class="featured-dest-img">
           <div class="featured-dest-body">
             <h4>Granada</h4>
             <p>Cuna de compositores, serenatas y tradición musical frente al Gran Lago Cocibolca.</p>
@@ -481,7 +483,7 @@
       <div class="musica-history-grid">
         <!-- 1. El Son Nica -->
         <a href="#archivoSonoro" class="history-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Catedral Inmaculada Concepción & Plaza de la Independencia Granada.webp" alt="El Son Nica" class="history-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="El Son Nica" class="history-card-bg">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
             <div class="history-card-info">
@@ -507,7 +509,7 @@
 
         <!-- 3. Marimba de Arco -->
         <a href="#archivoSonoro" class="history-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Marimba de Arco" class="history-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="history-card-bg">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
             <div class="history-card-info">
@@ -520,7 +522,7 @@
 
         <!-- 4. El Güegüense -->
         <a href="#archivoSonoro" class="history-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/dona_haydee.jpg" alt="El Güegüense" class="history-card-bg">
+          <img loading="lazy" decoding="async" src="assets/images/comida/gallo_pinto.jpg" alt="El Güegüense" class="history-card-bg">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
             <div class="history-card-info">
@@ -556,7 +558,7 @@
       <div class="musica-instruments-grid">
         <!-- 1. Marimba de Arco -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="Marimba de Arco" class="instrument-img">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="instrument-img">
           <div class="instrument-body">
             <h4>Marimba de Arco</h4>
             <p>Patrimonio de la Humanidad</p>
@@ -592,7 +594,7 @@
 
         <!-- 5. Quijongo -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Cañón de Somoto & Monumento Nacional.webp" alt="Quijongo" class="instrument-img">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Quijongo" class="instrument-img">
           <div class="instrument-body">
             <h4>Quijongo</h4>
             <p>Herencia afroindígena</p>
@@ -673,7 +675,7 @@
 
         <!-- 4. El Solar de Monimbó -->
         <div class="track-card-exact" data-title="El Solar de Monimbó" data-artist="Luis Enrique Mejía Godoy">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Parque Nacional Volcán Masaya & Cráter Santiago.jpg" alt="El Solar de Monimbó" class="track-thumb">
+          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="El Solar de Monimbó" class="track-thumb">
           <div class="track-info">
             <h5 class="track-title">El Solar de Monimbó</h5>
             <p class="track-artist">Luis Enrique Mejía Godoy</p>
@@ -693,7 +695,7 @@
 
         <!-- 6. Danza del Güegüense -->
         <div class="track-card-exact" data-title="Danza del Güegüense" data-artist="Folclor Nacional">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/dona_haydee.jpg" alt="Danza del Güegüense" class="track-thumb">
+          <img loading="lazy" decoding="async" src="assets/images/comida/gallo_pinto.jpg" alt="Danza del Güegüense" class="track-thumb">
           <div class="track-info">
             <h5 class="track-title">Danza del Güegüense</h5>
             <p class="track-artist">Folclor Nacional</p>
@@ -711,7 +713,7 @@
     <div class="exact-container">
       <div class="musica-digital-strip">
         <div class="musica-digital-left">
-          <img loading="lazy" decoding="async" src="assets/images/baqui.png" alt="Baqüi Asistente" class="musica-digital-bird">
+          <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Asistente" class="musica-digital-bird">
           <div class="musica-digital-text">
             <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano Digital: ¿Qué música querés disfrutar hoy?</h3>
             <p>Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio que estés explorando.</p>
@@ -750,6 +752,7 @@
   <!-- ============================================================================
        11. PIE DE PÁGINA INSTITUCIONAL UNIFICADO (4 COLUMNAS - IMÁGENES 1-4)
        ============================================================================ -->
+  </main>
   <footer class="site-footer-exact" role="contentinfo">
     <div class="exact-container">
       <div class="footer-grid-exact">
@@ -945,7 +948,7 @@
             { name: "Masaya: Cuna de la Marimba de Arco", lat: 11.9700, lng: -86.0900, genre: "Marimba", color: "#F65E01" },
             { name: "Granada: Serenatas y Compositores", lat: 11.9344, lng: -85.9560, genre: "Clásica y Canción", color: "#165D6F" },
             { name: "León: Cuna de la Trova y Poesía", lat: 12.4379, lng: -86.8780, genre: "Trova y Son Nica", color: "#8B5CF6" },
-            { name: "Caribe Sur: Palo de Mayo & Afrobeat", lat: 12.0131, lng: -83.7635, genre: "Palo de Mayo", color: "#10B981" },
+            { name: "Caribe Sur: Palo de Mayo & Afrobeat", lat: 12.0131, lng: -83.7635, genre: "Palo de Mayo", color: "#4A7A5A" },
             { name: "Matagalpa & Jinotega: Polkas y Mazurcas", lat: 12.9256, lng: -85.9172, genre: "Mazurcas Campesinas", color: "#F59E0B" }
           ];
 

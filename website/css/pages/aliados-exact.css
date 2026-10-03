@@ -8,7 +8,7 @@
  *   y anfitriones comunitarios de Nicaragua con tarifas transparentes y sin comisiones.
  *
  * ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
- * - Sistema CSS modular con tokens cromáticos oficiales (#165D6F, #F65E01, #F4E6C1, #0F172A, #10B981).
+ * - Sistema CSS modular con tokens cromáticos oficiales (#165D6F, #F65E01, #F4E6C1, #0F172A, #4A7A5A).
  * - Grilla responsiva de 10 aliados destacados en formato 5x2 (desktop) y carrusel/scroll táctil (móvil).
  * - Barra de métricas de impacto, barra de filtros avanzados con selector de departamento y cercanía.
  * - Sección de mapa interactivo dividida con lista de aliados cercanos verificados.
@@ -26,7 +26,7 @@
   --aliados-naranja: #F65E01;
   --aliados-crema: #F4E6C1;
   --aliados-noche: #0F172A;
-  --aliados-verde: #10B981;
+  --aliados-verde: #4A7A5A;
   --aliados-bg: #F8FAFC;
   --aliados-card-bg: #FFFFFF;
   --aliados-text: #1E293B;
@@ -74,7 +74,7 @@ body.page-aliados-exact {
   gap: 8px;
   background: rgba(16, 185, 129, 0.2);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #34D399;
+  color: #8DBF9A;
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.82rem;
@@ -212,7 +212,7 @@ body.page-aliados-exact {
 
 .aliados-metric-item.verified-badge {
   background: rgba(16, 185, 129, 0.12);
-  color: #065F46;
+  color: #2F5A3C;
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
@@ -305,7 +305,7 @@ body.page-aliados-exact {
 }
 
 .btn-search-aliados:hover {
-  background-color: #059669;
+  background-color: #4A7A5A;
   transform: translateY(-1px);
 }
 
@@ -527,7 +527,7 @@ body.page-aliados-exact {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  background-color: #10B981;
+  background-color: #4A7A5A;
   color: #FFFFFF;
   padding: 6px 8px;
   border-radius: 6px;
@@ -538,7 +538,7 @@ body.page-aliados-exact {
 }
 
 .btn-aliado-whatsapp:hover {
-  background-color: #059669;
+  background-color: #4A7A5A;
 }
 
 .btn-aliado-profile {
@@ -727,7 +727,7 @@ body.page-aliados-exact {
   align-items: center;
   gap: 4px;
   font-size: 0.65rem;
-  color: #059669;
+  color: #4A7A5A;
   font-weight: 600;
 }
 

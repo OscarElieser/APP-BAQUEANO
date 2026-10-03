@@ -103,7 +103,7 @@ html body .terminos-inline-007 {
   gap: 0.4rem !important;
   font-family: var(--font-tech) !important;
   font-size: 0.75rem !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
   background: rgba(16, 185, 129, 0.1) !important;
   border: 1px solid rgba(16, 185, 129, 0.3) !important;
   padding: 0.25rem 0.65rem !important;
@@ -114,6 +114,6 @@ html body .terminos-inline-008 {
   width: 7px !important;
   height: 7px !important;
   border-radius: 50% !important;
-  background: #10B981 !important;
-  box-shadow: 0 0 6px #10B981 !important;
+  background: #4A7A5A !important;
+  box-shadow: 0 0 6px #4A7A5A !important;
 }

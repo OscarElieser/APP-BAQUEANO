@@ -75,7 +75,7 @@
       description: 'Isla de Ometepe con sus colosos Concepción y Maderas, playas del Pacífico para surf y santuario de tortugas paslama en Refugio La Flor.',
       highlights: ['Isla de Ometepe', 'Playa Maderas', 'Refugio La Flor', 'San Juan del Sur'],
       culture: 'Petroglifos precolombinos, cooperativas plataneras, pesca artesanal.',
-      color: '#10B981'
+      color: '#4A7A5A'
     },
     madriz: {
       name: 'Madriz (Cañón de Somoto & Rosquillas)',
@@ -105,7 +105,7 @@
       description: 'La Ciudad de las Brumas, Lago de Apanás para avistamiento de aves acuáticas, Reserva Datanlí-El Diablo y cascada La Luna en El Cuá.',
       highlights: ['Lago de Apanás', 'Cascada La Luna', 'Reserva Datanlí-El Diablo', 'Peña de la Cruz'],
       culture: 'Guitarras segovianas, tejido campesino de henequén, clima fresco de montaña.',
-      color: '#10B981'
+      color: '#4A7A5A'
     },
     masaya: {
       name: 'Masaya (Cuna del Folclore & Lava Activa)',
@@ -141,7 +141,7 @@
     ruta_cafe: {
       name: 'Ruta del Café Campesino & Bosque de Niebla',
       points: ['managua', 'matagalpa', 'jinotega', 'madriz'],
-      color: '#10B981'
+      color: '#4A7A5A'
     },
     ruta_caribe: {
       name: 'Travesía de Dos Océanos: Pacífico a Caribe',

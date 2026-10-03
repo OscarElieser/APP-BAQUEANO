@@ -1,23 +1,23 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — COOPERATIVAS & ALOJAMIENTOS ALIADOS (aliados.css)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Conectar al visitante de forma directa con la red de cooperativas campesinas,
-//   hospedajes rurales y aliados comunitarios de Nicaragua sin intermediación.
-// - Ofrecer una galería fotográfica enriquecida con múltiples tomas de las
-//   instalaciones, cabañas, ríos y paisajes de cada aliado verificado.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Tarjetas interactivas 3D con giro de 180° y soporte táctil en dispositivos móviles.
-// - Galería de miniaturas fotográficas (`.flip-front-gallery-strip`) para previsualizar
-//   múltiples fotos por cada aliado.
-// - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
-//
-// 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-// - .allies-3d-grid, .flip-card-3d, .flip-card-inner, .flip-front-img-wrap.
-// - .flip-front-gallery-strip, .flip-gallery-thumb, .flip-photo-badge.
-// ============================================================================
+/* ============================================================================ */
+/* 🧭 BAQUEANO ECOSYSTEM — COOPERATIVAS & ALOJAMIENTOS ALIADOS (aliados.css) */
+/* ============================================================================ */
+/*  */
+/* 🎯 1. POR QUÉ (WHY / PROPÓSITO): */
+/* - Conectar al visitante de forma directa con la red de cooperativas campesinas, */
+/*   hospedajes rurales y aliados comunitarios de Nicaragua sin intermediación. */
+/* - Ofrecer una galería fotográfica enriquecida con múltiples tomas de las */
+/*   instalaciones, cabañas, ríos y paisajes de cada aliado verificado. */
+/*  */
+/* ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN): */
+/* - Tarjetas interactivas 3D con giro de 180° y soporte táctil en dispositivos móviles. */
+/* - Galería de miniaturas fotográficas (`.flip-front-gallery-strip`) para previsualizar */
+/*   múltiples fotos por cada aliado. */
+/* - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche). */
+/*  */
+/* 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS): */
+/* - .allies-3d-grid, .flip-card-3d, .flip-card-inner, .flip-front-img-wrap. */
+/* - .flip-front-gallery-strip, .flip-gallery-thumb, .flip-photo-badge. */
+/* ============================================================================ */
 
 
 
@@ -91,7 +91,7 @@ html body .aliados-inline-012 {
   font-family: var(--font-tech) !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .aliados-inline-013 {

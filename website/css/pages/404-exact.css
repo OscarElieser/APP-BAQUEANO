@@ -1,29 +1,29 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — PÁGINA 404 DE ALTA FIDELIDAD 1:1 (404-exact.css)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una experiencia de error 404 inmersiva, artística y conectada con la
-//   identidad cultural nicaragüense, transformando un extravío digital en una
-//   invitación a explorar senderos auténticos no cartografiados.
-// - Reproducir fielmente la composición oficial: Baqüi explorador con sombrero y
-//   mochila sosteniendo el mapa, poste de madera rústica con flechas territoriales,
-//   número 404 texturizado con petroglifos, y tarjeta flotante "¿Y ahora qué?".
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - CSS moderno estructurado con Flexbox, CSS Grid y efectos Glassmorphism
-//   (backdrop-filter con desenfoque de 16px y bordes luminosos sutiles).
-// - Colores institucionales: Teal (#165D6F), Terracota Fuego (#F65E01),
-//   Crema Arena (#F4E6C1) y Noche Profunda (#0F172A).
-// - Cero uso de sintaxis deprecada; adaptabilidad responsiva fluida para móviles,
-//   tablets y pantallas panorámicas.
-//
-// 📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
-// - Clases para la barra superior HUD con botón SOS rojo y selector de tema,
-//   el escenario central con poste de madera, ilustración de Baqüi y tipografía 404,
-//   los botones de retorno al inicio y destinos, la tarjeta inferior "¿Y ahora qué?"
-//   con 4 tarjetas panorámicas y el footer institucional.
-// ============================================================================
+/* ============================================================================ */
+/* 🧭 BAQUEANO ECOSYSTEM — PÁGINA 404 DE ALTA FIDELIDAD 1:1 (404-exact.css) */
+/* ============================================================================ */
+/*  */
+/* 🎯 1. POR QUÉ (WHY / PROPÓSITO): */
+/* - Proveer una experiencia de error 404 inmersiva, artística y conectada con la */
+/*   identidad cultural nicaragüense, transformando un extravío digital en una */
+/*   invitación a explorar senderos auténticos no cartografiados. */
+/* - Reproducir fielmente la composición oficial: Baqüi explorador con sombrero y */
+/*   mochila sosteniendo el mapa, poste de madera rústica con flechas territoriales, */
+/*   número 404 texturizado con petroglifos, y tarjeta flotante "¿Y ahora qué?". */
+/*  */
+/* ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN): */
+/* - CSS moderno estructurado con Flexbox, CSS Grid y efectos Glassmorphism */
+/*   (backdrop-filter con desenfoque de 16px y bordes luminosos sutiles). */
+/* - Colores institucionales: Teal (#165D6F), Terracota Fuego (#F65E01), */
+/*   Crema Arena (#F4E6C1) y Noche Profunda (#0F172A). */
+/* - Cero uso de sintaxis deprecada; adaptabilidad responsiva fluida para móviles, */
+/*   tablets y pantallas panorámicas. */
+/*  */
+/* 📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES): */
+/* - Clases para la barra superior HUD con botón SOS rojo y selector de tema, */
+/*   el escenario central con poste de madera, ilustración de Baqüi y tipografía 404, */
+/*   los botones de retorno al inicio y destinos, la tarjeta inferior "¿Y ahora qué?" */
+/*   con 4 tarjetas panorámicas y el footer institucional. */
+/* ============================================================================ */
 
 /* Reseteo y Base para 404 */
 .page-404-exact {
@@ -203,7 +203,7 @@
   justify-content: center;
   align-items: center;
   background: radial-gradient(circle at 50% 40%, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.88) 100%),
-              url('../../assets/images/heroes/404_hero_official.jpg') center/cover no-repeat;
+              url('../../assets/images/destinos/cerro_negro.jpg') center 40%/cover no-repeat; /* antes: 404_hero_official.jpg = maqueta con textos dibujados que duplicaban el HTML */
 }
 
 .hero-404-content-wrap {
@@ -542,7 +542,7 @@
   flex-shrink: 0;
 }
 
-.icon-bg-destinos { background: #10B981; }
+.icon-bg-destinos { background: #4A7A5A; }
 .icon-bg-experiencias { background: #F65E01; }
 .icon-bg-mapa { background: #0284C7; }
 .icon-bg-negocio { background: #B45309; }

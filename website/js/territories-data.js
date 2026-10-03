@@ -529,7 +529,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'INTUR/SIIT — Granada', url: 'https://tramites.intur.gob.ni/siit/public/site/atractivosTuristicosGranada.html' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/hotel_dario.jpg',
+    heroImage: 'assets/images/aliados/hotel_dario.jpg',
     lat: 11.9298,
     lng: -85.9535,
     coopCount: 32
@@ -665,7 +665,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'INTUR — Miraflor', url: 'https://www.intur.gob.ni/2016/02/01/gobierno-sandinista-amplia-oferta-turistica-en-el-departamento-de-esteli/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/poco_a_poco.jpg',
+    heroImage: 'assets/images/destinos/Casa Señorial Colonial Granada.jpg',
     lat: 13.0910,
     lng: -86.3530,
     coopCount: 24
@@ -769,7 +769,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'INTUR/SIIT — Managua', url: 'https://tramites.intur.gob.ni/siit/public/site/atractivosTuristicosManagua.html' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/dona_haydee.jpg',
+    heroImage: 'assets/images/comida/gallo_pinto.jpg',
     lat: 12.1280,
     lng: -86.2650,
     coopCount: 35
@@ -836,7 +836,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Mapa Nacional — Carazo', url: 'https://www.mapanicaragua.com/carazo/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/villa_redonda.jpg',
+    heroImage: 'assets/images/destinos/Villa Vista Redonda (Emerald Coast).webp',
     lat: 11.8580,
     lng: -86.2390,
     coopCount: 18
@@ -969,7 +969,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Mapa Nacional — Boaco', url: 'https://www.mapanicaragua.com/boaco/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/finca_magdalena.jpg',
+    heroImage: 'assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg',
     lat: 12.4720,
     lng: -85.6590,
     coopCount: 15
@@ -1105,7 +1105,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Visita Nicaragua — Islas', url: 'https://www.visitanicaragua.com/atractivos/islas/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/fortaleza_el_castillo.jpg',
+    heroImage: 'assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg',
     lat: 11.0180,
     lng: -84.3970,
     coopCount: 27

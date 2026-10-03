@@ -23,7 +23,7 @@
 - Estilos en css/pages/historia-exact.css y modales oficiales.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="historia" data-bq-group="cultura">
 
 <head>
   <meta charset="UTF-8">
@@ -34,8 +34,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome Icons Suite -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -56,6 +55,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 
 <body class="page-historia-exact">
@@ -88,10 +89,10 @@
             Más <i class="fa-solid fa-chevron-down" style="font-size: 0.72rem; margin-left: 2px;"></i>
           </button>
           <div class="exact-nav-dropdown-menu" role="menu">
-            <a href="ambiental.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf" style="color: #10B981;"></i> Custodia Ambiental</a>
+            <a href="ambiental.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-leaf" style="color: #4A7A5A;"></i> Custodia Ambiental</a>
             <a href="gastronomia.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-utensils" style="color: #F65E01;"></i> Gastronomía Ancestral</a>
             <a href="musica.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-music" style="color: #A855F7;"></i> Son Sonoro Folk</a>
-            <a href="aliados.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake" style="color: #10B981;"></i> Red de Aliados</a>
+            <a href="aliados.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-handshake" style="color: #4A7A5A;"></i> Red de Aliados</a>
             <a href="nosotros.html" class="exact-nav-dropdown-item" role="menuitem"><i class="fa-solid fa-users" style="color: #F4E6C1;"></i> Quiénes Somos</a>
           </div>
         </div>
@@ -236,7 +237,7 @@
           <!-- Izquierda: Mapa Departamental -->
           <div class="hist-dept-map-card">
             <div class="hist-dept-map-header">
-              <h3><i class="fa-solid fa-map-pin" style="color: #10B981;"></i> Explorá los 17 territorios</h3>
+              <h3><i class="fa-solid fa-map-pin" style="color: #4A7A5A;"></i> Explorá los 17 territorios</h3>
               <p>Conocé la riqueza histórica, cultural y natural de cada departamento y región autónoma de Nicaragua.</p>
             </div>
             <div id="historiaDeptMap" class="hist-dept-map-viewport"></div>
@@ -303,7 +304,7 @@
       <section class="hist-peoples-section">
         <div class="hist-section-header">
           <div>
-            <h2><i class="fa-solid fa-users" style="color: #10B981;"></i> Pueblos originarios y memoria viva</h2>
+            <h2><i class="fa-solid fa-users" style="color: #4A7A5A;"></i> Pueblos originarios y memoria viva</h2>
             <p>Culturas que mantienen vivo el espíritu de Nicaragua.</p>
           </div>
           <a href="#pueblosOriginarios" class="hist-section-link">Ver más sobre nuestros pueblos <i class="fa-solid fa-arrow-right"></i></a>
@@ -453,7 +454,7 @@
       <section class="hist-heritage-section">
         <div class="hist-section-header">
           <div>
-            <h2><i class="fa-solid fa-landmark" style="color: #10B981;"></i> Patrimonio vivo</h2>
+            <h2><i class="fa-solid fa-landmark" style="color: #4A7A5A;"></i> Patrimonio vivo</h2>
             <p>Nuestra cultura sigue presente en cada expresión.</p>
           </div>
           <a href="#patrimonio" class="hist-section-link">Ver más patrimonios <i class="fa-solid fa-arrow-right"></i></a>
@@ -541,7 +542,7 @@
            ============================================================================ -->
       <section class="hist-audio-section">
         <div class="hist-audio-left">
-          <img loading="lazy" decoding="async" src="assets/images/baqui.png" alt="Baqüi" class="hist-bird-avatar">
+          <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi" class="hist-bird-avatar">
           <button type="button" class="hist-audio-play-btn" aria-label="Reproducir audioguía"><i class="fa-solid fa-play"></i></button>
           <div>
             <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0;">Escuchá nuestra historia</h3>
@@ -582,7 +583,7 @@
 
         <!-- Subsección: 9 Monumentos Clave -->
         <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 24px 0 14px;">
-          <i class="fa-solid fa-landmark-dome" style="color: #10B981;"></i> Monumentos y Sitios de Memoria Viva
+          <i class="fa-solid fa-landmark-dome" style="color: #4A7A5A;"></i> Monumentos y Sitios de Memoria Viva
         </h3>
         <div class="hist-monuments-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-bottom: 30px;">
           <article class="hist-site-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 16px; box-shadow: 0 4px 12px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
@@ -593,7 +594,7 @@
           </article>
 
           <article class="hist-site-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 16px; box-shadow: 0 4px 12px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
-            <div style="font-size: 0.72rem; font-weight: 800; color: #10B981; text-transform: uppercase; margin-bottom: 4px;"><i class="fa-solid fa-landmark"></i> Puerto Momotombo · León</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #4A7A5A; text-transform: uppercase; margin-bottom: 4px;"><i class="fa-solid fa-landmark"></i> Puerto Momotombo · León</div>
             <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.02rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruinas de León Viejo (UNESCO)</h4>
             <p style="font-size: 0.82rem; color: #64748B; margin: 0 0 10px; line-height: 1.45; flex: 1;">Patrimonio de la Humanidad UNESCO fundado en 1524 por Francisco Hernández de Córdoba. Sepultada por erupciones del volcán Momotombo en 1610.</p>
             <span style="font-size: 0.75rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-location-dot"></i> La Paz Centro · Museo de sitio y senderos</span>
@@ -614,7 +615,7 @@
           </article>
 
           <article class="hist-site-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 16px; box-shadow: 0 4px 12px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
-            <div style="font-size: 0.72rem; font-weight: 800; color: #10B981; text-transform: uppercase; margin-bottom: 4px;"><i class="fa-solid fa-book-bookmark"></i> Catedral de León · León</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #4A7A5A; text-transform: uppercase; margin-bottom: 4px;"><i class="fa-solid fa-book-bookmark"></i> Catedral de León · León</div>
             <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.02rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Tumba y Cripta de Rubén Darío</h4>
             <p style="font-size: 0.82rem; color: #64748B; margin: 0 0 10px; line-height: 1.45; flex: 1;">Bajo el altar de la Insigne Basílica Catedral reposan los restos del Príncipe de las Letras Castellanas, custodiados por el esculpido León Doliente de mármol.</p>
             <span style="font-size: 0.75rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-location-dot"></i> Plaza Mayor de León · Acceso a bóvedas</span>
@@ -690,9 +691,9 @@
         <div class="hist-sources-logos">
           <div class="hist-source-pill"><i class="fa-solid fa-landmark-dome" style="color: #0284C7;"></i> INTUR</div>
           <div class="hist-source-pill"><i class="fa-solid fa-masks-theater" style="color: #F65E01;"></i> INC</div>
-          <div class="hist-source-pill"><i class="fa-solid fa-graduation-cap" style="color: #10B981;"></i> MINED</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-graduation-cap" style="color: #4A7A5A;"></i> MINED</div>
           <div class="hist-source-pill"><i class="fa-solid fa-building-columns" style="color: #D97706;"></i> BCN</div>
-          <div class="hist-source-pill"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> MARENA</div>
+          <div class="hist-source-pill"><i class="fa-solid fa-leaf" style="color: #4A7A5A;"></i> MARENA</div>
           <div class="hist-source-pill"><i class="fa-solid fa-globe" style="color: #2563EB;"></i> UNESCO</div>
         </div>
         <a href="#fuentes" class="hist-btn-all-sources">Ver todas las fuentes <i class="fa-solid fa-arrow-right"></i></a>

@@ -26,7 +26,7 @@
   --gastro-naranja: #F65E01;
   --gastro-crema: #F4E6C1;
   --gastro-noche: #0F172A;
-  --gastro-verde: #10B981;
+  --gastro-verde: #4A7A5A;
   --gastro-bg: #F8FAFC;
   --gastro-border: #E2E8F0;
   --gastro-radius: 14px;
@@ -206,7 +206,7 @@ body.page-gastro-exact {
 }
 
 .gastro-cat-pill.active {
-  background: #065F46;
+  background: #2F5A3C;
   color: #FFFFFF;
 }
 

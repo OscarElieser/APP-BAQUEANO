@@ -121,9 +121,9 @@ window.BaqueanoMap = (function() {
   const CATEGORY_STYLES = {
     playas: { color: '#0EA5E9', icon: 'fa-umbrella-beach', label: 'Playa' },
     bahias: { color: '#06B6D4', icon: 'fa-anchor', label: 'Bahía' },
-    rios: { color: '#10B981', icon: 'fa-water', label: 'Río / Cuenca' },
+    rios: { color: '#4A7A5A', icon: 'fa-water', label: 'Río / Cuenca' },
     volcanes: { color: '#F65E01', icon: 'fa-volcano', label: 'Volcán' },
-    selva: { color: '#22C55E', icon: 'fa-tree', label: 'Selva Nubosa' },
+    selva: { color: '#4A7A5A', icon: 'fa-tree', label: 'Selva Nubosa' },
     islas: { color: '#14B8A6', icon: 'fa-fish', label: 'Isla' },
     hoteles: { color: '#EAB308', icon: 'fa-hotel', label: 'Hotel & Eco-Lodge' },
     hostales: { color: '#F97316', icon: 'fa-bed', label: 'Hostal' },
@@ -203,7 +203,7 @@ window.BaqueanoMap = (function() {
               <i class="fa-solid fa-receipt" style="color: #F59E0B; margin-right: 0.25rem;"></i> ${place.priceDetail}
             </div>` : ''}
           <div class="map-popup-coop">
-            <i class="fa-solid fa-handshake" style="color: #10B981;"></i>
+            <i class="fa-solid fa-handshake" style="color: #4A7A5A;"></i>
             <span>${place.cooperativeName || 'Comunidad Local'}</span>
           </div>
           <div class="map-popup-actions">

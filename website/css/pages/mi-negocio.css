@@ -144,7 +144,7 @@
     .model-col-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
     .model-col-value { font-size: 1.8rem; font-weight: 800; font-family: var(--font-tech); }
     .model-col.bad .model-col-value { color: #EF4444; }
-    .model-col.good .model-col-value { color: #10B981; }
+    .model-col.good .model-col-value { color: #4A7A5A; }
 
     /* Formulario Multi-Paso */
     .reg-form-section {
@@ -466,7 +466,7 @@
     }
 
     .btn-reg-submit {
-      background: linear-gradient(135deg, #165D6F 0%, #10B981 100%);
+      background: linear-gradient(135deg, #165D6F 0%, #4A7A5A 100%);
     }
 
     .btn-reg-submit:hover {
@@ -493,7 +493,7 @@
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #165D6F, #10B981);
+      background: linear-gradient(135deg, #165D6F, #4A7A5A);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -719,7 +719,7 @@ html body .mi-negocio-inline-010 {
 }
 
 html body .mi-negocio-inline-011 {
-  color: #10B981 !important;
+  color: #4A7A5A !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
 }
@@ -733,7 +733,7 @@ html body .mi-negocio-inline-012 {
 }
 
 html body .mi-negocio-inline-013 {
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .mi-negocio-inline-014 {
@@ -856,7 +856,7 @@ html body .mi-negocio-inline-035 {
   font-family: var(--font-tech) !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .mi-negocio-inline-036 {

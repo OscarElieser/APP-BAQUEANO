@@ -36,7 +36,7 @@
       department: 'Rivas',
       municipality: 'Altagracia & Moyogalpa',
       category: 'Naturaleza & Volcanes',
-      image: 'assets/images/destinos/ometepe.webp',
+      image: 'assets/images/destinos/isla_de_ometepe.jpg',
       altImage: 'assets/images/destinos/isla_de_ometepe.jpg',
       verifiedDate: 'Actualización pendiente',
       priceNio: 'Precio pendiente de verificación',
@@ -75,7 +75,7 @@
       department: 'Granada',
       municipality: 'Granada',
       category: 'Cultura & Patrimonio',
-      image: 'assets/images/destinos/granada.webp',
+      image: 'assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg',
       altImage: 'assets/images/destinos/isletas_de_granada.jpg',
       verifiedDate: 'Actualización pendiente',
       priceNio: 'Precio pendiente de verificación',
@@ -228,7 +228,7 @@
       municipality: 'Nindirí & Masaya',
       category: 'Cultura & Volcanes',
       image: 'assets/images/destinos/volcan_masaya.jpg',
-      altImage: 'assets/images/destinos/destinos-hero.jpg',
+      altImage: 'assets/images/destinos/volcan_masaya.jpg',
       verifiedDate: 'Actualización pendiente',
       priceNio: 'Precio pendiente de verificación',
       priceUsd: 'Sin publicar',
@@ -267,7 +267,7 @@
       municipality: 'Granada',
       category: 'Naturaleza & Navegación',
       image: 'assets/images/destinos/isletas_de_granada.jpg',
-      altImage: 'assets/images/destinos/granada.webp',
+      altImage: 'assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg',
       verifiedDate: 'Actualización pendiente',
       priceNio: 'Precio pendiente de verificación',
       priceUsd: 'Sin publicar',
@@ -431,7 +431,7 @@
       <div class="bq-dossier-dialog" id="bqDossierDialog">
         <!-- Portada Cinematográfica -->
         <div class="bq-dossier-hero">
-          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos/volcan_masaya.jpg'}'">
           <div class="bq-dossier-hero-gradient"></div>
           <button type="button" class="bq-dossier-close" id="bqDossierCloseBtn" aria-label="Cerrar ficha">
             <i class="fa-solid fa-xmark"></i>
@@ -507,7 +507,7 @@
           <div class="bq-dossier-section">
             <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Actividades recomendadas</h4>
             <div class="bq-dossier-chips-list">
-              ${dest.activities.map(act => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-check" style="color:#10B981"></i> ${act}</div>`).join('')}
+              ${dest.activities.map(act => `<div class="bq-dossier-chip-item"><i class="fa-solid fa-check" style="color:#4A7A5A"></i> ${act}</div>`).join('')}
             </div>
           </div>
 
@@ -541,7 +541,7 @@
               </div>
               <div class="bq-dossier-feedback-actions">
                 <button type="button" class="bq-feedback-chip ${localStorage.getItem('bq_vote_' + dest.id) === 'up' ? 'voted' : ''}" id="modalVoteUp" aria-label="Sí, muy útil">
-                  <i class="fa-solid fa-thumbs-up" style="color:#10B981;"></i> <span>Sí, útil</span>
+                  <i class="fa-solid fa-thumbs-up" style="color:#4A7A5A;"></i> <span>Sí, útil</span>
                 </button>
                 <button type="button" class="bq-feedback-chip ${localStorage.getItem('bq_vote_' + dest.id) === 'down' ? 'voted' : ''}" id="modalVoteDown" aria-label="Podría mejorar">
                   <i class="fa-solid fa-thumbs-down" style="color:#F59E0B;"></i> <span>Podría mejorar</span>

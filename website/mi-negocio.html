@@ -28,7 +28,7 @@
 - Sección FAQ: Respuestas a las 6 preguntas más frecuentes de anfitriones.
 ============================================================================
 -->
-<html lang="es">
+<html lang="es" data-bq-page="mi-negocio" data-bq-group="cuenta">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -38,8 +38,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -57,6 +56,8 @@
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-3">
 </head>
 <body class="has-video-hero page-mi-negocio">
 
@@ -379,7 +380,7 @@
             <div class="badge-section-pill"><i class="fa-solid fa-file-circle-plus"></i> Registro Oficial</div>
             <h2 class="section-headline">Registrate como anfitrión</h2>
             <p class="section-subtext">
-              Completa los 3 pasos en menos de 5 minutos. Tu solicitud llega directamente al
+              Completá los 3 pasos en menos de 5 minutos. Tu solicitud llega directamente al
               Ops Center para aprobación por el Administrador General.
             </p>
           </div>
@@ -404,7 +405,7 @@
           <div id="regStepsContainer">
             <div class="reg-error-banner" id="regErrorBanner">
               <i class="fa-solid fa-triangle-exclamation"></i>
-              <span id="regErrorText">Error al registrar. Intenta nuevamente.</span>
+              <span id="regErrorText">No pudimos registrar tu negocio. Revisá tu conexión y probá otra vez.</span>
             </div>
 
             <form id="businessRegForm" novalidate>
@@ -414,7 +415,7 @@
                 <div class="reg-step-panel active" id="regStep_0">
                   <div class="reg-step-header">
                     <div class="reg-step-title">🏡 Datos de tu Negocio</div>
-                    <div class="reg-step-subtitle">Cuéntanos sobre tu cooperativa, posada o servicio turístico.</div>
+                    <div class="reg-step-subtitle">Contanos sobre tu cooperativa, posada o servicio turístico.</div>
                   </div>
 
                   <div class="field-group">
@@ -428,7 +429,7 @@
                   <div class="field-group">
                     <label class="field-label" for="portalBizType">Tipo de Negocio <span class="field-required">*</span></label>
                     <select id="portalBizType" name="bizType" class="form-select-input" required>
-                      <option value="">— Selecciona el tipo —</option>
+                      <option value="">— Elegí el tipo —</option>
                       <option value="Cooperativa Ecoturística">Cooperativa Ecoturística</option>
                       <option value="Posada / Alojamiento Campesino">Posada / Alojamiento Campesino</option>
                       <option value="Guía Baqueano Certificado">Guía Baqueano Certificado</option>
@@ -438,7 +439,7 @@
                       <option value="Artesanía & Cultura">Artesanía & Cultura</option>
                       <option value="Aventura & Senderismo">Aventura & Senderismo</option>
                     </select>
-                    <span class="field-error-msg" id="portalBizType_error">Selecciona el tipo de negocio.</span>
+                    <span class="field-error-msg" id="portalBizType_error">Elegí el tipo de negocio.</span>
                   </div>
 
                   <div class="field-row-2">
@@ -464,23 +465,23 @@
                         <option>RACCS</option>
                         <option>RACCN</option>
                       </select>
-                      <span class="field-error-msg" id="portalBizDepartment_error">Selecciona tu departamento.</span>
+                      <span class="field-error-msg" id="portalBizDepartment_error">Elegí tu departamento.</span>
                     </div>
                     <div class="field-group">
                       <label class="field-label" for="portalBizMunicipality">Municipio <span class="field-required">*</span></label>
                       <input type="text" id="portalBizMunicipality" name="bizMunicipality" class="form-control-input"
                              placeholder="Ej: Somoto, El Cuá..." required maxlength="80">
-                      <span class="field-error-msg" id="portalBizMunicipality_error">Ingresa el municipio.</span>
+                      <span class="field-error-msg" id="portalBizMunicipality_error">Escribí el municipio.</span>
                     </div>
                   </div>
 
                   <div class="field-group">
                     <label class="field-label" for="portalBizDescription">Descripción de tus Servicios <span class="field-required">*</span></label>
                     <textarea id="portalBizDescription" name="bizDescription" class="form-textarea-input"
-                              placeholder="Describe los tours, alojamientos, gastronomía o experiencias que ofreces y por qué son únicos para el viajero responsable..."
+                              placeholder="Contá qué tours, alojamiento, comida o experiencias ofrecés y qué los hace especiales…"
                               required maxlength="800"></textarea>
-                    <span class="field-error-msg" id="portalBizDescription_error">Describe tus servicios.</span>
-                    <span class="field-hint">Máximo 800 caracteres. Sé específico: menciona precios, duración y grupos máximos.</span>
+                    <span class="field-error-msg" id="portalBizDescription_error">Contanos qué servicios ofrecés.</span>
+                    <span class="field-hint">Máximo 800 caracteres. Sé concreto: incluí precios, duración y tamaño máximo de grupo.</span>
                   </div>
 
                   <div class="field-row-2">
@@ -521,11 +522,11 @@
                     <div class="field-group">
                       <label class="field-label" for="bizInturReg">¿Registrado en INTUR? <span class="field-required">*</span></label>
                       <select id="bizInturReg" name="bizInturReg" class="form-select-input" required>
-                        <option value="">— Selecciona —</option>
+                        <option value="">— Elegí una opción —</option>
                         <option value="true">Sí, tengo registro INTUR</option>
                         <option value="false">No aún, estoy en proceso</option>
                       </select>
-                      <span class="field-error-msg" id="bizInturReg_error">Selecciona una opción.</span>
+                      <span class="field-error-msg" id="bizInturReg_error">Elegí una opción.</span>
                     </div>
                   </div>
 
@@ -556,14 +557,14 @@
                     <textarea id="bizCommunityBenefit" name="bizCommunityBenefit" class="form-textarea-input"
                               placeholder="Ej: El 40% de los ingresos va al fondo de becas escolares. Empleamos 8 familias campesinas de la cooperativa..."
                               required maxlength="500"></textarea>
-                    <span class="field-error-msg" id="bizCommunityBenefit_error">Describe el impacto comunitario.</span>
+                    <span class="field-error-msg" id="bizCommunityBenefit_error">Contanos cómo beneficia a tu comunidad.</span>
                   </div>
                 </div>
 
                 <!-- PASO 3: Confirmación y Previsualización -->
                 <div class="reg-step-panel" id="regStep_2">
                   <div class="reg-step-header">
-                    <div class="reg-step-title">✅ Revisa tu Solicitud</div>
+                    <div class="reg-step-title">✅ Revisá tu solicitud</div>
                     <div class="reg-step-subtitle">Confirma los datos antes de enviar al Ops Center para aprobación.</div>
                   </div>
 
@@ -624,7 +625,7 @@
                     Siguiente <i class="fa-solid fa-arrow-right"></i>
                   </button>
                   <button type="button" class="btn-reg-submit mi-negocio-inline-024" id="btnRegSubmit">
-                    <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud a Firestore
+                    <i class="fa-solid fa-paper-plane"></i> Enviar mi solicitud
                   </button>
                 </div>
               </div>
@@ -704,7 +705,7 @@
         <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(15,23,42,0.03);">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">
             <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0F172A; margin: 0;">
-              <i class="fa-solid fa-list-check" style="color: #10B981;"></i> Las 13 Modalidades Oficiales de Turismo (Art. 16 Ley 1210)
+              <i class="fa-solid fa-list-check" style="color: #4A7A5A;"></i> Las 13 Modalidades Oficiales de Turismo (Art. 16 Ley 1210)
             </h3>
             <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F; background: rgba(22,93,111,0.08); padding: 4px 10px; border-radius: 6px;">
               Clasificación Oficial Nacional
@@ -714,7 +715,7 @@
             <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #165D6F; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
               1. 🧗 Turismo de Aventura
             </div>
-            <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #10B981; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
+            <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #4A7A5A; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
               2. 🌿 Natural y Ecoturismo
             </div>
             <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #F65E01; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
@@ -729,7 +730,7 @@
             <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #8B5CF6; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
               6. 🧘 Turismo de Bienestar
             </div>
-            <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #16A34A; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
+            <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #4A7A5A; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
               7. 🌾 Rural y Agroturismo
             </div>
             <div style="padding: 10px 14px; background: #F8FAFC; border-radius: 10px; border-left: 3px solid #E11D48; font-size: 0.82rem; font-weight: 700; color: #1E293B;">
@@ -760,7 +761,7 @@
       <div class="container">
         <div class="section-lead-header mi-negocio-inline-026">
           <div class="badge-section-pill"><i class="fa-solid fa-circle-question"></i> Preguntas Frecuentes</div>
-          <h2 class="section-headline">Todo lo que necesitas saber</h2>
+          <h2 class="section-headline">Todo lo que necesitás saber</h2>
         </div>
 
         <div class="faq-list" id="faqList">
@@ -786,7 +787,7 @@
               No es un requisito estricto para registrarse, pero sí es muy recomendable.
               El registro en INTUR te da acceso al régimen de incentivos de las Leyes No. 1210 y 1211, que promueven
               el fomento y desarrollo turístico comunitario. El equipo Baqueano
-              puede orientarte en el proceso de registro INTUR si lo necesitas.
+              puede orientarte en el proceso de registro INTUR si lo necesitás.
             </div>
           </div>
 
@@ -933,7 +934,7 @@
                   <i class="fa-solid fa-tags"></i> Tipo de Negocio <span class="req">*</span>
                 </label>
                 <select id="bizType" name="bizType" class="biz-select" required>
-                  <option value="">Selecciona el tipo de negocio...</option>
+                  <option value="">Elegí el tipo de negocio…</option>
                   <option value="Comedor Tradicional / Restaurante Campesino">Comedor Tradicional / Restaurante Campesino</option>
                   <option value="Hotel / Eco-Lodge">Hotel / Eco-Lodge</option>
                   <option value="Hostal Comunitario">Hostal Comunitario</option>
@@ -965,7 +966,7 @@
                   <i class="fa-solid fa-layer-group"></i> Categoría en Catálogo Baqueano <span class="req">*</span>
                 </label>
                 <select id="bizCategory" name="bizCategory" class="biz-select" required>
-                  <option value="">Selecciona una categoría oficial...</option>
+                  <option value="">Elegí una categoría oficial…</option>
                   <option value="gastronomia">Gastronomía Ancestral (Comedores, Baho, Quesillos)</option>
                   <option value="hoteles">Hoteles & Eco-Lodges</option>
                   <option value="hostales">Hostales de Aventura & Mochileros</option>
@@ -986,7 +987,7 @@
                   <i class="fa-solid fa-map"></i> Departamento de Nicaragua <span class="req">*</span>
                 </label>
                 <select id="bizDepartment" name="bizDepartment" class="biz-select" required>
-                  <option value="">Selecciona tu departamento...</option>
+                  <option value="">Elegí tu departamento…</option>
                   <option value="Boaco">Boaco</option>
                   <option value="Carazo">Carazo</option>
                   <option value="Chinandega">Chinandega</option>
@@ -1081,7 +1082,7 @@
                   <i class="fa-solid fa-align-left"></i> Breve Descripción del Servicio o Menú Típico <span class="req">*</span>
                   <span class="biz-char-counter" id="bizCharCounter">0 / 300</span>
                 </label>
-                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Describe qué ofreces al visitante, especialidad culinaria, tipo de habitaciones o atractivos naturales cercanos..." required></textarea>
+                <textarea id="bizDescription" name="bizDescription" class="biz-textarea" maxlength="300" placeholder="Contá qué le ofrecés al visitante: especialidad de la casa, tipo de habitaciones o atractivos naturales cercanos…" required></textarea>
                 <span class="biz-error-msg" id="err-bizDescription"></span>
               </div>
 
@@ -1094,7 +1095,7 @@
                   <input type="file" id="bizPhoto" name="bizPhoto" accept="image/*" class="biz-file-input">
                   <div class="biz-upload-placeholder" id="bizUploadPlaceholder">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Toca o arrastra una imagen de tu establecimiento (Máx 5MB)</span>
+                    <span>Tocá o arrastrá una foto de tu negocio (máx. 5 MB)</span>
                   </div>
                   <div class="biz-photo-preview" id="bizPhotoPreview" style="display: none;">
                     <img id="bizPreviewImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Vista previa de foto">
@@ -1145,7 +1146,7 @@
             Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
           </p>
           <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
-            <input type="email" class="footer-newsletter-input" placeholder="Ingresa tu correo electrónico..." required aria-label="Correo electrónico para boletín">
+            <input type="email" class="footer-newsletter-input" placeholder="Tu correo electrónico" required aria-label="Correo electrónico para boletín">
             <button type="submit" class="footer-newsletter-btn">
               <i class="fa-solid fa-paper-plane"></i> Suscribirme
             </button>
@@ -1275,8 +1276,8 @@
           © 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.
         </div>
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
-            <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 6px #10B981;"></span>
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-tech); font-size: 0.75rem; color: #4A7A5A; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.25rem 0.65rem; border-radius: 9999px;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #4A7A5A; box-shadow: 0 0 6px #4A7A5A;"></span>
             Telemetría GPS 24/7 Activa
           </span>
           <a href="ambiental.html"><i class="fa-solid fa-leaf"></i> Decálogo Verde</a>
@@ -1326,7 +1327,7 @@
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
-          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo baqueanonicaragua.apk en tu dispositivo.</p></div>
+          <div class="step-details"><h5>Descarga el APK</h5><p>Guardá el archivo baqueanonicaragua.apk en tu teléfono.</p></div>
         </div>
         <div class="step-row-item">
           <div class="step-badge-num">2</div>

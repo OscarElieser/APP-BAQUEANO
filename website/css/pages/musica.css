@@ -1,23 +1,23 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — REPRODUCTOR ÉPICO & GALERÍA SONORA (musica.css)
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proporcionar una experiencia auditiva y visual de alta fidelidad para la
-//   música tradicional nicaragüense, el folklore campesino y las canciones históricas.
-// - Crear un diseño épico e interactivo con tornamesa virtual, vinilo giratorio,
-//   ecualizador de espectro dinámico a 60fps y consola de control táctil.
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche).
-// - Animaciones fluidas GPU-accelerated: @keyframes vinylRotate, @keyframes soundWavePulse.
-// - Canvas interactivo o barras SVG/CSS para el visualizador de frecuencias en tiempo real.
-//
-// 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS):
-// - .epic-player-wrapper, .epic-turntable-chassis, .epic-vinyl-disc, .epic-tonearm.
-// - .epic-spectrum-visualizer, .epic-scrubber-track, .epic-controls-group.
-// - .epic-playlist-drawer, .epic-track-item.
-// ============================================================================
+/* ============================================================================ */
+/* 🧭 BAQUEANO ECOSYSTEM — REPRODUCTOR ÉPICO & GALERÍA SONORA (musica.css) */
+/* ============================================================================ */
+/*  */
+/* 🎯 1. POR QUÉ (WHY / PROPÓSITO): */
+/* - Proporcionar una experiencia auditiva y visual de alta fidelidad para la */
+/*   música tradicional nicaragüense, el folklore campesino y las canciones históricas. */
+/* - Crear un diseño épico e interactivo con tornamesa virtual, vinilo giratorio, */
+/*   ecualizador de espectro dinámico a 60fps y consola de control táctil. */
+/*  */
+/* ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN): */
+/* - Paleta oficial: #165D6F (Teal Petróleo), #F65E01 (Terracota), #F4E6C1 (Arena), #0F172A (Noche). */
+/* - Animaciones fluidas GPU-accelerated: @keyframes vinylRotate, @keyframes soundWavePulse. */
+/* - Canvas interactivo o barras SVG/CSS para el visualizador de frecuencias en tiempo real. */
+/*  */
+/* 📦 3. QUÉ (WHAT / COMPONENTES EXPUESTOS): */
+/* - .epic-player-wrapper, .epic-turntable-chassis, .epic-vinyl-disc, .epic-tonearm. */
+/* - .epic-spectrum-visualizer, .epic-scrubber-track, .epic-controls-group. */
+/* - .epic-playlist-drawer, .epic-track-item. */
+/* ============================================================================ */
 
 
 
@@ -152,7 +152,7 @@ html body .musica-inline-020 {
   font-family: var(--font-tech) !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #10B981 !important;
+  color: #4A7A5A !important;
 }
 
 html body .musica-inline-021 {
@@ -330,7 +330,7 @@ html body .musica-inline-033 {
 .epic-badge-hi-res {
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.35);
-  color: #10B981;
+  color: #4A7A5A;
 }
 
 .epic-badge-heritage {
