@@ -37,7 +37,7 @@ Solo se carga el `SKILL.md` necesario para la tarea. No se cargan todos los skil
 ### Restricciones críticas de BAQUEANO
 
 - `website/` es la web pública de Firebase Hosting; no confundir con Flutter `web/`.
-- Firebase Authentication se conserva. Supabase es la base de datos principal por directiva vigente del propietario.
+- Firebase Authentication se conserva. Firestore es la fuente de datos prioritaria y Supabase un espejo con la misma capacidad para toda la información (directiva del propietario, 2026-10-03).
 - No migrar Firebase Auth a Supabase Auth ni Supabase a Firestore sin orden explícita.
 - Flutter se trabaja en `lib/` y `android/`; `ios/` y Flutter `web/` permanecen intactos salvo instrucción explícita.
 - No desplegar Firebase, Supabase, Functions, Cloud Run ni Play Store como efecto colateral de un skill.

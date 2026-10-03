@@ -73,6 +73,8 @@
     ];
     needed.forEach(function(css) {
       if (css.id === 'bq-fonts' && document.querySelector('link[href*="fonts.googleapis.com/css2"]')) return;
+      var cleanPath = css.href.split('?')[0];
+      if (document.querySelector('link[href*="' + cleanPath + '"]')) return;
       if (!document.getElementById(css.id)) {
         var link = document.createElement('link');
         link.id = css.id; link.rel = 'stylesheet'; link.href = css.href;

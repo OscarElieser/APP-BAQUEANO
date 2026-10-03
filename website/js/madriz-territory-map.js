@@ -93,12 +93,21 @@
     return `${departmentId}:${String(place.name || '').trim().toLocaleLowerCase('es-NI')}`;
   }
 
+  function geocodeSearchName(value) {
+    return String(value || '')
+      .replace(/\s*\([^)]*\)\s*/g, ' ')
+      .replace(/^(reserva silvestre|reserva natural|monumento nacional)\s+/i, '')
+      .replace(/^museo nacional\s+/i, 'Museo ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   async function geocodeCatalogPlace(place, runId, cache) {
     const cacheId = geocodeCacheId(place);
     const cached = cache[cacheId];
     if (cached && validCoordinates(cached)) return { ...place, ...cached };
 
-    const query = [place.name, territoryName, 'Nicaragua'].filter(Boolean).join(', ');
+    const query = [geocodeSearchName(place.name), territoryName, 'Nicaragua'].filter(Boolean).join(', ');
     const url = new URL('https://nominatim.openstreetmap.org/search');
     url.searchParams.set('q', query);
     url.searchParams.set('format', 'jsonv2');
@@ -424,7 +433,10 @@
         maxZoom: 12,
         duration: 900
       });
-      setStatus(`${places.length} ${places.length === 1 ? 'lugar publicado' : 'lugares publicados'} con ubicación verificable.`, 'ready');
+      const statusParts = [];
+      if (catalogResolved) statusParts.push(`${catalogResolved} ${catalogResolved === 1 ? 'lugar de la guía' : 'lugares de la guía'}`);
+      if (publishedCount) statusParts.push(`${publishedCount} ${publishedCount === 1 ? 'registro publicado' : 'registros publicados'}`);
+      setStatus(`${statusParts.join(' y ')} ubicados en ${territoryName}.`, 'ready');
     } catch (error) {
       console.error(`[Mapa ${territoryName}]`, error);
       setStatus('No fue posible cargar el catálogo territorial en este momento.', 'error');

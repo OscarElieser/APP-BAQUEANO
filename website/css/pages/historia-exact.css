@@ -1201,3 +1201,15 @@ html[data-theme] .hist-dept-map-card .hist-dept-map-header p {
   .hist-era-dialog-actions > * { flex: 1 1 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) { .hist-era-dialog[open] { animation: none; } }
+/* Reglas globales de <dialog> y de títulos (sistema/tema) le ganaban a la
+   ficha: se fija posición centrada y tinta blanca con mayor especificidad. */
+dialog.hist-era-dialog[open] {
+  position: fixed; inset: 0; margin: auto; height: fit-content;
+}
+dialog.hist-era-dialog .hist-era-dialog-title {
+  color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important;
+  text-shadow: 0 2px 14px rgba(15, 23, 42, 0.6);
+}
+@media (max-width: 600px) {
+  dialog.hist-era-dialog[open] { inset: auto 0 0 0; margin: 0; }
+}

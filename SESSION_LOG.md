@@ -3264,6 +3264,25 @@ Solicitud: verificar y corregir esta sección para que funcione según el depart
 
 Estado: análisis iniciado; aún sin cambios de implementación.
 
+### Avance verificable y cierre técnico
+
+- Causa raíz 1 corregida: el CSS dimensionaba únicamente `#madrizMap`; ahora también dimensiona `#chinandegaMap` y `#territoryMap`, evitando el lienzo oscuro vacío en la plantilla territorial compartida.
+- Causa raíz 2 corregida: los lugares enumerados en `territories-data.js` ahora se entregan al controlador cartográfico en los 15 departamentos y las 2 regiones, incluyendo las experiencias especiales de Madriz y Chinandega.
+- Se añadió resolución cartográfica progresiva mediante OpenStreetMap Nominatim, limitada a Nicaragua, con normalización de nombres, validación geográfica, límite responsable entre consultas y caché local persistente.
+- Firestore se conserva como fuente prioritaria para registros publicados; la capa editorial complementa el mapa cuando faltan documentos georreferenciados y evita duplicados por nombre.
+- Se añadieron estados accesibles de progreso, vacío y resultado, junto con marcadores y carrusel interactivo para los lugares resueltos.
+
+Pruebas ejecutadas:
+
+- `node --check` limpio en los tres controladores JavaScript modificados.
+- `npm test` en `website/`: Production smoke tests passed.
+- `npm run test:hostinger` en `website/`: 10 rutas críticas verificadas.
+- Auditoría estructural: 17 territorios, 181 lugares mencionados, 0 territorios sin centro o lista de lugares.
+- Consulta geográfica real de muestra: Selva Negra, Cerro Apante, Catedral San Pedro y Museo del Café fueron resueltos dentro de Matagalpa, Nicaragua.
+- `git diff --check` limpio para los archivos intervenidos.
+
+Estado final: implementación local completa y verificada. No se realizó despliegue a producción en esta solicitud.
+
 ## 2026-10-03 — Auditoría y Optimización Profunda de Rendimiento (Performance Engineering)
 
 ### 🎯 POR QUÉ (WHY / PROPÓSITO)
@@ -3289,3 +3308,64 @@ Estado: análisis iniciado; aún sin cambios de implementación.
 - Pruebas y mediciones antes/después con reporte comparativo.
 
 Estado: Iniciado (Fase 1: Diagnóstico y Auditoría Baseline).
+- **Planificador baqueano-ia (resuelto):** `js/baqueano-travel-session.js?v=20261003-1`: destinos vacíos → pista + accesos rápidos (Granada, Masaya, León, Estelí, Somoto; siempre resolubles por FALLBACK_ENTITIES) que agregan el destino y generan la ruta; "Cómo moverte" y "Alertas" sin ruta → guía general verificable (buses desde Roberto Huembes/Israel Lewites, lancha San Jorge–Ometepe, taxis sin taxímetro, Corn Island; lluvias mayo–octubre, sol/agua, córdobas, Policía 118 · Bomberos 115 · Cruz Roja 128) con estado "Sin alertas activas"; saludo con ejemplo concreto. `baqueano-ia-exact.css?v=20261003-plan-2`: chips sin barra nativa (desvanecido), "En línea" en una línea, "Probá con estas ideas", CTA "Generar ruta" fijo al pie del panel. Sistema: mascota flotante oculta en baqueano-ia (el chat ya es BAQUI). Verificado: acceso rápido "Granada" → itinerario de 3 días; 0 errores; sin desborde (antes 399/390 px).
+- **"Conocer más" (resuelto):** `js/historia-epocas.js?v=20261003-1` (nuevo): `<dialog>` nativo con 7 fichas (resumen, datos clave fechados, "Dónde vivirlo hoy" → destinos.html?q=, "Escuchar en la audioguía" que activa el capítulo). `historia-exact.css?v=20261003-epocas-2`. Verificado 1440/390: 7/7 abren, Escape cierra, audioguía salta al capítulo, 0 errores, 0 desborde.
+- **Estado de la sesión:** todo SIN commitear; para producción falta commit + deploy (decisión del propietario).
+## 2026-10-03 — Activación del botón de micrófono de Baqüi
+
+### 🎯 POR QUÉ
+El botón de micrófono del asistente Baqüi aparece en la interfaz, pero el usuario reporta que no funciona y necesita dictado de voz operativo.
+
+### ⚙️ CÓMO
+Se inspeccionará el controlador del asistente, la integración con reconocimiento de voz, los permisos del navegador/Android, los eventos del botón y los estados accesibles de escucha, resultado y error.
+
+### 📦 QUÉ
+Solicitud: hacer funcionar el botón de micrófono mostrado en el asistente Baqüi.
+
+Estado: diagnóstico iniciado; aún sin cambios de implementación.
+
+### Avance verificable y cierre técnico
+
+- Causa raíz confirmada: Firebase Hosting, Hostinger y Azure enviaban `Permissions-Policy` con `microphone=()`, bloqueando el micrófono aunque el usuario intentara conceder permiso.
+- Se cambió exclusivamente el permiso de micrófono a `microphone=(self)` en `firebase.json`, `website/.htaccess` y `azure/nginx/baqueano-security-headers.conf`. Cámara y pagos permanecen bloqueados.
+- El control ahora solicita permiso de audio de forma explícita mediante `getUserMedia`, libera inmediatamente la pista y luego inicia `SpeechRecognition`/`webkitSpeechRecognition`.
+- El botón funciona como interruptor iniciar/detener, actualiza `aria-pressed`, etiqueta accesible, icono y estado visual animado.
+- Se habilitaron resultados parciales, transcripción progresiva en el campo y foco para revisar o enviar el texto.
+- Se añadieron mensajes específicos para permiso bloqueado, contexto sin HTTPS, silencio, falta de micrófono, red, idioma y navegador incompatible.
+- Al cerrar Baqüi se aborta cualquier reconocimiento activo para evitar uso residual del micrófono.
+- Se actualizaron las versiones de caché del JavaScript y CSS del asistente en el cargador global y las inclusiones directas.
+
+Pruebas ejecutadas:
+
+- `node --check` limpio para `baqueano-assistant.js` y `navigation.js`.
+- `firebase.json` parseado correctamente.
+- Verificación de políticas: cero coincidencias activas de `microphone=()` y tres configuraciones con `microphone=(self)`.
+- `npm test --prefix website`: pruebas de producción aprobadas.
+- `npm run test:hostinger --prefix website`: 10 rutas críticas aprobadas.
+- `git diff --check` limpio en los archivos intervenidos.
+
+Estado final: corrección local completa y verificada. Requiere despliegue para que la nueva cabecera HTTP tenga efecto en el sitio publicado.
+
+## 2026-10-03 — Directiva de arquitectura del propietario: Firestore prioritario, Supabase espejo completo
+
+- 🎯 **POR QUÉ:** El propietario ordena explícitamente: Firestore continúa como fuente prioritaria de datos; Supabase debe tener la misma capacidad para toda la información (espejo/respaldo completo, no parcial).
+- ⚙️ **CÓMO:** Se actualiza AGENTS.md (regla de arquitectura, antes "Supabase base principal") y la memoria persistente del asistente. Toda función nueva lee/escribe primero en Firestore y replica en Supabase con el mismo alcance de datos.
+- **Estado:** Registrado.
+## 2026-10-03 — Precisión de alcance: micrófono en Baqueano IA de producción
+
+### 🎯 POR QUÉ
+El usuario aclara que el botón afectado está específicamente en la página pública HTTPS de Baqueano IA, no únicamente en las páginas territoriales locales.
+
+### ⚙️ CÓMO
+Se verificará `https://baqueanonicaragua.com/baqueano-ia.html`, sus cabeceras HTTP, el mecanismo que carga `baqueano-assistant.js` y cualquier implementación particular del micrófono en esa ruta.
+
+### 📦 QUÉ
+Ruta objetivo confirmada: `https://baqueanonicaragua.com/baqueano-ia.html`.
+
+Estado: verificación de producción iniciada.
+
+## 2026-10-03 — Tarea: auditoría de paridad Firestore ↔ Supabase
+
+- 🎯 **POR QUÉ:** Con Firestore como fuente prioritaria y Supabase como espejo completo, hay que saber qué colecciones de Firestore no tienen tabla equivalente en Supabase, qué tablas están bloqueadas para recibir la réplica y qué tablas están abiertas de más.
+- ⚙️ **CÓMO:** Solo lectura. Inventario de colecciones Firestore desde código (website/js, functions, lib/ Dart) y `firestore.rules`; esquema y políticas vivas de Supabase vía MCP; mecanismos de réplica existentes (functions, ops-engine). Informe con matriz y plan.
+- **Estado:** Iniciado.
