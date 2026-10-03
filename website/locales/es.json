@@ -261,8 +261,8 @@
     "closePanel": "Cerrar asistente",
     "later": "Ahora no",
     "thinking": "Pensando...",
-    "error": "No pude procesar tu consulta. Intentá de nuevo.",
-    "greeting": "¡Hola! Soy Baqui, tu guía digital de Nicaragua. ¿Qué querés explorar hoy?",
+    "error": "Se me enredó el camino con esa consulta. ¿Me la contás de otra forma?",
+    "greeting": "¡Hola! Soy BAQUI, tu baqueano digital. ¿Qué querés descubrir hoy?",
     "suggestions": {
       "adventure": "Aventura y volcanes",
       "culture": "Cultura y patrimonio",

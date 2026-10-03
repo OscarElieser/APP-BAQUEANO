@@ -238,7 +238,7 @@ async function submitBusinessRegistration(data, stepsContainer, successPanel, bt
     const errorBanner = document.getElementById('regErrorBanner');
     if (errorBanner) {
       errorBanner.style.display = 'flex';
-      errorBanner.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error al registrar: ${err.message}. Intenta nuevamente.`;
+      errorBanner.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> No pudimos registrar tu negocio: ${err.message}. Revisá los datos y probá otra vez.`;
       setTimeout(() => { errorBanner.style.display = 'none'; }, 5000);
     } else {
       alert('Error al registrar el negocio: ' + err.message);

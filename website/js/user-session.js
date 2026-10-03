@@ -82,7 +82,7 @@
         return null;
       }
       // Auto-corregir nombres residuales de placeholder o texto de invitado
-      if (!session.name || session.name === 'Inicia sesión para ver tu perfil' || session.name === 'Invitado') {
+      if (!session.name || session.name === 'Inicia sesión para ver tu perfil' || session.name === 'Entrá para ver tu perfil' || session.name === 'Invitado') {
         const emailLower = (session.email || '').toLowerCase();
         const priv = PRIVILEGED_ACCOUNTS[emailLower];
         if (priv && priv.name) {
@@ -774,8 +774,8 @@
       : '';
 
     let resolvedName = (firebaseUser.displayName || '').trim();
-    if (!resolvedName || resolvedName === email || resolvedName === 'Inicia sesión para ver tu perfil' || resolvedName === 'Invitado') {
-      if (existing && existing.name && existing.name !== 'Inicia sesión para ver tu perfil' && existing.name !== 'Invitado' && existing.name !== email) {
+    if (!resolvedName || resolvedName === email || resolvedName === 'Inicia sesión para ver tu perfil' || resolvedName === 'Entrá para ver tu perfil' || resolvedName === 'Invitado') {
+      if (existing && existing.name && existing.name !== 'Inicia sesión para ver tu perfil' && existing.name !== 'Entrá para ver tu perfil' && existing.name !== 'Invitado' && existing.name !== email) {
         resolvedName = existing.name;
       } else if (privileged && privileged.name) {
         resolvedName = privileged.name;

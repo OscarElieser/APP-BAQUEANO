@@ -1277,7 +1277,7 @@ window.BaqueanoIndexFeatures = (function () {
         } else if (selectedMedia.length > 0) {
           hint.textContent = `${selectedMedia.length} archivo(s) · Haz clic para añadir más`;
         } else {
-          hint.textContent = 'Arrastra o haz clic para subir';
+          hint.textContent = 'Arrastrá tus fotos o tocá aquí para subirlas';
         }
       }
 
@@ -1288,7 +1288,7 @@ window.BaqueanoIndexFeatures = (function () {
         );
         const toAdd = allowed.slice(0, MAX_FILES - selectedMedia.length);
         if (toAdd.length < allowed.length) {
-          alert(`Solo puedes subir hasta ${MAX_FILES} archivos en total.`);
+          alert(`Podés subir hasta ${MAX_FILES} archivos en total.`);
         }
         toAdd.forEach(file => {
           selectedMedia.push({

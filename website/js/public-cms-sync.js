@@ -598,7 +598,7 @@
                   <div class="flip-card-inner">
                     <div class="flip-card-front">
                       <div class="flip-front-img-wrap">
-                        <img src="${image}" alt="${this.escape(name)}" class="flip-front-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='assets/images/destinos/finca_magdalena.jpg'">
+                        <img src="${image}" alt="${this.escape(name)}" class="flip-front-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/images/destinos/finca_magdalena.jpg'">
                       </div>
                       <div class="flip-front-body">
                         <span class="aliados-inline-002">${this.escape(territory)} • ${this.escape(municipality)}</span>
@@ -716,7 +716,7 @@
               return `
                 <div class="gastro-card">
                   <div class="gastro-img-wrap">
-                    <img src="${image}" alt="${this.escape(name)}" class="gastro-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='assets/images/comida/gallo_pinto.jpg'">
+                    <img src="${image}" alt="${this.escape(name)}" class="gastro-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/images/comida/gallo_pinto.jpg'">
                   </div>
                   <div class="gastro-body">
                     <h3 class="gastro-title">${this.escape(name)}</h3>

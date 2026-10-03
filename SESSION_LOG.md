@@ -3032,3 +3032,39 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Nuevo:** barra de pulgar (`injectThumbBar` en `js/global-injector.js`): Inicio · Explorar · Mapa · Mi Viaje · BAQUI, ≤768 px, safe-area, `aria-current`, etiquetas `data-i18n` (+ clave `nav.quick` en 6 idiomas). La mascota flotante se oculta en celular (BAQUI se abre desde la barra; panel y funciones intactos).
 - **Verificado (Playwright, Chromium móvil táctil):** 320/360/390/430/768 px sin desborde; menú abre y recibe toques; BAQUI abre desde la barra; 0 errores JS.
 - **Siguiente:** voz de BAQUI y mensajes del sistema (humanización), revisión de la barra en mapa/destinos/perfil/mi-viaje, escritorio 1440–2560.
+
+## 2026-10-03 — Sincronización exitosa desde repositorio remoto GitHub (origin/main)
+
+### 🎯 POR QUÉ
+- El usuario solicitó traer todo lo que está subido en GitHub para actualizar el espacio de trabajo local (`traer lo que esta subido en github para aca para actualizar lo que tenemos aqui`).
+- Asegurar que el entorno local cuente con las últimas novedades subidas al repositorio: arquitectura Azure para el Hackathon, integración de autenticación Google en el perfil público, endurecimiento de seguridad en Ops Center, paquete de autodespliegue, limpieza del repositorio (.snapshots/edge-profile/ y temporales antiguos) y el rediseño mobile-first Lote D1 ("Nicaragua salvaje digital").
+
+### ⚙️ CÓMO
+- Se creó una rama de respaldo de seguridad local `backup-local-20261003` para prevenir cualquier pérdida de datos.
+- Se ejecutó `git fetch origin` obteniendo todas las referencias remotas actualizadas.
+- Se verificó la coherencia de commits entre local y `origin/main`.
+- Se sincronizó el árbol local de trabajo con la punta de `origin/main` (commit `98681052 limpieza6`).
+- Se verificó que el árbol de trabajo está completamente limpio (`git status`: up to date with 'origin/main', nothing to commit).
+
+### 📦 QUÉ
+- Árbol de trabajo local 100% sincronizado y actualizado con GitHub `origin/main` (`98681052`).
+- Respaldo de seguridad local preservado en rama `backup-local-20261003`.
+- Novedades integradas:
+  1. Infraestructura y scripts de despliegue Azure (`azure/`, `docs/AZURE_DEPLOYMENT.md`).
+  2. Autenticación Google en Website público (`website/js/auth-panel.js`, `website/css/auth-panel.css`, `website/perfil.html`).
+  3. Endurecimiento de seguridad en Ops Center y middleware (`functions/lib/auth-middleware.js`).
+  4. Rediseño Mobile-First con identidad propia y barra de pulgar (`website/css/baqueano-identity.css`, `website/js/global-injector.js`).
+  5. Limpieza de archivos masivos de perfiles de navegación y temporales antiguos.
+- Estado: Sincronización completada con éxito.
+
+## 2026-10-03 — Reanudación del brief "Nicaragua salvaje digital" (Lote D2)
+
+- 🎯 **POR QUÉ:** El propietario reenvía el brief completo; el lote D1 ya está en `origin/main` (98681052). Se continúa con los pendientes registrados.
+- ⚙️ **CÓMO:** Lote D2 = (1) voz de BAQUI y mensajes del sistema (carga, vacío, error, 404) con voseo natural; (2) revisar barra de pulgar y desbordes en mapa/destinos/perfil/mi-viaje; (3) escritorio 1440–2560 px. Sin borrar nada; verificación con Playwright.
+- **Estado:** Iniciado (inventario).
+- **Avance D2 (2026-10-03):**
+  1. **Humanización (voseo natural, sin caricatura):** toasts de favoritos/viaje ("Entrá a tu cuenta para guardar este lugar."), título del panel de perfil ("Entrá para ver tu perfil"; `user-session.js` sigue reconociendo el texto anterior), errores de registro de negocio, subida de fotos, reproductor sonoro, galería de color, validaciones del formulario de negocio, ambiental, denuncias, cookies ("Vos tenés el control"), mi-negocio, baqueano-ia/ai, estados de carga de departamento ("Explorando el territorio…") y destino ("Buscando qué hay por aquí…"); `locales/es.json` (saludo y error de BAQUI).
+  2. **Bug crítico perfil.html:** script inline sin cerrar (menú móvil) → `Unexpected end of input`; se caían filtros de reservas, preferencias y "Compartir Pasaporte". Cerrado; 0 errores.
+  3. **Bug crítico baqueano-ia.html (no terminaba de cargar):** `onerror` apuntaba a imágenes inexistentes que a su vez fallaban → bucle infinito. Fotos reales (volcan_masaya, La Calzada, isletas_de_granada) + `loading=lazy`. Carga: ∞ → ~3 s.
+  4. **Prevención global:** `this.onerror=null;` en todos los `onerror="this.src=…"` (13 archivos) + cortafuegos `installImageLoopGuard()` en `js/global-injector.js` (captura de errores de <img>: 2.º fallo → foto local, 3.º → pixel transparente).
+  5. Auditoría Playwright 9 páginas × 8 anchos (320–2560): 0 desbordes horizontales; barra de pulgar recibe todos los toques (el "solapamiento" de #baqueanoAssistantBox era contenedor vacío con pointer-events:none).

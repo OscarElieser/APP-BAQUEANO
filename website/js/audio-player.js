@@ -149,7 +149,7 @@
       if (waveAnim) waveAnim.style.display = 'flex';
       if (stopBtn) stopBtn.style.display = 'inline-flex';
     } else {
-      display.innerHTML = `<i class="fa-solid fa-circle-play"></i> Selecciona un compositor u obra para iniciar el viaje sonoro`;
+      display.innerHTML = `<i class="fa-solid fa-circle-play"></i> Elegí un compositor o una obra y arrancamos el viaje sonoro`;
       if (waveAnim) waveAnim.style.display = 'none';
       if (stopBtn) stopBtn.style.display = 'none';
     }
@@ -211,7 +211,7 @@
       container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1.5rem; background: rgba(15,23,42,0.6); border-radius: 20px; border: 1px dashed var(--border-subtle);">
           <i class="fa-solid fa-music-slash" style="font-size: 2.5rem; color: var(--terracotta); margin-bottom: 1rem;"></i>
-          <h4 style="font-size: 1.3rem; color: #FFFFFF; margin-bottom: 0.5rem;">No se encontraron compositores</h4>
+          <h4 style="font-size: 1.3rem; color: #FFFFFF; margin-bottom: 0.5rem;">Por aquí no encontramos compositores</h4>
           <p style="font-size: 0.9rem; color: var(--text-muted);">Prueba buscando con otro término (ej. "Camilo", "Mora Limpia", "Somoto", "León").</p>
           <button class="btn-hero-glass" onclick="window.BaqueanoSonora.clearSearch()" style="margin-top: 1rem;">
             <i class="fa-solid fa-rotate-left"></i> Restablecer Filtros

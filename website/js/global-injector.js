@@ -1025,6 +1025,36 @@
     document.body.classList.add('bq-has-thumbbar');
   }
 
+  // ── Cortafuegos de imágenes rotas ────────────────────────────────────────
+  // 🎯 POR QUÉ: varias imágenes usan onerror="this.src='respaldo'" y el
+  //    respaldo tampoco existía; el navegador entraba en un bucle infinito
+  //    de errores y el evento load nunca llegaba (baqueano-ia.html colgada).
+  // ⚙️ CÓMO: un único listener de 'error' en fase de captura (los errores de
+  //    <img> no burbujean) cuenta los fallos de cada imagen. Al segundo fallo
+  //    desactiva su onerror y usa una fotografía local que sí existe; al
+  //    tercero la retira con un pixel transparente para no pedir nada más.
+  // 📦 QUÉ: ninguna imagen puede volver a colgar una página ni gastar
+  //    transferencia de Hosting en reintentos; el alt sigue disponible.
+  var BQ_IMG_FALLBACK = 'assets/images/destinos/splash_bg.jpg';
+  var BQ_IMG_BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  function installImageLoopGuard() {
+    document.addEventListener('error', function (event) {
+      var img = event.target;
+      if (!img || img.tagName !== 'IMG') return;
+      var fails = (parseInt(img.getAttribute('data-bq-img-fails'), 10) || 0) + 1;
+      img.setAttribute('data-bq-img-fails', String(fails));
+      if (fails < 2) return;
+      img.onerror = null;
+      if (fails === 2 && img.src.indexOf(BQ_IMG_FALLBACK) === -1) {
+        img.src = BQ_IMG_FALLBACK;
+      } else if (img.src !== BQ_IMG_BLANK) {
+        img.removeAttribute('srcset');
+        img.src = BQ_IMG_BLANK;
+      }
+    }, true);
+  }
+  installImageLoopGuard();
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

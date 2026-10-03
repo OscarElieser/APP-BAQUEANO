@@ -431,7 +431,7 @@
       <div class="bq-dossier-dialog" id="bqDossierDialog">
         <!-- Portada Cinematográfica -->
         <div class="bq-dossier-hero">
-          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
           <div class="bq-dossier-hero-gradient"></div>
           <button type="button" class="bq-dossier-close" id="bqDossierCloseBtn" aria-label="Cerrar ficha">
             <i class="fa-solid fa-xmark"></i>
@@ -593,7 +593,7 @@
         favBtn.innerHTML = '<i class="fa-solid fa-heart" style="color:#EF4444"></i> <span>Guardado</span>';
         if (window.bqToast) window.bqToast('Destino guardado en Supabase.', 'success');
       } catch (error) {
-        if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar favoritos.' : error.message, 'warning');
+        if (window.bqToast) window.bqToast(error.status === 401 ? 'Entrá a tu cuenta para guardar este lugar.' : error.message, 'warning');
       }
     });
 
@@ -609,7 +609,7 @@
         tripBtn.innerHTML = '<i class="fa-solid fa-route" style="color:#F65E01"></i> <span>En Mi Viaje</span>';
         if (window.bqToast) window.bqToast('Plan guardado en Supabase.', 'success');
       } catch (error) {
-        if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar tu viaje.' : error.message, 'warning');
+        if (window.bqToast) window.bqToast(error.status === 401 ? 'Entrá a tu cuenta para guardar tu viaje.' : error.message, 'warning');
       }
     });
 

@@ -48,7 +48,7 @@
 
       if (resumesGallery) {
         gallery.classList.remove('is-paused');
-        status.textContent = 'Selecciona una tarjeta para pausar el recorrido';
+        status.textContent = 'Tocá una tarjeta para pausar el recorrido';
         return;
       }
 

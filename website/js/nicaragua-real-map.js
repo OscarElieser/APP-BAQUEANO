@@ -262,7 +262,7 @@
         </div>
         <div class="baq-popup-img-wrap">
           <img src="${dest.image}" alt="${dest.name}" class="baq-popup-img"
-               onerror="this.src='assets/images/destinos/canon_de_somoto.jpg'">
+               onerror="this.onerror=null;this.src='assets/images/destinos/canon_de_somoto.jpg'">
           <div class="baq-popup-img-overlay">
             <span class="baq-popup-coops">
               <i class="fa-solid fa-people-group"></i> ${dest.coopCount} Cooperativas

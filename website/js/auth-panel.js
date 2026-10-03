@@ -113,7 +113,7 @@ RELACIÓN:
     var title = document.createElement('h2');
     title.className = 'bq-auth-title';
     title.id = 'bq-auth-title';
-    title.textContent = 'Inicia sesión para ver tu perfil';
+    title.textContent = 'Entrá para ver tu perfil';
 
     var lead = document.createElement('p');
     lead.className = 'bq-auth-lead';

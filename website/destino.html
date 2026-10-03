@@ -304,7 +304,7 @@
     <div id="destinoContentCard">
       <div style="padding: 60px 20px; text-align: center;">
         <i class="fa-solid fa-compass fa-spin" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
-        <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Cargando información territorial...</h2>
+        <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Buscando qué hay por aquí…</h2>
         <p style="color: #94A3B8;">Consultando el Banco Maestro Baqueano de Nicaragua.</p>
       </div>
     </div>
@@ -380,7 +380,7 @@
       // Renderizar ficha completa en el contenedor
       card.innerHTML = `
         <div class="bq-dossier-hero">
-          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos-hero.jpg'}'">
           <div class="bq-dossier-hero-gradient"></div>
           <div class="bq-dossier-hero-text">
             <div class="bq-dossier-badges">
@@ -530,7 +530,7 @@
           this.innerHTML = '<i class="fa-solid fa-heart" style="color:#EF4444"></i> <span>Guardado</span>';
           if (window.bqToast) window.bqToast('Destino guardado en Favoritos.', 'success');
         } catch (error) {
-          if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar favoritos.' : error.message, 'warning');
+          if (window.bqToast) window.bqToast(error.status === 401 ? 'Entrá a tu cuenta para guardar este lugar.' : error.message, 'warning');
         }
       });
 
@@ -553,7 +553,7 @@
           this.innerHTML = '<i class="fa-solid fa-route" style="color:#F65E01"></i> <span>En Mi Viaje</span>';
           if (window.bqToast) window.bqToast(`${dest.title} se añadió a Mi Viaje.`, 'success');
         } catch (error) {
-          if (window.bqToast) window.bqToast(error.status === 401 ? 'Inicia sesión para guardar tu viaje.' : error.message, 'warning');
+          if (window.bqToast) window.bqToast(error.status === 401 ? 'Entrá a tu cuenta para guardar tu viaje.' : error.message, 'warning');
         }
       });
 

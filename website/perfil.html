@@ -130,7 +130,7 @@
         </div>
         <!-- Pill de Usuario Logueado (Imagen 1) -->
         <a href="perfil.html" class="nav-user-pill">
-          <img src="assets/images/destinos/ometepe.webp" alt="Oscar" class="nav-user-avatar" onerror="this.src='assets/images/logo.png'">
+          <img src="assets/images/destinos/ometepe.webp" alt="Oscar" class="nav-user-avatar" onerror="this.onerror=null;this.src='assets/images/logo.png'">
           <span>Oscar</span>
           <i class="fa-solid fa-chevron-down" style="font-size:0.7rem;margin-left:2px"></i>
         </a>
@@ -160,7 +160,7 @@
     <div class="prof-user-card">
       <div class="prof-user-left">
         <div class="prof-avatar-box">
-          <img src="assets/images/destinos/ometepe.webp" alt="Oscar Elieser" class="prof-avatar-img" onerror="this.src='assets/images/logo.png'">
+          <img src="assets/images/destinos/ometepe.webp" alt="Oscar Elieser" class="prof-avatar-img" onerror="this.onerror=null;this.src='assets/images/logo.png'">
           <a href="perfil.html?editar=foto#perfil-personal" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></a>
         </div>
         <div class="prof-user-info">
@@ -220,7 +220,7 @@
         <h4><i class="fa-regular fa-calendar-days" style="color:var(--prof-primary)"></i> Próximo viaje</h4>
         <span class="prof-next-trip-badge">12 — 14 oct. 2026</span>
       </div>
-      <img src="assets/images/destinos-hero.jpg" alt="Volcán Masaya" class="prof-next-trip-img" onerror="this.src='assets/images/hero-home.jpg'">
+      <img src="assets/images/destinos-hero.jpg" alt="Volcán Masaya" class="prof-next-trip-img" onerror="this.onerror=null;this.src='assets/images/hero-home.jpg'">
       <h5 class="prof-next-trip-title">Volcán Masaya, Granada y Ometepe</h5>
       <p class="prof-next-trip-meta">3 días · 2 viajeros · Naturaleza · Cultura · Gastronomía</p>
       <div class="prof-trip-thumbs-row">
@@ -246,7 +246,7 @@
       </div>
       <div class="prof-res-list">
         <div class="prof-res-item">
-          <img src="assets/images/aliados/cañon.webp" alt="Eco-Lodge" class="prof-res-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+          <img src="assets/images/aliados/cañon.webp" alt="Eco-Lodge" class="prof-res-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
           <div class="prof-res-info">
             <h5>Eco-Lodge Finca Magdalena</h5>
             <p>Ometepe · 12 - 14 oct. 2026</p>
@@ -254,7 +254,7 @@
           <span class="prof-res-status">Confirmada</span>
         </div>
         <div class="prof-res-item">
-          <img src="assets/images/destinos/ometepe.webp" alt="Tour Ometepe" class="prof-res-img" onerror="this.src='assets/images/destinos-hero.jpg'">
+          <img src="assets/images/destinos/ometepe.webp" alt="Tour Ometepe" class="prof-res-img" onerror="this.onerror=null;this.src='assets/images/destinos-hero.jpg'">
           <div class="prof-res-info">
             <h5>Tour Isla de Ometepe</h5>
             <p>Ometepe · 15 oct. 2026</p>
@@ -459,7 +459,7 @@
       <div class="prof-scenic-text">
         "Más experiencias que te conectan con nuestra tierra."
       </div>
-      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="prof-scenic-bird" onerror="this.src='assets/images/logo.png'">
+      <img src="assets/images/baqui-bird.png" alt="Baqüi" class="prof-scenic-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'">
     </div>
   </section>
 
@@ -775,6 +775,9 @@
           const isOpen = navMenu.classList.toggle('nav-active');
           mobileToggle.setAttribute('aria-expanded', isOpen);
           mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        });
+      }
+
       // Compartir Pasaporte Baqueano
       const sharePassportBtn = document.getElementById('btnSharePassport');
       if (sharePassportBtn) {

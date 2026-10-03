@@ -1378,10 +1378,10 @@ function initFooterBizRegister() {
       const terms = document.getElementById('bizTerms')?.checked;
 
       if (!name) markError('bizName', 'Por favor ingresa el nombre del negocio');
-      if (!type) markError('bizType', 'Selecciona el tipo de negocio');
+      if (!type) markError('bizType', 'Elegí el tipo de negocio');
       if (!owner) markError('bizOwner', 'Ingresa el nombre del propietario o responsable');
-      if (!category) markError('bizCategory', 'Selecciona la categoría Baqueano');
-      if (!department) markError('bizDepartment', 'Selecciona el departamento');
+      if (!category) markError('bizCategory', 'Elegí la categoría Baqueano');
+      if (!department) markError('bizDepartment', 'Elegí el departamento');
       if (!municipality) markError('bizMunicipality', 'Ingresa el municipio');
       if (!address) markError('bizAddress', 'Indica la dirección o referencia exacta');
       if (!phone) markError('bizPhone', 'Ingresa un teléfono principal de contacto');
