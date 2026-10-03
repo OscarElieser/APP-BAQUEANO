@@ -604,6 +604,27 @@
   border-radius: 50%;
 }
 
+.bq-form #bqMicrophone.is-listening {
+  color: #FFFFFF;
+  background: #C54B01;
+  border-color: #F65E01;
+  box-shadow: 0 6px 18px rgba(246, 94, 1, .34);
+  animation: bq-microphone-pulse 1.1s ease-in-out infinite;
+}
+
+.bq-form #bqMicrophone.is-listening:focus-visible {
+  outline-color: #F4E6C1;
+}
+
+@keyframes bq-microphone-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bq-form #bqMicrophone.is-listening { animation: none; }
+}
+
 .bq-drawer > footer {
   padding: 5px 10px calc(6px + env(safe-area-inset-bottom));
 }

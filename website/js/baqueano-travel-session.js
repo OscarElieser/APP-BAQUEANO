@@ -78,6 +78,7 @@
   let travelSession = restoreSession();
   let map = null;
   let routeLayer = null;
+  let chatRecognition = null;
   let markerLayer = null;
   let activeRequest = null;
 
@@ -371,6 +372,105 @@
     addMessage(text); input.value = ''; travelSession = parseTravelIntent(text, travelSession); await generateSession();
   }
 
+  function setChatMicrophoneState(listening, message) {
+    const button = $('#iaChatMicBtn');
+    const input = $('#iaChatInput');
+    if (button) {
+      button.classList.toggle('is-listening', listening);
+      button.setAttribute('aria-pressed', String(listening));
+      button.setAttribute('aria-label', listening ? 'Detener dictado' : 'Iniciar dictado');
+      button.title = listening ? 'Detener dictado' : 'Hablar con BAQUI';
+      const icon = $('i', button);
+      if (icon) icon.className = listening ? 'fa-solid fa-stop' : 'fa-solid fa-microphone';
+    }
+    if (input && message) input.placeholder = message;
+  }
+
+  function chatRecognitionError(code) {
+    const messages = {
+      'not-allowed': 'El micrófono está bloqueado. Permitilo en el candado del navegador.',
+      'service-not-allowed': 'El navegador bloqueó el servicio de voz.',
+      'audio-capture': 'No encontré un micrófono disponible.',
+      'no-speech': 'No detecté voz. Tocá el micrófono e intentá nuevamente.',
+      network: 'El dictado necesita conexión a internet.',
+      aborted: 'Dictado detenido.',
+      'language-not-supported': 'El navegador no admite este idioma para dictado.'
+    };
+    return messages[code] || 'No pude iniciar el dictado. Revisá el permiso del micrófono.';
+  }
+
+  async function toggleChatRecognition() {
+    const input = $('#iaChatInput');
+    if (chatRecognition) {
+      chatRecognition.stop();
+      setChatMicrophoneState(false, 'Dictado detenido. Podés editar o enviar el texto.');
+      return;
+    }
+
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) {
+      addMessage('Tu navegador no admite dictado por voz. En Android, abrí esta página con la versión actual de Chrome.', 'bot');
+      return;
+    }
+    if (!window.isSecureContext) {
+      addMessage('El dictado por voz necesita una conexión HTTPS segura.', 'bot');
+      return;
+    }
+
+    try {
+      if (navigator.mediaDevices?.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop());
+      }
+    } catch (error) {
+      const message = 'El micrófono está bloqueado. Permitilo desde el candado del navegador y volvé a intentarlo.';
+      if (input) input.placeholder = message;
+      addMessage(message, 'bot');
+      return;
+    }
+
+    const recognition = new Recognition();
+    chatRecognition = recognition;
+    recognition.lang = 'es-NI';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    let finalTranscript = '';
+    let errorCode = '';
+
+    recognition.onstart = () => setChatMicrophoneState(true, 'Escuchando… hablá ahora.');
+    recognition.onspeechend = () => recognition.stop();
+    recognition.onresult = event => {
+      let interimTranscript = '';
+      for (let index = event.resultIndex; index < event.results.length; index += 1) {
+        const transcript = event.results[index][0]?.transcript || '';
+        if (event.results[index].isFinal) finalTranscript += transcript;
+        else interimTranscript += transcript;
+      }
+      const transcript = `${finalTranscript} ${interimTranscript}`.trim();
+      if (input && transcript) input.value = transcript.slice(0, 500);
+    };
+    recognition.onerror = event => {
+      errorCode = event.error || 'unknown';
+      const message = chatRecognitionError(errorCode);
+      if (input) input.placeholder = message;
+      if (!['aborted', 'no-speech'].includes(errorCode)) addMessage(message, 'bot');
+    };
+    recognition.onend = () => {
+      chatRecognition = null;
+      const hasText = Boolean(input?.value.trim());
+      setChatMicrophoneState(false, hasText ? 'Listo. Podés editar o enviar tu idea de viaje.' : chatRecognitionError(errorCode || 'no-speech'));
+      if (hasText) input.focus();
+    };
+
+    try {
+      recognition.start();
+    } catch (error) {
+      chatRecognition = null;
+      setChatMicrophoneState(false, 'No pude iniciar el dictado. Intentá nuevamente.');
+    }
+  }
+
   function readControls() {
     travelSession.days = Number($('#cntDaysVal').textContent) || 1;
     travelSession.travelers = Number($('#cntTravVal').textContent) || 1;
@@ -380,6 +480,7 @@
 
   function bindControls() {
     $('#iaChatSendBtn')?.addEventListener('click', submitChat);
+    $('#iaChatMicBtn')?.addEventListener('click', toggleChatRecognition);
     $('#iaChatInput')?.addEventListener('keydown', (event) => { if (event.key === 'Enter') { event.preventDefault(); submitChat(); } });
     $$('.ia-chat-pill[data-prompt]').forEach((button) => button.addEventListener('click', () => { $('#iaChatInput').value = button.dataset.prompt || ''; submitChat(); }));
     [['#cntDaysMinus', 'days', -1, 1, 14], ['#cntDaysPlus', 'days', 1, 1, 14], ['#cntTravMinus', 'travelers', -1, 1, 20], ['#cntTravPlus', 'travelers', 1, 1, 20]].forEach(([selector, key, delta, min, max]) => $(selector)?.addEventListener('click', () => { travelSession[key] = Math.max(min, Math.min(max, travelSession[key] + delta)); generateSession(); }));

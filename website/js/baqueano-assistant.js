@@ -8,7 +8,7 @@
   'use strict';
   if (window.BaqueanoAssistant?.version === '6') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20260925-baqui-6'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20261003-microphone-1'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
   // 🎯 POR QUÉ: Firebase Hosting no expone /health y su 404 pintaba el asistente en rojo aunque Supabase estuviera operativo.
@@ -25,7 +25,7 @@
   const initialLanguage = window.BaqueanoLanguage?.get?.() || localStorage.getItem('baqueano_language_v2') || localStorage.getItem('baqueano_language_v1') || localStorage.getItem('baqueano_language') || 'es';
   const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, minimized: false, lastSuggestion: 0, currentLanguage: initialLanguage, preferredLanguage: initialLanguage }, safeJson(sessionStorage.getItem(KEYS.session), {}));
   const preferences = Object.assign({ voice: false, edge: 'right', y: null, enabled: true, suggestions: true }, safeJson(localStorage.getItem(KEYS.preferences), {}));
-  const state = { open: false, busy: false, minimized: false, dragging: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio', service: 'checking' };
+  const state = { open: false, busy: false, minimized: false, dragging: false, listening: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio', service: 'checking' };
   const saveSession = () => sessionStorage.setItem(KEYS.session, JSON.stringify(session));
   const savePreferences = () => localStorage.setItem(KEYS.preferences, JSON.stringify(preferences));
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -100,7 +100,7 @@
         <div class="bq-quick" aria-label="Acciones rápidas">
           <button data-quick="build_itinerary">🗺️ Planificar viaje</button><button data-quick="search_places">🌋 Descubrir destinos</button><button data-quick="lodging">🏨 Hospedaje</button><button data-quick="food">🍽️ Dónde comer</button><button data-quick="music">🎶 Música</button><button data-quick="history">📖 Historia</button><button data-quick="experiences">🥾 Aventuras</button><button data-quick="show_nearby">📍 Qué hay cerca</button><button data-quick="favorites">❤️ Favoritos</button><button data-quick="show_emergency">🚨 SOS 24/7</button><button data-quick="country">🇳🇮 Conocer Nicaragua</button><button data-quick="surprise">✨ Sorpréndeme</button>
         </div>
-        <form class="bq-form" id="bqForm"><label class="sr-only" for="bqInput">Escribe tu consulta</label><textarea id="bqInput" rows="2" maxlength="500" placeholder="Preguntá por destinos, rutas o experiencias…" required></textarea><button type="button" data-command="microphone" aria-label="Hablar"><i class="fa-solid fa-microphone"></i></button><button type="submit" aria-label="Enviar"><i class="fa-solid fa-arrow-up"></i></button></form>
+        <form class="bq-form" id="bqForm"><label class="sr-only" for="bqInput">Escribe tu consulta</label><textarea id="bqInput" rows="2" maxlength="500" placeholder="Preguntá por destinos, rutas o experiencias…" required></textarea><button type="button" id="bqMicrophone" data-command="microphone" aria-label="Iniciar dictado" aria-pressed="false" title="Hablar con Baqüi"><i class="fa-solid fa-microphone"></i></button><button type="submit" aria-label="Enviar"><i class="fa-solid fa-arrow-up"></i></button></form>
         <footer><button data-command="clear"><i class="fa-solid fa-trash-can"></i> Limpiar</button><button data-command="stop" hidden><i class="fa-solid fa-stop"></i> Detener</button><button data-command="hide"><i class="fa-solid fa-eye-slash"></i> Ocultar 30 min</button></footer>
       </aside>
       <button class="bq-mascot-minimize" type="button" data-command="minimize-mascot" aria-label="Minimizar a Baqüi" title="Minimizar"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
@@ -856,7 +856,7 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
 
   function isSnoozed() { return Number(session.hiddenUntil || 0) > Date.now(); }
   function open() { if (isSnoozed()) return; wakeCharacter(); state.open = true; state.minimized = false; $('#bqDrawer').classList.add('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'false'); $('#bqMascot').setAttribute('aria-expanded', 'true'); root.classList.remove('is-peeking'); hideSuggestion(); setTimeout(() => $('#bqInput')?.focus(), 120); track('assistant_opened'); }
-  function close() { state.open = false; $('#bqDrawer').classList.remove('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'true'); $('#bqMascot').setAttribute('aria-expanded', 'false'); stopSpeaking(); track('assistant_closed'); schedulePeek(); }
+  function close() { state.open = false; state.recognition?.abort(); updateMicrophoneState(false); $('#bqDrawer').classList.remove('is-open'); $('#bqDrawer').setAttribute('aria-hidden', 'true'); $('#bqMascot').setAttribute('aria-expanded', 'false'); stopSpeaking(); track('assistant_closed'); schedulePeek(); }
   function minimizeMascot() { session.minimized = true; state.minimized = true; saveSession(); close(); hideSuggestion(); root.classList.add('is-minimized'); track('assistant_minimized'); }
   function hide() { session.hidden = false; session.hiddenUntil = Date.now() + CONFIG.snoozeTime; saveSession(); close(); hideSuggestion(); root.classList.add('is-snoozed'); track('assistant_hidden', { minutes: 30 }); }
   function reopen() { session.hidden = false; session.hiddenUntil = 0; session.minimized = false; state.minimized = false; saveSession(); root.classList.remove('is-snoozed', 'is-minimized'); wakeCharacter(); showSuggestion(pageGuidance()); track('assistant_reopened'); }
@@ -912,12 +912,121 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
     mascot.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
   }
 
-  function startRecognition() {
-    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (!Recognition) return appendMessage('El reconocimiento de voz no está disponible en este navegador.', 'assistant');
-    setCharacter('listening'); track('assistant_voice_used');
-    state.recognition?.abort(); const recognition = new Recognition(); state.recognition = recognition; recognition.lang = 'es-NI'; recognition.interimResults = false; $('#bqInput').placeholder = 'Escuchando…';
-    recognition.onresult = event => { $('#bqInput').value = event.results[0][0].transcript; $('#bqInput').placeholder = 'Entendido. Podés enviarlo o editarlo.'; };
-    recognition.onerror = () => { $('#bqInput').placeholder = 'No te escuché bien. ¿Me lo repetís?'; }; recognition.onend = () => { state.recognition = null; setCharacter('idle'); }; recognition.start();
+  function updateMicrophoneState(listening, message) {
+    state.listening = listening;
+    const button = $('#bqMicrophone');
+    const input = $('#bqInput');
+    if (button) {
+      button.classList.toggle('is-listening', listening);
+      button.setAttribute('aria-pressed', String(listening));
+      button.setAttribute('aria-label', listening ? 'Detener dictado' : 'Iniciar dictado');
+      button.title = listening ? 'Detener dictado' : 'Hablar con Baqüi';
+      const icon = $('i', button);
+      if (icon) icon.className = listening ? 'fa-solid fa-stop' : 'fa-solid fa-microphone';
+    }
+    if (input && message) input.placeholder = message;
+    root.classList.toggle('is-listening', listening);
+    if (listening) setCharacter('listening');
+    else if (state.character === 'listening') setCharacter('idle');
+  }
+
+  function recognitionErrorMessage(code) {
+    const messages = {
+      'not-allowed': 'El micrófono está bloqueado. Permitilo en el candado del navegador e intentá otra vez.',
+      'service-not-allowed': 'El navegador bloqueó el servicio de voz. Revisá el permiso del micrófono.',
+      'audio-capture': 'No encontré un micrófono disponible en este dispositivo.',
+      'no-speech': 'No detecté voz. Tocá el micrófono y hablá cerca del dispositivo.',
+      network: 'El dictado necesita conexión. Revisá internet e intentá nuevamente.',
+      aborted: 'Dictado detenido.',
+      'language-not-supported': 'Este navegador no admite dictado en español de Nicaragua.'
+    };
+    return messages[code] || 'No pude iniciar el dictado. Revisá el permiso del micrófono e intentá otra vez.';
+  }
+
+  async function requestMicrophonePermission() {
+    if (!window.isSecureContext) throw new DOMException('Se requiere HTTPS.', 'SecurityError');
+    if (!navigator.mediaDevices?.getUserMedia) return;
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach(track => track.stop());
+  }
+
+  async function startRecognition() {
+    if (state.recognition || state.listening) {
+      state.recognition?.stop();
+      updateMicrophoneState(false, 'Dictado detenido. Podés editar o enviar el texto.');
+      return;
+    }
+
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) {
+      appendMessage('Tu navegador no admite dictado por voz. En Android, abrí BAQUEANO con la versión actual de Chrome.', 'assistant');
+      return;
+    }
+
+    const input = $('#bqInput');
+    updateMicrophoneState(false, 'Solicitando permiso para usar el micrófono…');
+    try {
+      await requestMicrophonePermission();
+    } catch (error) {
+      const message = error?.name === 'SecurityError'
+        ? 'El micrófono necesita una conexión HTTPS segura.'
+        : 'El micrófono está bloqueado. Permitilo en el candado del navegador e intentá otra vez.';
+      if (input) input.placeholder = message;
+      appendMessage(message, 'assistant');
+      track('assistant_voice_error', { error: String(error?.name || 'permission') });
+      return;
+    }
+
+    const recognition = new Recognition();
+    state.recognition = recognition;
+    recognition.lang = 'es-NI';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    let finalTranscript = '';
+    let errorCode = '';
+
+    recognition.onstart = () => {
+      updateMicrophoneState(true, 'Escuchando… hablá ahora.');
+      track('assistant_voice_used');
+    };
+    recognition.onspeechend = () => recognition.stop();
+    recognition.onresult = event => {
+      let interimTranscript = '';
+      for (let index = event.resultIndex; index < event.results.length; index += 1) {
+        const transcript = event.results[index][0]?.transcript || '';
+        if (event.results[index].isFinal) finalTranscript += transcript;
+        else interimTranscript += transcript;
+      }
+      const transcript = `${finalTranscript} ${interimTranscript}`.trim();
+      if (input && transcript) {
+        input.value = transcript.slice(0, Number(input.maxLength) || 500);
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    };
+    recognition.onerror = event => {
+      errorCode = event.error || 'unknown';
+      const message = recognitionErrorMessage(errorCode);
+      if (input) input.placeholder = message;
+      if (!['aborted', 'no-speech'].includes(errorCode)) appendMessage(message, 'assistant');
+      track('assistant_voice_error', { error: errorCode });
+    };
+    recognition.onend = () => {
+      state.recognition = null;
+      const hasText = Boolean(input?.value.trim());
+      updateMicrophoneState(false, hasText
+        ? 'Listo. Podés editarlo o tocar enviar.'
+        : recognitionErrorMessage(errorCode || 'no-speech'));
+      if (hasText) input.focus();
+    };
+
+    try {
+      recognition.start();
+    } catch (error) {
+      state.recognition = null;
+      updateMicrophoneState(false, 'No pude iniciar el dictado. Intentá nuevamente.');
+      track('assistant_voice_error', { error: String(error?.name || 'start') });
+    }
   }
 
   session.hidden = false;
