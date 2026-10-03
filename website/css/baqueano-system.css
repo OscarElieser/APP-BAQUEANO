@@ -1228,3 +1228,10 @@ html[data-bq-page="destinos"] :is(.dest-catalog-dual-btns, .dest-highlight-body)
     transform-origin: 50% 100%;
   }
 }
+
+/* BAQUI ya es el chat principal de baqueano-ia.html: la mascota flotante y su
+   globo duplicaban al asistente y tapaban el panel "Tu aventura". El panel
+   (#bqDrawer) sigue disponible desde la barra de pulgar. */
+html[data-bq-page="baqueano-ia"] #baqueanoAssistantBox :is(.bq-mascot, .bq-mascot-minimize, .bq-suggestion, .bq-reopen-tab) {
+  display: none !important;
+}

@@ -3192,3 +3192,45 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - 🎯 **POR QUÉ:** El propietario pide seguir con el rediseño llamativo (la sesión se cortó una vez).
 - ⚙️ **CÓMO:** (1) completar la auditoría de desborde interrumpida; (2) portada más cálida y lenguaje de postal en Destinos/Departamentos, sin borrar contenido ni funciones; verificación Playwright.
 - **Estado:** Iniciado.
+- **Avance (2026-10-03) — continuación:**
+  1. **Destinos en clave de postal** (`css/baqueano-system.css`, `html[data-bq-page="destinos"]`): tarjetas destacadas y de catálogo con marco de papel, foto 4:3 (antes 110 px) con zoom suave, inclinación leve solo al pasar/enfocar, pin naranja de marca (antes azul #0284C7 ajeno), títulos Montserrat 800, botones dobles en una línea y aire en la fila-carrusel para no recortar el marco. HTML intacto.
+  2. Voseo: "Descubre tu próxima Aventura" → "Descubrí tu próxima aventura" (`destinos.html`).
+  3. **Portada con luz de atardecer** (`#heroNicaragua`): la capa azul al 92 % apagaba el video; ahora oscuridad solo detrás del texto, brillo naranja sobre el paisaje y video más saturado. En celular: velo parejo, barra superior noche translúcida y video ampliado 12 % desde abajo para sacar una franja gris propia del clip.
+  4. `baqueano-system.css?v=20261003-13`.
+  5. Herramientas de prueba: el servidor `python -m http.server` se satura con el video y genera falsos fallos (LOAD-TIMEOUT, logo roto); se usa un servidor Node estático (scratchpad `srv.cjs`). Casos sospechosos (offline 430, baqueano-ia 1440, mi-negocio 1440) verificados: sin desborde real.
+  6. Incidente menor: 4 capturas cayeron en `website/` por cwd; movidas al scratchpad (no quedan archivos sueltos en el repo).
+  7. **Auditoría final (servidor Node, 28 páginas × 8 anchos 320→1920): 224/224 sin desborde, sin errores JS ni imágenes rotas.**
+  8. Guía "Cartografía Viva" v3 con capturas de portada cálida y Destinos: https://claude.ai/code/artifact/cfd088e7-cddc-496b-8c52-30c6f088d004
+- **Estado:** Completado. Cambios SIN commitear (el propietario decide el commit).
+- **Siguiente sugerido:** lenguaje de postal en `departamento.html` y `destino.html`; re-auditar contraste con umbral AA real 4.5:1; plan de endurecimiento RLS de Supabase (pendiente de aprobación).
+
+## 2026-10-03 — Solicitud: corregir el reproductor "Escuchá nuestra historia" (historia.html)
+
+- 🎯 **POR QUÉ:** En producción, el tiempo "00:00 / 2:45" se muestra en vertical (un carácter por línea) junto a una barra azul fina que atraviesa la tarjeta.
+- ⚙️ **CÓMO:** Localizar marcado/CSS del reproductor, encontrar la causa raíz del colapso de ancho, corregir sin quitar funciones; verificar en 1440/390 px.
+- **Estado:** Iniciado.
+- **Causa raíz:** el texto "0:00 / 2:45" era un `<span>` dentro de `.hist-waveform-bar`, cuya regla de barrita (`span { width:3px; background:#93C5FD }`) lo dejaba de 3 px de ancho → texto vertical + barra azul. Además, el botón ▶ no tenía ningún JS (no reproducía nada) y no existe narración grabada.
+- **Solución:**
+  1. `historia.html`: indicador con clase `.hist-audio-time`, subtítulo `aria-live` (`.hist-audio-caption`), las 7 etiquetas pasan a `<button data-chapter aria-pressed>`, script `js/historia-audioguia.js?v=20261003-1`; `historia-exact.css?v=20261003-audio-1`.
+  2. `js/historia-audioguia.js` (nuevo, Golden Circle): audioguía con síntesis de voz del navegador (voz en español, preferencia es-NI/es-419), 7 capítulos breves con hechos verificables, ▶/⏸, encadena capítulos, subtítulo visible, respaldo de texto sin voz, se detiene en `pagehide`.
+  3. `css/pages/historia-exact.css`: indicador con ancho natural, botón laguna (naranja AA al reproducir), capítulos con estado activo, onda animada solo al hablar (reduced-motion respetado), apilado en celular.
+- **Verificado (Playwright 1440/390/320):** "Capítulo 4 de 7" horizontal (83 px), capítulo activo y subtítulo correctos, ▶/⏸ alterna `aria-pressed`, 0 errores JS, 0 desborde.
+- **Estado:** Completado localmente. Para verlo en baqueanonicaragua.com falta commit + deploy (decisión del propietario).
+
+## 2026-10-03 — Solicitud: mejorar el planificador de baqueano-ia.html
+
+- 🎯 **POR QUÉ:** El propietario muestra 4 zonas débiles: chat de BAQUI (barra de desplazamiento nativa en los chips, "En línea" partido, área vacía), panel "Tu aventura" (barra interna, "Territorio / Destinos" sin control visible), y tarjetas "Cómo moverte en tu ruta" y "Alertas y recomendaciones" con grandes vacíos.
+- ⚙️ **CÓMO:** Capturas locales 1440/390, inspección de marcado/CSS/JS, mejoras sin quitar funciones (chat, generación de ruta, mapa), verificación Playwright.
+- **Estado:** Iniciado.
+
+## 2026-10-03 — Solicitud (durante el trabajo en baqueano-ia): botón "Iniciar sesión" debe cambiar al iniciar sesión
+
+- 🎯 **POR QUÉ:** Con sesión iniciada, el botón de la barra debe verse rojo y decir "Cerrar sesión"/"Salir", para que el usuario sepa que entró y pueda salir.
+- ⚙️ **CÓMO:** Localizar `.navbar-login-btn` y el manejo de sesión (Firebase Auth, `user-session.js`/`auth-panel.js`); alternar estado y acción de cerrar sesión con confirmación; verificar.
+- **Estado:** En cola (se termina primero el planificador de baqueano-ia).
+
+## 2026-10-03 — Solicitud PRIORITARIA: sin sesión iniciada no debe verse ningún dato personal (perfil.html)
+
+- 🎯 **POR QUÉ:** La página de perfil muestra nombre, correo, teléfono, ubicación, contacto de emergencia, salud, seguridad y transacciones aunque nadie haya iniciado sesión. Si están en el HTML publicado, son datos personales expuestos a cualquiera.
+- ⚙️ **CÓMO:** Ubicar el origen (HTML estático vs. JS), retirar los datos de ejemplo del marcado, mostrar estado "Iniciá sesión" sin datos para visitantes y cargar los datos reales solo con sesión (Firebase Auth). Verificar sin sesión.
+- **Estado:** Iniciado (prioridad sobre el botón de sesión).

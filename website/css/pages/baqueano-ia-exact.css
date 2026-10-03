@@ -1332,3 +1332,74 @@ QUÉ:
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================================
+ * PLANIFICADOR BAQUI — PULIDO DE ESTADOS Y CONTROLES (2026-10-03)
+ * 🎯 POR QUÉ: chips con barra de desplazamiento nativa, "En línea" partido en
+ *   dos líneas, botón "Generar ruta" oculto al fondo de un panel con barra
+ *   interna y tarjetas utilitarias vacías con mucho espacio muerto.
+ * ⚙️ CÓMO: chips deslizables sin barra (desvanecido en el borde), CTA fijo al
+ *   pie del panel, estados vacíos con contenido útil renderizado por
+ *   js/baqueano-travel-session.js (.ia-dest-quick, .ia-guide-list).
+ * 📦 QUÉ: mismo flujo, menos fricción; nada se elimina.
+ * ========================================================================== */
+.ia-chat-online-badge { white-space: nowrap; flex-shrink: 0; }
+
+.ia-chat-pills-row {
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+  padding-right: 36px;
+}
+.ia-chat-pills-row::-webkit-scrollbar { display: none; }
+.ia-chat-pills-row > * { scroll-snap-align: start; flex-shrink: 0; }
+.ia-chat-pills-label { font-size: 0.72rem; font-weight: 600; color: var(--ia-muted); }
+.ia-chat-pill { min-height: 32px; }
+
+/* Panel "Tu aventura": el botón principal siempre visible */
+.ia-config-box { scrollbar-width: thin; scrollbar-color: rgba(22, 93, 111, 0.35) transparent; }
+.ia-config-box .ia-cta-generate {
+  position: sticky;
+  bottom: -20px;
+  z-index: 2;
+  margin-bottom: -20px;
+  box-shadow: 0 -16px 18px 6px #FFFFFF, 0 10px 24px -12px rgba(197, 75, 1, 0.7);
+}
+
+/* Destinos vacíos: pista + accesos rápidos */
+.ia-dest-empty { flex-basis: 100%; margin: 0 0 4px; font-size: 0.78rem; color: var(--ia-muted); line-height: 1.45; }
+.ia-dest-quick {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 34px; padding: 4px 12px;
+  border: 1.5px dashed rgba(22, 93, 111, 0.45); border-radius: 999px;
+  background: #FFFFFF; color: #165D6F;
+  font: 700 0.78rem/1 inherit; cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.ia-dest-quick:hover { background: rgba(22, 93, 111, 0.08); border-style: solid; }
+.ia-dest-quick:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.ia-dest-quick i { font-size: 0.7rem; }
+
+/* Tarjetas utilitarias: guía útil en lugar de vacío */
+.ia-guide-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ia-guide-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 0.82rem; line-height: 1.45; color: #4F5E6B; }
+.ia-guide-list li strong { color: var(--ia-dark); }
+.ia-guide-list li > i {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(22, 93, 111, 0.1); color: #165D6F; font-size: 0.8rem;
+}
+.ia-guide-note { margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed rgba(21, 35, 47, 0.18); font-size: 0.78rem; font-weight: 600; color: #165D6F; }
+.ia-alert-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: 0 0 14px; padding: 5px 12px; border-radius: 999px;
+  background: rgba(62, 123, 82, 0.12); color: #2F5A3C;
+  font-size: 0.76rem; font-weight: 700;
+}
+/* La pista es una línea de ayuda, no un bloque de "estado vacío" del sistema */
+body .ia-tags-cloud .ia-dest-empty {
+  display: block !important; min-height: 0 !important; padding: 0 !important;
+  border: 0 !important; background: none !important; box-shadow: none !important;
+  text-align: left !important; font-size: 0.78rem !important;
+}

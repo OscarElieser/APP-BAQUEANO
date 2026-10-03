@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
-  <link rel="stylesheet" href="css/pages/historia-exact.css?v=20260927-exact-1">
+  <link rel="stylesheet" href="css/pages/historia-exact.css?v=20261003-audio-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
@@ -56,7 +56,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-13">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-14">
 </head>
 
 <body class="page-historia-exact">
@@ -543,27 +543,28 @@
       <section class="hist-audio-section">
         <div class="hist-audio-left">
           <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi" class="hist-bird-avatar">
-          <button type="button" class="hist-audio-play-btn" aria-label="Reproducir audioguía"><i class="fa-solid fa-play"></i></button>
+          <button type="button" class="hist-audio-play-btn" aria-label="Reproducir audioguía" aria-pressed="false"><i class="fa-solid fa-play"></i></button>
           <div>
             <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0;">Escuchá nuestra historia</h3>
             <p style="font-size: 0.76rem; color: #64748B; margin: 2px 0 6px 0;">Relatos, música y personajes en voz de Baqueano Digital.</p>
-            <div class="hist-waveform-bar">
+            <div class="hist-waveform-bar" aria-hidden="true">
               <span style="height: 8px;"></span><span style="height: 14px;"></span><span style="height: 22px;"></span>
               <span style="height: 16px;"></span><span style="height: 26px;"></span><span style="height: 12px;"></span>
               <span style="height: 20px;"></span><span style="height: 10px;"></span><span style="height: 18px;"></span>
-              <span style="font-size: 0.7rem; color: #64748B; margin-left: 8px; font-weight: 700;">0:00 / 2:45</span>
+              <span class="hist-audio-time" aria-hidden="true">7 capítulos</span>
             </div>
+            <p class="hist-audio-caption" aria-live="polite">Elegí un capítulo o tocá ▶ para escuchar desde el inicio.</p>
           </div>
         </div>
 
-        <div class="hist-audio-categories">
-          <span class="hist-audio-tag">🏛️ Época Prehispánica</span>
-          <span class="hist-audio-tag">⛪ Colonia</span>
-          <span class="hist-audio-tag">📜 Independencia</span>
-          <span class="hist-audio-tag">⚔️ Guerra Nacional</span>
-          <span class="hist-audio-tag">🎖️ Siglo XX</span>
-          <span class="hist-audio-tag">🇳🇮 Nicaragua Actual</span>
-          <span class="hist-audio-tag">🎶 Música y Tradiciones</span>
+        <div class="hist-audio-categories" role="group" aria-label="Capítulos de la audioguía">
+          <button type="button" class="hist-audio-tag" data-chapter="0" aria-pressed="false">🏛️ Época Prehispánica</button>
+          <button type="button" class="hist-audio-tag" data-chapter="1" aria-pressed="false">⛪ Colonia</button>
+          <button type="button" class="hist-audio-tag" data-chapter="2" aria-pressed="false">📜 Independencia</button>
+          <button type="button" class="hist-audio-tag" data-chapter="3" aria-pressed="false">⚔️ Guerra Nacional</button>
+          <button type="button" class="hist-audio-tag" data-chapter="4" aria-pressed="false">🎖️ Siglo XX</button>
+          <button type="button" class="hist-audio-tag" data-chapter="5" aria-pressed="false">🇳🇮 Nicaragua Actual</button>
+          <button type="button" class="hist-audio-tag" data-chapter="6" aria-pressed="false">🎶 Música y Tradiciones</button>
         </div>
       </section>
 
@@ -849,6 +850,7 @@
   </script>
 <script src="js/territory-carousel.js"></script>
 <script src="js/navigation.js"></script>
+<script src="js/historia-audioguia.js?v=20261003-1" defer></script>
 <script src="js/global-injector.js"></script>
 </body>
 

@@ -26,6 +26,24 @@
     { name: 'Masaya', type: 'municipality', latitude: 11.9744, longitude: -86.0942 }
   ]);
 
+  const QUICK_DESTINATIONS = Object.freeze(['Granada', 'Masaya', 'León', 'Estelí', 'Somoto']);
+
+  // Orientación general (no ligada a una ruta): hechos estables de movilidad y
+  // seguridad en Nicaragua. Se muestran mientras no haya destinos, en lugar de
+  // tarjetas vacías; nunca se presentan como datos verificados de la ruta.
+  const TRANSPORT_GUIDE = Object.freeze([
+    ['fa-bus', 'Buses interurbanos', 'Salen de los mercados de Managua: Roberto Huembes hacia Masaya, Granada y Rivas; Israel Lewites hacia León.'],
+    ['fa-ferry', 'Lancha a Ometepe', 'Sale de San Jorge (Rivas). Llegá con tiempo en temporada alta.'],
+    ['fa-taxi', 'Taxis', 'No usan taxímetro: acordá la tarifa antes de subir.'],
+    ['fa-plane', 'Caribe', 'A Corn Island se llega en avioneta desde Managua o en barco desde Bluefields.']
+  ]);
+  const SAFETY_GUIDE = Object.freeze([
+    ['fa-cloud-rain', 'Mayo a octubre es temporada de lluvias: revisá caminos y salidas en lancha.'],
+    ['fa-sun', 'Protector solar, sombrero y agua, sobre todo en volcanes y playas del Pacífico.'],
+    ['fa-money-bill-wave', 'Llevá córdobas en efectivo para comunidades y mercados.'],
+    ['fa-phone', 'Emergencias: Policía 118 · Bomberos 115 · Cruz Roja 128.']
+  ]);
+
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const repairEncoding = (value) => {
@@ -249,6 +267,21 @@
     $('#iaBudgetCurrency').value = travelSession.budget.currency;
     $('#iaBudgetConversion').textContent = travelSession.budget.amount == null ? 'Ingresá tu límite real.' : `Referencia: ${RATE.USD_NIO} NIO por USD · ${RATE.verifiedAt}`;
     const tags = $('#iaDestTags');
+    if (!travelSession.destinations.length) {
+      // Estado vacío útil: accesos rápidos a destinos que el motor resuelve
+      // siempre (FALLBACK_ENTITIES), aun sin conexión a Supabase.
+      const hint = document.createElement('p'); hint.className = 'ia-dest-empty';
+      hint.textContent = 'Todavía no elegiste destinos. Escribile a BAQUI o empezá con uno de estos:';
+      const quick = QUICK_DESTINATIONS.map((name) => {
+        const chip = document.createElement('button'); chip.type = 'button'; chip.className = 'ia-dest-quick';
+        chip.innerHTML = '<i class="fa-solid fa-plus" aria-hidden="true"></i> ' + escapeHtml(name);
+        chip.setAttribute('aria-label', 'Agregar ' + name + ' a la ruta');
+        chip.addEventListener('click', () => { if (!travelSession.destinations.includes(name)) travelSession.destinations.push(name); generateSession(); });
+        return chip;
+      });
+      tags.replaceChildren(hint, ...quick);
+      return;
+    }
     tags.replaceChildren(...travelSession.destinations.map((name) => {
       const tag = document.createElement('span'); tag.className = 'ia-tag'; tag.append(document.createTextNode(name + ' '));
       const button = document.createElement('button'); button.type = 'button'; button.className = 'ia-tag-remove'; button.setAttribute('aria-label', 'Quitar ' + name); button.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
@@ -295,13 +328,13 @@
       const content = $('h4', transport)?.nextElementSibling;
       if (content) content.innerHTML = routeNames.length
         ? `<div><strong>Ruta actual:</strong> ${escapeHtml(routeNames.join(' → '))}.</div><div>Confirmá horarios y disponibilidad directamente con operadores de transporte antes de viajar.</div><div>Las distancias mostradas son geográficas hasta disponer de un proveedor vial.</div>`
-        : '<div>Agregá destinos para recibir orientación de transporte vinculada a tu ruta.</div>';
+        : '<ul class="ia-guide-list">' + TRANSPORT_GUIDE.map(([icon, title, text]) => `<li><i class="fa-solid ${icon}" aria-hidden="true"></i><span><strong>${escapeHtml(title)}.</strong> ${escapeHtml(text)}</span></li>`).join('') + '</ul><p class="ia-guide-note">Agregá destinos y te digo cómo conectar tu ruta.</p>';
     }
     if (alerts) {
       const content = $('h4', alerts)?.nextElementSibling;
       if (content) content.innerHTML = travelSession.warnings.length
         ? travelSession.warnings.map((warning) => `<div><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ${escapeHtml(warning)}</div>`).join('')
-        : '<div>Sin alertas específicas verificadas para la sesión actual. Consultá clima, accesos y condiciones locales antes de salir.</div>';
+        : '<p class="ia-alert-status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Sin alertas activas para tu sesión</p><ul class="ia-guide-list">' + SAFETY_GUIDE.map(([icon, text]) => `<li><i class="fa-solid ${icon}" aria-hidden="true"></i><span>${escapeHtml(text)}</span></li>`).join('') + '</ul>';
     }
   }
 
@@ -373,7 +406,8 @@
     if (!travelSession.destinations.length) {
       const messages = $('#iaChatMessages');
       if (messages) messages.replaceChildren();
-      addMessage('Contame destinos, días, viajeros y presupuesto. El mapa y todo el plan se actualizarán desde esa misma solicitud.', 'bot');
+      addMessage('¡Hola! Soy BAQUI. Contame destinos, días, cuántos viajan y tu presupuesto, y armo el mapa, el itinerario y el costo en un solo paso.', 'bot');
+      addMessage('Por ejemplo: «3 días entre Granada y Masaya, 2 personas, 400 dólares».', 'bot');
     }
     bindControls(); initMap();
     window.addEventListener('baqueano:languageChanged', (event) => {
