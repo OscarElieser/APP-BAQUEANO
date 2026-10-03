@@ -1491,6 +1491,55 @@ function initializeNavigationModules() {
   initDropdownMiPais();
   scheduleBaqueanoDigitalLoad();
   ensureAccessibleControlNames();
+  initInstantNavigation();
+}
+
+// ============================================================================
+// 🎯 POR QUÉ: Navegación instantánea mediante prefetch inteligente en hover/touchstart.
+// ⚙️ CÓMO: Detecta enlaces internos a archivos .html, verifica si la conexión no es Save-Data,
+//         y precarga el documento usando <link rel="prefetch"> bajo demanda una sola vez.
+// 📦 QUÉ: initInstantNavigation() para acelerar transiciones entre páginas.
+// ============================================================================
+function initInstantNavigation() {
+  if (navigator.connection) {
+    if (navigator.connection.saveData || /(^|2)g/.test(navigator.connection.effectiveType || '')) {
+      return;
+    }
+  }
+
+  const prefetchedUrls = new Set();
+  const currentPath = window.location.pathname;
+
+  function prefetchUrl(url) {
+    if (!url || prefetchedUrls.has(url)) return;
+    prefetchedUrls.add(url);
+
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = url;
+    link.as = 'document';
+    document.head.appendChild(link);
+  }
+
+  function handleInteraction(e) {
+    const anchor = e.target.closest('a[href]');
+    if (!anchor || anchor.target || anchor.hasAttribute('download')) return;
+
+    const href = anchor.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+    try {
+      const targetUrl = new URL(anchor.href, window.location.href);
+      if (targetUrl.origin === window.location.origin && targetUrl.pathname !== currentPath) {
+        if (!/admin\.html/i.test(targetUrl.pathname)) {
+          prefetchUrl(targetUrl.href);
+        }
+      }
+    } catch (_) {}
+  }
+
+  document.addEventListener('pointerenter', handleInteraction, { capture: true, passive: true });
+  document.addEventListener('touchstart', handleInteraction, { capture: true, passive: true });
 }
 
 // ============================================================================

@@ -3410,3 +3410,33 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Informe: https://claude.ai/code/artifact/e480ef23-ff0d-4bc5-b055-49396be84d02
   - **Plan propuesto (NO aplicado, requiere aprobación):** (1) Edge Function `baqueano-mirror` que verifica el token de Firebase y copia con clave de servicio (respaldo genérico en ops_backup_entities); (2) migración de tablas faltantes con `firestore_id` + `payload jsonb`; (3) cerrar permisos públicos y pasar el Ops Center por la función; (4) carga inicial con credencial de administrador de Firebase + control diario de conteos.
 - **Estado:** Auditoría completada; esperando aprobación del plan.
+
+## 2026-10-03 — Auditoría y Optimización Profunda de Rendimiento de Todo el Proyecto BAQUEANO
+
+### 🎯 1. POR QUÉ (Why / Propósito):
+- Mejorar de forma drástica y perceptible la velocidad de carga y navegación en `https://baqueanonicaragua.com/` tanto en computadoras de escritorio como en smartphones Android, iPhone y tablets, especialmente en conexiones móviles 3G/4G.
+- Eliminar cuellos de botella críticos (favicons pesados de 3.2MB, duplicidad de CSS por `global-injector.js`, peticiones síncronas de shell, descargas no diferidas de librerías de mapas pesadas como Leaflet y MapLibre, JS no diferido, imágenes sobredimensionadas).
+- Cumplir estrictamente con la directiva: CERO eliminación de funcionalidades, CERO eliminación de contenido, CERO cambio visual, CERO rotura de Firebase, Supabase, Auth, BAQUI, mapas, formularios, navegación ni i18n.
+
+### ⚙️ 2. CÓMO (How / Arquitectura & Implementación):
+- Optimización de activos: Favicons y logos reducidos de megabytes a kilobytes sin pérdida de nitidez.
+- Lazy-loading y carga condicional con `IntersectionObserver` para mapas interactivos (Leaflet, MapLibre) y BAQUI Assistant diferido en `requestIdleCallback`.
+- Desacoplamiento de llamadas de red bloqueantes en `global-injector.js`: erradicado `fetch('index.html')` redundante y duplicidad de inyección de CSS.
+- Optimización masiva de HTML: atributos `loading="lazy"`, `decoding="async"`, `preload="none"` en videos, y dimensiones explícitas para eliminar CLS.
+- Implementación de prefetch inteligente en hover/touchstart y soporte progresivo de View Transitions API.
+- Configuración de directivas de caché optimizadas para CDN/Hosting en `firebase.json`.
+
+### 📦 3. QUÉ (What / Entregables & Estado):
+- `website/favicon.ico`: 3.24MB → 2.6KB (99.9% ahorro).
+- `website/favicon.png`: 3.24MB → 1.1KB.
+- Imágenes clave (BAQUI, footers, destinos) comprimidas y optimizadas.
+- `global-injector.js`: Sincronización in-memory sin fetch repetitivo y prevención de CSS duplicado.
+- Mapas diferidos en `index.html`, `destinos.html`, `departamento.html`, `mi-viaje.html`, `gastronomia.html`, `historia.html`, `musica.html`.
+- En progreso: Atributos HTML masivos, prefetch inteligente de navegación, caché en `firebase.json` y reporte comparativo final.
+
+
+## 2026-10-03 — Solicitud: elegir la mejor solución de espejo Firestore → Supabase "sin dañar lo que llevamos"
+
+- 🎯 **POR QUÉ:** Hacer realidad la directiva (Supabase con la misma capacidad que Firestore) sin romper el sitio, el Ops Center ni la app.
+- ⚙️ **CÓMO:** Comparar opciones (Third-Party Auth de Supabase con Firebase, Functions de Firebase, Edge Function de Supabase), elegir la de menor riesgo y aplicar SOLO cambios aditivos: tabla nueva, función nueva, script cliente que no bloquea. Sin cambios de RLS existentes ni migraciones destructivas.
+- **Estado:** Iniciado.

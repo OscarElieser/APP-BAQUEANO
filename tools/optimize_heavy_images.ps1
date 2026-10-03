@@ -86,9 +86,10 @@ function Optimize-JpgImage($path, $maxWidth, $quality = 85) {
 
 Write-Host "=== OPTIMIZANDO IMÁGENES PESADAS CLAVE ==="
 
-# 1. Mascotas de BAQUI (se usan en 30-100px en pantalla)
+# 1. Mascotas de BAQUI y Logo Principal
 Optimize-PngImage "c:\Users\PC 1\APP BAQUEANO\website\assets\images\assistant\baqui.png" 300
 Optimize-PngImage "c:\Users\PC 1\APP BAQUEANO\website\assets\images\assistant\baqui-bird.png" 300
+Optimize-PngImage "c:\Users\PC 1\APP BAQUEANO\website\assets\images\logo.png" 600
 
 # 2. Footers pesados
 Optimize-PngImage "c:\Users\PC 1\APP BAQUEANO\website\assets\images\footer.png" 1200

@@ -135,4 +135,17 @@
   if (document.readyState === 'complete') logPageView();
   else window.addEventListener('load', logPageView, { once: true });
 
+  // ==========================================================================
+  // Espejo Firestore → Supabase (directiva 2026-10-03: Firestore prioritario,
+  // Supabase con la misma información). Se carga en toda página con Firebase;
+  // envuelve las escrituras de Firestore sin cambiar su resultado.
+  // ==========================================================================
+  if (!document.querySelector('script[data-bq-mirror]')) {
+    var mirrorScript = document.createElement('script');
+    mirrorScript.src = 'js/firestore-mirror.js?v=20261003-1';
+    mirrorScript.defer = true;
+    mirrorScript.setAttribute('data-bq-mirror', '');
+    document.head.appendChild(mirrorScript);
+  }
+
 })(window);

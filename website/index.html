@@ -72,7 +72,7 @@
     <div class="exact-container nav-inner">
       <!-- Marca / Logo Oficial -->
       <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
+        <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="500" height="386">
         <div class="exact-nav-brand-text navbar-brand-text">
           <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
           <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
@@ -161,7 +161,7 @@
          SECCIÓN 1: HERO PRINCIPAL CINEMATOGRÁFICO (IMAGEN 4)
          ============================================================================ -->
     <section class="hero-exact hero-section-nicaragua" id="heroNicaragua">
-      <video class="bq-hero-background" autoplay muted loop playsinline preload="metadata" poster="assets/images/destinos/isla_de_ometepe.jpg" aria-hidden="true">
+      <video class="bq-hero-background" autoplay muted loop playsinline preload="none" poster="assets/images/destinos/isla_de_ometepe.jpg" aria-hidden="true">
         <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
       </video>
       <div class="bq-hero-overlay" aria-hidden="true"></div>
@@ -425,7 +425,7 @@
           <div class="inspire-photo-frame baqueano-photo-frame">
             <img id="destinoImagen" class="baqueano-photo" data-inspire-image
               src="assets/images/destinos/isla_de_ometepe.jpg"
-              alt="Volcanes y costa de la Isla de Ometepe" fetchpriority="high">
+              alt="Volcanes y costa de la Isla de Ometepe" fetchpriority="high" decoding="async" width="1600" height="900">
             <div class="inspire-photo-wash" aria-hidden="true"></div>
           </div>
 
@@ -458,16 +458,16 @@
           <div class="inspire-gallery-editorial" aria-label="Colección de fotos del destino">
             <div class="polaroid-strip" data-inspire-gallery-strip>
               <button type="button" class="polaroid-item is-active" data-gallery-index="0" aria-label="Ver foto 1">
-                <img data-inspire-gallery="0" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Vista de Ometepe">
+                <img data-inspire-gallery="0" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Vista de Ometepe" decoding="async" loading="lazy" width="1600" height="900">
               </button>
               <button type="button" class="polaroid-item" data-gallery-index="1" aria-label="Ver foto 2">
-                <img loading="lazy" decoding="async" data-inspire-gallery="1" src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada San Ramón">
+                <img loading="lazy" decoding="async" data-inspire-gallery="1" src="assets/images/destinos/cascada_la_luna.jpg" alt="Cascada San Ramón" width="1200" height="1800">
               </button>
               <button type="button" class="polaroid-item" data-gallery-index="2" aria-label="Ver foto 3">
-                <img loading="lazy" decoding="async" data-inspire-gallery="2" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Finca Magdalena">
+                <img loading="lazy" decoding="async" data-inspire-gallery="2" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Finca Magdalena" width="900" height="500">
               </button>
               <button type="button" class="polaroid-item" data-gallery-index="3" aria-label="Ver foto 4">
-                <img loading="lazy" decoding="async" data-inspire-gallery="3" src="assets/images/comida/nacatamal.jpg" alt="Tradición gastronómica">
+                <img loading="lazy" decoding="async" data-inspire-gallery="3" src="assets/images/comida/nacatamal.jpg" alt="Tradición gastronómica" width="371" height="742">
               </button>
               <button type="button" class="polaroid-arrow-btn" id="btnNextGalleryItem" aria-label="Ver siguiente foto">
                 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
@@ -509,7 +509,7 @@
             <img loading="lazy" decoding="async"
               class="nicaragua-map__image inspire-nic-map"
               src="assets/images/mapa-nicaragua-territorial.png"
-              alt="Mapa territorial ilustrado de Nicaragua con relieve, volcanes, lagos y costas">
+              alt="Mapa territorial ilustrado de Nicaragua con relieve, volcanes, lagos y costas" width="1207" height="1303">
 
             <!-- CAPA 2: SVG de conectores Bézier (anchor → callout) + marcadores geográficos -->
             <!-- viewBox 0 0 100 100 para usar unidades porcentuales directas -->
@@ -570,7 +570,7 @@
               data-type="attraction"
               aria-label="Destino Cañón de Somoto">
               <span class="geo-callout__type-icon" aria-hidden="true">🏞️</span>
-              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt=""></span>
+              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="" width="399" height="501"></span>
               <span class="pin-label">Cañón de Somoto</span>
             </button>
 
@@ -583,7 +583,7 @@
               data-type="city"
               aria-label="Destino León">
               <span class="geo-callout__type-icon" aria-hidden="true">🏛️</span>
-              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/departamentos/leon.png" alt=""></span>
+              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/departamentos/leon.png" alt="" width="192" height="144"></span>
               <span class="pin-label">León</span>
             </button>
 
@@ -596,7 +596,7 @@
               data-type="volcano"
               aria-label="Destino Cerro Negro">
               <span class="geo-callout__type-icon" aria-hidden="true">🌋</span>
-              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/destinos/cerro_negro.jpg" alt=""></span>
+              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/destinos/cerro_negro.jpg" alt="" width="700" height="438"></span>
               <span class="pin-label">Cerro Negro</span>
             </button>
 
@@ -609,7 +609,7 @@
               data-type="city"
               aria-label="Destino Granada">
               <span class="geo-callout__type-icon" aria-hidden="true">🏛️</span>
-              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/departamentos/granada.jpg" alt=""></span>
+              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/departamentos/granada.jpg" alt="" width="192" height="144"></span>
               <span class="pin-label">Granada</span>
             </button>
 
@@ -622,7 +622,7 @@
               data-type="island"
               aria-label="Destino Isla de Ometepe">
               <span class="geo-callout__type-icon" aria-hidden="true">🏝️</span>
-              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt=""></span>
+              <span class="pin-thumb-ring"><img loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="" width="1600" height="900"></span>
               <span class="pin-label">Ometepe</span>
               <span class="pin-active-pulse" aria-hidden="true"></span>
             </button>
@@ -632,7 +632,7 @@
           <div class="inspire-map-footer">
             <div class="inspire-story-card">
               <div class="story-thumb-wrap">
-                <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Choza comunitaria tradicional" class="story-thumb">
+                <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Choza comunitaria tradicional" class="story-thumb" width="900" height="500">
               </div>
               <div class="story-text">
                 <h4 class="story-title">Más que un destino</h4>
@@ -665,7 +665,7 @@
             <div class="dest-card-media">
               <span class="dest-tag-pill nature">Naturaleza</span>
               <button type="button" class="dest-heart-btn" aria-label="Guardar en favoritos"><i class="fa-regular fa-heart"></i></button>
-              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe, Rivas" loading="lazy">
+              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe, Rivas" loading="lazy" decoding="async" width="1600" height="900">
             </div>
             <div class="dest-card-body">
               <h3 class="dest-card-title"><a href="destinos.html?id=ometepe" style="text-decoration:none; color:inherit;">Isla de Ometepe</a></h3>
@@ -682,7 +682,7 @@
             <div class="dest-card-media">
               <span class="dest-tag-pill culture">Cultura</span>
               <button type="button" class="dest-heart-btn" aria-label="Guardar en favoritos"><i class="fa-regular fa-heart"></i></button>
-              <img src="assets/images/departamentos/granada.jpg" alt="Granada Colonial" loading="lazy">
+              <img src="assets/images/departamentos/granada.jpg" alt="Granada Colonial" loading="lazy" decoding="async" width="192" height="144">
             </div>
             <div class="dest-card-body">
               <h3 class="dest-card-title"><a href="destinos.html?id=granada" style="text-decoration:none; color:inherit;">Granada</a></h3>
@@ -699,7 +699,7 @@
             <div class="dest-card-media">
               <span class="dest-tag-pill beach">Playas</span>
               <button type="button" class="dest-heart-btn" aria-label="Guardar en favoritos"><i class="fa-regular fa-heart"></i></button>
-              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="San Juan del Sur, Rivas" loading="lazy">
+              <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="San Juan del Sur, Rivas" loading="lazy" decoding="async" width="447" height="447">
             </div>
             <div class="dest-card-body">
               <h3 class="dest-card-title"><a href="destinos.html?id=sjds" style="text-decoration:none; color:inherit;">San Juan del Sur</a></h3>
@@ -716,7 +716,7 @@
             <div class="dest-card-media">
               <span class="dest-tag-pill adventure">Aventura</span>
               <button type="button" class="dest-heart-btn" aria-label="Guardar en favoritos"><i class="fa-regular fa-heart"></i></button>
-              <img src="assets/images/destinos/cerro_negro.jpg" alt="Cerro Negro, León" loading="lazy">
+              <img src="assets/images/destinos/cerro_negro.jpg" alt="Cerro Negro, León" loading="lazy" decoding="async" width="700" height="438">
             </div>
             <div class="dest-card-body">
               <h3 class="dest-card-title"><a href="destinos.html?id=cerro_negro" style="text-decoration:none; color:inherit;">Cerro Negro</a></h3>
@@ -733,7 +733,7 @@
             <div class="dest-card-media">
               <span class="dest-tag-pill nature">Naturaleza</span>
               <button type="button" class="dest-heart-btn" aria-label="Guardar en favoritos"><i class="fa-regular fa-heart"></i></button>
-              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto, Madriz" loading="lazy">
+              <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto, Madriz" loading="lazy" decoding="async" width="399" height="501">
             </div>
             <div class="dest-card-body">
               <h3 class="dest-card-title"><a href="destinos.html?id=somoto" style="text-decoration:none; color:inherit;">Cañón de Somoto</a></h3>
@@ -792,7 +792,7 @@
           <!-- Columna Derecha: Baqueano Digital Asistente IA -->
           <div class="ai-card-exact" id="baqueanoDigitalCard">
             <div class="ai-avatar-side">
-              <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Asistente IA" class="ai-avatar-img">
+              <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Asistente IA" class="ai-avatar-img" width="300" height="300">
             </div>
             <div class="ai-content-side">
               <div class="ai-title-row">
@@ -908,7 +908,7 @@
         <div class="experiences-row-exact">
           <!-- 1. Aventura en Volcanes -->
           <a href="experiencias.html?categoria=volcan" class="exp-card-exact">
-            <img src="assets/images/destinos/cerro_negro.jpg" alt="Aventura en Volcanes" class="exp-card-bg" loading="lazy">
+            <img src="assets/images/destinos/cerro_negro.jpg" alt="Aventura en Volcanes" class="exp-card-bg" loading="lazy" decoding="async" width="700" height="438">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
               <div class="exp-card-info">
@@ -921,7 +921,7 @@
 
           <!-- 2. Gastronomía Ancestral -->
           <a href="gastronomia.html" class="exp-card-exact">
-            <img src="assets/images/comida/nacatamal.jpg" alt="Gastronomía Ancestral de Nicaragua" class="exp-card-bg" loading="lazy">
+            <img src="assets/images/comida/nacatamal.jpg" alt="Gastronomía Ancestral de Nicaragua" class="exp-card-bg" loading="lazy" decoding="async" width="371" height="742">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
               <div class="exp-card-info">
@@ -934,7 +934,7 @@
 
           <!-- 3. Comunidades Vivas -->
           <a href="experiencias.html?categoria=comunitario" class="exp-card-exact">
-            <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Comunidades Vivas de Nicaragua" class="exp-card-bg" loading="lazy">
+            <img src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Comunidades Vivas de Nicaragua" class="exp-card-bg" loading="lazy" decoding="async" width="900" height="500">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
               <div class="exp-card-info">
@@ -947,7 +947,7 @@
 
           <!-- 4. Playas de Ensueño -->
           <a href="experiencias.html?categoria=playa" class="exp-card-exact">
-            <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Playas de Ensueño" class="exp-card-bg" loading="lazy">
+            <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Playas de Ensueño" class="exp-card-bg" loading="lazy" decoding="async" width="447" height="447">
             <div class="exp-card-gradient"></div>
             <div class="exp-card-content">
               <div class="exp-card-info">
@@ -1008,7 +1008,7 @@
               &ldquo;Todo fue muy fácil de planificar. La app nos ayudó a descubrir lugares auténticos.&rdquo;
             </p>
             <div class="test-author-row">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Carlos R." class="test-avatar-img">
+              <img loading="lazy" decoding="async" src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Carlos R." class="test-avatar-img" width="678" height="452">
               <div class="test-author-info">
                 <h4>Carlos R.</h4>
                 <span>Viajero · Guatemala</span>
@@ -1029,7 +1029,7 @@
               &ldquo;Increíble la calidez de la gente y la belleza de Nicaragua. ¡Volveremos!&rdquo;
             </p>
             <div class="test-author-row">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Villa Vista Redonda (Emerald Coast).webp" alt="Ana P." class="test-avatar-img">
+              <img loading="lazy" decoding="async" src="assets/images/destinos/Villa Vista Redonda (Emerald Coast).webp" alt="Ana P." class="test-avatar-img" width="818" height="540">
               <div class="test-author-info">
                 <h4>Ana P.</h4>
                 <span>Turista · El Salvador</span>
@@ -1069,7 +1069,7 @@
         <div class="community-card-exact">
           <!-- Izquierda: Foto de anfitrión y propuesta -->
           <div class="community-left-host">
-            <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Anfitrión Baqueano Campesino" class="host-avatar-img">
+            <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Anfitrión Baqueano Campesino" class="host-avatar-img" width="900" height="500">
             <div class="host-info-text">
               <h3>Sumate a la comunidad BAQUEANO</h3>
               <p>¿Tenés un negocio turístico? Formá parte de nuestra red de anfitriones.</p>
@@ -1118,7 +1118,7 @@
         <!-- Columna 1: Marca y Redes -->
         <div class="footer-brand-col">
           <a href="index.html" class="footer-logo-row" aria-label="Baqueano Nicaragua — Inicio">
-            <img src="assets/logos/BAQUENO%20LOGO.png" alt="Baqueano" class="footer-logo-img">
+            <img src="assets/logos/BAQUENO%20LOGO.png" alt="Baqueano" class="footer-logo-img" decoding="async" loading="lazy" width="21676" height="21967">
             <div class="footer-brand-text-block">
               <span class="footer-brand-title">BAQUEANO</span>
               <span class="footer-brand-subtitle">NICARAGUA AUTÉNTICA</span>
@@ -1132,7 +1132,7 @@
             <a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
           <div class="footer-badge-wrap">
-            <img loading="lazy" decoding="async" src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="footer-autentica-badge">
+            <img loading="lazy" decoding="async" src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="footer-autentica-badge" width="1983" height="793">
           </div>
         </div>
 
@@ -1321,7 +1321,7 @@
     <div class="modal-card-dialog" style="max-width: 860px; padding: 16px; background: #000000; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2);">
       <button type="button" class="modal-close-x" onclick="closeHeroVideoModal()" aria-label="Cerrar video"><i class="fa-solid fa-xmark"></i></button>
       <div style="position: relative; width: 100%; border-radius: 12px; overflow: hidden; background: #000;">
-        <video id="heroModalVideoPlayer" controls playsinline style="width: 100%; height: auto; max-height: 75vh; display: block;" poster="assets/images/destinos/isla_de_ometepe.jpg">
+        <video id="heroModalVideoPlayer" controls playsinline preload="none" style="width: 100%; height: auto; max-height: 75vh; display: block;" poster="assets/images/destinos/isla_de_ometepe.jpg">
           <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
           Tu navegador no soporta reproducción de video.
         </video>

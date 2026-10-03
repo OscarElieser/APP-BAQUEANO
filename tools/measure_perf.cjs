@@ -101,6 +101,9 @@ async function run() {
       const res = await measurePage(browser, p);
       results.push(res);
       console.log(`✓ ${p} medido en ${res.loadMs}ms (${res.totalKB} KB, ${res.requests} reqs)`);
+      if (res.errors > 0) {
+        console.log(`  ⚠ Errores en ${p}:`, res.errorList);
+      }
     } catch (err) {
       console.error(`✗ Error midiendo ${p}:`, err.message);
     }

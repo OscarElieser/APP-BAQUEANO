@@ -210,7 +210,7 @@
   <nav class="main-navbar-exact main-navbar" id="mainNavbar" role="navigation" aria-label="Navegación principal">
     <div class="exact-container nav-inner">
       <a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">
-        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">
+        <img src="assets/images/logo.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="600" height="608">
         <div class="exact-nav-brand-text navbar-brand-text">
           <span class="exact-nav-title navbar-brand-title">BAQUEANO</span>
           <span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>
@@ -382,7 +382,7 @@
       // Renderizar ficha completa en el contenedor
       card.innerHTML = `
         <div class="bq-dossier-hero">
-          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos/volcan_masaya.jpg'}'">
+          <img src="${dest.image}" alt="${dest.title}" class="bq-dossier-hero-img" onerror="this.onerror=null;this.src='${dest.altImage || 'assets/images/destinos/volcan_masaya.jpg'}'" decoding="async" loading="lazy">
           <div class="bq-dossier-hero-gradient"></div>
           <div class="bq-dossier-hero-text">
             <div class="bq-dossier-badges">
