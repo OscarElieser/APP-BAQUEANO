@@ -55,6 +55,9 @@ async function measurePage(browser, pageName) {
       else if (/image/i.test(type)) imgBytes += len;
       else if (/font/i.test(type)) fontBytes += len;
       else otherBytes += len;
+      if (res.status() >= 400) {
+        consoleErrors.push(`[${res.status()}] ${res.url()}`);
+      }
     } catch (_) {}
   });
 
@@ -87,7 +90,8 @@ async function measurePage(browser, pageName) {
     cssKB: Math.round(cssBytes / 1024),
     imgKB: Math.round(imgBytes / 1024),
     fontKB: Math.round(fontBytes / 1024),
-    errors: consoleErrors.length
+    errors: consoleErrors.length,
+    errorList: consoleErrors
   };
 }
 
