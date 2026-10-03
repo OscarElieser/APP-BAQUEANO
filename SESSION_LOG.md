@@ -3009,3 +3009,17 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - **Prueba de seguridad en navegador:** `loginAsExplorer('Intruso','oscarelieser.informatica.inatec@gmail.com')` → producción actual: `role: admin`, enlace Ops visible; código corregido: `role: explorer`, `emailVerified: false`, enlace oculto.
 - **Directriz 1 (datos reales):** registrada en memoria del asistente; los catálogos turísticos se tratarán como datos reales con fuente (INTUR, visitanicaragua, mapanicaragua) al migrarlos a Supabase.
 - **Pendiente propietario:** resolver facturación GitHub; desplegar reglas y Functions (`firebase deploy --only firestore:rules,storage,functions`, requiere login interactivo); ejecutar `migrate-from-manual.sh` en la VM (instala el autodeploy).
+## 2026-10-03 — Solicitud: rediseño frontend con identidad única
+
+- 🎯 **POR QUÉ:** El propietario quiere un diseño único y mejor para el Website, sin perder información ni funcionalidades, adaptable y responsive en cualquier dispositivo.
+- ⚙️ **CÓMO:** Rediseño por capas y por lotes: (1) capturas de línea base en 360/390/768/1024/1440 px; (2) sistema de diseño (tokens + componentes) cargado globalmente; (3) página por página empezando por la portada, conservando DOM, IDs, clases y ganchos JS; (4) verificación Playwright (sin desbordes, sin errores nuevos) y capturas antes/después.
+- 📦 **QUÉ:** Pendiente de definir dirección visual tras la línea base.
+- **Estado:** Iniciado.
+## 2026-10-03 — Brief creativo del propietario: "Nicaragua salvaje digital"
+
+- 🎯 **POR QUÉ:** Plataforma turística única, inmersiva, humana y auténticamente nicaragüense; competitiva internacionalmente; nada de plantillas genéricas ni copias de otras plataformas.
+- ⚙️ **CÓMO (reglas del brief):** NO borrar nada (mejorar, integrar, optimizar, modernizar); diseñar por espacio disponible, no por modelo de dispositivo (Grid, Flex, container queries, clamp, dvh, safe-area); mobile-first con navegación de pulgar; touch y hover equivalentes; puntos de control 320→2560 px; Design System global; voz humana con voseo nicaragüense natural (sin caricatura); BAQUI cercano y responsable; microcopy específico; mensajes de sistema humanizados; i18n que transmita personalidad sin traducir modismos; rendimiento (LCP/INP/CLS, transform/opacity, IntersectionObserver); trazabilidad tras cada etapa.
+- 📦 **QUÉ:** Orden de implementación: tokens/estilos globales → responsive → navegación → portada → destinos → departamentos → mapas → experiencias → BAQUI → perfiles → reservas → secundarias; luego humanización, pruebas y optimización.
+- **Nota:** el brief incluye un adjetivo vetado por AGENTS.md regla 2; no se usará en archivos ni código.
+- **Estado:** Lote D1 (capa de identidad + portada) en curso.
+- **2026-10-03 — Reanudación:** el propietario reenvía el brief completo. Se retoma el lote D1 desde el estado sin commitear (`css/baqueano-identity.css`, `assets/textures/`, `js/global-injector.js`).

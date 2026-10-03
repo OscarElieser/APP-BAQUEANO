@@ -63,7 +63,10 @@
         integrity: 'sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==',
         crossOrigin: 'anonymous'
       },
-      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' }
+      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap' },
+      // Capa de identidad "Cartografía viva": SIEMPRE la última, para que sus
+      // correcciones de contraste y responsive prevalezcan. Ver css/baqueano-identity.css
+      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261003-1' }
     ];
     needed.forEach(function(css) {
       if (!document.getElementById(css.id)) {

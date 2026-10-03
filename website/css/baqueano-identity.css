@@ -1,0 +1,334 @@
+/*
+=====================================================
+BAQUEANO — Capa de identidad "Cartografía viva"
+=====================================================
+
+PROPÓSITO:
+  Dar al Website una identidad visual propia, coherente con el eslogan
+  "Descubre lo que no sale en el mapa", y corregir los fallos de contraste
+  y de adaptación a pantallas pequeñas detectados en la auditoría visual
+  (capturas reales en 390 px y 1440 px, 2026-10-03).
+
+ARQUITECTURA:
+  - Capa ADITIVA: se carga la ÚLTIMA (js/global-injector.js) en todas las
+    páginas. No modifica HTML ni JavaScript; conserva toda la información y
+    funcionalidad. Revertir = quitar esta hoja.
+  - Secciones:
+      1. Tokens de marca (colores, radios, sombras teñidas, textura).
+      2. Base global segura (foco, tipografía, interacción, movimiento).
+      3. Firma visual: curvas de nivel topográficas y etiquetas tipo coordenada.
+      4. Correcciones de la portada, acotadas por id de sección.
+      5. Asistente BAQUI en móvil.
+  - Se usa !important solo donde el CSS heredado ya lo usa (styles.css e
+    index-exact.css suman más de 4.000); sin él la corrección no aplica.
+
+ACCESIBILIDAD:
+  Contraste AA en los títulos corregidos, foco visible naranja de marca,
+  objetivos táctiles ≥ 44 px y respeto a prefers-reduced-motion.
+
+RELACIÓN:
+  css/variables.css, css/colors.css (paleta oficial), css/pages/index-exact.css
+  (estilos de portada que esta capa corrige), assets/textures/topografia.svg.
+=====================================================
+*/
+
+/* ===================================================
+   1. TOKENS DE MARCA
+   =================================================== */
+:root {
+  --bq-id-ink: #0F172A;        /* Texto principal */
+  --bq-id-navy: #0D1B2A;       /* Fondos profundos */
+  --bq-id-teal: #165D6F;       /* Color institucional */
+  --bq-id-orange: #F65E01;     /* Acento: brújula / acción */
+  --bq-id-sand: #F4E6C1;       /* Papel cartográfico */
+  --bq-id-moss: #4A7A5A;       /* Naturaleza */
+  --bq-id-on-dark: #F8FAFC;    /* Texto sobre fondos oscuros */
+  --bq-id-on-dark-soft: rgba(248, 250, 252, 0.78);
+
+  /* Escala de radios: interior más cerrado, contenedores más suaves */
+  --bq-id-radius-sm: 10px;
+  --bq-id-radius-md: 16px;
+  --bq-id-radius-lg: 24px;
+
+  /* Sombras teñidas de teal (una sola fuente de luz, arriba) */
+  --bq-id-shadow-sm: 0 2px 8px rgba(13, 27, 42, 0.08);
+  --bq-id-shadow-md: 0 12px 32px -8px rgba(22, 93, 111, 0.22);
+  --bq-id-shadow-lg: 0 28px 60px -18px rgba(13, 27, 42, 0.38);
+
+  --bq-id-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --bq-id-topo: url("../assets/textures/topografia.svg");
+}
+
+/* ===================================================
+   2. BASE GLOBAL SEGURA
+   =================================================== */
+
+/* Foco visible con el naranja de brújula (WCAG 2.4.7 / 2.4.11). */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--bq-id-orange);
+  outline-offset: 3px;
+}
+
+/* Titulares equilibrados y párrafos sin palabras huérfanas. */
+:where(h1, h2, h3) { text-wrap: balance; }
+:where(p, li) { text-wrap: pretty; }
+
+/* Cifras alineadas en contadores, precios y estadísticas. */
+:where([class*="stat"], [class*="price"], [class*="count"], time) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Respuesta táctil al pulsar (simula un botón físico). */
+:where(button, [role="button"], a[class*="btn"], a[class*="button"]):active {
+  transform: translateY(1px) scale(0.985);
+}
+
+/* Las imágenes nunca desbordan su contenedor. Especificidad cero (:where)
+   para que las librerías de mapas (mosaicos con max-width: none) prevalezcan. */
+:where(img, video, iframe) { max-width: 100%; }
+
+/* Desplazamiento suave solo si el usuario no pide menos movimiento. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Contenido decorativo que sobresale (manchas, halos) no crea scroll lateral. */
+html, body { overflow-x: clip; }
+
+/* ===================================================
+   3. FIRMA VISUAL: CARTOGRAFÍA VIVA
+   =================================================== */
+
+/* Curvas de nivel topográficas como "papel de mapa" de fondo.
+   Se pinta en ::before con mask-image, así el color sale del token y la
+   textura nunca tapa contenido ni recibe clics. */
+:is(#porqueBaqueano, #experienciasSection, #testimoniosSection, #comunidadSeccion) {
+  position: relative;
+  isolation: isolate;
+}
+
+:is(#porqueBaqueano, #experienciasSection, #testimoniosSection, #comunidadSeccion)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bq-id-teal);
+  opacity: 0.07;
+  -webkit-mask-image: var(--bq-id-topo);
+  mask-image: var(--bq-id-topo);
+  -webkit-mask-size: 640px 640px;
+  mask-size: 640px 640px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+/* Variación de posición para que las secciones no repitan el mismo relieve. */
+#experienciasSection::before { -webkit-mask-position: 220px 80px; mask-position: 220px 80px; }
+#testimoniosSection::before { -webkit-mask-position: -140px 300px; mask-position: -140px 300px; }
+#comunidadSeccion::before { -webkit-mask-position: 60px -200px; mask-position: 60px -200px; opacity: 0.09; }
+
+/* Etiquetas superiores como marcas de brújula: trazo naranja + texto espaciado. */
+:is(.vivir-eyebrow, .inspire-eyebrow, .scenic-eyebrow) {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: 0.16em !important;
+}
+
+:is(.inspire-eyebrow, .scenic-eyebrow)::before {
+  content: "";
+  flex: none;
+  width: 1.4rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--bq-id-orange);
+}
+
+/* ===================================================
+   4. CORRECCIONES DE LA PORTADA (index.html)
+   =================================================== */
+
+/* --- 4.1 Hero: el contenedor medía 446 px en pantallas de 390 px --- */
+#heroNicaragua .exact-container {
+  width: 100% !important;
+  max-width: min(1320px, 100%) !important;
+  box-sizing: border-box !important;
+  padding-inline: clamp(16px, 5vw, 56px) !important;
+}
+
+#heroNicaragua .hero-exact-title {
+  font-size: clamp(2.35rem, 10.4vw, 5.6rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.025em !important;
+  overflow-wrap: anywhere;
+}
+
+/* --- 4.2 Contrato de SUPERFICIE OSCURA (causa raíz del texto ilegible) ---
+   css/theme-switcher.css y css/headings-system.css obligan a TODOS los títulos de <main> a usar
+   var(--text-primary) con !important (incluido -webkit-text-fill-color), y esa
+   variable vale #0F172A en modo claro: por eso aparecían títulos azul marino
+   sobre fondos azul marino. En lugar de competir con más !important, cada
+   superficie oscura redefine las variables de texto para su contenido; la regla
+   del tema sigue funcionando y toma el color correcto según el contexto.
+   Cualquier página puede usarlo con el atributo data-surface="dark". */
+:is([data-surface="dark"], .map-card-exact, .ai-card-exact, .exp-card-exact, .scenic-banner-card) {
+  --text-primary: var(--bq-id-on-dark);
+  --text-secondary: var(--bq-id-on-dark-soft);
+  --text-muted: rgba(248, 250, 252, 0.62);
+  --text-light: var(--bq-id-on-dark);
+  /* css/headings-system.css aplica la misma idea a todos los H2 con --heading-ink */
+  --heading-ink: var(--bq-id-on-dark);
+  --heading-muted: var(--bq-id-sand);
+}
+
+/* --- 4.3 Experiencias: fotos con degradado suficiente para leer el título --- */
+#experienciasSection .exp-card-gradient {
+  background: linear-gradient(180deg, rgba(13, 27, 42, 0) 30%, rgba(13, 27, 42, 0.55) 62%, rgba(13, 27, 42, 0.92) 100%) !important;
+}
+
+#experienciasSection .exp-card-info h3 {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+#experienciasSection .exp-card-exact {
+  border-radius: var(--bq-id-radius-lg) !important;
+  box-shadow: var(--bq-id-shadow-md) !important;
+  transition: transform 0.35s var(--bq-id-ease), box-shadow 0.35s var(--bq-id-ease) !important;
+}
+
+#experienciasSection .exp-card-exact:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--bq-id-shadow-lg) !important;
+}
+
+/* --- 4.4 Banner final: titular azul sobre azul marino --- */
+/* El titular usa el arena de marca (variable declarada en el propio elemento). */
+#bannerAtardecer .scenic-title {
+  --text-primary: var(--bq-id-sand);
+  --heading-ink: var(--bq-id-sand);
+  background: none !important;
+}
+
+/* --- 4.5 Ritmo responsive de tabletas y móviles --- */
+@media (max-width: 1024px) {
+  /* Mapa y planificador: una columna en lugar de dos columnas estrechas */
+  #mapaAiSection .map-ai-grid-exact {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* Experiencias: dos columnas en tableta */
+  #experienciasSection .experiences-row-exact {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* ¿Por qué BAQUEANO?: introducción arriba y pilares debajo */
+  #porqueBaqueano .why-baqueano-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    gap: 1.5rem !important;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Experiencias: carrusel horizontal con encaje (scroll-snap); las 4 tarjetas
+     siguen disponibles y cada título se lee completo. */
+  #experienciasSection .experiences-row-exact {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-template-columns: none !important;
+    grid-auto-columns: minmax(78%, 1fr) !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    padding-bottom: 0.75rem !important;
+    scrollbar-width: thin;
+  }
+
+  #experienciasSection .exp-card-exact {
+    scroll-snap-align: start;
+    min-height: 240px;
+  }
+
+  #porqueBaqueano .why-pillars-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* Tarjeta del mapa: texto arriba y mapa a lo ancho debajo (antes el mapa
+     quedaba comprimido a un costado en 390 px). */
+  #mapaAiSection .map-card-inner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+
+  #mapaAiSection .map-visual-wrap,
+  #mapaAiSection .map-visual-viewport {
+    width: 100% !important;
+    min-height: 240px;
+  }
+
+  /* Banner final y comunidad: apilados, texto alineado a la izquierda */
+  #bannerAtardecer .scenic-banner-card,
+  #comunidadSeccion .community-card-exact {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.25rem !important;
+  }
+
+  #bannerAtardecer .scenic-banner-right {
+    text-align: left !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
+
+  #bannerAtardecer .scenic-btns-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  #bannerAtardecer .scenic-btns-row a {
+    justify-content: center !important;
+    min-height: 48px;
+  }
+
+  #comunidadSeccion .community-perks-row {
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    gap: 1rem !important;
+    justify-content: flex-start !important;
+  }
+
+  #comunidadSeccion :is(.community-left-host, .host-info-text, .community-perk-item) {
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1024px) {
+  #porqueBaqueano .why-pillars-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ===================================================
+   5. ASISTENTE BAQUI EN MÓVIL
+   =================================================== */
+/* En pantallas pequeñas la burbuja de sugerencia (260 px) tapaba ~20 % de la
+   pantalla en todo el recorrido. Se conserva la mascota: al tocarla se abre
+   el panel completo con las mismas acciones (Escuchar, Abrir panel). */
+@media (max-width: 640px) {
+  .bq-assistant .bq-suggestion {
+    display: none !important;
+  }
+}
