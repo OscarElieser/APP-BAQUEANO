@@ -1023,7 +1023,7 @@ html[data-bg-mode="dark"] body main :is(
   .essential-card, .law-card-item, .dept-section-card, .aliado-card-exact,
   [class*="accordion-item"], [class*="faq-item"], details, form, table,
   [class*="index-card"], [class*="sidebar"], [class*="-panel"], [class*="info-box"]
-):not([class*="hero"]):not(:is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item, .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box, .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box, .modal-card-dialog)) {
+):not([class*="hero"]):not(:is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item, .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box, .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box, .modal-card-dialog)):not(:has(> [class*="overlay"], > [class*="card-bg"])) {
   background-color: var(--baqueano-surface) !important;
   color: var(--baqueano-text) !important;
 }
@@ -1033,7 +1033,7 @@ html[data-bg-mode="dark"] body main :is(
   .essential-card, .law-card-item, .dept-section-card, .aliado-card-exact,
   [class*="accordion-item"], [class*="faq-item"], details, form, table,
   [class*="index-card"], [class*="sidebar"], [class*="-panel"], [class*="info-box"]
-):not([class*="hero"]):not(:is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item, .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box, .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box, .modal-card-dialog))
+):not([class*="hero"]):not(:is(.mun-card, .c-step, .person-profile-card, .exp-route-box, .canon-feat-item, .artisan-card, .video-card-showcase, .geo-side-box, .price-policy-box, .music-madriz-player-box, .scientific-rigor-box, .sos-card, .protocol-box, .modal-card-dialog)):not(:has(> [class*="overlay"], > [class*="card-bg"]))
   :is(h1, h2, h3, h4, h5, h6, p, li, dd, td, th, label, summary, small, strong):not([class*="badge"]):not([class*="pill"]):not([class*="btn"]):not([class*="tag"]):not(:is([class*="overlay"], [class*="caption"], figure) *) {
   color: inherit !important;
   -webkit-text-fill-color: currentColor !important;

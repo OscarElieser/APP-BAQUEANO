@@ -3110,3 +3110,21 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
   - mi-negocio: formulario por pasos (indicador legible, textarea, roles de botón) + voseo en 24 textos; "Enviar Solicitud a Firestore" → "Enviar mi solicitud". Notas de campo manuscritas unificadas y en flujo normal en celular.
 - **Auditoría responsive:** 224/224 combinaciones (28 páginas × 8 anchos) sin desborde, errores JS ni imágenes rotas visibles.
 - **Siguiente:** pruebas funcionales (SOS, BAQUI, idioma, búsqueda, filtros, mapa, formularios, favoritos, departamentos/destinos por parámetro), modo oscuro del selector de temas, re-auditoría final.
+
+## 2026-10-03 — Consulta: Activación e implementación de Firebase Cloud Functions
+
+- 🎯 **POR QUÉ:** El usuario consulta cómo activar Firebase Cloud Functions en Google Firebase ("Esperando tu primera implementación" en la consola de Firebase del proyecto `app baqueano Prod`).
+- ⚙️ **CÓMO:** Explicar con precisión técnica los requisitos (Plan Blaze obligatorio de pago por consumo de Google Cloud, inicialización de Firebase CLI `firebase init functions`, creación de funciones en TypeScript/JavaScript y despliegue `firebase deploy --only functions`), contextualizado con la arquitectura actual de BAQUEANO (Supabase como DB principal, Firebase Auth y Hosting).
+- **Ejecución y Diagnóstico de Error:**
+  - El usuario ejecutó `npx firebase-tools deploy --only functions`.
+  - Fallo `HTTP 400`: `Billing account for project '578585227888' is not open. Billing must be enabled for activation of service(s) 'artifactregistry.googleapis.com' to proceed.`
+  - Causa raíz: Google Cloud / Firebase Functions v2 requiere una cuenta de facturación activa vinculada (Plan Blaze / Facturación de Google Cloud habilitada).
+- **Resolución técnica:** Guiar al usuario paso a paso para vincular o reactivar la cuenta de facturación (Cloud Billing) en la consola de Google Cloud / Firebase y reintentar el despliegue.
+- **Estado:** En proceso de resolución.
+- **Avance D3-3 (2026-10-03):**
+  - Pruebas funcionales (Playwright, publicado vs actual): menú móvil, SOS, BAQUI desde barra, idioma EN, filtros de destinos, mapa (10 marcadores vectoriales), departamento por parámetro, validación Mi Negocio, Google en perfil, favoritos, denuncias, historia, música, chat BAQUI → **sin regresiones** (mismos resultados en ambas versiones; las 4 "fallas" iniciales eran condiciones de prueba: el SOS global es `#bqSosModal`, el menú usa `mobile-open`, el buscador abre `bq-search-overlay`).
+  - `headings-system.css`: h2 hereda color; escala hasta 2.35rem.
+  - Modo oscuro del selector de temas (opcional): 517 → 76 textos < 3:1 con "lienzo noche + tarjetas de papel" (sistema §25). Modo claro (predeterminado): 0.
+  - `css/headings-system.css`, `css/theme-switcher.css`, `js/theme-switcher.js` modificados sin quitar funciones.
+- **Pendiente D3:** 76 casos en modo oscuro opcional; optimización de imágenes (WebP/AVIF, 1.2 GB en assets); traducción de textos nuevos/humanizados a EN/FR/IT/PT/DE; Ops Center (36 `<h1>`, tema propio); pruebas en Firefox/WebKit; revisión visual página a página de secciones interiores.
+- **Cierre de sesión D3 (2026-10-03):** auditoría final 224/224 sin problemas; funcional 14/15 (el buscador abre su panel interno al pulsar el botón; la prueba con Enter es la única diferencia de método); contraste modo claro 0, modo oscuro 76 (publicado b8469aef: 177 y 571; cifras previas 144/517 estaban contaminadas porque el servidor "antes" leía HEAD y el propietario commiteó 0b0b6296 a las 12:27). Galería antes/después de 28 páginas: https://claude.ai/code/artifact/e84a9aa7-f9bd-4180-9f36-931bd45dbe02 . Cambios SIN commitear (el propietario decide el commit).
