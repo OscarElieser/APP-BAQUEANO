@@ -681,7 +681,11 @@ export type LocaleCode =
   | "es-SV"
   | "es-PA"
   | "es"
-  | "en";
+  | "en"
+  | "fr"
+  | "it"
+  | "pt"
+  | "de";
 
 export interface TerritorialStructureConfig {
   readonly level1Label: string; // e.g., "Departamento / Región Autónoma", "Provincia", "Distrito"

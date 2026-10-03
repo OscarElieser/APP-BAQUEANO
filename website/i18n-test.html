@@ -1,0 +1,31 @@
+<!doctype html>
+<!--
+  🎯 POR QUÉ: Demostrar que una página pública nueva hereda i18n desde el shell global sin importar directamente el motor.
+  ⚙️ CÓMO: Carga únicamente global-injector.js y usa claves semánticas tanto en HTML como en contenido creado por JavaScript.
+  📦 QUÉ: Fixture estable para probar seis idiomas, atributos, contenido dinámico y persistencia entre rutas.
+-->
+<html lang="es-NI">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BAQUEANO · I18N Test</title>
+</head>
+<body>
+  <main id="main-content">
+    <h1 data-i18n="nav.home">Inicio</h1>
+    <label for="i18nSearch" data-i18n="actions.search">Buscar</label>
+    <input id="i18nSearch" data-i18n-placeholder="baqui.placeholder" placeholder="Preguntá por destinos, rutas o experiencias…">
+    <button type="button" data-i18n="actions.continue">Continuar</button>
+    <div id="i18nDynamic" aria-live="polite"></div>
+  </main>
+  <script src="js/global-injector.js"></script>
+  <script>
+    window.addEventListener('baqueano:languageChanged', renderI18nFixture);
+    function renderI18nFixture() {
+      var target = document.getElementById('i18nDynamic');
+      if (target && window.BaqueanoLanguage) target.textContent = window.BaqueanoLanguage.t('status.loading');
+    }
+    window.addEventListener('load', renderI18nFixture, { once: true });
+  </script>
+</body>
+</html>

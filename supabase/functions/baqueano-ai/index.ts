@@ -27,6 +27,7 @@
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "@supabase/supabase-js";
+import { BaqueanoKnowledgeService } from "../_shared/baqueano-knowledge.ts";
 
 const BCN_RATE = 36.6243;
 const GROUNDED_MODEL = "gemini-3.5-flash-lite";
@@ -299,13 +300,29 @@ function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" 
   return "tourism";
 }
 
-async function buildGroundedTourismAnswer(prompt: string, history: unknown) {
+function internalKnowledgeAnswer(records: Array<{title: string; entityType: string}>, language: string): string {
+  const titles = [...new Set(records.map((record) => record.title).filter(Boolean))].slice(0, 8).join(", ");
+  const messages: Record<string, string> = {
+    es: `Según la información interna de BAQUEANO, encontré: ${titles}. Puedo ayudarte a convertir estos datos en una ruta o ampliar una categoría específica.`,
+    en: `According to BAQUEANO's internal information, I found: ${titles}. I can turn these results into a route or explore a specific category.`,
+    fr: `Selon les informations internes de BAQUEANO, j'ai trouvé : ${titles}. Je peux créer un itinéraire ou approfondir une catégorie.`,
+    it: `Secondo le informazioni interne di BAQUEANO, ho trovato: ${titles}. Posso creare un itinerario o approfondire una categoria.`,
+    pt: `Segundo as informações internas do BAQUEANO, encontrei: ${titles}. Posso criar uma rota ou explorar uma categoria.`,
+    de: `Laut den internen Informationen von BAQUEANO habe ich Folgendes gefunden: ${titles}. Ich kann daraus eine Route erstellen oder eine Kategorie vertiefen.`
+  };
+  return messages[language] || messages.es;
+}
+
+async function buildGroundedTourismAnswer(prompt: string, history: unknown, internalContext: unknown, language: string, countryCode: string) {
   const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
     .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
   if (!apiKeys.length) return {message: null, sources: [], status: "missing_secret"};
   const recentHistory = Array.isArray(history) ? history.slice(-8).map((item: Record<string, unknown>) => `${String(item.role || "user")}: ${String(item.content || "").slice(0, 500)}`).join("\n") : "";
-  const instruction = `Sos Baqüi, asistente autónomo, interactivo y respetuoso dedicado exclusivamente al turismo integral de Nicaragua.
-Respondé en español natural y cordial. Conservá el contexto. Ayudá con destinos, cultura, gastronomía, naturaleza, transporte, clima, seguridad, accesibilidad, presupuesto y turismo comunitario.
+  const languageNames: Record<string, string> = {es: "español nicaragüense", en: "inglés turístico claro", fr: "francés natural", it: "italiano cercano", pt: "portugués natural", de: "alemán claro"};
+  const instruction = `Sos Baqüi, agente autónomo y responsable especializado en turismo integral del país ${countryCode}.
+Respondé en ${languageNames[language] || languageNames.es}. Conservá nombres culturales originales y el contexto. Ayudá con destinos, cultura, gastronomía, naturaleza, transporte, clima, seguridad, accesibilidad, presupuesto y turismo comunitario.
+Información interna BAQUEANO recuperada primero: ${JSON.stringify(internalContext).slice(0, 8000)}.
+La información interna válida prevalece. Usa fuentes externas solamente para completar vacíos o datos operativos/actuales y cita su procedencia.
 Consulta y prioriza mediante URL Context: ${TRUSTED_SOURCE_URLS.join(" ")}.
 No inventes precios, teléfonos, horarios, disponibilidad ni hechos. Si el usuario pregunta algo ajeno al turismo de Nicaragua, explicá amablemente tu especialidad y ofrecé una alternativa turística relacionada.
 No construyas un itinerario salvo que el usuario lo solicite. Para emergencias recomendá confirmar con autoridades oficiales.
@@ -356,22 +373,36 @@ Deno.serve(async (req: Request) => {
     const budgetNio = Number(body.budgetNio) || (daysRequested * groupSize * 2000);
     const budgetUsd = Number(body.budgetUsd) || Number((budgetNio / BCN_RATE).toFixed(2));
     const userUid = body.userUid ? String(body.userUid) : null;
+    const countryCode = String(body.countryCode || "NI").toUpperCase().slice(0, 2);
+    const requestedLanguage = String(body.currentLanguage || body.preferredLanguage || "es").toLowerCase().split("-")[0];
+    const currentLanguage = ["es", "en", "fr", "it", "pt", "de"].includes(requestedLanguage) ? requestedLanguage : "es";
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const supabase = supabaseUrl && serviceKey ? createClient(supabaseUrl, serviceKey) : null;
+    const internalKnowledge = supabase ? await new BaqueanoKnowledgeService(supabase).search(prompt) : [];
+    const internalSufficient = internalKnowledge.length > 0 && new BaqueanoKnowledgeService(supabase!).isSufficient(internalKnowledge);
 
     const intent = conversationIntent(prompt);
     if (intent !== "planning") {
-      const localMessages: Record<string, string> = {
-        greeting: "¡Hola! Soy Baqüi, tu asistente de turismo de Nicaragua. Puedo ayudarte a descubrir destinos, cultura, gastronomía, naturaleza, rutas, seguridad y opciones según tus días, viajeros y presupuesto. ¿Qué te gustaría conocer?",
-        farewell: "¡Hasta pronto! Ha sido un gusto acompañarte. Cuando regresés, conservaré el contexto de esta conversación para seguir preparando tu experiencia por Nicaragua.",
-        thanks: "¡Con mucho gusto! Estoy aquí para seguir ayudándote a conocer Nicaragua de manera responsable, informada y conectada con sus comunidades.",
-        help: "Puedo conversar sobre cualquier aspecto turístico de Nicaragua: destinos, departamentos, cultura, comida, naturaleza, clima, transporte, accesibilidad, seguridad y presupuestos. También puedo crear un itinerario cuando me indiqués destino, días y viajeros."
+      const localizedMessages: Record<string, Record<string, string>> = {
+        es: {greeting: "¡Hola! Soy Baqüi, tu agente turístico de Nicaragua. ¿Qué te gustaría conocer?", farewell: "¡Hasta pronto! Conservaré el contexto autorizado de tu viaje.", thanks: "¡Con gusto! Puedo seguir ayudándote con información turística trazable.", help: "Puedo buscar en BAQUEANO, planificar rutas y consultar fuentes externas confiables solo cuando falte información."},
+        en: {greeting: "Hi! I'm Baqüi, your Nicaragua travel agent. What would you like to discover?", farewell: "See you soon! I'll retain the authorized context of your trip.", thanks: "You're welcome! I can keep helping with traceable travel information.", help: "I can search BAQUEANO, plan routes, and consult reliable external sources only when information is missing."},
+        fr: {greeting: "Bonjour ! Je suis Baqüi, votre agent touristique au Nicaragua. Que souhaitez-vous découvrir ?", farewell: "À bientôt ! Je conserverai le contexte autorisé de votre voyage.", thanks: "Avec plaisir ! Je peux continuer avec des informations touristiques traçables.", help: "Je peux consulter BAQUEANO, planifier des itinéraires et utiliser des sources externes fiables seulement si nécessaire."},
+        it: {greeting: "Ciao! Sono Baqüi, il tuo agente turistico per il Nicaragua. Cosa vuoi scoprire?", farewell: "A presto! Conserverò il contesto autorizzato del viaggio.", thanks: "Con piacere! Posso continuare con informazioni turistiche tracciabili.", help: "Posso consultare BAQUEANO, pianificare itinerari e usare fonti esterne affidabili solo quando serve."},
+        pt: {greeting: "Olá! Sou Baqüi, seu agente de turismo na Nicarágua. O que você quer descobrir?", farewell: "Até logo! Vou manter o contexto autorizado da sua viagem.", thanks: "Com prazer! Posso continuar com informações turísticas rastreáveis.", help: "Posso consultar o BAQUEANO, planejar rotas e usar fontes externas confiáveis somente quando necessário."},
+        de: {greeting: "Hallo! Ich bin Baqüi, Ihr Reiseagent für Nicaragua. Was möchten Sie entdecken?", farewell: "Bis bald! Ich behalte den freigegebenen Reisekontext.", thanks: "Gern! Ich helfe weiter mit nachvollziehbaren Reiseinformationen.", help: "Ich kann BAQUEANO durchsuchen, Routen planen und externe Quellen nur bei fehlenden Informationen nutzen."}
       };
-      const groundedAnswer = localMessages[intent] ? null : await buildGroundedTourismAnswer(prompt, body.history);
-      const message = localMessages[intent] || groundedAnswer?.message || "No pude verificar esa información en este momento. Puedo seguir ayudándote con turismo de Nicaragua sin inventar datos.";
+      const localMessages = localizedMessages[currentLanguage] || localizedMessages.es;
+      const internalAnswer = intent === "tourism" && internalSufficient ? internalKnowledgeAnswer(internalKnowledge, currentLanguage) : null;
+      const groundedAnswer = localMessages[intent] || internalAnswer ? null : await buildGroundedTourismAnswer(prompt, body.history, internalKnowledge, currentLanguage, countryCode);
+      const message = localMessages[intent] || internalAnswer || groundedAnswer?.message || "Todavía no tengo ese dato verificado.";
       return new Response(JSON.stringify({
         success: true, ok: true, type: "conversation", intent, message,
         provider: localMessages[intent] ? "baqueano-conversation" : "baqueano-supabase-grounded-web",
         groundingStatus: groundedAnswer?.status || "not_required",
-        sources: groundedAnswer?.sources || [],
+        sources: [...internalKnowledge.map((item) => ({id: item.entityId, label: item.title, type: "baqueano", entityType: item.entityType})), ...(groundedAnswer?.sources || [])],
+        sourcePolicy: {internalFirst: true, internalSufficient, externalUsed: Boolean(groundedAnswer?.sources?.length)},
+        countryCode, currentLanguage,
         actions: intent === "greeting" || intent === "help" ? [{type: "build_itinerary", label: "Abrir planificador completo"}] : []
       }, null, 2), {status: 200, headers: CORS_HEADERS});
     }
@@ -424,13 +455,12 @@ Deno.serve(async (req: Request) => {
 
     // Persistir de forma garantizada en Supabase PostgreSQL (travel_plans)
     let planId: string | null = null;
-    const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SUPABASE_ANON_KEY");
+    const supabaseKey = serviceKey || Deno.env.get("SUPABASE_ANON_KEY");
 
     if (supabaseUrl && supabaseKey) {
       try {
-        const supabase = createClient(supabaseUrl, supabaseKey);
-        const { data, error } = await supabase
+        const persistenceClient = createClient(supabaseUrl, supabaseKey);
+        const { data, error } = await persistenceClient
           .from("travel_plans")
           .insert({
             user_uid: userUid,
@@ -459,6 +489,9 @@ Deno.serve(async (req: Request) => {
           success: true,
           ok: true,
           provider,
+          sourcePolicy: {internalFirst: true, internalRecords: internalKnowledge.length, externalUsed: Boolean(grounded)},
+          countryCode,
+          currentLanguage,
           groundingStatus: groundingResult.status,
           planId: planId,
           itinerary: generatedItinerary

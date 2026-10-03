@@ -1,47 +1,352 @@
 // ============================================================================
-// BAQUEANO — CONFIGURACIÓN BILINGÜE GLOBAL ES / EN
+// BAQUEANO — MOTOR GLOBAL DE INTERNACIONALIZACIÓN
 // ============================================================================
-// 🎯 POR QUÉ: permitir que toda la plataforma sea comprendida en español e inglés.
-// ⚙️ CÓMO: traduce nodos visibles, atributos y contenido dinámico; conserva siempre
-//    el original y guarda la preferencia local durante toda la navegación.
-// 📦 QUÉ: selector accesible ES/EN, motor reversible y observador de interfaz dinámica.
+// 🎯 POR QUÉ: una navegación parcialmente traducida rompe la confianza y deja
+//    fuera de contexto a la interfaz, el contenido dinámico y BAQÜI.
+// ⚙️ CÓMO: usa catálogos JSON versionados, español de Nicaragua como fallback,
+//    atributos semánticos, compatibilidad con textos heredados y un único evento.
+// 📦 QUÉ: API `BaqueanoLanguage`, selector accesible, Intl, SEO y traducción de
+//    nodos añadidos después del primer render sin insertar HTML del catálogo.
 // ============================================================================
-(function () {
+(function initializeBaqueanoI18n(window, document) {
   'use strict';
-  var STORAGE_KEY='baqueano_language_v1', current=localStorage.getItem(STORAGE_KEY)==='en'?'en':'es', applying=false;
-  var originals=new WeakMap(), attributeOriginals=new WeakMap();
-  var exact={
-    'Inicio':'Home','Explorar':'Explore','Cultura':'Culture','Baqueano IA':'Baqueano AI','Mi Viaje':'My Trip','Más':'More',
-    'Departamentos':'Departments','Destinos':'Destinations','Mapa':'Map','Experiencias':'Experiences','Historia':'History','Gastronomía':'Cuisine','Música':'Music','Ambiental':'Environment',
-    'Comunidad':'Community','Aliados':'Partners','Mi Negocio':'My Business','Denuncia':'Report','Cuenta y Plataforma':'Account and Platform','Perfil':'Profile','Reservas':'Bookings','Favoritos':'Favorites','Ayuda':'Help','Nosotros':'About Us','Términos':'Terms','Privacidad':'Privacy','Cookies':'Cookies',
-    'Iniciar sesión':'Sign in','Cerrar sesión':'Sign out','Cambiar idioma':'Change language','Español':'Spanish','Inglés':'English','Buscar':'Search','Cerrar':'Close','Volver':'Back','Continuar':'Continue','Guardar':'Save','Cancelar':'Cancel','Aceptar':'Accept','Enviar':'Send','Ver más':'See more','Leer más':'Read more','Conocer más':'Learn more',
-    'Planificar mi viaje':'Plan my trip','Mis favoritos':'My favorites','Mis reservas':'My bookings','Registrar negocio':'Register a business','Reportar incidencia':'Report an incident','Cuenta y acceso':'Account and access',
-    '¿Cómo podemos ayudarte?':'How can we help you?','Estamos para orientarte':'We are here to guide you','Preguntas frecuentes':'Frequently asked questions','Respuestas rápidas':'Quick answers','Accesos directos':'Quick access','Resolvé lo que necesitás':'Get what you need done','¿Necesitás más ayuda?':'Need more help?','Hablemos con vos':'Let’s talk',
-    'Abrir Centro SOS':'Open SOS Center','Centro SOS y Auxilio':'SOS and Assistance Center','Asistencia en ruta':'Roadside assistance','¿Tenés una emergencia?':'Do you have an emergency?','Policía':'Police','Bomberos':'Fire Department','Emergencias':'Emergencies',
-    'Descubre lo que no sale en el mapa':'Discover what maps do not show','Nicaragua auténtica':'Authentic Nicaragua','Todos los derechos reservados.':'All rights reserved.','Hecho con':'Made with','en Nicaragua':'in Nicaragua',
-    'Anterior':'Previous','Siguiente':'Next','Reproducir':'Play','Pausar':'Pause','Aleatorio':'Shuffle','Repetir':'Repeat','Lista de reproducción':'Playlist','Abrir archivo sonoro':'Open sound archive','Canción anterior':'Previous song','Siguiente canción':'Next song','Posición de la canción':'Song position',
-    'Cargando...':'Loading...','No hay resultados':'No results','Sin resultados':'No results','Ver detalles':'View details','Compartir':'Share','Copiar':'Copy','Ubicación':'Location','Clima':'Weather','Hoy':'Today','Mañana':'Tomorrow','Abierto':'Open','Cerrado':'Closed','Gratis':'Free','Desde':'From','Por persona':'Per person'
-  };
-  var phrases=[
-    ['¿Cómo','How'],['¿Dónde','Where'],['¿Qué','What'],['¿Por qué','Why'],['Encontrá','Find'],['Descubrí','Discover'],['Explorá','Explore'],['Consultá','Check'],['Organizá','Organize'],['Conocé','Discover'],['Guardá','Save'],['Elegí','Choose'],['Entrá','Go to'],['Visitá','Visit'],['Usá','Use'],['Completá','Complete'],['Contanos','Tell us'],
-    ['Nicaragua','Nicaragua'],['nicaragüense','Nicaraguan'],['nicaragüenses','Nicaraguan'],['territorios','territories'],['territorio','territory'],['departamento','department'],['departamentos','departments'],['destinos','destinations'],['destino','destination'],['viajes','trips'],['viaje','trip'],['ruta','route'],['rutas','routes'],['cuenta','account'],['seguridad','safety'],['negocio','business'],['negocios','businesses'],['reserva','booking'],['reservas','bookings'],['favoritos','favorites'],['favorito','favorite'],['experiencias','experiences'],['experiencia','experience'],['información','information'],['ayuda','help'],['pregunta','question'],['preguntas','questions'],['respuesta','answer'],['respuestas','answers'],['contacto','contact'],['emergencia','emergency'],['emergencias','emergencies'],['ubicación','location'],['mapa','map'],['clima','weather'],['música','music'],['historia','history'],['comunidad','community'],['naturaleza','nature'],['cultura','culture'],['comida','food'],['perfil','profile'],['datos','data'],['usuario','user'],['contraseña','password'],
-    ['Guardar','Save'],['guardado','saved'],['guardados','saved'],['Buscar','Search'],['buscá','search'],['Ver','View'],['Abrir','Open'],['Cerrar','Close'],['Enviar','Send'],['Seleccionar','Select'],['seleccionado','selected'],['Agregar','Add'],['Eliminar','Delete'],['Modificar','Edit'],['Confirmar','Confirm'],['Compartir','Share'],['Descargar','Download'],['Registrar','Register'],['Reportar','Report'],['Planificar','Plan'],['Crear','Create'],['Consultar','Check'],['administrar','manage'],
-    ['el','the'],['la','the'],['los','the'],['las','the'],['un','a'],['una','a'],['y','and'],['o','or'],['con','with'],['sin','without'],['para','for'],['por','by'],['desde','from'],['hasta','to'],['en','in'],['de','of'],['del','of the'],['al','to the'],['tu','your'],['tus','your'],['mi','my'],['mis','my'],['nuestro','our'],['nuestra','our'],['nuestros','our'],['esta','this'],['este','this'],['estas','these'],['estos','these'],['más','more'],['cada','each'],['todo','all'],['toda','all'],['todos','all'],['todas','all'],['aquí','here'],['ahora','now'],['también','also'],['disponible','available'],['real','real'],['rápido','quick'],['rápida','quick'],['nacional','national'],['personal','personal']
-  ];
-  function preserveCase(source,replacement){if(source===source.toUpperCase()&&source.length>1)return replacement.toUpperCase();if(source[0]===source[0].toUpperCase())return replacement.charAt(0).toUpperCase()+replacement.slice(1);return replacement;}
-  function translate(value){var lead=(value.match(/^\s*/)||[''])[0],tail=(value.match(/\s*$/)||[''])[0],text=value.trim();if(!text)return value;if(exact[text])return lead+exact[text]+tail;var output=text;phrases.forEach(function(pair){var escaped=pair[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&');output=output.replace(new RegExp('(^|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])('+escaped+')(?=$|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])','gi'),function(_,before,word){return before+preserveCase(word,pair[1]);});});return lead+output+tail;}
-  function eligible(node){var parent=node.parentElement;if(!parent)return false;if(parent.closest('script,style,noscript,code,pre,textarea,[data-no-translate],.notranslate'))return false;return /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ¿¡]/.test(node.nodeValue||'');}
-  function translateText(node){if(!originals.has(node))originals.set(node,node.nodeValue);var source=originals.get(node);node.nodeValue=current==='en'?translate(source):source;}
-  function translateAttributes(element){var names=['placeholder','title','aria-label','alt'];var stored=attributeOriginals.get(element)||{};names.forEach(function(name){if(element.hasAttribute(name)&&!stored[name])stored[name]=element.getAttribute(name);if(stored[name])element.setAttribute(name,current==='en'?translate(stored[name]):stored[name]);});attributeOriginals.set(element,stored);}
-  function apply(root){if(applying)return;applying=true;document.documentElement.lang=current;var walker=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT);var nodes=[];while(walker.nextNode())if(eligible(walker.currentNode))nodes.push(walker.currentNode);nodes.forEach(translateText);if((root||document).querySelectorAll)(root||document).querySelectorAll('*').forEach(translateAttributes);applying=false;updateButtons();}
-  function updateButtons(){document.querySelectorAll('.global-language,.navbar-lang-pill').forEach(function(button){var span=button.querySelector('span');if(span)span.textContent=current.toUpperCase();button.setAttribute('aria-label',current==='en'?'Change language':'Cambiar idioma');button.setAttribute('aria-expanded','false');});}
-  function closeMenus(){document.querySelectorAll('.bq-language-menu').forEach(function(menu){menu.remove();});}
-  function select(language){current=language;localStorage.setItem(STORAGE_KEY,current);closeMenus();apply(document.body);window.dispatchEvent(new CustomEvent('baqueano:language',{detail:{language:current}}));}
-  function openMenu(button){closeMenus();var rect=button.getBoundingClientRect(),menu=document.createElement('div');menu.className='bq-language-menu';menu.setAttribute('role','menu');menu.innerHTML='<button type="button" data-lang="es" role="menuitem"><strong>ES</strong><span>Español</span><i class="fa-solid fa-check"></i></button><button type="button" data-lang="en" role="menuitem"><strong>EN</strong><span>English</span><i class="fa-solid fa-check"></i></button>';document.body.appendChild(menu);menu.style.top=(rect.bottom+8)+'px';menu.style.right=Math.max(10,innerWidth-rect.right)+'px';menu.querySelectorAll('button').forEach(function(item){item.classList.toggle('is-active',item.dataset.lang===current);item.addEventListener('click',function(){select(item.dataset.lang);});});button.setAttribute('aria-expanded','true');}
-  function bindButtons(){document.querySelectorAll('.global-language,.navbar-lang-pill').forEach(function(button){if(button.dataset.languageReady)return;button.dataset.languageReady='true';button.setAttribute('aria-haspopup','menu');button.addEventListener('click',function(event){event.stopPropagation();openMenu(button);});});updateButtons();}
-  var style=document.createElement('style');style.textContent='.bq-language-menu{position:fixed;z-index:2147483000;width:190px;padding:7px;background:#fff;border:1px solid #DCE6E9;border-radius:14px;box-shadow:0 18px 45px rgba(15,23,42,.22);font-family:Inter,system-ui,sans-serif}.bq-language-menu button{width:100%;display:grid;grid-template-columns:35px 1fr auto;align-items:center;gap:8px;padding:10px;border:0;border-radius:9px;background:transparent;color:#0F172A;text-align:left;cursor:pointer}.bq-language-menu button:hover,.bq-language-menu button.is-active{background:#EEF6F7}.bq-language-menu strong{color:#165D6F}.bq-language-menu span{font-weight:700}.bq-language-menu i{display:none;color:#F65E01}.bq-language-menu button.is-active i{display:block}@media(max-width:960px){#mainNavbar .global-language,#mainNavbar .navbar-lang-pill{display:inline-flex!important}}';document.head.appendChild(style);
-  document.addEventListener('click',closeMenus);document.addEventListener('keydown',function(event){if(event.key==='Escape')closeMenus();});
-  function init(){bindButtons();apply(document.body);var observer=new MutationObserver(function(records){if(applying)return;records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===1){bindButtons();apply(node);}else if(node.nodeType===3&&eligible(node))translateText(node);});});});observer.observe(document.body,{childList:true,subtree:true});}
-  window.BaqueanoLanguage={get:function(){return current;},set:select,translate:translate};
-  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
-}());
+
+  if (window.__BAQUEANO_I18N_LOADED__) return;
+  window.__BAQUEANO_I18N_LOADED__ = true;
+
+  var SUPPORTED = Object.freeze(['es', 'en', 'fr', 'it', 'pt', 'de']);
+  var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE' });
+  var STORAGE_KEY = 'baqueano_language_v2';
+  var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
+  var VERSION = '2026.10.01';
+  var cache = new Map();
+  var semanticFallbackKeys = new Map();
+  var originals = new WeakMap();
+  var attributeOriginals = new WeakMap();
+  var applying = false;
+  var scheduled = false;
+  var mutationRoots = new Set();
+
+  var legacyKeys = Object.freeze({
+    'Inicio': 'nav.home', 'Explorar': 'nav.explore', 'Destinos': 'nav.destinations', 'Mapa': 'nav.map',
+    'Experiencias': 'nav.experiences', 'Cultura': 'nav.culture', 'Historia': 'nav.history',
+    'Gastronomía': 'nav.gastronomy', 'Música': 'nav.music', 'Mi Viaje': 'nav.trip', 'Más': 'nav.more',
+    'Buscar': 'actions.search', 'Cerrar': 'actions.close', 'Volver': 'actions.back', 'Continuar': 'actions.continue',
+    'Guardar': 'actions.save', 'Cancelar': 'actions.cancel', 'Aceptar': 'actions.accept', 'Enviar': 'actions.send',
+    'Ver más': 'actions.viewMore', 'Leer más': 'actions.readMore', 'Ver detalles': 'actions.details',
+    'Compartir': 'actions.share', 'Cargando...': 'status.loading', 'No hay resultados': 'status.empty',
+    'Sin resultados': 'status.empty', 'Todos los derechos reservados.': 'footer.rights',
+    'Cambiar idioma': 'language.change', 'Preguntá por destinos, rutas o experiencias…': 'baqui.placeholder',
+    'Escribe tu consulta': 'baqui.inputLabel', 'Escribí tu consulta': 'baqui.inputLabel', 'Limpiar': 'baqui.clear',
+    'Detener': 'baqui.stop', 'Escuchar': 'baqui.listen', 'Abrir panel': 'baqui.openPanel', 'Ahora no': 'baqui.later'
+  });
+
+  function normalizeLanguage(value) {
+    var code = String(value || '').trim().toLowerCase().split(/[-_]/)[0];
+    return SUPPORTED.includes(code) ? code : 'es';
+  }
+
+  function initialLanguage() {
+    var stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) {
+      LEGACY_STORAGE_KEYS.some(function findLegacy(key) {
+        stored = localStorage.getItem(key);
+        return Boolean(stored);
+      });
+    }
+    return stored ? normalizeLanguage(stored) : normalizeLanguage(navigator.language);
+  }
+
+  var currentLanguage = initialLanguage();
+  var activeCatalog = null;
+  var fallbackCatalog = null;
+
+  function getPath(source, path) {
+    return String(path || '').split('.').reduce(function readPath(value, segment) {
+      return value && Object.prototype.hasOwnProperty.call(value, segment) ? value[segment] : undefined;
+    }, source);
+  }
+
+  function indexCanonicalPhrases(source, prefix) {
+    Object.keys(source || {}).forEach(function indexValue(segment) {
+      var key = prefix ? prefix + '.' + segment : segment;
+      var value = source[segment];
+      if (value && typeof value === 'object' && !Array.isArray(value)) indexCanonicalPhrases(value, key);
+      else if (typeof value === 'string' && value.trim() && !semanticFallbackKeys.has(value.trim())) semanticFallbackKeys.set(value.trim(), key);
+    });
+  }
+
+  async function loadCatalog(language) {
+    var safeLanguage = normalizeLanguage(language);
+    if (cache.has(safeLanguage)) return cache.get(safeLanguage);
+    var request = fetch('locales/' + safeLanguage + '.json?v=' + VERSION, { credentials: 'same-origin', cache: 'force-cache' })
+      .then(function parse(response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      });
+    cache.set(safeLanguage, request);
+    try {
+      return await request;
+    } catch (error) {
+      cache.delete(safeLanguage);
+      if (safeLanguage !== 'es') return loadCatalog('es');
+      console.error('[i18n] No se pudo cargar el catálogo base.', error);
+      return {};
+    }
+  }
+
+  function translate(key, options) {
+    var settings = options || {};
+    var value = getPath(activeCatalog, key);
+    if (typeof value !== 'string' || !value.trim()) value = getPath(fallbackCatalog, key);
+    if (typeof value !== 'string' || !value.trim()) {
+      if (settings.fallback != null) return String(settings.fallback);
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') console.warn('[i18n] Missing key:', key, currentLanguage);
+      return '';
+    }
+    return value.replace(/\{(\w+)\}/g, function replaceToken(_, token) {
+      return settings[token] == null ? '{' + token + '}' : String(settings[token]);
+    });
+  }
+
+  function translateLegacy(value) {
+    var leading = (String(value).match(/^\s*/) || [''])[0];
+    var trailing = (String(value).match(/\s*$/) || [''])[0];
+    var source = String(value).trim();
+    var key = legacyKeys[source] || semanticFallbackKeys.get(source);
+    if (!key || currentLanguage === 'es') return value;
+    var translated = translate(key, { fallback: source });
+    return leading + translated + trailing;
+  }
+
+  function eligibleText(node) {
+    var parent = node.parentElement;
+    if (!parent || !String(node.nodeValue || '').trim()) return false;
+    return !parent.closest('script,style,noscript,code,pre,textarea,[data-no-translate],.notranslate,[data-i18n]');
+  }
+
+  function applyTextNode(node) {
+    if (!originals.has(node)) originals.set(node, node.nodeValue);
+    var value = translateLegacy(originals.get(node));
+    if (node.nodeValue !== value) node.nodeValue = value;
+  }
+
+  function applyAttribute(element, attribute, dataAttribute) {
+    var key = element.getAttribute(dataAttribute);
+    if (!key) return;
+    var fallback = element.getAttribute(attribute) || '';
+    var value = translate(key, { fallback: fallback });
+    if (value && element.getAttribute(attribute) !== value) element.setAttribute(attribute, value);
+  }
+
+  function applyElement(element) {
+    if (element.hasAttribute('data-i18n')) {
+      var key = element.getAttribute('data-i18n');
+      var fallback = element.textContent;
+      var value = translate(key, { fallback: fallback });
+      if (value && element.textContent !== value) element.textContent = value;
+    }
+    applyAttribute(element, 'placeholder', 'data-i18n-placeholder');
+    applyAttribute(element, 'title', 'data-i18n-title');
+    applyAttribute(element, 'aria-label', 'data-i18n-aria-label');
+    applyAttribute(element, 'alt', 'data-i18n-alt');
+
+    var stored = attributeOriginals.get(element) || {};
+    ['placeholder', 'title', 'aria-label', 'alt'].forEach(function translateLegacyAttribute(name) {
+      if (element.hasAttribute('data-i18n-' + name)) return;
+      if (element.hasAttribute(name) && stored[name] == null) stored[name] = element.getAttribute(name);
+      if (stored[name] != null) {
+        var translatedAttribute = translateLegacy(stored[name]);
+        if (element.getAttribute(name) !== translatedAttribute) element.setAttribute(name, translatedAttribute);
+      }
+    });
+    attributeOriginals.set(element, stored);
+  }
+
+  function updateMetadata() {
+    document.documentElement.lang = LOCALES[currentLanguage];
+    document.documentElement.dir = 'ltr';
+    var titleKey = document.documentElement.dataset.i18nTitle || document.body?.dataset.i18nTitle;
+    var descriptionKey = document.documentElement.dataset.i18nDescription || document.body?.dataset.i18nDescription;
+    if (titleKey) document.title = translate(titleKey, { fallback: document.title });
+    var description = document.querySelector('meta[name="description"]');
+    if (description && descriptionKey) description.content = translate(descriptionKey, { fallback: description.content });
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    var ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogTitle && titleKey) ogTitle.content = translate(titleKey, { fallback: ogTitle.content });
+    if (ogDescription && descriptionKey) ogDescription.content = translate(descriptionKey, { fallback: ogDescription.content });
+  }
+
+  function updateButtons() {
+    document.querySelectorAll('.global-language,.navbar-lang-pill').forEach(function updateButton(button) {
+      var label = button.querySelector('span');
+      if (label) label.textContent = currentLanguage.toUpperCase();
+      button.setAttribute('aria-label', translate('language.change', { fallback: 'Cambiar idioma' }));
+      button.setAttribute('aria-expanded', String(Boolean(document.querySelector('.bq-language-menu'))));
+    });
+  }
+
+  function applyTranslations(root) {
+    if (applying || !activeCatalog) return;
+    applying = true;
+    var scope = root && root.nodeType === 1 ? root : document.body;
+    if (scope) {
+      applyElement(scope);
+      scope.querySelectorAll('*').forEach(applyElement);
+      var walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) if (eligibleText(walker.currentNode)) applyTextNode(walker.currentNode);
+    }
+    updateMetadata();
+    updateButtons();
+    applying = false;
+  }
+
+  function closeMenu() {
+    var menu = document.querySelector('.bq-language-menu');
+    if (menu) menu.remove();
+    updateButtons();
+  }
+
+  function languageChangedDetail() {
+    return { lang: currentLanguage, language: currentLanguage, locale: LOCALES[currentLanguage] };
+  }
+
+  async function changeLanguage(language, options) {
+    var next = normalizeLanguage(language);
+    fallbackCatalog = fallbackCatalog || await loadCatalog('es');
+    if (!semanticFallbackKeys.size) indexCanonicalPhrases(fallbackCatalog, '');
+    activeCatalog = next === 'es' ? fallbackCatalog : await loadCatalog(next);
+    currentLanguage = next;
+    localStorage.setItem(STORAGE_KEY, currentLanguage);
+    LEGACY_STORAGE_KEYS.forEach(function removeLegacy(key) { localStorage.removeItem(key); });
+    closeMenu();
+    applyTranslations(document.body);
+    if (!options || !options.silent) {
+      var detail = languageChangedDetail();
+      window.dispatchEvent(new CustomEvent('baqueano:languageChanged', { detail: detail }));
+      window.dispatchEvent(new CustomEvent('baqueano:language', { detail: detail }));
+      window.dispatchEvent(new CustomEvent('baqueano', { detail: detail }));
+      window.dataLayer?.push({ event: 'language_changed', language: currentLanguage });
+    }
+    return currentLanguage;
+  }
+
+  function openMenu(button) {
+    closeMenu();
+    var menu = document.createElement('div');
+    menu.className = 'bq-language-menu';
+    menu.setAttribute('role', 'menu');
+    menu.setAttribute('aria-label', translate('language.change', { fallback: 'Cambiar idioma' }));
+    SUPPORTED.forEach(function addLanguage(language) {
+      var item = document.createElement('button');
+      item.type = 'button';
+      item.dataset.lang = language;
+      item.setAttribute('role', 'menuitemradio');
+      item.setAttribute('aria-checked', String(language === currentLanguage));
+      item.classList.toggle('is-active', language === currentLanguage);
+      var code = document.createElement('strong');
+      code.textContent = language.toUpperCase();
+      var name = document.createElement('span');
+      name.textContent = translate('language.' + language, { fallback: language.toUpperCase() });
+      var marker = document.createElement('i');
+      marker.className = 'fa-solid fa-check';
+      marker.setAttribute('aria-hidden', 'true');
+      item.append(code, name, marker);
+      item.addEventListener('click', function selectItem() { changeLanguage(language); });
+      menu.appendChild(item);
+    });
+    document.body.appendChild(menu);
+    var rect = button.getBoundingClientRect();
+    menu.style.top = Math.min(innerHeight - menu.offsetHeight - 10, rect.bottom + 8) + 'px';
+    menu.style.right = Math.max(10, innerWidth - rect.right) + 'px';
+    button.setAttribute('aria-expanded', 'true');
+    menu.querySelector('.is-active')?.focus();
+    menu.addEventListener('keydown', function navigate(event) {
+      var items = Array.from(menu.querySelectorAll('button'));
+      var index = items.indexOf(document.activeElement);
+      if (event.key === 'Escape') { closeMenu(); button.focus(); return; }
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      event.preventDefault();
+      items[(index + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].focus();
+    });
+  }
+
+  function bindButtons(root) {
+    (root || document).querySelectorAll('.global-language,.navbar-lang-pill').forEach(function bind(button) {
+      if (button.dataset.languageReady) return;
+      button.dataset.languageReady = 'true';
+      button.setAttribute('aria-haspopup', 'menu');
+      button.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', function toggle(event) {
+        event.stopPropagation();
+        document.querySelector('.bq-language-menu') ? closeMenu() : openMenu(button);
+      });
+    });
+  }
+
+  function installStyle() {
+    if (document.getElementById('baqueano-language-style')) return;
+    var style = document.createElement('style');
+    style.id = 'baqueano-language-style';
+    style.textContent = '.bq-language-menu{position:fixed;z-index:2147483000;width:min(220px,calc(100vw - 20px));max-height:min(420px,calc(100vh - 20px));overflow:auto;padding:7px;background:#fff;border:1px solid #DCE6E9;border-radius:14px;box-shadow:0 18px 45px rgba(15,23,42,.22);font-family:Inter,system-ui,sans-serif}.bq-language-menu button{width:100%;min-width:0;display:grid;grid-template-columns:35px minmax(0,1fr) auto;align-items:center;gap:8px;padding:10px;border:0;border-radius:9px;background:transparent;color:#0F172A;text-align:left;cursor:pointer}.bq-language-menu button:hover,.bq-language-menu button:focus-visible,.bq-language-menu button.is-active{background:#EEF6F7;outline:2px solid transparent}.bq-language-menu button:focus-visible{box-shadow:0 0 0 3px #F65E01}.bq-language-menu strong{color:#165D6F}.bq-language-menu span{font-weight:700;overflow-wrap:anywhere}.bq-language-menu i{visibility:hidden;color:#F65E01}.bq-language-menu button.is-active i{visibility:visible}@media(max-width:960px){#mainNavbar .global-language,#mainNavbar .navbar-lang-pill{display:inline-flex!important}}';
+    document.head.appendChild(style);
+  }
+
+  function scheduleApply(root) {
+    if (root && root.nodeType === 1) mutationRoots.add(root);
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(function applyMutationBatch() {
+      scheduled = false;
+      bindButtons(document);
+      var roots = Array.from(mutationRoots);
+      mutationRoots.clear();
+      if (!roots.length || roots.length > 40) applyTranslations(document.body);
+      else roots.forEach(function translateRoot(candidate) {
+        if (candidate.isConnected) applyTranslations(candidate);
+      });
+    });
+  }
+
+  async function init() {
+    installStyle();
+    bindButtons(document);
+    await changeLanguage(currentLanguage, { silent: true });
+    var observer = new MutationObserver(function observe(records) {
+      if (applying) return;
+      records.forEach(function collectMutations(record) {
+        if (record.type === 'characterData') {
+          if (eligibleText(record.target)) scheduleApply(record.target.parentElement);
+          return;
+        }
+        Array.from(record.addedNodes).forEach(function inspect(node) {
+          if (node.nodeType === 1) scheduleApply(node);
+          else if (node.nodeType === 3 && eligibleText(node)) scheduleApply(node.parentElement);
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+
+  document.addEventListener('click', function closeOnOutside(event) {
+    if (!event.target.closest('.bq-language-menu,.global-language,.navbar-lang-pill')) closeMenu();
+  });
+  document.addEventListener('keydown', function closeOnEscape(event) { if (event.key === 'Escape') closeMenu(); });
+
+  window.BaqueanoLanguage = Object.freeze({
+    get: function getLanguage() { return currentLanguage; },
+    getLocale: function getLocale() { return LOCALES[currentLanguage]; },
+    getSupported: function getSupported() { return SUPPORTED.slice(); },
+    set: changeLanguage,
+    t: translate,
+    translate: translateLegacy,
+    apply: applyTranslations,
+    translateElement: function translateElement(element) { applyTranslations(element); },
+    refresh: function refresh() { applyTranslations(document.body); },
+    formatDate: function formatDate(value, options) { return new Intl.DateTimeFormat(LOCALES[currentLanguage], options).format(new Date(value)); },
+    formatNumber: function formatNumber(value, options) { return new Intl.NumberFormat(LOCALES[currentLanguage], options).format(value); },
+    formatCurrency: function formatCurrency(value, currency) { return new Intl.NumberFormat(LOCALES[currentLanguage], { style: 'currency', currency: currency || 'NIO' }).format(value); }
+  });
+
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init, { once: true }) : init();
+}(window, document));

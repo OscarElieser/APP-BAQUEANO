@@ -22,7 +22,8 @@
   if (EXCLUDED.test(location.pathname.replace(/\/$/, ''))) return;
 
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
-  const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, minimized: false, lastSuggestion: 0 }, safeJson(sessionStorage.getItem(KEYS.session), {}));
+  const initialLanguage = window.BaqueanoLanguage?.get?.() || localStorage.getItem('baqueano_language_v2') || localStorage.getItem('baqueano_language_v1') || localStorage.getItem('baqueano_language') || 'es';
+  const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, minimized: false, lastSuggestion: 0, currentLanguage: initialLanguage, preferredLanguage: initialLanguage }, safeJson(sessionStorage.getItem(KEYS.session), {}));
   const preferences = Object.assign({ voice: false, edge: 'right', y: null, enabled: true, suggestions: true }, safeJson(localStorage.getItem(KEYS.preferences), {}));
   const state = { open: false, busy: false, minimized: false, dragging: false, character: 'idle', controller: null, recognition: null, timers: [], lastActivity: Date.now(), module: 'inicio', service: 'checking' };
   const saveSession = () => sessionStorage.setItem(KEYS.session, JSON.stringify(session));
@@ -125,7 +126,8 @@
       currentAudio: document.querySelector('.is-playing,[data-playing="true"]')?.dataset.title || null,
       currentFood: document.querySelector('[data-food].is-active,[data-dish].is-active')?.dataset.food || null,
       currentArticle: document.querySelector('article.is-active,[data-article].is-active')?.dataset.article || null,
-      activeFilters, recentPlaces: safeJson(sessionStorage.getItem('baqueano_recent_items'), []).slice(-5), filters: { active: activeFilters }, recentItems: safeJson(sessionStorage.getItem('baqueano_recent_items'), []).slice(-5), tripProfile: session.tripProfile
+      activeFilters, recentPlaces: safeJson(sessionStorage.getItem('baqueano_recent_items'), []).slice(-5), filters: { active: activeFilters }, recentItems: safeJson(sessionStorage.getItem('baqueano_recent_items'), []).slice(-5), tripProfile: session.tripProfile,
+      currentLanguage: session.currentLanguage, preferredLanguage: session.preferredLanguage
     };
   }
 
@@ -759,7 +761,7 @@ Puedo ayudarte con:
 
       let response;
       for (let attempt = 1; attempt <= CONFIG.requestAttempts; attempt += 1) {
-        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), context: context() }) });
+        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), countryCode: 'NI', currentLanguage: session.currentLanguage, preferredLanguage: session.preferredLanguage, context: context() }) });
         if (response.ok || response.status < 500) break;
         if (attempt < CONFIG.requestAttempts) await new Promise(resolve => setTimeout(resolve, 500 * (2 ** (attempt - 1))));
       }
@@ -941,6 +943,14 @@ Puedo ayudarte con:
   function wakeCharacter() { state.lastActivity = Date.now(); if (state.character === 'sleeping') { setCharacter('greeting'); setTimeout(() => { if (state.character === 'greeting') setCharacter('idle'); }, 1100); } }
   ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'scroll'].forEach(type => document.addEventListener(type, wakeCharacter, { passive: true }));
   window.addEventListener('baqueano:context', event => { session.pageEvent = event.detail; });
+  window.addEventListener('baqueano:languageChanged', event => {
+    const language = event.detail?.lang || event.detail?.language || 'es';
+    session.currentLanguage = language;
+    session.preferredLanguage = language;
+    saveSession();
+    root.dataset.language = language;
+    window.BaqueanoLanguage?.apply?.(root);
+  });
   const reactToContext = (type, detail = {}) => {
     window.dispatchEvent(new CustomEvent('baqueano:context', {detail: {type, ...detail}}));
     if (type === 'music_playing') {

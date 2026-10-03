@@ -43,11 +43,13 @@ assert(workspace.includes('"apps/*"'), "Workspace must discover app manifests fr
 assert(adminPackage.name === "@baqueano/admin", "Admin manifest must live at apps/admin/package.json.");
 assert(!fs.existsSync(path.join(root, "apps/admin/src/package.json")), "Admin source must not contain a nested package manifest.");
 assert(
-  ["dev:web", "dev:admin", "build", "build:web", "build:admin", "lint", "typecheck"].every((name) =>
+  ["dev:web", "dev:admin", "build:workspace", "build:web", "build:admin", "lint", "typecheck"].every((name) =>
     rootPackage.scripts[name]?.includes("corepack pnpm")
   ),
   "Workspace lifecycle scripts must invoke pnpm through Corepack."
 );
+assert(rootPackage.scripts.build === "node scripts/build-hostinger-static.mjs", "Default build must produce the Hostinger static site.");
+assert(rootPackage.scripts["build:hostinger"] === rootPackage.scripts.build, "Hostinger build alias must match the default build.");
 
 assert(firebaseSource.includes('where("userId", "==", userId)'), "Favorites query must use the runtime userId.");
 assert(webHealthRoute.includes("validatePublicEnvironment"), "Health route must validate public env.");
@@ -292,7 +294,7 @@ assert(!globalInjector.includes("50588888888"), "Footer must not contain placeho
 
 for (const [sourceName, source] of publicHtmlSources) {
   assert(!source.includes('href="https://youtube.com"'), `${sourceName} must not link to generic YouTube home.`);
-  for (const match of source.matchAll(/href="([^"?#]+\.html)(?:[?#][^"]*)?"/g)) {
+  for (const match of source.matchAll(/<a\b[^>]*href="([^"?#]+\.html)(?:[?#][^"]*)?"/g)) {
     const target = match[1].replace(/^\.\//, "");
     assert(fs.existsSync(path.join(root, target)), `${sourceName} links to missing local page ${target}.`);
   }

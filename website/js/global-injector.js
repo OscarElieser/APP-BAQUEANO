@@ -930,9 +930,9 @@
       assetScript.dataset.globalAssets = 'true';
       document.body.appendChild(assetScript);
     }
-    if (!document.querySelector('script[data-global-language]')) {
+    if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20260929-1';
+      languageScript.src = 'js/global-language.js?v=20261001-i18n-2';
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);
     }

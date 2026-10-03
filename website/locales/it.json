@@ -1,0 +1,10 @@
+{
+  "meta": { "locale": "it-IT", "version": "2026.10.01" },
+  "language": { "change": "Cambia lingua", "es": "Español", "en": "English", "fr": "Français", "it": "Italiano", "pt": "Português", "de": "Deutsch" },
+  "nav": { "home": "Home", "explore": "Esplora", "destinations": "Destinazioni", "map": "Mappa", "experiences": "Esperienze", "culture": "Cultura", "history": "Storia", "gastronomy": "Gastronomia", "music": "Musica", "trip": "Il mio viaggio", "more": "Altro" },
+  "actions": { "search": "Cerca", "close": "Chiudi", "back": "Indietro", "continue": "Continua", "save": "Salva", "cancel": "Annulla", "accept": "Accetta", "send": "Invia", "viewMore": "Vedi altro", "readMore": "Leggi di più", "details": "Vedi dettagli", "share": "Condividi", "retry": "Riprova" },
+  "status": { "loading": "Caricamento…", "empty": "Nessun risultato trovato.", "saved": "Salvato correttamente.", "error": "Non è stato possibile completare l'azione. Riprova.", "offline": "Offline" },
+  "baqui": { "welcome": "Ciao! Sono Baqüi, la tua guida guardabarranco. Cosa vuoi scoprire oggi?", "placeholder": "Chiedi informazioni su destinazioni, itinerari o esperienze…", "inputLabel": "Scrivi la tua domanda", "open": "Apri Baqüi, la tua guida digitale", "send": "Invia", "clear": "Cancella", "stop": "Ferma", "listen": "Ascolta", "openPanel": "Apri pannello", "later": "Non ora" },
+  "footer": { "rights": "Tutti i diritti riservati.", "tagline": "Scopri ciò che le mappe non mostrano", "madeIn": "Creato in Nicaragua" },
+  "seo": { "defaultTitle": "BAQUEANO — Scopri il Nicaragua", "defaultDescription": "Esplora destinazioni, cultura ed esperienze autentiche del Nicaragua." }
+}

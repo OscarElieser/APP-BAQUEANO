@@ -584,14 +584,24 @@
   filter: drop-shadow(0 2px 4px rgba(246, 94, 1, 0.3));
 }
 
-/* Wrap del Mapa con Relieve y Ruta SVG */
-.inspire-nic-map-wrap {
+/* ============================================================================
+   SISTEMA CARTOGRÁFICO — 4 CAPAS
+   Imagen → SVG Anchors + Conectores → Callout Cards
+   Coordenadas normalizadas en % → escala automática en todos los viewports
+   ============================================================================ */
+
+/* Contenedor raíz — contexto de posicionamiento compartido */
+.inspire-nic-map-wrap,
+.nicaragua-map {
   position: relative;
   width: 100%;
   height: 470px;
+  overflow: visible;
 }
 
-.inspire-nic-map {
+/* CAPA 1: Imagen base del mapa territorial */
+.inspire-nic-map,
+.nicaragua-map__image {
   position: absolute;
   inset: 0 2% 40px 6%;
   width: 90%;
@@ -601,22 +611,82 @@
   filter: drop-shadow(0 24px 28px rgba(15, 23, 42, 0.22));
   user-select: none;
   pointer-events: none;
+  z-index: 1;
 }
 
-/* Ruta Curva Punteada SVG */
-.map-route-svg {
+/* CAPA 2: SVG — conectores Bézier + marcadores geográficos */
+/* Hereda exactamente el mismo inset que la imagen */
+.map-route-svg,
+.nicaragua-map__connections {
   position: absolute;
   inset: 0 2% 40px 6%;
   width: 90%;
   height: calc(100% - 40px);
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
   overflow: visible;
 }
 
-.route-curve {
-  filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.45));
+/* Marcador geográfico — punto fijo = ubicación real en el mapa */
+.anchor-dot {
+  fill: #F65E01;
+  filter: drop-shadow(0 1px 4px rgba(246,94,1,0.7));
+  transition: r 0.25s ease, fill 0.25s ease;
 }
+
+.anchor-halo {
+  fill: rgba(246, 94, 1, 0.18);
+  stroke: rgba(246, 94, 1, 0.55);
+  stroke-width: 0.5;
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+/* Halo pulsante para el destino activo */
+.anchor-halo--pulse {
+  animation: anchorPulse 2.4s infinite ease-out;
+}
+
+@keyframes anchorPulse {
+  0%   { r: 3.5; opacity: 0.7; }
+  70%  { r: 6;   opacity: 0; }
+  100% { r: 3.5; opacity: 0; }
+}
+
+/* Conector Bézier — anchor → callout */
+.geo-connector {
+  fill: none;
+  stroke: rgba(255,255,255,0.72);
+  stroke-width: 0.6;
+  stroke-dasharray: 1.8 1.4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 3px rgba(15,23,42,0.45));
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+  opacity: 0.72;
+}
+
+.geo-connector.is-active {
+  stroke: #F65E01;
+  stroke-width: 0.9;
+  stroke-dasharray: none;
+  opacity: 1;
+  filter: drop-shadow(0 1px 5px rgba(246,94,1,0.6));
+}
+
+/* Diferenciación visual de anchors por tipo */
+[data-anchor-for] .anchor-dot,
+[data-type="city"]       .anchor-dot { fill: #165D6F; }
+[data-type="volcano"]   .anchor-dot { fill: #C0392B; }
+[data-type="island"]    .anchor-dot { fill: #F65E01; }
+[data-type="attraction"].anchor-dot { fill: #2D7A4F; }
+
+[data-type="city"]       .anchor-halo { fill: rgba(22,93,111,0.18); stroke: rgba(22,93,111,0.55); }
+[data-type="volcano"]   .anchor-halo { fill: rgba(192,57,43,0.18); stroke: rgba(192,57,43,0.55); }
+[data-type="island"]    .anchor-halo { fill: rgba(246,94,1,0.18);  stroke: rgba(246,94,1,0.55); }
+[data-type="attraction"].anchor-halo { fill: rgba(45,122,79,0.18); stroke: rgba(45,122,79,0.55); }
+
+/* Al activar un destino, el anchor se ilumina */
+.geo-anchor.is-active .anchor-dot { r: 2.4; filter: drop-shadow(0 0 5px currentColor); }
+.geo-anchor.is-active .anchor-halo { fill-opacity: 0.3; stroke-opacity: 0.9; }
 
 /* Pins Interactivos sobre el Mapa */
 .inspire-pin {
@@ -700,21 +770,36 @@
   100% { transform: scale(1.55); opacity: 0; }
 }
 
-/* Posiciones geográficas de los pines sobre el relieve territorial */
-/* 1. Cañón de Somoto: Norte */
-.pin-somoto { top: 8%; right: 7%; }
+/* ============================================================================
+   POSICIONAMIENTO DE CALLOUTS — Basado en data-card-x / data-card-y
+   El JS lee los atributos y aplica left/top en porcentaje.
+   Las clases .pin-* son compatibilidad hacia atrás + soporte sin-JS fallback.
+   REGLA FUNDAMENTAL: estos valores posicionan la TARJETA, no el punto geográfico.
+   El punto geográfico vive en el SVG (cx/cy del anchor).
+   ============================================================================ */
 
-/* 2. León: Occidente */
-.pin-leon   { top: 35%; left: 0%; }
+/* Fallback CSS (sin JS) — coordenadas calibradas para el mapa en desktop */
+/* Tarjeta Cañón de Somoto: arriba derecha, fuera del territorio para claridad */
+.pin-somoto { top: 5%;  left: 72%; }
 
-/* 3. Granada: Oriente de Cocibolca */
-.pin-granada { top: 48%; right: -2%; }
+/* Tarjeta León: izquierda del mapa — departamento occidental */
+.pin-leon   { top: 36%; left: 2%; }
 
-/* 4. Cerro Negro: Cordillera Maribios */
-.pin-cerro  { top: 64%; right: 2%; }
+/* Tarjeta Cerro Negro: arriba-izquierda — norte de León */
+.pin-cerro  { top: 22%; left: 2%; }
 
-/* 5. Ometepe: Lago Cocibolca (Sur) */
-.pin-ometepe { top: 76%; left: 10%; }
+/* Tarjeta Granada: derecha a la altura del Lago Cocibolca */
+.pin-granada { top: 52%; left: 70%; }
+
+/* Tarjeta Ometepe: abajo-izquierda — apunta hacia el lago */
+.pin-ometepe { top: 72%; left: 2%; }
+
+/* Icono de tipo diferenciador en la tarjeta */
+.geo-callout__type-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
 
 /* Pie del Mapa: Story Card + Botón Ver Todos */
 .inspire-map-footer {
@@ -854,11 +939,13 @@
     height: 420px;
   }
 
-  .pin-somoto { top: 8%; right: 28%; }
-  .pin-leon   { top: 34%; left: 16%; }
-  .pin-granada { top: 48%; right: 22%; }
-  .pin-cerro  { top: 62%; right: 24%; }
-  .pin-ometepe { top: 74%; left: 24%; }
+  /* En esta breakpoint el JS recalcula automáticamente.
+     Fallback CSS para el contenedor más estrecho: */
+  .pin-somoto  { top: 5%;  left: 58%; }
+  .pin-leon    { top: 36%; left: 0%; }
+  .pin-cerro   { top: 20%; left: 0%; }
+  .pin-granada { top: 52%; left: 60%; }
+  .pin-ometepe { top: 72%; left: 0%; }
 
   .inspire-brand-callout {
     justify-content: center;
@@ -996,11 +1083,13 @@
     width: 100%;
   }
 
-  .pin-somoto { top: 6%; right: 10%; }
-  .pin-leon   { top: 32%; left: 2%; }
-  .pin-granada { top: 48%; right: 4%; }
-  .pin-cerro  { top: 62%; right: 6%; }
-  .pin-ometepe { top: 74%; left: 8%; }
+  /* Mobile: el JS reposiciona automáticamente las tarjetas.
+     Fallback CSS: tarjetas compactas en los bordes */
+  .pin-somoto  { top: 5%;  left: 60%; }
+  .pin-leon    { top: 37%; left: 0%; }
+  .pin-cerro   { top: 21%; left: 0%; }
+  .pin-granada { top: 52%; left: 62%; }
+  .pin-ometepe { top: 73%; left: 0%; }
 
   .inspire-pin {
     min-height: 36px;
@@ -1040,3 +1129,107 @@
     animation: none !important;
   }
 }
+
+/* ============================================================================
+   AUTOPLAY — Barra de Progreso + Dots + Botón Pausa/Play
+   ============================================================================ */
+
+/* Barra de progreso */
+.inspire-autoplay-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.18);
+  z-index: 10;
+  overflow: hidden;
+  border-radius: 0 0 20px 0;
+}
+
+.inspire-autoplay-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #F65E01, #ffae6d);
+  border-radius: 2px;
+  /* La transición se gestiona por JS */
+  will-change: width;
+}
+
+/* Dots indicadores de destino */
+.inspire-autoplay-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.inspire-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  transition: background 0.35s, transform 0.35s;
+  cursor: default;
+}
+
+.inspire-dot.is-active {
+  background: #F65E01;
+  border-color: #F65E01;
+  transform: scale(1.35);
+  box-shadow: 0 0 6px rgba(246, 94, 1, 0.55);
+}
+
+/* Botón Pausa/Play */
+.inspire-autoplay-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 12;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, opacity 0.25s;
+  opacity: 0;  /* visible solo al hover del article */
+}
+
+.inspire-feature:hover .inspire-autoplay-toggle,
+.inspire-feature:focus-within .inspire-autoplay-toggle {
+  opacity: 1;
+}
+
+.inspire-autoplay-toggle:hover {
+  background: rgba(246, 94, 1, 0.75);
+  border-color: #F65E01;
+}
+
+.inspire-autoplay-toggle:focus-visible {
+  outline: 3px solid #F65E01;
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+/* Reduced-motion: desactivar transición de barra */
+@media (prefers-reduced-motion: reduce) {
+  .inspire-autoplay-bar {
+    transition: none !important;
+  }
+  .inspire-dot {
+    transition: none !important;
+  }
+}
+

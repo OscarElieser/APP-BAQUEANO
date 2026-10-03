@@ -1,0 +1,46 @@
+# 🎯 POR QUÉ: Replicar en Apache las rutas, seguridad y caché esenciales del Hosting anterior.
+# ⚙️ CÓMO: Usa reglas estáticas compatibles con public_html, sin proxy Node ni cambios en Firebase/Supabase.
+# 📦 QUÉ: Redirecciones canónicas, 404, encabezados defensivos, MIME PWA y caché diferenciada.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+RewriteRule ^baqueano-ai/?$ /baqueano-ai.html [R=301,L,NE]
+RewriteRule ^privacidad/?$ /index.html#privacidad [R=302,L,NE]
+RewriteRule ^terminos/?$ /index.html#terminos [R=302,L,NE]
+RewriteRule ^negocio/?$ /mi-negocio.html [R=301,L,NE]
+RewriteRule ^mapa/?$ /mapa.html [R=301,L,NE]
+RewriteRule ^departamentos(?:\.html)?/?$ /departamento.html [R=302,L,NE]
+RewriteRule ^ops/?$ /admin.html [R=301,L,NE]
+
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(self), camera=(), microphone=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://apis.google.com https://www.googletagmanager.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.openstreetmap.org https://firebasestorage.googleapis.com https://lh3.googleusercontent.com https://*.google.com https://*.googleapis.com https://*.gstatic.com https://*.arcgisonline.com https://*.cartocdn.com https://images.unsplash.com https://video-previews.elements.envatousercontent.com; connect-src 'self' https://api.open-meteo.com https://*.supabase.co wss://*.supabase.co https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://*.google.com https://*.arcgisonline.com; frame-src https://app-baqueano.firebaseapp.com; object-src 'none'; base-uri 'self';"
+  <FilesMatch "^(admin\.html|service-worker\.js)$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate"
+  </FilesMatch>
+  <Files "admin.html">
+    Header always set X-Robots-Tag "noindex, nofollow"
+  </Files>
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType application/manifest+json .json
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType text/css "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+</IfModule>

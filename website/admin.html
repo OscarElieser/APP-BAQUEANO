@@ -105,7 +105,7 @@
             <span class="ops-brand-subtitle">Ops Command</span>
           </div>
         </a>
-        <button class="ops-sidebar-toggle-btn" id="opsSidebarToggleBtn" title="Colapsar menú">
+        <button type="button" class="ops-sidebar-toggle-btn" id="opsSidebarToggleBtn" title="Colapsar menú">
           <i class="fa-solid fa-chevron-left"></i>
         </button>
       </div>
@@ -352,7 +352,7 @@
               <span class="ops-user-name" id="opsTopUserName">Administrador</span>
               <span class="ops-user-role" id="opsTopUserRole">Super Administrador</span>
             </div>
-            <button class="btn-ops-matte" id="btnLogoutAdmin" title="Cerrar Sesión" style="padding: 0.35rem 0.6rem; margin-left: 0.5rem;">
+            <button type="button" class="btn-ops-matte" id="btnLogoutAdmin" title="Cerrar Sesión" style="padding: 0.35rem 0.6rem; margin-left: 0.5rem;">
               <i class="fa-solid fa-right-from-bracket"></i>
             </button>
           </div>
@@ -361,7 +361,7 @@
 
       <!-- FRANJA DE BÚSQUEDA / PALETA DE COMANDOS GLOBAL (DEBAJO DEL HEADER) -->
       <div class="ops-search-strip">
-        <button class="ops-global-search-btn" id="opsCommandPaletteTrigger">
+        <button type="button" class="ops-global-search-btn" id="opsCommandPaletteTrigger">
           <i class="fa-solid fa-magnifying-glass"></i>
           <span>Buscar destino, negocio, usuario o comando...</span>
           <span class="ops-kbd-badge">Ctrl+K</span>
@@ -382,8 +382,8 @@
             </div>
             <div class="ops-view-actions">
               <span style="font-size: 0.78rem; color: var(--ops-text-muted);" id="opsMetricsLastUpdated">Actualizando...</span>
-              <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.seedInitialContent()"><i class="fa-solid fa-cloud-arrow-up"></i> Migrar Catálogo Inicial</button>
-              <button class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> Sincronizar</button>
+              <button type="button" class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.seedInitialContent()"><i class="fa-solid fa-cloud-arrow-up"></i> Migrar Catálogo Inicial</button>
+              <button type="button" class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> Sincronizar</button>
             </div>
           </div>
 
@@ -497,7 +497,7 @@
               <p class="ops-view-subtitle">ADMINISTRACIÓN EDITORIAL DE SENDEROS, VOLCANES, PLAYAS Y ÁREAS PROTEGIDAS</p>
             </div>
             <div class="ops-view-actions">
-              <button class="btn-ops-matte accent" onclick="promptNewDestination()"><i class="fa-solid fa-plus"></i> Nuevo Destino</button>
+              <button type="button" class="btn-ops-matte accent" onclick="promptNewDestination()"><i class="fa-solid fa-plus"></i> Nuevo Destino</button>
             </div>
           </div>
 
@@ -601,7 +601,7 @@
               <p class="ops-view-subtitle">CONFIGURACIÓN DINÁMICA DE PÁGINAS, SECCIONES, BANNERS Y BARRAS DE NAVEGACIÓN</p>
             </div>
             <div class="ops-view-actions">
-              <button class="btn-ops-matte primary" onclick="saveWebsiteConfig()"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
+              <button type="button" class="btn-ops-matte primary" onclick="saveWebsiteConfig()"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
             </div>
           </div>
 
@@ -1098,7 +1098,7 @@
       <div class="ops-command-search-wrap">
         <i class="fa-solid fa-magnifying-glass" style="color: var(--ops-text-muted);"></i>
         <input type="text" class="ops-command-input" id="opsCommandSearchInput" placeholder="Escribe un comando o navega a un módulo...">
-        <button class="ops-sidebar-toggle-btn" id="opsCommandCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" class="ops-sidebar-toggle-btn" id="opsCommandCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="ops-command-results-list" id="opsCommandResultsList">
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('01-dashboard')">
@@ -1143,7 +1143,7 @@
     <div class="ops-modal-box" style="max-width: 680px; width: 92%;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
         <h3 class="ops-modal-title" id="previewModalTitle" style="margin:0;">Vista Previa</h3>
-        <button class="ops-sidebar-toggle-btn" id="previewModalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" class="ops-sidebar-toggle-btn" id="previewModalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="previewModalBody"></div>
     </div>

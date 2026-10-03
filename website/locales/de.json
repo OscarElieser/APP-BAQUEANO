@@ -1,0 +1,10 @@
+{
+  "meta": { "locale": "de-DE", "version": "2026.10.01" },
+  "language": { "change": "Sprache ändern", "es": "Español", "en": "English", "fr": "Français", "it": "Italiano", "pt": "Português", "de": "Deutsch" },
+  "nav": { "home": "Start", "explore": "Entdecken", "destinations": "Reiseziele", "map": "Karte", "experiences": "Erlebnisse", "culture": "Kultur", "history": "Geschichte", "gastronomy": "Kulinarik", "music": "Musik", "trip": "Meine Reise", "more": "Mehr" },
+  "actions": { "search": "Suchen", "close": "Schließen", "back": "Zurück", "continue": "Weiter", "save": "Speichern", "cancel": "Abbrechen", "accept": "Bestätigen", "send": "Senden", "viewMore": "Mehr anzeigen", "readMore": "Weiterlesen", "details": "Details anzeigen", "share": "Teilen", "retry": "Erneut versuchen" },
+  "status": { "loading": "Wird geladen…", "empty": "Keine Ergebnisse gefunden.", "saved": "Erfolgreich gespeichert.", "error": "Die Aktion konnte nicht abgeschlossen werden. Versuchen Sie es erneut.", "offline": "Offline" },
+  "baqui": { "welcome": "Hallo! Ich bin Baqüi, Ihr Guardabarranco-Reiseführer. Was möchten Sie heute entdecken?", "placeholder": "Fragen Sie nach Reisezielen, Routen oder Erlebnissen…", "inputLabel": "Geben Sie Ihre Frage ein", "open": "Baqüi, den digitalen Reiseführer, öffnen", "send": "Senden", "clear": "Löschen", "stop": "Stoppen", "listen": "Anhören", "openPanel": "Panel öffnen", "later": "Nicht jetzt" },
+  "footer": { "rights": "Alle Rechte vorbehalten.", "tagline": "Entdecken Sie, was Karten nicht zeigen", "madeIn": "Hergestellt in Nicaragua" },
+  "seo": { "defaultTitle": "BAQUEANO — Nicaragua entdecken", "defaultDescription": "Entdecken Sie Nicaraguas Reiseziele, Kultur und authentische Erlebnisse." }
+}

@@ -1,0 +1,10 @@
+{
+  "meta": { "locale": "en-US", "version": "2026.10.01" },
+  "language": { "change": "Change language", "es": "Español", "en": "English", "fr": "Français", "it": "Italiano", "pt": "Português", "de": "Deutsch" },
+  "nav": { "home": "Home", "explore": "Explore", "destinations": "Destinations", "map": "Map", "experiences": "Experiences", "culture": "Culture", "history": "History", "gastronomy": "Cuisine", "music": "Music", "trip": "My Trip", "more": "More" },
+  "actions": { "search": "Search", "close": "Close", "back": "Back", "continue": "Continue", "save": "Save", "cancel": "Cancel", "accept": "Accept", "send": "Send", "viewMore": "View more", "readMore": "Read more", "details": "View details", "share": "Share", "retry": "Try again" },
+  "status": { "loading": "Loading...", "empty": "We couldn't find any results.", "saved": "Saved successfully.", "error": "We couldn't complete that action. Please try again.", "offline": "Offline" },
+  "baqui": { "welcome": "Hi! I'm Baqüi, your guardabarranco guide. What would you like to discover today?", "placeholder": "Ask about destinations, routes, or experiences…", "inputLabel": "Type your question", "open": "Open Baqüi, your digital guide", "send": "Send", "clear": "Clear", "stop": "Stop", "listen": "Listen", "openPanel": "Open panel", "later": "Not now" },
+  "footer": { "rights": "All rights reserved.", "tagline": "Discover what maps don't show", "madeIn": "Made in Nicaragua" },
+  "seo": { "defaultTitle": "BAQUEANO — Discover Nicaragua", "defaultDescription": "Explore Nicaragua's destinations, culture, and authentic experiences." }
+}

@@ -14,12 +14,14 @@ import path from "node:path";
 import { chromium } from "@playwright/test";
 
 const widths = [320, 360, 375, 390, 412, 430, 768, 820, 1024, 1280, 1366, 1440, 1920, 2560];
+const webBaseUrl = process.env.WEB_BASE_URL || "http://127.0.0.1:3000";
+const adminBaseUrl = process.env.ADMIN_BASE_URL || "http://127.0.0.1:3001";
 const routes = [
-  { name: "web-home", url: "http://localhost:3000/" },
-  { name: "web-destinos", url: "http://localhost:3000/destinos" },
-  { name: "web-mapa", url: "http://localhost:3000/mapa" },
-  { name: "admin-dashboard", url: "http://localhost:3001/dashboard" },
-  { name: "admin-destinos", url: "http://localhost:3001/destinos" }
+  { name: "web-home", url: `${webBaseUrl}/` },
+  { name: "web-destinos", url: `${webBaseUrl}/destinos` },
+  { name: "web-mapa", url: `${webBaseUrl}/mapa` },
+  { name: "admin-dashboard", url: `${adminBaseUrl}/dashboard` },
+  { name: "admin-destinos", url: `${adminBaseUrl}/destinos` }
 ];
 
 const outputDir = path.resolve("docs/visual-audit");

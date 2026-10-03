@@ -1,0 +1,298 @@
+{
+  "generatedAt": "2026-10-01T19:45:38.810Z",
+  "pages": 29,
+  "baseKeys": 342,
+  "errors": [
+    "en: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
+    "fr: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
+    "it: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
+    "pt: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
+    "de: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)"
+  ],
+  "warnings": [
+    {
+      "file": "404.html",
+      "unkeyedVisibleTextEstimate": 86
+    },
+    {
+      "file": "aliados.html",
+      "unkeyedVisibleTextEstimate": 253
+    },
+    {
+      "file": "ambiental.html",
+      "unkeyedVisibleTextEstimate": 149
+    },
+    {
+      "file": "aviso-legal.html",
+      "unkeyedVisibleTextEstimate": 154
+    },
+    {
+      "file": "ayuda.html",
+      "unkeyedVisibleTextEstimate": 66
+    },
+    {
+      "file": "baqueano-ai.html",
+      "unkeyedVisibleTextEstimate": 40
+    },
+    {
+      "file": "baqueano-ia.html",
+      "unkeyedVisibleTextEstimate": 303
+    },
+    {
+      "file": "cookies.html",
+      "unkeyedVisibleTextEstimate": 185
+    },
+    {
+      "file": "cronicas.html",
+      "unkeyedVisibleTextEstimate": 21
+    },
+    {
+      "file": "denuncias.html",
+      "unkeyedVisibleTextEstimate": 183
+    },
+    {
+      "file": "departamento.html",
+      "unkeyedVisibleTextEstimate": 221
+    },
+    {
+      "file": "destino.html",
+      "unkeyedVisibleTextEstimate": 79
+    },
+    {
+      "file": "destinos.html",
+      "unkeyedVisibleTextEstimate": 176
+    },
+    {
+      "file": "experiencias.html",
+      "unkeyedVisibleTextEstimate": 191
+    },
+    {
+      "file": "favoritos.html",
+      "unkeyedVisibleTextEstimate": 8
+    },
+    {
+      "file": "gastronomia.html",
+      "unkeyedVisibleTextEstimate": 238
+    },
+    {
+      "file": "historia.html",
+      "unkeyedVisibleTextEstimate": 223
+    },
+    {
+      "file": "index.html",
+      "unkeyedVisibleTextEstimate": 252
+    },
+    {
+      "file": "legal.html",
+      "unkeyedVisibleTextEstimate": 54
+    },
+    {
+      "file": "mapa.html",
+      "unkeyedVisibleTextEstimate": 59
+    },
+    {
+      "file": "mi-negocio.html",
+      "unkeyedVisibleTextEstimate": 337
+    },
+    {
+      "file": "mi-viaje.html",
+      "unkeyedVisibleTextEstimate": 185
+    },
+    {
+      "file": "musica.html",
+      "unkeyedVisibleTextEstimate": 183
+    },
+    {
+      "file": "nosotros.html",
+      "unkeyedVisibleTextEstimate": 191
+    },
+    {
+      "file": "offline.html",
+      "unkeyedVisibleTextEstimate": 59
+    },
+    {
+      "file": "perfil.html",
+      "unkeyedVisibleTextEstimate": 235
+    },
+    {
+      "file": "privacidad.html",
+      "unkeyedVisibleTextEstimate": 144
+    },
+    {
+      "file": "terminos.html",
+      "unkeyedVisibleTextEstimate": 245
+    },
+    {
+      "file": "js/admin-ops.js",
+      "hardcodedDynamicTextEstimate": 13
+    },
+    {
+      "file": "js/audio-player.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/baqueano-3d-map.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/baqueano-ai.js",
+      "hardcodedDynamicTextEstimate": 7
+    },
+    {
+      "file": "js/baqueano-assistant.js",
+      "hardcodedDynamicTextEstimate": 5
+    },
+    {
+      "file": "js/baqueano-map.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/baqueano-route-weather.js",
+      "hardcodedDynamicTextEstimate": 9
+    },
+    {
+      "file": "js/baqueano-travel-session.js",
+      "hardcodedDynamicTextEstimate": 12
+    },
+    {
+      "file": "js/baqui-evolved.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/business-portal.js",
+      "hardcodedDynamicTextEstimate": 4
+    },
+    {
+      "file": "js/calculator.js",
+      "hardcodedDynamicTextEstimate": 9
+    },
+    {
+      "file": "js/chinandega-experience.js",
+      "hardcodedDynamicTextEstimate": 6
+    },
+    {
+      "file": "js/color-gallery.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/demo-hackathon-tour.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/destination-dossier.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/destinos-gastronomia.js",
+      "hardcodedDynamicTextEstimate": 8
+    },
+    {
+      "file": "js/destinos-interactions.js",
+      "hardcodedDynamicTextEstimate": 5
+    },
+    {
+      "file": "js/environmental-evidence.js",
+      "hardcodedDynamicTextEstimate": 7
+    },
+    {
+      "file": "js/environmental.js",
+      "hardcodedDynamicTextEstimate": 10
+    },
+    {
+      "file": "js/epic-music-player.js",
+      "hardcodedDynamicTextEstimate": 7
+    },
+    {
+      "file": "js/global-asset-curator.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/global-injector.js",
+      "hardcodedDynamicTextEstimate": 13
+    },
+    {
+      "file": "js/global-language.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/global-music-player.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/hero-experience.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/index-destinos-editorial.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/index-features.js",
+      "hardcodedDynamicTextEstimate": 17
+    },
+    {
+      "file": "js/legal-scrollspy.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/madriz-experience.js",
+      "hardcodedDynamicTextEstimate": 4
+    },
+    {
+      "file": "js/madriz-territory-map.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/mi-viaje-interactions.js",
+      "hardcodedDynamicTextEstimate": 10
+    },
+    {
+      "file": "js/musica-player.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/navigation.js",
+      "hardcodedDynamicTextEstimate": 16
+    },
+    {
+      "file": "js/nicaragua-real-map.js",
+      "hardcodedDynamicTextEstimate": 5
+    },
+    {
+      "file": "js/panorama-viewer.js",
+      "hardcodedDynamicTextEstimate": 4
+    },
+    {
+      "file": "js/persistent-audio-player.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/platform-enhancements.js",
+      "hardcodedDynamicTextEstimate": 14
+    },
+    {
+      "file": "js/public-cms-sync.js",
+      "hardcodedDynamicTextEstimate": 5
+    },
+    {
+      "file": "js/route-builder.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/territory-carousel.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/theme-switcher.js",
+      "hardcodedDynamicTextEstimate": 4
+    },
+    {
+      "file": "js/tourism-catalog-expansion.js",
+      "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/tres-pilares.js",
+      "hardcodedDynamicTextEstimate": 3
+    }
+  ]
+}
