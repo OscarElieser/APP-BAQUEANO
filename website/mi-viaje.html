@@ -67,8 +67,8 @@
     .viaje-hero p  { font-size: 1.05rem; color: #CBD5E1; max-width: 620px; margin: 0; }
 
     /* ── Layout ── */
-    .viaje-body-layout { display: grid; grid-template-columns: 1fr 300px; gap: 28px; padding: 36px 0 60px; align-items: start; }
-    @media (max-width: 900px) { .viaje-body-layout { grid-template-columns: 1fr; } }
+    .viaje-body-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; padding: 36px 0 60px; align-items: start; }
+    @media (max-width: 900px) { .viaje-body-layout { grid-template-columns: minmax(0, 1fr); } }
 
     /* ── Pestañas Planificador ── */
     .viaje-tabs-nav { display: flex; gap: 10px; border-bottom: 2px solid #E2E8F0; margin-bottom: 24px; overflow-x: auto; padding-bottom: 3px; }
@@ -161,7 +161,7 @@
     .rec-section-head h2 { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0; }
     .rec-section-head a  { font-size: .85rem; color: #165D6F; font-weight: 700; text-decoration: none; }
     .rec-section-head a:hover { text-decoration: underline; }
-    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 16px; }
     .rec-card { background: #FFF; border: 1px solid #E2E8F0; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
     .rec-card-img {
       height: 148px;
@@ -830,7 +830,7 @@
       </div>
       <div class="sos-emergency-buttons">
         <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía (118)</a>
-        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Blanca (128)</a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Roja (128)</a>
       </div>
     </div>
   </div>

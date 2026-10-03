@@ -1171,7 +1171,7 @@
                 </div>
               </div>
               <p class="departamento-inline-001">
-                Hospital Juan Antonio Brenes Palacios (Somoto), Policía Nacional (118), Bomberos (115) y Cruz Blanca (128).
+                Hospital Juan Antonio Brenes Palacios (Somoto), Policía Nacional (118), Bomberos (115) y Cruz Roja (128).
               </p>
               <div class="sos-actions-wrap">
                 <button type="button" class="btn-hero-primary open-sos-btn" style="width: 100%; justify-content: center; background: var(--rojo-alerta);">

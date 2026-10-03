@@ -38,7 +38,7 @@
 .chinandega-gallery-toggle { display:inline-flex; align-items:center; gap:.5rem; margin-top:1rem; padding:.65rem 1rem; color:#F4E6C1; background:rgba(15,23,42,.82); border:1px solid rgba(244,230,193,.2); border-radius:999px; cursor:pointer; font:750 .72rem var(--font-tech,sans-serif); }
 .chinandega-gallery-toggle:hover,.chinandega-gallery-toggle:focus-visible { background:#F65E01; border-color:#F65E01; outline:none; }
 .chinandega-audio-section .video-gallery-header p { max-width:680px; margin:.6rem auto 2rem; color:#94A3B8; text-align:center; }
-.chinandega-audio-card { display:grid; grid-template-columns:auto minmax(200px,1fr) minmax(280px,1fr); align-items:center; gap:1.2rem; padding:1.3rem; background:linear-gradient(145deg,rgba(22,93,111,.32),rgba(15,23,42,.96)); border:1px solid rgba(244,230,193,.16); border-radius:24px; box-shadow:0 20px 45px rgba(0,0,0,.25); }
+.chinandega-audio-card { display:grid; grid-template-columns:auto minmax(min(200px, 100%), 1fr) minmax(min(280px, 100%), 1fr); align-items:center; gap:1.2rem; padding:1.3rem; background:linear-gradient(145deg,rgba(22,93,111,.32),rgba(15,23,42,.96)); border:1px solid rgba(244,230,193,.16); border-radius:24px; box-shadow:0 20px 45px rgba(0,0,0,.25); }
 .chinandega-audio-icon { display:grid; width:64px; height:64px; place-items:center; color:#FFF; background:linear-gradient(145deg,#F65E01,#B53F00); border-radius:50%; font-size:1.25rem; }
 .chinandega-audio-card span { color:#FF8A3D; font:800 .66rem var(--font-tech,sans-serif); letter-spacing:.08em; }
 .chinandega-audio-card h3 { margin:.3rem 0; color:#FFF; }

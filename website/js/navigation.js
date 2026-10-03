@@ -555,7 +555,7 @@ function initActiveNavHighlight() {
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Proveer auxilio inmediato en senderos de Nicaragua con geolocalización satelital
 //   precisa en cualquier dispositivo, garantizando que las coordenadas sean 100%
-//   compatibles con Google Maps, Waze, Policía Nacional y Cruz Blanca sin errores de búsqueda.
+//   compatibles con Google Maps, Waze, Policía Nacional y Cruz Roja sin errores de búsqueda.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Invoca navigator.geolocation con enableHighAccuracy: true para activar sensores GPS

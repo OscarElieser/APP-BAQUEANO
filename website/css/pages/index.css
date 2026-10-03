@@ -3148,7 +3148,7 @@ html[data-section-colors-custom] .index-main-flow :is(
 /* ── LOS 4 PILARES DE LA PROPUESTA DE VALOR ── */
 .ps-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 20px;
   position: relative;
   z-index: 1;
@@ -4151,7 +4151,7 @@ html[data-section-colors-custom] .index-main-flow :is(
 
 .unified-allies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1.25rem;
 }
 

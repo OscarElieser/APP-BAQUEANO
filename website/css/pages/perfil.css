@@ -206,7 +206,7 @@
     /* Formularios dentro del Perfil */
     .profile-form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
       gap: 1.2rem;
     }
 
@@ -518,7 +518,7 @@ html body .perfil-inline-013 {
 
 html body .perfil-inline-014 {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)) !important;
   gap: 1rem !important;
 }
 

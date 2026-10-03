@@ -648,7 +648,7 @@
 
 .manifesto-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: 1.2rem;
   max-width: 860px;
   margin: 2.2rem auto 2.5rem;

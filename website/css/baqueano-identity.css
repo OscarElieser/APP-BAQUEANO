@@ -587,16 +587,22 @@ body.nav-drawer-open .bq-thumbbar {
 /* 8.2 Destinos que inspiran: las polaroids estaban en position:absolute
    encima del botón "Explorar destino" (x 482–888 sobre x 348–572 en 1440 px).
    Pasan al flujo normal, debajo del botón, con desplazamiento horizontal. */
-.inspire-copy .inspire-gallery-editorial {
+.inspire-feature {
+  flex-wrap: wrap !important;
+}
+
+.inspire-feature > .inspire-gallery-editorial {
   position: relative !important;
   inset: auto !important;
   transform: none !important;
+  flex: 0 0 100% !important;
   width: 100% !important;
   max-width: 100% !important;
   margin-top: 1.25rem !important;
+  z-index: 1;
 }
 
-.inspire-copy .polaroid-strip {
+.inspire-feature > .inspire-gallery-editorial .polaroid-strip {
   max-width: 100%;
   overflow-x: auto;
   scroll-snap-type: x proximity;
@@ -604,8 +610,8 @@ body.nav-drawer-open .bq-thumbbar {
   padding-block: 6px;
 }
 
-.inspire-copy .polaroid-strip::-webkit-scrollbar { display: none; }
-.inspire-copy .polaroid-item { flex: 0 0 auto; scroll-snap-align: start; }
+.inspire-feature > .inspire-gallery-editorial .polaroid-strip::-webkit-scrollbar { display: none; }
+.inspire-feature > .inspire-gallery-editorial .polaroid-item { flex: 0 0 auto; scroll-snap-align: start; }
 
 /* 8.3 Encabezados de sección con enlace a la derecha: en celular el enlace
    bajaba cortado ("Ver todas las experi…"). Ahora se acomoda debajo. */
@@ -622,4 +628,67 @@ body.nav-drawer-open .bq-thumbbar {
     display: inline-flex !important;
     align-items: center;
   }
+}
+
+/* ===================================================
+   9. PIE DE PÁGINA: MARCA COMPLETA EN CELULAR
+   =================================================== */
+/* js/global-asset-curator.js pone el ícono de marca a min(230px, 100%) junto
+   al texto "BAQUEANO / Nicaragua auténtica": en 390 px el texto quedaba en
+   x 262–413, cortado en todas las páginas internas. El ícono acompaña al
+   nombre con un tamaño proporcional; el nombre nunca se corta. */
+#siteFooter .footer-logo-row img.bq-footer-proposal-logo,
+#siteFooter .footer-logo-row .footer-logo-img {
+  width: clamp(52px, 14vw, 76px) !important;
+  max-height: 64px !important;
+  flex: 0 0 auto;
+}
+
+#siteFooter .footer-logo-row { gap: 12px; }
+#siteFooter .footer-brand-text-block { min-width: 0; }
+
+/* ===================================================
+   10. PERFIL: ESTADÍSTICAS EN CELULAR
+   =================================================== */
+/* Con sesión iniciada, las 4 cifras + "Editar perfil" iban en una sola fila
+   y se salían de la pantalla (x hasta 510 px en 390 px). En celular pasan a
+   dos columnas; el botón ocupa la fila completa. */
+@media (max-width: 600px) {
+  .prof-user-card .prof-stats-box {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .prof-user-card .prof-stats-box .prof-btn-edit {
+    grid-column: 1 / -1;
+    justify-content: center;
+    min-height: 44px;
+  }
+}
+
+/* 8.4 "Más que un destino": la tarjeta quedaba en 164 px junto al botón y el
+   texto se partía palabra por palabra. Tarjeta y botón comparten la fila solo
+   si caben; si no, el botón baja a su propia línea. */
+.inspire-map-territorial .inspire-map-footer {
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.inspire-map-territorial .inspire-story-card {
+  flex: 1 1 260px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.inspire-map-territorial .inspire-story-card .story-text {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.inspire-map-territorial .inspire-browse-all-btn {
+  flex: 0 1 auto;
+  min-height: 48px;
 }

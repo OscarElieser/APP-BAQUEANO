@@ -92,7 +92,7 @@
     }
     .hotlines-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
       gap: 1.3rem;
       margin-top: 2.5rem;
     }
@@ -154,13 +154,13 @@ html body .denuncias-inline-004 {
 
 html body .denuncias-inline-005 {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)) !important;
   gap: 1rem !important;
 }
 
 html body .denuncias-inline-006 {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)) !important;
   gap: 1rem !important;
   margin-bottom: 1.5rem !important;
 }

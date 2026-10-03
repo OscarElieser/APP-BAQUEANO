@@ -10,7 +10,7 @@
 - Convertir la experiencia offline de un error genérico a una ventaja táctica
   de supervivencia y consulta territorial 100% funcional sin conexión a internet.
 - Proteger la vida del viajero y preservar el acceso a números de auxilio nacional
-  (Policía 118, Cruz Blanca 128, Bomberos 115) y protocolos de cañones y volcanes.
+  (Policía 118, Cruz Roja 128, Bomberos 115) y protocolos de cañones y volcanes.
 
 ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 - Arquitectura 100% autónoma y precargada por el Service Worker (CacheStorage).
@@ -390,9 +390,9 @@
     </div>
 
     <span class="offline-tag">Modo Supervivencia Territorial</span>
-    <h1>Estás sin cobertura celular</h1>
+    <h1>Se fue la señal</h1>
     <p class="lead-text">
-      Te encuentras en una zona rural o agreste sin internet. Baqueano mantiene activa en tu dispositivo la información esencial de auxilio y orientación campesina.
+      No pasa nada: aquí tenés guardados los números de emergencia y los puntos de apoyo de los lugares más visitados. Cuando vuelva el internet, seguimos explorando.
     </p>
 
     <!-- Marcación Telefónica Directa SOS (Funciona sin datos móviles) -->
@@ -404,8 +404,8 @@
           <span class="sos-card-desc">Auxilio en ruta y seguridad</span>
         </a>
 
-        <a href="tel:128" class="sos-card" title="Llamar a Cruz Blanca">
-          <span class="sos-card-title">Cruz Blanca</span>
+        <a href="tel:128" class="sos-card" title="Llamar a la Cruz Roja">
+          <span class="sos-card-title">Cruz Roja</span>
           <span class="sos-card-number">🚑 128</span>
           <span class="sos-card-desc">Atención médica y rescate</span>
         </a>
@@ -425,14 +425,14 @@
         <li><strong>Cañón de Somoto:</strong> Punto de enlace en Comunidad El Zapote o Puesto de Guías La Patasta.</li>
         <li><strong>Isla de Ometepe:</strong> Puesto de guardaparques Volcán Maderas y Albergue Charco Verde.</li>
         <li><strong>Cerro Negro / Telica:</strong> Caseta Comunitaria Rota y Puesto de Guías San Jacinto.</li>
-        <li><strong>Conservación:</strong> Mantente en el sendero marcado, ahorra batería de tu dispositivo y busca la posada rural más cercana.</li>
+        <li><strong>Conservación:</strong> Quedate en el sendero marcado, ahorrá batería y buscá la posada o comunidad más cercana.</li>
       </ul>
     </div>
 
     <!-- Botones de Acción -->
     <div class="action-row">
       <button type="button" class="btn btn-primary" onclick="reintentarConexion()">
-        🔄 Reintentar Conexión
+        🔄 Probar la conexión
       </button>
       <a href="/" class="btn btn-secondary">
         Ver Caché de Inicio
@@ -443,7 +443,7 @@
     </div>
 
     <div class="status-pill" id="offlineStatus">
-      📡 Esperando señal de red... Se reconectará automáticamente.
+      📡 Esperando señal… En cuanto vuelva, te reconectamos solos.
     </div>
   </main>
 
