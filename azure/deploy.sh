@@ -39,6 +39,10 @@ MEDIA_VIDEOS="${WEB_ROOT}/media/videos"
 KEEP=5
 
 reload_nginx() {
+  # POR QUÉ: las cabeceras versionadas deben llegar a producción junto con cada release.
+  # CÓMO: instalamos el snippet antes de validar; nginx -t impide activar una configuración inválida.
+  # QUÉ: Permissions-Policy, CSP y demás controles quedan sincronizados con origin/main.
+  sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-security-headers.conf" "/etc/nginx/snippets/baqueano-security-headers.conf"
   sudo nginx -t
   sudo systemctl reload nginx
 }
