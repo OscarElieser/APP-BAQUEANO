@@ -52,3 +52,12 @@ Con aprobación explícita, eliminar únicamente los elementos de los grupos A y
 4. registrar exactamente qué se eliminó y cómo recuperarlo.
 
 No se usará una orden global como `git clean` porque podría abarcar archivos fuera del manifiesto.
+
+## Resultado ejecutado — 2026-10-02
+
+- Eliminados: `temp_old_admin.html`, `temp_old_ops.js`, `temp_old_ops2.js` y `flutter_01.log`.
+- `build/` fue limpiado por Flutter y se regeneró durante las pruebas; se conserva porque ahora contiene artefactos activos de verificación.
+- `.dart_tool/` fue regenerado por `flutter pub get`; se conserva como metadato activo del entorno.
+- Se conservaron `node_modules/`, `.firebase/`, `supabase/.temp/` y `.pnpm-store/` porque mantienen dependencias o estado de herramientas y su eliminación no mejora la estructura del código.
+- No hubo cambios rastreados en `website/`, `web/`, `android/`, `lib/`, `pubspec.yaml` ni `pubspec.lock`.
+- Validación: `flutter analyze` sin hallazgos y `flutter test` con 31 pruebas aprobadas.

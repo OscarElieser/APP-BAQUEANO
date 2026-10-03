@@ -2890,3 +2890,18 @@ ode_modules, builds, cachés, .next, assets de medios, dist-hostinger), contrast
 - 📦 **QUÉ:** Se identificaron como regenerables `build/`, `.dart_tool/`, `node_modules/`, `.firebase/`, `supabase/.temp/`, `.pnpm-store/` y `flutter_01.log`. También se identificaron tres respaldos rastreados sin referencias: `temp_old_admin.html`, `temp_old_ops.js` y `temp_old_ops2.js`.
 - **Conservar:** `.runtime/`, `.snapshots/`, fuentes heredadas, catálogos, migraciones, configuración, documentación histórica y cualquier información pendiente de migrar a Supabase.
 - **Estado:** No se eliminó nada todavía. La operación destructiva espera confirmación explícita sobre los grupos A y B del manifiesto.
+## 2026-10-02 — Limpieza conservadora autorizada
+
+- 🎯 **POR QUÉ:** Retirar basura comprobable sin dañar la estructura ni el funcionamiento del Website, el directorio Flutter `web/`, Android o `lib/`.
+- ⚙️ **CÓMO:** Se aplicará únicamente el manifiesto auditado de alta certeza: cachés regenerables, un log antiguo y tres respaldos temporales sin referencias. Se verificarán rutas absolutas dentro de la raíz antes de cualquier eliminación recursiva.
+- 📦 **QUÉ:** Autorización recibida para que el asistente decida qué eliminar, con la restricción principal de preservar `website/`, `web/`, `android/`, `lib/`, configuración, datos y arquitectura.
+- **Estado:** Eliminación conservadora iniciada; resultados pendientes de validación.
+## 2026-10-02 — Limpieza conservadora completada y validada
+
+- 🎯 **POR QUÉ:** Eliminar únicamente basura comprobada, priorizando la integridad de Website, Flutter y Android.
+- ⚙️ **CÓMO:** Se eliminaron mediante Git los tres respaldos temporales versionados y mediante parche el log antiguo. Flutter limpió artefactos y regeneró metadatos necesarios; el cambio automático de `pubspec.lock` se revirtió porque no pertenecía a la limpieza.
+- 📦 **QUÉ:** Eliminados `temp_old_admin.html`, `temp_old_ops.js`, `temp_old_ops2.js` y `flutter_01.log`. Los tres archivos versionados pueden recuperarse desde Git.
+- **Conservado deliberadamente:** `node_modules/`, `.dart_tool/`, `.firebase/`, `supabase/.temp/`, `.pnpm-store/`, `.runtime/`, `.snapshots/`, código, configuraciones y datos heredados.
+- **Integridad:** `git status` no reporta cambios rastreados en `website/`, `web/`, `android/`, `lib/`, `pubspec.yaml` ni `pubspec.lock`.
+- **Pruebas:** `flutter analyze` terminó con `No issues found`; `flutter test` terminó con 31 pruebas aprobadas.
+- **Estado:** Limpieza completada sin modificar la estructura funcional solicitada.
