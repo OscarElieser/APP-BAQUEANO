@@ -3731,3 +3731,27 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - `docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md` (Matriz consolidada de la rúbrica)
   - **Documentación:** `README.md` actualizado con el desglose formal de los 5 aspectos de la rúbrica del Hackathon.
 
+---
+
+## 2026-10-03 — Diagnóstico y Resolución: Error 400 redirect_uri_mismatch en Google OAuth y Sincronización Git
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - El usuario reporta la captura de pantalla con el error crítico de Google:
+    `Acceso bloqueado: la solicitud de esta aplicación no es válida. Error 400: redirect_uri_mismatch`.
+  - El usuario intentó `git push origin main` y la consola respondió `Everything up-to-date` porque los cambios locales estaban en otra rama o no estaban fusionados a `main`, por lo que el servidor de producción todavía sirve los archivos anteriores con `authDomain: 'baqueanonicaragua.com'` o el redirect_uri en Google Cloud Console necesita verificación.
+  - Objetivo: Identificar la rama activa, verificar el `authDomain` en los archivos y en producción, sincronizar con `main`, y resolver el `redirect_uri_mismatch` de forma definitiva.
+
+- ⚙️ **CÓMO (How / Arquitectura e Implementación):**
+  1. Verificar el estado de git (`git branch`, `git status`, `git log`).
+  2. Determinar si `chore/reorganizacion-repositorio` contiene los cambios de `authDomain: 'app-baqueano.firebaseapp.com'` y fusionarlos o subirlos a `main`.
+  3. Desplegar o actualizar la release en Azure y Firebase Hosting si corresponde.
+  4. Explicar exactamente cómo Google OAuth valida `redirect_uri` y garantizar que apunte al dominio canónico autorizado por Firebase.
+
+- 📦 **QUÉ (What / Entregables):**
+  - Corrección y verificación de `authDomain` en producción.
+  - Sincronización de rama a `main` y actualización de producción.
+  - Solución al error 400 de Google OAuth.
+
+
+- **Resultado final:** barrido completo 28 páginas × 13 anchos + casos 1–12: 3392 comprobaciones, 5 fallos no deterministas (1 caída del navegador headless en index@430; aviso-legal@1024/1366 medido antes de inyectarse `navigation-mega.css` bajo carga). Reejecución de esas páginas en los 13 anchos: 358/358 OK; aviso-legal en aislamiento 9/9 OK. `npm test` OK. Sin commit (pendiente de autorización del propietario). Riesgo residual: páginas que no enlazan `navigation-mega.css` en su `<head>` dependen de la inyección por JS (posible destello breve en redes lentas).
+- **Estado:** Completado. Cómo reanudar: `PORT=5077 node dev-server.js` (raíz) y `npm run test:shell` (website/).
