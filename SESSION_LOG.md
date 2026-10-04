@@ -3932,3 +3932,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** el propietario espera ver la comunidad en producción.
 - ⚙️ **CÓMO:** confirmar si el PR #2 está fusionado en `main` (Azure solo publica desde `main`) y el estado de los checks.
 - 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+
+## 2026-10-04 (sin Copilot + footer) — "no trabajemos con cuota de Copilot, usá Claude, Gemini o Codex; la página no se actualiza, sigue el problema del footer"
+- 🎯 **POR QUÉ:** el check `github-advanced-security` (revisión con IA de Copilot) falla por cuota agotada; el propietario prefiere Claude/Gemini/Codex. La web no muestra cambios y el footer sigue mal.
+- ⚙️ **CÓMO:** verificar si el PR #2 está fusionado (Azure publica solo desde `main`); revisión de código con Claude en GitHub Actions en lugar de Copilot; rediseñar el footer.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Avance:**
+  - **Diagnóstico de "no se actualiza":** PR #2 sigue abierto; `main` sigue en `724a5e3`. Azure publica solo `main` → hay que fusionar el PR para ver cualquier cambio.
+  - **Footer** (`css/baqueano-system.css` §13b, hoja global): distribución definida para las 31 páginas (antes solo en `css/pages/index-exact.css`, 11 páginas, y caía a 2 columnas desde 1024 px). ≥1101 px marca + 4 columnas; 641–1100 px marca en franja + 4 columnas en una fila; ≤640 px 2×2. Verificado con Playwright en 1440/1005/768/390 px (index y testimonios): 5/4/4/2 columnas, overflow 0.
+  - **Copilot → Claude:** nuevo `.github/workflows/claude-review.yml` (`anthropics/claude-code-action@v1`) que revisa cada PR según AGENTS.md; requiere secreto `ANTHROPIC_API_KEY` o `CLAUDE_CODE_OAUTH_TOKEN` y se omite con aviso si falta. El check `github-advanced-security` (IA de Copilot) no está en ningún workflow: se desactiva desde la configuración del repositorio (propietario).
+  - Build Hostinger 721 archivos + verificación OK; smoke OK; YAML válido.

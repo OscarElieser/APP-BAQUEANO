@@ -1,0 +1,85 @@
+# ============================================================================
+# 🧭 BAQUEANO — REVISIÓN DE CÓDIGO CON CLAUDE EN CADA PULL REQUEST
+# ============================================================================
+# 🎯 POR QUÉ:
+# - La revisión con IA de Copilot (check `github-advanced-security`) falla por
+#   cuota mensual agotada. El propietario pidió revisar con Claude en su lugar.
+#
+# ⚙️ CÓMO:
+# - anthropics/claude-code-action revisa el diff del PR y deja comentarios en
+#   línea más un resumen, siguiendo AGENTS.md (seguridad, rendimiento,
+#   paleta oficial, solo Android en Flutter, Firestore → Supabase).
+# - Credencial: secreto ANTHROPIC_API_KEY o CLAUDE_CODE_OAUTH_TOKEN
+#   (Settings → Secrets and variables → Actions). Sin credencial el job se
+#   omite con un aviso: nunca deja el PR en rojo por falta de configuración.
+# - Solo PRs del mismo repositorio (los forks no reciben secretos).
+#
+# 📦 QUÉ:
+# - Check "🤖 Revisión con Claude" en cada PR abierto o actualizado.
+# ============================================================================
+name: 🤖 Revisión con Claude
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  claude-review:
+    name: 🤖 Revisión con Claude
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 🔑 Verificar credencial de Claude
+        id: credential
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -n "${ANTHROPIC_API_KEY}${CLAUDE_CODE_OAUTH_TOKEN}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Falta ANTHROPIC_API_KEY o CLAUDE_CODE_OAUTH_TOKEN en Settings → Secrets → Actions: se omite la revisión con Claude."
+          fi
+
+      - name: 📥 Checkout
+        if: steps.credential.outputs.ready == 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🤖 Revisar el PR con Claude
+        if: steps.credential.outputs.ready == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: true
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Revisá este pull request de BAQUEANO en español, siguiendo AGENTS.md.
+            Prioridad, de mayor a menor:
+            1. Seguridad: XSS (innerHTML con datos de usuario o de la URL), secretos expuestos,
+               reglas de Firestore/RLS de Supabase, CSP, validación en Edge Functions.
+            2. Errores de lógica y casos borde (nulos, valores no finitos, async sin `mounted`).
+            3. Rendimiento: trabajo pesado en el hilo principal, imágenes sin tamaño acotado,
+               listas sin RepaintBoundary en Flutter.
+            4. Reglas del proyecto: `.withValues(alpha:)` en lugar de `.withOpacity()`,
+               paleta oficial, encabezado POR QUÉ / CÓMO / QUÉ, no tocar `ios/` ni `web/`.
+            Comentá en línea solo hallazgos concretos y verificables, con la corrección sugerida.
+            Cerrá con un resumen corto: qué está bien, qué bloquea y qué es opcional.
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"

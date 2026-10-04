@@ -694,6 +694,70 @@ body :is(footer.site-footer-exact, footer.official-footer-exact, footer.main-foo
 }
 
 /* ===================================================
+   13b. FOOTER GLOBAL — DISTRIBUCIÓN RESPONSIVA
+   🎯 POR QUÉ: la distribución vivía solo en css/pages/index-exact.css (11 de
+   31 páginas) y bajaba a 2 columnas desde 1024 px: en laptops quedaban
+   columnas desbalanceadas, mucho vacío y LEGAL sola al final.
+   ⚙️ CÓMO: grilla definida aquí (hoja global, siempre la última):
+   ≥1101 px marca + 4 columnas; 641–1100 px marca en franja horizontal y las
+   4 columnas en una fila; ≤640 px enlaces en 2×2. Listas compactas.
+   📦 QUÉ: mismo pie (js/global-injector.js) equilibrado en toda pantalla.
+   =================================================== */
+footer.site-footer-exact { padding-top: clamp(40px, 6vw, 64px); }
+footer.site-footer-exact .exact-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+}
+footer.site-footer-exact .footer-top-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.35fr) repeat(4, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
+  padding-bottom: clamp(28px, 4vw, 44px);
+}
+footer.site-footer-exact .footer-brand-col { display: flex; flex-direction: column; min-width: 0; }
+footer.site-footer-exact .footer-tagline-text { margin: 4px 0 16px; line-height: 1.5; }
+footer.site-footer-exact .footer-social-row { display: flex; flex-wrap: wrap; gap: 10px; }
+footer.site-footer-exact .footer-social-link { width: 40px; height: 40px; }
+footer.site-footer-exact .footer-autentica-badge { width: 170px; max-width: 100%; height: auto; margin-top: 18px; }
+footer.site-footer-exact .footer-nav-col { min-width: 0; }
+footer.site-footer-exact .footer-nav-col h4 { margin: 0 0 8px; }
+footer.site-footer-exact .footer-accent-bar { width: 28px; height: 3px; border-radius: 2px; background: var(--baqueano-primary, #F65E01); margin-bottom: 14px; }
+footer.site-footer-exact .footer-nav-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+footer.site-footer-exact .footer-nav-col a { line-height: 1.6; overflow-wrap: anywhere; }
+footer.site-footer-exact .footer-bottom-bar { border-top: 1px solid rgba(244, 230, 193, 0.08); padding: 18px 0; }
+footer.site-footer-exact .footer-bottom-bar .exact-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; font-size: 0.8rem; }
+
+/* Laptop y tablet: la marca pasa a una franja horizontal y los 4 grupos de
+   enlaces quedan en una sola fila pareja. */
+@media (max-width: 1100px) {
+  footer.site-footer-exact .footer-top-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  footer.site-footer-exact .footer-brand-col {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 32px;
+    padding-bottom: clamp(20px, 3vw, 28px);
+    border-bottom: 1px solid rgba(244, 230, 193, 0.08);
+  }
+  footer.site-footer-exact .footer-logo-row { margin-bottom: 0; }
+  footer.site-footer-exact .footer-tagline-text { margin: 0; flex: 1 1 220px; }
+  footer.site-footer-exact .footer-autentica-badge { margin-top: 0; width: 140px; }
+}
+
+/* Celular: marca apilada y enlaces en 2×2 (listas cortas, sin vacío). */
+@media (max-width: 640px) {
+  footer.site-footer-exact .footer-top-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
+  footer.site-footer-exact .footer-brand-col { flex-direction: column; align-items: flex-start; gap: 12px; }
+  footer.site-footer-exact .footer-tagline-text { flex: 0 0 auto; }
+  footer.site-footer-exact .footer-bottom-bar .exact-container { justify-content: center; text-align: center; }
+}
+
+/* ===================================================
    14. FONDOS DE PÁGINA
    =================================================== */
 /* Papel de mapa cálido en lugar de blanco plano, solo donde la página no
