@@ -183,6 +183,11 @@
             <span class="ops-nav-item-label">Usuarios</span>
             <span class="ops-nav-badge" id="badgeCount-13">12</span>
           </a>
+          <a class="ops-nav-item" data-tab="36-comunidad">
+            <i class="fa-solid fa-people-group ops-nav-item-icon"></i>
+            <span class="ops-nav-item-label">Comunidad · Moderación</span>
+            <span class="ops-nav-badge" id="badgeCount-36" style="display:none;">0</span>
+          </a>
           <a class="ops-nav-item" data-tab="14-guias">
             <i class="fa-solid fa-person-hiking ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Guías / Baqueanos</span>
@@ -896,6 +901,10 @@
           <div class="ops-view-header"><h1><i class="fa-solid fa-server"></i> Estado del Sistema</h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-heart-pulse ops-empty-icon" style="color: var(--bq-jungle);"></i><div class="ops-empty-title">Servicios en Operación</div><div class="ops-empty-desc">Firebase Auth (Activo) • Cloud Firestore (Activo) • Storage (Activo) • Hosting (Activo).</div></div>
         </section>
+        <section class="ops-view-panel" id="view-36-comunidad">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-people-group"></i> Comunidad · Moderación</h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-people-group ops-empty-icon"></i><div class="ops-empty-title">Experiencias de viajeros</div><div class="ops-empty-desc">Aprobación de publicaciones, denuncias y comentarios de la comunidad.</div></div>
+        </section>
         <section class="ops-view-panel" id="view-34-tarifas">
           <div class="ops-view-header"><h1><i class="fa-solid fa-tags"></i> Gestión de Tarifas</h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-database ops-empty-icon"></i><div class="ops-empty-title">Catálogo verificable de precios</div><div class="ops-empty-desc">Servicios, vigencia, fuente, moneda, disponibilidad y trazabilidad histórica.</div></div>
@@ -1563,8 +1572,11 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261003-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261003-roles-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261004-comunidad-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261003-1"></script>
+  <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
+  <script defer src="js/community-api.js?v=20261004-1"></script>
+  <script defer src="js/ops-center/ops-community-moderation.js?v=20261004-1"></script>
 
   <script>
     // Puente de compatibilidad global sin errores de consola
