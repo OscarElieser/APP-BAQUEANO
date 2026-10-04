@@ -124,6 +124,8 @@
     "staffOnly": "Somente equipe",
     "session": "Sua sessão",
     "closeMenu": "Fechar menu de navegação",
-    "openMenu": "Abrir menu de navegação"
+    "openMenu": "Abrir menu de navegação",
+    "search": "Buscar no BAQUEANO",
+    "searchPlaceholder": "Praias, vulcões, León…"
   }
 }

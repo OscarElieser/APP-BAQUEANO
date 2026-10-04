@@ -371,6 +371,14 @@ RELACIÓN:
     setProfileField('email', user.email || '');
     setProfileField('since', formatDate(user.metadata && user.metadata.creationTime, false));
     setProfileField('last-login', formatDate(user.metadata && user.metadata.lastSignInTime, true));
+    // Seguridad: método real de la cuenta (antes decía "Google: Conectado" a todos).
+    var providers = (user.providerData || []).map(function (entry) { return entry && entry.providerId; });
+    var google = providers.indexOf('google.com') !== -1;
+    var password = providers.indexOf('password') !== -1;
+    setProfileField('auth-provider', google && password ? 'Google y correo con contraseña'
+      : google ? 'Cuenta de Google' : password ? 'Correo y contraseña (protegida por Firebase; BAQUEANO no la guarda)' : 'Cuenta BAQUEANO');
+    setProfileField('email-verified', user.emailVerified ? 'Sí' : 'Pendiente: revisá tu bandeja de entrada');
+    setProfileField('auth-2fa', google ? 'Se configura en tu cuenta de Google' : 'Todavía no disponible para cuentas con correo');
 
     if (typeof user.photoURL === 'string' && user.photoURL.indexOf('https://') === 0) {
       Array.prototype.forEach.call(document.querySelectorAll('.prof-avatar-img, [data-profile-avatar]'), function (img) {
@@ -402,7 +410,23 @@ RELACIÓN:
     }
   }
 
+  // 🎯 POR QUÉ: quien llega desde Testimonios (u otra página) para iniciar
+  //    sesión debe volver exactamente a donde estaba.
+  // ⚙️ CÓMO: ?volver= solo acepta rutas INTERNAS del sitio (página .html con
+  //    query/hash opcional); nunca URLs externas (evita redirección abierta).
+  // 📦 QUÉ: tras iniciar sesión, location.replace(volver).
+  function safeReturnPath() {
+    try {
+      var target = new URLSearchParams(window.location.search).get('volver') || '';
+      return /^[a-z0-9-]+\.html(?:[?#][^\s<>"']*)?$/i.test(target) && target.indexOf('perfil.html') !== 0 ? target : '';
+    } catch (_) { return ''; }
+  }
+
   function onAuthChanged(user) {
+    if (user && safeReturnPath()) {
+      window.location.replace(safeReturnPath());
+      return;
+    }
     if (user) {
       if (panel) panel.hidden = true;
       setPrivateSectionsHidden(false);

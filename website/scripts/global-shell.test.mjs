@@ -156,6 +156,24 @@ async function geometrySweep() {
 async function mobileDrawer(browser) {
   const context = await newContext(browser, { width: 390, height: 844, mobile: true, blockFirebase: true });
   const { page, errors } = await openPage(context, 'historia.html');
+  // Cada clic informa qué paso falló (antes solo se veía "Timeout").
+  const click = async (selector, label) => {
+    try { await page.click(selector, { timeout: 8000 }); }
+    catch (error) {
+      const why = await page.evaluate((sel) => {
+        const el = document.querySelector(sel);
+        if (!el) return 'no existe';
+        const r = el.getBoundingClientRect();
+        const hidden = [];
+        for (let node = el; node; node = node.parentElement) {
+          const c = getComputedStyle(node);
+          if (c.display === 'none' || c.visibility !== 'visible') hidden.push(`${node.tagName.toLowerCase()}.${[...node.classList].join('.')} (${c.display}/${c.visibility})`);
+        }
+        return `caja ${[r.left, r.top, r.width, r.height].map(Math.round)} · ancho ${innerWidth} · html "${document.documentElement.className}" · ocultos: ${hidden.join(' > ') || 'ninguno'}`;
+      }, selector).catch(() => 'sin diagnóstico');
+      throw new Error(`clic "${label}" (${selector}) no respondió: ${why}`);
+    }
+  };
   const state = () => page.evaluate(() => {
     const t = document.getElementById('mobileNavToggle');
     const menu = document.getElementById('navLinksMenu');
@@ -177,7 +195,7 @@ async function mobileDrawer(browser) {
   });
   const closers = ['escape', 'backdrop', 'close'];
   for (let i = 1; i <= 6; i += 1) {
-    await page.click('#mobileNavToggle');
+    await click('#mobileNavToggle', `abrir panel (ciclo ${i})`);
     await page.waitForTimeout(380);
     const s = await state();
     expect(s.expanded === 'true' && s.open, `Panel móvil ciclo ${i}: no abrió (${JSON.stringify(s)})`);
@@ -186,7 +204,7 @@ async function mobileDrawer(browser) {
     const how = closers[i % 3];
     if (how === 'escape') await page.keyboard.press('Escape');
     else if (how === 'backdrop') await page.mouse.click(380, 600);
-    else await page.click('#navLinksMenu .bq-drawer-close');
+    else await click('#navLinksMenu .bq-drawer-close', 'botón cerrar del panel');
     await page.waitForTimeout(380);
     const c = await state();
     expect(c.expanded === 'false' && !c.open, `Panel móvil ciclo ${i} (${how}): no cerró (${JSON.stringify(c)})`);
@@ -194,10 +212,10 @@ async function mobileDrawer(browser) {
   }
 
   // Acordeón: un solo grupo abierto a la vez.
-  await page.click('#mobileNavToggle');
+  await click('#mobileNavToggle', 'abrir panel (acordeón)');
   await page.waitForTimeout(380);
   for (const group of ['explore', 'community', 'account']) {
-    await page.click(`#bqMenuTrigger-${group}`);
+    await click(`#bqMenuTrigger-${group}`, `grupo ${group}`);
     await page.waitForTimeout(150);
     const open = await page.evaluate(() => [...document.querySelectorAll('#navLinksMenu .bq-menu-group.is-open')].map((g) => g.dataset.group));
     expect(open.length === 1 && open[0] === group, `Acordeón: al abrir ${group} quedan abiertos ${open.join(',')}`);
@@ -218,8 +236,10 @@ async function mobileDrawer(browser) {
   expect(tools.thumb, 'Panel móvil: la barra inferior desaparece al abrir el panel');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(350);
-  const bar = await page.evaluate(() => ['#mainNavbar .global-nav-actions > .sos-quick-btn', '#mainNavbar .global-nav-actions > .global-language', '#mainNavbar .global-nav-actions > .bq-account-slot > *', '#mobileNavToggle'].every((sel) => { const el = document.querySelector(sel); const r = el && el.getBoundingClientRect(); return !!(r && r.width > 0 && r.right <= document.documentElement.clientWidth + 1); }));
+  const bar = await page.evaluate(() => ['#mainNavbar .global-nav-actions > .sos-quick-btn', '#mainNavbar .global-nav-actions > .global-language', '#mainNavbar .global-nav-actions > .bq-account-slot > *', '#mobileNavToggle'].every((sel) => { const el = document.querySelector(sel); const r = el && el.getBoundingClientRect(); return !!(r && r.width > 0 && r.right <= document.documentElement.clientWidth + 1 && getComputedStyle(el).visibility === 'visible'); }));
   expect(bar, 'Barra superior móvil: falta SOS, Usuario, ES o ☰');
+  const closedByEscape = await state();
+  expect(closedByEscape.expanded === 'false' && !closedByEscape.open, 'Panel móvil: Escape con un grupo desplegado no cerró el panel');
 
   // Rotación: horizontal y regreso, sin desbordes.
   for (const vp of [{ width: 844, height: 390 }, { width: 390, height: 844 }]) {
@@ -230,9 +250,9 @@ async function mobileDrawer(browser) {
   }
 
   // Elegir un enlace navega y la página nueva carga con el panel cerrado.
-  await page.click('#mobileNavToggle');
+  await click('#mobileNavToggle', 'abrir panel (tras rotación)');
   await page.waitForTimeout(380);
-  await page.click('#bqMenuTrigger-explore');
+  await click('#bqMenuTrigger-explore', 'grupo Explorar');
   await page.waitForTimeout(150);
   await Promise.all([page.waitForURL(/destinos\.html/, { timeout: 15000 }), page.click('#bqMenuPanel-explore a[href="destinos.html"]')]);
   await page.waitForFunction(() => document.getElementById('mobileNavToggle'), null, { timeout: 15000 });
@@ -316,7 +336,7 @@ async function languagePersistence(browser) {
 // verdad: se cubren con la prueba E2E real opcional (BQ_REAL_E2E=1) y, para
 // Google de admin/super_admin, con la verificación manual del propietario.
 
-async function headerAccount(page, until) {
+async function headerAccount(page, until, waitMs = 8000) {
   const read = () => page.evaluate(() => {
     const visible = (el) => { const cs = getComputedStyle(el); return !el.hidden && cs.display !== 'none' && cs.visibility !== 'hidden'; };
     const slot = document.querySelector('#mainNavbar .global-nav-actions .bq-account-slot') || document.querySelector('#mainNavbar .bq-account-slot');
@@ -328,8 +348,8 @@ async function headerAccount(page, until) {
       opsVisible: opsLinks.length > 0 && opsLinks.some(visible)
     };
   });
-  // Espera el estado final (la verificación en vivo es asíncrona) hasta 8 s.
-  const deadline = Date.now() + 8000;
+  // Espera el estado final (la verificación en vivo es asíncrona).
+  const deadline = Date.now() + waitMs;
   let state = await read();
   while (until && !until(state) && Date.now() < deadline) {
     await page.waitForTimeout(250);
@@ -417,7 +437,9 @@ async function rolesAndSession(browser) {
       }
     }, [SESSION_KEY]);
     const { page } = await openPage(context, 'destinos.html');
-    const h = await headerAccount(page, (x) => x.hasLogin);
+    // Depende de descargar el SDK real de Firebase desde gstatic (medido:
+    // 4 s a 14 s según la red): margen amplio. El Ops Center nunca se muestra.
+    const h = await headerAccount(page, (x) => x.hasLogin, 25000);
     const stored = await page.evaluate((key) => localStorage.getItem(key), SESSION_KEY);
     expect(!h.opsVisible && h.hasLogin && stored === null, `CASO 5b: Firebase real no invalidó la sesión falsa ${JSON.stringify({ h, stored })}`);
     await page.goto(`${BASE}/admin.html`, { waitUntil: 'domcontentloaded' });

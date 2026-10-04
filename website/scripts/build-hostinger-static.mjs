@@ -13,7 +13,9 @@ if (path.dirname(output) !== path.resolve(root) || path.basename(output) !== 'di
   throw new Error('Directorio de salida no seguro.');
 }
 
-const publicDirectories = ['assets', 'css', 'js', 'locales'];
+// `data/` lleva los índices generados del buscador global y de BAQUI
+// (scripts/build-search-index.mjs); sin ellos el buscador cae al modo básico.
+const publicDirectories = ['assets', 'css', 'data', 'js', 'locales'];
 const publicRootFiles = new Set([
   '.htaccess', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'robots.txt',
   'service-worker.js', 'sitemap.xml', 'styles.css'
@@ -47,7 +49,7 @@ for (const entry of await fs.readdir(root, { withFileTypes: true })) {
 }
 for (const directory of publicDirectories) await copyTree(path.join(root, directory), path.join(output, directory));
 
-const required = ['index.html', '404.html', 'styles.css', 'js/global-injector.js', 'js/global-language.js', 'locales/es.json', '.htaccess'];
+const required = ['index.html', '404.html', 'testimonios.html', 'styles.css', 'js/global-injector.js', 'js/global-language.js', 'js/global-search.js', 'locales/es.json', 'data/search-index.json', 'data/travel-knowledge.json', '.htaccess'];
 for (const relative of required) {
   try { await fs.access(path.join(output, relative)); }
   catch { throw new Error(`Salida incompleta: falta ${relative}`); }

@@ -39,7 +39,17 @@
     const mapPanel = document.querySelector('.destinos-map-panel');
     const listPanel = document.querySelector('.destinos-destacados-panel');
     const splitGrid = document.querySelector('.destinos-split-grid');
-    const pageSize = 5;
+    // 🎯 POR QUÉ: el catálogo está en DOS secciones ("Todos los destinos" y
+    //    "Más destinos que te encantarán", 5 tarjetas cada una) y el paginador
+    //    de 5 por página trataba todo como una lista: la página 1 vaciaba la
+    //    segunda sección y la página 2 la primera.
+    // ⚙️ CÓMO: una página = lo que caben en ambas filas (5 + 5). Las tarjetas
+    //    visibles se reparten en orden: primero la fila de arriba y luego la de
+    //    abajo; una sección sin tarjetas (p. ej. con filtros) se oculta.
+    // 📦 QUÉ: ninguna sección queda vacía ni con huecos.
+    const catalogRows = [...document.querySelectorAll('.destinos-catalog-row')];
+    const rowCapacity = 5;
+    const pageSize = Math.max(rowCapacity, catalogRows.length * rowCapacity);
     const state = { query: '', category: 'todos', department: '', price: '', rating: 0, verified: false, favoritesOnly: false, page: 1 };
 
     allCards.forEach((card, index) => {
@@ -95,8 +105,24 @@
       const maxPage = Math.max(1, Math.ceil(filtered.length / pageSize));
       state.page = Math.min(state.page, maxPage);
       cards.forEach((card) => { card.hidden = true; });
-      filtered.slice((state.page - 1) * pageSize, state.page * pageSize)
-        .forEach((card) => { card.hidden = false; });
+      const pageCards = filtered.slice((state.page - 1) * pageSize, state.page * pageSize);
+      pageCards.forEach((card, index) => {
+        card.hidden = false;
+        const row = catalogRows[Math.min(catalogRows.length - 1, Math.floor(index / rowCapacity))];
+        // appendChild en orden reconstruye el orden original aunque un filtro
+        // anterior haya movido la tarjeta de fila.
+        if (row) row.appendChild(card);
+      });
+      // Una fila sin tarjetas visibles se oculta junto con su título.
+      catalogRows.forEach((row, index) => {
+        if (index === 0) return;
+        const empty = ![...row.children].some((child) => !child.hidden);
+        row.hidden = empty;
+        const header = row.previousElementSibling;
+        if (header && header.classList.contains('section-header-exact')) header.hidden = empty;
+        const control = row.nextElementSibling;
+        if (control && control.classList.contains('bq-gallery-control')) control.hidden = empty;
+      });
       renderPagination(filtered.length);
       updateResultCount(filtered.length);
       updateUrl();
@@ -211,6 +237,9 @@
       if (!wrap) return;
       const pages = Math.max(1, Math.ceil(total / pageSize));
       wrap.replaceChildren();
+      // Con una sola página no hay nada que paginar.
+      wrap.hidden = pages <= 1;
+      if (pages <= 1) return;
       const addButton = (label, page, ariaLabel, disabled) => {
         const button = document.createElement('button'); button.type = 'button'; button.className = 'pagination-btn';
         button.textContent = label; button.disabled = disabled; if (ariaLabel) button.setAttribute('aria-label', ariaLabel);

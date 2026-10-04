@@ -501,9 +501,10 @@
         <a href="privacidad.html" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Configurar seguridad</a>
       </div>
       <div class="prof-field-list">
-        <div class="prof-field-item"><i class="fa-solid fa-lock"></i><div><small>Acceso</small><strong>Con tu cuenta de Google (BAQUEANO no guarda contraseñas)</strong></div></div>
-        <div class="prof-field-item"><i class="fa-brands fa-google"></i><div><small>Inicio con Google</small><strong>Conectado</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-key"></i><div><small>Autenticación en dos pasos (2FA)</small><strong>Se configura en tu cuenta de Google</strong></div></div>
+        <!-- Datos reales de Firebase Auth (js/auth-panel.js → renderUser); nunca un estado fijo. -->
+        <div class="prof-field-item"><i class="fa-solid fa-lock"></i><div><small>Método de acceso</small><strong data-profile-field="auth-provider">—</strong></div></div>
+        <div class="prof-field-item"><i class="fa-regular fa-envelope-open"></i><div><small>Correo verificado</small><strong data-profile-field="email-verified">—</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-key"></i><div><small>Autenticación en dos pasos (2FA)</small><strong data-profile-field="auth-2fa">—</strong></div></div>
         <div style="font-size:0.75rem;color:var(--prof-muted);border-top:1px dashed #EDF2F7;padding-top:8px;display:flex;justify-content:space-between">
           <span>Último acceso: <strong data-profile-field="last-login">—</strong></span>
           <a href="privacidad.html" style="color:var(--prof-primary);font-weight:700">Ver todas →</a>
@@ -748,9 +749,14 @@
       const sharePassportBtn = document.getElementById('btnSharePassport');
       if (sharePassportBtn) {
         sharePassportBtn.addEventListener('click', () => {
+          // El progreso sale del pasaporte real de la página, nunca de una cifra fija.
+          const progressText = (document.querySelector('.prof-passport-progress-meta') || {}).textContent || '';
+          const explored = Number((/(\d+)\s+de\s+17/.exec(progressText) || [])[1] || 0);
           const shareData = {
-            title: 'Mi Pasaporte Baqueano Nicaragua',
-            text: '¡He explorado 5 de 17 departamentos de Nicaragua con Baqueano! Descubre lo que no sale en el mapa:',
+            title: 'Mi Pasaporte BAQUEANO Nicaragua',
+            text: explored > 0
+              ? `¡Llevo ${explored} de 17 departamentos de Nicaragua explorados con BAQUEANO! Descubrí lo que no sale en el mapa:`
+              : 'Empecé mi Pasaporte BAQUEANO para recorrer los 17 departamentos de Nicaragua. Descubrí lo que no sale en el mapa:',
             url: window.location.href
           };
           if (navigator.share) {
@@ -785,7 +791,7 @@
 <script src="js/navigation.js?v=20261004-menu-2"></script>
 <script src="js/global-injector.js"></script>
 <script src="js/user-session.js?v=20261003-3"></script>
-<script src="js/auth-panel.js?v=20261003-4" defer></script>
+<script src="js/auth-panel.js?v=20261004-1" defer></script>
 </body>
 </html>
 

@@ -124,6 +124,8 @@
     "staffOnly": "Solo personale",
     "session": "La tua sessione",
     "closeMenu": "Chiudi il menu di navigazione",
-    "openMenu": "Apri il menu di navigazione"
+    "openMenu": "Apri il menu di navigazione",
+    "search": "Cerca su BAQUEANO",
+    "searchPlaceholder": "Spiagge, vulcani, León…"
   }
 }

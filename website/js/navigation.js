@@ -122,6 +122,9 @@ function bqRenderGlobalMenu(current) {
         </a>
         <button type="button" class="bq-drawer-close" data-bq-close-drawer aria-label="Cerrar menú de navegación" data-i18n-aria-label="menu.closeMenu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
+      <button type="button" class="bq-drawer-search" data-bq-open-search data-bq-close-drawer>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span data-i18n="menu.searchPlaceholder">Buscá playas, volcanes, León…</span>
+      </button>
       <a href="index.html" class="bq-menu-home exact-nav-link${homeCurrent ? ' active' : ''}"${homeCurrent ? ' aria-current="page"' : ''}>
         <i class="fa-solid fa-house bq-menu-trigger-icon" aria-hidden="true"></i><span data-i18n="menu.home">Inicio</span>
       </a>`;
@@ -281,7 +284,9 @@ function bqInitMenuGroups(navMenu) {
     const panel = group.querySelector('.bq-menu-panel');
     const items = Array.from(panel.querySelectorAll('a[href]:not([hidden])'));
     const onTrigger = event.target === trigger;
-    if (event.key === 'Escape' && group.classList.contains('is-open')) {
+    // En escritorio, Escape pliega solo el desplegable. En el panel móvil se
+    // deja pasar: Escape cierra el panel completo (patrón de diálogo).
+    if (event.key === 'Escape' && group.classList.contains('is-open') && !BQ_MENU_DRAWER_QUERY.matches) {
       event.preventDefault();
       event.stopPropagation();
       bqSetMenuGroup(group, false, { returnFocus: true });
@@ -363,6 +368,7 @@ function buildGlobalMegaNavigation() {
     actions.dataset.globalActionsReady = 'true';
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
+      <button type="button" class="bq-search-trigger" data-bq-open-search aria-label="Buscar en BAQUEANO" data-i18n-aria-label="menu.search" title="Buscar (/)"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
       <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
       <div class="bq-account-slot" data-bq-account><a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html" aria-label="Iniciar sesión"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span></a></div>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>

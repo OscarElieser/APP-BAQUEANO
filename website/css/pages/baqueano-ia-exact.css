@@ -1420,3 +1420,81 @@ body .ia-tags-cloud .ia-dest-empty {
   border: 0 !important; background: none !important; box-shadow: none !important;
   text-align: left !important; font-size: 0.78rem !important;
 }
+
+/* ============================================================================
+   TARJETAS ROTATIVAS POR PARADA ("Cómo moverte" y "Alertas")
+   🎯 POR QUÉ: la información debe corresponder a cada lugar que BAQUI
+      recomienda (uno, tres o más), no ser texto genérico.
+   ⚙️ CÓMO: pestañas por parada (rotan cada 8 s; pausa con mouse o foco) y un
+      panel con datos reales de data/travel-knowledge.json.
+   📦 QUÉ: .ia-rot-tabs, .ia-rot-panel, .ia-rot-chips, .ia-rot-link.
+   ============================================================================ */
+.ia-utility-card { display: flex; flex-direction: column; min-width: 0; }
+.ia-rot-tabs {
+  display: flex; gap: 6px; margin: 0 0 12px; padding-bottom: 4px;
+  overflow-x: auto; scrollbar-width: thin; overscroll-behavior-x: contain;
+}
+.ia-rot-tabs button {
+  display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+  min-height: 34px; padding: 5px 12px 5px 6px; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(22, 93, 111, 0.22); background: #F4F9FA; color: #165D6F;
+  font: 700 0.76rem/1.1 "Plus Jakarta Sans", Inter, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.ia-rot-tabs button span {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(22, 93, 111, 0.14); font-size: 0.7rem;
+}
+.ia-rot-tabs button[aria-selected="true"] { background: #165D6F; border-color: #165D6F; color: #FFFFFF; }
+.ia-rot-tabs button[aria-selected="true"] span { background: #F65E01; color: #FFFFFF; }
+.ia-rot-tabs button:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.ia-rot-single { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 10px; color: #165D6F; font-weight: 800; font-size: 0.82rem; }
+.ia-rot-panel { animation: iaRotIn 0.35s ease both; }
+@keyframes iaRotIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.ia-rot-lead { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; margin: 0 0 12px; font-size: 0.82rem; line-height: 1.5; color: #334155; }
+.ia-rot-lead i { color: #F65E01; margin-top: 3px; }
+.ia-rot-list { gap: 10px; }
+.ia-rot-list li.is-warning > i { background: rgba(246, 94, 1, 0.14); color: #C2410C; }
+.ia-rot-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.ia-rot-chips span {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px;
+  background: rgba(22, 93, 111, 0.08); color: #165D6F; font-size: 0.74rem; font-weight: 700;
+}
+.ia-rot-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: #165D6F; font-weight: 800; font-size: 0.8rem; text-decoration: none; }
+.ia-rot-link:hover { color: #C2410C; }
+.ia-rot-missing { display: flex; gap: 8px; margin: 0 0 10px; padding: 8px 10px; border-radius: 10px; background: #FFF7ED; color: #9A3412; font-size: 0.78rem; }
+@media (prefers-reduced-motion: reduce) { .ia-rot-panel { animation: none; } }
+
+/* ============================================================================
+   🎯 POR QUÉ: "Conocé cada parada" muestra la ficha real de cada lugar de la
+      ruta (si BAQUI recomienda 3 lugares, rota entre los 3).
+   ⚙️ CÓMO: tarjeta a todo el ancho de la grilla; foto + texto en dos columnas
+      desde 760 px y apilado en celular; listas en grilla auto-fit.
+   📦 QUÉ: .ia-discover-card, .ia-discover, .ia-discover-grid.
+   ============================================================================ */
+.ia-discover-card { grid-column: 1 / -1; }
+.ia-discover { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.ia-discover-media { margin: 0; border-radius: 14px; overflow: hidden; background: #F4E6C1; aspect-ratio: 3 / 2; }
+.ia-discover-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ia-discover-copy { min-width: 0; }
+.ia-discover-title { margin: 0 0 4px; font-size: 1.15rem; font-weight: 800; color: #0F172A; }
+.ia-discover-tagline { margin: 0 0 10px; color: #165D6F; font-weight: 700; font-size: 0.86rem; }
+.ia-discover-desc { margin: 0 0 14px; color: #334155; font-size: 0.86rem; line-height: 1.6; }
+.ia-discover-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.ia-discover-block { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px; }
+.ia-discover-block h5 { margin: 0 0 8px; font-size: 0.8rem; font-weight: 800; color: #0F172A; display: flex; align-items: center; gap: 6px; }
+.ia-discover-block h5 i { color: #F65E01; }
+.ia-discover-block ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.ia-discover-block li { font-size: 0.8rem; line-height: 1.45; color: #334155; }
+.ia-discover-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.ia-discover-verified { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(22, 93, 111, 0.06); border-left: 3px solid #165D6F; }
+.ia-discover-verified h5 { margin: 0 0 6px; font-size: 0.8rem; font-weight: 800; color: #165D6F; display: flex; align-items: center; gap: 6px; }
+.ia-discover-verified ul { margin: 0 0 6px; padding-left: 18px; display: grid; gap: 4px; }
+.ia-discover-verified li { font-size: 0.8rem; line-height: 1.45; color: #334155; }
+.ia-discover-verified p { margin: 0; font-size: 0.72rem; color: #64748B; }
+.ia-discover-verified a { color: #165D6F; font-weight: 700; }
+/* Con varias paradas, todas las pestañas a la vista (pasan a otra línea). */
+.ia-rot-tabs { flex-wrap: wrap; overflow-x: visible; }
+@media (min-width: 760px) {
+  .ia-discover { grid-template-columns: minmax(220px, 340px) minmax(0, 1fr); align-items: start; }
+}

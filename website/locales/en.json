@@ -124,6 +124,8 @@
     "staffOnly": "Staff only",
     "session": "Your session",
     "closeMenu": "Close navigation menu",
-    "openMenu": "Open navigation menu"
+    "openMenu": "Open navigation menu",
+    "search": "Search BAQUEANO",
+    "searchPlaceholder": "Search beaches, volcanoes, León…"
   }
 }

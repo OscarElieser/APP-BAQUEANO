@@ -124,6 +124,8 @@
     "staffOnly": "Nur Personal",
     "session": "Deine Sitzung",
     "closeMenu": "Navigationsmenü schließen",
-    "openMenu": "Navigationsmenü öffnen"
+    "openMenu": "Navigationsmenü öffnen",
+    "search": "In BAQUEANO suchen",
+    "searchPlaceholder": "Strände, Vulkane, León…"
   }
 }

@@ -495,80 +495,81 @@
     measurementId: 'G-J2FBQHH47T'
   };
 
-  const SUPABASE_REST_PROFILES_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/profiles';
-  const SUPABASE_ANON_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+  // ==========================================================================
+  // 🎯 POR QUÉ: el perfil se enviaba a Supabase con la clave pública y con el
+  //    rol que decía el navegador (incluso "superadmin"). Supabase lo rechazaba
+  //    (permiso revocado) y, si alguna vez lo aceptara, sería una escalada de
+  //    privilegios. Además las escrituras a Firestore llevaban campos fuera de
+  //    la lista blanca de firestore.rules, así que tampoco se guardaban.
+  // ⚙️ CÓMO: solo se escribe `users/{uid}` en Firestore con los campos que
+  //    permiten las reglas; js/firestore-mirror.js replica cada escritura
+  //    confirmada en Supabase a través de la Edge Function baqueano-mirror,
+  //    que verifica el ID token de Firebase. El rol nunca sale del navegador:
+  //    lo deciden los Custom Claims y public.official_super_admins.
+  // 📦 QUÉ: ensureUserDocument() al iniciar sesión y persistProfile() al editar.
+  // ==========================================================================
+  const PROFILE_LANGUAGES = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+  const PROFILE_CURRENCIES = ['NIO', 'USD'];
+  const shortText = (value, max) => String(value == null ? '' : value).trim().slice(0, max);
 
-  /**
-   * Mapea el rol interno de Baqueano a la restricción CHECK de public.profiles en Supabase:
-   * CHECK (role IN ('traveler', 'business_owner', 'guide', 'editor', 'admin', 'superadmin'))
-   */
-  function mapRoleToSupabase(role) {
-    if (role === 'super_admin' || role === 'superadmin') return 'superadmin';
-    if (role === 'admin') return 'admin';
-    if (role === 'guide') return 'guide';
-    if (role === 'business_owner' || role === 'partner') return 'business_owner';
-    if (role === 'editor' || role === 'auditor') return 'editor';
-    return 'traveler';
+  function userDocs() {
+    if (!(window.firebase && window.firebase.firestore && window.firebase.auth)) return null;
+    try { return window.firebase.firestore().collection('users'); } catch (error) { return null; }
   }
 
-  /**
-   * Sincroniza la identidad autenticada de Firebase con la tabla `public.profiles` en Supabase.
-   * Utiliza primero el cliente oficial de Supabase (si está cargado) y fallback defensivo vía REST API.
-   */
-  async function syncProfileToSupabase(userObj) {
-    if (!userObj || (!userObj.firebaseUid && !userObj.uid)) return;
-    const uid = userObj.firebaseUid || userObj.uid;
-    if (String(uid).startsWith('usr_')) return; // Omitir sesiones dummy locales
-
-    const profileData = {
-      firebase_uid: uid,
-      email: (userObj.email || '').trim().toLowerCase(),
-      display_name: userObj.name || userObj.displayName || '',
-      phone: userObj.phone || null,
-      avatar_url: userObj.avatar || userObj.photoURL || null,
-      role: mapRoleToSupabase(userObj.role),
-      metadata: {
-        settings: userObj.settings || {},
-        travel_preferences: userObj.travelPreferences || {},
-        two_factor_enabled: !!userObj.twoFactorEnabled,
-        last_synced_at: new Date().toISOString()
-      },
-      updated_at: new Date().toISOString()
-    };
-
-    // 1. Cliente oficial window.baqueanoSupabase (si está activo en la página)
-    if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
-      try {
-        const { error } = await window.baqueanoSupabase.from('profiles').upsert(profileData, { onConflict: 'firebase_uid' });
-        if (!error) {
-          console.info('🟢 [Baqueano Session] Perfil y rol respaldados con éxito en Supabase Cloud.');
-          return;
-        }
-        console.warn('🟡 [Baqueano Session] Aviso al guardar en Supabase SDK, intentando REST fallback:', error.message);
-      } catch (sdkErr) {
-        console.warn('🟡 [Baqueano Session] Excepción en Supabase SDK:', sdkErr.message);
-      }
-    }
-
-    // 2. Respaldo directo de alta resiliencia vía REST API de Supabase
+  // Alta del directorio de usuarios: una vez por cuenta (create con las
+  // reglas: uid y correo del token, rol "explorer", contadores en cero).
+  async function ensureUserDocument(firebaseUser, session) {
+    const users = userDocs();
+    if (!users || !firebaseUser || !firebaseUser.uid) return;
+    const flag = 'bq_user_doc_' + firebaseUser.uid;
+    try { if (sessionStorage.getItem(flag)) return; } catch (_) {}
     try {
-      const response = await fetch(`${SUPABASE_REST_PROFILES_URL}?on_conflict=firebase_uid`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'resolution=merge-duplicates'
-        },
-        body: JSON.stringify(profileData)
-      });
-      if (response.ok) {
-        console.info('🟢 [Baqueano Session] Perfil sincronizado en Supabase PostgreSQL (REST).');
-      } else {
-        console.warn('🟡 [Baqueano Session] Respuesta en Supabase REST:', response.status);
+      const ref = users.doc(firebaseUser.uid);
+      const snapshot = await ref.get();
+      if (!snapshot.exists) {
+        const now = new Date().toISOString();
+        const doc = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email || '',
+          displayName: shortText(session && session.name, 120),
+          role: 'explorer',
+          explorerLevel: 'Explorador Inicial',
+          xp: 0,
+          stamps: [],
+          badges: [],
+          favorites: [],
+          createdAt: firebaseUser.metadata && firebaseUser.metadata.creationTime ? new Date(firebaseUser.metadata.creationTime).toISOString() : now,
+          updatedAt: now
+        };
+        if (firebaseUser.photoURL) doc.photoUrl = String(firebaseUser.photoURL).slice(0, 500);
+        await ref.set(doc);
       }
-    } catch (restErr) {
-      console.warn('🟡 [Baqueano Session] Aviso de red hacia Supabase REST:', restErr.message);
+      try { sessionStorage.setItem(flag, '1'); } catch (_) {}
+    } catch (error) {
+      console.warn('[Baqueano Session] No se pudo registrar el usuario en Firestore:', error.message);
+    }
+  }
+
+  // Edición del perfil: solo nombre, foto y el mapa `profile` validado.
+  async function persistProfile(userObj) {
+    const users = userDocs();
+    const current = window.firebase && window.firebase.auth ? window.firebase.auth().currentUser : null;
+    if (!users || !current || !userObj || userObj.firebaseUid !== current.uid) return false;
+    const settings = userObj.settings || {};
+    const profile = {};
+    if (userObj.phone) profile.phone = shortText(userObj.phone, 30);
+    if (PROFILE_LANGUAGES.includes(settings.language)) profile.language = settings.language;
+    if (PROFILE_CURRENCIES.includes(settings.currency)) profile.currency = settings.currency;
+    const update = { displayName: shortText(userObj.name, 120), profile: profile, updatedAt: new Date().toISOString() };
+    if (userObj.avatar && /^https:\/\//.test(userObj.avatar)) update.photoUrl = String(userObj.avatar).slice(0, 500);
+    try {
+      await ensureUserDocument(current, userObj);
+      await users.doc(current.uid).set(update, { merge: true });
+      return true;
+    } catch (error) {
+      console.warn('[Baqueano Session] Perfil no guardado en Firestore:', error.message);
+      return false;
     }
   }
 
@@ -679,38 +680,8 @@
       updateNavbar();
       window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: userObj }));
 
-      // 2. Persistencia en FIREBASE FIRESTORE (Almacenamiento Principal)
-      if (typeof window.firebase !== 'undefined' && window.firebase.firestore) {
-        try {
-          const db = window.firebase.firestore();
-          const uid = userObj.firebaseUid || 'guest_uid';
-          db.collection('users').doc(uid).set({
-            displayName: userObj.name || '',
-            name: userObj.name || '',
-            email: userObj.email || '',
-            phone: userObj.phone || '',
-            avatar: userObj.avatar || '',
-            role: userObj.role || 'explorer',
-            roleLabel: userObj.roleLabel || 'Explorador',
-            twoFactorEnabled: !!userObj.twoFactorEnabled,
-            settings: userObj.settings || { language: 'es', currency: 'USD' },
-            travelPreferences: userObj.travelPreferences || {},
-            savedPaymentMethods: userObj.savedPaymentMethods || [],
-            bookings: userObj.bookings || [],
-            billingHistory: userObj.billingHistory || [],
-            updatedAt: new Date().toISOString()
-          }, { merge: true }).then(() => {
-            console.info('🟢 [Baqueano Session] Perfil y configuración guardados en Firebase Firestore (Principal).');
-          }).catch((err) => {
-            console.warn('🟡 [Baqueano Session] Aviso al guardar en Firestore:', err.message);
-          });
-        } catch (fbErr) {
-          console.warn('🟡 [Baqueano Session] Excepción en Firestore:', fbErr.message);
-        }
-      }
-
-      // 3. Persistencia en SUPABASE (Perfiles y Roles Oficiales)
-      syncProfileToSupabase(userObj);
+      // 2. Firestore (fuente principal); el espejo lo replica en Supabase.
+      persistProfile(userObj);
 
       return userObj;
     },
@@ -820,49 +791,6 @@
       }
     },
 
-    loginAsExplorer: function(name, email) {
-      const explorerEmail = (email || 'explorador@baqueano.ni').trim().toLowerCase();
-      // Acceso local sin Firebase: NUNCA concede privilegios, aunque se escriba
-      // un correo oficial (antes bastaba con teclearlo para obtener rol admin).
-      const privileged = null;
-      const session = {
-        firebaseUid: 'usr_' + Date.now(),
-        name: (name || (privileged ? 'Administrador' : 'Explorador Baqueano')).trim(),
-        email: explorerEmail,
-        phone: '+505 8443-1289',
-        avatar: 'assets/images/logo.png',
-        role: privileged ? privileged.role : 'explorer',
-        roleLabel: privileged ? privileged.roleLabel : 'Explorador',
-        memberSince: new Date().toLocaleDateString('es-NI', { month: 'long', year: 'numeric' }),
-        emailVerified: false, // Sesión local: el correo no fue verificado por Firebase.
-        providerIds: ['baqueano.identity'],
-        isLoggedIn: true,
-        settings: { language: 'es', currency: 'USD' },
-        travelPreferences: { pace: 'moderate', terrain: 'montana', diet: 'tipica' },
-        bookings: [
-          {
-            id: 'res-bq-001',
-            destinationName: 'Monumento Nacional Cañón de Somoto',
-            destinationDepartment: 'Madriz',
-            date: '2026-10-15',
-            time: '08:00 AM',
-            status: 'upcoming',
-            statusLabel: 'Confirmada',
-            totalUsd: 15,
-            totalNio: 550,
-            guideName: 'Don José Baqueano (Comunitario)',
-            pax: 2
-          }
-        ],
-        billingHistory: [],
-        savedPaymentMethods: []
-      };
-      saveSession(session);
-      updateNavbar();
-      window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: session }));
-      return session;
-    },
-
     logout: async function() {
       // 1. Cierre seguro de Firebase con timeout de salvaguarda (1.2s). En
       //    páginas sin SDK se carga primero (máx. 4 s): si no, Firebase
@@ -907,58 +835,6 @@
       if (!user) return null;
       Object.assign(user, updatedFields);
       this.saveUser(user);
-      return user;
-    },
-
-    addBooking: function(bookingData) {
-      let user = loadSession();
-      if (!user) return null;
-      if (!user.bookings) user.bookings = [];
-      user.bookings.unshift(bookingData);
-      this.saveUser(user);
-
-      // Sincronizar reserva en Supabase (reservations)
-      if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
-        const uid = user.firebaseUid || 'guest_uid';
-        const reservationCode = bookingData.id || ('RES-' + Date.now().toString(36).toUpperCase());
-        window.baqueanoSupabase.from('reservations').insert({
-          reservation_code: reservationCode,
-          user_uid: uid,
-          service_title: bookingData.destinationName || 'Expedición Baqueano',
-          travel_date: bookingData.date || new Date().toISOString().split('T')[0],
-          people_count: Number(bookingData.pax) || 1,
-          total_price: Number(bookingData.totalNio) || (Number(bookingData.totalUsd || 0) * 36.65),
-          currency: 'NIO',
-          status: bookingData.status || 'pending',
-          notes: bookingData.guideName ? 'Guía: ' + bookingData.guideName : null
-        }).then(({ error }) => {
-          if (error) console.warn('[Supabase Sync] Aviso en reserva:', error.message);
-          else console.info('🟢 [Supabase Sync] Reserva respaldada con éxito en Supabase.');
-        }).catch(err => console.warn('[Supabase Sync] Error reserva:', err.message));
-      }
-
-      return user;
-    },
-
-    cancelBooking: function(bookingId) {
-      let user = loadSession();
-      if (!user) return null;
-      const booking = (user.bookings || []).find(b => b.id === bookingId);
-      if (booking) {
-        booking.status = 'cancelled';
-        booking.statusLabel = 'Cancelada';
-        this.saveUser(user);
-
-        // Cancelar en Supabase
-        if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
-          window.baqueanoSupabase.from('reservations')
-            .update({ status: 'cancelled', updated_at: new Date().toISOString() })
-            .eq('reservation_code', bookingId)
-            .then(({ error }) => {
-              if (error) console.warn('[Supabase Sync] Error al cancelar en Supabase:', error.message);
-            }).catch(e => console.warn('[Supabase Sync] Excepción cancelación:', e.message));
-        }
-      }
       return user;
     },
 
@@ -1099,27 +975,8 @@
       });
     }
 
-    // Sincronizar usuario con la base de datos Firestore (Directorio de Usuarios)
-    if (typeof window.firebase !== 'undefined' && window.firebase.firestore) {
-      try {
-        const db = window.firebase.firestore();
-        db.collection('users').doc(firebaseUser.uid).set({
-          displayName: session.name,
-          email: session.email,
-          role: session.role,
-          explorerLevel: 'Explorador Inicial',
-          status: 'active',
-          updatedAt: new Date().toISOString(),
-          // Evitamos sobreescribir createdAt si ya existe con merge: true
-          createdAt: firebaseUser.metadata && firebaseUser.metadata.creationTime ? new Date(firebaseUser.metadata.creationTime).toISOString() : new Date().toISOString()
-        }, { merge: true }).catch(function(err) {
-          console.warn('[Baqueano Session] Omitido guardado en Firestore:', err.message);
-        });
-      } catch (err) {}
-    }
-
-    // Sincronizar usuario y rol oficial en Supabase PostgreSQL (public.profiles)
-    syncProfileToSupabase(session);
+    // Directorio de usuarios en Firestore (sin rol del cliente; ver ensureUserDocument).
+    ensureUserDocument(firebaseUser, session);
 
     return session;
   }

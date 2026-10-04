@@ -4017,6 +4017,19 @@ img {
   transform: scale(1);
 }
 
+/* 🎯 POR QUÉ: (1) el modal "Registrar mi negocio" se abre con .is-open, pero
+      solo .active lo mostraba: el botón parecía no funcionar. (2) Cerrado, su
+      formulario forzaba visibility:visible (index.css) y, como capa fija e
+      invisible, se quedaba con los clics del centro de la pantalla: enlaces
+      del footer, tarjetas y botones de la portada "no respondían".
+   ⚙️ CÓMO: .is-open equivale a .active; con el modal cerrado ningún
+      descendiente es visible ni recibe eventos.
+   📦 QUÉ: modales .modal-backdrop-pro coherentes en todo el sitio. */
+.modal-backdrop-pro.is-open { opacity: 1; visibility: visible; }
+.modal-backdrop-pro.is-open .modal-card-dialog { transform: scale(1); }
+.modal-backdrop-pro:not(.active):not(.is-open) { pointer-events: none; }
+.modal-backdrop-pro:not(.active):not(.is-open) * { visibility: hidden !important; pointer-events: none !important; }
+
 .modal-close-x {
   position: absolute;
   top: 1.5rem;

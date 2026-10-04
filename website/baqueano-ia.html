@@ -47,7 +47,7 @@
   <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/pages/baqueano-ia-exact.css?v=20261003-plan-2">
+  <link rel="stylesheet" href="css/pages/baqueano-ia-exact.css?v=20261004-rutas-2">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
 
@@ -604,77 +604,25 @@
       <a href="aliados.html" style="font-size:0.88rem;color:var(--ia-primary);font-weight:700;text-decoration:none">Ver más recomendaciones →</a>
     </div>
 
+    <!-- 🎯 Sin tarjetas de ejemplo: los servicios aparecen solo si existen en
+         Supabase y están vinculados a la ruta (js/baqueano-travel-session.js). -->
     <div class="ia-recs-grid">
-      <!-- 1 -->
-      <div class="ia-rec-card">
-        <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #165D6F 0%, #0B253A 100%);">
-          <span class="ia-rec-badge"><i class="fa-solid fa-hotel"></i> Hospedaje</span>
-          <img src="assets/images/assistant/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
-        </div>
-        <div class="ia-rec-content">
-          <h4 class="ia-rec-title">Hotel Boutique Adela</h4>
-          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.8 (120) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 1,800 / noche</span>
-          <a href="aliados.html" class="ia-rec-btn">Ver detalle</a>
-        </div>
-      </div>
-      <!-- 2 -->
-      <div class="ia-rec-card">
-        <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #F65E01 0%, #0B253A 100%);">
-          <span class="ia-rec-badge"><i class="fa-solid fa-utensils"></i> Gastronomía</span>
-          <img src="assets/images/assistant/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
-        </div>
-        <div class="ia-rec-content">
-          <h4 class="ia-rec-title">Restaurante El Zaguán</h4>
-          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.7 (210) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 350 / persona</span>
-          <a href="gastronomia.html" class="ia-rec-btn">Ver detalle</a>
-        </div>
-      </div>
-      <!-- 3 -->
-      <div class="ia-rec-card">
-        <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #4A7A5A 0%, #0B253A 100%);">
-          <span class="ia-rec-badge"><i class="fa-solid fa-person-hiking"></i> Guía Local</span>
-          <img src="assets/images/assistant/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
-        </div>
-        <div class="ia-rec-content">
-          <h4 class="ia-rec-title">Guía Local Don Carlos</h4>
-          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.9 (64) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 800 / tour</span>
-          <a href="https://wa.me/50588880000" target="_blank" rel="noopener" class="ia-rec-btn">Contactar</a>
-        </div>
-      </div>
-      <!-- 4 -->
-      <div class="ia-rec-card">
-        <div class="ia-rec-img-wrap" style="background: linear-gradient(135deg, #0284C7 0%, #0B253A 100%);">
-          <span class="ia-rec-badge"><i class="fa-solid fa-water"></i> Tour Acuático</span>
-          <img src="assets/images/assistant/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="ia-rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
-        </div>
-        <div class="ia-rec-content">
-          <h4 class="ia-rec-title">Tour en Kayak Isletas</h4>
-          <span class="ia-rec-loc"><i class="fa-solid fa-location-dot"></i> Granada</span>
-          <span class="ia-rec-rating">★ 4.8 (93) · <small style="color:var(--ia-green);font-weight:700">Verificado BAQUEANO</small></span>
-          <span class="ia-rec-price">C$ 600 / persona</span>
-          <a href="experiencias.html" class="ia-rec-btn">Reservar</a>
-        </div>
-      </div>
+      <p class="ia-empty-state">Todavía no hay servicios vinculados y verificables para esta ruta. BAQUEANO no mostrará recomendaciones ficticias.</p>
     </div>
   </section>
 
   <!-- 3 UTILITY FOOTER STRIPS -->
   <section class="ia-utility-section">
+    <!-- CONOCÉ CADA PARADA: ficha real rotativa de cada lugar de la ruta -->
+    <div class="ia-utility-card ia-discover-card">
+      <h4><i class="fa-solid fa-map-location-dot" style="color:var(--ia-primary)"></i> Conocé cada parada de tu ruta</h4>
+      <div class="ia-rot-body"><p class="ia-guide-note">Contale a BAQUI a dónde querés ir: acá vas a ver qué hacer, qué conocer y qué probar en cada lugar de tu ruta.</p></div>
+    </div>
+
     <!-- CÓMO MOVERTE -->
     <div class="ia-utility-card">
       <h4><i class="fa-solid fa-car-side" style="color:var(--ia-primary)"></i> Cómo moverte en tu ruta</h4>
-      <div style="display:flex;flex-direction:column;gap:8px;font-size:0.82rem;color:var(--ia-muted)">
-        <div><strong>Transporte privado:</strong> Más comodidad y flexibilidad de horario.</div>
-        <div><strong>Shuttle turístico:</strong> Económico y seguro entre Granada y Masaya.</div>
-        <div><strong>Alquiler de vehículo:</strong> Libertad total para explorar miradores.</div>
-        <div><strong>Transporte local:</strong> Experiencia auténtica en buses interurbanos.</div>
-      </div>
+      <div class="ia-rot-body"><p class="ia-guide-note">Agregá destinos y te digo cómo llegar a cada uno.</p></div>
     </div>
 
     <!-- CLIMA TERRITORIAL EN VIVO -->
@@ -700,12 +648,7 @@
     <!-- ALERTAS Y RECOMENDACIONES -->
     <div class="ia-utility-card">
       <h4><i class="fa-solid fa-circle-exclamation" style="color:#EF4444"></i> Alertas y recomendaciones</h4>
-      <div style="display:flex;flex-direction:column;gap:6px;font-size:0.8rem;color:var(--ia-muted)">
-        <div>✔ Condiciones normales para viajar.</div>
-        <div>✔ Llevar protección solar y agua suficiente.</div>
-        <div>✔ Respetar las indicaciones en el Parque Nacional Volcán Masaya.</div>
-        <div>✔ Seguir sugerencias de guías locales acreditados.</div>
-      </div>
+      <div class="ia-rot-body"><p class="ia-guide-note">Las alertas y recomendaciones se ajustan a cada lugar de tu ruta.</p></div>
     </div>
   </section>
 
@@ -1067,7 +1010,7 @@
       }
     });
   </script>
-<script src="js/baqueano-travel-session.js?v=20261003-microphone-1"></script>
+<script src="js/baqueano-travel-session.js?v=20261004-rutas-2"></script>
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/baqueano-route-weather.js?v=20260929-1"></script>
 <script src="js/baqueano-assistant.js?v=20261003-microphone-1"></script>

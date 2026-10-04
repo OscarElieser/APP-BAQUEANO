@@ -485,6 +485,8 @@
     "staffOnly": "Solo personal",
     "session": "Tu sesión",
     "closeMenu": "Cerrar menú de navegación",
-    "openMenu": "Abrir menú de navegación"
+    "openMenu": "Abrir menú de navegación",
+    "search": "Buscar en BAQUEANO",
+    "searchPlaceholder": "Buscá playas, volcanes, León…"
   }
 }

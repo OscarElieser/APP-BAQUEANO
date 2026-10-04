@@ -145,6 +145,8 @@
         .bq-stamp-sub   { font-size: .65rem; color: #64748B; text-transform: uppercase; letter-spacing: .1em; }
 
         /* ── Botón OPS Center Flotante ── */
+        /* Con el pie a la vista, la burbuja de BAQUI no tapa sus enlaces. */
+        html.bq-footer-visible #bqSuggestion { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; transition: opacity .2s ease, visibility 0s linear .2s; }
         /* ── Toast de Retroalimentación Global ── */
         #bqGlobalToast { position: fixed; bottom: 80px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
         @keyframes bqToastIn  { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:none; } }
@@ -286,6 +288,14 @@
     footer.setAttribute('role', 'contentinfo');
     footer.innerHTML = bqFooterHTML();
     document.body.appendChild(footer);
+    // 🎯 La burbuja de sugerencias de BAQUI tapaba "Cookies" y "Aviso Legal".
+    // ⚙️ Mientras el pie está a la vista se marca <html>; el CSS la aparta.
+    // 📦 Enlaces del footer siempre clicables.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        document.documentElement.classList.toggle('bq-footer-visible', entries.some(function (entry) { return entry.isIntersecting; }));
+      }, { rootMargin: '0px 0px -40px 0px' }).observe(footer);
+    }
   }
 
   function bqFooterLinks(title, links) {
@@ -317,7 +327,7 @@
         '</div>' +
         bqFooterLinks('EXPLORÁ', [['index.html', 'Inicio'], ['destinos.html', 'Destinos'], ['mapa.html', 'Mapa Interactivo'], ['experiencias.html', 'Experiencias'], ['departamento.html', 'Departamentos']]) +
         bqFooterLinks('CULTURA', [['historia.html', 'Historia &amp; Memoria'], ['gastronomia.html', 'Gastronomía Ancestral'], ['musica.html', 'Son Sonoro Folk'], ['ambiental.html', 'Custodia Ambiental'], ['aliados.html', 'Red de Aliados']]) +
-        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
+        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['testimonios.html', 'Experiencias de viajeros'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
         bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['aviso-legal.html', 'Aviso Legal']]) +
       '</div></div>' +
       '<div class="footer-bottom-bar"><div class="exact-container">' +
@@ -519,79 +529,32 @@
   }
 
   // ========================================================================
-  // 🎯 POR QUÉ: permitir encontrar contenido del ecosistema sin salir de BAQUEANO.
-  // ⚙️ CÓMO: consulta un índice local curado, normaliza acentos y pondera título,
-  //    categoría, descripción y palabras clave antes de ordenar los resultados.
-  // 📦 QUÉ: buscador interno con resultados enlazados a páginas y secciones reales.
+  // 🎯 POR QUÉ: buscador global DENTRO de BAQUEANO (destinos, departamentos,
+  //    categorías, platos, artistas y páginas) con enlace directo al punto.
+  // ⚙️ CÓMO: la lógica vive en js/global-search.js (índice generado desde los
+  //    catálogos reales: data/search-index.json). Aquí solo se carga y, si
+  //    alguien envía un buscador antes de que termine de cargar, se guarda
+  //    la consulta para resolverla al llegar.
+  // 📦 QUÉ: window.BaqueanoSiteSearch (open, go, search) en todas las páginas.
   // ========================================================================
   function initInternalSiteSearch() {
-    if (document.getElementById('bqSiteSearchResults')) return;
-    var records = [
-      ['Destinos de Nicaragua','Destinos','Volcanes, playas, montañas, reservas y ciudades para explorar.','destinos.html','destinos viajar turismo volcan playa montaña naturaleza aventura'],
-      ['Departamentos y territorios','Explorar','Información de los 17 territorios de Nicaragua.','departamento.html','departamentos territorios leon managua granada masaya rivas carazo chinandega matagalpa esteli boaco chontales madriz nueva segovia rio san juan caribe racccn racs'],
-      ['Mapa interactivo','Explorar','Ubicá destinos, servicios y puntos de interés en el mapa nacional.','mapa.html','mapa ubicacion gps lugares rutas coordenadas'],
-      ['Experiencias','Explorar','Actividades, senderos y vivencias comunitarias.','experiencias.html','experiencias tours senderismo aventura comunidades guia'],
-      ['BAQUI','Planificación','Asistente para crear rutas y consultar clima por territorio.','baqueano-ia.html','ia inteligencia artificial ruta itinerario clima viaje planificar'],
-      ['Mi viaje','Planificación','Organizá destinos, presupuesto, días y experiencias.','mi-viaje.html','viaje ruta itinerario presupuesto reservas plan'],
-      ['Historia y memoria','Cultura','Historia nacional, personajes, museos y sitios de memoria.','historia.html','historia museos monumentos independencia cultura memoria ruben dario sandino'],
-      ['Gastronomía nicaragüense','Cultura','Platos, bebidas, recetas y tradiciones culinarias.','gastronomia.html','comida gastronomia recetas nacatamal vigoron gallo pinto quesillo'],
-      ['Música de Nicaragua','Cultura','Archivo sonoro, artistas, géneros e instrumentos.','musica.html','musica canciones artistas marimba son nica audio folklor'],
-      ['Custodia ambiental','Naturaleza','Conservación, áreas protegidas y buenas prácticas ambientales.','ambiental.html','ambiental naturaleza conservacion areas protegidas huella cero'],
-      ['Red de aliados','Comunidad','Organizaciones y actores vinculados al turismo nacional.','aliados.html','aliados organizaciones instituciones comunidad socios'],
-      ['Mi negocio','Negocios','Registro y herramientas para emprendimientos turísticos.','mi-negocio.html','negocio negocios empresa emprendimiento comercio hospedaje restaurante guia registrar local'],
-      ['Canal de denuncias','Seguridad','Reporte confidencial de incidencias ambientales.','denuncias.html','denuncia reportar emergencia ambiental seguridad'],
-      ['Perfil y cuenta','Cuenta','Datos personales, favoritos y configuración de usuario.','perfil.html','perfil cuenta usuario iniciar sesion configuracion favoritos'],
-      ['Reservas','Cuenta','Consultá y administrá tus viajes reservados.','perfil.html#reservas','reservas reservar viaje boleto confirmacion'],
-      ['Favoritos','Cuenta','Accedé a los destinos que guardaste.','favoritos.html','favoritos guardados lista deseos'],
-      ['Quiénes somos','Institucional','Propósito, misión y equipo de BAQUEANO.','nosotros.html','nosotros quienes somos mision vision contacto ayuda faq'],
-      ['Términos y condiciones','Legal','Reglas y condiciones de uso de la plataforma.','terminos.html','terminos condiciones reglas legal'],
-      ['Privacidad','Legal','Tratamiento y protección de datos personales.','privacidad.html','privacidad datos personales seguridad'],
-      ['Política de cookies','Legal','Preferencias, almacenamiento local y uso sin conexión.','cookies.html','cookies consentimiento almacenamiento offline preferencias'],
-      ['Centro SOS y Auxilio','Emergencias','Números nacionales, GPS y herramientas para solicitar ayuda.','#sos','sos emergencia policia ambulancia bomberos auxilio 118 128 115 911']
-    ].map(function(item) { return { title:item[0], category:item[1], description:item[2], url:item[3], keywords:item[4] }; });
-
-    var style = document.createElement('style');
-    style.id = 'bq-site-search-styles';
-    style.textContent = `
-      .bq-search-overlay{position:fixed;inset:0;z-index:2147481000;background:rgba(15,23,42,.56);backdrop-filter:blur(7px);display:grid;place-items:start center;padding:9vh 18px 24px}.bq-search-overlay[hidden]{display:none!important}
-      .bq-search-panel{width:min(780px,100%);max-height:82vh;overflow:hidden;background:#fff;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 28px 80px rgba(15,23,42,.3);font-family:'Inter',system-ui,sans-serif;color:#0F172A}
-      .bq-search-head{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid #E2E8F0}.bq-search-head i{color:#165D6F}.bq-search-field{flex:1;border:0;outline:0;font-size:1rem;color:#0F172A;background:transparent}.bq-search-close{border:0;background:#F1F5F9;color:#475569;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem}
-      .bq-search-meta{padding:11px 18px;color:#64748B;font-size:.78rem;background:#F8FAFC}.bq-search-list{max-height:calc(82vh - 112px);overflow:auto;padding:10px}.bq-search-result{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:13px;border-radius:14px;color:inherit;text-decoration:none;border:1px solid transparent}.bq-search-result:hover,.bq-search-result:focus{background:#F4F9FA;border-color:#CFE0E4;outline:0}.bq-search-result-icon{width:42px;height:42px;border-radius:12px;background:#EDF6F7;color:#165D6F;display:grid;place-items:center}.bq-search-result h3{font:800 .9rem/1.25 'Montserrat',sans-serif;margin:0 0 3px}.bq-search-result p{font-size:.78rem;color:#64748B;margin:0;line-height:1.4}.bq-search-tag{font-size:.68rem;font-weight:800;color:#C84B00;background:#FFF1E8;padding:5px 8px;border-radius:99px}.bq-search-empty{text-align:center;padding:42px 20px;color:#64748B}.bq-search-empty i{display:block;font-size:2rem;color:#CBD5E1;margin-bottom:12px}
-      @media(max-width:600px){.bq-search-overlay{padding:12px}.bq-search-panel{max-height:94vh}.bq-search-result{grid-template-columns:38px 1fr}.bq-search-tag{display:none}.bq-search-list{max-height:calc(94vh - 112px)}}`;
-    document.head.appendChild(style);
-
-    var overlay = document.createElement('div');
-    overlay.id = 'bqSiteSearchResults'; overlay.className = 'bq-search-overlay'; overlay.hidden = true;
-    overlay.innerHTML = '<section class="bq-search-panel" role="dialog" aria-modal="true" aria-labelledby="bqSearchLabel"><div class="bq-search-head"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label id="bqSearchLabel" class="sr-only" for="bqSearchField">Buscar en BAQUEANO</label><input id="bqSearchField" class="bq-search-field" type="search" placeholder="Buscar dentro de BAQUEANO…" autocomplete="off"><button class="bq-search-close" type="button" aria-label="Cerrar búsqueda">×</button></div><div class="bq-search-meta" id="bqSearchMeta">Escribí para buscar páginas y servicios</div><div class="bq-search-list" id="bqSearchList"></div></section>';
-    document.body.appendChild(overlay);
-
-    function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9ñ]+/g,' ').trim(); }
-    function search(query) {
-      var terms = normalize(query).split(/\s+/).filter(Boolean);
-      if (!terms.length) return [];
-      return records.map(function(record) {
-        var title = normalize(record.title), category = normalize(record.category), body = normalize(record.description + ' ' + record.keywords);
-        var score = terms.reduce(function(total, term) { return total + (title.includes(term) ? 12 : 0) + (category.includes(term) ? 6 : 0) + (body.includes(term) ? 3 : 0); }, 0);
-        return { record:record, score:score };
-      }).filter(function(item){ return item.score > 0; }).sort(function(a,b){ return b.score-a.score || a.record.title.localeCompare(b.record.title); }).slice(0,10);
+    if (!document.querySelector('script[data-bq-global-search]')) {
+      var searchScript = document.createElement('script');
+      searchScript.src = 'js/global-search.js?v=20261004-2';
+      searchScript.defer = true;
+      searchScript.dataset.bqGlobalSearch = 'true';
+      document.body.appendChild(searchScript);
     }
-    function render(query) {
-      var results = search(query), list = document.getElementById('bqSearchList'), meta = document.getElementById('bqSearchMeta');
-      meta.textContent = results.length ? results.length + ' resultado' + (results.length === 1 ? '' : 's') + ' dentro de BAQUEANO' : 'Búsqueda interna de BAQUEANO';
-      if (!results.length) { list.innerHTML = '<div class="bq-search-empty"><i class="fa-regular fa-compass"></i><strong>No encontramos coincidencias</strong><p>Probá con destino, negocio, música, mapa o departamento.</p></div>'; return; }
-      list.innerHTML = results.map(function(item) { var r=item.record; return '<a class="bq-search-result" href="'+r.url+'"><span class="bq-search-result-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span><span><h3>'+r.title+'</h3><p>'+r.description+'</p></span><span class="bq-search-tag">'+r.category+'</span></a>'; }).join('');
-      var sos = list.querySelector('a[href="#sos"]'); if (sos) sos.addEventListener('click', function(event){ event.preventDefault(); overlay.hidden=true; bqOpenSos(event); });
-    }
-    function open(query) { overlay.hidden=false; var field=document.getElementById('bqSearchField'); field.value=query||''; render(field.value); setTimeout(function(){field.focus();field.select();},30); }
-    function close() { overlay.hidden=true; }
-    document.getElementById('bqSearchField').addEventListener('input', function(event){ render(event.target.value); });
-    overlay.querySelector('.bq-search-close').addEventListener('click', close);
-    overlay.addEventListener('click', function(event){ if(event.target===overlay) close(); });
-    document.addEventListener('keydown', function(event){ if(event.key==='Escape'&&!overlay.hidden) close(); });
-    document.querySelectorAll('form.hero-exact-search, form.destinos-hero-search').forEach(function(form){
-      form.addEventListener('submit', function(event){ event.preventDefault(); var input=form.querySelector('input[type="search"],input[name="q"]'); var value=input?input.value.trim():''; if(value) open(value); else input && input.focus(); });
+    document.querySelectorAll('form.hero-exact-search, form[data-bq-global-search]').forEach(function(form) {
+      if (form.dataset.bqSearchQueue === '1') return;
+      form.dataset.bqSearchQueue = '1';
+      form.addEventListener('submit', function(event) {
+        if (window.BaqueanoSiteSearch && window.BaqueanoSiteSearch.__v2) return;
+        event.preventDefault();
+        var input = form.querySelector('input[type="search"], input[name="q"], input[type="text"]');
+        window.__bqPendingSearch = input ? input.value : '';
+      });
     });
-    window.BaqueanoSiteSearch = { open:open, search:search };
   }
 
   // ========================================================================
@@ -600,6 +563,90 @@
   //    emite un evento para que cada módulo respete la selección del visitante.
   // 📦 QUÉ: aviso global, panel configurable y acceso permanente para revisarlo.
   // ========================================================================
+  // ========================================================================
+  // 🎯 POR QUÉ: el buscador debe llevar "directo al punto": buscar "Somoto",
+  //    "Gallo Pinto" o "Camilo Zapata" no puede dejar al visitante al inicio de
+  //    una página larga buscando a ojo.
+  // ⚙️ CÓMO: los enlaces del índice llevan `ir=<nombre>`. Al cargar, se busca
+  //    el título visible cuyo texto coincide (exacto primero, luego el más
+  //    parecido), esperando con MutationObserver a que la página termine de
+  //    dibujar su contenido dinámico (máx. 8 s). Se centra su tarjeta y se
+  //    resalta 3 s; sin animación con "reducir movimiento". Solo lee texto: el
+  //    parámetro nunca se inserta como HTML.
+  // 📦 QUÉ: initSearchSpotlight() en todas las páginas públicas.
+  // ========================================================================
+  function initSearchSpotlight() {
+    var target;
+    try { target = new URLSearchParams(window.location.search).get('ir'); } catch (error) { return; }
+    target = normalizeSpot(target);
+    if (!target || target.length < 2) return;
+    var EXCLUDE = '#mainNavbar, header, footer, .footer-unified, #bqGlobalSearch, #bqThumbBar, #bqCookieConsent, script, style, noscript, [hidden], [aria-hidden="true"]';
+    var TITLES = 'h1, h2, h3, h4, h5, .dish-title, .dept-item-title, [class*="title"], [class*="name"], figcaption, strong';
+    var CARD = 'article, li, .dept-gastro-item, .dept-place-item, [class*="card"], [class*="item"]';
+
+    function find() {
+      var best = null;
+      var bestScore = 0;
+      document.querySelectorAll(TITLES).forEach(function(el) {
+        if (el.closest(EXCLUDE) || !el.getClientRects().length) return;
+        var text = normalizeSpot(el.textContent);
+        if (!text || text.length > 160) return;
+        var score = text === target ? 3 : text.indexOf(target) === 0 ? 2 : text.indexOf(target) > 0 ? 1 : 0;
+        // Título más corto que el nombre buscado ("Vigorón" ↔ "Vigorón Granadino").
+        if (!score && text.length >= 6 && target.indexOf(text) === 0) score = 1;
+        if (!score) return;
+        // Entre empates gana el texto más corto (el título, no un párrafo).
+        score = score * 1000 - text.length;
+        if (score > bestScore) { bestScore = score; best = el; }
+      });
+      return best;
+    }
+
+    function reveal(el) {
+      // Resalta la tarjeta que contiene el título si cabe en pantalla.
+      var box = el.closest(CARD);
+      if (!box || box.getBoundingClientRect().height > window.innerHeight * 0.8) box = el;
+      if (!document.getElementById('bq-spotlight-styles')) {
+        var style = document.createElement('style');
+        style.id = 'bq-spotlight-styles';
+        style.textContent = '.bq-spotlight{outline:3px solid #F65E01;outline-offset:4px;border-radius:12px;animation:bqSpot 1.2s ease-in-out 2}@keyframes bqSpot{50%{outline-color:rgba(246,94,1,.25)}}@media (prefers-reduced-motion:reduce){.bq-spotlight{animation:none}}';
+        document.head.appendChild(style);
+      }
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      box.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      box.classList.add('bq-spotlight');
+      if (!box.hasAttribute('tabindex')) box.setAttribute('tabindex', '-1');
+      try { box.focus({ preventScroll: true }); } catch (error) { /* foco opcional */ }
+      window.setTimeout(function() { box.classList.remove('bq-spotlight'); }, 3200);
+    }
+
+    var done = false;
+    var observer = null;
+    function attempt() {
+      if (done) return;
+      var el = find();
+      if (!el) return;
+      done = true;
+      if (observer) observer.disconnect();
+      // Un fotograma extra deja que la página termine de maquetar.
+      window.requestAnimationFrame(function() { reveal(el); });
+    }
+    attempt();
+    if (done) return;
+    var pending = false;
+    observer = new MutationObserver(function() {
+      if (pending) return;
+      pending = true;
+      window.setTimeout(function() { pending = false; attempt(); }, 120);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.setTimeout(function() { if (observer) observer.disconnect(); done = true; }, 8000);
+  }
+
+  function normalizeSpot(value) {
+    return String(value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9ñ ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
   function injectCookieConsent() {
     var STORAGE_KEY = 'baqueano_cookie_consent_v1';
     var COOKIE_NAME = 'bq_consent';
@@ -837,6 +884,7 @@
     wireExistingSosButtons();
     wireGlobalButtons();
     injectThumbBar();
+    initSearchSpotlight();
     // ⚡ Shell listo: navigation.js monta UNA vez el menú canónico (enlaces,
     //    mega menú "Más", cajón móvil, scroll) y repinta la sesión. Si
     //    navigation.js aún no cargó, lo monta al recibir este evento.

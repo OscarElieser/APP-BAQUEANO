@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es" data-bq-page="testimonios" data-bq-group="comunidad">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!--
+    🎯 POR QUÉ: viajeros reales comparten experiencias reales de Nicaragua; la
+       comunidad enriquece destinos, departamentos y negocios de BAQUEANO.
+    ⚙️ CÓMO: js/testimonios.js + js/community-api.js → Edge Function
+       baqueano-community (Supabase) con la sesión de Firebase. Ver es público;
+       publicar, comentar, reaccionar, subir fotos/videos y denunciar exige
+       sesión. Cada experiencia pasa por moderación en el Ops Center.
+    📦 QUÉ: feed con filtros y buscador, detalle con comentarios y respuestas,
+       formulario "Comparte tu experiencia", denuncias y "Mis experiencias".
+  -->
+  <title>Experiencias de viajeros | Testimonios BAQUEANO</title>
+  <meta name="description" content="Experiencias reales de viajeros en Nicaragua: destinos, playas, volcanes, comunidades y gastronomía contadas por quienes las vivieron.">
+  <link rel="canonical" href="https://baqueanonicaragua.com/testimonios.html">
+  <meta name="theme-color" content="#165D6F">
+  <meta property="og:title" content="Experiencias de viajeros · BAQUEANO">
+  <meta property="og:description" content="Viajeros reales compartiendo experiencias reales de Nicaragua.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=20260929-help-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
+  <link rel="stylesheet" href="css/pages/testimonios.css?v=20261004-1">
+  <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
+</head>
+<body class="tm-page">
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <main id="mainContent" tabindex="-1">
+    <section class="tm-hero">
+      <div class="tm-wrap tm-hero-grid">
+        <div>
+          <span class="tm-eyebrow"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Comunidad BAQUEANO</span>
+          <h1>Experiencias de viajeros</h1>
+          <p class="tm-lead">Viajeros reales compartiendo experiencias reales de Nicaragua. Tu experiencia puede inspirar el próximo viaje de alguien.</p>
+          <div class="tm-hero-actions">
+            <button type="button" class="tm-btn tm-btn-primary" data-compose="1"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Compartí tu experiencia</button>
+            <a class="tm-btn tm-btn-ghost" href="#tmFeedSection"><i class="fa-regular fa-compass" aria-hidden="true"></i> Explorar experiencias</a>
+          </div>
+        </div>
+        <aside class="tm-hero-card">
+          <h2>¿Ya viviste Nicaragua?</h2>
+          <p>Contanos ese rincón que vale la pena conocer: cómo llegaste, qué te sorprendió y qué le recomendarías a otro viajero.</p>
+          <ul>
+            <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Cada publicación pasa por revisión del equipo.</li>
+            <li><i class="fa-solid fa-user-lock" aria-hidden="true"></i> Nunca mostramos tu correo ni tu teléfono.</li>
+            <li><i class="fa-solid fa-image" aria-hidden="true"></i> Hasta 6 fotos y 1 video corto por experiencia.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <div class="tm-wrap">
+      <p class="tm-notice" id="tmUnavailable" hidden><i class="fa-solid fa-circle-info" aria-hidden="true"></i> La comunidad de viajeros se está habilitando. Muy pronto vas a poder publicar y comentar experiencias reales.</p>
+
+      <section class="tm-mine" id="tmMine" hidden aria-labelledby="tmMineTitle">
+        <h2 id="tmMineTitle"><i class="fa-regular fa-bookmark" aria-hidden="true"></i> Mis experiencias</h2>
+        <ul class="tm-mine-list" id="tmMineList"></ul>
+      </section>
+
+      <section class="tm-feed-section" id="tmFeedSection" aria-labelledby="tmFeedTitle">
+        <div class="tm-feed-head">
+          <h2 id="tmFeedTitle">Lo que cuentan los viajeros</h2>
+          <span class="tm-count" id="tmCount" aria-live="polite"></span>
+        </div>
+
+        <form class="tm-filters" id="tmFilters" role="search" aria-label="Filtrar experiencias">
+          <label class="tm-search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <span class="sr-only">Buscar experiencias</span>
+            <input id="tmSearch" type="search" placeholder="Buscá por destino, playa, volcán, comida…" autocomplete="off" maxlength="80">
+          </label>
+          <label class="tm-field">
+            <span class="sr-only">Ordenar</span>
+            <select id="tmSort">
+              <option value="recent">Más recientes</option>
+              <option value="rating">Más valorados</option>
+              <option value="comments">Más comentados</option>
+              <option value="reactions">Más inspiradores</option>
+            </select>
+          </label>
+          <label class="tm-field">
+            <span class="sr-only">Departamento</span>
+            <select id="tmDepartment"><option value="">Todos los departamentos</option></select>
+          </label>
+          <label class="tm-field">
+            <span class="sr-only">Categoría</span>
+            <select id="tmType"><option value="">Todas las categorías</option></select>
+          </label>
+          <div class="tm-chips" role="group" aria-label="Contenido multimedia">
+            <button type="button" class="tm-chip" data-media-filter="photos" aria-pressed="false"><i class="fa-regular fa-image" aria-hidden="true"></i> Con fotos</button>
+            <button type="button" class="tm-chip" data-media-filter="video" aria-pressed="false"><i class="fa-solid fa-video" aria-hidden="true"></i> Con videos</button>
+            <button type="button" class="tm-chip tm-chip-dest" id="tmDestinationChip" hidden><span></span> <i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+            <button type="button" class="tm-link" id="tmClear">Limpiar filtros</button>
+          </div>
+        </form>
+
+        <div class="tm-state" id="tmFeedState" hidden></div>
+        <div class="tm-feed" id="tmFeed" aria-live="polite" aria-busy="true"></div>
+        <div class="tm-more-row"><button type="button" class="tm-btn tm-btn-ghost" id="tmLoadMore" hidden>Ver más experiencias</button></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Inicio de sesión requerido -->
+  <dialog class="tm-dialog tm-dialog-sm" id="tmLoginDialog" aria-labelledby="tmLoginTitle">
+    <div class="tm-dialog-head">
+      <h2 id="tmLoginTitle">Iniciá sesión para participar</h2>
+      <button type="button" class="tm-close" data-close-dialog="1" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <p>Inicia sesión para compartir tu experiencia con la comunidad BAQUEANO. Después te devolvemos exactamente a donde estabas.</p>
+    <div class="tm-login-actions">
+      <button type="button" class="tm-btn tm-btn-google" id="tmLoginGoogle"><i class="fa-brands fa-google" aria-hidden="true"></i> Continuar con Google</button>
+      <a class="tm-btn tm-btn-ghost" id="tmLoginEmail" href="perfil.html"><i class="fa-regular fa-envelope" aria-hidden="true"></i> Entrar o crear cuenta con correo</a>
+    </div>
+    <p class="tm-status" id="tmLoginMessage" role="status"></p>
+  </dialog>
+
+  <!-- Detalle de una experiencia -->
+  <dialog class="tm-dialog" id="tmDetailDialog" aria-labelledby="tmDetailTitle">
+    <div class="tm-dialog-head">
+      <h2 id="tmDetailTitle">Experiencia</h2>
+      <button type="button" class="tm-close" data-close-dialog="1" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="tm-dialog-body" id="tmDetailBody"></div>
+  </dialog>
+
+  <!-- Comparte tu experiencia -->
+  <dialog class="tm-dialog" id="tmComposeDialog" aria-labelledby="tmComposeTitle">
+    <div class="tm-dialog-head">
+      <h2 id="tmComposeTitle">Comparte tu experiencia</h2>
+      <button type="button" class="tm-close" data-close-dialog="1" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <form class="tm-dialog-body tm-compose" id="tmComposeForm" novalidate>
+      <p class="tm-hint">Compartí ese rincón de Nicaragua que vale la pena conocer. Los campos con * son obligatorios.</p>
+      <label class="tm-label">Título de tu experiencia *
+        <input id="tmTitle" name="title" type="text" required minlength="5" maxlength="120" placeholder="Ej.: Atardecer inolvidable en Las Peñitas">
+      </label>
+      <label class="tm-label">Contanos qué viviste *
+        <textarea name="body" required minlength="30" maxlength="4000" rows="5" placeholder="Cómo llegaste, qué hiciste, qué te sorprendió… (mínimo 30 caracteres)"></textarea>
+      </label>
+      <div class="tm-grid-2">
+        <label class="tm-label">Destino o lugar visitado
+          <input name="destination" type="text" list="tmPlacesList" maxlength="120" placeholder="Ej.: Isla de Ometepe">
+          <datalist id="tmPlacesList"></datalist>
+        </label>
+        <label class="tm-label">Departamento
+          <select id="tmComposeDepartment" name="department"><option value="">Elegí un departamento</option></select>
+        </label>
+        <label class="tm-label">Municipio
+          <input name="municipality" type="text" maxlength="80" placeholder="Opcional">
+        </label>
+        <label class="tm-label">Negocio o lugar relacionado
+          <input name="place" type="text" maxlength="120" placeholder="Hospedaje, restaurante, tour… (opcional)">
+        </label>
+        <label class="tm-label">¿Cuándo fuiste?
+          <input id="tmVisit" name="visit" type="month" min="1990-01">
+        </label>
+        <label class="tm-label">Tipo de experiencia
+          <select id="tmComposeType" name="type"><option value="">Elegí un tipo</option></select>
+        </label>
+      </div>
+      <fieldset class="tm-rating">
+        <legend>Tu valoración</legend>
+        <input type="radio" id="tmR5" name="rating" value="5"><label for="tmR5" aria-label="5 estrellas"><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+        <input type="radio" id="tmR4" name="rating" value="4"><label for="tmR4" aria-label="4 estrellas"><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+        <input type="radio" id="tmR3" name="rating" value="3"><label for="tmR3" aria-label="3 estrellas"><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+        <input type="radio" id="tmR2" name="rating" value="2"><label for="tmR2" aria-label="2 estrellas"><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+        <input type="radio" id="tmR1" name="rating" value="1"><label for="tmR1" aria-label="1 estrella"><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+      </fieldset>
+      <label class="tm-label">Etiquetas
+        <input name="tags" type="text" maxlength="200" placeholder="playa, familia, atardecer (separadas por coma)">
+      </label>
+      <label class="tm-label">Recomendaciones
+        <textarea name="recommendations" maxlength="1000" rows="2" placeholder="¿Qué no se puede perder? (opcional)"></textarea>
+      </label>
+      <label class="tm-label">Consejos para otros viajeros
+        <textarea name="tips" maxlength="1000" rows="2" placeholder="Transporte, horarios, qué llevar… (opcional)"></textarea>
+      </label>
+      <div class="tm-upload">
+        <label class="tm-upload-btn" for="tmFiles"><i class="fa-solid fa-camera" aria-hidden="true"></i> Agregar fotos o un video</label>
+        <input id="tmFiles" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" multiple class="sr-only">
+        <small>Hasta 6 fotos (se optimizan a WebP) y 1 video MP4/WebM de máx. 90 s y 40 MB.</small>
+        <div class="tm-previews" id="tmPreviews"></div>
+      </div>
+      <label class="tm-consent" id="tmPublicConsentRow" hidden>
+        <input type="checkbox" id="tmPublicConsent"> Entiendo que mis fotos y videos serán visibles públicamente en BAQUEANO cuando se publique la experiencia.
+      </label>
+      <p class="tm-status" id="tmComposeStatus" role="status" aria-live="polite"></p>
+      <div class="tm-form-actions">
+        <button type="button" class="tm-btn tm-btn-ghost" data-close-dialog="1">Cancelar</button>
+        <button type="submit" class="tm-btn tm-btn-primary" id="tmComposeSubmit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Enviar a revisión</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Denuncia -->
+  <dialog class="tm-dialog tm-dialog-sm" id="tmReportDialog" aria-labelledby="tmReportTitle">
+    <div class="tm-dialog-head">
+      <h2 id="tmReportTitle">Denunciar contenido</h2>
+      <button type="button" class="tm-close" data-close-dialog="1" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <form class="tm-dialog-body" id="tmReportForm">
+      <fieldset class="tm-reasons" id="tmReasons"><legend>¿Qué pasa con este contenido?</legend></fieldset>
+      <label class="tm-label">Detalle (opcional)
+        <textarea id="tmReportDetails" maxlength="500" rows="3"></textarea>
+      </label>
+      <p class="tm-status" id="tmReportStatus" role="status"></p>
+      <div class="tm-form-actions">
+        <button type="button" class="tm-btn tm-btn-ghost" data-close-dialog="1">Cancelar</button>
+        <button type="submit" class="tm-btn tm-btn-primary">Enviar denuncia</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js?v=20261004-1"></script>
+  <script src="js/community-api.js?v=20261004-1"></script>
+  <script src="js/testimonios.js?v=20261004-1" defer></script>
+  <script src="js/navigation.js?v=20261004-menu-2"></script>
+  <script src="js/global-injector.js"></script>
+</body>
+</html>

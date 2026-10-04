@@ -891,6 +891,17 @@
 .dest-detail-dialog h2 { margin: 5px 0 8px; color: #0B253A !important; }
 .dest-dialog-kicker { color: #F65E01; font-size: .75rem; font-weight: 900; letter-spacing: .12em; }
 .dest-dialog-close { position: absolute; z-index: 2; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #FFFFFF; color: #0F172A; font-size: 1.5rem; cursor: pointer; box-shadow: 0 6px 20px rgba(15,23,42,.2); }
+/* 🎯 POR QUÉ: la ficha (p. ej. Isla de Ometepe) se cortaba: el diálogo tenía
+      overflow:hidden y sin altura máxima, así que lo que excedía la pantalla
+      no se podía ver.
+   ⚙️ CÓMO: altura máxima del viewport (dvh) y scroll vertical interno; el
+      botón de cerrar queda fijo arriba (sticky) mientras se desplaza.
+   📦 QUÉ: toda la información visible con scroll arriba/abajo, en celular
+      y escritorio. */
+.dest-detail-dialog { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.dest-detail-dialog .dest-dialog-close { position: sticky; top: 12px; float: right; margin: 12px 12px -52px 0; }
+.dest-detail-dialog .dest-dialog-close:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.dest-detail-dialog > div { padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
 @media (max-width: 680px) {
   .destinos-filter-bar { align-items: stretch; }
   .destinos-filters-left { width: 100%; }
@@ -898,3 +909,6 @@
   .dest-filter-menu { position: fixed; left: 14px; right: 14px; top: auto; bottom: 14px; }
   .destinos-toast { width: calc(100% - 28px); text-align: center; border-radius: 14px; }
 }
+
+/* Filas, títulos y paginación ocultos por el paginador (destinos-interactions.js). */
+.destinos-catalog-row[hidden], .section-header-exact[hidden], .destinos-pagination-wrap[hidden], .bq-gallery-control[hidden] { display: none !important; }
