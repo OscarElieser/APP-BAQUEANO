@@ -3945,3 +3945,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** llevar la rama `claude/upbeat-turing-m7y81v` a `main` para que Azure publique (autodeploy cada 2 min).
 - ⚙️ **CÓMO:** buscar plantilla de PR, crear el Pull Request contra `main` con resumen, pruebas y pendientes; no se fusiona (lo hace el propietario).
 - 📦 **QUÉ:** PR creado y enlazado en la respuesta.
+
+## 2026-10-04 (sesión cloud) — "listo" (el propietario indica que fusionó/revisó el PR #1)
+- 🎯 **POR QUÉ:** comprobar con datos reales que la fusión y los pipelines quedaron bien.
+- ⚙️ **CÓMO:** consultar estado del PR #1 y de los workflows en `main`; corregir lo que falle.
+- 📦 **QUÉ:** resultado en la respuesta.
