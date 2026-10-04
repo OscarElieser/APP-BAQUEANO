@@ -3910,3 +3910,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** probable fuente de los entregables de Marketing/Diseño y del plan de sprints; permitiría pasar filas ⚪ a evidencia real.
 - ⚙️ **CÓMO:** intentar leer el tablero público (JSON), contrastarlo con la matriz; si no es accesible, informar y pedir exportación.
 - 📦 **QUÉ:** actualización de la matriz solo con lo realmente leído.
+
+## 2026-10-04 (sesión cloud) — "te autorizo que trabaje automáticamente" → FASE 2 y siguientes
+- 🎯 **POR QUÉ:** el propietario autoriza continuar sin confirmaciones. Restricciones que siguen vigentes: no borrar nada, solo rama `claude/upbeat-turing-m7y81v`, no tocar `ios/` ni `web/`, sin acciones destructivas en Supabase/Azure, sin PR salvo petición.
+- ⚙️ **CÓMO:** Fase 2 = F-01 (checkout en `verify-azure`) y F-02 (matriz CodeQL); luego Fase 3 = `website/scripts/audit-i18n-pages.mjs` + `docs/I18N_AUDIT.md`. Commits pequeños (`fix:`, `i18n:`, `docs:`).
+- 📦 **QUÉ:** workflows corregidos, auditor i18n, evidencia de pruebas. Lo que requiera Azure/Supabase vivo queda documentado como pendiente.
