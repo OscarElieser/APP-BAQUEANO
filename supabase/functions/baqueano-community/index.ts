@@ -112,7 +112,7 @@ function cleanText(value: unknown, max: number, { multiline = false, required = 
   if (typeof value !== "string") throw new HttpError(400, `${label} no es texto.`);
   let text = value.normalize("NFC")
     .replace(multiline ? /[\u0000-\u0009\u000B-\u001F\u007F]/g : /[\u0000-\u001F\u007F]/g, " ")
-    .replace(/[​-‏‪-‮⁦-⁩]/g, "");
+    .replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069]/g, "");
   text = multiline ? text.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n") : text.replace(/\s+/g, " ");
   text = text.trim();
   if (!text) {
