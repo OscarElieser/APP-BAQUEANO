@@ -4020,3 +4020,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Privilegios de cliente retirados en auditoría y respaldos; telemetría solo INSERT. `sync_geography_point` con search_path fijo (verificado: el trigger sigue funcionando). Queda 1 WARN aceptado: extensión `vector` en public (moverla rompe la búsqueda de BAQUI).
   - Ops Center: `SUPABASE_BROWSER_WRITES = false` — ya no escribe/borra en Supabase con la clave pública; Firestore + espejo verificado `baqueano-mirror` replican.
   - Pruebas negativas como anon (transacción revertida): 12/12 + telemetría permitida; `supabase/tests/rls_hardening.test.sql` (14 aserciones pgTAP) y ajuste de `sensitive_surfaces_rls.test.sql`.
+- **CI producción:** el job `verify-azure` de `deploy-production.yml` no hacía checkout → `tools/verify-sprints.mjs` MODULE_NOT_FOUND aunque Azure servía el commit correcto (`/health` = f3e2fd9, Supabase OK con 17 departamentos). Agregados checkout + Node 22.

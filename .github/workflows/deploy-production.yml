@@ -66,6 +66,12 @@ jobs:
     env:
       SITE: https://baqueanonicaragua.com
     steps:
+      # tools/verify-sprints.mjs vive en el repo: sin checkout el paso de
+      # evidencia fallaba con MODULE_NOT_FOUND aunque producción estuviera bien.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Esperar a que /health sirva este commit (autodeploy cada 2 min)
         run: |
           short="${GITHUB_SHA::7}"
