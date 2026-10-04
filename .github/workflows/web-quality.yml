@@ -4,8 +4,8 @@
 # 🎯 POR QUÉ: hasta ahora ninguna prueba web era un gate de CI (hallazgo F-16).
 # ⚙️ CÓMO: job único y barato, sin secretos, sin tocar producción:
 #   1. build estático del Website (misma lista permitida que Azure).
-#   2. validate-i18n: compara claves entre los 6 catálogos. Hoy FALLA (faltan
-#      297 claves por idioma) → `continue-on-error` hasta completar la Fase 3.
+#   2. validate-i18n: compara claves entre los 6 catálogos (gate real: los 5
+#      idiomas ya tienen las 570 claves).
 #   3. audit-i18n-pages: mide la cobertura real por página; informativo, con
 #      umbral progresivo (subirlo cuando mejore la cobertura).
 # 📦 QUÉ: señal temprana en cada PR/push; el resumen queda en el "Job summary".
@@ -38,8 +38,6 @@ jobs:
       - name: Build estático del Website
         run: node scripts/build-hostinger-static.mjs
       - name: Catálogos i18n (claves equivalentes en los 6 idiomas)
-        id: catalogs
-        continue-on-error: true
         run: node scripts/validate-i18n.mjs
       - name: Cobertura i18n por página
         run: |
@@ -47,7 +45,3 @@ jobs:
           { echo '### Cobertura i18n por página'; echo '```'; tail -n 3 /tmp/i18n.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Umbral mínimo por página (progresivo)
         run: node scripts/audit-i18n-pages.mjs --min=0
-      - name: Resumen de catálogos
-        if: steps.catalogs.outcome == 'failure'
-        run: |
-          echo "::warning::validate-i18n falla, faltan claves en algun idioma (ver docs/I18N_AUDIT.md). Pendiente de Fase 3."

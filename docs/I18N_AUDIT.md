@@ -8,44 +8,44 @@
 - ⚙️ **CÓMO:** un texto cuenta como traducido si su elemento tiene `data-i18n*` o coincide con un valor de `locales/es.json` (el motor traduce por frase exacta). Se excluyen nombres propios nicaragüenses. En JS se buscan literales con aspecto de español: es una **heurística** (puede haber falsos positivos y negativos).
 - 📦 **QUÉ:** tabla por página, SEO por página y literales dinámicos por script.
 
-**Catálogos (claves):** es=570 · en=281 · fr=281 · it=281 · pt=281 · de=281  
+**Catálogos (claves):** es=570 · en=578 · fr=578 · it=578 · pt=578 · de=578  
 **HTML total:** 806 de 4203 textos cubiertos = **19.2 %**
 
 ## Por página (HTML)
 
 | Página | TOTAL_TEXTS | TRANSLATED | UNTRANSLATED | MISSING_KEYS | HARDCODED_STRINGS | SEO sin traducir | % |
 |---|---|---|---|---|---|---|---|
-| 404.html | 68 | 27 | 41 | 21 | 41 | 2/2 | 40 |
-| admin.html | 353 | 14 | 339 | 11 | 339 | 2/2 | 4 |
-| aliados.html | 203 | 37 | 166 | 17 | 166 | 2/2 | 18 |
-| ambiental.html | 150 | 23 | 127 | 17 | 127 | 2/2 | 15 |
-| aviso-legal.html | 124 | 26 | 98 | 24 | 98 | 2/2 | 21 |
-| ayuda.html | 56 | 7 | 49 | 5 | 49 | 2/2 | 13 |
-| baqueano-ai.html | 21 | 11 | 10 | 10 | 10 | 1/1 | 52 |
-| baqueano-ia.html | 174 | 32 | 142 | 26 | 142 | 2/2 | 18 |
-| cookies.html | 159 | 26 | 133 | 24 | 133 | 2/2 | 16 |
-| cronicas.html | 55 | 1 | 54 | 1 | 54 | 2/2 | 2 |
-| denuncias.html | 145 | 16 | 129 | 18 | 129 | 2/2 | 11 |
-| departamento.html | 164 | 22 | 142 | 22 | 142 | 1/1 | 13 |
-| destino.html | 28 | 11 | 17 | 14 | 17 | 2/2 | 39 |
-| destinos.html | 159 | 57 | 102 | 27 | 102 | 2/2 | 36 |
-| experiencias.html | 127 | 12 | 115 | 15 | 115 | 2/2 | 9 |
+| 404.html | 68 | 27 | 41 | 0 | 41 | 2/2 | 40 |
+| admin.html | 353 | 14 | 339 | 0 | 339 | 2/2 | 4 |
+| aliados.html | 203 | 37 | 166 | 0 | 166 | 2/2 | 18 |
+| ambiental.html | 150 | 23 | 127 | 0 | 127 | 2/2 | 15 |
+| aviso-legal.html | 124 | 26 | 98 | 0 | 98 | 2/2 | 21 |
+| ayuda.html | 56 | 7 | 49 | 0 | 49 | 2/2 | 13 |
+| baqueano-ai.html | 21 | 11 | 10 | 0 | 10 | 1/1 | 52 |
+| baqueano-ia.html | 174 | 32 | 142 | 0 | 142 | 2/2 | 18 |
+| cookies.html | 159 | 26 | 133 | 0 | 133 | 2/2 | 16 |
+| cronicas.html | 55 | 1 | 54 | 0 | 54 | 2/2 | 2 |
+| denuncias.html | 145 | 16 | 129 | 0 | 129 | 2/2 | 11 |
+| departamento.html | 164 | 22 | 142 | 0 | 142 | 1/1 | 13 |
+| destino.html | 28 | 11 | 17 | 0 | 17 | 2/2 | 39 |
+| destinos.html | 159 | 57 | 102 | 0 | 102 | 2/2 | 36 |
+| experiencias.html | 127 | 12 | 115 | 0 | 115 | 2/2 | 9 |
 | favoritos.html | 6 | 0 | 6 | 0 | 6 | 2/2 | 0 |
-| gastronomia.html | 226 | 46 | 180 | 23 | 180 | 2/2 | 20 |
-| historia.html | 202 | 24 | 178 | 19 | 178 | 2/2 | 12 |
+| gastronomia.html | 226 | 46 | 180 | 0 | 180 | 2/2 | 20 |
+| historia.html | 202 | 24 | 178 | 0 | 178 | 2/2 | 12 |
 | i18n-test.html | 6 | 5 | 1 | 0 | 1 | 1/1 | 83 |
-| index.html | 266 | 79 | 187 | 68 | 187 | 4/4 | 30 |
-| legal.html | 35 | 14 | 21 | 16 | 21 | 2/2 | 40 |
-| mapa.html | 39 | 12 | 27 | 15 | 27 | 2/2 | 31 |
-| mi-negocio.html | 274 | 24 | 250 | 22 | 250 | 2/2 | 9 |
-| mi-viaje.html | 135 | 27 | 108 | 24 | 108 | 2/2 | 20 |
-| musica.html | 242 | 31 | 211 | 19 | 211 | 2/2 | 13 |
-| nosotros.html | 189 | 42 | 147 | 32 | 147 | 2/2 | 22 |
-| offline.html | 41 | 14 | 27 | 13 | 27 | 1/1 | 34 |
-| perfil.html | 181 | 38 | 143 | 33 | 143 | 2/2 | 21 |
-| privacidad.html | 108 | 29 | 79 | 25 | 79 | 2/2 | 27 |
-| terminos.html | 201 | 33 | 168 | 24 | 168 | 2/2 | 16 |
-| testimonios.html | 66 | 66 | 0 | 3 | 0 | 2/4 | 100 |
+| index.html | 266 | 79 | 187 | 0 | 187 | 4/4 | 30 |
+| legal.html | 35 | 14 | 21 | 0 | 21 | 2/2 | 40 |
+| mapa.html | 39 | 12 | 27 | 0 | 27 | 2/2 | 31 |
+| mi-negocio.html | 274 | 24 | 250 | 0 | 250 | 2/2 | 9 |
+| mi-viaje.html | 135 | 27 | 108 | 0 | 108 | 2/2 | 20 |
+| musica.html | 242 | 31 | 211 | 0 | 211 | 2/2 | 13 |
+| nosotros.html | 189 | 42 | 147 | 0 | 147 | 2/2 | 22 |
+| offline.html | 41 | 14 | 27 | 0 | 27 | 1/1 | 34 |
+| perfil.html | 181 | 38 | 143 | 0 | 143 | 2/2 | 21 |
+| privacidad.html | 108 | 29 | 79 | 0 | 79 | 2/2 | 27 |
+| terminos.html | 201 | 33 | 168 | 0 | 168 | 2/2 | 16 |
+| testimonios.html | 66 | 66 | 0 | 0 | 0 | 2/4 | 100 |
 
 `MISSING_KEYS` = claves usadas por la página que faltan en al menos un idioma distinto de ES.
 
