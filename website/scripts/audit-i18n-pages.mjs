@@ -17,7 +17,7 @@
 // 📦 QUÉ: tabla por página con TOTAL_TEXTS, TRANSLATED, UNTRANSLATED, MISSING_KEYS,
 //    HARDCODED_STRINGS y DYNAMIC_STRINGS; `--write` genera docs/I18N_AUDIT.md;
 //    `--min=<pct>` falla (exit 1) si algún HTML queda por debajo (uso en CI);
-//    `--json` imprime el resultado en JSON.
+//    `--json` imprime el resultado en JSON; `--list` lista los textos únicos sin traducir.
 // ============================================================================
 import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -143,6 +143,7 @@ const htmlFiles = (await readdir(root)).filter((f) => f.endsWith('.html')).sort(
 const jsFiles = (await readdir(join(root, 'js'))).filter((f) => f.endsWith('.js')).sort();
 
 const pages = [];
+const allHardcoded = new Map(); // texto → {pages:Set, kind}
 for (const file of htmlFiles) {
   const html = await readFile(join(root, file), 'utf8');
   const { items, seo } = auditHtml(html);
@@ -151,7 +152,12 @@ for (const file of htmlFiles) {
   const missingKeys = new Set();
   for (const it of items) {
     const r = classify(it.text, it.hasKey);
-    if (r.translated) { translated += 1; r.missing.forEach((k) => missingKeys.add(k)); } else hardcoded.push(it);
+    if (r.translated) { translated += 1; r.missing.forEach((k) => missingKeys.add(k)); } else {
+      hardcoded.push(it);
+      const e = allHardcoded.get(it.text) || { pages: new Set(), kind: it.kind };
+      e.pages.add(file);
+      allHardcoded.set(it.text, e);
+    }
   }
   const seoUntranslated = seo.filter((s) => !classify(s.text, false).translated);
   pages.push({
@@ -181,7 +187,12 @@ const result = {
   pages, scripts
 };
 
-if (args.has('--json')) {
+if (args.has('--list')) {
+  // Textos HTML sin traducir, únicos, ordenados por número de páginas (para priorizar el catálogo).
+  const rows = [...allHardcoded].sort((a, b) => b[1].pages.size - a[1].pages.size || a[0].localeCompare(b[0]));
+  for (const [text, e] of rows) console.log(`${e.pages.size}\t${e.kind}\t${text}`);
+  console.error(`${rows.length} textos únicos sin traducir`);
+} else if (args.has('--json')) {
   console.log(JSON.stringify(result, null, 2));
 } else {
   console.log(`Catálogo (claves): ${LANGS.map((l) => `${l}=${catalogs[l].size}`).join(' ')}`);

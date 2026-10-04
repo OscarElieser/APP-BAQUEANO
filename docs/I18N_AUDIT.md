@@ -8,43 +8,43 @@
 - ⚙️ **CÓMO:** un texto cuenta como traducido si su elemento tiene `data-i18n*` o coincide con un valor de `locales/es.json` (el motor traduce por frase exacta). Se excluyen nombres propios nicaragüenses. En JS se buscan literales con aspecto de español: es una **heurística** (puede haber falsos positivos y negativos).
 - 📦 **QUÉ:** tabla por página, SEO por página y literales dinámicos por script.
 
-**Catálogos (claves):** es=570 · en=578 · fr=578 · it=578 · pt=578 · de=578  
-**HTML total:** 806 de 4203 textos cubiertos = **19.2 %**
+**Catálogos (claves):** es=741 · en=749 · fr=749 · it=749 · pt=749 · de=749  
+**HTML total:** 1506 de 4203 textos cubiertos = **35.8 %**
 
 ## Por página (HTML)
 
 | Página | TOTAL_TEXTS | TRANSLATED | UNTRANSLATED | MISSING_KEYS | HARDCODED_STRINGS | SEO sin traducir | % |
 |---|---|---|---|---|---|---|---|
-| 404.html | 68 | 27 | 41 | 0 | 41 | 2/2 | 40 |
-| admin.html | 353 | 14 | 339 | 0 | 339 | 2/2 | 4 |
-| aliados.html | 203 | 37 | 166 | 0 | 166 | 2/2 | 18 |
-| ambiental.html | 150 | 23 | 127 | 0 | 127 | 2/2 | 15 |
-| aviso-legal.html | 124 | 26 | 98 | 0 | 98 | 2/2 | 21 |
-| ayuda.html | 56 | 7 | 49 | 0 | 49 | 2/2 | 13 |
-| baqueano-ai.html | 21 | 11 | 10 | 0 | 10 | 1/1 | 52 |
-| baqueano-ia.html | 174 | 32 | 142 | 0 | 142 | 2/2 | 18 |
-| cookies.html | 159 | 26 | 133 | 0 | 133 | 2/2 | 16 |
-| cronicas.html | 55 | 1 | 54 | 0 | 54 | 2/2 | 2 |
-| denuncias.html | 145 | 16 | 129 | 0 | 129 | 2/2 | 11 |
-| departamento.html | 164 | 22 | 142 | 0 | 142 | 1/1 | 13 |
-| destino.html | 28 | 11 | 17 | 0 | 17 | 2/2 | 39 |
-| destinos.html | 159 | 57 | 102 | 0 | 102 | 2/2 | 36 |
-| experiencias.html | 127 | 12 | 115 | 0 | 115 | 2/2 | 9 |
+| 404.html | 68 | 45 | 23 | 0 | 23 | 2/2 | 66 |
+| admin.html | 353 | 15 | 338 | 0 | 338 | 2/2 | 4 |
+| aliados.html | 203 | 61 | 142 | 0 | 142 | 2/2 | 30 |
+| ambiental.html | 150 | 40 | 110 | 0 | 110 | 2/2 | 27 |
+| aviso-legal.html | 124 | 54 | 70 | 0 | 70 | 2/2 | 44 |
+| ayuda.html | 56 | 8 | 48 | 0 | 48 | 2/2 | 14 |
+| baqueano-ai.html | 21 | 16 | 5 | 0 | 5 | 1/1 | 76 |
+| baqueano-ia.html | 174 | 58 | 116 | 0 | 116 | 2/2 | 33 |
+| cookies.html | 159 | 53 | 106 | 0 | 106 | 2/2 | 33 |
+| cronicas.html | 55 | 3 | 52 | 0 | 52 | 2/2 | 5 |
+| denuncias.html | 145 | 96 | 49 | 0 | 49 | 2/2 | 66 |
+| departamento.html | 164 | 115 | 49 | 0 | 49 | 1/1 | 70 |
+| destino.html | 28 | 12 | 16 | 0 | 16 | 2/2 | 43 |
+| destinos.html | 159 | 79 | 80 | 0 | 80 | 2/2 | 50 |
+| experiencias.html | 127 | 15 | 112 | 0 | 112 | 2/2 | 12 |
 | favoritos.html | 6 | 0 | 6 | 0 | 6 | 2/2 | 0 |
-| gastronomia.html | 226 | 46 | 180 | 0 | 180 | 2/2 | 20 |
-| historia.html | 202 | 24 | 178 | 0 | 178 | 2/2 | 12 |
+| gastronomia.html | 226 | 65 | 161 | 0 | 161 | 2/2 | 29 |
+| historia.html | 202 | 40 | 162 | 0 | 162 | 2/2 | 20 |
 | i18n-test.html | 6 | 5 | 1 | 0 | 1 | 1/1 | 83 |
-| index.html | 266 | 79 | 187 | 0 | 187 | 4/4 | 30 |
-| legal.html | 35 | 14 | 21 | 0 | 21 | 2/2 | 40 |
-| mapa.html | 39 | 12 | 27 | 0 | 27 | 2/2 | 31 |
-| mi-negocio.html | 274 | 24 | 250 | 0 | 250 | 2/2 | 9 |
-| mi-viaje.html | 135 | 27 | 108 | 0 | 108 | 2/2 | 20 |
-| musica.html | 242 | 31 | 211 | 0 | 211 | 2/2 | 13 |
-| nosotros.html | 189 | 42 | 147 | 0 | 147 | 2/2 | 22 |
-| offline.html | 41 | 14 | 27 | 0 | 27 | 1/1 | 34 |
-| perfil.html | 181 | 38 | 143 | 0 | 143 | 2/2 | 21 |
-| privacidad.html | 108 | 29 | 79 | 0 | 79 | 2/2 | 27 |
-| terminos.html | 201 | 33 | 168 | 0 | 168 | 2/2 | 16 |
+| index.html | 266 | 109 | 157 | 0 | 157 | 4/4 | 41 |
+| legal.html | 35 | 22 | 13 | 0 | 13 | 2/2 | 63 |
+| mapa.html | 39 | 15 | 24 | 0 | 24 | 2/2 | 38 |
+| mi-negocio.html | 274 | 121 | 153 | 0 | 153 | 2/2 | 44 |
+| mi-viaje.html | 135 | 50 | 85 | 0 | 85 | 2/2 | 37 |
+| musica.html | 242 | 67 | 175 | 0 | 175 | 2/2 | 28 |
+| nosotros.html | 189 | 74 | 115 | 0 | 115 | 2/2 | 39 |
+| offline.html | 41 | 20 | 21 | 0 | 21 | 1/1 | 49 |
+| perfil.html | 181 | 65 | 116 | 0 | 116 | 2/2 | 36 |
+| privacidad.html | 108 | 56 | 52 | 0 | 52 | 2/2 | 52 |
+| terminos.html | 201 | 61 | 140 | 0 | 140 | 2/2 | 30 |
 | testimonios.html | 66 | 66 | 0 | 0 | 0 | 2/4 | 100 |
 
 `MISSING_KEYS` = claves usadas por la página que faltan en al menos un idioma distinto de ES.
@@ -53,10 +53,10 @@
 
 **404.html**
 - texto: 404 — Este camino no lleva a ningún lado \| BAQUEANO Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Este camino
 - texto: no lleva a ningún lado
+- texto: Puede que la dirección esté mal escrita o que la página se haya movido
 
 **admin.html**
 - texto: Baqueano Ops Center \| Centro de Operaciones & Administración Total
@@ -67,94 +67,94 @@
 
 **aliados.html**
 - texto: Aliados Baqueano \| Conectá con quienes hacen posible la experiencia
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Conectá con quienes hacen posible
 - texto: la experiencia
+- texto: Cooperativas, eco-lodges, hospedajes, comedores, guías y emprendedores
 
 **ambiental.html**
 - texto: Custodia del Territorio \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Custodiá lo que venís
 - texto: a descubrir
+- texto: Nuestros bosques, lagunas de cráter, ríos y comunidades son sagrados. 
 
 **aviso-legal.html**
 - texto: Aviso Legal & Propiedad Intelectual \| BAQUEANO Nicaragua
-- texto: NICARAGUA AUTÉNTICA
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
-- texto: 🛡️ LEGAL
+- texto: Aviso Legal &
+- texto: Propiedad Intelectual
+- texto: Marco jurídico, transparencia y condiciones de operación de BAQUEANO, 
 
 **ayuda.html**
 - texto: Centro de Ayuda \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: ¿Cómo podemos ayudarte?
 - texto: Encontrá respuestas y llegá directamente a cada herramienta de Baquean
 - texto: Buscar en el Centro de Ayuda
+- texto: También podés elegir una categoría.
 
 **baqueano-ai.html**
 - texto: Baqueano Digital \| Redirigiendo a Baqueano IA...
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Te estamos llevando con BAQUI… Si no pasa nada,
 - texto: entrá por aquí
+- title: Clima actual
 
 **baqueano-ia.html**
 - texto: BAQUI \| Tu viaje por Nicaragua, pensado contigo
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Tu viaje por Nicaragua,
 - texto: pensado contigo.
+- texto: Un copiloto de IA que combina lo mejor de Nicaragua para crear rutas ú
 
 **cookies.html**
 - texto: Cookies y Almacenamiento Local \| BAQUEANO Nicaragua
-- texto: NICARAGUA AUTÉNTICA
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
-- texto: 🛡️ LEGAL
+- texto: Cookies,
+- texto: almacenamiento local y uso sin conexión
+- texto: Transparencia sobre cómo utilizamos cookies, tecnologías de almacenami
 
 **cronicas.html**
 - texto: Crónicas & Relatos Territoriales \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: Voces del Territorio · Edición Especial
 - texto: Crónicas que se caminan
 - texto: Nicaragua · Cuaderno de Campo 2026
+- texto: Todas las crónicas
 
 **denuncias.html**
 - texto: Canal Ético Ambiental & Denuncias \| Baqueano Nicaragua
 - texto: NICARAGUA
-- texto: Portal Soberano
-- texto: Mi País
-- texto: 29 Áreas Protegidas y Volcanes
+- texto: Consola Satelital
+- texto: ACTIVO
+- texto: 🌳 Canal Ético & Denuncias Ambientales
 
 **departamento.html**
 - texto: Guía Turística Departamental \| Baqueano Nicaragua
 - texto: NICARAGUA
-- texto: Portal Soberano
-- texto: Mi País
-- texto: 29 Áreas Protegidas y Volcanes
+- texto: Mi Pasaporte
+- texto: Territorio Soberano
+- texto: Explorando el territorio…
 
 **destino.html**
 - texto: Ficha de Destino \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: Acceso restringido
 - texto: Buscando qué hay por aquí…
 - texto: Consultando el Banco Maestro Baqueano de Nicaragua.
+- texto: Tu contribución mantiene actualizado el inventario territorial de Nica
 
 **destinos.html**
 - texto: Destinos de Nicaragua \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Destinos de Nicaragua
 - texto: Playas, volcanes, montañas, cultura, gastronomía y mucho más.
+- texto: Descubrí tu próxima aventura
 
 **experiencias.html**
 - texto: Experiencias de Aventura & Cultura \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: TURISMO DE IMPACTO POSITIVO
 - texto: Experiencias que te
+- texto: transforman
 
 **favoritos.html**
 - texto: Mis Favoritos \| BAQUEANO Nicaragua
@@ -165,97 +165,97 @@
 
 **gastronomia.html**
 - texto: Gastronomía Ancestral de los Hijos del Maíz \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: NICARAGUA
 - texto: Gastronomía Ancestral de los
+- texto: Hijos del Maíz
 
 **historia.html**
 - texto: Historia de Nicaragua \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: NICARAGUA
 - texto: UNA HISTORIA
+- texto: QUE SIGUE VIVA
 
 **i18n-test.html**
 - texto: BAQUEANO · I18N Test
 
 **index.html**
 - texto: Baqueano Nicaragua \| Descubre lo que no sale en el mapa
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: NICARAGUA
 - texto: AUTÉNTICA
+- texto: NO SE VISITA,
 
 **legal.html**
 - texto: Centro Legal & Términos \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Centro Jurídico & Cumplimiento
 - texto: Conocé las bases legales, compromisos de privacidad y términos de serv
+- texto: Condiciones de uso del portal, políticas de reserva directa con anfitr
 
 **mapa.html**
 - texto: Mapa Interactivo de Nicaragua \| Baqueano
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Descubrí Nicaragua
 - texto: territorio por territorio
+- texto: Explorá destinos, volcanes, playas, naturaleza, cultura y comunidades 
 
 **mi-negocio.html**
 - texto: Portal de Anfitriones & Negocios \| Baqueano Nicaragua
 - texto: NICARAGUA
-- texto: Portal Soberano
-- texto: Mi País
-- texto: 29 Áreas Protegidas y Volcanes
+- texto: Tu comunidad merece
+- texto: ganar el 100%
+- texto: de lo que cobra
 
 **mi-viaje.html**
 - texto: Mi Viaje & Planificador \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: PLANIFICADOR SOBERANO
 - texto: Mi Aventura por Nicaragua
+- texto: Organizá tus días, calculá tus gastos con tarifas reales y guardá tus 
 
 **musica.html**
 - texto: Música & Patrimonio Sonoro \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: NICARAGUA
 - texto: EL SONIDO DE NICARAGUA
+- texto: SIGUE VIVO
 
 **nosotros.html**
 - texto: Nosotros \| BAQUEANO Nicaragua Auténtica
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
-- texto: Decálogo y alertas ecológicas
-- texto: Historia y Memoria
+- texto: NOSOTROS
+- texto: DESCUBRÍ LO QUE
+- texto: NO SALE EN EL MAPA
 
 **offline.html**
 - texto: Modo Offline Territorial \| Baqueano Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
 - texto: Modo Supervivencia Territorial
 - texto: No pasa nada: aquí tenés guardados los números de emergencia y los pun
+- texto: Auxilio en ruta y seguridad
 
 **perfil.html**
 - texto: Mi Perfil \| BAQUEANO Nicaragua Auténtica
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
-- texto: Decálogo y alertas ecológicas
-- texto: Historia y Memoria
+- texto: Mi cuenta
+- texto: Un viajero,
+- texto: mil historias
 
 **privacidad.html**
 - texto: Privacidad & Seguridad de tus Datos \| BAQUEANO Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
-- texto: Decálogo y alertas ecológicas
-- texto: Historia y Memoria
+- texto: Tus datos,
+- texto: bajo tu control
+- texto: En BAQUEANO protegemos tu información y la usamos solo para ofrecerte 
 
 **terminos.html**
 - texto: Términos & Condiciones de Uso \| BAQUEANO Nicaragua
-- texto: NICARAGUA AUTÉNTICA
 - texto: SOS
-- texto: Decálogo y alertas ecológicas
-- texto: Historia y Memoria
+- texto: Términos &
+- texto: Condiciones de Uso
+- texto: Web, App Android y servicios digitales de BAQUEANO.
 
 ## Literales dinámicos en JS (heurística)
 
@@ -288,15 +288,15 @@
 | js/mi-viaje-interactions.js | 27 | 27 | no |
 | js/index-destinos-editorial.js | 21 | 21 | no |
 | js/admin-ops.js | 20 | 20 | no |
-| js/auth-panel.js | 26 | 20 | no |
-| js/global-injector.js | 28 | 20 | no |
+| js/auth-panel.js | 26 | 19 | no |
 | js/smart-search.js | 19 | 19 | no |
 | js/baqueano-map.js | 18 | 18 | no |
 | js/platform-enhancements.js | 18 | 18 | no |
+| js/global-injector.js | 28 | 17 | no |
 | js/environmental-evidence.js | 14 | 14 | no |
 | js/website-business-catalog.js | 14 | 14 | no |
-| js/destinos-gastronomia.js | 13 | 12 | no |
 | js/website-operations-catalog.js | 12 | 12 | no |
+| js/destinos-gastronomia.js | 13 | 11 | no |
 | js/global-music-player.js | 11 | 11 | no |
 | js/global-asset-curator.js | 10 | 10 | no |
 | js/community-api.js | 8 | 8 | no |
