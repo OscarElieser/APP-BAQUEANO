@@ -3922,3 +3922,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - ⚙️ **CÓMO:** abrir pull request de `claude/sleepy-goodall-kqogrq` hacia la rama por defecto, siguiendo la plantilla de PR si existe.
 - 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
 - **Hecho:** PR abierto → https://github.com/OscarElieser/APP-BAQUEANO/pull/2 (`claude/sleepy-goodall-kqogrq` → `main`, sin conflictos). Al fusionarlo, Azure publica en ~2 min.
+
+## 2026-10-04 (vigilar PR + footer) — "sí por favor; el footer está feo pero esperemos la actualización; testimonios.html será el espacio de comentarios globales tipo blog"
+- 🎯 **POR QUÉ:** el propietario pide vigilar el PR #2 hasta que se fusione; además señala que el footer se ve mal y confirma que `testimonios.html` es el blog/espacio global de comentarios de la comunidad.
+- ⚙️ **CÓMO:** suscripción a la actividad del PR (CI, revisiones, conflictos). El footer se revisa DESPUÉS de que la actualización llegue a producción, como pidió el propietario.
+- 📦 **QUÉ:** pendientes registrados: (1) vigilar PR #2; (2) rediseño del footer tras el despliegue (captura: columnas Explorá/Cultura/Comunidad en 2 columnas desbalanceadas, mucho espacio vacío); (3) `testimonios.html` = blog global de la comunidad (orientar futuras mejoras con ese enfoque).
