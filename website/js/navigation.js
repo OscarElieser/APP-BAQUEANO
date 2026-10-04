@@ -336,7 +336,9 @@ function buildGlobalMegaNavigation() {
     headings.rel = 'stylesheet'; headings.href = 'css/headings-system.css?v=20260927-1'; headings.dataset.globalHeadings = 'true';
     document.head.appendChild(headings);
   }
-  if (!document.querySelector('link[data-global-mega-nav]')) {
+  // Si la página ya enlaza la hoja (con cualquier versión) no se descarga otra
+  // copia: antes se cargaba dos veces y alteraba el orden de la cascada.
+  if (!document.querySelector('link[data-global-mega-nav], link[href*="css/navigation-mega.css"]')) {
     const style = document.createElement('link');
     style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20261004-menu-2'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);

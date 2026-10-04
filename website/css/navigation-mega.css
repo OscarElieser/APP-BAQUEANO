@@ -1571,3 +1571,68 @@ html:has(> body[style*="overflow:hidden"]) { overflow: hidden !important; }
   #mainNavbar .bq-menu-group.is-open > .bq-menu-panel { animation: none !important; }
   #mainNavbar .bq-menu-item:hover { transform: none; }
 }
+
+/* ---------- Barra superior móvil: BAQUEANO + SOS + Usuario + ES + ☰ ----------
+   🎯 POR QUÉ: tres reglas heredadas para ≤ 480 px fijaban el contenedor de
+      acciones en 36 px, ocultaban SOS y la cuenta: al mostrar el idioma, ☰
+      quedaba fuera de la pantalla.
+   ⚙️ CÓMO: selectores con un nivel más de especificidad (.nav-inner >) para
+      que el contenedor mida lo que contiene; botones cuadrados de 36 px
+      (34 px a ≤ 400 px); a ≤ 359 px la marca queda solo con el logo
+      (baqueano-identity.css).
+   📦 QUÉ: los cinco controles visibles y dentro de la pantalla desde 320 px. */
+@media (max-width: 960px) {
+  #mainNavbar .nav-inner > .global-nav-actions,
+  #mainNavbar .exact-container > .global-nav-actions {
+    display: flex !important; align-items: center !important; flex-wrap: nowrap !important;
+    width: auto !important; min-width: 0 !important; max-width: none !important;
+    gap: 6px !important; margin-left: auto !important; padding-left: 0 !important;
+  }
+  #mainNavbar .nav-inner > .global-nav-actions > .sos-quick-btn {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    width: 36px !important; min-width: 36px !important; height: 36px !important; padding: 0 !important;
+    border-radius: 12px !important;
+  }
+  #mainNavbar .nav-inner > .global-nav-actions > .sos-quick-btn span { display: none !important; }
+  #mainNavbar .nav-inner > .global-nav-actions > .bq-account-slot { display: inline-flex !important; width: auto !important; }
+  #mainNavbar .nav-inner > .global-nav-actions > .bq-account-slot > :is(a, button) {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    width: 36px !important; min-width: 36px !important; height: 36px !important; padding: 0 !important;
+    border-radius: 12px !important;
+  }
+  #mainNavbar .nav-inner > .global-nav-actions > .bq-account-slot > :is(a, button) > span:not(.bq-account-avatar) { display: none !important; }
+}
+@media (max-width: 400px) {
+  #mainNavbar .nav-inner > .global-nav-actions { gap: 4px !important; }
+  #mainNavbar .nav-inner > .global-nav-actions > :is(.sos-quick-btn, .exact-nav-mobile-toggle, .mobile-nav-toggle),
+  #mainNavbar .nav-inner > .global-nav-actions > .bq-account-slot > :is(a, button) {
+    width: 34px !important; min-width: 34px !important; height: 34px !important;
+  }
+}
+
+/* ---------- Ítems del panel: imponerse a reglas heredadas de "Más" ----------
+   Las reglas antiguas (#mainNavbar .nav-links-menu.mobile-open a {… !important})
+   alineaban el texto a la derecha y pintaban cada enlace como tarjeta. */
+#mainNavbar #navLinksMenu .bq-menu-item {
+  display: flex !important; align-items: center !important; justify-content: flex-start !important;
+  gap: 12px !important; width: auto !important; min-height: 46px !important; height: auto !important;
+  margin: 0 !important; padding: 7px 10px !important; box-sizing: border-box !important;
+  border: 1px solid transparent !important; border-radius: 12px !important;
+  background: transparent !important; box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.88) !important; text-align: left !important;
+  font-size: inherit !important; text-decoration: none !important;
+}
+#mainNavbar #navLinksMenu .bq-menu-item[hidden] { display: none !important; }
+#mainNavbar #navLinksMenu .bq-menu-item:hover { background: rgba(22, 93, 111, 0.26) !important; color: #FFFFFF !important; }
+#mainNavbar #navLinksMenu .bq-menu-item.active {
+  background: rgba(22, 93, 111, 0.38) !important; border-color: rgba(246, 94, 1, 0.45) !important; color: #FFFFFF !important;
+}
+#mainNavbar #navLinksMenu .bq-menu-admin { margin-top: 8px !important; border-top: 1px dashed rgba(244, 230, 193, 0.18) !important; padding-top: 10px !important; }
+#mainNavbar #navLinksMenu .bq-drawer-brand {
+  background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; height: auto !important;
+}
+@media (max-width: 960px) {
+  /* Con el panel abierto solo hay un cierre (el del panel): las acciones de
+     la barra quedan detrás del fondo oscuro. */
+  html.nav-drawer-open #mainNavbar .nav-inner > .global-nav-actions { visibility: hidden !important; }
+}

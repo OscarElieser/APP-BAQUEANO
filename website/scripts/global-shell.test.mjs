@@ -12,10 +12,11 @@
  *   desde la raíz; URL configurable con BQ_BASE_URL).
  * - Para recorrer anchos se bloquean imágenes, video y fuentes (no afectan la
  *   geometría del header) y se acepta el aviso de cookies por adelantado.
- * - Para los roles se sustituye Firebase por un doble de prueba ANTES de que
- *   carguen los scripts: así se ejercita la lógica real de user-session.js,
- *   roles.js y ops-engine.js con un usuario, un admin y un super_admin sin
- *   tocar cuentas reales. El SDK real de gstatic se bloquea en esas pruebas.
+ * - Sin dobles simulados (directiva del propietario, 2026-10-04): la sesión y
+ *   los roles se prueban contra Firebase REAL (invitado, localStorage
+ *   manipulado, sesión falsa invalidada por Firebase). Los casos con cuenta
+ *   real (usuario, admin, super_admin) se cubren con BQ_REAL_E2E=1 y con la
+ *   verificación manual de Google del propietario.
  *
  * 📦 QUÉ (What / Entregables):
  * - Sale con código 1 si algo falla e imprime cada fallo con página y ancho.
@@ -60,7 +61,7 @@ async function newContext(browser, { width, height = 900, blockFirebase = false,
     const url = req.url();
     if (type === 'image' || type === 'media' || type === 'font') return route.abort();
     if (blockFirebase && /gstatic\.com\/firebasejs|supabase\.co|googleapis\.com\/identitytoolkit/.test(url)) return route.abort();
-    if (!url.startsWith(BASE) && !/cdnjs\.cloudflare\.com|gstatic\.com|fonts\.googleapis\.com/.test(url)) return route.abort();
+    if (!url.startsWith(BASE) && !/cdnjs\.cloudflare\.com|gstatic\.com|googleapis\.com|firebaseapp\.com|supabase\.co|jsdelivr\.net/.test(url)) return route.abort();
     return route.continue();
   });
   return context;
@@ -151,7 +152,7 @@ async function geometrySweep() {
   }
 }
 
-// ── 2. Menú móvil: abrir/cerrar repetido, Escape, fuera, enlace, rotación ──
+// ── 2. Menú móvil (panel izquierdo): abrir/cerrar, acordeón, enlaces, rotación ──
 async function mobileDrawer(browser) {
   const context = await newContext(browser, { width: 390, height: 844, mobile: true, blockFirebase: true });
   const { page, errors } = await openPage(context, 'historia.html');
@@ -161,44 +162,63 @@ async function mobileDrawer(browser) {
     const r = menu.getBoundingClientRect();
     return {
       expanded: t.getAttribute('aria-expanded'),
-      open: document.documentElement.classList.contains('nav-drawer-open') || document.body.classList.contains('nav-drawer-open'),
-      menuVisible: r.width > 0 && r.right > 0 && r.left < innerWidth && getComputedStyle(menu).visibility !== 'hidden',
-      menuInside: r.top >= -1 && r.bottom <= innerHeight + 1 && r.left >= -1 && r.right <= innerWidth + 1,
-      scrollable: menu.scrollHeight <= menu.clientHeight + 1 || ['auto', 'scroll'].includes(getComputedStyle(menu).overflowY) || [...menu.querySelectorAll('*')].some((el) => ['auto', 'scroll'].includes(getComputedStyle(el).overflowY) && el.scrollHeight > el.clientHeight)
+      open: menu.classList.contains('mobile-open') && document.documentElement.classList.contains('nav-drawer-open'),
+      menuInside: r.top >= -1 && r.left >= -1 && r.right <= innerWidth + 1 && r.bottom <= innerHeight + 1,
+      scrollable: ['auto', 'scroll'].includes(getComputedStyle(menu).overflowY),
+      openGroups: menu.querySelectorAll('.bq-menu-group.is-open').length
     };
   });
-  const canScroll = async () => {
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await page.mouse.wheel(0, 900);
-    await page.waitForTimeout(250);
-    return page.evaluate(() => window.scrollY > 0);
-  };
-
+  const canScroll = () => page.evaluate(async () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollBy({ top: 400, behavior: 'instant' });
+    await new Promise((r) => setTimeout(r, 60));
+    return window.scrollY > 0;
+  });
+  const closers = ['escape', 'backdrop', 'close'];
   for (let i = 1; i <= 6; i += 1) {
     await page.click('#mobileNavToggle');
-    await page.waitForTimeout(260);
+    await page.waitForTimeout(380);
     const s = await state();
-    expect(s.expanded === 'true' && s.open && s.menuVisible, `Menú móvil ciclo ${i}: no abrió (${JSON.stringify(s)})`);
-    expect(s.menuInside, `Menú móvil ciclo ${i}: el cajón sale del viewport`);
-    expect(s.scrollable, `Menú móvil ciclo ${i}: sin scroll interno con muchas opciones`);
-    if (i % 3 === 1) await page.keyboard.press('Escape');
-    else if (i % 3 === 2) await page.mouse.click(380, 420); // fondo, a la derecha del panel
-    else await page.click('#mobileNavToggle');
-    await page.waitForTimeout(300);
+    expect(s.expanded === 'true' && s.open, `Panel móvil ciclo ${i}: no abrió (${JSON.stringify(s)})`);
+    expect(s.menuInside && s.scrollable, `Panel móvil ciclo ${i}: fuera del viewport o sin scroll interno`);
+    expect(s.openGroups === 1, `Panel móvil ciclo ${i}: el grupo de la página actual no quedó desplegado (${s.openGroups})`);
+    const how = closers[i % 3];
+    if (how === 'escape') await page.keyboard.press('Escape');
+    else if (how === 'backdrop') await page.mouse.click(380, 600);
+    else await page.click('#navLinksMenu .bq-drawer-close');
+    await page.waitForTimeout(380);
     const c = await state();
-    expect(c.expanded === 'false' && !c.open, `Menú móvil ciclo ${i}: no cerró (${JSON.stringify(c)})`);
-    expect(await canScroll(), `Menú móvil ciclo ${i}: la página quedó sin scroll tras cerrar`);
+    expect(c.expanded === 'false' && !c.open, `Panel móvil ciclo ${i} (${how}): no cerró (${JSON.stringify(c)})`);
+    expect(await canScroll(), `Panel móvil ciclo ${i} (${how}): la página quedó sin scroll tras cerrar`);
   }
 
+  // Acordeón: un solo grupo abierto a la vez.
+  await page.click('#mobileNavToggle');
+  await page.waitForTimeout(380);
+  for (const group of ['explore', 'community', 'account']) {
+    await page.click(`#bqMenuTrigger-${group}`);
+    await page.waitForTimeout(150);
+    const open = await page.evaluate(() => [...document.querySelectorAll('#navLinksMenu .bq-menu-group.is-open')].map((g) => g.dataset.group));
+    expect(open.length === 1 && open[0] === group, `Acordeón: al abrir ${group} quedan abiertos ${open.join(',')}`);
+  }
   const tools = await page.evaluate(() => {
     const menu = document.getElementById('navLinksMenu');
+    const vw = document.documentElement.clientWidth;
+    const inBar = (sel) => { const el = document.querySelector(sel); const r = el && el.getBoundingClientRect(); return !!(r && r.width > 0); };
     return {
-      lang: Boolean(menu.querySelector('.global-language, .navbar-lang-pill')),
-      account: Boolean(menu.querySelector('.bq-account-slot, a[href="perfil.html"]'))
+      lang: Boolean(menu.querySelector('.global-language')),
+      account: Boolean(menu.querySelector('[data-bq-account-drawer]')),
+      thumb: (() => { const t = document.getElementById('bqThumbBar'); return !!t && getComputedStyle(t).visibility !== 'hidden' && getComputedStyle(t).display !== 'none'; })(),
+      vw,
+      bar: inBar('#mainNavbar .global-nav-actions > .sos-quick-btn') && inBar('#mainNavbar .global-nav-actions > .global-language') && inBar('#mainNavbar .global-nav-actions > .bq-account-slot > *')
     };
   });
-  expect(tools.lang, 'Menú móvil: falta el selector de idioma dentro del cajón');
-  expect(tools.account, 'Menú móvil: falta el acceso a cuenta/login dentro del cajón');
+  expect(tools.lang && tools.account, 'Panel móvil: faltan idioma o cuenta dentro del panel');
+  expect(tools.thumb, 'Panel móvil: la barra inferior desaparece al abrir el panel');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(350);
+  const bar = await page.evaluate(() => ['#mainNavbar .global-nav-actions > .sos-quick-btn', '#mainNavbar .global-nav-actions > .global-language', '#mainNavbar .global-nav-actions > .bq-account-slot > *', '#mobileNavToggle'].every((sel) => { const el = document.querySelector(sel); const r = el && el.getBoundingClientRect(); return !!(r && r.width > 0 && r.right <= document.documentElement.clientWidth + 1); }));
+  expect(bar, 'Barra superior móvil: falta SOS, Usuario, ES o ☰');
 
   // Rotación: horizontal y regreso, sin desbordes.
   for (const vp of [{ width: 844, height: 390 }, { width: 390, height: 844 }]) {
@@ -208,39 +228,67 @@ async function mobileDrawer(browser) {
     expect(over <= 1, `Rotación ${vp.width}x${vp.height}: desbordamiento horizontal ${over} px`);
   }
 
-  // Seleccionar un enlace cierra el cajón y navega.
+  // Elegir un enlace navega y la página nueva carga con el panel cerrado.
   await page.click('#mobileNavToggle');
-  await page.waitForTimeout(260);
-  const link = page.locator('#navLinksMenu a[href="destinos.html"]').first();
-  await Promise.all([page.waitForURL(/destinos\.html/, { timeout: 15000 }), link.click()]);
+  await page.waitForTimeout(380);
+  await page.click('#bqMenuTrigger-explore');
+  await page.waitForTimeout(150);
+  await Promise.all([page.waitForURL(/destinos\.html/, { timeout: 15000 }), page.click('#bqMenuPanel-explore a[href="destinos.html"]')]);
   await page.waitForFunction(() => document.getElementById('mobileNavToggle'), null, { timeout: 15000 });
   const after = await state();
-  expect(after.expanded === 'false' && !after.open, 'Menú móvil: queda abierto tras cambiar de página');
-  expect(errors.length === 0, `Menú móvil: errores JS ${errors.join(' | ')}`);
+  expect(after.expanded === 'false' && !after.open, 'Panel móvil: queda abierto tras cambiar de página');
+  expect(errors.length === 0, `Panel móvil: errores JS ${errors.join(' | ')}`);
   await context.close();
 }
 
-// ── 3. Escritorio: "Más" accesible con teclado y dentro del viewport ───────
+// ── 3. Escritorio: cinco grupos con desplegables independientes ─────────────
 async function desktopDropdown(browser) {
-  for (const width of [1024, 1280, 1920]) {
+  for (const width of [1024, 1280, 1366, 1920]) {
     const context = await newContext(browser, { width, blockFirebase: true });
-    const { page } = await openPage(context, 'index.html');
-    await page.focus('#btnGlobalMoreTrigger');
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(300);
-    const open = await page.evaluate(() => {
-      const t = document.getElementById('btnGlobalMoreTrigger');
-      const m = document.getElementById('globalMegaMenu');
-      const r = m.getBoundingClientRect();
-      const probe = document.elementFromPoint(r.left + r.width / 2, r.top + Math.min(40, r.height / 2));
-      return { expanded: t.getAttribute('aria-expanded'), inside: r.left >= -1 && r.right <= innerWidth + 1 && r.height > 0, onTop: Boolean(probe && m.contains(probe)) };
-    });
-    expect(open.expanded === 'true' && open.inside, `"Más" @${width}px: no abre o sale del viewport (${JSON.stringify(open)})`);
-    expect(open.onTop, `"Más" @${width}px: el desplegable queda detrás de otro elemento`);
+    const { page, errors } = await openPage(context, 'index.html');
+    const labels = await page.evaluate(() => [...document.querySelectorAll('#navLinksMenu > a.bq-menu-home, #navLinksMenu .bq-menu-trigger')].map((el) => el.id || 'home'));
+    expect(labels.length === 5, `Escritorio @${width}px: se esperaban 5 grupos, hay ${labels.length}`);
+    for (const group of ['explore', 'culture', 'community', 'account']) {
+      await page.click(`#bqMenuTrigger-${group}`);
+      await page.waitForTimeout(260);
+      const r = await page.evaluate((g) => {
+        const panel = document.getElementById(`bqMenuPanel-${g}`);
+        const pr = panel.getBoundingClientRect();
+        const links = [...panel.querySelectorAll('a[href]:not([hidden])')];
+        const blocked = links.filter((a) => { const b = a.getBoundingClientRect(); const hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2); return !hit || !a.contains(hit); }).length;
+        return {
+          expanded: document.getElementById(`bqMenuTrigger-${g}`).getAttribute('aria-expanded'),
+          inside: pr.left >= 0 && pr.right <= document.documentElement.clientWidth && pr.bottom <= innerHeight + 1 && pr.height > 0,
+          open: document.querySelectorAll('#navLinksMenu .bq-menu-group.is-open').length,
+          links: links.length, blocked
+        };
+      }, group);
+      expect(r.expanded === 'true' && r.inside && r.open === 1, `Grupo ${group} @${width}px: ${JSON.stringify(r)}`);
+      expect(r.links > 0 && r.blocked === 0, `Grupo ${group} @${width}px: ${r.blocked} enlaces tapados`);
+    }
+    // Teclado: ↓ entra al panel, ↓ avanza, Esc cierra y devuelve el foco.
     await page.keyboard.press('Escape');
+    await page.focus('#bqMenuTrigger-culture');
+    await page.keyboard.press('ArrowDown');
     await page.waitForTimeout(200);
-    const closed = await page.evaluate(() => document.getElementById('btnGlobalMoreTrigger').getAttribute('aria-expanded'));
-    expect(closed === 'false', `"Más" @${width}px: Escape no lo cierra`);
+    const first = await page.evaluate(() => document.activeElement.getAttribute('href'));
+    await page.keyboard.press('ArrowDown');
+    const second = await page.evaluate(() => document.activeElement.getAttribute('href'));
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(150);
+    const back = await page.evaluate(() => ({ id: document.activeElement.id, exp: document.getElementById('bqMenuTrigger-culture').getAttribute('aria-expanded') }));
+    expect(first === 'historia.html' && second === 'gastronomia.html', `Teclado @${width}px: ↓ no recorre los enlaces (${first}, ${second})`);
+    expect(back.id === 'bqMenuTrigger-culture' && back.exp === 'false', `Teclado @${width}px: Esc no cierra ni devuelve el foco`);
+    // Hover con puntero fino y clic fuera.
+    await page.hover('#bqMenuTrigger-community');
+    await page.waitForTimeout(260);
+    const hovered = await page.evaluate(() => document.getElementById('bqMenuTrigger-community').getAttribute('aria-expanded'));
+    await page.evaluate(() => document.body.dispatchEvent(new MouseEvent("click", { bubbles: true })));
+    await page.waitForTimeout(260);
+    const closed = await page.evaluate(() => document.querySelectorAll('#navLinksMenu .bq-menu-group.is-open').length);
+    expect(hovered === 'true', `Hover @${width}px: no abre Comunidad`);
+    expect(closed === 0, `Clic fuera @${width}px: el grupo sigue abierto`);
+    expect(errors.length === 0, `Escritorio @${width}px: errores JS ${errors.join(' | ')}`);
     await context.close();
   }
 }
@@ -262,37 +310,10 @@ async function languagePersistence(browser) {
   await context.close();
 }
 
-// ── 5. Roles: doble de Firebase para usuario, admin y super_admin ──────────
-const FAKE_USERS = {
-  user: { uid: 'uid-user-1', email: 'viajera@example.com', emailVerified: true, displayName: 'Ana Viajera', claims: {} },
-  admin: { uid: 'uid-admin-1', email: 'byoscarelieser@gmail.com', emailVerified: true, displayName: 'Admin Prueba', claims: {} },
-  super: { uid: 'uid-super-1', email: 'oscarelieser.informatica.inatec@gmail.com', emailVerified: true, displayName: 'Super Prueba', claims: {} },
-  unverifiedOfficial: { uid: 'uid-fake-1', email: 'oscarelieser.informatica.inatec@gmail.com', emailVerified: false, displayName: 'Impostor', claims: {} },
-  claimAdmin: { uid: 'uid-claim-1', email: 'staff@example.com', emailVerified: true, displayName: 'Staff Claim', claims: { role: 'admin' } }
-};
-
-async function contextWithFakeFirebase(browser, user, width = 1280) {
-  const context = await newContext(browser, { width, blockFirebase: true });
-  await context.addInitScript((u) => {
-    const fakeUser = u && {
-      uid: u.uid, email: u.email, emailVerified: u.emailVerified, displayName: u.displayName,
-      photoURL: '', phoneNumber: '', providerData: [{ providerId: 'google.com' }], metadata: {},
-      getIdTokenResult: () => Promise.resolve({ claims: u.claims })
-    };
-    const auth = {
-      currentUser: fakeUser,
-      onAuthStateChanged(cb) { setTimeout(() => cb(fakeUser), 50); return () => {}; },
-      signOut() { auth.currentUser = null; return Promise.resolve(); }
-    };
-    const app = { name: '[DEFAULT]' };
-    const firebase = {
-      apps: [app], app: () => app, initializeApp: () => app,
-      auth: Object.assign(() => auth, { GoogleAuthProvider: function () { this.setCustomParameters = () => {}; this.addScope = () => {}; } })
-    };
-    Object.defineProperty(window, 'firebase', { value: firebase, writable: false, configurable: false });
-  }, user);
-  return context;
-}
+// ── 5. Roles y sesión con Firebase REAL (sin dobles simulados) ──────────────
+// Los casos con cuenta (usuario, admin y super_admin) exigen iniciar sesión de
+// verdad: se cubren con la prueba E2E real opcional (BQ_REAL_E2E=1) y, para
+// Google de admin/super_admin, con la verificación manual del propietario.
 
 async function headerAccount(page, until) {
   const read = () => page.evaluate(() => {
@@ -362,9 +383,9 @@ async function rolesAndSession(browser) {
     await context.close();
   }
 
-  // CASO 1 / 6: invitado abre admin.html directamente.
+  // CASO 1 / 6: invitado abre admin.html directamente (Firebase real).
   {
-    const context = await contextWithFakeFirebase(browser, null);
+    const context = await newContext(browser, { width: 1280 });
     const page = await context.newPage();
     await page.goto(`${BASE}/admin.html`, { waitUntil: 'domcontentloaded' });
     const g = await adminGate(page);
@@ -373,7 +394,7 @@ async function rolesAndSession(browser) {
     await context.close();
   }
 
-  // CASO 5: localStorage falsificado (sin Firebase confirmando nada).
+  // CASO 5: localStorage falsificado sin que Firebase confirme nada.
   {
     const context = await newContext(browser, { width: 1280, blockFirebase: true });
     await context.addInitScript(([key]) => {
@@ -382,15 +403,12 @@ async function rolesAndSession(browser) {
     const { page } = await openPage(context, 'index.html');
     const forged = await headerAccount(page);
     expect(!forged.opsVisible, `CASO 5: localStorage falsificado muestra el Ops Center ${JSON.stringify(forged)}`);
-    await page.goto(`${BASE}/admin.html`, { waitUntil: 'domcontentloaded' });
-    const g = await adminGate(page);
-    expect(!g.appVisible, 'CASO 5: localStorage falsificado abre el Ops Center');
     await context.close();
   }
 
-  // CASO 5b: sesión falsificada y Firebase responde "sin usuario" → se limpia.
+  // CASO 5b: sesión falsificada + Firebase REAL sin usuario → se invalida.
   {
-    const context = await contextWithFakeFirebase(browser, null);
+    const context = await newContext(browser, { width: 1280 });
     await context.addInitScript(([key]) => {
       if (!sessionStorage.getItem('bq-test-seeded')) {
         sessionStorage.setItem('bq-test-seeded', '1');
@@ -400,49 +418,10 @@ async function rolesAndSession(browser) {
     const { page } = await openPage(context, 'destinos.html');
     const h = await headerAccount(page, (x) => x.hasLogin);
     const stored = await page.evaluate((key) => localStorage.getItem(key), SESSION_KEY);
-    expect(!h.opsVisible && h.hasLogin && stored === null, `CASO 5b: sesión falsa no se invalidó con Firebase ${JSON.stringify({ h, stored })}`);
-    await context.close();
-  }
-
-  // CASOS 2, 3, 4 + claims + correo oficial sin verificar.
-  const cases = [
-    ['CASO 2 usuario', FAKE_USERS.user, false],
-    ['CASO 3 admin', FAKE_USERS.admin, true],
-    ['CASO 4 super_admin', FAKE_USERS.super, true],
-    ['Correo oficial sin verificar', FAKE_USERS.unverifiedOfficial, false],
-    ['Custom Claim admin', FAKE_USERS.claimAdmin, true]
-  ];
-  for (const [label, user, allowed] of cases) {
-    const context = await contextWithFakeFirebase(browser, user);
-    const { page, errors } = await openPage(context, 'index.html');
-    const h = await headerAccount(page, (x) => x.hasAvatar && x.opsVisible === allowed);
-    expect(h.hasAvatar && !h.hasLogin && h.text.includes(user.displayName.split(' ')[0]), `${label}: header sin avatar/nombre ${JSON.stringify(h)}`);
-    expect(h.opsVisible === allowed, `${label}: enlace Ops Center ${h.opsVisible ? 'visible' : 'oculto'} (esperado ${allowed ? 'visible' : 'oculto'})`);
-
-    // CASO 7: la sesión sigue al cambiar de página.
-    for (const file of ['destinos.html', 'gastronomia.html', 'historia.html']) {
-      await page.goto(`${BASE}/${file}`, { waitUntil: 'domcontentloaded' });
-      const n = await headerAccount(page, (x) => x.hasAvatar && x.opsVisible === allowed);
-      expect(n.hasAvatar && n.opsVisible === allowed, `${label}: sesión inconsistente en ${file} ${JSON.stringify(n)}`);
-    }
-
+    expect(!h.opsVisible && h.hasLogin && stored === null, `CASO 5b: Firebase real no invalidó la sesión falsa ${JSON.stringify({ h, stored })}`);
     await page.goto(`${BASE}/admin.html`, { waitUntil: 'domcontentloaded' });
     const g = await adminGate(page);
-    expect(g.appVisible === allowed, `${label}: Ops Center ${g.appVisible ? 'abierto' : 'cerrado'} (esperado ${allowed ? 'abierto' : 'cerrado'})`);
-    if (!allowed) expect(g.denied, `${label}: falta el mensaje "No tienes autorización para acceder al Ops Center."`);
-    expect(errors.length === 0, `${label}: errores JS ${errors.join(' | ')}`);
-    await context.close();
-  }
-
-  // Logout desde una página sin SDK propio: limpia sesión y header.
-  {
-    const context = await contextWithFakeFirebase(browser, FAKE_USERS.user);
-    const { page } = await openPage(context, 'historia.html');
-    await headerAccount(page, (x) => x.hasAvatar);
-    await page.evaluate(() => window.BaqueanoSession.logout());
-    await page.waitForTimeout(300);
-    const after = await page.evaluate((key) => ({ stored: localStorage.getItem(key), signedOut: window.firebase.auth().currentUser === null }), SESSION_KEY);
-    expect(after.stored === null && after.signedOut, `Logout: no cerró la sesión ${JSON.stringify(after)}`);
+    expect(!g.appVisible, 'CASO 5b: la sesión falsa abre el Ops Center');
     await context.close();
   }
 }
@@ -470,18 +449,22 @@ async function linkAudit(browser) {
 
 const browser = await chromium.launch();
 const steps = [
-  ['Roles, sesión y Ops Center', rolesAndSession],
-  ['Menú móvil', mobileDrawer],
-  ['Desplegable de escritorio', desktopDropdown],
-  ['Idioma persistente', languagePersistence],
-  ['Enlaces de header y footer', linkAudit],
-  [`Barrido de ${WIDTHS.length} anchos × ${PAGES.length} páginas`, geometrySweep]
+  ['roles', 'Roles, sesión y Ops Center', rolesAndSession],
+  ['movil', 'Menú móvil', mobileDrawer],
+  ['escritorio', 'Desplegable de escritorio', desktopDropdown],
+  ['idioma', 'Idioma persistente', languagePersistence],
+  ['enlaces', 'Enlaces de header y footer', linkAudit],
+  ['barrido', `Barrido de ${WIDTHS.length} anchos × ${PAGES.length} páginas`, geometrySweep]
 ];
-for (const [name, fn] of steps) {
+// BQ_STEPS=roles,movil ejecuta solo esos pasos; cada fallo se imprime al terminar su paso.
+const onlySteps = process.env.BQ_STEPS ? new Set(process.env.BQ_STEPS.split(',')) : null;
+for (const [id, name, fn] of steps) {
+  if (onlySteps && !onlySteps.has(id)) continue;
   const before = failures.length;
   console.log(`▶ ${name}`);
   try { await fn(browser); } catch (error) { expect(false, `${name}: excepción ${error.message.split('\n')[0]}`); }
   console.log(`  ${failures.length === before ? 'OK' : `${failures.length - before} fallo(s)`}`);
+  failures.slice(before).forEach((f) => console.log('   ✗ ' + f));
 }
 await browser.close();
 
