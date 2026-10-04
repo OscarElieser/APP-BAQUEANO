@@ -85,4 +85,5 @@ jobs:
         run: npm ci
 
       - name: 🛡️ Validate Syntax and Entrypoints
-        run: node -c src/index.js
+        run: node -c backend/ai/src/index.js
+

@@ -84,6 +84,18 @@ LO QUE FUNCIONA EN ESTE PUNTO:
     - SESSION_LOG.md
 
   ESTADO: Implementado y verificado. -->
+## 🧭 EJECUCIÓN DE LOTE 2 (BACKEND IA GENKIT) E INTEGRACIÓN DEL COMPONENTE MAGAZINE DE ATHEROS (03-10-2026)
+
+- **Consulta / Solicitud del Usuario:**
+  > *"te lo autorizo pero ademas quiero que instale lo sguiente: on builder we have vanilla as well as react tailwind-https://builder.atheros.ia/components/magazine?ds=ember-studio"*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** (1) Consolidar el backend de IA (Genkit) dentro de `backend/ai/` para liberar la raíz y mantener la cohesión del código de inteligencia artificial verificado por CI/CD; (2) Inspeccionar y adaptar el componente de diseño editorial `magazine` de Atheros Builder (tema Ember Studio) bajo la variante **Vanilla (HTML + CSS modular)**, respetando la identidad turística, la paleta oficial de BAQUEANO y la arquitectura estática de Firebase Hosting sin añadir dependencias de React o Tailwind.
+  - ⚙️ **CÓMO:** (1) Crear `backend/ai/`, (2) Mover mediante `git mv` `src/` y `prompts/` a `backend/ai/src/` y `backend/ai/prompts/`, (3) Actualizar `package.json` raíz (`"main": "backend/ai/src/index.js"`) y `.github/workflows/flutter_ci.yml` (`node -c backend/ai/src/index.js`), (4) Verificar sintaxis con `node -c backend/ai/src/index.js`, (5) Auditar e integrar la estructura Vanilla del componente Magazine de Atheros adaptándolo a `website/css/` y componentes editoriales de BAQUEANO.
+  - 📦 **QUÉ:** Backend IA consolidado en `backend/ai/`, CI actualizado y verificado, y componente editorial Vanilla adaptado al ecosistema de diseño.
+
+---
+
 ## 🧭 EJECUCIÓN DE LOTE 1: REORGANIZACIÓN DE DOCUMENTACIÓN Y CSS HUÉRFANO (03-10-2026)
 
 - **Consulta / Autorización del Usuario:**

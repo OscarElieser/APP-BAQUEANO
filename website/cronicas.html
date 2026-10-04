@@ -1,47 +1,247 @@
 <!DOCTYPE html>
 <!--
 ============================================================================
-BAQUEANO — BLOG Y CRÓNICAS TERRITORIALES
+🧭 BAQUEANO — BLOG Y CRÓNICAS TERRITORIALES (EDICIÓN MAGAZINE)
 ============================================================================
-POR QUÉ: ofrecer un destino propio para relatos de viaje, voces comunitarias y
-actualizaciones del territorio, evitando enviar este acceso a otra temática.
-CÓMO: reúne crónicas editoriales enlazadas con departamentos y experiencias;
-la navegación y el pie se sincronizan mediante el inyector global.
-QUÉ: portada editorial, archivo inicial de crónicas y accesos territoriales.
+🎯 1. POR QUÉ (WHY / PROPÓSITO):
+- Ofrecer un espacio editorial narrativo de alto impacto visual y documental
+  para las historias, memorias comunitarias y crónicas vivas de Nicaragua.
+- Inspirado en el patrón arquitectónico Magazine Layout (Atheros / Ember Studio)
+  implementado 100% en Vanilla CSS modular con la paleta soberana de BAQUEANO.
+
+⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+- Layout en 3 rieles: navegación temática izquierda, historia líder + rejilla
+  popular al centro, y lecturas destacadas con pull-quote a la derecha.
+- Integración con navegación global y pie institucional sincronizados por
+  el inyector universal (global-injector.js).
+- Cumplimiento WCAG 2.2 AA (targets >= 44px, focus-visible, prefers-reduced-motion).
+
+📦 3. QUÉ (WHAT / ENTREGABLES & CONTENIDO):
+- Portada editorial, masthead con chips de filtrado territorial, historia líder
+  de Ometepe, crónicas de Somoto y Matagalpa, ranking de lecturas y cita campesina.
 ============================================================================
 -->
 <html lang="es" data-bq-page="cronicas" data-bq-group="cultura">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Blog &amp; Crónicas | Baqueano Nicaragua</title>
-  <meta name="description" content="Relatos territoriales, voces comunitarias y crónicas de viaje responsable por Nicaragua.">
+  <title>Crónicas &amp; Relatos Territoriales | Baqueano Nicaragua</title>
+  <meta name="description" content="Relatos territoriales, voces comunitarias y crónicas de viaje responsable por Nicaragua. Descubre lo que no sale en el mapa.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260930-cronicas-1">
-  <link rel="stylesheet" href="css/navigation-mega.css?v=20260930-cronicas-1">
-  <style>
-    body{margin:0;background:#F8FAFC;color:#0F172A;font-family:Inter,system-ui,sans-serif}.chronicle-hero{min-height:58vh;display:grid;place-items:end start;padding:clamp(7rem,13vw,11rem) clamp(1.2rem,7vw,7rem) clamp(3rem,7vw,6rem);position:relative;isolation:isolate;overflow:hidden;background:url('assets/images/destinos/isla_de_ometepe.jpg') center/cover}.chronicle-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(15,23,42,.94),rgba(15,23,42,.34))}.chronicle-hero div{max-width:780px}.chronicle-hero span{color:#F4E6C1;font-weight:800;letter-spacing:.14em}.chronicle-hero h1{margin:.7rem 0 1rem;color:#fff;font:900 clamp(2.5rem,7vw,5.5rem)/.96 Montserrat,sans-serif}.chronicle-hero p{color:#E2E8F0;font-size:clamp(1rem,2vw,1.2rem);line-height:1.7}.chronicle-main{max-width:1280px;margin:auto;padding:clamp(2.5rem,6vw,5rem) 1.2rem}.chronicle-head{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:2rem}.chronicle-head h2{margin:0;font:900 clamp(1.7rem,4vw,2.7rem) Montserrat,sans-serif;color:#165D6F}.chronicle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}.chronicle-card{overflow:hidden;border:1px solid #E2E8F0;border-radius:22px;background:#fff;box-shadow:0 14px 35px rgba(15,23,42,.08)}.chronicle-card img{width:100%;height:220px;object-fit:cover}.chronicle-copy{padding:1.3rem}.chronicle-copy small{color:#F65E01;font-weight:900;letter-spacing:.08em}.chronicle-copy h3{margin:.5rem 0;color:#0F172A;font:800 1.2rem/1.25 Montserrat,sans-serif}.chronicle-copy p{color:#64748B;line-height:1.6}.chronicle-copy a{display:inline-flex;gap:.45rem;align-items:center;color:#165D6F;font-weight:800;text-decoration:none}@media(max-width:800px){.chronicle-grid{grid-template-columns:1fr}.chronicle-head{align-items:start;flex-direction:column}}
-  </style>
+  <link rel="stylesheet" href="styles.css?v=20261003-mag-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20261003-mag-1">
+  <link rel="stylesheet" href="css/components/magazine-layout.css?v=20261003-mag-1">
 
-  <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
+  <!-- Favicon e Iconografía Oficial de Pestaña -->
   <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="icon" type="image/webp" sizes="192x192" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
+  
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
 </head>
 <body>
-  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal"><div class="exact-container nav-inner"><a href="index.html" class="exact-nav-brand navbar-brand-pill"><img src="assets/images/LOGOS/baqueano_icono_oficial.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="478" height="478"><div class="exact-nav-brand-text"><span class="exact-nav-title">BAQUEANO</span><span class="exact-nav-tagline">NICARAGUA AUTÉNTICA</span></div></a><div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div><div class="exact-nav-actions global-nav-actions"></div></div></nav>
-  <main>
-    <header class="chronicle-hero"><div><span>VOCES DEL TERRITORIO</span><h1>Crónicas que se caminan</h1><p>Relatos de comunidades, caminos, cocinas y paisajes narrados con contexto y respeto por quienes hacen vivir cada lugar.</p></div></header>
-    <section class="chronicle-main"><div class="chronicle-head"><div><span>ARCHIVO BAQUEANO</span><h2>Historias para preparar el viaje</h2></div><a href="departamento.html">Explorar territorios <i class="fa-solid fa-arrow-right"></i></a></div><div class="chronicle-grid">
-      <article class="chronicle-card"><img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" loading="lazy" decoding="async" width="399" height="501"><div class="chronicle-copy"><small>MADRIZ · COMUNIDAD</small><h3>El cañón contado por sus guías</h3><p>Cómo la organización local convirtió el conocimiento del río y la roca en una experiencia guiada responsable.</p><a href="departamento.html?id=madriz">Leer territorio <i class="fa-solid fa-arrow-right"></i></a></div></article>
-      <article class="chronicle-card"><img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" loading="lazy" decoding="async" width="1600" height="900"><div class="chronicle-copy"><small>RIVAS · ISLA</small><h3>Dos volcanes y muchas comunidades</h3><p>Una mirada a Ometepe más allá de sus cumbres: fincas, senderos, memoria y hospitalidad insular.</p><a href="departamento.html?id=rivas">Leer territorio <i class="fa-solid fa-arrow-right"></i></a></div></article>
-      <article class="chronicle-card"><img src="assets/images/destinos/selva_negra.jpg" alt="Cafetales del norte" loading="lazy" decoding="async" width="399" height="501"><div class="chronicle-copy"><small>NORTE · CAFÉ</small><h3>Del corte a la taza</h3><p>Personas, temporadas y decisiones que sostienen la cultura cafetalera de las montañas nicaragüenses.</p><a href="departamento.html?id=matagalpa">Leer territorio <i class="fa-solid fa-arrow-right"></i></a></div></article>
-    </div></section>
+  <!-- Barra de Navegación Global Idéntica -->
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <a href="index.html" class="exact-nav-brand navbar-brand-pill">
+        <img src="assets/images/LOGOS/baqueano_icono_oficial.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="478" height="478">
+        <div class="exact-nav-brand-text">
+          <span class="exact-nav-title">BAQUEANO</span>
+          <span class="exact-nav-tagline">NICARAGUA AUTÉNTICA</span>
+        </div>
+      </a>
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+    <!-- Componente Editorial Magazine -->
+    <section class="bq-magazine-container" aria-label="Magazine de Crónicas Territoriales">
+      
+      <!-- Masthead Editorial -->
+      <header class="bq-magazine-masthead">
+        <div class="bq-mag-masthead-top">
+          <div>
+            <span class="bq-mag-kicker">Voces del Territorio · Edición Especial</span>
+            <h1 class="bq-mag-title">Crónicas que se caminan</h1>
+          </div>
+          <span class="bq-mag-date">Nicaragua · Cuaderno de Campo 2026</span>
+        </div>
+
+        <nav class="bq-mag-section-nav" aria-label="Secciones del magazine">
+          <a href="#" class="bq-mag-chip active">Todas las crónicas</a>
+          <a href="#" class="bq-mag-chip">Comunidades Vivas</a>
+          <a href="#" class="bq-mag-chip">Senderos y Volcanes</a>
+          <a href="#" class="bq-mag-chip">Ruta del Café</a>
+          <a href="#" class="bq-mag-chip">Memoria y Tradición</a>
+          <a href="#" class="bq-mag-chip">Caribe y Pueblos</a>
+        </nav>
+      </header>
+
+      <!-- Rejilla Asimétrica Magazine de 3 Rieles -->
+      <div class="bq-magazine-body">
+        
+        <!-- RIEL IZQUIERDO: Temas y Enfoques -->
+        <aside class="bq-mag-left-rail" aria-label="Temáticas y territorios">
+          <div class="bq-mag-rail-card">
+            <h3 class="bq-mag-rail-heading">Territorios</h3>
+            <ul class="bq-mag-topic-list">
+              <li>
+                <a href="departamento.html?id=madriz" class="bq-mag-topic-link">
+                  <span>Cañón de Somoto</span>
+                  <span class="bq-mag-topic-badge">12 relatos</span>
+                </a>
+              </li>
+              <li>
+                <a href="departamento.html?id=rivas" class="bq-mag-topic-link">
+                  <span>Isla de Ometepe</span>
+                  <span class="bq-mag-topic-badge">18 relatos</span>
+                </a>
+              </li>
+              <li>
+                <a href="departamento.html?id=matagalpa" class="bq-mag-topic-link">
+                  <span>Selva Negra &amp; Norte</span>
+                  <span class="bq-mag-topic-badge">15 relatos</span>
+                </a>
+              </li>
+              <li>
+                <a href="departamento.html?id=leon" class="bq-mag-topic-link">
+                  <span>Cerro Negro &amp; Poneloya</span>
+                  <span class="bq-mag-topic-badge">9 relatos</span>
+                </a>
+              </li>
+              <li>
+                <a href="departamento.html?id=caribe-sur" class="bq-mag-topic-link">
+                  <span>Corn Island &amp; Bluefields</span>
+                  <span class="bq-mag-topic-badge">14 relatos</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bq-mag-rail-card">
+            <h3 class="bq-mag-rail-heading">Baqueanos del Mes</h3>
+            <p style="font-size:0.84rem;color:var(--bq-mag-muted);line-height:1.55;margin:0 0 1rem;">
+              Anfitriones rurales y sabios locales que comparten su conocimiento sin intermediarios.
+            </p>
+            <a href="aliados.html" style="color:var(--bq-mag-primary);font-weight:800;font-size:0.84rem;text-decoration:none;">
+              Conocer anfitriones <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </aside>
+
+        <!-- COLUMNA CENTRAL: Noticia Principal + Rejilla Popular -->
+        <div class="bq-mag-main-content">
+          
+          <!-- Noticia Líder (Featured Lead Story) -->
+          <article class="bq-mag-lead-article">
+            <div class="bq-mag-lead-media">
+              <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Dos volcanes y comunidades en Ometepe" loading="eager" decoding="async" width="1600" height="900">
+              <span class="bq-mag-lead-tag">Crónica Principal · Rivas</span>
+            </div>
+            <div class="bq-mag-lead-body">
+              <h2 class="bq-mag-lead-title">Dos volcanes y muchas comunidades: El latido insular</h2>
+              <p class="bq-mag-lead-excerpt">
+                Una travesía profunda por Ometepe más allá de las cumbres del Concepción y Maderas. En fincas agroecológicas, cooperativas plataneras y senderos de petroglifos ancestrales, las familias campesinas preservan una hospitalidad que resiste al turismo masivo y honra el agua del Gran Lago.
+              </p>
+              <div class="bq-mag-byline">
+                <img src="assets/images/LOGOS/baqueano_icono_oficial.png" alt="Baqueano Guardabarranco" class="bq-mag-byline-avatar">
+                <div>
+                  <span class="bq-mag-byline-name">Por Martín Morales · Baqueano de Altagracia</span>
+                  <div style="font-size:0.75rem;">Lectura de 7 min · Verificado en territorio</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Rejilla Secundaria Popular -->
+          <div class="bq-mag-secondary-grid">
+            <article class="bq-mag-card-sm">
+              <div class="bq-mag-card-sm-media">
+                <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" loading="lazy" decoding="async" width="399" height="501">
+              </div>
+              <div class="bq-mag-card-sm-content">
+                <span class="bq-mag-card-sm-kicker">Geoparque · Madriz</span>
+                <h3 class="bq-mag-card-sm-title">El cañón narrado por quienes reman el Coco</h3>
+                <p class="bq-mag-card-sm-excerpt">
+                  Cómo la cooperativa comunitaria transformó el rescate del cañón en un modelo de custodia ambiental y empleo campesino digno.
+                </p>
+                <a href="departamento.html?id=madriz" class="bq-mag-card-sm-link">
+                  Leer relato completo <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <article class="bq-mag-card-sm">
+              <div class="bq-mag-card-sm-media">
+                <img src="assets/images/destinos/selva_negra.jpg" alt="Cafetales de Matagalpa" loading="lazy" decoding="async" width="399" height="501">
+              </div>
+              <div class="bq-mag-card-sm-content">
+                <span class="bq-mag-card-sm-kicker">Montaña · Matagalpa</span>
+                <h3 class="bq-mag-card-sm-title">Del grano a la taza: La nebliselva en cosecha</h3>
+                <p class="bq-mag-card-sm-excerpt">
+                  Las manos que cosechan el café bajo sombra, el canto del quetzal y las recetas ancestrales de maíz en las sierras del norte.
+                </p>
+                <a href="departamento.html?id=matagalpa" class="bq-mag-card-sm-link">
+                  Leer relato completo <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <!-- RIEL DERECHO: Lo Más Leído + Pull-Quote Campesina -->
+        <aside class="bq-mag-right-rail" aria-label="Lecturas destacadas">
+          
+          <div class="bq-mag-rail-card">
+            <h3 class="bq-mag-rail-heading">Lo Más Leído</h3>
+            <div class="bq-mag-most-read-list">
+              <a href="historia.html" class="bq-mag-rank-item">
+                <span class="bq-mag-rank-number">01</span>
+                <div class="bq-mag-rank-content">
+                  <h4 class="bq-mag-rank-title">Las 365 Isletas: El secreto de los pescadores coloniales</h4>
+                  <span class="bq-mag-rank-meta">Granada · 4 min de lectura</span>
+                </div>
+              </a>
+
+              <a href="gastronomia.html" class="bq-mag-rank-item">
+                <span class="bq-mag-rank-number">02</span>
+                <div class="bq-mag-rank-content">
+                  <h4 class="bq-mag-rank-title">El rondón de Bluefields: Historia de leña y coco</h4>
+                  <span class="bq-mag-rank-meta">Caribe Sur · 5 min de lectura</span>
+                </div>
+              </a>
+
+              <a href="ambiental.html" class="bq-mag-rank-item">
+                <span class="bq-mag-rank-number">03</span>
+                <div class="bq-mag-rank-content">
+                  <h4 class="bq-mag-rank-title">La guardia silenciosa del Guardabarranco</h4>
+                  <span class="bq-mag-rank-meta">Naturaleza · 6 min de lectura</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Pull-Quote Editorial -->
+          <div class="bq-mag-pull-quote">
+            <blockquote>
+              "El verdadero baqueano no te muestra solo el sendero; te enseña a escuchar la montaña y a respetar a quienes la cuidan."
+            </blockquote>
+            <cite>— Don Silvio Gutiérrez, Guía Comunitario de Somoto</cite>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
   </main>
+
   <footer id="siteFooter"></footer>
+
   <script src="js/navigation.js"></script>
   <script src="js/global-injector.js"></script>
 </body>

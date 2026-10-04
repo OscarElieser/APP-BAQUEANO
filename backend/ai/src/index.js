@@ -24,11 +24,13 @@
 import { gemini15Flash, googleAI } from '@genkit-ai/googleai';
 import { genkit, z } from 'genkit';
 
+import { fileURLToPath } from 'node:url';
+
 // Configuración de la instancia central de Genkit con soporte para Dotprompt (.prompt)
 export const ai = genkit({
   plugins: [googleAI()],
   model: gemini15Flash,
-  promptDir: './prompts',
+  promptDir: fileURLToPath(new URL('../prompts', import.meta.url)),
 });
 
 // ----------------------------------------------------------------------------

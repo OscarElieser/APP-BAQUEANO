@@ -2,9 +2,9 @@
   "name": "baqueano-genkit-backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/index.js",
+  "main": "backend/ai/src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node backend/ai/src/index.js",
     "genkit:start": "genkit start"
   },
   "dependencies": {

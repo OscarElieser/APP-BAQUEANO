@@ -1,0 +1,515 @@
+// ============================================================================
+// 🧭 BAQUEANO ECOSYSTEM — COMPONENTE EDITORIAL MAGAZINE (VANILLA CSS)
+// Basado en el patrón arquitectónico Magazine Layout (Atheros Builder / Ember Studio)
+// Adaptado con rigor al Sistema de Diseño BAQUEANO NICARAGUA
+// ============================================================================
+//
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer una experiencia de lectura editorial y narrativa de alto nivel para
+//   las crónicas, relatos territoriales y voces campesinas de Nicaragua.
+// - Reemplazar grids simples y monótonos por una jerarquía editorial con:
+//   cabecera de sección, riel izquierdo temático, historia principal destacada,
+//   artículos populares en rejilla, y riel derecho de lecturas indispensables
+//   con citas destacadas (pull-quotes).
+//
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - 100% Vanilla CSS modular con `grid-template-areas` y Mobile-First.
+// - Tokens de color oficiales de BAQUEANO:
+//   * Petróleo Teal (#165D6F)
+//   * Naranja Terracota Fuego (#F65E01)
+//   * Crema Arena Pinolera (#F4E6C1)
+//   * Noche Profunda (#0F172A)
+// - Accesibilidad: soporte estricto para `prefers-reduced-motion: reduce`,
+//   `:focus-visible` de alto contraste, targets táctiles mínimos de 44px
+//   y semántica ARIA (`aria-label="Magazine layout"`).
+// - Responsividad fluida: se apila verticalmente en móviles (<768px) y se
+//   despliega en layout editorial asimétrico de 3 columnas en pantallas amplias.
+//
+// 📦 3. QUÉ (WHAT / ENTREGABLES & CLASES EXPUESTAS):
+// - `.bq-magazine-container`: Contenedor principal con grid editorial.
+// - `.bq-magazine-masthead`: Titular y barra de navegación de sección.
+// - `.bq-magazine-left-rail`: Columna lateral con filtros y autores locales.
+// - `.bq-magazine-lead`: Noticia/historia principal con figura multimedia y byline.
+// - `.bq-magazine-grid`: Rejilla de artículos populares y crónicas de campo.
+// - `.bq-magazine-right-rail`: Riel de 'Lo más leído' y pull-quote testimonial.
+// ============================================================================
+
+:root {
+  --bq-mag-primary: #165D6F;
+  --bq-mag-accent: #F65E01;
+  --bq-mag-sand: #F4E6C1;
+  --bq-mag-dark: #0F172A;
+  --bq-mag-slate: #334155;
+  --bq-mag-muted: #64748B;
+  --bq-mag-bg: #F8FAFC;
+  --bq-mag-card: #FFFFFF;
+  --bq-mag-border: #E2E8F0;
+  --bq-mag-radius: 18px;
+  --bq-mag-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --bq-mag-shadow-hover: 0 16px 36px rgba(22, 93, 111, 0.14);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 1. CONTENEDOR PRINCIPAL DEL MAGAZINE                                       */
+/* -------------------------------------------------------------------------- */
+.bq-magazine-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. MASTHEAD EDITORIAL (CABECERA Y SECCIONES)                               */
+/* -------------------------------------------------------------------------- */
+.bq-magazine-masthead {
+  border-bottom: 2px solid var(--bq-mag-primary);
+  padding-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bq-mag-masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bq-mag-kicker {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bq-mag-accent);
+}
+
+.bq-mag-title {
+  margin: 0.25rem 0 0;
+  font-family: Montserrat, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: var(--bq-mag-dark);
+  line-height: 1.05;
+}
+
+.bq-mag-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--bq-mag-muted);
+}
+
+.bq-mag-section-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  scrollbar-width: thin;
+}
+
+.bq-mag-chip {
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid var(--bq-mag-border);
+  background: var(--bq-mag-card);
+  color: var(--bq-mag-slate);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.bq-mag-chip:hover,
+.bq-mag-chip.active {
+  background: var(--bq-mag-primary);
+  color: #FFFFFF;
+  border-color: var(--bq-mag-primary);
+  transform: translateY(-1px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. REJILLA ASIMÉTRICA DE 3 COLUMNAS (MAGAZINE WIREFRAME)                   */
+/* -------------------------------------------------------------------------- */
+.bq-magazine-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .bq-magazine-body {
+    grid-template-columns: 240px 1fr 280px;
+  }
+}
+
+/* --- Riel Izquierdo (Left Rail) --- */
+.bq-mag-left-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.bq-mag-rail-card {
+  background: var(--bq-mag-card);
+  border: 1px solid var(--bq-mag-border);
+  border-radius: var(--bq-mag-radius);
+  padding: 1.25rem;
+  box-shadow: var(--bq-mag-shadow);
+}
+
+.bq-mag-rail-heading {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--bq-mag-primary);
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--bq-mag-sand);
+}
+
+.bq-mag-topic-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.bq-mag-topic-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--bq-mag-slate);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0;
+  transition: color 0.15s ease;
+}
+
+.bq-mag-topic-link:hover {
+  color: var(--bq-mag-accent);
+}
+
+.bq-mag-topic-badge {
+  background: #F1F5F9;
+  color: var(--bq-mag-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+/* --- Columna Central: Noticia Principal (Lead) + Rejilla Popular --- */
+.bq-mag-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.bq-mag-lead-article {
+  background: var(--bq-mag-card);
+  border: 1px solid var(--bq-mag-border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--bq-mag-shadow);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.bq-mag-lead-article:hover {
+  box-shadow: var(--bq-mag-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.bq-mag-lead-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.bq-mag-lead-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.bq-mag-lead-article:hover .bq-mag-lead-media img {
+  transform: scale(1.02);
+}
+
+.bq-mag-lead-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--bq-mag-accent);
+  color: #FFFFFF;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bq-mag-lead-body {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.bq-mag-lead-title {
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  font-weight: 900;
+  color: var(--bq-mag-dark);
+  line-height: 1.2;
+}
+
+.bq-mag-lead-excerpt {
+  color: var(--bq-mag-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.bq-mag-byline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--bq-mag-border);
+  font-size: 0.82rem;
+  color: var(--bq-mag-muted);
+}
+
+.bq-mag-byline-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bq-mag-sand);
+}
+
+.bq-mag-byline-name {
+  font-weight: 800;
+  color: var(--bq-mag-dark);
+}
+
+/* Rejilla de Artículos Secundarios */
+.bq-mag-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.bq-mag-card-sm {
+  background: var(--bq-mag-card);
+  border: 1px solid var(--bq-mag-border);
+  border-radius: var(--bq-mag-radius);
+  overflow: hidden;
+  box-shadow: var(--bq-mag-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bq-mag-card-sm:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--bq-mag-shadow-hover);
+}
+
+.bq-mag-card-sm-media {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.bq-mag-card-sm-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bq-mag-card-sm:hover .bq-mag-card-sm-media img {
+  transform: scale(1.03);
+}
+
+.bq-mag-card-sm-content {
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.bq-mag-card-sm-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--bq-mag-accent);
+}
+
+.bq-mag-card-sm-title {
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--bq-mag-dark);
+}
+
+.bq-mag-card-sm-excerpt {
+  font-size: 0.85rem;
+  color: var(--bq-mag-muted);
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bq-mag-card-sm-link {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--bq-mag-primary);
+  text-decoration: none;
+}
+
+/* --- Riel Derecho (Right Rail - Lo Más Leído & Cita) --- */
+.bq-mag-right-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.bq-mag-most-read-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bq-mag-rank-item {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  text-decoration: none;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #F1F5F9;
+  transition: transform 0.15s ease;
+}
+
+.bq-mag-rank-item:hover {
+  transform: translateX(3px);
+}
+
+.bq-mag-rank-number {
+  font-family: Montserrat, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--bq-mag-primary);
+  line-height: 1;
+  min-width: 24px;
+}
+
+.bq-mag-rank-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bq-mag-rank-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--bq-mag-dark);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.bq-mag-rank-meta {
+  font-size: 0.75rem;
+  color: var(--bq-mag-muted);
+}
+
+/* Pull-Quote Editorial de Lujo */
+.bq-mag-pull-quote {
+  background: linear-gradient(145deg, var(--bq-mag-primary), #0D414E);
+  color: #FFFFFF;
+  border-radius: var(--bq-mag-radius);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(22, 93, 111, 0.25);
+}
+
+.bq-mag-pull-quote::before {
+  content: "“";
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  font-size: 6rem;
+  font-family: Georgia, serif;
+  color: var(--bq-mag-sand);
+  opacity: 0.2;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.bq-mag-pull-quote blockquote {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--bq-mag-sand);
+}
+
+.bq-mag-pull-quote cite {
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: block;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. ACCESIBILIDAD UNIVERSAL (WCAG 2.2 AA)                                   */
+/* -------------------------------------------------------------------------- */
+.bq-magazine-container a:focus-visible,
+.bq-magazine-container button:focus-visible {
+  outline: 3px solid var(--bq-mag-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bq-magazine-container *,
+  .bq-magazine-container *::before,
+  .bq-magazine-container *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
