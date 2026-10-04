@@ -3942,3 +3942,9 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - **Footer** (`css/baqueano-system.css` §13b, hoja global): distribución definida para las 31 páginas (antes solo en `css/pages/index-exact.css`, 11 páginas, y caía a 2 columnas desde 1024 px). ≥1101 px marca + 4 columnas; 641–1100 px marca en franja + 4 columnas en una fila; ≤640 px 2×2. Verificado con Playwright en 1440/1005/768/390 px (index y testimonios): 5/4/4/2 columnas, overflow 0.
   - **Copilot → Claude:** nuevo `.github/workflows/claude-review.yml` (`anthropics/claude-code-action@v1`) que revisa cada PR según AGENTS.md; requiere secreto `ANTHROPIC_API_KEY` o `CLAUDE_CODE_OAUTH_TOKEN` y se omite con aviso si falta. El check `github-advanced-security` (IA de Copilot) no está en ningún workflow: se desactiva desde la configuración del repositorio (propietario).
   - Build Hostinger 721 archivos + verificación OK; smoke OK; YAML válido.
+
+## 2026-10-04 (unificar con hackathon) — "Quiero que este formulario se complemente con BAQUEANO Nicaragua Hackathon 2026, que solo sea uno"
+- 🎯 **POR QUÉ:** el propietario quiere un único formulario/experiencia que integre la comunidad de testimonios con lo del Hackathon 2026.
+- ⚙️ **CÓMO:** localizar todo lo relacionado con "hackathon" en el repo y en Supabase/Firestore; entender qué formulario existe allí antes de proponer la unificación.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Aclaración del propietario (captura):** "a esta parte se va a unir" → la sección **"Testimonios"** de la portada (tarjetas Laura M. / Carlos R. / Ana P., botones ♡ y Comentar, enlace "Ver más historias") debe ser la misma comunidad de `testimonios.html`: un solo sistema con experiencias reales.
