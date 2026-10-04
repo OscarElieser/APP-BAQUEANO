@@ -306,3 +306,12 @@ Columnas: tamaño HTML KB · `<link css>` · `<script src>` · bloqueantes (sin 
 | F-31 | P1 | **La app Android abre `http://localhost:8086/#/dashboard`**; el documento oficial exige que la aplicación “ya no use localhost” y se conecte a Azure | `lib/features/admin/screens/admin_screen.dart:42` | Apuntar a la URL de Azure (HTTPS) y probar el APK |
 | F-32 | P1 | **El rol Auditor solo existe como dato de muestra** (`ops-mock-data.js:178`); el documento pide 3 roles funcionales (ej. Admin, Usuario, Auditor) | `website/js/ops-center/ops-mock-data.js`, `firestore.rules` | Implementar Auditor (solo lectura de `audit_logs`) en claims y RLS; revisar datos de muestra del Ops Center |
 | F-33 | P1 | **Pistas Marketing y Diseño casi sin entregables en el repo** (Lean Canvas, arquetipo, plan de lanzamiento, calendario, riesgos, moodboard, manual de marca, wireframes, kit de assets…) | `docs/` | Redactar/enlazar (ver matriz) |
+
+## Anexo D — Actualizaciones posteriores a la línea base
+
+| ID | Estado nuevo | Evidencia |
+|---|---|---|
+| F-01 | 🟡 Corregido en rama, a validar al fusionar a `main` | commit `64e72b7` (checkout en `verify-azure`) |
+| F-02 | 🟡 Corregido en rama, a validar al fusionar a `main` | commit `d8aa216` (CodeQL: actions, c-cpp, javascript-typescript) |
+| F-03 | 🟡 En curso | Catálogos 741/741 claves en los 6 idiomas, `validate-i18n` exit 0; cobertura estimada de páginas 19,2 % → 35,8 %; verificado en Chromium (FR/DE/EN, persistencia entre páginas, 0 errores) |
+| F-07 | ✅ Corregido (2026-10-04) | Migración `20261004211000_revoke_public_execute_rls_auto_enable.sql`: ACL ahora `{postgres, service_role}`; el disparador `ensure_rls` sigue activando RLS (prueba revertida: `relrowsecurity=true`); `departments`=17; los avisos 0028/0029 del asesor desaparecieron. La función NO se eliminó |

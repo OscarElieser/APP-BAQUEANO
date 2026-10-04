@@ -3923,3 +3923,9 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** antes de tocar Supabase, aclarar el alcance y comprobar si algo usa `rls_auto_enable()`.
 - ⚙️ **CÓMO:** búsqueda en el repo (solo lectura); no se ejecuta ningún cambio en Supabase.
 - 📦 **QUÉ:** respuesta explicativa; REVOKE sigue sin aplicarse hasta confirmación.
+
+## 2026-10-04 (sesión cloud) — Autorización del propietario: "ok entonces continua. te autorizo" (REVOKE de `rls_auto_enable()` + seguir Fase 3)
+- 🎯 **POR QUÉ:** cerrar F-07 (función SECURITY DEFINER ejecutable por `anon`/`authenticated`).
+- ⚙️ **CÓMO:** leer la definición (solo lectura) → migración `REVOKE EXECUTE … FROM anon, authenticated, public` (no borra nada, reversible con GRANT) → verificar advisors y `/api/azure/db`. Alcance: SOLO este REVOKE; la migración de testimonios NO está autorizada.
+- 📦 **QUÉ:** migración versionada en `supabase/migrations/` + evidencia.
+- **Avance (F-07 cerrado):** `REVOKE EXECUTE … FROM PUBLIC, anon, authenticated` sobre `public.rls_auto_enable()` aplicado en Supabase como migración `revoke_public_execute_rls_auto_enable` (copia en `supabase/migrations/20261004211000_…sql`). La función es el disparador de eventos `ensure_rls`; no se eliminó ni modificó. Verificado: ACL `{postgres, service_role}`; tabla de prueba en transacción revertida con RLS activado; `departments`=17; advisor de seguridad ya sin los avisos de SECURITY DEFINER (quedan: 9 INFO sin políticas, `sync_geography_point` search_path, `vector` en public). No se tocó nada más en Supabase; la migración de testimonios sigue sin aplicar (no autorizada).
