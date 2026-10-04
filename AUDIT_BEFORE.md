@@ -298,3 +298,11 @@ Columnas: tamaño HTML KB · `<link css>` · `<script src>` · bloqueantes (sin 
 3. Confirmar en Azure: NSG, SSH, `ufw`, certificado, HTTP/2.
 4. Leer el mensaje interno del job CodeQL Swift.
 5. Confirmar restricciones de las claves `AIza…` en Google Cloud.
+
+## Anexo C — Hallazgos añadidos tras leer el documento oficial (2026-10-04)
+
+| ID | Sev | Problema | Dónde | Solución |
+|---|---|---|---|---|
+| F-31 | P1 | **La app Android abre `http://localhost:8086/#/dashboard`**; el documento oficial exige que la aplicación “ya no use localhost” y se conecte a Azure | `lib/features/admin/screens/admin_screen.dart:42` | Apuntar a la URL de Azure (HTTPS) y probar el APK |
+| F-32 | P1 | **El rol Auditor solo existe como dato de muestra** (`ops-mock-data.js:178`); el documento pide 3 roles funcionales (ej. Admin, Usuario, Auditor) | `website/js/ops-center/ops-mock-data.js`, `firestore.rules` | Implementar Auditor (solo lectura de `audit_logs`) en claims y RLS; revisar datos de muestra del Ops Center |
+| F-33 | P1 | **Pistas Marketing y Diseño casi sin entregables en el repo** (Lean Canvas, arquetipo, plan de lanzamiento, calendario, riesgos, moodboard, manual de marca, wireframes, kit de assets…) | `docs/` | Redactar/enlazar (ver matriz) |

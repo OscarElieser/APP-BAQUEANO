@@ -11,7 +11,7 @@
 
 **Estados:** ✅ Cumple · 🟡 Parcial · 🔴 No cumple · ⚪ No verificado
 
-> ⚠️ **Advertencia de fuente:** el PDF *“Entregables Nacionales Hackathon Nicaragua 2026 – Aficionado”* **no estaba disponible** en el repositorio ni en la sesión. Los requisitos provienen de la lista del encargo. Hay que cotejarlos con el PDF antes de cerrar (acción **M-00**).
+> ✅ **Fuente oficial cotejada (2026-10-04):** el documento `Entregable_Aficionado_HN26.docx` fue adjuntado y leído completo. Tiene **tres pistas** por sprint: **Desarrollo**, **Marketing** y **Diseño**. La primera versión de esta matriz solo cubría Desarrollo; ahora se añaden Marketing y Diseño (sección “Pistas de Marketing y Diseño”) y se corrigen dos filas de Desarrollo (roles y control de versiones).
 
 ## Evidencia independiente usada (observada hoy)
 
@@ -26,7 +26,7 @@
 
 ---
 
-## PRIMER SPRINT
+## PISTA DESARROLLO — PRIMER SPRINT
 
 | REQUISITO | SPRINT | ÁREA | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN | EVIDENCIA FINAL |
 |---|---|---|---|---|---|---|---|---|
@@ -40,32 +40,32 @@
 | Formularios funcionales | 1 | Frontend/Backend | Formularios en `mi-negocio`, `denuncias`, `ayuda`, `perfil`, login; sin auditoría de validación/honeypot | `website/mi-negocio.html`, `denuncias.html` | 🟡 | Validación cliente+servidor, estados loading/error/éxito, anti-spam (F-24) | Auditar y corregir | _Fase 8_ |
 | Control de versiones | 1 | Git | Repositorio en GitHub, 50 commits, rama `main` | `github.com/OscarElieser/APP-BAQUEANO` | ✅ | — | — | EV-6 |
 | Commits legibles | 1 | Git | Mensajes recientes: “mega”, “mega3”, “domingo4”, “actualizacion 4octubre 1” | `git log` | 🔴 | Convención `audit:/fix:/perf:/i18n:/a11y:/security:/docs:/test:` | Commits pequeños y descriptivos desde ahora; no reescribir historia | _Fases 2–12_ |
-| Evidencia Commit / Push / Pull | 1 | Git | Historial y sincronización con `origin`; sin documento de evidencia | `docs/evidencias/sprint-1/` | 🟡 | Capturas/log de commit, push y pull con fecha | Generar en `HACKATHON_EVIDENCE.md` | _Fase 11_ |
-| Tres roles funcionales | 1 | Seguridad | Reglas Firestore: `explorer` por defecto, `admin`, `super_admin` (claim `role`); tabla `official_super_admins` (3 filas) | `firestore.rules:31-35,106`, `website/js/user-session.js` | 🟡 | Mapa a nombres SUPERADMIN/ADMIN/USUARIO, prueba de que USUARIO no entra a Ops, política RLS equivalente en Supabase (F-08, F-09) | Matriz de roles + prueba E2E | _Fase 6_ |
+| Control de versiones: **evidenciar al menos 3 comandos (Commit, Push, Pull)** | 1 | Git | Historial y sincronización con `origin`; no hay documento que muestre los tres comandos con fecha | `docs/evidencias/sprint-1/` | 🟡 | Captura/log de `git commit`, `git push`, `git pull` | Generar en `HACKATHON_EVIDENCE.md` | _Fase 11_ |
+| Seguridad y roles: **3 roles funcionales (ej. Admin, Usuario y Auditor)** | 1 | Seguridad | Reglas Firestore: `explorer` (usuario), `admin`, `super_admin` (claim `role`). **El rol Auditor solo existe como fila de datos de muestra** (`ops-mock-data.js:178`); no hay regla, política ni vista que lo haga funcional | `firestore.rules:31-35,106`, `website/js/ops-center/ops-mock-data.js` | 🟡 | Rol Auditor funcional (solo lectura de `audit_logs`/reportes) en Firebase claims + RLS; prueba de que USUARIO no entra a Ops (F-09, F-31) | Implementar Auditor y matriz de roles + prueba E2E | _Fase 6_ |
 | Código legible | 1 | Calidad | Encabezados “Círculo Dorado”; archivos CSS/JS muy grandes (`styles.css` 240 KB) | `website/js/*.js`, `styles.css` | 🟡 | Reducción de duplicación y CSS inline (F-22) | Refactor gradual | _Fase 4_ |
 | Buenas prácticas | 1 | Calidad | `flutter analyze --fatal-infos` y `flutter test` en CI (verde); sin lint ni tests web en CI | `.github/workflows/flutter_ci.yml` | 🟡 | Lint JS, pruebas web y i18n como gates (F-16) | Pipeline ordenado | _Fase 9–10_ |
 | Ejecución local sin errores | 1 | Calidad | SESSION_LOG declara pruebas locales en navegador sin errores JS; no re-ejecutadas aquí | `SESSION_LOG.md` (2026-10-04) | ⚪ | Ejecución limpia reproducible y evidencia | Correr en entorno limpio | _Fase 10_ |
 | Video de navegación | 1 | Entregable | No hay video de demostración del recorrido en el repo | — | ⚪ | Guion y grabación | Preparar guion; grabar tras Fase 12 | _Fase 11_ |
 
-## SEGUNDO SPRINT
+## PISTA DESARROLLO — SEGUNDO SPRINT
 
 | REQUISITO | SPRINT | ÁREA | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN | EVIDENCIA FINAL |
 |---|---|---|---|---|---|---|---|---|
-| Build final | 2 | Build | Job `checks` ejecuta `node scripts/build-hostinger-static.mjs` con éxito (EV-3); CI Flutter compila APK debug (EV-5) | `website/scripts/build-hostinger-static.mjs`, `flutter_ci.yml` | ✅ | — (el APK *release firmado* depende de secretos no verificados) | Mantener | EV-3, EV-5 |
+| Compilación: **APK descargable desde una web / build empaquetado para el servidor** | 2 | Build | Job `checks` ejecuta el build estático con éxito (EV-3); CI Flutter compila APK debug (EV-5); `website/assets/BaqueanoNicaragua.apk` (≈ 90 MB) versionado y servido por Nginx (`baqueano-delivery.conf`, descarga como `baqueano-android.apk`) | `website/scripts/build-hostinger-static.mjs`, `azure/nginx/baqueano-delivery.conf` | 🟡 | Comprobar que el APK publicado sea el de la versión final y descargable desde la web; hoy es debug/firmado no verificado, y pesa 90 MB dentro de git (F-05) | Mover a GitHub Releases/Storage, verificar descarga | _Fase 5_ |
 | Servidor Azure | 2 | Infraestructura | VM `vm-baqueano-prod`, `Linux 6.8.0-1070-azure`, sirve el commit actual (EV-1) | `azure/`, `https://baqueanonicaragua.com/health` | ✅ | — | Capturar portal Azure para el jurado | EV-1 |
 | SSH | 2 | Infraestructura | `setup-server.sh` configura endurecimiento SSH (código); acceso vivo no probado | `azure/setup-server.sh`, `azure/configure-nsg.sh` | ⚪ | Evidencia de acceso por clave y `PasswordAuthentication no` | Sesión SSH controlada + `sshd -T` | _Fase 9_ |
 | IP pública | 2 | Infraestructura | Documentos citan `20.80.81.65` (commit `6cc4841`); no re-resuelta hoy | `docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md` | ⚪ | Resolución DNS y IP actual | `dig`/portal Azure | _Fase 9_ |
 | Puertos | 2 | Seguridad red | `configure-nsg.sh` define reglas; `verify-sprints.mjs` prueba 80/443 abiertos y 3000/5432 cerrados **pero no corrió en CI** (F-01) | `azure/configure-nsg.sh`, `tools/verify-sprints.mjs` | ⚪ | Resultado vivo de la prueba (y 3306/6379/27017) | Arreglar F-01 y ejecutar | _Fase 9_ |
 | Entorno de programación | 2 | Infraestructura | Node v22.23.3 en la VM (EV-1); `systemd/` y `autodeploy.sh` | `azure/systemd/`, `azure/autodeploy.sh` | ✅ | — | Documentar versiones | EV-1 |
 | Base de datos operativa | 2 | Datos | Supabase responde desde Azure (EV-2); PostgreSQL local solo localhost | `/api/azure/db` | ✅ | Tablas culturales vacías (F-04) — operativa pero poco poblada | Seed (Fase 6) | EV-2, EV-4 |
-| Conexión real a nube | 2 | Datos | Azure ⇄ Supabase PostgreSQL, 254 ms (EV-2) | `azure/api/server.js` | ✅ | — | — | EV-2 |
+| Conexión a la nube: **la app ya no usa “localhost”, se conecta a la IP pública de Azure** | 2 | Datos | Portal web: Azure ⇄ Supabase (EV-2). **App Android:** `lib/features/admin/screens/admin_screen.dart:42` abre `http://localhost:8086/#/dashboard` (F-31) | `azure/api/server.js`, `lib/features/admin/screens/admin_screen.dart` | 🟡 | Sustituir localhost por URL de Azure en la app; comprobar el APK | Corregir y probar APK | _Fase 9_ |
 | UI components | 2 | Frontend | Sistema global (`baqueano-system.css`, `global-injector.js`); sin tokens unificados documentados | `website/css/` (79 hojas) | 🟡 | Tokens (color, tipografía, espaciado, radios, sombras, z-index, movimiento) consolidados | `design-tokens.css` | _Fase 4_ |
 | Flujo UX | 2 | Frontend | Flujo Inicio→Destinos→Mapa→Mi viaje→Perfil previsto en `verify-sprints.mjs` | `tools/verify-sprints.mjs` | ⚪ | Recorrido probado en navegador | Prueba E2E | _Fase 10_ |
 | Assets | 2 | Assets | 711 MB en `website/assets`, 51 imágenes > 500 KB, 14 `webp`, 2 `avif` (F-05) | `website/assets/` | 🔴 | Optimización, `srcset`, auditoría de duplicados | `docs/ASSET_AUDIT.md` + scripts seguros | _Fase 5_ |
 | Accesibilidad | 2 | Accesibilidad | `css/accessibility.css`; 0 `<img>` sin `alt` (regex); WCAG 2.2 AA no medida | `website/css/accessibility.css` | 🟡 | Revisión de contraste, foco, teclado, modales, `prefers-reduced-motion` | Auditoría a11y | _Fase 4_ |
 | Adaptación a tamaños de pantalla | 2 | Responsive | `mobile-first-core.css`, `responsive-ecosystem.css`; sin medición en 15 anchos | `website/css/` | ⚪ | Barrido 320–1920 px, sin overflow horizontal | Playwright por ancho | _Fase 4_ |
 
-## TERCER SPRINT
+## PISTA DESARROLLO — TERCER SPRINT
 
 | REQUISITO | SPRINT | ÁREA | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN | EVIDENCIA FINAL |
 |---|---|---|---|---|---|---|---|---|
@@ -79,6 +79,74 @@
 | Modificar información | 3 | CRUD | `azure/api/test/evidence-crud.test.js` (2 pruebas) existe; sin ejecución viva documentada | `azure/api/test/` | ⚪ | Evidencia de UPDATE/DELETE con RLS y `audit_log` | Prueba + `audit_logs` (hoy 0 filas) | _Fase 6_ |
 | Código de producción = GitHub `main` | 3 | Git | `/health` commit `724a5e3` = HEAD de `main` (EV-1) | `main` | ✅ | El job que lo verifica falla por F-01 (la igualdad sí se cumple) | Arreglar F-01 | EV-1 |
 | README actualizado con despliegue Azure | 3 | Documentación | Sección “Despliegue Web en Azure” y “Evidencias reproducibles” en README raíz | `README.md:452-517` | 🟡 | Evidencia desactualizada (commit `6cc4841`), falta diagrama de despliegue | Actualizar | _Fase 11_ |
+
+---
+
+## PISTAS DE MARKETING Y DISEÑO (nuevas, según el documento oficial)
+
+**Criterio de estado:** busqué por palabras clave en el repositorio (`Lean Canvas`, `arquetipo`, `moodboard`, `Manual de Marca`, `wireframe`, `Plan de Lanzamiento`, `Calendario de contenido`, `Plan de Contingencia`, `user flow`, `Kit de Assets`, `early adopter`…). Si no hay documento en el repo, el estado es **⚪**: puede existir fuera (Canva, Figma, Miro) y debe enlazarse o redactarse. No lo marco 🔴 sin saber si existe fuera.
+
+### Marketing — Primer sprint
+
+| REQUISITO | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN |
+|---|---|---|---|---|---|
+| Lean Canvas (9 bloques, visual) + empatía con investigación | Solo se menciona en `IMPLEMENTATION_PLAN.md` como faltante | `docs/audit/IMPLEMENTATION_PLAN.md:27` | ⚪ | Plantilla visual de 9 bloques y evidencia de investigación | Redactar/enlazar (`docs/marketing/LEAN_CANVAS.md` + imagen) |
+| Buyer Persona (≥ 1 perfil: nombre, edad, ocupación, necesidades, frustraciones, conducta digital) + campos de aspiraciones | Persona “Mateo Valenzuela, 28 años” con necesidades y propuesta de valor | `docs/design/MARKETING_4C_BAQUEANO.md:45` | 🟡 | Verificar que incluya frustraciones, comportamiento digital y **campos de aspiraciones** (no confirmado) | Completar y extraer a documento propio |
+| Plan de Branding: concepto, arquetipo, misión y visión | Sin coincidencias para “arquetipo”; misión/visión por verificar | — | ⚪ | Concepto, arquetipo, misión, visión | Redactar |
+| Propuesta de valor + estrategia de canales | Propuesta de valor central en 4C (sección 2.1 C); canales sin documento | `MARKETING_4C_BAQUEANO.md:62` | 🟡 | Selección de canales digitales | Añadir sección |
+| Objetivos SMART (≥ 3) + tiempos de entrega | Sin documento (coincidencias solo en archivos ajenos) | — | ⚪ | 3 objetivos SMART y cronograma | Redactar (hay plan en `docs/planning/BAQUEANO_3_SPRINT_EXECUTION_PLAN.md`) |
+
+### Marketing — Segundo sprint
+
+| REQUISITO | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN |
+|---|---|---|---|---|---|
+| Concepto estratégico de campaña de lanzamiento | Sin documento | — | ⚪ | Propuesta de valor, mensaje, concepto creativo, diferenciador, llamado a la acción | Redactar |
+| Perfil y segmentación de audiencia (+ early adopters) | “Dos tipos de consumidores” en 4C; sin early adopters | `MARKETING_4C_BAQUEANO.md:35` | 🟡 | Barreras, motivaciones, primeros usuarios | Ampliar |
+| Plan de lanzamiento (2 meses: expectativa, activación, seguimiento) | Sin documento | — | ⚪ | Plan completo | Redactar |
+| Estrategia de crecimiento por etapas (pilotaje, crecimiento, posicionamiento) | Embudo y KPIs 4F/4C; sin etapas | `MARKETING_4F_BAQUEANO.md:140` | 🟡 | Etapas con objetivos, público, acciones e indicadores | Ampliar |
+| Estrategia de canales y medios | Sin documento | — | ⚪ | Canales justificados | Redactar |
+| Calendario de contenido y activaciones (2 meses) | Sin documento | — | ⚪ | Calendario | Redactar |
+
+### Marketing — Tercer sprint
+
+| REQUISITO | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN |
+|---|---|---|---|---|---|
+| Brief creativo para diseño | Sin documento | — | ⚪ | Concepto, tono, mensajes, referencias, piezas | Redactar |
+| Mapa de canales por etapa | Sin documento | — | ⚪ | Canales por etapa | Redactar |
+| Riesgos y plan de contingencia (5 riesgos) | Sin documento (existe `DISASTER_RECOVERY_BAQUEANO.md`, técnico, no de lanzamiento) | `docs/deployment/DISASTER_RECOVERY_BAQUEANO.md` | ⚪ | 5 riesgos de lanzamiento + respuesta | Redactar |
+| Especificaciones de piezas de campaña | Sin documento | — | ⚪ | Formato, objetivo, mensaje, canal por pieza | Redactar |
+
+### Diseño — Primer sprint
+
+| REQUISITO | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN |
+|---|---|---|---|---|---|
+| Logo e identidad visual (boceto de alta fidelidad) | Logos en `website/assets/logos/` (horizontal, icono oficial, blanco) | `website/assets/logos/` | 🟡 | Documento que explique coherencia conceptual | Incluir en manual de marca |
+| Paleta de colores con armonía y legibilidad | Paleta oficial en `AGENTS.md`/`DESIGN.md` (`#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`, `#4A7A5A`) | `docs/design/DESIGN.md:61`, `website/css/colors.css` | 🟡 | Justificación de relación con la marca y prueba de contraste | Documentar contraste (WCAG) |
+| Tipografía y jerarquía visual | Montserrat + Plus Jakarta Sans en `global-injector`; `typography.css`, `headings-system.css` | `website/css/typography.css` | 🟡 | Guía documentada | Incluir en manual |
+| Valores de marca (definición y representación visual) | Sin documento | — | ⚪ | Valores y su representación | Redactar |
+| Moodboard | Solo mencionado como faltante | `IMPLEMENTATION_PLAN.md:95` | ⚪ | Tablero visual | Crear/enlazar |
+| Manual de marca | Solo mencionado como faltante | `IMPLEMENTATION_PLAN.md:95` | ⚪ | Reglas de identidad visual | Redactar (partir de `DESIGN.md`) |
+| UX: wireframes básicos | Sin archivo | — | ⚪ | Wireframes de la estructura | Crear/enlazar |
+
+### Diseño — Segundo sprint
+
+| REQUISITO | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN |
+|---|---|---|---|---|---|
+| Aplicación del manual en pantallas (mockups: inicio, funcionalidad, perfil) | La app y el sitio reales existen (capturas posibles); sin mockups documentados | `website/index.html`, `perfil.html` | ⚪ | Mockups de 3 pantallas clave | Capturar y documentar |
+| Sistema de componentes de UI (botón primario/cancelar/confirmar, menús, barras) | CSS en `website/css/components/`; sin documento de biblioteca | `website/css/components/` | ⚪ | Documento/biblioteca visual | Crear `docs/design/UI_COMPONENTS.md` |
+| Validación y ajuste de flujo UX (user flow / wireframes) | Sin documento | — | ⚪ | Flujo actualizado | Redactar |
+| Kit de assets (SVG/PNG listos para frontend) | Imágenes/íconos dispersos; 1 SVG en `website/assets`; sin kit exportado | `website/assets/` | 🔴 | Kit ordenado en SVG/PNG (solo 1 SVG hoy) | Crear kit |
+| Chequeo de accesibilidad (contraste, tipografía, etiquetado, tamaños) | `docs/audit/ACCESSIBILITY_AUDIT.md` previo (no revalidado) y `css/accessibility.css` | `docs/audit/ACCESSIBILITY_AUDIT.md` | 🟡 | Validación con medición actual | Fase 4 |
+
+### Diseño — Tercer sprint
+
+| REQUISITO | EVIDENCIA ACTUAL | ARCHIVO / URL | ESTADO | FALTA | ACCIÓN |
+|---|---|---|---|---|---|
+| Mapa de aplicación de marca por punto de contacto | Sin documento | — | ⚪ | Qué elemento de identidad en cada punto (redes, app, físico) | Redactar |
+| Guía de adaptación visual por canal (formatos/proporciones) | Sin documento | — | ⚪ | Ajustes de logo y assets para redes | Redactar |
+| Producción de piezas de campaña (prioritarias de expectativa) | Sin piezas en el repo | — | ⚪ | Piezas visuales según calendario | Producir tras Marketing |
+
+> **Nota:** si estos entregables existen en Canva, Figma, Miro o Drive, indíquenme el enlace y los verifico (tengo conectores de Canva y Figma disponibles); si no, los redacto en `docs/marketing/` y `docs/design/` con el contenido real del proyecto (sin inventar cifras ni investigación).
 
 ---
 
@@ -113,14 +181,16 @@
 
 ## Resumen de la línea base
 
-Conteo automático sobre las tres tablas de sprint (`awk` sobre este archivo):
+Conteo automático de la **pista Desarrollo** (tablas de sprint, `awk` sobre este archivo; Marketing y Diseño se cuentan aparte abajo):
 
-| Estado | Sprint 1 (16) | Sprint 2 (13) | Sprint 3 (10) | **Total (39)** |
+| Estado | Sprint 1 (16) | Sprint 2 (13) | Sprint 3 (10) | **Total Desarrollo (39)** |
 |---|---|---|---|---|
-| ✅ Cumple | 1 | 5 | 3 | **9** |
-| 🟡 Parcial | 11 | 2 | 5 | **18** |
+| ✅ Cumple | 1 | 3 | 3 | **7** |
+| 🟡 Parcial | 11 | 4 | 5 | **20** |
 | 🔴 No cumple | 1 | 1 | 0 | **2** |
 | ⚪ No verificado | 3 | 5 | 2 | **10** |
+
+**Pistas Marketing + Diseño (30 filas):** ✅ 0 · 🟡 8 · 🔴 1 · ⚪ 21. Casi todo es ⚪ porque no hay documento en el repositorio; pueden existir fuera (Canva/Figma/Miro).
 
 **Lectura:** el flujo “servidor Azure → base en nube → código = `main`” **tiene evidencia real** (EV-1…EV-3). Lo que falta para ganar no es infraestructura sino **demostrabilidad**: CI en verde (F-01/F-02), idiomas (F-03), datos reales en Supabase (F-04), evidencia de puertos/SSH (⚪) y documentación unificada.
 
