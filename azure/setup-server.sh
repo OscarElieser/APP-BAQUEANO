@@ -122,7 +122,7 @@ systemctl restart fail2ban
 dpkg-reconfigure -f noninteractive unattended-upgrades
 
 echo "==> 7/7 Preparando directorios del sitio y configuración de Nginx"
-mkdir -p "${WEB_ROOT}/releases" /etc/baqueano
+mkdir -p "${WEB_ROOT}/releases" "${WEB_ROOT}/media/apk" /etc/baqueano
 chown -R "${APP_USER}:${APP_USER}" "${WEB_ROOT}"
 chmod 750 /etc/baqueano
 
@@ -137,8 +137,11 @@ if [[ ! -e "${WEB_ROOT}/current" ]]; then
 fi
 
 install -m 644 "${REPO_DIR}/azure/nginx/baqueano-security-headers.conf" /etc/nginx/snippets/baqueano-security-headers.conf
+install -m 644 "${REPO_DIR}/azure/nginx/baqueano-delivery.conf" /etc/nginx/snippets/baqueano-delivery.conf
 install -m 644 "${REPO_DIR}/azure/nginx/baqueano.conf" /etc/nginx/sites-available/baqueano.conf
+install -m 644 "${REPO_DIR}/azure/nginx/baqueano-ip.conf" /etc/nginx/sites-available/baqueano-ip.conf
 ln -sfn /etc/nginx/sites-available/baqueano.conf /etc/nginx/sites-enabled/baqueano.conf
+ln -sfn /etc/nginx/sites-available/baqueano-ip.conf /etc/nginx/sites-enabled/baqueano-ip.conf
 rm -f /etc/nginx/sites-enabled/default
 nginx -t
 systemctl enable --now nginx

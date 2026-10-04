@@ -474,6 +474,30 @@ bash ~/APP-BAQUEANO/azure/deploy.sh              # publica origin/main
 curl https://baqueanonicaragua.com/health        # muestra el commit desplegado
 ```
 
+### Evidencias reproducibles — Sprint 1, Sprint 2 y Sprint 3
+
+Los artefactos de evaluación se conservan bajo `docs/evidencias/` y están
+excluidos del hosting público. La comprobación integral se ejecuta con:
+
+```bash
+node tools/verify-sprints.mjs --commit="$(git rev-parse --short HEAD)" \
+  --output=docs/evidencias/sprint-3/resultados/verificacion.json
+```
+
+| Sprint | Alcance | Evidencia |
+| --- | --- | --- |
+| Sprint 1 | README, stack, interfaces, roles, pruebas y builds | `docs/evidencias/sprint-1/` |
+| Sprint 2 | Azure, IP pública, SSH, SO, Node, PostgreSQL y puertos | `docs/evidencias/sprint-2/` |
+| Sprint 3 | Flujo autónomo, APK, CRUD Azure→Supabase y commit de producción | `docs/evidencias/sprint-3/` |
+
+Rutas de entrega:
+
+- Website: `https://baqueanonicaragua.com`.
+- APK: `https://baqueanonicaragua.com/downloads/baqueano-android.apk`.
+- Salud/commit: `https://baqueanonicaragua.com/health`.
+- Integración de datos: `POST /api/azure/evidence/crud` crea, lee, actualiza y
+  elimina únicamente un registro efímero aislado; no altera datos turísticos.
+
 ---
 
 ## 📄 Licencia & Créditos

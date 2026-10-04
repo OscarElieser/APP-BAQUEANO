@@ -77,4 +77,4 @@ No utilizar 21st para:
 - **Servidor MCP**: `21st` (`https://21st.dev/api/mcp`).
 - **Configuración Local**: `.mcp.json` con referencia a `${API_KEY_21ST}`.
 - **Configuración Global Antigravity**: `%USERPROFILE%\.gemini\config\mcp_config.json`.
-- **Manual de Operaciones**: `docs/21ST_MCP_ANTIGRAVITY.md`.
+- **Manual de Operaciones**: `docs/architecture/21ST_MCP_ANTIGRAVITY.md`.

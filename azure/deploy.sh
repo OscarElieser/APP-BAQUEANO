@@ -44,6 +44,10 @@ reload_nginx() {
   # QUÉ: Permissions-Policy, CSP y demás controles quedan sincronizados con origin/main.
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-security-headers.conf" "/etc/nginx/snippets/baqueano-security-headers.conf"
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-auth-proxy.conf" "/etc/nginx/snippets/baqueano-auth-proxy.conf"
+  sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-delivery.conf" "/etc/nginx/snippets/baqueano-delivery.conf"
+  sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-ip.conf" "/etc/nginx/sites-available/baqueano-ip.conf"
+  sudo ln -sfn "/etc/nginx/sites-available/baqueano-ip.conf" "/etc/nginx/sites-enabled/baqueano-ip.conf"
+  sudo rm -f "/etc/nginx/sites-enabled/default"
   local site_config="/etc/nginx/sites-available/baqueano.conf"
   local site_backup="${site_config}.baqueano-backup"
 
@@ -58,6 +62,20 @@ reload_nginx() {
       return 1
     fi
   fi
+  if ! sudo grep -q "baqueano-delivery.conf" "${site_config}"; then
+    sudo cp "${site_config}" "${site_backup}"
+    sudo sed -i "/# API proxy/i\\    include /etc/nginx/snippets/baqueano-delivery.conf;\n" "${site_config}"
+    if ! sudo nginx -t; then
+      sudo cp "${site_backup}" "${site_config}"
+      sudo nginx -t
+      echo "No se pudo instalar la ruta de entrega Android; se restauró la configuración anterior." >&2
+      return 1
+    fi
+  fi
+  # El bloque IP posee el único default_server. Esta normalización preserva las
+  # líneas TLS que Certbot haya añadido al virtual host canónico.
+  sudo sed -i -E 's/listen 80 default_server;/listen 80;/' "${site_config}"
+  sudo sed -i -E 's/listen \[::\]:80 default_server;/listen [::]:80;/' "${site_config}"
   sudo nginx -t
   sudo systemctl reload nginx
 }
@@ -101,6 +119,16 @@ if [[ -d "${MEDIA_VIDEOS}" ]]; then
   rsync -a "${MEDIA_VIDEOS}/" "${RELEASE}/assets/videos/"
 else
   echo "Aviso: ${MEDIA_VIDEOS} no existe; los videos responderán 404 (igual que hoy en web.app)."
+fi
+
+# El APK está versionado para la entrega y se publica bajo un nombre estable.
+# Nginx permite únicamente esta ruta exacta; el bloqueo general de *.apk sigue activo.
+if [[ -s "${REPO_DIR}/website/assets/BaqueanoNicaragua.apk" ]]; then
+  mkdir -p "${RELEASE}/downloads"
+  install -m 0644 "${REPO_DIR}/website/assets/BaqueanoNicaragua.apk" "${RELEASE}/downloads/baqueano-android.apk"
+else
+  echo "ERROR: falta el APK versionado website/assets/BaqueanoNicaragua.apk" >&2
+  exit 1
 fi
 
 echo "==> 5/6 Escribiendo health.json (evidencia de despliegue)"

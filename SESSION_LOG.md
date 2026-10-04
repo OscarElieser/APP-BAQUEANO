@@ -84,6 +84,18 @@ LO QUE FUNCIONA EN ESTE PUNTO:
     - SESSION_LOG.md
 
   ESTADO: Implementado y verificado. -->
+## 🧭 EJECUCIÓN DE LOTE 1: REORGANIZACIÓN DE DOCUMENTACIÓN Y CSS HUÉRFANO (03-10-2026)
+
+- **Consulta / Autorización del Usuario:**
+  > *"te autorizo"*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Limpiar la raíz del repositorio de archivos markdown dispersos agrupándolos temáticamente en subdirectorios de `docs/` (`architecture/`, `security/`, `database/`, `deployment/`, `design/`), e integrar el archivo CSS huérfano `nicaragua-branding.css` en `website/css/` para resolver el error 404 del sitio web, sin alterar ningún despliegue ni funcionalidad.
+  - ⚙️ **CÓMO:** (1) Crear las carpetas de destino en `docs/` (`docs/security`, `docs/database`, `docs/deployment`, `docs/design`), (2) Mover con `git mv` los archivos markdown para conservar el 100% del historial de Git, (3) Mover con `git mv` `nicaragua-branding.css` a `website/css/nicaragua-branding.css`, (4) Actualizar rutas en `README.md`, (5) Verificar con `git status` y registrar commit atómico de Lote 1 en la rama `chore/reorganizacion-repositorio`.
+  - 📦 **QUÉ:** Documentación estructurada profesionalmente, raíz del repositorio despejada, CSS identitario reubicado en su ruta canónica web.
+
+---
+
 ## 🧭 EJECUCIÓN DE FASE 2 (PROPUESTA), FASE 3 (PLAN DE MIGRACIÓN) Y FASE 4 (RESPALDO & LIMPIEZA SEGURA) (03-10-2026)
 
 - **Consulta / Solicitud:**
@@ -3603,3 +3615,14 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** Completar y evidenciar accesibilidad pública por IP, seguridad de puertos, flujo autónomo, integración CRUD real y correspondencia entre Azure y GitHub `main`.
 - ⚙️ **CÓMO:** Implementar cambios reproducibles en servidor/web/API y pruebas automatizadas, organizar evidencias ocultas al público por sprint y actualizar README. Se preservarán los cambios locales existentes y no se ejecutará push ni despliegue remoto sin una autorización distinta.
 - 📦 **QUÉ:** Solicitud registrada antes del análisis. Objetivo: dejar Sprint 1–3 terminados a nivel de código y evidencia automatizada, marcando por separado aquello que dependa del despliegue remoto o de capturas manuales autenticadas.
+- **Fase 1 (auditoría) — hallazgos:**
+  - Header/footer: ya centralizados en `global-injector.js` (sesión anterior). 1 solo header y 1 solo footer en las 28 páginas públicas; admin.html excluido.
+  - **Causa del header que desaparece al hacer scroll:** 9 páginas (index, historia, perfil, nosotros, términos, privacidad, ambiental, baqueano-ia, 404) ponen `body { overflow-x:hidden }` y `baqueano-identity.css` pone `html { overflow-x:clip }` → el `<body>` se vuelve contenedor de scroll y `position: sticky` deja de funcionar (medido con Playwright: top = −2500 px).
+  - Hamburguesa con 3 controladores que se anulaban; al cerrar quedaba `nav-drawer-open` pegado → página sin scroll (2 de cada 3 ciclos).
+  - navigation.js se enganchaba al menú viejo antes de que el inyector lo reemplazara: `.scrolled` nunca se aplicaba, "Más" con doble toggle.
+  - ≤480 px: idioma, SOS y sesión ocultos sin alternativa; a 320 px la hamburguesa quedaba fuera de pantalla.
+  - Enlace roto `perfil.html#tab-viajes` (ancla real `#reservas`); redirecciones `/privacidad` y `/terminos` en firebase.json apuntaban a `index.html#…`.
+  - `upgradeContactForms` mostraba "¡Mensaje enviado!" falso en cualquier formulario (login, búsquedas, registros).
+  - Roles: puerta del Ops Center usa Firebase Auth en vivo (bien), pero marcaba a todos como `superAdmin`; lista de correos duplicada en 2 archivos. firestore.rules ya impide auto-asignarse rol.
+- **Fase 2 — cambios (sin commit):** `css/navigation-mega.css` (overflow html/body, bloqueo de scroll en `<html>`, cuenta, herramientas del cajón, área segura), `js/navigation.js` (montaje único tras `baqueano:shell-ready`, controlador único del cajón por delegación, scroll, "Más", herramientas del cajón, carga de roles.js), `js/global-injector.js` (evento shell-ready, formularios), `js/user-session.js` (menú de cuenta, rol por roles.js + Custom Claims, sincronía entre pestañas), `js/shared/roles.js` (NUEVO, matriz única), `js/ops-center/ops-engine.js` + `admin.html` (rol real super_admin/admin, claims, mensaje "No tienes autorización…"), `js/global-language.js` (almacenamiento bloqueado), `firebase.json` (/admin, /ops-center, /dashboard → admin.html; /privacidad y /terminos a sus páginas).
+- **Pruebas:** funcional Playwright 42/42 (casos 1–12 del pedido); 24/24 enlaces de header/footer válidos; `npm test` OK; scroll del header por anchos en curso.

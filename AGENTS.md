@@ -62,7 +62,7 @@ Integrar los procedimientos especializados del plugin global `agent-skills` de A
 ### 📦 QUÉ (What / Funcionalidad y Entregables)
 
 - Regla operativa detallada: `.agents/rules/agent-skills-baqueano.md`.
-- Manual de instalación, uso, actualización y recuperación: `docs/AGENT_SKILLS_ANTIGRAVITY.md`.
+- Manual de instalación, uso, actualización y recuperación: `docs/architecture/AGENT_SKILLS_ANTIGRAVITY.md`.
 - Plugin esperado: `agent-skills`, con activación automática por intención y carga bajo demanda.
 
 ## 21ST MCP
@@ -71,5 +71,5 @@ Use 21st MCP for UI discovery, component research, interface generation and visu
 
 ## 4C MARKETING MODEL
 
-When implementing marketing, UX, discovery, booking or business features, evaluate the solution against BAQUEANO's 4C model: Consumer, Cost, Convenience and Communication. Refer to `docs/MARKETING_4C_BAQUEANO.md` and `DESIGN.md`.
+When implementing marketing, UX, discovery, booking or business features, evaluate the solution against BAQUEANO's 4C model: Consumer, Cost, Convenience and Communication. Refer to `docs/design/MARKETING_4C_BAQUEANO.md` and `docs/design/DESIGN.md`.
 

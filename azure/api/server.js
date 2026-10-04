@@ -28,8 +28,9 @@ DATOS:
   - health.json de la release activa: commit de GitHub desplegado.
 
 SEGURIDAD:
-  - Solo métodos GET/HEAD; rutas fijas; sin parámetros de usuario → sin
-    inyección posible.
+  - GET/HEAD para salud y un POST acotado para la prueba CRUD efímera.
+  - La prueba genera su propio token criptográfico, no acepta campos de negocio
+    y elimina el registro al terminar.
   - Resultados cacheados 30 s: miles de peticiones no se traducen en miles de
     consultas a Supabase.
   - Timeouts de 5 s en llamadas externas para que la API nunca se bloquee.
@@ -47,6 +48,7 @@ const http = require('node:http');
 const os = require('node:os');
 const fs = require('node:fs/promises');
 const { execFile } = require('node:child_process');
+const { createHash, randomBytes, randomUUID } = require('node:crypto');
 
 const HOST = '127.0.0.1';
 const PORT = Number(process.env.PORT || 3000);
@@ -61,6 +63,7 @@ const RELEASE_HEALTH = process.env.RELEASE_HEALTH || '/var/www/baqueano/current/
 const CACHE_TTL_MS = 30_000;
 const EXTERNAL_TIMEOUT_MS = 5_000;
 let dbCache = { at: 0, value: null };
+const evidenceRate = new Map();
 
 // Lee el commit desplegado escrito por azure/deploy.sh.
 async function readRelease() {
@@ -123,6 +126,106 @@ async function databaseStatus() {
   return { ...value, cached: false };
 }
 
+// Ejecuta una operación PostgREST autenticada por el token efímero que RLS
+// compara contra `proof_hash`. La clave usada es publicable y no omite RLS.
+async function evidenceRequest(resource, method, proofToken, body) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), EXTERNAL_TIMEOUT_MS);
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/${resource}`, {
+      method,
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        'Content-Type': 'application/json',
+        'X-Proof-Token': proofToken,
+        Prefer: method === 'DELETE' ? 'return=minimal' : 'return=representation'
+      },
+      body: body === undefined ? undefined : JSON.stringify(body),
+      signal: controller.signal
+    });
+    const text = await response.text();
+    const data = text ? JSON.parse(text) : null;
+    if (!response.ok) {
+      const error = new Error(`Supabase ${method} respondió ${response.status}`);
+      error.status = response.status;
+      error.safeCode = data?.code || 'DATA_API_ERROR';
+      throw error;
+    }
+    return data;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Prueba aislada crear → leer → actualizar → leer → eliminar. Nunca modifica
+// catálogos, usuarios ni reservas y no devuelve el token de autorización.
+async function runEvidenceCrud() {
+  const proofToken = randomBytes(32).toString('hex');
+  const proofHash = createHash('sha256').update(proofToken).digest('hex');
+  const id = randomUUID();
+  const table = 'sprint_evidence_records';
+  const filter = `${table}?id=eq.${encodeURIComponent(id)}`;
+  const expiresAt = new Date(Date.now() + 10 * 60_000).toISOString();
+
+  try {
+    const created = await evidenceRequest(table, 'POST', proofToken, {
+      id,
+      proof_hash: proofHash,
+      value: 'created-by-azure',
+      version: 1,
+      expires_at: expiresAt
+    });
+    const read = await evidenceRequest(`${filter}&select=id,value,version`, 'GET', proofToken);
+    const updated = await evidenceRequest(filter, 'PATCH', proofToken, {
+      value: 'updated-by-azure',
+      version: 2,
+      updated_at: new Date().toISOString()
+    });
+    const verified = await evidenceRequest(`${filter}&select=id,value,version`, 'GET', proofToken);
+    await evidenceRequest(filter, 'DELETE', proofToken);
+
+    const valid = created?.[0]?.id === id && read?.[0]?.version === 1 &&
+      updated?.[0]?.version === 2 && verified?.[0]?.value === 'updated-by-azure';
+    if (!valid) throw new Error('La secuencia CRUD no devolvió el estado esperado');
+
+    return {
+      ok: true,
+      source: 'supabase-postgresql',
+      via: 'azure-api',
+      operations: ['create', 'read', 'update', 'delete'],
+      recordId: id,
+      cleanup: true,
+      checkedAt: new Date().toISOString()
+    };
+  } catch (error) {
+    // Limpieza defensiva: si una fase intermedia falla, se intenta borrar la fila.
+    try { await evidenceRequest(filter, 'DELETE', proofToken); } catch { /* no-op */ }
+    throw error;
+  }
+}
+
+function clientAddress(req) {
+  return String(req.headers['x-real-ip'] || req.socket.remoteAddress || 'unknown').slice(0, 80);
+}
+
+function allowEvidenceRun(req) {
+  const key = clientAddress(req);
+  const now = Date.now();
+  const current = evidenceRate.get(key);
+  if (current && now - current.startedAt < 60_000 && current.count >= 3) return false;
+  const next = !current || now - current.startedAt >= 60_000
+    ? { startedAt: now, count: 1 }
+    : { ...current, count: current.count + 1 };
+  evidenceRate.set(key, next);
+  if (evidenceRate.size > 500) {
+    for (const [address, window] of evidenceRate) {
+      if (now - window.startedAt >= 60_000) evidenceRate.delete(address);
+    }
+  }
+  return true;
+}
+
 function send(res, status, body) {
   const payload = JSON.stringify(body);
   res.writeHead(status, {
@@ -145,15 +248,19 @@ const routes = {
     release: await readRelease()
   }),
   // Conectividad Azure → Supabase (base principal) y PostgreSQL local (evidencia).
-  '/api/azure/db': databaseStatus
+  '/api/azure/db': databaseStatus,
+  '/api/azure/evidence/crud': runEvidenceCrud
 };
 
 const server = http.createServer(async (req, res) => {
   try {
-    if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, { error: 'method_not_allowed' });
     const path = new URL(req.url, 'http://localhost').pathname.replace(/\/+$/, '');
     const handler = routes[path];
     if (!handler) return send(res, 404, { error: 'not_found' });
+    const isEvidenceCrud = path === '/api/azure/evidence/crud';
+    if (isEvidenceCrud && req.method !== 'POST') return send(res, 405, { error: 'method_not_allowed' });
+    if (!isEvidenceCrud && req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, { error: 'method_not_allowed' });
+    if (isEvidenceCrud && !allowEvidenceRun(req)) return send(res, 429, { error: 'rate_limited' });
     return send(res, 200, await handler());
   } catch (error) {
     // Nunca se exponen trazas internas al cliente.
@@ -163,11 +270,16 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.requestTimeout = 10_000;
-server.listen(PORT, HOST, () => {
-  console.log(`[baqueano-api] escuchando en http://${HOST}:${PORT}`);
-});
 
-// Apagado ordenado cuando systemd detiene o reinicia el servicio.
-for (const signal of ['SIGTERM', 'SIGINT']) {
-  process.on(signal, () => server.close(() => process.exit(0)));
+if (require.main === module) {
+  server.listen(PORT, HOST, () => {
+    console.log(`[baqueano-api] escuchando en http://${HOST}:${PORT}`);
+  });
+
+  // Apagado ordenado cuando systemd detiene o reinicia el servicio.
+  for (const signal of ['SIGTERM', 'SIGINT']) {
+    process.on(signal, () => server.close(() => process.exit(0)));
+  }
 }
+
+module.exports = { checkSupabase, databaseStatus, evidenceRequest, runEvidenceCrud, allowEvidenceRun, server };

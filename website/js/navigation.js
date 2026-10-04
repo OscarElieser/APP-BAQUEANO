@@ -143,6 +143,7 @@ function buildGlobalMegaNavigation() {
   const megaMenu = document.getElementById('globalMegaMenu');
   const desktopHoverQuery = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
   let closeTimer = null;
+  let hoverOpenedAt = 0;
 
   if (moreDropdown && moreBtn && moreDropdown.dataset.bqWired !== 'true') {
     // Marca para que initDropdownMiPais() no le agregue un segundo controlador
@@ -150,7 +151,10 @@ function buildGlobalMegaNavigation() {
     moreDropdown.dataset.bqWired = 'true';
     moreBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const open = moreDropdown.classList.toggle('is-open');
+      // En escritorio el hover ya lo abrió: el clic que sigue no debe cerrarlo.
+      const justHovered = desktopHoverQuery.matches && Date.now() - hoverOpenedAt < 700;
+      const open = justHovered ? true : moreDropdown.classList.toggle('is-open');
+      moreDropdown.classList.toggle('is-open', open);
       moreBtn.setAttribute('aria-expanded', String(open));
       if (open && megaMenu) {
         const firstLink = megaMenu.querySelector('a');
@@ -163,6 +167,7 @@ function buildGlobalMegaNavigation() {
     moreDropdown.addEventListener('mouseenter', () => {
       if (!desktopHoverQuery.matches) return;
       clearTimeout(closeTimer);
+      if (!moreDropdown.classList.contains('is-open')) hoverOpenedAt = Date.now();
       moreDropdown.classList.add('is-open');
       moreBtn.setAttribute('aria-expanded', 'true');
     });

@@ -1271,8 +1271,11 @@ html:has(> body[style*="overflow:hidden"]) { overflow: hidden !important; }
   }
 }
 @media (max-width: 480px) {
-  /* La cuenta pasa al cajón: la barra queda con marca + hamburguesa. */
-  #mainNavbar .bq-account-slot { display: none !important; }
+  /* Cuenta e idioma pasan al cajón: la barra queda con marca + hamburguesa.
+     Selector más específico que el que inyecta global-language.js, que forzaba
+     el idioma visible y empujaba la hamburguesa fuera de pantalla a 320 px. */
+  #mainNavbar .bq-account-slot,
+  #mainNavbar .global-nav-actions > .global-language { display: none !important; }
 }
 /* Respeta el notch del iPhone en horizontal sin cortar marca ni hamburguesa. */
 @media (max-width: 960px) {
