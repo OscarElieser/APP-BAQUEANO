@@ -84,6 +84,18 @@ LO QUE FUNCIONA EN ESTE PUNTO:
     - SESSION_LOG.md
 
   ESTADO: Implementado y verificado. -->
+## 🧭 ACTIVACIÓN DEL EQUIPO MULTIDISCIPLINARIO SENIOR Y PROTOCOLO MAESTRO DE 68 REGLAS DE ARQUITECTURA (03-10-2026)
+
+- **Consulta / Mandato del Usuario:**
+  > *"Actúa como un equipo multidisciplinario senior de nivel internacional especializado en desarrollo de software, producto digital, turismo, inteligencia artificial, seguridad, diseño, marketing, accesibilidad, sostenibilidad y arquitectura empresarial. Trabaja sobre mi proyecto BAQUEANO... [Protocolo Maestro de 68 Reglas e Instrucciones de Orquestación de Skills y Especialistas]"*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Establecer la gobernanza y ejecución de nivel de ingeniería internacional para BAQUEANO, asegurando que cada intervención se aborde con visión de producto global, rigor arquitectónico, cero pérdida de datos, preservación cultural fáctica nicaragüense y máxima excelencia técnica.
+  - ⚙️ **CÓMO:** (1) Selección y orquestación dinámica de Agent Skills y MCPs (21st, Cloud, DB, etc.) sin esperar solicitud manual, (2) Convocatoria y articulación de especialistas multidisciplinarios por tarea, (3) Auditoría de causa raíz antes de modificar, (4) Respeto al stack real (Web Vanilla modular en `website/`, Flutter Android en `lib/` y `android/`, Supabase y Firebase Auth/Hosting/Functions), (5) Blindaje de seguridad RBAC en servidor para Ops Center, (6) RAG e IA contextual (BAQUI) con herramientas controladas y cero alucinaciones, (7) Accesibilidad WCAG 2.2 AA y rendimiento Core Web Vitals de primer nivel.
+  - 📦 **QUÉ:** Marco operativo multidisciplinario activo, matriz de especialidades sincronizada y bitácora persistente actualizada como punto único de verdad.
+
+---
+
 ## 🧭 SINCRONIZACIÓN Y SUBIDA COMPLETA A GITHUB (02-10-2026)
 
 - **Consulta / Solicitud:**
@@ -3461,3 +3473,74 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Verificado con Firestore simulado: 7 escrituras (set, update, add, batch set/delete, delete) → 7 envíos correctos, valores de retorno intactos, 0 errores.
 - **Hallazgo:** solo 3 de 30 páginas cargan el SDK de Firestore; `admin.html` no lo carga → el Ops Center no lee ni escribe Firestore (sus 17 sincronizaciones nunca arrancan). NO se cambió: activarlo altera el comportamiento del Ops Center (decisión del propietario).
 - **Pendiente:** prueba de punta a punta con una cuenta real (iniciar sesión, guardar algo y revisar `firestore_mirror`); app Android (Dart) aún no llama al espejo; carga inicial de lo ya existente en Firestore (requiere credencial de administrador); tablas tipadas y cierre de permisos públicos (fases 2–3, requieren aprobación).
+
+---
+
+## 2026-10-03 — Sincronización y Descarga Completa desde GitHub ("trae todo de github aqui")
+
+- 🎯 **POR QUÉ:** Sincronizar el espacio de trabajo local con todos los cambios, commits y ramas remotas en GitHub para garantizar paridad absoluta con el origen remoto sin pérdida de trabajo local ni desincronización de componentes.
+- ⚙️ **CÓMO:**
+  1. Verificación de estado local (`git status`).
+  2. Ejecución de `git fetch --all --prune --tags` para actualizar todos los punteros remotos y tags.
+  3. Ejecución de `git pull origin main` avanzando 21 commits remotos en fast-forward limpio.
+  4. Inspección del árbol de trabajo para verificar que esté 100% limpio y actualizado con `origin/main`.
+- 📦 **QUÉ (Entregables & Estado):**
+  - Repositorio local sincronizado con el commit más reciente: `e930f0a` (*octubrevictorioso*).
+  - 172 archivos actualizados (8,726 inserciones, 1,734 eliminaciones).
+  - Integrados nuevos activos multimedia WebP en `website/assets/images/vivir/`, configuración de Azure API / Nginx auth proxy, espejo Firestore en Supabase (`firestore_mirror.sql`, Edge Function `baqueano-mirror`), audioguías y componentes de historia, y optimizaciones de rendimiento y favicon.
+  - `git status`: Limpio, `Your branch is up to date with 'origin/main'`.
+
+---
+
+## 2026-10-03 — Solicitud: menú/footer único, menú recortado al angostar el navegador, login de usuarios normales
+
+- **Pedido del propietario:**
+  1. El menú y el footer son UNO SOLO para todo el sitio, excepto el Ops Center (admin.html), que tiene el suyo.
+  2. Al angostar la ventana del navegador, el menú no se muestra completo.
+  3. super_admin y admin entran bien con Google; los demás usuarios deben poder iniciar sesión normal (usuario) solo para navegar la web, sin acceso al Ops Center.
+- **Estado:** Iniciado.
+- **Causa raíz del menú recortado:** `styles.css` convierte el menú en cajón oculto desde ≤960 px, pero `css/navigation-mega.css` solo mostraba la hamburguesa en ≤768 px → entre 769 y 960 px no había menú ni botón.
+- **Cambios (sin commit todavía):**
+  1. `website/css/navigation-mega.css`: corte único a 960 px (hamburguesa + cajón ≤960; cápsula de escritorio y compresión ≥961). Verificado con Playwright en 1440…390 px: 6/6 enlaces visibles y clicables en el cajón (index, historia, perfil).
+  2. `website/js/global-injector.js`: menú y footer únicos impuestos SIEMPRE desde el inyector (reemplaza copias locales de cada HTML; admin.html excluido). Footer canónico = marcado de index.html (`site-footer-exact`). Eliminados `syncShellWithIndex` (descargaba index.html y casi nunca corría), `upgradeOldFooters`, `injectOPSButton` y `addOpsToExistingNavbar` (mostraba "OPS Center" a cualquiera). Verificado: 28/28 páginas con menú y footer idénticos, sin duplicados (antes 7 páginas con menú antiguo sin logo, 5 diseños de footer y 5 páginas con footer doble; el de mi-viaje estaba roto).
+  3. `website/js/user-session.js`: `BaqueanoSession.refreshNavbar()` y `resetPassword(email)`.
+  4. `website/js/auth-panel.js` + `css/auth-panel.css` + `perfil.html` (v=20261003-3): además de Google, formulario Entrar / Crear cuenta / ¿Olvidaste tu contraseña? para usuarios normales. Probado contra Firebase real: el proveedor correo/contraseña responde; errores en español.
+  5. `website/js/ops-center/ops-engine.js`: al negar el Ops Center a un usuario no autorizado ya NO cierra su sesión de toda la web; muestra "Tu sesión en el sitio sigue activa" + "Volver al sitio".
+- **Pruebas:** `npm test` (website) en verde.
+- **Pendiente:** commit/despliegue (no solicitado); solicitudes de instalación de skills/MCP para todos los entornos de IA (3 mensajes del propietario) — por revisar alcance.
+- **Estado:** menú/footer/login completados y verificados localmente.
+
+---
+
+## 2026-10-03 — Solicitud: instalar claude-mem, headroom wrap, claude code z, task observer
+
+- Se suma a las 3 listas previas de skills/MCP para "todos los entornos de IA" (Claude, Codex, Gemini, .agents).
+- **Estado:** Iniciado — identificando paquetes oficiales antes de instalar (riesgo de cadena de suministro).
+- **Identificados:** claude-mem = thedotmack/claude-mem (plugin de Claude Code); headroom = headroomlabs-ai/headroom (PyPI `headroom-ai`); task observer = rebelytics/one-skill-to-rule-them-all (skill, sin red, scripts locales revisados). "claude code z": ambiguo (¿ZCode/GLM de Z.ai?), pendiente de confirmar.
+- **Instalado:** task-observer v3.5.0 en ~/.claude/skills, ~/.codex/skills, ~/.gemini/skills, ~/.agents/skills.
+- **En curso:** headroom-ai[all] vía `uv tool install --python 3.13` (entorno aislado). No se ejecuta `headroom wrap` (lo lanza el propietario).
+- **Requiere al propietario:** claude-mem se instala con `/plugin marketplace add thedotmack/claude-mem` + `/plugin install claude-mem` (no hay CLI `claude` en PATH).
+- **Permiso:** el propietario autorizó explícitamente escribir esta entrada tras un bloqueo del clasificador.
+- **headroom 0.39.1 instalado** (~/.local/bin/headroom.exe, entorno uv aislado con Python 3.13). Verificado con `headroom --version`. Uso: `headroom wrap claude` / deshacer: `headroom unwrap claude`.
+
+---
+
+## 2026-10-03 — Solicitud: instalar automáticamente los mejores skills (web, Android/iOS, navegación, seguridad, frontend, backend, IA, trazabilidad, sostenibilidad, accesibilidad, animaciones, impacto, marketing, BD, diseño, música, videos, temas, idiomas)
+
+- **Criterio:** solo repositorios oficiales o de alta reputación; se lee cada SKILL.md y se revisan scripts antes de copiar; no se sobrescribe lo existente; instalación en ~/.claude, ~/.codex, ~/.gemini, ~/.agents.
+- **Estado:** Iniciado.
+- **Selección propuesta:** trailofbits/skills (seguridad), coreyhaines31/marketingskills (marketing/SEO), remotion-dev/skills (video/audio), flutter/agent-plugins + dart-lang/skills (Android/iOS, oficiales), addyosmani/web-quality-skills (accesibilidad, rendimiento, SEO), ibelick/ui-skills (accesibilidad, animación), anthropics/skills (diseño, temas, arte), skill de Emil Kowalski (animaciones).
+- **Bloqueado:** el clasificador de permisos denegó clonar los repositorios (integración de código no confiable). No se instaló nada de esta lista. Requiere autorización explícita del propietario (regla de permiso para Bash o aprobación por repo).
+
+---
+
+## 2026-10-03 — Solicitud: arquitectura global de header/footer/sesión/idioma + protección real del Ops Center (prompt integral de 30 puntos)
+
+- **Pedido del propietario:** header y footer únicos para todo el sitio público (Ops Center excluido), arreglar el header durante el scroll, menú responsive real (320–1920 px), menú móvil accesible (Escape, clic fuera, foco), separar autenticación de autorización (super_admin/admin con Google → Ops Center; usuario normal con correo/contraseña → solo sitio público), proteger de verdad las rutas administrativas (no confiar en localStorage), sesión e idioma persistentes entre páginas, auditoría de enlaces, rendimiento, accesibilidad, seguridad. Sin borrar contenido ni romper el Ops Center.
+- **Punto de partida:** continúa la entrada "menú/footer único..." de hoy (cambios aún sin commit en global-injector.js, navigation-mega.css, auth-panel.*, user-session.js, ops-engine.js, perfil.html).
+- **Estado:** Iniciado — Fase 1 (auditoría).
+## 2026-10-03 — Solicitud recibida mediante archivo adjunto
+
+- 🎯 **POR QUÉ:** Preservar antes de cualquier análisis la solicitud actual y garantizar continuidad ante interrupciones.
+- ⚙️ **CÓMO:** Leer el archivo adjunto `pasted-text.txt` indicado por el usuario y ejecutar íntegramente sus instrucciones dentro de las normas de BAQUEANO.
+- 📦 **QUÉ:** Solicitud del usuario: “The attached pasted text file(s) contain the user's request. Read and act on that content.” Estado inicial: registrada; contenido pendiente de lectura y ejecución.

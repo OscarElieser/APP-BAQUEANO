@@ -1,7 +1,17 @@
 /*
 =====================================================
-BAQUEANO — Panel de acceso con Google (perfil.html)
+BAQUEANO — Panel de acceso: Google o correo y contraseña (perfil.html)
 =====================================================
+
+ACTUALIZACIÓN 2026-10-03 (directiva del propietario):
+  - super_admin y admin entran con Google (el Ops Center exige correo oficial
+    verificado; ver js/ops-center/ops-engine.js).
+  - Cualquier otra persona entra "normal" con correo y contraseña (o crea su
+    cuenta) SOLO para navegar el portal: guardar destinos, Mi Viaje, perfil.
+    Tener cuenta no da acceso al Ops Center; el enlace ni siquiera se muestra.
+  - Formulario: Entrar / Crear cuenta / Olvidé mi contraseña. Delegan en
+    BaqueanoSession.login, .register y .resetPassword (js/user-session.js),
+    que traducen los errores de Firebase al español.
 
 PROPÓSITO:
   Conectar el Website público con Firebase Authentication. Hasta ahora
@@ -71,6 +81,8 @@ RELACIÓN:
   var panel = null;
   var messageEl = null;
   var googleBtn = null;
+  var emailForm = null;
+  var emailMode = 'login'; // 'login' | 'register'
 
   // Espera a que navigation.js inyecte user-session.js (BaqueanoSession).
   function waitForSession() {
@@ -175,11 +187,154 @@ RELACIÓN:
     priv.textContent = 'Política de privacidad';
     privacy.append(priv, '.');
 
-    panel.append(eyebrow, title, lead, googleBtn, messageEl, privacy);
+    var divider = document.createElement('p');
+    divider.className = 'bq-auth-divider';
+    divider.textContent = 'o con tu correo';
+
+    emailForm = buildEmailForm();
+
+    panel.append(eyebrow, title, lead, googleBtn, divider, emailForm, messageEl, privacy);
+    setEmailMode('login');
 
     var hero = document.querySelector('.prof-hero');
     if (hero && hero.parentNode) hero.parentNode.insertBefore(panel, hero.nextSibling);
     else document.body.insertBefore(panel, document.body.firstChild);
+  }
+
+  function field(type, name, labelText, autocomplete) {
+    var wrap = document.createElement('label');
+    wrap.className = 'bq-auth-field';
+    wrap.dataset.field = name;
+    var span = document.createElement('span');
+    span.textContent = labelText;
+    var input = document.createElement('input');
+    input.type = type;
+    input.name = name;
+    input.autocomplete = autocomplete;
+    input.required = true;
+    if (type === 'password') input.minLength = 8;
+    if (name === 'name') input.maxLength = 80;
+    wrap.append(span, input);
+    return wrap;
+  }
+
+  // Formulario de correo y contraseña para usuarios que navegan el portal.
+  function buildEmailForm() {
+    var form = document.createElement('form');
+    form.className = 'bq-auth-form';
+
+    var tabs = document.createElement('div');
+    tabs.className = 'bq-auth-tabs';
+    tabs.setAttribute('role', 'tablist');
+    [['login', 'Entrar'], ['register', 'Crear cuenta']].forEach(function (pair) {
+      var tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'bq-auth-tab';
+      tab.dataset.mode = pair[0];
+      tab.setAttribute('role', 'tab');
+      tab.textContent = pair[1];
+      tab.addEventListener('click', function () { setEmailMode(pair[0]); });
+      tabs.appendChild(tab);
+    });
+
+    var submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.className = 'bq-auth-submit';
+
+    var forgot = document.createElement('button');
+    forgot.type = 'button';
+    forgot.className = 'bq-auth-forgot';
+    forgot.textContent = '¿Olvidaste tu contraseña?';
+    forgot.addEventListener('click', handlePasswordReset);
+
+    form.append(
+      tabs,
+      field('text', 'name', 'Nombre', 'name'),
+      field('email', 'email', 'Correo electrónico', 'email'),
+      field('password', 'password', 'Contraseña (mínimo 8 caracteres)', 'current-password'),
+      submit,
+      forgot
+    );
+    form.addEventListener('submit', handleEmailSubmit);
+    return form;
+  }
+
+  function setEmailMode(mode) {
+    emailMode = mode === 'register' ? 'register' : 'login';
+    if (!emailForm) return;
+    var isRegister = emailMode === 'register';
+    Array.prototype.forEach.call(emailForm.querySelectorAll('.bq-auth-tab'), function (tab) {
+      var active = tab.dataset.mode === emailMode;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    var nameField = emailForm.querySelector('[data-field="name"]');
+    nameField.hidden = !isRegister;
+    nameField.querySelector('input').required = isRegister;
+    emailForm.querySelector('input[name="password"]').autocomplete = isRegister ? 'new-password' : 'current-password';
+    emailForm.querySelector('.bq-auth-submit').textContent = isRegister ? 'Crear mi cuenta' : 'Entrar';
+    emailForm.querySelector('.bq-auth-forgot').hidden = isRegister;
+    setMessage('', false);
+  }
+
+  function friendlyAuthError(error) {
+    var code = error && error.code;
+    if (code === 'auth/operation-not-allowed') return 'El acceso con correo todavía no está habilitado. Usá Google o intentá más tarde.';
+    if (code === 'auth/network-request-failed') return 'Sin conexión con el servicio de acceso. Revisá tu internet.';
+    return (error && error.message) || 'No se pudo completar la operación. Inténtalo de nuevo.';
+  }
+
+  function setFormBusy(busy) {
+    if (emailForm) {
+      Array.prototype.forEach.call(emailForm.querySelectorAll('button, input'), function (el) { el.disabled = busy; });
+    }
+    if (googleBtn) googleBtn.disabled = busy;
+  }
+
+  async function handleEmailSubmit(event) {
+    event.preventDefault();
+    if (!emailForm.reportValidity()) return;
+    var name = emailForm.querySelector('input[name="name"]').value.trim();
+    var email = emailForm.querySelector('input[name="email"]').value.trim();
+    var password = emailForm.querySelector('input[name="password"]').value;
+    setFormBusy(true);
+    setMessage(emailMode === 'register' ? 'Creando tu cuenta…' : 'Verificando tus datos…', true);
+    try {
+      var session = await waitForSession();
+      if (!session) throw new Error('El servicio de sesión no cargó. Recargá la página.');
+      if (emailMode === 'register') {
+        await session.register(email, password, name);
+        setMessage('¡Cuenta creada! Te enviamos un correo para verificar tu dirección.', true);
+      } else {
+        await session.login(email, password);
+        setMessage('', false);
+      }
+      emailForm.querySelector('input[name="password"]').value = '';
+    } catch (error) {
+      setMessage(friendlyAuthError(error), false);
+    } finally {
+      setFormBusy(false);
+    }
+  }
+
+  async function handlePasswordReset() {
+    var emailInput = emailForm.querySelector('input[name="email"]');
+    if (!emailInput.value.trim() || !emailInput.checkValidity()) {
+      emailInput.focus();
+      setMessage('Escribí tu correo arriba y tocá de nuevo "¿Olvidaste tu contraseña?".', true);
+      return;
+    }
+    setFormBusy(true);
+    try {
+      var session = await waitForSession();
+      if (!session || typeof session.resetPassword !== 'function') throw new Error('El servicio de sesión no cargó. Recargá la página.');
+      await session.resetPassword(emailInput.value.trim());
+      setMessage('Si existe una cuenta con ese correo, te llegará un enlace para crear una nueva contraseña.', true);
+    } catch (error) {
+      setMessage(friendlyAuthError(error), false);
+    } finally {
+      setFormBusy(false);
+    }
   }
 
   async function handleGoogleLogin() {
@@ -267,7 +422,7 @@ RELACIÓN:
       console.warn('[Baqueano Auth] SDK de Firebase Auth no disponible; perfil oculto.');
       setPrivateSectionsHidden(true);
       buildPanel();
-      googleBtn.disabled = true;
+      setFormBusy(true);
       setMessage('No pudimos conectar con el servicio de acceso. Revisá tu conexión y recargá la página.', false);
       return;
     }

@@ -433,6 +433,12 @@
       return loadSession();
     },
 
+    // Repinta el estado de sesión en el menú. global-injector.js lo llama tras
+    // imponer el menú canónico, para no perder "Cerrar sesión" al reemplazarlo.
+    refreshNavbar: function() {
+      updateNavbar();
+    },
+
     saveUser: async function(userObj) {
       if (!userObj) return null;
       // 1. Guardar localmente para reactividad instantánea
@@ -567,6 +573,27 @@
           throw new Error('El formato del correo electrónico no es válido.');
         }
         throw error;
+      }
+    },
+
+    // Envía el correo de restablecimiento de contraseña de Firebase. Por
+    // privacidad responde igual exista o no la cuenta (no revela registros).
+    resetPassword: async function(email) {
+      ensureFirebaseInitialized();
+      if (!window.firebase || !window.firebase.auth) {
+        throw new Error('El servicio de autenticación no está disponible en este entorno.');
+      }
+      if (!email) throw new Error('Escribí tu correo para enviarte el enlace.');
+      try {
+        await window.firebase.auth().sendPasswordResetEmail(email.trim());
+      } catch (error) {
+        if (error.code === 'auth/invalid-email') {
+          throw new Error('El formato del correo electrónico no es válido.');
+        } else if (error.code === 'auth/too-many-requests') {
+          throw new Error('Demasiados intentos. Esperá unos minutos antes de reintentar.');
+        } else if (error.code !== 'auth/user-not-found') {
+          throw error;
+        }
       }
     },
 

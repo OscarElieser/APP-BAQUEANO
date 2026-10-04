@@ -2136,8 +2136,10 @@
         this.authorizedAdmins.some((adminEmail) => adminEmail.toLowerCase() === email);
 
       if (!isAuthorized) {
+        // Usuarios normales pueden tener sesión para navegar el portal público.
+        // Aquí solo se les niega el Ops Center: NO se cierra su sesión del sitio
+        // (antes signOut() los expulsaba de toda la web por abrir admin.html).
         console.warn(`[OpsAuth] Acceso denegado a usuario no autorizado: ${email}`);
-        window.firebase.auth().signOut();
         const feedbackEl = document.getElementById('loginFeedback');
         if (feedbackEl) {
           feedbackEl.className = 'login-feedback-alert error';
@@ -2147,7 +2149,9 @@
               <div><i class="fa-solid fa-lock"></i> <strong>Acceso Restringido</strong></div>
               <div style="font-size:0.82rem;color:var(--ops-text-secondary);">
                 La cuenta <code data-ops-denied-email></code> no cuenta con privilegios administrativos verificados en el Ops Center.
+                Tu sesión en el sitio sigue activa.
               </div>
+              <a href="index.html" style="font-size:0.82rem;font-weight:700;color:#F65E01;">← Volver al sitio</a>
             </div>`;
           // El correo se inserta como texto (no HTML) para impedir inyección.
           const deniedEmailEl = feedbackEl.querySelector('[data-ops-denied-email]');

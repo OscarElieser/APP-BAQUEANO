@@ -47,8 +47,8 @@
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/perfil-exact.css?v=20260927-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
-  <!-- Panel de acceso con Google (Firebase Auth). Ver js/auth-panel.js -->
-  <link rel="stylesheet" href="css/auth-panel.css?v=20261003-1">
+  <!-- Panel de acceso: Google o correo y contraseña (Firebase Auth). Ver js/auth-panel.js -->
+  <link rel="stylesheet" href="css/auth-panel.css?v=20261003-3">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20260928-nav-fix-6">
 
@@ -773,14 +773,14 @@
   🎯 POR QUÉ: el perfil no cargaba Firebase, así que no existía forma de iniciar sesión con Google.
   ⚙️ CÓMO: el SDK compat y firebase-config.js se cargan ANTES de navigation.js para que
      user-session.js (inyectado por navigation.js) se suscriba a onAuthStateChanged.
-  📦 QUÉ: auth-panel.js muestra "Continuar con Google" a visitantes y los datos reales al usuario.
+  📦 QUÉ: auth-panel.js muestra "Continuar con Google" y el acceso con correo a visitantes y los datos reales al usuario.
 -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="js/firebase-config.js?v=20261003-2"></script>
 <script src="js/navigation.js"></script>
 <script src="js/global-injector.js"></script>
-<script src="js/auth-panel.js?v=20261003-2" defer></script>
+<script src="js/auth-panel.js?v=20261003-3" defer></script>
 </body>
 </html>
 

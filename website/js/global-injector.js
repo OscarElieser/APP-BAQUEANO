@@ -4,7 +4,7 @@
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Garantizar que el 100% de las páginas del ecosistema BAQUEANO tengan:
-//   * El mismo navbar oficial con enlace a Admin / OPS Center
+//   * El mismo navbar oficial (el enlace al Ops Center solo aparece a cuentas autorizadas)
 //   * El mismo footer oficial con 5 columnas, redes sociales y sello Nicaragua Auténtica
 //   * Todos los botones interactivos funcionales (SOS, descarga APK, compartir)
 //   * Formularios de contacto consistentes con temática BAQUEANO
@@ -15,11 +15,12 @@
 // - Detecta si la página ya tiene navbar/footer oficiales; si no, los inyecta.
 // - Usa DOMContentLoaded + MutationObserver para tolerancia a race conditions.
 // - No modifica admin.html (protección explícita).
-// - El OPS Center Button se añade al menú "Más" del navbar en todas las páginas.
+// - Menú y footer se imponen SIEMPRE desde este archivo: una sola fuente para todo
+//   el portal público. admin.html (Ops Center) queda fuera y conserva el suyo.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES):
-// - injectGlobalNavbar(): Navbar oficial con mega-menú y botón OPS Center.
-// - injectGlobalFooter(): Footer oficial 5 columnas idéntico a mi-viaje.html.
+// - injectGlobalNavbar(): impone el menú único del portal (reemplaza copias locales).
+// - injectGlobalFooter(): impone el pie único de 5 columnas (mismo marcado que index.html).
 // - injectGlobalCSS(): Estilos necesarios si no están cargados.
 // - wireGlobalButtons(): Activa todos los botones genéricos del sitio.
 // - injectContactForm(): Reemplaza formularios genéricos por el formulario Baqueano.
@@ -210,18 +211,20 @@
   window.bqToast = bqToast;
 
   // ── Inyectar Navbar ───────────────────────────────────────────────────────
-  function injectGlobalNavbar() {
-    if (document.getElementById('mainNavbar')) return;
+  // 🎯 POR QUÉ: el propietario exige UN solo menú para todo el portal público
+  //    (el Ops Center tiene el suyo). Varias páginas traían copias antiguas en
+  //    su HTML: sin logo, con enlaces distintos y botones extra.
+  // ⚙️ CÓMO: se descarta cualquier menú que traiga la página y se coloca el
+  //    armazón canónico; navigation.js (buildGlobalMegaNavigation) lo llena con
+  //    los enlaces, el mega menú "Más" y las acciones (SOS, sesión, idioma).
+  //    Solo se conserva la clase bq-nav-over-video, que es de comportamiento
+  //    visual sobre héroes con video y no cambia el contenido.
+  // 📦 QUÉ: menú idéntico en todas las páginas, una sola vez en el documento.
+  var NAV_SELECTOR = '#mainNavbar, nav.main-navbar, nav.main-navbar-exact';
 
-    var legacyNav = document.querySelector('nav.main-navbar, nav.main-navbar-exact');
-    if (legacyNav) {
-      legacyNav.id = 'mainNavbar';
-      legacyNav.className = 'main-navbar-exact main-navbar';
-      legacyNav.setAttribute('role', 'navigation');
-      legacyNav.setAttribute('aria-label', 'Navegación principal');
-      legacyNav.innerHTML = bqNavbarHTML();
-      return;
-    }
+  function injectGlobalNavbar() {
+    var existing = Array.prototype.slice.call(document.querySelectorAll(NAV_SELECTOR));
+    var overVideo = existing.some(function (n) { return n.classList.contains('bq-nav-over-video'); });
 
     var legacyPageHeader = document.querySelector('.nav-404-header');
     if (legacyPageHeader) {
@@ -230,19 +233,25 @@
     }
 
     var nav = document.createElement('nav');
-    nav.className = 'main-navbar-exact main-navbar';
+    nav.className = 'main-navbar-exact main-navbar' + (overVideo ? ' bq-nav-over-video' : '');
     nav.id = 'mainNavbar';
     nav.setAttribute('role', 'navigation');
     nav.setAttribute('aria-label', 'Navegación principal');
     nav.innerHTML = bqNavbarHTML();
-    document.body.insertBefore(nav, document.body.firstChild);
+
+    if (existing.length) {
+      existing[0].replaceWith(nav);
+      existing.slice(1).forEach(function (n) { n.remove(); });
+    } else {
+      document.body.insertBefore(nav, document.body.firstChild);
+    }
     wireNavbarButtons(nav);
   }
 
   function bqNavbarHTML() {
     return '<div class="exact-container nav-inner">' +
       '<a href="index.html" class="exact-nav-brand navbar-brand-pill" aria-label="Baqueano Nicaragua — Inicio">' +
-        '<img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo">' +
+        '<img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="500" height="386">' +
         '<div class="exact-nav-brand-text navbar-brand-text">' +
           '<span class="exact-nav-title navbar-brand-title">BAQUEANO</span>' +
           '<span class="exact-nav-tagline navbar-brand-sub">NICARAGUA AUTÉNTICA</span>' +
@@ -251,100 +260,6 @@
       '<div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar"></div>' +
       '<div class="exact-nav-actions global-nav-actions"></div>' +
     '</div>';
-  }
-
-  // Sincroniza literalmente los dos componentes institucionales con index.html.
-  // POR QUÉ: evita que páginas heredadas mantengan versiones visuales distintas.
-  // CÓMO: obtiene el documento raíz, clona sus componentes y conserva el estado
-  // activo correspondiente a la página que el visitante está consultando.
-  // QUÉ: un solo menú y un solo footer para todo el portal público.
-  async function syncShellWithIndex() {
-    if (currentPage === 'index.html' || currentPage === 'admin.html') return;
-
-    var currentNav = document.querySelector('#mainNavbar, nav.main-navbar, nav.main-navbar-exact');
-    var currentFooter = document.querySelector('#siteFooter, .site-footer-exact, .bq-global-footer, footer');
-
-    var activeGroups = {
-      'destinos.html': 'destinos.html',
-      'departamento.html': 'destinos.html',
-      'mapa.html': 'destinos.html',
-      'experiencias.html': 'destinos.html',
-      'historia.html': 'historia.html',
-      'gastronomia.html': 'historia.html',
-      'musica.html': 'historia.html',
-      'ambiental.html': 'historia.html',
-      'baqueano-ai.html': 'baqueano-ai.html',
-      'baqueano-ia.html': 'baqueano-ai.html',
-      'mi-viaje.html': 'mi-viaje.html'
-    };
-    var activeHref = activeGroups[currentPage];
-
-    // Si la página ya tiene la barra y pie canónicos, actualizamos el estado sin descargar index.html
-    if (currentNav && currentNav.querySelector('.nav-inner, .nav-links-menu') && currentFooter) {
-      currentNav.querySelectorAll('.active').forEach(function (item) { item.classList.remove('active'); });
-      if (activeHref) {
-        var activeLink = currentNav.querySelector('a[href="' + activeHref + '"]');
-        if (activeLink) activeLink.classList.add('active');
-      } else {
-        var moreTrigger = currentNav.querySelector('.nav-dropdown-trigger, .exact-nav-dropdown-btn');
-        if (moreTrigger) moreTrigger.classList.add('active');
-      }
-      if (typeof buildGlobalMegaNavigation === 'function') buildGlobalMegaNavigation();
-      wireNavbarButtons(currentNav);
-      wireExistingSosButtons();
-      return;
-    }
-
-    try {
-      var response = await fetch('index.html', { cache: 'default' });
-      if (!response.ok) throw new Error('No se pudo cargar la interfaz raíz');
-
-      var source = new DOMParser().parseFromString(await response.text(), 'text/html');
-      var sourceNav = source.querySelector('#mainNavbar');
-      var sourceFooter = source.querySelector('#siteFooter');
-
-      if (sourceNav) {
-        var navClone = document.importNode(sourceNav, true);
-        navClone.querySelectorAll('.active').forEach(function (item) { item.classList.remove('active'); });
-
-        var activeGroups = {
-          'destinos.html': 'destinos.html',
-          'departamento.html': 'destinos.html',
-          'mapa.html': 'destinos.html',
-          'experiencias.html': 'destinos.html',
-          'historia.html': 'historia.html',
-          'gastronomia.html': 'historia.html',
-          'musica.html': 'historia.html',
-          'ambiental.html': 'historia.html',
-          'baqueano-ai.html': 'baqueano-ai.html',
-          'baqueano-ia.html': 'baqueano-ai.html',
-          'mi-viaje.html': 'mi-viaje.html'
-        };
-        var activeHref = activeGroups[currentPage];
-        if (activeHref) {
-          var activeLink = navClone.querySelector('a[href="' + activeHref + '"]');
-          if (activeLink) activeLink.classList.add('active');
-        } else {
-          var moreTrigger = navClone.querySelector('.nav-dropdown-trigger, .exact-nav-dropdown-btn');
-          if (moreTrigger) moreTrigger.classList.add('active');
-        }
-
-        if (currentNav) currentNav.replaceWith(navClone);
-        else document.body.insertBefore(navClone, document.body.firstChild);
-      }
-
-      if (sourceFooter) {
-        var footerClone = document.importNode(sourceFooter, true);
-        if (currentFooter) currentFooter.replaceWith(footerClone);
-        else document.body.appendChild(footerClone);
-      }
-
-      if (typeof buildGlobalMegaNavigation === 'function') buildGlobalMegaNavigation();
-      wireNavbarButtons(document.getElementById('mainNavbar'));
-      wireExistingSosButtons();
-    } catch (error) {
-      console.warn('[BaqueanoShell] Se conservó la interfaz local:', error);
-    }
   }
 
   function wireNavbarButtons(nav) {
@@ -375,106 +290,65 @@
     }
   }
 
-  // ── Inyectar Footer Oficial ───────────────────────────────────────────────
-  function injectGlobalFooter() {
-    // Si ya tiene footer oficial, no tocar
-    if (document.querySelector('.official-footer-exact, .bq-global-footer')) return;
+  // ── Footer único del portal ───────────────────────────────────────────────
+  // 🎯 POR QUÉ: convivían cinco diseños de pie (site-footer-exact, bq-global-footer,
+  //    official-footer-exact, site-footer-pro, footer-unified) y varias páginas
+  //    mostraban dos pies a la vez. El portal público debe tener uno solo.
+  // ⚙️ CÓMO: se retiran todos los pies institucionales que traiga la página y se
+  //    agrega el pie canónico (el mismo marcado de index.html, estilado por
+  //    css/pages/index-exact.css que injectGlobalCSS garantiza). No se tocan los
+  //    <footer> internos de tarjetas o artículos, solo los pies de sitio.
+  // 📦 QUÉ: un único pie de 5 columnas con barra de derechos en todas las páginas.
+  var FOOTER_SELECTOR = '#siteFooter, .site-footer-exact, .bq-global-footer, .official-footer-exact, ' +
+    '.main-footer, .site-footer-pro, .footer-unified, body > footer';
 
-    // Eliminar footer OLD si existe
-    var oldFooter = document.querySelector('.site-footer-exact, footer');
-    if (oldFooter) oldFooter.remove();
+  function injectGlobalFooter() {
+    document.querySelectorAll(FOOTER_SELECTOR).forEach(function (old) { old.remove(); });
 
     var footer = document.createElement('footer');
-    footer.className = 'bq-global-footer';
+    footer.className = 'site-footer-exact';
+    footer.id = 'siteFooter';
+    footer.setAttribute('role', 'contentinfo');
     footer.innerHTML = bqFooterHTML();
     document.body.appendChild(footer);
   }
 
-  function bqFooterHTML() {
-    return '<div class="bq-footer-inner">' +
-      '<div class="bq-footer-grid">' +
-        // Columna Marca
-        '<div class="bq-footer-brand">' +
-          '<a href="index.html" aria-label="Baqueano Nicaragua — Inicio">' +
-            '<img src="assets/logos/BAQUENO%20LOGO.png" alt="Baqueano" class="bq-footer-logo-icon">' +
-            '<div class="bq-footer-brand-text">' +
-              '<span class="bq-footer-brand-name">BAQUEANO</span>' +
-              '<span class="bq-footer-brand-sub">NICARAGUA AUTÉNTICA</span>' +
-            '</div>' +
-          '</a>' +
-          '<p class="bq-footer-tagline">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</p>' +
-          '<div class="bq-footer-socials">' +
-          '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
-            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
-            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
-            '<a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="bq-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
-          '</div>' +
-          '<img src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="bq-footer-autentica-badge">' +
-        '</div>' +
-        // Columna Explorá
-        '<div class="bq-footer-col">' +
-          '<h4>EXPLORÁ</h4><div class="bq-footer-accent"></div>' +
-          '<ul>' +
-            '<li><a href="index.html">Inicio</a></li>' +
-            '<li><a href="destinos.html">Destinos</a></li>' +
-            '<li><a href="mapa.html">Mapa Interactivo</a></li>' +
-            '<li><a href="experiencias.html">Experiencias</a></li>' +
-            '<li><a href="departamento.html">Departamentos</a></li>' +
-          '</ul>' +
-        '</div>' +
-        // Columna Cultura
-        '<div class="bq-footer-col">' +
-          '<h4>CULTURA</h4><div class="bq-footer-accent"></div>' +
-          '<ul>' +
-            '<li><a href="historia.html">Historia &amp; Memoria</a></li>' +
-            '<li><a href="gastronomia.html">Gastronomía Ancestral</a></li>' +
-            '<li><a href="musica.html">Son Sonoro Folk</a></li>' +
-            '<li><a href="ambiental.html">Custodia Ambiental</a></li>' +
-            '<li><a href="aliados.html">Red de Aliados</a></li>' +
-          '</ul>' +
-        '</div>' +
-        // Columna Comunidad
-        '<div class="bq-footer-col">' +
-          '<h4>COMUNIDAD</h4><div class="bq-footer-accent"></div>' +
-          '<ul>' +
-            '<li><a href="nosotros.html">Quiénes Somos</a></li>' +
-            '<li><a href="mi-negocio.html">Registrá tu Negocio</a></li>' +
-            '<li><a href="denuncias.html">Canal de Denuncias</a></li>' +
-            '<li><a href="perfil.html">Mi Perfil</a></li>' +
-            '<li><a href="mi-viaje.html">Mi Viaje</a></li>' +
-          '</ul>' +
-        '</div>' +
-        // Columna Legal
-        '<div class="bq-footer-col">' +
-          '<h4>LEGAL</h4><div class="bq-footer-accent"></div>' +
-          '<ul>' +
-            '<li><a href="terminos.html">Términos y Condiciones</a></li>' +
-            '<li><a href="privacidad.html">Política de Privacidad</a></li>' +
-            '<li><a href="cookies.html">Política de Cookies</a></li>' +
-            '<li><a href="aviso-legal.html">Aviso Legal</a></li>' +
-          '</ul>' +
-        '</div>' +
-      '</div>' +
-    '</div>' +
-    '<div class="bq-footer-bottom">' +
-      '<span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>' +
-      '<div class="bq-footer-stamp">' +
-        '<span style="font-size:.75rem;color:#475569">Hecho con ❤️ en Nicaragua</span>' +
-      '</div>' +
-    '</div>';
+  function bqFooterLinks(title, links) {
+    return '<div class="footer-nav-col"><h4>' + title + '</h4><div class="footer-accent-bar"></div><ul>' +
+      links.map(function (l) { return '<li><a href="' + l[0] + '">' + l[1] + '</a></li>'; }).join('') +
+      '</ul></div>';
   }
 
-  // ── Inyectar botón OPS Center FAB ─────────────────────────────────────────
-  function injectOPSButton() {
-    // Solo si la página no es admin.html y no existe ya
-    if (document.getElementById('bqOpsFab')) return;
-    var fab = document.createElement('a');
-    fab.id = 'bqOpsFab';
-    fab.href = 'admin.html';
-    fab.className = 'bq-ops-fab';
-    fab.title = 'OPS Center — Solo personal autorizado';
-    fab.innerHTML = '<i class="fa-solid fa-shield-halved"></i> OPS Center';
-    document.body.appendChild(fab);
+  function bqFooterHTML() {
+    return '<div class="exact-container"><div class="footer-top-grid">' +
+        '<div class="footer-brand-col">' +
+          '<a href="index.html" class="footer-logo-row" aria-label="Baqueano Nicaragua — Inicio">' +
+            '<img src="assets/logos/BAQUENO%20LOGO.png" alt="Baqueano" class="footer-logo-img" decoding="async" loading="lazy" width="21676" height="21967">' +
+            '<div class="footer-brand-text-block">' +
+              '<span class="footer-brand-title">BAQUEANO</span>' +
+              '<span class="footer-brand-subtitle">NICARAGUA AUTÉNTICA</span>' +
+            '</div>' +
+          '</a>' +
+          '<span class="footer-tagline-text">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</span>' +
+          '<div class="footer-social-row">' +
+            '<a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+            '<a href="https://www.facebook.com/share/1S71xwJKse/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+            '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
+            '<a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+          '</div>' +
+          '<div class="footer-badge-wrap">' +
+            '<img loading="lazy" decoding="async" src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="footer-autentica-badge" width="1983" height="793">' +
+          '</div>' +
+        '</div>' +
+        bqFooterLinks('EXPLORÁ', [['index.html', 'Inicio'], ['destinos.html', 'Destinos'], ['mapa.html', 'Mapa Interactivo'], ['experiencias.html', 'Experiencias'], ['departamento.html', 'Departamentos']]) +
+        bqFooterLinks('CULTURA', [['historia.html', 'Historia &amp; Memoria'], ['gastronomia.html', 'Gastronomía Ancestral'], ['musica.html', 'Son Sonoro Folk'], ['ambiental.html', 'Custodia Ambiental'], ['aliados.html', 'Red de Aliados']]) +
+        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
+        bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['aviso-legal.html', 'Aviso Legal']]) +
+      '</div></div>' +
+      '<div class="footer-bottom-bar"><div class="exact-container">' +
+        '<span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>' +
+        '<span>Hecho con <i class="fa-solid fa-heart" style="color: #EF4444;"></i> en Nicaragua</span>' +
+      '</div></div>';
   }
 
   // ── Modal SOS Global ───────────────────────────────────────────────────────
@@ -621,32 +495,6 @@
         }
       });
     });
-  }
-
-  // ── Actualizar footers OLD existentes ─────────────────────────────────────
-  function upgradeOldFooters() {
-    var oldFooter = document.querySelector('.site-footer-exact:not(.bq-global-footer)');
-    if (oldFooter) {
-      oldFooter.outerHTML = '<footer class="bq-global-footer">' + bqFooterHTML() + '</footer>';
-    }
-  }
-
-  // ── Actualizar navbars .main-navbar-exact para agregar botón OPS ──────────
-  function addOpsToExistingNavbar() {
-    // Si el navbar oficial ya está pero no tiene el link admin.html
-    var exactNav = document.querySelector('.main-navbar-exact, [id="mainNavbar"]');
-    if (!exactNav) return;
-    if (exactNav.querySelector('a[href="admin.html"]')) return; // ya tiene
-
-    // Buscar el dropdown del navbar y añadir el link
-    var dropdownMenu = exactNav.querySelector('.exact-dropdown-menu');
-    if (dropdownMenu) {
-      var adminLink = document.createElement('a');
-      adminLink.href = 'admin.html';
-      adminLink.className = 'exact-dropdown-item';
-      adminLink.innerHTML = '<i class="fa-solid fa-lock" style="color:#F65E01"></i> OPS Center <small style="color:#64748B;font-size:.7rem;display:block">Solo personal</small>';
-      dropdownMenu.appendChild(adminLink);
-    }
   }
 
   // ── Escape key para modales ────────────────────────────────────────────────
@@ -999,10 +847,8 @@
     removeGlobalSearchButtons();
     initInternalSiteSearch();
     injectGlobalNavbar();
-    upgradeOldFooters();
     injectGlobalFooter();
     injectSosModal();
-    addOpsToExistingNavbar();
     wireNavbarButtons(null);
     wireExistingSosButtons();
     wireGlobalButtons();
@@ -1011,7 +857,11 @@
     if (typeof buildGlobalMegaNavigation === 'function') {
       buildGlobalMegaNavigation();
     }
-    await syncShellWithIndex();
+    // El menú se acaba de reconstruir: repintar el estado de sesión (Cerrar
+    // sesión, enlace al Ops Center solo para cuentas autorizadas).
+    if (window.BaqueanoSession && typeof window.BaqueanoSession.refreshNavbar === 'function') {
+      try { window.BaqueanoSession.refreshNavbar(); } catch (e) { console.warn('[BaqueanoShell] Sesión no repintada:', e); }
+    }
     removeGlobalSearchButtons();
     normalizeFooterBoundary();
     protectFormsWithHoneypot();

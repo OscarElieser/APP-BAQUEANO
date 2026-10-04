@@ -403,9 +403,10 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
   outline: 2px solid #F65E01 !important;
   outline-offset: 2px !important;
 }
-
-/* TABLET PEQUEÑA (769px a 920px): comprimir espaciado sin romper menú horizontal */
-@media (max-width: 920px) and (min-width: 769px) {
+/* PANTALLA INTERMEDIA (961px a 1000px): comprimir espaciado sin romper el menú horizontal.
+   Por debajo de 961px el menú pasa al cajón con hamburguesa (mismo corte que styles.css),
+   así nunca queda una franja de anchos sin menú visible ni botón para abrirlo. */
+@media (max-width: 1000px) and (min-width: 961px) {
   #mainNavbar .exact-container, #mainNavbar .nav-inner { padding: 0 16px !important; }
   #mainNavbar .exact-nav-brand { margin-right: 12px !important; }
   #mainNavbar .exact-nav-link, #mainNavbar .nav-links-menu > a,
@@ -419,7 +420,7 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
 }
 
 /* MOVIL (Patrón 21st MCP: Off-Canvas Drawer con Backdrop Blur & Touch Ergonomics) */
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   #mainNavbar .exact-nav-mobile-toggle,
   #mainNavbar .mobile-nav-toggle { display: inline-flex !important; }
 
@@ -550,7 +551,7 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
       editorial con columnas claramente delimitadas.
    📦 QUÉ: acabado de escritorio, transición compacta y drawer móvil táctil.
    ============================================================================ */
-@media (min-width: 769px) {
+@media (min-width: 961px) {
   #mainNavbar {
     top: 12px !important;
     width: min(1400px, calc(100% - 32px)) !important;
@@ -694,7 +695,7 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
   outline-offset: 3px !important;
 }
 
-@media (max-width: 1100px) and (min-width: 769px) {
+@media (max-width: 1100px) and (min-width: 961px) {
   #mainNavbar { width: calc(100% - 20px) !important; }
   #mainNavbar .exact-container, #mainNavbar .nav-inner { padding-inline: 12px !important; }
   #mainNavbar .exact-nav-brand { margin-right: 8px !important; padding-right: 10px !important; }
@@ -705,7 +706,7 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
   #mainNavbar .global-favs, #mainNavbar .navbar-favs-btn { display: none !important; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   #mainNavbar {
     background: linear-gradient(135deg, #09253A, #0C3444) !important;
     border-bottom-color: rgba(244,230,193,0.12) !important;
