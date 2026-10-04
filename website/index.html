@@ -969,73 +969,12 @@
           <div class="title-group">
             <h2>Testimonios</h2>
           </div>
-          <a href="historia.html" class="section-header-link">Ver más historias <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="testimonios.html" class="section-header-link">Ver más historias <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
-        <div class="testimonials-row-exact">
-          <!-- 1. Laura M. -->
-          <div class="test-card-exact">
-            <div class="test-stars-row">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <p class="test-quote-text">
-              &ldquo;Una experiencia increíble. Conocimos lugares que no están en los tours tradicionales.&rdquo;
-            </p>
-            <div class="test-author-row">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Laura M." class="test-avatar-img">
-              <div class="test-author-info">
-                <h4>Laura M.</h4>
-                <span>Turista · Costa Rica</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. Carlos R. -->
-          <div class="test-card-exact">
-            <div class="test-stars-row">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <p class="test-quote-text">
-              &ldquo;Todo fue muy fácil de planificar. La app nos ayudó a descubrir lugares auténticos.&rdquo;
-            </p>
-            <div class="test-author-row">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Carlos R." class="test-avatar-img" width="678" height="452">
-              <div class="test-author-info">
-                <h4>Carlos R.</h4>
-                <span>Viajero · Guatemala</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3. Ana P. -->
-          <div class="test-card-exact">
-            <div class="test-stars-row">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <p class="test-quote-text">
-              &ldquo;Increíble la calidez de la gente y la belleza de Nicaragua. ¡Volveremos!&rdquo;
-            </p>
-            <div class="test-author-row">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Villa Vista Redonda (Emerald Coast).webp" alt="Ana P." class="test-avatar-img" width="818" height="540">
-              <div class="test-author-info">
-                <h4>Ana P.</h4>
-                <span>Turista · El Salvador</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Experiencias reales de la comunidad (js/home-community.js → Edge Function
+             baqueano-community). Mismo sistema que testimonios.html: sin reseñas de ejemplo. -->
+        <div class="testimonials-row-exact" data-community-feed aria-live="polite" aria-busy="true"></div>
       </div>
     </section>
 
@@ -1537,6 +1476,9 @@
 <script src="js/tres-pilares.js?v=20261001-pilares-1"></script>
 <script src="js/navigation.js?v=20261004-menu-2"></script>
 <script src="js/global-injector.js"></script>
+<!-- Testimonios de la portada = comunidad real (misma fuente que testimonios.html). -->
+<script defer src="js/community-api.js?v=20261004-1"></script>
+<script defer src="js/home-community.js?v=20261004-1"></script>
 </body>
 
 </html>

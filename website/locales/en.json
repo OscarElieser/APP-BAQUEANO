@@ -415,6 +415,8 @@
     "justNow": "just now",
     "destLead": "Real experiences from the BAQUEANO community, reviewed by our team.",
     "destEmpty": "No one has shared an experience at this destination yet. You could be the first!",
-    "destSeeAll": "See all experiences"
+    "destSeeAll": "See all experiences",
+    "comment": "Comment",
+    "communityTraveler": "Community traveler"
   }
 }

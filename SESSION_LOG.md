@@ -3948,3 +3948,9 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - ⚙️ **CÓMO:** localizar todo lo relacionado con "hackathon" en el repo y en Supabase/Firestore; entender qué formulario existe allí antes de proponer la unificación.
 - 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
 - **Aclaración del propietario (captura):** "a esta parte se va a unir" → la sección **"Testimonios"** de la portada (tarjetas Laura M. / Carlos R. / Ana P., botones ♡ y Comentar, enlace "Ver más historias") debe ser la misma comunidad de `testimonios.html`: un solo sistema con experiencias reales.
+- **Avance (unificación portada ↔ comunidad):**
+  - `index.html` sección "Testimonios": eliminadas las 3 reseñas de ejemplo fijas (Laura M., Carlos R., Ana P.); "Ver más historias" ahora va a `testimonios.html` (antes `historia.html`).
+  - Nuevo `js/home-community.js`: muestra hasta 3 experiencias aprobadas reales (`list` de `baqueano-community`), ♡ = reacción real con sesión (sin sesión abre la experiencia para iniciar sesión), "Comentar" abre la experiencia con sus comentarios, tarjeta "Compartí tu experiencia" cuando hay menos de 3 (o si el servicio falla). Estilos en `css/pages/index-exact.css` (2 columnas ≤900 px, 1 columna ≤600 px).
+  - `js/platform-enhancements.js`: retirado `initTestimonials` (comentarios y "me gusta" guardados solo en localStorage, invisibles para el resto); versión del script subida en `global-injector.js`.
+  - i18n: `community.comment` y `community.communityTraveler` en 6 idiomas; VERSION del catálogo `2026.10.04-comunidad-2`.
+  - Pruebas: E2E local 17/17 (con publicaciones, vacía, servicio caído; sin reseñas de ejemplo, sin HTML inyectado, sin scroll horizontal, ♡ sin sesión → experiencia); build Hostinger + verificación + smoke OK.
