@@ -19,6 +19,7 @@
     "test:shell": "node scripts/global-shell.test.mjs",
     "test:i18n": "node scripts/validate-i18n.mjs",
     "i18n:audit": "node scripts/i18n-audit.mjs",
+    "i18n:pages": "node scripts/audit-i18n-pages.mjs",
     "test:i18n:browser": "node scripts/i18n-browser.test.mjs",
     "audit:visual": "node scripts/visual-audit.mjs"
   },
