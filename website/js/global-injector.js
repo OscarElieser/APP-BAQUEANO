@@ -18,7 +18,7 @@
 //   `baqueano:shell-ready`, y navigation.js monta UNA vez el contenido y los
 //   controles del menú; user-session.js pinta el estado de sesión y el rol.
 // - Página pública nueva: basta con incluir, al final del <body>,
-//     <script src="js/navigation.js"></script>
+//     <script src="js/navigation.js?v=20261004-menu-2"></script>
 //     <script src="js/global-injector.js"></script>
 //   No hay que copiar menú, pie, idioma ni sesión.
 //
@@ -59,7 +59,7 @@
       { id: 'bq-modules',   href: 'css/modules.css' },
       { id: 'bq-index-ui',  href: 'css/pages/index-exact.css?v=20260927-exact-1' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
-      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20260929-v10-final' },
+      { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20261004-menu-2' },
       { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20260930-1' },
       { id: 'bq-accessibility', href: 'css/accessibility.css?v=20260930-1' },
       { 
@@ -72,7 +72,7 @@
       // pide Google Fonts en su <head>, no se repite la petición.
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
-      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261003-3' },
+      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261004-menu-1' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
       { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261003-16' }
     ];
@@ -810,7 +810,7 @@
     }
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20261001-i18n-2';
+      languageScript.src = 'js/global-language.js?v=20261004-menu-1';
       languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);

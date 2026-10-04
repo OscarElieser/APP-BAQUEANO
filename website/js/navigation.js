@@ -32,6 +32,297 @@
 let currentGpsCoords = "Ubicación aún no disponible";
 
 // ============================================================================
+// 🧭 MENÚ GLOBAL — FUENTE ÚNICA DE VERDAD
+// 🎯 POR QUÉ: el propietario pide cinco grupos (Inicio, Explorar, Cultura,
+//    Comunidad, Cuenta y plataforma), cada uno con su propio desplegable en
+//    escritorio y en acordeón dentro del panel lateral en celular, sin perder
+//    ninguna ruta existente (BAQUI, Mi Viaje, Crónicas y Aviso legal quedan
+//    dentro de su grupo natural).
+// ⚙️ CÓMO: estos datos generan el HTML de escritorio y de celular a la vez.
+//    Cada texto lleva su clave `menu.*` (locales/*.json) para que
+//    global-language.js lo traduzca. Formato de ítem:
+//    [href, ícono, clave, texto, descripción, páginas extra que lo activan].
+// 📦 QUÉ: cambiar el menú en este bloque lo cambia en las 28 páginas públicas.
+//    El Ops Center (admin.html) conserva su propio menú.
+// ============================================================================
+const BQ_MENU_GROUPS = [
+  {
+    id: 'explore', key: 'explore', label: 'Explorar', icon: 'fa-solid fa-compass',
+    sections: [
+      { key: 'discover', label: 'Descubrí', items: [
+        ['departamento.html', 'fa-regular fa-map', 'departments', 'Departamentos', 'Los 17 territorios de Nicaragua'],
+        ['destinos.html', 'fa-solid fa-mountain-sun', 'destinations', 'Destinos', 'Volcanes, playas, reservas y ciudades', ['destino.html']],
+        ['mapa.html', 'fa-solid fa-map-location-dot', 'map', 'Mapa', 'Ubicá lugares y servicios'],
+        ['experiencias.html', 'fa-solid fa-person-hiking', 'experiences', 'Experiencias', 'Senderos, tours y vivencias comunitarias']
+      ] },
+      { key: 'plan', label: 'Planificá', items: [
+        ['mi-viaje.html', 'fa-solid fa-route', 'trip', 'Mi Viaje', 'Días, presupuesto y paradas de tu ruta'],
+        ['baqueano-ia.html', 'fa-solid fa-wand-magic-sparkles', 'baqui', 'BAQUI', 'Armá tu ruta y consultá el clima', ['baqueano-ai.html']]
+      ] }
+    ]
+  },
+  {
+    id: 'culture', key: 'culture', label: 'Cultura', icon: 'fa-solid fa-landmark',
+    sections: [
+      { items: [
+        ['historia.html', 'fa-regular fa-file-lines', 'history', 'Historia', 'Memoria, personajes y patrimonio'],
+        ['gastronomia.html', 'fa-solid fa-utensils', 'gastronomy', 'Gastronomía', 'Platos, bebidas y tradiciones'],
+        ['musica.html', 'fa-solid fa-music', 'music', 'Música', 'Archivo sonoro, artistas e instrumentos'],
+        ['ambiental.html', 'fa-solid fa-leaf', 'environmental', 'Ambiental', 'Áreas protegidas y buenas prácticas'],
+        ['cronicas.html', 'fa-regular fa-newspaper', 'chronicles', 'Crónicas', 'Relatos y reportajes de Nicaragua']
+      ] }
+    ]
+  },
+  {
+    id: 'community', key: 'community', label: 'Comunidad', icon: 'fa-solid fa-people-group',
+    sections: [
+      { items: [
+        ['aliados.html', 'fa-regular fa-handshake', 'allies', 'Aliados', 'Organizaciones que impulsan el turismo'],
+        ['mi-negocio.html', 'fa-solid fa-shop', 'business', 'Mi Negocio', 'Registrá tu emprendimiento turístico'],
+        ['testimonios.html', 'fa-regular fa-comments', 'testimonials', 'Testimonios', 'Experiencias reales de viajeros'],
+        ['denuncias.html', 'fa-solid fa-shield-halved', 'complaints', 'Denuncia', 'Reporte confidencial ambiental']
+      ] }
+    ]
+  },
+  {
+    id: 'account', key: 'account', shortKey: 'accountShort', label: 'Cuenta y plataforma', short: 'Cuenta',
+    icon: 'fa-solid fa-user-gear', wide: true,
+    sections: [
+      { key: 'yourAccount', label: 'Tu cuenta', items: [
+        ['perfil.html', 'fa-regular fa-user', 'profile', 'Perfil'],
+        ['perfil.html#reservas', 'fa-regular fa-calendar-days', 'reservations', 'Reservas'],
+        ['favoritos.html', 'fa-regular fa-heart', 'favorites', 'Favoritos']
+      ] },
+      { key: 'platform', label: 'Plataforma', items: [
+        ['ayuda.html', 'fa-regular fa-circle-question', 'help', 'Ayuda'],
+        ['nosotros.html', 'fa-solid fa-people-group', 'about', 'Nosotros'],
+        ['terminos.html', 'fa-regular fa-file-lines', 'terms', 'Términos'],
+        ['privacidad.html', 'fa-solid fa-user-shield', 'privacy', 'Privacidad'],
+        ['cookies.html', 'fa-solid fa-cookie-bite', 'cookies', 'Cookies'],
+        ['aviso-legal.html', 'fa-solid fa-scale-balanced', 'legalNotice', 'Aviso legal', '', ['legal.html']]
+      ] }
+    ]
+  }
+];
+
+function bqMenuItemIsCurrent(href, extra, current) {
+  const [file, hash] = href.split('#');
+  if (hash) return file === current && window.location.hash === '#' + hash;
+  return file === current || (Array.isArray(extra) && extra.includes(current));
+}
+
+function bqRenderGlobalMenu(current) {
+  const esc = (value) => String(value).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const homeCurrent = current === 'index.html' || current === '';
+  let html = `
+      <div class="bq-drawer-head">
+        <a href="index.html" class="bq-drawer-brand" aria-label="Baqueano Nicaragua — Inicio" data-i18n-aria-label="nav.brandAria">
+          <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="" width="500" height="386" decoding="async">
+          <span><strong class="notranslate">BAQUEANO</strong><small>NICARAGUA AUTÉNTICA</small></span>
+        </a>
+        <button type="button" class="bq-drawer-close" data-bq-close-drawer aria-label="Cerrar menú de navegación" data-i18n-aria-label="menu.closeMenu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <a href="index.html" class="bq-menu-home exact-nav-link${homeCurrent ? ' active' : ''}"${homeCurrent ? ' aria-current="page"' : ''}>
+        <i class="fa-solid fa-house bq-menu-trigger-icon" aria-hidden="true"></i><span data-i18n="menu.home">Inicio</span>
+      </a>`;
+
+  BQ_MENU_GROUPS.forEach((group) => {
+    const groupCurrent = group.sections.some((s) => s.items.some((i) => bqMenuItemIsCurrent(i[0], i[5], current)));
+    const triggerId = `bqMenuTrigger-${group.id}`;
+    const panelId = `bqMenuPanel-${group.id}`;
+    const label = group.short
+      ? `<span class="bq-menu-label-full" data-i18n="menu.${group.key}">${esc(group.label)}</span><span class="bq-menu-label-short" data-i18n="menu.${group.shortKey}">${esc(group.short)}</span>`
+      : `<span data-i18n="menu.${group.key}">${esc(group.label)}</span>`;
+    html += `
+      <div class="bq-menu-group${groupCurrent ? ' is-current' : ''}${group.wide ? ' is-wide' : ''}" data-group="${group.id}">
+        <button type="button" class="bq-menu-trigger${groupCurrent ? ' active' : ''}" id="${triggerId}" aria-expanded="false" aria-controls="${panelId}">
+          <i class="${group.icon} bq-menu-trigger-icon" aria-hidden="true"></i>${label}<i class="fa-solid fa-chevron-down bq-menu-caret" aria-hidden="true"></i>
+        </button>
+        <div class="bq-menu-panel" id="${panelId}" role="region" aria-labelledby="${triggerId}" hidden>`;
+    group.sections.forEach((section) => {
+      html += `
+          <div class="bq-menu-section">${section.label ? `<p class="bq-menu-section-title" data-i18n="menu.${section.key}">${esc(section.label)}</p>` : ''}
+            <ul class="bq-menu-list">`;
+      section.items.forEach(([href, icon, key, text, desc, extra]) => {
+        const isCurrent = bqMenuItemIsCurrent(href, extra, current);
+        html += `
+              <li><a class="bq-menu-item${isCurrent ? ' active' : ''}" href="${esc(href)}"${isCurrent ? ' aria-current="page"' : ''}>
+                <span class="bq-menu-item-icon" aria-hidden="true"><i class="${icon}"></i></span>
+                <span class="bq-menu-item-text"><strong data-i18n="menu.${key}">${esc(text)}</strong>${desc ? `<small data-i18n="menu.${key}Desc">${esc(desc)}</small>` : ''}</span>
+              </a></li>`;
+      });
+      html += `
+            </ul>
+          </div>`;
+    });
+    if (group.id === 'account') {
+      // Solo se muestra a admin/super_admin verificados en vivo (user-session.js);
+      // admin.html vuelve a verificar el rol y las reglas protegen los datos.
+      html += `
+          <a class="bq-menu-item bq-menu-admin global-admin-link" href="admin.html" hidden aria-hidden="true" tabindex="-1">
+            <span class="bq-menu-item-icon" aria-hidden="true"><i class="fa-solid fa-satellite-dish"></i></span>
+            <span class="bq-menu-item-text"><strong data-i18n="menu.admin">Admin / Ops Center</strong><small data-i18n="menu.staffOnly">Solo personal</small></span>
+          </a>`;
+    }
+    html += `
+        </div>
+      </div>`;
+  });
+
+  html += `
+      <div class="bq-drawer-tools">
+        <p class="bq-menu-section-title" data-i18n="menu.session">Tu sesión</p>
+        <div class="bq-drawer-account" data-bq-account-drawer></div>
+        <div class="bq-drawer-row">
+          <button type="button" class="global-language navbar-lang-pill bq-drawer-lang" aria-label="Cambiar idioma"><i class="fa-solid fa-globe" aria-hidden="true"></i><span>ES</span></button>
+          <button type="button" class="bq-drawer-sos" data-bq-close-drawer onclick="openSosModal(event)"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i> SOS · Emergencias</button>
+        </div>
+      </div>`;
+  return html;
+}
+
+// ============================================================================
+// Controlador de grupos (escritorio = desplegables; celular = acordeón)
+// 🎯 POR QUÉ: un único controlador por documento para los cinco grupos; antes
+//    había varios sobre el mismo botón y se anulaban.
+// ⚙️ CÓMO: patrón de "divulgación" accesible (botón + aria-expanded +
+//    aria-controls + panel con hidden). Solo un grupo abierto a la vez.
+//    Escritorio con puntero fino: abre al pasar el mouse (con demora) y con
+//    clic; teclado: Enter/Espacio, ↓ entra al panel, ↑/↓/Inicio/Fin recorren,
+//    Esc cierra y devuelve el foco; salir con Tab cierra. Clic fuera cierra.
+// 📦 QUÉ: bqSetMenuGroup(), bqCloseMenuGroups(), bqInitMenuGroups().
+// ============================================================================
+const BQ_MENU_DRAWER_QUERY = window.matchMedia('(max-width: 960px)');
+const BQ_MENU_HOVER_QUERY = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
+
+function bqClampMenuPanel(panel) {
+  if (!panel || BQ_MENU_DRAWER_QUERY.matches) return;
+  panel.style.setProperty('--bq-panel-shift', '0px');
+  const rect = panel.getBoundingClientRect();
+  const margin = 12;
+  const viewport = document.documentElement.clientWidth;
+  let shift = 0;
+  if (rect.right > viewport - margin) shift = viewport - margin - rect.right;
+  if (rect.left + shift < margin) shift = margin - rect.left;
+  panel.style.setProperty('--bq-panel-shift', `${Math.round(shift)}px`);
+}
+
+function bqMenuGroups() {
+  return Array.from(document.querySelectorAll('#navLinksMenu .bq-menu-group'));
+}
+
+function bqSetMenuGroup(group, open, options = {}) {
+  if (!group) return;
+  const trigger = group.querySelector('.bq-menu-trigger');
+  const panel = group.querySelector('.bq-menu-panel');
+  if (!trigger || !panel) return;
+  if (open) bqMenuGroups().forEach((other) => { if (other !== group) bqSetMenuGroup(other, false); });
+  group.classList.toggle('is-open', open);
+  trigger.setAttribute('aria-expanded', String(open));
+  panel.hidden = !open;
+  if (open) {
+    bqClampMenuPanel(panel);
+    if (options.focusFirst) {
+      const first = panel.querySelector('a[href]:not([hidden])');
+      if (first) first.focus();
+    }
+  } else if (options.returnFocus) {
+    trigger.focus();
+  }
+}
+
+function bqCloseMenuGroups(exceptGroup) {
+  bqMenuGroups().forEach((group) => { if (group !== exceptGroup) bqSetMenuGroup(group, false); });
+}
+
+function bqInitMenuGroups(navMenu) {
+  if (!navMenu || navMenu.dataset.bqGroupsWired === 'true') return;
+  navMenu.dataset.bqGroupsWired = 'true';
+  const hoverTimers = new WeakMap();
+
+  navMenu.addEventListener('click', (event) => {
+    const trigger = event.target.closest('.bq-menu-trigger');
+    if (!trigger || !navMenu.contains(trigger)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const group = trigger.closest('.bq-menu-group');
+    // Si el mouse lo acaba de abrir, el clic que sigue no debe cerrarlo.
+    const justHovered = BQ_MENU_HOVER_QUERY.matches && Date.now() - (Number(group.dataset.hoverAt) || 0) < 600;
+    bqSetMenuGroup(group, justHovered || !group.classList.contains('is-open'));
+  });
+
+  navMenu.querySelectorAll('.bq-menu-group').forEach((group) => {
+    group.addEventListener('mouseenter', () => {
+      if (!BQ_MENU_HOVER_QUERY.matches) return;
+      clearTimeout(hoverTimers.get(group));
+      hoverTimers.set(group, setTimeout(() => {
+        if (!group.classList.contains('is-open')) group.dataset.hoverAt = String(Date.now());
+        bqSetMenuGroup(group, true);
+      }, 90));
+    });
+    group.addEventListener('mouseleave', () => {
+      if (!BQ_MENU_HOVER_QUERY.matches) return;
+      clearTimeout(hoverTimers.get(group));
+      hoverTimers.set(group, setTimeout(() => bqSetMenuGroup(group, false), 220));
+    });
+    // En escritorio, al salir del grupo con Tab se cierra su panel.
+    group.addEventListener('focusout', (event) => {
+      if (BQ_MENU_DRAWER_QUERY.matches) return;
+      if (event.relatedTarget && group.contains(event.relatedTarget)) return;
+      if (!event.relatedTarget) return;
+      bqSetMenuGroup(group, false);
+    });
+  });
+
+  navMenu.addEventListener('keydown', (event) => {
+    const group = event.target.closest('.bq-menu-group');
+    if (!group) return;
+    const trigger = group.querySelector('.bq-menu-trigger');
+    const panel = group.querySelector('.bq-menu-panel');
+    const items = Array.from(panel.querySelectorAll('a[href]:not([hidden])'));
+    const onTrigger = event.target === trigger;
+    if (event.key === 'Escape' && group.classList.contains('is-open')) {
+      event.preventDefault();
+      event.stopPropagation();
+      bqSetMenuGroup(group, false, { returnFocus: true });
+      return;
+    }
+    if (onTrigger && event.key === 'ArrowDown') {
+      event.preventDefault();
+      bqSetMenuGroup(group, true, { focusFirst: true });
+      return;
+    }
+    if (onTrigger || !items.length) return;
+    const index = items.indexOf(document.activeElement);
+    let next = -1;
+    if (event.key === 'ArrowDown') next = (index + 1) % items.length;
+    else if (event.key === 'ArrowUp') next = index <= 0 ? items.length - 1 : index - 1;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = items.length - 1;
+    if (next >= 0) {
+      event.preventDefault();
+      items[next].focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (BQ_MENU_DRAWER_QUERY.matches) return;
+    if (!event.target.closest || !event.target.closest('#navLinksMenu .bq-menu-group')) bqCloseMenuGroups();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !BQ_MENU_DRAWER_QUERY.matches) bqCloseMenuGroups();
+  });
+  const onLayoutChange = () => bqCloseMenuGroups();
+  if (BQ_MENU_DRAWER_QUERY.addEventListener) BQ_MENU_DRAWER_QUERY.addEventListener('change', onLayoutChange);
+  else if (BQ_MENU_DRAWER_QUERY.addListener) BQ_MENU_DRAWER_QUERY.addListener(onLayoutChange);
+  window.addEventListener('resize', () => {
+    const open = document.querySelector('#navLinksMenu .bq-menu-group.is-open .bq-menu-panel');
+    if (open) bqClampMenuPanel(open);
+  }, { passive: true });
+}
+
+
+// ============================================================================
 // 🎯 POR QUÉ: mantener un único orden de navegación en todo el portal.
 // ⚙️ CÓMO: normaliza la barra existente antes de activar sus controladores.
 // 📦 QUÉ: cinco accesos principales y un mega menú de cuatro columnas.
@@ -47,7 +338,7 @@ function buildGlobalMegaNavigation() {
   }
   if (!document.querySelector('link[data-global-mega-nav]')) {
     const style = document.createElement('link');
-    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20260929-v10-final'; style.dataset.globalMegaNav = 'true';
+    style.rel = 'stylesheet'; style.href = 'css/navigation-mega.css?v=20261004-menu-2'; style.dataset.globalMegaNav = 'true';
     document.head.appendChild(style);
   }
 
@@ -56,69 +347,9 @@ function buildGlobalMegaNavigation() {
     navMenu.dataset.globalMegaReady = 'true';
 
     const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    const activeClass = (files) => files.includes(current) ? ' active' : '';
-
-    navMenu.innerHTML = `
-      <a href="index.html" class="exact-nav-link${activeClass(['index.html',''])}" role="menuitem"><span class="nav-label">Inicio</span></a>
-      <a href="destinos.html" class="exact-nav-link${activeClass(['destinos.html','departamento.html','mapa.html','experiencias.html'])}" role="menuitem"><span class="nav-label">Explorar</span></a>
-      <a href="historia.html" class="exact-nav-link${activeClass(['historia.html','gastronomia.html','musica.html','ambiental.html'])}" role="menuitem"><span class="nav-label">Cultura</span></a>
-      <a href="baqueano-ia.html" class="exact-nav-link${activeClass(['baqueano-ia.html','baqueano-ai.html'])}" role="menuitem"><span class="nav-label">BAQUI</span></a>
-      <a href="mi-viaje.html" class="exact-nav-link${activeClass(['mi-viaje.html'])}" role="menuitem"><span class="nav-label">Mi Viaje</span></a>
-      <div class="nav-dropdown global-more-dropdown" id="navDropdownGlobalMore" role="none">
-        <button class="nav-dropdown-trigger exact-nav-dropdown-btn${activeClass(['aliados.html','mi-negocio.html','denuncias.html','perfil.html','favoritos.html','ayuda.html','nosotros.html','terminos.html','privacidad.html','cookies.html','aviso-legal.html','admin.html'])}" id="btnGlobalMoreTrigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="globalMegaMenu" role="menuitem">
-          <span>Más</span> <i class="fa-solid fa-chevron-down" style="font-size:0.72rem;margin-left:2px"></i>
-        </button>
-        <div class="nav-dropdown-menu global-mega-menu exact-dropdown-menu" id="globalMegaMenu" role="menu">
-          <!-- 1. EXPLORAR -->
-          <section class="global-mega-column explore">
-            <h2><i class="fa-solid fa-location-dot"></i> Explorar</h2>
-            <a href="departamento.html"><i class="fa-regular fa-map"></i> Departamentos</a>
-            <a href="destinos.html"><i class="fa-solid fa-mountain-sun"></i> Destinos</a>
-            <a href="mapa.html"><i class="fa-regular fa-map"></i> Mapa</a>
-            <a href="experiencias.html"><i class="fa-solid fa-person-hiking"></i> Experiencias</a>
-          </section>
-
-          <!-- 2. CULTURA -->
-          <section class="global-mega-column culture">
-            <h2><i class="fa-solid fa-landmark"></i> Cultura</h2>
-            <a href="historia.html"><i class="fa-regular fa-file-lines"></i> Historia</a>
-            <a href="gastronomia.html"><i class="fa-solid fa-utensils"></i> Gastronomía</a>
-            <a href="musica.html"><i class="fa-solid fa-music"></i> Música</a>
-            <a href="ambiental.html"><i class="fa-regular fa-leaf"></i> Ambiental</a>
-          </section>
-
-          <!-- 3. COMUNIDAD -->
-          <section class="global-mega-column community">
-            <h2><i class="fa-solid fa-people-group"></i> Comunidad</h2>
-            <a href="aliados.html"><i class="fa-regular fa-handshake"></i> Aliados</a>
-            <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i> Mi Negocio</a>
-            <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i> Denuncia</a>
-          </section>
-
-          <!-- 4. CUENTA Y PLATAFORMA -->
-          <section class="global-mega-column account">
-            <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
-            <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
-            <a href="perfil.html#reservas"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
-            <a href="favoritos.html"><i class="fa-regular fa-heart"></i> Favoritos</a>
-            <a href="ayuda.html"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
-            <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
-            <a href="terminos.html"><i class="fa-regular fa-file-lines"></i> Términos</a>
-            <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
-            <a href="cookies.html"><i class="fa-solid fa-cookie-bite"></i> Cookies</a>
-            <a class="global-admin-link" href="admin.html" hidden aria-hidden="true"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
-          </section>
-        </div>
-      </div>
-      <!-- Herramientas del cajón móvil (≤960 px): cuenta, idioma y SOS, que en
-           celular no caben en la barra. En escritorio están ocultas. -->
-      <div class="bq-drawer-tools" role="none">
-        <div class="bq-drawer-account" data-bq-account-drawer></div>
-        <div class="bq-drawer-row">
-          <button type="button" class="global-language navbar-lang-pill bq-drawer-lang" aria-label="Cambiar idioma"><i class="fa-solid fa-globe" aria-hidden="true"></i><span>ES</span></button>
-          <button type="button" class="bq-drawer-sos" data-bq-close-drawer onclick="openSosModal(event)"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i> SOS · Emergencias</button>
-        </div>
-      </div>`;
+    // Navegación por divulgación (botones + paneles), no "menubar".
+    navMenu.removeAttribute('role');
+    navMenu.innerHTML = bqRenderGlobalMenu(current);
   }
 
   // Eliminar divisor vertical previo si existiese
@@ -133,81 +364,12 @@ function buildGlobalMegaNavigation() {
       <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
       <div class="bq-account-slot" data-bq-account><a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html" aria-label="Iniciar sesión"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span></a></div>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>
-      <button class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <button class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú de navegación" data-i18n-aria-label="menu.openMenu" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     `;
   }
 
-  // ─── Control Interactivo del Mega Menú (Inspirado en 21st MCP Mega Menu Navbar) ───
-  const moreDropdown = document.getElementById('navDropdownGlobalMore');
-  const moreBtn = document.getElementById('btnGlobalMoreTrigger');
-  const megaMenu = document.getElementById('globalMegaMenu');
-  const desktopHoverQuery = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
-  let closeTimer = null;
-  let hoverOpenedAt = 0;
-
-  if (moreDropdown && moreBtn && moreDropdown.dataset.bqWired !== 'true') {
-    // Marca para que initDropdownMiPais() no le agregue un segundo controlador
-    // (dos toggles sobre el mismo botón se anulaban: "Más" no abría al tocarlo).
-    moreDropdown.dataset.bqWired = 'true';
-    moreBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      // En escritorio el hover ya lo abrió: el clic que sigue no debe cerrarlo.
-      const justHovered = desktopHoverQuery.matches && Date.now() - hoverOpenedAt < 700;
-      const open = justHovered ? true : moreDropdown.classList.toggle('is-open');
-      moreDropdown.classList.toggle('is-open', open);
-      moreBtn.setAttribute('aria-expanded', String(open));
-      if (open && megaMenu) {
-        const firstLink = megaMenu.querySelector('a');
-        if (firstLink && document.activeElement === moreBtn) {
-          // Mantener foco accesible en el botón o permitir navegación con Tab
-        }
-      }
-    });
-
-    moreDropdown.addEventListener('mouseenter', () => {
-      if (!desktopHoverQuery.matches) return;
-      clearTimeout(closeTimer);
-      if (!moreDropdown.classList.contains('is-open')) hoverOpenedAt = Date.now();
-      moreDropdown.classList.add('is-open');
-      moreBtn.setAttribute('aria-expanded', 'true');
-    });
-
-    moreDropdown.addEventListener('mouseleave', () => {
-      if (!desktopHoverQuery.matches) return;
-      closeTimer = setTimeout(() => {
-        moreDropdown.classList.remove('is-open');
-        moreBtn.setAttribute('aria-expanded', 'false');
-      }, 240);
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!moreDropdown.contains(e.target)) {
-        moreDropdown.classList.remove('is-open');
-        moreBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Accesibilidad por teclado: Escape para cerrar y flechas para recorrer ítems
-    moreDropdown.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        moreDropdown.classList.remove('is-open');
-        moreBtn.setAttribute('aria-expanded', 'false');
-        moreBtn.focus();
-      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        const links = Array.from(megaMenu ? megaMenu.querySelectorAll('a') : []);
-        if (!links.length) return;
-        const currentIndex = links.indexOf(document.activeElement);
-        e.preventDefault();
-        if (e.key === 'ArrowDown') {
-          const nextIndex = currentIndex + 1 < links.length ? currentIndex + 1 : 0;
-          links[nextIndex].focus();
-        } else {
-          const prevIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : links.length - 1;
-          links[prevIndex].focus();
-        }
-      }
-    });
-  }
+  // Cinco grupos: un solo controlador (ver bqInitMenuGroups).
+  bqInitMenuGroups(navMenu);
 
   // El cajón móvil (hamburguesa) lo controla únicamente initMobileMenu(), por
   // delegación. Antes había tres controladores sobre el mismo botón que se
@@ -456,13 +618,26 @@ function bqSetDrawerState(isOpen, restoreFocus = false) {
   if (backdrop) backdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
   if (toggle) {
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    // La etiqueta sigue al idioma activo (global-language.js) si está cargado.
+    const i18nKey = isOpen ? 'menu.closeMenu' : 'menu.openMenu';
+    const fallback = isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación';
+    const translated = window.BaqueanoLanguage && typeof window.BaqueanoLanguage.t === 'function' ? window.BaqueanoLanguage.t(i18nKey, { fallback }) : '';
+    toggle.setAttribute('data-i18n-aria-label', i18nKey);
+    toggle.setAttribute('aria-label', translated && translated !== i18nKey ? translated : fallback);
     const icon = toggle.querySelector('i');
     if (icon) icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
   }
+  // Acordeón: al abrir se despliega el grupo de la página actual; al cerrar,
+  // todo vuelve a plegarse para la próxima apertura.
   if (isOpen && menu) {
-    const firstLink = menu.querySelector('a, button');
-    if (firstLink) window.requestAnimationFrame(() => firstLink.focus({ preventScroll: true }));
+    const currentGroup = menu.querySelector('.bq-menu-group.is-current');
+    if (currentGroup && !menu.querySelector('.bq-menu-group.is-open')) bqSetMenuGroup(currentGroup, true);
+  } else if (!isOpen) {
+    bqCloseMenuGroups();
+  }
+  if (isOpen && menu) {
+    const firstControl = menu.querySelector('.bq-drawer-close') || menu.querySelector('a, button');
+    if (firstControl) window.requestAnimationFrame(() => firstControl.focus({ preventScroll: true }));
   } else if (!isOpen && restoreFocus && toggle) {
     toggle.focus();
   }
@@ -515,7 +690,30 @@ function initMobileMenu() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && bqIsDrawerOpen()) bqSetDrawerState(false, true);
+    if (!bqIsDrawerOpen()) return;
+    if (event.key === 'Escape') {
+      bqSetDrawerState(false, true);
+      return;
+    }
+    // Con el panel abierto, Tab recorre solo sus controles (como un diálogo).
+    if (event.key !== 'Tab') return;
+    const { menu } = bqDrawerParts();
+    if (!menu) return;
+    const focusables = Array.from(menu.querySelectorAll('a[href], button:not([disabled])'))
+      .filter((el) => !el.hidden && el.getAttribute('aria-hidden') !== 'true' && el.getClientRects().length > 0);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (!menu.contains(document.activeElement)) {
+      event.preventDefault();
+      first.focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   const desktopQuery = window.matchMedia(`(min-width: ${BQ_DRAWER_BREAKPOINT + 1}px)`);
@@ -535,9 +733,12 @@ function initActiveNavHighlight() {
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (!href) return;
-    const linkPage = href.split('/').pop().split('#')[0];
+    const [linkFile, linkHash] = href.split('/').pop().split('#');
+    const linkPage = linkFile;
+    // Un enlace con ancla (perfil.html#reservas) solo es "actual" con esa ancla.
+    const hashMatches = !linkHash || window.location.hash === '#' + linkHash;
 
-    if (linkPage === pageName || (pageName === '' && linkPage === 'index.html')) {
+    if (hashMatches && (linkPage === pageName || (pageName === '' && linkPage === 'index.html'))) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');

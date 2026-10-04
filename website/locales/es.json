@@ -145,9 +145,18 @@
     },
     "pillars": {
       "title": "Los tres pilares de BAQUEANO",
-      "community": { "title": "Comunidades", "desc": "Conectamos viajeros con comunidades campesinas y cooperativas locales que son los verdaderos guardianes del territorio." },
-      "sustainability": { "title": "Sostenibilidad", "desc": "Cada ruta, cada guía y cada experiencia están diseñadas para proteger los ecosistemas y apoyar la economía local." },
-      "authenticity": { "title": "Autenticidad", "desc": "Nada está escenificado. Las experiencias son reales, vivas y construidas desde adentro del territorio." }
+      "community": {
+        "title": "Comunidades",
+        "desc": "Conectamos viajeros con comunidades campesinas y cooperativas locales que son los verdaderos guardianes del territorio."
+      },
+      "sustainability": {
+        "title": "Sostenibilidad",
+        "desc": "Cada ruta, cada guía y cada experiencia están diseñadas para proteger los ecosistemas y apoyar la economía local."
+      },
+      "authenticity": {
+        "title": "Autenticidad",
+        "desc": "Nada está escenificado. Las experiencias son reales, vivas y construidas desde adentro del territorio."
+      }
     },
     "sos": {
       "title": "Emergencias",
@@ -361,8 +370,12 @@
     "story": "Nuestra historia"
   },
   "legal": {
-    "terms": { "title": "Términos de Uso" },
-    "privacy": { "title": "Política de Privacidad" },
+    "terms": {
+      "title": "Términos de Uso"
+    },
+    "privacy": {
+      "title": "Política de Privacidad"
+    },
     "cookies": {
       "title": "Política de Cookies",
       "accept": "Aceptar todas",
@@ -370,7 +383,9 @@
       "banner": "Usamos cookies para mejorar tu experiencia.",
       "learnMore": "Más información"
     },
-    "legalNotice": { "title": "Aviso Legal" }
+    "legalNotice": {
+      "title": "Aviso Legal"
+    }
   },
   "offline": {
     "title": "Sin conexión",
@@ -414,5 +429,62 @@
     "darkMode": "Activar modo oscuro",
     "lightMode": "Activar modo claro",
     "language": "Cambiar idioma"
+  },
+  "menu": {
+    "home": "Inicio",
+    "explore": "Explorar",
+    "culture": "Cultura",
+    "community": "Comunidad",
+    "account": "Cuenta y plataforma",
+    "accountShort": "Cuenta",
+    "principal": "Principal",
+    "discover": "Descubrí",
+    "plan": "Planificá",
+    "yourAccount": "Tu cuenta",
+    "platform": "Plataforma",
+    "departments": "Departamentos",
+    "departmentsDesc": "Los 17 territorios de Nicaragua",
+    "destinations": "Destinos",
+    "destinationsDesc": "Volcanes, playas, reservas y ciudades",
+    "map": "Mapa",
+    "mapDesc": "Ubicá lugares y servicios",
+    "experiences": "Experiencias",
+    "experiencesDesc": "Senderos, tours y vivencias comunitarias",
+    "trip": "Mi Viaje",
+    "tripDesc": "Días, presupuesto y paradas de tu ruta",
+    "baqui": "BAQUI",
+    "baquiDesc": "Armá tu ruta y consultá el clima",
+    "history": "Historia",
+    "historyDesc": "Memoria, personajes y patrimonio",
+    "gastronomy": "Gastronomía",
+    "gastronomyDesc": "Platos, bebidas y tradiciones",
+    "music": "Música",
+    "musicDesc": "Archivo sonoro, artistas e instrumentos",
+    "environmental": "Ambiental",
+    "environmentalDesc": "Áreas protegidas y buenas prácticas",
+    "chronicles": "Crónicas",
+    "chroniclesDesc": "Relatos y reportajes de Nicaragua",
+    "allies": "Aliados",
+    "alliesDesc": "Organizaciones que impulsan el turismo",
+    "business": "Mi Negocio",
+    "businessDesc": "Registrá tu emprendimiento turístico",
+    "testimonials": "Testimonios",
+    "testimonialsDesc": "Experiencias reales de viajeros",
+    "complaints": "Denuncia",
+    "complaintsDesc": "Reporte confidencial ambiental",
+    "profile": "Perfil",
+    "reservations": "Reservas",
+    "favorites": "Favoritos",
+    "help": "Ayuda",
+    "about": "Nosotros",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "cookies": "Cookies",
+    "legalNotice": "Aviso legal",
+    "admin": "Admin / Ops Center",
+    "staffOnly": "Solo personal",
+    "session": "Tu sesión",
+    "closeMenu": "Cerrar menú de navegación",
+    "openMenu": "Abrir menú de navegación"
   }
 }

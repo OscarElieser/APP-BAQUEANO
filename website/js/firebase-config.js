@@ -102,13 +102,81 @@
   }
 
   // ==========================================================================
+  // 🗄️ BASE DE DATOS FIRESTORE REAL: `appbaqueano`
+  // 🎯 POR QUÉ: el proyecto no tiene base `(default)`; la única es `appbaqueano`
+  //    (la misma de la app Android). `firebase.firestore()` apuntaba a la base
+  //    inexistente: las lecturas devolvían vacío desde caché y las escrituras
+  //    quedaban en cola para siempre, sin error visible. Nada se guardaba.
+  // ⚙️ CÓMO: el SDK compat solo abre `(default)`. Su propio contenedor de
+  //    componentes sí crea la instancia modular de una base con nombre; se
+  //    envuelve en la clase compat (`firebase.firestore.Firestore`) y un Proxy
+  //    hace que `firebase.firestore()` la devuelva en TODO el sitio, sin tocar
+  //    cada archivo. Un accesor cubre el caso en que el SDK de Firestore cargue
+  //    después de este script. SDK fijado en 10.14.1 (las URLs lo fijan).
+  // 📦 QUÉ: una sola línea decide la base (FIRESTORE_DATABASE_ID). Si no se
+  //    puede abrir, se lanza un error claro en lugar de fallar en silencio.
+  // ==========================================================================
+  var FIRESTORE_DATABASE_ID = 'appbaqueano';
+  var namedFirestore = null;
+
+  function openNamedFirestore(namespace) {
+    if (namedFirestore) return namedFirestore;
+    var appCompat = firebase.app();
+    var container = appCompat && appCompat._delegate && appCompat._delegate.container;
+    if (!container || typeof namespace.Firestore !== 'function') {
+      throw new Error('[Baqueano Firebase] Este SDK no permite abrir la base "' + FIRESTORE_DATABASE_ID + '".');
+    }
+    var modular = container.getProvider('firestore').getImmediate({ identifier: FIRESTORE_DATABASE_ID });
+    namedFirestore = new namespace.Firestore(appCompat, modular);
+    return namedFirestore;
+  }
+
+  function routeToNamedDatabase(namespace) {
+    if (!namespace || namespace.__bqDatabaseId) return namespace;
+    return new Proxy(namespace, {
+      apply: function (target, thisArg, args) {
+        var app = args[0];
+        // Otras apps (con nombre propio) conservan el comportamiento del SDK.
+        if (app && app.name && app.name !== '[DEFAULT]') return Reflect.apply(target, thisArg, args);
+        return openNamedFirestore(target);
+      },
+      get: function (target, prop, receiver) {
+        if (prop === '__bqDatabaseId') return FIRESTORE_DATABASE_ID;
+        return Reflect.get(target, prop, receiver);
+      }
+    });
+  }
+
+  function installFirestoreRouting() {
+    if (typeof firebase === 'undefined') return;
+    var descriptor = Object.getOwnPropertyDescriptor(firebase, 'firestore');
+    if (descriptor && descriptor.get && descriptor.get.__bqRouting) return;
+    var routed = routeToNamedDatabase(firebase.firestore);
+    var getter = function () { return routed; };
+    getter.__bqRouting = true;
+    Object.defineProperty(firebase, 'firestore', {
+      configurable: true,
+      enumerable: true,
+      get: getter,
+      // El SDK de Firestore se registra con `firebase.firestore = …` al cargar.
+      set: function (value) { routed = routeToNamedDatabase(value); }
+    });
+  }
+
+  // ==========================================================================
   // 🌐 EXPOSICIÓN GLOBAL
   // ==========================================================================
   var firebaseApp = initializeFirebaseOnce();
+  try {
+    installFirestoreRouting();
+  } catch (routingError) {
+    console.error('[Baqueano Firebase] No se pudo dirigir Firestore a "' + FIRESTORE_DATABASE_ID + '":', routingError);
+  }
 
   window.BaqueanoFirebase = {
     app:              firebaseApp,
     config:           BAQUEANO_FIREBASE_CONFIG,
+    firestoreDatabaseId: FIRESTORE_DATABASE_ID,
     googleClientId:   BAQUEANO_GOOGLE_OAUTH_CLIENT_ID,
     createGoogleProvider: createGoogleProvider,
     isReady:          !!firebaseApp

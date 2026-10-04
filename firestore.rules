@@ -55,21 +55,65 @@ service cloud.firestore {
       return resource.data.status == 'published';
     }
 
+    function isShortText(data, field, maxSize) {
+      return data.get(field, '') is string && data.get(field, '').size() <= maxSize;
+    }
+
+    // 🎯 POR QUÉ: el usuario crea y edita sus propios datos desde el perfil
+    //    (web y app); antes no existía ningún campo editable para ellos.
+    // ⚙️ CÓMO: un único mapa `profile` con lista blanca de claves, tipos y
+    //    tamaños. Rol, XP, sellos e insignias quedan fuera de este mapa.
+    // 📦 QUÉ: teléfono, ubicación, contacto de emergencia, idioma, moneda,
+    //    intereses, alimentación, accesibilidad y consentimientos.
+    function isValidConsents(consents) {
+      return consents is map
+        && consents.keys().hasOnly(['location', 'personalization', 'analytics'])
+        && consents.get('location', false) is bool
+        && consents.get('personalization', false) is bool
+        && consents.get('analytics', false) is bool;
+    }
+
+    function isValidProfileDetails(details) {
+      return details is map
+        && details.keys().hasOnly([
+          'phone', 'city', 'country', 'emergencyContact', 'language',
+          'currency', 'interests', 'dietary', 'accessibility', 'consents'
+        ])
+        && isShortText(details, 'phone', 30)
+        && isShortText(details, 'city', 80)
+        && isShortText(details, 'country', 80)
+        && isShortText(details, 'emergencyContact', 120)
+        && isShortText(details, 'dietary', 300)
+        && isShortText(details, 'accessibility', 300)
+        && details.get('language', 'es') in ['es', 'en', 'fr', 'it', 'pt', 'de']
+        && details.get('currency', 'NIO') in ['NIO', 'USD']
+        && details.get('interests', []) is list
+        && details.get('interests', []).size() <= 12
+        && details.get('interests', []).hasOnly([
+          'playas', 'volcanes', 'senderismo', 'gastronomia', 'cafe',
+          'cascadas', 'cultura', 'familiar', 'fotografia', 'aventura'
+        ])
+        && isValidConsents(details.get('consents', {}));
+    }
+
     // Perfiles privados. El cliente nunca puede asignarse rol, XP ni insignias.
     match /users/{userId} {
       allow get: if isOwner(userId) || isAdmin();
       allow list: if isAdmin();
       allow create: if isOwner(userId)
         && request.resource.data.uid == request.auth.uid
+        && request.resource.data.get('email', '') == request.auth.token.get('email', '')
         && request.resource.data.get('role', 'explorer') == 'explorer'
         && request.resource.data.keys().hasOnly([
           'uid', 'email', 'displayName', 'photoUrl', 'role', 'explorerLevel',
           'xp', 'stamps', 'badges', 'favorites', 'createdAt', 'updatedAt',
-          'privacyConsentAt'
+          'privacyConsentAt', 'profile'
         ])
         && request.resource.data.get('xp', 0) == 0
         && request.resource.data.get('stamps', []).size() == 0
-        && request.resource.data.get('badges', []).size() == 0;
+        && request.resource.data.get('badges', []).size() == 0
+        && isShortText(request.resource.data, 'displayName', 120)
+        && isValidProfileDetails(request.resource.data.get('profile', {}));
       allow update: if isAdmin()
         || (isOwner(userId)
           && request.resource.data.uid == resource.data.uid
@@ -77,8 +121,10 @@ service cloud.firestore {
           && request.resource.data.role == resource.data.role
           && onlyChanges([
             'displayName', 'photoUrl', 'explorerLevel', 'favorites',
-            'privacyConsentAt', 'updatedAt'
-          ]));
+            'privacyConsentAt', 'updatedAt', 'profile'
+          ])
+          && isShortText(request.resource.data, 'displayName', 120)
+          && isValidProfileDetails(request.resource.data.get('profile', {})));
       allow delete: if isOwner(userId) || isAdmin();
 
       match /notifications/{notificationId} {
@@ -307,8 +353,20 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // Telemetría anónima: esquema cerrado y tamaños acotados para que nadie la
+    // use como almacenamiento libre (antes: `allow create: if true`).
     match /traffic_sessions/{sessionId} {
-      allow create: if true;
+      allow create: if request.resource.data.keys().hasOnly([
+          'id', 'sessionId', 'platform', 'page', 'path', 'referrer', 'clientIp',
+          'userAgent', 'appVersion', 'deviceModel', 'userId', 'isGuest',
+          'timestamp', 'status'
+        ])
+        && isShortText(request.resource.data, 'page', 200)
+        && isShortText(request.resource.data, 'path', 300)
+        && isShortText(request.resource.data, 'referrer', 300)
+        && isShortText(request.resource.data, 'userAgent', 400)
+        && isShortText(request.resource.data, 'userId', 200)
+        && isShortText(request.resource.data, 'sessionId', 100);
       allow read, delete: if isAdmin();
       allow update: if false;
     }

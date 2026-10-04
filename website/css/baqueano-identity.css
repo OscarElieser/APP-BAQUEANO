@@ -430,8 +430,12 @@ body.nav-drawer-open #mainNavbar {
   z-index: 10050 !important;
 }
 
+/* La barra de pulgar (navegación rápida) se mantiene visible aunque el panel
+   lateral (navegación completa) esté abierto: son componentes distintos. El
+   panel reserva env(safe-area-inset-bottom) + 90 px abajo para no quedar
+   tapado (css/navigation-mega.css, MENÚ GLOBAL v2). */
 body.nav-drawer-open .bq-thumbbar {
-  visibility: hidden;
+  visibility: visible;
 }
 
 /* Teléfonos muy estrechos (≤ 359 px): la marca queda solo con el logo. */

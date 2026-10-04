@@ -182,7 +182,7 @@ async function mobileDrawer(browser) {
     expect(s.menuInside, `Menú móvil ciclo ${i}: el cajón sale del viewport`);
     expect(s.scrollable, `Menú móvil ciclo ${i}: sin scroll interno con muchas opciones`);
     if (i % 3 === 1) await page.keyboard.press('Escape');
-    else if (i % 3 === 2) await page.mouse.click(10, 400); // fondo del cajón
+    else if (i % 3 === 2) await page.mouse.click(380, 420); // fondo, a la derecha del panel
     else await page.click('#mobileNavToggle');
     await page.waitForTimeout(300);
     const c = await state();

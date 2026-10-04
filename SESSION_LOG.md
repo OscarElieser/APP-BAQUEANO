@@ -3755,3 +3755,73 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 
 - **Resultado final:** barrido completo 28 páginas × 13 anchos + casos 1–12: 3392 comprobaciones, 5 fallos no deterministas (1 caída del navegador headless en index@430; aviso-legal@1024/1366 medido antes de inyectarse `navigation-mega.css` bajo carga). Reejecución de esas páginas en los 13 anchos: 358/358 OK; aviso-legal en aislamiento 9/9 OK. `npm test` OK. Sin commit (pendiente de autorización del propietario). Riesgo residual: páginas que no enlazan `navigation-mega.css` en su `<head>` dependen de la inyección por JS (posible destello breve en redes lentas).
 - **Estado:** Completado. Cómo reanudar: `PORT=5077 node dev-server.js` (raíz) y `npm run test:shell` (website/).
+
+- 📦 **QUÉ:** Solicitud registrada antes de cualquier análisis. Estado: Fase 1 en progreso.
+
+---
+
+## 2026-10-04 — Paso a Paso Definitivo para Blindar y Resolver Autenticación en Firebase & Google OAuth
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - El usuario solicita: "dame el paso a paso para que firebase no siga teniendo problema con la autenticacion".
+  - Diagnóstico: Se requiere una guía clara, accionable e infalible dividida en las 3 capas que intervienen en el flujo de Google OAuth y Firebase Auth:
+    1. Código fuente (`authDomain`).
+    2. Consola de Firebase (Dominios autorizados).
+    3. Consola de Google Cloud (OAuth 2.0 Client ID y Redirect URIs).
+    4. Despliegue en GitHub, Azure y purga de caché.
+
+- ⚙️ **CÓMO (How / Arquitectura e Implementación):**
+  - Documentar exactamente cada pantalla, URL y clic necesario para que tanto `baqueanonicaragua.com`, `localhost` y cualquier dominio funcionen 100% sin `redirect_uri_mismatch` ni errores de CORS/origen no autorizado.
+  - Asegurar sincronización en Git y despliegue a la máquina de Azure.
+
+- 📦 **QUÉ (What / Entregables):**
+  - Guía paso a paso numerada y explicada pedagógicamente para el usuario.
+  - `git push origin main` ejecutado exitosamente por el usuario (`6cc4841..39aab17`).
+  - Verificación visual de la captura: Dominios autorizados en Firebase Console confirmados al 100% (`localhost`, `app-baqueano.firebaseapp.com`, `app-baqueano.web.app`, `baqueanonicaragua.com`, `www.baqueanonicaragua.com`, `20.80.81.65`).
+  - Diagnóstico de error local: El usuario intentó ejecutar el comando `bash ~/APP-BAQUEANO/azure/deploy.sh` en su terminal local de Windows PowerShell en lugar de la sesión SSH del servidor Azure.
+
+
+- **Fase 1 — causa raíz confirmada con peticiones reales (2026-10-04):** (1) el proyecto `app-baqueano` NO tiene base `(default)`; la única es `appbaqueano` (nam5, creada 2026-09-02, VACÍA). Toda la web usa `firebase.firestore()` → `(default)` inexistente: las lecturas devuelven vacío desde caché sin error y las escrituras quedan en cola para siempre (fallo invisible). (2) Las reglas vivas de `appbaqueano` son las de creación: `allow read, write: if false` (ruleset `0bd1c5d7-e1a9-40a3-a542-da400e23340e`); `firestore.rules` del repo nunca se aplicó porque `firebase.json` apuntaba a `(default)`. (3) Supabase: `firestore_mirror` = 0 filas, `profiles` = 0. (4) Aun con la base correcta, el sitio escribía campos fuera del esquema (`status`, `platform`, `lastLogin`, `photoURL`, sin `uid`).
+- **Plan de reversión de reglas:** re-publicar `projects/app-baqueano/rulesets/0bd1c5d7-e1a9-40a3-a542-da400e23340e` en `cloud.firestore/appbaqueano` (o `git revert` + `firebase deploy --only firestore:rules`).
+- **Cambios:** `firebase.json` (firestore → database `appbaqueano`), `firestore.rules` (mapa `profile` editable por el dueño con lista blanca/tipos/tamaños; email del doc = email del token; `traffic_sessions` con esquema cerrado).
+- **Despliegue de reglas: BLOQUEADO por el control de permisos del asistente (despliegue a producción).** Queda pendiente que el propietario ejecute o autorice: `firebase deploy --only firestore --project app-baqueano`.
+- **Reanudación (2026-10-04):** el propietario pide "continúa donde te quedaste" tras un corte de sesión. Punto exacto: hecho `firebase.json` → `appbaqueano`, `firestore.rules` (mapa `profile`), `firebase-config.js` (enrutamiento central a `appbaqueano`). Pendiente: `user-session.js` (perfil válido para las reglas, quitar rutas simuladas y escrituras anónimas a Supabase), perfil editable con datos reales en `perfil.html`, prueba real sin dobles simulados, y despliegue de reglas (bloqueado por permisos; lo ejecuta el propietario).
+
+---
+
+## 2026-10-04 — Menú móvil: panel lateral completo tipo Ops Center
+
+- 🎯 **POR QUÉ:** El propietario muestra captura del cajón móvil: el menú queda cortado (Cultura → "Música" tapada abajo) y no se ven las demás secciones. Pide que el menú se abra a la izquierda o derecha con TODOS los menús, como el menú desplegable lateral del Ops Center.
+- ⚙️ **CÓMO:** Reproducir en Playwright (390×844), revisar `css/navigation-mega.css` (≤960 px) y el controlador del cajón en `js/navigation.js`, tomar como referencia el sidebar del Ops Center, y convertir el cajón en panel lateral izquierdo con cabecera fija, cuerpo con scroll y secciones plegables; sin quitar enlaces.
+- 📦 **QUÉ:** Solicitud registrada antes de cualquier cambio. El trabajo de datos reales (perfil/Firestore) queda en pausa y se retoma después.
+
+---
+
+## 2026-10-04 — Footer con botones que no funcionan + página `testimonios.html`
+
+- 🎯 **POR QUÉ:** El propietario reporta que algunos botones del footer no funcionan y que no existe un lugar donde el usuario pueda comentar; pide una página `testimonios.html`.
+- ⚙️ **CÓMO:** Auditar en navegador cada enlace/botón del footer global (destino, ancla, respuesta HTTP, acción JS). Crear `testimonios.html` integrada al shell global (header/footer únicos), con testimonios REALES: solo usuarios autenticados publican; se guarda en Firestore (`appbaqueano`, colección nueva con reglas de esquema cerrado y moderación) y se replica a Supabase por el espejo. Sin datos de ejemplo.
+- 📦 **QUÉ:** Solicitud registrada. En cola detrás del menú lateral móvil (en curso).
+- **Avance menú (2026-10-04):** panel lateral izquierdo implementado (`css/navigation-mega.css` bloque "PANEL LATERAL MÓVIL", `js/navigation.js` cabecera/cierre/foco atrapado/íconos/Testimonios). Causas reales corregidas: (a) header con backdrop-filter = bloque contenedor del panel fijo → en perfil/mapa desplazados el cajón quedaba en top −1438 px; (b) `#globalMegaMenu` heredaba acordeón cerrado (`max-height:0`, `overflow:hidden`, `pointer-events:none`) → enlaces visibles pero intocables; (c) hijo flex con `z-index:20` se pintaba sobre la zona fija. Verificado: 25/25 enlaces tocables en 6 escenarios (320×640 … 844×390), 0 superposiciones al desplazar.
+
+---
+
+## 2026-10-04 — Lote de solicitudes del propietario (registro previo obligatorio)
+
+- 🎯 **POR QUÉ / QUÉ se pide:**
+  1. **Prompt maestro del menú:** escritorio con 5 grupos (Inicio | Explorar ▼ | Cultura ▼ | Comunidad ▼ | Cuenta/Plataforma ▼) cada uno con su desplegable independiente + SOS, Usuario, ES; móvil: barra superior BAQUEANO + SOS + Usuario + ES + ☰, panel izquierdo 100dvh con acordeón (un grupo abierto), foco atrapado, overlay, X, Esc, toque fuera, `padding-bottom: calc(env(safe-area-inset-bottom) + 90px)`; conservar la barra inferior (Inicio | Explorar | Mapa | Mi Viaje | BAQUI) corrigiendo solapes; i18n global; Admin/Ops Center solo autorizado; pruebas en 1920×1080 … 320×568 y horizontal; Comunidad = Aliados, Mi Negocio, Testimonios, Denuncia.
+  2. **Testimonios / "Experiencias de viajeros"** (secciones 17–30): ver público; publicar/comentar/reaccionar/subir solo autenticado (Google o cuenta BAQUEANO) con mensaje "Inicia sesión para compartir tu experiencia…" y retorno al mismo punto; formulario "Comparte tu experiencia"; fotos/videos con validación, límites y miniaturas; feed con filtros y buscador; comentarios con respuestas/editar/eliminar propios/denunciar; autoría por user_id; moderación (borrador, pendiente, publicado, rechazado, oculto, reportado, archivado) integrada al Ops Center; anti-abuso; privacidad; integración con destinos y BAQUI (opinión ≠ hecho oficial).
+  3. **Ficha de destino (modal Isla de Ometepe) cortada:** mostrar toda la información con scroll vertical.
+  4. **Galería de destinos:** la página 1 no muestra información y la 2 sí.
+  5. **Tarjetas "Alertas y recomendaciones" y "Cómo moverte en tu ruta":** muestran texto técnico ("Entidad sin validación activa de Supabase. León"); deben dar información real del lugar y actualizarse automáticamente.
+  6. **Footer:** botones que no funcionan.
+- ⚙️ **CÓMO:** orden 1 → 3 → 4 → 5 → 6 → 2 → cierre de perfil real; auditoría antes de cada cambio; Playwright en todas las resoluciones pedidas.
+- 📦 **Estado:** registrado antes de cualquier cambio. Bloqueo vigente: despliegue de reglas Firestore (lo ejecuta el propietario).
+
+---
+
+## 2026-10-04 — BAQUI: de chatbot a agente turístico real (prompt maestro)
+
+- 🎯 **POR QUÉ:** Caso real fallido: "quiero ir a la playa… León, Carazo y Rivas… 500 dólares… mi pareja y dos niños" → BAQUI respondió "Organicé León para 3 días y 1 viajero" (ignoró 2 destinos, presupuesto, 4 viajeros; inventó 3 días).
+- ⚙️ **CÓMO (pedido):** auditar dónde se procesa el chat, modelo, prompt, origen de "3 días" y "1 viajero", defaults hardcodeados; extracción estructurada (JSON Schema) con validación semántica (total = adultos + niños; days null ≠ 3); datos faltantes → recomendación preliminar + 1–2 preguntas; BAQUEANO primero (Supabase/destinos/negocios/hospedajes…), web solo como respaldo con fuentes y consultas minimizadas; tools backend (search_destinations, calculate_trip_budget, …); comparador con score; presupuesto desglosado marcando estimaciones; memoria `trip_context`; capa AIProvider (OpenAI/Gemini/Claude) con fallback; claves solo en backend; contenido web = datos, nunca instrucciones; respuestas con acciones; pruebas multivariable.
+- 📦 **Estado:** registrado antes de cualquier cambio; en cola tras el menú.

@@ -1312,3 +1312,262 @@ html:has(> body[style*="overflow:hidden"]) { overflow: hidden !important; }
     contain: none !important;
   }
 }
+
+/* ============================================================================
+   MENÚ GLOBAL v2 — 5 GRUPOS (Inicio · Explorar · Cultura · Comunidad · Cuenta)
+   🎯 POR QUÉ: el propietario pide un header limpio con cinco grupos, cada uno
+      con su propio desplegable en escritorio, y en celular un panel lateral
+      izquierdo con acordeón donde NINGUNA opción quede cortada. El cajón
+      anterior se cortaba por causas de arquitectura (no de estilo):
+        1. el header tiene backdrop-filter → era bloque contenedor del panel
+           position:fixed: con la página desplazada el cajón quedaba fuera de
+           pantalla (perfil/mapa: top −1438 px);
+        2. una regla heredada dejaba el "Más" como acordeón cerrado
+           (max-height:0, overflow:hidden, pointer-events:none);
+        3. en un contenedor flex, un hijo con z-index (20) se pintaba sobre la
+           zona fija; y la barra inferior (z 11990) tapaba el final del cajón.
+   ⚙️ CÓMO: clases nuevas `bq-menu-*` (sin chocar con las reglas heredadas de
+      "Más"). Enfoque mobile-first para el contenido del menú: la base es el
+      acordeón del panel y `@media (min-width: 961px)` lo vuelve desplegables.
+      El contenedor #navLinksMenu (panel) usa 100dvh, scroll propio,
+      overscroll-behavior: contain y margen inferior para la barra de pulgar.
+      Mientras el panel está abierto el header pierde backdrop-filter.
+   📦 QUÉ: mismo HTML (js/navigation.js → bqRenderGlobalMenu) para escritorio
+      y celular; escritorio con paneles anclados a su botón (desplazados en
+      JS si tocarían el borde); celular con secciones plegables.
+   ============================================================================ */
+
+/* ---------- Base (celular / panel lateral): acordeón ---------- */
+#mainNavbar .bq-menu-group { display: block; width: 100%; }
+#mainNavbar .bq-menu-trigger,
+#mainNavbar #navLinksMenu > a.bq-menu-home {
+  display: flex !important; align-items: center !important; gap: 12px !important;
+  width: auto !important; min-height: 50px !important; height: auto !important;
+  margin: 2px 12px !important; padding: 10px 14px !important; box-sizing: border-box !important;
+  border: 1px solid transparent !important; border-radius: 12px !important;
+  background: transparent !important; box-shadow: none !important;
+  color: #FFFFFF !important; text-align: left !important; text-decoration: none !important;
+  font: 700 0.98rem/1.2 Montserrat, sans-serif !important; letter-spacing: 0 !important;
+  cursor: pointer; transform: none !important;
+}
+#mainNavbar .bq-menu-trigger { width: calc(100% - 24px) !important; }
+#mainNavbar .bq-menu-trigger-icon {
+  width: 20px; flex: 0 0 20px; text-align: center; color: #7FB8C4; font-size: 0.98rem;
+}
+#mainNavbar .bq-menu-caret {
+  margin-left: auto; color: #F65E01; font-size: 0.72rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#mainNavbar .bq-menu-group.is-open > .bq-menu-trigger .bq-menu-caret { transform: rotate(180deg); }
+#mainNavbar .bq-menu-label-short { display: none; }
+#mainNavbar .bq-menu-trigger:hover,
+#mainNavbar #navLinksMenu > a.bq-menu-home:hover,
+#mainNavbar .bq-menu-group.is-open > .bq-menu-trigger { background: rgba(22, 93, 111, 0.28) !important; }
+#mainNavbar .bq-menu-trigger.active,
+#mainNavbar #navLinksMenu > a.bq-menu-home.active {
+  box-shadow: inset 3px 0 0 #F65E01 !important; background: rgba(22, 93, 111, 0.34) !important;
+}
+#mainNavbar .bq-menu-trigger.active .bq-menu-trigger-icon,
+#mainNavbar #navLinksMenu > a.bq-menu-home.active .bq-menu-trigger-icon { color: #F65E01; }
+#mainNavbar .bq-menu-trigger:focus-visible,
+#mainNavbar .bq-menu-item:focus-visible,
+#mainNavbar #navLinksMenu > a.bq-menu-home:focus-visible { outline: 2px solid #F65E01 !important; outline-offset: 2px !important; }
+
+#mainNavbar .bq-menu-panel { margin: 2px 12px 8px 30px; padding: 2px 0 6px 12px; border-left: 1px solid rgba(244, 230, 193, 0.12); }
+#mainNavbar .bq-menu-panel[hidden] { display: none !important; }
+#mainNavbar .bq-menu-group.is-open > .bq-menu-panel { animation: bqMenuAccordionIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes bqMenuAccordionIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+#mainNavbar .bq-menu-section + .bq-menu-section { margin-top: 6px; }
+#mainNavbar .bq-menu-section-title {
+  margin: 10px 4px 4px; padding: 0;
+  color: rgba(244, 230, 193, 0.68); font: 800 0.66rem/1.2 Montserrat, sans-serif;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+#mainNavbar .bq-menu-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+#mainNavbar .bq-menu-list li { margin: 0; padding: 0; }
+#mainNavbar .bq-menu-item {
+  display: flex; align-items: center; gap: 12px; min-height: 46px;
+  padding: 7px 10px; border-radius: 12px; border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.88); text-decoration: none;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+#mainNavbar .bq-menu-item[hidden] { display: none !important; }
+#mainNavbar .bq-menu-item-icon {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 34px;
+  width: 34px; height: 34px; border-radius: 10px;
+  background: rgba(22, 93, 111, 0.32); color: #9FD3DD; font-size: 0.9rem;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+#mainNavbar .bq-menu-item-text { display: grid; gap: 2px; min-width: 0; }
+#mainNavbar .bq-menu-item-text strong { color: inherit; font: 700 0.92rem/1.2 "Plus Jakarta Sans", Inter, sans-serif; }
+#mainNavbar .bq-menu-item-text small { color: rgba(203, 213, 225, 0.78); font: 500 0.74rem/1.3 "Plus Jakarta Sans", Inter, sans-serif; }
+#mainNavbar .bq-menu-item:hover { background: rgba(22, 93, 111, 0.26); color: #FFFFFF; }
+#mainNavbar .bq-menu-item:hover .bq-menu-item-icon { background: rgba(246, 94, 1, 0.2); color: #FDBA74; }
+#mainNavbar .bq-menu-item.active { background: rgba(22, 93, 111, 0.38); border-color: rgba(246, 94, 1, 0.45); color: #FFFFFF; }
+#mainNavbar .bq-menu-item.active .bq-menu-item-icon { background: #F65E01; color: #FFFFFF; }
+#mainNavbar .bq-menu-admin { margin-top: 8px; border-top: 1px dashed rgba(244, 230, 193, 0.18); border-radius: 0 0 12px 12px; padding-top: 10px; }
+#mainNavbar .bq-menu-admin .bq-menu-item-icon { background: rgba(246, 94, 1, 0.18); color: #FDBA74; }
+
+/* ---------- Panel lateral (≤ 960 px) ---------- */
+@media (max-width: 960px) {
+  /* Causa 1: el header no puede ser bloque contenedor del panel fijo. */
+  html.nav-drawer-open #mainNavbar {
+    -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    transform: none !important; filter: none !important;
+  }
+
+  #mainNavbar #navLinksMenu {
+    display: flex !important; flex-direction: column !important;
+    align-items: stretch !important; justify-content: flex-start !important;
+    position: fixed !important; top: 0 !important; bottom: auto !important;
+    left: 0 !important; right: auto !important;
+    width: min(88vw, 360px) !important; max-width: none !important; min-height: 0 !important;
+    height: 100vh !important; height: 100dvh !important;
+    max-height: 100vh !important; max-height: 100dvh !important; flex: none !important;
+    margin: 0 !important; gap: 0 !important;
+    padding: 0 0 calc(env(safe-area-inset-bottom, 0px) + 90px) !important;
+    overflow-x: hidden !important; overflow-y: auto !important;
+    overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+    background: linear-gradient(180deg, #0B2335 0%, #081A2A 100%) !important;
+    -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    border: 0 !important; border-right: 1px solid rgba(244, 230, 193, 0.12) !important;
+    border-radius: 0 !important; box-shadow: 18px 0 48px rgba(0, 0, 0, 0.45) !important;
+    transform: translateX(-105%) !important; visibility: hidden !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.3s !important;
+    animation: none !important; z-index: 5 !important;
+  }
+  #mainNavbar #navLinksMenu.mobile-open {
+    transform: translateX(0) !important; visibility: visible !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0s !important;
+  }
+  /* Causa 3: en flex, un z-index en un hijo crea capa aunque sea static. */
+  #mainNavbar #navLinksMenu > * { flex-shrink: 0 !important; z-index: auto !important; }
+
+  #mainNavbar #navLinksMenu .bq-drawer-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    position: sticky; top: 0; z-index: 10 !important;
+    margin-bottom: 8px; padding: calc(12px + env(safe-area-inset-top, 0px)) 12px 12px 16px;
+    background: #0B2335 !important; border-bottom: 1px solid rgba(244, 230, 193, 0.1);
+  }
+  #mainNavbar #navLinksMenu .bq-drawer-brand { display: flex; align-items: center; gap: 10px; min-width: 0; text-decoration: none; }
+  #mainNavbar #navLinksMenu .bq-drawer-brand img { width: 36px; height: auto; flex-shrink: 0; }
+  #mainNavbar #navLinksMenu .bq-drawer-brand span { display: grid; gap: 2px; min-width: 0; }
+  #mainNavbar #navLinksMenu .bq-drawer-brand strong { color: #FFFFFF; font: 900 1rem/1 Montserrat, sans-serif; letter-spacing: 0.08em; }
+  #mainNavbar #navLinksMenu .bq-drawer-brand small { color: #F4E6C1; font: 700 0.6rem/1.2 "Plus Jakarta Sans", Inter, sans-serif; letter-spacing: 0.12em; }
+  #mainNavbar #navLinksMenu .bq-drawer-close {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
+    color: #FFFFFF; font-size: 1.1rem;
+    background: rgba(246, 94, 1, 0.14); border: 1px solid rgba(246, 94, 1, 0.38);
+  }
+  #mainNavbar #navLinksMenu .bq-drawer-close:focus-visible { outline: 2px solid #F65E01; outline-offset: 2px; }
+
+  /* Sesión, idioma y SOS al final (la barra superior ya los muestra). */
+  #mainNavbar #navLinksMenu .bq-drawer-tools {
+    display: grid !important; gap: 8px; position: static !important;
+    margin: 14px 12px 0 !important; padding: 12px 4px 0 !important;
+    background: none !important; border-top: 1px solid rgba(244, 230, 193, 0.12) !important;
+  }
+  #mainNavbar #navLinksMenu .bq-drawer-tools .bq-menu-section-title { margin: 0 4px 2px; }
+
+  /* Fondo oscuro sobre la página, también en tablet. */
+  html.nav-drawer-open .nav-drawer-backdrop { display: block !important; }
+
+  /* Barra superior móvil: BAQUEANO + SOS + Usuario + ES + ☰ en todos los
+     anchos (antes cuenta e idioma se ocultaban a ≤ 480 px). */
+  #mainNavbar .global-nav-actions > .bq-account-slot { display: inline-flex !important; }
+  #mainNavbar .global-nav-actions > .global-language.navbar-lang-pill {
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    min-width: 40px !important; height: 36px !important; padding: 0 8px !important;
+    border-radius: 12px !important; gap: 3px !important; font-size: 0.76rem !important;
+  }
+  #mainNavbar .global-nav-actions > .global-language.navbar-lang-pill i { display: none !important; }
+}
+
+@media (max-width: 400px) {
+  #mainNavbar .global-nav-actions { gap: 4px !important; margin-left: 4px !important; padding-left: 0 !important; }
+  #mainNavbar .global-nav-actions > :is(.sos-quick-btn, .navbar-sos-btn, .exact-nav-mobile-toggle, .mobile-nav-toggle),
+  #mainNavbar .global-nav-actions > .bq-account-slot > :is(a, button) {
+    width: 34px !important; min-width: 34px !important; height: 34px !important;
+  }
+  #mainNavbar .global-nav-actions > .global-language.navbar-lang-pill { min-width: 36px !important; height: 34px !important; padding: 0 6px !important; }
+}
+
+/* Pantallas bajas: descripciones fuera para que entren más opciones. */
+@media (max-width: 960px) and (max-height: 560px) {
+  #mainNavbar #navLinksMenu .bq-menu-item-text small { display: none; }
+  #mainNavbar #navLinksMenu .bq-menu-item { min-height: 42px; }
+}
+
+/* ---------- Escritorio (≥ 961 px): desplegables independientes ---------- */
+@media (min-width: 961px) {
+  #mainNavbar .bq-drawer-head,
+  #mainNavbar .bq-drawer-tools,
+  #mainNavbar .bq-menu-trigger-icon { display: none !important; }
+
+  #mainNavbar #navLinksMenu { gap: 2px !important; }
+  #mainNavbar .bq-menu-group { position: relative; display: inline-flex; align-items: center; width: auto; height: 100%; }
+
+  #mainNavbar .bq-menu-trigger,
+  #mainNavbar #navLinksMenu > a.bq-menu-home {
+    width: auto !important; min-height: 0 !important; height: 38px !important;
+    margin: 0 !important; padding: 7px clamp(8px, 1vw, 15px) !important; gap: 6px !important;
+    border: 0 !important; border-radius: 8px !important;
+    color: rgba(255, 255, 255, 0.84) !important; white-space: nowrap !important;
+    font: 600 clamp(0.8rem, 0.72rem + 0.18vw, 0.9rem)/1 Inter, "Plus Jakarta Sans", sans-serif !important;
+    transition: color 0.2s ease, background-color 0.2s ease !important;
+  }
+  #mainNavbar .bq-menu-caret { margin-left: 2px; font-size: 0.66rem; }
+  #mainNavbar .bq-menu-trigger:hover,
+  #mainNavbar #navLinksMenu > a.bq-menu-home:hover,
+  #mainNavbar .bq-menu-group.is-open > .bq-menu-trigger { background: rgba(22, 93, 111, 0.3) !important; color: #FFFFFF !important; }
+  #mainNavbar .bq-menu-trigger.active,
+  #mainNavbar #navLinksMenu > a.bq-menu-home.active {
+    background: rgba(22, 93, 111, 0.22) !important; color: #FFFFFF !important;
+    box-shadow: inset 0 -2px 0 #F65E01 !important;
+  }
+
+  /* Panel bajo su botón; JS lo desplaza (--bq-panel-shift) si tocaría el borde. */
+  #mainNavbar .bq-menu-panel {
+    position: absolute; top: calc(100% + 10px); left: 50%;
+    translate: calc(-50% + var(--bq-panel-shift, 0px)) 0;
+    width: 340px; max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 110px); overflow-y: auto; overscroll-behavior: contain;
+    margin: 0; padding: 12px; box-sizing: border-box;
+    border: 1px solid rgba(244, 230, 193, 0.18); border-left: 1px solid rgba(244, 230, 193, 0.18);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(12, 41, 65, 0.985) 0%, rgba(8, 26, 44, 0.99) 100%);
+    box-shadow: 0 26px 64px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    z-index: 100060;
+  }
+  /* Puente invisible: el mouse cruza el espacio entre botón y panel sin cerrarlo. */
+  #mainNavbar .bq-menu-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+  #mainNavbar .bq-menu-group.is-open > .bq-menu-panel { animation: bqMenuDropIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes bqMenuDropIn { from { opacity: 0; transform: translateY(-6px) scale(0.985); } to { opacity: 1; transform: none; } }
+
+  #mainNavbar .bq-menu-group[data-group="explore"] > .bq-menu-panel,
+  #mainNavbar .bq-menu-group.is-wide > .bq-menu-panel {
+    width: 600px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 14px;
+  }
+  #mainNavbar .bq-menu-group[data-group="explore"] > .bq-menu-panel[hidden],
+  #mainNavbar .bq-menu-group.is-wide > .bq-menu-panel[hidden] { display: none !important; }
+  #mainNavbar .bq-menu-group.is-wide > .bq-menu-panel .bq-menu-admin { grid-column: 1 / -1; }
+  #mainNavbar .bq-menu-panel .bq-menu-section + .bq-menu-section { margin-top: 0; }
+  #mainNavbar .bq-menu-panel .bq-menu-section-title { margin: 4px 10px 6px; }
+  #mainNavbar .bq-menu-item:hover { transform: translateX(2px); }
+
+  /* Laptops estrechas: "Cuenta" corto y sin nombre junto al avatar. */
+  @media (max-width: 1240px) {
+    #mainNavbar .bq-menu-label-full { display: none; }
+    #mainNavbar .bq-menu-label-short { display: inline; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mainNavbar #navLinksMenu,
+  #mainNavbar #navLinksMenu.mobile-open { transition: none !important; }
+  #mainNavbar .bq-menu-panel,
+  #mainNavbar .bq-menu-group.is-open > .bq-menu-panel { animation: none !important; }
+  #mainNavbar .bq-menu-item:hover { transform: none; }
+}
