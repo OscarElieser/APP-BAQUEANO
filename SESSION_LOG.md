@@ -3921,3 +3921,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** Azure publica desde `main`; los cambios de la comunidad deben fusionarse para llegar a baqueanonicaragua.com.
 - ⚙️ **CÓMO:** abrir pull request de `claude/sleepy-goodall-kqogrq` hacia la rama por defecto, siguiendo la plantilla de PR si existe.
 - 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Hecho:** PR abierto → https://github.com/OscarElieser/APP-BAQUEANO/pull/2 (`claude/sleepy-goodall-kqogrq` → `main`, sin conflictos). Al fusionarlo, Azure publica en ~2 min.
