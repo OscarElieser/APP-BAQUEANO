@@ -2550,3 +2550,29 @@ button.territory-pill-card.active {
 }
 .madriz-map-popup-link:hover,
 .madriz-map-popup-link:focus-visible { background: #F65E01; }
+
+/* ==========================================================================
+   CONTRASTE DE TÍTULOS EN FRANJAS OSCURAS (todas las guías territoriales)
+   🎯 POR QUÉ: "¿Ya conocés … o querés empezar a comprenderlo?", "… en
+   Movimiento", "Explorá … desde el territorio real", "… en imágenes" y la
+   galería fotográfica se leían azul oscuro sobre fondo oscuro (contraste 1:1
+   a 2.4:1): reglas globales de baqueano-system.css con !important pintaban
+   los títulos con la tinta de superficies claras.
+   ⚙️ CÓMO: selector más específico (html body main …) con !important solo
+   para estas franjas oscuras; texto secundario en arena/gris claro.
+   📦 QUÉ: títulos blancos y textos legibles (≥ 4.5:1) en los 17 territorios.
+   ========================================================================== */
+/* Plantilla común (fondo oscuro) y tarjeta de cierre (siempre oscura). La
+   página especial de Madriz tiene esas franjas sobre fondo claro: allí no aplica. */
+html body main#mainContent.territory-unified-layout :is(.madriz-gallery-strip, .madriz-video-gallery, .madriz-map-section, .madriz-closing-strip)
+  :is(h1, h2, h3, .section-title-clean, .closing-title),
+html body main#mainContent .closing-card-alta-gama :is(h1, h2, h3, .closing-title) {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+html body main#mainContent.territory-unified-layout :is(.madriz-gallery-strip, .madriz-video-gallery, .madriz-map-section, .madriz-closing-strip)
+  :is(p, .closing-desc):not([class*="btn"]):not([class*="status"]),
+html body main#mainContent .closing-card-alta-gama :is(p, .closing-desc):not([class*="btn"]) {
+  color: #CBD5E1 !important;
+  -webkit-text-fill-color: #CBD5E1 !important;
+}

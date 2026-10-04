@@ -3997,3 +3997,10 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** el propietario sigue viendo bloques de Madriz.
 - ⚙️ **CÓMO:** son las secciones 16–24 de la experiencia especial de Madriz; corresponden a la misma falla de plantilla corregida en `29c8949` (publicada ~23:15 UTC). Confirmar con el propietario la URL y recarga forzada; aclarar si quiere que los otros 16 territorios tengan esas mismas 24 secciones con su propia información.
 - 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+
+## 2026-10-04 (cierre de Madriz + contraste) — captura "¿Ya conocés Madriz o querés empezar a comprenderlo?"
+- 🎯 **POR QUÉ:** otra sección de Madriz en la captura; además los títulos de secciones oscuras (cierre, "Madriz en Movimiento", "Explorá Madriz…", "El Cañón de Somoto en Alta Fidelidad") salen azul oscuro sobre fondo oscuro (ilegibles).
+- ⚙️ **CÓMO:** corregir el contraste de los títulos en secciones oscuras (regla global posterior que los pinta navy); la mezcla de contenido ya está corregida en `29c8949`.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Contraste corregido (publicado):** `body main h2:not(...)` de headings-system.css y `.section-title-clean {color:#0F172A !important}` ganaban; regla nueva en `css/pages/departamento.css` con `main#mainContent.territory-unified-layout` (franjas oscuras de la plantilla común) y `.closing-card-alta-gama` (siempre oscura) → títulos blancos y textos #CBD5E1. Verificado con capturas: León/Rivas (fondo oscuro) blancos; Madriz (franjas claras) conserva títulos oscuros.
+- **Directiva del propietario:** "todo eso tiene que adaptarse según el departamento seleccionado" → las 24+ secciones de Madriz deben existir para los 17 territorios con información propia. Plan: renderizador único basado en datos por territorio; secciones sin datos verificados no se muestran; completar territorio por territorio y publicar cada uno.
