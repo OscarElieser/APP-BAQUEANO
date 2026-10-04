@@ -3916,3 +3916,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - **i18n:** bloque `community` (109 frases) en `locales/{es,en,fr,it,pt,de}.json` para `testimonios.html` y la sección de destino; `global-language.js` VERSION `2026.10.04-comunidad` (el catálogo se pide con `force-cache`) y su `?v=` en `global-injector.js`. `testimonios.html` unificado a voseo ("Compartí tu experiencia", "Iniciá sesión…").
   - **Pruebas:** `node --check` de todos los JS tocados, JSON de 6 idiomas válido, `build-hostinger-static` (721 archivos) + `verify-hostinger-static` OK, `production-smoke.test.mjs` OK. E2E Playwright local (scratchpad, Edge Function simulada): 18/19; la única diferencia es que "Lo que cuentan los viajeros" ya tenía traducción previa ("What travelers are saying"), correcta. `validate-i18n.mjs` sigue en exit 1 por 297 claves pendientes de otras páginas que ya faltaban antes (sin regresión: traducidas 273 → 382). `global-shell.test.mjs` no corre: falta `@playwright/test` en `website/` (no se agregó dependencia).
   - **Estado:** todo en la rama `claude/sleepy-goodall-kqogrq`. Azure publica desde `main`: falta fusionar la rama para que los cambios de web y CSP lleguen a baqueanonicaragua.com (el backend de Supabase ya está activo).
+
+## 2026-10-04 (pull request) — "ok hazlo"
+- 🎯 **POR QUÉ:** Azure publica desde `main`; los cambios de la comunidad deben fusionarse para llegar a baqueanonicaragua.com.
+- ⚙️ **CÓMO:** abrir pull request de `claude/sleepy-goodall-kqogrq` hacia la rama por defecto, siguiendo la plantilla de PR si existe.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
