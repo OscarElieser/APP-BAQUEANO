@@ -24,7 +24,7 @@ SELECT ok(NOT has_table_privilege('authenticated', 'public.audit_logs', 'SELECT'
 SELECT ok(NOT has_table_privilege('authenticated', 'public.audit_logs', 'DELETE'), 'authenticated no elimina audit_logs');
 
 SELECT ok(NOT has_table_privilege('anon', 'public.traffic_sessions', 'SELECT'), 'anon no lee telemetria');
-SELECT ok(NOT has_table_privilege('anon', 'public.traffic_sessions', 'INSERT'), 'anon no inserta telemetria directa');
+SELECT ok(has_table_privilege('anon', 'public.traffic_sessions', 'INSERT'), 'anon solo inserta telemetria (sin leer ni borrar)');
 SELECT ok(NOT has_table_privilege('authenticated', 'public.traffic_sessions', 'SELECT'), 'authenticated no lee telemetria');
 SELECT ok(NOT has_table_privilege('authenticated', 'public.traffic_sessions', 'DELETE'), 'authenticated no elimina telemetria');
 

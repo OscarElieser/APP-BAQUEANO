@@ -37,6 +37,14 @@
 (function (window, document) {
   'use strict';
 
+  // 🔒 SEGURIDAD (2026-10-04): el navegador NO escribe en Supabase con la clave
+  // pública. Las escrituras del Ops Center van a Firestore (fuente prioritaria) y
+  // js/firestore-mirror.js las replica en Supabase vía la Edge Function
+  // baqueano-mirror (token de Firebase verificado + rol de servicio). Las
+  // escrituras directas exigían políticas RLS abiertas (`ALL` para `public`) en
+  // audit_logs y ops_backup_entities, que permitían borrar la auditoría.
+  const SUPABASE_BROWSER_WRITES = false;
+
   // --------------------------------------------------------------------------
   // --------------------------------------------------------------------------
   // 0. REGISTRO UNIVERSAL DE PÁGINAS Y SECCIONES DEL SITIO WEB (16 PÁGINAS)
@@ -2540,7 +2548,7 @@
       }
 
       // Sincronización soberana en Supabase (public.audit_logs)
-      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+      if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase && window.baqueanoSupabase.from) {
         try {
           await window.baqueanoSupabase.from('audit_logs').insert({
             admin_email: performedByEmail,
@@ -2579,7 +2587,7 @@
       }
 
       // 2. Eliminar en Supabase
-      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+      if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase && window.baqueanoSupabase.from) {
         try {
           await window.baqueanoSupabase.from('audit_logs').delete().or(`id.eq.${logId},target_id.eq.${logId}`);
         } catch (sbErr) {
@@ -2625,7 +2633,7 @@
         }
       }
 
-      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+      if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase && window.baqueanoSupabase.from) {
         try {
           await window.baqueanoSupabase.from('audit_logs').delete().neq('admin_email', 'TRUNCATE_FILTER_IMPOSSIBLE_VALUE');
         } catch (sbErr) {
@@ -2707,7 +2715,7 @@
       }
 
       // 2. Sincronización en Supabase (Almacenamiento de Respaldo)
-      if (window.baqueanoSupabase) {
+      if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase) {
         try {
           await window.baqueanoSupabase.from('ops_backup_entities').upsert({
             id: entityId,
@@ -2879,7 +2887,7 @@
       await batch.commit();
 
       // Eliminación garantizada en Supabase
-      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+      if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase && window.baqueanoSupabase.from) {
         try {
           window.baqueanoSupabase.from('ops_backup_entities').delete().eq('id', entityId).catch(() => {});
           if (config.collection === 'destinations' || config.collection === 'places') {
@@ -3485,7 +3493,7 @@
       await batch.commit();
 
       // Sincronización soberana masiva hacia Supabase
-      if (window.baqueanoSupabase && window.baqueanoSupabase.from) {
+      if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase && window.baqueanoSupabase.from) {
         try {
           for (const dest of seedDestinations) {
             await window.baqueanoSupabase.from('destinations').upsert({
@@ -7300,7 +7308,7 @@
             updatedBy: OpsState.currentUser?.email || 'admin'
           }, { merge: true });
         }
-        if (window.baqueanoSupabase) {
+        if (SUPABASE_BROWSER_WRITES && window.baqueanoSupabase) {
           await window.baqueanoSupabase.from('ops_backup_entities').upsert({
             id: 'global_config',
             module_id: '32-configuracion',
