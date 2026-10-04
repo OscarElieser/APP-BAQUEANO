@@ -4021,3 +4021,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Ops Center: `SUPABASE_BROWSER_WRITES = false` — ya no escribe/borra en Supabase con la clave pública; Firestore + espejo verificado `baqueano-mirror` replican.
   - Pruebas negativas como anon (transacción revertida): 12/12 + telemetría permitida; `supabase/tests/rls_hardening.test.sql` (14 aserciones pgTAP) y ajuste de `sensitive_surfaces_rls.test.sql`.
 - **CI producción:** el job `verify-azure` de `deploy-production.yml` no hacía checkout → `tools/verify-sprints.mjs` MODULE_NOT_FOUND aunque Azure servía el commit correcto (`/health` = f3e2fd9, Supabase OK con 17 departamentos). Agregados checkout + Node 22.
+- **P0 Roles (RBAC) demostrables — publicado:**
+  - Supabase: tabla `public.staff_roles` (super_admin | admin | auditor; RLS + política restrictiva + sin privilegios de cliente; verificado en producción: anon/authenticated sin SELECT) → `supabase/migrations/20261005000000_staff_roles_rbac.sql`.
+  - Edge Function `baqueano-community` v2 desplegada: rol desde claim o `staff_roles` (correo verificado), acción `whoami`, `mod_queue` para admin y AUDITOR con `read_only`, escrituras solo admin/superadmin.
+  - `js/shared/roles.js`: rol AUDITOR, `canAccessOps` (admin, superadmin, auditor) y `canWriteOps` (admin, superadmin), consulta `whoami` al servidor si no hay claim ni matriz local. Prueba unitaria 10/10.
+  - Ops Center: modo Auditor (solo lectura) envuelve 52 métodos de escritura de `OpsCMS` y `BaqueanoOpsEngine` (aviso y `false`), banner `.ops-readonly-banner`; la moderación de la comunidad oculta botones con `read_only`. Playwright: métodos envueltos, aviso visible, `exportFullBackup` permitido, 0 errores JS.
+  - CI: pruebas negativas en vivo en `deploy-production.yml` (whoami/mod_queue/moderate sin sesión o token falso → 401; anon no lee staff_roles, auditoría, respaldos, perfiles ni reservas).
+  - Documento: `docs/security/ROLES_Y_PERMISOS.md` (matriz Invitado/Explorador/Emprendedor/Auditor/Admin/Superadmin, cómo asignar Auditor por SQL, evidencias, limitación Firestore).
+  - Pendiente del propietario: correo para la cuenta Auditor (demo al jurado).

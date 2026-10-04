@@ -1820,3 +1820,41 @@
 }
 
 
+
+/* ==========================================================================
+   🔎 MODO AUDITOR (SOLO LECTURA)
+   🎯 POR QUÉ: el rol Auditor revisa sin modificar; la interfaz debe dejarlo claro.
+   ⚙️ CÓMO: ops-engine.js agrega body.ops-readonly; se muestra un banner fijo y
+      se atenúan los controles de creación/edición (el bloqueo real lo hacen
+      el motor y el servidor).
+   📦 QUÉ: .ops-readonly-banner y atenuación de acciones de escritura.
+   ========================================================================== */
+.ops-readonly-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, #165D6F, #0F172A);
+  color: #F4E6C1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 2px solid #F65E01;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.45);
+}
+.ops-readonly-banner i { color: #F65E01; }
+body.ops-readonly #btnBulkPublish,
+body.ops-readonly #btnBulkDraft,
+body.ops-readonly #btnBulkArchive,
+body.ops-readonly #btnBulkTrash,
+body.ops-readonly [onclick*="openCreateDrawer"],
+body.ops-readonly [onclick*="hardDelete"],
+body.ops-readonly [onclick*="trashEntity"],
+body.ops-readonly [onclick*="saveGlobal"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

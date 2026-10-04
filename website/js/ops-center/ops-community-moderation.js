@@ -45,7 +45,7 @@
     restaurante: 'Restaurante', tour: 'Tour', evento: 'Evento', otro: 'Otro'
   };
 
-  var state = { status: 'pending_review', panel: null, requestId: 0, busy: false };
+  var state = { status: 'pending_review', panel: null, requestId: 0, busy: false, readOnly: false };
 
   // --------------------------------------------------------------------------
   // Utilidades de DOM seguras
@@ -213,6 +213,11 @@
     ]);
   }
 
+  // Rol Auditor: ve la cola completa pero no modera (el servidor también lo impide).
+  function readOnlyNotice() {
+    return el('span', { className: 'ops-badge-pill draft', style: 'display:inline-flex;gap:0.35rem;align-items:center;' }, [icon('fa-eye'), ' Solo lectura (Auditor)']);
+  }
+
   function actionButton(label, iconName, kind, handler) {
     return el('button', { type: 'button', className: 'btn-ops-matte' + (kind ? ' ' + kind : ''), onclick: handler }, [icon(iconName), ' ' + label]);
   }
@@ -227,6 +232,7 @@
     note.value = item.moderation_note || '';
 
     function moderate(patch, confirmText) {
+      if (state.readOnly) return;
       if (confirmText && !window.confirm(confirmText)) return;
       var body = Object.assign({ id: item.id }, patch);
       var trimmed = note.value.trim();
@@ -247,16 +253,21 @@
     ];
 
     var actions = [];
-    if (item.status !== 'published') actions.push(actionButton('Aprobar y publicar', 'fa-circle-check', 'accent', function () { moderate({ status: 'published' }); }));
-    if (item.status !== 'hidden') actions.push(actionButton('Ocultar', 'fa-eye-slash', '', function () { moderate({ status: 'hidden' }); }));
-    if (item.status !== 'rejected') {
-      actions.push(actionButton('Rechazar', 'fa-ban', '', function () {
-        moderate({ status: 'rejected' }, 'Rechazar elimina las fotos y videos de esta experiencia para liberar almacenamiento. ¿Continuar?');
-      }));
+    if (state.readOnly) {
+      note.readOnly = true;
+      actions.push(readOnlyNotice());
+    } else {
+      if (item.status !== 'published') actions.push(actionButton('Aprobar y publicar', 'fa-circle-check', 'accent', function () { moderate({ status: 'published' }); }));
+      if (item.status !== 'hidden') actions.push(actionButton('Ocultar', 'fa-eye-slash', '', function () { moderate({ status: 'hidden' }); }));
+      if (item.status !== 'rejected') {
+        actions.push(actionButton('Rechazar', 'fa-ban', '', function () {
+          moderate({ status: 'rejected' }, 'Rechazar elimina las fotos y videos de esta experiencia para liberar almacenamiento. ¿Continuar?');
+        }));
+      }
+      actions.push(actionButton(item.featured ? 'Quitar destacado' : 'Destacar', 'fa-star', '', function () { moderate({ featured: !item.featured }); }));
+      actions.push(actionButton(item.verified_visit ? 'Quitar verificación' : 'Visita verificada', 'fa-certificate', '', function () { moderate({ verified_visit: !item.verified_visit }); }));
+      actions.push(actionButton('Guardar nota', 'fa-floppy-disk', '', function () { moderate({}); }));
     }
-    actions.push(actionButton(item.featured ? 'Quitar destacado' : 'Destacar', 'fa-star', '', function () { moderate({ featured: !item.featured }); }));
-    actions.push(actionButton(item.verified_visit ? 'Quitar verificación' : 'Visita verificada', 'fa-certificate', '', function () { moderate({ verified_visit: !item.verified_visit }); }));
-    actions.push(actionButton('Guardar nota', 'fa-floppy-disk', '', function () { moderate({}); }));
 
     return el('article', {
       className: 'ops-table-container-matte',
@@ -291,6 +302,7 @@
 
   function commentRow(comment) {
     function act(status, confirmText) {
+      if (state.readOnly) return;
       if (confirmText && !window.confirm(confirmText)) return;
       run(api().call('mod_comment', { id: comment.id, status: status }), 'Comentario actualizado.');
     }
@@ -305,7 +317,7 @@
         ]),
         el('p', { text: comment.body, style: 'margin:0;font-size:0.84rem;color:var(--ops-text-secondary);white-space:pre-line;overflow-wrap:anywhere;' })
       ]),
-      el('div', { style: 'display:flex;gap:0.4rem;flex-wrap:wrap;' }, [
+      state.readOnly ? readOnlyNotice() : el('div', { style: 'display:flex;gap:0.4rem;flex-wrap:wrap;' }, [
         actionButton('Restaurar', 'fa-rotate-left', 'accent', function () { act('published'); }),
         comment.status !== 'hidden' ? actionButton('Ocultar', 'fa-eye-slash', '', function () { act('hidden'); }) : null,
         actionButton('Eliminar', 'fa-trash', '', function () { act('deleted', '¿Eliminar este comentario de forma definitiva para el público?'); })
@@ -335,6 +347,7 @@
     client.call('mod_queue', { status: state.status }).then(function (data) {
       if (requestId !== state.requestId) return;
       state.lastCounts = data.counts || {};
+      state.readOnly = data.read_only === true;
       updateNavBadge(state.lastCounts);
       var items = Array.isArray(data.items) ? data.items : [];
       var comments = Array.isArray(data.comments) ? data.comments : [];

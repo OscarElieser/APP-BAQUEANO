@@ -92,6 +92,28 @@ jobs:
           echo "$body" | grep -q '"provider":"supabase-postgresql","ok":true' || { echo "::error::Supabase no respondió desde Azure"; exit 1; }
       - name: Evidencia Sprint 1–3 completa
         run: node tools/verify-sprints.mjs --commit="${GITHUB_SHA::7}"
+      - name: Pruebas negativas en vivo (RBAC y RLS)
+        # Clave publicable: es pública por diseño (va en el sitio). Demuestra que
+        # sin sesión o con token falso no se modera ni se leen tablas de servidor.
+        env:
+          FN: https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-community
+          REST: https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1
+          ANON: sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d
+        run: |
+          expect() { # $1 descripción, $2 código esperado (regex), resto: curl
+            local desc="$1" want="$2"; shift 2
+            local code; code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$@")"
+            if [[ "$code" =~ ^($want)$ ]]; then echo "✅ $desc → $code"; else echo "::error::$desc → $code (esperado $want)"; exit 1; fi
+          }
+          expect "whoami sin sesión" 401 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"whoami"}'
+          expect "mod_queue sin sesión" 401 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"mod_queue"}'
+          expect "mod_queue con token falso" 401 -X POST "$FN" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"mod_queue"}'
+          expect "moderate sin sesión" 401 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"moderate","id":"00000000-0000-0000-0000-000000000000","status":"published"}'
+          expect "lista pública de experiencias" 200 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"list"}'
+          for t in staff_roles audit_logs ops_backup_entities profiles reservations; do
+            body="$(curl -s --max-time 20 "$REST/$t?select=*&limit=1" -H "apikey: $ANON")"
+            if [[ "$body" == "[]" || "$body" == *'"code"'* ]]; then echo "✅ anon no lee $t → ${body:0:80}"; else echo "::error::anon leyó $t"; exit 1; fi
+          done
       - name: Cabeceras de seguridad y redirecciones
         run: |
           headers="$(curl -fsSI --max-time 15 "$SITE/")"

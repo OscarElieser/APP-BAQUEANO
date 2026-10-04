@@ -2221,6 +2221,7 @@
         role: role
       };
       OpsState.currentRole = role;
+      applyReadOnlyMode(role);
 
       OpsUI.updateUserProfileUI(OpsState.currentUser);
       OpsUI.hideLoginGate();
@@ -7395,6 +7396,82 @@
       if (accessibleName) control.setAttribute('aria-label', accessibleName);
     });
   }
+
+  // ==========================================================================
+  // 🔎 MODO AUDITOR (SOLO LECTURA)
+  // ==========================================================================
+  // 🎯 POR QUÉ: el rol Auditor revisa auditoría, moderación y respaldos sin
+  //    poder alterar nada. La interfaz debe reflejarlo con claridad.
+  // ⚙️ CÓMO: se envuelven los métodos de escritura de OpsCMS y del motor; si el
+  //    rol no puede escribir (BaqueanoRoles.canWriteOps), se bloquea la acción
+  //    con un aviso. La garantía real está en el servidor: firestore.rules y la
+  //    Edge Function solo aceptan escrituras de admin/superadmin.
+  // 📦 QUÉ: clase body.ops-readonly, banner y bloqueo de 50+ acciones.
+  // ==========================================================================
+  const OPS_WRITE_METHODS = {
+    cms: ['deleteAuditLog', 'clearAuditLogs', 'saveEntity', 'updateStatus', 'setTrashed', 'hardDelete', 'duplicate',
+      'toggleManualVerified', 'executeBulkAction', 'seedInitialContent', 'savePageSection', 'togglePageSectionStatus',
+      'movePageSectionOrder', 'trashPageSection', 'restorePageSection', 'restorePageElementOriginal',
+      'hardDeletePageSection', 'resetPageSectionsToBaseline'],
+    engine: ['seedInitialContent', 'saveSiteVideoConfiguration', 'triggerManualBackupSync', 'openCreateDrawer',
+      'openEditDrawer', 'saveDestination', 'duplicateEntity', 'trashEntity', 'restoreEntity', 'hardDeleteEntity',
+      'toggleManualVerified', 'verifyBusiness', 'revokeBusinessVerification', 'manageSubscription',
+      'saveGlobalAnnouncement', 'uploadAndroidRelease', 'publishExternalAndroidRelease', 'unpublishAndroidRelease',
+      'runAiJob', 'runAiInstruction', 'toggleAiAutonomy', 'onDirectMediaUpload', 'openSectionModal',
+      'addSectionToPage', 'toggleSectionStatus', 'moveSectionOrder', 'trashSection', 'restoreSection',
+      'restoreOriginalElement', 'hardDeleteSection', 'resetPageToBaseline', 'importBackupFile',
+      'saveGlobalSettings', 'saveGlobalSeoConfig']
+  };
+
+  function opsCanWrite() {
+    const role = OpsState.currentRole;
+    if (window.BaqueanoRoles && typeof window.BaqueanoRoles.canWriteOps === 'function') {
+      return window.BaqueanoRoles.canWriteOps(role);
+    }
+    return role === 'admin' || role === 'super_admin';
+  }
+
+  function wrapWriteMethods(target, names) {
+    if (!target) return;
+    names.forEach((name) => {
+      const original = target[name];
+      if (typeof original !== 'function' || original.__bqReadOnlyGuard) return;
+      const guarded = function (...args) {
+        if (!opsCanWrite()) {
+          OpsToast.show('Rol Auditor: acceso de solo lectura. Esta acción requiere un administrador.', 'warning', 4200);
+          return Promise.resolve(false);
+        }
+        return original.apply(this, args);
+      };
+      guarded.__bqReadOnlyGuard = true;
+      target[name] = guarded;
+    });
+  }
+
+  function applyReadOnlyMode(role) {
+    const readOnly = !opsCanWrite();
+    document.body.classList.toggle('ops-readonly', readOnly);
+    document.body.dataset.opsRole = role || '';
+    let banner = document.getElementById('opsReadOnlyBanner');
+    if (readOnly && !banner) {
+      banner = document.createElement('div');
+      banner.id = 'opsReadOnlyBanner';
+      banner.className = 'ops-readonly-banner';
+      banner.setAttribute('role', 'status');
+      const icon = document.createElement('i');
+      icon.className = 'fa-solid fa-eye';
+      icon.setAttribute('aria-hidden', 'true');
+      const text = document.createElement('span');
+      text.textContent = 'Modo Auditor: podés revisar auditoría, moderación y respaldos, pero no modificar contenido.';
+      banner.append(icon, text);
+      document.body.prepend(banner);
+    } else if (!readOnly && banner) {
+      banner.remove();
+    }
+  }
+
+  wrapWriteMethods(OpsCMS, OPS_WRITE_METHODS.cms);
+  wrapWriteMethods(window.BaqueanoOpsEngine, OPS_WRITE_METHODS.engine);
 
   document.addEventListener('DOMContentLoaded', () => {
     window.BaqueanoOpsEngine.init();

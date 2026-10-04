@@ -17,15 +17,18 @@
 //    service role tras validar, sanear y limitar frecuencia.
 // 3. Multimedia: URL firmada de subida por archivo; al adjuntar se
 //    comprueban tamaño real y "magic bytes" (tipo real, no el declarado).
-// 4. Administradores: claims (admin/super_admin) o correo verificado activo
-//    en public.official_super_admins (misma regla que el Ops Center).
+// 4. Roles (RBAC): claim `role` del token o correo verificado activo en
+//    public.staff_roles (super_admin | admin | auditor). Admin y superadmin
+//    moderan; el AUDITOR solo lee la cola de moderación (nunca modifica).
 // 5. Nunca se devuelve el UID de otra persona, su correo ni datos internos.
 //
 // 📦 QUÉ (POST { action, ... }):
 // - Público: list, get, destination_feed.
 // - Con sesión: mine, create, update, delete, upload_url, attach_media,
 //   remove_media, comment, edit_comment, delete_comment, react, report.
-// - Administración: mod_queue, moderate, mod_comment, resolve_report.
+// - Administración: mod_queue (admin y auditor), moderate, mod_comment,
+//   resolve_report (solo admin/superadmin).
+// - Identidad: whoami → rol verificado por el servidor.
 // ============================================================================
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
@@ -78,7 +81,8 @@ const PUBLIC_COLUMNS = [
 ].join(", ");
 const MEDIA_COLUMNS = "id, testimonial_id, kind, storage_path, thumb_path, mime_type, width, height, duration_seconds, position";
 
-type Actor = { uid: string; email: string | null; emailVerified: boolean; name: string; avatar: string | null; isAdmin: boolean };
+type Actor = { uid: string; email: string | null; emailVerified: boolean; name: string; avatar: string | null; role: string; isAdmin: boolean; isAuditor: boolean };
+const STAFF_ROLES = new Set(["super_admin", "admin", "auditor"]);
 class HttpError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
@@ -183,20 +187,29 @@ async function resolveActor(req: Request, service: SupabaseClient): Promise<Acto
   if (!uid) throw new HttpError(401, "La sesión no identifica a ningún usuario.");
   const email = typeof claims.email === "string" ? claims.email.toLowerCase() : null;
   const emailVerified = claims.email_verified === true;
-  let isAdmin = claims.admin === true || claims.role === "admin" || claims.role === "super_admin";
-  if (!isAdmin && email && emailVerified) {
-    const { data } = await service.from("official_super_admins").select("email").eq("email", email).eq("is_active", true).maybeSingle();
-    isAdmin = Boolean(data);
+  let role = typeof claims.role === "string" && STAFF_ROLES.has(claims.role) ? claims.role : (claims.admin === true ? "admin" : "");
+  if (!role && email && emailVerified) {
+    const { data } = await service.from("staff_roles").select("role").eq("email", email).eq("is_active", true).maybeSingle();
+    if (data && STAFF_ROLES.has(data.role)) role = data.role;
   }
+  if (!role) role = "explorer";
+  const isAdmin = role === "admin" || role === "super_admin";
+  const isAuditor = role === "auditor";
   const rawName = typeof claims.name === "string" ? claims.name : "";
   const name = (rawName.replace(/\s+/g, " ").trim().slice(0, 80)) || "Viajero BAQUEANO";
   const picture = typeof claims.picture === "string" && /^https:\/\//.test(claims.picture) ? claims.picture.slice(0, 500) : null;
-  return { uid, email, emailVerified, name, avatar: picture, isAdmin };
+  return { uid, email, emailVerified, name, avatar: picture, role, isAdmin, isAuditor };
 }
 
 function requireActor(actor: Actor | null): Actor {
   if (!actor) throw new HttpError(401, "Iniciá sesión para participar en la comunidad BAQUEANO.");
   return actor;
+}
+// Lectura de moderación: administradores y auditores (sin permisos de escritura).
+function requireStaffReader(actor: Actor | null): Actor {
+  const a = requireActor(actor);
+  if (!a.isAdmin && !a.isAuditor) throw new HttpError(403, "Solo el equipo autorizado del Ops Center puede ver la moderación.");
+  return a;
 }
 function requireAdmin(actor: Actor | null): Actor {
   const a = requireActor(actor);
@@ -594,8 +607,12 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
     }
 
     // ---------- Moderación (Ops Center) ----------
+    case "whoami": {
+      const a = requireActor(actor);
+      return { role: a.role, email_verified: a.emailVerified };
+    }
     case "mod_queue": {
-      requireAdmin(actor);
+      const reader = requireStaffReader(actor);
       const status = MODERATION_STATES.has(String(body.status)) ? String(body.status) : "pending_review";
       const { data, error } = await service.from("testimonials")
         .select(`${PUBLIC_COLUMNS}, moderation_note, moderated_at, reports_count, testimonial_media(${MEDIA_COLUMNS}), testimonial_reports(id, reason, details, status, created_at)`)
@@ -612,6 +629,7 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       return {
         items: (data || []).map((t: Record<string, unknown>) => ({ ...t, media: shapeMedia(t.testimonial_media as Array<Record<string, unknown>>), testimonial_media: undefined })),
         comments: comments || [], counts,
+        read_only: !reader.isAdmin,
       };
     }
     case "moderate": {
