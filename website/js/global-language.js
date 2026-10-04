@@ -18,9 +18,12 @@
   var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.04';
+  var VERSION = '2026.10.05';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
+  // Índice en minúsculas: permite traducir títulos en MAYÚSCULAS (p. ej. "EXPLORÁ")
+  // aunque el catálogo guarde la frase en mayúscula inicial.
+  var semanticFallbackKeysLower = new Map();
   var originals = new WeakMap();
   var attributeOriginals = new WeakMap();
   var applying = false;
@@ -78,7 +81,11 @@
       var key = prefix ? prefix + '.' + segment : segment;
       var value = source[segment];
       if (value && typeof value === 'object' && !Array.isArray(value)) indexCanonicalPhrases(value, key);
-      else if (typeof value === 'string' && value.trim() && !semanticFallbackKeys.has(value.trim())) semanticFallbackKeys.set(value.trim(), key);
+      else if (typeof value === 'string' && value.trim() && !semanticFallbackKeys.has(value.trim())) {
+        semanticFallbackKeys.set(value.trim(), key);
+        var lowered = value.trim().toLowerCase();
+        if (!semanticFallbackKeysLower.has(lowered)) semanticFallbackKeysLower.set(lowered, key);
+      }
     });
   }
 
@@ -120,8 +127,15 @@
     var trailing = (String(value).match(/\s*$/) || [''])[0];
     var source = String(value).trim();
     var key = legacyKeys[source] || semanticFallbackKeys.get(source);
+    var shouted = false;
+    if (!key) {
+      // Misma frase con otra capitalización; si el original estaba TODO EN MAYÚSCULAS se conserva ese estilo.
+      key = semanticFallbackKeysLower.get(source.toLowerCase());
+      shouted = Boolean(key) && source === source.toUpperCase() && source !== source.toLowerCase();
+    }
     if (!key || currentLanguage === 'es') return value;
     var translated = translate(key, { fallback: source });
+    if (shouted) translated = translated.toLocaleUpperCase(LOCALES[currentLanguage]);
     return leading + translated + trailing;
   }
 
