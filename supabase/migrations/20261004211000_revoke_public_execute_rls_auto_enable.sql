@@ -1,0 +1,18 @@
+-- ============================================================================
+-- BAQUEANO — Retirar la exposición pública de public.rls_auto_enable()
+-- ============================================================================
+-- 🎯 POR QUÉ: el asesor de seguridad de Supabase (lints 0028 y 0029) avisaba que
+--    `anon` y `authenticated` podían ejecutar esta función SECURITY DEFINER vía
+--    /rest/v1/rpc/rls_auto_enable. No debe ser una RPC pública.
+-- ⚙️ CÓMO: la función es el disparador de eventos `ensure_rls` (activa RLS en toda
+--    tabla nueva de `public`). No se elimina ni se modifica. Solo se retira el
+--    permiso EXECUTE a PUBLIC, anon y authenticated; el dueño (postgres) y
+--    service_role lo conservan. Los disparadores de eventos no requieren EXECUTE
+--    del usuario al activarse.
+-- 📦 QUÉ: aplicado en el proyecto heiudfpthqwtjrtluqlm el 2026-10-04.
+--    Verificación: ACL = {postgres, service_role}; una tabla de prueba creada en
+--    una transacción revertida salió con relrowsecurity = true; departments = 17;
+--    los dos avisos del asesor desaparecieron.
+-- ↩️ Reversión: GRANT EXECUTE ON FUNCTION public.rls_auto_enable() TO anon, authenticated;
+-- ============================================================================
+REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM PUBLIC, anon, authenticated;

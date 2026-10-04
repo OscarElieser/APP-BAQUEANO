@@ -13,6 +13,7 @@
       "**/node_modules/**",
       "**/docs/**",
       "**/scripts/**",
+      "**/i18n-sources/**",
       "**/dev-*.log",
       "**/*.log",
       "**/apps/**",

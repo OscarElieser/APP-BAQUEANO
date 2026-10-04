@@ -1,0 +1,47 @@
+# =====================================================
+# BAQUEANO — Calidad del portal web (Fase 2/3 · Hackathon 2026)
+# =====================================================
+# 🎯 POR QUÉ: hasta ahora ninguna prueba web era un gate de CI (hallazgo F-16).
+# ⚙️ CÓMO: job único y barato, sin secretos, sin tocar producción:
+#   1. build estático del Website (misma lista permitida que Azure).
+#   2. validate-i18n: compara claves entre los 6 catálogos (gate real: los 5
+#      idiomas ya tienen las 570 claves).
+#   3. audit-i18n-pages: mide la cobertura real por página; informativo, con
+#      umbral progresivo (subirlo cuando mejore la cobertura).
+# 📦 QUÉ: señal temprana en cada PR/push; el resumen queda en el "Job summary".
+# =====================================================
+name: 🌐 BAQUEANO Calidad Web
+
+on:
+  push:
+    branches: [main, 'claude/**', 'audit/**']
+    paths: ['website/**', '.github/workflows/web-quality.yml']
+  pull_request:
+    branches: [main]
+    paths: ['website/**', '.github/workflows/web-quality.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  web-quality:
+    name: 🌐 Build + i18n
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build estático del Website
+        run: node scripts/build-hostinger-static.mjs
+      - name: Catálogos i18n (claves equivalentes en los 6 idiomas)
+        run: node scripts/validate-i18n.mjs
+      - name: Cobertura i18n por página
+        run: |
+          node scripts/audit-i18n-pages.mjs | tee /tmp/i18n.txt
+          { echo '### Cobertura i18n por página'; echo '```'; tail -n 3 /tmp/i18n.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Umbral mínimo por página (progresivo)
+        run: node scripts/audit-i18n-pages.mjs --min=0

@@ -66,6 +66,12 @@ jobs:
     env:
       SITE: https://baqueanonicaragua.com
     steps:
+      # 🎯 Causa raíz de los runs #25–#28 en rojo: este job no descargaba el
+      #    repositorio y `tools/verify-sprints.mjs` no existía en el runner.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Esperar a que /health sirva este commit (autodeploy cada 2 min)
         run: |
           short="${GITHUB_SHA::7}"

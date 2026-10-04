@@ -1,0 +1,297 @@
+language.select	Select your language	Choisissez votre langue	Scegli la lingua	Escolha o idioma	Sprache auswählen
+nav.profile	My Profile	Mon profil	Il mio profilo	Meu perfil	Mein Profil
+nav.favorites	Favorites	Favoris	Preferiti	Favoritos	Favoriten
+nav.assistant	Baqueano Digital	Baqueano Digital	Baqueano Digital	Baqueano Digital	Baqueano Digital
+nav.legal	Legal	Mentions légales	Note legali	Legal	Rechtliches
+nav.about	About Us	Qui sommes-nous	Chi siamo	Quem somos	Über uns
+nav.register	Register your Business	Inscrivez votre entreprise	Registra la tua attività	Cadastre seu negócio	Ihr Unternehmen registrieren
+nav.complaints	Report a Concern	Canal de signalement	Canale di segnalazione	Canal de denúncias	Meldekanal
+nav.allies	Allies Network	Réseau d'alliés	Rete di alleati	Rede de aliados	Netzwerk der Partner
+nav.admin	Ops Center	Ops Center	Ops Center	Ops Center	Ops Center
+nav.skipNav	Skip to main content	Aller au contenu principal	Vai al contenuto principale	Ir para o conteúdo principal	Zum Hauptinhalt springen
+nav.aria	Main navigation	Navigation principale	Navigazione principale	Navegação principal	Hauptnavigation
+nav.brandAria	Baqueano Nicaragua — Home	Baqueano Nicaragua — Accueil	Baqueano Nicaragua — Home	Baqueano Nicaragua — Início	Baqueano Nicaragua — Startseite
+nav.menuOpen	Open menu	Ouvrir le menu	Apri il menu	Abrir menu	Menü öffnen
+nav.menuClose	Close menu	Fermer le menu	Chiudi il menu	Fechar menu	Menü schließen
+footer.explore	Explore	Explorer	Esplora	Explore	Entdecken
+footer.culture	Culture	Culture	Cultura	Cultura	Kultur
+footer.community	Community	Communauté	Comunità	Comunidade	Gemeinschaft
+footer.legal	Legal	Mentions légales	Note legali	Legal	Rechtliches
+footer.destinations	Destinations	Destinations	Destinazioni	Destinos	Reiseziele
+footer.interactive_map	Interactive Map	Carte interactive	Mappa interattiva	Mapa interativo	Interaktive Karte
+footer.experiences	Experiences	Expériences	Esperienze	Experiências	Erlebnisse
+footer.departments	Departments	Départements	Dipartimenti	Departamentos	Departamentos
+footer.history_memory	History & Memory	Histoire et mémoire	Storia e memoria	História e memória	Geschichte & Erinnerung
+footer.ancestral_gastronomy	Ancestral Cuisine	Gastronomie ancestrale	Gastronomia ancestrale	Gastronomia ancestral	Traditionelle Küche
+footer.folk_music	Folk Sound	Son folklorique	Suono folk	Som folk	Folk-Klänge
+footer.environmental	Environmental Stewardship	Protection de l'environnement	Tutela ambientale	Proteção ambiental	Umweltschutz
+footer.allies	Allies Network	Réseau d'alliés	Rete di alleati	Rede de aliados	Netzwerk der Partner
+footer.about	About Us	Qui sommes-nous	Chi siamo	Quem somos	Über uns
+footer.register_business	Register your Business	Inscrivez votre entreprise	Registra la tua attività	Cadastre seu negócio	Ihr Unternehmen registrieren
+footer.complaints	Report a Concern	Canal de signalement	Canale di segnalazione	Canal de denúncias	Meldekanal
+footer.profile	My Profile	Mon profil	Il mio profilo	Meu perfil	Mein Profil
+footer.trip	My Trip	Mon voyage	Il mio viaggio	Minha viagem	Meine Reise
+footer.terms	Terms of Use	Conditions d'utilisation	Termini di utilizzo	Termos de uso	Nutzungsbedingungen
+footer.privacy	Privacy Policy	Politique de confidentialité	Informativa sulla privacy	Política de privacidade	Datenschutzerklärung
+footer.cookies	Cookie Policy	Politique de cookies	Politica sui cookie	Política de cookies	Cookie-Richtlinie
+footer.legal_notice	Legal Notice	Mentions légales	Note legali	Aviso legal	Impressum
+footer.copyright	© {year} Baqueano Nicaragua.	© {year} Baqueano Nicaragua.	© {year} Baqueano Nicaragua.	© {year} Baqueano Nicaragua.	© {year} Baqueano Nicaragua.
+actions.download	Download	Télécharger	Scarica	Baixar	Herunterladen
+actions.filter	Filter	Filtrer	Filtra	Filtrar	Filtern
+actions.clear	Clear	Effacer	Cancella	Limpar	Zurücksetzen
+actions.apply	Apply	Appliquer	Applica	Aplicar	Anwenden
+actions.confirm	Confirm	Confirmer	Conferma	Confirmar	Bestätigen
+actions.delete	Delete	Supprimer	Elimina	Excluir	Löschen
+actions.edit	Edit	Modifier	Modifica	Editar	Bearbeiten
+actions.add	Add	Ajouter	Aggiungi	Adicionar	Hinzufügen
+actions.remove	Remove	Retirer	Rimuovi	Remover	Entfernen
+actions.explore	Explore	Explorer	Esplora	Explorar	Entdecken
+actions.discover	Discover	Découvrir	Scopri	Descobrir	Entdecken
+actions.plan	Plan	Planifier	Pianifica	Planejar	Planen
+actions.book	Book	Réserver	Prenota	Reservar	Buchen
+actions.contact	Contact	Contacter	Contatta	Entrar em contato	Kontaktieren
+actions.login	Log in	Se connecter	Accedi	Entrar	Anmelden
+actions.logout	Log out	Se déconnecter	Esci	Sair	Abmelden
+actions.register	Sign up	S'inscrire	Registrati	Cadastrar-se	Registrieren
+actions.viewAll	View all	Voir tout	Vedi tutto	Ver tudo	Alle ansehen
+actions.viewMap	View on map	Voir sur la carte	Vedi sulla mappa	Ver no mapa	Auf der Karte ansehen
+actions.openMenu	Open menu	Ouvrir le menu	Apri il menu	Abrir menu	Menü öffnen
+actions.prevPage	Previous page	Page précédente	Pagina precedente	Página anterior	Vorherige Seite
+actions.nextPage	Next page	Page suivante	Pagina successiva	Próxima página	Nächste Seite
+status.success	Done!	C'est fait !	Fatto!	Pronto!	Fertig!
+status.retry	Try again	Réessayer	Riprova	Tentar novamente	Erneut versuchen
+status.saving	Saving…	Enregistrement…	Salvataggio…	Salvando…	Wird gespeichert…
+status.sending	Sending…	Envoi…	Invio…	Enviando…	Wird gesendet…
+status.sent	Sent	Envoyé	Inviato	Enviado	Gesendet
+status.required	This field is required	Ce champ est obligatoire	Questo campo è obbligatorio	Este campo é obrigatório	Dieses Feld ist erforderlich
+status.invalid	Please check this field	Vérifiez ce champ	Controlla questo campo	Verifique este campo	Bitte überprüfen Sie diese Angabe
+status.notFound	Not found	Introuvable	Non trovato	Não encontrado	Nicht gefunden
+home.hero.title	Discover what isn't on the map	Découvrez ce qui n'est pas sur la carte	Scopri ciò che non è sulla mappa	Descubra o que não está no mapa	Entdecken Sie, was nicht auf der Karte steht
+home.hero.subtitle	Community tourism and ecotourism in Nicaragua	Tourisme communautaire et écotourisme au Nicaragua	Turismo comunitario ed ecoturismo in Nicaragua	Turismo comunitário e ecoturismo na Nicarágua	Gemeindetourismus und Ökotourismus in Nicaragua
+home.hero.cta	Explore destinations	Explorer les destinations	Esplora le destinazioni	Explorar destinos	Reiseziele entdecken
+home.hero.videoAlt	Nature and culture of Nicaragua	Nature et culture du Nicaragua	Natura e cultura del Nicaragua	Natureza e cultura da Nicarágua	Natur und Kultur Nicaraguas
+home.destinations.title	DESTINATIONS THAT	DES DESTINATIONS QUI	DESTINAZIONI CHE	DESTINOS QUE	REISEZIELE, DIE
+home.destinations.subtitle	Inspire	Inspirent	Ispirano	Inspiram	Inspirieren
+home.destinations.featured	Featured Destination	Destination à la une	Destinazione in evidenza	Destino em destaque	Empfohlenes Reiseziel
+home.destinations.exploreBtn	Explore destination	Explorer la destination	Esplora la destinazione	Explorar destino	Reiseziel entdecken
+home.destinations.viewAll	View all destinations	Voir toutes les destinations	Vedi tutte le destinazioni	Ver todos os destinos	Alle Reiseziele ansehen
+home.destinations.mapTitle	Territorial map of Nicaragua	Carte territoriale du Nicaragua	Mappa territoriale del Nicaragua	Mapa territorial da Nicarágua	Territorialkarte von Nicaragua
+home.destinations.moreThanDest	More than a destination	Plus qu'une destination	Più di una destinazione	Mais do que um destino	Mehr als ein Reiseziel
+home.destinations.moreThanDesc	Every place has stories, people and traditions that make it unique.	Chaque lieu a ses histoires, ses habitants et ses traditions qui le rendent unique.	Ogni luogo ha storie, persone e tradizioni che lo rendono unico.	Cada lugar tem histórias, pessoas e tradições que o tornam único.	Jeder Ort hat Geschichten, Menschen und Traditionen, die ihn einzigartig machen.
+home.destinations.filters.all	All	Tout	Tutti	Todos	Alle
+home.destinations.filters.nature	Nature	Nature	Natura	Natureza	Natur
+home.destinations.filters.culture	Culture	Culture	Cultura	Cultura	Kultur
+home.destinations.filters.volcanoes	Volcanoes	Volcans	Vulcani	Vulcões	Vulkane
+home.destinations.filters.beaches	Beaches	Plages	Spiagge	Praias	Strände
+home.destinations.filters.gastronomy	Cuisine	Gastronomie	Gastronomia	Gastronomia	Kulinarik
+home.destinations.filters.communities	Communities	Communautés	Comunità	Comunidades	Gemeinden
+home.destinations.filters.heritage	Heritage	Patrimoine	Patrimonio	Patrimônio	Kulturerbe
+home.destinations.filters.museums	Museums	Musées	Musei	Museus	Museen
+home.pillars.title	The three pillars of BAQUEANO	Les trois piliers de BAQUEANO	I tre pilastri di BAQUEANO	Os três pilares do BAQUEANO	Die drei Säulen von BAQUEANO
+home.pillars.community.title	Communities	Communautés	Comunità	Comunidades	Gemeinschaften
+home.pillars.community.desc	We connect travelers with rural communities and local cooperatives, the true guardians of the land.	Nous mettons les voyageurs en relation avec des communautés rurales et des coopératives locales, véritables gardiennes du territoire.	Colleghiamo i viaggiatori con comunità contadine e cooperative locali, i veri custodi del territorio.	Conectamos viajantes com comunidades camponesas e cooperativas locais, os verdadeiros guardiões do território.	Wir verbinden Reisende mit ländlichen Gemeinden und lokalen Genossenschaften, den wahren Hütern des Landes.
+home.pillars.sustainability.title	Sustainability	Durabilité	Sostenibilità	Sustentabilidade	Nachhaltigkeit
+home.pillars.sustainability.desc	Every route, guide and experience is designed to protect ecosystems and support the local economy.	Chaque itinéraire, chaque guide et chaque expérience est conçu pour protéger les écosystèmes et soutenir l'économie locale.	Ogni percorso, ogni guida e ogni esperienza è pensato per proteggere gli ecosistemi e sostenere l'economia locale.	Cada rota, cada guia e cada experiência são pensados para proteger os ecossistemas e apoiar a economia local.	Jede Route, jeder Guide und jedes Erlebnis ist darauf ausgelegt, Ökosysteme zu schützen und die lokale Wirtschaft zu stärken.
+home.pillars.authenticity.title	Authenticity	Authenticité	Autenticità	Autenticidade	Authentizität
+home.pillars.authenticity.desc	Nothing is staged. The experiences are real, alive and built from within the community.	Rien n'est mis en scène. Les expériences sont réelles, vivantes et construites de l'intérieur du territoire.	Niente è messo in scena. Le esperienze sono vere, vive e costruite dall'interno del territorio.	Nada é encenado. As experiências são reais, vivas e construídas por dentro do território.	Nichts ist inszeniert. Die Erlebnisse sind echt, lebendig und entstehen aus dem Herzen der Region.
+home.sos.title	Emergencies	Urgences	Emergenze	Emergências	Notfälle
+home.sos.subtitle	Immediate assistance for travelers in Nicaragua	Assistance immédiate pour les voyageurs au Nicaragua	Assistenza immediata per i viaggiatori in Nicaragua	Assistência imediata para viajantes na Nicarágua	Sofortige Hilfe für Reisende in Nicaragua
+home.sos.police	National Police	Police nationale	Polizia nazionale	Polícia Nacional	Nationale Polizei
+home.sos.medical	Red Cross / MINSA	Croix-Rouge / MINSA	Croce Rossa / MINSA	Cruz Vermelha / MINSA	Rotes Kreuz / MINSA
+home.sos.fire	Fire Department	Pompiers	Vigili del fuoco	Bombeiros	Feuerwehr
+home.sos.general	General Emergencies	Urgences générales	Emergenze generali	Emergências gerais	Allgemeine Notfälle
+home.sos.close	Close	Fermer	Chiudi	Fechar	Schließen
+destinations.title	Destinations	Destinations	Destinazioni	Destinos	Reiseziele
+destinations.subtitle	Discover Nicaragua like never before	Découvrez le Nicaragua comme jamais	Scopri il Nicaragua come non l'hai mai visto	Descubra a Nicarágua como nunca	Entdecken Sie Nicaragua wie nie zuvor
+destinations.search	Search destination...	Rechercher une destination...	Cerca una destinazione...	Buscar destino...	Reiseziel suchen...
+destinations.featured	Featured	À la une	In evidenza	Destaque	Empfohlen
+destinations.region	Region	Région	Regione	Região	Region
+destinations.category	Category	Catégorie	Categoria	Categoria	Kategorie
+destinations.difficulty	Difficulty	Difficulté	Difficoltà	Dificuldade	Schwierigkeit
+destinations.duration	Duration	Durée	Durata	Duração	Dauer
+destinations.bestSeason	Best time to visit	Meilleure période	Periodo migliore	Melhor época	Beste Reisezeit
+destinations.howToGet	How to get there	Comment s'y rendre	Come arrivare	Como chegar	Anreise
+destinations.whatToSee	What to see	À voir	Cosa vedere	O que ver	Sehenswürdigkeiten
+destinations.localGuides	Local guides	Guides locaux	Guide locali	Guias locais	Lokale Guides
+destinations.experiences	Experiences	Expériences	Esperienze	Experiências	Erlebnisse
+destinations.gallery	Gallery	Galerie	Galleria	Galeria	Galerie
+destinations.noResults	We couldn't find destinations with those filters.	Aucune destination ne correspond à ces filtres.	Non abbiamo trovato destinazioni con questi filtri.	Não encontramos destinos com esses filtros.	Mit diesen Filtern wurden keine Reiseziele gefunden.
+destinations.exploreBtn	Explore	Explorer	Esplora	Explorar	Entdecken
+destinations.viewDossier	View full dossier	Voir le dossier complet	Vedi la scheda completa	Ver dossiê completo	Vollständiges Dossier ansehen
+departments.title	Departments	Départements	Dipartimenti	Departamentos	Departamentos
+departments.subtitle	Explore Nicaragua department by department	Explorez le Nicaragua département par département	Esplora il Nicaragua dipartimento per dipartimento	Explore a Nicarágua departamento por departamento	Entdecken Sie Nicaragua Departamento für Departamento
+departments.capital	Departmental seat	Chef-lieu	Capoluogo	Sede departamental	Hauptort
+departments.population	Population	Population	Popolazione	População	Bevölkerung
+departments.area	Area	Superficie	Superficie	Área	Fläche
+departments.municipalities	Municipalities	Municipalités	Comuni	Municípios	Gemeinden
+departments.attractions	Attractions	Attractions	Attrazioni	Atrações	Sehenswürdigkeiten
+departments.gastronomy	Traditional cuisine	Gastronomie typique	Cucina tipica	Gastronomia típica	Typische Küche
+departments.events	Festivals and events	Fêtes et événements	Feste ed eventi	Festas e eventos	Feste und Veranstaltungen
+departments.history	History	Histoire	Storia	História	Geschichte
+departments.environment	Environment	Environnement	Ambiente	Meio ambiente	Umwelt
+departments.howToGet	How to get there	Comment s'y rendre	Come arrivare	Como chegar	Anreise
+map.title	Map of Nicaragua	Carte du Nicaragua	Mappa del Nicaragua	Mapa da Nicarágua	Karte von Nicaragua
+map.subtitle	Explore the territory interactively	Explorez le territoire de manière interactive	Esplora il territorio in modo interattivo	Explore o território de forma interativa	Erkunden Sie das Land interaktiv
+map.search	Search place...	Rechercher un lieu...	Cerca un luogo...	Buscar lugar...	Ort suchen...
+map.zoomIn	Zoom in	Zoomer	Ingrandisci	Aproximar	Vergrößern
+map.zoomOut	Zoom out	Dézoomer	Riduci	Afastar	Verkleinern
+map.myLocation	My location	Ma position	La mia posizione	Minha localização	Mein Standort
+map.noResults	No places found.	Aucun lieu trouvé.	Nessun luogo trovato.	Nenhum lugar encontrado.	Keine Orte gefunden.
+experiences.title	Experiences	Expériences	Esperienze	Experiências	Erlebnisse
+experiences.subtitle	Live Nicaragua from the inside	Vivez le Nicaragua de l'intérieur	Vivi il Nicaragua dall'interno	Viva a Nicarágua por dentro	Erleben Sie Nicaragua von innen
+experiences.duration	Duration	Durée	Durata	Duração	Dauer
+experiences.groupSize	Group size	Taille du groupe	Dimensione del gruppo	Tamanho do grupo	Gruppengröße
+experiences.price	Price	Prix	Prezzo	Preço	Preis
+experiences.included	Included	Inclus	Incluso	Incluído	Inbegriffen
+experiences.notIncluded	Not included	Non inclus	Non incluso	Não incluído	Nicht inbegriffen
+experiences.requirements	Requirements	Conditions requises	Requisiti	Requisitos	Voraussetzungen
+experiences.book	Book experience	Réserver l'expérience	Prenota l'esperienza	Reservar experiência	Erlebnis buchen
+experiences.contact	Ask about availability	Demander les disponibilités	Chiedi la disponibilità	Consultar disponibilidade	Verfügbarkeit anfragen
+history.title	History & Memory	Histoire et mémoire	Storia e memoria	História e memória	Geschichte & Erinnerung
+history.subtitle	The deep roots of Nicaragua	Les racines profondes du Nicaragua	Le radici profonde del Nicaragua	As raízes profundas da Nicarágua	Die tiefen Wurzeln Nicaraguas
+history.timeline	Timeline	Chronologie	Linea del tempo	Linha do tempo	Zeitleiste
+history.readMore	Read more about this period	En savoir plus sur cette période	Scopri di più su questo periodo	Saiba mais sobre este período	Mehr über diese Epoche lesen
+gastronomy.title	Ancestral Cuisine	Gastronomie ancestrale	Gastronomia ancestrale	Gastronomia ancestral	Traditionelle Küche
+gastronomy.subtitle	The flavors that tell the story of Nicaragua	Les saveurs qui racontent l'histoire du Nicaragua	I sapori che raccontano la storia del Nicaragua	Os sabores que contam a história da Nicarágua	Die Aromen, die die Geschichte Nicaraguas erzählen
+gastronomy.ingredients	Ingredients	Ingrédients	Ingredienti	Ingredientes	Zutaten
+gastronomy.recipe	Recipe	Recette	Ricetta	Receita	Rezept
+gastronomy.region	Region of origin	Région d'origine	Regione di origine	Região de origem	Herkunftsregion
+gastronomy.traditional	Traditional	Traditionnel	Tradizionale	Tradicional	Traditionell
+gastronomy.dishes	Dishes	Plats	Piatti	Pratos	Gerichte
+gastronomy.drinks	Drinks	Boissons	Bevande	Bebidas	Getränke
+gastronomy.desserts	Desserts	Desserts	Dolci	Sobremesas	Desserts
+music.title	Folk Sound	Son folklorique	Suono folk	Som folk	Folk-Klänge
+music.subtitle	Music as the identity of the Nicaraguan people	La musique comme identité du peuple nicaraguayen	La musica come identità del popolo nicaraguense	A música como identidade do povo nicaraguense	Musik als Identität des nicaraguanischen Volkes
+music.genre	Genre	Genre	Genere	Gênero	Genre
+music.instrument	Instrument	Instrument	Strumento	Instrumento	Instrument
+music.region	Region	Région	Regione	Região	Region
+music.listen	Listen	Écouter	Ascolta	Ouvir	Anhören
+music.artists	Artists	Artistes	Artisti	Artistas	Künstler
+music.festivals	Festivals	Festivals	Festival	Festivais	Festivals
+environmental.title	Environmental Stewardship	Protection de l'environnement	Tutela ambientale	Proteção ambiental	Umweltschutz
+environmental.subtitle	Protecting Nicaragua's natural heritage	Protéger le patrimoine naturel du Nicaragua	Proteggere il patrimonio naturale del Nicaragua	Protegendo o patrimônio natural da Nicarágua	Den Naturschatz Nicaraguas schützen
+environmental.reserves	Reserves	Réserves	Riserve	Reservas	Schutzgebiete
+environmental.species	Protected species	Espèces protégées	Specie protette	Espécies protegidas	Geschützte Arten
+environmental.ecosystems	Ecosystems	Écosystèmes	Ecosistemi	Ecossistemas	Ökosysteme
+environmental.conservation	Conservation	Conservation	Conservazione	Conservação	Naturschutz
+baqui.title	Baqueano Digital	Baqueano Digital	Baqueano Digital	Baqueano Digital	Baqueano Digital
+baqui.subtitle	Your smart travel guide	Votre guide de voyage intelligent	La tua guida di viaggio intelligente	Seu guia de viagem inteligente	Ihr intelligenter Reiseführer
+baqui.closePanel	Close assistant	Fermer l'assistant	Chiudi l'assistente	Fechar assistente	Assistenten schließen
+baqui.thinking	Thinking...	Réflexion en cours...	Sto pensando...	Pensando...	Ich denke nach...
+baqui.error	I lost the trail on that one. Could you ask it another way?	J'ai perdu le fil de cette demande. Pouvez-vous la reformuler ?	Ho perso il sentiero con questa richiesta. Puoi riformularla?	Perdi o caminho com essa pergunta. Pode reformulá-la?	Bei dieser Anfrage habe ich den Faden verloren. Können Sie sie anders formulieren?
+baqui.greeting	Hi! I'm BAQUI, your digital baqueano. What would you like to discover today?	Bonjour ! Je suis BAQUI, votre baqueano numérique. Que souhaitez-vous découvrir aujourd'hui ?	Ciao! Sono BAQUI, il tuo baqueano digitale. Cosa vuoi scoprire oggi?	Olá! Eu sou o BAQUI, seu baqueano digital. O que você quer descobrir hoje?	Hallo! Ich bin BAQUI, Ihr digitaler Baqueano. Was möchten Sie heute entdecken?
+baqui.suggestions.adventure	Adventure and volcanoes	Aventure et volcans	Avventura e vulcani	Aventura e vulcões	Abenteuer und Vulkane
+baqui.suggestions.culture	Culture and heritage	Culture et patrimoine	Cultura e patrimonio	Cultura e patrimônio	Kultur und Kulturerbe
+baqui.suggestions.gastronomy	Traditional cuisine	Gastronomie typique	Cucina tipica	Gastronomia típica	Typische Küche
+baqui.suggestions.communities	Local communities	Communautés locales	Comunità locali	Comunidades locais	Lokale Gemeinden
+baqui.suggestions.surprise	Surprise me	Surprenez-moi	Sorprendimi	Surpreenda-me	Überrasch mich
+baqui.modes.discover	What do you want to experience?	Que voulez-vous vivre ?	Cosa vuoi vivere?	O que você quer viver?	Was möchten Sie erleben?
+baqui.modes.surprise	Surprise me	Surprenez-moi	Sorprendimi	Surpreenda-me	Überrasch mich
+baqui.modes.hidden	Off the map	Hors de la carte	Fuori dalla mappa	Fora do mapa	Abseits der Karte
+baqui.modes.planner	Plan a trip	Planifier un voyage	Pianifica un viaggio	Planejar viagem	Reise planen
+trip.title	My Trip	Mon voyage	Il mio viaggio	Minha viagem	Meine Reise
+trip.subtitle	Plan your adventure through Nicaragua	Planifiez votre aventure au Nicaragua	Pianifica la tua avventura in Nicaragua	Planeje sua aventura pela Nicarágua	Planen Sie Ihr Abenteuer in Nicaragua
+trip.addDestination	Add destination	Ajouter une destination	Aggiungi destinazione	Adicionar destino	Reiseziel hinzufügen
+trip.addExperience	Add experience	Ajouter une expérience	Aggiungi esperienza	Adicionar experiência	Erlebnis hinzufügen
+trip.addNote	Add note	Ajouter une note	Aggiungi nota	Adicionar nota	Notiz hinzufügen
+trip.totalDays	Total days	Nombre total de jours	Giorni totali	Total de dias	Gesamttage
+trip.budget	Estimated budget	Budget estimé	Budget stimato	Orçamento estimado	Geschätztes Budget
+trip.share	Share itinerary	Partager l'itinéraire	Condividi l'itinerario	Compartilhar roteiro	Reiseplan teilen
+trip.export	Export PDF	Exporter en PDF	Esporta PDF	Exportar PDF	Als PDF exportieren
+trip.emptyTitle	Your trip is empty	Votre voyage est vide	Il tuo viaggio è vuoto	Sua viagem está vazia	Ihre Reise ist noch leer
+trip.emptyDesc	Start adding destinations and experiences to build your itinerary.	Commencez à ajouter des destinations et des expériences pour construire votre itinéraire.	Inizia ad aggiungere destinazioni ed esperienze per costruire il tuo itinerario.	Comece a adicionar destinos e experiências para montar seu roteiro.	Fügen Sie Reiseziele und Erlebnisse hinzu, um Ihren Reiseplan zu erstellen.
+trip.day	Day	Jour	Giorno	Dia	Tag
+trip.morning	Morning	Matin	Mattina	Manhã	Morgen
+trip.afternoon	Afternoon	Après-midi	Pomeriggio	Tarde	Nachmittag
+trip.evening	Evening	Soir	Sera	Noite	Abend
+trip.notes	Notes	Notes	Note	Notas	Notizen
+profile.title	My Profile	Mon profil	Il mio profilo	Meu perfil	Mein Profil
+profile.name	Name	Nom	Nome	Nome	Name
+profile.email	Email	E-mail	E-mail	E-mail	E-Mail
+profile.phone	Phone	Téléphone	Telefono	Telefone	Telefon
+profile.country	Country of origin	Pays d'origine	Paese di origine	País de origem	Herkunftsland
+profile.language	Preferred language	Langue préférée	Lingua preferita	Idioma preferido	Bevorzugte Sprache
+profile.interests	Interests	Centres d'intérêt	Interessi	Interesses	Interessen
+profile.saved	Saved	Enregistrés	Salvati	Salvos	Gespeichert
+profile.trips	My trips	Mes voyages	I miei viaggi	Minhas viagens	Meine Reisen
+profile.settings	Settings	Paramètres	Impostazioni	Configurações	Einstellungen
+profile.logout	Log out	Se déconnecter	Esci	Sair	Abmelden
+profile.editProfile	Edit profile	Modifier le profil	Modifica profilo	Editar perfil	Profil bearbeiten
+profile.favorites	My favorites	Mes favoris	I miei preferiti	Meus favoritos	Meine Favoriten
+favorites.title	Favorites	Favoris	Preferiti	Favoritos	Favoriten
+favorites.subtitle	The places you saved	Les lieux que vous avez enregistrés	I luoghi che hai salvato	Os lugares que você salvou	Die Orte, die Sie gespeichert haben
+favorites.empty	You don't have any saved favorites yet.	Vous n'avez pas encore de favoris.	Non hai ancora preferiti salvati.	Você ainda não tem favoritos salvos.	Sie haben noch keine Favoriten gespeichert.
+favorites.emptyDesc	Explore destinations and mark them as favorites to see them here.	Explorez les destinations et ajoutez-les à vos favoris pour les retrouver ici.	Esplora le destinazioni e segnale come preferite per vederle qui.	Explore destinos e marque-os como favoritos para vê-los aqui.	Entdecken Sie Reiseziele und markieren Sie sie als Favoriten, um sie hier zu sehen.
+favorites.remove	Remove from favorites	Retirer des favoris	Rimuovi dai preferiti	Remover dos favoritos	Aus Favoriten entfernen
+favorites.add	Add to favorites	Ajouter aux favoris	Aggiungi ai preferiti	Adicionar aos favoritos	Zu Favoriten hinzufügen
+favorites.added	Added to favorites	Ajouté aux favoris	Aggiunto ai preferiti	Adicionado aos favoritos	Zu Favoriten hinzugefügt
+favorites.removed	Removed from favorites	Retiré des favoris	Rimosso dai preferiti	Removido dos favoritos	Aus Favoriten entfernt
+search.placeholder	Search destinations, experiences, cuisine…	Rechercher destinations, expériences, gastronomie…	Cerca destinazioni, esperienze, gastronomia…	Busque destinos, experiências, gastronomia…	Reiseziele, Erlebnisse, Kulinarik suchen…
+search.results	Results	Résultats	Risultati	Resultados	Ergebnisse
+search.noResults	We found nothing for "{query}". Try another word or a nearby place.	Aucun résultat pour « {query} ». Essayez un autre mot ou un lieu proche.	Non abbiamo trovato nulla per "{query}". Prova un'altra parola o un luogo vicino.	Não encontramos nada para "{query}". Tente outra palavra ou um lugar próximo.	Keine Ergebnisse für „{query}“. Versuchen Sie ein anderes Wort oder einen Ort in der Nähe.
+search.suggestions	Suggestions	Suggestions	Suggerimenti	Sugestões	Vorschläge
+search.recent	Recent searches	Recherches récentes	Ricerche recenti	Buscas recentes	Letzte Suchanfragen
+search.clear	Clear search	Effacer la recherche	Cancella la ricerca	Limpar busca	Suche zurücksetzen
+forms.name	First name	Prénom	Nome	Nome	Vorname
+forms.lastName	Last name	Nom	Cognome	Sobrenome	Nachname
+forms.fullName	Full name	Nom complet	Nome completo	Nome completo	Vollständiger Name
+forms.email	Email	E-mail	E-mail	E-mail	E-Mail
+forms.phone	Phone	Téléphone	Telefono	Telefone	Telefon
+forms.message	Message	Message	Messaggio	Mensagem	Nachricht
+forms.subject	Subject	Objet	Oggetto	Assunto	Betreff
+forms.country	Country	Pays	Paese	País	Land
+forms.date	Date	Date	Data	Data	Datum
+forms.password	Password	Mot de passe	Password	Senha	Passwort
+forms.submit	Send	Envoyer	Invia	Enviar	Senden
+forms.required	* Required field	* Champ obligatoire	* Campo obbligatorio	* Campo obrigatório	* Pflichtfeld
+forms.invalidEmail	That email doesn't look complete. Please check it.	Cette adresse e-mail semble incomplète. Vérifiez-la, s'il vous plaît.	Questa e-mail sembra incompleta. Controllala, per favore.	Esse e-mail parece incompleto. Confira, por favor.	Diese E-Mail-Adresse wirkt unvollständig. Bitte überprüfen Sie sie.
+forms.success	Done! We received your message.	C'est fait ! Nous avons bien reçu votre message.	Fatto! Abbiamo ricevuto il tuo messaggio.	Pronto! Recebemos sua mensagem.	Geschafft! Ihre Nachricht ist bei uns angekommen.
+forms.error	It couldn't be sent. Check your connection and try again.	L'envoi a échoué. Vérifiez votre connexion et réessayez.	Invio non riuscito. Controlla la connessione e riprova.	Não foi possível enviar. Verifique sua conexão e tente novamente.	Senden fehlgeschlagen. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.
+forms.namePlaceholder	Your name	Votre nom	Il tuo nome	Seu nome	Ihr Name
+forms.emailPlaceholder	you@email.com	vous@courriel.com	tu@email.com	voce@email.com	sie@email.de
+forms.messagePlaceholder	Write your message here…	Écrivez votre message ici…	Scrivi qui il tuo messaggio…	Escreva sua mensagem aqui…	Schreiben Sie hier Ihre Nachricht…
+forms.selectOption	Select an option	Sélectionnez une option	Seleziona un'opzione	Selecione uma opção	Option auswählen
+forms.contactTitle	Contact us	Contactez-nous	Contattaci	Fale conosco	Kontakt
+forms.contactDesc	Write to us and we'll help you plan your trip through Nicaragua.	Écrivez-nous et nous vous aiderons à préparer votre voyage au Nicaragua.	Scrivici e ti aiuteremo a organizzare il tuo viaggio in Nicaragua.	Escreva para nós e ajudaremos você a montar sua viagem pela Nicarágua.	Schreiben Sie uns, wir helfen Ihnen bei der Planung Ihrer Reise durch Nicaragua.
+about.title	About Us	Qui sommes-nous	Chi siamo	Quem somos	Über uns
+about.subtitle	The digital ecosystem of Nicaraguan tourism	L'écosystème numérique du tourisme nicaraguayen	L'ecosistema digitale del turismo nicaraguense	O ecossistema digital do turismo nicaraguense	Das digitale Ökosystem des nicaraguanischen Tourismus
+about.mission	Mission	Mission	Missione	Missão	Mission
+about.vision	Vision	Vision	Visione	Visão	Vision
+about.values	Values	Valeurs	Valori	Valores	Werte
+about.team	Our team	Notre équipe	Il nostro team	Nossa equipe	Unser Team
+about.story	Our story	Notre histoire	La nostra storia	Nossa história	Unsere Geschichte
+legal.terms.title	Terms of Use	Conditions d'utilisation	Termini di utilizzo	Termos de uso	Nutzungsbedingungen
+legal.privacy.title	Privacy Policy	Politique de confidentialité	Informativa sulla privacy	Política de privacidade	Datenschutzerklärung
+legal.cookies.title	Cookie Policy	Politique de cookies	Politica sui cookie	Política de cookies	Cookie-Richtlinie
+legal.cookies.accept	Accept all	Tout accepter	Accetta tutti	Aceitar todos	Alle akzeptieren
+legal.cookies.reject	Reject optional	Refuser les cookies facultatifs	Rifiuta quelli facoltativi	Rejeitar opcionais	Optionale ablehnen
+legal.cookies.banner	We use cookies to improve your experience.	Nous utilisons des cookies pour améliorer votre expérience.	Usiamo i cookie per migliorare la tua esperienza.	Usamos cookies para melhorar sua experiência.	Wir verwenden Cookies, um Ihr Erlebnis zu verbessern.
+legal.cookies.learnMore	Learn more	En savoir plus	Scopri di più	Saiba mais	Mehr erfahren
+legal.legalNotice.title	Legal Notice	Mentions légales	Note legali	Aviso legal	Impressum
+offline.title	No connection	Pas de connexion	Nessuna connessione	Sem conexão	Keine Verbindung
+offline.subtitle	The signal dropped	Le signal a disparu	Il segnale è sparito	O sinal acabou	Das Signal ist weg
+offline.desc	What you already loaded is still here. When the internet is back, we carry on.	Ce que vous avez déjà chargé reste disponible. Dès le retour d'internet, nous reprenons.	Ciò che hai già caricato è ancora qui. Quando torna internet, riprendiamo.	O que você já carregou continua aqui. Quando a internet voltar, seguimos em frente.	Was Sie bereits geladen haben, bleibt verfügbar. Sobald das Internet zurück ist, geht es weiter.
+offline.retry	Test the connection	Tester la connexion	Prova la connessione	Testar a conexão	Verbindung testen
+notFound.title	This path leads nowhere	Ce chemin ne mène nulle part	Questo sentiero non porta da nessuna parte	Este caminho não leva a lugar nenhum	Dieser Weg führt ins Nichts
+notFound.subtitle	Neither on the map, nor off it	Ni sur la carte, ni en dehors	Né sulla mappa, né fuori	Nem no mapa, nem fora dele	Weder auf der Karte noch abseits davon
+notFound.desc	The address may be misspelled or the page may have moved. Let's get back to exploring.	L'adresse est peut-être mal saisie ou la page a été déplacée. Reprenons l'exploration.	L'indirizzo potrebbe essere errato o la pagina spostata. Torniamo a esplorare.	O endereço pode estar errado ou a página pode ter mudado de lugar. Vamos voltar a explorar.	Die Adresse ist vielleicht falsch geschrieben oder die Seite wurde verschoben. Auf zur nächsten Entdeckung.
+notFound.homeBtn	Back to home	Retour à l'accueil	Torna alla home	Voltar ao início	Zurück zur Startseite
+notFound.exploreBtn	Explore destinations	Explorer les destinations	Esplora le destinazioni	Explorar destinos	Reiseziele entdecken
+cookie.banner.text	We use cookies to improve your experience on BAQUEANO.	Nous utilisons des cookies pour améliorer votre expérience sur BAQUEANO.	Usiamo i cookie per migliorare la tua esperienza su BAQUEANO.	Usamos cookies para melhorar sua experiência no BAQUEANO.	Wir verwenden Cookies, um Ihr Erlebnis auf BAQUEANO zu verbessern.
+cookie.banner.accept	Accept	Accepter	Accetta	Aceitar	Akzeptieren
+cookie.banner.decline	Decline	Refuser	Rifiuta	Recusar	Ablehnen
+cookie.banner.learnMore	Learn more	En savoir plus	Scopri di più	Saiba mais	Mehr erfahren
+allies.title	Allies Network	Réseau d'alliés	Rete di alleati	Rede de aliados	Netzwerk der Partner
+allies.subtitle	Communities and businesses that make responsible tourism in Nicaragua possible	Les communautés et les entreprises qui rendent possible le tourisme responsable au Nicaragua	Comunità e imprese che rendono possibile il turismo responsabile in Nicaragua	Comunidades e empresas que tornam possível o turismo responsável na Nicarágua	Gemeinden und Unternehmen, die verantwortungsvollen Tourismus in Nicaragua möglich machen
+business.register.title	Register your Business	Inscrivez votre entreprise	Registra la tua attività	Cadastre seu negócio	Ihr Unternehmen registrieren
+business.register.subtitle	Be part of the BAQUEANO ecosystem	Faites partie de l'écosystème BAQUEANO	Entra a far parte dell'ecosistema BAQUEANO	Faça parte do ecossistema BAQUEANO	Werden Sie Teil des BAQUEANO-Ökosystems
+business.register.submit	Submit registration	Envoyer l'inscription	Invia la registrazione	Enviar cadastro	Registrierung senden
+business.register.success	Your business was registered successfully!	Votre entreprise a bien été enregistrée !	La tua attività è stata registrata con successo!	Seu negócio foi cadastrado com sucesso!	Ihr Unternehmen wurde erfolgreich registriert!
+accessibility.skipNav	Skip to main content	Aller au contenu principal	Vai al contenuto principale	Ir para o conteúdo principal	Zum Hauptinhalt springen
+accessibility.closeModal	Close dialog	Fermer la fenêtre	Chiudi la finestra	Fechar janela	Dialog schließen
+accessibility.openMenu	Open navigation menu	Ouvrir le menu de navigation	Apri il menu di navigazione	Abrir menu de navegação	Navigationsmenü öffnen
+accessibility.closeMenu	Close navigation menu	Fermer le menu de navigation	Chiudi il menu di navigazione	Fechar menu de navegação	Navigationsmenü schließen
+accessibility.logo	Baqueano Nicaragua — Back to home	Baqueano Nicaragua — Retour à l'accueil	Baqueano Nicaragua — Torna alla home	Baqueano Nicaragua — Voltar ao início	Baqueano Nicaragua — Zurück zur Startseite
+accessibility.darkMode	Turn on dark mode	Activer le mode sombre	Attiva la modalità scura	Ativar modo escuro	Dunkelmodus aktivieren
+accessibility.lightMode	Turn on light mode	Activer le mode clair	Attiva la modalità chiara	Ativar modo claro	Hellmodus aktivieren
+accessibility.language	Change language	Changer de langue	Cambia lingua	Mudar idioma	Sprache ändern
