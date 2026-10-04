@@ -3927,3 +3927,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** el propietario pide vigilar el PR #2 hasta que se fusione; además señala que el footer se ve mal y confirma que `testimonios.html` es el blog/espacio global de comentarios de la comunidad.
 - ⚙️ **CÓMO:** suscripción a la actividad del PR (CI, revisiones, conflictos). El footer se revisa DESPUÉS de que la actualización llegue a producción, como pidió el propietario.
 - 📦 **QUÉ:** pendientes registrados: (1) vigilar PR #2; (2) rediseño del footer tras el despliegue (captura: columnas Explorá/Cultura/Comunidad en 2 columnas desbalanceadas, mucho espacio vacío); (3) `testimonios.html` = blog global de la comunidad (orientar futuras mejoras con ese enfoque).
+
+## 2026-10-04 (esperar despliegue) — "vamos a esperar los 2 minutos para ver la actualización"
+- 🎯 **POR QUÉ:** el propietario espera ver la comunidad en producción.
+- ⚙️ **CÓMO:** confirmar si el PR #2 está fusionado en `main` (Azure solo publica desde `main`) y el estado de los checks.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
