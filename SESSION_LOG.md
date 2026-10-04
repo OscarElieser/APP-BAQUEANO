@@ -3940,3 +3940,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** el propietario necesita saber cómo llevar los cambios de la rama a producción.
 - ⚙️ **CÓMO:** explicar el camino rama → `main` → Azure (autodeploy cada 2 min) y qué ya está activo (solo el REVOKE en Supabase). Sin cambios de código.
 - 📦 **QUÉ:** respuesta con pasos; no se crea PR sin pedirlo.
+
+## 2026-10-04 (sesión cloud) — "ok crea el pr"
+- 🎯 **POR QUÉ:** llevar la rama `claude/upbeat-turing-m7y81v` a `main` para que Azure publique (autodeploy cada 2 min).
+- ⚙️ **CÓMO:** buscar plantilla de PR, crear el Pull Request contra `main` con resumen, pruebas y pendientes; no se fusiona (lo hace el propietario).
+- 📦 **QUÉ:** PR creado y enlazado en la respuesta.
