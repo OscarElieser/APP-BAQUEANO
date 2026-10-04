@@ -28,6 +28,14 @@
 
 create extension if not exists pgcrypto;
 
+-- array_to_string es STABLE y Postgres rechaza funciones no inmutables en
+-- columnas generadas ("generation expression is not immutable"). Para un
+-- text[] el resultado sí es determinista: este envoltorio lo declara así.
+create or replace function public.community_tags_text(p_tags text[])
+returns text language sql immutable parallel safe set search_path = '' as $$
+  select pg_catalog.array_to_string(p_tags, ' ');
+$$;
+
 -- ---------------------------------------------------------------------------
 -- 1. Testimonios
 -- ---------------------------------------------------------------------------
@@ -73,7 +81,7 @@ create table if not exists public.testimonials (
     to_tsvector('spanish'::regconfig,
       coalesce(title, '') || ' ' || coalesce(body, '') || ' ' ||
       coalesce(destination_name, '') || ' ' || coalesce(place_name, '') || ' ' ||
-      coalesce(municipality, '') || ' ' || coalesce(array_to_string(tags, ' '), ''))
+      coalesce(municipality, '') || ' ' || coalesce(public.community_tags_text(tags), ''))
   ) stored,
   published_at timestamptz,
   created_at timestamptz not null default now(),

@@ -3893,3 +3893,69 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** la sesión volvió a cortarse mientras el barrido de 13 anchos × 29 páginas iba en 820 px (sin fallos hasta ahí).
 - ⚙️ **CÓMO:** revisar el resultado del barrido; seguir la lista de pendientes en orden: verificación final de pruebas, i18n de `testimonios.html`, integración de experiencias en `destino.html`, pestaña de moderación en el Ops Center (preparada para cuando Supabase tenga el backend), y dejar listo lo que requiere aprobación del propietario (migración + Edge Function de comunidad).
 - 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+
+## 2026-10-04 (mensaje habilitado de comunidad) — "¿el formulario de testimonios ya está hecho o sigue saliendo 'La comunidad de viajeros se está habilitando'? Firebase Hosting está lleno; dominio en Hostinger por DNS + Azure; Supabase/Firebase solo autenticación"
+- 🎯 **POR QUÉ:** `baqueanonicaragua.com/testimonios.html` muestra el aviso "La comunidad de viajeros se está habilitando" y el usuario pregunta si ya existe el formulario/backend.
+- ⚙️ **CÓMO:** revisar `testimonios.html`, `js/testimonios.js`, `js/community-api.js`, y si el backend (migración + Edge Function) está desplegado en Supabase.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción; diagnóstico a continuación.
+- **Diagnóstico:** el formulario y el feed ya estaban hechos en la web (`testimonios.html`, `js/testimonios.js`, `js/community-api.js`). El aviso aparecía porque el backend nunca se había desplegado: la Edge Function `baqueano-community` respondía 404 y las tablas no existían. No depende de Firebase Hosting (lleno): todo vive en Supabase y la web la sirve Azure/Hostinger.
+- **Bug encontrado y corregido en la migración:** `search_vector` usaba `array_to_string` (STABLE) en una columna generada → Postgres la rechaza ("generation expression is not immutable"). Se agregó el envoltorio inmutable `public.community_tags_text(text[])`.
+- **Aplicado en Supabase (`heiudfpthqwtjrtluqlm`):** migraciones `community_testimonials_1_tables` y `community_testimonials_2_triggers_policies_bucket` (tablas, triggers, RLS, permisos por columna, bucket `community-media`). Nota: el MCP de Supabase se cuelga con sentencias `DROP ... IF EXISTS` (pide una confirmación que no llega); como los objetos no existían, se aplicó sin esos DROP.
+- **Edge Function `baqueano-community` v1 desplegada** (ACTIVE, `verify_jwt=false`: verifica el token de Firebase internamente). En `index.ts` los caracteres invisibles de la regex se pasaron a escapes `\u` equivalentes; registrada en `supabase/config.toml`.
+- **Verificación:** en transacción revertida, `anon` ve solo lo publicado (1 de 2), el contador de comentarios y la búsqueda en español funcionan; `anon` no ve `author_uid`, no inserta y no lee denuncias; 0 filas de prueba persistidas. Este contenedor no tiene salida a `supabase.co`, así que la llamada HTTP real se verifica desde el navegador.
+- **Pendiente del propietario:** recargar `baqueanonicaragua.com/testimonios.html` (Ctrl+F5); publicar una experiencia (queda `pending_review`) y aprobarla desde el Ops Center.
+
+## 2026-10-04 (instalar lo pendiente) — "instala todos lo que hace falta en nuestro proyecto"
+- 🎯 **POR QUÉ:** el backend de la comunidad ya está activo; falta lo que impide usarla de punta a punta (moderación en el Ops Center) y los pendientes de la lista anterior.
+- ⚙️ **CÓMO:** revisar pendientes (moderación Ops Center, i18n de `testimonios.html`, experiencias en `destino.html`), implementarlos, probar y registrar.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Avance (instalar lo pendiente):**
+  - **Ops Center → pestaña 36 "Comunidad · Moderación"** (`js/ops-center/ops-community-moderation.js`, registrada en `ENTITY_REGISTRY` y `renderEntityView` de `ops-engine.js`, nav + panel + scripts en `admin.html`): filtros Pendientes/Denunciadas/Publicadas/Ocultas/Rechazadas con contadores, aprobar, ocultar, rechazar (con confirmación porque borra multimedia), destacar, visita verificada, nota de moderación, bandeja de comentarios denunciados/ocultos y contador en el menú. Todo texto de usuario con `textContent`; permisos los decide la Edge Function.
+  - **`destino.html`:** sección "Lo que cuentan los viajeros" (`js/destination-community.js` + estilos en `css/destination-dossier.css`) con hasta 3 experiencias aprobadas del destino (`destination_feed`), "Ver todas" y "Compartí tu experiencia". **Corregido XSS reflejado**: el `?id=` de un destino inexistente se insertaba en `innerHTML`; ahora va por `textContent`.
+  - **CSP (Azure nginx + respaldo `firebase.json`):** `img-src` agrega `https://heiudfpthqwtjrtluqlm.supabase.co` y se define `media-src 'self' blob: <supabase>`; sin esto las fotos/videos de la comunidad y la vista previa del video quedaban bloqueadas en producción. `azure/deploy.sh` instala el snippet en el autodeploy.
+  - **i18n:** bloque `community` (109 frases) en `locales/{es,en,fr,it,pt,de}.json` para `testimonios.html` y la sección de destino; `global-language.js` VERSION `2026.10.04-comunidad` (el catálogo se pide con `force-cache`) y su `?v=` en `global-injector.js`. `testimonios.html` unificado a voseo ("Compartí tu experiencia", "Iniciá sesión…").
+  - **Pruebas:** `node --check` de todos los JS tocados, JSON de 6 idiomas válido, `build-hostinger-static` (721 archivos) + `verify-hostinger-static` OK, `production-smoke.test.mjs` OK. E2E Playwright local (scratchpad, Edge Function simulada): 18/19; la única diferencia es que "Lo que cuentan los viajeros" ya tenía traducción previa ("What travelers are saying"), correcta. `validate-i18n.mjs` sigue en exit 1 por 297 claves pendientes de otras páginas que ya faltaban antes (sin regresión: traducidas 273 → 382). `global-shell.test.mjs` no corre: falta `@playwright/test` en `website/` (no se agregó dependencia).
+  - **Estado:** todo en la rama `claude/sleepy-goodall-kqogrq`. Azure publica desde `main`: falta fusionar la rama para que los cambios de web y CSP lleguen a baqueanonicaragua.com (el backend de Supabase ya está activo).
+
+## 2026-10-04 (pull request) — "ok hazlo"
+- 🎯 **POR QUÉ:** Azure publica desde `main`; los cambios de la comunidad deben fusionarse para llegar a baqueanonicaragua.com.
+- ⚙️ **CÓMO:** abrir pull request de `claude/sleepy-goodall-kqogrq` hacia la rama por defecto, siguiendo la plantilla de PR si existe.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Hecho:** PR abierto → https://github.com/OscarElieser/APP-BAQUEANO/pull/2 (`claude/sleepy-goodall-kqogrq` → `main`, sin conflictos). Al fusionarlo, Azure publica en ~2 min.
+
+## 2026-10-04 (vigilar PR + footer) — "sí por favor; el footer está feo pero esperemos la actualización; testimonios.html será el espacio de comentarios globales tipo blog"
+- 🎯 **POR QUÉ:** el propietario pide vigilar el PR #2 hasta que se fusione; además señala que el footer se ve mal y confirma que `testimonios.html` es el blog/espacio global de comentarios de la comunidad.
+- ⚙️ **CÓMO:** suscripción a la actividad del PR (CI, revisiones, conflictos). El footer se revisa DESPUÉS de que la actualización llegue a producción, como pidió el propietario.
+- 📦 **QUÉ:** pendientes registrados: (1) vigilar PR #2; (2) rediseño del footer tras el despliegue (captura: columnas Explorá/Cultura/Comunidad en 2 columnas desbalanceadas, mucho espacio vacío); (3) `testimonios.html` = blog global de la comunidad (orientar futuras mejoras con ese enfoque).
+
+## 2026-10-04 (esperar despliegue) — "vamos a esperar los 2 minutos para ver la actualización"
+- 🎯 **POR QUÉ:** el propietario espera ver la comunidad en producción.
+- ⚙️ **CÓMO:** confirmar si el PR #2 está fusionado en `main` (Azure solo publica desde `main`) y el estado de los checks.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+
+## 2026-10-04 (sin Copilot + footer) — "no trabajemos con cuota de Copilot, usá Claude, Gemini o Codex; la página no se actualiza, sigue el problema del footer"
+- 🎯 **POR QUÉ:** el check `github-advanced-security` (revisión con IA de Copilot) falla por cuota agotada; el propietario prefiere Claude/Gemini/Codex. La web no muestra cambios y el footer sigue mal.
+- ⚙️ **CÓMO:** verificar si el PR #2 está fusionado (Azure publica solo desde `main`); revisión de código con Claude en GitHub Actions en lugar de Copilot; rediseñar el footer.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Avance:**
+  - **Diagnóstico de "no se actualiza":** PR #2 sigue abierto; `main` sigue en `724a5e3`. Azure publica solo `main` → hay que fusionar el PR para ver cualquier cambio.
+  - **Footer** (`css/baqueano-system.css` §13b, hoja global): distribución definida para las 31 páginas (antes solo en `css/pages/index-exact.css`, 11 páginas, y caía a 2 columnas desde 1024 px). ≥1101 px marca + 4 columnas; 641–1100 px marca en franja + 4 columnas en una fila; ≤640 px 2×2. Verificado con Playwright en 1440/1005/768/390 px (index y testimonios): 5/4/4/2 columnas, overflow 0.
+  - **Copilot → Claude:** nuevo `.github/workflows/claude-review.yml` (`anthropics/claude-code-action@v1`) que revisa cada PR según AGENTS.md; requiere secreto `ANTHROPIC_API_KEY` o `CLAUDE_CODE_OAUTH_TOKEN` y se omite con aviso si falta. El check `github-advanced-security` (IA de Copilot) no está en ningún workflow: se desactiva desde la configuración del repositorio (propietario).
+  - Build Hostinger 721 archivos + verificación OK; smoke OK; YAML válido.
+
+## 2026-10-04 (unificar con hackathon) — "Quiero que este formulario se complemente con BAQUEANO Nicaragua Hackathon 2026, que solo sea uno"
+- 🎯 **POR QUÉ:** el propietario quiere un único formulario/experiencia que integre la comunidad de testimonios con lo del Hackathon 2026.
+- ⚙️ **CÓMO:** localizar todo lo relacionado con "hackathon" en el repo y en Supabase/Firestore; entender qué formulario existe allí antes de proponer la unificación.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Aclaración del propietario (captura):** "a esta parte se va a unir" → la sección **"Testimonios"** de la portada (tarjetas Laura M. / Carlos R. / Ana P., botones ♡ y Comentar, enlace "Ver más historias") debe ser la misma comunidad de `testimonios.html`: un solo sistema con experiencias reales.
+- **Avance (unificación portada ↔ comunidad):**
+  - `index.html` sección "Testimonios": eliminadas las 3 reseñas de ejemplo fijas (Laura M., Carlos R., Ana P.); "Ver más historias" ahora va a `testimonios.html` (antes `historia.html`).
+  - Nuevo `js/home-community.js`: muestra hasta 3 experiencias aprobadas reales (`list` de `baqueano-community`), ♡ = reacción real con sesión (sin sesión abre la experiencia para iniciar sesión), "Comentar" abre la experiencia con sus comentarios, tarjeta "Compartí tu experiencia" cuando hay menos de 3 (o si el servicio falla). Estilos en `css/pages/index-exact.css` (2 columnas ≤900 px, 1 columna ≤600 px).
+  - `js/platform-enhancements.js`: retirado `initTestimonials` (comentarios y "me gusta" guardados solo en localStorage, invisibles para el resto); versión del script subida en `global-injector.js`.
+  - i18n: `community.comment` y `community.communityTraveler` en 6 idiomas; VERSION del catálogo `2026.10.04-comunidad-2`.
+  - Pruebas: E2E local 17/17 (con publicaciones, vacía, servicio caído; sin reseñas de ejemplo, sin HTML inyectado, sin scroll horizontal, ♡ sin sesión → experiencia); build Hostinger + verificación + smoke OK.
+
+## 2026-10-04 (publicación directa) — "quiero que en cada cambio hagas tú el add, commit y push para que salga todo en baqueanonicaragua.com sin pasar por permisos de Azure, Supabase y Firebase"
+- 🎯 **POR QUÉ:** el propietario quiere ver cada cambio publicado en producción sin pasos manuales (fusionar PR, aprobar).
+- ⚙️ **CÓMO:** autorización explícita del propietario para publicar en `main` (Azure autodeploy cada ~2 min desde `main`). Fusionar el PR #2 y, desde ahora, cada cambio validado (build Hostinger + verificación + smoke) se sube con add/commit/push a `main`.
+- 📦 **QUÉ:** directiva permanente de publicación directa en `main` tras validación local. Los cambios de base de datos (migraciones Supabase) y despliegues de Edge Functions se siguen aplicando con las herramientas de Supabase; Firebase solo autenticación.

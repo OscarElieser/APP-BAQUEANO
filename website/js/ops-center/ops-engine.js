@@ -1756,6 +1756,14 @@
       isSystem: true,
       title: 'Estado del Sistema & Infraestructura',
       icon: 'fa-server'
+    },
+    // 36: Moderación de la comunidad de viajeros (Edge Function baqueano-community).
+    // Lo pinta js/ops-center/ops-community-moderation.js; el servidor exige rol admin.
+    '36-comunidad': {
+      isSystem: true,
+      title: 'Comunidad · Moderación',
+      icon: 'fa-people-group',
+      roleRequired: 'admin'
     }
   };
 
@@ -4062,6 +4070,10 @@
       if (tabId === '32-configuracion') return this.renderGlobalConfigModule();
       if (tabId === '33-estado') return this.renderSystemStatusModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '36-comunidad') {
+        if (window.BaqueanoCommunityModeration) return window.BaqueanoCommunityModeration.render(panel);
+        return;
+      }
 
       // Si es una colección administrable estándar, construir o actualizar la tabla
       let items = OpsState.collectionsData[tabId] || [];

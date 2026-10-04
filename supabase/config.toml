@@ -10,3 +10,11 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/baqueano-ai/deno.json"
 entrypoint = "./functions/baqueano-ai/index.ts"
+
+# Comunidad de viajeros: verifica el ID token de Firebase dentro de la función
+# (lecturas públicas sin sesión), por eso no usa el JWT de Supabase.
+[functions.baqueano-community]
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-community/deno.json"
+entrypoint = "./functions/baqueano-community/index.ts"

@@ -160,49 +160,10 @@
     var form=document.getElementById('ecoReportForm');if(!form||form.dataset.bqReady==='true')return;form.dataset.bqReady='true';form.addEventListener('submit',function(event){event.preventDefault();event.stopImmediatePropagation();if(!form.reportValidity())return;var report={id:'BQN-'+Date.now().toString(36).toUpperCase(),type:form.querySelector('select')?.value||'reporte',department:document.getElementById('reportDepartment')?.value||'',location:document.getElementById('reportLocation')?.value||'',details:document.getElementById('reportDetails')?.value||'',contact:document.getElementById('reportContact')?.value||'',createdAt:new Date().toISOString(),status:'recibido'};var reports=readJson('baqueano_environmental_reports',[]);if(!Array.isArray(reports))reports=[];reports.push(report);writeJson('baqueano_environmental_reports',reports);var old=form.querySelector('.bq-report-confirmation');if(old)old.remove();var confirmation=document.createElement('div');confirmation.className='bq-report-confirmation';confirmation.setAttribute('role','status');confirmation.innerHTML='<strong>Reporte recibido · '+report.id+'</strong><span>Conservá este código para seguimiento. Si existe peligro inmediato, utilizá el Centro SOS o las líneas oficiales mostradas en esta página.</span>';form.appendChild(confirmation);form.reset();confirmation.scrollIntoView({behavior:'smooth',block:'center'});},{capture:true});
   }
 
-  function initTestimonials(){
-    var section=document.getElementById('testimoniosSection');if(!section||section.dataset.bqReady==='true')return;section.dataset.bqReady='true';var row=section.querySelector('.testimonials-row-exact');var stored=readJson('baqueano_testimonials',[]);if(!Array.isArray(stored))stored=[];
-    var lastOpener=null;
+  // Testimonios de la portada: ahora los pinta js/home-community.js con la
+  // comunidad real (Edge Function baqueano-community). Se retiró la versión
+  // anterior que guardaba comentarios y "me gusta" solo en localStorage.
 
-    function safeAvatarUrl(value){
-      if(!value)return '';
-      try{var parsed=new URL(String(value),window.location.href);return parsed.protocol==='https:'||parsed.origin===window.location.origin?parsed.href:'';}catch(error){return '';}
-    }
-
-    function getCommentAuthor(){
-      var user=window.BaqueanoSession&&typeof window.BaqueanoSession.getUser==='function'?window.BaqueanoSession.getUser():null;
-      var name=user&&(user.name||user.displayName)?String(user.name||user.displayName).trim():'Explorador BAQUEANO';
-      return{name:name||'Explorador BAQUEANO',avatar:safeAvatarUrl(user&&(user.avatar||user.photoURL)),label:user&&user.isLoggedIn?'Viajero de la comunidad':'Comentario de la comunidad'};
-    }
-
-    function createAvatar(author){
-      var wrap=document.createElement('span');wrap.className='test-avatar-img bq-test-avatar';
-      var avatarUrl=safeAvatarUrl(author&&author.avatar);var name=author&&author.name?author.name:'Explorador BAQUEANO';
-      if(avatarUrl){var image=document.createElement('img');image.src=avatarUrl;image.alt='Foto de '+name;image.loading='lazy';image.decoding='async';image.addEventListener('error',function(){wrap.textContent=name.charAt(0).toUpperCase()||'B';wrap.classList.add('is-fallback');},{once:true});wrap.appendChild(image);}
-      else{wrap.textContent=name.charAt(0).toUpperCase()||'B';wrap.classList.add('is-fallback');}
-      return wrap;
-    }
-
-    function createTestimonialCard(item){
-      var author={name:item.authorName||'Explorador BAQUEANO',avatar:item.authorAvatar||'',label:item.authorLabel||'Comentario de la comunidad'};
-      var card=document.createElement('div');card.className='test-card-exact';
-      var stars=document.createElement('div');stars.className='test-stars-row';stars.setAttribute('aria-label','5 de 5 estrellas');
-      for(var starIndex=0;starIndex<5;starIndex+=1){var star=document.createElement('i');star.className='fa-solid fa-star';star.setAttribute('aria-hidden','true');stars.appendChild(star);}
-      var quote=document.createElement('p');quote.className='test-quote-text';quote.textContent='“'+String(item.text||'').trim()+'”';
-      var authorRow=document.createElement('div');authorRow.className='test-author-row';authorRow.appendChild(createAvatar(author));
-      var authorInfo=document.createElement('div');authorInfo.className='test-author-info';var authorName=document.createElement('h4');authorName.textContent=author.name;var authorLabel=document.createElement('span');authorLabel.textContent=author.label;authorInfo.append(authorName,authorLabel);authorRow.appendChild(authorInfo);
-      card.append(stars,quote,authorRow);return card;
-    }
-
-    stored.forEach(function(item){row.appendChild(createTestimonialCard(item));});
-    var form=document.createElement('form');form.className='bq-comment-form';form.hidden=true;form.setAttribute('aria-hidden','true');form.innerHTML='<div class="bq-comment-head"><strong>Compartí tu experiencia</strong><button type="button" class="bq-comment-close" data-comment-close aria-label="Cerrar formulario de comentario"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div><label><span class="sr-only">Tu comentario</span><textarea required maxlength="500" placeholder="Contanos qué descubriste y qué recomendarías a otros viajeros."></textarea></label><div class="bq-comment-buttons"><button type="button" class="bq-comment-cancel" data-comment-close>Cancelar</button><button type="submit" class="bq-comment-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Publicar comentario</button></div>';row.insertAdjacentElement('afterend',form);
-    function closeCommentForm(event){if(event){event.preventDefault();event.stopPropagation();}form.reset();form.hidden=true;form.setAttribute('aria-hidden','true');if(lastOpener&&document.contains(lastOpener))lastOpener.focus();}
-    form.addEventListener('click',function(event){if(event.target.closest('[data-comment-close]'))closeCommentForm(event);});
-    form.addEventListener('keydown',function(event){if(event.key==='Escape')closeCommentForm(event);});
-    function wire(card,index){if(card.dataset.bqTestReady)return;card.dataset.bqTestReady='true';var actions=document.createElement('div');actions.className='bq-test-actions';var likes=Number(localStorage.getItem('baqueano_test_like_'+index)||0);actions.innerHTML='<button type="button" class="bq-test-action" aria-label="Me gusta" aria-pressed="false"><i class="fa-regular fa-heart" aria-hidden="true"></i><span>'+likes+'</span></button><button type="button" class="bq-test-action bq-comment-open"><i class="fa-regular fa-comment" aria-hidden="true"></i> Comentar</button>';card.appendChild(actions);var like=actions.firstElementChild;like.addEventListener('click',function(){var active=like.getAttribute('aria-pressed')==='true';active=!active;like.setAttribute('aria-pressed',String(active));likes=Math.max(0,likes+(active?1:-1));like.querySelector('span').textContent=likes;like.querySelector('i').className=(active?'fa-solid':'fa-regular')+' fa-heart';localStorage.setItem('baqueano_test_like_'+index,String(likes));});actions.querySelector('.bq-comment-open').addEventListener('click',function(event){lastOpener=event.currentTarget;form.hidden=false;form.setAttribute('aria-hidden','false');form.querySelector('textarea').focus();});}
-    form.addEventListener('submit',function(event){event.preventDefault();var textarea=form.querySelector('textarea');var value=textarea.value.trim();if(!value){textarea.focus();return;}var author=getCommentAuthor();var item={text:value,createdAt:new Date().toISOString(),authorName:author.name,authorAvatar:author.avatar,authorLabel:author.label};stored.push(item);writeJson('baqueano_testimonials',stored);var card=createTestimonialCard(item);row.appendChild(card);wire(card,row.children.length-1);closeCommentForm();if(typeof window.bqToast==='function')window.bqToast('Comentario publicado en la comunidad.','success');});Array.from(row.children).forEach(wire);
-  }
-
-  function init(){initLikes();initGalleries();initAllyFilters();initAdvancedAllySearch();initVideoNavigation();initBaquiActions();initHistoryCards();initExperienceBanner();initEnvironmentalPoints();initMusicDock();initFormalReport();initTestimonials();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
+  function init(){initLikes();initGalleries();initAllyFilters();initAdvancedAllySearch();initVideoNavigation();initBaquiActions();initHistoryCards();initExperienceBanner();initEnvironmentalPoints();initMusicDock();initFormalReport();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

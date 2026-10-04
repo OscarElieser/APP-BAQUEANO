@@ -844,7 +844,7 @@
   async function init() {
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
-      enhancementScript.src = 'js/platform-enhancements.js?v=20260930-1';
+      enhancementScript.src = 'js/platform-enhancements.js?v=20261004-comunidad-1';
       enhancementScript.dataset.platformEnhancements = 'true';
       enhancementScript.defer = true;
       document.body.appendChild(enhancementScript);
@@ -857,7 +857,7 @@
     }
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20261004-menu-1';
+      languageScript.src = 'js/global-language.js?v=20261004-comunidad-1';
       languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);
