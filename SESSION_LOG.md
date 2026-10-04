@@ -3992,3 +3992,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - **Inspección ampliada** (página completa: texto visible/oculto, alt/title/aria, enlaces, imágenes y fondos tras scroll) en los 17 territorios por enlace directo y navegando en el orden del propietario pasando dos veces por Madriz y por Chinandega: 0 restos de Madriz/Chinandega; quedan solo menciones legítimas (ruta a Nueva Segovia por Somoto, Río Coco en RACCN, rosquillas como comida típica). Sin errores JS. Build + verificación + smoke OK.
 - **Coordenadas (workflow, commit `5435881`):** 76 de 181 lugares ubicados dentro de su contorno; 105 sin coincidencia en OpenStreetMap con el nombre de la guía (no se muestran en vez de ubicarse mal). Peores: Boaco 0/11, Madriz 1/8, RACCN 1/8, Carazo 2/11. Pendiente: completar coordenadas (nombres alternativos o carga manual verificada).
 - Capturas adicionales del propietario (secciones 8–15 de Madriz en Rivas) corresponden a la misma falla de plantilla ya corregida en `29c8949`.
+
+## 2026-10-04 (más capturas de Madriz) — capturas de las secciones 16–24 de Madriz (Naturaleza viva, Leyendas, Anfitriones, Rutas, Logística, SOS Madriz, Código del Explorador)
+- 🎯 **POR QUÉ:** el propietario sigue viendo bloques de Madriz.
+- ⚙️ **CÓMO:** son las secciones 16–24 de la experiencia especial de Madriz; corresponden a la misma falla de plantilla corregida en `29c8949` (publicada ~23:15 UTC). Confirmar con el propietario la URL y recarga forzada; aclarar si quiere que los otros 16 territorios tengan esas mismas 24 secciones con su propia información.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
