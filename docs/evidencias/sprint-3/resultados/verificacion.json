@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-10-04T05:31:28.328Z",
+  "site": "https://baqueanonicaragua.com",
+  "publicIp": "20.80.81.65",
+  "expectedCommit": "6cc4841",
+  "deployedCommit": "6cc4841",
+  "passed": 15,
+  "failed": 0,
+  "results": [
+    {
+      "name": "azure-health",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "azure-runtime",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "azure-database",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "flujo/",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "flujo/destinos.html",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "flujo/mapa.html",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "flujo/mi-viaje.html",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "flujo/perfil.html",
+      "ok": true,
+      "status": 200,
+      "detail": "correcto"
+    },
+    {
+      "name": "dns-resolucion-ip",
+      "ok": true,
+      "detail": "dominio apunta a IP de Azure (20.80.81.65)"
+    },
+    {
+      "name": "puerto-80",
+      "ok": true,
+      "detail": "abierto"
+    },
+    {
+      "name": "puerto-443",
+      "ok": true,
+      "detail": "abierto"
+    },
+    {
+      "name": "puerto-3000",
+      "ok": true,
+      "detail": "cerrado_o_filtrado"
+    },
+    {
+      "name": "puerto-5432",
+      "ok": true,
+      "detail": "cerrado_o_filtrado"
+    },
+    {
+      "name": "integracion-datos-supabase",
+      "ok": true,
+      "detail": "consulta exitosa: 5 departamentos obtenidos"
+    },
+    {
+      "name": "aplicacion-movil-apk",
+      "ok": true,
+      "detail": "APK verificado (91.02 MB)"
+    }
+  ]
+}

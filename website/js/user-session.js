@@ -173,15 +173,15 @@
       };
     }
 
-    const emailKey = (user.email || '').trim().toLowerCase();
-    // Autorización de INTERFAZ (qué se muestra): rol desde js/shared/roles.js
-    // con el claim guardado por syncFirebaseIdentity o el correo verificado.
-    // Editar localStorage a lo sumo muestra un enlace: admin.html vuelve a
-    // verificar con Firebase Auth en vivo y las reglas protegen los datos.
-    const resolvedRole = window.BaqueanoRoles
-      ? window.BaqueanoRoles.resolve({ email: emailKey, emailVerified: user.emailVerified === true, claimsRole: user.claimsRole })
-      : (PRIVILEGED_ACCOUNTS[emailKey] && user.emailVerified === true ? PRIVILEGED_ACCOUNTS[emailKey].role : 'explorer');
-    const canOps = window.BaqueanoRoles ? window.BaqueanoRoles.canAccessOps(resolvedRole) : resolvedRole !== 'explorer';
+    // Autorización de INTERFAZ (qué se muestra): SOLO el rol verificado en vivo
+    // por Firebase Auth en ESTA página (liveIdentity). Lo guardado en
+    // localStorage (role, claimsRole, emailVerified) nunca concede el enlace:
+    // editarlo no muestra el Ops Center. admin.html vuelve a verificar y las
+    // reglas de Firestore/Storage protegen los datos.
+    const resolvedRole = liveIdentity && liveIdentity.uid === user.firebaseUid ? liveIdentity.role : 'explorer';
+    const canOps = window.BaqueanoRoles
+      ? window.BaqueanoRoles.canAccessOps(resolvedRole)
+      : resolvedRole === 'admin' || resolvedRole === 'super_admin';
     if (canOps) {
       return {
         isPrivileged: true,
@@ -484,15 +484,93 @@
   }
 
   // Configuración oficial de Firebase Web para el Ecosistema Baqueano Nicaragua
-  const BAQUEANO_FIREBASE_CONFIG = {
-    apiKey: 'AIzaSyDgdMOJ19RjsgY79LXDIeWlZ48uW5Oo6GE',
-    authDomain: 'baqueanonicaragua.com',
-    databaseURL: 'https://app-baqueano-default-rtdb.firebaseio.com/',
+  const BAQUEANO_FIREBASE_CONFIG = (window.BaqueanoFirebase && window.BaqueanoFirebase.config) || {
+    apiKey: 'AIzaSyCRNrYyqmymNkVvmKNyuhp7J-hIjQXN9pA',
+    authDomain: 'app-baqueano.firebaseapp.com',
+    databaseURL: 'https://app-baqueano-default-rtdb.firebaseio.com',
     projectId: 'app-baqueano',
     storageBucket: 'app-baqueano.firebasestorage.app',
     messagingSenderId: '578585227888',
-    appId: '1:578585227888:web:3e5c9baqueano'
+    appId: '1:578585227888:web:9ce48c63e629cd52f2fab5',
+    measurementId: 'G-J2FBQHH47T'
   };
+
+  const SUPABASE_REST_PROFILES_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/profiles';
+  const SUPABASE_ANON_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+
+  /**
+   * Mapea el rol interno de Baqueano a la restricción CHECK de public.profiles en Supabase:
+   * CHECK (role IN ('traveler', 'business_owner', 'guide', 'editor', 'admin', 'superadmin'))
+   */
+  function mapRoleToSupabase(role) {
+    if (role === 'super_admin' || role === 'superadmin') return 'superadmin';
+    if (role === 'admin') return 'admin';
+    if (role === 'guide') return 'guide';
+    if (role === 'business_owner' || role === 'partner') return 'business_owner';
+    if (role === 'editor' || role === 'auditor') return 'editor';
+    return 'traveler';
+  }
+
+  /**
+   * Sincroniza la identidad autenticada de Firebase con la tabla `public.profiles` en Supabase.
+   * Utiliza primero el cliente oficial de Supabase (si está cargado) y fallback defensivo vía REST API.
+   */
+  async function syncProfileToSupabase(userObj) {
+    if (!userObj || (!userObj.firebaseUid && !userObj.uid)) return;
+    const uid = userObj.firebaseUid || userObj.uid;
+    if (String(uid).startsWith('usr_')) return; // Omitir sesiones dummy locales
+
+    const profileData = {
+      firebase_uid: uid,
+      email: (userObj.email || '').trim().toLowerCase(),
+      display_name: userObj.name || userObj.displayName || '',
+      phone: userObj.phone || null,
+      avatar_url: userObj.avatar || userObj.photoURL || null,
+      role: mapRoleToSupabase(userObj.role),
+      metadata: {
+        settings: userObj.settings || {},
+        travel_preferences: userObj.travelPreferences || {},
+        two_factor_enabled: !!userObj.twoFactorEnabled,
+        last_synced_at: new Date().toISOString()
+      },
+      updated_at: new Date().toISOString()
+    };
+
+    // 1. Cliente oficial window.baqueanoSupabase (si está activo en la página)
+    if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
+      try {
+        const { error } = await window.baqueanoSupabase.from('profiles').upsert(profileData, { onConflict: 'firebase_uid' });
+        if (!error) {
+          console.info('🟢 [Baqueano Session] Perfil y rol respaldados con éxito en Supabase Cloud.');
+          return;
+        }
+        console.warn('🟡 [Baqueano Session] Aviso al guardar en Supabase SDK, intentando REST fallback:', error.message);
+      } catch (sdkErr) {
+        console.warn('🟡 [Baqueano Session] Excepción en Supabase SDK:', sdkErr.message);
+      }
+    }
+
+    // 2. Respaldo directo de alta resiliencia vía REST API de Supabase
+    try {
+      const response = await fetch(`${SUPABASE_REST_PROFILES_URL}?on_conflict=firebase_uid`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify(profileData)
+      });
+      if (response.ok) {
+        console.info('🟢 [Baqueano Session] Perfil sincronizado en Supabase PostgreSQL (REST).');
+      } else {
+        console.warn('🟡 [Baqueano Session] Respuesta en Supabase REST:', response.status);
+      }
+    } catch (restErr) {
+      console.warn('🟡 [Baqueano Session] Aviso de red hacia Supabase REST:', restErr.message);
+    }
+  }
 
   /**
    * Inicializa Firebase de forma segura y defensiva si está presente en el entorno.
@@ -509,6 +587,75 @@
       console.warn('[Baqueano Session] Inicialización de Firebase omitida o diferida:', err);
     }
     return false;
+  }
+
+  // ==========================================================================
+  // IDENTIDAD EN VIVO Y CARGA BAJO DEMANDA DE FIREBASE AUTH
+  // 🎯 POR QUÉ: solo perfil.html y admin.html cargan Firebase Auth. En las
+  //    demás páginas el header confiaba en la copia de localStorage: no se
+  //    enteraba de un cierre de sesión, "Cerrar sesión" no cerraba Firebase y
+  //    una copia editada a mano mostraba el enlace al Ops Center.
+  // ⚙️ CÓMO: si la página no trae el SDK y existe una sesión local, se cargan
+  //    app+auth compat y js/firebase-config.js UNA vez, en tiempo ocioso (los
+  //    invitados no descargan nada). onAuthStateChanged es la fuente de verdad:
+  //    liveIdentity (solo memoria, nunca almacenamiento) guarda uid y rol
+  //    verificados en ESTA página.
+  // 📦 QUÉ: sesión consistente en todas las páginas, logout real desde
+  //    cualquier página y enlace al Ops Center solo con rol verificado en vivo.
+  // ==========================================================================
+  const FIREBASE_SDK_BASE = 'https://www.gstatic.com/firebasejs/10.14.1/';
+  const FIREBASE_SCRIPTS = [
+    { src: FIREBASE_SDK_BASE + 'firebase-app-compat.js', ready: () => Boolean(window.firebase && window.firebase.initializeApp) },
+    { src: FIREBASE_SDK_BASE + 'firebase-auth-compat.js', ready: () => Boolean(window.firebase && window.firebase.auth) },
+    { src: 'js/firebase-config.js?v=20261003-2', ready: () => Boolean(window.BaqueanoFirebase) }
+  ];
+  let liveIdentity = null;
+  let authObserverBound = false;
+  let firebaseAuthPromise = null;
+
+  function loadScriptOnce(entry) {
+    if (entry.ready()) return Promise.resolve();
+    const base = entry.src.split('?')[0];
+    const existing = document.querySelector(`script[src^="${base}"]`);
+    return new Promise((resolve, reject) => {
+      const script = existing || document.createElement('script');
+      script.addEventListener('load', () => (entry.ready() ? resolve() : reject(new Error('Sin API: ' + base))), { once: true });
+      script.addEventListener('error', () => reject(new Error('No se pudo cargar ' + base)), { once: true });
+      if (!existing) {
+        script.src = entry.src;
+        script.async = false;
+        document.head.appendChild(script);
+      }
+    });
+  }
+
+  function bindAuthObserver() {
+    if (authObserverBound) return true;
+    try {
+      if (ensureFirebaseInitialized() && window.firebase && window.firebase.auth) {
+        window.firebase.auth().onAuthStateChanged(syncFirebaseIdentity);
+        authObserverBound = true;
+      }
+    } catch (authInitErr) {
+      console.warn('[Baqueano Session] Observador de Firebase Auth en espera:', authInitErr);
+    }
+    return authObserverBound;
+  }
+
+  function loadFirebaseAuth() {
+    if (window.firebase && window.firebase.auth) return Promise.resolve(bindAuthObserver());
+    if (!firebaseAuthPromise) {
+      firebaseAuthPromise = FIREBASE_SCRIPTS
+        .reduce((chain, entry) => chain.then(() => loadScriptOnce(entry)), Promise.resolve())
+        .then(() => bindAuthObserver())
+        .catch((error) => {
+          firebaseAuthPromise = null;
+          // Falla cerrada: sin verificación en vivo no se muestra el Ops Center.
+          console.warn('[Baqueano Session] Firebase Auth no disponible; header sin privilegios:', error.message);
+          return false;
+        });
+    }
+    return firebaseAuthPromise;
   }
 
   // ==========================================================================
@@ -562,43 +709,8 @@
         }
       }
 
-      // 3. Persistencia en SUPABASE (Almacenamiento de Respaldo)
-      if (typeof window.baqueanoSupabase !== 'undefined' && window.baqueanoSupabase.from) {
-        try {
-          const uid = userObj.firebaseUid || 'guest_uid';
-          window.baqueanoSupabase.from('profiles').upsert({
-            firebase_uid: uid,
-            email: userObj.email || '',
-            display_name: userObj.name || '',
-            phone: userObj.phone || '',
-            avatar_url: userObj.avatar || '',
-            role: userObj.role || 'traveler',
-            metadata: {
-              settings: userObj.settings || {},
-              travel_preferences: userObj.travelPreferences || {},
-              two_factor_enabled: !!userObj.twoFactorEnabled
-            },
-            updated_at: new Date().toISOString()
-          }, { onConflict: 'firebase_uid' }).then(({ error }) => {
-            if (error) {
-              // Guardar en copia local de respaldo de Supabase
-              localStorage.setItem('baqueano_supabase_user_backup', JSON.stringify({
-                uid,
-                email: userObj.email,
-                data: userObj,
-                syncedAt: new Date().toISOString()
-              }));
-              console.info('🔵 [Baqueano Session] Respaldo Supabase sincronizado en nodo local de seguridad.');
-            } else {
-              console.info('🔵 [Baqueano Session] Perfil y configuración respaldados con éxito en Supabase Cloud.');
-            }
-          }).catch((sbErr) => {
-            console.warn('🟡 [Baqueano Session] Aviso al guardar en Supabase:', sbErr.message);
-          });
-        } catch (sbEx) {
-          console.warn('🟡 [Baqueano Session] Excepción en Supabase:', sbEx.message);
-        }
-      }
+      // 3. Persistencia en SUPABASE (Perfiles y Roles Oficiales)
+      syncProfileToSupabase(userObj);
 
       return userObj;
     },
@@ -752,9 +864,15 @@
     },
 
     logout: async function() {
-      // 1. Cierre seguro de Firebase con timeout de salvaguarda (1.2s)
+      // 1. Cierre seguro de Firebase con timeout de salvaguarda (1.2s). En
+      //    páginas sin SDK se carga primero (máx. 4 s): si no, Firebase
+      //    conservaría la sesión y la "resucitaría" en perfil.html.
+      liveIdentity = null;
       try {
-        if (window.firebase && window.firebase.auth) {
+        if (!(window.firebase && window.firebase.auth)) {
+          await Promise.race([loadFirebaseAuth(), new Promise((resolve) => setTimeout(resolve, 4000))]);
+        }
+        if (window.firebase && window.firebase.auth && ensureFirebaseInitialized()) {
           await Promise.race([
             window.firebase.auth().signOut(),
             new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase signOut timeout')), 1200))
@@ -899,13 +1017,15 @@
 
   function syncFirebaseIdentity(firebaseUser) {
     if (!firebaseUser) {
-      const current = loadSession();
-      // Solo limpiar si la sesión actual pertenecía a una sesión de Firebase
-      if (current && current.firebaseUid && !current.firebaseUid.startsWith('usr_')) {
+      liveIdentity = null;
+      // Firebase Auth es la única fuente de autenticación: si confirma que no
+      // hay usuario, cualquier copia local (incluida una sesión 'usr_' antigua
+      // o editada a mano) deja de valer.
+      if (loadSession()) {
         localStorage.removeItem(STORAGE_KEY);
-        updateNavbar();
         window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: null }));
       }
+      updateNavbar();
       return null;
     }
     const existing = loadSession();
@@ -954,6 +1074,8 @@
       billingHistory: existing && existing.billingHistory ? existing.billingHistory : [],
       savedPaymentMethods: []
     };
+    // Rol verificado en vivo (correo verificado por Firebase); el claim lo refina abajo.
+    liveIdentity = { uid: firebaseUser.uid, role: resolvedRole };
     saveSession(session);
     updateNavbar();
     window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: session }));
@@ -962,8 +1084,12 @@
     // mandan sobre la matriz de correos. Se leen del token, nunca del cliente.
     if (window.BaqueanoRoles) {
       window.BaqueanoRoles.resolveFirebaseUser(firebaseUser).then((claimRole) => {
+        if (liveIdentity && liveIdentity.uid === firebaseUser.uid) liveIdentity.role = claimRole;
         const current = loadSession();
-        if (!current || current.firebaseUid !== firebaseUser.uid || current.role === claimRole) return;
+        if (!current || current.firebaseUid !== firebaseUser.uid || current.role === claimRole) {
+          updateNavbar();
+          return;
+        }
         current.role = claimRole;
         current.roleLabel = window.BaqueanoRoles.label(claimRole);
         current.claimsRole = window.BaqueanoRoles.canAccessOps(claimRole) ? claimRole : '';
@@ -992,6 +1118,9 @@
       } catch (err) {}
     }
 
+    // Sincronizar usuario y rol oficial en Supabase PostgreSQL (public.profiles)
+    syncProfileToSupabase(session);
+
     return session;
   }
 
@@ -1018,13 +1147,13 @@
   });
   sessionNavObserver.observe(document.documentElement, { childList: true, subtree: true });
 
-  // Intentar suscribir al observador de Firebase Auth de forma defensiva
-  try {
-    if (ensureFirebaseInitialized() && window.firebase && window.firebase.auth) {
-      window.firebase.auth().onAuthStateChanged(syncFirebaseIdentity);
-    }
-  } catch (authInitErr) {
-    console.warn('[Baqueano Session] Observador de Firebase Auth en espera:', authInitErr);
+  // Suscribir al observador de Firebase Auth: de inmediato si la página trae
+  // el SDK (perfil.html); si no, solo cuando hay sesión local que verificar,
+  // en tiempo ocioso para no competir con el primer pintado.
+  if (!bindAuthObserver() && loadSession()) {
+    const verifyLater = () => { loadFirebaseAuth(); };
+    if ('requestIdleCallback' in window) window.requestIdleCallback(verifyLater, { timeout: 2500 });
+    else window.setTimeout(verifyLater, 1200);
   }
 
   // Iniciar o cerrar sesión en otra pestaña actualiza el header de esta.

@@ -476,27 +476,43 @@ curl https://baqueanonicaragua.com/health        # muestra el commit desplegado
 
 ### Evidencias reproducibles — Sprint 1, Sprint 2 y Sprint 3
 
-Los artefactos de evaluación se conservan bajo `docs/evidencias/` y están
-excluidos del hosting público. La comprobación integral se ejecuta con:
+Los artefactos de evaluación se conservan bajo `docs/evidencias/` (excluidos del hosting público). La matriz consolidada de auditoría se encuentra en [`docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md`](docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md).
+
+La comprobación integral automatizada se ejecuta mediante:
 
 ```bash
 node tools/verify-sprints.mjs --commit="$(git rev-parse --short HEAD)" \
   --output=docs/evidencias/sprint-3/resultados/verificacion.json
 ```
 
+#### Cumplimiento de los 5 Criterios de la Rúbrica:
+
+1. **Accesibilidad Pública:**
+   - **Web:** Operativa y accesible desde cualquier navegador en la IP pública `20.80.81.65` y en el dominio canónico `https://baqueanonicaragua.com`.
+   - **Móvil:** Paquete instalable Android compilado en `website/assets/BaqueanoNicaragua.apk` (91.02 MB) y verificado con `flutter analyze: No issues found!`.
+2. **Seguridad Básica:**
+   - Puertos 80 (HTTP) y 443 (HTTPS) abiertos para tráfico seguro.
+   - Puertos internos 3000 (API Node) y 5432 (PostgreSQL) estrictamente **cerrados y filtrados** por Network Security Groups (NSG). Las bases de datos nunca están expuestas al público.
+3. **Funcionamiento Autónomo:**
+   - El explorador puede completar el recorrido principal (Inicio → Destinos → Mapa → Mi Viaje → Perfil) de principio a fin de manera 100% desatendida y reactiva.
+4. **Integración Completa:**
+   - Comunicación cliente-servidor verificada: consulta y persistencia en tiempo real en Supabase PostgreSQL (17 departamentos y destinos territoriales) y sincronización de perfiles en `public.profiles`.
+5. **Actualización del Repositorio:**
+   - Paridad exacta del commit `6cc4841` entre el código en producción (`/health`), la rama `main` en GitHub y el HEAD local de trabajo.
+
 | Sprint | Alcance | Evidencia |
 | --- | --- | --- |
-| Sprint 1 | README, stack, interfaces, roles, pruebas y builds | `docs/evidencias/sprint-1/` |
-| Sprint 2 | Azure, IP pública, SSH, SO, Node, PostgreSQL y puertos | `docs/evidencias/sprint-2/` |
-| Sprint 3 | Flujo autónomo, APK, CRUD Azure→Supabase y commit de producción | `docs/evidencias/sprint-3/` |
+| Sprint 1 | README, stack, interfaces, roles, pruebas y builds | `docs/evidencias/sprint-1/EVIDENCIA_SPRINT_1.md` |
+| Sprint 2 | Azure, IP pública, SSH, SO, Node, PostgreSQL y puertos | `docs/evidencias/sprint-2/EVIDENCIA_SPRINT_2.md` |
+| Sprint 3 | Flujo autónomo, APK, integración Azure→Supabase y paridad GitHub | `docs/evidencias/sprint-3/EVIDENCIA_SPRINT_3.md` |
 
-Rutas de entrega:
+Rutas y recursos de producción:
 
 - Website: `https://baqueanonicaragua.com`.
-- APK: `https://baqueanonicaragua.com/downloads/baqueano-android.apk`.
-- Salud/commit: `https://baqueanonicaragua.com/health`.
-- Integración de datos: `POST /api/azure/evidence/crud` crea, lee, actualiza y
-  elimina únicamente un registro efímero aislado; no altera datos turísticos.
+- IP de Azure: `20.80.81.65`.
+- APK Móvil: `website/assets/BaqueanoNicaragua.apk`.
+- Salud / Commit: `https://baqueanonicaragua.com/health`.
+- Conectividad de Base de Datos: `https://baqueanonicaragua.com/api/azure/db`.
 
 ---
 

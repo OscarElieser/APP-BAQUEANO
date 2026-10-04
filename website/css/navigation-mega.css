@@ -1290,3 +1290,25 @@ html:has(> body[style*="overflow:hidden"]) { overflow: hidden !important; }
 @media (prefers-reduced-motion: reduce) {
   #mainNavbar .bq-account-menu { animation: none; }
 }
+
+/* ---- "MÁS" SIEMPRE DENTRO DE LA VENTANA (escritorio) ----
+   🎯 POR QUÉ: el panel "Más" es position:fixed centrado en la ventana, pero
+      #navLinksMenu tenía backdrop-filter, y un ancestro con backdrop-filter
+      (o transform/filter) pasa a ser el bloque contenedor de los fixed. El
+      panel se centraba sobre el menú y a 1024 px salía 19 px por la izquierda.
+   ⚙️ CÓMO: en escritorio el menú es transparente sobre el header opaco (el
+      desenfoque no se veía), así que se le quitan backdrop-filter, transform
+      y filter. Dos IDs para ganar a las reglas heredadas de styles.css,
+      layout.css y baqueano-system.css.
+   📦 QUÉ: panel "Más" centrado en la ventana en todos los anchos de
+      escritorio, sin cambio visual. El cajón móvil (≤ 960 px) no cambia. */
+@media (min-width: 961px) {
+  #mainNavbar #navLinksMenu {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+    contain: none !important;
+  }
+}

@@ -16,6 +16,7 @@
     "lint": "corepack pnpm --filter @baqueano/web lint && corepack pnpm --filter @baqueano/admin lint",
     "typecheck": "corepack pnpm --filter @baqueano/web typecheck && corepack pnpm --filter @baqueano/admin typecheck",
     "test": "node scripts/production-smoke.test.mjs",
+    "test:shell": "node scripts/global-shell.test.mjs",
     "test:i18n": "node scripts/validate-i18n.mjs",
     "i18n:audit": "node scripts/i18n-audit.mjs",
     "test:i18n:browser": "node scripts/i18n-browser.test.mjs",

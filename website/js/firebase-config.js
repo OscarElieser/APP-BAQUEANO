@@ -35,7 +35,7 @@
   // ==========================================================================
   var BAQUEANO_FIREBASE_CONFIG = {
     apiKey: 'AIzaSyCRNrYyqmymNkVvmKNyuhp7J-hIjQXN9pA',
-    authDomain: 'baqueanonicaragua.com',
+    authDomain: 'app-baqueano.firebaseapp.com',
     databaseURL: 'https://app-baqueano-default-rtdb.firebaseio.com',
     projectId: 'app-baqueano',
     storageBucket: 'app-baqueano.firebasestorage.app',

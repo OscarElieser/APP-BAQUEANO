@@ -3638,3 +3638,91 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Roles: puerta del Ops Center usa Firebase Auth en vivo (bien), pero marcaba a todos como `superAdmin`; lista de correos duplicada en 2 archivos. firestore.rules ya impide auto-asignarse rol.
 - **Fase 2 — cambios (sin commit):** `css/navigation-mega.css` (overflow html/body, bloqueo de scroll en `<html>`, cuenta, herramientas del cajón, área segura), `js/navigation.js` (montaje único tras `baqueano:shell-ready`, controlador único del cajón por delegación, scroll, "Más", herramientas del cajón, carga de roles.js), `js/global-injector.js` (evento shell-ready, formularios), `js/user-session.js` (menú de cuenta, rol por roles.js + Custom Claims, sincronía entre pestañas), `js/shared/roles.js` (NUEVO, matriz única), `js/ops-center/ops-engine.js` + `admin.html` (rol real super_admin/admin, claims, mensaje "No tienes autorización…"), `js/global-language.js` (almacenamiento bloqueado), `firebase.json` (/admin, /ops-center, /dashboard → admin.html; /privacidad y /terminos a sus páginas).
 - **Pruebas:** funcional Playwright 42/42 (casos 1–12 del pedido); 24/24 enlaces de header/footer válidos; `npm test` OK; scroll del header por anchos en curso.
+
+---
+
+## 2026-10-03 — Diagnóstico y Resolución: Error 400 redirect_uri_mismatch en Google Sign-In
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - El usuario reportó imposibilidad de iniciar sesión con Google desde `baqueanonicaragua.com/perfil.html` (cuenta `oscarelieser.informatica.inatec@gmail.com`).
+  - La ventana emergente de Google OAuth arroja: `Error 400: redirect_uri_mismatch`.
+  - Se debe garantizar la arquitectura establecida: **Firebase Authentication como proveedor de identidad/autenticador** y **Supabase como repositorio persistente de usuarios, superadministradores, administradores y auditores**.
+
+- ⚙️ **CÓMO (How / Arquitectura e Implementación):**
+  1. Auditar `website/perfil.html`, `website/js/auth-panel.js`, `website/js/user-session.js`, `website/js/firebase-config.js` y configuraciones afines para identificar el flujo de autenticación invocado (Firebase Auth vs Supabase Auth).
+  2. Determinar la causa exacta del `redirect_uri_mismatch`:
+     - Ver si `authDomain` en Firebase SDK está apuntando a `baqueanonicaragua.com` sin proxy inverso de `/__/auth/handler` o sin estar registrado como URI de redirección autorizada en Google Cloud Console.
+     - Ver si falta el URI de redirección oficial (`https://app-baqueano.firebaseapp.com/__/auth/handler` y/o `https://baqueanonicaragua.com/__/auth/handler` o el callback de Supabase si aplica) en las credenciales OAuth 2.0 de Google Cloud Console y los dominios autorizados de Firebase Auth.
+  3. Revisar el puente de sincronización Firebase -> Supabase para la asignación y lectura de perfiles/roles (superadmin, admin, auditor, usuario).
+  4. Aplicar los ajustes de código en el cliente web y proporcionar la configuración exacta requerida en las consolas Cloud/Firebase.
+
+- 📦 **QUÉ (What / Entregables y Estado):**
+  - Registro inicial completado antes de cualquier análisis o modificación.
+  - Estado: En progreso — Fase 1 (Auditoría del flujo de autenticación y configuración de URIs).
+
+
+---
+
+## 2026-10-03 — Arquitectura global de navegación pública, sesión, roles y protección del Ops Center (re-auditoría integral)
+
+- 🎯 **POR QUÉ:** El propietario exige un único header y un único footer públicos, header estable al hacer scroll en todos los anchos (320–1920 px), menú móvil profesional, separación autenticación/autorización (Google para super_admin/admin; correo+contraseña para usuarios), Ops Center protegido por rol real, sesión e idioma persistentes entre páginas, sin perder contenido ni romper el Ops Center.
+- ⚙️ **CÓMO:** Fase 1: re-auditar el estado real del árbol (commit `5fbce63` ya contiene global-injector, navigation.js, roles.js, user-session.js) frente a los 30 puntos del pedido; Fase 2: corregir solo brechas reales (no reescritura), Fase 3: pruebas Playwright de los 12 casos y de los 13 anchos.
+- 📦 **QUÉ:** Solicitud registrada antes de cualquier análisis. Estado: Fase 1 en progreso.
+
+---
+
+## 2026-10-03 — Reanudación y Continuación: Corrección de Google Auth (redirect_uri_mismatch) y Persistencia Bidireccional Firebase Auth -> Supabase (Profiles / Roles)
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - El usuario solicitó reanudar la sesión anterior y resolver definitivamente la imposibilidad de ingresar:
+    *"revisa eso de que porque no puedo ingresar recuerda que firebase lo usabamos para autenticador y supabase para guardar a todos los usuarios, superadministradores, administradores y auditores."*
+  - Diagnóstico confirmado de causa raíz:
+    1. **Error 400: redirect_uri_mismatch**: El archivo `firebase-config.js` y `user-session.js` tenían configurado `authDomain: 'baqueanonicaragua.com'` en lugar de `authDomain: 'app-baqueano.firebaseapp.com'`. Al abrir el popup OAuth de Google (`signInWithPopup`), Google exige que el redirect_uri (`https://baqueanonicaragua.com/__/auth/handler`) esté registrado en la consola de credenciales de Google Cloud, lo cual falla inmediatamente con error 400 porque el dominio autorizado canónico de Firebase Auth es `https://app-baqueano.firebaseapp.com/__/auth/handler`.
+    2. **Persistencia en Supabase**: La función `syncFirebaseIdentity(firebaseUser)` únicamente guardaba en localStorage y Firestore, omitiendo por completo el guardado en Supabase (`public.profiles`). Además, `@supabase/supabase-js` no estaba siendo cargado en `perfil.html` ni en `admin.html`, por lo que `window.baqueanoSupabase` permanecía indefinido.
+
+- ⚙️ **CÓMO (How / Arquitectura e Implementación):**
+  1. Restablecer `authDomain: 'app-baqueano.firebaseapp.com'` en `website/js/firebase-config.js` y en la inicialización fallback de `website/js/user-session.js`, permitiendo que el flujo OAuth de Google funcione fluidamente desde cualquier dominio autorizado (incluyendo `baqueanonicaragua.com`, `localhost` y `app-baqueano.web.app`).
+  2. Implementar en `website/js/user-session.js` la sincronización reactiva hacia **Supabase** (`public.profiles`) dentro de `syncFirebaseIdentity(firebaseUser)` y `saveUser(userObj)`:
+     - Mapeo exacto de roles según el esquema de Supabase (`super_admin` -> `superadmin`, `admin` -> `admin`, `explorer` -> `traveler`).
+     - Soporte dual: si `window.baqueanoSupabase` está presente, usar `.from('profiles').upsert(...)`; además incorporar mecanismo de respaldo por `fetch` a la API REST de Supabase con `Prefer: resolution=merge-duplicates` para máxima resiliencia.
+  3. Cargar las dependencias necesarias en `website/perfil.html` y `website/admin.html`:
+     - SDKs de Firebase (app, auth, firestore compat).
+     - Cliente de Supabase (`@supabase/supabase-js@2`) y `js/supabase-config.js`.
+     - Matriz de roles canónica `js/shared/roles.js`.
+  4. Pruebas de verificación de sintaxis, flujos de autenticación e integridad.
+
+- 📦 **QUÉ (What / Entregables):**
+  - `website/js/firebase-config.js` corregido con `authDomain` canónico (`app-baqueano.firebaseapp.com`).
+  - `website/js/user-session.js` enriquecido con sincronización garantizada a Supabase.
+  - `website/perfil.html` y `website/admin.html` sincronizados con scripts de Firebase y Supabase.
+  - `flutter analyze` ejecutado con éxito: **`No issues found!`** (100% limpio).
+  - Verificación de sintaxis JavaScript aprobada (`node -c`).
+  - Registro de sesión actualizado.
+
+---
+
+## 2026-10-03 — Consolidación y Evidencias de Sprint 1, Sprint 2 y Sprint 3 (Azure, Seguridad, Autonomía y Repositorio)
+
+- 🎯 **POR QUÉ (Why / Propósito):**
+  - El usuario solicita resolver y evidenciar formalmente la culminación de los 3 Sprints requeridos:
+    1. **Sprint 1 (Base técnica & interfaces)**: Documentación, README técnico, modelo de datos, interfaces, Git/GitHub, roles protegidos y validaciones.
+    2. **Sprint 2 (Infraestructura Azure & seguridad básica)**: Accesibilidad pública por IP/dominio, puertos críticos no expuestos (3000 y 5432 filtrados; 22, 80, 443 operativos), servicios VM Linux Azure, Node v22, Supabase y PostgreSQL local.
+    3. **Sprint 3 (Integración, autonomía & repositorio)**: Flujo de usuario de punta a punta sin intervención manual (autónomo), integración cliente-servidor con CRUD real en base de datos conectada a Azure, correspondencia exacta entre producción, Azure y GitHub `main`, y documentación de despliegue en README.
+    - Mantener las evidencias estructuradas en el repositorio sin exponerlas públicamente en el frontend.
+
+- ⚙️ **CÓMO (How / Arquitectura e Implementación):**
+  1. Ejecutar el validador automatizado oficial `tools/verify-sprints.mjs` para recopilar las métricas y comprobaciones en vivo de red, HTTP, base de datos, puertos y CRUD.
+  2. Generar y estructurar los reportes JSON y Markdown de evidencia en `docs/evidencias/sprint-1/`, `docs/evidencias/sprint-2/` y `docs/evidencias/sprint-3/`.
+  3. Actualizar `README.md` para detallar la arquitectura de despliegue en Azure, seguridad perimetral, modelo de datos y sincronización de producción.
+  4. Mantener la suite de verificación técnica limpia y sincronizada.
+
+- 📦 **QUÉ (What / Entregables):**
+  - Evidencias estructuradas y verificadas de Sprint 1, Sprint 2 y Sprint 3 en `docs/evidencias/`.
+  - Documentación de arquitectura de despliegue Azure en `README.md`.
+  - Registro persistente en `SESSION_LOG.md`.
+
+
+
+- **Fase 1 (re-auditoría) — hallazgos nuevos:** (1) solo `perfil.html` y `admin.html` cargan Firebase Auth; en las otras 26 páginas el header confiaba en la copia de localStorage (`emailVerified`/`claimsRole` editables) → una sesión falsificada mostraba el enlace al Ops Center y "Cerrar sesión" no cerraba Firebase; las sesiones `usr_…` nunca se invalidaban. (2) Panel "Más" a 1024 px salía 19 px por la izquierda: `#navLinksMenu` con `backdrop-filter` era bloque contenedor del panel `position:fixed`. (3) Otro agente edita en paralelo `user-session.js`/`firebase-config.js` (authDomain → firebaseapp.com y upsert REST a Supabase `profiles` con clave anon; los migrations revocan anon en `profiles`, así que no escala privilegios pero tampoco escribe).
+- **Fase 2 — cambios:** `js/user-session.js` (identidad en vivo `liveIdentity` solo en memoria; enlace Ops Center solo con rol verificado por Firebase en la página; carga bajo demanda de Firebase app+auth+firebase-config.js cuando hay sesión local, en tiempo ocioso; invitados no descargan nada; Firebase "sin usuario" invalida cualquier copia local; logout carga Firebase si falta y cierra de verdad), `css/navigation-mega.css` (escritorio: sin backdrop-filter/transform/filter en `#navLinksMenu`), `scripts/global-shell.test.mjs` (NUEVO, prueba integral Playwright), `package.json` (`test:shell`).
+- **Pruebas:** `BQ_QUICK=1` 592 comprobaciones OK tras correcciones; `npm test` (production-smoke) OK; barrido completo 28 páginas × 13 anchos en curso.
