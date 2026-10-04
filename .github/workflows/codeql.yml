@@ -43,22 +43,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
+        # 🎯 POR QUÉ (evidencia: run 37231649651, commit 724a5e3):
+        #   - javascript-typescript y c-cpp pasan.
+        #   - java-kotlin fallaba: el autobuild ejecuta `./gradlew clean` y el
+        #     proyecto Android es Flutter (necesita el SDK de Flutter, ausente
+        #     en el runner) → "BUILD FAILED" / "unable to automatically build".
+        #   - swift fallaba en `ios/`; AGENTS.md fija el alcance en Android y
+        #     Web, por lo que no se analiza.
+        # ⚙️ CÓMO: se retiran java-kotlin y swift de la matriz (sin borrar
+        #   código) y se añade `actions` para auditar los propios workflows.
+        # 📦 QUÉ: los lenguajes con código analizable quedan en verde.
+        - language: actions
+          build-mode: none
         - language: c-cpp
           build-mode: none
-        - language: java-kotlin
-          build-mode: autobuild
         - language: javascript-typescript
           build-mode: none
-        - language: swift
-          build-mode: autobuild
-        # CodeQL supports the following values keywords for 'language': 'actions', 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'rust', 'swift'
-        # Use `c-cpp` to analyze code written in C, C++ or both
-        # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
-        # Use 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
-        # To learn more about changing the languages that are analyzed or customizing the build mode for your analysis,
-        # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning.
-        # If you are analyzing a compiled language, you can modify the 'build-mode' for that language to customize how
-        # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
