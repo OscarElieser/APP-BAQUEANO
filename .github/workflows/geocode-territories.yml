@@ -1,0 +1,53 @@
+# ============================================================================
+# 🧭 BAQUEANO — COORDENADAS DE LOS LUGARES POR TERRITORIO (UNA SOLA VEZ)
+# ============================================================================
+# 🎯 POR QUÉ: los mapas de departamento.html necesitan pines dentro de su
+#    propio territorio sin geocodificar en el navegador de cada visitante.
+# ⚙️ CÓMO: ejecuta website/scripts/geocode-territory-places.mjs (Nominatim
+#    restringido al contorno oficial de cada departamento) y guarda el
+#    resultado en main; Azure lo publica solo.
+# 📦 QUÉ: website/data/territory-places.json actualizado. Se lanza a mano
+#    (workflow_dispatch) o al cambiar los lugares o los contornos.
+# ============================================================================
+name: 🗺️ Coordenadas de territorios
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - website/js/territories-data.js
+      - website/data/nicaragua-departments.geojson
+      - website/scripts/geocode-territory-places.mjs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: geocode-territories
+  cancel-in-progress: false
+
+jobs:
+  geocode:
+    name: 🗺️ Geocodificar lugares dentro de cada territorio
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Geocodificar (1 consulta por segundo)
+        run: node website/scripts/geocode-territory-places.mjs
+      - name: Guardar resultado en main
+        run: |
+          if git diff --quiet -- website/data/territory-places.json && git ls-files --error-unmatch website/data/territory-places.json >/dev/null 2>&1; then
+            echo "Sin cambios en las coordenadas."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add website/data/territory-places.json
+          git commit -m "data(mapas): coordenadas de lugares dentro de cada territorio"
+          git pull --rebase origin main
+          git push origin HEAD:main

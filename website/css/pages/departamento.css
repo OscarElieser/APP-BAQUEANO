@@ -2528,3 +2528,25 @@ button.territory-pill-card.active {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.97) 72%) !important;
   }
 }
+
+/* Ficha del pin: territorio, ubicación y "Cómo llegar" (js/madriz-territory-map.js).
+   🎯 Cada pin informa a qué territorio pertenece y cómo llegar.
+   ⚙️ Texto secundario y enlace con la paleta oficial y área táctil cómoda.
+   📦 .madriz-map-popup-meta, .madriz-map-popup-link. */
+.madriz-map-popup-meta { margin: 0.25rem 0 0; font-size: 0.74rem; color: #64748B; }
+.madriz-map-popup-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 32px;
+  margin-top: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: #165D6F;
+  color: #FFFFFF !important;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.madriz-map-popup-link:hover,
+.madriz-map-popup-link:focus-visible { background: #F65E01; }

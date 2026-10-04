@@ -396,7 +396,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'INTUR/SIIT — Jinotega', url: 'https://tramites.intur.gob.ni/siit/public/site/empresasTuristicasJinotega.html' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/cascada_la_luna.jpg',
+    heroImage: 'assets/images/departamentos/jinotega.jpg',
     lat: 13.3720,
     lng: -85.6900,
     coopCount: 26
@@ -665,7 +665,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'INTUR — Miraflor', url: 'https://www.intur.gob.ni/2016/02/01/gobierno-sandinista-amplia-oferta-turistica-en-el-departamento-de-esteli/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/Casa Señorial Colonial Granada.jpg',
+    heroImage: 'assets/images/departamentos/esteli.png',
     lat: 13.0910,
     lng: -86.3530,
     coopCount: 24
@@ -700,7 +700,7 @@ window.BAQUEANO_TERRITORIES = [
     bestSeason: 'Diciembre a abril para explorar el Golfo de Fonseca con vientos suaves y cielos despejados.',
     howToReach: 'Por la Carretera Panamericana Occidental (NIC-12), 134 km desde Managua (aprox. 2.5 horas).',
     recommendations: 'Llevar abundante agua para el calor intenso, repelente ecológico de insectos para los manglares y guía especializado para el San Cristóbal.',
-    heroImage: 'assets/images/destinos/cerro_negro.jpg',
+    heroImage: 'assets/images/departamentos/chinandega.jpg',
     lat: 12.6280,
     lng: -87.1310,
     coopCount: 19
@@ -769,7 +769,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'INTUR/SIIT — Managua', url: 'https://tramites.intur.gob.ni/siit/public/site/atractivosTuristicosManagua.html' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/comida/gallo_pinto.jpg',
+    heroImage: 'assets/images/departamentos/managua.png',
     lat: 12.1280,
     lng: -86.2650,
     coopCount: 35
@@ -836,7 +836,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Mapa Nacional — Carazo', url: 'https://www.mapanicaragua.com/carazo/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/Villa Vista Redonda (Emerald Coast).webp',
+    heroImage: 'assets/images/departamentos/carazo.png',
     lat: 11.8580,
     lng: -86.2390,
     coopCount: 18
@@ -905,7 +905,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Visita Nicaragua — Juigalpa', url: 'https://visitanicaragua.com/en/juigalpa-un-destino-imperdible-de-nicaragua/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/canon_de_somoto.jpg',
+    heroImage: 'assets/images/departamentos/chontales.png',
     lat: 12.0620,
     lng: -85.3640,
     coopCount: 16
@@ -969,7 +969,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Mapa Nacional — Boaco', url: 'https://www.mapanicaragua.com/boaco/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg',
+    heroImage: 'assets/images/departamentos/boaco.png',
     lat: 12.4720,
     lng: -85.6590,
     coopCount: 15
@@ -1040,7 +1040,7 @@ window.BAQUEANO_TERRITORIES = [
       { label: 'Visita Nicaragua — Cicloturismo', url: 'https://www.visitanicaragua.com/nicaragua-un-destino-ideal-para-cicloturistas/' }
     ],
     officialVerifiedAt: '26 de septiembre de 2026',
-    heroImage: 'assets/images/destinos/selva_negra.jpg',
+    heroImage: 'assets/images/departamentos/nueva%20segovia.png',
     lat: 13.6330,
     lng: -86.4750,
     coopCount: 20
@@ -1169,7 +1169,7 @@ window.BAQUEANO_TERRITORIES = [
     requiresCommunityCoordination: true,
     transportMustBeVerified: true,
     culturalSensitivity: 'alta',
-    heroImage: 'assets/images/destinos/cascada_la_luna.jpg',
+    heroImage: 'assets/images/departamentos/raan.png',
     lat: 14.0350,
     lng: -83.3880,
     coopCount: 17

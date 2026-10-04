@@ -7,6 +7,12 @@
 // documentos publicados de tourismPlaces y reviews calcula la media visible.
 // 📦 QUÉ: mapa reutilizable, centro territorial exacto, marcadores accesibles,
 // fichas inferiores, pantalla completa y limpieza al cambiar de departamento.
+// 🗺️ ACOTADO POR TERRITORIO (2026-10-04): cada mapa muestra SOLO su
+// departamento o región: contorno oficial (data/nicaragua-departments.geojson,
+// geoBoundaries ADM1, CC BY 4.0), resto del país atenuado, vista limitada al
+// territorio y pines aceptados únicamente si caen dentro del contorno (la
+// geocodificación se restringe al rectángulo del territorio). Antes un lugar
+// podía ubicarse en otro departamento y mezclar información entre territorios.
 // ============================================================================
 
 (function (window, document) {
@@ -33,7 +39,13 @@
   let markers = [];
   let generation = 0;
   let catalogPlaces = [];
-  const GEOCODE_CACHE_KEY = 'baqueano-territory-geocodes-v1';
+  const GEOCODE_CACHE_KEY = 'baqueano-territory-geocodes-v2';
+  const BOUNDARIES_URL = 'data/nicaragua-departments.geojson?v=20261004-1';
+  let boundariesPromise = null;
+  // Coordenadas calculadas una vez en GitHub Actions (scripts/geocode-territory-places.mjs).
+  const PRECOMPUTED_URL = 'data/territory-places.json';
+  let precomputedPromise = null;
+  let territoryFeature = null;
   const NICARAGUA_BOUNDS = { south: 10.7, north: 15.1, west: -88.1, east: -82.5 };
 
   function byId(id) {
@@ -89,6 +101,86 @@
       && longitude >= NICARAGUA_BOUNDS.west && longitude <= NICARAGUA_BOUNDS.east;
   }
 
+  function loadBoundaries() {
+    if (!boundariesPromise) {
+      boundariesPromise = fetch(BOUNDARIES_URL, { credentials: 'same-origin' })
+        .then((response) => (response.ok ? response.json() : null))
+        .catch(() => null);
+    }
+    return boundariesPromise;
+  }
+
+  function loadPrecomputed() {
+    if (!precomputedPromise) {
+      precomputedPromise = fetch(PRECOMPUTED_URL, { credentials: 'same-origin', cache: 'no-cache' })
+        .then((response) => (response.ok ? response.json() : null))
+        .catch(() => null);
+    }
+    return precomputedPromise;
+  }
+
+  function pointInRing(point, ring) {
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i, i += 1) {
+      const [xi, yi] = ring[i];
+      const [xj, yj] = ring[j];
+      if ((yi > point[1]) !== (yj > point[1]) && point[0] < ((xj - xi) * (point[1] - yi)) / (yj - yi) + xi) inside = !inside;
+    }
+    return inside;
+  }
+
+  function polygonsOf(feature) {
+    const geometry = feature && feature.geometry;
+    if (!geometry) return [];
+    return geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.type === 'MultiPolygon' ? geometry.coordinates : [];
+  }
+
+  // Sin contorno disponible se conserva el filtro nacional (degradación segura).
+  function insideTerritory(latitude, longitude) {
+    if (!territoryFeature) return insideNicaragua(latitude, longitude);
+    const point = [longitude, latitude];
+    return polygonsOf(territoryFeature).some((rings) => pointInRing(point, rings[0]) && !rings.slice(1).some((hole) => pointInRing(point, hole)));
+  }
+
+  function territoryBbox() {
+    const bbox = territoryFeature && territoryFeature.properties && territoryFeature.properties.bbox;
+    return Array.isArray(bbox) && bbox.length === 4 ? bbox : null;
+  }
+
+  // Máscara: todo el mundo menos el territorio (los anillos exteriores son huecos).
+  function maskGeometry() {
+    const world = [[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]];
+    const holes = polygonsOf(territoryFeature).map((rings) => rings[0]);
+    return { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [world].concat(holes) } };
+  }
+
+  function waitForStyle() {
+    return new Promise((resolve) => {
+      if (!map) return resolve(false);
+      if (map.isStyleLoaded && map.isStyleLoaded()) return resolve(true);
+      const timer = window.setTimeout(() => resolve(Boolean(map)), 6000);
+      map.once('load', () => { window.clearTimeout(timer); resolve(true); });
+    });
+  }
+
+  function drawTerritory() {
+    if (!map || !territoryFeature) return;
+    try {
+      map.addSource('bq-territory', { type: 'geojson', data: territoryFeature });
+      map.addSource('bq-territory-mask', { type: 'geojson', data: maskGeometry() });
+      map.addLayer({ id: 'bq-territory-mask', type: 'fill', source: 'bq-territory-mask', paint: { 'fill-color': '#0F172A', 'fill-opacity': 0.55 } });
+      map.addLayer({ id: 'bq-territory-fill', type: 'fill', source: 'bq-territory', paint: { 'fill-color': '#165D6F', 'fill-opacity': 0.08 } });
+      map.addLayer({ id: 'bq-territory-line', type: 'line', source: 'bq-territory', paint: { 'line-color': '#F65E01', 'line-width': 3 } });
+    } catch (error) {
+      console.warn(`[Mapa ${territoryName}] No fue posible dibujar el contorno:`, error.message);
+    }
+    const bbox = territoryBbox();
+    if (!bbox) return;
+    const pad = 0.35;
+    map.setMaxBounds([[bbox[0] - pad, bbox[1] - pad], [bbox[2] + pad, bbox[3] + pad]]);
+    map.fitBounds([[bbox[0], bbox[1]], [bbox[2], bbox[3]]], { padding: 40, duration: 0 });
+  }
+
   function geocodeCacheId(place) {
     return `${departmentId}:${String(place.name || '').trim().toLocaleLowerCase('es-NI')}`;
   }
@@ -105,7 +197,7 @@
   async function geocodeCatalogPlace(place, runId, cache) {
     const cacheId = geocodeCacheId(place);
     const cached = cache[cacheId];
-    if (cached && validCoordinates(cached)) return { ...place, ...cached };
+    if (cached && validCoordinates(cached) && insideTerritory(Number(cached.latitude), Number(cached.longitude))) return { ...place, ...cached };
 
     const query = [geocodeSearchName(place.name), territoryName, 'Nicaragua'].filter(Boolean).join(', ');
     const url = new URL('https://nominatim.openstreetmap.org/search');
@@ -114,6 +206,11 @@
     url.searchParams.set('limit', '1');
     url.searchParams.set('countrycodes', 'ni');
     url.searchParams.set('accept-language', 'es');
+    const bbox = territoryBbox();
+    if (bbox) {
+      url.searchParams.set('viewbox', bbox.join(','));
+      url.searchParams.set('bounded', '1');
+    }
 
     try {
       const response = await fetch(url.toString(), {
@@ -125,7 +222,8 @@
       const match = Array.isArray(results) ? results[0] : null;
       const latitude = asNumber(match?.lat);
       const longitude = asNumber(match?.lon);
-      if (latitude === null || longitude === null || !insideNicaragua(latitude, longitude)) return null;
+      // Solo se acepta un punto dentro del contorno del territorio activo.
+      if (latitude === null || longitude === null || !insideTerritory(latitude, longitude)) return null;
       cache[cacheId] = { latitude, longitude, geocodedAt: Date.now() };
       writeGeocodeCache(cache);
       return { ...place, latitude, longitude };
@@ -137,12 +235,23 @@
 
   async function loadCatalogPlaces(runId, onPlace) {
     const cache = readGeocodeCache();
+    const precomputed = await loadPrecomputed();
+    const known = new Map();
+    const list = precomputed && precomputed.territories && Array.isArray(precomputed.territories[departmentId])
+      ? precomputed.territories[departmentId] : [];
+    list.forEach((entry) => {
+      const lat = asNumber(entry.lat);
+      const lng = asNumber(entry.lng);
+      if (lat !== null && lng !== null && insideTerritory(lat, lng)) known.set(String(entry.name), { latitude: lat, longitude: lng });
+    });
     let resolved = 0;
     for (let index = 0; index < catalogPlaces.length; index += 1) {
       if (runId !== generation) break;
       const place = catalogPlaces[index] || {};
-      const cached = cache[geocodeCacheId(place)];
-      const result = await geocodeCatalogPlace(place, runId, cache);
+      const fixed = known.get(String(place.name));
+      // Coordenada precalculada (validada dentro del contorno): sin red ni espera.
+      const cached = fixed || cache[geocodeCacheId(place)];
+      const result = fixed ? { ...place, ...fixed } : await geocodeCatalogPlace(place, runId, cache);
       if (result && runId === generation) {
         resolved += 1;
         onPlace({
@@ -241,7 +350,7 @@
     const places = [];
     snapshot.forEach((doc) => {
       const data = doc.data() || {};
-      if (validCoordinates(data)) places.push({ id: doc.id, ...data });
+      if (validCoordinates(data) && insideTerritory(Number(data.latitude), Number(data.longitude))) places.push({ id: doc.id, ...data });
     });
     // Los pines no deben esperar una consulta adicional por cada reseña.
     // Las valoraciones son complementarias; la ubicación aparece primero.
@@ -270,6 +379,21 @@
     const description = document.createElement('p');
     description.textContent = String(place.shortDescription || place.categoryLabel || 'Lugar publicado en el catálogo territorial.');
     content.append(title, description);
+
+    const meta = document.createElement('p');
+    meta.className = 'madriz-map-popup-meta';
+    meta.textContent = place.catalogReference
+      ? `${territoryName} · ubicación aproximada`
+      : String(place.municipality || territoryName);
+    content.append(meta);
+
+    const directions = document.createElement('a');
+    directions.className = 'madriz-map-popup-link';
+    directions.href = `https://www.google.com/maps/dir/?api=1&destination=${Number(place.latitude)},${Number(place.longitude)}`;
+    directions.target = '_blank';
+    directions.rel = 'noopener noreferrer';
+    directions.innerHTML = '<i class="fa-solid fa-route" aria-hidden="true"></i> Cómo llegar';
+    content.append(directions);
 
     if (place.verified === true) {
       const verified = document.createElement('span');
@@ -377,6 +501,11 @@
     const container = byId('madrizMap');
     if (!container) return;
     setStatus('Consultando lugares publicados…', 'loading');
+    const boundaries = await loadBoundaries();
+    if (runId !== generation) return;
+    territoryFeature = boundaries && Array.isArray(boundaries.features)
+      ? boundaries.features.find((feature) => feature.properties && feature.properties.id === departmentId) || null
+      : null;
     const ready = await waitForDependencies(runId);
     if (!ready || runId !== generation || !byId('madrizMap')) {
       setStatus('El mapa territorial no pudo inicializarse. Comprueba tu conexión.', 'error');
@@ -395,6 +524,9 @@
       });
       map.addControl(new window.maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
       bindExpandButton();
+      await waitForStyle();
+      if (runId !== generation || !map) return;
+      drawTerritory();
 
       const centerMarkerElement = document.createElement('button');
       centerMarkerElement.type = 'button';
@@ -421,6 +553,8 @@
       }
 
       const bounds = new window.maplibregl.LngLatBounds();
+      const territoryBounds = territoryBbox();
+      if (territoryBounds) bounds.extend([[territoryBounds[0], territoryBounds[1]], [territoryBounds[2], territoryBounds[3]]]);
       places.forEach((place) => addPlace(place, bounds));
       const publishedCount = places.length;
       const knownNames = new Set(places.map((place) => String(place.name || '').toLocaleLowerCase('es-NI')));
@@ -444,7 +578,8 @@
       const statusParts = [];
       if (catalogResolved) statusParts.push(`${catalogResolved} ${catalogResolved === 1 ? 'lugar de la guía' : 'lugares de la guía'}`);
       if (publishedCount) statusParts.push(`${publishedCount} ${publishedCount === 1 ? 'registro publicado' : 'registros publicados'}`);
-      setStatus(`${statusParts.join(' y ')} ubicados en ${territoryName}.`, 'ready');
+      const totalPins = (catalogResolved || 0) + publishedCount;
+      setStatus(`${statusParts.join(' y ')} ${totalPins === 1 ? 'ubicado' : 'ubicados'} en ${territoryName}.`, 'ready');
     } catch (error) {
       console.error(`[Mapa ${territoryName}]`, error);
       setStatus('No fue posible cargar el catálogo territorial en este momento.', 'error');
@@ -455,6 +590,7 @@
     generation += 1;
     markers.forEach((marker) => marker.remove());
     markers = [];
+    territoryFeature = null;
     if (map) {
       map.remove();
       map = null;
