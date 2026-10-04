@@ -3954,3 +3954,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - `js/platform-enhancements.js`: retirado `initTestimonials` (comentarios y "me gusta" guardados solo en localStorage, invisibles para el resto); versión del script subida en `global-injector.js`.
   - i18n: `community.comment` y `community.communityTraveler` en 6 idiomas; VERSION del catálogo `2026.10.04-comunidad-2`.
   - Pruebas: E2E local 17/17 (con publicaciones, vacía, servicio caído; sin reseñas de ejemplo, sin HTML inyectado, sin scroll horizontal, ♡ sin sesión → experiencia); build Hostinger + verificación + smoke OK.
+
+## 2026-10-04 (publicación directa) — "quiero que en cada cambio hagas tú el add, commit y push para que salga todo en baqueanonicaragua.com sin pasar por permisos de Azure, Supabase y Firebase"
+- 🎯 **POR QUÉ:** el propietario quiere ver cada cambio publicado en producción sin pasos manuales (fusionar PR, aprobar).
+- ⚙️ **CÓMO:** autorización explícita del propietario para publicar en `main` (Azure autodeploy cada ~2 min desde `main`). Fusionar el PR #2 y, desde ahora, cada cambio validado (build Hostinger + verificación + smoke) se sube con add/commit/push a `main`.
+- 📦 **QUÉ:** directiva permanente de publicación directa en `main` tras validación local. Los cambios de base de datos (migraciones Supabase) y despliegues de Edge Functions se siguen aplicando con las herramientas de Supabase; Firebase solo autenticación.
