@@ -21,7 +21,8 @@
  * 📦 QUÉ (What / Entregables):
  * - Sale con código 1 si algo falla e imprime cada fallo con página y ancho.
  * - Uso: `node scripts/global-shell.test.mjs` (desde website/).
- *   BQ_QUICK=1 limita el barrido a 4 páginas; BQ_PAGES=a.html,b.html elige páginas.
+ *   BQ_QUICK=1 limita el barrido a 4 páginas; BQ_PAGES=a.html,b.html elige páginas;
+ *   BQ_WIDTHS=1024,1920 elige anchos.
  */
 import { readdirSync } from 'node:fs';
 import path from 'node:path';
@@ -30,7 +31,9 @@ import { chromium } from '@playwright/test';
 
 const BASE = (process.env.BQ_BASE_URL || 'http://127.0.0.1:5077').replace(/\/$/, '');
 const WEBSITE_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const WIDTHS = [320, 360, 375, 390, 412, 430, 768, 820, 1024, 1280, 1366, 1440, 1920];
+// BQ_WIDTHS=1024,1280 limita el barrido a esos anchos (reanudar tras un corte).
+const ALL_WIDTHS = [320, 360, 375, 390, 412, 430, 768, 820, 1024, 1280, 1366, 1440, 1920];
+const WIDTHS = process.env.BQ_WIDTHS ? process.env.BQ_WIDTHS.split(',').map(Number).filter((w) => ALL_WIDTHS.includes(w)) : ALL_WIDTHS;
 const EXCLUDED = new Set(['admin.html', 'i18n-test.html']);
 const ALL_PAGES = readdirSync(WEBSITE_DIR).filter((f) => f.endsWith('.html') && !EXCLUDED.has(f)).sort();
 const PAGES = process.env.BQ_PAGES ? process.env.BQ_PAGES.split(',') : process.env.BQ_QUICK ? ['index.html', 'destinos.html', 'historia.html', 'perfil.html'] : ALL_PAGES;

@@ -3888,3 +3888,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - **`perfil.html` + `js/auth-panel.js`:** la tarjeta de seguridad muestra el método real (Google / correo y contraseña), correo verificado sí/pendiente y 2FA según el proveedor (antes "Google: Conectado" para todos); el texto de compartir el pasaporte usa el progreso real de la página (antes "5 de 17" inventado).
   - **Prueba CASO 5b:** medido de nuevo: la sesión falsa se invalida, pero la descarga real del SDK desde gstatic tardó 10 s (invalidación a 14,3 s) → margen de la prueba 25 s. El Ops Center nunca se muestra con la sesión falsa.
   - Nota: `website/scripts/update-perfil-auth.js` (script antiguo de parcheo) aún inyectaría un "Modo Demostración" con `loginAsExplorer`, que ya no existe; no se ejecuta en el sitio.
+
+## 2026-10-04 (segunda reanudación) — "continúa trabajando en lo que tenemos pendiente"
+- 🎯 **POR QUÉ:** la sesión volvió a cortarse mientras el barrido de 13 anchos × 29 páginas iba en 820 px (sin fallos hasta ahí).
+- ⚙️ **CÓMO:** revisar el resultado del barrido; seguir la lista de pendientes en orden: verificación final de pruebas, i18n de `testimonios.html`, integración de experiencias en `destino.html`, pestaña de moderación en el Ops Center (preparada para cuando Supabase tenga el backend), y dejar listo lo que requiere aprobación del propietario (migración + Edge Function de comunidad).
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
