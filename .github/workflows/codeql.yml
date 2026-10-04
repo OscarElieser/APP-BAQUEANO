@@ -45,12 +45,15 @@ jobs:
         include:
         - language: c-cpp
           build-mode: none
+        # 🎯 BAQUEANO: el código nativo Android es Kotlin (Flutter). CodeQL no
+        # analiza Kotlin sin compilar y "autobuild" no sabe construir Flutter,
+        # así que se compila a mano (ver "Run manual build steps").
         - language: java-kotlin
-          build-mode: autobuild
+          build-mode: manual
         - language: javascript-typescript
           build-mode: none
-        - language: swift
-          build-mode: autobuild
+        # Swift (ios/) se retiró del análisis: AGENTS.md limita el desarrollo a
+        # Android y web; ios/ no se compila ni se publica.
         # CodeQL supports the following values keywords for 'language': 'actions', 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'rust', 'swift'
         # Use `c-cpp` to analyze code written in C, C++ or both
         # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
@@ -88,16 +91,29 @@ jobs:
     # to build your code.
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+    - name: Setup Java 17 (manual build)
+      if: matrix.build-mode == 'manual'
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Flutter (manual build)
+      if: matrix.build-mode == 'manual'
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        cache: true
+
+    # Compila el APK debug para que CodeQL observe la compilación Kotlin.
+    # Sin daemon de Gradle: CodeQL necesita ver el proceso del compilador.
     - name: Run manual build steps
       if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        echo 'If you are using a "manual" build mode for one or more of the' \
-          'languages you are analyzing, replace this with the commands to build' \
-          'your code, for example:'
-        echo '  make bootstrap'
-        echo '  make release'
-        exit 1
+        flutter pub get
+        printf '\norg.gradle.daemon=false\n' >> android/gradle.properties
+        flutter build apk --debug
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v4
