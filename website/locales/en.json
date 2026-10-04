@@ -10,7 +10,8 @@
     "fr": "Français",
     "it": "Italiano",
     "pt": "Português",
-    "de": "Deutsch"
+    "de": "Deutsch",
+    "select": "Select your language"
   },
   "nav": {
     "quick": "Quick access",
@@ -24,7 +25,21 @@
     "gastronomy": "Cuisine",
     "music": "Music",
     "trip": "My Trip",
-    "more": "More"
+    "more": "More",
+    "profile": "My Profile",
+    "favorites": "Favorites",
+    "assistant": "Baqueano Digital",
+    "legal": "Legal",
+    "about": "About Us",
+    "register": "Register your Business",
+    "complaints": "Report a Concern",
+    "allies": "Allies Network",
+    "admin": "Ops Center",
+    "skipNav": "Skip to main content",
+    "aria": "Main navigation",
+    "brandAria": "Baqueano Nicaragua — Home",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
   },
   "actions": {
     "search": "Search",
@@ -39,14 +54,44 @@
     "readMore": "Read more",
     "details": "View details",
     "share": "Share",
-    "retry": "Try again"
+    "retry": "Try again",
+    "download": "Download",
+    "filter": "Filter",
+    "clear": "Clear",
+    "apply": "Apply",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "explore": "Explore",
+    "discover": "Discover",
+    "plan": "Plan",
+    "book": "Book",
+    "contact": "Contact",
+    "login": "Log in",
+    "logout": "Log out",
+    "register": "Sign up",
+    "viewAll": "View all",
+    "viewMap": "View on map",
+    "openMenu": "Open menu",
+    "prevPage": "Previous page",
+    "nextPage": "Next page"
   },
   "status": {
     "loading": "Exploring Nicaragua…",
     "empty": "Nothing around here yet. Let's try another search.",
     "saved": "Saved successfully.",
     "error": "We couldn't complete that action. Please try again.",
-    "offline": "Offline"
+    "offline": "Offline",
+    "success": "Done!",
+    "retry": "Try again",
+    "saving": "Saving…",
+    "sending": "Sending…",
+    "sent": "Sent",
+    "required": "This field is required",
+    "invalid": "Please check this field",
+    "notFound": "Not found"
   },
   "baqui": {
     "welcome": "Hi! I'm Baqüi, your guardabarranco guide. What would you like to discover today?",
@@ -58,12 +103,54 @@
     "stop": "Stop",
     "listen": "Listen",
     "openPanel": "Open panel",
-    "later": "Not now"
+    "later": "Not now",
+    "title": "Baqueano Digital",
+    "subtitle": "Your smart travel guide",
+    "closePanel": "Close assistant",
+    "thinking": "Thinking...",
+    "error": "I lost the trail on that one. Could you ask it another way?",
+    "greeting": "Hi! I'm BAQUI, your digital baqueano. What would you like to discover today?",
+    "suggestions": {
+      "adventure": "Adventure and volcanoes",
+      "culture": "Culture and heritage",
+      "gastronomy": "Traditional cuisine",
+      "communities": "Local communities",
+      "surprise": "Surprise me"
+    },
+    "modes": {
+      "discover": "What do you want to experience?",
+      "surprise": "Surprise me",
+      "hidden": "Off the map",
+      "planner": "Plan a trip"
+    }
   },
   "footer": {
     "rights": "All rights reserved.",
     "tagline": "Discover what maps don't show",
-    "madeIn": "Made in Nicaragua"
+    "madeIn": "Made in Nicaragua",
+    "explore": "Explore",
+    "culture": "Culture",
+    "community": "Community",
+    "legal": "Legal",
+    "destinations": "Destinations",
+    "interactive_map": "Interactive Map",
+    "experiences": "Experiences",
+    "departments": "Departments",
+    "history_memory": "History & Memory",
+    "ancestral_gastronomy": "Ancestral Cuisine",
+    "folk_music": "Folk Sound",
+    "environmental": "Environmental Stewardship",
+    "allies": "Allies Network",
+    "about": "About Us",
+    "register_business": "Register your Business",
+    "complaints": "Report a Concern",
+    "profile": "My Profile",
+    "trip": "My Trip",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "legal_notice": "Legal Notice",
+    "copyright": "© {year} Baqueano Nicaragua."
   },
   "seo": {
     "defaultTitle": "BAQUEANO — Discover Nicaragua",
@@ -305,5 +392,291 @@
       "draft": "Draft",
       "archived": "Archived"
     }
+  },
+  "home": {
+    "hero": {
+      "title": "Discover what isn't on the map",
+      "subtitle": "Community tourism and ecotourism in Nicaragua",
+      "cta": "Explore destinations",
+      "videoAlt": "Nature and culture of Nicaragua"
+    },
+    "destinations": {
+      "title": "DESTINATIONS THAT",
+      "subtitle": "Inspire",
+      "featured": "Featured Destination",
+      "exploreBtn": "Explore destination",
+      "viewAll": "View all destinations",
+      "mapTitle": "Territorial map of Nicaragua",
+      "moreThanDest": "More than a destination",
+      "moreThanDesc": "Every place has stories, people and traditions that make it unique.",
+      "filters": {
+        "all": "All",
+        "nature": "Nature",
+        "culture": "Culture",
+        "volcanoes": "Volcanoes",
+        "beaches": "Beaches",
+        "gastronomy": "Cuisine",
+        "communities": "Communities",
+        "heritage": "Heritage",
+        "museums": "Museums"
+      }
+    },
+    "pillars": {
+      "title": "The three pillars of BAQUEANO",
+      "community": {
+        "title": "Communities",
+        "desc": "We connect travelers with rural communities and local cooperatives, the true guardians of the land."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "desc": "Every route, guide and experience is designed to protect ecosystems and support the local economy."
+      },
+      "authenticity": {
+        "title": "Authenticity",
+        "desc": "Nothing is staged. The experiences are real, alive and built from within the community."
+      }
+    },
+    "sos": {
+      "title": "Emergencies",
+      "subtitle": "Immediate assistance for travelers in Nicaragua",
+      "police": "National Police",
+      "medical": "Red Cross / MINSA",
+      "fire": "Fire Department",
+      "general": "General Emergencies",
+      "close": "Close"
+    }
+  },
+  "destinations": {
+    "title": "Destinations",
+    "subtitle": "Discover Nicaragua like never before",
+    "search": "Search destination...",
+    "featured": "Featured",
+    "region": "Region",
+    "category": "Category",
+    "difficulty": "Difficulty",
+    "duration": "Duration",
+    "bestSeason": "Best time to visit",
+    "howToGet": "How to get there",
+    "whatToSee": "What to see",
+    "localGuides": "Local guides",
+    "experiences": "Experiences",
+    "gallery": "Gallery",
+    "noResults": "We couldn't find destinations with those filters.",
+    "exploreBtn": "Explore",
+    "viewDossier": "View full dossier"
+  },
+  "departments": {
+    "title": "Departments",
+    "subtitle": "Explore Nicaragua department by department",
+    "capital": "Departmental seat",
+    "population": "Population",
+    "area": "Area",
+    "municipalities": "Municipalities",
+    "attractions": "Attractions",
+    "gastronomy": "Traditional cuisine",
+    "events": "Festivals and events",
+    "history": "History",
+    "environment": "Environment",
+    "howToGet": "How to get there"
+  },
+  "map": {
+    "title": "Map of Nicaragua",
+    "subtitle": "Explore the territory interactively",
+    "search": "Search place...",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "myLocation": "My location",
+    "noResults": "No places found."
+  },
+  "experiences": {
+    "title": "Experiences",
+    "subtitle": "Live Nicaragua from the inside",
+    "duration": "Duration",
+    "groupSize": "Group size",
+    "price": "Price",
+    "included": "Included",
+    "notIncluded": "Not included",
+    "requirements": "Requirements",
+    "book": "Book experience",
+    "contact": "Ask about availability"
+  },
+  "history": {
+    "title": "History & Memory",
+    "subtitle": "The deep roots of Nicaragua",
+    "timeline": "Timeline",
+    "readMore": "Read more about this period"
+  },
+  "gastronomy": {
+    "title": "Ancestral Cuisine",
+    "subtitle": "The flavors that tell the story of Nicaragua",
+    "ingredients": "Ingredients",
+    "recipe": "Recipe",
+    "region": "Region of origin",
+    "traditional": "Traditional",
+    "dishes": "Dishes",
+    "drinks": "Drinks",
+    "desserts": "Desserts"
+  },
+  "music": {
+    "title": "Folk Sound",
+    "subtitle": "Music as the identity of the Nicaraguan people",
+    "genre": "Genre",
+    "instrument": "Instrument",
+    "region": "Region",
+    "listen": "Listen",
+    "artists": "Artists",
+    "festivals": "Festivals"
+  },
+  "environmental": {
+    "title": "Environmental Stewardship",
+    "subtitle": "Protecting Nicaragua's natural heritage",
+    "reserves": "Reserves",
+    "species": "Protected species",
+    "ecosystems": "Ecosystems",
+    "conservation": "Conservation"
+  },
+  "trip": {
+    "title": "My Trip",
+    "subtitle": "Plan your adventure through Nicaragua",
+    "addDestination": "Add destination",
+    "addExperience": "Add experience",
+    "addNote": "Add note",
+    "totalDays": "Total days",
+    "budget": "Estimated budget",
+    "share": "Share itinerary",
+    "export": "Export PDF",
+    "emptyTitle": "Your trip is empty",
+    "emptyDesc": "Start adding destinations and experiences to build your itinerary.",
+    "day": "Day",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "notes": "Notes"
+  },
+  "profile": {
+    "title": "My Profile",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country of origin",
+    "language": "Preferred language",
+    "interests": "Interests",
+    "saved": "Saved",
+    "trips": "My trips",
+    "settings": "Settings",
+    "logout": "Log out",
+    "editProfile": "Edit profile",
+    "favorites": "My favorites"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "subtitle": "The places you saved",
+    "empty": "You don't have any saved favorites yet.",
+    "emptyDesc": "Explore destinations and mark them as favorites to see them here.",
+    "remove": "Remove from favorites",
+    "add": "Add to favorites",
+    "added": "Added to favorites",
+    "removed": "Removed from favorites"
+  },
+  "search": {
+    "placeholder": "Search destinations, experiences, cuisine…",
+    "results": "Results",
+    "noResults": "We found nothing for \"{query}\". Try another word or a nearby place.",
+    "suggestions": "Suggestions",
+    "recent": "Recent searches",
+    "clear": "Clear search"
+  },
+  "forms": {
+    "name": "First name",
+    "lastName": "Last name",
+    "fullName": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "subject": "Subject",
+    "country": "Country",
+    "date": "Date",
+    "password": "Password",
+    "submit": "Send",
+    "required": "* Required field",
+    "invalidEmail": "That email doesn't look complete. Please check it.",
+    "success": "Done! We received your message.",
+    "error": "It couldn't be sent. Check your connection and try again.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@email.com",
+    "messagePlaceholder": "Write your message here…",
+    "selectOption": "Select an option",
+    "contactTitle": "Contact us",
+    "contactDesc": "Write to us and we'll help you plan your trip through Nicaragua."
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "The digital ecosystem of Nicaraguan tourism",
+    "mission": "Mission",
+    "vision": "Vision",
+    "values": "Values",
+    "team": "Our team",
+    "story": "Our story"
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms of Use"
+    },
+    "privacy": {
+      "title": "Privacy Policy"
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "accept": "Accept all",
+      "reject": "Reject optional",
+      "banner": "We use cookies to improve your experience.",
+      "learnMore": "Learn more"
+    },
+    "legalNotice": {
+      "title": "Legal Notice"
+    }
+  },
+  "offline": {
+    "title": "No connection",
+    "subtitle": "The signal dropped",
+    "desc": "What you already loaded is still here. When the internet is back, we carry on.",
+    "retry": "Test the connection"
+  },
+  "notFound": {
+    "title": "This path leads nowhere",
+    "subtitle": "Neither on the map, nor off it",
+    "desc": "The address may be misspelled or the page may have moved. Let's get back to exploring.",
+    "homeBtn": "Back to home",
+    "exploreBtn": "Explore destinations"
+  },
+  "cookie": {
+    "banner": {
+      "text": "We use cookies to improve your experience on BAQUEANO.",
+      "accept": "Accept",
+      "decline": "Decline",
+      "learnMore": "Learn more"
+    }
+  },
+  "allies": {
+    "title": "Allies Network",
+    "subtitle": "Communities and businesses that make responsible tourism in Nicaragua possible"
+  },
+  "business": {
+    "register": {
+      "title": "Register your Business",
+      "subtitle": "Be part of the BAQUEANO ecosystem",
+      "submit": "Submit registration",
+      "success": "Your business was registered successfully!"
+    }
+  },
+  "accessibility": {
+    "skipNav": "Skip to main content",
+    "closeModal": "Close dialog",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "logo": "Baqueano Nicaragua — Back to home",
+    "darkMode": "Turn on dark mode",
+    "lightMode": "Turn on light mode",
+    "language": "Change language"
   }
 }
