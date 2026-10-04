@@ -21,7 +21,7 @@
 #   - Permisos mínimos del GITHUB_TOKEN (contents: read).
 #   - Solo un despliegue a la vez (concurrency).
 #
-# RELACIÓN: azure/autodeploy.sh, azure/deploy.sh, docs/AZURE_DEPLOYMENT.md.
+# RELACIÓN: azure/autodeploy.sh, azure/deploy.sh, docs/deployment/AZURE_DEPLOYMENT.md.
 # =====================================================
 name: 🚀 BAQUEANO Producción (Azure + Firebase)
 
@@ -134,7 +134,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Aviso si falta el secreto
         if: env.HAS_FIREBASE_SECRET != 'true'
-        run: echo "::notice::Secreto FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO no configurado; se omite Firebase Hosting (ver docs/AZURE_DEPLOYMENT.md)."
+        run: echo "::notice::Secreto FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO no configurado; se omite Firebase Hosting (ver docs/deployment/AZURE_DEPLOYMENT.md)."
       - name: Desplegar Hosting (canal live)
         if: env.HAS_FIREBASE_SECRET == 'true'
         uses: FirebaseExtended/action-hosting-deploy@v0

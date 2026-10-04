@@ -1,6 +1,7 @@
 # 🌋 BAQUEANO NICARAGUA
 
-> **Arquitectura vigente:** [`docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md). El Website público puede conservar HTML/CSS/JavaScript y cargar dinámicamente toda la información desde Supabase. Firebase conserva identidad y Hosting técnico; Hostinger administra el dominio canónico.
+> **Arquitectura oficial (única vigente):** [`docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md).
+> **Hostinger** (DNS) → **Azure VM** (Nginx + Website + API) · **Firebase Authentication** (identidad) · **Cloud Firestore** (escritura prioritaria) → espejo verificado → **Supabase PostgreSQL** (espejo completo con RLS: lectura del sitio, comunidad, BAQUI y API de Azure) · Firebase Hosting solo como respaldo técnico. Roles: [`docs/security/ROLES_Y_PERMISOS.md`](docs/security/ROLES_Y_PERMISOS.md).
 
 ## Plataforma Tecnológica para Turismo Sostenible, Conservación y Bienestar Comunitario
 
@@ -215,7 +216,7 @@ Inspirado en los lagos, volcanes, la cerámica de San Juan de Oriente y la tierr
 
 ## 🗄️ Arquitectura de Base de Datos, Normas de Seguridad (PCI-DSS, RBAC, PII) & Offline-First
 
-La base de datos de **BAQUEANO** está diseñada bajo una arquitectura híbrida de alta disponibilidad que combina **Google Cloud Firestore** (NoSQL orientado a documentos) con almacenamiento persistente local y empaquetado de arranque, permitiendo operación ininterrumpida en cumbres volcánicas y selvas de Nicaragua sin cobertura móvil.
+La base de datos de **BAQUEANO** sigue la [arquitectura oficial](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md): **Cloud Firestore** recibe primero toda escritura (app Android y Ops Center) y la Edge Function `baqueano-mirror` la replica con el mismo alcance en **Supabase PostgreSQL** (espejo completo con RLS, que alimenta el sitio web, la comunidad, BAQUI y la API de Azure). En Android, Firestore se combina con almacenamiento persistente local y empaquetado de arranque, permitiendo operación ininterrumpida en cumbres volcánicas y selvas de Nicaragua sin cobertura móvil.
 
 ```text
        ┌──────────────────────────────────────────────────────────────────┐
@@ -451,7 +452,7 @@ flutter run -d [DEVICE_ID]
 
 ## ☁️ Despliegue Web en Azure
 
-> Guía completa: [docs/AZURE_DEPLOYMENT.md](docs/AZURE_DEPLOYMENT.md) · Evidencias: [docs/evidencias/azure/](docs/evidencias/azure/README.md) · Auditoría: [docs/audit/](docs/audit/SYSTEM_MAP.md)
+> Guía completa: [docs/deployment/AZURE_DEPLOYMENT.md](docs/deployment/AZURE_DEPLOYMENT.md) · Evidencias: [docs/evidencias/azure/](docs/evidencias/azure/README.md) · Auditoría: [docs/audit/](docs/audit/SYSTEM_MAP.md)
 
 | Capa | Tecnología | Rol |
 | --- | --- | --- |
@@ -459,12 +460,13 @@ flutter run -d [DEVICE_ID]
 | Infraestructura | Azure VM `vm-baqueano-prod` · Ubuntu Server 22.04 LTS · NSG | Servidor del Hackathon Nicaragua 2026 |
 | Servidor web | Nginx + TLS Let's Encrypt (HTTPS/443, HTTP/80 solo redirección) | Sirve el Website estático de `website/` |
 | API | Node.js 20 en `127.0.0.1:3000`, systemd, expuesta solo vía Nginx en `/api/azure/*` | Demuestra Azure → datos |
-| Base productiva | Supabase PostgreSQL (RLS) | Fuente única de información |
+| Datos (escritura) | Cloud Firestore | Fuente prioritaria: toda escritura nueva va primero aquí |
+| Datos (espejo y lectura web) | Supabase PostgreSQL (RLS + Edge Functions) | Espejo completo; lectura del sitio, comunidad, BAQUI y API de Azure |
 | BD en Azure | PostgreSQL local solo `localhost` | Evidencia de la rúbrica, sin datos productivos |
 | Autenticación | Firebase Authentication (Google) | Identidad |
 | Hosting alternativo | Firebase Hosting `https://app-baqueano.web.app` | Respaldo técnico |
 
-**Seguridad:** SSH solo con clave y solo desde la IP del administrador; puertos de base de datos (5432, 3306) y de la API (3000) nunca expuestos; cabeceras CSP/HSTS; RLS en Supabase; roles en Firebase Custom Claims.
+**Seguridad:** SSH solo con clave y solo desde la IP del administrador; puertos de base de datos (5432, 3306) y de la API (3000) nunca expuestos; cabeceras CSP/HSTS; RLS en Supabase con pruebas negativas en vivo en CI; roles decididos por el servidor (claim de Firebase o `public.staff_roles`): Explorador, Emprendedor, Auditor (solo lectura), Admin y Superadmin.
 
 **Despliegue reproducible (GitHub = producción):**
 

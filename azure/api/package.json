@@ -2,7 +2,7 @@
   "name": "@baqueano/azure-api",
   "version": "1.0.0",
   "private": true,
-  "description": "API de infraestructura Azure de BAQUEANO (sin dependencias). Ver docs/AZURE_DEPLOYMENT.md.",
+  "description": "API de infraestructura Azure de BAQUEANO (sin dependencias). Ver docs/deployment/AZURE_DEPLOYMENT.md.",
   "type": "commonjs",
   "main": "server.js",
   "engines": {

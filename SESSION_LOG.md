@@ -4029,3 +4029,9 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - CI: pruebas negativas en vivo en `deploy-production.yml` (whoami/mod_queue/moderate sin sesión o token falso → 401; anon no lee staff_roles, auditoría, respaldos, perfiles ni reservas).
   - Documento: `docs/security/ROLES_Y_PERMISOS.md` (matriz Invitado/Explorador/Emprendedor/Auditor/Admin/Superadmin, cómo asignar Auditor por SQL, evidencias, limitación Firestore).
   - Pendiente del propietario: correo para la cuenta Auditor (demo al jurado).
+
+## 2026-10-05 — "SI CONTINUA SIN PARAR"
+- 🎯 **POR QUÉ:** el propietario autoriza seguir sin pausas hasta completar el plan de 100 pts.
+- ⚙️ **CÓMO:** orden: README con una sola arquitectura → BAQUI (viajeros/presupuesto/destinos, preguntar días) → i18n 6 idiomas → entregables de marketing/diseño y matriz de evidencias. Publicar cada avance en `main`.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **README con una sola arquitectura — publicado:** `docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md` reescrito según AGENTS.md (Hostinger DNS → Azure VM; Firebase Auth identidad; Firestore escritura prioritaria → baqueano-mirror → Supabase espejo completo y lectura web; Firebase Hosting respaldo), con diagrama único, responsabilidades con evidencia y criterios verificables. README: nota superior, sección de base de datos y tabla de Azure alineadas (se retiran "fuente única" y "roles en Custom Claims"). Rutas `docs/AZURE_DEPLOYMENT.md` → `docs/deployment/AZURE_DEPLOYMENT.md` en workflows y scripts de Azure.

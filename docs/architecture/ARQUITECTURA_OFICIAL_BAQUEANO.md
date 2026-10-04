@@ -1,113 +1,96 @@
-# 🧭 Arquitectura oficial y obligatoria de BAQUEANO
+# 🧭 Arquitectura oficial de BAQUEANO (única vigente)
 
-## 🎯 POR QUÉ (Why / Propósito)
+> Versión 2026-10-05. Alineada con `AGENTS.md`, regla 5: directiva del propietario del 2026-10-03. Este documento sustituye cualquier versión anterior. Ante una contradicción, prevalecen `AGENTS.md` y este archivo.
 
-Separar con precisión identidad, información, dominio, experiencia e inteligencia para que BAQUEANO evolucione sin destruir el Website existente ni mantener bases de datos competidoras.
+## 🎯 POR QUÉ (Propósito)
 
-Un Website no necesita React, Next.js ni renderizado de servidor para ser dinámico. Las páginas actuales pueden seguir construidas con HTML, CSS y JavaScript; son dinámicas cuando obtienen, validan y presentan contenido procedente de Supabase en vez de almacenar ese contenido como autoridad dentro del HTML o JavaScript.
+Una evaluación externa señaló que README y documentos describían arquitecturas distintas:
 
-## ⚙️ CÓMO (How / Arquitectura e implementación)
+- "Firestore es la base principal".
+- "Supabase es la única fuente".
+- "Roles en Custom Claims".
 
-### Flujo canónico
+Este documento fija **una sola** descripción, verificable en el código y en producción, para que el jurado, el equipo y cualquier agente lean lo mismo.
+
+## ⚙️ CÓMO (Arquitectura)
+
+### Diagrama único
 
 ```text
-USUARIO
-  ↓
-https://baqueanonicaragua.com
-  ↓
-WEBSITE BAQUEANO — HTML + CSS + JavaScript
-  ├─→ Firebase Authentication — identidad, sesión y Firebase UID
-  ├─→ Supabase — toda la información dinámica y operativa
-  └─→ BAQUI — inteligencia y RAG sobre información verificada de Supabase
+                         USUARIO (navegador · Android)
+                                     │
+               ┌─────────────────────┴──────────────────────┐
+               ▼                                            ▼
+  https://baqueanonicaragua.com                     App Android (Flutter)
+  DNS en HOSTINGER  ──►  AZURE VM vm-baqueano-prod          │
+  Nginx + TLS · CSP/HSTS · autodeploy de main (2 min)       │
+  ├─ Website estático (website/ → dist-hostinger)           │
+  └─ API Node /api/azure/* (127.0.0.1:3000)                 │
+               │                                            │
+               ├──────────── Firebase Authentication ◄──────┤   IDENTIDAD (UID + ID token)
+               │                                            │
+               │            Cloud Firestore  ◄──────────────┤   ESCRITURA PRIORITARIA
+               │  (Ops Center y app escriben aquí primero)  │
+               │                    │                       │
+               │       baqueano-mirror (Edge Function, token verificado)
+               │                    ▼                       │
+               └──────────►  SUPABASE PostgreSQL  ◄─────────┘   ESPEJO COMPLETO + LECTURA WEB
+                     RLS · Storage · Edge Functions · pgvector
+                     ├─ baqueano-community  (experiencias, moderación, RBAC)
+                     ├─ baqueano-ai         (BAQUI, RAG sobre datos verificados)
+                     ├─ baqueano-mirror     (réplica Firestore → Supabase)
+                     └─ baqueano-status     (salud)
 
-https://app-baqueano.web.app
-  └─→ URL técnica, respaldo, diagnóstico y recuperación de Firebase Hosting
+  Firebase Hosting https://app-baqueano.web.app → solo respaldo técnico (no canonical)
 ```
 
-### Responsabilidades no intercambiables
+### Responsabilidades (no intercambiables)
 
-| Componente | Responsabilidad oficial | No debe convertirse en |
+| Componente | Responsabilidad | Evidencia en el repositorio |
 |---|---|---|
-| Hostinger | Dominio, DNS, SSL, correo y futuros subdominios | Base de datos de la aplicación |
-| Firebase Authentication | Registro, login, Google Sign-In, sesión, OAuth, Firebase UID y App Check cuando aplique | Almacén principal de contenido |
-| Firebase Hosting | Infraestructura web técnica, respaldo y recuperación | Dominio canónico público |
-| Supabase | PostgreSQL, RLS, Realtime, Storage dinámico, información y operaciones | Segundo sistema de autenticación con contraseñas duplicadas |
-| Website | Experiencia, navegación, renderizado y formularios | Fuente canónica de datos turísticos |
-| BAQUI | Consulta, RAG, planificación y asistencia | Generador de hechos sin fuentes |
-| Android | Aplicación Flutter independiente orientada exclusivamente a Android | Dependencia estructural del Website |
+| **Hostinger** | Dominio y DNS de `baqueanonicaragua.com`, que apunta a Azure | `docs/deployment/AZURE_DEPLOYMENT.md` |
+| **Azure VM** | Sirve el sitio y la API (Nginx, TLS, cabeceras de seguridad); se actualiza sola desde `main` | `azure/`, `.github/workflows/deploy-production.yml` (job verify-azure) |
+| **Firebase Authentication** | Identidad: Google Sign-In, sesión, UID e ID token RS256 | `website/js/user-session.js`, `lib/` |
+| **Cloud Firestore** | Fuente de datos **prioritaria**: toda escritura nueva va primero aquí (Ops Center y Android) | `firestore.rules`, `website/js/firestore-mirror.js` |
+| **Supabase** | **Espejo completo** de cada colección, con la misma capacidad. Es la lectura del sitio, la comunidad, BAQUI y la consulta desde Azure. Aplica RLS | `supabase/migrations/`, `supabase/functions/`, `supabase/tests/` |
+| **Edge Functions** | Toda escritura en Supabase hecha en nombre de un usuario: verifican el token de Firebase y deciden el rol | `supabase/functions/*` |
+| **Firebase Hosting** | Respaldo técnico; nunca canonical | `firebase.json` |
+| **Android** | App Flutter separada (`lib/`, `android/`). No se tocan `ios/` ni `web/` | `pubspec.yaml` |
 
-### Decisión sobre tecnologías web
+### Reglas de datos
 
-- `website/` puede conservar sus páginas HTML, estilos CSS y módulos JavaScript actuales.
-- React y Next.js son opcionales. Su existencia en subproyectos no obliga a reescribir la web pública.
-- No se crearán 153 archivos HTML para municipios. Una plantilla como `municipio.html?id=somoto` puede consultar Supabase y renderizar el municipio solicitado.
-- Una plantilla como `departamento.html?depto=matagalpa` debe resolver desde Supabase departamento, municipios, destinos, alojamiento, gastronomía, historia, cultura, naturaleza y emergencias verificadas.
-- Los componentes visuales existentes deben preservarse mientras se cambia progresivamente su fuente de información.
+1. **Escritura:** Firestore primero. Después `baqueano-mirror` replica en Supabase con el mismo alcance. La clave pública del navegador **no** escribe tablas de servidor (`SUPABASE_BROWSER_WRITES = false` en el Ops Center).
+2. **Lectura pública del sitio:** Supabase, con RLS (solo contenido publicado y columnas públicas).
+3. **Contenido de usuarios** (experiencias, comentarios, fotos y videos): solo por la Edge Function `baqueano-community`, que verifica el token de Firebase, sanea, limita frecuencia y comprueba el tipo real de archivo.
+4. **`SUPABASE_SERVICE_ROLE_KEY`:** solo existe en el servidor (Edge Functions). Nunca en HTML, JavaScript público, APK ni el repositorio.
+5. **Supabase Auth tiene 0 usuarios a propósito:** la identidad es Firebase. Supabase no guarda contraseñas.
 
-### Patrón dinámico permitido en HTML/JavaScript
+### Roles (RBAC)
 
-```text
-Página HTML estable
-  ↓
-Módulo JavaScript de datos
-  ↓
-Supabase Data API o backend seguro
-  ↓
-RLS + validación + estado publicado
-  ↓
-Renderizado en el DOM
-```
+El rol siempre lo decide el servidor:
 
-La clave pública publicable puede existir en el cliente únicamente con RLS correctamente configurada. `SUPABASE_SERVICE_ROLE_KEY` jamás puede aparecer en HTML, JavaScript público, Flutter, APK, almacenamiento del navegador ni repositorio público. Operaciones administrativas, verificación, cambios de roles y auditoría privilegiada deben pasar por backend seguro.
+1. Custom claim `role` del token de Firebase.
+2. Si no hay claim, el correo **verificado** en `public.staff_roles`.
+3. Si no aparece, `explorer`.
 
-### Identidad Firebase conectada con Supabase
-
-```text
-Firebase Authentication
-  uid = abc123
-        ↓ token verificado por backend
-Supabase profiles
-  firebase_uid = abc123
-```
-
-Supabase no almacena contraseñas Firebase. El `firebase_uid` enlaza perfiles, favoritos, viajes, reservas, reseñas y operaciones autorizadas. Una clave pública o la presencia del UID no constituye autorización: cada flujo sensible requiere políticas RLS y, cuando corresponda, backend que verifique el token Firebase.
-
-### Regla de información
-
-Supabase es la única autoridad para toda información dinámica y operativa, incluyendo territorio, turismo, naturaleza, patrimonio, cultura, historia, museos, música, arte, gastronomía, alojamiento, negocios, transporte, servicios útiles, emergencias verificadas, perfiles, favoritos, viajes, reservas, reseñas, verificaciones, fuentes, auditoría y conocimiento de BAQUI.
-
-Firestore, Realtime Database, JSON, HTML, constantes JavaScript/Dart y almacenamiento local existentes son fuentes heredadas, respaldos o cachés temporales. No deben eliminarse antes de completar:
-
-```text
-IDENTIFICAR → RESPALDAR → VALIDAR → NORMALIZAR → IMPORTAR A SUPABASE
-→ PROBAR → CONECTAR WEBSITE → VERIFICAR → RETIRAR DOBLE ESCRITURA
-```
+Roles: Invitado, Explorador (usuario), Emprendedor, **Auditor (solo lectura)**, Admin y Superadmin. La matriz y las pruebas están en [`docs/security/ROLES_Y_PERMISOS.md`](../security/ROLES_Y_PERMISOS.md).
 
 ### Dominio y canonical
 
-- Canonical público: `https://baqueanonicaragua.com`.
-- `https://www.baqueanonicaragua.com` debe redirigir al dominio sin `www`.
-- Todas las rutas internas, Open Graph, sitemap y datos estructurados deben usar el dominio canónico.
-- `https://app-baqueano.web.app` debe permanecer accesible, pero nunca declarar su URL como canonical.
-- Los subdominios futuros solo se crean por necesidad comprobada.
+- Canonical: `https://baqueanonicaragua.com`. `www` redirige al dominio sin `www`; HTTP redirige a HTTPS.
+- `https://app-baqueano.web.app` sigue accesible, pero nunca se declara canonical.
 
-## 📦 QUÉ (What / Resultado y criterios de cumplimiento)
+## 📦 QUÉ (Criterios verificables)
 
-La arquitectura se considera aplicada cuando:
+| # | Criterio | Cómo se verifica |
+|---|---|---|
+| 1 | Producción sirve el commit de `main` | `curl https://baqueanonicaragua.com/health` (job verify-azure) |
+| 2 | Azure consulta Supabase | `GET /api/azure/db` → `"provider":"supabase-postgresql","ok":true` |
+| 3 | Sin sesión no se modera ni se leen tablas de servidor | Pruebas negativas en vivo de verify-azure (401 y anon sin acceso) |
+| 4 | RLS sin políticas abiertas | `supabase/tests/rls_hardening.test.sql` (pgTAP) |
+| 5 | Roles demostrables | `docs/security/ROLES_Y_PERMISOS.md` |
+| 6 | Android analiza y compila | `flutter_ci.yml` y CodeQL java-kotlin (build manual) |
 
-1. una alta desde Ops Center se guarda en Supabase;
-2. el mismo registro aparece en Website, mapa, búsqueda, departamento, municipio, BAQUI, Mi Viaje y experiencias según corresponda;
-3. ninguna edición de contenido exige modificar múltiples archivos HTML;
-4. Firebase responde quién es el usuario y Supabase conserva su información;
-5. Firestore deja de ser autoridad paralela del catálogo;
-6. favoritos, viajes y reservas se sincronizan entre dispositivos;
-7. la información sensible se protege con RLS, autorización y backend;
-8. emergencias solo se publican con fuente, verificación y fecha;
-9. `baqueanonicaragua.com` es canonical y Firebase Hosting sigue disponible como respaldo;
-10. Android continúa separado y no se modifican `ios/` ni el directorio Flutter `web/`.
+### Precedencia documental
 
-## Precedencia documental
-
-Este documento sustituye cualquier especificación anterior que declare Firestore como datastore principal, Supabase como simple respaldo, Next.js o React como requisito obligatorio de la web pública, o `app-baqueano.web.app` como dominio canónico.
-
-Los documentos históricos se conservan como evidencia, pero deben interpretarse bajo esta arquitectura.
+Los documentos históricos que describen otra arquitectura (Firestore como "única" base, Supabase como "única autoridad", Next.js obligatorio o `web.app` como canonical) se conservan solo como historial.

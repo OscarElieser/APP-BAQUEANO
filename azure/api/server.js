@@ -39,7 +39,7 @@ SEGURIDAD:
 
 RELACIÓN:
   azure/nginx/baqueano.conf (proxy /api/azure/), azure/systemd/,
-  docs/AZURE_DEPLOYMENT.md (evidencias para el jurado).
+  docs/deployment/AZURE_DEPLOYMENT.md (evidencias para el jurado).
 =====================================================
 */
 'use strict';

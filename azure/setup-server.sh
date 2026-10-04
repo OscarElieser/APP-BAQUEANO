@@ -30,7 +30,7 @@
 #
 # RELACIÓN:
 #   azure/nginx/baqueano.conf (sitio), azure/deploy.sh (despliegues),
-#   docs/AZURE_DEPLOYMENT.md (guía paso a paso).
+#   docs/deployment/AZURE_DEPLOYMENT.md (guía paso a paso).
 #
 # USO (en la VM):
 #   git clone https://github.com/OscarElieser/APP-BAQUEANO.git ~/APP-BAQUEANO

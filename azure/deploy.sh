@@ -23,7 +23,7 @@
 #   - Si el build falla, "current" no cambia: el sitio sigue sirviendo la release anterior.
 #
 # RELACIÓN:
-#   azure/setup-server.sh, azure/nginx/baqueano.conf, docs/AZURE_DEPLOYMENT.md.
+#   azure/setup-server.sh, azure/nginx/baqueano.conf, docs/deployment/AZURE_DEPLOYMENT.md.
 #
 # USO:
 #   bash ~/APP-BAQUEANO/azure/deploy.sh            # despliega origin/main
@@ -113,7 +113,7 @@ rsync -a --delete "${REPO_DIR}/website/dist-hostinger/" "${RELEASE}/"
 
 echo "==> 4/6 Incorporando videos (fuera de Git)"
 # Los videos están en .gitignore (exceden límites de GitHub). Se suben una vez
-# por SCP a ${MEDIA_VIDEOS} y se copian en cada release. Ver docs/AZURE_DEPLOYMENT.md.
+# por SCP a ${MEDIA_VIDEOS} y se copian en cada release. Ver docs/deployment/AZURE_DEPLOYMENT.md.
 if [[ -d "${MEDIA_VIDEOS}" ]]; then
   mkdir -p "${RELEASE}/assets/videos"
   rsync -a "${MEDIA_VIDEOS}/" "${RELEASE}/assets/videos/"
