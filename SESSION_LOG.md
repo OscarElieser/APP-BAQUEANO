@@ -3825,3 +3825,35 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** Caso real fallido: "quiero ir a la playa… León, Carazo y Rivas… 500 dólares… mi pareja y dos niños" → BAQUI respondió "Organicé León para 3 días y 1 viajero" (ignoró 2 destinos, presupuesto, 4 viajeros; inventó 3 días).
 - ⚙️ **CÓMO (pedido):** auditar dónde se procesa el chat, modelo, prompt, origen de "3 días" y "1 viajero", defaults hardcodeados; extracción estructurada (JSON Schema) con validación semántica (total = adultos + niños; days null ≠ 3); datos faltantes → recomendación preliminar + 1–2 preguntas; BAQUEANO primero (Supabase/destinos/negocios/hospedajes…), web solo como respaldo con fuentes y consultas minimizadas; tools backend (search_destinations, calculate_trip_budget, …); comparador con score; presupuesto desglosado marcando estimaciones; memoria `trip_context`; capa AIProvider (OpenAI/Gemini/Claude) con fallback; claves solo en backend; contenido web = datos, nunca instrucciones; respuestas con acciones; pruebas multivariable.
 - 📦 **Estado:** registrado antes de cualquier cambio; en cola tras el menú.
+
+---
+
+## 🔖 PUNTO DE REANUDACIÓN — 2026-10-04 (fin de jornada pedido por el propietario)
+
+**Estado del repositorio:** todo el trabajo está en los commits `1ef6e89 domingo4` y `cfe463c mega` (rama `chore/reorganizacion-repositorio`). Único archivo sin commit: `website/scripts/global-shell.test.mjs` (pruebas en reescritura). El sitio publicado YA muestra el menú nuevo (alguien desplegó Hosting) → `baqueanonicaragua.com/testimonios.html` da **404** porque la página aún no existe.
+
+### ✅ Hecho y verificado (Playwright, servidor local `PORT=5077 node dev-server.js`)
+- **Menú global v2** (`js/navigation.js` → `BQ_MENU_GROUPS` + `bqRenderGlobalMenu()` + `bqInitMenuGroups()`; CSS en `css/navigation-mega.css` bloque "MENÚ GLOBAL v2" + "Barra superior móvil" + "Ítems del panel"): escritorio Inicio | Explorar ▼ | Cultura ▼ | Comunidad ▼ | Cuenta y plataforma ▼ con paneles independientes (clic, hover, teclado ↓/↑/Inicio/Fin/Esc, clic fuera), verificado 1920×1080, 1440×900, 1366×768, 1280×720, 1024×768, 1024×1366. Móvil/tablet: panel izquierdo 100dvh, acordeón (abre el grupo actual, uno a la vez), foco atrapado, X/Esc/fondo, `padding-bottom: calc(env(safe-area-inset-bottom) + 90px)`, barra inferior visible; barra superior BAQUEANO + SOS + Usuario + ES + ☰. Verificado 430×932, 412×915, 390×844, 375×812, 360×800, 320×568, 844×390, 568×320, 820×1180, 768×1024: 32/32 controles tocables, 0 grupos dobles, último control sobre la barra inferior.
+- Rutas que no estaban en los 5 grupos quedaron dentro: Mi Viaje y BAQUI (Explorar › Planificá), Crónicas (Cultura), Aviso legal (Cuenta › Plataforma). Testimonios en Comunidad (Aliados, Mi Negocio, Testimonios, Denuncia).
+- **i18n:** espacio `menu.*` (55 claves) en es/en/fr/it/pt/de, sin pérdidas (verificado clave por clave); `global-language.js` VERSION → `2026.10.04`.
+- Causas raíz del menú cortado corregidas: header con backdrop-filter = bloque contenedor del panel fijo; acordeón heredado `max-height:0/pointer-events:none`; `z-index` en hijo flex; reglas ≤480 px que fijaban acciones en 36 px y ocultaban SOS/cuenta; `navigation-mega.css` se cargaba DOS veces (corregido).
+- **Datos reales (diagnóstico confirmado):** el proyecto NO tiene base Firestore `(default)`; la única es `appbaqueano` (vacía) con reglas vivas `allow read, write: if false`. `firebase.json` ahora apunta a `appbaqueano`; `firebase-config.js` enruta `firebase.firestore()` a `appbaqueano` (Proxy + accesor); `firestore.rules` con mapa `profile` editable, email = token, `traffic_sessions` con esquema cerrado. Supabase `firestore_mirror` = 0 filas (nada llegó nunca).
+- `user-session.js`: enlace Ops Center solo con rol verificado en vivo (`liveIdentity`), carga diferida de Firebase Auth si hay sesión local, logout real desde cualquier página.
+
+### ⛔ Bloqueo (requiere al propietario)
+- **Desplegar reglas a la base real** (el control de permisos del asistente lo bloquea): `firebase deploy --only firestore --project app-baqueano`. Reversión: re-publicar ruleset `0bd1c5d7-e1a9-40a3-a542-da400e23340e` en `cloud.firestore/appbaqueano`. Sin esto, ningún perfil/testimonio se guarda.
+
+### ⏭️ Pendiente, en este orden
+1. **`testimonios.html` + "Experiencias de viajeros"** (URGENTE: 404 en producción). Feed público, publicar/comentar/reaccionar solo autenticado con retorno al mismo punto, multimedia validada, moderación (estados) en Ops Center, reglas Firestore `testimonials`, `testimonial_comments`, `testimonial_reactions`, `testimonial_reports` + Storage, integración con fichas de destino.
+2. Terminar `scripts/global-shell.test.mjs`: (a) paso `movil` → "page.click Timeout" en el arnés (las sondas manuales pasan; revisar qué clic espera: probablemente `#mobileNavToggle` oculto por `visibility:hidden` de las acciones cuando el panel sigue abierto); (b) **CASO 5b real falla**: con Firebase real la sesión falsa NO se invalidó en 8 s → revisar carga diferida (`loadFirebaseAuth`/requestIdleCallback) en `user-session.js` — posible defecto real; (c) `idioma` timeout esperando `BaqueanoLanguage`.
+3. Ficha de destino (modal "Isla de Ometepe", `js/destinos-interactions.js` ~línea 282) cortada → scroll interno.
+4. Galería de destinos: página 1 vacía y página 2 con datos (index/destinos, control "Pausar galería").
+5. Tarjetas "Alertas y recomendaciones" / "Cómo moverte en tu ruta": texto técnico "Entidad sin validación activa de Supabase" → información real por lugar y actualización automática.
+6. Botones del footer que no funcionan (auditoría en navegador).
+7. Perfil editable con datos reales (`perfil.html`): tarjeta de seguridad falsa ("Inicio con Google: Conectado" para todos), texto de compartir pasaporte inventado ("5 de 17"), `user-session.js` escribe campos fuera del esquema y hace upsert anónimo a Supabase `profiles` (revocado) → reemplazar por espejo; quitar `loginAsExplorer`/`addBooking`/`cancelBooking` (datos simulados sin uso).
+8. **BAQUI agente real** (prompt maestro): auditar origen de "3 días"/"1 viajero", extracción estructurada, `trip_context`, tools, comparador, presupuesto, AIProvider con fallback, claves solo en backend.
+9. Captura nueva sin analizar: barra de búsqueda "¿Qué querés vivir en Nicaragua?" (revisar qué espera el propietario).
+10. Riesgos anotados: la app Android usa `appbaqueano` y escribe `platform/status/lastLogin` (denegados por reglas); `traffic_sessions` sin uso web; copias estáticas antiguas del menú en 12 HTML (las reemplaza el inyector).
+
+### ▶️ Cómo reanudar
+`PORT=5077 node dev-server.js` (raíz) → `cd website && BQ_STEPS=movil,escritorio node scripts/global-shell.test.mjs` (pasos: roles, movil, escritorio, idioma, enlaces, barrido; `BQ_QUICK=1` = 4 páginas).

@@ -164,6 +164,7 @@ async function mobileDrawer(browser) {
       expanded: t.getAttribute('aria-expanded'),
       open: menu.classList.contains('mobile-open') && document.documentElement.classList.contains('nav-drawer-open'),
       menuInside: r.top >= -1 && r.left >= -1 && r.right <= innerWidth + 1 && r.bottom <= innerHeight + 1,
+      rect: [r.left, r.top, r.right, r.bottom].map(Math.round), vh: innerHeight, y: Math.round(window.scrollY),
       scrollable: ['auto', 'scroll'].includes(getComputedStyle(menu).overflowY),
       openGroups: menu.querySelectorAll('.bq-menu-group.is-open').length
     };
@@ -180,7 +181,7 @@ async function mobileDrawer(browser) {
     await page.waitForTimeout(380);
     const s = await state();
     expect(s.expanded === 'true' && s.open, `Panel móvil ciclo ${i}: no abrió (${JSON.stringify(s)})`);
-    expect(s.menuInside && s.scrollable, `Panel móvil ciclo ${i}: fuera del viewport o sin scroll interno`);
+    expect(s.menuInside && s.scrollable, `Panel móvil ciclo ${i}: fuera del viewport o sin scroll interno ${JSON.stringify(s)}`);
     expect(s.openGroups === 1, `Panel móvil ciclo ${i}: el grupo de la página actual no quedó desplegado (${s.openGroups})`);
     const how = closers[i % 3];
     if (how === 'escape') await page.keyboard.press('Escape');
