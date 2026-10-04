@@ -417,6 +417,16 @@
     "destEmpty": "Noch hat niemand eine Erfahrung zu diesem Ziel geteilt. Du kannst die erste Person sein!",
     "destSeeAll": "Alle Erfahrungen ansehen",
     "comment": "Kommentieren",
-    "communityTraveler": "Reisende:r der Community"
+    "communityTraveler": "Reisende:r der Community",
+    "pause": "Pausieren",
+    "resume": "Fortsetzen",
+    "commenting": "Du kommentierst:",
+    "commentPh": "Schreibe deinen Kommentar für die Community…",
+    "yourComment": "Dein Kommentar",
+    "loginToComment": "Melde dich an, um zu kommentieren",
+    "publishComment": "Kommentar veröffentlichen",
+    "publishing": "Wird veröffentlicht…",
+    "commentThanks": "Kommentar veröffentlicht. Danke für deinen Beitrag zur Community!",
+    "carouselLabel": "Erfahrungsberichte der Community"
   }
 }

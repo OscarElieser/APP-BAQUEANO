@@ -3960,3 +3960,19 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - ⚙️ **CÓMO:** autorización explícita del propietario para publicar en `main` (Azure autodeploy cada ~2 min desde `main`). Fusionar el PR #2 y, desde ahora, cada cambio validado (build Hostinger + verificación + smoke) se sube con add/commit/push a `main`.
 - 📦 **QUÉ:** directiva permanente de publicación directa en `main` tras validación local. Los cambios de base de datos (migraciones Supabase) y despliegues de Edge Functions se siguen aplicando con las herramientas de Supabase; Firebase solo autenticación.
 - **Hecho:** PR #2 fusionado en `main` (`bfdee32`) por directiva del propietario; vigilancia del PR y revisión programada canceladas. Desde ahora se trabaja directo en `main` (validación local → add/commit/push). Azure publica solo en ~2 min. No se puede verificar baqueanonicaragua.com desde este entorno (el proxy bloquea el dominio): la verificación visual la hace el propietario con Ctrl+F5.
+
+## 2026-10-04 (galería infinita de testimonios) — "quiero que salgan los testimonios de los usuarios en galería en movimiento infinito con pausa para que el usuario pueda comentar otro testimonio"
+- 🎯 **POR QUÉ:** la portada (ya publicada) muestra solo la tarjeta de invitación; el propietario quiere un carrusel continuo de testimonios reales que se pause para comentar.
+- ⚙️ **CÓMO:** revisar cuántas experiencias publicadas hay; convertir la fila de la portada en una galería en bucle infinito (CSS transform, 60 fps) con pausa al pasar el mouse/enfocar/tocar y botón Pausar/Reanudar; comentar desde la portada.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **Avance (galería infinita, publicado en `main`):**
+  - Base de datos: 0 experiencias (ni publicadas ni pendientes) → la portada muestra la invitación hasta que se aprueben las primeras.
+  - `js/home-community.js` reescrito: con ≥3 experiencias, galería en bucle infinito (pista set + copia, `transform` en GPU, duración ∝ tarjetas); pausa con hover, foco, toque y botón Pausar/Reanudar (WCAG 2.2.2); Comentar abre un panel en la portada que publica con `comment` (sesión Firebase) y pausa la galería; ♡ con `react`; acciones por delegación en originales y copias; con 1–2, fila fija + invitación; `prefers-reduced-motion` → carrusel deslizable sin animación. Estilos en `css/pages/index-exact.css`.
+  - Corregido choque de clase `.bq-like-count` (insignia oscura de platform-enhancements) → `.bq-home-like-n`.
+  - i18n: 10 frases nuevas × 6 idiomas; VERSION `2026.10.04-galeria-1`.
+  - Pruebas: E2E 16/16 (movimiento, pausa hover/botón/comentario, reanudar, comentario con sesión y contador en todas las copias, sin sesión, reducido, 2 y 0 experiencias); build Hostinger + verificación + smoke OK.
+
+## 2026-10-04 (departamentos) — "en departamento.html veo información de Madriz en otros departamentos; Madriz era solo referencia de estilo. El mapa de cada departamento debe mostrar solo la información de ese departamento (15 departamentos + 2 regiones), con pines en su ubicación, como lo da ChatGPT"
+- 🎯 **POR QUÉ:** contenido de Madriz se filtra a otros departamentos y el mapa no está acotado al departamento seleccionado.
+- ⚙️ **CÓMO:** auditar `departamento.html` y sus scripts (`madriz-experience.js` y similares), separar los datos por departamento y acotar el mapa (límites + pines) al territorio elegido.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.

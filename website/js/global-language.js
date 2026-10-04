@@ -18,7 +18,7 @@
   var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.04-comunidad-2';
+  var VERSION = '2026.10.04-galeria-1';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
   var originals = new WeakMap();

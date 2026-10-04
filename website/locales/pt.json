@@ -417,6 +417,16 @@
     "destEmpty": "Ninguém compartilhou uma experiência neste destino ainda. Você pode ser a primeira pessoa!",
     "destSeeAll": "Ver todas as experiências",
     "comment": "Comentar",
-    "communityTraveler": "Viajante da comunidade"
+    "communityTraveler": "Viajante da comunidade",
+    "pause": "Pausar",
+    "resume": "Retomar",
+    "commenting": "Comentando:",
+    "commentPh": "Escreva seu comentário para a comunidade…",
+    "yourComment": "Seu comentário",
+    "loginToComment": "Entre para comentar",
+    "publishComment": "Publicar comentário",
+    "publishing": "Publicando…",
+    "commentThanks": "Comentário publicado. Obrigado por contribuir com a comunidade!",
+    "carouselLabel": "Depoimentos da comunidade"
   }
 }

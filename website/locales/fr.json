@@ -417,6 +417,16 @@
     "destEmpty": "Personne n'a encore partagé d'expérience sur cette destination. Vous pourriez être la première personne !",
     "destSeeAll": "Voir toutes les expériences",
     "comment": "Commenter",
-    "communityTraveler": "Voyageur de la communauté"
+    "communityTraveler": "Voyageur de la communauté",
+    "pause": "Pause",
+    "resume": "Reprendre",
+    "commenting": "Vous commentez :",
+    "commentPh": "Écrivez votre commentaire pour la communauté…",
+    "yourComment": "Votre commentaire",
+    "loginToComment": "Connectez-vous pour commenter",
+    "publishComment": "Publier le commentaire",
+    "publishing": "Publication…",
+    "commentThanks": "Commentaire publié. Merci de contribuer à la communauté !",
+    "carouselLabel": "Témoignages de la communauté"
   }
 }

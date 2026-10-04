@@ -417,6 +417,16 @@
     "destEmpty": "No one has shared an experience at this destination yet. You could be the first!",
     "destSeeAll": "See all experiences",
     "comment": "Comment",
-    "communityTraveler": "Community traveler"
+    "communityTraveler": "Community traveler",
+    "pause": "Pause",
+    "resume": "Resume",
+    "commenting": "Commenting on:",
+    "commentPh": "Write your comment for the community…",
+    "yourComment": "Your comment",
+    "loginToComment": "Sign in to comment",
+    "publishComment": "Post comment",
+    "publishing": "Posting…",
+    "commentThanks": "Comment posted. Thanks for contributing to the community!",
+    "carouselLabel": "Community testimonials"
   }
 }
