@@ -1135,6 +1135,8 @@
             mainContainer.classList.remove('territory-unified-layout');
             mainContainer.dataset.territory = 'madriz';
           }
+          // Marca de diseño especial: al salir de Madriz se restaura la plantilla común.
+          mainContainer.dataset.layout = 'special';
           window.BaqueanoMadriz.renderMadrizExperience(mainContainer, dept);
           renderSelectorGrid('madriz');
           return;
@@ -1150,15 +1152,22 @@
             mainContainer.classList.remove('territory-unified-layout');
             mainContainer.dataset.territory = 'chinandega';
           }
+          mainContainer.dataset.layout = 'special';
           window.BaqueanoChinandega.renderChinandegaExperience(mainContainer, dept);
           renderSelectorGrid('chinandega');
           return;
         }
 
         // Restaurar la plantilla compartida si una experiencia especial la sustituyó.
-        if (mainContainer && !mainContainer.querySelector('#deptHeroBg')) {
+        // POR QUÉ: Madriz y Chinandega también tienen #deptHeroBg, así que esa
+        // comprobación no detectaba el cambio y sus secciones (manifiesto, videos,
+        // Cañón de Somoto, modo científico…) quedaban en los demás territorios.
+        // CÓMO: se restaura siempre que el último render fue especial.
+        if (mainContainer && (mainContainer.dataset.layout === 'special' || !mainContainer.querySelector('#deptHeroBg'))) {
+          if (window.BaqueanoMadrizMap) window.BaqueanoMadrizMap.unmount();
           mainContainer.innerHTML = standardTemplateHtml;
         }
+        if (mainContainer) mainContainer.dataset.layout = 'standard';
 
         if (mainContainer) {
           mainContainer.dataset.territory = dept.id;
