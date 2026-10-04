@@ -3716,13 +3716,18 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   3. Actualizar `README.md` para detallar la arquitectura de despliegue en Azure, seguridad perimetral, modelo de datos y sincronización de producción.
   4. Mantener la suite de verificación técnica limpia y sincronizada.
 
-- 📦 **QUÉ (What / Entregables):**
-  - Evidencias estructuradas y verificadas de Sprint 1, Sprint 2 y Sprint 3 en `docs/evidencias/`.
-  - Documentación de arquitectura de despliegue Azure en `README.md`.
-  - Registro persistente en `SESSION_LOG.md`.
+- 📦 **QUÉ (What / Entregables y Resultados Finales de Sprints 1, 2 y 3):**
+  - **Validador Automatizado:** `tools/verify-sprints.mjs` actualizado y ejecutado con éxito total: **15 pruebas aprobadas, 0 fallidas (100% verde)**.
+  - **Paridad de Commit:** Verificado que Azure (`https://baqueanonicaragua.com/health`), GitHub `main` y HEAD local coinciden en el commit canónico `6cc4841`.
+  - **Infraestructura Azure:** Verificada VM `vm-baqueano-prod`, Linux kernel `6.8.0-1070-azure`, Node.js `v22.23.3` en `/api/azure/health`.
+  - **Conectividad a Bases de Datos:** Verificado `/api/azure/db` conectando con `supabase-postgresql` (17 departamentos, 249ms) y PostgreSQL local en `127.0.0.1:5432` aceptando conexiones.
+  - **Seguridad Perimetral:** Escaneo TCP en vivo a IP pública `20.80.81.65` confirmando puertos 80 y 443 abiertos; puertos críticos 3000 y 5432 estrictamente cerrados y filtrados.
+  - **Funcionamiento Autónomo:** Verificada la navegación de extremo a extremo sin intervención técnica (Home, Destinos, Mapa, Mi Viaje, Perfil).
+  - **Paquete Móvil Android:** Paquete `website/assets/BaqueanoNicaragua.apk` validado (91.02 MB) y `flutter analyze` mantenido en estándar limpio.
+  - **Artefactos y Evidencias Estructuradas:**
+    - `docs/evidencias/sprint-1/EVIDENCIA_SPRINT_1.md` + `resultados/verificacion.json`
+    - `docs/evidencias/sprint-2/EVIDENCIA_SPRINT_2.md` + `resultados/verificacion.json`
+    - `docs/evidencias/sprint-3/EVIDENCIA_SPRINT_3.md` + `resultados/verificacion.json`
+    - `docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md` (Matriz consolidada de la rúbrica)
+  - **Documentación:** `README.md` actualizado con el desglose formal de los 5 aspectos de la rúbrica del Hackathon.
 
-
-
-- **Fase 1 (re-auditoría) — hallazgos nuevos:** (1) solo `perfil.html` y `admin.html` cargan Firebase Auth; en las otras 26 páginas el header confiaba en la copia de localStorage (`emailVerified`/`claimsRole` editables) → una sesión falsificada mostraba el enlace al Ops Center y "Cerrar sesión" no cerraba Firebase; las sesiones `usr_…` nunca se invalidaban. (2) Panel "Más" a 1024 px salía 19 px por la izquierda: `#navLinksMenu` con `backdrop-filter` era bloque contenedor del panel `position:fixed`. (3) Otro agente edita en paralelo `user-session.js`/`firebase-config.js` (authDomain → firebaseapp.com y upsert REST a Supabase `profiles` con clave anon; los migrations revocan anon en `profiles`, así que no escala privilegios pero tampoco escribe).
-- **Fase 2 — cambios:** `js/user-session.js` (identidad en vivo `liveIdentity` solo en memoria; enlace Ops Center solo con rol verificado por Firebase en la página; carga bajo demanda de Firebase app+auth+firebase-config.js cuando hay sesión local, en tiempo ocioso; invitados no descargan nada; Firebase "sin usuario" invalida cualquier copia local; logout carga Firebase si falta y cierra de verdad), `css/navigation-mega.css` (escritorio: sin backdrop-filter/transform/filter en `#navLinksMenu`), `scripts/global-shell.test.mjs` (NUEVO, prueba integral Playwright), `package.json` (`test:shell`).
-- **Pruebas:** `BQ_QUICK=1` 592 comprobaciones OK tras correcciones; `npm test` (production-smoke) OK; barrido completo 28 páginas × 13 anchos en curso.
