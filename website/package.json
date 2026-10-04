@@ -20,6 +20,7 @@
     "test:i18n": "node scripts/validate-i18n.mjs",
     "i18n:audit": "node scripts/i18n-audit.mjs",
     "test:i18n:browser": "node scripts/i18n-browser.test.mjs",
+    "test:baqui": "node scripts/baqui-intent.test.mjs",
     "audit:visual": "node scripts/visual-audit.mjs"
   },
   "devDependencies": {

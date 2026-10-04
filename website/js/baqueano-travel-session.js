@@ -168,6 +168,17 @@
     return children ? `${a} y ${children} niño${children === 1 ? '' : 's'}` : a;
   }
 
+  // Montos en formato nicaragüense o anglosajón: "1.500", "1,500", "8,000",
+  // "1.500,50", "450.75". Un grupo final de 3 dígitos es separador de miles.
+  function parseAmount(raw) {
+    const value = String(raw || '').replace(/[.,]+$/, '');
+    if (/^\d{1,3}([.,]\d{3})+$/.test(value)) return Number(value.replace(/[.,]/g, ''));
+    if (/^\d{1,3}(\.\d{3})+,\d{1,2}$/.test(value)) return Number(value.replace(/\./g, '').replace(',', '.'));
+    if (/^\d{1,3}(,\d{3})+\.\d{1,2}$/.test(value)) return Number(value.replace(/,/g, ''));
+    if (/^\d+,\d{1,2}$/.test(value)) return Number(value.replace(',', '.'));
+    return Number(value);
+  }
+
   function parseTravelIntent(text, current = travelSession) {
     const normalized = normalize(text);
     const next = clone(current);
@@ -191,7 +202,9 @@
     else if (/una semana/.test(normalized)) next.days = 7;
 
     // Viajeros = adultos + niños. Un monto ($500) nunca se toma como personas.
-    const childrenMatch = normalized.match(new RegExp(NUM + '\\s+(?:ninos?|ninas?|hijos?|hijas?|menores|chavalos?|chiquitos?|bebes?)'));
+    // "3 niños", "dos de ellos niños", "de los cuales 2 son menores".
+    const childrenMatch = normalized.match(new RegExp(NUM + '\\s+(?:de\\s+(?:ellos|ellas|los cuales|las cuales)\\s+)?(?:son\\s+)?(?:ninos?|ninas?|hijos?|hijas?|menores|chavalos?|chiquitos?|bebes?)'))
+      || normalized.match(new RegExp('(?:de\\s+(?:ellos|ellas|los cuales|las cuales)\\s+)' + NUM + '\\s+(?:son\\s+)?(?:ninos?|ninas?|menores)'));
     const adultsMatch = normalized.match(new RegExp(NUM + '\\s+(?:adultos?|personas mayores)'));
     const totalMatch = normalized.match(new RegExp('(?:somos|vamos|viajamos)\\s+' + NUM + '\\b(?!\\s*(?:dias?|noches?|dolares?|usd|cordobas?))'))
       || normalized.match(new RegExp(NUM + '\\s*(?:personas?|viajeros?)'));
@@ -203,6 +216,10 @@
     if (adults == null && companion) adults = 2;
     if (adults == null && total != null) adults = Math.max(1, total - (children || 0));
     if (adults == null && children != null) adults = current.adults ?? null;
+    // "Somos 4 adultos" describe al grupo completo: sin niños mencionados son 0
+    // (no se arrastran los de una consulta anterior).
+    const wholeGroup = /\b(?:somos|vamos|viajamos|familia de)\b/.test(normalized) || /voy solo|voy sola|viajo solo|viajo sola/.test(normalized);
+    if (wholeGroup && adults != null && children == null) children = 0;
     if (adults != null || children != null) {
       next.adults = adults ?? current.adults ?? null;
       next.children = children ?? current.children ?? 0;
@@ -213,10 +230,14 @@
     const money = normalized.match(/(c\$|us\$|\$)\s*(\d[\d.,]*)/) || normalized.match(/(\d[\d.,]*)\s*(dolares?|usd|cordobas?|nio)/);
     if (money) {
       const symbolFirst = /\$/.test(money[1]);
-      const amount = Number((symbolFirst ? money[2] : money[1]).replace(/,/g, ''));
+      const amount = parseAmount(symbolFirst ? money[2] : money[1]);
       const unit = symbolFirst ? money[1] : money[2];
       if (Number.isFinite(amount) && amount > 0) {
-        next.budget.amount = amount;
+        // "50 dólares por persona" con 4 viajeros = 200 de presupuesto total.
+        const perPerson = /por persona|por cabeza|cada uno|cada una|c\/u|p\/p/.test(normalized);
+        const people = next.travelers || null;
+        next.budget.perPerson = perPerson ? amount : null;
+        next.budget.amount = perPerson && people ? amount * people : amount;
         next.budget.currency = /c\$|cordoba|nio/.test(unit) ? 'NIO' : 'USD';
       }
     }
@@ -659,7 +680,10 @@
     const intro = names.length > 1
       ? `Tengo tu ruta con ${names.length} paradas: ${names.join(' → ')}`
       : `Tengo tu ruta a ${names[0]}`;
-    const details = [who && `para ${who}`, money && `con ${money}`].filter(Boolean).join(' ');
+    const perPerson = travelSession.budget.perPerson != null && travelSession.travelers
+      ? ` (${new Intl.NumberFormat(travelSession.budget.currency === 'USD' ? 'en-US' : 'es-NI', { style: 'currency', currency: travelSession.budget.currency, maximumFractionDigits: 0 }).format(travelSession.budget.perPerson)} por persona)`
+      : '';
+    const details = [who && `para ${who}`, money && `con ${money}${perPerson} en total`].filter(Boolean).join(' ');
     const missing = [];
     if (!travelSession.days) missing.push('cuántos días quieren viajar');
     if (!who) missing.push('cuántas personas viajan (y si van niños)');
