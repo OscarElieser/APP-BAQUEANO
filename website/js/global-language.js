@@ -46,11 +46,17 @@
     return SUPPORTED.includes(code) ? code : 'es';
   }
 
+  // El almacenamiento puede estar bloqueado (modo privado, política del
+  // navegador): el idioma sigue funcionando en la página aunque no persista.
+  function readStored(key) {
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+  }
+
   function initialLanguage() {
-    var stored = localStorage.getItem(STORAGE_KEY);
+    var stored = readStored(STORAGE_KEY);
     if (!stored) {
       LEGACY_STORAGE_KEYS.some(function findLegacy(key) {
-        stored = localStorage.getItem(key);
+        stored = readStored(key);
         return Boolean(stored);
       });
     }
@@ -217,8 +223,10 @@
     if (!semanticFallbackKeys.size) indexCanonicalPhrases(fallbackCatalog, '');
     activeCatalog = next === 'es' ? fallbackCatalog : await loadCatalog(next);
     currentLanguage = next;
-    localStorage.setItem(STORAGE_KEY, currentLanguage);
-    LEGACY_STORAGE_KEYS.forEach(function removeLegacy(key) { localStorage.removeItem(key); });
+    try {
+      localStorage.setItem(STORAGE_KEY, currentLanguage);
+      LEGACY_STORAGE_KEYS.forEach(function removeLegacy(key) { localStorage.removeItem(key); });
+    } catch (_) { /* sin persistencia: el idioma aplica solo a esta página */ }
     closeMenu();
     applyTranslations(document.body);
     if (!options || !options.silent) {

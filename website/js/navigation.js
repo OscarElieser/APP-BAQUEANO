@@ -99,7 +99,7 @@ function buildGlobalMegaNavigation() {
           <section class="global-mega-column account">
             <h2><i class="fa-solid fa-gear"></i> Cuenta y Plataforma</h2>
             <a href="perfil.html"><i class="fa-regular fa-user"></i> Perfil</a>
-            <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
+            <a href="perfil.html#reservas"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
             <a href="favoritos.html"><i class="fa-regular fa-heart"></i> Favoritos</a>
             <a href="ayuda.html"><i class="fa-regular fa-circle-question"></i> Ayuda</a>
             <a href="nosotros.html"><i class="fa-solid fa-people-group"></i> Nosotros</a>
@@ -109,6 +109,15 @@ function buildGlobalMegaNavigation() {
             <a class="global-admin-link" href="admin.html" hidden aria-hidden="true"><i class="fa-solid fa-lock"></i> Admin / Ops Center <small>Solo personal</small></a>
           </section>
         </div>
+      </div>
+      <!-- Herramientas del cajón móvil (≤960 px): cuenta, idioma y SOS, que en
+           celular no caben en la barra. En escritorio están ocultas. -->
+      <div class="bq-drawer-tools" role="none">
+        <div class="bq-drawer-account" data-bq-account-drawer></div>
+        <div class="bq-drawer-row">
+          <button type="button" class="global-language navbar-lang-pill bq-drawer-lang" aria-label="Cambiar idioma"><i class="fa-solid fa-globe" aria-hidden="true"></i><span>ES</span></button>
+          <button type="button" class="bq-drawer-sos" data-bq-close-drawer onclick="openSosModal(event)"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i> SOS · Emergencias</button>
+        </div>
       </div>`;
   }
 
@@ -117,13 +126,14 @@ function buildGlobalMegaNavigation() {
   if (existingDivider) existingDivider.remove();
 
   const actions = navbar.querySelector('.nav-actions-right, .nav-right-actions, .exact-nav-actions, .global-nav-actions');
-  if (actions) {
+  if (actions && actions.dataset.globalActionsReady !== 'true') {
+    actions.dataset.globalActionsReady = 'true';
     actions.classList.add('global-nav-actions');
     actions.innerHTML = `
       <button type="button" class="sos-quick-btn navbar-sos-btn" onclick="openSosModal(event)" aria-label="Centro de auxilio SOS"><i class="fa-solid fa-shield-heart"></i><span>SOS</span></button>
-      <a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html"><i class="fa-solid fa-circle-user"></i><span>Iniciar sesión</span></a>
+      <div class="bq-account-slot" data-bq-account><a class="exact-nav-btn-login global-session navbar-login-btn" href="perfil.html" aria-label="Iniciar sesión"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span></a></div>
       <button class="global-language navbar-lang-pill" type="button" aria-label="Cambiar idioma"><span>ES</span> <i class="fa-solid fa-chevron-down" style="font-size:0.68rem;margin-left:2px"></i></button>
-      <button class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars"></i></button>
+      <button class="exact-nav-mobile-toggle mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="navLinksMenu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     `;
   }
 
@@ -134,7 +144,10 @@ function buildGlobalMegaNavigation() {
   const desktopHoverQuery = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
   let closeTimer = null;
 
-  if (moreDropdown && moreBtn) {
+  if (moreDropdown && moreBtn && moreDropdown.dataset.bqWired !== 'true') {
+    // Marca para que initDropdownMiPais() no le agregue un segundo controlador
+    // (dos toggles sobre el mismo botón se anulaban: "Más" no abría al tocarlo).
+    moreDropdown.dataset.bqWired = 'true';
     moreBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = moreDropdown.classList.toggle('is-open');
@@ -191,55 +204,9 @@ function buildGlobalMegaNavigation() {
     });
   }
 
-  // ─── Control del Menú Móvil & Drawer Táctil (Inspirado en 21st MCP Mobile Nav) ───
-  const mobileToggle = document.getElementById('mobileNavToggle');
-  let navBackdrop = document.querySelector('.nav-drawer-backdrop');
-  if (!navBackdrop) {
-    navBackdrop = document.createElement('div');
-    navBackdrop.className = 'nav-drawer-backdrop';
-    navBackdrop.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(navBackdrop);
-  }
-
-  const closeMobileMenu = () => {
-    if (!navMenu) return;
-    navMenu.classList.remove('mobile-open', 'nav-active');
-    document.body.classList.remove('nav-drawer-open');
-    if (navBackdrop) navBackdrop.setAttribute('aria-hidden', 'true');
-    if (mobileToggle) {
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      mobileToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
-    }
-  };
-
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = navMenu.classList.toggle('mobile-open') || navMenu.classList.toggle('nav-active');
-      mobileToggle.setAttribute('aria-expanded', String(isOpen));
-      mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
-      document.body.classList.toggle('nav-drawer-open', isOpen);
-      if (navBackdrop) navBackdrop.setAttribute('aria-hidden', String(!isOpen));
-    });
-
-    navBackdrop.addEventListener('click', closeMobileMenu);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.body.classList.contains('nav-drawer-open')) {
-        closeMobileMenu();
-        mobileToggle.focus();
-      }
-    });
-
-    // Cerrar automáticamente al seleccionar una ruta en móvil
-    navMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          closeMobileMenu();
-        }
-      });
-    });
-  }
+  // El cajón móvil (hamburguesa) lo controla únicamente initMobileMenu(), por
+  // delegación. Antes había tres controladores sobre el mismo botón que se
+  // anulaban entre sí y dejaban la página sin scroll al cerrar.
 }
 
 // ============================================================================
@@ -381,27 +348,30 @@ function initPublicServiceWorker() {
 /**
  * Controla el estado visual de la barra superior con efecto dinámico al hacer scroll.
  */
+// 🎯 POR QUÉ: antes guardaba una referencia al menú que global-injector.js
+//    reemplaza después; la clase .scrolled nunca llegaba al menú visible.
+// ⚙️ CÓMO: un único listener pasivo (rAF) que busca #mainNavbar en cada cuadro.
+// 📦 QUÉ: fondo más sólido y sombra al desplazarse, en cualquier página.
 function initNavbarScroll() {
-  const navbar = document.getElementById('mainNavbar');
-  if (!navbar) return;
+  if (window.__bqNavScrollReady) {
+    window.__bqNavScrollSync?.();
+    return;
+  }
+  window.__bqNavScrollReady = true;
 
   let ticking = false;
-  const handleScroll = () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        if (window.scrollY > 25) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
+  const sync = () => {
+    ticking = false;
+    const navbar = document.getElementById('mainNavbar');
+    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 25);
   };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
+  window.__bqNavScrollSync = sync;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(sync);
+  }, { passive: true });
+  sync();
 }
 
 /**
@@ -447,20 +417,55 @@ function initActionRipples() {
  * invasivos en el DOM que contaminen la barra de navegación horizontal.
  * 📦 QUÉ: Controlador reactivo de apertura/cierre, backdrop y navegación móvil.
  */
+// 🎯 POR QUÉ: el botón hamburguesa tenía tres controladores (este, uno dentro de
+//    buildGlobalMegaNavigation y una delegación al final del archivo) que se
+//    anulaban: el menú a veces no abría y, al cerrar, la página quedaba sin
+//    scroll porque `nav-drawer-open` se quedaba pegado.
+// ⚙️ CÓMO: un solo controlador registrado una vez por documento, con delegación
+//    de eventos: busca #navLinksMenu y #mobileNavToggle en el momento del evento,
+//    así sobrevive a que global-injector.js reemplace el menú. El bloqueo de
+//    scroll se aplica a <html> (quien realmente desplaza la página) y se
+//    libera siempre al cerrar, al pasar a escritorio y al volver con "atrás".
+// 📦 QUÉ: abre/cierra con el botón, cierra al elegir una opción, al tocar
+//    fuera, con Escape y al rotar a horizontal ancho; foco accesible.
+const BQ_DRAWER_BREAKPOINT = 960; // mismo corte que css/navigation-mega.css
+
+function bqDrawerParts() {
+  return {
+    menu: document.getElementById('navLinksMenu'),
+    toggle: document.getElementById('mobileNavToggle'),
+    backdrop: document.querySelector('.nav-drawer-backdrop')
+  };
+}
+
+function bqIsDrawerOpen() {
+  const { menu } = bqDrawerParts();
+  return Boolean(menu && menu.classList.contains('mobile-open'));
+}
+
+function bqSetDrawerState(isOpen, restoreFocus = false) {
+  const { menu, toggle, backdrop } = bqDrawerParts();
+  if (menu) menu.classList.toggle('mobile-open', isOpen);
+  document.documentElement.classList.toggle('nav-drawer-open', isOpen);
+  document.body.classList.toggle('nav-drawer-open', isOpen);
+  if (backdrop) backdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  if (toggle) {
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    const icon = toggle.querySelector('i');
+    if (icon) icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  }
+  if (isOpen && menu) {
+    const firstLink = menu.querySelector('a, button');
+    if (firstLink) window.requestAnimationFrame(() => firstLink.focus({ preventScroll: true }));
+  } else if (!isOpen && restoreFocus && toggle) {
+    toggle.focus();
+  }
+}
+
 function initMobileMenu() {
-  const toggleBtn = document.getElementById('mobileNavToggle');
-  const navMenu = document.getElementById('navLinksMenu');
-
-  if (!toggleBtn || !navMenu) return;
-  if (navMenu.dataset.drawerInitialized === 'true') return;
-  navMenu.dataset.drawerInitialized = 'true';
-
-  // Limpieza defensiva de cualquier residuo invasivo que contamine el menú horizontal
-  navMenu.querySelectorAll('.nav-drawer-header, .nav-ops-group-title, .nav-drawer-footer').forEach((el) => el.remove());
-
-  let backdrop = document.querySelector('.nav-drawer-backdrop');
-  if (!backdrop) {
-    backdrop = document.createElement('button');
+  if (!document.querySelector('.nav-drawer-backdrop')) {
+    const backdrop = document.createElement('button');
     backdrop.className = 'nav-drawer-backdrop';
     backdrop.type = 'button';
     backdrop.tabIndex = -1;
@@ -468,67 +473,53 @@ function initMobileMenu() {
     backdrop.setAttribute('aria-hidden', 'true');
     document.body.appendChild(backdrop);
   }
+  // Estado inicial limpio (también si el menú se acaba de reemplazar).
+  bqSetDrawerState(false);
 
-  const setMenuState = (isOpen, restoreFocus = false) => {
-    navMenu.classList.toggle('mobile-open', isOpen);
-    document.body.classList.toggle('nav-drawer-open', isOpen);
-    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggleBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
-    backdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    const icon = toggleBtn.querySelector('i');
-    if (icon) {
-      icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  if (window.__bqDrawerReady) return;
+  window.__bqDrawerReady = true;
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    const { menu } = bqDrawerParts();
+
+    if (target.closest('#mobileNavToggle')) {
+      event.preventDefault();
+      bqSetDrawerState(!bqIsDrawerOpen());
+      return;
     }
-    if (isOpen) {
-      const firstLink = navMenu.querySelector('a');
-      if (firstLink) window.requestAnimationFrame(() => firstLink.focus());
-    } else if (restoreFocus) {
-      toggleBtn.focus();
+    if (!bqIsDrawerOpen()) return;
+    // El menú de idiomas se abre fuera del cajón: elegir idioma no lo cierra.
+    if (target.closest('.bq-language-menu')) return;
+    if (target.closest('[data-bq-close-drawer]')) {
+      bqSetDrawerState(false);
+      return;
     }
-  };
-
-  const toggleMenu = () => {
-    setMenuState(!navMenu.classList.contains('mobile-open'));
-  };
-
-  const closeMenu = (restoreFocus = false) => {
-    if (navMenu.classList.contains('mobile-open')) setMenuState(false, restoreFocus);
-  };
-
-  toggleBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleMenu();
-  });
-
-  backdrop.addEventListener('click', () => closeMenu(true));
-
-  // Cerrar al hacer clic en enlaces en móvil
-  navMenu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth < 992) closeMenu();
-    });
-  });
-
-  // Cerrar al hacer clic fuera
-  document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
-      closeMenu();
+    if (target.closest('.nav-drawer-backdrop')) {
+      bqSetDrawerState(false, true);
+      return;
     }
-  });
-
-  // Cerrar con Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu(true);
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 992 && navMenu.classList.contains('mobile-open')) {
-      setMenuState(false);
+    // Elegir una ruta cierra el cajón; el botón "Más" solo expande su sección.
+    if (menu && menu.contains(target)) {
+      if (target.closest('a[href]')) bqSetDrawerState(false);
+      return;
     }
+    // Toque fuera del cajón (salvo los controles de la barra, p. ej. idioma).
+    if (!target.closest('#mainNavbar')) bqSetDrawerState(false);
   });
 
-  setMenuState(false);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && bqIsDrawerOpen()) bqSetDrawerState(false, true);
+  });
+
+  const desktopQuery = window.matchMedia(`(min-width: ${BQ_DRAWER_BREAKPOINT + 1}px)`);
+  const releaseOnDesktop = () => { if (desktopQuery.matches && bqIsDrawerOpen()) bqSetDrawerState(false); };
+  if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', releaseOnDesktop);
+  else if (desktopQuery.addListener) desktopQuery.addListener(releaseOnDesktop);
+
+  // Volver con "atrás" restaura la página desde bfcache con el cajón abierto.
+  window.addEventListener('pageshow', () => { if (bqIsDrawerOpen()) bqSetDrawerState(false); });
 }
 
 function initActiveNavHighlight() {
@@ -922,161 +913,7 @@ function initNavbarQuickSearch() {
   });
 }
 
-/**
- * 🎯 POR QUÉ: impedir que las páginas públicas mantengan versiones distintas del
- * pie institucional y asegurar que index.html sea la referencia visual del portal.
- * ⚙️ CÓMO: sustituye el contenido de cualquier .site-footer-pro por una sola
- * plantilla compartida antes de activar telemetría y microinteracciones.
- * 📦 QUÉ: contacto oficial, enlaces legales, derechos y estado territorial.
- */
-function normalizeInstitutionalFooter() {
-  const footer = document.querySelector('.site-footer-pro');
-  if (!footer) return;
-
-  footer.innerHTML = `
-    <div class="container">
-      <div class="footer-columns-grid">
-        <div class="footer-col-contact">
-          <h4 class="footer-col-header">INFORMACIÓN OFICIAL</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-              <div><span>Correo Oficial:</span><br><a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a></div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-              <div><span>Mesa de Enlace:</span><br><a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer">+505 8443-1289</a></div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-              <div><span>Sede Territorial:</span><br><span>Managua · 17 Territorios de Nicaragua</span></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-legal-stack">
-        <a href="terminos.html">Términos &amp; Condiciones</a><span class="separator" aria-hidden="true">|</span>
-        <a href="privacidad.html">Política de Privacidad</a><span class="separator" aria-hidden="true">|</span>
-        <a href="aviso-legal.html">Aviso Legal</a><span class="separator" aria-hidden="true">|</span>
-        <a href="cookies.html">Política de Cookies</a><span class="separator" aria-hidden="true">|</span>
-        <a href="ambiental.html">Decálogo Verde &amp; Huella Cero</a><span class="separator" aria-hidden="true">|</span>
-        <a href="denuncias.html">Canal Ético Ambiental</a><span class="separator" aria-hidden="true">|</span>
-        <a href="admin.html">Baqueano Ops Center</a>
-      </div>
-
-      <div class="footer-bottom-bar">
-        <div>© 2026 Baqueano Nicaragua. Catálogo Oficial de Áreas Protegidas y Turismo Comunitario. Todos los derechos reservados.</div>
-        
-      </div>
-    </div>`;
-
-  footer.dataset.canonicalFooter = 'true';
-}
-
-/**
- * Inicializa la telemetría en vivo, seguidor de luz ambiental y micro-interacciones del footer táctico futurista.
- */
-function initDynamicFooter() {
-  const footer = document.querySelector('.site-footer-pro');
-  if (!footer) return;
-
-  // 1. Inyectar rayo láser de escaneo si no existe
-  if (!footer.querySelector('.footer-laser-scan')) {
-    const laser = document.createElement('div');
-    laser.className = 'footer-laser-scan';
-    laser.setAttribute('aria-hidden', 'true');
-    footer.prepend(laser);
-  }
-
-  // 2. Inyectar cinta HUD de telemetría si no existe
-  if (!footer.querySelector('.footer-telemetry-hud')) {
-    const container = footer.querySelector('.container');
-    if (container) {
-      const hudStrip = document.createElement('div');
-      hudStrip.className = 'footer-telemetry-hud';
-      hudStrip.innerHTML = `
-        <div class="hud-stat-item">
-          <span class="hud-beacon-led"></span>
-          <span class="hud-label">NODO CENTRAL:</span>
-          <strong class="hud-val">NICARAGUA SOBERANA</strong>
-        </div>
-        <div class="hud-stat-item">
-          <i class="fa-solid fa-satellite" style="color: var(--petroleo-glow);"></i>
-          <span class="hud-label">TELEMETRÍA GPS:</span>
-          <strong class="hud-val">12.1364° N, 86.2514° O</strong>
-        </div>
-        <div class="hud-stat-item">
-          <i class="fa-solid fa-shield-halved" style="color: var(--terracotta-light);"></i>
-          <span class="hud-label">SEGURIDAD:</span>
-          <strong class="hud-val">AES-GCM 256-BIT</strong>
-        </div>
-        <div class="hud-stat-item">
-          <i class="fa-regular fa-clock" style="color: var(--arena-pinolera);"></i>
-          <span class="hud-label">HORA LOCAL CST:</span>
-          <strong class="hud-val" id="footerLiveClock">--:--:--</strong>
-        </div>
-      `;
-      container.insertBefore(hudStrip, container.firstChild);
-    }
-  }
-
-  // 3. Reloj en vivo de Nicaragua (CST UTC-6)
-  const clockEl = document.getElementById('footerLiveClock');
-  const updateClock = () => {
-    if (clockEl) {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('es-NI', { 
-        timeZone: 'America/Managua',
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
-      });
-      clockEl.textContent = `${timeStr} (UTC-6)`;
-    }
-  };
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  // 4. Luz ambiental reactiva en el footer
-  footer.addEventListener('mousemove', (e) => {
-    const rect = footer.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    footer.style.setProperty('--footer-mouse-x', `${x}px`);
-    footer.style.setProperty('--footer-mouse-y', `${y}px`);
-  }, { passive: true });
-
-  // 5. Interactividad táctica en las líneas de emergencia
-  const emergencyItems = footer.querySelectorAll('.emergency-line-item');
-  emergencyItems.forEach(item => {
-    item.setAttribute('role', 'button');
-    item.setAttribute('tabindex', '0');
-    item.setAttribute('title', 'Tocar para activar asistencia directa');
-    
-    const strong = item.querySelector('strong');
-    const phoneNum = strong ? strong.textContent.replace(/[^0-9+]/g, '') : '';
-    
-    const triggerContact = () => {
-      if (!phoneNum) return;
-      if (phoneNum.startsWith('+505') || phoneNum.length > 4) {
-        const cleanWa = phoneNum.replace('+', '');
-        window.open(`https://api.whatsapp.com/send?phone=${cleanWa}&text=${encodeURIComponent('🚨 Auxilio Baqueano SOS: Solicitud de asistencia directa.')}`, '_blank', 'noopener,noreferrer');
-      } else {
-        window.location.href = `tel:${phoneNum}`;
-      }
-    };
-
-    item.addEventListener('click', triggerContact);
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        triggerContact();
-      }
-    });
-  });
-}
+// El pie de página único lo coloca global-injector.js (injectGlobalFooter).
 
 /**
  * POR QUÉ: reunir identidad institucional y documentos legales sin saturar la barra principal.
@@ -1116,7 +953,8 @@ function buildAboutDropdown() {
  * Control interactivo del submenú desplegable "Mi País"
  */
 function initDropdownMiPais() {
-  const dropdowns = Array.from(document.querySelectorAll('.nav-dropdown'));
+  // Los menús ya cableados (p. ej. "Más") se excluyen: un segundo toggle lo anulaba.
+  const dropdowns = Array.from(document.querySelectorAll('.nav-dropdown:not([data-bq-wired="true"])'));
   if (dropdowns.length === 0) return;
 
   const closeDropdown = (dropdown, returnFocus = false) => {
@@ -1156,11 +994,17 @@ function initDropdownMiPais() {
  * para adaptar el enlace del Navbar entre "Ops Center" (Admin/Auditor) y "Perfil" (Explorador).
  */
 function ensureUserSessionLoaded() {
-  if (!window.BaqueanoSession) {
+  // roles.js (matriz de autorización) debe ejecutarse antes que user-session.js:
+  // async=false conserva el orden de ejecución de scripts insertados por JS.
+  const load = (src, ready) => {
+    if (ready || document.querySelector(`script[src^="${src.split('?')[0]}"]`)) return;
     const script = document.createElement('script');
-    script.src = 'js/user-session.js?v=20261003-1';
+    script.src = src;
+    script.async = false;
     document.head.appendChild(script);
-  }
+  };
+  load('js/shared/roles.js?v=20261003-1', window.BaqueanoRoles);
+  load('js/user-session.js?v=20261003-2', window.BaqueanoSession);
 }
 
 /**
@@ -1446,32 +1290,19 @@ function initFooterBizRegister() {
   }
 }
 
-// Auto-inicialización completa y defensiva para páginas directas.
-
-  // Delegación global infalible para el botón hamburguesa móvil
-  document.addEventListener('click', (e) => {
-    const burger = e.target.closest('#mobileNavToggle, .mobile-nav-toggle');
-    if (burger) {
-      e.preventDefault();
-      e.stopPropagation();
-      const menu = document.getElementById('navLinksMenu');
-      if (menu) {
-        const willOpen = !menu.classList.contains('mobile-open');
-        menu.classList.toggle('mobile-open', willOpen);
-        document.body.classList.toggle('nav-drawer-open', willOpen);
-        burger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-        const bdrop = document.querySelector('.nav-drawer-backdrop');
-        if (bdrop) bdrop.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
-      }
-    }
-  });
-
-function initializeNavigationModules() {
-  initRuntimeObservability();
-  initPublicServiceWorker();
-  ensureUserSessionLoaded();
-  ensureThemeSwitcherLoaded();
-  normalizeInstitutionalFooter();
+// ============================================================================
+// 🎯 POR QUÉ: los controladores del menú se enganchaban al menú que trae cada
+//    HTML y global-injector.js lo reemplazaba después por el canónico: el menú
+//    visible quedaba sin scroll dinámico, sin resaltado y con listeners huérfanos.
+// ⚙️ CÓMO: mountGlobalNavigation() actúa sobre el menú canónico ya colocado y es
+//    idempotente (data-bq-mounted). Si la página usa el inyector, se espera su
+//    evento `baqueano:shell-ready`; si no, se monta sobre el menú existente.
+// 📦 QUÉ: un único montaje del header por página, en el orden correcto.
+// ============================================================================
+function mountGlobalNavigation() {
+  const navbar = document.getElementById('mainNavbar');
+  if (!navbar || navbar.dataset.bqMounted === 'true') return;
+  navbar.dataset.bqMounted = 'true';
   buildGlobalMegaNavigation();
   buildAboutDropdown();
   initBaqueanoAiNavLink();
@@ -1481,14 +1312,26 @@ function initializeNavigationModules() {
   initMobileMenu();
   initActiveNavHighlight();
   initDynamicDestinationCount();
+  initDropdownMiPais();
+  ensureAccessibleControlNames(navbar);
+  window.BaqueanoSession?.refreshNavbar?.();
+}
+window.BaqueanoNavigation = { mount: mountGlobalNavigation, closeDrawer: () => bqSetDrawerState(false) };
+
+function initializeNavigationModules() {
+  initRuntimeObservability();
+  initPublicServiceWorker();
+  ensureUserSessionLoaded();
+  ensureThemeSwitcherLoaded();
+  const usesGlobalShell = document.querySelector('script[src*="global-injector.js"]');
+  if (!usesGlobalShell || window.__BQ_SHELL_READY__) mountGlobalNavigation();
+  else document.addEventListener('baqueano:shell-ready', mountGlobalNavigation, { once: true });
   initSosModal();
   initDownloadModal();
   initAndroidReleaseDownload();
   initShareTools();
   initSmoothScroll();
-  initDynamicFooter();
   initFooterBizRegister();
-  initDropdownMiPais();
   scheduleBaqueanoDigitalLoad();
   ensureAccessibleControlNames();
   initInstantNavigation();
@@ -1522,6 +1365,7 @@ function initInstantNavigation() {
   }
 
   function handleInteraction(e) {
+    if (!(e.target instanceof Element)) return;
     const anchor = e.target.closest('a[href]');
     if (!anchor || anchor.target || anchor.hasAttribute('download')) return;
 

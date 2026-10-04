@@ -11,6 +11,29 @@ BAQUEANO ECOSYSTEM - NAVBAR HORIZONTAL PRIMER NIVEL v10-FINAL
 .bq-global-navbar { display: none !important; }
 body { padding-top: 0 !important; margin-top: 0 !important; }
 
+/* ── Scroll del documento: condición para que el header sticky funcione ──
+   🎯 POR QUÉ: en 9 páginas (index, historia, perfil, nosotros, términos,
+      privacidad, ambiental, BAQUI, 404) el header se iba con el scroll.
+      Sus hojas propias ponen `body { overflow-x: hidden }` mientras
+      baqueano-identity.css pone `html { overflow-x: clip }`. Con <html> sin
+      overflow visible, el overflow del <body> ya no se traslada al viewport:
+      el <body> se vuelve su propio contenedor de scroll y `position: sticky`
+      se pega a un elemento que nunca se desplaza.
+   ⚙️ CÓMO: el <body> nunca recorta con hidden/auto; `clip` evita el scroll
+      lateral sin crear contenedor de scroll. `visible` va primero como
+      respaldo para navegadores sin `clip`. El bloqueo de scroll del cajón
+      móvil se aplica al <html>, que es quien realmente desplaza la página.
+   📦 QUÉ: header visible en todas las páginas durante el scroll. */
+html { overflow-x: hidden; overflow-x: clip; }
+html body,
+html body[class] { overflow-x: visible !important; overflow-x: clip !important; }
+/* Bloqueo de scroll (cajón móvil y modales que ponen body.style.overflow =
+   'hidden'): se aplica al <html>, el elemento que realmente se desplaza. */
+html.nav-drawer-open,
+html:has(> body.nav-drawer-open),
+html:has(> body[style*="overflow: hidden"]),
+html:has(> body[style*="overflow:hidden"]) { overflow: hidden !important; }
+
 #mainNavbar {
   position: sticky !important; top: 0 !important;
   left: 0 !important; right: 0 !important;
@@ -1141,4 +1164,126 @@ body { padding-top: 0 !important; margin-top: 0 !important; }
   #mainNavbar .navbar-search-form { width: 180px !important; }
   #mainNavbar .navbar-search-wrapper.is-focused .navbar-search-form,
   #mainNavbar .navbar-search-form:focus-within { width: 280px !important; }
+}
+
+/* ============================================================================
+   CUENTA EN EL HEADER GLOBAL + HERRAMIENTAS DEL CAJÓN MÓVIL (2026-10-03)
+   🎯 POR QUÉ: con sesión el header solo mostraba "Cerrar sesión"; y en celular
+      (≤480 px) idioma, SOS y sesión quedaban ocultos sin alternativa.
+   ⚙️ CÓMO: .bq-account-* lo pinta user-session.js (avatar, nombre, menú con
+      Ops Center solo para admin/super_admin). .bq-drawer-tools vive dentro del
+      cajón y solo se muestra ≤960 px. Paleta oficial; foco visible.
+   📦 QUÉ: INVITADO "Iniciar sesión" · USUARIO avatar+nombre · ADMIN/SUPERADMIN
+      avatar+nombre + Ops Center; cuenta, idioma y SOS siempre accesibles.
+   ============================================================================ */
+#mainNavbar .bq-account-slot { position: relative; display: inline-flex; align-items: center; flex-shrink: 0; }
+#mainNavbar .bq-account-trigger {
+  display: inline-flex !important; align-items: center !important; gap: 8px !important;
+  height: 38px !important; padding: 0 12px 0 4px !important; border-radius: 19px !important;
+  background: rgba(255, 255, 255, 0.07) !important; color: #fff !important;
+  border: 1px solid rgba(244, 230, 193, 0.22) !important; cursor: pointer !important;
+  font: 700 0.8rem/1 Montserrat, sans-serif !important; white-space: nowrap !important;
+  transition: background 0.2s ease, border-color 0.2s ease !important;
+}
+#mainNavbar .bq-account-trigger:hover,
+#mainNavbar .bq-account-slot.is-open .bq-account-trigger {
+  background: rgba(22, 93, 111, 0.45) !important; border-color: rgba(246, 94, 1, 0.55) !important;
+}
+#mainNavbar .bq-account-name { max-width: 9ch; overflow: hidden; text-overflow: ellipsis; }
+#mainNavbar .bq-account-caret { font-size: 0.65rem; opacity: 0.8; transition: transform 0.2s ease; }
+#mainNavbar .bq-account-slot.is-open .bq-account-caret { transform: rotate(180deg); }
+.bq-account-avatar {
+  width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; overflow: hidden;
+  display: inline-grid; place-items: center; background: #F65E01; color: #fff;
+  font: 800 0.85rem/1 Montserrat, sans-serif; box-shadow: 0 0 0 2px rgba(244, 230, 193, 0.35);
+}
+.bq-account-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#mainNavbar .bq-account-menu {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 100060;
+  width: min(280px, calc(100vw - 20px)); padding: 8px; border-radius: 16px;
+  background: rgba(9, 32, 50, 0.98); border: 1px solid rgba(244, 230, 193, 0.16);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  animation: bqAccountIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+#mainNavbar .bq-account-menu[hidden] { display: none !important; }
+@keyframes bqAccountIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.bq-account-head { display: grid; gap: 3px; padding: 10px 12px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 6px; }
+.bq-account-head strong { color: #fff; font: 800 0.9rem/1.25 Montserrat, sans-serif; overflow-wrap: anywhere; }
+.bq-account-head span { color: #94A3B8; font-size: 0.74rem; overflow-wrap: anywhere; }
+.bq-account-role {
+  justify-self: start; margin-top: 4px; padding: 3px 9px; border-radius: 99px;
+  background: rgba(22, 93, 111, 0.35); color: #F4E6C1 !important; font-weight: 700; font-size: 0.68rem !important;
+}
+.bq-account-role.is-admin { background: rgba(246, 94, 1, 0.2); color: #FDBA74 !important; }
+#mainNavbar .bq-account-item {
+  display: flex !important; align-items: center !important; gap: 10px !important; width: 100% !important;
+  min-height: 42px !important; padding: 9px 12px !important; border-radius: 10px !important;
+  color: #E2E8F0 !important; background: transparent !important; border: 0 !important;
+  font: 600 0.86rem/1.2 Inter, system-ui, sans-serif !important; text-decoration: none !important;
+  text-align: left !important; cursor: pointer !important; box-sizing: border-box !important;
+}
+#mainNavbar .bq-account-item i { width: 18px; text-align: center; color: #F4E6C1; }
+#mainNavbar .bq-account-item:is(:hover, :focus-visible) { background: rgba(255, 255, 255, 0.07) !important; }
+#mainNavbar .bq-account-item.is-ops i { color: #F65E01; }
+#mainNavbar .bq-account-item.is-ops { color: #FDBA74 !important; }
+#mainNavbar .bq-account-item.is-logout { color: #FCA5A5 !important; }
+#mainNavbar .bq-account-item.is-logout i { color: #FCA5A5; }
+#mainNavbar .bq-account-item[aria-busy="true"] { opacity: 0.6; pointer-events: none; }
+#mainNavbar .bq-account-item.is-primary {
+  justify-content: center !important; background: linear-gradient(135deg, #165D6F, #0F4553) !important;
+  color: #fff !important; font-weight: 700 !important; border: 1px solid rgba(244, 230, 193, 0.22) !important;
+}
+
+/* Herramientas del cajón: solo dentro del cajón móvil */
+#mainNavbar .bq-drawer-tools { display: none !important; }
+@media (max-width: 960px) {
+  #mainNavbar .nav-links-menu.mobile-open .bq-drawer-tools,
+  #mainNavbar .exact-nav-menu.mobile-open .bq-drawer-tools {
+    display: grid !important; gap: 8px; margin-top: auto; padding-top: 14px;
+    border-top: 1px solid rgba(244, 230, 193, 0.12);
+  }
+  #mainNavbar .bq-drawer-account { display: grid; gap: 4px; }
+  #mainNavbar .bq-drawer-identity { display: flex; align-items: center; gap: 10px; padding: 6px 4px 8px; }
+  #mainNavbar .bq-drawer-identity-text { display: grid; gap: 2px; min-width: 0; }
+  #mainNavbar .bq-drawer-identity-text strong { color: #fff; font: 800 0.92rem/1.2 Montserrat, sans-serif; overflow-wrap: anywhere; }
+  #mainNavbar .bq-drawer-identity-text small { color: #F4E6C1; font-size: 0.74rem; }
+  #mainNavbar .bq-drawer-row { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
+  #mainNavbar .bq-drawer-tools .global-language.bq-drawer-lang {
+    display: inline-flex !important; height: 44px !important; padding: 0 14px !important; gap: 8px !important;
+    border-radius: 12px !important; justify-content: center !important;
+  }
+  #mainNavbar .bq-drawer-sos {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px;
+    border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.45); background: rgba(200, 30, 50, 0.22);
+    color: #FECACA; font: 800 0.85rem/1 Montserrat, sans-serif; cursor: pointer;
+  }
+  /* En la barra superior basta el avatar; el nombre va en el menú. */
+  #mainNavbar .bq-account-trigger { padding: 0 4px !important; width: 40px !important; justify-content: center !important; }
+  #mainNavbar .bq-account-trigger .bq-account-name,
+  #mainNavbar .bq-account-trigger .bq-account-caret { display: none !important; }
+  #mainNavbar .bq-account-menu { position: fixed; top: 74px; right: 10px; }
+  /* Cajón: margen inferior para la barra de pulgar y el área segura del iPhone. */
+  #mainNavbar .exact-nav-menu.mobile-open,
+  #mainNavbar .nav-links-menu.mobile-open {
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+    overscroll-behavior: contain;
+  }
+}
+@media (max-width: 480px) {
+  /* La cuenta pasa al cajón: la barra queda con marca + hamburguesa. */
+  #mainNavbar .bq-account-slot { display: none !important; }
+}
+/* Respeta el notch del iPhone en horizontal sin cortar marca ni hamburguesa. */
+@media (max-width: 960px) {
+  @supports (padding: max(0px)) {
+    #mainNavbar .exact-container,
+    #mainNavbar .nav-inner {
+      padding-left: max(10px, env(safe-area-inset-left)) !important;
+      padding-right: max(10px, env(safe-area-inset-right)) !important;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #mainNavbar .bq-account-menu { animation: none; }
 }

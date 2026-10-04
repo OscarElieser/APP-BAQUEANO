@@ -1764,7 +1764,7 @@
   // --------------------------------------------------------------------------
   const OpsState = {
     currentUser: null,
-    currentRole: 'superAdmin',
+    currentRole: null, // se asigna tras verificar el rol (OpsAuth.applyAuthorization)
     activeTab: '01-dashboard',
     activeFilterStatus: 'all',
     activeFilterCategory: 'all',
@@ -2127,13 +2127,33 @@
       }
     },
 
+    // 🎯 POR QUÉ: autenticarse con Google NO autoriza el Ops Center; hay que
+    //    verificar el rol con la identidad viva de Firebase (nunca localStorage).
+    // ⚙️ CÓMO: js/shared/roles.js resuelve el rol desde el Custom Claim del
+    //    token o, si no hay claim, desde el correo VERIFICADO en la matriz
+    //    oficial — la misma condición que isAdmin() en firestore.rules. Si
+    //    roles.js no cargó, se usa la lista local con correo verificado.
+    // 📦 QUÉ: super_admin y admin entran; explorador y cualquier otra cuenta ven
+    //    "No tienes autorización" sin perder su sesión del sitio.
     handleAuthenticatedUser(user) {
       const email = (user.email || '').toLowerCase().trim();
-      // Solo correos de la lista oficial Y verificados por Firebase (emailVerified).
-      // Es una barrera de interfaz: la autorización real la aplican las reglas de
-      // Firestore/Storage y el middleware de Functions con la misma condición.
-      const isAuthorized = user.emailVerified === true &&
-        this.authorizedAdmins.some((adminEmail) => adminEmail.toLowerCase() === email);
+      const rolesApi = window.BaqueanoRoles;
+      const fallbackRole = user.emailVerified === true &&
+        this.authorizedAdmins.some((adminEmail) => adminEmail.toLowerCase() === email) ? 'admin' : 'explorer';
+      const decision = rolesApi ? rolesApi.resolveFirebaseUser(user) : Promise.resolve(fallbackRole);
+      decision
+        .then((role) => this.applyAuthorization(user, role))
+        .catch((error) => {
+          console.error('[OpsAuth] No se pudo verificar el rol:', error);
+          this.applyAuthorization(user, 'explorer');
+        });
+    },
+
+    applyAuthorization(user, role) {
+      const email = (user.email || '').toLowerCase().trim();
+      const isAuthorized = window.BaqueanoRoles
+        ? window.BaqueanoRoles.canAccessOps(role)
+        : role === 'admin' || role === 'super_admin';
 
       if (!isAuthorized) {
         // Usuarios normales pueden tener sesión para navegar el portal público.
@@ -2146,9 +2166,9 @@
           feedbackEl.style.display = 'flex';
           feedbackEl.innerHTML = `
             <div style="display:flex;flex-direction:column;gap:0.4rem;text-align:left;">
-              <div><i class="fa-solid fa-lock"></i> <strong>Acceso Restringido</strong></div>
+              <div><i class="fa-solid fa-lock"></i> <strong>No tienes autorización para acceder al Ops Center.</strong></div>
               <div style="font-size:0.82rem;color:var(--ops-text-secondary);">
-                La cuenta <code data-ops-denied-email></code> no cuenta con privilegios administrativos verificados en el Ops Center.
+                La cuenta <code data-ops-denied-email></code> no tiene un rol administrativo verificado.
                 Tu sesión en el sitio sigue activa.
               </div>
               <a href="index.html" style="font-size:0.82rem;font-weight:700;color:#F65E01;">← Volver al sitio</a>
@@ -2182,8 +2202,9 @@
         email: user.email,
         name: user.displayName || user.email.split('@')[0],
         photoURL: resolvedPhoto,
-        role: 'superAdmin'
+        role: role
       };
+      OpsState.currentRole = role;
 
       OpsUI.updateUserProfileUI(OpsState.currentUser);
       OpsUI.hideLoginGate();
@@ -6238,7 +6259,7 @@
 
       const displayName = user.name || user.displayName || user.email || 'Administrador';
       if (nameEl) nameEl.textContent = displayName;
-      if (roleEl) roleEl.textContent = 'Super Administrador';
+      if (roleEl) roleEl.textContent = window.BaqueanoRoles ? window.BaqueanoRoles.label(user.role) : 'Administrador';
 
       if (avatarEl) {
         const photo = user.photoURL ||

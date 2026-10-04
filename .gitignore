@@ -91,3 +91,23 @@ website/assets/videos/
 # ----------------------------------------------------------------------------
 .snapshots/chrome-*/
 .snapshots/edge-*/
+
+# ----------------------------------------------------------------------------
+# HIGIENE Y RENDIMIENTO DEL REPOSITORIO (FASE 4 - 2026-10-03)
+# ----------------------------------------------------------------------------
+**/.next/
+**/.next/cache/
+**/*.pack
+**/*.pack.old
+.pnpm-store/
+.runtime/
+supabase/.temp/
+Thumbs.db
+thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+*.tmp
+*.bak
+*.old
+

@@ -1,0 +1,1693 @@
+{
+  "durationSeconds": "11.19",
+  "totalFiles": 3132,
+  "totalDirs": 890,
+  "totalSizeMB": "2284.04",
+  "junkFiles": [
+    {
+      "path": "functions/lib/backup-service.js",
+      "sizeBytes": 9040,
+      "sizeKB": "8.8",
+      "mtime": "2026-09-27T01:33:34.813Z"
+    },
+    {
+      "path": "functions/lib/storage-backup-service.js",
+      "sizeBytes": 3847,
+      "sizeKB": "3.8",
+      "mtime": "2026-09-27T01:33:34.863Z"
+    },
+    {
+      "path": "supabase/migrations/005_backup_operations.sql",
+      "sizeBytes": 3677,
+      "sizeKB": "3.6",
+      "mtime": "2026-09-27T01:33:34.892Z"
+    },
+    {
+      "path": "supabase/migrations/006_storage_backup.sql",
+      "sizeBytes": 3660,
+      "sizeKB": "3.6",
+      "mtime": "2026-09-27T01:33:34.893Z"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/client-production/index.pack.old",
+      "sizeBytes": 7965842,
+      "sizeKB": "7779.1",
+      "mtime": "2026-09-18T07:22:15.290Z"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/edge-server-production/index.pack.old",
+      "sizeBytes": 2608,
+      "sizeKB": "2.5",
+      "mtime": "2026-09-18T05:11:21.252Z"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/index.pack.old",
+      "sizeBytes": 34241683,
+      "sizeKB": "33439.1",
+      "mtime": "2026-09-18T07:21:32.143Z"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/client-production/index.pack.old",
+      "sizeBytes": 14593695,
+      "sizeKB": "14251.7",
+      "mtime": "2026-09-21T19:36:35.811Z"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/index.pack.old",
+      "sizeBytes": 19719883,
+      "sizeKB": "19257.7",
+      "mtime": "2026-09-21T19:36:08.163Z"
+    },
+    {
+      "path": "website/docs/BACKUP_RECOVERY.md",
+      "sizeBytes": 860,
+      "sizeKB": "0.8",
+      "mtime": "2026-09-17T00:35:44.465Z"
+    }
+  ],
+  "cacheDirs": [
+    {
+      "name": ".dart_tool",
+      "path": ".dart_tool"
+    },
+    {
+      "name": ".firebase",
+      "path": ".firebase"
+    },
+    {
+      "name": ".git",
+      "path": ".git"
+    },
+    {
+      "name": ".obsidian",
+      "path": ".obsidian"
+    },
+    {
+      "name": ".pnpm-store",
+      "path": ".pnpm-store"
+    },
+    {
+      "name": ".runtime",
+      "path": ".runtime"
+    },
+    {
+      "name": ".snapshots",
+      "path": ".snapshots"
+    },
+    {
+      "name": ".dart_tool",
+      "path": "admin/.dart_tool"
+    },
+    {
+      "name": ".gradle",
+      "path": "android/.gradle"
+    },
+    {
+      "name": "build",
+      "path": "build"
+    },
+    {
+      "name": "node_modules",
+      "path": "functions/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "node_modules"
+    },
+    {
+      "name": ".snapshots",
+      "path": "website/.snapshots"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/apps/admin/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/apps/web/node_modules"
+    },
+    {
+      "name": "dist-hostinger",
+      "path": "website/dist-hostinger"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/packages/ai-core/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/packages/config/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/packages/firebase/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/packages/ui/node_modules"
+    },
+    {
+      "name": "node_modules",
+      "path": "website/packages/validators/node_modules"
+    }
+  ],
+  "largeFiles": [
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/12.pack",
+      "sizeBytes": 196042337,
+      "sizeMB": "186.96"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/9.pack",
+      "sizeBytes": 112687150,
+      "sizeMB": "107.47"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/10.pack",
+      "sizeBytes": 99758213,
+      "sizeMB": "95.14"
+    },
+    {
+      "path": "website/assets/BaqueanoNicaragua.apk",
+      "sizeBytes": 95441231,
+      "sizeMB": "91.02"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/11.pack",
+      "sizeBytes": 78476407,
+      "sizeMB": "74.84"
+    },
+    {
+      "path": "website/assets/videos/video 2 (1).mp4",
+      "sizeBytes": 76418476,
+      "sizeMB": "72.88"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/15.pack",
+      "sizeBytes": 72340521,
+      "sizeMB": "68.99"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/0.pack",
+      "sizeBytes": 55400080,
+      "sizeMB": "52.83"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/client-production/1.pack",
+      "sizeBytes": 50271475,
+      "sizeMB": "47.94"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/index.pack",
+      "sizeBytes": 49975390,
+      "sizeMB": "47.66"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/7.pack",
+      "sizeBytes": 47067157,
+      "sizeMB": "44.89"
+    },
+    {
+      "path": "website/assets/videos/[preview]destinos.mp4",
+      "sizeBytes": 44747746,
+      "sizeMB": "42.67"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/client-production/11.pack",
+      "sizeBytes": 44483033,
+      "sizeMB": "42.42"
+    },
+    {
+      "path": "website/assets/videos/video nicaragua.mp4",
+      "sizeBytes": 44368248,
+      "sizeMB": "42.31"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/4.pack",
+      "sizeBytes": 40774662,
+      "sizeMB": "38.89"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/3.pack",
+      "sizeBytes": 40636187,
+      "sizeMB": "38.75"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/8.pack",
+      "sizeBytes": 36760317,
+      "sizeMB": "35.06"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/index.pack.old",
+      "sizeBytes": 34241683,
+      "sizeMB": "32.66"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/client-production/0.pack",
+      "sizeBytes": 34021260,
+      "sizeMB": "32.45"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/1.pack",
+      "sizeBytes": 26364817,
+      "sizeMB": "25.14"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/client-production/13.pack",
+      "sizeBytes": 23692187,
+      "sizeMB": "22.59"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/client-production/15.pack",
+      "sizeBytes": 21417496,
+      "sizeMB": "20.43"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/index.pack",
+      "sizeBytes": 19815883,
+      "sizeMB": "18.90"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/index.pack.old",
+      "sizeBytes": 19719883,
+      "sizeMB": "18.81"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/server-production/0.pack",
+      "sizeBytes": 17398489,
+      "sizeMB": "16.59"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/server-production/2.pack",
+      "sizeBytes": 14979410,
+      "sizeMB": "14.29"
+    },
+    {
+      "path": ".agents/skills/impeccable/scripts/bin/windows-x64/impeccable.exe",
+      "sizeBytes": 14720392,
+      "sizeMB": "14.04"
+    },
+    {
+      "path": ".github/skills/impeccable/scripts/bin/windows-x64/impeccable.exe",
+      "sizeBytes": 14720392,
+      "sizeMB": "14.04"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/client-production/index.pack",
+      "sizeBytes": 14642134,
+      "sizeMB": "13.96"
+    },
+    {
+      "path": "website/apps/web/.next/cache/webpack/client-production/index.pack.old",
+      "sizeBytes": 14593695,
+      "sizeMB": "13.92"
+    },
+    {
+      "path": "website/assets/audio/Caliente Como Verano.mp3",
+      "sizeBytes": 13708153,
+      "sizeMB": "13.07"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/client-production/4.pack",
+      "sizeBytes": 11602325,
+      "sizeMB": "11.06"
+    },
+    {
+      "path": "website/assets/videos/video 2.mp4",
+      "sizeBytes": 11511501,
+      "sizeMB": "10.98"
+    },
+    {
+      "path": "website/assets/audio/Fiesta Pinolera.mp3",
+      "sizeBytes": 11274377,
+      "sizeMB": "10.75"
+    },
+    {
+      "path": "website/assets/audio/Fiebre Costeña.mp3",
+      "sizeBytes": 10703862,
+      "sizeMB": "10.21"
+    },
+    {
+      "path": "website/apps/admin/.next/cache/webpack/client-production/0.pack",
+      "sizeBytes": 10511235,
+      "sizeMB": "10.02"
+    }
+  ],
+  "sensitiveFiles": [
+    {
+      "path": ".env",
+      "sizeBytes": 720
+    },
+    {
+      "path": "ios/Flutter/ephemeral/flutter_native_integration.env",
+      "sizeBytes": 450
+    }
+  ],
+  "exactDuplicates": [
+    {
+      "sizeBytes": 14720392,
+      "sizeKB": "14375.4",
+      "files": [
+        ".agents/skills/impeccable/scripts/bin/windows-x64/impeccable.exe",
+        ".github/skills/impeccable/scripts/bin/windows-x64/impeccable.exe"
+      ]
+    },
+    {
+      "sizeBytes": 6934251,
+      "sizeKB": "6771.7",
+      "files": [
+        "assets/audio/ENTRE REMOLINOS.mp3",
+        "website/assets/audio/ENTRE REMOLINOS.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5923040,
+      "sizeKB": "5784.2",
+      "files": [
+        "assets/audio/QUIERO QUE SEPAS.mp3",
+        "website/assets/audio/QUIERO QUE SEPAS.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5826502,
+      "sizeKB": "5689.9",
+      "files": [
+        "assets/audio/TULULU.mp3",
+        "website/assets/audio/TULULU.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5649441,
+      "sizeKB": "5517.0",
+      "files": [
+        "assets/audio/ASI ES LA VIDA.mp3",
+        "website/assets/audio/ASI ES LA VIDA.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5416865,
+      "sizeKB": "5289.9",
+      "files": [
+        "assets/audio/PROCURO OLVIDARTE.mp3",
+        "website/assets/audio/PROCURO OLVIDARTE.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5233564,
+      "sizeKB": "5110.9",
+      "files": [
+        "assets/audio/YO NO SE MAÑANA.mp3",
+        "website/assets/audio/YO NO SE MAÑANA.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5143859,
+      "sizeKB": "5023.3",
+      "files": [
+        "assets/audio/ROMPER EL SILENCIO.mp3",
+        "website/assets/audio/ROMPER EL SILENCIO.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5131515,
+      "sizeKB": "5011.2",
+      "files": [
+        "assets/audio/INSOPORTABLEMENTE BELLA.mp3",
+        "website/assets/audio/INSOPORTABLEMENTE BELLA.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5128366,
+      "sizeKB": "5008.2",
+      "files": [
+        "assets/audio/MAYAYA LA SINKY.mp3",
+        "website/assets/audio/MAYAYA LA SINKY.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 5111146,
+      "sizeKB": "4991.4",
+      "files": [
+        "assets/audio/EN EL MISMO TREN.mp3",
+        "website/assets/audio/EN EL MISMO TREN.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 4947178,
+      "sizeKB": "4831.2",
+      "files": [
+        "assets/audio/la_mora_limpia.mp3",
+        "website/assets/audio/la_mora_limpia.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 4730367,
+      "sizeKB": "4619.5",
+      "files": [
+        "website/assets/logo oficiales/BAQUENO_LOGO.png",
+        "website/assets/logos/BAQUENO LOGO.png"
+      ]
+    },
+    {
+      "sizeBytes": 4697475,
+      "sizeKB": "4587.4",
+      "files": [
+        "assets/audio/COMO TE VA NU AMOR.mp3",
+        "website/assets/audio/COMO TE VA NU AMOR.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 4275981,
+      "sizeKB": "4175.8",
+      "files": [
+        "assets/audio/el_solar_de_monimbo.mp3",
+        "website/assets/audio/el_solar_de_monimbo.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 4090063,
+      "sizeKB": "3994.2",
+      "files": [
+        "assets/audio/CANCIONERO.mp3",
+        "website/assets/audio/CANCIONERO.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 3696100,
+      "sizeKB": "3609.5",
+      "files": [
+        "assets/audio/palomita_guasiruca.mp3",
+        "website/assets/audio/palomita_guasiruca.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 3520644,
+      "sizeKB": "3438.1",
+      "files": [
+        "assets/audio/el_zanatillo.mp3",
+        "website/assets/audio/el_zanatillo.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 3274217,
+      "sizeKB": "3197.5",
+      "files": [
+        "assets/audio/baile_del_mestizaje.mp3",
+        "website/assets/audio/baile_del_mestizaje.mp3"
+      ]
+    },
+    {
+      "sizeBytes": 3246226,
+      "sizeKB": "3170.1",
+      "files": [
+        "website/assets/images/baqueano_icono_2000x2000-blanco.png",
+        "website/assets/images/LOGOS/baqueano_icono_2000x2000-blanco.png",
+        "website/assets/images/LOGOS/logo.png"
+      ]
+    },
+    {
+      "sizeBytes": 2738574,
+      "sizeKB": "2674.4",
+      "files": [
+        "assets/images/cultural y memoria.png",
+        "website/assets/cultural y memoria.png"
+      ]
+    },
+    {
+      "sizeBytes": 2413026,
+      "sizeKB": "2356.5",
+      "files": [
+        "assets/images/historia de mi pais.png",
+        "website/assets/historia de mi pais.png"
+      ]
+    },
+    {
+      "sizeBytes": 2410950,
+      "sizeKB": "2354.4",
+      "files": [
+        "assets/images/impacto socila y comunitario.png",
+        "website/assets/impacto socila y comunitario.png"
+      ]
+    },
+    {
+      "sizeBytes": 2392041,
+      "sizeKB": "2336.0",
+      "files": [
+        "assets/images/catalogo de destino.png",
+        "website/assets/catalogo de destino.png"
+      ]
+    },
+    {
+      "sizeBytes": 2380547,
+      "sizeKB": "2324.8",
+      "files": [
+        "assets/images/gastronomia.png",
+        "website/assets/gastronomia.png"
+      ]
+    },
+    {
+      "sizeBytes": 2298017,
+      "sizeKB": "2244.2",
+      "files": [
+        "assets/images/impacto ambiental.png",
+        "website/assets/impacto ambiental.png"
+      ]
+    },
+    {
+      "sizeBytes": 2289716,
+      "sizeKB": "2236.1",
+      "files": [
+        "assets/images/playas volcanes aventuras.png",
+        "website/assets/playas volcanes aventuras.png"
+      ]
+    },
+    {
+      "sizeBytes": 2187133,
+      "sizeKB": "2135.9",
+      "files": [
+        "assets/images/cooperativa.png",
+        "website/assets/cooperativa.png"
+      ]
+    },
+    {
+      "sizeBytes": 2173255,
+      "sizeKB": "2122.3",
+      "files": [
+        "assets/images/sonoro.png",
+        "website/assets/sonoro.png"
+      ]
+    },
+    {
+      "sizeBytes": 2114348,
+      "sizeKB": "2064.8",
+      "files": [
+        "assets/images/calculadora.png",
+        "website/assets/calculadora.png"
+      ]
+    },
+    {
+      "sizeBytes": 2097277,
+      "sizeKB": "2048.1",
+      "files": [
+        "assets/images/gobernanza.png",
+        "website/assets/gobernanza.png"
+      ]
+    },
+    {
+      "sizeBytes": 2045623,
+      "sizeKB": "1997.7",
+      "files": [
+        "assets/images/sos satelital.png",
+        "website/assets/sos satelital.png"
+      ]
+    },
+    {
+      "sizeBytes": 1929919,
+      "sizeKB": "1884.7",
+      "files": [
+        "assets/images/campaña ambiental.png",
+        "website/assets/campaña ambiental.png"
+      ]
+    },
+    {
+      "sizeBytes": 1627042,
+      "sizeKB": "1588.9",
+      "files": [
+        "assets/images/hospedaje/saltwater.png",
+        "website/assets/hospedaje/saltwater.png"
+      ]
+    },
+    {
+      "sizeBytes": 1100013,
+      "sizeKB": "1074.2",
+      "files": [
+        ".agents/skills/impeccable/scripts/data/font-index.json",
+        ".github/skills/impeccable/scripts/data/font-index.json"
+      ]
+    },
+    {
+      "sizeBytes": 722649,
+      "sizeKB": "705.7",
+      "files": [
+        "assets/images/lugares/isla_de_ometepe.jpg",
+        "website/apps/web/public/assets/images/destinos/isla_de_ometepe.jpg",
+        "website/assets/lugares/isla_de_ometepe.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 664101,
+      "sizeKB": "648.5",
+      "files": [
+        "assets/images/hospedaje/feel_at_home.jpg",
+        "website/assets/hospedaje/feel_at_home.jpg",
+        "website/assets/images/aliados/feel_at_home.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 649244,
+      "sizeKB": "634.0",
+      "files": [
+        "assets/images/lugares/cascada_la_luna.jpg",
+        "website/apps/web/public/assets/images/destinos/cascada_la_luna.jpg",
+        "website/assets/lugares/cascada_la_luna.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 639973,
+      "sizeKB": "625.0",
+      "files": [
+        "assets/images/hospedaje/arenas_beach.jpg",
+        "website/assets/hospedaje/arenas_beach.jpg",
+        "website/assets/images/aliados/arenas_beach.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 586014,
+      "sizeKB": "572.3",
+      "files": [
+        "assets/images/hospedaje/apoyo_resort.jpg",
+        "website/assets/hospedaje/apoyo_resort.jpg",
+        "website/assets/images/aliados/apoyo_resort.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 546371,
+      "sizeKB": "533.6",
+      "files": [
+        "assets/images/hospedaje/paraiso_nicaragua.jpg",
+        "website/assets/hospedaje/paraiso_nicaragua.jpg",
+        "website/assets/images/aliados/paraiso_nicaragua.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 535861,
+      "sizeKB": "523.3",
+      "files": [
+        ".agents/skills/impeccable/scripts/live-browser.js",
+        ".github/skills/impeccable/scripts/live-browser.js"
+      ]
+    },
+    {
+      "sizeBytes": 529372,
+      "sizeKB": "517.0",
+      "files": [
+        "assets/images/hospedaje/hotel_dario.jpg",
+        "website/assets/hospedaje/hotel_dario.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 512389,
+      "sizeKB": "500.4",
+      "files": [
+        "assets/images/hospedaje/town_hostel.jpg",
+        "website/assets/hospedaje/town_hostel.jpg",
+        "website/assets/images/aliados/town_hostel.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 495786,
+      "sizeKB": "484.2",
+      "files": [
+        "assets/images/hospedaje/beach_club.jpg",
+        "website/assets/hospedaje/beach_club.jpg",
+        "website/assets/images/aliados/beach_club.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 492694,
+      "sizeKB": "481.1",
+      "files": [
+        "website/assets/images/assistant/ROBOT-1.png",
+        "website/assets/images/assistant/robot-baqueano.png"
+      ]
+    },
+    {
+      "sizeBytes": 453575,
+      "sizeKB": "442.9",
+      "files": [
+        "assets/images/hospedaje/paraiso_beach.jpg",
+        "website/assets/hospedaje/paraiso_beach.jpg",
+        "website/assets/images/aliados/paraiso_beach.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 408778,
+      "sizeKB": "399.2",
+      "files": [
+        "assets/images/rios_y_playas/las_penitas.jpg",
+        "website/assets/rios_y_playas/las_penitas.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 391763,
+      "sizeKB": "382.6",
+      "files": [
+        "assets/images/hospedaje/hotel_maharaja.jpg",
+        "website/assets/hospedaje/hotel_maharaja.jpg",
+        "website/assets/images/aliados/hotel_maharaja.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 387038,
+      "sizeKB": "378.0",
+      "files": [
+        "assets/images/hospedaje/oro_eco.jpg",
+        "website/assets/hospedaje/oro_eco.jpg",
+        "website/assets/images/aliados/oro_eco.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 377828,
+      "sizeKB": "369.0",
+      "files": [
+        "assets/images/hospedaje/corn_island_hostal.jpg",
+        "website/assets/hospedaje/corn_island_hostal.jpg",
+        "website/assets/images/aliados/corn_island_hostal.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 359798,
+      "sizeKB": "351.4",
+      "files": [
+        "assets/images/hospedaje/sohla_rooftop.jpg",
+        "website/assets/hospedaje/sohla_rooftop.jpg",
+        "website/assets/images/aliados/sohla_rooftop.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 344430,
+      "sizeKB": "336.4",
+      "files": [
+        "assets/images/hospedaje/san_simian.jpg",
+        "website/assets/hospedaje/san_simian.jpg",
+        "website/assets/images/aliados/san_simian.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 341976,
+      "sizeKB": "334.0",
+      "files": [
+        "assets/images/rios_y_playas/playa_la_boquita.jpg",
+        "website/assets/rios_y_playas/playa_la_boquita.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 339303,
+      "sizeKB": "331.4",
+      "files": [
+        "assets/images/hospedaje/pic_nic.jpg",
+        "website/assets/hospedaje/pic_nic.jpg",
+        "website/assets/images/aliados/pic_nic.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 327872,
+      "sizeKB": "320.2",
+      "files": [
+        "assets/images/rios_y_playas/islas_del_maiz.jpg",
+        "website/assets/rios_y_playas/islas_del_maiz.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 293921,
+      "sizeKB": "287.0",
+      "files": [
+        "assets/images/hospedaje/hola_ola.jpg",
+        "website/assets/hospedaje/hola_ola.jpg",
+        "website/assets/images/aliados/hola_ola.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 279767,
+      "sizeKB": "273.2",
+      "files": [
+        "assets/images/rios_y_playas/playa_redonda.jpg",
+        "website/assets/rios_y_playas/playa_redonda.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 269773,
+      "sizeKB": "263.5",
+      "files": [
+        "assets/images/hospedaje/posada_del_sol.jpg",
+        "website/assets/hospedaje/posada_del_sol.jpg",
+        "website/assets/images/aliados/posada_del_sol.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 268402,
+      "sizeKB": "262.1",
+      "files": [
+        "assets/images/rios_y_playas/playa_casares.jpg",
+        "website/assets/rios_y_playas/playa_casares.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 256214,
+      "sizeKB": "250.2",
+      "files": [
+        "assets/images/hospedaje/posada_ecologica_la_abuela.jpg",
+        "website/assets/hospedaje/posada_ecologica_la_abuela.jpg",
+        "website/assets/images/aliados/posada_ecologica_la_abuela.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 156802,
+      "sizeKB": "153.1",
+      "files": [
+        "assets/images/lugares/volcan_masaya.jpg",
+        "website/apps/web/public/assets/images/destinos/volcan_masaya.jpg",
+        "website/assets/images/destinos/volcan_masaya.jpg",
+        "website/assets/lugares/volcan_masaya.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 151300,
+      "sizeKB": "147.8",
+      "files": [
+        "assets/images/baqueano_launcher_icon.png",
+        "website/assets/baqueano_launcher_icon.png"
+      ]
+    },
+    {
+      "sizeBytes": 128334,
+      "sizeKB": "125.3",
+      "files": [
+        "assets/images/hospedaje/inn_hotel.jpg",
+        "website/assets/hospedaje/inn_hotel.jpg",
+        "website/assets/images/aliados/inn_hotel.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 128098,
+      "sizeKB": "125.1",
+      "files": [
+        "assets/images/rios_y_playas/playa_popoyo.jpg",
+        "website/assets/rios_y_playas/playa_popoyo.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 123376,
+      "sizeKB": "120.5",
+      "files": [
+        "assets/images/lugares/corn_island.jpg",
+        "website/apps/web/public/assets/images/destinos/corn_island.jpg",
+        "website/assets/images/destinos/corn_island.jpg",
+        "website/assets/lugares/corn_island.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 123346,
+      "sizeKB": "120.5",
+      "files": [
+        "assets/images/baqueano_launcher_solid.png",
+        "website/assets/baqueano_launcher_solid.png",
+        "website/assets/images/baqueano_launcher_solid.png",
+        "website/assets/images/LOGOS/baqueano_launcher_solid.png"
+      ]
+    },
+    {
+      "sizeBytes": 123148,
+      "sizeKB": "120.3",
+      "files": [
+        "assets/images/baqueano_logo-completo_2160x1669-blanco.png",
+        "website/assets/baqueano_logo-completo_2160x1669-blanco.png",
+        "website/assets/images/LOGOS/baqueano_logo-completo_2160x1669-blanco.png"
+      ]
+    },
+    {
+      "sizeBytes": 117242,
+      "sizeKB": "114.5",
+      "files": [
+        "website/assets/images/assistant/baqui-bird.png",
+        "website/assets/images/assistant/baqui.png"
+      ]
+    },
+    {
+      "sizeBytes": 112594,
+      "sizeKB": "110.0",
+      "files": [
+        "website/apps/admin/.next/static/chunks/polyfills-42372ed130431b0a.js",
+        "website/apps/web/.next/static/chunks/polyfills-42372ed130431b0a.js"
+      ]
+    },
+    {
+      "sizeBytes": 112003,
+      "sizeKB": "109.4",
+      "files": [
+        "assets/images/lugares/splash_bg.jpg",
+        "assets/images/splash_bg.jpg",
+        "website/apps/web/public/assets/images/destinos/splash_bg.jpg",
+        "website/assets/images/destinos/splash_bg.jpg",
+        "website/assets/lugares/splash_bg.jpg",
+        "website/assets/splash_bg.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 92297,
+      "sizeKB": "90.1",
+      "files": [
+        "assets/images/baqueano_adaptive_foreground.png",
+        "website/assets/baqueano_adaptive_foreground.png"
+      ]
+    },
+    {
+      "sizeBytes": 85272,
+      "sizeKB": "83.3",
+      "files": [
+        "website/apps/admin/.next/static/media/8e9860b6e62d6359-s.woff2",
+        "website/apps/web/.next/static/media/8e9860b6e62d6359-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 84510,
+      "sizeKB": "82.5",
+      "files": [
+        "assets/images/lugares/isletas_de_granada.jpg",
+        "website/apps/web/public/assets/images/destinos/isletas_de_granada.jpg",
+        "website/assets/images/destinos/isletas_de_granada.jpg",
+        "website/assets/lugares/isletas_de_granada.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 79020,
+      "sizeKB": "77.2",
+      "files": [
+        "assets/images/rios_y_playas/fortaleza_el_castillo.jpg",
+        "website/assets/images/departamentos/rio san juan1.png",
+        "website/assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg",
+        "website/assets/rios_y_playas/fortaleza_el_castillo.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 68224,
+      "sizeKB": "66.6",
+      "files": [
+        "website/apps/admin/.next/static/media/1f173e5e25f3efee-s.woff2",
+        "website/apps/web/.next/static/media/1f173e5e25f3efee-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 65485,
+      "sizeKB": "64.0",
+      "files": [
+        "assets/images/lugares/selva_negra.jpg",
+        "website/apps/web/public/assets/images/destinos/selva_negra.jpg",
+        "website/assets/images/destinos/selva_negra.jpg",
+        "website/assets/lugares/selva_negra.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 57733,
+      "sizeKB": "56.4",
+      "files": [
+        "assets/images/rios_y_playas/playa_marsella.jpg",
+        "website/assets/rios_y_playas/playa_marsella.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 55432,
+      "sizeKB": "54.1",
+      "files": [
+        "website/assets/images/departamentos/madriz10.jfif",
+        "website/assets/images/departamentos/madriz22.jfif"
+      ]
+    },
+    {
+      "sizeBytes": 54555,
+      "sizeKB": "53.3",
+      "files": [
+        "website/assets/images/departamentos/chinandega14.jfif",
+        "website/assets/images/departamentos/chinandega48.jfif"
+      ]
+    },
+    {
+      "sizeBytes": 52755,
+      "sizeKB": "51.5",
+      "files": [
+        "assets/images/lugares/cerro_negro.jpg",
+        "website/apps/web/public/assets/images/destinos/cerro_negro.jpg",
+        "website/assets/images/destinos/cerro_negro.jpg",
+        "website/assets/lugares/cerro_negro.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 52352,
+      "sizeKB": "51.1",
+      "files": [
+        "assets/images/rios_y_playas/playa_pochomil.jpg",
+        "website/assets/rios_y_playas/playa_pochomil.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 51703,
+      "sizeKB": "50.5",
+      "files": [
+        "assets/images/lugares/canon_de_somoto.jpg",
+        "website/apps/web/public/assets/images/destinos/canon_de_somoto.jpg",
+        "website/assets/images/destinos/canon_de_somoto.jpg",
+        "website/assets/lugares/canon_de_somoto.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 48432,
+      "sizeKB": "47.3",
+      "files": [
+        "website/apps/admin/.next/static/media/e4af272ccee01ff0-s.p.woff2",
+        "website/apps/web/.next/static/media/e4af272ccee01ff0-s.p.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 44544,
+      "sizeKB": "43.5",
+      "files": [
+        "assets/images/comida/nacatamal.jpg",
+        "website/apps/web/public/assets/images/comida/nacatamal.jpg",
+        "website/assets/comida/nacatamal.jpg",
+        "website/assets/images/comida/nacatamal.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 41219,
+      "sizeKB": "40.3",
+      "files": [
+        "assets/images/comida/quesillo.jpg",
+        "website/apps/web/public/assets/images/comida/quesillo.jpg",
+        "website/assets/comida/quesillo.jpg",
+        "website/assets/images/comida/quesillo.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 40536,
+      "sizeKB": "39.6",
+      "files": [
+        "assets/images/logo oficiales/logo_baqueano.png",
+        "assets/images/logos/logo_baqueano.png",
+        "assets/images/logo_baqueano.png",
+        "website/assets/images/LOGOS/logo_baqueano.png",
+        "website/assets/logo oficiales/logo_baqueano.png",
+        "website/assets/logos/logo_baqueano.png",
+        "website/assets/logo_baqueano.png"
+      ]
+    },
+    {
+      "sizeBytes": 38774,
+      "sizeKB": "37.9",
+      "files": [
+        "assets/images/comida/gallo_pinto.jpg",
+        "website/apps/web/public/assets/images/comida/gallo_pinto.jpg",
+        "website/assets/comida/gallo_pinto.jpg",
+        "website/assets/images/comida/gallo_pinto.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 38218,
+      "sizeKB": "37.3",
+      "files": [
+        "assets/images/rios_y_playas/playa_maderas.jpg",
+        "website/assets/rios_y_playas/playa_maderas.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 38010,
+      "sizeKB": "37.1",
+      "files": [
+        "assets/images/rios_y_playas/san_juan_del_sur.jpg",
+        "website/assets/rios_y_playas/san_juan_del_sur.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 37781,
+      "sizeKB": "36.9",
+      "files": [
+        "assets/images/comida/vigoron.jpg",
+        "website/apps/web/public/assets/images/comida/vigoron.jpg",
+        "website/assets/comida/vigoron.jpg",
+        "website/assets/images/comida/vigoron.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 36698,
+      "sizeKB": "35.8",
+      "files": [
+        "assets/images/rios_y_playas/laguna_de_apoyo.jpg",
+        "website/apps/web/public/assets/images/destinos/laguna_de_apoyo.jpg",
+        "website/assets/images/destinos/laguna_de_apoyo.jpg",
+        "website/assets/rios_y_playas/laguna_de_apoyo.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 35508,
+      "sizeKB": "34.7",
+      "files": [
+        "website/apps/admin/.next/static/media/904be59b21bd51cb-s.p.woff2",
+        "website/apps/web/.next/static/media/904be59b21bd51cb-s.p.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 32757,
+      "sizeKB": "32.0",
+      "files": [
+        "assets/images/rios_y_playas/playa_el_transito.jpg",
+        "website/assets/rios_y_playas/playa_el_transito.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 32031,
+      "sizeKB": "31.3",
+      "files": [
+        "assets/images/comida/baho.jpg",
+        "website/apps/web/public/assets/images/comida/baho.jpg",
+        "website/assets/comida/baho.jpg",
+        "website/assets/images/comida/baho.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 29304,
+      "sizeKB": "28.6",
+      "files": [
+        ".agents/skills/impeccable/scripts/modern-screenshot.umd.js",
+        ".github/skills/impeccable/scripts/modern-screenshot.umd.js"
+      ]
+    },
+    {
+      "sizeBytes": 29177,
+      "sizeKB": "28.5",
+      "files": [
+        "website/apps/web/.next/server/app/_not-found.html",
+        "website/apps/web/.next/server/pages/404.html"
+      ]
+    },
+    {
+      "sizeBytes": 27407,
+      "sizeKB": "26.8",
+      "files": [
+        "assets/images/rios_y_playas/playa_gigante.jpg",
+        "website/assets/rios_y_playas/playa_gigante.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 27123,
+      "sizeKB": "26.5",
+      "files": [
+        "assets/images/comida/indio_viejo.jpg",
+        "website/apps/web/public/assets/images/comida/indio_viejo.jpg",
+        "website/assets/comida/indio_viejo.jpg",
+        "website/assets/images/comida/indio_viejo.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 25844,
+      "sizeKB": "25.2",
+      "files": [
+        "website/apps/admin/.next/static/media/ba9851c3c22cd980-s.woff2",
+        "website/apps/web/.next/static/media/ba9851c3c22cd980-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 25656,
+      "sizeKB": "25.1",
+      "files": [
+        "android/app/.cxx/Debug/5x131z1q/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c",
+        "android/app/.cxx/Debug/5x131z1q/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c",
+        "android/app/.cxx/Debug/5x131z1q/x86/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c",
+        "android/app/.cxx/Debug/5x131z1q/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c"
+      ]
+    },
+    {
+      "sizeBytes": 25388,
+      "sizeKB": "24.8",
+      "files": [
+        "android/app/.cxx/Debug/5x131z1q/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+        "android/app/.cxx/Debug/5x131z1q/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+        "android/app/.cxx/Debug/5x131z1q/x86/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+        "android/app/.cxx/Debug/5x131z1q/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+      ]
+    },
+    {
+      "sizeBytes": 24079,
+      "sizeKB": "23.5",
+      "files": [
+        "assets/images/IMG_20260905_204346_314.png",
+        "assets/images/logos/baqueano_logo_horizontal.png",
+        "website/apps/admin/public/assets/images/brand/baqueano_logo_horizontal.png",
+        "website/apps/web/public/assets/images/brand/baqueano_logo_horizontal.png",
+        "website/assets/images/LOGOS/baqueano_logo_horizontal.png",
+        "website/assets/IMG_20260905_204346_314.png",
+        "website/assets/logos/baqueano_logo_horizontal.png"
+      ]
+    },
+    {
+      "sizeBytes": 24072,
+      "sizeKB": "23.5",
+      "files": [
+        "website/apps/admin/.next/static/media/b1f344208eb4edfe-s.woff2",
+        "website/apps/web/.next/static/media/b1f344208eb4edfe-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 22320,
+      "sizeKB": "21.8",
+      "files": [
+        "website/apps/admin/.next/static/media/36966cca54120369-s.p.woff2",
+        "website/apps/web/.next/static/media/36966cca54120369-s.p.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 22010,
+      "sizeKB": "21.5",
+      "files": [
+        "assets/images/baqueano_icono_500x386.png",
+        "website/assets/baqueano_icono_500x386.png"
+      ]
+    },
+    {
+      "sizeBytes": 21492,
+      "sizeKB": "21.0",
+      "files": [
+        "website/apps/admin/.next/static/media/48e2044251ef3125-s.woff2",
+        "website/apps/web/.next/static/media/48e2044251ef3125-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 20101,
+      "sizeKB": "19.6",
+      "files": [
+        "assets/images/rios_y_playas/playa_costa_azul.jpg",
+        "website/assets/rios_y_playas/playa_costa_azul.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 19044,
+      "sizeKB": "18.6",
+      "files": [
+        "website/apps/admin/.next/static/media/19cfc7226ec3afaa-s.woff2",
+        "website/apps/web/.next/static/media/19cfc7226ec3afaa-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 18924,
+      "sizeKB": "18.5",
+      "files": [
+        "website/apps/admin/.next/static/media/b7387a63dd068245-s.woff2",
+        "website/apps/web/.next/static/media/b7387a63dd068245-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 18744,
+      "sizeKB": "18.3",
+      "files": [
+        "website/apps/admin/.next/static/media/21350d82a1f187e9-s.woff2",
+        "website/apps/web/.next/static/media/21350d82a1f187e9-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 18063,
+      "sizeKB": "17.6",
+      "files": [
+        "assets/images/baqueano_icono_500x386-blanco.png",
+        "assets/images/logos/baqueano_icono_blanco.png",
+        "website/assets/baqueano_icono_500x386-blanco.png",
+        "website/assets/images/LOGOS/baqueano_icono_500x386-blanco.png",
+        "website/assets/logos/baqueano_icono_blanco.png"
+      ]
+    },
+    {
+      "sizeBytes": 17227,
+      "sizeKB": "16.8",
+      "files": [
+        "assets/images/baqueano_icono_oficial.png",
+        "assets/images/IMG_20260905_204339_229.png",
+        "assets/images/logos/baqueano_icono_oficial.png",
+        "website/apps/web/public/assets/images/brand/baqueano_icono_oficial.png",
+        "website/assets/baqueano_icono_oficial.png",
+        "website/assets/images/LOGOS/baqueano_icono_oficial.png",
+        "website/assets/IMG_20260905_204339_229.png",
+        "website/assets/logos/baqueano_icono_oficial.png"
+      ]
+    },
+    {
+      "sizeBytes": 15434,
+      "sizeKB": "15.1",
+      "files": [
+        ".agents/skills/impeccable/reference/degraded/finish-reviewer.md",
+        ".github/skills/impeccable/reference/degraded/finish-reviewer.md"
+      ]
+    },
+    {
+      "sizeBytes": 14719,
+      "sizeKB": "14.4",
+      "files": [
+        "website/apps/admin/.next/server/app/destinos/page.js.nft.json",
+        "website/apps/admin/.next/server/app/fuentes/page.js.nft.json",
+        "website/apps/admin/.next/server/app/movilidad/page.js.nft.json",
+        "website/apps/admin/.next/server/app/negocios/page.js.nft.json",
+        "website/apps/admin/.next/server/app/usuarios/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 14701,
+      "sizeKB": "14.4",
+      "files": [
+        "website/apps/admin/.next/server/app/destinos/nuevo/page.js.nft.json",
+        "website/apps/admin/.next/server/app/destinos/[id]/page.js.nft.json",
+        "website/apps/admin/.next/server/app/negocios/[id]/page.js.nft.json",
+        "website/apps/admin/.next/server/app/strategic/briefing/page.js.nft.json",
+        "website/apps/admin/.next/server/app/strategic/scenarios/page.js.nft.json",
+        "website/apps/admin/.next/server/app/strategic/scorecard/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 14401,
+      "sizeKB": "14.1",
+      "files": [
+        "website/apps/admin/.next/server/app/auditoria/page.js.nft.json",
+        "website/apps/admin/.next/server/app/categorias/page.js.nft.json",
+        "website/apps/admin/.next/server/app/confianza/page.js.nft.json",
+        "website/apps/admin/.next/server/app/configuracion/page.js.nft.json",
+        "website/apps/admin/.next/server/app/control-tower/page.js.nft.json",
+        "website/apps/admin/.next/server/app/cultura/page.js.nft.json",
+        "website/apps/admin/.next/server/app/dashboard/page.js.nft.json",
+        "website/apps/admin/.next/server/app/departamentos/page.js.nft.json",
+        "website/apps/admin/.next/server/app/desarrolladores/page.js.nft.json",
+        "website/apps/admin/.next/server/app/dispositivos/page.js.nft.json",
+        "website/apps/admin/.next/server/app/gastronomia/page.js.nft.json",
+        "website/apps/admin/.next/server/app/historia/page.js.nft.json",
+        "website/apps/admin/.next/server/app/multimedia/page.js.nft.json",
+        "website/apps/admin/.next/server/app/municipios/page.js.nft.json",
+        "website/apps/admin/.next/server/app/operaciones-campo/page.js.nft.json",
+        "website/apps/admin/.next/server/app/pagos/page.js.nft.json",
+        "website/apps/admin/.next/server/app/paises/page.js.nft.json",
+        "website/apps/admin/.next/server/app/plataforma/page.js.nft.json",
+        "website/apps/admin/.next/server/app/predictive/page.js.nft.json",
+        "website/apps/admin/.next/server/app/reservas/page.js.nft.json",
+        "website/apps/admin/.next/server/app/simulation/page.js.nft.json",
+        "website/apps/admin/.next/server/app/smart-points/page.js.nft.json",
+        "website/apps/admin/.next/server/app/sostenibilidad/page.js.nft.json",
+        "website/apps/admin/.next/server/app/spatial/page.js.nft.json",
+        "website/apps/admin/.next/server/app/strategic/page.js.nft.json",
+        "website/apps/admin/.next/server/app/suscripciones/page.js.nft.json",
+        "website/apps/admin/.next/server/app/website-builder/page.js.nft.json",
+        "website/apps/admin/.next/server/app/_not-found/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 13795,
+      "sizeKB": "13.5",
+      "files": [
+        "website/assets/images/departamentos/granada.jpg",
+        "website/assets/images/departamentos/granada2.jpg"
+      ]
+    },
+    {
+      "sizeBytes": 12797,
+      "sizeKB": "12.5",
+      "files": [
+        "website/assets/images/departamentos/islaometepe.png",
+        "website/assets/images/departamentos/rivas.png"
+      ]
+    },
+    {
+      "sizeBytes": 11272,
+      "sizeKB": "11.0",
+      "files": [
+        "website/apps/admin/.next/static/media/c5fe6dc8356a8c31-s.woff2",
+        "website/apps/web/.next/static/media/c5fe6dc8356a8c31-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 10788,
+      "sizeKB": "10.5",
+      "files": [
+        "website/apps/web/.next/server/app/api/open/v1/datasets/[datasetId]/download/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/open/v1/places/[id]/trust/route.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10620,
+      "sizeKB": "10.4",
+      "files": [
+        "website/apps/admin/.next/static/media/bf24a9759715e608-s.woff2",
+        "website/apps/web/.next/static/media/bf24a9759715e608-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 10620,
+      "sizeKB": "10.4",
+      "files": [
+        "website/apps/web/.next/server/app/api/open/v1/spatial/corridors/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/open/v1/spatial/isochrones/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/open/v1/spatial/nearby/route.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10588,
+      "sizeKB": "10.3",
+      "files": [
+        ".agents/skills/impeccable/scripts/live-browser-ignores.js",
+        ".github/skills/impeccable/scripts/live-browser-ignores.js"
+      ]
+    },
+    {
+      "sizeBytes": 10452,
+      "sizeKB": "10.2",
+      "files": [
+        "website/apps/web/.next/server/app/api/internal/strategic/briefing/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/internal/strategic/copilot/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/internal/strategic/kpis/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/internal/strategic/signals/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/open/v1/datasets/route.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10362,
+      "sizeKB": "10.1",
+      "files": [
+        "website/apps/web/.next/server/app/api/open/v1/places/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/open/v1/smart-points/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/open/v1/territories/route.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10303,
+      "sizeKB": "10.1",
+      "files": [
+        "website/apps/web/.next/server/app/confianza/metodologia/page.js.nft.json",
+        "website/apps/web/.next/server/app/rutas/[slug]/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10280,
+      "sizeKB": "10.0",
+      "files": [
+        "website/apps/admin/.next/static/media/df0a9ae256c0569c-s.woff2",
+        "website/apps/web/.next/static/media/df0a9ae256c0569c-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 10251,
+      "sizeKB": "10.0",
+      "files": [
+        "website/apps/web/.next/server/app/mi-viaje/[tripId]/page.js.nft.json",
+        "website/apps/web/.next/server/app/p/[slug]/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10215,
+      "sizeKB": "10.0",
+      "files": [
+        "website/apps/web/.next/server/app/kiosk/[smartPointId]/page.js.nft.json",
+        "website/apps/web/.next/server/app/viaje/[tripId]/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10200,
+      "sizeKB": "10.0",
+      "files": [
+        "website/apps/web/.next/server/app/api/v1/places/route.js.nft.json",
+        "website/apps/web/.next/server/app/api/v1/territories/route.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10155,
+      "sizeKB": "9.9",
+      "files": [
+        "website/apps/web/.next/server/app/historia/page.js.nft.json",
+        "website/apps/web/.next/server/app/territorios/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10128,
+      "sizeKB": "9.9",
+      "files": [
+        "website/apps/web/.next/server/app/cultura/page.js.nft.json",
+        "website/apps/web/.next/server/app/sostenibilidad/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10083,
+      "sizeKB": "9.8",
+      "files": [
+        "website/apps/web/.next/server/app/marca/page.js.nft.json",
+        "website/apps/web/.next/server/app/mi-viaje/page.js.nft.json",
+        "website/apps/web/.next/server/app/privacidad/page.js.nft.json",
+        "website/apps/web/.next/server/app/terminos/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 10050,
+      "sizeKB": "9.8",
+      "files": [
+        "website/apps/web/.next/server/app/alquiler-vehiculos/page.js.nft.json",
+        "website/apps/web/.next/server/app/ayuda/page.js.nft.json",
+        "website/apps/web/.next/server/app/baqueano-ai/page.js.nft.json",
+        "website/apps/web/.next/server/app/developers/page.js.nft.json",
+        "website/apps/web/.next/server/app/notificaciones/page.js.nft.json",
+        "website/apps/web/.next/server/app/open-data/page.js.nft.json",
+        "website/apps/web/.next/server/app/pasaporte/page.js.nft.json",
+        "website/apps/web/.next/server/app/research/page.js.nft.json",
+        "website/apps/web/.next/server/app/_not-found/page.js.nft.json"
+      ]
+    },
+    {
+      "sizeBytes": 9022,
+      "sizeKB": "8.8",
+      "files": [
+        "website/apps/admin/.next/server/app/_not-found.html",
+        "website/apps/admin/.next/server/pages/404.html"
+      ]
+    },
+    {
+      "sizeBytes": 8720,
+      "sizeKB": "8.5",
+      "files": [
+        ".agents/skills/impeccable/scripts/impeccable",
+        ".github/skills/impeccable/scripts/impeccable"
+      ]
+    },
+    {
+      "sizeBytes": 8686,
+      "sizeKB": "8.5",
+      "files": [
+        ".agents/skills/impeccable/scripts/impeccable.cmd",
+        ".github/skills/impeccable/scripts/impeccable.cmd"
+      ]
+    },
+    {
+      "sizeBytes": 8028,
+      "sizeKB": "7.8",
+      "files": [
+        ".agents/skills/impeccable/scripts/command-metadata.json",
+        ".github/skills/impeccable/scripts/command-metadata.json"
+      ]
+    },
+    {
+      "sizeBytes": 7287,
+      "sizeKB": "7.1",
+      "files": [
+        ".agents/skills/impeccable/reference/degraded/manual-edit-applier.md",
+        ".github/skills/impeccable/reference/degraded/manual-edit-applier.md"
+      ]
+    },
+    {
+      "sizeBytes": 6772,
+      "sizeKB": "6.6",
+      "files": [
+        "website/apps/admin/.next/static/media/e1aab0933260df4d-s.woff2",
+        "website/apps/web/.next/static/media/e1aab0933260df4d-s.woff2"
+      ]
+    },
+    {
+      "sizeBytes": 5863,
+      "sizeKB": "5.7",
+      "files": [
+        "website/apps/admin/.next/types/cache-life.d.ts",
+        "website/apps/web/.next/types/cache-life.d.ts"
+      ]
+    },
+    {
+      "sizeBytes": 5422,
+      "sizeKB": "5.3",
+      "files": [
+        "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+        "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png"
+      ]
+    },
+    {
+      "sizeBytes": 5084,
+      "sizeKB": "5.0",
+      "files": [
+        ".agents/skills/impeccable/scripts/live-browser-dom.js",
+        ".github/skills/impeccable/scripts/live-browser-dom.js"
+      ]
+    },
+    {
+      "sizeBytes": 4234,
+      "sizeKB": "4.1",
+      "files": [
+        ".agents/skills/impeccable/scripts/live-browser-session.js",
+        ".github/skills/impeccable/scripts/live-browser-session.js"
+      ]
+    },
+    {
+      "sizeBytes": 4206,
+      "sizeKB": "4.1",
+      "files": [
+        ".agents/skills/impeccable/reference/operate.md",
+        ".github/skills/impeccable/reference/operate.md"
+      ]
+    },
+    {
+      "sizeBytes": 4139,
+      "sizeKB": "4.0",
+      "files": [
+        ".agents/skills/impeccable/reference/android.md",
+        ".github/skills/impeccable/reference/android.md"
+      ]
+    },
+    {
+      "sizeBytes": 3863,
+      "sizeKB": "3.8",
+      "files": [
+        ".agents/skills/impeccable/reference/ios.md",
+        ".github/skills/impeccable/reference/ios.md"
+      ]
+    },
+    {
+      "sizeBytes": 3606,
+      "sizeKB": "3.5",
+      "files": [
+        ".agents/skills/impeccable/reference/shape.md",
+        ".github/skills/impeccable/reference/shape.md"
+      ]
+    },
+    {
+      "sizeBytes": 3348,
+      "sizeKB": "3.3",
+      "files": [
+        ".agents/skills/impeccable/reference/degraded/documenter.md",
+        ".github/skills/impeccable/reference/degraded/documenter.md"
+      ]
+    },
+    {
+      "sizeBytes": 2557,
+      "sizeKB": "2.5",
+      "files": [
+        ".agents/skills/impeccable/scripts/data/font-index-failures.json",
+        ".github/skills/impeccable/scripts/data/font-index-failures.json"
+      ]
+    },
+    {
+      "sizeBytes": 1368,
+      "sizeKB": "1.3",
+      "files": [
+        "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+        "ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png"
+      ]
+    }
+  ]
+}

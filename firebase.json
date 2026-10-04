@@ -56,13 +56,13 @@
       },
       {
         "source": "/privacidad",
-        "destination": "/index.html#privacidad",
-        "type": 302
+        "destination": "/privacidad.html",
+        "type": 301
       },
       {
         "source": "/terminos",
-        "destination": "/index.html#terminos",
-        "type": 302
+        "destination": "/terminos.html",
+        "type": 301
       },
       {
         "source": "/negocio",
@@ -86,6 +86,21 @@
       },
       {
         "source": "/ops",
+        "destination": "/admin.html",
+        "type": 301
+      },
+      {
+        "source": "/ops-center",
+        "destination": "/admin.html",
+        "type": 301
+      },
+      {
+        "source": "/admin",
+        "destination": "/admin.html",
+        "type": 301
+      },
+      {
+        "source": "/dashboard",
         "destination": "/admin.html",
         "type": 301
       }

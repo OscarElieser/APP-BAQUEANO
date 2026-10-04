@@ -12,11 +12,15 @@
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Se ejecuta automáticamente al cargarse cualquier página del sitio.
-// - Detecta si la página ya tiene navbar/footer oficiales; si no, los inyecta.
-// - Usa DOMContentLoaded + MutationObserver para tolerancia a race conditions.
-// - No modifica admin.html (protección explícita).
 // - Menú y footer se imponen SIEMPRE desde este archivo: una sola fuente para todo
 //   el portal público. admin.html (Ops Center) queda fuera y conserva el suyo.
+// - Orden del shell: este archivo coloca el armazón del menú y el pie, emite
+//   `baqueano:shell-ready`, y navigation.js monta UNA vez el contenido y los
+//   controles del menú; user-session.js pinta el estado de sesión y el rol.
+// - Página pública nueva: basta con incluir, al final del <body>,
+//     <script src="js/navigation.js"></script>
+//     <script src="js/global-injector.js"></script>
+//   No hay que copiar menú, pie, idioma ni sesión.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES):
 // - injectGlobalNavbar(): impone el menú único del portal (reemplaza copias locales).
@@ -245,7 +249,6 @@
     } else {
       document.body.insertBefore(nav, document.body.firstChild);
     }
-    wireNavbarButtons(nav);
   }
 
   function bqNavbarHTML() {
@@ -260,34 +263,6 @@
       '<div class="exact-nav-menu nav-links-menu" id="navLinksMenu" role="menubar"></div>' +
       '<div class="exact-nav-actions global-nav-actions"></div>' +
     '</div>';
-  }
-
-  function wireNavbarButtons(nav) {
-    // Dropdown "Más"
-    var dropBtn = nav ? nav.querySelector('.bq-nav-dropdown-btn') : document.querySelector('.bq-nav-dropdown-btn');
-    var dropMenu = nav ? nav.querySelector('.bq-dropdown-menu') : document.querySelector('.bq-dropdown-menu');
-    if (dropBtn && dropMenu) {
-      dropBtn.addEventListener('click', function() {
-        var open = dropMenu.style.display === 'block';
-        dropMenu.style.display = open ? 'none' : 'block';
-        dropBtn.setAttribute('aria-expanded', String(!open));
-      });
-      document.addEventListener('click', function(e) {
-        if (!dropBtn.contains(e.target)) {
-          dropMenu.style.display = 'none';
-          dropBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-    // Burger móvil
-    var burger = document.getElementById('bqBurger');
-    var links  = document.getElementById('bqNavLinks');
-    if (burger && links) {
-      burger.addEventListener('click', function() {
-        var open = links.classList.toggle('open');
-        burger.setAttribute('aria-expanded', String(open));
-      });
-    }
   }
 
   // ── Footer único del portal ───────────────────────────────────────────────
@@ -475,8 +450,18 @@
   }
 
   // ── Mejorar Formularios de Contacto ───────────────────────────────────────
+  // 🎯 POR QUÉ: antes interceptaba TODOS los formularios y mostraba "¡Mensaje
+  //    enviado!" aunque fueran el login, una búsqueda o un registro con su
+  //    propia lógica: el usuario veía un éxito falso.
+  // ⚙️ CÓMO: solo actúa en formularios sin destino propio (sin action, sin
+  //    onsubmit, sin role=search) y fuera del panel de acceso; los formularios
+  //    que su página ya procesa en JS se listan en OWN_SUBMIT.
+  // 📦 QUÉ: confirmación visual solo donde no existe otro manejador.
+  var OWN_SUBMIT = ['bqReportForm', 'businessRegForm', 'registerBusinessForm', 'helpSearchForm', 'bizRegisterForm', 'ecoReportForm'];
   function upgradeContactForms() {
     document.querySelectorAll('form:not([data-bq-wired])').forEach(function(form) {
+      if (form.hasAttribute('action') || form.hasAttribute('onsubmit') || form.getAttribute('role') === 'search' ||
+          form.classList.contains('bq-auth-form') || form.closest('#mainNavbar') || OWN_SUBMIT.indexOf(form.id) !== -1) return;
       form.setAttribute('data-bq-wired', '1');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -556,7 +541,7 @@
       ['Mi negocio','Negocios','Registro y herramientas para emprendimientos turísticos.','mi-negocio.html','negocio negocios empresa emprendimiento comercio hospedaje restaurante guia registrar local'],
       ['Canal de denuncias','Seguridad','Reporte confidencial de incidencias ambientales.','denuncias.html','denuncia reportar emergencia ambiental seguridad'],
       ['Perfil y cuenta','Cuenta','Datos personales, favoritos y configuración de usuario.','perfil.html','perfil cuenta usuario iniciar sesion configuracion favoritos'],
-      ['Reservas','Cuenta','Consultá y administrá tus viajes reservados.','perfil.html#tab-viajes','reservas reservar viaje boleto confirmacion'],
+      ['Reservas','Cuenta','Consultá y administrá tus viajes reservados.','perfil.html#reservas','reservas reservar viaje boleto confirmacion'],
       ['Favoritos','Cuenta','Accedé a los destinos que guardaste.','favoritos.html','favoritos guardados lista deseos'],
       ['Quiénes somos','Institucional','Propósito, misión y equipo de BAQUEANO.','nosotros.html','nosotros quienes somos mision vision contacto ayuda faq'],
       ['Términos y condiciones','Legal','Reglas y condiciones de uso de la plataforma.','terminos.html','terminos condiciones reglas legal'],
@@ -849,18 +834,16 @@
     injectGlobalNavbar();
     injectGlobalFooter();
     injectSosModal();
-    wireNavbarButtons(null);
     wireExistingSosButtons();
     wireGlobalButtons();
     injectThumbBar();
-    // ⚡ Activar lógica del Mega Menú en todas las páginas
-    if (typeof buildGlobalMegaNavigation === 'function') {
-      buildGlobalMegaNavigation();
-    }
-    // El menú se acaba de reconstruir: repintar el estado de sesión (Cerrar
-    // sesión, enlace al Ops Center solo para cuentas autorizadas).
-    if (window.BaqueanoSession && typeof window.BaqueanoSession.refreshNavbar === 'function') {
-      try { window.BaqueanoSession.refreshNavbar(); } catch (e) { console.warn('[BaqueanoShell] Sesión no repintada:', e); }
+    // ⚡ Shell listo: navigation.js monta UNA vez el menú canónico (enlaces,
+    //    mega menú "Más", cajón móvil, scroll) y repinta la sesión. Si
+    //    navigation.js aún no cargó, lo monta al recibir este evento.
+    window.__BQ_SHELL_READY__ = true;
+    document.dispatchEvent(new CustomEvent('baqueano:shell-ready'));
+    if (window.BaqueanoNavigation && typeof window.BaqueanoNavigation.mount === 'function') {
+      try { window.BaqueanoNavigation.mount(); } catch (e) { console.warn('[BaqueanoShell] Menú no montado:', e); }
     }
     removeGlobalSearchButtons();
     normalizeFooterBoundary();

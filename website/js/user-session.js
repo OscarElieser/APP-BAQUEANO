@@ -12,7 +12,9 @@
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Persistencia híbrida defensiva (localStorage con fallback a sessionStorage y memoria).
-// - Soporte RBAC: Reconocimiento automático de roles mediante correo electrónico.
+// - RBAC: el rol sale de js/shared/roles.js (Custom Claim o correo verificado por
+//   Firebase). Autenticarse ≠ estar autorizado: un explorador nunca ve el Ops Center.
+// - Header global: cuenta con avatar, nombre y menú (renderAccountSlots).
 // - Sincronización en tiempo real del menú de navegación (Navbar) en todas las páginas web.
 // - Gestión reactiva de viajes: Filtro de reservas (Futuras, Pasadas, Canceladas),
 //   generación dinámica de tiquetes de viaje con QR satelital, sincronización de lista de
@@ -172,16 +174,22 @@
     }
 
     const emailKey = (user.email || '').trim().toLowerCase();
-    // El enlace al Ops Center solo aparece si Firebase verificó el correo.
-    if (PRIVILEGED_ACCOUNTS[emailKey] && user.emailVerified === true) {
-      const priv = PRIVILEGED_ACCOUNTS[emailKey];
+    // Autorización de INTERFAZ (qué se muestra): rol desde js/shared/roles.js
+    // con el claim guardado por syncFirebaseIdentity o el correo verificado.
+    // Editar localStorage a lo sumo muestra un enlace: admin.html vuelve a
+    // verificar con Firebase Auth en vivo y las reglas protegen los datos.
+    const resolvedRole = window.BaqueanoRoles
+      ? window.BaqueanoRoles.resolve({ email: emailKey, emailVerified: user.emailVerified === true, claimsRole: user.claimsRole })
+      : (PRIVILEGED_ACCOUNTS[emailKey] && user.emailVerified === true ? PRIVILEGED_ACCOUNTS[emailKey].role : 'explorer');
+    const canOps = window.BaqueanoRoles ? window.BaqueanoRoles.canAccessOps(resolvedRole) : resolvedRole !== 'explorer';
+    if (canOps) {
       return {
         isPrivileged: true,
-        role: priv.role,
-        navTitle: priv.navTitle,
-        navSublabel: priv.navDesc,
-        targetUrl: priv.targetUrl,
-        badge: priv.navBadge
+        role: resolvedRole,
+        navTitle: 'Ops Center',
+        navSublabel: 'Comando & Gestión',
+        targetUrl: 'admin.html',
+        badge: resolvedRole === 'super_admin' ? '● Super Admin' : '● Admin'
       };
     }
 
@@ -196,21 +204,251 @@
     };
   }
 
+  // ==========================================================================
+  // CUENTA EN EL HEADER GLOBAL
+  // 🎯 POR QUÉ: con sesión iniciada el botón solo decía "Cerrar sesión" en rojo:
+  //    no mostraba quién había entrado ni llevaba al perfil, y los
+  //    administradores no tenían un acceso claro al Ops Center.
+  // ⚙️ CÓMO: invitado → enlace "Iniciar sesión" a perfil.html. Con sesión →
+  //    botón con avatar y nombre que abre un menú (Mi perfil, Reservas,
+  //    Favoritos, Ops Center solo si el rol es admin/super_admin, Cerrar sesión).
+  //    Los textos del usuario se insertan con textContent (sin HTML). Un solo
+  //    juego de listeners por documento (delegación) aunque el header se
+  //    reconstruya. Mostrar el enlace NO autoriza: admin.html vuelve a verificar
+  //    con Firebase Auth en vivo y las reglas protegen los datos.
+  // 📦 QUÉ: INVITADO "Iniciar sesión" · USUARIO avatar+nombre · ADMIN y
+  //    SUPERADMIN avatar+nombre + Ops Center.
+  // ==========================================================================
+  function buildAvatar(user, firstName) {
+    const avatar = document.createElement('span');
+    avatar.className = 'bq-account-avatar';
+    avatar.setAttribute('aria-hidden', 'true');
+    const url = safeAvatarUrl(user && user.avatar);
+    if (url) {
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = '';
+      img.width = 32;
+      img.height = 32;
+      img.decoding = 'async';
+      img.referrerPolicy = 'no-referrer';
+      img.addEventListener('error', () => { img.remove(); avatar.textContent = (firstName || '?').charAt(0).toUpperCase(); }, { once: true });
+      avatar.appendChild(img);
+    } else {
+      avatar.textContent = (firstName || '?').charAt(0).toUpperCase();
+    }
+    return avatar;
+  }
+
+  function accountMenuItem(href, icon, label, extraClass) {
+    const link = document.createElement('a');
+    link.href = href;
+    link.className = 'bq-account-item' + (extraClass ? ' ' + extraClass : '');
+    link.setAttribute('role', 'menuitem');
+    const i = document.createElement('i');
+    i.className = icon;
+    i.setAttribute('aria-hidden', 'true');
+    const span = document.createElement('span');
+    span.textContent = label;
+    link.append(i, span);
+    return link;
+  }
+
+  function renderAccountSlots(user, navMeta, isAuthenticated, firstName) {
+    document.querySelectorAll('[data-bq-account]').forEach((slot, index) => {
+      const state = isAuthenticated ? `${navMeta.role}|${user.email}|${user.name}|${user.avatar}` : 'guest';
+      if (slot.dataset.renderedState === state) return;
+      slot.dataset.renderedState = state;
+      slot.replaceChildren();
+
+      if (!isAuthenticated) {
+        const login = document.createElement('a');
+        login.className = 'exact-nav-btn-login global-session navbar-login-btn';
+        login.href = 'perfil.html';
+        login.setAttribute('aria-label', 'Iniciar sesión');
+        login.innerHTML = '<i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span>';
+        slot.appendChild(login);
+        return;
+      }
+
+      const menuId = `bqAccountMenu${index}`;
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'bq-account-trigger global-session is-logged-in';
+      trigger.setAttribute('aria-haspopup', 'menu');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-controls', menuId);
+      trigger.setAttribute('aria-label', `Cuenta de ${firstName}`);
+      const name = document.createElement('span');
+      name.className = 'bq-account-name';
+      name.textContent = firstName;
+      const caret = document.createElement('i');
+      caret.className = 'fa-solid fa-chevron-down bq-account-caret';
+      caret.setAttribute('aria-hidden', 'true');
+      trigger.append(buildAvatar(user, firstName), name, caret);
+
+      const menu = document.createElement('div');
+      menu.className = 'bq-account-menu';
+      menu.id = menuId;
+      menu.setAttribute('role', 'menu');
+      menu.hidden = true;
+
+      const head = document.createElement('div');
+      head.className = 'bq-account-head';
+      const headName = document.createElement('strong');
+      headName.textContent = user.name || firstName;
+      const headEmail = document.createElement('span');
+      headEmail.textContent = user.email || '';
+      const roleBadge = document.createElement('span');
+      roleBadge.className = 'bq-account-role' + (navMeta.isPrivileged ? ' is-admin' : '');
+      roleBadge.textContent = window.BaqueanoRoles ? window.BaqueanoRoles.label(navMeta.role) : (navMeta.isPrivileged ? 'Administrador' : 'Explorador');
+      head.append(headName, headEmail, roleBadge);
+
+      menu.append(
+        head,
+        accountMenuItem('perfil.html', 'fa-regular fa-user', 'Mi perfil'),
+        accountMenuItem('perfil.html#reservas', 'fa-regular fa-calendar-days', 'Mis reservas'),
+        accountMenuItem('favoritos.html', 'fa-regular fa-heart', 'Favoritos')
+      );
+      if (navMeta.isPrivileged) {
+        menu.appendChild(accountMenuItem('admin.html', 'fa-solid fa-satellite-dish', 'Ops Center', 'is-ops'));
+      }
+      const logout = document.createElement('button');
+      logout.type = 'button';
+      logout.className = 'bq-account-item is-logout';
+      logout.setAttribute('role', 'menuitem');
+      logout.dataset.bqLogout = 'true';
+      logout.innerHTML = '<i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesión</span>';
+      menu.appendChild(logout);
+
+      slot.append(trigger, menu);
+    });
+    renderDrawerAccount(user, navMeta, isAuthenticated, firstName);
+    bindAccountMenuEvents();
+  }
+
+  // Versión del cajón móvil: tarjeta con identidad y accesos en lista (en
+  // celular no cabe un desplegable dentro de otro panel).
+  function renderDrawerAccount(user, navMeta, isAuthenticated, firstName) {
+    document.querySelectorAll('[data-bq-account-drawer]').forEach((box) => {
+      const state = isAuthenticated ? `${navMeta.role}|${user.email}|${user.name}|${user.avatar}` : 'guest';
+      if (box.dataset.renderedState === state) return;
+      box.dataset.renderedState = state;
+      box.replaceChildren();
+
+      if (!isAuthenticated) {
+        box.appendChild(accountMenuItem('perfil.html', 'fa-solid fa-circle-user', 'Iniciar sesión o crear cuenta', 'is-primary'));
+        return;
+      }
+      const card = document.createElement('div');
+      card.className = 'bq-drawer-identity';
+      const text = document.createElement('span');
+      text.className = 'bq-drawer-identity-text';
+      const strong = document.createElement('strong');
+      strong.textContent = user.name || firstName;
+      const role = document.createElement('small');
+      role.textContent = window.BaqueanoRoles ? window.BaqueanoRoles.label(navMeta.role) : 'Explorador';
+      text.append(strong, role);
+      card.append(buildAvatar(user, firstName), text);
+      box.append(card, accountMenuItem('perfil.html', 'fa-regular fa-user', 'Mi perfil'));
+      if (navMeta.isPrivileged) {
+        box.appendChild(accountMenuItem('admin.html', 'fa-solid fa-satellite-dish', 'Ops Center', 'is-ops'));
+      }
+      const logout = document.createElement('button');
+      logout.type = 'button';
+      logout.className = 'bq-account-item is-logout';
+      logout.dataset.bqLogout = 'true';
+      logout.innerHTML = '<i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesión</span>';
+      box.appendChild(logout);
+    });
+  }
+
+  function setAccountMenu(slot, open, focusFirst) {
+    const trigger = slot && slot.querySelector('.bq-account-trigger');
+    const menu = slot && slot.querySelector('.bq-account-menu');
+    if (!trigger || !menu) return;
+    menu.hidden = !open;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    slot.classList.toggle('is-open', open);
+    if (open && focusFirst) {
+      const first = menu.querySelector('.bq-account-item');
+      if (first) first.focus();
+    }
+  }
+
+  function closeAllAccountMenus(exceptSlot) {
+    document.querySelectorAll('[data-bq-account].is-open').forEach((slot) => {
+      if (slot !== exceptSlot) setAccountMenu(slot, false);
+    });
+  }
+
+  function bindAccountMenuEvents() {
+    if (window.__bqAccountMenuReady) return;
+    window.__bqAccountMenuReady = true;
+
+    document.addEventListener('click', async (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (!target) return;
+      const slot = target.closest('[data-bq-account]');
+
+      if (target.closest('.bq-account-trigger')) {
+        event.preventDefault();
+        const willOpen = !slot.classList.contains('is-open');
+        closeAllAccountMenus(slot);
+        setAccountMenu(slot, willOpen, event.detail === 0);
+        return;
+      }
+      if (target.closest('[data-bq-logout]')) {
+        event.preventDefault();
+        const button = target.closest('[data-bq-logout]');
+        button.setAttribute('aria-busy', 'true');
+        try {
+          await window.BaqueanoSession.logout();
+          window.bqToast?.('Cerraste sesión. ¡Volvé pronto!', 'success');
+        } finally {
+          button.removeAttribute('aria-busy');
+        }
+        return;
+      }
+      if (slot && target.closest('.bq-account-item')) {
+        setAccountMenu(slot, false);
+        return;
+      }
+      if (!slot) closeAllAccountMenus(null);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const openSlot = document.querySelector('[data-bq-account].is-open');
+      if (!openSlot) return;
+      if (event.key === 'Escape') {
+        setAccountMenu(openSlot, false);
+        openSlot.querySelector('.bq-account-trigger')?.focus();
+        return;
+      }
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        const items = Array.from(openSlot.querySelectorAll('.bq-account-item'));
+        if (!items.length) return;
+        event.preventDefault();
+        const index = items.indexOf(document.activeElement);
+        const next = event.key === 'ArrowDown'
+          ? (index + 1) % items.length
+          : (index - 1 + items.length) % items.length;
+        items[next].focus();
+      }
+    });
+  }
+
   /**
-   * Actualiza los enlaces del Navbar en la página actual de forma robusta y defensiva.
-   * 🎯 Por qué: Garantizar que el botón "Perfil" SIEMPRE permanezca visible y accesible
-   *    en el menú de navegación para todos los usuarios (exploradores y administradores),
-   *    evitando que sea sobreescrito o eliminado por el enlace de Ops Center.
-   * ⚙️ Cómo: Mantener de forma independiente el botón de "Perfil" (perfil.html) y el
-   *    botón de "Ops Center" (admin.html), sincronizando estado activo, subetiquetas e insignias.
-   * 📦 Qué: Botón Perfil en menú, botón Ops Center condicional, botón avatar en cabecera y enlaces de pie de página.
+   * Pinta el estado de sesión en el header y el pie de la página actual.
+   * 🎯 Por qué: la sesión debe verse igual en todas las páginas del portal.
+   * ⚙️ Cómo: lee la sesión local (copia de la identidad de Firebase), resuelve el
+   *    rol con js/shared/roles.js y actualiza enlaces al Ops Center y la cuenta.
+   * 📦 Qué: enlaces admin ocultos salvo admin/super_admin, cuenta del header y
+   *    del cajón móvil, y textos del pie.
    */
   function updateNavbar() {
     const user = loadSession();
     const navMeta = getRoleNavMetadata(user);
-    const currentPath = (window.location.pathname || '').toLowerCase();
-    const isPerfilPage = currentPath.endsWith('perfil.html');
-    const isAdminPage = currentPath.endsWith('admin.html');
     const isAuthenticated = Boolean(user && user.isLoggedIn);
     const userFirstName = (user && user.name)
       ? user.name.trim().split(/\s+/)[0]
@@ -228,162 +466,10 @@
       else adminLink.setAttribute('tabindex', '-1');
     });
 
-    const navLinksMenu = document.getElementById('navLinksMenu');
-    if (navLinksMenu) {
-      // 1. GARANTIZAR QUE EL BOTÓN DE "PERFIL" ESTÉ SIEMPRE PRESENTE EN EL MENÚ (NUNCA SE ELIMINA)
-      let perfilLink = navLinksMenu.querySelector('a[href="perfil.html"], .nav-link-perfil');
-
-      const perfilSublabel = isAuthenticated ? userFirstName : 'Iniciar sesión';
-      const perfilBadge = isAuthenticated ? '● Activo' : 'Acceso';
-
-      const perfilInnerHtml = `
-        <span class="nav-item-content">
-          <span class="nav-icon-box"><i class="fa-solid fa-circle-user nav-icon"></i></span>
-          <span class="nav-text-group">
-            <span class="nav-label">Perfil</span>
-            <span class="nav-sublabel">${escapeHtml(perfilSublabel)}</span>
-          </span>
-        </span>
-        <span class="nav-right-wrap">
-          <span class="nav-item-badge">${escapeHtml(perfilBadge)}</span>
-          <i class="fa-solid fa-chevron-right nav-arrow"></i>
-        </span>
-      `;
-
-      if (perfilLink) {
-        perfilLink.href = 'perfil.html';
-        perfilLink.classList.remove('nav-link-user-role');
-        perfilLink.classList.add('nav-link-perfil');
-        if (isPerfilPage) {
-          perfilLink.classList.add('active');
-        } else {
-          perfilLink.classList.remove('active');
-        }
-        perfilLink.innerHTML = perfilInnerHtml;
-      } else {
-        // Inyección reactiva si el HTML base no lo incluyó
-        perfilLink = document.createElement('a');
-        perfilLink.href = 'perfil.html';
-        perfilLink.className = `nav-link-perfil ${isPerfilPage ? 'active' : ''}`;
-        perfilLink.setAttribute('role', 'menuitem');
-        perfilLink.innerHTML = perfilInnerHtml;
-
-        // Insertar justo antes del Ops Center si existe, o al final
-        const opsRef = navLinksMenu.querySelector('a[href="admin.html"], .nav-link-ops');
-        if (opsRef) {
-          navLinksMenu.insertBefore(perfilLink, opsRef);
-        } else {
-          navLinksMenu.appendChild(perfilLink);
-        }
-      }
-
-      // 2. GESTIONAR EL BOTÓN DE "OPS CENTER" (ADMINISTRADOR / AUDITOR) SIN AFECTAR AL PERFIL
-      let opsLink = navLinksMenu.querySelector('a[href="admin.html"], .nav-link-ops');
-      if (navMeta.isPrivileged) {
-        if (!opsLink) {
-          opsLink = document.createElement('a');
-          opsLink.href = 'admin.html';
-          opsLink.className = 'nav-link-ops';
-          opsLink.setAttribute('role', 'menuitem');
-          navLinksMenu.appendChild(opsLink);
-        }
-        opsLink.style.display = '';
-        opsLink.href = 'admin.html';
-        if (isAdminPage) {
-          opsLink.classList.add('active');
-        } else {
-          opsLink.classList.remove('active');
-        }
-        opsLink.innerHTML = `
-          <span class="nav-item-content">
-            <span class="nav-icon-box"><i class="fa-solid fa-satellite-dish nav-icon"></i></span>
-            <span class="nav-text-group">
-              <span class="nav-label">${escapeHtml(navMeta.navTitle || 'Ops Center')}</span>
-              <span class="nav-sublabel">${escapeHtml(navMeta.navSublabel || 'Comando & Gestión')}</span>
-            </span>
-          </span>
-          <span class="nav-right-wrap">
-            <span class="nav-item-badge live">${escapeHtml(navMeta.badge || '● 24/7')}</span>
-            <i class="fa-solid fa-chevron-right nav-arrow"></i>
-          </span>
-        `;
-      } else if (opsLink) {
-        // Ocultar Ops Center para usuarios regulares/invitados
-        opsLink.style.display = 'none';
-      }
-    }
-
-    // 3. Sincronizar o inyectar el botón de identidad / avatar situado a la derecha del encabezado (.nav-profile-btn)
-    const navActionsRight = document.querySelector('.nav-actions-right');
-    if (navActionsRight && !navActionsRight.querySelector('.nav-profile-btn')) {
-      const chip = document.createElement('a');
-      chip.className = 'nav-profile-btn';
-      chip.href = 'perfil.html';
-      const sosBtn = navActionsRight.querySelector('.sos-quick-btn');
-      if (sosBtn) {
-        navActionsRight.insertBefore(chip, sosBtn);
-      } else {
-        navActionsRight.prepend(chip);
-      }
-    }
-
-    document.querySelectorAll('.nav-profile-btn').forEach((profileButton) => {
-      profileButton.href = 'perfil.html';
-      profileButton.title = isAuthenticated ? 'Abrir mi perfil' : 'Iniciar sesión';
-      profileButton.setAttribute('aria-label', profileButton.title);
-
-      if (!isAuthenticated) {
-        profileButton.innerHTML = `
-          <span class="nav-profile-avatar" aria-hidden="true"><i class="fa-solid fa-right-to-bracket"></i></span>
-          <span class="nav-profile-info"><span class="nav-profile-name">Iniciar sesión</span></span>
-        `;
-        return;
-      }
-
-      const safeName = String(user.name || user.email || 'Usuario');
-      const firstName = escapeHtml(safeName.trim().split(/\s+/)[0]);
-      const avatarUrl = safeAvatarUrl(user.avatar);
-      const avatarContent = avatarUrl
-        ? `<img src="${avatarUrl}" alt="" class="nav-profile-photo">`
-        : '<i class="fa-solid fa-user"></i>';
-      profileButton.innerHTML = `
-        <span class="nav-profile-avatar" aria-hidden="true">${avatarContent}</span>
-        <span class="nav-profile-info">
-          <span class="nav-profile-name">Mi Perfil</span>
-          <span class="nav-profile-role">${firstName}</span>
-        </span>
-      `;
-    });
-
-    // 3b. Botón de sesión de la barra (.navbar-login-btn, creado por navigation.js)
-    // 🎯 POR QUÉ: con sesión iniciada seguía diciendo "Iniciar sesión": el viajero
-    //    no sabía si había entrado ni cómo salir.
-    // ⚙️ CÓMO: con sesión → rojo, "Cerrar sesión" y cierra la sesión al tocarlo;
-    //    sin sesión → "Iniciar sesión" hacia perfil.html. Un solo listener por botón.
-    // 📦 QUÉ: estado visible y acción coherente en todas las páginas.
-    document.querySelectorAll('.navbar-login-btn').forEach((loginButton) => {
-      loginButton.classList.toggle('is-logged-in', isAuthenticated);
-      loginButton.setAttribute('href', isAuthenticated ? '#cerrar-sesion' : 'perfil.html');
-      loginButton.setAttribute('aria-label', isAuthenticated ? `Cerrar sesión de ${userFirstName}` : 'Iniciar sesión');
-      loginButton.title = isAuthenticated ? `Sesión de ${userFirstName} · tocá para salir` : 'Iniciar sesión';
-      loginButton.innerHTML = isAuthenticated
-        ? '<i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i><span>Cerrar sesión</span>'
-        : '<i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span>';
-      if (!loginButton.dataset.sessionBound) {
-        loginButton.dataset.sessionBound = 'true';
-        loginButton.addEventListener('click', async (event) => {
-          if (!loginButton.classList.contains('is-logged-in')) return; // navega a perfil.html
-          event.preventDefault();
-          loginButton.setAttribute('aria-busy', 'true');
-          try {
-            await window.BaqueanoSession?.logout?.();
-            window.bqToast?.('Cerraste sesión. ¡Volvé pronto!', 'success');
-          } finally {
-            loginButton.removeAttribute('aria-busy');
-          }
-        });
-      }
-    });
+    // El menú canónico (navigation.js) ya trae Perfil y el enlace oculto al Ops
+    // Center en "Más"; la cuenta del usuario se pinta en .bq-account-slot.
+    // 3b. Cuenta en el header global (.bq-account-slot, creado por navigation.js)
+    renderAccountSlots(user, navMeta, isAuthenticated, userFirstName);
 
     // 4. Actualizar enlaces correspondientes en el footer
     const footerPerfilLink = document.querySelector('.footer-link-list a[href="perfil.html"]');
@@ -826,6 +912,10 @@
     const email = (firebaseUser.email || '').trim().toLowerCase();
     // Rol privilegiado solo con correo verificado por Firebase.
     const privileged = firebaseUser.emailVerified === true ? PRIVILEGED_ACCOUNTS[email] : null;
+    // Rol provisional por correo verificado; abajo se refina con el Custom Claim.
+    const resolvedRole = window.BaqueanoRoles
+      ? window.BaqueanoRoles.resolve({ email, emailVerified: firebaseUser.emailVerified === true })
+      : (privileged ? privileged.role : 'explorer');
     const createdAt = firebaseUser.metadata && firebaseUser.metadata.creationTime
       ? new Date(firebaseUser.metadata.creationTime).toLocaleDateString('es-NI', { month: 'long', year: 'numeric' })
       : '';
@@ -851,8 +941,9 @@
       email,
       phone: firebaseUser.phoneNumber || '',
       avatar: firebaseUser.photoURL || (existing && existing.avatar) || '',
-      role: privileged ? privileged.role : 'explorer',
-      roleLabel: privileged ? privileged.roleLabel : 'Explorador',
+      role: resolvedRole,
+      roleLabel: window.BaqueanoRoles ? window.BaqueanoRoles.label(resolvedRole) : (privileged ? privileged.roleLabel : 'Explorador'),
+      claimsRole: '',
       memberSince: createdAt || (existing && existing.memberSince) || '—',
       emailVerified: !!firebaseUser.emailVerified,
       providerIds: (firebaseUser.providerData || []).map(profile => profile.providerId),
@@ -866,6 +957,21 @@
     saveSession(session);
     updateNavbar();
     window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: session }));
+
+    // Custom Claims (admin | super_admin) emitidos por el backend: si existen,
+    // mandan sobre la matriz de correos. Se leen del token, nunca del cliente.
+    if (window.BaqueanoRoles) {
+      window.BaqueanoRoles.resolveFirebaseUser(firebaseUser).then((claimRole) => {
+        const current = loadSession();
+        if (!current || current.firebaseUid !== firebaseUser.uid || current.role === claimRole) return;
+        current.role = claimRole;
+        current.roleLabel = window.BaqueanoRoles.label(claimRole);
+        current.claimsRole = window.BaqueanoRoles.canAccessOps(claimRole) ? claimRole : '';
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(current)); } catch (_) {}
+        updateNavbar();
+        window.dispatchEvent(new CustomEvent('baqueano_session_updated', { detail: current }));
+      });
+    }
 
     // Sincronizar usuario con la base de datos Firestore (Directorio de Usuarios)
     if (typeof window.firebase !== 'undefined' && window.firebase.firestore) {
@@ -920,6 +1026,11 @@
   } catch (authInitErr) {
     console.warn('[Baqueano Session] Observador de Firebase Auth en espera:', authInitErr);
   }
+
+  // Iniciar o cerrar sesión en otra pestaña actualiza el header de esta.
+  window.addEventListener('storage', (event) => {
+    if (event.key === STORAGE_KEY || event.key === null) updateNavbar();
+  });
 
   // Auto-inicializar Navbar en DOMContentLoaded o de inmediato si ya cargó
   if (document.readyState === 'loading') {

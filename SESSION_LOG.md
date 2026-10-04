@@ -84,6 +84,30 @@ LO QUE FUNCIONA EN ESTE PUNTO:
     - SESSION_LOG.md
 
   ESTADO: Implementado y verificado. -->
+## 🧭 EJECUCIÓN DE FASE 2 (PROPUESTA), FASE 3 (PLAN DE MIGRACIÓN) Y FASE 4 (RESPALDO & LIMPIEZA SEGURA) (03-10-2026)
+
+- **Consulta / Solicitud:**
+  > *"continua con el paso 2,3 y 4 , si no daña lo que llevamos hay que eliminarlo."*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Consolidar la propuesta formal de arquitectura del repositorio (Fase 2), estructurar el plan de migración paso a paso con rutas de impacto (Fase 3), y ejecutar el respaldo en una rama aislada de seguridad (`chore/reorganizacion-repositorio`) antes de proceder a la eliminación higiénica de archivos clasificados como estrictamente seguros para eliminar (caché `.next` huérfana de 1.2 GB, binarios duplicados y actualización de `.gitignore`).
+  - ⚙️ **CÓMO:** (1) Creación de rama de respaldo `chore/reorganizacion-repositorio`, (2) Registro de commit de seguridad de base, (3) Depuración de archivos identificados en Categoría A (seguro para eliminar), (4) Actualización de `.gitignore` para blindar el repositorio contra futuros cachés de webpack/next y temporales, (5) Entrega de la Propuesta (Fase 2) y Plan de Migración por lotes atómicos (Fase 3).
+  - 📦 **QUÉ:** Rama de trabajo creada, commit de seguridad registrado, repositorio aliviado de 1.2+ GB de basura no versionada y plan de migración detallado entregado para su ejecución por fases.
+
+---
+
+## 🧭 AUDITORÍA ARQUITECTÓNICA Y ESTRUCTURAL DEL REPOSITORIO — FASE 1 (03-10-2026)
+
+- **Consulta / Solicitud:**
+  > *"Quiero limpiar, ordenar y reorganizar completamente el repositorio APP BAQUEANO para que tenga una estructura profesional, clara, mantenible y escalable, SIN PERDER NINGUNA FUNCIONALIDAD, SIN BORRAR CONTENIDO IMPORTANTE y SIN ROMPER el despliegue actual en GitHub, Azure, Firebase, Supabase ni Hostinger... Empieza SOLO con la FASE 1. NO borres, NO muevas, NO renombres y NO hagas commit todavía. Muéstrame primero la auditoría y espera mi autorización antes de aplicar cambios."*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Preservar intacta la operatividad y despliegues en producción (Firebase Hosting, Cloud Functions, Azure API/VM, GitHub Actions, Hostinger, Flutter Android) mientras se diseña un mapa de reestructuración profesional y seguro. Cero pérdida de código o funcionalidad.
+  - ⚙️ **CÓMO:** Ejecución estricta de la Fase 1 (Auditoría Integral No Destructiva): Inventario completo del árbol de archivos, clasificación técnica por subsistema, detección exhaustiva de archivos temporales/cachés/builds/duplicados/secretos/archivos grandes, y mapeo de dependencias de rutas y scripts de despliegue antes de cualquier propuesta de movimiento.
+  - 📦 **QUÉ:** Informe ejecutivo de Auditoría Fase 1 con clasificación (A. Seguro para eliminar, B. Revisar antes, C. No tocar, D. Duplicados, E. Sin referencias, F. Archivos grandes, G. Secretos/Riesgos, H. Reglas de .gitignore) y mapa de dependencias críticas de despliegue.
+
+---
+
 ## 🧭 ACTIVACIÓN DEL EQUIPO MULTIDISCIPLINARIO SENIOR Y PROTOCOLO MAESTRO DE 68 REGLAS DE ARQUITECTURA (03-10-2026)
 
 - **Consulta / Mandato del Usuario:**
@@ -3544,3 +3568,38 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 🎯 **POR QUÉ:** Preservar antes de cualquier análisis la solicitud actual y garantizar continuidad ante interrupciones.
 - ⚙️ **CÓMO:** Leer el archivo adjunto `pasted-text.txt` indicado por el usuario y ejecutar íntegramente sus instrucciones dentro de las normas de BAQUEANO.
 - 📦 **QUÉ:** Solicitud del usuario: “The attached pasted text file(s) contain the user's request. Read and act on that content.” Estado inicial: registrada; contenido pendiente de lectura y ejecución.
+## 2026-10-03 — Auditoría integral y endurecimiento de seguridad
+
+- 🎯 **POR QUÉ:** La solicitud adjunta ordena auditar BAQUEANO como producto completo, priorizar P0–P4 y corregir causas raíz sin borrar funcionalidad ni datos.
+- ⚙️ **CÓMO:** Se activó auditoría paralela de arquitectura/seguridad, web/UX y Flutter/datos; se preservó el alcance Android y se contrastaron las políticas locales con la guía oficial vigente de RLS y Storage de Supabase.
+- 📦 **QUÉ:** Se confirmaron como P0 políticas públicas de escritura en Storage y acceso público total a auditoría/telemetría. Próximo cambio: migración aditiva de mínimo privilegio y prueba SQL de regresión; no se modificarán migraciones históricas ni se desplegará automáticamente.
+- **Estado de pruebas:** `website` smoke test fue reportado limpio por la auditoría web. La batería conjunta Flutter/web quedó bloqueada por procesos concurrentes y se detuvo; debe reintentarse por comandos aislados.
+
+### Avance verificable
+
+- Se agregó `supabase/migrations/20261003213000_lock_down_sensitive_surfaces.sql`, sin borrar tablas, filas, buckets ni migraciones previas.
+- Se agregó `supabase/tests/sensitive_surfaces_rls.test.sql` con 16 aserciones de regresión.
+- Se agregó `docs/audit/INTEGRAL_AUDIT_2026-10-03.md` con hallazgos P0–P4 y orden recomendado.
+- `git diff --check` y `corepack pnpm --dir website test` finalizaron correctamente.
+- La CLI Supabase no está instalada: `supabase test db` queda pendiente y no hubo despliegue remoto.
+- `flutter analyze`/`flutter test` no concluyeron por timeout con procesos Dart concurrentes; su estado se registra como no verificado, no como exitoso.
+- Próximo bloque P0: guard de rol para `/admin` y membresía Android verificada por backend.
+## 2026-10-03 — Verificación de requisitos técnicos y despliegue Azure
+
+- 🎯 **POR QUÉ:** Determinar con evidencia si BAQUEANO cumple el checklist solicitado: README técnico, modelo de datos, interfaces, Git/GitHub, roles, ejecución, builds, Azure, red, base de datos, conexión pública, seguridad e integración completa.
+- ⚙️ **CÓMO:** Auditar el repositorio y sus artefactos locales/remotos de forma no destructiva, separar “cumple”, “parcial”, “no cumple” y “no verificable”, y aportar evidencia por archivo, comando o estado observable.
+- 📦 **QUÉ:** Solicitud del usuario registrada antes del análisis. No se autoriza despliegue, push, apertura de puertos ni cambios de infraestructura; esta fase es de verificación y reporte.
+
+### Resultado verificable
+
+- Informe creado: `docs/audit/REQUIREMENTS_COMPLIANCE_2026-10-03.md`.
+- Azure activo: dominio/API HTTP 200, VM Linux Azure, Node v22.23.3, Supabase y PostgreSQL local operativos.
+- Producción, HEAD local y `origin/main` coinciden en `6cc4841`; existen cambios locales no comprometidos.
+- Puertos externos: 22/80/443 abiertos; 3000/5432 cerrados o filtrados.
+- Website smoke test, validación Hostinger y 28 pruebas de Functions: correctas.
+- Brechas principales: sin ER/2FN, sin capturas ni video, IP directa en 404, APK público en 404, sin E2E CRUD y Flutter Analyze en timeout.
+## 2026-10-03 — Cierre y evidencias Sprint 1, Sprint 2 y Sprint 3
+
+- 🎯 **POR QUÉ:** Completar y evidenciar accesibilidad pública por IP, seguridad de puertos, flujo autónomo, integración CRUD real y correspondencia entre Azure y GitHub `main`.
+- ⚙️ **CÓMO:** Implementar cambios reproducibles en servidor/web/API y pruebas automatizadas, organizar evidencias ocultas al público por sprint y actualizar README. Se preservarán los cambios locales existentes y no se ejecutará push ni despliegue remoto sin una autorización distinta.
+- 📦 **QUÉ:** Solicitud registrada antes del análisis. Objetivo: dejar Sprint 1–3 terminados a nivel de código y evidencia automatizada, marcando por separado aquello que dependa del despliegue remoto o de capturas manuales autenticadas.
