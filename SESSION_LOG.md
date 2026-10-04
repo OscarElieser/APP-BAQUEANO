@@ -3905,3 +3905,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - ⚙️ **CÓMO:** extraer el texto del .docx, comparar requisito por requisito con `docs/HACKATHON_COMPLIANCE_MATRIX.md`, corregir/ampliar filas. Solo documentación.
 - 📦 **QUÉ:** matriz actualizada con los requisitos literales del documento.
 - **Avance:** `docs/HACKATHON_COMPLIANCE_MATRIX.md` cotejada con el documento oficial: añadidas pistas Marketing y Diseño (30 filas: 0 ✅, 8 🟡, 1 🔴, 21 ⚪); Desarrollo recontado (7 ✅ · 20 🟡 · 2 🔴 · 10 ⚪). Nuevos hallazgos F-31 (app Android usa localhost), F-32 (rol Auditor solo simulado), F-33 (entregables Marketing/Diseño). El propietario envió el enlace del portal Azure de `vm-baqueano-prod` (rg-baqueano-prod): requiere sesión de la cuenta institucional; la sesión cloud no puede abrirlo → evidencia Azure sigue ⚪ hasta recibir capturas/salidas.
+
+## 2026-10-04 (sesión cloud) — El propietario comparte el tablero Trello `https://trello.com/b/eccox0I5/vigoron-mixto`
+- 🎯 **POR QUÉ:** probable fuente de los entregables de Marketing/Diseño y del plan de sprints; permitiría pasar filas ⚪ a evidencia real.
+- ⚙️ **CÓMO:** intentar leer el tablero público (JSON), contrastarlo con la matriz; si no es accesible, informar y pedir exportación.
+- 📦 **QUÉ:** actualización de la matriz solo con lo realmente leído.
