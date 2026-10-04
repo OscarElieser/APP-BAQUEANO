@@ -444,6 +444,13 @@
         </div>
 
         <!--
+          POR QUÉ: cada territorio necesita la profundidad de la guía de Madriz con SU información.
+          CÓMO: js/territory-rich-sections.js pinta aquí, desde js/territories-rich-data.js, solo las secciones con datos.
+          QUÉ: línea de tiempo, lugares emblemáticos, sabores, artesanías, música, fiestas, naturaleza, leyendas, rutas, qué llevar, SOS y código del explorador.
+        -->
+        <div id="deptRichSections" class="bq-rich-sections" hidden></div>
+
+        <!--
           POR QUÉ: el viajero necesita distinguir la narrativa editorial de los datos confirmados por autoridades turísticas.
           CÓMO: cada territorio aporta hallazgos y enlaces oficiales opcionales, sin reemplazar su contenido existente.
           QUÉ: bloque de ampliaciones verificadas en Visita Nicaragua e INTUR con fecha de consulta.
@@ -1031,7 +1038,9 @@
   <script defer src="js/madriz-experience.js"></script>
   <script defer src="js/chinandega-experience.js"></script>
   <script defer src="js/territory-media-experience.js?v=20260926-1"></script>
-  <script defer src="js/madriz-territory-map.js"></script>
+  <script defer src="js/territories-rich-data.js?v=20261004-1"></script>
+  <script defer src="js/territory-rich-sections.js?v=20261004-1"></script>
+  <script defer src="js/madriz-territory-map.js?v=20261004-mapa-2"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function initDepartmentPage() {
       const territories = window.BAQUEANO_TERRITORIES || [];
@@ -1261,6 +1270,9 @@
         if (reachEl) reachEl.textContent = dept.howToReach;
         const recEl = document.getElementById('deptRecommendationsText');
         if (recEl) recEl.textContent = dept.recommendations;
+
+        // Secciones ampliadas con la información propia del territorio activo.
+        if (window.BaqueanoTerritoryRich) window.BaqueanoTerritoryRich.render(dept);
 
         // Información oficial adicional: nunca sustituye la narrativa territorial existente.
         // POR QUÉ: estas llamadas a la acción deben nombrar siempre el territorio activo.

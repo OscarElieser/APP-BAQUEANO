@@ -2576,3 +2576,48 @@ html body main#mainContent .closing-card-alta-gama :is(p, .closing-desc):not([cl
   color: #CBD5E1 !important;
   -webkit-text-fill-color: #CBD5E1 !important;
 }
+
+/* ==========================================================================
+   SECCIONES AMPLIADAS POR TERRITORIO (js/territory-rich-sections.js)
+   🎯 POR QUÉ: los 17 territorios con la profundidad de la guía de Madriz.
+   ⚙️ CÓMO: mismas tarjetas .dept-section-card; grillas auto-fit que bajan a
+   una columna en celular; tabla con scroll horizontal propio (sin desbordar
+   la página); paleta oficial #165D6F, #F65E01, #F4E6C1, #0F172A.
+   📦 QUÉ: .bq-rich-* (línea de tiempo, fichas, tabla, chips, rutas).
+   ========================================================================== */
+.bq-rich-sections { display: contents; }
+.bq-rich-sections[hidden] { display: none !important; }
+.bq-rich-card .dept-card-header { align-items: flex-start; }
+.bq-rich-subtitle { margin: 0.2rem 0 0; font-size: 0.82rem; font-weight: 600; color: #165D6F; }
+.bq-rich-timeline { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 14px; }
+.bq-rich-timeline li { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: #F8FAFC; border: 1px solid #E2E8F0; }
+.bq-rich-step { flex: 0 0 30px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: #F65E01; color: #FFFFFF; font-weight: 800; font-size: 0.82rem; }
+.bq-rich-period { display: block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #F65E01; }
+.bq-rich-timeline strong { display: block; color: #0F172A; margin: 2px 0 4px; }
+.bq-rich-timeline p { margin: 0; font-size: 0.86rem; line-height: 1.5; color: #334155; }
+.bq-rich-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; margin-top: 1rem; }
+.bq-rich-feature { padding: 18px; border-radius: 18px; background: linear-gradient(150deg, #165D6F 0%, #0F172A 100%); color: #E2E8F0; box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18); min-width: 0; }
+.bq-rich-feature h4 { margin: 0 0 4px; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; font-size: 1.02rem; line-height: 1.3; overflow-wrap: anywhere; }
+.bq-rich-feature p { margin: 0.4rem 0 0; color: #CBD5E1 !important; -webkit-text-fill-color: #CBD5E1 !important; font-size: 0.88rem; line-height: 1.55; overflow-wrap: anywhere; }
+.bq-rich-feature-head { display: flex; gap: 12px; align-items: flex-start; }
+.bq-rich-feature-head > i { flex: 0 0 auto; margin-top: 3px; font-size: 1.2rem; color: #F65E01; }
+.bq-rich-feature-head span { display: block; font-size: 0.76rem; color: #F4E6C1; }
+.bq-rich-facts { list-style: none; margin: 0.7rem 0 0; padding: 0.7rem 0 0; border-top: 1px solid rgba(244, 230, 193, 0.15); font-size: 0.82rem; }
+.bq-rich-facts li { color: #CBD5E1; margin: 0.15rem 0; }
+.bq-rich-facts strong { color: #F4E6C1; }
+.bq-rich-tag { display: inline-block; margin-bottom: 8px; padding: 3px 10px; border-radius: 999px; background: #F65E01; color: #FFFFFF; font-size: 0.72rem; font-weight: 800; }
+.bq-rich-meta { color: #F4E6C1 !important; -webkit-text-fill-color: #F4E6C1 !important; font-size: 0.8rem !important; }
+.bq-rich-meta i { color: #F65E01; }
+.bq-rich-route ol { margin: 0.5rem 0 0; padding-left: 1.2rem; color: #CBD5E1; font-size: 0.86rem; line-height: 1.6; }
+.bq-rich-table-wrap { margin-top: 1rem; overflow-x: auto; border-radius: 14px; border: 1px solid #E2E8F0; -webkit-overflow-scrolling: touch; }
+.bq-rich-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 0.86rem; }
+.bq-rich-table thead th { background: #0F172A; color: #F4E6C1; text-align: left; padding: 12px 14px; font-size: 0.74rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.bq-rich-table tbody th, .bq-rich-table td { padding: 12px 14px; border-top: 1px solid #E2E8F0; vertical-align: top; color: #334155; text-align: left; }
+.bq-rich-table tbody th { color: #0F172A; font-weight: 800; }
+.bq-rich-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.8rem; }
+.bq-rich-chip { padding: 6px 12px; border-radius: 999px; background: rgba(22, 93, 111, 0.1); border: 1px solid rgba(22, 93, 111, 0.25); color: #165D6F; font-size: 0.8rem; font-weight: 700; }
+.bq-rich-note { margin: 0.8rem 0 0; padding: 10px 14px; border-left: 3px solid #165D6F; background: rgba(22, 93, 111, 0.08); border-radius: 8px; font-size: 0.82rem; font-style: italic; color: #334155; }
+.bq-rich-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; min-height: 44px; border: 0; cursor: pointer; }
+/* Listas dentro de fichas oscuras: las reglas globales de <li> las apagaban. */
+html body main#mainContent .bq-rich-feature :is(li, ol li) { color: #E2E8F0 !important; -webkit-text-fill-color: #E2E8F0 !important; }
+html body main#mainContent .bq-rich-feature li strong { color: #F4E6C1 !important; -webkit-text-fill-color: #F4E6C1 !important; }
