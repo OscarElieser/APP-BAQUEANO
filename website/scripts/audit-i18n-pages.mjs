@@ -190,7 +190,9 @@ const result = {
 if (args.has('--list')) {
   // Textos HTML sin traducir, únicos, ordenados por número de páginas (para priorizar el catálogo).
   const rows = [...allHardcoded].sort((a, b) => b[1].pages.size - a[1].pages.size || a[0].localeCompare(b[0]));
-  for (const [text, e] of rows) console.log(`${e.pages.size}\t${e.kind}\t${text}`);
+  // Columnas: nº de páginas · tipo de texto · texto · lista de páginas donde aparece.
+  // La lista de páginas va al final para poder priorizar por página sin romper las 3 primeras columnas.
+  for (const [text, e] of rows) console.log(`${e.pages.size}\t${e.kind}\t${text}\t${[...e.pages].map((f) => f.replace('.html', '')).join(',')}`);
   console.error(`${rows.length} textos únicos sin traducir`);
 } else if (args.has('--json')) {
   console.log(JSON.stringify(result, null, 2));

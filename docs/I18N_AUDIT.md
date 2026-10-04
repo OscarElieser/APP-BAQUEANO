@@ -8,40 +8,40 @@
 - ⚙️ **CÓMO:** un texto cuenta como traducido si su elemento tiene `data-i18n*` o coincide con un valor de `locales/es.json` (el motor traduce por frase exacta). Se excluyen nombres propios nicaragüenses. En JS se buscan literales con aspecto de español: es una **heurística** (puede haber falsos positivos y negativos).
 - 📦 **QUÉ:** tabla por página, SEO por página y literales dinámicos por script.
 
-**Catálogos (claves):** es=741 · en=749 · fr=749 · it=749 · pt=749 · de=749  
-**HTML total:** 1506 de 4203 textos cubiertos = **35.8 %**
+**Catálogos (claves):** es=893 · en=901 · fr=901 · it=901 · pt=901 · de=901  
+**HTML total:** 1676 de 4203 textos cubiertos = **39.9 %**
 
 ## Por página (HTML)
 
 | Página | TOTAL_TEXTS | TRANSLATED | UNTRANSLATED | MISSING_KEYS | HARDCODED_STRINGS | SEO sin traducir | % |
 |---|---|---|---|---|---|---|---|
-| 404.html | 68 | 45 | 23 | 0 | 23 | 2/2 | 66 |
+| 404.html | 68 | 59 | 9 | 0 | 9 | 1/2 | 87 |
 | admin.html | 353 | 15 | 338 | 0 | 338 | 2/2 | 4 |
 | aliados.html | 203 | 61 | 142 | 0 | 142 | 2/2 | 30 |
-| ambiental.html | 150 | 40 | 110 | 0 | 110 | 2/2 | 27 |
-| aviso-legal.html | 124 | 54 | 70 | 0 | 70 | 2/2 | 44 |
-| ayuda.html | 56 | 8 | 48 | 0 | 48 | 2/2 | 14 |
-| baqueano-ai.html | 21 | 16 | 5 | 0 | 5 | 1/1 | 76 |
-| baqueano-ia.html | 174 | 58 | 116 | 0 | 116 | 2/2 | 33 |
-| cookies.html | 159 | 53 | 106 | 0 | 106 | 2/2 | 33 |
+| ambiental.html | 150 | 41 | 109 | 0 | 109 | 2/2 | 27 |
+| aviso-legal.html | 124 | 55 | 69 | 0 | 69 | 2/2 | 44 |
+| ayuda.html | 56 | 46 | 10 | 0 | 10 | 1/2 | 82 |
+| baqueano-ai.html | 21 | 17 | 4 | 0 | 4 | 1/1 | 81 |
+| baqueano-ia.html | 174 | 60 | 114 | 0 | 114 | 2/2 | 34 |
+| cookies.html | 159 | 57 | 102 | 0 | 102 | 2/2 | 36 |
 | cronicas.html | 55 | 3 | 52 | 0 | 52 | 2/2 | 5 |
 | denuncias.html | 145 | 96 | 49 | 0 | 49 | 2/2 | 66 |
 | departamento.html | 164 | 115 | 49 | 0 | 49 | 1/1 | 70 |
 | destino.html | 28 | 12 | 16 | 0 | 16 | 2/2 | 43 |
-| destinos.html | 159 | 79 | 80 | 0 | 80 | 2/2 | 50 |
+| destinos.html | 159 | 106 | 53 | 0 | 53 | 2/2 | 67 |
 | experiencias.html | 127 | 15 | 112 | 0 | 112 | 2/2 | 12 |
-| favoritos.html | 6 | 0 | 6 | 0 | 6 | 2/2 | 0 |
+| favoritos.html | 6 | 4 | 2 | 0 | 2 | 1/2 | 67 |
 | gastronomia.html | 226 | 65 | 161 | 0 | 161 | 2/2 | 29 |
 | historia.html | 202 | 40 | 162 | 0 | 162 | 2/2 | 20 |
 | i18n-test.html | 6 | 5 | 1 | 0 | 1 | 1/1 | 83 |
-| index.html | 266 | 109 | 157 | 0 | 157 | 4/4 | 41 |
-| legal.html | 35 | 22 | 13 | 0 | 13 | 2/2 | 63 |
-| mapa.html | 39 | 15 | 24 | 0 | 24 | 2/2 | 38 |
+| index.html | 266 | 132 | 134 | 0 | 134 | 4/4 | 50 |
+| legal.html | 35 | 23 | 12 | 0 | 12 | 2/2 | 66 |
+| mapa.html | 39 | 34 | 5 | 0 | 5 | 1/2 | 87 |
 | mi-negocio.html | 274 | 121 | 153 | 0 | 153 | 2/2 | 44 |
-| mi-viaje.html | 135 | 50 | 85 | 0 | 85 | 2/2 | 37 |
+| mi-viaje.html | 135 | 69 | 66 | 0 | 66 | 2/2 | 51 |
 | musica.html | 242 | 67 | 175 | 0 | 175 | 2/2 | 28 |
 | nosotros.html | 189 | 74 | 115 | 0 | 115 | 2/2 | 39 |
-| offline.html | 41 | 20 | 21 | 0 | 21 | 1/1 | 49 |
+| offline.html | 41 | 36 | 5 | 0 | 5 | 0/1 | 88 |
 | perfil.html | 181 | 65 | 116 | 0 | 116 | 2/2 | 36 |
 | privacidad.html | 108 | 56 | 52 | 0 | 52 | 2/2 | 52 |
 | terminos.html | 201 | 61 | 140 | 0 | 140 | 2/2 | 30 |
@@ -52,11 +52,11 @@
 ## Muestras de texto sin traducir (5 por página)
 
 **404.html**
-- texto: 404 — Este camino no lleva a ningún lado \| BAQUEANO Nicaragua
 - texto: SOS
-- texto: Este camino
-- texto: no lleva a ningún lado
-- texto: Puede que la dirección esté mal escrita o que la página se haya movido
+- texto: Tranquilo: hay muchos caminos más, y varios no salen en ningún mapa. V
+- texto: Blog
+- alt: BAQUI, el guardabarranco explorador, con su mapa
+- alt: Volcanes y playas
 
 **admin.html**
 - texto: Baqueano Ops Center \| Centro de Operaciones & Administración Total
@@ -87,18 +87,17 @@
 - texto: Marco jurídico, transparencia y condiciones de operación de BAQUEANO, 
 
 **ayuda.html**
-- texto: Centro de Ayuda \| Baqueano Nicaragua
-- texto: ¿Cómo podemos ayudarte?
-- texto: Encontrá respuestas y llegá directamente a cada herramienta de Baquean
-- texto: Buscar en el Centro de Ayuda
-- texto: También podés elegir una categoría.
+- texto: En cada destino usá el botón de corazón. Después ingresá a
+- texto: Entrá a
+- texto: Las encontrás en la sección Reservas de tu
+- texto: perfil
+- texto: Visitá
 
 **baqueano-ai.html**
 - texto: Baqueano Digital \| Redirigiendo a Baqueano IA...
 - texto: SOS
 - texto: Te estamos llevando con BAQUI… Si no pasa nada,
 - texto: entrá por aquí
-- title: Clima actual
 
 **baqueano-ia.html**
 - texto: BAQUI \| Tu viaje por Nicaragua, pensado contigo
@@ -145,9 +144,9 @@
 **destinos.html**
 - texto: Destinos de Nicaragua \| Baqueano Nicaragua
 - texto: SOS
-- texto: Destinos de Nicaragua
 - texto: Playas, volcanes, montañas, cultura, gastronomía y mucho más.
-- texto: Descubrí tu próxima aventura
+- texto: Valoración
+- texto: Ordenar por:
 
 **experiencias.html**
 - texto: Experiencias de Aventura & Cultura \| Baqueano Nicaragua
@@ -157,11 +156,8 @@
 - texto: transforman
 
 **favoritos.html**
-- texto: Mis Favoritos \| BAQUEANO Nicaragua
-- texto: Mis lugares favoritos
 - texto: Guardá destinos que querés conocer y encontralos aquí cuando estés lis
-- texto: lugares guardados en este dispositivo
-- texto: Todavía no guardaste lugares
+- texto: Explorá Nicaragua y presioná el corazón de cualquier destino para agre
 
 **gastronomia.html**
 - texto: Gastronomía Ancestral de los Hijos del Maíz \| Baqueano Nicaragua
@@ -195,11 +191,11 @@
 - texto: Condiciones de uso del portal, políticas de reserva directa con anfitr
 
 **mapa.html**
-- texto: Mapa Interactivo de Nicaragua \| Baqueano
 - texto: SOS
-- texto: Descubrí Nicaragua
-- texto: territorio por territorio
 - texto: Explorá destinos, volcanes, playas, naturaleza, cultura y comunidades 
+- texto: Isla de Ometepe
+- texto: Oasis de fuego y agua en el Gran Lago Cocibolca con volcanes Concepció
+- alt: Logotipo Baqueano
 
 **mi-negocio.html**
 - texto: Portal de Anfitriones & Negocios \| Baqueano Nicaragua
@@ -230,11 +226,11 @@
 - texto: NO SALE EN EL MAPA
 
 **offline.html**
-- texto: Modo Offline Territorial \| Baqueano Nicaragua
 - texto: SOS
-- texto: Modo Supervivencia Territorial
 - texto: No pasa nada: aquí tenés guardados los números de emergencia y los pun
-- texto: Auxilio en ruta y seguridad
+- texto: Cañón de Somoto:
+- texto: Isla de Ometepe:
+- texto: Cerro Negro / Telica:
 
 **perfil.html**
 - texto: Mi Perfil \| BAQUEANO Nicaragua Auténtica
@@ -319,8 +315,8 @@
 | js/territory-media-catalog.js | 3 | 3 | no |
 | js/territory-media-experience.js | 3 | 3 | no |
 | js/audio-player.js | 2 | 2 | no |
-| js/ayuda.js | 2 | 2 | no |
 | js/panorama-viewer.js | 2 | 2 | no |
+| js/ayuda.js | 2 | 1 | no |
 | js/baqueano-api.js | 1 | 1 | no |
 | js/destinos-provenance.js | 1 | 1 | no |
 | js/firebase-config.js | 1 | 1 | no |
