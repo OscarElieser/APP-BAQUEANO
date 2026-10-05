@@ -39,7 +39,25 @@
     "aria": "Navigation principale",
     "brandAria": "Baqueano Nicaragua — Accueil",
     "menuOpen": "Ouvrir le menu",
-    "menuClose": "Fermer le menu"
+    "menuClose": "Fermer le menu",
+    "myCountry": "Mon pays",
+    "baqueanoAi": "Baqueano IA",
+    "alliesShort": "Partenaires",
+    "aboutUs": "À propos",
+    "androidApp": "Appli Android",
+    "androidPrivate": "Appli Android privée",
+    "androidAvailability": "Disponible avec l’appli Android installée et une session active.",
+    "historyHeritage": "Histoire & Patrimoine",
+    "musicCulture": "Musique & Culture",
+    "territories": "Territoires",
+    "vehicleRental": "Location de véhicules",
+    "brandManifesto": "Notre marque & Manifeste",
+    "helpCenter": "Centre d’aide & FAQ",
+    "terms": "Conditions générales",
+    "privacy": "Politique de confidentialité",
+    "hostMessages": "Messages des hôtes",
+    "notificationsCenter": "Centre de notifications",
+    "expeditionHistory": "Historique des expéditions"
   },
   "actions": {
     "search": "Rechercher",
@@ -91,7 +109,8 @@
     "sent": "Envoyé",
     "required": "Cette information est nécessaire",
     "invalid": "Vérifiez ce champ",
-    "notFound": "Introuvable"
+    "notFound": "Introuvable",
+    "processing": "Traitement…"
   },
   "baqui": {
     "welcome": "Bonjour ! Je suis Baqüi, votre guide guardabarranco. Que souhaitez-vous découvrir aujourd'hui ?",
@@ -730,7 +749,10 @@
     "messagePlaceholder": "Écrivez votre message ici…",
     "selectOption": "Choisissez une option",
     "contactTitle": "Contactez-nous",
-    "contactDesc": "Écrivez-nous et nous vous aiderons à organiser votre voyage au Nicaragua."
+    "contactDesc": "Écrivez-nous et nous vous aiderons à organiser votre voyage au Nicaragua.",
+    "phoneWhatsapp": "Téléphone / WhatsApp",
+    "nationality": "Nationalité",
+    "passwordSecure": "Mot de passe sécurisé (8 caractères minimum)"
   },
   "about": {
     "title": "Qui sommes-nous",
@@ -890,5 +912,42 @@
       "signIn": "Connectez-vous pour que le Centre des opérations reçoive votre alerte. L’appel fonctionne quand même.",
       "failed": "Impossible de prévenir le Centre des opérations (hors ligne). L’appel fonctionne quand même."
     }
+  },
+  "auth": {
+    "signin": "Se connecter",
+    "signup": "Créer un compte",
+    "haveAccount": "J’ai déjà un compte",
+    "myAccount": "Mon compte",
+    "accountActive": "Compte actif",
+    "signout": "Se déconnecter",
+    "signupAndOpen": "Créer et ouvrir l’appli",
+    "signinAndOpen": "Se connecter et ouvrir l’appli",
+    "androidAccess": {
+      "eyebrow": "Compte Baqueano",
+      "title": "Accès aux fonctions Android",
+      "description": "Créez un compte ou connectez-vous pour ouvrir messages, notifications et historique dans l’appli installée."
+    },
+    "acceptTermsPrefix": "J’accepte les",
+    "termsLink": "conditions",
+    "acceptTermsMiddle": "et la",
+    "privacyLink": "politique de confidentialité",
+    "sessionActiveOpeningApp": "Session active. Ouverture de l’appli Android…",
+    "signedIn": "Connecté.",
+    "logoutSuccess": "Déconnecté.",
+    "errors": {
+      "requiredCredentials": "L’e-mail et le mot de passe sont obligatoires.",
+      "signupFields": "Pour créer votre compte, nous avons besoin de votre nom, téléphone et nationalité.",
+      "passwordLength": "Le mot de passe doit contenir au moins 8 caractères.",
+      "acceptTerms": "Vous devez accepter les conditions et la politique de confidentialité pour créer le compte.",
+      "invalidCredentials": "E-mail ou mot de passe incorrect.",
+      "emailInUse": "Un compte existe déjà avec cet e-mail. Connectez-vous.",
+      "tooManyRequests": "Trop de tentatives. Patientez quelques minutes et réessayez.",
+      "generic": "Impossible de finaliser l’accès.",
+      "logout": "Impossible de vous déconnecter."
+    }
+  },
+  "errors": {
+    "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
+    "network": "Pas de connexion. Vérifiez votre internet et réessayez."
   }
 }

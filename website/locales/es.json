@@ -39,7 +39,25 @@
     "aria": "Navegación principal",
     "brandAria": "Baqueano Nicaragua — Inicio",
     "menuOpen": "Abrir menú",
-    "menuClose": "Cerrar menú"
+    "menuClose": "Cerrar menú",
+    "myCountry": "Mi País",
+    "baqueanoAi": "Baqueano IA",
+    "alliesShort": "Aliados",
+    "aboutUs": "Acerca de Nosotros",
+    "androidApp": "App Android",
+    "androidPrivate": "App Android Privada",
+    "androidAvailability": "Disponible con app Android instalada y sesión activa.",
+    "historyHeritage": "Historia & Patrimonio",
+    "musicCulture": "Música & Cultura",
+    "territories": "Territorios",
+    "vehicleRental": "Alquiler de Vehículos",
+    "brandManifesto": "Nuestra Marca & Manifiesto",
+    "helpCenter": "Centro de Ayuda & FAQ",
+    "terms": "Términos y Condiciones",
+    "privacy": "Políticas de Privacidad",
+    "hostMessages": "Mensajes de Anfitriones",
+    "notificationsCenter": "Centro de Notificaciones",
+    "expeditionHistory": "Historial de Expediciones"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
@@ -119,7 +137,8 @@
     "sent": "Enviado",
     "required": "Nos falta este dato",
     "invalid": "Revisá este dato",
-    "notFound": "No encontrado"
+    "notFound": "No encontrado",
+    "processing": "Procesando…"
   },
   "home": {
     "hero": {
@@ -366,7 +385,10 @@
     "messagePlaceholder": "Escribí tu mensaje aquí…",
     "selectOption": "Seleccioná una opción",
     "contactTitle": "Contactanos",
-    "contactDesc": "Escribinos y te ayudamos a armar tu viaje por Nicaragua."
+    "contactDesc": "Escribinos y te ayudamos a armar tu viaje por Nicaragua.",
+    "phoneWhatsapp": "Teléfono / WhatsApp",
+    "nationality": "Nacionalidad",
+    "passwordSecure": "Clave segura (mínimo 8 caracteres)"
   },
   "about": {
     "title": "Quiénes Somos",
@@ -890,5 +912,42 @@
       "signIn": "Inicia sesión para que el Centro de Operaciones reciba tu alerta. La llamada funciona igual.",
       "failed": "No se pudo avisar al Centro de Operaciones (sin conexión). La llamada funciona igual."
     }
+  },
+  "auth": {
+    "signin": "Ingresar",
+    "signup": "Crear cuenta",
+    "haveAccount": "Ya tengo cuenta",
+    "myAccount": "Mi cuenta",
+    "accountActive": "Cuenta activa",
+    "signout": "Cerrar sesión",
+    "signupAndOpen": "Crear y abrir app",
+    "signinAndOpen": "Ingresar y abrir app",
+    "androidAccess": {
+      "eyebrow": "Cuenta Baqueano",
+      "title": "Acceso para funciones Android",
+      "description": "Creá o iniciá sesión para abrir mensajes, notificaciones e historial en la app instalada."
+    },
+    "acceptTermsPrefix": "Acepto los",
+    "termsLink": "términos",
+    "acceptTermsMiddle": "y las",
+    "privacyLink": "políticas de privacidad",
+    "sessionActiveOpeningApp": "Sesión activa. Abriendo la app Android…",
+    "signedIn": "Sesión iniciada.",
+    "logoutSuccess": "Sesión cerrada.",
+    "errors": {
+      "requiredCredentials": "Correo y clave son obligatorios.",
+      "signupFields": "Para crear tu cuenta necesitamos nombre, teléfono y nacionalidad.",
+      "passwordLength": "La clave debe tener al menos 8 caracteres.",
+      "acceptTerms": "Debés aceptar términos y privacidad para crear la cuenta.",
+      "invalidCredentials": "Correo o clave incorrectos.",
+      "emailInUse": "Ya existe una cuenta con ese correo. Iniciá sesión.",
+      "tooManyRequests": "Demasiados intentos. Esperá unos minutos y probá otra vez.",
+      "generic": "No fue posible completar el acceso.",
+      "logout": "No fue posible cerrar la sesión."
+    }
+  },
+  "errors": {
+    "sessionExpired": "Tu sesión venció. Iniciá sesión nuevamente.",
+    "network": "Sin conexión. Revisá tu internet y probá otra vez."
   }
 }

@@ -14,7 +14,7 @@ const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: workspaceRoot,
   serverExternalPackages: ["genkit", "@genkit-ai/core", "@opentelemetry/sdk-node"],
-  transpilePackages: ["@baqueano/config", "@baqueano/firebase", "@baqueano/types", "@baqueano/ui", "@baqueano/validators", "@baqueano/ai-core"],
+  transpilePackages: ["@baqueano/i18n", "@baqueano/config", "@baqueano/firebase", "@baqueano/types", "@baqueano/ui", "@baqueano/validators", "@baqueano/ai-core"],
   async headers() {
     return [
       {

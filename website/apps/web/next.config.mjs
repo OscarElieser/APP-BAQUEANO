@@ -8,6 +8,7 @@ const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: workspaceRoot,
   transpilePackages: [
+    "@baqueano/i18n",
     "@baqueano/config",
     "@baqueano/design-system",
     "@baqueano/firebase",

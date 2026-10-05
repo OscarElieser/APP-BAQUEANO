@@ -39,7 +39,25 @@
     "aria": "Navegação principal",
     "brandAria": "Baqueano Nicaragua — Início",
     "menuOpen": "Abrir menu",
-    "menuClose": "Fechar menu"
+    "menuClose": "Fechar menu",
+    "myCountry": "Meu País",
+    "baqueanoAi": "Baqueano IA",
+    "alliesShort": "Parceiros",
+    "aboutUs": "Sobre Nós",
+    "androidApp": "App Android",
+    "androidPrivate": "App Android privado",
+    "androidAvailability": "Disponível com o app Android instalado e sessão ativa.",
+    "historyHeritage": "História & Patrimônio",
+    "musicCulture": "Música & Cultura",
+    "territories": "Territórios",
+    "vehicleRental": "Aluguel de Veículos",
+    "brandManifesto": "Nossa Marca & Manifesto",
+    "helpCenter": "Central de Ajuda & FAQ",
+    "terms": "Termos e Condições",
+    "privacy": "Política de Privacidade",
+    "hostMessages": "Mensagens dos Anfitriões",
+    "notificationsCenter": "Central de Notificações",
+    "expeditionHistory": "Histórico de Expedições"
   },
   "actions": {
     "search": "Buscar",
@@ -91,7 +109,8 @@
     "sent": "Enviado",
     "required": "Precisamos deste dado",
     "invalid": "Revise este campo",
-    "notFound": "Não encontrado"
+    "notFound": "Não encontrado",
+    "processing": "Processando…"
   },
   "baqui": {
     "welcome": "Olá! Sou Baqüi, seu guia guardabarranco. O que você quer descobrir hoje?",
@@ -730,7 +749,10 @@
     "messagePlaceholder": "Escreva sua mensagem aqui…",
     "selectOption": "Selecione uma opção",
     "contactTitle": "Fale conosco",
-    "contactDesc": "Escreva para nós e ajudaremos você a montar sua viagem pela Nicarágua."
+    "contactDesc": "Escreva para nós e ajudaremos você a montar sua viagem pela Nicarágua.",
+    "phoneWhatsapp": "Telefone / WhatsApp",
+    "nationality": "Nacionalidade",
+    "passwordSecure": "Senha segura (mínimo 8 caracteres)"
   },
   "about": {
     "title": "Quem somos",
@@ -890,5 +912,42 @@
       "signIn": "Entre para que o Centro de Operações receba seu alerta. A ligação funciona mesmo assim.",
       "failed": "Não foi possível avisar o Centro de Operações (sem conexão). A ligação funciona mesmo assim."
     }
+  },
+  "auth": {
+    "signin": "Entrar",
+    "signup": "Criar conta",
+    "haveAccount": "Já tenho conta",
+    "myAccount": "Minha conta",
+    "accountActive": "Conta ativa",
+    "signout": "Sair",
+    "signupAndOpen": "Criar e abrir o app",
+    "signinAndOpen": "Entrar e abrir o app",
+    "androidAccess": {
+      "eyebrow": "Conta Baqueano",
+      "title": "Acesso às funções Android",
+      "description": "Crie uma conta ou entre para abrir mensagens, notificações e histórico no app instalado."
+    },
+    "acceptTermsPrefix": "Aceito os",
+    "termsLink": "termos",
+    "acceptTermsMiddle": "e as",
+    "privacyLink": "políticas de privacidade",
+    "sessionActiveOpeningApp": "Sessão ativa. Abrindo o app Android…",
+    "signedIn": "Sessão iniciada.",
+    "logoutSuccess": "Sessão encerrada.",
+    "errors": {
+      "requiredCredentials": "E-mail e senha são obrigatórios.",
+      "signupFields": "Para criar sua conta precisamos de nome, telefone e nacionalidade.",
+      "passwordLength": "A senha deve ter pelo menos 8 caracteres.",
+      "acceptTerms": "Você deve aceitar os termos e a privacidade para criar a conta.",
+      "invalidCredentials": "E-mail ou senha incorretos.",
+      "emailInUse": "Já existe uma conta com esse e-mail. Entre.",
+      "tooManyRequests": "Muitas tentativas. Aguarde alguns minutos e tente de novo.",
+      "generic": "Não foi possível concluir o acesso.",
+      "logout": "Não foi possível encerrar a sessão."
+    }
+  },
+  "errors": {
+    "sessionExpired": "Sua sessão expirou. Entre novamente.",
+    "network": "Sem conexão. Verifique sua internet e tente de novo."
   }
 }

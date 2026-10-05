@@ -39,7 +39,25 @@
     "aria": "Navigazione principale",
     "brandAria": "Baqueano Nicaragua — Home",
     "menuOpen": "Apri menu",
-    "menuClose": "Chiudi menu"
+    "menuClose": "Chiudi menu",
+    "myCountry": "Il mio Paese",
+    "baqueanoAi": "Baqueano IA",
+    "alliesShort": "Partner",
+    "aboutUs": "Chi siamo",
+    "androidApp": "App Android",
+    "androidPrivate": "App Android privata",
+    "androidAvailability": "Disponibile con l’app Android installata e una sessione attiva.",
+    "historyHeritage": "Storia & Patrimonio",
+    "musicCulture": "Musica & Cultura",
+    "territories": "Territori",
+    "vehicleRental": "Noleggio veicoli",
+    "brandManifesto": "Il nostro marchio & Manifesto",
+    "helpCenter": "Centro assistenza & FAQ",
+    "terms": "Termini e condizioni",
+    "privacy": "Informativa sulla privacy",
+    "hostMessages": "Messaggi degli host",
+    "notificationsCenter": "Centro notifiche",
+    "expeditionHistory": "Storico delle spedizioni"
   },
   "actions": {
     "search": "Cerca",
@@ -91,7 +109,8 @@
     "sent": "Inviato",
     "required": "Ci serve questo dato",
     "invalid": "Controlla questo campo",
-    "notFound": "Non trovato"
+    "notFound": "Non trovato",
+    "processing": "Elaborazione…"
   },
   "baqui": {
     "welcome": "Ciao! Sono Baqüi, la tua guida guardabarranco. Cosa vuoi scoprire oggi?",
@@ -730,7 +749,10 @@
     "messagePlaceholder": "Scrivi qui il tuo messaggio…",
     "selectOption": "Seleziona un'opzione",
     "contactTitle": "Contattaci",
-    "contactDesc": "Scrivici e ti aiuteremo a organizzare il tuo viaggio in Nicaragua."
+    "contactDesc": "Scrivici e ti aiuteremo a organizzare il tuo viaggio in Nicaragua.",
+    "phoneWhatsapp": "Telefono / WhatsApp",
+    "nationality": "Nazionalità",
+    "passwordSecure": "Password sicura (minimo 8 caratteri)"
   },
   "about": {
     "title": "Chi siamo",
@@ -890,5 +912,42 @@
       "signIn": "Accedi perché il Centro operativo riceva la tua allerta. La chiamata funziona comunque.",
       "failed": "Impossibile avvisare il Centro operativo (offline). La chiamata funziona comunque."
     }
+  },
+  "auth": {
+    "signin": "Accedi",
+    "signup": "Crea un account",
+    "haveAccount": "Ho già un account",
+    "myAccount": "Il mio account",
+    "accountActive": "Account attivo",
+    "signout": "Esci",
+    "signupAndOpen": "Crea e apri l’app",
+    "signinAndOpen": "Accedi e apri l’app",
+    "androidAccess": {
+      "eyebrow": "Account Baqueano",
+      "title": "Accesso alle funzioni Android",
+      "description": "Crea un account o accedi per aprire messaggi, notifiche e cronologia nell’app installata."
+    },
+    "acceptTermsPrefix": "Accetto i",
+    "termsLink": "termini",
+    "acceptTermsMiddle": "e l’",
+    "privacyLink": "informativa sulla privacy",
+    "sessionActiveOpeningApp": "Sessione attiva. Apertura dell’app Android…",
+    "signedIn": "Accesso effettuato.",
+    "logoutSuccess": "Disconnesso.",
+    "errors": {
+      "requiredCredentials": "Email e password sono obbligatorie.",
+      "signupFields": "Per creare il tuo account ci servono nome, telefono e nazionalità.",
+      "passwordLength": "La password deve avere almeno 8 caratteri.",
+      "acceptTerms": "Devi accettare termini e privacy per creare l’account.",
+      "invalidCredentials": "Email o password non corretti.",
+      "emailInUse": "Esiste già un account con questa email. Accedi.",
+      "tooManyRequests": "Troppi tentativi. Attendi qualche minuto e riprova.",
+      "generic": "Non è stato possibile completare l’accesso.",
+      "logout": "Non è stato possibile uscire."
+    }
+  },
+  "errors": {
+    "sessionExpired": "La tua sessione è scaduta. Accedi di nuovo.",
+    "network": "Nessuna connessione. Controlla internet e riprova."
   }
 }

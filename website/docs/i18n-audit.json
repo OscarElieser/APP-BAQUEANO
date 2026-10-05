@@ -1,324 +1,1890 @@
 {
-  "generatedAt": "2026-10-05T00:02:48.610Z",
-  "pages": 30,
-  "baseKeys": 698,
+  "generatedAt": "2026-10-05T03:16:18.403Z",
+  "languages": [
+    "es",
+    "en",
+    "fr",
+    "it",
+    "pt",
+    "de"
+  ],
+  "keysPerLanguage": {
+    "es": 825,
+    "en": 825,
+    "fr": 825,
+    "it": 825,
+    "pt": 825,
+    "de": 825
+  },
+  "html": {
+    "files": 31,
+    "total": 5222,
+    "translated": 4,
+    "untranslated": 5218
+  },
+  "js": {
+    "files": 78,
+    "translated": 14,
+    "untranslated": 731
+  },
+  "jsEditorial": {
+    "files": 5,
+    "strings": 23
+  },
+  "tsx": {
+    "files": 97,
+    "total": 1154,
+    "translated": 60,
+    "untranslated": 1094
+  },
+  "fullyCovered": [
+    "js/ai-assistant.js",
+    "js/ayuda.js",
+    "js/baqueano-api.js",
+    "js/baqueano-master-catalog.js",
+    "js/baqueano-traffic-tracker.js",
+    "js/community-api.js",
+    "js/definitive-index-interactions.js",
+    "js/destination-community.js",
+    "js/destinos-provenance.js",
+    "js/favoritos.js",
+    "js/firebase-config.js",
+    "js/firestore-mirror.js",
+    "js/firestore-realtime.js",
+    "js/ops-center/ops-community-moderation.js",
+    "js/safety-gallery.js",
+    "js/shared/roles.js",
+    "js/smart-search.js",
+    "js/supabase-config.js",
+    "js/territory-inspector.js",
+    "js/territory-media-catalog.js",
+    "js/territory-rich-sections.js",
+    "js/video-registry.js",
+    "js/website-business-catalog.js",
+    "js/website-operations-catalog.js",
+    "apps/admin/src/app/layout.tsx",
+    "apps/admin/src/app/page.tsx",
+    "apps/admin/src/components/AdminCards.tsx",
+    "apps/admin/src/components/ui/AdminBadge.tsx",
+    "apps/admin/src/components/ui/AdminButton.tsx",
+    "apps/admin/src/components/ui/AdminTable.tsx",
+    "apps/web/src/app/layout.tsx",
+    "apps/web/src/app/loading.tsx",
+    "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
+    "apps/web/src/app/page.tsx",
+    "apps/web/src/app/territorios/[slug]/page.tsx",
+    "apps/web/src/components/DynamicBlockRenderer.tsx",
+    "apps/web/src/components/OfflineRegistration.tsx",
+    "apps/web/src/components/cards/DestinationCard.tsx",
+    "apps/web/src/components/navigation/PublicNavigation.tsx",
+    "apps/web/src/components/navigation/ScrollProgress.tsx",
+    "apps/web/src/components/sections/DataSourceBanner.tsx",
+    "packages/i18n/src/index.tsx",
+    "packages/ui/src/index.tsx"
+  ],
   "errors": [],
-  "warnings": [
+  "files": [
     {
       "file": "404.html",
-      "unkeyedVisibleTextEstimate": 82
+      "type": "html",
+      "total": 97,
+      "translated": 0,
+      "untranslated": 97,
+      "legacyPhrase": 49,
+      "coverage": 0
+    },
+    {
+      "file": "admin.html",
+      "type": "html",
+      "total": 479,
+      "translated": 0,
+      "untranslated": 479,
+      "legacyPhrase": 24,
+      "coverage": 0
     },
     {
       "file": "aliados.html",
-      "unkeyedVisibleTextEstimate": 248
+      "type": "html",
+      "total": 250,
+      "translated": 0,
+      "untranslated": 250,
+      "legacyPhrase": 27,
+      "coverage": 0
     },
     {
       "file": "ambiental.html",
-      "unkeyedVisibleTextEstimate": 144
+      "type": "html",
+      "total": 166,
+      "translated": 0,
+      "untranslated": 166,
+      "legacyPhrase": 26,
+      "coverage": 0
     },
     {
       "file": "aviso-legal.html",
-      "unkeyedVisibleTextEstimate": 143
+      "type": "html",
+      "total": 164,
+      "translated": 0,
+      "untranslated": 164,
+      "legacyPhrase": 49,
+      "coverage": 0
     },
     {
       "file": "ayuda.html",
-      "unkeyedVisibleTextEstimate": 66
+      "type": "html",
+      "total": 67,
+      "translated": 0,
+      "untranslated": 67,
+      "legacyPhrase": 6,
+      "coverage": 0
     },
     {
       "file": "baqueano-ai.html",
-      "unkeyedVisibleTextEstimate": 40
+      "type": "html",
+      "total": 47,
+      "translated": 0,
+      "untranslated": 47,
+      "legacyPhrase": 31,
+      "coverage": 0
     },
     {
       "file": "baqueano-ia.html",
-      "unkeyedVisibleTextEstimate": 264
+      "type": "html",
+      "total": 264,
+      "translated": 0,
+      "untranslated": 264,
+      "legacyPhrase": 61,
+      "coverage": 0
     },
     {
       "file": "cookies.html",
-      "unkeyedVisibleTextEstimate": 172
+      "type": "html",
+      "total": 194,
+      "translated": 0,
+      "untranslated": 194,
+      "legacyPhrase": 46,
+      "coverage": 0
     },
     {
       "file": "cronicas.html",
-      "unkeyedVisibleTextEstimate": 40
+      "type": "html",
+      "total": 52,
+      "translated": 0,
+      "untranslated": 52,
+      "legacyPhrase": 1,
+      "coverage": 0
     },
     {
       "file": "denuncias.html",
-      "unkeyedVisibleTextEstimate": 174
+      "type": "html",
+      "total": 181,
+      "translated": 0,
+      "untranslated": 181,
+      "legacyPhrase": 18,
+      "coverage": 0
     },
     {
       "file": "departamento.html",
-      "unkeyedVisibleTextEstimate": 212
+      "type": "html",
+      "total": 223,
+      "translated": 0,
+      "untranslated": 223,
+      "legacyPhrase": 22,
+      "coverage": 0
     },
     {
       "file": "destino.html",
-      "unkeyedVisibleTextEstimate": 79
+      "type": "html",
+      "total": 58,
+      "translated": 0,
+      "untranslated": 58,
+      "legacyPhrase": 27,
+      "coverage": 0
     },
     {
       "file": "destinos.html",
-      "unkeyedVisibleTextEstimate": 174
+      "type": "html",
+      "total": 169,
+      "translated": 0,
+      "untranslated": 169,
+      "legacyPhrase": 68,
+      "coverage": 0
     },
     {
       "file": "experiencias.html",
-      "unkeyedVisibleTextEstimate": 173
+      "type": "html",
+      "total": 181,
+      "translated": 0,
+      "untranslated": 181,
+      "legacyPhrase": 28,
+      "coverage": 0
     },
     {
       "file": "favoritos.html",
-      "unkeyedVisibleTextEstimate": 8
+      "type": "html",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "legacyPhrase": 1,
+      "coverage": 0
     },
     {
       "file": "gastronomia.html",
-      "unkeyedVisibleTextEstimate": 229
+      "type": "html",
+      "total": 260,
+      "translated": 0,
+      "untranslated": 260,
+      "legacyPhrase": 34,
+      "coverage": 0
     },
     {
       "file": "historia.html",
-      "unkeyedVisibleTextEstimate": 220
+      "type": "html",
+      "total": 221,
+      "translated": 0,
+      "untranslated": 221,
+      "legacyPhrase": 28,
+      "coverage": 0
+    },
+    {
+      "file": "i18n-test.html",
+      "type": "html",
+      "total": 5,
+      "translated": 4,
+      "untranslated": 1,
+      "legacyPhrase": 0,
+      "coverage": 80
     },
     {
       "file": "index.html",
-      "unkeyedVisibleTextEstimate": 247
+      "type": "html",
+      "total": 284,
+      "translated": 0,
+      "untranslated": 284,
+      "legacyPhrase": 103,
+      "coverage": 0
     },
     {
       "file": "legal.html",
-      "unkeyedVisibleTextEstimate": 54
+      "type": "html",
+      "total": 62,
+      "translated": 0,
+      "untranslated": 62,
+      "legacyPhrase": 35,
+      "coverage": 0
     },
     {
       "file": "mapa.html",
-      "unkeyedVisibleTextEstimate": 58
+      "type": "html",
+      "total": 64,
+      "translated": 0,
+      "untranslated": 64,
+      "legacyPhrase": 20,
+      "coverage": 0
     },
     {
       "file": "mi-negocio.html",
-      "unkeyedVisibleTextEstimate": 291
+      "type": "html",
+      "total": 329,
+      "translated": 0,
+      "untranslated": 329,
+      "legacyPhrase": 25,
+      "coverage": 0
     },
     {
       "file": "mi-viaje.html",
-      "unkeyedVisibleTextEstimate": 182
+      "type": "html",
+      "total": 185,
+      "translated": 0,
+      "untranslated": 185,
+      "legacyPhrase": 52,
+      "coverage": 0
     },
     {
       "file": "musica.html",
-      "unkeyedVisibleTextEstimate": 177
+      "type": "html",
+      "total": 255,
+      "translated": 0,
+      "untranslated": 255,
+      "legacyPhrase": 31,
+      "coverage": 0
     },
     {
       "file": "nosotros.html",
-      "unkeyedVisibleTextEstimate": 182
+      "type": "html",
+      "total": 199,
+      "translated": 0,
+      "untranslated": 199,
+      "legacyPhrase": 34,
+      "coverage": 0
     },
     {
       "file": "offline.html",
-      "unkeyedVisibleTextEstimate": 54
+      "type": "html",
+      "total": 68,
+      "translated": 0,
+      "untranslated": 68,
+      "legacyPhrase": 34,
+      "coverage": 0
     },
     {
       "file": "perfil.html",
-      "unkeyedVisibleTextEstimate": 211
+      "type": "html",
+      "total": 217,
+      "translated": 0,
+      "untranslated": 217,
+      "legacyPhrase": 49,
+      "coverage": 0
     },
     {
       "file": "privacidad.html",
-      "unkeyedVisibleTextEstimate": 140
+      "type": "html",
+      "total": 144,
+      "translated": 0,
+      "untranslated": 144,
+      "legacyPhrase": 30,
+      "coverage": 0
     },
     {
       "file": "terminos.html",
-      "unkeyedVisibleTextEstimate": 212
+      "type": "html",
+      "total": 249,
+      "translated": 0,
+      "untranslated": 249,
+      "legacyPhrase": 35,
+      "coverage": 0
     },
     {
       "file": "testimonios.html",
-      "unkeyedVisibleTextEstimate": 59
+      "type": "html",
+      "total": 80,
+      "translated": 0,
+      "untranslated": 80,
+      "legacyPhrase": 59,
+      "coverage": 0
     },
     {
       "file": "js/admin-ops.js",
-      "hardcodedDynamicTextEstimate": 13
+      "type": "js",
+      "total": 16,
+      "translated": 0,
+      "untranslated": 16,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/ai-assistant.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/audio-player.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/auth-panel.js",
-      "hardcodedDynamicTextEstimate": 9
+      "type": "js",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/ayuda.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/baqueano-3d-map.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/baqueano-ai.js",
-      "hardcodedDynamicTextEstimate": 6
+      "type": "js",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/baqueano-api.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/baqueano-assistant.js",
-      "hardcodedDynamicTextEstimate": 5
+      "type": "js",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/baqueano-map.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 19,
+      "translated": 0,
+      "untranslated": 19,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/baqueano-master-catalog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/baqueano-reels.js",
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/baqueano-route-weather.js",
-      "hardcodedDynamicTextEstimate": 9
+      "type": "js",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/baqueano-traffic-tracker.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/baqueano-travel-session.js",
-      "hardcodedDynamicTextEstimate": 16
+      "type": "js",
+      "total": 16,
+      "translated": 0,
+      "untranslated": 16,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/baqui-evolved.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/business-portal.js",
-      "hardcodedDynamicTextEstimate": 4
+      "type": "js",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/calculator.js",
-      "hardcodedDynamicTextEstimate": 9
+      "type": "js",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/chinandega-experience.js",
-      "hardcodedDynamicTextEstimate": 6
+      "type": "js",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/color-gallery.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/community-api.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/definitive-index-interactions.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/demo-hackathon-tour.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/destination-community.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/destination-dossier.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/destinos-gastronomia.js",
-      "hardcodedDynamicTextEstimate": 7
+      "type": "js",
+      "total": 7,
+      "translated": 0,
+      "untranslated": 7,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/destinos-interactions.js",
-      "hardcodedDynamicTextEstimate": 5
+      "type": "js",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/destinos-provenance.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/environmental-evidence.js",
-      "hardcodedDynamicTextEstimate": 6
+      "type": "js",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/environmental.js",
-      "hardcodedDynamicTextEstimate": 10
+      "type": "js",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/epic-music-player.js",
-      "hardcodedDynamicTextEstimate": 7
+      "type": "js",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/favoritos.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/firebase-config.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/firestore-mirror.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/firestore-realtime.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/global-asset-curator.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/global-injector.js",
-      "hardcodedDynamicTextEstimate": 11
+      "type": "js",
+      "total": 16,
+      "translated": 5,
+      "untranslated": 11,
+      "editorialStrings": 0,
+      "coverage": 31.3
     },
     {
       "file": "js/global-language.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/global-music-player.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/global-search.js",
-      "hardcodedDynamicTextEstimate": 6
+      "type": "js",
+      "total": 7,
+      "translated": 0,
+      "untranslated": 7,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/hero-experience.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/historia-audioguia.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/historia-epocas.js",
-      "hardcodedDynamicTextEstimate": 4
+      "type": "js",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/home-community.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/index-destinos-editorial.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/index-features.js",
-      "hardcodedDynamicTextEstimate": 13
+      "type": "js",
+      "total": 17,
+      "translated": 0,
+      "untranslated": 17,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/legal-scrollspy.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/madriz-experience.js",
-      "hardcodedDynamicTextEstimate": 4
+      "type": "js",
+      "total": 7,
+      "translated": 0,
+      "untranslated": 7,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/madriz-territory-map.js",
-      "hardcodedDynamicTextEstimate": 4
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/mi-viaje-interactions.js",
-      "hardcodedDynamicTextEstimate": 10
+      "type": "js",
+      "total": 30,
+      "translated": 0,
+      "untranslated": 30,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/musica-player.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 14,
+      "translated": 0,
+      "untranslated": 14,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/navigation.js",
-      "hardcodedDynamicTextEstimate": 14
+      "type": "js",
+      "total": 28,
+      "translated": 9,
+      "untranslated": 19,
+      "editorialStrings": 0,
+      "coverage": 32.1
     },
     {
       "file": "js/nicaragua-real-map.js",
-      "hardcodedDynamicTextEstimate": 4
+      "type": "js",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/ops-center/ops-community-moderation.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-engine.js",
+      "type": "js",
+      "total": 322,
+      "translated": 0,
+      "untranslated": 322,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/ops-center/ops-ia-copilot.js",
+      "type": "js",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/ops-center/ops-live-data.js",
+      "type": "js-editorial",
+      "total": 23,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 23,
+      "coverage": 0
+    },
+    {
+      "file": "js/ops-center/ops-mock-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/panorama-viewer.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/persistent-audio-player.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/platform-enhancements.js",
-      "hardcodedDynamicTextEstimate": 11
+      "type": "js",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/public-cms-sync.js",
-      "hardcodedDynamicTextEstimate": 5
+      "type": "js",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/route-builder.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/safety-gallery.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/shared/roles.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/smart-search.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/sonora-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/supabase-config.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/territories-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/territories-rich-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/territory-carousel.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/territory-inspector.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/territory-media-catalog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/territory-media-experience.js",
+      "type": "js",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/territory-rich-sections.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/testimonios.js",
-      "hardcodedDynamicTextEstimate": 11
+      "type": "js",
+      "total": 17,
+      "translated": 0,
+      "untranslated": 17,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/theme-switcher.js",
-      "hardcodedDynamicTextEstimate": 2
+      "type": "js",
+      "total": 37,
+      "translated": 0,
+      "untranslated": 37,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/tourism-catalog-expansion.js",
-      "hardcodedDynamicTextEstimate": 1
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/tres-pilares.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/user-session.js",
-      "hardcodedDynamicTextEstimate": 3
+      "type": "js",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
+      "file": "js/video-registry.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/website-business-catalog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/website-operations-catalog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/app/auditoria/page.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/categorias/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/confianza/page.tsx",
+      "type": "tsx",
+      "total": 19,
+      "translated": 0,
+      "untranslated": 19,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/configuracion/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/control-tower/page.tsx",
+      "type": "tsx",
+      "total": 49,
+      "translated": 0,
+      "untranslated": 49,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/cultura/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/dashboard/page.tsx",
+      "type": "tsx",
+      "total": 14,
+      "translated": 0,
+      "untranslated": 14,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/departamentos/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/desarrolladores/page.tsx",
+      "type": "tsx",
+      "total": 29,
+      "translated": 0,
+      "untranslated": 29,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/destinos/[id]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/destinos/nuevo/page.tsx",
+      "type": "tsx",
+      "total": 18,
+      "translated": 0,
+      "untranslated": 18,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/destinos/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/dispositivos/page.tsx",
+      "type": "tsx",
+      "total": 25,
+      "translated": 0,
+      "untranslated": 25,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/fuentes/page.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/gastronomia/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/historia/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/layout.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/app/mi-negocio/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/movilidad/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/multimedia/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/municipios/page.tsx",
+      "type": "tsx",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/negocios/[id]/page.tsx",
+      "type": "tsx",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/negocios/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/operaciones-campo/page.tsx",
+      "type": "tsx",
+      "total": 30,
+      "translated": 0,
+      "untranslated": 30,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/app/pagos/page.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/paises/page.tsx",
+      "type": "tsx",
+      "total": 38,
+      "translated": 0,
+      "untranslated": 38,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/plataforma/page.tsx",
+      "type": "tsx",
+      "total": 43,
+      "translated": 0,
+      "untranslated": 43,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/predictive/page.tsx",
+      "type": "tsx",
+      "total": 29,
+      "translated": 0,
+      "untranslated": 29,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/reservas/page.tsx",
+      "type": "tsx",
+      "total": 15,
+      "translated": 0,
+      "untranslated": 15,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/simulation/page.tsx",
+      "type": "tsx",
+      "total": 24,
+      "translated": 0,
+      "untranslated": 24,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/smart-points/page.tsx",
+      "type": "tsx",
+      "total": 29,
+      "translated": 0,
+      "untranslated": 29,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/sostenibilidad/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/spatial/page.tsx",
+      "type": "tsx",
+      "total": 58,
+      "translated": 0,
+      "untranslated": 58,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/briefing/page.tsx",
+      "type": "tsx",
+      "total": 22,
+      "translated": 0,
+      "untranslated": 22,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/page.tsx",
+      "type": "tsx",
+      "total": 52,
+      "translated": 0,
+      "untranslated": 52,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/scenarios/page.tsx",
+      "type": "tsx",
+      "total": 21,
+      "translated": 0,
+      "untranslated": 21,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/scorecard/page.tsx",
+      "type": "tsx",
+      "total": 13,
+      "translated": 0,
+      "untranslated": 13,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/suscripciones/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/usuarios/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/website-builder/page.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/AdminAuthGate.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/AdminCards.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/components/AdminShell.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ModulePlaceholder.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ai/AdminCopilot.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ui/AdminBadge.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/components/ui/AdminButton.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/components/ui/AdminTable.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/alquiler-vehiculos/page.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/ayuda/page.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/baqueano-ai/page.tsx",
+      "type": "tsx",
+      "total": 72,
+      "translated": 0,
+      "untranslated": 72,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/confianza/metodologia/page.tsx",
+      "type": "tsx",
+      "total": 34,
+      "translated": 0,
+      "untranslated": 34,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/cultura/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/destinos/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/destinos/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/developers/page.tsx",
+      "type": "tsx",
+      "total": 22,
+      "translated": 0,
+      "untranslated": 22,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/error.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/gastronomia/page.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/historia/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/kiosk/[smartPointId]/page.tsx",
+      "type": "tsx",
+      "total": 20,
+      "translated": 0,
+      "untranslated": 20,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/layout.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/loading.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/mapa/page.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/marca/page.tsx",
+      "type": "tsx",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/mi-viaje/page.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/not-found.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/notificaciones/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/open-data/page.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/p/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/pasaporte/page.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/privacidad/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/research/page.tsx",
+      "type": "tsx",
+      "total": 24,
+      "translated": 0,
+      "untranslated": 24,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/rutas/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/rutas/page.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/sostenibilidad/page.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/terminos/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/territorios/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/territorios/page.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/viaje/[tripId]/page.tsx",
+      "type": "tsx",
+      "total": 23,
+      "translated": 0,
+      "untranslated": 23,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/DynamicBlockRenderer.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/OfflineRegistration.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/cards/DestinationCard.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/cards/PlaceCard.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/cards/SavePlaceButton.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/map/InteractiveMap.tsx",
+      "type": "tsx",
+      "total": 7,
+      "translated": 0,
+      "untranslated": 7,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/navigation/PublicNavigation.tsx",
+      "type": "tsx",
+      "total": 58,
+      "translated": 58,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/navigation/ScrollProgress.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/navigation/SiteFooter.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/sections/DataSourceBanner.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/sections/DestinationExplorer.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/sections/HeroSection.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/sections/HomeNarrative.tsx",
+      "type": "tsx",
+      "total": 21,
+      "translated": 0,
+      "untranslated": 21,
+      "coverage": 0
+    },
+    {
+      "file": "packages/i18n/src/index.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 2,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "packages/ui/src/index.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
     }
   ]
 }

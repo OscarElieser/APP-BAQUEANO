@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es2022"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -15,13 +19,30 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@baqueano/ui": ["packages/ui/src"],
-      "@baqueano/types": ["packages/types/src"],
-      "@baqueano/firebase": ["packages/firebase/src"],
-      "@baqueano/validators": ["packages/validators/src"],
-      "@baqueano/design-system": ["packages/design-system/src"],
-      "@baqueano/config": ["packages/config/src"],
-      "@baqueano/ai-core": ["packages/ai-core/src"]
+      "@baqueano/ui": [
+        "packages/ui/src"
+      ],
+      "@baqueano/types": [
+        "packages/types/src"
+      ],
+      "@baqueano/firebase": [
+        "packages/firebase/src"
+      ],
+      "@baqueano/validators": [
+        "packages/validators/src"
+      ],
+      "@baqueano/design-system": [
+        "packages/design-system/src"
+      ],
+      "@baqueano/config": [
+        "packages/config/src"
+      ],
+      "@baqueano/ai-core": [
+        "packages/ai-core/src"
+      ],
+      "@baqueano/i18n": [
+        "packages/i18n/src"
+      ]
     }
   }
 }

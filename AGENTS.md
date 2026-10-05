@@ -46,6 +46,12 @@
    - Cada lugar tiene descripción propia (`desc`) en `website/js/territories-data.js`; nunca se reutiliza la información de otro lugar.
    - Detalle: `.agents/rules/franja_viva_territorios.md`. Prueba obligatoria en CI: `website/scripts/territory-places-rule.test.mjs`.
 
+9. **Internacionalización obligatoria (Regla del propietario, 2026-10-05)**:
+   - Todo texto visible de interfaz (HTML, JS dinámico, React/Next, Ops Center, BAQUI, errores, toasts, modales, `aria-label`, `placeholder`, `title`, `alt`, títulos y meta) usa una **clave semántica** de los catálogos `website/locales/{es,en,fr,it,pt,de}.json` (es-NI es fuente y respaldo).
+   - HTML: `data-i18n`, `data-i18n-placeholder`, `data-i18n-title`, `data-i18n-aria-label`, `data-i18n-alt`. JS: `BaqueanoLanguage.t('clave')`. React: `useBaqueanoI18n().t('clave')` o `<T k="clave" />` (`@baqueano/i18n`). Nombres propios y marcas: `data-no-translate` / `translate="no"`.
+   - Toda clave nueva entra en los 6 idiomas a la vez (`npm run i18n:add lote.json`). Prohibido crear catálogos paralelos o claves tipo `texto1`.
+   - Puerta CI `npm run i18n`: falla si falta una clave/traducción o si un archivo agrega texto de interfaz sin clave (trinquete contra `website/scripts/i18n-baseline.json`, que solo puede bajar). Cobertura: `website/docs/i18n-coverage.md`.
+
 ## BAQUEANO Agent Skills Orchestration
 
 ### 🎯 POR QUÉ (Why / Propósito)

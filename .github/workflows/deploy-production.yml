@@ -60,6 +60,9 @@ jobs:
       - name: Paridad Web → APK (territorios y lugares idénticos en la app)
         working-directory: website
         run: node scripts/export-territories-for-app.mjs --check
+      - name: Puerta i18n (6 idiomas, claves existentes, sin texto nuevo sin traducir)
+        working-directory: website
+        run: node scripts/validate-i18n.mjs && node scripts/i18n-audit.mjs
       - name: Paridad Web → APK (6 idiomas, mismas traducciones)
         working-directory: website
         run: node scripts/export-locales-for-app.mjs --check

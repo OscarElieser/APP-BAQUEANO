@@ -39,7 +39,25 @@
     "aria": "Main navigation",
     "brandAria": "Baqueano Nicaragua — Home",
     "menuOpen": "Open menu",
-    "menuClose": "Close menu"
+    "menuClose": "Close menu",
+    "myCountry": "My Country",
+    "baqueanoAi": "Baqueano AI",
+    "alliesShort": "Partners",
+    "aboutUs": "About Us",
+    "androidApp": "Android App",
+    "androidPrivate": "Private Android App",
+    "androidAvailability": "Available with the Android app installed and an active session.",
+    "historyHeritage": "History & Heritage",
+    "musicCulture": "Music & Culture",
+    "territories": "Territories",
+    "vehicleRental": "Vehicle Rental",
+    "brandManifesto": "Our Brand & Manifesto",
+    "helpCenter": "Help Center & FAQ",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "hostMessages": "Host Messages",
+    "notificationsCenter": "Notification Center",
+    "expeditionHistory": "Expedition History"
   },
   "actions": {
     "search": "Search",
@@ -91,7 +109,8 @@
     "sent": "Sent",
     "required": "We need this information",
     "invalid": "Please check this field",
-    "notFound": "Not found"
+    "notFound": "Not found",
+    "processing": "Processing…"
   },
   "baqui": {
     "welcome": "Hi! I'm Baqüi, your guardabarranco guide. What would you like to discover today?",
@@ -730,7 +749,10 @@
     "messagePlaceholder": "Write your message here…",
     "selectOption": "Select an option",
     "contactTitle": "Contact us",
-    "contactDesc": "Write to us and we'll help you plan your trip through Nicaragua."
+    "contactDesc": "Write to us and we'll help you plan your trip through Nicaragua.",
+    "phoneWhatsapp": "Phone / WhatsApp",
+    "nationality": "Nationality",
+    "passwordSecure": "Secure password (at least 8 characters)"
   },
   "about": {
     "title": "About Us",
@@ -890,5 +912,42 @@
       "signIn": "Sign in so the Operations Center receives your alert. The call works anyway.",
       "failed": "Could not notify the Operations Center (offline). The call works anyway."
     }
+  },
+  "auth": {
+    "signin": "Sign in",
+    "signup": "Create account",
+    "haveAccount": "I already have an account",
+    "myAccount": "My account",
+    "accountActive": "Account active",
+    "signout": "Sign out",
+    "signupAndOpen": "Create and open app",
+    "signinAndOpen": "Sign in and open app",
+    "androidAccess": {
+      "eyebrow": "Baqueano account",
+      "title": "Access to Android features",
+      "description": "Create an account or sign in to open messages, notifications and history in the installed app."
+    },
+    "acceptTermsPrefix": "I accept the",
+    "termsLink": "terms",
+    "acceptTermsMiddle": "and the",
+    "privacyLink": "privacy policy",
+    "sessionActiveOpeningApp": "Signed in. Opening the Android app…",
+    "signedIn": "Signed in.",
+    "logoutSuccess": "Signed out.",
+    "errors": {
+      "requiredCredentials": "Email and password are required.",
+      "signupFields": "To create your account we need your name, phone and nationality.",
+      "passwordLength": "The password must be at least 8 characters long.",
+      "acceptTerms": "You must accept the terms and privacy policy to create the account.",
+      "invalidCredentials": "Incorrect email or password.",
+      "emailInUse": "An account with that email already exists. Please sign in.",
+      "tooManyRequests": "Too many attempts. Wait a few minutes and try again.",
+      "generic": "We couldn’t complete the sign-in.",
+      "logout": "We couldn’t sign you out."
+    }
+  },
+  "errors": {
+    "sessionExpired": "Your session expired. Please sign in again.",
+    "network": "No connection. Check your internet and try again."
   }
 }

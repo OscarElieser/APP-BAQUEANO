@@ -26,7 +26,10 @@
     "export:app-territories": "node scripts/export-territories-for-app.mjs",
     "test:app-territories": "node scripts/export-territories-for-app.mjs --check",
     "export:app-locales": "node scripts/export-locales-for-app.mjs",
-    "test:app-locales": "node scripts/export-locales-for-app.mjs --check"
+    "test:app-locales": "node scripts/export-locales-for-app.mjs --check",
+    "i18n": "node scripts/validate-i18n.mjs && node scripts/i18n-audit.mjs && node scripts/export-locales-for-app.mjs --check",
+    "i18n:baseline": "node scripts/i18n-audit.mjs --update-baseline",
+    "i18n:add": "node scripts/i18n-add-keys.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",

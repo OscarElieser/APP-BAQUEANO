@@ -13,6 +13,7 @@
     "@baqueano/config": "workspace:*",
     "@baqueano/design-system": "workspace:*",
     "@baqueano/firebase": "workspace:*",
+    "@baqueano/i18n": "workspace:*",
     "@baqueano/types": "workspace:*",
     "@baqueano/ui": "workspace:*",
     "@baqueano/validators": "workspace:*"
